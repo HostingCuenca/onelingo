@@ -1,0 +1,36 @@
+{
+  "name": "onelingo-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "API de OneLingo: usuarios, progreso, errores, exámenes y panel de administración",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "migrate": "tsx src/migrate.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.124.0",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/formbody": "^9.0.0",
+    "@fastify/jwt": "^10.2.2",
+    "@fastify/multipart": "^10.1.1",
+    "@fastify/sensible": "^6.0.5",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
+    "fastify": "^5.12.1",
+    "google-auth-library": "^11.0.2",
+    "nodemailer": "^10.0.0",
+    "pg": "^8.23.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^8.0.1",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.0",
+    "typescript": "^5.6.0"
+  }
+}
