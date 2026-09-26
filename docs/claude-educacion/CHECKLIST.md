@@ -26,6 +26,13 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Persistencia de evidencia y de posición en la unidad (verificado en web).
 - [ ] Revisión nativa de los 9 idiomas «inicial» (DEC-010).
 
+## Fase 2b — A1 de inglés
+- [x] Esqueleto contractual de 29 unidades (PLAN_A1_INGLES.md) con prerrequisitos del grafo.
+- [x] Módulo a1-1 (12 u.), a1-2-presente (8 u.), a1-2-comunicar (9 u.) con integraciones.
+- [x] Rutas por nivel `/ruta/:nivel` con secciones por módulo; niveles 1–2 de inglés enlazados.
+- [x] Unidades omitibles según diagnóstico (DEC-011).
+- [x] Validador: frases de error solo como distractor.
+
 ## Fase 3 — Gramática
 - [x] Verificar bug «gramática desaparece»: área corregida antes; pantalla no reanudaba ni marcaba (auditoría D).
 - [x] Reanudar tema, marcar practicados en el Temario, guardar borradores, respetar nivel elegido.
@@ -55,6 +62,13 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Metadatos `tutor` por unidad en el contenido (sin integración visual).
 - [ ] Pasar esos metadatos al tutor IA (fase de avatares).
 
+## Fase 8b — Voz y feedback
+- [x] `language_code` en ElevenLabs, caché por idioma, zh/ja sin espacios (DEC-012).
+- [x] Sílabas sueltas no latinas con voz nativa del sistema.
+- [x] Sonidos Kenney revisados + toque de selección (DEC-013).
+- [x] Opciones con pedestal y animación; botones con `BotonPrincipal`.
+- [ ] Escuchar y validar los sonidos y voces en dispositivo real.
+
 ## Fase 9 — Pruebas
 - [x] Grafo sin ciclos y sin referencias rotas (10 idiomas).
 - [x] Ninguna unidad vacía; ninguna palabra sin enseñar (Python y Dart).
@@ -64,8 +78,9 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Gramática reanuda el tema tras volver.
 - [x] Recorrido de principiante U0 completo (widget test) y navegación con pestañas.
 - [x] `flutter analyze`: sin errores ni avisos nuevos (7 info previos en sync.dart).
-- [x] `flutter test`: 129 pasan, 1 omitida, 0 fallos.
+- [x] `flutter test`: 133 pasan, 1 omitida, 0 fallos; backend 11 pasan.
 - [x] Recorrido manual web (inglés) y emulador Android (japonés).
 
 ## Fase 10 — Producción
-- [x] Release educativa 1 `20260926-edu-1-fundamentos` publicada y verificada (ver DESPLIEGUES.md).
+- [x] Release educativa 1 `20260926-edu-1-fundamentos` publicada y verificada.
+- [x] Release educativa 2 `20260926-edu-2-a1-voz` publicada y verificada (ver DESPLIEGUES.md).

@@ -6,14 +6,14 @@ Estados: AUSENTE · DISEÑADO · IMPLEMENTADO · PROBADO · PRODUCCIÓN. «legad
 
 | Área | Pre-A1 | A1 | A2 | B1 | B2 | C1 | C2 |
 |---|---|---|---|---|---|---|---|
-| Gramática | PROBADO (ruta f0: pronombres, be ±, preguntas, WH) | PRODUCCIÓN legado (guías) · DISEÑADO grafo | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado · DISEÑADO | DISEÑADO (6 nodos reservados) |
-| Vocabulario | PROBADO (69 vocablos f0) | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | AUSENTE |
+| Gramática | PRODUCCIÓN (ruta f0: pronombres, be ±, preguntas, WH) | PRODUCCIÓN (ruta A1: 26 nodos + peticiones corteses, 29 unidades) | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado · DISEÑADO | PRODUCCIÓN legado · DISEÑADO | DISEÑADO (6 nodos reservados) |
+| Vocabulario | PRODUCCIÓN (69 vocablos f0) | PRODUCCIÓN (ruta A1, ~420 vocablos) | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | AUSENTE |
 | Reading | AUSENTE (solo frases) | PRODUCCIÓN legado (2 lecturas/nivel) | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | AUSENTE |
 | Listening | PROBADO (ítems escuchar, TTS) | PRODUCCIÓN legado (2 unidades/nivel) | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | PRODUCCIÓN legado | AUSENTE |
 | Speaking | AUSENTE en f0 (tutor IA aparte) | PRODUCCIÓN legado (tutor IA, sin evaluación) | idem | idem | idem | idem | AUSENTE |
 | Writing | PROBADO (escribir/completar cortos) | PRODUCCIÓN legado (IA en diagnóstico/biblioteca) | idem | idem | idem | idem | AUSENTE |
 | Pronunciación | DISEÑADO (notas y audio; sin evaluación acústica) | AUSENTE (solo «repetición» por transcripción) | AUSENTE | AUSENTE | AUSENTE | AUSENTE | AUSENTE |
-| Evaluación | PROBADO (evaluación de unidad ≥80 %, retención ≥1 día, repaso espaciado) | PRODUCCIÓN legado (examen 10 preguntas 65 %) · DISEÑADO ascenso por habilidad | idem | idem | idem | idem | AUSENTE |
+| Evaluación | PRODUCCIÓN (evaluación de unidad ≥80 %, retención ≥1 día, repaso espaciado) | PRODUCCIÓN (29 evaluaciones de unidad + 3 integraciones de módulo) · examen legado | idem | idem | idem | idem | AUSENTE |
 
 ## Otros 9 idiomas (es, fr, de, pt, it, zh, ja, ko, ru)
 
