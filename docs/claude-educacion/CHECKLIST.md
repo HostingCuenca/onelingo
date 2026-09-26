@@ -68,4 +68,4 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Recorrido manual web (inglés) y emulador Android (japonés).
 
 ## Fase 10 — Producción
-- [~] Release educativa 1: ver DESPLIEGUES.md.
+- [x] Release educativa 1 `20260926-edu-1-fundamentos` publicada y verificada (ver DESPLIEGUES.md).

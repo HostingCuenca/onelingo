@@ -1,39 +1,39 @@
 # Estado actual
 
-Última actualización: 2026-09-26
+Última actualización: 2026-09-26 19:00 (UTC-5: 14:00)
 Responsable: Claude (Claude Code) — Codex pausado durante esta fase
-Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree; Codex no escribe)
-Fase actual: Fase 1 — Auditoría (4 agentes en paralelo)
-Porcentaje aproximado: 5 %
+Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
+Fase actual: Release educativa 1 publicada; siguiente: A1 de inglés en esquema 2
+Porcentaje aproximado: fundamentos multilingües 100 % (pendiente revisión nativa); currículo completo A1–C2 ≈ 10 % implementado
 
 ## Trabajando ahora
 
-- Tarea: auditoría curricular, vocabulario/situaciones, habilidades/evaluación y arquitectura/recorridos.
-- Archivos: `docs/claude-educacion/auditoria/{A,B,C,D}-*.md` (un propietario por archivo, solo lectura del código).
-- Resultado esperado: inventario real, brechas con evidencia, grafo, esquema común, modelo de dominio y migración de foundations-v1.
-- Terminada cuando: los 4 informes existen y están consolidados en MAPA_CURRICULAR, COBERTURA, IDIOMAS, ESQUEMA_CONTENIDO y MIGRACION_FUNDAMENTOS.
+- Nada en curso. Release 1 cerrada y verificada.
 
 ## Terminado recientemente
 
-- Checkpoint completo: rama `checkpoint/onelingo-before-multilang-2026-09-26`, commit `396333b`, tag `checkpoint-2026-09-26-pre-multilang` (314 archivos, sin `.env`/build/node_modules). 2026-09-26.
-- Inventario de idiomas: 10 habilitados (`lib/core/content/curriculum.dart:11`). Ver IDIOMAS.md. 2026-09-26.
-- El checkpoint reproduce producción exactamente: `main.dart.js` compilado = publicado (`caa2e8a452cf3de8…`) y 8 assets del home idénticos. 2026-09-26.
+- Auditoría con 4 agentes (A currículo, B vocabulario/situaciones, C habilidades/evaluación, D arquitectura/recorridos): `auditoria/`. 2026-09-26.
+- Núcleo `lib/core/aprendizaje/` (esquema 2, estados, repaso, migración) y pantallas `lib/features/ruta/`. Pruebas `test/ruta_*`. 2026-09-26.
+- Ruta f0 de 6 unidades en en, es, fr, de, pt, it, zh, ja, ko, ru (60 unidades, 75–93 vocablos y 72–93 ítems por idioma). 2026-09-26.
+- Gramática inglesa: reanuda tema, marca practicados, guarda borradores. 2026-09-26.
+- Release `20260926-edu-1-fundamentos` en producción. 2026-09-26.
 
 ## Siguiente paso
 
-1. Consolidar los 4 informes en los documentos maestros.
-2. Implementar la estructura común (`lib/core/aprendizaje/`) con pruebas del grafo.
-3. Ruta inicial de inglés como referencia; luego las otras 9.
+1. Migrar A1 de inglés (niveles 1–2) al esquema 2 con los nodos `en-g-*` de A1 y alias de las guías actuales.
+2. Banco de evaluación separado del de práctica para las unidades f0.
+3. Revisión nativa de los 9 idiomas «inicial» (DEC-010).
 
 ## Bloqueos
 
-- Ninguno técnico.
-- Pendiente de decisión humana: destinatario del curso de español (la interfaz está solo en español). Ver DECISIONES DEC-004.
+- Revisión nativa: requiere hablantes nativos o docentes (decisión humana).
+- Niveles 3–10 fuera de inglés siguen con banco genérico en inglés (el usuario decidió resolverlo con contenido real, no ocultarlos).
 
 ## Producción
 
-- Versión desplegada: `home-layout17-assets` (desplegada por Codex, 2026-09-25 19:35 UTC). `main.dart.js` sha256 `caa2e8a452cf3de8…`.
+- Versión desplegada: `20260926-edu-1-fundamentos` · `main.dart.js` `ffefcc975f280e73…`
+- Fecha: 2026-09-26 18:56 UTC
 - URL: https://onelingo.hostingcuenca.com
-- Estado de salud: `/api/salud` OK (2026-09-26).
-- Respaldo más reciente del servidor: `/var/www/onelingo/backups/home-layout17-assets-20260925T193557Z`.
-- Rollback: restaurar `web/` desde el respaldo del release anterior (ver DESPLIEGUES.md). Ningún despliegue de esta fase todavía.
+- Estado de salud: `/api/salud` OK; `onelingo-api` online.
+- Respaldo: `/var/www/onelingo/backups/20260926-edu-1-fundamentos/web-anterior`
+- Rollback: ver DESPLIEGUES.md (dos `mv`).
