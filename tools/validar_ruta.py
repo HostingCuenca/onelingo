@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent / "assets" / "contenido"
-ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron"}
+ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron", "tabla"}
 ORDEN_TIPOS = ["ensenar", "practica_guiada", "practica_independiente", "situacion", "evaluacion"]
 FORMATOS = {"elegir", "escuchar", "ordenar", "completar", "escribir", "relacionar"}
 PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」…\"“”()«»—–，：；]")
@@ -113,6 +113,10 @@ class Validador:
             return set()
         vistos.add(u["id"])
         res = {w for v in u.get("vocabulario", []) for w in palabras(v.get("texto", ""))}
+        # Las celdas de las tablas (escrituras, conjugaciones) también enseñan.
+        res |= {w for p in u.get("pasos", []) if p.get("tipo") == "tabla"
+                for fila in p.get("filas", []) for c in fila if isinstance(c, dict) and "texto" in c
+                for w in palabras(c["texto"])}
         for p in u.get("prerequisitos", []):
             if p in unidades:
                 res |= self.conocidas(unidades[p], unidades, vistos)
@@ -197,6 +201,23 @@ class Validador:
                         self.apoyo(f["nota"], f"{donde}.formula[{i}].nota")
                 if "texto" in p:
                     self.apoyo(p["texto"], f"{donde}.texto")
+            if tipo == "tabla":
+                if not p.get("filas"):
+                    self.error(donde, "tabla sin filas")
+                for k in ("titulo", "texto"):
+                    if k in p:
+                        self.apoyo(p[k], f"{donde}.{k}")
+                for i, col in enumerate(p.get("columnas", [])):
+                    self.apoyo(col, f"{donde}.columnas[{i}]")
+                ancho = len(p.get("columnas", [])) or None
+                for i, fila in enumerate(p.get("filas", [])):
+                    if ancho and len(fila) != ancho:
+                        self.error(donde, f"fila {i} con {len(fila)} celdas; columnas: {ancho}")
+                    for j, c in enumerate(fila):
+                        if not isinstance(c, dict) or not ("texto" in c or "apoyo" in c):
+                            self.error(donde, f"celda [{i}][{j}] debe ser {{texto, rom?}} o {{apoyo}}")
+                        elif "apoyo" in c:
+                            self.apoyo(c["apoyo"], f"{donde}.celda[{i}][{j}]")
             if tipo == "vocabulario":
                 for r in p.get("refs", []):
                     if r not in vocab_ids:

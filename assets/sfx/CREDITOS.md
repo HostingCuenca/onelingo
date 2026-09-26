@@ -10,6 +10,7 @@ Selección revisada el 2026-09-26 para un público también infantil (referencia
 - incorrecto.wav: question_004.ogg (descendente suave 495 → 264 Hz, 0,33 s)
 - completado.wav: confirmation_001.ogg + confirmation_002.ogg encadenados (arpegio con destello final, 0,83 s)
 - toque.wav: select_002.ogg (clic de 0,04 s, volumen reducido)
+- nivel.wav: maximize_009 + confirmation_001 + confirmation_004 + confirmation_002 encadenados (fanfarria de nivel, 1,5 s)
 
 Anteriores (hasta el 2026-09-26): correcto = confirmation_001, incorrecto = error_004, completado = confirmation_004.
 

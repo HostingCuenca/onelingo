@@ -74,7 +74,7 @@ Un nivel puede tener varios módulos (p. ej. `a1-2` = `en.a1-2.presente` + `en.a
 
 ## Pasos (`tipo`)
 
-Orden obligatorio: primero **enseñar** (`explicacion`, `ejemplos`, `vocabulario`, `patron`), luego `practica_guiada`, luego `practica_independiente`, luego `situacion`, y al final `evaluacion`.
+Orden obligatorio: primero **enseñar** (`explicacion`, `ejemplos`, `vocabulario`, `patron`, `tabla`), luego `practica_guiada`, luego `practica_independiente`, luego `situacion`, y al final `evaluacion`.
 
 | Tipo | Campos | Qué ve el alumno |
 |---|---|---|
@@ -82,6 +82,7 @@ Orden obligatorio: primero **enseñar** (`explicacion`, `ejemplos`, `vocabulario
 | `ejemplos` | `items: [{texto, rom?, traduccion, nota?}]` | frases modelo con audio |
 | `vocabulario` | `refs: [idVocablo]` | tarjetas con audio y traducción |
 | `patron` | `formula: [{texto, nota?}]`, `ejemplos: [...]`, `texto`? | cómo se construye la frase |
+| `tabla` | `titulo`?, `texto`? (TextoApoyo), `columnas`? ([TextoApoyo]), `filas: [[celda]]`; celda = `{texto (meta), rom?}` o `{apoyo: TextoApoyo}` | cuadros de escritura (kana, hangul, cirílico, pinyin) y conjugaciones; cada celda meta se puede escuchar. Las celdas meta cuentan como enseñadas |
 | `practica_guiada` | `items: [Item]` (con `pista`) | ejercicios con ayuda; no cuentan para dominio |
 | `practica_independiente` | `items: [Item]` (sin `pista`) | menos ayuda |
 | `situacion` | `contexto` (TextoApoyo), `dialogo: [{hablante, texto, rom?, traduccion}]`, `items: [Item]` | aplicación comunicativa con diálogo modelo |

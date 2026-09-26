@@ -479,19 +479,19 @@ class _ItemViewState extends State<ItemView> {
             onPressed: listo ? comprobar : null,
             child: const Text('COMPROBAR'),
           ),
-        if (ok == false && widget.permitirReintento)
+        // Tras responder siempre se puede seguir; un fallo en la práctica
+        // vuelve al final del bloque (lo gestiona la unidad).
+        if (ok != null)
           BotonPrincipal(
-            color: OL.naranja,
-            onPressed: reiniciar,
-            child: const Text('INTENTAR OTRA VEZ'),
-          ),
-        // En la práctica guiada se sigue cuando se resuelve (con ayuda).
-        if (ok == true || (ok == false && !widget.guiada))
-          BotonPrincipal(
-            // Verde tras acertar, como el feedback de la respuesta.
-            color: ok == true ? OL.verde : OL.morado,
+            color: ok ? OL.verde : OL.morado,
             onPressed: widget.onContinuar,
             child: const Text('CONTINUAR'),
+          ),
+        if (ok == false && widget.permitirReintento)
+          TextButton.icon(
+            onPressed: reiniciar,
+            icon: const Icon(Icons.replay_rounded),
+            label: const Text('Intentar otra vez ahora'),
           ),
       ],
     );

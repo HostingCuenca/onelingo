@@ -11,16 +11,21 @@ import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
-import '../../shared/confeti.dart';
 import '../../shared/widgets/widgets.dart';
+import '../../core/efectos.dart';
+import 'celebracion.dart';
 import 'item_view.dart';
+import 'tabla_ruta.dart';
 
 /// Una pantalla del recorrido de la unidad: un paso de enseñanza, el diálogo
 /// de una situación o un ítem.
 class _Pantalla {
-  const _Pantalla(this.paso, [this.item]);
+  const _Pantalla(this.paso, [this.item, this.repetida = false]);
   final Paso paso;
   final Item? item;
+
+  /// Ejercicio fallado que vuelve al final de su bloque.
+  final bool repetida;
 }
 
 List<_Pantalla> _pantallasDe(UnidadRuta u, {required bool repaso}) {
@@ -86,7 +91,21 @@ class _UnidadRecorrido extends ConsumerStatefulWidget {
 }
 
 class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
-  late final pantallas = _pantallasDe(widget.unidad, repaso: widget.repaso);
+  late final List<_Pantalla> pantallas = _pantallasDe(
+    widget.unidad,
+    repaso: widget.repaso,
+  );
+
+  /// Un ejercicio de práctica fallado vuelve al final de su bloque (una vez
+  /// pendiente a la vez), en lugar de bloquear el avance.
+  void _repetirAlFinal(Paso paso, Item item) {
+    final yaPendiente = pantallas
+        .skip(indice + 1)
+        .any((p) => p.paso.id == paso.id && p.item?.id == item.id);
+    if (yaPendiente) return;
+    final ultimo = pantallas.lastIndexWhere((p) => p.paso.id == paso.id);
+    pantallas.insert(ultimo + 1, _Pantalla(paso, item, true));
+  }
   final scroll = ScrollController();
   int indice = 0;
 
@@ -95,6 +114,12 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   bool terminado = false;
   bool? aprobada;
   bool nivelNuevo = false;
+
+  /// Para la celebración: XP ganada y tiempo dedicado en esta sesión.
+  late final int xpInicial = ref.read(progressProvider).xp;
+  final reloj = Stopwatch()..start();
+  int xpGanada = 0;
+  Duration duracion = Duration.zero;
 
   UnidadRuta get u => widget.unidad;
   String get claveProgreso => 'onelingo.ruta.pos.${u.id}';
@@ -105,6 +130,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   @override
   void initState() {
     super.initState();
+    xpInicial;
     if (!widget.repaso) {
       // Modificar el estado durante el build lanza una excepción en Riverpod.
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -172,20 +198,34 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           '${p.paso.id}:${p.item!.id}',
     ];
     final aciertos = puntuables.where((k) => primeras[k] == true).length;
+    duracion = reloj.elapsed;
+    reloj.stop();
     if (widget.repaso) {
       registro.repaso(u, aciertos, puntuables.length);
+      final superado =
+          puntuables.isNotEmpty && aciertos / puntuables.length >= u.umbral;
+      if (superado) Efectos.completado();
       setState(() {
         terminado = true;
-        aprobada = puntuables.isNotEmpty && aciertos / puntuables.length >= u.umbral;
+        aprobada = superado;
+        xpGanada = ref.read(progressProvider).xp - xpInicial;
       });
       return;
     }
     final ok = registro.evaluacion(u, aciertos, puntuables.length);
     final nivel = ok && registro.comprobarNivel(widget.ruta, u.nivel);
+    final aprobadaAhora = aciertos / puntuables.length >= u.umbral;
+    // Recompensa sonora: fanfarria al completar el nivel, campanas al aprobar.
+    if (nivel) {
+      Efectos.nivel();
+    } else if (aprobadaAhora) {
+      Efectos.completado();
+    }
     setState(() {
       terminado = true;
-      aprobada = aciertos / puntuables.length >= u.umbral;
+      aprobada = aprobadaAhora;
       nivelNuevo = nivel;
+      xpGanada = ref.read(progressProvider).xp - xpInicial;
     });
     if (aprobada == true) _guardarPosicionInicio();
   }
@@ -222,7 +262,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     ref.watch(progressProvider);
     final pantalla = pantallas[indice];
     final nombreTipo = switch (pantalla.paso.tipo) {
-      TipoPaso.explicacion || TipoPaso.patron => 'Aprende',
+      TipoPaso.explicacion || TipoPaso.patron || TipoPaso.tabla => 'Aprende',
       TipoPaso.ejemplos => 'Ejemplos',
       TipoPaso.vocabulario => 'Vocabulario',
       TipoPaso.practicaGuiada => 'Práctica con ayuda',
@@ -251,8 +291,22 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Etiqueta(nombreTipo),
-                      const Spacer(),
+                      Expanded(
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 6,
+                          children: [
+                            Etiqueta(nombreTipo),
+                            if (pantalla.repetida)
+                              const Etiqueta(
+                                'Otra vez',
+                                color: OL.naranja,
+                                fondo: OL.naranjaSuave,
+                                icono: Icons.replay_rounded,
+                              ),
+                          ],
+                        ),
+                      ),
                       Text(
                         '${indice + 1} / ${pantallas.length}',
                         style: const TextStyle(color: OL.gris),
@@ -311,6 +365,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           onComprobado: (correcta, respuesta) {
             if (evalua) {
               primeras.putIfAbsent('${p.id}:${item.id}', () => correcta);
+            } else if (!correcta) {
+              setState(() => _repetirAlFinal(p, item));
             }
             ref.read(registroRutaProvider).item(
               u,
@@ -399,6 +455,19 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         for (final f in p.frases) {
           vista.add(_tarjetaFrase(f.texto, f.rom, t(f.traduccion), t(f.nota)));
         }
+      case TipoPaso.tabla:
+        if (p.texto != null) {
+          vista.add(Text(t(p.texto), style: const TextStyle(fontSize: 18, height: 1.4)));
+          vista.add(const SizedBox(height: 10));
+        }
+        vista.add(TablaRuta(paso: p, idioma: u.idioma, cadena: cadena));
+        vista.add(const SizedBox(height: 8));
+        vista.add(
+          const Text(
+            'Toca cada casilla para escucharla.',
+            style: TextStyle(color: OL.gris, fontSize: 15),
+          ),
+        );
       case TipoPaso.situacion:
         vista.add(
           Tarjeta(
@@ -528,61 +597,55 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       for (final p in pantallas)
         if (p.item != null && primeras['${p.paso.id}:${p.item!.id}'] == false) p,
     ];
+    final precision = puntuables == 0 ? 100 : (aciertos * 100 / puntuables).round();
     return [
-      if (ok) const SizedBox(height: 120, child: Confeti()),
-      Tarjeta(
-        color: ok ? OL.verdeSuave : OL.moradoSuave,
-        borde: ok ? OL.verde : OL.moradoClaro,
-        padding: const EdgeInsets.all(22),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Icon(
-              ok ? Icons.emoji_events_outlined : Icons.school_outlined,
-              size: 56,
-              color: ok ? OL.verde : OL.morado,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              widget.repaso
-                  ? (ok ? '¡Lo recuerdas!' : 'Hay que repasarlo')
-                  : ok
-                  ? '¡Unidad aprobada!'
-                  : 'Todavía no, vamos a repasarlo',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '$aciertos de $puntuables correctas a la primera. Se necesita el ${(u.umbral * 100).round()} %.',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 17),
-            ),
-            if (ok && !widget.repaso)
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: Text(
-                  'Aprobar no es lo mismo que dominar: te pediremos un repaso breve dentro de unos días para comprobar que lo recuerdas.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
-                ),
-              ),
+      if (ok)
+        CelebracionUnidad(
+          nivelCompleto: nivelNuevo,
+          titulo: widget.repaso
+              ? '¡Repaso superado!'
+              : nivelNuevo
+              ? '¡Nivel completado!'
+              : '¡Lección completada!',
+          subtitulo: widget.repaso
+              ? 'Lo recuerdas: esta unidad queda más firme.'
+              : nivelNuevo
+              ? (u.nivel == 'f0'
+                    ? 'Completaste los Fundamentos. Ya tienes el Nivel 1 disponible.'
+                    : 'Completaste ${t(tituloNivel)}.')
+              : 'Aprobar no es lo mismo que dominar: te pediremos un repaso breve dentro de unos días.',
+          fichas: [
+            FichaLogro.xp(xpGanada),
+            FichaLogro.precision(precision),
+            FichaLogro.tiempo(duracion),
           ],
-        ),
-      ),
-      if (nivelNuevo) ...[
-        const SizedBox(height: 14),
+        )
+      else
         Tarjeta(
-          color: OL.amarilloSuave,
-          borde: OL.amarillo,
-          child: Text(
-            u.nivel == 'f0'
-                ? '¡Completaste los Fundamentos! Ya tienes el Nivel 1 disponible.'
-                : '¡Completaste ${t(tituloNivel)}!',
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+          color: OL.moradoSuave,
+          borde: OL.moradoClaro,
+          padding: const EdgeInsets.all(22),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Icon(Icons.school_outlined, size: 56, color: OL.morado),
+              const SizedBox(height: 8),
+              Text(
+                widget.repaso
+                    ? 'Hay que repasarlo'
+                    : 'Todavía no, vamos a repasarlo',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '$aciertos de $puntuables correctas a la primera. Se necesita el ${(u.umbral * 100).round()} %.',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 17),
+              ),
+            ],
           ),
         ),
-      ],
       if (!ok && fallos.isNotEmpty) ...[
         const SizedBox(height: 16),
         const Text(

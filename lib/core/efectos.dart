@@ -14,7 +14,7 @@ class Efectos {
 
   static Future<void> precargar() => _preparacion ??= _preparar();
   static Future<void> _preparar() async {
-    for (final nombre in ['correcto', 'incorrecto', 'completado', 'toque']) {
+    for (final nombre in ['correcto', 'incorrecto', 'completado', 'toque', 'nivel']) {
       final player = AudioPlayer();
       try {
         await player.setReleaseMode(ReleaseMode.stop);
@@ -110,6 +110,14 @@ class Efectos {
   static void completado() {
     _vibrar();
     unawaited(_tocar('completado'));
+  }
+
+  /// Nivel completado: fanfarria más larga que la de una unidad.
+  static void nivel() {
+    if (vibraciones.value) {
+      unawaited(HapticFeedback.heavyImpact().catchError((_) {}));
+    }
+    unawaited(_tocar('nivel'));
   }
 
   /// Selección de una opción: clic breve y vibración ligera.

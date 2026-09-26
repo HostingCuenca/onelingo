@@ -34,8 +34,13 @@ List<String> problemasDeContenido(RutaCargada ruta) {
   ];
   Set<String> conocidas(UnidadRuta u) => {
     ...libres,
-    for (final x in cadena(u))
+    for (final x in cadena(u)) ...[
       for (final v in x.vocabulario) ...palabrasMeta(v.texto),
+      // Las celdas de las tablas (escrituras, conjugaciones) también enseñan.
+      for (final p in x.pasos)
+        for (final fila in p.filas)
+          for (final c in fila) ...palabrasMeta(c.texto ?? ''),
+    ],
   };
   // Las formas incorrectas enseñadas como error solo valen como distractor.
   Set<String> distractores(UnidadRuta u) => {
@@ -84,6 +89,20 @@ List<String> problemasDeContenido(RutaCargada ruta) {
         apoyo(p.texto, '${u.id}.${p.id}.texto');
       }
       if (p.tipo == TipoPaso.situacion) apoyo(p.contexto, '${u.id}.${p.id}.contexto');
+      if (p.tipo == TipoPaso.tabla) {
+        if (p.filas.isEmpty) errores.add('${u.id}.${p.id}: tabla sin filas');
+        for (final c in p.columnas) {
+          apoyo(c, '${u.id}.${p.id}.columnas');
+        }
+        for (final fila in p.filas) {
+          if (p.columnas.isNotEmpty && fila.length != p.columnas.length) {
+            errores.add('${u.id}.${p.id}: fila con ${fila.length} celdas');
+          }
+          for (final c in fila) {
+            if (c.apoyo != null) apoyo(c.apoyo, '${u.id}.${p.id}.celda');
+          }
+        }
+      }
       for (final f in p.frases) {
         meta(f.texto, '${u.id}.${p.id}');
         apoyo(f.traduccion, '${u.id}.${p.id}.traduccion');

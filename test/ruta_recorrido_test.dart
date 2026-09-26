@@ -122,13 +122,13 @@ void main() {
     await texto(tester, 'SIGUIENTE'); // ejemplos
     await texto(tester, 'SIGUIENTE'); // práctica guiada
     expect(find.text('Práctica con ayuda'), findsOneWidget);
-    // Un error en la práctica guiada: feedback y reintento, sin avanzar.
+    // Un error en la práctica guiada no bloquea: se ve la respuesta, se
+    // continúa y el ejercicio vuelve al final del bloque («Otra vez»).
     await texto(tester, 'goodbye');
     await texto(tester, 'COMPROBAR');
     expect(find.text('Vamos a repasarlo'), findsOneWidget);
-    expect(find.text('CONTINUAR'), findsNothing);
-    await texto(tester, 'INTENTAR OTRA VEZ');
-    await responder(tester, 'hello');
+    expect(find.text('Respuesta: hello'), findsOneWidget);
+    await texto(tester, 'CONTINUAR');
     await responder(tester, 'thank you');
     await relacionar(tester, [
       ('hello', 'hola'),
@@ -136,6 +136,8 @@ void main() {
       ('please', 'por favor'),
       ('thank you', 'gracias'),
     ]);
+    expect(find.text('Otra vez'), findsOneWidget);
+    await responder(tester, 'hello');
     final practicas = c.read(progressProvider).practicas;
     expect(practicas['ruta:en.f0.primer-contacto:p4:g1']['resueltaConApoyo'], isTrue);
     expect(practicas['ruta:en.f0.primer-contacto:p4:g1']['primeraCorrecta'], isFalse);
@@ -161,8 +163,11 @@ void main() {
     await texto(tester, 'COMPROBAR');
     await texto(tester, 'CONTINUAR');
     await responder(tester, 'excuse me');
-    expect(find.text('¡Unidad aprobada!'), findsOneWidget);
-    expect(find.text('5 de 5 correctas a la primera. Se necesita el 80 %.'), findsOneWidget);
+    // Recompensa: celebración con XP, precisión y tiempo.
+    expect(find.text('¡Lección completada!'), findsOneWidget);
+    expect(find.text('100 %'), findsOneWidget);
+    expect(find.text('XP GANADA'), findsOneWidget);
+    expect(find.textContaining('+'), findsWidgets);
 
     final ruta = (await tester.runAsync(() => CargadorRuta().cargar('en')))!!;
     final estados = estadosRuta(ruta, c.read(progressProvider).practicas);

@@ -258,6 +258,7 @@ enum TipoPaso {
   ejemplos,
   vocabulario,
   patron,
+  tabla,
   practicaGuiada,
   practicaIndependiente,
   situacion,
@@ -270,7 +271,21 @@ enum TipoPaso {
   };
 
   /// Pasos que enseñan (sin ítems que puntúen).
-  bool get ensena => index <= patron.index;
+  bool get ensena => index <= tabla.index;
+}
+
+/// Celda de una tabla: texto en el idioma meta (con romanización opcional)
+/// o texto de apoyo (encabezados de fila, traducciones).
+class Celda {
+  const Celda({this.texto, this.rom, this.apoyo});
+  final String? texto, rom;
+  final TextoApoyo? apoyo;
+
+  factory Celda.fromJson(Map<String, dynamic> j) => Celda(
+    texto: j['texto'] as String?,
+    rom: (j['rom'] as String?)?.trim().isEmpty ?? true ? null : j['rom'],
+    apoyo: j['apoyo'] == null ? null : TextoApoyo.fromJson(j['apoyo']),
+  );
 }
 
 class Paso {
@@ -285,6 +300,8 @@ class Paso {
     this.formula = const [],
     this.contexto,
     this.items = const [],
+    this.columnas = const [],
+    this.filas = const [],
   });
   final String id;
   final TipoPaso tipo;
@@ -296,6 +313,10 @@ class Paso {
   final List<String> refs;
   final List<({String texto, TextoApoyo? nota})> formula;
   final List<Item> items;
+
+  /// Tabla (escrituras, conjugaciones): encabezados y filas de celdas.
+  final List<TextoApoyo> columnas;
+  final List<List<Celda>> filas;
 
   factory Paso.fromJson(Map<String, dynamic> j) {
     final tipo = TipoPaso.desdeJson(j['tipo'] as String);
@@ -325,6 +346,13 @@ class Paso {
             texto: (f as Map)['texto'] as String,
             nota: f['nota'] == null ? null : TextoApoyo.fromJson(f['nota']),
           ),
+      ],
+      columnas: [
+        for (final c in j['columnas'] as List? ?? const []) TextoApoyo.fromJson(c),
+      ],
+      filas: [
+        for (final f in j['filas'] as List? ?? const [])
+          [for (final c in f as List) Celda.fromJson(c as Map<String, dynamic>)],
       ],
       items: tipo == TipoPaso.ejemplos
           ? const []

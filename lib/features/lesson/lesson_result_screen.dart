@@ -6,7 +6,8 @@ import '../../app/theme.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
-import '../../shared/confeti.dart';
+import '../../core/efectos.dart';
+import '../ruta/celebracion.dart';
 import '../../shared/widgets/widgets.dart';
 
 class LessonResultScreen extends ConsumerWidget {
@@ -38,45 +39,29 @@ class LessonResultScreen extends ConsumerWidget {
                 child: Column(
                   children: [
                     const Spacer(),
-                    AnilloProgreso(
-                      valor: pct / 100,
-                      tamano: 150,
-                      grosor: 12,
-                      color: pct >= 65 ? OL.verde : OL.naranja,
-                      child: Text(
-                        '$pct%',
-                        style: const TextStyle(
-                          fontSize: 34,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 22),
-                    Text(
-                      pct == 100
+                    // Recompensa al terminar (misma celebración que la ruta).
+                    CelebracionUnidad(
+                      nivelCompleto: nivelCompleto,
+                      sonido: pct < 60
+                          ? null
+                          : nivelCompleto
+                          ? Efectos.nivel
+                          : Efectos.completado,
+                      titulo: pct == 100
                           ? '¡Perfecto, ${s.nombre.split(' ').first}!'
                           : '¡Lección completada!',
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    const SizedBox(height: 6),
-                    const Text(
-                      'Práctica completada. El dominio se confirma con ejercicios nuevos y repaso.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: OL.gris, fontSize: 12),
-                    ),
-                    Text(
-                      l?.titulo ?? '',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: OL.gris),
-                    ),
-                    const SizedBox(height: 22),
-                    Row(
-                      children: [
-                        _Stat('${s.xp}', 'XP total', OL.naranja),
-                        const SizedBox(width: 10),
-                        _Stat('$aciertos/$total', 'Aciertos', OL.verde),
-                        const SizedBox(width: 10),
-                        _Stat('${s.rachaVigente}', 'Racha', OL.morado),
+                      subtitulo:
+                          '${l?.titulo ?? ''}\nPráctica completada. El dominio se confirma con ejercicios nuevos y repaso.',
+                      fichas: [
+                        FichaLogro(
+                          'ACIERTOS',
+                          OL.morado,
+                          Icons.check_circle_rounded,
+                          aciertos,
+                          (v) => '$v/$total',
+                        ),
+                        FichaLogro.precision(pct),
+                        FichaLogro.racha(s.rachaVigente),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -150,42 +135,8 @@ class LessonResultScreen extends ConsumerWidget {
               ),
             ),
           ),
-          if (pct >= 60) const Confeti(),
         ],
       ),
     );
   }
-}
-
-class _Stat extends StatelessWidget {
-  const _Stat(this.v, this.l, this.c);
-  final String v, l;
-  final Color c;
-
-  @override
-  Widget build(BuildContext context) => Expanded(
-    child: Tarjeta(
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      child: Column(
-        children: [
-          Text(
-            v,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              color: c,
-            ),
-          ),
-          Text(
-            l,
-            style: const TextStyle(
-              color: OL.gris,
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }
