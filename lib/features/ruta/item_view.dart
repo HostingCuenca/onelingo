@@ -8,27 +8,21 @@ import '../../core/aprendizaje/modelos.dart';
 import '../../core/efectos.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
+import '../../shared/widgets/primary_button.dart';
+import 'opcion_respuesta.dart';
 
-/// Reproduce un texto del idioma meta con la voz de la app.
+/// Reproduce un texto del idioma meta en su idioma: voz de la nube con el
+/// idioma forzado y, para sílabas sueltas no latinas o sin sesión, la voz
+/// nativa del dispositivo.
 Future<void> escucharTexto(
   BuildContext context,
   String texto,
   String idioma,
-) async {
-  var ok = false;
-  try {
-    ok = await VozNube.instancia.reproducir(texto, idioma);
-  } catch (_) {}
-  if (!ok && context.mounted) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'No se pudo reproducir el audio. Revisa tu conexión e inténtalo otra vez.',
-        ),
-      ),
-    );
-  }
-}
+) => Voz.instancia.hablar(
+  texto,
+  idioma,
+  sistema: mejorConVozDelSistema(texto, idioma),
+);
 
 /// Botón de audio reutilizable.
 class BotonAudio extends StatelessWidget {
@@ -190,36 +184,24 @@ class _ItemViewState extends State<ItemView> {
 
   Widget opcionBoton(String texto, bool seleccionada, VoidCallback? onTap, {
     bool? acierto,
-  }) {
-    final color = acierto == true
-        ? OL.verde
+    bool compacta = false,
+  }) => OpcionRespuesta(
+    texto: texto,
+    compacta: compacta,
+    estado: acierto == true
+        ? EstadoOpcion.correcta
         : acierto == false
-        ? OL.rojo
+        ? EstadoOpcion.incorrecta
         : seleccionada
-        ? OL.morado
-        : OL.grisClaro;
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          backgroundColor: seleccionada ? OL.moradoSuave : OL.blanco,
-          side: BorderSide(color: color, width: seleccionada ? 2 : 1.4),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          alignment: Alignment.centerLeft,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        ),
-        onPressed: onTap,
-        child: Text(
-          texto,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: OL.texto,
-          ),
-        ),
-      ),
-    );
-  }
+        ? EstadoOpcion.seleccionada
+        : EstadoOpcion.normal,
+    onTap: onTap == null
+        ? null
+        : () {
+            Efectos.toque();
+            onTap();
+          },
+  );
 
   Widget campoTexto() => TextField(
     controller: escrito,
@@ -308,9 +290,12 @@ class _ItemViewState extends State<ItemView> {
                     style: TextStyle(color: OL.gris, fontSize: 16),
                   ),
                 for (final i in orden)
-                  ActionChip(
-                    label: Text(item.tokens[i], style: const TextStyle(fontSize: 18)),
-                    onPressed: bloqueado ? null : () => setState(() => orden.remove(i)),
+                  opcionBoton(
+                    item.tokens[i],
+                    true,
+                    bloqueado ? null : () => setState(() => orden.remove(i)),
+                    acierto: bloqueado ? correcta : null,
+                    compacta: true,
                   ),
               ],
             ),
@@ -322,9 +307,11 @@ class _ItemViewState extends State<ItemView> {
             children: [
               for (var i = 0; i < item.tokens.length; i++)
                 if (!orden.contains(i))
-                  ActionChip(
-                    label: Text(item.tokens[i], style: const TextStyle(fontSize: 18)),
-                    onPressed: bloqueado ? null : () => setState(() => orden.add(i)),
+                  opcionBoton(
+                    item.tokens[i],
+                    false,
+                    bloqueado ? null : () => setState(() => orden.add(i)),
+                    compacta: true,
                   ),
             ],
           ),
@@ -488,32 +475,23 @@ class _ItemViewState extends State<ItemView> {
           ),
         const SizedBox(height: 16),
         if (ok == null && item.formato != FormatoItem.relacionar)
-          FilledButton(
+          BotonPrincipal(
             onPressed: listo ? comprobar : null,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 14),
-              child: Text('COMPROBAR'),
-            ),
+            child: const Text('COMPROBAR'),
           ),
         if (ok == false && widget.permitirReintento)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: OutlinedButton(
-              onPressed: reiniciar,
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 14),
-                child: Text('INTENTAR OTRA VEZ'),
-              ),
-            ),
+          BotonPrincipal(
+            color: OL.naranja,
+            onPressed: reiniciar,
+            child: const Text('INTENTAR OTRA VEZ'),
           ),
         // En la práctica guiada se sigue cuando se resuelve (con ayuda).
         if (ok == true || (ok == false && !widget.guiada))
-          FilledButton(
+          BotonPrincipal(
+            // Verde tras acertar, como el feedback de la respuesta.
+            color: ok == true ? OL.verde : OL.morado,
             onPressed: widget.onContinuar,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 14),
-              child: Text('CONTINUAR'),
-            ),
+            child: const Text('CONTINUAR'),
           ),
       ],
     );

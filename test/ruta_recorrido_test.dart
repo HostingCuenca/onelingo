@@ -187,7 +187,7 @@ void main() {
     );
     expect(find.text('Fundamentos de Inglés'), findsOneWidget);
     expect(find.text('Siguiente paso'), findsOneWidget);
-    expect(find.text('0. Primer contacto'), findsOneWidget);
+    expect(find.text('0. Primer contacto', skipOffstage: false), findsOneWidget);
     expect(find.text('Versión inicial'), findsNothing);
     await tester.scrollUntilVisible(
       find.text('5. Presentarte'),
@@ -214,13 +214,13 @@ void main() {
     expect(find.text('0 de 12 unidades aprobadas · A1'), findsOneWidget);
     expect(find.text('Siguiente paso'), findsOneWidget);
     // Sin bloqueo por fundamentos: la primera unidad de A1 está disponible.
-    expect(find.text('Disponible'), findsWidgets);
+    expect(find.text('Disponible', skipOffstage: false), findsWidgets);
     await montar(
       tester,
       const RutaScreen(),
       prefs: {'onelingo.progress.v1': estado},
     );
-    expect(find.text('Opcional · según tu nivel'), findsWidgets);
+    expect(find.text('Opcional · según tu nivel', skipOffstage: false), findsWidgets);
   });
 
   testWidgets('Gramática: al volver reanuda el tema y marca lo practicado',

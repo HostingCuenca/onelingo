@@ -14,11 +14,12 @@ class Efectos {
 
   static Future<void> precargar() => _preparacion ??= _preparar();
   static Future<void> _preparar() async {
-    for (final nombre in ['correcto', 'incorrecto', 'completado']) {
+    for (final nombre in ['correcto', 'incorrecto', 'completado', 'toque']) {
       final player = AudioPlayer();
       try {
         await player.setReleaseMode(ReleaseMode.stop);
-        await player.setVolume(.35);
+        // El toque de selección es mucho más discreto que el feedback.
+        await player.setVolume(nombre == 'toque' ? .2 : .35);
         await player.setSource(AssetSource('sfx/$nombre.wav'));
         _players[nombre] = player;
       } catch (_) {
@@ -111,9 +112,11 @@ class Efectos {
     unawaited(_tocar('completado'));
   }
 
+  /// Selección de una opción: clic breve y vibración ligera.
   static void toque() {
     if (vibraciones.value) {
       unawaited(HapticFeedback.selectionClick().catchError((_) {}));
     }
+    unawaited(_tocar('toque'));
   }
 }

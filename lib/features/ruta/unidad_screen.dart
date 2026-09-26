@@ -290,13 +290,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           ),
         ),
         const SizedBox(height: 16),
-        FilledButton(
+        BotonPrincipal(
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/fundamentos'),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 14),
-            child: Text('VOLVER A LA RUTA'),
-          ),
+          child: Text('VOLVER A LA RUTA'),
         ),
       ];
     }
@@ -443,13 +440,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           onPressed: () => ir(indice - 1),
           child: const Text('VOLVER AL PASO ANTERIOR'),
         ),
-      FilledButton(
+      BotonPrincipal(
         onPressed: siguiente,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          child: Text(
+        child: Text(
             p.tipo == TipoPaso.situacion ? 'PARTICIPAR' : 'SIGUIENTE',
-          ),
         ),
       ),
     ]);
@@ -610,12 +604,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       const SizedBox(height: 18),
       if (!ok) ...[
         if (!widget.repaso)
-          FilledButton(
+          BotonPrincipal(
             onPressed: volverAEnsenar,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 14),
-              child: Text('VOLVER A LA EXPLICACIÓN'),
-            ),
+            child: Text('VOLVER A LA EXPLICACIÓN'),
           ),
         const SizedBox(height: 8),
         OutlinedButton(
@@ -627,14 +618,11 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         ),
       ],
       if (ok && siguienteUnidad != null && !widget.repaso)
-        FilledButton(
+        BotonPrincipal(
           onPressed: () => context.pushReplacement(
             '/fundamentos/unidad/${siguienteUnidad.id}',
           ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            child: Text('SIGUIENTE: ${t(siguienteUnidad.titulo).toUpperCase()}'),
-          ),
+          child: Text('SIGUIENTE: ${t(siguienteUnidad.titulo).toUpperCase()}'),
         ),
       const SizedBox(height: 8),
       OutlinedButton(

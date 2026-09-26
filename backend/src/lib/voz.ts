@@ -29,25 +29,54 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
 export const vozDisponible = () => config.elevenApiKey.length > 0;
 
 /** Quita la romanización "(…)" y normaliza espacios: solo se sintetiza el texto nativo. */
-export function textoParaVoz(t: string) {
-  return t.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+export function textoParaVoz(t: string, idioma = 'en') {
+  const limpio = t.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+  // En chino y japonés el contenido separa palabras con espacios para los
+  // ejercicios; la voz debe leer la frase continua, sin pausas artificiales.
+  return idioma === 'zh' || idioma === 'ja' ? limpio.replace(/ /g, '') : limpio;
 }
 
-export function hashAudio(texto: string, vozId: string, modelo: string) {
-  return createHash('sha256').update(`${modelo}|${vozId}|${texto}`).digest('hex').slice(0, 40);
+/** Idiomas que Flash/Turbo v2.5 pueden forzar con `language_code` (ISO 639-1). */
+const IDIOMAS_FORZABLES = new Set(['en', 'es', 'fr', 'de', 'pt', 'it', 'zh', 'ja', 'ko', 'ru']);
+
+/**
+ * Código de idioma para ElevenLabs. Sin él, el modelo adivina el idioma y en
+ * textos cortos («あ», «Je», «ciao») pronuncia con acento de la voz (inglés).
+ * Solo los modelos v2.5 lo admiten; los demás devolverían error.
+ */
+export function codigoIdiomaVoz(idioma: string, modelo = config.elevenModelo) {
+  return /v2_5/.test(modelo) && IDIOMAS_FORZABLES.has(idioma) ? idioma : undefined;
+}
+
+export function cuerpoSintesis(texto: string, idioma: string, modelo = config.elevenModelo) {
+  const language_code = codigoIdiomaVoz(idioma, modelo);
+  return {
+    text: texto, model_id: modelo, ...(language_code ? { language_code } : {}),
+    voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.2, use_speaker_boost: true },
+  };
+}
+
+/**
+ * Clave de caché. Incluye el idioma: el mismo texto en dos idiomas («no») debe
+ * sonar distinto. Inglés conserva la clave anterior para reutilizar su caché,
+ * que ya se generó en inglés.
+ */
+export function hashAudio(texto: string, vozId: string, modelo: string, idioma = 'en') {
+  const base = idioma === 'en' ? `${modelo}|${vozId}|${texto}` : `${modelo}|${vozId}|${idioma}|${texto}`;
+  return createHash('sha256').update(base).digest('hex').slice(0, 40);
 }
 
 const dir = () => path.resolve(config.audioDir);
 const enCurso = new Map<string, Promise<Buffer>>();
 
-async function sintetizar(texto: string, vozId: string): Promise<Buffer> {
+async function sintetizar(texto: string, vozId: string, idioma: string): Promise<Buffer> {
   const url = `https://api.elevenlabs.io/v1/text-to-speech/${vozId}?output_format=mp3_44100_128`;
   let r!: Response;
   for (let i = 0; i < 3; i++) {
     r = await fetch(url, {
       method: 'POST',
       headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
-      body: JSON.stringify({ text: texto, model_id: config.elevenModelo, voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.2, use_speaker_boost: true } }),
+      body: JSON.stringify(cuerpoSintesis(texto, idioma)),
     });
     if (r.ok) return Buffer.from(await r.arrayBuffer());
     if ((r.status === 429 || r.status >= 500) && i < 2) { await new Promise((res) => setTimeout(res, 1000 * (i + 1))); continue; }
@@ -61,12 +90,12 @@ export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string;
 
 /** Devuelve el MP3 de `texto` con la voz del rol `voz`; lo genera solo si no existe. */
 export async function obtenerAudio(p: { texto: string; idioma: string; voz?: string }): Promise<Audio> {
-  const texto = textoParaVoz(p.texto);
+  const texto = textoParaVoz(p.texto, p.idioma);
   if (!texto) throw new Error('texto_vacio');
   if (texto.length > config.vozMaxCaracteres) throw new Error(`texto_demasiado_largo (${texto.length} > ${config.vozMaxCaracteres})`);
   const rol = VOCES[p.voz ?? ''] ? (p.voz as string) : 'narradora';
   const v = VOCES[rol];
-  const hash = hashAudio(texto, v.id, config.elevenModelo);
+  const hash = hashAudio(texto, v.id, config.elevenModelo, p.idioma);
   const ruta = path.join(dir(), `${hash}.mp3`);
 
   // 1) Caché en disco + registro de uso.
@@ -83,7 +112,7 @@ export async function obtenerAudio(p: { texto: string; idioma: string; voz?: str
   if (!pendiente) {
     pendiente = (async () => {
       await mkdir(dir(), { recursive: true });
-      const buffer = await sintetizar(texto, v.id);
+      const buffer = await sintetizar(texto, v.id, p.idioma);
       await writeFile(ruta, buffer);
       await query(
         `INSERT INTO audios (hash, idioma, voz, voz_id, modelo, texto, caracteres, bytes) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
@@ -118,10 +147,10 @@ export const vozExiste = (hash: string) => uno('SELECT hash FROM audios WHERE ha
 
 /** Stream the first generation; only complete audio becomes reusable cache. */
 export async function obtenerAudioStream(p: { texto: string; idioma: string; voz?: string }, signal: AbortSignal, onFirst: () => void) {
-  const texto = textoParaVoz(p.texto);
+  const texto = textoParaVoz(p.texto, p.idioma);
   if (!texto || texto.length > config.vozMaxCaracteres) throw new Error('texto_invalido');
   const rol = VOCES[p.voz ?? ''] ? p.voz! : 'narradora';
-  const v = VOCES[rol]; const hash = hashAudio(texto, v.id, config.elevenModelo);
+  const v = VOCES[rol]; const hash = hashAudio(texto, v.id, config.elevenModelo, p.idioma);
   const ruta = path.join(dir(), `${hash}.mp3`);
   try {
     const buffer = await readFile(ruta);
@@ -138,8 +167,7 @@ export async function obtenerAudioStream(p: { texto: string; idioma: string; voz
     const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${v.id}/stream?output_format=mp3_44100_128`, {
       method: 'POST', signal,
       headers: { 'xi-api-key': config.elevenApiKey, 'content-type': 'application/json' },
-      body: JSON.stringify({ text: texto, model_id: config.elevenModelo,
-        voice_settings: { stability: 0.5, similarity_boost: 0.75, style: 0.2, use_speaker_boost: true } }),
+      body: JSON.stringify(cuerpoSintesis(texto, p.idioma)),
     });
     if (!response.ok || !response.body) throw new Error(`ElevenLabs ${response.status}`);
     const reader = response.body.getReader();

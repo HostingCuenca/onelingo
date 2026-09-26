@@ -118,7 +118,7 @@ export default async function rutas(app: FastifyInstance) {
     const d = z.object({ texto: z.string().min(1), idioma: z.string().default('en'), voz: z.string().optional() }).parse(req.body);
     try {
       const a = await obtenerAudio(d);
-      return { hash: a.hash, cache: a.cache, voz: a.voz, caracteres: a.caracteres, existiaHash: hashAudio(textoParaVoz(d.texto), VOCES[a.voz].id, config.elevenModelo) === a.hash };
+      return { hash: a.hash, cache: a.cache, voz: a.voz, caracteres: a.caracteres, existiaHash: hashAudio(textoParaVoz(d.texto, d.idioma), VOCES[a.voz].id, config.elevenModelo, d.idioma) === a.hash };
     } catch (e) { return reply.code(502).send({ error: String(e).slice(0, 200) }); }
   });
 }

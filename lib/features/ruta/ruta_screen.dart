@@ -62,7 +62,7 @@ class _SinRuta extends StatelessWidget {
         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
       ),
       const SizedBox(height: 16),
-      FilledButton(
+      BotonPrincipal(
         onPressed: () => context.go('/aprender'),
         child: const Text('IR A APRENDER'),
       ),
@@ -314,12 +314,9 @@ class _Destacada extends StatelessWidget {
             const SizedBox(height: 6),
             Text(objetivo, style: const TextStyle(fontSize: 17, height: 1.4)),
             const SizedBox(height: 14),
-            FilledButton(
+            BotonPrincipal(
               onPressed: () => context.push(destino),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Text(repaso ? 'REPASAR' : 'EMPEZAR'),
-              ),
+              child: Text(repaso ? 'REPASAR' : 'EMPEZAR'),
             ),
           ],
         ),

@@ -102,3 +102,18 @@ Motivo: el prompt pide distinguir unidades dominadas, a estudiar y omitibles; es
 Alternativas descartadas: marcar como aprobadas las unidades inferiores (falsearía el dominio); ignorar prerrequisitos entre niveles.
 Archivos afectados: `lib/core/aprendizaje/dominio.dart`, `providers.dart`, pantallas de ruta.
 Riesgo: el diagnóstico actual no mide por unidad; una comprobación breve de prerrequisitos (auditoría C) sigue pendiente.
+
+## DEC-012 — Pronunciación por idioma: idioma forzado en la voz y voz nativa para sílabas sueltas
+
+Fecha: 2026-09-26 (reportado por el usuario: «あ» no sonaba japonés)
+Problema: el backend recibía `idioma` pero no lo enviaba a ElevenLabs; la voz (Alice, inglesa) adivinaba el idioma. Prueba con Whisper: sin forzar, «Привет» y «Obrigada» se detectaron como inglés; con `language_code`, ruso y portugués. Además la caché no distinguía idioma («no» es/en compartían audio) y zh/ja se leían con los espacios del contenido.
+Decisión: (1) `language_code` en modelos v2.5; (2) el idioma forma parte de la clave de caché, salvo inglés, que conserva su clave (su audio ya era correcto); (3) zh/ja sin espacios antes de sintetizar; (4) textos de 1–2 caracteres en ja/zh/ko/ru → voz del sistema del dispositivo con su locale; (5) la ruta usa `Voz.hablar`, que recurre a la voz del sistema sin sesión.
+Archivos afectados: `backend/src/lib/voz.ts`, `backend/src/routes/voz.ts`, `backend/test/voz-idioma.test.ts`, `lib/core/voz.dart`, `lib/features/ruta/item_view.dart`.
+Riesgo: el audio de idiomas distintos del inglés se regenera la primera vez (costo de caracteres). La voz del sistema depende de que el dispositivo tenga instalada la voz del idioma. Revisar voces nativas por idioma en ElevenLabs para la fase de avatares.
+
+## DEC-013 — Sonidos y feedback visual orientados también a niños
+
+Fecha: 2026-09-26 (pedido por el usuario; referencia Duolingo)
+Decisión: efectos Kenney CC0 elegidos midiendo la forma de onda: acierto = confirmation_002 (ascendente y brillante), error = question_004 (descenso suave), completado = confirmation_001 + 002, nuevo `toque` = select_002 al elegir una opción. Opciones con pedestal (mismo lenguaje que `BotonPrincipal`), «pop» al acertar y sacudida suave al fallar, CONTINUAR verde tras acertar; todo respeta sonido/animaciones desactivados y movimiento reducido.
+Archivos afectados: `assets/sfx/*`, `lib/core/efectos.dart`, `lib/features/ruta/opcion_respuesta.dart`, `item_view.dart`, `unidad_screen.dart`, `ruta_screen.dart`.
+Riesgo: la elección se hizo por análisis de la señal, no de oído; validar escuchando en el dispositivo.

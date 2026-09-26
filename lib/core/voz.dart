@@ -48,19 +48,25 @@ class Voz {
   /// `voz` es el rol de voz del servidor: id del tutor (mia, leo, sofia, max),
   /// `narradora` (lecciones, por defecto) o `narrador` (diálogos).
   /// `velocidad` ≤ 0.4 reproduce despacio (modo Listening lento).
+  /// `sistema` fuerza la voz del dispositivo (ver [mejorConVozDelSistema]).
   Future<void> hablar(
     String texto,
     String idioma, {
     double? velocidad,
     String? voz,
     bool progresivo = true,
+    bool sistema = false,
   }) async {
     final solicitud = ++_solicitud;
     await Efectos.detener();
     if (solicitud != _solicitud) return;
-    final limpio = soloNativo(texto);
+    final nativo = soloNativo(texto);
+    // zh/ja separan palabras con espacios en los ejercicios; se leen seguidas.
+    final limpio = idioma == 'zh' || idioma == 'ja'
+        ? nativo.replaceAll(' ', '')
+        : nativo;
     if (limpio.isEmpty) return;
-    if (natural && Sync.instancia.conectado) {
+    if (natural && Sync.instancia.conectado && !sistema) {
       await _tts.stop().catchError((_) {});
       if (solicitud != _solicitud) return;
       final ok = await VozNube.instancia.reproducir(
@@ -591,4 +597,15 @@ double similitud(String dicho, String esperado) {
   // La UI usa 0.6: un cambio de polaridad o un reordenamiento completo
   // no debe aprobar por compartir casi todas las palabras.
   return (negationChanged || sameTokensReordered) && score >= .5 ? .49 : score;
+}
+
+/// Una sílaba o signo suelto de una escritura no latina («あ», «妈», «아»,
+/// «да») suena mejor con la voz nativa del dispositivo: la voz de la nube no
+/// tiene contexto y lo pronuncia con el acento de su idioma de origen.
+bool mejorConVozDelSistema(String texto, String idioma) {
+  if (!const {'ja', 'zh', 'ko', 'ru'}.contains(idioma)) return false;
+  final letras = soloNativo(
+    texto,
+  ).replaceAll(RegExp(r'[\s\p{P}]', unicode: true), '');
+  return letras.isNotEmpty && letras.runes.length <= 2;
 }
