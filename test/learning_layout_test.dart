@@ -127,7 +127,7 @@ void main() {
 
       await render();
       expect(find.text('Empieza desde cero'), findsOneWidget);
-      expect(find.text('0 de 6 unidades aprobadas'), findsOneWidget);
+      expect(find.text('0 de 7 unidades aprobadas'), findsOneWidget);
       // La evidencia antigua de foundations-v1 es práctica con apoyo: no aprueba.
       for (final unit in foundationUnits) {
         for (var i = 0; i < unit.checks.length; i++) {
@@ -139,7 +139,7 @@ void main() {
         }
       }
       await render();
-      expect(find.text('0 de 6 unidades aprobadas'), findsOneWidget);
+      expect(find.text('0 de 7 unidades aprobadas'), findsOneWidget);
       // Aprobar la evaluación de la primera unidad sí avanza la ruta.
       final primera = ruta.unidades.first;
       notifier.registrarPractica(
@@ -147,8 +147,8 @@ void main() {
         resumenEvaluacion(primera, 5, 5, null, DateTime.now()),
       );
       await render();
-      expect(find.text('Continuar: Pronombres personales'), findsOneWidget);
-      expect(find.text('1 de 6 unidades aprobadas'), findsOneWidget);
+      expect(find.text('Continuar: El alfabeto'), findsOneWidget);
+      expect(find.text('1 de 7 unidades aprobadas'), findsOneWidget);
       expect(find.text('Gramática'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },

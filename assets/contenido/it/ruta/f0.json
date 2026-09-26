@@ -13,14 +13,34 @@
       "habilidades": ["escucha", "vocabulario", "pronunciacion"],
       "gramatica": ["it-g-sound-text", "it-g-greetings"],
       "vocabulario": [
-        {"id": "v-ciao", "texto": "ciao", "traduccion": {"es": "hola / chao (informal)"}, "nota": {"es": "Sirve para saludar y para despedirse, solo con amigos."}},
+        {
+          "id": "v-ciao",
+          "texto": "ciao",
+          "traduccion": {"es": "hola / chao (informal)"},
+          "nota": {"es": "Sirve para saludar y para despedirse, solo con amigos."}
+        },
         {"id": "v-buongiorno", "texto": "buongiorno", "traduccion": {"es": "buenos días"}},
-        {"id": "v-buonasera", "texto": "buonasera", "traduccion": {"es": "buenas tardes / buenas noches"}, "nota": {"es": "Se usa desde media tarde."}},
+        {
+          "id": "v-buonasera",
+          "texto": "buonasera",
+          "traduccion": {"es": "buenas tardes / buenas noches"},
+          "nota": {"es": "Se usa desde media tarde."}
+        },
         {"id": "v-arrivederci", "texto": "arrivederci", "traduccion": {"es": "adiós"}},
         {"id": "v-a-presto", "texto": "a presto", "traduccion": {"es": "hasta pronto"}},
         {"id": "v-buona-giornata", "texto": "buona giornata", "traduccion": {"es": "que tenga un buen día"}},
-        {"id": "v-grazie", "texto": "grazie", "traduccion": {"es": "gracias"}, "nota": {"es": "Se pronuncia «gratsie»: la e final suena."}},
-        {"id": "v-prego", "texto": "prego", "traduccion": {"es": "de nada"}, "nota": {"es": "También significa «adelante» o «¿qué desea?»."}},
+        {
+          "id": "v-grazie",
+          "texto": "grazie",
+          "traduccion": {"es": "gracias"},
+          "nota": {"es": "Se pronuncia «gratsie»: la e final suena."}
+        },
+        {
+          "id": "v-prego",
+          "texto": "prego",
+          "traduccion": {"es": "de nada"},
+          "nota": {"es": "También significa «adelante» o «¿qué desea?»."}
+        },
         {"id": "v-per-favore", "texto": "per favore", "traduccion": {"es": "por favor"}},
         {"id": "v-scusi", "texto": "scusi", "traduccion": {"es": "disculpe (formal)"}},
         {"id": "v-scusa", "texto": "scusa", "traduccion": {"es": "disculpa (informal)"}},
@@ -30,185 +50,1521 @@
         {"id": "v-signore", "texto": "signore", "traduccion": {"es": "señor"}}
       ],
       "erroresFrecuentes": [
-        {"incorrecto": "Ciao, signora!", "correcto": "Buongiorno, signora!", "explicacion": {"es": "«Ciao» es informal. Con una señora que no conoces se usa «buongiorno» o «buonasera»."}},
-        {"incorrecto": "Prego!", "correcto": "Per favore!", "explicacion": {"es": "Para pedir algo se dice «per favore». «Prego» es la respuesta a «grazie» (de nada)."}}
+        {
+          "incorrecto": "Ciao, signora!",
+          "correcto": "Buongiorno, signora!",
+          "explicacion": {"es": "«Ciao» es informal. Con una señora que no conoces se usa «buongiorno» o «buonasera»."}
+        },
+        {
+          "incorrecto": "Prego!",
+          "correcto": "Per favore!",
+          "explicacion": {"es": "Para pedir algo se dice «per favore». «Prego» es la respuesta a «grazie» (de nada)."}
+        }
       ],
       "pasos": [
-        {"id": "p1", "tipo": "explicacion", "icono": "saludo", "titulo": {"es": "Cómo aprendes aquí"},
-         "texto": {"es": "Cada unidad sigue el mismo camino: primero te enseñamos con ejemplos, después practicas con pistas y al final compruebas lo que sabes. Toca el altavoz para escuchar cada palabra. Buena noticia: el italiano se lee casi como se escribe, igual que el español."}},
-        {"id": "p2", "tipo": "vocabulario", "refs": ["v-ciao", "v-buongiorno", "v-buonasera", "v-arrivederci", "v-a-presto", "v-buona-giornata", "v-grazie", "v-prego", "v-per-favore", "v-scusi", "v-scusa", "v-si", "v-no", "v-signora", "v-signore"]},
-        {"id": "p3", "tipo": "explicacion", "icono": "sonido", "titulo": {"es": "Tres sonidos para empezar"},
-         "texto": {"es": "«Ci» suena «ch»: «ciao» se dice «chao». «Gi» suena como una «y» fuerte o como la «j» inglesa de «jeans»: «buongiorno». «Sc» delante de u suena «sk»: «scusi» se dice «skusi». Además, la tilde cambia el significado: «sì» es «sí»."}},
-        {"id": "p4", "tipo": "ejemplos", "items": [
-          {"texto": "Buongiorno, signora!", "traduccion": {"es": "¡Buenos días, señora!"}},
-          {"texto": "Buonasera, signore!", "traduccion": {"es": "¡Buenas noches, señor!"}},
-          {"texto": "Ciao!", "traduccion": {"es": "¡Hola! / ¡Chao! (a un amigo)"}},
-          {"texto": "Grazie! Prego!", "traduccion": {"es": "¡Gracias! ¡De nada!"}},
-          {"texto": "Scusi, signore!", "traduccion": {"es": "¡Disculpe, señor!"}},
-          {"texto": "Arrivederci! Buona giornata!", "traduccion": {"es": "¡Adiós! ¡Que tenga un buen día!"}}
-        ]},
-        {"id": "p5", "tipo": "practica_guiada", "items": [
-          {"id": "g1", "formato": "escuchar", "consigna": {"es": "Escucha y elige la palabra que oyes."}, "audio": "buongiorno", "opciones": ["buongiorno", "buonasera", "arrivederci"], "respuesta": 0,
-           "pista": {"es": "Es el saludo de la mañana."}, "feedback": {"es": "«Buongiorno» = buenos días."}},
-          {"id": "g2", "formato": "elegir", "consigna": {"es": "Elige la respuesta."}, "preguntaApoyo": {"es": "¿Qué dices para dar las gracias?"}, "opciones": ["grazie", "prego", "scusi"], "respuesta": 0,
-           "pista": {"es": "Suena parecido a «gracias»."}, "feedback": {"es": "«Grazie» = gracias. «Prego» = de nada."}},
-          {"id": "g3", "formato": "relacionar", "consigna": {"es": "Une cada expresión con su significado."},
-           "pares": [["ciao", {"es": "hola / chao (informal)"}], ["arrivederci", {"es": "adiós"}], ["per favore", {"es": "por favor"}], ["prego", {"es": "de nada"}]],
-           "pista": {"es": "Vuelve a escuchar las tarjetas si dudas."}, "feedback": {"es": "Estas cuatro expresiones te sirven desde el primer día."}},
-          {"id": "g4", "formato": "elegir", "consigna": {"es": "Elige la expresión adecuada."}, "preguntaApoyo": {"es": "Quieres llamar la atención de un camarero que no conoces."}, "opciones": ["Scusi!", "Scusa!", "Ciao!"], "respuesta": 0,
-           "pista": {"es": "Es la forma formal."}, "feedback": {"es": "«Scusi» es formal; «scusa» es para amigos."}}
-        ]},
-        {"id": "p6", "tipo": "practica_independiente", "items": [
-          {"id": "i1", "formato": "escuchar", "consigna": {"es": "Escucha y elige."}, "audio": "grazie", "opciones": ["prego", "grazie", "sì"], "respuesta": 1,
-           "feedback": {"es": "Oíste «grazie»: gracias."}},
-          {"id": "i2", "formato": "elegir", "consigna": {"es": "Elige tu respuesta."}, "preguntaApoyo": {"es": "Tu amigo te dice «Grazie!». ¿Qué respondes?"}, "opciones": ["Prego!", "Per favore!", "Scusi!"], "respuesta": 0,
-           "feedback": {"es": "«Grazie» → «Prego»."}},
-          {"id": "i3", "formato": "escribir", "consigna": {"es": "Escribe en italiano: «sí»."}, "respuesta": "sì",
-           "feedback": {"es": "Se escribe con tilde grave: «sì»."}}
-        ]},
-        {"id": "p7", "tipo": "situacion", "contexto": {"es": "Entras a una tienda pequeña en Roma. Saludas, pagas y te despides."},
-         "dialogo": [
-           {"hablante": "Tú", "texto": "Buongiorno, signora!", "traduccion": {"es": "¡Buenos días, señora!"}},
-           {"hablante": "Vendedora", "texto": "Buongiorno! Prego.", "traduccion": {"es": "¡Buenos días! Dígame."}},
-           {"hablante": "Tú", "texto": "Grazie!", "traduccion": {"es": "¡Gracias!"}},
-           {"hablante": "Vendedora", "texto": "Prego! Arrivederci!", "traduccion": {"es": "¡De nada! ¡Adiós!"}},
-           {"hablante": "Tú", "texto": "Arrivederci! Buona giornata!", "traduccion": {"es": "¡Adiós! ¡Que tenga un buen día!"}}
-         ],
-         "items": [
-           {"id": "s1", "formato": "elegir", "consigna": {"es": "Elige tu frase."}, "preguntaApoyo": {"es": "Sales de la tienda. ¿Qué le dices a la vendedora?"}, "opciones": ["Arrivederci, signora!", "Ciao, signora!", "Prego, signora!"], "respuesta": 0,
-            "feedback": {"es": "Con una desconocida: «Arrivederci». «Ciao» es informal."}}
-         ]},
-        {"id": "p8", "tipo": "evaluacion", "items": [
-          {"id": "e1", "formato": "escuchar", "consigna": {"es": "Escucha y elige."}, "audio": "arrivederci", "opciones": ["buongiorno", "arrivederci", "a presto"], "respuesta": 1,
-           "feedback": {"es": "«Arrivederci» = adiós."}},
-          {"id": "e2", "formato": "relacionar", "consigna": {"es": "Une cada palabra con su significado."},
-           "pares": [["sì", {"es": "sí"}], ["no", {"es": "no"}], ["scusa", {"es": "disculpa (informal)"}], ["buonasera", {"es": "buenas tardes / noches"}]],
-           "feedback": {"es": "«Scusa» con amigos; «scusi» con desconocidos."}},
-          {"id": "e3", "formato": "elegir", "consigna": {"es": "Elige la expresión adecuada."}, "preguntaApoyo": {"es": "Son las 7 de la tarde. Saludas al entrar a un restaurante."}, "opciones": ["Buonasera!", "Buongiorno!", "Arrivederci!"], "respuesta": 0,
-           "feedback": {"es": "Desde media tarde se dice «buonasera»."}},
-          {"id": "e4", "formato": "escribir", "consigna": {"es": "Escribe en italiano: «gracias»."}, "respuesta": "grazie",
-           "feedback": {"es": "Se escribe «grazie»."}},
-          {"id": "e5", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "per favore", "opciones": [{"es": "por favor"}, {"es": "gracias"}, {"es": "de nada"}], "respuesta": 0,
-           "feedback": {"es": "«Per favore» = por favor."}},
-          {"id": "e6", "formato": "elegir", "consigna": {"es": "Elige la expresión adecuada."}, "preguntaApoyo": {"es": "Te despides de una amiga."}, "opciones": ["Ciao! A presto!", "Buonasera, signora!", "Prego!"], "respuesta": 0,
-           "feedback": {"es": "Con amigos: «Ciao! A presto!»."}}
-        ]}
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "saludo",
+          "titulo": {"es": "Cómo aprendes aquí"},
+          "texto": {
+            "es": "Cada unidad sigue el mismo camino: primero te enseñamos con ejemplos, después practicas con pistas y al final compruebas lo que sabes. Toca el altavoz para escuchar cada palabra. Buena noticia: el italiano se lee casi como se escribe, igual que el español."
+          }
+        },
+        {
+          "id": "p2",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-ciao",
+            "v-buongiorno",
+            "v-buonasera",
+            "v-arrivederci",
+            "v-a-presto",
+            "v-buona-giornata",
+            "v-grazie",
+            "v-prego",
+            "v-per-favore",
+            "v-scusi",
+            "v-scusa",
+            "v-si",
+            "v-no",
+            "v-signora",
+            "v-signore"
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "explicacion",
+          "icono": "sonido",
+          "titulo": {"es": "Tres sonidos para empezar"},
+          "texto": {
+            "es": "«Ci» suena «ch»: «ciao» se dice «chao». «Gi» suena como una «y» fuerte o como la «j» inglesa de «jeans»: «buongiorno». «Sc» delante de u suena «sk»: «scusi» se dice «skusi». Además, la tilde cambia el significado: «sì» es «sí»."
+          }
+        },
+        {
+          "id": "p4",
+          "tipo": "ejemplos",
+          "items": [
+            {"texto": "Buongiorno, signora!", "traduccion": {"es": "¡Buenos días, señora!"}},
+            {"texto": "Buonasera, signore!", "traduccion": {"es": "¡Buenas noches, señor!"}},
+            {"texto": "Ciao!", "traduccion": {"es": "¡Hola! / ¡Chao! (a un amigo)"}},
+            {"texto": "Grazie! Prego!", "traduccion": {"es": "¡Gracias! ¡De nada!"}},
+            {"texto": "Scusi, signore!", "traduccion": {"es": "¡Disculpe, señor!"}},
+            {"texto": "Arrivederci! Buona giornata!", "traduccion": {"es": "¡Adiós! ¡Que tenga un buen día!"}}
+          ]
+        },
+        {
+          "id": "p5",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la palabra que oyes."},
+              "audio": "buongiorno",
+              "opciones": ["buongiorno", "buonasera", "arrivederci"],
+              "respuesta": 0,
+              "pista": {"es": "Es el saludo de la mañana."},
+              "feedback": {"es": "«Buongiorno» = buenos días."}
+            },
+            {
+              "id": "g2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la respuesta."},
+              "preguntaApoyo": {"es": "¿Qué dices para dar las gracias?"},
+              "opciones": ["grazie", "prego", "scusi"],
+              "respuesta": 0,
+              "pista": {"es": "Suena parecido a «gracias»."},
+              "feedback": {"es": "«Grazie» = gracias. «Prego» = de nada."}
+            },
+            {
+              "id": "g3",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada expresión con su significado."},
+              "pares": [
+                ["ciao", {"es": "hola / chao (informal)"}],
+                ["arrivederci", {"es": "adiós"}],
+                ["per favore", {"es": "por favor"}],
+                ["prego", {"es": "de nada"}]
+              ],
+              "pista": {"es": "Vuelve a escuchar las tarjetas si dudas."},
+              "feedback": {"es": "Estas cuatro expresiones te sirven desde el primer día."}
+            },
+            {
+              "id": "g4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la expresión adecuada."},
+              "preguntaApoyo": {"es": "Quieres llamar la atención de un camarero que no conoces."},
+              "opciones": ["Scusi!", "Scusa!", "Ciao!"],
+              "respuesta": 0,
+              "pista": {"es": "Es la forma formal."},
+              "feedback": {"es": "«Scusi» es formal; «scusa» es para amigos."}
+            }
+          ]
+        },
+        {
+          "id": "p6",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige."},
+              "audio": "grazie",
+              "opciones": ["prego", "grazie", "sì"],
+              "respuesta": 1,
+              "feedback": {"es": "Oíste «grazie»: gracias."}
+            },
+            {
+              "id": "i2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige tu respuesta."},
+              "preguntaApoyo": {"es": "Tu amigo te dice «Grazie!». ¿Qué respondes?"},
+              "opciones": ["Prego!", "Per favore!", "Scusi!"],
+              "respuesta": 0,
+              "feedback": {"es": "«Grazie» → «Prego»."}
+            },
+            {
+              "id": "i3",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano: «sí»."},
+              "respuesta": "sì",
+              "feedback": {"es": "Se escribe con tilde grave: «sì»."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "situacion",
+          "contexto": {"es": "Entras a una tienda pequeña en Roma. Saludas, pagas y te despides."},
+          "dialogo": [
+            {"hablante": "Tú", "texto": "Buongiorno, signora!", "traduccion": {"es": "¡Buenos días, señora!"}},
+            {"hablante": "Vendedora", "texto": "Buongiorno! Prego.", "traduccion": {"es": "¡Buenos días! Dígame."}},
+            {"hablante": "Tú", "texto": "Grazie!", "traduccion": {"es": "¡Gracias!"}},
+            {"hablante": "Vendedora", "texto": "Prego! Arrivederci!", "traduccion": {"es": "¡De nada! ¡Adiós!"}},
+            {
+              "hablante": "Tú",
+              "texto": "Arrivederci! Buona giornata!",
+              "traduccion": {"es": "¡Adiós! ¡Que tenga un buen día!"}
+            }
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige tu frase."},
+              "preguntaApoyo": {"es": "Sales de la tienda. ¿Qué le dices a la vendedora?"},
+              "opciones": ["Arrivederci, signora!", "Ciao, signora!", "Prego, signora!"],
+              "respuesta": 0,
+              "feedback": {"es": "Con una desconocida: «Arrivederci». «Ciao» es informal."}
+            }
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige."},
+              "audio": "arrivederci",
+              "opciones": ["buongiorno", "arrivederci", "a presto"],
+              "respuesta": 1,
+              "feedback": {"es": "«Arrivederci» = adiós."}
+            },
+            {
+              "id": "e2",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["sì", {"es": "sí"}],
+                ["no", {"es": "no"}],
+                ["scusa", {"es": "disculpa (informal)"}],
+                ["buonasera", {"es": "buenas tardes / noches"}]
+              ],
+              "feedback": {"es": "«Scusa» con amigos; «scusi» con desconocidos."}
+            },
+            {
+              "id": "e3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la expresión adecuada."},
+              "preguntaApoyo": {"es": "Son las 7 de la tarde. Saludas al entrar a un restaurante."},
+              "opciones": ["Buonasera!", "Buongiorno!", "Arrivederci!"],
+              "respuesta": 0,
+              "feedback": {"es": "Desde media tarde se dice «buonasera»."}
+            },
+            {
+              "id": "e4",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano: «gracias»."},
+              "respuesta": "grazie",
+              "feedback": {"es": "Se escribe «grazie»."}
+            },
+            {
+              "id": "e5",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "per favore",
+              "opciones": [{"es": "por favor"}, {"es": "gracias"}, {"es": "de nada"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Per favore» = por favor."}
+            },
+            {
+              "id": "e6",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la expresión adecuada."},
+              "preguntaApoyo": {"es": "Te despides de una amiga."},
+              "opciones": ["Ciao! A presto!", "Buonasera, signora!", "Prego!"],
+              "respuesta": 0,
+              "feedback": {"es": "Con amigos: «Ciao! A presto!»."}
+            }
+          ]
+        }
       ],
       "criterioDominio": {"umbral": 0.8},
-      "tutor": {"objetivo": {"es": "Saludar y agradecer"}, "gramaticaPermitida": ["it-g-sound-text", "it-g-greetings"], "longitudMaxFrase": 4}
+      "tutor": {
+        "objetivo": {"es": "Saludar y agradecer"},
+        "gramaticaPermitida": ["it-g-sound-text", "it-g-greetings"],
+        "longitudMaxFrase": 4
+      }
+    },
+    {
+      "id": "it.f0.alfabeto",
+      "orden": 1,
+      "titulo": {"es": "El alfabeto y el deletreo"},
+      "objetivo": {
+        "es": "Reconocer las 21 letras del italiano y las 5 extranjeras por su nombre, deletrear tu nombre y pedir que te repitan."
+      },
+      "cefr": "Pre-A1",
+      "nivelInterno": 0,
+      "concepto": "alfabeto",
+      "prerequisitos": ["it.f0.primo-contatto"],
+      "habilidades": ["pronunciacion", "escucha", "escritura", "vocabulario"],
+      "gramatica": ["it-g-alphabet", "it-g-spelling", "it-g-h-muta", "it-g-b-v"],
+      "vocabulario": [
+        {"id": "v-lettera", "texto": "lettera", "traduccion": {"es": "letra"}},
+        {"id": "v-parola", "texto": "parola", "traduccion": {"es": "palabra"}},
+        {
+          "id": "v-nome",
+          "texto": "nome",
+          "traduccion": {"es": "nombre"},
+          "nota": {"es": "Sirve para personas y cosas: «il nome» = el nombre."}
+        },
+        {"id": "v-come-si-scrive", "texto": "come si scrive?", "traduccion": {"es": "¿cómo se escribe?"}},
+        {"id": "v-si-scrive", "texto": "si scrive", "traduccion": {"es": "se escribe"}},
+        {
+          "id": "v-doppia",
+          "texto": "doppia",
+          "traduccion": {"es": "doble (para letras)"},
+          "nota": {"es": "«Doppia t» = dos t seguidas: tt."}
+        },
+        {
+          "id": "v-come-como",
+          "texto": "come",
+          "traduccion": {"es": "como / de (al deletrear)"},
+          "nota": {"es": "«R come Roma» = R de Roma. En preguntas, «come» significa «cómo»."}
+        },
+        {"id": "v-in-italiano", "texto": "in italiano", "traduccion": {"es": "en italiano"}},
+        {"id": "v-capisco", "texto": "capisco", "traduccion": {"es": "entiendo"}},
+        {
+          "id": "v-non-capisco",
+          "texto": "non capisco",
+          "traduccion": {"es": "no entiendo"},
+          "nota": {"es": "«Non» va delante del verbo; lo verás con calma más adelante."}
+        },
+        {"id": "v-ripeta", "texto": "ripeta, per favore", "traduccion": {"es": "repita, por favor (formal)"}},
+        {"id": "v-piu-piano", "texto": "più piano", "traduccion": {"es": "más despacio"}},
+        {"id": "v-come-scusi", "texto": "come, scusi?", "traduccion": {"es": "¿cómo dice? / ¿perdón?"}},
+        {"id": "v-giusto", "texto": "giusto", "traduccion": {"es": "correcto / exacto"}}
+      ],
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "J = jota",
+          "correcto": "J = i lunga",
+          "explicacion": {"es": "En italiano la J se llama «i lunga» (i larga) y casi solo aparece en palabras extranjeras."}
+        },
+        {
+          "incorrecto": "V = uve",
+          "correcto": "V = vu",
+          "explicacion": {
+            "es": "La V se llama «vu» (o «vi»). Y ojo: en italiano la v y la b suenan distinto; la v se pronuncia apoyando los dientes de arriba en el labio de abajo."
+          }
+        },
+        {
+          "incorrecto": "Non capito.",
+          "correcto": "Non capisco.",
+          "explicacion": {
+            "es": "«No entiendo» es «non capisco». «Capito» es otra forma del verbo («non ho capito» = no entendí)."
+          }
+        }
+      ],
+      "pasos": [
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "alfabeto",
+          "titulo": {"es": "Un alfabeto de 21 letras"},
+          "texto": {
+            "es": "El alfabeto italiano tiene 21 letras: las mismas del español, pero sin ñ, j, k, w, x ni y. La ñ se escribe «gn» (lo verás en la próxima lección) y las otras cinco letras solo aparecen en palabras extranjeras, como «jeans» o «taxi». Tres diferencias con el español: la h nunca suena («hotel» se dice «otel»); la q siempre va con u y suena «ku» («quattro»); y la b y la v NO suenan igual: la v se hace con los dientes sobre el labio, como una f que vibra. Los nombres de las letras son femeninos: «la a», «la bi», «una doppia t»."
+          }
+        },
+        {
+          "id": "p2",
+          "tipo": "tabla",
+          "titulo": {"es": "Las 21 letras"},
+          "texto": {"es": "Toca cada celda para escuchar el nombre de la letra y la palabra de ejemplo."},
+          "columnas": [{"es": "Letra"}, {"es": "Nombre"}, {"es": "Ejemplo"}, {"es": "Significa"}],
+          "filas": [
+            [{"texto": "A"}, {"texto": "a"}, {"texto": "amico"}, {"apoyo": {"es": "amigo"}}],
+            [{"texto": "B"}, {"texto": "bi"}, {"texto": "bene"}, {"apoyo": {"es": "bien"}}],
+            [{"texto": "C"}, {"texto": "ci"}, {"texto": "casa"}, {"apoyo": {"es": "casa"}}],
+            [{"texto": "D"}, {"texto": "di"}, {"texto": "dove"}, {"apoyo": {"es": "dónde"}}],
+            [{"texto": "E"}, {"texto": "e"}, {"texto": "euro"}, {"apoyo": {"es": "euro"}}],
+            [{"texto": "F"}, {"texto": "effe"}, {"texto": "famiglia"}, {"apoyo": {"es": "familia"}}],
+            [{"texto": "G"}, {"texto": "gi"}, {"texto": "gatto"}, {"apoyo": {"es": "gato"}}],
+            [{"texto": "H"}, {"texto": "acca"}, {"texto": "hotel"}, {"apoyo": {"es": "hotel (la h no suena)"}}],
+            [{"texto": "I"}, {"texto": "i"}, {"texto": "Italia"}, {"apoyo": {"es": "Italia"}}],
+            [{"texto": "L"}, {"texto": "elle"}, {"texto": "libro"}, {"apoyo": {"es": "libro"}}],
+            [{"texto": "M"}, {"texto": "emme"}, {"texto": "mamma"}, {"apoyo": {"es": "mamá"}}],
+            [{"texto": "N"}, {"texto": "enne"}, {"texto": "nome"}, {"apoyo": {"es": "nombre"}}],
+            [{"texto": "O"}, {"texto": "o"}, {"texto": "oggi"}, {"apoyo": {"es": "hoy"}}],
+            [{"texto": "P"}, {"texto": "pi"}, {"texto": "pane"}, {"apoyo": {"es": "pan"}}],
+            [{"texto": "Q"}, {"texto": "cu"}, {"texto": "quattro"}, {"apoyo": {"es": "cuatro"}}],
+            [{"texto": "R"}, {"texto": "erre"}, {"texto": "Roma"}, {"apoyo": {"es": "Roma"}}],
+            [{"texto": "S"}, {"texto": "esse"}, {"texto": "sole"}, {"apoyo": {"es": "sol"}}],
+            [{"texto": "T"}, {"texto": "ti"}, {"texto": "treno"}, {"apoyo": {"es": "tren"}}],
+            [{"texto": "U"}, {"texto": "u"}, {"texto": "uno"}, {"apoyo": {"es": "uno"}}],
+            [{"texto": "V"}, {"texto": "vu"}, {"texto": "vino"}, {"apoyo": {"es": "vino"}}],
+            [{"texto": "Z"}, {"texto": "zeta"}, {"texto": "zero"}, {"apoyo": {"es": "cero"}}]
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "tabla",
+          "titulo": {"es": "Letras de palabras extranjeras"},
+          "columnas": [{"es": "Letra"}, {"es": "Nombre"}, {"es": "Ejemplo"}, {"es": "Significa"}],
+          "filas": [
+            [{"texto": "J"}, {"texto": "i lunga"}, {"texto": "jeans"}, {"apoyo": {"es": "jeans"}}],
+            [{"texto": "K"}, {"texto": "cappa"}, {"texto": "kiwi"}, {"apoyo": {"es": "kiwi"}}],
+            [{"texto": "W"}, {"texto": "doppia vu"}, {"texto": "web"}, {"apoyo": {"es": "la web, internet"}}],
+            [{"texto": "X"}, {"texto": "ics"}, {"texto": "taxi"}, {"apoyo": {"es": "taxi"}}],
+            [{"texto": "Y"}, {"texto": "ipsilon"}, {"texto": "yogurt"}, {"apoyo": {"es": "yogur"}}]
+          ]
+        },
+        {
+          "id": "p4",
+          "tipo": "explicacion",
+          "icono": "escritura",
+          "titulo": {"es": "Cómo deletrear"},
+          "texto": {
+            "es": "Para preguntar cómo se escribe algo se dice «Come si scrive?». Se responde letra por letra y, si hay una letra doble, se dice «doppia»: «Rossi: erre, o, doppia esse, i». Por teléfono, los italianos aclaran las letras con nombres de ciudades: «A come Ancona, B come Bologna, R come Roma» (A de Ancona, B de Bolonia, R de Roma). Si no entiendes, pide ayuda: «Non capisco», «Come, scusi?», «Ripeta, per favore» o «Più piano, per favore»."
+          }
+        },
+        {
+          "id": "p5",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-lettera",
+            "v-parola",
+            "v-nome",
+            "v-come-si-scrive",
+            "v-si-scrive",
+            "v-doppia",
+            "v-come-como",
+            "v-in-italiano",
+            "v-capisco",
+            "v-non-capisco",
+            "v-ripeta",
+            "v-piu-piano",
+            "v-come-scusi",
+            "v-giusto"
+          ]
+        },
+        {
+          "id": "p6",
+          "tipo": "ejemplos",
+          "items": [
+            {"texto": "Come si scrive?", "traduccion": {"es": "¿Cómo se escribe?"}},
+            {"texto": "Rossi: erre, o, doppia esse, i.", "traduccion": {"es": "Rossi: erre, o, doble ese, i."}},
+            {"texto": "Ana: a, enne, a.", "traduccion": {"es": "Ana: a, ene, a."}},
+            {"texto": "R come Roma.", "traduccion": {"es": "R de Roma."}},
+            {
+              "texto": "Libro si scrive elle, i, bi, erre, o.",
+              "traduccion": {"es": "«Libro» se escribe ele, i, be, erre, o."}
+            },
+            {"texto": "Come, scusi? Ripeta, per favore.", "traduccion": {"es": "¿Cómo dice? Repita, por favor."}},
+            {
+              "texto": "Non capisco. Più piano, per favore.",
+              "traduccion": {"es": "No entiendo. Más despacio, por favor."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la letra."},
+              "audio": "acca",
+              "opciones": ["K", "H", "A"],
+              "respuesta": 1,
+              "pista": {"es": "Es la letra que nunca suena."},
+              "feedback": {"es": "«Acca» es la H. En italiano no suena: «hotel» se dice «otel»."}
+            },
+            {
+              "id": "g2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el nombre."},
+              "preguntaApoyo": {"es": "¿Cómo se llama la letra Q?"},
+              "opciones": ["ci", "cappa", "cu"],
+              "respuesta": 2,
+              "pista": {"es": "Suena como el principio de «cuatro»."},
+              "feedback": {"es": "La Q se llama «cu» y siempre va con u: «quattro»."}
+            },
+            {
+              "id": "g3",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada nombre con su letra."},
+              "pares": [
+                ["gi", {"es": "la letra G"}],
+                ["ci", {"es": "la letra C"}],
+                ["acca", {"es": "la letra H"}],
+                ["zeta", {"es": "la letra Z"}]
+              ],
+              "pista": {"es": "«ci» suena «chi» y «gi» suena «yi», con la j inglesa de «jeans»."},
+              "feedback": {"es": "ci = C, gi = G, acca = H, zeta = Z."}
+            },
+            {
+              "id": "g4",
+              "formato": "completar",
+              "consigna": {"es": "Completa el deletreo de «Rossi»."},
+              "texto": "Rossi: erre, o, ___ esse, i.",
+              "respuesta": "doppia",
+              "opciones": ["doppia", "acca", "come"],
+              "pista": {"es": "«Rossi» tiene dos s seguidas."},
+              "feedback": {"es": "Para una letra doble se dice «doppia»: doppia esse = ss."}
+            },
+            {
+              "id": "g5",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Più piano, per favore.",
+              "opciones": [{"es": "Repita, por favor."}, {"es": "No entiendo."}, {"es": "Más despacio, por favor."}],
+              "respuesta": 2,
+              "pista": {"es": "«Piano» significa «despacio»."},
+              "feedback": {"es": "«Più piano, per favore» = más despacio, por favor."}
+            }
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "escribir",
+              "consigna": {"es": "Escucha el deletreo y escribe la palabra."},
+              "audio": "ci, a, esse, a",
+              "respuesta": "casa",
+              "feedback": {"es": "Ci, a, esse, a: «casa»."}
+            },
+            {
+              "id": "i2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la letra."},
+              "preguntaApoyo": {"es": "¿Qué letra NO suena nunca en italiano?"},
+              "opciones": ["erre", "acca", "esse"],
+              "respuesta": 1,
+              "feedback": {"es": "La h (acca) es muda: no suena nunca."}
+            },
+            {
+              "id": "i3",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena la pregunta: «¿Cómo se escribe?»"},
+              "tokens": ["scrive?", "Come", "si"],
+              "respuesta": "Come si scrive?",
+              "feedback": {"es": "«Come si scrive?» = ¿cómo se escribe?"}
+            },
+            {
+              "id": "i4",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Non capisco.",
+              "opciones": [{"es": "No entiendo."}, {"es": "Entiendo."}, {"es": "Se escribe así."}],
+              "respuesta": 0,
+              "feedback": {"es": "«Non capisco» = no entiendo."}
+            }
+          ]
+        },
+        {
+          "id": "p9",
+          "tipo": "situacion",
+          "contexto": {
+            "es": "Llegas a un hotel en Roma. El recepcionista tiene que escribir tu apellido y te pide que lo deletrees."
+          },
+          "dialogo": [
+            {
+              "hablante": "Recepcionista",
+              "texto": "Buongiorno, signora! Nome, per favore?",
+              "traduccion": {"es": "¡Buenos días, señora! ¿Su nombre, por favor?"}
+            },
+            {"hablante": "Ana", "texto": "Buongiorno! Ana Rossi.", "traduccion": {"es": "¡Buenos días! Ana Rossi."}},
+            {
+              "hablante": "Recepcionista",
+              "texto": "Come, scusi? Come si scrive Rossi?",
+              "traduccion": {"es": "¿Cómo dice? ¿Cómo se escribe Rossi?"}
+            },
+            {
+              "hablante": "Ana",
+              "texto": "Erre, o, doppia esse, i. R come Roma.",
+              "traduccion": {"es": "Erre, o, doble ese, i. R de Roma."}
+            },
+            {"hablante": "Recepcionista", "texto": "Rossi. Giusto?", "traduccion": {"es": "Rossi. ¿Correcto?"}},
+            {"hablante": "Ana", "texto": "Sì, giusto. Grazie!", "traduccion": {"es": "Sí, correcto. ¡Gracias!"}}
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la respuesta."},
+              "preguntaApoyo": {"es": "¿Qué letra aclara Ana con el nombre de una ciudad?"},
+              "opciones": [{"es": "La S"}, {"es": "La R"}, {"es": "La A"}],
+              "respuesta": 1,
+              "feedback": {"es": "Ana dice «R come Roma» para que no haya dudas con la R."}
+            },
+            {
+              "id": "s2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Come, scusi?",
+              "opciones": [{"es": "¿Cómo se llama?"}, {"es": "¿Cómo dice? / ¿Perdón?"}, {"es": "¿Cómo está?"}],
+              "respuesta": 1,
+              "feedback": {"es": "«Come, scusi?» se usa cuando no oíste bien."}
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la letra."},
+              "audio": "effe",
+              "opciones": ["V", "F", "H"],
+              "respuesta": 1,
+              "feedback": {"es": "«Effe» es la F."}
+            },
+            {
+              "id": "e2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el nombre."},
+              "preguntaApoyo": {"es": "¿Cómo se llama la letra J en italiano?"},
+              "opciones": ["gi", "ipsilon", "i lunga"],
+              "respuesta": 2,
+              "feedback": {"es": "La J se llama «i lunga»."}
+            },
+            {
+              "id": "e3",
+              "formato": "escribir",
+              "consigna": {"es": "Escucha el deletreo y escribe la palabra."},
+              "audio": "emme, a, doppia emme, a",
+              "respuesta": "mamma",
+              "feedback": {"es": "Emme, a, doppia emme, a: «mamma» (mamá)."}
+            },
+            {
+              "id": "e4",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada frase con su significado."},
+              "pares": [
+                ["come si scrive?", {"es": "¿cómo se escribe?"}],
+                ["non capisco", {"es": "no entiendo"}],
+                ["più piano", {"es": "más despacio"}],
+                ["parola", {"es": "palabra"}]
+              ],
+              "feedback": {"es": "Son frases muy útiles en clase y de viaje."}
+            },
+            {
+              "id": "e5",
+              "formato": "completar",
+              "consigna": {"es": "Completa el deletreo de «Ana»."},
+              "texto": "Ana: a, ___, a.",
+              "respuesta": "enne",
+              "opciones": ["emme", "enne", "elle"],
+              "feedback": {"es": "La N se llama «enne»."}
+            },
+            {
+              "id": "e6",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la letra."},
+              "audio": "doppia vu",
+              "opciones": ["W", "X", "Y"],
+              "respuesta": 0,
+              "feedback": {"es": "«Doppia vu» es la W, como en «web»."}
+            }
+          ]
+        }
+      ],
+      "criterioDominio": {"umbral": 0.8},
+      "tutor": {
+        "objetivo": {"es": "Deletrear y reconocer letras"},
+        "gramaticaPermitida": ["it-g-alphabet", "it-g-spelling"],
+        "longitudMaxFrase": 5
+      }
     },
     {
       "id": "it.f0.suoni",
-      "orden": 1,
-      "titulo": {"es": "Sonidos del italiano"},
-      "objetivo": {"es": "Leer bien c, g, gli, gn, sc y pronunciar las consonantes dobles."},
+      "orden": 2,
+      "titulo": {"es": "C, g, gli, gn y sc"},
+      "objetivo": {"es": "Leer y pronunciar bien la c y la g (duras o suaves), ch y gh, gli, gn y sc."},
       "cefr": "Pre-A1",
       "nivelInterno": 0,
       "concepto": "pronunciacion",
-      "prerequisitos": ["it.f0.primo-contatto"],
+      "prerequisitos": ["it.f0.alfabeto"],
       "habilidades": ["pronunciacion", "escucha", "vocabulario"],
-      "gramatica": ["it-g-c-g", "it-g-gli-gn-sc", "it-g-double-consonants"],
+      "gramatica": ["it-g-c-g", "it-g-gli-gn-sc"],
       "vocabulario": [
         {"id": "v-casa", "texto": "casa", "traduccion": {"es": "casa"}},
         {"id": "v-cena", "texto": "cena", "traduccion": {"es": "cena"}, "nota": {"es": "Se dice «chena»."}},
+        {
+          "id": "v-cioccolato",
+          "texto": "cioccolato",
+          "traduccion": {"es": "chocolate"},
+          "nota": {"es": "«cio» = «cho»: la i no suena."}
+        },
         {"id": "v-chiesa", "texto": "chiesa", "traduccion": {"es": "iglesia"}, "nota": {"es": "Se dice «kiesa»."}},
         {"id": "v-gatto", "texto": "gatto", "traduccion": {"es": "gato"}},
-        {"id": "v-gelato", "texto": "gelato", "traduccion": {"es": "helado"}, "nota": {"es": "La g suena como la «j» inglesa de «jeans»."}},
-        {"id": "v-spaghetti", "texto": "spaghetti", "traduccion": {"es": "espaguetis"}},
-        {"id": "v-famiglia", "texto": "famiglia", "traduccion": {"es": "familia"}, "nota": {"es": "«gli» suena parecido a «lli», con la lengua pegada al paladar."}},
-        {"id": "v-gnocchi", "texto": "gnocchi", "traduccion": {"es": "ñoquis"}, "nota": {"es": "«gn» = ñ: «ñoki»."}},
-        {"id": "v-scuola", "texto": "scuola", "traduccion": {"es": "escuela"}},
-        {"id": "v-pesce", "texto": "pesce", "traduccion": {"es": "pescado / pez"}, "nota": {"es": "Se dice «peshe»."}},
-        {"id": "v-pizza", "texto": "pizza", "traduccion": {"es": "pizza"}, "nota": {"es": "«zz» suena «ts»."}},
+        {
+          "id": "v-gelato",
+          "texto": "gelato",
+          "traduccion": {"es": "helado"},
+          "nota": {"es": "La g suena como la j inglesa de «jeans»."}
+        },
+        {
+          "id": "v-giorno",
+          "texto": "giorno",
+          "traduccion": {"es": "día"},
+          "nota": {"es": "«gio» = «yo» con la j inglesa; la i no suena."}
+        },
+        {
+          "id": "v-spaghetti",
+          "texto": "spaghetti",
+          "traduccion": {"es": "espaguetis"},
+          "nota": {"es": "«ghe» = «gue»."}
+        },
+        {
+          "id": "v-famiglia",
+          "texto": "famiglia",
+          "traduccion": {"es": "familia"},
+          "nota": {"es": "«gli» suena parecido a «lli», con la lengua pegada al paladar."}
+        },
+        {"id": "v-figlio", "texto": "figlio", "traduccion": {"es": "hijo"}},
+        {
+          "id": "v-gnocchi",
+          "texto": "gnocchi",
+          "traduccion": {"es": "ñoquis"},
+          "nota": {"es": "«gn» = ñ: «ñoki»."}
+        },
+        {"id": "v-bagno", "texto": "bagno", "traduccion": {"es": "baño"}},
+        {"id": "v-scuola", "texto": "scuola", "traduccion": {"es": "escuela"}, "nota": {"es": "«scu» = «sku»."}},
+        {
+          "id": "v-pesce",
+          "texto": "pesce",
+          "traduccion": {"es": "pescado / pez"},
+          "nota": {"es": "Se dice «peshe»."}
+        },
+        {
+          "id": "v-prosciutto",
+          "texto": "prosciutto",
+          "traduccion": {"es": "jamón curado"},
+          "nota": {"es": "«sciu» = «shu»: «proshuto», con t larga."}
+        },
+        {
+          "id": "v-amici",
+          "texto": "amici",
+          "traduccion": {"es": "amigos"},
+          "nota": {"es": "amico → amici: la c se suaviza y suena «amichi»."}
+        }
+      ],
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "spagueti",
+          "correcto": "spaghetti",
+          "explicacion": {"es": "En italiano el sonido «gue» se escribe «ghe»: spaghetti. La combinación «gue» no se usa así."}
+        },
+        {
+          "incorrecto": "familia",
+          "correcto": "famiglia",
+          "explicacion": {"es": "«Familia» en italiano se escribe con «gli»: famiglia."}
+        }
+      ],
+      "pasos": [
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "sonido",
+          "titulo": {"es": "C y g: duras o suaves"},
+          "texto": {
+            "es": "Delante de a, o, u, la c y la g suenan duras, como en español: «casa», «gatto». Delante de e, i se suavizan: «ce» suena «che» (cena = «chena») y «ge» suena como la j inglesa de «jeans» (gelato). ¿Y si quiero el sonido duro delante de e, i? Se añade una h: «chiesa» = «kiesa», «spaghetti» = «spagueti». Y al revés: para el sonido suave delante de a, o, u se pone una i que no se pronuncia: «ciao» = «chao», «giorno» = «yorno» (con la j inglesa)."
+          }
+        },
+        {
+          "id": "p2",
+          "tipo": "tabla",
+          "titulo": {"es": "C y G"},
+          "texto": {"es": "La h endurece; la i (que no suena) suaviza."},
+          "columnas": [{"es": "Se escribe"}, {"es": "Suena"}, {"es": "Ejemplo"}, {"es": "Significa"}],
+          "filas": [
+            [
+              {"texto": "ca, co, cu"},
+              {"apoyo": {"es": "«ka, ko, ku»"}},
+              {"texto": "casa"},
+              {"apoyo": {"es": "casa"}}
+            ],
+            [
+              {"texto": "che, chi"},
+              {"apoyo": {"es": "«ke, ki»"}},
+              {"texto": "chiesa"},
+              {"apoyo": {"es": "iglesia"}}
+            ],
+            [
+              {"texto": "ce, ci"},
+              {"apoyo": {"es": "«che, chi», como en «chile»"}},
+              {"texto": "cena"},
+              {"apoyo": {"es": "cena"}}
+            ],
+            [
+              {"texto": "cia, cio, ciu"},
+              {"apoyo": {"es": "«cha, cho, chu» (la i no suena)"}},
+              {"texto": "cioccolato"},
+              {"apoyo": {"es": "chocolate"}}
+            ],
+            [
+              {"texto": "ga, go, gu"},
+              {"apoyo": {"es": "«ga, go, gu»"}},
+              {"texto": "gatto"},
+              {"apoyo": {"es": "gato"}}
+            ],
+            [
+              {"texto": "ghe, ghi"},
+              {"apoyo": {"es": "«gue, gui»"}},
+              {"texto": "spaghetti"},
+              {"apoyo": {"es": "espaguetis"}}
+            ],
+            [
+              {"texto": "ge, gi"},
+              {"apoyo": {"es": "«ye, yi» con la j inglesa de «jeans»"}},
+              {"texto": "gelato"},
+              {"apoyo": {"es": "helado"}}
+            ],
+            [
+              {"texto": "gia, gio, giu"},
+              {"apoyo": {"es": "«ya, yo, yu» con la j inglesa (la i no suena)"}},
+              {"texto": "giorno"},
+              {"apoyo": {"es": "día"}}
+            ]
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "explicacion",
+          "icono": "sonido",
+          "titulo": {"es": "gli, gn y sc"},
+          "texto": {
+            "es": "«Gn» es la ñ del español: «gnocchi» = «ñoki», «bagno» = «baño». «Gli» suena parecido a «lli», pronunciado con la lengua pegada al paladar: «famiglia», «figlio». Y «sc» cambia según la vocal: delante de e, i suena «sh» (pesce = «peshe»); delante de a, o, u, o con h, suena «sk» (scuola, schiena). Fíjate también en el plural: «amico» (amiko) pasa a «amici» (amichi), porque ahora la c va delante de i."
+          }
+        },
+        {
+          "id": "p4",
+          "tipo": "tabla",
+          "titulo": {"es": "gli, gn y sc"},
+          "columnas": [{"es": "Se escribe"}, {"es": "Suena"}, {"es": "Ejemplo"}, {"es": "Significa"}],
+          "filas": [
+            [
+              {"texto": "gli"},
+              {"apoyo": {"es": "parecido a «lli», con la lengua en el paladar"}},
+              {"texto": "famiglia"},
+              {"apoyo": {"es": "familia"}}
+            ],
+            [
+              {"texto": "gli"},
+              {"apoyo": {"es": "parecido a «lli»"}},
+              {"texto": "figlio"},
+              {"apoyo": {"es": "hijo"}}
+            ],
+            [{"texto": "gn"}, {"apoyo": {"es": "«ñ»"}}, {"texto": "gnocchi"}, {"apoyo": {"es": "ñoquis"}}],
+            [{"texto": "gn"}, {"apoyo": {"es": "«ñ»"}}, {"texto": "bagno"}, {"apoyo": {"es": "baño"}}],
+            [
+              {"texto": "sca, sco, scu"},
+              {"apoyo": {"es": "«ska, sko, sku»"}},
+              {"texto": "scuola"},
+              {"apoyo": {"es": "escuela"}}
+            ],
+            [
+              {"texto": "sche, schi"},
+              {"apoyo": {"es": "«ske, ski»"}},
+              {"texto": "schiena"},
+              {"apoyo": {"es": "espalda"}}
+            ],
+            [
+              {"texto": "sce, sci"},
+              {"apoyo": {"es": "«she, shi»"}},
+              {"texto": "pesce"},
+              {"apoyo": {"es": "pescado / pez"}}
+            ],
+            [
+              {"texto": "scia, scio, sciu"},
+              {"apoyo": {"es": "«sha, sho, shu» (la i no suena)"}},
+              {"texto": "prosciutto"},
+              {"apoyo": {"es": "jamón curado"}}
+            ]
+          ]
+        },
+        {
+          "id": "p5",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-casa",
+            "v-cena",
+            "v-cioccolato",
+            "v-chiesa",
+            "v-gatto",
+            "v-gelato",
+            "v-giorno",
+            "v-spaghetti",
+            "v-famiglia",
+            "v-figlio",
+            "v-gnocchi",
+            "v-bagno",
+            "v-scuola",
+            "v-pesce",
+            "v-prosciutto",
+            "v-amici"
+          ]
+        },
+        {
+          "id": "p6",
+          "tipo": "ejemplos",
+          "items": [
+            {
+              "texto": "casa, chiesa, cena, ciao",
+              "traduccion": {"es": "casa, iglesia, cena, hola"},
+              "nota": {"es": "«ka», «kie», «che», «chao»."}
+            },
+            {"texto": "gatto, spaghetti, gelato, giorno", "traduccion": {"es": "gato, espaguetis, helado, día"}},
+            {"texto": "famiglia, figlio", "traduccion": {"es": "familia, hijo"}},
+            {"texto": "gnocchi, bagno", "traduccion": {"es": "ñoquis, baño"}},
+            {
+              "texto": "scuola, schiena, pesce, prosciutto",
+              "traduccion": {"es": "escuela, espalda, pescado, jamón curado"},
+              "nota": {"es": "«sk», «sk», «sh», «sh»."}
+            },
+            {
+              "texto": "amico, amici",
+              "traduccion": {"es": "amigo, amigos"},
+              "nota": {"es": "La c suena «k» en amico y «ch» en amici."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la palabra que oyes."},
+              "audio": "cena",
+              "opciones": ["casa", "cena", "chiesa"],
+              "respuesta": 1,
+              "pista": {"es": "c + e suena «che»."},
+              "feedback": {"es": "«Cena» se dice «chena»."}
+            },
+            {
+              "id": "g2",
+              "formato": "elegir",
+              "consigna": {"es": "¿Cómo se pronuncia?"},
+              "pregunta": "chiesa",
+              "opciones": [{"es": "«shiesa»"}, {"es": "«chiesa», como en español"}, {"es": "«kiesa»"}],
+              "respuesta": 2,
+              "pista": {"es": "La h endurece la c."},
+              "feedback": {"es": "«Ch» en italiano suena «k»: «kiesa»."}
+            },
+            {
+              "id": "g3",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["gatto", {"es": "gato"}],
+                ["pesce", {"es": "pescado"}],
+                ["scuola", {"es": "escuela"}],
+                ["famiglia", {"es": "familia"}]
+              ],
+              "pista": {"es": "Se parecen mucho al español."},
+              "feedback": {"es": "Muchas palabras se parecen al español; lo que cambia es la pronunciación."}
+            },
+            {
+              "id": "g4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la palabra."},
+              "preguntaApoyo": {"es": "¿En cuál de estas palabras suena una «ñ»?"},
+              "opciones": ["gelato", "gnocchi", "gatto"],
+              "respuesta": 1,
+              "pista": {"es": "Busca las letras «gn»."},
+              "feedback": {"es": "«Gnocchi» = «ñoki»."}
+            },
+            {
+              "id": "g5",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la forma correcta."},
+              "preguntaApoyo": {"es": "¿Cómo se escribe «espaguetis» en italiano?"},
+              "opciones": ["spagueti", "spaghetti"],
+              "respuesta": 1,
+              "pista": {"es": "Para endurecer la g delante de e se usa h."},
+              "feedback": {"es": "El sonido «gue» se escribe «ghe»: spaghetti."}
+            }
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "escribir",
+              "consigna": {"es": "Escucha y escribe la palabra."},
+              "audio": "gelato",
+              "respuesta": "gelato",
+              "feedback": {"es": "«Gelato» = helado."}
+            },
+            {
+              "id": "i2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la palabra que oyes."},
+              "audio": "prosciutto",
+              "opciones": ["prosciutto", "pesce", "scuola"],
+              "respuesta": 0,
+              "feedback": {"es": "«Prosciutto» se dice «proshuto»."}
+            },
+            {
+              "id": "i3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la palabra."},
+              "preguntaApoyo": {"es": "¿En cuál suena «sh»?"},
+              "opciones": ["scuola", "schiena", "pesce"],
+              "respuesta": 2,
+              "feedback": {"es": "«Pesce» = «peshe»: sc + e suena «sh»."}
+            },
+            {
+              "id": "i4",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["bagno", {"es": "baño"}],
+                ["giorno", {"es": "día"}],
+                ["figlio", {"es": "hijo"}],
+                ["amici", {"es": "amigos"}]
+              ],
+              "feedback": {"es": "gn = ñ, gio = «yo», gli ≈ «lli», ci = «chi»."}
+            }
+          ]
+        },
+        {
+          "id": "p9",
+          "tipo": "situacion",
+          "contexto": {"es": "En una trattoria, Marco y Laura piden la comida al camarero."},
+          "dialogo": [
+            {"hablante": "Camarero", "texto": "Buonasera!", "traduccion": {"es": "¡Buenas noches!"}},
+            {
+              "hablante": "Marco",
+              "texto": "Buonasera! Gnocchi, per favore.",
+              "traduccion": {"es": "¡Buenas noches! Ñoquis, por favor."}
+            },
+            {"hablante": "Laura", "texto": "Spaghetti, per favore.", "traduccion": {"es": "Espaguetis, por favor."}},
+            {"hablante": "Camarero", "texto": "Pesce?", "traduccion": {"es": "¿Pescado?"}},
+            {"hablante": "Laura", "texto": "No, grazie.", "traduccion": {"es": "No, gracias."}},
+            {"hablante": "Camarero", "texto": "Gelato?", "traduccion": {"es": "¿Helado?"}},
+            {
+              "hablante": "Marco",
+              "texto": "Sì! Cioccolato, per favore!",
+              "traduccion": {"es": "¡Sí! De chocolate, por favor."}
+            }
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la respuesta."},
+              "preguntaApoyo": {"es": "¿Qué pide Laura?"},
+              "opciones": [{"es": "ñoquis"}, {"es": "espaguetis"}, {"es": "pescado"}],
+              "respuesta": 1,
+              "feedback": {"es": "Laura pide «spaghetti»."}
+            },
+            {
+              "id": "s2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige lo que oyes."},
+              "audio": "Gnocchi, per favore.",
+              "opciones": ["Gnocchi, per favore.", "Spaghetti, per favore.", "Gelato, per favore."],
+              "respuesta": 0,
+              "feedback": {"es": "«Gnocchi» empieza con el sonido «ñ»."}
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige."},
+              "audio": "pesce",
+              "opciones": ["chiesa", "pesce", "prosciutto"],
+              "respuesta": 1,
+              "feedback": {"es": "«Pesce» = «peshe»."}
+            },
+            {
+              "id": "e2",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["chiesa", {"es": "iglesia"}],
+                ["cena", {"es": "cena"}],
+                ["giorno", {"es": "día"}],
+                ["scuola", {"es": "escuela"}]
+              ],
+              "feedback": {"es": "ch = k, ce = che, gio = yo, scu = sku."}
+            },
+            {
+              "id": "e3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la pronunciación correcta."},
+              "pregunta": "cena",
+              "opciones": [{"es": "«sena»"}, {"es": "«kena»"}, {"es": "«chena»"}],
+              "respuesta": 2,
+              "feedback": {"es": "c + e = «che»."}
+            },
+            {
+              "id": "e4",
+              "formato": "escribir",
+              "consigna": {"es": "Escucha y escribe la palabra."},
+              "audio": "famiglia",
+              "respuesta": "famiglia",
+              "feedback": {"es": "«Famiglia» se escribe con «gli»."}
+            },
+            {
+              "id": "e5",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige."},
+              "audio": "spaghetti",
+              "opciones": ["gelato", "gnocchi", "spaghetti"],
+              "respuesta": 2,
+              "feedback": {"es": "«Ghe» suena «gue»: spaghetti."}
+            },
+            {
+              "id": "e6",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la forma correcta."},
+              "preguntaApoyo": {"es": "¿Cómo se escribe «familia» en italiano?"},
+              "opciones": ["famiglia", "familia"],
+              "respuesta": 0,
+              "feedback": {"es": "En italiano: famiglia, con «gli»."}
+            }
+          ]
+        }
+      ],
+      "criterioDominio": {"umbral": 0.8},
+      "tutor": {
+        "objetivo": {"es": "Pronunciar c, g, gli, gn y sc"},
+        "gramaticaPermitida": ["it-g-c-g", "it-g-gli-gn-sc"],
+        "longitudMaxFrase": 4
+      }
+    },
+    {
+      "id": "it.f0.doppie-vocali",
+      "orden": 3,
+      "titulo": {"es": "Dobles, z, vocales y acentos"},
+      "objetivo": {
+        "es": "Distinguir consonantes simples y dobles, pronunciar los dos sonidos de la z y leer las palabras con tilde."
+      },
+      "cefr": "Pre-A1",
+      "nivelInterno": 0,
+      "concepto": "pronunciacion",
+      "prerequisitos": ["it.f0.suoni"],
+      "habilidades": ["pronunciacion", "escucha", "escritura", "vocabulario"],
+      "gramatica": ["it-g-double-consonants", "it-g-z", "it-g-vowels", "it-g-written-accent"],
+      "vocabulario": [
         {"id": "v-pala", "texto": "pala", "traduccion": {"es": "pala"}},
         {"id": "v-palla", "texto": "palla", "traduccion": {"es": "pelota"}},
         {"id": "v-nono", "texto": "nono", "traduccion": {"es": "noveno"}},
         {"id": "v-nonno", "texto": "nonno", "traduccion": {"es": "abuelo"}},
-        {"id": "v-un-caffe", "texto": "un caffè", "traduccion": {"es": "un café (expreso)"}},
-        {"id": "v-ecco", "texto": "ecco", "traduccion": {"es": "aquí tiene / aquí está"}}
+        {
+          "id": "v-sette",
+          "texto": "sette",
+          "traduccion": {"es": "siete"},
+          "nota": {"es": "Con t doble. «Sete» (una t) es «sed»."}
+        },
+        {
+          "id": "v-cappello",
+          "texto": "cappello",
+          "traduccion": {"es": "sombrero"},
+          "nota": {"es": "Con p doble. «Capello» (una p) es «cabello»."}
+        },
+        {"id": "v-pizza", "texto": "pizza", "traduccion": {"es": "pizza"}, "nota": {"es": "«zz» suena «ts»."}},
+        {
+          "id": "v-ragazzo",
+          "texto": "ragazzo",
+          "traduccion": {"es": "chico"},
+          "nota": {"es": "«zz» suena «ts»: «ragatso»."}
+        },
+        {"id": "v-ragazza", "texto": "ragazza", "traduccion": {"es": "chica"}},
+        {
+          "id": "v-zero",
+          "texto": "zero",
+          "traduccion": {"es": "cero"},
+          "nota": {"es": "Aquí la z suena «ds», suave."}
+        },
+        {"id": "v-zaino", "texto": "zaino", "traduccion": {"es": "mochila"}, "nota": {"es": "«dsaino»."}},
+        {
+          "id": "v-un-caffe",
+          "texto": "un caffè",
+          "traduccion": {"es": "un café (expreso)"},
+          "nota": {"es": "La tilde marca la fuerza en la última sílaba."}
+        },
+        {"id": "v-ecco", "texto": "ecco", "traduccion": {"es": "aquí tiene / aquí está"}},
+        {"id": "v-citta", "texto": "città", "traduccion": {"es": "ciudad"}},
+        {
+          "id": "v-perche",
+          "texto": "perché",
+          "traduccion": {"es": "por qué / porque"},
+          "nota": {"es": "La misma palabra sirve para preguntar y para responder."}
+        },
+        {"id": "v-piu", "texto": "più", "traduccion": {"es": "más"}}
       ],
       "erroresFrecuentes": [
-        {"incorrecto": "pala", "correcto": "palla", "explicacion": {"es": "Para decir «pelota» la l es doble y dura más: «palla». «Pala» es otra palabra."}},
-        {"incorrecto": "nono", "correcto": "nonno", "explicacion": {"es": "«Abuelo» es «nonno», con n doble. «Nono» significa «noveno»."}}
+        {
+          "incorrecto": "pala",
+          "correcto": "palla",
+          "explicacion": {"es": "Para decir «pelota» la l es doble y dura más: «palla». «Pala» es otra palabra."}
+        },
+        {
+          "incorrecto": "nono",
+          "correcto": "nonno",
+          "explicacion": {"es": "«Abuelo» es «nonno», con n doble. «Nono» significa «noveno»."}
+        },
+        {
+          "incorrecto": "caffe",
+          "correcto": "caffè",
+          "explicacion": {"es": "En «caffè» la fuerza cae en la última sílaba, por eso se escribe la tilde: caffè, città, più."}
+        }
       ],
       "pasos": [
-        {"id": "p1", "tipo": "explicacion", "icono": "sonido", "titulo": {"es": "C y g: duras o suaves"},
-         "texto": {"es": "Delante de a, o, u, la c y la g son duras, como en español: «casa», «gatto». Delante de e, i se suavizan: «cena» suena «chena» y «gelato», con una g como la «j» inglesa de «jeans». Para mantenerlas duras delante de e, i se escribe una h: «chiesa» (kiesa), «spaghetti» (spagueti)."}},
-        {"id": "p2", "tipo": "vocabulario", "refs": ["v-casa", "v-cena", "v-chiesa", "v-gatto", "v-gelato", "v-spaghetti"]},
-        {"id": "p3", "tipo": "explicacion", "icono": "sonido", "titulo": {"es": "gli, gn y sc"},
-         "texto": {"es": "«Gn» es la ñ española: «gnocchi» se dice «ñoki». «Gli» suena parecido a «lli», con la lengua pegada al paladar: «famiglia». «Sc» delante de e, i suena «sh»: «pesce» (peshe); delante de a, o, u suena «sk»: «scuola»."}},
-        {"id": "p4", "tipo": "explicacion", "icono": "sonido", "titulo": {"es": "Consonantes dobles"},
-         "texto": {"es": "En italiano las consonantes dobles se pronuncian más largas, y eso cambia el significado: «pala» (pala) y «palla» (pelota); «nono» (noveno) y «nonno» (abuelo). Mantén la consonante un instante: pal-la, non-no, caf-fè."}},
-        {"id": "p5", "tipo": "vocabulario", "refs": ["v-famiglia", "v-gnocchi", "v-scuola", "v-pesce", "v-pizza", "v-pala", "v-palla", "v-nono", "v-nonno", "v-un-caffe", "v-ecco"]},
-        {"id": "p6", "tipo": "ejemplos", "items": [
-          {"texto": "casa, cena, chiesa", "traduccion": {"es": "casa, cena, iglesia"}, "nota": {"es": "«ka», «che», «kie»."}},
-          {"texto": "gatto, gelato, spaghetti", "traduccion": {"es": "gato, helado, espaguetis"}},
-          {"texto": "famiglia, gnocchi", "traduccion": {"es": "familia, ñoquis"}},
-          {"texto": "scuola, pesce", "traduccion": {"es": "escuela, pescado"}, "nota": {"es": "«sk» y «sh»."}},
-          {"texto": "pala, palla", "traduccion": {"es": "pala, pelota"}, "nota": {"es": "Escucha la l larga."}},
-          {"texto": "Un caffè, per favore.", "traduccion": {"es": "Un café, por favor."}}
-        ]},
-        {"id": "p7", "tipo": "practica_guiada", "items": [
-          {"id": "g1", "formato": "escuchar", "consigna": {"es": "Escucha y elige la palabra que oyes."}, "audio": "cena", "opciones": ["casa", "cena", "chiesa"], "respuesta": 1,
-           "pista": {"es": "c + e suena «ch»."}, "feedback": {"es": "«Cena» se dice «chena»."}},
-          {"id": "g2", "formato": "escuchar", "consigna": {"es": "Escucha y elige la palabra que oyes."}, "audio": "palla", "opciones": ["pala", "palla"], "respuesta": 1,
-           "pista": {"es": "Fíjate si la l dura más."}, "feedback": {"es": "«Palla» = pelota, con l doble."}},
-          {"id": "g3", "formato": "relacionar", "consigna": {"es": "Une cada palabra con su significado."},
-           "pares": [["gatto", {"es": "gato"}], ["pesce", {"es": "pescado"}], ["scuola", {"es": "escuela"}], ["famiglia", {"es": "familia"}]],
-           "pista": {"es": "Se parecen mucho al español."}, "feedback": {"es": "Muchas palabras se parecen al español; lo que cambia es la pronunciación."}},
-          {"id": "g4", "formato": "elegir", "consigna": {"es": "Elige la palabra."}, "preguntaApoyo": {"es": "¿En cuál de estas palabras suena una «ñ»?"}, "opciones": ["gnocchi", "gelato", "gatto"], "respuesta": 0,
-           "pista": {"es": "Busca las letras «gn»."}, "feedback": {"es": "«Gnocchi» = «ñoki»."}}
-        ]},
-        {"id": "p8", "tipo": "practica_independiente", "items": [
-          {"id": "i1", "formato": "escuchar", "consigna": {"es": "Escucha y elige."}, "audio": "nonno", "opciones": ["nono", "nonno"], "respuesta": 1,
-           "feedback": {"es": "«Nonno» = abuelo, con n doble."}},
-          {"id": "i2", "formato": "escribir", "consigna": {"es": "Escucha y escribe la palabra."}, "audio": "gelato", "respuesta": "gelato",
-           "feedback": {"es": "«Gelato» = helado."}},
-          {"id": "i3", "formato": "elegir", "consigna": {"es": "Elige el significado."}, "pregunta": "chiesa", "opciones": [{"es": "iglesia"}, {"es": "queso"}, {"es": "cena"}], "respuesta": 0,
-           "feedback": {"es": "«Chiesa» (kiesa) = iglesia."}}
-        ]},
-        {"id": "p9", "tipo": "situacion", "contexto": {"es": "Entras a un bar italiano por la mañana y pides un café en la barra."},
-         "dialogo": [
-           {"hablante": "Barista", "texto": "Buongiorno, signora!", "traduccion": {"es": "¡Buenos días, señora!"}},
-           {"hablante": "Ana", "texto": "Buongiorno! Un caffè, per favore.", "traduccion": {"es": "¡Buenos días! Un café, por favor."}},
-           {"hablante": "Barista", "texto": "Ecco!", "traduccion": {"es": "¡Aquí tiene!"}},
-           {"hablante": "Ana", "texto": "Grazie!", "traduccion": {"es": "¡Gracias!"}},
-           {"hablante": "Barista", "texto": "Prego! Buona giornata!", "traduccion": {"es": "¡De nada! ¡Que tenga un buen día!"}}
-         ],
-         "items": [
-           {"id": "s1", "formato": "elegir", "consigna": {"es": "Elige tu frase."}, "preguntaApoyo": {"es": "¿Cómo pides un café?"}, "opciones": ["Un caffè, per favore.", "Un caffè, prego.", "Ecco, grazie."], "respuesta": 0,
-            "feedback": {"es": "Para pedir: «per favore»."}},
-           {"id": "s2", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Ecco!", "opciones": [{"es": "¡Aquí tiene!"}, {"es": "¡De nada!"}, {"es": "¡Adiós!"}], "respuesta": 0,
-            "feedback": {"es": "«Ecco» se usa al entregar algo."}}
-         ]},
-        {"id": "p10", "tipo": "evaluacion", "items": [
-          {"id": "e1", "formato": "escuchar", "consigna": {"es": "Escucha y elige."}, "audio": "pesce", "opciones": ["pesce", "pizza", "chiesa"], "respuesta": 0,
-           "feedback": {"es": "«Pesce» = «peshe»."}},
-          {"id": "e2", "formato": "relacionar", "consigna": {"es": "Une cada palabra con su significado."},
-           "pares": [["pala", {"es": "pala"}], ["palla", {"es": "pelota"}], ["nono", {"es": "noveno"}], ["nonno", {"es": "abuelo"}]],
-           "feedback": {"es": "La consonante doble cambia el significado."}},
-          {"id": "e3", "formato": "elegir", "consigna": {"es": "Elige la pronunciación correcta."}, "pregunta": "chiesa", "opciones": [{"es": "«kiesa»"}, {"es": "«chiesa», como en español"}, {"es": "«siesa»"}], "respuesta": 0,
-           "feedback": {"es": "«Ch» en italiano suena «k»."}},
-          {"id": "e4", "formato": "escribir", "consigna": {"es": "Escucha y escribe la palabra."}, "audio": "famiglia", "respuesta": "famiglia",
-           "feedback": {"es": "«Famiglia» se escribe con «gli»."}},
-          {"id": "e5", "formato": "escuchar", "consigna": {"es": "Escucha y elige."}, "audio": "spaghetti", "opciones": ["spaghetti", "gelato", "gnocchi"], "respuesta": 0,
-           "feedback": {"es": "«Ghe» suena «gue»: spaghetti."}},
-          {"id": "e6", "formato": "elegir", "consigna": {"es": "Elige la pronunciación correcta."}, "pregunta": "cena", "opciones": [{"es": "«chena»"}, {"es": "«sena»"}, {"es": "«kena»"}], "respuesta": 0,
-           "feedback": {"es": "c + e = «ch»."}}
-        ]}
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "sonido",
+          "titulo": {"es": "Consonantes dobles"},
+          "texto": {
+            "es": "En italiano las consonantes dobles se pronuncian más largas, como si hicieras una pequeña pausa: pal-la, non-no, set-te. No es un detalle: cambia el significado. «Pala» es pala, pero «palla» es pelota; «nono» es noveno, pero «nonno» es abuelo. En español casi no existe este contraste, así que al principio exagera un poco la consonante doble."
+          }
+        },
+        {
+          "id": "p2",
+          "tipo": "tabla",
+          "titulo": {"es": "Simple o doble"},
+          "texto": {"es": "Escucha cada pareja: solo cambia la duración de la consonante."},
+          "columnas": [{"es": "Simple"}, {"es": "Significa"}, {"es": "Doble"}, {"es": "Significa"}],
+          "filas": [
+            [{"texto": "pala"}, {"apoyo": {"es": "pala"}}, {"texto": "palla"}, {"apoyo": {"es": "pelota"}}],
+            [{"texto": "nono"}, {"apoyo": {"es": "noveno"}}, {"texto": "nonno"}, {"apoyo": {"es": "abuelo"}}],
+            [
+              {"texto": "caro"},
+              {"apoyo": {"es": "caro / querido"}},
+              {"texto": "carro"},
+              {"apoyo": {"es": "carreta (¡no es «auto»!)"}}
+            ],
+            [{"texto": "sete"}, {"apoyo": {"es": "sed"}}, {"texto": "sette"}, {"apoyo": {"es": "siete"}}],
+            [
+              {"texto": "capello"},
+              {"apoyo": {"es": "cabello"}},
+              {"texto": "cappello"},
+              {"apoyo": {"es": "sombrero"}}
+            ]
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "explicacion",
+          "icono": "sonido",
+          "titulo": {"es": "La z y las vocales"},
+          "texto": {
+            "es": "La z italiana nunca suena como la z de España ni como una s. Tiene dos sonidos: «ts», como en «pizza», «grazie» o «ragazzo»; y «ds», más suave, como en «zero» o «zaino». Las vocales son las mismas cinco del español y siempre se pronuncian claras, también al final de la palabra: no las cierres ni las comas. La e y la o pueden ser abiertas o cerradas (como en «bene» o «sole»); cambia según la región y no te impedirá comunicarte."
+          }
+        },
+        {
+          "id": "p4",
+          "tipo": "tabla",
+          "titulo": {"es": "La z"},
+          "columnas": [{"es": "Suena"}, {"es": "Ejemplo"}, {"es": "Significa"}],
+          "filas": [
+            [{"apoyo": {"es": "«ts»"}}, {"texto": "pizza"}, {"apoyo": {"es": "pizza"}}],
+            [{"apoyo": {"es": "«ts»"}}, {"texto": "grazie"}, {"apoyo": {"es": "gracias"}}],
+            [{"apoyo": {"es": "«ts»"}}, {"texto": "ragazzo"}, {"apoyo": {"es": "chico"}}],
+            [{"apoyo": {"es": "«ds»"}}, {"texto": "zero"}, {"apoyo": {"es": "cero"}}],
+            [{"apoyo": {"es": "«ds»"}}, {"texto": "zaino"}, {"apoyo": {"es": "mochila"}}]
+          ]
+        },
+        {
+          "id": "p5",
+          "tipo": "explicacion",
+          "icono": "escritura",
+          "titulo": {"es": "La tilde"},
+          "texto": {
+            "es": "Casi todas las palabras italianas llevan la fuerza en la penúltima sílaba y no llevan tilde. La tilde se escribe solo cuando la fuerza cae en la última vocal: caffè, città, più, perché. Casi siempre es un acento grave (à, è, ì, ò, ù); en «perché» es agudo (é), como en español, porque esa e es cerrada. Y hay una tilde que cambia el significado: «è» (es / está) frente a «e» (y)."
+          }
+        },
+        {
+          "id": "p6",
+          "tipo": "tabla",
+          "titulo": {"es": "Palabras con tilde"},
+          "columnas": [{"es": "Palabra"}, {"es": "Significa"}],
+          "filas": [
+            [{"texto": "caffè"}, {"apoyo": {"es": "café"}}],
+            [{"texto": "città"}, {"apoyo": {"es": "ciudad"}}],
+            [{"texto": "più"}, {"apoyo": {"es": "más"}}],
+            [{"texto": "perché"}, {"apoyo": {"es": "por qué / porque"}}],
+            [{"texto": "però"}, {"apoyo": {"es": "pero / sin embargo"}}],
+            [{"texto": "è"}, {"apoyo": {"es": "es / está"}}],
+            [{"texto": "e"}, {"apoyo": {"es": "y"}}]
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-pala",
+            "v-palla",
+            "v-nono",
+            "v-nonno",
+            "v-sette",
+            "v-cappello",
+            "v-pizza",
+            "v-ragazzo",
+            "v-ragazza",
+            "v-zero",
+            "v-zaino",
+            "v-un-caffe",
+            "v-ecco",
+            "v-citta",
+            "v-perche",
+            "v-piu"
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "ejemplos",
+          "items": [
+            {"texto": "pala, palla", "traduccion": {"es": "pala, pelota"}, "nota": {"es": "Escucha la l larga."}},
+            {"texto": "nono, nonno", "traduccion": {"es": "noveno, abuelo"}},
+            {"texto": "sete, sette", "traduccion": {"es": "sed, siete"}},
+            {
+              "texto": "pizza, ragazzo, grazie",
+              "traduccion": {"es": "pizza, chico, gracias"},
+              "nota": {"es": "z = «ts»."}
+            },
+            {"texto": "zero, zaino", "traduccion": {"es": "cero, mochila"}, "nota": {"es": "z = «ds»."}},
+            {"texto": "Un caffè, per favore.", "traduccion": {"es": "Un café, por favor."}},
+            {"texto": "Ecco!", "traduccion": {"es": "¡Aquí tiene!"}}
+          ]
+        },
+        {
+          "id": "p9",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la palabra que oyes."},
+              "audio": "palla",
+              "opciones": ["pala", "palla"],
+              "respuesta": 1,
+              "pista": {"es": "Fíjate si la l dura más."},
+              "feedback": {"es": "«Palla» = pelota, con l doble."}
+            },
+            {
+              "id": "g2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige la palabra que oyes."},
+              "audio": "sette",
+              "opciones": ["sette", "sete"],
+              "respuesta": 0,
+              "pista": {"es": "¿La t dura más?"},
+              "feedback": {"es": "«Sette» = siete; «sete» = sed."}
+            },
+            {
+              "id": "g3",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["pizza", {"es": "pizza"}],
+                ["ragazzo", {"es": "chico"}],
+                ["zaino", {"es": "mochila"}],
+                ["cappello", {"es": "sombrero"}]
+              ],
+              "pista": {"es": "«Cappello» no es «cabello»."},
+              "feedback": {"es": "Fíjate en las dobles: pizza, ragazzo, cappello."}
+            },
+            {
+              "id": "g4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la respuesta."},
+              "preguntaApoyo": {"es": "¿Cómo suena la z de «pizza»?"},
+              "opciones": [{"es": "«s»"}, {"es": "«ts»"}, {"es": "como la z de España"}],
+              "respuesta": 1,
+              "pista": {"es": "Piensa en cómo dices «pizza» en tu país."},
+              "feedback": {"es": "En «pizza» la z doble suena «ts»."}
+            },
+            {
+              "id": "g5",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la palabra."},
+              "preguntaApoyo": {"es": "¿Cuál significa «y»?"},
+              "opciones": ["è", "e"],
+              "respuesta": 1,
+              "pista": {"es": "Es la que no lleva tilde."},
+              "feedback": {"es": "«e» sin tilde = y; «è» con tilde = es / está."}
+            }
+          ]
+        },
+        {
+          "id": "p10",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige."},
+              "audio": "nonno",
+              "opciones": ["nono", "nonno"],
+              "respuesta": 1,
+              "feedback": {"es": "«Nonno» = abuelo, con n doble."}
+            },
+            {
+              "id": "i2",
+              "formato": "escribir",
+              "consigna": {"es": "Escucha y escribe la palabra (con su tilde)."},
+              "audio": "città",
+              "respuesta": "città",
+              "aceptadas": ["citta"],
+              "feedback": {"es": "«Città» = ciudad, con tilde en la a."}
+            },
+            {
+              "id": "i3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el significado."},
+              "pregunta": "cappello",
+              "opciones": [{"es": "sombrero"}, {"es": "cabello"}, {"es": "carreta"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Cappello» (pp) = sombrero; «capello» (p) = cabello."}
+            },
+            {
+              "id": "i4",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["perché", {"es": "por qué / porque"}],
+                ["più", {"es": "más"}],
+                ["zero", {"es": "cero"}],
+                ["sette", {"es": "siete"}]
+              ],
+              "feedback": {"es": "Perché y più llevan tilde porque la fuerza va al final."}
+            }
+          ]
+        },
+        {
+          "id": "p11",
+          "tipo": "situacion",
+          "contexto": {"es": "Entras a un bar italiano por la mañana y pides un café en la barra."},
+          "dialogo": [
+            {"hablante": "Barista", "texto": "Buongiorno, signora!", "traduccion": {"es": "¡Buenos días, señora!"}},
+            {
+              "hablante": "Ana",
+              "texto": "Buongiorno! Un caffè, per favore.",
+              "traduccion": {"es": "¡Buenos días! Un café, por favor."}
+            },
+            {"hablante": "Barista", "texto": "Ecco!", "traduccion": {"es": "¡Aquí tiene!"}},
+            {"hablante": "Ana", "texto": "Grazie!", "traduccion": {"es": "¡Gracias!"}},
+            {
+              "hablante": "Barista",
+              "texto": "Prego! Buona giornata!",
+              "traduccion": {"es": "¡De nada! ¡Que tenga un buen día!"}
+            }
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige tu frase."},
+              "preguntaApoyo": {"es": "¿Cómo pides un café?"},
+              "opciones": ["Un caffè, prego.", "Un caffè, per favore.", "Ecco, grazie."],
+              "respuesta": 1,
+              "feedback": {"es": "Para pedir se dice «per favore»; «prego» es «de nada»."}
+            },
+            {
+              "id": "s2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Ecco!",
+              "opciones": [{"es": "¡De nada!"}, {"es": "¡Adiós!"}, {"es": "¡Aquí tiene!"}],
+              "respuesta": 2,
+              "feedback": {"es": "«Ecco» se usa al entregar algo."}
+            }
+          ]
+        },
+        {
+          "id": "p12",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["pala", {"es": "pala"}],
+                ["palla", {"es": "pelota"}],
+                ["nono", {"es": "noveno"}],
+                ["nonno", {"es": "abuelo"}]
+              ],
+              "feedback": {"es": "La consonante doble cambia el significado."}
+            },
+            {
+              "id": "e2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige."},
+              "audio": "zaino",
+              "opciones": ["zero", "zaino", "pizza"],
+              "respuesta": 1,
+              "feedback": {"es": "«Zaino» = mochila; la z suena «ds»."}
+            },
+            {
+              "id": "e3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el significado."},
+              "pregunta": "sete",
+              "opciones": [{"es": "sed"}, {"es": "siete"}, {"es": "seda"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Sete» (una t) = sed; «sette» (dos t) = siete."}
+            },
+            {
+              "id": "e4",
+              "formato": "escribir",
+              "consigna": {"es": "Escucha y escribe la palabra."},
+              "audio": "nonno",
+              "respuesta": "nonno",
+              "feedback": {"es": "«Nonno» = abuelo, con dos n."}
+            },
+            {
+              "id": "e5",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige lo que oyes."},
+              "audio": "Un caffè, per favore.",
+              "opciones": ["Ecco, grazie.", "Prego, signora.", "Un caffè, per favore."],
+              "respuesta": 2,
+              "feedback": {"es": "Así se pide un café."}
+            },
+            {
+              "id": "e6",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la forma correcta."},
+              "preguntaApoyo": {"es": "¿Cómo se escribe «café» en italiano?"},
+              "opciones": ["caffe", "caffè"],
+              "respuesta": 1,
+              "feedback": {"es": "«Caffè» lleva tilde: la fuerza cae al final."}
+            }
+          ]
+        }
       ],
       "criterioDominio": {"umbral": 0.8},
-      "tutor": {"objetivo": {"es": "Pronunciar c, g, gli, gn y consonantes dobles"}, "gramaticaPermitida": ["it-g-c-g", "it-g-double-consonants"], "longitudMaxFrase": 4}
+      "tutor": {
+        "objetivo": {"es": "Pronunciar dobles, z y leer tildes"},
+        "gramaticaPermitida": ["it-g-double-consonants", "it-g-z", "it-g-written-accent"],
+        "longitudMaxFrase": 4
+      }
     },
     {
       "id": "it.f0.pronomi",
-      "orden": 2,
+      "orden": 4,
       "titulo": {"es": "Pronombres: tu y Lei"},
       "objetivo": {"es": "Nombrar a las personas con pronombres y elegir entre «tu» y «Lei» al hablar con alguien."},
       "cefr": "Pre-A1",
       "nivelInterno": 0,
       "concepto": "pronombres",
-      "prerequisitos": ["it.f0.suoni"],
+      "prerequisitos": ["it.f0.doppie-vocali"],
       "habilidades": ["vocabulario", "gramatica", "escucha", "conversacion"],
       "gramatica": ["it-g-subj-pron", "it-g-tu-lei", "it-g-pro-drop"],
       "vocabulario": [
@@ -216,11 +1572,21 @@
         {"id": "v-tu", "texto": "tu", "traduccion": {"es": "tú (informal)"}},
         {"id": "v-lui", "texto": "lui", "traduccion": {"es": "él"}},
         {"id": "v-lei", "texto": "lei", "traduccion": {"es": "ella"}},
-        {"id": "v-lei-formale", "texto": "Lei", "traduccion": {"es": "usted"}, "nota": {"es": "Es la misma palabra que «lei» (ella); en textos formales se escribe con mayúscula."}},
+        {
+          "id": "v-lei-formale",
+          "texto": "Lei",
+          "traduccion": {"es": "usted"},
+          "nota": {"es": "Es la misma palabra que «lei» (ella); en textos formales se escribe con mayúscula."}
+        },
         {"id": "v-noi", "texto": "noi", "traduccion": {"es": "nosotros / nosotras"}},
         {"id": "v-voi", "texto": "voi", "traduccion": {"es": "ustedes / vosotros"}},
         {"id": "v-loro", "texto": "loro", "traduccion": {"es": "ellos / ellas"}},
-        {"id": "v-e", "texto": "e", "traduccion": {"es": "y"}, "nota": {"es": "Sin tilde. Con tilde, «è», significa «es / está»."}},
+        {
+          "id": "v-e",
+          "texto": "e",
+          "traduccion": {"es": "y"},
+          "nota": {"es": "Sin tilde. Con tilde, «è», significa «es / está»."}
+        },
         {"id": "v-come-stai", "texto": "come stai?", "traduccion": {"es": "¿cómo estás?"}},
         {"id": "v-come-sta", "texto": "come sta?", "traduccion": {"es": "¿cómo está usted?"}},
         {"id": "v-bene", "texto": "bene", "traduccion": {"es": "bien"}},
@@ -229,80 +1595,285 @@
         {"id": "v-cosi-cosi", "texto": "così così", "traduccion": {"es": "más o menos"}}
       ],
       "erroresFrecuentes": [
-        {"incorrecto": "Come stai, signora?", "correcto": "Come sta, signora?", "explicacion": {"es": "Con una señora que no conoces se usa «Lei»: el verbo va en tercera persona, «come sta?», como «¿cómo está usted?»."}},
-        {"incorrecto": "Come sta, Giulia?", "correcto": "Come stai, Giulia?", "explicacion": {"es": "Con una amiga se usa «tu»: «come stai?»."}}
+        {
+          "incorrecto": "Come stai, signora?",
+          "correcto": "Come sta, signora?",
+          "explicacion": {
+            "es": "Con una señora que no conoces se usa «Lei»: el verbo va en tercera persona, «come sta?», como «¿cómo está usted?»."
+          }
+        },
+        {
+          "incorrecto": "Come sta, Giulia?",
+          "correcto": "Come stai, Giulia?",
+          "explicacion": {"es": "Con una amiga se usa «tu»: «come stai?»."}
+        }
       ],
       "pasos": [
-        {"id": "p1", "tipo": "explicacion", "icono": "personas", "titulo": {"es": "Como en español"},
-         "texto": {"es": "Buena noticia: igual que en español, el italiano suele omitir el pronombre, porque el verbo ya dice quién es: «sono Ana» = soy Ana. El pronombre se usa para dar énfasis o contrastar: «Io sono Ana, e tu?». «Voi» es el plural de «tu» (ustedes / vosotros) y «loro» sirve para ellos y ellas."}},
-        {"id": "p2", "tipo": "vocabulario", "refs": ["v-io", "v-tu", "v-lui", "v-lei", "v-noi", "v-voi", "v-loro", "v-e"]},
-        {"id": "p3", "tipo": "explicacion", "icono": "tratamiento", "titulo": {"es": "¿Tu o Lei?"},
-         "texto": {"es": "«Tu» es para amigos, familia, niños y gente joven entre sí. Con desconocidos, clientes o personas mayores se usa «Lei» (usted). «Lei» es la misma palabra que «lei» (ella) y el verbo va en tercera persona, igual que con «usted»: «Come sta?» (¿cómo está usted?) frente a «Come stai?» (¿cómo estás?)."}},
-        {"id": "p4", "tipo": "vocabulario", "refs": ["v-lei-formale", "v-come-stai", "v-come-sta", "v-bene", "v-molto-bene", "v-male", "v-cosi-cosi"]},
-        {"id": "p5", "tipo": "ejemplos", "items": [
-          {"texto": "Marco: lui", "traduccion": {"es": "Marco → él"}},
-          {"texto": "Giulia: lei", "traduccion": {"es": "Giulia → ella"}},
-          {"texto": "Marco e Giulia: loro", "traduccion": {"es": "Marco y Giulia → ellos"}},
-          {"texto": "Giulia e io: noi", "traduccion": {"es": "Giulia y yo → nosotros"}},
-          {"texto": "Ciao, Giulia! Come stai?", "traduccion": {"es": "¡Hola, Giulia! ¿Cómo estás?"}, "nota": {"es": "Con una amiga: registro «tu»."}},
-          {"texto": "Buongiorno, signora! Come sta?", "traduccion": {"es": "¡Buenos días, señora! ¿Cómo está usted?"}, "nota": {"es": "Con una desconocida: registro «Lei»."}}
-        ]},
-        {"id": "p6", "tipo": "practica_guiada", "items": [
-          {"id": "g1", "formato": "elegir", "consigna": {"es": "Elige el pronombre."}, "preguntaApoyo": {"es": "Hablas de ti: «yo»."}, "opciones": ["io", "tu", "lui"], "respuesta": 0,
-           "pista": {"es": "Se parece a «yo»."}, "feedback": {"es": "«Io» = yo."}},
-          {"id": "g2", "formato": "elegir", "consigna": {"es": "Elige el pronombre."}, "preguntaApoyo": {"es": "Hablas de Giulia, una mujer."}, "opciones": ["lui", "lei", "loro"], "respuesta": 1,
-           "pista": {"es": "Mujer → ella."}, "feedback": {"es": "«Lei» = ella."}},
-          {"id": "g3", "formato": "elegir", "consigna": {"es": "Elige el pronombre."}, "preguntaApoyo": {"es": "Hablas con un señor que no conoces («usted»)."}, "opciones": ["tu", "Lei", "lui"], "respuesta": 1,
-           "pista": {"es": "Es la forma de respeto."}, "feedback": {"es": "«Lei» = usted."}},
-          {"id": "g4", "formato": "relacionar", "consigna": {"es": "Une cada pronombre con su significado."},
-           "pares": [["lui", {"es": "él"}], ["noi", {"es": "nosotros"}], ["voi", {"es": "ustedes / vosotros"}], ["loro", {"es": "ellos / ellas"}]],
-           "pista": {"es": "Mira las tarjetas de vocabulario."}, "feedback": {"es": "Ya conoces los pronombres italianos."}}
-        ]},
-        {"id": "p7", "tipo": "practica_independiente", "items": [
-          {"id": "i1", "formato": "elegir", "consigna": {"es": "Elige el pronombre."}, "preguntaApoyo": {"es": "Hablas de Marco y Giulia juntos."}, "opciones": ["loro", "noi", "voi"], "respuesta": 0,
-           "feedback": {"es": "«Loro» = ellos."}},
-          {"id": "i2", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Come sta?", "opciones": [{"es": "¿Cómo está usted?"}, {"es": "¿Cómo estás?"}, {"es": "¿Dónde está?"}], "respuesta": 0,
-           "feedback": {"es": "«Come sta?» es formal, con «Lei»."}},
-          {"id": "i3", "formato": "escribir", "consigna": {"es": "Escribe en italiano: «nosotros»."}, "respuesta": "noi",
-           "feedback": {"es": "«Noi» = nosotros / nosotras."}}
-        ]},
-        {"id": "p8", "tipo": "situacion", "contexto": {"es": "En la calle te encuentras con tu amiga Giulia y con su vecina, la señora Rossi."},
-         "dialogo": [
-           {"hablante": "Tú", "texto": "Ciao, Giulia! Come stai?", "traduccion": {"es": "¡Hola, Giulia! ¿Cómo estás?"}},
-           {"hablante": "Giulia", "texto": "Bene, grazie! E tu?", "traduccion": {"es": "¡Bien, gracias! ¿Y tú?"}},
-           {"hablante": "Tú", "texto": "Molto bene!", "traduccion": {"es": "¡Muy bien!"}},
-           {"hablante": "Tú", "texto": "Buongiorno, signora! Come sta?", "traduccion": {"es": "¡Buenos días, señora! ¿Cómo está usted?"}},
-           {"hablante": "Sra. Rossi", "texto": "Bene, grazie. E Lei?", "traduccion": {"es": "Bien, gracias. ¿Y usted?"}},
-           {"hablante": "Tú", "texto": "Bene, grazie.", "traduccion": {"es": "Bien, gracias."}}
-         ],
-         "items": [
-           {"id": "s1", "formato": "elegir", "consigna": {"es": "Responde según el diálogo."}, "preguntaApoyo": {"es": "¿A quién le hablas de «Lei»?"}, "opciones": [{"es": "A la señora Rossi"}, {"es": "A Giulia"}], "respuesta": 0,
-            "feedback": {"es": "A la vecina, que no es tu amiga, le hablas de «Lei»."}},
-           {"id": "s2", "formato": "elegir", "consigna": {"es": "Elige tu respuesta."}, "preguntaApoyo": {"es": "Giulia te pregunta «Come stai?». ¿Qué respondes?"}, "opciones": ["Bene, grazie! E tu?", "Bene, grazie. E Lei, signora?", "Arrivederci!"], "respuesta": 0,
-            "feedback": {"es": "Con Giulia usas «tu»: «E tu?»."}}
-         ]},
-        {"id": "p9", "tipo": "evaluacion", "items": [
-          {"id": "e1", "formato": "elegir", "consigna": {"es": "Elige la pregunta adecuada."}, "preguntaApoyo": {"es": "Le preguntas a tu amiga Giulia cómo está."}, "opciones": ["Come stai?", "Come sta?"], "respuesta": 0,
-           "feedback": {"es": "Con amigos: «Come stai?»."}},
-          {"id": "e2", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "voi", "opciones": [{"es": "ustedes / vosotros"}, {"es": "nosotros"}, {"es": "ellos"}], "respuesta": 0,
-           "feedback": {"es": "«Voi» = ustedes / vosotros."}},
-          {"id": "e3", "formato": "relacionar", "consigna": {"es": "Une cada pronombre con su significado."},
-           "pares": [["io", {"es": "yo"}], ["tu", {"es": "tú (informal)"}], ["Lei", {"es": "usted (formal)"}], ["loro", {"es": "ellos / ellas"}]],
-           "feedback": {"es": "«Tu» para la confianza, «Lei» para el respeto."}},
-          {"id": "e4", "formato": "ordenar", "consigna": {"es": "Ordena: «Muy bien, ¿y tú?»"}, "tokens": ["bene,", "Molto", "tu?", "e"], "respuesta": "Molto bene, e tu?",
-           "feedback": {"es": "Molto bene, e tu?"}},
-          {"id": "e5", "formato": "escribir", "consigna": {"es": "Escribe en italiano: «más o menos»."}, "respuesta": "così così",
-           "feedback": {"es": "«Così così», con tilde en la o final."}},
-          {"id": "e6", "formato": "elegir", "consigna": {"es": "Elige tu respuesta."}, "preguntaApoyo": {"es": "Una señora mayor te pregunta «Come sta?». Respondes y le devuelves la pregunta."}, "opciones": ["Bene, grazie. E Lei?", "Bene, grazie. E tu?"], "respuesta": 0,
-           "feedback": {"es": "Con la señora mantienes «Lei»."}}
-        ]}
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "personas",
+          "titulo": {"es": "Como en español"},
+          "texto": {
+            "es": "Buena noticia: igual que en español, el italiano suele omitir el pronombre, porque el verbo ya dice quién es: «sono Ana» = soy Ana. El pronombre se usa para dar énfasis o contrastar: «Io sono Ana, e tu?». «Voi» es el plural de «tu» (ustedes / vosotros) y «loro» sirve para ellos y ellas."
+          }
+        },
+        {
+          "id": "t1",
+          "tipo": "tabla",
+          "titulo": {"es": "Los pronombres personales"},
+          "texto": {"es": "Como en español, casi siempre se pueden omitir."},
+          "columnas": [{"es": "Italiano"}, {"es": "Español"}, {"es": "Fíjate"}],
+          "filas": [
+            [{"texto": "io"}, {"apoyo": {"es": "yo"}}, {"apoyo": {"es": "se escribe con minúscula"}}],
+            [{"texto": "tu"}, {"apoyo": {"es": "tú"}}, {"apoyo": {"es": "informal; sin tilde"}}],
+            [{"texto": "lui"}, {"apoyo": {"es": "él"}}, {"apoyo": {"es": "para un hombre"}}],
+            [{"texto": "lei"}, {"apoyo": {"es": "ella"}}, {"apoyo": {"es": "para una mujer"}}],
+            [{"texto": "Lei"}, {"apoyo": {"es": "usted"}}, {"apoyo": {"es": "formal; con mayúscula al escribir"}}],
+            [
+              {"texto": "noi"},
+              {"apoyo": {"es": "nosotros / nosotras"}},
+              {"apoyo": {"es": "para hombres y mujeres"}}
+            ],
+            [{"texto": "voi"}, {"apoyo": {"es": "ustedes / vosotros"}}, {"apoyo": {"es": "plural de «tu»"}}],
+            [{"texto": "loro"}, {"apoyo": {"es": "ellos / ellas"}}, {"apoyo": {"es": "para hombres y mujeres"}}]
+          ]
+        },
+        {
+          "id": "p2",
+          "tipo": "vocabulario",
+          "refs": ["v-io", "v-tu", "v-lui", "v-lei", "v-noi", "v-voi", "v-loro", "v-e"]
+        },
+        {
+          "id": "p3",
+          "tipo": "explicacion",
+          "icono": "tratamiento",
+          "titulo": {"es": "¿Tu o Lei?"},
+          "texto": {
+            "es": "«Tu» es para amigos, familia, niños y gente joven entre sí. Con desconocidos, clientes o personas mayores se usa «Lei» (usted). «Lei» es la misma palabra que «lei» (ella) y el verbo va en tercera persona, igual que con «usted»: «Come sta?» (¿cómo está usted?) frente a «Come stai?» (¿cómo estás?)."
+          }
+        },
+        {
+          "id": "p4",
+          "tipo": "vocabulario",
+          "refs": ["v-lei-formale", "v-come-stai", "v-come-sta", "v-bene", "v-molto-bene", "v-male", "v-cosi-cosi"]
+        },
+        {
+          "id": "p5",
+          "tipo": "ejemplos",
+          "items": [
+            {"texto": "Marco: lui", "traduccion": {"es": "Marco → él"}},
+            {"texto": "Giulia: lei", "traduccion": {"es": "Giulia → ella"}},
+            {"texto": "Marco e Giulia: loro", "traduccion": {"es": "Marco y Giulia → ellos"}},
+            {"texto": "Giulia e io: noi", "traduccion": {"es": "Giulia y yo → nosotros"}},
+            {
+              "texto": "Ciao, Giulia! Come stai?",
+              "traduccion": {"es": "¡Hola, Giulia! ¿Cómo estás?"},
+              "nota": {"es": "Con una amiga: registro «tu»."}
+            },
+            {
+              "texto": "Buongiorno, signora! Come sta?",
+              "traduccion": {"es": "¡Buenos días, señora! ¿Cómo está usted?"},
+              "nota": {"es": "Con una desconocida: registro «Lei»."}
+            }
+          ]
+        },
+        {
+          "id": "p6",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el pronombre."},
+              "preguntaApoyo": {"es": "Hablas de ti: «yo»."},
+              "opciones": ["io", "tu", "lui"],
+              "respuesta": 0,
+              "pista": {"es": "Se parece a «yo»."},
+              "feedback": {"es": "«Io» = yo."}
+            },
+            {
+              "id": "g2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el pronombre."},
+              "preguntaApoyo": {"es": "Hablas de Giulia, una mujer."},
+              "opciones": ["lui", "lei", "loro"],
+              "respuesta": 1,
+              "pista": {"es": "Mujer → ella."},
+              "feedback": {"es": "«Lei» = ella."}
+            },
+            {
+              "id": "g3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el pronombre."},
+              "preguntaApoyo": {"es": "Hablas con un señor que no conoces («usted»)."},
+              "opciones": ["tu", "Lei", "lui"],
+              "respuesta": 1,
+              "pista": {"es": "Es la forma de respeto."},
+              "feedback": {"es": "«Lei» = usted."}
+            },
+            {
+              "id": "g4",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada pronombre con su significado."},
+              "pares": [
+                ["lui", {"es": "él"}],
+                ["noi", {"es": "nosotros"}],
+                ["voi", {"es": "ustedes / vosotros"}],
+                ["loro", {"es": "ellos / ellas"}]
+              ],
+              "pista": {"es": "Mira las tarjetas de vocabulario."},
+              "feedback": {"es": "Ya conoces los pronombres italianos."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige el pronombre."},
+              "preguntaApoyo": {"es": "Hablas de Marco y Giulia juntos."},
+              "opciones": ["loro", "noi", "voi"],
+              "respuesta": 0,
+              "feedback": {"es": "«Loro» = ellos."}
+            },
+            {
+              "id": "i2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Come sta?",
+              "opciones": [{"es": "¿Cómo está usted?"}, {"es": "¿Cómo estás?"}, {"es": "¿Dónde está?"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Come sta?» es formal, con «Lei»."}
+            },
+            {
+              "id": "i3",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano: «nosotros»."},
+              "respuesta": "noi",
+              "feedback": {"es": "«Noi» = nosotros / nosotras."}
+            }
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "situacion",
+          "contexto": {"es": "En la calle te encuentras con tu amiga Giulia y con su vecina, la señora Rossi."},
+          "dialogo": [
+            {
+              "hablante": "Tú",
+              "texto": "Ciao, Giulia! Come stai?",
+              "traduccion": {"es": "¡Hola, Giulia! ¿Cómo estás?"}
+            },
+            {"hablante": "Giulia", "texto": "Bene, grazie! E tu?", "traduccion": {"es": "¡Bien, gracias! ¿Y tú?"}},
+            {"hablante": "Tú", "texto": "Molto bene!", "traduccion": {"es": "¡Muy bien!"}},
+            {
+              "hablante": "Tú",
+              "texto": "Buongiorno, signora! Come sta?",
+              "traduccion": {"es": "¡Buenos días, señora! ¿Cómo está usted?"}
+            },
+            {
+              "hablante": "Sra. Rossi",
+              "texto": "Bene, grazie. E Lei?",
+              "traduccion": {"es": "Bien, gracias. ¿Y usted?"}
+            },
+            {"hablante": "Tú", "texto": "Bene, grazie.", "traduccion": {"es": "Bien, gracias."}}
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Responde según el diálogo."},
+              "preguntaApoyo": {"es": "¿A quién le hablas de «Lei»?"},
+              "opciones": [{"es": "A la señora Rossi"}, {"es": "A Giulia"}],
+              "respuesta": 0,
+              "feedback": {"es": "A la vecina, que no es tu amiga, le hablas de «Lei»."}
+            },
+            {
+              "id": "s2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige tu respuesta."},
+              "preguntaApoyo": {"es": "Giulia te pregunta «Come stai?». ¿Qué respondes?"},
+              "opciones": ["Bene, grazie! E tu?", "Bene, grazie. E Lei, signora?", "Arrivederci!"],
+              "respuesta": 0,
+              "feedback": {"es": "Con Giulia usas «tu»: «E tu?»."}
+            }
+          ]
+        },
+        {
+          "id": "p9",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la pregunta adecuada."},
+              "preguntaApoyo": {"es": "Le preguntas a tu amiga Giulia cómo está."},
+              "opciones": ["Come stai?", "Come sta?"],
+              "respuesta": 0,
+              "feedback": {"es": "Con amigos: «Come stai?»."}
+            },
+            {
+              "id": "e2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "voi",
+              "opciones": [{"es": "ustedes / vosotros"}, {"es": "nosotros"}, {"es": "ellos"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Voi» = ustedes / vosotros."}
+            },
+            {
+              "id": "e3",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada pronombre con su significado."},
+              "pares": [
+                ["io", {"es": "yo"}],
+                ["tu", {"es": "tú (informal)"}],
+                ["Lei", {"es": "usted (formal)"}],
+                ["loro", {"es": "ellos / ellas"}]
+              ],
+              "feedback": {"es": "«Tu» para la confianza, «Lei» para el respeto."}
+            },
+            {
+              "id": "e4",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «Muy bien, ¿y tú?»"},
+              "tokens": ["bene,", "Molto", "tu?", "e"],
+              "respuesta": "Molto bene, e tu?",
+              "feedback": {"es": "Molto bene, e tu?"}
+            },
+            {
+              "id": "e5",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano: «más o menos»."},
+              "respuesta": "così così",
+              "feedback": {"es": "«Così così», con tilde en la o final."}
+            },
+            {
+              "id": "e6",
+              "formato": "elegir",
+              "consigna": {"es": "Elige tu respuesta."},
+              "preguntaApoyo": {"es": "Una señora mayor te pregunta «Come sta?». Respondes y le devuelves la pregunta."},
+              "opciones": ["Bene, grazie. E Lei?", "Bene, grazie. E tu?"],
+              "respuesta": 0,
+              "feedback": {"es": "Con la señora mantienes «Lei»."}
+            }
+          ]
+        }
       ],
       "criterioDominio": {"umbral": 0.8},
-      "tutor": {"objetivo": {"es": "Elegir tu o Lei y nombrar personas"}, "gramaticaPermitida": ["it-g-subj-pron", "it-g-tu-lei"], "longitudMaxFrase": 5}
+      "tutor": {
+        "objetivo": {"es": "Elegir tu o Lei y nombrar personas"},
+        "gramaticaPermitida": ["it-g-subj-pron", "it-g-tu-lei"],
+        "longitudMaxFrase": 5
+      }
     },
     {
       "id": "it.f0.essere-stare",
-      "orden": 3,
+      "orden": 5,
       "titulo": {"es": "Essere y stare"},
       "objetivo": {"es": "Decir quién eres, cómo estás y dónde estás con «essere» y «stare»."},
       "cefr": "Pre-A1",
@@ -312,12 +1883,32 @@
       "habilidades": ["gramatica", "vocabulario", "escritura", "escucha"],
       "gramatica": ["it-g-essere-present", "it-g-essere-location", "it-g-stare-health", "it-g-adj-gender"],
       "vocabulario": [
-        {"id": "v-sono", "texto": "sono", "traduccion": {"es": "soy / estoy (io) · son / están (loro)"}, "nota": {"es": "La misma forma sirve para «io» y para «loro»."}},
+        {
+          "id": "v-sono",
+          "texto": "sono",
+          "traduccion": {"es": "soy / estoy (io) · son / están (loro)"},
+          "nota": {"es": "La misma forma sirve para «io» y para «loro»."}
+        },
         {"id": "v-sei", "texto": "sei", "traduccion": {"es": "eres / estás"}},
-        {"id": "v-e-verbo", "texto": "è", "traduccion": {"es": "es / está (lui, lei, Lei)"}, "nota": {"es": "Con tilde. Sin tilde, «e» significa «y»."}},
+        {
+          "id": "v-e-verbo",
+          "texto": "è",
+          "traduccion": {"es": "es / está (lui, lei, Lei)"},
+          "nota": {"es": "Con tilde. Sin tilde, «e» significa «y»."}
+        },
         {"id": "v-siamo", "texto": "siamo", "traduccion": {"es": "somos / estamos"}},
-        {"id": "v-siete", "texto": "siete", "traduccion": {"es": "ustedes son / están"}, "nota": {"es": "Cuidado: no significa «siete» (7)."}},
-        {"id": "v-sto", "texto": "sto", "traduccion": {"es": "estoy (de salud, con stare)"}, "nota": {"es": "Formas: sto, stai, sta."}},
+        {
+          "id": "v-siete",
+          "texto": "siete",
+          "traduccion": {"es": "ustedes son / están"},
+          "nota": {"es": "Cuidado: no significa «siete» (7)."}
+        },
+        {
+          "id": "v-sto",
+          "texto": "sto",
+          "traduccion": {"es": "estoy (de salud, con stare)"},
+          "nota": {"es": "Formas: sto, stai, sta."}
+        },
         {"id": "v-stanco", "texto": "stanco", "traduccion": {"es": "cansado"}},
         {"id": "v-stanca", "texto": "stanca", "traduccion": {"es": "cansada"}},
         {"id": "v-contento", "texto": "contento", "traduccion": {"es": "contento"}},
@@ -329,82 +1920,316 @@
         {"id": "v-qui", "texto": "qui", "traduccion": {"es": "aquí"}}
       ],
       "erroresFrecuentes": [
-        {"incorrecto": "Sto a casa.", "correcto": "Sono a casa.", "explicacion": {"es": "Para decir dónde estás se usa «essere»: «sono a casa» (estoy en casa). «Sto a casa» significa más bien «me quedo en casa»."}},
-        {"incorrecto": "Sono bene.", "correcto": "Sto bene.", "explicacion": {"es": "Para la salud y el bienestar se usa «stare»: «sto bene» (estoy bien)."}},
-        {"incorrecto": "Sono stanco.", "correcto": "Sono stanca.", "explicacion": {"es": "Si lo dice una mujer, el adjetivo termina en -a: «stanca»."}}
+        {
+          "incorrecto": "Sto a casa.",
+          "correcto": "Sono a casa.",
+          "explicacion": {
+            "es": "Para decir dónde estás se usa «essere»: «sono a casa» (estoy en casa). «Sto a casa» significa más bien «me quedo en casa»."
+          }
+        },
+        {
+          "incorrecto": "Sono bene.",
+          "correcto": "Sto bene.",
+          "explicacion": {"es": "Para la salud y el bienestar se usa «stare»: «sto bene» (estoy bien)."}
+        },
+        {
+          "incorrecto": "Sono stanco.",
+          "correcto": "Sono stanca.",
+          "explicacion": {"es": "Si lo dice una mujer, el adjetivo termina en -a: «stanca»."}
+        }
       ],
       "pasos": [
-        {"id": "p1", "tipo": "explicacion", "icono": "verbo", "titulo": {"es": "Essere: ser… y estar en un lugar"},
-         "texto": {"es": "«Essere» es «ser»: «sono studentessa». Pero, a diferencia del español, también se usa para decir dónde estás («sono a casa» = estoy en casa) y para estados como cansado o contento («sono stanco»). Sus formas: sono, sei, è, siamo, siete, sono. Cuidado con la tilde: «è» es «es / está» y «e» es «y»."}},
-        {"id": "p2", "tipo": "patron", "texto": {"es": "Así se construye la frase (el pronombre puede omitirse):"},
-         "formula": [{"texto": "(Io)", "nota": {"es": "quién (opcional)"}}, {"texto": "sono", "nota": {"es": "verbo essere"}}, {"texto": "stanco", "nota": {"es": "qué / cómo / dónde"}}],
-         "ejemplos": [
-           {"texto": "Sono Ana.", "traduccion": {"es": "Soy Ana."}},
-           {"texto": "Sono studentessa.", "traduccion": {"es": "Soy estudiante."}},
-           {"texto": "Marco è a casa.", "traduccion": {"es": "Marco está en casa."}},
-           {"texto": "Siamo qui.", "traduccion": {"es": "Estamos aquí."}},
-           {"texto": "Giulia è contenta.", "traduccion": {"es": "Giulia está contenta."}}
-         ]},
-        {"id": "p3", "tipo": "vocabulario", "refs": ["v-sono", "v-sei", "v-e-verbo", "v-siamo", "v-siete", "v-stanco", "v-stanca", "v-contento", "v-contenta", "v-studente", "v-studentessa", "v-insegnante", "v-a-casa", "v-qui"]},
-        {"id": "p4", "tipo": "explicacion", "icono": "salud", "titulo": {"es": "Stare: cómo estás de salud"},
-         "texto": {"es": "«Stare» se usa sobre todo para preguntar y decir cómo estás: «Come stai?» — «Sto bene» (estoy bien), «sto male» (estoy mal). Formas: sto, stai, sta. Regla práctica: salud y bienestar → stare; lugar, identidad y estados como cansado → essere."}},
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "verbo",
+          "titulo": {"es": "Essere: ser… y estar en un lugar"},
+          "texto": {
+            "es": "«Essere» es «ser»: «sono studentessa». Pero, a diferencia del español, también se usa para decir dónde estás («sono a casa» = estoy en casa) y para estados como cansado o contento («sono stanco»). Sus formas: sono, sei, è, siamo, siete, sono. Cuidado con la tilde: «è» es «es / está» y «e» es «y»."
+          }
+        },
+        {
+          "id": "t1",
+          "tipo": "tabla",
+          "titulo": {"es": "Essere en presente"},
+          "texto": {"es": "«Sono» sirve para «io» y para «loro»: el contexto lo aclara."},
+          "columnas": [{"es": "Pronombre"}, {"es": "essere"}, {"es": "Español"}],
+          "filas": [
+            [{"texto": "io"}, {"texto": "sono"}, {"apoyo": {"es": "soy / estoy"}}],
+            [{"texto": "tu"}, {"texto": "sei"}, {"apoyo": {"es": "eres / estás"}}],
+            [{"texto": "lui, lei, Lei"}, {"texto": "è"}, {"apoyo": {"es": "es / está (usted es / está)"}}],
+            [{"texto": "noi"}, {"texto": "siamo"}, {"apoyo": {"es": "somos / estamos"}}],
+            [{"texto": "voi"}, {"texto": "siete"}, {"apoyo": {"es": "ustedes son / están"}}],
+            [{"texto": "loro"}, {"texto": "sono"}, {"apoyo": {"es": "son / están"}}]
+          ]
+        },
+        {
+          "id": "p2",
+          "tipo": "patron",
+          "texto": {"es": "Así se construye la frase (el pronombre puede omitirse):"},
+          "formula": [
+            {"texto": "(Io)", "nota": {"es": "quién (opcional)"}},
+            {"texto": "sono", "nota": {"es": "verbo essere"}},
+            {"texto": "stanco", "nota": {"es": "qué / cómo / dónde"}}
+          ],
+          "ejemplos": [
+            {"texto": "Sono Ana.", "traduccion": {"es": "Soy Ana."}},
+            {"texto": "Sono studentessa.", "traduccion": {"es": "Soy estudiante."}},
+            {"texto": "Marco è a casa.", "traduccion": {"es": "Marco está en casa."}},
+            {"texto": "Siamo qui.", "traduccion": {"es": "Estamos aquí."}},
+            {"texto": "Giulia è contenta.", "traduccion": {"es": "Giulia está contenta."}}
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-sono",
+            "v-sei",
+            "v-e-verbo",
+            "v-siamo",
+            "v-siete",
+            "v-stanco",
+            "v-stanca",
+            "v-contento",
+            "v-contenta",
+            "v-studente",
+            "v-studentessa",
+            "v-insegnante",
+            "v-a-casa",
+            "v-qui"
+          ]
+        },
+        {
+          "id": "p4",
+          "tipo": "explicacion",
+          "icono": "salud",
+          "titulo": {"es": "Stare: cómo estás de salud"},
+          "texto": {
+            "es": "«Stare» se usa sobre todo para preguntar y decir cómo estás: «Come stai?» — «Sto bene» (estoy bien), «sto male» (estoy mal). Formas: sto, stai, sta. Regla práctica: salud y bienestar → stare; lugar, identidad y estados como cansado → essere."
+          }
+        },
+        {
+          "id": "t2",
+          "tipo": "tabla",
+          "titulo": {"es": "Stare en presente"},
+          "texto": {"es": "Por ahora úsalo sobre todo para decir cómo estás de salud o de ánimo."},
+          "columnas": [{"es": "Pronombre"}, {"es": "stare"}, {"es": "Español"}],
+          "filas": [
+            [{"texto": "io"}, {"texto": "sto"}, {"apoyo": {"es": "estoy"}}],
+            [{"texto": "tu"}, {"texto": "stai"}, {"apoyo": {"es": "estás"}}],
+            [{"texto": "lui, lei, Lei"}, {"texto": "sta"}, {"apoyo": {"es": "está (usted está)"}}],
+            [{"texto": "noi"}, {"texto": "stiamo"}, {"apoyo": {"es": "estamos"}}],
+            [{"texto": "voi"}, {"texto": "state"}, {"apoyo": {"es": "ustedes están"}}],
+            [{"texto": "loro"}, {"texto": "stanno"}, {"apoyo": {"es": "están"}}]
+          ]
+        },
         {"id": "p5", "tipo": "vocabulario", "refs": ["v-sto"]},
-        {"id": "p6", "tipo": "practica_guiada", "items": [
-          {"id": "g1", "formato": "completar", "consigna": {"es": "Completa: «Soy Ana»."}, "texto": "Io ___ Ana.", "respuesta": "sono", "opciones": ["sono", "sei", "è"],
-           "pista": {"es": "Con «io» va «sono»."}, "feedback": {"es": "Io + sono."}},
-          {"id": "g2", "formato": "completar", "consigna": {"es": "Completa: «Estás cansado»."}, "texto": "Tu ___ stanco.", "respuesta": "sei", "opciones": ["sono", "sei", "sta"],
-           "pista": {"es": "Con «tu» va «sei»."}, "feedback": {"es": "Tu + sei."}},
-          {"id": "g3", "formato": "completar", "consigna": {"es": "Completa: «Estoy bien, gracias»."}, "texto": "___ bene, grazie.", "respuesta": "Sto", "opciones": ["Sto", "Sono", "È"],
-           "pista": {"es": "Para la salud se usa «stare»."}, "feedback": {"es": "Sto bene, grazie."}},
-          {"id": "g4", "formato": "elegir", "consigna": {"es": "Elige la frase correcta."}, "preguntaApoyo": {"es": "«Estoy en casa.»"}, "opciones": ["Sono a casa.", "Sto a casa.", "È a casa."], "respuesta": 0,
-           "pista": {"es": "Lugar → essere."}, "feedback": {"es": "«Sono a casa»: el lugar va con essere."}},
-          {"id": "g5", "formato": "relacionar", "consigna": {"es": "Une cada forma con su significado."},
-           "pares": [["sei", {"es": "eres / estás"}], ["è", {"es": "es / está"}], ["siamo", {"es": "somos / estamos"}], ["siete", {"es": "ustedes son / están"}]],
-           "pista": {"es": "«Siete» no es un número aquí."}, "feedback": {"es": "Ya conoces las formas de «essere»."}}
-        ]},
-        {"id": "p7", "tipo": "practica_independiente", "items": [
-          {"id": "i1", "formato": "ordenar", "consigna": {"es": "Ordena: «Marco está aquí»."}, "tokens": ["qui.", "Marco", "è"], "respuesta": "Marco è qui.",
-           "feedback": {"es": "Marco + è + qui."}},
-          {"id": "i2", "formato": "completar", "consigna": {"es": "Completa: «Giulia está cansada»."}, "texto": "Giulia è ___.", "respuesta": "stanca",
-           "feedback": {"es": "Giulia es mujer: «stanca»."}},
-          {"id": "i3", "formato": "escribir", "consigna": {"es": "Escribe en italiano lo que dice Ana: «Soy estudiante»."}, "respuesta": "Sono studentessa.", "aceptadas": ["Io sono studentessa."],
-           "feedback": {"es": "Sono studentessa."}}
-        ]},
-        {"id": "p8", "tipo": "situacion", "contexto": {"es": "Primer día en la escuela de idiomas. La profesora se presenta y conoces a Marco."},
-         "dialogo": [
-           {"hablante": "Laura", "texto": "Buongiorno! Sono Laura. Sono insegnante.", "traduccion": {"es": "¡Buenos días! Soy Laura. Soy profesora."}},
-           {"hablante": "Ana", "texto": "Buongiorno! Sono Ana. Sono studentessa.", "traduccion": {"es": "¡Buenos días! Soy Ana. Soy estudiante."}},
-           {"hablante": "Marco", "texto": "Ciao! Io sono Marco. Sono stanco!", "traduccion": {"es": "¡Hola! Yo soy Marco. ¡Estoy cansado!"}},
-           {"hablante": "Laura", "texto": "Ana, come stai?", "traduccion": {"es": "Ana, ¿cómo estás?"}},
-           {"hablante": "Ana", "texto": "Sto bene, grazie. Sono contenta!", "traduccion": {"es": "Estoy bien, gracias. ¡Estoy contenta!"}}
-         ],
-         "items": [
-           {"id": "s1", "formato": "elegir", "consigna": {"es": "Responde según el diálogo."}, "preguntaApoyo": {"es": "¿Cómo está Marco?"}, "opciones": [{"es": "Cansado"}, {"es": "Contento"}, {"es": "En casa"}], "respuesta": 0,
-            "feedback": {"es": "«Sono stanco» = estoy cansado."}},
-           {"id": "s2", "formato": "elegir", "consigna": {"es": "Elige tu respuesta."}, "preguntaApoyo": {"es": "Laura pregunta «Come stai?» y tú estás bien."}, "opciones": ["Sto bene, grazie.", "Sono bene, grazie."], "respuesta": 0,
-            "feedback": {"es": "Salud → stare: «Sto bene»."}}
-         ]},
-        {"id": "p9", "tipo": "evaluacion", "items": [
-          {"id": "e1", "formato": "completar", "consigna": {"es": "Completa: «Estamos en casa»."}, "texto": "Noi ___ a casa.", "respuesta": "siamo",
-           "feedback": {"es": "Noi + siamo. Lugar → essere."}},
-          {"id": "e2", "formato": "elegir", "consigna": {"es": "Elige la frase correcta."}, "preguntaApoyo": {"es": "«Estoy bien.»"}, "opciones": ["Sto bene.", "Sono bene.", "Sta bene."], "respuesta": 0,
-           "feedback": {"es": "Sto bene."}},
-          {"id": "e3", "formato": "ordenar", "consigna": {"es": "Ordena: «Laura es profesora»."}, "tokens": ["è", "Laura", "insegnante."], "respuesta": "Laura è insegnante.",
-           "feedback": {"es": "Laura + è + insegnante."}},
-          {"id": "e4", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Sono a casa.", "opciones": [{"es": "Estoy en casa."}, {"es": "Estoy aquí."}, {"es": "Estoy bien."}], "respuesta": 0,
-           "feedback": {"es": "«Sono a casa» = estoy en casa."}},
-          {"id": "e5", "formato": "escribir", "consigna": {"es": "Escribe en italiano lo que dice Marco: «Estoy cansado»."}, "respuesta": "Sono stanco.", "aceptadas": ["Io sono stanco."],
-           "feedback": {"es": "Sono stanco."}},
-          {"id": "e6", "formato": "elegir", "consigna": {"es": "Elige la forma que falta."}, "pregunta": "Tu ___ contenta.", "opciones": ["sei", "sono", "è"], "respuesta": 0,
-           "feedback": {"es": "Tu + sei."}}
-        ]}
+        {
+          "id": "p6",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Soy Ana»."},
+              "texto": "Io ___ Ana.",
+              "respuesta": "sono",
+              "opciones": ["sono", "sei", "è"],
+              "pista": {"es": "Con «io» va «sono»."},
+              "feedback": {"es": "Io + sono."}
+            },
+            {
+              "id": "g2",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Estás cansado»."},
+              "texto": "Tu ___ stanco.",
+              "respuesta": "sei",
+              "opciones": ["sono", "sei", "sta"],
+              "pista": {"es": "Con «tu» va «sei»."},
+              "feedback": {"es": "Tu + sei."}
+            },
+            {
+              "id": "g3",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Estoy bien, gracias»."},
+              "texto": "___ bene, grazie.",
+              "respuesta": "Sto",
+              "opciones": ["Sto", "Sono", "È"],
+              "pista": {"es": "Para la salud se usa «stare»."},
+              "feedback": {"es": "Sto bene, grazie."}
+            },
+            {
+              "id": "g4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la frase correcta."},
+              "preguntaApoyo": {"es": "«Estoy en casa.»"},
+              "opciones": ["Sono a casa.", "Sto a casa.", "È a casa."],
+              "respuesta": 0,
+              "pista": {"es": "Lugar → essere."},
+              "feedback": {"es": "«Sono a casa»: el lugar va con essere."}
+            },
+            {
+              "id": "g5",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada forma con su significado."},
+              "pares": [
+                ["sei", {"es": "eres / estás"}],
+                ["è", {"es": "es / está"}],
+                ["siamo", {"es": "somos / estamos"}],
+                ["siete", {"es": "ustedes son / están"}]
+              ],
+              "pista": {"es": "«Siete» no es un número aquí."},
+              "feedback": {"es": "Ya conoces las formas de «essere»."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «Marco está aquí»."},
+              "tokens": ["qui.", "Marco", "è"],
+              "respuesta": "Marco è qui.",
+              "feedback": {"es": "Marco + è + qui."}
+            },
+            {
+              "id": "i2",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Giulia está cansada»."},
+              "texto": "Giulia è ___.",
+              "respuesta": "stanca",
+              "feedback": {"es": "Giulia es mujer: «stanca»."}
+            },
+            {
+              "id": "i3",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano lo que dice Ana: «Soy estudiante»."},
+              "respuesta": "Sono studentessa.",
+              "aceptadas": ["Io sono studentessa."],
+              "feedback": {"es": "Sono studentessa."}
+            }
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "situacion",
+          "contexto": {"es": "Primer día en la escuela de idiomas. La profesora se presenta y conoces a Marco."},
+          "dialogo": [
+            {
+              "hablante": "Laura",
+              "texto": "Buongiorno! Sono Laura. Sono insegnante.",
+              "traduccion": {"es": "¡Buenos días! Soy Laura. Soy profesora."}
+            },
+            {
+              "hablante": "Ana",
+              "texto": "Buongiorno! Sono Ana. Sono studentessa.",
+              "traduccion": {"es": "¡Buenos días! Soy Ana. Soy estudiante."}
+            },
+            {
+              "hablante": "Marco",
+              "texto": "Ciao! Io sono Marco. Sono stanco!",
+              "traduccion": {"es": "¡Hola! Yo soy Marco. ¡Estoy cansado!"}
+            },
+            {"hablante": "Laura", "texto": "Ana, come stai?", "traduccion": {"es": "Ana, ¿cómo estás?"}},
+            {
+              "hablante": "Ana",
+              "texto": "Sto bene, grazie. Sono contenta!",
+              "traduccion": {"es": "Estoy bien, gracias. ¡Estoy contenta!"}
+            }
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Responde según el diálogo."},
+              "preguntaApoyo": {"es": "¿Cómo está Marco?"},
+              "opciones": [{"es": "Cansado"}, {"es": "Contento"}, {"es": "En casa"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Sono stanco» = estoy cansado."}
+            },
+            {
+              "id": "s2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige tu respuesta."},
+              "preguntaApoyo": {"es": "Laura pregunta «Come stai?» y tú estás bien."},
+              "opciones": ["Sto bene, grazie.", "Sono bene, grazie."],
+              "respuesta": 0,
+              "feedback": {"es": "Salud → stare: «Sto bene»."}
+            }
+          ]
+        },
+        {
+          "id": "p9",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Estamos en casa»."},
+              "texto": "Noi ___ a casa.",
+              "respuesta": "siamo",
+              "feedback": {"es": "Noi + siamo. Lugar → essere."}
+            },
+            {
+              "id": "e2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la frase correcta."},
+              "preguntaApoyo": {"es": "«Estoy bien.»"},
+              "opciones": ["Sto bene.", "Sono bene.", "Sta bene."],
+              "respuesta": 0,
+              "feedback": {"es": "Sto bene."}
+            },
+            {
+              "id": "e3",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «Laura es profesora»."},
+              "tokens": ["è", "Laura", "insegnante."],
+              "respuesta": "Laura è insegnante.",
+              "feedback": {"es": "Laura + è + insegnante."}
+            },
+            {
+              "id": "e4",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Sono a casa.",
+              "opciones": [{"es": "Estoy en casa."}, {"es": "Estoy aquí."}, {"es": "Estoy bien."}],
+              "respuesta": 0,
+              "feedback": {"es": "«Sono a casa» = estoy en casa."}
+            },
+            {
+              "id": "e5",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano lo que dice Marco: «Estoy cansado»."},
+              "respuesta": "Sono stanco.",
+              "aceptadas": ["Io sono stanco."],
+              "feedback": {"es": "Sono stanco."}
+            },
+            {
+              "id": "e6",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la forma que falta."},
+              "pregunta": "Tu ___ contenta.",
+              "opciones": ["sei", "sono", "è"],
+              "respuesta": 0,
+              "feedback": {"es": "Tu + sei."}
+            }
+          ]
+        }
       ],
       "criterioDominio": {"umbral": 0.8},
-      "tutor": {"objetivo": {"es": "Decir quién eres, cómo y dónde estás"}, "gramaticaPermitida": ["it-g-essere-present", "it-g-stare-health"], "longitudMaxFrase": 6}
+      "tutor": {
+        "objetivo": {"es": "Decir quién eres, cómo y dónde estás"},
+        "gramaticaPermitida": ["it-g-essere-present", "it-g-stare-health"],
+        "longitudMaxFrase": 6
+      }
     },
     {
       "id": "it.f0.negazione-domande",
-      "orden": 4,
+      "orden": 6,
       "titulo": {"es": "Negar y preguntar"},
       "objetivo": {"es": "Negar con «non» y hacer preguntas simples con entonación y con dove, chi, come."},
       "cefr": "Pre-A1",
@@ -417,7 +2242,12 @@
         {"id": "v-non", "texto": "non", "traduccion": {"es": "no (delante del verbo)"}},
         {"id": "v-chi", "texto": "chi", "traduccion": {"es": "quién"}, "nota": {"es": "Se dice «ki»."}},
         {"id": "v-dove", "texto": "dove", "traduccion": {"es": "dónde"}},
-        {"id": "v-dove-e", "texto": "dov'è", "traduccion": {"es": "¿dónde está?"}, "nota": {"es": "dove + è se unen: dov'è."}},
+        {
+          "id": "v-dove-e",
+          "texto": "dov'è",
+          "traduccion": {"es": "¿dónde está?"},
+          "nota": {"es": "dove + è se unen: dov'è."}
+        },
         {"id": "v-come", "texto": "come", "traduccion": {"es": "cómo"}},
         {"id": "v-anche", "texto": "anche", "traduccion": {"es": "también"}, "nota": {"es": "Se dice «anke»."}},
         {"id": "v-anchio", "texto": "anch'io", "traduccion": {"es": "yo también"}},
@@ -427,91 +2257,300 @@
         {"id": "v-occupato", "texto": "occupato", "traduccion": {"es": "ocupado"}},
         {"id": "v-occupata", "texto": "occupata", "traduccion": {"es": "ocupada"}},
         {"id": "v-triste", "texto": "triste", "traduccion": {"es": "triste"}},
-        {"id": "v-oggi", "texto": "oggi", "traduccion": {"es": "hoy"}, "nota": {"es": "La g es doble y suave: suena larga, como una «y» fuerte."}},
+        {
+          "id": "v-oggi",
+          "texto": "oggi",
+          "traduccion": {"es": "hoy"},
+          "nota": {"es": "La g es doble y suave: suena larga, como una «y» fuerte."}
+        },
         {"id": "v-adesso", "texto": "adesso", "traduccion": {"es": "ahora"}}
       ],
       "erroresFrecuentes": [
-        {"incorrecto": "No sono stanco.", "correcto": "Non sono stanco.", "explicacion": {"es": "Delante del verbo se usa «non». «No» es solo la respuesta: «No, non sono stanco»."}},
-        {"incorrecto": "Dove è Marco?", "correcto": "Dov'è Marco?", "explicacion": {"es": "«Dove» y «è» se unen y se escribe «dov'è»."}}
+        {
+          "incorrecto": "No sono stanco.",
+          "correcto": "Non sono stanco.",
+          "explicacion": {"es": "Delante del verbo se usa «non». «No» es solo la respuesta: «No, non sono stanco»."}
+        },
+        {
+          "incorrecto": "Dove è Marco?",
+          "correcto": "Dov'è Marco?",
+          "explicacion": {"es": "«Dove» y «è» se unen y se escribe «dov'è»."}
+        }
       ],
       "pasos": [
-        {"id": "p1", "tipo": "explicacion", "icono": "negacion", "titulo": {"es": "Negar: «non» delante del verbo"},
-         "texto": {"es": "Se niega casi como en español: pon «non» delante del verbo: «Non sono stanco» (no estoy cansado). Ojo: «no» solo se usa para responder. Por eso se dice «No, non sono malata»: el primer «no» responde y el segundo, «non», niega el verbo."}},
-        {"id": "p2", "tipo": "patron", "texto": {"es": "Afirmativo → negativo:"},
-         "formula": [{"texto": "(Io)", "nota": {"es": "quién (opcional)"}}, {"texto": "non", "nota": {"es": "negación"}}, {"texto": "sono", "nota": {"es": "verbo"}}, {"texto": "stanca", "nota": {"es": "cómo"}}],
-         "ejemplos": [
-           {"texto": "Non sono malata.", "traduccion": {"es": "No estoy enferma."}},
-           {"texto": "Marco non è qui.", "traduccion": {"es": "Marco no está aquí."}},
-           {"texto": "Oggi non sto bene.", "traduccion": {"es": "Hoy no estoy bien."}},
-           {"texto": "Giulia non è occupata.", "traduccion": {"es": "Giulia no está ocupada."}}
-         ]},
-        {"id": "p3", "tipo": "explicacion", "icono": "pregunta", "titulo": {"es": "Preguntar: como en español"},
-         "texto": {"es": "Para preguntar no cambias el orden: solo subes la voz al final, igual que en español: «Sei stanco?» (¿estás cansado?). Las palabras de pregunta van al principio: «Dove sei?» (¿dónde estás?), «Chi è?» (¿quién es?), «Come stai?». «Dove» + «è» se une: «Dov'è Giulia?»."}},
-        {"id": "p4", "tipo": "vocabulario", "refs": ["v-non", "v-chi", "v-dove", "v-dove-e", "v-come", "v-anche", "v-anchio", "v-ma", "v-malato", "v-malata", "v-occupato", "v-occupata", "v-triste", "v-oggi", "v-adesso"]},
-        {"id": "p5", "tipo": "ejemplos", "items": [
-          {"texto": "Sei stanco?", "traduccion": {"es": "¿Estás cansado?"}, "nota": {"es": "Solo sube la voz al final."}},
-          {"texto": "Dov'è Giulia?", "traduccion": {"es": "¿Dónde está Giulia?"}},
-          {"texto": "Chi è? È Marco.", "traduccion": {"es": "¿Quién es? Es Marco."}},
-          {"texto": "Dove sei adesso?", "traduccion": {"es": "¿Dónde estás ahora?"}},
-          {"texto": "Sono stanca. Anch'io!", "traduccion": {"es": "Estoy cansada. ¡Yo también!"}}
-        ]},
-        {"id": "p6", "tipo": "practica_guiada", "items": [
-          {"id": "g1", "formato": "completar", "consigna": {"es": "Completa: «No estoy cansada»."}, "texto": "Io ___ sono stanca.", "respuesta": "non", "opciones": ["non", "no"],
-           "pista": {"es": "Delante del verbo, la negación tiene tres letras."}, "feedback": {"es": "Io non sono stanca."}},
-          {"id": "g2", "formato": "ordenar", "consigna": {"es": "Ordena: «Giulia no está aquí»."}, "tokens": ["è", "Giulia", "qui.", "non"], "respuesta": "Giulia non è qui.",
-           "pista": {"es": "«Non» va justo antes de «è»."}, "feedback": {"es": "Giulia non è qui."}},
-          {"id": "g3", "formato": "elegir", "consigna": {"es": "Elige la pregunta."}, "preguntaApoyo": {"es": "Quieres saber dónde está Marco."}, "opciones": ["Dov'è Marco?", "Chi è Marco?", "Come sta Marco?"], "respuesta": 0,
-           "pista": {"es": "«Dove» = dónde."}, "feedback": {"es": "Dov'è Marco?"}},
-          {"id": "g4", "formato": "elegir", "consigna": {"es": "Elige la pregunta correcta."}, "preguntaApoyo": {"es": "«¿Estás cansado?»"}, "opciones": ["Sei stanco?", "Non sei stanco.", "Stanco non sei?"], "respuesta": 0,
-           "pista": {"es": "El orden es el mismo que en la afirmación."}, "feedback": {"es": "Sei stanco? — con la voz hacia arriba."}}
-        ]},
-        {"id": "p7", "tipo": "practica_independiente", "items": [
-          {"id": "i1", "formato": "escribir", "consigna": {"es": "Hazla negativa: «Sono occupato.»"}, "respuesta": "Non sono occupato.", "aceptadas": ["Io non sono occupato."],
-           "feedback": {"es": "Non sono occupato."}},
-          {"id": "i2", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Chi è?", "opciones": [{"es": "¿Quién es?"}, {"es": "¿Dónde está?"}, {"es": "¿Cómo estás?"}], "respuesta": 0,
-           "feedback": {"es": "«Chi è?» = ¿quién es?"}},
-          {"id": "i3", "formato": "relacionar", "consigna": {"es": "Une cada palabra con su significado."},
-           "pares": [["dove", {"es": "dónde"}], ["chi", {"es": "quién"}], ["oggi", {"es": "hoy"}], ["adesso", {"es": "ahora"}]],
-           "feedback": {"es": "«Chi» se dice «ki»: no es «qué»."}}
-        ]},
-        {"id": "p8", "tipo": "situacion", "contexto": {"es": "Marco llama por teléfono a Ana."},
-         "dialogo": [
-           {"hablante": "Marco", "texto": "Ciao, Ana! Dove sei adesso?", "traduccion": {"es": "¡Hola, Ana! ¿Dónde estás ahora?"}},
-           {"hablante": "Ana", "texto": "Sono a casa. Oggi non sto bene.", "traduccion": {"es": "Estoy en casa. Hoy no estoy bien."}},
-           {"hablante": "Marco", "texto": "Sei malata?", "traduccion": {"es": "¿Estás enferma?"}},
-           {"hablante": "Ana", "texto": "No, non sono malata, ma sono stanca.", "traduccion": {"es": "No, no estoy enferma, pero estoy cansada."}},
-           {"hablante": "Marco", "texto": "Anch'io sono stanco!", "traduccion": {"es": "¡Yo también estoy cansado!"}}
-         ],
-         "items": [
-           {"id": "s1", "formato": "elegir", "consigna": {"es": "Responde según el diálogo."}, "preguntaApoyo": {"es": "¿Ana está enferma?"}, "opciones": [{"es": "No, está cansada."}, {"es": "Sí, está enferma."}, {"es": "No, está ocupada."}], "respuesta": 0,
-            "feedback": {"es": "«Non sono malata, ma sono stanca.»"}},
-           {"id": "s2", "formato": "escribir", "consigna": {"es": "Marco dice «Sono stanco». Responde «¡Yo también!»."}, "respuesta": "Anch'io!", "aceptadas": ["Anch'io sono stanca.", "Anch'io sono stanco."],
-            "feedback": {"es": "«Anch'io» = yo también."}}
-         ]},
-        {"id": "p9", "tipo": "evaluacion", "items": [
-          {"id": "e1", "formato": "completar", "consigna": {"es": "Completa: «Marco no está enfermo»."}, "texto": "Marco ___ è malato.", "respuesta": "non",
-           "feedback": {"es": "Marco non è malato."}},
-          {"id": "e2", "formato": "elegir", "consigna": {"es": "Elige la frase correcta."}, "preguntaApoyo": {"es": "«No estoy triste.»"}, "opciones": ["Non sono triste.", "No sono triste.", "Sono non triste."], "respuesta": 0,
-           "feedback": {"es": "«Non» delante del verbo."}},
-          {"id": "e3", "formato": "ordenar", "consigna": {"es": "Ordena: «¿Dónde está Giulia ahora?»"}, "tokens": ["adesso?", "Dov'è", "Giulia"], "respuesta": "Dov'è Giulia adesso?",
-           "feedback": {"es": "Dov'è + Giulia + adesso?"}},
-          {"id": "e4", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Oggi non sto bene.", "opciones": [{"es": "Hoy no estoy bien."}, {"es": "Hoy estoy bien."}, {"es": "Ahora no estoy en casa."}], "respuesta": 0,
-           "feedback": {"es": "«Non sto bene» = no estoy bien."}},
-          {"id": "e5", "formato": "escribir", "consigna": {"es": "Escribe en italiano: «Él no está ocupado»."}, "respuesta": "Lui non è occupato.", "aceptadas": ["Non è occupato."],
-           "feedback": {"es": "Lui non è occupato. También vale sin «lui»."}},
-          {"id": "e6", "formato": "relacionar", "consigna": {"es": "Une cada palabra con su significado."},
-           "pares": [["malato", {"es": "enfermo"}], ["occupata", {"es": "ocupada"}], ["anche", {"es": "también"}], ["ma", {"es": "pero"}]],
-           "feedback": {"es": "Masculino en -o, femenino en -a."}}
-        ]}
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "negacion",
+          "titulo": {"es": "Negar: «non» delante del verbo"},
+          "texto": {
+            "es": "Se niega casi como en español: pon «non» delante del verbo: «Non sono stanco» (no estoy cansado). Ojo: «no» solo se usa para responder. Por eso se dice «No, non sono malata»: el primer «no» responde y el segundo, «non», niega el verbo."
+          }
+        },
+        {
+          "id": "p2",
+          "tipo": "patron",
+          "texto": {"es": "Afirmativo → negativo:"},
+          "formula": [
+            {"texto": "(Io)", "nota": {"es": "quién (opcional)"}},
+            {"texto": "non", "nota": {"es": "negación"}},
+            {"texto": "sono", "nota": {"es": "verbo"}},
+            {"texto": "stanca", "nota": {"es": "cómo"}}
+          ],
+          "ejemplos": [
+            {"texto": "Non sono malata.", "traduccion": {"es": "No estoy enferma."}},
+            {"texto": "Marco non è qui.", "traduccion": {"es": "Marco no está aquí."}},
+            {"texto": "Oggi non sto bene.", "traduccion": {"es": "Hoy no estoy bien."}},
+            {"texto": "Giulia non è occupata.", "traduccion": {"es": "Giulia no está ocupada."}}
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "explicacion",
+          "icono": "pregunta",
+          "titulo": {"es": "Preguntar: como en español"},
+          "texto": {
+            "es": "Para preguntar no cambias el orden: solo subes la voz al final, igual que en español: «Sei stanco?» (¿estás cansado?). Las palabras de pregunta van al principio: «Dove sei?» (¿dónde estás?), «Chi è?» (¿quién es?), «Come stai?». «Dove» + «è» se une: «Dov'è Giulia?»."
+          }
+        },
+        {
+          "id": "p4",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-non",
+            "v-chi",
+            "v-dove",
+            "v-dove-e",
+            "v-come",
+            "v-anche",
+            "v-anchio",
+            "v-ma",
+            "v-malato",
+            "v-malata",
+            "v-occupato",
+            "v-occupata",
+            "v-triste",
+            "v-oggi",
+            "v-adesso"
+          ]
+        },
+        {
+          "id": "p5",
+          "tipo": "ejemplos",
+          "items": [
+            {
+              "texto": "Sei stanco?",
+              "traduccion": {"es": "¿Estás cansado?"},
+              "nota": {"es": "Solo sube la voz al final."}
+            },
+            {"texto": "Dov'è Giulia?", "traduccion": {"es": "¿Dónde está Giulia?"}},
+            {"texto": "Chi è? È Marco.", "traduccion": {"es": "¿Quién es? Es Marco."}},
+            {"texto": "Dove sei adesso?", "traduccion": {"es": "¿Dónde estás ahora?"}},
+            {"texto": "Sono stanca. Anch'io!", "traduccion": {"es": "Estoy cansada. ¡Yo también!"}}
+          ]
+        },
+        {
+          "id": "p6",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «No estoy cansada»."},
+              "texto": "Io ___ sono stanca.",
+              "respuesta": "non",
+              "opciones": ["non", "no"],
+              "pista": {"es": "Delante del verbo, la negación tiene tres letras."},
+              "feedback": {"es": "Io non sono stanca."}
+            },
+            {
+              "id": "g2",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «Giulia no está aquí»."},
+              "tokens": ["è", "Giulia", "qui.", "non"],
+              "respuesta": "Giulia non è qui.",
+              "pista": {"es": "«Non» va justo antes de «è»."},
+              "feedback": {"es": "Giulia non è qui."}
+            },
+            {
+              "id": "g3",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la pregunta."},
+              "preguntaApoyo": {"es": "Quieres saber dónde está Marco."},
+              "opciones": ["Dov'è Marco?", "Chi è Marco?", "Come sta Marco?"],
+              "respuesta": 0,
+              "pista": {"es": "«Dove» = dónde."},
+              "feedback": {"es": "Dov'è Marco?"}
+            },
+            {
+              "id": "g4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la pregunta correcta."},
+              "preguntaApoyo": {"es": "«¿Estás cansado?»"},
+              "opciones": ["Sei stanco?", "Non sei stanco.", "Stanco non sei?"],
+              "respuesta": 0,
+              "pista": {"es": "El orden es el mismo que en la afirmación."},
+              "feedback": {"es": "Sei stanco? — con la voz hacia arriba."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "escribir",
+              "consigna": {"es": "Hazla negativa: «Sono occupato.»"},
+              "respuesta": "Non sono occupato.",
+              "aceptadas": ["Io non sono occupato."],
+              "feedback": {"es": "Non sono occupato."}
+            },
+            {
+              "id": "i2",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Chi è?",
+              "opciones": [{"es": "¿Quién es?"}, {"es": "¿Dónde está?"}, {"es": "¿Cómo estás?"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Chi è?» = ¿quién es?"}
+            },
+            {
+              "id": "i3",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["dove", {"es": "dónde"}],
+                ["chi", {"es": "quién"}],
+                ["oggi", {"es": "hoy"}],
+                ["adesso", {"es": "ahora"}]
+              ],
+              "feedback": {"es": "«Chi» se dice «ki»: no es «qué»."}
+            }
+          ]
+        },
+        {
+          "id": "p8",
+          "tipo": "situacion",
+          "contexto": {"es": "Marco llama por teléfono a Ana."},
+          "dialogo": [
+            {
+              "hablante": "Marco",
+              "texto": "Ciao, Ana! Dove sei adesso?",
+              "traduccion": {"es": "¡Hola, Ana! ¿Dónde estás ahora?"}
+            },
+            {
+              "hablante": "Ana",
+              "texto": "Sono a casa. Oggi non sto bene.",
+              "traduccion": {"es": "Estoy en casa. Hoy no estoy bien."}
+            },
+            {"hablante": "Marco", "texto": "Sei malata?", "traduccion": {"es": "¿Estás enferma?"}},
+            {
+              "hablante": "Ana",
+              "texto": "No, non sono malata, ma sono stanca.",
+              "traduccion": {"es": "No, no estoy enferma, pero estoy cansada."}
+            },
+            {
+              "hablante": "Marco",
+              "texto": "Anch'io sono stanco!",
+              "traduccion": {"es": "¡Yo también estoy cansado!"}
+            }
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Responde según el diálogo."},
+              "preguntaApoyo": {"es": "¿Ana está enferma?"},
+              "opciones": [{"es": "No, está cansada."}, {"es": "Sí, está enferma."}, {"es": "No, está ocupada."}],
+              "respuesta": 0,
+              "feedback": {"es": "«Non sono malata, ma sono stanca.»"}
+            },
+            {
+              "id": "s2",
+              "formato": "escribir",
+              "consigna": {"es": "Marco dice «Sono stanco». Responde «¡Yo también!»."},
+              "respuesta": "Anch'io!",
+              "aceptadas": ["Anch'io sono stanca.", "Anch'io sono stanco."],
+              "feedback": {"es": "«Anch'io» = yo también."}
+            }
+          ]
+        },
+        {
+          "id": "p9",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Marco no está enfermo»."},
+              "texto": "Marco ___ è malato.",
+              "respuesta": "non",
+              "feedback": {"es": "Marco non è malato."}
+            },
+            {
+              "id": "e2",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la frase correcta."},
+              "preguntaApoyo": {"es": "«No estoy triste.»"},
+              "opciones": ["Non sono triste.", "No sono triste.", "Sono non triste."],
+              "respuesta": 0,
+              "feedback": {"es": "«Non» delante del verbo."}
+            },
+            {
+              "id": "e3",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «¿Dónde está Giulia ahora?»"},
+              "tokens": ["adesso?", "Dov'è", "Giulia"],
+              "respuesta": "Dov'è Giulia adesso?",
+              "feedback": {"es": "Dov'è + Giulia + adesso?"}
+            },
+            {
+              "id": "e4",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Oggi non sto bene.",
+              "opciones": [{"es": "Hoy no estoy bien."}, {"es": "Hoy estoy bien."}, {"es": "Ahora no estoy en casa."}],
+              "respuesta": 0,
+              "feedback": {"es": "«Non sto bene» = no estoy bien."}
+            },
+            {
+              "id": "e5",
+              "formato": "escribir",
+              "consigna": {"es": "Escribe en italiano: «Él no está ocupado»."},
+              "respuesta": "Lui non è occupato.",
+              "aceptadas": ["Non è occupato."],
+              "feedback": {"es": "Lui non è occupato. También vale sin «lui»."}
+            },
+            {
+              "id": "e6",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada palabra con su significado."},
+              "pares": [
+                ["malato", {"es": "enfermo"}],
+                ["occupata", {"es": "ocupada"}],
+                ["anche", {"es": "también"}],
+                ["ma", {"es": "pero"}]
+              ],
+              "feedback": {"es": "Masculino en -o, femenino en -a."}
+            }
+          ]
+        }
       ],
       "criterioDominio": {"umbral": 0.8},
-      "tutor": {"objetivo": {"es": "Negar y preguntar con essere y stare"}, "gramaticaPermitida": ["it-g-non", "it-g-intonation-q", "it-g-wh-words"], "longitudMaxFrase": 7}
+      "tutor": {
+        "objetivo": {"es": "Negar y preguntar con essere y stare"},
+        "gramaticaPermitida": ["it-g-non", "it-g-intonation-q", "it-g-wh-words"],
+        "longitudMaxFrase": 7
+      }
     },
     {
       "id": "it.f0.presentarsi",
-      "orden": 5,
+      "orden": 7,
       "titulo": {"es": "Presentarte"},
-      "objetivo": {"es": "Decir tu nombre, tu nacionalidad, de dónde eres y dónde vives, y preguntárselo a otra persona con tu o Lei."},
+      "objetivo": {
+        "es": "Decir tu nombre, tu nacionalidad, de dónde eres y dónde vives, y preguntárselo a otra persona con tu o Lei."
+      },
       "cefr": "Pre-A1",
       "nivelInterno": 0,
       "concepto": "presentarse",
@@ -520,11 +2559,26 @@
       "gramatica": ["it-g-chiamarsi-chunks", "it-g-essere-di", "it-g-nationality-gender"],
       "vocabulario": [
         {"id": "v-mi-chiamo", "texto": "mi chiamo", "traduccion": {"es": "me llamo"}},
-        {"id": "v-come-ti-chiami", "texto": "come ti chiami?", "traduccion": {"es": "¿cómo te llamas?"}, "nota": {"es": "Informal, con «tu»."}},
-        {"id": "v-come-si-chiama", "texto": "come si chiama?", "traduccion": {"es": "¿cómo se llama usted?"}, "nota": {"es": "Formal, con «Lei»."}},
+        {
+          "id": "v-come-ti-chiami",
+          "texto": "come ti chiami?",
+          "traduccion": {"es": "¿cómo te llamas?"},
+          "nota": {"es": "Informal, con «tu»."}
+        },
+        {
+          "id": "v-come-si-chiama",
+          "texto": "come si chiama?",
+          "traduccion": {"es": "¿cómo se llama usted?"},
+          "nota": {"es": "Formal, con «Lei»."}
+        },
         {"id": "v-piacere", "texto": "piacere", "traduccion": {"es": "mucho gusto"}},
         {"id": "v-di-dove-sei", "texto": "di dove sei?", "traduccion": {"es": "¿de dónde eres?"}},
-        {"id": "v-sono-di", "texto": "sono di", "traduccion": {"es": "soy de (+ ciudad)"}, "nota": {"es": "En italiano es «di», no «de»."}},
+        {
+          "id": "v-sono-di",
+          "texto": "sono di",
+          "traduccion": {"es": "soy de (+ ciudad)"},
+          "nota": {"es": "En italiano es «di», no «de»."}
+        },
         {"id": "v-abito-a", "texto": "abito a", "traduccion": {"es": "vivo en (+ ciudad)"}},
         {"id": "v-dove-abiti", "texto": "dove abiti?", "traduccion": {"es": "¿dónde vives?"}},
         {"id": "v-ecuadoriano", "texto": "ecuadoriano", "traduccion": {"es": "ecuatoriano"}},
@@ -535,73 +2589,267 @@
         {"id": "v-messicana", "texto": "messicana", "traduccion": {"es": "mexicana"}}
       ],
       "erroresFrecuentes": [
-        {"incorrecto": "Sono de Quito.", "correcto": "Sono di Quito.", "explicacion": {"es": "En italiano la preposición es «di»: «sono di Quito»."}},
-        {"incorrecto": "Sono ecuadoriano.", "correcto": "Sono ecuadoriana.", "explicacion": {"es": "Si lo dice una mujer, la nacionalidad termina en -a."}},
-        {"incorrecto": "Io chiamo Ana.", "correcto": "Mi chiamo Ana.", "explicacion": {"es": "Como en español «me llamo», hace falta «mi»: «Mi chiamo Ana»."}}
+        {
+          "incorrecto": "Sono de Quito.",
+          "correcto": "Sono di Quito.",
+          "explicacion": {"es": "En italiano la preposición es «di»: «sono di Quito»."}
+        },
+        {
+          "incorrecto": "Sono ecuadoriano.",
+          "correcto": "Sono ecuadoriana.",
+          "explicacion": {"es": "Si lo dice una mujer, la nacionalidad termina en -a."}
+        },
+        {
+          "incorrecto": "Io chiamo Ana.",
+          "correcto": "Mi chiamo Ana.",
+          "explicacion": {"es": "Como en español «me llamo», hace falta «mi»: «Mi chiamo Ana»."}
+        }
       ],
       "pasos": [
-        {"id": "p1", "tipo": "explicacion", "icono": "presentacion", "titulo": {"es": "Nombre, origen y ciudad"},
-         "texto": {"es": "«Mi chiamo Ana» funciona igual que «me llamo Ana». Para preguntar: «Come ti chiami?» (con tu) o «Come si chiama?» (con Lei). Para el origen: «Sono di Quito» (ciudad) o tu nacionalidad, «Sono ecuadoriana». Para decir dónde vives: «Abito a Quito». Al conocer a alguien se dice «Piacere!»."}},
-        {"id": "p2", "tipo": "patron", "texto": {"es": "Pregunta → respuesta:"},
-         "formula": [{"texto": "Di dove sei?", "nota": {"es": "pregunta"}}, {"texto": "Sono di", "nota": {"es": "bloque fijo"}}, {"texto": "Quito.", "nota": {"es": "ciudad"}}],
-         "ejemplos": [
-           {"texto": "Come ti chiami? Mi chiamo Ana.", "traduccion": {"es": "¿Cómo te llamas? Me llamo Ana."}},
-           {"texto": "Di dove sei? Sono di Quito.", "traduccion": {"es": "¿De dónde eres? Soy de Quito."}},
-           {"texto": "Dove abiti? Abito a Roma.", "traduccion": {"es": "¿Dónde vives? Vivo en Roma."}},
-           {"texto": "Sono ecuadoriana. Piacere!", "traduccion": {"es": "Soy ecuatoriana. ¡Mucho gusto!"}},
-           {"texto": "Buongiorno, signore! Come si chiama?", "traduccion": {"es": "¡Buenos días, señor! ¿Cómo se llama usted?"}}
-         ]},
-        {"id": "p3", "tipo": "vocabulario", "refs": ["v-mi-chiamo", "v-come-ti-chiami", "v-come-si-chiama", "v-piacere", "v-di-dove-sei", "v-sono-di", "v-abito-a", "v-dove-abiti", "v-ecuadoriano", "v-ecuadoriana", "v-italiano", "v-italiana", "v-messicano", "v-messicana"]},
-        {"id": "p4", "tipo": "practica_guiada", "items": [
-          {"id": "g1", "formato": "elegir", "consigna": {"es": "Elige la pregunta."}, "preguntaApoyo": {"es": "Quieres saber el nombre de un compañero de tu edad."}, "opciones": ["Come ti chiami?", "Come si chiama?", "Di dove sei?"], "respuesta": 0,
-           "pista": {"es": "Con un compañero usas «tu»."}, "feedback": {"es": "Come ti chiami?"}},
-          {"id": "g2", "formato": "completar", "consigna": {"es": "Completa: «Soy de Quito»."}, "texto": "Sono ___ Quito.", "respuesta": "di", "opciones": ["di", "a", "e"],
-           "pista": {"es": "No es «de» como en español."}, "feedback": {"es": "Sono di Quito."}},
-          {"id": "g3", "formato": "ordenar", "consigna": {"es": "Ordena: «Me llamo Ana»."}, "tokens": ["chiamo", "Mi", "Ana."], "respuesta": "Mi chiamo Ana.",
-           "pista": {"es": "Empieza por «Mi»."}, "feedback": {"es": "Mi chiamo Ana."}},
-          {"id": "g4", "formato": "elegir", "consigna": {"es": "Elige la frase correcta."}, "preguntaApoyo": {"es": "Ana dice su nacionalidad."}, "opciones": ["Sono ecuadoriana.", "Sono ecuadoriano."], "respuesta": 0,
-           "pista": {"es": "Ana es mujer."}, "feedback": {"es": "Femenino: ecuadoriana."}}
-        ]},
-        {"id": "p5", "tipo": "practica_independiente", "items": [
-          {"id": "i1", "formato": "relacionar", "consigna": {"es": "Une cada pregunta con lo que pregunta."},
-           "pares": [["Come ti chiami?", {"es": "el nombre"}], ["Di dove sei?", {"es": "el origen"}], ["Dove abiti?", {"es": "dónde vive"}], ["Come stai?", {"es": "cómo está"}]],
-           "feedback": {"es": "Cuatro preguntas básicas para conocer a alguien."}},
-          {"id": "i2", "formato": "escribir", "consigna": {"es": "Responde en italiano a «Di dove sei?» (eres de Quito)."}, "respuesta": "Sono di Quito.", "aceptadas": ["Di Quito.", "Io sono di Quito."],
-           "feedback": {"es": "Sono di Quito."}},
-          {"id": "i3", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Piacere!", "opciones": [{"es": "¡Mucho gusto!"}, {"es": "¡Por favor!"}, {"es": "¡De nada!"}], "respuesta": 0,
-           "feedback": {"es": "«Piacere» = mucho gusto."}}
-        ]},
-        {"id": "p6", "tipo": "situacion", "contexto": {"es": "En un intercambio de idiomas conoces a Giulia, una chica italiana."},
-         "dialogo": [
-           {"hablante": "Giulia", "texto": "Ciao! Mi chiamo Giulia. Come ti chiami?", "traduccion": {"es": "¡Hola! Me llamo Giulia. ¿Cómo te llamas?"}},
-           {"hablante": "Ana", "texto": "Mi chiamo Ana. Piacere!", "traduccion": {"es": "Me llamo Ana. ¡Mucho gusto!"}},
-           {"hablante": "Giulia", "texto": "Piacere! Di dove sei?", "traduccion": {"es": "¡Mucho gusto! ¿De dónde eres?"}},
-           {"hablante": "Ana", "texto": "Sono ecuadoriana, sono di Quito. E tu?", "traduccion": {"es": "Soy ecuatoriana, soy de Quito. ¿Y tú?"}},
-           {"hablante": "Giulia", "texto": "Sono italiana. Abito a Roma.", "traduccion": {"es": "Soy italiana. Vivo en Roma."}}
-         ],
-         "items": [
-           {"id": "s1", "formato": "elegir", "consigna": {"es": "Responde según el diálogo."}, "preguntaApoyo": {"es": "¿Dónde vive Giulia?"}, "opciones": [{"es": "En Roma"}, {"es": "En Quito"}, {"es": "En México"}], "respuesta": 0,
-            "feedback": {"es": "«Abito a Roma.»"}},
-           {"id": "s2", "formato": "escribir", "consigna": {"es": "Giulia pregunta «Come ti chiami?». Responde que te llamas Ana."}, "respuesta": "Mi chiamo Ana.", "aceptadas": ["Sono Ana.", "Io sono Ana."],
-            "feedback": {"es": "Mi chiamo Ana."}}
-         ]},
-        {"id": "p7", "tipo": "evaluacion", "items": [
-          {"id": "e1", "formato": "ordenar", "consigna": {"es": "Ordena: «¿Cómo se llama usted?»"}, "tokens": ["si", "Come", "chiama?"], "respuesta": "Come si chiama?",
-           "feedback": {"es": "Come si chiama? — registro «Lei»."}},
-          {"id": "e2", "formato": "completar", "consigna": {"es": "Completa: «Vivo en Quito»."}, "texto": "___ a Quito.", "respuesta": "Abito",
-           "feedback": {"es": "Abito a Quito."}},
-          {"id": "e3", "formato": "escuchar", "consigna": {"es": "Escucha y elige el significado."}, "audio": "Sono messicana.", "opciones": [{"es": "Soy mexicana."}, {"es": "Soy mexicano."}, {"es": "Soy italiana."}], "respuesta": 0,
-           "feedback": {"es": "«Messicana» termina en -a: femenino."}},
-          {"id": "e4", "formato": "elegir", "consigna": {"es": "Elige la respuesta adecuada."}, "pregunta": "Di dove sei?", "opciones": ["Sono di Roma.", "Mi chiamo Marco.", "Sto bene, grazie."], "respuesta": 0,
-           "feedback": {"es": "Te preguntan el origen: «Sono di…»."}},
-          {"id": "e5", "formato": "escribir", "consigna": {"es": "Preséntate en italiano: «Me llamo Ana. Soy ecuatoriana.»"}, "respuesta": "Mi chiamo Ana. Sono ecuadoriana.", "aceptadas": ["Sono Ana. Sono ecuadoriana.", "Mi chiamo Ana. Io sono ecuadoriana."],
-           "feedback": {"es": "Mi chiamo Ana. Sono ecuadoriana."}},
-          {"id": "e6", "formato": "elegir", "consigna": {"es": "Elige la expresión."}, "preguntaApoyo": {"es": "Te presentan a una persona. ¿Qué dices?"}, "opciones": ["Piacere!", "Prego!", "Arrivederci!"], "respuesta": 0,
-           "feedback": {"es": "Al conocer a alguien: «Piacere!»."}}
-        ]}
+        {
+          "id": "p1",
+          "tipo": "explicacion",
+          "icono": "presentacion",
+          "titulo": {"es": "Nombre, origen y ciudad"},
+          "texto": {
+            "es": "«Mi chiamo Ana» funciona igual que «me llamo Ana». Para preguntar: «Come ti chiami?» (con tu) o «Come si chiama?» (con Lei). Para el origen: «Sono di Quito» (ciudad) o tu nacionalidad, «Sono ecuadoriana». Para decir dónde vives: «Abito a Quito». Al conocer a alguien se dice «Piacere!»."
+          }
+        },
+        {
+          "id": "p2",
+          "tipo": "patron",
+          "texto": {"es": "Pregunta → respuesta:"},
+          "formula": [
+            {"texto": "Di dove sei?", "nota": {"es": "pregunta"}},
+            {"texto": "Sono di", "nota": {"es": "bloque fijo"}},
+            {"texto": "Quito.", "nota": {"es": "ciudad"}}
+          ],
+          "ejemplos": [
+            {"texto": "Come ti chiami? Mi chiamo Ana.", "traduccion": {"es": "¿Cómo te llamas? Me llamo Ana."}},
+            {"texto": "Di dove sei? Sono di Quito.", "traduccion": {"es": "¿De dónde eres? Soy de Quito."}},
+            {"texto": "Dove abiti? Abito a Roma.", "traduccion": {"es": "¿Dónde vives? Vivo en Roma."}},
+            {"texto": "Sono ecuadoriana. Piacere!", "traduccion": {"es": "Soy ecuatoriana. ¡Mucho gusto!"}},
+            {
+              "texto": "Buongiorno, signore! Come si chiama?",
+              "traduccion": {"es": "¡Buenos días, señor! ¿Cómo se llama usted?"}
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "tipo": "vocabulario",
+          "refs": [
+            "v-mi-chiamo",
+            "v-come-ti-chiami",
+            "v-come-si-chiama",
+            "v-piacere",
+            "v-di-dove-sei",
+            "v-sono-di",
+            "v-abito-a",
+            "v-dove-abiti",
+            "v-ecuadoriano",
+            "v-ecuadoriana",
+            "v-italiano",
+            "v-italiana",
+            "v-messicano",
+            "v-messicana"
+          ]
+        },
+        {
+          "id": "p4",
+          "tipo": "practica_guiada",
+          "items": [
+            {
+              "id": "g1",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la pregunta."},
+              "preguntaApoyo": {"es": "Quieres saber el nombre de un compañero de tu edad."},
+              "opciones": ["Come ti chiami?", "Come si chiama?", "Di dove sei?"],
+              "respuesta": 0,
+              "pista": {"es": "Con un compañero usas «tu»."},
+              "feedback": {"es": "Come ti chiami?"}
+            },
+            {
+              "id": "g2",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Soy de Quito»."},
+              "texto": "Sono ___ Quito.",
+              "respuesta": "di",
+              "opciones": ["di", "a", "e"],
+              "pista": {"es": "No es «de» como en español."},
+              "feedback": {"es": "Sono di Quito."}
+            },
+            {
+              "id": "g3",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «Me llamo Ana»."},
+              "tokens": ["chiamo", "Mi", "Ana."],
+              "respuesta": "Mi chiamo Ana.",
+              "pista": {"es": "Empieza por «Mi»."},
+              "feedback": {"es": "Mi chiamo Ana."}
+            },
+            {
+              "id": "g4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la frase correcta."},
+              "preguntaApoyo": {"es": "Ana dice su nacionalidad."},
+              "opciones": ["Sono ecuadoriana.", "Sono ecuadoriano."],
+              "respuesta": 0,
+              "pista": {"es": "Ana es mujer."},
+              "feedback": {"es": "Femenino: ecuadoriana."}
+            }
+          ]
+        },
+        {
+          "id": "p5",
+          "tipo": "practica_independiente",
+          "items": [
+            {
+              "id": "i1",
+              "formato": "relacionar",
+              "consigna": {"es": "Une cada pregunta con lo que pregunta."},
+              "pares": [
+                ["Come ti chiami?", {"es": "el nombre"}],
+                ["Di dove sei?", {"es": "el origen"}],
+                ["Dove abiti?", {"es": "dónde vive"}],
+                ["Come stai?", {"es": "cómo está"}]
+              ],
+              "feedback": {"es": "Cuatro preguntas básicas para conocer a alguien."}
+            },
+            {
+              "id": "i2",
+              "formato": "escribir",
+              "consigna": {"es": "Responde en italiano a «Di dove sei?» (eres de Quito)."},
+              "respuesta": "Sono di Quito.",
+              "aceptadas": ["Di Quito.", "Io sono di Quito."],
+              "feedback": {"es": "Sono di Quito."}
+            },
+            {
+              "id": "i3",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Piacere!",
+              "opciones": [{"es": "¡Mucho gusto!"}, {"es": "¡Por favor!"}, {"es": "¡De nada!"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Piacere» = mucho gusto."}
+            }
+          ]
+        },
+        {
+          "id": "p6",
+          "tipo": "situacion",
+          "contexto": {"es": "En un intercambio de idiomas conoces a Giulia, una chica italiana."},
+          "dialogo": [
+            {
+              "hablante": "Giulia",
+              "texto": "Ciao! Mi chiamo Giulia. Come ti chiami?",
+              "traduccion": {"es": "¡Hola! Me llamo Giulia. ¿Cómo te llamas?"}
+            },
+            {
+              "hablante": "Ana",
+              "texto": "Mi chiamo Ana. Piacere!",
+              "traduccion": {"es": "Me llamo Ana. ¡Mucho gusto!"}
+            },
+            {
+              "hablante": "Giulia",
+              "texto": "Piacere! Di dove sei?",
+              "traduccion": {"es": "¡Mucho gusto! ¿De dónde eres?"}
+            },
+            {
+              "hablante": "Ana",
+              "texto": "Sono ecuadoriana, sono di Quito. E tu?",
+              "traduccion": {"es": "Soy ecuatoriana, soy de Quito. ¿Y tú?"}
+            },
+            {
+              "hablante": "Giulia",
+              "texto": "Sono italiana. Abito a Roma.",
+              "traduccion": {"es": "Soy italiana. Vivo en Roma."}
+            }
+          ],
+          "items": [
+            {
+              "id": "s1",
+              "formato": "elegir",
+              "consigna": {"es": "Responde según el diálogo."},
+              "preguntaApoyo": {"es": "¿Dónde vive Giulia?"},
+              "opciones": [{"es": "En Roma"}, {"es": "En Quito"}, {"es": "En México"}],
+              "respuesta": 0,
+              "feedback": {"es": "«Abito a Roma.»"}
+            },
+            {
+              "id": "s2",
+              "formato": "escribir",
+              "consigna": {"es": "Giulia pregunta «Come ti chiami?». Responde que te llamas Ana."},
+              "respuesta": "Mi chiamo Ana.",
+              "aceptadas": ["Sono Ana.", "Io sono Ana."],
+              "feedback": {"es": "Mi chiamo Ana."}
+            }
+          ]
+        },
+        {
+          "id": "p7",
+          "tipo": "evaluacion",
+          "items": [
+            {
+              "id": "e1",
+              "formato": "ordenar",
+              "consigna": {"es": "Ordena: «¿Cómo se llama usted?»"},
+              "tokens": ["si", "Come", "chiama?"],
+              "respuesta": "Come si chiama?",
+              "feedback": {"es": "Come si chiama? — registro «Lei»."}
+            },
+            {
+              "id": "e2",
+              "formato": "completar",
+              "consigna": {"es": "Completa: «Vivo en Quito»."},
+              "texto": "___ a Quito.",
+              "respuesta": "Abito",
+              "feedback": {"es": "Abito a Quito."}
+            },
+            {
+              "id": "e3",
+              "formato": "escuchar",
+              "consigna": {"es": "Escucha y elige el significado."},
+              "audio": "Sono messicana.",
+              "opciones": [{"es": "Soy mexicana."}, {"es": "Soy mexicano."}, {"es": "Soy italiana."}],
+              "respuesta": 0,
+              "feedback": {"es": "«Messicana» termina en -a: femenino."}
+            },
+            {
+              "id": "e4",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la respuesta adecuada."},
+              "pregunta": "Di dove sei?",
+              "opciones": ["Sono di Roma.", "Mi chiamo Marco.", "Sto bene, grazie."],
+              "respuesta": 0,
+              "feedback": {"es": "Te preguntan el origen: «Sono di…»."}
+            },
+            {
+              "id": "e5",
+              "formato": "escribir",
+              "consigna": {"es": "Preséntate en italiano: «Me llamo Ana. Soy ecuatoriana.»"},
+              "respuesta": "Mi chiamo Ana. Sono ecuadoriana.",
+              "aceptadas": ["Sono Ana. Sono ecuadoriana.", "Mi chiamo Ana. Io sono ecuadoriana."],
+              "feedback": {"es": "Mi chiamo Ana. Sono ecuadoriana."}
+            },
+            {
+              "id": "e6",
+              "formato": "elegir",
+              "consigna": {"es": "Elige la expresión."},
+              "preguntaApoyo": {"es": "Te presentan a una persona. ¿Qué dices?"},
+              "opciones": ["Piacere!", "Prego!", "Arrivederci!"],
+              "respuesta": 0,
+              "feedback": {"es": "Al conocer a alguien: «Piacere!»."}
+            }
+          ]
+        }
       ],
       "criterioDominio": {"umbral": 0.8},
-      "tutor": {"objetivo": {"es": "Presentarse y preguntar a otra persona"}, "gramaticaPermitida": ["it-g-chiamarsi-chunks", "it-g-essere-di", "it-g-essere-present", "it-g-non"], "longitudMaxFrase": 8}
+      "tutor": {
+        "objetivo": {"es": "Presentarse y preguntar a otra persona"},
+        "gramaticaPermitida": ["it-g-chiamarsi-chunks", "it-g-essere-di", "it-g-essere-present", "it-g-non"],
+        "longitudMaxFrase": 8
+      }
     }
   ]
 }

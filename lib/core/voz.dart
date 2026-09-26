@@ -603,9 +603,13 @@ double similitud(String dicho, String esperado) {
 /// «да») suena mejor con la voz nativa del dispositivo: la voz de la nube no
 /// tiene contexto y lo pronuncia con el acento de su idioma de origen.
 bool mejorConVozDelSistema(String texto, String idioma) {
-  if (!const {'ja', 'zh', 'ko', 'ru'}.contains(idioma)) return false;
   final letras = soloNativo(
     texto,
   ).replaceAll(RegExp(r'[\s\p{P}]', unicode: true), '');
-  return letras.isNotEmpty && letras.runes.length <= 2;
+  if (letras.isEmpty) return false;
+  // Una letra suelta del alfabeto («G», «ß», «ñ»): la voz del dispositivo
+  // dice su nombre en el idioma; la de la nube la lee como sonido suelto.
+  if (letras.runes.length == 1) return true;
+  return const {'ja', 'zh', 'ko', 'ru'}.contains(idioma) &&
+      letras.runes.length <= 2;
 }

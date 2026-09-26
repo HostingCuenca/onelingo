@@ -172,7 +172,7 @@ void main() {
     final ruta = (await tester.runAsync(() => CargadorRuta().cargar('en')))!!;
     final estados = estadosRuta(ruta, c.read(progressProvider).practicas);
     expect(estados['en.f0.primer-contacto']!.estado, EstadoUnidad.aprobada);
-    expect(estados['en.f0.pronombres']!.estado, EstadoUnidad.disponible);
+    expect(estados['en.f0.alfabeto']!.estado, EstadoUnidad.disponible);
     // Aprobar una unidad no completa el nivel.
     expect(c.read(progressProvider).rutaFundamentosAprobada, isFalse);
   });
@@ -195,7 +195,7 @@ void main() {
     expect(find.text('0. Primer contacto', skipOffstage: false), findsOneWidget);
     expect(find.text('Versión inicial'), findsNothing);
     await tester.scrollUntilVisible(
-      find.text('5. Presentarte'),
+      find.text('6. Presentarte'),
       200,
       scrollable: find.byType(Scrollable).first,
     );

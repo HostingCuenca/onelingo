@@ -48,7 +48,28 @@ void main() {
     // Continuidad: A1 empieza al terminar fundamentos y termina en la integración.
     expect(a11.first.prerequisitos, ['en.f0.presentarse']);
     expect(a12.last.id, 'en.a1.integracion-a1');
-    expect(ruta.unidades.map((u) => u.orden).toList(), [for (var i = 0; i < 35; i++) i]);
+    expect(ruta.unidades.map((u) => u.orden).toList(), [for (var i = 0; i < ruta.unidades.length; i++) i]);
+  });
+
+  test('Los 10 idiomas tienen escritura/sonidos y un A1 inicial con tablas', () async {
+    for (final l in idiomas) {
+      final ruta = (await CargadorRuta().cargar(l.code))!;
+      final a1 = ruta.delNivel('a1-1');
+      expect(a1.length, greaterThanOrEqualTo(7), reason: l.code);
+      // El A1 empieza donde terminan los fundamentos.
+      expect(a1.first.prerequisitos, [ruta.delNivel('f0').last.id], reason: l.code);
+      // Hay tablas (escritura o conjugación) en fundamentos y en A1.
+      bool conTabla(List<UnidadRuta> us) =>
+          us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));
+      expect(conTabla(ruta.delNivel('f0')), isTrue, reason: l.code);
+      expect(conTabla(a1), isTrue, reason: l.code);
+      // Orden global consecutivo.
+      expect(
+        ruta.unidades.map((u) => u.orden).toList(),
+        [for (var i = 0; i < ruta.unidades.length; i++) i],
+        reason: l.code,
+      );
+    }
   });
 
   test('Ningún idioma tiene módulos que no cargan', () async {
