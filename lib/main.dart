@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,8 +47,50 @@ class OneLingoApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      builder: (context, child) =>
-          _UsoTracker(child: ConnectionBanner(child: child!)),
+      builder: (context, child) => _UsoTracker(
+        child: _PrecargaEscritura(child: ConnectionBanner(child: child!)),
+      ),
+    );
+  }
+}
+
+/// En la web, Flutter descarga la fuente de respaldo (Noto) de una escritura
+/// la primera vez que la dibuja, y mientras tanto muestra cuadros vacíos.
+/// Un texto invisible con signos del idioma que se estudia fuerza esa
+/// descarga al abrir la app, antes de llegar a una tabla de kana o hangul.
+class _PrecargaEscritura extends ConsumerWidget {
+  const _PrecargaEscritura({required this.child});
+  final Widget child;
+
+  static const _muestras = {
+    'ja': 'あいうアイウ日本語',
+    'zh': '你好学生汉字',
+    'ko': '안녕하세요 한글',
+    'ru': 'Привет ёЁ',
+  };
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final muestra = kIsWeb
+        ? _muestras[ref.watch(progressProvider.select((s) => s.idiomaMeta))]
+        : null;
+    if (muestra == null) return child;
+    return Stack(
+      children: [
+        child,
+        Positioned(
+          left: 0,
+          top: 0,
+          child: IgnorePointer(
+            child: ExcludeSemantics(
+              child: Opacity(
+                opacity: 0,
+                child: Text(muestra, style: const TextStyle(fontSize: 2)),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
