@@ -132,7 +132,7 @@ void main() {
   });
 
   test('equivalencia MCER', () {
-    expect(cefrDe(6.5), 'B1+ · acercándose a B2');
+    expect(cefrDe(6.5), 'B1');
     expect(cefrDe(7), 'B2');
     expect(cefrDe(2), 'A1');
   });

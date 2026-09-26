@@ -2,7 +2,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { query } from '../lib/db.js';
 import { config } from '../lib/config.js';
-import { obtenerAudio, leerAudio, vozDisponible, VOCES, cuotaVoz, textoParaVoz, hashAudio } from '../lib/voz.js';
+import { obtenerAudio, obtenerAudioStream, leerAudio, vozDisponible, VOCES, cuotaVoz, textoParaVoz, hashAudio } from '../lib/voz.js';
 import { transcribirOpenAI, openaiDisponible } from '../lib/ia_openai.js';
 import { requiereAlumno, requiereAdmin, type Sesion } from '../lib/auth.js';
 
@@ -24,9 +24,25 @@ export default async function rutas(app: FastifyInstance) {
     voces: Object.fromEntries(Object.entries(VOCES).map(([k, v]) => [k, { nombre: v.nombre, descripcion: v.descripcion }])),
   }));
 
+  app.get('/voz/stream', { preHandler: alumnoOToken }, async (req, reply) => {
+    const q = z.object({ texto: z.string().min(1).max(600), idioma: z.string().default('en'), voz: z.string().optional() }).parse(req.query);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+    const started = performance.now();
+    reply.raw.on('close', () => { clearTimeout(timer); controller.abort(); });
+    try {
+      const a = await obtenerAudioStream(q, controller.signal, () => req.log.info({ ms: Math.round(performance.now() - started) }, 'voz_first_chunk'));
+      return reply.type('audio/mpeg').header('cache-control', 'private, no-store')
+        .header('x-accel-buffering', 'no').header('x-voz-cache', a.cache ? 'hit' : 'miss').send(a.stream);
+    } catch (e) {
+      clearTimeout(timer);
+      req.log.error({ err: String(e) }, 'voz_stream');
+      return reply.code(502).send({ error: 'voz_error' });
+    }
+  });
+
   /** MP3 de un texto. Se genera la primera vez y luego sale de la caché (cabecera X-Voz-Cache). */
   app.get('/voz', { preHandler: alumnoOToken }, async (req, reply) => {
-    if (!vozDisponible()) return reply.code(503).send({ error: 'voz_no_configurada' });
     const q = z.object({ texto: z.string().min(1), idioma: z.string().default('en'), voz: z.string().optional(), token: z.string().optional() }).parse(req.query);
     try {
       const a = await obtenerAudio(q);
@@ -44,7 +60,6 @@ export default async function rutas(app: FastifyInstance) {
 
   /** Pregenera en lote (p. ej. todos los textos de una lección) y devuelve los hashes. */
   app.post('/voz/lote', { preHandler: requiereAlumno }, async (req, reply) => {
-    if (!vozDisponible()) return reply.code(503).send({ error: 'voz_no_configurada' });
     const d = z.object({ idioma: z.string(), voz: z.string().optional(), textos: z.array(z.string().min(1)).min(1).max(60) }).parse(req.body);
     const resultados: { texto: string; hash?: string; cache?: boolean; error?: string }[] = [];
     for (const texto of d.textos) {
@@ -59,7 +74,7 @@ export default async function rutas(app: FastifyInstance) {
     const { hash } = z.object({ hash: z.string() }).parse(req.params);
     const b = await leerAudio(hash);
     if (!b) return reply.code(404).send({ error: 'no_existe' });
-    await query('UPDATE audios SET usos = usos + 1, ultimo_uso = now() WHERE hash = $1', [hash]);
+    await query('UPDATE audios SET usos = usos + 1, ultimo_uso = now() WHERE hash = $1', [hash]).catch(() => {});
     return reply.type('audio/mpeg').header('cache-control', 'public, max-age=31536000, immutable').send(b);
   });
 

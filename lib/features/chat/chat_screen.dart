@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 import '../../app/theme.dart';
+import '../../core/biblioteca.dart';
+import '../../core/conexion.dart';
+import '../situations/situation_screen.dart';
+import '../../core/content/situation_units.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/fotos.dart';
 import '../../core/api/sync.dart';
+import '../../core/perfil_aprendizaje.dart';
 import '../../core/content/idiomas.dart';
 import '../../core/voz.dart';
 import '../../core/models/models.dart';
@@ -14,13 +20,19 @@ import '../../shared/widgets/widgets.dart';
 
 /// Conversación con el tutor de IA (situación o libre).
 ///
-/// FASE 1: la IA es un simulador local que sigue el mismo contrato que tendrá
-/// el backend con Claude: `{reply, corrections[], suggestions[]}` y usa el
-/// `LevelProfile` del nivel del alumno. En fase 2 solo cambia `_responder`.
+/// Las respuestas y correcciones proceden del backend; los fallos permiten reintentar.
 class ChatScreen extends ConsumerStatefulWidget {
-  const ChatScreen({super.key, this.situacionId, this.leccionId});
+  const ChatScreen({
+    super.key,
+    this.situacionId,
+    this.leccionId,
+    this.objetivoId,
+    this.modo = 'practica',
+  });
   final int? situacionId;
   final String? leccionId;
+  final String? objetivoId;
+  final String modo;
 
   @override
   ConsumerState<ChatScreen> createState() => _ChatScreenState();
@@ -31,7 +43,8 @@ class _Msg {
   final String texto;
   final bool mio;
   final String? sub;
-  final (String, String, String)? correccion; // original, corregido, explicación
+  final (String, String, String)?
+  correccion; // original, corregido, explicación
 }
 
 class _ChatScreenState extends ConsumerState<ChatScreen> {
@@ -39,17 +52,41 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   final input = TextEditingController();
   final scroll = ScrollController();
   int turno = 0;
+  http.Client? _chatClient;
   bool escuchando = false;
+  bool transcribiendo = false;
+  bool mostrarAyuda = false;
+  bool usoAyuda = false;
   List<String> sugerenciasIA = [];
 
   void _bajar() => Future.delayed(const Duration(milliseconds: 50), () {
-        if (scroll.hasClients) scroll.animateTo(scroll.position.maxScrollExtent, duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
-      });
-  late final Situation? sit = widget.situacionId == null ? null : situacion(widget.situacionId!);
+    if (scroll.hasClients) {
+      scroll.animateTo(
+        scroll.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeOut,
+      );
+    }
+  });
+  late final Situation? sit = widget.situacionId == null
+      ? null
+      : situaciones.where((s) => s.id == widget.situacionId).firstOrNull;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!TickerMode.valuesOf(context).enabled) {
+      escuchando = false;
+      transcribiendo = false;
+    }
+  }
+
+  bool get _visible => mounted && TickerMode.valuesOf(context).enabled;
 
   @override
   void dispose() {
-    Oido.instancia.parar();
+    _chatClient?.close();
+    Oido.instancia.cancelar();
     Voz.instancia.parar();
     super.dispose();
   }
@@ -57,31 +94,67 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Future<void> _hablarAlTutor() async {
     if (escuchando) {
       await Oido.instancia.parar();
+      if (!mounted) return;
       setState(() => escuchando = false);
       return;
     }
-    setState(() => escuchando = true);
-    final ok = await Oido.instancia.escuchar(_idm, (texto, fin) {
-      if (!mounted) return;
-      setState(() => input.text = texto);
-      if (fin) {
-        setState(() => escuchando = false);
-        if (texto.trim().isNotEmpty) _enviar(texto);
-      }
-    }, segundos: 8, onFin: () {
-      if (!mounted || !escuchando) return;
-      setState(() => escuchando = false);
-      if (input.text.trim().isEmpty) {
-        final e = Oido.instancia.ultimoError;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(e.isEmpty ? 'No se escuchó nada. Acércate al micrófono e inténtalo otra vez.' : 'No se pudo escuchar ($e). Comprueba el micrófono.'),
-        ));
-      }
+    setState(() {
+      escuchando = true;
+      input.clear();
     });
+    final ok = await Oido.instancia.escuchar(
+      _idm,
+      (texto, fin) {
+        if (!mounted) return;
+        setState(() => input.text = texto);
+        if (fin) {
+          setState(() {
+            escuchando = false;
+            transcribiendo = false;
+          });
+          if (texto.trim().isNotEmpty) {
+            _enviar(texto);
+          }
+        }
+      },
+      segundos: 60,
+      silencio: const Duration(seconds: 3),
+      onProcesando: () {
+        if (mounted) {
+          setState(() {
+            escuchando = false;
+            transcribiendo = true;
+          });
+        }
+      },
+      onFin: () {
+        if (!mounted || (!escuchando && !transcribiendo)) return;
+        setState(() {
+          escuchando = false;
+          transcribiendo = false;
+        });
+        if (input.text.trim().isEmpty) {
+          final e = Oido.instancia.ultimoError;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                e.isEmpty
+                    ? 'No se escuchó nada. Acércate al micrófono e inténtalo otra vez.'
+                    : 'No se pudo escuchar ($e). Comprueba el micrófono.',
+              ),
+            ),
+          );
+        }
+      },
+    );
     if (!ok && mounted) {
       setState(() => escuchando = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Micrófono no disponible en este dispositivo. Escribe tu respuesta.')),
+        const SnackBar(
+          content: Text(
+            'Micrófono no disponible en este dispositivo. Escribe tu respuesta.',
+          ),
+        ),
       );
     }
   }
@@ -90,20 +163,37 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
+      if (!mounted) return;
+      if (widget.objetivoId != null) {
+        _responderConIA(ref.read(progressProvider).nivelActual);
+        return;
+      }
       final n = ref.read(progressProvider).nivelActual;
-      setState(() => mensajes.add(_Msg(_apertura(n), mio: false, sub: _traduccionApertura(n))));
-      Voz.instancia.hablar(_apertura(n), _idm, voz: ref.read(progressProvider).tutorId);
+      setState(
+        () => mensajes.add(
+          _Msg(_apertura(n), mio: false, sub: _traduccionApertura(n)),
+        ),
+      );
+      Voz.instancia.hablar(
+        _apertura(n),
+        _idm,
+        voz: ref.read(progressProvider).tutorId,
+      );
     });
   }
 
-  // --- Guion simulado por situación y nivel ---
+  // --- Apertura de la conversación por situación y nivel ---
 
   String get _idm => ref.read(progressProvider).idiomaMeta;
 
   String _apertura(int n) {
     final s = sit;
     if (_idm != 'en' && n <= 3) return chatNivelBajo(_idm).apertura;
-    if (s == null) return n <= 3 ? 'Hi! How are you today?' : "Hey! What's on your mind today? Tell me about your day.";
+    if (s == null) {
+      return n <= 3
+          ? 'Hi! How are you today?'
+          : "Hey! What's on your mind today? Tell me about your day.";
+    }
     if (n <= 3) {
       return switch (s.categoria) {
         'Comida' => 'Hello! Welcome. Are you ready to order?',
@@ -130,139 +220,176 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     };
   }
 
-  String? _traduccionApertura(int n) => n <= 3 ? 'Toca para traducir · mantén pulsado para escuchar' : null;
+  String? _traduccionApertura(int n) =>
+      n <= 3 ? 'Toca para traducir · mantén pulsado para escuchar' : null;
 
   List<String> _sugerencias(int n) {
     if (sugerenciasIA.isNotEmpty) return sugerenciasIA;
     final s = sit;
     if (_idm != 'en' && n <= 3) return chatNivelBajo(_idm).sugerencias;
-    if (s == null) return n <= 3 ? ['I am fine, thank you.', 'I am tired.', 'Very good!'] : ['It was a busy day.', 'Nothing special, and you?', 'I want to talk about work.'];
+    if (s == null) {
+      return n <= 3
+          ? ['I am fine, thank you.', 'I am tired.', 'Very good!']
+          : [
+              'It was a busy day.',
+              'Nothing special, and you?',
+              'I want to talk about work.',
+            ];
+    }
     return switch (s.categoria) {
-      'Comida' => n <= 3 ? ['Yes, please.', 'I want a coffee.', 'The menu, please.'] : ["I'd like the special, please.", 'What do you recommend?', 'Is it spicy?'],
-      'Salud' => n <= 3 ? ['My head hurts.', 'I have a fever.', 'I am tired.'] : ['I have had a headache since yesterday.', 'Do I need a prescription?', 'Is it serious?'],
-      'Trabajo' => ['I have three years of experience.', 'I work well in a team.', 'Could you repeat the question?'],
-      _ => n <= 3 ? ['Yes.', 'No, thank you.', 'I do not understand.'] : ['Could you help me with this?', 'Let me explain.', 'Thanks, that helps.'],
+      'Comida' =>
+        n <= 3
+            ? ['Yes, please.', 'I want a coffee.', 'The menu, please.']
+            : [
+                "I'd like the special, please.",
+                'What do you recommend?',
+                'Is it spicy?',
+              ],
+      'Salud' =>
+        n <= 3
+            ? ['My head hurts.', 'I have a fever.', 'I am tired.']
+            : [
+                'I have had a headache since yesterday.',
+                'Do I need a prescription?',
+                'Is it serious?',
+              ],
+      'Trabajo' => [
+        'I have three years of experience.',
+        'I work well in a team.',
+        'Could you repeat the question?',
+      ],
+      _ =>
+        n <= 3
+            ? ['Yes.', 'No, thank you.', 'I do not understand.']
+            : [
+                'Could you help me with this?',
+                'Let me explain.',
+                'Thanks, that helps.',
+              ],
     };
-  }
-
-  /// Detección de errores muy simple (la real la hará Claude en fase 2).
-  (String, String, String, Skill)? _corregir(String t) {
-    final l = t.trim();
-    if (_idm != 'en') return null; // las reglas locales son de inglés; Claude cubrirá el resto
-    if (RegExp(r'\bi am\b').hasMatch(l) && l.contains('i am')) {
-      return (l, l.replaceAll('i am', 'I am'), 'El pronombre "I" siempre va en mayúscula.', Skill.escritura);
-    }
-    if (RegExp(r'\bhow you\b', caseSensitive: false).hasMatch(l)) {
-      return (l, l.replaceAll(RegExp(r'how you', caseSensitive: false), 'how are you'), 'En preguntas no omitas el verbo "are".', Skill.gramatica);
-    }
-    if (RegExp(r'\bi have (\d+|two|three) years\b', caseSensitive: false).hasMatch(l) && !l.contains('of experience')) {
-      return (l, '$l of experience', 'Para hablar de experiencia laboral se dice "years of experience".', Skill.vocabulario);
-    }
-    if (RegExp(r'\bpeoples\b', caseSensitive: false).hasMatch(l)) {
-      return (l, l.replaceAll(RegExp(r'peoples', caseSensitive: false), 'people'), '"People" ya es plural; "peoples" solo se usa para pueblos/naciones.', Skill.vocabulario);
-    }
-    final want = RegExp(r"\b(want|wants|need|needs|would like)\s+(eat|drink|go|have|order|see|buy|pay|sleep|talk|speak|learn|study|work|travel|try)\b", caseSensitive: false);
-    if (want.hasMatch(l)) {
-      return (l, l.replaceAllMapped(want, (m) => '${m[1]} to ${m[2]}'), 'Después de "want / need / would like" el verbo va con "to": want to eat.', Skill.gramatica);
-    }
-    final tercera = RegExp(r"\b(he|she|it)\s+(go|eat|want|like|have|work|live|need|play|study)\b", caseSensitive: false);
-    if (tercera.hasMatch(l)) {
-      return (l, l.replaceAllMapped(tercera, (m) {
-        final v = m[2]!.toLowerCase();
-        final c = v == 'have' ? 'has' : (v == 'go' || v == 'study' ? (v == 'go' ? 'goes' : 'studies') : '${v}s');
-        return '${m[1]} $c';
-      }), 'En presente simple, he/she/it lleva -s en el verbo (she goes, he has).', Skill.conjugacion);
-    }
-    if (RegExp(r"\bi (no|not) (like|want|have|know|understand)\b", caseSensitive: false).hasMatch(l)) {
-      return (l, l.replaceAllMapped(RegExp(r"\bi (no|not) (\w+)", caseSensitive: false), (m) => "I don't ${m[2]}"), 'La negación en presente es "I don\'t + verbo".', Skill.gramatica);
-    }
-    if (RegExp(r"\bi am agree\b", caseSensitive: false).hasMatch(l)) {
-      return (l, l.replaceAll(RegExp(r"i am agree", caseSensitive: false), 'I agree'), '"Agree" es un verbo: se dice "I agree", no "I am agree".', Skill.vocabulario);
-    }
-    if (RegExp(r'\bmore better\b', caseSensitive: false).hasMatch(l)) {
-      return (l, l.replaceAll(RegExp(r'more better', caseSensitive: false), 'better'), '"Better" ya es comparativo; no lleva "more".', Skill.gramatica);
-    }
-    if (l.isNotEmpty && l[0] == l[0].toLowerCase() && RegExp(r'[a-z]').hasMatch(l[0])) {
-      return (l, l[0].toUpperCase() + l.substring(1), 'Las frases empiezan con mayúscula.', Skill.escritura);
-    }
-    return null;
-  }
-
-  String _respuesta(int n) {
-    final s = sit;
-    final base = s == null
-        ? ['Nice! Tell me more about that.', 'Interesting. Why do you think so?', 'Got it. And what happened next?', 'Great, thanks for sharing.']
-        : switch (s.categoria) {
-            'Comida' => ['Great choice! Anything to drink?', 'Sure. Would you like a starter as well?', 'Perfect, it will take ten minutes.', 'Here you are. Enjoy your meal!'],
-            'Salud' => ['I see. How long have you felt this way?', 'Do you have any other symptoms?', 'Let me check your temperature.', 'Take this twice a day and rest.'],
-            'Trabajo' => ['Interesting. Can you give me an example?', 'What are your strengths?', 'Why do you want this job?', 'Thank you. We will call you.'],
-            _ => ['Okay. Can you tell me more?', 'Sure, I can help with that.', 'Alright, anything else?', 'Perfect, thank you!'],
-          };
-    final r = base[turno % base.length];
-    if (n > 2) return r;
-    // Nivel 1-2: solo la primera frase, conservando su signo final.
-    final m = RegExp(r'^[^.!?]*[.!?]').firstMatch(r);
-    return m == null ? r : m.group(0)!;
-  }
-
-  /// Si hubo error, el tutor primero lo señala con la forma correcta (adaptado al nivel).
-  String _respuestaCon(int n, (String, String, String, Skill)? corr) {
-    final r = _respuesta(n);
-    if (corr == null) return r;
-    final c = corr.$2;
-    return n <= 3 ? 'Good try! We say: "$c". $r' : 'Almost — a more natural way is "$c". $r';
   }
 
   void _enviar(String texto) {
     final t = texto.trim();
-    if (t.isEmpty) return;
-    input.clear();
-    final n = ref.read(progressProvider).nivelActual;
-    final corr = _corregir(t);
-    setState(() {
-      mensajes.add(_Msg(t, mio: true, sub: corr == null ? '✓ Bien dicho' : null, correccion: corr == null ? null : (corr.$1, corr.$2, corr.$3)));
-    });
-    if (corr != null) {
-      ref.read(progressProvider.notifier).agregarError(
-            skill: corr.$4,
-            original: corr.$1,
-            correccion: corr.$2,
-            explicacion: corr.$3,
-            origen: sit?.nombre ?? 'Conversación libre',
-          );
+    if (t.isEmpty ||
+        pensando ||
+        transcribiendo ||
+        escuchando ||
+        errorConexion != null) {
+      return;
     }
-    _responderConIA(n, corr);
+    input.clear();
+    setState(() {
+      mensajes.add(_Msg(t, mio: true));
+    });
+    _responderConIA(ref.read(progressProvider).nivelActual);
   }
 
+  String? _respuestaEnCurso;
   bool pensando = false;
+  String? errorConexion;
 
-  /// Intenta la IA real del backend; si no hay servidor/clave, usa el simulador local.
-  Future<void> _responderConIA(int n, (String, String, String, Skill)? corrLocal) async {
+  /// No sustituye una respuesta de IA fallida por una simulación.
+  Future<void> _responderConIA(int n) async {
     final st = ref.read(progressProvider);
-    setState(() => pensando = true);
+    setState(() {
+      pensando = true;
+      _respuestaEnCurso = null;
+      errorConexion = null;
+    });
     final historial = [
-      for (final m in mensajes) {'rol': m.mio ? 'alumno' : 'tutor', 'texto': m.texto},
+      for (final m in mensajes)
+        {'rol': m.mio ? 'alumno' : 'tutor', 'texto': m.texto},
     ];
+    String? respuestaTemprana;
+    _chatClient?.close();
+    final client = http.Client();
+    _chatClient = client;
     final r = await Sync.instancia.chat(
+      client: client,
+      onReply: (texto) {
+        if (!mounted || _chatClient != client) return;
+        respuestaTemprana = texto;
+        setState(() => _respuestaEnCurso = texto);
+        _bajar();
+        if (_visible) {
+          Voz.instancia.hablar(texto, _idm, voz: st.tutorId, progresivo: true);
+        }
+      },
       idiomaMeta: st.idiomaMeta,
       idiomaNativo: st.idiomaNativo,
       nivel: n,
       tutorId: st.tutorId,
       situacionId: sit?.id,
+      objetivoId: widget.objetivoId,
+      modo: widget.modo,
       situacion: sit?.nombre,
-      objetivo: sit == null ? null : (n <= 3 ? 'responde con frases cortas' : n <= 6 ? 'mantener la conversación y pedir detalles' : 'reaccionar a imprevistos y negociar'),
+      objetivo: [
+        if (sit != null)
+          n <= 3
+              ? 'responde con frases cortas'
+              : n <= 6
+              ? 'mantener la conversación y pedir detalles'
+              : 'reaccionar a imprevistos y negociar',
+        if (st.idiomaMeta == 'en') ...[
+          'Contextos: ${st.sectores.map((s) => sectoresAprendizaje[s] ?? s).join(', ')}',
+          'Objetivos personales: ${st.objetivos.map((s) => objetivosAprendizaje[s] ?? s).join(', ')}',
+          'Prioridades basadas en práctica: ${RutaBiblioteca.prioridades(st.diagnostico, st.practicas).take(3).join(', ')}. Últimas dificultades: ${st.practicas.values.whereType<Map>().where((e) => e['correcta'] == false).take(5).map((e) => '${e['tema']}: ${e['feedback']}').join('; ')}. Usa estas evidencias para proponer refuerzo; no inventes unidades ni afirmes que son una certificación.',
+          if (st.diagnostico?['idioma'] == 'en')
+            'Temas a reforzar: ${((st.diagnostico?['refuerzo'] as List?) ?? []).take(5).join(', ')}. Competencias: ${st.diagnostico?['skills']}.',
+          'Practica situaciones relacionadas sin examinar conocimientos profesionales; prioriza comunicar y corregir el inglés.',
+        ],
+      ].join('\n'),
       historial: historial,
     );
     if (!mounted) return;
     if (r != null) {
+      if (sit != null && mensajes.any((m) => m.mio)) {
+        final corrections = (r['corrections'] as List? ?? [])
+            .whereType<Map>()
+            .toList();
+        final feedback = corrections
+            .map(
+              (c) => '${c['original']} → ${c['correcto']}: ${c['explicacion']}',
+            )
+            .join(' · ');
+        ref.read(progressProvider.notifier).guardarTurnoSituacion(
+          sit!.id,
+          widget.objetivoId ?? 'libre',
+          {
+            'tema': sit!.nombre,
+            'modo': widget.modo,
+            'asistida': usoAyuda,
+            'feedback': corrections.isEmpty
+                ? 'Turno practicado sin correcciones textuales; dominio aún no evaluado.'
+                : feedback.substring(0, feedback.length.clamp(0, 1200)),
+            'correcciones': corrections.take(3).toList(),
+          },
+        );
+      }
       // Correcciones reales de la IA sobre el último mensaje del alumno.
       final correcciones = (r['corrections'] as List? ?? []);
       if (correcciones.isNotEmpty && mensajes.isNotEmpty && mensajes.last.mio) {
         final c = correcciones.first as Map<String, dynamic>;
         final ultimo = mensajes.removeLast();
-        mensajes.add(_Msg(ultimo.texto, mio: true, correccion: (c['original'] as String? ?? ultimo.texto, c['correcto'] as String? ?? '', c['explicacion'] as String? ?? '')));
-        ref.read(progressProvider.notifier).agregarError(
-              skill: Skill.values.firstWhere((k) => k.name == (c['skill'] ?? 'gramatica'), orElse: () => Skill.gramatica),
+        mensajes.add(
+          _Msg(
+            ultimo.texto,
+            mio: true,
+            correccion: (
+              c['original'] as String? ?? ultimo.texto,
+              c['correcto'] as String? ?? '',
+              c['explicacion'] as String? ?? '',
+            ),
+          ),
+        );
+        ref
+            .read(progressProvider.notifier)
+            .agregarError(
+              skill: Skill.values.firstWhere(
+                (k) => k.name == (c['skill'] ?? 'gramatica'),
+                orElse: () => Skill.gramatica,
+              ),
               original: c['original'] as String? ?? ultimo.texto,
               correccion: c['correcto'] as String? ?? '',
               explicacion: c['explicacion'] as String? ?? '',
@@ -274,26 +401,38 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       final trad = r['traduccion'] as String? ?? '';
       setState(() {
         pensando = false;
-        mensajes.add(_Msg(rom.isEmpty ? texto : '$texto ($rom)', mio: false, sub: trad.isEmpty ? null : trad));
+        _respuestaEnCurso = null;
+        mensajes.add(
+          _Msg(
+            rom.isEmpty ? texto : '$texto ($rom)',
+            mio: false,
+            sub: trad.isEmpty ? null : trad,
+          ),
+        );
         sugerenciasIA = (r['suggestions'] as List? ?? []).cast<String>();
         turno++;
       });
-      Voz.instancia.hablar(texto, _idm, voz: st.tutorId);
+      if (respuestaTemprana == null) {
+        if (_visible) {
+          Voz.instancia.hablar(texto, _idm, voz: st.tutorId, progresivo: true);
+        }
+      }
       _bajar();
       return;
     }
-    Future.delayed(const Duration(milliseconds: 400), () {
-      if (!mounted) return;
-      setState(() {
-        pensando = false;
-        final rr = _respuestaCon(n, corrLocal);
-        mensajes.add(_Msg(rr, mio: false));
-        Voz.instancia.hablar(rr, _idm, voz: st.tutorId);
-        turno++;
-      });
-      Future.delayed(const Duration(milliseconds: 50), () {
-        if (scroll.hasClients) scroll.animateTo(scroll.position.maxScrollExtent, duration: const Duration(milliseconds: 250), curve: Curves.easeOut);
-      });
+    if (respuestaTemprana != null) {
+      await Voz.instancia.parar();
+    }
+    await Conexion.comprobar();
+    if (!mounted) return;
+    setState(() {
+      pensando = false;
+      _respuestaEnCurso = null;
+      errorConexion = !Sync.instancia.conectado
+          ? 'Inicia sesión para practicar con el tutor.'
+          : Conexion.estado.value == EstadoConexion.sinConexion
+          ? 'Sin conexión con OneLingo. Tu mensaje se conserva; comprueba la conexión y reintenta.'
+          : 'El tutor no está disponible en este momento. Tu mensaje se conserva; puedes reintentar.';
     });
   }
 
@@ -307,11 +446,27 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.pop()),
-        title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(sit?.nombre ?? 'Conversación libre', style: const TextStyle(fontSize: 16)),
-          Text('${t.nombre} · ${nombrePersonalidad(t.personalidad)} · Nivel $n', style: const TextStyle(fontSize: 11, color: OL.gris, fontWeight: FontWeight.w500)),
-        ]),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              sit?.nombre ?? 'Conversación libre',
+              style: const TextStyle(fontSize: 16),
+            ),
+            Text(
+              '${t.nombre} · ${nombrePersonalidad(t.personalidad)} · Nivel $n',
+              style: const TextStyle(
+                fontSize: 11,
+                color: OL.gris,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             tooltip: 'Cómo se adapta la IA a tu nivel',
@@ -324,83 +479,275 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ],
       ),
       body: Movil(
-        child: Column(children: [
-          if (sit != null)
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 4, 20, 8),
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration: BoxDecoration(color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(14)),
-              child: Row(children: [
-                Icon(Icons.flag_outlined, color: color, size: 18),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    n <= 3
-                        ? 'Objetivo: responde con frases cortas. La IA habla despacio.'
-                        : n <= 6
-                            ? 'Objetivo: mantén la conversación, pide detalles y explica tus preferencias.'
-                            : 'Objetivo: reacciona a imprevistos, da tu opinión y negocia.',
-                    style: TextStyle(color: color, fontWeight: FontWeight.w700, fontSize: 12),
+        child: Column(
+          children: [
+            if (MediaQuery.viewInsetsOf(context).bottom == 0)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: Image.asset(
+                        fotoTutor(t.id),
+                        alignment: encuadreTutor(t.id),
+                        width: MediaQuery.viewInsetsOf(context).bottom > 0
+                            ? 48
+                            : 86,
+                        height: MediaQuery.viewInsetsOf(context).bottom > 0
+                            ? 62
+                            : 110,
+                        fit: BoxFit.cover,
+                        semanticLabel: 'Tutor ${t.nombre}',
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            t.nombre,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          Text(
+                            widget.modo == 'prueba'
+                                ? 'Prueba de comunicación · sin pistas'
+                                : 'Practica a tu ritmo · nivel $n',
+                          ),
+                          if (widget.objetivoId != null)
+                            Text(
+                              ref
+                                      .watch(situationUnitsProvider)
+                                      .asData
+                                      ?.value
+                                      .where((u) => u.id == sit?.id)
+                                      .expand((u) => u.objectives)
+                                      .where((o) => o.id == widget.objetivoId)
+                                      .firstOrNull
+                                      ?.title ??
+                                  'Preparando tu objetivo',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (sit != null &&
+                _idm == 'en' &&
+                MediaQuery.viewInsetsOf(context).bottom == 0)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SituationSections(
+                  selected: widget.modo == 'prueba' ? 3 : 2,
+                  onSelected: (i) {
+                    context.pushReplacement('/situacion/${sit!.id}?seccion=$i');
+                  },
+                ),
+              ),
+            if (escuchando || transcribiendo)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 6,
+                ),
+                child: Row(
+                  children: [
+                    if (transcribiendo)
+                      const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    else
+                      const Icon(Icons.mic, color: OL.rojo, size: 20),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        transcribiendo
+                            ? 'Transcribiendo tu respuesta…'
+                            : 'Te escucho · termina tras 3 s de silencio',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ),
+                    if (escuchando)
+                      TextButton(
+                        onPressed: _hablarAlTutor,
+                        child: const Text('Detener y enviar'),
+                      ),
+                  ],
+                ),
+              ),
+            if (pensando) const LinearProgressIndicator(minHeight: 2),
+            if (errorConexion != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      errorConexion!,
+                      style: const TextStyle(
+                        color: OL.rojo,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    OutlinedButton.icon(
+                      onPressed: pensando ? null : () => _responderConIA(n),
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Reintentar mensaje'),
+                    ),
+                  ],
+                ),
+              ),
+            Expanded(
+              child: ListView.builder(
+                controller: scroll,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 8,
+                ),
+                itemCount:
+                    mensajes.length + (_respuestaEnCurso == null ? 0 : 1),
+                itemBuilder: (_, i) => _Burbuja(
+                  m: i < mensajes.length
+                      ? mensajes[i]
+                      : _Msg(
+                          _respuestaEnCurso!,
+                          mio: false,
+                          sub: 'Preparando traducción y comentarios…',
+                        ),
+                  color: color,
+                  tutor: t,
+                  idm: _idm,
+                ),
+              ),
+            ),
+            if (widget.modo != 'prueba')
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: () => setState(() {
+                    mostrarAyuda = !mostrarAyuda;
+                    if (mostrarAyuda) usoAyuda = true;
+                  }),
+                  icon: const Icon(Icons.lightbulb_outline),
+                  label: Text(
+                    mostrarAyuda ? 'Ocultar ayuda' : 'Necesito una pista',
                   ),
                 ),
-              ]),
-            ),
-          Expanded(
-            child: ListView.builder(
-              controller: scroll,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              itemCount: mensajes.length,
-              itemBuilder: (_, i) => _Burbuja(m: mensajes[i], color: color, tutor: t, idm: _idm),
-            ),
-          ),
-          SizedBox(
-            height: 40,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: [
-                for (final sug in _sugerencias(n))
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: ActionChip(
-                      label: Text(sug, style: TextStyle(color: color, fontWeight: FontWeight.w700, fontSize: 12)),
-                      backgroundColor: OL.blanco,
-                      side: BorderSide(color: color.withValues(alpha: 0.4)),
-                      onPressed: () => _enviar(sug),
+              ),
+            if (mostrarAyuda && widget.modo != 'prueba')
+              SizedBox(
+                height: 40,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  children: [
+                    for (final sug in _sugerencias(n))
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: ActionChip(
+                          label: Text(
+                            sug,
+                            style: TextStyle(
+                              color: color,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                            ),
+                          ),
+                          backgroundColor: OL.blanco,
+                          side: BorderSide(color: color.withValues(alpha: 0.4)),
+                          onPressed:
+                              pensando ||
+                                  transcribiendo ||
+                                  escuchando ||
+                                  errorConexion != null
+                              ? null
+                              : () => _enviar(sug),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
+              child: Row(
+                children: [
+                  IconButton.filled(
+                    tooltip: escuchando
+                        ? 'Detener y enviar'
+                        : 'Grabar respuesta',
+                    style: IconButton.styleFrom(
+                      backgroundColor: escuchando ? OL.rojo : color,
+                      fixedSize: const Size(48, 48),
+                    ),
+                    onPressed: pensando || transcribiendo
+                        ? null
+                        : _hablarAlTutor,
+                    icon: Icon(
+                      escuchando ? Icons.stop : Icons.mic,
+                      color: OL.blanco,
                     ),
                   ),
-              ],
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      controller: input,
+                      readOnly: escuchando || transcribiendo,
+                      onSubmitted: _enviar,
+                      textInputAction: TextInputAction.send,
+                      decoration: InputDecoration(
+                        hintText: transcribiendo
+                            ? 'Transcribiendo tu respuesta…'
+                            : escuchando
+                            ? (Oido.instancia.modo == 'nube'
+                                  ? 'Habla con calma…'
+                                  : 'Escuchando…')
+                            : 'Escribe tu respuesta...',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  IconButton(
+                    tooltip: 'Enviar mensaje',
+                    onPressed:
+                        pensando ||
+                            transcribiendo ||
+                            escuchando ||
+                            errorConexion != null
+                        ? null
+                        : () => _enviar(input.text),
+                    icon: Icon(Icons.send, color: color),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 8, 20, 16),
-            child: Row(children: [
-              IconButton.filled(
-                style: IconButton.styleFrom(backgroundColor: escuchando ? OL.rojo : color, fixedSize: const Size(48, 48)),
-                onPressed: _hablarAlTutor,
-                icon: Icon(escuchando ? Icons.stop : Icons.mic, color: OL.blanco),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: TextField(
-                  controller: input,
-                  onSubmitted: _enviar,
-                  textInputAction: TextInputAction.send,
-                  decoration: InputDecoration(hintText: escuchando ? (Oido.instancia.modo == 'nube' ? 'Grabando… toca el botón rojo para enviar' : 'Escuchando…') : 'Escribe tu respuesta...'),
-                ),
-              ),
-              const SizedBox(width: 6),
-              IconButton(onPressed: () => _enviar(input.text), icon: Icon(Icons.send, color: color)),
-            ]),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
 }
 
 class _Burbuja extends StatelessWidget {
-  const _Burbuja({required this.m, required this.color, required this.tutor, required this.idm});
+  const _Burbuja({
+    required this.m,
+    required this.color,
+    required this.tutor,
+    required this.idm,
+  });
   final _Msg m;
   final Color color;
   final Tutor tutor;
@@ -412,46 +759,120 @@ class _Burbuja extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
-        mainAxisAlignment: m.mio ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: m.mio
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!m.mio) ...[
-            CircleAvatar(radius: 16, backgroundColor: tutor.color, child: CircleAvatar(radius: 14, backgroundImage: AssetImage(fotoTutor(tutor.id)))),
+            CircleAvatar(
+              radius: 16,
+              backgroundColor: tutor.color,
+              child: CircleAvatar(
+                radius: 14,
+                backgroundImage: AssetImage(fotoTutor(tutor.id)),
+              ),
+            ),
             const SizedBox(width: 8),
           ],
           Flexible(
-            child: Column(crossAxisAlignment: m.mio ? CrossAxisAlignment.end : CrossAxisAlignment.start, children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
-                decoration: BoxDecoration(
-                  color: m.mio ? color : OL.blanco,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: m.mio ? null : OL.sombra(0.06),
-                ),
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  GestureDetector(
-                    onLongPress: m.mio ? null : () => Voz.instancia.hablar(m.texto, idm, voz: tutor.id),
-                    child: Text(m.texto, style: TextStyle(color: m.mio ? OL.blanco : OL.texto, height: 1.4)),
-                  ),
-                  if (m.sub != null) Text(m.sub!, style: TextStyle(color: m.mio ? const Color(0xFFE8E2FF) : OL.gris, fontSize: 11)),
-                ]),
-              ),
-              if (c != null)
+            child: Column(
+              crossAxisAlignment: m.mio
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+              children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 6),
-                  padding: const EdgeInsets.all(12),
-                  constraints: const BoxConstraints(maxWidth: 300),
-                  decoration: BoxDecoration(color: OL.blanco, borderRadius: BorderRadius.circular(14), border: Border.all(color: OL.rojoSuave, width: 2)),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    const Text('CORRECCIÓN', style: TextStyle(color: OL.rojo, fontSize: 10, fontWeight: FontWeight.w800, letterSpacing: 1)),
-                    const SizedBox(height: 4),
-                    Text(c.$1, style: const TextStyle(color: OL.gris, decoration: TextDecoration.lineThrough, fontSize: 13)),
-                    Text(c.$2, style: const TextStyle(fontWeight: FontWeight.w700, color: OL.verde)),
-                    const SizedBox(height: 4),
-                    Text(c.$3, style: const TextStyle(color: OL.gris, fontSize: 12, height: 1.3)),
-                  ]),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 11,
+                  ),
+                  decoration: BoxDecoration(
+                    color: m.mio ? color : OL.blanco,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: m.mio ? null : OL.sombra(0.06),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onLongPress: m.mio
+                            ? null
+                            : () => Voz.instancia.hablar(
+                                m.texto,
+                                idm,
+                                voz: tutor.id,
+                              ),
+                        child: Text(
+                          m.texto,
+                          style: TextStyle(
+                            color: m.mio ? OL.blanco : OL.texto,
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                      if (m.sub != null)
+                        Text(
+                          m.sub!,
+                          style: TextStyle(
+                            color: m.mio ? const Color(0xFFE8E2FF) : OL.gris,
+                            fontSize: 11,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-            ]),
+                if (c != null)
+                  Container(
+                    margin: const EdgeInsets.only(top: 6),
+                    padding: const EdgeInsets.all(12),
+                    constraints: const BoxConstraints(maxWidth: 300),
+                    decoration: BoxDecoration(
+                      color: OL.blanco,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(color: OL.rojoSuave, width: 2),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'CORRECCIÓN',
+                          style: TextStyle(
+                            color: OL.rojo,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          c.$1,
+                          style: const TextStyle(
+                            color: OL.gris,
+                            decoration: TextDecoration.lineThrough,
+                            fontSize: 13,
+                          ),
+                        ),
+                        Text(
+                          c.$2,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: OL.verde,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          c.$3,
+                          style: const TextStyle(
+                            color: OL.gris,
+                            fontSize: 12,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           ),
         ],
       ),
@@ -466,21 +887,38 @@ class _PerfilSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Cómo se adapta la IA · Nivel ${perfil.nivel}', style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 12),
-          _F('Tutor', '${tutor.nombre} · ${nombrePersonalidad(tutor.personalidad)}'),
-          _F('Vocabulario', perfil.vocabularioMax == 0 ? 'Sin límite' : 'Hasta ${perfil.vocabularioMax} palabras'),
-          _F('Tiempos verbales', perfil.tiempos),
-          _F('Longitud de frase', perfil.longitudFrase),
-          _F('Velocidad de habla', '${perfil.velocidad}x'),
-          _F('Corrección', perfil.correccion),
-          const SizedBox(height: 8),
-          const Text('Este perfil se inyecta en el prompt de la IA junto con la situación y tu idioma nativo (ARQUITECTURA §5).',
-              style: TextStyle(color: OL.gris, fontSize: 12)),
-        ]),
-      );
+    padding: const EdgeInsets.all(24),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Cómo se adapta la IA · Nivel ${perfil.nivel}',
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox(height: 12),
+        _F(
+          'Tutor',
+          '${tutor.nombre} · ${nombrePersonalidad(tutor.personalidad)}',
+        ),
+        _F(
+          'Vocabulario',
+          perfil.vocabularioMax == 0
+              ? 'Sin límite'
+              : 'Hasta ${perfil.vocabularioMax} palabras',
+        ),
+        _F('Tiempos verbales', perfil.tiempos),
+        _F('Longitud de frase', perfil.longitudFrase),
+        _F('Velocidad de habla', '${perfil.velocidad}x'),
+        _F('Corrección', perfil.correccion),
+        const SizedBox(height: 8),
+        const Text(
+          'Este perfil se inyecta en el prompt de la IA junto con la situación y tu idioma nativo (ARQUITECTURA §5).',
+          style: TextStyle(color: OL.gris, fontSize: 12),
+        ),
+      ],
+    ),
+  );
 }
 
 class _F extends StatelessWidget {
@@ -489,10 +927,21 @@ class _F extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 8),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(width: 130, child: Text(k, style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w600))),
-          Expanded(child: Text(v, style: const TextStyle(fontWeight: FontWeight.w600))),
-        ]),
-      );
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 130,
+          child: Text(
+            k,
+            style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w600),
+          ),
+        ),
+        Expanded(
+          child: Text(v, style: const TextStyle(fontWeight: FontWeight.w600)),
+        ),
+      ],
+    ),
+  );
 }

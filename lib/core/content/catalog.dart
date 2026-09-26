@@ -116,7 +116,7 @@ const perfilesNivel = [
   LevelProfile(nivel: 10, vocabularioMax: 0, tiempos: 'sin restricción', longitudFrase: 'sin límite', velocidad: 1.1, correccion: 'como un hablante nativo exigente'),
 ];
 
-LevelProfile perfilNivel(int n) => perfilesNivel[n - 1];
+LevelProfile perfilNivel(int n) => perfilesNivel[n.clamp(1, 10) - 1];
 
 const planes = [
   Plan(id: 'p1', nombre: 'Un idioma', idiomas: 1, precio: 20, incluye: [

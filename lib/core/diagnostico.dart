@@ -25,16 +25,39 @@ import 'placement.dart';
 /// comprensión de un texto corto, situación cotidiana, detectar el error,
 /// completar (escribir la palabra), respuesta corta, escuchar y elegir,
 /// escuchar y escribir (dictado) y producción escrita.
-enum TipoDiag { eleccion, natural, significado, contexto, situacion, error, completar, corta, escucha, dictado, escritura }
+enum TipoDiag {
+  eleccion,
+  natural,
+  significado,
+  contexto,
+  situacion,
+  error,
+  completar,
+  corta,
+  escucha,
+  dictado,
+  escritura,
+  ordenar,
+}
 
 const tiposDiagNombre = {
-  TipoDiag.eleccion: 'Elige', TipoDiag.natural: 'La más natural', TipoDiag.significado: 'Significado', TipoDiag.contexto: 'Comprensión',
-  TipoDiag.situacion: 'Situación', TipoDiag.error: 'Detecta el error', TipoDiag.completar: 'Completa', TipoDiag.corta: 'Respuesta corta',
-  TipoDiag.escucha: 'Escucha', TipoDiag.dictado: 'Dictado', TipoDiag.escritura: 'Escribe',
+  TipoDiag.eleccion: 'Elige',
+  TipoDiag.natural: 'La más natural',
+  TipoDiag.significado: 'Significado',
+  TipoDiag.contexto: 'Comprensión',
+  TipoDiag.situacion: 'Situación',
+  TipoDiag.error: 'Detecta el error',
+  TipoDiag.completar: 'Completa',
+  TipoDiag.corta: 'Respuesta corta',
+  TipoDiag.ordenar: 'Ordena la frase',
+  TipoDiag.escucha: 'Escucha',
+  TipoDiag.dictado: 'Dictado',
+  TipoDiag.escritura: 'Escribe',
 };
 
 const skillsDiag = {
-  'comprension': 'Comprensión',
+  'listening': 'Listening',
+  'comprension': 'Lectura',
   'vocabulario': 'Vocabulario',
   'gramatica': 'Gramática',
   'tiempos': 'Tiempos verbales',
@@ -56,7 +79,14 @@ class PreguntaDiag {
     this.correcta = -1,
     this.aceptadas = const [],
     this.explicacion = '',
+    this.id = '',
+    this.imagen = '',
+    this.pasajeId = '',
+    this.sectores = const [],
+    this.objetivos = const [],
   });
+  final String id, imagen, pasajeId;
+  final List<String> sectores, objetivos;
   final int nivel; // 0..10
   final String skill;
   final TipoDiag tipo;
@@ -68,45 +98,95 @@ class PreguntaDiag {
   final List<String> aceptadas; // completar / respuesta corta
   final String explicacion;
 
-  bool get conOpciones => opciones.isNotEmpty;
+  bool get conOpciones => opciones.isNotEmpty && tipo != TipoDiag.ordenar;
   bool get esEscritura => tipo == TipoDiag.escritura;
+
   /// El texto se escucha y no se muestra hasta responder.
   bool get esAuditiva => tipo == TipoDiag.escucha || tipo == TipoDiag.dictado;
-  String get respuestaCorrecta => conOpciones ? opciones[correcta] : (aceptadas.isEmpty ? '' : aceptadas.first);
+  String get respuestaCorrecta => conOpciones
+      ? opciones[correcta]
+      : (aceptadas.isEmpty ? '' : aceptadas.first);
   String get clave => '$nivel|$skill|$texto';
 
   static PreguntaDiag fromJson(Map<String, dynamic> j) => PreguntaDiag(
-        nivel: j['nivel'] as int,
-        skill: j['skill'] as String,
-        tipo: TipoDiag.values.firstWhere((t) => t.name == j['tipo'], orElse: () => TipoDiag.eleccion),
-        tema: j['tema'] as String? ?? '',
-        instruccion: j['instruccion'] as String? ?? '',
-        texto: j['texto'] as String,
-        opciones: ((j['opciones'] as List?) ?? []).cast<String>(),
-        correcta: j['correcta'] as int? ?? -1,
-        aceptadas: ((j['aceptadas'] as List?) ?? []).cast<String>(),
-        explicacion: j['explicacion'] as String? ?? '',
-      );
+    id: j['id'] as String? ?? '',
+    imagen: j['imagen'] as String? ?? '',
+    pasajeId: j['pasajeId'] as String? ?? '',
+    sectores: List<String>.from(j['sectores'] as List? ?? []),
+    objetivos: List<String>.from(j['objetivos'] as List? ?? []),
+    nivel: j['nivel'] as int,
+    skill: j['skill'] as String,
+    tipo: TipoDiag.values.firstWhere(
+      (t) => t.name == j['tipo'],
+      orElse: () => TipoDiag.eleccion,
+    ),
+    tema: j['tema'] as String? ?? '',
+    instruccion: j['instruccion'] as String? ?? '',
+    texto: j['texto'] as String,
+    opciones: ((j['opciones'] as List?) ?? []).cast<String>(),
+    correcta: j['correcta'] as int? ?? -1,
+    aceptadas: ((j['aceptadas'] as List?) ?? []).cast<String>(),
+    explicacion: j['explicacion'] as String? ?? '',
+  );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'imagen': imagen,
+    'pasajeId': pasajeId,
+    'sectores': sectores,
+    'objetivos': objetivos,
+    'nivel': nivel,
+    'skill': skill,
+    'tipo': tipo.name,
+    'tema': tema,
+    'instruccion': instruccion,
+    'texto': texto,
+    'opciones': opciones,
+    'correcta': correcta,
+    'aceptadas': aceptadas,
+    'explicacion': explicacion,
+  };
 
   /// Copia con las opciones barajadas (la correcta se sigue de `correcta`).
   PreguntaDiag barajada(Random rnd) {
     if (!conOpciones) return this;
     final correctaTexto = opciones[correcta];
     final ops = [...opciones]..shuffle(rnd);
-    return PreguntaDiag(nivel: nivel, skill: skill, tipo: tipo, tema: tema, instruccion: instruccion, texto: texto, opciones: ops, correcta: ops.indexOf(correctaTexto), aceptadas: aceptadas, explicacion: explicacion);
+    return PreguntaDiag(
+      id: id,
+      imagen: imagen,
+      pasajeId: pasajeId,
+      sectores: sectores,
+      objetivos: objetivos,
+      nivel: nivel,
+      skill: skill,
+      tipo: tipo,
+      tema: tema,
+      instruccion: instruccion,
+      texto: texto,
+      opciones: ops,
+      correcta: ops.indexOf(correctaTexto),
+      aceptadas: aceptadas,
+      explicacion: explicacion,
+    );
   }
 
   /// Pregunta de opción múltiple a partir de un paso de lección (banco de respaldo).
   static PreguntaDiag desdePaso(LessonStep s, int nivel) => PreguntaDiag(
-        nivel: nivel,
-        skill: switch (s.skill) { Skill.vocabulario => 'vocabulario', Skill.frases => 'expresiones', Skill.gramatica => 'gramatica', _ => 'comprension' },
-        tipo: TipoDiag.eleccion,
-        tema: s.hint.isEmpty ? 'repaso del nivel $nivel' : s.hint,
-        instruccion: 'Elige la opción correcta.',
-        texto: s.prompt,
-        opciones: s.options,
-        correcta: s.options.indexOf(s.answer).clamp(0, s.options.length - 1),
-      );
+    nivel: nivel,
+    skill: switch (s.skill) {
+      Skill.vocabulario => 'vocabulario',
+      Skill.frases => 'expresiones',
+      Skill.gramatica => 'gramatica',
+      _ => 'comprension',
+    },
+    tipo: TipoDiag.eleccion,
+    tema: s.hint.isEmpty ? 'repaso del nivel $nivel' : s.hint,
+    instruccion: 'Elige la opción correcta.',
+    texto: s.prompt,
+    opciones: s.options,
+    correcta: s.options.indexOf(s.answer).clamp(0, s.options.length - 1),
+  );
 }
 
 /// Banco de preguntas por idioma.
@@ -119,13 +199,19 @@ class BancoDiag {
     if (_intentado.contains(idioma)) return;
     _intentado.add(idioma);
     try {
-      final raw = await rootBundle.loadString('assets/contenido/$idioma/diagnostico.json');
+      final raw = await rootBundle.loadString(
+        'assets/contenido/$idioma/${idioma == 'en' ? 'biblioteca' : 'diagnostico'}.json',
+      );
       final j = jsonDecode(raw) as Map<String, dynamic>;
-      _cache[idioma] = [for (final q in (j['preguntas'] as List)) PreguntaDiag.fromJson(q as Map<String, dynamic>)];
+      _cache[idioma] = [
+        for (final q in (j['preguntas'] as List))
+          PreguntaDiag.fromJson(q as Map<String, dynamic>),
+      ];
     } catch (_) {}
   }
 
-  static bool disponible(String idioma) => (_cache[idioma]?.isNotEmpty) ?? false;
+  static bool disponible(String idioma) =>
+      (_cache[idioma]?.isNotEmpty) ?? false;
 
   /// Preguntas sembradas del idioma; si no hay, se construyen desde las lecciones.
   static List<PreguntaDiag> de(String idioma) {
@@ -133,13 +219,19 @@ class BancoDiag {
     if (s != null && s.isNotEmpty) return s;
     return [
       for (var n = 0; n <= 10; n++)
-        for (final p in PruebaNivel.bancoNivel(n).take(12)) PreguntaDiag.desdePaso(p, n)
+        for (final p in PruebaNivel.bancoNivel(n).take(12))
+          PreguntaDiag.desdePaso(p, n),
     ];
   }
 }
 
 class RespuestaDiag {
-  RespuestaDiag({required this.pregunta, required this.respuesta, required this.correcta, this.puntuacion});
+  RespuestaDiag({
+    required this.pregunta,
+    required this.respuesta,
+    required this.correcta,
+    this.puntuacion,
+  });
   final PreguntaDiag pregunta;
   final String respuesta;
   final bool correcta;
@@ -148,11 +240,18 @@ class RespuestaDiag {
 
 /// Evaluación de la producción escrita (IA o heurística local).
 class EvaluacionEscritura {
-  const EvaluacionEscritura({required this.puntuacion, this.correccion = '', this.comentario = '', this.errores = const [], this.porIa = true});
+  const EvaluacionEscritura({
+    required this.puntuacion,
+    this.correccion = '',
+    this.comentario = '',
+    this.errores = const [],
+    this.porIa = true,
+  });
   final double puntuacion; // 1-10
   final String correccion;
   final String comentario;
-  final List<String> errores; // temas detectados, p. ej. "ortografía", "puntuación"
+  final List<String>
+  errores; // temas detectados, p. ej. "ortografía", "puntuación"
   final bool porIa;
 }
 
@@ -191,42 +290,53 @@ class ResultadoDiag {
   double get precision => preguntas == 0 ? 0 : aciertos / preguntas;
 
   Map<String, dynamic> toJson() => {
-        'declarado': declarado,
-        'nivel': nivel,
-        'cefr': cefr,
-        'confianza': confianza,
-        'preguntas': preguntas,
-        'aciertos': aciertos,
-        'skills': skills,
-        'fortalezas': fortalezas,
-        'debilidades': debilidades,
-        'recurrentes': recurrentes,
-        'refuerzo': refuerzo,
-        'recomendado': recomendado,
-        'plan': plan,
-        if (escritura != null) 'escritura': {'puntuacion': escritura!.puntuacion, 'correccion': escritura!.correccion, 'comentario': escritura!.comentario, 'porIa': escritura!.porIa},
-        'fecha': DateTime.now().toIso8601String(),
-      };
+    'declarado': declarado,
+    'nivel': nivel,
+    'cefr': cefr,
+    'confianza': confianza,
+    'preguntas': preguntas,
+    'aciertos': aciertos,
+    'skills': skills,
+    'fortalezas': fortalezas,
+    'debilidades': debilidades,
+    'recurrentes': recurrentes,
+    'refuerzo': refuerzo,
+    'recomendado': recomendado,
+    'plan': plan,
+    if (escritura != null)
+      'escritura': {
+        'puntuacion': escritura!.puntuacion,
+        'correccion': escritura!.correccion,
+        'comentario': escritura!.comentario,
+        'porIa': escritura!.porIa,
+      },
+    'fecha': DateTime.now().toIso8601String(),
+  };
 }
 
+/// Equivalencia curricular orientativa, no acreditación ni escala psicométrica.
 String cefrDe(double n) {
-  if (n < 1) return 'Pre-A1 · desde cero';
-  if (n < 1.5) return 'Pre-A1';
-  if (n < 2.5) return 'A1';
-  if (n < 3.5) return 'A2';
-  if (n < 4.5) return 'A2+';
-  if (n < 5.5) return 'B1';
-  if (n < 6.5) return 'B1+';
-  if (n < 7) return 'B1+ · acercándose a B2';
-  if (n < 7.5) return 'B2';
-  if (n < 8.5) return 'B2+ / C1';
-  if (n < 9.5) return 'C1';
-  return 'C2';
+  if (n < 1) return 'Pre-A1 · Fundamentos';
+  if (n < 3) return 'A1';
+  if (n < 5) return 'A2';
+  if (n < 7) return 'B1';
+  if (n < 9) return 'B2';
+  return 'C1';
 }
 
 /// Petición al generador de preguntas (IA): el motor decide qué medir, la IA redacta.
 class PeticionDiag {
-  const PeticionDiag({required this.nivel, required this.skill, required this.tipo, required this.evitar, required this.declarado, required this.estimacion, required this.aciertos, required this.fallos, required this.debilidades});
+  const PeticionDiag({
+    required this.nivel,
+    required this.skill,
+    required this.tipo,
+    required this.evitar,
+    required this.declarado,
+    required this.estimacion,
+    required this.aciertos,
+    required this.fallos,
+    required this.debilidades,
+  });
   final int nivel;
   final String skill;
   final TipoDiag tipo;
@@ -238,9 +348,16 @@ class PeticionDiag {
   final List<String> debilidades;
 
   Map<String, dynamic> toJson() => {
-        'nivel': nivel, 'skill': skill, 'tipo': tipo.name, 'evitar': evitar, 'declarado': declarado,
-        'estimacion': estimacion, 'aciertos': aciertos, 'fallos': fallos, 'debilidades': debilidades,
-      };
+    'nivel': nivel,
+    'skill': skill,
+    'tipo': tipo.name,
+    'evitar': evitar,
+    'declarado': declarado,
+    'estimacion': estimacion,
+    'aciertos': aciertos,
+    'fallos': fallos,
+    'debilidades': debilidades,
+  };
 }
 
 /// Tipos de pregunta que usa cada competencia (rotan para variar el formato).
@@ -262,16 +379,36 @@ class Diagnostico {
     this.minPreguntas = 10,
     this.maxPreguntas = 25,
     this.generador,
+    this.personalizado = false,
+    this.preferirBanco = true,
+    this.sectores = const [],
+    this.objetivos = const [],
     Random? random,
-  })  : _banco = List.of(banco),
-        estimacion = declarado.toDouble().clamp(0, 10),
-        _rnd = random ?? Random();
+  }) : _banco = List.of(banco),
+       estimacion = declarado.toDouble().clamp(0, 10),
+       _rnd = random ?? Random();
 
   /// Generador con IA (opcional). Si falla o no existe, se usa el banco sembrado.
   final Future<PreguntaDiag?> Function(PeticionDiag peticion)? generador;
+
   /// Origen de la última pregunta: 'ia' o 'banco'.
   String origenActual = 'banco';
 
+  final bool personalizado;
+  final bool preferirBanco;
+  final List<String> sectores, objetivos;
+  static const recorrido = <(String, TipoDiag)>[
+    ('comprension', TipoDiag.contexto),
+    ('listening', TipoDiag.escucha),
+    ('gramatica', TipoDiag.completar),
+    ('vocabulario', TipoDiag.significado),
+    ('escritura', TipoDiag.escritura),
+    ('listening', TipoDiag.escucha),
+    ('gramatica', TipoDiag.ordenar),
+    ('comprension', TipoDiag.contexto),
+    ('listening', TipoDiag.escucha),
+    ('escritura', TipoDiag.escritura),
+  ];
   final int declarado;
   final List<PreguntaDiag> _banco;
   final int minPreguntas;
@@ -290,6 +427,19 @@ class Diagnostico {
   int get aciertos => respuestas.where((r) => r.correcta).length;
   int get nivelActual => estimacion.round().clamp(0, 10);
 
+  double estimacionParaSkill(String skill) {
+    var v = declarado.toDouble();
+    for (final r in respuestas.where(
+      (r) => r.pregunta.skill == skill && !r.pregunta.esEscritura,
+    )) {
+      v += r.correcta ? .5 : -.5;
+    }
+    return v.clamp(1, 10);
+  }
+
+  int nivelParaSkill(String skill) =>
+      estimacionParaSkill(skill).round().clamp(1, 10);
+
   Map<String, int> get _porSkill {
     final m = <String, int>{};
     for (final r in respuestas) {
@@ -298,7 +448,11 @@ class Diagnostico {
     return m;
   }
 
-  bool get _tocaEscritura => !escrituraHecha && estimacion >= 1.5 && (n >= 8 || _estable()) && _banco.any((q) => q.esEscritura);
+  bool get _tocaEscritura =>
+      !escrituraHecha &&
+      estimacion >= 1.5 &&
+      (n >= 8 || _estable()) &&
+      _banco.any((q) => q.esEscritura);
 
   Map<String, int> get _porTipo {
     final m = <String, int>{};
@@ -308,12 +462,15 @@ class Diagnostico {
     return m;
   }
 
-  bool get _terminaria => n >= maxPreguntas || (n >= minPreguntas && _estable() && (escrituraHecha || estimacion < 1.5));
+  bool get _terminaria =>
+      n >= maxPreguntas ||
+      (n >= minPreguntas && _estable() && (escrituraHecha || estimacion < 1.5));
 
   /// Competencia menos medida (sin contar la escritura) para la siguiente pregunta.
   String _siguienteSkill() {
     final conteo = _porSkill;
-    final skills = skillsDiag.keys.where((k) => k != 'escritura').toList()..shuffle(_rnd);
+    final skills = skillsDiag.keys.where((k) => k != 'escritura').toList()
+      ..shuffle(_rnd);
     skills.sort((a, b) => (conteo[a] ?? 0) - (conteo[b] ?? 0));
     return skills.first;
   }
@@ -321,9 +478,20 @@ class Diagnostico {
   /// Tipo menos usado de los que admite la competencia (variedad de formatos).
   TipoDiag _siguienteTipo(String skill, int nivel) {
     final conteo = _porTipo;
-    var tipos = [...(tiposPorSkill[skill] ?? [TipoDiag.eleccion])]..shuffle(_rnd);
+    var tipos = [
+      ...(tiposPorSkill[skill] ?? [TipoDiag.eleccion]),
+    ]..shuffle(_rnd);
     // En Fundamentos no se dicta: reconocer letras y palabras sueltas.
-    if (nivel == 0) tipos = tipos.where((t) => t != TipoDiag.dictado && t != TipoDiag.completar && t != TipoDiag.corta).toList();
+    if (nivel == 0) {
+      tipos = tipos
+          .where(
+            (t) =>
+                t != TipoDiag.dictado &&
+                t != TipoDiag.completar &&
+                t != TipoDiag.corta,
+          )
+          .toList();
+    }
     if (tipos.isEmpty) return TipoDiag.eleccion;
     tipos.sort((a, b) => (conteo[a.name] ?? 0) - (conteo[b.name] ?? 0));
     return tipos.first;
@@ -333,13 +501,73 @@ class Diagnostico {
     final out = <String>[];
     for (final s in skillsDiag.keys) {
       final rs = respuestas.where((r) => r.pregunta.skill == s).toList();
-      if (rs.length >= 2 && rs.where((r) => !r.correcta).length * 2 > rs.length) out.add(skillsDiag[s]!);
+      if (rs.length >= 2 &&
+          rs.where((r) => !r.correcta).length * 2 > rs.length) {
+        out.add(skillsDiag[s]!);
+      }
     }
     return out;
   }
 
   /// Siguiente pregunta pidiéndola a la IA (con el banco sembrado como respaldo). null si terminó.
   Future<PreguntaDiag?> siguienteAsync() async {
+    if (personalizado) {
+      if (n >= recorrido.length) {
+        terminado = true;
+        return null;
+      }
+      final (skill, tipo) = recorrido[n];
+      final peticion = PeticionDiag(
+        nivel: nivelParaSkill(skill),
+        skill: skill,
+        tipo: tipo,
+        evitar: [for (final r in respuestas) r.pregunta.texto],
+        declarado: declarado,
+        estimacion: estimacion,
+        aciertos: aciertos,
+        fallos: n - aciertos,
+        debilidades: _debilidadesActuales,
+      );
+      PreguntaDiag? p;
+      if (preferirBanco) {
+        final usadas = respuestas.map((r) => r.pregunta.texto).toSet();
+        final candidatas =
+            _banco
+                .where(
+                  (q) =>
+                      q.skill == skill &&
+                      q.tipo == tipo &&
+                      !usadas.contains(q.texto) &&
+                      !_usadas.contains(q.clave),
+                )
+                .toList()
+              ..shuffle(_rnd);
+        int prioridad(PreguntaDiag q) =>
+            (q.nivel - peticion.nivel).abs() * 10 -
+            (q.sectores.any(sectores.contains) ? 2 : 0) -
+            (q.objetivos.any(objetivos.contains) ? 1 : 0);
+        candidatas.sort((a, b) => prioridad(a).compareTo(prioridad(b)));
+        if (candidatas.isNotEmpty &&
+            (candidatas.first.nivel - peticion.nivel).abs() <= 1) {
+          p = candidatas.first;
+        }
+      }
+      origenActual = p == null ? 'ia' : 'banco';
+      p ??= await generador?.call(peticion);
+      if (p == null ||
+          p.tipo != tipo ||
+          p.skill != skill ||
+          p.texto.isEmpty ||
+          respuestas.any((r) => r.pregunta.clave == p!.clave) ||
+          _usadas.contains(p.clave)) {
+        throw StateError(
+          'No se pudo preparar una pregunta válida. Reintenta sin perder tu progreso.',
+        );
+      }
+      _usadas.add(p.clave);
+      actual = p.barajada(_rnd);
+      return actual;
+    }
     if (terminado || generador == null) return siguiente();
     if (_terminaria) {
       terminado = true;
@@ -355,9 +583,15 @@ class Diagnostico {
       tipo = _siguienteTipo(skill, nivelActual);
     }
     final peticion = PeticionDiag(
-      nivel: nivelActual, skill: skill, tipo: tipo,
+      nivel: nivelActual,
+      skill: skill,
+      tipo: tipo,
       evitar: [for (final r in respuestas) r.pregunta.texto],
-      declarado: declarado, estimacion: estimacion, aciertos: aciertos, fallos: n - aciertos, debilidades: _debilidadesActuales,
+      declarado: declarado,
+      estimacion: estimacion,
+      aciertos: aciertos,
+      fallos: n - aciertos,
+      debilidades: _debilidadesActuales,
     );
     PreguntaDiag? q;
     try {
@@ -383,13 +617,22 @@ class Diagnostico {
       terminado = true;
       return null;
     }
-    if (n >= minPreguntas && _estable() && (escrituraHecha || estimacion < 1.5 || !_banco.any((q) => q.esEscritura))) {
+    if (n >= minPreguntas &&
+        _estable() &&
+        (escrituraHecha ||
+            estimacion < 1.5 ||
+            !_banco.any((q) => q.esEscritura))) {
       terminado = true;
       return null;
     }
     PreguntaDiag? q;
     if (_tocaEscritura) {
-      q = _mejor(_banco.where((x) => x.esEscritura && !_usadas.contains(x.clave)).toList(), nivelActual);
+      q = _mejor(
+        _banco
+            .where((x) => x.esEscritura && !_usadas.contains(x.clave))
+            .toList(),
+        nivelActual,
+      );
     }
     q ??= _elegirObjetiva();
     if (q == null) {
@@ -405,7 +648,14 @@ class Diagnostico {
     final objetivo = nivelActual;
     final conteo = _porSkill;
     for (final distancia in [0, 1, 2, 3, 10]) {
-      final candidatas = _banco.where((x) => !x.esEscritura && !_usadas.contains(x.clave) && (x.nivel - objetivo).abs() <= distancia).toList();
+      final candidatas = _banco
+          .where(
+            (x) =>
+                !x.esEscritura &&
+                !_usadas.contains(x.clave) &&
+                (x.nivel - objetivo).abs() <= distancia,
+          )
+          .toList();
       if (candidatas.isEmpty) continue;
       // Competencia menos medida hasta ahora; entre iguales, la más cercana al objetivo; luego azar.
       candidatas.sort((a, b) {
@@ -417,7 +667,13 @@ class Diagnostico {
       });
       final menor = conteo[candidatas.first.skill] ?? 0;
       final menorDist = (candidatas.first.nivel - objetivo).abs();
-      final empate = candidatas.where((x) => (conteo[x.skill] ?? 0) == menor && (x.nivel - objetivo).abs() == menorDist).toList();
+      final empate = candidatas
+          .where(
+            (x) =>
+                (conteo[x.skill] ?? 0) == menor &&
+                (x.nivel - objetivo).abs() == menorDist,
+          )
+          .toList();
       return empate[_rnd.nextInt(empate.length)];
     }
     return null;
@@ -425,7 +681,9 @@ class Diagnostico {
 
   PreguntaDiag? _mejor(List<PreguntaDiag> lista, int objetivo) {
     if (lista.isEmpty) return null;
-    lista.sort((a, b) => (a.nivel - objetivo).abs() - (b.nivel - objetivo).abs());
+    lista.sort(
+      (a, b) => (a.nivel - objetivo).abs() - (b.nivel - objetivo).abs(),
+    );
     return lista.first;
   }
 
@@ -436,7 +694,12 @@ class Diagnostico {
     return ult.reduce(max) - ult.reduce(min) <= 0.5;
   }
 
-  static String _norm(String t) => soloNativo(t).toLowerCase().replaceAll(RegExp(r"[^\p{L}\p{N}\s']", unicode: true), '').replaceAll(RegExp(r'\s+'), ' ').trim();
+  static String _norm(String t) =>
+      soloNativo(t)
+          .toLowerCase()
+          .replaceAll(RegExp(r"[^\p{L}\p{N}\s']", unicode: true), '')
+          .replaceAll(RegExp(r'\s+'), ' ')
+          .trim();
 
   /// Comprueba una respuesta objetiva y actualiza la estimación.
   bool responder(String respuesta) {
@@ -448,17 +711,29 @@ class Diagnostico {
     } else if (q.tipo == TipoDiag.dictado) {
       // Dictado: se admite un pequeño margen (una palabra de cada cinco).
       final esperado = q.aceptadas.isEmpty ? q.texto : q.aceptadas.first;
-      ok = similitud(respuesta, esperado) >= 0.8 || q.aceptadas.any((a) => _norm(a) == _norm(respuesta));
+      ok =
+          similitud(respuesta, esperado) >= 0.8 ||
+          q.aceptadas.any((a) => _norm(a) == _norm(respuesta));
     } else {
       final r = _norm(respuesta);
       ok = q.aceptadas.any((a) => _norm(a) == r);
     }
-    respuestas.add(RespuestaDiag(pregunta: q, respuesta: respuesta, correcta: ok));
+    respuestas.add(
+      RespuestaDiag(pregunta: q, respuesta: respuesta, correcta: ok),
+    );
     _ajustar(q, ok);
     return ok;
   }
 
   void _ajustar(PreguntaDiag q, bool ok) {
+    if (personalizado) {
+      const skills = ['comprension', 'listening', 'gramatica', 'vocabulario'];
+      estimacion =
+          skills.map(estimacionParaSkill).reduce((a, b) => a + b) /
+          skills.length;
+      _historial.add(estimacion);
+      return;
+    }
     double delta;
     if (ok) {
       delta = q.nivel > estimacion + 0.5 ? 0.75 : 0.5;
@@ -466,7 +741,9 @@ class Diagnostico {
       delta = q.nivel < estimacion - 0.5 ? -0.75 : -0.5;
       // Fallos concentrados en una sola competencia con buen rendimiento general:
       // se anota la debilidad, pero no baja el nivel global tanto.
-      final fallosSkill = respuestas.where((r) => !r.correcta && r.pregunta.skill == q.skill).length;
+      final fallosSkill = respuestas
+          .where((r) => !r.correcta && r.pregunta.skill == q.skill)
+          .length;
       final precision = respuestas.isEmpty ? 0.0 : aciertos / respuestas.length;
       if (fallosSkill >= 2 && precision >= 0.6) delta = -0.25;
     }
@@ -480,19 +757,43 @@ class Diagnostico {
     if (q == null) return;
     escrituraHecha = true;
     _escritura = e;
-    respuestas.add(RespuestaDiag(pregunta: q, respuesta: texto, correcta: e.puntuacion >= estimacion - 0.5, puntuacion: e.puntuacion));
-    // La producción libre pesa más que una pregunta de opción: media ponderada.
-    final nueva = (estimacion * 2 + e.puntuacion) / 3;
-    estimacion = (estimacion + (nueva - estimacion).clamp(-1.0, 1.0)).clamp(0.0, 10.0);
+    _erroresEscritura.addAll(e.errores);
+    respuestas.add(
+      RespuestaDiag(
+        pregunta: q,
+        respuesta: texto,
+        correcta: e.puntuacion >= estimacion - 0.5,
+        puntuacion: e.puntuacion,
+      ),
+    );
+    // La escritura se combina una sola vez, al producir el resultado final.
     _historial.add(estimacion);
   }
 
   EvaluacionEscritura? _escritura;
+  final _erroresEscritura = <String>{};
+
+  double? get mediaEscritura {
+    final valores = respuestas
+        .where((r) => r.pregunta.esEscritura && r.puntuacion != null)
+        .map((r) => r.puntuacion!)
+        .toList();
+    return valores.isEmpty
+        ? null
+        : valores.reduce((a, b) => a + b) / valores.length;
+  }
 
   /// Evaluación local de respaldo cuando la IA no está disponible.
   static EvaluacionEscritura evaluarLocal(String texto, double estimacion) {
-    final palabras = texto.trim().split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
-    final frases = texto.split(RegExp(r'[.!?。！？]+')).where((f) => f.trim().isNotEmpty).length;
+    final palabras = texto
+        .trim()
+        .split(RegExp(r'\s+'))
+        .where((w) => w.isNotEmpty)
+        .toList();
+    final frases = texto
+        .split(RegExp(r'[.!?。！？]+'))
+        .where((f) => f.trim().isNotEmpty)
+        .length;
     final largas = palabras.where((w) => w.length >= 7).length;
     var p = estimacion;
     if (palabras.length < 8) p -= 1.5;
@@ -501,7 +802,9 @@ class Diagnostico {
     if (largas >= 4) p += 0.25;
     return EvaluacionEscritura(
       puntuacion: p.clamp(1, 10),
-      comentario: palabras.length < 8 ? 'Texto muy corto: escribe al menos 3 frases para medir mejor tu escritura.' : 'Evaluación aproximada sin IA: cuenta de frases y vocabulario.',
+      comentario: palabras.length < 8
+          ? 'Texto muy corto: escribe al menos 3 frases para medir mejor tu escritura.'
+          : 'Evaluación aproximada sin IA: cuenta de frases y vocabulario.',
       porIa: false,
     );
   }
@@ -509,8 +812,8 @@ class Diagnostico {
   /// Nivel final: la producción escrita pesa un 35 % cuando existe, porque
   /// reconocer una respuesta entre cuatro no demuestra lo mismo que producir el idioma.
   double get nivelFinal {
-    final e = _escritura;
-    final v = e == null ? estimacion : estimacion * 0.65 + e.puntuacion * 0.35;
+    final e = mediaEscritura;
+    final v = e == null ? estimacion : estimacion * 0.65 + e * 0.35;
     return (v.clamp(0.0, 10.0) * 2).round() / 2;
   }
 
@@ -522,24 +825,46 @@ class Diagnostico {
       final rs = respuestas.where((r) => r.pregunta.skill == s).toList();
       if (rs.isEmpty) continue;
       if (s == 'escritura') {
-        skills[s] = ((rs.first.puntuacion ?? estimacion) * 2).round() / 2;
+        skills[s] = ((mediaEscritura ?? estimacion) * 2).round() / 2;
+        continue;
+      }
+      if (personalizado) {
+        skills[s] = estimacionParaSkill(s);
         continue;
       }
       final prec = rs.where((r) => r.correcta).length / rs.length;
-      final nivelMedio = rs.map((r) => r.pregunta.nivel).reduce((a, b) => a + b) / rs.length;
+      final nivelMedio =
+          rs.map((r) => r.pregunta.nivel).reduce((a, b) => a + b) / rs.length;
       final v = (nivelMedio + (prec - 0.5) * 3).clamp(1.0, 10.0);
       skills[s] = (v * 2).round() / 2;
     }
-    final fortalezas = [for (final e in skills.entries) if (e.value >= nivel + 0.5) skillsDiag[e.key]!];
-    final debilidades = [for (final e in skills.entries) if (e.value <= nivel - 0.5) skillsDiag[e.key]!];
+    final fortalezas = [
+      for (final e in skills.entries)
+        if (e.value >= nivel + 0.5) skillsDiag[e.key]!,
+    ];
+    final debilidades = [
+      for (final e in skills.entries)
+        if (e.value <= nivel - 0.5) skillsDiag[e.key]!,
+    ];
     final temasFallados = <String, int>{};
-    for (final r in respuestas.where((r) => !r.correcta && !r.pregunta.esEscritura)) {
-      temasFallados[r.pregunta.tema] = (temasFallados[r.pregunta.tema] ?? 0) + 1;
+    for (final r in respuestas.where(
+      (r) => !r.correcta && !r.pregunta.esEscritura,
+    )) {
+      temasFallados[r.pregunta.tema] =
+          (temasFallados[r.pregunta.tema] ?? 0) + 1;
     }
-    final recurrentes = [for (final e in temasFallados.entries) if (e.value >= 2) e.key];
-    final refuerzo = <String>{...temasFallados.keys, ...?_escritura?.errores}.toList();
+    final recurrentes = [
+      for (final e in temasFallados.entries)
+        if (e.value >= 2) e.key,
+    ];
+    final refuerzo = <String>{
+      ...temasFallados.keys,
+      ..._erroresEscritura,
+    }.toList();
     final recomendado = nivel < 1 ? 0 : nivel.round().clamp(1, 10);
-    final confianza = (0.4 + n * 0.03 + (escrituraHecha ? 0.15 : 0) - (_estable() ? 0 : 0.1)).clamp(0.3, 0.95);
+    final confianza =
+        (0.4 + n * 0.03 + (escrituraHecha ? 0.15 : 0) - (_estable() ? 0 : 0.1))
+            .clamp(0.3, 0.95);
     return ResultadoDiag(
       declarado: declarado,
       nivel: nivel,
@@ -553,7 +878,16 @@ class Diagnostico {
       recurrentes: recurrentes,
       refuerzo: refuerzo,
       recomendado: recomendado,
-      plan: planDe(recomendado, refuerzo),
+      plan: personalizado
+          ? [
+              for (final s
+                  in (skills.entries.toList()
+                        ..sort((a, b) => a.value.compareTo(b.value)))
+                      .take(3))
+                'Biblioteca · ${skillsDiag[s.key]}: práctica al nivel ${s.value.round().clamp(1, 10)}, con explicación y ejemplos nuevos.',
+              'Tutor con IA: aplica lo que necesitas reforzar a tus objetivos.',
+            ]
+          : planDe(recomendado, refuerzo),
       escritura: _escritura,
     );
   }
@@ -562,19 +896,26 @@ class Diagnostico {
   static List<String> planDe(int recomendado, List<String> refuerzo) {
     final plan = <String>[];
     if (recomendado == 0) {
-      plan.add('Fundamentos: letras y sonidos, números, colores y palabras básicas');
+      plan.add(
+        'Fundamentos: letras y sonidos, números, colores y palabras básicas',
+      );
       plan.add('Después, Nivel 1 desde la unidad 1');
       return plan;
     }
     final niveles = {recomendado, if (recomendado > 1) recomendado - 1};
     for (final tema in refuerzo) {
-      final claves = tema.toLowerCase().split(RegExp(r'[\s/,]+')).where((w) => w.length > 3).toList();
+      final claves = tema
+          .toLowerCase()
+          .split(RegExp(r'[\s/,]+'))
+          .where((w) => w.length > 3)
+          .toList();
       String? hallado;
       for (final nv in niveles) {
         for (final u in unidadesDe(nv)) {
           final titulo = u.titulo.toLowerCase();
           if (claves.any((c) => titulo.contains(c))) {
-            hallado = 'Nivel $nv · Unidad ${u.numero}: ${u.titulo} (refuerza: $tema)';
+            hallado =
+                'Nivel $nv · Unidad ${u.numero}: ${u.titulo} (refuerza: $tema)';
             break;
           }
         }
@@ -583,7 +924,11 @@ class Diagnostico {
       plan.add(hallado ?? 'Refuerzo con la IA: $tema');
       if (plan.length >= 6) break;
     }
-    if (plan.isEmpty) plan.add('Empieza el Nivel $recomendado desde la unidad 1: no se detectaron debilidades claras');
+    if (plan.isEmpty) {
+      plan.add(
+        'Empieza el Nivel $recomendado desde la unidad 1: no se detectaron debilidades claras',
+      );
+    }
     return plan;
   }
 }

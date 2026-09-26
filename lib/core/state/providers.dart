@@ -10,7 +10,9 @@ import '../content/curriculum.dart';
 import '../models/models.dart';
 
 /// Se inyecta en `main` con `overrideWithValue`.
-final prefsProvider = Provider<SharedPreferences>((_) => throw UnimplementedError());
+final prefsProvider = Provider<SharedPreferences>(
+  (_) => throw UnimplementedError(),
+);
 
 /// Todo el estado del estudiante. En fase 2 vive en el servidor; aquí se
 /// persiste en el dispositivo para que la demo funcione sin backend.
@@ -18,7 +20,9 @@ final prefsProvider = Provider<SharedPreferences>((_) => throw UnimplementedErro
 String nombreLimpio(String nombre, {String? email}) {
   var n = nombre.trim();
   if (n.contains('@')) n = n.split('@').first;
-  if (n.isEmpty && email != null && email.contains('@')) n = email.split('@').first;
+  if (n.isEmpty && email != null && email.contains('@')) {
+    n = email.split('@').first;
+  }
   if (n.isEmpty) return 'Alumno';
   return n[0].toUpperCase() + n.substring(1);
 }
@@ -37,6 +41,9 @@ class ProgressState {
     this.nivelInicial = 1,
     this.fundamentos = false,
     this.diagnostico,
+    this.practicas = const {},
+    this.sectores = const [],
+    this.objetivos = const [],
     this.completadas = const {},
     this.puntuaciones = const {},
     this.examenes = const {},
@@ -44,6 +51,7 @@ class ProgressState {
     this.xp = 0,
     this.racha = 0,
     this.ultimoDia = '',
+    this.diasActividad = const {},
     this.segundosEstudio = 0,
     this.trialInicio,
     this.trialSegundos = 0,
@@ -57,22 +65,39 @@ class ProgressState {
   final String idiomaNativo;
   final String idiomaMeta;
   final int nivelInicial;
+
   /// Recomendado por la prueba de nivel: empezar por el Nivel 0 (Fundamentos).
   final bool fundamentos;
+
   /// Resultado del diagnóstico adaptativo (nivel, competencias, refuerzo, plan).
   final Map<String, dynamic>? diagnostico;
+  final Map<String, dynamic> practicas;
+  final List<String> sectores, objetivos;
   final Set<String> completadas; // ids de lección
   final Map<String, int> puntuaciones; // id → % aciertos
-  final Map<int, int> examenes; // nivel → % (último intento)
+  final Map<int, int> examenes; // nivel → mejor resultado; conserva logros
   final List<Mistake> errores;
   final int xp;
   final int racha;
   final String ultimoDia; // yyyy-mm-dd
+  final Set<String> diasActividad; // días reales observados, yyyy-mm-dd
   final int segundosEstudio;
   final DateTime? trialInicio;
   final int trialSegundos;
   final String tutorId;
   final String planId;
+
+  /// Ayer sigue vigente: todavía se puede estudiar hoy. No inventa historial.
+  int get rachaVigente => rachaEn(DateTime.now());
+
+  int rachaEn(DateTime fecha) {
+    final ultima = DateTime.tryParse(ultimoDia);
+    if (ultima == null || racha < 1) return 0;
+    final hoy = DateTime.utc(fecha.year, fecha.month, fecha.day);
+    final dia = DateTime.utc(ultima.year, ultima.month, ultima.day);
+    final diferencia = hoy.difference(dia).inDays;
+    return diferencia == 0 || diferencia == 1 ? racha : 0;
+  }
 
   // ---- Reglas de desbloqueo (ARQUITECTURA §3) ----
 
@@ -86,7 +111,10 @@ class ProgressState {
   }
 
   /// Fundamentos pendientes: recomendados y sin terminar.
-  bool get fundamentosPendientes => fundamentos && leccionesDe(0).isNotEmpty && completadasEnNivel(0) < totalLeccionesDe(0);
+  bool get fundamentosPendientes =>
+      fundamentos &&
+      leccionesDe(0).isNotEmpty &&
+      completadasEnNivel(0) < totalLeccionesDe(0);
 
   int get nivelActual {
     if (fundamentosPendientes) return 0;
@@ -113,7 +141,9 @@ class ProgressState {
     if (desbloquearTodo) return LessonState.actual;
     if (l.numero == 1) return LessonState.actual;
     final anterior = 'L${l.nivel}-${(l.numero - 1).toString().padLeft(3, '0')}';
-    return completadas.contains(anterior) ? LessonState.actual : LessonState.bloqueada;
+    return completadas.contains(anterior)
+        ? LessonState.actual
+        : LessonState.bloqueada;
   }
 
   Lesson? leccionActual(int n) {
@@ -127,10 +157,14 @@ class ProgressState {
 
   int get trialRestante {
     if (planId.isNotEmpty) return segundosPruebaGratis;
-    return (segundosPruebaGratis - trialSegundos).clamp(0, segundosPruebaGratis);
+    return (segundosPruebaGratis - trialSegundos).clamp(
+      0,
+      segundosPruebaGratis,
+    );
   }
 
-  bool get trialAgotado => planId.isEmpty && trialInicio != null && trialRestante == 0;
+  bool get trialAgotado =>
+      planId.isEmpty && trialInicio != null && trialRestante == 0;
 
   Map<Skill, int> get porHabilidad {
     final m = <Skill, int>{for (final s in Skill.values) s: 0};
@@ -150,7 +184,9 @@ class ProgressState {
       final l = leccionPorId(id);
       if (l == null) continue;
       n += l.steps.where((s) => s.type == StepType.flashcard).length;
-      n += l.steps.where((s) => s.type == StepType.matchPairs).fold(0, (a, s) => a + s.pairs.length);
+      n += l.steps
+          .where((s) => s.type == StepType.matchPairs)
+          .fold(0, (a, s) => a + s.pairs.length);
     }
     return n;
   }
@@ -164,6 +200,9 @@ class ProgressState {
     int? nivelInicial,
     bool? fundamentos,
     Map<String, dynamic>? diagnostico,
+    Map<String, dynamic>? practicas,
+    List<String>? sectores,
+    List<String>? objetivos,
     Set<String>? completadas,
     Map<String, int>? puntuaciones,
     Map<int, int>? examenes,
@@ -171,83 +210,103 @@ class ProgressState {
     int? xp,
     int? racha,
     String? ultimoDia,
+    Set<String>? diasActividad,
     int? segundosEstudio,
     DateTime? trialInicio,
     int? trialSegundos,
     String? tutorId,
     String? planId,
-  }) =>
-      ProgressState(
-        onboardingDone: onboardingDone ?? this.onboardingDone,
-        nombre: nombre ?? this.nombre,
-        email: email ?? this.email,
-        idiomaNativo: idiomaNativo ?? this.idiomaNativo,
-        idiomaMeta: idiomaMeta ?? this.idiomaMeta,
-        nivelInicial: nivelInicial ?? this.nivelInicial,
-        fundamentos: fundamentos ?? this.fundamentos,
-        diagnostico: diagnostico ?? this.diagnostico,
-        completadas: completadas ?? this.completadas,
-        puntuaciones: puntuaciones ?? this.puntuaciones,
-        examenes: examenes ?? this.examenes,
-        errores: errores ?? this.errores,
-        xp: xp ?? this.xp,
-        racha: racha ?? this.racha,
-        ultimoDia: ultimoDia ?? this.ultimoDia,
-        segundosEstudio: segundosEstudio ?? this.segundosEstudio,
-        trialInicio: trialInicio ?? this.trialInicio,
-        trialSegundos: trialSegundos ?? this.trialSegundos,
-        tutorId: tutorId ?? this.tutorId,
-        planId: planId ?? this.planId,
-      );
+  }) => ProgressState(
+    onboardingDone: onboardingDone ?? this.onboardingDone,
+    nombre: nombre ?? this.nombre,
+    email: email ?? this.email,
+    idiomaNativo: idiomaNativo ?? this.idiomaNativo,
+    idiomaMeta: idiomaMeta ?? this.idiomaMeta,
+    nivelInicial: nivelInicial ?? this.nivelInicial,
+    fundamentos: fundamentos ?? this.fundamentos,
+    diagnostico: diagnostico ?? this.diagnostico,
+    practicas: practicas ?? this.practicas,
+    sectores: sectores ?? this.sectores,
+    objetivos: objetivos ?? this.objetivos,
+    completadas: completadas ?? this.completadas,
+    puntuaciones: puntuaciones ?? this.puntuaciones,
+    examenes: examenes ?? this.examenes,
+    errores: errores ?? this.errores,
+    xp: xp ?? this.xp,
+    racha: racha ?? this.racha,
+    ultimoDia: ultimoDia ?? this.ultimoDia,
+    diasActividad: diasActividad ?? this.diasActividad,
+    segundosEstudio: segundosEstudio ?? this.segundosEstudio,
+    trialInicio: trialInicio ?? this.trialInicio,
+    trialSegundos: trialSegundos ?? this.trialSegundos,
+    tutorId: tutorId ?? this.tutorId,
+    planId: planId ?? this.planId,
+  );
 
   Map<String, dynamic> toJson() => {
-        'onboardingDone': onboardingDone,
-        'nombre': nombre,
-        'email': email,
-        'idiomaNativo': idiomaNativo,
-        'idiomaMeta': idiomaMeta,
-        'nivelInicial': nivelInicial,
-        'fundamentos': fundamentos,
-        if (diagnostico != null) 'diagnostico': diagnostico,
-        'completadas': completadas.toList(),
-        'puntuaciones': puntuaciones,
-        'examenes': examenes.map((k, v) => MapEntry(k.toString(), v)),
-        'errores': errores.map((e) => e.toJson()).toList(),
-        'xp': xp,
-        'racha': racha,
-        'ultimoDia': ultimoDia,
-        'segundosEstudio': segundosEstudio,
-        'trialInicio': trialInicio?.toIso8601String(),
-        'trialSegundos': trialSegundos,
-        'tutorId': tutorId,
-        'planId': planId,
-      };
+    'onboardingDone': onboardingDone,
+    'nombre': nombre,
+    'email': email,
+    'idiomaNativo': idiomaNativo,
+    'idiomaMeta': idiomaMeta,
+    'nivelInicial': nivelInicial,
+    'fundamentos': fundamentos,
+    'practicas': practicas,
+    'sectores': sectores,
+    'objetivos': objetivos,
+    if (diagnostico != null) 'diagnostico': diagnostico,
+    'completadas': completadas.toList(),
+    'puntuaciones': puntuaciones,
+    'examenes': examenes.map((k, v) => MapEntry(k.toString(), v)),
+    'errores': errores.map((e) => e.toJson()).toList(),
+    'xp': xp,
+    'racha': racha,
+    'ultimoDia': ultimoDia,
+    'diasActividad': diasActividad.toList()..sort(),
+    'segundosEstudio': segundosEstudio,
+    'trialInicio': trialInicio?.toIso8601String(),
+    'trialSegundos': trialSegundos,
+    'tutorId': tutorId,
+    'planId': planId,
+  };
 
   static ProgressState fromJson(Map<String, dynamic> j) => ProgressState(
-        onboardingDone: j['onboardingDone'] as bool? ?? false,
-        nombre: j['nombre'] as String? ?? 'Bryan',
-        email: j['email'] as String? ?? '',
-        idiomaNativo: j['idiomaNativo'] as String? ?? 'es',
-        idiomaMeta: j['idiomaMeta'] as String? ?? 'en',
-        nivelInicial: j['nivelInicial'] as int? ?? 1,
-        fundamentos: j['fundamentos'] as bool? ?? false,
-        diagnostico: (j['diagnostico'] as Map?)?.cast<String, dynamic>(),
-        completadas: ((j['completadas'] as List?) ?? []).cast<String>().toSet(),
-        puntuaciones: ((j['puntuaciones'] as Map?) ?? {}).cast<String, int>(),
-        examenes: ((j['examenes'] as Map?) ?? {})
-            .map((k, v) => MapEntry(int.parse(k as String), v as int)),
-        errores: ((j['errores'] as List?) ?? [])
-            .map((e) => Mistake.fromJson((e as Map).cast<String, dynamic>()))
-            .toList(),
-        xp: j['xp'] as int? ?? 0,
-        racha: j['racha'] as int? ?? 0,
-        ultimoDia: j['ultimoDia'] as String? ?? '',
-        segundosEstudio: j['segundosEstudio'] as int? ?? 0,
-        trialInicio: j['trialInicio'] == null ? null : DateTime.parse(j['trialInicio'] as String),
-        trialSegundos: j['trialSegundos'] as int? ?? 0,
-        tutorId: j['tutorId'] as String? ?? 'mia',
-        planId: j['planId'] as String? ?? '',
-      );
+    onboardingDone: j['onboardingDone'] as bool? ?? false,
+    nombre: j['nombre'] as String? ?? 'Bryan',
+    email: j['email'] as String? ?? '',
+    idiomaNativo: j['idiomaNativo'] as String? ?? 'es',
+    idiomaMeta: j['idiomaMeta'] as String? ?? 'en',
+    nivelInicial: j['nivelInicial'] as int? ?? 1,
+    fundamentos: j['fundamentos'] as bool? ?? false,
+    diagnostico: (j['diagnostico'] as Map?)?.cast<String, dynamic>(),
+    practicas: (j['practicas'] as Map?)?.cast<String, dynamic>() ?? {},
+    sectores: ((j['sectores'] as List?) ?? []).whereType<String>().toList(),
+    objetivos: ((j['objetivos'] as List?) ?? []).whereType<String>().toList(),
+    completadas: ((j['completadas'] as List?) ?? []).cast<String>().toSet(),
+    puntuaciones: ((j['puntuaciones'] as Map?) ?? {}).cast<String, int>(),
+    examenes: ((j['examenes'] as Map?) ?? {}).map(
+      (k, v) => MapEntry(int.parse(k as String), v as int),
+    ),
+    errores: ((j['errores'] as List?) ?? [])
+        .map((e) => Mistake.fromJson((e as Map).cast<String, dynamic>()))
+        .toList(),
+    xp: j['xp'] as int? ?? 0,
+    racha: j['racha'] as int? ?? 0,
+    ultimoDia: j['ultimoDia'] as String? ?? '',
+    diasActividad: j['diasActividad'] is List
+        ? (j['diasActividad'] as List).whereType<String>().toSet()
+        : {
+            if ((j['ultimoDia'] as String? ?? '').isNotEmpty)
+              j['ultimoDia'] as String,
+          },
+    segundosEstudio: j['segundosEstudio'] as int? ?? 0,
+    trialInicio: j['trialInicio'] == null
+        ? null
+        : DateTime.parse(j['trialInicio'] as String),
+    trialSegundos: j['trialSegundos'] as int? ?? 0,
+    tutorId: j['tutorId'] as String? ?? 'mia',
+    planId: j['planId'] as String? ?? '',
+  );
 }
 
 class ProgressNotifier extends StateNotifier<ProgressState> {
@@ -260,7 +319,9 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     final raw = p.getString(_key);
     if (raw == null) return const ProgressState();
     try {
-      final st = ProgressState.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      final st = ProgressState.fromJson(
+        jsonDecode(raw) as Map<String, dynamic>,
+      );
       idiomaContenido = st.idiomaMeta;
       ContenidoJson.precargar(st.idiomaMeta);
       return st;
@@ -291,8 +352,13 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     Map<String, dynamic>? diagnostico,
     String email = '',
     String password = '',
+    List<String> sectores = const [],
+    List<String> objetivos = const [],
+    bool sesionPreparada = false,
   }) {
-    final correo = email.trim().isEmpty ? '${nombre.trim().toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '.')}@onelingo.demo' : email.trim().toLowerCase();
+    final correo = email.trim().isEmpty
+        ? '${nombre.trim().toLowerCase().replaceAll(RegExp(r'[^a-z0-9]+'), '.')}@onelingo.demo'
+        : email.trim().toLowerCase();
     final nuevo = state.copyWith(
       onboardingDone: true,
       nombre: nombreLimpio(nombre, email: correo),
@@ -302,22 +368,57 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
       nivelInicial: nivelInicial,
       fundamentos: fundamentos,
       diagnostico: diagnostico,
+      sectores: sectores,
+      objetivos: objetivos,
       trialInicio: state.trialInicio ?? DateTime.now(),
     );
-    final registro = password.trim().length >= 6 && email.trim().isNotEmpty
-        ? Sync.instancia.registrarConPassword(email: correo, password: password, nombre: nombre, idiomaNativo: idiomaNativo, idiomaMeta: idiomaMeta, nivelInicial: nivelInicial)
-        : Sync.instancia.registrar(email: correo, nombre: nombre, idiomaNativo: idiomaNativo, idiomaMeta: idiomaMeta, nivelInicial: nivelInicial);
+    final registro = sesionPreparada
+        ? Future.value(true)
+        : password.trim().length >= 6 && email.trim().isNotEmpty
+        ? Sync.instancia.registrarConPassword(
+            email: correo,
+            password: password,
+            nombre: nombre,
+            idiomaNativo: idiomaNativo,
+            idiomaMeta: idiomaMeta,
+            nivelInicial: nivelInicial,
+          )
+        : Sync.instancia.registrar(
+            email: correo,
+            nombre: nombre,
+            idiomaNativo: idiomaNativo,
+            idiomaMeta: idiomaMeta,
+            nivelInicial: nivelInicial,
+          );
     registro.then((_) => Sync.instancia.subir(nuevo.toJson()));
     _save(nuevo);
   }
 
   /// Tras iniciar sesión real: usa el progreso del servidor si existe; si no, crea el estado inicial.
-  void iniciarSesionReal({required String email, required String nombre, Map<String, dynamic>? estadoServidor, String idiomaNativo = 'es', String idiomaMeta = 'en', int nivelInicial = 1}) {
-    if (estadoServidor != null && (estadoServidor['onboardingDone'] as bool? ?? false)) {
+  void iniciarSesionReal({
+    required String email,
+    required String nombre,
+    Map<String, dynamic>? estadoServidor,
+    String idiomaNativo = 'es',
+    String idiomaMeta = 'en',
+    int nivelInicial = 1,
+  }) {
+    if (estadoServidor != null &&
+        (estadoServidor['onboardingDone'] as bool? ?? false)) {
       _save(ProgressState.fromJson(estadoServidor).copyWith(email: email));
       return;
     }
-    _save(ProgressState(onboardingDone: true, nombre: nombreLimpio(nombre, email: email), email: email, idiomaNativo: idiomaNativo, idiomaMeta: idiomaMeta, nivelInicial: nivelInicial, trialInicio: DateTime.now()));
+    _save(
+      ProgressState(
+        onboardingDone: true,
+        nombre: nombreLimpio(nombre, email: email),
+        email: email,
+        idiomaNativo: idiomaNativo,
+        idiomaMeta: idiomaMeta,
+        nivelInicial: nivelInicial,
+        trialInicio: DateTime.now(),
+      ),
+    );
   }
 
   /// Carga un estado completo (usuarios de prueba / sesión del servidor en fase 2).
@@ -326,10 +427,111 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     final st = s.copyWith(email: correo);
     if (correo.isNotEmpty) {
       Sync.instancia
-          .login(email: correo, nombre: st.nombre, idiomaNativo: st.idiomaNativo, idiomaMeta: st.idiomaMeta, nivelInicial: st.nivelInicial)
+          .login(
+            email: correo,
+            nombre: st.nombre,
+            idiomaNativo: st.idiomaNativo,
+            idiomaMeta: st.idiomaMeta,
+            nivelInicial: st.nivelInicial,
+          )
           .then((_) => Sync.instancia.subir(st.toJson()));
     }
     _save(st);
+  }
+
+  void guardarPerfil(List<String> sectores, List<String> objetivos) =>
+      _save(state.copyWith(sectores: sectores, objetivos: objetivos));
+
+  void guardarDiagnostico(Map<String, dynamic> resultado, int nivel) => _save(
+    state.copyWith(
+      diagnostico: resultado,
+      nivelInicial: resultado['idioma'] == state.idiomaMeta
+          ? nivel.clamp(1, 10)
+          : state.nivelInicial,
+      fundamentos: resultado['idioma'] == state.idiomaMeta
+          ? nivel == 0
+          : state.fundamentos,
+    ),
+  );
+
+  void registrarPractica(String id, Map<String, dynamic> evidencia) {
+    final anterior = state.practicas[id] as Map?;
+    final intentos = (anterior?['intentos'] as int? ?? 0) + 1;
+    final fecha = DateTime.now().toIso8601String();
+    final skill = evidencia['skill'] ?? evidencia['habilidad'];
+    // Si el registro antiguo ya se repitió, su primera respuesta es desconocida.
+    final primeraCorrecta = anterior == null
+        ? evidencia['correcta']
+        : anterior['primeraCorrecta'] ??
+              (anterior['intentos'] == 1 ? anterior['correcta'] : null);
+    final primeraFecha = anterior == null
+        ? fecha
+        : anterior['primeraFecha'] ??
+              (anterior['intentos'] == 1 ? anterior['fecha'] : null);
+    _save(
+      _conActividad(
+        state.copyWith(
+          practicas: {
+            ...state.practicas,
+            id: {
+              ...evidencia,
+              'skill': ?skill,
+              'primeraCorrecta': ?primeraCorrecta,
+              'primeraFecha': ?primeraFecha,
+              if (evidencia['situacionId'] != null)
+                'historial': [
+                  ...((anterior?['historial'] as List?) ?? []).skip(
+                    ((anterior?['historial'] as List?)?.length ?? 0) > 4
+                        ? ((anterior?['historial'] as List).length - 4)
+                        : 0,
+                  ),
+                  if (anterior != null)
+                    {
+                      'fecha': anterior['fecha'],
+                      'correcta': anterior['correcta'],
+                    },
+                ],
+              'intentos': intentos,
+              'fecha': fecha,
+            },
+          },
+        ),
+        anterior == null ? 5 : 0,
+      ),
+    );
+  }
+
+  /// Last turn and bounded correction evidence; does not award mastery or XP.
+  void guardarTurnoSituacion(
+    int id,
+    String objetivo,
+    Map<String, dynamic> evidencia,
+  ) {
+    final key = 'situacion-${state.idiomaMeta}-$id-$objetivo';
+    final anterior = state.practicas[key] as Map?;
+    final historial = [
+      ...?anterior?['historial'] as List?,
+      if (anterior != null)
+        {'fecha': anterior['fecha'], 'feedback': anterior['feedback']},
+    ];
+    _save(
+      state.copyWith(
+        practicas: {
+          ...state.practicas,
+          key: {
+            ...evidencia,
+            'idioma': state.idiomaMeta,
+            'situacionId': id,
+            'objetivoId': objetivo,
+            'tipo': 'conversacion',
+            'fecha': DateTime.now().toIso8601String(),
+            'historial': historial
+                .skip(historial.length > 5 ? historial.length - 5 : 0)
+                .toList(),
+          },
+        },
+      ),
+    );
   }
 
   void elegirTutor(String id) => _save(state.copyWith(tutorId: id));
@@ -341,28 +543,67 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     final hoy = _hoy();
     var racha = s.racha;
     if (s.ultimoDia != hoy) {
-      final ayer = DateTime.now().subtract(const Duration(days: 1));
-      final ayerStr =
-          '${ayer.year}-${ayer.month.toString().padLeft(2, '0')}-${ayer.day.toString().padLeft(2, '0')}';
-      racha = (s.ultimoDia == ayerStr) ? racha + 1 : 1;
+      racha = s.rachaVigente + 1;
     }
-    return s.copyWith(xp: s.xp + xpGanado, racha: racha, ultimoDia: hoy);
+    return s.copyWith(
+      xp: s.xp + xpGanado,
+      racha: racha,
+      ultimoDia: hoy,
+      diasActividad: {
+        ...s.diasActividad,
+        if (s.ultimoDia.isNotEmpty) s.ultimoDia,
+        hoy,
+      },
+    );
   }
 
   void completarLeccion(Lesson l, {required int aciertos, required int total}) {
-    Sync.instancia.evento('leccion_completada', {'leccion': l.id, 'aciertos': aciertos, 'total': total});
+    Sync.instancia.evento('leccion_completada', {
+      'leccion': l.id,
+      'aciertos': aciertos,
+      'total': total,
+    });
     final pct = total == 0 ? 100 : (aciertos * 100 / total).round();
-    final s = _conActividad(state, l.xp + (pct == 100 ? 5 : 0));
-    _save(s.copyWith(
-      completadas: {...s.completadas, l.id},
-      puntuaciones: {...s.puntuaciones, l.id: pct},
-    ));
+    // Completar conserva su significado de participación; no demuestra dominio.
+    final s = _conActividad(
+      state,
+      state.completadas.contains(l.id) ? 0 : l.xp + (pct == 100 ? 5 : 0),
+    );
+    _save(
+      s.copyWith(
+        completadas: {...s.completadas, l.id},
+        puntuaciones: {
+          ...s.puntuaciones,
+          l.id: pct > (s.puntuaciones[l.id] ?? 0)
+              ? pct
+              : (s.puntuaciones[l.id] ?? 0),
+        },
+      ),
+    );
   }
 
   void registrarExamen(int nivel, int pct) {
     Sync.instancia.evento('examen', {'nivel': nivel, 'pct': pct});
-    final s = _conActividad(state, pct >= Level.minimoAprobacion ? 200 : 20);
-    _save(s.copyWith(examenes: {...s.examenes, nivel: pct}));
+    final anterior = state.examenes[nivel];
+    final primeraAprobacion =
+        pct >= Level.minimoAprobacion &&
+        (anterior == null || anterior < Level.minimoAprobacion);
+    final s = _conActividad(
+      state,
+      primeraAprobacion
+          ? 200
+          : anterior == null
+          ? 20
+          : 0,
+    );
+    _save(
+      s.copyWith(
+        examenes: {
+          ...s.examenes,
+          nivel: anterior == null || pct > anterior ? pct : anterior,
+        },
+      ),
+    );
   }
 
   void agregarError({
@@ -385,17 +626,26 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
   }
 
   void marcarErrorPracticado(String id) {
-    _save(state.copyWith(
-      errores: [for (final e in state.errores) e.id == id ? e.copyWith(practicado: true) : e],
-    ));
+    _save(
+      state.copyWith(
+        errores: [
+          for (final e in state.errores)
+            e.id == id ? e.copyWith(practicado: true) : e,
+        ],
+      ),
+    );
   }
 
   /// Latido de uso: la app lo llama cada 30 s en primer plano.
   void sumarSegundos(int seg) {
-    _save(state.copyWith(
-      segundosEstudio: state.segundosEstudio + seg,
-      trialSegundos: state.planId.isEmpty ? state.trialSegundos + seg : state.trialSegundos,
-    ));
+    _save(
+      state.copyWith(
+        segundosEstudio: state.segundosEstudio + seg,
+        trialSegundos: state.planId.isEmpty
+            ? state.trialSegundos + seg
+            : state.trialSegundos,
+      ),
+    );
   }
 
   void reiniciar() {

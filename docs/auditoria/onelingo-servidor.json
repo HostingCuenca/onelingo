@@ -1,0 +1,67 @@
+{
+  "database_readonly": "BEGIN\n{\"version\" : \"PostgreSQL 14.24 (Ubuntu 14.24-0ubuntu0.22.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0, 64-bit\", \"database\" : \"onelingo\", \"tables\" : [\"audios\", \"conversaciones\", \"correos\", \"errores\", \"eventos\", \"examenes\", \"progreso\", \"schema_migrations\", \"usuarios\"], \"migrations\" : [\"001_inicial.sql\", \"002_auth.sql\", \"003_audios.sql\"], \"users\" : 1, \"progress\" : 1, \"conversations\" : 0, \"audios\" : 0}\nCOMMIT",
+  "database_error": "",
+  "firewall": "UFW activo; 5432/tcp permitido desde cualquier origen en IPv4 e IPv6.",
+  "cert": "notBefore=Sep  8 01:59:19 2026 GMT\nnotAfter=Dec  7 01:59:18 2026 GMT\nissuer=C = US, O = Let's Encrypt, CN = YR1\n",
+  "permissions": {
+    "/var/www/onelingo/backend/.env": "0o644",
+    "/var/www/onelingo/backend": "0o755",
+    "/var/www/onelingo": "0o755"
+  },
+  "comparison": {
+    "backend/src/migrate.ts": "identical",
+    "backend/src/server.ts": "identical",
+    "backend/src/app.ts": "identical",
+    "backend/src/routes/diagnostico.ts": "identical",
+    "backend/src/routes/chat.ts": "identical",
+    "backend/src/routes/auth.ts": "identical",
+    "backend/src/routes/usuarios.ts": "identical",
+    "backend/src/routes/admin.ts": "identical",
+    "backend/src/routes/voz.ts": "identical",
+    "backend/src/lib/ia_openai.ts": "identical",
+    "backend/src/lib/ia_gemini.ts": "identical",
+    "backend/src/lib/ia.ts": "identical",
+    "backend/src/lib/auth.ts": "identical",
+    "backend/src/lib/correo.ts": "identical",
+    "backend/src/lib/db.ts": "identical",
+    "backend/src/lib/config.ts": "identical",
+    "backend/src/lib/diag_ia.ts": "identical",
+    "backend/src/lib/voz.ts": "identical",
+    "backend/sql/003_audios.sql": "identical",
+    "backend/sql/002_auth.sql": "identical",
+    "backend/sql/001_inicial.sql": "identical",
+    "backend/package.json": "identical",
+    "backend/package-lock.json": "identical"
+  },
+  "connectivity": {
+    "dns": {
+      "onelingo.hostingcuenca.com": "167.235.20.41"
+    },
+    "https_200": [
+      "/",
+      "/panel/",
+      "/api/salud",
+      "/api/chat/estado",
+      "/api/voz/estado",
+      "/api/diagnostico/estado"
+    ],
+    "postgres_5432": "Conexión TCP externa exitosa",
+    "backend_8091": "Timeout externo; escucha 0.0.0.0 en servidor"
+  },
+  "pm2": {
+    "name": "onelingo-api",
+    "status": "online",
+    "node": "20.19.4",
+    "restarts": 2,
+    "cwd": "/var/www/onelingo/backend"
+  },
+  "configuration": {
+    "port": 8091,
+    "public_url": "https://onelingo.hostingcuenca.com/api",
+    "audio_dir": "/var/www/onelingo/audio",
+    "smtp_configured": false,
+    "google_oauth_configured": false,
+    "tutor_provider": "openai",
+    "tutor_model": "gpt-4.1-mini"
+  }
+}

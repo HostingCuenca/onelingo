@@ -21,6 +21,7 @@ const Estado = z.object({
   nivelInicial: z.number().optional(),
   fundamentos: z.boolean().optional(),
   diagnostico: z.record(z.any()).optional(),
+  practicas: z.record(z.any()).default({}),
   completadas: z.array(z.string()).default([]),
   puntuaciones: z.record(z.number()).default({}),
   examenes: z.record(z.number()).default({}),

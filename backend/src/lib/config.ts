@@ -25,7 +25,7 @@ export const config = {
   geminiModelo: process.env.GEMINI_MODELO ?? 'gemini-flash-latest',
   // Voz (ElevenLabs). Los audios se generan una vez y se guardan en AUDIO_DIR + tabla `audios`.
   elevenApiKey: process.env.ELEVENLABS_API_KEY ?? '',
-  elevenModelo: process.env.ELEVENLABS_MODELO ?? 'eleven_multilingual_v2',
+  elevenModelo: process.env.ELEVENLABS_MODELO ?? 'eleven_flash_v2_5',
   audioDir: process.env.AUDIO_DIR ?? './audio',
   // Máximo de caracteres por petición de voz (protege la cuota mensual).
   vozMaxCaracteres: Number(process.env.VOZ_MAX_CARACTERES ?? 600),

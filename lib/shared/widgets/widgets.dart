@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
+export 'language_flag.dart';
+export 'primary_button.dart';
 import '../../core/models/models.dart';
 
 class Tarjeta extends StatelessWidget {
@@ -13,7 +15,7 @@ class Tarjeta extends StatelessWidget {
     this.color = OL.blanco,
     this.borde,
     this.onTap,
-    this.radio = 16,
+    this.radio = 22,
     this.sombra = true,
   });
   final Widget child;
@@ -31,8 +33,15 @@ class Tarjeta extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(radio),
-        border: borde == null ? null : Border.all(color: borde!, width: 2),
-        boxShadow: sombra ? OL.sombra() : null,
+        border: Border.all(color: borde ?? OL.grisClaro, width: 2),
+        boxShadow: sombra
+            ? [
+                BoxShadow(
+                  color: borde ?? OL.grisClaro,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : null,
       ),
       child: child,
     );
@@ -49,24 +58,34 @@ class Tarjeta extends StatelessWidget {
 }
 
 class HeroCard extends StatelessWidget {
-  const HeroCard({super.key, required this.child, this.gradient = OL.gradienteMorado});
+  const HeroCard({
+    super.key,
+    required this.child,
+    this.gradient = OL.gradienteMorado,
+  });
   final Widget child;
   final Gradient gradient;
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: OL.sombra(0.18),
-        ),
-        child: child,
-      );
+    padding: const EdgeInsets.all(22),
+    decoration: BoxDecoration(
+      gradient: gradient,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: OL.sombra(0.18),
+    ),
+    child: child,
+  );
 }
 
 class Etiqueta extends StatelessWidget {
-  const Etiqueta(this.texto, {super.key, this.color = OL.morado, this.fondo, this.icono});
+  const Etiqueta(
+    this.texto, {
+    super.key,
+    this.color = OL.morado,
+    this.fondo,
+    this.icono,
+  });
   final String texto;
   final Color color;
   final Color? fondo;
@@ -74,28 +93,39 @@ class Etiqueta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-        decoration: BoxDecoration(
-          color: fondo ?? color.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(99),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+    decoration: BoxDecoration(
+      color: fondo ?? color.withValues(alpha: 0.12),
+      borderRadius: BorderRadius.circular(99),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (icono != null) ...[
+          Icon(icono, size: 14, color: color),
+          const SizedBox(width: 5),
+        ],
+        Text(
+          texto,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            color: color,
+          ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (icono != null) ...[
-              Icon(icono, size: 14, color: color),
-              const SizedBox(width: 5),
-            ],
-            Text(texto,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: color)),
-          ],
-        ),
-      );
+      ],
+    ),
+  );
 }
 
 class BarraProgreso extends StatelessWidget {
-  const BarraProgreso(this.valor,
-      {super.key, this.color = OL.morado, this.fondo = OL.grisClaro, this.alto = 8});
+  const BarraProgreso(
+    this.valor, {
+    super.key,
+    this.color = OL.morado,
+    this.fondo = OL.grisClaro,
+    this.alto = 12,
+  });
   final double valor;
   final Color color;
   final Color fondo;
@@ -103,14 +133,21 @@ class BarraProgreso extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ClipRRect(
-        borderRadius: BorderRadius.circular(99),
-        child: LinearProgressIndicator(
-          value: valor.clamp(0, 1),
-          minHeight: alto,
-          backgroundColor: fondo,
-          valueColor: AlwaysStoppedAnimation(color),
-        ),
-      );
+    borderRadius: BorderRadius.circular(99),
+    child: TweenAnimationBuilder<double>(
+      tween: Tween(end: valor.clamp(0, 1)),
+      duration: MediaQuery.disableAnimationsOf(context)
+          ? Duration.zero
+          : const Duration(milliseconds: 320),
+      curve: Curves.easeOutCubic,
+      builder: (_, value, _) => LinearProgressIndicator(
+        value: value,
+        minHeight: alto,
+        backgroundColor: fondo,
+        valueColor: AlwaysStoppedAnimation(color),
+      ),
+    ),
+  );
 }
 
 class AnilloProgreso extends StatelessWidget {
@@ -132,13 +169,13 @@ class AnilloProgreso extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: tamano,
-        height: tamano,
-        child: CustomPaint(
-          painter: _AnilloPainter(valor.clamp(0, 1), grosor, color, fondo),
-          child: Center(child: child),
-        ),
-      );
+    width: tamano,
+    height: tamano,
+    child: CustomPaint(
+      painter: _AnilloPainter(valor.clamp(0, 1), grosor, color, fondo),
+      child: Center(child: child),
+    ),
+  );
 }
 
 class _AnilloPainter extends CustomPainter {
@@ -169,8 +206,14 @@ class _AnilloPainter extends CustomPainter {
 }
 
 class IconoCuadro extends StatelessWidget {
-  const IconoCuadro(this.icono,
-      {super.key, this.color = OL.morado, this.tamano = 44, this.radio = 12, this.relleno = false});
+  const IconoCuadro(
+    this.icono, {
+    super.key,
+    this.color = OL.morado,
+    this.tamano = 44,
+    this.radio = 12,
+    this.relleno = false,
+  });
   final IconData icono;
   final Color color;
   final double tamano;
@@ -179,14 +222,14 @@ class IconoCuadro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        width: tamano,
-        height: tamano,
-        decoration: BoxDecoration(
-          color: relleno ? color : color.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(radio),
-        ),
-        child: Icon(icono, color: relleno ? OL.blanco : color, size: tamano * 0.5),
-      );
+    width: tamano,
+    height: tamano,
+    decoration: BoxDecoration(
+      color: relleno ? color : color.withValues(alpha: 0.12),
+      borderRadius: BorderRadius.circular(radio),
+    ),
+    child: Icon(icono, color: relleno ? OL.blanco : color, size: tamano * 0.5),
+  );
 }
 
 class TituloSeccion extends StatelessWidget {
@@ -197,16 +240,23 @@ class TituloSeccion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(texto, style: Theme.of(context).textTheme.headlineSmall),
-          if (accion != null) TextButton(onPressed: onAccion, child: Text(accion!)),
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Expanded(
+        child: Text(texto, style: Theme.of(context).textTheme.headlineSmall),
+      ),
+      if (accion != null) TextButton(onPressed: onAccion, child: Text(accion!)),
+    ],
+  );
 }
 
 class EstadoLeccionIcono extends StatelessWidget {
-  const EstadoLeccionIcono(this.estado, {super.key, required this.numero, this.color = OL.morado});
+  const EstadoLeccionIcono(
+    this.estado, {
+    super.key,
+    required this.numero,
+    this.color = OL.morado,
+  });
   final LessonState estado;
   final int numero;
   final Color color;
@@ -214,9 +264,17 @@ class EstadoLeccionIcono extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (bg, fg, child) = switch (estado) {
-      LessonState.completada => (OL.verdeSuave, OL.verde, const Icon(Icons.check, size: 18)),
+      LessonState.completada => (
+        OL.verdeSuave,
+        OL.verde,
+        const Icon(Icons.check, size: 18),
+      ),
       LessonState.actual => (color, OL.blanco, Text('$numero')),
-      LessonState.bloqueada => (OL.grisClaro, OL.gris, const Icon(Icons.lock_outline, size: 16)),
+      LessonState.bloqueada => (
+        OL.grisClaro,
+        OL.gris,
+        const Icon(Icons.lock_outline, size: 16),
+      ),
     };
     return Container(
       width: 36,
@@ -225,7 +283,10 @@ class EstadoLeccionIcono extends StatelessWidget {
       alignment: Alignment.center,
       child: DefaultTextStyle(
         style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 14),
-        child: IconTheme(data: IconThemeData(color: fg), child: child),
+        child: IconTheme(
+          data: IconThemeData(color: fg),
+          child: child,
+        ),
       ),
     );
   }
@@ -237,11 +298,11 @@ class Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Image.asset(
-        'assets/img/logo.png',
-        width: tamano,
-        height: tamano,
-        fit: BoxFit.contain,
-      );
+    'assets/img/logo.png',
+    width: tamano,
+    height: tamano,
+    fit: BoxFit.contain,
+  );
 }
 
 /// Contenedor centrado con ancho máximo para que la demo web no se estire.
@@ -251,6 +312,9 @@ class Movil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-        child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 480), child: child),
-      );
+    child: ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 480),
+      child: child,
+    ),
+  );
 }

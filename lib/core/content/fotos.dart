@@ -2,6 +2,8 @@
 /// asociadas a situaciones, unidades, tutores y actividades diarias.
 library;
 
+import 'package:flutter/painting.dart';
+
 const _base = 'assets/img/fotos/';
 
 String? fotoSituacion(int id) {
@@ -32,6 +34,15 @@ String? fotoUnidad(int nivel, int numero) {
 }
 
 String fotoTutor(String id) => '${_base}tutor-$id.jpg';
+
+/// Focal points measured from the existing photos; avoid cropping faces.
+Alignment encuadreTutor(String id) => switch (id) {
+  'sofia' => Alignment.centerLeft,
+  'mia' => const Alignment(-.7, 0),
+  'leo' => const Alignment(.55, 0),
+  'max' => const Alignment(.35, 0),
+  _ => Alignment.center,
+};
 
 String fotoActividad(String nombre) {
   const m = <String, String>{

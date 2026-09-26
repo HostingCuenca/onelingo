@@ -73,3 +73,50 @@ export async function transcribirOpenAI(audio: Buffer, nombre: string, idioma: s
   }));
   return { texto: String(j?.text ?? '').trim(), modelo: config.openaiModeloTranscripcion };
 }
+
+/** Read a completed first JSON string without waiting for the remaining fields. */
+export function extraerReply(texto: string): string | undefined {
+  const m = /^\s*\{\s*"reply"\s*:\s*("(?:[^"\\]|\\.)*")/s.exec(texto);
+  if (!m) return undefined;
+  try { return JSON.parse(m[1]); } catch { return undefined; }
+}
+
+export async function generarTutorStream(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], onReply: (texto: string) => void, signal: AbortSignal) {
+  const r = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST', signal,
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
+    body: JSON.stringify({ model: config.openaiModelo,
+      messages: [{ role: 'system', content: system + '\nEscribe reply primero; máximo 600 caracteres y una primera respuesta breve.' }, ...mensajes],
+      response_format: { type: 'json_schema', json_schema: { name: 'respuesta_tutor', strict: true, schema: ESQUEMA_TUTOR_OPENAI } },
+      temperature: 0.7, max_tokens: 700, stream: true, stream_options: { include_usage: true } }),
+  });
+  if (!r.ok || !r.body) throw new Error(`OpenAI ${r.status}`);
+  const reader = r.body.getReader(); const decoder = new TextDecoder();
+  let pending = '', texto = '', enviado = false, done = false;
+  let modelo = config.openaiModelo, entrada = 0, salida = 0;
+  try {
+    while (true) {
+      const next = await reader.read();
+      pending += decoder.decode(next.value, { stream: !next.done });
+      let end: number;
+      while ((end = pending.indexOf('\n')) >= 0) {
+        const line = pending.slice(0, end).trim(); pending = pending.slice(end + 1);
+        if (!line.startsWith('data:')) continue;
+        const data = line.slice(5).trim();
+        if (data === '[DONE]') { done = true; continue; }
+        const j = JSON.parse(data);
+        if (j.error || j.choices?.[0]?.delta?.refusal) throw new Error('Respuesta rechazada');
+        modelo = j.model ?? modelo;
+        if (j.usage) { entrada = j.usage.prompt_tokens; salida = j.usage.completion_tokens; }
+        texto += j.choices?.[0]?.delta?.content ?? '';
+        if (!enviado) {
+          const reply = extraerReply(texto);
+          if (reply?.trim() && reply.length <= 600) { enviado = true; onReply(reply); }
+        }
+      }
+      if (next.done) break;
+    }
+    if (!done) throw new Error('Respuesta interrumpida');
+    return { json: JSON.parse(texto), modelo, entrada, salida };
+  } finally { await reader.cancel().catch(() => {}); reader.releaseLock(); }
+}

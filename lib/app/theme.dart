@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Paleta OneLingo: sacada del logo (globo arcoíris + "Lingo" morado).
 class OL {
@@ -45,12 +44,12 @@ class OL {
   );
 
   static List<BoxShadow> sombra([double alpha = 0.08]) => [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: alpha),
-          blurRadius: 14,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withValues(alpha: alpha),
+      blurRadius: 14,
+      offset: const Offset(0, 4),
+    ),
+  ];
 }
 
 ThemeData buildTheme() {
@@ -65,20 +64,26 @@ ThemeData buildTheme() {
     ),
     scaffoldBackgroundColor: OL.fondo,
   );
-  final textTheme = GoogleFonts.plusJakartaSansTextTheme(base.textTheme).apply(
-    bodyColor: OL.texto,
-    displayColor: OL.texto,
-  );
-  final titulos = GoogleFonts.beVietnamPro(fontWeight: FontWeight.w700);
+  final textTheme = base.textTheme
+      .apply(fontFamily: 'Nunito')
+      .apply(bodyColor: OL.texto, displayColor: OL.texto);
+  const titulos = TextStyle(fontFamily: 'Nunito', fontWeight: FontWeight.w900);
 
   return base.copyWith(
     textTheme: textTheme.copyWith(
-      headlineLarge: titulos.copyWith(fontSize: 28, color: OL.texto),
-      headlineMedium: titulos.copyWith(fontSize: 22, color: OL.texto),
-      headlineSmall: titulos.copyWith(fontSize: 18, color: OL.texto),
-      titleLarge: titulos.copyWith(fontSize: 16, color: OL.texto),
-      titleMedium: GoogleFonts.beVietnamPro(
-          fontSize: 14, fontWeight: FontWeight.w600, color: OL.texto),
+      headlineLarge: titulos.copyWith(fontSize: 30, color: OL.texto),
+      headlineMedium: titulos.copyWith(fontSize: 26, color: OL.texto),
+      headlineSmall: titulos.copyWith(fontSize: 22, color: OL.texto),
+      titleLarge: titulos.copyWith(fontSize: 20, color: OL.texto),
+      bodyLarge: textTheme.bodyLarge?.copyWith(fontSize: 18, height: 1.45),
+      bodyMedium: textTheme.bodyMedium?.copyWith(fontSize: 16, height: 1.4),
+      bodySmall: textTheme.bodySmall?.copyWith(fontSize: 14, height: 1.35),
+      titleMedium: TextStyle(
+        fontFamily: 'Nunito',
+        fontSize: 17,
+        fontWeight: FontWeight.w700,
+        color: OL.texto,
+      ),
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: OL.fondo,
@@ -92,34 +97,47 @@ ThemeData buildTheme() {
       color: OL.blanco,
       elevation: 0,
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18),
+        side: const BorderSide(color: OL.grisClaro, width: 2),
+      ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: OL.morado,
         foregroundColor: OL.blanco,
         elevation: 0,
-        minimumSize: const Size.fromHeight(52),
+        minimumSize: const Size.fromHeight(54),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        textStyle: GoogleFonts.plusJakartaSans(
-            fontSize: 15, fontWeight: FontWeight.w700, letterSpacing: 0.4),
+        textStyle: TextStyle(
+          fontFamily: 'Nunito',
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.4,
+        ),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: OL.texto,
-        minimumSize: const Size.fromHeight(52),
-        side: const BorderSide(color: OL.grisClaro, width: 1.5),
+        minimumSize: const Size.fromHeight(54),
+        side: const BorderSide(color: OL.grisClaro, width: 2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-        textStyle: GoogleFonts.plusJakartaSans(
-            fontSize: 15, fontWeight: FontWeight.w700),
+        textStyle: TextStyle(
+          fontFamily: 'Nunito',
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: OL.morado,
-        textStyle: GoogleFonts.plusJakartaSans(
-            fontSize: 14, fontWeight: FontWeight.w700),
+        textStyle: TextStyle(
+          fontFamily: 'Nunito',
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -128,11 +146,11 @@ ThemeData buildTheme() {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: OL.grisClaro, width: 1.5),
+        borderSide: const BorderSide(color: OL.grisClaro, width: 2),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
-        borderSide: const BorderSide(color: OL.grisClaro, width: 1.5),
+        borderSide: const BorderSide(color: OL.grisClaro, width: 2),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
@@ -143,10 +161,11 @@ ThemeData buildTheme() {
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: OL.blanco,
       indicatorColor: OL.moradoClaro,
-      height: 68,
+      height: 80,
       labelTextStyle: WidgetStateProperty.resolveWith(
-        (states) => GoogleFonts.plusJakartaSans(
-          fontSize: 11,
+        (states) => TextStyle(
+          fontFamily: 'Nunito',
+          fontSize: 14,
           fontWeight: FontWeight.w600,
           color: states.contains(WidgetState.selected) ? OL.morado : OL.gris,
         ),

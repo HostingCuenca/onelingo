@@ -8,12 +8,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app/router.dart';
 import 'app/theme.dart';
 import 'core/api/sync.dart';
+import 'core/conexion.dart';
+import 'core/efectos.dart';
+import 'core/voz.dart';
+import 'shared/widgets/connection_banner.dart';
 import 'core/state/providers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   Sync.instancia.inicializar(prefs);
+  Efectos.inicializar(prefs);
+  Efectos.antesDeSonar = Voz.instancia.parar;
+  unawaited(Efectos.precargar());
   runApp(
     ProviderScope(
       overrides: [prefsProvider.overrideWithValue(prefs)],
@@ -39,7 +46,8 @@ class OneLingoApp extends ConsumerWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      builder: (context, child) => _UsoTracker(child: child!),
+      builder: (context, child) =>
+          _UsoTracker(child: ConnectionBanner(child: child!)),
     );
   }
 }
@@ -54,7 +62,8 @@ class _UsoTracker extends ConsumerStatefulWidget {
   ConsumerState<_UsoTracker> createState() => _UsoTrackerState();
 }
 
-class _UsoTrackerState extends ConsumerState<_UsoTracker> with WidgetsBindingObserver {
+class _UsoTrackerState extends ConsumerState<_UsoTracker>
+    with WidgetsBindingObserver {
   Timer? _timer;
 
   @override
@@ -62,11 +71,13 @@ class _UsoTrackerState extends ConsumerState<_UsoTracker> with WidgetsBindingObs
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _iniciar();
+    Conexion.comprobar();
   }
 
   void _iniciar() {
     _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 30), (_) {
+      Conexion.comprobar();
       if (ref.read(progressProvider).onboardingDone) {
         ref.read(progressProvider.notifier).sumarSegundos(30);
       }
@@ -76,6 +87,7 @@ class _UsoTrackerState extends ConsumerState<_UsoTracker> with WidgetsBindingObs
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      Conexion.comprobar();
       _iniciar();
     } else {
       _timer?.cancel();

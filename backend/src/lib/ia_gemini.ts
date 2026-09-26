@@ -25,7 +25,10 @@ const ESQUEMA_TUTOR = {
 
 export const geminiDisponible = () => config.geminiApiKey.length > 0;
 
+let cuotaBloqueadaHasta = 0;
+
 export async function generarJsonGemini(system: string, turnos: { role: 'user' | 'model'; text: string }[], esquema: unknown = ESQUEMA_TUTOR, modelo = config.geminiModelo) {
+  if (Date.now() < cuotaBloqueadaHasta) throw new Error('Gemini: cuota temporalmente agotada');
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelo}:generateContent`;
   const cuerpo = {
     systemInstruction: { parts: [{ text: system }] },
@@ -34,9 +37,10 @@ export async function generarJsonGemini(system: string, turnos: { role: 'user' |
   };
   let r!: Response, j: any;
   for (let intento = 0; intento < 4; intento++) {
-    r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': config.geminiApiKey }, body: JSON.stringify(cuerpo) });
+    r = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': config.geminiApiKey }, body: JSON.stringify(cuerpo), signal: AbortSignal.timeout(12000) });
     j = await r.json();
     if (r.ok) break;
+    if (r.status === 429) { cuotaBloqueadaHasta = Date.now() + 90000; throw new Error('Gemini 429: cuota agotada; usar respaldo'); }
     // 503 (alta demanda) y 429 (cuota): reintento con espera creciente.
     if ((r.status === 503 || r.status === 429) && intento < 3) { await new Promise((res) => setTimeout(res, 800 * (intento + 1))); continue; }
     throw new Error(`Gemini ${r.status}: ${j?.error?.message ?? 'error'}`);

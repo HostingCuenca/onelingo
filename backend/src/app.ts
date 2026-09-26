@@ -16,7 +16,7 @@ import rutasDiagnostico from './routes/diagnostico.js';
 
 export async function crearApp() {
   const app = Fastify({ logger: { level: process.env.LOG_LEVEL ?? 'info' }, bodyLimit: 2 * 1024 * 1024 });
-  await app.register(cors, { origin: true });
+  await app.register(cors, { origin: true, methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'] });
   await app.register(sensible);
   await app.register(formbody);
   await app.register(multipart, { limits: { fileSize: 15 * 1024 * 1024, files: 1 } });

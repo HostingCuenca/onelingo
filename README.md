@@ -5,6 +5,8 @@ fundamentos), 100 lecciones por nivel, diagnóstico adaptativo, tutor conversaci
 voz natural. Flutter (Android, iOS, web) + backend Fastify/PostgreSQL + panel de
 administración.
 
+**Diseño vigente:** [decisiones de interfaz y contenido](docs/DISENO-APP.md).
+
 **Lee primero [DOCUMENTACION.md](DOCUMENTACION.md)**: estructura, cómo ejecutar cada
 parte, variables de entorno, despliegue y pendientes.
 
