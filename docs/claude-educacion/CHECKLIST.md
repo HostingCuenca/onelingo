@@ -2,77 +2,70 @@
 
 Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 
-## Fase 0 — Preparación
-- [x] Crear checkpoint completo (`396333b`, tag `checkpoint-2026-09-26-pre-multilang`).
-- [x] Crear rama `claude/educacion-multilenguaje`.
-- [x] Verificar que el checkpoint no contiene `.env` ni secretos.
-- [x] Comparar assets del home con producción (8/8 idénticos).
-- [x] Comparar `main.dart.js` del checkpoint con producción: idéntico (sha256 `caa2e8a452cf3de8…`).
-- [x] Crear `docs/claude-educacion/` con los archivos de seguimiento.
-
 ## Fase 1 — Auditoría
+- [x] Checkpoint completo (`396333b`, tag `checkpoint-2026-09-26-pre-multilang`), idéntico a producción (`main.dart.js` `caa2e8a4…`).
 - [x] Inventariar idiomas habilitados (10).
-- [~] Agente A: inventario curricular, grafo gramatical inglés, sistemas lingüísticos y rutas por idioma.
-- [~] Agente B: vocabulario, 50 situaciones, adaptación multilingüe, sistema de repaso.
-- [~] Agente C: tipos de actividad, habilidades, diagnóstico, evaluación, certificaciones.
-- [~] Agente D: mapa técnico, acoplamiento a inglés, progreso, bug de gramática, esquema, migración, recorridos.
-- [ ] Consolidar MAPA_CURRICULAR.md.
-- [ ] Consolidar COBERTURA.md.
-- [ ] Completar IDIOMAS.md con estados por idioma.
-- [ ] Redactar ESQUEMA_CONTENIDO.md.
-- [ ] Redactar MIGRACION_FUNDAMENTOS.md.
+- [x] Agente A: inventario curricular, grafo gramatical inglés (111 nodos), sistemas lingüísticos y rutas por idioma.
+- [x] Agente B: vocabulario, 50 situaciones, adaptación multilingüe, sistema de repaso.
+- [x] Agente C: tipos de actividad, habilidades, diagnóstico, evaluación, certificaciones.
+- [x] Agente D: mapa técnico, acoplamiento a inglés, progreso, bug de gramática, esquema, migración, recorridos.
+- [x] MAPA_CURRICULAR.md, COBERTURA.md, IDIOMAS.md, ESQUEMA_CONTENIDO.md, MIGRACION_FUNDAMENTOS.md.
 
 ## Fase 2 — Fundamentos
-- [ ] Implementar modelos comunes de ruta (`lib/core/aprendizaje/`).
-- [ ] Implementar grafo de prerrequisitos con validación (sin ciclos, IDs existentes).
-- [ ] Implementar estados de unidad y desbloqueo.
-- [ ] Implementar migración de foundations-v1 sin pérdida de progreso.
-- [ ] Ruta inicial de inglés (U0–U5) en datos.
-- [ ] Rutas iniciales de fr, de, pt, it.
-- [ ] Rutas iniciales de zh, ja, ko, ru (con fase de escritura/sonidos).
-- [ ] Ruta inicial de es (según DEC-004).
-- [ ] Pantalla de ruta conectada desde Aprender (sin tocar el home).
-- [ ] Verificar persistencia al cerrar y reabrir la app.
+- [x] Modelos comunes de ruta con textos por idioma de apoyo (`lib/core/aprendizaje/modelos.dart`).
+- [x] Cargador por idioma sin `dart:io` (web y móvil).
+- [x] Grafo de prerrequisitos con validación (ciclos, IDs, orden).
+- [x] Estados de unidad, desbloqueo, aprobación, retención y repaso espaciado.
+- [x] Migración de foundations-v1 por alias de lectura, sin pérdida.
+- [x] Ruta inicial de inglés U0–U5.
+- [x] Rutas iniciales de fr, it, pt.
+- [x] Rutas iniciales de de, ru, es (es con apoyo en inglés, DEC-004).
+- [x] Rutas iniciales de zh, ja, ko (fase de escritura y sonidos).
+- [x] Pantalla de ruta y de unidad conectadas en `/fundamentos` (Aprender, tarjeta de camino, Inicio).
+- [x] Nivel 0 = ruta; aprobarla desbloquea el Nivel 1 (DEC-007).
+- [x] Persistencia de evidencia y de posición en la unidad (verificado en web).
+- [ ] Revisión nativa de los 9 idiomas «inicial» (DEC-010).
 
 ## Fase 3 — Gramática
-- [ ] Verificar bug «gramática desaparece tras entrenar» con evidencia.
-- [ ] Corregir el bug si sigue ocurriendo, con prueba de regresión.
-- [ ] Vincular guías de gramática inglesa existentes a IDs del grafo.
+- [x] Verificar bug «gramática desaparece»: área corregida antes; pantalla no reanudaba ni marcaba (auditoría D).
+- [x] Reanudar tema, marcar practicados en el Temario, guardar borradores, respetar nivel elegido.
+- [ ] Vincular las 43 guías a IDs del grafo `en-g-*` (alias `grammar-guide-*`).
+- [ ] Recolocar guías fuera de nivel (continuous, past-continuous, third-conditional).
 
 ## Fase 4 — Vocabulario
-- [ ] Estados de vocabulario (visto → dominado) en el modelo.
-- [ ] Vocabulario inicial por idioma enlazado a unidades.
+- [x] Vocabulario inicial por idioma enlazado a unidades (75–93 vocablos por idioma).
+- [ ] Estados de vocabulario por palabra (visto → dominado) con id común de sentido.
 
 ## Fase 5 — Situaciones
-- [ ] Plantilla de situación como mini-ruta en el esquema.
-- [ ] Mapa de las 50 situaciones con nivel y gramática requerida.
+- [x] Paso `situacion` con diálogo modelo en cada unidad f0 (10 idiomas).
+- [ ] Convertir la situación «restaurante» en mini-ruta de 12 pasos (piloto).
+- [ ] Mapa de las 50 situaciones al esquema 2 con nivel y gramática.
 
 ## Fase 6 — Habilidades
-- [ ] Tipos de actividad de la ruta inicial: ordenar, completar, relacionar, escuchar y elegir, producción corta.
+- [x] Formatos elegir, escuchar, ordenar, completar, escribir, relacionar.
+- [ ] Pares mínimos/tonos como formato propio; dictado nuevo; lectura con varias preguntas en esquema 2.
 
 ## Fase 7 — Evaluación
-- [ ] Evaluación de fin de unidad con criterio de dominio.
-- [ ] Separar evidencia con ayuda (práctica) de evidencia sin ayuda (evaluación).
+- [x] Evaluación de fin de unidad (≥ 4 ítems, ≥ 2 formatos, 80 % a la primera, sin pistas).
+- [x] Separar evidencia con ayuda (guiada) de evidencia sin ayuda (evaluación).
+- [ ] Banco de evaluación separado del de práctica.
+- [ ] Rediseñar el examen de ascenso de 10 preguntas.
 
 ## Fase 8 — Personalización
-- [ ] Metadatos de unidad disponibles para el tutor IA (sin integración visual).
+- [x] Metadatos `tutor` por unidad en el contenido (sin integración visual).
+- [ ] Pasar esos metadatos al tutor IA (fase de avatares).
 
 ## Fase 9 — Pruebas
-- [ ] Prueba: grafo sin ciclos y sin referencias rotas (10 idiomas).
-- [ ] Prueba: ninguna unidad vacía.
-- [ ] Prueba: ningún ejercicio usa vocabulario/gramática no enseñados antes.
-- [ ] Prueba: desbloqueo correcto.
-- [ ] Prueba: migración de foundations-v1 idempotente.
-- [ ] Prueba: progreso persistente tras reinicio.
-- [ ] Prueba: temas visibles después de practicar.
-- [ ] `flutter analyze` sin errores nuevos.
-- [ ] `flutter test` completo en verde.
-- [ ] Recorrido manual web + emulador Android.
+- [x] Grafo sin ciclos y sin referencias rotas (10 idiomas).
+- [x] Ninguna unidad vacía; ninguna palabra sin enseñar (Python y Dart).
+- [x] Desbloqueo, aprobación irreversible, retención y repaso.
+- [x] Migración de foundations-v1.
+- [x] Progreso persistente (toJson/fromJson y almacenamiento web).
+- [x] Gramática reanuda el tema tras volver.
+- [x] Recorrido de principiante U0 completo (widget test) y navegación con pestañas.
+- [x] `flutter analyze`: sin errores ni avisos nuevos (7 info previos en sync.dart).
+- [x] `flutter test`: 129 pasan, 1 omitida, 0 fallos.
+- [x] Recorrido manual web (inglés) y emulador Android (japonés).
 
 ## Fase 10 — Producción
-- [ ] Confirmar que se conservan home, logo, 6 iconos, «Aprende hoy», voz, avatares, backend y APK.
-- [ ] Bloqueo de despliegue en el servidor.
-- [ ] Respaldo identificable del servidor.
-- [ ] Despliegue atómico de web.
-- [ ] Verificar `/api/salud` y recorrido publicado.
-- [ ] Registrar release y rollback en DESPLIEGUES.md.
+- [~] Release educativa 1: ver DESPLIEGUES.md.

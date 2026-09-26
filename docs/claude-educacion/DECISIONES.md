@@ -39,3 +39,56 @@ Motivo: cada curso debe explicarse en un idioma que el alumno entienda.
 Alternativas descartadas: (b) español solo para angloparlantes sin estructura multilingüe; (c) ocultar español como meta.
 Archivos afectados: esquema de contenido (campos de texto localizados), cargador de rutas, pantalla de ruta. Ver ESQUEMA_CONTENIDO.md.
 Riesgo: un nativo de un idioma sin textos de apoyo cae al respaldo en español. La interfaz de un angloparlante que estudia español seguirá mayormente en español hasta la fase de i18n.
+
+## DEC-005 — Ruta nueva en paralelo; el contenido antiguo queda como banco
+
+Fecha: 2026-09-26
+Problema: reordenar los niveles 1–2 cambia los IDs `L<n>-NNN` y el progreso asociado; el cargador antiguo exige 20 unidades por nivel.
+Decisión: el esquema 2 (`assets/contenido/<idioma>/ruta/`) convive con el antiguo. Los JSON `nivel-N.json`, las guías y la biblioteca no se modifican ni se borran; se migrarán nivel a nivel.
+Motivo: no perder progreso ni romper pantallas publicadas.
+Alternativas descartadas: reordenar y migrar IDs ahora.
+Archivos afectados: `lib/core/aprendizaje/*`, `assets/contenido/*/ruta/*`.
+Riesgo: dos modelos de progreso conviven hasta completar la migración.
+
+## DEC-006 — Estados de unidad y criterio de dominio
+
+Fecha: 2026-09-26
+Problema: «completado» significaba solo participación; no existía «dominado».
+Decisión: estados calculados desde `practicas`: bloqueada (visible, se puede leer) → disponible → en curso → practicada (guiada resuelta, desbloquea la siguiente) → aprobada (evaluación ≥ 80 % a la primera, en ese intento; no se revoca) → dominada (repaso acertado ≥ 1 día después de aprobar). Repaso espaciado tipo Leitner [1, 3, 7, 16, 35, 90] días; un fallo baja dos cajas y reprograma a 1 día.
+Motivo: separar práctica con ayuda, comprobación y retención (auditorías C y D).
+Alternativas descartadas: desbloquear solo con «dominada» (bloquearía un día entero).
+Archivos afectados: `lib/core/aprendizaje/dominio.dart`, `providers.dart`.
+Riesgo: umbrales (80 %, 1 día) son hipótesis; calibrar con un piloto. La evaluación reutiliza los mismos ítems al reintentar (banco de evaluación separado pendiente).
+
+## DEC-007 — La ruta de fundamentos es el Nivel 0 en los 10 idiomas
+
+Fecha: 2026-09-26 (decidido por el usuario)
+Problema: un principiante de inglés nunca salía del nivel 0 (contaba 40 lecciones que no se pueden abrir).
+Decisión: `fundamentosPendientes` termina al aprobar todas las unidades f0 del idioma (marca `ruta:<idioma>.f0:completa`) o, por compatibilidad, completando las lecciones antiguas del nivel 0. Esas lecciones quedan como «práctica extra» dentro de la ruta.
+Motivo: una salida alcanzable y pedagógica del nivel 0.
+Archivos afectados: `lib/core/state/providers.dart`, `lib/features/ruta/*`, `lib/features/course/levels_screen.dart`, `lib/shared/widgets/learning_path.dart`.
+Riesgo: ninguno para usuarios existentes (la condición antigua sigue valiendo).
+
+## DEC-008 — Destinos del home según idioma (solo navegación)
+
+Fecha: 2026-09-26 (autorizado por el usuario)
+Problema: «Aprende hoy» iba siempre a fundamentos de inglés; diagnóstico y biblioteca abrían siempre inglés.
+Decisión: «Aprende hoy» → ruta de fundamentos si está pendiente; si no, Aprender (inglés) o la lección actual. Diagnóstico con el idioma meta. Biblioteca solo para inglés; en otros idiomas lleva a Aprender. No se cambió diseño, logo, iconos, imagen ni textos.
+Archivos afectados: `lib/features/home/home_screen.dart` (10 líneas).
+Riesgo: el diagnóstico de otros idiomas tiene las limitaciones documentadas en la auditoría C.
+
+## DEC-009 — Corrección tolerante a tildes y a espacios en zh/ja
+
+Fecha: 2026-09-26
+Problema: exigir «não», «équatorienne» o pinyin con tonos frustra en teclados sin esas letras.
+Decisión: una respuesta que solo difiere en tildes (y marcas de tono del pinyin) cuenta como correcta y muestra «Ojo con las tildes: …». En zh/ja se aceptan con y sin espacios. Las opciones se muestran barajadas.
+Archivos afectados: `lib/core/aprendizaje/correccion.dart`, `lib/features/ruta/item_view.dart`.
+Riesgo: pares donde la tilde cambia el sentido (avó/avô) se aceptan con aviso.
+
+## DEC-010 — Publicar 9 idiomas como «Versión inicial» (REVISIÓN NATIVA PENDIENTE)
+
+Fecha: 2026-09-26 (decidido por el usuario)
+Problema: las rutas de es, fr, de, pt, it, zh, ja, ko, ru se redactaron sin revisión de hablantes nativos.
+Decisión: se publican con `revision: "inicial"` y etiqueta visible «Versión inicial». Inglés: `revisada`.
+Puntos concretos a revisar (informes de los autores): fr professeure, «Comment tu t'appelles ?», «Je viens de Quito»; it «sto a casa», «Prego» = «Dígame»; pt pronunciaciones de Río/SP, «estou com fome»; de «Ich bin kein Lehrer», pregunta V1; ru convención de transliteración (х = j, о átona = a); es «Encantado» como error, yeísmo; zh 不 con tono cambiado, frases cortas en la tienda de té; ja sin kanji en f0, おくに は どこ; ko romanización sin tensificación, 친구예요; en todos, pares mínimos que dependen del TTS (avó/avô, pala/palla, tonos, 달/탈/딸).
+Riesgo: errores de naturalidad; ningún error de corrección gramatical conocido.
