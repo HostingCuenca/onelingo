@@ -14,24 +14,26 @@ Estructura educativa multilingüe: cada idioma con su propio mapa y una ruta de 
 - El contenido antiguo (`nivel-N.json`, guías, biblioteca) convive como banco (DEC-005).
 
 ## Estado
-- Ruta f0 IMPLEMENTADA y PROBADA en los 10 idiomas (6 unidades c/u, 60 en total). 9 idiomas marcados «Versión inicial» (sin revisión nativa).
-- Nivel 0 = ruta; aprobar todas sus unidades desbloquea el Nivel 1.
-- Gramática inglesa: reanuda tema, marca practicados, guarda borradores.
-- A1–C1 de otros idiomas: legado + niveles 3–10 con banco genérico en inglés (sin resolver, decisión del usuario: se resuelve con contenido real).
+- Ruta f0 IMPLEMENTADA y en PRODUCCIÓN en los 10 idiomas (6 unidades c/u). 9 idiomas «Versión inicial» (sin revisión nativa).
+- **A1 de inglés en PRODUCCIÓN**: 29 unidades (niveles `a1-1`, `a1-2`, 3 módulos) según PLAN_A1_INGLES.md; `/ruta/:nivel`.
+- Nivel 0 = ruta; unidades de niveles inferiores al diagnóstico son «omitibles» (DEC-011).
+- Voz: idioma forzado en ElevenLabs y caché por idioma (DEC-012). Sonidos y botones con estilo de la app (DEC-013).
+- A2–C1 inglés y A1+ del resto: legado; niveles 3–10 fuera de inglés con banco genérico en inglés.
 
 ## Cinco últimos cambios
-1. `607a1df` núcleo `lib/core/aprendizaje/`, pantallas `lib/features/ruta/`, contenido f0 × 10, pruebas.
-2. Tolerancia a tildes y pinyin; opciones barajadas (DEC-009).
-3. `CargadorRuta` lee sin la caché de `rootBundle` (evita futuros colgados en pruebas).
-4. Home: 3 destinos por idioma (DEC-008), sin tocar diseño.
-5. Docs de seguimiento completos en `docs/claude-educacion/`.
+1. `f0a6451` pronunciación por idioma (backend `voz.ts`), sonidos Kenney revisados, `OpcionRespuesta` con pedestal y `BotonPrincipal` en la ruta.
+2. `913a4e3` A1 de inglés (29 unidades), rutas por nivel, omitibles, validador estricto de distractores.
+3. `607a1df` núcleo `lib/core/aprendizaje/` + rutas f0 × 10 idiomas.
+4. Releases `20260926-edu-1-fundamentos` y `20260926-edu-2-a1-voz` en producción.
+5. Docs de seguimiento, `tools/generar_mapa_curricular.py`.
 
 ## Archivos principales
 ```
 lib/core/aprendizaje/{modelos,cargador,grafo,dominio,correccion,integridad,migracion,providers}.dart
 lib/features/ruta/{ruta_screen,unidad_screen,item_view}.dart
 lib/shared/widgets/tarjeta_fundamentos.dart
-assets/contenido/<idioma>/ruta/{curso,f0}.json
+assets/contenido/<idioma>/ruta/{curso,f0}.json  (+ en: a1-1, a1-2-presente, a1-2-comunicar)
+lib/features/ruta/opcion_respuesta.dart · backend/src/lib/voz.ts
 tools/validar_ruta.py
 test/ruta_{contenido,dominio,recorrido}_test.dart
 ```
@@ -40,7 +42,9 @@ test/ruta_{contenido,dominio,recorrido}_test.dart
 ```bash
 python3 tools/validar_ruta.py            # contenido de los 10 idiomas
 ~/flutter/bin/flutter analyze lib        # 7 info previos en sync.dart
-~/flutter/bin/flutter test               # 129 pasan, 1 omitida
+~/flutter/bin/flutter test               # 133 pasan, 1 omitida
+cd backend && npx tsx --test test/*.test.ts   # 11 pasan
+python3 tools/generar_mapa_curricular.py
 ~/flutter/bin/flutter build web --release --dart-define=API_URL=https://onelingo.hostingcuenca.com/api
 ./tools/dev-local.sh android emulator-5554   # AVD pruebas_general
 ```
@@ -50,16 +54,16 @@ En pruebas de widgets: precargar la ruta con `tester.runAsync(() => cargador.car
 Ver DESPLIEGUES.md (release, respaldo y rollback). SSH `ssh -F /dev/null root@167.235.20.41`; web en `/var/www/onelingo/web` (conservar `web/apk/`); bloqueo `/tmp/onelingo-deploy.lock` en el servidor.
 
 ## Siguiente tarea concreta
-Migrar A1 de inglés (niveles 1–2) al esquema 2 empezando por los nodos `en-g-*` de A1 de la auditoría A, enlazando las guías existentes como alias. En paralelo: revisión nativa de DEC-010.
+A2 de inglés (niveles 3–4): esqueleto contractual desde la auditoría A §A2 (como PLAN_A1_INGLES.md) y 3 agentes de contenido con un archivo cada uno. Después, A1 de otro idioma. En paralelo: revisión nativa (DEC-010) y escucha real de sonidos/voces (DEC-012, DEC-013).
 
 ## Riesgos activos
 - Contenido de 9 idiomas sin revisión nativa (DEC-010).
+- Sonidos elegidos por análisis de señal, no de oído; voces del sistema dependen del dispositivo.
+- Gemini devuelve 403 («project denied access») en producción; el diagnóstico recurre a OpenAI.
 - Evaluación de unidad reutiliza ítems al reintentar; no hay banco separado.
-- Audio TTS de pares mínimos/tonos no verificado acústicamente.
-- El audio exige sesión en el backend; los usuarios demo locales no oyen audio (comportamiento previo).
-- Home: la tarjeta «50 situaciones» dice «Inglés para la vida real» en todos los idiomas (texto del home, no tocado).
+- Home: la tarjeta «50 situaciones» dice «Inglés para la vida real» en todos los idiomas.
 - Niveles 3–10 fuera de inglés siguen mostrando el banco genérico en inglés.
-- El backend reemplaza el estado completo sin fusión (riesgo previo de «última escritura gana»).
+- El backend reemplaza el estado completo sin fusión («última escritura gana»).
 
 ## No sobrescribir
 Home nuevo (`home_screen.dart`, salvo sus destinos), logo oficial, 6 iconos del home, imagen «Aprende hoy», avatares (`web/avatar`), voz, backend y su `.env`, configuración del servidor, APK publicado.
