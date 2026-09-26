@@ -144,7 +144,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   }
 
   bool get bloqueada {
-    final estados = estadosRuta(widget.ruta, ref.read(progressProvider).practicas);
+    final estados = estadosAlumno(widget.ruta, ref.read(progressProvider));
     return estados[u.id]?.estado == EstadoUnidad.bloqueada;
   }
 
@@ -522,9 +522,14 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     final puntuables = primeras.length;
     final aciertos = primeras.values.where((v) => v).length;
     final ok = aprobada == true;
+    // La siguiente en orden, aunque sea del nivel siguiente (f0 → A1).
     final siguienteUnidad = widget.ruta.unidades
-        .where((x) => x.orden > u.orden && x.nivel == u.nivel)
+        .where((x) => x.orden > u.orden)
         .firstOrNull;
+    final tituloNivel = widget.ruta.curso.niveles
+        .where((n) => n.id == u.nivel)
+        .firstOrNull
+        ?.titulo;
     final fallos = [
       for (final p in pantallas)
         if (p.item != null && primeras['${p.paso.id}:${p.item!.id}'] == false) p,
@@ -576,9 +581,11 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         Tarjeta(
           color: OL.amarilloSuave,
           borde: OL.amarillo,
-          child: const Text(
-            '¡Completaste los Fundamentos! Ya tienes el Nivel 1 disponible en Aprender.',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+          child: Text(
+            u.nivel == 'f0'
+                ? '¡Completaste los Fundamentos! Ya tienes el Nivel 1 disponible.'
+                : '¡Completaste ${t(tituloNivel)}!',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
           ),
         ),
       ],

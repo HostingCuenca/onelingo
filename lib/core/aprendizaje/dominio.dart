@@ -43,26 +43,54 @@ bool _resueltaGuiada(Map? e) =>
 DateTime? _fecha(Object? v) => v is String ? DateTime.tryParse(v) : null;
 
 class InfoUnidad {
-  const InfoUnidad(this.estado, {this.repasoPendiente = false, this.proximoRepaso});
+  const InfoUnidad(
+    this.estado, {
+    this.repasoPendiente = false,
+    this.proximoRepaso,
+    this.omitible = false,
+  });
   final EstadoUnidad estado;
   final bool repasoPendiente;
   final DateTime? proximoRepaso;
+
+  /// De un nivel inferior al del diagnóstico: cuenta como prerrequisito
+  /// cumplido y no se recomienda, pero se puede estudiar.
+  final bool omitible;
+
+  InfoUnidad comoOmitible() => InfoUnidad(
+    estado == EstadoUnidad.bloqueada ? EstadoUnidad.disponible : estado,
+    repasoPendiente: repasoPendiente,
+    proximoRepaso: proximoRepaso,
+    omitible: true,
+  );
 }
+
+/// Nivel interno desde el que empieza la ruta de un alumno: los niveles
+/// inferiores al del diagnóstico se pueden omitir (salvo quien empieza de cero).
+int nivelBaseDe({required bool desdeCero, required int nivelInicial}) =>
+    desdeCero ? 0 : nivelInicial;
 
 /// Calcula el estado de todas las unidades de una ruta.
 Map<String, InfoUnidad> estadosRuta(
   RutaCargada ruta,
   Map<String, dynamic> practicas, {
   DateTime? ahora,
+  int nivelBase = 0,
 }) {
   final hoy = ahora ?? DateTime.now();
   final res = <String, InfoUnidad>{};
   // Las unidades vienen ordenadas y los prerrequisitos siempre son anteriores.
   for (final u in ruta.unidades) {
     final prereqOk = u.prerequisitos.every(
-      (p) => res[p]?.estado.alMenos(EstadoUnidad.practicada) ?? false,
+      (p) =>
+          (res[p]?.omitible ?? false) ||
+          (res[p]?.estado.alMenos(EstadoUnidad.practicada) ?? false),
     );
-    res[u.id] = _estadoUnidad(u, practicas, prereqOk, hoy);
+    final info = _estadoUnidad(u, practicas, prereqOk, hoy);
+    final omitible =
+        (u.nivelInterno ?? 99) < nivelBase &&
+        !info.estado.alMenos(EstadoUnidad.aprobada);
+    res[u.id] = omitible ? info.comoOmitible() : info;
   }
   return res;
 }
@@ -179,7 +207,8 @@ Map<String, dynamic> siguienteRepaso(
 UnidadRuta? unidadRecomendada(RutaCargada ruta, Map<String, InfoUnidad> e) {
   for (final u in ruta.unidades) {
     final info = e[u.id]!;
-    if (!info.estado.alMenos(EstadoUnidad.aprobada) &&
+    if (!info.omitible &&
+        !info.estado.alMenos(EstadoUnidad.aprobada) &&
         info.estado != EstadoUnidad.bloqueada) {
       return u;
     }

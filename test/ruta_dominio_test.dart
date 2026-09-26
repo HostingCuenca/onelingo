@@ -99,7 +99,7 @@ void main() {
   test('Nivel 0 completo solo con todas las unidades aprobadas', () {
     final ahora = DateTime(2026, 9, 26);
     final practicas = <String, dynamic>{};
-    for (final x in ruta.unidades) {
+    for (final x in ruta.delNivel('f0')) {
       expect(nivelAprobado(ruta, estadosRuta(ruta, practicas), 'f0'), isFalse);
       practicas.addAll(guiadaResuelta(x));
       practicas[ClaveRuta.evaluacion(x.id)] = resumenEvaluacion(x, 5, 5, null, ahora);
@@ -157,6 +157,33 @@ void main() {
     expect(vuelta.rutaFundamentosAprobada, isTrue);
     // La marca de otro idioma no cuenta.
     expect(hecho.copyWith(idiomaMeta: 'fr').fundamentosPendientes, isTrue);
+  });
+
+  test('Diagnóstico: los niveles ya superados se pueden omitir', () {
+    // Quien empieza de cero no omite nada.
+    expect(nivelBaseDe(desdeCero: true, nivelInicial: 1), 0);
+    var e = estadosRuta(ruta, {}, nivelBase: 0);
+    expect(e.values.where((i) => i.omitible), isEmpty);
+    // Ubicado en el Nivel 1: fundamentos opcionales, A1 disponible.
+    final base = nivelBaseDe(desdeCero: false, nivelInicial: 1);
+    e = estadosRuta(ruta, {}, nivelBase: base);
+    for (final u in ruta.delNivel('f0')) {
+      expect(e[u.id]!.omitible, isTrue, reason: u.id);
+      expect(e[u.id]!.estado, isNot(EstadoUnidad.bloqueada), reason: u.id);
+    }
+    final siguiente = unidadRecomendada(ruta, e);
+    expect(siguiente?.nivel, isNot('f0'));
+    // Ubicado en A2 (nivel 3): todo A1 queda opcional.
+    e = estadosRuta(ruta, {}, nivelBase: 3);
+    for (final u in ruta.unidades.where((u) => (u.nivelInterno ?? 9) < 3)) {
+      expect(e[u.id]!.omitible, isTrue, reason: u.id);
+    }
+    // Aprobar una unidad omitible la saca de «opcional».
+    e = estadosRuta(ruta, {
+      ClaveRuta.evaluacion(u(0).id): resumenEvaluacion(u(0), 5, 5, null, DateTime.now()),
+    }, nivelBase: 1);
+    expect(e[u(0).id]!.omitible, isFalse);
+    expect(e[u(0).id]!.estado, EstadoUnidad.aprobada);
   });
 
   test('Grafo: detecta ciclos y prerrequisitos inexistentes', () {

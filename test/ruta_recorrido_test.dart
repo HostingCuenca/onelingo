@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:audioplayers_platform_interface/audioplayers_platform_interface.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +173,18 @@ void main() {
   });
 
   testWidgets('Ruta: muestra unidades, estados y la recomendación', (tester) async {
-    await montar(tester, const RutaScreen());
+    await montar(
+      tester,
+      const RutaScreen(),
+      prefs: {
+        'onelingo.progress.v1': jsonEncode({
+          'onboardingDone': true,
+          'idiomaMeta': 'en',
+          'nivelInicial': 1,
+          'fundamentos': true,
+        }),
+      },
+    );
     expect(find.text('Fundamentos de Inglés'), findsOneWidget);
     expect(find.text('Siguiente paso'), findsOneWidget);
     expect(find.text('0. Primer contacto'), findsOneWidget);
@@ -183,6 +195,32 @@ void main() {
       scrollable: find.byType(Scrollable).first,
     );
     expect(find.text('Bloqueada'), findsWidgets);
+  });
+
+  testWidgets('Alumno ubicado en Nivel 1: A1 disponible y fundamentos opcionales',
+      (tester) async {
+    final estado = jsonEncode({
+      'onboardingDone': true,
+      'idiomaMeta': 'en',
+      'nivelInicial': 1,
+      'fundamentos': false,
+    });
+    await montar(
+      tester,
+      const RutaScreen(nivel: 'a1-1'),
+      prefs: {'onelingo.progress.v1': estado},
+    );
+    expect(find.text('Nivel 1 · A1 inicial · Inglés'), findsOneWidget);
+    expect(find.text('0 de 12 unidades aprobadas · A1'), findsOneWidget);
+    expect(find.text('Siguiente paso'), findsOneWidget);
+    // Sin bloqueo por fundamentos: la primera unidad de A1 está disponible.
+    expect(find.text('Disponible'), findsWidgets);
+    await montar(
+      tester,
+      const RutaScreen(),
+      prefs: {'onelingo.progress.v1': estado},
+    );
+    expect(find.text('Opcional · según tu nivel'), findsWidgets);
   });
 
   testWidgets('Gramática: al volver reanuda el tema y marca lo practicado',

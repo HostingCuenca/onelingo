@@ -113,11 +113,22 @@ class Validador:
             return set()
         vistos.add(u["id"])
         res = {w for v in u.get("vocabulario", []) for w in palabras(v.get("texto", ""))}
-        # Las formas incorrectas explicadas en erroresFrecuentes se enseñan como error.
-        res |= {w for e in u.get("erroresFrecuentes", []) for w in palabras(re.sub(r"\([^)]*\)", " ", e.get("incorrecto", "")))}
         for p in u.get("prerequisitos", []):
             if p in unidades:
                 res |= self.conocidas(unidades[p], unidades, vistos)
+        return res
+
+    def de_errores(self, u, unidades, vistos=None):
+        """Palabras de las frases incorrectas enseñadas (unidad y prerrequisitos)."""
+        vistos = vistos if vistos is not None else set()
+        if u["id"] in vistos:
+            return set()
+        vistos.add(u["id"])
+        res = {w for e in u.get("erroresFrecuentes", [])
+               for w in palabras(re.sub(r"\([^)]*\)", " ", e.get("incorrecto", "")))}
+        for p in u.get("prerequisitos", []):
+            if p in unidades:
+                res |= self.de_errores(unidades[p], unidades, vistos)
         return res
 
     def unidad(self, u, unidades, libres):
@@ -150,6 +161,8 @@ class Validador:
         if not isinstance(umbral, (int, float)) or not 0.5 <= umbral <= 1:
             self.error(uid, "criterioDominio.umbral debe estar entre 0.5 y 1")
         conocidas = self.conocidas(u, unidades) | libres
+        # Las formas incorrectas enseñadas como error solo valen como distractor.
+        self.distractores = conocidas | self.de_errores(u, unidades)
         pasos = u.get("pasos", [])
         if not pasos or pasos[0].get("tipo") not in ENSENAR:
             self.error(uid, "la unidad debe empezar enseñando (explicacion/ejemplos/vocabulario/patron)")
@@ -241,7 +254,8 @@ class Validador:
                 if isinstance(o, dict):
                     self.apoyo(o, f"{donde}.opciones[{i}]")
                 else:
-                    self.meta(str(o), conocidas, f"{donde}.opciones[{i}]")
+                    permitidas = conocidas if i == r else self.distractores
+                    self.meta(str(o), permitidas, f"{donde}.opciones[{i}]")
             if "pregunta" in it:
                 self.meta(it["pregunta"], conocidas, f"{donde}.pregunta")
             if "preguntaApoyo" in it:
@@ -264,7 +278,8 @@ class Validador:
             self.meta(it.get("texto", ""), conocidas, f"{donde}.texto")
             self.meta(it.get("respuesta", ""), conocidas, f"{donde}.respuesta")
             for o in it.get("opciones", []):
-                self.meta(str(o), conocidas, f"{donde}.opciones")
+                permitidas = conocidas if palabras(str(o)) == palabras(it.get("respuesta", "")) else self.distractores
+                self.meta(str(o), permitidas, f"{donde}.opciones")
             if it.get("audio"):
                 self.meta(it["audio"], conocidas, f"{donde}.audio")
         elif f == "relacionar":

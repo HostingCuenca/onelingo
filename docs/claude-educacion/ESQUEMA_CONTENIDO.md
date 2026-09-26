@@ -41,6 +41,8 @@ Los textos en el **idioma meta** son cadenas simples; si la escritura no es lati
 - `palabrasLibres`: nombres propios y otros tokens del idioma meta permitidos sin enseñanza previa.
 - `nivelInterno: null` + `estado: "planificado"` = nivel reservado (C2, DEC-002). No se muestra al alumno.
 
+Un nivel puede tener varios módulos (p. ej. `a1-2` = `en.a1-2.presente` + `en.a1-2.comunicar`); la pantalla de ruta los muestra como secciones. Los prerrequisitos pueden cruzar módulos y niveles; `orden` es global en el curso. Si un módulo no carga, el curso sigue funcionando sin él (`CargadorRuta.modulosConError`) y las pruebas fallan.
+
 ## <modulo>.json
 
 ```json
@@ -65,6 +67,7 @@ Los textos en el **idioma meta** son cadenas simples; si la escritura no es lati
 | `criterioDominio` | `{"umbral": 0.8}` | sí | aciertos a la primera en la evaluación |
 | `repaso` | `{"intervalosDias": [1,3,7,16,35,90]}` | no | valores por defecto si falta |
 | `tutor` | objeto | no | metadatos futuros para el tutor IA (sin integración visual) |
+| `guias` | [string] | no | ids de guías de `grammar_guides.dart` relacionadas (enlace con el contenido antiguo) |
 
 **Vocablo**: `{"id": "v-hello", "texto": "hello", "rom": "…"?, "traduccion": TextoApoyo, "nota": TextoApoyo?}`
 **ErrorFrecuente**: `{"incorrecto": "I is Ana.", "correcto": "I am Ana.", "explicacion": TextoApoyo}`
@@ -110,7 +113,8 @@ Normalización para corregir: minúsculas, apóstrofos tipográficos → `'`, se
 ## Estados de unidad (se calculan desde `practicas`, DEC-006)
 
 `bloqueada` (prerrequisito sin practicar; se ve, no se hace) → `disponible` → `enCurso` (vio la explicación) → `practicada` (práctica guiada resuelta) → `aprobada` (evaluación ≥ umbral a la primera en ese intento) → `dominada` (aprobada + repaso acertado ≥ 1 día después). `repasar` = aprobada/dominada con repaso vencido.
-Desbloqueo: todos los prerrequisitos ≥ `practicada`. Nivel 0 completo: todas las unidades de `f0` ≥ `aprobada`.
+Desbloqueo: todos los prerrequisitos ≥ `practicada` u **omitibles**. Nivel completo: todas sus unidades ≥ `aprobada`.
+Omitible (DEC-011): unidad de un nivel interno inferior al del diagnóstico (`nivelBase = fundamentos ? 0 : nivelInicial`) y no aprobada. Cuenta como prerrequisito cumplido, no se recomienda y se muestra «Opcional · según tu nivel»; se puede estudiar igual.
 
 ## Claves de evidencia (en `ProgressState.practicas`)
 

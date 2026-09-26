@@ -10,6 +10,8 @@ import '../library/library_screen.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../core/aprendizaje/modelos.dart';
+import '../../core/aprendizaje/providers.dart';
 import '../../shared/widgets/tarjeta_fundamentos.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -21,6 +23,17 @@ class LevelsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
     final meta = idioma(s.idiomaMeta);
+    final ruta = ref.watch(rutaProvider(s.idiomaMeta)).valueOrNull;
+    // Nivel del esquema 2 para un nivel interno, si ya tiene unidades.
+    String? nivelRuta(int n) {
+      for (final nv in ruta?.curso.niveles ?? const <NivelCurso>[]) {
+        if (nv.nivelInterno == n && ruta!.delNivel(nv.id).isNotEmpty) {
+          return nv.id;
+        }
+      }
+      return null;
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text('Curso de ${meta.nombre}')),
       body: ListView(
@@ -39,14 +52,16 @@ class LevelsScreen extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Tarjeta(
-                  onTap: () => context.push('/biblioteca?nivel=$n'),
+                  onTap: () => nivelRuta(n) != null
+                      ? context.push('/ruta/${nivelRuta(n)}')
+                      : context.push('/biblioteca?nivel=$n'),
                   child: Row(
                     children: [
                       CircleAvatar(child: Text('$n')),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Nivel $n · ${cefrDe(n.toDouble())} · ${n.isOdd ? 'Explora' : 'Consolida'}',
+                          'Nivel $n · ${cefrDe(n.toDouble())} · ${nivelRuta(n) != null ? 'Ruta guiada' : n.isOdd ? 'Explora' : 'Consolida'}',
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),

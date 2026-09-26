@@ -33,6 +33,32 @@ void main() {
     });
   }
 
+  test('Inglés A1: las 29 unidades del plan, en su nivel y sin módulos rotos', () async {
+    final cargador = CargadorRuta();
+    final ruta = (await cargador.cargar('en'))!;
+    expect(cargador.modulosConError, isEmpty);
+    final a11 = ruta.delNivel('a1-1'), a12 = ruta.delNivel('a1-2');
+    expect(a11.length, 12);
+    expect(a12.length, 17);
+    for (final u in [...a11, ...a12]) {
+      expect(u.cefr, 'A1', reason: u.id);
+      expect(u.nivelInterno, u.nivel == 'a1-1' ? 1 : 2, reason: u.id);
+      expect(u.id.startsWith('en.a1.'), isTrue, reason: u.id);
+    }
+    // Continuidad: A1 empieza al terminar fundamentos y termina en la integración.
+    expect(a11.first.prerequisitos, ['en.f0.presentarse']);
+    expect(a12.last.id, 'en.a1.integracion-a1');
+    expect(ruta.unidades.map((u) => u.orden).toList(), [for (var i = 0; i < 35; i++) i]);
+  });
+
+  test('Ningún idioma tiene módulos que no cargan', () async {
+    for (final l in idiomas) {
+      final cargador = CargadorRuta();
+      await cargador.cargar(l.code);
+      expect(cargador.modulosConError, isEmpty, reason: l.code);
+    }
+  });
+
   test('Idiomas de apoyo (DEC-004): español explicado en inglés', () async {
     final es = (await CargadorRuta().cargar('es'))!;
     expect(es.curso.apoyoPredeterminado, 'en');

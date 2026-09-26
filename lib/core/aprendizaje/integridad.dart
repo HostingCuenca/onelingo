@@ -28,21 +28,30 @@ List<String> problemasDeContenido(RutaCargada ruta) {
     }
   }
 
+  Iterable<UnidadRuta> cadena(UnidadRuta u) => [
+    for (final id in {u.id, ...prerequisitosTransitivos(ruta, u.id)})
+      ruta.unidad(id)!,
+  ];
   Set<String> conocidas(UnidadRuta u) => {
     ...libres,
-    for (final id in {u.id, ...prerequisitosTransitivos(ruta, u.id)})
-      for (final x in [ruta.unidad(id)!]) ...[
-        for (final v in x.vocabulario) ...palabrasMeta(v.texto),
-        for (final e in x.erroresFrecuentes)
-          ...palabrasMeta(e.incorrecto.replaceAll(RegExp(r'\([^)]*\)'), ' ')),
-      ],
+    for (final x in cadena(u))
+      for (final v in x.vocabulario) ...palabrasMeta(v.texto),
+  };
+  // Las formas incorrectas enseñadas como error solo valen como distractor.
+  Set<String> distractores(UnidadRuta u) => {
+    ...conocidas(u),
+    for (final x in cadena(u))
+      for (final e in x.erroresFrecuentes)
+        ...palabrasMeta(e.incorrecto.replaceAll(RegExp(r'\([^)]*\)'), ' ')),
   };
 
   for (final u in ruta.unidades) {
     final saber = conocidas(u);
-    void meta(String? texto, String donde) {
+    final saberDistractor = distractores(u);
+    void meta(String? texto, String donde, {bool distractor = false}) {
       if (texto == null) return;
-      final faltan = palabrasMeta(texto).where((w) => !saber.contains(w)).toSet();
+      final validas = distractor ? saberDistractor : saber;
+      final faltan = palabrasMeta(texto).where((w) => !validas.contains(w)).toSet();
       if (faltan.isNotEmpty) {
         errores.add('$donde: palabras no enseñadas ${faltan.join(', ')}');
       }
@@ -103,8 +112,15 @@ List<String> problemasDeContenido(RutaCargada ruta) {
         meta(i.texto, donde);
         meta(i.audio, donde);
         meta(i.pregunta, donde);
-        for (final o in i.opciones) {
-          o.meta != null ? meta(o.meta, donde) : apoyo(o.apoyo, donde);
+        for (var k = 0; k < i.opciones.length; k++) {
+          final o = i.opciones[k];
+          final esRespuesta = i.indiceRespuesta != null
+              ? k == i.indiceRespuesta
+              : palabrasMeta(o.meta ?? '').join(' ') ==
+                    palabrasMeta(i.respuesta ?? '').join(' ');
+          o.meta != null
+              ? meta(o.meta, donde, distractor: !esRespuesta)
+              : apoyo(o.apoyo, donde);
         }
         for (final par in i.pares) {
           meta(par.$1, donde);

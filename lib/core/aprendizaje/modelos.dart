@@ -341,6 +341,7 @@ class UnidadRuta {
     required this.id,
     required this.idioma,
     required this.nivel,
+    this.modulo = '',
     required this.orden,
     required this.titulo,
     required this.objetivo,
@@ -356,8 +357,12 @@ class UnidadRuta {
     required this.umbral,
     required this.intervalosRepaso,
     required this.tutor,
+    this.guias = const [],
   });
   final String id, idioma, nivel, cefr, concepto;
+
+  /// Módulo al que pertenece (sección dentro del nivel).
+  final String modulo;
   final int orden;
   final int? nivelInterno;
   final TextoApoyo titulo, objetivo;
@@ -371,16 +376,21 @@ class UnidadRuta {
   /// Metadatos para el tutor IA (integración futura, sin interfaz).
   final Map<String, dynamic> tutor;
 
+  /// Guías de gramática existentes relacionadas (ids de grammar_guides.dart).
+  final List<String> guias;
+
   static const intervalosPorDefecto = [1, 3, 7, 16, 35, 90];
 
   factory UnidadRuta.fromJson(
     Map<String, dynamic> j, {
     required String idioma,
     required String nivel,
+    String modulo = '',
   }) => UnidadRuta(
     id: j['id'] as String,
     idioma: idioma,
     nivel: nivel,
+    modulo: modulo,
     orden: j['orden'] as int,
     titulo: TextoApoyo.fromJson(j['titulo']),
     objetivo: TextoApoyo.fromJson(j['objetivo']),
@@ -408,6 +418,7 @@ class UnidadRuta {
           intervalosPorDefecto,
     ),
     tutor: Map<String, dynamic>.from(j['tutor'] as Map? ?? const {}),
+    guias: List<String>.from(j['guias'] as List? ?? const []),
   );
 
   Vocablo? vocablo(String id) {

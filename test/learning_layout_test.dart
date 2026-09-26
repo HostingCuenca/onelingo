@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,11 +21,24 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
-    SharedPreferences.setMockInitialValues({});
+    // Principiante que empieza de cero (onboarding: fundamentos = true).
+    SharedPreferences.setMockInitialValues({
+      'onelingo.progress.v1': jsonEncode({
+        'onboardingDone': true,
+        'idiomaMeta': 'en',
+        'nivelInicial': 1,
+        'fundamentos': true,
+      }),
+    });
     final prefs = await SharedPreferences.getInstance();
     Efectos.animaciones.value = false;
+    final cargador = CargadorRuta();
+    await tester.runAsync(() => cargador.cargar('en'));
     final container = ProviderContainer(
-      overrides: [prefsProvider.overrideWithValue(prefs)],
+      overrides: [
+        prefsProvider.overrideWithValue(prefs),
+        cargadorRutaProvider.overrideWithValue(cargador),
+      ],
     );
     addTearDown(container.dispose);
     Future<void> render(String recommendation) => tester.pumpWidget(
@@ -53,6 +68,7 @@ void main() {
       ),
     );
     await render('gramatica');
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
     expect(find.text('Gramática'), findsOneWidget);
@@ -67,7 +83,14 @@ void main() {
   testWidgets(
     'Fundamentos muestra el próximo paso sin confundir práctica con dominio',
     (tester) async {
-      SharedPreferences.setMockInitialValues({});
+      SharedPreferences.setMockInitialValues({
+        'onelingo.progress.v1': jsonEncode({
+          'onboardingDone': true,
+          'idiomaMeta': 'en',
+          'nivelInicial': 1,
+          'fundamentos': true,
+        }),
+      });
       final prefs = await SharedPreferences.getInstance();
       final cargador = CargadorRuta();
       final ruta = (await tester.runAsync(() => cargador.cargar('en')))!!;

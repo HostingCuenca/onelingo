@@ -92,3 +92,13 @@ Problema: las rutas de es, fr, de, pt, it, zh, ja, ko, ru se redactaron sin revi
 Decisión: se publican con `revision: "inicial"` y etiqueta visible «Versión inicial». Inglés: `revisada`.
 Puntos concretos a revisar (informes de los autores): fr professeure, «Comment tu t'appelles ?», «Je viens de Quito»; it «sto a casa», «Prego» = «Dígame»; pt pronunciaciones de Río/SP, «estou com fome»; de «Ich bin kein Lehrer», pregunta V1; ru convención de transliteración (х = j, о átona = a); es «Encantado» como error, yeísmo; zh 不 con tono cambiado, frases cortas en la tienda de té; ja sin kanji en f0, おくに は どこ; ko romanización sin tensificación, 친구예요; en todos, pares mínimos que dependen del TTS (avó/avô, pala/palla, tonos, 달/탈/딸).
 Riesgo: errores de naturalidad; ningún error de corrección gramatical conocido.
+
+## DEC-011 — Unidades omitibles según el diagnóstico
+
+Fecha: 2026-09-26
+Problema: con prerrequisitos entre niveles, un alumno ubicado en A1 o A2 quedaría bloqueado por unidades de Fundamentos o A1 que no necesita.
+Decisión: `nivelBase = fundamentos ? 0 : nivelInicial`. Las unidades con `nivelInterno < nivelBase` no aprobadas son «omitibles»: cuentan como prerrequisito cumplido, no se recomiendan y siguen disponibles. No se marcan como aprobadas ni dominadas (no hay evidencia).
+Motivo: el prompt pide distinguir unidades dominadas, a estudiar y omitibles; esto aplica la ubicación sin inventar evidencia.
+Alternativas descartadas: marcar como aprobadas las unidades inferiores (falsearía el dominio); ignorar prerrequisitos entre niveles.
+Archivos afectados: `lib/core/aprendizaje/dominio.dart`, `providers.dart`, pantallas de ruta.
+Riesgo: el diagnóstico actual no mide por unidad; una comprobación breve de prerrequisitos (auditoría C) sigue pendiente.

@@ -11,18 +11,25 @@ import '../../core/state/providers.dart';
 import '../../shared/widgets/mascot_coach.dart';
 import '../../shared/widgets/widgets.dart';
 
-/// Ruta de Fundamentos (nivel 0) del idioma que estudia el alumno.
+/// Ruta de un nivel (por defecto Fundamentos, nivel 0) del idioma que
+/// estudia el alumno.
 class RutaScreen extends ConsumerWidget {
-  const RutaScreen({super.key});
+  const RutaScreen({super.key, this.nivel = 'f0'});
+  final String nivel;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
     final ruta = ref.watch(rutaProvider(s.idiomaMeta));
     final nombre = idioma(s.idiomaMeta).nombre;
+    final r = ruta.valueOrNull;
+    final datosNivel = r?.curso.niveles.where((n) => n.id == nivel).firstOrNull;
+    final titulo = nivel == 'f0' || datosNivel == null
+        ? 'Fundamentos de $nombre'
+        : '${datosNivel.titulo.en(cadenaDelAlumno(s, r!.curso))} · $nombre';
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fundamentos de $nombre'),
+        title: Text(titulo),
         leading: IconButton(
           tooltip: 'Volver',
           icon: const Icon(Icons.arrow_back_rounded),
@@ -36,7 +43,7 @@ class RutaScreen extends ConsumerWidget {
           error: (_, _) => const Center(child: Text('No se pudo cargar la ruta.')),
           data: (r) => r == null
               ? _SinRuta(nombre: nombre)
-              : _Ruta(ruta: r, estado: s),
+              : _Ruta(ruta: r, estado: s, nivel: nivel),
         ),
       ),
     );
@@ -63,36 +70,82 @@ class _SinRuta extends StatelessWidget {
   );
 }
 
+/// Primera unidad recomendable del nivel; si no hay, una con repaso pendiente.
+UnidadRuta? recomendadaEnNivel(
+  RutaCargada ruta,
+  Map<String, InfoUnidad> e,
+  String nivel,
+) {
+  final unidades = ruta.delNivel(nivel);
+  for (final u in unidades) {
+    final i = e[u.id]!;
+    if (!i.omitible &&
+        i.estado != EstadoUnidad.bloqueada &&
+        !i.estado.alMenos(EstadoUnidad.aprobada)) {
+      return u;
+    }
+  }
+  for (final u in unidades) {
+    if (e[u.id]!.repasoPendiente) return u;
+  }
+  return null;
+}
+
+/// Siguiente nivel publicado con unidades, o null.
+NivelCurso? nivelSiguiente(RutaCargada ruta, String nivel) {
+  final publicados = [
+    for (final n in ruta.curso.niveles)
+      if (n.estado == EstadoNivel.publicado && ruta.delNivel(n.id).isNotEmpty) n,
+  ];
+  final i = publicados.indexWhere((n) => n.id == nivel);
+  return i >= 0 && i + 1 < publicados.length ? publicados[i + 1] : null;
+}
+
 class _Ruta extends StatelessWidget {
-  const _Ruta({required this.ruta, required this.estado});
+  const _Ruta({required this.ruta, required this.estado, required this.nivel});
   final RutaCargada ruta;
   final ProgressState estado;
+  final String nivel;
 
   @override
   Widget build(BuildContext context) {
     final cadena = cadenaDelAlumno(estado, ruta.curso);
     String t(TextoApoyo? x) => x?.en(cadena) ?? '';
-    final unidades = ruta.delNivel('f0');
-    final estados = estadosRuta(ruta, estado.practicas);
-    final recomendada = unidadRecomendada(ruta, estados);
+    final unidades = ruta.delNivel(nivel);
+    final estados = estadosAlumno(ruta, estado);
+    final recomendada = recomendadaEnNivel(ruta, estados, nivel);
+    final siguienteNivel = nivelSiguiente(ruta, nivel);
+    final destinoSiguiente = siguienteNivel == null
+        ? '/aprender'
+        : '/ruta/${siguienteNivel.id}';
+    final modulos = [
+      for (final m in ruta.curso.modulos)
+        if (m.nivel == nivel) m,
+    ];
+    final cefr =
+        ruta.curso.niveles.where((n) => n.id == nivel).firstOrNull?.cefr ?? '';
     final aprobadas = unidades
         .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
         .length;
-    final completo = nivelAprobado(ruta, estados, 'f0');
-    final hayLeccionesExtra = leccionesDe(0).isNotEmpty;
+    final completo = nivelAprobado(ruta, estados, nivel);
+    final hayLeccionesExtra = nivel == 'f0' && leccionesDe(0).isNotEmpty;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
       children: [
         MascotCoach(
           message: completo
-              ? '¡Terminaste los fundamentos! Repasa cuando te lo pida y sigue en el Nivel 1.'
+              ? '¡Terminaste este nivel! Repasa cuando te lo pida y sigue avanzando.'
               : 'Primero te enseño con ejemplos. Después practicas y, al final, compruebas lo que sabes.',
         ),
         Row(
           children: [
             Expanded(
               child: Text(
-                t(ruta.curso.modulos.first.titulo),
+                t(
+                  modulos.length == 1
+                      ? modulos.first.titulo
+                      : ruta.curso.niveles.firstWhere((n) => n.id == nivel).titulo,
+                ),
                 style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
               ),
             ),
@@ -111,7 +164,7 @@ class _Ruta extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '$aprobadas de ${unidades.length} unidades aprobadas · Pre-A1',
+          '$aprobadas de ${unidades.length} unidades aprobadas · $cefr',
           style: const TextStyle(color: OL.gris, fontSize: 16),
         ),
         const SizedBox(height: 8),
@@ -130,23 +183,37 @@ class _Ruta extends StatelessWidget {
             child: Tarjeta(
               color: OL.verdeSuave,
               borde: OL.verde,
-              onTap: () => context.go('/aprender'),
-              child: const Row(
+              onTap: () => siguienteNivel == null
+                  ? context.go(destinoSiguiente)
+                  : context.push(destinoSiguiente),
+              child: Row(
                 children: [
-                  Icon(Icons.emoji_events_outlined, color: OL.verde, size: 32),
-                  SizedBox(width: 12),
+                  const Icon(Icons.emoji_events_outlined, color: OL.verde, size: 32),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Fundamentos completados. Continúa en el Nivel 1.',
-                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+                      siguienteNivel == null
+                          ? 'Nivel completado. Sigue practicando en Aprender.'
+                          : 'Nivel completado. Continúa: ${t(siguienteNivel.titulo)}.',
+                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
                     ),
                   ),
-                  Icon(Icons.chevron_right_rounded),
+                  const Icon(Icons.chevron_right_rounded),
                 ],
               ),
             ),
           ),
-        for (final u in unidades)
+        for (final u in unidades) ...[
+          if (modulos.length > 1 &&
+              (u == unidades.first ||
+                  unidades[unidades.indexOf(u) - 1].modulo != u.modulo))
+            Padding(
+              padding: const EdgeInsets.fromLTRB(4, 8, 4, 10),
+              child: Text(
+                t(modulos.firstWhere((m) => m.id == u.modulo).titulo),
+                style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: _FilaUnidad(
@@ -159,6 +226,7 @@ class _Ruta extends StatelessWidget {
                   : t(ruta.unidad(u.prerequisitos.first)?.titulo),
             ),
           ),
+        ],
         const SizedBox(height: 8),
         const Text(
           'Aprobar una unidad no es dominarla: la marcamos como dominada cuando la recuerdas en un repaso días después.',
@@ -179,6 +247,9 @@ class _Ruta extends StatelessWidget {
 
 String etiquetaEstado(InfoUnidad info) {
   if (info.repasoPendiente) return 'Repaso pendiente';
+  if (info.omitible && !info.estado.alMenos(EstadoUnidad.practicada)) {
+    return 'Opcional · según tu nivel';
+  }
   return switch (info.estado) {
     EstadoUnidad.bloqueada => 'Bloqueada',
     EstadoUnidad.disponible => 'Disponible',

@@ -12,6 +12,14 @@ final rutaProvider = FutureProvider.family<RutaCargada?, String>(
   (ref, idioma) => ref.watch(cargadorRutaProvider).cargar(idioma),
 );
 
+/// Nivel desde el que empieza la ruta del alumno (omite lo ya superado).
+int nivelBaseAlumno(ProgressState s) =>
+    nivelBaseDe(desdeCero: s.fundamentos, nivelInicial: s.nivelInicial);
+
+/// Estados de la ruta de un alumno.
+Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) =>
+    estadosRuta(ruta, s.practicas, nivelBase: nivelBaseAlumno(s));
+
 /// Cadena de idiomas de apoyo para mostrar textos al alumno (DEC-004).
 List<String> cadenaDelAlumno(ProgressState s, Curso curso) =>
     cadenaApoyo(s.idiomaNativo, curso.apoyoPredeterminado);

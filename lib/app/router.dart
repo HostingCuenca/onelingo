@@ -85,6 +85,12 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ),
                 ],
               ),
+              // Rutas de los demás niveles (esquema 2), p. ej. /ruta/a1-1.
+              GoRoute(
+                path: '/ruta/:nivel',
+                builder: (_, state) =>
+                    RutaScreen(nivel: state.pathParameters['nivel']!),
+              ),
               // Ruta de fundamentos por idioma (esquema 2). Sustituye a la
               // pantalla foundations-v1; su progreso se lee por alias.
               GoRoute(

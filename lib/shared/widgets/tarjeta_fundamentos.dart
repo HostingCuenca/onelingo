@@ -16,18 +16,26 @@ class TarjetaFundamentos extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
     final ruta = ref.watch(rutaProvider(s.idiomaMeta)).valueOrNull;
-    final unidades = ruta?.delNivel('f0') ?? const [];
-    final estados = ruta == null ? null : estadosRuta(ruta, s.practicas);
+    final estados = ruta == null ? null : estadosAlumno(ruta, s);
+    final siguiente = ruta == null ? null : unidadRecomendada(ruta, estados!);
+    // La tarjeta sigue al nivel de la próxima unidad (f0, luego A1…).
+    final nivel = siguiente?.nivel ?? 'f0';
+    final unidades = ruta?.delNivel(nivel) ?? const [];
     final aprobadas = estados == null
         ? 0
         : unidades
               .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
               .length;
-    final siguiente = ruta == null ? null : unidadRecomendada(ruta, estados!);
     final cadena = ruta == null ? const ['es'] : cadenaDelAlumno(s, ruta.curso);
     final completo = unidades.isNotEmpty && aprobadas == unidades.length;
+    final tituloNivel = ruta?.curso.niveles
+        .where((n) => n.id == nivel)
+        .firstOrNull
+        ?.titulo
+        .en(cadena);
     return Tarjeta(
-      onTap: () => context.push('/fundamentos'),
+      onTap: () =>
+          context.push(nivel == 'f0' ? '/fundamentos' : '/ruta/$nivel'),
       color: OL.moradoSuave,
       borde: OL.morado,
       child: Column(
@@ -59,7 +67,9 @@ class TarjetaFundamentos extends ConsumerWidget {
           BarraProgreso(unidades.isEmpty ? 0 : aprobadas / unidades.length),
           const SizedBox(height: 8),
           Text(
-            '$aprobadas de ${unidades.length} unidades aprobadas',
+            nivel == 'f0'
+                ? '$aprobadas de ${unidades.length} unidades aprobadas'
+                : '${tituloNivel ?? ''} · $aprobadas de ${unidades.length} unidades aprobadas',
             style: const TextStyle(fontSize: 14, height: 1.4, color: OL.gris),
           ),
         ],
