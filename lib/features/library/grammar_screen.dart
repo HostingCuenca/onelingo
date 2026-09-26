@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/grammar_guides.dart';
@@ -28,6 +29,9 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
   final Map<String, int> choices = {};
   final Map<String, String> drafts = {};
   final Set<String> checked = {};
+  static const _clavePosicion = 'onelingo.gramatica.posicion';
+  static const _prefijoBorrador = 'onelingo.gramatica.borrador.';
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +39,52 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
       1,
       10,
     );
+    _restaurar();
+  }
+
+  /// Reanuda el último tema (y nivel, si no se pidió uno) y los borradores.
+  Future<void> _restaurar() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final guardados = {
+        for (final k in prefs.getKeys())
+          if (k.startsWith(_prefijoBorrador))
+            k.substring(_prefijoBorrador.length): prefs.getString(k) ?? '',
+      };
+      final partes = (prefs.getString(_clavePosicion) ?? '').split(':');
+      final nivelGuardado = int.tryParse(partes.first);
+      final temaGuardado = partes.length > 1 ? int.tryParse(partes[1]) : null;
+      if (!mounted) return;
+      setState(() {
+        drafts.addAll(guardados);
+        if (nivelGuardado != null &&
+            temaGuardado != null &&
+            (widget.nivel == null || widget.nivel == nivelGuardado) &&
+            nivelGuardado >= 1 &&
+            nivelGuardado <= 10 &&
+            temaGuardado < grammarForLevel(nivelGuardado).length) {
+          level = nivelGuardado;
+          topic = temaGuardado;
+        }
+      });
+    } catch (_) {}
+  }
+
+  void _guardarPosicion() => SharedPreferences.getInstance()
+      .then((p) => p.setString(_clavePosicion, '$level:$topic'))
+      .catchError((_) => true);
+
+  void _guardarBorrador(String guia, String texto) {
+    drafts[guia] = texto;
+    SharedPreferences.getInstance()
+        .then((p) => p.setString('$_prefijoBorrador$guia', texto))
+        .catchError((_) => true);
+  }
+
+  /// Un tema está practicado si hay evidencia de alguna de sus comprobaciones.
+  bool practicado(GrammarGuide g) {
+    final practicas = ref.read(progressProvider).practicas;
+    return practicas.keys.any((k) => k.startsWith('grammar-guide-${g.id}-'));
   }
 
   void check(GrammarGuide guide, int index) {
@@ -65,6 +115,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
   void showStep(int value) {
     FocusScope.of(context).unfocus();
     setState(() => step = value);
+    _guardarPosicion();
     if (scroll.hasClients) scroll.jumpTo(0);
   }
 
@@ -158,8 +209,15 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                             trailing: Icon(
                               current
                                   ? Icons.bookmark_rounded
+                                  : practicado(item)
+                                  ? Icons.check_circle_rounded
                                   : Icons.chevron_right_rounded,
-                              color: OL.morado,
+                              color: !current && practicado(item)
+                                  ? OL.verde
+                                  : OL.morado,
+                              semanticLabel: practicado(item)
+                                  ? 'Practicado'
+                                  : null,
                             ),
                             onTap: () =>
                                 Navigator.pop(context, (selectedLevel, i)),
@@ -417,7 +475,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                             initialValue: drafts[guide.id] ?? '',
                             minLines: 3,
                             maxLines: 6,
-                            onChanged: (v) => drafts[guide.id] = v,
+                            onChanged: (v) => _guardarBorrador(guide.id, v),
                             decoration: const InputDecoration(
                               labelText: 'Tus propias frases',
                               hintText: 'Escribe tu ejemplo en inglés…',

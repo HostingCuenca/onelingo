@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:onelingo/core/aprendizaje/cargador.dart';
+import 'package:onelingo/core/aprendizaje/dominio.dart';
+import 'package:onelingo/core/aprendizaje/providers.dart';
 import 'package:onelingo/core/efectos.dart';
 import 'package:onelingo/core/content/foundations.dart';
 import 'package:onelingo/core/state/providers.dart';
@@ -64,47 +67,68 @@ void main() {
   testWidgets(
     'Fundamentos muestra el próximo paso sin confundir práctica con dominio',
     (tester) async {
-      final evidence = <String, dynamic>{};
-      Future<void> render() => tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: SingleChildScrollView(
-              child: LearningPath(
-                nivel: 1,
-                recommended: 'gramatica',
-                practices: Map.of(evidence),
+      SharedPreferences.setMockInitialValues({});
+      final prefs = await SharedPreferences.getInstance();
+      final cargador = CargadorRuta();
+      final ruta = (await tester.runAsync(() => cargador.cargar('en')))!!;
+      final container = ProviderContainer(
+        overrides: [
+          prefsProvider.overrideWithValue(prefs),
+          cargadorRutaProvider.overrideWithValue(cargador),
+        ],
+      );
+      addTearDown(container.dispose);
+      final notifier = container.read(progressProvider.notifier);
+      Future<void> render() async {
+        await tester.pumpWidget(
+          UncontrolledProviderScope(
+            container: container,
+            child: const MaterialApp(
+              home: Scaffold(
+                body: SingleChildScrollView(
+                  child: LearningPath(
+                    nivel: 1,
+                    recommended: 'gramatica',
+                    practices: {},
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      );
+        );
+        await tester.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 50)),
+        );
+        await tester.pumpAndSettle();
+      }
+
       await render();
       expect(find.text('Empieza desde cero'), findsOneWidget);
-      expect(find.text('0 de 6 pasos practicados con apoyo'), findsOneWidget);
-      final first = foundationUnits.first;
-      evidence[foundationKey(first, 0)] = {
-        'correcta': true,
-        'resueltaConApoyo': true,
-      };
-      await render();
-      expect(find.text('0 de 6 pasos practicados con apoyo'), findsOneWidget);
-      for (var i = 0; i < first.checks.length; i++) {
-        evidence[foundationKey(first, i)] = {'resueltaConApoyo': true};
-      }
-      await render();
-      expect(find.text('Continuar: Digo mi nombre'), findsOneWidget);
-      expect(find.text('1 de 6 pasos practicados con apoyo'), findsOneWidget);
+      expect(find.text('0 de 6 unidades aprobadas'), findsOneWidget);
+      // La evidencia antigua de foundations-v1 es práctica con apoyo: no aprueba.
       for (final unit in foundationUnits) {
         for (var i = 0; i < unit.checks.length; i++) {
-          evidence[foundationKey(unit, i)] = {'resueltaConApoyo': true};
+          notifier.registrarPractica(foundationKey(unit, i), {
+            'correcta': true,
+            'resueltaConApoyo': true,
+            'conApoyo': true,
+          });
         }
       }
       await render();
-      expect(find.text('Repasa tus primeros pasos'), findsOneWidget);
-      expect(find.text('6 de 6 pasos practicados con apoyo'), findsOneWidget);
+      expect(find.text('0 de 6 unidades aprobadas'), findsOneWidget);
+      // Aprobar la evaluación de la primera unidad sí avanza la ruta.
+      final primera = ruta.unidades.first;
+      notifier.registrarPractica(
+        ClaveRuta.evaluacion(primera.id),
+        resumenEvaluacion(primera, 5, 5, null, DateTime.now()),
+      );
+      await render();
+      expect(find.text('Continuar: Pronombres personales'), findsOneWidget);
+      expect(find.text('1 de 6 unidades aprobadas'), findsOneWidget);
       expect(find.text('Gramática'), findsOneWidget);
-      expect(find.byType(InkWell), findsNWidgets(6));
       expect(tester.takeException(), isNull);
     },
+    timeout: const Timeout(Duration(seconds: 45)),
   );
 }

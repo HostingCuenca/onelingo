@@ -110,11 +110,18 @@ class ProgressState {
     return true;
   }
 
-  /// Fundamentos pendientes: recomendados y sin terminar.
+  /// Fundamentos pendientes: recomendados y sin terminar. Se terminan al
+  /// aprobar la ruta de fundamentos del idioma (DEC-007) o, como antes,
+  /// completando todas las lecciones antiguas del nivel 0.
   bool get fundamentosPendientes =>
       fundamentos &&
+      !rutaFundamentosAprobada &&
       leccionesDe(0).isNotEmpty &&
       completadasEnNivel(0) < totalLeccionesDe(0);
+
+  /// Marca que escribe la ruta nueva al aprobar todas las unidades de f0.
+  bool get rutaFundamentosAprobada =>
+      practicas.containsKey('ruta:$idiomaMeta.f0:completa');
 
   int get nivelActual {
     if (fundamentosPendientes) return 0;

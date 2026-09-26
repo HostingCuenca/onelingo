@@ -8,9 +8,9 @@ import '../../app/theme.dart';
 import '../../core/diagnostico.dart';
 import '../library/library_screen.dart';
 import '../../core/content/curriculum.dart';
-import '../../core/content/fundamentos.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/tarjeta_fundamentos.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Mapa de los 10 niveles con su estado (bloqueado / en curso / aprobado).
@@ -61,8 +61,10 @@ class LevelsScreen extends ConsumerWidget {
               style: TextStyle(color: OL.gris, fontSize: 14),
             ),
             const SizedBox(height: 14),
-            if (leccionesDe(0).isNotEmpty)
-              _NivelCard(lvl: nivelFundamentos, s: s),
+            // Nivel 0 = ruta de fundamentos del idioma (DEC-007); las
+            // lecciones antiguas quedan como práctica extra dentro de la ruta.
+            const TarjetaFundamentos(),
+            const SizedBox(height: 12),
             for (final lvl in niveles) _NivelCard(lvl: lvl, s: s),
           ],
         ],

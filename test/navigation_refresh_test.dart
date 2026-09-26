@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:onelingo/app/router.dart';
 import 'package:onelingo/app/theme.dart';
+import 'package:onelingo/core/aprendizaje/cargador.dart';
+import 'package:onelingo/core/aprendizaje/providers.dart';
 import 'package:onelingo/core/efectos.dart';
 import 'package:onelingo/core/state/providers.dart';
 
@@ -29,8 +31,14 @@ void main() {
           }),
         });
         final prefs = await SharedPreferences.getInstance();
+        // La ruta de fundamentos se lee de assets fuera del reloj simulado.
+        final cargador = CargadorRuta();
+        await tester.runAsync(() => cargador.cargar('en'));
         final container = ProviderContainer(
-          overrides: [prefsProvider.overrideWithValue(prefs)],
+          overrides: [
+            prefsProvider.overrideWithValue(prefs),
+            cargadorRutaProvider.overrideWithValue(cargador),
+          ],
         );
         addTearDown(container.dispose);
         final router = container.read(routerProvider);
@@ -60,6 +68,10 @@ void main() {
         );
         expect(tester.takeException(), isNull);
         router.go('/fundamentos');
+        await tester.pump();
+        await tester.runAsync(
+          () => Future<void>.delayed(const Duration(milliseconds: 50)),
+        );
         await tester.pumpAndSettle();
         expect(find.byType(NavigationBar), findsOneWidget);
         router.go('/practicar');

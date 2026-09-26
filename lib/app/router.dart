@@ -6,7 +6,8 @@ import '../core/state/providers.dart';
 import '../core/voz.dart';
 import '../shared/widgets/app_navigation_icon.dart';
 import '../features/library/library_screen.dart';
-import '../features/foundations/foundations_screen.dart';
+import '../features/ruta/ruta_screen.dart';
+import '../features/ruta/unidad_screen.dart';
 import '../features/library/grammar_screen.dart';
 import '../features/library/learning_unit_screen.dart';
 import '../features/chat/chat_screen.dart';
@@ -84,9 +85,20 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ),
                 ],
               ),
+              // Ruta de fundamentos por idioma (esquema 2). Sustituye a la
+              // pantalla foundations-v1; su progreso se lee por alias.
               GoRoute(
                 path: '/fundamentos',
-                builder: (_, _) => const FoundationsScreen(),
+                builder: (_, _) => const RutaScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'unidad/:id',
+                    builder: (_, state) => UnidadScreen(
+                      unidadId: state.pathParameters['id']!,
+                      repaso: state.uri.queryParameters['modo'] == 'repaso',
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: '/estudiar',

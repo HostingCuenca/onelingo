@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../../app/theme.dart';
 import '../../core/biblioteca.dart';
 import '../../core/diagnostico.dart';
-import '../../core/content/foundations.dart';
 import 'widgets.dart';
 import 'skill_badge.dart';
+import 'tarjeta_fundamentos.dart';
 
 /// Stable learning areas: recommendations never remove access to a subject.
 class LearningPath extends StatelessWidget {
@@ -21,15 +21,6 @@ class LearningPath extends StatelessWidget {
   final Map<String, dynamic> practices;
   @override
   Widget build(BuildContext context) {
-    final practiced = foundationUnits
-        .where((unit) => foundationPracticed(unit, practices))
-        .length;
-    final pending = foundationUnits.where(
-      (unit) =>
-          !foundationPracticed(unit, practices) &&
-          foundationAvailable(unit, practices),
-    );
-    final next = pending.isEmpty ? null : pending.first;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -44,46 +35,7 @@ class LearningPath extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         if (nivel <= 2) ...[
-          Tarjeta(
-            onTap: () => context.push('/fundamentos'),
-            color: OL.moradoSuave,
-            borde: OL.morado,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Icon(Icons.school_rounded, color: OL.morado, size: 32),
-                const SizedBox(height: 10),
-                Text(
-                  practiced == 0
-                      ? 'Empieza desde cero'
-                      : next == null
-                      ? 'Repasa tus primeros pasos'
-                      : 'Continuar: ${next.title}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
-                    color: OL.morado,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  next?.goal ?? 'Vuelve a los ejemplos y practica a tu ritmo.',
-                  style: const TextStyle(fontSize: 16, height: 1.4),
-                ),
-                const SizedBox(height: 12),
-                BarraProgreso(practiced / foundationUnits.length),
-                const SizedBox(height: 8),
-                Text(
-                  '$practiced de ${foundationUnits.length} pasos practicados con apoyo',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    height: 1.4,
-                    color: OL.gris,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          const TarjetaFundamentos(),
           const SizedBox(height: 16),
         ],
         for (var i = 0; i < RutaBiblioteca.habilidades.length; i++) ...[

@@ -45,8 +45,12 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             _LearnTodayHero(
               onTap: () {
-                if (s.idiomaMeta == 'en') {
+                // Destino según idioma y progreso: la ruta de fundamentos
+                // mientras esté pendiente; en inglés, el camino de Aprender.
+                if (s.fundamentosPendientes) {
                   context.go('/fundamentos');
+                } else if (s.idiomaMeta == 'en') {
+                  context.go('/aprender');
                 } else if (actual != null) {
                   context.push('/leccion/${actual.id}');
                 } else {
@@ -68,12 +72,12 @@ class HomeScreen extends ConsumerWidget {
               onProgress: () => context.go('/perfil'),
               onDiagnostic: () => context.push(
                 '/prueba-nivel',
-                extra: {
-                  'idioma': 'en',
-                  'nivel': s.idiomaMeta == 'en' ? s.nivelInicial : 1,
-                },
+                extra: {'idioma': s.idiomaMeta, 'nivel': s.nivelInicial},
               ),
-              onLibrary: () => context.push('/biblioteca'),
+              // La biblioteca solo tiene contenido en inglés por ahora.
+              onLibrary: () => s.idiomaMeta == 'en'
+                  ? context.push('/biblioteca')
+                  : context.go('/aprender'),
             ),
             const SizedBox(height: 18),
             const MascotCoach(
