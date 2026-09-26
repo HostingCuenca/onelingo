@@ -38,3 +38,20 @@ Estados: MAPEADO (en el currículo) → DISEÑADO (objetivos y estructura) → I
 | ru | bukvy-druzya · bukvy-novye · mestoimeniya · eto · ne-voprosy · predstavlenie | cirílico, acento marcado en `rom`, presente sin «ser» |
 
 Revisión nativa pendiente en los 9 idiomas marcados «inicial»: lista de puntos en DECISIONES.md (DEC-010).
+
+## Actualización 2026-09-26 (release edu-3)
+
+| Idioma | Fundamentos (f0) | A1 (esquema 2) | Escritura / sonidos en f0 |
+|---|---:|---:|---|
+| en | 7 u. | 29 u. | alfabeto + sonidos |
+| es | 8 u. | 9 u. | alfabeto, vocales y consonantes (para angloparlantes) |
+| fr | 8 u. | 9 u. | alfabeto, vocales, nasales, liaison |
+| de | 8 u. | 9 u. | alfabeto, Umlaute, vocales y consonantes |
+| pt | 8 u. | 9 u. | alfabeto, vocales abiertas/nasales, consonantes |
+| it | 8 u. | 9 u. | alfabeto, c/g, dobles, vocales |
+| zh | 13 u. | 9 u. | 4 tonos + neutro, 21 iniciales, finales, sandhi, trazos, radicales |
+| ja | 16 u. | 8 u. | hiragana y katakana completos (+ dakuten, yōon, っ, vocales largas, préstamos) |
+| ko | 9 u. | 9 u. | hangul completo: 21 vocales, 19 consonantes, 받침, reglas de lectura |
+| ru | 10 u. | 9 u. | 33 letras, vocales duras/blandas, ь ъ, acento y reducción |
+
+Todas las rutas: PROBADO (validador y pruebas); 9 idiomas «inicial» (revisión nativa pendiente, DEC-010). A1 de otros idiomas = módulo «Primeras frases» (nivel `a1-1`); `a1-2` pendiente salvo inglés.

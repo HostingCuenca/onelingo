@@ -33,6 +33,15 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Unidades omitibles según diagnóstico (DEC-011).
 - [x] Validador: frases de error solo como distractor.
 
+## Fase 2c — Profundización multilingüe
+- [x] Paso `tabla` (validadores Python y Dart, interfaz con audio por casilla).
+- [x] Escritura/sonidos completos en f0 de los 10 idiomas.
+- [x] A1 «Primeras frases» con tablas de conjugación en los 9 idiomas; inglés con alfabeto y tablas.
+- [x] Fallo en práctica → continuar + repetir al final del bloque.
+- [x] Celebración (XP, precisión, tiempo) y sonido de nivel; también en lecciones antiguas.
+- [x] Precarga de fuentes CJK/cirílico en web.
+- [!] Release 3 `20260926-edu-3-escrituras`: build listo; SSH sin respuesta.
+
 ## Fase 3 — Gramática
 - [x] Verificar bug «gramática desaparece»: área corregida antes; pantalla no reanudaba ni marcaba (auditoría D).
 - [x] Reanudar tema, marcar practicados en el Temario, guardar borradores, respetar nivel elegido.

@@ -18,9 +18,12 @@ Estructura educativa multilingüe: cada idioma con su propio mapa y una ruta de 
 - **A1 de inglés en PRODUCCIÓN**: 29 unidades (niveles `a1-1`, `a1-2`, 3 módulos) según PLAN_A1_INGLES.md; `/ruta/:nivel`.
 - Nivel 0 = ruta; unidades de niveles inferiores al diagnóstico son «omitibles» (DEC-011).
 - Voz: idioma forzado en ElevenLabs y caché por idioma (DEC-012). Sonidos y botones con estilo de la app (DEC-013).
-- A2–C1 inglés y A1+ del resto: legado; niveles 3–10 fuera de inglés con banco genérico en inglés.
+- **Escrituras completas** en f0 (kana, hangul, pinyin, cirílico, alfabetos) y **A1 «Primeras frases»** en los 10 idiomas (204 unidades). Paso `tabla`.
+- Fallo en práctica → se continúa y se repite al final del bloque. Celebración al completar.
+- A2–C1 inglés y a1-2+ del resto: legado; niveles 3–10 fuera de inglés con banco genérico en inglés.
 
 ## Cinco últimos cambios
+1. `bf11441`/`58d2b73` escrituras completas + A1 ×10 idiomas, precarga de fuentes; `33fef8f` celebración, repetición de fallos, `tabla`.
 1. `f0a6451` pronunciación por idioma (backend `voz.ts`), sonidos Kenney revisados, `OpcionRespuesta` con pedestal y `BotonPrincipal` en la ruta.
 2. `913a4e3` A1 de inglés (29 unidades), rutas por nivel, omitibles, validador estricto de distractores.
 3. `607a1df` núcleo `lib/core/aprendizaje/` + rutas f0 × 10 idiomas.
@@ -54,7 +57,7 @@ En pruebas de widgets: precargar la ruta con `tester.runAsync(() => cargador.car
 Ver DESPLIEGUES.md (release, respaldo y rollback). SSH `ssh -F /dev/null root@167.235.20.41`; web en `/var/www/onelingo/web` (conservar `web/apk/`); bloqueo `/tmp/onelingo-deploy.lock` en el servidor.
 
 ## Siguiente tarea concreta
-A2 de inglés (niveles 3–4): esqueleto contractual desde la auditoría A §A2 (como PLAN_A1_INGLES.md) y 3 agentes de contenido con un archivo cada uno. Después, A1 de otro idioma. En paralelo: revisión nativa (DEC-010) y escucha real de sonidos/voces (DEC-012, DEC-013).
+Desplegar `20260926-edu-3-escrituras` (build en `build/web`, `main.dart.js` 181298a3…) cuando SSH responda. Después: A2 de inglés (niveles 3–4): esqueleto contractual desde la auditoría A §A2 (como PLAN_A1_INGLES.md) y 3 agentes de contenido con un archivo cada uno. Después, A1 de otro idioma. En paralelo: revisión nativa (DEC-010) y escucha real de sonidos/voces (DEC-012, DEC-013).
 
 ## Riesgos activos
 - Contenido de 9 idiomas sin revisión nativa (DEC-010).

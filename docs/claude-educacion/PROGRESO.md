@@ -3,14 +3,18 @@
 Última actualización: 2026-09-26 19:00 (UTC-5: 14:00)
 Responsable: Claude (Claude Code) — Codex pausado durante esta fase
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
-Fase actual: Release educativa 2 publicada (A1 de inglés, voz por idioma, sonidos); siguiente: A2 de inglés o A1 de otro idioma
-Porcentaje aproximado: fundamentos 10 idiomas 100 % (revisión nativa pendiente); inglés pre-A1+A1 100 %; currículo completo A1–C2 ≈ 20 % implementado
+Fase actual: Release educativa 3 lista (escrituras completas + A1 «Primeras frases» ×10, recompensa, repetición de fallos); despliegue pendiente de acceso SSH
+Porcentaje aproximado: fundamentos 10 idiomas completos (escritura/sonidos) · A1 inicial 10 idiomas · inglés A1 completo · currículo A1–C2 ≈ 25 %
 
 ## Trabajando ahora
 
 - Nada en curso. Release 1 cerrada y verificada.
 
 ## Terminado recientemente
+
+- Escrituras/sonidos completos y A1 «Primeras frases» en 10 idiomas (204 unidades), paso `tabla` (DEC-015). 2026-09-26.
+- Fallo en práctica ya no bloquea: repetición al final del bloque (DEC-014). 2026-09-26.
+- Celebración al completar unidad/nivel y precarga de fuentes CJK en web (DEC-016). 2026-09-26.
 
 - A1 de inglés: 29 unidades en 3 módulos (plan en PLAN_A1_INGLES.md), rutas por nivel, unidades omitibles según diagnóstico. 2026-09-26.
 - Pronunciación por idioma corregida (DEC-012) y sonidos/feedback visual al estilo de la app (DEC-013). 2026-09-26.
@@ -30,8 +34,8 @@ Porcentaje aproximado: fundamentos 10 idiomas 100 % (revisión nativa pendiente)
 
 ## Bloqueos
 
-- Revisión nativa: requiere hablantes nativos o docentes (decisión humana).
-- Niveles 3–10 fuera de inglés siguen con banco genérico en inglés (el usuario decidió resolverlo con contenido real, no ocultarlos).
+- SSH a 167.235.20.41 sin respuesta desde ~2026-09-26 21:10 UTC (HTTPS OK). Causa probable: bloqueo temporal por número de conexiones (fail2ban). Acción: reintento automático; si persiste, revisar el firewall del servidor.
+- Revisión nativa de 9 idiomas (decisión humana).
 
 ## Producción
 

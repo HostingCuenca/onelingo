@@ -117,3 +117,25 @@ Fecha: 2026-09-26 (pedido por el usuario; referencia Duolingo)
 Decisión: efectos Kenney CC0 elegidos midiendo la forma de onda: acierto = confirmation_002 (ascendente y brillante), error = question_004 (descenso suave), completado = confirmation_001 + 002, nuevo `toque` = select_002 al elegir una opción. Opciones con pedestal (mismo lenguaje que `BotonPrincipal`), «pop» al acertar y sacudida suave al fallar, CONTINUAR verde tras acertar; todo respeta sonido/animaciones desactivados y movimiento reducido.
 Archivos afectados: `assets/sfx/*`, `lib/core/efectos.dart`, `lib/features/ruta/opcion_respuesta.dart`, `item_view.dart`, `unidad_screen.dart`, `ruta_screen.dart`.
 Riesgo: la elección se hizo por análisis de la señal, no de oído; validar escuchando en el dispositivo.
+
+## DEC-014 — Un fallo en la práctica no bloquea: el ejercicio vuelve al final del bloque
+
+Fecha: 2026-09-26 (reportado por el usuario: «al continuar se repite y no hay avance»)
+Problema: en la práctica guiada, tras un error solo se ofrecía «Intentar otra vez»; quien no sabía la respuesta repetía el mismo ejercicio sin avanzar.
+Decisión: tras responder siempre se puede continuar viendo la respuesta correcta; un ejercicio de práctica fallado se reinserta una vez al final de su bloque con la etiqueta «Otra vez» (patrón Duolingo). «Intentar otra vez ahora» queda como opción secundaria. La evaluación no repite (mide la primera respuesta).
+Archivos afectados: `lib/features/ruta/unidad_screen.dart`, `item_view.dart`.
+Riesgo: ninguno conocido; «practicada» sigue exigiendo resolver cada ejercicio guiado.
+
+## DEC-015 — Paso «tabla» y escrituras completas por idioma
+
+Fecha: 2026-09-26 (pedido por el usuario: en japonés solo había algunas kana)
+Decisión: nuevo paso `tabla` (celdas meta con romanización, audibles) para escrituras y conjugaciones; las celdas cuentan como enseñadas. Fundamentos de cada idioma cubren la escritura/sonidos completos (ja kana completo, zh pinyin completo, ko hangul completo, ru 33 letras, alfabetos latinos) y cada idioma tiene un A1 «Primeras frases» con pronombres, verbos iniciales y tablas de conjugación.
+Archivos afectados: esquema, validadores, `modelos.dart`, `tabla_ruta.dart`, contenido de los 10 idiomas.
+Riesgo: las celdas de tabla amplían lo «enseñado» sin explicar cada palabra; audio de letras sueltas → voz del sistema (DEC-012).
+
+## DEC-016 — Recompensa al completar
+
+Fecha: 2026-09-26 (pedido por el usuario; referencia Duolingo)
+Decisión: al aprobar una unidad o repaso, celebración con Lumo, confeti, fichas animadas (XP ganada, precisión, tiempo) y sonido «completado»; al completar un nivel, trofeo y fanfarria «nivel». Las lecciones antiguas usan la misma celebración (aciertos, precisión, racha). Respeta sonido/animaciones desactivados y movimiento reducido. En web se precarga la fuente de la escritura que se estudia para evitar cuadros vacíos.
+Archivos afectados: `lib/features/ruta/celebracion.dart`, `unidad_screen.dart`, `lesson_result_screen.dart`, `efectos.dart`, `assets/sfx/nivel.wav`, `lib/main.dart`.
+Riesgo: la XP mostrada es la ganada en la sesión (las repeticiones no suman XP).
