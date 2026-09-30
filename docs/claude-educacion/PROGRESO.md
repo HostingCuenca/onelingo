@@ -1,17 +1,19 @@
 # Estado actual
 
 Última actualización: 2026-09-30
-Responsable: Codex
+Responsable: Claude (Claude Code)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
 Fase actual: Inglés N1 y N2 completos y N3 C1–C90 publicados; N3 C91–C100 pendiente de autoría.
 Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 290/1.000 clases editoriales integradas y activas · programa inglés total 29 %
 
 ## Trabajando ahora
 
-- Continuar Inglés N3 desde C91 en bloques de cinco bajo `editorial-agent.v2`, con autoría y revisión independiente en paralelo. No ampliar el runtime de 290 a 300 hasta obtener GO longitudinal.
-- Cola y protocolo de continuidad: `docs/claude-educacion/ENGLISH_EDITORIAL_PIPELINE.md`.
+- **Pulido de las 290 clases publicadas antes de producir más** (auditoría `auditoria/AUDITORIA_2026-09-30.md`). Capa de enriquecimiento por bloques de 5 (`CONTRATO_ENRIQUECIMIENTO.md`): explicación en español, patrón, errores reales y situación con diálogo propio. Piloto de 15 clases con GO independiente integrado; ola 1 (90 clases) en autoría con 6 agentes.
+- N3 C91–C100 y el mapa de N4 quedan después del pulido y con el contrato enriquecido desde el origen.
 
 ## Terminado recientemente
+
+- Pulido de la app (2026-09-30, local, sin desplegar): fichas de ordenar desordenadas, contracciones aceptadas, umbral redondeado (3/4), repaso sin bucle, audio en escucha-ordenar/completar, nivel elegido en el diagnóstico, MCER por nivel, hash web, JSON compactos (12,4 → 7,3 MB), escritura larga sin rúbrica como producción abierta (216 ítems), situación con diálogo visible. Commits `d31dce7`…`5f8ce57`. 175 pruebas Flutter, 61 de herramientas, 10 idiomas sin errores.
 
 - Inglés N1 editorial completo y conectado localmente: 100 clases, 1.300 ejercicios, cronología 1–100 válida, manifiesto `active`, repaso aislado y selección trazable. 155 pruebas Flutter pasan, 1 omitida; 40 pruebas de herramientas pasan; 10 idiomas con 0 errores de ruta. Build web local verificado; sin despliegue. 2026-09-28.
 - Inglés N2: mapa editorial v2 de 100 clases congelado; C1–C15 redactadas con 195 ejercicios, 75 piezas de enseñanza, 134 entradas de vocabulario y cierres acumulativos C5/C10/C15. Validación individual 15/15, tres bundles correctos y 47 pruebas de herramientas. Permanece en `shadow`, sin alterar el runtime. 2026-09-29.

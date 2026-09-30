@@ -13,7 +13,8 @@ Completar Inglés N1–N10, 100 clases por nivel, sin depender del tutor ni de g
 | N1 C1–C100 | `active`, producción | mantenimiento |
 | N2 C1–C100 | fuente editorial `shadow`; runtime `active`, producción | revisión del cliente |
 | N3 C1–C90 | fuente editorial `shadow`; runtime `active`, producción | revisión del cliente |
-| N3 C91–C100 | pendiente de autoría | validación mecánica y auditoría independiente |
+| Enriquecimiento N1–N3 (290 clases) | piloto 15 GO integrado; ola 1 (90) en autoría | validador de enriquecimiento + revisión independiente |
+| N3 C91–C100 | pendiente, después del enriquecimiento | autoría con el contrato enriquecido |
 | N4–N10 | NO-GO para autoría | mapa v2 propio antes de autoría |
 
 ## Flujo obligatorio por bloque
@@ -38,7 +39,7 @@ Completar Inglés N1–N10, 100 clases por nivel, sin depender del tutor ni de g
 
 ## Protocolo de reanudación
 
-Al retomar el trabajo, leer primero este archivo y `PROGRESO.md`, comprobar la fila más avanzada y reanudar el primer bloque que no tenga `GO`. No volver a generar bloques integrados ni ampliar producción como parte automática de la población editorial. El primer lote pendiente es N3 C91–C95.
+Al retomar el trabajo, leer primero este archivo y `PROGRESO.md`, comprobar la fila más avanzada y reanudar el primer bloque que no tenga `GO`. No volver a generar bloques integrados ni ampliar producción como parte automática de la población editorial. El trabajo prioritario es el enriquecimiento de las 290 clases (CONTRATO_ENRIQUECIMIENTO.md); después, N3 C91–C95.
 
 Validaciones mínimas antes de cerrar un hito:
 
