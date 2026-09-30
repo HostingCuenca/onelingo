@@ -14,11 +14,50 @@ List<String> palabrasMeta(String texto) => texto
     .where((p) => p.isNotEmpty && p != '-')
     .toList();
 
+/// Formas base posibles de una flexión regular inglesa (misma regla que
+/// `bases` en tools/validar_ruta.py).
+Set<String> basesFlexion(String w) {
+  final res = <String>{};
+  if (w.endsWith("'s")) res.add(w.substring(0, w.length - 2));
+  const sufijos = [
+    ('ies', ['y']),
+    ('ied', ['y']),
+    ('iest', ['y']),
+    ('ier', ['y']),
+    ('es', ['', 'e']),
+    ('s', ['']),
+    ('ed', ['', 'e']),
+    ('d', ['']),
+    ('ing', ['', 'e']),
+    ('est', ['', 'e']),
+    ('er', ['', 'e']),
+  ];
+  for (final (suf, reemplazos) in sufijos) {
+    if (w.endsWith(suf) && w.length - suf.length >= 2) {
+      final raiz = w.substring(0, w.length - suf.length);
+      for (final r in reemplazos) {
+        res.add(raiz + r);
+      }
+      if (raiz.length >= 3 && raiz[raiz.length - 1] == raiz[raiz.length - 2]) {
+        res.add(raiz.substring(0, raiz.length - 1));
+      }
+    }
+  }
+  return res;
+}
+
+bool palabraConocida(String w, Set<String> conocidas) =>
+    conocidas.contains(w) ||
+    RegExp(r'^\d+$').hasMatch(w) ||
+    basesFlexion(w).any(conocidas.contains);
+
 /// Problemas pedagógicos y de datos de una ruta. Vacío = íntegra.
 List<String> problemasDeContenido(RutaCargada ruta) {
   final errores = [...validarGrafo(ruta.unidades)];
   final apoyos = ruta.curso.idiomasApoyo;
-  final libres = {for (final p in ruta.curso.palabrasLibres) ...palabrasMeta(p)};
+  final libres = {
+    for (final p in ruta.curso.palabrasLibres) ...palabrasMeta(p),
+  };
 
   void apoyo(TextoApoyo? t, String donde) {
     for (final l in apoyos) {
@@ -56,7 +95,9 @@ List<String> problemasDeContenido(RutaCargada ruta) {
     void meta(String? texto, String donde, {bool distractor = false}) {
       if (texto == null) return;
       final validas = distractor ? saberDistractor : saber;
-      final faltan = palabrasMeta(texto).where((w) => !validas.contains(w)).toSet();
+      final faltan = palabrasMeta(texto)
+          .where((w) => !palabraConocida(w, validas))
+          .toSet();
       if (faltan.isNotEmpty) {
         errores.add('$donde: palabras no enseñadas ${faltan.join(', ')}');
       }
@@ -88,7 +129,9 @@ List<String> problemasDeContenido(RutaCargada ruta) {
       if (p.texto != null || p.tipo == TipoPaso.explicacion) {
         apoyo(p.texto, '${u.id}.${p.id}.texto');
       }
-      if (p.tipo == TipoPaso.situacion) apoyo(p.contexto, '${u.id}.${p.id}.contexto');
+      if (p.tipo == TipoPaso.situacion) {
+        apoyo(p.contexto, '${u.id}.${p.id}.contexto');
+      }
       if (p.tipo == TipoPaso.tabla) {
         if (p.filas.isEmpty) errores.add('${u.id}.${p.id}: tabla sin filas');
         for (final c in p.columnas) {

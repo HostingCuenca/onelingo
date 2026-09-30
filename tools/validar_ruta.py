@@ -25,6 +25,28 @@ def palabras(texto):
     return [p for p in PUNTUACION.sub(" ", texto.lower()).split() if p and p != "-"]
 
 
+def bases(w):
+    """Formas base posibles de una flexión regular inglesa (plural, 's,
+    -ed, -ing, -er/-est). Evita exigir que cada flexión se declare aparte."""
+    res = set()
+    if w.endswith("'s"):
+        res.add(w[:-2])
+    for suf, reemplazos in (("ies", ("y",)), ("ied", ("y",)), ("iest", ("y",)), ("ier", ("y",)),
+                            ("es", ("", "e")), ("s", ("",)), ("ed", ("", "e")), ("d", ("",)),
+                            ("ing", ("", "e")), ("est", ("", "e")), ("er", ("", "e"))):
+        if w.endswith(suf) and len(w) - len(suf) >= 2:
+            raiz = w[: -len(suf)]
+            for r in reemplazos:
+                res.add(raiz + r)
+            if len(raiz) >= 3 and raiz[-1] == raiz[-2]:
+                res.add(raiz[:-1])  # running → run, bigger → big
+    return res
+
+
+def conocida(w, conocidas):
+    return w in conocidas or w.isdigit() or bool(bases(w) & conocidas)
+
+
 def huella_item(item):
     """Contenido puntuable, sin id, pista, consigna ni feedback editorial."""
     datos = {k: item[k] for k in CAMPOS_HUELLA if k in item}
@@ -318,7 +340,7 @@ class Validador:
                         self.advertencia(uid, f"contaminación: ítems exactos reutilizados entre {da} y {db}")
 
     def meta(self, texto, conocidas, donde):
-        faltan = [w for w in palabras(texto) if w not in conocidas]
+        faltan = [w for w in palabras(texto) if not conocida(w, conocidas)]
         if faltan:
             self.error(donde, f"usa palabras no enseñadas: {', '.join(sorted(set(faltan)))}")
 

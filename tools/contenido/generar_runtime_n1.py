@@ -77,18 +77,24 @@ def enrichments(level: str, units: dict[str, dict]) -> dict[str, dict]:
     return result
 
 
-def unenriched_units(spec: dict) -> list[dict]:
-    return [
-        route_unit(
-            document,
-            level=spec["id"],
-            cefr=spec["cefr"],
-            internal=spec["internal"],
-            first_order=spec["first_order"],
-            previous="",
-        )
-        for document in classes(spec["id"], spec["count"])
-    ]
+def unenriched_units() -> list[dict]:
+    """Todas las clases del corte, sin enriquecer y encadenadas como en el runtime."""
+    result = []
+    previous = "en.f0.presentarse"
+    for spec in LEVELS:
+        for document in classes(spec["id"], spec["count"]):
+            result.append(
+                route_unit(
+                    document,
+                    level=spec["id"],
+                    cefr=spec["cefr"],
+                    internal=spec["internal"],
+                    first_order=spec["first_order"],
+                    previous=previous,
+                )
+            )
+            previous = document["id"]
+    return result
 
 
 def es(text: str) -> dict:
@@ -551,11 +557,7 @@ def compile_runtime() -> tuple[dict[str, dict], dict, dict, dict]:
     }
     previous = "en.f0.presentarse"
     # La validación del enriquecimiento compara con las clases sin enriquecer.
-    base_units = {
-        unit["id"]: unit
-        for spec in LEVELS
-        for unit in unenriched_units(spec)
-    }
+    base_units = {unit["id"]: unit for unit in unenriched_units()}
     routes = {}
     active_ids = []
     for spec in LEVELS:

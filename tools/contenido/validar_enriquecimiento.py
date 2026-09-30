@@ -62,8 +62,8 @@ def validar_clase(cid: str, e: dict, clase: dict | None) -> tuple[list[str], lis
     exp = e.get("explicacion") or {}
     _texto(exp.get("titulo"), f"{cid}.explicacion.titulo", errores, 3)
     texto = _texto(exp.get("texto"), f"{cid}.explicacion.texto", errores, 80)
-    if texto and len(texto) > 900:
-        avisos.append(f"{cid}.explicacion.texto: {len(texto)} caracteres (largo para móvil)")
+    if texto and len(texto) > 650:
+        avisos.append(f"{cid}.explicacion.texto: {len(texto)} caracteres (largo para móvil; ideal ≤ 550)")
 
     patron = e.get("patron")
     if patron is not None:
@@ -115,7 +115,8 @@ def validar_clase(cid: str, e: dict, clase: dict | None) -> tuple[list[str], lis
         errores.append(f"{cid}.situacion.item: formato {item.get('formato')!r}")
     if item.get("formato") == "escuchar" and not item.get("audio"):
         errores.append(f"{cid}.situacion.item: escuchar sin audio")
-    opciones = item.get("opciones") or []
+    # Opciones en inglés (texto) o en el idioma de apoyo ({"es": …}).
+    opciones = [o.get("es", "") if isinstance(o, dict) else o for o in item.get("opciones") or []]
     if len(opciones) != 3 or len({o.strip().lower() for o in opciones}) != 3:
         errores.append(f"{cid}.situacion.item: se piden 3 opciones distintas")
     r = item.get("respuesta")
@@ -159,16 +160,45 @@ def validar_clase(cid: str, e: dict, clase: dict | None) -> tuple[list[str], lis
     return errores, avisos
 
 
+def _conocidas_por_clase(unidades: dict[str, dict], ids: list[str]) -> dict[str, set[str]]:
+    """Palabras que el validador de rutas da por enseñadas en cada clase
+    (misma regla que tools/validar_ruta.py, sobre la cadena de clases)."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import validar_ruta
+
+    curso = json.loads((ROOT / "assets/contenido/en/ruta/curso.json").read_text(encoding="utf-8"))
+    libres = {w for p in curso.get("palabrasLibres", []) for w in validar_ruta.palabras(p)}
+    todas = dict(unidades)
+    for archivo in ("f0.json",):
+        for u in json.loads((ROOT / f"assets/contenido/en/ruta/{archivo}").read_text(encoding="utf-8"))["unidades"]:
+            todas[u["id"]] = u
+    v = validar_ruta.Validador("en")
+    return {cid: v.conocidas(todas[cid], todas) | libres for cid in ids}
+
+
+def palabras_no_ensenadas(cid: str, e: dict, conocidas: set[str]) -> list[str]:
+    import validar_ruta
+
+    textos = [s.get("texto", "") for s in (e.get("patron") or {}).get("formula", [])]
+    textos += [x.get("correcto", "") for x in e.get("erroresFrecuentes", [])]
+    sit = e.get("situacion") or {}
+    textos += [l.get("texto", "") for l in sit.get("dialogo", [])]
+    item = sit.get("item") or {}
+    textos += [o for o in item.get("opciones", []) if isinstance(o, str)]
+    textos.append(item.get("audio") or "")
+    textos += [x.get("en", "") for x in e.get("ejemplos", [])]
+    faltan = set()
+    for t in textos:
+        faltan |= {w for w in validar_ruta.palabras(t) if not validar_ruta.conocida(w, conocidas)}
+    return sorted(faltan)
+
+
 def unidades_runtime() -> dict[str, dict]:
     """Clases tal como quedan sin enriquecer (los índices de `ejemplos`
     se refieren a la enseñanza original, no a una versión ya sustituida)."""
     import generar_runtime_n1 as compilador
 
-    return {
-        u["id"]: u
-        for spec in compilador.LEVELS
-        for u in compilador.unenriched_units(spec)
-    }
+    return {u["id"]: u for u in compilador.unenriched_units()}
 
 
 def validar(path: Path, unidades: dict[str, dict] | None = None) -> tuple[list[str], list[str]]:
@@ -184,10 +214,15 @@ def validar(path: Path, unidades: dict[str, dict] | None = None) -> tuple[list[s
         for n in range(rango.get("start", 0), rango.get("end", -1) + 1)
     }
     clases = doc.get("classes") or {}
+    conocidas = _conocidas_por_clase(unidades, [cid for cid in clases if cid in unidades])
     if set(clases) != esperadas:
         errores.append(f"{path.name}: clases {sorted(clases)} no coinciden con el rango {sorted(esperadas)}")
     for cid, e in clases.items():
         err, av = validar_clase(cid, e, unidades.get(cid))
+        if cid in conocidas:
+            faltan = palabras_no_ensenadas(cid, e, conocidas[cid])
+            if faltan:
+                err.append(f"{cid}: palabras inglesas no enseñadas antes: {', '.join(faltan)}")
         errores += err
         avisos += av
     return errores, avisos

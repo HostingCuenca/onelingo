@@ -60,6 +60,8 @@ Las 290 clases publicadas practican y evalúan, pero no **explican** la gramáti
 ```
 
 - `tabla` y `ejemplos` son opcionales. `ejemplos` sustituye, por posición (0 = primero), ejemplos de enseñanza defectuosos: instrucciones o metalenguaje en inglés («Use present passive for…»), traducciones que resumen en lugar de traducir o notas en inglés.
+- Opciones del ítem: en inglés como texto (`"He has got a book."`) o en español como objeto (`{"es": "Del padre de Ana."}`); las españolas comprueban comprensión sin exigir producir inglés.
+- Palabras: las inglesas deben estar enseñadas antes (se aceptan flexiones regulares: plural, 's, -ed, -ing, -er/-est). Los nombres propios nuevos se añaden a `palabrasLibres` de `curso.json`. `python3 tools/validar_ruta.py` debe quedar en 0 errores.
 - `item.formato`: `elegir` o `escuchar` (con `"audio"`: línea del diálogo o variante breve), siempre con 3 opciones y `respuesta` como índice. No copiar ejercicios existentes de la clase.
 
 ## Reglas de calidad
