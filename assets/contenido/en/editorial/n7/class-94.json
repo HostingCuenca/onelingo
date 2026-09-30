@@ -1,0 +1,811 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-94",
+  "title": {
+    "en": "A story told from two sides",
+    "es": "Una historia contada desde dos lados"
+  },
+  "objectives": {
+    "es": [
+      "Escribir un relato breve contado por dos personajes que recuerdan el mismo hecho, con saltos temporales, diálogo y un contrafactual."
+    ]
+  },
+  "concepts": [
+    "n7-integrated-workshop-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-93"
+  ],
+  "usesVocabulary": [
+    "recall",
+    "version",
+    "however",
+    "whereas",
+    "afterwards",
+    "insisted",
+    "whispered",
+    "memory",
+    "narrator"
+  ],
+  "usesPatterns": [
+    "n7-integrated-workshop-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "recall",
+      "es": "recordar"
+    },
+    {
+      "en": "version",
+      "es": "versión"
+    },
+    {
+      "en": "however",
+      "es": "sin embargo"
+    },
+    {
+      "en": "whereas",
+      "es": "mientras que"
+    },
+    {
+      "en": "afterwards",
+      "es": "después, más tarde"
+    },
+    {
+      "en": "insisted",
+      "es": "insistió"
+    },
+    {
+      "en": "whispered",
+      "es": "susurró"
+    },
+    {
+      "en": "memory",
+      "es": "recuerdo, memoria"
+    },
+    {
+      "en": "narrator",
+      "es": "narrador"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-94.t01",
+      "en": "I recall the night clearly; my sister, however, remembers a different version.",
+      "es": "Recuerdo la noche con claridad; mi hermana, sin embargo, recuerda otra versión.",
+      "explanationEs": "Cada narrador da su versión: however marca el contraste entre las dos voces.",
+      "segments": [
+        "I recall the night clearly; my",
+        "sister, however, remembers a different version."
+      ],
+      "audioText": "I recall the night clearly; my sister, however, remembers a different version.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-4"
+    },
+    {
+      "id": "en.n7.class-94.t02",
+      "en": "Whereas I remember the silence, she remembers only the music.",
+      "es": "Mientras que yo recuerdo el silencio, ella solo recuerda la música.",
+      "explanationEs": "Whereas contrasta dos hechos y no lleva but en la misma frase.",
+      "segments": [
+        "Whereas I remember the silence,",
+        "she remembers only the music."
+      ],
+      "audioText": "Whereas I remember the silence, she remembers only the music.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-4"
+    },
+    {
+      "id": "en.n7.class-94.t03",
+      "en": "\"Stay here,\" he whispered, and afterwards he insisted that he had only wanted to help.",
+      "es": "«Quédate aquí», susurró, y después insistió en que solo había querido ayudar.",
+      "explanationEs": "Un verbo de habla con manera (whispered) y un salto temporal (afterwards) dan vida al diálogo.",
+      "segments": [
+        "\"Stay here,\" he whispered, and afterwards he insisted",
+        "that he had only wanted to help."
+      ],
+      "audioText": "\"Stay here,\" he whispered, and afterwards he insisted that he had only wanted to help.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-4"
+    },
+    {
+      "id": "en.n7.class-94.t04",
+      "en": "That memory is painful: had I waited, none of this would have happened.",
+      "es": "Ese recuerdo duele: si hubiera esperado, nada de esto habría pasado.",
+      "explanationEs": "Un contrafactual con Had + sujeto + participio expresa lo que el narrador lamenta.",
+      "segments": [
+        "That memory is painful: had I waited,",
+        "none of this would have happened."
+      ],
+      "audioText": "That memory is painful: had I waited, none of this would have happened.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-4"
+    },
+    {
+      "id": "en.n7.class-94.t05",
+      "en": "The narrator changes in chapter two: now the story comes from her brother.",
+      "es": "El narrador cambia en el capítulo dos: ahora la historia viene de su hermano.",
+      "explanationEs": "Indica siempre quién narra para que el lector sepa de quién es cada versión.",
+      "segments": [
+        "The narrator changes in chapter two: now",
+        "the story comes from her brother."
+      ],
+      "audioText": "The narrator changes in chapter two: now the story comes from her brother.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c94.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase une bien dos versiones opuestas?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Mia recalls the party; her friend, however, remember the rain."
+          },
+          {
+            "text": "Mia recalls the party; her friend, however, remembers the rain."
+          },
+          {
+            "text": "Mia recalls the party; her friend, whereas, remembers the rain."
+          }
+        ],
+        "teaches": [
+          "n7-integrated-workshop-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.pg01.seed-0",
+          "feedback": {
+            "es": "However va entre comas y el verbo remembers concuerda con her friend; whereas no funciona como adverbio suelto."
+          },
+          "hint": {
+            "es": "Comprueba la concordancia del verbo y dónde va el conector."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9c6660333e6a46d909d7793269c0c8e53592ce0a05236494e28a09bddaf78b2f"
+      },
+      {
+        "id": "en.n7.c94.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Después, insistió en que solo había querido ayudar.»"
+        },
+        "answer": {
+          "text": "Afterwards",
+          "accepted": [
+            "Afterwards",
+            "afterwards"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-integrated-workshop-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.pg02.seed-0",
+          "feedback": {
+            "es": "Afterwards es un adverbio de tiempo que va solo, sin complemento."
+          },
+          "hint": {
+            "es": "Es un adverbio de tiempo que puede ir solo al principio de la frase."
+          },
+          "text": "___, he insisted that he had only wanted to help."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2d059f555350b3d170eab93dfc72dd46974f5dfe530173983d325fd8caf70a0c"
+      },
+      {
+        "id": "en.n7.c94.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Si hubiera esperado, nada de esto habría pasado.»"
+        },
+        "answer": {
+          "text": "Had I waited none of this would have happened",
+          "tokens": [
+            "Had",
+            "I",
+            "waited",
+            "none",
+            "of",
+            "this",
+            "would",
+            "have",
+            "happened"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-integrated-workshop-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.pg03.seed-0",
+          "feedback": {
+            "es": "Had I waited invierte el condicional y none of this would have happened da el resultado que no ocurrió."
+          },
+          "hint": {
+            "es": "La frase empieza con el auxiliar de la condición, sin if."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f1180230ae04baf87a2d9ba24fefb12041a89331b55e0d95c72d333300baa48c"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c94.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres piezas de un relato a dos voces."
+        },
+        "answer": {
+          "text": "recall | Whereas | whispered",
+          "accepted": [
+            "recall | Whereas | whispered"
+          ],
+          "parts": [
+            {
+              "text": "recall",
+              "accepted": [
+                "recall"
+              ]
+            },
+            {
+              "text": "Whereas",
+              "accepted": [
+                "Whereas",
+                "whereas"
+              ]
+            },
+            {
+              "text": "whispered",
+              "accepted": [
+                "whispered"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.p01.seed-0",
+          "feedback": {
+            "es": "Recall abre la versión del narrador, whereas contrasta con la otra voz y whispered da manera al diálogo."
+          },
+          "sentences": [
+            "I ___ the night clearly; she remembers it differently.",
+            "___ I remember the silence, she remembers the music.",
+            "\"Stay here,\" he ___, and disappeared."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7883d78fa2199bb7e0e1232465acd7cd6fdef2c72707ee5baf51590baed324ec"
+      },
+      {
+        "id": "en.n7.c94.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estas frases marca un salto temporal?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The lights are very bright."
+          },
+          {
+            "text": "Lights go out at night."
+          },
+          {
+            "text": "By then, the lights had gone out."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.p02.seed-0",
+          "feedback": {
+            "es": "By then + pasado perfecto sitúa la escena en un momento anterior a otro del relato."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0afccf6e3e7d36a4843f1ec380608ac6abbf88af94bd09ea9af63bbc95f9422a"
+      },
+      {
+        "id": "en.n7.c94.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la frase de Ana con however: ella recuerda la música."
+        },
+        "answer": {
+          "text": "I recall the music; my brother, however, remembers the silence.",
+          "accepted": [
+            "I recall the music; my brother, however, remembers the silence.",
+            "I recall the music; however, my brother remembers the silence.",
+            "My brother remembers the silence; I, however, recall the music."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.p03.seed-0",
+          "feedback": {
+            "es": "However puede ir entre comas tras el sujeto o después del punto y coma para contrastar las dos versiones."
+          },
+          "text": "Ana recuerda la música; su hermano recuerda el silencio. Escribe la frase de Ana con however."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3e525e11fe771152e151b30f1e7bab44545a9d230d94a4b3163c7c8569c4ea0f"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c94.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe un relato a dos voces sobre el mismo hecho, con los recursos de la clase."
+        },
+        "answer": {
+          "text": "Ana's version. I recall that night clearly. The concert was perfect: I was standing next to a food stall with a cold drink, and the music was great. Then, suddenly, the lights went out. \"Stay here,\" Leo whispered, and he disappeared into the dark. Afterwards, he insisted that he had only wanted to help, whereas I remember only the fear. By then, the crowd had gone quiet and nobody moved. Had I followed him, I would have got lost in the park. Years later, that memory still feels bitter. Leo's version. My sister recalls the silence; however, I remember the music, which never stopped. I remember the smell of rain and the guitar, still playing in the dark. I found the cable behind the stage and fixed it in five minutes. \"Why did you leave me?\" she asked when I came back. \"I wanted to help,\" I replied. If I hadn't gone, the concert would have been cancelled, and nobody would have seen the lights come back. Looking back, I understand why she was angry. Afterwards we laughed about it, but we still tell the story in two different ways.",
+          "accepted": [
+            "Ana's version. I recall that night clearly. The concert was perfect: I was standing next to a food stall with a cold drink, and the music was great. Then, suddenly, the lights went out. \"Stay here,\" Leo whispered, and he disappeared into the dark. Afterwards, he insisted that he had only wanted to help, whereas I remember only the fear. By then, the crowd had gone quiet and nobody moved. Had I followed him, I would have got lost in the park. Years later, that memory still feels bitter. Leo's version. My sister recalls the silence; however, I remember the music, which never stopped. I remember the smell of rain and the guitar, still playing in the dark. I found the cable behind the stage and fixed it in five minutes. \"Why did you leave me?\" she asked when I came back. \"I wanted to help,\" I replied. If I hadn't gone, the concert would have been cancelled, and nobody would have seen the lights come back. Looking back, I understand why she was angry. Afterwards we laughed about it, but we still tell the story in two different ways.",
+            "Mia's version. I remember the platform very well. The train was late, so Tom and I waited in the cold. \"Let's go home,\" I said, but he insisted that we stay. By then, the last bus had left. Had he listened to me, we would have been warm in bed. Afterwards, I was angry for a week. Tom's version. My friend recalls the cold, whereas I remember the moment the train finally arrived. \"You were right,\" she whispered, when we sat down at last. If we had gone home, we would have missed the best night of the trip. Looking back, I think we were both a little right. Years later, we still argue about it, however, and we both enjoy telling the story."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.e01.seed-0",
+          "feedback": {
+            "es": "El relato necesita dos voces, un contraste, un salto temporal, un diálogo y un contrafactual."
+          },
+          "text": "Escribe un relato de 180 a 220 palabras sobre un mismo hecho —la noche en que se fue la luz durante el concierto del barrio— contado por dos personajes, Ana y su hermano Leo. Incluye un salto temporal, un diálogo breve con un verbo de habla y una frase contrafactual.",
+          "scoring": {
+            "wordRange": [
+              110,
+              260
+            ],
+            "evidenceGroups": [
+              [
+                "I recall",
+                "I remember",
+                "recalls",
+                "remembers",
+                "my version",
+                "in my memory",
+                "my memory"
+              ],
+              [
+                "however",
+                "whereas",
+                "but",
+                "while",
+                "on the other hand"
+              ],
+              [
+                "afterwards",
+                "years later",
+                "by then",
+                "looking back",
+                "later",
+                "the next day",
+                "the next morning"
+              ],
+              [
+                "whispered",
+                "muttered",
+                "replied",
+                "said",
+                "asked",
+                "shouted",
+                "whispering"
+              ],
+              [
+                "had I",
+                "had she",
+                "had he",
+                "if i had",
+                "if she had",
+                "if he had",
+                "would have"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e1231cf73caffc4d3a94a7a7843e806e622e2f44c74b831058cf6c14a0fab8b6"
+      },
+      {
+        "id": "en.n7.c94.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase contrasta bien las dos voces?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Whereas Ana remembers the music, Leo remembers the silence."
+          },
+          {
+            "text": "Whereas Ana remembers the music, but Leo remembers the silence."
+          },
+          {
+            "text": "Whereas Ana remembers the music, Leo remember the silence."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.e02.seed-0",
+          "feedback": {
+            "es": "Whereas lleva la coma y el segundo hecho sin but, con el verbo concordado: Leo remembers."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:be4a252b03d44eb80c307c999cf3017ab6144993d4effce38cea4e7f480bb8e3"
+      },
+      {
+        "id": "en.n7.c94.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige en qué no coinciden los dos hermanos."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The place of the concert."
+          },
+          {
+            "text": "The time when everything stopped."
+          },
+          {
+            "text": "The name of the band."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.e03.seed-0",
+          "feedback": {
+            "es": "Uno dice las nueve y la otra recuerda las diez: no coinciden en la hora en que todo se paró."
+          },
+          "audio": "My brother says the lights went out at nine. I recall it differently: I remember the music stopping at ten.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a457dbe6dd2fa1c0a814157ecc12f64566249d99a6f378c540cc34d36487d729"
+      },
+      {
+        "id": "en.n7.c94.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Después, Ana insistió en que había tenido razón.»"
+        },
+        "answer": {
+          "text": "Afterwards Ana insisted that she had been right",
+          "tokens": [
+            "Afterwards",
+            "Ana",
+            "insisted",
+            "that",
+            "she",
+            "had",
+            "been",
+            "right"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.e04.seed-0",
+          "feedback": {
+            "es": "Afterwards abre la frase y insisted that + pasado perfecto retrocede lo que ella decía."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:abb28cd7895f1a3fef4068ad41b86b566687c45b68fafc6299863b4be558f122"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c94.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿qué recuerda Tom?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A calm evening."
+          },
+          {
+            "text": "A late concert."
+          },
+          {
+            "text": "A storm."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.r01.seed-0",
+          "feedback": {
+            "es": "Whereas Mia recalls una tarde tranquila, Tom insiste en que hubo una tormenta."
+          },
+          "text": "Whereas Mia recalls a calm evening, Tom insists that there was a storm."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:24a3d68e6dca5c2ce9f5b3249453681be9b150ba18b9f5b51895bec5a76ba7a3"
+      },
+      {
+        "id": "en.n7.c94.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pasó con las dos amigas."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They did not arrive together."
+          },
+          {
+            "text": "They arrived together."
+          },
+          {
+            "text": "She waited for a long time."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.r02.seed-0",
+          "feedback": {
+            "es": "Had she waited + would have indica que no esperó, así que no llegaron juntas."
+          },
+          "audio": "Had she waited, the two of them would have arrived together. Afterwards, she insisted it was not her fault.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7ba1dfce7213781c705559f9f83b520bd3da19421b9aeb96fdcff5036169329c"
+      },
+      {
+        "id": "en.n7.c94.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «En mi recuerdo, el concierto fue perfecto.»"
+        },
+        "answer": {
+          "text": "memory",
+          "accepted": [
+            "memory"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c94.r03.seed-0",
+          "feedback": {
+            "es": "In my memory introduce la versión personal del narrador."
+          },
+          "text": "In my ___, the concert was perfect."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:befc76f313e09595d805e649297907598d617882aec7ef8081983377ca625661"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c94.e01": {
+      "reteach": "en.n7.class-94.t01",
+      "review": "en.n7.c94.r01"
+    },
+    "en.n7.c94.e02": {
+      "reteach": "en.n7.class-94.t02",
+      "review": "en.n7.c94.r02"
+    },
+    "en.n7.c94.e03": {
+      "reteach": "en.n7.class-94.t03",
+      "review": "en.n7.c94.r03"
+    },
+    "en.n7.c94.e04": {
+      "reteach": "en.n7.class-94.t04",
+      "review": "en.n7.c94.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

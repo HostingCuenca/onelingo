@@ -1,0 +1,619 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n7.class-91": {
+      "explicacion": {
+        "titulo": "Pares casi iguales, significados distintos",
+        "texto": "Dos frases casi iguales pueden decir cosas distintas. Had it not been for + sustantivo mira al pasado: algo evitó un resultado que no ocurrió. If it weren't for + sustantivo mira al presente: algo nos sostiene hoy. Allegedly señala que alguien lo afirma y tú te distancias, sin pruebas; apparently señala que hay indicios visibles. The former es el primero de dos elementos y the latter, el segundo. Antes de elegir, pregúntate qué tiempo, qué fuente y cuántos elementos hay."
+      },
+      "patron": {
+        "texto": "Elige la forma según el matiz que quieras transmitir:",
+        "formula": [
+          {
+            "texto": "Had it not been for the rain,",
+            "nota": "pasado: algo evitó otro resultado"
+          },
+          {
+            "texto": "If it weren't for the rain,",
+            "nota": "presente: algo nos sostiene hoy"
+          },
+          {
+            "texto": "Allegedly / Apparently,",
+            "nota": "se afirma sin pruebas / hay indicios"
+          },
+          {
+            "texto": "the former … the latter",
+            "nota": "primero … segundo de dos"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If it weren't for the rain, the match would have finished on time.",
+          "correcto": "Had it not been for the rain, the match would have finished on time.",
+          "explicacion": "Con would have + participio (pasado) se usa Had it not been for; if it weren't for describe el presente."
+        },
+        {
+          "incorrecto": "Allegedly, the mayor ignored the warning: the emails prove it.",
+          "correcto": "Apparently, the mayor ignored the warning: the emails show it.",
+          "explicacion": "Allegedly implica que nadie lo ha probado; si hay pruebas, apparently (o un verbo de evidencia) es más exacto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia hablan del concierto del barrio, que casi se cancela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Had it not been for the volunteers, the concert would have been cancelled.",
+            "traduccion": "De no ser por los voluntarios, el concierto se habría cancelado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Apparently, the mayor called them on Friday.",
+            "traduccion": "Al parecer, el alcalde los llamó el viernes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Allegedly, he ignored the warning about the rain.",
+            "traduccion": "Supuestamente, ignoró la advertencia sobre la lluvia."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That is only a rumour. There is no evidence.",
+            "traduccion": "Eso es solo un rumor. No hay pruebas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Mia no da por cierta la historia del alcalde?",
+          "opciones": [
+            {
+              "es": "Porque no hay pruebas de que sea verdad."
+            },
+            {
+              "es": "Porque el alcalde llamó a los voluntarios el viernes."
+            },
+            {
+              "es": "Porque los voluntarios cancelaron el concierto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «That is only a rumour. There is no evidence»: la advertencia ignorada es solo algo que se afirma."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Matiz"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Had it not been for…"
+            },
+            {
+              "texto": "pasado: algo evitó otro resultado"
+            }
+          ],
+          [
+            {
+              "texto": "If it weren't for…"
+            },
+            {
+              "texto": "presente: algo nos sostiene hoy"
+            }
+          ],
+          [
+            {
+              "texto": "allegedly"
+            },
+            {
+              "texto": "se afirma, sin pruebas"
+            }
+          ],
+          [
+            {
+              "texto": "apparently"
+            },
+            {
+              "texto": "hay indicios visibles"
+            }
+          ],
+          [
+            {
+              "texto": "the former / the latter"
+            },
+            {
+              "texto": "primero / segundo de dos"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-92": {
+      "explicacion": {
+        "titulo": "Revisar un párrafo con cuatro filtros",
+        "texto": "Antes de dar por bueno un párrafo, pásalo por cuatro filtros. Primero, el condicional pasado: la parte con if lleva had + participio (If I had known…) o se invierte (Had I known…); would have va solo en el resultado. Segundo, los verbos de reporte: admitted + -ing, suggested that + sujeto + verbo. Tercero, of which / of whom para unir dos ideas. Cuarto, el registro: formal con fórmulas como Dear… y I am writing to…"
+      },
+      "patron": {
+        "texto": "Filtros para corregir un párrafo:",
+        "formula": [
+          {
+            "texto": "If I had known, / Had I known,",
+            "nota": "if + had + participio: no if would have"
+          },
+          {
+            "texto": "suggested that we check",
+            "nota": "suggest + that + sujeto + verbo base"
+          },
+          {
+            "texto": "two of which are empty",
+            "nota": "of which / of whom unen las dos ideas"
+          },
+          {
+            "texto": "I am writing to enquire",
+            "nota": "registro formal, sin Hey ni contracciones"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If I would have known about the delay, I would have called earlier.",
+          "correcto": "If I had known about the delay, I would have called earlier.",
+          "explicacion": "La parte del if lleva had + participio; would have solo va en el resultado."
+        },
+        {
+          "incorrecto": "Leo suggested me to check the draft again.",
+          "correcto": "Leo suggested that I check the draft again.",
+          "explicacion": "Suggest no admite persona + to: se usa suggest + that + sujeto + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia revisa con Tom el párrafo de su blog sobre el huerto comunitario.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Here is my sentence: The garden has six plots, two of them are empty.",
+            "traduccion": "Esta es mi frase: el huerto tiene seis parcelas, dos de ellas están vacías."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That needs a fix. Try: two of which are still empty.",
+            "traduccion": "Eso necesita un arreglo. Prueba: dos de las cuales siguen vacías."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And this one: If I would have known, I would have come earlier.",
+            "traduccion": "Y esta: si yo habría sabido, habría venido antes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Say if I had known. The if part takes had, not would.",
+            "traduccion": "Di if I had known. La parte del if lleva had, no would."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué corrige Tom en la segunda frase de Mia?",
+          "opciones": [
+            {
+              "es": "Cambia would have known por had known."
+            },
+            {
+              "es": "Quita la palabra if de la frase."
+            },
+            {
+              "es": "Cambia earlier por later."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «The if part takes had, not would»: la parte del if necesita had + participio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Error",
+          "Corrección"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "If I would have known"
+            },
+            {
+              "texto": "If I had known / Had I known"
+            }
+          ],
+          [
+            {
+              "texto": "suggested me to go"
+            },
+            {
+              "texto": "suggested that I go"
+            }
+          ],
+          [
+            {
+              "texto": "two of them are empty"
+            },
+            {
+              "texto": "two of which are empty"
+            }
+          ],
+          [
+            {
+              "texto": "Hey, I write to ask"
+            },
+            {
+              "texto": "Dear…, I am writing to enquire"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-93": {
+      "explicacion": {
+        "titulo": "Leer una canción: voz, metáfora, tono y reacción",
+        "texto": "Para interpretar una canción, sigue cuatro pasos. Primero, la voz: quién habla y cómo suena (bitter, hopeful). Segundo, la metáfora central: una cosa descrita como otra (un faro = fuerza). Tercero, el tono, que puede cambiar entre el estribillo y el resto. Cuarto, tu reacción personal: For me, … Usa verbos prudentes (suggest, sound, as if) porque una letra rara vez lo dice todo y cada oyente puede leerla distinto."
+      },
+      "patron": {
+        "texto": "Ficha de una canción:",
+        "formula": [
+          {
+            "texto": "The voice sounds bitter,",
+            "nota": "voz: sound + adjetivo"
+          },
+          {
+            "texto": "The lighthouse is a metaphor for strength.",
+            "nota": "metáfora central: metaphor for + idea"
+          },
+          {
+            "texto": "The tone of the chorus is hopeful.",
+            "nota": "tono: adjetivo sobre estribillo o estrofa"
+          },
+          {
+            "texto": "For me, the song is nostalgic.",
+            "nota": "tu reacción personal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lighthouse is a metaphor of strength.",
+          "correcto": "The lighthouse is a metaphor for strength.",
+          "explicacion": "Se dice metaphor for, no metaphor of, para indicar lo que representa."
+        },
+        {
+          "incorrecto": "The voice in the song sounds like nostalgic.",
+          "correcto": "The voice in the song sounds nostalgic.",
+          "explicacion": "Después de sound va el adjetivo directamente; sound like se usa con un sustantivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom escuchan una canción nueva en casa de Ana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Listen to the chorus. The singer says, I am a lighthouse, not a boat.",
+            "traduccion": "Escucha el estribillo. El cantante dice: soy un faro, no un barco."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is a metaphor for staying strong, I think.",
+            "traduccion": "Eso es una metáfora de mantenerse firme, creo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, and the tone is hopeful, even though the rest of the song sounds sad.",
+            "traduccion": "Sí, y el tono es esperanzado, aunque el resto de la canción suena triste."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "For me, the voice sounds nostalgic, as if the singer missed home.",
+            "traduccion": "Para mí, la voz suena nostálgica, como si el cantante echara de menos su casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué representa el faro para Tom?",
+          "opciones": [
+            {
+              "es": "Mantenerse firme."
+            },
+            {
+              "es": "Echar de menos el hogar."
+            },
+            {
+              "es": "Un barco que se va."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «That is a metaphor for staying strong»: el faro representa mantenerse firme."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Cómo se dice"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Voz"
+            },
+            {
+              "texto": "The voice sounds bitter / hopeful."
+            }
+          ],
+          [
+            {
+              "texto": "Metáfora"
+            },
+            {
+              "texto": "The … is a metaphor for …"
+            }
+          ],
+          [
+            {
+              "texto": "Tono"
+            },
+            {
+              "texto": "The tone of the chorus is …"
+            }
+          ],
+          [
+            {
+              "texto": "Reacción personal"
+            },
+            {
+              "texto": "For me, the song is …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-94": {
+      "explicacion": {
+        "titulo": "Una historia, dos voces",
+        "texto": "Para contar un mismo hecho desde dos lados, da a cada narrador su propia voz y deja claro quién habla. Contrasta las versiones con however o whereas (whereas no lleva but). Marca el salto temporal con By then, Afterwards o Years later. Incluye un diálogo breve con un verbo de habla (whispered, muttered, replied) y termina con un contrafactual: Had I waited, … would have …, que muestra lo que el personaje lamenta."
+      },
+      "patron": {
+        "texto": "Dos voces, una historia:",
+        "formula": [
+          {
+            "texto": "I recall …; my sister, however, remembers …",
+            "nota": "dos versiones del mismo hecho"
+          },
+          {
+            "texto": "By then, / Afterwards, / Years later,",
+            "nota": "saltos en el tiempo"
+          },
+          {
+            "texto": "\"Stay here,\" he whispered.",
+            "nota": "diálogo con verbo de habla"
+          },
+          {
+            "texto": "Had I waited, … would have …",
+            "nota": "contrafactual: lo que no ocurrió"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Whereas I remember the silence, but she remembers the music.",
+          "correcto": "Whereas I remember the silence, she remembers the music.",
+          "explicacion": "Whereas ya expresa el contraste: no se le añade but en la misma frase."
+        },
+        {
+          "incorrecto": "After, he insisted that he had only wanted to help.",
+          "correcto": "Afterwards, he insisted that he had only wanted to help.",
+          "explicacion": "After necesita un complemento (after the concert); solo, se dice afterwards."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia planean el relato que escribirán para el taller de escritura.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "My story has two narrators: Ana and her brother.",
+            "traduccion": "Mi relato tiene dos narradores: Ana y su hermano."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Do they recall the same night?",
+            "traduccion": "¿Recuerdan la misma noche?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but Ana remembers the music, whereas her brother insists that the lights went out.",
+            "traduccion": "Sí, pero Ana recuerda la música, mientras que su hermano insiste en que se fue la luz."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then readers will wonder whose version is true.",
+            "traduccion": "Entonces los lectores se preguntarán cuál de las dos versiones es cierta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué se diferencian las dos versiones?",
+          "opciones": [
+            {
+              "es": "Ana recuerda la música y su hermano, que se fue la luz."
+            },
+            {
+              "es": "Ana recuerda el silencio y su hermano, la música."
+            },
+            {
+              "es": "Ana y su hermano recuerdan noches distintas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo contrasta con whereas: Ana recuerda la música y su hermano insiste en que se fue la luz."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Contraste"
+            },
+            {
+              "texto": "I recall …; however, she remembers …"
+            }
+          ],
+          [
+            {
+              "texto": "Salto temporal"
+            },
+            {
+              "texto": "By then, / Afterwards, / Years later,"
+            }
+          ],
+          [
+            {
+              "texto": "Diálogo"
+            },
+            {
+              "texto": "\"Stay here,\" he whispered."
+            }
+          ],
+          [
+            {
+              "texto": "Contrafactual"
+            },
+            {
+              "texto": "Had I waited, none of this would have happened."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-95": {
+      "explicacion": {
+        "titulo": "Reportar, proponer y avisar",
+        "texto": "Un imprevisto comunitario combina tres destrezas. Reportar con fidelidad: said that / complained that + oración retrocedida (is → was, has → had), sin añadir tu opinión. Proponer con tacto: Would you consider + -ing…? o We would rather… Y avisar con claridad: Notice, we apologise for…, as + razón, en un registro neutro y formal. Antes de escribir el aviso, decide qué pasó, qué propones y qué disculpa ofreces."
+      },
+      "patron": {
+        "texto": "Reportar + proponer + avisar:",
+        "formula": [
+          {
+            "texto": "Tom said that the generator had broken down.",
+            "nota": "reporte: retroceso de tiempos"
+          },
+          {
+            "texto": "Would you consider moving the stalls?",
+            "nota": "propuesta con tacto"
+          },
+          {
+            "texto": "Notice: we apologise for the change,",
+            "nota": "aviso formal y disculpa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Tom said me that the generator had broken down.",
+          "correcto": "Tom told me that the generator had broken down.",
+          "explicacion": "Tell lleva persona (told me); said no la admite sin to (said to me)."
+        },
+        {
+          "incorrecto": "Would you consider to move the stalls to the park?",
+          "correcto": "Would you consider moving the stalls to the park?",
+          "explicacion": "Consider va seguido de -ing, no de to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom organizan la fiesta del barrio cuando se estropea el equipo de música.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, what happened to the music?",
+            "traduccion": "Tom, ¿qué pasó con la música?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The generator broke down. Mrs Lopez also complained that the music was too loud.",
+            "traduccion": "El generador se averió. La Sra. López también se quejó de que la música estaba demasiado alta."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Would you consider moving the stalls to the park until it is fixed?",
+            "traduccion": "¿Consideraría trasladar los puestos al parque hasta que esté arreglado?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good idea. I will write a notice and apologise for the change.",
+            "traduccion": "Buena idea. Escribiré un aviso y pediré disculpas por el cambio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Ana?",
+          "opciones": [
+            {
+              "es": "Trasladar los puestos al parque hasta que arreglen el generador."
+            },
+            {
+              "es": "Aplazar la fiesta hasta el domingo."
+            },
+            {
+              "es": "Bajar el volumen de la música."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana pregunta «Would you consider moving the stalls to the park until it is fixed?»: propone trasladar los puestos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Reportar"
+            },
+            {
+              "texto": "Tom said that the generator had broken down."
+            }
+          ],
+          [
+            {
+              "texto": "Quejarse (reporte)"
+            },
+            {
+              "texto": "Mrs Lopez complained that the music was too loud."
+            }
+          ],
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "Would you consider moving the stalls?"
+            }
+          ],
+          [
+            {
+              "texto": "Avisar"
+            },
+            {
+              "texto": "Notice: we apologise for the change."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,819 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-81",
+  "title": {
+    "en": "What is this email asking?",
+    "es": "¿Qué pide este correo?"
+  },
+  "objectives": {
+    "es": [
+      "Identificar el propósito, la acción esperada y el plazo en correos de un primer trabajo o voluntariado."
+    ]
+  },
+  "concepts": [
+    "n7-professional-communication-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-80"
+  ],
+  "usesVocabulary": [
+    "deadline",
+    "attachment",
+    "approve",
+    "submit",
+    "reminder",
+    "urgent",
+    "draft",
+    "purpose"
+  ],
+  "usesPatterns": [
+    "n7-professional-communication-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "deadline",
+      "es": "plazo, fecha límite"
+    },
+    {
+      "en": "attachment",
+      "es": "archivo adjunto"
+    },
+    {
+      "en": "approve",
+      "es": "aprobar"
+    },
+    {
+      "en": "submit",
+      "es": "entregar, enviar"
+    },
+    {
+      "en": "reminder",
+      "es": "recordatorio"
+    },
+    {
+      "en": "urgent",
+      "es": "urgente"
+    },
+    {
+      "en": "draft",
+      "es": "borrador"
+    },
+    {
+      "en": "purpose",
+      "es": "propósito"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-81.t01",
+      "en": "The purpose of this email is to ask you to cover Saturday's shift.",
+      "es": "El propósito de este correo es pedirte que cubras el turno del sábado.",
+      "explanationEs": "The purpose of this email is to + verbo dice para qué escriben; ask you to + verbo es lo que esperan de ti.",
+      "segments": [
+        "The purpose of this email is to",
+        "ask you to cover Saturday's shift."
+      ],
+      "audioText": "The purpose of this email is to ask you to cover Saturday's shift.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-professional-communication-1"
+    },
+    {
+      "id": "en.n7.class-81.t02",
+      "en": "Please submit your hours by Friday at noon; the deadline is firm.",
+      "es": "Por favor, entrega tus horas antes del viernes a mediodía; el plazo es firme.",
+      "explanationEs": "Please + verbo base pide una acción; by + día y hora fija el plazo.",
+      "segments": [
+        "Please submit your hours by Friday",
+        "at noon; the deadline is firm."
+      ],
+      "audioText": "Please submit your hours by Friday at noon; the deadline is firm.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-professional-communication-1"
+    },
+    {
+      "id": "en.n7.class-81.t03",
+      "en": "I am sending the draft as an attachment. Could you approve it before Monday?",
+      "es": "Te envío el borrador como archivo adjunto. ¿Podrías aprobarlo antes del lunes?",
+      "explanationEs": "Could you + verbo base es una petición cortés; before + día marca hasta cuándo.",
+      "segments": [
+        "I am sending the draft as an",
+        "attachment. Could you approve it before Monday?"
+      ],
+      "audioText": "I am sending the draft as an attachment. Could you approve it before Monday?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-professional-communication-1"
+    },
+    {
+      "id": "en.n7.class-81.t04",
+      "en": "This is a reminder that the training starts at nine tomorrow.",
+      "es": "Este es un recordatorio de que la formación empieza mañana a las nueve.",
+      "explanationEs": "Un reminder solo informa o recuerda: aquí no se pide ninguna acción.",
+      "segments": [
+        "This is a reminder that the",
+        "training starts at nine tomorrow."
+      ],
+      "audioText": "This is a reminder that the training starts at nine tomorrow.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-professional-communication-1"
+    },
+    {
+      "id": "en.n7.class-81.t05",
+      "en": "It is urgent: the client needs an answer today.",
+      "es": "Es urgente: el cliente necesita una respuesta hoy.",
+      "explanationEs": "Urgent y today señalan que el plazo es inmediato.",
+      "segments": [
+        "It is urgent: the client",
+        "needs an answer today."
+      ],
+      "audioText": "It is urgent: the client needs an answer today.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-professional-communication-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c81.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué acción pide el correo y qué plazo marca?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Send the new volunteer list by Thursday at five."
+          },
+          {
+            "text": "Read a reminder about Thursday at five."
+          },
+          {
+            "text": "Approve the draft before Thursday."
+          }
+        ],
+        "teaches": [
+          "n7-professional-communication-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.pg01.seed-0",
+          "feedback": {
+            "es": "Could you send… pide enviar la lista, y by Thursday at five es el plazo."
+          },
+          "hint": {
+            "es": "Busca el verbo que sigue a «could you» y la expresión con by."
+          },
+          "text": "Hi Sara, could you send me the new volunteer list by Thursday at five? Thanks, Ana."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9c8a9b9efc015691e5cf574bf27fb8b7d5276463ab7f3c58dd7b300e3c29cfb0"
+      },
+      {
+        "id": "en.n7.c81.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Por favor, entrega el informe antes del viernes a mediodía.»"
+        },
+        "answer": {
+          "text": "submit",
+          "accepted": [
+            "submit",
+            "send"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-professional-communication-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.pg02.seed-0",
+          "feedback": {
+            "es": "Submit es el verbo de la clase para entregar un trabajo o documento."
+          },
+          "hint": {
+            "es": "Es el verbo de la clase para entregar algo a quien lo pide."
+          },
+          "text": "Please ___ the report by Friday at noon."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1f7697bb2243fb8670ce2fc918c67e34475d961ae8cd35cc90500f623bd519ad"
+      },
+      {
+        "id": "en.n7.c81.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El propósito de este correo es pedirte que apruebes el borrador.»"
+        },
+        "answer": {
+          "text": "The purpose of this email is to ask you to approve the draft",
+          "tokens": [
+            "The",
+            "purpose",
+            "of",
+            "this",
+            "email",
+            "is",
+            "to",
+            "ask",
+            "you",
+            "to",
+            "approve",
+            "the",
+            "draft"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-professional-communication-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.pg03.seed-0",
+          "feedback": {
+            "es": "The purpose… is to ask you to + verbo dice para qué escriben y qué esperan de ti."
+          },
+          "hint": {
+            "es": "Empieza por The purpose y usa to ask you to + verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:777baf1f11de90755259b48f786b951d8187aefe4fe0b1d49e752b8eb325e8ee"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c81.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase de correo con lo que exige."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Could you approve the draft before Monday?",
+              {
+                "es": "Pide aprobar algo antes del lunes"
+              }
+            ],
+            [
+              "This is a reminder that the meeting is at ten.",
+              {
+                "es": "Recuerda algo y no pide nada"
+              }
+            ],
+            [
+              "Please submit your hours by Friday.",
+              {
+                "es": "Pide entregar algo para un plazo"
+              }
+            ],
+            [
+              "It is urgent: call me today.",
+              {
+                "es": "Avisa de algo que no puede esperar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.p01.seed-0",
+          "feedback": {
+            "es": "Cada frase tiene una función: pedir una aprobación, recordar, pedir una entrega con plazo o avisar de urgencia."
+          },
+          "pairs": [
+            [
+              "Could you approve the draft before Monday?",
+              {
+                "es": "Pide aprobar algo antes del lunes"
+              }
+            ],
+            [
+              "This is a reminder that the meeting is at ten.",
+              {
+                "es": "Recuerda algo y no pide nada"
+              }
+            ],
+            [
+              "Please submit your hours by Friday.",
+              {
+                "es": "Pide entregar algo para un plazo"
+              }
+            ],
+            [
+              "It is urgent: call me today.",
+              {
+                "es": "Avisa de algo que no puede esperar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:06c402ce18e25ffe8e6d53e26f8905233baa2983777b7e21523b3bd9220a0c1f"
+      },
+      {
+        "id": "en.n7.c81.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el mensaje y elige qué debe hacer Mia."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Call Tom on Friday at noon."
+          },
+          {
+            "text": "Give Tom the list of people who came, before midday on Friday."
+          },
+          {
+            "text": "Go to the volunteer office on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.p02.seed-0",
+          "feedback": {
+            "es": "Tom pide la lista de asistencia (attendance list) y fija el plazo: el viernes a mediodía."
+          },
+          "audio": "Hi Mia, it is Tom from the volunteer office. Could you send me the attendance list by Friday at noon? I need it for the report.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b5779cd9bcb91856318e54f5fe4fe6f69cd7c5a1eadc4155fc9283ee05177a03"
+      },
+      {
+        "id": "en.n7.c81.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres frases de correos de trabajo."
+        },
+        "answer": {
+          "text": "urgent | deadline | reminder",
+          "accepted": [
+            "urgent | deadline | reminder"
+          ],
+          "parts": [
+            {
+              "text": "urgent",
+              "accepted": [
+                "urgent"
+              ]
+            },
+            {
+              "text": "deadline",
+              "accepted": [
+                "deadline"
+              ]
+            },
+            {
+              "text": "reminder",
+              "accepted": [
+                "reminder"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.p03.seed-0",
+          "feedback": {
+            "es": "Urgent avisa de prisa, deadline da la fecha límite y reminder recuerda algo sin pedir acción."
+          },
+          "sentences": [
+            "It is ___: the client needs the answer today.",
+            "The ___ is Friday at noon.",
+            "This is a ___ that the training starts tomorrow."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:969c7a1d51c0d8c20b1c0c69249cb4c4209754ceeb4aa5e67b7a526ab149d4cc"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c81.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el correo, ¿qué debe hacer el equipo?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Reply to Ana before Tuesday."
+          },
+          {
+            "text": "Move the training to another room."
+          },
+          {
+            "text": "Nothing: the email only reminds them of a change."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.e01.seed-0",
+          "feedback": {
+            "es": "El correo es un recordatorio (this is a reminder) de un cambio de sala: no pide ninguna acción."
+          },
+          "text": "Hi team, this is a reminder that the training room changes on Tuesday. Thanks, Ana."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2028a52db9cfca40c5806d48ad9ab4fcb5141b7377104ac61df8cee73adf2993"
+      },
+      {
+        "id": "en.n7.c81.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige hasta cuándo debe responder Leo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Before nine the next morning."
+          },
+          {
+            "text": "By Wednesday."
+          },
+          {
+            "text": "Tonight at nine."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.e02.seed-0",
+          "feedback": {
+            "es": "El plazo oficial es el miércoles, pero la hablante pide una respuesta antes de las nueve de mañana."
+          },
+          "audio": "Hello Leo. The deadline for the draft is Wednesday, but I need you to approve it earlier. Could you read it tonight and reply before nine tomorrow morning?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0456f8f908a97dbf4d54176a90458b22e5dc0c7ba7a14f0b6cb8297c2492e720"
+      },
+      {
+        "id": "en.n7.c81.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Es urgente, así que responde antes de las cinco.»"
+        },
+        "answer": {
+          "text": "It is urgent so please reply before five",
+          "tokens": [
+            "It",
+            "is",
+            "urgent",
+            "so",
+            "please",
+            "reply",
+            "before",
+            "five"
+          ],
+          "accepted": [
+            "It is urgent so please reply before five",
+            "It is urgent so reply before five please"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.e03.seed-0",
+          "feedback": {
+            "es": "Urgent explica la prisa y before five da el plazo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8244829ea09073cdb803da635f2860616c45eca235c53221fb4749f48ad90477"
+      },
+      {
+        "id": "en.n7.c81.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una petición cortés para tu supervisor con un plazo."
+        },
+        "answer": {
+          "text": "Could you approve the draft before Wednesday?",
+          "accepted": [
+            "Could you approve the draft before Wednesday?",
+            "Could you please approve the draft before Wednesday?",
+            "Please approve the draft before Wednesday.",
+            "Could you approve the draft by Wednesday?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.e04.seed-0",
+          "feedback": {
+            "es": "La petición lleva Could you + verbo base para pedir con cortesía y before Wednesday para fijar el plazo."
+          },
+          "text": "Quieres que tu supervisor apruebe el borrador antes del miércoles. Escribe la petición en inglés."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d7df5042097726786651483f678213c3da709c1a2a33f74f4ea50ac4d42072f5"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c81.r01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Responde, por favor, el viernes como muy tarde.»"
+        },
+        "answer": {
+          "text": "by",
+          "accepted": [
+            "by"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.r01.seed-0",
+          "feedback": {
+            "es": "Con un plazo límite se usa by, no until: by Friday at the latest."
+          },
+          "text": "Please reply ___ Friday at the latest."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6038c05eed7530e48c3405c4d30abf20670e17b9d9e534048c184206c95089bb"
+      },
+      {
+        "id": "en.n7.c81.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase expresa un plazo claro?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Please send it when it is possible."
+          },
+          {
+            "text": "Please send it by Thursday at four."
+          },
+          {
+            "text": "Please send it soon, thanks."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.r02.seed-0",
+          "feedback": {
+            "es": "Solo la frase con by Thursday at four da un día y una hora concretos."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:69699617803dafba1efa32798188a65fc03caec77a125ad2fc6eb34a03e13c3e"
+      },
+      {
+        "id": "en.n7.c81.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué tienen que hacer los voluntarios."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Reply before six tomorrow."
+          },
+          {
+            "text": "Bring the draft to the hall."
+          },
+          {
+            "text": "Nothing: it only reminds them of the meeting."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-professional-communication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c81.r03.seed-0",
+          "feedback": {
+            "es": "El mensaje solo recuerda la reunión y dice que no hace falta responder."
+          },
+          "audio": "Hi everyone, just a reminder: the volunteer meeting is tomorrow at six, in the main hall. You do not need to reply.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:035948e0acad90f12e38726feafd3a1775761f1c622ca4cdec2b4f9406819119"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c81.e01": {
+      "reteach": "en.n7.class-81.t01",
+      "review": "en.n7.c81.r01"
+    },
+    "en.n7.c81.e02": {
+      "reteach": "en.n7.class-81.t02",
+      "review": "en.n7.c81.r02"
+    },
+    "en.n7.c81.e03": {
+      "reteach": "en.n7.class-81.t03",
+      "review": "en.n7.c81.r03"
+    },
+    "en.n7.c81.e04": {
+      "reteach": "en.n7.class-81.t04",
+      "review": "en.n7.c81.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

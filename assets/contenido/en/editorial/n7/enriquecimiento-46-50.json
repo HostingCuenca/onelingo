@@ -1,0 +1,628 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "classes": {
+    "en.n7.class-46": {
+      "explicacion": {
+        "titulo": "Tesis, razón y ejemplo",
+        "texto": "Un párrafo de opinión tiene tres piezas. La tesis (claim) es lo que defiendes: Schools should start later. La razón (reason) responde por qué: teenagers need more sleep. El ejemplo o la prueba (example, evidence) responde cómo lo sé: un dato, una cifra o un caso real. Para reconocerlas, pregunta a cada frase: ¿qué defiende?, ¿por qué?, ¿cómo lo sé? Los conectores ayudan: because y since para la razón; for example y for instance para el ejemplo. Una razón sin ejemplo queda débil y un ejemplo sin razón queda suelto."
+      },
+      "patron": {
+        "texto": "Tesis + razón + ejemplo:",
+        "formula": [
+          {
+            "texto": "Schools should start later",
+            "nota": "tesis: lo que defiendes"
+          },
+          {
+            "texto": "because teenagers need more sleep.",
+            "nota": "razón: because + por qué"
+          },
+          {
+            "texto": "For example, many students fall asleep in class.",
+            "nota": "ejemplo: for example + un caso real"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree that schools should start later.",
+          "correcto": "I agree that schools should start later.",
+          "explicacion": "En inglés agree es un verbo: I agree. No se usa con to be, como sí ocurre con «estar de acuerdo»."
+        },
+        {
+          "incorrecto": "Schools should start later. Because teenagers need more sleep.",
+          "correcto": "Schools should start later because teenagers need more sleep.",
+          "explicacion": "Una oración con because necesita su frase principal; en inglés no se escribe sola como «Porque…» al empezar una frase."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le enseña su párrafo de opinión a Leo y él busca sus partes.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Read my paragraph: Schools should start later. Teenagers need more sleep. For example, many students fall asleep in the first lesson.",
+            "traduccion": "Lee mi párrafo: «Schools should start later. Teenagers need more sleep. For example, many students fall asleep in the first lesson»."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I can find your claim. It is the first sentence.",
+            "traduccion": "Puedo encontrar tu tesis. Es la primera frase."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the reason?",
+            "traduccion": "¿Y la razón?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is the second sentence. The example is the students who fall asleep.",
+            "traduccion": "Es la segunda frase. El ejemplo son los estudiantes que se duermen."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el ejemplo del párrafo de Sara?",
+          "opciones": [
+            {
+              "es": "Muchos estudiantes se duermen en la primera clase."
+            },
+            {
+              "es": "Los adolescentes necesitan dormir más."
+            },
+            {
+              "es": "Las clases deberían empezar más tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que el ejemplo son los estudiantes que se duermen; la tesis es la primera frase y la razón, la segunda."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Pregunta que responde",
+          "Conectores frecuentes"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Claim"
+            },
+            {
+              "texto": "¿Qué defiendo?"
+            },
+            {
+              "texto": "I think, my claim is that"
+            }
+          ],
+          [
+            {
+              "texto": "Reason"
+            },
+            {
+              "texto": "¿Por qué?"
+            },
+            {
+              "texto": "because, since"
+            }
+          ],
+          [
+            {
+              "texto": "Example"
+            },
+            {
+              "texto": "¿Cómo lo sé?"
+            },
+            {
+              "texto": "for example, for instance"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-47": {
+      "explicacion": {
+        "titulo": "Conectores de fundamento",
+        "texto": "Estos conectores justifican una afirmación y suenan más formales que because. In view of va con un sustantivo: In view of the noise, … (con una oración completa: in view of the fact that). On the grounds that introduce el motivo oficial de una decisión y va con oración. Insofar as limita: algo es cierto solo en la medida en que se cumple la condición. Seeing that da por sabido el motivo («visto que»). Un conector formal no mejora una razón débil: primero elige bien el fundamento y después el conector."
+      },
+      "patron": {
+        "texto": "Afirmación + conector + fundamento:",
+        "formula": [
+          {
+            "texto": "The school decided to ban phones",
+            "nota": "la afirmación o decisión"
+          },
+          {
+            "texto": "on the grounds that",
+            "nota": "conector: va seguido de una oración"
+          },
+          {
+            "texto": "they distract students.",
+            "nota": "el fundamento: sujeto + verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In view of the noise is constant, we should close the window.",
+          "correcto": "In view of the constant noise, we should close the window.",
+          "explicacion": "In view of va con un sustantivo. Para usar una oración hay que decir in view of the fact that."
+        },
+        {
+          "incorrecto": "The school banned phones on the grounds to avoid noise.",
+          "correcto": "The school banned phones on the grounds that they cause noise.",
+          "explicacion": "On the grounds va seguido de that + oración completa; no se usa con infinitivo como «con el fin de»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom escriben para la revista del colegio y hablan de la norma sobre los móviles.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Why did the school ban phones?",
+            "traduccion": "¿Por qué prohibió el colegio los móviles?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "On the grounds that they distract students. That is the official reason.",
+            "traduccion": "Alegando que distraen a los estudiantes. Esa es la razón oficial."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I think phones are useful insofar as they help us look up words.",
+            "traduccion": "Creo que los móviles son útiles en la medida en que nos ayudan a buscar palabras."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good point. Seeing that we use them in English class, the rule seems unfair.",
+            "traduccion": "Buen punto. Visto que los usamos en clase de inglés, la norma parece injusta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿hasta qué punto dice Mia que los móviles son útiles?",
+          "opciones": [
+            {
+              "es": "Solo en la medida en que ayudan a buscar palabras."
+            },
+            {
+              "es": "Siempre, en cualquier clase."
+            },
+            {
+              "es": "Nunca, porque distraen a los estudiantes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia usa insofar as: los móviles son útiles solo en la medida en que ayudan a buscar palabras, no de forma general."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Va con",
+          "Matiz"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "in view of"
+            },
+            {
+              "texto": "sustantivo"
+            },
+            {
+              "texto": "fundamento conocido; formal"
+            }
+          ],
+          [
+            {
+              "texto": "on the grounds that"
+            },
+            {
+              "texto": "oración"
+            },
+            {
+              "texto": "motivo oficial de una decisión"
+            }
+          ],
+          [
+            {
+              "texto": "insofar as"
+            },
+            {
+              "texto": "oración"
+            },
+            {
+              "texto": "justifica solo hasta cierto punto"
+            }
+          ],
+          [
+            {
+              "texto": "seeing that"
+            },
+            {
+              "texto": "oración"
+            },
+            {
+              "texto": "motivo ya conocido; más conversacional"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-48": {
+      "explicacion": {
+        "titulo": "Tres fallos frecuentes y cómo responder",
+        "texto": "Un argumento falla cuando la razón no sostiene la tesis. Tres fallos comunes: la generalización apresurada (de uno o dos casos a «todos»), la falsa causa (tomar una casualidad por causa: ocurrió después, luego fue por eso) y el ataque personal (criticar a quien habla en vez de a lo que dice). Una réplica razonable nombra el fallo y pide una prueba mejor: That is only one case. Do you have more evidence? Responde siempre a la idea, nunca a la persona."
+      },
+      "patron": {
+        "texto": "Fallo + réplica razonable:",
+        "formula": [
+          {
+            "texto": "My cousin failed, so everyone fails.",
+            "nota": "argumento con fallo: de un caso a todos"
+          },
+          {
+            "texto": "That is only one case.",
+            "nota": "réplica: nombra el fallo con calma"
+          },
+          {
+            "texto": "Do you have more evidence?",
+            "nota": "pide una prueba mejor en lugar de atacar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Everyone with a phone fail the test.",
+          "correcto": "Everyone with a phone fails the test.",
+          "explicacion": "Everyone y everybody llevan el verbo en singular aunque en español «todos» sea plural."
+        },
+        {
+          "incorrecto": "It is a personal attack, not an answer of the question.",
+          "correcto": "It is a personal attack, not an answer to the question.",
+          "explicacion": "Con answer se usa to: an answer to the question."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Ana practican en el club de debate y revisan dos argumentos.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Listen: My cousin failed the test with his phone, so everyone with a phone fails.",
+            "traduccion": "Escucha: «Mi primo suspendió el examen con su móvil, así que todos los que tienen móvil suspenden»."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a hasty conclusion. One case is not enough.",
+            "traduccion": "Es una conclusión apresurada. Un caso no es suficiente."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And this one: Tom is always late, so he is wrong about homework.",
+            "traduccion": "¿Y este? «Tom siempre llega tarde, así que se equivoca con los deberes»."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a personal attack. We should answer his idea, not him.",
+            "traduccion": "Eso es un ataque personal. Deberíamos responder a su idea, no a él."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué fallo encuentra Ana en el primer argumento?",
+          "opciones": [
+            {
+              "es": "Saca una regla general de un solo caso."
+            },
+            {
+              "es": "Ataca a la persona en lugar de la idea."
+            },
+            {
+              "es": "Confunde una casualidad con una causa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que es una conclusión apresurada porque un solo caso no basta; el ataque personal es el fallo del segundo argumento."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Fallo",
+          "Señal",
+          "Réplica razonable"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hasty generalisation"
+            },
+            {
+              "texto": "de pocos casos a «todos»"
+            },
+            {
+              "texto": "That is only one case."
+            }
+          ],
+          [
+            {
+              "texto": "False cause"
+            },
+            {
+              "texto": "«después» se toma por «por eso»"
+            },
+            {
+              "texto": "That may be a coincidence."
+            }
+          ],
+          [
+            {
+              "texto": "Personal attack"
+            },
+            {
+              "texto": "critica a la persona"
+            },
+            {
+              "texto": "Let us talk about the idea."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-49": {
+      "explicacion": {
+        "titulo": "Un párrafo a dos voces",
+        "texto": "Un buen párrafo argumentativo escucha a la otra parte. Sigue cinco pasos: tesis (Homework should be shorter), razón con ejemplo, contraargumento (Critics say that…), concesión (I admit that… / It is true that…) y réplica con although, however o nevertheless, que explica por qué tu tesis sigue siendo más fuerte. Although y whereas van con una oración completa y no se combinan con but. However y nevertheless abren una frase nueva y llevan coma. Reconocer lo válido no debilita tu argumento: lo hace más creíble."
+      },
+      "patron": {
+        "texto": "Tesis + contraargumento + réplica:",
+        "formula": [
+          {
+            "texto": "Homework should be shorter.",
+            "nota": "tesis: lo que defiendes"
+          },
+          {
+            "texto": "Critics say that it helps students practise.",
+            "nota": "contraargumento: lo que diría la otra parte"
+          },
+          {
+            "texto": "Although some of it is useful,",
+            "nota": "concesión: although + lo válido"
+          },
+          {
+            "texto": "too much leaves no time to rest.",
+            "nota": "réplica: por qué tu tesis sigue en pie"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although homework is useful, but it takes too much time.",
+          "correcto": "Although homework is useful, it takes too much time.",
+          "explicacion": "En español «aunque… pero» es frecuente; en inglés although ya marca el contraste y no se añade but."
+        },
+        {
+          "incorrecto": "Practice matters, nevertheless too much homework is a problem.",
+          "correcto": "Practice matters; nevertheless, too much homework is a problem.",
+          "explicacion": "Nevertheless no es una conjunción: separa dos oraciones con punto o punto y coma y lleva coma detrás."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana prepara con Tom el párrafo para el debate sobre los deberes.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My claim is that homework should be shorter. What would critics say?",
+            "traduccion": "Mi tesis es que los deberes deben ser más cortos. ¿Qué dirían los críticos?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "They would say that homework helps students practise.",
+            "traduccion": "Dirían que los deberes ayudan a los estudiantes a practicar."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "True. I admit that some of it is useful. Although it helps, too much leaves no time to rest.",
+            "traduccion": "Cierto. Reconozco que algunos son útiles. Aunque ayudan, demasiados no dejan tiempo para descansar."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is a good rebuttal. You admit the valid point, then you answer it.",
+            "traduccion": "Esa es una buena réplica. Reconoces el punto válido y luego lo respondes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Ana con el argumento de los críticos?",
+          "opciones": [
+            {
+              "es": "Reconoce lo válido y después lo rebate."
+            },
+            {
+              "es": "Lo ignora y repite su tesis."
+            },
+            {
+              "es": "Lo acepta y cambia de tesis."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana admite que algunos deberes son útiles y responde con although: demasiados no dejan tiempo para descansar. Tom lo llama una buena réplica."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "Homework should be shorter."
+            }
+          ],
+          [
+            {
+              "texto": "Contraargumento"
+            },
+            {
+              "texto": "Critics say that homework helps students practise."
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "I admit that some of it is useful."
+            }
+          ],
+          [
+            {
+              "texto": "Réplica"
+            },
+            {
+              "texto": "However, three hours every night is too much."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-50": {
+      "explicacion": {
+        "titulo": "Un ensayo de opinión completo",
+        "texto": "Un ensayo de opinión integra todo el bloque. La introducción presenta el tema y la tesis: I believe that phones should stay in bags. El desarrollo da dos razones con su dato (First…, Moreover…). Después llega el contraargumento con concesión y réplica (Critics say…; I admit…; However…). La conclusión repite la tesis con otras palabras (Overall…). Para defender el ensayo ante una pregunta difícil, reconoce lo válido y responde con una razón y un dato; nunca ataques a quien pregunta ni cambies de tesis."
+      },
+      "patron": {
+        "texto": "Ensayo en cuatro pasos:",
+        "formula": [
+          {
+            "texto": "I believe that phones should stay in bags.",
+            "nota": "introducción: tesis clara"
+          },
+          {
+            "texto": "First, phones distract students.",
+            "nota": "razón con dato y conector (First, Moreover)"
+          },
+          {
+            "texto": "Critics say they help; however, the benefit is small.",
+            "nota": "contraargumento con concesión y réplica"
+          },
+          {
+            "texto": "Overall, the policy should stay.",
+            "nota": "conclusión: repite la tesis"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In my opinion, I believe that phones should stay in bags.",
+          "correcto": "I believe that phones should stay in bags.",
+          "explicacion": "Es redundante decir «en mi opinión» y «creo que» a la vez; ya sabemos que es tu opinión."
+        },
+        {
+          "incorrecto": "The teacher allows to use phones in the library.",
+          "correcto": "The teacher allows students to use phones in the library.",
+          "explicacion": "Allow necesita un complemento antes del infinitivo: allow somebody to do something; «permite usar» no se traduce directamente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le hace una objeción a Sara sobre su ensayo y ella lo defiende.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Your essay says phones should stay in bags. But students use phones to look up words.",
+            "traduccion": "Tu ensayo dice que los móviles deben quedarse en la mochila. Pero los estudiantes usan el móvil para buscar palabras."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good question. I admit that it is useful. However, a dictionary does the same, and it does not distract anyone.",
+            "traduccion": "Buena pregunta. Reconozco que es útil. Sin embargo, un diccionario hace lo mismo y no distrae a nadie."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So you do not think phones have any benefit?",
+            "traduccion": "¿Entonces no crees que los móviles tengan ningún beneficio?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "They have one, but overall the benefit is small compared with the distraction.",
+            "traduccion": "Tienen uno, pero en conjunto el beneficio es pequeño comparado con la distracción."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo defiende Sara su ensayo ante la objeción de Carlos?",
+          "opciones": [
+            {
+              "es": "Reconoce lo útil y responde que un diccionario hace lo mismo sin distraer."
+            },
+            {
+              "es": "Dice que los móviles nunca son útiles para nadie."
+            },
+            {
+              "es": "Ataca a Carlos por usar el móvil en clase."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara admite que buscar palabras es útil y responde con un argumento: un diccionario hace lo mismo y no distrae. No ataca a Carlos ni cambia de tesis."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del ensayo",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Introduction"
+            },
+            {
+              "texto": "I believe that phones should stay in bags during lessons."
+            }
+          ],
+          [
+            {
+              "texto": "Body 1"
+            },
+            {
+              "texto": "First, phones distract students."
+            }
+          ],
+          [
+            {
+              "texto": "Body 2"
+            },
+            {
+              "texto": "Moreover, a clear policy helps teachers."
+            }
+          ],
+          [
+            {
+              "texto": "Counterargument"
+            },
+            {
+              "texto": "Critics say phones help; however, the benefit is small."
+            }
+          ],
+          [
+            {
+              "texto": "Conclusion"
+            },
+            {
+              "texto": "Overall, the policy should stay."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,804 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-92",
+  "title": {
+    "en": "Polish the paragraph",
+    "es": "Pulir un párrafo con precisión"
+  },
+  "objectives": {
+    "es": [
+      "Corregir en un párrafo propio errores de condicional, verbos de reporte, cláusulas con of which/whom y registro."
+    ]
+  },
+  "concepts": [
+    "n7-integrated-workshop-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-91"
+  ],
+  "usesVocabulary": [
+    "delay",
+    "admitted",
+    "suggested",
+    "plots",
+    "empty",
+    "enquire",
+    "draft",
+    "mistakes"
+  ],
+  "usesPatterns": [
+    "n7-integrated-workshop-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "delay",
+      "es": "retraso"
+    },
+    {
+      "en": "admitted",
+      "es": "admitió"
+    },
+    {
+      "en": "suggested",
+      "es": "sugirió"
+    },
+    {
+      "en": "plots",
+      "es": "parcelas"
+    },
+    {
+      "en": "empty",
+      "es": "vacío"
+    },
+    {
+      "en": "enquire",
+      "es": "preguntar, pedir información (formal)"
+    },
+    {
+      "en": "draft",
+      "es": "borrador"
+    },
+    {
+      "en": "mistakes",
+      "es": "errores"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-92.t01",
+      "en": "Had I known about the delay, I would have called the office earlier.",
+      "es": "Si hubiera sabido del retraso, habría llamado antes a la oficina.",
+      "explanationEs": "Condicional pasado: if + had + participio, o la inversión Had I known; nunca if + would have.",
+      "segments": [
+        "Had I known about the delay, I",
+        "would have called the office earlier."
+      ],
+      "audioText": "Had I known about the delay, I would have called the office earlier.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-2"
+    },
+    {
+      "id": "en.n7.class-92.t02",
+      "en": "She admitted making mistakes in the draft.",
+      "es": "Admitió haber cometido errores en el borrador.",
+      "explanationEs": "Admit + verbo con -ing (o that + oración): no admit + persona + to.",
+      "segments": [
+        "She admitted making mistakes",
+        "in the draft."
+      ],
+      "audioText": "She admitted making mistakes in the draft.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-2"
+    },
+    {
+      "id": "en.n7.class-92.t03",
+      "en": "Leo suggested that we check the draft again.",
+      "es": "Leo sugirió que revisáramos el borrador otra vez.",
+      "explanationEs": "Suggest + that + sujeto + verbo base, o suggest + -ing; nunca suggest + persona + to.",
+      "segments": [
+        "Leo suggested that we",
+        "check the draft again."
+      ],
+      "audioText": "Leo suggested that we check the draft again.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-2"
+    },
+    {
+      "id": "en.n7.class-92.t04",
+      "en": "The garden has six plots, two of which are still empty.",
+      "es": "El huerto tiene seis parcelas, dos de las cuales siguen vacías.",
+      "explanationEs": "Of which sustituye a of them y une las dos ideas en una sola frase.",
+      "segments": [
+        "The garden has six plots, two",
+        "of which are still empty."
+      ],
+      "audioText": "The garden has six plots, two of which are still empty.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-2"
+    },
+    {
+      "id": "en.n7.class-92.t05",
+      "en": "Dear Ms Green, I am writing to enquire about the delay.",
+      "es": "Estimada Sra. Green: le escribo para preguntar por el retraso.",
+      "explanationEs": "Registro formal: saludo Dear, I am writing to + verbo y sin contracciones ni Hey.",
+      "segments": [
+        "Dear Ms Green, I am writing",
+        "to enquire about the delay."
+      ],
+      "audioText": "Dear Ms Green, I am writing to enquire about the delay.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-integrated-workshop-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c92.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase corrige bien el condicional?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "If Tom would have seen the sign, he would have stopped."
+          },
+          {
+            "text": "If Tom saw the sign, he would have stopped."
+          },
+          {
+            "text": "If Tom had seen the sign, he would have stopped."
+          }
+        ],
+        "teaches": [
+          "n7-integrated-workshop-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.pg01.seed-0",
+          "feedback": {
+            "es": "If + had + participio forma la condición pasada; would have va solo en el resultado."
+          },
+          "hint": {
+            "es": "La condición y el resultado no pueden llevar el mismo auxiliar."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4c7b7a7ba28061a0e63bc09fd99250e6921ba04e9c4230065939a4e7eb7678d5"
+      },
+      {
+        "id": "en.n7.c92.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Tom admitió haber perdido las llaves.»"
+        },
+        "answer": {
+          "text": "admitted",
+          "accepted": [
+            "admitted"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-integrated-workshop-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.pg02.seed-0",
+          "feedback": {
+            "es": "Admitted va seguido de un verbo con -ing: admitted losing."
+          },
+          "hint": {
+            "es": "Es un verbo de reporte en pasado que admite -ing."
+          },
+          "text": "Tom ___ losing the keys."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:453d749ebbce44384ea88d8910cc575d834021ae812d2b6976451285c2cbb524"
+      },
+      {
+        "id": "en.n7.c92.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El huerto tiene cuatro parcelas, dos de las cuales están vacías.»"
+        },
+        "answer": {
+          "text": "The garden has four plots two of which are empty",
+          "tokens": [
+            "The",
+            "garden",
+            "has",
+            "four",
+            "plots",
+            "two",
+            "of",
+            "which",
+            "are",
+            "empty"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-integrated-workshop-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.pg03.seed-0",
+          "feedback": {
+            "es": "Of which cierra la frase y sustituye a of them: dos de las cuales."
+          },
+          "hint": {
+            "es": "Después de la cantidad van of which y el verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ddd23f20305366d45d4547dbe5fbfd5a84b03846ed07d4defc4d009580bfbb8c"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c92.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres correcciones del párrafo."
+        },
+        "answer": {
+          "text": "which | suggested | Had",
+          "accepted": [
+            "which | suggested | Had"
+          ],
+          "parts": [
+            {
+              "text": "which",
+              "accepted": [
+                "which"
+              ]
+            },
+            {
+              "text": "suggested",
+              "accepted": [
+                "suggested"
+              ]
+            },
+            {
+              "text": "Had",
+              "accepted": [
+                "Had",
+                "had"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.p01.seed-0",
+          "feedback": {
+            "es": "Of which une la frase, suggested that + verbo base corrige el reporte y Had I known invierte el condicional."
+          },
+          "sentences": [
+            "The garden has five plots, three of ___ are empty.",
+            "Leo ___ that I check the draft.",
+            "___ I known about the delay, I would have called."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:49c7a3af89f14893084e500fe16de93d7b7e281db0defa35b1251ee3b3350e9c"
+      },
+      {
+        "id": "en.n7.c92.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué versión es adecuada para un correo al director?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Dear Mr Brown, I am writing to report that the printer is broken again."
+          },
+          {
+            "text": "Hi Mr Brown, the printer is broken, so fix it."
+          },
+          {
+            "text": "Mr Brown, printer broken again. Fix."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.p02.seed-0",
+          "feedback": {
+            "es": "El correo formal abre con Dear y usa I am writing to; las otras versiones son demasiado secas o informales."
+          },
+          "text": "Hey Mr Brown, sorry, the printer's broken again, can you fix it?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8ef927e4a8b65a9296bf9f4ea88d67261c6f61ea64b117f18136785ad26d7dba"
+      },
+      {
+        "id": "en.n7.c92.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con el tipo de error que corrige."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "If I would have known",
+              {
+                "es": "Condicional: la parte del if lleva had"
+              }
+            ],
+            [
+              "Leo suggested me to go",
+              {
+                "es": "Verbo de reporte: suggested that + sujeto"
+              }
+            ],
+            [
+              "two of them are empty",
+              {
+                "es": "Cláusula relativa: two of which"
+              }
+            ],
+            [
+              "Hey, I want a refund!",
+              {
+                "es": "Registro demasiado informal"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.p03.seed-0",
+          "feedback": {
+            "es": "Cada error pertenece a un filtro distinto: condicional, reporte, relativo o registro."
+          },
+          "pairs": [
+            [
+              "If I would have known",
+              {
+                "es": "Condicional: la parte del if lleva had"
+              }
+            ],
+            [
+              "Leo suggested me to go",
+              {
+                "es": "Verbo de reporte: suggested that + sujeto"
+              }
+            ],
+            [
+              "two of them are empty",
+              {
+                "es": "Cláusula relativa: two of which"
+              }
+            ],
+            [
+              "Hey, I want a refund!",
+              {
+                "es": "Registro demasiado informal"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:574cffe4cc3d821e19984910fac3db068d217014bff10d9482eb1a00c50dae46"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c92.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Corrige el error de condicional en la frase del texto."
+        },
+        "answer": {
+          "text": "If Sara had called, we would have waited.",
+          "accepted": [
+            "If Sara had called, we would have waited.",
+            "Had Sara called, we would have waited."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.e01.seed-0",
+          "feedback": {
+            "es": "La condición pasada lleva had + participio o la inversión Had Sara called."
+          },
+          "text": "If Sara would have called, we would have waited."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7b2345fc86fe751ed9bb5c2bee4ba6fe298043370bd94b574606f912347aaccd"
+      },
+      {
+        "id": "en.n7.c92.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pasó con el borrador de Leo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Leo checked the draft and found the mistakes."
+          },
+          {
+            "text": "Leo did not check the draft, so he missed the mistakes."
+          },
+          {
+            "text": "Leo will check the draft tomorrow."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.e02.seed-0",
+          "feedback": {
+            "es": "Had Leo checked + would have found indica que no lo revisó y por eso no vio los errores."
+          },
+          "audio": "Had Leo checked the draft, he would have found the mistakes.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0bc2adbbefb8f8dbe3b7cf5c933a1ed8a6d667dd2e2f4fd5cb820a3fc84e230a"
+      },
+      {
+        "id": "en.n7.c92.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué opción completa bien la frase del texto con una cláusula relativa?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The club has ten members, four of which are teenagers."
+          },
+          {
+            "text": "The club has ten members, four whom are teenagers."
+          },
+          {
+            "text": "The club has ten members, four of whom are teenagers."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.e03.seed-0",
+          "feedback": {
+            "es": "Los miembros son personas, así que se usa of whom; of which se reserva para cosas."
+          },
+          "text": "The club has ten members, four of them are teenagers."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a07d92c5fbb69f236f8a615baa82e9fac4ad4688e695279f752c03cf290ea690"
+      },
+      {
+        "id": "en.n7.c92.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Querido Sr. Brown: le escribo para preguntar por el envío.»"
+        },
+        "answer": {
+          "text": "Dear Mr Brown I am writing to enquire about the delivery",
+          "tokens": [
+            "Dear",
+            "Mr",
+            "Brown",
+            "I",
+            "am",
+            "writing",
+            "to",
+            "enquire",
+            "about",
+            "the",
+            "delivery"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.e04.seed-0",
+          "feedback": {
+            "es": "La fórmula formal va en este orden: Dear + nombre, I am writing to + verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:996652a4faa3ff20a28e809dae10639ad31236c58f51b5db91b0b711e4b63f50"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c92.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase usa bien admitted con un verbo con -ing?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She admitted forgetting the password."
+          },
+          {
+            "text": "She admitted me to forget the password."
+          },
+          {
+            "text": "She admitted that forgetting the password."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.r01.seed-0",
+          "feedback": {
+            "es": "Admitted se sigue de -ing o de that + oración completa, no de persona + to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bd1d627dfa503965131321ad2725dce58862a754c006dd9e1a1a0fdcfae934f6"
+      },
+      {
+        "id": "en.n7.c92.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si hubiéramos salido antes, habríamos llegado.»"
+        },
+        "answer": {
+          "text": "had",
+          "accepted": [
+            "had"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.r02.seed-0",
+          "feedback": {
+            "es": "If + had + participio forma la condición pasada."
+          },
+          "text": "If we ___ left earlier, we would have arrived."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0673f19932e45a28211f941b4dd9e82a6b06ea0996f03c0161256248a4141f57"
+      },
+      {
+        "id": "en.n7.c92.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué problema tiene el borrador."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It has too many paragraphs."
+          },
+          {
+            "text": "Some paragraphs still have no text."
+          },
+          {
+            "text": "Its paragraphs are too long."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-integrated-workshop-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c92.r03.seed-0",
+          "feedback": {
+            "es": "Two of which are empty se refiere a los seis párrafos: dos siguen sin texto."
+          },
+          "audio": "I read the draft twice. It has six paragraphs, two of which are empty.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:19c9e007d33e7fb3a5cb8216414869f744ad0f5f9834cd4b1003ce354a81e650"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c92.e01": {
+      "reteach": "en.n7.class-92.t01",
+      "review": "en.n7.c92.r01"
+    },
+    "en.n7.c92.e02": {
+      "reteach": "en.n7.class-92.t02",
+      "review": "en.n7.c92.r02"
+    },
+    "en.n7.c92.e03": {
+      "reteach": "en.n7.class-92.t03",
+      "review": "en.n7.c92.r03"
+    },
+    "en.n7.c92.e04": {
+      "reteach": "en.n7.class-92.t04",
+      "review": "en.n7.c92.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

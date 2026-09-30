@@ -1,0 +1,660 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "classes": {
+    "en.n7.class-81": {
+      "explicacion": {
+        "titulo": "Propósito, acción y plazo en un correo",
+        "texto": "Antes de responder a un correo de trabajo, busca tres datos. El propósito: por qué te escriben (I am writing to…, The purpose of this email is to…). La acción: qué esperan de ti, que suele ir con Could you…? o Please + verbo. El plazo: hasta cuándo, con by, before o no later than + día u hora. Algunos correos son solo un recordatorio: informan y no piden nada. Si hay acción y plazo, tienes que responder; si no, basta con leer."
+      },
+      "patron": {
+        "texto": "Propósito + acción + plazo:",
+        "formula": [
+          {
+            "texto": "I am writing to ask",
+            "nota": "propósito: para qué escribe"
+          },
+          {
+            "texto": "you to send the schedule",
+            "nota": "acción: lo que tienes que hacer"
+          },
+          {
+            "texto": "by Friday at noon.",
+            "nota": "plazo: by + día y hora"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Please submit the report until Friday.",
+          "correcto": "Please submit the report by Friday.",
+          "explicacion": "Until indica hasta cuándo dura algo (I will work until Friday); by marca el límite para hacerlo. En español los dos se traducen «hasta»."
+        },
+        {
+          "incorrecto": "Could you to send me the list?",
+          "correcto": "Could you send me the list?",
+          "explicacion": "Después de could you se usa el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara recibe un correo de su supervisor en su primera semana de voluntariado y se lo cuenta a Leo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "My supervisor sent me an email about the volunteer schedule.",
+            "traduccion": "Mi supervisor me envió un correo sobre el horario de voluntarios."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What is the purpose? Does he want something from you?",
+            "traduccion": "¿Cuál es el propósito? ¿Quiere algo de ti?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. He wants me to approve the draft by Thursday.",
+            "traduccion": "Sí. Quiere que apruebe el borrador antes del jueves."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So the deadline is Thursday. Is it urgent?",
+            "traduccion": "Entonces el plazo es el jueves. ¿Es urgente?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No. The second email is only a reminder about the training.",
+            "traduccion": "No. El segundo correo es solo un recordatorio sobre la formación."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tiene que hacer Sara y para cuándo?",
+          "opciones": [
+            {
+              "es": "Aprobar el borrador antes del jueves."
+            },
+            {
+              "es": "Entregar sus horas antes del viernes."
+            },
+            {
+              "es": "Confirmar la formación para mañana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice que su supervisor quiere que apruebe el borrador antes del jueves; el otro correo solo es un recordatorio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Pregunta",
+          "Señal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "propósito"
+            },
+            {
+              "texto": "¿Por qué escribe?"
+            },
+            {
+              "texto": "I am writing to…"
+            }
+          ],
+          [
+            {
+              "texto": "acción"
+            },
+            {
+              "texto": "¿Qué me pide?"
+            },
+            {
+              "texto": "Could you…? / Please…"
+            }
+          ],
+          [
+            {
+              "texto": "plazo"
+            },
+            {
+              "texto": "¿Hasta cuándo?"
+            },
+            {
+              "texto": "by / before / no later than"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-82": {
+      "explicacion": {
+        "titulo": "Pedir y rechazar con cortesía",
+        "texto": "En inglés profesional casi nunca se pide con una orden directa (Send me the file). Se suaviza con un modal (Could you possibly…?), con una fórmula indirecta (I was wondering if you could…, Would you mind + -ing?) o con una pregunta indirecta (Do you know whether…?). Ojo al orden: en la pregunta indirecta no hay inversión (whether she is available, no whether is she available). Para rechazar, di que no puedes y ofrece una alternativa: Unfortunately… but I could…. Cuanta más distancia con la persona, más indirecta la fórmula."
+      },
+      "patron": {
+        "texto": "Fórmula suave + verbo + petición:",
+        "formula": [
+          {
+            "texto": "I was wondering if",
+            "nota": "fórmula indirecta en pasado"
+          },
+          {
+            "texto": "you could check",
+            "nota": "could + verbo base"
+          },
+          {
+            "texto": "the draft before Friday?",
+            "nota": "la petición concreta y el plazo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Do you know whether is the manager available?",
+          "correcto": "Do you know whether the manager is available?",
+          "explicacion": "En la pregunta indirecta el orden vuelve a ser de afirmación: sujeto + verbo, sin inversión."
+        },
+        {
+          "incorrecto": "Would you mind to check the draft?",
+          "correcto": "Would you mind checking the draft?",
+          "explicacion": "Después de mind se usa el verbo con -ing, no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom, voluntario nuevo, pide ayuda a Carlos, el coordinador.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Carlos, I was wondering if you could do me a favour.",
+            "traduccion": "Carlos, me preguntaba si podrías hacerme un favor."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Of course. What do you need?",
+            "traduccion": "Claro. ¿Qué necesitas?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Would you mind checking my draft of the schedule? I am not sure it is correct.",
+            "traduccion": "¿Te importaría revisar mi borrador del horario? No estoy seguro de que sea correcto."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Unfortunately, I am not available today, but I could read it tomorrow morning.",
+            "traduccion": "Por desgracia, hoy no estoy disponible, pero podría leerlo mañana por la mañana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That would be perfect. I would really appreciate it.",
+            "traduccion": "Sería perfecto. Te lo agradecería mucho."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué responde Carlos a la petición de Tom?",
+          "opciones": [
+            {
+              "es": "Que hoy no puede, pero lo leerá mañana por la mañana."
+            },
+            {
+              "es": "Que lo revisará ahora mismo."
+            },
+            {
+              "es": "Que Tom debe pedírselo a otro coordinador."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que hoy no está disponible pero que podría leer el borrador mañana por la mañana."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Destinatario",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "un compañero"
+            },
+            {
+              "texto": "Can you…?"
+            },
+            {
+              "texto": "Can you send me the file?"
+            }
+          ],
+          [
+            {
+              "texto": "tu supervisor"
+            },
+            {
+              "texto": "Could you possibly…?"
+            },
+            {
+              "texto": "Could you possibly send me the file?"
+            }
+          ],
+          [
+            {
+              "texto": "alguien a quien no conoces"
+            },
+            {
+              "texto": "I was wondering if you could…"
+            },
+            {
+              "texto": "I was wondering if you could send me the file."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-83": {
+      "explicacion": {
+        "titulo": "Quién hace qué y para cuándo",
+        "texto": "Un acta responde a tres preguntas: ¿quién?, ¿qué? y ¿para cuándo? El responsable aparece con is responsible for, has been assigned o Nombre + to + verbo. La acción suele ir con will + verbo. El plazo va con by, before, due on o no later than. Cuidado con la diferencia entre lo hablado y lo decidido: «It was discussed» no obliga a nadie; «It was agreed» sí. Antes de rellenar una tabla, busca esas tres señales y no inventes datos que el acta no da."
+      },
+      "patron": {
+        "texto": "Quién + qué + para cuándo:",
+        "formula": [
+          {
+            "texto": "Tom",
+            "nota": "responsable: quién lo hace"
+          },
+          {
+            "texto": "will circulate the minutes",
+            "nota": "acción: will + verbo"
+          },
+          {
+            "texto": "by Tuesday.",
+            "nota": "plazo: by + día"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The report is due for Thursday.",
+          "correcto": "The report is due on Thursday.",
+          "explicacion": "En español se dice «para el jueves», pero en inglés el plazo va con due on o due by, no con for."
+        },
+        {
+          "incorrecto": "Tom is responsible of the list.",
+          "correcto": "Tom is responsible for the list.",
+          "explicacion": "Responsible se combina con for, no con of, aunque en español sea «responsable de»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo repasan el acta de la reunión del club de voluntarios.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Who is responsible for the new poster?",
+            "traduccion": "¿Quién es responsable del cartel nuevo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The minutes say that Mia has been assigned the poster. It is due on Thursday.",
+            "traduccion": "El acta dice que a Mia le han asignado el cartel. Hay que entregarlo el jueves."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And who will circulate the minutes?",
+            "traduccion": "¿Y quién hará llegar el acta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Tom will circulate them to all attendees by Tuesday.",
+            "traduccion": "Tom se la hará llegar a todos los asistentes antes del martes."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Then I only have to book the room.",
+            "traduccion": "Bien. Entonces solo tengo que reservar la sala."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién entrega el cartel y para cuándo?",
+          "opciones": [
+            {
+              "es": "Mia, para el jueves."
+            },
+            {
+              "es": "Tom, para el martes."
+            },
+            {
+              "es": "Ana, para el jueves."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que a Mia le han asignado el cartel y que debe estar el jueves; Tom es quien reparte el acta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "¿Quién?"
+            },
+            {
+              "texto": "responsible for / has been assigned / Nombre + to"
+            },
+            {
+              "texto": "Mia has been assigned the poster."
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué?"
+            },
+            {
+              "texto": "will + verbo / to + verbo"
+            },
+            {
+              "texto": "will circulate the minutes"
+            }
+          ],
+          [
+            {
+              "texto": "¿Para cuándo?"
+            },
+            {
+              "texto": "by / due on / no later than"
+            },
+            {
+              "texto": "due on Thursday"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-84": {
+      "explicacion": {
+        "titulo": "Una actualización clara: avance, obstáculo y plan",
+        "texto": "Un correo de avance tiene cuatro piezas. Primero, lo que ya está hecho, con presente perfecto (I have completed…, So far…). Segundo, el obstáculo, que sigue afectando hoy (The main obstacle has been…). Tercero, el plan, con futuro continuo para acciones en marcha (Next week I will be writing…). Cuarto, una petición cortés con plazo (I would be grateful if you could…). Con una fecha concreta como yesterday se usa pasado simple, no presente perfecto."
+      },
+      "patron": {
+        "texto": "Avance + obstáculo + plan + petición:",
+        "formula": [
+          {
+            "texto": "So far, I have completed the first section,",
+            "nota": "presente perfecto: lo ya hecho"
+          },
+          {
+            "texto": "but the main obstacle has been a delay.",
+            "nota": "obstáculo que sigue afectando"
+          },
+          {
+            "texto": "Next week I will be writing the conclusion,",
+            "nota": "futuro continuo: plan en marcha"
+          },
+          {
+            "texto": "and I would be grateful if you could help.",
+            "nota": "petición cortés"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have finished the first section yesterday.",
+          "correcto": "I finished the first section yesterday.",
+          "explicacion": "Con yesterday o una fecha concreta se usa el pasado simple; el presente perfecto no admite un momento terminado."
+        },
+        {
+          "incorrecto": "I will be grateful if you will send the photos.",
+          "correcto": "I would be grateful if you could send the photos.",
+          "explicacion": "La petición cortés usa would be… if you could; will suena seco y mezcla tiempos."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia informa a su coordinador Carlos del avance de la guía de voluntarios.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "How is the guide going, Mia?",
+            "traduccion": "¿Cómo va la guía, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So far, I have completed two sections. The main obstacle has been a delay in the photos.",
+            "traduccion": "Hasta ahora he terminado dos secciones. El principal obstáculo ha sido un retraso en las fotos."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What will you do while we wait for them?",
+            "traduccion": "¿Qué harás mientras las esperamos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Meanwhile, I will be writing the introduction. I would be grateful if you could send the photos by Wednesday.",
+            "traduccion": "Mientras tanto estaré escribiendo la introducción. Te agradecería que enviaras las fotos antes del miércoles."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I will ask the school today.",
+            "traduccion": "Se las pediré hoy al colegio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hará Mia mientras esperan las fotos?",
+          "opciones": [
+            {
+              "es": "Escribir la introducción."
+            },
+            {
+              "es": "Completar dos secciones más."
+            },
+            {
+              "es": "Pedir las fotos al colegio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que mientras tanto estará escribiendo la introducción; las fotos las pedirá Carlos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "avance"
+            },
+            {
+              "texto": "presente perfecto"
+            },
+            {
+              "texto": "I have completed two sections."
+            }
+          ],
+          [
+            {
+              "texto": "obstáculo"
+            },
+            {
+              "texto": "has been / there has been"
+            },
+            {
+              "texto": "The main obstacle has been a delay."
+            }
+          ],
+          [
+            {
+              "texto": "plan"
+            },
+            {
+              "texto": "will be + -ing"
+            },
+            {
+              "texto": "I will be writing the introduction."
+            }
+          ],
+          [
+            {
+              "texto": "petición"
+            },
+            {
+              "texto": "I would be grateful if you could…"
+            },
+            {
+              "texto": "I would be grateful if you could reply."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-85": {
+      "explicacion": {
+        "titulo": "Informe de la primera semana y rechazo con tacto",
+        "texto": "El correo de tu primera semana junta tres movimientos. Resumir lo hecho con presente perfecto y lo acordado con It was agreed that… would. Señalar un problema con datos (overview, obstacle, delay). Y, si te piden algo imposible, rechazar con tacto: reconoce la petición (I would love to help), explica con hechos (with this workload it is not realistic…), ofrece una alternativa (As an alternative, I could…) y cierra con una pregunta (Would that work for you?). Un no seco rompe la relación; un no con alternativa la mantiene."
+      },
+      "patron": {
+        "texto": "Reconocer + explicar + alternativa + pregunta:",
+        "formula": [
+          {
+            "texto": "I would love to help,",
+            "nota": "reconoces la petición"
+          },
+          {
+            "texto": "but with this workload it is not realistic to finish by Friday.",
+            "nota": "explicas con datos"
+          },
+          {
+            "texto": "As an alternative, I could send a draft on Wednesday.",
+            "nota": "ofreces una alternativa concreta"
+          },
+          {
+            "texto": "Would that work for you?",
+            "nota": "cierras con una pregunta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is not realistic finishing everything by Friday.",
+          "correcto": "It is not realistic to finish everything by Friday.",
+          "explicacion": "Después de realistic (y de adjetivos como possible o important) se usa to + verbo, no el verbo con -ing."
+        },
+        {
+          "incorrecto": "No, I cannot. It is impossible for me.",
+          "correcto": "I would love to help, but I am afraid I cannot handle another project this week.",
+          "explicacion": "Un no seco suena brusco. Reconoce la petición, explica el motivo y añade una alternativa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo termina su primera semana en una ONG y habla con su responsable, Sara.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How has your first week been, Leo?",
+            "traduccion": "¿Cómo ha ido tu primera semana, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Busy, but I have a clear overview of the tasks. It was agreed that I would prioritise the donor list.",
+            "traduccion": "Ajetreada, pero tengo una visión clara de las tareas. Se acordó que daría prioridad a la lista de donantes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Great. Could you also write the whole final report by Friday?",
+            "traduccion": "Genial. ¿Podrías escribir también todo el informe final para el viernes?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I would love to help, but with this workload it is not realistic. As an alternative, I could send a draft on Wednesday.",
+            "traduccion": "Me encantaría ayudar, pero con esta carga de trabajo no es realista. Como alternativa, podría enviar un borrador el miércoles."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That works. Thank you, Leo.",
+            "traduccion": "Me parece bien. Gracias, Leo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo responde Leo a la petición del informe final?",
+          "opciones": [
+            {
+              "es": "Rechaza con tacto y propone un borrador para el miércoles."
+            },
+            {
+              "es": "Acepta escribirlo entero para el viernes."
+            },
+            {
+              "es": "Dice que no es su tarea y no ofrece nada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que no es realista y ofrece un borrador el miércoles como alternativa; Sara lo acepta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "resumir la semana"
+            },
+            {
+              "texto": "presente perfecto"
+            },
+            {
+              "texto": "I have completed the donor list."
+            }
+          ],
+          [
+            {
+              "texto": "resumir un acuerdo"
+            },
+            {
+              "texto": "It was agreed that… would"
+            },
+            {
+              "texto": "It was agreed that I would prioritise the list."
+            }
+          ],
+          [
+            {
+              "texto": "rechazar con tacto"
+            },
+            {
+              "texto": "I would love to, but I am afraid…"
+            },
+            {
+              "texto": "I would love to help, but I am afraid I cannot."
+            }
+          ],
+          [
+            {
+              "texto": "pedir ayuda"
+            },
+            {
+              "texto": "I would be grateful if you could…"
+            },
+            {
+              "texto": "I would be grateful if you could send the data."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

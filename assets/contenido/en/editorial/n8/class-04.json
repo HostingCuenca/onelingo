@@ -1,0 +1,803 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-04",
+  "title": {
+    "en": "Say it with natural rhythm",
+    "es": "Decirlo con ritmo natural"
+  },
+  "objectives": {
+    "es": [
+      "Producir un mensaje de voz para un amigo con bloques de sentido marcados, palabras clave acentuadas y formas reducidas."
+    ]
+  },
+  "concepts": [
+    "n8-connected-speech-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-03"
+  ],
+  "usesVocabulary": [
+    "chunk",
+    "pause",
+    "stress",
+    "rhythm",
+    "key",
+    "weak",
+    "emphasise"
+  ],
+  "usesPatterns": [
+    "n8-connected-speech-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "chunk",
+      "es": "bloque de sentido"
+    },
+    {
+      "en": "pause",
+      "es": "pausa"
+    },
+    {
+      "en": "stress",
+      "es": "acento de intensidad"
+    },
+    {
+      "en": "rhythm",
+      "es": "ritmo"
+    },
+    {
+      "en": "key",
+      "es": "clave"
+    },
+    {
+      "en": "weak",
+      "es": "débil"
+    },
+    {
+      "en": "emphasise",
+      "es": "enfatizar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-04.t01",
+      "en": "A short pause after each chunk helps the listener follow your message.",
+      "es": "Una pausa corta tras cada bloque ayuda al oyente a seguir tu mensaje.",
+      "explanationEs": "Cada bloque es una idea completa; la pausa se marca con una barra (/).",
+      "segments": [
+        "A short pause after each chunk",
+        "helps the listener follow your message."
+      ],
+      "audioText": "A short pause after each chunk helps the listener follow your message.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-connected-speech-4"
+    },
+    {
+      "id": "en.n8.class-04.t02",
+      "en": "The key words, like the time and the place, carry the stress.",
+      "es": "Las palabras clave, como la hora y el lugar, llevan el acento.",
+      "explanationEs": "Acentúa la información importante: hora, lugar, precio.",
+      "segments": [
+        "The key words, like the time",
+        "and the place, carry the stress."
+      ],
+      "audioText": "The key words, like the time and the place, carry the stress.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-connected-speech-4"
+    },
+    {
+      "id": "en.n8.class-04.t03",
+      "en": "Weak words like 'to' and 'the' are quick, so the rhythm comes from the stressed words.",
+      "es": "Las palabras débiles como «to» y «the» se dicen rápido, así que el ritmo viene de las palabras acentuadas.",
+      "explanationEs": "El ritmo del inglés depende de los acentos, no de cada sílaba.",
+      "segments": [
+        "Weak words like 'to' and 'the' are quick,",
+        "so the rhythm comes from the stressed words."
+      ],
+      "audioText": "Weak words like 'to' and 'the' are quick, so the rhythm comes from the stressed words.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-connected-speech-4"
+    },
+    {
+      "id": "en.n8.class-04.t04",
+      "en": "You can emphasise a number to be clear: 'I said NINE, not five.'",
+      "es": "Puedes enfatizar un número para ser claro: «Dije NUEVE, no cinco».",
+      "explanationEs": "Emphasise significa dar más fuerza a una palabra para corregir o aclarar.",
+      "segments": [
+        "You can emphasise a number to be",
+        "clear: 'I said NINE, not five.'"
+      ],
+      "audioText": "You can emphasise a number to be clear: 'I said NINE, not five.'",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-connected-speech-4"
+    },
+    {
+      "id": "en.n8.class-04.t05",
+      "en": "I'll pause after 'late' and after 'back', so the message is clear.",
+      "es": "Haré una pausa después de «late» y de «back», para que el mensaje sea claro.",
+      "explanationEs": "Una pausa antes de la información nueva da tiempo para entenderla.",
+      "segments": [
+        "I'll pause after 'late' and after",
+        "'back', so the message is clear."
+      ],
+      "audioText": "I'll pause after 'late' and after 'back', so the message is clear.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-connected-speech-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c04.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Dónde harías la pausa en «Call me back when you get this»?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "After me"
+          },
+          {
+            "text": "After back"
+          },
+          {
+            "text": "After get"
+          }
+        ],
+        "teaches": [
+          "n8-connected-speech-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.pg01.seed-0",
+          "feedback": {
+            "es": "Los bloques son «Call me back» y «when you get this»: la pausa va entre los dos."
+          },
+          "hint": {
+            "es": "Cada bloque es una idea completa: pedir + momento."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ae34603888991b93fc61cc55728def12e7d6aad63fe03bd2a0230937220cd3fe"
+      },
+      {
+        "id": "en.n8.c04.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Las palabras clave llevan el acento.»"
+        },
+        "answer": {
+          "text": "stress",
+          "accepted": [
+            "stress"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-connected-speech-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.pg02.seed-0",
+          "feedback": {
+            "es": "Stress es el acento de intensidad que destaca la información clave."
+          },
+          "hint": {
+            "es": "Es lo que se marca con mayúsculas en un mensaje."
+          },
+          "text": "The key words carry the ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e5c0e9759556c3087d7014e0532ba42fab05a5fc6754f47ad870017e7a208ed1"
+      },
+      {
+        "id": "en.n8.c04.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Te llamaré cuando llegue a la estación.»"
+        },
+        "answer": {
+          "text": "I'll call you when I get to the station",
+          "tokens": [
+            "I'll",
+            "call",
+            "you",
+            "when",
+            "I",
+            "get",
+            "to",
+            "the",
+            "station"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-connected-speech-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.pg03.seed-0",
+          "feedback": {
+            "es": "La frase tiene dos bloques: I'll call you y when I get to the station."
+          },
+          "hint": {
+            "es": "Empieza por I'll call you."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:91cf9c482907aacee542e507007ce26e7d14669821f778d7320c9dd9ff88a541"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c04.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué palabras acentúas más en el mensaje de la nota?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I'll, at, the"
+          },
+          {
+            "text": "you, at, at"
+          },
+          {
+            "text": "meet, station, nine"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.p01.seed-0",
+          "feedback": {
+            "es": "Meet, station y nine son las palabras clave; I'll, at, the y you son débiles."
+          },
+          "text": "I'll meet you at the station at nine."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3c137b4e4871c717b5444e6f5c4b7bc6b42d21630c4cadeb42a5c6469ac16156"
+      },
+      {
+        "id": "en.n8.c04.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el mensaje de Mia y elige qué debe hacer Sara."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She should begin the activity alone."
+          },
+          {
+            "text": "She should wait for Mia at the stop."
+          },
+          {
+            "text": "She should call the bus company."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.p02.seed-0",
+          "feedback": {
+            "es": "Start without me pide que empiecen sin ella; el mensaje va en bloques cortos."
+          },
+          "audio": "Hi Sara. I'm gonna be late. My bus is delayed. I'll arrive at ten. Start without me.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dd7a8dbf641d46b1b1c8aba427e10d49af564119cc41cee6d95dd6c40db2c0a6"
+      },
+      {
+        "id": "en.n8.c04.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada bloque de sentido con su función en el mensaje."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I'm gonna be late",
+              {
+                "es": "Avisa del problema"
+              }
+            ],
+            [
+              "because my bus is delayed",
+              {
+                "es": "Da la razón"
+              }
+            ],
+            [
+              "so please start without me",
+              {
+                "es": "Propone qué hacer"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.p03.seed-0",
+          "feedback": {
+            "es": "Un mensaje claro separa el problema, la razón y la petición en bloques distintos."
+          },
+          "pairs": [
+            [
+              "I'm gonna be late",
+              {
+                "es": "Avisa del problema"
+              }
+            ],
+            [
+              "because my bus is delayed",
+              {
+                "es": "Da la razón"
+              }
+            ],
+            [
+              "so please start without me",
+              {
+                "es": "Propone qué hacer"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:214ec2fafbaa2632378cc411bea91a26eeb6949af0cbdfd5b9b8eaef98cfae7c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c04.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la versión con bloques de sentido claros para un mensaje de voz."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Hi / Leo I'm gonna / be late so call / me back."
+          },
+          {
+            "text": "Hi Leo, / I'm gonna be late, / so call me back."
+          },
+          {
+            "text": "Hi Leo I'm gonna be late so call me back."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.e01.seed-0",
+          "feedback": {
+            "es": "La primera versión corta entre ideas; las otras cortan dentro de una frase o no hacen pausas."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5680a7d4ce9f0f8daaad3cdea198b56d8637d5efcb9edee9e4446f9497de5e78"
+      },
+      {
+        "id": "en.n8.c04.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el mensaje y elige qué le pide Mia a Leo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "To buy the tickets himself."
+          },
+          {
+            "text": "To call the station."
+          },
+          {
+            "text": "To bring money for the tickets."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.e02.seed-0",
+          "feedback": {
+            "es": "Mia compra las entradas y pide a Leo que lleve el dinero, unos cincuenta por entrada."
+          },
+          "audio": "Hi Leo. It's Mia. I gotta buy the tickets first. So lemme know if you can bring the money. It's kinda expensive. About fifty pounds each.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dd9030ffef9cfb94140fa81ee530118bdc4f4043db63614ccd29c35b78081e29"
+      },
+      {
+        "id": "en.n8.c04.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el mensaje: «Soy Mia y llegaré a las nueve.»"
+        },
+        "answer": {
+          "text": "It's Mia and I'll arrive at nine",
+          "tokens": [
+            "It's",
+            "Mia",
+            "and",
+            "I'll",
+            "arrive",
+            "at",
+            "nine"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.e03.seed-0",
+          "feedback": {
+            "es": "El mensaje empieza con quién habla y después da la hora de llegada."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9615339c40af03a76cdbf277664765ae7bcaa6e821e384e930e4e62c73336194"
+      },
+      {
+        "id": "en.n8.c04.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe un mensaje de voz para Leo con pausas (/) y dos formas reducidas."
+        },
+        "answer": {
+          "text": "Hi Leo, / it's Mia. / I'm gonna be at the station / on SATURDAY / at half past NINE. / We wanna catch the ten o'clock train, / so please don't be late. / I gotta buy the tickets first, / so lemme know / if you can bring the money. / They're kinda expensive, / about fifty pounds each. / If it rains, / we'll go to the museum instead. / I'll wait for you at the entrance, / and I'll keep my phone on. / Call me back / when you get this, / and send me a message too. / It's gonna be a great day! / See you on Saturday!",
+          "accepted": [
+            "Hi Leo, / it's Mia. / I'm gonna be at the station / on SATURDAY / at half past NINE. / We wanna catch the ten o'clock train, / so please don't be late. / I gotta buy the tickets first, / so lemme know / if you can bring the money. / They're kinda expensive, / about fifty pounds each. / If it rains, / we'll go to the museum instead. / I'll wait for you at the entrance, / and I'll keep my phone on. / Call me back / when you get this, / and send me a message too. / It's gonna be a great day! / See you on Saturday!",
+            "Hey Leo, / it's Mia. / I'm gonna meet you at the station / at nine thirty / on SATURDAY. / The train leaves at ten, / so don't be late. / I gotta buy the tickets, / and they're fifty pounds each, / so please bring the money. / If it rains, / we're gonna go to the museum instead. / Lemme know / if that works for you. / I'll wait for you at the entrance, / and I'll keep my phone on. / It's gonna be a great day, / so please call me back / when you get this. / See you there!",
+            "Hi Leo, / Mia here. / See you at the station / on Saturday / at 9:30. / We wanna get the ten o'clock train, / so be on time. / I gotta get the tickets. / They're kinda expensive, / 50 pounds each, / so bring some money. / If it rains, / we'll visit the museum instead. / I'll wait for you at the entrance / and keep my phone on. / It's gonna be a great day, / so call me back / when you hear this, / and send me a message too!"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.e04.seed-0",
+          "feedback": {
+            "es": "El mensaje agrupa la información en bloques, acentúa hora, precio y plan alternativo, y usa formas reducidas informales."
+          },
+          "text": "Datos: quedáis el sábado a las 9:30 en la estación; el tren sale a las 10; las entradas cuestan 50 libras cada una y tienes que comprarlas tú; si llueve, iréis al museo. Marca las pausas con / y las palabras acentuadas en MAYÚSCULAS.",
+          "scoring": {
+            "wordRange": [
+              75,
+              200
+            ],
+            "evidenceGroups": [
+              [
+                "at the station",
+                "by the station"
+              ],
+              [
+                "half past nine",
+                "nine thirty",
+                "9.30",
+                "9:30"
+              ],
+              [
+                "gonna",
+                "wanna",
+                "gotta",
+                "kinda",
+                "lemme",
+                "dunno"
+              ],
+              [
+                "fifty pounds",
+                "50 pounds"
+              ],
+              [
+                "if it rains",
+                "when it rains",
+                "if it's raining"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:da985be61dd3717d8e7b66eb68f81a173b1a6ab3f81d05b877bf0dd52eb8814f"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c04.r01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El ritmo natural viene de las palabras acentuadas.»"
+        },
+        "answer": {
+          "text": "rhythm",
+          "accepted": [
+            "rhythm"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.r01.seed-0",
+          "feedback": {
+            "es": "El ritmo del inglés nace de los acentos: las palabras débiles se dicen deprisa entre ellos."
+          },
+          "text": "Natural ___ comes from the stressed words."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:183b36841d59729bbc93c0914fa49023f44607a0b78707714cd6669a4a47102d"
+      },
+      {
+        "id": "en.n8.c04.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál suena a un mensaje de voz informal entre amigos?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I gotta go, but call me back later."
+          },
+          {
+            "text": "I am not able to speak now; please return my call."
+          },
+          {
+            "text": "I regret that I must leave; contact me later."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.r02.seed-0",
+          "feedback": {
+            "es": "Con un amigo funcionan gotta y las frases cortas; las otras dos suenan a un mensaje de oficina."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:624ea1e1ca31db9f338e6aeb51717292489adadff7208547ed37425c0562cc15"
+      },
+      {
+        "id": "en.n8.c04.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el mensaje de Ana y elige qué debe llevar Tom."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Some drinks."
+          },
+          {
+            "text": "A cake."
+          },
+          {
+            "text": "The tickets."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-connected-speech-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c04.r03.seed-0",
+          "feedback": {
+            "es": "Don't forget the cake es la petición clave del mensaje de Ana."
+          },
+          "audio": "Hi Tom. It's Ana. The party is at eight. Don't forget the cake. See you there.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d846d94af752c9a31c2bd892f490a1f15e48d24df8acab5192bf4f6819605428"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c04.e01": {
+      "reteach": "en.n8.class-04.t01",
+      "review": "en.n8.c04.r01"
+    },
+    "en.n8.c04.e02": {
+      "reteach": "en.n8.class-04.t02",
+      "review": "en.n8.c04.r02"
+    },
+    "en.n8.c04.e03": {
+      "reteach": "en.n8.class-04.t03",
+      "review": "en.n8.c04.r03"
+    },
+    "en.n8.c04.e04": {
+      "reteach": "en.n8.class-04.t04",
+      "review": "en.n8.c04.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

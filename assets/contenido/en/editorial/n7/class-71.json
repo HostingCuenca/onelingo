@@ -1,0 +1,819 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-71",
+  "title": {
+    "en": "Who is telling the story?",
+    "es": "¿Quién cuenta la historia?"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer si un fragmento lo cuenta un narrador en primera persona, en tercera persona limitada o omnisciente, y señalar la pista lingüística."
+    ]
+  },
+  "concepts": [
+    "n7-literature-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-70"
+  ],
+  "usesVocabulary": [
+    "narrator",
+    "omniscient",
+    "perspective",
+    "reliable",
+    "suspected",
+    "secretly",
+    "unaware",
+    "hesitated",
+    "meanwhile"
+  ],
+  "usesPatterns": [
+    "n7-literature-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "narrator",
+      "es": "narrador"
+    },
+    {
+      "en": "omniscient",
+      "es": "omnisciente"
+    },
+    {
+      "en": "perspective",
+      "es": "perspectiva, punto de vista"
+    },
+    {
+      "en": "reliable",
+      "es": "fiable"
+    },
+    {
+      "en": "suspected",
+      "es": "sospechó, sospeché"
+    },
+    {
+      "en": "secretly",
+      "es": "en secreto"
+    },
+    {
+      "en": "unaware",
+      "es": "que no sabe, ajeno a"
+    },
+    {
+      "en": "hesitated",
+      "es": "dudó, dudé"
+    },
+    {
+      "en": "meanwhile",
+      "es": "mientras tanto"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-71.t01",
+      "en": "I suspected that the stranger was following me, but I kept walking.",
+      "es": "Sospeché que el desconocido me seguía, pero seguí caminando.",
+      "explanationEs": "Narrador en primera persona: I + verbo de pensamiento; quien cuenta es un personaje de la historia.",
+      "segments": [
+        "I suspected that the stranger was",
+        "following me, but I kept walking."
+      ],
+      "audioText": "I suspected that the stranger was following me, but I kept walking.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-literature-1"
+    },
+    {
+      "id": "en.n7.class-71.t02",
+      "en": "Mia secretly hoped that the letter would never arrive.",
+      "es": "Mia esperaba en secreto que la carta nunca llegara.",
+      "explanationEs": "Tercera persona limitada: solo conocemos lo que siente un personaje; secretly abre su mundo interior.",
+      "segments": [
+        "Mia secretly hoped that the",
+        "letter would never arrive."
+      ],
+      "audioText": "Mia secretly hoped that the letter would never arrive.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-literature-1"
+    },
+    {
+      "id": "en.n7.class-71.t03",
+      "en": "Mia was unaware that her brother was watching her from the garden.",
+      "es": "Mia no sabía que su hermano la observaba desde el jardín.",
+      "explanationEs": "Omnisciente: el narrador sabe algo que el personaje ignora; unaware + that + oración.",
+      "segments": [
+        "Mia was unaware that her brother",
+        "was watching her from the garden."
+      ],
+      "audioText": "Mia was unaware that her brother was watching her from the garden.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-literature-1"
+    },
+    {
+      "id": "en.n7.class-71.t04",
+      "en": "Meanwhile, Tom hesitated at the gate; Ana, on the other side, already knew what he would say.",
+      "es": "Mientras tanto, Tom dudó en la puerta; Ana, al otro lado, ya sabía lo que él diría.",
+      "explanationEs": "Meanwhile salta de una mente a otra: señal típica del narrador omnisciente.",
+      "segments": [
+        "Meanwhile, Tom hesitated at the gate; Ana, on the",
+        "other side, already knew what he would say."
+      ],
+      "audioText": "Meanwhile, Tom hesitated at the gate; Ana, on the other side, already knew what he would say.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-literature-1"
+    },
+    {
+      "id": "en.n7.class-71.t05",
+      "en": "I am not a reliable narrator, because my perspective is the only one you will ever hear.",
+      "es": "No soy un narrador fiable, porque mi perspectiva es la única que oirás.",
+      "explanationEs": "Reliable narrator: un narrador en primera persona solo ofrece su versión de los hechos.",
+      "segments": [
+        "I am not a reliable narrator, because my perspective",
+        "is the only one you will ever hear."
+      ],
+      "audioText": "I am not a reliable narrator, because my perspective is the only one you will ever hear.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-literature-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c71.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee el fragmento: ¿qué pista muestra que el narrador es un personaje?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The word door and the place of the story."
+          },
+          {
+            "text": "The narrator knows what every character thinks."
+          },
+          {
+            "text": "The pronoun I and the narrator's own worry."
+          }
+        ],
+        "teaches": [
+          "n7-literature-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.pg01.seed-0",
+          "feedback": {
+            "es": "La pista es I junto a un pensamiento propio (I suspected): quien cuenta vive la escena."
+          },
+          "hint": {
+            "es": "Fíjate en el pronombre de quien cuenta: ¿es I o es she?"
+          },
+          "text": "I hesitated at the door, because I suspected that someone was waiting inside."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:28b94a893f25e6a885cc3828c839d3ee35585db91b2a98bae7f2273a48104abc"
+      },
+      {
+        "id": "en.n7.c71.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Dudé en la puerta y sospeché algo.»"
+        },
+        "answer": {
+          "text": "I",
+          "accepted": [
+            "I"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-literature-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.pg02.seed-0",
+          "feedback": {
+            "es": "El español omite el sujeto, pero en inglés el narrador personaje necesita I delante del verbo."
+          },
+          "hint": {
+            "es": "El verbo inglés no puede ir solo: piensa en quién dice «dudé»."
+          },
+          "text": "___ hesitated at the door and suspected something."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e81943285064c632d34bcd0df293def44b5c4339ad2bed5ca2eefb5afb9d5fbd"
+      },
+      {
+        "id": "en.n7.c71.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mia no sabía que su hermano la observaba.»"
+        },
+        "answer": {
+          "text": "Mia was unaware that her brother was watching her",
+          "tokens": [
+            "Mia",
+            "was",
+            "unaware",
+            "that",
+            "her",
+            "brother",
+            "was",
+            "watching",
+            "her"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-literature-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.pg03.seed-0",
+          "feedback": {
+            "es": "Unaware va después de was y abre una oración completa con that."
+          },
+          "hint": {
+            "es": "Empieza por el sujeto y sigue con was unaware that + oración."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9e74ba3f304d6c83f688fb9beed4b5be4dda38c4b97ca771eddff49b91344d3b"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c71.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada fragmento con el narrador que lo cuenta."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I hesitated at the door and my hands were cold.",
+              {
+                "es": "Primera persona: un personaje cuenta"
+              }
+            ],
+            [
+              "We suspected that the captain was lying.",
+              {
+                "es": "Primera del plural: un grupo cuenta"
+              }
+            ],
+            [
+              "Mia secretly hoped that the letter would never arrive.",
+              {
+                "es": "Tercera limitada: solo vemos la mente de Mia"
+              }
+            ],
+            [
+              "Tom felt calm; Ana, however, feared the truth.",
+              {
+                "es": "Omnisciente: entra en dos mentes"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.p01.seed-0",
+          "feedback": {
+            "es": "El pronombre (I, we, she) y el número de mentes que se abren definen al narrador."
+          },
+          "pairs": [
+            [
+              "I hesitated at the door and my hands were cold.",
+              {
+                "es": "Primera persona: un personaje cuenta"
+              }
+            ],
+            [
+              "We suspected that the captain was lying.",
+              {
+                "es": "Primera del plural: un grupo cuenta"
+              }
+            ],
+            [
+              "Mia secretly hoped that the letter would never arrive.",
+              {
+                "es": "Tercera limitada: solo vemos la mente de Mia"
+              }
+            ],
+            [
+              "Tom felt calm; Ana, however, feared the truth.",
+              {
+                "es": "Omnisciente: entra en dos mentes"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8882163fd8c9f32c67fcca8a64ac3c35361fc907c80c16d89bf5b9f26f5f8cb2"
+      },
+      {
+        "id": "en.n7.c71.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la escena y elige qué sabe el narrador."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It knows the feelings of both Sara and Leo."
+          },
+          {
+            "text": "It is a character who tells only his own story."
+          },
+          {
+            "text": "It only knows what Sara thinks."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.p02.seed-0",
+          "feedback": {
+            "es": "La escena entra en la mente de Sara (hoped) y en la de Leo (decided): el narrador lo sabe todo."
+          },
+          "audio": "Sara secretly hoped that Leo would call, while Leo hesitated and decided that he would not tell her the truth.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:054b8148b82f1ef7cbd379a347ad923f3412f075c1ad2c97280e6610cd932558"
+      },
+      {
+        "id": "en.n7.c71.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres fragmentos con la palabra que marca el punto de vista."
+        },
+        "answer": {
+          "text": "Meanwhile | unaware | hesitated",
+          "accepted": [
+            "Meanwhile | unaware | hesitated"
+          ],
+          "parts": [
+            {
+              "text": "Meanwhile",
+              "accepted": [
+                "Meanwhile"
+              ]
+            },
+            {
+              "text": "unaware",
+              "accepted": [
+                "unaware"
+              ]
+            },
+            {
+              "text": "hesitated",
+              "accepted": [
+                "hesitated",
+                "paused",
+                "waited"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.p03.seed-0",
+          "feedback": {
+            "es": "Meanwhile cambia de personaje, unaware marca lo que el personaje ignora e I hesitated muestra a un narrador que vive la escena."
+          },
+          "sentences": [
+            "___, Tom suspected nothing, but Ana already knew the whole truth.",
+            "Mia was ___ that her brother had read the letter.",
+            "I ___ before I opened the letter, because I suspected a problem."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:63d0264678df157ceeb49171e496e8303ebfe355c37bbe321e0525c460094aa1"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c71.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según sus pistas, ¿qué narrador cuenta este fragmento?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A first-person narrator: Carlos tells his own story."
+          },
+          {
+            "text": "An omniscient narrator: it shows the minds of two characters."
+          },
+          {
+            "text": "A limited narrator: we only enter Carlos's mind."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.e01.seed-0",
+          "feedback": {
+            "es": "Aparecen los pensamientos de Carlos y, en el otro lado de la pista, los de Sara: eso exige un narrador omnisciente."
+          },
+          "text": "Carlos was sure that the match was lost. On the other side of the court, Sara secretly feared the same thing."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e5ac7bf1cdae520bcb0f86d563e7d0884cc6bf6d46354673a0c462734b69d922"
+      },
+      {
+        "id": "en.n7.c71.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y decide quién cuenta esta historia."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A narrator outside the story who knows every secret."
+          },
+          {
+            "text": "A narrator who follows Rex and reads his mind."
+          },
+          {
+            "text": "One of the characters, describing what he lived."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.e02.seed-0",
+          "feedback": {
+            "es": "I suspected y I soon understood delatan a un personaje que cuenta su propia experiencia."
+          },
+          "audio": "I suspected nothing when Rex ran to the door, but I soon understood that somebody was waiting outside.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6fd8a72b7bb549c671b6cbacf9a8efed341b7680c443862de155823657a45a6f"
+      },
+      {
+        "id": "en.n7.c71.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Dudé antes de abrir la carta porque sospechaba algo.»"
+        },
+        "answer": {
+          "text": "I hesitated before I opened the letter because I suspected something",
+          "tokens": [
+            "I",
+            "hesitated",
+            "before",
+            "I",
+            "opened",
+            "the",
+            "letter",
+            "because",
+            "I",
+            "suspected",
+            "something"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.e03.seed-0",
+          "feedback": {
+            "es": "La frase lleva I dos veces: en inglés cada verbo personal necesita su sujeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3305b6bda7dbf66918d61e1dcd7d79a49b228a8cefd1b98132713cfde4020df8"
+      },
+      {
+        "id": "en.n7.c71.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe el fragmento en primera persona: ahora Mia cuenta su propia historia."
+        },
+        "answer": {
+          "text": "I hesitated at the door and suspected that someone was inside.",
+          "accepted": [
+            "I hesitated at the door and suspected that someone was inside.",
+            "I hesitated at the door and I suspected that someone was inside."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.e04.seed-0",
+          "feedback": {
+            "es": "Se cambia Mia por I y el resto se mantiene: en primera persona el narrador siempre necesita el sujeto I."
+          },
+          "text": "Mia hesitated at the door and suspected that someone was inside."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f80a7e86e9626f4207bbb1347e1d465d9c816b170d8c63d1587805f5d9b177c8"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c71.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee la línea: ¿qué delata a un narrador de tercera persona limitada?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Only Ana's hopes are revealed, and the narrator uses she."
+          },
+          {
+            "text": "The pronoun I shows that Ana tells the story."
+          },
+          {
+            "text": "The narrator also reveals what the other team thinks."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.r01.seed-0",
+          "feedback": {
+            "es": "Solo se abre la mente de Ana y el narrador habla de ella con she: es tercera persona limitada."
+          },
+          "text": "Ana secretly hoped that her team would win the final."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e68144b58dabf3be04a8e8830ce811499331799f0fd38b5a5f24ebfd86d7e801"
+      },
+      {
+        "id": "en.n7.c71.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No soy un narrador fiable, porque solo oyes mi versión.»"
+        },
+        "answer": {
+          "text": "narrator",
+          "accepted": [
+            "narrator"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.r02.seed-0",
+          "feedback": {
+            "es": "Un narrador que es personaje ofrece una sola versión: por eso puede no ser reliable."
+          },
+          "text": "I am not a reliable ___, because you only hear my side."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:255de71ac602e45322c29b865ff97d8d8d253ed30956c7852490a805b6e59333"
+      },
+      {
+        "id": "en.n7.c71.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige de quién conoce los pensamientos el narrador."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Tom's and his sister's."
+          },
+          {
+            "text": "Only Tom's."
+          },
+          {
+            "text": "The narrator's own."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-literature-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c71.r03.seed-0",
+          "feedback": {
+            "es": "Solo se cuenta el miedo de Tom; de su hermana no se sabe nada: el narrador es limitado."
+          },
+          "audio": "Tom did not tell anyone about the letter. He secretly feared that his sister had already read it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3f7fc541ac197f90aec6fbd07282920d08b3cf58048e08e9a3aa2ac0e5ffd046"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c71.e01": {
+      "reteach": "en.n7.class-71.t01",
+      "review": "en.n7.c71.r01"
+    },
+    "en.n7.c71.e02": {
+      "reteach": "en.n7.class-71.t02",
+      "review": "en.n7.c71.r02"
+    },
+    "en.n7.c71.e03": {
+      "reteach": "en.n7.class-71.t03",
+      "review": "en.n7.c71.r03"
+    },
+    "en.n7.c71.e04": {
+      "reteach": "en.n7.class-71.t04",
+      "review": "en.n7.c71.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

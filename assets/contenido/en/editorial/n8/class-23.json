@@ -1,0 +1,822 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-23",
+  "title": {
+    "en": "Analyse a short speech",
+    "es": "Analizar un discurso breve"
+  },
+  "objectives": {
+    "es": [
+      "Analizar un discurso breve, escrito y en audio: localizar la tesis, dos técnicas retóricas y la llamada a la acción."
+    ]
+  },
+  "concepts": [
+    "n8-rhetorical-analysis-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-22"
+  ],
+  "usesVocabulary": [
+    "thesis",
+    "opening",
+    "closing",
+    "claim",
+    "call to action",
+    "appeal",
+    "petition"
+  ],
+  "usesPatterns": [
+    "n8-rhetorical-analysis-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "thesis",
+      "es": "tesis"
+    },
+    {
+      "en": "opening",
+      "es": "apertura"
+    },
+    {
+      "en": "closing",
+      "es": "cierre"
+    },
+    {
+      "en": "claim",
+      "es": "afirmación principal"
+    },
+    {
+      "en": "call to action",
+      "es": "llamada a la acción"
+    },
+    {
+      "en": "appeal",
+      "es": "apelar a"
+    },
+    {
+      "en": "petition",
+      "es": "petición"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-23.t01",
+      "en": "The thesis is the main claim of the speech.",
+      "es": "La tesis es la afirmación principal del discurso.",
+      "explanationEs": "Thesis = claim principal que el orador defiende.",
+      "segments": [
+        "The thesis is the main",
+        "claim of the speech."
+      ],
+      "audioText": "The thesis is the main claim of the speech.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-rhetorical-analysis-3"
+    },
+    {
+      "id": "en.n8.class-23.t02",
+      "en": "In the opening, the speaker states the thesis clearly.",
+      "es": "En la apertura, el orador expone la tesis con claridad.",
+      "explanationEs": "La tesis suele estar al principio.",
+      "segments": [
+        "In the opening, the speaker",
+        "states the thesis clearly."
+      ],
+      "audioText": "In the opening, the speaker states the thesis clearly.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-rhetorical-analysis-3"
+    },
+    {
+      "id": "en.n8.class-23.t03",
+      "en": "The closing ends with a call to action: sign the petition today.",
+      "es": "El cierre termina con una llamada a la acción: firma la petición hoy.",
+      "explanationEs": "La llamada a la acción pide al público que haga algo concreto.",
+      "segments": [
+        "The closing ends with a call",
+        "to action: sign the petition today."
+      ],
+      "audioText": "The closing ends with a call to action: sign the petition today.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-rhetorical-analysis-3"
+    },
+    {
+      "id": "en.n8.class-23.t04",
+      "en": "The speaker uses a rhetorical question to appeal to the audience's feelings.",
+      "es": "El orador usa una pregunta retórica para apelar a los sentimientos del público.",
+      "explanationEs": "Appeal to + nombre: apelar a.",
+      "segments": [
+        "The speaker uses a rhetorical question",
+        "to appeal to the audience's feelings."
+      ],
+      "audioText": "The speaker uses a rhetorical question to appeal to the audience's feelings.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-rhetorical-analysis-3"
+    },
+    {
+      "id": "en.n8.class-23.t05",
+      "en": "She makes a claim, supports it with a tricolon and closes with a petition.",
+      "es": "Hace una afirmación, la apoya con un tricolon y cierra con una petición.",
+      "explanationEs": "Estructura: claim → técnica → petición.",
+      "segments": [
+        "She makes a claim, supports it with",
+        "a tricolon and closes with a petition."
+      ],
+      "audioText": "She makes a claim, supports it with a tricolon and closes with a petition.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-rhetorical-analysis-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c23.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Identifica la tesis en la apertura del discurso."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The school has too many bikes."
+          },
+          {
+            "text": "Students should stop riding to school."
+          },
+          {
+            "text": "We must build a bike shelter this year."
+          }
+        ],
+        "teaches": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.pg01.seed-0",
+          "feedback": {
+            "es": "La oradora presenta su afirmación principal con I believe: hay que construir un cobertizo para bicis."
+          },
+          "hint": {
+            "es": "La tesis es lo que la oradora cree que hay que hacer."
+          },
+          "text": "Our school has forty bikes but no safe place to park them. I believe we must build a bike shelter this year."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1e6c9248f0c95af2b1dd761266c8bb0e9e054d38ecb85fba081734a20af48894"
+      },
+      {
+        "id": "en.n8.c23.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La oradora pide al público que firme la petición.»"
+        },
+        "answer": {
+          "text": "asks",
+          "accepted": [
+            "asks",
+            "invites"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.pg02.seed-0",
+          "feedback": {
+            "es": "Con la oradora (tercera persona) el verbo es asks + persona + to + verbo."
+          },
+          "hint": {
+            "es": "Verbo en tercera persona del singular: pide."
+          },
+          "text": "The speaker ___ the audience to sign the petition."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a4e9f2db1724dde5b8dbbaf9becb78d10d59db055a537b70ea7d678a00f31b60"
+      },
+      {
+        "id": "en.n8.c23.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la técnica del fragmento."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Two rhetorical questions built on contrast."
+          },
+          {
+            "text": "A list of three matching verbs."
+          },
+          {
+            "text": "A call to action with a date."
+          }
+        ],
+        "teaches": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.pg03.seed-0",
+          "feedback": {
+            "es": "Las dos preguntas no esperan respuesta y oponen coches y personas, ruido y conversación."
+          },
+          "hint": {
+            "es": "¿Hay preguntas? ¿Qué ideas se oponen?"
+          },
+          "text": "Do we want a city of cars, or a city of people? Do we want noise, or conversation?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d68851655e681b4f4bec4cd4c4d6502cf0e0cf3c8195b8f52353effa284d969"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c23.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la apertura y elige qué quiere conseguir la oradora."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "More buses for students who live far away."
+          },
+          {
+            "text": "A safe route for students who walk to school."
+          },
+          {
+            "text": "A new road for the teachers' cars."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.p01.seed-0",
+          "feedback": {
+            "es": "El problema es una carretera sin acera y la tesis pide un camino seguro para quienes van andando."
+          },
+          "audio": "Good morning, everyone. Every day, three hundred students walk along a road without a pavement. Today I will argue that our school needs a safe path.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b24aa30f3c894c7988275bf6fa9e532ef3a2882324ec1b9f165d0f415653eb55"
+      },
+      {
+        "id": "en.n8.c23.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada fragmento con su función en el discurso."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I believe the road is dangerous.",
+              {
+                "es": "tesis"
+              }
+            ],
+            [
+              "Would you let your child cross here?",
+              {
+                "es": "pregunta retórica"
+              }
+            ],
+            [
+              "Sign the petition before you leave.",
+              {
+                "es": "llamada a la acción"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.p02.seed-0",
+          "feedback": {
+            "es": "Lo que se defiende es la tesis, la pregunta sin respuesta es retórica y la petición de actuar es la llamada."
+          },
+          "pairs": [
+            [
+              "I believe the road is dangerous.",
+              {
+                "es": "tesis"
+              }
+            ],
+            [
+              "Would you let your child cross here?",
+              {
+                "es": "pregunta retórica"
+              }
+            ],
+            [
+              "Sign the petition before you leave.",
+              {
+                "es": "llamada a la acción"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc8d6a878cfdd0f65b9796f3dbcc7694ba68197d62338fd9d884c19073a6ed92"
+      },
+      {
+        "id": "en.n8.c23.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La oradora termina pidiendo al público que firme.»"
+        },
+        "answer": {
+          "text": "The speaker ends by asking the audience to sign",
+          "tokens": [
+            "The",
+            "speaker",
+            "ends",
+            "by",
+            "asking",
+            "the",
+            "audience",
+            "to",
+            "sign"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.p03.seed-0",
+          "feedback": {
+            "es": "Ends by asking + persona + to + verbo: así se resume la llamada a la acción."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:197e027f308e4981ba8aace210034f0ff78a9edb02f4c731beb118d5f8a0756b"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c23.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el discurso y elige su tesis."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Students should study at home instead."
+          },
+          {
+            "text": "The exams should start earlier in the day."
+          },
+          {
+            "text": "The library should stay open later for students."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.e01.seed-0",
+          "feedback": {
+            "es": "La oradora pide ampliar el horario de la biblioteca; la pregunta y la petición apoyan esa tesis."
+          },
+          "audio": "Good morning. Our library closes at four, yet exams start at five. Who can study in an empty building? Not me, not you, not anyone. Students need a library that opens late, so I am asking the council to keep it open later. Please add your name to the list at the door.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ffc40673cca72450ffb05e3219137c0f02fe8c5e4772ce8554f94b6f7b64551d"
+      },
+      {
+        "id": "en.n8.c23.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el esquema del discurso con una palabra en cada hueco."
+        },
+        "answer": {
+          "text": "park | question | sign",
+          "accepted": [
+            "park | question | sign"
+          ],
+          "parts": [
+            {
+              "text": "park",
+              "accepted": [
+                "park"
+              ]
+            },
+            {
+              "text": "question",
+              "accepted": [
+                "question"
+              ]
+            },
+            {
+              "text": "sign",
+              "accepted": [
+                "sign"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.e02.seed-0",
+          "feedback": {
+            "es": "La tesis habla de un segundo parque, la pregunta es retórica y se pide firmar la petición."
+          },
+          "sentences": [
+            "The thesis is that the town needs a second ___.",
+            "The speaker uses a rhetorical ___ about the children.",
+            "The call to action is to ___ the petition."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          },
+          "text": "Our town has one park and ten thousand people. Why should children play in the street? Fewer cars, more trees, more benches: that is the future we need. Please sign the petition for a second park tonight."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:01130f1894613dc6db4219e7972a289d16aebb0fac6dfcb6fe95e0f5d823f9d5"
+      },
+      {
+        "id": "en.n8.c23.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige qué hace la oradora en el cierre del discurso."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She invites the audience to come on Saturday with a friend."
+          },
+          {
+            "text": "She repeats her thesis in the opening."
+          },
+          {
+            "text": "She asks a rhetorical question about the park."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.e03.seed-0",
+          "feedback": {
+            "es": "El cierre termina con una invitación concreta: venir el sábado con un amigo."
+          },
+          "text": "Some people say the park is too small. I say it is big enough for everyone who cares. So come on Saturday, bring a friend and bring a bag."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:abaf1092dbba07afeb6adc9f0ed582b059ab36d703a9b6d03d7e7977d2fdfd3b"
+      },
+      {
+        "id": "en.n8.c23.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Resume el discurso: tesis y llamada a la acción."
+        },
+        "answer": {
+          "text": "The speaker argues that the town needs an electric minibus and asks the audience to vote for it on Friday.",
+          "accepted": [
+            "The speaker argues that the town needs an electric minibus and asks the audience to vote for it on Friday.",
+            "The speaker says that the town needs an electric minibus and invites the audience to vote on Friday."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.e04.seed-0",
+          "feedback": {
+            "es": "Un buen resumen contiene la tesis (argues that…) y la llamada a la acción (asks the audience to…)."
+          },
+          "text": "The bus is late, the road is full and the air is dirty. Why should we accept this? Our town needs an electric minibus, and I ask you to vote for it on Friday.",
+          "scoring": {
+            "wordRange": [
+              15,
+              40
+            ],
+            "evidenceGroups": [
+              [
+                "argues that",
+                "says that",
+                "claims that",
+                "believes that"
+              ],
+              [
+                "electric minibus",
+                "minibus"
+              ],
+              [
+                "asks the audience to",
+                "invites the audience to",
+                "asks people to",
+                "calls on the audience to"
+              ],
+              [
+                "vote"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a7f9fa34c1c47384e24b47a3086e2bbae3f77a91f8e19e40c9b6da24be81ec1e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c23.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la técnica principal de este fragmento."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Contrast between old and new."
+          },
+          {
+            "text": "Repetition followed by a question."
+          },
+          {
+            "text": "A thesis in the opening."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.r01.seed-0",
+          "feedback": {
+            "es": "We recycle se repite dos veces y después llega una pregunta: repetición seguida de pregunta retórica."
+          },
+          "audio": "We recycle paper. We recycle glass. So why do we not recycle plastic?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7668aa5e6e40904571a4ae2e1219a5144a3671ea5c3207a8dc6c8ef9fd9e2fef"
+      },
+      {
+        "id": "en.n8.c23.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La apertura presenta la tesis del discurso.»"
+        },
+        "answer": {
+          "text": "thesis",
+          "accepted": [
+            "thesis"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.r02.seed-0",
+          "feedback": {
+            "es": "La tesis es la afirmación principal y se expone en la apertura."
+          },
+          "text": "The opening states the ___ of the speech."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3ac647d17423960fdf5a12d3dc56e66e1c47c2d3c232201f9120df0de9d181c9"
+      },
+      {
+        "id": "en.n8.c23.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la llamada a la acción del fragmento."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Our river is getting dirtier."
+          },
+          {
+            "text": "Bring a rhetorical question to the council."
+          },
+          {
+            "text": "Join the clean-up on Sunday at nine."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-rhetorical-analysis-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c23.r03.seed-0",
+          "feedback": {
+            "es": "La llamada a la acción es lo que se pide al público: unirse a la limpieza el domingo."
+          },
+          "text": "Our river is getting dirtier every year. Please join the clean-up on Sunday at nine, and bring gloves."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8b219116fd918310f75dd2513821ced7018aab31bca85c750489c665912a5451"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c23.e01": {
+      "reteach": "en.n8.class-23.t01",
+      "review": "en.n8.c23.r01"
+    },
+    "en.n8.c23.e02": {
+      "reteach": "en.n8.class-23.t02",
+      "review": "en.n8.c23.r02"
+    },
+    "en.n8.c23.e03": {
+      "reteach": "en.n8.class-23.t03",
+      "review": "en.n8.c23.r03"
+    },
+    "en.n8.c23.e04": {
+      "reteach": "en.n8.class-23.t04",
+      "review": "en.n8.c23.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

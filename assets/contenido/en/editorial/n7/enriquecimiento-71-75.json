@@ -1,0 +1,637 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "classes": {
+    "en.n7.class-71": {
+      "explicacion": {
+        "titulo": "¿Quién cuenta la historia?",
+        "texto": "Toda historia la cuenta alguien, y ese punto de vista decide lo que sabes. Primera persona: el narrador es un personaje y dice I o we (I suspected…). Tercera limitada: dice he/she, pero solo entras en la mente de UN personaje (Mia secretly hoped…). Omnisciente: el narrador lo sabe todo, entra en varias mentes o sabe más que los personajes (Mia was unaware that…). Las pistas son el pronombre, los verbos de pensamiento y quién sabe qué."
+      },
+      "patron": {
+        "texto": "Quién habla + qué sabe → tipo de narrador:",
+        "formula": [
+          {
+            "texto": "I suspected that…",
+            "nota": "primera persona: el narrador es un personaje"
+          },
+          {
+            "texto": "Mia secretly hoped that…",
+            "nota": "tercera limitada: solo la mente de Mia"
+          },
+          {
+            "texto": "Mia was unaware that…",
+            "nota": "omnisciente: sabe más que el personaje"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Suspected that the stranger was following me.",
+          "correcto": "I suspected that the stranger was following me.",
+          "explicacion": "En español se omite el sujeto («sospeché»), pero en inglés el narrador en primera persona necesita siempre I."
+        },
+        {
+          "incorrecto": "Mia was unaware of that her brother was watching.",
+          "correcto": "Mia was unaware that her brother was watching.",
+          "explicacion": "Delante de una oración completa se usa unaware that; unaware of solo va delante de un nombre (unaware of the danger)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara comentan las primeras líneas de una novela en su club de lectura.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Listen to this line: I suspected that the stranger was following me.",
+            "traduccion": "Escucha esta línea: sospeché que el desconocido me seguía."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So the narrator is one of the characters.",
+            "traduccion": "Entonces el narrador es uno de los personajes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. But look at this one: Mia was unaware that her brother was watching.",
+            "traduccion": "Sí. Pero mira esta otra: Mia no sabía que su hermano la observaba."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then the narrator knows more than Mia does.",
+            "traduccion": "Entonces el narrador sabe más que Mia."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Exactly. That is not first person.",
+            "traduccion": "Exacto. Eso no es primera persona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pista muestra que la segunda línea no es primera persona?",
+          "opciones": [
+            {
+              "es": "El narrador sabe algo que Mia no sabe."
+            },
+            {
+              "es": "El narrador usa la palabra «I»."
+            },
+            {
+              "es": "El narrador habla con el hermano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lo explica: «the narrator knows more than Mia does». Esa ventaja de conocimiento no existe en la primera persona."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Narrador",
+          "Pista",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "primera persona"
+            },
+            {
+              "texto": "I / we + opinión propia"
+            },
+            {
+              "texto": "I hesitated at the door."
+            }
+          ],
+          [
+            {
+              "texto": "tercera limitada"
+            },
+            {
+              "texto": "he / she + una sola mente"
+            },
+            {
+              "texto": "Mia secretly hoped that…"
+            }
+          ],
+          [
+            {
+              "texto": "omnisciente"
+            },
+            {
+              "texto": "varias mentes o saber más"
+            },
+            {
+              "texto": "Mia was unaware that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-72": {
+      "explicacion": {
+        "titulo": "Verbos de habla con matiz",
+        "texto": "En una escena, said casi nunca basta: el verbo ya dice cómo suena la voz. Whisper es hablar muy bajo; mutter, entre dientes y con descontento; snap, de forma brusca y enfadada; hint, insinuar sin decirlo. Van después de la cita, con la coma dentro de ella («Go away,» Tom snapped), o delante de that + oración (Leo hinted that…). Un adverbio refuerza el tono, pero no repitas lo que el verbo ya dice: snapped angrily sobra."
+      },
+      "patron": {
+        "texto": "«Cita,» + quien habla + verbo con matiz + adverbio:",
+        "formula": [
+          {
+            "texto": "'It is late,'",
+            "nota": "la cita acaba en coma dentro de las comillas"
+          },
+          {
+            "texto": "Tom",
+            "nota": "quien habla"
+          },
+          {
+            "texto": "muttered",
+            "nota": "verbo con matiz: entre dientes"
+          },
+          {
+            "texto": "bitterly.",
+            "nota": "adverbio opcional que suma una emoción"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia whispered me that the baby was asleep.",
+          "correcto": "Mia whispered to me that the baby was asleep.",
+          "explicacion": "Con whisper el destinatario necesita to: whispered to me. No se dice whispered me."
+        },
+        {
+          "incorrecto": "Leo hinted to go home early.",
+          "correcto": "Leo hinted that he wanted to go home early.",
+          "explicacion": "Hint se construye con that + oración completa: insinúas una idea, no se usa con infinitivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia revisa con Tom una escena que escribe para el club de lectura.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I wrote: 'Go away,' said Carlos. But it sounds flat.",
+            "traduccion": "Escribí: «Vete», dijo Carlos. Pero suena plano."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Carlos is furious, so he should snap.",
+            "traduccion": "Carlos está furioso, así que debería espetar."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "You are right. 'Go away,' Carlos snapped. And Sara is scared, so she whispers.",
+            "traduccion": "Tienes razón. «Vete», espetó Carlos. Y Sara tiene miedo, así que susurra."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, and Leo can mutter. He is tired of the noise.",
+            "traduccion": "Sí, y Leo puede murmurar. Está harto del ruido."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué verbo propone Tom para Carlos y por qué?",
+          "opciones": [
+            {
+              "es": "Snap, porque Carlos está furioso."
+            },
+            {
+              "es": "Whisper, porque Carlos tiene miedo."
+            },
+            {
+              "es": "Mutter, porque Carlos está cansado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Carlos is furious, so he should snap». Whisper es para Sara y mutter para Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Cómo suena",
+          "Se usa cuando…"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "whisper"
+            },
+            {
+              "texto": "muy bajo"
+            },
+            {
+              "texto": "hay que guardar silencio o un secreto"
+            }
+          ],
+          [
+            {
+              "texto": "mutter"
+            },
+            {
+              "texto": "entre dientes"
+            },
+            {
+              "texto": "te quejas casi para ti mismo"
+            }
+          ],
+          [
+            {
+              "texto": "snap"
+            },
+            {
+              "texto": "brusco y cortante"
+            },
+            {
+              "texto": "estás enfadado o impaciente"
+            }
+          ],
+          [
+            {
+              "texto": "hint"
+            },
+            {
+              "texto": "indirecto"
+            },
+            {
+              "texto": "insinúas sin pedir ni afirmar"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-73": {
+      "explicacion": {
+        "titulo": "Deducir por qué actúa un personaje",
+        "texto": "Un buen lector deduce el porqué. Mira lo que el personaje hace, lo que evita y la diferencia entre lo que dice y lo que hace. Para expresar la deducción, usa must be (casi seguro), might be (posible), can't be (imposible) o un detalle + suggests that + oración. Ojo: después de avoid, el verbo va en -ing (avoids looking), y must no lleva to. Evita afirmar más de lo que el texto permite."
+      },
+      "patron": {
+        "texto": "Detalle + suggests that + motivo deducido:",
+        "formula": [
+          {
+            "texto": "His silence",
+            "nota": "el detalle que observas"
+          },
+          {
+            "texto": "suggests that",
+            "nota": "verbo de inferencia: apunta a"
+          },
+          {
+            "texto": "he is reluctant",
+            "nota": "la emoción o el motivo que deduces"
+          },
+          {
+            "texto": "to talk about it.",
+            "nota": "lo que el personaje evita"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She must to be waiting for someone.",
+          "correcto": "She must be waiting for someone.",
+          "explicacion": "Los verbos modales como must van seguidos del verbo base, sin to."
+        },
+        {
+          "incorrecto": "Mia avoids to look at Tom.",
+          "correcto": "Mia avoids looking at Tom.",
+          "explicacion": "Avoid («evitar») va seguido de -ing, no de infinitivo con to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos comentan un cuento corto que leyeron para el club.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why does the old man put two cups on the table every evening?",
+            "traduccion": "¿Por qué el anciano pone dos tazas en la mesa cada tarde?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "His wife died last year. The second cup suggests that he misses her.",
+            "traduccion": "Su esposa murió el año pasado. La segunda taza sugiere que la echa de menos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, and he avoids talking about her with his neighbours.",
+            "traduccion": "Sí, y evita hablar de ella con sus vecinos."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That is more evidence. He is reluctant to say goodbye.",
+            "traduccion": "Eso es otra prueba. Es reacio a despedirse."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Carlos, ¿qué sugiere la segunda taza?",
+          "opciones": [
+            {
+              "es": "Que el anciano echa de menos a su esposa."
+            },
+            {
+              "es": "Que el anciano espera visitas cada tarde."
+            },
+            {
+              "es": "Que el anciano evita a sus vecinos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «The second cup suggests that he misses her». Evitar a los vecinos es otro indicio que añade Ana."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Certeza",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "casi segura"
+            },
+            {
+              "texto": "must be"
+            },
+            {
+              "texto": "She must be hiding something."
+            }
+          ],
+          [
+            {
+              "texto": "posible"
+            },
+            {
+              "texto": "might be"
+            },
+            {
+              "texto": "He might be more nervous than he admits."
+            }
+          ],
+          [
+            {
+              "texto": "imposible"
+            },
+            {
+              "texto": "can't be"
+            },
+            {
+              "texto": "He can't be calm."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-74": {
+      "explicacion": {
+        "titulo": "Una escena con sentidos, voz y pasado previo",
+        "texto": "Una escena breve combina tres piezas. La descripción sensorial dice cómo se ve, huele o suena el lugar (dim, a faint scent, creaked). El diálogo usa un verbo de habla con matiz (whispered, snapped). Y el past perfect (had + participio) cuenta lo ocurrido ANTES del momento de la escena: someone had left a cup of tea. El pasado simple lleva la acción principal; el past perfect explica por qué las cosas están como están."
+      },
+      "patron": {
+        "texto": "Pasado simple (ahora) + had + participio (antes):",
+        "formula": [
+          {
+            "texto": "Leo glanced at the table:",
+            "nota": "acción principal en pasado simple"
+          },
+          {
+            "texto": "someone had left",
+            "nota": "hecho anterior: had + participio"
+          },
+          {
+            "texto": "a cup of tea,",
+            "nota": "lo que Leo descubre"
+          },
+          {
+            "texto": "and it was still warm.",
+            "nota": "descripción sensorial de lo que ve"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She was sure that someone has opened the window.",
+          "correcto": "She was sure that someone had opened the window.",
+          "explicacion": "En una narración en pasado, lo ocurrido antes se cuenta con had + participio, no con has."
+        },
+        {
+          "incorrecto": "Nobody had opened the window since years.",
+          "correcto": "Nobody had opened the window for years.",
+          "explicacion": "Para una duración se usa for years; since exige un punto de inicio (since 2019)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara enseña a Carlos el borrador de una escena que escribe para el club.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Here is my scene. The room was dim, and someone had left the window open.",
+            "traduccion": "Aquí está mi escena. La habitación estaba en penumbra y alguien había dejado la ventana abierta."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Nice. I can almost feel the cold. Is there a smell?",
+            "traduccion": "Bien. Casi siento el frío. ¿Hay algún olor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, a faint scent of smoke. Then Mia whispered, 'Who was here?'",
+            "traduccion": "Sí, un leve olor a humo. Luego Mia susurró: «¿Quién estuvo aquí?»."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. The window shows what happened before, and the whisper shows how she feels.",
+            "traduccion": "Bien. La ventana muestra lo que pasó antes y el susurro muestra cómo se siente ella."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Carlos, ¿qué muestra el detalle de la ventana abierta?",
+          "opciones": [
+            {
+              "es": "Algo que ocurrió antes de la escena."
+            },
+            {
+              "es": "Un olor que Mia percibe."
+            },
+            {
+              "es": "La voz baja de Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que la ventana muestra lo que ocurrió antes; el olor es el humo y el susurro revela lo que siente Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "sentido"
+            },
+            {
+              "texto": "adjetivo o verbo sensorial"
+            },
+            {
+              "texto": "a faint scent of smoke"
+            }
+          ],
+          [
+            {
+              "texto": "voz"
+            },
+            {
+              "texto": "verbo de habla con matiz"
+            },
+            {
+              "texto": "'Who was here?' Mia whispered."
+            }
+          ],
+          [
+            {
+              "texto": "lo anterior"
+            },
+            {
+              "texto": "had + participio"
+            },
+            {
+              "texto": "She had heard footsteps earlier."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-75": {
+      "explicacion": {
+        "titulo": "Reseñar y debatir en un club de lectura",
+        "texto": "En un club de lectura haces tres cosas. Recomiendas (I would recommend it to anyone who…), valoras con matices, con un contraste (The pace is slow, but the ending feels rushed), y explicas el motivo de un personaje (she wanted to protect her family). Ante una crítica, primero concedes (I see your point…, To be fair…) y después respondes con tu razón. Tras recommend usa -ing o that: I recommend reading it."
+      },
+      "patron": {
+        "texto": "Concesión + but + tu razón:",
+        "formula": [
+          {
+            "texto": "I see your point that the plot is predictable,",
+            "nota": "concedes lo que dice la otra persona"
+          },
+          {
+            "texto": "but",
+            "nota": "contrasta con tu opinión"
+          },
+          {
+            "texto": "the characters felt convincing",
+            "nota": "tu razón o valoración"
+          },
+          {
+            "texto": "to me.",
+            "nota": "matiz personal: es tu impresión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I recommend to read this novel.",
+          "correcto": "I recommend reading this novel.",
+          "explicacion": "Recommend no va seguido de to + verbo: se usa -ing (recommend reading) o that + oración."
+        },
+        {
+          "incorrecto": "I am agree with you about the ending.",
+          "correcto": "I agree with you about the ending.",
+          "explicacion": "Agree ya es un verbo: no se usa con be como el español «estoy de acuerdo»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia discuten la novela del mes en su club de lectura.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I did not enjoy the novel. The plot was predictable.",
+            "traduccion": "No disfruté la novela. El argumento era previsible."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I see your point, but to be fair, the main character was very convincing.",
+            "traduccion": "Entiendo, pero siendo justos, el personaje principal era muy convincente."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Maybe. The ending felt rushed, though.",
+            "traduccion": "Quizá. Aunque el final parecía apresurado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "True. I would still recommend it to anyone who likes a gripping story.",
+            "traduccion": "Cierto. Aun así, se la recomendaría a cualquiera a quien le guste una historia absorbente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué aspecto defiende Mia frente a la crítica del argumento?",
+          "opciones": [
+            {
+              "es": "Que el personaje principal es muy convincente."
+            },
+            {
+              "es": "Que el final está muy bien ritmado."
+            },
+            {
+              "es": "Que el argumento es muy sorprendente."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia responde a «the plot was predictable» con «the main character was very convincing»: defiende el personaje, no el argumento."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "recomendar"
+            },
+            {
+              "texto": "I would recommend… to anyone who…"
+            },
+            {
+              "texto": "I would recommend this novel to anyone who enjoys a mystery."
+            }
+          ],
+          [
+            {
+              "texto": "conceder"
+            },
+            {
+              "texto": "I see your point, but…"
+            },
+            {
+              "texto": "I see your point, but the ending fits her choice."
+            }
+          ],
+          [
+            {
+              "texto": "justificar"
+            },
+            {
+              "texto": "To be fair, …"
+            },
+            {
+              "texto": "To be fair, her choice makes sense."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}
