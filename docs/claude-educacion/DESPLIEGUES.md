@@ -137,3 +137,13 @@ Rollback:
 ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20260930-edu-6-pulido; mv web staging/20260930-edu-6-pulido/web-retirada-post && cp -al $B/web-anterior web'
 # gzip: cp $B/apache-onelingo-le-ssl.conf.bak "$(readlink -f /etc/apache2/sites-enabled/onelingo.hostingcuenca.com-le-ssl.conf)" && apache2ctl configtest && systemctl reload apache2
 ```
+
+## Release: 20260930-edu-7-n3-n4
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: N3 completo (C91–C100, autoría compacta con GO independiente) y N4 completo (100 clases, B1 consolidación, mapa v2 revisado; autor y revisor distintos, constructor con control real de léxico). Total publicado: N1–N4, 400 clases y 5.200 ejercicios. Solo assets web (app sin cambios de código).
+Commit: `842b72b` · Build: `main.dart.js` `e6eca1c7…` (igual que edu-6); biblioteca `d24eda6b…`.
+Pruebas: 176 Flutter (1 omitida), validar_ruta 10 idiomas 0 errores, construir_bloque OK en los 20 bloques de N4.
+Backup: `/var/www/onelingo/backups/20260930-edu-7-n3-n4/web-anterior` (= edu-6), `env.sha256`.
+Health: `/api/salud` 200, `onelingo-api` online sin reinicio, `.env` igual, APK/avatar 200, `n4-editorial.json` servido con gzip. Lock creado y liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-7-n3-n4/web-retirada-post && cp -al backups/20260930-edu-7-n3-n4/web-anterior web'`
