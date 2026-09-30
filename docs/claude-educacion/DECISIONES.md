@@ -180,3 +180,26 @@ Motivo: respetar la estructura del cliente, evitar duplicar A1 y mantener result
 Alternativas descartadas: conservar N1–N2 = A1; llamar C2 o «bilingüe» al Nivel 10 sin evidencia suficiente; sobrescribir el nivel histórico del usuario.
 Archivos afectados: diagnóstico, serialización de progreso, manifiestos curriculares, rutas inglesas y pruebas de migración.
 Riesgo: la interfaz antigua que interprete `nivelInicial` sin versión debe mantenerse sobre aliases hasta completar la migración.
+
+## DEC-021 — Pulir las 290 clases publicadas antes de producir más
+Fecha: 2026-09-30 · Responsable: Claude
+Decisión: detener N3 C91–C100 y N4 hasta corregir lo publicado. La auditoría del 2026-09-30 mostró práctica sin enseñanza, situaciones y errores de relleno, fichas ya ordenadas y controles neutralizados por el compilador.
+Motivo: producir 710 clases más con el mismo molde multiplicaría el defecto.
+Archivos: `auditoria/AUDITORIA_2026-09-30.md`.
+
+## DEC-022 — Capas editoriales sobre la fuente aprobada
+Fecha: 2026-09-30 · Responsable: Claude
+Decisión: las mejoras se aplican como capas revisables sobre los JSON editoriales, sin regenerar las clases: `enriquecimiento-*.json` (explicación, patrón, tabla, 2 errores reales, situación con diálogo e ítem propio, ejemplos corregidos), `correcciones-completar.json` (frase con hueco + traducción como pista + respuestas aceptadas) y `correcciones-items.json` (campos corregidos de ejercicios defectuosos y tercera opción). El compilador solo fusiona archivos con revisión independiente `GO` y que pasan la validación automática.
+Motivo: trazabilidad por bloque, autor y revisor distintos, y reversibilidad (quitar la capa restaura la versión anterior).
+Riesgo: dos fuentes para un mismo ítem; se mitiga con una sola función de fusión (`normalized_exercise`) común a biblioteca y ruta.
+
+## DEC-023 — Producción abierta para escritura larga sin rúbrica
+Fecha: 2026-09-30 · Responsable: Claude
+Decisión: un «escribir» de más de 12 palabras sin `evidenceGroups` se marca `openProduction`: el alumno escribe dentro de un rango de palabras, compara con el modelo y el ítem no puntúa (216 variantes).
+Motivo: sin IA en runtime, comparar un párrafo con una o dos soluciones exactas rechaza respuestas correctas y bloquea aprobaciones.
+Alternativa futura: corrección por el tutor IA con rúbrica, cuando se conecte con la unidad.
+
+## DEC-024 — Aprobación con redondeo hacia abajo
+Fecha: 2026-09-30 · Responsable: Claude
+Decisión: `aciertosNecesarios = floor(total × umbral)` (mínimo 1; con 1–2 ítems, todos). Con 0,8: 3/4 y 2/3 aprueban.
+Motivo: con 4 ítems de evaluación, 0,8 exigía el 100 %.

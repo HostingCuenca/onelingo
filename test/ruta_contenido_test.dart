@@ -75,7 +75,7 @@ void main() {
     ];
     for (final runtime in samples) {
       expect(runtime.activa, isTrue);
-      expect(runtime.libraryVersion, '2026.09.30-en-n3.1');
+      expect(runtime.libraryVersion, '2026.09.30-en-pulido.1');
       expect(runtime.pool('practiceGuided')!.variants, hasLength(3));
       expect(runtime.pool('practice')!.variants, hasLength(3));
       expect(runtime.pool('evaluation')!.variants, hasLength(4));

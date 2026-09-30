@@ -16,14 +16,14 @@ La producción masiva de N1–N3 tiene buena cobertura del temario y progresión
 | 4 | P1 | Repaso fallido se volvía a recomendar en el acto (bucle) | Corregido: vence al día siguiente |
 | 5 | P1 | «Escucha y ordena/completa» sin botón de audio (8 ítems) | Corregido |
 | 6 | P1 | El diagnóstico guardaba el nivel recomendado, no el elegido; sobrescribía `escala` | Corregido |
-| 7 | P0 | Gramática sin explicar: explicación = objetivo en una línea | En curso: capa de enriquecimiento (CONTRATO_ENRIQUECIMIENTO.md) |
-| 8 | P1 | Situación falsa en 290 clases (contexto genérico + copia de práctica) | En curso: situaciones reales con diálogo e ítem propio |
-| 9 | P1 | `erroresFrecuentes` falsos («frase + ?») | En curso: 2 errores reales por clase |
-| 10 | P0/P1 | 161 ejemplos de enseñanza son metalenguaje en inglés; notas en inglés; traducciones-resumen | En curso (`ejemplos` del enriquecimiento) |
-| 11 | P1 | Escritura larga corregida por coincidencia exacta (159 respuestas > 12 palabras, 3 con rúbrica) | Pendiente: rúbricas `wordRange` + `evidenceGroups` |
-| 12 | P1 | 345/401 ítems de elegir de N1 con 2 opciones | Pendiente: tercera opción |
-| 13 | P1 | Respuesta visible en consigna/pista (91 ítems); pistas genéricas repetidas | Pendiente |
-| 14 | P0 | N1 C86–88: 15 «completar» sin frase inglesa; opciones con errores | Pendiente |
+| 7 | P0 | Gramática sin explicar: explicación = objetivo en una línea | Corregido: 290/290 clases con explicación y patrón (GO independiente) |
+| 8 | P1 | Situación falsa en 290 clases (contexto genérico + copia de práctica) | Corregido: 290 situaciones con diálogo e ítem propio |
+| 9 | P1 | `erroresFrecuentes` falsos («frase + ?») | Corregido: 580 errores reales |
+| 10 | P0/P1 | 161 ejemplos de enseñanza son metalenguaje en inglés; notas en inglés; traducciones-resumen | Corregido en el enriquecimiento |
+| 11 | P1 | Escritura larga corregida por coincidencia exacta (159 respuestas > 12 palabras, 3 con rúbrica) | Corregido: producción abierta no puntuable (216 variantes, DEC-023) |
+| 12 | P1 | 345/401 ítems de elegir de N1 con 2 opciones | Corregido: tercera opción en 429 ítems de N1–N2 |
+| 13 | P1 | Respuesta visible en consigna/pista (91 ítems); pistas genéricas repetidas | Corregido en correcciones-items / pistas |
+| 14 | P0 | N1 C86–88: 15 «completar» sin frase inglesa; opciones con errores | Corregido (pistas + correcciones de ítems) |
 | 15 | P1 | Vocabulario inflado con «expresión del curso» (81–89 %): anula el control «nada sin enseñar» | Pendiente: separar léxico de validación del vocabulario enseñado |
 | 16 | P2 | 12,4 MB de JSON sin compresión en el servidor | Parcial: JSON compactos (7,3 MB). Falta activar `DEFLATE` para `application/json` (config del servidor, requiere aprobación) |
 | 17 | P2 | Hash de selección distinto en web (precisión > 2^53) | Corregido |
@@ -37,3 +37,9 @@ La producción masiva de N1–N3 tiene buena cobertura del temario y progresión
 - Formatos N1: 394 elegir, 277 completar, 270 ordenar, 91 escuchar, 35 escribir, 33 relacionar.
 - Palabras por ejemplo: N1 4,8 · N2 9,0 · N3 12,4.
 - Pruebas tras la fase 1: 174 Flutter, 1 omitida; 61 de herramientas; 10 idiomas sin errores.
+
+## Actualización (cierre de la fase de pulido)
+
+- 668 «completar» sin pista recibieron traducción completa como guía y respuestas aceptadas (`correcciones-completar.json`, GO por nivel).
+- ~200 ejercicios del registro `EJERCICIOS_DEFECTUOSOS.md` y 429 ítems de dos opciones corregidos (`correcciones-items.json`, GO por nivel).
+- Queda pendiente: #15 (vocabulario inflado: el control «nada sin enseñar» sigue siendo laxo; las pistas destaparon 57 palabras no enseñadas en N2–N3), #16 (gzip en el servidor), #20 (imágenes y personajes fijos), #21 (cobertura MCER).
