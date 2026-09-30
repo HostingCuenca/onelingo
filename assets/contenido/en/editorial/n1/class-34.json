@@ -1,0 +1,817 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "vocabularyDeclarations": "exhaustive"
+  },
+  "id": "en.n1.class-34",
+  "title": {
+    "en": "Listening for location",
+    "es": "Escucha y selección de ubicación"
+  },
+  "concepts": [
+    "location-listening"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n1.class-33"
+  ],
+  "usesVocabulary": [
+    "the",
+    "a",
+    "is",
+    "book",
+    "bag",
+    "ball",
+    "sofa",
+    "table",
+    "chair",
+    "chairs",
+    "box",
+    "two",
+    "and",
+    "in",
+    "on",
+    "under",
+    "next to",
+    "between"
+  ],
+  "usesPatterns": [
+    "location-listening",
+    "location-in-on-under",
+    "location-next-to-between",
+    "location-visual-review",
+    "articles-a-an",
+    "articles-the-contrast"
+  ],
+  "objectives": {
+    "es": [
+      "Reconocer objetos y preposiciones en audio breve.",
+      "Distinguir cinco relaciones espaciales sin apoyo escrito inicial."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "in",
+      "es": "dentro de"
+    },
+    {
+      "en": "on",
+      "es": "encima de"
+    },
+    {
+      "en": "under",
+      "es": "debajo de"
+    },
+    {
+      "en": "next to",
+      "es": "al lado de"
+    },
+    {
+      "en": "between",
+      "es": "entre"
+    },
+    {
+      "en": "book",
+      "es": "libro"
+    },
+    {
+      "en": "sofa",
+      "es": "sofá"
+    },
+    {
+      "en": "table",
+      "es": "mesa"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n1.class-34.t01",
+      "en": "The book is on the table.",
+      "es": "El libro está encima de la mesa.",
+      "explanationEs": "Escucha el objeto y luego la ubicación.",
+      "segments": [
+        {
+          "en": "The book is",
+          "es": "El libro está"
+        },
+        {
+          "en": "on the table.",
+          "es": "encima de la mesa."
+        }
+      ],
+      "audioText": "The book is on the table.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-34.t02",
+      "en": "The bag is under the chair.",
+      "es": "La bolsa está debajo de la silla.",
+      "explanationEs": "Under indica debajo.",
+      "segments": [
+        {
+          "en": "The bag is",
+          "es": "La bolsa está"
+        },
+        {
+          "en": "under the chair.",
+          "es": "debajo de la silla."
+        }
+      ],
+      "audioText": "The bag is under the chair.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-34.t03",
+      "en": "The ball is in the box.",
+      "es": "La pelota está dentro de la caja.",
+      "explanationEs": "In indica dentro.",
+      "segments": [
+        {
+          "en": "The ball is",
+          "es": "La pelota está"
+        },
+        {
+          "en": "in the box.",
+          "es": "dentro de la caja."
+        }
+      ],
+      "audioText": "The ball is in the box.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-34.t04",
+      "en": "The sofa is next to the table.",
+      "es": "El sofá está al lado de la mesa.",
+      "explanationEs": "Next to indica al lado de.",
+      "segments": [
+        {
+          "en": "The sofa is",
+          "es": "El sofá está"
+        },
+        {
+          "en": "next to the table.",
+          "es": "al lado de la mesa."
+        }
+      ],
+      "audioText": "The sofa is next to the table.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-34.t05",
+      "en": "The table is between two chairs.",
+      "es": "La mesa está entre dos sillas.",
+      "explanationEs": "Between sitúa algo entre dos referencias.",
+      "segments": [
+        {
+          "en": "The table is",
+          "es": "La mesa está"
+        },
+        {
+          "en": "between two chairs.",
+          "es": "entre dos sillas."
+        }
+      ],
+      "audioText": "The table is between two chairs.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n1.c34.pg01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la frase oída."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The book is on the table."
+          },
+          {
+            "text": "The book is under the table."
+          }
+        ],
+        "teaches": [
+          "location-listening"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye on the table."
+          },
+          "hint": {
+            "es": "Escucha la preposición."
+          },
+          "audio": "The book is on the table.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5ccbafcc14e9fe5fa40b4682828671b6dc6387a4ce41c6be5eaead12e7c9cadc"
+      },
+      {
+        "id": "en.n1.c34.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Escucha y completa: The bag is ___ the chair."
+        },
+        "answer": {
+          "text": "under",
+          "accepted": [
+            "under"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "location-listening"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye under."
+          },
+          "hint": {
+            "es": "La palabra significa debajo."
+          },
+          "audio": "The bag is under the chair.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9f26900628359cae068fef702ce0333e560c09f2141818c570381e0d36d525e4"
+      },
+      {
+        "id": "en.n1.c34.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Escucha y ordena la oración."
+        },
+        "answer": {
+          "text": "The ball is in the box.",
+          "tokens": [
+            "The",
+            "ball",
+            "is",
+            "in",
+            "the",
+            "box."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "location-listening"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La pelota está dentro de la caja."
+          },
+          "hint": {
+            "es": "In va antes de the box."
+          },
+          "audio": "The ball is in the box.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5e91992abaf3bbf294d93942f5543a8df616cbeca4fec2ab9f5078808680895a"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n1.c34.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la ubicación del sofá."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The sofa is next to the table."
+          },
+          {
+            "text": "The sofa is under the table."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye next to."
+          },
+          "audio": "The sofa is next to the table.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9112b6a8bf439055740bb9006ba9440f1fb43fff4b3aaaf9a4d7a6ed377a6e90"
+      },
+      {
+        "id": "en.n1.c34.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Escucha y completa: The table is ___ two chairs."
+        },
+        "answer": {
+          "text": "between",
+          "accepted": [
+            "between"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye between."
+          },
+          "audio": "The table is between two chairs.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:385ee2c2c76cf3acb817e58b43728329ae62a6c5b4334f7ed197c2f6cb671b61"
+      },
+      {
+        "id": "en.n1.c34.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Escucha y ordena la oración."
+        },
+        "answer": {
+          "text": "The book is under the chair.",
+          "tokens": [
+            "The",
+            "book",
+            "is",
+            "under",
+            "the",
+            "chair."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Under va antes de the chair."
+          },
+          "audio": "The book is under the chair.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aeb2dcd652be3dfd8b9146e4c1d006d3034b51fe01bd056f0bbf256680ed5628"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n1.c34.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la oración correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The ball is on the table."
+          },
+          {
+            "text": "The ball is in the box."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye on the table."
+          },
+          "audio": "The ball is on the table.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:05b0e71e520b289188d910ac97757d2f79e1c1bf0dba76e7891fc3b4a31fefa6"
+      },
+      {
+        "id": "en.n1.c34.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Escucha y completa: The bag is ___ the table."
+        },
+        "answer": {
+          "text": "next to",
+          "accepted": [
+            "next to"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye next to."
+          },
+          "audio": "The bag is next to the table.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d05d6dbc14e0809ae3356f55fdbb7501c3f40569798441906b5c9b5b1858eb25"
+      },
+      {
+        "id": "en.n1.c34.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Escucha y ordena la oración."
+        },
+        "answer": {
+          "text": "The chair is next to the sofa.",
+          "tokens": [
+            "The",
+            "chair",
+            "is",
+            "next",
+            "to",
+            "the",
+            "sofa."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Next to une chair y sofa."
+          },
+          "audio": "The chair is next to the sofa.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:88106b21cf4ff652ee287ae3e071f05463bbf883442dc2589b5f5c6d936cbdc1"
+      },
+      {
+        "id": "en.n1.c34.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la frase oída."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The bag is in the box."
+          },
+          {
+            "text": "The bag is under the box."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye in the box."
+          },
+          "audio": "The bag is in the box.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:68178ba4d9c6ebf3f5f275adb09aba5bef793bdee43d1f60c88fbdee944e2910"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n1.c34.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada expresión con su significado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "on a table",
+              {
+                "es": "encima de una mesa"
+              }
+            ],
+            [
+              "under a chair",
+              {
+                "es": "debajo de una silla"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "On es encima; under es debajo."
+          },
+          "pairs": [
+            [
+              "on a table",
+              {
+                "es": "encima de una mesa"
+              }
+            ],
+            [
+              "under a chair",
+              {
+                "es": "debajo de una silla"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:013bf97348199eda063ca58523355ad9207792a774328e92283c1bfd470932a0"
+      },
+      {
+        "id": "en.n1.c34.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Escucha y completa: The ball is ___ the chair and the sofa."
+        },
+        "answer": {
+          "text": "between",
+          "accepted": [
+            "between"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye between."
+          },
+          "audio": "The ball is between the chair and the sofa.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2e7f0fb342662ec0e2ee9c5dd87575e3d2fe9516aac7b0f398008d25a9bb1bc2"
+      },
+      {
+        "id": "en.n1.c34.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la oración correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "A book is in a bag."
+          },
+          {
+            "text": "A book is on a bag."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye in a bag."
+          },
+          "audio": "A book is in a bag.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:079ca4001f06ee2b9919c05402d0944f4c6408b83a587b1916d926db06e197c3"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n1.c34.e01": {
+      "reteach": "en.n1.class-34.t01",
+      "review": "en.n1.c34.r01"
+    },
+    "en.n1.c34.e02": {
+      "reteach": "en.n1.class-34.t04",
+      "review": "en.n1.c34.r02"
+    },
+    "en.n1.c34.e03": {
+      "reteach": "en.n1.class-34.t04",
+      "review": "en.n1.c34.r01"
+    },
+    "en.n1.c34.e04": {
+      "reteach": "en.n1.class-34.t03",
+      "review": "en.n1.c34.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

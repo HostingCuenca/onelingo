@@ -1,0 +1,878 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-34",
+  "title": {
+    "en": "Explain a routine choice",
+    "es": "Explicar una elección de rutina"
+  },
+  "objectives": {
+    "es": [
+      "Explicar tres hábitos, una actividad evitada y un objetivo.",
+      "Dar razones concretas para una actualización de bienestar."
+    ]
+  },
+  "concepts": [
+    "n3-habits-preferences-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-33"
+  ],
+  "usesVocabulary": [
+    "wellbeing",
+    "routine",
+    "sleep",
+    "exercise",
+    "avoid",
+    "goal",
+    "hope"
+  ],
+  "usesPatterns": [
+    "n3-habits-preferences-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "wellbeing",
+      "es": "bienestar"
+    },
+    {
+      "en": "routine",
+      "es": "rutina"
+    },
+    {
+      "en": "sleep",
+      "es": "sueño"
+    },
+    {
+      "en": "exercise",
+      "es": "ejercicio"
+    },
+    {
+      "en": "avoid",
+      "es": "evitar"
+    },
+    {
+      "en": "goal",
+      "es": "objetivo"
+    },
+    {
+      "en": "hope",
+      "es": "esperar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-34.t01",
+      "en": "I enjoy walking for my wellbeing.",
+      "es": "Disfruto caminar por mi bienestar.",
+      "explanationEs": "Enjoy walking presenta una preferencia.",
+      "segments": [
+        {
+          "en": "I enjoy walking",
+          "es": "Disfruto caminar"
+        },
+        {
+          "en": "for my wellbeing.",
+          "es": "por mi bienestar."
+        }
+      ],
+      "audioText": "I enjoy walking for my wellbeing.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-habits-preferences-4"
+    },
+    {
+      "id": "en.n3.class-34.t02",
+      "en": "I avoid using screens late.",
+      "es": "Evito usar pantallas tarde.",
+      "explanationEs": "Avoid using muestra el hábito que se evita.",
+      "segments": [
+        {
+          "en": "I avoid",
+          "es": "Evito usar"
+        },
+        {
+          "en": "using screens late.",
+          "es": "pantallas tarde."
+        }
+      ],
+      "audioText": "I avoid using screens late.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-habits-preferences-4"
+    },
+    {
+      "id": "en.n3.class-34.t03",
+      "en": "I hope to cook more at home.",
+      "es": "Espero cocinar más en casa.",
+      "explanationEs": "Hope to cook expresa un objetivo.",
+      "segments": [
+        {
+          "en": "I hope to",
+          "es": "Espero cocinar"
+        },
+        {
+          "en": "cook more at home.",
+          "es": "más en casa."
+        }
+      ],
+      "audioText": "I hope to cook more at home.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-habits-preferences-4"
+    },
+    {
+      "id": "en.n3.class-34.t04",
+      "en": "A reason makes a routine choice clear.",
+      "es": "Una razón aclara una elección de rutina.",
+      "explanationEs": "Because conecta patrón y motivo.",
+      "segments": [
+        {
+          "en": "A reason makes",
+          "es": "Una razón aclara"
+        },
+        {
+          "en": "a routine choice clear.",
+          "es": "una elección de rutina."
+        }
+      ],
+      "audioText": "A reason makes a routine choice clear.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-habits-preferences-4"
+    },
+    {
+      "id": "en.n3.class-34.t05",
+      "en": "A small goal can support sleep and energy.",
+      "es": "Un objetivo pequeño puede apoyar sueño y energía.",
+      "explanationEs": "Una actualización de bienestar reúne elecciones y razones.",
+      "segments": [
+        {
+          "en": "A small goal can",
+          "es": "Un objetivo pequeño puede"
+        },
+        {
+          "en": "support sleep and energy.",
+          "es": "apoyar sueño y energía."
+        }
+      ],
+      "audioText": "A small goal can support sleep and energy.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-habits-preferences-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c34.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige una razón con avoid + -ing."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I avoid to eat late."
+          },
+          {
+            "text": "I avoid eating late because it hurts my sleep."
+          },
+          {
+            "text": "I avoid eat late."
+          }
+        ],
+        "teaches": [
+          "n3-habits-preferences-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Avoid eating presenta la actividad que se evita."
+          },
+          "hint": {
+            "es": "Observa el verbo y la forma que lo sigue."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3456dce7e34480d89e9550cdececdb47d3a883b49c99ad0cb1f1603ec1397b52"
+      },
+      {
+        "id": "en.n3.c34.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el objetivo: I hope ___ more."
+        },
+        "answer": {
+          "text": "to exercise",
+          "accepted": [
+            "to exercise"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-habits-preferences-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Hope to exercise expresa un objetivo."
+          },
+          "hint": {
+            "es": "Observa el verbo y la forma que lo sigue."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:af4266e8e28d3044156c4bbb37d99af7e92abb6287a3d13cc9c36ef19b114ed8"
+      },
+      {
+        "id": "en.n3.c34.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una razón de bienestar."
+        },
+        "answer": {
+          "text": "I enjoy walking because it clears my mind",
+          "tokens": [
+            "I",
+            "enjoy",
+            "walking",
+            "because",
+            "it",
+            "clears",
+            "my",
+            "mind"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-habits-preferences-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Enjoy walking y because conectan preferencia y razón."
+          },
+          "hint": {
+            "es": "Observa el verbo y la forma que lo sigue."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:95072ddecc500cd06a7e1c78370685bc334544cf078ccdf60ae16cefb842b179"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c34.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el hábito preferido."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "cooking at home"
+          },
+          {
+            "text": "to cook at home"
+          },
+          {
+            "text": "cook home"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Enjoy cooking at home expresa una preferencia con razón."
+          },
+          "audio": "I enjoy cooking at home because it saves money.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6c1854c9a00bb63e99a88577fdd53b9ad35adfd74bfa06189562b8cdc8469c20"
+      },
+      {
+        "id": "en.n3.c34.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona hábito con razón."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "avoid sitting late",
+              {
+                "es": "sleep better"
+              }
+            ],
+            [
+              "enjoy cycling",
+              {
+                "es": "feel active"
+              }
+            ],
+            [
+              "hope to cook",
+              {
+                "es": "eat well"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada razón explica la elección sin cambiar el patrón."
+          },
+          "pairs": [
+            [
+              "avoid sitting late",
+              {
+                "es": "sleep better"
+              }
+            ],
+            [
+              "enjoy cycling",
+              {
+                "es": "feel active"
+              }
+            ],
+            [
+              "hope to cook",
+              {
+                "es": "eat well"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:68a20f45d17789fb61f4aab3e9e068d6f0aa679712182a75a1e140124fa310b3"
+      },
+      {
+        "id": "en.n3.c34.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe dos hábitos y una razón."
+        },
+        "answer": {
+          "text": "I enjoy walking and avoid using the car because I want to feel active.",
+          "accepted": [
+            "I enjoy walking and avoid using the car because I want to feel active.",
+            "I like walking, and I avoid driving because I hope to stay active."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes incluyen dos patrones -ing, un objetivo con to y una razón."
+          },
+          "text": "Caminas y evitas usar el coche porque quieres sentirte activo."
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c41f33a5a47431b7bcaec7148e9b175749915e51d98e0e07b4ef1c02fb52182c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c34.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la explicación de una rutina saludable."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I enjoy stretching because it helps my back."
+          },
+          {
+            "text": "I enjoy to stretch because back."
+          },
+          {
+            "text": "I stretching enjoy my back."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Enjoy stretching y because forman una explicación clara."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:298f3dc69e729a24dfe40654a5dd070a9b5e0fc63252c0fcba8a995d7ba0a0f9"
+      },
+      {
+        "id": "en.n3.c34.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y marca el objetivo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "avoids snacks"
+          },
+          {
+            "text": "wants to sleep well"
+          },
+          {
+            "text": "late"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Wants to sleep well expresa el objetivo de Kai."
+          },
+          "audio": "Kai avoids snacks late because he wants to sleep well.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5bc6f9e3581a807ba36c94ae9d7261e6433a25ce19cef30c05744fc41254a56c"
+      },
+      {
+        "id": "en.n3.c34.e03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada elección con su razón."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "enjoys swimming",
+              {
+                "es": "feel calm"
+              }
+            ],
+            [
+              "avoids screens late",
+              {
+                "es": "sleep better"
+              }
+            ],
+            [
+              "needs to plan meals",
+              {
+                "es": "eat regularly"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las razones hacen observable el propósito de cada cambio."
+          },
+          "pairs": [
+            [
+              "enjoys swimming",
+              {
+                "es": "feel calm"
+              }
+            ],
+            [
+              "avoids screens late",
+              {
+                "es": "sleep better"
+              }
+            ],
+            [
+              "needs to plan meals",
+              {
+                "es": "eat regularly"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aa2ffeb59ef973a0e6a0226d75a235a2af829c65bc7e8ec0ac9e5e554c9e29b4"
+      },
+      {
+        "id": "en.n3.c34.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta 70–90 palabras para una actualización de bienestar."
+        },
+        "answer": {
+          "text": "I enjoy walking after work because it gives me energy. I avoid using screens late because I want to sleep better. I hope to cook more at home, since regular meals help my routine. These small changes are realistic: walking is easy near my home, and cooking lets me plan tomorrow's food. I will review the routine next week and keep the habits that help most. Because this routine supports my sleep, I hope to keep it next week.",
+          "accepted": [
+            "I enjoy walking after work because it gives me energy. I avoid using screens late because I want to sleep better. I hope to cook more at home, since regular meals help my routine. These small changes are realistic: walking is easy near my home, and cooking lets me plan tomorrow's food. I will review the routine next week and keep the habits that help most. Because this routine supports my sleep, I hope to keep it next week.",
+            "Walking after work gives me energy, so I enjoy walking. I avoid using screens late because I hope to sleep better. I also plan to cook more at home; regular meals support my routine. These changes are realistic because I can walk near home and prepare food for tomorrow. Next week I will review the plan and keep the habits that help me most. Because this plan supports my sleep, I hope to keep it next week."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes incluyen dos patrones con -ing, un patrón con to y razones concretas."
+          },
+          "scoring": {
+            "wordRange": [
+              70,
+              90
+            ],
+            "independentAttempt": true
+          },
+          "text": "Rutina: disfrutas caminar; evitas pantallas tarde; esperas cocinar más; razón: energía y sueño."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9d9c796d94ed3efcf830ed39fda41f8fefc180c3c3cde97da4aec6bf5682196"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c34.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase explica una preferencia y una razón?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I enjoy gardening because it relaxes me."
+          },
+          {
+            "text": "I enjoy to garden because relax."
+          },
+          {
+            "text": "I gardening enjoy me."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Enjoy gardening y because explican la elección."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c33c2188aa9fdace1fbe0d45e10fcc5baff2790f84c549bb82cd19298d995383"
+      },
+      {
+        "id": "en.n3.c34.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona el cambio que necesita razón."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "avoids coffee"
+          },
+          {
+            "text": "wants to sleep"
+          },
+          {
+            "text": "late"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Wants to sleep explica por qué cambia la rutina."
+          },
+          "audio": "Tara avoids coffee late because she wants to sleep.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1c4710935e56b192b511d2048068e05ce70a83975fa2e0cbf19caee9b85870de"
+      },
+      {
+        "id": "en.n3.c34.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una meta con hope y una razón."
+        },
+        "answer": {
+          "text": "I hope to rest more because I will reduce screens.",
+          "accepted": [
+            "I hope to rest more because I will reduce screens.",
+            "I want to rest more, so I plan to reduce screen time."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-habits-preferences-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes conservan objetivo y razón."
+          },
+          "text": "Esperas descansar más porque vas a reducir pantallas."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:84d60af1d8afdfafb78e1a3829e2480691c50f97079214974e064f1d60ae8a44"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c34.e01": {
+      "reteach": "en.n3.class-34.t01",
+      "review": "en.n3.c34.r01"
+    },
+    "en.n3.c34.e02": {
+      "reteach": "en.n3.class-34.t02",
+      "review": "en.n3.c34.r02"
+    },
+    "en.n3.c34.e03": {
+      "reteach": "en.n3.class-34.t03",
+      "review": "en.n3.c34.r03"
+    },
+    "en.n3.c34.e04": {
+      "reteach": "en.n3.class-34.t05",
+      "review": "en.n3.c34.r03",
+      "reteachSteps": [
+        "en.n3.class-34.t01",
+        "en.n3.class-34.t02",
+        "en.n3.class-34.t03",
+        "en.n3.class-34.t04",
+        "en.n3.class-34.t05"
+      ],
+      "reviewSteps": [
+        "en.n3.c34.r01",
+        "en.n3.c34.r02",
+        "en.n3.c34.r03"
+      ]
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

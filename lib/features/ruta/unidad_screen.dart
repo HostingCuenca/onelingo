@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app/theme.dart';
+import '../../core/aprendizaje/biblioteca_adaptador.dart';
 import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
@@ -20,15 +21,30 @@ import 'tabla_ruta.dart';
 /// Una pantalla del recorrido de la unidad: un paso de enseñanza, el diálogo
 /// de una situación o un ítem.
 class _Pantalla {
-  const _Pantalla(this.paso, [this.item, this.repetida = false]);
+  const _Pantalla(
+    this.paso, [
+    this.item,
+    this.repetida = false,
+    this.variantId,
+    this.libraryVersion,
+    this.selectionId,
+  ]);
   final Paso paso;
   final Item? item;
+  final String? variantId, libraryVersion, selectionId;
 
   /// Ejercicio fallado que vuelve al final de su bloque.
   final bool repetida;
 }
 
-List<_Pantalla> _pantallasDe(UnidadRuta u, {required bool repaso}) {
+List<_Pantalla> _pantallasDe(
+  UnidadRuta u, {
+  required bool repaso,
+  BibliotecaUnidadRuntime? runtime,
+}) {
+  if (runtime?.activa == true) {
+    return _pantallasBiblioteca(u, repaso: repaso, runtime: runtime!);
+  }
   final res = <_Pantalla>[];
   for (final p in u.pasos) {
     if (repaso) {
@@ -48,6 +64,54 @@ List<_Pantalla> _pantallasDe(UnidadRuta u, {required bool repaso}) {
   return res;
 }
 
+List<_Pantalla> _pantallasBiblioteca(
+  UnidadRuta u, {
+  required bool repaso,
+  required BibliotecaUnidadRuntime runtime,
+}) {
+  final result = <_Pantalla>[];
+
+  void addPool(String pool, TipoPaso type, String suffix) {
+    final selection = runtime.pool(pool);
+    if (selection == null) return;
+    final step = Paso(
+      id: '${u.id}.$suffix',
+      tipo: type,
+      items: [
+        for (final variant in selection.variants) itemDesdeVariante(variant),
+      ],
+    );
+    for (var index = 0; index < step.items.length; index++) {
+      final variant = selection.variants[index];
+      result.add(
+        _Pantalla(
+          step,
+          step.items[index],
+          false,
+          variant.id,
+          runtime.libraryVersion,
+          selection.selectionId,
+        ),
+      );
+    }
+  }
+
+  if (repaso) {
+    addPool('review', TipoPaso.practicaIndependiente, 'review');
+    return result;
+  }
+  for (final step in u.pasos.where((step) => step.tipo.ensena)) {
+    result.add(_Pantalla(step));
+  }
+  addPool('practiceGuided', TipoPaso.practicaGuiada, 'guided');
+  addPool('practice', TipoPaso.practicaIndependiente, 'practice');
+  for (final step in u.pasos.where((step) => step.tipo == TipoPaso.situacion)) {
+    result.add(_Pantalla(step));
+  }
+  addPool('evaluation', TipoPaso.evaluacion, 'evaluation');
+  return result;
+}
+
 class UnidadScreen extends ConsumerWidget {
   const UnidadScreen({super.key, required this.unidadId, this.repaso = false});
   final String unidadId;
@@ -57,8 +121,12 @@ class UnidadScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final idioma = unidadId.split('.').first;
     final ruta = ref.watch(rutaProvider(idioma));
+    final runtime = ref.watch(
+      bibliotecaUnidadRuntimeProvider((idioma: idioma, unidad: unidadId)),
+    );
     return ruta.when(
-      loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
         body: const Center(child: Text('No se pudo cargar la unidad.')),
@@ -71,7 +139,41 @@ class UnidadScreen extends ConsumerWidget {
             body: const Center(child: Text('Esta unidad no existe.')),
           );
         }
-        return _UnidadRecorrido(ruta: r, unidad: u, repaso: repaso);
+        return runtime.when(
+          loading: () =>
+              const Scaffold(body: Center(child: CircularProgressIndicator())),
+          error: (_, _) => Scaffold(
+            appBar: AppBar(),
+            body: const Center(
+              child: Text('No se pudo preparar la biblioteca de ejercicios.'),
+            ),
+          ),
+          data: (resolved) {
+            if (resolved.diagnostico.activacion == EstadoBiblioteca.active &&
+                !resolved.activa) {
+              return Scaffold(
+                appBar: AppBar(),
+                body: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Text(
+                      'Esta clase está temporalmente fuera de servicio. '
+                      'No se sustituyó silenciosamente por contenido antiguo.\n\n'
+                      '${resolved.diagnostico.errores.join('\n')}',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              );
+            }
+            return _UnidadRecorrido(
+              ruta: r,
+              unidad: u,
+              repaso: repaso,
+              runtime: resolved,
+            );
+          },
+        );
       },
     );
   }
@@ -82,10 +184,12 @@ class _UnidadRecorrido extends ConsumerStatefulWidget {
     required this.ruta,
     required this.unidad,
     required this.repaso,
+    required this.runtime,
   });
   final RutaCargada ruta;
   final UnidadRuta unidad;
   final bool repaso;
+  final BibliotecaUnidadRuntime runtime;
   @override
   ConsumerState<_UnidadRecorrido> createState() => _UnidadRecorridoState();
 }
@@ -94,6 +198,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   late final List<_Pantalla> pantallas = _pantallasDe(
     widget.unidad,
     repaso: widget.repaso,
+    runtime: widget.runtime,
   );
 
   /// Un ejercicio de práctica fallado vuelve al final de su bloque (una vez
@@ -104,8 +209,20 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         .any((p) => p.paso.id == paso.id && p.item?.id == item.id);
     if (yaPendiente) return;
     final ultimo = pantallas.lastIndexWhere((p) => p.paso.id == paso.id);
-    pantallas.insert(ultimo + 1, _Pantalla(paso, item, true));
+    final current = pantallas[indice];
+    pantallas.insert(
+      ultimo + 1,
+      _Pantalla(
+        paso,
+        item,
+        true,
+        current.variantId,
+        current.libraryVersion,
+        current.selectionId,
+      ),
+    );
   }
+
   final scroll = ScrollController();
   int indice = 0;
 
@@ -146,7 +263,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       final guardado = prefs.getInt(claveProgreso) ?? 0;
       // Se reanuda en la enseñanza o práctica, nunca a mitad de la evaluación.
       final seguro = guardado.clamp(0, pantallas.length - 1);
-      if (mounted && seguro > 0 &&
+      if (mounted &&
+          seguro > 0 &&
           pantallas[seguro].paso.tipo != TipoPaso.evaluacion) {
         setState(() => indice = seguro);
       }
@@ -368,13 +486,18 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
             } else if (!correcta) {
               setState(() => _repetirAlFinal(p, item));
             }
-            ref.read(registroRutaProvider).item(
-              u,
-              p,
-              item,
-              correcta: correcta,
-              respuesta: respuesta,
-            );
+            ref
+                .read(registroRutaProvider)
+                .item(
+                  u,
+                  p,
+                  item,
+                  correcta: correcta,
+                  respuesta: respuesta,
+                  variantId: pantalla.variantId,
+                  libraryVersion: pantalla.libraryVersion,
+                  selectionId: pantalla.selectionId,
+                );
           },
           onContinuar: siguiente,
         ),
@@ -395,7 +518,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
             color: OL.moradoSuave,
             borde: OL.moradoClaro,
             padding: const EdgeInsets.all(20),
-            child: Text(t(p.texto), style: const TextStyle(fontSize: 19, height: 1.5)),
+            child: Text(
+              t(p.texto),
+              style: const TextStyle(fontSize: 19, height: 1.5),
+            ),
           ),
         );
         if (indice == 0) {
@@ -405,7 +531,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       case TipoPaso.vocabulario:
         vista.add(
           const Text(
-            'Toca el altavoz para escuchar cada palabra.',
+            'Toca cualquier parte de la tarjeta para escuchar cada palabra.',
             style: TextStyle(color: OL.gris, fontSize: 16),
           ),
         );
@@ -431,7 +557,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
             children: [
               for (final f in p.formula)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: OL.moradoSuave,
                     borderRadius: BorderRadius.circular(14),
@@ -441,7 +570,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                     children: [
                       Text(
                         f.texto,
-                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                       if (f.nota != null)
                         Text(t(f.nota), style: const TextStyle(color: OL.gris)),
@@ -457,7 +589,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         }
       case TipoPaso.tabla:
         if (p.texto != null) {
-          vista.add(Text(t(p.texto), style: const TextStyle(fontSize: 18, height: 1.4)));
+          vista.add(
+            Text(t(p.texto), style: const TextStyle(fontSize: 18, height: 1.4)),
+          );
           vista.add(const SizedBox(height: 10));
         }
         vista.add(TablaRuta(paso: p, idioma: u.idioma, cadena: cadena));
@@ -473,7 +607,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           Tarjeta(
             color: OL.azulSuave,
             borde: OL.azul,
-            child: Text(t(p.contexto), style: const TextStyle(fontSize: 18, height: 1.4)),
+            child: Text(
+              t(p.contexto),
+              style: const TextStyle(fontSize: 18, height: 1.4),
+            ),
           ),
         );
         vista.add(const SizedBox(height: 12));
@@ -511,9 +648,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         ),
       BotonPrincipal(
         onPressed: siguiente,
-        child: Text(
-            p.tipo == TipoPaso.situacion ? 'PARTICIPAR' : 'SIGUIENTE',
-        ),
+        child: Text(p.tipo == TipoPaso.situacion ? 'PARTICIPAR' : 'SIGUIENTE'),
       ),
     ]);
     return vista;
@@ -546,6 +681,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     child: Tarjeta(
       color: color,
       padding: const EdgeInsets.fromLTRB(16, 12, 6, 12),
+      etiquetaSemantica: 'Escuchar $texto',
+      onTap: () => escucharTexto(context, texto, u.idioma),
       child: Row(
         children: [
           Expanded(
@@ -555,27 +692,43 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                 if (hablante != null)
                   Text(
                     hablante,
-                    style: const TextStyle(color: OL.morado, fontWeight: FontWeight.w800),
+                    style: const TextStyle(
+                      color: OL.morado,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
                 Text(
                   texto,
-                  style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800),
+                  style: const TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
                 if (rom != null)
-                  Text(rom, style: const TextStyle(color: OL.gris, fontSize: 16)),
+                  Text(
+                    rom,
+                    style: const TextStyle(color: OL.gris, fontSize: 16),
+                  ),
                 Text(traduccion, style: const TextStyle(fontSize: 17)),
                 if (nota.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
                       nota,
-                      style: const TextStyle(color: OL.gris, fontSize: 15, height: 1.3),
+                      style: const TextStyle(
+                        color: OL.gris,
+                        fontSize: 15,
+                        height: 1.3,
+                      ),
                     ),
                   ),
               ],
             ),
           ),
-          BotonAudio(texto: texto, idioma: u.idioma),
+          const Padding(
+            padding: EdgeInsets.all(12),
+            child: Icon(Icons.volume_up_outlined, color: OL.morado),
+          ),
         ],
       ),
     ),
@@ -595,9 +748,12 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         ?.titulo;
     final fallos = [
       for (final p in pantallas)
-        if (p.item != null && primeras['${p.paso.id}:${p.item!.id}'] == false) p,
+        if (p.item != null && primeras['${p.paso.id}:${p.item!.id}'] == false)
+          p,
     ];
-    final precision = puntuables == 0 ? 100 : (aciertos * 100 / puntuables).round();
+    final precision = puntuables == 0
+        ? 100
+        : (aciertos * 100 / puntuables).round();
     return [
       if (ok)
         CelebracionUnidad(
@@ -635,7 +791,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                     ? 'Hay que repasarlo'
                     : 'Todavía no, vamos a repasarlo',
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               const SizedBox(height: 8),
               Text(

@@ -1,0 +1,700 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "vocabularyDeclarations": "exhaustive"
+  },
+  "id": "en.n1.class-67",
+  "title": {
+    "en": "Can you?",
+    "es": "preguntas Can you…?"
+  },
+  "concepts": [
+    "can-ability-questions-short-answers"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n1.class-66"
+  ],
+  "usesVocabulary": [
+    "can",
+    "can't",
+    "yes",
+    "no",
+    "I",
+    "you",
+    "she",
+    "he",
+    "Ana",
+    "swim",
+    "drive",
+    "cook",
+    "dance",
+    "help",
+    "play",
+    "soccer",
+    "do",
+    "does"
+  ],
+  "usesPatterns": [
+    "can-ability-questions-short-answers",
+    "can-ability-affirmative-negative",
+    "present-simple-short-answers"
+  ],
+  "objectives": {
+    "es": [
+      "Comprender y usar preguntas can you…?.",
+      "Practicar con respuestas editoriales deterministas y sin generación dinámica."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "can",
+      "es": "poder / saber"
+    },
+    {
+      "en": "can't",
+      "es": "no poder / no saber"
+    },
+    {
+      "en": "swim",
+      "es": "nadar"
+    },
+    {
+      "en": "drive",
+      "es": "manejar"
+    },
+    {
+      "en": "cook",
+      "es": "cocinar"
+    },
+    {
+      "en": "dance",
+      "es": "bailar"
+    },
+    {
+      "en": "help",
+      "es": "ayudar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n1.class-67.t01",
+      "en": "Can you swim?",
+      "es": "¿Sabes nadar?",
+      "explanationEs": "Can inicia la pregunta; no se usa do.",
+      "segments": [
+        {
+          "en": "Can you",
+          "es": "¿Sabes"
+        },
+        {
+          "en": "swim?",
+          "es": "nadar?"
+        }
+      ],
+      "audioText": "Can you swim?",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-67.t02",
+      "en": "Yes, I can.",
+      "es": "Sí, sé.",
+      "explanationEs": "La respuesta corta repite can.",
+      "segments": [
+        {
+          "en": "Yes,",
+          "es": "Sí,"
+        },
+        {
+          "en": "I can.",
+          "es": "sé."
+        }
+      ],
+      "audioText": "Yes, I can.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-67.t03",
+      "en": "Can you drive?",
+      "es": "¿Sabes manejar?",
+      "explanationEs": "El verbo sigue en forma base.",
+      "segments": [
+        {
+          "en": "Can you",
+          "es": "¿Sabes"
+        },
+        {
+          "en": "drive?",
+          "es": "manejar?"
+        }
+      ],
+      "audioText": "Can you drive?",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-67.t04",
+      "en": "No, I can't.",
+      "es": "No, no sé.",
+      "explanationEs": "La respuesta negativa usa can't.",
+      "segments": [
+        {
+          "en": "No,",
+          "es": "No,"
+        },
+        {
+          "en": "I can't.",
+          "es": "no sé."
+        }
+      ],
+      "audioText": "No, I can't.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-67.t05",
+      "en": "Can she help?",
+      "es": "¿Puede ayudar ella?",
+      "explanationEs": "Can tampoco usa does con she.",
+      "segments": [
+        {
+          "en": "Can she",
+          "es": "¿Puede ella"
+        },
+        {
+          "en": "help?",
+          "es": "ayudar?"
+        }
+      ],
+      "audioText": "Can she help?",
+      "audioMode": "tts",
+      "languageCode": "en"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n1.c67.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la pregunta correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Can you swim?"
+          },
+          {
+            "text": "Do you can swim?"
+          }
+        ],
+        "teaches": [
+          "can-ability-questions-short-answers"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can inicia la pregunta sin do."
+          },
+          "hint": {
+            "es": "Can + you + verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:28d5130b2f10a7302a7f4427de271de300d1197b2a5b5745844a34c64637066f"
+      },
+      {
+        "id": "en.n1.c67.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la respuesta afirmativa: Yes, I ___."
+        },
+        "answer": {
+          "text": "can",
+          "accepted": [
+            "can"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "can-ability-questions-short-answers"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta es Yes, I can."
+          },
+          "hint": {
+            "es": "Repite can."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b40ecf15c28411003c68ffae10fc17f38c0bd4027b6ac9dba5356ec9d234c16b"
+      },
+      {
+        "id": "en.n1.c67.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la respuesta negativa."
+        },
+        "answer": {
+          "text": "No, I can't.",
+          "tokens": [
+            "No,",
+            "I",
+            "can't."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "can-ability-questions-short-answers"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta corta negativa usa can't."
+          },
+          "hint": {
+            "es": "No + I + can't."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d53c26ece74035506d09eb0f6107214eb3f16df1a9487ac1e2e947f24a3f1bb7"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n1.c67.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la pregunta con she."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Can she cook?"
+          },
+          {
+            "text": "Does she can cook?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can no usa does."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1086ffd25891c47e2bd3d285a9230faaac723eea3bd72be40dc5f42baa876d5a"
+      },
+      {
+        "id": "en.n1.c67.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la pregunta: ___ you dance?"
+        },
+        "answer": {
+          "text": "Can",
+          "accepted": [
+            "Can",
+            "can"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can va al inicio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7ca87f06565608d05603deb11aeff019f4ccef4d852e60698ff4d221eea6bef3"
+      },
+      {
+        "id": "en.n1.c67.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la pregunta sobre manejar."
+        },
+        "answer": {
+          "text": "Can he drive?",
+          "tokens": [
+            "Can",
+            "he",
+            "drive?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can + he + drive."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b249f75a675a863adc408f3ba4c4c1866ab0f92828e8041963b1d7ccba961b68"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n1.c67.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta afirmativa completa."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Yes, she can."
+          },
+          {
+            "text": "Yes, she does."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La pregunta con can se responde con can."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9cd9ef5263be558affb3f4ab8b8e100ffdd527623f4bc12ed830fa8e240e0a48"
+      },
+      {
+        "id": "en.n1.c67.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: Can you speak Spanish? No, I ___."
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta negativa usa can't."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:89ce7a4db560c97a6111c7d5fde296f5f2c05c5f8dd7d69de8fba8dfd48ee5bd"
+      },
+      {
+        "id": "en.n1.c67.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la pregunta para ofrecer ayuda."
+        },
+        "answer": {
+          "text": "Can I help?",
+          "tokens": [
+            "Can",
+            "I",
+            "help?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I help? ofrece ayuda."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d46ed40b9e182d44aaea0d0e3996f9629881b16cf9eac325d5c40d9d110206f"
+      },
+      {
+        "id": "en.n1.c67.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la pregunta oída."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Can you play soccer?"
+          },
+          {
+            "text": "Do you play soccer?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye Can you."
+          },
+          "audio": "Can you play soccer?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7fb48ee5d8e3afa2df53ca9b7217f707bff0307936edfc8569c9f84a4ec86704"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n1.c67.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona pregunta y respuesta."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Can you cook?",
+              {
+                "es": "Yes, I can."
+              }
+            ],
+            [
+              "Can you drive?",
+              {
+                "es": "No, I can't."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las respuestas cortas conservan can o can't."
+          },
+          "pairs": [
+            [
+              "Can you cook?",
+              {
+                "es": "Yes, I can."
+              }
+            ],
+            [
+              "Can you drive?",
+              {
+                "es": "No, I can't."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2fa1d293acfb00fd2312aa71ba9b94424d8542ed63afe51551a345861a9cce17"
+      },
+      {
+        "id": "en.n1.c67.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: Can they swim? Yes, they ___."
+        },
+        "answer": {
+          "text": "can",
+          "accepted": [
+            "can"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "They también usa can."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bd13b99b48ae7e496b9da0c097cf49b2a7457c71e82fe7f3d921f0b6ed12d0ee"
+      },
+      {
+        "id": "en.n1.c67.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena otra pregunta de capacidad."
+        },
+        "answer": {
+          "text": "Can Ana dance?",
+          "tokens": [
+            "Can",
+            "Ana",
+            "dance?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "can-ability-questions-short-answers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can precede al sujeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0cc929026767566f6446c39199d23eb952a22c01c88b5a1690d4ad5452614f4d"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n1.c67.e01": {
+      "reteach": "en.n1.class-67.t01",
+      "review": "en.n1.c67.r01"
+    },
+    "en.n1.c67.e02": {
+      "reteach": "en.n1.class-67.t02",
+      "review": "en.n1.c67.r02"
+    },
+    "en.n1.c67.e03": {
+      "reteach": "en.n1.class-67.t03",
+      "review": "en.n1.c67.r03"
+    },
+    "en.n1.c67.e04": {
+      "reteach": "en.n1.class-67.t04",
+      "review": "en.n1.c67.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

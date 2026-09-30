@@ -1,0 +1,917 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-50",
+  "title": {
+    "en": "Resolve a schedule change",
+    "es": "Resolver un cambio de horario"
+  },
+  "objectives": {
+    "es": [
+      "Resolver una cadena de tres avisos.",
+      "Confirmar un horario sin cambiar voces, datos ni acciones."
+    ]
+  },
+  "concepts": [
+    "n3-reported-messages-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-49"
+  ],
+  "usesVocabulary": [
+    "chain",
+    "schedule",
+    "speaker",
+    "confirm",
+    "update",
+    "required"
+  ],
+  "usesPatterns": [
+    "n3-reported-messages-1",
+    "n3-reported-messages-2",
+    "n3-reported-messages-3",
+    "n3-reported-messages-4",
+    "n3-reported-messages-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "chain",
+      "es": "cadena"
+    },
+    {
+      "en": "schedule",
+      "es": "horario"
+    },
+    {
+      "en": "speaker",
+      "es": "hablante"
+    },
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    },
+    {
+      "en": "update",
+      "es": "actualización"
+    },
+    {
+      "en": "required",
+      "es": "requerido"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-50.t01",
+      "en": "A message chain keeps each speaker separate.",
+      "es": "Una cadena de mensajes mantiene separado a cada hablante.",
+      "explanationEs": "Chain evita intercambiar las tres voces.",
+      "segments": [
+        {
+          "en": "A message chain",
+          "es": "Una cadena de mensajes"
+        },
+        {
+          "en": "keeps each speaker separate.",
+          "es": "mantiene separado a cada hablante."
+        }
+      ],
+      "audioText": "A message chain keeps each speaker separate.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-5"
+    },
+    {
+      "id": "en.n3.class-50.t02",
+      "en": "In a schedule report, said gives content and told names a recipient.",
+      "es": "En un reporte de horario, said da contenido y told nombra receptor.",
+      "explanationEs": "La forma correcta distingue said de told.",
+      "segments": [
+        {
+          "en": "In a schedule report, said gives",
+          "es": "En un reporte de horario, said"
+        },
+        {
+          "en": "content and told names a recipient.",
+          "es": "da contenido y told nombra receptor."
+        }
+      ],
+      "audioText": "In a schedule report, said gives content and told names a recipient.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-5"
+    },
+    {
+      "id": "en.n3.class-50.t03",
+      "en": "The speaker changes I to she without losing meaning.",
+      "es": "El hablante cambia I por she sin perder sentido.",
+      "explanationEs": "Speaker y perspectiva deben conservarse.",
+      "segments": [
+        {
+          "en": "The speaker changes I",
+          "es": "El hablante cambia I"
+        },
+        {
+          "en": "to she without losing meaning.",
+          "es": "por she sin perder sentido."
+        }
+      ],
+      "audioText": "The speaker changes I to she without losing meaning.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-5"
+    },
+    {
+      "id": "en.n3.class-50.t04",
+      "en": "Each update includes its required action.",
+      "es": "Cada actualización incluye su acción requerida.",
+      "explanationEs": "Update transmite el dato y lo que debe hacerse.",
+      "segments": [
+        {
+          "en": "Each update includes",
+          "es": "Cada actualización incluye"
+        },
+        {
+          "en": "its required action.",
+          "es": "su acción requerida."
+        }
+      ],
+      "audioText": "Each update includes its required action.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-5"
+    },
+    {
+      "id": "en.n3.class-50.t05",
+      "en": "Please confirm the new schedule after all three replies.",
+      "es": "Confirma el horario nuevo después de las tres respuestas.",
+      "explanationEs": "Confirm cierra el acuerdo viable.",
+      "segments": [
+        {
+          "en": "Please confirm the new",
+          "es": "Confirma el horario nuevo"
+        },
+        {
+          "en": "schedule after all three replies.",
+          "es": "después de las tres respuestas."
+        }
+      ],
+      "audioText": "Please confirm the new schedule after all three replies.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-5"
+    },
+    {
+      "id": "en.n3.class-50.t06",
+      "en": "Rae said a storm had closed the outdoor training field on Wednesday and told Omar to find an indoor alternative. Omar reported that Hall One was available on Friday at ten and told Nina to move the training equipment. Nina said she could move it and sent the updated schedule. Rae then confirmed Friday at ten in Hall One. Omar secures the hall, Nina moves the equipment, and Rae closes the change. This cancellation-and-relocation chain preserves all three speakers, times and required actions without relying on overlapping availability.",
+      "es": "Rae dijo que una tormenta había cerrado el campo de entrenamiento del miércoles y pidió a Omar una alternativa cubierta. Omar informó que Hall One estaba libre el viernes a las diez y encargó a Nina trasladar el equipo. Nina aceptó y envió el horario actualizado. Rae confirmó el viernes a las diez en Hall One. La cadena conserva hablantes, tiempos y acciones mediante cancelación y traslado, no mediante disponibilidades superpuestas.",
+      "explanationEs": "El modelo integra cinco conceptos mediante cancelación, reubicación, tareas y confirmación explícita.",
+      "segments": [
+        {
+          "en": "Rae said a storm had closed the outdoor training field on Wednesday and told Omar to find an indoor alternative. Omar reported that Hall One was available on Friday at ten and told Nina to move the training equipment. Nina said she could move",
+          "es": "Rae dijo que una tormenta había cerrado el campo de entrenamiento del miércoles y pidió a Omar una alternativa cubierta. Omar informó que Hall One estaba libre el viernes a las diez y encargó a"
+        },
+        {
+          "en": "it and sent the updated schedule. Rae then confirmed Friday at ten in Hall One. Omar secures the hall, Nina moves the equipment, and Rae closes the change. This cancellation-and-relocation chain preserves all three speakers, times and required actions without relying on overlapping availability.",
+          "es": "Nina trasladar el equipo. Nina aceptó y envió el horario actualizado. Rae confirmó el viernes a las diez en Hall One. La cadena conserva hablantes, tiempos y acciones mediante cancelación y traslado, no mediante disponibilidades superpuestas."
+        }
+      ],
+      "audioText": "Rae said a storm had closed the outdoor training field on Wednesday and told Omar to find an indoor alternative. Omar reported that Hall One was available on Friday at ten and told Nina to move the training equipment. Nina said she could move it and sent the updated schedule. Rae then confirmed Friday at ten in Hall One. Omar secures the hall, Nina moves the equipment, and Rae closes the change. This cancellation-and-relocation chain preserves all three speakers, times and required actions without relying on overlapping availability.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c50.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué cierre confirma un horario nuevo?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The time may change."
+          },
+          {
+            "text": "Tuesday at four in Room Two is confirmed."
+          },
+          {
+            "text": "Someone should check later."
+          }
+        ],
+        "teaches": [
+          "n3-reported-messages-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La segunda opción fija día, hora y sala."
+          },
+          "hint": {
+            "es": "Busca un horario completo y confirmado."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b95b7c6c70fd9d157fbaad682aa25bb9917108837121e5d7922efcb91de180fa"
+      },
+      {
+        "id": "en.n3.c50.pg02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y marca quién recibe la petición."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Ava"
+          },
+          {
+            "text": "the agenda"
+          },
+          {
+            "text": "Leo"
+          }
+        ],
+        "teaches": [
+          "n3-reported-messages-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Leo aparece después de told y recibe la petición."
+          },
+          "hint": {
+            "es": "Identifica el nombre después de told."
+          },
+          "audio": "Ava said she could meet at three and told Leo to bring the agenda.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dae20c06b4dc160e89a46d2e78300fbf8dfb6c6f023f32d796ad30797663f2b3"
+      },
+      {
+        "id": "en.n3.c50.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el cierre con horario y confirmación."
+        },
+        "answer": {
+          "text": "The team confirmed Wednesday at five in Room One.",
+          "tokens": [
+            "The",
+            "team",
+            "confirmed",
+            "Wednesday",
+            "at",
+            "five",
+            "in",
+            "Room",
+            "One."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-reported-messages-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El cierre conserva día, hora y lugar."
+          },
+          "hint": {
+            "es": "Busca la señal temporal que conecta las dos acciones."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0c3d9ef9a918702f99b7b4c64120c8ac30e746272505ab870a37bba391633f4c"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c50.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada hablante con su aviso."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Iris",
+              {
+                "es": "can meet at two"
+              }
+            ],
+            [
+              "Leo",
+              {
+                "es": "needs a later time"
+              }
+            ],
+            [
+              "Mara",
+              {
+                "es": "can reserve Room Five"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada hablante mantiene su propio dato."
+          },
+          "pairs": [
+            [
+              "Iris",
+              {
+                "es": "can meet at two"
+              }
+            ],
+            [
+              "Leo",
+              {
+                "es": "needs a later time"
+              }
+            ],
+            [
+              "Mara",
+              {
+                "es": "can reserve Room Five"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9e13004370375006432df6af4231900ec93edc95c3d3ecaddb356b95ab5aaf32"
+      },
+      {
+        "id": "en.n3.c50.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el uso correcto de said y told."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Nia told the time was four."
+          },
+          {
+            "text": "Nia said the time was four and told Bo to confirm."
+          },
+          {
+            "text": "Nia said Bo to confirm at four."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Said introduce el dato y told Bo introduce la petición."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d39ba3f81227cf8477074cf0b578b51a5fcf2f0f068c09e0e9ae9b7a0e68e66"
+      },
+      {
+        "id": "en.n3.c50.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Transmite un cambio de llamada y su confirmación."
+        },
+        "answer": {
+          "text": "Ava said the call had moved to Tuesday at four and told Ben to update the calendar. Ben said he had updated it and told Cia to send the link. Cia confirmed that the link was sent and that the call was Tuesday at four.",
+          "accepted": [
+            "Ava said the call had moved to Tuesday at four and told Ben to update the calendar. Ben said he had updated it and told Cia to send the link. Cia confirmed that the link was sent and that the call was Tuesday at four.",
+            "Ava reported the call change to Tuesday at four and asked Ben to update the calendar. Ben confirmed the update and asked Cia to send the link. Cia sent it and confirmed the Tuesday call."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La cadena transmite un cambio, dos acciones y una confirmación sin comparar horarios."
+          },
+          "text": "Client messages. Ava: The call moved to Tuesday at four; tell Ben to update the calendar. Ben: The calendar is updated; tell Cia to send the link. Cia: The link is sent, and Tuesday at four is confirmed."
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f3fd260a7d9c993c8551318f7cba41f55a9639f8ea844ff94e3325645633c90e"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c50.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Aisha da hora; Leo la cambia; Marta confirma sala. Elige el resumen fiel."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Aisha, Leo and Marta all reported one shared update."
+          },
+          {
+            "text": "Aisha gave a time, Leo changed it, and Marta confirmed the room."
+          },
+          {
+            "text": "Aisha confirmed the room, Leo gave the first time, and Marta changed it."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-1",
+          "n3-reported-messages-2",
+          "n3-reported-messages-3",
+          "n3-reported-messages-4",
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La segunda opción conserva las funciones de los tres hablantes."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:52e5b7cbe90fd71ca67f1d156cc0cb12eb9b6733c1e2dfc0057cb073810c6c69"
+      },
+      {
+        "id": "en.n3.c50.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha otra cadena y elige el horario compatible."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Thursday at ten in Room Six"
+          },
+          {
+            "text": "Friday at eleven in Room Five"
+          },
+          {
+            "text": "Thursday at eleven in Room Six"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-1",
+          "n3-reported-messages-2",
+          "n3-reported-messages-3",
+          "n3-reported-messages-4",
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las tres disponibilidades respaldan jueves a las once en Room Six."
+          },
+          "audio": "Colin can meet Thursday at ten or eleven. Sue can only meet at eleven. Room Six is free at eleven.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:10e7b3a3aef46da47ff19ef027329144a709ad94a3b1fc084e87a2e08ec3366f"
+      },
+      {
+        "id": "en.n3.c50.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reporta el aviso y su acción sin cambiar datos."
+        },
+        "answer": {
+          "text": "Nora said she could arrive at five and told Sam to open Room Three at four forty-five.",
+          "accepted": [
+            "Nora said she could arrive at five and told Sam to open Room Three at four forty-five.",
+            "Nora said that she could arrive at five; Sam had to open Room Three at four forty-five."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-1",
+          "n3-reported-messages-2",
+          "n3-reported-messages-3",
+          "n3-reported-messages-4",
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El reporte conserva hablante, perspectiva, receptor, sala y horas."
+          },
+          "text": "Nora: I can arrive at 5. Tell Sam to open Room 3 at 4:45."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2aa460f31cd54bcda53d4d8b1a482c0fa6b75cbe85d19e645bac08c4b0097520"
+      },
+      {
+        "id": "en.n3.c50.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escucha el hilo clínico y resuélvelo en 80–110 palabras."
+        },
+        "answer": {
+          "text": "Aisha said the scanner repair would finish on Wednesday morning and that she could not run Tuesday's clinic. She told Leo to send the new consent form. Leo said the patient could come on Wednesday at nine and told Marta to book Room Two. Marta reported that Room Two was booked for Wednesday at nine and that she had sent the notice. Leo sends the form, and Marta books the room. In her final email, Aisha explicitly confirmed the clinic for Wednesday at nine in Room Two. The complete chain keeps all three speakers, actions and times clear.",
+          "accepted": [
+            "Aisha said the scanner repair would finish on Wednesday morning and that she could not run Tuesday's clinic. She told Leo to send the new consent form. Leo said the patient could come on Wednesday at nine and told Marta to book Room Two. Marta reported that Room Two was booked for Wednesday at nine and that she had sent the notice. Leo sends the form, and Marta books the room. In her final email, Aisha explicitly confirmed the clinic for Wednesday at nine in Room Two. The complete chain keeps all three speakers, actions and times clear.",
+            "The scanner repair was not complete for Tuesday, Aisha said, so she told Leo to send a revised consent form. Leo reported that the patient was available on Wednesday at nine and told Marta to reserve Room Two. Marta said the room had been booked and the notice had been sent. Aisha's final email confirmed Wednesday at nine in Room Two. Leo handles the form, Marta handles the room, and Aisha closes the change. This clinic relay preserves the three speakers and every required action."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-1",
+          "n3-reported-messages-2",
+          "n3-reported-messages-3",
+          "n3-reported-messages-4",
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La solución atribuye tres voces, conserva la avería y cita la confirmación final."
+          },
+          "text": "El audio aporta avería, nuevo horario, acciones y confirmación final.",
+          "audio": "Clinic email thread. Aisha: The scanner repair will finish Wednesday morning. I cannot run Tuesday's clinic; tell Leo to send the revised consent form. Leo: The patient can come Wednesday at nine; tell Marta to book Room Two. Marta: Room Two is booked for Wednesday at nine, and I sent the notice. Final email from Aisha: I confirm Wednesday at nine in Room Two.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ceddbc1fd5af7d5713355a73a089745509107e941a7c3f4488d0986d5c5da224"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c50.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué opción conserva perspectiva y acción?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Tia said she would call and told Max to send the code."
+          },
+          {
+            "text": "Tia said Max would call and told him to keep the code."
+          },
+          {
+            "text": "Tia said she had called, and Max told her to send the code."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "She would call adapta la perspectiva y told Max conserva la acción."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1d78ab07e5a452fc27f33f706bd4b2ee7dd6ae570a431c55b00a8f24fb4d3a0b"
+      },
+      {
+        "id": "en.n3.c50.r02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada evidencia con su función."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "said the rehearsal began at six",
+              {
+                "es": "reported content"
+              }
+            ],
+            [
+              "told Bea to unlock the door",
+              {
+                "es": "recipient and action"
+              }
+            ],
+            [
+              "Friday at seven is confirmed",
+              {
+                "es": "final schedule"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las tres evidencias separan contenido, relevo y cierre."
+          },
+          "pairs": [
+            [
+              "said the rehearsal began at six",
+              {
+                "es": "reported content"
+              }
+            ],
+            [
+              "told Bea to unlock the door",
+              {
+                "es": "recipient and action"
+              }
+            ],
+            [
+              "Friday at seven is confirmed",
+              {
+                "es": "final schedule"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c5965d0e85709a465bf0f2209fd087021b00c4c8abbfa3bd3ff2b8742b41fef0"
+      },
+      {
+        "id": "en.n3.c50.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escucha el cambio teatral y resuélvelo en 80–110 palabras."
+        },
+        "answer": {
+          "text": "Jon said the touring group needed the Main Stage at seven and told Bea to ask the dancers about a six o'clock warm-up in Studio Three. Bea reported that the dancers had accepted six and told Luis to update the board. Luis said the board now showed the warm-up at six in Studio Three and the rehearsal at seven on the Main Stage. Bea contacts the dancers, and Luis updates the board. Jon's final message explicitly confirmed the rehearsal at seven on the Main Stage. This theatre swap preserves all three speakers, both actions, times and locations.",
+          "accepted": [
+            "Jon said the touring group needed the Main Stage at seven and told Bea to ask the dancers about a six o'clock warm-up in Studio Three. Bea reported that the dancers had accepted six and told Luis to update the board. Luis said the board now showed the warm-up at six in Studio Three and the rehearsal at seven on the Main Stage. Bea contacts the dancers, and Luis updates the board. Jon's final message explicitly confirmed the rehearsal at seven on the Main Stage. This theatre swap preserves all three speakers, both actions, times and locations.",
+            "The touring group needed the Main Stage at seven, Jon said, so he told Bea to offer the dancers a six o'clock warm-up in Studio Three. Bea said they accepted and told Luis to update the rehearsal board. Luis reported that the board listed the warm-up at six in Studio Three and the rehearsal at seven on the Main Stage. Jon then confirmed the Main Stage rehearsal at seven. Bea manages the dancers, Luis changes the board, and Jon closes the swap. The three voices, actions, times and venues remain clear."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-1",
+          "n3-reported-messages-2",
+          "n3-reported-messages-3",
+          "n3-reported-messages-4",
+          "n3-reported-messages-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recuperación transmite un intercambio de espacios y la confirmación teatral."
+          },
+          "text": "El audio aporta un intercambio de espacios, dos acciones y confirmación final.",
+          "audio": "Theatre desk log. Jon: The touring group needs the Main Stage at seven; tell Bea to ask the dancers about a six o'clock warm-up in Studio Three. Bea: The dancers accepted six; tell Luis to update the board. Luis: The board now shows the warm-up at six in Studio Three and the rehearsal at seven on the Main Stage. Final message from Jon: I confirm the rehearsal at seven on the Main Stage.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c30bbb39b85964face7de2597571385e250f30d2b53a47ed2e7bb99c25ed1da4"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c50.e01": {
+      "reteach": "en.n3.class-50.t01",
+      "review": "en.n3.c50.r02"
+    },
+    "en.n3.c50.e02": {
+      "reteach": "en.n3.class-50.t05",
+      "review": "en.n3.c50.r03"
+    },
+    "en.n3.c50.e03": {
+      "reteach": "en.n3.class-50.t03",
+      "review": "en.n3.c50.r01"
+    },
+    "en.n3.c50.e04": {
+      "reteach": "en.n3.class-50.t06",
+      "review": "en.n3.c50.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n3-reported-messages-1",
+    "n3-reported-messages-2",
+    "n3-reported-messages-3",
+    "n3-reported-messages-4",
+    "n3-reported-messages-5"
+  ]
+}

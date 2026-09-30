@@ -1,0 +1,728 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-36",
+  "title": {
+    "en": "Present perfect or past simple",
+    "es": "Present perfect o pasado simple"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer present perfect o pasado simple en mensajes breves de nivel A2.",
+      "Aplicar la regla de present perfect o pasado simple en contextos nuevos y sin pistas.",
+      "Producir una respuesta propia que demuestre present perfect o pasado simple."
+    ]
+  },
+  "concepts": [
+    "n2-present-perfect-past-simple-choice"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-35"
+  ],
+  "usesVocabulary": [
+    "finished",
+    "date",
+    "yesterday",
+    "recently",
+    "specific",
+    "still"
+  ],
+  "usesPatterns": [
+    "n2-present-perfect-past-simple-choice"
+  ],
+  "vocabulary": [
+    {
+      "en": "finished",
+      "es": "terminado"
+    },
+    {
+      "en": "date",
+      "es": "fecha"
+    },
+    {
+      "en": "yesterday",
+      "es": "ayer"
+    },
+    {
+      "en": "recently",
+      "es": "recientemente"
+    },
+    {
+      "en": "specific",
+      "es": "específico"
+    },
+    {
+      "en": "still",
+      "es": "todavía"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-36.t01",
+      "en": "I finished the report yesterday.",
+      "es": "Terminé el informe ayer.",
+      "explanationEs": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "I finished",
+          "es": "Terminé el"
+        },
+        {
+          "en": "the report yesterday.",
+          "es": "informe ayer."
+        }
+      ],
+      "audioText": "I finished the report yesterday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-present-perfect-past-simple-choice"
+    },
+    {
+      "id": "en.n2.class-36.t02",
+      "en": "She has recently changed jobs.",
+      "es": "Ella ha cambiado de trabajo recientemente.",
+      "explanationEs": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "She has",
+          "es": "Ella ha cambiado"
+        },
+        {
+          "en": "recently changed jobs.",
+          "es": "de trabajo recientemente."
+        }
+      ],
+      "audioText": "She has recently changed jobs.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-present-perfect-past-simple-choice"
+    },
+    {
+      "id": "en.n2.class-36.t03",
+      "en": "A specific date requires the past simple.",
+      "es": "Una fecha específica requiere pasado simple.",
+      "explanationEs": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "A specific date",
+          "es": "Una fecha específica"
+        },
+        {
+          "en": "requires the past simple.",
+          "es": "requiere pasado simple."
+        }
+      ],
+      "audioText": "A specific date requires the past simple.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-present-perfect-past-simple-choice"
+    },
+    {
+      "id": "en.n2.class-36.t04",
+      "en": "We have not received the package; it is still missing.",
+      "es": "No hemos recibido el paquete; todavía falta.",
+      "explanationEs": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "We have not received the",
+          "es": "No hemos recibido"
+        },
+        {
+          "en": "package; it is still missing.",
+          "es": "el paquete; todavía falta."
+        }
+      ],
+      "audioText": "We have not received the package; it is still missing.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-present-perfect-past-simple-choice"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c36.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "La acción ocurrió ayer. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I called Marta yesterday."
+          },
+          {
+            "text": "I have called Marta yesterday."
+          },
+          {
+            "text": "I has called Marta yesterday."
+          }
+        ],
+        "teaches": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En la selección guiada, la evidencia correcta es «I called Marta yesterday.»."
+          },
+          "hint": {
+            "es": "Aplica esta regla: Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c6d8f9e609fc43a55f1ad32147116fede986b61601c7446bcc0d0bdf690d5dcd"
+      },
+      {
+        "id": "en.n2.c36.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa con fecha terminada: We ___ the museum in 2024."
+        },
+        "answer": {
+          "text": "visited",
+          "accepted": [
+            "visited"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el primer espacio, la evidencia correcta es «visited»."
+          },
+          "hint": {
+            "es": "Busca la forma que cumple esta regla: Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:177ac28b7eabe2d1ab33af9e3d2b25e3acf197d61601f686a99b886efef1e55e"
+      },
+      {
+        "id": "en.n2.c36.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena un ejemplo de present perfect o pasado simple."
+        },
+        "answer": {
+          "text": "Maya started the course last Monday.",
+          "tokens": [
+            "Maya",
+            "started",
+            "the",
+            "course",
+            "last",
+            "Monday."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el primer orden, la evidencia correcta es «Maya started the course last Monday.»."
+          },
+          "hint": {
+            "es": "Localiza primero el sujeto y la forma verbal principal."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3c1bf0b7f72204e2df257efc88b2d994406c024d2046339e6c5a1c8ffd87ff81"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c36.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: Compré este teléfono el mes pasado."
+        },
+        "answer": {
+          "text": "I bought this phone last month.",
+          "accepted": [
+            "I bought this phone last month.",
+            "I bought this phone last month"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En la primera producción, la evidencia correcta es «I bought this phone last month.»."
+          },
+          "text": "Compré este teléfono el mes pasado."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04d0073ecaa5e9c4a18520c3453adbf527fad69fff2e170e14e6044423d038e2"
+      },
+      {
+        "id": "en.n2.c36.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y reconoce un ejemplo de present perfect o pasado simple."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I have seen that film on Friday."
+          },
+          {
+            "text": "I saw that film on Friday."
+          },
+          {
+            "text": "I seen that film on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el primer audio, la evidencia correcta es «I saw that film on Friday.»."
+          },
+          "audio": "I saw that film on Friday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:83ce006cfb74d347c4287d63ec1869eca587981c6a8f7503039b09c4e0db1901"
+      },
+      {
+        "id": "en.n2.c36.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario inicial de present perfect o pasado simple."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "finished",
+              {
+                "es": "terminado"
+              }
+            ],
+            [
+              "date",
+              {
+                "es": "fecha"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el primer grupo léxico, la evidencia correcta es «finished / date»."
+          },
+          "pairs": [
+            [
+              "finished",
+              {
+                "es": "terminado"
+              }
+            ],
+            [
+              "date",
+              {
+                "es": "fecha"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:246add6f3455d8ee4686e64d5f040b985834670e4652cce9b29122c08611b223"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c36.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "La noticia reciente importa ahora y no incluye fecha terminada. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "They recently move house."
+          },
+          {
+            "text": "They has recently moved house."
+          },
+          {
+            "text": "They have recently moved house."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En la primera evaluación, la evidencia correcta es «They have recently moved house.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6eed53a8799da392e87f1bc6c579f4164a0956ba48f6e40e650a92ed60470d74"
+      },
+      {
+        "id": "en.n2.c36.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Sigue sin encontrarlas. Completa: Leo ___ his keys."
+        },
+        "answer": {
+          "text": "has lost",
+          "accepted": [
+            "has lost"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el segundo espacio, la evidencia correcta es «has lost»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:87c498231277674ff77fecd81c67116c50527bd5e717cd898678125b1263914f"
+      },
+      {
+        "id": "en.n2.c36.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: Ella ha encontrado recientemente un nuevo apartamento."
+        },
+        "answer": {
+          "text": "She has recently found a new apartment.",
+          "accepted": [
+            "She has recently found a new apartment.",
+            "She has recently found a new apartment"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En la producción evaluada, la evidencia correcta es «She has recently found a new apartment.»."
+          },
+          "text": "Ella ha encontrado recientemente un nuevo apartamento."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:023f5d9195b6282f2958a75edcc3fc3afa1f0db7c57233c1993ef1e0c49aa75d"
+      },
+      {
+        "id": "en.n2.c36.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y verifica otro ejemplo de present perfect o pasado simple."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The bus just arrive."
+          },
+          {
+            "text": "The bus has just arrived."
+          },
+          {
+            "text": "The bus have just arrived."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el audio evaluado, la evidencia correcta es «The bus has just arrived.»."
+          },
+          "audio": "The bus has just arrived.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:82bd63bc2adc8208d032c7478c477e399b18876f0f4bc7e6ce49bfd3e85b9fc4"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c36.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario de repaso de present perfect o pasado simple."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "specific",
+              {
+                "es": "específico"
+              }
+            ],
+            [
+              "still",
+              {
+                "es": "todavía"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el segundo grupo léxico, la evidencia correcta es «specific / still»."
+          },
+          "pairs": [
+            [
+              "specific",
+              {
+                "es": "específico"
+              }
+            ],
+            [
+              "still",
+              {
+                "es": "todavía"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:22fa4b6037f89590b95e517733dc9e77c5de62b7e3790b927f15dd3281cd7ab0"
+      },
+      {
+        "id": "en.n2.c36.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una oración de repaso sobre present perfect o pasado simple."
+        },
+        "answer": {
+          "text": "Our team has won three games this season.",
+          "tokens": [
+            "Our",
+            "team",
+            "has",
+            "won",
+            "three",
+            "games",
+            "this",
+            "season."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En el orden de repaso, la evidencia correcta es «Our team has won three games this season.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d23ca3104f34c7a190d634507a7ca1593b598388d570f6a0c7b5244bdf6b0324"
+      },
+      {
+        "id": "en.n2.c36.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: No hemos terminado el proyecto todavía."
+        },
+        "answer": {
+          "text": "We have not finished the project yet.",
+          "accepted": [
+            "We have not finished the project yet.",
+            "We have not finished the project yet"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-present-perfect-past-simple-choice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Past simple acompaña un tiempo terminado; present perfect conecta el hecho con ahora. En la producción de repaso, la evidencia correcta es «We have not finished the project yet.»."
+          },
+          "text": "No hemos terminado el proyecto todavía."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7c5a32a78a9196761660f60b2589677536e6b026a3e6cf7678dfe1cc0595de6d"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c36.e01": {
+      "reteach": "en.n2.class-36.t01",
+      "review": "en.n2.c36.r01"
+    },
+    "en.n2.c36.e02": {
+      "reteach": "en.n2.class-36.t02",
+      "review": "en.n2.c36.r02"
+    },
+    "en.n2.c36.e03": {
+      "reteach": "en.n2.class-36.t03",
+      "review": "en.n2.c36.r03"
+    },
+    "en.n2.c36.e04": {
+      "reteach": "en.n2.class-36.t04",
+      "review": "en.n2.c36.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

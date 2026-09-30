@@ -1,0 +1,730 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-44",
+  "title": {
+    "en": "Compare two choices",
+    "es": "Comparar dos opciones"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer comparar dos opciones en mensajes breves de nivel A2.",
+      "Aplicar la regla de comparar dos opciones en contextos nuevos y sin pistas.",
+      "Producir una respuesta propia que demuestre comparar dos opciones."
+    ]
+  },
+  "concepts": [
+    "n2-compare-two-choices"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-43"
+  ],
+  "usesVocabulary": [
+    "option",
+    "advantage",
+    "disadvantage",
+    "while",
+    "both",
+    "prefer"
+  ],
+  "usesPatterns": [
+    "n2-compare-two-choices"
+  ],
+  "vocabulary": [
+    {
+      "en": "option",
+      "es": "opción"
+    },
+    {
+      "en": "advantage",
+      "es": "ventaja"
+    },
+    {
+      "en": "disadvantage",
+      "es": "desventaja"
+    },
+    {
+      "en": "while",
+      "es": "mientras que"
+    },
+    {
+      "en": "both",
+      "es": "ambos"
+    },
+    {
+      "en": "prefer",
+      "es": "preferir"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-44.t01",
+      "en": "The first option is cheaper.",
+      "es": "La primera opción es más barata.",
+      "explanationEs": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "The first",
+          "es": "La primera opción"
+        },
+        {
+          "en": "option is cheaper.",
+          "es": "es más barata."
+        }
+      ],
+      "audioText": "The first option is cheaper.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-compare-two-choices"
+    },
+    {
+      "id": "en.n2.class-44.t02",
+      "en": "Its main advantage is the central location.",
+      "es": "Su principal ventaja es la ubicación céntrica.",
+      "explanationEs": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "Its main advantage",
+          "es": "Su principal ventaja"
+        },
+        {
+          "en": "is the central location.",
+          "es": "es la ubicación céntrica."
+        }
+      ],
+      "audioText": "Its main advantage is the central location.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-compare-two-choices"
+    },
+    {
+      "id": "en.n2.class-44.t03",
+      "en": "The disadvantage is that the room is smaller.",
+      "es": "La desventaja es que la habitación es más pequeña.",
+      "explanationEs": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "The disadvantage is that",
+          "es": "La desventaja es que"
+        },
+        {
+          "en": "the room is smaller.",
+          "es": "la habitación es más pequeña."
+        }
+      ],
+      "audioText": "The disadvantage is that the room is smaller.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-compare-two-choices"
+    },
+    {
+      "id": "en.n2.class-44.t04",
+      "en": "Both are comfortable, while I prefer the quieter hotel.",
+      "es": "Ambos son cómodos, mientras que prefiero el hotel más silencioso.",
+      "explanationEs": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "Both are comfortable, while",
+          "es": "Ambos son cómodos, mientras que"
+        },
+        {
+          "en": "I prefer the quieter hotel.",
+          "es": "prefiero el hotel más silencioso."
+        }
+      ],
+      "audioText": "Both are comfortable, while I prefer the quieter hotel.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-compare-two-choices"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c44.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Contrasta precio y comodidad de dos hoteles. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Hotel A is cheaper, while Hotel B is more comfortable."
+          },
+          {
+            "text": "Hotel A is cheapest, while Hotel B more comfortable."
+          },
+          {
+            "text": "Hotel A cheaper that Hotel B is comfortable."
+          }
+        ],
+        "teaches": [
+          "n2-compare-two-choices"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En la selección guiada, la evidencia correcta es «Hotel A is cheaper, while Hotel B is more comfortable.»."
+          },
+          "hint": {
+            "es": "Aplica esta regla: Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5aef6849c8c564e9c2a30a44c5a0d1acd1096fec09750ea410028eca8d280607"
+      },
+      {
+        "id": "en.n2.c44.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el contraste: This phone is lighter, ___ that one is faster."
+        },
+        "answer": {
+          "text": "while",
+          "accepted": [
+            "while"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-compare-two-choices"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el primer espacio, la evidencia correcta es «while»."
+          },
+          "hint": {
+            "es": "Busca la forma que cumple esta regla: Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1e0fd9363809a9a185e1ade5bc30ca72f1b03d4746c20c036cc9b08d26e002eb"
+      },
+      {
+        "id": "en.n2.c44.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena un ejemplo de comparar dos opciones."
+        },
+        "answer": {
+          "text": "The first apartment has a better location.",
+          "tokens": [
+            "The",
+            "first",
+            "apartment",
+            "has",
+            "a",
+            "better",
+            "location."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-compare-two-choices"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el primer orden, la evidencia correcta es «The first apartment has a better location.»."
+          },
+          "hint": {
+            "es": "Localiza primero el sujeto y la forma verbal principal."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aa2d2af65d7a9e03569b30416e1e646bfaf2c54482b08ed96a287ab84cf20a0f"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c44.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: La opción A es más barata, pero la B es más fiable."
+        },
+        "answer": {
+          "text": "Option A is cheaper, but option B is more reliable.",
+          "accepted": [
+            "Option A is cheaper, but option B is more reliable.",
+            "Option A is cheaper, but option B is more reliable"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En la primera producción, la evidencia correcta es «Option A is cheaper, but option B is more reliable.»."
+          },
+          "text": "La opción A es más barata, pero la B es más fiable."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a022ae8c10a74b981f7177e0bc14f05df47ca85d4199e7dd04c2108282485d00"
+      },
+      {
+        "id": "en.n2.c44.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y reconoce un ejemplo de comparar dos opciones."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "This laptop is faster, but the other one is lighter."
+          },
+          {
+            "text": "This laptop is lighter, but the other one is faster."
+          },
+          {
+            "text": "Both laptops are equally light and fast."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el primer audio, la evidencia correcta es «This laptop is lighter, but the other one is faster.»."
+          },
+          "audio": "This laptop is lighter, but the other one is faster.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c03afb0076616c9267ffd80fdf24984e6dcca0c706312981daf19b025471d4ab"
+      },
+      {
+        "id": "en.n2.c44.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario inicial de comparar dos opciones."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "option",
+              {
+                "es": "opción"
+              }
+            ],
+            [
+              "advantage",
+              {
+                "es": "ventaja"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el primer grupo léxico, la evidencia correcta es «option / advantage»."
+          },
+          "pairs": [
+            [
+              "option",
+              {
+                "es": "opción"
+              }
+            ],
+            [
+              "advantage",
+              {
+                "es": "ventaja"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1abd06195a8250a06e6a8d94cde34726f2e06d5c9432ab5339e1fd4a4c89f5fb"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c44.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Expresa una preferencia después de comparar velocidad y costo. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Both is fast, but I prefer the cheapest than train."
+          },
+          {
+            "text": "Both are faster, but I prefer cheap train than."
+          },
+          {
+            "text": "Both are fast, but I prefer the cheaper train."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En la primera evaluación, la evidencia correcta es «Both are fast, but I prefer the cheaper train.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:98712a3d3310fa9543870c0ab306397861947f678cc69ec88a659249a31336de"
+      },
+      {
+        "id": "en.n2.c44.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la valoración: The main ___ is the high price."
+        },
+        "answer": {
+          "text": "disadvantage",
+          "accepted": [
+            "disadvantage"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el segundo espacio, la evidencia correcta es «disadvantage»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6e62d30c4ec11dafb781ef5472dd2aef493406d459a16d9d4ee807358630931a"
+      },
+      {
+        "id": "en.n2.c44.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: Buscas aula. A: online, $40, 6 semanas; B: aula, $80, 10. Compara."
+        },
+        "answer": {
+          "text": "Course A is cheaper and shorter, but I prefer course B because I want classroom learning.",
+          "accepted": [
+            "Course A is cheaper and shorter, but I prefer course B because I want classroom learning.",
+            "Course A costs less and takes fewer weeks; however, course B is my choice because I need classroom lessons."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En la producción evaluada, la evidencia correcta es «Course A is cheaper and shorter, but I prefer course B because I want classroom learning.»."
+          },
+          "text": "Buscas aula. A: online, $40, 6 semanas; B: aula, $80, 10. Compara."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:96e53f201dc111c2ed1b9b7fdaa73575c406eb128ea9b416fcb71bdf005a31bb"
+      },
+      {
+        "id": "en.n2.c44.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y verifica otro ejemplo de comparar dos opciones."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I prefer the blue chair because it is comfortabler."
+          },
+          {
+            "text": "I prefer the blue chair because it is more comfortable."
+          },
+          {
+            "text": "I prefer blue chair because more comfortable than."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el audio evaluado, la evidencia correcta es «I prefer the blue chair because it is more comfortable.»."
+          },
+          "audio": "I prefer the blue chair because it is more comfortable.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:61e295812bcee3e14a5f5928e9b920e5c32cd70b5ebc570bcb0df6988febc58b"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c44.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario de repaso de comparar dos opciones."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "both",
+              {
+                "es": "ambos"
+              }
+            ],
+            [
+              "prefer",
+              {
+                "es": "preferir"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el segundo grupo léxico, la evidencia correcta es «both / prefer»."
+          },
+          "pairs": [
+            [
+              "both",
+              {
+                "es": "ambos"
+              }
+            ],
+            [
+              "prefer",
+              {
+                "es": "preferir"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9f10425a76a33a028135381f54340dfc904cbee9665c2c3c392ff45a1448cc45"
+      },
+      {
+        "id": "en.n2.c44.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una oración de repaso sobre comparar dos opciones."
+        },
+        "answer": {
+          "text": "Both routes are safe, but this one is shorter.",
+          "tokens": [
+            "Both",
+            "routes",
+            "are",
+            "safe,",
+            "but",
+            "this",
+            "one",
+            "is",
+            "shorter."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En el orden de repaso, la evidencia correcta es «Both routes are safe, but this one is shorter.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:815e9b7cc958bb184e47ee48ecdbc7ad3aca9582d25315d19f76d06713f8bb18"
+      },
+      {
+        "id": "en.n2.c44.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: La ventaja del bus es el precio; la desventaja es la duración."
+        },
+        "answer": {
+          "text": "The advantage of the bus is its price, while the disadvantage is the duration.",
+          "accepted": [
+            "The advantage of the bus is its price, while the disadvantage is the duration.",
+            "The price is the bus's advantage, whereas the longer duration is its disadvantage."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-compare-two-choices"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una comparación útil presenta criterios, ventajas y desventajas antes de expresar preferencia. En la producción de repaso, la evidencia correcta es «The advantage of the bus is its price, while the disadvantage is the duration.»."
+          },
+          "text": "La ventaja del bus es el precio; la desventaja es la duración."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9260cdeb5c75a0a84f0e1fccdb11cdcb29fa8cc9fed47d735722a6e3ba5ecb03"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c44.e01": {
+      "reteach": "en.n2.class-44.t01",
+      "review": "en.n2.c44.r01"
+    },
+    "en.n2.c44.e02": {
+      "reteach": "en.n2.class-44.t02",
+      "review": "en.n2.c44.r02"
+    },
+    "en.n2.c44.e03": {
+      "reteach": "en.n2.class-44.t03",
+      "review": "en.n2.c44.r03"
+    },
+    "en.n2.c44.e04": {
+      "reteach": "en.n2.class-44.t04",
+      "review": "en.n2.c44.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

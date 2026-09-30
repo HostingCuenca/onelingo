@@ -71,3 +71,51 @@ Fecha: 2026-09-26 · Responsable: Claude (Claude Code)
 Contenido: escrituras completas en f0 (kana, hangul, pinyin, cirílico, alfabetos), A1 «Primeras frases» ×10 idiomas (204 unidades), paso `tabla`, repetición de fallos al final del bloque, celebración con XP/precisión/tiempo, `sfx/nivel.wav`, precarga de fuentes en web. Solo web (backend sin cambios desde edu-2).
 Commit: `15e02e8` · Build: `main.dart.js` sha256 `181298a30c436abf…` (API_URL prod) en `build/web`.
 Estado: NO desplegado. El puerto 22 de 167.235.20.41 no responde desde la IP 128.201.160.43 (30 reintentos en 30 min); HTTPS y `/api/salud` OK. Probable bloqueo de fail2ban. No se creó bloqueo ni se tocó el servidor.
+
+## Release: 20260929-edu-4-n1-runtime
+
+Fecha: 2026-09-29 14:03 UTC
+Responsable: Codex
+Contenido: release web acumulativa; incorpora el alcance de `edu-3-escrituras` pendiente y conecta Inglés N1 editorial al recorrido real con 100 clases, biblioteca determinista de 1.300 ejercicios, pools separados y 100 unidades activas. Los enlaces históricos resuelven a N1. N2 C1–C15 permanece fuera del runtime y no se publica. Backend, APK y avatar sin cambios.
+
+Commit: árbol de trabajo sobre `d4e2dcd`, rama `claude/educacion-multilenguaje`; los cambios educativos continúan sin commit. El artefacto desplegado está identificado por manifiesto completo en `backups/20260929-edu-4-n1-runtime/build-web-v2.sha256`.
+
+Build: `flutter build web --release --no-pub --dart-define=API_URL=https://onelingo.hostingcuenca.com/api`; `main.dart.js` SHA-256 `71d06ed85241a61ff340e6b2c34ec84b3543100030f76fecb42a78ea8ad1af19`; `n1-editorial.json` `2f08ad20e29427c1de4baab04eb2d1d470234cc89a9756d90c22e958d29ac718`; biblioteca `6804db552370d12f30f293bead21800ac0c7dcb921b47024c73703a4599f3961`.
+
+Pruebas ejecutadas: rutas 10 idiomas/0 errores; 47 pruebas Python; Flutter 155 pasan, 1 omitida; prueba focalizada posterior a la corrección 22 pasan; análisis sin errores nuevos y con 12 avisos heredados. Verificación HTTP de 100 unidades, 100 activas y 1.300 familias. Recorrido visual real: `/aprender` muestra N1 A1 completo, 0/100; C1 abre y muestra solo las 8 tarjetas editoriales de vocabulario.
+
+Incidente contenido durante QA: el primer candidato llegó a activarse brevemente, pero la inspección visual detectó que exponía frases internas como tarjetas de vocabulario. Se restauró inmediatamente la web anterior (`main.dart.js` `b772bd8c…`), se corrigió el compilador y solo entonces se activó/vigiló la variante v2. No se declaró completada la release defectuosa.
+
+Backup del servidor: `/var/www/onelingo/backups/20260929-edu-4-n1-runtime/web-anterior` (`main.dart.js` `b772bd8c96388c55…`), hashes del entorno y manifiestos de build.
+Ruta desplegada: `/var/www/onelingo/web`, mediante staging y renombres; `/apk/` y `/avatar/` preservados por hardlinks desde la web anterior.
+URL de validación: `https://onelingo.hostingcuenca.com/?release=20260929-edu-4-n1-runtime-v2#/aprender`
+Health check: `/api/salud` OK; `onelingo-api` online sin reinicio; `.env` conserva SHA-256 `35a518e3…`; APK y avatar responden 200.
+Resultado: OK.
+
+Rollback disponible:
+```bash
+ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260929-edu-4-n1-runtime/web-retirada-post-release && cp -al backups/20260929-edu-4-n1-runtime/web-anterior web'
+```
+
+## Release: 20260930-edu-5-n2-n3-review
+
+Fecha: 2026-09-30 13:53 UTC
+Responsable: Codex
+Contenido: release web acumulativa para revisión del cliente. Mantiene N1 C1–C100 y publica N2 C1–C100 y N3 C1–C90 en el recorrido real. Total: 290 clases activas y 3.770 ejercicios deterministas, sin tutor IA en runtime. N3 C91–C100 no forma parte de esta release. Incluye soporte visible para fuentes de lectura/escucha, completar multiparte, puntuación parcial y rúbricas locales de escritura. Backend, APK y avatar sin cambios.
+
+Commit: árbol de trabajo sobre `d4e2dcd`, rama `claude/educacion-multilenguaje`; los cambios educativos continúan sin commit por la restricción histórica sobre `.git`.
+
+Build: `flutter build web --release --no-pub --dart-define=API_URL=https://onelingo.hostingcuenca.com/api`; `main.dart.js` SHA-256 `72e25f36798f5810b1fac9c68ec95d788729ddd9dd8d3378f7965f414b7808a6`; biblioteca `6082121eb64241c789032d5ba8d044c80759ffd93f3d6a3738f98a9081063ff2`; activación `f1effe220d28baa4377643fb3bbecdeb5dd114d58eb9e190c0388ee7358bc765`; versión de biblioteca `2026.09.30-en-n3.1`.
+
+Pruebas ejecutadas: rutas de 10 idiomas con 0 errores; 61 pruebas Python; 169 pruebas Flutter pasan y 1 se omite; análisis focalizado sin problemas. El análisis global conserva 12 avisos heredados. Verificación del build y HTTP: 290 unidades activas, 3.770 familias, N2 C1–C100, N3 C1–C90 y ausencia de C91. Inspección visual real de `#/ruta/n2` y `#/ruta/n3` correcta.
+
+Backup del servidor: `/var/www/onelingo/backups/20260930-edu-5-n2-n3-review/web-anterior`, `env.sha256`, `web-anterior.sha256` y `build-web.sha256`.
+Ruta desplegada: `/var/www/onelingo/web`, mediante staging, copia por hardlinks de `apk/` y `avatar/`, y renombres atómicos.
+URL de validación: `https://onelingo.hostingcuenca.com/?release=20260930-edu-5-n2-n3-review#/aprender`
+Health check: `/api/salud` OK; `onelingo-api` online sin reinicio; `.env` conserva SHA-256 `35a518e3a6c41168b07ef38d44680a77bd23079caf169ab7231823fff62435b1`; APK y avatar responden 200.
+Resultado: OK. Lock creado y liberado después de la comprobación visual.
+
+Rollback disponible:
+```bash
+ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-5-n2-n3-review/web-retirada-post-release && cp -al backups/20260930-edu-5-n2-n3-review/web-anterior web'
+```

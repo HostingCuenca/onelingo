@@ -40,7 +40,7 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Fallo en práctica → continuar + repetir al final del bloque.
 - [x] Celebración (XP, precisión, tiempo) y sonido de nivel; también en lecciones antiguas.
 - [x] Precarga de fuentes CJK/cirílico en web.
-- [!] Release 3 `20260926-edu-3-escrituras`: build listo; SSH sin respuesta.
+- [x] El alcance de `20260926-edu-3-escrituras` quedó absorbido y publicado en `20260929-edu-4-n1-runtime`; no desplegar la release 3 por separado.
 
 ## Fase 3 — Gramática
 - [x] Verificar bug «gramática desaparece»: área corregida antes; pantalla no reanudaba ni marcaba (auditoría D).
@@ -87,9 +87,37 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` terminado · `[!]` bloqueado
 - [x] Gramática reanuda el tema tras volver.
 - [x] Recorrido de principiante U0 completo (widget test) y navegación con pestañas.
 - [x] `flutter analyze`: sin errores ni avisos nuevos (7 info previos en sync.dart).
-- [x] `flutter test`: 133 pasan, 1 omitida, 0 fallos; backend 11 pasan.
+- [x] `flutter test --no-pub`: 155 pasan, 1 omitida, 0 fallos; herramientas Python: 40 pasan; rutas de 10 idiomas: 0 errores (2026-09-28). Backend conserva las 11 pruebas documentadas.
+- [x] Build web local con API pública generado; `main.dart.js` SHA-256 `71d06ed85241a61ff340e6b2c34ec84b3543100030f76fecb42a78ea8ad1af19`.
 - [x] Recorrido manual web (inglés) y emulador Android (japonés).
 
 ## Fase 10 — Producción
 - [x] Release educativa 1 `20260926-edu-1-fundamentos` publicada y verificada.
 - [x] Release educativa 2 `20260926-edu-2-a1-voz` publicada y verificada (ver DESPLIEGUES.md).
+
+## Fase 11 — Replanteamiento editorial 10 × 100
+- [x] Inventario real por idioma: 109/10.000 clases de N1–N10; F0 separado.
+- [x] Decidir 10 niveles × 100 clases para cada idioma (DEC-018).
+- [x] Excluir tutor/generación IA del camino base (DEC-017).
+- [x] Diseñar Inglés Nivel 1 como 20 bloques × 5 clases.
+- [x] Diseñar pools editoriales separados: enseñanza, guiada, práctica, evaluación y repaso.
+- [x] Auditar secuencia con perfiles de estudiante y sistemas de escritura.
+- [x] Implementar núcleo aislado `exercise-library/1`: parser, pools, IDs, validación y selector determinista.
+- [x] Integrar cargador y adaptador retrocompatible del esquema 2; una unidad `active` consume exclusivamente la biblioteca y conserva metadatos de selección.
+- [ ] Importar y clasificar los ejercicios actuales con IDs globales estables.
+- [x] Corregir el repaso para usar solo variantes editoriales del pool `review`; la selección es determinista y se registra.
+- [x] Fortalecer validador Python: exposición cronológica, evidencia de habilidades y contaminación entre práctica/evaluación.
+- [x] Crear simulaciones automatizadas para diagnóstico, saltos, alfabetización, retorno y refuerzo.
+- [x] Ajustar diagnósticos por encima del contenido al mayor nivel realmente publicado.
+- [x] Impedir que el diagnóstico global omita alfabetización zh/ja/ko/ru sin evidencia.
+- [x] Priorizar repaso/refuerzo vencido antes de contenido nuevo y conservar la aprobación histórica.
+- [x] Consolidar el plan de migración por hitos, con estados `legacy → shadow → active`, puertas de calidad y reversión por unidad.
+- [x] Extraer el PDF maestro a un manifiesto verificable: 10 niveles, 1.000 especificaciones e IDs únicos; ninguna IA requerida en ejecución.
+- [x] M1: importador reproducible en seco; 36 unidades, 528 familias/variantes, seis informes y 0 errores; no aplicado al producto.
+- [x] M2: cargador, adaptador, diagnóstico, persistencia de metadatos y recorrido conectados; pruebas de datos y widget cubren N1 C1 y C100.
+- [x] Adoptar escala cliente: N1 = A1 completo, progresión hasta C1 avanzado en N10 y equivalencia histórica conservadora (DEC-020).
+- [x] Implementar versionado y migración de diagnóstico/progreso sin sobrescribir valores históricos.
+- [x] M3: la integración técnica se amplió a las 100 clases de Inglés N1, quedó `active` y fue publicada en `20260929-edu-4-n1-runtime`; la revisión humana registrada sigue siendo requisito para los niveles en `shadow`.
+- [x] Poblar las 100 clases de Inglés Nivel 1 (1.300 ejercicios) y validarlas antes de activar la nueva versión.
+- [~] Poblar Inglés N2–N10 por lotes: N2 completo con C1–C100 (1.300 ejercicios, `shadow`); mapa N3 v2 validado y C1–C90 integradas (1.170 ejercicios, `shadow`); C91–C100 avanzan en cadena editorial. Luego continuar N3–N10 y cada idioma con su mapa propio.
+- [ ] Registrar revisión pedagógica y lingüística por lote antes de publicar.

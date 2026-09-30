@@ -7,6 +7,11 @@ import '../api/sync.dart';
 import '../content/catalog.dart';
 import '../content/contenido_json.dart';
 import '../content/curriculum.dart';
+import '../diagnostico.dart'
+    show
+        escalaDiagnosticoCliente,
+        escalaDiagnosticoLegacy,
+        nivelClienteDesdeLegacy;
 import '../models/models.dart';
 
 /// Se inyecta en `main` con `overrideWithValue`.
@@ -39,6 +44,8 @@ class ProgressState {
     this.idiomaNativo = 'es',
     this.idiomaMeta = 'en',
     this.nivelInicial = 1,
+    this.nivelEscala = escalaDiagnosticoLegacy,
+    this.nivelClienteInicial,
     this.fundamentos = false,
     this.diagnostico,
     this.practicas = const {},
@@ -64,7 +71,18 @@ class ProgressState {
   final String email;
   final String idiomaNativo;
   final String idiomaMeta;
+
+  /// Ubicación histórica usada por la ruta anterior. Nunca se sobrescribe
+  /// con un valor de una escala distinta.
   final int nivelInicial;
+  final String nivelEscala;
+  final int? nivelClienteInicial;
+
+  int get nivelCliente =>
+      nivelClienteInicial ??
+      (nivelEscala == escalaDiagnosticoCliente
+          ? nivelInicial.clamp(0, 10)
+          : nivelClienteDesdeLegacy(nivelInicial));
 
   /// Recomendado por la prueba de nivel: empezar por el Nivel 0 (Fundamentos).
   final bool fundamentos;
@@ -205,6 +223,8 @@ class ProgressState {
     String? idiomaNativo,
     String? idiomaMeta,
     int? nivelInicial,
+    String? nivelEscala,
+    int? nivelClienteInicial,
     bool? fundamentos,
     Map<String, dynamic>? diagnostico,
     Map<String, dynamic>? practicas,
@@ -230,6 +250,8 @@ class ProgressState {
     idiomaNativo: idiomaNativo ?? this.idiomaNativo,
     idiomaMeta: idiomaMeta ?? this.idiomaMeta,
     nivelInicial: nivelInicial ?? this.nivelInicial,
+    nivelEscala: nivelEscala ?? this.nivelEscala,
+    nivelClienteInicial: nivelClienteInicial ?? this.nivelClienteInicial,
     fundamentos: fundamentos ?? this.fundamentos,
     diagnostico: diagnostico ?? this.diagnostico,
     practicas: practicas ?? this.practicas,
@@ -257,6 +279,8 @@ class ProgressState {
     'idiomaNativo': idiomaNativo,
     'idiomaMeta': idiomaMeta,
     'nivelInicial': nivelInicial,
+    'nivelEscala': nivelEscala,
+    'nivelClienteInicial': ?nivelClienteInicial,
     'fundamentos': fundamentos,
     'practicas': practicas,
     'sectores': sectores,
@@ -284,6 +308,8 @@ class ProgressState {
     idiomaNativo: j['idiomaNativo'] as String? ?? 'es',
     idiomaMeta: j['idiomaMeta'] as String? ?? 'en',
     nivelInicial: j['nivelInicial'] as int? ?? 1,
+    nivelEscala: j['nivelEscala'] as String? ?? escalaDiagnosticoLegacy,
+    nivelClienteInicial: (j['nivelClienteInicial'] as num?)?.round(),
     fundamentos: j['fundamentos'] as bool? ?? false,
     diagnostico: (j['diagnostico'] as Map?)?.cast<String, dynamic>(),
     practicas: (j['practicas'] as Map?)?.cast<String, dynamic>() ?? {},
@@ -452,9 +478,20 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
   void guardarDiagnostico(Map<String, dynamic> resultado, int nivel) => _save(
     state.copyWith(
       diagnostico: resultado,
-      nivelInicial: resultado['idioma'] == state.idiomaMeta
+      // `nivelInicial` conserva el valor de la escala histórica. Un
+      // diagnóstico cliente nuevo se guarda en su propio campo versionado.
+      nivelInicial:
+          resultado['idioma'] == state.idiomaMeta &&
+              resultado['escala'] != escalaDiagnosticoCliente
           ? nivel.clamp(1, 10)
           : state.nivelInicial,
+      nivelEscala: resultado['idioma'] == state.idiomaMeta
+          ? (resultado['escala'] as String? ?? escalaDiagnosticoLegacy)
+          : state.nivelEscala,
+      nivelClienteInicial: resultado['idioma'] == state.idiomaMeta
+          ? ((resultado['nivelCliente'] as num?)?.round() ??
+                nivelClienteDesdeLegacy(nivel))
+          : state.nivelCliente,
       fundamentos: resultado['idioma'] == state.idiomaMeta
           ? nivel == 0
           : state.fundamentos,

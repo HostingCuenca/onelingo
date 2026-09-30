@@ -46,11 +46,13 @@ class InfoUnidad {
   const InfoUnidad(
     this.estado, {
     this.repasoPendiente = false,
+    this.necesitaRefuerzo = false,
     this.proximoRepaso,
     this.omitible = false,
   });
   final EstadoUnidad estado;
   final bool repasoPendiente;
+  final bool necesitaRefuerzo;
   final DateTime? proximoRepaso;
 
   /// De un nivel inferior al del diagnóstico: cuenta como prerrequisito
@@ -60,6 +62,7 @@ class InfoUnidad {
   InfoUnidad comoOmitible() => InfoUnidad(
     estado == EstadoUnidad.bloqueada ? EstadoUnidad.disponible : estado,
     repasoPendiente: repasoPendiente,
+    necesitaRefuerzo: necesitaRefuerzo,
     proximoRepaso: proximoRepaso,
     omitible: true,
   );
@@ -69,6 +72,37 @@ class InfoUnidad {
 /// inferiores al del diagnóstico se pueden omitir (salvo quien empieza de cero).
 int nivelBaseDe({required bool desdeCero, required int nivelInicial}) =>
     desdeCero ? 0 : nivelInicial;
+
+/// Convierte la ubicación histórica (0=Fundamentos, 1–2=A1, …) a la escala
+/// comercial adoptada (Nivel 1=A1 completo). Se usa solo para recomendación;
+/// las claves de progreso y el diagnóstico original permanecen intactos.
+int nivelClienteDesdeNivelHistorico(int nivel) {
+  if (nivel <= 0) return 0;
+  if (nivel <= 2) return 1;
+  if (nivel <= 4) return 2;
+  if (nivel <= 6) return 3;
+  if (nivel <= 8) return 5;
+  return 8;
+}
+
+int nivelBaseClienteDe({required bool desdeCero, required int nivelInicial}) =>
+    desdeCero ? 0 : nivelClienteDesdeNivelHistorico(nivelInicial);
+
+/// Evita una ruta sin siguiente paso cuando el diagnóstico apunta a un nivel
+/// que todavía no tiene contenido editorial publicado.
+int nivelBaseDisponible(RutaCargada ruta, int solicitado) {
+  final publicados = ruta.unidades.map((u) => u.nivelInterno).whereType<int>();
+  if (publicados.isEmpty) return 0;
+  final maximo = publicados.reduce((a, b) => a > b ? a : b);
+  return solicitado.clamp(0, maximo).toInt();
+}
+
+/// En escrituras no latinas, demostrar un nivel oral/global no prueba que el
+/// alumno sepa leer. Estas unidades no se omiten sin evidencia específica.
+bool alfabetizacionObligatoria(UnidadRuta u) =>
+    const {'zh', 'ja', 'ko', 'ru'}.contains(u.idioma) &&
+    u.nivelInterno == 0 &&
+    u.habilidades.contains('escritura');
 
 /// Calcula el estado de todas las unidades de una ruta.
 Map<String, InfoUnidad> estadosRuta(
@@ -89,6 +123,7 @@ Map<String, InfoUnidad> estadosRuta(
     final info = _estadoUnidad(u, practicas, prereqOk, hoy);
     final omitible =
         (u.nivelInterno ?? 99) < nivelBase &&
+        !alfabetizacionObligatoria(u) &&
         !info.estado.alMenos(EstadoUnidad.aprobada);
     res[u.id] = omitible ? info.comoOmitible() : info;
   }
@@ -107,13 +142,16 @@ InfoUnidad _estadoUnidad(
   if (aprobada) {
     final proximo = repaso is Map
         ? _fecha(repaso['proximo'])
-        : _fecha(evaluacion['fechaAprobada'])?.add(
-            Duration(days: u.intervalosRepaso.first),
-          );
+        : _fecha(evaluacion['fechaAprobada'])
+              ?.add(Duration(days: u.intervalosRepaso.first));
     final dominada = repaso is Map && repaso['retencion'] == true;
+    final necesitaRefuerzo =
+        repaso is Map && repaso['necesitaRefuerzo'] == true;
     return InfoUnidad(
       dominada ? EstadoUnidad.dominada : EstadoUnidad.aprobada,
-      repasoPendiente: proximo != null && !proximo.isAfter(hoy),
+      repasoPendiente:
+          necesitaRefuerzo || (proximo != null && !proximo.isAfter(hoy)),
+      necesitaRefuerzo: necesitaRefuerzo,
       proximoRepaso: proximo,
     );
   }
@@ -132,7 +170,8 @@ InfoUnidad _estadoUnidad(
       practicas.containsKey(ClaveRuta.visto(u.id)) ||
       u.pasos.any(
         (p) => p.items.any(
-          (i) => evidenciaDe(practicas, ClaveRuta.item(u.id, p.id, i.id)) != null,
+          (i) =>
+              evidenciaDe(practicas, ClaveRuta.item(u.id, p.id, i.id)) != null,
         ),
       );
   return InfoUnidad(empezada ? EstadoUnidad.enCurso : EstadoUnidad.disponible);
@@ -179,7 +218,9 @@ Map<String, dynamic> siguienteRepaso(
   final cajaPrevia = anterior?['caja'] as int? ?? 0;
   final caja = acierto ? cajaPrevia + 1 : (cajaPrevia - 2).clamp(0, 99);
   final intervalos = u.intervalosRepaso;
-  final dias = acierto ? intervalos[(caja - 1).clamp(0, intervalos.length - 1)] : 1;
+  final dias = acierto
+      ? intervalos[(caja - 1).clamp(0, intervalos.length - 1)]
+      : 1;
   final aprobadaEn = _fecha(evaluacion?['fechaAprobada']);
   // Retención: acierto en un repaso hecho al menos un día después de aprobar.
   final retencion =
@@ -197,14 +238,19 @@ Map<String, dynamic> siguienteRepaso(
     'correcta': acierto,
     'caja': caja,
     'retencion': retencion,
+    'necesitaRefuerzo': !acierto,
     'ultimo': ahora.toIso8601String(),
     'proximo': ahora.add(Duration(days: dias)).toIso8601String(),
   };
 }
 
-/// Unidad recomendada: la primera no aprobada que no esté bloqueada; si
-/// todas están aprobadas, la primera con repaso pendiente.
+/// Unidad recomendada: primero retención/refuerzo vencido; después contenido
+/// nuevo no aprobado. Así el repaso espaciado no queda enterrado por la ruta.
 UnidadRuta? unidadRecomendada(RutaCargada ruta, Map<String, InfoUnidad> e) {
+  for (final u in ruta.unidades) {
+    final info = e[u.id]!;
+    if (info.necesitaRefuerzo || info.repasoPendiente) return u;
+  }
   for (final u in ruta.unidades) {
     final info = e[u.id]!;
     if (!info.omitible &&
@@ -212,9 +258,6 @@ UnidadRuta? unidadRecomendada(RutaCargada ruta, Map<String, InfoUnidad> e) {
         info.estado != EstadoUnidad.bloqueada) {
       return u;
     }
-  }
-  for (final u in ruta.unidades) {
-    if (e[u.id]!.repasoPendiente) return u;
   }
   return null;
 }

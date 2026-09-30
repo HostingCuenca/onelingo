@@ -66,7 +66,7 @@ Un nivel puede tener varios módulos (p. ej. `a1-2` = `en.a1-2.presente` + `en.a
 | `pasos` | [Paso] | sí | secuencia didáctica |
 | `criterioDominio` | `{"umbral": 0.8}` | sí | aciertos a la primera en la evaluación |
 | `repaso` | `{"intervalosDias": [1,3,7,16,35,90]}` | no | valores por defecto si falta |
-| `tutor` | objeto | no | metadatos futuros para el tutor IA (sin integración visual) |
+| `tutor` | objeto | no | metadatos opcionales para práctica conversacional; nunca requisito de la ruta base (DEC-017) |
 | `guias` | [string] | no | ids de guías de `grammar_guides.dart` relacionadas (enlace con el contenido antiguo) |
 
 **Vocablo**: `{"id": "v-hello", "texto": "hello", "rom": "…"?, "traduccion": TextoApoyo, "nota": TextoApoyo?}`
@@ -97,8 +97,8 @@ Campos comunes: `id` (único en la unidad), `formato`, `consigna` (TextoApoyo), 
 | `elegir` | `pregunta`? (meta) o `preguntaApoyo`? (TextoApoyo), `opciones` ([string meta] o [TextoApoyo]), `respuesta` (índice) | índice |
 | `escuchar` | `audio` (texto meta que se reproduce), `opciones`, `respuesta` | índice |
 | `ordenar` | `tokens` [string], `respuesta` (frase) | comparación normalizada |
-| `completar` | `texto` con `___`, `respuesta`, `aceptadas`?, `opciones`? | normalizada; con `opciones` se muestran botones |
-| `escribir` | `respuesta`, `aceptadas`?, `audio`? (dictado) | normalizada |
+| `completar` | simple: `texto` con un `___`, `respuesta`, `aceptadas`?, `opciones`?; multiparte editorial: `textosPartes`, `respuestasPartes`, `partesPuntuables`, `minimoCorrectas` | simple normalizada; multiparte corrige cada campo y aplica el umbral declarado |
+| `escribir` | `respuesta`, `aceptadas`?, `audio`? (dictado); editorial extensa: `minimoPalabras`, `maximoPalabras`, `evidenciasEscritura` adaptados desde `origin.scoring.wordRange/evidenceGroups` | normalizada; con rúbrica, rango + una frase válida de cada grupo |
 | `relacionar` | `pares: [[texto meta, TextoApoyo]]` (3–5) | todos los pares |
 
 Normalización para corregir: minúsculas, apóstrofos tipográficos → `'`, se elimina la puntuación `.,!?¡¿;:。、！？「」…"“”«»` en cualquier posición y se colapsan los espacios. Formas alternativas válidas (contracciones, variantes) van en `aceptadas`.
@@ -108,8 +108,10 @@ Normalización para corregir: minúsculas, apóstrofos tipográficos → `'`, se
 1. IDs únicos; prerrequisitos existentes; grafo sin ciclos; `orden` coherente con prerrequisitos.
 2. Cada TextoApoyo tiene todos los `idiomasApoyo`, sin cadenas vacías.
 3. La unidad empieza enseñando y respeta el orden de pasos; hay `practica_guiada`, `situacion` y `evaluacion` (≥ 4 ítems, ≥ 2 formatos); la evaluación es el último paso.
-4. **Nada sin enseñar**: cada palabra del idioma meta que aparece en respuestas, opciones, fichas de ordenar, textos de completar, audios, ejemplos y diálogos debe estar en el `vocabulario` de la unidad o de sus prerrequisitos (transitivos), en el `incorrecto` de sus `erroresFrecuentes` (distractores enseñados como error) o en `palabrasLibres`. Las frases de varias palabras se enseñan como vocablo y cuentan palabra a palabra. En `zh` y `ja` las frases separan palabras con espacios (convención del repositorio).
+4. **Nada sin enseñar y en orden cronológico**: una palabra del idioma meta cuenta como disponible después de aparecer en un paso de enseñanza (`ejemplos`, `vocabulario`, `patron` o `tabla`) o en un prerrequisito transitivo. Declararla en la lista `vocabulario` no basta. Respuestas, opciones, ordenar, completar, audios y diálogos solo pueden usar lo ya expuesto; las formas `incorrecto` de `erroresFrecuentes` valen únicamente como distractores. Las frases de varias palabras cuentan palabra a palabra. En `zh` y `ja` se mantiene la convención de separar palabras con espacios en los datos.
 5. `respuesta` de `elegir`/`escuchar` es un índice válido; `ordenar` usa exactamente los `tokens`.
+
+Los ejercicios nuevos se separarán en la biblioteca `exercise-library/1`; contrato y migración en `BIBLIOTECA_EJERCICIOS_V1.md`. Hasta completar el adaptador, los pasos embebidos siguen siendo la fuente compatible.
 
 ## Estados de unidad (se calculan desde `practicas`, DEC-006)
 

@@ -7,7 +7,7 @@ export 'language_flag.dart';
 export 'primary_button.dart';
 import '../../core/models/models.dart';
 
-class Tarjeta extends StatelessWidget {
+class Tarjeta extends StatefulWidget {
   const Tarjeta({
     super.key,
     required this.child,
@@ -17,6 +17,7 @@ class Tarjeta extends StatelessWidget {
     this.onTap,
     this.radio = 22,
     this.sombra = true,
+    this.etiquetaSemantica,
   });
   final Widget child;
   final EdgeInsets padding;
@@ -25,33 +26,70 @@ class Tarjeta extends StatelessWidget {
   final VoidCallback? onTap;
   final double radio;
   final bool sombra;
+  final String? etiquetaSemantica;
+
+  @override
+  State<Tarjeta> createState() => _TarjetaState();
+}
+
+class _TarjetaState extends State<Tarjeta> {
+  bool presionada = false;
 
   @override
   Widget build(BuildContext context) {
-    final box = Container(
-      padding: padding,
+    final interactiva = widget.onTap != null;
+    final reducirMovimiento = MediaQuery.disableAnimationsOf(context);
+    final colorPresionado = Color.alphaBlend(
+      OL.morado.withValues(alpha: 0.09),
+      widget.color,
+    );
+    final box = AnimatedContainer(
+      duration: reducirMovimiento
+          ? Duration.zero
+          : const Duration(milliseconds: 90),
+      curve: Curves.easeOut,
+      padding: widget.padding,
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(radio),
-        border: Border.all(color: borde ?? OL.grisClaro, width: 2),
-        boxShadow: sombra
+        color: presionada ? colorPresionado : widget.color,
+        borderRadius: BorderRadius.circular(widget.radio),
+        border: Border.all(
+          color: presionada ? OL.morado : widget.borde ?? OL.grisClaro,
+          width: presionada ? 3 : 2,
+        ),
+        boxShadow: widget.sombra
             ? [
                 BoxShadow(
-                  color: borde ?? OL.grisClaro,
-                  offset: const Offset(0, 4),
+                  color: presionada
+                      ? OL.morado.withValues(alpha: 0.38)
+                      : widget.borde ?? OL.grisClaro,
+                  offset: Offset(0, presionada ? 1 : 4),
                 ),
               ]
             : null,
       ),
-      child: child,
+      child: widget.child,
     );
-    if (onTap == null) return box;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(radio),
-        onTap: onTap,
-        child: box,
+    if (!interactiva) return box;
+    return Semantics(
+      button: true,
+      label: widget.etiquetaSemantica,
+      child: AnimatedScale(
+        scale: presionada ? 0.98 : 1,
+        duration: reducirMovimiento
+            ? Duration.zero
+            : const Duration(milliseconds: 90),
+        curve: Curves.easeOut,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(widget.radio),
+            onHighlightChanged: (value) {
+              if (presionada != value) setState(() => presionada = value);
+            },
+            onTap: widget.onTap,
+            child: box,
+          ),
+        ),
       ),
     );
   }

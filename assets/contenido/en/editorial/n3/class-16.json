@@ -1,0 +1,914 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-16",
+  "title": {
+    "en": "How certain is the plan?",
+    "es": "Grado de certeza del plan"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir arreglo confirmado, intención y predicción.",
+      "Interpretar el futuro con señales de certeza."
+    ]
+  },
+  "concepts": [
+    "n3-future-coordination-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-15"
+  ],
+  "usesVocabulary": [
+    "arrangement",
+    "intention",
+    "prediction",
+    "confirmed",
+    "forecast",
+    "booking"
+  ],
+  "usesPatterns": [
+    "n3-future-coordination-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "arrangement",
+      "es": "arreglo"
+    },
+    {
+      "en": "intention",
+      "es": "intención"
+    },
+    {
+      "en": "prediction",
+      "es": "predicción"
+    },
+    {
+      "en": "confirmed",
+      "es": "confirmado"
+    },
+    {
+      "en": "forecast",
+      "es": "pronóstico"
+    },
+    {
+      "en": "booking",
+      "es": "reserva"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-16.t01",
+      "en": "Our arrangement is to meet the tutor at six tomorrow.",
+      "es": "Nuestro arreglo es reunirnos con el tutor mañana a las seis.",
+      "explanationEs": "Present continuous con hora fijada muestra un arreglo confirmado.",
+      "segments": [
+        {
+          "en": "Our arrangement is to meet",
+          "es": "Nuestro arreglo es reunirnos con"
+        },
+        {
+          "en": "the tutor at six tomorrow.",
+          "es": "el tutor mañana a las seis."
+        }
+      ],
+      "audioText": "Our arrangement is to meet the tutor at six tomorrow.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-1"
+    },
+    {
+      "id": "en.n3.class-16.t02",
+      "en": "My intention is to bring the printed map.",
+      "es": "Mi intención es traer el mapa impreso.",
+      "explanationEs": "Be going to puede expresar una intención del hablante.",
+      "segments": [
+        {
+          "en": "My intention is to",
+          "es": "Mi intención es"
+        },
+        {
+          "en": "bring the printed map.",
+          "es": "traer el mapa impreso."
+        }
+      ],
+      "audioText": "My intention is to bring the printed map.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-1"
+    },
+    {
+      "id": "en.n3.class-16.t03",
+      "en": "The forecast says it will rain soon.",
+      "es": "El pronóstico dice que lloverá pronto.",
+      "explanationEs": "Will expresa una predicción basada en una lectura del contexto.",
+      "segments": [
+        {
+          "en": "The forecast says",
+          "es": "El pronóstico dice"
+        },
+        {
+          "en": "it will rain soon.",
+          "es": "que lloverá pronto."
+        }
+      ],
+      "audioText": "The forecast says it will rain soon.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-1"
+    },
+    {
+      "id": "en.n3.class-16.t04",
+      "en": "A plan can show a booking, an intention or a prediction.",
+      "es": "Un plan puede mostrar reserva, intención o predicción.",
+      "explanationEs": "La forma futura se interpreta junto con la evidencia del mensaje.",
+      "segments": [
+        {
+          "en": "A plan can show a",
+          "es": "Un plan puede mostrar"
+        },
+        {
+          "en": "booking, an intention or a prediction.",
+          "es": "reserva, intención o predicción."
+        }
+      ],
+      "audioText": "A plan can show a booking, an intention or a prediction.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-1"
+    },
+    {
+      "id": "en.n3.class-16.t05",
+      "en": "We will check the forecast before the trip.",
+      "es": "Revisaremos el pronóstico antes del viaje.",
+      "explanationEs": "El pronóstico ayuda a separar una predicción de un arreglo.",
+      "segments": [
+        {
+          "en": "We will check the",
+          "es": "Revisaremos el pronóstico"
+        },
+        {
+          "en": "forecast before the trip.",
+          "es": "antes del viaje."
+        }
+      ],
+      "audioText": "We will check the forecast before the trip.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c16.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Clasifica: ¿arreglo confirmado o intención?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The room is booked"
+          },
+          {
+            "text": "I am going to call"
+          },
+          {
+            "text": "It may rain"
+          }
+        ],
+        "teaches": [
+          "n3-future-coordination-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Is booked es un arreglo ya confirmado."
+          },
+          "hint": {
+            "es": "Busca el mensaje con reserva concreta."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d03f8f4019a6f2e541b2f6e819d6545d8963be224dac20d338f07a0e4b48a86a"
+      },
+      {
+        "id": "en.n3.c16.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la intención de Rosa: She is ___ to join us."
+        },
+        "answer": {
+          "text": "going",
+          "accepted": [
+            "going"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-future-coordination-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Is going to expresa una intención futura."
+          },
+          "hint": {
+            "es": "Usa going después de is."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fc84131f8e1c6440203d20c2d75f749706291d1938b591a8f3c50f56427aa0ab"
+      },
+      {
+        "id": "en.n3.c16.pg03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la predicción."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A fixed booking"
+          },
+          {
+            "text": "A personal intention"
+          },
+          {
+            "text": "A prediction"
+          }
+        ],
+        "teaches": [
+          "n3-future-coordination-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La evidencia del cielo permite una predicción."
+          },
+          "hint": {
+            "es": "Relaciona el cielo oscuro con lo que probablemente pasará."
+          },
+          "audio": "The sky is dark; it will rain before the match.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:22eacb7bd0eaf0446c6182766529620b8de053a3f49483757fd991b92ebacb6f"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c16.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada mensaje con su grado de certeza."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "We are meeting at six",
+              {
+                "es": "confirmed arrangement"
+              }
+            ],
+            [
+              "I am going to study",
+              {
+                "es": "intention"
+              }
+            ],
+            [
+              "The bus will be late",
+              {
+                "es": "prediction"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada forma se interpreta con la señal contextual del mensaje."
+          },
+          "pairs": [
+            [
+              "We are meeting at six",
+              {
+                "es": "confirmed arrangement"
+              }
+            ],
+            [
+              "I am going to study",
+              {
+                "es": "intention"
+              }
+            ],
+            [
+              "The bus will be late",
+              {
+                "es": "prediction"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bc5b677df094dba75208c514b7c487dc076916180e3bff76aeb7e61fc57c9ef9"
+      },
+      {
+        "id": "en.n3.c16.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el mensaje de una reserva ya cerrada."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We are having lunch at noon."
+          },
+          {
+            "text": "I am going to check the menu."
+          },
+          {
+            "text": "It will be busy."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La hora acordada presenta un arreglo confirmado."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:89051360c7565dac74c38e9fad72c73480d75b47709e29a0325915fe6e5ff95b"
+      },
+      {
+        "id": "en.n3.c16.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha: ¿qué expresa el hablante?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A confirmed table"
+          },
+          {
+            "text": "An intention"
+          },
+          {
+            "text": "A weather prediction"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Going to ask anuncia una intención del hablante."
+          },
+          "audio": "I am going to ask the manager after lunch.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:df9479f6012f99b3e31858091cb353f8632b1b484c5990607dcb0aeee3a6bdcb"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c16.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "En una agenda, elige el arreglo confirmado."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The team is meeting on Friday."
+          },
+          {
+            "text": "I am going to print the map."
+          },
+          {
+            "text": "The road will be busy."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La reunión con día fijado es el arreglo confirmado."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b11705e34bc220f0379db2c080353f1e59f07081a454723d88983f4ea7f098c5"
+      },
+      {
+        "id": "en.n3.c16.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y marca la intención personal."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A fixed appointment"
+          },
+          {
+            "text": "A personal intention"
+          },
+          {
+            "text": "A weather guess"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El hablante anuncia lo que piensa hacer personalmente."
+          },
+          "audio": "I am going to bring extra chairs for the picnic.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a7f4583fca6bd17eca8d8c7dc81411dc5c05c25d2b9479f40d2abae074be3e73"
+      },
+      {
+        "id": "en.n3.c16.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "El cielo cambia: selecciona la predicción."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "We are meeting at eight."
+          },
+          {
+            "text": "She is going to send the file."
+          },
+          {
+            "text": "The storm will reach the coast."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La tormenta permite anticipar una predicción."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:763c41b8d23e93a43ae3f19b967cb08f75341cb3839df082149fe52ac45ace8c"
+      },
+      {
+        "id": "en.n3.c16.e04",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Clasifica seis mensajes de una feria."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "The stalls are opening at nine",
+              {
+                "es": "confirmed arrangement — stalls schedule"
+              }
+            ],
+            [
+              "I am going to bring signs",
+              {
+                "es": "intention — signs"
+              }
+            ],
+            [
+              "It will be crowded",
+              {
+                "es": "prediction — crowd"
+              }
+            ],
+            [
+              "The band is playing at noon",
+              {
+                "es": "confirmed arrangement — band schedule"
+              }
+            ],
+            [
+              "I am going to print maps",
+              {
+                "es": "intention — maps"
+              }
+            ],
+            [
+              "The road will be busy",
+              {
+                "es": "prediction — road traffic"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las seis etiquetas exigen distinguir arreglo, intención y predicción."
+          },
+          "pairs": [
+            [
+              "The stalls are opening at nine",
+              {
+                "es": "confirmed arrangement — stalls schedule"
+              }
+            ],
+            [
+              "I am going to bring signs",
+              {
+                "es": "intention — signs"
+              }
+            ],
+            [
+              "It will be crowded",
+              {
+                "es": "prediction — crowd"
+              }
+            ],
+            [
+              "The band is playing at noon",
+              {
+                "es": "confirmed arrangement — band schedule"
+              }
+            ],
+            [
+              "I am going to print maps",
+              {
+                "es": "intention — maps"
+              }
+            ],
+            [
+              "The road will be busy",
+              {
+                "es": "prediction — road traffic"
+              }
+            ]
+          ],
+          "scoring": {
+            "parts": 6,
+            "minimumCorrect": 5,
+            "independentAttempt": true
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dce1bb4a2224516cee139fa263e344501370ea7932d3252e4c9a015a73cf2369"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c16.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase confirma una cita con hora?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We are meeting at ten."
+          },
+          {
+            "text": "I am going to call."
+          },
+          {
+            "text": "It will be cold."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La hora compartida confirma el arreglo."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e417cfb32b813ef7fd033033d993f96ed314dcacd3d4c4d4f7e229a7d8339114"
+      },
+      {
+        "id": "en.n3.c16.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la intención del voluntario."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A prediction"
+          },
+          {
+            "text": "A personal plan"
+          },
+          {
+            "text": "A confirmed train"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El voluntario declara su plan personal para la noche."
+          },
+          "audio": "I am going to label the boxes tonight.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:53e094fc9398668a0067edce23433b99584d88e65c9fc3608846abc934fb25a4"
+      },
+      {
+        "id": "en.n3.c16.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una frase de predicción sobre nubes y lluvia."
+        },
+        "answer": {
+          "text": "The dark clouds mean it will rain.",
+          "accepted": [
+            "The dark clouds mean it will rain.",
+            "It will rain because dark clouds cover the sky."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las dos respuestas conectan la evidencia visible con una predicción."
+          },
+          "text": "Nubes negras cubren el cielo; predices lluvia."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a8faf92baf7cbd2d21c12563ee53fe837100e246ec3d89207f91f5e922f7032b"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c16.e01": {
+      "reteach": "en.n3.class-16.t01",
+      "review": "en.n3.c16.r01"
+    },
+    "en.n3.c16.e02": {
+      "reteach": "en.n3.class-16.t02",
+      "review": "en.n3.c16.r02"
+    },
+    "en.n3.c16.e03": {
+      "reteach": "en.n3.class-16.t03",
+      "review": "en.n3.c16.r03"
+    },
+    "en.n3.c16.e04": {
+      "reteach": "en.n3.class-16.t04",
+      "review": "en.n3.c16.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

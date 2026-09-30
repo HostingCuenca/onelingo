@@ -88,10 +88,16 @@ class _FoundationsScreenState extends ConsumerState<FoundationsScreen> {
       ),
     ),
   );
-  Widget panel(List<Widget> children) => Tarjeta(
+  Widget panel(
+    List<Widget> children, {
+    VoidCallback? onTap,
+    String? etiquetaSemantica,
+  }) => Tarjeta(
     padding: const EdgeInsets.all(22),
     color: OL.moradoSuave,
     borde: OL.moradoClaro,
+    onTap: onTap,
+    etiquetaSemantica: etiquetaSemantica,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: children,
@@ -262,47 +268,64 @@ class _FoundationsScreenState extends ConsumerState<FoundationsScreen> {
               ] else if (!practicing) ...[
                 Text('Descubre · ${card + 1} de ${unit.cards.length}'),
                 const SizedBox(height: 12),
-                panel([
-                  Icon(
-                    switch (unit.cards[card].visual) {
-                      'happy' => Icons.sentiment_satisfied_alt,
-                      'tired' => Icons.bedtime_outlined,
-                      'pair' => Icons.people_outline,
-                      'you' => Icons.waving_hand_outlined,
-                      _ => Icons.person_outline,
-                    },
-                    size: 64,
-                    color: OL.morado,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    unit.cards[card].english,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w900,
+                panel(
+                  [
+                    Icon(
+                      switch (unit.cards[card].visual) {
+                        'happy' => Icons.sentiment_satisfied_alt,
+                        'tired' => Icons.bedtime_outlined,
+                        'pair' => Icons.people_outline,
+                        'you' => Icons.waving_hand_outlined,
+                        _ => Icons.person_outline,
+                      },
+                      size: 64,
+                      color: OL.morado,
                     ),
-                  ),
-                  Text(
-                    unit.cards[card].spanish,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 24),
-                  ),
-                  const SizedBox(height: 18),
-                  Text(
-                    unit.cards[card].explanation,
-                    style: const TextStyle(fontSize: 18, height: 1.5),
-                  ),
-                  TextButton.icon(
-                    onPressed: listening
-                        ? null
-                        : () => listen(unit.cards[card].english),
-                    icon: const Icon(Icons.volume_up_outlined),
-                    label: Text(
-                      listening ? 'Preparando audio…' : 'Escuchar en inglés',
+                    const SizedBox(height: 16),
+                    Text(
+                      unit.cards[card].english,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
-                  ),
-                ]),
+                    Text(
+                      unit.cards[card].spanish,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 24),
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      unit.cards[card].explanation,
+                      style: const TextStyle(fontSize: 18, height: 1.5),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.volume_up_outlined, color: OL.morado),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            listening
+                                ? 'Preparando audio…'
+                                : 'Toca la tarjeta para escuchar',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: OL.morado,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                  onTap: listening
+                      ? null
+                      : () => listen(unit.cards[card].english),
+                  etiquetaSemantica:
+                      'Escuchar ${unit.cards[card].english} en inglés',
+                ),
                 if (card > 0)
                   TextButton(
                     onPressed: () => change(() => card--),

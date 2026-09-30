@@ -1,0 +1,121 @@
+[
+  {
+    "name": "runtime_ai_enabled",
+    "operation": "set",
+    "path": ["runtimeAi"],
+    "value": true,
+    "rehash": false,
+    "expected": "runtimeAi must be false"
+  },
+  {
+    "name": "ai_reference_in_content",
+    "operation": "set",
+    "path": ["classes", 0, "objectives", "es", 0],
+    "value": "Pide al tutor IA que genere la respuesta.",
+    "rehash": false,
+    "expected": "runtime AI reference forbidden"
+  },
+  {
+    "name": "generic_unresolvable_prompt",
+    "operation": "set",
+    "path": ["classes", 0, "pools", "evaluation", 0, "prompt", "es"],
+    "value": "Elige la opción correcta.",
+    "rehash": true,
+    "expected": "generic/unresolvable prompt"
+  },
+  {
+    "name": "hint_outside_guided",
+    "operation": "set",
+    "path": ["classes", 0, "pools", "evaluation", 0, "origin", "hint"],
+    "value": {"es": "Pista filtrada"},
+    "rehash": true,
+    "expected": "hints forbidden outside guided practice"
+  },
+  {
+    "name": "unknown_required_concept",
+    "operation": "set",
+    "path": ["classes", 0, "pools", "practice", 0, "requires"],
+    "value": ["future-unknown"],
+    "rehash": true,
+    "expected": "requires undeclared/not-yet-taught concept"
+  },
+  {
+    "name": "missing_remediation",
+    "operation": "delete",
+    "path": ["classes", 0, "remediationMap", "en.n1.c01.e01"],
+    "rehash": false,
+    "expected": "remediationMap coverage mismatch"
+  },
+  {
+    "name": "bad_hash",
+    "operation": "set",
+    "path": ["classes", 0, "pools", "practice", 0, "prompt", "es"],
+    "value": "Escribe otra respuesta en inglés.",
+    "rehash": false,
+    "expected": "bad contentHash"
+  },
+  {
+    "name": "semantic_leak_to_evaluation",
+    "operation": "copy_semantic",
+    "source": ["classes", 0, "pools", "practice", 0],
+    "path": ["classes", 0, "pools", "evaluation", 0],
+    "rehash": true,
+    "expected": "semantic duplicate of practice"
+  },
+  {
+    "name": "broken_teaching_segments",
+    "operation": "set",
+    "path": ["classes", 0, "teaching", 0, "segments"],
+    "value": ["Unrelated", "segments"],
+    "rehash": false,
+    "expected": "segments do not cover en"
+  },
+  {
+    "name": "missing_cumulative_close",
+    "operation": "delete",
+    "path": ["classes", 4, "cumulativeEvaluation"],
+    "rehash": false,
+    "expected": "cumulativeEvaluation required at block close"
+  },
+  {
+    "name": "conflicting_audio_replay_alias",
+    "operation": "set",
+    "path": ["classes", 0, "pools", "practice", 1, "origin", "audioControls"],
+    "value": {"replayLimit": 2, "showTranscript": false},
+    "rehash": true,
+    "expected": "conflicting replay policies"
+  },
+  {
+    "name": "partial_matching_pair_leak",
+    "operation": "copy_pair",
+    "source": ["classes", 0, "pools", "practice", 2],
+    "path": ["classes", 0, "pools", "evaluation", 3],
+    "sourceIndex": 0,
+    "targetIndex": 2,
+    "rehash": true,
+    "expected": "atomic pair duplicate of practice"
+  },
+  {
+    "name": "underspecified_completion_prompt",
+    "operation": "underspecify_completion",
+    "path": ["classes", 0, "pools", "practiceGuided", 2],
+    "rehash": true,
+    "expected": "completar prompt is underspecified"
+  },
+  {
+    "name": "strict_answer_semantic_reuse",
+    "operation": "set",
+    "path": ["classes", 0, "qualityPolicy"],
+    "value": {"answerReuseAcrossEarlyReserved": "forbid"},
+    "rehash": false,
+    "expected": "answer semantic duplicate of practice"
+  },
+  {
+    "name": "strict_atomic_answer_evidence_reuse",
+    "operation": "set",
+    "path": ["classes", 0, "qualityPolicy"],
+    "value": {"answerEvidenceReuseAcrossPools": "forbid"},
+    "rehash": false,
+    "expected": "answer evidence duplicate of practice"
+  }
+]

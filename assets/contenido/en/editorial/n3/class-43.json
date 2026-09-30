@@ -1,0 +1,913 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-43",
+  "title": {
+    "en": "Track a service request",
+    "es": "Seguir una solicitud de servicio"
+  },
+  "objectives": {
+    "es": [
+      "Seguir recepción, revisión, reparación y confirmación.",
+      "Identificar estado actual y fecha de cierre en un aviso."
+    ]
+  },
+  "concepts": [
+    "n3-processes-services-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-42"
+  ],
+  "usesVocabulary": [
+    "request",
+    "stage",
+    "receive",
+    "review",
+    "confirmation",
+    "closure"
+  ],
+  "usesPatterns": [
+    "n3-processes-services-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "request",
+      "es": "solicitud"
+    },
+    {
+      "en": "stage",
+      "es": "etapa"
+    },
+    {
+      "en": "receive",
+      "es": "recibir"
+    },
+    {
+      "en": "review",
+      "es": "revisar"
+    },
+    {
+      "en": "confirmation",
+      "es": "confirmación"
+    },
+    {
+      "en": "closure",
+      "es": "cierre"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-43.t01",
+      "en": "A service request moves through ordered stages.",
+      "es": "Una solicitud de servicio avanza por etapas ordenadas.",
+      "explanationEs": "El registro permite reconstruir la secuencia.",
+      "segments": [
+        {
+          "en": "A service request",
+          "es": "Una solicitud de servicio"
+        },
+        {
+          "en": "moves through ordered stages.",
+          "es": "avanza por etapas ordenadas."
+        }
+      ],
+      "audioText": "A service request moves through ordered stages.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-processes-services-3"
+    },
+    {
+      "id": "en.n3.class-43.t02",
+      "en": "Reception records that the request was received.",
+      "es": "La recepción registra que la solicitud fue recibida.",
+      "explanationEs": "Es la primera etapa.",
+      "segments": [
+        {
+          "en": "Reception records that",
+          "es": "La recepción registra que"
+        },
+        {
+          "en": "the request was received.",
+          "es": "la solicitud fue recibida."
+        }
+      ],
+      "audioText": "Reception records that the request was received.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-processes-services-3"
+    },
+    {
+      "id": "en.n3.class-43.t03",
+      "en": "Review checks the item before repair.",
+      "es": "La revisión comprueba el objeto antes de repararlo.",
+      "explanationEs": "La reparación depende de la revisión.",
+      "segments": [
+        {
+          "en": "Review checks the",
+          "es": "La revisión comprueba el"
+        },
+        {
+          "en": "item before repair.",
+          "es": "objeto antes de repararlo."
+        }
+      ],
+      "audioText": "Review checks the item before repair.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-processes-services-3"
+    },
+    {
+      "id": "en.n3.class-43.t04",
+      "en": "The current stage tells what is happening now.",
+      "es": "El estado actual indica qué ocurre ahora.",
+      "explanationEs": "Now, currently y pending ayudan a localizarlo.",
+      "segments": [
+        {
+          "en": "The current stage tells",
+          "es": "El estado actual"
+        },
+        {
+          "en": "what is happening now.",
+          "es": "indica qué ocurre ahora."
+        }
+      ],
+      "audioText": "The current stage tells what is happening now.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-processes-services-3"
+    },
+    {
+      "id": "en.n3.class-43.t05",
+      "en": "The closing date tells when confirmation is completed.",
+      "es": "La fecha de cierre indica cuándo termina la confirmación.",
+      "explanationEs": "No la confundas con la recepción.",
+      "segments": [
+        {
+          "en": "The closing date tells",
+          "es": "La fecha de cierre"
+        },
+        {
+          "en": "when confirmation is completed.",
+          "es": "indica cuándo termina la confirmación."
+        }
+      ],
+      "audioText": "The closing date tells when confirmation is completed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-processes-services-3"
+    },
+    {
+      "id": "en.n3.class-43.t06",
+      "en": "Read one notice, order reception, review, repair and confirmation, then report the current status and closing date. Keep every date attached to its stated stage.",
+      "es": "Ordena cuatro etapas y comunica el estado actual y la fecha de cierre.",
+      "explanationEs": "La tarea integrada evita inventar etapas o mover fechas entre acciones.",
+      "segments": [
+        {
+          "en": "Read one notice, order reception, review, repair and confirmation, then report the",
+          "es": "Ordena cuatro etapas y comunica el"
+        },
+        {
+          "en": "current status and closing date. Keep every date attached to its stated stage.",
+          "es": "estado actual y la fecha de cierre."
+        }
+      ],
+      "audioText": "Read one notice, order reception, review, repair and confirmation, then report the current status and closing date. Keep every date attached to its stated stage.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-processes-services-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c43.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué etapa ocurre primero en una solicitud?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The repair is confirmed"
+          },
+          {
+            "text": "The item is repaired"
+          },
+          {
+            "text": "The request is received"
+          }
+        ],
+        "teaches": [
+          "n3-processes-services-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recepción de la solicitud inicia el proceso."
+          },
+          "hint": {
+            "es": "Busca la entrada del caso antes de cualquier revisión."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e2bfc20314c363f9259f3855603e57ef35aa0eb2ff2ce5775aa588a1048875ed"
+      },
+      {
+        "id": "en.n3.c43.pg02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena cuatro etapas de una reparación."
+        },
+        "answer": {
+          "text": "The request was received. The item was inspected. It was repaired. Completion was confirmed.",
+          "tokens": [
+            "The",
+            "request",
+            "was",
+            "received.",
+            "The",
+            "item",
+            "was",
+            "inspected.",
+            "It",
+            "was",
+            "repaired.",
+            "Completion",
+            "was",
+            "confirmed."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-processes-services-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Recepción, revisión, reparación y confirmación forman la secuencia."
+          },
+          "hint": {
+            "es": "La confirmación solo aparece después de la reparación."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:54de358b99c4f3f11101b91da5bd2409a5c7b87211d5e14d8bb2648c50360cc7"
+      },
+      {
+        "id": "en.n3.c43.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: The device ___ now being tested."
+        },
+        "answer": {
+          "text": "is",
+          "accepted": [
+            "is"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-processes-services-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Is being tested marca la etapa actualmente en curso."
+          },
+          "hint": {
+            "es": "Device es singular y el proceso sigue activo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9fb45745acdc6ba7abf8faf562585f1de27040776e486514028d11379cbefe99"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c43.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada registro con su etapa."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Request logged at 09:00",
+              {
+                "es": "reception"
+              }
+            ],
+            [
+              "Damage checked at 10:30",
+              {
+                "es": "review"
+              }
+            ],
+            [
+              "New part fitted at 14:00",
+              {
+                "es": "repair"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Logged, checked y fitted sitúan cada acción en el proceso."
+          },
+          "pairs": [
+            [
+              "Request logged at 09:00",
+              {
+                "es": "reception"
+              }
+            ],
+            [
+              "Damage checked at 10:30",
+              {
+                "es": "review"
+              }
+            ],
+            [
+              "New part fitted at 14:00",
+              {
+                "es": "repair"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:35499d29a0d543c92f614f0dfe22ac40151823623ae095b44f7c0773af99b7a9"
+      },
+      {
+        "id": "en.n3.c43.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el estado actual."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The printer is being repaired"
+          },
+          {
+            "text": "Confirmation was sent yesterday"
+          },
+          {
+            "text": "The request has not arrived"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Is now being repaired identifica la etapa vigente entre hechos terminados."
+          },
+          "audio": "The request was received this morning and the printer was inspected. It is now being repaired. Confirmation will be sent tomorrow.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4fbc7ca5bc6cc1e1a0dd8152128f554b4d3a293212c6d2f3a9aded70c6451096"
+      },
+      {
+        "id": "en.n3.c43.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Resume estado actual y fecha de cierre."
+        },
+        "answer": {
+          "text": "The bike is now being repaired, and the request closes on Thursday.",
+          "accepted": [
+            "The bike is now being repaired, and the request closes on Thursday.",
+            "Repair is the current stage; completion is scheduled for Thursday."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes conservan la etapa vigente y el cierre del jueves."
+          },
+          "text": "Bike received Monday; checked Tuesday; now repaired; closes Thursday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:819beb62fbe0c66592a1aa83542afdd1711002a2c031c0d9013b67aede994667"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c43.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Received, reviewed, repaired, confirmed: ¿qué va tercero?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "confirmed"
+          },
+          {
+            "text": "repaired"
+          },
+          {
+            "text": "received"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Repaired ocupa la tercera posición después de recepción y revisión."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:85546d3f11b2f38c448294eea584b00482228497836808eba3ce10e88efab0a9"
+      },
+      {
+        "id": "en.n3.c43.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona la fecha de cierre."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Monday"
+          },
+          {
+            "text": "Today"
+          },
+          {
+            "text": "18 July"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Will close on 18 July indica la fecha final del caso."
+          },
+          "audio": "The parcel was received on Monday. It is being checked now, and the case will close on 18 July.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a613c3a7ff4d7af5ad95d5d9d43901bc8b9a148190d6718cd877cfaad5f4c432"
+      },
+      {
+        "id": "en.n3.c43.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué oración identifica una etapa pendiente?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Confirmation has not been sent yet."
+          },
+          {
+            "text": "The item was received yesterday."
+          },
+          {
+            "text": "The inspection was completed at ten."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Has not been sent yet marca confirmation como pendiente."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c221194bcba875f1c73e601af9bd2a2554275e28982aacaea008d075c6047679"
+      },
+      {
+        "id": "en.n3.c43.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Extrae seis datos del registro F18."
+        },
+        "answer": {
+          "text": "request received on 3 May | request reviewed on 4 May | repair in progress | confirmation planned for 6 May | repair | 6 May",
+          "accepted": [
+            "request received on 3 May | request reviewed on 4 May | repair in progress | confirmation planned for 6 May | repair | 6 May"
+          ],
+          "parts": [
+            {
+              "text": "request received on 3 May",
+              "accepted": [
+                "request received on 3 May",
+                "request received on 3 May"
+              ]
+            },
+            {
+              "text": "request reviewed on 4 May",
+              "accepted": [
+                "request reviewed on 4 May",
+                "request reviewed on 4 May"
+              ]
+            },
+            {
+              "text": "repair in progress",
+              "accepted": [
+                "repair in progress",
+                "repair in progress"
+              ]
+            },
+            {
+              "text": "confirmation planned for 6 May",
+              "accepted": [
+                "confirmation planned for 6 May",
+                "confirmation planned for 6 May"
+              ]
+            },
+            {
+              "text": "repair",
+              "accepted": [
+                "repair",
+                "repair"
+              ]
+            },
+            {
+              "text": "6 May",
+              "accepted": [
+                "6 May",
+                "6 May"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La extracción conserva el orden, el estado actual y la fecha final."
+          },
+          "scoring": {
+            "unit": "status-record",
+            "total": 6,
+            "minimumCorrect": 5,
+            "requiredParts": [
+              4,
+              5
+            ],
+            "criteria": [
+              "four-stages-in-order",
+              "current-status",
+              "closing-date"
+            ]
+          },
+          "sentences": [
+            "Stage 1: ___",
+            "Stage 2: ___",
+            "Stage 3: ___",
+            "Stage 4: ___",
+            "Current status: ___",
+            "Closure date: ___"
+          ],
+          "text": "F18: The request was received on 3 May and reviewed on 4 May. Repair is now in progress. Confirmation is planned for 6 May, when the case will close."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:23f996505072e3cda939c1af032cabba3b0e6f798eb78c28f15a128fed3d2c76"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c43.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué dato responde cuál es el estado actual?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Received last Friday"
+          },
+          {
+            "text": "Being inspected now"
+          },
+          {
+            "text": "Closes next Monday"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Being inspected now expresa la etapa que está en curso."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:84a42a7f8bf4fcd5f3e09fa10aeb76c579cc17b928c91ef9c46233b92a5efb93"
+      },
+      {
+        "id": "en.n3.c43.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Reconstruye una secuencia completa de servicio."
+        },
+        "answer": {
+          "text": "The form was received. It was reviewed. The change was made. Confirmation was sent.",
+          "tokens": [
+            "The",
+            "form",
+            "was",
+            "received.",
+            "It",
+            "was",
+            "reviewed.",
+            "The",
+            "change",
+            "was",
+            "made.",
+            "Confirmation",
+            "was",
+            "sent."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La secuencia conserva recepción, revisión, acción y confirmación."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5a51cde075f7524620a2d5a02f58b7dda2aef9955724444a26161e7b16a3d1f5"
+      },
+      {
+        "id": "en.n3.c43.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Recupera seis datos del registro K7."
+        },
+        "answer": {
+          "text": "case received on 9 August | case reviewed on 10 August | replacement in progress | confirmation due on 12 August | replacement | 12 August",
+          "accepted": [
+            "case received on 9 August | case reviewed on 10 August | replacement in progress | confirmation due on 12 August | replacement | 12 August"
+          ],
+          "parts": [
+            {
+              "text": "case received on 9 August",
+              "accepted": [
+                "case received on 9 August",
+                "case received on 9 August"
+              ]
+            },
+            {
+              "text": "case reviewed on 10 August",
+              "accepted": [
+                "case reviewed on 10 August",
+                "case reviewed on 10 August"
+              ]
+            },
+            {
+              "text": "replacement in progress",
+              "accepted": [
+                "replacement in progress",
+                "replacement in progress"
+              ]
+            },
+            {
+              "text": "confirmation due on 12 August",
+              "accepted": [
+                "confirmation due on 12 August",
+                "confirmation due on 12 August"
+              ]
+            },
+            {
+              "text": "replacement",
+              "accepted": [
+                "replacement",
+                "replacement"
+              ]
+            },
+            {
+              "text": "12 August",
+              "accepted": [
+                "12 August",
+                "12 August"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-processes-services-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recuperación extrae cuatro etapas, estado actual y fecha de cierre."
+          },
+          "scoring": {
+            "unit": "status-record",
+            "total": 6,
+            "minimumCorrect": 5,
+            "requiredParts": [
+              4,
+              5
+            ],
+            "criteria": [
+              "four-stages-in-order",
+              "current-status",
+              "closing-date"
+            ]
+          },
+          "sentences": [
+            "First stage: ___",
+            "Second stage: ___",
+            "Third stage: ___",
+            "Fourth stage: ___",
+            "Current status: ___",
+            "Closure date: ___"
+          ],
+          "text": "K7: The case was received on 9 August and reviewed on 10 August. Replacement is currently in progress. Confirmation is due on 12 August, the closure date."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8ae607e1dad5c571f462ce99fa9adad96cbb844a4ca1ee779fbdaa7d0dbf5c8a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c43.e01": {
+      "reteach": "en.n3.class-43.t02",
+      "review": "en.n3.c43.r02"
+    },
+    "en.n3.c43.e02": {
+      "reteach": "en.n3.class-43.t05",
+      "review": "en.n3.c43.r03"
+    },
+    "en.n3.c43.e03": {
+      "reteach": "en.n3.class-43.t04",
+      "review": "en.n3.c43.r01"
+    },
+    "en.n3.c43.e04": {
+      "reteach": "en.n3.class-43.t06",
+      "review": "en.n3.c43.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

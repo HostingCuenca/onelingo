@@ -1,0 +1,753 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-61",
+  "phase": "input",
+  "title": {
+    "en": "Can and could for requests",
+    "es": "Can y could para peticiones"
+  },
+  "concepts": [
+    "n2-can-could-requests"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-60"
+  ],
+  "usesVocabulary": [
+    "request",
+    "help",
+    "books",
+    "carry",
+    "open",
+    "explain",
+    "box",
+    "window"
+  ],
+  "usesPatterns": [
+    "n2-can-could-requests"
+  ],
+  "objectives": {
+    "es": [
+      "Reconocer peticiones con can y could en diálogos breves.",
+      "Distinguir el grado de cortesía de una petición.",
+      "Producir peticiones claras para acciones cotidianas."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "request",
+      "es": "petición"
+    },
+    {
+      "en": "help",
+      "es": "ayuda"
+    },
+    {
+      "en": "books",
+      "es": "libros"
+    },
+    {
+      "en": "carry",
+      "es": "llevar"
+    },
+    {
+      "en": "open",
+      "es": "abrir"
+    },
+    {
+      "en": "explain",
+      "es": "explicar"
+    },
+    {
+      "en": "box",
+      "es": "caja"
+    },
+    {
+      "en": "window",
+      "es": "ventana"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-61.t01",
+      "en": "Can you help me with this box, please?",
+      "es": "¿Puedes ayudarme con esta caja, por favor?",
+      "explanationEs": "Can formula una petición directa y amable.",
+      "segments": [
+        {
+          "en": "Can you help me",
+          "es": "¿Puedes ayudarme con"
+        },
+        {
+          "en": "with this box, please?",
+          "es": "esta caja, por favor?"
+        }
+      ],
+      "audioText": "Can you help me with this box, please?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-could-requests"
+    },
+    {
+      "id": "en.n2.class-61.t02",
+      "en": "Could you open the window, please?",
+      "es": "¿Podrías abrir la ventana, por favor?",
+      "explanationEs": "Could hace la petición más suave.",
+      "segments": [
+        {
+          "en": "Could you open",
+          "es": "¿Podrías abrir la"
+        },
+        {
+          "en": "the window, please?",
+          "es": "ventana, por favor?"
+        }
+      ],
+      "audioText": "Could you open the window, please?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-could-requests"
+    },
+    {
+      "id": "en.n2.class-61.t03",
+      "en": "Can you carry these books?",
+      "es": "¿Puedes llevar estos libros?",
+      "explanationEs": "Can pide una acción concreta.",
+      "segments": [
+        {
+          "en": "Can you",
+          "es": "¿Puedes llevar"
+        },
+        {
+          "en": "carry these books?",
+          "es": "estos libros?"
+        }
+      ],
+      "audioText": "Can you carry these books?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-could-requests"
+    },
+    {
+      "id": "en.n2.class-61.t04",
+      "en": "Could you explain the form?",
+      "es": "¿Podrías explicar el formulario?",
+      "explanationEs": "Could introduce una petición cortés de información.",
+      "segments": [
+        {
+          "en": "Could you",
+          "es": "¿Podrías explicar"
+        },
+        {
+          "en": "explain the form?",
+          "es": "el formulario?"
+        }
+      ],
+      "audioText": "Could you explain the form?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-could-requests"
+    },
+    {
+      "id": "en.n2.class-61.t05",
+      "en": "A request asks someone to do an action.",
+      "es": "Una petición pide a alguien que haga una acción.",
+      "explanationEs": "Request nombra el acto de pedir una acción.",
+      "segments": [
+        {
+          "en": "A request asks someone",
+          "es": "Una petición pide a"
+        },
+        {
+          "en": "to do an action.",
+          "es": "alguien que haga una acción."
+        }
+      ],
+      "audioText": "A request asks someone to do an action.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-could-requests"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c61.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la petición correcta para abrir la ventana."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Could you open the window, please?"
+          },
+          {
+            "text": "Could you opens the window?"
+          },
+          {
+            "text": "Could open you the window?"
+          }
+        ],
+        "teaches": [
+          "n2-can-could-requests"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you inicia una petición cortés. En la elección guiada, la respuesta es «Could you open the window, please?»."
+          },
+          "hint": {
+            "es": "Observa quién pide, permite, ofrece o responde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:db5a489753bb401e079851b0dc851d3b213f4907a7e09e11926f0fb1c39a065c"
+      },
+      {
+        "id": "en.n2.c61.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la petición: Can you ___ me with this box?"
+        },
+        "answer": {
+          "text": "help",
+          "accepted": [
+            "help"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-can-could-requests"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can you va seguido del verbo base help. En el primer espacio, la respuesta es «help»."
+          },
+          "hint": {
+            "es": "Completa solo la palabra o fragmento ausente."
+          },
+          "text": "Completa la petición: Can you ___ me with this box?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e73141dbd70f9f156fa88369808813c981f076c94713b66a2a0c93aaf114127d"
+      },
+      {
+        "id": "en.n2.c61.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una petición para llevar los libros."
+        },
+        "answer": {
+          "text": "Can you carry these books?",
+          "tokens": [
+            "Can",
+            "you",
+            "carry",
+            "these",
+            "books?"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-can-could-requests"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La pregunta coloca can antes del sujeto you. En el primer orden, la respuesta es «Can you carry these books?»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después el verbo modal."
+          },
+          "text": "Ordena una petición para llevar los libros."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5fbc92c692f535c5cef4f1be5385ae4ce7b40d140880cdbd1622bdb9df58ebb7"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c61.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Podrías explicar el formulario, por favor?"
+        },
+        "answer": {
+          "text": "Could you explain the form, please?",
+          "accepted": [
+            "Could you explain the form, please?",
+            "Could you please explain the form?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you y could you please expresan una petición cortés. En la primera producción, la respuesta es «Could you explain the form, please?»."
+          },
+          "text": "¿Podrías explicar el formulario, por favor?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c38031aff26890d265275e14795dbd6e57e2b711e154d2d29b9476cf5f7c4263"
+      },
+      {
+        "id": "en.n2.c61.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la petición para pedir ayuda con una caja."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Could you carry this box, please?"
+          },
+          {
+            "text": "Could you carries this box?"
+          },
+          {
+            "text": "Could carry you this box?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you carry pide a otra persona una acción y carry queda en forma base. En el primer audio, la respuesta es «Could you carry this box, please?»."
+          },
+          "audio": "Could you carry this box, please?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7d5a91bd2100baa0b37133601bd0d939f7038b89deeaf28f4f29319bb8d72758"
+      },
+      {
+        "id": "en.n2.c61.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona una función y una acción de petición."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "request",
+              {
+                "es": "petición"
+              }
+            ],
+            [
+              "carry",
+              {
+                "es": "llevar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Request nombra el acto y carry la acción que se puede pedir. En el primer grupo léxico, la respuesta es «request / carry»."
+          },
+          "pairs": [
+            [
+              "request",
+              {
+                "es": "petición"
+              }
+            ],
+            [
+              "carry",
+              {
+                "es": "llevar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:745515180ebcda086cd4ce2a5d5dcfc3c501bad3fb0d0e2bbe1924c94d1b9224"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c61.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la petición más cortés para una explicación."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Can you explains this rule?"
+          },
+          {
+            "text": "Could you explain this rule, please?"
+          },
+          {
+            "text": "Could explain you this rule?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you explain es una petición cortés con verbo base. En la primera evaluación, la respuesta es «Could you explain this rule, please?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c3af60a15d564ba0d55fb2d26b68cb64ad5069a4538fe29ec14eacbc56238dac"
+      },
+      {
+        "id": "en.n2.c61.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: Could you ___ the door, please?"
+        },
+        "answer": {
+          "text": "open",
+          "accepted": [
+            "open"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you va seguido del verbo base open. En el segundo espacio, la respuesta es «open»."
+          },
+          "text": "Completa: Could you ___ the door, please?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:32fe629ba985caf12201d632bd7d68e683ed40dd5e3c47206641da178ae5db8f"
+      },
+      {
+        "id": "en.n2.c61.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Puedes ayudarme con estas cajas?"
+        },
+        "answer": {
+          "text": "Can you help me with these boxes?",
+          "accepted": [
+            "Can you help me with these boxes?",
+            "Can you help me with the boxes?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can you help formula una petición directa y clara. En la producción evaluada, la respuesta es «Can you help me with these boxes?»."
+          },
+          "text": "¿Puedes ayudarme con estas cajas?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b4cb46cbd6fb40b1eeda1da1d8e6580011cc334884bead1061fe1da08c389bcd"
+      },
+      {
+        "id": "en.n2.c61.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la petición de información."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Could you explains this map?"
+          },
+          {
+            "text": "Could explain you this map?"
+          },
+          {
+            "text": "Could you explain this map, please?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you explain usa sujeto y verbo base en ese orden. En el audio evaluado, la respuesta es «Could you explain this map, please?»."
+          },
+          "audio": "Could you explain this map, please?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8b7eea9b2efa16e0e5a892e778d17348da745f2ebe38eb907004471a4efd6bd3"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c61.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos acciones que se pueden pedir."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "help",
+              {
+                "es": "ayudar"
+              }
+            ],
+            [
+              "explain",
+              {
+                "es": "explicar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Help y explain son acciones que otra persona puede hacer tras una petición. En el segundo grupo léxico, la respuesta es «help / explain»."
+          },
+          "pairs": [
+            [
+              "help",
+              {
+                "es": "ayudar"
+              }
+            ],
+            [
+              "explain",
+              {
+                "es": "explicar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b1738f92bce7f178ce13792bc582a04cace87acb060025e4828b8eb1649a7ae1"
+      },
+      {
+        "id": "en.n2.c61.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la petición: Can you ___ these books?"
+        },
+        "answer": {
+          "text": "carry",
+          "accepted": [
+            "carry"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can you se completa con el verbo base carry. En el repaso modal, la respuesta es «carry»."
+          },
+          "text": "Completa la petición: Can you ___ these books?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:327edd3d06fcbf6de4a90d9b7148f13cded087b289232413db09f8a87b2685fb"
+      },
+      {
+        "id": "en.n2.c61.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Podrías abrir la puerta?"
+        },
+        "answer": {
+          "text": "Could you open the door?",
+          "accepted": [
+            "Could you open the door?",
+            "Could you please open the door?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you open es una petición suave y completa. En la producción de repaso, la respuesta es «Could you open the door?»."
+          },
+          "text": "¿Podrías abrir la puerta?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:955df14c98b874da44e643d52f50d01fe135bb53a4dada15fffa549373228efe"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c61.e01": {
+      "reteach": "en.n2.class-61.t04",
+      "review": "en.n2.c61.r01"
+    },
+    "en.n2.c61.e02": {
+      "reteach": "en.n2.class-61.t02",
+      "review": "en.n2.c61.r03"
+    },
+    "en.n2.c61.e03": {
+      "reteach": "en.n2.class-61.t01",
+      "review": "en.n2.c61.r01"
+    },
+    "en.n2.c61.e04": {
+      "reteach": "en.n2.class-61.t04",
+      "review": "en.n2.c61.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

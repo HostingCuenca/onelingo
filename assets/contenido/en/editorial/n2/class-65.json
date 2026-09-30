@@ -1,0 +1,778 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-65",
+  "phase": "transfer",
+  "title": {
+    "en": "Service conversation",
+    "es": "Conversación de servicio"
+  },
+  "concepts": [
+    "n2-service-conversation"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-64"
+  ],
+  "usesVocabulary": [
+    "service",
+    "service ticket",
+    "receipt",
+    "change",
+    "colleague",
+    "solve",
+    "counter",
+    "customer",
+    "help",
+    "problem"
+  ],
+  "usesPatterns": [
+    "n2-can-could-requests",
+    "n2-may-can-permission",
+    "n2-can-shall-offers",
+    "n2-polite-responses",
+    "n2-service-conversation"
+  ],
+  "objectives": {
+    "es": [
+      "Integrar peticiones, permisos y ofrecimientos en un servicio.",
+      "Resolver una necesidad del cliente con lenguaje cortés.",
+      "Producir una conversación de servicio breve y clara."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "service",
+      "es": "servicio"
+    },
+    {
+      "en": "service ticket",
+      "es": "ticket de servicio"
+    },
+    {
+      "en": "receipt",
+      "es": "recibo"
+    },
+    {
+      "en": "change",
+      "es": "cambiar"
+    },
+    {
+      "en": "colleague",
+      "es": "colega"
+    },
+    {
+      "en": "solve",
+      "es": "resolver"
+    },
+    {
+      "en": "counter",
+      "es": "mostrador"
+    },
+    {
+      "en": "customer",
+      "es": "cliente"
+    },
+    {
+      "en": "help",
+      "es": "ayuda"
+    },
+    {
+      "en": "problem",
+      "es": "problema"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-65.t01",
+      "en": "Good morning. How can I help you?",
+      "es": "Buenos días. ¿Cómo puedo ayudarle?",
+      "explanationEs": "How can I help inicia una atención de servicio.",
+      "segments": [
+        {
+          "en": "Good morning. How",
+          "es": "Buenos días."
+        },
+        {
+          "en": "can I help you?",
+          "es": "¿Cómo puedo ayudarle?"
+        }
+      ],
+      "audioText": "Good morning. How can I help you?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-service-conversation"
+    },
+    {
+      "id": "en.n2.class-65.t02",
+      "en": "Could you change this service ticket, please?",
+      "es": "¿Podría cambiar este ticket de servicio, por favor?",
+      "explanationEs": "Could you change formula una petición del cliente a otra persona.",
+      "segments": [
+        {
+          "en": "Could you change",
+          "es": "¿Podría cambiar este ticket"
+        },
+        {
+          "en": "this service ticket, please?",
+          "es": "de servicio, por favor?"
+        }
+      ],
+      "audioText": "Could you change this service ticket, please?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-service-conversation"
+    },
+    {
+      "id": "en.n2.class-65.t03",
+      "en": "Certainly. May I see your receipt?",
+      "es": "Por supuesto. ¿Puedo ver su recibo?",
+      "explanationEs": "May I see pide permiso de forma formal.",
+      "segments": [
+        {
+          "en": "Certainly. May I",
+          "es": "Por supuesto. ¿Puedo"
+        },
+        {
+          "en": "see your receipt?",
+          "es": "ver su recibo?"
+        }
+      ],
+      "audioText": "Certainly. May I see your receipt?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-service-conversation"
+    },
+    {
+      "id": "en.n2.class-65.t04",
+      "en": "Shall I call a colleague?",
+      "es": "¿Llamo a un colega?",
+      "explanationEs": "Shall I call ofrece una solución.",
+      "segments": [
+        {
+          "en": "Shall I",
+          "es": "¿Llamo a"
+        },
+        {
+          "en": "call a colleague?",
+          "es": "un colega?"
+        }
+      ],
+      "audioText": "Shall I call a colleague?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-service-conversation"
+    },
+    {
+      "id": "en.n2.class-65.t05",
+      "en": "Customer: Could you update this service ticket, please? Clerk: May I see your order number? Customer: Certainly. Can I wait here? Clerk: Shall I call a supervisor? Customer: Yes, please. Thank you. That solves my problem.",
+      "es": "Cliente: ¿Podría actualizar este ticket de servicio, por favor? Empleado: ¿Puedo ver su número de pedido? Cliente: Claro. ¿Puedo esperar aquí? Empleado: ¿Llamo a un supervisor? Cliente: Sí, por favor. Gracias. Eso resuelve mi problema.",
+      "explanationEs": "Este escenario de pedido integra petición, permiso, respuesta cortés, ofrecimiento aceptado y resolución.",
+      "segments": [
+        {
+          "en": "Customer: Could you update this service ticket, please? Clerk: May I see your order number? Customer: Certainly. Can",
+          "es": "Cliente: ¿Podría actualizar este ticket de servicio, por favor? Empleado: ¿Puedo ver su número de pedido? Cliente:"
+        },
+        {
+          "en": "I wait here? Clerk: Shall I call a supervisor? Customer: Yes, please. Thank you. That solves my problem.",
+          "es": "Claro. ¿Puedo esperar aquí? Empleado: ¿Llamo a un supervisor? Cliente: Sí, por favor. Gracias. Eso resuelve mi problema."
+        }
+      ],
+      "audioText": "Customer: Could you update this service ticket, please? Clerk: May I see your order number? Customer: Certainly. Can I wait here? Clerk: Shall I call a supervisor? Customer: Yes, please. Thank you. That solves my problem.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-service-conversation"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c65.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la apertura correcta de un servicio."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "How can I help you?"
+          },
+          {
+            "text": "How can I helps you?"
+          },
+          {
+            "text": "How I can help you?"
+          }
+        ],
+        "teaches": [
+          "n2-service-conversation"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "How can I help inicia el servicio con verbo base. En la elección guiada, la respuesta es «How can I help you?»."
+          },
+          "hint": {
+            "es": "Observa quién pide, permite, ofrece o responde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:096bf2246886be8043b478ce2fed9a710e04048d913cd076d945d1b55b52a3b8"
+      },
+      {
+        "id": "en.n2.c65.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la petición: Could I ___ this ticket?"
+        },
+        "answer": {
+          "text": "change",
+          "accepted": [
+            "change"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-service-conversation"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could I se completa con el verbo base change. En el primer espacio, la respuesta es «change»."
+          },
+          "hint": {
+            "es": "Completa solo la palabra o fragmento ausente."
+          },
+          "text": "Completa la petición: Could I ___ this ticket?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:28e8d9c9de406a31f2ae2bfd15548b898bbe3814d6723055224466ab2789ad6d"
+      },
+      {
+        "id": "en.n2.c65.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el permiso para ver el recibo."
+        },
+        "answer": {
+          "text": "May I see your receipt?",
+          "tokens": [
+            "May",
+            "I",
+            "see",
+            "your",
+            "receipt?"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-service-conversation"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "May I see pide permiso formalmente. En el primer orden, la respuesta es «May I see your receipt?»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después el verbo modal."
+          },
+          "text": "Ordena el permiso para ver el recibo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6de8d7db4f10574bd147f60e48d24f1be1866a83ad3ba033be61215c557c764a"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c65.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una petición para explicar el ticket de servicio."
+        },
+        "answer": {
+          "text": "Could you explain this service ticket, please?",
+          "accepted": [
+            "Could you explain this service ticket, please?",
+            "Can you explain this service ticket, please?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you explain y can you explain piden a otra persona una acción concreta. En la primera producción, la respuesta es «Could you explain this service ticket, please?»."
+          },
+          "text": "¿Podría explicar este ticket de servicio, por favor?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c5eb546cfe36d2f612460c5c3faa4d3d3bcbe87aec8b3872083679b5fe65068a"
+      },
+      {
+        "id": "en.n2.c65.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el ofrecimiento del empleado."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Shall I call a colleague?"
+          },
+          {
+            "text": "Shall I calls a colleague?"
+          },
+          {
+            "text": "Call I shall a colleague?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I call ofrece una acción con verbo base. En el primer audio, la respuesta es «Shall I call a colleague?»."
+          },
+          "audio": "Shall I call a colleague?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:28ad605c380287f72c5eb782ccba443a0b7d89259a8a4951ad7da1c7e5ae7bcd"
+      },
+      {
+        "id": "en.n2.c65.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos palabras del servicio."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "ticket",
+              {
+                "es": "billete"
+              }
+            ],
+            [
+              "counter",
+              {
+                "es": "mostrador"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Ticket y counter aparecen en una atención al cliente. En el primer grupo léxico, la respuesta es «ticket / counter»."
+          },
+          "pairs": [
+            [
+              "ticket",
+              {
+                "es": "billete"
+              }
+            ],
+            [
+              "counter",
+              {
+                "es": "mostrador"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e474822d3837a27f008bee767c81047e3accea4d7f4a1d1a2148a3cba4f5339c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c65.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la petición de cambio del cliente."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "May I see this service ticket, please?"
+          },
+          {
+            "text": "Could change you this service ticket?"
+          },
+          {
+            "text": "Could you change this service ticket, please?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you change pide al empleado una acción; May I see pediría permiso y la segunda rompe el orden. En la primera evaluación, la respuesta es «Could you change this service ticket, please?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dfc576ab46a804a1179a5739abca5e0dd9521912a94dabeb1f746fecd1bbca30"
+      },
+      {
+        "id": "en.n2.c65.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el ofrecimiento: Shall I call a ___?"
+        },
+        "answer": {
+          "text": "colleague",
+          "accepted": [
+            "colleague"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I call ofrece llamar a un colleague. En el segundo espacio, la respuesta es «colleague»."
+          },
+          "text": "Completa el ofrecimiento: Shall I call a ___?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9685990bcb1b284df5e058314847b7e39ce2f5652fc67fa4aab1caa36bee16f"
+      },
+      {
+        "id": "en.n2.c65.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta un diálogo de corrección con aceptación y resolución."
+        },
+        "answer": {
+          "text": "Customer: Could you correct this service ticket, please? Clerk: May I see your receipt? Customer: Of course. Can I sit here? Clerk: Shall I call a colleague? Customer: Yes, please. Thank you. That solves my problem.",
+          "accepted": [
+            "Customer: Could you correct this service ticket, please? Clerk: May I see your receipt? Customer: Of course. Can I sit here? Clerk: Shall I call a colleague? Customer: Yes, please. Thank you. That solves my problem.",
+            "Customer: Can you correct this service ticket, please? Clerk: Can I see your receipt? Customer: Certainly. May I sit here? Clerk: Can I call a colleague? Customer: Yes, please. Thanks. That solves my problem."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-could-requests",
+          "n2-may-can-permission",
+          "n2-can-shall-offers",
+          "n2-polite-responses",
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Este escenario distinto conserva roles, petición, permiso, respuesta cortés, ofrecimiento aceptado y resolución. En la producción acumulativa, la respuesta es «Customer: Could you correct this service ticket, please? Clerk: May I see your receipt? Customer: Of course. Can I sit here? Clerk: Shall I call a colleague? Customer: Yes, please. Thank you. That solves my problem.»."
+          },
+          "text": "Cliente: ¿Podrías corregir este ticket de servicio, por favor? Empleado: ¿Puedo ver tu recibo? Cliente: Claro. ¿Puedo sentarme aquí? Empleado: ¿Llamo a un colega? Cliente: Sí, por favor. Gracias. Eso resuelve mi problema."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1b656fd3baaee76321449069290e3cb1307237ed6e1300a7ae1a9065cd8fa0ca"
+      },
+      {
+        "id": "en.n2.c65.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el cierre del problema."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Thank you. That solve my problem."
+          },
+          {
+            "text": "Thank you. That solves my problem."
+          },
+          {
+            "text": "Thank you. Solves that my problem."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "That solves my problem cierra la atención con claridad. En el audio evaluado, la respuesta es «Thank you. That solves my problem.»."
+          },
+          "audio": "Thank you. That solves my problem.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:293f44d8b6a09be403e255ae8803ead9c7b6301525b907fb0a13b18fc1b6ec41"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c65.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos funciones del diálogo de servicio."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Could you explain this service ticket?",
+              {
+                "es": "petición"
+              }
+            ],
+            [
+              "Can I wait here?",
+              {
+                "es": "permiso"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Could you explain pide una acción y Can I wait solicita permiso. En el segundo grupo léxico, la respuesta es «request / permission»."
+          },
+          "pairs": [
+            [
+              "Could you explain this service ticket?",
+              {
+                "es": "petición"
+              }
+            ],
+            [
+              "Can I wait here?",
+              {
+                "es": "permiso"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:44cd8ec44b6a09dbf76daceef9a02aa33098cd47bafd9a6a98a46bb1dc000046"
+      },
+      {
+        "id": "en.n2.c65.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el ofrecimiento: Can I ___ a colleague?"
+        },
+        "answer": {
+          "text": "call",
+          "accepted": [
+            "call"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I call ofrece una acción para resolver el servicio. En el repaso de ofrecimiento, la respuesta es «call»."
+          },
+          "text": "Completa el ofrecimiento: Can I ___ a colleague?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d10404511961a2fc31330dc4a04ef3033a9132cef91a9bef2d793c0e15c40c55"
+      },
+      {
+        "id": "en.n2.c65.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta un diálogo de impresión con aceptación y resolución."
+        },
+        "answer": {
+          "text": "Customer: Can you print this service ticket, please? Clerk: Can I check your order? Customer: Certainly. May I wait here? Clerk: Can I call a manager? Customer: Yes, please. Thanks, my problem is solved.",
+          "accepted": [
+            "Customer: Can you print this service ticket, please? Clerk: Can I check your order? Customer: Certainly. May I wait here? Clerk: Can I call a manager? Customer: Yes, please. Thanks, my problem is solved.",
+            "Customer: Could you print this service ticket, please? Clerk: May I check your order? Customer: Of course. Can I wait here? Clerk: Shall I call a manager? Customer: Yes, please. Thank you, my problem is solved."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-service-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Este tercer escenario conserva roles, petición, permiso, respuesta cortés, ofrecimiento aceptado y resolución. En la producción de repaso, la respuesta es «Customer: Can you print this service ticket, please? Clerk: Can I check your order? Customer: Certainly. May I wait here? Clerk: Can I call a manager? Customer: Yes, please. Thanks, my problem is solved.»."
+          },
+          "text": "Cliente: ¿Puedes imprimir este ticket de servicio? Empleado: ¿Puedo revisar tu pedido? Cliente: Claro. ¿Puedo esperar aquí? Empleado: ¿Puedo llamar a un gerente? Cliente: Sí, por favor. Gracias, mi problema está resuelto."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bfe8a44fb3e190e583cc063f121c118a62676f144152a3047996e0372d0e7d0e"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c65.e01": {
+      "reteach": "en.n2.class-65.t02",
+      "review": "en.n2.c65.r01"
+    },
+    "en.n2.c65.e02": {
+      "reteach": "en.n2.class-65.t04",
+      "review": "en.n2.c65.r02"
+    },
+    "en.n2.c65.e03": {
+      "reteach": "en.n2.class-65.t05",
+      "review": "en.n2.c65.r03"
+    },
+    "en.n2.c65.e04": {
+      "reteach": "en.n2.class-65.t05",
+      "review": "en.n2.c65.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n2-can-could-requests",
+    "n2-may-can-permission",
+    "n2-can-shall-offers",
+    "n2-polite-responses",
+    "n2-service-conversation"
+  ]
+}

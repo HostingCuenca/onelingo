@@ -1,0 +1,710 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "vocabularyDeclarations": "exhaustive"
+  },
+  "id": "en.n1.class-39",
+  "title": {
+    "en": "Place and time in a sentence",
+    "es": "Lugar y tiempo en la oración"
+  },
+  "concepts": [
+    "routine-place-time-order"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n1.class-38"
+  ],
+  "usesVocabulary": [
+    "I",
+    "you",
+    "we",
+    "they",
+    "study",
+    "English",
+    "play",
+    "soccer",
+    "work",
+    "drink",
+    "water",
+    "at",
+    "the",
+    "home",
+    "school",
+    "office",
+    "every day"
+  ],
+  "usesPatterns": [
+    "routine-place-time-order",
+    "subject-verb-object-order",
+    "present-simple-base-pronouns",
+    "routine-verbs"
+  ],
+  "objectives": {
+    "es": [
+      "Colocar el lugar después del objeto.",
+      "Colocar every day al final de la oración."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "at",
+      "es": "en"
+    },
+    {
+      "en": "home",
+      "es": "casa"
+    },
+    {
+      "en": "school",
+      "es": "escuela"
+    },
+    {
+      "en": "office",
+      "es": "oficina"
+    },
+    {
+      "en": "every day",
+      "es": "todos los días"
+    },
+    {
+      "en": "work",
+      "es": "trabajar"
+    },
+    {
+      "en": "water",
+      "es": "agua"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n1.class-39.t01",
+      "en": "I study English at home.",
+      "es": "Estudio inglés en casa.",
+      "explanationEs": "El lugar va después del objeto.",
+      "segments": [
+        {
+          "en": "I study English",
+          "es": "Estudio inglés"
+        },
+        {
+          "en": "at home.",
+          "es": "en casa."
+        }
+      ],
+      "audioText": "I study English at home.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-39.t02",
+      "en": "We play soccer at school.",
+      "es": "Jugamos fútbol en la escuela.",
+      "explanationEs": "At school expresa el lugar.",
+      "segments": [
+        {
+          "en": "We play soccer",
+          "es": "Jugamos fútbol"
+        },
+        {
+          "en": "at school.",
+          "es": "en la escuela."
+        }
+      ],
+      "audioText": "We play soccer at school.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-39.t03",
+      "en": "They work at the office.",
+      "es": "Trabajan en la oficina.",
+      "explanationEs": "At the office va al final si no hay tiempo.",
+      "segments": [
+        {
+          "en": "They work",
+          "es": "Trabajan"
+        },
+        {
+          "en": "at the office.",
+          "es": "en la oficina."
+        }
+      ],
+      "audioText": "They work at the office.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-39.t04",
+      "en": "You drink water every day.",
+      "es": "Bebes agua todos los días.",
+      "explanationEs": "Every day expresa tiempo y va al final.",
+      "segments": [
+        {
+          "en": "You drink water",
+          "es": "Bebes agua"
+        },
+        {
+          "en": "every day.",
+          "es": "todos los días."
+        }
+      ],
+      "audioText": "You drink water every day.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-39.t05",
+      "en": "I study English at home every day.",
+      "es": "Estudio inglés en casa todos los días.",
+      "explanationEs": "Cuando aparecen ambos, lugar precede a tiempo.",
+      "segments": [
+        {
+          "en": "I study English",
+          "es": "Estudio inglés"
+        },
+        {
+          "en": "at home every day.",
+          "es": "en casa todos los días."
+        }
+      ],
+      "audioText": "I study English at home every day.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n1.c39.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el orden correcto."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I study English at home."
+          },
+          {
+            "text": "I at home study English."
+          }
+        ],
+        "teaches": [
+          "routine-place-time-order"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "At home va después del objeto."
+          },
+          "hint": {
+            "es": "Quién + verbo + qué + dónde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:db14a6e9c2085603a27896aa3372900e7e4cd01d09a985e8342ce3e5fbab3267"
+      },
+      {
+        "id": "en.n1.c39.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: We play soccer ___ school."
+        },
+        "answer": {
+          "text": "at",
+          "accepted": [
+            "at"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "routine-place-time-order"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La expresión es at school."
+          },
+          "hint": {
+            "es": "Usa at."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:90616471f80e228a96f3eeb42677562d34498ae1c20c71c1492320368b54036b"
+      },
+      {
+        "id": "en.n1.c39.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la frase con lugar."
+        },
+        "answer": {
+          "text": "They work at the office.",
+          "tokens": [
+            "They",
+            "work",
+            "at",
+            "the",
+            "office."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "routine-place-time-order"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El lugar va después del verbo."
+          },
+          "hint": {
+            "es": "Empieza con They."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0ffd7da7d0f443cec914f305008a46b124a05dd2eeaa273e3b130f1b581bd55"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n1.c39.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase con el tiempo al final."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "You drink water every day."
+          },
+          {
+            "text": "Every day you water drink."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Every day va al final."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:55ba981195e5c8aa8a1fb34e2ce30930d62dc0b901ab108f4d36faeffee1ed57"
+      },
+      {
+        "id": "en.n1.c39.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: I study English at ___."
+        },
+        "answer": {
+          "text": "home",
+          "accepted": [
+            "home"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "At home significa en casa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4fe7495bc09b0a3d3ee4c0e92de0e6bd0c0fb35f398e75c484ff25d58ecca619"
+      },
+      {
+        "id": "en.n1.c39.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena lugar y tiempo."
+        },
+        "answer": {
+          "text": "We play soccer at school every day.",
+          "tokens": [
+            "We",
+            "play",
+            "soccer",
+            "at",
+            "school",
+            "every",
+            "day."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Lugar antes de tiempo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9d5977785f4714bc97db5098477c8d5d0695d2c75be220f1a10e6b28ffe730a3"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n1.c39.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige «Estudiamos inglés en casa»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We study English at home."
+          },
+          {
+            "text": "We study at home English."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "English va antes de at home."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e009ab7c7ab6c0479d4890b5491b24f46b15ebb102734e304ec643b19e512bf8"
+      },
+      {
+        "id": "en.n1.c39.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: They work at the ___."
+        },
+        "answer": {
+          "text": "office",
+          "accepted": [
+            "office"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "At the office significa en la oficina."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:17793af512ca2e7f6b3195b2284fc05429369b21382581d3163ab4faa7cf0269"
+      },
+      {
+        "id": "en.n1.c39.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena con tiempo al final."
+        },
+        "answer": {
+          "text": "They drink water every day.",
+          "tokens": [
+            "They",
+            "drink",
+            "water",
+            "every",
+            "day."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Every day ocupa la posición final."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e2e149f7973dfde1d82de4c984ce8267e7786b797ac233c0dcac70d43e372c72"
+      },
+      {
+        "id": "en.n1.c39.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la oración oída."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They play soccer at school."
+          },
+          {
+            "text": "They play soccer at home."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye at school."
+          },
+          "audio": "They play soccer at school.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7f943b4d06e14c8eb8f791561ca0bf21c9591dc418923e9abd93f22ddf9f4ce9"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n1.c39.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada lugar con su significado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "at the office",
+              {
+                "es": "en la oficina"
+              }
+            ],
+            [
+              "at school",
+              {
+                "es": "en la escuela"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Ambas expresiones usan at."
+          },
+          "pairs": [
+            [
+              "at the office",
+              {
+                "es": "en la oficina"
+              }
+            ],
+            [
+              "at school",
+              {
+                "es": "en la escuela"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d3a19436b11405a48fc5ac0871501da62e51f7d9bcbb2b691cb315f6abba6502"
+      },
+      {
+        "id": "en.n1.c39.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: We work at ___."
+        },
+        "answer": {
+          "text": "home",
+          "accepted": [
+            "home"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "At home significa en casa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9836453d68ac80d7d5aa24cba9c8bb88c93f9df19d621deb97026c97694394e8"
+      },
+      {
+        "id": "en.n1.c39.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena lugar y tiempo."
+        },
+        "answer": {
+          "text": "I work at home every day.",
+          "tokens": [
+            "I",
+            "work",
+            "at",
+            "home",
+            "every",
+            "day."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "routine-place-time-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Every day va al final."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:96edc8601a2af185b7ca161e8cb5fbb6d99c258f9b1086fd9fbc0a83eb76e19b"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n1.c39.e01": {
+      "reteach": "en.n1.class-39.t01",
+      "review": "en.n1.c39.r01"
+    },
+    "en.n1.c39.e02": {
+      "reteach": "en.n1.class-39.t02",
+      "review": "en.n1.c39.r02"
+    },
+    "en.n1.c39.e03": {
+      "reteach": "en.n1.class-39.t03",
+      "review": "en.n1.c39.r03"
+    },
+    "en.n1.c39.e04": {
+      "reteach": "en.n1.class-39.t04",
+      "review": "en.n1.c39.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

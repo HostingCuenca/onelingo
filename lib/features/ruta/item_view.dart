@@ -8,21 +8,18 @@ import '../../core/aprendizaje/modelos.dart';
 import '../../core/efectos.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
-import '../../shared/widgets/primary_button.dart';
+import '../../shared/widgets/widgets.dart';
 import 'opcion_respuesta.dart';
 
 /// Reproduce un texto del idioma meta en su idioma: voz de la nube con el
 /// idioma forzado y, para sílabas sueltas no latinas o sin sesión, la voz
 /// nativa del dispositivo.
-Future<void> escucharTexto(
-  BuildContext context,
-  String texto,
-  String idioma,
-) => Voz.instancia.hablar(
-  texto,
-  idioma,
-  sistema: mejorConVozDelSistema(texto, idioma),
-);
+Future<void> escucharTexto(BuildContext context, String texto, String idioma) =>
+    Voz.instancia.hablar(
+      texto,
+      idioma,
+      sistema: mejorConVozDelSistema(texto, idioma),
+    );
 
 /// Botón de audio reutilizable.
 class BotonAudio extends StatelessWidget {
@@ -87,6 +84,10 @@ class _ItemViewState extends State<ItemView> {
   int? elegido;
   final orden = <int>[];
   final escrito = TextEditingController();
+  late final List<TextEditingController> escritosPartes = [
+    for (var i = 0; i < widget.item.textosPartes.length; i++)
+      TextEditingController(),
+  ];
   String? opcionCompletar;
   bool? correcta;
   bool verPista = false;
@@ -94,8 +95,10 @@ class _ItemViewState extends State<ItemView> {
   int? izquierda;
   final emparejados = <int>{};
   int errores = 0;
-  late final List<int> derecha = List.generate(widget.item.pares.length, (i) => i)
-    ..shuffle();
+  late final List<int> derecha = List.generate(
+    widget.item.pares.length,
+    (i) => i,
+  )..shuffle();
 
   /// Las opciones se muestran barajadas para que la correcta no tenga una
   /// posición fija; la corrección usa siempre el índice original.
@@ -110,6 +113,9 @@ class _ItemViewState extends State<ItemView> {
   @override
   void dispose() {
     escrito.dispose();
+    for (final controller in escritosPartes) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -117,6 +123,9 @@ class _ItemViewState extends State<ItemView> {
     elegido = null;
     orden.clear();
     escrito.clear();
+    for (final controller in escritosPartes) {
+      controller.clear();
+    }
     opcionCompletar = null;
     correcta = null;
     izquierda = null;
@@ -128,16 +137,59 @@ class _ItemViewState extends State<ItemView> {
     FormatoItem.elegir || FormatoItem.escuchar => '${elegido ?? ''}',
     FormatoItem.ordenar => [for (final i in orden) item.tokens[i]].join(' '),
     FormatoItem.completar =>
-      item.opciones.isNotEmpty ? (opcionCompletar ?? '') : escrito.text,
+      esCompletarMultipartes
+          ? escritosPartes.map((controller) => controller.text).join(' | ')
+          : item.opciones.isNotEmpty
+          ? (opcionCompletar ?? '')
+          : escrito.text,
     FormatoItem.escribir => escrito.text,
-    FormatoItem.relacionar => errores == 0 ? 'ok' : 'errores:$errores',
+    FormatoItem.relacionar => relacionAprobada ? 'ok' : 'errores:$errores',
   };
+
+  bool get esCompletarMultipartes =>
+      item.textosPartes.isNotEmpty &&
+      item.textosPartes.length == item.respuestasPartes.length;
+
+  bool get completarMultipartesAprobado {
+    if (!esCompletarMultipartes) return false;
+    final partesCorrectas = <bool>[];
+    for (var i = 0; i < escritosPartes.length; i++) {
+      final dada = normalizar(escritosPartes[i].text);
+      partesCorrectas.add(
+        dada.isNotEmpty &&
+            item.respuestasPartes[i].any(
+              (respuesta) => normalizar(respuesta) == dada,
+            ),
+      );
+    }
+    final partes = item.partesPuntuables ?? item.respuestasPartes.length;
+    final minimo = item.minimoCorrectas ?? partes;
+    final obligatoriasCorrectas = item.partesObligatorias.every(
+      (index) =>
+          index >= 0 &&
+          index < partesCorrectas.length &&
+          partesCorrectas[index],
+    );
+    return partesCorrectas.where((correcta) => correcta).length >= minimo &&
+        obligatoriasCorrectas;
+  }
+
+  bool get relacionAprobada {
+    final partes = item.partesPuntuables ?? item.pares.length;
+    final minimo = item.minimoCorrectas ?? partes;
+    final erroresPermitidos = (partes - minimo).clamp(0, partes);
+    return errores <= erroresPermitidos;
+  }
 
   bool get listo => switch (item.formato) {
     FormatoItem.elegir || FormatoItem.escuchar => elegido != null,
     FormatoItem.ordenar => orden.length == item.tokens.length,
     FormatoItem.completar =>
-      item.opciones.isNotEmpty
+      esCompletarMultipartes
+          ? escritosPartes.every(
+              (controller) => controller.text.trim().isNotEmpty,
+            )
+          : item.opciones.isNotEmpty
           ? opcionCompletar != null
           : escrito.text.trim().isNotEmpty,
     FormatoItem.escribir => escrito.text.trim().isNotEmpty,
@@ -147,15 +199,13 @@ class _ItemViewState extends State<ItemView> {
   void comprobar() {
     if (correcta != null || !listo) return;
     final respuesta = respuestaActual;
-    final ok = corregir(
-      item,
-      switch (item.formato) {
-        FormatoItem.elegir || FormatoItem.escuchar => elegido,
-        FormatoItem.relacionar => errores == 0,
-        _ => respuesta,
-      },
-      widget.idioma,
-    );
+    final ok = esCompletarMultipartes
+        ? completarMultipartesAprobado
+        : corregir(item, switch (item.formato) {
+            FormatoItem.elegir || FormatoItem.escuchar => elegido,
+            FormatoItem.relacionar => relacionAprobada,
+            _ => respuesta,
+          }, widget.idioma);
     setState(() => correcta = ok);
     unawaited(VozNube.instancia.parar().catchError((_) {}));
     ok ? Efectos.correcto() : Efectos.incorrecto();
@@ -182,7 +232,10 @@ class _ItemViewState extends State<ItemView> {
 
   String textoOpcion(Opcion o) => o.meta ?? t(o.apoyo);
 
-  Widget opcionBoton(String texto, bool seleccionada, VoidCallback? onTap, {
+  Widget opcionBoton(
+    String texto,
+    bool seleccionada,
+    VoidCallback? onTap, {
     bool? acierto,
     bool compacta = false,
   }) => OpcionRespuesta(
@@ -234,22 +287,44 @@ class _ItemViewState extends State<ItemView> {
                 grande: true,
               ),
             ),
+          if (item.audio == null && item.texto?.trim().isNotEmpty == true)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Tarjeta(
+                color: OL.moradoSuave,
+                sombra: false,
+                child: Text(
+                  item.texto!,
+                  style: const TextStyle(fontSize: 17, height: 1.4),
+                ),
+              ),
+            ),
           if (item.pregunta != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      item.pregunta!,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w900,
+              child: Tarjeta(
+                sombra: false,
+                padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
+                onTap: () =>
+                    escucharTexto(context, item.pregunta!, widget.idioma),
+                etiquetaSemantica: 'Escuchar ${item.pregunta!}',
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        item.pregunta!,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
-                  ),
-                  BotonAudio(texto: item.pregunta!, idioma: widget.idioma),
-                ],
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Icon(Icons.volume_up_outlined, color: OL.morado),
+                    ),
+                  ],
+                ),
               ),
             ),
           if (item.preguntaApoyo != null)
@@ -317,6 +392,48 @@ class _ItemViewState extends State<ItemView> {
           ),
         ];
       case FormatoItem.completar:
+        if (esCompletarMultipartes) {
+          return [
+            if (item.texto?.trim().isNotEmpty == true)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Tarjeta(
+                  color: OL.moradoSuave,
+                  sombra: false,
+                  child: Text(
+                    item.texto!,
+                    style: const TextStyle(fontSize: 17, height: 1.4),
+                  ),
+                ),
+              ),
+            for (var i = 0; i < item.textosPartes.length; i++) ...[
+              Text(
+                '${i + 1}. ${item.textosPartes[i]}',
+                style: const TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: escritosPartes[i],
+                enabled: !bloqueado,
+                autocorrect: false,
+                enableSuggestions: false,
+                textCapitalization: TextCapitalization.none,
+                decoration: InputDecoration(
+                  hintText: 'Respuesta ${i + 1}',
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (_) => setState(() {}),
+                onSubmitted: (_) {
+                  if (listo) comprobar();
+                },
+              ),
+              const SizedBox(height: 16),
+            ],
+          ];
+        }
         return [
           Text(
             (item.texto ?? '').replaceAll(
@@ -340,6 +457,18 @@ class _ItemViewState extends State<ItemView> {
         ];
       case FormatoItem.escribir:
         return [
+          if (item.audio == null && item.texto?.trim().isNotEmpty == true)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Tarjeta(
+                color: OL.moradoSuave,
+                sombra: false,
+                child: Text(
+                  item.texto!,
+                  style: const TextStyle(fontSize: 17, height: 1.4),
+                ),
+              ),
+            ),
           if (item.audio != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -354,12 +483,27 @@ class _ItemViewState extends State<ItemView> {
         ];
       case FormatoItem.relacionar:
         return [
+          if (item.texto?.trim().isNotEmpty == true)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Tarjeta(
+                color: OL.moradoSuave,
+                sombra: false,
+                child: Text(
+                  item.texto!,
+                  style: const TextStyle(fontSize: 17, height: 1.4),
+                ),
+              ),
+            ),
           if (errores > 0 && !bloqueado)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 'Esa pareja no coincide. Prueba con otra.',
-                style: const TextStyle(color: OL.rojo, fontWeight: FontWeight.w700),
+                style: const TextStyle(
+                  color: OL.rojo,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           Row(
@@ -421,6 +565,25 @@ class _ItemViewState extends State<ItemView> {
           t(item.consigna),
           style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800),
         ),
+        if (item.imagen != null) ...[
+          const SizedBox(height: 14),
+          Semantics(
+            image: true,
+            label: item.imagenAlt,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 280),
+                child: Image.asset(
+                  item.imagen!,
+                  fit: BoxFit.contain,
+                  semanticLabel: item.imagenAlt,
+                  excludeFromSemantics: true,
+                ),
+              ),
+            ),
+          ),
+        ],
         const SizedBox(height: 16),
         ...cuerpo(),
         if (widget.guiada && item.pista != null && ok == null) ...[
@@ -433,7 +596,10 @@ class _ItemViewState extends State<ItemView> {
             ),
           ),
           if (verPista)
-            Text(t(item.pista), style: const TextStyle(fontSize: 17, height: 1.4)),
+            Text(
+              t(item.pista),
+              style: const TextStyle(fontSize: 17, height: 1.4),
+            ),
         ],
         if (ok != null)
           FeedbackDock(
@@ -443,7 +609,8 @@ class _ItemViewState extends State<ItemView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (ok && soloFallanTildes(item, respuestaActual, widget.idioma))
+                  if (ok &&
+                      soloFallanTildes(item, respuestaActual, widget.idioma))
                     Padding(
                       padding: const EdgeInsets.only(bottom: 6),
                       child: Text(

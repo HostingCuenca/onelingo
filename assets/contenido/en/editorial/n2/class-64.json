@@ -1,0 +1,756 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-64",
+  "phase": "production",
+  "title": {
+    "en": "Respond politely",
+    "es": "Responder con cortesía"
+  },
+  "concepts": [
+    "n2-polite-responses"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-63"
+  ],
+  "usesVocabulary": [
+    "certainly",
+    "course",
+    "sorry",
+    "right now",
+    "thanks",
+    "available",
+    "problem",
+    "request"
+  ],
+  "usesPatterns": [
+    "n2-polite-responses"
+  ],
+  "objectives": {
+    "es": [
+      "Comprender respuestas afirmativas y negativas corteses.",
+      "Relacionar cortesía con aceptación o rechazo claro.",
+      "Responder a una petición sin ocultar la decisión."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "certainly",
+      "es": "por supuesto"
+    },
+    {
+      "en": "course",
+      "es": "supuesto"
+    },
+    {
+      "en": "sorry",
+      "es": "lo siento"
+    },
+    {
+      "en": "right now",
+      "es": "ahora mismo"
+    },
+    {
+      "en": "thanks",
+      "es": "gracias"
+    },
+    {
+      "en": "available",
+      "es": "disponible"
+    },
+    {
+      "en": "problem",
+      "es": "problema"
+    },
+    {
+      "en": "request",
+      "es": "petición"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-64.t01",
+      "en": "Yes, of course. I can help you.",
+      "es": "Sí, por supuesto. Puedo ayudarte.",
+      "explanationEs": "Of course acepta una petición con cortesía.",
+      "segments": [
+        {
+          "en": "Yes, of course.",
+          "es": "Sí, por"
+        },
+        {
+          "en": "I can help you.",
+          "es": "supuesto. Puedo ayudarte."
+        }
+      ],
+      "audioText": "Yes, of course. I can help you.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-polite-responses"
+    },
+    {
+      "id": "en.n2.class-64.t02",
+      "en": "Certainly, I can explain the form.",
+      "es": "Por supuesto, puedo explicar el formulario.",
+      "explanationEs": "Certainly confirma la ayuda de manera formal.",
+      "segments": [
+        {
+          "en": "Certainly, I can",
+          "es": "Por supuesto, puedo"
+        },
+        {
+          "en": "explain the form.",
+          "es": "explicar el formulario."
+        }
+      ],
+      "audioText": "Certainly, I can explain the form.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-polite-responses"
+    },
+    {
+      "id": "en.n2.class-64.t03",
+      "en": "Sorry, I can't help right now.",
+      "es": "Lo siento, no puedo ayudar ahora mismo.",
+      "explanationEs": "Sorry y can't rechazan con una explicación breve.",
+      "segments": [
+        {
+          "en": "Sorry, I can't",
+          "es": "Lo siento, no"
+        },
+        {
+          "en": "help right now.",
+          "es": "puedo ayudar ahora mismo."
+        }
+      ],
+      "audioText": "Sorry, I can't help right now.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-polite-responses"
+    },
+    {
+      "id": "en.n2.class-64.t04",
+      "en": "Thanks for asking, but I am not available.",
+      "es": "Gracias por preguntar, pero no estoy disponible.",
+      "explanationEs": "Thanks suaviza una respuesta negativa.",
+      "segments": [
+        {
+          "en": "Thanks for asking, but",
+          "es": "Gracias por preguntar,"
+        },
+        {
+          "en": "I am not available.",
+          "es": "pero no estoy disponible."
+        }
+      ],
+      "audioText": "Thanks for asking, but I am not available.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-polite-responses"
+    },
+    {
+      "id": "en.n2.class-64.t05",
+      "en": "A polite response answers the request clearly.",
+      "es": "Una respuesta cortés contesta la petición con claridad.",
+      "explanationEs": "La cortesía no debe ocultar si se acepta o rechaza.",
+      "segments": [
+        {
+          "en": "A polite response",
+          "es": "Una respuesta cortés contesta"
+        },
+        {
+          "en": "answers the request clearly.",
+          "es": "la petición con claridad."
+        }
+      ],
+      "audioText": "A polite response answers the request clearly.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-polite-responses"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c64.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta cortés que acepta ayuda."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Yes, of course. I can help you."
+          },
+          {
+            "text": "Yes, of course. I can helps you."
+          },
+          {
+            "text": "Of course I helping you."
+          }
+        ],
+        "teaches": [
+          "n2-polite-responses"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Of course acepta y can help mantiene el verbo base. En la elección guiada, la respuesta es «Yes, of course. I can help you.»."
+          },
+          "hint": {
+            "es": "Observa quién pide, permite, ofrece o responde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1b6460ca23156d4e61fcbdbe0f41fb5f6d9cdcbd4b61ea63fed040b034e5a053"
+      },
+      {
+        "id": "en.n2.c64.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la respuesta: Sorry, I ___ help right now."
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-polite-responses"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can't expresa una negativa cortés con can. En el primer espacio, la respuesta es «can't»."
+          },
+          "hint": {
+            "es": "Completa solo la palabra o fragmento ausente."
+          },
+          "text": "Completa la respuesta: Sorry, I ___ help right now."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2c499ce2a1993b6089d8092c47b86cad8a1ec5c0468beb06ccb3923d709d003b"
+      },
+      {
+        "id": "en.n2.c64.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la respuesta de agradecimiento."
+        },
+        "answer": {
+          "text": "Thanks for asking, but I am not available.",
+          "tokens": [
+            "Thanks",
+            "for",
+            "asking,",
+            "but",
+            "I",
+            "am",
+            "not",
+            "available."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-polite-responses"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Thanks for asking agradece antes de explicar la negativa. En el primer orden, la respuesta es «Thanks for asking, but I am not available.»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después el verbo modal."
+          },
+          "text": "Ordena la respuesta de agradecimiento."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f29d2f513f4d6085b0440b5c97eabbd8c17effa1eeac11c0a1eea3eb87234554"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c64.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: Por supuesto, puedo explicarlo."
+        },
+        "answer": {
+          "text": "Certainly, I can explain it.",
+          "accepted": [
+            "Certainly, I can explain it.",
+            "Of course, I can explain it."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Certainly y of course aceptan la petición con cortesía. En la primera producción, la respuesta es «Certainly, I can explain it.»."
+          },
+          "text": "Por supuesto, puedo explicarlo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:972e4675b75e211e812aea8e2bce2a221ea003386531a60bf84036b1e9a858b2"
+      },
+      {
+        "id": "en.n2.c64.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la respuesta negativa cortés."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Sorry, I can't help right now."
+          },
+          {
+            "text": "Sorry, I can't helps right now."
+          },
+          {
+            "text": "Sorry, I not can help right now."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Sorry suaviza la negativa y can't va con help en forma base. En el primer audio, la respuesta es «Sorry, I can't help right now.»."
+          },
+          "audio": "Sorry, I can't help right now.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:220b7f084e7c00091b102303ecc2666a1589e7269907c1262b17aa895b50aa5e"
+      },
+      {
+        "id": "en.n2.c64.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos expresiones de cortesía."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "certainly",
+              {
+                "es": "por supuesto"
+              }
+            ],
+            [
+              "thanks",
+              {
+                "es": "gracias"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Certainly acepta; thanks agradece la petición. En el primer grupo léxico, la respuesta es «certainly / thanks»."
+          },
+          "pairs": [
+            [
+              "certainly",
+              {
+                "es": "por supuesto"
+              }
+            ],
+            [
+              "thanks",
+              {
+                "es": "gracias"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e9a83775cbd40c22b3c1ee075d64c395e00dff2dbcbee327535b75545ba945f8"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c64.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el rechazo realmente cortés."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I can't help you right now."
+          },
+          {
+            "text": "Certainly, I can help you."
+          },
+          {
+            "text": "Sorry, I can't help you right now."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Sorry suaviza el rechazo; la primera opción rechaza sin marcador de cortesía y certainly acepta. En la primera evaluación, la respuesta es «Sorry, I can't help you right now.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c0aa94a1f2cca497c248e7a43d7e1c71bd2ae55043ad52cc2c41f3eaf7716733"
+      },
+      {
+        "id": "en.n2.c64.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la aceptación: Yes, of ___ ."
+        },
+        "answer": {
+          "text": "course",
+          "accepted": [
+            "course"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Of course es una aceptación cortés. En el segundo espacio, la respuesta es «course»."
+          },
+          "text": "Completa la aceptación: Yes, of ___ ."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1e9428bf8724181ca7acc0d3db0f121fc68118370c76ef2ade9ec54e5ccc47ae"
+      },
+      {
+        "id": "en.n2.c64.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una respuesta cortés: No puedes ayudar ahora."
+        },
+        "answer": {
+          "text": "Sorry, I am not available right now.",
+          "accepted": [
+            "Sorry, I am not available right now.",
+            "Sorry, I am unavailable right now."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Sorry y not available explican una negativa cortés. En la producción evaluada, la respuesta es «Sorry, I am not available right now.»."
+          },
+          "text": "No puedes ayudar ahora."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a73a2e42cc2bd4e94d1a1538d3b07ebeaf4f72a5ebd5f6bc7568606c06d411d3"
+      },
+      {
+        "id": "en.n2.c64.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la respuesta formal afirmativa."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Certainly, I can explains the problem."
+          },
+          {
+            "text": "Certainly, I can explain the problem."
+          },
+          {
+            "text": "Certainly I explain can the problem."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Certainly acepta y can explain usa el verbo base. En el audio evaluado, la respuesta es «Certainly, I can explain the problem.»."
+          },
+          "audio": "Certainly, I can explain the problem.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2d07c5d4205ffc7101c306b5a1ef91b0426f4510cb4ad5d1f36630a176fdb7f9"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c64.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos aceptaciones corteses."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "course",
+              {
+                "es": "aceptación"
+              }
+            ],
+            [
+              "certainly",
+              {
+                "es": "afirmación formal"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Of course acepta y certainly confirma una respuesta afirmativa formal. En el segundo grupo léxico, la respuesta es «course / certainly»."
+          },
+          "pairs": [
+            [
+              "course",
+              {
+                "es": "aceptación"
+              }
+            ],
+            [
+              "certainly",
+              {
+                "es": "afirmación formal"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9ede57d8cf78d6e09dab2e56efbafae4da93d989a128a956c2193c82cd774a5"
+      },
+      {
+        "id": "en.n2.c64.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la disponibilidad: I am not ___ right now."
+        },
+        "answer": {
+          "text": "available",
+          "accepted": [
+            "available"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Available completa la idea de no estar disponible. En el repaso modal, la respuesta es «available»."
+          },
+          "text": "Completa la disponibilidad: I am not ___ right now."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7e1d0cff5d104b5e35ab2832c9b355d596949ea15fd6d3d2b3265f30fb5613b8"
+      },
+      {
+        "id": "en.n2.c64.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: Gracias por preguntar, no estoy disponible hoy."
+        },
+        "answer": {
+          "text": "Thanks for asking, but I am unavailable today.",
+          "accepted": [
+            "Thanks for asking, but I am unavailable today.",
+            "Thank you for asking, but I am unavailable today."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-polite-responses"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Thanks for asking suaviza la respuesta negativa y today la sitúa. En la producción de repaso, la respuesta es «Thanks for asking, but I am unavailable today.»."
+          },
+          "text": "Gracias por preguntar, no estoy disponible hoy."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d3c33e0973b7ab22ad51bb7601d05047edb102575486cfec8d9c67bb6833b1a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c64.e01": {
+      "reteach": "en.n2.class-64.t03",
+      "review": "en.n2.c64.r03"
+    },
+    "en.n2.c64.e02": {
+      "reteach": "en.n2.class-64.t01",
+      "review": "en.n2.c64.r01"
+    },
+    "en.n2.c64.e03": {
+      "reteach": "en.n2.class-64.t04",
+      "review": "en.n2.c64.r03"
+    },
+    "en.n2.c64.e04": {
+      "reteach": "en.n2.class-64.t02",
+      "review": "en.n2.c64.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

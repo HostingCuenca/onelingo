@@ -1,0 +1,754 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-62",
+  "phase": "form",
+  "title": {
+    "en": "May and can for permission",
+    "es": "May y can para permiso"
+  },
+  "concepts": [
+    "n2-may-can-permission"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-61"
+  ],
+  "usesVocabulary": [
+    "permission",
+    "phone",
+    "seat",
+    "enter",
+    "bring",
+    "visitor",
+    "museum",
+    "polite"
+  ],
+  "usesPatterns": [
+    "n2-may-can-permission"
+  ],
+  "objectives": {
+    "es": [
+      "Reconocer permisos con may y can en situaciones comunes.",
+      "Elegir may o can según el registro de la situación.",
+      "Pedir y conceder permiso con una fórmula completa."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "permission",
+      "es": "permiso"
+    },
+    {
+      "en": "phone",
+      "es": "teléfono"
+    },
+    {
+      "en": "seat",
+      "es": "asiento"
+    },
+    {
+      "en": "enter",
+      "es": "entrar"
+    },
+    {
+      "en": "bring",
+      "es": "traer"
+    },
+    {
+      "en": "visitor",
+      "es": "visitante"
+    },
+    {
+      "en": "museum",
+      "es": "museo"
+    },
+    {
+      "en": "polite",
+      "es": "cortés"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-62.t01",
+      "en": "May I use your phone, please?",
+      "es": "¿Puedo usar tu teléfono, por favor?",
+      "explanationEs": "May I pide permiso de manera formal.",
+      "segments": [
+        {
+          "en": "May I use",
+          "es": "¿Puedo usar tu"
+        },
+        {
+          "en": "your phone, please?",
+          "es": "teléfono, por favor?"
+        }
+      ],
+      "audioText": "May I use your phone, please?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-may-can-permission"
+    },
+    {
+      "id": "en.n2.class-62.t02",
+      "en": "Can I sit in this seat?",
+      "es": "¿Puedo sentarme en este asiento?",
+      "explanationEs": "Can I pide permiso en una situación cotidiana.",
+      "segments": [
+        {
+          "en": "Can I sit",
+          "es": "¿Puedo sentarme"
+        },
+        {
+          "en": "in this seat?",
+          "es": "en este asiento?"
+        }
+      ],
+      "audioText": "Can I sit in this seat?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-may-can-permission"
+    },
+    {
+      "id": "en.n2.class-62.t03",
+      "en": "You may enter the museum now.",
+      "es": "Puedes entrar al museo ahora.",
+      "explanationEs": "You may también concede permiso.",
+      "segments": [
+        {
+          "en": "You may enter",
+          "es": "Puedes entrar"
+        },
+        {
+          "en": "the museum now.",
+          "es": "al museo ahora."
+        }
+      ],
+      "audioText": "You may enter the museum now.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-may-can-permission"
+    },
+    {
+      "id": "en.n2.class-62.t04",
+      "en": "Can visitors bring a small bag?",
+      "es": "¿Pueden los visitantes traer una bolsa pequeña?",
+      "explanationEs": "Can pregunta por una regla o permiso general.",
+      "segments": [
+        {
+          "en": "Can visitors bring",
+          "es": "¿Pueden los visitantes"
+        },
+        {
+          "en": "a small bag?",
+          "es": "traer una bolsa pequeña?"
+        }
+      ],
+      "audioText": "Can visitors bring a small bag?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-may-can-permission"
+    },
+    {
+      "id": "en.n2.class-62.t05",
+      "en": "May sounds more polite than can for permission.",
+      "es": "May suena más cortés que can para pedir permiso.",
+      "explanationEs": "La elección depende del grado de cortesía.",
+      "segments": [
+        {
+          "en": "May sounds more polite",
+          "es": "May suena más cortés"
+        },
+        {
+          "en": "than can for permission.",
+          "es": "que can para pedir permiso."
+        }
+      ],
+      "audioText": "May sounds more polite than can for permission.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-may-can-permission"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c62.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el permiso formal para usar el teléfono."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "May I use your phone, please?"
+          },
+          {
+            "text": "May I uses your phone?"
+          },
+          {
+            "text": "May use I your phone?"
+          }
+        ],
+        "teaches": [
+          "n2-may-can-permission"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "May I use pide permiso formalmente y use queda en forma base. En la elección guiada, la respuesta es «May I use your phone, please?»."
+          },
+          "hint": {
+            "es": "Observa quién pide, permite, ofrece o responde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:658b8dfa573eed7de6604a309d8a68245c892fc12b7207de3cde5f308af9df95"
+      },
+      {
+        "id": "en.n2.c62.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el permiso cotidiano: Can I ___ here?"
+        },
+        "answer": {
+          "text": "sit",
+          "accepted": [
+            "sit"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-may-can-permission"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I va seguido del verbo base sit. En el primer espacio, la respuesta es «sit»."
+          },
+          "hint": {
+            "es": "Completa solo la palabra o fragmento ausente."
+          },
+          "text": "Completa el permiso cotidiano: Can I ___ here?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ecb033faa6a9d04f81e8503d0167c6517ecba2507ae1df8605ea2307221b03aa"
+      },
+      {
+        "id": "en.n2.c62.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el permiso para entrar al museo."
+        },
+        "answer": {
+          "text": "You may enter the museum now.",
+          "tokens": [
+            "You",
+            "may",
+            "enter",
+            "the",
+            "museum",
+            "now."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-may-can-permission"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "You may concede permiso antes del verbo enter. En el primer orden, la respuesta es «You may enter the museum now.»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después el verbo modal."
+          },
+          "text": "Ordena el permiso para entrar al museo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:195a1f7539b45b9418f9485b5be8dd10c6c97af21e5b176243afc832ec413f2e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c62.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Puedo traer una bolsa pequeña?"
+        },
+        "answer": {
+          "text": "Can I bring a small bag?",
+          "accepted": [
+            "Can I bring a small bag?",
+            "May I bring a small bag?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I y may I pueden pedir permiso; may es más formal. En la primera producción, la respuesta es «Can I bring a small bag?»."
+          },
+          "text": "¿Puedo traer una bolsa pequeña?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4d277debcd3e6b6f41ae4e0633b267b418fe4cd52d0596f4da28c990c442abf4"
+      },
+      {
+        "id": "en.n2.c62.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el permiso para sentarse."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "May I sit in this seat?"
+          },
+          {
+            "text": "May I sits in this seat?"
+          },
+          {
+            "text": "May sit I in this seat?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "May I sit mantiene el verbo base después de may. En el primer audio, la respuesta es «May I sit in this seat?»."
+          },
+          "audio": "May I sit in this seat?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b3b9e86bfb3fcf1da92fafd57ba0def72384ba5713a7cf13535eab8f52178357"
+      },
+      {
+        "id": "en.n2.c62.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos palabras sobre permiso."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "permission",
+              {
+                "es": "permiso"
+              }
+            ],
+            [
+              "visitor",
+              {
+                "es": "visitante"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Permission nombra la autorización y visitor a quien la pide. En el primer grupo léxico, la respuesta es «permission / visitor»."
+          },
+          "pairs": [
+            [
+              "permission",
+              {
+                "es": "permiso"
+              }
+            ],
+            [
+              "visitor",
+              {
+                "es": "visitante"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e383b31f72e8c9d2116de613f3ffcd7362f19b31ce6a51048c94dca5de98827a"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c62.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la pregunta formal para entrar al museo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Can I enters the museum?"
+          },
+          {
+            "text": "May I enter the museum, please?"
+          },
+          {
+            "text": "May enter I the museum?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "May I enter es la petición formal y usa verbo base. En la primera evaluación, la respuesta es «May I enter the museum, please?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7a20ae440c7dd81d7d6176072eafb2d99687ae7f659a9f1ad9e50e5e6cf51500"
+      },
+      {
+        "id": "en.n2.c62.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la regla: Can visitors ___ a small bag?"
+        },
+        "answer": {
+          "text": "bring",
+          "accepted": [
+            "bring"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can visitors va seguido del verbo base bring. En el segundo espacio, la respuesta es «bring»."
+          },
+          "text": "Completa la regla: Can visitors ___ a small bag?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:eaeae6d3b7688011022f96bb215eae7f3c85f4c2403398b547824c5ecf13b919"
+      },
+      {
+        "id": "en.n2.c62.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Puedo sentarme en este asiento, por favor?"
+        },
+        "answer": {
+          "text": "May I sit in this seat, please?",
+          "accepted": [
+            "May I sit in this seat, please?",
+            "Can I sit in this seat, please?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "May I sit pide permiso con un registro formal. En la producción evaluada, la respuesta es «May I sit in this seat, please?»."
+          },
+          "text": "¿Puedo sentarme en este asiento, por favor?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fa5e37addbbf8d55688509ac33f993d05788fcb337964e97e31f1c480b5f046f"
+      },
+      {
+        "id": "en.n2.c62.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el único permiso concedido."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Visitors must enter the museum now."
+          },
+          {
+            "text": "Visitors may enter the museum now."
+          },
+          {
+            "text": "Visitors may enters the museum now."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Visitors may enter concede permiso; must expresa obligación y enters rompe el verbo base. En el audio evaluado, la respuesta es «Visitors may enter the museum now.»."
+          },
+          "audio": "Visitors may enter the museum now.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f375a4a899bf3d049cba83823eb6369def3bf73bc485508174eee7d0ceeabdfd"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c62.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos palabras del museo."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "phone",
+              {
+                "es": "teléfono"
+              }
+            ],
+            [
+              "museum",
+              {
+                "es": "museo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Phone y museum forman contextos visibles de permiso. En el segundo grupo léxico, la respuesta es «phone / museum»."
+          },
+          "pairs": [
+            [
+              "phone",
+              {
+                "es": "teléfono"
+              }
+            ],
+            [
+              "museum",
+              {
+                "es": "museo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4bf237e67e1e51edd323949bdecc23629f039d3c2f605068c9c4584a6f18757b"
+      },
+      {
+        "id": "en.n2.c62.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el permiso: You may ___ now."
+        },
+        "answer": {
+          "text": "enter",
+          "accepted": [
+            "enter"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "You may se completa con el verbo base enter. En el repaso modal, la respuesta es «enter»."
+          },
+          "text": "Completa el permiso: You may ___ now."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e9a379cc5b942e095bb623d29b58371d2f7f59bd7e4256715c6c51493ea0bf2a"
+      },
+      {
+        "id": "en.n2.c62.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Pueden los visitantes traer bolsas?"
+        },
+        "answer": {
+          "text": "Can visitors bring bags?",
+          "accepted": [
+            "Can visitors bring bags?",
+            "May visitors bring bags?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-may-can-permission"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can visitors bring pregunta por una regla general. En la producción de repaso, la respuesta es «Can visitors bring bags?»."
+          },
+          "text": "¿Pueden los visitantes traer bolsas?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e59dae45736f6bb36c3d194f768718b0a9eaa76c6c8c2d20ce58e0f39f350dc1"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c62.e01": {
+      "reteach": "en.n2.class-62.t01",
+      "review": "en.n2.c62.r03"
+    },
+    "en.n2.c62.e02": {
+      "reteach": "en.n2.class-62.t04",
+      "review": "en.n2.c62.r01"
+    },
+    "en.n2.c62.e03": {
+      "reteach": "en.n2.class-62.t02",
+      "review": "en.n2.c62.r03"
+    },
+    "en.n2.c62.e04": {
+      "reteach": "en.n2.class-62.t03",
+      "review": "en.n2.c62.r02"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,852 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-19",
+  "title": {
+    "en": "Coordinate a plan",
+    "es": "Coordinar un plan"
+  },
+  "objectives": {
+    "es": [
+      "Proponer un arreglo con responsables y plazos.",
+      "Añadir una alternativa viable a un plan futuro."
+    ]
+  },
+  "concepts": [
+    "n3-future-coordination-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-18"
+  ],
+  "usesVocabulary": [
+    "deadline",
+    "task",
+    "confirm",
+    "alternative",
+    "covered",
+    "message"
+  ],
+  "usesPatterns": [
+    "n3-future-coordination-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "deadline",
+      "es": "plazo"
+    },
+    {
+      "en": "task",
+      "es": "tarea"
+    },
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    },
+    {
+      "en": "alternative",
+      "es": "alternativa"
+    },
+    {
+      "en": "covered",
+      "es": "cubierto"
+    },
+    {
+      "en": "message",
+      "es": "mensaje"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-19.t01",
+      "en": "Lena will send the map before the deadline at noon.",
+      "es": "Lena enviará el mapa antes del plazo del mediodía.",
+      "explanationEs": "La coordinación nombra responsable, acción y plazo.",
+      "segments": [
+        {
+          "en": "Lena will send the map",
+          "es": "Lena enviará el mapa"
+        },
+        {
+          "en": "before the deadline at noon.",
+          "es": "antes del plazo del mediodía."
+        }
+      ],
+      "audioText": "Lena will send the map before the deadline at noon.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-4"
+    },
+    {
+      "id": "en.n3.class-19.t02",
+      "en": "If rain starts, we will use the covered patio.",
+      "es": "Si empieza la lluvia, usaremos el patio cubierto.",
+      "explanationEs": "If introduce una alternativa viable ante una contingencia.",
+      "segments": [
+        {
+          "en": "If rain starts, we",
+          "es": "Si empieza la lluvia,"
+        },
+        {
+          "en": "will use the covered patio.",
+          "es": "usaremos el patio cubierto."
+        }
+      ],
+      "audioText": "If rain starts, we will use the covered patio.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-4"
+    },
+    {
+      "id": "en.n3.class-19.t03",
+      "en": "Please confirm your task before Thursday.",
+      "es": "Confirma tu tarea antes del jueves.",
+      "explanationEs": "Una confirmación cierra quién hará qué y cuándo.",
+      "segments": [
+        {
+          "en": "Please confirm your",
+          "es": "Confirma tu tarea"
+        },
+        {
+          "en": "task before Thursday.",
+          "es": "antes del jueves."
+        }
+      ],
+      "audioText": "Please confirm your task before Thursday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-4"
+    },
+    {
+      "id": "en.n3.class-19.t04",
+      "en": "Three people can share one task and a deadline.",
+      "es": "Tres personas pueden compartir una tarea y un plazo.",
+      "explanationEs": "La propuesta debe ser concreta y comprobable.",
+      "segments": [
+        {
+          "en": "Three people can share",
+          "es": "Tres personas pueden compartir"
+        },
+        {
+          "en": "one task and a deadline.",
+          "es": "una tarea y un plazo."
+        }
+      ],
+      "audioText": "Three people can share one task and a deadline.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-4"
+    },
+    {
+      "id": "en.n3.class-19.t05",
+      "en": "We will keep an alternative plan for bad weather.",
+      "es": "Mantendremos un plan alternativo para mal tiempo.",
+      "explanationEs": "Una alternativa permite renegociar sin perder el objetivo.",
+      "segments": [
+        {
+          "en": "We will keep an",
+          "es": "Mantendremos un plan"
+        },
+        {
+          "en": "alternative plan for bad weather.",
+          "es": "alternativo para mal tiempo."
+        }
+      ],
+      "audioText": "We will keep an alternative plan for bad weather.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-future-coordination-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c19.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el mensaje con responsable y plazo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Lena may review the map later."
+          },
+          {
+            "text": "The map is expected around noon."
+          },
+          {
+            "text": "Lena will send the map by noon."
+          }
+        ],
+        "teaches": [
+          "n3-future-coordination-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Lena y by noon hacen observable responsable y plazo."
+          },
+          "hint": {
+            "es": "Busca quién hará qué y para cuándo."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f68ecb2da581ff084443b37f97a7236cee44552d8839fc519a99d9bbac7c2ba5"
+      },
+      {
+        "id": "en.n3.c19.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la alternativa: If rain starts, we will ___ indoors."
+        },
+        "answer": {
+          "text": "meet",
+          "accepted": [
+            "meet"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-future-coordination-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Meet indoors ofrece una alternativa viable."
+          },
+          "hint": {
+            "es": "El verbo debe expresar el plan alternativo."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a7ca9ff218d7f5663028c102f1c462905127ed940ddff8fb81e7a661eee3fce4"
+      },
+      {
+        "id": "en.n3.c19.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una confirmación de tareas."
+        },
+        "answer": {
+          "text": "Tom will bring chairs by Friday.",
+          "tokens": [
+            "Tom",
+            "will",
+            "bring",
+            "chairs",
+            "by",
+            "Friday."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-future-coordination-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La frase muestra responsable, tarea y plazo."
+          },
+          "hint": {
+            "es": "Sujeto, will, acción y plazo forman la coordinación."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6dd62726b266e364e93c576f7f64291bb3e4a0ace4a2cc5f2e40d9af8712991d"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c19.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada persona con su tarea y plazo."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Nia",
+              {
+                "es": "will call by ten"
+              }
+            ],
+            [
+              "Omar",
+              {
+                "es": "will print by lunch"
+              }
+            ],
+            [
+              "Sue",
+              {
+                "es": "will check by Friday"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una coordinación útil asigna una acción y un momento a cada persona."
+          },
+          "pairs": [
+            [
+              "Nia",
+              {
+                "es": "will call by ten"
+              }
+            ],
+            [
+              "Omar",
+              {
+                "es": "will print by lunch"
+              }
+            ],
+            [
+              "Sue",
+              {
+                "es": "will check by Friday"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fe21101d95def7768ff6e7a54b8adefcf78db50fc78c7a7aa50700f853b6e9a7"
+      },
+      {
+        "id": "en.n3.c19.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la alternativa del equipo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Cancel the plan"
+          },
+          {
+            "text": "Use the library room"
+          },
+          {
+            "text": "Wait until next month"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La biblioteca es la alternativa explícita si el salón está lleno."
+          },
+          "audio": "If the hall is full, we will use the library room.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:029ad239b4a50c8161fb092fbfb36574da06a420a403415e0cb5fffdb967d30b"
+      },
+      {
+        "id": "en.n3.c19.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una propuesta con responsable y plazo."
+        },
+        "answer": {
+          "text": "Maya will send the menu by Tuesday.",
+          "accepted": [
+            "Maya will send the menu by Tuesday.",
+            "By Tuesday, Maya will send the menu."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Ambas variantes conservan responsable, acción y plazo."
+          },
+          "text": "Maya enviará el menú el martes."
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4742cde902eba3a58ff478c0b93806e002ce9217aebca489cfc8c880fc126fa3"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c19.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la propuesta completa para un voluntario."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Jin may ask about the bus on Wednesday."
+          },
+          {
+            "text": "Jin will book the bus by Wednesday."
+          },
+          {
+            "text": "The bus booking was discussed on Wednesday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La propuesta nombra acción, responsable y plazo."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:52c92d78752ede57128709da115424979e70702c28718154e9db9d8dfb19e5e4"
+      },
+      {
+        "id": "en.n3.c19.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y marca la alternativa viable."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Buy a new printer"
+          },
+          {
+            "text": "Email the tickets"
+          },
+          {
+            "text": "End the event"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Enviar los boletos por correo resuelve el fallo de impresión."
+          },
+          "audio": "If the printer fails, we will email the tickets.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:75741043e7da475555d4156d7a5dbdaa9fc7ee7acec55c4fe31be7b5620458bc"
+      },
+      {
+        "id": "en.n3.c19.e03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une plan y responsable de un evento."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Luca",
+              {
+                "es": "will invite guests by Monday"
+              }
+            ],
+            [
+              "Pia",
+              {
+                "es": "will bring cups by noon"
+              }
+            ],
+            [
+              "Ravi",
+              {
+                "es": "will confirm the room by Tuesday"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada par deja claro quién coordina qué y cuándo."
+          },
+          "pairs": [
+            [
+              "Luca",
+              {
+                "es": "will invite guests by Monday"
+              }
+            ],
+            [
+              "Pia",
+              {
+                "es": "will bring cups by noon"
+              }
+            ],
+            [
+              "Ravi",
+              {
+                "es": "will confirm the room by Tuesday"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8b38084b8d02538f64efb6ed3b66ce46b2161990eb94c58bc131c375e4e8b5b1"
+      },
+      {
+        "id": "en.n3.c19.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta 60–80 palabras con tres personas y plazos."
+        },
+        "answer": {
+          "text": "Ana will book the quiet community room by Friday because the event needs a calm place. Ben will print the signs by Saturday morning, and Carla will check the guest list by Thursday. If rain starts, the group will use the covered courtyard. Ana will message everyone tonight, and all three will confirm the plan before Thursday so guests receive clear information.",
+          "accepted": [
+            "Ana will book the quiet community room by Friday because the event needs a calm place. Ben will print the signs by Saturday morning, and Carla will check the guest list by Thursday. If rain starts, the group will use the covered courtyard. Ana will message everyone tonight, and all three will confirm the plan before Thursday so guests receive clear information.",
+            "By Friday, Ana will reserve the quiet community room because the event needs a calm place. Ben will print signs by Saturday morning, while Carla checks the guest list by Thursday. If rain starts, the group will move to the covered courtyard. Ana will message everyone tonight, and all three will confirm the plan before Thursday so guests receive clear information."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes conservan las tres personas, cada plazo, la razón y la alternativa."
+          },
+          "text": "Evento comunitario: Ana reserva sala tranquila viernes; Ben imprime carteles sábado; Carla revisa invitados jueves; si llueve, patio cubierto; Ana avisa esta noche; confirman jueves."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:11761e4f57ecb4f6a3c6ac1c61ff363b285e8b4a5d8198854c05aeebf103b136"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c19.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué opción asigna tarea y plazo inequívocos?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Rosa might review the list later."
+          },
+          {
+            "text": "The list is scheduled for six."
+          },
+          {
+            "text": "Rosa will check the list by six."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Rosa, check y by six forman una asignación completa."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:897510b09f0a5202488d275b283b25908d4bc0c2a8c54fef47519979a9c7605c"
+      },
+      {
+        "id": "en.n3.c19.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona la contingencia acordada."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Kim starts the warm-up"
+          },
+          {
+            "text": "Kim cancels training"
+          },
+          {
+            "text": "The coach leaves town"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El plan alternativo mantiene el entrenamiento en marcha."
+          },
+          "audio": "If the coach is late, Kim will start the warm-up.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d3fb3a171ba41f8d7eae1f170c516d7d4546f365e3a608ff8b72542e9545a059"
+      },
+      {
+        "id": "en.n3.c19.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe 60–80 palabras con tres personas y plazos."
+        },
+        "answer": {
+          "text": "Leo will confirm the library room by noon because the group needs a clear meeting place. Bea will pack water by seven, and Omar will tell everyone the meeting point by eight. If the bus does not come, they will walk from the station. Leo will message the group tonight, and all three will confirm the route before nine so nobody arrives at the wrong place.",
+          "accepted": [
+            "Leo will confirm the library room by noon because the group needs a clear meeting place. Bea will pack water by seven, and Omar will tell everyone the meeting point by eight. If the bus does not come, they will walk from the station. Leo will message the group tonight, and all three will confirm the route before nine so nobody arrives at the wrong place.",
+            "By noon, Leo will reserve the library room because the group needs a clear meeting place. Bea will prepare water by seven, while Omar tells everyone the meeting point by eight. If the bus fails, they will walk from the station. Leo will message the group tonight, and all three will confirm the route before nine so nobody arrives at the wrong place."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-future-coordination-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El escenario distinto conserva participantes, plazos, razón, contingencia y confirmación."
+          },
+          "text": "Excursión: Leo confirma sala de biblioteca al mediodía por seguridad; Bea prepara agua a las siete; Omar avisa el punto a las ocho; si no llega el bus, caminan; Leo escribe esta noche; confirman antes de las nueve."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:707f37b609d83fc814b590a82e0d91c098691aea8d9f9ec6bd311b653ed370bb"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c19.e01": {
+      "reteach": "en.n3.class-19.t01",
+      "review": "en.n3.c19.r01"
+    },
+    "en.n3.c19.e02": {
+      "reteach": "en.n3.class-19.t02",
+      "review": "en.n3.c19.r02"
+    },
+    "en.n3.c19.e03": {
+      "reteach": "en.n3.class-19.t03",
+      "review": "en.n3.c19.r03"
+    },
+    "en.n3.c19.e04": {
+      "reteach": "en.n3.class-19.t04",
+      "review": "en.n3.c19.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

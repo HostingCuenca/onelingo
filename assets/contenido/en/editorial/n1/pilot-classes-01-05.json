@@ -1,0 +1,3275 @@
+{
+  "schema": "onelingo.editorial.class-bundle.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "classes": [
+    {
+      "id": "en.n1.class-01",
+      "title": {
+        "en": "Introduce yourself",
+        "es": "Presentarse y dar datos personales"
+      },
+      "objectives": {
+        "es": [
+          "Hola, me llamo Ana.",
+          "Soy de Perú.",
+          "Usar el patrón en una interacción breve."
+        ]
+      },
+      "vocabulary": [
+        {
+          "en": "hello",
+          "es": "hola"
+        },
+        {
+          "en": "name",
+          "es": "nombre"
+        },
+        {
+          "en": "from",
+          "es": "de"
+        },
+        {
+          "en": "country",
+          "es": "país"
+        },
+        {
+          "en": "city",
+          "es": "ciudad"
+        },
+        {
+          "en": "live",
+          "es": "vivir"
+        },
+        {
+          "en": "student",
+          "es": "estudiante"
+        },
+        {
+          "en": "friend",
+          "es": "amigo"
+        }
+      ],
+      "teaching": [
+        {
+          "id": "en.n1.class-01.t01",
+          "en": "Hello, my name is Ana.",
+          "es": "Hola, me llamo Ana.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 1 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "Hello,",
+            "my",
+            "name",
+            "is",
+            "Ana"
+          ],
+          "audioText": "Hello, my name is Ana.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-01.t02",
+          "en": "I am from Peru.",
+          "es": "Soy de Perú.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 2 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "I",
+            "am",
+            "from",
+            "Peru"
+          ],
+          "audioText": "I am from Peru.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-01.t03",
+          "en": "I live in Lima.",
+          "es": "Vivo en Lima.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 3 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "I",
+            "live",
+            "in",
+            "Lima"
+          ],
+          "audioText": "I live in Lima.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-01.t04",
+          "en": "I am a student.",
+          "es": "Soy estudiante.",
+          "explanationEs": "I + am + información personal",
+          "segments": [
+            "I",
+            "am",
+            "a",
+            "student"
+          ],
+          "audioText": "I am a student.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "identity-be"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n1.c01.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Elige la presentación correcta."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Hello, my name is Ana."
+              },
+              {
+                "text": "Good night, Ana."
+              },
+              {
+                "text": "See you, Ana."
+              }
+            ],
+            "teaches": [
+              "identity"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              },
+              "hint": {
+                "es": "Descarta primero las opciones que no responden a la consigna."
+              }
+            },
+            "contentHash": "sha256:e6659bda026b8cd1b96bb08919220ab937edd44f3937bb2c13b106ace66ecc9e"
+          },
+          {
+            "id": "en.n1.c01.pg02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena para decir de dónde eres."
+            },
+            "answer": {
+              "text": "I am from Peru.",
+              "tokens": [
+                "I",
+                "am",
+                "from",
+                "Peru."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "identity"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              },
+              "hint": {
+                "es": "Empieza por el sujeto y coloca después la forma verbal."
+              }
+            },
+            "contentHash": "sha256:908c7f67e2ed833f3756328b6e7129c3dafec14168006b35b26ad54e17dc4ef3"
+          },
+          {
+            "id": "en.n1.c01.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: I ___ in Lima. "
+            },
+            "answer": {
+              "text": "live",
+              "accepted": [
+                "live"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "identity"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "text": "I live in Lima.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              },
+              "hint": {
+                "es": "Lee la oración entera y busca el patrón visto en los ejemplos."
+              }
+            },
+            "contentHash": "sha256:19fff6293afb736ca38959c7ed5acb4d0c810377b4417fadc6cc330b35d5bbc0"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n1.c01.p01",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe en inglés: «Soy estudiante»."
+            },
+            "answer": {
+              "text": "I am a student.",
+              "accepted": [
+                "I am a student.",
+                "I am a student",
+                "i am a student.",
+                "i am a student"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Una persona dice su ocupación.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:9a9e0997ac8dfc3c2315cf638589d610d4dfe02c33d00c4a6ae5f12742b0a0ce"
+          },
+          {
+            "id": "en.n1.c01.p02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige la frase correcta."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "I live in Quito."
+              },
+              {
+                "text": "I am from Chile."
+              },
+              {
+                "text": "My name is Leo."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "I am from Chile.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:6dcc69139e5b0c4429c54cb2fe224e9758c12873ffaf99382b7240f5447d8b94"
+          },
+          {
+            "id": "en.n1.c01.p03",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona cada saludo con su significado."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "hello",
+                  {
+                    "es": "hola"
+                  }
+                ],
+                [
+                  "name",
+                  {
+                    "es": "nombre"
+                  }
+                ],
+                [
+                  "friend",
+                  {
+                    "es": "amigo"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "hello",
+                  {
+                    "es": "hola"
+                  }
+                ],
+                [
+                  "name",
+                  {
+                    "es": "nombre"
+                  }
+                ],
+                [
+                  "friend",
+                  {
+                    "es": "amigo"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:d95588996ed9d40f4d65a33d65c6f8371484160b5d8078a4806991103969f2b5"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n1.c01.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "¿Qué frase presenta el nombre de Leo?"
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "I am from Leo."
+              },
+              {
+                "text": "I live Leo."
+              },
+              {
+                "text": "My name is Leo."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              }
+            },
+            "contentHash": "sha256:a19f7bfab9bf1a374688dbe2bbb2ea73db2c47be20cec4b5998ceace085ffbb8"
+          },
+          {
+            "id": "en.n1.c01.e02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre la ciudad."
+            },
+            "answer": {
+              "text": "I live in Lima.",
+              "tokens": [
+                "I",
+                "live",
+                "in",
+                "Lima."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:e13de25689198389042b0943bd0088658cb51fe345470cfe245653d3ab3dfcaa"
+          },
+          {
+            "id": "en.n1.c01.e03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Traduce: «Soy de Perú»."
+            },
+            "answer": {
+              "text": "I am from Peru.",
+              "accepted": [
+                "I am from Peru.",
+                "I am from Peru",
+                "i am from peru.",
+                "i am from peru"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Dato de procedencia.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:51ad752e8de174cef1b9c9032ef88859fc1cacb3db66662608d4b8b9de4f4b41"
+          },
+          {
+            "id": "en.n1.c01.e04",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona palabra y significado."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "country",
+                  {
+                    "es": "país"
+                  }
+                ],
+                [
+                  "city",
+                  {
+                    "es": "ciudad"
+                  }
+                ],
+                [
+                  "student",
+                  {
+                    "es": "estudiante"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "country",
+                  {
+                    "es": "país"
+                  }
+                ],
+                [
+                  "city",
+                  {
+                    "es": "ciudad"
+                  }
+                ],
+                [
+                  "student",
+                  {
+                    "es": "estudiante"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:5bff42de1618eca43da25bcff1fe4e0f9e10a9e73b1e9fd2afb616d7dd38efde"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n1.c01.r01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige la nueva presentación."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Hello, my name is Ana."
+              },
+              {
+                "text": "I am from Peru."
+              },
+              {
+                "text": "I live in Lima."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "Hello, my name is Ana.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:f704566b1472cb3feb2b4b20274007aebdab9645119fbf5fa57bdd5f29818a0b"
+          },
+          {
+            "id": "en.n1.c01.r02",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: I am from ___."
+            },
+            "answer": {
+              "text": "Chile.",
+              "accepted": [
+                "Chile.",
+                "Chile",
+                "chile.",
+                "chile"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Una persona comparte su país.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              }
+            },
+            "contentHash": "sha256:05998ca19019dac0dbb336cc2a40d22fb84dd1bd8be9b0c7184f56d982c29668"
+          },
+          {
+            "id": "en.n1.c01.r03",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena una frase de residencia."
+            },
+            "answer": {
+              "text": "I live in Quito.",
+              "tokens": [
+                "I",
+                "live",
+                "in",
+                "Quito."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "identity"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:4ed62d09d64e60b3b8b53b59138d59f48e7ce970cc47f4be76c566a6fce4f0d5"
+          }
+        ]
+      },
+      "prerequisites": [],
+      "concepts": [
+        "identity",
+        "identity-be"
+      ],
+      "skills": [
+        "lectura",
+        "escucha",
+        "escritura-controlada"
+      ],
+      "accessibility": {
+        "shortSpanishInstructions": true,
+        "audioSpeedOptions": [
+          0.75,
+          1.0
+        ],
+        "audioMaxReplays": 3,
+        "revealTranscriptAfterAttempt": true,
+        "acceptCaseAndTerminalPunctuationVariants": true,
+        "lowLoadMode": "one_item_at_a_time",
+        "orderAndWriteSegmentation": true,
+        "guidedChoiceAlternativeBeforeWriting": true
+      },
+      "recovery": {
+        "afterTwoErrors": "reteach_then_guided_variant",
+        "preserveAttemptEvidence": true,
+        "reviewTargetsFailedConcepts": true,
+        "maxIndependentAttemptsBeforeReteach": 2
+      },
+      "remediationMap": {
+        "en.n1.c01.e01": {
+          "reteach": "en.n1.class-01.t01",
+          "review": "en.n1.c01.r01"
+        },
+        "en.n1.c01.e02": {
+          "reteach": "en.n1.class-01.t02",
+          "review": "en.n1.c01.r02"
+        },
+        "en.n1.c01.e03": {
+          "reteach": "en.n1.class-01.t03",
+          "review": "en.n1.c01.r03"
+        },
+        "en.n1.c01.e04": {
+          "reteach": "en.n1.class-01.t04",
+          "review": "en.n1.c01.r02"
+        }
+      }
+    },
+    {
+      "id": "en.n1.class-02",
+      "title": {
+        "en": "Pronouns and be",
+        "es": "Pronombres y be afirmativo"
+      },
+      "objectives": {
+        "es": [
+          "Soy estudiante.",
+          "Ella es de Chile.",
+          "Usar el patrón en una interacción breve."
+        ]
+      },
+      "vocabulary": [
+        {
+          "en": "I",
+          "es": "yo"
+        },
+        {
+          "en": "you",
+          "es": "tú"
+        },
+        {
+          "en": "he",
+          "es": "él"
+        },
+        {
+          "en": "she",
+          "es": "ella"
+        },
+        {
+          "en": "we",
+          "es": "nosotros"
+        },
+        {
+          "en": "they",
+          "es": "ellos"
+        },
+        {
+          "en": "am",
+          "es": "soy"
+        },
+        {
+          "en": "is",
+          "es": "es"
+        },
+        {
+          "en": "are",
+          "es": "son"
+        }
+      ],
+      "teaching": [
+        {
+          "id": "en.n1.class-02.t01",
+          "en": "I am a student.",
+          "es": "Soy estudiante.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 1 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "I",
+            "am",
+            "a",
+            "student"
+          ],
+          "audioText": "I am a student.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-02.t02",
+          "en": "She is from Chile.",
+          "es": "Ella es de Chile.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 2 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "She",
+            "is",
+            "from",
+            "Chile"
+          ],
+          "audioText": "She is from Chile.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-02.t03",
+          "en": "They are friends.",
+          "es": "Ellos son amigos.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 3 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "They",
+            "are",
+            "friends"
+          ],
+          "audioText": "They are friends.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-02.t04",
+          "en": "He is a teacher.",
+          "es": "Él es profesor.",
+          "explanationEs": "he/she + is + descripción",
+          "segments": [
+            "He",
+            "is",
+            "a",
+            "teacher"
+          ],
+          "audioText": "He is a teacher.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "pronouns-be"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n1.c02.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Elige la frase correcta con she."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "She are happy."
+              },
+              {
+                "text": "She is happy."
+              },
+              {
+                "text": "She am happy."
+              }
+            ],
+            "teaches": [
+              "pronouns-be"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              },
+              "hint": {
+                "es": "Descarta primero las opciones que no responden a la consigna."
+              }
+            },
+            "contentHash": "sha256:9446ce46c17e35819c6f7ff2692a7bac29b2af981beda7da2d3de6f6663272d7"
+          },
+          {
+            "id": "en.n1.c02.pg02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase con they."
+            },
+            "answer": {
+              "text": "They are friends.",
+              "tokens": [
+                "They",
+                "are",
+                "friends."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "pronouns-be"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              },
+              "hint": {
+                "es": "Empieza por el sujeto y coloca después la forma verbal."
+              }
+            },
+            "contentHash": "sha256:82dd8d45a42fa5dd9cd3eecc905ab6fc30ecf9885788cf0156698837ff089863"
+          },
+          {
+            "id": "en.n1.c02.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: We ___ students."
+            },
+            "answer": {
+              "text": "are",
+              "accepted": [
+                "are"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "pronouns-be"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "text": "We are students.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              },
+              "hint": {
+                "es": "Lee la oración entera y busca el patrón visto en los ejemplos."
+              }
+            },
+            "contentHash": "sha256:50fff18833da4f2dc3a45f5c70411ba5d621231e227886ff9ad5976909657da3"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n1.c02.p01",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe en inglés: «Él es profesor»."
+            },
+            "answer": {
+              "text": "He is a teacher.",
+              "accepted": [
+                "He is a teacher.",
+                "He is a teacher",
+                "he is a teacher.",
+                "he is a teacher"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Presenta a un hombre.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:0961cc523154248db532ec1d6c0b943425fe7734dd812c30eb35fb5f58d91abd"
+          },
+          {
+            "id": "en.n1.c02.p02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "She is from Chile."
+              },
+              {
+                "text": "He is from Chile."
+              },
+              {
+                "text": "They are from Chile."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "She is from Chile.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:90f189dfb9e71d52a3e417fd318e6ac52c694c8e2ce03466b2e723bb76e45389"
+          },
+          {
+            "id": "en.n1.c02.p03",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona pronombre y traducción."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "I",
+                  {
+                    "es": "yo"
+                  }
+                ],
+                [
+                  "she",
+                  {
+                    "es": "ella"
+                  }
+                ],
+                [
+                  "they",
+                  {
+                    "es": "ellos"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "I",
+                  {
+                    "es": "yo"
+                  }
+                ],
+                [
+                  "she",
+                  {
+                    "es": "ella"
+                  }
+                ],
+                [
+                  "they",
+                  {
+                    "es": "ellos"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:d0c6dbf9de80a194e4ab78c244b755746c81d87df1a38e6fca72c4c0817acbd5"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n1.c02.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Elige la forma de be para I."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "am"
+              },
+              {
+                "text": "is"
+              },
+              {
+                "text": "are"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              }
+            },
+            "contentHash": "sha256:70587cbb3859e24ac8357d7b432f6a1f0528a81e0d5cccb76aa19bb395912358"
+          },
+          {
+            "id": "en.n1.c02.e02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena una frase con she."
+            },
+            "answer": {
+              "text": "She is a student.",
+              "tokens": [
+                "She",
+                "is",
+                "a",
+                "student."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:6bd9a21355a03b4d8d3768779f5bcf2d8c30986f6281a5069e860d25222ccc53"
+          },
+          {
+            "id": "en.n1.c02.e03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Traduce: «Nosotros somos amigos»."
+            },
+            "answer": {
+              "text": "We are friends.",
+              "accepted": [
+                "We are friends.",
+                "We are friends",
+                "we are friends.",
+                "we are friends"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Usa we y are.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:7458dcf94e7c5443482a49d93e8b7e5171af4021840495b2a2e19425037985bf"
+          },
+          {
+            "id": "en.n1.c02.e04",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona sujeto y forma."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "I",
+                  {
+                    "es": "am"
+                  }
+                ],
+                [
+                  "he",
+                  {
+                    "es": "is"
+                  }
+                ],
+                [
+                  "we",
+                  {
+                    "es": "are"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "I",
+                  {
+                    "es": "am"
+                  }
+                ],
+                [
+                  "he",
+                  {
+                    "es": "is"
+                  }
+                ],
+                [
+                  "we",
+                  {
+                    "es": "are"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:0fcd37a1b172ede08e0b596fee56899871a48025fa2ddc5fe48b1f65530349f3"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n1.c02.r01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige quién habla."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "I am a student."
+              },
+              {
+                "text": "She is a student."
+              },
+              {
+                "text": "They are friends."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "They are friends.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:942bdb4ab420dd27c9209c5620a5222cb70bafef03cd796e417bcccf2389ce65"
+          },
+          {
+            "id": "en.n1.c02.r02",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: He ___ a teacher."
+            },
+            "answer": {
+              "text": "is",
+              "accepted": [
+                "is"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Describe a un hombre.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              }
+            },
+            "contentHash": "sha256:ce0ea8ff1e0930b95c9708eafc5e5b3ddee459371d81b6e39e4e6dfeb74ca9c6"
+          },
+          {
+            "id": "en.n1.c02.r03",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase con you."
+            },
+            "answer": {
+              "text": "You are a friend.",
+              "tokens": [
+                "You",
+                "are",
+                "a",
+                "friend."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:bb32c2b1ed17f0d4ec14e6d9545775077f3927704ad97b144c14d7c322b08484"
+          }
+        ]
+      },
+      "prerequisites": [
+        "en.n1.class-01"
+      ],
+      "concepts": [
+        "pronouns-be"
+      ],
+      "skills": [
+        "lectura",
+        "escucha",
+        "escritura-controlada"
+      ],
+      "accessibility": {
+        "shortSpanishInstructions": true,
+        "audioSpeedOptions": [
+          0.75,
+          1.0
+        ],
+        "audioMaxReplays": 3,
+        "revealTranscriptAfterAttempt": true,
+        "acceptCaseAndTerminalPunctuationVariants": true,
+        "lowLoadMode": "one_item_at_a_time",
+        "orderAndWriteSegmentation": true,
+        "guidedChoiceAlternativeBeforeWriting": true
+      },
+      "recovery": {
+        "afterTwoErrors": "reteach_then_guided_variant",
+        "preserveAttemptEvidence": true,
+        "reviewTargetsFailedConcepts": true,
+        "maxIndependentAttemptsBeforeReteach": 2
+      },
+      "remediationMap": {
+        "en.n1.c02.e01": {
+          "reteach": "en.n1.class-02.t01",
+          "review": "en.n1.c02.r01"
+        },
+        "en.n1.c02.e02": {
+          "reteach": "en.n1.class-02.t02",
+          "review": "en.n1.c02.r02"
+        },
+        "en.n1.c02.e03": {
+          "reteach": "en.n1.class-02.t03",
+          "review": "en.n1.c02.r03"
+        },
+        "en.n1.c02.e04": {
+          "reteach": "en.n1.class-02.t04",
+          "review": "en.n1.c02.r03"
+        }
+      }
+    },
+    {
+      "id": "en.n1.class-03",
+      "title": {
+        "en": "Classroom objects",
+        "es": "Objetos del aula"
+      },
+      "objectives": {
+        "es": [
+          "Esto es un libro.",
+          "El bolígrafo está sobre el pupitre.",
+          "Usar el patrón en una interacción breve."
+        ]
+      },
+      "vocabulary": [
+        {
+          "en": "book",
+          "es": "libro"
+        },
+        {
+          "en": "pen",
+          "es": "bolígrafo"
+        },
+        {
+          "en": "pencil",
+          "es": "lápiz"
+        },
+        {
+          "en": "desk",
+          "es": "pupitre"
+        },
+        {
+          "en": "chair",
+          "es": "silla"
+        },
+        {
+          "en": "bag",
+          "es": "bolso"
+        },
+        {
+          "en": "board",
+          "es": "pizarra"
+        },
+        {
+          "en": "eraser",
+          "es": "borrador"
+        },
+        {
+          "en": "ruler",
+          "es": "regla"
+        }
+      ],
+      "teaching": [
+        {
+          "id": "en.n1.class-03.t01",
+          "en": "This is a book.",
+          "es": "Esto es un libro.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 1 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "This",
+            "is",
+            "a",
+            "book"
+          ],
+          "audioText": "This is a book.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-03.t02",
+          "en": "The pen is on the desk.",
+          "es": "El bolígrafo está sobre el pupitre.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 2 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "The",
+            "pen",
+            "is",
+            "on",
+            "the",
+            "desk"
+          ],
+          "audioText": "The pen is on the desk.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-03.t03",
+          "en": "My bag is blue.",
+          "es": "Mi bolso es azul.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 3 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "My",
+            "bag",
+            "is",
+            "blue"
+          ],
+          "audioText": "My bag is blue.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-03.t04",
+          "en": "The chair is blue.",
+          "es": "La silla es azul.",
+          "explanationEs": "the + objeto + is + color",
+          "segments": [
+            "The",
+            "chair",
+            "is",
+            "blue"
+          ],
+          "audioText": "The chair is blue.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "classroom-description"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n1.c03.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Elige la palabra para «libro»."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "book"
+              },
+              {
+                "text": "chair"
+              },
+              {
+                "text": "ruler"
+              }
+            ],
+            "teaches": [
+              "classroom-objects"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              },
+              "hint": {
+                "es": "Descarta primero las opciones que no responden a la consigna."
+              }
+            },
+            "contentHash": "sha256:93aebe2313dfa49287c4a94d6a7fb7069c9dd80114b3f2934e6b871e58e374e3"
+          },
+          {
+            "id": "en.n1.c03.pg02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre el pupitre."
+            },
+            "answer": {
+              "text": "The pen is on the desk.",
+              "tokens": [
+                "The",
+                "pen",
+                "is",
+                "on",
+                "the",
+                "desk."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "classroom-objects"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              },
+              "hint": {
+                "es": "Empieza por el sujeto y coloca después la forma verbal."
+              }
+            },
+            "contentHash": "sha256:1cb7b75b90938222d9bba83434692a6bc9e0958d256c5fc4990f71aa7fb34fc0"
+          },
+          {
+            "id": "en.n1.c03.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: This is a ___."
+            },
+            "answer": {
+              "text": "pencil",
+              "accepted": [
+                "pencil"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "classroom-objects"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "text": "Señala un objeto para escribir.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              },
+              "hint": {
+                "es": "Lee la oración entera y busca el patrón visto en los ejemplos."
+              }
+            },
+            "contentHash": "sha256:1ee88d28d9425dc6e3deaf697868751f503e9a45bd37f5ab49d07f99748f75ca"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n1.c03.p01",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe en inglés: «La silla es azul»."
+            },
+            "answer": {
+              "text": "The chair is blue.",
+              "accepted": [
+                "The chair is blue.",
+                "The chair is blue",
+                "the chair is blue.",
+                "the chair is blue"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Describe un objeto del aula.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:06e1dff70424265b2b29e61828f97f61e2901751f8aeca9570c96438a4313b42"
+          },
+          {
+            "id": "en.n1.c03.p02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige el objeto."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "The bag is red."
+              },
+              {
+                "text": "The board is green."
+              },
+              {
+                "text": "The desk is small."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "The board is green.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:3f0a20617f5b85b78dd7686e596cfe4eaa299cabfa6cb4e87dd32c0c5e14f1a5"
+          },
+          {
+            "id": "en.n1.c03.p03",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona objeto y traducción."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "book",
+                  {
+                    "es": "libro"
+                  }
+                ],
+                [
+                  "chair",
+                  {
+                    "es": "silla"
+                  }
+                ],
+                [
+                  "ruler",
+                  {
+                    "es": "regla"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "book",
+                  {
+                    "es": "libro"
+                  }
+                ],
+                [
+                  "chair",
+                  {
+                    "es": "silla"
+                  }
+                ],
+                [
+                  "ruler",
+                  {
+                    "es": "regla"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:88cc20092026d87f5d90c96b2964fb239bdfa1e36ccb33af48609cf74e86e67d"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n1.c03.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "¿Qué objeto sirve para borrar?"
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "pen"
+              },
+              {
+                "text": "book"
+              },
+              {
+                "text": "eraser"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              }
+            },
+            "contentHash": "sha256:3d783dc1667790b1fc6f44b5d23331edea00ec3cd4bfb4f0899889e7ecc2b771"
+          },
+          {
+            "id": "en.n1.c03.e02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre el bolso."
+            },
+            "answer": {
+              "text": "My bag is blue.",
+              "tokens": [
+                "My",
+                "bag",
+                "is",
+                "blue."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:a581199ccc9691e876dba6bd126f1349c35c1e9f5cd855c7762fc2bd21b6a983"
+          },
+          {
+            "id": "en.n1.c03.e03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Traduce: «El bolígrafo está sobre el pupitre»."
+            },
+            "answer": {
+              "text": "The pen is on the desk.",
+              "accepted": [
+                "The pen is on the desk.",
+                "The pen is on the desk",
+                "the pen is on the desk.",
+                "the pen is on the desk"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Usa on para la posición.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:95bc939cf78f1a55c97df4d64f747f4b9b343bc7b38af38f194ea0161fb6d164"
+          },
+          {
+            "id": "en.n1.c03.e04",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona los objetos."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "pencil",
+                  {
+                    "es": "lápiz"
+                  }
+                ],
+                [
+                  "board",
+                  {
+                    "es": "pizarra"
+                  }
+                ],
+                [
+                  "eraser",
+                  {
+                    "es": "borrador"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "pencil",
+                  {
+                    "es": "lápiz"
+                  }
+                ],
+                [
+                  "board",
+                  {
+                    "es": "pizarra"
+                  }
+                ],
+                [
+                  "eraser",
+                  {
+                    "es": "borrador"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:5d1f4e7f14c85d1201cd9375b7a48d874c74056f83299a4f38bbb731bd69711e"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n1.c03.r01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige el color del objeto."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "The chair is blue."
+              },
+              {
+                "text": "The bag is red."
+              },
+              {
+                "text": "The board is green."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "The chair is blue.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:42a38b7f82428f47b519591e34f8674db6431a20f313f2cab323a29715c5d164"
+          },
+          {
+            "id": "en.n1.c03.r02",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: The pen is on the ___."
+            },
+            "answer": {
+              "text": "desk.",
+              "accepted": [
+                "desk.",
+                "desk"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Indica dónde está el bolígrafo.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              }
+            },
+            "contentHash": "sha256:693a53080e59136c126a071096726ae8002f06a13c1ead4e17a254c0f44dae7c"
+          },
+          {
+            "id": "en.n1.c03.r03",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena una frase para señalar un libro."
+            },
+            "answer": {
+              "text": "This is a book.",
+              "tokens": [
+                "This",
+                "is",
+                "a",
+                "book."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:65455d35b1c516dc9e189129be68d50146f6b7e4db3fedf6986a0e6c21324031"
+          }
+        ]
+      },
+      "prerequisites": [
+        "en.n1.class-02"
+      ],
+      "concepts": [
+        "classroom-objects"
+      ],
+      "skills": [
+        "lectura",
+        "escucha",
+        "escritura-controlada"
+      ],
+      "accessibility": {
+        "shortSpanishInstructions": true,
+        "audioSpeedOptions": [
+          0.75,
+          1.0
+        ],
+        "audioMaxReplays": 3,
+        "revealTranscriptAfterAttempt": true,
+        "acceptCaseAndTerminalPunctuationVariants": true,
+        "lowLoadMode": "one_item_at_a_time",
+        "orderAndWriteSegmentation": true,
+        "guidedChoiceAlternativeBeforeWriting": true
+      },
+      "recovery": {
+        "afterTwoErrors": "reteach_then_guided_variant",
+        "preserveAttemptEvidence": true,
+        "reviewTargetsFailedConcepts": true,
+        "maxIndependentAttemptsBeforeReteach": 2
+      },
+      "remediationMap": {
+        "en.n1.c03.e01": {
+          "reteach": "en.n1.class-03.t01",
+          "review": "en.n1.c03.r01"
+        },
+        "en.n1.c03.e02": {
+          "reteach": "en.n1.class-03.t02",
+          "review": "en.n1.c03.r02"
+        },
+        "en.n1.c03.e03": {
+          "reteach": "en.n1.class-03.t03",
+          "review": "en.n1.c03.r03"
+        },
+        "en.n1.c03.e04": {
+          "reteach": "en.n1.class-03.t04",
+          "review": "en.n1.c03.r02"
+        }
+      }
+    },
+    {
+      "id": "en.n1.class-04",
+      "title": {
+        "en": "Family and relationships",
+        "es": "Familia y relaciones"
+      },
+      "objectives": {
+        "es": [
+          "Esta es mi madre.",
+          "Mi hermano es estudiante.",
+          "Usar el patrón en una interacción breve."
+        ]
+      },
+      "vocabulary": [
+        {
+          "en": "mother",
+          "es": "madre"
+        },
+        {
+          "en": "father",
+          "es": "padre"
+        },
+        {
+          "en": "sister",
+          "es": "hermana"
+        },
+        {
+          "en": "brother",
+          "es": "hermano"
+        },
+        {
+          "en": "parents",
+          "es": "padres"
+        },
+        {
+          "en": "family",
+          "es": "familia"
+        },
+        {
+          "en": "son",
+          "es": "hijo"
+        },
+        {
+          "en": "daughter",
+          "es": "hija"
+        },
+        {
+          "en": "cousin",
+          "es": "primo"
+        }
+      ],
+      "teaching": [
+        {
+          "id": "en.n1.class-04.t01",
+          "en": "This is my mother.",
+          "es": "Esta es mi madre.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 1 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "This",
+            "is",
+            "my",
+            "mother"
+          ],
+          "audioText": "This is my mother.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-04.t02",
+          "en": "My brother is a student.",
+          "es": "Mi hermano es estudiante.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 2 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "My",
+            "brother",
+            "is",
+            "a",
+            "student"
+          ],
+          "audioText": "My brother is a student.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-04.t03",
+          "en": "They are my parents.",
+          "es": "Ellos son mis padres.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 3 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "They",
+            "are",
+            "my",
+            "parents"
+          ],
+          "audioText": "They are my parents.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-04.t04",
+          "en": "They are my parents.",
+          "es": "Ellos son mis padres.",
+          "explanationEs": "they + are + relación",
+          "segments": [
+            "They",
+            "are",
+            "my",
+            "parents"
+          ],
+          "audioText": "They are my parents.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "family-be"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n1.c04.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Elige la palabra para «madre»."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "father"
+              },
+              {
+                "text": "mother"
+              },
+              {
+                "text": "cousin"
+              }
+            ],
+            "teaches": [
+              "family-relations"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              },
+              "hint": {
+                "es": "Descarta primero las opciones que no responden a la consigna."
+              }
+            },
+            "contentHash": "sha256:f633d00c9cc4e7ed85c1236811d966ef9abbab88b06a82777f19896d65810763"
+          },
+          {
+            "id": "en.n1.c04.pg02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre tu hermano."
+            },
+            "answer": {
+              "text": "My brother is a student.",
+              "tokens": [
+                "My",
+                "brother",
+                "is",
+                "a",
+                "student."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "family-relations"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              },
+              "hint": {
+                "es": "Empieza por el sujeto y coloca después la forma verbal."
+              }
+            },
+            "contentHash": "sha256:cc149506ea1137e613b20d0b370adb97d415040bc2ec76ff6d8f44b8e9dae4eb"
+          },
+          {
+            "id": "en.n1.c04.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: This is my ___."
+            },
+            "answer": {
+              "text": "sister",
+              "accepted": [
+                "sister"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "family-relations"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "text": "Presenta a una hermana.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              },
+              "hint": {
+                "es": "Lee la oración entera y busca el patrón visto en los ejemplos."
+              }
+            },
+            "contentHash": "sha256:48876445f995761f87c7cbfb556e7735b00786bc60b7cedd983d2e2bc277b53b"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n1.c04.p01",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe en inglés: «Ellos son mis padres»."
+            },
+            "answer": {
+              "text": "They are my parents.",
+              "accepted": [
+                "They are my parents.",
+                "They are my parents",
+                "they are my parents.",
+                "they are my parents"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Presenta a dos familiares.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:977bdf098f1777ee535aee19cae70a32aaffffd77a96537fac172466d8f8b000"
+          },
+          {
+            "id": "en.n1.c04.p02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige el familiar."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "My sister is kind."
+              },
+              {
+                "text": "My father is kind."
+              },
+              {
+                "text": "My cousin is kind."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "My cousin is kind.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:82f0521ba702e9b63d242ca24933c9ad8047c5edc62cf20e742520f8f501c9d5"
+          },
+          {
+            "id": "en.n1.c04.p03",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona familiar y traducción."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "mother",
+                  {
+                    "es": "madre"
+                  }
+                ],
+                [
+                  "brother",
+                  {
+                    "es": "hermano"
+                  }
+                ],
+                [
+                  "daughter",
+                  {
+                    "es": "hija"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "mother",
+                  {
+                    "es": "madre"
+                  }
+                ],
+                [
+                  "brother",
+                  {
+                    "es": "hermano"
+                  }
+                ],
+                [
+                  "daughter",
+                  {
+                    "es": "hija"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:b061b5ff5a559d7b8d771af88bab5f4c686654c9924e1a009227499c8e232b07"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n1.c04.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "¿Quiénes son los padres?"
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "mother and father"
+              },
+              {
+                "text": "sister and brother"
+              },
+              {
+                "text": "son and cousin"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              }
+            },
+            "contentHash": "sha256:ccbeb42e2c07c0085cee0bfb9feb07fee5243aacafa9319ec397bc2d33a09d5b"
+          },
+          {
+            "id": "en.n1.c04.e02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena una frase de presentación."
+            },
+            "answer": {
+              "text": "This is my mother.",
+              "tokens": [
+                "This",
+                "is",
+                "my",
+                "mother."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:10c15329ed1280e28433d5d5ebd4de2c86f5eb5e8b4cb1d083ca3c1848a2f757"
+          },
+          {
+            "id": "en.n1.c04.e03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Traduce: «Mi hermana es estudiante»."
+            },
+            "answer": {
+              "text": "My sister is a student.",
+              "accepted": [
+                "My sister is a student.",
+                "My sister is a student",
+                "my sister is a student.",
+                "my sister is a student"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Usa my para posesión.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:8e2552423d7ed569f965d5e9e434418596bfae26eb7de9d0e1075313bb9ee7a3"
+          },
+          {
+            "id": "en.n1.c04.e04",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona miembros de la familia."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "father",
+                  {
+                    "es": "padre"
+                  }
+                ],
+                [
+                  "parents",
+                  {
+                    "es": "padres"
+                  }
+                ],
+                [
+                  "cousin",
+                  {
+                    "es": "primo"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "father",
+                  {
+                    "es": "padre"
+                  }
+                ],
+                [
+                  "parents",
+                  {
+                    "es": "padres"
+                  }
+                ],
+                [
+                  "cousin",
+                  {
+                    "es": "primo"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:d2edd6b987a9fb89800df98ccfce93f20cc346b969406af72341cb155dc5687b"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n1.c04.r01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige la relación."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "My brother is a student."
+              },
+              {
+                "text": "This is my mother."
+              },
+              {
+                "text": "They are my parents."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "This is my mother.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:3309f17b1a6fef7f8e111b5a51156a74f29c0c798f3b7c7acdcc347358474240"
+          },
+          {
+            "id": "en.n1.c04.r02",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: My ___ is a student."
+            },
+            "answer": {
+              "text": "brother",
+              "accepted": [
+                "brother"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Habla de un hermano.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              }
+            },
+            "contentHash": "sha256:6e95df7a93be41d0d6d0ecae39b037361304c8912472ab9981cd85c8fd2b40e0"
+          },
+          {
+            "id": "en.n1.c04.r03",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre los padres."
+            },
+            "answer": {
+              "text": "They are my parents.",
+              "tokens": [
+                "They",
+                "are",
+                "my",
+                "parents."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-relations"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:714900b10ae7e8c3936a2af1c15eff7749afbda759daff4bbd1166d79e04845e"
+          }
+        ]
+      },
+      "prerequisites": [
+        "en.n1.class-03"
+      ],
+      "concepts": [
+        "family-relations",
+        "family-be",
+        "family-vocabulary"
+      ],
+      "skills": [
+        "lectura",
+        "escucha",
+        "escritura-controlada"
+      ],
+      "accessibility": {
+        "shortSpanishInstructions": true,
+        "audioSpeedOptions": [
+          0.75,
+          1.0
+        ],
+        "audioMaxReplays": 3,
+        "revealTranscriptAfterAttempt": true,
+        "acceptCaseAndTerminalPunctuationVariants": true,
+        "lowLoadMode": "one_item_at_a_time",
+        "orderAndWriteSegmentation": true,
+        "guidedChoiceAlternativeBeforeWriting": true
+      },
+      "recovery": {
+        "afterTwoErrors": "reteach_then_guided_variant",
+        "preserveAttemptEvidence": true,
+        "reviewTargetsFailedConcepts": true,
+        "maxIndependentAttemptsBeforeReteach": 2
+      },
+      "remediationMap": {
+        "en.n1.c04.e01": {
+          "reteach": "en.n1.class-04.t01",
+          "review": "en.n1.c04.r01"
+        },
+        "en.n1.c04.e02": {
+          "reteach": "en.n1.class-04.t02",
+          "review": "en.n1.c04.r02"
+        },
+        "en.n1.c04.e03": {
+          "reteach": "en.n1.class-04.t03",
+          "review": "en.n1.c04.r03"
+        },
+        "en.n1.c04.e04": {
+          "reteach": "en.n1.class-04.t04",
+          "review": "en.n1.c04.r02"
+        }
+      }
+    },
+    {
+      "id": "en.n1.class-05",
+      "title": {
+        "en": "My family in short sentences",
+        "es": "Mi familia en frases"
+      },
+      "objectives": {
+        "es": [
+          "Mi abuela es amable.",
+          "Nuestra familia es pequeña.",
+          "Usar el patrón en una interacción breve."
+        ]
+      },
+      "vocabulary": [
+        {
+          "en": "grandmother",
+          "es": "abuela"
+        },
+        {
+          "en": "grandfather",
+          "es": "abuelo"
+        },
+        {
+          "en": "aunt",
+          "es": "tía"
+        },
+        {
+          "en": "uncle",
+          "es": "tío"
+        },
+        {
+          "en": "child",
+          "es": "niño"
+        },
+        {
+          "en": "home",
+          "es": "casa"
+        },
+        {
+          "en": "photo",
+          "es": "foto"
+        },
+        {
+          "en": "kind",
+          "es": "amable"
+        },
+        {
+          "en": "small",
+          "es": "pequeño"
+        }
+      ],
+      "teaching": [
+        {
+          "id": "en.n1.class-05.t01",
+          "en": "My grandmother is kind.",
+          "es": "Mi abuela es amable.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 1 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "My",
+            "grandmother",
+            "is",
+            "kind"
+          ],
+          "audioText": "My grandmother is kind.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-05.t02",
+          "en": "Our family is small.",
+          "es": "Nuestra familia es pequeña.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 2 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "Our",
+            "family",
+            "is",
+            "small"
+          ],
+          "audioText": "Our family is small.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-05.t03",
+          "en": "My home is in this photo.",
+          "es": "Mi casa está en esta foto.",
+          "explanationEs": "Observa el modelo y sus partes. Practica primero la frase 3 con apoyo antes de producirla sin ayuda.",
+          "segments": [
+            "My",
+            "home",
+            "is",
+            "in",
+            "this",
+            "photo"
+          ],
+          "audioText": "My home is in this photo.",
+          "audioMode": "tts",
+          "languageCode": "en"
+        },
+        {
+          "id": "en.n1.class-05.t04",
+          "en": "My grandfather is kind.",
+          "es": "Mi abuelo es amable.",
+          "explanationEs": "my + familiar + is + adjetivo",
+          "segments": [
+            "My",
+            "grandfather",
+            "is",
+            "kind"
+          ],
+          "audioText": "My grandfather is kind.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "family-description"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n1.c05.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Elige la frase sobre una abuela."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "My uncle is kind."
+              },
+              {
+                "text": "My aunt is kind."
+              },
+              {
+                "text": "My grandmother is kind."
+              }
+            ],
+            "teaches": [
+              "family-description"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Compara sujeto, verbo y significado con el modelo enseñado."
+              },
+              "hint": {
+                "es": "Descarta primero las opciones que no responden a la consigna."
+              }
+            },
+            "contentHash": "sha256:3f8b843922676fe233384e2d815aa55dda9a081f783454f87e941f167cdb7cec"
+          },
+          {
+            "id": "en.n1.c05.pg02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre la familia."
+            },
+            "answer": {
+              "text": "Our family is small.",
+              "tokens": [
+                "Our",
+                "family",
+                "is",
+                "small."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "family-description"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              },
+              "hint": {
+                "es": "Empieza por el sujeto y coloca después la forma verbal."
+              }
+            },
+            "contentHash": "sha256:6c7fe589153da99ff5fe1548c5290992ae29b75a54cd5f9b0124793587690ef9"
+          },
+          {
+            "id": "en.n1.c05.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: My home is in this ___."
+            },
+            "answer": {
+              "text": "photo",
+              "accepted": [
+                "photo"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "family-description"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "text": "Presenta una imagen.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              },
+              "hint": {
+                "es": "Lee la oración entera y busca el patrón visto en los ejemplos."
+              }
+            },
+          "contentHash": "sha256:07af3e0e40afa6bcc99aece4a7421211f440a018cc6c01c53c1f120a086351c9"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n1.c05.p01",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe en inglés: «Mi abuelo es amable»."
+            },
+            "answer": {
+              "text": "My grandfather is kind.",
+              "accepted": [
+                "My grandfather is kind.",
+                "My grandfather is kind",
+                "my grandfather is kind.",
+                "my grandfather is kind"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-description"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Describe a un familiar.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:e56837d3991fdbd3160734e526e5a79fd70c34afdf07361e307b72439c49fbb0"
+          },
+          {
+            "id": "en.n1.c05.p02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Our family is small."
+              },
+              {
+                "text": "Our home is small."
+              },
+              {
+                "text": "The child is small."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "family-description"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "Our family is small.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:64aa54c1285ea5c997a5ca41da98df7c9ef581afbfb4da21d07c312bb980d76b"
+          },
+          {
+            "id": "en.n1.c05.p03",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona palabra y traducción."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "grandmother",
+                  {
+                    "es": "abuela"
+                  }
+                ],
+                [
+                  "uncle",
+                  {
+                    "es": "tío"
+                  }
+                ],
+                [
+                  "home",
+                  {
+                    "es": "casa"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-description"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "grandmother",
+                  {
+                    "es": "abuela"
+                  }
+                ],
+                [
+                  "uncle",
+                  {
+                    "es": "tío"
+                  }
+                ],
+                [
+                  "home",
+                  {
+                    "es": "casa"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:422ffe419565f5c67f91f506551bc4e1bf1bae5706a5c6f9c088f3402a148537"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n1.c05.e01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "¿Qué frase sirve para presentarte con tu nombre?"
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Hello, my name is Ana."
+              },
+              {
+                "text": "The chair is blue."
+              },
+              {
+                "text": "They are my parents."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "identity-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "Hello, my name is Ana.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:0aa53775c323e4341fc25fa2e4de04980bc1decf973e2f89ea4957e6261c913a"
+          },
+          {
+            "id": "en.n1.c05.e02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase que presenta a los padres."
+            },
+            "answer": {
+              "text": "They are my parents.",
+              "tokens": [
+                "They",
+                "are",
+                "my",
+                "parents."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "pronouns-be",
+              "family-be"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:829c916fb1c9fc74cea276bbfbc89bbc26f2c9121d3f63ae0f6fb12968add726"
+          },
+          {
+            "id": "en.n1.c05.e03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Traduce: «Esto es un libro»."
+            },
+            "answer": {
+              "text": "This is a book.",
+              "accepted": [
+                "This is a book.",
+                "This is a book",
+                "this is a book.",
+                "this is a book"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "classroom-objects"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Transferencia acumulativa de objetos del aula.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado: sujeto, forma de be y complemento."
+              }
+            },
+            "contentHash": "sha256:50399bd16342e138f0d10f9b4629e2abc8b87a562eb81bc27a64d0c1c9071998"
+          },
+          {
+            "id": "en.n1.c05.e04",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona vocabulario familiar."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "grandfather",
+                  {
+                    "es": "abuelo"
+                  }
+                ],
+                [
+                  "aunt",
+                  {
+                    "es": "tía"
+                  }
+                ],
+                [
+                  "kind",
+                  {
+                    "es": "amable"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-vocabulary"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "pairs": [
+                [
+                  "grandfather",
+                  {
+                    "es": "abuelo"
+                  }
+                ],
+                [
+                  "aunt",
+                  {
+                    "es": "tía"
+                  }
+                ],
+                [
+                  "kind",
+                  {
+                    "es": "amable"
+                  }
+                ]
+              ],
+              "feedback": {
+                "es": "Compara cada palabra inglesa con su significado antes de confirmar todas las parejas."
+              }
+            },
+            "contentHash": "sha256:b606b2bfed7f8c1d811729da7a42f4a9547a176e400960c828071d59e166aa81"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n1.c05.r01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y elige quién es amable."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "My uncle is kind."
+              },
+              {
+                "text": "My aunt is kind."
+              },
+              {
+                "text": "My grandfather is kind."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "family-description"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "audio": "My grandfather is kind.",
+              "feedback": {
+                "es": "Escucha de nuevo y localiza primero las palabras clave antes de elegir."
+              },
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "contentHash": "sha256:c66fb19cdd07783d19ef1b113ad511089d3161e382d7128eec1dceb12a3bdf9f"
+          },
+          {
+            "id": "en.n1.c05.r02",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: Our family is ___."
+            },
+            "answer": {
+              "text": "small.",
+              "accepted": [
+                "small.",
+                "small"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-description"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "text": "Describe el tamaño de la familia.",
+              "feedback": {
+                "es": "Revisa el patrón enseñado y comprueba que la palabra encaje en toda la oración."
+              }
+            },
+            "contentHash": "sha256:6a1c0685f5dc8da06040ef341efd0476b3b9129cbc5ab815e13c4da39ba83f8e"
+          },
+          {
+            "id": "en.n1.c05.r03",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la frase sobre una casa."
+            },
+            "answer": {
+              "text": "Our home is small.",
+              "tokens": [
+                "Our",
+                "home",
+                "is",
+                "small."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "family-description"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Comprueba el orden sujeto + verbo + complemento y vuelve a leer la frase completa."
+              }
+            },
+            "contentHash": "sha256:4590554638a59babb4ae45ac0bd16ab208db5befa27ea9766eb6794f926c31f3"
+          }
+        ]
+      },
+      "prerequisites": [
+        "en.n1.class-04"
+      ],
+      "concepts": [
+        "family-description"
+      ],
+      "usesPatterns": [
+        "identity-be",
+        "pronouns-be",
+        "classroom-objects",
+        "family-vocabulary",
+        "family-description"
+      ],
+      "skills": [
+        "lectura",
+        "escucha",
+        "escritura-controlada"
+      ],
+      "accessibility": {
+        "shortSpanishInstructions": true,
+        "audioSpeedOptions": [
+          0.75,
+          1.0
+        ],
+        "audioMaxReplays": 3,
+        "revealTranscriptAfterAttempt": true,
+        "acceptCaseAndTerminalPunctuationVariants": true,
+        "lowLoadMode": "one_item_at_a_time",
+        "orderAndWriteSegmentation": true,
+        "guidedChoiceAlternativeBeforeWriting": true
+      },
+      "recovery": {
+        "afterTwoErrors": "reteach_then_guided_variant",
+        "preserveAttemptEvidence": true,
+        "reviewTargetsFailedConcepts": true,
+        "maxIndependentAttemptsBeforeReteach": 2
+      },
+      "cumulativeEvaluation": [
+        "identity-be",
+        "pronouns-be",
+        "classroom-objects",
+        "family-vocabulary"
+      ],
+      "remediationMap": {
+        "en.n1.c05.e01": {
+          "reteach": "en.n1.class-05.t01",
+          "review": "en.n1.c05.r01"
+        },
+        "en.n1.c05.e02": {
+          "reteach": "en.n1.class-05.t02",
+          "review": "en.n1.c05.r02"
+        },
+        "en.n1.c05.e03": {
+          "reteach": "en.n1.class-05.t03",
+          "review": "en.n1.c05.r03"
+        },
+        "en.n1.c05.e04": {
+          "reteach": "en.n1.class-05.t04",
+          "review": "en.n1.c05.r01"
+        }
+      }
+    }
+  ],
+  "selectionPolicy": {
+    "deterministic": true,
+    "selectionIdGeneratedAtAttempt": true,
+    "excludeRecentFamilies": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ],
+    "resumeUsesFrozenSelection": true
+  }
+}

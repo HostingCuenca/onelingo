@@ -1,0 +1,799 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-38",
+  "title": {
+    "en": "Which service is it?",
+    "es": "¿Qué servicio es?"
+  },
+  "objectives": {
+    "es": [
+      "Localizar el referente definido en un anuncio de servicio.",
+      "Ignorar horarios o detalles extra que no cambian el referente."
+    ]
+  },
+  "concepts": [
+    "n3-defining-information-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-37"
+  ],
+  "usesVocabulary": [
+    "advert",
+    "referent",
+    "detail",
+    "person",
+    "service",
+    "location"
+  ],
+  "usesPatterns": [
+    "n3-defining-information-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "advert",
+      "es": "anuncio"
+    },
+    {
+      "en": "referent",
+      "es": "referente"
+    },
+    {
+      "en": "detail",
+      "es": "detalle"
+    },
+    {
+      "en": "person",
+      "es": "persona"
+    },
+    {
+      "en": "service",
+      "es": "servicio"
+    },
+    {
+      "en": "location",
+      "es": "ubicación"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-38.t01",
+      "en": "Read the whole advert before choosing.",
+      "es": "Lee todo el anuncio antes de elegir.",
+      "explanationEs": "La información definitoria puede aparecer después del nombre.",
+      "segments": [
+        {
+          "en": "Read the whole",
+          "es": "Lee todo el"
+        },
+        {
+          "en": "advert before choosing.",
+          "es": "anuncio antes de elegir."
+        }
+      ],
+      "audioText": "Read the whole advert before choosing.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-defining-information-3"
+    },
+    {
+      "id": "en.n3.class-38.t02",
+      "en": "The referent is the person, thing or place being defined.",
+      "es": "El referente es la persona, cosa o lugar definido.",
+      "explanationEs": "Who, which/that y where ayudan a localizarlo.",
+      "segments": [
+        {
+          "en": "The referent is the person,",
+          "es": "El referente es la"
+        },
+        {
+          "en": "thing or place being defined.",
+          "es": "persona, cosa o lugar definido."
+        }
+      ],
+      "audioText": "The referent is the person, thing or place being defined.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-defining-information-3"
+    },
+    {
+      "id": "en.n3.class-38.t03",
+      "en": "The relative detail identifies the service exactly.",
+      "es": "El detalle relativo identifica el servicio con precisión.",
+      "explanationEs": "La función es más importante que información secundaria.",
+      "segments": [
+        {
+          "en": "The relative detail",
+          "es": "El detalle relativo identifica"
+        },
+        {
+          "en": "identifies the service exactly.",
+          "es": "el servicio con precisión."
+        }
+      ],
+      "audioText": "The relative detail identifies the service exactly.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-defining-information-3"
+    },
+    {
+      "id": "en.n3.class-38.t04",
+      "en": "Where points to a location in which an activity happens.",
+      "es": "Where señala una ubicación en la que ocurre una actividad.",
+      "explanationEs": "No confundas el lugar con un objeto cercano.",
+      "segments": [
+        {
+          "en": "Where points to a location",
+          "es": "Where señala una ubicación en"
+        },
+        {
+          "en": "in which an activity happens.",
+          "es": "la que ocurre una actividad."
+        }
+      ],
+      "audioText": "Where points to a location in which an activity happens.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-defining-information-3"
+    },
+    {
+      "id": "en.n3.class-38.t05",
+      "en": "A person may be mentioned beside extra opening times.",
+      "es": "Una persona puede aparecer junto a horarios adicionales.",
+      "explanationEs": "El horario no cambia quién realiza la función.",
+      "segments": [
+        {
+          "en": "A person may be",
+          "es": "Una persona puede aparecer"
+        },
+        {
+          "en": "mentioned beside extra opening times.",
+          "es": "junto a horarios adicionales."
+        }
+      ],
+      "audioText": "A person may be mentioned beside extra opening times.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-defining-information-3"
+    },
+    {
+      "id": "en.n3.class-38.t06",
+      "en": "For an integrated advert set, extract one person, one object and one place.",
+      "es": "En un conjunto integrado, extrae una persona, un objeto y un lugar.",
+      "explanationEs": "Cada respuesta debe citar el detalle que la define.",
+      "segments": [
+        {
+          "en": "For an integrated advert set, extract",
+          "es": "En un conjunto integrado, extrae una"
+        },
+        {
+          "en": "one person, one object and one place.",
+          "es": "persona, un objeto y un lugar."
+        }
+      ],
+      "audioText": "For an integrated advert set, extract one person, one object and one place.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-defining-information-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c38.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "El anuncio dice someone who repairs watches. ¿Quién es?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The waiting customer"
+          },
+          {
+            "text": "The shop owner next door"
+          },
+          {
+            "text": "The watch repairer"
+          }
+        ],
+        "teaches": [
+          "n3-defining-information-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Who repairs watches define al reparador, no a las personas mencionadas cerca."
+          },
+          "hint": {
+            "es": "Busca el referente que realiza la acción definitoria."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3b5a03de9d1fb957582a06704b514d0ceecb89b4f060c3182b717b33063fed70"
+      },
+      {
+        "id": "en.n3.c38.pg02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el lugar descrito."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The tool library"
+          },
+          {
+            "text": "The sports hall"
+          },
+          {
+            "text": "The post office"
+          }
+        ],
+        "teaches": [
+          "n3-defining-information-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "The tool library es el lugar donde los residentes toman herramientas prestadas."
+          },
+          "hint": {
+            "es": "La acción después de where identifica el servicio."
+          },
+          "audio": "Visit the centre where residents can borrow tools for home repairs.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6997a7604074980d65cad15e4fe86fd9f6e89e9bf5bd4b7057669a606f8e2e49"
+      },
+      {
+        "id": "en.n3.c38.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el detalle que define un servicio de reparto."
+        },
+        "answer": {
+          "text": "It is a service that delivers medicine on the same day.",
+          "tokens": [
+            "It",
+            "is",
+            "a",
+            "service",
+            "that",
+            "delivers",
+            "medicine",
+            "on",
+            "the",
+            "same",
+            "day."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-defining-information-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "That delivers medicine distingue el servicio por su función."
+          },
+          "hint": {
+            "es": "Coloca la cláusula relativa después de service."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0799f09191936d3d3513ecb98a4a1de382677334cfd3717991ac18ff46ac82c8"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c38.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada anuncio con su referente exacto."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "a person who fits new locks",
+              {
+                "es": "locksmith"
+              }
+            ],
+            [
+              "a device which prints labels",
+              {
+                "es": "label printer"
+              }
+            ],
+            [
+              "a place where bikes are stored",
+              {
+                "es": "cycle store"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Persona, objeto y lugar se identifican mediante el detalle definitorio."
+          },
+          "pairs": [
+            [
+              "a person who fits new locks",
+              {
+                "es": "locksmith"
+              }
+            ],
+            [
+              "a device which prints labels",
+              {
+                "es": "label printer"
+              }
+            ],
+            [
+              "a place where bikes are stored",
+              {
+                "es": "cycle store"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:81631f5cb549b55525a6971e771b5826e6383c24ea0d1dc9fe535b9f59b8dcbc"
+      },
+      {
+        "id": "en.n3.c38.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona el objeto, no la información extra."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The opening time"
+          },
+          {
+            "text": "The visitor card"
+          },
+          {
+            "text": "The office manager"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Which records arrivals define la tarjeta; la hora es información adicional."
+          },
+          "audio": "Our office opens at eight. Use the card which records each visitor's arrival.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:73702d1cea64f928afbb002a417919e349698c3dfc4bb727d61eaa913563aeb7"
+      },
+      {
+        "id": "en.n3.c38.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Identifica persona, objeto y lugar en tres anuncios."
+        },
+        "answer": {
+          "text": "Person: the shoe repairer. Object: the key machine. Place: the parcel collection point.",
+          "accepted": [
+            "Person: the shoe repairer. Object: the key machine. Place: the parcel collection point.",
+            "The cobbler is the person; the key cutter is the object; the collection desk is the place."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las respuestas recuperan los tres referentes a partir del detalle relativo."
+          },
+          "text": "who repairs shoes; which copies keys; where customers collect parcels."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:78cfa8653ba2bbd4813b58d7b4c8b35c2663f822fa1c45b50520dec207608bad"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c38.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Quién ofrece el apoyo definido en el anuncio?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The adviser who checks benefit forms"
+          },
+          {
+            "text": "The receptionist who opens the door"
+          },
+          {
+            "text": "The visitor who waits outside"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Checking benefit forms es el detalle que identifica al adviser solicitado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:772b4d753d9ce00c7bbed06a097984ae41c00304b6b5143401f6abf1866f87bf"
+      },
+      {
+        "id": "en.n3.c38.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona el servicio descrito."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Furniture sales"
+          },
+          {
+            "text": "Room decoration"
+          },
+          {
+            "text": "Home furniture collection"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Collects large furniture from home define el servicio de recogida."
+          },
+          "audio": "We recommend the service that collects large furniture from your home.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:308bb19694fef00e738be2c472402289175a8eb7eeff2cdc57081e5826d739a6"
+      },
+      {
+        "id": "en.n3.c38.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el lugar definido por where you can report lost property."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "A lost-property office"
+          },
+          {
+            "text": "A waiting room"
+          },
+          {
+            "text": "A ticket machine"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La oficina de objetos perdidos es el lugar donde se reportan pertenencias."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:08a60674a59691f09a71cc724bf489da42ae9db77788ccd21ca784f4e814759d"
+      },
+      {
+        "id": "en.n3.c38.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Lee tres anuncios e identifica persona, objeto y lugar."
+        },
+        "answer": {
+          "text": "Person: Nara, the translator. Object: the queue-number tablet. Place: the adviser meeting room.",
+          "accepted": [
+            "Person: Nara, the translator. Object: the queue-number tablet. Place: the adviser meeting room.",
+            "Nara is the person; the tablet displaying queue numbers is the object; the room for tenant-adviser meetings is the place."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta usa solo los detalles definitorios y descarta horarios y ubicación extra."
+          },
+          "text": "A: Ask for Nara, who translates housing letters; she works mornings. B: Use the tablet which displays queue numbers; it is beside reception. C: Go to the room where tenants meet advisers; it closes at six."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2a2abe076849a9e751bf8005f8e2c64db23d7e7c31872a6b4ab4e5fe1314bef7"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c38.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué objeto describe which checks air quality?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A window cleaner"
+          },
+          {
+            "text": "A health adviser"
+          },
+          {
+            "text": "An air-quality sensor"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El sensor es el objeto que mide la calidad del aire."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97df1cf0c209205a377ec89cb951fa62d9ecc20608512b650cf14b9048a88c78"
+      },
+      {
+        "id": "en.n3.c38.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el referente principal."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Friday"
+          },
+          {
+            "text": "The volunteer"
+          },
+          {
+            "text": "The online form"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Who helps people complete forms define al voluntario."
+          },
+          "audio": "The centre is busy on Fridays. Ask for the volunteer who helps people complete online forms.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc19e3f1dfbc8f54a0d04da96ab480ff9a302efa7a95fc7ca4c64a823317cec7"
+      },
+      {
+        "id": "en.n3.c38.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Recupera tres referentes de anuncios nuevos."
+        },
+        "answer": {
+          "text": "Person: the hearing specialist. Object: the digital ticket wallet. Place: the battery collection point.",
+          "accepted": [
+            "Person: the hearing specialist. Object: the digital ticket wallet. Place: the battery collection point.",
+            "The hearing tester is the person; the ticket wallet is the object; the battery point is the place."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-defining-information-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Los tres referentes se apoyan en acciones distintas y explícitas."
+          },
+          "text": "who tests hearing; which stores digital tickets; where residents leave batteries."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dfdb63541691710cc58bdd2f168ddbae8d9aefade5b8868f03a74b2187e3924f"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c38.e01": {
+      "reteach": "en.n3.class-38.t02",
+      "review": "en.n3.c38.r02"
+    },
+    "en.n3.c38.e02": {
+      "reteach": "en.n3.class-38.t03",
+      "review": "en.n3.c38.r01"
+    },
+    "en.n3.c38.e03": {
+      "reteach": "en.n3.class-38.t04",
+      "review": "en.n3.c38.r03"
+    },
+    "en.n3.c38.e04": {
+      "reteach": "en.n3.class-38.t06",
+      "review": "en.n3.c38.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

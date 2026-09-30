@@ -418,17 +418,15 @@ class _StepViewState extends State<_StepView> {
       _titulo(t, 'Nueva palabra'),
       Tarjeta(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-        onTap: () => setState(() => mostrarTraduccion = !mostrarTraduccion),
+        onTap: () => Voz.instancia.hablar(s.prompt, idiomaContenido),
+        etiquetaSemantica: 'Escuchar ${s.prompt}',
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () => Voz.instancia.hablar(s.prompt, idiomaContenido),
-              child: const IconoCuadro(
-                Icons.volume_up_outlined,
-                tamano: 56,
-                radio: 28,
-                relleno: true,
-              ),
+            const IconoCuadro(
+              Icons.volume_up_outlined,
+              tamano: 56,
+              radio: 28,
+              relleno: true,
             ),
             const SizedBox(height: 20),
             Text(s.prompt, textAlign: TextAlign.center, style: t.headlineLarge),
@@ -446,10 +444,17 @@ class _StepViewState extends State<_StepView> {
                       ),
                     )
                   : const Text(
-                      'Toca para ver la traducción',
+                      'Toca la tarjeta para escuchar',
                       key: ValueKey('hint'),
                       style: TextStyle(color: OL.gris),
                     ),
+            ),
+            TextButton(
+              onPressed: () =>
+                  setState(() => mostrarTraduccion = !mostrarTraduccion),
+              child: Text(
+                mostrarTraduccion ? 'OCULTAR TRADUCCIÓN' : 'VER TRADUCCIÓN',
+              ),
             ),
           ],
         ),
@@ -641,73 +646,73 @@ class _StepViewState extends State<_StepView> {
     ],
   );
 
-  Widget _escucha(TextTheme t) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      _titulo(t, 'Escucha y escribe'),
-      Tarjeta(
-        child: Column(
-          children: [
-            IconButton.filled(
-              style: IconButton.styleFrom(
-                backgroundColor: OL.morado,
-                fixedSize: const Size(72, 72),
-              ),
-              onPressed: () {
-                Voz.instancia.hablar(s.prompt, idiomaContenido, velocidad: 0.4);
-                setState(() => mostrarAudio = true);
-                Timer(const Duration(milliseconds: 1800), () {
-                  if (mounted) setState(() => mostrarAudio = false);
-                });
-              },
-              icon: const Icon(
+  Widget _escucha(TextTheme t) {
+    void reproducir() {
+      Voz.instancia.hablar(s.prompt, idiomaContenido, velocidad: 0.4);
+      setState(() => mostrarAudio = true);
+      Timer(const Duration(milliseconds: 1800), () {
+        if (mounted) setState(() => mostrarAudio = false);
+      });
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _titulo(t, 'Escucha y escribe'),
+        Tarjeta(
+          onTap: reproducir,
+          etiquetaSemantica: 'Reproducir audio para escribir',
+          child: Column(
+            children: [
+              const IconoCuadro(
                 Icons.play_arrow_rounded,
-                color: OL.blanco,
-                size: 36,
+                tamano: 72,
+                radio: 36,
+                relleno: true,
               ),
-            ),
-            const SizedBox(height: 10),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: mostrarAudio
-                  ? const Text(
-                      'Reproduciendo…',
-                      key: ValueKey('a'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        color: OL.morado,
+              const SizedBox(height: 10),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                child: mostrarAudio
+                    ? const Text(
+                        'Reproduciendo…',
+                        key: ValueKey('a'),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: OL.morado,
+                        ),
+                      )
+                    : const Text(
+                        'Toca para escuchar (puedes repetirlo las veces que quieras)',
+                        key: ValueKey('b'),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: OL.gris, fontSize: 12),
                       ),
-                    )
-                  : const Text(
-                      'Toca para escuchar (puedes repetirlo las veces que quieras)',
-                      key: ValueKey('b'),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: OL.gris, fontSize: 12),
-                    ),
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
-      ),
-      const SizedBox(height: 14),
-      TextField(
-        controller: texto,
-        enabled: correcto == null,
-        onChanged: (_) => setState(() {}),
-        minLines: 2,
-        maxLines: 3,
-        decoration: const InputDecoration(
-          hintText: 'Escribe lo que escuches...',
+        const SizedBox(height: 14),
+        TextField(
+          controller: texto,
+          enabled: correcto == null,
+          onChanged: (_) => setState(() {}),
+          minLines: 2,
+          maxLines: 3,
+          decoration: const InputDecoration(
+            hintText: 'Escribe lo que escuches...',
+          ),
         ),
-      ),
-      const SizedBox(height: 10),
-      if (s.hint.isNotEmpty)
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Etiqueta('Pista: ${s.hint}', icono: Icons.lightbulb_outline),
-        ),
-    ],
-  );
+        const SizedBox(height: 10),
+        if (s.hint.isNotEmpty)
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Etiqueta('Pista: ${s.hint}', icono: Icons.lightbulb_outline),
+          ),
+      ],
+    );
+  }
 
   Widget _parejas(TextTheme t) {
     final izquierda = s.pairs.map((p) => p.$1).toList();
@@ -806,6 +811,9 @@ class _StepViewState extends State<_StepView> {
         _titulo(t, 'Repite en voz alta'),
         Tarjeta(
           padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 20),
+          onTap: () =>
+              Voz.instancia.hablar(s.prompt, idiomaContenido, velocidad: 0.4),
+          etiquetaSemantica: 'Escuchar modelo: ${s.prompt}',
           child: Column(
             children: [
               Text(
@@ -823,14 +831,28 @@ class _StepViewState extends State<_StepView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  OutlinedButton.icon(
-                    onPressed: () => Voz.instancia.hablar(
-                      s.prompt,
-                      idiomaContenido,
-                      velocidad: 0.4,
+                  const Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.volume_up_outlined,
+                          size: 22,
+                          color: OL.morado,
+                        ),
+                        SizedBox(width: 8),
+                        Flexible(
+                          child: Text(
+                            'Toca la tarjeta para escuchar',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: OL.morado,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    icon: const Icon(Icons.volume_up_outlined, size: 18),
-                    label: const Text('Escuchar modelo'),
                   ),
                   const SizedBox(width: 12),
                   IconButton.filled(
@@ -1014,23 +1036,23 @@ class _StepViewState extends State<_StepView> {
               alignment: i.isEven
                   ? Alignment.centerLeft
                   : Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () => Voz.instancia.hablar(
-                  visibles[i].$2,
-                  idiomaContenido,
-                  voz: i.isEven ? 'narrador' : 'narradora',
-                ),
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 300),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 300),
+                child: Tarjeta(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 14,
                     vertical: 11,
                   ),
-                  decoration: BoxDecoration(
-                    color: i.isEven ? OL.blanco : OL.morado,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: i.isEven ? OL.sombra(0.06) : null,
+                  color: i.isEven ? OL.blanco : OL.morado,
+                  borde: i.isEven ? OL.grisClaro : OL.morado,
+                  radio: 16,
+                  sombra: i.isEven,
+                  onTap: () => Voz.instancia.hablar(
+                    visibles[i].$2,
+                    idiomaContenido,
+                    voz: i.isEven ? 'narrador' : 'narradora',
                   ),
+                  etiquetaSemantica: 'Escuchar ${visibles[i].$2}',
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

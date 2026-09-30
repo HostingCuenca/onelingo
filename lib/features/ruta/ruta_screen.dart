@@ -23,8 +23,11 @@ class RutaScreen extends ConsumerWidget {
     final ruta = ref.watch(rutaProvider(s.idiomaMeta));
     final nombre = idioma(s.idiomaMeta).nombre;
     final r = ruta.valueOrNull;
-    final datosNivel = r?.curso.niveles.where((n) => n.id == nivel).firstOrNull;
-    final titulo = nivel == 'f0' || datosNivel == null
+    final nivelResuelto = r == null ? nivel : resolverNivelHistorico(r, nivel);
+    final datosNivel = r?.curso.niveles
+        .where((n) => n.id == nivelResuelto)
+        .firstOrNull;
+    final titulo = nivelResuelto == 'f0' || datosNivel == null
         ? 'Fundamentos de $nombre'
         : '${datosNivel.titulo.en(cadenaDelAlumno(s, r!.curso))} · $nombre';
     return Scaffold(
@@ -40,14 +43,32 @@ class RutaScreen extends ConsumerWidget {
       body: Movil(
         child: ruta.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, _) => const Center(child: Text('No se pudo cargar la ruta.')),
+          error: (_, _) =>
+              const Center(child: Text('No se pudo cargar la ruta.')),
           data: (r) => r == null
               ? _SinRuta(nombre: nombre)
-              : _Ruta(ruta: r, estado: s, nivel: nivel),
+              : _Ruta(
+                  ruta: r,
+                  estado: s,
+                  nivel: resolverNivelHistorico(r, nivel),
+                ),
         ),
       ),
     );
   }
+}
+
+/// Conserva enlaces guardados de la ruta inglesa anterior sin duplicar sus
+/// 29 unidades. Ambos tramos A1 históricos aterrizan en el N1 editorial.
+String resolverNivelHistorico(RutaCargada ruta, String solicitado) {
+  if (ruta.delNivel(solicitado).isNotEmpty) return solicitado;
+  if (ruta.curso.idioma == 'en' &&
+      ruta.curso.usaEscalaCliente &&
+      const {'a1-1', 'a1-2'}.contains(solicitado) &&
+      ruta.delNivel('n1').isNotEmpty) {
+    return 'n1';
+  }
+  return solicitado;
 }
 
 class _SinRuta extends StatelessWidget {
@@ -95,7 +116,8 @@ UnidadRuta? recomendadaEnNivel(
 NivelCurso? nivelSiguiente(RutaCargada ruta, String nivel) {
   final publicados = [
     for (final n in ruta.curso.niveles)
-      if (n.estado == EstadoNivel.publicado && ruta.delNivel(n.id).isNotEmpty) n,
+      if (n.estado == EstadoNivel.publicado && ruta.delNivel(n.id).isNotEmpty)
+        n,
   ];
   final i = publicados.indexWhere((n) => n.id == nivel);
   return i >= 0 && i + 1 < publicados.length ? publicados[i + 1] : null;
@@ -144,15 +166,19 @@ class _Ruta extends StatelessWidget {
                 t(
                   modulos.length == 1
                       ? modulos.first.titulo
-                      : ruta.curso.niveles.firstWhere((n) => n.id == nivel).titulo,
+                      : ruta.curso.niveles
+                            .firstWhere((n) => n.id == nivel)
+                            .titulo,
                 ),
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
             if (ruta.curso.revisionInicial)
               const Tooltip(
-                message:
-                    'Contenido nuevo pendiente de revisión por hablantes nativos.',
+                message: 'Contenido nuevo pendiente de revisión por hablantes nativos.',
                 child: Etiqueta(
                   'Versión inicial',
                   color: OL.naranja,
@@ -168,7 +194,10 @@ class _Ruta extends StatelessWidget {
           style: const TextStyle(color: OL.gris, fontSize: 16),
         ),
         const SizedBox(height: 8),
-        BarraProgreso(unidades.isEmpty ? 0 : aprobadas / unidades.length, alto: 8),
+        BarraProgreso(
+          unidades.isEmpty ? 0 : aprobadas / unidades.length,
+          alto: 8,
+        ),
         const SizedBox(height: 18),
         if (recomendada != null)
           _Destacada(
@@ -188,14 +217,21 @@ class _Ruta extends StatelessWidget {
                   : context.push(destinoSiguiente),
               child: Row(
                 children: [
-                  const Icon(Icons.emoji_events_outlined, color: OL.verde, size: 32),
+                  const Icon(
+                    Icons.emoji_events_outlined,
+                    color: OL.verde,
+                    size: 32,
+                  ),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       siguienteNivel == null
                           ? 'Nivel completado. Sigue practicando en Aprender.'
                           : 'Nivel completado. Continúa: ${t(siguienteNivel.titulo)}.',
-                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                   const Icon(Icons.chevron_right_rounded),
@@ -211,7 +247,10 @@ class _Ruta extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(4, 8, 4, 10),
               child: Text(
                 t(modulos.firstWhere((m) => m.id == u.modulo).titulo),
-                style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ),
           Padding(
@@ -284,8 +323,8 @@ class _Destacada extends StatelessWidget {
   final String titulo, objetivo;
   @override
   Widget build(BuildContext context) {
-    final repaso = info.repasoPendiente &&
-        info.estado.alMenos(EstadoUnidad.aprobada);
+    final repaso =
+        info.repasoPendiente && info.estado.alMenos(EstadoUnidad.aprobada);
     final destino = repaso
         ? '/fundamentos/unidad/${unidad.id}?modo=repaso'
         : '/fundamentos/unidad/${unidad.id}';
@@ -304,7 +343,10 @@ class _Destacada extends StatelessWidget {
                   : info.estado == EstadoUnidad.disponible
                   ? 'Siguiente paso'
                   : 'Continúa',
-              style: const TextStyle(color: OL.morado, fontWeight: FontWeight.w800),
+              style: const TextStyle(
+                color: OL.morado,
+                fontWeight: FontWeight.w800,
+              ),
             ),
             const SizedBox(height: 6),
             Text(
@@ -341,7 +383,11 @@ class _FilaUnidad extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloqueada = info.estado == EstadoUnidad.bloqueada;
     final hecha = info.estado.alMenos(EstadoUnidad.aprobada);
-    final color = bloqueada ? OL.gris : hecha ? OL.verde : OL.morado;
+    final color = bloqueada
+        ? OL.gris
+        : hecha
+        ? OL.verde
+        : OL.morado;
     return Semantics(
       button: true,
       label: '$titulo. ${etiquetaEstado(info)}',
@@ -357,14 +403,21 @@ class _FilaUnidad extends StatelessWidget {
                 children: [
                   Text(
                     '${unidad.orden}. $titulo',
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     bloqueada && previa != null
                         ? 'Puedes leerla. Para practicar, primero «$previa».'
                         : objetivo,
-                    style: const TextStyle(color: OL.gris, fontSize: 15, height: 1.3),
+                    style: const TextStyle(
+                      color: OL.gris,
+                      fontSize: 15,
+                      height: 1.3,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(

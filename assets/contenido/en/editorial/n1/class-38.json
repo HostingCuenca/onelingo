@@ -1,0 +1,670 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "vocabularyDeclarations": "exhaustive"
+  },
+  "id": "en.n1.class-38",
+  "title": {
+    "en": "Subject, verb and object",
+    "es": "Orden sujeto + verbo + objeto"
+  },
+  "concepts": [
+    "subject-verb-object-order"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n1.class-37"
+  ],
+  "usesVocabulary": [
+    "I",
+    "you",
+    "we",
+    "they",
+    "study",
+    "English",
+    "drink",
+    "coffee",
+    "water",
+    "play",
+    "soccer"
+  ],
+  "usesPatterns": [
+    "subject-verb-object-order",
+    "present-simple-base-pronouns",
+    "routine-verbs"
+  ],
+  "objectives": {
+    "es": [
+      "Construir oraciones en orden sujeto-verbo-objeto.",
+      "Mantener el objeto inmediatamente después del verbo."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "study",
+      "es": "estudiar"
+    },
+    {
+      "en": "English",
+      "es": "inglés"
+    },
+    {
+      "en": "drink",
+      "es": "beber"
+    },
+    {
+      "en": "coffee",
+      "es": "café"
+    },
+    {
+      "en": "water",
+      "es": "agua"
+    },
+    {
+      "en": "soccer",
+      "es": "fútbol"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n1.class-38.t01",
+      "en": "I study English.",
+      "es": "Estudio inglés.",
+      "explanationEs": "El orden es sujeto, verbo y objeto.",
+      "segments": [
+        {
+          "en": "I",
+          "es": "Yo"
+        },
+        {
+          "en": "study English.",
+          "es": "estudio inglés."
+        }
+      ],
+      "audioText": "I study English.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-38.t02",
+      "en": "You drink coffee.",
+      "es": "Bebes café.",
+      "explanationEs": "Coffee va después de drink.",
+      "segments": [
+        {
+          "en": "You",
+          "es": "Tú"
+        },
+        {
+          "en": "drink coffee.",
+          "es": "bebes café."
+        }
+      ],
+      "audioText": "You drink coffee.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-38.t03",
+      "en": "We play soccer.",
+      "es": "Jugamos fútbol.",
+      "explanationEs": "Soccer va después de play.",
+      "segments": [
+        {
+          "en": "We",
+          "es": "Nosotros"
+        },
+        {
+          "en": "play soccer.",
+          "es": "jugamos fútbol."
+        }
+      ],
+      "audioText": "We play soccer.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-38.t04",
+      "en": "They drink water.",
+      "es": "Beben agua.",
+      "explanationEs": "Water completa la acción.",
+      "segments": [
+        {
+          "en": "They",
+          "es": "Ellos"
+        },
+        {
+          "en": "drink water.",
+          "es": "beben agua."
+        }
+      ],
+      "audioText": "They drink water.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n1.c38.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el orden correcto."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I study English."
+          },
+          {
+            "text": "English I study."
+          }
+        ],
+        "teaches": [
+          "subject-verb-object-order"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El sujeto I va primero."
+          },
+          "hint": {
+            "es": "Quién + verbo + qué."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:41ee156c1ef3c0b278dbe508b210969dadcd66817bdfd1d87e10974f396c91e0"
+      },
+      {
+        "id": "en.n1.c38.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: You drink ___."
+        },
+        "answer": {
+          "text": "coffee",
+          "accepted": [
+            "coffee"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "subject-verb-object-order"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Coffee va después de drink."
+          },
+          "hint": {
+            "es": "Completa el objeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2c06b666e259e6f73b031fc1000bc8ee302be336906a0a726a2c2d3e57a983ba"
+      },
+      {
+        "id": "en.n1.c38.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena para decir «Jugamos fútbol»."
+        },
+        "answer": {
+          "text": "We play soccer.",
+          "tokens": [
+            "We",
+            "play",
+            "soccer."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "subject-verb-object-order"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Sujeto + verbo + objeto."
+          },
+          "hint": {
+            "es": "Empieza con We."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:34ee460956b550acbf79e3d269f65740ee50ff81945e84d523672edbdb0cd06b"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n1.c38.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They drink water."
+          },
+          {
+            "text": "They water drink."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Drink va antes de water."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:16c64108ba188573c6c30cbd3304a5ae85eeafcb19e3ad3ed0a63c97a546db67"
+      },
+      {
+        "id": "en.n1.c38.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: We ___ soccer."
+        },
+        "answer": {
+          "text": "play",
+          "accepted": [
+            "play"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Play va entre sujeto y objeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d3b3d0c317d93b7a755c57eb68f1fb59b82d98e4ba58584af8502ed3da224b3e"
+      },
+      {
+        "id": "en.n1.c38.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la frase sobre inglés."
+        },
+        "answer": {
+          "text": "You study English.",
+          "tokens": [
+            "You",
+            "study",
+            "English."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El orden es You + study + English."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97448f5499fd44d76398fc4ae68cc55a92bcbfcdc440112189728dbe47a1640b"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n1.c38.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige «Bebo café»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I drink coffee."
+          },
+          {
+            "text": "I coffee drink."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El verbo precede al objeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c5151ab3db914af6040f03d3d25ee49b454c07c490a5dc447f873a8a0c569ec6"
+      },
+      {
+        "id": "en.n1.c38.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: They study ___."
+        },
+        "answer": {
+          "text": "English",
+          "accepted": [
+            "English",
+            "english"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "English es el objeto de study."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97a020a3ed4ce182a457810cd6dc5085e6089e4bb62224a3032ddebc344e8983"
+      },
+      {
+        "id": "en.n1.c38.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena para decir «Bebemos agua»."
+        },
+        "answer": {
+          "text": "We drink water.",
+          "tokens": [
+            "We",
+            "drink",
+            "water."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "We + drink + water."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:062a86428ace20629faea2849f562ec16a651731d8745c6e763d5bacda679fd0"
+      },
+      {
+        "id": "en.n1.c38.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la frase con el orden correcto."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They play soccer."
+          },
+          {
+            "text": "Soccer they play."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye sujeto, verbo y objeto."
+          },
+          "audio": "They play soccer.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8ed6525875e3ee3c6a7e6aa01c4423afdc766349eb9503b209687fa0d731de15"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n1.c38.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona verbo y objeto frecuente."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "study English",
+              {
+                "es": "estudiar inglés"
+              }
+            ],
+            [
+              "drink coffee",
+              {
+                "es": "beber café"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada objeto sigue a su verbo."
+          },
+          "pairs": [
+            [
+              "study English",
+              {
+                "es": "estudiar inglés"
+              }
+            ],
+            [
+              "drink coffee",
+              {
+                "es": "beber café"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:565dd185645e0a5ef9fa1a45d332783b34b5eca5e936f5a13c00d592ac8b3196"
+      },
+      {
+        "id": "en.n1.c38.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: I ___ water."
+        },
+        "answer": {
+          "text": "drink",
+          "accepted": [
+            "drink"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Drink precede a water."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9db7303ecb8d4b5b1c4798c38591b5858ceb2df79c00e02ab3dad544cb9d2fdb"
+      },
+      {
+        "id": "en.n1.c38.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena para decir «Ellos estudian inglés»."
+        },
+        "answer": {
+          "text": "They study English.",
+          "tokens": [
+            "They",
+            "study",
+            "English."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "subject-verb-object-order"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "They + study + English."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc5dd69e0b9ea9fd49cd4e442419eab047e68afe75f64e3fa3b22fbda42d3d38"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n1.c38.e01": {
+      "reteach": "en.n1.class-38.t01",
+      "review": "en.n1.c38.r01"
+    },
+    "en.n1.c38.e02": {
+      "reteach": "en.n1.class-38.t02",
+      "review": "en.n1.c38.r02"
+    },
+    "en.n1.c38.e03": {
+      "reteach": "en.n1.class-38.t03",
+      "review": "en.n1.c38.r03"
+    },
+    "en.n1.c38.e04": {
+      "reteach": "en.n1.class-38.t04",
+      "review": "en.n1.c38.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

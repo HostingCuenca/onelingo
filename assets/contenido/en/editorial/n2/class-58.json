@@ -1,0 +1,740 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-58",
+  "title": {
+    "en": "Should and shouldn't",
+    "es": "Should y shouldn't"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir consejos con should y acciones que conviene evitar con shouldn't.",
+      "Relacionar recomendaciones de salud cotidiana con una razón comprensible.",
+      "Pedir y redactar consejos breves para problemas comunes de nivel A2."
+    ]
+  },
+  "concepts": [
+    "n2-should-advice"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-57"
+  ],
+  "usesVocabulary": [
+    "rest",
+    "cough",
+    "screen",
+    "appointment",
+    "healthy",
+    "headache",
+    "stress",
+    "improve"
+  ],
+  "usesPatterns": [
+    "n2-should-advice"
+  ],
+  "vocabulary": [
+    {
+      "en": "rest",
+      "es": "descansar"
+    },
+    {
+      "en": "cough",
+      "es": "tos"
+    },
+    {
+      "en": "screen",
+      "es": "pantalla"
+    },
+    {
+      "en": "appointment",
+      "es": "cita"
+    },
+    {
+      "en": "healthy",
+      "es": "saludable"
+    },
+    {
+      "en": "headache",
+      "es": "dolor de cabeza"
+    },
+    {
+      "en": "stress",
+      "es": "estrés"
+    },
+    {
+      "en": "improve",
+      "es": "mejorar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-58.t01",
+      "en": "You should rest if you have a headache.",
+      "es": "Deberías descansar si tienes dolor de cabeza.",
+      "explanationEs": "Should ofrece un consejo; no presenta la acción como una obligación.",
+      "segments": [
+        {
+          "en": "You should rest if",
+          "es": "Deberías descansar si"
+        },
+        {
+          "en": "you have a headache.",
+          "es": "tienes dolor de cabeza."
+        }
+      ],
+      "audioText": "You should rest if you have a headache.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-should-advice"
+    },
+    {
+      "id": "en.n2.class-58.t02",
+      "en": "You shouldn't stare at a screen when your eyes hurt.",
+      "es": "No deberías mirar una pantalla cuando te duelen los ojos.",
+      "explanationEs": "Shouldn't recomienda evitar una acción que puede empeorar el problema.",
+      "segments": [
+        {
+          "en": "You shouldn't stare at a",
+          "es": "No deberías mirar una pantalla"
+        },
+        {
+          "en": "screen when your eyes hurt.",
+          "es": "cuando te duelen los ojos."
+        }
+      ],
+      "audioText": "You shouldn't stare at a screen when your eyes hurt.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-should-advice"
+    },
+    {
+      "id": "en.n2.class-58.t03",
+      "en": "You should make an appointment because your cough is getting worse.",
+      "es": "Deberías pedir una cita porque tu tos está empeorando.",
+      "explanationEs": "Because añade la razón que sostiene la recomendación.",
+      "segments": [
+        {
+          "en": "You should make an appointment",
+          "es": "Deberías pedir una cita"
+        },
+        {
+          "en": "because your cough is getting worse.",
+          "es": "porque tu tos está empeorando."
+        }
+      ],
+      "audioText": "You should make an appointment because your cough is getting worse.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-should-advice"
+    },
+    {
+      "id": "en.n2.class-58.t04",
+      "en": "What should I change to build a healthy routine and improve my sleep?",
+      "es": "¿Qué debería cambiar para crear una rutina saludable y mejorar mi sueño?",
+      "explanationEs": "What should I change permite pedir consejo sobre un cambio concreto.",
+      "segments": [
+        {
+          "en": "What should I change to build",
+          "es": "¿Qué debería cambiar para crear una"
+        },
+        {
+          "en": "a healthy routine and improve my sleep?",
+          "es": "rutina saludable y mejorar mi sueño?"
+        }
+      ],
+      "audioText": "What should I change to build a healthy routine and improve my sleep?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-should-advice"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c58.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Leo tiene dolor de cabeza. Elige un consejo adecuado."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Leo has to finish his shift before he rests."
+          },
+          {
+            "text": "Leo doesn't have to change his schedule today."
+          },
+          {
+            "text": "Leo should rest in a quiet room."
+          }
+        ],
+        "teaches": [
+          "n2-should-advice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should rest ofrece una recomendación útil sin convertirla en obligación."
+          },
+          "hint": {
+            "es": "Should introduce un consejo; must comunica una regla firme."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2baf00347b786bf5a1f3ac685017d0d863b0d2f4f62ea3d21831f9887a12fabe"
+      },
+      {
+        "id": "en.n2.c58.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el consejo: You ___ use the screen for hours without a break."
+        },
+        "answer": {
+          "text": "shouldn't",
+          "accepted": [
+            "shouldn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-should-advice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shouldn't use aconseja evitar un hábito que puede cansar la vista."
+          },
+          "hint": {
+            "es": "La recomendación es evitar la acción, así que usa shouldn't."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3650e0f3dc7d784bc6020cca9a8a6a62935d7d81bd91154a8c7d01875ce5fc14"
+      },
+      {
+        "id": "en.n2.c58.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el consejo para una tos que empeora."
+        },
+        "answer": {
+          "text": "You should make an appointment for that cough.",
+          "tokens": [
+            "You",
+            "should",
+            "make",
+            "an",
+            "appointment",
+            "for",
+            "that",
+            "cough."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-should-advice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should make recomienda pedir una cita a causa de la tos."
+          },
+          "hint": {
+            "es": "Coloca should antes del verbo base make."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ac06af511fee99d577e5d442cc864cb7be0112d3159baf75230ec483ec5c21c1"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c58.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: Para reducir el estrés, deberías caminar después del trabajo."
+        },
+        "answer": {
+          "text": "To reduce stress, you should walk after work.",
+          "accepted": [
+            "To reduce stress, you should walk after work.",
+            "You should take a walk after work to reduce stress."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should walk presenta una acción recomendable para reducir el estrés."
+          },
+          "text": "Para reducir el estrés, deberías caminar después del trabajo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6af863f4a04de22b9766888d7e9ddd60714d2d5c922e491eb1bd2f50e3429db2"
+      },
+      {
+        "id": "en.n2.c58.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el consejo sobre una rutina saludable."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "You shouldn't skip breakfast; a healthy meal can improve your morning."
+          },
+          {
+            "text": "You have to eat breakfast before seven every morning."
+          },
+          {
+            "text": "You don't have to change your breakfast routine."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shouldn't skip aconseja conservar un desayuno saludable para mejorar la mañana."
+          },
+          "audio": "You shouldn't skip breakfast; a healthy meal can improve your morning.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d8adb3fef405adb523d12ff01e8076cd89a3b28dbb0ff693fd423340312f00e8"
+      },
+      {
+        "id": "en.n2.c58.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada problema con una acción útil."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "headache",
+              {
+                "es": "rest in a quiet room"
+              }
+            ],
+            [
+              "cough",
+              {
+                "es": "make an appointment"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El descanso puede ayudar con el dolor de cabeza y una cita permite revisar la tos."
+          },
+          "pairs": [
+            [
+              "headache",
+              {
+                "es": "rest in a quiet room"
+              }
+            ],
+            [
+              "cough",
+              {
+                "es": "make an appointment"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:547f2e4c1cbc6dc207e296b664a4e8814fcb8d189325218fe502aad37dfcc4d5"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c58.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Una amiga está agotada. Elige el consejo, no una regla."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She has to finish all her work before bedtime."
+          },
+          {
+            "text": "She should go to bed earlier."
+          },
+          {
+            "text": "She doesn't have to change her sleep schedule."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should go ofrece una recomendación razonable para alguien agotado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:528e71eb0fbfbd4aa20b01873a326e583d21891500ce33b557aeca59624bc68c"
+      },
+      {
+        "id": "en.n2.c58.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "El café causa dolor de cabeza: You ___ drink it late at night."
+        },
+        "answer": {
+          "text": "shouldn't",
+          "accepted": [
+            "shouldn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shouldn't drink aconseja evitar el café tarde por su efecto negativo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e43f694b6bcd99022795b2f68dae58e6ec9670d9b0069a61197cb87f2161ac5f"
+      },
+      {
+        "id": "en.n2.c58.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el consejo: descansa de la pantalla porque te duelen los ojos."
+        },
+        "answer": {
+          "text": "You should take a screen break because your eyes hurt.",
+          "accepted": [
+            "You should take a screen break because your eyes hurt.",
+            "You should look away from the screen and rest your eyes because they hurt."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should take y because conectan el consejo con la razón visible."
+          },
+          "text": "Descansa de la pantalla porque te duelen los ojos."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cb094b37889e49b690d20ba0a21a0128fdebca28d33d2369eda39cc1042ae4ef"
+      },
+      {
+        "id": "en.n2.c58.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona la pregunta que solicita consejo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "What should I do to reduce stress?"
+          },
+          {
+            "text": "What mustn't I do in the laboratory?"
+          },
+          {
+            "text": "What don't I have to do before the meeting?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "What should I do pide una recomendación para manejar el estrés."
+          },
+          "audio": "What should I do to reduce stress?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e1d65a64fd8f699698191964ab54128e0348e8a10bd9e58fa48995844bf31863"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c58.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona la forma de consejo con su función."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "should",
+              {
+                "es": "acción recomendable"
+              }
+            ],
+            [
+              "shouldn't",
+              {
+                "es": "acción que conviene evitar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should propone una acción útil y shouldn't recomienda evitarla."
+          },
+          "pairs": [
+            [
+              "should",
+              {
+                "es": "acción recomendable"
+              }
+            ],
+            [
+              "shouldn't",
+              {
+                "es": "acción que conviene evitar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:171f86d0f59db4c1566b20e354ed240c2aa3d020e18e17df7bee6cefc32ea8fb"
+      },
+      {
+        "id": "en.n2.c58.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el consejo para pedir una cita en la clínica."
+        },
+        "answer": {
+          "text": "You should call the clinic for an appointment.",
+          "tokens": [
+            "You",
+            "should",
+            "call",
+            "the",
+            "clinic",
+            "for",
+            "an",
+            "appointment."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should call recomienda contactar la clínica para obtener una cita."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b4f4d331c485d8553fd43b58b72f2e25ad5b671fbe5d283b2eaa6c8afe4ca63d"
+      },
+      {
+        "id": "en.n2.c58.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: Para mejorar el sueño, deberías apagar la pantalla temprano."
+        },
+        "answer": {
+          "text": "To improve your sleep, you should turn off the screen early.",
+          "accepted": [
+            "To improve your sleep, you should turn off the screen early.",
+            "You should switch off the screen early to improve your sleep."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-should-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should turn off formula un consejo saludable con un propósito concreto."
+          },
+          "text": "Para mejorar el sueño, deberías apagar la pantalla temprano."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d8fa6517208588914f32d3bd8fa6a48b8b838265724a45f4dced0935dc20d995"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c58.e01": {
+      "reteach": "en.n2.class-58.t01",
+      "review": "en.n2.c58.r01"
+    },
+    "en.n2.c58.e02": {
+      "reteach": "en.n2.class-58.t02",
+      "review": "en.n2.c58.r01"
+    },
+    "en.n2.c58.e03": {
+      "reteach": "en.n2.class-58.t03",
+      "review": "en.n2.c58.r03"
+    },
+    "en.n2.c58.e04": {
+      "reteach": "en.n2.class-58.t04",
+      "review": "en.n2.c58.r02"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

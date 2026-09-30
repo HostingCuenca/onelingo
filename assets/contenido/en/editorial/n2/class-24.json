@@ -1,0 +1,755 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-24",
+  "phase": "production",
+  "title": {
+    "en": "Plan a weekend",
+    "es": "Planificar un fin de semana"
+  },
+  "concepts": [
+    "n2-weekend-planning"
+  ],
+  "skills": [
+    "lectura",
+    "escucha",
+    "escritura",
+    "producción-controlada"
+  ],
+  "prerequisites": [
+    "en.n2.class-23"
+  ],
+  "usesVocabulary": [
+    "itinerary",
+    "reserve",
+    "hike",
+    "picnic",
+    "route",
+    "train",
+    "museum",
+    "weather",
+    "pack"
+  ],
+  "usesPatterns": [
+    "n2-weekend-planning"
+  ],
+  "objectives": {
+    "es": [
+      "Organizar un fin de semana viable con actividades, horarios y alternativas.",
+      "Secuenciar decisiones con first, then y after that sin perder referencias temporales.",
+      "Combinar transporte, reserva y clima en un itinerario breve y coherente."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "itinerary",
+      "es": "itinerario"
+    },
+    {
+      "en": "reserve",
+      "es": "reservar"
+    },
+    {
+      "en": "hike",
+      "es": "hacer senderismo"
+    },
+    {
+      "en": "picnic",
+      "es": "pícnic"
+    },
+    {
+      "en": "route",
+      "es": "ruta"
+    },
+    {
+      "en": "train",
+      "es": "tren"
+    },
+    {
+      "en": "museum",
+      "es": "museo"
+    },
+    {
+      "en": "weather",
+      "es": "clima"
+    },
+    {
+      "en": "pack",
+      "es": "empacar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-24.t01",
+      "en": "On Saturday morning, we are going to hike by the lake.",
+      "es": "El sábado por la mañana vamos a caminar junto al lago.",
+      "explanationEs": "La referencia temporal abre el primer paso del itinerario.",
+      "segments": [
+        {
+          "en": "On Saturday morning, we are",
+          "es": "El sábado por la mañana"
+        },
+        {
+          "en": "going to hike by the lake.",
+          "es": "vamos a caminar junto al lago."
+        }
+      ],
+      "audioText": "On Saturday morning, we are going to hike by the lake.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-weekend-planning"
+    },
+    {
+      "id": "en.n2.class-24.t02",
+      "en": "We are going to reserve museum tickets before Friday.",
+      "es": "Vamos a reservar entradas para el museo antes del viernes.",
+      "explanationEs": "Before Friday establece una fecha límite para la reserva.",
+      "segments": [
+        {
+          "en": "We are going to",
+          "es": "Vamos a reservar entradas para"
+        },
+        {
+          "en": "reserve museum tickets before Friday.",
+          "es": "el museo antes del viernes."
+        }
+      ],
+      "audioText": "We are going to reserve museum tickets before Friday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-weekend-planning"
+    },
+    {
+      "id": "en.n2.class-24.t03",
+      "en": "First, we are going to take the early train.",
+      "es": "Primero vamos a tomar el tren temprano.",
+      "explanationEs": "First marca el inicio del plan y evita un orden ambiguo.",
+      "segments": [
+        {
+          "en": "First, we are going",
+          "es": "Primero vamos a"
+        },
+        {
+          "en": "to take the early train.",
+          "es": "tomar el tren temprano."
+        }
+      ],
+      "audioText": "First, we are going to take the early train.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-weekend-planning"
+    },
+    {
+      "id": "en.n2.class-24.t04",
+      "en": "Then, we are going to have a picnic in the park.",
+      "es": "Después vamos a hacer un pícnic en el parque.",
+      "explanationEs": "Then enlaza la segunda actividad del recorrido.",
+      "segments": [
+        {
+          "en": "Then, we are going to",
+          "es": "Después vamos a hacer"
+        },
+        {
+          "en": "have a picnic in the park.",
+          "es": "un pícnic en el parque."
+        }
+      ],
+      "audioText": "Then, we are going to have a picnic in the park.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-weekend-planning"
+    },
+    {
+      "id": "en.n2.class-24.t05",
+      "en": "If the weather is bad, we are going to visit the aquarium instead.",
+      "es": "Si hace mal tiempo, vamos a visitar el acuario en cambio.",
+      "explanationEs": "La condición introduce una alternativa práctica sin abandonar going to.",
+      "segments": [
+        {
+          "en": "If the weather is bad, we",
+          "es": "Si hace mal tiempo, vamos"
+        },
+        {
+          "en": "are going to visit the aquarium instead.",
+          "es": "a visitar el acuario en cambio."
+        }
+      ],
+      "audioText": "If the weather is bad, we are going to visit the aquarium instead.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-weekend-planning"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c24.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "El paseo empieza el sábado por la mañana. Elige el primer paso del itinerario."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "On Saturday morning, we are going to hike by the lake."
+          },
+          {
+            "text": "We hiked by the lake last Monday."
+          },
+          {
+            "text": "We usually hike after work."
+          }
+        ],
+        "teaches": [
+          "n2-weekend-planning"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La oración elegida fija sábado por la mañana y presenta la caminata como plan futuro."
+          },
+          "hint": {
+            "es": "Busca la opción que combina un momento del fin de semana con going to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3e88d660d8ffffd80b9ec5342b2496fb3cc5b5b9bb48903fb96392366213a6fb"
+      },
+      {
+        "id": "en.n2.c24.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la tarea previa: We ___ museum tickets before Friday."
+        },
+        "answer": {
+          "text": "are going to reserve",
+          "accepted": [
+            "are going to reserve"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-weekend-planning"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Are going to reserve convierte la compra de entradas en una tarea planificada."
+          },
+          "hint": {
+            "es": "Con we, usa are y conserva reserve en forma base."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:804ca2f3dcefdb08e94f74fec11c71105b704204ed0fffcdc86020f3f585fe59"
+      },
+      {
+        "id": "en.n2.c24.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el inicio del recorrido para que first marque la primera acción."
+        },
+        "answer": {
+          "text": "First, we are going to take the early train.",
+          "tokens": [
+            "First,",
+            "we",
+            "are",
+            "going",
+            "to",
+            "take",
+            "the",
+            "early",
+            "train."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-weekend-planning"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "First abre la secuencia y el tren temprano aparece como primera decisión logística."
+          },
+          "hint": {
+            "es": "Sitúa First al inicio y early delante de train."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ff222686853cf02f729271b3d8e57c75cb0647b66e9c38b410079726235f6d4f"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c24.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el segundo paso y elige la actividad correcta después del tren."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Before the train, we are going to eat at home."
+          },
+          {
+            "text": "After the train ride, we are going to have a picnic near the river."
+          },
+          {
+            "text": "After the picnic, we walked to the station."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "After the train ride sitúa el pícnic como segunda actividad del plan."
+          },
+          "audio": "After the train ride, we are going to have a picnic near the river.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ba11850581c1324769688345bdb1eda422b453e8a066d25fe25bb3cf05a8450a"
+      },
+      {
+        "id": "en.n2.c24.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la alternativa por lluvia: We ___ the aquarium instead."
+        },
+        "answer": {
+          "text": "are going to visit",
+          "accepted": [
+            "are going to visit"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Are going to visit presenta el acuario como alternativa ya prevista."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:74708946d7b43f03d03f1693c3f5e7e5fb6116a6c383f5b98f7fbc65aabbda26"
+      },
+      {
+        "id": "en.n2.c24.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "El grupo necesita agua para la caminata. Selecciona la tarea útil del viernes."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "They are going to pack water after the hike."
+          },
+          {
+            "text": "They are going to buy concert tickets on Friday."
+          },
+          {
+            "text": "They are going to pack water bottles on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Empacar agua el viernes prepara la caminata; las otras acciones llegan tarde o no ayudan."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3bd8ab79be0d8a2c41fa370bb79ba3f53f7efbdefd9e2dc46d8c08ead6a548bd"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c24.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "La visita guiada empieza 10:30. Elige la llegada que deja quince minutos."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We are going to arrive at the museum at ten fifteen."
+          },
+          {
+            "text": "We are going to arrive at the museum at ten forty-five."
+          },
+          {
+            "text": "We are going to arrive at the museum at eleven fifteen."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Llegar a las 10:15 deja quince minutos antes de la visita; las otras horas llegan tarde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:07ea93cfae83f5de17d9f181ab266f68282ea52deb877e6ed6c9a0a7dd6dd58b"
+      },
+      {
+        "id": "en.n2.c24.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el traslado previsto: After lunch, we ___ the coastal route."
+        },
+        "answer": {
+          "text": "are going to follow",
+          "accepted": [
+            "are going to follow"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Are going to follow incorpora la ruta costera después del almuerzo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8b9274af3a2b091e332b3cca4b3c9c9007922ead572f8e20aa1e8a35ad05b531"
+      },
+      {
+        "id": "en.n2.c24.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta el itinerario con dos pasos y una alternativa si llueve."
+        },
+        "answer": {
+          "text": "Our weekend itinerary starts with the early train. Then, we are going to have a picnic at noon. If it rains, we are going to visit the museum.",
+          "accepted": [
+            "Our weekend itinerary starts with the early train. Then, we are going to have a picnic at noon. If it rains, we are going to visit the museum.",
+            "Our weekend itinerary starts with the early train. Then, we're going to have a picnic at noon. If it rains, we're going to visit the museum."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta integra secuencia, horario y alternativa climática en un itinerario ejecutable."
+          },
+          "text": "Datos: tren temprano; pícnic al mediodía; con lluvia, museo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d05634a53e595084213a4b8f863cf58df6755031060ebde536c0301f2ddb170"
+      },
+      {
+        "id": "en.n2.c24.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el plan alternativo y escoge qué harán si cambia el clima."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "If the weather gets worse, we are going to move the picnic to Sunday."
+          },
+          {
+            "text": "If the weather gets worse, we are going to move the picnic indoors."
+          },
+          {
+            "text": "If the weather gets worse, we are going to move the picnic near the lake."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El audio conserva el pícnic y cambia su ubicación al interior, no el día ni el lugar exterior."
+          },
+          "audio": "If the weather gets worse, we are going to move the picnic indoors.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fa2217ad112e2dcd5425d1f63642f3ecaf492b1ed19333c5476d0fa06b012397"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c24.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada tarea del fin de semana con su momento lógico."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "check the weather forecast",
+              {
+                "es": "antes de empacar"
+              }
+            ],
+            [
+              "reserve the guided tour",
+              {
+                "es": "antes de que se agoten los cupos"
+              }
+            ],
+            [
+              "follow the marked route",
+              {
+                "es": "durante la caminata"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada tarea queda situada en el momento que hace posible el resto del itinerario."
+          },
+          "pairs": [
+            [
+              "check the weather forecast",
+              {
+                "es": "antes de empacar"
+              }
+            ],
+            [
+              "reserve the guided tour",
+              {
+                "es": "antes de que se agoten los cupos"
+              }
+            ],
+            [
+              "follow the marked route",
+              {
+                "es": "durante la caminata"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:925caffe5d86f8fc38e8dfc40d793a551d8e02eb8749d7f056a991593162a2f5"
+      },
+      {
+        "id": "en.n2.c24.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la segunda actividad: Then, we ___ lunch near the castle."
+        },
+        "answer": {
+          "text": "are going to have",
+          "accepted": [
+            "are going to have"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Then enlaza el almuerzo con la actividad anterior y are going to have expresa el plan."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2b0a907414c904b151f2ce0d560f691f7f35cd345eaf0dd6f7441419dad785f0"
+      },
+      {
+        "id": "en.n2.c24.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés una alternativa para el domingo lluvioso."
+        },
+        "answer": {
+          "text": "If it rains, we are going to visit the science museum.",
+          "accepted": [
+            "If it rains, we are going to visit the science museum.",
+            "If it rains, we're going to visit the science museum."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-weekend-planning"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La condición if it rains activa una alternativa concreta con going to."
+          },
+          "text": "Alternativa: visitaremos el museo de ciencias si llueve."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3eb0b546ef5705de10ed91f54bf66c78627d910fb568e7ed5a8f8705ecb0f715"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c24.e01": {
+      "reteach": "en.n2.class-24.t01",
+      "review": "en.n2.c24.r01"
+    },
+    "en.n2.c24.e02": {
+      "reteach": "en.n2.class-24.t02",
+      "review": "en.n2.c24.r02"
+    },
+    "en.n2.c24.e03": {
+      "reteach": "en.n2.class-24.t03",
+      "review": "en.n2.c24.r03"
+    },
+    "en.n2.c24.e04": {
+      "reteach": "en.n2.class-24.t04",
+      "review": "en.n2.c24.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true,
+    "lowLoadMode": "one_item_at_a_time",
+    "acceptCaseAndTerminalPunctuationVariants": true,
+    "orderAndWriteSegmentation": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true,
+    "afterTwoErrors": "reteach_then_guided_variant"
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

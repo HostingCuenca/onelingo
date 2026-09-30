@@ -1,0 +1,817 @@
+{
+  "schema": "onelingo.editorial.chronology.v1",
+  "course": "en",
+  "level": 1,
+  "range": {"start": 1, "end": 100},
+  "scale": "client-10-levels-v1",
+  "reservedFutureVocabulary": ["red", "blue", "green", "yellow", "black", "white", "big", "new", "old", "color", "have", "has"],
+  "status": "editorial-manifest",
+  "normalization": "casefold-trim-exact-phrase",
+  "notes": [
+    "Classes 1-7 reflect approved editorial files; classes 8-20 define only the minimum scope established by PLAN_NIVEL1_INGLES_100.md and valid legacy seeds.",
+    "allowedCarryover is intentionally scoped, not every word ever seen. Additions require editorial review.",
+    "Free-text inference is not authoritative. Class files must declare usesVocabulary and usesPatterns for automated chronology checks."
+  ],
+  "classes": [
+    {
+      "id": "en.n1.class-01",
+      "title": "Presentarse y dar datos personales",
+      "introducedVocabulary": ["hello", "name", "from", "country", "city", "live", "student", "friend"],
+      "allowedCarryover": [],
+      "newPatterns": ["identity", "identity-be"],
+      "requiresPatterns": []
+    },
+    {
+      "id": "en.n1.class-02",
+      "title": "Pronombres y be afirmativo",
+      "introducedVocabulary": ["I", "you", "he", "she", "we", "they", "am", "is", "are"],
+      "allowedCarryover": ["name", "student", "friend"],
+      "newPatterns": ["pronouns-be"],
+      "requiresPatterns": ["identity-be"]
+    },
+    {
+      "id": "en.n1.class-03",
+      "title": "Objetos del aula",
+      "introducedVocabulary": ["this", "book", "pen", "pencil", "desk", "chair", "bag", "board", "eraser", "ruler"],
+      "allowedCarryover": ["student", "I", "you", "he", "she", "am", "is", "are"],
+      "newPatterns": ["classroom-objects", "classroom-description"],
+      "requiresPatterns": ["identity-be", "pronouns-be"]
+    },
+    {
+      "id": "en.n1.class-04",
+      "title": "Familia y relaciones",
+      "introducedVocabulary": ["mother", "father", "sister", "brother", "parents", "family", "son", "daughter", "cousin"],
+      "allowedCarryover": ["this", "student", "friend", "he", "she", "is", "are"],
+      "newPatterns": ["family-relations", "family-be", "family-vocabulary"],
+      "requiresPatterns": ["pronouns-be"]
+    },
+    {
+      "id": "en.n1.class-05",
+      "title": "Mi familia en frases",
+      "introducedVocabulary": ["grandmother", "grandfather", "aunt", "uncle", "child", "home", "photo", "kind", "small"],
+      "allowedCarryover": ["this", "mother", "father", "sister", "brother", "parents", "family", "son", "daughter", "cousin", "friend", "he", "she", "we", "they", "is", "are"],
+      "newPatterns": ["family-description"],
+      "requiresPatterns": ["identity-be", "pronouns-be", "classroom-objects", "family-be", "family-vocabulary"]
+    },
+    {
+      "id": "en.n1.class-06",
+      "title": "a/an con objetos y profesiones",
+      "introducedVocabulary": ["apple", "artist", "engineer", "teacher", "umbrella", "orange", "a", "an"],
+      "allowedCarryover": ["this", "book", "desk", "student", "he", "she", "is"],
+      "newPatterns": ["articles-a-an"],
+      "requiresPatterns": ["identity-be", "pronouns-be", "classroom-objects"]
+    },
+    {
+      "id": "en.n1.class-07",
+      "title": "Plural regular",
+      "introducedVocabulary": ["two", "three", "here", "books", "pens", "chairs", "bags", "desks", "class", "classes"],
+      "allowedCarryover": ["book", "pen", "pencil", "desk", "chair", "bag", "student", "apple", "teacher", "is", "are"],
+      "newPatterns": ["regular-plurals"],
+      "requiresPatterns": ["pronouns-be", "classroom-objects", "articles-a-an"]
+    },
+    {
+      "id": "en.n1.class-08",
+      "title": "Plurales irregulares frecuentes",
+      "introducedVocabulary": ["four", "man", "men", "woman", "women", "children", "person", "people", "tooth", "teeth", "foot", "feet"],
+      "allowedCarryover": ["child", "book", "pen", "chair", "bag", "desk", "class", "books", "pens", "chairs", "bags", "desks", "classes"],
+      "newPatterns": ["irregular-plurals"],
+      "requiresPatterns": ["regular-plurals"]
+    },
+    {
+      "id": "en.n1.class-09",
+      "title": "the frente a a/an",
+      "introducedVocabulary": ["the", "door", "window", "table", "keys"],
+      "allowedCarryover": ["this", "here", "book", "apple", "desk", "chair", "bag", "class", "artist", "teacher", "man", "woman", "child", "person"],
+      "newPatterns": ["articles-the-contrast"],
+      "requiresPatterns": ["articles-a-an", "regular-plurals", "irregular-plurals"]
+    },
+    {
+      "id": "en.n1.class-10",
+      "title": "Miniinventario: describir una habitación",
+      "introducedVocabulary": ["room", "see", "and"],
+      "allowedCarryover": ["two", "three", "four", "here", "book", "pen", "pencil", "desk", "chair", "bag", "board", "eraser", "ruler", "door", "window", "table", "keys", "the", "books", "chairs", "people"],
+      "newPatterns": ["room-inventory-description"],
+      "requiresPatterns": ["articles-a-an", "articles-the-contrast", "regular-plurals", "irregular-plurals"]
+    },
+    {
+      "id": "en.n1.class-11",
+      "title": "Colores y tamaños",
+      "introducedVocabulary": ["red", "blue", "green", "yellow", "black", "white", "big", "new", "old", "color"],
+      "allowedCarryover": ["small", "orange", "book", "pen", "pencil", "desk", "chair", "bag", "board", "door", "window", "table", "is", "are", "books", "chairs"],
+      "newPatterns": ["adjective-description"],
+      "requiresPatterns": ["pronouns-be", "classroom-description", "regular-plurals"]
+    },
+    {
+      "id": "en.n1.class-12",
+      "title": "Orden adjetivo + sustantivo",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["red", "blue", "green", "the", "yellow", "black", "white", "orange", "big", "small", "new", "old", "book", "pen", "pencil", "desk", "chair", "chairs", "bag", "board", "door", "window", "table"],
+      "newPatterns": ["adjective-noun-order"],
+      "requiresPatterns": ["adjective-description", "articles-a-an", "articles-the-contrast", "regular-plurals"]
+    },
+    {
+      "id": "en.n1.class-13",
+      "title": "this/that",
+      "introducedVocabulary": ["that"],
+      "allowedCarryover": ["this", "book", "pen", "pencil", "desk", "chair", "bag", "board", "door", "window", "table", "red", "blue", "green", "big", "small", "new", "old", "is"],
+      "newPatterns": ["demonstratives-singular"],
+      "requiresPatterns": ["articles-a-an", "adjective-noun-order", "classroom-objects"]
+    },
+    {
+      "id": "en.n1.class-14",
+      "title": "these/those",
+      "introducedVocabulary": ["these", "those"],
+      "allowedCarryover": ["this", "that", "books", "pens", "chairs", "bags", "desks", "classes", "men", "women", "children", "people", "red", "blue", "green", "big", "small", "are"],
+      "newPatterns": ["demonstratives-plural"],
+      "requiresPatterns": ["demonstratives-singular", "regular-plurals", "irregular-plurals", "adjective-noun-order"]
+    },
+    {
+      "id": "en.n1.class-15",
+      "title": "Señalar y describir objetos",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["this", "that", "these", "those", "book", "pen", "pencil", "desk", "chair", "bag", "board", "door", "window", "table", "books", "pens", "chairs", "bags", "desks", "red", "blue", "green", "yellow", "black", "white", "big", "small", "new", "old", "is", "are"],
+      "newPatterns": ["object-description-integration"],
+      "requiresPatterns": ["adjective-description", "adjective-noun-order", "demonstratives-singular", "demonstratives-plural", "regular-plurals"]
+    },
+    {
+      "id": "en.n1.class-16",
+      "title": "my/your/his/her/its",
+      "introducedVocabulary": ["my", "your", "his", "her", "its"],
+      "allowedCarryover": ["mother", "father", "sister", "brother", "parents", "family", "son", "daughter", "cousin", "book", "pen", "pencil", "desk", "chair", "bag", "home", "photo", "this", "that", "is", "color", "blue", "I", "you", "he", "she"],
+      "newPatterns": ["possessive-adjectives-singular"],
+      "requiresPatterns": ["pronouns-be", "family-vocabulary", "classroom-objects", "demonstratives-singular", "articles-a-an", "adjective-description"]
+    },
+    {
+      "id": "en.n1.class-17",
+      "title": "our/their",
+      "introducedVocabulary": ["our", "their"],
+      "allowedCarryover": ["my", "your", "his", "her", "its", "parents", "family", "children", "people", "books", "pens", "chairs", "bags", "desks", "home", "photo", "we", "they", "this", "that", "these", "those", "is", "are", "chair"],
+      "newPatterns": ["possessive-adjectives-plural"],
+      "requiresPatterns": ["possessive-adjectives-singular", "pronouns-be", "regular-plurals", "irregular-plurals", "demonstratives-singular", "demonstratives-plural"]
+    },
+    {
+      "id": "en.n1.class-18",
+      "title": "Ana's book",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["my", "your", "his", "her", "its", "our", "their", "mother", "father", "sister", "brother", "parents", "family", "son", "daughter", "book", "pen", "pencil", "desk", "chair", "bag", "home", "photo", "this", "that", "is"],
+      "newPatterns": ["possessive-s"],
+      "requiresPatterns": ["possessive-adjectives-singular", "possessive-adjectives-plural", "family-vocabulary", "demonstratives-singular", "articles-a-an"]
+    },
+    {
+      "id": "en.n1.class-19",
+      "title": "have got/has got",
+      "introducedVocabulary": ["have", "has", "have got", "has got"],
+      "allowedCarryover": ["I", "you", "he", "she", "we", "they", "mother", "father", "sister", "brother", "parents", "family", "son", "daughter", "child", "children", "book", "pen", "pencil", "desk", "chair", "bag", "home", "photo", "a"],
+      "newPatterns": ["have-got-possession"],
+      "requiresPatterns": ["pronouns-be", "family-vocabulary", "classroom-objects", "articles-a-an"]
+    },
+    {
+      "id": "en.n1.class-20",
+      "title": "Familia, rasgos y pertenencias",
+      "introducedVocabulary": ["eyes", "hair", "brown", "long", "short"],
+      "allowedCarryover": ["mother", "father", "sister", "brother", "parents", "family", "son", "daughter", "cousin", "grandmother", "grandfather", "aunt", "uncle", "child", "children", "kind", "small", "big", "old", "new", "book", "pen", "pencil", "bag", "home", "photo", "my", "your", "his", "her", "its", "our", "their", "have got", "has got", "a", "is", "have", "has"],
+      "newPatterns": ["family-possession-integration"],
+      "requiresPatterns": ["family-description", "possessive-adjectives-singular", "possessive-adjectives-plural", "possessive-s", "have-got-possession", "articles-a-an", "adjective-description", "irregular-plurals"]
+    },
+    {
+      "id": "en.n1.class-21",
+      "title": "Habitaciones y muebles",
+      "introducedVocabulary": ["bedroom", "kitchen", "bathroom", "living room", "bed", "beds", "sofa"],
+      "allowedCarryover": ["this", "that", "these", "those", "is", "are", "a", "chair", "chairs", "table", "room"],
+      "newPatterns": ["rooms-furniture"],
+      "requiresPatterns": ["articles-a-an", "demonstratives-singular", "demonstratives-plural", "regular-plurals", "room-inventory-description"]
+    },
+    {
+      "id": "en.n1.class-22",
+      "title": "there is/there are afirmativo",
+      "introducedVocabulary": ["there", "there is", "there are", "tables", "sofas"],
+      "allowedCarryover": ["is", "are", "a", "bed", "beds", "chair", "chairs", "table", "sofa", "room", "bedroom", "bathroom"],
+      "newPatterns": ["there-is-are-affirmative"],
+      "requiresPatterns": ["articles-a-an", "regular-plurals", "rooms-furniture"]
+    },
+    {
+      "id": "en.n1.class-23",
+      "title": "Preguntas y negativas con there",
+      "introducedVocabulary": ["not", "yes", "no", "is there", "are there", "there is not", "there are not"],
+      "allowedCarryover": ["there", "there is", "there are", "is", "are", "a", "bed", "beds", "chair", "chairs", "table", "tables", "sofa", "sofas", "bedroom", "bathroom"],
+      "newPatterns": ["there-questions-negatives"],
+      "requiresPatterns": ["there-is-are-affirmative", "articles-a-an", "regular-plurals"]
+    },
+    {
+      "id": "en.n1.class-24",
+      "title": "in/on/under",
+      "introducedVocabulary": ["in", "on", "under", "ball", "box"],
+      "allowedCarryover": ["the", "a", "is", "red", "table", "book", "bag", "chair"],
+      "newPatterns": ["location-in-on-under"],
+      "requiresPatterns": ["articles-a-an", "articles-the-contrast", "adjective-noun-order"]
+    },
+    {
+      "id": "en.n1.class-25",
+      "title": "Integración: plano de la casa",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["there", "there is", "there are", "is there", "are there", "there is not", "there are not", "is", "are", "a", "the", "not", "yes", "no", "two", "three", "bed", "beds", "chair", "chairs", "sofa", "ball", "table", "bedroom", "kitchen", "living room", "in", "on", "under", "red"],
+      "newPatterns": ["house-plan-integration"],
+      "requiresPatterns": ["rooms-furniture", "there-is-are-affirmative", "there-questions-negatives", "location-in-on-under", "regular-plurals", "articles-a-an", "articles-the-contrast"]
+    },
+    {
+      "id": "en.n1.class-26",
+      "title": "Next to y between",
+      "introducedVocabulary": ["next to", "between"],
+      "allowedCarryover": ["the", "a", "is", "ball", "sofa", "chair", "chairs", "table", "bed", "window", "bag", "two", "and", "under", "on"],
+      "newPatterns": ["location-next-to-between"],
+      "requiresPatterns": ["location-in-on-under", "articles-a-an", "articles-the-contrast", "regular-plurals"]
+    },
+    {
+      "id": "en.n1.class-27",
+      "title": "Repaso visual de lugar",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["the", "a", "is", "ball", "red", "green", "box", "table", "chair", "sofa", "and", "in", "on", "under", "next to", "between"],
+      "newPatterns": ["location-visual-review"],
+      "requiresPatterns": ["location-in-on-under", "location-next-to-between", "articles-a-an", "articles-the-contrast", "adjective-noun-order"]
+    },
+    {
+      "id": "en.n1.class-28",
+      "title": "Instrucciones afirmativas",
+      "introducedVocabulary": ["open", "close", "sit", "stand", "read", "write", "down", "up"],
+      "allowedCarryover": ["the", "book", "door", "your", "name"],
+      "newPatterns": ["imperative-affirmative"],
+      "requiresPatterns": ["articles-the-contrast"]
+    },
+    {
+      "id": "en.n1.class-29",
+      "title": "Instrucciones corteses y negativas",
+      "introducedVocabulary": ["please", "don't", "run", "touch", "listen", "look", "at"],
+      "allowedCarryover": ["the", "book", "door", "open", "sit", "down"],
+      "newPatterns": ["imperative-politeness-negatives"],
+      "requiresPatterns": ["imperative-affirmative", "articles-the-contrast"]
+    },
+    {
+      "id": "en.n1.class-30",
+      "title": "Integración de instrucciones",
+      "introducedVocabulary": ["put"],
+      "allowedCarryover": ["the", "book", "table", "bag", "chair", "ball", "sofa", "door", "your", "name", "and", "is", "on", "under", "next to", "between", "open", "close", "sit", "down", "read", "write", "please", "don't", "touch"],
+      "newPatterns": ["instructions-integration"],
+      "requiresPatterns": ["location-next-to-between", "location-visual-review", "imperative-affirmative", "imperative-politeness-negatives", "location-in-on-under", "articles-the-contrast"]
+    },
+    {
+      "id": "en.n1.class-31",
+      "title": "Describir casa y familia",
+      "introducedVocabulary": ["welcome to", "house", "bedrooms", "grandma", "grandpa", "pet"],
+      "allowedCarryover": ["my", "our", "this", "is", "there are", "are", "two", "has got", "a", "in", "the", "living room", "small", "their"],
+      "newPatterns": ["house-family-integration"],
+      "requiresPatterns": ["family-possession-integration", "rooms-furniture", "there-is-are-affirmative", "location-in-on-under", "possessive-adjectives-singular", "possessive-adjectives-plural", "demonstratives-singular", "have-got-possession"]
+    },
+    {
+      "id": "en.n1.class-32",
+      "title": "Diálogo: visita a mi casa",
+      "introducedVocabulary": ["thank you"],
+      "allowedCarryover": ["hello", "welcome to", "my", "our", "house", "friend", "this", "is", "the", "living room", "is there", "are there", "there", "a", "sofa", "sofas", "yes", "please", "sit", "down", "don't", "run", "stand", "up", "chairs"],
+      "newPatterns": ["house-visit-dialogue"],
+      "requiresPatterns": ["house-family-integration", "there-questions-negatives", "imperative-politeness-negatives", "demonstratives-singular", "rooms-furniture"]
+    },
+    {
+      "id": "en.n1.class-33",
+      "title": "Lectura con artículos y plurales",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["this", "is", "a", "the", "house", "there is", "there are", "there", "are", "sofa", "sofas", "in", "living room", "two", "chair", "chairs", "next to", "table", "green", "under"],
+      "newPatterns": ["articles-plurals-reading"],
+      "requiresPatterns": ["articles-a-an", "articles-the-contrast", "regular-plurals", "there-is-are-affirmative", "location-next-to-between", "adjective-noun-order", "house-family-integration"]
+    },
+    {
+      "id": "en.n1.class-34",
+      "title": "Escucha y selección de ubicación",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["the", "a", "is", "book", "bag", "ball", "sofa", "table", "chair", "chairs", "box", "two", "and", "in", "on", "under", "next to", "between"],
+      "newPatterns": ["location-listening"],
+      "requiresPatterns": ["location-in-on-under", "location-next-to-between", "location-visual-review", "articles-a-an", "articles-the-contrast"]
+    },
+    {
+      "id": "en.n1.class-35",
+      "title": "Evaluación mixta A1 inicial",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["this", "these", "my", "our", "their", "house", "small", "is", "are", "there is", "there are", "there", "a", "the", "two", "chair", "chairs", "living room", "welcome to", "thank you", "please", "sit", "down", "book", "bag", "pet", "sofa", "table", "green", "in", "on", "under", "next to", "between", "stand", "up"],
+      "newPatterns": ["a1-initial-assessment"],
+      "requiresPatterns": ["house-family-integration", "house-visit-dialogue", "articles-plurals-reading", "location-listening", "there-is-are-affirmative", "location-next-to-between", "imperative-politeness-negatives"]
+    },
+    {
+      "id": "en.n1.class-36",
+      "title": "Rutinas y verbos cotidianos",
+      "introducedVocabulary": ["work", "study", "English", "eat", "drink", "water", "play", "soccer", "go", "to", "school", "every day"],
+      "allowedCarryover": ["I", "you", "we", "they", "at", "home"],
+      "newPatterns": ["routine-verbs"],
+      "requiresPatterns": []
+    },
+    {
+      "id": "en.n1.class-37",
+      "title": "I/you/we/they + verbo",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["I", "you", "we", "they", "work", "study", "English", "eat", "drink", "water", "play", "soccer", "at", "home", "am"],
+      "newPatterns": ["present-simple-base-pronouns"],
+      "requiresPatterns": ["routine-verbs"]
+    },
+    {
+      "id": "en.n1.class-38",
+      "title": "Orden sujeto + verbo + objeto",
+      "introducedVocabulary": ["coffee"],
+      "allowedCarryover": ["I", "you", "we", "they", "study", "English", "drink", "water", "play", "soccer"],
+      "newPatterns": ["subject-verb-object-order"],
+      "requiresPatterns": ["present-simple-base-pronouns", "routine-verbs"]
+    },
+    {
+      "id": "en.n1.class-39",
+      "title": "Lugar y tiempo en la oración",
+      "introducedVocabulary": ["office"],
+      "allowedCarryover": ["I", "you", "we", "they", "study", "English", "play", "soccer", "work", "drink", "water", "at", "the", "home", "school", "every day"],
+      "newPatterns": ["routine-place-time-order"],
+      "requiresPatterns": ["subject-verb-object-order", "present-simple-base-pronouns", "routine-verbs"]
+    },
+    {
+      "id": "en.n1.class-40",
+      "title": "Mi día en seis frases",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["I", "we", "they", "am", "study", "English", "drink", "water", "coffee", "go", "to", "school", "play", "soccer", "eat", "work", "at", "the", "home", "office", "every day"],
+      "newPatterns": ["my-day-six-sentences"],
+      "requiresPatterns": ["routine-verbs", "present-simple-base-pronouns", "subject-verb-object-order", "routine-place-time-order"]
+    },
+    {
+      "id": "en.n1.class-41",
+      "title": "he/she/it",
+      "introducedVocabulary": ["it", "works", "lives", "Ecuador", "eats", "drinks", "plays"],
+      "allowedCarryover": ["he", "she", "work", "at", "home", "in", "drink", "water", "play", "soccer"],
+      "newPatterns": ["present-third-person-basic"],
+      "requiresPatterns": ["routine-verbs"]
+    },
+    {
+      "id": "en.n1.class-42",
+      "title": "Terminaciones -s/-es/-ies",
+      "introducedVocabulary": ["goes", "watches", "TV", "studies", "breakfast"],
+      "allowedCarryover": ["he", "she", "works", "at", "the", "office", "to", "school", "English", "plays", "soccer", "home", "go", "study", "play", "have", "has"],
+      "newPatterns": ["third-person-endings"],
+      "requiresPatterns": ["present-third-person-basic", "routine-verbs"]
+    },
+    {
+      "id": "en.n1.class-43",
+      "title": "Errores de concordancia",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["he", "she", "works", "work", "at", "home", "studies", "English", "goes", "go", "to", "school", "has", "have", "breakfast", "watches", "plays", "soccer", "drinks", "drink", "water"],
+      "newPatterns": ["third-person-agreement-errors"],
+      "requiresPatterns": ["third-person-endings", "present-third-person-basic"]
+    },
+    {
+      "id": "en.n1.class-44",
+      "title": "Rutina de otra persona",
+      "introducedVocabulary": ["Ana"],
+      "allowedCarryover": ["she", "studies", "English", "every day", "drinks", "water", "at", "home", "goes", "go", "to", "school", "plays", "soccer", "watches", "TV", "study"],
+      "newPatterns": ["another-person-routine"],
+      "requiresPatterns": ["third-person-agreement-errors", "third-person-endings", "routine-place-time-order"]
+    },
+    {
+      "id": "en.n1.class-45",
+      "title": "Perfil de una persona",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["this", "these", "is", "are", "Ana", "she", "they", "work", "works", "lives", "in", "Ecuador", "studies", "English", "every day", "at", "the", "office", "school", "plays", "soccer", "drinks", "water", "home", "goes", "to", "watches", "TV"],
+      "newPatterns": ["person-profile-integration"],
+      "requiresPatterns": ["present-third-person-basic", "third-person-endings", "third-person-agreement-errors", "another-person-routine", "routine-place-time-order"]
+    },
+    {
+      "id": "en.n1.class-46",
+      "title": "don't/doesn't",
+      "introducedVocabulary": ["doesn't", "meat", "milk", "drive", "drives", "car", "like"],
+      "allowedCarryover": ["I", "you", "we", "they", "he", "she", "don't", "eat", "drink", "work", "works", "at", "home", "play", "soccer", "a", "coffee"],
+      "newPatterns": ["present-simple-negatives"],
+      "requiresPatterns": ["person-profile-integration", "present-simple-base-pronouns", "present-third-person-basic"]
+    },
+    {
+      "id": "en.n1.class-47",
+      "title": "Respuestas cortas",
+      "introducedVocabulary": ["do", "does"],
+      "allowedCarryover": ["yes", "no", "I", "we", "they", "he", "she", "don't", "doesn't"],
+      "newPatterns": ["present-simple-short-answers"],
+      "requiresPatterns": ["present-simple-negatives"]
+    },
+    {
+      "id": "en.n1.class-48",
+      "title": "Do/Does...?",
+      "introducedVocabulary": ["listen to", "listens", "music"],
+      "allowedCarryover": ["do", "does", "you", "we", "they", "he", "she", "study", "English", "play", "plays", "soccer", "read", "books", "drink", "drinks", "coffee", "to"],
+      "newPatterns": ["present-simple-yes-no-questions"],
+      "requiresPatterns": ["present-simple-short-answers", "present-simple-negatives", "present-simple-base-pronouns", "present-third-person-basic"]
+    },
+    {
+      "id": "en.n1.class-49",
+      "title": "Entrevista de hábitos",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["do", "does", "you", "I", "she", "Ana", "study", "studies", "English", "yes", "no", "play", "soccer", "don't", "doesn't", "listen", "to", "music", "read", "books", "drink", "coffee"],
+      "newPatterns": ["habits-interview"],
+      "requiresPatterns": ["present-simple-yes-no-questions", "present-simple-short-answers"]
+    },
+    {
+      "id": "en.n1.class-50",
+      "title": "Corrección y producción controlada",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["I", "you", "we", "they", "he", "she", "Ana", "do", "does", "don't", "doesn't", "drink", "coffee", "play", "soccer", "study", "English", "read", "books", "yes", "no"],
+      "newPatterns": ["present-simple-controlled-production"],
+      "requiresPatterns": ["present-simple-negatives", "present-simple-short-answers", "present-simple-yes-no-questions", "habits-interview"]
+    },
+    {
+      "id": "en.n1.class-51",
+      "title": "what/where/when",
+      "introducedVocabulary": ["what", "where", "when"],
+      "allowedCarryover": ["do", "does", "you", "they", "he", "she", "drink", "eat", "work", "study", "English", "read", "play", "soccer"],
+      "newPatterns": ["wh-what-where-when"],
+      "requiresPatterns": ["present-simple-yes-no-questions"]
+    },
+    {
+      "id": "en.n1.class-52",
+      "title": "what time",
+      "introducedVocabulary": ["what time", "time", "get up", "get", "gets", "seven", "eight", "o'clock", "start", "starts", "finish"],
+      "allowedCarryover": ["what", "where", "do", "does", "you", "he", "she", "I", "at", "work", "up", "class"],
+      "newPatterns": ["wh-what-time"],
+      "requiresPatterns": ["wh-what-where-when", "present-simple-yes-no-questions", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-53",
+      "title": "who + verbo",
+      "introducedVocabulary": ["who", "cook", "cooks", "dinner"],
+      "allowedCarryover": ["does", "study", "studies", "English", "Ana", "he", "she", "plays", "soccer", "drink", "drinks", "coffee", "work", "works", "at", "home", "water"],
+      "newPatterns": ["who-subject-questions"],
+      "requiresPatterns": ["wh-what-time", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-54",
+      "title": "Preguntar por rutinas",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["what", "where", "when", "who", "what time", "time", "do", "does", "you", "they", "he", "she", "study", "studies", "English", "work", "play", "plays", "soccer", "get up", "get", "up", "cook", "cooks", "dinner", "drink"],
+      "newPatterns": ["routine-wh-questions"],
+      "requiresPatterns": ["wh-what-where-when", "wh-what-time", "who-subject-questions"]
+    },
+    {
+      "id": "en.n1.class-55",
+      "title": "Agenda diaria de dos personas",
+      "introducedVocabulary": ["Leo", "gets up"],
+      "allowedCarryover": ["Ana", "get up", "get", "gets", "up", "at", "seven", "eight", "o'clock", "study", "studies", "English", "school", "works", "home", "who", "does", "what", "where", "what time", "time"],
+      "newPatterns": ["two-person-daily-schedule"],
+      "requiresPatterns": ["wh-what-where-when", "wh-what-time", "who-subject-questions", "routine-wh-questions"]
+    },
+    {
+      "id": "en.n1.class-56",
+      "title": "always/usually/often",
+      "introducedVocabulary": ["always", "usually", "often", "walk", "walks", "take", "takes", "bus"],
+      "allowedCarryover": ["I", "she", "we", "they", "he", "Ana", "to", "work", "works", "the", "eat", "at", "home", "study", "studies", "English", "drinks", "coffee", "school"],
+      "newPatterns": ["frequency-always-usually-often"],
+      "requiresPatterns": ["present-simple-base-pronouns", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-57",
+      "title": "sometimes/never",
+      "introducedVocabulary": ["sometimes", "never"],
+      "allowedCarryover": ["I", "they", "she", "he", "we", "Ana", "drink", "drinks", "coffee", "play", "plays", "soccer", "study", "studies", "English", "at", "home", "take", "takes", "the", "bus", "eat", "doesn't", "don't"],
+      "newPatterns": ["frequency-sometimes-never"],
+      "requiresPatterns": ["frequency-always-usually-often", "present-simple-negatives", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-58",
+      "title": "Posición con be y otros verbos",
+      "introducedVocabulary": ["on time", "late", "tired"],
+      "allowedCarryover": ["I", "am", "is", "are", "she", "they", "we", "he", "Ana", "always", "usually", "often", "sometimes", "never", "walks", "to", "school", "takes", "the", "bus", "study", "English"],
+      "newPatterns": ["frequency-position-be-vs-verbs"],
+      "requiresPatterns": ["frequency-always-usually-often", "frequency-sometimes-never", "pronouns-be", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-59",
+      "title": "at/on/in para hora, día y mes",
+      "introducedVocabulary": ["Monday", "Friday", "Saturday", "Sunday", "July", "morning", "afternoon", "evening", "night"],
+      "allowedCarryover": ["on", "in", "I", "we", "they", "she", "he", "Ana", "get up", "at", "seven", "eight", "o'clock", "study", "studies", "English", "work", "home", "drinks", "coffee", "the", "play", "soccer", "read", "water"],
+      "newPatterns": ["time-prepositions-at-on-in"],
+      "requiresPatterns": ["wh-what-time", "present-simple-base-pronouns", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-60",
+      "title": "Calendario personal",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["I", "study", "English", "on", "Monday", "usually", "in", "the", "evening", "play", "soccer", "Friday", "at", "eight", "o'clock", "never", "work", "Sunday", "what time", "time", "do", "you", "often", "read", "morning", "class", "starts", "sometimes", "Saturday", "always", "get up", "seven", "July", "night"],
+      "newPatterns": ["personal-calendar-integration"],
+      "requiresPatterns": ["frequency-always-usually-often", "frequency-sometimes-never", "frequency-position-be-vs-verbs", "time-prepositions-at-on-in", "wh-what-time"]
+    },
+    {
+      "id": "en.n1.class-61",
+      "title": "Rutina propia",
+      "introducedVocabulary": ["take a shower", "shower", "then", "go to bed", "six", "ten"],
+      "allowedCarryover": ["I", "get up", "at", "seven", "o'clock", "take", "a", "usually", "study", "English", "in", "the", "morning", "sometimes", "play", "soccer", "on", "Friday", "go", "drink", "coffee", "often", "never", "home", "water"],
+      "newPatterns": ["first-person-routine-integration"],
+      "requiresPatterns": ["personal-calendar-integration", "frequency-position-be-vs-verbs", "time-prepositions-at-on-in", "routine-place-time-order"]
+    },
+    {
+      "id": "en.n1.class-62",
+      "title": "Rutina de otra persona",
+      "introducedVocabulary": ["gym"],
+      "allowedCarryover": ["my", "sister", "brother", "gets up", "get up", "six", "o'clock", "she", "he", "usually", "go", "goes", "to", "the", "in", "evening", "then", "takes", "a", "shower", "doesn't", "work", "works", "on", "Saturday", "what time", "time", "does", "often", "always", "never", "bus", "studies", "at", "home", "play", "soccer", "Sunday", "sometimes", "drinks", "coffee", "bed"],
+      "newPatterns": ["third-person-routine-integration"],
+      "requiresPatterns": ["first-person-routine-integration", "third-person-endings", "present-simple-negatives", "wh-what-time", "frequency-position-be-vs-verbs", "time-prepositions-at-on-in"]
+    },
+    {
+      "id": "en.n1.class-63",
+      "title": "Lectura de horario",
+      "introducedVocabulary": ["park", "weekend", "early"],
+      "allowedCarryover": ["Monday", "Ana", "studies", "English", "at", "seven", "Friday", "plays", "soccer", "eight", "Saturday", "Leo", "walks", "in", "the", "morning", "on", "Sunday", "gets up", "goes", "to", "bed", "never", "works"],
+      "newPatterns": ["routine-schedule-reading"],
+      "requiresPatterns": ["third-person-routine-integration", "time-prepositions-at-on-in", "frequency-sometimes-never", "routine-place-time-order"]
+    },
+    {
+      "id": "en.n1.class-64",
+      "title": "Escucha de entrevista breve",
+      "introducedVocabulary": ["what about you", "about"],
+      "allowedCarryover": ["what time", "what", "when", "time", "do", "you", "get up", "where", "I", "usually", "at", "six", "seven", "o'clock", "never", "study", "English", "in", "the", "evening", "home", "play", "soccer", "on", "Friday", "sometimes", "often", "drink", "coffee", "school", "work", "morning", "night"],
+      "newPatterns": ["short-routine-interview-listening"],
+      "requiresPatterns": ["routine-wh-questions", "wh-what-time", "first-person-routine-integration", "frequency-position-be-vs-verbs", "time-prepositions-at-on-in"]
+    },
+    {
+      "id": "en.n1.class-65",
+      "title": "Evaluación mixta de rutina",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["I", "get up", "gets", "at", "seven", "and", "then", "take a shower", "my", "brother", "usually", "go", "goes", "to", "the", "gym", "he", "doesn't", "work", "works", "on", "Sunday", "what time", "time", "does", "go to bed", "is", "never", "late", "study", "English", "in", "morning", "takes", "Ana", "studies", "Monday", "eight", "Friday", "sometimes", "walk", "park", "play", "soccer", "six", "July", "your", "sister", "where"],
+      "newPatterns": ["routine-mixed-assessment"],
+      "requiresPatterns": ["first-person-routine-integration", "third-person-routine-integration", "routine-schedule-reading", "short-routine-interview-listening", "time-prepositions-at-on-in", "frequency-position-be-vs-verbs", "present-simple-negatives", "wh-what-time"]
+    },
+    {
+      "id": "en.n1.class-66",
+      "title": "can/can't para capacidad",
+      "introducedVocabulary": ["can", "can't", "swim", "dance", "speak", "Spanish"],
+      "allowedCarryover": ["drive", "I", "she", "he", "we", "they", "Ana", "cook", "to"],
+      "newPatterns": ["can-ability-affirmative-negative"],
+      "requiresPatterns": ["present-simple-base-pronouns", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-67",
+      "title": "Can you...?",
+      "introducedVocabulary": ["help"],
+      "allowedCarryover": ["can", "can't", "yes", "no", "I", "you", "she", "he", "Ana", "swim", "drive", "cook", "dance", "play", "soccer", "do", "does"],
+      "newPatterns": ["can-ability-questions-short-answers"],
+      "requiresPatterns": ["can-ability-affirmative-negative", "present-simple-short-answers"]
+    },
+    {
+      "id": "en.n1.class-68",
+      "title": "like/love/hate con sustantivos",
+      "introducedVocabulary": ["likes", "love", "loves", "hate", "hates", "cats"],
+      "allowedCarryover": ["like", "music", "coffee", "soccer", "I", "she", "he", "they", "we", "the"],
+      "newPatterns": ["preferences-nouns"],
+      "requiresPatterns": ["third-person-endings", "present-simple-base-pronouns"]
+    },
+    {
+      "id": "en.n1.class-69",
+      "title": "like/love/hate con actividades",
+      "introducedVocabulary": ["swimming", "dancing", "cooking", "reading", "playing", "playing soccer"],
+      "allowedCarryover": ["I", "she", "he", "they", "we", "Leo", "like", "likes", "love", "loves", "hate", "hates", "swim", "soccer"],
+      "newPatterns": ["preferences-gerunds"],
+      "requiresPatterns": ["preferences-nouns", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-70",
+      "title": "Actividades y preferencias",
+      "introducedVocabulary": ["guitar", "but"],
+      "allowedCarryover": ["can", "can't", "swim", "swimming", "cook", "cooking", "drive", "dance", "dancing", "play", "playing", "soccer", "the", "like", "likes", "love", "loves", "hates", "music", "I", "you", "she", "he", "Ana", "Leo", "and", "do", "doesn't", "yes"],
+      "newPatterns": ["activities-preferences-integration"],
+      "requiresPatterns": ["can-ability-affirmative-negative", "can-ability-questions-short-answers", "preferences-nouns", "preferences-gerunds", "third-person-endings", "present-simple-yes-no-questions"]
+    },
+    {
+      "id": "en.n1.class-71",
+      "title": "me/you/him/her/it",
+      "introducedVocabulary": ["me", "him", "know", "knows", "call", "calls"],
+      "allowedCarryover": ["you", "her", "it", "help", "like", "likes", "I", "Ana", "she", "he", "we"],
+      "newPatterns": ["object-pronouns-singular"],
+      "requiresPatterns": ["present-simple-base-pronouns", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-72",
+      "title": "us/them",
+      "introducedVocabulary": ["us", "them", "with", "for", "Carlos", "Sara", "helps"],
+      "allowedCarryover": ["every day", "they", "we", "Ana", "Leo", "help", "know", "knows", "is", "this", "the", "book", "call", "calls", "she", "coffee", "and"],
+      "newPatterns": ["object-pronouns-plural"],
+      "requiresPatterns": ["object-pronouns-singular", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-73",
+      "title": "Sustitución de nombres por pronombres objeto",
+      "introducedVocabulary": ["Mia"],
+      "allowedCarryover": ["me", "you", "him", "her", "it", "us", "them", "I", "we", "they", "he", "Ana", "Leo", "Sara", "know", "knows", "call", "calls", "help", "like", "the", "book", "and"],
+      "newPatterns": ["name-to-object-pronoun-substitution"],
+      "requiresPatterns": ["object-pronouns-singular", "object-pronouns-plural", "third-person-endings"]
+    },
+    {
+      "id": "en.n1.class-74",
+      "title": "mine/yours/his/hers",
+      "introducedVocabulary": ["mine", "yours", "hers", "phone"],
+      "allowedCarryover": ["his", "my", "your", "her", "this", "that", "the", "it", "is", "are", "book", "bag", "keys", "red"],
+      "newPatterns": ["possessive-pronouns-core"],
+      "requiresPatterns": ["possessive-adjectives-singular", "demonstratives-singular"]
+    },
+    {
+      "id": "en.n1.class-75",
+      "title": "Whose y pertenencias",
+      "introducedVocabulary": ["whose", "ours", "theirs"],
+      "allowedCarryover": ["mine", "yours", "our", "this", "that", "these", "they", "we", "it", "is", "are", "bag", "book", "phone", "keys", "who", "help", "us", "I", "call", "her"],
+      "newPatterns": ["whose-and-belongings"],
+      "requiresPatterns": ["object-pronouns-singular", "object-pronouns-plural", "name-to-object-pronoun-substitution", "possessive-pronouns-core", "demonstratives-singular", "demonstratives-plural"]
+    },
+    {
+      "id": "en.n1.class-76",
+      "title": "Contables e incontables",
+      "introducedVocabulary": ["one", "apples", "egg", "eggs", "rice", "bread", "countable", "uncountable"],
+      "allowedCarryover": ["two", "four", "apple", "milk", "water", "I", "have", "is", "are", "a", "and"],
+      "newPatterns": ["countable-uncountable-nouns"],
+      "requiresPatterns": ["regular-plurals", "articles-a-an", "pronouns-be", "present-simple-base-pronouns"]
+    },
+    {
+      "id": "en.n1.class-77",
+      "title": "some/any",
+      "introducedVocabulary": ["some", "any"],
+      "allowedCarryover": ["there", "there is", "there are", "is there", "are there", "not", "milk", "apples", "water", "eggs", "bread", "rice", "coffee", "chairs", "is", "are"],
+      "newPatterns": ["some-any-basic"],
+      "requiresPatterns": ["countable-uncountable-nouns", "there-is-are-affirmative", "there-questions-negatives"]
+    },
+    {
+      "id": "en.n1.class-78",
+      "title": "How many/How much",
+      "introducedVocabulary": ["how many", "how much", "many", "much"],
+      "allowedCarryover": ["apples", "eggs", "milk", "rice", "water", "bread", "coffee", "there", "are", "is", "two", "do", "you", "we", "have"],
+      "newPatterns": ["how-many-how-much"],
+      "requiresPatterns": ["countable-uncountable-nouns", "some-any-basic", "there-is-are-affirmative", "present-simple-yes-no-questions"]
+    },
+    {
+      "id": "en.n1.class-79",
+      "title": "Lista de compras",
+      "introducedVocabulary": ["shopping list", "list", "need"],
+      "allowedCarryover": ["this", "my", "we", "two", "four", "six", "apple", "apples", "egg", "eggs", "some", "milk", "bread", "rice", "water", "coffee", "is"],
+      "newPatterns": ["shopping-list-integration"],
+      "requiresPatterns": ["countable-uncountable-nouns", "some-any-basic", "how-many-how-much", "present-simple-base-pronouns"]
+    },
+    {
+      "id": "en.n1.class-80",
+      "title": "Mercado: pedir cantidades",
+      "introducedVocabulary": [],
+      "allowedCarryover": ["do", "you", "have", "any", "yes", "we", "some", "how many", "how much", "many", "much", "need", "I", "apples", "eggs", "milk", "rice", "bread", "water", "two", "four"],
+      "newPatterns": ["market-quantities-integration"],
+      "requiresPatterns": ["countable-uncountable-nouns", "some-any-basic", "how-many-how-much", "shopping-list-integration", "present-simple-yes-no-questions", "present-simple-base-pronouns"]
+    },
+    {
+      "id": "en.n1.class-81",
+      "title": "I'd like…",
+      "introducedVocabulary": ["I'd like", "I'd", "salad", "soup", "chicken", "want"],
+      "allowedCarryover": ["like", "a", "the", "some", "water", "coffee", "please", "thank you", "I"],
+      "newPatterns": ["id-like-requests"],
+      "requiresPatterns": ["some-any-basic", "countable-uncountable-nouns", "articles-a-an"]
+    },
+    {
+      "id": "en.n1.class-82",
+      "title": "Can I have…?",
+      "introducedVocabulary": ["Can I have", "menu", "check", "account", "sure"],
+      "allowedCarryover": ["can", "I", "have", "has", "the", "a", "some", "water", "bread", "salad", "soup", "chicken", "please", "yes", "no"],
+      "newPatterns": ["can-i-have-requests"],
+      "requiresPatterns": ["can-ability-questions-short-answers", "some-any-basic", "articles-a-an", "id-like-requests"]
+    },
+    {
+      "id": "en.n1.class-83",
+      "title": "Could I…? como bloque funcional",
+      "introducedVocabulary": ["could", "Could I have", "juice", "repeat", "sorry"],
+      "allowedCarryover": ["I", "have", "the", "a", "some", "menu", "water", "soup", "table", "for", "two", "you", "that", "can", "please"],
+      "newPatterns": ["could-i-have-functional"],
+      "requiresPatterns": ["can-i-have-requests", "some-any-basic", "articles-a-an"]
+    },
+    {
+      "id": "en.n1.class-84",
+      "title": "Restaurante básico",
+      "introducedVocabulary": ["without"],
+      "allowedCarryover": ["a", "table", "for", "two", "please", "could", "I", "have", "the", "menu", "I'd like", "salad", "chicken", "don't", "do", "not", "no", "eat", "meat", "can", "with", "rice", "check", "account"],
+      "newPatterns": ["basic-restaurant-integration"],
+      "requiresPatterns": ["id-like-requests", "can-i-have-requests", "could-i-have-functional", "present-simple-negatives", "some-any-basic"]
+    },
+    {
+      "id": "en.n1.class-85",
+      "title": "Diálogo cliente/mesero y evaluación",
+      "introducedVocabulary": ["server", "customer"],
+      "allowedCarryover": ["a", "table", "for", "two", "yes", "please", "could", "I", "have", "the", "menu", "I'd like", "salad", "can", "some", "water", "sure", "sorry", "you", "repeat", "that", "check", "soup", "want", "chicken"],
+      "newPatterns": ["customer-server-dialogue-assessment"],
+      "requiresPatterns": ["id-like-requests", "can-i-have-requests", "could-i-have-functional", "basic-restaurant-integration", "some-any-basic", "countable-uncountable-nouns"]
+    },
+    {
+      "id": "en.n1.class-86",
+      "title": "am/is/are + -ing",
+      "introducedVocabulary": ["working", "running", "now", "today", "watching"],
+      "allowedCarryover": ["am", "is", "are", "reading", "cooking", "i", "she", "they", "we", "you"],
+      "newPatterns": ["am-is-are-ing"],
+      "requiresPatterns": []
+    },
+    {
+      "id": "en.n1.class-87",
+      "title": "Acciones que ocurren ahora",
+      "introducedVocabulary": ["washing", "writing", "listening"],
+      "allowedCarryover": ["now", "today", "playing", "reading", "cooking", "working", "running", "am", "are", "i", "is", "she", "they", "we", "you"],
+      "newPatterns": ["actions-happening-now"],
+      "requiresPatterns": ["am-is-are-ing"]
+    },
+    {
+      "id": "en.n1.class-88",
+      "title": "Presente simple frente a continuo",
+      "introducedVocabulary": ["reads"],
+      "allowedCarryover": ["every day", "usually", "now", "today", "read", "work", "works", "cook", "cooking", "am", "are", "he", "i", "is", "reading", "she", "they", "we", "working", "you"],
+      "newPatterns": ["simple-vs-continuous"],
+      "requiresPatterns": ["am-is-are-ing"]
+    },
+    {
+      "id": "en.n1.class-89",
+      "title": "and/but/or",
+      "introducedVocabulary": ["or", "tea", "day", "every", "sundays"],
+      "allowedCarryover": ["and", "but", "read", "write", "coffee", "home", "school", "today", "are", "do", "have", "i", "is", "now", "on", "please", "reading", "reads", "she", "studies", "study", "they", "want", "we", "work", "works", "you"],
+      "newPatterns": ["and-but-or"],
+      "requiresPatterns": ["simple-vs-continuous"]
+    },
+    {
+      "id": "en.n1.class-90",
+      "title": "because/so y descripción conectada",
+      "introducedVocabulary": ["because", "so", "rain", "stay", "coat", "cold", "hungry", "money", "raining", "stays", "wear"],
+      "allowedCarryover": ["now", "today", "home", "tired", "study", "work", "a", "am", "are", "cook", "have", "i", "is", "it", "need", "she", "they", "time", "we"],
+      "newPatterns": ["because-so-connected"],
+      "requiresPatterns": ["and-but-or", "am-is-are-ing", "actions-happening-now", "simple-vs-continuous"]
+    },
+    {
+      "id": "en.n1.class-91",
+      "title": "Conocer a alguien",
+      "introducedVocabulary": ["hi", "I'm", "nice", "meet", "what's", "Quito", "cuenca", "good", "lima", "maya", "yesterday"],
+      "allowedCarryover": ["name", "your", "you", "from", "where", "are", "am", "hello", "leo", "night", "see", "to", "what"],
+      "newPatterns": ["meet-someone"],
+      "requiresPatterns": ["pronouns-be", "routine-wh-questions"]
+    },
+    {
+      "id": "en.n1.class-92",
+      "title": "Quedar en una cafetería",
+      "introducedVocabulary": ["free", "let's", "café", "busy", "caf", "let"],
+      "allowedCarryover": ["are", "you", "on", "Saturday", "meet", "at", "three", "see", "can", "Sunday", "sorry", "four", "i", "i'm", "the", "two"],
+      "newPatterns": ["cafe-meeting"],
+      "requiresPatterns": ["can-ability-affirmative-negative", "time-prepositions-at-on-in"]
+    },
+    {
+      "id": "en.n1.class-93",
+      "title": "Mensajes: invitación y respuesta",
+      "introducedVocabulary": ["Sam", "would", "maybe", "next", "thanks", "week"],
+      "allowedCarryover": ["hi", "are", "you", "free", "like", "meet", "yes", "I'd", "love", "sorry", "can't", "see", "Friday", "to", "at", "i", "monday", "now", "on", "two"],
+      "newPatterns": ["invitation-messages"],
+      "requiresPatterns": ["can-ability-affirmative-negative", "id-like-requests", "can-i-have-requests", "could-i-have-functional"]
+    },
+    {
+      "id": "en.n1.class-94",
+      "title": "Simulación con menú y horario",
+      "introducedVocabulary": ["opens", "nine", "sandwich"],
+      "allowedCarryover": ["café", "at", "I'd like", "please", "can", "I", "have", "some", "tea", "let's", "meet", "ten", "menu", "has", "soup", "and", "salad", "the", "a", "are", "caf", "eight", "free", "let", "now", "you"],
+      "newPatterns": ["menu-schedule-simulation"],
+      "requiresPatterns": ["id-like-requests", "can-i-have-requests", "time-prepositions-at-on-in"]
+    },
+    {
+      "id": "en.n1.class-95",
+      "title": "Evaluación integrada A1",
+      "introducedVocabulary": ["Alex", "jordan"],
+      "allowedCarryover": ["hi", "I'm", "nice", "meet", "you", "are", "free", "at", "two", "would", "like", "café", "I'd", "some", "tea", "please", "see", "Friday", "am", "caf", "from", "monday", "name", "on", "quito", "the", "to", "what", "your"],
+      "newPatterns": ["a1-integrated-evaluation"],
+      "requiresPatterns": ["meet-someone", "cafe-meeting", "invitation-messages", "menu-schedule-simulation"]
+    },
+    {
+      "id": "en.n1.class-96",
+      "title": "Repaso espaciado del nivel",
+      "introducedVocabulary": ["studying"],
+      "allowedCarryover": ["I'm", "Ana", "this", "my", "bag", "she", "gets up", "at", "seven", "can", "swim", "but", "can't", "drive", "there is", "there are", "some", "milk", "apples", "I'd like", "soup", "water", "please", "he", "is", "reading", "now", "works", "work", "home", "I", "cook", "they", "are", "cooking", "every day", "get up", "six", "book", "mine", "check", "like", "studies", "how many", "eggs"],
+      "newPatterns": ["spaced-review-n1"],
+      "requiresPatterns": ["a1-integrated-evaluation", "third-person-endings", "can-ability-affirmative-negative", "and-but-or", "some-any-basic", "id-like-requests", "simple-vs-continuous", "possessive-pronouns-core", "how-many-how-much"]
+    },
+    {
+      "id": "en.n1.class-97",
+      "title": "Lectura, escucha y escritura editorial",
+      "introducedVocabulary": ["near", "right now", "relaxing", "routine", "action", "meeting", "orders", "food", "asks", "describes"],
+      "allowedCarryover": ["hi", "I'm", "Mia", "I", "live", "here", "usually", "study", "studies", "in", "the", "morning", "reading", "at", "café", "like", "because", "it", "is", "on", "Saturday", "meet", "Ana", "ten", "she", "lives", "they", "check", "Sunday", "seven", "am", "a", "and", "caf", "for", "her"],
+      "newPatterns": ["integrated-editorial-literacy"],
+      "requiresPatterns": ["spaced-review-n1", "meet-someone", "cafe-meeting", "simple-vs-continuous", "because-so-connected", "time-prepositions-at-on-in"]
+    },
+    {
+      "id": "en.n1.class-98",
+      "title": "Evaluación final del Nivel 1",
+      "introducedVocabulary": ["talking"],
+      "allowedCarryover": ["my", "name", "is", "Leo", "I", "live", "near", "the", "park", "work", "works", "at", "home", "and", "study", "English", "can", "can't", "cook", "cooks", "cooking", "dance", "but", "there are", "there is", "some", "apples", "rice", "in", "kitchen", "have", "water", "please", "right now", "am", "to", "Ana", "every day", "swim", "drive", "I'd like", "salad", "she", "he", "reading", "now", "how much", "much", "milk", "we", "meet", "on", "Saturday", "ten", "usually", "reads", "night", "because", "it", "could", "check"],
+      "newPatterns": ["n1-final-assessment"],
+      "requiresPatterns": ["a1-integrated-evaluation", "integrated-editorial-literacy", "third-person-endings", "can-ability-affirmative-negative", "and-but-or", "some-any-basic", "how-many-how-much", "could-i-have-functional", "simple-vs-continuous"]
+    },
+    {
+      "id": "en.n1.class-99",
+      "title": "Conversación guiada por tarjetas",
+      "introducedVocabulary": ["card"],
+      "allowedCarryover": ["my", "name", "is", "Sara", "I", "live", "near", "here", "usually", "get up", "get", "at", "seven", "like", "reading", "and", "can", "cook", "right now", "am", "studying", "are", "you", "free", "on", "Saturday", "I'd like", "some", "water", "please", "read", "every day", "where", "the", "park", "soup", "cooking", "swim", "working", "routine", "work", "home", "have"],
+      "newPatterns": ["guided-card-conversation"],
+      "requiresPatterns": ["n1-final-assessment", "invitation-messages", "a1-integrated-evaluation", "preferences-gerunds", "can-ability-affirmative-negative", "simple-vs-continuous", "id-like-requests"]
+    },
+    {
+      "id": "en.n1.class-100",
+      "title": "Proyecto My life in English",
+      "introducedVocabulary": ["part", "closing", "see you", "tomorrow"],
+      "allowedCarryover": ["my", "name", "is", "Leo", "I", "live", "in", "Quito", "usually", "get up", "at", "seven", "like", "reading", "and", "can", "cook", "right now", "am", "studying", "English", "are", "you", "free", "on", "Saturday", "I'm", "Ana", "near", "here", "swim", "there are", "now", "because", "it", "relaxing", "we", "meet", "ten", "I'd like", "some", "water", "please", "every day", "study", "check", "have", "the"],
+      "newPatterns": ["my-life-in-english-project"],
+      "requiresPatterns": ["spaced-review-n1", "integrated-editorial-literacy", "n1-final-assessment", "guided-card-conversation", "a1-integrated-evaluation", "meet-someone", "cafe-meeting", "invitation-messages", "simple-vs-continuous", "because-so-connected"]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:onelingo/core/aprendizaje/biblioteca_adaptador.dart';
 import 'package:onelingo/core/aprendizaje/cargador.dart';
 import 'package:onelingo/core/aprendizaje/integridad.dart';
 import 'package:onelingo/core/aprendizaje/modelos.dart';
@@ -33,44 +34,112 @@ void main() {
     });
   }
 
-  test('Inglés A1: las 29 unidades del plan, en su nivel y sin módulos rotos', () async {
-    final cargador = CargadorRuta();
-    final ruta = (await cargador.cargar('en'))!;
-    expect(cargador.modulosConError, isEmpty);
-    final a11 = ruta.delNivel('a1-1'), a12 = ruta.delNivel('a1-2');
-    expect(a11.length, 12);
-    expect(a12.length, 17);
-    for (final u in [...a11, ...a12]) {
-      expect(u.cefr, 'A1', reason: u.id);
-      expect(u.nivelInterno, u.nivel == 'a1-1' ? 1 : 2, reason: u.id);
-      expect(u.id.startsWith('en.a1.'), isTrue, reason: u.id);
+  test(
+    'Inglés N1: 100 clases editoriales activas y sin módulos rotos',
+    () async {
+      final cargador = CargadorRuta();
+      final ruta = (await cargador.cargar('en'))!;
+      expect(cargador.modulosConError, isEmpty);
+      final n1 = ruta.delNivel('n1');
+      expect(n1.length, 100);
+      for (final u in n1) {
+        expect(u.cefr, 'A1', reason: u.id);
+        expect(u.nivelInterno, 1, reason: u.id);
+        expect(u.id.startsWith('en.n1.class-'), isTrue, reason: u.id);
+      }
+      expect(n1.first.prerequisitos, ['en.f0.presentarse']);
+      expect(n1.last.id, 'en.n1.class-100');
+      final vocabularioVisible = n1.first.pasos.firstWhere(
+        (paso) => paso.tipo == TipoPaso.vocabulario,
+      );
+      expect(vocabularioVisible.refs, hasLength(8));
+      expect(
+        vocabularioVisible.refs,
+        everyElement(isNot(contains('good-night'))),
+      );
+      expect(ruta.unidades.map((u) => u.orden).toList(), [
+        for (var i = 0; i < ruta.unidades.length; i++) i,
+      ]);
+    },
+  );
+
+  test('Inglés N1–N3 consumen los cuatro pools editoriales activos', () async {
+    final loader = CargadorBiblioteca();
+    final samples = [
+      await loader.resolverUnidad('en', 'en.n1.class-01'),
+      await loader.resolverUnidad('en', 'en.n1.class-100'),
+      await loader.resolverUnidad('en', 'en.n2.class-01'),
+      await loader.resolverUnidad('en', 'en.n2.class-100'),
+      await loader.resolverUnidad('en', 'en.n3.class-01'),
+      await loader.resolverUnidad('en', 'en.n3.class-90'),
+    ];
+    for (final runtime in samples) {
+      expect(runtime.activa, isTrue);
+      expect(runtime.libraryVersion, '2026.09.30-en-n3.1');
+      expect(runtime.pool('practiceGuided')!.variants, hasLength(3));
+      expect(runtime.pool('practice')!.variants, hasLength(3));
+      expect(runtime.pool('evaluation')!.variants, hasLength(4));
+      expect(runtime.pool('review')!.variants, hasLength(3));
     }
-    // Continuidad: A1 empieza al terminar fundamentos y termina en la integración.
-    expect(a11.first.prerequisitos, ['en.f0.presentarse']);
-    expect(a12.last.id, 'en.a1.integracion-a1');
-    expect(ruta.unidades.map((u) => u.orden).toList(), [for (var i = 0; i < ruta.unidades.length; i++) i]);
+    expect(
+      samples.first.pool('evaluation')!.selectionId,
+      (await loader.resolverUnidad(
+        'en',
+        'en.n1.class-01',
+      )).pool('evaluation')!.selectionId,
+    );
   });
 
-  test('Los 10 idiomas tienen escritura/sonidos y un A1 inicial con tablas', () async {
-    for (final l in idiomas) {
-      final ruta = (await CargadorRuta().cargar(l.code))!;
-      final a1 = ruta.delNivel('a1-1');
-      expect(a1.length, greaterThanOrEqualTo(7), reason: l.code);
-      // El A1 empieza donde terminan los fundamentos.
-      expect(a1.first.prerequisitos, [ruta.delNivel('f0').last.id], reason: l.code);
-      // Hay tablas (escritura o conjugación) en fundamentos y en A1.
-      bool conTabla(List<UnidadRuta> us) =>
-          us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));
-      expect(conTabla(ruta.delNivel('f0')), isTrue, reason: l.code);
-      expect(conTabla(a1), isTrue, reason: l.code);
-      // Orden global consecutivo.
+  test(
+    'Inglés publica el corte aprobado: N2 completo y N3 hasta C90',
+    () async {
+      final ruta = (await CargadorRuta().cargar('en'))!;
+      final n2 = ruta.delNivel('n2');
+      final n3 = ruta.delNivel('n3');
+      expect(n2, hasLength(100));
+      expect(n3, hasLength(90));
+      expect(n2.first.prerequisitos, ['en.n1.class-100']);
+      expect(n2.last.id, 'en.n2.class-100');
+      expect(n3.first.prerequisitos, ['en.n2.class-100']);
+      expect(n3.last.id, 'en.n3.class-90');
       expect(
-        ruta.unidades.map((u) => u.orden).toList(),
-        [for (var i = 0; i < ruta.unidades.length; i++) i],
-        reason: l.code,
+        n2.every((unit) => unit.cefr == 'A2' && unit.nivelInterno == 2),
+        isTrue,
       );
-    }
-  });
+      expect(
+        n3.every((unit) => unit.cefr == 'B1' && unit.nivelInterno == 3),
+        isTrue,
+      );
+      expect(
+        ruta.delNivel('n3').any((unit) => unit.id == 'en.n3.class-91'),
+        isFalse,
+      );
+    },
+  );
+
+  test(
+    'Los 10 idiomas tienen escritura/sonidos y un A1 inicial con tablas',
+    () async {
+      for (final l in idiomas) {
+        final ruta = (await CargadorRuta().cargar(l.code))!;
+        final a1 = ruta.delNivel(l.code == 'en' ? 'n1' : 'a1-1');
+        expect(a1.length, greaterThanOrEqualTo(7), reason: l.code);
+        // El A1 empieza donde terminan los fundamentos.
+        expect(a1.first.prerequisitos, [
+          ruta.delNivel('f0').last.id,
+        ], reason: l.code);
+        // Hay tablas (escritura o conjugación) en fundamentos y en A1.
+        bool conTabla(List<UnidadRuta> us) =>
+            us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));
+        expect(conTabla(ruta.delNivel('f0')), isTrue, reason: l.code);
+        if (l.code != 'en') expect(conTabla(a1), isTrue, reason: l.code);
+        // Orden global consecutivo.
+        expect(ruta.unidades.map((u) => u.orden).toList(), [
+          for (var i = 0; i < ruta.unidades.length; i++) i,
+        ], reason: l.code);
+      }
+    },
+  );
 
   test('Ningún idioma tiene módulos que no cargan', () async {
     for (final l in idiomas) {
@@ -95,12 +164,15 @@ void main() {
     expect(en.curso.revisionInicial, isFalse);
   });
 
-  test('Solo inglés está revisado; el resto se marca «versión inicial»', () async {
-    for (final l in idiomas) {
-      final ruta = (await CargadorRuta().cargar(l.code))!;
-      expect(ruta.curso.revisionInicial, l.code != 'en', reason: l.code);
-    }
-  });
+  test(
+    'Solo inglés está revisado; el resto se marca «versión inicial»',
+    () async {
+      for (final l in idiomas) {
+        final ruta = (await CargadorRuta().cargar(l.code))!;
+        expect(ruta.curso.revisionInicial, l.code != 'en', reason: l.code);
+      }
+    },
+  );
 
   test('TextoApoyo: nativo → predeterminado → español', () {
     const t = TextoApoyo({'es': 'hola', 'en': 'hello'});

@@ -74,7 +74,7 @@ void main() {
       ClaveRuta.evaluacion(u(0).id): evaluacion,
     }, ahora: dia0.add(const Duration(days: 1, hours: 1)));
     expect(e[u(0).id]!.repasoPendiente, isTrue);
-    expect(unidadRecomendada(ruta, e)!.id, isNot(u(0).id));
+    expect(unidadRecomendada(ruta, e)!.id, u(0).id);
     final alDia = siguienteRepaso(
       u(0),
       evaluacion,
@@ -91,9 +91,21 @@ void main() {
     expect(e[u(0).id]!.estado, EstadoUnidad.dominada);
     expect(e[u(0).id]!.repasoPendiente, isFalse);
     // Un repaso fallado baja de caja y vuelve a pedirse pronto.
-    final fallo = siguienteRepaso(u(0), evaluacion, alDia, 1, 5, dia0.add(const Duration(days: 5)));
+    final fallo = siguienteRepaso(
+      u(0),
+      evaluacion,
+      alDia,
+      1,
+      5,
+      dia0.add(const Duration(days: 5)),
+    );
     expect(fallo['caja'], lessThan(alDia['caja'] as int));
-    expect(fallo['retencion'], isTrue, reason: 'la retención ya demostrada se conserva');
+    expect(
+      fallo['retencion'],
+      isTrue,
+      reason: 'la retención ya demostrada se conserva',
+    );
+    expect(fallo['necesitaRefuerzo'], isTrue);
   });
 
   test('Nivel 0 completo solo con todas las unidades aprobadas', () {
@@ -102,7 +114,13 @@ void main() {
     for (final x in ruta.delNivel('f0')) {
       expect(nivelAprobado(ruta, estadosRuta(ruta, practicas), 'f0'), isFalse);
       practicas.addAll(guiadaResuelta(x));
-      practicas[ClaveRuta.evaluacion(x.id)] = resumenEvaluacion(x, 5, 5, null, ahora);
+      practicas[ClaveRuta.evaluacion(x.id)] = resumenEvaluacion(
+        x,
+        5,
+        5,
+        null,
+        ahora,
+      );
     }
     expect(nivelAprobado(ruta, estadosRuta(ruta, practicas), 'f0'), isTrue);
   });
@@ -127,10 +145,7 @@ void main() {
     }
     // La evidencia antigua aparece como progreso de las unidades nuevas.
     expect(e['en.f0.pronombres']!.estado, EstadoUnidad.bloqueada);
-    expect(
-      evidenciaDe(antiguas, 'ruta:en.f0.pronombres:p4:g1'),
-      isNotNull,
-    );
+    expect(evidenciaDe(antiguas, 'ruta:en.f0.pronombres:p4:g1'), isNotNull);
     // Pura e idempotente: no modifica las claves antiguas.
     expect(estadosRuta(ruta, antiguas).length, e.length);
     expect(antiguas.keys.toSet(), aliasFoundationV1.keys.toSet());
@@ -180,7 +195,13 @@ void main() {
     }
     // Aprobar una unidad omitible la saca de «opcional».
     e = estadosRuta(ruta, {
-      ClaveRuta.evaluacion(u(0).id): resumenEvaluacion(u(0), 5, 5, null, DateTime.now()),
+      ClaveRuta.evaluacion(u(0).id): resumenEvaluacion(
+        u(0),
+        5,
+        5,
+        null,
+        DateTime.now(),
+      ),
     }, nivelBase: 1);
     expect(e[u(0).id]!.omitible, isFalse);
     expect(e[u(0).id]!.estado, EstadoUnidad.aprobada);
@@ -189,20 +210,37 @@ void main() {
   test('Grafo: detecta ciclos y prerrequisitos inexistentes', () {
     final a = ruta.unidades[0], b = ruta.unidades[1];
     UnidadRuta copia(UnidadRuta x, List<String> pre, int orden) => UnidadRuta(
-      id: x.id, idioma: x.idioma, nivel: x.nivel, orden: orden, titulo: x.titulo,
-      objetivo: x.objetivo, cefr: x.cefr, nivelInterno: x.nivelInterno,
-      concepto: x.concepto, prerequisitos: pre, habilidades: x.habilidades,
-      gramatica: x.gramatica, vocabulario: x.vocabulario,
-      erroresFrecuentes: x.erroresFrecuentes, pasos: x.pasos, umbral: x.umbral,
-      intervalosRepaso: x.intervalosRepaso, tutor: x.tutor,
+      id: x.id,
+      idioma: x.idioma,
+      nivel: x.nivel,
+      orden: orden,
+      titulo: x.titulo,
+      objetivo: x.objetivo,
+      cefr: x.cefr,
+      nivelInterno: x.nivelInterno,
+      concepto: x.concepto,
+      prerequisitos: pre,
+      habilidades: x.habilidades,
+      gramatica: x.gramatica,
+      vocabulario: x.vocabulario,
+      erroresFrecuentes: x.erroresFrecuentes,
+      pasos: x.pasos,
+      umbral: x.umbral,
+      intervalosRepaso: x.intervalosRepaso,
+      tutor: x.tutor,
     );
     expect(validarGrafo(ruta.unidades), isEmpty);
     expect(
-      validarGrafo([copia(a, [b.id], 0), copia(b, [a.id], 1)]),
+      validarGrafo([
+        copia(a, [b.id], 0),
+        copia(b, [a.id], 1),
+      ]),
       contains('ciclo de prerrequisitos'),
     );
     expect(
-      validarGrafo([copia(a, ['en.f0.no-existe'], 0)]).single,
+      validarGrafo([
+        copia(a, ['en.f0.no-existe'], 0),
+      ]).single,
       contains('inexistente'),
     );
   });

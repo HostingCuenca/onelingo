@@ -13,7 +13,11 @@ RAIZ = Path(__file__).resolve().parent.parent / "assets" / "contenido"
 ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron", "tabla"}
 ORDEN_TIPOS = ["ensenar", "practica_guiada", "practica_independiente", "situacion", "evaluacion"]
 FORMATOS = {"elegir", "escuchar", "ordenar", "completar", "escribir", "relacionar"}
-PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」…\"“”()«»—–，：；]")
+PUNTUACION = re.compile(r"[.,!?¡¿;:/。、！？「」…\"“”()«»—–，：；]")
+CAMPOS_HUELLA = {
+    "formato", "consigna", "pregunta", "preguntaApoyo", "opciones", "respuesta",
+    "aceptadas", "tokens", "texto", "audio", "pares",
+}
 
 
 def palabras(texto):
@@ -21,13 +25,23 @@ def palabras(texto):
     return [p for p in PUNTUACION.sub(" ", texto.lower()).split() if p and p != "-"]
 
 
+def huella_item(item):
+    """Contenido puntuable, sin id, pista, consigna ni feedback editorial."""
+    datos = {k: item[k] for k in CAMPOS_HUELLA if k in item}
+    return json.dumps(datos, ensure_ascii=False, sort_keys=True)
+
+
 class Validador:
     def __init__(self, idioma):
         self.idioma = idioma
         self.errores = []
+        self.advertencias = []
 
     def error(self, donde, msg):
         self.errores.append(f"[{self.idioma}] {donde}: {msg}")
+
+    def advertencia(self, donde, msg):
+        self.advertencias.append(f"[{self.idioma}] {donde}: {msg}")
 
     def apoyo(self, valor, donde):
         if not isinstance(valor, dict):
@@ -164,9 +178,18 @@ class Validador:
         umbral = (u.get("criterioDominio") or {}).get("umbral")
         if not isinstance(umbral, (int, float)) or not 0.5 <= umbral <= 1:
             self.error(uid, "criterioDominio.umbral debe estar entre 0.5 y 1")
-        conocidas = self.conocidas(u, unidades) | libres
+        conocidas = set(libres)
+        declaradas = {
+            palabra
+            for vocablo in u.get("vocabulario", [])
+            for palabra in palabras(vocablo.get("texto", ""))
+        }
+        for p in u.get("prerequisitos", []):
+            if p in unidades:
+                conocidas |= self.conocidas(unidades[p], unidades)
         # Las formas incorrectas enseñadas como error solo valen como distractor.
-        self.distractores = conocidas | self.de_errores(u, unidades)
+        errores_distractor = self.de_errores(u, unidades)
+        self.distractores = conocidas | errores_distractor
         pasos = u.get("pasos", [])
         if not pasos or pasos[0].get("tipo") not in ENSENAR:
             self.error(uid, "la unidad debe empezar enseñando (explicacion/ejemplos/vocabulario/patron)")
@@ -174,6 +197,8 @@ class Validador:
         tipos = set()
         paso_ids = set()
         item_ids = set()
+        evidencia = set()
+        huellas = {}
         for p in pasos:
             pid, tipo = p.get("id"), p.get("tipo")
             donde = f"{uid}.{pid}"
@@ -191,17 +216,29 @@ class Validador:
             tipos.add(clase)
             if tipo == "explicacion":
                 self.apoyo(p.get("texto"), f"{donde}.texto")
+                evidencia.add("gramatica")
             if tipo in ("ejemplos", "patron"):
                 for i, e in enumerate(p.get("items", p.get("ejemplos", []))):
-                    self.meta(e.get("texto", ""), conocidas, f"{donde}.ejemplo[{i}]")
+                    texto = e.get("texto", "")
+                    # Ejemplos y patrones son pasos de enseñanza: pueden
+                    # introducir vocablos declarados, pero no palabras ajenas
+                    # al vocabulario/prerrequisitos de la unidad.
+                    self.meta(texto, conocidas | declaradas, f"{donde}.ejemplo[{i}]")
+                    conocidas |= set(palabras(texto))
                     self.apoyo(e.get("traduccion"), f"{donde}.ejemplo[{i}].traduccion")
             if tipo == "patron":
+                evidencia.add("gramatica")
                 for i, f in enumerate(p.get("formula", [])):
+                    # La fórmula puede contener etiquetas metalingüísticas
+                    # (subject, noun, raíz, +, →); no constituye por sí sola
+                    # exposición de vocabulario meta.
                     if "nota" in f:
                         self.apoyo(f["nota"], f"{donde}.formula[{i}].nota")
                 if "texto" in p:
                     self.apoyo(p["texto"], f"{donde}.texto")
             if tipo == "tabla":
+                evidencia.add("gramatica")
+                evidencia.add("escritura")
                 if not p.get("filas"):
                     self.error(donde, "tabla sin filas")
                 for k in ("titulo", "texto"):
@@ -218,11 +255,29 @@ class Validador:
                             self.error(donde, f"celda [{i}][{j}] debe ser {{texto, rom?}} o {{apoyo}}")
                         elif "apoyo" in c:
                             self.apoyo(c["apoyo"], f"{donde}.celda[{i}][{j}]")
+                        elif "texto" in c:
+                            texto = c.get("texto", "")
+                            # Una tabla es material explícito de enseñanza
+                            # (alfabetos, silabarios y conjugaciones). Sus
+                            # celdas meta introducen el contenido que muestran.
+                            conocidas |= set(palabras(texto))
             if tipo == "vocabulario":
+                evidencia.add("vocabulario")
                 for r in p.get("refs", []):
                     if r not in vocab_ids:
                         self.error(donde, f"ref de vocabulario inexistente {r}")
+                # `vocabulario` es el lexicón declarado de la unidad; `refs`
+                # decide qué tarjetas se muestran al alumno. El compilador
+                # puede declarar formas de transferencia, nombres propios o
+                # flexiones necesarias para validar ejercicios sin convertir
+                # cada distractor y cada frase completa en una tarjeta visible.
+                conocidas |= declaradas
+            if tipo in ENSENAR:
+                # Una vez mostrado por un paso de enseñanza, el vocabulario
+                # también puede utilizarse como distractor legítimo.
+                self.distractores = conocidas | errores_distractor
             if tipo == "situacion":
+                evidencia.add("lectura")
                 self.apoyo(p.get("contexto"), f"{donde}.contexto")
                 if not p.get("dialogo"):
                     self.error(donde, "situación sin diálogo modelo")
@@ -240,6 +295,12 @@ class Validador:
                     item_ids.add(iid)
                     formatos.add(it.get("formato"))
                     self.item(it, tipo, conocidas, f"{donde}.{iid}")
+                if tipo in ("practica_guiada", "practica_independiente", "evaluacion"):
+                    huella = {huella_item(it) for it in p["items"]}
+                    if huella:
+                        huellas.setdefault(tipo, []).append((donde, huella))
+                if any(it.get("formato") in ("escribir", "ordenar", "completar") for it in p["items"]):
+                    evidencia.add("escritura")
                 if tipo == "evaluacion" and (len(p["items"]) < 4 or len(formatos) < 2):
                     self.error(donde, "la evaluación necesita ≥ 4 ítems y ≥ 2 formatos")
         for requerido in ("practica_guiada", "situacion", "evaluacion"):
@@ -247,6 +308,14 @@ class Validador:
                 self.error(uid, f"falta un paso '{requerido}'")
         if pasos and pasos[-1].get("tipo") != "evaluacion":
             self.error(uid, "la evaluación debe ser el último paso")
+        for habilidad in set(u.get("habilidades", [])) & {"gramatica", "vocabulario", "lectura", "escritura"}:
+            if habilidad not in evidencia:
+                self.error(uid, f"habilidad declarada sin evidencia determinista: {habilidad}")
+        for a in ("practica_guiada", "practica_independiente"):
+            for da, ha in huellas.get(a, []):
+                for db, hb in huellas.get("evaluacion", []):
+                    if ha & hb:
+                        self.advertencia(uid, f"contaminación: ítems exactos reutilizados entre {da} y {db}")
 
     def meta(self, texto, conocidas, donde):
         faltan = [w for w in palabras(texto) if w not in conocidas]
@@ -315,10 +384,15 @@ class Validador:
 def main():
     idiomas = sys.argv[1:] or sorted(p.name for p in RAIZ.iterdir() if (p / "ruta").is_dir())
     errores = []
+    advertencias = []
     for idioma in idiomas:
-        errores += Validador(idioma).validar()
+        validador = Validador(idioma)
+        errores += validador.validar()
+        advertencias += validador.advertencias
     for e in errores:
         print(e)
+    for e in advertencias:
+        print("WARN " + e)
     print(f"{len(idiomas)} idioma(s) · {len(errores)} error(es)")
     sys.exit(1 if errores else 0)
 

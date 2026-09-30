@@ -1,0 +1,748 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "vocabularyDeclarations": "exhaustive"
+  },
+  "id": "en.n1.class-35",
+  "title": {
+    "en": "Initial A1 mixed assessment",
+    "es": "Evaluación mixta A1 inicial"
+  },
+  "concepts": [
+    "a1-initial-assessment"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n1.class-34"
+  ],
+  "usesVocabulary": [
+    "this",
+    "these",
+    "my",
+    "our",
+    "their",
+    "house",
+    "small",
+    "is",
+    "are",
+    "there is",
+    "there are",
+    "there",
+    "a",
+    "the",
+    "two",
+    "chair",
+    "chairs",
+    "living room",
+    "welcome to",
+    "thank you",
+    "please",
+    "sit",
+    "down",
+    "book",
+    "bag",
+    "pet",
+    "sofa",
+    "table",
+    "green",
+    "in",
+    "on",
+    "under",
+    "next to",
+    "between",
+    "stand",
+    "up"
+  ],
+  "usesPatterns": [
+    "a1-initial-assessment",
+    "house-family-integration",
+    "house-visit-dialogue",
+    "articles-plurals-reading",
+    "location-listening",
+    "there-is-are-affirmative",
+    "location-next-to-between",
+    "imperative-politeness-negatives"
+  ],
+  "objectives": {
+    "es": [
+      "Comprobar transferencia entre casa, familia, diálogo, lectura y escucha.",
+      "Resolver una evaluación con al menos tres formatos."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "house",
+      "es": "casa"
+    },
+    {
+      "en": "welcome to",
+      "es": "bienvenido a"
+    },
+    {
+      "en": "thank you",
+      "es": "gracias"
+    },
+    {
+      "en": "between",
+      "es": "entre"
+    },
+    {
+      "en": "our",
+      "es": "nuestro"
+    },
+    {
+      "en": "chair",
+      "es": "silla"
+    },
+    {
+      "en": "chairs",
+      "es": "sillas"
+    },
+    {
+      "en": "book",
+      "es": "libro"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n1.class-35.t01",
+      "en": "This is my house.",
+      "es": "Esta es mi casa.",
+      "explanationEs": "Recupera la presentación de la casa.",
+      "segments": [
+        {
+          "en": "This is",
+          "es": "Esta es"
+        },
+        {
+          "en": "my house.",
+          "es": "mi casa."
+        }
+      ],
+      "audioText": "This is my house.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-35.t02",
+      "en": "There are two chairs in the living room.",
+      "es": "Hay dos sillas en la sala.",
+      "explanationEs": "Recupera plural, artículo y ubicación.",
+      "segments": [
+        {
+          "en": "There are two chairs",
+          "es": "Hay dos sillas"
+        },
+        {
+          "en": "in the living room.",
+          "es": "en la sala."
+        }
+      ],
+      "audioText": "There are two chairs in the living room.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-35.t03",
+      "en": "Welcome to my house. Thank you.",
+      "es": "Bienvenido a mi casa. Gracias.",
+      "explanationEs": "Recupera dos turnos del diálogo.",
+      "segments": [
+        {
+          "en": "Welcome to my house.",
+          "es": "Bienvenido a mi casa."
+        },
+        {
+          "en": "Thank you.",
+          "es": "Gracias."
+        }
+      ],
+      "audioText": "Welcome to my house. Thank you.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-35.t04",
+      "en": "The book is under the table.",
+      "es": "El libro está debajo de la mesa.",
+      "explanationEs": "Recupera ubicación a partir de una oración breve.",
+      "segments": [
+        {
+          "en": "The book is",
+          "es": "El libro está"
+        },
+        {
+          "en": "under the table.",
+          "es": "debajo de la mesa."
+        }
+      ],
+      "audioText": "The book is under the table.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n1.c35.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la presentación de una casa."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "This is my house."
+          },
+          {
+            "text": "These are my chairs."
+          }
+        ],
+        "teaches": [
+          "a1-initial-assessment"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "This is my house presenta una casa."
+          },
+          "hint": {
+            "es": "House es singular."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a81653e4e8b2fcac4d67b57adbdc4d319684ef445fc6a70170a8b2aa70e34413"
+      },
+      {
+        "id": "en.n1.c35.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: There ___ two chairs."
+        },
+        "answer": {
+          "text": "are",
+          "accepted": [
+            "are"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "a1-initial-assessment"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Two chairs usa are."
+          },
+          "hint": {
+            "es": "Es plural."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bc0b0405c112615a4aa0fe321c2e7f0e7abaf94cf0357879460af0e74bfa7fa2"
+      },
+      {
+        "id": "en.n1.c35.pg03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la ubicación."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The book is under the table."
+          },
+          {
+            "text": "The book is on the table."
+          }
+        ],
+        "teaches": [
+          "a1-initial-assessment"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye under."
+          },
+          "hint": {
+            "es": "Escucha la preposición."
+          },
+          "audio": "The book is under the table.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b5d557d5373a222bdfa6cc07f8e2b43b0f9df7f1f522c63bff0582446b9f6c6d"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n1.c35.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta a Welcome to my house."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Thank you."
+          },
+          {
+            "text": "Stand up."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Thank you responde a la bienvenida."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7167c2e721f5d08074cdda714baa7a2c1442de2414e4cc35367943df20b5238f"
+      },
+      {
+        "id": "en.n1.c35.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: My grandpa has got a ___."
+        },
+        "answer": {
+          "text": "pet",
+          "accepted": [
+            "pet"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Pet significa mascota."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b8c93cd787c787b13630a181eea78595d355e984ac37cf0c12ee26fcbcd5941d"
+      },
+      {
+        "id": "en.n1.c35.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la ubicación del sofá."
+        },
+        "answer": {
+          "text": "The sofa is next to the table.",
+          "tokens": [
+            "The",
+            "sofa",
+            "is",
+            "next",
+            "to",
+            "the",
+            "table."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Next to indica al lado de."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5f7654bd18bae81a6015e02857c9d3a3f654a82e5c5ac0564c709180283faa9c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n1.c35.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la descripción correcta de nuestra casa."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Our house is small."
+          },
+          {
+            "text": "Their house is small."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment",
+          "house-family-integration"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Our house significa nuestra casa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:25212e51caad90792f0d975086c9de006a9299453533437b29397d87360d5dff"
+      },
+      {
+        "id": "en.n1.c35.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el diálogo: Welcome to my house. — ___ you."
+        },
+        "answer": {
+          "text": "Thank",
+          "accepted": [
+            "Thank",
+            "thank"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment",
+          "house-visit-dialogue"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta es Thank you."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d30af94b257b6426e507e09b4a230b0c04dce0bea963fe24c0d8268126a17d7"
+      },
+      {
+        "id": "en.n1.c35.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la oración plural de la lectura."
+        },
+        "answer": {
+          "text": "The chairs are green.",
+          "tokens": [
+            "The",
+            "chairs",
+            "are",
+            "green."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment",
+          "articles-plurals-reading"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "The recupera las sillas ya mencionadas."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1084f766bdccd07f3393f9c8ca13bb1eb35a9fe226d1021ce6f8d5532e3fd296"
+      },
+      {
+        "id": "en.n1.c35.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y relaciona la frase con la opción correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The bag is between two chairs."
+          },
+          {
+            "text": "The bag is under a chair."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment",
+          "location-listening"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye between two chairs."
+          },
+          "audio": "The bag is between two chairs.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04f01fac28450bae639fea0bdc563c25e92fd4e585230f7ebce90e335627095b"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n1.c35.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada expresión con su función."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "There is a sofa",
+              {
+                "es": "existencia singular"
+              }
+            ],
+            [
+              "There are two chairs",
+              {
+                "es": "existencia plural"
+              }
+            ],
+            [
+              "Please sit down",
+              {
+                "es": "invitación cortés"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Is es singular; are es plural; please añade cortesía."
+          },
+          "pairs": [
+            [
+              "There is a sofa",
+              {
+                "es": "existencia singular"
+              }
+            ],
+            [
+              "There are two chairs",
+              {
+                "es": "existencia plural"
+              }
+            ],
+            [
+              "Please sit down",
+              {
+                "es": "invitación cortés"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e70203cb7f0aff6fb00528126ff53f493ee4df400124aa12a73279502675d44d"
+      },
+      {
+        "id": "en.n1.c35.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: The ball is next ___ the sofa."
+        },
+        "answer": {
+          "text": "to",
+          "accepted": [
+            "to"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La expresión es next to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b2305aebabf39bf9192c53f4c874936231f7a6a656bd788ee9f2d83ec8685bef"
+      },
+      {
+        "id": "en.n1.c35.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la bienvenida con our."
+        },
+        "answer": {
+          "text": "Welcome to our house.",
+          "tokens": [
+            "Welcome",
+            "to",
+            "our",
+            "house."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "a1-initial-assessment"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Welcome to presenta el lugar."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:25aded7bdb3a4fd457800753c4fd5c6a14b88df327d447664a6dc1c4f4e60172"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n1.c35.e01": {
+      "reteach": "en.n1.class-35.t01",
+      "review": "en.n1.c35.r03"
+    },
+    "en.n1.c35.e02": {
+      "reteach": "en.n1.class-35.t03",
+      "review": "en.n1.c35.r03"
+    },
+    "en.n1.c35.e03": {
+      "reteach": "en.n1.class-35.t02",
+      "review": "en.n1.c35.r01"
+    },
+    "en.n1.c35.e04": {
+      "reteach": "en.n1.class-35.t04",
+      "review": "en.n1.c35.r02"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "house-family-integration",
+    "house-visit-dialogue",
+    "articles-plurals-reading",
+    "location-listening",
+    "a1-initial-assessment"
+  ]
+}

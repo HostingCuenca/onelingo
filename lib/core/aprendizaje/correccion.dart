@@ -1,6 +1,6 @@
 import 'modelos.dart';
 
-final _puntuacion = RegExp(r'[.,!?¡¿;:。、！？「」…"“”«»()—–，：；]');
+final _puntuacion = RegExp(r'[.,!?¡¿;:/。、！？「」…"“”«»()—–，：；]');
 final _espacios = RegExp(r'\s+');
 
 /// Normaliza una respuesta escrita (ver ESQUEMA_CONTENIDO.md).
@@ -32,8 +32,7 @@ const _tildes = {
 };
 
 /// Quita las tildes del alfabeto latino (no afecta a otras escrituras).
-String sinTildes(String s) =>
-    s.split('').map((c) => _tildes[c] ?? c).join();
+String sinTildes(String s) => s.split('').map((c) => _tildes[c] ?? c).join();
 
 String _forma(String s, String idioma) =>
     idioma == 'zh' || idioma == 'ja' ? _compacta(s) : normalizar(s);
@@ -55,12 +54,39 @@ bool soloFallanTildes(Item item, String respuesta, String idioma) =>
     !_coincide(item, respuesta, idioma, true) &&
     _coincide(item, respuesta, idioma, false);
 
+bool _cumpleRubricaEscritura(Item item, String respuesta, String idioma) {
+  if (item.evidenciasEscritura.isEmpty ||
+      item.minimoPalabras == null ||
+      item.maximoPalabras == null) {
+    return respuestaEscritaCorrecta(item, respuesta, idioma);
+  }
+  final palabras = normalizar(respuesta)
+      .split(' ')
+      .where((palabra) => palabra.isNotEmpty)
+      .length;
+  if (palabras < item.minimoPalabras! || palabras > item.maximoPalabras!) {
+    return false;
+  }
+  final dada = ' ${sinTildes(_forma(respuesta, idioma))} ';
+  return item.evidenciasEscritura.every(
+    (grupo) => grupo.any((frase) {
+      final evidencia = sinTildes(_forma(frase, idioma));
+      return evidencia.isNotEmpty && dada.contains(' $evidencia ');
+    }),
+  );
+}
+
 /// Corrige un ítem. [respuesta] es un índice (elegir/escuchar), una frase
 /// (ordenar/completar/escribir) o `true` cuando se completó relacionar.
-bool corregir(Item item, Object? respuesta, String idioma) =>
-    switch (item.formato) {
-      FormatoItem.elegir ||
-      FormatoItem.escuchar => respuesta == item.indiceRespuesta,
-      FormatoItem.relacionar => respuesta == true,
-      _ => respuesta is String && respuestaEscritaCorrecta(item, respuesta, idioma),
-    };
+bool corregir(
+  Item item,
+  Object? respuesta,
+  String idioma,
+) => switch (item.formato) {
+  FormatoItem.elegir ||
+  FormatoItem.escuchar => respuesta == item.indiceRespuesta,
+  FormatoItem.relacionar => respuesta == true,
+  FormatoItem.escribir =>
+    respuesta is String && _cumpleRubricaEscritura(item, respuesta, idioma),
+  _ => respuesta is String && respuestaEscritaCorrecta(item, respuesta, idioma),
+};

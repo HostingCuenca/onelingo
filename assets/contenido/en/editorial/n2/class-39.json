@@ -1,0 +1,727 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-39",
+  "title": {
+    "en": "Recent news and details",
+    "es": "Noticias recientes y detalles"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer noticias recientes y detalles en mensajes breves de nivel A2.",
+      "Aplicar la regla de noticias recientes y detalles en contextos nuevos y sin pistas.",
+      "Producir una respuesta propia que demuestre noticias recientes y detalles."
+    ]
+  },
+  "concepts": [
+    "n2-recent-news-details"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-38"
+  ],
+  "usesVocabulary": [
+    "news",
+    "happened",
+    "details",
+    "just",
+    "when",
+    "where"
+  ],
+  "usesPatterns": [
+    "n2-recent-news-details"
+  ],
+  "vocabulary": [
+    {
+      "en": "news",
+      "es": "noticia"
+    },
+    {
+      "en": "happened",
+      "es": "ocurrió"
+    },
+    {
+      "en": "details",
+      "es": "detalles"
+    },
+    {
+      "en": "just",
+      "es": "acabar de"
+    },
+    {
+      "en": "when",
+      "es": "cuándo"
+    },
+    {
+      "en": "where",
+      "es": "dónde"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-39.t01",
+      "en": "I have some news: Marta has just won a prize.",
+      "es": "Tengo una noticia: Marta acaba de ganar un premio.",
+      "explanationEs": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "I have some news: Marta",
+          "es": "Tengo una noticia: Marta"
+        },
+        {
+          "en": "has just won a prize.",
+          "es": "acaba de ganar un premio."
+        }
+      ],
+      "audioText": "I have some news: Marta has just won a prize.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recent-news-details"
+    },
+    {
+      "id": "en.n2.class-39.t02",
+      "en": "What happened after the ceremony?",
+      "es": "¿Qué ocurrió después de la ceremonia?",
+      "explanationEs": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "What happened",
+          "es": "¿Qué ocurrió después"
+        },
+        {
+          "en": "after the ceremony?",
+          "es": "de la ceremonia?"
+        }
+      ],
+      "audioText": "What happened after the ceremony?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recent-news-details"
+    },
+    {
+      "id": "en.n2.class-39.t03",
+      "en": "Ask when the event took place.",
+      "es": "Pregunta cuándo ocurrió el evento.",
+      "explanationEs": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "Ask when the",
+          "es": "Pregunta cuándo"
+        },
+        {
+          "en": "event took place.",
+          "es": "ocurrió el evento."
+        }
+      ],
+      "audioText": "Ask when the event took place.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recent-news-details"
+    },
+    {
+      "id": "en.n2.class-39.t04",
+      "en": "Add details about where the event happened.",
+      "es": "Añade detalles sobre dónde ocurrió el evento.",
+      "explanationEs": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "Add details about",
+          "es": "Añade detalles sobre"
+        },
+        {
+          "en": "where the event happened.",
+          "es": "dónde ocurrió el evento."
+        }
+      ],
+      "audioText": "Add details about where the event happened.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recent-news-details"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c39.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Abre una noticia reciente sin fecha terminada. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Our neighbors have just had a baby."
+          },
+          {
+            "text": "Our neighbors just has a baby."
+          },
+          {
+            "text": "Our neighbors have had a baby yesterday."
+          }
+        ],
+        "teaches": [
+          "n2-recent-news-details"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En la selección guiada, la evidencia correcta es «Our neighbors have just had a baby.»."
+          },
+          "hint": {
+            "es": "Aplica esta regla: Una noticia reciente usa present perfect; los detalles terminados pasan a past simple."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:757c7aff2f2a5bf8542aec6cd68ab5644147966beb53a7b7e9904bf9e61a8035"
+      },
+      {
+        "id": "en.n2.c39.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la noticia: The city ___ a new bridge."
+        },
+        "answer": {
+          "text": "has opened",
+          "accepted": [
+            "has opened"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-recent-news-details"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el primer espacio, la evidencia correcta es «has opened»."
+          },
+          "hint": {
+            "es": "Busca la forma que cumple esta regla: Una noticia reciente usa present perfect; los detalles terminados pasan a past simple."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d1228d88819af07b0a6d07969ff0f343939750e430a7384c9e065354fe4b11c"
+      },
+      {
+        "id": "en.n2.c39.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena un ejemplo de noticias recientes y detalles."
+        },
+        "answer": {
+          "text": "The school has just announced the results.",
+          "tokens": [
+            "The",
+            "school",
+            "has",
+            "just",
+            "announced",
+            "the",
+            "results."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-recent-news-details"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el primer orden, la evidencia correcta es «The school has just announced the results.»."
+          },
+          "hint": {
+            "es": "Localiza primero el sujeto y la forma verbal principal."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2d3615b27189ca73d4d2ce82c961dbc45da1518cd1a3607935742311dda0d601"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c39.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: Tengo noticias: Paula acaba de conseguir trabajo."
+        },
+        "answer": {
+          "text": "I have news: Paula has just found a job.",
+          "accepted": [
+            "I have news: Paula has just found a job.",
+            "I have news: Paula has just found a job"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En la primera producción, la evidencia correcta es «I have news: Paula has just found a job.»."
+          },
+          "text": "Tengo noticias: Paula acaba de conseguir trabajo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fb95fec38aa6518cf0559e3cef438c48416ec3f96ac1e5ab138c6b9ed90f16f0"
+      },
+      {
+        "id": "en.n2.c39.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y reconoce un ejemplo de noticias recientes y detalles."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Leo has broke his arm."
+          },
+          {
+            "text": "Leo has broken his arm."
+          },
+          {
+            "text": "Leo broke his arm tomorrow."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el primer audio, la evidencia correcta es «Leo has broken his arm.»."
+          },
+          "audio": "Leo has broken his arm.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:af6a38299102ebc4f10b7e1a585376dde211c22a40076f595c5734b44479b868"
+      },
+      {
+        "id": "en.n2.c39.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario inicial de noticias recientes y detalles."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "news",
+              {
+                "es": "noticia"
+              }
+            ],
+            [
+              "happened",
+              {
+                "es": "ocurrió"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el primer grupo léxico, la evidencia correcta es «news / happened»."
+          },
+          "pairs": [
+            [
+              "news",
+              {
+                "es": "noticia"
+              }
+            ],
+            [
+              "happened",
+              {
+                "es": "ocurrió"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:005d5956140cb4068cedee3589a1273d66504a9f991f43d49fe2a187b7263fb7"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c39.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Después de la noticia, pregunta por el momento terminado. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "When has the accident happened?"
+          },
+          {
+            "text": "When did the accident happened?"
+          },
+          {
+            "text": "When did the accident happen?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En la primera evaluación, la evidencia correcta es «When did the accident happen?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4d7b0cee2ca6048695566e6734f3b8a11d72b84800ba9bfff3cc3e3b9a1e9d3b"
+      },
+      {
+        "id": "en.n2.c39.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el detalle: Where ___ they hold the ceremony?"
+        },
+        "answer": {
+          "text": "did",
+          "accepted": [
+            "did"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el segundo espacio, la evidencia correcta es «did»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:289573e8d5e41103e158004af4334259691fdde23853c21f866cd99b457bdaf0"
+      },
+      {
+        "id": "en.n2.c39.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: El equipo ha ganado; pregunta cuándo y dónde jugó."
+        },
+        "answer": {
+          "text": "The team has won. When did it play, and where was the match?",
+          "accepted": [
+            "The team has won. When did it play, and where was the match?",
+            "The team has won. When was the game, and where did they play?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En la producción evaluada, la evidencia correcta es «The team has won. When did it play, and where was the match?»."
+          },
+          "text": "El equipo ha ganado; pregunta cuándo y dónde jugó."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c6b91c0f3457dae9ede976a1a123f3e0dd1002c9c15199b7e9791d41c5dbada5"
+      },
+      {
+        "id": "en.n2.c39.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y verifica otro ejemplo de noticias recientes y detalles."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Where have the firefighters found the dog yesterday?"
+          },
+          {
+            "text": "Where did the firefighters find the dog?"
+          },
+          {
+            "text": "Where did the firefighters found the dog?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el audio evaluado, la evidencia correcta es «Where did the firefighters find the dog?»."
+          },
+          "audio": "Where did the firefighters find the dog?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:47208abe9d11aaed0a30b6eb7da0f0a860a8038279301fc45615960e99f82446"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c39.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario de repaso de noticias recientes y detalles."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "ceremony",
+              {
+                "es": "ceremonia"
+              }
+            ],
+            [
+              "result",
+              {
+                "es": "resultado"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el segundo grupo léxico, la evidencia correcta es «ceremony / result»."
+          },
+          "pairs": [
+            [
+              "ceremony",
+              {
+                "es": "ceremonia"
+              }
+            ],
+            [
+              "result",
+              {
+                "es": "resultado"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8988acb37e7bb64f54d56f5fad63c33a2427d6badda3368a8d447842ac15355d"
+      },
+      {
+        "id": "en.n2.c39.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una oración de repaso sobre noticias recientes y detalles."
+        },
+        "answer": {
+          "text": "Who gave you the good news?",
+          "tokens": [
+            "Who",
+            "gave",
+            "you",
+            "the",
+            "good",
+            "news?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En el orden de repaso, la evidencia correcta es «Who gave you the good news?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f1f64542b05337fc18cd4d866a87ef622424ecd2664161fbb42031cde4dc9114"
+      },
+      {
+        "id": "en.n2.c39.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: La tienda ha cerrado; pregunta qué ocurrió esta mañana."
+        },
+        "answer": {
+          "text": "The shop has closed. What happened there this morning?",
+          "accepted": [
+            "The shop has closed. What happened there this morning?",
+            "The shop has closed. What took place there earlier this morning?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recent-news-details"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una noticia reciente usa present perfect; los detalles terminados pasan a past simple. En la producción de repaso, la evidencia correcta es «The shop has closed. What happened there this morning?»."
+          },
+          "text": "La tienda ha cerrado; pregunta qué ocurrió esta mañana."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:48128799e9946fc7d4d77681c2a912f9968dba3e87ebc380a3cd43ea5ceecc99"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c39.e01": {
+      "reteach": "en.n2.class-39.t01",
+      "review": "en.n2.c39.r01"
+    },
+    "en.n2.c39.e02": {
+      "reteach": "en.n2.class-39.t02",
+      "review": "en.n2.c39.r02"
+    },
+    "en.n2.c39.e03": {
+      "reteach": "en.n2.class-39.t03",
+      "review": "en.n2.c39.r03"
+    },
+    "en.n2.c39.e04": {
+      "reteach": "en.n2.class-39.t04",
+      "review": "en.n2.c39.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

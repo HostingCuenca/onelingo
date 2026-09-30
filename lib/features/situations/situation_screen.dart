@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/fotos.dart';
 import '../../core/content/situation_units.dart';
@@ -219,45 +220,52 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                         ),
                       ),
                       const Text(
-                        'Escucha, recuerda el significado y usa la palabra en una frase propia.',
+                        'Toca una tarjeta para escuchar, recuerda el significado y usa la palabra en una frase propia.',
                       ),
                       for (final word in unit.words)
-                        Card(
-                          child: ListTile(
-                            title: Text(
-                              word.$1,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w800,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Tarjeta(
+                            padding: EdgeInsets.zero,
+                            sombra: false,
+                            onTap: listening ? null : () => listen(word.$1),
+                            etiquetaSemantica: 'Escuchar ${word.$1}',
+                            child: ListTile(
+                              title: Text(
+                                word.$1,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                ),
                               ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(word.$2),
-                                for (final detail in unit.vocabulary.where(
-                                  (v) => v.en == word.$1,
-                                )) ...[
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    detail.example,
-                                    style: const TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      height: 1.4,
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(word.$2),
+                                  for (final detail in unit.vocabulary.where(
+                                    (v) => v.en == word.$1,
+                                  )) ...[
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      detail.example,
+                                      style: const TextStyle(
+                                        fontStyle: FontStyle.italic,
+                                        height: 1.4,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '${detail.category} · introducción sugerida: nivel ${detail.level}',
-                                    style: const TextStyle(fontSize: 11),
-                                  ),
+                                    Text(
+                                      '${detail.category} · introducción sugerida: nivel ${detail.level}',
+                                      style: const TextStyle(fontSize: 11),
+                                    ),
+                                  ],
                                 ],
-                              ],
-                            ),
-                            trailing: IconButton(
-                              tooltip: 'Escuchar ${word.$1}',
-                              onPressed: listening
-                                  ? null
-                                  : () => listen(word.$1),
-                              icon: const Icon(Icons.volume_up_rounded),
+                              ),
+                              trailing: const Tooltip(
+                                message: 'Toca la tarjeta para escuchar',
+                                child: Icon(
+                                  Icons.volume_up_rounded,
+                                  color: OL.morado,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -303,17 +311,37 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                                     ),
                                   for (final example in pattern.examples) ...[
                                     const SizedBox(height: 12),
-                                    Text(example.$1),
-                                    Text(
-                                      example.$2,
-                                      style: const TextStyle(fontSize: 13),
-                                    ),
-                                    TextButton.icon(
-                                      onPressed: listening
+                                    Tarjeta(
+                                      sombra: false,
+                                      radio: 16,
+                                      onTap: listening
                                           ? null
                                           : () => listen(example.$1),
-                                      icon: const Icon(Icons.volume_up_rounded),
-                                      label: const Text('Escuchar frase'),
+                                      etiquetaSemantica:
+                                          'Escuchar ${example.$1}',
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(example.$1),
+                                                Text(
+                                                  example.$2,
+                                                  style: const TextStyle(
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const Icon(
+                                            Icons.volume_up_rounded,
+                                            color: OL.morado,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ],
@@ -329,31 +357,37 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                           fontWeight: FontWeight.w800,
                         ),
                       ),
-                      Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                obj.phrase,
-                                style: const TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w700,
+                      Tarjeta(
+                        onTap: listening ? null : () => listen(obj.phrase),
+                        etiquetaSemantica: 'Escuchar ${obj.phrase}',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              obj.phrase,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(obj.translation),
+                            const SizedBox(height: 12),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.volume_up_rounded, color: OL.morado),
+                                SizedBox(width: 8),
+                                Text(
+                                  'Toca la tarjeta para escuchar',
+                                  style: TextStyle(
+                                    color: OL.morado,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 12),
-                              Text(obj.translation),
-                              const SizedBox(height: 12),
-                              OutlinedButton.icon(
-                                onPressed: listening
-                                    ? null
-                                    : () => listen(obj.phrase),
-                                icon: const Icon(Icons.volume_up_rounded),
-                                label: const Text('Escuchar ejemplo'),
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       const Text(

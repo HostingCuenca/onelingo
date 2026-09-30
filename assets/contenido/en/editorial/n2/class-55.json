@@ -1,0 +1,775 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-55",
+  "phase": "transfer",
+  "title": {
+    "en": "Solve a shopping problem",
+    "es": "Resolver un problema de compras"
+  },
+  "concepts": [
+    "n2-shopping-problem"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-54"
+  ],
+  "usesVocabulary": [
+    "receipt",
+    "missing",
+    "cashier",
+    "wrong",
+    "replace",
+    "refund",
+    "delivery",
+    "plates",
+    "bread"
+  ],
+  "usesPatterns": [
+    "n2-countable-uncountable",
+    "n2-quantity-a-few-a-little-enough",
+    "n2-quantity-too-much-too-many",
+    "n2-event-quantities",
+    "n2-shopping-problem"
+  ],
+  "objectives": {
+    "es": [
+      "Reconocer resolver un problema de compras en mensajes breves de nivel A2.",
+      "Explicar un problema de compra y proponer una solución concreta.",
+      "Producir una respuesta breve sobre resolver un problema de compras sin apoyo dinámico."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "receipt",
+      "es": "recibo"
+    },
+    {
+      "en": "missing",
+      "es": "faltante"
+    },
+    {
+      "en": "cashier",
+      "es": "cajero"
+    },
+    {
+      "en": "wrong",
+      "es": "equivocado"
+    },
+    {
+      "en": "replace",
+      "es": "reemplazar"
+    },
+    {
+      "en": "refund",
+      "es": "reembolso"
+    },
+    {
+      "en": "delivery",
+      "es": "entrega"
+    },
+    {
+      "en": "plates",
+      "es": "platos"
+    },
+    {
+      "en": "bread",
+      "es": "pan"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-55.t01",
+      "en": "The receipt shows two missing items.",
+      "es": "El recibo muestra dos artículos faltantes.",
+      "explanationEs": "Receipt permite comprobar qué artículos faltan.",
+      "segments": [
+        {
+          "en": "The receipt shows",
+          "es": "El recibo muestra"
+        },
+        {
+          "en": "two missing items.",
+          "es": "dos artículos faltantes."
+        }
+      ],
+      "audioText": "The receipt shows two missing items.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-shopping-problem"
+    },
+    {
+      "id": "en.n2.class-55.t02",
+      "en": "The delivery has the wrong plates; the shop will replace them.",
+      "es": "La entrega tiene los platos equivocados; la tienda los reemplazará.",
+      "explanationEs": "Wrong plates identifica artículos equivocados y replace them da la solución.",
+      "segments": [
+        {
+          "en": "The delivery has the wrong",
+          "es": "La entrega tiene los platos"
+        },
+        {
+          "en": "plates; the shop will replace them.",
+          "es": "equivocados; la tienda los reemplazará."
+        }
+      ],
+      "audioText": "The delivery has the wrong plates; the shop will replace them.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-shopping-problem"
+    },
+    {
+      "id": "en.n2.class-55.t03",
+      "en": "We have too many large plates and not enough bread.",
+      "es": "Tenemos demasiados platos grandes y no hay suficiente pan.",
+      "explanationEs": "Too many acompaña plates y not enough mide bread.",
+      "segments": [
+        {
+          "en": "We have too many large",
+          "es": "Tenemos demasiados platos grandes"
+        },
+        {
+          "en": "plates and not enough bread.",
+          "es": "y no hay suficiente pan."
+        }
+      ],
+      "audioText": "We have too many large plates and not enough bread.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-shopping-problem"
+    },
+    {
+      "id": "en.n2.class-55.t04",
+      "en": "We need a few more sandwiches, but we have enough bread.",
+      "es": "Necesitamos unos pocos sándwiches más, pero tenemos suficiente pan.",
+      "explanationEs": "A few y enough resuelven dos necesidades distintas.",
+      "segments": [
+        {
+          "en": "We need a few more",
+          "es": "Necesitamos unos pocos sándwiches"
+        },
+        {
+          "en": "sandwiches, but we have enough bread.",
+          "es": "más, pero tenemos suficiente pan."
+        }
+      ],
+      "audioText": "We need a few more sandwiches, but we have enough bread.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-shopping-problem"
+    },
+    {
+      "id": "en.n2.class-55.t05",
+      "en": "For our event, eight guests need two servings and two cups each; the receipt lists sixteen cups, but only eight arrived, so eight are missing. We should request a refund.",
+      "es": "Para nuestro evento, ocho invitados necesitan dos porciones (servings) y dos vasos cada uno; el recibo lista dieciséis vasos, pero solo llegaron ocho, así que faltan ocho. Debemos pedir una devolución.",
+      "explanationEs": "La guía integra evento, invitados, servings, cantidades faltantes y una única acción de devolución.",
+      "segments": [
+        {
+          "en": "For our event, eight guests need two servings and two cups each; the receipt lists",
+          "es": "Para nuestro evento, ocho invitados necesitan dos porciones (servings) y dos vasos cada uno; el"
+        },
+        {
+          "en": "sixteen cups, but only eight arrived, so eight are missing. We should request a refund.",
+          "es": "recibo lista dieciséis vasos, pero solo llegaron ocho, así que faltan ocho. Debemos pedir una devolución."
+        }
+      ],
+      "audioText": "For our event, eight guests need two servings and two cups each; the receipt lists sixteen cups, but only eight arrived, so eight are missing. We should request a refund.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-shopping-problem"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c55.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la solución con una cantidad contable correcta."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "We need a little cups."
+          },
+          {
+            "text": "We need a few cups."
+          },
+          {
+            "text": "We need a few cup."
+          }
+        ],
+        "teaches": [
+          "n2-shopping-problem"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cups es plural contable y usa a few. En la elección guiada, la respuesta es «We need a few cups.»."
+          },
+          "hint": {
+            "es": "Compara la cantidad con el sustantivo que la acompaña."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f7ada0f618251770425d1757969613348836a470f38edca71d4d9de01b9b0a75"
+      },
+      {
+        "id": "en.n2.c55.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa (cambiar por otros): He can ___ the wrong items."
+        },
+        "answer": {
+          "text": "replace",
+          "accepted": [
+            "replace"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-shopping-problem"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La pista cambiar por otros identifica replace. En el primer espacio, la respuesta es «replace»."
+          },
+          "hint": {
+            "es": "Identifica si el sustantivo se puede contar o medir."
+          },
+          "text": "Completa (cambiar por otros): He can ___ the wrong items."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:673264b16e86c248b6e2ec5ff3282005437112a698d0f8977e08149750334429"
+      },
+      {
+        "id": "en.n2.c55.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la solución sobre el recibo."
+        },
+        "answer": {
+          "text": "The receipt shows two missing items.",
+          "tokens": [
+            "The",
+            "receipt",
+            "shows",
+            "two",
+            "missing",
+            "items."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-shopping-problem"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Receipt introduce la prueba y missing describe los artículos. En el primer orden, la respuesta es «The receipt shows two missing items.»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después la expresión de cantidad."
+          },
+          "text": "Ordena la solución sobre el recibo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:185eeecccf1f50212081ad7b5b4f1beee4792a0fdb4006a498837d3f374dc5c9"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c55.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: El recibo muestra dos artículos faltantes."
+        },
+        "answer": {
+          "text": "Our receipt lists two missing items.",
+          "accepted": [
+            "Our receipt lists two missing items.",
+            "The receipt lists two missing items."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Receipt identifica la compra y missing describe los artículos. En la primera producción, la respuesta es «Our receipt lists two missing items.»."
+          },
+          "text": "El recibo muestra dos artículos faltantes."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b2f6553e5df629f38c97a59b7ed197c30326e651ba6438c7b3824713bfd38ce2"
+      },
+      {
+        "id": "en.n2.c55.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la solución del cajero."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The cashier can gives a refund."
+          },
+          {
+            "text": "The cashier can give a refund."
+          },
+          {
+            "text": "The cashier can give a replace."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Después de can se usa give; refund es la devolución de dinero. En el primer audio, la respuesta es «The cashier can give a refund.»."
+          },
+          "audio": "The cashier can give a refund.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4408c671a86731c1d102c9e3f073c727ea174a7cd0c6a15dd8fdc985fb707f81"
+      },
+      {
+        "id": "en.n2.c55.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos soluciones de compra."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "replace",
+              {
+                "es": "reemplazar"
+              }
+            ],
+            [
+              "refund",
+              {
+                "es": "reembolso"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Replace cambia el artículo; refund devuelve el dinero. En el primer grupo léxico, la respuesta es «replace / refund»."
+          },
+          "pairs": [
+            [
+              "replace",
+              {
+                "es": "reemplazar"
+              }
+            ],
+            [
+              "refund",
+              {
+                "es": "reembolso"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4400e98e469b968067ac0746fefb4c638adc7879679ba04963a43834466cd1eb"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c55.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la solución con cantidad suficiente."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We have enough bread for everyone."
+          },
+          {
+            "text": "We have a little bread for everyone."
+          },
+          {
+            "text": "We have enough breads for everyone."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-countable-uncountable",
+          "n2-quantity-a-few-a-little-enough"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Bread es incontable y enough indica que alcanza. En la primera evaluación, la respuesta es «We have enough bread for everyone.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6634ebc2569d7d4faba74bc4d5a8a8e314db81cc3e80d4f19d366292e4ecf03a"
+      },
+      {
+        "id": "en.n2.c55.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el exceso contable: There are too ___ bags."
+        },
+        "answer": {
+          "text": "many",
+          "accepted": [
+            "many"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-quantity-too-much-too-many"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Bags es plural contable y necesita too many. En el segundo espacio, la respuesta es «many»."
+          },
+          "text": "Completa el exceso contable: There are too ___ bags."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e3353d91e704fd2ebe1066f198627b97032a111e9c5b7f98930faacd5d8c304a"
+      },
+      {
+        "id": "en.n2.c55.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Evento: 8 invitados, 2 servings c/u; recibo 16, llegan 8: faltan 8. Pide devolución."
+        },
+        "answer": {
+          "text": "For the event, eight guests need two servings and two cups each; the receipt lists sixteen cups, but the delivery has eight, so eight are missing. There are too many bags, but we have enough food. We should ask for a refund.",
+          "accepted": [
+            "For the event, eight guests need two servings and two cups each; the receipt lists sixteen cups, but the delivery has eight, so eight are missing. There are too many bags, but we have enough food. We should ask for a refund.",
+            "At our event, each of eight guests needs two servings and two cups. Only eight of the sixteen ordered cups arrived, so eight are missing. Food is enough despite too many bags; we should request a refund."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-countable-uncountable",
+          "n2-quantity-a-few-a-little-enough",
+          "n2-quantity-too-much-too-many",
+          "n2-event-quantities",
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La respuesta integra evento, invitados, servings, el cálculo de 8 faltantes, comida suficiente, bolsas de más y una única acción de devolución. En la producción acumulativa, la respuesta es «For the event, eight guests need two servings and two cups each; the receipt lists sixteen cups, but the delivery has eight, so eight are missing.»."
+          },
+          "text": "Evento para 8 invitados: cada uno necesita 2 porciones (servings) y 2 vasos; el recibo lista 16 vasos, la entrega trae 8: faltan 8. Hay demasiadas bolsas, pero suficiente comida. Escribe una solución: pide devolución."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:06f12d51c11a768d6483e916bafda88fc560d7f9eb64c946a6f7f1f3e01fcf11"
+      },
+      {
+        "id": "en.n2.c55.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el caso de artículos equivocados y su solución."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The delivery has the wrong plates, so the shop will replace them."
+          },
+          {
+            "text": "The delivery has the right plates, so the shop will replace them."
+          },
+          {
+            "text": "The delivery has the wrong plates, so the shop will keep them."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Wrong plates describen el problema y replace them es la solución escuchada. En el audio evaluado, la respuesta es «The delivery has the wrong plates, so the shop will replace them.»."
+          },
+          "audio": "The delivery has the wrong plates, so the shop will replace them.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0aa0ede16f3aa4fc75ad0e3d121f736dc2ba100ce4446247b23889e6332ba449"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c55.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona el problema de artículos y su solución."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "wrong plates",
+              {
+                "es": "platos equivocados"
+              }
+            ],
+            [
+              "replace them",
+              {
+                "es": "reemplazarlos"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Wrong plates identifica el error y replace them nombra la solución. En el segundo grupo léxico, la respuesta es «wrong plates / replace them»."
+          },
+          "pairs": [
+            [
+              "wrong plates",
+              {
+                "es": "platos equivocados"
+              }
+            ],
+            [
+              "replace them",
+              {
+                "es": "reemplazarlos"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:907aa602c245015ebf20bcf3329760a367c5dcac735323cb154db8e6ebcd2161"
+      },
+      {
+        "id": "en.n2.c55.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa (devolver dinero): The shop can give a ___."
+        },
+        "answer": {
+          "text": "refund",
+          "accepted": [
+            "refund"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La pista devolver dinero identifica refund. En el repaso de cantidad, la respuesta es «refund»."
+          },
+          "text": "Completa (devolver dinero): The shop can give a ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:707bbb572f2887b43a0a06e8e7d26c81cd32450c28d113588fb4181f29944f96"
+      },
+      {
+        "id": "en.n2.c55.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Integra evento, servings y devolución en un problema nuevo."
+        },
+        "answer": {
+          "text": "For the event, six guests need two servings and two cups each; the receipt lists twelve cups, but six arrived, so six are missing. There are too many bags, but we have enough food. We should request a refund.",
+          "accepted": [
+            "For the event, six guests need two servings and two cups each; the receipt lists twelve cups, but six arrived, so six are missing. There are too many bags, but we have enough food. We should request a refund.",
+            "At our event, each of six guests needs two servings and two cups. Only six of the twelve ordered cups arrived, so six are missing. Food is enough despite too many bags; we should ask for a refund."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-shopping-problem"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El repaso recupera evento, invitados, servings, cantidad faltante, comida suficiente, bolsas y la única acción de devolución. En la producción de repaso, la respuesta es «For the event, six guests need two servings and two cups each; the receipt lists twelve cups, but six arrived, so six are missing. There are too many bags, but we have enough food. We should request a refund.»."
+          },
+          "text": "Evento para 6 invitados: cada uno necesita 2 porciones (servings) y 2 vasos; el recibo lista 12 vasos, la entrega trae 6: faltan 6. Hay demasiadas bolsas, pero suficiente comida. Pide devolución."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dfe0581f1e990c64fdf58403ca6997231932ac751ea4a4844996489e2f1af5ac"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c55.e01": {
+      "reteach": "en.n2.class-55.t04",
+      "review": "en.n2.c55.r03"
+    },
+    "en.n2.c55.e02": {
+      "reteach": "en.n2.class-55.t03",
+      "review": "en.n2.c55.r03"
+    },
+    "en.n2.c55.e03": {
+      "reteach": "en.n2.class-55.t05",
+      "review": "en.n2.c55.r03"
+    },
+    "en.n2.c55.e04": {
+      "reteach": "en.n2.class-55.t02",
+      "review": "en.n2.c55.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n2-countable-uncountable",
+    "n2-quantity-a-few-a-little-enough",
+    "n2-quantity-too-much-too-many",
+    "n2-event-quantities",
+    "n2-shopping-problem"
+  ]
+}

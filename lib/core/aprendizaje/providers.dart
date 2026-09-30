@@ -1,11 +1,44 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/providers.dart';
+import 'biblioteca_adaptador.dart';
 import 'cargador.dart';
 import 'dominio.dart';
 import 'modelos.dart';
 
 final cargadorRutaProvider = Provider<CargadorRuta>((_) => CargadorRuta());
+final cargadorBibliotecaProvider = Provider<CargadorBiblioteca>(
+  (_) => CargadorBiblioteca(),
+);
+
+final activacionBibliotecaProvider =
+    FutureProvider.family<ActivacionBiblioteca, String>(
+      (ref, idioma) =>
+          ref.watch(cargadorBibliotecaProvider).cargarActivacion(idioma),
+    );
+
+final diagnosticoBibliotecaProvider =
+    FutureProvider.family<
+      DiagnosticoBiblioteca,
+      ({String idioma, String unidad})
+    >((ref, key) async {
+      final activacion = await ref.watch(
+        activacionBibliotecaProvider(key.idioma).future,
+      );
+      return ref
+          .watch(cargadorBibliotecaProvider)
+          .diagnostico(key.idioma, key.unidad, activacion);
+    });
+
+final bibliotecaUnidadRuntimeProvider =
+    FutureProvider.family<
+      BibliotecaUnidadRuntime,
+      ({String idioma, String unidad})
+    >((ref, key) {
+      return ref
+          .watch(cargadorBibliotecaProvider)
+          .resolverUnidad(key.idioma, key.unidad);
+    });
 
 /// Ruta de un idioma (null si aún no tiene).
 final rutaProvider = FutureProvider.family<RutaCargada?, String>(
@@ -16,9 +49,23 @@ final rutaProvider = FutureProvider.family<RutaCargada?, String>(
 int nivelBaseAlumno(ProgressState s) =>
     nivelBaseDe(desdeCero: s.fundamentos, nivelInicial: s.nivelInicial);
 
+/// Base de la ruta 10 × 100. La ruta legacy conserva `nivelBaseAlumno` hasta
+/// que cada unidad pase por `shadow` y se active explícitamente.
+int nivelBaseAlumnoCliente(ProgressState s) =>
+    nivelBaseDe(desdeCero: s.fundamentos, nivelInicial: s.nivelCliente);
+
 /// Estados de la ruta de un alumno.
 Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) =>
-    estadosRuta(ruta, s.practicas, nivelBase: nivelBaseAlumno(s));
+    estadosRuta(
+      ruta,
+      s.practicas,
+      nivelBase: nivelBaseDisponible(
+        ruta,
+        ruta.curso.usaEscalaCliente
+            ? nivelBaseAlumnoCliente(s)
+            : nivelBaseAlumno(s),
+      ),
+    );
 
 /// Cadena de idiomas de apoyo para mostrar textos al alumno (DEC-004).
 List<String> cadenaDelAlumno(ProgressState s, Curso curso) =>
@@ -51,6 +98,9 @@ class RegistroRuta {
     Item i, {
     required bool correcta,
     required String respuesta,
+    String? variantId,
+    String? libraryVersion,
+    String? selectionId,
   }) {
     final clave = ClaveRuta.item(u.id, p.id, i.id);
     final anterior = _practicas[clave];
@@ -72,8 +122,12 @@ class RegistroRuta {
       'correcta': correcta,
       if (guiada)
         'resueltaConApoyo':
-            correcta || (anterior is Map && anterior['resueltaConApoyo'] == true),
+            correcta ||
+            (anterior is Map && anterior['resueltaConApoyo'] == true),
       'respuesta': respuesta,
+      'variantId': ?variantId,
+      'libraryVersion': ?libraryVersion,
+      'selectionId': ?selectionId,
     });
   }
 

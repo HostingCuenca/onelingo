@@ -1,0 +1,3753 @@
+{
+  "schema": "onelingo.editorial.class-bundle.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "classes": [
+    {
+      "schema": "onelingo.editorial.class.v1",
+      "course": "en",
+      "level": 2,
+      "scale": "client-10-levels-v1",
+      "status": "shadow",
+      "runtimeAi": false,
+      "phase": "input",
+      "title": {
+        "en": "Transport and tickets",
+        "es": "Transporte y billetes"
+      },
+      "objectives": {
+        "es": [
+          "Distinguir billetes de ida y de ida y vuelta según el viaje.",
+          "Localizar tarifa, salida y andén en información de transporte.",
+          "Pedir un billete con destino y horario concretos."
+        ]
+      },
+      "id": "en.n2.class-66",
+      "cefr": "A2",
+      "concepts": [
+        "n2-transport-tickets"
+      ],
+      "skills": [
+        "vocabulario",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "prerequisites": [
+        "en.n2.class-65"
+      ],
+      "vocabulary": [
+        {
+          "en": "single ticket",
+          "es": "billete de ida"
+        },
+        {
+          "en": "return",
+          "es": "regreso"
+        },
+        {
+          "en": "platform",
+          "es": "andén"
+        },
+        {
+          "en": "fare",
+          "es": "tarifa"
+        },
+        {
+          "en": "departure",
+          "es": "salida"
+        },
+        {
+          "en": "ticket machine",
+          "es": "máquina expendedora"
+        }
+      ],
+      "usesVocabulary": [
+        "single ticket",
+        "return",
+        "platform",
+        "fare",
+        "departure",
+        "ticket machine"
+      ],
+      "usesPatterns": [
+        "n2-transport-tickets"
+      ],
+      "teaching": [
+        {
+          "id": "en.n2.class-66.t01",
+          "en": "A single ticket to Brighton is valid from platform one.",
+          "es": "Un billete de ida a Brighton es válido desde el andén uno.",
+          "explanationEs": "Single ticket sirve para un trayecto sin regreso y platform ubica la salida.",
+          "segments": [
+            {
+              "en": "A single ticket to Brighton",
+              "es": "Un billete de ida a Brighton"
+            },
+            {
+              "en": "is valid from platform one.",
+              "es": "es válido desde el andén uno."
+            }
+          ],
+          "audioText": "A single ticket to Brighton is valid from platform one.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-transport-tickets"
+        },
+        {
+          "id": "en.n2.class-66.t02",
+          "en": "The return is included in this ticket.",
+          "es": "El regreso está incluido en este billete.",
+          "explanationEs": "Return señala que la compra incluye también el trayecto de vuelta.",
+          "segments": [
+            {
+              "en": "The return is",
+              "es": "El regreso está"
+            },
+            {
+              "en": "included in this ticket.",
+              "es": "incluido en este billete."
+            }
+          ],
+          "audioText": "The return is included in this ticket.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-transport-tickets"
+        },
+        {
+          "id": "en.n2.class-66.t03",
+          "en": "The fare from the ticket machine is twelve pounds.",
+          "es": "La tarifa de la máquina expendedora es de doce libras.",
+          "explanationEs": "Fare es el precio del viaje; ticket machine indica dónde comprar.",
+          "segments": [
+            {
+              "en": "The fare from the",
+              "es": "La tarifa de la máquina"
+            },
+            {
+              "en": "ticket machine is twelve pounds.",
+              "es": "expendedora es de doce libras."
+            }
+          ],
+          "audioText": "The fare from the ticket machine is twelve pounds.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-transport-tickets"
+        },
+        {
+          "id": "en.n2.class-66.t04",
+          "en": "The departure is at 9:20 from platform six.",
+          "es": "La salida es a las 9:20 desde el andén seis.",
+          "explanationEs": "Departure aporta la hora y platform ubica el punto de embarque.",
+          "segments": [
+            {
+              "en": "The departure is at",
+              "es": "La salida es a las"
+            },
+            {
+              "en": "9:20 from platform six.",
+              "es": "9:20 desde el andén seis."
+            }
+          ],
+          "audioText": "The departure is at 9:20 from platform six.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-transport-tickets"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n2.c66.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Vas a Londres y no vuelves hoy. Elige el billete adecuado."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "a single ticket"
+              },
+              {
+                "text": "a return ticket"
+              },
+              {
+                "text": "two platform tickets"
+              }
+            ],
+            "teaches": [
+              "n2-transport-tickets"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Single ticket corresponde a un viaje sin trayecto de regreso."
+              },
+              "hint": {
+                "es": "Busca la opción que incluye solo la ida."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:15f13666ebbc497251cb5386a833e90313af8150d876e335cc90f1d3e1b7dc94"
+          },
+          {
+            "id": "en.n2.c66.pg02",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona cada dato del tren con su significado."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "fare",
+                  {
+                    "es": "precio del viaje"
+                  }
+                ],
+                [
+                  "platform",
+                  {
+                    "es": "lugar para subir"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-transport-tickets"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Fare responde cuánto cuesta y platform señala dónde abordar."
+              },
+              "pairs": [
+                [
+                  "fare",
+                  {
+                    "es": "precio del viaje"
+                  }
+                ],
+                [
+                  "platform",
+                  {
+                    "es": "lugar para subir"
+                  }
+                ]
+              ],
+              "hint": {
+                "es": "Distingue una cantidad de dinero de un lugar de la estación."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:a10e028046f10902615c2f565cb8fd93cb8fe68ba296f1ff160e8b0336e45f29"
+          },
+          {
+            "id": "en.n2.c66.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa el lugar de compra: Use the ___ near the entrance."
+            },
+            "answer": {
+              "text": "ticket machine",
+              "accepted": [
+                "ticket machine"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-transport-tickets"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Ticket machine completa el punto donde se adquiere el billete."
+              },
+              "hint": {
+                "es": "Es una máquina, no el andén ni la hora."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:662834d7e0327fb2fac8f7856d82a1972eca74dbfc79f6f4208a3bed13026182"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n2.c66.p01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha e identifica el andén de salida."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "platform two"
+              },
+              {
+                "text": "platform four"
+              },
+              {
+                "text": "platform fourteen"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La grabación dice platform four, que es el punto de salida del tren a York."
+              },
+              "audio": "The train to York leaves from platform four.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:e211f365708d5930ab77fc195d4b8b68297acfe290a4da97d708efd653f04085"
+          },
+          {
+            "id": "en.n2.c66.p02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la solicitud de un billete de ida y vuelta."
+            },
+            "answer": {
+              "text": "A return ticket to Bath, please.",
+              "tokens": [
+                "A",
+                "return",
+                "ticket",
+                "to",
+                "Bath,",
+                "please."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Return aparece antes de ticket y to introduce el destino Bath."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:393e029d638fff414d2d22ff0b35238b4426e18dc08c44c2d2bc501f3405cb2c"
+          },
+          {
+            "id": "en.n2.c66.p03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe en inglés: La tarifa es de quince euros."
+            },
+            "answer": {
+              "text": "The fare is fifteen euros.",
+              "accepted": [
+                "The fare is fifteen euros.",
+                "A ticket costs fifteen euros."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "The fare is fifteen euros comunica de forma natural el precio del trayecto."
+              },
+              "text": "La tarifa es de quince euros."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:db56ea3310a7cbd9f98db3f910dcc304d0029200cb0628cc12f9bbc3e33e2fc6"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n2.c66.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Viajas hoy y regresas mañana. Selecciona la compra correcta."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "a single ticket"
+              },
+              {
+                "text": "a return ticket"
+              },
+              {
+                "text": "a platform pass"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Return ticket es la única opción que incluye ida y regreso."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:ea183343e5c62507bc888ff900c3e5437386fa8954f23ffe43872929d44b8a91"
+          },
+          {
+            "id": "en.n2.c66.e02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y marca la hora exacta de salida."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "7:45"
+              },
+              {
+                "text": "6:15"
+              },
+              {
+                "text": "7:15"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Quarter past seven equivale a 7:15 y fija la salida."
+              },
+              "audio": "Your departure is at quarter past seven.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:0814cc8c8f4b00ff2f7edbe363ec88c0457c3dc0247822f870cd61fd99c29d64"
+          },
+          {
+            "id": "en.n2.c66.e03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa el punto de embarque: The coach leaves from ___ nine."
+            },
+            "answer": {
+              "text": "platform",
+              "accepted": [
+                "platform"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Platform es el sustantivo que acompaña al número del lugar de salida."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:e7f33868342c417d1eef32023c829580ae8282137dc266b447711cfab8aabc88"
+          },
+          {
+            "id": "en.n2.c66.e04",
+            "format": "escribir",
+            "prompt": {
+              "es": "Pide en inglés un billete de ida a Oxford para las 10:30."
+            },
+            "answer": {
+              "text": "I would like a single ticket to Oxford for 10:30, please.",
+              "accepted": [
+                "I would like a single ticket to Oxford for 10:30, please.",
+                "A single ticket to Oxford for the 10:30 departure, please."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La petición incluye tipo de billete, destino, hora y cortesía."
+              },
+              "text": "Un billete de ida a Oxford para las 10:30."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:53e052c136939bd707ac91a5816a63ebc1239dff449cd016fe30620942be1a1f"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n2.c66.r01",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Une cada compra con el viaje que permite."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "single ticket",
+                  {
+                    "es": "solo ida"
+                  }
+                ],
+                [
+                  "return ticket",
+                  {
+                    "es": "ida y vuelta"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Los nombres de billete distinguen si el regreso está incluido."
+              },
+              "pairs": [
+                [
+                  "single ticket",
+                  {
+                    "es": "solo ida"
+                  }
+                ],
+                [
+                  "return ticket",
+                  {
+                    "es": "ida y vuelta"
+                  }
+                ]
+              ]
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:f25ae98be8c295419f0f81443be1881a53608167e9b92f2a4243f938d6d79cf2"
+          },
+          {
+            "id": "en.n2.c66.r02",
+            "format": "elegir",
+            "prompt": {
+              "es": "El panel indica plataforma 8. ¿Dónde esperas el tren?"
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "at platform eight"
+              },
+              {
+                "text": "at platform three"
+              },
+              {
+                "text": "by the ticket machine"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Platform eight es el lugar indicado para esperar el tren."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:68544865bc13ea942873ed1e69db26578f64401147d172d3886c3a340edf752c"
+          },
+          {
+            "id": "en.n2.c66.r03",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha la nueva hora de salida y selecciona la correcta."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "8:02"
+              },
+              {
+                "text": "8:20"
+              },
+              {
+                "text": "8:40"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Twenty past eight equivale a 8:20 y recupera la comprensión de la hora."
+              },
+              "audio": "The departure is at twenty past eight.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:9f112eb66e2ce51135d31ed394f1009cc420ba05ee9422cd850cdf332062d059"
+          }
+        ]
+      },
+      "remediationMap": {
+        "en.n2.c66.e01": {
+          "reteach": "en.n2.class-66.t02",
+          "review": "en.n2.c66.r01"
+        },
+        "en.n2.c66.e02": {
+          "reteach": "en.n2.class-66.t04",
+          "review": "en.n2.c66.r03"
+        },
+        "en.n2.c66.e03": {
+          "reteach": "en.n2.class-66.t04",
+          "review": "en.n2.c66.r02"
+        },
+        "en.n2.c66.e04": {
+          "reteach": "en.n2.class-66.t01",
+          "review": "en.n2.c66.r01"
+        }
+      },
+      "accessibility": {
+        "highContrast": true,
+        "largeText": true,
+        "screenReader": true,
+        "audioReplay": true
+      },
+      "recovery": {
+        "retryPool": "review",
+        "maxAttempts": 2,
+        "allowAudioReplay": true,
+        "preserveProgress": true
+      },
+      "remediationPolicy": {
+        "source": "editorial",
+        "deterministic": true
+      },
+      "selectionPolicy": {
+        "deterministic": true
+      },
+      "evidencePolicy": {
+        "attemptRecords": [
+          "variantId",
+          "libraryVersion",
+          "selectionId"
+        ]
+      },
+      "qualityPolicy": {
+        "chronologyTokens": "enforce",
+        "answerReuseAcrossEarlyReserved": "forbid",
+        "answerEvidenceReuseAcrossPools": "forbid",
+        "agentContract": "editorial-agent.v2",
+        "minChoices": 3,
+        "maxPromptCharacters": 90,
+        "feedbackReuseWithinClass": "forbid",
+        "minClassFormats": 4
+      }
+    },
+    {
+      "schema": "onelingo.editorial.class.v1",
+      "course": "en",
+      "level": 2,
+      "scale": "client-10-levels-v1",
+      "status": "shadow",
+      "runtimeAi": false,
+      "phase": "form",
+      "title": {
+        "en": "Directions with landmarks",
+        "es": "Indicaciones con puntos de referencia"
+      },
+      "objectives": {
+        "es": [
+          "Seguir indicaciones que combinan desplazamientos y giros.",
+          "Usar edificios visibles como puntos de referencia en una ruta.",
+          "Producir una secuencia breve para llegar a un lugar."
+        ]
+      },
+      "id": "en.n2.class-67",
+      "cefr": "A2",
+      "concepts": [
+        "n2-directions-landmarks"
+      ],
+      "skills": [
+        "vocabulario",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "prerequisites": [
+        "en.n2.class-66"
+      ],
+      "vocabulary": [
+        {
+          "en": "landmark",
+          "es": "punto de referencia"
+        },
+        {
+          "en": "go past",
+          "es": "pasar de largo"
+        },
+        {
+          "en": "turn left",
+          "es": "girar a la izquierda"
+        },
+        {
+          "en": "cross",
+          "es": "cruzar"
+        },
+        {
+          "en": "opposite",
+          "es": "enfrente de"
+        },
+        {
+          "en": "corner",
+          "es": "esquina"
+        }
+      ],
+      "usesVocabulary": [
+        "landmark",
+        "go past",
+        "turn left",
+        "cross",
+        "opposite",
+        "corner"
+      ],
+      "usesPatterns": [
+        "n2-directions-landmarks"
+      ],
+      "teaching": [
+        {
+          "id": "en.n2.class-67.t01",
+          "en": "Use the bank as a landmark: go past the museum and turn left there.",
+          "es": "Usa el banco como punto de referencia: pasa el museo y gira allí a la izquierda.",
+          "explanationEs": "El landmark identifica el giro después de usar go past para avanzar.",
+          "segments": [
+            {
+              "en": "Use the bank as a landmark: go",
+              "es": "Usa el banco como punto de referencia: pasa"
+            },
+            {
+              "en": "past the museum and turn left there.",
+              "es": "el museo y gira allí a la izquierda."
+            }
+          ],
+          "audioText": "Use the bank as a landmark: go past the museum and turn left there.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-directions-landmarks"
+        },
+        {
+          "id": "en.n2.class-67.t02",
+          "en": "Cross the bridge and continue to the traffic lights.",
+          "es": "Cruza el puente y continúa hasta el semáforo.",
+          "explanationEs": "Cross indica atravesar; el semáforo funciona como punto de referencia.",
+          "segments": [
+            {
+              "en": "Cross the bridge and",
+              "es": "Cruza el puente y"
+            },
+            {
+              "en": "continue to the traffic lights.",
+              "es": "continúa hasta el semáforo."
+            }
+          ],
+          "audioText": "Cross the bridge and continue to the traffic lights.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-directions-landmarks"
+        },
+        {
+          "id": "en.n2.class-67.t03",
+          "en": "The station is opposite the library.",
+          "es": "La estación está enfrente de la biblioteca.",
+          "explanationEs": "Opposite ubica un lugar al otro lado de una calle o espacio.",
+          "segments": [
+            {
+              "en": "The station is",
+              "es": "La estación está"
+            },
+            {
+              "en": "opposite the library.",
+              "es": "enfrente de la biblioteca."
+            }
+          ],
+          "audioText": "The station is opposite the library.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-directions-landmarks"
+        },
+        {
+          "id": "en.n2.class-67.t04",
+          "en": "The café is on the corner beside the old clock, a useful landmark.",
+          "es": "El café está en la esquina junto al reloj antiguo, un punto de referencia útil.",
+          "explanationEs": "Corner localiza la intersección y landmark ayuda a reconocer el lugar.",
+          "segments": [
+            {
+              "en": "The café is on the corner",
+              "es": "El café está en la esquina junto"
+            },
+            {
+              "en": "beside the old clock, a useful landmark.",
+              "es": "al reloj antiguo, un punto de referencia útil."
+            }
+          ],
+          "audioText": "The café is on the corner beside the old clock, a useful landmark.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-directions-landmarks"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n2.c67.pg01",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la ruta: pasa la iglesia y gira a la izquierda."
+            },
+            "answer": {
+              "text": "Go past the church and turn left.",
+              "tokens": [
+                "Go",
+                "past",
+                "the",
+                "church",
+                "and",
+                "turn",
+                "left."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-directions-landmarks"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Go past precede el punto visible y turn left indica el cambio posterior."
+              },
+              "hint": {
+                "es": "Primero sigue de largo; después cambia de dirección."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:6ecf36fb00a633a7b78ecd289c47ef79caa9ee7786b171a6ada27832800fba30"
+          },
+          {
+            "id": "en.n2.c67.pg02",
+            "format": "elegir",
+            "prompt": {
+              "es": "La farmacia está frente al hotel. Elige la ubicación exacta."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "The pharmacy is behind the hotel."
+              },
+              {
+                "text": "The pharmacy is opposite the hotel."
+              },
+              {
+                "text": "The pharmacy is inside the hotel."
+              }
+            ],
+            "teaches": [
+              "n2-directions-landmarks"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Opposite traduce frente a sin indicar que ambos lugares son el mismo."
+              },
+              "hint": {
+                "es": "Busca la preposición para dos edificios enfrentados."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:9e25b4feb6e5efad58621d85778793bee5b8913ccaf5f5b51830a9382fbc8189"
+          },
+          {
+            "id": "en.n2.c67.pg03",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona cada instrucción con la acción física."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "cross the road",
+                  {
+                    "es": "atravesar la calle"
+                  }
+                ],
+                [
+                  "turn left",
+                  {
+                    "es": "cambiar hacia la izquierda"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-directions-landmarks"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Cross implica atravesar; turn left modifica el sentido del recorrido."
+              },
+              "pairs": [
+                [
+                  "cross the road",
+                  {
+                    "es": "atravesar la calle"
+                  }
+                ],
+                [
+                  "turn left",
+                  {
+                    "es": "cambiar hacia la izquierda"
+                  }
+                ]
+              ],
+              "hint": {
+                "es": "Una acción cruza un espacio y la otra cambia la orientación."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:4191173154fdd9438619a6a708735b87f15b7b0db828c492538c7936cc13e40c"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n2.c67.p01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha qué punto de referencia aparece después del puente."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "the small bank"
+              },
+              {
+                "text": "the railway station"
+              },
+              {
+                "text": "the tall hotel"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La ruta termina beside the tall hotel, el referente después del puente."
+              },
+              "audio": "Cross the bridge and stop beside the tall hotel.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:c26610c445197cdc7447e6430e4075d5ed77ee893dbae22e03ca2f7bd5f38eb6"
+          },
+          {
+            "id": "en.n2.c67.p02",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa: The bakery is on the ___ next to the park."
+            },
+            "answer": {
+              "text": "corner",
+              "accepted": [
+                "corner"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "On the corner ubica la panadería en la intersección junto al parque."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:c01cd2cf543b47ba1e7be691043a0996114468af9ff6e3903e02ce1463353188"
+          },
+          {
+            "id": "en.n2.c67.p03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe: Cruza la plaza y pasa de largo el teatro."
+            },
+            "answer": {
+              "text": "Cross the square and go past the theatre.",
+              "accepted": [
+                "Cross the square and go past the theatre.",
+                "Go across the square, then pass the theatre."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La secuencia usa cross para atravesar y go past para continuar más allá."
+              },
+              "text": "Cruza la plaza y pasa de largo el teatro."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:3353409111aad380b7544dfd8a99986fd79241c1cb47a00f4e03fef8a4560f1f"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n2.c67.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Desde el mercado, pasa el banco y gira a la izquierda en el cine."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Go past the bank and turn left at the cinema."
+              },
+              {
+                "text": "Turn left at the bank, then go past the cinema."
+              },
+              {
+                "text": "Go past the cinema and turn right at the bank."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La primera ruta conserva tanto el orden de los referentes como el giro indicado."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:46097f7291fd096d9460414208aa05c46f8135a81001cb533701e80d02516fff"
+          },
+          {
+            "id": "en.n2.c67.e02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y decide dónde está la oficina de turismo."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "behind the castle"
+              },
+              {
+                "text": "inside the castle"
+              },
+              {
+                "text": "opposite the castle"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Opposite the castle identifica la posición al otro lado del castillo."
+              },
+              "audio": "The tourist office is opposite the castle, on the corner.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:7fcb68be0b556aa57bd39a3a05b2136077306a239af8a693aaecd8a7ea5f161e"
+          },
+          {
+            "id": "en.n2.c67.e03",
+            "format": "completar",
+            "prompt": {
+              "es": "Usa go past: ___ the fountain; the station is ahead."
+            },
+            "answer": {
+              "text": "Go past",
+              "accepted": [
+                "Go past"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Go past ordena continuar más allá de la fuente antes de llegar."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:304888d484dbdde9b86f4feb8fea4401119a8eac871648db8382afc651fd0661"
+          },
+          {
+            "id": "en.n2.c67.e04",
+            "format": "escribir",
+            "prompt": {
+              "es": "Da la ruta: cruza el puente y gira a la izquierda en el museo."
+            },
+            "answer": {
+              "text": "Cross the bridge and turn left at the museum.",
+              "accepted": [
+                "Cross the bridge and turn left at the museum.",
+                "Go across the bridge, then take a left at the museum."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La indicación enlaza un cruce con un giro en un referente inequívoco."
+              },
+              "text": "Cruza el puente y gira a la izquierda en el museo."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:987cf429393cc56e8bed3ffe036df3acd0172c14bec94bee117828bb154c06dc"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n2.c67.r01",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Reconstruye la ubicación del hostal frente a la catedral."
+            },
+            "answer": {
+              "text": "The hostel is opposite the cathedral.",
+              "tokens": [
+                "The",
+                "hostel",
+                "is",
+                "opposite",
+                "the",
+                "cathedral."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Opposite sitúa hostal y catedral en lados enfrentados."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:eb2d2184f6b704ae2db47a68a1def3489a743a8a794de5de078aa1eddb82a09b"
+          },
+          {
+            "id": "en.n2.c67.r02",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Une cada referencia con la parte correcta de la ruta."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "at the clock tower",
+                  {
+                    "es": "lugar para girar"
+                  }
+                ],
+                [
+                  "on the corner",
+                  {
+                    "es": "posición en la intersección"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "At introduce el punto del giro y on the corner describe la ubicación final."
+              },
+              "pairs": [
+                [
+                  "at the clock tower",
+                  {
+                    "es": "lugar para girar"
+                  }
+                ],
+                [
+                  "on the corner",
+                  {
+                    "es": "posición en la intersección"
+                  }
+                ]
+              ]
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:755b421142794c5a9771cdafb14108c70887311282959d0d5c05ce3669522c5f"
+          },
+          {
+            "id": "en.n2.c67.r03",
+            "format": "elegir",
+            "prompt": {
+              "es": "Debes continuar más allá del banco. Selecciona la indicación."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "Stop opposite the bank."
+              },
+              {
+                "text": "Go past the bank."
+              },
+              {
+                "text": "Turn into the bank."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Go past the bank indica continuar hasta dejar el banco atrás."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:bdafe3ca357685c7ef6dddeb0da3fe5131806431677a4afbb24cc09bb5955732"
+          }
+        ]
+      },
+      "remediationMap": {
+        "en.n2.c67.e01": {
+          "reteach": "en.n2.class-67.t01",
+          "review": "en.n2.c67.r02"
+        },
+        "en.n2.c67.e02": {
+          "reteach": "en.n2.class-67.t03",
+          "review": "en.n2.c67.r01"
+        },
+        "en.n2.c67.e03": {
+          "reteach": "en.n2.class-67.t01",
+          "review": "en.n2.c67.r03"
+        },
+        "en.n2.c67.e04": {
+          "reteach": "en.n2.class-67.t02",
+          "review": "en.n2.c67.r02"
+        }
+      },
+      "accessibility": {
+        "highContrast": true,
+        "largeText": true,
+        "screenReader": true,
+        "audioReplay": true
+      },
+      "recovery": {
+        "retryPool": "review",
+        "maxAttempts": 2,
+        "allowAudioReplay": true,
+        "preserveProgress": true
+      },
+      "remediationPolicy": {
+        "source": "editorial",
+        "deterministic": true
+      },
+      "selectionPolicy": {
+        "deterministic": true
+      },
+      "evidencePolicy": {
+        "attemptRecords": [
+          "variantId",
+          "libraryVersion",
+          "selectionId"
+        ]
+      },
+      "qualityPolicy": {
+        "chronologyTokens": "enforce",
+        "answerReuseAcrossEarlyReserved": "forbid",
+        "answerEvidenceReuseAcrossPools": "forbid",
+        "agentContract": "editorial-agent.v2",
+        "minChoices": 3,
+        "maxPromptCharacters": 90,
+        "feedbackReuseWithinClass": "forbid",
+        "minClassFormats": 4
+      }
+    },
+    {
+      "schema": "onelingo.editorial.class.v1",
+      "course": "en",
+      "level": 2,
+      "scale": "client-10-levels-v1",
+      "status": "shadow",
+      "runtimeAi": false,
+      "phase": "comprehension",
+      "title": {
+        "en": "Travel problems",
+        "es": "Problemas de viaje"
+      },
+      "objectives": {
+        "es": [
+          "Diferenciar retrasos, cancelaciones y servicios perdidos.",
+          "Relacionar un problema de viaje con su causa visible.",
+          "Identificar una respuesta práctica ante equipaje o transporte alterado."
+        ]
+      },
+      "id": "en.n2.class-68",
+      "cefr": "A2",
+      "concepts": [
+        "n2-travel-problems"
+      ],
+      "skills": [
+        "vocabulario",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "prerequisites": [
+        "en.n2.class-67"
+      ],
+      "vocabulary": [
+        {
+          "en": "delayed",
+          "es": "retrasado"
+        },
+        {
+          "en": "cancelled",
+          "es": "cancelado"
+        },
+        {
+          "en": "missed",
+          "es": "perdió"
+        },
+        {
+          "en": "luggage",
+          "es": "equipaje"
+        },
+        {
+          "en": "wrong platform",
+          "es": "andén equivocado"
+        },
+        {
+          "en": "replacement bus",
+          "es": "autobús sustitutorio"
+        }
+      ],
+      "usesVocabulary": [
+        "delayed",
+        "cancelled",
+        "missed",
+        "luggage",
+        "wrong platform",
+        "replacement bus"
+      ],
+      "usesPatterns": [
+        "n2-travel-problems"
+      ],
+      "teaching": [
+        {
+          "id": "en.n2.class-68.t01",
+          "en": "Our train is delayed by forty minutes.",
+          "es": "Nuestro tren lleva cuarenta minutos de retraso.",
+          "explanationEs": "Delayed indica que el servicio saldrá más tarde, pero sigue previsto.",
+          "segments": [
+            {
+              "en": "Our train is",
+              "es": "Nuestro tren lleva"
+            },
+            {
+              "en": "delayed by forty minutes.",
+              "es": "cuarenta minutos de retraso."
+            }
+          ],
+          "audioText": "Our train is delayed by forty minutes.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-travel-problems"
+        },
+        {
+          "id": "en.n2.class-68.t02",
+          "en": "The ferry is cancelled, so it will not leave today.",
+          "es": "El ferry está cancelado, así que no saldrá hoy.",
+          "explanationEs": "Cancelled significa que el servicio no se realizará.",
+          "segments": [
+            {
+              "en": "The ferry is cancelled, so",
+              "es": "El ferry está cancelado,"
+            },
+            {
+              "en": "it will not leave today.",
+              "es": "así que no saldrá hoy."
+            }
+          ],
+          "audioText": "The ferry is cancelled, so it will not leave today.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-travel-problems"
+        },
+        {
+          "id": "en.n2.class-68.t03",
+          "en": "I missed the coach because I waited on the wrong platform.",
+          "es": "Perdí el autobús porque esperé en el andén equivocado.",
+          "explanationEs": "Missed expresa que el viajero no alcanzó el servicio; because presenta la causa.",
+          "segments": [
+            {
+              "en": "I missed the coach because",
+              "es": "Perdí el autobús porque"
+            },
+            {
+              "en": "I waited on the wrong platform.",
+              "es": "esperé en el andén equivocado."
+            }
+          ],
+          "audioText": "I missed the coach because I waited on the wrong platform.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-travel-problems"
+        },
+        {
+          "id": "en.n2.class-68.t04",
+          "en": "My luggage is missing, so I will report it at the desk.",
+          "es": "Mi equipaje no aparece, así que lo informaré en el mostrador.",
+          "explanationEs": "Luggage identifica el objeto perdido y report indica la acción adecuada.",
+          "segments": [
+            {
+              "en": "My luggage is missing, so I",
+              "es": "Mi equipaje no aparece, así"
+            },
+            {
+              "en": "will report it at the desk.",
+              "es": "que lo informaré en el mostrador."
+            }
+          ],
+          "audioText": "My luggage is missing, so I will report it at the desk.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-travel-problems"
+        },
+        {
+          "id": "en.n2.class-68.t05",
+          "en": "The cancelled train has a replacement bus to the next town.",
+          "es": "El tren cancelado tiene un autobús sustitutorio hasta la siguiente ciudad.",
+          "explanationEs": "Replacement bus mantiene la ruta cuando el tren no opera.",
+          "segments": [
+            {
+              "en": "The cancelled train has a",
+              "es": "El tren cancelado tiene un"
+            },
+            {
+              "en": "replacement bus to the next town.",
+              "es": "autobús sustitutorio hasta la siguiente ciudad."
+            }
+          ],
+          "audioText": "The cancelled train has a replacement bus to the next town.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-travel-problems"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n2.c68.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "El tren saldrá 30 minutos tarde. Elige el aviso correcto."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "The train is delayed."
+              },
+              {
+                "text": "The train is cancelled."
+              },
+              {
+                "text": "The train is on the wrong platform."
+              }
+            ],
+            "teaches": [
+              "n2-travel-problems"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Delayed mantiene el viaje previsto y solo cambia la hora."
+              },
+              "hint": {
+                "es": "El servicio todavía saldrá, pero no a tiempo."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:87c77b714ac9dc96e12eb750420096c8fef05643766b174d4070175cc663cc18"
+          },
+          {
+            "id": "en.n2.c68.pg02",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona cada problema con su consecuencia."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "cancelled flight",
+                  {
+                    "es": "no sale"
+                  }
+                ],
+                [
+                  "missed bus",
+                  {
+                    "es": "el viajero llegó tarde"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-travel-problems"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Cancelled elimina el servicio; missed indica que la persona no lo alcanzó."
+              },
+              "pairs": [
+                [
+                  "cancelled flight",
+                  {
+                    "es": "no sale"
+                  }
+                ],
+                [
+                  "missed bus",
+                  {
+                    "es": "el viajero llegó tarde"
+                  }
+                ]
+              ],
+              "hint": {
+                "es": "Separa un servicio inexistente de una salida que el viajero perdió."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:997c889be917bccb4327375674644d5cb083076e647a0624bc2e80451e3aea38"
+          },
+          {
+            "id": "en.n2.c68.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa la causa: We waited on the ___ and missed the train."
+            },
+            "answer": {
+              "text": "wrong platform",
+              "accepted": [
+                "wrong platform"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-travel-problems"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Wrong platform explica por qué esperaron en un lugar incorrecto."
+              },
+              "hint": {
+                "es": "Necesitas una expresión de lugar equivocado."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:f7ce6a37b7b3bc7132d64e5765c579d5355e8525a8725afb74556ab62112aec6"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n2.c68.p01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha qué objeto no llegó al aeropuerto."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "my passport"
+              },
+              {
+                "text": "my luggage"
+              },
+              {
+                "text": "my ticket"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La grabación identifica luggage como el objeto que no llegó."
+              },
+              "audio": "My luggage did not arrive with the flight.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:8eb80bad9223e5addbc2aed96753e912862e8335c4f54336d9297d965b937500"
+          },
+          {
+            "id": "en.n2.c68.p02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena el aviso de cancelación y la alternativa."
+            },
+            "answer": {
+              "text": "The train is cancelled, so take the replacement bus.",
+              "tokens": [
+                "The",
+                "train",
+                "is",
+                "cancelled,",
+                "so",
+                "take",
+                "the",
+                "replacement",
+                "bus."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "So conecta la cancelación con el autobús sustitutorio disponible."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:889d482b43fa0bb7ac934fa9faa43ad53409b6e3687714701c261db969c56a3b"
+          },
+          {
+            "id": "en.n2.c68.p03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe: Perdimos el vuelo porque el autobús se retrasó."
+            },
+            "answer": {
+              "text": "We missed the flight because the bus was delayed.",
+              "accepted": [
+                "We missed the flight because the bus was delayed.",
+                "Because the bus was late, we did not catch the flight."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Missed presenta el resultado y because relaciona el retraso con la causa."
+              },
+              "text": "Perdimos el vuelo porque el autobús se retrasó."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:b3d8f54fe0cc68ba78307b9ef80231071ac2f10761c8dd3243fffe31b4b24c89"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n2.c68.e01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y distingue retraso de cancelación."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "It will leave at 8:10."
+              },
+              {
+                "text": "It will leave at 8:45."
+              },
+              {
+                "text": "It will not run today."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El servicio sigue activo y su nueva salida es a las 8:45."
+              },
+              "audio": "The 8:10 service is delayed, but it will leave at 8:45.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:35956febb91400ed033d959e860e2c8dbfa3bcaa6f44a43e76cec2878d8116a2"
+          },
+          {
+            "id": "en.n2.c68.e02",
+            "format": "elegir",
+            "prompt": {
+              "es": "El barco no operará hoy. Selecciona la descripción precisa."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "The boat missed its luggage."
+              },
+              {
+                "text": "The boat is slightly delayed."
+              },
+              {
+                "text": "The boat is cancelled today."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Cancelled today comunica que el barco no realizará el trayecto."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:c9d654dc673631026743da3e0fe94b7a227a35287b7ddf7f46eb46611a873f37"
+          },
+          {
+            "id": "en.n2.c68.e03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa la solución: The railway provides a ___ to the next town."
+            },
+            "answer": {
+              "text": "replacement bus",
+              "accepted": [
+                "replacement bus"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Replacement bus es el transporte alternativo que ofrece la compañía."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:42c836abf6a6724001e428de3d76f6e301520e0d285ca211fed971913bf56322"
+          },
+          {
+            "id": "en.n2.c68.e04",
+            "format": "escribir",
+            "prompt": {
+              "es": "Explica: mi equipaje falta y debo informar a la aerolínea."
+            },
+            "answer": {
+              "text": "My luggage is missing, so I need to report it to the airline.",
+              "accepted": [
+                "My luggage is missing, so I need to report it to the airline.",
+                "I need to tell the airline because my luggage has not arrived."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La respuesta nombra el problema y la acción necesaria sin inventar una causa."
+              },
+              "text": "Mi equipaje falta y debo informar a la aerolínea."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:d41b088b4b9ac1fe64c004ab42447923cc5cc379aae67030f1f8e22411504659"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n2.c68.r01",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Une cada aviso con la respuesta práctica."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "flight delayed",
+                  {
+                    "es": "consultar la nueva hora"
+                  }
+                ],
+                [
+                  "ferry cancelled",
+                  {
+                    "es": "buscar otra ruta"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Un retraso requiere nueva hora; una cancelación exige una alternativa."
+              },
+              "pairs": [
+                [
+                  "flight delayed",
+                  {
+                    "es": "consultar la nueva hora"
+                  }
+                ],
+                [
+                  "ferry cancelled",
+                  {
+                    "es": "buscar otra ruta"
+                  }
+                ]
+              ]
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:b3fe7fc6fab84bc358a15e7111369d2e14834c68eb522707cfab4140247d3224"
+          },
+          {
+            "id": "en.n2.c68.r02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Reconstruye la causa del tren perdido."
+            },
+            "answer": {
+              "text": "I missed the train because I arrived late.",
+              "tokens": [
+                "I",
+                "missed",
+                "the",
+                "train",
+                "because",
+                "I",
+                "arrived",
+                "late."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Because introduce la llegada tardía como causa del tren perdido."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:05212f6873107be861d7b78baaeff65fbc52ffac763ff7344e591b29fae73553"
+          },
+          {
+            "id": "en.n2.c68.r03",
+            "format": "elegir",
+            "prompt": {
+              "es": "Tu maleta no aparece en la cinta. ¿Qué problema debes informar?"
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "missing luggage"
+              },
+              {
+                "text": "a wrong platform"
+              },
+              {
+                "text": "a cancelled ferry"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Missing luggage describe exactamente una maleta que no llegó a la cinta."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:168f7dc4082fea025c1a4065011919a4bf3d4c53bc9853245c8c1297660232ae"
+          }
+        ]
+      },
+      "remediationMap": {
+        "en.n2.c68.e01": {
+          "reteach": "en.n2.class-68.t01",
+          "review": "en.n2.c68.r01"
+        },
+        "en.n2.c68.e02": {
+          "reteach": "en.n2.class-68.t02",
+          "review": "en.n2.c68.r01"
+        },
+        "en.n2.c68.e03": {
+          "reteach": "en.n2.class-68.t05",
+          "review": "en.n2.c68.r01"
+        },
+        "en.n2.c68.e04": {
+          "reteach": "en.n2.class-68.t04",
+          "review": "en.n2.c68.r03"
+        }
+      },
+      "accessibility": {
+        "highContrast": true,
+        "largeText": true,
+        "screenReader": true,
+        "audioReplay": true
+      },
+      "recovery": {
+        "retryPool": "review",
+        "maxAttempts": 2,
+        "allowAudioReplay": true,
+        "preserveProgress": true
+      },
+      "remediationPolicy": {
+        "source": "editorial",
+        "deterministic": true
+      },
+      "selectionPolicy": {
+        "deterministic": true
+      },
+      "evidencePolicy": {
+        "attemptRecords": [
+          "variantId",
+          "libraryVersion",
+          "selectionId"
+        ]
+      },
+      "qualityPolicy": {
+        "chronologyTokens": "enforce",
+        "answerReuseAcrossEarlyReserved": "forbid",
+        "answerEvidenceReuseAcrossPools": "forbid",
+        "agentContract": "editorial-agent.v2",
+        "minChoices": 3,
+        "maxPromptCharacters": 90,
+        "feedbackReuseWithinClass": "forbid",
+        "minClassFormats": 4
+      }
+    },
+    {
+      "schema": "onelingo.editorial.class.v1",
+      "course": "en",
+      "level": 2,
+      "scale": "client-10-levels-v1",
+      "status": "shadow",
+      "runtimeAi": false,
+      "phase": "production",
+      "title": {
+        "en": "Ask for help while travelling",
+        "es": "Pedir ayuda durante un viaje"
+      },
+      "objectives": {
+        "es": [
+          "Formular peticiones corteses de ayuda durante un viaje.",
+          "Explicar un problema antes de solicitar una acción concreta.",
+          "Preguntar dónde encontrar un servicio de asistencia."
+        ]
+      },
+      "id": "en.n2.class-69",
+      "cefr": "A2",
+      "concepts": [
+        "n2-ask-help-travel"
+      ],
+      "skills": [
+        "vocabulario",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "prerequisites": [
+        "en.n2.class-68"
+      ],
+      "vocabulary": [
+        {
+          "en": "Could you help me",
+          "es": "¿Podría ayudarme?"
+        },
+        {
+          "en": "information desk",
+          "es": "mostrador de información"
+        },
+        {
+          "en": "show me",
+          "es": "mostrarme"
+        },
+        {
+          "en": "where",
+          "es": "dónde"
+        },
+        {
+          "en": "lost",
+          "es": "perdido"
+        },
+        {
+          "en": "contact",
+          "es": "contactar"
+        }
+      ],
+      "usesVocabulary": [
+        "Could you help me",
+        "information desk",
+        "show me",
+        "where",
+        "lost",
+        "contact"
+      ],
+      "usesPatterns": [
+        "n2-ask-help-travel"
+      ],
+      "teaching": [
+        {
+          "id": "en.n2.class-69.t01",
+          "en": "Where is the information desk? Could you help me find it?",
+          "es": "¿Dónde está el mostrador de información? ¿Podría ayudarme a encontrarlo?",
+          "explanationEs": "Where localiza el servicio y Could you help me añade una petición cortés.",
+          "segments": [
+            {
+              "en": "Where is the information desk?",
+              "es": "¿Dónde está el mostrador de"
+            },
+            {
+              "en": "Could you help me find it?",
+              "es": "información? ¿Podría ayudarme a encontrarlo?"
+            }
+          ],
+          "audioText": "Where is the information desk? Could you help me find it?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-ask-help-travel"
+        },
+        {
+          "id": "en.n2.class-69.t02",
+          "en": "Could you show me where platform three is?",
+          "es": "¿Podría mostrarme dónde está el andén tres?",
+          "explanationEs": "Show me where solicita orientación hacia un lugar específico.",
+          "segments": [
+            {
+              "en": "Could you show me",
+              "es": "¿Podría mostrarme dónde"
+            },
+            {
+              "en": "where platform three is?",
+              "es": "está el andén tres?"
+            }
+          ],
+          "audioText": "Could you show me where platform three is?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-ask-help-travel"
+        },
+        {
+          "id": "en.n2.class-69.t03",
+          "en": "I am lost and I need to contact my hotel.",
+          "es": "Estoy perdido y necesito contactar con mi hotel.",
+          "explanationEs": "I am lost explica la situación; need to contact expresa la ayuda necesaria.",
+          "segments": [
+            {
+              "en": "I am lost and I",
+              "es": "Estoy perdido y necesito"
+            },
+            {
+              "en": "need to contact my hotel.",
+              "es": "contactar con mi hotel."
+            }
+          ],
+          "audioText": "I am lost and I need to contact my hotel.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-ask-help-travel"
+        },
+        {
+          "id": "en.n2.class-69.t04",
+          "en": "Where can I report a missing bag?",
+          "es": "¿Dónde puedo informar sobre una bolsa extraviada?",
+          "explanationEs": "Where can I pregunta por el lugar adecuado para resolver un problema.",
+          "segments": [
+            {
+              "en": "Where can I",
+              "es": "¿Dónde puedo informar"
+            },
+            {
+              "en": "report a missing bag?",
+              "es": "sobre una bolsa extraviada?"
+            }
+          ],
+          "audioText": "Where can I report a missing bag?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-ask-help-travel"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n2.c69.pg01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Necesitas orientación cortés en la estación. Elige la petición."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "You help me now."
+              },
+              {
+                "text": "Could you help me, please?"
+              },
+              {
+                "text": "I helped the station yesterday."
+              }
+            ],
+            "teaches": [
+              "n2-ask-help-travel"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Could you help me, please? mantiene cortesía y pide asistencia directa."
+              },
+              "hint": {
+                "es": "Busca una pregunta con could y please."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:dbca1901e693e91df25a1520a3f067c569bb39dc74f6217cf028c58df41128b5"
+          },
+          {
+            "id": "en.n2.c69.pg02",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la pregunta para localizar el mostrador."
+            },
+            "answer": {
+              "text": "Where is the information desk?",
+              "tokens": [
+                "Where",
+                "is",
+                "the",
+                "information",
+                "desk?"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-ask-help-travel"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Where inicia la pregunta y information desk nombra el destino buscado."
+              },
+              "hint": {
+                "es": "Empieza con la palabra interrogativa de lugar."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:5312e23eaddc55b75f0a197940b28bfd2578e87e9228202abb80607c170f830a"
+          },
+          {
+            "id": "en.n2.c69.pg03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa la petición: Could you ___ me where the exit is?"
+            },
+            "answer": {
+              "text": "show",
+              "accepted": [
+                "show"
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-ask-help-travel"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Show me where pide que la otra persona indique la ubicación."
+              },
+              "hint": {
+                "es": "Usa el verbo de mostrar sin to."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:561fb8314cf5df9c14d297f7a372a3ee2c28e6730005249c54045365a763026a"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n2.c69.p01",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha qué ayuda necesita la viajera perdida."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "She wants to cancel a ticket."
+              },
+              {
+                "text": "She wants to contact her hostel."
+              },
+              {
+                "text": "She wants to buy luggage."
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La viajera pide contactar su hostel porque está perdida."
+              },
+              "audio": "I am lost. Could you help me contact my hostel?",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:5e595614d32625362bdd421e9ac9cf17370d1549f8c0b9d6ce158520370972c3"
+          },
+          {
+            "id": "en.n2.c69.p02",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona cada necesidad con la pregunta útil."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "find a taxi",
+                  {
+                    "es": "Where is the taxi rank?"
+                  }
+                ],
+                [
+                  "recover a bag",
+                  {
+                    "es": "Where can I report lost luggage?"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Cada pregunta nombra el lugar o servicio que resuelve la necesidad."
+              },
+              "pairs": [
+                [
+                  "find a taxi",
+                  {
+                    "es": "Where is the taxi rank?"
+                  }
+                ],
+                [
+                  "recover a bag",
+                  {
+                    "es": "Where can I report lost luggage?"
+                  }
+                ]
+              ]
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:846ac2a80bf3f36faa2d84496949fd08a2f568cd88d751f4a481deebe563e847"
+          },
+          {
+            "id": "en.n2.c69.p03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Pide en inglés ayuda para encontrar el andén siete."
+            },
+            "answer": {
+              "text": "Could you help me find platform seven, please?",
+              "accepted": [
+                "Could you help me find platform seven, please?",
+                "Please, could you show me where platform seven is?"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La petición incluye cortesía, acción y el andén concreto."
+              },
+              "text": "Ayuda para encontrar el andén siete."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:24473d979309bbe6d0109d2b0f934c5c8c030ee98b187bcc73c15c56328f442f"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n2.c69.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Perdiste tu mochila. Selecciona la pregunta más útil al personal."
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Where can I report a lost backpack?"
+              },
+              {
+                "text": "Could you show me where platform six is?"
+              },
+              {
+                "text": "Where can I buy a return ticket?"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Where can I report dirige el problema de la mochila al servicio correcto."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:1ecbf020f51fd5f116676d4cba44756b3cc269e67e1b793197cf955bd62f97f4"
+          },
+          {
+            "id": "en.n2.c69.e02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha y reconoce el destino que busca el pasajero."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "the ticket machine"
+              },
+              {
+                "text": "the hotel entrance"
+              },
+              {
+                "text": "the information desk"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El destino solicitado es literalmente the information desk."
+              },
+              "audio": "Could you show me where the information desk is?",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:af023eaaf938946099ddce5bf41bc2223e06399ba83fda2f91fe92b6a27e0b36"
+          },
+          {
+            "id": "en.n2.c69.e03",
+            "format": "completar",
+            "prompt": {
+              "es": "Completa con where: Could you tell me ___ I can contact the airline?"
+            },
+            "answer": {
+              "text": "where",
+              "accepted": [
+                "where"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Where introduce la ubicación del servicio para contactar la aerolínea."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:4495f2047b4a759e9a5a798033b837001fe1033381d011fe2c489bb5aa251a34"
+          },
+          {
+            "id": "en.n2.c69.e04",
+            "format": "escribir",
+            "prompt": {
+              "es": "Estás perdido: pide ayuda para llamar a tu hotel."
+            },
+            "answer": {
+              "text": "I am lost. Could you help me contact my hotel, please?",
+              "accepted": [
+                "I am lost. Could you help me contact my hotel, please?",
+                "Could you please help me call my hotel? I am lost."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La producción explica el problema y solicita una acción concreta con cortesía."
+              },
+              "text": "Estoy perdido y necesito llamar a mi hotel."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:0b23332e0fd88a58bb4c9cc592967c52c0ab0ddf45065eacd221f71d5af22118"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n2.c69.r01",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Reconstruye la pregunta para localizar el mostrador de información."
+            },
+            "answer": {
+              "text": "Could you tell me where the information desk is?",
+              "tokens": [
+                "Could",
+                "you",
+                "tell",
+                "me",
+                "where",
+                "the",
+                "information",
+                "desk",
+                "is?"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Information desk conserva el destino exacto y where solicita su ubicación."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:16a8f5906cf36f1a11987daa072ab199708d5cd231cbf1f2f673119fc9fa6494"
+          },
+          {
+            "id": "en.n2.c69.r02",
+            "format": "escribir",
+            "prompt": {
+              "es": "Sin señal, pide al personal ayuda para contactar a tu hotel."
+            },
+            "answer": {
+              "text": "Could you help me contact my hotel because my phone has no signal?",
+              "accepted": [
+                "Could you help me contact my hotel because my phone has no signal?",
+                "My phone has no signal. Could you please help me call my hotel?"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La petición recupera exactamente la acción de contactar al hotel y explica la causa."
+              },
+              "text": "Mi teléfono no tiene señal; necesito contactar a mi hotel."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:dcd1414bd8278cae1cfd594113c5087dd281ac7d23181443b7c983e68e422ed9"
+          },
+          {
+            "id": "en.n2.c69.r03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Pregunta con cortesía dónde puedes tomar un taxi."
+            },
+            "answer": {
+              "text": "Could you tell me where I can get a taxi, please?",
+              "accepted": [
+                "Could you tell me where I can get a taxi, please?",
+                "Please, could you show me where the taxi rank is?"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-ask-help-travel"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La pregunta usa where dentro de una petición cortés y mantiene el objetivo del taxi."
+              },
+              "text": "¿Dónde puedo tomar un taxi?"
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:61a8379270ba629c148355bd0d6be628f812daff148c4ce171b0b10f31acad52"
+          }
+        ]
+      },
+      "remediationMap": {
+        "en.n2.c69.e01": {
+          "reteach": "en.n2.class-69.t04",
+          "review": "en.n2.c69.r03"
+        },
+        "en.n2.c69.e02": {
+          "reteach": "en.n2.class-69.t01",
+          "review": "en.n2.c69.r01"
+        },
+        "en.n2.c69.e03": {
+          "reteach": "en.n2.class-69.t04",
+          "review": "en.n2.c69.r03"
+        },
+        "en.n2.c69.e04": {
+          "reteach": "en.n2.class-69.t03",
+          "review": "en.n2.c69.r02"
+        }
+      },
+      "accessibility": {
+        "highContrast": true,
+        "largeText": true,
+        "screenReader": true,
+        "audioReplay": true
+      },
+      "recovery": {
+        "retryPool": "review",
+        "maxAttempts": 2,
+        "allowAudioReplay": true,
+        "preserveProgress": true
+      },
+      "remediationPolicy": {
+        "source": "editorial",
+        "deterministic": true
+      },
+      "selectionPolicy": {
+        "deterministic": true
+      },
+      "evidencePolicy": {
+        "attemptRecords": [
+          "variantId",
+          "libraryVersion",
+          "selectionId"
+        ]
+      },
+      "qualityPolicy": {
+        "chronologyTokens": "enforce",
+        "answerReuseAcrossEarlyReserved": "forbid",
+        "answerEvidenceReuseAcrossPools": "forbid",
+        "agentContract": "editorial-agent.v2",
+        "minChoices": 3,
+        "maxPromptCharacters": 90,
+        "feedbackReuseWithinClass": "forbid",
+        "minClassFormats": 4
+      }
+    },
+    {
+      "schema": "onelingo.editorial.class.v1",
+      "course": "en",
+      "level": 2,
+      "scale": "client-10-levels-v1",
+      "status": "shadow",
+      "runtimeAi": false,
+      "phase": "transfer",
+      "title": {
+        "en": "Complete a travel plan",
+        "es": "Completar un plan de viaje"
+      },
+      "objectives": {
+        "es": [
+          "Organizar un itinerario con transporte, horario y conexión.",
+          "Incluir una ruta reconocible y una respuesta ante problemas.",
+          "Presentar un plan completo con ayuda y alternativa confirmadas."
+        ]
+      },
+      "id": "en.n2.class-70",
+      "cefr": "A2",
+      "concepts": [
+        "n2-complete-travel-plan"
+      ],
+      "skills": [
+        "vocabulario",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "prerequisites": [
+        "en.n2.class-69"
+      ],
+      "vocabulary": [
+        {
+          "en": "itinerary",
+          "es": "itinerario"
+        },
+        {
+          "en": "reserve",
+          "es": "reservar"
+        },
+        {
+          "en": "connection",
+          "es": "conexión"
+        },
+        {
+          "en": "backup plan",
+          "es": "plan alternativo"
+        },
+        {
+          "en": "route",
+          "es": "ruta"
+        },
+        {
+          "en": "confirm",
+          "es": "confirmar"
+        }
+      ],
+      "usesVocabulary": [
+        "itinerary",
+        "reserve",
+        "connection",
+        "backup plan",
+        "route",
+        "confirm"
+      ],
+      "usesPatterns": [
+        "n2-transport-tickets",
+        "n2-directions-landmarks",
+        "n2-travel-problems",
+        "n2-ask-help-travel",
+        "n2-complete-travel-plan"
+      ],
+      "teaching": [
+        {
+          "id": "en.n2.class-70.t01",
+          "en": "My itinerary lists the train, ticket and departure time.",
+          "es": "Mi itinerario enumera el tren, el billete y la hora de salida.",
+          "explanationEs": "Un itinerario reúne los datos necesarios antes del viaje.",
+          "segments": [
+            {
+              "en": "My itinerary lists the",
+              "es": "Mi itinerario enumera el tren, el"
+            },
+            {
+              "en": "train, ticket and departure time.",
+              "es": "billete y la hora de salida."
+            }
+          ],
+          "audioText": "My itinerary lists the train, ticket and departure time.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-complete-travel-plan"
+        },
+        {
+          "id": "en.n2.class-70.t02",
+          "en": "Reserve the return ticket and confirm the platform.",
+          "es": "Reserva el billete de ida y vuelta y confirma el andén.",
+          "explanationEs": "Reserve fija la compra y confirm comprueba un dato que puede cambiar.",
+          "segments": [
+            {
+              "en": "Reserve the return ticket",
+              "es": "Reserva el billete de ida"
+            },
+            {
+              "en": "and confirm the platform.",
+              "es": "y vuelta y confirma el andén."
+            }
+          ],
+          "audioText": "Reserve the return ticket and confirm the platform.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-complete-travel-plan"
+        },
+        {
+          "id": "en.n2.class-70.t03",
+          "en": "The route crosses the square before the bus connection.",
+          "es": "La ruta cruza la plaza antes de la conexión de autobús.",
+          "explanationEs": "Route ordena el desplazamiento y connection enlaza dos servicios.",
+          "segments": [
+            {
+              "en": "The route crosses the",
+              "es": "La ruta cruza la plaza"
+            },
+            {
+              "en": "square before the bus connection.",
+              "es": "antes de la conexión de autobús."
+            }
+          ],
+          "audioText": "The route crosses the square before the bus connection.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-complete-travel-plan"
+        },
+        {
+          "id": "en.n2.class-70.t04",
+          "en": "Keep a backup plan for your route in case a service is cancelled.",
+          "es": "Mantén un plan alternativo para tu ruta por si se cancela un servicio.",
+          "explanationEs": "Backup plan anticipa una solución concreta para la ruta prevista.",
+          "segments": [
+            {
+              "en": "Keep a backup plan for your",
+              "es": "Mantén un plan alternativo para tu"
+            },
+            {
+              "en": "route in case a service is cancelled.",
+              "es": "ruta por si se cancela un servicio."
+            }
+          ],
+          "audioText": "Keep a backup plan for your route in case a service is cancelled.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-complete-travel-plan"
+        },
+        {
+          "id": "en.n2.class-70.t05",
+          "en": "Confirm where to ask for help before you travel.",
+          "es": "Confirma dónde pedir ayuda antes de viajar.",
+          "explanationEs": "Un plan completo incluye un punto de asistencia, no solo transporte y ruta.",
+          "segments": [
+            {
+              "en": "Confirm where to ask",
+              "es": "Confirma dónde pedir"
+            },
+            {
+              "en": "for help before you travel.",
+              "es": "ayuda antes de viajar."
+            }
+          ],
+          "audioText": "Confirm where to ask for help before you travel.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-complete-travel-plan"
+        },
+        {
+          "id": "en.n2.class-70.t06",
+          "en": "For Bristol, reserve a single ticket for 8:30 from platform two. Go past the library. If the train is delayed, ask: Could you help me find the shuttle, please? The shuttle leaves at 9:00.",
+          "es": "Para Bristol, reserva un billete de ida para las 8:30 desde el andén dos. Pasa la biblioteca. Si el tren se retrasa, pregunta: ¿Podría ayudarme a encontrar el transporte, por favor? El transporte sale a las 9:00.",
+          "explanationEs": "El modelo integra billete, salida, referente, problema, petición y alternativa concreta sin omitir datos.",
+          "segments": [
+            {
+              "en": "For Bristol, reserve a single ticket for 8:30 from platform two. Go past the library. If the",
+              "es": "Para Bristol, reserva un billete de ida para las 8:30 desde el andén dos. Pasa la biblioteca. Si"
+            },
+            {
+              "en": "train is delayed, ask: Could you help me find the shuttle, please? The shuttle leaves at 9:00.",
+              "es": "el tren se retrasa, pregunta: ¿Podría ayudarme a encontrar el transporte, por favor? El transporte sale a las 9:00."
+            }
+          ],
+          "audioText": "For Bristol, reserve a single ticket for 8:30 from platform two. Go past the library. If the train is delayed, ask: Could you help me find the shuttle, please? The shuttle leaves at 9:00.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "patternId": "n2-complete-travel-plan"
+        }
+      ],
+      "pools": {
+        "practiceGuided": [
+          {
+            "id": "en.n2.c70.pg01",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Relaciona cada parte del plan con su función."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "itinerary",
+                  {
+                    "es": "ordenar horas y trayectos"
+                  }
+                ],
+                [
+                  "backup plan",
+                  {
+                    "es": "responder a una cancelación"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-complete-travel-plan"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El itinerario organiza el viaje; el plan alternativo protege ante cambios."
+              },
+              "pairs": [
+                [
+                  "itinerary",
+                  {
+                    "es": "ordenar horas y trayectos"
+                  }
+                ],
+                [
+                  "backup plan",
+                  {
+                    "es": "responder a una cancelación"
+                  }
+                ]
+              ],
+              "hint": {
+                "es": "Distingue la secuencia principal de la solución de emergencia."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:5f1b6b26830eaa54166c7fb9c64d7e93ac68a2829f3412475363d55f153ab66f"
+          },
+          {
+            "id": "en.n2.c70.pg02",
+            "format": "elegir",
+            "prompt": {
+              "es": "Viajas y vuelves el domingo. ¿Qué acción completa la compra?"
+            },
+            "answer": {
+              "index": 0
+            },
+            "choices": [
+              {
+                "text": "Reserve a return ticket."
+              },
+              {
+                "text": "Cancel every connection."
+              },
+              {
+                "text": "Ignore the departure time."
+              }
+            ],
+            "teaches": [
+              "n2-complete-travel-plan"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Return ticket cubre ambos trayectos y reserve asegura la compra."
+              },
+              "hint": {
+                "es": "La acción debe incluir el regreso y conservar el viaje."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:83c1fdf846635a356f523b05096ca5d770f99936b839184a9445f07daad19db8"
+          },
+          {
+            "id": "en.n2.c70.pg03",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Ordena la comprobación del andén antes de salir."
+            },
+            "answer": {
+              "text": "Confirm the platform before the departure.",
+              "tokens": [
+                "Confirm",
+                "the",
+                "platform",
+                "before",
+                "the",
+                "departure."
+              ]
+            },
+            "choices": [],
+            "teaches": [
+              "n2-complete-travel-plan"
+            ],
+            "requires": [],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Confirm pide verificar el andén antes de la hora de salida."
+              },
+              "hint": {
+                "es": "Empieza con la acción de comprobar y termina con el momento."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:9c1d918add874c1939fde20e4fc006dbeb4ced39a3a59faf0ec2336b1f711139"
+          }
+        ],
+        "practice": [
+          {
+            "id": "en.n2.c70.p01",
+            "format": "completar",
+            "prompt": {
+              "es": "Usa reserve: I will ___ the ticket before Friday."
+            },
+            "answer": {
+              "text": "reserve",
+              "accepted": [
+                "reserve"
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Reserve completa la acción de asegurar el billete antes del viernes."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:3678cb7b06a7fe5da26bba7c0eebf5b078cb7b61763df26650c77a6ec9b26b60"
+          },
+          {
+            "id": "en.n2.c70.p02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha qué conexión debe confirmar la viajera."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "the ferry route"
+              },
+              {
+                "text": "the bus connection"
+              },
+              {
+                "text": "the hotel reservation"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La grabación identifica the bus connection en Central Station."
+              },
+              "audio": "Please confirm the bus connection at Central Station.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:01338f480cc9d8e3f746d8bb1d7578bfd439fb2da39ef26c0a61b5cb4efcb248"
+          },
+          {
+            "id": "en.n2.c70.p03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Escribe: Mi ruta cruza el parque y termina en la estación."
+            },
+            "answer": {
+              "text": "My route crosses the park and ends at the station.",
+              "accepted": [
+                "My route crosses the park and ends at the station.",
+                "The route goes across the park and finishes at the station."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La frase define un recorrido con un punto atravesado y un destino final."
+              },
+              "text": "Mi ruta cruza el parque y termina en la estación."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:a3e969dcfe0a55689a0a83bfdd5839562d02b5e86a2749b5be5f907bca71cab6"
+          }
+        ],
+        "evaluation": [
+          {
+            "id": "en.n2.c70.e01",
+            "format": "elegir",
+            "prompt": {
+              "es": "Plan: ida el viernes y regreso el lunes. Elige la reserva correcta."
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "a single ticket for Friday"
+              },
+              {
+                "text": "a return ticket for Friday and Monday"
+              },
+              {
+                "text": "a return ticket for Friday and Sunday"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets",
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El billete de ida y vuelta vincula las dos fechas del itinerario."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:f3da21fe9bd327af4cf944dbd08b1477f23f8d3c4a418254c00ae85ae8e732b9"
+          },
+          {
+            "id": "en.n2.c70.e02",
+            "format": "escuchar",
+            "prompt": {
+              "es": "Escucha la ruta y selecciona dónde girar."
+            },
+            "answer": {
+              "index": 2
+            },
+            "choices": [
+              {
+                "text": "at the bridge"
+              },
+              {
+                "text": "at the hotel"
+              },
+              {
+                "text": "at the museum"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-directions-landmarks",
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El giro ocurre at the museum después de cruzar el puente y pasar el hotel."
+              },
+              "audio": "Cross the bridge, go past the hotel and turn left at the museum.",
+              "audioMode": "tts",
+              "languageCode": "en",
+              "speedOptions": [
+                0.75,
+                1.0
+              ],
+              "maxReplays": 3,
+              "revealTranscriptAfterAttempt": true
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:012bd8f0d299d09ec48d5572e624d15f12a2ea037e1ffac15ecbbfae1bc0c7e6"
+          },
+          {
+            "id": "en.n2.c70.e03",
+            "format": "elegir",
+            "prompt": {
+              "es": "El tren se cancela. Debes pedir ayuda y mantener el viaje. ¿Qué dices?"
+            },
+            "answer": {
+              "index": 1
+            },
+            "choices": [
+              {
+                "text": "Could you help me confirm the new departure time?"
+              },
+              {
+                "text": "Could you help me find the replacement bus?"
+              },
+              {
+                "text": "Could you show me where the information desk is?"
+              }
+            ],
+            "teaches": [],
+            "requires": [
+              "n2-travel-problems",
+              "n2-ask-help-travel",
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "La petición une el problema de cancelación con una alternativa de transporte útil."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:b3158bb11f006f3e56f5bd6d8373660d887bd02c78e2d8fdf872e3304a4169b5"
+          },
+          {
+            "id": "en.n2.c70.e04",
+            "format": "escribir",
+            "prompt": {
+              "es": "Redacta el plan con cada dato y reproduce la petición entre comillas."
+            },
+            "answer": {
+              "text": "I will reserve a return ticket to Leeds for the 9:10 departure and confirm platform four. From the station, I will go past the museum. If the train is cancelled, I will say, ‘Could you help me find bus 22, please?’ My alternative is bus 22 at 9:40.",
+              "accepted": [
+                "I will reserve a return ticket to Leeds for the 9:10 departure and confirm platform four. From the station, I will go past the museum. If the train is cancelled, I will say, ‘Could you help me find bus 22, please?’ My alternative is bus 22 at 9:40.",
+                "My itinerary has a return ticket to Leeds, a 9:10 departure from platform four and a route past the museum. If the train is cancelled, I will ask, ‘Could you help me find bus 22, please?’ I will take bus 22 at 9:40 instead."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets",
+              "n2-directions-landmarks",
+              "n2-travel-problems",
+              "n2-ask-help-travel",
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El plan usa todos los datos visibles y no inventa la petición ni la alternativa."
+              },
+              "text": "Return ticket to Leeds; 9:10, platform 4; go past the museum. The train is cancelled. Say: ‘Could you help me find bus 22, please?’ Alternative: bus 22 at 9:40."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:a6f7dea23fd2a84ff265cc254fef415f0df45cc9303cba9f8bafd78979161087"
+          }
+        ],
+        "review": [
+          {
+            "id": "en.n2.c70.r01",
+            "format": "ordenar",
+            "prompt": {
+              "es": "Reconstruye el paso que asegura una conexión posterior."
+            },
+            "answer": {
+              "text": "Confirm the connection before leaving the station.",
+              "tokens": [
+                "Confirm",
+                "the",
+                "connection",
+                "before",
+                "leaving",
+                "the",
+                "station."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "Confirmar antes de salir evita perder el enlace con el siguiente servicio."
+              }
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:77155e7a78f6db14e45ade59db6660ce1120a43c2aee75e7fdb603e561e92420"
+          },
+          {
+            "id": "en.n2.c70.r02",
+            "format": "relacionar",
+            "prompt": {
+              "es": "Une cada riesgo del itinerario con su respuesta."
+            },
+            "answer": {
+              "pairs": [
+                [
+                  "service delayed",
+                  {
+                    "es": "confirm the new departure"
+                  }
+                ],
+                [
+                  "service cancelled",
+                  {
+                    "es": "use the backup plan"
+                  }
+                ]
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El retraso cambia la hora; la cancelación activa la alternativa preparada."
+              },
+              "pairs": [
+                [
+                  "service delayed",
+                  {
+                    "es": "confirm the new departure"
+                  }
+                ],
+                [
+                  "service cancelled",
+                  {
+                    "es": "use the backup plan"
+                  }
+                ]
+              ]
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:749de86da09a477cbac6f01682b3f51be4bca072646b0d205494a5533a15279a"
+          },
+          {
+            "id": "en.n2.c70.r03",
+            "format": "escribir",
+            "prompt": {
+              "es": "Crea el plan de Norwich y reproduce la petición indicada."
+            },
+            "answer": {
+              "text": "I will reserve a single ticket to Norwich for 7:45 and confirm platform three. I will cross the square. If the coach is delayed, I will say, ‘Could you help me find the taxi stand, please?’ My alternative is a taxi at 8:10.",
+              "accepted": [
+                "I will reserve a single ticket to Norwich for 7:45 and confirm platform three. I will cross the square. If the coach is delayed, I will say, ‘Could you help me find the taxi stand, please?’ My alternative is a taxi at 8:10.",
+                "My Norwich plan uses a single ticket for 7:45 from platform three and a route across the square. If the coach is delayed, I will ask, ‘Could you help me find the taxi stand, please?’ I can take a taxi at 8:10."
+              ]
+            },
+            "choices": [],
+            "teaches": [],
+            "requires": [
+              "n2-transport-tickets",
+              "n2-directions-landmarks",
+              "n2-travel-problems",
+              "n2-ask-help-travel",
+              "n2-complete-travel-plan"
+            ],
+            "origin": {
+              "kind": "editorial",
+              "feedback": {
+                "es": "El repaso integra los cinco conceptos en Norwich, un escenario distinto al de Leeds."
+              },
+              "text": "Single ticket to Norwich; 7:45, platform 3; cross the square. The coach is delayed. Say: ‘Could you help me find the taxi stand, please?’ Alternative: taxi at 8:10."
+            },
+            "accessibility": {
+              "screenReader": true,
+              "highContrast": true,
+              "largeText": true
+            },
+            "contentHash": "sha256:cd60f6d98adb35a4874a8b65c70d0b740b5cfef43c858e0c1acea82d1fb00387"
+          }
+        ]
+      },
+      "remediationMap": {
+        "en.n2.c70.e01": {
+          "reteach": "en.n2.class-70.t02",
+          "review": "en.n2.c70.r03"
+        },
+        "en.n2.c70.e02": {
+          "reteach": "en.n2.class-70.t03",
+          "review": "en.n2.c70.r03"
+        },
+        "en.n2.c70.e03": {
+          "reteach": "en.n2.class-70.t06",
+          "review": "en.n2.c70.r02"
+        },
+        "en.n2.c70.e04": {
+          "reteach": "en.n2.class-70.t06",
+          "review": "en.n2.c70.r03"
+        }
+      },
+      "accessibility": {
+        "highContrast": true,
+        "largeText": true,
+        "screenReader": true,
+        "audioReplay": true
+      },
+      "recovery": {
+        "retryPool": "review",
+        "maxAttempts": 2,
+        "allowAudioReplay": true,
+        "preserveProgress": true
+      },
+      "remediationPolicy": {
+        "source": "editorial",
+        "deterministic": true
+      },
+      "selectionPolicy": {
+        "deterministic": true
+      },
+      "evidencePolicy": {
+        "attemptRecords": [
+          "variantId",
+          "libraryVersion",
+          "selectionId"
+        ]
+      },
+      "qualityPolicy": {
+        "chronologyTokens": "enforce",
+        "answerReuseAcrossEarlyReserved": "forbid",
+        "answerEvidenceReuseAcrossPools": "forbid",
+        "agentContract": "editorial-agent.v2",
+        "minChoices": 3,
+        "maxPromptCharacters": 90,
+        "feedbackReuseWithinClass": "forbid",
+        "minClassFormats": 4
+      },
+      "cumulativeEvaluation": [
+        "n2-transport-tickets",
+        "n2-directions-landmarks",
+        "n2-travel-problems",
+        "n2-ask-help-travel",
+        "n2-complete-travel-plan"
+      ]
+    }
+  ]
+}

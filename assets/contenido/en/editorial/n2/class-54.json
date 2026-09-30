@@ -1,0 +1,755 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-54",
+  "phase": "production",
+  "title": {
+    "en": "Plan quantities for an event",
+    "es": "Planificar cantidades para un evento"
+  },
+  "concepts": [
+    "n2-event-quantities"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-53"
+  ],
+  "usesVocabulary": [
+    "event",
+    "guests",
+    "servings",
+    "cups",
+    "plates",
+    "sandwiches",
+    "juice",
+    "shopping list"
+  ],
+  "usesPatterns": [
+    "n2-event-quantities"
+  ],
+  "objectives": {
+    "es": [
+      "Reconocer planificar cantidades para un evento en mensajes breves de nivel A2.",
+      "Calcular cantidades suficientes para invitados y materiales de un evento.",
+      "Producir una respuesta breve sobre planificar cantidades para un evento sin apoyo dinámico."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "event",
+      "es": "evento"
+    },
+    {
+      "en": "guests",
+      "es": "invitados"
+    },
+    {
+      "en": "servings",
+      "es": "porciones"
+    },
+    {
+      "en": "cups",
+      "es": "vasos"
+    },
+    {
+      "en": "plates",
+      "es": "platos"
+    },
+    {
+      "en": "sandwiches",
+      "es": "sándwiches"
+    },
+    {
+      "en": "juice",
+      "es": "zumo"
+    },
+    {
+      "en": "shopping list",
+      "es": "lista de compras"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-54.t01",
+      "en": "For twenty guests, each person needs one plate, one sandwich, and one bottle.",
+      "es": "Para veinte invitados, cada persona necesita un plato, un sándwich y una botella.",
+      "explanationEs": "Una unidad de cada artículo por invitado fija la capacidad que debe cubrir el plan.",
+      "segments": [
+        {
+          "en": "For twenty guests, each person needs",
+          "es": "Para veinte invitados, cada persona necesita"
+        },
+        {
+          "en": "one plate, one sandwich, and one bottle.",
+          "es": "un plato, un sándwich y una botella."
+        }
+      ],
+      "audioText": "For twenty guests, each person needs one plate, one sandwich, and one bottle.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-event-quantities"
+    },
+    {
+      "id": "en.n2.class-54.t02",
+      "en": "We need enough plates and cups for everyone.",
+      "es": "Necesitamos suficientes platos y vasos para todos.",
+      "explanationEs": "Plates y cups son plurales contables para cada invitado.",
+      "segments": [
+        {
+          "en": "We need enough plates",
+          "es": "Necesitamos suficientes platos"
+        },
+        {
+          "en": "and cups for everyone.",
+          "es": "y vasos para todos."
+        }
+      ],
+      "audioText": "We need enough plates and cups for everyone.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-event-quantities"
+    },
+    {
+      "id": "en.n2.class-54.t03",
+      "en": "A few extra sandwiches will help.",
+      "es": "Unos pocos sándwiches extra ayudarán.",
+      "explanationEs": "A few acompaña al plural sandwiches.",
+      "segments": [
+        {
+          "en": "A few extra",
+          "es": "Unos pocos"
+        },
+        {
+          "en": "sandwiches will help.",
+          "es": "sándwiches extra ayudarán."
+        }
+      ],
+      "audioText": "A few extra sandwiches will help.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-event-quantities"
+    },
+    {
+      "id": "en.n2.class-54.t04",
+      "en": "We should buy a little juice, not too much.",
+      "es": "Debemos comprar un poco de zumo, no demasiado.",
+      "explanationEs": "Juice es incontable y necesita a little o too much.",
+      "segments": [
+        {
+          "en": "We should buy a",
+          "es": "Debemos comprar un poco"
+        },
+        {
+          "en": "little juice, not too much.",
+          "es": "de zumo, no demasiado."
+        }
+      ],
+      "audioText": "We should buy a little juice, not too much.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-event-quantities"
+    },
+    {
+      "id": "en.n2.class-54.t05",
+      "en": "For twenty guests, we need ten more plates, eight more sandwiches, and eighteen more bottles.",
+      "es": "Para veinte invitados, necesitamos diez platos, ocho sándwiches y dieciocho botellas más.",
+      "explanationEs": "La lista compara capacidad e inventario: faltan 10 platos, 8 sándwiches y 18 botellas.",
+      "segments": [
+        {
+          "en": "For twenty guests, we need ten more",
+          "es": "Para veinte invitados, necesitamos diez platos,"
+        },
+        {
+          "en": "plates, eight more sandwiches, and eighteen more bottles.",
+          "es": "ocho sándwiches y dieciocho botellas más."
+        }
+      ],
+      "audioText": "For twenty guests, we need ten more plates, eight more sandwiches, and eighteen more bottles.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-event-quantities"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c54.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Para veinte invitados, elige el plan correcto."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We need enough plates for everyone."
+          },
+          {
+            "text": "We need enough plate for everyone."
+          },
+          {
+            "text": "We need a little plates for everyone."
+          }
+        ],
+        "teaches": [
+          "n2-event-quantities"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Plates es plural y enough expresa una cantidad suficiente. En la elección guiada, la respuesta es «We need enough plates for everyone.»."
+          },
+          "hint": {
+            "es": "Compara la cantidad con el sustantivo que la acompaña."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:93f330fc97a4a2109c5da3ce70325848fc9a5126797758e9a68e3d5f15fc4228"
+      },
+      {
+        "id": "en.n2.c54.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa (sándwiches): We need a few ___ for lunch."
+        },
+        "answer": {
+          "text": "sandwiches",
+          "accepted": [
+            "sandwiches"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-event-quantities"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La traducción entre paréntesis identifica sandwiches, un plural contable. En el primer espacio, la respuesta es «sandwiches»."
+          },
+          "hint": {
+            "es": "Identifica si el sustantivo se puede contar o medir."
+          },
+          "text": "Completa (sándwiches): We need a few ___ for lunch."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8d682a870fb5935a0ebaa656ba84e22c8e7633da446ecd436a8f2e49462d9718"
+      },
+      {
+        "id": "en.n2.c54.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el plan sobre un poco de zumo."
+        },
+        "answer": {
+          "text": "We should buy a little juice.",
+          "tokens": [
+            "We",
+            "should",
+            "buy",
+            "a",
+            "little",
+            "juice."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-event-quantities"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "A little precede al incontable juice. En el primer orden, la respuesta es «We should buy a little juice.»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después la expresión de cantidad."
+          },
+          "text": "Ordena el plan sobre un poco de zumo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:20c3de646d96086c2e7d2c5b3a4eaa2976183450d06e34d7d0298d8f8c437119"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c54.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: Necesitamos veinte platos y suficientes vasos."
+        },
+        "answer": {
+          "text": "We need twenty plates and enough cups.",
+          "accepted": [
+            "We need twenty plates and enough cups.",
+            "We need twenty plates plus enough cups."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Plates y cups son plurales contables; enough marca suficiencia. En la primera producción, la respuesta es «We need twenty plates and enough cups.»."
+          },
+          "text": "Necesitamos veinte platos y suficientes vasos."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0ec40c62221c9b2fe33f3666998d229733b0a1130d082f99addb50a8a4ae6471"
+      },
+      {
+        "id": "en.n2.c54.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el plan de sándwiches."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "We are preparing enough sandwich for the guests."
+          },
+          {
+            "text": "We are preparing a little sandwiches for the guests."
+          },
+          {
+            "text": "We are preparing enough sandwiches for the guests."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Sandwiches es plural y enough cubre la necesidad de invitados. En el primer audio, la respuesta es «We are preparing enough sandwiches for the guests.»."
+          },
+          "audio": "We are preparing enough sandwiches for the guests.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:68b3ed33871855b2a836b08742d3df047a2f0c9585001dfc598dbedce9052a4f"
+      },
+      {
+        "id": "en.n2.c54.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos palabras del plan del evento."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "servings",
+              {
+                "es": "porciones"
+              }
+            ],
+            [
+              "shopping list",
+              {
+                "es": "lista de compras"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Servings cuenta porciones y shopping list organiza la compra. En el primer grupo léxico, la respuesta es «servings / shopping list»."
+          },
+          "pairs": [
+            [
+              "servings",
+              {
+                "es": "porciones"
+              }
+            ],
+            [
+              "shopping list",
+              {
+                "es": "lista de compras"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8a2c3c35945798cfc0e25603a2a6111b20510d35e869362bc4fbf25ada934af4"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c54.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Para doce invitados, elige la cantidad suficiente."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "We need a little cups for twelve guests."
+          },
+          {
+            "text": "We need enough cups for twelve guests."
+          },
+          {
+            "text": "We need enough cup for twelve guests."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cups es plural contable y enough expresa suficiencia. En la primera evaluación, la respuesta es «We need enough cups for twelve guests.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6b15b16e5b1a7d39e08f29c3d14d82b27feefc633901d93bdc68dfe4259f55b5"
+      },
+      {
+        "id": "en.n2.c54.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la cantidad pequeña: We need a ___ juice for the picnic."
+        },
+        "answer": {
+          "text": "little",
+          "accepted": [
+            "little"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Juice es incontable y se combina con a little. En el segundo espacio, la respuesta es «little»."
+          },
+          "text": "Completa la cantidad pequeña: We need a ___ juice for the picnic."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5484477181ed24d6c817952617435a7edda96bf068dd4d007192089afa676231"
+      },
+      {
+        "id": "en.n2.c54.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Calcula: 20 invitados, 1 plato/sándwich/botella cada uno; hay 10, 12 y 2."
+        },
+        "answer": {
+          "text": "For twenty guests, we need ten more plates, eight more sandwiches, and eighteen more bottles of juice.",
+          "accepted": [
+            "For twenty guests, we need ten more plates, eight more sandwiches, and eighteen more bottles of juice.",
+            "For twenty guests, we need ten extra plates, eight extra sandwiches, and eighteen more bottles of juice."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El plan calcula una unidad por invitado: faltan 10 platos, 8 sándwiches y 18 botellas. En la producción evaluada, la respuesta es «For twenty guests, we need ten more plates, eight more sandwiches, and eighteen more bottles of juice.»."
+          },
+          "text": "Para 20 invitados, cada uno necesita 1 plato, 1 sándwich y 1 botella de zumo; hay 10 platos, 12 sándwiches y 2 botellas. Escribe qué comprar."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:47cb16c2643a558c1724c52ad8d9439094c45dfe972d3a128012eae8ddf09658"
+      },
+      {
+        "id": "en.n2.c54.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la cantidad para los invitados."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "We have enough foods for the guests."
+          },
+          {
+            "text": "We has enough food for the guests."
+          },
+          {
+            "text": "We have enough food for the guests."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Food es incontable y enough expresa una cantidad suficiente. En el audio evaluado, la respuesta es «We have enough food for the guests.»."
+          },
+          "audio": "We have enough food for the guests.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:69207cb05f058a430e4ddfa29432422944cd01341c6a562b4ba16b99a78dd7b9"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c54.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos elementos del evento."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "guests",
+              {
+                "es": "invitados"
+              }
+            ],
+            [
+              "juice",
+              {
+                "es": "zumo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Guests se cuenta; juice se mide como bebida. En el segundo grupo léxico, la respuesta es «guests / juice»."
+          },
+          "pairs": [
+            [
+              "guests",
+              {
+                "es": "invitados"
+              }
+            ],
+            [
+              "juice",
+              {
+                "es": "zumo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a2770de092067a4958d2a63b863928390350167b53ecc7967ad9071d4ba895d7"
+      },
+      {
+        "id": "en.n2.c54.r02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Calcula: 12 invitados necesitan 1 de cada artículo; hay 4, 8 y 3."
+        },
+        "answer": {
+          "text": "We need eight more plates, four more sandwiches, and nine more bottles.",
+          "accepted": [
+            "We need eight more plates, four more sandwiches, and nine more bottles.",
+            "For twelve guests, we need eight extra plates, four extra sandwiches, and nine extra bottles."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Resta el inventario de la capacidad: faltan 8 platos, 4 sándwiches y 9 botellas. En el cálculo de repaso, la respuesta es «We need eight more plates, four more sandwiches, and nine more bottles.»."
+          },
+          "text": "Para 12 invitados, cada uno necesita 1 plato, 1 sándwich y 1 botella; hay 4 platos, 8 sándwiches y 3 botellas. Escribe qué falta."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e354991b502ce7298fbbe10f3b49eb843382527c9e3682b832d215983d835cb6"
+      },
+      {
+        "id": "en.n2.c54.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: Compramos suficientes vasos para todos."
+        },
+        "answer": {
+          "text": "We bought enough cups for everyone.",
+          "accepted": [
+            "We bought enough cups for everyone.",
+            "We purchased enough cups for all the guests."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-event-quantities"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cups es plural y enough expresa que alcanza para todos. En la producción de repaso, la respuesta es «We bought enough cups for everyone.»."
+          },
+          "text": "Compramos suficientes vasos para todos."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:75a5cacf1ffdf4fd9ae9642c52d72d939a2932e600919fe0e9d56411f0b21aaa"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c54.e01": {
+      "reteach": "en.n2.class-54.t02",
+      "review": "en.n2.c54.r03"
+    },
+    "en.n2.c54.e02": {
+      "reteach": "en.n2.class-54.t04",
+      "review": "en.n2.c54.r01"
+    },
+    "en.n2.c54.e03": {
+      "reteach": "en.n2.class-54.t01",
+      "review": "en.n2.c54.r02"
+    },
+    "en.n2.c54.e04": {
+      "reteach": "en.n2.class-54.t05",
+      "review": "en.n2.c54.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

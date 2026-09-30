@@ -89,6 +89,7 @@ class Curso {
   const Curso({
     required this.idioma,
     required this.version,
+    required this.curriculumScale,
     required this.revisionInicial,
     required this.idiomasApoyo,
     required this.apoyoPredeterminado,
@@ -96,7 +97,9 @@ class Curso {
     required this.niveles,
     required this.modulos,
   });
-  final String idioma, version, apoyoPredeterminado;
+  final String idioma, version, curriculumScale, apoyoPredeterminado;
+
+  bool get usaEscalaCliente => curriculumScale == 'client-10-levels-v1';
 
   /// Contenido sin revisión nativa: se muestra la etiqueta «Versión inicial».
   final bool revisionInicial;
@@ -107,6 +110,7 @@ class Curso {
   factory Curso.fromJson(Map<String, dynamic> j) => Curso(
     idioma: j['idioma'] as String,
     version: j['version'] as String? ?? '',
+    curriculumScale: j['curriculumScale'] as String? ?? 'internal-0-10-v1',
     revisionInicial: j['revision'] != 'revisada',
     idiomasApoyo: List<String>.from(j['idiomasApoyo'] as List? ?? const ['es']),
     apoyoPredeterminado: j['apoyoPredeterminado'] as String? ?? 'es',
@@ -208,17 +212,36 @@ class Item {
     this.tokens = const [],
     this.texto,
     this.audio,
+    this.imagen,
+    this.imagenAlt,
     this.pares = const [],
+    this.textosPartes = const [],
+    this.respuestasPartes = const [],
+    this.partesPuntuables,
+    this.minimoCorrectas,
+    this.partesObligatorias = const [],
+    this.minimoPalabras,
+    this.maximoPalabras,
+    this.evidenciasEscritura = const [],
   });
   final String id;
   final FormatoItem formato;
   final TextoApoyo consigna, feedback;
   final TextoApoyo? pista, preguntaApoyo;
-  final String? pregunta, respuesta, texto, audio;
+  final String? pregunta, respuesta, texto, audio, imagen, imagenAlt;
   final List<Opcion> opciones;
   final int? indiceRespuesta;
+  final int? partesPuntuables, minimoCorrectas;
+  final int? minimoPalabras, maximoPalabras;
+  final List<int> partesObligatorias;
+  final List<List<String>> evidenciasEscritura;
   final List<String> aceptadas, tokens;
   final List<(String, TextoApoyo)> pares;
+
+  /// Estímulos y respuestas válidas de una actividad de completar multiparte.
+  /// Cada posición de [respuestasPartes] corresponde a [textosPartes].
+  final List<String> textosPartes;
+  final List<List<String>> respuestasPartes;
 
   factory Item.fromJson(Map<String, dynamic> j) {
     final formato = FormatoItem.values.byName(j['formato'] as String);
@@ -242,6 +265,24 @@ class Item {
       tokens: List<String>.from(j['tokens'] as List? ?? const []),
       texto: j['texto'] as String?,
       audio: j['audio'] as String?,
+      imagen: j['imagen'] as String?,
+      imagenAlt: j['imagenAlt'] as String?,
+      partesPuntuables: j['partesPuntuables'] as int?,
+      minimoCorrectas: j['minimoCorrectas'] as int?,
+      partesObligatorias: List<int>.from(
+        j['partesObligatorias'] as List? ?? const [],
+      ),
+      minimoPalabras: j['minimoPalabras'] as int?,
+      maximoPalabras: j['maximoPalabras'] as int?,
+      evidenciasEscritura: [
+        for (final grupo in j['evidenciasEscritura'] as List? ?? const [])
+          List<String>.from(grupo as List),
+      ],
+      textosPartes: List<String>.from(j['textosPartes'] as List? ?? const []),
+      respuestasPartes: [
+        for (final respuestas in j['respuestasPartes'] as List? ?? const [])
+          List<String>.from(respuestas as List),
+      ],
       pares: [
         for (final p in j['pares'] as List? ?? const [])
           ((p as List)[0] as String, TextoApoyo.fromJson(p[1])),
@@ -348,11 +389,15 @@ class Paso {
           ),
       ],
       columnas: [
-        for (final c in j['columnas'] as List? ?? const []) TextoApoyo.fromJson(c),
+        for (final c in j['columnas'] as List? ?? const [])
+          TextoApoyo.fromJson(c),
       ],
       filas: [
         for (final f in j['filas'] as List? ?? const [])
-          [for (final c in f as List) Celda.fromJson(c as Map<String, dynamic>)],
+          [
+            for (final c in f as List)
+              Celda.fromJson(c as Map<String, dynamic>),
+          ],
       ],
       items: tipo == TipoPaso.ejemplos
           ? const []
@@ -442,8 +487,7 @@ class UnidadRuta {
     ],
     umbral: ((j['criterioDominio'] as Map)['umbral'] as num).toDouble(),
     intervalosRepaso: List<int>.from(
-      (j['repaso'] as Map?)?['intervalosDias'] as List? ??
-          intervalosPorDefecto,
+      (j['repaso'] as Map?)?['intervalosDias'] as List? ?? intervalosPorDefecto,
     ),
     tutor: Map<String, dynamic>.from(j['tutor'] as Map? ?? const {}),
     guias: List<String>.from(j['guias'] as List? ?? const []),

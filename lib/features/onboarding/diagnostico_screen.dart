@@ -780,19 +780,20 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
   Widget _audio(PreguntaDiag p, bool respondida) => Tarjeta(
     color: OL.moradoSuave,
     sombra: false,
+    onTap: reproduciendo ? null : _escuchar,
+    etiquetaSemantica: audioListo
+        ? 'Volver a escuchar el audio'
+        : 'Escuchar audio',
     child: Column(
       children: [
-        GestureDetector(
-          onTap: _escuchar,
-          child: AnimatedScale(
-            scale: reproduciendo ? 1.08 : 1.0,
-            duration: const Duration(milliseconds: 250),
-            child: const IconoCuadro(
-              Icons.volume_up_rounded,
-              tamano: 72,
-              radio: 36,
-              relleno: true,
-            ),
+        AnimatedScale(
+          scale: reproduciendo ? 1.08 : 1.0,
+          duration: const Duration(milliseconds: 250),
+          child: const IconoCuadro(
+            Icons.volume_up_rounded,
+            tamano: 72,
+            radio: 36,
+            relleno: true,
           ),
         ),
         const SizedBox(height: 10),

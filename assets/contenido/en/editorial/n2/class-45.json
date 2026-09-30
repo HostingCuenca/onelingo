@@ -1,0 +1,747 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-45",
+  "title": {
+    "en": "Recommend the better option",
+    "es": "Recomendar la mejor opción"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer recomendar la mejor opción en mensajes breves de nivel A2.",
+      "Aplicar la regla de recomendar la mejor opción en contextos nuevos y sin pistas.",
+      "Producir una respuesta propia que demuestre recomendar la mejor opción."
+    ]
+  },
+  "concepts": [
+    "n2-recommend-better-option"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-44"
+  ],
+  "usesVocabulary": [
+    "recommend",
+    "suitable",
+    "budget",
+    "needs",
+    "because",
+    "overall"
+  ],
+  "usesPatterns": [
+    "n2-short-comparatives",
+    "n2-long-comparatives",
+    "n2-irregular-comparatives",
+    "n2-compare-two-choices",
+    "n2-recommend-better-option"
+  ],
+  "vocabulary": [
+    {
+      "en": "recommend",
+      "es": "recomendar"
+    },
+    {
+      "en": "suitable",
+      "es": "adecuado"
+    },
+    {
+      "en": "budget",
+      "es": "presupuesto"
+    },
+    {
+      "en": "needs",
+      "es": "necesidades"
+    },
+    {
+      "en": "because",
+      "es": "porque"
+    },
+    {
+      "en": "overall",
+      "es": "en general"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-45.t01",
+      "en": "I recommend the quieter room because it is more suitable.",
+      "es": "Recomiendo la habitación más silenciosa porque es más adecuada.",
+      "explanationEs": "Una recomendación conecta necesidades y criterios con una opción mediante because. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "I recommend the quieter room",
+          "es": "Recomiendo la habitación más"
+        },
+        {
+          "en": "because it is more suitable.",
+          "es": "silenciosa porque es más adecuada."
+        }
+      ],
+      "audioText": "I recommend the quieter room because it is more suitable.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recommend-better-option"
+    },
+    {
+      "id": "en.n2.class-45.t02",
+      "en": "This course is better and more suitable because it has clear lessons.",
+      "es": "Este curso es mejor y más adecuado porque tiene lecciones claras.",
+      "explanationEs": "Una recomendación conecta necesidades y criterios con una opción mediante because. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "This course is better and more",
+          "es": "Este curso es mejor y"
+        },
+        {
+          "en": "suitable because it has clear lessons.",
+          "es": "más adecuado porque tiene lecciones claras."
+        }
+      ],
+      "audioText": "This course is better and more suitable because it has clear lessons.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recommend-better-option"
+    },
+    {
+      "id": "en.n2.class-45.t03",
+      "en": "Compare each hotel with the traveler's needs and budget.",
+      "es": "Compara cada hotel con las necesidades y el presupuesto del viajero.",
+      "explanationEs": "Una recomendación conecta necesidades y criterios con una opción mediante because. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "Compare each hotel with",
+          "es": "Compara cada hotel con las"
+        },
+        {
+          "en": "the traveler's needs and budget.",
+          "es": "necesidades y el presupuesto del viajero."
+        }
+      ],
+      "audioText": "Compare each hotel with the traveler's needs and budget.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recommend-better-option"
+    },
+    {
+      "id": "en.n2.class-45.t04",
+      "en": "Choose the train because it is better overall.",
+      "es": "Elige el tren porque es mejor en general.",
+      "explanationEs": "Una recomendación conecta necesidades y criterios con una opción mediante because. Este ejemplo muestra el patrón en un contexto completo.",
+      "segments": [
+        {
+          "en": "Choose the train because",
+          "es": "Elige el tren porque"
+        },
+        {
+          "en": "it is better overall.",
+          "es": "es mejor en general."
+        }
+      ],
+      "audioText": "Choose the train because it is better overall.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-recommend-better-option"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c45.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "La persona necesita ahorrar; recomienda la alternativa económica. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I recommend the bus because it is cheaper."
+          },
+          {
+            "text": "I recommend the bus because it is more cheap."
+          },
+          {
+            "text": "I recommend bus because cheaper than."
+          }
+        ],
+        "teaches": [
+          "n2-recommend-better-option"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En la selección guiada, la evidencia correcta es «I recommend the bus because it is cheaper.»."
+          },
+          "hint": {
+            "es": "Aplica esta regla: Una recomendación conecta necesidades y criterios con una opción mediante because."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:65cb5fe674e0f6ee171f90681599968526628db2f802d202407f6e384a2bd063"
+      },
+      {
+        "id": "en.n2.c45.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la razón: Choose this plan ___ it is more reliable."
+        },
+        "answer": {
+          "text": "because",
+          "accepted": [
+            "because"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-recommend-better-option"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el primer espacio, la evidencia correcta es «because»."
+          },
+          "hint": {
+            "es": "Busca la forma que cumple esta regla: Una recomendación conecta necesidades y criterios con una opción mediante because."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:602a5c1eb95790bed921221f4c66af7f912a1cd74b1868a2b960458b85512c1d"
+      },
+      {
+        "id": "en.n2.c45.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena un ejemplo de recomendar la mejor opción."
+        },
+        "answer": {
+          "text": "This option is more suitable for your needs.",
+          "tokens": [
+            "This",
+            "option",
+            "is",
+            "more",
+            "suitable",
+            "for",
+            "your",
+            "needs."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-recommend-better-option"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el primer orden, la evidencia correcta es «This option is more suitable for your needs.»."
+          },
+          "hint": {
+            "es": "Localiza primero el sujeto y la forma verbal principal."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3d8e6212ab21df20d9c5fad0d8487cb5116008184d338fc2d780ce24c27c6f7c"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c45.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: Recomienda el tren porque es más rápido y fiable."
+        },
+        "answer": {
+          "text": "I recommend the train because it is faster and more reliable.",
+          "accepted": [
+            "I recommend the train because it is faster and more reliable.",
+            "I recommend the train because it is faster and more reliable"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En la primera producción, la evidencia correcta es «I recommend the train because it is faster and more reliable.»."
+          },
+          "text": "Recomienda el tren porque es más rápido y fiable."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f41765cbc4746abb60ca0c18b024f89744fadb32c5b75b6cb89d6389eb171fce"
+      },
+      {
+        "id": "en.n2.c45.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y reconoce un ejemplo de recomendar la mejor opción."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The local shop is farther from a small market."
+          },
+          {
+            "text": "The local shop is better for a small budget."
+          },
+          {
+            "text": "The large store is better for an unlimited budget."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el primer audio, la evidencia correcta es «The local shop is better for a small budget.»."
+          },
+          "audio": "The local shop is better for a small budget.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d4212afcb1d89236ba3629308e487b2da4c53546a8814c8e5ae0b1269d0df69f"
+      },
+      {
+        "id": "en.n2.c45.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario inicial de recomendar la mejor opción."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "recommend",
+              {
+                "es": "recomendar"
+              }
+            ],
+            [
+              "suitable",
+              {
+                "es": "adecuado"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el primer grupo léxico, la evidencia correcta es «recommend / suitable»."
+          },
+          "pairs": [
+            [
+              "recommend",
+              {
+                "es": "recomendar"
+              }
+            ],
+            [
+              "suitable",
+              {
+                "es": "adecuado"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:07c0ca1e66ad2cce7197ace19d7478a5a9723c5094c1a7564b62119f28d34a6d"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c45.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "La persona prioriza comodidad; recomienda la opción adecuada. Elige la forma correcta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The smaller room is more suitable because it is noisier."
+          },
+          {
+            "text": "Both rooms are equally quiet and suitable."
+          },
+          {
+            "text": "The larger room is more suitable because it is quieter."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-short-comparatives",
+          "n2-long-comparatives"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En la primera evaluación, la evidencia correcta es «The larger room is more suitable because it is quieter.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:791d49a7be30e0c4d5a272545cb505c6e7652069a6b60450c8ba77d46461c9aa"
+      },
+      {
+        "id": "en.n2.c45.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la comparación: This route is ___ than the other one."
+        },
+        "answer": {
+          "text": "better",
+          "accepted": [
+            "better"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-irregular-comparatives"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el segundo espacio, la evidencia correcta es «better»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1432397a17a0605ed776ade759e58f9a60285a052e157cbf626ed296761495e9"
+      },
+      {
+        "id": "en.n2.c45.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: Necesita 3 cuartos y ahorrar. A: $600, lejos, 3. B: $750, cerca, 2."
+        },
+        "answer": {
+          "text": "Home A is cheaper than home B and more suitable for this family. Overall, it is the better option because it has three bedrooms and fits their budget.",
+          "accepted": [
+            "Home A is cheaper than home B and more suitable for this family. Overall, it is the better option because it has three bedrooms and fits their budget.",
+            "I recommend home A: it is the better and more suitable choice because it costs less than home B and provides the three bedrooms they need."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-short-comparatives",
+          "n2-long-comparatives",
+          "n2-irregular-comparatives",
+          "n2-compare-two-choices",
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En la producción evaluada, la evidencia correcta es «Home A is cheaper than home B and more suitable for this family. Overall, it is the better option because it has three bedrooms and fits their budget.»."
+          },
+          "text": "Necesita 3 cuartos y ahorrar. A: $600, lejos, 3. B: $750, cerca, 2."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3c7be837a437a0b5e973f518a50083cf8467612c09f586a3095be4d8e178a9a4"
+      },
+      {
+        "id": "en.n2.c45.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y verifica otro ejemplo de recomendar la mejor opción."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I recommend the other route because it is longer."
+          },
+          {
+            "text": "I recommend this route because it is shorter and safer."
+          },
+          {
+            "text": "I avoid this route because it is less safe."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el audio evaluado, la evidencia correcta es «I recommend this route because it is shorter and safer.»."
+          },
+          "audio": "I recommend this route because it is shorter and safer.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:274db1ce8a8bc91f74066c3c5298075f488f3008f615d485f16f64e3e2a50247"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c45.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona vocabulario de repaso de recomendar la mejor opción."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "quieter room",
+              {
+                "es": "habitación más silenciosa"
+              }
+            ],
+            [
+              "more suitable",
+              {
+                "es": "más adecuada"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el segundo grupo léxico, la evidencia correcta es «quieter room / more suitable»."
+          },
+          "pairs": [
+            [
+              "quieter room",
+              {
+                "es": "habitación más silenciosa"
+              }
+            ],
+            [
+              "more suitable",
+              {
+                "es": "más adecuada"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2b4896b78813613b601e1130236d1569308b81439e4ff75ab3014bad1dad9b7d"
+      },
+      {
+        "id": "en.n2.c45.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una oración de repaso sobre recomendar la mejor opción."
+        },
+        "answer": {
+          "text": "The train is better overall and fits our budget.",
+          "tokens": [
+            "The",
+            "train",
+            "is",
+            "better",
+            "overall",
+            "and",
+            "fits",
+            "our",
+            "budget."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En el orden de repaso, la evidencia correcta es «The train is better overall and fits our budget.»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6a6cfb02d9561250d0d404678a0a5622c9c83a2a8aee8cfa21686f2412ae7e07"
+      },
+      {
+        "id": "en.n2.c45.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés: En general, elige el hotel tranquilo porque ofrece mejor descanso."
+        },
+        "answer": {
+          "text": "Overall, choose the quieter hotel because it offers better rest for everyone.",
+          "accepted": [
+            "Overall, choose the quieter hotel because it offers better rest for everyone.",
+            "In general, I recommend the quieter hotel because everyone can rest better there."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-recommend-better-option"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Una recomendación conecta necesidades y criterios con una opción mediante because. En la producción de repaso, la evidencia correcta es «Overall, choose the quieter hotel because it offers better rest for everyone.»."
+          },
+          "text": "En general, elige el hotel tranquilo porque ofrece mejor descanso."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3f2b522ddedf4fdfd2e211c02a63c76b72668e04dede0e55b59f0acff87887fd"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c45.e01": {
+      "reteach": "en.n2.class-45.t01",
+      "review": "en.n2.c45.r01"
+    },
+    "en.n2.c45.e02": {
+      "reteach": "en.n2.class-45.t02",
+      "review": "en.n2.c45.r02"
+    },
+    "en.n2.c45.e03": {
+      "reteach": "en.n2.class-45.t03",
+      "review": "en.n2.c45.r03"
+    },
+    "en.n2.c45.e04": {
+      "reteach": "en.n2.class-45.t04",
+      "review": "en.n2.c45.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n2-short-comparatives",
+    "n2-long-comparatives",
+    "n2-irregular-comparatives",
+    "n2-compare-two-choices",
+    "n2-recommend-better-option"
+  ]
+}

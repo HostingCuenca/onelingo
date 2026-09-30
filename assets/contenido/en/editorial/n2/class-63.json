@@ -1,0 +1,753 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-63",
+  "phase": "comprehension",
+  "title": {
+    "en": "Offers with can and shall",
+    "es": "Ofrecimientos con can y shall"
+  },
+  "concepts": [
+    "n2-can-shall-offers"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-62"
+  ],
+  "usesVocabulary": [
+    "offer",
+    "bag",
+    "door",
+    "water",
+    "cab",
+    "lift",
+    "umbrella",
+    "wait"
+  ],
+  "usesPatterns": [
+    "n2-can-shall-offers"
+  ],
+  "objectives": {
+    "es": [
+      "Comprender ofrecimientos con can y shall.",
+      "Distinguir ayuda individual de una propuesta compartida.",
+      "Ofrecer acciones concretas con cortesía."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "offer",
+      "es": "ofrecimiento"
+    },
+    {
+      "en": "bag",
+      "es": "bolsa"
+    },
+    {
+      "en": "door",
+      "es": "puerta"
+    },
+    {
+      "en": "water",
+      "es": "agua"
+    },
+    {
+      "en": "cab",
+      "es": "taxi"
+    },
+    {
+      "en": "lift",
+      "es": "ascensor"
+    },
+    {
+      "en": "umbrella",
+      "es": "paraguas"
+    },
+    {
+      "en": "wait",
+      "es": "esperar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-63.t01",
+      "en": "Can I carry your bag?",
+      "es": "¿Puedo llevar tu bolsa?",
+      "explanationEs": "Can I ofrece ayuda a otra persona.",
+      "segments": [
+        {
+          "en": "Can I",
+          "es": "¿Puedo llevar"
+        },
+        {
+          "en": "carry your bag?",
+          "es": "tu bolsa?"
+        }
+      ],
+      "audioText": "Can I carry your bag?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-shall-offers"
+    },
+    {
+      "id": "en.n2.class-63.t02",
+      "en": "Shall I open the door?",
+      "es": "¿Abro la puerta?",
+      "explanationEs": "Shall I ofrece hacer una acción.",
+      "segments": [
+        {
+          "en": "Shall I",
+          "es": "¿Abro"
+        },
+        {
+          "en": "open the door?",
+          "es": "la puerta?"
+        }
+      ],
+      "audioText": "Shall I open the door?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-shall-offers"
+    },
+    {
+      "id": "en.n2.class-63.t03",
+      "en": "We can bring some water.",
+      "es": "Podemos traer agua.",
+      "explanationEs": "Can también ofrece una posibilidad de ayuda.",
+      "segments": [
+        {
+          "en": "We can",
+          "es": "Podemos"
+        },
+        {
+          "en": "bring some water.",
+          "es": "traer agua."
+        }
+      ],
+      "audioText": "We can bring some water.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-shall-offers"
+    },
+    {
+      "id": "en.n2.class-63.t04",
+      "en": "Shall we call a cab?",
+      "es": "¿Llamamos a un taxi?",
+      "explanationEs": "Shall we propone una acción conjunta.",
+      "segments": [
+        {
+          "en": "Shall we",
+          "es": "¿Llamamos a"
+        },
+        {
+          "en": "call a cab?",
+          "es": "un taxi?"
+        }
+      ],
+      "audioText": "Shall we call a cab?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-shall-offers"
+    },
+    {
+      "id": "en.n2.class-63.t05",
+      "en": "Can and shall both introduce an offer.",
+      "es": "Can y shall pueden introducir un ofrecimiento.",
+      "explanationEs": "La forma cambia según quién ofrece la acción.",
+      "segments": [
+        {
+          "en": "Can and shall",
+          "es": "Can y shall"
+        },
+        {
+          "en": "both introduce an offer.",
+          "es": "pueden introducir un ofrecimiento."
+        }
+      ],
+      "audioText": "Can and shall both introduce an offer.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-can-shall-offers"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c63.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el ofrecimiento para llevar la bolsa."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Can I carry your bag?"
+          },
+          {
+            "text": "Can I carries your bag?"
+          },
+          {
+            "text": "Carry I can your bag?"
+          }
+        ],
+        "teaches": [
+          "n2-can-shall-offers"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I carry ofrece ayuda con el verbo base carry. En la elección guiada, la respuesta es «Can I carry your bag?»."
+          },
+          "hint": {
+            "es": "Observa quién pide, permite, ofrece o responde."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5ac7a81d490e02a8995bd38c8ee092c1963f7cc88802121e333f16759777206c"
+      },
+      {
+        "id": "en.n2.c63.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el ofrecimiento: Shall I ___ the door?"
+        },
+        "answer": {
+          "text": "open",
+          "accepted": [
+            "open"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-can-shall-offers"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I va seguido del verbo base open. En el primer espacio, la respuesta es «open»."
+          },
+          "hint": {
+            "es": "Completa solo la palabra o fragmento ausente."
+          },
+          "text": "Completa el ofrecimiento: Shall I ___ the door?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6aa145d8ccb6017a3bb79d7499f8cdb0125bd46acdd78e90b6118817c0acea57"
+      },
+      {
+        "id": "en.n2.c63.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la propuesta de llamar a un taxi."
+        },
+        "answer": {
+          "text": "Shall we call a cab?",
+          "tokens": [
+            "Shall",
+            "we",
+            "call",
+            "a",
+            "cab?"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-can-shall-offers"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall we propone una acción compartida. En el primer orden, la respuesta es «Shall we call a cab?»."
+          },
+          "hint": {
+            "es": "Ordena primero el sujeto y después el verbo modal."
+          },
+          "text": "Ordena la propuesta de llamar a un taxi."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ebb8554486edde1bfa37771fad536c2eca6c77b3657673371d53d882539abc5e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c63.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Puedo traerte agua?"
+        },
+        "answer": {
+          "text": "Can I bring you some water?",
+          "accepted": [
+            "Can I bring you some water?",
+            "Shall I bring you some water?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I bring ofrece ayuda con un verbo base. En la primera producción, la respuesta es «Can I bring you some water?»."
+          },
+          "text": "¿Puedo traerte agua?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:01e74c6b6c69fc9788d56912731c21850a1eb2ead528a30acbae2b1ff407aaeb"
+      },
+      {
+        "id": "en.n2.c63.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el ofrecimiento de esperar."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Shall I wait for you?"
+          },
+          {
+            "text": "Shall I waits for you?"
+          },
+          {
+            "text": "Wait I shall for you?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I wait ofrece hacer la acción de esperar. En el primer audio, la respuesta es «Shall I wait for you?»."
+          },
+          "audio": "Shall I wait for you?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c24b23ed4381e540bdba1e075a8e3709d4d6b4a9c1e64ccebd1afd093a0d3cf0"
+      },
+      {
+        "id": "en.n2.c63.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos palabras de ofrecimientos."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "offer",
+              {
+                "es": "ofrecimiento"
+              }
+            ],
+            [
+              "umbrella",
+              {
+                "es": "paraguas"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Offer nombra la ayuda y umbrella es un objeto que se puede ofrecer. En el primer grupo léxico, la respuesta es «offer / umbrella»."
+          },
+          "pairs": [
+            [
+              "offer",
+              {
+                "es": "ofrecimiento"
+              }
+            ],
+            [
+              "umbrella",
+              {
+                "es": "paraguas"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2af0ef8979d76e8f5a26a3a61a7330b947caafb153916cb8a027b941540fba8c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c63.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la propuesta para usar el ascensor."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Shall we uses the lift?"
+          },
+          {
+            "text": "Shall we use the lift?"
+          },
+          {
+            "text": "Use we shall the lift?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall we use propone una acción conjunta. En la primera evaluación, la respuesta es «Shall we use the lift?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3c874310bc49c8e3aa59601b0ee1d3a3602c239c184e21380108d4384a263fbb"
+      },
+      {
+        "id": "en.n2.c63.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Ofrezco agua a una persona: Can I ___ you some water?"
+        },
+        "answer": {
+          "text": "bring",
+          "accepted": [
+            "bring"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Can I bring you ofrece una acción a otra persona; bring queda en forma base. En el segundo espacio, la respuesta es «bring»."
+          },
+          "text": "Ofrezco agua a una persona: Can I ___ you some water?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2f890f0317fe6df9f3b0820a73f4bd87a1a7400519104a7991f3e3549146c3f4"
+      },
+      {
+        "id": "en.n2.c63.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe: ¿Abro la puerta por ti?"
+        },
+        "answer": {
+          "text": "Shall I open the door for you?",
+          "accepted": [
+            "Shall I open the door for you?",
+            "Can I open the door for you?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I open ofrece hacer la acción por otra persona. En la producción evaluada, la respuesta es «Shall I open the door for you?»."
+          },
+          "text": "¿Abro la puerta por ti?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7110c2feeb2ce33993eff252c27a9d080cd4a2b5b3df801227f62391dcb0b264"
+      },
+      {
+        "id": "en.n2.c63.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la propuesta de llamar un taxi."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Shall we calls a cab for them?"
+          },
+          {
+            "text": "Shall call we a cab for them?"
+          },
+          {
+            "text": "Shall we call a cab for them?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall we call propone una acción conjunta con verbo base. En el audio evaluado, la respuesta es «Shall we call a cab for them?»."
+          },
+          "audio": "Shall we call a cab for them?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f35ce0a0cbde3a320cba712d0a6af127a639bc8b70e69b6781bf8a29d00e2639"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c63.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos palabras de ayuda."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "taxi",
+              {
+                "es": "taxi"
+              }
+            ],
+            [
+              "wait",
+              {
+                "es": "esperar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Taxi y wait aparecen en ofrecimientos de ayuda. En el segundo grupo léxico, la respuesta es «taxi / wait»."
+          },
+          "pairs": [
+            [
+              "taxi",
+              {
+                "es": "taxi"
+              }
+            ],
+            [
+              "wait",
+              {
+                "es": "esperar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:25cf723f76913a87366e3331f22bd1338a7e9db7105238d82d6f56bf46cac41b"
+      },
+      {
+        "id": "en.n2.c63.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Ofrezco agua a Ana: Shall I ___ you some water?"
+        },
+        "answer": {
+          "text": "bring",
+          "accepted": [
+            "bring"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I bring you ofrece una acción a Ana; bring queda en forma base. En el repaso de ofrecimiento, la respuesta es «bring»."
+          },
+          "text": "Ofrezco agua a Ana: Shall I ___ you some water?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1dcb932845d74a697d6c1bc3bf3c05c9ae7e8b91d36be2274197d194e06139b3"
+      },
+      {
+        "id": "en.n2.c63.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Ofrece llevar dos bolsas pesadas por otra persona."
+        },
+        "answer": {
+          "text": "Shall I carry those bags for you?",
+          "accepted": [
+            "Shall I carry those bags for you?",
+            "Can I carry those bags for you?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-can-shall-offers"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Shall I carry y can I carry ofrecen hacer una acción para otra persona. En la producción de repaso, la respuesta es «Shall I carry those bags for you?»."
+          },
+          "text": "Veo que llevas dos bolsas pesadas. Ofrece: ¿Llevo esas bolsas por ti?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c5ea0b322232995902309b920fa129fb1b73d4231d8f013e8e89e29e66d8fb7c"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c63.e01": {
+      "reteach": "en.n2.class-63.t04",
+      "review": "en.n2.c63.r01"
+    },
+    "en.n2.c63.e02": {
+      "reteach": "en.n2.class-63.t03",
+      "review": "en.n2.c63.r02"
+    },
+    "en.n2.c63.e03": {
+      "reteach": "en.n2.class-63.t02",
+      "review": "en.n2.c63.r03"
+    },
+    "en.n2.c63.e04": {
+      "reteach": "en.n2.class-63.t04",
+      "review": "en.n2.c63.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,756 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-59",
+  "title": {
+    "en": "Explain rules and advice",
+    "es": "Explicar reglas y consejos"
+  },
+  "objectives": {
+    "es": [
+      "Clasificar indicaciones como regla, ausencia de necesidad o consejo.",
+      "Explicar una regla o recomendación con una razón explícita y pertinente.",
+      "Redactar mensajes que separen con claridad lo obligatorio de lo recomendable."
+    ]
+  },
+  "concepts": [
+    "n2-explain-rules-advice"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-58"
+  ],
+  "usesVocabulary": [
+    "rule",
+    "advice",
+    "required",
+    "optional",
+    "prohibited",
+    "reason",
+    "visitor",
+    "notice"
+  ],
+  "usesPatterns": [
+    "n2-have-to-necessity",
+    "n2-must-rules",
+    "n2-should-advice",
+    "n2-explain-rules-advice"
+  ],
+  "vocabulary": [
+    {
+      "en": "rule",
+      "es": "regla"
+    },
+    {
+      "en": "advice",
+      "es": "consejo"
+    },
+    {
+      "en": "required",
+      "es": "obligatorio"
+    },
+    {
+      "en": "optional",
+      "es": "opcional"
+    },
+    {
+      "en": "prohibited",
+      "es": "prohibido"
+    },
+    {
+      "en": "reason",
+      "es": "razón"
+    },
+    {
+      "en": "visitor",
+      "es": "visitante"
+    },
+    {
+      "en": "notice",
+      "es": "aviso"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-59.t01",
+      "en": "Visitors must sign in; this is a required rule.",
+      "es": "Los visitantes deben registrarse; esta es una regla obligatoria.",
+      "explanationEs": "Must presenta la acción como una regla que el visitante debe cumplir.",
+      "segments": [
+        {
+          "en": "Visitors must sign in;",
+          "es": "Los visitantes deben registrarse;"
+        },
+        {
+          "en": "this is a required rule.",
+          "es": "esta es una regla obligatoria."
+        }
+      ],
+      "audioText": "Visitors must sign in; this is a required rule.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-explain-rules-advice"
+    },
+    {
+      "id": "en.n2.class-59.t02",
+      "en": "Visitors have to show ID, but a printed ticket is optional.",
+      "es": "Los visitantes tienen que mostrar identificación, pero el boleto impreso es opcional.",
+      "explanationEs": "Have to marca necesidad externa; optional indica que otra acción no es necesaria.",
+      "segments": [
+        {
+          "en": "Visitors have to show ID,",
+          "es": "Los visitantes tienen que mostrar identificación,"
+        },
+        {
+          "en": "but a printed ticket is optional.",
+          "es": "pero el boleto impreso es opcional."
+        }
+      ],
+      "audioText": "Visitors have to show ID, but a printed ticket is optional.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-explain-rules-advice"
+    },
+    {
+      "id": "en.n2.class-59.t03",
+      "en": "You should arrive early; this is advice, not a rule.",
+      "es": "Deberías llegar temprano; es un consejo, no una regla.",
+      "explanationEs": "Should formula una recomendación que ayuda, pero no obliga.",
+      "segments": [
+        {
+          "en": "You should arrive early; this",
+          "es": "Deberías llegar temprano; es"
+        },
+        {
+          "en": "is advice, not a rule.",
+          "es": "un consejo, no una regla."
+        }
+      ],
+      "audioText": "You should arrive early; this is advice, not a rule.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-explain-rules-advice"
+    },
+    {
+      "id": "en.n2.class-59.t04",
+      "en": "The notice gives the reason: Entry is prohibited, so visitors mustn't use this door.",
+      "es": "El aviso da la razón: la entrada está prohibida, por eso los visitantes no deben usar esta puerta.",
+      "explanationEs": "Una explicación combina la indicación con una razón clara mediante because o so.",
+      "segments": [
+        {
+          "en": "The notice gives the reason: Entry is",
+          "es": "El aviso da la razón: la entrada está prohibida,"
+        },
+        {
+          "en": "prohibited, so visitors mustn't use this door.",
+          "es": "por eso los visitantes no deben usar esta puerta."
+        }
+      ],
+      "audioText": "The notice gives the reason: Entry is prohibited, so visitors mustn't use this door.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-explain-rules-advice"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c59.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "El registro es obligatorio. Elige la regla, no el consejo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Visitors must sign in at reception."
+          },
+          {
+            "text": "Visitors should sign in if they have time."
+          },
+          {
+            "text": "Visitors don't have to sign in at reception."
+          }
+        ],
+        "teaches": [
+          "n2-explain-rules-advice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Must sign in presenta el registro como una regla obligatoria."
+          },
+          "hint": {
+            "es": "Una regla firme usa must; un consejo usa should."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0f3fb4a1e4c22516b85300046bc63ee05b58e1adca3781dc5f54891fb3ebb198"
+      },
+      {
+        "id": "en.n2.c59.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "El boleto es digital: You ___ print it before the visit."
+        },
+        "answer": {
+          "text": "don't have to",
+          "accepted": [
+            "don't have to"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-explain-rules-advice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Don't have to print indica que la copia en papel es opcional."
+          },
+          "hint": {
+            "es": "La acción no es necesaria, pero tampoco está prohibida."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:39ce3b0dc407e1f5111704f69b7bc56fe3a6bacfa4fef63af14ee7ba3c2ea35c"
+      },
+      {
+        "id": "en.n2.c59.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el consejo y la razón sobre la fila de entrada."
+        },
+        "answer": {
+          "text": "You should arrive early because the line is long.",
+          "tokens": [
+            "You",
+            "should",
+            "arrive",
+            "early",
+            "because",
+            "the",
+            "line",
+            "is",
+            "long."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-explain-rules-advice"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should arrive comunica consejo y because explica la razón."
+          },
+          "hint": {
+            "es": "Empieza con el sujeto, añade should y deja la razón después de because."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:55a30dacd5ca2b0050e9abfea7b7e6feb2e5e3ac070ab5f2f60be1c687d41c7f"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c59.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la regla: Los visitantes deben mostrar identificación en la entrada."
+        },
+        "answer": {
+          "text": "Visitors must show ID at the entrance.",
+          "accepted": [
+            "Visitors must show ID at the entrance.",
+            "At the entrance, visitors have to show ID."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Must show presenta la identificación como requisito de acceso."
+          },
+          "text": "Los visitantes deben mostrar identificación en la entrada."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:be96e38d3cd9c88b49fc3eac2a034929f8608e5bd0b276ecfa710111f9d74d6d"
+      },
+      {
+        "id": "en.n2.c59.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el consejo, no la obligación."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "You must bring water; it is a required rule."
+          },
+          {
+            "text": "You mustn't bring water into the building."
+          },
+          {
+            "text": "You should bring water; it is useful advice for a hot day."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should bring presenta el agua como recomendación útil, no como requisito."
+          },
+          "audio": "You should bring water; it is useful advice for a hot day.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:87c3da9e08c96e4f1c9b321ece2fefa5dcc1b07b14c4b55721ffa42b1b0822a0"
+      },
+      {
+        "id": "en.n2.c59.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada palabra con su valor dentro de una norma."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "required",
+              {
+                "es": "obligatorio"
+              }
+            ],
+            [
+              "optional",
+              {
+                "es": "no obligatorio"
+              }
+            ],
+            [
+              "reason",
+              {
+                "es": "explicación"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Required exige, optional permite elegir y reason explica por qué existe la indicación."
+          },
+          "pairs": [
+            [
+              "required",
+              {
+                "es": "obligatorio"
+              }
+            ],
+            [
+              "optional",
+              {
+                "es": "no obligatorio"
+              }
+            ],
+            [
+              "reason",
+              {
+                "es": "explicación"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:10d8708aa9c6e887ab3d8c4c769cd9b994b17db1f7c4a601481432d3aa20e351"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c59.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "El aviso recomienda silencio, pero no lo exige. Elige la frase adecuada."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Visitors must speak quietly in the hall."
+          },
+          {
+            "text": "Visitors should speak quietly in the hall."
+          },
+          {
+            "text": "Visitors mustn't speak in the hall."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should speak quietly conserva el carácter recomendado del aviso."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6fe3cf780bccb09a1a068ad3489db00ef8d6a152997fe99dfe26ece6055019d2"
+      },
+      {
+        "id": "en.n2.c59.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "La fotografía está prohibida: Guests ___ take pictures inside."
+        },
+        "answer": {
+          "text": "mustn't",
+          "accepted": [
+            "mustn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Mustn't take transforma la prohibición del aviso en una regla directa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e427897ddb780bdde8bb9ae484efd120c643f0a956115c4fe6c9e3c0f4b3d111"
+      },
+      {
+        "id": "en.n2.c59.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta: casco obligatorio; llevar agua es consejo porque hace calor."
+        },
+        "answer": {
+          "text": "Visitors must wear a helmet, and they should bring water because it is hot.",
+          "accepted": [
+            "Visitors must wear a helmet, and they should bring water because it is hot.",
+            "Visitors have to wear a helmet; they should also carry water because it is hot."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Must distingue la regla y should presenta el agua como consejo con razón."
+          },
+          "text": "Casco obligatorio; llevar agua es consejo porque hace calor."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f00e16b2a6ea5029b6d799cb4d1175b7ba64988e916e62a8fcb6a131fb0b9b67"
+      },
+      {
+        "id": "en.n2.c59.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la prohibición explicada por el aviso."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The notice says you shouldn't enter because the floor may be slippery."
+          },
+          {
+            "text": "The notice says you don't have to use this entrance while the floor is wet."
+          },
+          {
+            "text": "The notice says you mustn't enter because the floor is wet."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Mustn't enter comunica la prohibición y because aporta su causa."
+          },
+          "audio": "The notice says you mustn't enter because the floor is wet.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:078a96b1cf338dc615f9dc879b3ef880ecdc7390372d1461c1484d0aa67e0efb"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c59.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada modal con el tipo de mensaje."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "must / mustn't",
+              {
+                "es": "regla"
+              }
+            ],
+            [
+              "should / shouldn't",
+              {
+                "es": "consejo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Must y mustn't regulan acciones; should y shouldn't orientan decisiones."
+          },
+          "pairs": [
+            [
+              "must / mustn't",
+              {
+                "es": "regla"
+              }
+            ],
+            [
+              "should / shouldn't",
+              {
+                "es": "consejo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:19cd2997675342dc1929fc1b2b1aae9d79461f01277caf2c4a9ff323a05acb11"
+      },
+      {
+        "id": "en.n2.c59.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la indicación sobre el boleto impreso."
+        },
+        "answer": {
+          "text": "Visitors don't have to bring a printed ticket.",
+          "tokens": [
+            "Visitors",
+            "don't",
+            "have",
+            "to",
+            "bring",
+            "a",
+            "printed",
+            "ticket."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Don't have to bring explica que el boleto impreso es opcional."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a710e3cbd0700194e1daec82490daf1fabc430164ecb68ff4e3863a832c315e6"
+      },
+      {
+        "id": "en.n2.c59.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta: hablar bajo es regla; apagar notificaciones es consejo."
+        },
+        "answer": {
+          "text": "Visitors must speak quietly and should turn off phone notifications.",
+          "accepted": [
+            "Visitors must speak quietly and should turn off phone notifications.",
+            "Visitors have to speak quietly; they should silence phone notifications."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-explain-rules-advice"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La producción separa el comportamiento exigido de la recomendación práctica."
+          },
+          "text": "Hablar bajo es regla; apagar notificaciones es consejo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d36ed216a06eb53f9cd3dab974a0f5cdbaa62aad7c9ed8c79dbe8322d748ec61"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c59.e01": {
+      "reteach": "en.n2.class-59.t03",
+      "review": "en.n2.c59.r01"
+    },
+    "en.n2.c59.e02": {
+      "reteach": "en.n2.class-59.t04",
+      "review": "en.n2.c59.r01"
+    },
+    "en.n2.c59.e03": {
+      "reteach": "en.n2.class-59.t01",
+      "review": "en.n2.c59.r03"
+    },
+    "en.n2.c59.e04": {
+      "reteach": "en.n2.class-59.t04",
+      "review": "en.n2.c59.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

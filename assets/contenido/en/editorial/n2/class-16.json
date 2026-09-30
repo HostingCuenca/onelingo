@@ -1,0 +1,734 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-16",
+  "phase": "input",
+  "title": {
+    "en": "Was, were and past descriptions",
+    "es": "Was, were y descripciones pasadas"
+  },
+  "concepts": [
+    "n2-was-were-descriptions"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-15"
+  ],
+  "usesVocabulary": [
+    "tired",
+    "quiet",
+    "crowded",
+    "empty",
+    "ready",
+    "late",
+    "station",
+    "weather"
+  ],
+  "usesPatterns": [
+    "n2-was-were-descriptions"
+  ],
+  "objectives": {
+    "es": [
+      "Describir estados, lugares y personas del pasado con was o were.",
+      "Reconocer la concordancia singular y plural en lectura y escucha.",
+      "Producir descripciones pasadas breves sin apoyo dinámico."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "tired",
+      "es": "cansado"
+    },
+    {
+      "en": "quiet",
+      "es": "tranquilo"
+    },
+    {
+      "en": "crowded",
+      "es": "lleno de gente"
+    },
+    {
+      "en": "empty",
+      "es": "vacío"
+    },
+    {
+      "en": "ready",
+      "es": "listo"
+    },
+    {
+      "en": "late",
+      "es": "tarde"
+    },
+    {
+      "en": "station",
+      "es": "estación"
+    },
+    {
+      "en": "weather",
+      "es": "clima"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-16.t01",
+      "en": "I was tired after the journey.",
+      "es": "Estaba cansado después del viaje.",
+      "explanationEs": "Was acompaña a I para describir un estado pasado.",
+      "segments": [
+        {
+          "en": "I was tired",
+          "es": "Estaba cansado"
+        },
+        {
+          "en": "after the journey.",
+          "es": "después del viaje."
+        }
+      ],
+      "audioText": "I was tired after the journey.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-was-were-descriptions"
+    },
+    {
+      "id": "en.n2.class-16.t02",
+      "en": "The hotel room was quiet at night.",
+      "es": "La habitación del hotel estaba tranquila por la noche.",
+      "explanationEs": "Was acompaña a un sujeto singular.",
+      "segments": [
+        {
+          "en": "The hotel room",
+          "es": "La habitación del hotel"
+        },
+        {
+          "en": "was quiet at night.",
+          "es": "estaba tranquila por la noche."
+        }
+      ],
+      "audioText": "The hotel room was quiet at night.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-was-were-descriptions"
+    },
+    {
+      "id": "en.n2.class-16.t03",
+      "en": "Maya was at the station before nine.",
+      "es": "Maya estaba en la estación antes de las nueve.",
+      "explanationEs": "Was también expresa ubicación pasada.",
+      "segments": [
+        {
+          "en": "Maya was at",
+          "es": "Maya estaba en la"
+        },
+        {
+          "en": "the station before nine.",
+          "es": "estación antes de las nueve."
+        }
+      ],
+      "audioText": "Maya was at the station before nine.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-was-were-descriptions"
+    },
+    {
+      "id": "en.n2.class-16.t04",
+      "en": "The streets were empty after midnight.",
+      "es": "Las calles estaban vacías después de medianoche.",
+      "explanationEs": "Were acompaña a un sujeto plural.",
+      "segments": [
+        {
+          "en": "The streets were",
+          "es": "Las calles estaban"
+        },
+        {
+          "en": "empty after midnight.",
+          "es": "vacías después de medianoche."
+        }
+      ],
+      "audioText": "The streets were empty after midnight.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-was-were-descriptions"
+    },
+    {
+      "id": "en.n2.class-16.t05",
+      "en": "We were ready for the early bus.",
+      "es": "Estábamos listos para el autobús temprano.",
+      "explanationEs": "Were acompaña a we, you y they.",
+      "segments": [
+        {
+          "en": "We were ready",
+          "es": "Estábamos listos para"
+        },
+        {
+          "en": "for the early bus.",
+          "es": "el autobús temprano."
+        }
+      ],
+      "audioText": "We were ready for the early bus.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-was-were-descriptions"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c16.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Después del almuerzo el café estaba lleno. Elige la descripción correcta."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The café were crowded after lunch."
+          },
+          {
+            "text": "The café was crowded after lunch."
+          },
+          {
+            "text": "The café is crowded after lunch."
+          }
+        ],
+        "teaches": [
+          "n2-was-were-descriptions"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "The café es singular y la situación es pasada, por eso corresponde was."
+          },
+          "hint": {
+            "es": "Compara el sujeto con la forma verbal del modelo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e0343a3968fbefdebb3facdec71c66ed492aebdf5538053a401e7959ca9b394"
+      },
+      {
+        "id": "en.n2.c16.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la descripción pasada: My suitcase ___ very heavy."
+        },
+        "answer": {
+          "text": "was",
+          "accepted": [
+            "was"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-was-were-descriptions"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "My suitcase es singular; was marca su estado en el pasado."
+          },
+          "hint": {
+            "es": "Localiza el sujeto y completa solo el fragmento ausente."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a01d5db9357fe0838f71cb816c5f68ca81cfce0a0721eb9a8e0bba04f3de4cca"
+      },
+      {
+        "id": "en.n2.c16.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena una descripción plural del lugar en el pasado."
+        },
+        "answer": {
+          "text": "The streets were quiet at midnight.",
+          "tokens": [
+            "The",
+            "streets",
+            "were",
+            "quiet",
+            "at",
+            "midnight."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-was-were-descriptions"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Were sigue al sujeto plural the streets."
+          },
+          "hint": {
+            "es": "Busca primero el sujeto y después la forma verbal."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:128080fe93fbdcbf85ab3bdea3aad03cf75ffeca988ba9e8ef1fb32f714c7b92"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c16.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Leo y Nina llegaron tarde ayer. Elige la frase que describe su estado."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Leo and Nina was late yesterday."
+          },
+          {
+            "text": "Leo and Nina are late yesterday."
+          },
+          {
+            "text": "Leo and Nina were late yesterday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Dos personas forman un sujeto plural; were concuerda con Leo and Nina."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:84c3ceef65b8b888be2f3d79559698864c3276f8abfb6a75074b0ccab90a8479"
+      },
+      {
+        "id": "en.n2.c16.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa con la forma pasada de be: The weather ___ cold and windy."
+        },
+        "answer": {
+          "text": "was",
+          "accepted": [
+            "was"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Weather funciona como singular, así que requiere was."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ff4eb8758e6af1b3ce3dffd21eb50117556dbfb2c93497729d767dc9b188169a"
+      },
+      {
+        "id": "en.n2.c16.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige exactamente la frase sobre la preparación antes del taxi."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I were ready before the taxi arrived."
+          },
+          {
+            "text": "I was ready before the taxi arrived."
+          },
+          {
+            "text": "I am ready before the taxi arrived."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El audio usa was con I y mantiene ambas acciones en el pasado."
+          },
+          "audio": "I was ready before the taxi arrived.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:35337412bcb7cba5b2f0c30be765cafef1567d976aa2c8b0424a177e877da8fe"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c16.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Ayer no había visitantes. Elige la descripción correcta del museo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The museum was empty yesterday."
+          },
+          {
+            "text": "The museum were empty yesterday."
+          },
+          {
+            "text": "The museum is empty yesterday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Museum es singular y yesterday exige was."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ef47549ea069eed0840aa1d8bba5a32aff261f8352185282d37fd86b63922992"
+      },
+      {
+        "id": "en.n2.c16.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la descripción de dos habitaciones: Our rooms ___ clean but small."
+        },
+        "answer": {
+          "text": "were",
+          "accepted": [
+            "were"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Rooms es plural; la forma pasada correcta es were."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:065d1858c5bcd0ee3e88c7a0b50431e0fc28c34638f5bda83d420fe9553ec7bc"
+      },
+      {
+        "id": "en.n2.c16.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la descripción de una sala vacía antes del amanecer."
+        },
+        "answer": {
+          "text": "The waiting room was empty before sunrise.",
+          "tokens": [
+            "The",
+            "waiting",
+            "room",
+            "was",
+            "empty",
+            "before",
+            "sunrise."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Waiting room es singular y usa was para describir su estado pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0599b3579a8f51bf09246e1859c3c682787920731462bda7b05a3ae73c25ab48"
+      },
+      {
+        "id": "en.n2.c16.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona la descripción correcta de los autobuses después del concierto."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The buses was crowded after the concert."
+          },
+          {
+            "text": "The buses are crowded after the concert."
+          },
+          {
+            "text": "The buses were crowded after the concert."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Buses es plural y el relato está en pasado, por eso se oye were."
+          },
+          "audio": "The buses were crowded after the concert.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4423383d15d0a814b06a39e58de9a1f55d352855598a0f3bf7473e0232535dd4"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c16.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona dos adjetivos de descripción con su significado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "crowded",
+              {
+                "es": "lleno de gente"
+              }
+            ],
+            [
+              "empty",
+              {
+                "es": "vacío"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Crowded y empty expresan estados opuestos de un lugar."
+          },
+          "pairs": [
+            [
+              "crowded",
+              {
+                "es": "lleno de gente"
+              }
+            ],
+            [
+              "empty",
+              {
+                "es": "vacío"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:963ceb5f7b08a31aea107d46a90dd8b309cd9a899c83f2753819767abd45b028"
+      },
+      {
+        "id": "en.n2.c16.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el repaso: The street ___ quiet after the storm."
+        },
+        "answer": {
+          "text": "was",
+          "accepted": [
+            "was"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Street es singular; was describe su estado después de la tormenta."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c80ab401a23abea8bf9ed5c112ddb5863b0746caa81cdaa315ade7bcc2cb0f4e"
+      },
+      {
+        "id": "en.n2.c16.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés cómo se sentía el grupo después del viaje."
+        },
+        "answer": {
+          "text": "We were tired after the long journey.",
+          "accepted": [
+            "We were tired after the long journey."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-was-were-descriptions"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "We requiere were para describir un estado pasado."
+          },
+          "text": "El grupo estaba cansado después del largo viaje."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3296492b061629b25e3a9fdfe1b7b719410353ed88cd0c8cf0c647b64e29671a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c16.e01": {
+      "reteach": "en.n2.class-16.t01",
+      "review": "en.n2.c16.r01"
+    },
+    "en.n2.c16.e02": {
+      "reteach": "en.n2.class-16.t02",
+      "review": "en.n2.c16.r02"
+    },
+    "en.n2.c16.e03": {
+      "reteach": "en.n2.class-16.t03",
+      "review": "en.n2.c16.r03"
+    },
+    "en.n2.c16.e04": {
+      "reteach": "en.n2.class-16.t04",
+      "review": "en.n2.c16.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

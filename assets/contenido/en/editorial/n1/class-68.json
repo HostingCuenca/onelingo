@@ -1,0 +1,705 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 1,
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "vocabularyDeclarations": "exhaustive"
+  },
+  "id": "en.n1.class-68",
+  "title": {
+    "en": "Like, love and hate with nouns",
+    "es": "like, love y hate con sustantivos"
+  },
+  "concepts": [
+    "preferences-nouns"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n1.class-67"
+  ],
+  "usesVocabulary": [
+    "like",
+    "likes",
+    "love",
+    "loves",
+    "hate",
+    "hates",
+    "music",
+    "cats",
+    "coffee",
+    "soccer",
+    "I",
+    "she",
+    "he",
+    "they",
+    "we",
+    "the"
+  ],
+  "usesPatterns": [
+    "preferences-nouns",
+    "third-person-endings",
+    "present-simple-base-pronouns"
+  ],
+  "objectives": {
+    "es": [
+      "Comprender y usar like, love y hate con sustantivos.",
+      "Practicar con respuestas editoriales deterministas y sin generación dinámica."
+    ]
+  },
+  "vocabulary": [
+    {
+      "en": "like",
+      "es": "gustar"
+    },
+    {
+      "en": "likes",
+      "es": "le gusta"
+    },
+    {
+      "en": "love",
+      "es": "encantar"
+    },
+    {
+      "en": "loves",
+      "es": "le encanta"
+    },
+    {
+      "en": "hate",
+      "es": "odiar"
+    },
+    {
+      "en": "hates",
+      "es": "odia"
+    },
+    {
+      "en": "music",
+      "es": "música"
+    },
+    {
+      "en": "cats",
+      "es": "gatos"
+    },
+    {
+      "en": "coffee",
+      "es": "café"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n1.class-68.t01",
+      "en": "I like music.",
+      "es": "Me gusta la música.",
+      "explanationEs": "Para gustos generales no se usa the.",
+      "segments": [
+        {
+          "en": "I like",
+          "es": "Me gusta"
+        },
+        {
+          "en": "music.",
+          "es": "la música."
+        }
+      ],
+      "audioText": "I like music.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-68.t02",
+      "en": "I love coffee.",
+      "es": "Me encanta el café.",
+      "explanationEs": "Love expresa una preferencia fuerte.",
+      "segments": [
+        {
+          "en": "I love",
+          "es": "Me encanta"
+        },
+        {
+          "en": "coffee.",
+          "es": "el café."
+        }
+      ],
+      "audioText": "I love coffee.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-68.t03",
+      "en": "I hate cats.",
+      "es": "Odio los gatos.",
+      "explanationEs": "Hate expresa rechazo fuerte.",
+      "segments": [
+        {
+          "en": "I hate",
+          "es": "Odio"
+        },
+        {
+          "en": "cats.",
+          "es": "los gatos."
+        }
+      ],
+      "audioText": "I hate cats.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-68.t04",
+      "en": "She likes music.",
+      "es": "A ella le gusta la música.",
+      "explanationEs": "Con she, like cambia a likes.",
+      "segments": [
+        {
+          "en": "She likes",
+          "es": "A ella le gusta"
+        },
+        {
+          "en": "music.",
+          "es": "la música."
+        }
+      ],
+      "audioText": "She likes music.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    },
+    {
+      "id": "en.n1.class-68.t05",
+      "en": "He loves soccer.",
+      "es": "A él le encanta el fútbol.",
+      "explanationEs": "Con he, love cambia a loves.",
+      "segments": [
+        {
+          "en": "He loves",
+          "es": "A él le encanta"
+        },
+        {
+          "en": "soccer.",
+          "es": "el fútbol."
+        }
+      ],
+      "audioText": "He loves soccer.",
+      "audioMode": "tts",
+      "languageCode": "en"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n1.c68.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige «Me gusta la música»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I like music."
+          },
+          {
+            "text": "I like the music."
+          }
+        ],
+        "teaches": [
+          "preferences-nouns"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El gusto general se expresa sin the."
+          },
+          "hint": {
+            "es": "Usa I like + sustantivo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ae5be06907e62e033a4133eb0ff3a1732abbc1c5abd6b3719d7fca6c6e6545b7"
+      },
+      {
+        "id": "en.n1.c68.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: I ___ coffee."
+        },
+        "answer": {
+          "text": "love",
+          "accepted": [
+            "love"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "preferences-nouns"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Love significa encantar."
+          },
+          "hint": {
+            "es": "La preferencia es fuerte y positiva."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4e73f4383c905dc406e4b2fb01787cc167ad9c57a6d01223b6ad6a6e92d58a25"
+      },
+      {
+        "id": "en.n1.c68.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la preferencia negativa fuerte."
+        },
+        "answer": {
+          "text": "I hate cats.",
+          "tokens": [
+            "I",
+            "hate",
+            "cats."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "preferences-nouns"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Hate va antes del sustantivo."
+          },
+          "hint": {
+            "es": "I + hate + cats."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dd926219e82cd43016e80fde65614e660b69f976aeb98fd435955c687c6c9619"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n1.c68.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la concordancia correcta con she."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She likes coffee."
+          },
+          {
+            "text": "She like coffee."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "She usa likes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:77744d79f144256f80f4b556998feae2a5c43c102d364665d823b104e50fb26d"
+      },
+      {
+        "id": "en.n1.c68.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: He ___ soccer."
+        },
+        "answer": {
+          "text": "loves",
+          "accepted": [
+            "loves"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "He usa loves."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:45b99fb9697b8627b49507c12d48dad21fd976e9dbba027be8ae934b5edc8a73"
+      },
+      {
+        "id": "en.n1.c68.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena otro gusto general."
+        },
+        "answer": {
+          "text": "They like music.",
+          "tokens": [
+            "They",
+            "like",
+            "music."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "They usa like sin -s."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c49d00cbf14d62b0d93b8bd5f7d895088d05f81169a13a0a36a5d35c7e84cb6c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n1.c68.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase sin artículo innecesario."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We love coffee."
+          },
+          {
+            "text": "We love the coffee."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Coffee general va sin the."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d91b251a968116d7662a6b328ce2003dfdad0f1d20d93cd505e513ccb5879b53"
+      },
+      {
+        "id": "en.n1.c68.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: Ana ___ music."
+        },
+        "answer": {
+          "text": "likes",
+          "accepted": [
+            "likes"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Ana usa likes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c25f1c3c7e36d726083c3ea86d3c86ff97b2a11e1f58f43419946a1b0e232529"
+      },
+      {
+        "id": "en.n1.c68.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la preferencia de él."
+        },
+        "answer": {
+          "text": "He hates cats.",
+          "tokens": [
+            "He",
+            "hates",
+            "cats."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "He usa hates."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d1b5e854661270da0a1383be266fab6a10f1520a2e3382c12f3b801a358fdfdf"
+      },
+      {
+        "id": "en.n1.c68.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la preferencia oída."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I love music."
+          },
+          {
+            "text": "I hate music."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Se oye love music."
+          },
+          "audio": "I love music.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f6473feb0159ca3df673c10d4b950f27a3087297b7e2350aed5790c11839291e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n1.c68.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona verbo y significado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "love",
+              {
+                "es": "encantar"
+              }
+            ],
+            [
+              "hate",
+              {
+                "es": "odiar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Love es encantar; hate es odiar."
+          },
+          "pairs": [
+            [
+              "love",
+              {
+                "es": "encantar"
+              }
+            ],
+            [
+              "hate",
+              {
+                "es": "odiar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:61ad2fb20ef8ccc0d8d54a8ee76f65b65d93d1988479a8bac31677e0e8f0a7dc"
+      },
+      {
+        "id": "en.n1.c68.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: We ___ cats."
+        },
+        "answer": {
+          "text": "like",
+          "accepted": [
+            "like"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "We usa like."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0c03972a2566e047c51e84c010fe5ae9a807120a8f9c16aae41eb93a03452b99"
+      },
+      {
+        "id": "en.n1.c68.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena otra preferencia fuerte."
+        },
+        "answer": {
+          "text": "She loves music.",
+          "tokens": [
+            "She",
+            "loves",
+            "music."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "preferences-nouns"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "She usa loves."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b05dc4d20011979341c489419b7e887c9562a72b5fc72725e4725b280369a5f8"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n1.c68.e01": {
+      "reteach": "en.n1.class-68.t01",
+      "review": "en.n1.c68.r01"
+    },
+    "en.n1.c68.e02": {
+      "reteach": "en.n1.class-68.t02",
+      "review": "en.n1.c68.r02"
+    },
+    "en.n1.c68.e03": {
+      "reteach": "en.n1.class-68.t03",
+      "review": "en.n1.c68.r03"
+    },
+    "en.n1.c68.e04": {
+      "reteach": "en.n1.class-68.t04",
+      "review": "en.n1.c68.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,729 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-12",
+  "title": {
+    "en": "An earlier past event",
+    "es": "Un hecho anterior en el pasado"
+  },
+  "objectives": {
+    "es": [
+      "Formar past perfect con had y participio.",
+      "Distinguir el hecho anterior del hecho posterior."
+    ]
+  },
+  "concepts": [
+    "n3-narrative-turning-points-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-11"
+  ],
+  "usesVocabulary": [
+    "had",
+    "participle",
+    "before",
+    "after",
+    "already",
+    "earlier"
+  ],
+  "usesPatterns": [
+    "n3-narrative-turning-points-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "had",
+      "es": "había"
+    },
+    {
+      "en": "participle",
+      "es": "participio"
+    },
+    {
+      "en": "before",
+      "es": "antes de"
+    },
+    {
+      "en": "after",
+      "es": "después de"
+    },
+    {
+      "en": "already",
+      "es": "ya"
+    },
+    {
+      "en": "earlier",
+      "es": "anterior"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-12.t01",
+      "en": "Past perfect uses had plus a participle.",
+      "es": "Past perfect usa had más un participio.",
+      "explanationEs": "La forma no cambia según el sujeto.",
+      "segments": [
+        {
+          "en": "Past perfect uses",
+          "es": "Past perfect usa"
+        },
+        {
+          "en": "had plus a participle.",
+          "es": "had más un participio."
+        }
+      ],
+      "audioText": "Past perfect uses had plus a participle.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-narrative-turning-points-2"
+    },
+    {
+      "id": "en.n3.class-12.t02",
+      "en": "The bus had left before we arrived.",
+      "es": "El autobús había salido antes de que llegáramos.",
+      "explanationEs": "Before separa el hecho anterior del posterior.",
+      "segments": [
+        {
+          "en": "The bus had",
+          "es": "El autobús había salido"
+        },
+        {
+          "en": "left before we arrived.",
+          "es": "antes de que llegáramos."
+        }
+      ],
+      "audioText": "The bus had left before we arrived.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-narrative-turning-points-2"
+    },
+    {
+      "id": "en.n3.class-12.t03",
+      "en": "After Mia had called, she relaxed.",
+      "es": "Después de que Mia llamó, se relajó.",
+      "explanationEs": "After también permite identificar el orden.",
+      "segments": [
+        {
+          "en": "After Mia had",
+          "es": "Después de que"
+        },
+        {
+          "en": "called, she relaxed.",
+          "es": "Mia llamó, se relajó."
+        }
+      ],
+      "audioText": "After Mia had called, she relaxed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-narrative-turning-points-2"
+    },
+    {
+      "id": "en.n3.class-12.t04",
+      "en": "The earlier event uses past perfect.",
+      "es": "El hecho anterior usa past perfect.",
+      "explanationEs": "El past simple presenta normalmente el hecho posterior.",
+      "segments": [
+        {
+          "en": "The earlier event",
+          "es": "El hecho anterior"
+        },
+        {
+          "en": "uses past perfect.",
+          "es": "usa past perfect."
+        }
+      ],
+      "audioText": "The earlier event uses past perfect.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-narrative-turning-points-2"
+    },
+    {
+      "id": "en.n3.class-12.t05",
+      "en": "I had already eaten when Lee came.",
+      "es": "Ya había comido cuando Lee llegó.",
+      "explanationEs": "Already refuerza que la acción estaba terminada.",
+      "segments": [
+        {
+          "en": "I had already",
+          "es": "Ya había comido"
+        },
+        {
+          "en": "eaten when Lee came.",
+          "es": "cuando Lee llegó."
+        }
+      ],
+      "audioText": "I had already eaten when Lee came.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-narrative-turning-points-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c12.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que marca el hecho anterior."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Nora had left before I arrived."
+          },
+          {
+            "text": "Nora left after I arrived."
+          },
+          {
+            "text": "Nora is leaving when I arrive."
+          }
+        ],
+        "teaches": [
+          "n3-narrative-turning-points-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had left sitúa la salida de Nora antes de mi llegada."
+          },
+          "hint": {
+            "es": "Busca had más participio para el hecho más antiguo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e693f87168bc9203cdb8514afcb960a7a1cd91314b961fad50bfc4a99e7231d9"
+      },
+      {
+        "id": "en.n3.c12.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: The film started after we ___ down."
+        },
+        "answer": {
+          "text": "had sat",
+          "accepted": [
+            "had sat"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-narrative-turning-points-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had sat aclara que nos sentamos antes del inicio."
+          },
+          "hint": {
+            "es": "Usa had y el participio de sit."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2e7d8f1e80fe7d4406ed1d6ca22be2244221a5b16d0a3c3165319016524c140f"
+      },
+      {
+        "id": "en.n3.c12.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el hecho previo a la llamada."
+        },
+        "answer": {
+          "text": "I had already sent the message.",
+          "tokens": [
+            "I",
+            "had",
+            "already",
+            "sent",
+            "the",
+            "message."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-narrative-turning-points-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had sent expresa una acción terminada antes de la llamada."
+          },
+          "hint": {
+            "es": "Pon had before sent y already entre ambos."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:27ae7dc77de2dc39179da86270f43f91c950cd51d965bbf0e2e7dde535e9c14f"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c12.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué ocurrió primero."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Omar reached the café"
+          },
+          {
+            "text": "His friends ordered lunch"
+          },
+          {
+            "text": "They paid together"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had ordered identifica el pedido como el hecho anterior."
+          },
+          "audio": "When Omar reached the café, his friends had ordered lunch.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4828aa6cbaa02d2b832c57e5d956392eaf9e0a6e6ba858ea6f3cb95aee98f0cf"
+      },
+      {
+        "id": "en.n3.c12.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada hecho posterior con su causa anterior."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "She missed the train",
+              {
+                "es": "She had left home late"
+              }
+            ],
+            [
+              "The room was clean",
+              {
+                "es": "They had finished the work"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Cada forma con had explica una situación posterior en past simple."
+          },
+          "pairs": [
+            [
+              "She missed the train",
+              {
+                "es": "She had left home late"
+              }
+            ],
+            [
+              "The room was clean",
+              {
+                "es": "They had finished the work"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9e1908b1cdcb76268c4aa140899821e295bc0da57e86bafacb41b4b3c5a7d65c"
+      },
+      {
+        "id": "en.n3.c12.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Aclara el orden: cerrar la tienda; llegar nosotros."
+        },
+        "answer": {
+          "text": "The staff had closed the shop before we arrived.",
+          "accepted": [
+            "The staff had closed the shop before we arrived.",
+            "When we arrived, the staff had already closed the shop."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las dos variantes marcan el cierre como anterior a nuestra llegada."
+          },
+          "text": "Primero cerraron la tienda. Después llegamos nosotros."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c100fadceadf0721b55941cfa9c4f1fd476338584ab12a03addd5db173811950"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c12.e01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: Eva was tired because she ___ all night."
+        },
+        "answer": {
+          "text": "had worked",
+          "accepted": [
+            "had worked"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had worked presenta el trabajo anterior que causó el cansancio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7df2388089b46a071da502c8dca207e755be214df504ddc0b81feb38ba557554"
+      },
+      {
+        "id": "en.n3.c12.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase: el show ya había empezado al entrar."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The show had begun before we entered."
+          },
+          {
+            "text": "The show began after we entered."
+          },
+          {
+            "text": "The show was beginning as we entered."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had begun confirma que el espectáculo ya había empezado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e61ed323141255e3d62bbb159f01faed7e9169ad5f79f3ce74fdc9a5da1e1e5d"
+      },
+      {
+        "id": "en.n3.c12.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona el hecho más antiguo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Leo found the box"
+          },
+          {
+            "text": "Someone took the tools"
+          },
+          {
+            "text": "Leo bought new tools"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had taken coloca el retiro de las herramientas antes del hallazgo."
+          },
+          "audio": "Leo found an empty box because someone had taken the tools.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:00d9fa257bb14a21ca3e1f8e3377d2751631ed408791289d2e26761e1d96f7b8"
+      },
+      {
+        "id": "en.n3.c12.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Explica el orden: perder la llave; esperar fuera."
+        },
+        "answer": {
+          "text": "Sam waited outside because he had lost his key.",
+          "accepted": [
+            "Sam waited outside because he had lost his key.",
+            "Because Sam had lost his key, he waited outside the flat."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes conectan la pérdida anterior con la espera posterior."
+          },
+          "text": "Primero Sam perdió la llave. Después esperó fuera del piso."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e139a3487f238bd839637a9b511b6258dcd90c610d000526ee10ceb4f409ede1"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c12.r01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la causa anterior del cierre de la carretera."
+        },
+        "answer": {
+          "text": "A tree had fallen across the road.",
+          "tokens": [
+            "A",
+            "tree",
+            "had",
+            "fallen",
+            "across",
+            "the",
+            "road."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had fallen explica por qué la carretera quedó cerrada."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:26e1e1eddf792d7ddee0a48079ce09bb11aee90553a3262989a040d6aa483500"
+      },
+      {
+        "id": "en.n3.c12.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué pasó primero en esta pareja de hechos?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The guests arrived"
+          },
+          {
+            "text": "Maya had prepared dinner"
+          },
+          {
+            "text": "They ate dessert"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Had prepared muestra que la cena estaba lista antes de la llegada."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9990c1b1e480a00b754ceadd8d02888091ea036c65cc58ce4a5248c20c7ceffd"
+      },
+      {
+        "id": "en.n3.c12.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Une los hechos: cargar el teléfono; comenzar el viaje."
+        },
+        "answer": {
+          "text": "I had charged my phone before the journey began.",
+          "accepted": [
+            "I had charged my phone before the journey began.",
+            "Before the journey began, I had fully charged my phone."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-narrative-turning-points-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Ambas respuestas mantienen el teléfono cargado como hecho previo."
+          },
+          "text": "El teléfono se cargó primero. El viaje comenzó después."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:50ea75b96fab7176fe1653e94dbdec808e6681e329eceeb68cae9a6aa7ac5a80"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c12.e01": {
+      "reteach": "en.n3.class-12.t04",
+      "review": "en.n3.c12.r01"
+    },
+    "en.n3.c12.e02": {
+      "reteach": "en.n3.class-12.t02",
+      "review": "en.n3.c12.r02"
+    },
+    "en.n3.c12.e03": {
+      "reteach": "en.n3.class-12.t03",
+      "review": "en.n3.c12.r02"
+    },
+    "en.n3.c12.e04": {
+      "reteach": "en.n3.class-12.t05",
+      "review": "en.n3.c12.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

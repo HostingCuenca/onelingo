@@ -13,6 +13,7 @@ Riesgo: el checkpoint incluye ~244 MB de modelos GLB; subirlo a GitHub sin Git L
 ## DEC-002 — Conservar la escala interna 0–10
 
 Fecha: 2026-09-26
+Estado: reemplazada para la nueva versión curricular por DEC-020; se conserva únicamente como interpretación del progreso histórico.
 Problema: se propuso reasignar niveles para que 10 = C2.
 Decisión: se conserva 0 = Fundamentos, 1–2 A1, 3–4 A2, 5–6 B1, 7–8 B2, 9–10 C1 (`lib/core/diagnostico.dart:320`). C2 queda en el modelo curricular como `cefr: C2`, `estado: planificado`, `nivelInterno: null` (reservado).
 Motivo: cambiar la escala exige migrar progreso, diagnóstico, exámenes, backend e interfaz.
@@ -139,3 +140,43 @@ Fecha: 2026-09-26 (pedido por el usuario; referencia Duolingo)
 Decisión: al aprobar una unidad o repaso, celebración con Lumo, confeti, fichas animadas (XP ganada, precisión, tiempo) y sonido «completado»; al completar un nivel, trofeo y fanfarria «nivel». Las lecciones antiguas usan la misma celebración (aciertos, precisión, racha). Respeta sonido/animaciones desactivados y movimiento reducido. En web se precarga la fuente de la escritura que se estudia para evitar cuadros vacíos.
 Archivos afectados: `lib/features/ruta/celebracion.dart`, `unidad_screen.dart`, `lesson_result_screen.dart`, `efectos.dart`, `assets/sfx/nivel.wav`, `lib/main.dart`.
 Riesgo: la XP mostrada es la ganada en la sesión (las repeticiones no suman XP).
+
+## DEC-017 — Ruta base editorial, sin tutor IA obligatorio
+
+Fecha: 2026-09-27 (decidido por el usuario)
+Problema: el currículo maestro del cliente describe «práctica con IA», pero depender de generación en tiempo de ejecución impide controlar secuencia, respuestas, dificultad, coste y reproducibilidad.
+Decisión: enseñanza, práctica, evaluación y repaso de la ruta base usan contenido editorial creado, revisado y versionado por OneLingo. El tutor IA queda como práctica opcional separada y nunca es requisito para completar una clase o nivel.
+Motivo: asegurar calidad pedagógica, funcionamiento offline/degradado y medición comparable.
+Alternativas descartadas: generar ejercicios o repasos en tiempo de ejecución; usar el tutor como paso obligatorio.
+Archivos afectados: diseño en `METODOLOGIA_EDITORIAL_10X100.md` y `BIBLIOTECA_EJERCICIOS_V1.md`; implementación pendiente.
+Riesgo: aumenta el volumen editorial y exige herramientas de autoría, validación y revisión lingüística.
+
+## DEC-018 — Diez niveles de cien clases por idioma
+
+Fecha: 2026-09-27 (decidido por el usuario)
+Problema: el PDF del cliente fija 10 × 100, mientras la ruta actual contiene 109 clases de Nivel 1–10 entre los diez idiomas y cobertura desigual.
+Decisión: cada idioma tendrá exactamente cien clases en cada nivel interno 1–10. Fundamentos (`f0`) se conserva como preparación adaptativa fuera de esas 1.000 clases. Se comparte el contrato y los resultados MCER, pero no se traduce la secuencia gramatical inglesa.
+Motivo: cumplir la estructura comercial sin ignorar escritura, gramática, pronunciación y registro propios de cada idioma.
+Alternativas descartadas: traducir 1.000 clases inglesas; contar F0 dentro de las cien del Nivel 1; poblar solo títulos.
+Archivos afectados: `INVENTARIO_10X100_IDIOMAS.md`, `PLAN_NIVEL1_INGLES_100.md` y futuros manifiestos por idioma.
+Riesgo: 10.000 clases requieren producción por lotes, QA automatizado y revisión lingüística; no deben publicarse de una sola vez.
+
+## DEC-019 — Diagnóstico acotado y alfabetización no omitible
+
+Fecha: 2026-09-27
+Problema: un diagnóstico podía apuntar por encima del último nivel publicado y dejar la ruta sin recomendación. En zh/ja/ko/ru, el mismo nivel global podía volver opcionales unidades de escritura no demostradas.
+Decisión: la recomendación se acota al mayor nivel con contenido editorial cargado. Las unidades F0 de `escritura` en zh, ja, ko y ru no son omitibles por nivel global; requieren evidencia específica. Los repasos vencidos o en refuerzo tienen prioridad sobre contenido nuevo.
+Motivo: siempre debe existir un siguiente paso accionable y una habilidad oral no demuestra alfabetización.
+Archivos afectados: `lib/core/aprendizaje/dominio.dart`, `providers.dart`, `test/simulacion_estudiantes_test.dart`, `test/ruta_dominio_test.dart`.
+Riesgo: un alumno alfabetizado puede repetir contenido hasta que el diagnóstico por competencia se implemente; es preferible a omitir una escritura desconocida.
+
+## DEC-020 — Adoptar la escala comercial del cliente
+
+Fecha: 2026-09-27 (decidido por el usuario)
+Problema: la escala histórica repartía A1, A2, B1 y B2 entre pares de niveles internos, mientras el currículo contratado define diez niveles comerciales con cien clases cada uno. El nuevo mapa inglés de N1 concentra A1 completo y por tanto no puede convivir sin versión con N1–N2 = A1.
+Decisión: la nueva versión curricular usa N1 = A1; N2 = A2; N3 = entrada B1; N4 = consolidación B1; N5 = entrada B2; N6 = consolidación B2; N7 = B2 alto; N8 = entrada C1; N9 = C1 profesional/avanzado; N10 = dominio C1. Son bandas pedagógicas internas, no acreditaciones oficiales. C2 queda fuera de la promesa de los diez niveles hasta disponer de alcance y evaluación propios.
+Migración: el progreso histórico conserva su escala y valor original. La equivalencia conservadora es legado 1–2 → cliente 1, 3–4 → 2, 5–6 → 3, 7–8 → 5 y 9–10 → 8. Los niveles intermedios superiores de cada banda se obtienen con evidencia nueva, no se conceden automáticamente.
+Motivo: respetar la estructura del cliente, evitar duplicar A1 y mantener resultados honestos en los niveles avanzados.
+Alternativas descartadas: conservar N1–N2 = A1; llamar C2 o «bilingüe» al Nivel 10 sin evidencia suficiente; sobrescribir el nivel histórico del usuario.
+Archivos afectados: diagnóstico, serialización de progreso, manifiestos curriculares, rutas inglesas y pruebas de migración.
+Riesgo: la interfaz antigua que interprete `nivelInicial` sin versión debe mantenerse sobre aliases hasta completar la migración.

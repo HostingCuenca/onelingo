@@ -1,0 +1,796 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 2,
+  "cefr": "A2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n2.class-80",
+  "title": {
+    "en": "Health conversation",
+    "es": "Conversación sobre salud"
+  },
+  "objectives": {
+    "es": [
+      "Sostener una conversación de salud A2 sin ofrecer un diagnóstico.",
+      "Integrar síntomas, consejo general, cita, relato pasado e instrucciones.",
+      "Confirmar por escrito un plan completo con roles y datos concretos."
+    ]
+  },
+  "concepts": [
+    "n2-health-conversation"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n2.class-79"
+  ],
+  "usesVocabulary": [
+    "symptom",
+    "advice",
+    "appointment",
+    "describe",
+    "confirm",
+    "conversation",
+    "health",
+    "follow-up"
+  ],
+  "usesPatterns": [
+    "n2-symptoms-body-states",
+    "n2-advice-common-problems",
+    "n2-appointments-instructions",
+    "n2-describe-health-event",
+    "n2-health-conversation"
+  ],
+  "vocabulary": [
+    {
+      "en": "symptom",
+      "es": "síntoma"
+    },
+    {
+      "en": "advice",
+      "es": "consejo"
+    },
+    {
+      "en": "appointment",
+      "es": "cita"
+    },
+    {
+      "en": "describe",
+      "es": "describir"
+    },
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    },
+    {
+      "en": "conversation",
+      "es": "conversación"
+    },
+    {
+      "en": "health",
+      "es": "salud"
+    },
+    {
+      "en": "follow-up",
+      "es": "seguimiento"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n2.class-80.t01",
+      "en": "Patient: I have a headache and feel dizzy. Receptionist: Thank you. Please describe each symptom.",
+      "es": "Paciente: Tengo dolor de cabeza y mareo. Recepción: Gracias. Describe cada síntoma.",
+      "explanationEs": "Una conversación de health comienza con un symptom descrito de forma concreta.",
+      "segments": [
+        {
+          "en": "Patient: I have a headache and feel",
+          "es": "Paciente: Tengo dolor de cabeza y"
+        },
+        {
+          "en": "dizzy. Receptionist: Thank you. Please describe each symptom.",
+          "es": "mareo. Recepción: Gracias. Describe cada síntoma."
+        }
+      ],
+      "audioText": "Patient: I have a headache and feel dizzy. Receptionist: Thank you. Please describe each symptom.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-health-conversation"
+    },
+    {
+      "id": "en.n2.class-80.t02",
+      "en": "Health worker: You should sit down and rest. This is general advice, not a diagnosis.",
+      "es": "Profesional: Deberías sentarte y descansar. Es consejo general, no diagnóstico.",
+      "explanationEs": "Advice seguro recomienda una acción y declara su alcance limitado.",
+      "segments": [
+        {
+          "en": "Health worker: You should sit down and",
+          "es": "Profesional: Deberías sentarte y descansar."
+        },
+        {
+          "en": "rest. This is general advice, not a diagnosis.",
+          "es": "Es consejo general, no diagnóstico."
+        }
+      ],
+      "audioText": "Health worker: You should sit down and rest. This is general advice, not a diagnosis.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-health-conversation"
+    },
+    {
+      "id": "en.n2.class-80.t03",
+      "en": "Patient: I would like an appointment. Receptionist: I can book Friday at two.",
+      "es": "Paciente: Quisiera una cita. Recepción: Puedo reservar el viernes a las dos.",
+      "explanationEs": "Los roles permiten pedir y ofrecer una appointment con datos precisos.",
+      "segments": [
+        {
+          "en": "Patient: I would like an appointment.",
+          "es": "Paciente: Quisiera una cita. Recepción: Puedo"
+        },
+        {
+          "en": "Receptionist: I can book Friday at two.",
+          "es": "reservar el viernes a las dos."
+        }
+      ],
+      "audioText": "Patient: I would like an appointment. Receptionist: I can book Friday at two.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-health-conversation"
+    },
+    {
+      "id": "en.n2.class-80.t04",
+      "en": "Receptionist: Please arrive early. Patient: Could you confirm the time?",
+      "es": "Recepción: Llega antes. Paciente: ¿Podría confirmar la hora?",
+      "explanationEs": "Confirm verifica la información antes del follow-up.",
+      "segments": [
+        {
+          "en": "Receptionist: Please arrive early. Patient:",
+          "es": "Recepción: Llega antes. Paciente:"
+        },
+        {
+          "en": "Could you confirm the time?",
+          "es": "¿Podría confirmar la hora?"
+        }
+      ],
+      "audioText": "Receptionist: Please arrive early. Patient: Could you confirm the time?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-health-conversation"
+    },
+    {
+      "id": "en.n2.class-80.t05",
+      "en": "Patient: This morning I felt tired while working. Health worker: You should rest; this is general advice, not a diagnosis. Receptionist: Your appointment is Tuesday at nine. Please arrive ten minutes early with the form. Patient: Thank you; I confirm the plan.",
+      "es": "Paciente: Esta mañana me sentí cansado mientras trabajaba. Profesional: Deberías descansar; es consejo general, no diagnóstico. Recepción: Tu cita es el martes a las nueve. Llega diez minutos antes con el formulario. Paciente: Gracias; confirmo el plan.",
+      "explanationEs": "El modelo integra relato, consejo, cita, instrucciones y confirmación en una conversation completa.",
+      "segments": [
+        {
+          "en": "Patient: This morning I felt tired while working. Health worker: You should rest; this is general advice, not a diagnosis. Receptionist:",
+          "es": "Paciente: Esta mañana me sentí cansado mientras trabajaba. Profesional: Deberías descansar; es consejo general, no diagnóstico. Recepción: Tu"
+        },
+        {
+          "en": "Your appointment is Tuesday at nine. Please arrive ten minutes early with the form. Patient: Thank you; I confirm the plan.",
+          "es": "cita es el martes a las nueve. Llega diez minutos antes con el formulario. Paciente: Gracias; confirmo el plan."
+        }
+      ],
+      "audioText": "Patient: This morning I felt tired while working. Health worker: You should rest; this is general advice, not a diagnosis. Receptionist: Your appointment is Tuesday at nine. Please arrive ten minutes early with the form. Patient: Thank you; I confirm the plan.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n2-health-conversation"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n2.c80.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la apertura que comunica dos síntomas con claridad."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I would like an appointment for my headache."
+          },
+          {
+            "text": "I have a headache and feel dizzy."
+          },
+          {
+            "text": "You should rest if you feel dizzy."
+          }
+        ],
+        "teaches": [
+          "n2-health-conversation"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Have a headache y feel dizzy abren la conversación con dos datos corporales."
+          },
+          "hint": {
+            "es": "Busca una descripción directa, sin diagnóstico ni consejo todavía."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d00256d01c53ef247b94de5eedc39e473b4b0a060bbf65aa85f9ee96347ff41"
+      },
+      {
+        "id": "en.n2.c80.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa la respuesta profesional: You ___ sit down and rest."
+        },
+        "answer": {
+          "text": "should",
+          "accepted": [
+            "should"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-health-conversation"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should sit down and rest ofrece consejo general con fuerza adecuada."
+          },
+          "hint": {
+            "es": "La respuesta es una recomendación, no una obligación ni un diagnóstico."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6386169a93c7ef6dc03a48f84a2fe560932e45c2e39c9a3c670b776114b0632a"
+      },
+      {
+        "id": "en.n2.c80.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la petición y la confirmación de una cita."
+        },
+        "answer": {
+          "text": "I would like an appointment; could you confirm the time?",
+          "tokens": [
+            "I",
+            "would",
+            "like",
+            "an",
+            "appointment;",
+            "could",
+            "you",
+            "confirm",
+            "the",
+            "time?"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n2-health-conversation"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La secuencia primero solicita la cita y después pide confirmar la hora."
+          },
+          "hint": {
+            "es": "Coloca la petición antes de la pregunta de confirmación."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6a073190dc172d6896ba17c2fe7257d02762ffba8234048d990d1f242786f943"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n2.c80.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe dos turnos: síntoma y consejo general."
+        },
+        "answer": {
+          "text": "Patient: I have a cough and a sore throat. Health worker: You should drink water and rest.",
+          "accepted": [
+            "Patient: I have a cough and a sore throat. Health worker: You should drink water and rest.",
+            "Patient: I have a sore throat and a cough. Health worker: You should rest and drink water."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-symptoms-body-states",
+          "n2-advice-common-problems",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las variantes mantienen roles, dos síntomas y dos acciones de autocuidado."
+          },
+          "text": "Paciente: tos y dolor de garganta. Profesional: beber agua y descansar."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a760a74db3da0c0dddd38d58d2a609e8240b1324a0192cacd0e9748182b0df30"
+      },
+      {
+        "id": "en.n2.c80.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y selecciona el dato que la recepción confirma."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "A Friday appointment at two"
+          },
+          {
+            "text": "A Thursday visit with no time"
+          },
+          {
+            "text": "A Friday appointment at twelve"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-appointments-instructions",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Reception confirma Friday at two; early es una instrucción, no una nueva hora."
+          },
+          "audio": "Receptionist: Your appointment is Friday at two. Please arrive early.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:58bf3c543eb842f65ade0bfda593fb9636a5e08f3a81d81964c1ff6918d4a046"
+      },
+      {
+        "id": "en.n2.c80.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada turno con la función que cumple."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Yesterday I fell near the door",
+              {
+                "es": "describe lo sucedido"
+              }
+            ],
+            [
+              "Could you confirm the time?",
+              {
+                "es": "verifica la cita"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-appointments-instructions",
+          "n2-describe-health-event",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Un turno relata el evento pasado y el otro solicita confirmación logística."
+          },
+          "pairs": [
+            [
+              "Yesterday I fell near the door",
+              {
+                "es": "describe lo sucedido"
+              }
+            ],
+            [
+              "Could you confirm the time?",
+              {
+                "es": "verifica la cita"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c73e71a84159265632b425c2ede416851992959387bef8120467ad3c539d62ab"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n2.c80.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "El paciente informa mareo y dolor de espalda. Elige su turno."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "You should arrive early with a form."
+          },
+          {
+            "text": "I would like Friday at two."
+          },
+          {
+            "text": "I feel dizzy and have pain in my back."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-symptoms-body-states",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La opción correcta informa mareo y dolor de espalda sin añadir consejo ni cita."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6679b1e336a19b8352c93d80e5525c156f51bb4b82675c5ae503e9a2b25d447f"
+      },
+      {
+        "id": "en.n2.c80.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Usa should para aconsejar: You ___ avoid standing while dizzy."
+        },
+        "answer": {
+          "text": "should",
+          "accepted": [
+            "should"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-advice-common-problems",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Should comunica consejo general sin convertirlo en diagnóstico o garantía."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:52e5b030d0cce38ba45565d6c2e4a6f128bc47d38c7d133688c8d45f23f7cb6b"
+      },
+      {
+        "id": "en.n2.c80.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige todos los datos de la cita e instrucciones."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Monday at nine; arrive early; bring the form"
+          },
+          {
+            "text": "Monday at ten; arrive early; bring an ID"
+          },
+          {
+            "text": "Tuesday at nine; arrive on time; bring the form"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n2-appointments-instructions",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La opción conserva Monday at nine, diez minutos antes y el formulario."
+          },
+          "audio": "Your appointment is Monday at nine. Arrive ten minutes early and bring the form.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:28b121cda590afffb1c7a7664d31b28ebfa68f7ca2833201238133d9931cb9a8"
+      },
+      {
+        "id": "en.n2.c80.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta el diálogo con los datos indicados y conserva los cinco pasos."
+        },
+        "answer": {
+          "text": "Patient: Yesterday I felt dizzy, fell, and hurt my knee. It still hurts. Health worker: You should sit down and rest; this is general advice, not a diagnosis. Patient: I would like an appointment for Thursday at 11:00. Receptionist: Confirmed. Please arrive ten minutes early and bring the form. Patient: Thank you. I confirm the time and instructions.",
+          "accepted": [
+            "Patient: Yesterday I felt dizzy, fell, and hurt my knee. It still hurts. Health worker: You should sit down and rest; this is general advice, not a diagnosis. Patient: I would like an appointment for Thursday at 11:00. Receptionist: Confirmed. Please arrive ten minutes early and bring the form. Patient: Thank you. I confirm the time and instructions.",
+            "Patient: I felt dizzy yesterday, fell, and hurt my knee. I still have pain. Health worker: You should rest and sit down; this is general advice, not a diagnosis. Patient: Could I have an appointment on Thursday at 11:00? Receptionist: Yes, it is confirmed. Bring the form and arrive ten minutes early. Patient: Thank you; I confirm the appointment and the instructions."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-symptoms-body-states",
+          "n2-advice-common-problems",
+          "n2-appointments-instructions",
+          "n2-describe-health-event",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "El diálogo conserva el evento, estado actual, consejo limitado, cita, instrucciones y cierre."
+          },
+          "text": "Paciente: ayer se mareó, cayó y se lastimó la rodilla; aún tiene dolor. Profesional: consejo general de sentarse y descansar; no es diagnóstico. Paciente: pide cita para jueves 11:00. Recepción: confirma e indica llegar diez minutos antes con formulario. Paciente: confirma el plan."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5ee59827b04e1f189a7db90a0e577f340479cddf42ab4d6f3814d05117d92d24"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n2.c80.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada turno con síntoma o relato pasado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I feel tired now",
+              {
+                "es": "estado actual"
+              }
+            ],
+            [
+              "I fell yesterday",
+              {
+                "es": "hecho pasado"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-symptoms-body-states",
+          "n2-describe-health-event",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recuperación separa cómo se siente alguien ahora de lo que ocurrió antes."
+          },
+          "pairs": [
+            [
+              "I feel tired now",
+              {
+                "es": "estado actual"
+              }
+            ],
+            [
+              "I fell yesterday",
+              {
+                "es": "hecho pasado"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4222cb18ce48ed8452ee700fae52c40fce2564e4dbcdc0528f5df023c89391ad"
+      },
+      {
+        "id": "en.n2.c80.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la cita con hora y las dos instrucciones logísticas."
+        },
+        "answer": {
+          "text": "Your appointment is Wednesday at ten; arrive early and bring the form.",
+          "tokens": [
+            "Your",
+            "appointment",
+            "is",
+            "Wednesday",
+            "at",
+            "ten;",
+            "arrive",
+            "early",
+            "and",
+            "bring",
+            "the",
+            "form."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-appointments-instructions",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recuperación conserva miércoles a las diez, llegada anticipada y formulario."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc1c45fd49ecf6ce9e90003648092f8b018da4626ed8d3dc6f2aeb9cab6f022e"
+      },
+      {
+        "id": "en.n2.c80.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Redacta la recuperación completa con todos los datos dados."
+        },
+        "answer": {
+          "text": "Patient: This morning I had a cough and a sore throat while I was working. Health worker: You should drink water and rest; this is general advice, not a diagnosis. Receptionist: Your appointment is Friday at 2:00. Please arrive fifteen minutes early and bring your ID. Patient: Thank you. I confirm the appointment and instructions.",
+          "accepted": [
+            "Patient: This morning I had a cough and a sore throat while I was working. Health worker: You should drink water and rest; this is general advice, not a diagnosis. Receptionist: Your appointment is Friday at 2:00. Please arrive fifteen minutes early and bring your ID. Patient: Thank you. I confirm the appointment and instructions.",
+            "Patient: While I was working this morning, I had a sore throat and a cough. Health worker: You should rest and drink water; this is general advice, not a diagnosis. Receptionist: I confirm Friday at 2:00. Bring your ID and arrive fifteen minutes early. Patient: Thank you; I confirm the time and instructions."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n2-symptoms-body-states",
+          "n2-advice-common-problems",
+          "n2-appointments-instructions",
+          "n2-describe-health-event",
+          "n2-health-conversation"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recuperación integra los cinco conceptos en un contexto nuevo y completo."
+          },
+          "text": "Paciente: esta mañana tos y dolor de garganta durante el trabajo. Profesional: agua y descanso como consejo general, no diagnóstico. Recepción: cita viernes 2:00; llegar quince minutos antes con identificación. Paciente: confirma."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:da5ed160ae9c5c042a4c64fefc46d8370ce7cae7fb83ce11ace38fbb648c3ca7"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n2.c80.e01": {
+      "reteach": "en.n2.class-80.t01",
+      "review": "en.n2.c80.r01"
+    },
+    "en.n2.c80.e02": {
+      "reteach": "en.n2.class-80.t02",
+      "review": "en.n2.c80.r03"
+    },
+    "en.n2.c80.e03": {
+      "reteach": "en.n2.class-80.t04",
+      "review": "en.n2.c80.r02"
+    },
+    "en.n2.c80.e04": {
+      "reteach": "en.n2.class-80.t05",
+      "review": "en.n2.c80.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n2-symptoms-body-states",
+    "n2-advice-common-problems",
+    "n2-appointments-instructions",
+    "n2-describe-health-event",
+    "n2-health-conversation"
+  ]
+}

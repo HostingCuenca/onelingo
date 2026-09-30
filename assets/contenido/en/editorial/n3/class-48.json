@@ -1,0 +1,893 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 3,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n3.class-48",
+  "title": {
+    "en": "Original message and report",
+    "es": "Mensaje original y reporte"
+  },
+  "objectives": {
+    "es": [
+      "Comparar fuente directa y reporte.",
+      "Detectar cambios de persona, hora o acción."
+    ]
+  },
+  "concepts": [
+    "n3-reported-messages-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n3.class-47"
+  ],
+  "usesVocabulary": [
+    "original",
+    "report",
+    "person",
+    "time",
+    "action",
+    "perspective"
+  ],
+  "usesPatterns": [
+    "n3-reported-messages-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "original",
+      "es": "mensaje fuente"
+    },
+    {
+      "en": "report",
+      "es": "reporte"
+    },
+    {
+      "en": "person",
+      "es": "persona"
+    },
+    {
+      "en": "time",
+      "es": "hora"
+    },
+    {
+      "en": "action",
+      "es": "acción"
+    },
+    {
+      "en": "perspective",
+      "es": "perspectiva"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n3.class-48.t01",
+      "en": "The original source says, I will call at six.",
+      "es": "La fuente original dice: llamaré a las seis.",
+      "explanationEs": "Original identifica el mensaje de partida.",
+      "segments": [
+        {
+          "en": "The original source says,",
+          "es": "La fuente original dice:"
+        },
+        {
+          "en": "I will call at six.",
+          "es": "llamaré a las seis."
+        }
+      ],
+      "audioText": "The original source says, I will call at six.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-3"
+    },
+    {
+      "id": "en.n3.class-48.t02",
+      "en": "The report must preserve the place.",
+      "es": "El reporte debe conservar el lugar.",
+      "explanationEs": "Report se compara con la fuente.",
+      "segments": [
+        {
+          "en": "The report must",
+          "es": "El reporte debe"
+        },
+        {
+          "en": "preserve the place.",
+          "es": "conservar el lugar."
+        }
+      ],
+      "audioText": "The report must preserve the place.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-3"
+    },
+    {
+      "id": "en.n3.class-48.t03",
+      "en": "A person can change from I to she.",
+      "es": "Una persona puede cambiar de I a she.",
+      "explanationEs": "Person cambia por la nueva perspectiva.",
+      "segments": [
+        {
+          "en": "A person can change",
+          "es": "Una persona puede cambiar"
+        },
+        {
+          "en": "from I to she.",
+          "es": "de I a she."
+        }
+      ],
+      "audioText": "A person can change from I to she.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-3"
+    },
+    {
+      "id": "en.n3.class-48.t04",
+      "en": "The time at six must stay exact.",
+      "es": "La hora de las seis debe mantenerse exacta.",
+      "explanationEs": "Time es un dato que no se debe inventar.",
+      "segments": [
+        {
+          "en": "The time at",
+          "es": "La hora de las"
+        },
+        {
+          "en": "six must stay exact.",
+          "es": "seis debe mantenerse exacta."
+        }
+      ],
+      "audioText": "The time at six must stay exact.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-3"
+    },
+    {
+      "id": "en.n3.class-48.t05",
+      "en": "The action call must remain call.",
+      "es": "La acción call debe seguir siendo call.",
+      "explanationEs": "Action conserva lo que hará el hablante.",
+      "segments": [
+        {
+          "en": "The action call",
+          "es": "La acción call"
+        },
+        {
+          "en": "must remain call.",
+          "es": "debe seguir siendo call."
+        }
+      ],
+      "audioText": "The action call must remain call.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-3"
+    },
+    {
+      "id": "en.n3.class-48.t06",
+      "en": "Compare the original source and report: I becomes she, six stays six, and call stays call.",
+      "es": "Compara fuente y reporte: I cambia a she; seis y call se conservan.",
+      "explanationEs": "El modelo revisa persona, hora y acción antes de decidir.",
+      "segments": [
+        {
+          "en": "Compare the original source and report: I becomes",
+          "es": "Compara fuente y reporte: I cambia"
+        },
+        {
+          "en": "she, six stays six, and call stays call.",
+          "es": "a she; seis y call se conservan."
+        }
+      ],
+      "audioText": "Compare the original source and report: I becomes she, six stays six, and call stays call.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n3-reported-messages-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n3.c48.pg01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y detecta el dato modificado."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "person"
+          },
+          {
+            "text": "place"
+          },
+          {
+            "text": "time"
+          }
+        ],
+        "teaches": [
+          "n3-reported-messages-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Five cambia a six; el dato modificado es la hora."
+          },
+          "hint": {
+            "es": "Compara los números de la fuente y el reporte."
+          },
+          "audio": "Original: I arrive at five. Report: Lia said she arrived at six.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8928f6b0f4fd3c5fedef4b3c4115a7bdb8fa4a3ea845c2945c674b85c8dde4c0"
+      },
+      {
+        "id": "en.n3.c48.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué dato permanece igual en ambos mensajes?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The speaker"
+          },
+          {
+            "text": "Room Three"
+          },
+          {
+            "text": "The day"
+          }
+        ],
+        "teaches": [
+          "n3-reported-messages-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Room Three aparece sin cambios en fuente y reporte."
+          },
+          "hint": {
+            "es": "Busca el dato idéntico."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2d9b52c35e7a6cc858865d442e970972b01c10312bc744b40dfd43ad925bf8b7"
+      },
+      {
+        "id": "en.n3.c48.pg03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada cambio con su categoría."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I becomes she",
+              {
+                "es": "person and perspective"
+              }
+            ],
+            [
+              "at two becomes at four",
+              {
+                "es": "time"
+              }
+            ],
+            [
+              "call becomes email",
+              {
+                "es": "action"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n3-reported-messages-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las parejas separan persona, hora y acción."
+          },
+          "hint": {
+            "es": "Observa pronombres, números y verbos."
+          },
+          "pairs": [
+            [
+              "I becomes she",
+              {
+                "es": "person and perspective"
+              }
+            ],
+            [
+              "at two becomes at four",
+              {
+                "es": "time"
+              }
+            ],
+            [
+              "call becomes email",
+              {
+                "es": "action"
+              }
+            ]
+          ]
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:16243fe5c7e4d924d903e3dfecc26ce8aebac2442bce432e96f67adee8be7eca"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n3.c48.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Compara la fuente y el reporte: ¿qué cambió?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "place"
+          },
+          {
+            "text": "speaker"
+          },
+          {
+            "text": "day"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Outside cambia a inside; el lugar no se conservó."
+          },
+          "audio": "Original: We will meet outside. Report: Bo said they would meet inside.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f1061d8f7b1a2e45592e9905578bb995acef365c46e77d930258926e3a2ab184"
+      },
+      {
+        "id": "en.n3.c48.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Fuente: Nia: 'I will print it at nine'. Elige el reporte fiel."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Nia said she would print it at nine."
+          },
+          {
+            "text": "Nia said she would call at nine."
+          },
+          {
+            "text": "Nia said she would print it at ten."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Print y nine conservan los dos datos de la fuente."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6b0a3f704af5badf2cc96cc2e1d7acdbf0fad1790f421b7f4c486024e214b0fd"
+      },
+      {
+        "id": "en.n3.c48.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Corrige el reporte para conservar el día."
+        },
+        "answer": {
+          "text": "Eli said he worked on Monday.",
+          "accepted": [
+            "Eli said he worked on Monday.",
+            "Eli said that he worked on Monday."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Monday restaura el dato temporal de la fuente."
+          },
+          "text": "Fuente: I work on Monday. Reporte incorrecto: Eli said he worked on Tuesday."
+        },
+        "attemptEvidence": {
+          "attempt": "guided",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:80a08d4a40a6d38378f6111b860af8a7af878e0a2fe1345efc2346b28e302b1e"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n3.c48.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el par y marca el cambio."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "speaker"
+          },
+          {
+            "text": "action"
+          },
+          {
+            "text": "place"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Gate cambia a reception, mientras wait se conserva."
+          },
+          "audio": "Original: I will wait at the gate. Report: Uma said she would wait at reception.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6a4264126ea1131caeb2053b316162a31e93a59fda6e61e402b0f369a6c9c701"
+      },
+      {
+        "id": "en.n3.c48.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha fuente y reporte: ¿qué dato se conserva?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "the time at two"
+          },
+          {
+            "text": "the time at three"
+          },
+          {
+            "text": "the place Room Four"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Room Four permanece igual; la hora cambia de dos a tres."
+          },
+          "audio": "Original Iris: The meeting is in Room Four at two. Report: Iris said the meeting was in Room Four at three.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8692f5d5d8aa869482ea9fab6a864e79804e85d6c27207989b58aae2172bf71d"
+      },
+      {
+        "id": "en.n3.c48.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Repara el verbo alterado en el reporte."
+        },
+        "answer": {
+          "text": "Jo said she would deliver the box.",
+          "accepted": [
+            "Jo said she would deliver the box.",
+            "Jo said that she would deliver the box."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Deliver recupera la acción original sin cambiar la perspectiva."
+          },
+          "text": "Fuente: Jo: I will deliver the box. Error: Jo said she would collect the box."
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0f4986a36d9fb1f1e78dfc98d8072db6549e0cf13fda1ccbe55fb085cc13dc8f"
+      },
+      {
+        "id": "en.n3.c48.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha tres fuentes y elige los cambios en orden."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "time / action / person"
+          },
+          {
+            "text": "action / person / time"
+          },
+          {
+            "text": "person / time / action"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "Las fuentes muestran persona, hora y acción modificadas, en ese orden."
+          },
+          "audio": "Pair one. Original Nora: I will call you at six. Report: Nora said she would call me at six. Pair two. Original Omar: The train leaves at seven. Report: Omar said the train left at eight. Pair three. Original Mia: Please email the form. Report: Mia told me to print the form.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5cd71bff89e89c51e81d98539f622679908ef9f6466a3bd32c266b66ee06c620"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n3.c48.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué elemento cambia de my a her?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "action"
+          },
+          {
+            "text": "perspective"
+          },
+          {
+            "text": "time"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "My a her es un cambio de perspectiva personal."
+          }
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:abbb09bf45c386d18252e38b0c8383675c21062219dee9a7d0a00f19d3fb5d48"
+      },
+      {
+        "id": "en.n3.c48.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el dato conservado."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "the speaker name"
+          },
+          {
+            "text": "the verb tense"
+          },
+          {
+            "text": "the time at ten"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "At ten permanece idéntico en ambos mensajes."
+          },
+          "audio": "Original: I open the desk at ten. Report: Kai said he opened the desk at ten.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:27d6f6c3770e3dda19245b357e3813004f4daf640372480bc791892cc35eb451"
+      },
+      {
+        "id": "en.n3.c48.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha tres fuentes nuevas y elige los cambios."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "perspective / clock time / requested action"
+          },
+          {
+            "text": "clock time / perspective / requested action"
+          },
+          {
+            "text": "requested action / clock time / perspective"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n3-reported-messages-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "feedback": {
+            "es": "La recuperación vuelve a distinguir persona, hora y acción."
+          },
+          "audio": "Pair one. Original Tia: I need my pass. Report: Tia said she needed her pass. Pair two. Original Ben: The talk starts at noon. Report: Ben said the talk started at one. Pair three. Original Sol: Please bring water. Report: Sol told me to bring food.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "attemptEvidence": {
+          "attempt": "independent",
+          "evidence": "deterministic",
+          "remediation": "editorial"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4b7f2a86f3378f037a5c92648d86400da8c1c2b060273fc7b045536c37f1d391"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n3.c48.e01": {
+      "reteach": "en.n3.class-48.t02",
+      "review": "en.n3.c48.r02"
+    },
+    "en.n3.c48.e02": {
+      "reteach": "en.n3.class-48.t01",
+      "review": "en.n3.c48.r03"
+    },
+    "en.n3.c48.e03": {
+      "reteach": "en.n3.class-48.t05",
+      "review": "en.n3.c48.r03"
+    },
+    "en.n3.c48.e04": {
+      "reteach": "en.n3.class-48.t06",
+      "review": "en.n3.c48.r03"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

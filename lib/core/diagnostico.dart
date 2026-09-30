@@ -21,6 +21,30 @@ import 'placement.dart';
 /// Banco de preguntas: `assets/contenido/<idioma>/diagnostico.json`
 /// (semilla `tools/contenido/semilla/<idioma>-diagnostico.txt`).
 
+const escalaDiagnosticoLegacy = 'internal-0-10-v1';
+const escalaDiagnosticoCliente = 'client-10-levels-v1';
+
+/// Equivalencia conservadora para ubicar resultados históricos en la escala
+/// comercial. El resultado original nunca se sobreescribe.
+int nivelClienteDesdeLegacy(int nivel) {
+  if (nivel <= 0) return 0;
+  if (nivel <= 2) return 1;
+  if (nivel <= 4) return 2;
+  if (nivel <= 6) return 3;
+  if (nivel <= 8) return 5;
+  return 8;
+}
+
+int nivelClienteDeDiagnostico(Map<String, dynamic>? diagnostico) {
+  if (diagnostico == null) return 1;
+  if (diagnostico['escala'] == escalaDiagnosticoCliente &&
+      diagnostico['nivelCliente'] is num) {
+    return (diagnostico['nivelCliente'] as num).round().clamp(0, 10);
+  }
+  final n = diagnostico['recomendado'];
+  return nivelClienteDesdeLegacy(n is num ? n.round() : 1);
+}
+
 /// Tipos de pregunta: elegir, la más natural, significado de una expresión,
 /// comprensión de un texto corto, situación cotidiana, detectar el error,
 /// completar (escribir la palabra), respuesta corta, escuchar y elegir,
@@ -287,9 +311,14 @@ class ResultadoDiag {
   final List<String> plan;
   final EvaluacionEscritura? escritura;
 
+  String get escala => escalaDiagnosticoLegacy;
+  int get nivelCliente => nivelClienteDesdeLegacy(recomendado);
+
   double get precision => preguntas == 0 ? 0 : aciertos / preguntas;
 
   Map<String, dynamic> toJson() => {
+    'escala': escala,
+    'nivelCliente': nivelCliente,
     'declarado': declarado,
     'nivel': nivel,
     'cefr': cefr,
