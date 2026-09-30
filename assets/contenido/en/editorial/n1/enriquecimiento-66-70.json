@@ -1,0 +1,617 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-66: contexto «lo que sabe hacer su familia» → «lo que saben hacer sus familias» (cada uno habla de la suya).",
+      "Revisadas 66–70: explicaciones correctas y alineadas con los ejercicios (can + verbo base, preguntas con can, like/love/hate + sustantivo sin the, + -ing, contraste can/like); errores plausibles; ítems con una sola respuesta deducible del diálogo.",
+      "Aceptado: avisos del validador «la opción correcta apenas aparece en el diálogo» por usar opciones en español (permitido por el contrato)."
+    ]
+  },
+  "classes": {
+    "en.n1.class-66": {
+      "explicacion": {
+        "titulo": "Can y can't: saber o poder hacer algo",
+        "texto": "Can expresa capacidad: lo que sabes o puedes hacer. Can't es la negativa. Después de can va el verbo en forma base, sin to: I can swim, no «I can to swim». Can nunca cambia (I can, she can, they can) y el verbo tampoco lleva -s con he o she: She can cook, no «She can cooks». En español distinguimos «sé nadar» y «puedo nadar»; en inglés las dos ideas se dicen con can."
+      },
+      "patron": {
+        "texto": "Sujeto + can/can't + verbo base:",
+        "formula": [
+          {
+            "texto": "Ana",
+            "nota": "sujeto: cualquier persona"
+          },
+          {
+            "texto": "can",
+            "nota": "igual con todos los sujetos"
+          },
+          {
+            "texto": "speak",
+            "nota": "verbo base: sin to y sin -s"
+          },
+          {
+            "texto": "Spanish.",
+            "nota": "el resto de la frase"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Afirmativa",
+          "Negativa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I can swim."
+            },
+            {
+              "texto": "I can't swim."
+            }
+          ],
+          [
+            {
+              "texto": "She can cook."
+            },
+            {
+              "texto": "She can't cook."
+            }
+          ],
+          [
+            {
+              "texto": "They can dance."
+            },
+            {
+              "texto": "They can't dance."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can to swim.",
+          "correcto": "I can swim.",
+          "explicacion": "Después de can el verbo va directo, sin to."
+        },
+        {
+          "incorrecto": "She can cooks.",
+          "correcto": "She can cook.",
+          "explicacion": "Con can el verbo no lleva -s, aunque el sujeto sea she o he."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo están en el parque y hablan de lo que saben hacer sus familias.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I can swim. My brother Tom can't swim.",
+            "traduccion": "Yo sé nadar. Mi hermano Tom no sabe nadar."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My sister Sara can't swim. She can dance.",
+            "traduccion": "Mi hermana Sara no sabe nadar. Sabe bailar."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And your father?",
+            "traduccion": "¿Y tu padre?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "He can drive. He can't cook.",
+            "traduccion": "Sabe manejar. No sabe cocinar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sabe hacer Sara, la hermana de Leo?",
+          "opciones": [
+            {
+              "es": "Bailar."
+            },
+            {
+              "es": "Nadar."
+            },
+            {
+              "es": "Manejar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «My sister Sara can't swim. She can dance». Sara sabe bailar, pero no sabe nadar."
+        }
+      }
+    },
+    "en.n1.class-67": {
+      "explicacion": {
+        "titulo": "Preguntas con can y respuestas cortas",
+        "texto": "Para preguntar por una capacidad, can va delante del sujeto: Can you swim? (¿Sabes nadar?). No se usa do ni does: se dice Can she cook?, no «Does she can cook?». El verbo sigue en forma base. Las respuestas cortas repiten can: Yes, I can. / No, I can't. En español basta con «sí» o «no», pero en inglés es más natural añadir el sujeto y can. Can también sirve para ofrecer ayuda: Can I help?"
+      },
+      "patron": {
+        "texto": "Can + sujeto + verbo base + ?",
+        "formula": [
+          {
+            "texto": "Can",
+            "nota": "va primero en la pregunta"
+          },
+          {
+            "texto": "you",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "drive?",
+            "nota": "verbo base, sin -s"
+          },
+          {
+            "texto": "No, I can't.",
+            "nota": "respuesta corta: sujeto + can o can't"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Sí",
+          "No"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Can you swim?"
+            },
+            {
+              "texto": "Yes, I can."
+            },
+            {
+              "texto": "No, I can't."
+            }
+          ],
+          [
+            {
+              "texto": "Can she cook?"
+            },
+            {
+              "texto": "Yes, she can."
+            },
+            {
+              "texto": "No, she can't."
+            }
+          ],
+          [
+            {
+              "texto": "Can they dance?"
+            },
+            {
+              "texto": "Yes, they can."
+            },
+            {
+              "texto": "No, they can't."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Do you can swim?",
+          "correcto": "Can you swim?",
+          "explicacion": "Con can no se usa do: can pasa delante del sujeto."
+        },
+        {
+          "incorrecto": "Can you drive? Yes, I do.",
+          "correcto": "Can you drive? Yes, I can.",
+          "explicacion": "La respuesta corta repite el verbo de la pregunta: can."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom preparan la cena en casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Can you cook, Tom?",
+            "traduccion": "¿Sabes cocinar, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, I can't. Can you?",
+            "traduccion": "No, no sé. ¿Y tú?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, I can. Can you help?",
+            "traduccion": "Sí, sé. ¿Puedes ayudar?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, I can.",
+            "traduccion": "Sí, puedo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién sabe cocinar?",
+          "opciones": [
+            {
+              "es": "Ana."
+            },
+            {
+              "es": "Tom."
+            },
+            {
+              "es": "Ninguno de los dos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «No, I can't» y Ana responde «Yes, I can». Solo Ana sabe cocinar."
+        }
+      }
+    },
+    "en.n1.class-68": {
+      "explicacion": {
+        "titulo": "Like, love y hate con cosas",
+        "texto": "Like (gustar), love (encantar) y hate (odiar) funcionan distinto que en español. En español la cosa es el sujeto («me gusta la música»); en inglés la persona va primero y es el sujeto: I like music. Con he, she o un nombre, el verbo lleva -s: she likes, he loves, Ana hates. Para gustos en general no se usa the: I love coffee, no «I love the coffee». Si la cosa se puede contar, va en plural: I hate cats."
+      },
+      "patron": {
+        "texto": "Persona + like/love/hate + cosa en general:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "la persona va primero"
+          },
+          {
+            "texto": "likes",
+            "nota": "con he/she el verbo lleva -s"
+          },
+          {
+            "texto": "music.",
+            "nota": "gusto general: sin the"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Significado",
+          "Con he/she"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "like"
+            },
+            {
+              "texto": "gustar"
+            },
+            {
+              "texto": "likes"
+            }
+          ],
+          [
+            {
+              "texto": "love"
+            },
+            {
+              "texto": "encantar"
+            },
+            {
+              "texto": "loves"
+            }
+          ],
+          [
+            {
+              "texto": "hate"
+            },
+            {
+              "texto": "odiar"
+            },
+            {
+              "texto": "hates"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I like the music.",
+          "correcto": "I like music.",
+          "explicacion": "Para hablar de gustos en general no se pone the delante de la cosa."
+        },
+        {
+          "incorrecto": "She like coffee.",
+          "correcto": "She likes coffee.",
+          "explicacion": "Con she, he o un nombre, like lleva -s: likes."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y su hermana Sara desayunan en la cocina y hablan de gustos.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I like music. Do you like music, Sara?",
+            "traduccion": "Me gusta la música. ¿Te gusta la música, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, I love music!",
+            "traduccion": "¡Sí, me encanta la música!"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Our father loves coffee.",
+            "traduccion": "A nuestro padre le encanta el café."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. Our mother hates coffee. She likes milk.",
+            "traduccion": "Sí. Nuestra madre odia el café. Le gusta la leche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a quién no le gusta el café?",
+          "opciones": [
+            {
+              "es": "A la madre de Carlos y Sara."
+            },
+            {
+              "es": "Al padre de Carlos y Sara."
+            },
+            {
+              "es": "A Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Our mother hates coffee». Al padre, en cambio, le encanta (loves coffee)."
+        }
+      }
+    },
+    "en.n1.class-69": {
+      "explicacion": {
+        "titulo": "Like, love y hate + actividad con -ing",
+        "texto": "Cuando lo que te gusta es una actividad, el verbo va con -ing: I like swimming (me gusta nadar). En español usamos el infinitivo («nadar»), por eso es fácil decir «I like swim», pero es incorrecto. Si el verbo termina en -e, se quita la e: dance → dancing; y swim dobla la m: swimming. Con he o she, like/love/hate llevan -s y la actividad sigue con -ing: She likes reading. La actividad puede tener más palabras: Leo loves playing soccer."
+      },
+      "patron": {
+        "texto": "Persona + like/love/hate + verbo con -ing:",
+        "formula": [
+          {
+            "texto": "Leo",
+            "nota": "sujeto: he"
+          },
+          {
+            "texto": "loves",
+            "nota": "con he/she: -s"
+          },
+          {
+            "texto": "playing soccer.",
+            "nota": "la actividad, con -ing"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Con -ing"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "read"
+            },
+            {
+              "texto": "reading"
+            }
+          ],
+          [
+            {
+              "texto": "cook"
+            },
+            {
+              "texto": "cooking"
+            }
+          ],
+          [
+            {
+              "texto": "play"
+            },
+            {
+              "texto": "playing"
+            }
+          ],
+          [
+            {
+              "texto": "dance"
+            },
+            {
+              "texto": "dancing (se quita la e)"
+            }
+          ],
+          [
+            {
+              "texto": "swim"
+            },
+            {
+              "texto": "swimming (se dobla la m)"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I like swim.",
+          "correcto": "I like swimming.",
+          "explicacion": "Después de like, love o hate, la actividad va con -ing, no en forma base."
+        },
+        {
+          "incorrecto": "She like cooking.",
+          "correcto": "She likes cooking.",
+          "explicacion": "Con she, like lleva -s; la actividad conserva -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom están en la escuela y hablan de lo que les gusta hacer el fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I love dancing. And you, Tom?",
+            "traduccion": "Me encanta bailar. ¿Y a ti, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I hate dancing. I love playing soccer.",
+            "traduccion": "Odio bailar. Me encanta jugar fútbol."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My brother Leo likes reading.",
+            "traduccion": "A mi hermano Leo le gusta leer."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My sister likes swimming.",
+            "traduccion": "A mi hermana le gusta nadar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué actividad odia Tom?",
+          "opciones": [
+            {
+              "es": "Bailar."
+            },
+            {
+              "es": "Jugar fútbol."
+            },
+            {
+              "es": "Nadar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I hate dancing. I love playing soccer». Odia bailar."
+        }
+      }
+    },
+    "en.n1.class-70": {
+      "explicacion": {
+        "titulo": "Can o like: saber hacer y gustar",
+        "texto": "Esta clase une dos ideas. Can habla de capacidad: I can swim (sé nadar). Like, love y hate hablan de gustos: I like swimming (me gusta nadar). Saber hacer algo no significa que te guste: She can cook, but she hates cooking. Fíjate en la forma: después de can va el verbo base (swim); después de like, love o hate va una actividad con -ing (swimming) o una cosa (music). Para preguntar: Can you…? (capacidad) y Do you like…? (gusto). Responde con la misma palabra: Yes, I can. / Yes, I do."
+      },
+      "patron": {
+        "texto": "Capacidad con can + gusto con like/love/hate:",
+        "formula": [
+          {
+            "texto": "She can",
+            "nota": "capacidad: can"
+          },
+          {
+            "texto": "cook,",
+            "nota": "verbo base, sin -ing"
+          },
+          {
+            "texto": "but she hates",
+            "nota": "gusto: hate con -s por she"
+          },
+          {
+            "texto": "cooking.",
+            "nota": "actividad con -ing"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Idea",
+          "Pregunta",
+          "Respuesta corta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Capacidad (can)"
+            },
+            {
+              "texto": "Can you swim?"
+            },
+            {
+              "texto": "Yes, I can. / No, I can't."
+            }
+          ],
+          [
+            {
+              "texto": "Gusto (like)"
+            },
+            {
+              "texto": "Do you like swimming?"
+            },
+            {
+              "texto": "Yes, I do. / No, I don't."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can swimming.",
+          "correcto": "I can swim.",
+          "explicacion": "Después de can va el verbo base; el -ing es para like, love y hate."
+        },
+        {
+          "incorrecto": "Can you like music?",
+          "correcto": "Do you like music?",
+          "explicacion": "Para preguntar por gustos se usa do, no can."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana visita a Leo en su casa y ve una guitarra.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Can you play the guitar, Leo?",
+            "traduccion": "¿Sabes tocar la guitarra, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, I can, but I don't like playing the guitar.",
+            "traduccion": "Sí, sé, pero no me gusta tocar la guitarra."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Oh! Do you like music?",
+            "traduccion": "¡Oh! ¿Te gusta la música?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, I do. I love music and I like dancing.",
+            "traduccion": "Sí. Me encanta la música y me gusta bailar."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I can't dance, but I love dancing!",
+            "traduccion": "No sé bailar, ¡pero me encanta bailar!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es cierto sobre Leo?",
+          "opciones": [
+            {
+              "es": "Sabe tocar la guitarra, pero no le gusta tocarla."
+            },
+            {
+              "es": "No sabe tocar la guitarra."
+            },
+            {
+              "es": "No le gusta la música."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Yes, I can, but I don't like playing the guitar». Sabe tocarla, pero no le gusta."
+        }
+      }
+    }
+  }
+}

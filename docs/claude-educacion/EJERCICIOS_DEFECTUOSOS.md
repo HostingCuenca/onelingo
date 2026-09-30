@@ -73,3 +73,11 @@ Registro acumulado por autores y revisores del enriquecimiento. No se corrigen e
 | n3.c46.pg03, c46.p02, c47.p01, c49.p01 | Pares de vocabulario de relleno | autor N3 31–50 |
 | n3.c40.pg02, c47.pg03, c49.pg02, c50.pg03 | Pista irrelevante | autor N3 31–50 |
 | n3.c35.pg02, c35.pg03, c34.e04, c35.e03, c35.e04, c37.p03, c37.e03, c39.p03, c38.p03, c38.e04 | Inglés poco natural o modelo incoherente | autor N3 31–50 |
+| n1.c77.pg02 | La opción rechazada («Is there some milk?») también es gramatical | autor N1 66–80 |
+| n1.c75.e02, n1.c75.e03 | Evalúan pronombres objeto en una clase de whose | autor N1 66–80 |
+| n3.c86.e04, c87.e04, c88.e04, c90.e03, c90.p03 | Respuestas exactas imposibles o sin texto fuente; feedback en inglés | autor N3 81–90 |
+| n3.c88.e01, n3.c88.e03 | Respuesta en la consigna | autor N3 81–90 |
+| n3.c87.p01, c89.e01, c89.p02, c86.e01 | Redacción poco natural; se responde por sentido común | autor N3 81–90 |
+| n2.c69.p02, n2.c74.pg03 | Inglés en el campo `es` de relacionar; «taxi rank» no enseñado | autor N2 66–80 |
+| n2.c75.p03, n2.c77.pg02 | Inglés poco natural | autor N2 66–80 |
+| n2.c70.e03 | Respuesta ambigua entre peticiones de ayuda | autor N2 66–80 |

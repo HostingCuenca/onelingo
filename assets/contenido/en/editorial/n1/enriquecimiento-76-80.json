@@ -1,0 +1,637 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-76: explicación «un pan» o «dos arroces» → «un pan» o «dos panes» (ejemplo más natural del contraste).",
+      "class-79: traducción de «No, we don't.» completada: «No, no necesitamos.»",
+      "Revisadas 76–80: contables/incontables, some/any, how many/much, lista y mercado coherentes con los ejercicios; ejemplos 2–4 de class-76 sustituyen metalenguaje con traducción literal («Milk es incontable»).",
+      "Aceptado: «There is not any…» sin contracción, coherente con los ejercicios; avisos del validador por opciones en español."
+    ]
+  },
+  "classes": {
+    "en.n1.class-76": {
+      "explicacion": {
+        "titulo": "Sustantivos contables e incontables",
+        "texto": "Los sustantivos contables se pueden contar: llevan a/an, número y plural con -s: an apple, two apples, four eggs. Los incontables no se cuentan uno a uno: milk, water, rice, bread. No llevan a ni -s: I have bread, no «I have a bread». Ojo: en español decimos «un pan» o «dos panes», pero en inglés bread y rice son incontables. Con un incontable el verbo va en singular: Milk is white."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo + contable en plural / incontable:",
+        "formula": [
+          {
+            "texto": "I have",
+            "nota": "sujeto + verbo"
+          },
+          {
+            "texto": "two eggs",
+            "nota": "contable: número + plural con -s"
+          },
+          {
+            "texto": "and water.",
+            "nota": "incontable: sin a y sin -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Contables",
+          "Incontables"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "one apple → two apples"
+            },
+            {
+              "texto": "milk"
+            }
+          ],
+          [
+            {
+              "texto": "one egg → four eggs"
+            },
+            {
+              "texto": "water"
+            }
+          ],
+          [
+            {
+              "texto": "a book → three books"
+            },
+            {
+              "texto": "rice"
+            }
+          ],
+          [
+            {
+              "texto": "a chair → two chairs"
+            },
+            {
+              "texto": "bread"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have a bread.",
+          "correcto": "I have bread.",
+          "explicacion": "Bread es incontable: no lleva a."
+        },
+        {
+          "incorrecto": "I have two egg.",
+          "correcto": "I have two eggs.",
+          "explicacion": "Egg es contable: con dos o más se añade -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana preparan el desayuno en la cocina.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What have we got for breakfast?",
+            "traduccion": "¿Qué tenemos para el desayuno?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "We have got four eggs and two apples.",
+            "traduccion": "Tenemos cuatro huevos y dos manzanas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Do we have milk?",
+            "traduccion": "¿Tenemos leche?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, we have milk and bread. We don't have rice.",
+            "traduccion": "Sí, tenemos leche y pan. No tenemos arroz."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántos huevos tienen?",
+          "opciones": [
+            {
+              "es": "Cuatro."
+            },
+            {
+              "es": "Dos."
+            },
+            {
+              "es": "Ninguno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «We have got four eggs and two apples». Tienen cuatro huevos."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Milk is uncountable.",
+          "es": "La leche es incontable.",
+          "nota": "Milk no lleva a ni -s: se dice I have milk."
+        },
+        {
+          "indice": 3,
+          "en": "I have rice.",
+          "es": "Tengo arroz.",
+          "nota": "Rice es incontable: sin a y sin -s."
+        },
+        {
+          "indice": 4,
+          "en": "We have bread and water.",
+          "es": "Tenemos pan y agua.",
+          "nota": "Bread y water son incontables: no se dice a bread ni waters."
+        }
+      ]
+    },
+    "en.n1.class-77": {
+      "explicacion": {
+        "titulo": "Some y any: cantidad sin número",
+        "texto": "Some y any hablan de una cantidad sin decir el número exacto. Van con incontables (some milk) o con contables en plural (some apples). Usa some en afirmaciones: There is some milk. Usa any en preguntas y negativas: Is there any water? There is not any bread. En español muchas veces no decimos nada («hay leche», «¿hay huevos?»), por eso es fácil olvidarlos. Con un contable en singular se usa a/an: There is an apple."
+      },
+      "patron": {
+        "texto": "There is/are + some/any + cosa:",
+        "formula": [
+          {
+            "texto": "There are",
+            "nota": "varias cosas → are; una o incontable → is"
+          },
+          {
+            "texto": "some",
+            "nota": "afirmación → some; pregunta o negativa → any"
+          },
+          {
+            "texto": "eggs.",
+            "nota": "contable en plural o incontable"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Incontable",
+          "Contable en plural"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Afirmativa"
+            },
+            {
+              "texto": "There is some milk."
+            },
+            {
+              "texto": "There are some apples."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "Is there any water?"
+            },
+            {
+              "texto": "Are there any eggs?"
+            }
+          ],
+          [
+            {
+              "texto": "Negativa"
+            },
+            {
+              "texto": "There is not any bread."
+            },
+            {
+              "texto": "There are not any eggs."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There is not some water.",
+          "correcto": "There is not any water.",
+          "explicacion": "En las negativas se usa any, no some."
+        },
+        {
+          "incorrecto": "There are any apples.",
+          "correcto": "There are some apples.",
+          "explicacion": "En las afirmaciones se usa some; any es para preguntas y negativas."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y su hermana Sara miran qué hay en la cocina.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Is there any milk?",
+            "traduccion": "¿Hay leche?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, there is some milk.",
+            "traduccion": "Sí, hay leche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Are there any eggs?",
+            "traduccion": "¿Hay huevos?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, there are not any eggs. There are some apples.",
+            "traduccion": "No, no hay huevos. Hay unas manzanas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no hay en la cocina?",
+          "opciones": [
+            {
+              "es": "Huevos."
+            },
+            {
+              "es": "Leche."
+            },
+            {
+              "es": "Manzanas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «No, there are not any eggs». Sí hay leche y manzanas."
+        }
+      }
+    },
+    "en.n1.class-78": {
+      "explicacion": {
+        "titulo": "How many y how much: ¿cuántos? ¿cuánto?",
+        "texto": "How many significa «cuántos/cuántas» y va con contables en plural: How many apples are there? How much significa «cuánto/cuánta» y va con incontables: How much milk is there? En español cambiamos la terminación (cuántos, cuánta); en inglés eliges la palabra según si la cosa se puede contar. Después va la cosa y luego are there / is there o do you have. Ojo al orden: How many eggs are there?, no «How many eggs there are?»."
+      },
+      "patron": {
+        "texto": "How many/much + cosa + pregunta:",
+        "formula": [
+          {
+            "texto": "How many",
+            "nota": "contables → many; incontables → much"
+          },
+          {
+            "texto": "eggs",
+            "nota": "la cosa, justo después"
+          },
+          {
+            "texto": "do you have?",
+            "nota": "o are there? / is there?"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Va con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "How many"
+            },
+            {
+              "texto": "contables en plural"
+            },
+            {
+              "texto": "How many eggs are there?"
+            }
+          ],
+          [
+            {
+              "texto": "How much"
+            },
+            {
+              "texto": "incontables"
+            },
+            {
+              "texto": "How much rice is there?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "How much eggs are there?",
+          "correcto": "How many eggs are there?",
+          "explicacion": "Eggs se puede contar: se usa how many."
+        },
+        {
+          "incorrecto": "How many apples there are?",
+          "correcto": "How many apples are there?",
+          "explicacion": "En la pregunta, are va antes de there, aunque en español digamos «¿cuántas manzanas hay?»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom preparan la comida para ir al parque.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "How many apples do we have?",
+            "traduccion": "¿Cuántas manzanas tenemos?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "We have six apples.",
+            "traduccion": "Tenemos seis manzanas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And how much water is there?",
+            "traduccion": "¿Y cuánta agua hay?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "There is some water, but there is not any milk.",
+            "traduccion": "Hay agua, pero no hay leche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántas manzanas tienen?",
+          "opciones": [
+            {
+              "es": "Seis."
+            },
+            {
+              "es": "Dos."
+            },
+            {
+              "es": "Cuatro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom responde: «We have six apples»."
+        }
+      }
+    },
+    "en.n1.class-79": {
+      "explicacion": {
+        "titulo": "Una lista de compras",
+        "texto": "En una lista de compras se juntan las formas de las últimas clases. Primero piensa si la cosa se cuenta. Si se cuenta, usa un número y el plural: two apples, six eggs. Si no se cuenta, usa some: some milk, some bread. Para decir lo que falta, usa need (necesitar): We need two apples. Need funciona como otros verbos: con he o she lleva -s (She needs milk) y la negativa usa don't: We don't need rice."
+      },
+      "patron": {
+        "texto": "We need + número o some + cosa:",
+        "formula": [
+          {
+            "texto": "We need",
+            "nota": "necesitamos"
+          },
+          {
+            "texto": "six eggs",
+            "nota": "contable: número + plural"
+          },
+          {
+            "texto": "and some milk.",
+            "nota": "incontable: some, sin número"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "En la lista",
+          "Frase completa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "2 apples"
+            },
+            {
+              "texto": "We need two apples."
+            }
+          ],
+          [
+            {
+              "texto": "6 eggs"
+            },
+            {
+              "texto": "We need six eggs."
+            }
+          ],
+          [
+            {
+              "texto": "milk"
+            },
+            {
+              "texto": "We need some milk."
+            }
+          ],
+          [
+            {
+              "texto": "bread"
+            },
+            {
+              "texto": "We need some bread."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We need two milk.",
+          "correcto": "We need some milk.",
+          "explicacion": "Milk es incontable: no lleva número, sino some."
+        },
+        {
+          "incorrecto": "We need six egg.",
+          "correcto": "We need six eggs.",
+          "explicacion": "Con un número mayor que uno, el contable va en plural."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hacen la lista de compras para su casa.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "This is our shopping list.",
+            "traduccion": "Esta es nuestra lista de compras."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We need six eggs and some bread.",
+            "traduccion": "Necesitamos seis huevos y pan."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Do we need milk?",
+            "traduccion": "¿Necesitamos leche?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, we don't. We need two apples.",
+            "traduccion": "No, no necesitamos. Necesitamos dos manzanas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no necesitan comprar?",
+          "opciones": [
+            {
+              "es": "Leche."
+            },
+            {
+              "es": "Huevos."
+            },
+            {
+              "es": "Manzanas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia pregunta «Do we need milk?» y Leo responde «No, we don't»."
+        }
+      }
+    },
+    "en.n1.class-80": {
+      "explicacion": {
+        "titulo": "En el mercado: preguntar y pedir cantidades",
+        "texto": "En el mercado se usan juntas las formas de la unidad. Para preguntar si tienen algo: Do you have any apples? La respuesta afirmativa usa some: Yes, we have some apples. Para preguntar la cantidad: How many (contables) o How much (incontables) + do you need? Para responder, da un número con plural (I need four apples) o usa some con un incontable (I need some rice). Antes de hablar, piensa si la cosa se cuenta: eso decide many o much, número o some."
+      },
+      "patron": {
+        "texto": "How many/much + cosa + do you need?",
+        "formula": [
+          {
+            "texto": "How much",
+            "nota": "incontable → much; contable → many"
+          },
+          {
+            "texto": "rice",
+            "nota": "la cosa"
+          },
+          {
+            "texto": "do you need?",
+            "nota": "¿necesita?"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "preguntar si hay"
+            },
+            {
+              "texto": "Do you have any eggs?"
+            }
+          ],
+          [
+            {
+              "texto": "responder que sí"
+            },
+            {
+              "texto": "Yes, we have some eggs."
+            }
+          ],
+          [
+            {
+              "texto": "preguntar cuántos"
+            },
+            {
+              "texto": "How many eggs do you need?"
+            }
+          ],
+          [
+            {
+              "texto": "preguntar cuánto"
+            },
+            {
+              "texto": "How much milk do you need?"
+            }
+          ],
+          [
+            {
+              "texto": "responder"
+            },
+            {
+              "texto": "I need six eggs. / I need some milk."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "How much apples do you need?",
+          "correcto": "How many apples do you need?",
+          "explicacion": "Apples se puede contar: se usa how many."
+        },
+        {
+          "incorrecto": "I need a rice.",
+          "correcto": "I need some rice.",
+          "explicacion": "Rice es incontable: no lleva a; se usa some."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara compra en el mercado. Carlos es el vendedor.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Do you have any eggs?",
+            "traduccion": "¿Tiene huevos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, we have some eggs. How many eggs do you need?",
+            "traduccion": "Sí, tenemos huevos. ¿Cuántos huevos necesita?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I need six eggs. And some rice, please.",
+            "traduccion": "Necesito seis huevos. Y arroz, por favor."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Sorry, we don't have any rice today.",
+            "traduccion": "Lo siento, hoy no tenemos arroz."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "OK. Do you have any bread?",
+            "traduccion": "Bueno. ¿Tiene pan?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, we have some bread.",
+            "traduccion": "Sí, tenemos pan."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no tiene hoy el vendedor?",
+          "opciones": [
+            {
+              "es": "Arroz."
+            },
+            {
+              "es": "Huevos."
+            },
+            {
+              "es": "Pan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «Sorry, we don't have any rice today»."
+        }
+      }
+    }
+  }
+}

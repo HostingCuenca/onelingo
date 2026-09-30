@@ -1,0 +1,704 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-73: «otra persona y tú → us» → «otra persona y yo → us» (us incluye a quien habla).",
+      "class-74: traducción de «No, it isn't.» completada: «No, no es mío.» (antes solo «No.»).",
+      "class-75: la explicación recuerda los pronombres objeto (They help us, I call her), que la evaluación de esta clase de integración también mide.",
+      "class-75: se sustituye el ejemplo 2 «Whose keys are they?», cuya traducción «¿De quién son estas llaves?» no era fiel; ahora «¿De quién son las llaves?».",
+      "Aceptado: «Tom and Leo's» como posesión conjunta; opciones del ítem en español (avisos del validador)."
+    ]
+  },
+  "classes": {
+    "en.n1.class-71": {
+      "explicacion": {
+        "titulo": "Pronombres objeto: me, you, him, her, it",
+        "texto": "Después del verbo no se usa I, he ni she, sino su forma de objeto: me, you, him, her, it. Ana knows me (Ana me conoce), I call him (lo llamo), I help her (la ayudo), I like it (me gusta, hablando de una cosa). En español el pronombre va antes del verbo («lo llamo»); en inglés va después: I call him, no «I him call». You no cambia, y her sirve para «la» y también para «su» (de ella)."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo + pronombre objeto:",
+        "formula": [
+          {
+            "texto": "I",
+            "nota": "quién hace la acción"
+          },
+          {
+            "texto": "call",
+            "nota": "el verbo"
+          },
+          {
+            "texto": "him.",
+            "nota": "a quién: un hombre o un niño; va después del verbo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Objeto",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I"
+            },
+            {
+              "texto": "me"
+            },
+            {
+              "texto": "Ana knows me."
+            }
+          ],
+          [
+            {
+              "texto": "you"
+            },
+            {
+              "texto": "you"
+            },
+            {
+              "texto": "I know you."
+            }
+          ],
+          [
+            {
+              "texto": "he"
+            },
+            {
+              "texto": "him"
+            },
+            {
+              "texto": "I call him."
+            }
+          ],
+          [
+            {
+              "texto": "she"
+            },
+            {
+              "texto": "her"
+            },
+            {
+              "texto": "I help her."
+            }
+          ],
+          [
+            {
+              "texto": "it"
+            },
+            {
+              "texto": "it"
+            },
+            {
+              "texto": "I like it."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I call he.",
+          "correcto": "I call him.",
+          "explicacion": "Después del verbo se usa la forma de objeto: him, no he."
+        },
+        {
+          "incorrecto": "I him know.",
+          "correcto": "I know him.",
+          "explicacion": "En español decimos «lo conozco», pero en inglés el pronombre va después del verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom hablan en el patio de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Do you know Leo?",
+            "traduccion": "¿Conoces a Leo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, I know him. He is my friend.",
+            "traduccion": "Sí, lo conozco. Es mi amigo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And Sara? Do you know her?",
+            "traduccion": "¿Y Sara? ¿La conoces?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, I don't know her.",
+            "traduccion": "No, no la conozco."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She is my sister. I call her every day.",
+            "traduccion": "Es mi hermana. La llamo todos los días."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a quién conoce Tom?",
+          "opciones": [
+            {
+              "es": "A Leo."
+            },
+            {
+              "es": "A Sara."
+            },
+            {
+              "es": "A Leo y a Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Yes, I know him» (a Leo) y «No, I don't know her» (a Sara)."
+        }
+      }
+    },
+    "en.n1.class-72": {
+      "explicacion": {
+        "titulo": "Us y them: nos y los (a ellos)",
+        "texto": "Us es la forma de objeto de we, y them la de they. Van después del verbo: They help us (nos ayudan), We know them (los conocemos). También van después de with (con) y for (para): Carlos is with us, This book is for them. En español decimos «con nosotros» y «para ellos», pero en inglés ahí no se usa we ni they: se dice with us, no «with we». Them sirve para personas y también para cosas o animales: I like them (los gatos)."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo + us/them:",
+        "formula": [
+          {
+            "texto": "Ana",
+            "nota": "sujeto: quién hace la acción"
+          },
+          {
+            "texto": "calls",
+            "nota": "verbo con -s por Ana (she)"
+          },
+          {
+            "texto": "them",
+            "nota": "a ellos o a ellas; va después del verbo"
+          },
+          {
+            "texto": "every day.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Objeto",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "we"
+            },
+            {
+              "texto": "us"
+            },
+            {
+              "texto": "They help us."
+            }
+          ],
+          [
+            {
+              "texto": "they"
+            },
+            {
+              "texto": "them"
+            },
+            {
+              "texto": "We know them."
+            }
+          ],
+          [
+            {
+              "texto": "with / for + we"
+            },
+            {
+              "texto": "us"
+            },
+            {
+              "texto": "Carlos is with us."
+            }
+          ],
+          [
+            {
+              "texto": "with / for + they"
+            },
+            {
+              "texto": "them"
+            },
+            {
+              "texto": "This book is for them."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "They help we.",
+          "correcto": "They help us.",
+          "explicacion": "Después del verbo, we cambia a us."
+        },
+        {
+          "incorrecto": "The photo is for they.",
+          "correcto": "The photo is for them.",
+          "explicacion": "Después de for o with se usa them, no they."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Sara están en el parque y ven a unos niños con un balón.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Who are they?",
+            "traduccion": "¿Quiénes son?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "They are my cousins. I play soccer with them every day.",
+            "traduccion": "Son mis primos. Juego fútbol con ellos todos los días."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Can they play with us?",
+            "traduccion": "¿Pueden jugar con nosotras?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes! And this ball is for them.",
+            "traduccion": "¡Sí! Y este balón es para ellos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con quién juega Sara al fútbol todos los días?",
+          "opciones": [
+            {
+              "es": "Con sus primos."
+            },
+            {
+              "es": "Con Ana."
+            },
+            {
+              "es": "Con su hermano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «They are my cousins. I play soccer with them every day». Them son sus primos."
+        }
+      }
+    },
+    "en.n1.class-73": {
+      "explicacion": {
+        "titulo": "Cambiar nombres por pronombres objeto",
+        "texto": "Para no repetir un nombre, se cambia por un pronombre objeto después del verbo. Piensa en quién es: un hombre o un niño → him (Leo → him); una mujer o una niña → her (Mia → her); una cosa → it (the book → it); varias personas o cosas → them (Ana and Leo → them); otra persona y yo → us (Sara and me → us). Primero se dice el nombre y después el pronombre: I know Leo. I know him. Después del verbo nunca se usa he, she, we ni they."
+      },
+      "patron": {
+        "texto": "Nombre la primera vez, pronombre después:",
+        "formula": [
+          {
+            "texto": "We help Ana and Leo.",
+            "nota": "primera vez: los nombres"
+          },
+          {
+            "texto": "We help",
+            "nota": "mismo sujeto y verbo"
+          },
+          {
+            "texto": "them.",
+            "nota": "dos personas → them, para no repetir"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Nombre",
+          "Pronombre"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Leo"
+            },
+            {
+              "texto": "him"
+            }
+          ],
+          [
+            {
+              "texto": "Mia"
+            },
+            {
+              "texto": "her"
+            }
+          ],
+          [
+            {
+              "texto": "the book"
+            },
+            {
+              "texto": "it"
+            }
+          ],
+          [
+            {
+              "texto": "Ana and Leo"
+            },
+            {
+              "texto": "them"
+            }
+          ],
+          [
+            {
+              "texto": "Sara and me"
+            },
+            {
+              "texto": "us"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I know Leo. I know he.",
+          "correcto": "I know Leo. I know him.",
+          "explicacion": "Después del verbo se usa him, no he."
+        },
+        {
+          "incorrecto": "I call Ana and Leo. I call him.",
+          "correcto": "I call Ana and Leo. I call them.",
+          "explicacion": "Son dos personas: se usa them, aunque una sea un hombre."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara hablan de sus amigos en la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Do you know Mia and Tom?",
+            "traduccion": "¿Conoces a Mia y a Tom?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, I know them. They help me with English.",
+            "traduccion": "Sí, los conozco. Me ayudan con el inglés."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And Leo?",
+            "traduccion": "¿Y Leo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I don't know him. Is he your friend?",
+            "traduccion": "No lo conozco. ¿Es tu amigo?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes. I play soccer with him.",
+            "traduccion": "Sí. Juego fútbol con él."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a quién no conoce Sara?",
+          "opciones": [
+            {
+              "es": "A Leo."
+            },
+            {
+              "es": "A Mia."
+            },
+            {
+              "es": "A Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I don't know him». Him se refiere a Leo; a Mia y a Tom sí los conoce («I know them»)."
+        }
+      }
+    },
+    "en.n1.class-74": {
+      "explicacion": {
+        "titulo": "Mine, yours, his, hers: el mío, el tuyo…",
+        "texto": "My, your y her van siempre delante de un sustantivo: my book. Mine, yours y hers van solos, sin sustantivo, normalmente al final: This book is mine (este libro es mío). Así no repites la cosa: It is my book → It is mine. His es igual en los dos casos: his phone y The phone is his. En español «mío» cambia (mío, mía, míos), pero mine nunca cambia y no lleva the: se dice It is mine, no «It is the mine»."
+      },
+      "patron": {
+        "texto": "Cosa + is/are + mine/yours/his/hers:",
+        "formula": [
+          {
+            "texto": "The red bag",
+            "nota": "la cosa"
+          },
+          {
+            "texto": "is",
+            "nota": "una cosa → is; varias → are"
+          },
+          {
+            "texto": "hers.",
+            "nota": "de ella: va solo, sin sustantivo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Con sustantivo",
+          "Solo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "my book"
+            },
+            {
+              "texto": "mine"
+            }
+          ],
+          [
+            {
+              "texto": "your bag"
+            },
+            {
+              "texto": "yours"
+            }
+          ],
+          [
+            {
+              "texto": "his phone"
+            },
+            {
+              "texto": "his"
+            }
+          ],
+          [
+            {
+              "texto": "her pen"
+            },
+            {
+              "texto": "hers"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This phone is my.",
+          "correcto": "This phone is mine.",
+          "explicacion": "My necesita un sustantivo detrás; al final de la frase se usa mine."
+        },
+        {
+          "incorrecto": "This bag is the mine.",
+          "correcto": "This bag is mine.",
+          "explicacion": "En español decimos «es la mía», pero mine no lleva the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana recogen las cosas del aula al final de la clase.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Is this phone yours, Ana?",
+            "traduccion": "¿Este teléfono es tuyo, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No, it isn't. Leo has got a black phone. It is his.",
+            "traduccion": "No, no es mío. Leo tiene un teléfono negro. Es de él."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And this red bag? Is it Mia's?",
+            "traduccion": "¿Y esta mochila roja? ¿Es de Mia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, it is hers. The blue bag is mine.",
+            "traduccion": "Sí, es de ella. La mochila azul es mía."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién es el teléfono negro?",
+          "opciones": [
+            {
+              "es": "De Leo."
+            },
+            {
+              "es": "De Ana."
+            },
+            {
+              "es": "De Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Leo has got a black phone. It is his». His se refiere a Leo."
+        }
+      }
+    },
+    "en.n1.class-75": {
+      "explicacion": {
+        "titulo": "Whose: ¿de quién es?",
+        "texto": "Whose significa «de quién» y va delante de la cosa: Whose bag is this? (¿De quién es esta mochila?). Si son varias cosas, el verbo es are: Whose keys are these? No se usa who: «Who bag is this?» es incorrecto. Para responder, usa los posesivos que van solos: mine, yours, his, hers, ours (nuestro) y theirs (de ellos): It is mine. They are ours. Igual que mine, ours y theirs no llevan sustantivo detrás ni cambian en plural. Recuerda también: después del verbo van los pronombres objeto (They help us, I call her)."
+      },
+      "patron": {
+        "texto": "Whose + cosa + is/are + this/these?",
+        "formula": [
+          {
+            "texto": "Whose",
+            "nota": "de quién: va primero"
+          },
+          {
+            "texto": "keys",
+            "nota": "la cosa, justo después de whose"
+          },
+          {
+            "texto": "are",
+            "nota": "varias cosas → are"
+          },
+          {
+            "texto": "these?",
+            "nota": "cerca: this/these; lejos: that/those"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Con sustantivo",
+          "Solo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "my keys"
+            },
+            {
+              "texto": "mine"
+            }
+          ],
+          [
+            {
+              "texto": "your bag"
+            },
+            {
+              "texto": "yours"
+            }
+          ],
+          [
+            {
+              "texto": "his phone"
+            },
+            {
+              "texto": "his"
+            }
+          ],
+          [
+            {
+              "texto": "her book"
+            },
+            {
+              "texto": "hers"
+            }
+          ],
+          [
+            {
+              "texto": "our keys"
+            },
+            {
+              "texto": "ours"
+            }
+          ],
+          [
+            {
+              "texto": "their phone"
+            },
+            {
+              "texto": "theirs"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Who bag is this?",
+          "correcto": "Whose bag is this?",
+          "explicacion": "Para preguntar «de quién» se usa whose; who significa «quién»."
+        },
+        {
+          "incorrecto": "They are our.",
+          "correcto": "They are ours.",
+          "explicacion": "Sin sustantivo detrás se usa ours, no our."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos ordenan la entrada de la casa después de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Whose keys are these?",
+            "traduccion": "¿De quién son estas llaves?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "They are ours.",
+            "traduccion": "Son nuestras."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And whose bag is that?",
+            "traduccion": "¿Y de quién es esa mochila?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is Sara's. It isn't mine.",
+            "traduccion": "Es de Sara. No es mía."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Whose books are those?",
+            "traduccion": "¿De quién son esos libros?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "They are Tom and Leo's. They are theirs.",
+            "traduccion": "Son de Tom y Leo. Son de ellos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién es la mochila?",
+          "opciones": [
+            {
+              "es": "De Sara."
+            },
+            {
+              "es": "De Carlos."
+            },
+            {
+              "es": "De Tom y Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «It is Sara's. It isn't mine». La mochila es de Sara."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Whose keys are they?",
+          "es": "¿De quién son las llaves?",
+          "nota": "Con keys, en plural, se usa are."
+        }
+      ]
+    }
+  }
+}

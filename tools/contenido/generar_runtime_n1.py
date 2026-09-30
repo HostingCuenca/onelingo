@@ -356,6 +356,11 @@ def vocabulary(document: dict, level: str, number: int) -> list[dict]:
             origin = exercise.get("origin", {})
             values.append(origin.get("audio", ""))
             values.append(origin.get("text", ""))
+            # Con pista de «completar», la frase pasa del enunciado en español
+            # al texto en inglés: se declara igual que cualquier texto del ítem.
+            cue = FILL_CUES.get(exercise.get("id", ""))
+            if cue:
+                values.append(cue["frase"])
             values.extend(origin.get("sentences", []))
             for pair in origin.get("pairs") or answer.get("pairs") or []:
                 if isinstance(pair, list) and pair:
