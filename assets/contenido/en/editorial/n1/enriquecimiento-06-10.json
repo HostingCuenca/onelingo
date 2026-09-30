@@ -1,0 +1,576 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 6,
+    "end": 10
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1 tras correcciones. Reglas a/an, plural -s/-es, irregulares y a/an vs the correctas y ajustadas a los ejercicios.",
+      "class-07: tabla «+ -es (tras s)» → «(tras s, x, ch, sh)» para coincidir con la explicación.",
+      "class-08: el diálogo usaba «I see…», estructura que no se enseña hasta class-10; reescrito con «… are here» (enseñado en class-07); consigna y feedback ajustados.",
+      "class-09: «I see a bag on the table» → «This is a bag. The keys are in the bag.» (evita I see antes de class-10 y muestra a → the); distractores «Sobre la mesa / Sobre la silla»; feedback ajustado.",
+      "Avisos del validador por opciones en español: aceptables."
+    ]
+  },
+  "classes": {
+    "en.n1.class-06": {
+      "explicacion": {
+        "titulo": "A o an: depende del sonido",
+        "texto": "A y an significan «un» o «una» y van delante de un sustantivo singular. Se usa a si la palabra siguiente empieza con sonido de consonante (a book, a teacher) y an si empieza con sonido de vocal (an apple, an umbrella). Cuenta el sonido, no solo la letra. Con las profesiones hay una trampa: en español decimos «ella es artista», sin artículo, pero en inglés es obligatorio: She is an artist."
+      },
+      "patron": {
+        "texto": "Sujeto + is + a/an + profesión u objeto:",
+        "formula": [
+          {
+            "texto": "She is",
+            "nota": "sujeto + be"
+          },
+          {
+            "texto": "an",
+            "nota": "an: la palabra siguiente empieza con sonido de vocal"
+          },
+          {
+            "texto": "artist.",
+            "nota": "profesión en singular"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Artículo",
+          "Cuándo",
+          "Ejemplos"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a"
+            },
+            {
+              "texto": "sonido de consonante"
+            },
+            {
+              "texto": "a book, a teacher, a desk"
+            }
+          ],
+          [
+            {
+              "texto": "an"
+            },
+            {
+              "texto": "sonido de vocal"
+            },
+            {
+              "texto": "an apple, an engineer, an umbrella"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She is artist.",
+          "correcto": "She is an artist.",
+          "explicacion": "En inglés la profesión lleva a/an, aunque en español digamos «es artista»."
+        },
+        {
+          "incorrecto": "This is a apple.",
+          "correcto": "This is an apple.",
+          "explicacion": "Apple empieza con sonido de vocal, por eso va an."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara hablan de sus padres en el recreo.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "My mother is an engineer.",
+            "traduccion": "Mi madre es ingeniera."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My mother is a teacher.",
+            "traduccion": "Mi madre es profesora."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And your father?",
+            "traduccion": "¿Y tu padre?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My father is an artist.",
+            "traduccion": "Mi padre es artista."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Oh! My father is a teacher.",
+            "traduccion": "¡Oh! Mi padre es profesor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién es artista?",
+          "opciones": [
+            {
+              "es": "El padre de Sara."
+            },
+            {
+              "es": "La madre de Carlos."
+            },
+            {
+              "es": "El padre de Carlos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «My father is an artist». La madre de Carlos es ingeniera y su padre, profesor."
+        }
+      }
+    },
+    "en.n1.class-07": {
+      "explicacion": {
+        "titulo": "Plural regular: -s y -es",
+        "texto": "Para formar el plural de la mayoría de los sustantivos se añade -s: book → books, pen → pens. Si la palabra termina en s, x, ch o sh, se añade -es: class → classes. Con un sujeto plural el verbo es are: The chairs are here. Después de two, three o four el sustantivo siempre va en plural. The no cambia: the book y the books (en español, «el libro» y «los libros»)."
+      },
+      "patron": {
+        "texto": "Número + sustantivo plural + are:",
+        "formula": [
+          {
+            "texto": "Two",
+            "nota": "número: más de uno"
+          },
+          {
+            "texto": "pencils",
+            "nota": "pencil + -s"
+          },
+          {
+            "texto": "are here.",
+            "nota": "plural → are"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Regla",
+          "Singular",
+          "Plural"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "+ -s"
+            },
+            {
+              "texto": "book, pen, chair"
+            },
+            {
+              "texto": "books, pens, chairs"
+            }
+          ],
+          [
+            {
+              "texto": "+ -es (tras s, x, ch, sh)"
+            },
+            {
+              "texto": "class"
+            },
+            {
+              "texto": "classes"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The books is here.",
+          "correcto": "The books are here.",
+          "explicacion": "Books es plural, así que el verbo es are."
+        },
+        {
+          "incorrecto": "Two classs are here.",
+          "correcto": "Two classes are here.",
+          "explicacion": "Class termina en s: su plural se forma con -es."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo preparan sus cosas antes de la clase.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The bags are here. And the books?",
+            "traduccion": "Los bolsos están aquí. ¿Y los libros?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Three books are on the desk.",
+            "traduccion": "Tres libros están sobre el pupitre."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the pens?",
+            "traduccion": "¿Y los bolígrafos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Two pens are in my bag.",
+            "traduccion": "Dos bolígrafos están en mi bolso."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántos libros hay sobre el pupitre?",
+          "opciones": [
+            {
+              "es": "Tres."
+            },
+            {
+              "es": "Dos."
+            },
+            {
+              "es": "Uno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Three books are on the desk». Los dos bolígrafos están en su bolso."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 1,
+          "en": "One pen, two pens.",
+          "es": "Un bolígrafo, dos bolígrafos.",
+          "nota": "Pen termina en n: basta con añadir -s."
+        }
+      ]
+    },
+    "en.n1.class-08": {
+      "explicacion": {
+        "titulo": "Plurales irregulares",
+        "texto": "Algunos sustantivos muy frecuentes no forman el plural con -s: cambian la palabra. Child → children, person → people, man → men, woman → women, tooth → teeth, foot → feet. Nunca se les añade -s: se dice children, no childs ni childrens. Llevan are como cualquier plural: Two women are friends. Ojo con people: significa «personas» o «la gente», y aunque en español «la gente» va en singular, en inglés es plural: The people are kind."
+      },
+      "patron": {
+        "texto": "Número + plural irregular + are:",
+        "formula": [
+          {
+            "texto": "Two",
+            "nota": "número"
+          },
+          {
+            "texto": "women",
+            "nota": "plural irregular de woman"
+          },
+          {
+            "texto": "are friends.",
+            "nota": "plural → are"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Singular",
+          "Plural"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "child"
+            },
+            {
+              "texto": "children"
+            }
+          ],
+          [
+            {
+              "texto": "person"
+            },
+            {
+              "texto": "people"
+            }
+          ],
+          [
+            {
+              "texto": "man"
+            },
+            {
+              "texto": "men"
+            }
+          ],
+          [
+            {
+              "texto": "woman"
+            },
+            {
+              "texto": "women"
+            }
+          ],
+          [
+            {
+              "texto": "tooth"
+            },
+            {
+              "texto": "teeth"
+            }
+          ],
+          [
+            {
+              "texto": "foot"
+            },
+            {
+              "texto": "feet"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Two childs are here.",
+          "correcto": "Two children are here.",
+          "explicacion": "Child es irregular: su plural es children, sin -s."
+        },
+        {
+          "incorrecto": "The people is kind.",
+          "correcto": "The people are kind.",
+          "explicacion": "People ya es plural, así que va con are (aunque digamos «la gente es»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo llegan a una fiesta familiar en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Two men and two women are here.",
+            "traduccion": "Dos hombres y dos mujeres están aquí."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the children?",
+            "traduccion": "¿Y los niños?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Three children are here. They are my cousins.",
+            "traduccion": "Tres niños están aquí. Son mis primos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The people are happy today.",
+            "traduccion": "La gente está contenta hoy."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántos niños hay en la fiesta?",
+          "opciones": [
+            {
+              "es": "Tres."
+            },
+            {
+              "es": "Dos."
+            },
+            {
+              "es": "Cuatro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Three children are here». Hombres y mujeres hay dos de cada uno."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 1,
+          "en": "One person, two people.",
+          "es": "Una persona, dos personas.",
+          "nota": "People es el plural habitual de person y va con are."
+        }
+      ]
+    },
+    "en.n1.class-09": {
+      "explicacion": {
+        "titulo": "A/an o the",
+        "texto": "A o an presenta algo por primera vez o uno cualquiera: This is a book (un libro). The se usa cuando los dos ya saben de cuál se habla, porque se mencionó antes o porque es el único del lugar: The book is here, The door is here. The vale para «el, la, los, las», también en plural: The keys are here. A/an solo va con una cosa, nunca con plurales. Con profesiones se usa a/an: She is a teacher."
+      },
+      "patron": {
+        "texto": "Primera mención con a/an, después the:",
+        "formula": [
+          {
+            "texto": "This is an apple.",
+            "nota": "primera vez: an"
+          },
+          {
+            "texto": "The apple",
+            "nota": "la misma manzana: the"
+          },
+          {
+            "texto": "is here.",
+            "nota": "información nueva"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Artículo",
+          "Uso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a / an"
+            },
+            {
+              "texto": "primera mención, una cosa"
+            },
+            {
+              "texto": "This is a book."
+            }
+          ],
+          [
+            {
+              "texto": "the"
+            },
+            {
+              "texto": "algo ya conocido (singular o plural)"
+            },
+            {
+              "texto": "The book is here. The keys are here."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This is a book. A book is here.",
+          "correcto": "This is a book. The book is here.",
+          "explicacion": "La segunda vez ya sabemos de qué libro hablamos: se usa the."
+        },
+        {
+          "incorrecto": "A keys are here.",
+          "correcto": "The keys are here.",
+          "explicacion": "A/an solo va con una cosa; con un plural conocido se usa the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom busca sus llaves en casa y Ana le ayuda.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Where are my keys?",
+            "traduccion": "¿Dónde están mis llaves?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "This is a bag. The keys are in the bag.",
+            "traduccion": "Este es un bolso. Las llaves están en el bolso."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thank you, Ana!",
+            "traduccion": "¡Gracias, Ana!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde están las llaves de Tom?",
+          "opciones": [
+            {
+              "es": "En el bolso."
+            },
+            {
+              "es": "Sobre la mesa."
+            },
+            {
+              "es": "Sobre la silla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «The keys are in the bag». Primero presenta el bolso con a y luego lo retoma con the."
+        }
+      }
+    },
+    "en.n1.class-10": {
+      "explicacion": {
+        "titulo": "Describir una habitación: I see…",
+        "texto": "En esta clase juntas lo aprendido para describir un lugar. I see significa «veo»; recuerda que en inglés el sujeto I es obligatorio. Usa a/an para una cosa nueva (I see a table), un número + plural para varias (two books, two people) y the para algo ya mencionado (The table is here). And (y) une objetos: I see a desk and two chairs. Revisa siempre: ¿una cosa o varias?, ¿plural regular o irregular?"
+      },
+      "patron": {
+        "texto": "I see + objetos unidos con and:",
+        "formula": [
+          {
+            "texto": "I see",
+            "nota": "veo (el sujeto I no se omite)"
+          },
+          {
+            "texto": "a desk",
+            "nota": "una cosa → a/an"
+          },
+          {
+            "texto": "and",
+            "nota": "y"
+          },
+          {
+            "texto": "two chairs.",
+            "nota": "varias → número + plural"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "See a room.",
+          "correcto": "I see a room.",
+          "explicacion": "En español basta «veo», pero en inglés hay que poner el sujeto I."
+        },
+        {
+          "incorrecto": "I see two chair.",
+          "correcto": "I see two chairs.",
+          "explicacion": "Después de two el sustantivo va en plural: chairs."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo visita a Mia y describen juntos su habitación.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I see a desk and two chairs.",
+            "traduccion": "Veo un pupitre y dos sillas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And I see three books on the desk.",
+            "traduccion": "Y yo veo tres libros sobre el pupitre."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I see a photo. Two people are in the photo.",
+            "traduccion": "Veo una foto. Hay dos personas en la foto."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "They are my parents.",
+            "traduccion": "Son mis padres."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quiénes están en la foto?",
+          "opciones": [
+            {
+              "es": "Los padres de Mia."
+            },
+            {
+              "es": "Los primos de Mia."
+            },
+            {
+              "es": "Mia y Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «They are my parents»."
+        }
+      }
+    }
+  }
+}

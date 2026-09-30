@@ -1,0 +1,502 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 11,
+    "end": 15
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1 tras correcciones. Orden adjetivo + sustantivo, adjetivo invariable, this/that/these/those con is/are correctos y alineados con los ejercicios.",
+      "class-14: se quitó la guía de pronunciación «dis/diis», que sugería /d/ en lugar de th; ahora solo contrasta i corta / i larga.",
+      "class-14: distractor «Mia y Tom» duplicaba «Sus primos»; sustituido por «Sus abuelos».",
+      "Avisos del validador por opciones en español: aceptables."
+    ]
+  },
+  "classes": {
+    "en.n1.class-11": {
+      "explicacion": {
+        "titulo": "Colores y tamaños después de is/are",
+        "texto": "Para describir un objeto se usa sujeto + is/are + adjetivo: The book is red, The chair is big. Con un sujeto plural va are: The books are new. En inglés el adjetivo nunca cambia: no tiene género ni plural. En español decimos «la puerta es blanca» y «las sillas son rojas», pero en inglés es siempre white y red: The door is white, The chairs are red. Nunca se añade -s al adjetivo."
+      },
+      "patron": {
+        "texto": "The + objeto + is/are + adjetivo:",
+        "formula": [
+          {
+            "texto": "The books",
+            "nota": "sujeto plural"
+          },
+          {
+            "texto": "are",
+            "nota": "plural → are"
+          },
+          {
+            "texto": "new.",
+            "nota": "adjetivo: sin -s"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The chairs are blues.",
+          "correcto": "The chairs are blue.",
+          "explicacion": "El adjetivo no lleva -s aunque el sujeto sea plural (en español, «azules»)."
+        },
+        {
+          "incorrecto": "The books is new.",
+          "correcto": "The books are new.",
+          "explicacion": "Books es plural, así que va con are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia comparan sus cosas del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "My pen is black. It is old.",
+            "traduccion": "Mi bolígrafo es negro. Es viejo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My pens are new. They are green.",
+            "traduccion": "Mis bolígrafos son nuevos. Son verdes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And your books?",
+            "traduccion": "¿Y tus libros?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My books are red. They are big.",
+            "traduccion": "Mis libros son rojos. Son grandes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de qué color son los bolígrafos de Mia?",
+          "opciones": [
+            {
+              "es": "Verdes."
+            },
+            {
+              "es": "Negros."
+            },
+            {
+              "es": "Rojos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «My pens are new. They are green». El negro es el de Leo."
+        }
+      }
+    },
+    "en.n1.class-12": {
+      "explicacion": {
+        "titulo": "El adjetivo va antes del sustantivo",
+        "texto": "En español solemos decir «un libro rojo» (sustantivo + adjetivo), pero en inglés el orden es al revés: a red book (adjetivo + sustantivo). El artículo va primero: a/an o the + adjetivo + sustantivo: the big desk, a green table. En plural, solo el sustantivo lleva -s: blue chairs, no blues chairs. Ojo: a o an depende de la palabra que va justo detrás: a book, pero an old book."
+      },
+      "patron": {
+        "texto": "Artículo + adjetivo + sustantivo:",
+        "formula": [
+          {
+            "texto": "a",
+            "nota": "artículo"
+          },
+          {
+            "texto": "red",
+            "nota": "adjetivo: va antes"
+          },
+          {
+            "texto": "book",
+            "nota": "sustantivo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "a book red",
+          "correcto": "a red book",
+          "explicacion": "En inglés el adjetivo va antes del sustantivo, al revés que en español."
+        },
+        {
+          "incorrecto": "the olds chairs",
+          "correcto": "the old chairs",
+          "explicacion": "Solo el sustantivo lleva -s; el adjetivo no cambia."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara buscan sus libros en el aula.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I see a red book and a blue book on the desk.",
+            "traduccion": "Veo un libro rojo y un libro azul sobre el pupitre."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My book is the blue book.",
+            "traduccion": "Mi libro es el libro azul."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the red book is my book.",
+            "traduccion": "Y el libro rojo es mi libro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el libro de Sara?",
+          "opciones": [
+            {
+              "es": "El libro azul."
+            },
+            {
+              "es": "El libro rojo."
+            },
+            {
+              "es": "El libro verde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «My book is the blue book». El rojo es de Carlos."
+        }
+      }
+    },
+    "en.n1.class-13": {
+      "explicacion": {
+        "titulo": "This y that: cerca y lejos",
+        "texto": "This señala una cosa que está cerca de quien habla: This is a book (esto es un libro). That señala una cosa que está lejos: That is a pen (eso o aquello es un bolígrafo). Los dos son singulares y van con is. No cambian con el género: this sirve para «este, esta, esto», y that para «ese, esa, eso, aquel». No olvides is: This is a bag, no This a bag. Si añades un adjetivo, va antes del sustantivo: That is a big chair."
+      },
+      "patron": {
+        "texto": "This/That + is + a + (adjetivo) + cosa:",
+        "formula": [
+          {
+            "texto": "That",
+            "nota": "una cosa lejos"
+          },
+          {
+            "texto": "is",
+            "nota": "singular → is"
+          },
+          {
+            "texto": "a big chair.",
+            "nota": "a + adjetivo + sustantivo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Distancia",
+          "Palabra",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "cerca"
+            },
+            {
+              "texto": "this"
+            },
+            {
+              "texto": "This is a red bag."
+            }
+          ],
+          [
+            {
+              "texto": "lejos"
+            },
+            {
+              "texto": "that"
+            },
+            {
+              "texto": "That is a big chair."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This a book.",
+          "correcto": "This is a book.",
+          "explicacion": "Hace falta el verbo is entre this y el resto de la frase."
+        },
+        {
+          "incorrecto": "That is a chair big.",
+          "correcto": "That is a big chair.",
+          "explicacion": "El adjetivo va antes del sustantivo: a big chair."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia ordenan el aula: algunas cosas están cerca y otras, lejos.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, this is my bag. It is red.",
+            "traduccion": "Mia, este es mi bolso. Es rojo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And that is a blue bag.",
+            "traduccion": "Y ese es un bolso azul."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. That is a new bag.",
+            "traduccion": "Sí. Ese es un bolso nuevo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "This is a green pen. It is my pen.",
+            "traduccion": "Este es un bolígrafo verde. Es mi bolígrafo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de qué color es el bolso que está lejos?",
+          "opciones": [
+            {
+              "es": "Azul."
+            },
+            {
+              "es": "Rojo."
+            },
+            {
+              "es": "Verde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «that is a blue bag». That señala algo lejos; el bolso rojo (this) es el de Tom."
+        }
+      }
+    },
+    "en.n1.class-14": {
+      "explicacion": {
+        "titulo": "These y those: varias cosas",
+        "texto": "These es el plural de this: varias cosas cerca (estos, estas). Those es el plural de that: varias cosas lejos (esos, esas, aquellos). Van siempre con are y con el sustantivo en plural, regular o irregular: These are books, Those are children. El adjetivo sigue sin -s: Those are red bags. Cuidado con la pronunciación: en this la i es corta y en these es larga, como una «ii»."
+      },
+      "patron": {
+        "texto": "These/Those + are + (adjetivo) + plural:",
+        "formula": [
+          {
+            "texto": "Those",
+            "nota": "varias cosas lejos"
+          },
+          {
+            "texto": "are",
+            "nota": "plural → are"
+          },
+          {
+            "texto": "red",
+            "nota": "adjetivo sin -s"
+          },
+          {
+            "texto": "bags.",
+            "nota": "sustantivo en plural"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "",
+          "Cerca",
+          "Lejos"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "una cosa (is)"
+            },
+            {
+              "texto": "this"
+            },
+            {
+              "texto": "that"
+            }
+          ],
+          [
+            {
+              "texto": "varias cosas (are)"
+            },
+            {
+              "texto": "these"
+            },
+            {
+              "texto": "those"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "These is books.",
+          "correcto": "These are books.",
+          "explicacion": "These es plural: va con are, no con is."
+        },
+        {
+          "incorrecto": "Those are childrens.",
+          "correcto": "Those are children.",
+          "explicacion": "Children ya es plural; no se le añade -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo están en el parque con la familia de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, these are my cousins, Mia and Tom.",
+            "traduccion": "Leo, estos son mis primos, Mia y Tom."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Hello! And those people?",
+            "traduccion": "¡Hola! ¿Y esas personas?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Those are my parents.",
+            "traduccion": "Esos son mis padres."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Hi, Leo!",
+            "traduccion": "¡Hola, Leo!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quiénes están lejos de Sara?",
+          "opciones": [
+            {
+              "es": "Sus padres."
+            },
+            {
+              "es": "Sus primos."
+            },
+            {
+              "es": "Sus abuelos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara usa those, que señala lejos: «Those are my parents». Con these presenta a sus primos, que están cerca."
+        }
+      }
+    },
+    "en.n1.class-15": {
+      "explicacion": {
+        "titulo": "Cierre: señalar y describir objetos",
+        "texto": "Hay dos formas de describir. 1) This/That is a + adjetivo + sustantivo: This is a red book (el adjetivo va antes). 2) This/That + sustantivo + is + adjetivo: That chair is blue (el adjetivo va después de is). En plural: These are red books, Those chairs are red. Para no fallar, decide: ¿una cosa (this/that + is) o varias (these/those + are)? ¿Cerca o lejos? El adjetivo nunca lleva -s."
+      },
+      "patron": {
+        "texto": "This/That/These/Those + cosa + is/are + adjetivo:",
+        "formula": [
+          {
+            "texto": "Those",
+            "nota": "varias cosas, lejos"
+          },
+          {
+            "texto": "chairs",
+            "nota": "sustantivo en plural"
+          },
+          {
+            "texto": "are",
+            "nota": "plural → are"
+          },
+          {
+            "texto": "red.",
+            "nota": "adjetivo después de are, sin -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "",
+          "Cerca",
+          "Lejos"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "una cosa"
+            },
+            {
+              "texto": "This book is red."
+            },
+            {
+              "texto": "That chair is blue."
+            }
+          ],
+          [
+            {
+              "texto": "varias"
+            },
+            {
+              "texto": "These are red books."
+            },
+            {
+              "texto": "Those chairs are red."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This book red is.",
+          "correcto": "This book is red.",
+          "explicacion": "El verbo is va antes del adjetivo, no al final."
+        },
+        {
+          "incorrecto": "Those chair is blue.",
+          "correcto": "Those chairs are blue.",
+          "explicacion": "Those es plural: el sustantivo lleva -s y el verbo es are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos ordenan la sala de su casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "This book is red. It is my book.",
+            "traduccion": "Este libro es rojo. Es mi libro."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Those are my books. They are blue.",
+            "traduccion": "Esos son mis libros. Son azules."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That chair is old.",
+            "traduccion": "Esa silla es vieja."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, and these chairs are new.",
+            "traduccion": "Sí, y estas sillas son nuevas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de qué color son los libros de Carlos?",
+          "opciones": [
+            {
+              "es": "Azules."
+            },
+            {
+              "es": "Rojos."
+            },
+            {
+              "es": "Verdes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «Those are my books. They are blue». El libro rojo es de Ana."
+        }
+      }
+    }
+  }
+}

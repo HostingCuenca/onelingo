@@ -1,0 +1,603 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1. Explicaciones correctas y alineadas con los ejercicios; errores plausibles (calco «I call me», omisión de a con ocupación, sujeto omitido, is/are con sujeto compuesto).",
+      "P2 (sin cambio): class-03 «in the desk» puede ser correcto si algo está dentro del pupitre; la explicación ya aclara in = dentro de / on = encima.",
+      "P2 (sin cambio): class-04 «mys parents» es error menos frecuente, pero coherente con la explicación (my no lleva -s).",
+      "Avisos del validador por opciones en español: aceptables (el ítem se responde leyendo el diálogo)."
+    ]
+  },
+  "classes": {
+    "en.n1.class-01": {
+      "explicacion": {
+        "titulo": "Presentarte: my name is, I am from, I live in",
+        "texto": "Para presentarte usas tres frases fijas. My name is Ana significa «me llamo Ana» (literalmente, «mi nombre es Ana»); no se dice I call me. I am from + país dice de dónde eres, y I live in + ciudad, dónde vives. En inglés el sujeto I es obligatorio y va siempre en mayúscula: en español basta «soy de Perú», pero en inglés hay que decir I am from Peru. Para la ocupación se añade a: I am a student."
+      },
+      "patron": {
+        "texto": "I + am/live + dato personal:",
+        "formula": [
+          {
+            "texto": "I",
+            "nota": "yo: obligatorio y siempre en mayúscula"
+          },
+          {
+            "texto": "am from",
+            "nota": "soy de (origen)"
+          },
+          {
+            "texto": "Peru.",
+            "nota": "el país, con mayúscula"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Quieres decir",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "tu nombre"
+            },
+            {
+              "texto": "My name is Ana."
+            }
+          ],
+          [
+            {
+              "texto": "de dónde eres"
+            },
+            {
+              "texto": "I am from Peru."
+            }
+          ],
+          [
+            {
+              "texto": "dónde vives"
+            },
+            {
+              "texto": "I live in Lima."
+            }
+          ],
+          [
+            {
+              "texto": "qué haces"
+            },
+            {
+              "texto": "I am a student."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I call me Ana.",
+          "correcto": "My name is Ana.",
+          "explicacion": "Es un calco de «me llamo». En inglés se dice «mi nombre es»: my name is."
+        },
+        {
+          "incorrecto": "I am student.",
+          "correcto": "I am a student.",
+          "explicacion": "Con una ocupación, el inglés pide a delante: I am a student (en español, «soy estudiante» sin artículo)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo se conocen en una clase de inglés por videollamada.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Hello, my name is Leo.",
+            "traduccion": "Hola, me llamo Leo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Hi, Leo. My name is Ana. I am from Peru.",
+            "traduccion": "Hola, Leo. Me llamo Ana. Soy de Perú."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I am from Chile. I live in Quito.",
+            "traduccion": "Yo soy de Chile. Vivo en Quito."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I live in Lima. I am a student.",
+            "traduccion": "Yo vivo en Lima. Soy estudiante."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de dónde es Leo?",
+          "opciones": [
+            {
+              "es": "De Chile."
+            },
+            {
+              "es": "De Perú."
+            },
+            {
+              "es": "De Quito."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I am from Chile». Quito es la ciudad donde vive, no su país de origen."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Hello, my name is Ana.",
+          "es": "Hola, me llamo Ana.",
+          "nota": "My name is equivale a «me llamo» (literalmente, «mi nombre es»)."
+        },
+        {
+          "indice": 1,
+          "en": "I am from Peru.",
+          "es": "Soy de Perú.",
+          "nota": "I am from + país: de dónde eres. El país va con mayúscula."
+        },
+        {
+          "indice": 2,
+          "en": "I live in Lima.",
+          "es": "Vivo en Lima.",
+          "nota": "I live in + ciudad: dónde vives. No olvides in."
+        }
+      ]
+    },
+    "en.n1.class-02": {
+      "explicacion": {
+        "titulo": "Pronombres y el verbo be: am, is, are",
+        "texto": "El verbo be significa «ser» o «estar» y tiene tres formas en presente: am va solo con I; is va con he, she e it; are va con you, we y they. You sirve para «tú», «usted» y «ustedes», y they para «ellos» y «ellas». En español el sujeto se puede omitir («es profesor»), pero en inglés es obligatorio: He is a teacher. Primero mira el sujeto y después elige la forma."
+      },
+      "patron": {
+        "texto": "Sujeto + am/is/are + información:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "sujeto: ella"
+          },
+          {
+            "texto": "is",
+            "nota": "con he/she/it → is"
+          },
+          {
+            "texto": "from Chile.",
+            "nota": "información sobre ella"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Be",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I"
+            },
+            {
+              "texto": "am"
+            },
+            {
+              "texto": "I am a student."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "is"
+            },
+            {
+              "texto": "She is from Chile."
+            }
+          ],
+          [
+            {
+              "texto": "you / we / they"
+            },
+            {
+              "texto": "are"
+            },
+            {
+              "texto": "They are friends."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She are happy.",
+          "correcto": "She is happy.",
+          "explicacion": "Con she (una persona) se usa is; are es para you, we y they."
+        },
+        {
+          "incorrecto": "Is a teacher.",
+          "correcto": "He is a teacher.",
+          "explicacion": "En español decimos «es profesor» sin sujeto, pero en inglés hay que poner he o she."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le habla a Tom de dos amigos suyos en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Sara and Leo are my friends.",
+            "traduccion": "Sara y Leo son mis amigos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Are they students?",
+            "traduccion": "¿Son estudiantes?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sara is a student. Leo is a teacher.",
+            "traduccion": "Sara es estudiante. Leo es profesor."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh! Are they from Mexico?",
+            "traduccion": "¡Oh! ¿Son de México?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sara is from Mexico. Leo is from Spain.",
+            "traduccion": "Sara es de México. Leo es de España."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién es profesor?",
+          "opciones": [
+            {
+              "es": "Leo."
+            },
+            {
+              "es": "Sara."
+            },
+            {
+              "es": "Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Leo is a teacher». Sara es estudiante."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I am a student.",
+          "es": "Soy estudiante.",
+          "nota": "Con I siempre va am. El sujeto I no se omite."
+        },
+        {
+          "indice": 1,
+          "en": "She is from Chile.",
+          "es": "Ella es de Chile.",
+          "nota": "Con he, she o it va is."
+        },
+        {
+          "indice": 2,
+          "en": "They are friends.",
+          "es": "Ellos son amigos.",
+          "nota": "Con you, we y they va are; friends lleva -s porque son varios."
+        }
+      ]
+    },
+    "en.n1.class-03": {
+      "explicacion": {
+        "titulo": "Objetos del aula: this is a…, the… is",
+        "texto": "This is a book significa «esto es un libro»: sirve para presentar algo que tienes cerca. A equivale a «un» y a «una», porque en inglés los objetos no tienen género: a book, a chair. The equivale a «el, la»: the pen, the desk. El verbo is significa «es» o «está»: The chair is blue (es azul) y The pen is on the desk (está sobre el pupitre). On significa «sobre, encima de». En inglés tampoco se omite el sujeto: This is a book, no Is a book."
+      },
+      "patron": {
+        "texto": "The + objeto + is + lugar o color:",
+        "formula": [
+          {
+            "texto": "The pen",
+            "nota": "the + objeto (el bolígrafo)"
+          },
+          {
+            "texto": "is",
+            "nota": "es / está"
+          },
+          {
+            "texto": "on the desk.",
+            "nota": "on = sobre, encima de"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Is a book.",
+          "correcto": "This is a book.",
+          "explicacion": "En español decimos «es un libro», pero en inglés hace falta un sujeto: this."
+        },
+        {
+          "incorrecto": "The pen is in the desk.",
+          "correcto": "The pen is on the desk.",
+          "explicacion": "«En» se traduce on cuando algo está encima de una superficie; in es «dentro de»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia ordenan sus cosas en el aula.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "My bag is blue. The book is in my bag.",
+            "traduccion": "Mi bolso es azul. El libro está en mi bolso."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The pencil is on the chair.",
+            "traduccion": "El lápiz está sobre la silla."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the eraser?",
+            "traduccion": "¿Y el borrador?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The eraser is on the desk.",
+            "traduccion": "El borrador está sobre el pupitre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está el borrador?",
+          "opciones": [
+            {
+              "es": "Sobre el pupitre."
+            },
+            {
+              "es": "Sobre la silla."
+            },
+            {
+              "es": "En el bolso de Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The eraser is on the desk». Lo que está sobre la silla es el lápiz."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "This is a book.",
+          "es": "Esto es un libro.",
+          "nota": "This is presenta algo cercano; a vale para «un» y «una»."
+        },
+        {
+          "indice": 1,
+          "en": "The pen is on the desk.",
+          "es": "El bolígrafo está sobre el pupitre.",
+          "nota": "Aquí is significa «está»; on = sobre."
+        },
+        {
+          "indice": 2,
+          "en": "My bag is blue.",
+          "es": "Mi bolso es azul.",
+          "nota": "El color va después de is y no cambia: blue."
+        }
+      ]
+    },
+    "en.n1.class-04": {
+      "explicacion": {
+        "titulo": "La familia: this is my…, they are my…",
+        "texto": "Para presentar a un familiar se usa This is my + familiar: This is my mother (esta es mi madre). En inglés this sirve también para personas. My significa «mi» y también «mis»: nunca lleva -s (my parents). Para dos o más personas se usa They are my…: They are my parents. Ojo: parents significa «padres» (madre y padre), no «parientes». Cousin sirve para «primo» y para «prima»."
+      },
+      "patron": {
+        "texto": "This is / They are + my + familiar:",
+        "formula": [
+          {
+            "texto": "They are",
+            "nota": "varias personas → they are"
+          },
+          {
+            "texto": "my",
+            "nota": "mis: my no cambia en plural"
+          },
+          {
+            "texto": "parents.",
+            "nota": "padres (madre y padre)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "They are mys parents.",
+          "correcto": "They are my parents.",
+          "explicacion": "My no lleva -s aunque en español digamos «mis»."
+        },
+        {
+          "incorrecto": "My sister is a student. He is kind.",
+          "correcto": "My sister is a student. She is kind.",
+          "explicacion": "Tu hermana es una mujer: se usa she, no he."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara visita la casa de Leo y conoce a su familia.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Sara, this is my mother.",
+            "traduccion": "Sara, esta es mi madre."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Hello! Nice to meet you.",
+            "traduccion": "¡Hola! Encantada de conocerla."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And this is my brother, Tom. He is a student.",
+            "traduccion": "Y este es mi hermano, Tom. Es estudiante."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Hi, Tom!",
+            "traduccion": "¡Hola, Tom!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And they are my cousins, Mia and Carlos.",
+            "traduccion": "Y ellos son mis primos, Mia y Carlos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quiénes son Mia y Carlos?",
+          "opciones": [
+            {
+              "es": "Los primos de Leo."
+            },
+            {
+              "es": "Los hermanos de Leo."
+            },
+            {
+              "es": "Los padres de Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «they are my cousins, Mia and Carlos». Su hermano es Tom."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "This is my mother.",
+          "es": "Esta es mi madre.",
+          "nota": "This is sirve también para presentar a una persona."
+        },
+        {
+          "indice": 1,
+          "en": "My brother is a student.",
+          "es": "Mi hermano es estudiante.",
+          "nota": "Una persona (my brother) → is."
+        },
+        {
+          "indice": 2,
+          "en": "This is my cousin.",
+          "es": "Este es mi primo.",
+          "nota": "Cousin vale para «primo» y para «prima»."
+        }
+      ]
+    },
+    "en.n1.class-05": {
+      "explicacion": {
+        "titulo": "Describir a la familia: my/our + familiar + is",
+        "texto": "Para describir a un familiar se usa my (mi) u our (nuestro, nuestra) + familiar + is + adjetivo: My grandmother is kind. El adjetivo no cambia con el género: kind sirve para «amable» en abuela y abuelo, y small para «pequeño» y «pequeña». Family es una sola cosa, así que va con is: Our family is small. Si hablas de dos personas, usa are: My aunt and my uncle are kind. Recuerda también presentarte (My name is…) y presentar objetos (This is a book)."
+      },
+      "patron": {
+        "texto": "My/Our + familiar + is + adjetivo:",
+        "formula": [
+          {
+            "texto": "My grandmother",
+            "nota": "posesivo + familiar"
+          },
+          {
+            "texto": "is",
+            "nota": "una persona → is"
+          },
+          {
+            "texto": "kind.",
+            "nota": "adjetivo: no cambia con el género"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Is kind my grandmother.",
+          "correcto": "My grandmother is kind.",
+          "explicacion": "En español se puede decir «es amable mi abuela», pero en inglés el sujeto va primero."
+        },
+        {
+          "incorrecto": "My aunt and my uncle is kind.",
+          "correcto": "My aunt and my uncle are kind.",
+          "explicacion": "Son dos personas, así que se usa are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le enseña a Tom una foto de su familia.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, this is my family.",
+            "traduccion": "Tom, esta es mi familia."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is she your grandmother?",
+            "traduccion": "¿Ella es tu abuela?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. My grandmother is kind.",
+            "traduccion": "Sí. Mi abuela es amable."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is this your uncle?",
+            "traduccion": "¿Este es tu tío?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. My uncle is from Mexico, and my aunt is from Spain.",
+            "traduccion": "Sí. Mi tío es de México y mi tía es de España."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de dónde es el tío de Mia?",
+          "opciones": [
+            {
+              "es": "De México."
+            },
+            {
+              "es": "De España."
+            },
+            {
+              "es": "De Perú."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «My uncle is from Mexico». La tía es de España."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "My grandmother is kind.",
+          "es": "Mi abuela es amable.",
+          "nota": "Kind no cambia: sirve para abuela y abuelo."
+        },
+        {
+          "indice": 1,
+          "en": "Our family is small.",
+          "es": "Nuestra familia es pequeña.",
+          "nota": "Our = nuestro/nuestra. Family es una sola → is."
+        },
+        {
+          "indice": 2,
+          "en": "My home is in this photo.",
+          "es": "Mi casa está en esta foto.",
+          "nota": "Aquí is significa «está»."
+        }
+      ]
+    }
+  }
+}
