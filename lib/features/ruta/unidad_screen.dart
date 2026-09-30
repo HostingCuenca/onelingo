@@ -108,6 +108,14 @@ List<_Pantalla> _pantallasBiblioteca(
   addPool('practice', TipoPaso.practicaIndependiente, 'practice');
   for (final step in u.pasos.where((step) => step.tipo == TipoPaso.situacion)) {
     result.add(_Pantalla(step));
+    // Ítem propio de la situación (enriquecimiento editorial). Las clases aún
+    // sin enriquecer traen una copia de la práctica (`situation-check`), que
+    // no se repite.
+    result.addAll(
+      step.items
+          .where((item) => !item.id.contains('situation-check'))
+          .map((item) => _Pantalla(step, item)),
+    );
   }
   addPool('evaluation', TipoPaso.evaluacion, 'evaluation');
   return result;
@@ -506,6 +514,40 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       final guiada = p.tipo == TipoPaso.practicaGuiada;
       final evalua = widget.repaso || p.tipo == TipoPaso.evaluacion;
       return [
+        // La pregunta de una situación se responde con el diálogo a la vista.
+        if (p.tipo == TipoPaso.situacion && p.frases.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Tarjeta(
+              color: OL.azulSuave,
+              sombra: false,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final linea in p.frases)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 3),
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            if (linea.hablante != null)
+                              TextSpan(
+                                text: '${linea.hablante}: ',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: OL.azul,
+                                ),
+                              ),
+                            TextSpan(text: linea.texto),
+                          ],
+                        ),
+                        style: const TextStyle(fontSize: 16, height: 1.35),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
         ItemView(
           key: ValueKey('${p.id}:${item.id}:$indice'),
           item: item,
@@ -681,7 +723,12 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         ),
       BotonPrincipal(
         onPressed: siguiente,
-        child: Text(p.tipo == TipoPaso.situacion ? 'PARTICIPAR' : 'SIGUIENTE'),
+        child: Text(
+          p.tipo == TipoPaso.situacion &&
+                  p.items.any((i) => !i.id.contains('situation-check'))
+              ? 'PARTICIPAR'
+              : 'SIGUIENTE',
+        ),
       ),
     ]);
     return vista;

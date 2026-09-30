@@ -1,0 +1,568 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "classes": {
+    "en.n1.class-16": {
+      "explicacion": {
+        "titulo": "Posesivos: my, your, his, her, its",
+        "texto": "Los posesivos van siempre delante del sustantivo: my book (mi libro), your pen (tu bolígrafo). En español «su» sirve para todo, pero en inglés depende del dueño: his si el dueño es un hombre o un niño, her si es una mujer o una niña, e its si es una cosa o un animal. El posesivo concuerda con el dueño, no con la cosa: Leo es hombre, así que se dice his bag aunque «bolsa» sea femenino."
+      },
+      "patron": {
+        "texto": "This/That is + posesivo + cosa:",
+        "formula": [
+          {
+            "texto": "That is",
+            "nota": "señala algo lejos"
+          },
+          {
+            "texto": "her",
+            "nota": "el dueño es una mujer (she)"
+          },
+          {
+            "texto": "desk.",
+            "nota": "lo que le pertenece"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Dueño",
+          "Posesivo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I"
+            },
+            {
+              "texto": "my"
+            },
+            {
+              "texto": "my book"
+            }
+          ],
+          [
+            {
+              "texto": "you"
+            },
+            {
+              "texto": "your"
+            },
+            {
+              "texto": "your pen"
+            }
+          ],
+          [
+            {
+              "texto": "he"
+            },
+            {
+              "texto": "his"
+            },
+            {
+              "texto": "his bag"
+            }
+          ],
+          [
+            {
+              "texto": "she"
+            },
+            {
+              "texto": "her"
+            },
+            {
+              "texto": "her desk"
+            }
+          ],
+          [
+            {
+              "texto": "it"
+            },
+            {
+              "texto": "its"
+            },
+            {
+              "texto": "its color"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo is my brother. This is her bag.",
+          "correcto": "Leo is my brother. This is his bag.",
+          "explicacion": "El dueño es Leo, un hombre: se usa his. En inglés el posesivo no cambia según la cosa (bolsa), sino según el dueño."
+        },
+        {
+          "incorrecto": "This is the my pen.",
+          "correcto": "This is my pen.",
+          "explicacion": "El posesivo ya hace el trabajo del artículo: no se pone the ni a delante de my, your, his o her."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia ordenan la mesa del aula al final de la clase.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "This is my pen.",
+            "traduccion": "Este es mi bolígrafo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And that is your book.",
+            "traduccion": "Y ese es tu libro."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. Ana is my sister. That is her book.",
+            "traduccion": "No. Ana es mi hermana. Ese es su libro."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "This is a bag. Its color is blue.",
+            "traduccion": "Este es un bolso. Su color es azul."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Tom is my brother. That is his bag.",
+            "traduccion": "Tom es mi hermano. Ese es su bolso."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién es el libro?",
+          "opciones": [
+            "De Ana, la hermana de Leo.",
+            "De Leo.",
+            "De Tom, el hermano de Leo."
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Ana is my sister. That is her book». Her se refiere a Ana."
+        }
+      }
+    },
+    "en.n1.class-17": {
+      "explicacion": {
+        "titulo": "Our y their: nuestro y su (de ellos)",
+        "texto": "Our significa «nuestro, nuestra, nuestros, nuestras» y corresponde a we. Their significa «su» o «sus» cuando los dueños son varios (they). A diferencia del español, estas palabras nunca cambian: our book y our books; their photo y their bags. Lo que sí cambia es el demostrativo y el verbo: this/that + is con una cosa, these/those + are con varias."
+      },
+      "patron": {
+        "texto": "These/Those + are + our/their + cosas:",
+        "formula": [
+          {
+            "texto": "Those",
+            "nota": "varias cosas, lejos"
+          },
+          {
+            "texto": "are",
+            "nota": "plural → are"
+          },
+          {
+            "texto": "their",
+            "nota": "los dueños son they (ellos o ellas)"
+          },
+          {
+            "texto": "bags.",
+            "nota": "sustantivo en plural"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Verbo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "this (una, cerca)"
+            },
+            {
+              "texto": "is"
+            },
+            {
+              "texto": "This is our home."
+            }
+          ],
+          [
+            {
+              "texto": "these (varias, cerca)"
+            },
+            {
+              "texto": "are"
+            },
+            {
+              "texto": "These are our books."
+            }
+          ],
+          [
+            {
+              "texto": "that (una, lejos)"
+            },
+            {
+              "texto": "is"
+            },
+            {
+              "texto": "That is their photo."
+            }
+          ],
+          [
+            {
+              "texto": "those (varias, lejos)"
+            },
+            {
+              "texto": "are"
+            },
+            {
+              "texto": "Those are their bags."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "These are ours books.",
+          "correcto": "These are our books.",
+          "explicacion": "Our no lleva -s aunque la cosa sea plural. En español decimos «nuestros», pero en inglés el posesivo no cambia."
+        },
+        {
+          "incorrecto": "That is they photo.",
+          "correcto": "That is their photo.",
+          "explicacion": "They es «ellos» (el sujeto). Para decir «su foto de ellos» se usa their."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos son hermanos y le enseñan su casa a su amiga Mia.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Mia, this is our home.",
+            "traduccion": "Mia, este es nuestro hogar."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "These are our books, and those are our chairs.",
+            "traduccion": "Estos son nuestros libros y esas son nuestras sillas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Our cousins are here. Those are their bags.",
+            "traduccion": "Nuestros primos están aquí. Esas son sus bolsas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And that is their photo.",
+            "traduccion": "Y esa es su foto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién son las bolsas?",
+          "opciones": [
+            "De los primos de Sara y Carlos.",
+            "De Sara y Carlos.",
+            "De Mia."
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Our cousins are here. Those are their bags». Their se refiere a los primos."
+        }
+      }
+    },
+    "en.n1.class-18": {
+      "explicacion": {
+        "titulo": "El apóstrofo 's: de quién es algo",
+        "texto": "Para decir «la foto de mi madre», en inglés el dueño va primero y se le añade 's: my mother's photo. El orden es al revés que en español: primero el dueño, después la cosa. El apóstrofo va pegado al dueño (father's, sister's), nunca a la cosa. Con personas no se suele decir the book of my father: se dice my father's book."
+      },
+      "patron": {
+        "texto": "This/That is + dueño + 's + cosa:",
+        "formula": [
+          {
+            "texto": "That is",
+            "nota": "presenta la cosa"
+          },
+          {
+            "texto": "your father's",
+            "nota": "el dueño + 's (de tu padre)"
+          },
+          {
+            "texto": "book.",
+            "nota": "la cosa que le pertenece"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "That is the book of my father.",
+          "correcto": "That is my father's book.",
+          "explicacion": "Es un calco de «el libro de mi padre». Con personas, el dueño va primero y lleva 's."
+        },
+        {
+          "incorrecto": "This is my brother pen.",
+          "correcto": "This is my brother's pen.",
+          "explicacion": "Sin 's, brother no indica pertenencia. El apóstrofo + s es obligatorio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom ayuda a Ana a ordenar su casa después de una comida familiar.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "This is a red bag.",
+            "traduccion": "Este es un bolso rojo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is my mother's bag.",
+            "traduccion": "Ese es el bolso de mi madre."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "This is a black pen.",
+            "traduccion": "Este es un bolígrafo negro."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is my father's pen.",
+            "traduccion": "Ese es el bolígrafo de mi padre."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And this book is new.",
+            "traduccion": "Y este libro es nuevo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is my sister's book.",
+            "traduccion": "Ese es el libro de mi hermana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién es el bolígrafo negro?",
+          "opciones": [
+            "Del padre de Ana.",
+            "De la madre de Ana.",
+            "De la hermana de Ana."
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «That is my father's pen»."
+        }
+      }
+    },
+    "en.n1.class-19": {
+      "explicacion": {
+        "titulo": "Have got y has got: tener",
+        "texto": "Para decir lo que alguien tiene se usa have got o has got. Con I, you, we y they va have got; con he, she o it va has got, igual que is va con he y she. El orden es sujeto + have/has + got + lo que tiene: She has got a bag. En inglés el sujeto es obligatorio: no se dice «Has got a pen», sino «He has got a pen»."
+      },
+      "patron": {
+        "texto": "Sujeto + have/has got + cosa:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "sujeto: he, she o it"
+          },
+          {
+            "texto": "has got",
+            "nota": "he/she/it → has got"
+          },
+          {
+            "texto": "a bag.",
+            "nota": "lo que tiene"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "have got"
+            },
+            {
+              "texto": "We have got a photo."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "has got"
+            },
+            {
+              "texto": "She has got a bag."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She have got a pen.",
+          "correcto": "She has got a pen.",
+          "explicacion": "Con he, she o it se usa has got, no have got."
+        },
+        {
+          "incorrecto": "Has got a book.",
+          "correcto": "He has got a book.",
+          "explicacion": "En español decimos «tiene un libro» sin sujeto, pero en inglés el sujeto (he, she…) es obligatorio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo revisan lo que lleva cada uno a la clase.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I have got a book and a pen.",
+            "traduccion": "Tengo un libro y un bolígrafo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I have got a bag.",
+            "traduccion": "Yo tengo un bolso."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Ana has got the photo.",
+            "traduccion": "Ana tiene la foto."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Tom has got an umbrella.",
+            "traduccion": "Y Tom tiene un paraguas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tiene Tom?",
+          "opciones": [
+            "He has got an umbrella.",
+            "He has got the photo.",
+            "He has got a book."
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Tom has got an umbrella»."
+        }
+      }
+    },
+    "en.n1.class-20": {
+      "explicacion": {
+        "titulo": "Repaso: familia, pertenencia y have/has got",
+        "texto": "En esta clase se juntan tres herramientas. Los posesivos (my, your, his, her, our, their) van delante del sustantivo y dependen del dueño. El apóstrofo 's une dueño y cosa: my father's book. Have got o has got dice lo que alguien tiene, también los rasgos: She has got long hair. Fíjate si el sujeto es singular (my mother → has got) o plural (our parents, their children → have got)."
+      },
+      "patron": {
+        "texto": "Posesivo + familiar + have/has got + rasgo:",
+        "formula": [
+          {
+            "texto": "His father",
+            "nota": "posesivo + familiar (singular)"
+          },
+          {
+            "texto": "has got",
+            "nota": "singular → has got; plural → have got"
+          },
+          {
+            "texto": "short hair.",
+            "nota": "rasgo: el adjetivo va antes del sustantivo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "my mother, her sister (una persona)"
+            },
+            {
+              "texto": "has got"
+            },
+            {
+              "texto": "My mother has got brown eyes."
+            }
+          ],
+          [
+            {
+              "texto": "our parents, their children (varias)"
+            },
+            {
+              "texto": "have got"
+            },
+            {
+              "texto": "Their children have got long hair."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My sister has got hair long.",
+          "correcto": "My sister has got long hair.",
+          "explicacion": "En inglés el adjetivo va antes del sustantivo: long hair, no hair long (en español decimos «pelo largo»)."
+        },
+        {
+          "incorrecto": "Their children has got brown eyes.",
+          "correcto": "Their children have got brown eyes.",
+          "explicacion": "Children es plural (varios hijos), así que se usa have got."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le enseña a Sara una foto de su familia.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "This is my family.",
+            "traduccion": "Esta es mi familia."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Your mother has got long hair.",
+            "traduccion": "Tu madre tiene el pelo largo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, and my father has got short hair.",
+            "traduccion": "Sí, y mi padre tiene el pelo corto."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is your brother. He has got brown eyes.",
+            "traduccion": "Ese es tu hermano. Tiene ojos marrones."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No, that is my cousin. My brother's eyes are green.",
+            "traduccion": "No, ese es mi primo. Los ojos de mi hermano son verdes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién tiene ojos marrones?",
+          "opciones": [
+            "El primo de Carlos.",
+            "El hermano de Carlos.",
+            "El padre de Carlos."
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos corrige a Sara: el chico de ojos marrones es su primo; los ojos de su hermano son verdes."
+        }
+      }
+    }
+  }
+}

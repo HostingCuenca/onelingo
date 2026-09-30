@@ -14,6 +14,8 @@ import re
 from copy import deepcopy
 from pathlib import Path
 
+import validar_enriquecimiento
+
 
 ROOT = Path(__file__).resolve().parents[2]
 EDITORIAL = ROOT / "assets/contenido/en/editorial"
@@ -52,6 +54,45 @@ def classes(level: str, count: int) -> list[dict]:
         for number in range(start, count + 1)
     )
     return result
+
+
+def enrichments(level: str, units: dict[str, dict]) -> dict[str, dict]:
+    """Capa de enriquecimiento (CONTRATO_ENRIQUECIMIENTO.md) aprobada.
+
+    Solo se fusionan archivos con revisión independiente ``GO``; un borrador
+    no cambia el runtime aunque esté en la carpeta.
+    """
+    result: dict[str, dict] = {}
+    for path in sorted((EDITORIAL / level).glob("enriquecimiento-*.json")):
+        document = json.loads(path.read_text(encoding="utf-8"))
+        if document.get("review", {}).get("status") != "GO":
+            continue
+        errors, _ = validar_enriquecimiento.validar(path, units)
+        if errors:
+            raise ValueError(f"{path.name} tiene GO pero no pasa la validación automática: {errors[:5]}")
+        for class_id, entry in document["classes"].items():
+            if class_id in result:
+                raise ValueError(f"{class_id}: enriquecimiento duplicado ({path.name})")
+            result[class_id] = entry
+    return result
+
+
+def unenriched_units(spec: dict) -> list[dict]:
+    return [
+        route_unit(
+            document,
+            level=spec["id"],
+            cefr=spec["cefr"],
+            internal=spec["internal"],
+            first_order=spec["first_order"],
+            previous="",
+        )
+        for document in classes(spec["id"], spec["count"])
+    ]
+
+
+def es(text: str) -> dict:
+    return {"es": text}
 
 
 def number_of(document: dict) -> int:
@@ -254,6 +295,7 @@ def route_unit(
     internal: int,
     first_order: int,
     previous: str,
+    enrichment: dict | None = None,
 ) -> dict:
     number = number_of(document)
     title = document.get("title", {})
@@ -299,13 +341,119 @@ def route_unit(
         skills.remove("escritura")
     situation_item = deepcopy(practice[0])
     situation_item["id"] = f"ex.onelingo.{level}.c{number:02d}.situation-check:v1:application"
-    steps = [
+    prefix = f"en.{level}.class-{number:02d}"
+    teaching_items = [
         {
-            "id": f"en.{level}.class-{number:02d}.explanation",
+            "texto": item.get("en", ""),
+            "traduccion": {"es": item.get("es", "")},
+            "nota": {"es": item.get("explanationEs", "Observa el modelo.")},
+        }
+        for item in teaching
+    ]
+    situation = {
+        "id": f"{prefix}.situation",
+        "tipo": "situacion",
+        "contexto": {"es": "Usa el modelo de la clase en una situación breve."},
+        "dialogo": [
+            {"hablante": "Modelo", "texto": first_sentence, "traduccion": {"es": first_translation}}
+        ],
+        "items": [situation_item],
+    }
+    frequent_errors = [
+        {
+            "incorrecto": first_sentence.rstrip(".") + " ?",
+            "correcto": first_sentence,
+            "explicacion": {"es": "Conserva el orden y la forma del modelo enseñado."},
+        }
+    ]
+    explanation_steps = [
+        {
+            "id": f"{prefix}.explanation",
             "tipo": "explicacion",
             "titulo": {"es": "Objetivo de la clase"},
             "texto": {"es": objective},
-        },
+        }
+    ]
+    if enrichment:
+        explanation = enrichment["explicacion"]
+        explanation_steps = [
+            {
+                "id": f"{prefix}.explanation",
+                "tipo": "explicacion",
+                "titulo": es(explanation["titulo"]),
+                "texto": es(explanation["texto"]),
+            }
+        ]
+        pattern = enrichment.get("patron")
+        if pattern:
+            explanation_steps.append(
+                {
+                    "id": f"{prefix}.pattern",
+                    "tipo": "patron",
+                    "texto": es(pattern["texto"]),
+                    "formula": [
+                        {"texto": segment["texto"], "nota": es(segment["nota"])}
+                        for segment in pattern["formula"]
+                    ],
+                }
+            )
+        table = enrichment.get("tabla")
+        if table:
+            explanation_steps.append(
+                {
+                    "id": f"{prefix}.table",
+                    "tipo": "tabla",
+                    "columnas": [es(column) for column in table["columnas"]],
+                    "filas": [
+                        [
+                            {
+                                key: (es(value) if key == "apoyo" else value)
+                                for key, value in cell.items()
+                            }
+                            for cell in row
+                        ]
+                        for row in table["filas"]
+                    ],
+                }
+            )
+        for replacement in enrichment.get("ejemplos", []):
+            teaching_items[replacement["indice"]] = {
+                "texto": replacement["en"],
+                "traduccion": es(replacement["es"]),
+                "nota": es(replacement["nota"]),
+            }
+        frequent_errors = [
+            {
+                "incorrecto": error["incorrecto"],
+                "correcto": error["correcto"],
+                "explicacion": es(error["explicacion"]),
+            }
+            for error in enrichment["erroresFrecuentes"]
+        ]
+        authored = enrichment["situacion"]
+        item = authored["item"]
+        situation_item = {
+            "id": f"ex.onelingo.{level}.c{number:02d}.situation:v2:application",
+            "formato": item["formato"],
+            "consigna": es(item["consigna"]),
+            "feedback": es(item["feedback"]),
+            "opciones": list(item["opciones"]),
+            "respuesta": item["respuesta"],
+        }
+        if item.get("audio"):
+            situation_item["audio"] = item["audio"]
+        situation = {
+            "id": f"{prefix}.situation",
+            "tipo": "situacion",
+            "contexto": es(authored["contexto"]),
+            "dialogo": [
+                {"hablante": line["hablante"], "texto": line["texto"], "traduccion": es(line["traduccion"])}
+                for line in authored["dialogo"]
+            ],
+            "items": [situation_item],
+        }
+    steps = [
+        *explanation_steps,
         {
             "id": f"en.{level}.class-{number:02d}.vocabulary",
             "tipo": "vocabulario",
@@ -315,14 +463,7 @@ def route_unit(
             "id": f"en.{level}.class-{number:02d}.teaching",
             "tipo": "ejemplos",
             "titulo": {"es": "Aprende y observa"},
-            "items": [
-                {
-                    "texto": item.get("en", ""),
-                    "traduccion": {"es": item.get("es", "")},
-                    "nota": {"es": item.get("explanationEs", "Observa el modelo.")},
-                }
-                for item in teaching
-            ],
+            "items": teaching_items,
         },
         {
             "id": f"en.{level}.class-{number:02d}.guided",
@@ -334,15 +475,7 @@ def route_unit(
             "tipo": "practica_independiente",
             "items": practice,
         },
-        {
-            "id": f"en.{level}.class-{number:02d}.situation",
-            "tipo": "situacion",
-            "contexto": {"es": "Usa el modelo de la clase en una situación breve."},
-            "dialogo": [
-                {"hablante": "Modelo", "texto": first_sentence, "traduccion": {"es": first_translation}}
-            ],
-            "items": [situation_item],
-        },
+        situation,
         {
             "id": f"en.{level}.class-{number:02d}.evaluation",
             "tipo": "evaluacion",
@@ -361,13 +494,7 @@ def route_unit(
         "habilidades": skills,
         "gramatica": list(document.get("usesPatterns", [])),
         "vocabulario": words,
-        "erroresFrecuentes": [
-            {
-                "incorrecto": first_sentence.rstrip(".") + " ?",
-                "correcto": first_sentence,
-                "explicacion": {"es": "Conserva el orden y la forma del modelo enseñado."},
-            }
-        ],
+        "erroresFrecuentes": frequent_errors,
         "pasos": steps,
         "criterioDominio": {"umbral": 0.8},
         "repaso": {"intervalosDias": [1, 3, 7, 16, 35, 90]},
@@ -385,11 +512,21 @@ def compile_runtime() -> tuple[dict[str, dict], dict, dict, dict]:
         "families": [],
     }
     previous = "en.f0.presentarse"
+    # La validación del enriquecimiento compara con las clases sin enriquecer.
+    base_units = {
+        unit["id"]: unit
+        for spec in LEVELS
+        for unit in unenriched_units(spec)
+    }
     routes = {}
     active_ids = []
     for spec in LEVELS:
         level = spec["id"]
         documents = classes(level, spec["count"])
+        enriched = enrichments(level, base_units)
+        unknown = set(enriched) - {document["id"] for document in documents}
+        if unknown:
+            raise ValueError(f"enriquecimiento de clases fuera del corte: {sorted(unknown)}")
         if len(documents) != spec["count"]:
             raise ValueError(f"expected {spec['count']} {level} classes, got {len(documents)}")
         route_units = []
@@ -420,6 +557,7 @@ def compile_runtime() -> tuple[dict[str, dict], dict, dict, dict]:
                     internal=spec["internal"],
                     first_order=spec["first_order"],
                     previous=previous,
+                    enrichment=enriched.get(document["id"]),
                 )
             )
             active_ids.append(document["id"])

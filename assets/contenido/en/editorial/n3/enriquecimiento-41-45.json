@@ -1,0 +1,759 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "classes": {
+    "en.n3.class-41": {
+      "explicacion": {
+        "titulo": "Presente pasivo: is/are + participio",
+        "texto": "La voz pasiva se usa cuando importa más lo que se hace que quién lo hace. En presente se forma con am/is/are + participio pasado: Bread is made every morning (el pan se hace cada mañana). Lo que recibe la acción va al principio y be concuerda con ello: is con singular, are con plural. Quien hace la acción (el agente) solo se nombra con by cuando es útil. En español decimos «se revisan los pedidos»; en inglés no existe ese «se»: se usa la pasiva (The orders are checked)."
+      },
+      "patron": {
+        "texto": "Lo que recibe la acción + is/are + participio (+ by + agente):",
+        "formula": [
+          {
+            "texto": "The meals",
+            "nota": "lo que recibe la acción (plural)"
+          },
+          {
+            "texto": "are prepared",
+            "nota": "are + participio"
+          },
+          {
+            "texto": "by our cook",
+            "nota": "by + agente, solo si es útil"
+          },
+          {
+            "texto": "every day.",
+            "nota": "cuándo o con qué frecuencia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I"
+            },
+            {
+              "texto": "am + participio"
+            },
+            {
+              "texto": "I am picked up at four."
+            }
+          ],
+          [
+            {
+              "texto": "singular (he, she, it…)"
+            },
+            {
+              "texto": "is + participio"
+            },
+            {
+              "texto": "The soup is prepared in the kitchen."
+            }
+          ],
+          [
+            {
+              "texto": "plural (we, you, they…)"
+            },
+            {
+              "texto": "are + participio"
+            },
+            {
+              "texto": "The tickets are checked at the door."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The pizzas are prepare in the kitchen.",
+          "correcto": "The pizzas are prepared in the kitchen.",
+          "explicacion": "La pasiva necesita el participio (prepared), no el infinitivo (prepare)."
+        },
+        {
+          "incorrecto": "Are checked the tickets at the door.",
+          "correcto": "The tickets are checked at the door.",
+          "explicacion": "Es un calco de «se revisan los boletos». En inglés lo que recibe la acción va delante y be concuerda con ello."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia visita la panadería de su tío Carlos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Uncle Carlos, when is the bread made?",
+            "traduccion": "Tío Carlos, ¿cuándo se hace el pan?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is made every morning at five.",
+            "traduccion": "Se hace cada mañana a las cinco."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the cakes?",
+            "traduccion": "¿Y los pasteles?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The cakes are made in the afternoon by your aunt Sara.",
+            "traduccion": "Los pasteles los hace tu tía Sara por la tarde."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then each box is labelled with the date.",
+            "traduccion": "Luego cada caja se etiqueta con la fecha."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién hace los pasteles?",
+          "opciones": [
+            "La tía Sara.",
+            "El tío Carlos.",
+            "Mia."
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «The cakes are made in the afternoon by your aunt Sara». By presenta al agente."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Bread is made here every morning.",
+          "es": "Aquí se hace pan cada mañana.",
+          "nota": "Is + participio (made): importa el pan, no quién lo hace."
+        },
+        {
+          "indice": 1,
+          "en": "The tickets are checked at the door.",
+          "es": "Los boletos se revisan en la puerta.",
+          "nota": "Tickets es plural, por eso are."
+        },
+        {
+          "indice": 2,
+          "en": "I am picked up from school at four.",
+          "es": "Me recogen de la escuela a las cuatro.",
+          "nota": "Con I se usa am + participio."
+        },
+        {
+          "indice": 3,
+          "en": "The rooms are cleaned every day.",
+          "es": "Las habitaciones se limpian todos los días.",
+          "nota": "Sin agente: no se sabe o no importa quién limpia."
+        },
+        {
+          "indice": 4,
+          "en": "The meals are prepared by our cook, Nora.",
+          "es": "Las comidas las prepara nuestra cocinera, Nora.",
+          "nota": "By + agente, solo cuando es útil saber quién lo hace."
+        },
+        {
+          "indice": 5,
+          "en": "Each parcel is labelled and checked before delivery.",
+          "es": "Cada paquete se etiqueta y se revisa antes de la entrega.",
+          "nota": "Un solo is sirve para dos participios unidos con and."
+        }
+      ]
+    },
+    "en.n3.class-42": {
+      "explicacion": {
+        "titulo": "Pasado pasivo: was/were + participio",
+        "texto": "Para contar un cambio o una reparación ya terminada sin decir quién la hizo se usa was/were + participio: The door was fixed yesterday (la puerta se arregló ayer). Was va con un sujeto singular y were con uno plural. El participio no cambia: was replaced, were replaced. Añade cuándo pasó (yesterday, on Monday, this morning) para que el aviso sea claro."
+      },
+      "patron": {
+        "texto": "Lo afectado + was/were + participio + cuándo:",
+        "formula": [
+          {
+            "texto": "The lights",
+            "nota": "lo afectado (plural)"
+          },
+          {
+            "texto": "were replaced",
+            "nota": "were + participio"
+          },
+          {
+            "texto": "on Tuesday.",
+            "nota": "cuándo terminó"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "singular"
+            },
+            {
+              "texto": "was + participio"
+            },
+            {
+              "texto": "The gate was locked at nine."
+            }
+          ],
+          [
+            {
+              "texto": "plural"
+            },
+            {
+              "texto": "were + participio"
+            },
+            {
+              "texto": "The chairs were delivered yesterday."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The windows was cleaned yesterday.",
+          "correcto": "The windows were cleaned yesterday.",
+          "explicacion": "Windows es plural: se usa were."
+        },
+        {
+          "incorrecto": "The door fixed this morning.",
+          "correcto": "The door was fixed this morning.",
+          "explicacion": "Sin was, la frase dice que la puerta arregló algo. La pasiva necesita was o were delante del participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo vuelve a casa después de un viaje y su hermana Ana le cuenta los cambios.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The house looks different!",
+            "traduccion": "¡La casa se ve diferente!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. The old chairs were replaced on Monday.",
+            "traduccion": "Sí. Las sillas viejas se cambiaron el lunes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the new sofa?",
+            "traduccion": "¿Y el sofá nuevo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It was delivered yesterday.",
+            "traduccion": "Lo entregaron ayer."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Was my bicycle repaired too?",
+            "traduccion": "¿También se reparó mi bicicleta?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, it was returned this morning.",
+            "traduccion": "Sí, la devolvieron esta mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo llegó el sofá nuevo?",
+          "opciones": [
+            "Ayer.",
+            "El lunes.",
+            "Esta mañana."
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «It was delivered yesterday»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The broken window was repaired yesterday.",
+          "es": "La ventana rota se reparó ayer.",
+          "nota": "Was + participio: una reparación ya terminada."
+        },
+        {
+          "indice": 1,
+          "en": "The gate was locked at nine.",
+          "es": "La reja se cerró con llave a las nueve.",
+          "nota": "Gate es singular: was."
+        },
+        {
+          "indice": 2,
+          "en": "The lights were replaced on Friday.",
+          "es": "Las luces se cambiaron el viernes.",
+          "nota": "Lights es plural: were."
+        },
+        {
+          "indice": 3,
+          "en": "The books were returned to the library.",
+          "es": "Los libros se devolvieron a la biblioteca.",
+          "nota": "El participio (returned) es igual con was y con were."
+        },
+        {
+          "indice": 4,
+          "en": "The new sofa was delivered this morning.",
+          "es": "El sofá nuevo se entregó esta mañana.",
+          "nota": "This morning dice cuándo terminó la acción."
+        },
+        {
+          "indice": 5,
+          "en": "Our house was built in 1990.",
+          "es": "Nuestra casa se construyó en 1990.",
+          "nota": "Built es un participio irregular: build → built."
+        }
+      ]
+    },
+    "en.n3.class-43": {
+      "explicacion": {
+        "titulo": "Seguir las etapas: was received, is being repaired",
+        "texto": "Cuando algo pasa por varias etapas (se recibe, se revisa, se repara, se confirma), cada etapa se cuenta con la pasiva adecuada. Lo terminado va en pasado: The bicycle was received on Monday. Lo que ocurre ahora va con is/are being + participio: It is being repaired now (la están reparando). Lo que falta se dice con will be + participio (It will be returned on Friday) o con has not been + participio (It has not been confirmed yet). Cada fecha va con su etapa: no las mezcles."
+      },
+      "patron": {
+        "texto": "Etapa terminada + etapa actual:",
+        "formula": [
+          {
+            "texto": "The bicycle",
+            "nota": "lo que pasa por el proceso"
+          },
+          {
+            "texto": "was checked on Tuesday,",
+            "nota": "etapa terminada: was + participio"
+          },
+          {
+            "texto": "and it is being repaired now.",
+            "nota": "etapa actual: is being + participio"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Etapa",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "terminada"
+            },
+            {
+              "texto": "was/were + participio"
+            },
+            {
+              "texto": "The request was received."
+            }
+          ],
+          [
+            {
+              "texto": "en curso"
+            },
+            {
+              "texto": "is/are being + participio"
+            },
+            {
+              "texto": "The phone is being repaired."
+            }
+          ],
+          [
+            {
+              "texto": "futura"
+            },
+            {
+              "texto": "will be + participio"
+            },
+            {
+              "texto": "It will be returned on Friday."
+            }
+          ],
+          [
+            {
+              "texto": "pendiente"
+            },
+            {
+              "texto": "has not been + participio"
+            },
+            {
+              "texto": "It has not been confirmed yet."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The bicycle is repairing now.",
+          "correcto": "The bicycle is being repaired now.",
+          "explicacion": "La bicicleta no repara nada: recibe la acción. Para «se está reparando» hace falta is being + participio."
+        },
+        {
+          "incorrecto": "The phone will be return on Friday.",
+          "correcto": "The phone will be returned on Friday.",
+          "explicacion": "Después de will be también va el participio (returned)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom pregunta por su bicicleta en el taller del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Hello! Is my red bicycle ready?",
+            "traduccion": "¡Hola! ¿Está lista mi bicicleta roja?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Not yet. It was received on Monday and checked on Tuesday.",
+            "traduccion": "Todavía no. Se recibió el lunes y se revisó el martes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And now?",
+            "traduccion": "¿Y ahora?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Now it is being repaired. It will be returned to you on Friday.",
+            "traduccion": "Ahora la están reparando. Se te devolverá el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo se revisó la bicicleta?",
+          "opciones": [
+            "El martes.",
+            "El lunes.",
+            "El viernes."
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «It was received on Monday and checked on Tuesday»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The request was received on Monday.",
+          "es": "La solicitud se recibió el lunes.",
+          "nota": "Primera etapa, ya terminada: pasado pasivo."
+        },
+        {
+          "indice": 1,
+          "en": "The phone was checked on Tuesday.",
+          "es": "El teléfono se revisó el martes.",
+          "nota": "La revisión va antes de la reparación."
+        },
+        {
+          "indice": 2,
+          "en": "The screen is being repaired now.",
+          "es": "La pantalla se está reparando ahora.",
+          "nota": "Is being + participio: la etapa actual."
+        },
+        {
+          "indice": 3,
+          "en": "The confirmation has not been sent yet.",
+          "es": "La confirmación todavía no se ha enviado.",
+          "nota": "Has not been + participio: una etapa pendiente."
+        },
+        {
+          "indice": 4,
+          "en": "The phone will be returned on Friday.",
+          "es": "El teléfono se devolverá el viernes.",
+          "nota": "Will be + participio: la etapa final, con su fecha."
+        },
+        {
+          "indice": 5,
+          "en": "My bicycle was received on Monday, and it is being repaired now.",
+          "es": "Mi bicicleta se recibió el lunes y ahora la están reparando.",
+          "nota": "Cada fecha se queda con su etapa: el lunes es la recepción, no la reparación."
+        }
+      ]
+    },
+    "en.n3.class-44": {
+      "explicacion": {
+        "titulo": "Explicar un proceso: First, Next, Finally",
+        "texto": "Para explicar cómo se hace algo habitualmente sin nombrar a quien lo hace, se usa el presente pasivo en todas las etapas: are collected, is inspected, are returned. No cambies de tiempo ni de voz a mitad del proceso. Ordena las etapas con First, Next, Then y Finally (primero, después, luego, por último), normalmente seguidos de coma. Si el proceso ocurrió una sola vez en el pasado, todas las etapas van en pasado: was/were + participio."
+      },
+      "patron": {
+        "texto": "Conector + etapa en presente pasivo:",
+        "formula": [
+          {
+            "texto": "First,",
+            "nota": "conector de orden + coma"
+          },
+          {
+            "texto": "the books are collected.",
+            "nota": "etapa 1: presente pasivo"
+          },
+          {
+            "texto": "Next, they are sorted.",
+            "nota": "etapa siguiente, mismo tiempo"
+          },
+          {
+            "texto": "Finally, they are returned.",
+            "nota": "última etapa"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "First,"
+            },
+            {
+              "texto": "primero"
+            }
+          ],
+          [
+            {
+              "texto": "Next,"
+            },
+            {
+              "texto": "después"
+            }
+          ],
+          [
+            {
+              "texto": "Then"
+            },
+            {
+              "texto": "luego"
+            }
+          ],
+          [
+            {
+              "texto": "Finally,"
+            },
+            {
+              "texto": "por último"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "First, the books are collected. Next, we sorted them.",
+          "correcto": "First, the books are collected. Next, they are sorted.",
+          "explicacion": "No cambies de tiempo ni de voz en medio del proceso: si empiezas en presente pasivo, sigue igual."
+        },
+        {
+          "incorrecto": "At the end, the books are returned.",
+          "correcto": "Finally, the books are returned.",
+          "explicacion": "«Al final» en una secuencia de pasos se dice Finally. At the end necesita of + algo (at the end of the day)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a su profesora Sara qué pasa con las cosas perdidas en la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Sara, what happens to lost things?",
+            "traduccion": "Sara, ¿qué pasa con las cosas perdidas?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "First, they are collected from the school every Friday.",
+            "traduccion": "Primero, se recogen por toda la escuela cada viernes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Next, each thing is labelled with the date.",
+            "traduccion": "Después, cada cosa se etiqueta con la fecha."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Finally, they are put in the big box next to the library.",
+            "traduccion": "Por último, se ponen en la caja grande junto a la biblioteca."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo se recogen las cosas perdidas?",
+          "opciones": [
+            "Cada viernes.",
+            "Cada lunes.",
+            "Todos los días."
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «First, they are collected from the school every Friday»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Lost things are collected every Friday.",
+          "es": "Las cosas perdidas se recogen cada viernes.",
+          "nota": "Proceso habitual: presente pasivo, sin agente."
+        },
+        {
+          "indice": 1,
+          "en": "First, the old coats are collected at the door.",
+          "es": "Primero, los abrigos viejos se recogen en la puerta.",
+          "nota": "First abre la secuencia."
+        },
+        {
+          "indice": 2,
+          "en": "Next, each coat is inspected for damage.",
+          "es": "Después, cada abrigo se revisa por si tiene daños.",
+          "nota": "Mismo tiempo en cada etapa: is inspected."
+        },
+        {
+          "indice": 3,
+          "en": "Then the good coats are sorted by size.",
+          "es": "Luego, los abrigos en buen estado se clasifican por talla.",
+          "nota": "Then conecta con la etapa siguiente."
+        },
+        {
+          "indice": 4,
+          "en": "Finally, they are taken to the school.",
+          "es": "Por último, se llevan a la escuela.",
+          "nota": "Finally cierra el proceso."
+        },
+        {
+          "indice": 5,
+          "en": "First, the bottles are collected. Next, they are washed. Finally, they are filled again.",
+          "es": "Primero, las botellas se recogen. Después, se lavan. Por último, se vuelven a llenar.",
+          "nota": "Tres etapas, un solo tiempo (presente pasivo) y conectores de orden."
+        }
+      ]
+    },
+    "en.n3.class-45": {
+      "explicacion": {
+        "titulo": "Preguntar por el estado de algo y pedir una acción",
+        "texto": "Para resolver un problema de estado (un pedido o una reparación que no llega), primero cuenta lo que ya pasó en pasado pasivo (was received, was checked). Luego di lo que ocurre ahora con is being + participio y nombra la etapa que falta con has not been + participio. Termina con una petición concreta: Please confirm when it will be delivered. Dentro de la petición el orden es normal (when it will be…), no de pregunta. Usa solo los datos que tienes, sin inventar fechas."
+      },
+      "patron": {
+        "texto": "Hecho terminado + etapa pendiente + petición:",
+        "formula": [
+          {
+            "texto": "The phone was repaired on Monday,",
+            "nota": "hecho terminado: was + participio"
+          },
+          {
+            "texto": "but it has not been returned yet.",
+            "nota": "etapa pendiente: has not been + participio"
+          },
+          {
+            "texto": "Please confirm when it will be returned.",
+            "nota": "petición concreta: Please confirm when + sujeto + will be…"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Please confirm me the date.",
+          "correcto": "Please confirm the date.",
+          "explicacion": "Confirm no lleva me: se confirma algo, no a alguien. Si quieres decir «dime», usa tell me: Please tell me the date."
+        },
+        {
+          "incorrecto": "Please confirm when will it be returned.",
+          "correcto": "Please confirm when it will be returned.",
+          "explicacion": "Después de confirm when… el orden es normal (sujeto + will be), no de pregunta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia pregunta en la tienda de reparaciones del barrio por el teléfono de su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Hello. I am asking about my grandmother's phone.",
+            "traduccion": "Hola. Pregunto por el teléfono de mi abuela."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It was received on Monday, and the screen was replaced yesterday.",
+            "traduccion": "Se recibió el lunes y la pantalla se cambió ayer."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is it ready now?",
+            "traduccion": "¿Ya está listo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Not yet. The battery is being tested now.",
+            "traduccion": "Todavía no. Ahora se está probando la batería."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Please confirm when it will be ready for collection.",
+            "traduccion": "Por favor, confirme cuándo estará listo para recogerlo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It will be ready on Thursday.",
+            "traduccion": "Estará listo el jueves."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué se está haciendo ahora con el teléfono?",
+          "opciones": [
+            "Se está probando la batería.",
+            "Se está cambiando la pantalla.",
+            "Se está recibiendo en la tienda."
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «The battery is being tested now». La pantalla ya se cambió ayer."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "My order was sent on 5 March, but it has not arrived.",
+          "es": "Mi pedido se envió el 5 de marzo, pero no ha llegado.",
+          "nota": "Parte de los datos reales: la fecha y la acción que constan."
+        },
+        {
+          "indice": 1,
+          "en": "The parcel is being prepared now.",
+          "es": "El paquete se está preparando ahora.",
+          "nota": "Is being + participio: la acción actual."
+        },
+        {
+          "indice": 2,
+          "en": "The request was received on Monday.",
+          "es": "La solicitud se recibió el lunes.",
+          "nota": "Was + participio: una acción terminada."
+        },
+        {
+          "indice": 3,
+          "en": "The phone was checked, and then the screen was replaced.",
+          "es": "El teléfono se revisó y luego se cambió la pantalla.",
+          "nota": "Las etapas se cuentan en el orden en que ocurrieron."
+        },
+        {
+          "indice": 4,
+          "en": "Delivery has not been arranged. Please confirm when it will be arranged.",
+          "es": "La entrega no se ha organizado. Por favor, confirme cuándo se organizará.",
+          "nota": "Nombra la etapa pendiente y pide una acción sobre ese paso."
+        },
+        {
+          "indice": 5,
+          "en": "I am asking about suitcase B17. It was found on 7 March, and it is being kept at the airport desk. Delivery has not been arranged yet. Please confirm when it will be delivered.",
+          "es": "Pregunto por la maleta B17. Se encontró el 7 de marzo y la están guardando en el mostrador del aeropuerto. La entrega todavía no se ha organizado. Por favor, confirme cuándo se entregará.",
+          "nota": "Mensaje completo: hechos pasados, acción actual, etapa pendiente y petición."
+        }
+      ]
+    }
+  }
+}
