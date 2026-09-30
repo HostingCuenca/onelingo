@@ -59,7 +59,8 @@
 - [x] Desplegar `20260930-edu-6-pulido` (2026-09-30).
 - [x] Compresión gzip de JSON en Apache (2026-09-30).
 - [x] Producir, revisar (GO) e integrar Inglés N3 C91 → N10 C100; releases edu-7 a edu-10 (1.000 clases publicadas, 2026-09-30).
-- [ ] Subir la dificultad C1 de N8–N10 (léxico enseñado más amplio, distractores más finos).
+- [x] Subir la dificultad C1 de N8–N10: pase C1 con puerta medible y GO independiente (edu-11, 2026-09-30).
+- [ ] Diagnóstico de ubicación v2 alineado con N1–N10.
 - [ ] Separar el léxico de validación del vocabulario enseñado (auditoría #15).
 - [x] Producir Inglés N3 C91–C95 (`community-project`) en staging, con autoría, simulación, corrección y GO independiente.
 - [x] Producir Inglés N3 C96–C100 (`b1-entry-capstone`) y revisar el bloque completo por ser cierre de nivel.

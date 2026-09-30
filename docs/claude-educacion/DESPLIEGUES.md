@@ -174,3 +174,12 @@ Commit: `d6502aa` · Build: `main.dart.js` `2d5759d1…` (sin cambios de código
 Pruebas: 177 Flutter (1 omitida), validar_ruta 0 errores en 10 idiomas, construir_bloque OK en los 20 bloques de N10, 1.000/1.000 clases enriquecidas con GO.
 Backup: `/var/www/onelingo/backups/20260930-edu-10-n10-ingles-completo/web-anterior` (= edu-9). Health: salud, APK, avatar, `n10-editorial.json` y biblioteca 200; `curso.json` sirve n8–n10 «publicado»; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-10-n10-ingles-completo/web-retirada-post && cp -al backups/20260930-edu-10-n10-ingles-completo/web-anterior web'`
+
+## Release: 20260930-edu-11-c1-dificultad
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: pase de dificultad C1 en N8–N10 (60 bloques, 300 clases) con puerta medible en el constructor (`"pase": "c1"`) y revisión independiente GO por bloque. Estímulos de ~15 → 40–46 palabras; vocabulario 8,5 → 12 entradas por clase; frases de enseñanza 12 → 20–23 palabras; la correcta es la única opción más larga en 13–14 % (antes 42–51 %). Español neutro (municipio, auto, boleto, celular…). App: opciones y bancos de palabras siempre barajados (y nunca en el orden correcto) en lecciones antiguas y en el diagnóstico.
+Commit: `5422ab3` · Build: `main.dart.js` `8c57e0a0…`; biblioteca `0d281c1b…` (servida igual).
+Pruebas: 178 Flutter (1 omitida), validar_ruta 0 errores en 10 idiomas, 1.000/1.000 clases con GO, 60/60 bloques C1 con GO y construcción en orden.
+Backup: `/var/www/onelingo/backups/20260930-edu-11-c1-dificultad/web-anterior` (= edu-10). Health: salud, APK, avatar y `n10-editorial.json` 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-11-c1-dificultad/web-retirada-post && cp -al backups/20260930-edu-11-c1-dificultad/web-anterior web'`

@@ -8,7 +8,8 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Trabajando ahora
 
-- Nada en curso. Inglés N1–N10 publicado en `20260930-edu-10-n10-ingles-completo`.
+- Pase de dificultad C1 (N8–N10) publicado en `20260930-edu-11-c1-dificultad`.
+- Siguiente: diagnóstico de ubicación v2 (plan en discusión con el cliente).
 
 ## Terminado recientemente
 
@@ -43,7 +44,7 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 ## Siguiente paso
 
 1. Recoger revisión del cliente sobre N1–N10 publicados.
-2. Calidad C1 (N8–N10): ampliar léxico enseñado para subir la dificultad y endurecer distractores; alinear el control de léxico del constructor con `validar_ruta.py` (nombres propios, formas singulares/plurales y orden de clases).
+2. Diagnóstico de ubicación v2 alineado con N1–N10 (por habilidad, lecturas y audios del nivel).
 3. Auditoría #15 (léxico de validación separado del vocabulario enseñado), imágenes y personajes fijos (#20).
 
 ## Bloqueos
@@ -52,9 +53,9 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Producción
 
-- Versión desplegada: `20260930-edu-10-n10-ingles-completo` · `main.dart.js` `2d5759d1…`; biblioteca `e1bca6ef…`; backend sin cambios desde `edu-2`.
+- Versión desplegada: `20260930-edu-11-c1-dificultad` · `main.dart.js` `8c57e0a0…`; biblioteca `0d281c1b…`; backend sin cambios desde `edu-2`.
 - Fecha: 2026-09-30
 - URL: https://onelingo.hostingcuenca.com
 - Estado de salud: `/api/salud` OK.
-- Respaldo: `/var/www/onelingo/backups/20260930-edu-10-n10-ingles-completo/web-anterior`
+- Respaldo: `/var/www/onelingo/backups/20260930-edu-11-c1-dificultad/web-anterior`
 - Rollback: ver `DESPLIEGUES.md`; restauración web completa, sin reinicio de backend.
