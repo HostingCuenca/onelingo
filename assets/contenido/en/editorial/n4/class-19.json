@@ -1,0 +1,765 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-19",
+  "title": {
+    "en": "Justify your deduction",
+    "es": "Justificar tu deducción"
+  },
+  "objectives": {
+    "es": [
+      "Escribir un párrafo que explique por qué un amigo no responde, con el hecho, la pista, deducciones con modales y un plan para comprobarlo."
+    ]
+  },
+  "concepts": [
+    "n4-everyday-mysteries-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-18"
+  ],
+  "usesVocabulary": [
+    "message",
+    "busy",
+    "battery",
+    "online",
+    "meeting",
+    "signal",
+    "asleep"
+  ],
+  "usesPatterns": [
+    "n4-everyday-mysteries-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "message",
+      "es": "mensaje"
+    },
+    {
+      "en": "busy",
+      "es": "ocupado"
+    },
+    {
+      "en": "battery",
+      "es": "batería"
+    },
+    {
+      "en": "online",
+      "es": "conectado"
+    },
+    {
+      "en": "meeting",
+      "es": "reunión"
+    },
+    {
+      "en": "signal",
+      "es": "señal, cobertura"
+    },
+    {
+      "en": "asleep",
+      "es": "dormido"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-19.t01",
+      "en": "Ana has not answered my message since lunch, so she must be busy.",
+      "es": "Ana no ha respondido mi mensaje desde el almuerzo, así que debe de estar ocupada.",
+      "explanationEs": "El hecho (has not answered) y una deducción con must be.",
+      "segments": [
+        "Ana has not answered my message since",
+        "lunch, so she must be busy."
+      ],
+      "audioText": "Ana has not answered my message since lunch, so she must be busy.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-4"
+    },
+    {
+      "id": "en.n4.class-19.t02",
+      "en": "Her phone might have run out of battery.",
+      "es": "Puede que a su teléfono se le haya acabado la batería.",
+      "explanationEs": "Posible causa: might have + participio.",
+      "segments": [
+        "Her phone might have",
+        "run out of battery."
+      ],
+      "audioText": "Her phone might have run out of battery.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-4"
+    },
+    {
+      "id": "en.n4.class-19.t03",
+      "en": "She can't be asleep: she was online ten minutes ago.",
+      "es": "No puede estar dormida: estuvo conectada hace diez minutos.",
+      "explanationEs": "Una pista que contradice la idea: can't be.",
+      "segments": [
+        "She can't be asleep: she",
+        "was online ten minutes ago."
+      ],
+      "audioText": "She can't be asleep: she was online ten minutes ago.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-4"
+    },
+    {
+      "id": "en.n4.class-19.t04",
+      "en": "She could have gone into a meeting, because she has one every Friday.",
+      "es": "Podría haber entrado en una reunión, porque tiene una cada viernes.",
+      "explanationEs": "Because explica la razón de la deducción.",
+      "segments": [
+        "She could have gone into a meeting,",
+        "because she has one every Friday."
+      ],
+      "audioText": "She could have gone into a meeting, because she has one every Friday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-4"
+    },
+    {
+      "id": "en.n4.class-19.t05",
+      "en": "The signal in her house is weak, so the message might not have arrived.",
+      "es": "La señal en su casa es débil, así que puede que el mensaje no haya llegado.",
+      "explanationEs": "Might not have + participio: posibilidad negativa.",
+      "segments": [
+        "The signal in her house is weak,",
+        "so the message might not have arrived."
+      ],
+      "audioText": "The signal in her house is weak, so the message might not have arrived.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c19.pg01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Podría estar en una reunión.»"
+        },
+        "answer": {
+          "text": "She could be in a meeting",
+          "tokens": [
+            "She",
+            "could",
+            "be",
+            "in",
+            "a",
+            "meeting"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-everyday-mysteries-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.pg01.seed-0",
+          "feedback": {
+            "es": "Could + be expresa una posibilidad; la frase termina con el lugar o la situación."
+          },
+          "hint": {
+            "es": "Could va antes de be."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:02cdc62ec488b8bd6b2eba707bd632f18f06439af3fefd044db97a651f67b2e4"
+      },
+      {
+        "id": "en.n4.c19.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Sigue conectada: no puede estar durmiendo.»"
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-everyday-mysteries-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.pg02.seed-0",
+          "feedback": {
+            "es": "Estar conectada contradice la idea de que duerma: can't be."
+          },
+          "hint": {
+            "es": "Pregúntate si alguien conectado ahora puede estar durmiendo."
+          },
+          "text": "She is still online, so she ___ be asleep."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6bf546a99664edd90b9413935a86b4e690be28ff5b42fc1845d1740e93abade8"
+      },
+      {
+        "id": "en.n4.c19.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase propone cómo comprobar la deducción?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I must have called her yesterday."
+          },
+          {
+            "text": "I will call her tonight to check."
+          },
+          {
+            "text": "She can't have called me."
+          }
+        ],
+        "teaches": [
+          "n4-everyday-mysteries-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.pg03.seed-0",
+          "feedback": {
+            "es": "Para comprobar se plantea una acción futura con will + verbo."
+          },
+          "hint": {
+            "es": "Comprobar es un plan futuro: will + verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6e7091d9b414aac69cc629d22ec717d4beb8dcab34264cd4fc5cfd58085bbeea"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c19.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa cada deducción con el modal correcto."
+        },
+        "answer": {
+          "text": "might | must",
+          "accepted": [
+            "might | must"
+          ],
+          "parts": [
+            {
+              "text": "might",
+              "accepted": [
+                "might",
+                "could"
+              ]
+            },
+            {
+              "text": "must",
+              "accepted": [
+                "must"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.p01.seed-0",
+          "feedback": {
+            "es": "Con dudas se usa might o could; con una pista clara (respondió), must have."
+          },
+          "sentences": [
+            "I am not sure, but she ___ be in a meeting.",
+            "She answered my message at noon, so she ___ have seen it."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1146e055b63590dcbc7d4a9ee6ebe70d48e74d566392e3ff10a06ddecee4fa2c"
+      },
+      {
+        "id": "en.n4.c19.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Su teléfono podría no tener señal.»"
+        },
+        "answer": {
+          "text": "Her phone might not have a signal",
+          "tokens": [
+            "Her",
+            "phone",
+            "might",
+            "not",
+            "have",
+            "a",
+            "signal"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.p02.seed-0",
+          "feedback": {
+            "es": "Might not + verbo base expresa una posibilidad negativa sobre el presente; el sujeto va delante."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:953a11b2e0d16ba9f91b4308198d44a792111c7b3c38f5dbdabdeea40158fe40"
+      },
+      {
+        "id": "en.n4.c19.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés una deducción con might have."
+        },
+        "answer": {
+          "text": "Her phone might have run out of battery.",
+          "accepted": [
+            "Her phone might have run out of battery.",
+            "Ana's phone might have run out of battery.",
+            "Her phone could have run out of battery.",
+            "Ana's phone could have run out of battery."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.p03.seed-0",
+          "feedback": {
+            "es": "Una causa posible del pasado se escribe con might have + participio."
+          },
+          "text": "Datos: Ana no contesta. Quizá se le acabó la batería del teléfono."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e44e62466fafbf2d00041088b32641d483a4cd033c49caf4be9674579e3a0399"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c19.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la deducción más prudente con esa pista."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He must be angry."
+          },
+          {
+            "text": "He can't have a phone."
+          },
+          {
+            "text": "He might be busy."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.e01.seed-0",
+          "feedback": {
+            "es": "Con una sola pista (tarda en contestar) solo se puede decir que es posible: might be."
+          },
+          "text": "Tom has not answered for three hours. He always answers quickly."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2615962bdc59a41ae47da2b97cdf3b8704221d98fd90c4604b0349e723b34a44"
+      },
+      {
+        "id": "en.n4.c19.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué descarta la persona."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "That Leo's phone is broken."
+          },
+          {
+            "text": "That Leo is at work."
+          },
+          {
+            "text": "That Leo called back."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.e02.seed-0",
+          "feedback": {
+            "es": "El teléfono no puede estar roto porque lo usó a la hora de comer: eso es lo que descarta."
+          },
+          "audio": "Leo has not called me back. He was at work all day, so he might still be there. His phone can't be broken, because he used it at lunch.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:86f5d5f5e0fc22c26f38314874e95ef9638bceacdf1c58f41dd550b586778328"
+      },
+      {
+        "id": "en.n4.c19.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No sé si recibió mi mensaje; puede que no haya llegado.»"
+        },
+        "answer": {
+          "text": "might",
+          "accepted": [
+            "might",
+            "could"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.e03.seed-0",
+          "feedback": {
+            "es": "La duda se expresa con might not have + participio."
+          },
+          "text": "I am not sure: the message ___ not have arrived."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0b67ced4fcce12f7a7ee32449a6c5584779f5c526a035d12ee27d8dca7ee1cf6"
+      },
+      {
+        "id": "en.n4.c19.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe 4 o 5 frases: por qué tu amigo no responde y qué harás."
+        },
+        "answer": {
+          "text": "Leo has not answered my messages since this morning. He was online at noon, so he can't be asleep. He has an exam today, so he must be busy. I will call him tonight to check.",
+          "accepted": [
+            "Leo has not answered my messages since this morning. He was online at noon, so he can't be asleep. He has an exam today, so he must be busy. I will call him tonight to check.",
+            "Leo hasn't answered my messages today. He was online at noon, so he can't be sleeping. He might be busy because he has an exam. I will text him tonight to check."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.e04.seed-0",
+          "feedback": {
+            "es": "Un buen texto plantea el hecho, apoya las deducciones con pistas y propone cómo comprobarlas."
+          },
+          "text": "Caso: Leo no contesta tus mensajes desde esta mañana. Estuvo conectado al mediodía y hoy tiene un examen. Escribe el hecho, una deducción con must o might, otra con can't y qué harás para comprobarlo.",
+          "scoring": {
+            "wordRange": [
+              25,
+              90
+            ],
+            "evidenceGroups": [
+              [
+                "has not answered",
+                "hasn't answered",
+                "did not answer",
+                "has not replied",
+                "hasn't replied",
+                "has not responded",
+                "hasn't responded"
+              ],
+              [
+                "can't be asleep",
+                "can't be sleeping",
+                "cannot be asleep"
+              ],
+              [
+                "must be busy",
+                "might be busy",
+                "could be busy",
+                "must be studying",
+                "might be studying",
+                "could be studying",
+                "must be taking",
+                "might be taking"
+              ],
+              [
+                "I will call",
+                "I will text",
+                "I will check",
+                "I will message",
+                "I will ask",
+                "I am going to call"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:30b62a7db7cf86cfc842848ba8b1a4ab75cea098d157beab838d66a8595af275"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c19.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la deducción que respalda la pista."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Someone can't have left the fridge open."
+          },
+          {
+            "text": "Someone must have left the fridge open."
+          },
+          {
+            "text": "The fridge might be in the garden."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.r01.seed-0",
+          "feedback": {
+            "es": "Un hecho directo (nevera abierta, leche en la mesa) apoya una conclusión casi segura con must have."
+          },
+          "text": "The fridge is open and the milk is on the table."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6ace21bea970b5493b0a399baa2ba30c960ae70ad0b53df9ca5221da60499179"
+      },
+      {
+        "id": "en.n4.c19.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Quizá dejé las llaves en el gimnasio.»"
+        },
+        "answer": {
+          "text": "might",
+          "accepted": [
+            "might",
+            "could"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.r02.seed-0",
+          "feedback": {
+            "es": "Con «quizá» se usa might have + participio."
+          },
+          "text": "I ___ have left my keys at the gym."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9079b5ac4e3a58a5618459bef57dad031899bcd59c01b9f106edc977f0f3ef99"
+      },
+      {
+        "id": "en.n4.c19.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una frase empática para un amigo que perdió el último autobús."
+        },
+        "answer": {
+          "text": "I'm sorry to hear that. It is not your fault.",
+          "accepted": [
+            "I'm sorry to hear that. It is not your fault.",
+            "I am sorry to hear that. It was not your fault.",
+            "I'm sorry to hear that. It wasn't your fault.",
+            "I am sorry to hear that. It is not your fault.",
+            "I'm sorry to hear that. It isn't your fault."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c19.r03.seed-0",
+          "feedback": {
+            "es": "Primero se reconoce el sentimiento con I'm sorry to hear that y luego se quita la culpa."
+          },
+          "text": "Tu amigo perdió el último autobús. Reconoce lo que siente y quítale la culpa."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0bf27bf1490fdc0039e326931bc71887d564a74da813000bc93879341a30817a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c19.e01": {
+      "reteach": "en.n4.class-19.t01",
+      "review": "en.n4.c19.r01"
+    },
+    "en.n4.c19.e02": {
+      "reteach": "en.n4.class-19.t02",
+      "review": "en.n4.c19.r02"
+    },
+    "en.n4.c19.e03": {
+      "reteach": "en.n4.class-19.t03",
+      "review": "en.n4.c19.r03"
+    },
+    "en.n4.c19.e04": {
+      "reteach": "en.n4.class-19.t04",
+      "review": "en.n4.c19.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

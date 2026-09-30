@@ -1,0 +1,756 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-43",
+  "title": {
+    "en": "Does it sound natural?",
+    "es": "¿Suena natural?"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir en textos y audios si una combinación de ocio o deporte suena natural o es una traducción literal."
+    ]
+  },
+  "concepts": [
+    "n4-sport-and-leisure-words-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-42"
+  ],
+  "usesVocabulary": [
+    "exercise",
+    "yoga",
+    "tennis",
+    "swimming",
+    "spend",
+    "fit",
+    "fun",
+    "lesson"
+  ],
+  "usesPatterns": [
+    "n4-sport-and-leisure-words-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "exercise",
+      "es": "ejercicio"
+    },
+    {
+      "en": "yoga",
+      "es": "yoga (disciplina)"
+    },
+    {
+      "en": "tennis",
+      "es": "tenis"
+    },
+    {
+      "en": "swimming",
+      "es": "natación"
+    },
+    {
+      "en": "spend",
+      "es": "pasar (tiempo)"
+    },
+    {
+      "en": "fit",
+      "es": "en forma"
+    },
+    {
+      "en": "fun",
+      "es": "diversión"
+    },
+    {
+      "en": "lesson",
+      "es": "clase"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-43.t01",
+      "en": "I do yoga on Monday and play tennis on Friday.",
+      "es": "Hago yoga el lunes y juego al tenis el viernes.",
+      "explanationEs": "Play para juegos con pelota; do para actividades individuales como yoga.",
+      "segments": [
+        "I do yoga on Monday",
+        "and play tennis on Friday."
+      ],
+      "audioText": "I do yoga on Monday and play tennis on Friday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-3"
+    },
+    {
+      "id": "en.n4.class-43.t02",
+      "en": "We go swimming every weekend.",
+      "es": "Vamos a nadar todos los fines de semana.",
+      "explanationEs": "Go + verbo con -ing para actividades como swimming, running o skating.",
+      "segments": [
+        "We go swimming",
+        "every weekend."
+      ],
+      "audioText": "We go swimming every weekend.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-3"
+    },
+    {
+      "id": "en.n4.class-43.t03",
+      "en": "Leo does exercise in the morning to keep fit.",
+      "es": "Leo hace ejercicio por la mañana para mantenerse en forma.",
+      "explanationEs": "Do exercise, no «make exercise». Keep fit = mantenerse en forma.",
+      "segments": [
+        "Leo does exercise in the",
+        "morning to keep fit."
+      ],
+      "audioText": "Leo does exercise in the morning to keep fit.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-3"
+    },
+    {
+      "id": "en.n4.class-43.t04",
+      "en": "I spend my free time at the park, and we always have fun.",
+      "es": "Paso mi tiempo libre en el parque y siempre nos divertimos.",
+      "explanationEs": "Spend time = pasar tiempo. Have fun = divertirse (make fun of alguien significa burlarse).",
+      "segments": [
+        "I spend my free time at the",
+        "park, and we always have fun."
+      ],
+      "audioText": "I spend my free time at the park, and we always have fun.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-3"
+    },
+    {
+      "id": "en.n4.class-43.t05",
+      "en": "Tom has a swimming lesson on Tuesday.",
+      "es": "Tom tiene una clase de natación el martes.",
+      "explanationEs": "Have a lesson = tener una clase; no se dice «make a lesson».",
+      "segments": [
+        "Tom has a swimming",
+        "lesson on Tuesday."
+      ],
+      "audioText": "Tom has a swimming lesson on Tuesday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c43.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase natural para «Hago yoga los lunes»."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I make yoga on Mondays."
+          },
+          {
+            "text": "I do yoga on Mondays."
+          },
+          {
+            "text": "I play yoga on Mondays."
+          }
+        ],
+        "teaches": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.pg01.seed-0",
+          "feedback": {
+            "es": "El yoga se hace con do: es una actividad individual sin pelota."
+          },
+          "hint": {
+            "es": "Mira la nota de yoga en la enseñanza: es una actividad individual."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b19d87a24587ad5f88101e1dda604f377122b595ce2336d7c6bf009fb9168bef"
+      },
+      {
+        "id": "en.n4.c43.pg02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige con qué frecuencia nadan."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "They swim every day."
+          },
+          {
+            "text": "They swim on Sunday."
+          },
+          {
+            "text": "They swim once a week."
+          }
+        ],
+        "teaches": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.pg02.seed-0",
+          "feedback": {
+            "es": "Every Saturday significa una vez por semana; go swimming es nadar."
+          },
+          "hint": {
+            "es": "Fíjate en el día: Saturday solo ocurre una vez cada semana."
+          },
+          "audio": "We go swimming every Saturday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cff8c509ff7769b31909fe7eb6e18185fb3bef9a091b7ca22708df98cd4712aa"
+      },
+      {
+        "id": "en.n4.c43.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Jugamos al tenis después de la escuela.»"
+        },
+        "answer": {
+          "text": "play",
+          "accepted": [
+            "play"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.pg03.seed-0",
+          "feedback": {
+            "es": "El tenis es un juego de pelota y por eso lleva play."
+          },
+          "hint": {
+            "es": "Piensa en los juegos de pelota: su verbo no es do ni go."
+          },
+          "text": "We ___ tennis after school."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d32278d2f6d22b8c54d52c8e67bc4701dedca78e3760648a88dca86cffc5cf7c"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c43.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase natural para «Hago ejercicio para mantenerme en forma»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I do exercise to keep fit."
+          },
+          {
+            "text": "I make exercise to keep fit."
+          },
+          {
+            "text": "I play exercise to keep fit."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.p01.seed-0",
+          "feedback": {
+            "es": "Se dice do exercise; make y play no combinan con exercise."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3b337a216c272f28c919ccf22bdd39dcc5511120b8972dffd9004a0dd5f43ff0"
+      },
+      {
+        "id": "en.n4.c43.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la versión natural de la frase de Tom."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "We do tennis on Friday."
+          },
+          {
+            "text": "We play tennis on Friday."
+          },
+          {
+            "text": "We make tennis on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.p02.seed-0",
+          "feedback": {
+            "es": "El tenis es un juego de pelota, así que va con play."
+          },
+          "text": "Tom says: «We go tennis on Friday.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0a284b80eda6651170a40bac62487b95ae8802de2b26cc988b4a473f5dfc62c0"
+      },
+      {
+        "id": "en.n4.c43.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Leo quiere pasar más tiempo con su familia los domingos.»"
+        },
+        "answer": {
+          "text": "spend",
+          "accepted": [
+            "spend"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.p03.seed-0",
+          "feedback": {
+            "es": "El tiempo se pasa con spend: spend time es pasar tiempo."
+          },
+          "text": "Leo wants to ___ more time with his family on Sundays."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8cfb8c020e3caf5e6a76a4bad0ddc2e1c8e72fac9d1e6d5761c1a786964bb8d4"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c43.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace Sara el miércoles."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She does yoga."
+          },
+          {
+            "text": "She plays tennis."
+          },
+          {
+            "text": "She swims."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.e01.seed-0",
+          "feedback": {
+            "es": "Sara dice go swimming on Wednesday: nada ese día. El yoga y el tenis son de otros días."
+          },
+          "audio": "Sara says: I do yoga on Monday, I go swimming on Wednesday, and I play tennis on Saturday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d68da3dac8591f7faea3d3e24b64fa16d60c9df9fd05c8ad53e6a1c59b2a1382"
+      },
+      {
+        "id": "en.n4.c43.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase natural para «Nos divertimos mucho en la clase de natación»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We had fun in the swimming lesson."
+          },
+          {
+            "text": "We made fun in the swimming lesson."
+          },
+          {
+            "text": "We did fun in the swimming lesson."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.e02.seed-0",
+          "feedback": {
+            "es": "Divertirse es have fun; make fun significa burlarse y do no combina con fun."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d6ac3475aab47e30db8ee797fa1a3fb7b1b0a0208eb3c35caa4bb73214c21df"
+      },
+      {
+        "id": "en.n4.c43.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Leo y Ana salen a correr cada mañana.»"
+        },
+        "answer": {
+          "text": "go",
+          "accepted": [
+            "go"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.e03.seed-0",
+          "feedback": {
+            "es": "Las actividades con -ing como running van con go."
+          },
+          "text": "Leo and Ana ___ running every morning."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:798b207fee35e84e1de4dad383da23069ffb1da4e062b9e5372dcd5140b3fed0"
+      },
+      {
+        "id": "en.n4.c43.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Dile a un amigo que haces yoga y juegas al tenis en tu tiempo libre."
+        },
+        "answer": {
+          "text": "In my free time I do yoga and I play tennis.",
+          "accepted": [
+            "In my free time I do yoga and I play tennis.",
+            "I do yoga and play tennis in my free time.",
+            "In my free time, I do yoga and play tennis.",
+            "I do yoga and I play tennis in my free time."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.e04.seed-0",
+          "feedback": {
+            "es": "Yoga lleva do, tenis lleva play, y el tiempo libre se introduce con in my free time."
+          },
+          "text": "Dile a un amigo que haces yoga y juegas al tenis en tu tiempo libre.",
+          "scoring": {
+            "wordRange": [
+              6,
+              20
+            ],
+            "evidenceGroups": [
+              [
+                "do yoga"
+              ],
+              [
+                "play tennis"
+              ],
+              [
+                "free time"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:77619dda00f60672f917044b61ce8e3d5aceb3b452906d760f1212797901cb04"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c43.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo se siente la persona después de la clase."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Tired and unhappy."
+          },
+          {
+            "text": "Happy and healthy."
+          },
+          {
+            "text": "Afraid of the next lesson."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.r01.seed-0",
+          "feedback": {
+            "es": "Had fun indica que se divirtió y feel fit, que se siente en forma: contenta y sana."
+          },
+          "audio": "It was a good lesson. We had fun, and now I feel fit.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9750b1e298984c2f941e9cd0708c3e345026d7ae22a4480a2be9584f8efef953"
+      },
+      {
+        "id": "en.n4.c43.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Carlos usó un verbo poco natural. ¿Cómo se corrige?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I go yoga on Sunday."
+          },
+          {
+            "text": "I make yoga on Sunday."
+          },
+          {
+            "text": "I do yoga on Sunday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.r02.seed-0",
+          "feedback": {
+            "es": "El yoga es una actividad individual y lleva do; go y make no combinan con yoga."
+          },
+          "text": "Carlos: «I play yoga on Sunday.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b16ae19bf87a8f0f2ff6ca8925f8e9b1a15296d88114244f6b1230aa53b66722"
+      },
+      {
+        "id": "en.n4.c43.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la frase: «Siempre vamos a nadar después de la clase.»"
+        },
+        "answer": {
+          "text": "We always go swimming after the lesson.",
+          "tokens": [
+            "We",
+            "always",
+            "go",
+            "swimming",
+            "after",
+            "the",
+            "lesson."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c43.r03.seed-0",
+          "feedback": {
+            "es": "Go swimming va junto; always se coloca antes del verbo go."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4840815e3b458d525a28d08a648db7ccfc5ef5ad054d464555c82e97213903ec"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c43.e01": {
+      "reteach": "en.n4.class-43.t01",
+      "review": "en.n4.c43.r01"
+    },
+    "en.n4.c43.e02": {
+      "reteach": "en.n4.class-43.t02",
+      "review": "en.n4.c43.r02"
+    },
+    "en.n4.c43.e03": {
+      "reteach": "en.n4.class-43.t03",
+      "review": "en.n4.c43.r03"
+    },
+    "en.n4.c43.e04": {
+      "reteach": "en.n4.class-43.t04",
+      "review": "en.n4.c43.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

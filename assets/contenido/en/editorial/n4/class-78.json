@@ -1,0 +1,744 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-78",
+  "title": {
+    "en": "Confirm or ask?",
+    "es": "¿Confirmar o preguntar?"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir si un question tag confirma lo que ya se sabe o pregunta de verdad, según la entonación y el contexto."
+    ]
+  },
+  "concepts": [
+    "n4-culture-and-traditions-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-77"
+  ],
+  "usesVocabulary": [
+    "delicious",
+    "spicy",
+    "sweet",
+    "typical",
+    "traditional",
+    "excited"
+  ],
+  "usesPatterns": [
+    "n4-culture-and-traditions-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "delicious",
+      "es": "delicioso"
+    },
+    {
+      "en": "spicy",
+      "es": "picante"
+    },
+    {
+      "en": "sweet",
+      "es": "dulce"
+    },
+    {
+      "en": "typical",
+      "es": "típico"
+    },
+    {
+      "en": "traditional",
+      "es": "tradicional"
+    },
+    {
+      "en": "excited",
+      "es": "emocionado"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-78.t01",
+      "en": "The food is delicious, isn't it?",
+      "es": "La comida está deliciosa, ¿verdad?",
+      "explanationEs": "Sabes que está rica y buscas acuerdo: la voz baja al final (↘) y confirmas.",
+      "segments": [
+        "The food is",
+        "delicious, isn't it?"
+      ],
+      "audioText": "The food is delicious, isn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-3"
+    },
+    {
+      "id": "en.n4.class-78.t02",
+      "en": "This soup isn't spicy, is it?",
+      "es": "Esta sopa no es picante, ¿verdad?",
+      "explanationEs": "No lo sabes y te importa: la voz sube al final (↗) y preguntas de verdad.",
+      "segments": [
+        "This soup isn't",
+        "spicy, is it?"
+      ],
+      "audioText": "This soup isn't spicy, is it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-3"
+    },
+    {
+      "id": "en.n4.class-78.t03",
+      "en": "It is a typical food here, isn't it?",
+      "es": "Es una comida típica de aquí, ¿verdad?",
+      "explanationEs": "Si ya lo ves claro, la voz baja (↘): confirmas.",
+      "segments": [
+        "It is a typical",
+        "food here, isn't it?"
+      ],
+      "audioText": "It is a typical food here, isn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-3"
+    },
+    {
+      "id": "en.n4.class-78.t04",
+      "en": "You are excited about the party, aren't you?",
+      "es": "Estás emocionado con la fiesta, ¿verdad?",
+      "explanationEs": "Se nota que lo está: la voz baja (↘) y confirmas.",
+      "segments": [
+        "You are excited about",
+        "the party, aren't you?"
+      ],
+      "audioText": "You are excited about the party, aren't you?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-3"
+    },
+    {
+      "id": "en.n4.class-78.t05",
+      "en": "This is a traditional dance, isn't it?",
+      "es": "Este es un baile tradicional, ¿verdad?",
+      "explanationEs": "Si no estás seguro, la voz sube (↗) y preguntas.",
+      "segments": [
+        "This is a traditional",
+        "dance, isn't it?"
+      ],
+      "audioText": "This is a traditional dance, isn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-3"
+    },
+    {
+      "id": "en.n4.class-78.t06",
+      "en": "The cake is sweet, isn't it?",
+      "es": "El pastel es dulce, ¿verdad?",
+      "explanationEs": "Con el primer bocado, la voz baja (↘): esperas un «sí».",
+      "segments": [
+        "The cake is",
+        "sweet, isn't it?"
+      ],
+      "audioText": "The cake is sweet, isn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c78.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace Ana con su frase?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She shares her opinion and wants agreement."
+          },
+          {
+            "text": "She asks for new information."
+          },
+          {
+            "text": "She gives an order."
+          }
+        ],
+        "teaches": [
+          "n4-culture-and-traditions-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.pg01.seed-0",
+          "feedback": {
+            "es": "Ana sonríe y sabe que la comida está rica: el tag confirma su opinión."
+          },
+          "hint": {
+            "es": "Ana sonríe: ya conoce la respuesta."
+          },
+          "text": "Ana eats the soup and smiles. She says: 'This soup is delicious, isn't it?'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4a7f191be51f44a6a6c248c121931d4a88366e0955dfd75c2490a8b8e9329c13"
+      },
+      {
+        "id": "en.n4.c78.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace Tom con su frase?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He shares an opinion."
+          },
+          {
+            "text": "He asks because he does not know."
+          },
+          {
+            "text": "He says thanks."
+          }
+        ],
+        "teaches": [
+          "n4-culture-and-traditions-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.pg02.seed-0",
+          "feedback": {
+            "es": "Tom no sabe si es picante y le importa: pregunta de verdad (la voz sube)."
+          },
+          "hint": {
+            "es": "Tom no sabe la respuesta y le importa."
+          },
+          "text": "Tom looks at the menu. He says: 'This soup isn't spicy, is it? I don't like spicy food.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2ad326faaaf445dd2110b66d63ee1e975b4b0874ffa47b4058564cd0b37c40de"
+      },
+      {
+        "id": "en.n4.c78.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es una pregunta de verdad (la voz sube)?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Everyone knows this dance, don't they?"
+          },
+          {
+            "text": "This cake is really sweet, isn't it?"
+          },
+          {
+            "text": "I don't know this food. It isn't spicy, is it?"
+          }
+        ],
+        "teaches": [
+          "n4-culture-and-traditions-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.pg03.seed-0",
+          "feedback": {
+            "es": "«I don't know» indica duda: la persona pregunta para obtener información."
+          },
+          "hint": {
+            "es": "Busca a la persona que dice que no sabe."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:50594f010463684cd12bbd67d2201ece0bfb77912df1ada19dc443b0caf51445"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c78.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué quiere Leo al decir su frase?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He wants Ana to say yes."
+          },
+          {
+            "text": "He is asking a real question."
+          },
+          {
+            "text": "He is changing the subject."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.p01.seed-0",
+          "feedback": {
+            "es": "Leo ve la máscara y opina: That is beautiful, isn't it? espera que Ana esté de acuerdo."
+          },
+          "text": "Leo sees a festival mask and says: 'That is beautiful, isn't it?'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e70700231f75f728d31f659a9d9e17eaa469ab4f1794660684e5a664a75de81b"
+      },
+      {
+        "id": "en.n4.c78.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace Sara con su frase?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She is sure about the time."
+          },
+          {
+            "text": "She is checking information."
+          },
+          {
+            "text": "She is telling a story."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.p02.seed-0",
+          "feedback": {
+            "es": "Sara dice «I think» y «I'm not sure»: usa el tag para comprobar un dato (la voz sube)."
+          },
+          "text": "Sara: I think the festival starts at six, but I'm not sure. It starts at six, doesn't it?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0fbd9348bdab422fc1b02ff88887c02a2ce62a602bd3848c0bf06f69b8f116cc"
+      },
+      {
+        "id": "en.n4.c78.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Todos aman esta comida. Está deliciosa, ¿verdad?»"
+        },
+        "answer": {
+          "text": "isn't",
+          "accepted": [
+            "isn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.p03.seed-0",
+          "feedback": {
+            "es": "Frase afirmativa con is → tag negativo isn't it; aquí confirmas algo que todos saben."
+          },
+          "text": "Everyone loves this food. It is delicious, ___ it?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9929b23a09cee331732d4b26ff56c9729e4e2a394046e0eb47a73e7fbd90089"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c78.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige por qué pregunta Tom."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He already knows the food well."
+          },
+          {
+            "text": "He is praising the food."
+          },
+          {
+            "text": "He needs information about the food."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.e01.seed-0",
+          "feedback": {
+            "es": "Tom dice «I don't know» y pregunta con is it?: necesita información."
+          },
+          "audio": "Tom looks at a plate of food and says to Ana: I don't know this food. It isn't spicy, is it?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7b0541333205842bfba7b53eabfcf4240183a2872807a53146326db0d14fad05"
+      },
+      {
+        "id": "en.n4.c78.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿qué espera Carlos?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "That people agree with him."
+          },
+          {
+            "text": "That people explain the recipe."
+          },
+          {
+            "text": "That people try something new."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.e02.seed-0",
+          "feedback": {
+            "es": "Carlos ya sabe que el pastel es dulce: el tag isn't it? pide que los demás coincidan."
+          },
+          "text": "Carlos tries the cake and smiles. He says: 'This cake is sweet, isn't it?'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cdf23c03a3fca23e4caebf7548908b6226e2b9d809c1763ce18a656fa309e5d8"
+      },
+      {
+        "id": "en.n4.c78.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Perdona, soy nuevo. No conoces este baile, ¿verdad?»"
+        },
+        "answer": {
+          "text": "do",
+          "accepted": [
+            "do"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.e03.seed-0",
+          "feedback": {
+            "es": "Frase negativa con don't → tag afirmativo do you; aquí la persona pregunta de verdad."
+          },
+          "text": "Sorry, I am new here. You don't know this dance, ___ you?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:55d504e6cc53d2f4f7d341ab08e410db3b1b2dcd2d289954d14918f38d9365b5"
+      },
+      {
+        "id": "en.n4.c78.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿En cuál de las frases se confirma algo que ya se sabe?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I am not sure. The parade is on Sunday, isn't it?"
+          },
+          {
+            "text": "It is our best tradition. Everyone loves it, don't they?"
+          },
+          {
+            "text": "Sorry, I don't know. It isn't free, is it?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.e04.seed-0",
+          "feedback": {
+            "es": "Quien dice «our best tradition» está seguro: el tag solo busca acuerdo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a29ce1fed7bbeed6d2e1dc0f5a64ff76c81dc16a74a4d47227c43bf1b6060aef"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c78.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué espera Sara."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Her friend tells her the price."
+          },
+          {
+            "text": "Her friend asks for the cake."
+          },
+          {
+            "text": "Her friend says yes."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.r01.seed-0",
+          "feedback": {
+            "es": "Sara acaba de probarlo y opina: espera que su amigo confirme."
+          },
+          "audio": "Sara eats the sweet cake and says: It is really delicious, isn't it?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:33bcda71c44bbce791c5aaec4fb31d1e6d5b8308c21b99d1efa9923ff0b46634"
+      },
+      {
+        "id": "en.n4.c78.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que pregunta porque no está segura."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I don't remember the date. The festival is in May, isn't it?"
+          },
+          {
+            "text": "Everyone knows it. The festival is in May, isn't it?"
+          },
+          {
+            "text": "We love it. The festival is in May, isn't it?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.r02.seed-0",
+          "feedback": {
+            "es": "La frase que dice «I don't remember» usa el tag para comprobar un dato."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ab8a2677545563f46ad71dd6cc0bf83b78d7f20d9d05f06425943ad8582a1fe2"
+      },
+      {
+        "id": "en.n4.c78.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una frase con tag para confirmar algo que ya sabes."
+        },
+        "answer": {
+          "text": "The food at the festival is delicious, isn't it?",
+          "accepted": [
+            "The food at the festival is delicious, isn't it?",
+            "The festival food is delicious, isn't it?",
+            "The food at the festival is really delicious, isn't it?",
+            "The festival food is really delicious, isn't it?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c78.r03.seed-0",
+          "feedback": {
+            "es": "Una confirmación es una frase afirmativa con tag negativo: delicious, isn't it?"
+          },
+          "text": "Dices a un amigo que la comida del festival es deliciosa y esperas que esté de acuerdo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ac4f447439e94e467df2faeff9cec66725de6dde542ed9ea3fb529fb5aee4c00"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c78.e01": {
+      "reteach": "en.n4.class-78.t01",
+      "review": "en.n4.c78.r01"
+    },
+    "en.n4.c78.e02": {
+      "reteach": "en.n4.class-78.t02",
+      "review": "en.n4.c78.r02"
+    },
+    "en.n4.c78.e03": {
+      "reteach": "en.n4.class-78.t03",
+      "review": "en.n4.c78.r03"
+    },
+    "en.n4.c78.e04": {
+      "reteach": "en.n4.class-78.t04",
+      "review": "en.n4.c78.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

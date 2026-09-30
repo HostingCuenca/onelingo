@@ -1,0 +1,770 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-29",
+  "title": {
+    "en": "Describe someone special",
+    "es": "Describir a alguien especial"
+  },
+  "objectives": {
+    "es": [
+      "Escribir sobre una persona o un lugar querido combinando datos que identifican y datos extra con whose y where."
+    ]
+  },
+  "concepts": [
+    "n4-people-and-places-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-28"
+  ],
+  "usesVocabulary": [
+    "generous",
+    "cosy",
+    "patient",
+    "childhood",
+    "smile",
+    "memory",
+    "proud"
+  ],
+  "usesPatterns": [
+    "n4-people-and-places-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "generous",
+      "es": "generoso"
+    },
+    {
+      "en": "cosy",
+      "es": "acogedor"
+    },
+    {
+      "en": "patient",
+      "es": "paciente"
+    },
+    {
+      "en": "childhood",
+      "es": "infancia"
+    },
+    {
+      "en": "smile",
+      "es": "sonrisa"
+    },
+    {
+      "en": "memory",
+      "es": "recuerdo"
+    },
+    {
+      "en": "proud",
+      "es": "orgulloso"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-29.t01",
+      "en": "My grandmother, who is very generous, lives in a house with a small garden.",
+      "es": "Mi abuela, que es muy generosa, vive en una casa con un jardín pequeño.",
+      "explanationEs": "Who is very generous: dato extra entre comas sobre alguien ya identificado.",
+      "segments": [
+        "My grandmother, who is very generous, lives",
+        "in a house with a small garden."
+      ],
+      "audioText": "My grandmother, who is very generous, lives in a house with a small garden.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-4"
+    },
+    {
+      "id": "en.n4.class-29.t02",
+      "en": "She is the patient person who taught me to cook.",
+      "es": "Es la persona paciente que me enseñó a cocinar.",
+      "explanationEs": "Who taught me to cook identifica: dice qué persona es. No lleva comas.",
+      "segments": [
+        "She is the patient person",
+        "who taught me to cook."
+      ],
+      "audioText": "She is the patient person who taught me to cook.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-4"
+    },
+    {
+      "id": "en.n4.class-29.t03",
+      "en": "I spent my childhood in the village where she lives.",
+      "es": "Pasé mi infancia en el pueblo donde ella vive.",
+      "explanationEs": "Where identifica el pueblo; no se repite there.",
+      "segments": [
+        "I spent my childhood in",
+        "the village where she lives."
+      ],
+      "audioText": "I spent my childhood in the village where she lives.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-4"
+    },
+    {
+      "id": "en.n4.class-29.t04",
+      "en": "Her kitchen, which is small and cosy, is my favourite place.",
+      "es": "Su cocina, que es pequeña y acogedora, es mi lugar favorito.",
+      "explanationEs": "Which entre comas: dato extra sobre una cosa.",
+      "segments": [
+        "Her kitchen, which is small and",
+        "cosy, is my favourite place."
+      ],
+      "audioText": "Her kitchen, which is small and cosy, is my favourite place.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-4"
+    },
+    {
+      "id": "en.n4.class-29.t05",
+      "en": "She has a friend whose smile makes everyone happy.",
+      "es": "Tiene una amiga cuya sonrisa alegra a todo el mundo.",
+      "explanationEs": "Whose + nombre: la sonrisa es de la amiga; no se dice whose her smile.",
+      "segments": [
+        "She has a friend whose",
+        "smile makes everyone happy."
+      ],
+      "audioText": "She has a friend whose smile makes everyone happy.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-4"
+    },
+    {
+      "id": "en.n4.class-29.t06",
+      "en": "My best memory is the day when we cooked together.",
+      "es": "Mi mejor recuerdo es el día en que cocinamos juntos.",
+      "explanationEs": "When se refiere a un momento: the day when.",
+      "segments": [
+        "My best memory is the",
+        "day when we cooked together."
+      ],
+      "audioText": "My best memory is the day when we cooked together.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c29.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la mejor forma de unir las dos frases del texto."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "My aunt, which lives near the park, is kind."
+          },
+          {
+            "text": "My aunt, who she lives near the park, is kind."
+          },
+          {
+            "text": "My aunt, who lives near the park, is kind."
+          }
+        ],
+        "teaches": [
+          "n4-people-and-places-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.pg01.seed-0",
+          "feedback": {
+            "es": "Una persona pide who, y el dato extra va entre comas. Which es para cosas y she sobra."
+          },
+          "hint": {
+            "es": "Es una persona y el dato va entre comas."
+          },
+          "text": "My aunt is kind. My aunt lives near the park."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:028fd57e959feae684e8a1fa76cc6066bfac18279016f349fbf267d441a73b15"
+      },
+      {
+        "id": "en.n4.c29.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La casa donde crecí es pequeña.»"
+        },
+        "answer": {
+          "text": "where",
+          "accepted": [
+            "where"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-people-and-places-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.pg02.seed-0",
+          "feedback": {
+            "es": "Un lugar pide where: the house where I grew up."
+          },
+          "hint": {
+            "es": "Se habla de un lugar: elige el relativo de lugar."
+          },
+          "text": "The house ___ I grew up is small."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cd8a8614e94089cfb7ac02904b8757f4b7067dc1451e97ac7faa29995a78f154"
+      },
+      {
+        "id": "en.n4.c29.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el pronombre que identifica a cuál de los dos amigos."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "who"
+          },
+          {
+            "text": "whose"
+          },
+          {
+            "text": "where"
+          }
+        ],
+        "teaches": [
+          "n4-people-and-places-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.pg03.seed-0",
+          "feedback": {
+            "es": "Hay dos amigos, así que la cláusula debe identificar a uno: who lives in Quito, sin comas. Whose es posesión y where es lugar."
+          },
+          "hint": {
+            "es": "Es una persona que hace algo: elige el pronombre de personas."
+          },
+          "text": "I have two friends. The friend ___ lives in Quito is a nurse."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1a0acf5400d5fafb009e60bd60d9d737da747a8141e7348fdea4954e3dd11655"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c29.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mi abuela, que es muy generosa, vive aquí.»"
+        },
+        "answer": {
+          "text": "My grandmother, who is very generous, lives here",
+          "tokens": [
+            "My",
+            "grandmother,",
+            "who",
+            "is",
+            "very",
+            "generous,",
+            "lives",
+            "here"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.p01.seed-0",
+          "feedback": {
+            "es": "El dato extra va entre comas, justo después del nombre: who is very generous."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7b1bfb48b40f07e5e369b10d685f1374e7030077e8ab3f210c446e95ea407e5a"
+      },
+      {
+        "id": "en.n4.c29.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el dato extra sobre el tío."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He teaches children."
+          },
+          {
+            "text": "He is very patient."
+          },
+          {
+            "text": "He lives in a village."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.p02.seed-0",
+          "feedback": {
+            "es": "Lo que va entre comas (who is very patient) es el dato extra. Where I spent my childhood identifica el pueblo."
+          },
+          "audio": "My uncle, who is very patient, teaches children in the village where I spent my childhood.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:808cc428a9e918b445a7fb001c5c90d7e23c5f056314f6c073132006da0dd34e"
+      },
+      {
+        "id": "en.n4.c29.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mi amiga, cuya sonrisa es cálida.» / «El parque donde jugamos.»"
+        },
+        "answer": {
+          "text": "whose | where",
+          "accepted": [
+            "whose | where"
+          ],
+          "parts": [
+            {
+              "text": "whose",
+              "accepted": [
+                "whose"
+              ]
+            },
+            {
+              "text": "where",
+              "accepted": [
+                "where"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.p03.seed-0",
+          "feedback": {
+            "es": "Whose expresa que la sonrisa es de la amiga y where sustituye al lugar donde jugamos."
+          },
+          "sentences": [
+            "My friend, ___ smile is warm, lives here.",
+            "The park ___ we play is big."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ff0817325dfabce46555790c41ad2934b2164d407371ad7aea17435cc88d3efb"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c29.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase identifica a cuál de dos hermanas se refiere?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The sister, who lives in Loja, is a nurse."
+          },
+          {
+            "text": "The sister, who is a nurse, lives in Loja."
+          },
+          {
+            "text": "The sister who lives in Loja is a nurse."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.e01.seed-0",
+          "feedback": {
+            "es": "Sin comas, who lives in Loja distingue a una hermana entre varias. Con comas solo añadiría un dato sobre una hermana ya conocida."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:675677701abe291426a4eb908a51c8f4272c64dd1d64ec375b60bc48c8b1133a"
+      },
+      {
+        "id": "en.n4.c29.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el dato extra sobre la mejor amiga."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Her smile makes everyone happy."
+          },
+          {
+            "text": "She lives in a big house."
+          },
+          {
+            "text": "She is very patient."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.e02.seed-0",
+          "feedback": {
+            "es": "Whose smile makes everyone happy va entre comas: es el dato extra. Where I spent my childhood identifica la casa."
+          },
+          "audio": "My best friend, whose smile makes everyone happy, lives in the house where I spent my childhood.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:38bf8a4880d0ad5dc13b74cfb35905cf0d9ffea9f5193ab8af2b096a69991fab"
+      },
+      {
+        "id": "en.n4.c29.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Recuerdo el verano en que aprendí a cocinar.»"
+        },
+        "answer": {
+          "text": "when",
+          "accepted": [
+            "when"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.e03.seed-0",
+          "feedback": {
+            "es": "El verano es un momento, así que el relativo es when."
+          },
+          "text": "I remember the summer ___ I learned to cook."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:80196257d5e3555baa4dfa2888782a13cb69efa327054e447cdf8802a8465bc0"
+      },
+      {
+        "id": "en.n4.c29.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe 70–90 palabras sobre tu tío Carlos con los datos dados."
+        },
+        "answer": {
+          "text": "My uncle Carlos, who is a mechanic, is the most generous person I know. He lives in the village where I spent my childhood. His workshop, which is small and cosy, is my favourite place. He is patient with the children who visit him, and he always teaches them something new. My cousin, whose smile makes everyone happy, works with him. I visit them every summer, because the days when I am there are always happy.",
+          "accepted": [
+            "My uncle Carlos, who is a mechanic, is the most generous person I know. He lives in the village where I spent my childhood. His workshop, which is small and cosy, is my favourite place. He is patient with the children who visit him, and he always teaches them something new. My cousin, whose smile makes everyone happy, works with him. I visit them every summer, because the days when I am there are always happy.",
+            "I want to describe my uncle Carlos, who is a mechanic and the most generous person in my family. He lives in the village where I spent my childhood. His workshop, which is small and cosy, is my favourite place. He is very patient with the children who visit him, and he always teaches them something new. My cousin, whose smile makes everyone happy, works with him, and I visit them every summer. Those days are my best memory."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.e04.seed-0",
+          "feedback": {
+            "es": "Un buen texto usa who con coma para un dato extra, where para el pueblo, which para el taller y whose para la sonrisa."
+          },
+          "text": "Datos: tu tío Carlos es mecánico (dato extra, con comas) y muy generoso. Vive en el pueblo donde pasaste tu infancia. Su taller, que es pequeño y acogedor, es tu lugar favorito. Es paciente con los niños que lo visitan. Tu prima, cuya sonrisa alegra a todos, trabaja con él. Los visitas cada verano.",
+          "scoring": {
+            "wordRange": [
+              60,
+              100
+            ],
+            "evidenceGroups": [
+              [
+                "who is a mechanic"
+              ],
+              [
+                "where I spent my childhood",
+                "where I grew up"
+              ],
+              [
+                "which is small and cosy"
+              ],
+              [
+                "whose smile"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b53ff505718d9e2d76ab96feb71f0e04ad96af61469dda1112852cbbdc422695"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c29.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase con un dato extra entre comas sobre un parque."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The park which is very quiet is near my house."
+          },
+          {
+            "text": "The park, which is very quiet, is near my house."
+          },
+          {
+            "text": "The park, that is very quiet, is near my house."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.r01.seed-0",
+          "feedback": {
+            "es": "Un dato extra sobre una cosa va entre comas y con which; that no se admite entre comas. Sin comas, la cláusula identificaría el parque."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c7ef34cda9505c968e38ed5b92bb391d55b97d888f10be7b77194d3b491162b9"
+      },
+      {
+        "id": "en.n4.c29.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mi amiga, que es muy amable, vive en Loja.»"
+        },
+        "answer": {
+          "text": "who",
+          "accepted": [
+            "who"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.r02.seed-0",
+          "feedback": {
+            "es": "Es una persona y hay comas: who introduce el dato extra."
+          },
+          "text": "My friend, ___ is very kind, lives in Loja."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5c8cc0f26104f230ddda80c364ea54bb518dbe75bf735aa43e0a90f292963724"
+      },
+      {
+        "id": "en.n4.c29.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Di que tu madre, que es muy paciente, está orgullosa de ti."
+        },
+        "answer": {
+          "text": "My mother, who is very patient, is proud of me.",
+          "accepted": [
+            "My mother, who is very patient, is proud of me.",
+            "My mother, who is proud of me, is very patient.",
+            "My mother is very patient, and she is proud of me."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c29.r03.seed-0",
+          "feedback": {
+            "es": "El dato extra sobre tu madre va entre comas con who, y la frase principal dice que está orgullosa: is proud of me."
+          },
+          "text": "Datos: mi madre; es muy paciente; está orgullosa de mí."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c2d7cbb8b2d7d0b7a11123d7ea89b001157b224b6e2132fdcc08ad5e9692f8ff"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c29.e01": {
+      "reteach": "en.n4.class-29.t01",
+      "review": "en.n4.c29.r01"
+    },
+    "en.n4.c29.e02": {
+      "reteach": "en.n4.class-29.t02",
+      "review": "en.n4.c29.r02"
+    },
+    "en.n4.c29.e03": {
+      "reteach": "en.n4.class-29.t03",
+      "review": "en.n4.c29.r03"
+    },
+    "en.n4.c29.e04": {
+      "reteach": "en.n4.class-29.t04",
+      "review": "en.n4.c29.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,782 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-12",
+  "title": {
+    "en": "Had done or had been doing",
+    "es": "Había hecho o había estado haciendo"
+  },
+  "objectives": {
+    "es": [
+      "Formar el past perfect continuous (had been + -ing) y elegirlo frente a had + participio según se destaque la duración o el resultado."
+    ]
+  },
+  "concepts": [
+    "n5-before-that-moment-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n5.class-11"
+  ],
+  "usesVocabulary": [
+    "queuing",
+    "finally",
+    "grumpy",
+    "noon",
+    "pages",
+    "break"
+  ],
+  "usesPatterns": [
+    "n5-before-that-moment-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "queuing",
+      "es": "haciendo cola"
+    },
+    {
+      "en": "finally",
+      "es": "por fin"
+    },
+    {
+      "en": "grumpy",
+      "es": "de mal humor"
+    },
+    {
+      "en": "noon",
+      "es": "mediodía"
+    },
+    {
+      "en": "pages",
+      "es": "páginas"
+    },
+    {
+      "en": "break",
+      "es": "descanso"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-12.t01",
+      "en": "We had been queuing for two hours when the doors finally opened.",
+      "es": "Llevábamos dos horas haciendo cola cuando por fin se abrieron las puertas.",
+      "explanationEs": "Had been + -ing + for: la actividad duró dos horas hasta ese momento.",
+      "segments": [
+        "We had been queuing for two",
+        "hours when the doors finally opened."
+      ],
+      "audioText": "We had been queuing for two hours when the doors finally opened.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-before-that-moment-2"
+    },
+    {
+      "id": "en.n5.class-12.t02",
+      "en": "Leo hadn't been sleeping well, so he was grumpy all day.",
+      "es": "Leo no había estado durmiendo bien, así que estuvo de mal humor todo el día.",
+      "explanationEs": "Negativa: hadn't been + -ing; explica el mal humor.",
+      "segments": [
+        "Leo hadn't been sleeping well, so",
+        "he was grumpy all day."
+      ],
+      "audioText": "Leo hadn't been sleeping well, so he was grumpy all day.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-before-that-moment-2"
+    },
+    {
+      "id": "en.n5.class-12.t03",
+      "en": "By noon Mia had finished two pages, so she took a short break.",
+      "es": "Para el mediodía Mia había terminado dos páginas, así que hizo un breve descanso.",
+      "explanationEs": "Had finished + cantidad: interesa el resultado (dos páginas), no el tiempo.",
+      "segments": [
+        "By noon Mia had finished two pages,",
+        "so she took a short break."
+      ],
+      "audioText": "By noon Mia had finished two pages, so she took a short break.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-before-that-moment-2"
+    },
+    {
+      "id": "en.n5.class-12.t04",
+      "en": "How long had you been queuing before the doors opened?",
+      "es": "¿Cuánto tiempo llevabas haciendo cola antes de que abrieran las puertas?",
+      "explanationEs": "Pregunta de duración: How long + had + sujeto + been + -ing.",
+      "segments": [
+        "How long had you been",
+        "queuing before the doors opened?"
+      ],
+      "audioText": "How long had you been queuing before the doors opened?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-before-that-moment-2"
+    },
+    {
+      "id": "en.n5.class-12.t05",
+      "en": "Sara had written four pages, but she had only been writing for an hour.",
+      "es": "Sara había escrito cuatro páginas, pero solo llevaba una hora escribiendo.",
+      "explanationEs": "Had written cuenta el resultado (four pages); had been writing mide el tiempo.",
+      "segments": [
+        "Sara had written four pages, but she",
+        "had only been writing for an hour."
+      ],
+      "audioText": "Sara had written four pages, but she had only been writing for an hour.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-before-that-moment-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c12.pg01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mia no había estado durmiendo bien, así que estaba de mal humor.»"
+        },
+        "answer": {
+          "text": "hadn't been",
+          "accepted": [
+            "hadn't been",
+            "had not been"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-before-that-moment-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.pg01.seed-0",
+          "feedback": {
+            "es": "La negativa del past perfect continuous es hadn't been + -ing: Mia hadn't been sleeping."
+          },
+          "hint": {
+            "es": "Es negativa: primero el auxiliar con not y después la palabra que precede al -ing."
+          },
+          "text": "Mia ___ sleeping well, so she was grumpy."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:02f9dabc6f154673835a84751aae29c77dec5cc5b339af21bb4e74dfad9f3a95"
+      },
+      {
+        "id": "en.n5.c12.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la pregunta: «¿Cuánto tiempo llevabas esperando?»"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "How long had you been waiting?"
+          },
+          {
+            "text": "How long you had been waiting?"
+          },
+          {
+            "text": "How long have you been waiting?"
+          }
+        ],
+        "teaches": [
+          "n5-before-that-moment-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.pg02.seed-0",
+          "feedback": {
+            "es": "La pregunta de duración invierte had y el sujeto; have you been pondría la pregunta en presente."
+          },
+          "hint": {
+            "es": "El auxiliar va antes del sujeto y la pregunta está en pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d53ac6661bb449eb638a2efbdda4691441c8d071dd4b003fee18624247d3ddd"
+      },
+      {
+        "id": "en.n5.c12.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase destaca cuánto duró la actividad y no el resultado?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She had painted the whole kitchen."
+          },
+          {
+            "text": "She had been painting for three hours."
+          },
+          {
+            "text": "She had finished the kitchen."
+          }
+        ],
+        "teaches": [
+          "n5-before-that-moment-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.pg03.seed-0",
+          "feedback": {
+            "es": "Had been painting + for three hours mide la duración; las otras dos cuentan un resultado."
+          },
+          "hint": {
+            "es": "Fíjate en cuál responde a «¿cuánto tiempo?» y no a «¿qué terminó?»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c07e299f2ffca950f606f1aeb447a55026a028fee63ce71929f1e3cf6debce73"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c12.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las frases con had done o had been doing."
+        },
+        "answer": {
+          "text": "had been waiting | had written | had been running",
+          "accepted": [
+            "had been waiting | had written | had been running"
+          ],
+          "parts": [
+            {
+              "text": "had been waiting",
+              "accepted": [
+                "had been waiting",
+                "had waited"
+              ]
+            },
+            {
+              "text": "had written",
+              "accepted": [
+                "had written"
+              ]
+            },
+            {
+              "text": "had been running",
+              "accepted": [
+                "had been running",
+                "had run"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.p01.seed-0",
+          "feedback": {
+            "es": "For an hour y for ten minutes piden duración (had been + -ing; had waited y had run también se admiten); six emails es una cantidad terminada (had written)."
+          },
+          "sentences": [
+            "We ___ (wait) for an hour when the bus came.",
+            "By noon Tom ___ (write) six emails.",
+            "Leo was out of breath because he ___ (run) for ten minutes."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:070935b289a51c8a086cfc9d789b0c4083cadd9ffa2adeb914ebcd98887a84eb"
+      },
+      {
+        "id": "en.n5.c12.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «¿Cuánto tiempo llevaba cocinando Carlos cuando llegaste?»"
+        },
+        "answer": {
+          "text": "How long had Carlos been cooking when you arrived",
+          "tokens": [
+            "How",
+            "long",
+            "had",
+            "Carlos",
+            "been",
+            "cooking",
+            "when",
+            "you",
+            "arrived"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.p02.seed-0",
+          "feedback": {
+            "es": "La pregunta de duración va: How long + had + sujeto + been + cooking."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:148cfbf1aafa38bb456779d96ee006dd3eca5220fcbcbe7e0d267dd406b729a0"
+      },
+      {
+        "id": "en.n5.c12.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha: ¿desde cuándo pintaba Sara y cuántas paredes tenía hechas?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Since two; nine walls."
+          },
+          {
+            "text": "For nine hours; two walls."
+          },
+          {
+            "text": "Since nine; two walls."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.p03.seed-0",
+          "feedback": {
+            "es": "Since nine marca el inicio de la actividad y two walls es el resultado; for nine hours cambiaría el dato."
+          },
+          "audio": "Sara had been painting since nine, but she had only finished two walls.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:443f57e1d8fbb69269abbf91d64479e099e702cc5fdda99e867a833fc380311c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c12.e01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las frases: elige entre resultado y duración."
+        },
+        "answer": {
+          "text": "had read | had been queuing | had solved",
+          "accepted": [
+            "had read | had been queuing | had solved"
+          ],
+          "parts": [
+            {
+              "text": "had read",
+              "accepted": [
+                "had read"
+              ]
+            },
+            {
+              "text": "had been queuing",
+              "accepted": [
+                "had been queuing",
+                "had queued"
+              ]
+            },
+            {
+              "text": "had solved",
+              "accepted": [
+                "had solved"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.e01.seed-0",
+          "feedback": {
+            "es": "Three chapters y four problems son cantidades terminadas; for ages mide una espera larga (had been queuing, o had queued)."
+          },
+          "sentences": [
+            "Sara ___ (read) three chapters before lunch.",
+            "They ___ (queue) for ages when it began to rain.",
+            "By noon Tom ___ (solve) four problems."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1532fec09d2313ed3ae9dbb7a29864ff43a007c6779aab125b1c8770bd4fde98"
+      },
+      {
+        "id": "en.n5.c12.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cuánto tiempo llevaban esperando."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Around 60 minutes."
+          },
+          {
+            "text": "Around 120 minutes."
+          },
+          {
+            "text": "Around 10 minutes."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.e02.seed-0",
+          "feedback": {
+            "es": "La respuesta del audio es «almost an hour»: casi sesenta minutos."
+          },
+          "audio": "How long had they been waiting when the train finally arrived? Almost an hour.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2f3e29c257514b3d7ad561474c16c92d37d2d6863adeae3727a96ca0d8bbd06f"
+      },
+      {
+        "id": "en.n5.c12.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la forma que cuenta cuántas cosas terminó Ana antes del viernes."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "had been finishing"
+          },
+          {
+            "text": "had finished"
+          },
+          {
+            "text": "was finishing"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.e03.seed-0",
+          "feedback": {
+            "es": "All twelve emails es un resultado completo: se usa had finished."
+          },
+          "text": "By Friday, Ana ___ all twelve emails."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:84f70bcb013c6d19e6a5a685b477c9a08ddd082552c9d029aa67925e6fb26b45"
+      },
+      {
+        "id": "en.n5.c12.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la pregunta sobre cuánto esperaba Tom."
+        },
+        "answer": {
+          "text": "How long had Tom been waiting when the bus came?",
+          "accepted": [
+            "How long had Tom been waiting when the bus came?",
+            "How long had Tom been waiting when the bus arrived?",
+            "How long had Tom been waiting when the bus finally came?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.e04.seed-0",
+          "feedback": {
+            "es": "La duración se pregunta con How long + had + Tom + been + waiting."
+          },
+          "text": "Quieres saber cuánto tiempo llevaba Tom esperando cuando llegó el autobús."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f21c987991d3f0b5f6907ee4444470caba500b7e4db8fae72136057de5d918a6"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c12.r01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «No llevaban mucho tiempo haciendo cola cuando abrieron las puertas.»"
+        },
+        "answer": {
+          "text": "They hadn't been queuing for long when the doors opened",
+          "tokens": [
+            "They",
+            "hadn't",
+            "been",
+            "queuing",
+            "for",
+            "long",
+            "when",
+            "the",
+            "doors",
+            "opened"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.r01.seed-0",
+          "feedback": {
+            "es": "La negativa hadn't been + queuing se mantiene junta y for long da la duración corta."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3d9f19d979db19d0210eda7a6c3f201c9709762e1391ae76731e7dc758eaf3a8"
+      },
+      {
+        "id": "en.n5.c12.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase correcta: «Conocía a Sara desde hacía años.»"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I had been knowing Sara for years."
+          },
+          {
+            "text": "I knew Sara since years."
+          },
+          {
+            "text": "I had known Sara for years."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.r02.seed-0",
+          "feedback": {
+            "es": "Know es un verbo de estado: had known, sin -ing, y for se usa con períodos de tiempo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6427e3ac2526fafae3f1cb369f016200834093a98a2b33ac8328e099f08e1a99"
+      },
+      {
+        "id": "en.n5.c12.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase habla del resultado y no de la duración?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Tom had fixed the bike."
+          },
+          {
+            "text": "Tom had been fixing the bike."
+          },
+          {
+            "text": "Tom hadn't been fixing the bike."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-before-that-moment-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c12.r03.seed-0",
+          "feedback": {
+            "es": "Had fixed presenta la bici ya arreglada; las otras dos hablan de la actividad de arreglarla."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:414f2a748a8ae17ebafd30ceb6f72ff91b7b8a868e625091bf30aaa13e640a4c"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c12.e01": {
+      "reteach": "en.n5.class-12.t01",
+      "review": "en.n5.c12.r01"
+    },
+    "en.n5.c12.e02": {
+      "reteach": "en.n5.class-12.t02",
+      "review": "en.n5.c12.r02"
+    },
+    "en.n5.c12.e03": {
+      "reteach": "en.n5.class-12.t03",
+      "review": "en.n5.c12.r03"
+    },
+    "en.n5.c12.e04": {
+      "reteach": "en.n5.class-12.t04",
+      "review": "en.n5.c12.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,646 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "classes": {
+    "en.n4.class-56": {
+      "explicacion": {
+        "titulo": "Have something done: un servicio",
+        "texto": "Have something done expresa un servicio: la acción no la haces tú, la hace otra persona (un profesional) por ti. La estructura es have + cosa + participio: I had my bike repaired. Compara: I repaired my bike = la reparé yo; I had my bike repaired = la reparó un mecánico. En español decimos «me corté el pelo» para los dos casos, pero en inglés solo I cut my hair significa que lo hiciste tú. Si quieres nombrar a quien lo hace, añade by: by a hairdresser. Have cambia de tiempo (had, has, am having); el participio no cambia."
+      },
+      "patron": {
+        "texto": "have + cosa + participio:",
+        "formula": [
+          {
+            "texto": "Tom",
+            "nota": "quien recibe el servicio"
+          },
+          {
+            "texto": "had",
+            "nota": "have en el tiempo que necesites"
+          },
+          {
+            "texto": "his bike",
+            "nota": "la cosa: va antes del participio"
+          },
+          {
+            "texto": "repaired.",
+            "nota": "participio: lo hace otra persona"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I cut my hair at the hairdresser's.",
+          "correcto": "I had my hair cut at the hairdresser's.",
+          "explicacion": "Calco de «me corté el pelo en la peluquería». I cut my hair significa que lo cortaste tú; para un servicio se usa had + cosa + participio."
+        },
+        {
+          "incorrecto": "He had his car wash yesterday.",
+          "correcto": "He had his car washed yesterday.",
+          "explicacion": "Después de la cosa (his car) va el participio: washed, no el verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom llega a la escuela con su bici como nueva y Mia le pregunta.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Your bike looks new, Tom!",
+            "traduccion": "¡Tu bici parece nueva, Tom!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I did not buy a new one. I had it repaired at the shop.",
+            "traduccion": "No compré una nueva. La hice reparar en la tienda."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Did you repair it yourself?",
+            "traduccion": "¿La arreglaste tú mismo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, a mechanic did it. I also had the wheels cleaned.",
+            "traduccion": "No, lo hizo un mecánico. También hice limpiar las ruedas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién arregló la bici de Tom?",
+          "opciones": [
+            {
+              "es": "Un mecánico de la tienda."
+            },
+            {
+              "es": "El propio Tom."
+            },
+            {
+              "es": "Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «a mechanic did it»: la reparó un mecánico. «Had it repaired» indica un servicio, no que lo hiciera él."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quién hace la acción",
+          "Frase",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Yo mismo"
+            },
+            {
+              "texto": "I repaired my bike."
+            },
+            {
+              "texto": "La reparé yo."
+            }
+          ],
+          [
+            {
+              "texto": "Otra persona"
+            },
+            {
+              "texto": "I had my bike repaired."
+            },
+            {
+              "texto": "Un mecánico la reparó."
+            }
+          ],
+          [
+            {
+              "texto": "Otra persona (planeado)"
+            },
+            {
+              "texto": "We are having the windows cleaned."
+            },
+            {
+              "texto": "Alguien nos las limpia."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-57": {
+      "explicacion": {
+        "titulo": "Have y get en todos los tiempos",
+        "texto": "Have o get + cosa + participio funciona en todos los tiempos; solo cambia have/get. Presente continuo: I am having it fixed. Pasado: I had it fixed. Futuro: I will have it fixed. Con need to: I need to get it fixed. En preguntas y negaciones se usa el auxiliar do: Did you have it fixed? I didn't have it fixed. El orden no cambia nunca: primero la cosa y después el participio (the phone fixed, no fixed the phone). Get es más informal que have y se usa mucho con problemas."
+      },
+      "patron": {
+        "texto": "have / get + cosa + participio:",
+        "formula": [
+          {
+            "texto": "We will have",
+            "nota": "sujeto + have en el tiempo necesario"
+          },
+          {
+            "texto": "the internet",
+            "nota": "la cosa: va antes del participio"
+          },
+          {
+            "texto": "installed",
+            "nota": "participio"
+          },
+          {
+            "texto": "on Monday.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will have installed the internet.",
+          "correcto": "We will have the internet installed.",
+          "explicacion": "La cosa va antes del participio: have + the internet + installed. Have installed the internet cambia el significado."
+        },
+        {
+          "incorrecto": "Did you had the pizza delivered?",
+          "correcto": "Did you have the pizza delivered?",
+          "explicacion": "Después de did el verbo va en forma base: have, no had."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le pregunta a Carlos por su casa nueva.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Is your internet working now, Carlos?",
+            "traduccion": "¿Ya funciona tu internet, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Not yet. We will have it installed on Monday.",
+            "traduccion": "Todavía no. Haremos que lo instalen el lunes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the walls? They look new.",
+            "traduccion": "¿Y las paredes? Parecen nuevas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We had them painted last week.",
+            "traduccion": "Las hicimos pintar la semana pasada."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo instalarán internet en la casa de Carlos?",
+          "opciones": [
+            {
+              "es": "El lunes."
+            },
+            {
+              "es": "La semana pasada."
+            },
+            {
+              "es": "Ya está instalado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «We will have it installed on Monday». La semana pasada fue cuando pintaron las paredes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tiempo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presente continuo"
+            },
+            {
+              "texto": "She is getting her phone fixed today."
+            }
+          ],
+          [
+            {
+              "texto": "Pasado"
+            },
+            {
+              "texto": "We did not have the room painted."
+            }
+          ],
+          [
+            {
+              "texto": "Futuro"
+            },
+            {
+              "texto": "We will have the internet installed."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "Did you have the pizza delivered?"
+            }
+          ],
+          [
+            {
+              "texto": "Con need to"
+            },
+            {
+              "texto": "I need to get these tickets printed."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-58": {
+      "explicacion": {
+        "titulo": "Problema, petición y solución",
+        "texto": "En una llamada de servicio escucha tres datos. El problema: The headphones are faulty / The box arrived damaged / One part is missing / It stopped working. La petición del cliente, siempre cortés: I would like a refund / Could you replace it? La solución que ofrece la tienda, con can o will: We can exchange it / We will send a new one. Ojo: el cliente puede pedir una cosa y la tienda ofrecer otra; la solución es lo que finalmente se acepta."
+      },
+      "patron": {
+        "texto": "Problema + petición + solución:",
+        "formula": [
+          {
+            "texto": "The headphones are faulty.",
+            "nota": "problema: adjetivo o is missing"
+          },
+          {
+            "texto": "I would like a refund.",
+            "nota": "petición: would like / could you"
+          },
+          {
+            "texto": "We can replace them.",
+            "nota": "solución de la tienda: can / will"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The box arrived damage.",
+          "correcto": "The box arrived damaged.",
+          "explicacion": "Para describir cómo llegó la caja se usa el participio como adjetivo: damaged."
+        },
+        {
+          "incorrecto": "Could you to replace it?",
+          "correcto": "Could you replace it?",
+          "explicacion": "Después de could va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia llama a una tienda porque sus auriculares llegaron con un problema.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Good morning. How can I help you?",
+            "traduccion": "Buenos días. ¿En qué puedo ayudarla?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My headphones arrived damaged. The left side does not work.",
+            "traduccion": "Mis auriculares llegaron dañados. El lado izquierdo no funciona."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I am sorry about that. Would you like a refund or a new pair?",
+            "traduccion": "Lamento eso. ¿Quiere un reembolso o un par nuevo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Could you replace them, please?",
+            "traduccion": "¿Podría sustituirlos, por favor?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Of course. We will send you a new pair tomorrow.",
+            "traduccion": "Por supuesto. Le enviaremos un par nuevo mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué acuerdan al final?",
+          "opciones": [
+            {
+              "es": "Enviar unos auriculares nuevos mañana."
+            },
+            {
+              "es": "Devolver el dinero hoy."
+            },
+            {
+              "es": "Arreglar los auriculares ahora."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia pide sustituirlos y Tom responde «We will send you a new pair tomorrow». El reembolso solo era una de las opciones."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Frases clave",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Problema"
+            },
+            {
+              "texto": "is faulty / damaged / missing / stopped working"
+            },
+            {
+              "texto": "The box arrived damaged."
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "I would like… / Could you…?"
+            },
+            {
+              "texto": "Could you replace it?"
+            }
+          ],
+          [
+            {
+              "texto": "Solución"
+            },
+            {
+              "texto": "We can… / We will…"
+            },
+            {
+              "texto": "We can exchange it."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-59": {
+      "explicacion": {
+        "titulo": "Una reclamación cortés",
+        "texto": "Una reclamación cortés tiene cuatro partes: 1) motivo (I am writing to complain about…), 2) hechos con fechas (Unfortunately, it stopped working after one week), 3) petición educada (I would be grateful if you could… / I would like to have it repaired / Could you replace it?) y 4) cierre (I look forward to your reply. Kind regards). La cortesía viene de would y could, y de contar el hecho sin atacar a la tienda. Incluye al menos una estructura have something done."
+      },
+      "patron": {
+        "texto": "Motivo + hechos + petición + cierre:",
+        "formula": [
+          {
+            "texto": "I am writing to complain about a faulty lamp.",
+            "nota": "motivo: I am writing to + verbo base"
+          },
+          {
+            "texto": "Unfortunately, it stopped working after one week.",
+            "nota": "hechos: qué pasó y cuándo"
+          },
+          {
+            "texto": "I would be grateful if you could replace it.",
+            "nota": "petición: would be grateful if you could"
+          },
+          {
+            "texto": "I look forward to your reply.",
+            "nota": "cierre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I write you for complain about the lamp.",
+          "correcto": "I am writing to complain about the lamp.",
+          "explicacion": "Calco de «le escribo para quejarme». En inglés: I am writing to + verbo base."
+        },
+        {
+          "incorrecto": "I want that you replace it.",
+          "correcto": "I would like you to replace it.",
+          "explicacion": "Want that no existe en inglés. Se dice would like you to + verbo base, que además es más cortés."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le enseña a Leo el borrador de su reclamación por una lámpara defectuosa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I am writing to complain about a faulty lamp. Is that a good start?",
+            "traduccion": "Le escribo para reclamar por una lámpara defectuosa. ¿Es un buen comienzo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. Now add the facts. When did it stop working?",
+            "traduccion": "Sí. Ahora añade los hechos. ¿Cuándo dejó de funcionar?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Unfortunately, it stopped working after one week.",
+            "traduccion": "Lamentablemente, dejó de funcionar a la semana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good. Now ask for a solution. Write: I would be grateful if you could replace it.",
+            "traduccion": "Bien. Ahora pide una solución. Escribe: Le agradecería que pudiera sustituirla."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe añadir Ana después de los hechos?",
+          "opciones": [
+            {
+              "es": "Una petición cortés para pedir una solución."
+            },
+            {
+              "es": "El saludo final de la carta."
+            },
+            {
+              "es": "La fecha de compra de la lámpara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Now ask for a solution» y le da la frase con would be grateful. Los hechos ya están escritos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Frase",
+          "Para qué sirve"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Motivo"
+            },
+            {
+              "texto": "I am writing to complain about…"
+            },
+            {
+              "texto": "decir por qué escribes"
+            }
+          ],
+          [
+            {
+              "texto": "Hechos"
+            },
+            {
+              "texto": "Unfortunately, it stopped working."
+            },
+            {
+              "texto": "contar lo ocurrido con fechas"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "I would be grateful if you could…"
+            },
+            {
+              "texto": "pedir con cortesía"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "I look forward to your reply."
+            },
+            {
+              "texto": "terminar con educación"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-60": {
+      "explicacion": {
+        "titulo": "Resolver un producto defectuoso",
+        "texto": "Una devolución tiene cuatro pasos. 1) Explica el fallo con hechos: I bought it last week, and it stopped working. Enseña el recibo (receipt). 2) Pide con cortesía: Could I return it? I would like to have it repaired. 3) Si no hay acuerdo, negocia: Is there another option? The other option is… Pregunta por la garantía (It is under warranty). 4) Confirma lo acordado: So, to confirm, you will… by Friday. Di el problema, no culpes al vendedor."
+      },
+      "patron": {
+        "texto": "Fallo + petición + opción + confirmación:",
+        "formula": [
+          {
+            "texto": "The camera stopped working.",
+            "nota": "fallo: un hecho"
+          },
+          {
+            "texto": "Could I return it, please?",
+            "nota": "petición cortés"
+          },
+          {
+            "texto": "The other option is to have it repaired.",
+            "nota": "opción: alternativa del vendedor"
+          },
+          {
+            "texto": "So, to confirm, you will repair it by Friday.",
+            "nota": "confirmar: repetir lo acordado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I want return it.",
+          "correcto": "I would like to return it.",
+          "explicacion": "Después de want va to + verbo, y en una tienda would like to suena más cortés: I would like to return it."
+        },
+        {
+          "incorrecto": "I bought it the last week.",
+          "correcto": "I bought it last week.",
+          "explicacion": "En inglés last week se dice sin the; es un calco de «la semana pasada»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia devuelve una cámara que no enciende y habla con Sara, la vendedora.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Hello. I bought this camera last week, and it does not turn on.",
+            "traduccion": "Hola. Compré esta cámara la semana pasada y no se enciende."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I am sorry. Do you have your receipt?",
+            "traduccion": "Lo siento. ¿Tiene su recibo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, here it is. Could I return it?",
+            "traduccion": "Sí, aquí está. ¿Podría devolverla?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It is under warranty. You have two options: a refund or an exchange.",
+            "traduccion": "Está en garantía. Tiene dos opciones: un reembolso o un cambio."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I would like an exchange, please.",
+            "traduccion": "Me gustaría un cambio, por favor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué elige Mia?",
+          "opciones": [
+            {
+              "es": "Cambiar la cámara por otra."
+            },
+            {
+              "es": "Que le devuelvan el dinero."
+            },
+            {
+              "es": "Que arreglen la cámara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara ofrece un reembolso o un cambio y Mia responde «I would like an exchange»: elige cambiarla por otra."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Explicar el fallo"
+            },
+            {
+              "texto": "It stopped working after two days."
+            }
+          ],
+          [
+            {
+              "texto": "Pedir"
+            },
+            {
+              "texto": "Could I return it, please?"
+            }
+          ],
+          [
+            {
+              "texto": "Negociar"
+            },
+            {
+              "texto": "The other option is to have it repaired."
+            }
+          ],
+          [
+            {
+              "texto": "Confirmar"
+            },
+            {
+              "texto": "So, to confirm, you will repair it by Friday."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -190,7 +190,12 @@ def es(texto: str) -> dict:
 # ------------------------------------------------------------ construcción --
 
 ORDINAL = re.compile(
-    r"\b(?:la|el|lo)\s+(?:primer[oa]?|segund[oa]|tercer[oa]?|cuart[oa]|últim[oa])\b"
+    # Ordinal que designa una opción: «Solo la primera usa…», «la segunda
+    # opción», «la tercera es…». No «el tercer condicional», «la primera frase
+    # era…» ni «el segundo punto» (orden del estímulo, que no cambia).
+    r"\b(?:la|el)\s+(?:primer[oa]?|segund[oa]|tercer[oa]?|cuart[oa]|últim[oa])\s+"
+    r"(?:opci[oó]n|respuesta|alternativa|usa|es|son|lleva|tiene|dice|expresa|marca|muestra|mantiene|"
+    r"combina|retrocede|suena|funciona|encaja|sirve|conserva|incluye|respeta)\b"
     r"|\bopci[oó]n\s+(?:[abcd1-4])\b|\b(?:first|second|third|last)\s+(?:option|answer|choice)\b",
     re.IGNORECASE,
 )

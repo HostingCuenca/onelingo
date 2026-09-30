@@ -1,0 +1,798 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-31",
+  "title": {
+    "en": "Questions that get passed on",
+    "es": "Preguntas que se transmiten"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer cómo una pregunta directa se convierte en pregunta indirecta con if, whether o una palabra interrogativa."
+    ]
+  },
+  "concepts": [
+    "n4-messages-and-gossip-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-30"
+  ],
+  "usesVocabulary": [
+    "asked",
+    "wondered",
+    "whether",
+    "hungry",
+    "late",
+    "library",
+    "pen",
+    "brother"
+  ],
+  "usesPatterns": [
+    "n4-messages-and-gossip-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "asked",
+      "es": "preguntó"
+    },
+    {
+      "en": "wondered",
+      "es": "se preguntó"
+    },
+    {
+      "en": "whether",
+      "es": "si (o no)"
+    },
+    {
+      "en": "hungry",
+      "es": "con hambre"
+    },
+    {
+      "en": "late",
+      "es": "tarde"
+    },
+    {
+      "en": "library",
+      "es": "biblioteca"
+    },
+    {
+      "en": "pen",
+      "es": "bolígrafo"
+    },
+    {
+      "en": "brother",
+      "es": "hermano"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-31.t01",
+      "en": "Mia asked me where I lived.",
+      "es": "Mia me preguntó dónde vivía.",
+      "explanationEs": "Con where, la pregunta conserva la palabra interrogativa y sigue sujeto + verbo: sin did.",
+      "segments": [
+        "Mia asked me",
+        "where I lived."
+      ],
+      "audioText": "Mia asked me where I lived.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-1"
+    },
+    {
+      "id": "en.n4.class-31.t02",
+      "en": "Tom asked if I was hungry.",
+      "es": "Tom preguntó si yo tenía hambre.",
+      "explanationEs": "Una pregunta de sí o no se transmite con if; el verbo va después del sujeto.",
+      "segments": [
+        "Tom asked if",
+        "I was hungry."
+      ],
+      "audioText": "Tom asked if I was hungry.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-1"
+    },
+    {
+      "id": "en.n4.class-31.t03",
+      "en": "Sara wondered whether the bus was late.",
+      "es": "Sara se preguntó si el autobús llegaba tarde.",
+      "explanationEs": "Whether también significa «si»; es frecuente con wondered.",
+      "segments": [
+        "Sara wondered whether the",
+        "bus was late."
+      ],
+      "audioText": "Sara wondered whether the bus was late.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-1"
+    },
+    {
+      "id": "en.n4.class-31.t04",
+      "en": "Leo asked what time the film started.",
+      "es": "Leo preguntó a qué hora empezaba la película.",
+      "explanationEs": "What time se mantiene; después viene sujeto + verbo, sin did.",
+      "segments": [
+        "Leo asked what time",
+        "the film started."
+      ],
+      "audioText": "Leo asked what time the film started.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-1"
+    },
+    {
+      "id": "en.n4.class-31.t05",
+      "en": "Ana asked if the library was open.",
+      "es": "Ana preguntó si la biblioteca estaba abierta.",
+      "explanationEs": "Is pasa a was: el tiempo retrocede al contar la pregunta.",
+      "segments": [
+        "Ana asked if the",
+        "library was open."
+      ],
+      "audioText": "Ana asked if the library was open.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c31.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cómo se transmite la pregunta «Where do you study?» dicha por Mia?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Mia asked where did I study."
+          },
+          {
+            "text": "Mia asked where I studied."
+          },
+          {
+            "text": "Mia asked where do you study."
+          }
+        ],
+        "teaches": [
+          "n4-messages-and-gossip-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.pg01.seed-0",
+          "feedback": {
+            "es": "Al transmitir una pregunta con where se usa sujeto + verbo, sin do: asked where I studied. Las otras opciones conservan la estructura de pregunta directa."
+          },
+          "hint": {
+            "es": "La versión transmitida ya no necesita el auxiliar de la pregunta directa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5c3eda5f81918d71c7585d494b19e6fff856d390ad91d97ff7a2b30ebb316ae6"
+      },
+      {
+        "id": "en.n4.c31.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Tom preguntó si yo tenía un bolígrafo.»"
+        },
+        "answer": {
+          "text": "if",
+          "accepted": [
+            "if",
+            "whether"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-messages-and-gossip-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.pg02.seed-0",
+          "feedback": {
+            "es": "Las preguntas de sí o no, al transmitirse, necesitan if o whether (si) delante del sujeto."
+          },
+          "hint": {
+            "es": "Una pregunta de sí o no no tiene palabra interrogativa: necesita una palabra que signifique «si»."
+          },
+          "text": "Tom asked ___ I had a pen."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cf06c29b0fe2e1e577a8d16ccb1e26144188f447e255db791d53ec175370ecec"
+      },
+      {
+        "id": "en.n4.c31.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mia preguntó dónde estaba la biblioteca.»"
+        },
+        "answer": {
+          "text": "Mia asked where the library was",
+          "tokens": [
+            "Mia",
+            "asked",
+            "where",
+            "the",
+            "library",
+            "was"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-messages-and-gossip-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.pg03.seed-0",
+          "feedback": {
+            "es": "Después de where va el sujeto (the library) y luego el verbo (was): el orden es el de una frase afirmativa."
+          },
+          "hint": {
+            "es": "Tras la palabra interrogativa, primero va el sujeto y luego el verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d78bde12627a0729049485e8804a306bd8db4a92e1334da7f21daeea9d7b2c7a"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c31.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quería saber Leo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Leo wanted to know where my brother lived."
+          },
+          {
+            "text": "Leo told me that he had a brother."
+          },
+          {
+            "text": "Leo wanted to know if I had a brother."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.p01.seed-0",
+          "feedback": {
+            "es": "Leo preguntó if I had a brother: quiere saber si la persona tiene un hermano. No pregunta dónde vive ni afirma nada."
+          },
+          "audio": "Leo asked me if I had a brother.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6d2057e3d7b8db6d39e818baba2468555878737cbe3fdeeec1cc90fe447dd43d"
+      },
+      {
+        "id": "en.n4.c31.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase transmite una pregunta de sí o no?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Ana asked if the shop was open."
+          },
+          {
+            "text": "Ana asked where the shop was."
+          },
+          {
+            "text": "Ana asked what shop it was."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.p02.seed-0",
+          "feedback": {
+            "es": "Solo Ana asked if the shop was open conserva la idea de sí o no; las otras dos transmiten preguntas con where y con what."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2a1058fa3ee39df17cc7528e545f1f9fd84e53adaf290da8e19b34bc4b324de9"
+      },
+      {
+        "id": "en.n4.c31.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ana preguntó cuándo empezaba la clase.»"
+        },
+        "answer": {
+          "text": "when",
+          "accepted": [
+            "when"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.p03.seed-0",
+          "feedback": {
+            "es": "When mantiene la palabra interrogativa de la pregunta directa; el verbo va después del sujeto."
+          },
+          "text": "Ana asked ___ the class started."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5674aa631c8a624110c04f803f53404e9790996cc26c770314341f3632f4335e"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c31.e01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada pregunta transmitida con la pregunta original."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Carlos asked where the park was.",
+              {
+                "es": "«¿Dónde está el parque?»"
+              }
+            ],
+            [
+              "Sara asked if I liked pizza.",
+              {
+                "es": "«¿Te gusta la pizza?»"
+              }
+            ],
+            [
+              "Leo asked who the teacher was.",
+              {
+                "es": "«¿Quién es el profesor?»"
+              }
+            ],
+            [
+              "Tom asked whether it was cold.",
+              {
+                "es": "«¿Hace frío?»"
+              }
+            ],
+            [
+              "Mia asked what I wanted.",
+              {
+                "es": "«¿Qué quieres?»"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.e01.seed-0",
+          "feedback": {
+            "es": "Cada frase transmitida contiene if, whether o una wh-word que te dice qué se preguntó en la versión directa."
+          },
+          "pairs": [
+            [
+              "Carlos asked where the park was.",
+              {
+                "es": "«¿Dónde está el parque?»"
+              }
+            ],
+            [
+              "Sara asked if I liked pizza.",
+              {
+                "es": "«¿Te gusta la pizza?»"
+              }
+            ],
+            [
+              "Leo asked who the teacher was.",
+              {
+                "es": "«¿Quién es el profesor?»"
+              }
+            ],
+            [
+              "Tom asked whether it was cold.",
+              {
+                "es": "«¿Hace frío?»"
+              }
+            ],
+            [
+              "Mia asked what I wanted.",
+              {
+                "es": "«¿Qué quieres?»"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:abc61cbebf1ab13cee91724087c8f8aba923b0958d98e2bead5a2cae49ccc00e"
+      },
+      {
+        "id": "en.n4.c31.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quería saber Mia."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Mia wanted to know where the library was."
+          },
+          {
+            "text": "Mia wanted to know if the library opened on Sundays."
+          },
+          {
+            "text": "Mia said that the library was open on Sunday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.e02.seed-0",
+          "feedback": {
+            "es": "Mia preguntó whether the library was open on Sunday: quiere saber si la biblioteca abre los domingos, no dónde está ni qué afirma."
+          },
+          "audio": "Mia asked whether the library was open on Sunday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:50231f97e5e4a879ff09d5070a4b660cf4565da4976159f297dba3d83f9bba22"
+      },
+      {
+        "id": "en.n4.c31.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la versión transmitida de la pregunta de Tom?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Tom asked if did I have a bag."
+          },
+          {
+            "text": "Tom asked do I have a bag."
+          },
+          {
+            "text": "Tom asked if I had a bag."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.e03.seed-0",
+          "feedback": {
+            "es": "Con una pregunta de sí o no se usa if y orden afirmativo: if I had a bag. Las otras opciones mezclan el orden de la pregunta directa."
+          },
+          "text": "Tom says: «Do you have a bag?»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ef5e64461ba6653de44eeab295c8bdcf7ce89aefefbf375cdce16eca42237abb"
+      },
+      {
+        "id": "en.n4.c31.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estas frases transmite mal la pregunta?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Sara asked what was my name."
+          },
+          {
+            "text": "Sara asked what my name was."
+          },
+          {
+            "text": "Sara asked if I was tired."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.e04.seed-0",
+          "feedback": {
+            "es": "What was my name deja el verbo antes del sujeto, como en la pregunta directa. Al transmitir se dice what my name was."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b192b89714281a7aaf47cf5c2af6b595cf440483bb77bf8e3873d402b2299026"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c31.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué pregunta hizo Leo en realidad?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Do you work here?"
+          },
+          {
+            "text": "Where do you work?"
+          },
+          {
+            "text": "Who works here?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.r01.seed-0",
+          "feedback": {
+            "es": "Leo asked where I worked es una pregunta con where: Leo preguntó dónde trabajo. Las otras dos preguntan si trabajo aquí o quién trabaja aquí."
+          },
+          "text": "Leo asked where I worked."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d9c959de77a659fa7790578fd186d4466e00d98c57943ca8c26540816afbc00"
+      },
+      {
+        "id": "en.n4.c31.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quería saber Sara."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Sara wanted to know what time the bus came."
+          },
+          {
+            "text": "Sara asked who drove the bus."
+          },
+          {
+            "text": "Sara was not sure if the bus was on time."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.r02.seed-0",
+          "feedback": {
+            "es": "Sara wondered whether the bus was late: se preguntaba si el autobús llegaba tarde. No pregunta la hora ni quién conduce."
+          },
+          "audio": "Sara wondered whether the bus was late.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8d1fc4192dc08d7494fae1dfd0b8e6d86b7c7e83ed9fb184b644c3a5f02a938a"
+      },
+      {
+        "id": "en.n4.c31.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Tom preguntó si yo tenía hambre.»"
+        },
+        "answer": {
+          "text": "Tom asked if I was hungry",
+          "tokens": [
+            "Tom",
+            "asked",
+            "if",
+            "I",
+            "was",
+            "hungry"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c31.r03.seed-0",
+          "feedback": {
+            "es": "If introduce la pregunta de sí o no y después va el sujeto (I) con el verbo: if I was hungry."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7c2b350202c95aafe4cf5db28caa199a4e5a1792e0303b948229e3f51620cd3a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c31.e01": {
+      "reteach": "en.n4.class-31.t01",
+      "review": "en.n4.c31.r01"
+    },
+    "en.n4.c31.e02": {
+      "reteach": "en.n4.class-31.t02",
+      "review": "en.n4.c31.r02"
+    },
+    "en.n4.c31.e03": {
+      "reteach": "en.n4.class-31.t03",
+      "review": "en.n4.c31.r03"
+    },
+    "en.n4.c31.e04": {
+      "reteach": "en.n4.class-31.t04",
+      "review": "en.n4.c31.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

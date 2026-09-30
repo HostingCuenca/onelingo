@@ -1,0 +1,788 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-93",
+  "title": {
+    "en": "Follow a story in many voices",
+    "es": "Seguir una historia en varias voces"
+  },
+  "objectives": {
+    "es": [
+      "Seguir una historia contada por varias voces e identificar quién dice qué y cuándo."
+    ]
+  },
+  "concepts": [
+    "n4-story-project-3"
+  ],
+  "skills": [
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-92"
+  ],
+  "usesVocabulary": [
+    "voice",
+    "speaker",
+    "version",
+    "detail",
+    "agree",
+    "remember",
+    "each",
+    "gate"
+  ],
+  "usesPatterns": [
+    "n4-story-project-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "voice",
+      "es": "voz"
+    },
+    {
+      "en": "speaker",
+      "es": "hablante"
+    },
+    {
+      "en": "version",
+      "es": "versión"
+    },
+    {
+      "en": "detail",
+      "es": "detalle"
+    },
+    {
+      "en": "agree",
+      "es": "estar de acuerdo"
+    },
+    {
+      "en": "remember",
+      "es": "recordar"
+    },
+    {
+      "en": "each",
+      "es": "cada"
+    },
+    {
+      "en": "gate",
+      "es": "portón"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-93.t01",
+      "en": "Each speaker tells a different version of the story with his or her own voice.",
+      "es": "Cada hablante cuenta una versión distinta de la historia con su propia voz.",
+      "explanationEs": "Each + singular: cada hablante aporta su propia versión.",
+      "segments": [
+        "Each speaker tells a different version of the",
+        "story with his or her own voice."
+      ],
+      "audioText": "Each speaker tells a different version of the story with his or her own voice.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-story-project-3"
+    },
+    {
+      "id": "en.n4.class-93.t02",
+      "en": "Mia says that she closed the gate before dinner.",
+      "es": "Mia dice que ella cerró el portón antes de la cena.",
+      "explanationEs": "Says that + oración: lo que cuenta Mia. Su «I» pasa a she.",
+      "segments": [
+        "Mia says that she closed",
+        "the gate before dinner."
+      ],
+      "audioText": "Mia says that she closed the gate before dinner.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-story-project-3"
+    },
+    {
+      "id": "en.n4.class-93.t03",
+      "en": "Leo can't remember the time, but he saw one detail: the gate was open.",
+      "es": "Leo no recuerda la hora, pero vio un detalle: el portón estaba abierto.",
+      "explanationEs": "Un detalle concreto sirve para comparar versiones.",
+      "segments": [
+        "Leo can't remember the time, but he",
+        "saw one detail: the gate was open."
+      ],
+      "audioText": "Leo can't remember the time, but he saw one detail: the gate was open.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-story-project-3"
+    },
+    {
+      "id": "en.n4.class-93.t04",
+      "en": "I agree with Leo: I saw Rex in the street at six.",
+      "es": "Estoy de acuerdo con Leo: vi a Rex en la calle a las seis.",
+      "explanationEs": "I = quien habla. Agree no lleva am: «estoy de acuerdo» es I agree.",
+      "segments": [
+        "I agree with Leo: I saw",
+        "Rex in the street at six."
+      ],
+      "audioText": "I agree with Leo: I saw Rex in the street at six.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-story-project-3"
+    },
+    {
+      "id": "en.n4.class-93.t05",
+      "en": "Mia does not agree with Sara about the time.",
+      "es": "Mia no está de acuerdo con Sara sobre la hora.",
+      "explanationEs": "Agree with + persona: dos hablantes pueden contradecirse.",
+      "segments": [
+        "Mia does not agree with",
+        "Sara about the time."
+      ],
+      "audioText": "Mia does not agree with Sara about the time.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-story-project-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c93.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee las dos voces: ¿quién dice que vio el portón abierto?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Leo"
+          },
+          {
+            "text": "Mia"
+          },
+          {
+            "text": "Nobody"
+          }
+        ],
+        "teaches": [
+          "n4-story-project-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.pg01.seed-0",
+          "feedback": {
+            "es": "Quien dice «I saw it open» es Leo. Mia cuenta otra cosa: que cerró el portón antes de la cena."
+          },
+          "hint": {
+            "es": "Busca I + saw: es quien habla."
+          },
+          "text": "Mia: I closed the gate before dinner. Leo: I saw it open at six."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:18397aa1607ba0a5c826218e006824ee93fbb1cbc0a2ee5be0df3fed60006a52"
+      },
+      {
+        "id": "en.n4.c93.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mia dice que ella cerró el portón.»"
+        },
+        "answer": {
+          "text": "she",
+          "accepted": [
+            "she"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-story-project-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.pg02.seed-0",
+          "feedback": {
+            "es": "Al contar lo que dice Mia, su «I» pasa a she."
+          },
+          "hint": {
+            "es": "Hablas de otra persona: cambia I por he o she."
+          },
+          "text": "Mia says that ___ closed the gate."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3a70bf6665a7f6e40d1cfc87cfb2fc9f88f380881f1de61a1acf63a28f312f99"
+      },
+      {
+        "id": "en.n4.c93.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Sara está de acuerdo con Leo.»"
+        },
+        "answer": {
+          "text": "Sara agrees with Leo",
+          "tokens": [
+            "Sara",
+            "agrees",
+            "with",
+            "Leo"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-story-project-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.pg03.seed-0",
+          "feedback": {
+            "es": "Agree es un verbo en inglés: con Sara (she) se usa agrees, sin am ni is."
+          },
+          "hint": {
+            "es": "Sujeto + agrees + with + persona."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:da58ed6e3511e0739580ce418cf13d23caf178db6f7508eea626d9a57a21dcc7"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c93.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada verbo con lo que expresa el hablante."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "says that",
+              {
+                "es": "cuenta algo"
+              }
+            ],
+            [
+              "remembers",
+              {
+                "es": "recuerda un dato"
+              }
+            ],
+            [
+              "thinks",
+              {
+                "es": "da su opinión"
+              }
+            ],
+            [
+              "agrees",
+              {
+                "es": "coincide con otro hablante"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.p01.seed-0",
+          "feedback": {
+            "es": "Cada verbo atribuye algo distinto: contar, recordar, opinar y coincidir."
+          },
+          "pairs": [
+            [
+              "says that",
+              {
+                "es": "cuenta algo"
+              }
+            ],
+            [
+              "remembers",
+              {
+                "es": "recuerda un dato"
+              }
+            ],
+            [
+              "thinks",
+              {
+                "es": "da su opinión"
+              }
+            ],
+            [
+              "agrees",
+              {
+                "es": "coincide con otro hablante"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5c9b0774533827495b9bc4d14867a117e6af944016c4676c9f517b491625e3a1"
+      },
+      {
+        "id": "en.n4.c93.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién cree que el gato se llevó el pastel."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Tom"
+          },
+          {
+            "text": "Ana"
+          },
+          {
+            "text": "Leo"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.p02.seed-0",
+          "feedback": {
+            "es": "El verbo thinks marca la opinión de Ana. Tom solo cuenta dónde dejó el pastel."
+          },
+          "audio": "Tom says that he left the cake on the table. Ana thinks that the cat took it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e395539c460de0ad5c196d77bd94dc0516454313ad1836880e899ac201baffe0"
+      },
+      {
+        "id": "en.n4.c93.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿quién no está de acuerdo con Carlos?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Sara"
+          },
+          {
+            "text": "Ana"
+          },
+          {
+            "text": "Tom"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.p03.seed-0",
+          "feedback": {
+            "es": "Sara dice «I agree with Carlos», pero Tom contradice la hora. Ana no habla."
+          },
+          "text": "Carlos: The bus was late. Sara: I agree with Carlos. Tom: No, it arrived at eight."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5678ed2c6928bdf7bd60a33c6f51e1246ec32b5f9aec7c3293b0804750df1080"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c93.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha las tres voces y elige quién estaba en la cocina."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Mia"
+          },
+          {
+            "text": "Leo"
+          },
+          {
+            "text": "Sara"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.e01.seed-0",
+          "feedback": {
+            "es": "Solo una voz explica dónde estaba: «I was in the kitchen». Sara vio a Rex en la calle y Leo oyó un ruido."
+          },
+          "audio": "Sara: I saw Rex in the street at six. Leo: I did not see him, but I heard a noise near the gate. Mia: I was in the kitchen, so I did not see anything.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ed1ab465416612d3d6e92e8ca080784ce33fae1ff388c32fd95da471ad3f93dd"
+      },
+      {
+        "id": "en.n4.c93.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según las tres voces, ¿qué hecho ocurrió primero?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Ana opened the box."
+          },
+          {
+            "text": "Sara saw Tom near the box."
+          },
+          {
+            "text": "Leo found the box empty."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.e02.seed-0",
+          "feedback": {
+            "es": "Las horas ordenan los hechos: al mediodía (noon) Sara vio a Tom; después del almuerzo Ana abrió la caja; a las cuatro Leo la encontró vacía."
+          },
+          "text": "Ana: I opened the box after lunch. Leo: I found the box empty at four. Sara: I saw Tom near the box at noon."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:865ee59ecf5cfc296c6f2b1ffae92ec5478ca4f5b314ffd371b2af49fca5d488"
+      },
+      {
+        "id": "en.n4.c93.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estoy de acuerdo con Tom.»"
+        },
+        "answer": {
+          "text": "agree",
+          "accepted": [
+            "agree"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.e03.seed-0",
+          "feedback": {
+            "es": "En inglés agree es un verbo: I agree. No se dice I am agree."
+          },
+          "text": "I ___ with Tom."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:06947787ac37859ece6ab2e822a674b74d308efa1e30092e305657de17215663"
+      },
+      {
+        "id": "en.n4.c93.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Cuenta lo que dijo Tom usando says that y el pronombre correcto."
+        },
+        "answer": {
+          "text": "Tom says that he found the key in the garden.",
+          "accepted": [
+            "Tom says that he found the key in the garden.",
+            "Tom says he found the key in the garden.",
+            "Tom said that he found the key in the garden.",
+            "Tom said he found the key in the garden."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.e04.seed-0",
+          "feedback": {
+            "es": "Al contar lo que dijo otro, se usa Tom says that + oración, y su «I» pasa a he."
+          },
+          "text": "Tom: “I found the key in the garden.”",
+          "scoring": {
+            "wordRange": [
+              6,
+              14
+            ],
+            "evidenceGroups": [
+              [
+                "tom says",
+                "tom said"
+              ],
+              [
+                "he found",
+                "he had found"
+              ],
+              [
+                "the key"
+              ],
+              [
+                "in the garden"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:12d5411bf3b4a50627b6244b0e754cb97954fa04292222c906fe6c95b79548e7"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c93.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Quién piensa que Rex tiene hambre?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Leo"
+          },
+          {
+            "text": "Mia"
+          },
+          {
+            "text": "Sara"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.r01.seed-0",
+          "feedback": {
+            "es": "Sara dice «I think Rex is hungry». Leo añade un comentario, pero no dice que lo piense él."
+          },
+          "text": "Sara: I think Rex is hungry. Leo: He always looks hungry."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97047f66d2e7b426f45e9af4d791b3cb79554e9ad4a218ee970888076a22af99"
+      },
+      {
+        "id": "en.n4.c93.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Leo recuerda un detalle importante.»"
+        },
+        "answer": {
+          "text": "Leo remembers an important detail",
+          "tokens": [
+            "Leo",
+            "remembers",
+            "an",
+            "important",
+            "detail"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.r02.seed-0",
+          "feedback": {
+            "es": "El sujeto va primero y remembers lleva -s con Leo (he)."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3fd8a9594ab8b11c7704f60747e5ded90fe98953566e809e3fe370c1745ff634"
+      },
+      {
+        "id": "en.n4.c93.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Cada voz cuenta una versión distinta.»"
+        },
+        "answer": {
+          "text": "voice",
+          "accepted": [
+            "voice"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-story-project-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c93.r03.seed-0",
+          "feedback": {
+            "es": "Each va con un sustantivo singular: each voice, y el verbo lleva -s (tells)."
+          },
+          "text": "Each ___ tells a different version."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b75ad231b522517540e723cc2a7a98b5f5ecdb5a773b74667433af32253fc891"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c93.e01": {
+      "reteach": "en.n4.class-93.t01",
+      "review": "en.n4.c93.r01"
+    },
+    "en.n4.c93.e02": {
+      "reteach": "en.n4.class-93.t02",
+      "review": "en.n4.c93.r02"
+    },
+    "en.n4.c93.e03": {
+      "reteach": "en.n4.class-93.t03",
+      "review": "en.n4.c93.r03"
+    },
+    "en.n4.c93.e04": {
+      "reteach": "en.n4.class-93.t04",
+      "review": "en.n4.c93.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

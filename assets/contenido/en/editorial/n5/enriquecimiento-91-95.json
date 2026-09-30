@@ -1,0 +1,654 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n5.class-91": {
+      "explicacion": {
+        "titulo": "Reconocer estructuras en una anécdota",
+        "texto": "Antes de usar una estructura hay que saber verla. En una anécdota busca pistas en la forma del verbo: had been + -ing es una actividad en curso antes de otro hecho pasado; had + objeto + participio significa que otra persona hizo algo por ti; told / admitted + that reporta lo dicho; should have + participio critica o lamenta algo pasado; if + had + participio, would + verbo base une una causa pasada con un resultado de hoy. No traduzcas palabra por palabra: la forma te dice el significado."
+      },
+      "patron": {
+        "texto": "Pista en la forma = estructura:",
+        "formula": [
+          {
+            "texto": "had been saving",
+            "nota": "había estado + -ing: actividad anterior en curso"
+          },
+          {
+            "texto": "had it replaced",
+            "nota": "have + cosa + participio: lo hace otra persona"
+          },
+          {
+            "texto": "told him that…",
+            "nota": "verbo de reporte + that: lo que alguien dijo"
+          },
+          {
+            "texto": "If he hadn't…, he would…",
+            "nota": "condicional: causa pasada, resultado de hoy"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The assistant told that he should have bought insurance.",
+          "correcto": "The assistant told him that he should have bought insurance.",
+          "explicacion": "Tell necesita una persona antes de that: told him that. Sin persona, el español «dijo que» engaña."
+        },
+        {
+          "incorrecto": "If he wouldn't have been careless, he would still have his phone.",
+          "correcto": "If he hadn't been so careless, he would still have his phone.",
+          "explicacion": "Después de if no se usa would: if + had + participio para el pasado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le cuenta a Mia lo que le pasó con su teléfono.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "You look sad, Carlos. What happened?",
+            "traduccion": "Te veo triste, Carlos. ¿Qué pasó?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "My phone was stolen last week. I had been saving for it for a year.",
+            "traduccion": "Me robaron el teléfono la semana pasada. Llevaba un año ahorrando para comprarlo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh no! Do you have a new phone now?",
+            "traduccion": "¡Oh, no! ¿Tienes un teléfono nuevo ahora?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, I had it replaced, but the shop assistant said I should have bought insurance.",
+            "traduccion": "Sí, hice que me lo cambiaran, pero el dependiente dijo que debería haber comprado un seguro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le dijo el dependiente a Carlos?",
+          "opciones": [
+            {
+              "es": "Que debería haber comprado un seguro."
+            },
+            {
+              "es": "Que debería haber ahorrado más dinero."
+            },
+            {
+              "es": "Que el teléfono viejo todavía funcionaba."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos cuenta que el dependiente dijo «I should have bought insurance»: una crítica sobre algo que no hizo antes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pista en la frase",
+          "Estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "had been + -ing"
+            },
+            {
+              "texto": "actividad anterior en curso"
+            }
+          ],
+          [
+            {
+              "texto": "had + cosa + participio"
+            },
+            {
+              "texto": "causativo: lo hace otra persona"
+            }
+          ],
+          [
+            {
+              "texto": "told / admitted + that"
+            },
+            {
+              "texto": "reporte"
+            }
+          ],
+          [
+            {
+              "texto": "If + had + participio, would + base"
+            },
+            {
+              "texto": "condicional mixto"
+            }
+          ],
+          [
+            {
+              "texto": "should have + participio"
+            },
+            {
+              "texto": "crítica o arrepentimiento"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-92": {
+      "explicacion": {
+        "titulo": "Reparar una oración: tiempo, patrón y conector",
+        "texto": "Un error casi nunca es al azar: suele venir de traducir del español. Para repararlo, revisa cuatro cosas en orden. 1) Tiempo: si un hecho fue anterior a otro, pide had + participio. 2) Patrón del verbo: suggest + -ing, told + persona + that, get used to + -ing. 3) Conector: despite + sustantivo (sin of) y although + oración (sin but). 4) Condicional: después de if no va would. Corrige un solo punto cada vez y vuelve a leer la oración completa."
+      },
+      "patron": {
+        "texto": "Cuatro puntos que revisar:",
+        "formula": [
+          {
+            "texto": "Leo suggested going",
+            "nota": "suggest + -ing, no to + verbo"
+          },
+          {
+            "texto": "although it was cloudy",
+            "nota": "although + oración, sin but"
+          },
+          {
+            "texto": "Despite the rain,",
+            "nota": "despite + sustantivo, sin of"
+          },
+          {
+            "texto": "If I had studied, I would have passed.",
+            "nota": "if + had + participio, would después"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She said me that she was tired.",
+          "correcto": "She told me that she was tired.",
+          "explicacion": "Say no admite persona directa: con persona se usa tell. Said me es un calco de «me dijo»."
+        },
+        {
+          "incorrecto": "Despite of the rain, we went out.",
+          "correcto": "Despite the rain, we went out.",
+          "explicacion": "Despite no lleva of. Solo in spite of lleva of: in spite of the rain."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le enseña a Leo unas frases de su mensaje para el club y él las corrige.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Look at my message: Despite of the rain, we went to the park.",
+            "traduccion": "Mira mi mensaje: A pesar de la lluvia, fuimos al parque."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Almost! We say despite the rain, without of.",
+            "traduccion": "¡Casi! Decimos despite the rain, sin of."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And this one: Although it was cold, but we stayed.",
+            "traduccion": "Y esta: Aunque hacía frío, pero nos quedamos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Delete but. Although already connects the two ideas.",
+            "traduccion": "Borra but. Although ya une las dos ideas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué corrige Leo en las dos frases de Ana?",
+          "opciones": [
+            {
+              "es": "Quita of después de despite y quita but después de although."
+            },
+            {
+              "es": "Cambia despite por although y añade but."
+            },
+            {
+              "es": "Añade of después de despite y deja although igual."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «without of» para despite y «Delete but» para although: cada conector sobra una palabra."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Error típico",
+          "Forma correcta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "She said me that…"
+            },
+            {
+              "texto": "She told me that…"
+            }
+          ],
+          [
+            {
+              "texto": "Despite of the rain"
+            },
+            {
+              "texto": "Despite the rain"
+            }
+          ],
+          [
+            {
+              "texto": "Although…, but…"
+            },
+            {
+              "texto": "Although…, … (sin but)"
+            }
+          ],
+          [
+            {
+              "texto": "If I would have known"
+            },
+            {
+              "texto": "If I had known"
+            }
+          ],
+          [
+            {
+              "texto": "He suggested to go"
+            },
+            {
+              "texto": "He suggested going"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-93": {
+      "explicacion": {
+        "titulo": "Escuchar una historia: secuencia, actitud y sentido figurado",
+        "texto": "Una historia en audio se entiende siguiendo tres hilos. Primero, la secuencia: by the time, afterwards y eventually te dicen qué pasó antes y qué pasó después, y had + participio marca lo que ya había ocurrido. Segundo, la actitud de quien narra: palabras como fortunately o proudly y el tono de voz muestran cómo se siente. Tercero, las expresiones figuradas: my heart sank o a blessing in disguise no se traducen literalmente; busca qué pasa a continuación para entender su sentido."
+      },
+      "patron": {
+        "texto": "Tres hilos de una historia oral:",
+        "formula": [
+          {
+            "texto": "By the time we arrived,",
+            "nota": "secuencia: lo anterior ya había pasado"
+          },
+          {
+            "texto": "Fortunately, / proudly",
+            "nota": "actitud: cómo se siente quien narra"
+          },
+          {
+            "texto": "my heart sank",
+            "nota": "expresión figurada: un sentimiento, no un movimiento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By the time we arrived, the concert already started.",
+          "correcto": "By the time we arrived, the concert had already started.",
+          "explicacion": "El concierto empezó antes de llegar: hace falta had + participio, no pasado simple."
+        },
+        {
+          "incorrecto": "I was relieving when the bus finally came.",
+          "correcto": "I was relieved when the bus finally came.",
+          "explicacion": "Para decir cómo te sientes se usa -ed (relieved). Relieving describiría lo que produce alivio en otros."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le cuenta a Mia un podcast que escuchó sobre un viaje.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I heard a podcast about a lost suitcase. My heart sank with the narrator!",
+            "traduccion": "Escuché un pódcast sobre una maleta perdida. ¡Se me encogió el corazón con la narradora!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What happened?",
+            "traduccion": "¿Qué pasó?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "By the time she reached the airport, the plane had already left. Fortunately, a kind driver gave her a lift to the next airport.",
+            "traduccion": "Cuando llegó al aeropuerto, el avión ya había salido. Por suerte, un conductor amable la llevó al siguiente aeropuerto."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So the delay was a blessing in disguise?",
+            "traduccion": "¿Entonces el retraso fue una bendición disfrazada?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, she met her best friend there.",
+            "traduccion": "Sí, allí conoció a su mejor amiga."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué el retraso fue una «bendición disfrazada»?",
+          "opciones": [
+            {
+              "es": "Porque la narradora conoció allí a su mejor amiga."
+            },
+            {
+              "es": "Porque el avión volvió a buscarla."
+            },
+            {
+              "es": "Porque encontró su maleta en el aeropuerto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom confirma que fue una bendición disfrazada y explica el motivo: en el siguiente aeropuerto conoció a su mejor amiga."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué buscar",
+          "Pistas en el audio"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Secuencia"
+            },
+            {
+              "texto": "by the time, afterwards, eventually, had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Actitud de quien narra"
+            },
+            {
+              "texto": "fortunately, proudly, tono de voz"
+            }
+          ],
+          [
+            {
+              "texto": "Expresión figurada"
+            },
+            {
+              "texto": "my heart sank, a blessing in disguise"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-94": {
+      "explicacion": {
+        "titulo": "Contar una historia con cinco partes",
+        "texto": "Una buena anécdota tiene cinco partes y cada una usa su tiempo. Contexto: was/were + -ing y when + pasado simple. Causa previa: had + participio. Giro: suddenly o unexpectedly + pasado simple. Efecto de hoy: condicional mixto, if + had + participio, would + verbo base. Reflexión final: I wish + had + participio o I should have + participio. Mantén el pasado en toda la historia y cambia de tiempo solo cuando cambia el momento del que hablas."
+      },
+      "patron": {
+        "texto": "Cinco partes de una historia:",
+        "formula": [
+          {
+            "texto": "We were camping when a storm started.",
+            "nota": "contexto: escena + hecho que la interrumpe"
+          },
+          {
+            "texto": "We had ignored the forecast.",
+            "nota": "causa previa: had + participio"
+          },
+          {
+            "texto": "Suddenly, a stranger offered us a place.",
+            "nota": "giro: suddenly + pasado simple"
+          },
+          {
+            "texto": "If we hadn't met him, we would be in wet tents now.",
+            "nota": "efecto de hoy: condicional mixto"
+          },
+          {
+            "texto": "I wish we had listened.",
+            "nota": "reflexión: wish / should have + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I wish we listened to the forecast.",
+          "correcto": "I wish we had listened to the forecast.",
+          "explicacion": "Para lamentar algo que ya pasó hace falta wish + had + participio. Wish + pasado simple habla del presente."
+        },
+        {
+          "incorrecto": "If we didn't meet him, we would be in wet tents now.",
+          "correcto": "If we hadn't met him, we would be in wet tents now.",
+          "explicacion": "La causa es un hecho pasado: if + had + participio. If + pasado simple habla de una situación actual irreal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo cuenta a Sara su viaje de acampada.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tell us about your trip, Leo.",
+            "traduccion": "Cuéntanos tu viaje, Leo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We were camping by a lake when a storm started. We had ignored the forecast.",
+            "traduccion": "Estábamos acampando junto a un lago cuando empezó una tormenta. Habíamos ignorado el pronóstico."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Oh no! What did you do?",
+            "traduccion": "¡Oh, no! ¿Qué hicieron?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Suddenly, a stranger offered us a place in his van. If we hadn't met him, we would be in wet tents now.",
+            "traduccion": "De repente, un desconocido nos ofreció un sitio en su furgoneta. Si no lo hubiéramos conocido, estaríamos en tiendas de campaña mojadas ahora."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I wish we had checked the weather!",
+            "traduccion": "¡Ojalá hubiéramos mirado el tiempo!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué lamenta Leo al final de la historia?",
+          "opciones": [
+            {
+              "es": "No haber mirado el tiempo antes del viaje."
+            },
+            {
+              "es": "Haber aceptado el sitio en la furgoneta."
+            },
+            {
+              "es": "No haber llevado más tiendas de campaña."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «I wish we had checked the weather»: lamenta no haber comprobado el tiempo antes de salir."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Contexto"
+            },
+            {
+              "texto": "was/were + -ing … when + pasado simple"
+            }
+          ],
+          [
+            {
+              "texto": "Causa previa"
+            },
+            {
+              "texto": "had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Giro"
+            },
+            {
+              "texto": "suddenly + pasado simple"
+            }
+          ],
+          [
+            {
+              "texto": "Efecto de hoy"
+            },
+            {
+              "texto": "If + had + participio, would + verbo base"
+            }
+          ],
+          [
+            {
+              "texto": "Reflexión"
+            },
+            {
+              "texto": "I wish + had + participio / should have + participio"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-95": {
+      "explicacion": {
+        "titulo": "Usar todo el nivel en una situación real",
+        "texto": "Recibir a un visitante mezcla varias funciones, y cada una tiene su estructura. Planear: presente continuo o going to. Reportar un mensaje: told us that + retroceso del tiempo (will pasa a would). Solucionar un imprevisto: have + cosa + participio y if + presente, will. Hablar de costumbres: it's a custom to… y get used to + -ing. Deducir: must have + participio. Antes de hablar, decide qué función necesitas; la estructura sale de ahí."
+      },
+      "patron": {
+        "texto": "Funciones de un fin de semana:",
+        "formula": [
+          {
+            "texto": "We're planning a busy weekend.",
+            "nota": "planear: presente continuo"
+          },
+          {
+            "texto": "The airline told us that it would be delivered.",
+            "nota": "reportar: told us that + would"
+          },
+          {
+            "texto": "We'll have pizza delivered.",
+            "nota": "imprevisto: have + cosa + participio"
+          },
+          {
+            "texto": "You'll soon get used to eating late.",
+            "nota": "costumbres: get used to + -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In my country is a custom to eat at eight.",
+          "correcto": "In my country it's a custom to eat at eight.",
+          "explicacion": "En inglés la oración necesita sujeto: it's a custom. No se puede omitir it como en español."
+        },
+        {
+          "incorrecto": "You will soon get used to eat late.",
+          "correcto": "You will soon get used to eating late.",
+          "explicacion": "En get used to, la palabra to es una preposición y pide -ing, no el verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana recibe a Tom, su visitante de intercambio, en el aeropuerto.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Welcome, Tom! You must be exhausted after such a long flight.",
+            "traduccion": "¡Bienvenido, Tom! Debes de estar agotado después de un vuelo tan largo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "A little. The airline told me that my suitcase would be delivered tomorrow.",
+            "traduccion": "Un poco. La aerolínea me dijo que mi maleta sería entregada mañana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Don't worry. Tonight you can use some of my brother's clothes, and we'll have pizza delivered.",
+            "traduccion": "No te preocupes. Esta noche puedes usar ropa de mi hermano y pediremos pizza a domicilio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thanks! Is it a custom to eat pizza on Fridays?",
+            "traduccion": "¡Gracias! ¿Es costumbre comer pizza los viernes?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is now!",
+            "traduccion": "¡Desde ahora, sí!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué solución ofrece Ana para esta noche?",
+          "opciones": [
+            {
+              "es": "Prestarle ropa de su hermano y pedir pizza a domicilio."
+            },
+            {
+              "es": "Llevarlo a una tienda a comprar ropa nueva."
+            },
+            {
+              "es": "Llamar a la aerolínea para cambiar su vuelo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que Tom puede usar ropa de su hermano y que pedirán pizza a domicilio («we'll have pizza delivered»)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Estructura útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Planear"
+            },
+            {
+              "texto": "We're visiting… / We're going to…"
+            }
+          ],
+          [
+            {
+              "texto": "Reportar"
+            },
+            {
+              "texto": "told us that + would / had"
+            }
+          ],
+          [
+            {
+              "texto": "Imprevisto"
+            },
+            {
+              "texto": "have + cosa + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Costumbres"
+            },
+            {
+              "texto": "it's a custom to… / get used to + -ing"
+            }
+          ],
+          [
+            {
+              "texto": "Deducir"
+            },
+            {
+              "texto": "must have + participio"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

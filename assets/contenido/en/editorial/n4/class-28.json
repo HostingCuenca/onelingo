@@ -1,0 +1,821 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-28",
+  "title": {
+    "en": "Who or what is it?",
+    "es": "¿De quién o de qué se habla?"
+  },
+  "objectives": {
+    "es": [
+      "Identificar a qué persona o lugar se refiere una descripción y distinguir la pista que identifica del dato extra."
+    ]
+  },
+  "concepts": [
+    "n4-people-and-places-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-27"
+  ],
+  "usesVocabulary": [
+    "florist",
+    "butcher",
+    "postman",
+    "statue",
+    "monument",
+    "flower",
+    "meat"
+  ],
+  "usesPatterns": [
+    "n4-people-and-places-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "florist",
+      "es": "florista"
+    },
+    {
+      "en": "butcher",
+      "es": "carnicero"
+    },
+    {
+      "en": "postman",
+      "es": "cartero"
+    },
+    {
+      "en": "statue",
+      "es": "estatua"
+    },
+    {
+      "en": "monument",
+      "es": "monumento"
+    },
+    {
+      "en": "flower",
+      "es": "flor"
+    },
+    {
+      "en": "meat",
+      "es": "carne"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-28.t01",
+      "en": "The florist is the woman who sells flowers on the corner.",
+      "es": "La florista es la mujer que vende flores en la esquina.",
+      "explanationEs": "Who sells flowers identifica a la persona: es la pista que hay que escuchar.",
+      "segments": [
+        "The florist is the woman who",
+        "sells flowers on the corner."
+      ],
+      "audioText": "The florist is the woman who sells flowers on the corner.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-3"
+    },
+    {
+      "id": "en.n4.class-28.t02",
+      "en": "The butcher, who is very friendly, has a shop where we buy meat.",
+      "es": "El carnicero, que es muy amable, tiene una tienda donde compramos carne.",
+      "explanationEs": "Who is very friendly es un dato extra (comas); where we buy meat identifica la tienda.",
+      "segments": [
+        "The butcher, who is very friendly, has",
+        "a shop where we buy meat."
+      ],
+      "audioText": "The butcher, who is very friendly, has a shop where we buy meat.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-3"
+    },
+    {
+      "id": "en.n4.class-28.t03",
+      "en": "The postman, whose bag is always full, arrives at nine.",
+      "es": "El cartero, cuya bolsa siempre va llena, llega a las nueve.",
+      "explanationEs": "Whose bag is always full añade un detalle entre comas; no decide quién es.",
+      "segments": [
+        "The postman, whose bag is",
+        "always full, arrives at nine."
+      ],
+      "audioText": "The postman, whose bag is always full, arrives at nine.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-3"
+    },
+    {
+      "id": "en.n4.class-28.t04",
+      "en": "The statue, which stands in the square, shows a famous singer.",
+      "es": "La estatua, que está en la plaza, representa a una cantante famosa.",
+      "explanationEs": "Which stands in the square es un dato extra sobre una estatua ya conocida.",
+      "segments": [
+        "The statue, which stands in the",
+        "square, shows a famous singer."
+      ],
+      "audioText": "The statue, which stands in the square, shows a famous singer.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-3"
+    },
+    {
+      "id": "en.n4.class-28.t05",
+      "en": "The monument where people meet is near the bridge.",
+      "es": "El monumento donde la gente se reúne está cerca del puente.",
+      "explanationEs": "Where people meet identifica de qué monumento hablamos, por eso no hay comas.",
+      "segments": [
+        "The monument where people meet",
+        "is near the bridge."
+      ],
+      "audioText": "The monument where people meet is near the bridge.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-people-and-places-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c28.pg01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la pista y elige de qué lugar se habla."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The bakery"
+          },
+          {
+            "text": "The library"
+          },
+          {
+            "text": "The bank"
+          }
+        ],
+        "teaches": [
+          "n4-people-and-places-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.pg01.seed-0",
+          "feedback": {
+            "es": "Where people read and borrow books es la pista que identifica el lugar: la biblioteca."
+          },
+          "hint": {
+            "es": "Piensa dónde se leen y se prestan libros."
+          },
+          "audio": "It is a place where people read and borrow books.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0466b0326ea98388521d85c2f188b59a2d8787107f7d21375313f927be2d1cb5"
+      },
+      {
+        "id": "en.n4.c28.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿a quién describe?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The butcher"
+          },
+          {
+            "text": "The florist"
+          },
+          {
+            "text": "The postman"
+          }
+        ],
+        "teaches": [
+          "n4-people-and-places-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.pg02.seed-0",
+          "feedback": {
+            "es": "La parte que identifica es who brings letters: trae cartas. Whose bag is always full solo añade un detalle."
+          },
+          "hint": {
+            "es": "Fíjate en lo que hace la persona: es la pista sin comas."
+          },
+          "text": "It is a person who brings letters, and whose bag is always full."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fd286dc8df7c357f57a3dcd2e20a46030dac12661b368f72df8e5d6a36431c15"
+      },
+      {
+        "id": "en.n4.c28.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es el lugar donde compramos pan.»"
+        },
+        "answer": {
+          "text": "where",
+          "accepted": [
+            "where"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-people-and-places-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.pg03.seed-0",
+          "feedback": {
+            "es": "Un lugar pide where: the place where we buy bread."
+          },
+          "hint": {
+            "es": "Se habla de un lugar: elige el relativo de lugar."
+          },
+          "text": "It is the place ___ we buy bread."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3e19066de6c486b8ef346f9192ca8d16618e7926add7184d74ea38f5cf0b29ad"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c28.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige a qué persona describe el audio."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The florist"
+          },
+          {
+            "text": "The butcher"
+          },
+          {
+            "text": "The postman"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.p01.seed-0",
+          "feedback": {
+            "es": "Who sells flowers identifica a la persona. Whose shop is on the corner solo añade su ubicación."
+          },
+          "audio": "It is a person who sells flowers, and whose shop is on the corner.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cd3474dd9e0b114557005279f6ea5fcb880372dc0377d66478088ebce0cf77e5"
+      },
+      {
+        "id": "en.n4.c28.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige de qué lugar habla el audio."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The stadium"
+          },
+          {
+            "text": "The park"
+          },
+          {
+            "text": "The museum"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.p02.seed-0",
+          "feedback": {
+            "es": "Where children play identifica el lugar; which is very old es un dato extra sobre la fuente."
+          },
+          "audio": "It is a place where children play. The fountain, which is very old, is in the park.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a9ea4b4a4cc0a9b33930642d7624801f29c9df6c7e901fd4418377147de1d6d8"
+      },
+      {
+        "id": "en.n4.c28.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el dato extra sobre el vecino."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He has a shop."
+          },
+          {
+            "text": "We buy bread there."
+          },
+          {
+            "text": "He is very friendly."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.p03.seed-0",
+          "feedback": {
+            "es": "Lo que va entre comas (who is very friendly) es el dato extra. Where we buy fresh bread identifica la tienda."
+          },
+          "audio": "My neighbour, who is very friendly, has a shop where we buy fresh bread.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c74e906d53f5ba49d3209a7f5766eccbc163466334d692826a406a719017924a"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c28.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué lugar describe el audio."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The hospital"
+          },
+          {
+            "text": "The bank"
+          },
+          {
+            "text": "The school"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.e01.seed-0",
+          "feedback": {
+            "es": "Where doctors and nurses work es la pista que identifica: un hospital. Estar cerca del estadio es solo un dato más."
+          },
+          "audio": "It is a place where doctors and nurses work, and it is near the stadium.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8c89c49c81047ae99dd57aa5c2800c5fa58f0205ef4dddef0047736bc1afce93"
+      },
+      {
+        "id": "en.n4.c28.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿cómo se reconoce la casa del abuelo de Tom?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Its owner is very old."
+          },
+          {
+            "text": "Its door is blue."
+          },
+          {
+            "text": "It is near the stadium."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.e02.seed-0",
+          "feedback": {
+            "es": "Whose door is blue identifica la casa. Who is very old va entre comas: es un dato extra sobre el abuelo, no sobre la casa."
+          },
+          "text": "Tom's grandfather, who is very old, lives in the house whose door is blue."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2ba364ed0b828947b43cd1d500d4ca9ea2ce42b0363cb0850ad4de1c7e7a09ea"
+      },
+      {
+        "id": "en.n4.c28.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué persona muestra la estatua."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A postman."
+          },
+          {
+            "text": "A mechanic."
+          },
+          {
+            "text": "A singer."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.e03.seed-0",
+          "feedback": {
+            "es": "Who lived here identifica a la persona de la estatua: una cantante. Which is in the square es un dato extra sobre la estatua."
+          },
+          "audio": "The statue, which is in the square, shows a singer who lived here.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2e13e06956fc0be757963c36b8dd3c234909780465701a700b1fea791a598603"
+      },
+      {
+        "id": "en.n4.c28.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es la persona que reparte las cartas.»"
+        },
+        "answer": {
+          "text": "who",
+          "accepted": [
+            "who",
+            "that"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.e04.seed-0",
+          "feedback": {
+            "es": "Se habla de una persona y no hay comas: who (o that) introduce la pista que identifica."
+          },
+          "text": "It is the person ___ delivers the letters."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3aa5352644322e093744782f9fe5005dc3142fafb3795c4728c0f25b86221d89"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c28.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige a quién se describe."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The butcher"
+          },
+          {
+            "text": "The postman"
+          },
+          {
+            "text": "The florist"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.r01.seed-0",
+          "feedback": {
+            "es": "Sells fresh meat identifica al carnicero. Whose shop is on the corner solo dice dónde está su tienda."
+          },
+          "audio": "It is the man whose shop is on the corner, and he sells fresh meat.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e1666713e95aa3dcde8547fb932b59afc586efe467986d6922856e21057ab90c"
+      },
+      {
+        "id": "en.n4.c28.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase lleva un dato extra entre comas?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The florist who sells flowers is kind."
+          },
+          {
+            "text": "The florist, who is very kind, sells flowers."
+          },
+          {
+            "text": "The woman who sells flowers is the florist."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.r02.seed-0",
+          "feedback": {
+            "es": "Solo la frase «The florist, who is very kind, sells flowers» lleva comas: who is very kind añade un dato. En las otras, who sells flowers identifica a la persona."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ad8c6670d4d149598ab24e0b95a3bcd12a91c4dd8cb735a6acafa290cd741677"
+      },
+      {
+        "id": "en.n4.c28.r03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada descripción con la persona o el lugar."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "a place where people watch films",
+              {
+                "es": "el cine"
+              }
+            ],
+            [
+              "a person who repairs cars",
+              {
+                "es": "el mecánico"
+              }
+            ],
+            [
+              "a place where we swim",
+              {
+                "es": "la piscina"
+              }
+            ],
+            [
+              "a person who teaches children",
+              {
+                "es": "el maestro"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-people-and-places-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c28.r03.seed-0",
+          "feedback": {
+            "es": "Cada relativo te da la pista que identifica: where + lugar o who + persona y lo que hace."
+          },
+          "pairs": [
+            [
+              "a place where people watch films",
+              {
+                "es": "el cine"
+              }
+            ],
+            [
+              "a person who repairs cars",
+              {
+                "es": "el mecánico"
+              }
+            ],
+            [
+              "a place where we swim",
+              {
+                "es": "la piscina"
+              }
+            ],
+            [
+              "a person who teaches children",
+              {
+                "es": "el maestro"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4a41d8dc565357c280791ddc05cf782836e580fd847424be4cde1ceb7c714094"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c28.e01": {
+      "reteach": "en.n4.class-28.t01",
+      "review": "en.n4.c28.r01"
+    },
+    "en.n4.c28.e02": {
+      "reteach": "en.n4.class-28.t02",
+      "review": "en.n4.c28.r02"
+    },
+    "en.n4.c28.e03": {
+      "reteach": "en.n4.class-28.t03",
+      "review": "en.n4.c28.r03"
+    },
+    "en.n4.c28.e04": {
+      "reteach": "en.n4.class-28.t04",
+      "review": "en.n4.c28.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

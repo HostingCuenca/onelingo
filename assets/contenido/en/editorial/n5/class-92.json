@@ -1,0 +1,803 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-92",
+  "title": {
+    "en": "Repair the sentences",
+    "es": "Reparar oraciones"
+  },
+  "objectives": {
+    "es": [
+      "Corregir errores frecuentes de tiempos, patrones verbales, condicionales y conectores en oraciones propias del nivel."
+    ]
+  },
+  "concepts": [
+    "n5-integrated-stories-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n5.class-91"
+  ],
+  "usesVocabulary": [
+    "suggested",
+    "although",
+    "despite",
+    "wish",
+    "passed",
+    "already",
+    "getting"
+  ],
+  "usesPatterns": [
+    "n5-integrated-stories-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "suggested",
+      "es": "sugirió"
+    },
+    {
+      "en": "although",
+      "es": "aunque"
+    },
+    {
+      "en": "despite",
+      "es": "a pesar de"
+    },
+    {
+      "en": "wish",
+      "es": "ojalá, desear"
+    },
+    {
+      "en": "passed",
+      "es": "aprobó"
+    },
+    {
+      "en": "already",
+      "es": "ya"
+    },
+    {
+      "en": "getting",
+      "es": "acostumbrándose (get used to)"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-92.t01",
+      "en": "Leo suggested going to the beach, although it was cloudy.",
+      "es": "Leo sugirió ir a la playa, aunque estaba nublado.",
+      "explanationEs": "Suggest + verbo con -ing (no to); although une las dos ideas sin añadir but.",
+      "segments": [
+        "Leo suggested going to the",
+        "beach, although it was cloudy."
+      ],
+      "audioText": "Leo suggested going to the beach, although it was cloudy.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-2"
+    },
+    {
+      "id": "en.n5.class-92.t02",
+      "en": "Despite the rain, we had already decided to go out.",
+      "es": "A pesar de la lluvia, ya habíamos decidido salir.",
+      "explanationEs": "Despite + sustantivo, sin of; had decided va antes del momento de salir.",
+      "segments": [
+        "Despite the rain, we had",
+        "already decided to go out."
+      ],
+      "audioText": "Despite the rain, we had already decided to go out.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-2"
+    },
+    {
+      "id": "en.n5.class-92.t03",
+      "en": "I wish you would stop talking during the film.",
+      "es": "Ojalá dejaras de hablar durante la película.",
+      "explanationEs": "Wish + would + verbo base expresa molestia por algo que otra persona hace.",
+      "segments": [
+        "I wish you would stop",
+        "talking during the film."
+      ],
+      "audioText": "I wish you would stop talking during the film.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-2"
+    },
+    {
+      "id": "en.n5.class-92.t04",
+      "en": "If I had studied more, I would have passed the test.",
+      "es": "Si hubiera estudiado más, habría aprobado el examen.",
+      "explanationEs": "If + had + participio; would nunca va justo después de if.",
+      "segments": [
+        "If I had studied more, I",
+        "would have passed the test."
+      ],
+      "audioText": "If I had studied more, I would have passed the test.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-2"
+    },
+    {
+      "id": "en.n5.class-92.t05",
+      "en": "Mia told me that she had already seen the film.",
+      "es": "Mia me dijo que ya había visto la película.",
+      "explanationEs": "Told + persona + that; had seen porque verla fue anterior a decirlo.",
+      "segments": [
+        "Mia told me that she",
+        "had already seen the film."
+      ],
+      "audioText": "Mia told me that she had already seen the film.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-2"
+    },
+    {
+      "id": "en.n5.class-92.t06",
+      "en": "I'm getting used to living in a big city.",
+      "es": "Me estoy acostumbrando a vivir en una ciudad grande.",
+      "explanationEs": "Get used to va con -ing porque to es una preposición.",
+      "segments": [
+        "I'm getting used to living",
+        "in a big city."
+      ],
+      "audioText": "I'm getting used to living in a big city.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c92.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué versión corrige el error de esta oración?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Although was late, we kept playing."
+          },
+          {
+            "text": "Despite it was late, we kept playing."
+          },
+          {
+            "text": "Although it was late, we kept playing."
+          }
+        ],
+        "teaches": [
+          "n5-integrated-stories-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.pg01.seed-0",
+          "feedback": {
+            "es": "Although ya une las dos ideas, así que but sobra. Despite no puede ir delante de una oración completa."
+          },
+          "hint": {
+            "es": "Although ya une las dos ideas: sobra una palabra."
+          },
+          "text": "Although it was late, but we kept playing."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:66b58998092face4a2dc9a59a074489116c41c89bf95ae0a65d965f7d5b5f15f"
+      },
+      {
+        "id": "en.n5.c92.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Leo sugirió ir a la playa.»"
+        },
+        "answer": {
+          "text": "going",
+          "accepted": [
+            "going"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-integrated-stories-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.pg02.seed-0",
+          "feedback": {
+            "es": "Después de suggested va un verbo con -ing: suggested going."
+          },
+          "hint": {
+            "es": "Después de suggest va un verbo con -ing."
+          },
+          "text": "Leo suggested ___ to the beach."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b84809976a0fc18988e7b738515fbeecff52bdd087cb25f582c73bccd8ae9c35"
+      },
+      {
+        "id": "en.n5.c92.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué versión corrige el error con el verbo de reporte?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She told me that she was tired."
+          },
+          {
+            "text": "She said me she was tired."
+          },
+          {
+            "text": "She told that she was tired me."
+          }
+        ],
+        "teaches": [
+          "n5-integrated-stories-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.pg03.seed-0",
+          "feedback": {
+            "es": "Con una persona se usa told me that. Said me es un calco del español."
+          },
+          "hint": {
+            "es": "Con persona directa usamos tell, no say."
+          },
+          "text": "She said me that she was tired."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b1f1ba24a70af891c9d64429302c56f86d58b13f00c47a99ec9b56d60f690377"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c92.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «A pesar del ruido, Leo ya había terminado su tarea.»"
+        },
+        "answer": {
+          "text": "Despite the noise Leo had already finished his homework",
+          "tokens": [
+            "Despite",
+            "the",
+            "noise",
+            "Leo",
+            "had",
+            "already",
+            "finished",
+            "his",
+            "homework"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.p01.seed-0",
+          "feedback": {
+            "es": "Despite va con un sustantivo (the noise) y had finished sitúa la tarea antes del momento pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:df46b08bc9ec26072d71e81aad86cd952b8366e24f80c955e4683065d826ee77"
+      },
+      {
+        "id": "en.n5.c92.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada oración correcta con la regla que respeta."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Leo suggested walking to school.",
+              {
+                "es": "suggest + verbo con -ing"
+              }
+            ],
+            [
+              "Although it rained, we went out.",
+              {
+                "es": "although sin but en la segunda parte"
+              }
+            ],
+            [
+              "If I had known, I would have called.",
+              {
+                "es": "if + had + participio, sin would"
+              }
+            ],
+            [
+              "Mia told me that she was tired.",
+              {
+                "es": "told lleva una persona antes de that"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.p02.seed-0",
+          "feedback": {
+            "es": "Cada oración evita un calco distinto: suggest con -ing, although sin but, if con had y told con persona."
+          },
+          "pairs": [
+            [
+              "Leo suggested walking to school.",
+              {
+                "es": "suggest + verbo con -ing"
+              }
+            ],
+            [
+              "Although it rained, we went out.",
+              {
+                "es": "although sin but en la segunda parte"
+              }
+            ],
+            [
+              "If I had known, I would have called.",
+              {
+                "es": "if + had + participio, sin would"
+              }
+            ],
+            [
+              "Mia told me that she was tired.",
+              {
+                "es": "told lleva una persona antes de that"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:50e6d0b5b5a7e078340d565bc990bab351a59b6f221b6d4b602b91a550b91012"
+      },
+      {
+        "id": "en.n5.c92.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la idea que conecta although."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "They stayed inside because the sun was shining."
+          },
+          {
+            "text": "The sun was shining, but they stayed inside."
+          },
+          {
+            "text": "They went out after the sun was shining."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.p03.seed-0",
+          "feedback": {
+            "es": "Although presenta un contraste: el sol brillaba, pero se quedaron dentro."
+          },
+          "audio": "We stayed inside although the sun was shining.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:32513ecca10fdb8be8b405460a746e5e6c58bb8a28bf5b0a1f4328405435b94f"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c92.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la versión corregida de este condicional?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "If I knew about the test, I would have studied."
+          },
+          {
+            "text": "If I have known about the test, I would have studied."
+          },
+          {
+            "text": "If I had known about the test, I would have studied."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.e01.seed-0",
+          "feedback": {
+            "es": "Después de if va had + participio; would solo aparece en el resultado."
+          },
+          "text": "If I would have known about the test, I would have studied."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3cd12e92e8ff1e9b9d4bb81d48f56cd1937d5d721d477a42bba632890ad0a7fe"
+      },
+      {
+        "id": "en.n5.c92.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Me estoy acostumbrando a madrugar» y «Ana me dijo que estaba nerviosa»."
+        },
+        "answer": {
+          "text": "getting | told",
+          "accepted": [
+            "getting | told"
+          ],
+          "parts": [
+            {
+              "text": "getting",
+              "accepted": [
+                "getting"
+              ]
+            },
+            {
+              "text": "told",
+              "accepted": [
+                "told"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.e02.seed-0",
+          "feedback": {
+            "es": "Get used to lleva -ing porque to es una preposición, y told necesita la persona: told me."
+          },
+          "sentences": [
+            "I'm getting used to ___ up early.",
+            "Ana ___ me that she was nervous."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d68b0bbe452d46bec7d3607456b20c7881696ada32a4a7b5a0a9492b98cd6bde"
+      },
+      {
+        "id": "en.n5.c92.e03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe la oración del chat sin el error."
+        },
+        "answer": {
+          "text": "Despite the rain, we stayed at home and played cards.",
+          "accepted": [
+            "Despite the rain, we stayed at home and played cards.",
+            "In spite of the rain, we stayed at home and played cards."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.e03.seed-0",
+          "feedback": {
+            "es": "Despite no lleva of. Al quitarlo, la oración queda correcta; in spite of también sería correcto."
+          },
+          "text": "Despite of the rain, we stayed at home and played cards."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1d25edaa9a76ca061421fd541d8a784f3ac378110b8ce8d671975e8947c18384"
+      },
+      {
+        "id": "en.n5.c92.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cómo se corrige el tiempo verbal del segundo hecho?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "…the film had already started."
+          },
+          {
+            "text": "…the film has already started."
+          },
+          {
+            "text": "…the film already starts."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.e04.seed-0",
+          "feedback": {
+            "es": "La película empezó antes de que llegara: hace falta had already started. Already starts y has already started no sitúan el hecho en el pasado."
+          },
+          "text": "When I arrived at the cinema, the film already started."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fa9b18639d0ba99674eacdb17774d612f53f982f4c5a9fc65cdb88386926b623"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c92.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué oración usa despite correctamente?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Despite of being tired, Ana finished the race."
+          },
+          {
+            "text": "Despite being tired, Ana finished the race."
+          },
+          {
+            "text": "Despite she was tired, Ana finished the race."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.r01.seed-0",
+          "feedback": {
+            "es": "Despite va con un sustantivo o con -ing, sin of. Las otras dos añaden of o una oración completa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a43d725754286e60db57f5623c4f7a83e57c6e33afde334925d1291101d7cce7"
+      },
+      {
+        "id": "en.n5.c92.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ojalá dejaras de interrumpirme.»"
+        },
+        "answer": {
+          "text": "would",
+          "accepted": [
+            "would"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.r02.seed-0",
+          "feedback": {
+            "es": "Wish + would expresa molestia por algo que hace otra persona."
+          },
+          "text": "I wish you ___ stop interrupting me."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f862c359d0e11b496eeb09263080a8f234abe5a5e9025d0419f29d083db954a7"
+      },
+      {
+        "id": "en.n5.c92.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué siente la persona."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She is happy the door is closed."
+          },
+          {
+            "text": "She is sorry about the door."
+          },
+          {
+            "text": "She is upset that the door stays open."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c92.r03.seed-0",
+          "feedback": {
+            "es": "Wish + would expresa molestia por algo que otra persona hace: aquí, dejar la puerta abierta."
+          },
+          "audio": "I wish you would close the door when you leave.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:99700fc95410d33bb81e18a411865d4a5f6252e3b1a961efd112e90e194ae984"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c92.e01": {
+      "reteach": "en.n5.class-92.t01",
+      "review": "en.n5.c92.r01"
+    },
+    "en.n5.c92.e02": {
+      "reteach": "en.n5.class-92.t02",
+      "review": "en.n5.c92.r02"
+    },
+    "en.n5.c92.e03": {
+      "reteach": "en.n5.class-92.t03",
+      "review": "en.n5.c92.r03"
+    },
+    "en.n5.c92.e04": {
+      "reteach": "en.n5.class-92.t04",
+      "review": "en.n5.c92.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

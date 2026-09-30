@@ -1,0 +1,641 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "classes": {
+    "en.n5.class-71": {
+      "explicacion": {
+        "titulo": "Una raíz, cuatro categorías",
+        "texto": "En los textos científicos una misma raíz aparece con terminaciones distintas, y la terminación te dice la categoría. Los verbos son la raíz (observe, predict) o terminan en -yse (analyse); los sustantivos terminan en -sis, -tion, -ment o -ist (analysis, prediction, measurement, scientist); los adjetivos, en -al o -ific (analytical, scientific); y los adverbios, en -ly (scientifically). Comprueba también el lugar: tras the, a o her va un sustantivo; tras will, un verbo; y antes de un sustantivo, un adjetivo."
+      },
+      "patron": {
+        "texto": "Raíz + terminación = categoría:",
+        "formula": [
+          {
+            "texto": "observe",
+            "nota": "verbo: la acción (tras will o un sujeto)"
+          },
+          {
+            "texto": "observation",
+            "nota": "sustantivo: -tion, -sis, -ment"
+          },
+          {
+            "texto": "scientific",
+            "nota": "adjetivo: -al, -ific; describe un sustantivo"
+          },
+          {
+            "texto": "scientifically",
+            "nota": "adverbio: -ly; dice cómo se hace"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We need to analysis the data.",
+          "correcto": "We need to analyse the data.",
+          "explicacion": "Tras to va un verbo: analyse. Analysis es el sustantivo, la cosa que resulta del trabajo."
+        },
+        {
+          "incorrecto": "The scientist explained the result scientific.",
+          "correcto": "The scientist explained the result scientifically.",
+          "explicacion": "Para decir cómo se hace algo hace falta un adverbio (-ly). Scientific es un adjetivo y solo acompaña a un sustantivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan el informe de una clase de ciencias.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What do we write first in the report?",
+            "traduccion": "¿Qué escribimos primero en el informe?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "First we observe the plant and write every observation.",
+            "traduccion": "Primero observamos la planta y escribimos cada observación."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And then?",
+            "traduccion": "¿Y después?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then we analyse the numbers and make a scientific prediction.",
+            "traduccion": "Después analizamos los números y hacemos una predicción científica."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hacen Mia y Tom tras observar la planta?",
+          "opciones": [
+            {
+              "es": "Analizan los números y hacen una predicción."
+            },
+            {
+              "es": "Escriben cada observación."
+            },
+            {
+              "es": "Miden la planta con mucho cuidado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Then we analyse the numbers and make a scientific prediction». Escribir cada observación pertenece al primer paso, y nadie habla de medir la planta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Categoría",
+          "Terminación típica",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Verbo"
+            },
+            {
+              "texto": "raíz o -yse"
+            },
+            {
+              "texto": "observe, predict, analyse"
+            }
+          ],
+          [
+            {
+              "texto": "Sustantivo"
+            },
+            {
+              "texto": "-sis, -tion, -ment, -ist"
+            },
+            {
+              "texto": "analysis, prediction, measurement, scientist"
+            }
+          ],
+          [
+            {
+              "texto": "Adjetivo"
+            },
+            {
+              "texto": "-al, -ific"
+            },
+            {
+              "texto": "analytical, scientific"
+            }
+          ],
+          [
+            {
+              "texto": "Adverbio"
+            },
+            {
+              "texto": "-ly"
+            },
+            {
+              "texto": "scientifically"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-72": {
+      "explicacion": {
+        "titulo": "Causa, efecto y cambios en los datos",
+        "texto": "Para explicar un dato usa tres moldes. Causa + leads to / results in + efecto: Lack of sleep leads to stress (la causa es el sujeto). Efecto + is due to + causa: Stress is due to lack of sleep. As a result of + causa, efecto: As a result of the heat, sales dropped. Después de lead to, due to y as a result of va un sustantivo, no una oración con verbo. Para describir cambios usa rise, increase, fall o drop más un adverbio: sharply (mucho y rápido), steadily (constante) o slightly (un poco)."
+      },
+      "patron": {
+        "texto": "Causa → efecto, o efecto → causa:",
+        "formula": [
+          {
+            "texto": "Lack of sleep",
+            "nota": "causa: suele ser el sujeto"
+          },
+          {
+            "texto": "leads to / results in",
+            "nota": "une la causa con el efecto"
+          },
+          {
+            "texto": "stress;",
+            "nota": "efecto: un sustantivo"
+          },
+          {
+            "texto": "stress is due to lack of sleep.",
+            "nota": "al revés: efecto + due to + causa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Stress is due of lack of sleep.",
+          "correcto": "Stress is due to lack of sleep.",
+          "explicacion": "Se dice due to, con to: no existe «due of». Después va la causa."
+        },
+        {
+          "incorrecto": "As a result of it rained, the river rose.",
+          "correcto": "As a result of the rain, the river rose.",
+          "explicacion": "As a result of va seguido de un sustantivo (the rain), no de una oración con sujeto y verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a Ana los datos de su clase sobre el sueño.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why is the class so tired on Monday?",
+            "traduccion": "¿Por qué está tan cansada la clase los lunes?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is due to late nights. Sleep hours dropped last week.",
+            "traduccion": "Se debe a acostarse tarde. Las horas de sueño bajaron la semana pasada."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And the result?",
+            "traduccion": "¿Y el resultado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "As a result of the lack of sleep, the class marks fell slightly.",
+            "traduccion": "Como resultado de la falta de sueño, las notas de la clase bajaron ligeramente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿cuál es la causa de que la clase esté cansada?",
+          "opciones": [
+            {
+              "es": "Los estudiantes se acuestan tarde."
+            },
+            {
+              "es": "Las notas de la clase bajaron."
+            },
+            {
+              "es": "La clase tiene demasiadas tareas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «It is due to late nights». Las notas bajando es el efecto, no la causa, y nadie menciona las tareas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Causa + leads to / results in + efecto"
+            },
+            {
+              "texto": "Lack of sleep leads to stress."
+            }
+          ],
+          [
+            {
+              "texto": "Efecto + is due to + causa"
+            },
+            {
+              "texto": "Stress is due to lack of sleep."
+            }
+          ],
+          [
+            {
+              "texto": "As a result of + causa, efecto"
+            },
+            {
+              "texto": "As a result of the heat, sales dropped."
+            }
+          ],
+          [
+            {
+              "texto": "Verbo de cambio + sharply / steadily / slightly"
+            },
+            {
+              "texto": "Sleep hours rose steadily."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-73": {
+      "explicacion": {
+        "titulo": "Las cuatro partes de un resumen",
+        "texto": "Un resumen de estudio sigue casi siempre el mismo orden, y cada parte tiene palabras señal. Pregunta: asked whether. Método: surveyed o tested + participantes + tiempo. Resultado: found that, the results suggest. Limitación: however, only, small sample. Dos trampas: suggest no es prove (un estudio rara vez demuestra una causa) y whether significa «si» en una pregunta indirecta, no «cuando». En verdadero o falso, marca Not stated si el texto no dice nada sobre la frase."
+      },
+      "patron": {
+        "texto": "Pregunta → método → resultado → limitación:",
+        "formula": [
+          {
+            "texto": "The researchers asked whether…",
+            "nota": "pregunta: qué querían saber"
+          },
+          {
+            "texto": "They surveyed 200 participants…",
+            "nota": "método: a quién y cómo"
+          },
+          {
+            "texto": "The results suggest that…",
+            "nota": "resultado: lo que encontraron"
+          },
+          {
+            "texto": "However, the sample was small.",
+            "nota": "limitación: lo que no se puede concluir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The study proves that breakfast improves marks.",
+          "correcto": "The study suggests that breakfast improves marks.",
+          "explicacion": "Un estudio pequeño solo da una pista. Prove afirma una prueba definitiva; suggest es el verbo prudente."
+        },
+        {
+          "incorrecto": "The researchers asked whether did teenagers eat breakfast.",
+          "correcto": "The researchers asked whether teenagers eat breakfast.",
+          "explicacion": "En una pregunta indirecta no se usa did ni se invierte el orden: whether + sujeto + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Carlos lo que leyó sobre un estudio de caminar y el ánimo.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What did the researchers want to know?",
+            "traduccion": "¿Qué querían saber los investigadores?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "They asked whether walking to school improves mood.",
+            "traduccion": "Preguntaron si caminar a la escuela mejora el ánimo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "How many participants were in the sample?",
+            "traduccion": "¿Cuántos participantes había en la muestra?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Only forty students. The results suggest a link; however, the sample was small.",
+            "traduccion": "Solo cuarenta estudiantes. Los resultados sugieren un vínculo; sin embargo, la muestra era pequeña."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿cuál es la limitación del estudio?",
+          "opciones": [
+            {
+              "es": "La muestra era pequeña: solo cuarenta estudiantes."
+            },
+            {
+              "es": "El estudio duró solo dos semanas."
+            },
+            {
+              "es": "Los investigadores no hicieron una pregunta clara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Only forty students… the sample was small». El diálogo no menciona la duración y la pregunta del estudio sí es clara."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Palabras señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "asked whether"
+            },
+            {
+              "texto": "The researchers asked whether…"
+            }
+          ],
+          [
+            {
+              "texto": "Método"
+            },
+            {
+              "texto": "surveyed, tested + participantes"
+            },
+            {
+              "texto": "They surveyed 200 participants."
+            }
+          ],
+          [
+            {
+              "texto": "Resultado"
+            },
+            {
+              "texto": "found that, suggest"
+            },
+            {
+              "texto": "The results suggest a link."
+            }
+          ],
+          [
+            {
+              "texto": "Limitación"
+            },
+            {
+              "texto": "however, only, small sample"
+            },
+            {
+              "texto": "However, the sample was small."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-74": {
+      "explicacion": {
+        "titulo": "Describir un experimento en voz pasiva",
+        "texto": "Un experimento se describe en pasado y casi siempre en voz pasiva, porque importa lo que se hizo y no quién lo hizo: sujeto + was/were + participio (Twenty seeds were divided; the height was measured). Sujeto singular, was; plural, were. El orden habitual es propósito (The aim was to find out whether…), pasos (first, then, after that), resultado (The results were clear…) y conclusión (It can be concluded that…). El agente (by the students) solo se añade si es importante."
+      },
+      "patron": {
+        "texto": "Sujeto + was/were + participio:",
+        "formula": [
+          {
+            "texto": "Twenty seeds",
+            "nota": "sujeto: lo que recibe la acción"
+          },
+          {
+            "texto": "were divided",
+            "nota": "were + participio (sujeto plural)"
+          },
+          {
+            "texto": "into two groups.",
+            "nota": "el resto de la información"
+          },
+          {
+            "texto": "The height was measured.",
+            "nota": "sujeto singular: was + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Twenty seeds was divided into two groups.",
+          "correcto": "Twenty seeds were divided into two groups.",
+          "explicacion": "Seeds es plural, así que la pasiva lleva were, no was."
+        },
+        {
+          "incorrecto": "The plants measured every three days.",
+          "correcto": "The plants were measured every three days.",
+          "explicacion": "En español basta «se midieron»; en inglés la pasiva necesita were + participio. Sin were, la frase dice que las plantas midieron algo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo preparan la presentación de su experimento con semillas.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What was the aim of our experiment?",
+            "traduccion": "¿Cuál era el objetivo de nuestro experimento?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It was to find out whether seeds grow faster in light.",
+            "traduccion": "Era averiguar si las semillas crecen más rápido con luz."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And what was done first?",
+            "traduccion": "¿Y qué se hizo primero?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The seeds were divided into two groups. One group was placed near the window.",
+            "traduccion": "Las semillas se dividieron en dos grupos. Un grupo se colocó junto a la ventana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué se hizo primero con las semillas?",
+          "opciones": [
+            {
+              "es": "Las dividieron en dos grupos."
+            },
+            {
+              "es": "Las midieron cada tres días."
+            },
+            {
+              "es": "Las regaron con agua fría."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «The seeds were divided into two groups». Medirlas y regarlas con agua fría no aparece en el diálogo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del informe",
+          "Frase típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Propósito"
+            },
+            {
+              "texto": "The aim was to find out whether…"
+            }
+          ],
+          [
+            {
+              "texto": "Pasos"
+            },
+            {
+              "texto": "…were divided / was placed / was measured"
+            }
+          ],
+          [
+            {
+              "texto": "Resultado"
+            },
+            {
+              "texto": "The results were clear…"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "It can be concluded that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-75": {
+      "explicacion": {
+        "titulo": "Explicar un hallazgo: causa o coincidencia",
+        "texto": "Para explicar un hallazgo a un amigo, simplifica sin exagerar. Anuncia que vas a hablar claro (Let me explain…), reformula con In other words y da un caso con For example. Después separa patrón y causa: si dos cosas suben juntas hay un patrón, pero eso no significa que una cause la otra. Usa That does not mean that… o not necessarily para frenar una conclusión y it may be a coincidence para dudar con honestidad. Y si no lo sabes, dilo: I am not sure yet."
+      },
+      "patron": {
+        "texto": "Patrón + freno + ejemplo:",
+        "formula": [
+          {
+            "texto": "There is a pattern:",
+            "nota": "lo que se repite en los datos"
+          },
+          {
+            "texto": "that does not mean that…",
+            "nota": "freno: no es prueba de causa"
+          },
+          {
+            "texto": "it may be a coincidence.",
+            "nota": "duda prudente"
+          },
+          {
+            "texto": "For example,…",
+            "nota": "un caso que lo aclara"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The study says that sleep causes good marks, for sure.",
+          "correcto": "The study says that sleep may lead to good marks.",
+          "explicacion": "Un patrón no prueba una causa. Con datos así se usa una forma prudente (may lead to), no «seguro que causa»."
+        },
+        {
+          "incorrecto": "Both marks and sleep is high in this class.",
+          "correcto": "Both marks and sleep are high in this class.",
+          "explicacion": "Both ... and ... suma dos sujetos, así que el verbo va en plural: are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le explica a Mia un estudio que leyó sobre la bicicleta y las notas.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What did the study find?",
+            "traduccion": "¿Qué encontró el estudio?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "In other words, students who ride bikes get better marks.",
+            "traduccion": "Es decir, los estudiantes que van en bici sacan mejores notas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So bikes cause good marks?",
+            "traduccion": "¿Entonces las bicis causan buenas notas?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Not necessarily. It may be a coincidence, so I am not sure yet.",
+            "traduccion": "No necesariamente. Puede ser una coincidencia, así que todavía no estoy seguro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué piensa Tom de la relación entre la bici y las notas?",
+          "opciones": [
+            {
+              "es": "Que puede ser una coincidencia y aún no está seguro."
+            },
+            {
+              "es": "Que la bici causa las buenas notas."
+            },
+            {
+              "es": "Que los estudiantes sin bici sacan mejores notas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom responde: «Not necessarily. It may be a coincidence…». No afirma una causa ni dice que quienes no van en bici saquen mejores notas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quiero…",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Reformular con palabras simples"
+            },
+            {
+              "texto": "In other words, …"
+            }
+          ],
+          [
+            {
+              "texto": "Dar un caso"
+            },
+            {
+              "texto": "For example, …"
+            }
+          ],
+          [
+            {
+              "texto": "Frenar una causa dudosa"
+            },
+            {
+              "texto": "That does not mean that… / Not necessarily."
+            }
+          ],
+          [
+            {
+              "texto": "Dudar con honestidad"
+            },
+            {
+              "texto": "It may be a coincidence. I am not sure yet."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,805 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-58",
+  "title": {
+    "en": "Original or retold?",
+    "es": "¿Versión original o versión contada?"
+  },
+  "objectives": {
+    "es": [
+      "Comparar una conversación con su versión reportada y detectar distorsiones de tiempo, persona o sentido."
+    ]
+  },
+  "concepts": [
+    "n5-what-they-said-3"
+  ],
+  "skills": [
+    "lectura",
+    "escucha",
+    "gramática"
+  ],
+  "prerequisites": [
+    "en.n5.class-57"
+  ],
+  "usesVocabulary": [
+    "original",
+    "version",
+    "faithful",
+    "accurate",
+    "distorted",
+    "exaggerated",
+    "detail",
+    "then",
+    "there"
+  ],
+  "usesPatterns": [
+    "n5-what-they-said-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "original",
+      "es": "el original, lo que se dijo de verdad"
+    },
+    {
+      "en": "version",
+      "es": "versión"
+    },
+    {
+      "en": "faithful",
+      "es": "fiel"
+    },
+    {
+      "en": "accurate",
+      "es": "exacto, preciso"
+    },
+    {
+      "en": "distorted",
+      "es": "distorsionado"
+    },
+    {
+      "en": "exaggerated",
+      "es": "exagerado"
+    },
+    {
+      "en": "detail",
+      "es": "detalle"
+    },
+    {
+      "en": "then",
+      "es": "entonces, en ese momento"
+    },
+    {
+      "en": "there",
+      "es": "allí"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-58.t01",
+      "en": "Tom said he was tired then.",
+      "es": "Tom dijo que estaba cansado en ese momento.",
+      "explanationEs": "Now → then: el «ahora» de la cita original pasa a «entonces»; am → was.",
+      "segments": [
+        "Tom said he",
+        "was tired then."
+      ],
+      "audioText": "Tom said he was tired then.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-what-they-said-3"
+    },
+    {
+      "id": "en.n5.class-58.t02",
+      "en": "Ana said she had been there the day before.",
+      "es": "Ana dijo que había estado allí el día anterior.",
+      "explanationEs": "Here → there y yesterday → the day before; el tiempo retrocede un paso (was → had been).",
+      "segments": [
+        "Ana said she had been",
+        "there the day before."
+      ],
+      "audioText": "Ana said she had been there the day before.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-what-they-said-3"
+    },
+    {
+      "id": "en.n5.class-58.t03",
+      "en": "The original was «I might come», but the report says she promised to come, so that version is distorted.",
+      "es": "El original era «quizá venga», pero el reporte dice que prometió venir, así que esa versión está distorsionada.",
+      "explanationEs": "Una versión distorsionada cambia la fuerza de lo dicho: might no es promised.",
+      "segments": [
+        "The original was «I might come», but the report says",
+        "she promised to come, so that version is distorted."
+      ],
+      "audioText": "The original was «I might come», but the report says she promised to come, so that version is distorted.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-what-they-said-3"
+    },
+    {
+      "id": "en.n5.class-58.t04",
+      "en": "She said «a few people», but the report says «hundreds», so it is exaggerated.",
+      "es": "Ella dijo «unas pocas personas», pero el reporte dice «cientos», así que está exagerado.",
+      "explanationEs": "Exaggerated: hace algo más grande de lo que fue.",
+      "segments": [
+        "She said «a few people», but the",
+        "report says «hundreds», so it is exaggerated."
+      ],
+      "audioText": "She said «a few people», but the report says «hundreds», so it is exaggerated.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-what-they-said-3"
+    },
+    {
+      "id": "en.n5.class-58.t05",
+      "en": "An accurate report keeps every detail: who said it, what they said and when.",
+      "es": "Un reporte exacto conserva cada detalle: quién lo dijo, qué dijo y cuándo.",
+      "explanationEs": "Accurate + detail: no se omite ni se añade información.",
+      "segments": [
+        "An accurate report keeps every detail: who",
+        "said it, what they said and when."
+      ],
+      "audioText": "An accurate report keeps every detail: who said it, what they said and when.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-what-they-said-3"
+    },
+    {
+      "id": "en.n5.class-58.t06",
+      "en": "In a faithful version, «I may be late» becomes He said he might be late.",
+      "es": "En una versión fiel, «puede que llegue tarde» se convierte en Dijo que quizá llegaría tarde.",
+      "explanationEs": "May → might: el grado de posibilidad se mantiene al retroceder.",
+      "segments": [
+        "In a faithful version, «I may be late»",
+        "becomes He said he might be late."
+      ],
+      "audioText": "In a faithful version, «I may be late» becomes He said he might be late.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-what-they-said-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c58.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Es fiel este reporte?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "No, it changes the person."
+          },
+          {
+            "text": "Yes, it is faithful."
+          },
+          {
+            "text": "No, it makes the feeling stronger."
+          }
+        ],
+        "teaches": [
+          "n5-what-they-said-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.pg01.seed-0",
+          "feedback": {
+            "es": "Mantiene el significado: I → he, am → was y now → then son los cambios correctos. No cambia la intensidad del sentimiento."
+          },
+          "hint": {
+            "es": "Compara la persona, el tiempo del verbo y la palabra now."
+          },
+          "text": "Original: «I'm very tired now.» Report: Tom said he was very tired then."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3cac792896b0a12e90e0202a4da4f60267e0c6613ee986fc787bc24ca49c8e21"
+      },
+      {
+        "id": "en.n5.c58.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué falla en este reporte?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It changes the place."
+          },
+          {
+            "text": "It uses the wrong person."
+          },
+          {
+            "text": "It turns «may» into a promise."
+          }
+        ],
+        "teaches": [
+          "n5-what-they-said-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.pg02.seed-0",
+          "feedback": {
+            "es": "«I may come» es una posibilidad y promised es un compromiso: la fuerza cambia. El lugar y la persona están bien."
+          },
+          "hint": {
+            "es": "Mira si «may come» y «promised» tienen la misma fuerza."
+          },
+          "text": "Original: «I may come to the party.» Report: Ana said she promised to come to the party."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ac5850b56690a1876e8076d46611f0740573c7dfa212a38d72b51374d71674c4"
+      },
+      {
+        "id": "en.n5.c58.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Leo dijo que vendrían al día siguiente.»"
+        },
+        "answer": {
+          "text": "next",
+          "accepted": [
+            "next"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-what-they-said-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.pg03.seed-0",
+          "feedback": {
+            "es": "Tomorrow se convierte en the next day cuando reportas en otro momento."
+          },
+          "hint": {
+            "es": "Tomorrow se convierte en the … day."
+          },
+          "text": "Leo said they would come the ___ day."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:669ea63222ca316fb9c36561da29b93e421af436d6d30d2d216644a551b96313"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c58.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige si el segundo reporte es fiel."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "No: Mia only said she was busy."
+          },
+          {
+            "text": "Yes: Mia refused to come."
+          },
+          {
+            "text": "No: Mia was not busy."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.p01.seed-0",
+          "feedback": {
+            "es": "Mia solo dijo que estaba ocupada; refused to come es una distorsión que añade una negativa."
+          },
+          "audio": "Mia said she was busy, and Ana told us that Mia refused to come.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9da48f359dc27d01156fe8432cd49cbdced1f0d15f52b5a11edce3f64646f720"
+      },
+      {
+        "id": "en.n5.c58.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué cambios hace el reporte fiel?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Only the pronoun changes."
+          },
+          {
+            "text": "The tense goes back and yesterday becomes the day before."
+          },
+          {
+            "text": "Nothing changes."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.p02.seed-0",
+          "feedback": {
+            "es": "El verbo retrocede (saw → had seen) y yesterday pasa a the day before. No basta con cambiar el pronombre."
+          },
+          "text": "Original: «We saw the match yesterday.» Report: She said they had seen the match the day before."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:da6984a03ccd6029382d7660073d650ee7fabccded32b5c000bf6d874104249a"
+      },
+      {
+        "id": "en.n5.c58.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada cita original con su reporte fiel."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I have lost my keys.",
+              {
+                "es": "She said she had lost her keys."
+              }
+            ],
+            [
+              "I can swim here.",
+              {
+                "es": "He said he could swim there."
+              }
+            ],
+            [
+              "We will help you tomorrow.",
+              {
+                "es": "They said they would help me the next day."
+              }
+            ],
+            [
+              "I saw him yesterday.",
+              {
+                "es": "She said she had seen him the day before."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.p03.seed-0",
+          "feedback": {
+            "es": "En cada reporte cambian persona, tiempo y referencias: have lost → had lost, can → could, here → there, yesterday → the day before."
+          },
+          "pairs": [
+            [
+              "I have lost my keys.",
+              {
+                "es": "She said she had lost her keys."
+              }
+            ],
+            [
+              "I can swim here.",
+              {
+                "es": "He said he could swim there."
+              }
+            ],
+            [
+              "We will help you tomorrow.",
+              {
+                "es": "They said they would help me the next day."
+              }
+            ],
+            [
+              "I saw him yesterday.",
+              {
+                "es": "She said she had seen him the day before."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1a2661b0bd764ab756f4268cb4ccf94d1ea341ec793336a7262ad4fa9b6914a1"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c58.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Es fiel el reporte de Leo?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Yes: it keeps the same meaning."
+          },
+          {
+            "text": "No: Friday should be the day before."
+          },
+          {
+            "text": "No: promised is stronger than might."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.e01.seed-0",
+          "feedback": {
+            "es": "«I might call you» es una posibilidad; promised la convierte en compromiso. El viernes no necesita cambiar."
+          },
+          "text": "Original: «I might call you on Friday.» Report: Leo promised to call me on Friday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a78e9f51a89e64d6c22decf1f65c69f8d3a126d53b83acb7afa1b529aaab8047"
+      },
+      {
+        "id": "en.n5.c58.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige si el reporte de Sara es fiel."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Yes, it keeps the meaning and the time."
+          },
+          {
+            "text": "No, Carlos said he would bring it today."
+          },
+          {
+            "text": "No, Sara changed the person."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.e02.seed-0",
+          "feedback": {
+            "es": "Will → would y tomorrow → the next day son los cambios correctos; el significado es el mismo."
+          },
+          "audio": "Carlos said: I will bring the cake tomorrow. Sara told us that Carlos would bring the cake the next day.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:41e5b51063f5130e6c7d4b3a696104107f369ad2266c6f10e30a786c861b6e51"
+      },
+      {
+        "id": "en.n5.c58.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Dijo que estaba contenta en ese momento.»"
+        },
+        "answer": {
+          "text": "then",
+          "accepted": [
+            "then"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.e03.seed-0",
+          "feedback": {
+            "es": "Now se convierte en then al reportar en pasado."
+          },
+          "text": "She said she was happy ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bd10cd9a43339f97af0c38f5fa408283f9c1a2a94a55f248a4bfb5f8310037ca"
+      },
+      {
+        "id": "en.n5.c58.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mia dijo que llamaría al día siguiente.»"
+        },
+        "answer": {
+          "text": "Mia said she would call the next day",
+          "tokens": [
+            "Mia",
+            "said",
+            "she",
+            "would",
+            "call",
+            "the",
+            "next",
+            "day"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.e04.seed-0",
+          "feedback": {
+            "es": "Will → would y tomorrow → the next day: el reporte fiel cambia las dos cosas."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d661c1d8f74766252cc097558a3704ec1f05c20f79e26257a8dc7cdc896d0ea2"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c58.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué problema tiene este reporte?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It changes the day of the meeting."
+          },
+          {
+            "text": "It makes the number of people much bigger."
+          },
+          {
+            "text": "It mixes up who spoke."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.r01.seed-0",
+          "feedback": {
+            "es": "Some people se convierte en hundreds: el reporte lo exagera. El día y la persona no cambian."
+          },
+          "text": "Original: «Some people came to the meeting.» Report: Leo said hundreds of people came to the meeting."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d77d66e60d3e39e804b897c3fb82895186af582621d6d58163fa28c0bbce2075"
+      },
+      {
+        "id": "en.n5.c58.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace el reporte de Tom."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It keeps Ana's words exactly."
+          },
+          {
+            "text": "It makes Ana's promise stronger."
+          },
+          {
+            "text": "It makes Ana's promise weaker."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.r02.seed-0",
+          "feedback": {
+            "es": "Definitely pasa a might: la seguridad de Ana se debilita. Es una distorsión, no un reporte fiel."
+          },
+          "audio": "Ana said she would definitely come. Tom told us that Ana said she might come.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e2bd0f91bd51a7c911b5b96ea2ddecffbcf21706b47b14216c473575bcc595d"
+      },
+      {
+        "id": "en.n5.c58.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ana dijo que quizá vendría.»"
+        },
+        "answer": {
+          "text": "might",
+          "accepted": [
+            "might"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-what-they-said-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c58.r03.seed-0",
+          "feedback": {
+            "es": "May → might: la posibilidad se mantiene al retroceder el tiempo."
+          },
+          "text": "Ana said she ___ come."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:13e126cf17cd6448fc6ad8f262f04f5d97e6905ac1bd1b7569bc4c01b95d8879"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c58.e01": {
+      "reteach": "en.n5.class-58.t01",
+      "review": "en.n5.c58.r01"
+    },
+    "en.n5.c58.e02": {
+      "reteach": "en.n5.class-58.t02",
+      "review": "en.n5.c58.r02"
+    },
+    "en.n5.c58.e03": {
+      "reteach": "en.n5.class-58.t03",
+      "review": "en.n5.c58.r03"
+    },
+    "en.n5.c58.e04": {
+      "reteach": "en.n5.class-58.t04",
+      "review": "en.n5.c58.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,767 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-14",
+  "title": {
+    "en": "Write about a regret",
+    "es": "Escribir sobre un arrepentimiento"
+  },
+  "objectives": {
+    "es": [
+      "Escribir un texto breve sobre una decisión que lamentas: la decisión (past simple), el arrepentimiento (wish + had), su consecuencia (tercer condicional) y un deseo actual."
+    ]
+  },
+  "concepts": [
+    "n4-regrets-and-wishes-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-13"
+  ],
+  "usesVocabulary": [
+    "quit",
+    "lessons",
+    "guitar",
+    "practising",
+    "band",
+    "teacher",
+    "song"
+  ],
+  "usesPatterns": [
+    "n4-regrets-and-wishes-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "quit",
+      "es": "dejar (abandonar)"
+    },
+    {
+      "en": "lessons",
+      "es": "clases"
+    },
+    {
+      "en": "guitar",
+      "es": "guitarra"
+    },
+    {
+      "en": "practising",
+      "es": "practicando"
+    },
+    {
+      "en": "band",
+      "es": "banda"
+    },
+    {
+      "en": "teacher",
+      "es": "profesor"
+    },
+    {
+      "en": "song",
+      "es": "canción"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-14.t01",
+      "en": "Two years ago, I quit my guitar lessons because I wanted more free time.",
+      "es": "Hace dos años dejé mis clases de guitarra porque quería más tiempo libre.",
+      "explanationEs": "Primero la decisión: past simple y un marcador de tiempo (two years ago).",
+      "segments": [
+        "Two years ago, I quit my guitar",
+        "lessons because I wanted more free time."
+      ],
+      "audioText": "Two years ago, I quit my guitar lessons because I wanted more free time.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-4"
+    },
+    {
+      "id": "en.n4.class-14.t02",
+      "en": "Now I wish I had kept practising every day.",
+      "es": "Ahora ojalá hubiera seguido practicando cada día.",
+      "explanationEs": "El arrepentimiento: wish + had + participio.",
+      "segments": [
+        "Now I wish I had",
+        "kept practising every day."
+      ],
+      "audioText": "Now I wish I had kept practising every day.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-4"
+    },
+    {
+      "id": "en.n4.class-14.t03",
+      "en": "If I had stayed, I would have played in the school band.",
+      "es": "Si me hubiera quedado, habría tocado en la banda del colegio.",
+      "explanationEs": "La consecuencia imaginada: tercer condicional.",
+      "segments": [
+        "If I had stayed, I would",
+        "have played in the school band."
+      ],
+      "audioText": "If I had stayed, I would have played in the school band.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-4"
+    },
+    {
+      "id": "en.n4.class-14.t04",
+      "en": "If only I had listened to my teacher!",
+      "es": "¡Ojalá hubiera escuchado a mi profesor!",
+      "explanationEs": "If only da más emoción al arrepentimiento.",
+      "segments": [
+        "If only I had",
+        "listened to my teacher!"
+      ],
+      "audioText": "If only I had listened to my teacher!",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-4"
+    },
+    {
+      "id": "en.n4.class-14.t05",
+      "en": "Now I wish I could play a song for my family.",
+      "es": "Ahora ojalá pudiera tocar una canción para mi familia.",
+      "explanationEs": "El deseo actual: wish + could (presente).",
+      "segments": [
+        "Now I wish I could play",
+        "a song for my family."
+      ],
+      "audioText": "Now I wish I could play a song for my family.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c14.pg01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Dejé mis clases de piano porque quería más tiempo.»"
+        },
+        "answer": {
+          "text": "I quit my piano lessons because I wanted more time",
+          "tokens": [
+            "I",
+            "quit",
+            "my",
+            "piano",
+            "lessons",
+            "because",
+            "I",
+            "wanted",
+            "more",
+            "time"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.pg01.seed-0",
+          "feedback": {
+            "es": "La decisión se cuenta en pasado simple (quit, wanted) y because introduce el motivo al final."
+          },
+          "hint": {
+            "es": "Empieza por el sujeto, usa el pasado simple y deja because para el motivo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c515007bb29cf4a3f1ba21d4d3094caee258f36c7c34b89f4a9aa8d11ca4acea"
+      },
+      {
+        "id": "en.n4.c14.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si hubiera practicado cada día, habría tocado mejor.»"
+        },
+        "answer": {
+          "text": "played",
+          "accepted": [
+            "played"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.pg02.seed-0",
+          "feedback": {
+            "es": "El resultado del tercer condicional lleva would have + participio: played."
+          },
+          "hint": {
+            "es": "Participio regular de play."
+          },
+          "text": "If I had practised every day, I would have ___ better."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cc293514b84ae8a91bf30f448643619814389632f0b04aec0d244c505b65f134"
+      },
+      {
+        "id": "en.n4.c14.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase sirve para abrir el texto con la decisión?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Last year, I wish I quit my piano lessons."
+          },
+          {
+            "text": "Last year, if I had quit my piano lessons."
+          },
+          {
+            "text": "Last year, I quit my piano lessons."
+          }
+        ],
+        "teaches": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.pg03.seed-0",
+          "feedback": {
+            "es": "La decisión ya ocurrió y se cuenta en pasado simple, sin wish ni if."
+          },
+          "hint": {
+            "es": "La decisión ya ocurrió: se cuenta con el pasado simple."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:54775297d2fd2e2775e760bce4ea6b8ba184bad747b0a7a41c1e72284a9e1602"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c14.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa cada deseo: uno sobre hoy y otro sobre el pasado."
+        },
+        "answer": {
+          "text": "could | had listened",
+          "accepted": [
+            "could | had listened"
+          ],
+          "parts": [
+            {
+              "text": "could",
+              "accepted": [
+                "could"
+              ]
+            },
+            {
+              "text": "had listened",
+              "accepted": [
+                "had listened"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.p01.seed-0",
+          "feedback": {
+            "es": "Sobre hoy, can pasa a could; sobre el pasado, wish + had + participio."
+          },
+          "sentences": [
+            "Now I wish I ___ (can) play the piano.",
+            "I wish I ___ (listen) to my teacher."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1fc7e3b8780c854b8ce8e8fb651f05ccad69ae737f9a39407f4a574fb422836d"
+      },
+      {
+        "id": "en.n4.c14.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena el resultado: «habría tocado una canción»"
+        },
+        "answer": {
+          "text": "I would have played a song",
+          "tokens": [
+            "I",
+            "would",
+            "have",
+            "played",
+            "a",
+            "song"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.p02.seed-0",
+          "feedback": {
+            "es": "El resultado del tercer condicional lleva would have + participio: I would have played."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:89167b2ef2bad25b5ef05a4d313733058f1afe4895a7551e1c46775b1bbcbadb"
+      },
+      {
+        "id": "en.n4.c14.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe en inglés tu deseo actual."
+        },
+        "answer": {
+          "text": "I wish I could play the guitar better.",
+          "accepted": [
+            "I wish I could play the guitar better.",
+            "I wish I could play the guitar better now.",
+            "Now I wish I could play the guitar better."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.p03.seed-0",
+          "feedback": {
+            "es": "Un deseo sobre el presente lleva wish + could; better va al final."
+          },
+          "text": "Ahora desearías poder tocar mejor la guitarra."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:22dca45f6017de9b499f93cfaed7e468ebcf50cf3a4f64c1d84f94eda4aebb59"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c14.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Completa la frase con la palabra que encaja en el hueco."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "wish"
+          },
+          {
+            "text": "regret"
+          },
+          {
+            "text": "hope"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.e01.seed-0",
+          "feedback": {
+            "es": "Tras wish + had + participio se expresa el arrepentimiento; regret y hope no se construyen así."
+          },
+          "text": "I quit my lessons last year. Now I ___ I had stayed."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e42652e5d520a4b5d6e599060ff31aa94a57a6c449adb9d0188399c5c0acae26"
+      },
+      {
+        "id": "en.n4.c14.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué lamenta la persona."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Buying a new bike."
+          },
+          {
+            "text": "Selling the bike."
+          },
+          {
+            "text": "Breaking the phone."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.e02.seed-0",
+          "feedback": {
+            "es": "Wish + had kept marca lo que lamenta: haber vendido la bicicleta."
+          },
+          "audio": "Last year I sold my bike to buy a phone. Now I wish I had kept it, because the phone is broken.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5dac0f717a129600402ea4b1cda774e5607d30b6edd4d6e6e5d068f5248fcb35"
+      },
+      {
+        "id": "en.n4.c14.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ojalá no hubiera dejado las clases.»"
+        },
+        "answer": {
+          "text": "had not quit",
+          "accepted": [
+            "had not quit",
+            "hadn't quit"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.e03.seed-0",
+          "feedback": {
+            "es": "El arrepentimiento negativo se forma con wish + had not + participio."
+          },
+          "text": "I wish I ___ my lessons."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2349a791d9abe2a556157fc745d4fde89ea62dd3cec35be4f18423b8e067e113"
+      },
+      {
+        "id": "en.n4.c14.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe un texto breve (unas 45 palabras) sobre una decisión que lamentas."
+        },
+        "answer": {
+          "text": "Last year I quit tennis because I wanted more free time. Now I wish I had stayed in the team. If I had stayed, I would have played in the big match. If only I had listened to my teacher! Now I wish I could play better.",
+          "accepted": [
+            "Last year I quit tennis because I wanted more free time. Now I wish I had stayed in the team. If I had stayed, I would have played in the big match. If only I had listened to my teacher! Now I wish I could play better.",
+            "A year ago, I quit tennis to have more free time. I wish I had not quit. If I had kept playing, I would have played in the big match. If only I had asked my teacher for help! Now I wish I could play better."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.e04.seed-0",
+          "feedback": {
+            "es": "Un buen texto cuenta la decisión en pasado, lamenta con wish + had o if only, imagina la consecuencia con el tercer condicional y cierra con un deseo actual."
+          },
+          "text": "Datos: hace un año dejaste el tenis para tener más tiempo libre. Ahora quisieras haberte quedado en el equipo. Escribe la decisión, tu arrepentimiento con wish + had, una consecuencia imaginada con if + had (por ejemplo, un partido importante), un lamento con if only y un deseo actual con wish + could.",
+          "scoring": {
+            "wordRange": [
+              35,
+              90
+            ],
+            "evidenceGroups": [
+              [
+                "Last year",
+                "A year ago",
+                "One year ago",
+                "Last summer",
+                "Last season"
+              ],
+              [
+                "wish I had",
+                "wish I hadn't",
+                "wish I had not",
+                "If only I had"
+              ],
+              [
+                "If I had",
+                "If I hadn't",
+                "If I had not"
+              ],
+              [
+                "would have",
+                "wouldn't have",
+                "would not have"
+              ],
+              [
+                "wish I could",
+                "wish I were",
+                "wish I played"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cc07255dcf28a2ec95c4ed137c65edf5f496bc3d78e348b460ee1d79ad3bbda1"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c14.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y decide qué tipo de condición es."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "real"
+          },
+          {
+            "text": "impossible"
+          },
+          {
+            "text": "unreal"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.r01.seed-0",
+          "feedback": {
+            "es": "If + pasado y would imaginan algo que hoy no es cierto: no tiene tiempo porque trabaja cada día."
+          },
+          "audio": "If I had more time, I would learn the guitar. But I work every day.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5da469ae284979c180ba88641f7dd58a7119664238350b67a776ee35238ffd01"
+      },
+      {
+        "id": "en.n4.c14.r02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Traduce al inglés con un pasado imaginado."
+        },
+        "answer": {
+          "text": "If I had arrived earlier, I would have seen my grandmother.",
+          "accepted": [
+            "If I had arrived earlier, I would have seen my grandmother.",
+            "I would have seen my grandmother if I had arrived earlier.",
+            "If I had arrived sooner, I would have seen my grandmother."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.r02.seed-0",
+          "feedback": {
+            "es": "Un pasado imaginado pide if + had + participio y would have + participio."
+          },
+          "text": "Si hubiera llegado antes, habría visto a mi abuela."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e4b1ef369e16119b3ca04b1b2de1902439c21bde3c166df82bb9e5c3f3f7ffb6"
+      },
+      {
+        "id": "en.n4.c14.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ojalá viviera en una ciudad más grande.»"
+        },
+        "answer": {
+          "text": "lived",
+          "accepted": [
+            "lived"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c14.r03.seed-0",
+          "feedback": {
+            "es": "Un deseo sobre el presente lleva wish + pasado simple: lived."
+          },
+          "text": "I wish I ___ in a bigger city."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6f6416462354fe4f9d50b00d64f2be8c52a459ceed44893ac7ce3eb9d8c13bdd"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c14.e01": {
+      "reteach": "en.n4.class-14.t01",
+      "review": "en.n4.c14.r01"
+    },
+    "en.n4.c14.e02": {
+      "reteach": "en.n4.class-14.t02",
+      "review": "en.n4.c14.r02"
+    },
+    "en.n4.c14.e03": {
+      "reteach": "en.n4.class-14.t03",
+      "review": "en.n4.c14.r03"
+    },
+    "en.n4.c14.e04": {
+      "reteach": "en.n4.class-14.t04",
+      "review": "en.n4.c14.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

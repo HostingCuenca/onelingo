@@ -1,0 +1,735 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-79",
+  "title": {
+    "en": "Compare two traditions",
+    "es": "Comparar dos tradiciones"
+  },
+  "objectives": {
+    "es": [
+      "Escribir una comparación de dos tradiciones con both, neither, either, unlike o while y un tag que invite a confirmar."
+    ]
+  },
+  "concepts": [
+    "n4-culture-and-traditions-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-78"
+  ],
+  "usesVocabulary": [
+    "custom",
+    "similar",
+    "different",
+    "unlike",
+    "while",
+    "popular"
+  ],
+  "usesPatterns": [
+    "n4-culture-and-traditions-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "custom",
+      "es": "costumbre"
+    },
+    {
+      "en": "similar",
+      "es": "parecido"
+    },
+    {
+      "en": "different",
+      "es": "diferente"
+    },
+    {
+      "en": "unlike",
+      "es": "a diferencia de"
+    },
+    {
+      "en": "while",
+      "es": "mientras que"
+    },
+    {
+      "en": "popular",
+      "es": "muy conocido, querido"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-79.t01",
+      "en": "Both festivals are similar, because both have a parade and traditional music.",
+      "es": "Los dos festivales son parecidos, porque los dos tienen desfile y música tradicional.",
+      "explanationEs": "Both + plural: lo que comparten; similar introduce el parecido.",
+      "segments": [
+        "Both festivals are similar, because both",
+        "have a parade and traditional music."
+      ],
+      "audioText": "Both festivals are similar, because both have a parade and traditional music.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-4"
+    },
+    {
+      "id": "en.n4.class-79.t02",
+      "en": "Unlike Carnival, the June festival is quiet, isn't it?",
+      "es": "A diferencia del Carnaval, el festival de junio es tranquilo, ¿verdad?",
+      "explanationEs": "Unlike + sustantivo marca la diferencia; el tag invita a confirmar.",
+      "segments": [
+        "Unlike Carnival, the June festival",
+        "is quiet, isn't it?"
+      ],
+      "audioText": "Unlike Carnival, the June festival is quiet, isn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-4"
+    },
+    {
+      "id": "en.n4.class-79.t03",
+      "en": "Neither custom is new, and both are very popular.",
+      "es": "Ninguna de las dos costumbres es nueva, y las dos son muy populares.",
+      "explanationEs": "Neither + singular con verbo afirmativo; both + plural.",
+      "segments": [
+        "Neither custom is new, and",
+        "both are very popular."
+      ],
+      "audioText": "Neither custom is new, and both are very popular.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-4"
+    },
+    {
+      "id": "en.n4.class-79.t04",
+      "en": "We can celebrate on either day, while my parents prefer Sunday.",
+      "es": "Podemos celebrarlo cualquiera de los dos días, mientras que mis padres prefieren el domingo.",
+      "explanationEs": "While contrasta dos ideas en una misma frase.",
+      "segments": [
+        "We can celebrate on either day,",
+        "while my parents prefer Sunday."
+      ],
+      "audioText": "We can celebrate on either day, while my parents prefer Sunday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-4"
+    },
+    {
+      "id": "en.n4.class-79.t05",
+      "en": "The two traditions are different, but both are important, aren't they?",
+      "es": "Las dos tradiciones son diferentes, pero las dos son importantes, ¿verdad?",
+      "explanationEs": "Different marca la diferencia; but y un tag cierran la comparación.",
+      "segments": [
+        "The two traditions are different, but",
+        "both are important, aren't they?"
+      ],
+      "audioText": "The two traditions are different, but both are important, aren't they?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c79.pg01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Los dos festivales tienen música tradicional.»"
+        },
+        "answer": {
+          "text": "Both festivals have traditional music.",
+          "tokens": [
+            "Both",
+            "festivals",
+            "have",
+            "traditional",
+            "music."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-culture-and-traditions-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.pg01.seed-0",
+          "feedback": {
+            "es": "Both va delante del sustantivo plural festivals, con el verbo have."
+          },
+          "hint": {
+            "es": "Both va delante del sustantivo plural."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ea3226d606e1b7b977d26a5464510120c88626d8c5e96ff0bec5e4cb0e422949"
+      },
+      {
+        "id": "en.n4.c79.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ninguna de las dos tiendas vende máscaras, así que no podemos comprar una.»"
+        },
+        "answer": {
+          "text": "Neither",
+          "accepted": [
+            "Neither",
+            "neither"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-culture-and-traditions-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.pg02.seed-0",
+          "feedback": {
+            "es": "Neither significa «ninguno de los dos» y lleva el verbo en afirmativo: Neither shop sells."
+          },
+          "hint": {
+            "es": "«Ninguna de las dos»: el verbo va en afirmativo."
+          },
+          "text": "___ shop sells masks, so we cannot buy one."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6b786e48e66301086a98bdc4af61725c2fb822f216e0d715644a59f99848a650"
+      },
+      {
+        "id": "en.n4.c79.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué tag invita a confirmar «Las dos tradiciones son antiguas»?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "isn't it?"
+          },
+          {
+            "text": "aren't they?"
+          },
+          {
+            "text": "don't they?"
+          }
+        ],
+        "teaches": [
+          "n4-culture-and-traditions-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.pg03.seed-0",
+          "feedback": {
+            "es": "La frase usa are con sujeto plural, así que el tag es aren't they?"
+          },
+          "hint": {
+            "es": "El auxiliar es are y el sujeto es plural."
+          },
+          "text": "Both traditions are old, ___"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6e2457d77f070aea704154e8da434cbd23e9ee8491fae8488b18df1f792d51c9"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c79.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «A diferencia del Carnaval, el festival de junio es tranquilo.»"
+        },
+        "answer": {
+          "text": "Unlike",
+          "accepted": [
+            "Unlike",
+            "unlike"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.p01.seed-0",
+          "feedback": {
+            "es": "Unlike significa «a diferencia de» y va directamente delante del sustantivo."
+          },
+          "text": "___ Carnival, the June festival is quiet."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:df4c57820a1edb1b05b32bab375f0257cff497bc041de91fdee43122938fb04b"
+      },
+      {
+        "id": "en.n4.c79.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase compara bien dos costumbres?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Neither custom isn't new, and both are popular."
+          },
+          {
+            "text": "Neither customs are new, and both are popular."
+          },
+          {
+            "text": "Neither custom is new, and both are popular."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.p02.seed-0",
+          "feedback": {
+            "es": "Neither va con sustantivo singular y verbo afirmativo; both se usa con el plural."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aec1b2d22e6d22b13a76ff4356e545217d0406188e9f2803158c05e678244151"
+      },
+      {
+        "id": "en.n4.c79.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una frase: los dos festivales son muy parecidos."
+        },
+        "answer": {
+          "text": "Both festivals are very similar.",
+          "accepted": [
+            "Both festivals are very similar.",
+            "The two festivals are very similar."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.p03.seed-0",
+          "feedback": {
+            "es": "Both + sustantivo plural + be + similar expresa que dos cosas son parecidas."
+          },
+          "text": "Idea: los dos festivales (festivals) son muy parecidos (similar)."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:36b6503cd1c78363c14d7152468b7b65a0a2b1ecc445c48a4395ddbdf3a794f6"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c79.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué diferencia hay entre los dos festivales."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "One has a parade and the other has a concert."
+          },
+          {
+            "text": "Only one of them has dancing."
+          },
+          {
+            "text": "One is in May and the other is in June."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.e01.seed-0",
+          "feedback": {
+            "es": "While contrasta los dos festivales: uno tiene desfile y el otro, concierto; los dos tienen baile."
+          },
+          "audio": "Our festival has a parade, while the festival in the next town has a concert. Both have dancing.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f7672ffec6e2f2875a99a98e86a2b90c4c269e01e20101bfd728fd1c8eca51fd"
+      },
+      {
+        "id": "en.n4.c79.e02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «A diferencia del desfile, el concierto es gratis.»"
+        },
+        "answer": {
+          "text": "Unlike the parade, the concert is free.",
+          "tokens": [
+            "Unlike",
+            "the",
+            "parade,",
+            "the",
+            "concert",
+            "is",
+            "free."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.e02.seed-0",
+          "feedback": {
+            "es": "Unlike va al principio y se une al sustantivo the parade; después viene la idea contrastada."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:94784ea350ce7073d9d156a194c3c8b8bdfd374f90052ab5c185558d349b1534"
+      },
+      {
+        "id": "en.n4.c79.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Puedes celebrarlo cualquiera de los dos días, sábado o domingo.»"
+        },
+        "answer": {
+          "text": "either",
+          "accepted": [
+            "either"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.e03.seed-0",
+          "feedback": {
+            "es": "Either day significa «cualquiera de los dos días»."
+          },
+          "text": "You can celebrate on ___ day, Saturday or Sunday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:366b6e160199bcc93f38181fc4fb4a24c7c05fe9646bcf8704de796d2402f436"
+      },
+      {
+        "id": "en.n4.c79.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Compara dos fiestas: usa both o neither, either, unlike o while y un tag."
+        },
+        "answer": {
+          "text": "Both festivals are similar because both have a parade and traditional music. Unlike Carnival, the June festival is quiet, while Carnival is noisy. Neither custom is new, and you can see the parade on either day. Both are very popular, aren't they?",
+          "accepted": [
+            "Both festivals are similar because both have a parade and traditional music. Unlike Carnival, the June festival is quiet, while Carnival is noisy. Neither custom is new, and you can see the parade on either day. Both are very popular, aren't they?",
+            "Both festivals have a parade and traditional music, but Carnival is noisy, while the June festival is quiet. Neither festival is new, and you can go on either day. Both are very popular, aren't they?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.e04.seed-0",
+          "feedback": {
+            "es": "Una buena comparación nombra lo que comparten (both o neither), ofrece una opción con either, marca el contraste (unlike o while) y cierra con un tag."
+          },
+          "text": "Datos: el Carnaval y el festival de junio. Los dos tienen desfile y música tradicional; el Carnaval es ruidoso y el de junio, tranquilo. Ninguna costumbre es nueva y se puede ver el desfile cualquiera de los dos días. Cierra con un tag que invite a confirmar que los dos son populares.",
+          "scoring": {
+            "wordRange": [
+              30,
+              75
+            ],
+            "evidenceGroups": [
+              [
+                "both festivals",
+                "both have",
+                "both are",
+                "neither custom",
+                "neither festival"
+              ],
+              [
+                "either day",
+                "on either",
+                "either"
+              ],
+              [
+                "unlike",
+                "while"
+              ],
+              [
+                "aren't they",
+                "don't they",
+                "isn't it",
+                "aren't you"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3800bb9d1e5aaa17881e50f84526dc5d10347da78d8b4703ef779e144215f9ce"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c79.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué tienen en común las dos familias."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Everyone in both families wears a costume."
+          },
+          {
+            "text": "Nobody in the two families has a special costume."
+          },
+          {
+            "text": "Only one family has a special costume."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.r01.seed-0",
+          "feedback": {
+            "es": "Neither does... significa que la otra familia tampoco tiene disfraz especial."
+          },
+          "audio": "My family does not have a special costume, and neither does my cousin's family.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9bf32ff1199dcbc6347529abae187b7455fc6a6a85554fca2afce611ff414b5"
+      },
+      {
+        "id": "en.n4.c79.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase marca una diferencia entre las dos tradiciones?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Both customs are quiet and old."
+          },
+          {
+            "text": "Neither custom is noisy."
+          },
+          {
+            "text": "The first custom is quiet, while the second is noisy."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.r02.seed-0",
+          "feedback": {
+            "es": "While une dos ideas contrarias: una costumbre es tranquila y la otra, ruidosa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97f0cf71990a9713a337b46415e647f4d572738aeac6f57d0a11698da251f745"
+      },
+      {
+        "id": "en.n4.c79.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Las dos tradiciones son muy antiguas, ¿verdad?»"
+        },
+        "answer": {
+          "text": "aren't",
+          "accepted": [
+            "aren't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c79.r03.seed-0",
+          "feedback": {
+            "es": "Frase afirmativa con are → tag negativo aren't they."
+          },
+          "text": "Both traditions are very old, ___ they?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:76579ed4cb5ad3760fe37ddc63ec803eb5b1719a4515bafecf5970641584b565"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c79.e01": {
+      "reteach": "en.n4.class-79.t01",
+      "review": "en.n4.c79.r01"
+    },
+    "en.n4.c79.e02": {
+      "reteach": "en.n4.class-79.t02",
+      "review": "en.n4.c79.r02"
+    },
+    "en.n4.c79.e03": {
+      "reteach": "en.n4.class-79.t03",
+      "review": "en.n4.c79.r03"
+    },
+    "en.n4.c79.e04": {
+      "reteach": "en.n4.class-79.t04",
+      "review": "en.n4.c79.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

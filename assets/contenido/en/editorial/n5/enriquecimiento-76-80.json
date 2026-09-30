@@ -1,0 +1,688 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "classes": {
+    "en.n5.class-76": {
+      "explicacion": {
+        "titulo": "Hecho, opinión o afirmación atribuida",
+        "texto": "En una noticia no todo pesa igual. Un hecho (fact) se puede comprobar: fechas, cifras, sucesos. Una opinión (opinion) es un juicio: terrible, the best, should. Una afirmación atribuida (claim) es algo que dice alguien y que la noticia no comprueba. El verbo de postura te da la pista: claim e insist muestran distancia (nadie lo ha probado); argue introduce una idea defendida con razones; point out señala algo que se puede ver. According to + fuente atribuye sin asegurar que sea verdad."
+      },
+      "patron": {
+        "texto": "Fuente + verbo de postura + that + idea:",
+        "formula": [
+          {
+            "texto": "The spokesperson",
+            "nota": "fuente: quién lo dice"
+          },
+          {
+            "texto": "claims / argues / points out",
+            "nota": "verbo de postura: marca la distancia"
+          },
+          {
+            "texto": "that traffic fell.",
+            "nota": "that + lo que dice esa fuente"
+          },
+          {
+            "texto": "According to the council,",
+            "nota": "otra forma de atribuir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According the council, 300 people voted.",
+          "correcto": "According to the council, 300 people voted.",
+          "explicacion": "Según se dice according to: sin to la frase es incorrecta. Después va la fuente, no un verbo."
+        },
+        {
+          "incorrecto": "The mayor insists in that the plan is safe.",
+          "correcto": "The mayor insists that the plan is safe.",
+          "explicacion": "Insist lleva that directamente. Aunque en español se dice «insiste en que», en inglés no se añade in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo leen una noticia sobre unas reglas nuevas y comentan cada frase.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The story says the council closed the road on 3 March.",
+            "traduccion": "La noticia dice que el ayuntamiento cerró la calle el 3 de marzo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a fact. You can check the date.",
+            "traduccion": "Eso es un hecho. Puedes comprobar la fecha."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And this line: «The new rules are terrible»?",
+            "traduccion": "¿Y esta línea: «Las nuevas reglas son terribles»?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is an opinion. But a spokesperson claims that traffic fell by 20 percent; we need proof.",
+            "traduccion": "Eso es una opinión. Pero un portavoz afirma que el tráfico bajó un 20 por ciento; necesitamos pruebas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿qué tipo de enunciado es el dato del portavoz sobre el tráfico?",
+          "opciones": [
+            {
+              "es": "Una afirmación que aún necesita pruebas."
+            },
+            {
+              "es": "Un hecho que ya está comprobado."
+            },
+            {
+              "es": "Una opinión de Ana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «a spokesperson claims… we need proof». Claim marca una afirmación atribuida; los hechos son los que se pueden comprobar, como la fecha."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "¿Se puede comprobar?",
+          "Señales"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "Sí: fecha, cifra, suceso"
+            },
+            {
+              "texto": "It is a fact that…, closed, voted"
+            }
+          ],
+          [
+            {
+              "texto": "Opinión"
+            },
+            {
+              "texto": "No: es un juicio"
+            },
+            {
+              "texto": "terrible, the best, should, I think"
+            }
+          ],
+          [
+            {
+              "texto": "Afirmación atribuida"
+            },
+            {
+              "texto": "Todavía no"
+            },
+            {
+              "texto": "claims, insists, argue, according to"
+            }
+          ],
+          [
+            {
+              "texto": "Dato señalado"
+            },
+            {
+              "texto": "Sí: se puede ver"
+            },
+            {
+              "texto": "point out"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-77": {
+      "explicacion": {
+        "titulo": "Conectores formales y matizadores B2",
+        "texto": "Los conectores formales ordenan un resumen. Nevertheless (aun así) une dos ideas que chocan; consequently (por consiguiente) marca un resultado; whereas (mientras que) contrasta dos cosas en la misma frase; moreover (además) suma un argumento. Nevertheless, consequently y moreover van tras punto o punto y coma y llevan coma detrás. Los matizadores suavizan lo que afirmas: arguably (podría decirse que), tend to + verbo base (suelen) e it would seem that… (parece ser que). Así no presentas como un hecho lo que es una interpretación."
+      },
+      "patron": {
+        "texto": "Hecho + conector formal + matiz:",
+        "formula": [
+          {
+            "texto": "Prices rose;",
+            "nota": "hecho"
+          },
+          {
+            "texto": "consequently,",
+            "nota": "conector: resultado (coma detrás)"
+          },
+          {
+            "texto": "tickets tend to cost more.",
+            "nota": "tend to + verbo base: suelen"
+          },
+          {
+            "texto": "Arguably, this is unfair.",
+            "nota": "arguably: matiza una opinión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The plan is cheap, nevertheless it is slow.",
+          "correcto": "The plan is cheap; nevertheless, it is slow.",
+          "explicacion": "Nevertheless no une dos frases con una coma sola: necesita punto o punto y coma delante y una coma detrás."
+        },
+        {
+          "incorrecto": "Students tend to sleeping late.",
+          "correcto": "Students tend to sleep late.",
+          "explicacion": "Tend to va seguido del verbo en forma base: sleep, no sleeping."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos resumen una noticia sobre el horario escolar.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "The later start was popular; nevertheless, some parents complained.",
+            "traduccion": "El horario más tardío fue popular; aun así, algunos padres se quejaron."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Why?",
+            "traduccion": "¿Por qué?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The buses were late, and consequently some students missed first class.",
+            "traduccion": "Los autobuses llegaron tarde y, por consiguiente, algunos estudiantes perdieron la primera clase."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So is the later start a good plan?",
+            "traduccion": "¿Entonces el horario más tardío es un buen plan?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Arguably, yes. It would seem that students tend to sleep more.",
+            "traduccion": "Podría decirse que sí. Parece ser que los estudiantes suelen dormir más."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿por qué algunos estudiantes perdieron la primera clase?",
+          "opciones": [
+            {
+              "es": "Los autobuses llegaron tarde."
+            },
+            {
+              "es": "Los padres se quejaron."
+            },
+            {
+              "es": "El horario empezó antes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «The buses were late, and consequently some students missed first class». Consequently une la causa (autobuses tarde) con el resultado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Conector o matizador",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Contraste que sorprende"
+            },
+            {
+              "texto": "nevertheless"
+            },
+            {
+              "texto": "It was late; nevertheless, it arrived."
+            }
+          ],
+          [
+            {
+              "texto": "Resultado"
+            },
+            {
+              "texto": "consequently"
+            },
+            {
+              "texto": "Prices rose; consequently, sales fell."
+            }
+          ],
+          [
+            {
+              "texto": "Contraste en una frase"
+            },
+            {
+              "texto": "whereas"
+            },
+            {
+              "texto": "Some like it, whereas others don't."
+            }
+          ],
+          [
+            {
+              "texto": "Matiz"
+            },
+            {
+              "texto": "arguably, tend to, it would seem"
+            },
+            {
+              "texto": "Arguably, it is the best."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-78": {
+      "explicacion": {
+        "titulo": "Hechos comunes, enfoque y palabras cargadas",
+        "texto": "Dos noticias sobre el mismo hecho pueden sonar muy distinto. Para compararlas separa tres cosas. Hechos comunes: quién, qué y cuándo, que aparecen en las dos versiones. Enfoque (focus): qué pone en primer plano cada una, por ejemplo el enfado de las familias o el motivo del cierre. Palabras cargadas (loaded words): takes away, angry, wastes… llevan una opinión dentro de un texto que parece informativo. Fíjate también en lo que una versión menciona y la otra no. La versión neutral usa verbos como closes o says."
+      },
+      "patron": {
+        "texto": "Comparar dos versiones:",
+        "formula": [
+          {
+            "texto": "Both versions say that…",
+            "nota": "hecho común"
+          },
+          {
+            "texto": "version A emphasises…",
+            "nota": "enfoque de la versión A"
+          },
+          {
+            "texto": "whereas version B mentions…",
+            "nota": "enfoque de la versión B"
+          },
+          {
+            "texto": "«Takes away» is a loaded word.",
+            "nota": "palabra cargada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Both versions says that the park closes on Sundays.",
+          "correcto": "Both versions say that the park closes on Sundays.",
+          "explicacion": "Both versions es plural: el verbo no lleva -s."
+        },
+        {
+          "incorrecto": "The text emphasises on the anger of the families.",
+          "correcto": "The text emphasises the anger of the families.",
+          "explicacion": "En español se dice «hace hincapié en»; en inglés emphasise va directamente con su objeto, sin on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comparan dos titulares sobre el cierre de un parque.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Version A says «Council takes away park».",
+            "traduccion": "La versión A dice «El ayuntamiento quita el parque»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That sounds angry. Version B says «Council closes park on Sundays».",
+            "traduccion": "Suena enfadado. La versión B dice «El ayuntamiento cierra el parque los domingos»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Both give the same fact: the park closes on Sundays.",
+            "traduccion": "Ambas dan el mismo hecho: el parque cierra los domingos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, but A focuses on the families, and B mentions the new grass.",
+            "traduccion": "Sí, pero A se centra en las familias y B menciona la hierba nueva."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tienen en común las dos versiones?",
+          "opciones": [
+            {
+              "es": "El hecho de que el parque cierra los domingos."
+            },
+            {
+              "es": "Que destacan el enfado de las familias."
+            },
+            {
+              "es": "Que mencionan la hierba nueva."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Both give the same fact: the park closes on Sundays». El enfado de las familias solo lo destaca A y la hierba nueva solo la menciona B."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué busco",
+          "Pregunta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hechos comunes"
+            },
+            {
+              "texto": "¿qué dicen las dos?"
+            },
+            {
+              "texto": "The park closes on Sundays."
+            }
+          ],
+          [
+            {
+              "texto": "Enfoque"
+            },
+            {
+              "texto": "¿qué destaca cada una?"
+            },
+            {
+              "texto": "anger of the families / new grass"
+            }
+          ],
+          [
+            {
+              "texto": "Palabras cargadas"
+            },
+            {
+              "texto": "¿qué palabra lleva opinión?"
+            },
+            {
+              "texto": "takes away, angry, wastes"
+            }
+          ],
+          [
+            {
+              "texto": "Omisión"
+            },
+            {
+              "texto": "¿qué falta en una?"
+            },
+            {
+              "texto": "the reason for the closure"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-79": {
+      "explicacion": {
+        "titulo": "Un resumen equilibrado en cinco pasos",
+        "texto": "Un resumen equilibrado sigue un orden: 1) qué pasó, con palabras neutrales; 2) la primera fuente (According to the council…); 3) la segunda fuente con contraste (Residents claim that…, whereas…); 4) una consecuencia (Consequently, …); 5) un matiz final (Arguably, …, it would seem that…, tend to). Nombra siempre quién dice cada cosa, evita palabras cargadas (foolish, terrible) y usa claim cuando nadie lo ha comprobado. Así el lector ve los dos lados y tu opinión no se presenta como un hecho."
+      },
+      "patron": {
+        "texto": "Hecho + fuente A + fuente B + consecuencia + matiz:",
+        "formula": [
+          {
+            "texto": "The council closed the road.",
+            "nota": "hecho neutral"
+          },
+          {
+            "texto": "According to the council, … whereas residents claim…",
+            "nota": "dos fuentes y contraste"
+          },
+          {
+            "texto": "Consequently, …",
+            "nota": "consecuencia"
+          },
+          {
+            "texto": "Arguably, …",
+            "nota": "matiz final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Residents claim that the repairs are slow. Whereas the council says they are on time.",
+          "correcto": "Residents claim that the repairs are slow, whereas the council says they are on time.",
+          "explicacion": "Whereas no puede empezar una frase sola: une las dos partes con una coma."
+        },
+        {
+          "incorrecto": "According to residents claim that the repairs are slow.",
+          "correcto": "According to residents, the repairs are slow.",
+          "explicacion": "According to ya atribuye la información: después va la fuente y una coma, no otro verbo de postura."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le lee a Ana su resumen de una noticia sobre unas obras.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Here is my summary. According to the council, the road is closed for repairs.",
+            "traduccion": "Este es mi resumen. Según el ayuntamiento, la calle está cerrada por obras."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And what do the residents say?",
+            "traduccion": "¿Y qué dicen los vecinos?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Residents claim that the repairs are slow, whereas the council says they are on time.",
+            "traduccion": "Los vecinos afirman que las obras son lentas, mientras que el ayuntamiento dice que van a tiempo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Do you show an opinion?",
+            "traduccion": "Bien. ¿Muestras una opinión?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Only a careful one: arguably, the council should warn people earlier.",
+            "traduccion": "Solo una prudente: podría decirse que el ayuntamiento debería avisar antes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién dice que las obras van a tiempo?",
+          "opciones": [
+            {
+              "es": "El ayuntamiento."
+            },
+            {
+              "es": "Los vecinos."
+            },
+            {
+              "es": "Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «the council says they are on time». Los vecinos afirman lo contrario y Leo solo da una opinión prudente al final."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué haces",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "Cuentas el hecho con palabras neutrales"
+            },
+            {
+              "texto": "The council closed the road."
+            }
+          ],
+          [
+            {
+              "texto": "2"
+            },
+            {
+              "texto": "Nombras la primera fuente"
+            },
+            {
+              "texto": "According to the council, …"
+            }
+          ],
+          [
+            {
+              "texto": "3"
+            },
+            {
+              "texto": "Nombras la segunda fuente y contrastas"
+            },
+            {
+              "texto": "Residents claim that…, whereas…"
+            }
+          ],
+          [
+            {
+              "texto": "4"
+            },
+            {
+              "texto": "Das una consecuencia"
+            },
+            {
+              "texto": "Consequently, …"
+            }
+          ],
+          [
+            {
+              "texto": "5"
+            },
+            {
+              "texto": "Matizas al final"
+            },
+            {
+              "texto": "Arguably, … / It would seem that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-80": {
+      "explicacion": {
+        "titulo": "Valorar la cobertura: evidencia, concesión y matiz",
+        "texto": "Valorar una cobertura no es decir «es buena» o «es mala»: es dar una opinión suave con una prueba. Abre con I would say… y un adjetivo moderado (fairly balanced, rather one-sided). Apoya tu idea con because y un dato: it gave both sides. Si el otro tiene un buen argumento, concédelo con You have a point o That criticism is valid, y vuelve a lo tuyo con That said. Suaviza la crítica con to some extent o rather y cierra con On balance. Recuerda: I agree that…, nunca «I am agree»."
+      },
+      "patron": {
+        "texto": "Opinión suave + evidencia + concesión + conclusión:",
+        "formula": [
+          {
+            "texto": "I would say the coverage was fairly balanced,",
+            "nota": "opinión suavizada"
+          },
+          {
+            "texto": "because it gave both sides.",
+            "nota": "evidencia"
+          },
+          {
+            "texto": "You have a point;",
+            "nota": "concesión al otro"
+          },
+          {
+            "texto": "on balance, it was fair.",
+            "nota": "conclusión tras pesar todo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree that the coverage was biased.",
+          "correcto": "I agree that the coverage was biased.",
+          "explicacion": "En español se dice «estoy de acuerdo», pero en inglés agree es un verbo: I agree, sin be."
+        },
+        {
+          "incorrecto": "You have reason: that criticism is valid.",
+          "correcto": "You have a point: that criticism is valid.",
+          "explicacion": "«Tienes razón» no se traduce literalmente. Se dice You have a point o You are right."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos valoran cómo contó la televisión local el cierre de una piscina.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I would say the coverage was fairly balanced.",
+            "traduccion": "Yo diría que la cobertura fue bastante equilibrada."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Really? The headline was rather loaded.",
+            "traduccion": "¿De verdad? El titular estaba más bien cargado."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "You have a point. That said, it gave both sides.",
+            "traduccion": "Tienes razón. Dicho esto, dio los dos lados."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "On balance, then, it was fair to some extent.",
+            "traduccion": "En conjunto, entonces, fue justa hasta cierto punto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concede Ana a Carlos?",
+          "opciones": [
+            {
+              "es": "Que el titular estaba algo cargado."
+            },
+            {
+              "es": "Que la cobertura fue totalmente parcial."
+            },
+            {
+              "es": "Que solo se dio un lado de la historia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana responde «You have a point» al comentario sobre el titular cargado, y después defiende que dio los dos lados. No concede que fuera totalmente parcial."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quiero…",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Suavizar mi opinión"
+            },
+            {
+              "texto": "I would say… / fairly, rather"
+            }
+          ],
+          [
+            {
+              "texto": "Dar evidencia"
+            },
+            {
+              "texto": "because it gave both sides"
+            }
+          ],
+          [
+            {
+              "texto": "Conceder un punto"
+            },
+            {
+              "texto": "You have a point. / That criticism is valid."
+            }
+          ],
+          [
+            {
+              "texto": "Matizar y concluir"
+            },
+            {
+              "texto": "That said, … / to some extent / On balance, …"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

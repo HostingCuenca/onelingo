@@ -1,0 +1,777 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-01",
+  "title": {
+    "en": "Result or activity?",
+    "es": "¿Resultado o actividad?"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer si una frase destaca un resultado terminado o una actividad que dura, a partir de pistas visibles."
+    ]
+  },
+  "concepts": [
+    "n5-changing-lives-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-100"
+  ],
+  "usesVocabulary": [
+    "kitchen",
+    "exhausted",
+    "chapters",
+    "wet",
+    "still",
+    "recently",
+    "already",
+    "cake"
+  ],
+  "usesPatterns": [
+    "n5-changing-lives-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "kitchen",
+      "es": "cocina"
+    },
+    {
+      "en": "exhausted",
+      "es": "agotado"
+    },
+    {
+      "en": "chapters",
+      "es": "capítulos"
+    },
+    {
+      "en": "wet",
+      "es": "mojado"
+    },
+    {
+      "en": "still",
+      "es": "todavía"
+    },
+    {
+      "en": "recently",
+      "es": "recientemente"
+    },
+    {
+      "en": "already",
+      "es": "ya"
+    },
+    {
+      "en": "cake",
+      "es": "pastel"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-01.t01",
+      "en": "I've painted the kitchen, so now it looks new.",
+      "es": "Ya he pintado la cocina, así que ahora parece nueva.",
+      "explanationEs": "Have + participio destaca el resultado: el trabajo está hecho y se ve hoy.",
+      "segments": [
+        "I've painted the kitchen, so",
+        "now it looks new."
+      ],
+      "audioText": "I've painted the kitchen, so now it looks new.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-1"
+    },
+    {
+      "id": "en.n5.class-01.t02",
+      "en": "I've been painting the kitchen all morning, and I'm exhausted.",
+      "es": "Llevo toda la mañana pintando la cocina y estoy agotado.",
+      "explanationEs": "Have been + -ing destaca la actividad que ha durado y su efecto: el cansancio.",
+      "segments": [
+        "I've been painting the kitchen",
+        "all morning, and I'm exhausted."
+      ],
+      "audioText": "I've been painting the kitchen all morning, and I'm exhausted.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-1"
+    },
+    {
+      "id": "en.n5.class-01.t03",
+      "en": "Leo has read three chapters of his book tonight.",
+      "es": "Leo ha leído tres capítulos de su libro esta noche.",
+      "explanationEs": "Si cuentas cantidades (three chapters) usas el simple: cuentas resultados.",
+      "segments": [
+        "Leo has read three chapters",
+        "of his book tonight."
+      ],
+      "audioText": "Leo has read three chapters of his book tonight.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-1"
+    },
+    {
+      "id": "en.n5.class-01.t04",
+      "en": "Look! The paint is still wet. Somebody has been painting here.",
+      "es": "¡Mira! La pintura sigue mojada. Alguien ha estado pintando aquí.",
+      "explanationEs": "Una pista visible (pintura mojada) indica una actividad reciente, aunque no veas quién.",
+      "segments": [
+        "Look! The paint is still wet.",
+        "Somebody has been painting here."
+      ],
+      "audioText": "Look! The paint is still wet. Somebody has been painting here.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-1"
+    },
+    {
+      "id": "en.n5.class-01.t05",
+      "en": "Ana has been learning Italian recently, and she has learned fifty words.",
+      "es": "Ana ha estado aprendiendo italiano últimamente y ha aprendido cincuenta palabras.",
+      "explanationEs": "La actividad (has been learning) y el resultado contado (fifty words) pueden aparecer juntos.",
+      "segments": [
+        "Ana has been learning Italian recently,",
+        "and she has learned fifty words."
+      ],
+      "audioText": "Ana has been learning Italian recently, and she has learned fifty words.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c01.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según la escena, ¿qué frase destaca el resultado del trabajo?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I've been painting the kitchen walls."
+          },
+          {
+            "text": "I've painted the kitchen walls."
+          },
+          {
+            "text": "I was painting the kitchen walls."
+          }
+        ],
+        "teaches": [
+          "n5-changing-lives-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.pg01.seed-0",
+          "feedback": {
+            "es": "La escena dice que el trabajo está terminado y se ve el efecto: eso es resultado, con have + participio."
+          },
+          "hint": {
+            "es": "Fíjate en si el trabajo sigue en marcha o ya acabó, y en qué se ve ahora."
+          },
+          "text": "Scene: The kitchen walls are bright yellow now. The job is finished, and the floor is clean."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:903f3eb1c0b7a96d81fed2ea67882bb156091933444d5e46b35e1d9ccac64b2f"
+      },
+      {
+        "id": "en.n5.c01.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según la escena, ¿qué frase describe lo que Mia ha estado haciendo?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Mia has painted three walls."
+          },
+          {
+            "text": "Mia painted the wall last year."
+          },
+          {
+            "text": "Mia has been painting the wall."
+          }
+        ],
+        "teaches": [
+          "n5-changing-lives-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.pg02.seed-0",
+          "feedback": {
+            "es": "Las manos con pintura y la pared todavía mojada son pistas de una actividad reciente: has been painting."
+          },
+          "hint": {
+            "es": "Busca las huellas que deja una actividad: manos sucias, pintura que aún no se seca."
+          },
+          "text": "Scene: Mia has paint on her hands and on her face. The wall behind her is still wet."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:15c3371fb15bb4b78201eed6728720cce164b28b4d80123ef3fa460f1cac4ffd"
+      },
+      {
+        "id": "en.n5.c01.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ana lleva dos horas esperando a Leo.»"
+        },
+        "answer": {
+          "text": "been",
+          "accepted": [
+            "been"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-changing-lives-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.pg03.seed-0",
+          "feedback": {
+            "es": "Una actividad que ha durado dos horas pide has been + -ing; sin been falta el auxiliar."
+          },
+          "hint": {
+            "es": "Es una actividad que dura: entre has y waiting falta una palabra."
+          },
+          "text": "Ana has ___ waiting for Leo for two hours."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c269f8b67914d89dc81f9d6579de0b708ac7dc16e1998804cbde55a049a54ade"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c01.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Ella lleva toda la tarde cocinando.»"
+        },
+        "answer": {
+          "text": "She has been cooking all afternoon",
+          "tokens": [
+            "She",
+            "has",
+            "been",
+            "cooking",
+            "all",
+            "afternoon"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.p01.seed-0",
+          "feedback": {
+            "es": "Has been cooking muestra una actividad larga; all afternoon marca cuánto ha durado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:86ea7d466ff13310f2f507dd90013c875072ccf8bb5d6b4cfb30981d0d907bad"
+      },
+      {
+        "id": "en.n5.c01.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige por qué Sara está muy cansada."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She did some exercise a moment ago."
+          },
+          {
+            "text": "She slept badly last night."
+          },
+          {
+            "text": "She finished her work late."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.p02.seed-0",
+          "feedback": {
+            "es": "El audio dice que Sara ha estado corriendo: la actividad reciente explica el cansancio. El sueño y el trabajo no se mencionan."
+          },
+          "audio": "Sara has been running, so she is very tired.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ca26ba6d274c123467a0c64edcb36d7c9aaae81e77469381843a3dab57f699af"
+      },
+      {
+        "id": "en.n5.c01.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase sobre la limpieza con lo que destaca."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I've cleaned the house.",
+              {
+                "es": "La casa ya está limpia."
+              }
+            ],
+            [
+              "I've been cleaning the house.",
+              {
+                "es": "Llevo un rato limpiando."
+              }
+            ],
+            [
+              "I've cleaned four rooms.",
+              {
+                "es": "Cuento cuántas habitaciones hice."
+              }
+            ],
+            [
+              "I've been cleaning since ten.",
+              {
+                "es": "Digo desde cuándo dura la actividad."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.p03.seed-0",
+          "feedback": {
+            "es": "El simple da resultado o cantidad; el continuo da la actividad y su duración."
+          },
+          "pairs": [
+            [
+              "I've cleaned the house.",
+              {
+                "es": "La casa ya está limpia."
+              }
+            ],
+            [
+              "I've been cleaning the house.",
+              {
+                "es": "Llevo un rato limpiando."
+              }
+            ],
+            [
+              "I've cleaned four rooms.",
+              {
+                "es": "Cuento cuántas habitaciones hice."
+              }
+            ],
+            [
+              "I've been cleaning since ten.",
+              {
+                "es": "Digo desde cuándo dura la actividad."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:44b160bb6755538d42469b04229a55cc07bd6670c8eeb89077ac4d05fa0f37ce"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c01.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según la nota, ¿qué frase destaca lo que Ana ha logrado?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Ana has been baking for hours."
+          },
+          {
+            "text": "Ana has baked a cake."
+          },
+          {
+            "text": "Ana was baking a cake."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.e01.seed-0",
+          "feedback": {
+            "es": "La nota muestra un pastel terminado que todos comen: el foco es el resultado, con has baked."
+          },
+          "text": "Note on the fridge from Ana: The cake is on the table. It looks good, and all the friends are eating it."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0578718ac2fbbf6a4f2819bf5ad92ecd33a21c30c33f68d474158738e3c3f706"
+      },
+      {
+        "id": "en.n5.c01.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué ha hecho Tom esta mañana."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He started one long message."
+          },
+          {
+            "text": "He read emails all night."
+          },
+          {
+            "text": "He finished four messages."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.e02.seed-0",
+          "feedback": {
+            "es": "Four emails es una cantidad: Tom cuenta cuánto ha terminado. No habla de empezar ni de leer."
+          },
+          "audio": "Tom has written four emails this morning.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:eb902cc6ec31155936cbee85e85a75899c960aa62ee4901078c0c311a63306ab"
+      },
+      {
+        "id": "en.n5.c01.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estoy agotado: llevo todo el día trabajando.»"
+        },
+        "answer": {
+          "text": "working",
+          "accepted": [
+            "working"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.e03.seed-0",
+          "feedback": {
+            "es": "Llevo todo el día trabajando destaca una actividad larga: been + verbo con -ing."
+          },
+          "text": "I'm exhausted. I've been ___ all day."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:02402557aa1fec2872fdd9bfa011820f7be32ef0b2b6811514ca7bbec4e19bda"
+      },
+      {
+        "id": "en.n5.c01.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mia ya ha leído el libro entero.»"
+        },
+        "answer": {
+          "text": "already",
+          "accepted": [
+            "already"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.e04.seed-0",
+          "feedback": {
+            "es": "Already («ya») va entre has y el participio y refuerza que el resultado está completo; no hay been porque no es una actividad."
+          },
+          "text": "Mia has ___ read the whole book."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f1c2d6a3104bff5f28297d5bf3c302c8b2769fc7d51142001eeed05c03048211"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c01.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase encaja con la escena de Tom?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Tom has been planting trees."
+          },
+          {
+            "text": "Tom has planted all the trees."
+          },
+          {
+            "text": "Tom planted trees ten years ago."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.r01.seed-0",
+          "feedback": {
+            "es": "Tom sigue en el jardín, cansado y con las manos sucias: es una actividad en curso, has been planting."
+          },
+          "text": "Scene: Tom has dirty hands and is tired. He is still in the garden, and there are plants on the table."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:45bbccf34ad65769811b2e4c65b6c26e5d28df20bbe6eea4f03311c59518bd19"
+      },
+      {
+        "id": "en.n5.c01.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo está la habitación ahora."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It is still being cleaned."
+          },
+          {
+            "text": "It is clean and light."
+          },
+          {
+            "text": "It is dark and dirty."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.r02.seed-0",
+          "feedback": {
+            "es": "I've cleaned indica un resultado terminado; el efecto hoy es una habitación luminosa."
+          },
+          "audio": "I've cleaned the windows, so the room is bright now.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7053f4b65e53217ff40e49da2760a71d20c8f999d41b99d6ffe75effc82ea488"
+      },
+      {
+        "id": "en.n5.c01.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mia ha escrito cinco páginas del informe.»"
+        },
+        "answer": {
+          "text": "written",
+          "accepted": [
+            "written"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c01.r03.seed-0",
+          "feedback": {
+            "es": "Five pages cuenta un resultado: has + participio de write, que es written."
+          },
+          "text": "Mia has ___ five pages of the report."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d5d26bbc66a0b6c2119d1ad85b98d70d9fe263873c053337526464e1a348ce62"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c01.e01": {
+      "reteach": "en.n5.class-01.t01",
+      "review": "en.n5.c01.r01"
+    },
+    "en.n5.c01.e02": {
+      "reteach": "en.n5.class-01.t02",
+      "review": "en.n5.c01.r02"
+    },
+    "en.n5.c01.e03": {
+      "reteach": "en.n5.class-01.t03",
+      "review": "en.n5.c01.r03"
+    },
+    "en.n5.c01.e04": {
+      "reteach": "en.n5.class-01.t04",
+      "review": "en.n5.c01.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

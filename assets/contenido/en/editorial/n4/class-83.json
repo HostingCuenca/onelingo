@@ -1,0 +1,797 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-83",
+  "title": {
+    "en": "Headlines and hedges",
+    "es": "Titulares y matices"
+  },
+  "objectives": {
+    "es": [
+      "Deducir en una noticia oída qué parte es un hecho y cuál es solo la versión de alguien, por sus verbos y adverbios."
+    ]
+  },
+  "concepts": [
+    "n4-news-and-certainty-3"
+  ],
+  "skills": [
+    "escucha",
+    "lectura",
+    "vocabulario"
+  ],
+  "prerequisites": [
+    "en.n4.class-82"
+  ],
+  "usesVocabulary": [
+    "fact",
+    "claims",
+    "denies",
+    "evidence",
+    "allegedly",
+    "unclear",
+    "version",
+    "confirmed"
+  ],
+  "usesPatterns": [
+    "n4-news-and-certainty-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "fact",
+      "es": "hecho"
+    },
+    {
+      "en": "claims",
+      "es": "afirma"
+    },
+    {
+      "en": "denies",
+      "es": "niega"
+    },
+    {
+      "en": "evidence",
+      "es": "pruebas"
+    },
+    {
+      "en": "allegedly",
+      "es": "supuestamente"
+    },
+    {
+      "en": "unclear",
+      "es": "poco claro"
+    },
+    {
+      "en": "version",
+      "es": "versión"
+    },
+    {
+      "en": "confirmed",
+      "es": "confirmado"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-83.t01",
+      "en": "The date is a fact: the council has confirmed it.",
+      "es": "La fecha es un hecho: el consejo la ha confirmado.",
+      "explanationEs": "Fact = hecho. Se apoya en una confirmación de una fuente fiable.",
+      "segments": [
+        "The date is a fact:",
+        "the council has confirmed it."
+      ],
+      "audioText": "The date is a fact: the council has confirmed it.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-3"
+    },
+    {
+      "id": "en.n4.class-83.t02",
+      "en": "The company claims that the mistake was small, but the workers disagree.",
+      "es": "La empresa afirma que el error fue pequeño, pero los trabajadores no están de acuerdo.",
+      "explanationEs": "Claims presenta la versión de una parte. Quien informa no la da por cierta.",
+      "segments": [
+        "The company claims that the mistake",
+        "was small, but the workers disagree."
+      ],
+      "audioText": "The company claims that the mistake was small, but the workers disagree.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-3"
+    },
+    {
+      "id": "en.n4.class-83.t03",
+      "en": "The club denies the story, and there is no evidence yet.",
+      "es": "El club niega la historia y todavía no hay pruebas.",
+      "explanationEs": "Denies = niega. Evidence es incontable: no lleva -s ni a.",
+      "segments": [
+        "The club denies the story, and",
+        "there is no evidence yet."
+      ],
+      "audioText": "The club denies the story, and there is no evidence yet.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-3"
+    },
+    {
+      "id": "en.n4.class-83.t04",
+      "en": "Allegedly, the shop owner knew about the problem for weeks.",
+      "es": "Supuestamente, el dueño de la tienda sabía del problema desde hacía semanas.",
+      "explanationEs": "Allegedly = supuestamente: alguien lo afirma, pero sin pruebas todavía.",
+      "segments": [
+        "Allegedly, the shop owner knew",
+        "about the problem for weeks."
+      ],
+      "audioText": "Allegedly, the shop owner knew about the problem for weeks.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-3"
+    },
+    {
+      "id": "en.n4.class-83.t05",
+      "en": "There are two versions of the accident, and the facts are still unclear.",
+      "es": "Hay dos versiones del accidente y los hechos siguen sin estar claros.",
+      "explanationEs": "Unclear = poco claro. Con dos versiones opuestas, ninguna es un hecho todavía.",
+      "segments": [
+        "There are two versions of the accident,",
+        "and the facts are still unclear."
+      ],
+      "audioText": "There are two versions of the accident, and the facts are still unclear.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c83.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee las dos frases: ¿cuál presenta un hecho?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The club denies the story."
+          },
+          {
+            "text": "The story is a rumour."
+          },
+          {
+            "text": "The council confirmed the date."
+          }
+        ],
+        "teaches": [
+          "n4-news-and-certainty-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.pg01.seed-0",
+          "feedback": {
+            "es": "El consejo lo confirma: es un hecho. El club solo niega la historia, y negar es dar una versión."
+          },
+          "hint": {
+            "es": "Un hecho lo respalda una fuente oficial, no una parte interesada."
+          },
+          "text": "The council confirmed the date. The club denies the story."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5c5658924f9d20bd35c20ab68fdb673d86b838e75b6fe083ca1180a04c984e0f"
+      },
+      {
+        "id": "en.n4.c83.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El conductor afirma que vio una luz roja.»"
+        },
+        "answer": {
+          "text": "claims",
+          "accepted": [
+            "claims",
+            "says"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-news-and-certainty-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.pg02.seed-0",
+          "feedback": {
+            "es": "Claims presenta la versión del conductor: él lo dice, pero no está comprobado."
+          },
+          "hint": {
+            "es": "Es el verbo que presenta la versión de una persona, no un hecho."
+          },
+          "text": "The driver ___ that he saw a red light."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4a0909e81b4da9616c31cdb58d7d1b504577bc3a38c0c1e8c43f9150fe3d1995"
+      },
+      {
+        "id": "en.n4.c83.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase deja la noticia abierta, sin cerrarla como un hecho?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "There is no evidence yet."
+          },
+          {
+            "text": "The mayor announced the date."
+          },
+          {
+            "text": "The council has confirmed it."
+          }
+        ],
+        "teaches": [
+          "n4-news-and-certainty-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.pg03.seed-0",
+          "feedback": {
+            "es": "No hay pruebas todavía: la noticia sigue abierta. Las otras dos frases dan la información por cerrada."
+          },
+          "hint": {
+            "es": "Busca la frase que habla de lo que falta por saber, no de lo que ya se ha confirmado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5aa75c07116c7610246ceacb45a02ab3b61500f754bcfcb23935f9333ba1f093"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c83.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la parte que es un hecho."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A bus crossed the bridge."
+          },
+          {
+            "text": "People can use the bridge."
+          },
+          {
+            "text": "The bridge is closed today."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.p01.seed-0",
+          "feedback": {
+            "es": "La confirmación del alcalde es el hecho: el puente está en uso. Lo del autobús va con reportedly."
+          },
+          "audio": "The mayor confirmed that the bridge is open. Reportedly, a bus crossed it this morning.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:30dcab82e5530e16400fb047a6a6079102b76486b8f7c1b3981fdb8b063b432f"
+      },
+      {
+        "id": "en.n4.c83.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién afirma que el jugador se va."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The club."
+          },
+          {
+            "text": "The player."
+          },
+          {
+            "text": "A reporter."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.p02.seed-0",
+          "feedback": {
+            "es": "El club lo niega y es el reportero quien lo afirma con claims: esa es su versión."
+          },
+          "audio": "The club denies the story, but a reporter claims the player is leaving.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9571412d5331e34608e2e8156ded89b76c03ad03560538940aa023fde804e06"
+      },
+      {
+        "id": "en.n4.c83.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada señal de la noticia con lo que indica."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "The council confirmed it.",
+              {
+                "es": "hecho"
+              }
+            ],
+            [
+              "The club denies it.",
+              {
+                "es": "versión opuesta"
+              }
+            ],
+            [
+              "Allegedly, he knew.",
+              {
+                "es": "dicho sin pruebas"
+              }
+            ],
+            [
+              "It is unclear.",
+              {
+                "es": "no hay respuesta clara"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.p03.seed-0",
+          "feedback": {
+            "es": "Cada señal tiene un papel: confirmar da un hecho, negar da la versión contraria y allegedly o unclear dejan el dato abierto."
+          },
+          "pairs": [
+            [
+              "The council confirmed it.",
+              {
+                "es": "hecho"
+              }
+            ],
+            [
+              "The club denies it.",
+              {
+                "es": "versión opuesta"
+              }
+            ],
+            [
+              "Allegedly, he knew.",
+              {
+                "es": "dicho sin pruebas"
+              }
+            ],
+            [
+              "It is unclear.",
+              {
+                "es": "no hay respuesta clara"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2a82975e078c475ae4950d66f13ff3d57d089acf0548407954a0d35b3083effc"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c83.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige lo que muestra la cámara."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Only one person was there."
+          },
+          {
+            "text": "Two people used a red car."
+          },
+          {
+            "text": "The owner saw nobody."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.e01.seed-0",
+          "feedback": {
+            "es": "La cámara es una prueba: muestra a una sola persona. El dueño afirma otra cosa, y eso es solo su versión."
+          },
+          "audio": "Police say the thief used a red car. A shop owner claims he saw two people. The camera shows only one person.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f16d35ee5058b5d12bb807398a0008d594da5a87e7220a6583c089bb2eda700f"
+      },
+      {
+        "id": "en.n4.c83.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué dato es un hecho y no una versión?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "There was no leak."
+          },
+          {
+            "text": "Tests have not started."
+          },
+          {
+            "text": "The owner saw nothing."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.e02.seed-0",
+          "feedback": {
+            "es": "Que las pruebas no han empezado es un hecho del informe. El dueño afirma y los trabajadores lo contradicen: versiones."
+          },
+          "text": "The shop owner claims there was no leak. The workers say it is not true. Tests have not started."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:62867ce117e76d6ecb93b0aa796f77ab7629ab2661d8a63d7c2ef80d4495b255"
+      },
+      {
+        "id": "en.n4.c83.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El club niega la historia y dice que no hay pruebas.»"
+        },
+        "answer": {
+          "text": "denies",
+          "accepted": [
+            "denies"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.e03.seed-0",
+          "feedback": {
+            "es": "Denies es el verbo de negar: el club da su versión contraria, y las pruebas faltan."
+          },
+          "text": "The club ___ the story and says there is no evidence."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:346cc7a6ba8f4b4d6dbc4eedc7c5315d90d305776e8a8fef2036a2236094a757"
+      },
+      {
+        "id": "en.n4.c83.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la palabra que presenta esta frase como una versión sin pruebas."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Officially"
+          },
+          {
+            "text": "Clearly"
+          },
+          {
+            "text": "Allegedly"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.e04.seed-0",
+          "feedback": {
+            "es": "Allegedly significa supuestamente: señala que alguien lo afirma sin pruebas. Officially y clearly la presentarían como segura."
+          },
+          "text": "___, the driver was using a phone."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:918f58e08aa8151a72d4697575e017fed9d7eec8d0da01a708bf4a550feea213"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c83.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué no se sabe todavía."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The day the road will open."
+          },
+          {
+            "text": "Whether the road is closed."
+          },
+          {
+            "text": "Who closed the road."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.r01.seed-0",
+          "feedback": {
+            "es": "La policía cerró la carretera (hecho) pero nadie sabe cuándo abrirá: eso es lo que falta."
+          },
+          "audio": "The police closed the road this morning. However, nobody knows when it will open.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6213e9608d23d317f51c249177123eb5c66ca729f22a7d30eeba40af9c669edd"
+      },
+      {
+        "id": "en.n4.c83.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Todavía no hay pruebas, así que es solo una versión.»"
+        },
+        "answer": {
+          "text": "There is no evidence yet so it is only a version",
+          "tokens": [
+            "There",
+            "is",
+            "no",
+            "evidence",
+            "yet",
+            "so",
+            "it",
+            "is",
+            "only",
+            "a",
+            "version"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.r02.seed-0",
+          "feedback": {
+            "es": "Sin pruebas, lo que tenemos es una versión: por eso se une con so a lo que sigue."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:906ff9cb16168ae36de95bfbfdddad42a39d2029b0e5536add902c94fbbaab76"
+      },
+      {
+        "id": "en.n4.c83.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Todavía no está claro quién tiene razón; cada parte cuenta algo distinto.»"
+        },
+        "answer": {
+          "text": "unclear",
+          "accepted": [
+            "unclear"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c83.r03.seed-0",
+          "feedback": {
+            "es": "Unclear describe lo que no está claro: aquí, quién tiene razón cuando las dos partes dicen cosas distintas."
+          },
+          "text": "It is still ___ who is right, because each side tells a different story."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2a926a45b24a2cb4d2ba9b2d1a0419a955a8b1a7ff79890c55fa4c23c005dd36"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c83.e01": {
+      "reteach": "en.n4.class-83.t01",
+      "review": "en.n4.c83.r01"
+    },
+    "en.n4.c83.e02": {
+      "reteach": "en.n4.class-83.t02",
+      "review": "en.n4.c83.r02"
+    },
+    "en.n4.c83.e03": {
+      "reteach": "en.n4.class-83.t03",
+      "review": "en.n4.c83.r03"
+    },
+    "en.n4.c83.e04": {
+      "reteach": "en.n4.class-83.t04",
+      "review": "en.n4.c83.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

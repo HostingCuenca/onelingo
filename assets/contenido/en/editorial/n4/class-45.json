@@ -1,0 +1,807 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-45",
+  "title": {
+    "en": "Recommend an activity",
+    "es": "Recomendar una actividad"
+  },
+  "objectives": {
+    "es": [
+      "Recomendar un deporte o pasatiempo a un amigo, justificarlo con combinaciones naturales y responder a sus dudas."
+    ]
+  },
+  "concepts": [
+    "n4-sport-and-leisure-words-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-44"
+  ],
+  "usesVocabulary": [
+    "recommend",
+    "join",
+    "club",
+    "beginner",
+    "try",
+    "choose",
+    "enjoy",
+    "suit"
+  ],
+  "usesPatterns": [
+    "n4-sport-and-leisure-words-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "recommend",
+      "es": "recomendar"
+    },
+    {
+      "en": "join",
+      "es": "apuntarse a"
+    },
+    {
+      "en": "club",
+      "es": "club deportivo"
+    },
+    {
+      "en": "beginner",
+      "es": "principiante"
+    },
+    {
+      "en": "try",
+      "es": "probar"
+    },
+    {
+      "en": "choose",
+      "es": "elegir"
+    },
+    {
+      "en": "enjoy",
+      "es": "disfrutar"
+    },
+    {
+      "en": "suit",
+      "es": "convenir"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-45.t01",
+      "en": "I recommend swimming if you want to keep fit.",
+      "es": "Te recomiendo la natación si quieres mantenerte en forma.",
+      "explanationEs": "Recommend + verbo con -ing o sustantivo: I recommend swimming.",
+      "segments": [
+        "I recommend swimming if you",
+        "want to keep fit."
+      ],
+      "audioText": "I recommend swimming if you want to keep fit.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-5"
+    },
+    {
+      "id": "en.n4.class-45.t02",
+      "en": "You should join a club, because a club is a good way to make friends.",
+      "es": "Deberías apuntarte a un club, porque un club es una buena forma de hacer amigos.",
+      "explanationEs": "Join a club = apuntarse a un club. Make friends = hacer amigos.",
+      "segments": [
+        "You should join a club, because a club",
+        "is a good way to make friends."
+      ],
+      "audioText": "You should join a club, because a club is a good way to make friends.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-5"
+    },
+    {
+      "id": "en.n4.class-45.t03",
+      "en": "Every beginner can have fun, and you do not need to be good at it.",
+      "es": "Cualquier principiante puede divertirse y no hace falta ser bueno.",
+      "explanationEs": "Beginner = principiante. Se anima con have fun.",
+      "segments": [
+        "Every beginner can have fun, and you do",
+        "not need to be good at it."
+      ],
+      "audioText": "Every beginner can have fun, and you do not need to be good at it.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-5"
+    },
+    {
+      "id": "en.n4.class-45.t04",
+      "en": "Try yoga first; if you do not enjoy it, choose a team sport.",
+      "es": "Prueba primero el yoga; si no lo disfrutas, elige un deporte de equipo.",
+      "explanationEs": "Try = probar una actividad; choose = elegir entre varias.",
+      "segments": [
+        "Try yoga first; if you do not",
+        "enjoy it, choose a team sport."
+      ],
+      "audioText": "Try yoga first; if you do not enjoy it, choose a team sport.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-5"
+    },
+    {
+      "id": "en.n4.class-45.t05",
+      "en": "I think tennis can suit you, because you are keen on fast games.",
+      "es": "Creo que el tenis te puede convenir, porque eres aficionado a los juegos rápidos.",
+      "explanationEs": "Suit you = irte bien, convenirte.",
+      "segments": [
+        "I think tennis can suit you, because",
+        "you are keen on fast games."
+      ],
+      "audioText": "I think tennis can suit you, because you are keen on fast games.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-sport-and-leisure-words-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c45.pg01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Te recomiendo la natación si quieres mantenerte en forma.»"
+        },
+        "answer": {
+          "text": "recommend",
+          "accepted": [
+            "recommend"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.pg01.seed-0",
+          "feedback": {
+            "es": "Recomendar se dice recommend, seguido del verbo con -ing."
+          },
+          "hint": {
+            "es": "Es el verbo de la primera frase de la enseñanza."
+          },
+          "text": "I ___ swimming if you want to keep fit."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:20772939f96d3ccbf7e9b110e1198dc6f94620e646c5063b1ef31bd5e07cc32a"
+      },
+      {
+        "id": "en.n4.c45.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase natural para «Te recomiendo apuntarte a un club»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I recommend joining a club."
+          },
+          {
+            "text": "I recommend to join a club."
+          },
+          {
+            "text": "I recommend you joining to a club."
+          }
+        ],
+        "teaches": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.pg02.seed-0",
+          "feedback": {
+            "es": "Tras recommend va el verbo con -ing y join no lleva preposición."
+          },
+          "hint": {
+            "es": "Después de recommend va el verbo con -ing."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0e6e7d20d54888da50337455dbbf60ab4a4732b7cc96d10328e594655ae9d857"
+      },
+      {
+        "id": "en.n4.c45.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la frase: «Cualquier principiante puede divertirse en este club.»"
+        },
+        "answer": {
+          "text": "Every beginner can have fun in this club.",
+          "tokens": [
+            "Every",
+            "beginner",
+            "can",
+            "have",
+            "fun",
+            "in",
+            "this",
+            "club."
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.pg03.seed-0",
+          "feedback": {
+            "es": "Every beginner va al principio como sujeto y have fun es la pareja natural."
+          },
+          "hint": {
+            "es": "Empieza con Every beginner."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f75509641849bd52bd6f0e5d859f00a007615b8e9f9cb557725357d7b89c37cb"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c45.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es una buena forma de mantenerse en forma.»"
+        },
+        "answer": {
+          "text": "to",
+          "accepted": [
+            "to"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.p01.seed-0",
+          "feedback": {
+            "es": "Después de way se usa to + verbo: a good way to keep fit."
+          },
+          "text": "It is a good way ___ keep fit."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dbbe897f7a240f8e180ab2bcac90d4da539a4b3c4c29a5e7b06abe9e220d8926"
+      },
+      {
+        "id": "en.n4.c45.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Leo es principiante. ¿Qué consejo le sirve mejor?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Take part in the big race tomorrow."
+          },
+          {
+            "text": "Join a club and try one lesson first."
+          },
+          {
+            "text": "Break a record this weekend."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.p02.seed-0",
+          "feedback": {
+            "es": "A un principiante le conviene probar una clase y unirse a un club, no competir ya."
+          },
+          "text": "Leo is keen on running, but he is a beginner."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:987001fe9149dee732e2d788aa7f8e5e85c2d680586a4e862b7f3feca8853e1c"
+      },
+      {
+        "id": "en.n4.c45.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las dos frases sobre Mia y los deportes."
+        },
+        "answer": {
+          "text": "of | in",
+          "accepted": [
+            "of | in"
+          ],
+          "parts": [
+            {
+              "text": "of",
+              "accepted": [
+                "of"
+              ]
+            },
+            {
+              "text": "in",
+              "accepted": [
+                "in"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.p03.seed-0",
+          "feedback": {
+            "es": "Afraid pide of e interested pide in: recuerda la preposición de cada adjetivo."
+          },
+          "sentences": [
+            "Mia is afraid ___ team sports.",
+            "She is interested ___ swimming."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4ed8a4ccd300c9ddaf594a59a35c09be8801357a0ea40cb679b9f63e7a16ec1f"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c45.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué actividad se recomienda para Tom."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A quiet class on his own."
+          },
+          {
+            "text": "A race against the clock."
+          },
+          {
+            "text": "A place to play and meet people."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5",
+          "n4-sport-and-leisure-words-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.e01.seed-0",
+          "feedback": {
+            "es": "Se recomienda un club de tenis: Tom es bueno en tenis, le gustan los juegos de equipo y allí puede hacer amigos."
+          },
+          "audio": "Tom is good at tennis and keen on team games. I recommend a tennis club for him, because he can make friends there.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:caf8d47fcb96b181c21b5839570538b5b176b9f26aaa95728f395f3930669c63"
+      },
+      {
+        "id": "en.n4.c45.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si te gusta el agua, ve a nadar cada sábado.»"
+        },
+        "answer": {
+          "text": "go",
+          "accepted": [
+            "go"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5",
+          "n4-sport-and-leisure-words-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.e02.seed-0",
+          "feedback": {
+            "es": "Actividades como swimming se combinan con go."
+          },
+          "text": "If you like water, ___ swimming every Saturday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:076b63555b0810f7b8cb573098e46e68e5965e9853835c519a7aca55de6bbdc7"
+      },
+      {
+        "id": "en.n4.c45.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase natural para «Ana es buena nadando y está orgullosa de su equipo»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Ana is good at swimming and proud of her team."
+          },
+          {
+            "text": "Ana is good in swimming and proud with her team."
+          },
+          {
+            "text": "Ana is good at swim and proud of to her team."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5",
+          "n4-sport-and-leisure-words-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.e03.seed-0",
+          "feedback": {
+            "es": "Good at y proud of son las preposiciones correctas, seguidas de -ing o sustantivo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:069ace2f5c32c5f61bc320b4818e24375af22052b5bceae0fa081f74ceaa676a"
+      },
+      {
+        "id": "en.n4.c45.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Recomienda una actividad a un amigo principiante y responde a su duda."
+        },
+        "answer": {
+          "text": "I recommend joining a swimming club. It is a good way to keep fit, and you can make new friends there. Do not be afraid of being a beginner, because every beginner can have fun. Try one lesson first, and then choose.",
+          "accepted": [
+            "I recommend joining a swimming club. It is a good way to keep fit, and you can make new friends there. Do not be afraid of being a beginner, because every beginner can have fun. Try one lesson first, and then choose.",
+            "I recommend tennis. You are good at fast games, and you can join a club to make friends and keep fit. Do not worry about being a beginner: every beginner can have fun."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5",
+          "n4-sport-and-leisure-words-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.e04.seed-0",
+          "feedback": {
+            "es": "Una recomendación completa tiene la sugerencia (I recommend), el motivo (keep fit, make friends) y una respuesta a la duda del principiante (every beginner can have fun)."
+          },
+          "text": "Un amigo principiante quiere mantenerse en forma y hacer amigos, pero teme no ser lo bastante bueno. Recomiéndale una actividad (35 a 70 palabras), di por qué le conviene y responde a su duda.",
+          "scoring": {
+            "wordRange": [
+              30,
+              100
+            ],
+            "evidenceGroups": [
+              [
+                "I recommend",
+                "recommend",
+                "you should",
+                "why do not you",
+                "try"
+              ],
+              [
+                "keep fit",
+                "make friends",
+                "make new friends",
+                "have fun",
+                "good way"
+              ],
+              [
+                "beginner",
+                "beginners",
+                "do not need to be good",
+                "do not worry",
+                "afraid",
+                "everyone",
+                "anyone"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:052844b51358b1c9dc46bc5a18d874a50bab2dbe3b041a9d07e7280f7640882e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c45.r01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Recomienda el yoga a una amiga y di por qué."
+        },
+        "answer": {
+          "text": "I recommend yoga because it is a good way to keep fit.",
+          "accepted": [
+            "I recommend yoga because it is a good way to keep fit.",
+            "I recommend yoga because it keeps you fit.",
+            "You should try yoga because it is good to keep fit.",
+            "I recommend yoga to keep fit."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.r01.seed-0",
+          "feedback": {
+            "es": "Recommend + sustantivo, y la razón se da con because y una combinación natural: keep fit."
+          },
+          "text": "Recomienda el yoga a una amiga y explica que sirve para mantenerse en forma.",
+          "scoring": {
+            "wordRange": [
+              6,
+              25
+            ],
+            "evidenceGroups": [
+              [
+                "I recommend",
+                "recommend",
+                "you should try",
+                "try yoga"
+              ],
+              [
+                "yoga"
+              ],
+              [
+                "keep fit",
+                "keeps you fit",
+                "keep you fit",
+                "keeping fit",
+                "stay fit"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:be62c5008a06ce1516c346d098f30be91a48684ec1d3c18de678545394ee903b"
+      },
+      {
+        "id": "en.n4.c45.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿qué siente Sara sobre el próximo partido?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She is afraid of it."
+          },
+          {
+            "text": "She is excited about it."
+          },
+          {
+            "text": "She is not interested in it."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.r02.seed-0",
+          "feedback": {
+            "es": "Sara dice que está excited about the next match: está emocionada."
+          },
+          "text": "Sara lost the final, but she scored a goal and had fun. She says: «I am proud of my team and excited about the next match.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c053f42a6836a4b7318cb46312e786e37286cd43be62783e7a87c075e4e6bdb9"
+      },
+      {
+        "id": "en.n4.c45.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué consejo se da a un principiante."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Join a club on the first day."
+          },
+          {
+            "text": "Choose the hardest sport."
+          },
+          {
+            "text": "Start with one lesson before joining."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-sport-and-leisure-words-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c45.r03.seed-0",
+          "feedback": {
+            "es": "El consejo es probar una clase corta y unirse a un club solo si lo disfrutas."
+          },
+          "audio": "If you are a beginner, do not choose a hard sport. Try a short lesson, then join a club if you enjoy it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:45b9695be7895f6c68a04be5c679fa0c1df6e5c353cfd331a1fc2c39a10b60f7"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c45.e01": {
+      "reteach": "en.n4.class-45.t01",
+      "review": "en.n4.c45.r01"
+    },
+    "en.n4.c45.e02": {
+      "reteach": "en.n4.class-45.t02",
+      "review": "en.n4.c45.r02"
+    },
+    "en.n4.c45.e03": {
+      "reteach": "en.n4.class-45.t03",
+      "review": "en.n4.c45.r03"
+    },
+    "en.n4.c45.e04": {
+      "reteach": "en.n4.class-45.t04",
+      "review": "en.n4.c45.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n4-sport-and-leisure-words-1",
+    "n4-sport-and-leisure-words-2",
+    "n4-sport-and-leisure-words-3",
+    "n4-sport-and-leisure-words-4",
+    "n4-sport-and-leisure-words-5"
+  ]
+}

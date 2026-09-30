@@ -1,0 +1,797 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-02",
+  "title": {
+    "en": "Had done or did",
+    "es": "Había hecho o hizo"
+  },
+  "objectives": {
+    "es": [
+      "Elegir entre past perfect y past simple con already, just, never before y by the time."
+    ]
+  },
+  "concepts": [
+    "n4-earlier-events-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-01"
+  ],
+  "usesVocabulary": [
+    "concert",
+    "phone",
+    "already",
+    "just",
+    "never",
+    "before",
+    "by the time",
+    "nervous",
+    "homework",
+    "song"
+  ],
+  "usesPatterns": [
+    "n4-earlier-events-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "concert",
+      "es": "concierto"
+    },
+    {
+      "en": "phone",
+      "es": "teléfono"
+    },
+    {
+      "en": "already",
+      "es": "ya"
+    },
+    {
+      "en": "just",
+      "es": "acababa de"
+    },
+    {
+      "en": "never",
+      "es": "nunca"
+    },
+    {
+      "en": "before",
+      "es": "antes"
+    },
+    {
+      "en": "by the time",
+      "es": "para cuando"
+    },
+    {
+      "en": "nervous",
+      "es": "nervioso"
+    },
+    {
+      "en": "homework",
+      "es": "tarea"
+    },
+    {
+      "en": "song",
+      "es": "canción"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-02.t01",
+      "en": "By the time we got to the concert, the band had already started.",
+      "es": "Para cuando llegamos al concierto, la banda ya había empezado.",
+      "explanationEs": "By the time + pasado simple da el momento; had already started, lo anterior.",
+      "segments": [
+        "By the time we got to the",
+        "concert, the band had already started."
+      ],
+      "audioText": "By the time we got to the concert, the band had already started.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-2"
+    },
+    {
+      "id": "en.n4.class-02.t02",
+      "en": "When Ana's phone rang, Leo left the house.",
+      "es": "Cuando sonó el teléfono de Ana, Leo salió de casa.",
+      "explanationEs": "Dos pasados simples: primero sonó el teléfono y después Leo salió.",
+      "segments": [
+        "When Ana's phone rang,",
+        "Leo left the house."
+      ],
+      "audioText": "When Ana's phone rang, Leo left the house.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-2"
+    },
+    {
+      "id": "en.n4.class-02.t03",
+      "en": "When Ana's phone rang, Leo had already left the house.",
+      "es": "Cuando sonó el teléfono de Ana, Leo ya había salido de casa.",
+      "explanationEs": "Con had already, Leo salió antes de que sonara el teléfono.",
+      "segments": [
+        "When Ana's phone rang, Leo",
+        "had already left the house."
+      ],
+      "audioText": "When Ana's phone rang, Leo had already left the house.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-2"
+    },
+    {
+      "id": "en.n4.class-02.t04",
+      "en": "Mia had just finished her homework when her friend arrived.",
+      "es": "Mia acababa de terminar la tarea cuando llegó su amiga.",
+      "explanationEs": "Had just + participio: algo muy reciente antes de otro momento pasado.",
+      "segments": [
+        "Mia had just finished her",
+        "homework when her friend arrived."
+      ],
+      "audioText": "Mia had just finished her homework when her friend arrived.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-2"
+    },
+    {
+      "id": "en.n4.class-02.t05",
+      "en": "Tom was nervous because he had never played that song at a concert before.",
+      "es": "Tom estaba nervioso porque nunca había tocado esa canción en un concierto.",
+      "explanationEs": "Had never + participio + before: era la primera vez en ese momento.",
+      "segments": [
+        "Tom was nervous because he had never",
+        "played that song at a concert before."
+      ],
+      "audioText": "Tom was nervous because he had never played that song at a concert before.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c02.pg01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El autobús ya se había ido cuando Tom llegó a la parada.»"
+        },
+        "answer": {
+          "text": "already",
+          "accepted": [
+            "already"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-earlier-events-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.pg01.seed-0",
+          "feedback": {
+            "es": "Already marca que el autobús se había ido antes de que Tom llegara a la parada."
+          },
+          "hint": {
+            "es": "Va entre had y el participio."
+          },
+          "text": "The bus had ___ gone when Tom got to the stop."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3696b9f25ab9e1a08529c779a1cb73f398eab82721b6b7f8b5fa77c5ce642e18"
+      },
+      {
+        "id": "en.n4.c02.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase: «Cuando llegué, la tienda ya había cerrado.»"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "When I arrived, the shop already closed."
+          },
+          {
+            "text": "When I arrived, the shop has already closed."
+          },
+          {
+            "text": "When I arrived, the shop had already closed."
+          }
+        ],
+        "teaches": [
+          "n4-earlier-events-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.pg02.seed-0",
+          "feedback": {
+            "es": "La tienda cerró antes de llegar, así que va en past perfect; already closed y has already closed no sitúan bien esa acción anterior."
+          },
+          "hint": {
+            "es": "Cerró antes de que llegaras: necesitas had + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:82a15a6357c90d8fd12b01b0715fea47eed433930c0144f79e743634bebc8c7b"
+      },
+      {
+        "id": "en.n4.c02.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mia nunca había montado a caballo antes.»"
+        },
+        "answer": {
+          "text": "Mia had never ridden a horse before",
+          "tokens": [
+            "Mia",
+            "had",
+            "never",
+            "ridden",
+            "a",
+            "horse",
+            "before"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-earlier-events-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.pg03.seed-0",
+          "feedback": {
+            "es": "Never va entre had y ridden, y before cierra la frase: era la primera vez de Mia."
+          },
+          "hint": {
+            "es": "Never va entre had y el participio; before va al final."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:59508453e095c53bd254e54b3388e03d1e940012ec52e9a342d77cefdb1cdae2"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c02.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué le pasó a Leo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He missed his bus."
+          },
+          {
+            "text": "He caught his bus."
+          },
+          {
+            "text": "He ran to his bus."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.p01.seed-0",
+          "feedback": {
+            "es": "«The bus had already gone» cuando se levantó: Leo perdió el autobús."
+          },
+          "audio": "By the time Leo got up, the bus had already gone.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:10619767981b0359b3b83bdd9149b87b83d2071f1f67b8dca749411546f1eb2f"
+      },
+      {
+        "id": "en.n4.c02.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase cuenta bien la situación de Sara?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "When Sara got to the station, the train was leaving."
+          },
+          {
+            "text": "When Sara got to the station, the train had already left."
+          },
+          {
+            "text": "When Sara got to the station, the train left."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.p02.seed-0",
+          "feedback": {
+            "es": "El tren salió a las 6:00 y ella llegó a las 6:10: lo que pasó antes va con had. Left solo contaría otra acción posterior a la llegada."
+          },
+          "text": "Sara's train left at 6:00. She got to the station at 6:10."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:07974889176cc0a44bf5fef0f54c464eebd7eba0dedb9508a449b2107031be1d"
+      },
+      {
+        "id": "en.n4.c02.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada marcador con su significado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "already",
+              {
+                "es": "ya"
+              }
+            ],
+            [
+              "just",
+              {
+                "es": "acababa de"
+              }
+            ],
+            [
+              "never before",
+              {
+                "es": "nunca antes"
+              }
+            ],
+            [
+              "by the time",
+              {
+                "es": "para cuando"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.p03.seed-0",
+          "feedback": {
+            "es": "Estos marcadores acompañan a had + participio y sitúan lo anterior respecto a otro momento del pasado."
+          },
+          "pairs": [
+            [
+              "already",
+              {
+                "es": "ya"
+              }
+            ],
+            [
+              "just",
+              {
+                "es": "acababa de"
+              }
+            ],
+            [
+              "never before",
+              {
+                "es": "nunca antes"
+              }
+            ],
+            [
+              "by the time",
+              {
+                "es": "para cuando"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:db18d110a43bb99cdad07a4059004b2045a9dc4dbe3e2d1579ad6d0edf075854"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c02.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase: «Leo acababa de salir cuando yo llegué.»"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Leo has just left when I arrived."
+          },
+          {
+            "text": "Leo was just leaving when I arrived."
+          },
+          {
+            "text": "Leo had just left when I arrived."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.e01.seed-0",
+          "feedback": {
+            "es": "Just va entre had y el participio; has just no encaja con un momento pasado como arrived."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f6be47e274af3c549803e29b346e1f589cec6a5facfb0177face24621989bd62"
+      },
+      {
+        "id": "en.n4.c02.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué era nuevo para Carlos en sus vacaciones."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Seeing the sea."
+          },
+          {
+            "text": "Swimming in a pool."
+          },
+          {
+            "text": "Eating Spanish food."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.e02.seed-0",
+          "feedback": {
+            "es": "«Had never seen the sea before» indica que ver el mar era su primera vez; las otras actividades no se mencionan."
+          },
+          "audio": "Carlos had never seen the sea before his holiday in Spain.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:43aed851aefd79ac2990f7abbd84c55f950820b2627a84bbd1ae02f721e9b1d0"
+      },
+      {
+        "id": "en.n4.c02.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Acababa de llegar a casa cuando sonó el teléfono.»"
+        },
+        "answer": {
+          "text": "just",
+          "accepted": [
+            "just"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.e03.seed-0",
+          "feedback": {
+            "es": "Just tras had indica que llegar a casa acababa de ocurrir cuando sonó el teléfono."
+          },
+          "text": "I had ___ got home when the phone rang."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4c07da7a9fc6aa2e002b9b891f5b2a10d50e2534b781e395cabec71b85c3ae7c"
+      },
+      {
+        "id": "en.n4.c02.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la frase en inglés usando by the time."
+        },
+        "answer": {
+          "text": "By the time I arrived, the film had already started.",
+          "accepted": [
+            "By the time I arrived, the film had already started.",
+            "By the time I got there, the film had already started.",
+            "By the time I arrived, the film had started.",
+            "By the time I got there, the film had started."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.e04.seed-0",
+          "feedback": {
+            "es": "By the time + pasado simple da el momento de referencia y had already started, la acción anterior."
+          },
+          "text": "Frase: Para cuando llegué, la película ya había empezado."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cbd2e6ee79ed0ded27bffa252916ac4390938bd7eb7e943886f64e5a796ac6ac"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c02.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es verdadera según las horas?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "When Ana arrived, the party had not started yet."
+          },
+          {
+            "text": "When Ana arrived, the party had already started."
+          },
+          {
+            "text": "When Ana arrived, the party finished."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.r01.seed-0",
+          "feedback": {
+            "es": "La fiesta empezó a las 7:30, media hora antes de que Ana llegara a las 8:00."
+          },
+          "text": "Ana arrived at 8:00. The party started at 7:30."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b38f920001d579f4fd9014dbe26a028e5aaa2703706aad3bea95b4bf7e708d91"
+      },
+      {
+        "id": "en.n4.c02.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué había hecho el hablante justo antes de que se apagara la luz."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He was still reading."
+          },
+          {
+            "text": "He was going to start reading."
+          },
+          {
+            "text": "He had stopped reading."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.r02.seed-0",
+          "feedback": {
+            "es": "«Had just closed my book»: dejó de leer un momento antes de que se apagara la luz."
+          },
+          "audio": "I had just closed my book when the lights went out.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0c67999350fb4621d5108f84b5c0cf749465405d558ad8d944f46b913f8b6038"
+      },
+      {
+        "id": "en.n4.c02.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Para cuando llamé, él ya se había ido.»"
+        },
+        "answer": {
+          "text": "By the time I called he had already gone",
+          "tokens": [
+            "By",
+            "the",
+            "time",
+            "I",
+            "called",
+            "he",
+            "had",
+            "already",
+            "gone"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c02.r03.seed-0",
+          "feedback": {
+            "es": "By the time + pasado simple fija el momento y had already gone expresa lo que ya había ocurrido."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9b35c007bf205c05c333c7ba0ecea48fbd1d5f2eb3b47bf637a0e6a1cbad02de"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c02.e01": {
+      "reteach": "en.n4.class-02.t01",
+      "review": "en.n4.c02.r01"
+    },
+    "en.n4.c02.e02": {
+      "reteach": "en.n4.class-02.t02",
+      "review": "en.n4.c02.r02"
+    },
+    "en.n4.c02.e03": {
+      "reteach": "en.n4.class-02.t03",
+      "review": "en.n4.c02.r03"
+    },
+    "en.n4.c02.e04": {
+      "reteach": "en.n4.class-02.t04",
+      "review": "en.n4.c02.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,871 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-40",
+  "title": {
+    "en": "One problem, two audiences",
+    "es": "Un problema, dos destinatarios"
+  },
+  "objectives": {
+    "es": [
+      "Explicar el mismo problema a un vecino y a la administración con el tono correcto en cada caso."
+    ]
+  },
+  "concepts": [
+    "n4-tone-and-audience-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-39"
+  ],
+  "usesVocabulary": [
+    "loud",
+    "noise",
+    "complain",
+    "neighbour",
+    "administration",
+    "building",
+    "solve",
+    "midnight"
+  ],
+  "usesPatterns": [
+    "n4-tone-and-audience-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "loud",
+      "es": "fuerte (ruido)"
+    },
+    {
+      "en": "noise",
+      "es": "ruido"
+    },
+    {
+      "en": "complain",
+      "es": "quejarse"
+    },
+    {
+      "en": "neighbour",
+      "es": "vecino"
+    },
+    {
+      "en": "administration",
+      "es": "administración"
+    },
+    {
+      "en": "building",
+      "es": "edificio"
+    },
+    {
+      "en": "solve",
+      "es": "resolver"
+    },
+    {
+      "en": "midnight",
+      "es": "medianoche"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-40.t01",
+      "en": "Hi Sam, the music is very loud at night.",
+      "es": "Hola, Sam, la música está muy fuerte por la noche.",
+      "explanationEs": "Al vecino: saludo corto y el problema dicho de forma directa.",
+      "segments": [
+        "Hi Sam, the music is",
+        "very loud at night."
+      ],
+      "audioText": "Hi Sam, the music is very loud at night.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-5"
+    },
+    {
+      "id": "en.n4.class-40.t02",
+      "en": "Sorry, but the noise is too loud. Could you turn it down, please?",
+      "es": "Perdona, pero el ruido es demasiado fuerte. ¿Podrías bajarlo, por favor?",
+      "explanationEs": "Petición amable e informal: could you … please.",
+      "segments": [
+        "Sorry, but the noise is too loud.",
+        "Could you turn it down, please?"
+      ],
+      "audioText": "Sorry, but the noise is too loud. Could you turn it down, please?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-5"
+    },
+    {
+      "id": "en.n4.class-40.t03",
+      "en": "Dear Mr Jones, I am writing to complain about the noise in the building.",
+      "es": "Estimado Sr. Jones, le escribo para quejarme del ruido en el edificio.",
+      "explanationEs": "A la administración: Dear + título y I am writing to complain about.",
+      "segments": [
+        "Dear Mr Jones, I am writing to",
+        "complain about the noise in the building."
+      ],
+      "audioText": "Dear Mr Jones, I am writing to complain about the noise in the building.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-5"
+    },
+    {
+      "id": "en.n4.class-40.t04",
+      "en": "The music starts at midnight, and it stops at two.",
+      "es": "La música empieza a medianoche y termina a las dos.",
+      "explanationEs": "Un correo de queja da datos concretos: cuándo empieza y cuándo termina.",
+      "segments": [
+        "The music starts at midnight,",
+        "and it stops at two."
+      ],
+      "audioText": "The music starts at midnight, and it stops at two.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-5"
+    },
+    {
+      "id": "en.n4.class-40.t05",
+      "en": "I would like to ask you to solve this problem.",
+      "es": "Querría pedirle que resuelva este problema.",
+      "explanationEs": "Petición formal: I would like to ask you to + verbo.",
+      "segments": [
+        "I would like to ask",
+        "you to solve this problem."
+      ],
+      "audioText": "I would like to ask you to solve this problem.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c40.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué mensaje va dirigido al vecino?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Dear Mr Jones, I am writing to complain about the noise."
+          },
+          {
+            "text": "Hi Sam, could you turn the music down, please?"
+          },
+          {
+            "text": "Kind regards, the building administration."
+          }
+        ],
+        "teaches": [
+          "n4-tone-and-audience-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.pg01.seed-0",
+          "feedback": {
+            "es": "Hi Sam y Could you turn the music down, please? forman un mensaje cercano, informal y amable. Las otras opciones son formales."
+          },
+          "hint": {
+            "es": "Al vecino le escribes con un tono cercano y relajado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:00644161efb2d4d9f593b9c894f0315f3e7c8e3e2dedd5070064036cc9195fd0"
+      },
+      {
+        "id": "en.n4.c40.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Escribo para quejarme del ruido.»"
+        },
+        "answer": {
+          "text": "to",
+          "accepted": [
+            "to"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-tone-and-audience-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.pg02.seed-0",
+          "feedback": {
+            "es": "El propósito de un correo se introduce con to + verbo base: I am writing to complain."
+          },
+          "hint": {
+            "es": "Después de I am writing va la partícula que introduce el propósito."
+          },
+          "text": "I am writing ___ complain about the noise."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:66af2d257126288f80005665147d57a13ab28c72c932f78809e2df279a119ea5"
+      },
+      {
+        "id": "en.n4.c40.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El ruido es fuerte. Como resultado, no puedo dormir.»"
+        },
+        "answer": {
+          "text": "result",
+          "accepted": [
+            "result"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-tone-and-audience-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.pg03.seed-0",
+          "feedback": {
+            "es": "As a result introduce la consecuencia: por el ruido, no puedo dormir."
+          },
+          "hint": {
+            "es": "Es el sustantivo que expresa la consecuencia de lo anterior."
+          },
+          "text": "The noise is loud. As a ___, I cannot sleep."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:21bf60c26768517933d1d93a9b469a8e591d44ef31dd0fc8a01f631d7f7a940a"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c40.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién recibirá este mensaje sobre la música."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The building administration."
+          },
+          {
+            "text": "A school director."
+          },
+          {
+            "text": "A neighbour."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.p01.seed-0",
+          "feedback": {
+            "es": "Hi Sam y could you turn it down, please? indican un mensaje informal y cercano, propio de un vecino."
+          },
+          "audio": "Hi Sam! The music is very loud at night. Could you turn it down, please?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5c1756e81a02a31f0e6f427cd422ed51730bb77ea60dc3b390e9c1613f3362ca"
+      },
+      {
+        "id": "en.n4.c40.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Querría pedirle que resuelva este problema.»"
+        },
+        "answer": {
+          "text": "I would like to ask you to solve this problem",
+          "tokens": [
+            "I",
+            "would",
+            "like",
+            "to",
+            "ask",
+            "you",
+            "to",
+            "solve",
+            "this",
+            "problem"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.p02.seed-0",
+          "feedback": {
+            "es": "I would like to ask you to + verbo es la petición formal que se usa con la administración."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:46d3981298bd910572106e86b83b84b7c37fa51ba0c588370452bba94fbcce31"
+      },
+      {
+        "id": "en.n4.c40.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es la adecuada para el correo a la administración?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I am writing to complain about the noise in the building."
+          },
+          {
+            "text": "Hi! The noise is too loud, help!"
+          },
+          {
+            "text": "Stop the noise now!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.p03.seed-0",
+          "feedback": {
+            "es": "I am writing to complain about… es una frase formal, completa y con propósito claro. Las otras opciones son coloquiales o bruscas."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f19948680cb6fb70243e8182b2278e3a094769b7165fae6fb9feecf999a11f02"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c40.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe un mensaje informal a tu vecino Sam sobre la música de la noche."
+        },
+        "answer": {
+          "text": "Hi Sam, the music is very loud every night. As a result, I cannot sleep. Could you turn it down after midnight, please? Thanks for understanding!",
+          "accepted": [
+            "Hi Sam, the music is very loud every night. As a result, I cannot sleep. Could you turn it down after midnight, please? Thanks for understanding!",
+            "Hi Sam, the music is very loud every night after midnight. I can't sleep. Can you turn it down, please? Thank you!",
+            "Hello Sam, your music is too loud at night. I can't sleep well. Could you turn the music down, please? Thanks!",
+            "Hi Sam, the music is very loud every night, so I can't sleep. Can you please turn it down? Thanks for understanding!"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5",
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.e01.seed-0",
+          "feedback": {
+            "es": "Un buen mensaje al vecino saluda con Hi, describe el problema, da la consecuencia con as a result y pide con Could you … please."
+          },
+          "text": "Datos: la música suena muy fuerte cada noche desde medianoche; no puedes dormir; quieres que la baje.",
+          "scoring": {
+            "wordRange": [
+              10,
+              60
+            ],
+            "evidenceGroups": [
+              [
+                "Hi",
+                "Hello",
+                "Hey"
+              ],
+              [
+                "loud",
+                "noisy"
+              ],
+              [
+                "cannot sleep",
+                "can not sleep",
+                "not able to sleep",
+                "unable to sleep",
+                "cannot get any sleep",
+                "cannot sleep well"
+              ],
+              [
+                "Could you",
+                "Can you",
+                "Would you mind",
+                "Would you",
+                "Please"
+              ],
+              [
+                "turn it down",
+                "turn the music down",
+                "turn down the music",
+                "turn the volume down",
+                "lower the music",
+                "lower the volume"
+              ],
+              [
+                "Thanks",
+                "Thank you",
+                "Cheers",
+                "Thx"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4600dd680815a2c8f2def6327dbee6819976b711dd703b2395e52f2b5eedad71"
+      },
+      {
+        "id": "en.n4.c40.e02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el correo formal a la administración sobre el ruido (60 a 90 palabras)."
+        },
+        "answer": {
+          "text": "Dear Mr Jones, I am writing to complain about the noise in our building. Every night the music from the apartment next to mine is very loud until two in the morning. As a result, I cannot sleep and my children are tired at school. My neighbour told me that he would turn it down; however, the problem continues. In addition, other families also complain. I would like to ask you to solve this problem. Thank you for your help. Kind regards, Sara Lopez",
+          "accepted": [
+            "Dear Mr Jones, I am writing to complain about the noise in our building. Every night the music from the apartment next to mine is very loud until two in the morning. As a result, I cannot sleep and my children are tired at school. My neighbour told me that he would turn it down; however, the problem continues. In addition, other families also complain. I would like to ask you to solve this problem. Thank you for your help. Kind regards, Sara Lopez",
+            "Dear Mr Jones, I am writing to complain about the noise in the building. The music from my neighbour is very loud every night until two in the morning. As a result, I cannot sleep and my children are tired at school. My neighbour said that he would turn it down, but the problem continues. In addition, other families complain too. I would like to ask you to solve this problem. Kind regards, Sara Lopez",
+            "Dear Mr Jones, I am writing to tell you about the noise in our building. Every night my neighbour plays very loud music until two in the morning. As a result, I cannot sleep and my children are tired at school. My neighbour told me that he would turn it down, but the problem continues. In addition, other families complain. Could you please solve this problem? Thank you for your help. Kind regards, Sara Lopez"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5",
+          "n4-tone-and-audience-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.e02.seed-0",
+          "feedback": {
+            "es": "Un correo formal abre con Dear Mr Jones, explica el propósito con I am writing to complain, da datos con as a result o in addition, cuenta lo que dijo el vecino con told me that y pide con I would like to ask you to."
+          },
+          "text": "Datos: música muy fuerte cada noche hasta las dos; no puedes dormir y tus hijos están cansados en la escuela; el vecino dijo que la bajaría, pero sigue igual; pides una solución.",
+          "scoring": {
+            "wordRange": [
+              50,
+              120
+            ],
+            "evidenceGroups": [
+              [
+                "Dear Mr Jones",
+                "Dear Sir",
+                "Dear Sir or Madam",
+                "Dear Administration",
+                "Dear Mr"
+              ],
+              [
+                "I am writing to complain",
+                "I am writing to report",
+                "I am writing to tell you",
+                "I am writing to you about",
+                "I am writing about",
+                "I am writing to inform you"
+              ],
+              [
+                "as a result",
+                "in addition",
+                "therefore",
+                "furthermore",
+                "moreover"
+              ],
+              [
+                "however",
+                "although",
+                "but",
+                "even though",
+                "nevertheless"
+              ],
+              [
+                "told me that",
+                "told me he",
+                "said that he",
+                "said he would",
+                "promised to",
+                "promised that"
+              ],
+              [
+                "I would like to ask you to",
+                "I would like you to",
+                "I would like to ask",
+                "Could you please",
+                "Could you",
+                "I would appreciate",
+                "I am asking you to",
+                "I would be grateful"
+              ],
+              [
+                "two",
+                "2",
+                "2am",
+                "2 a m"
+              ],
+              [
+                "Kind regards",
+                "Best regards",
+                "Yours sincerely",
+                "Yours faithfully",
+                "Sincerely",
+                "With kind regards",
+                "Regards"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:963fce6e71649ce711f435fef952ebeded62bdebb560b6b2fb3dc17c213ba4fb"
+      },
+      {
+        "id": "en.n4.c40.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hará la administración."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It will call the police tonight."
+          },
+          {
+            "text": "It will talk to the neighbour tomorrow."
+          },
+          {
+            "text": "It will move Ms Lopez to another building."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5",
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.e03.seed-0",
+          "feedback": {
+            "es": "We will speak to the neighbour tomorrow: la administración hablará con el vecino al día siguiente. No cambiará de edificio ni llamará a la policía."
+          },
+          "audio": "Dear Ms Lopez, thank you for your email. We will speak to your neighbour tomorrow. Kind regards.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:afb01cdde011e02da0f414c0200e130dddb038cb41ba7f30e5f5c7b9fff44ec3"
+      },
+      {
+        "id": "en.n4.c40.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cómo cuentas a la administración lo que dijo Sam?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Sam said me that he could not turn it down before eleven."
+          },
+          {
+            "text": "Sam told that he could not turn it down before eleven."
+          },
+          {
+            "text": "Sam told me that he could not turn it down before eleven."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5",
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.e04.seed-0",
+          "feedback": {
+            "es": "Told me that + could not retrocede cannot en el estilo indirecto. Said me y told sin persona no son correctas."
+          },
+          "text": "Sam says: «I can't turn it down before eleven.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:964d84bd380203f097e19e49722f1e6689b536d33e82f7b920f83bcd89da461a"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c40.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué conector une la queja con su consecuencia?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "As a result,"
+          },
+          {
+            "text": "However,"
+          },
+          {
+            "text": "Although"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.r01.seed-0",
+          "feedback": {
+            "es": "As a result introduce la consecuencia del ruido: no puedo dormir. However y although expresan contraste."
+          },
+          "text": "The music is loud every night. ___, I cannot sleep."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:989efdfa55add4060a6d690a9f768151d36537cc11552f9f71fd7654c345d623"
+      },
+      {
+        "id": "en.n4.c40.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige a quién se escribe el mensaje."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A close friend."
+          },
+          {
+            "text": "The building administration."
+          },
+          {
+            "text": "A neighbour."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.r02.seed-0",
+          "feedback": {
+            "es": "Dear Mr Jones… I am writing to complain es la voz formal de un correo a la administración del edificio."
+          },
+          "audio": "Dear Mr Jones, I am writing to complain about the noise in the building. Kind regards.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d8539b64d19e53617717f7ea00828ad7d3d5bf3d8d65df84f285d8f59a2db922"
+      },
+      {
+        "id": "en.n4.c40.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es demasiado informal para un correo formal?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Kind regards."
+          },
+          {
+            "text": "I would like to ask you to solve this problem."
+          },
+          {
+            "text": "Thanks a lot, bye!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c40.r03.seed-0",
+          "feedback": {
+            "es": "Thanks a lot, bye! es coloquial. En un correo formal se escribe Thank you very much y Kind regards."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6f09164a668e09d72c259cb8615c0cb6004010d01302751bbefee21c88ff3f56"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c40.e01": {
+      "reteach": "en.n4.class-40.t01",
+      "review": "en.n4.c40.r01"
+    },
+    "en.n4.c40.e02": {
+      "reteach": "en.n4.class-40.t02",
+      "review": "en.n4.c40.r02"
+    },
+    "en.n4.c40.e03": {
+      "reteach": "en.n4.class-40.t03",
+      "review": "en.n4.c40.r03"
+    },
+    "en.n4.c40.e04": {
+      "reteach": "en.n4.class-40.t04",
+      "review": "en.n4.c40.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n4-tone-and-audience-1",
+    "n4-tone-and-audience-2",
+    "n4-tone-and-audience-3",
+    "n4-tone-and-audience-4",
+    "n4-tone-and-audience-5"
+  ]
+}

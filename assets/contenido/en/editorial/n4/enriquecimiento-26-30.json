@@ -1,0 +1,617 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "classes": {
+    "en.n4.class-26": {
+      "explicacion": {
+        "titulo": "Datos que identifican y datos extra",
+        "texto": "Una cláusula relativa (who, which, that) puede hacer dos trabajos. Si identifica, dice de cuál hablamos y va sin comas: The woman who lives next door is a nurse (hay varias mujeres). Si solo añade un dato sobre algo que ya está identificado, va entre comas: My cousin, who lives in Loja, is a singer (sabemos de qué prima hablamos). Con comas no se usa that ni se puede omitir el pronombre: usa who (personas) o which (cosas). Al leer en voz alta, las comas son pausas."
+      },
+      "patron": {
+        "texto": "Nombre, + who/which + dato extra, + resto de la frase:",
+        "formula": [
+          {
+            "texto": "My cousin,",
+            "nota": "a quién nos referimos: ya está identificado"
+          },
+          {
+            "texto": "who lives in Loja,",
+            "nota": "dato extra entre comas (who para personas)"
+          },
+          {
+            "texto": "is a singer.",
+            "nota": "lo que decimos de ella"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My cousin, that lives in Loja, is a singer.",
+          "correcto": "My cousin, who lives in Loja, is a singer.",
+          "explicacion": "Entre comas no se puede usar that: se usa who para personas y which para cosas."
+        },
+        {
+          "incorrecto": "Carlos, he lives next door, is a mechanic.",
+          "correcto": "Carlos, who lives next door, is a mechanic.",
+          "explicacion": "En español abrimos un inciso con un pronombre personal; en inglés hace falta who o which, no he ni she."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara miran una foto de la familia de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Who is the woman in the photo?",
+            "traduccion": "¿Quién es la mujer de la foto?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is my cousin, who lives in Loja.",
+            "traduccion": "Es mi prima, que vive en Loja."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What does she do?",
+            "traduccion": "¿A qué se dedica?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She is a nurse. She works at the hospital that is near the stadium.",
+            "traduccion": "Es enfermera. Trabaja en el hospital que está cerca del estadio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué dato extra da Sara sobre su prima?",
+          "opciones": [
+            {
+              "es": "Que vive en Loja."
+            },
+            {
+              "es": "Que es enfermera."
+            },
+            {
+              "es": "Que trabaja cerca del estadio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «my cousin, who lives in Loja»: la cláusula entre comas es el dato extra. The hospital that is near the stadium identifica el hospital."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Comas",
+          "Pronombres",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "identifica"
+            },
+            {
+              "texto": "sin comas"
+            },
+            {
+              "texto": "who / which / that"
+            },
+            {
+              "texto": "The woman who lives next door is a nurse."
+            }
+          ],
+          [
+            {
+              "texto": "dato extra"
+            },
+            {
+              "texto": "con comas"
+            },
+            {
+              "texto": "who / which (no that)"
+            },
+            {
+              "texto": "My cousin, who lives in Loja, is a singer."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-27": {
+      "explicacion": {
+        "titulo": "Whose, where, when y preposición + relativo",
+        "texto": "Whose expresa posesión y lleva el nombre justo detrás: The boy whose dog is lost (nunca whose his dog). Where sustituye a un lugar: the square where we meet, sin repetir there. When sustituye a un momento: the day when we met. Con preposición, en inglés formal va antes del relativo: the girl with whom I practise, the house in which she lives. En conversación la preposición va al final: the festival which we go to. Whom solo se usa tras preposición; en el resto de los casos basta who."
+      },
+      "patron": {
+        "texto": "Nombre + whose / where / when + oración:",
+        "formula": [
+          {
+            "texto": "The boy",
+            "nota": "a quién o a qué nos referimos"
+          },
+          {
+            "texto": "whose dog is lost",
+            "nota": "whose + nombre: posesión, sin the ni his"
+          },
+          {
+            "texto": "lives next door.",
+            "nota": "lo que decimos del chico"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The boy whose his dog is lost lives next door.",
+          "correcto": "The boy whose dog is lost lives next door.",
+          "explicacion": "Whose ya incluye la posesión: no se añade his. El nombre (dog) va justo después de whose."
+        },
+        {
+          "incorrecto": "The square where we meet there has a fountain.",
+          "correcto": "The square where we meet has a fountain.",
+          "explicacion": "Where ya se refiere al lugar, así que there sobra. En español tampoco decimos «donde nos reunimos allí», pero el error aparece al traducir."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Ana organizan su salida al festival del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "When is the festival?",
+            "traduccion": "¿Cuándo es el festival?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is on Saturday, the day when the market is closed.",
+            "traduccion": "Es el sábado, el día en que el mercado está cerrado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And where is it?",
+            "traduccion": "¿Y dónde es?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is in the square where we meet on Sundays.",
+            "traduccion": "Es en la plaza donde nos reunimos los domingos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué pasa el día del festival?",
+          "opciones": [
+            {
+              "es": "El mercado está cerrado."
+            },
+            {
+              "es": "El mercado abre más temprano."
+            },
+            {
+              "es": "Los vecinos salen de viaje."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «the day when the market is closed»: ese día el mercado está cerrado. No se habla de horarios ni de viajes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Se refiere a",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "whose"
+            },
+            {
+              "texto": "posesión"
+            },
+            {
+              "texto": "The boy whose dog is lost lives next door."
+            }
+          ],
+          [
+            {
+              "texto": "where"
+            },
+            {
+              "texto": "lugar"
+            },
+            {
+              "texto": "The square where we meet has a fountain."
+            }
+          ],
+          [
+            {
+              "texto": "when"
+            },
+            {
+              "texto": "momento"
+            },
+            {
+              "texto": "I remember the day when the festival began."
+            }
+          ],
+          [
+            {
+              "texto": "preposición + whom / which"
+            },
+            {
+              "texto": "persona o cosa con preposición"
+            },
+            {
+              "texto": "The girl with whom I practise is my neighbour."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-28": {
+      "explicacion": {
+        "titulo": "Quién o qué es: escuchar la pista que identifica",
+        "texto": "Para entender una descripción, escucha tres cosas: el nombre que se describe, la cláusula sin pausa que identifica (The woman who sells flowers) y los datos extra con pausa, que solo añaden información (…, who is very friendly, …). Decide con la parte que identifica: es la que te dice de cuál se trata. El dato extra sirve para confirmar, pero no para elegir. Where señala un lugar y whose señala lo que pertenece a quien se busca. Si dos personas comparten un dato extra, fíjate en la cláusula que las diferencia."
+      },
+      "patron": {
+        "texto": "Nombre + pista que identifica + dato extra:",
+        "formula": [
+          {
+            "texto": "It is the place",
+            "nota": "lo que hay que adivinar"
+          },
+          {
+            "texto": "where we buy bread",
+            "nota": "pista que identifica: sin comas"
+          },
+          {
+            "texto": ", which opens at six.",
+            "nota": "dato extra entre comas: confirma, no decide"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The florist is the woman who she sells flowers.",
+          "correcto": "The florist is the woman who sells flowers.",
+          "explicacion": "Who ya hace de sujeto de sells: no se repite she. En español a veces repetimos el sujeto, en inglés no."
+        },
+        {
+          "incorrecto": "The butcher, who is very friendly has a shop on the corner.",
+          "correcto": "The butcher, who is very friendly, has a shop on the corner.",
+          "explicacion": "El dato extra se abre y se cierra con coma. Si falta la segunda, el inciso queda abierto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom juegan a adivinar quién es una persona o qué lugar es.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "It is a place where people read and borrow books.",
+            "traduccion": "Es un lugar donde la gente lee y toma prestados libros."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is it the library?",
+            "traduccion": "¿Es la biblioteca?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes! Now guess: it is a person who brings letters, and whose bag is always full.",
+            "traduccion": "¡Sí! Ahora adivina: es una persona que trae cartas y cuya bolsa siempre va llena."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The postman!",
+            "traduccion": "¡El cartero!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Mia, ¿qué hace la persona que Tom debe adivinar?",
+          "opciones": [
+            {
+              "es": "Trae las cartas."
+            },
+            {
+              "es": "Vende flores."
+            },
+            {
+              "es": "Presta libros."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «a person who brings letters»: esa es la pista que identifica. Prestar libros era la pista del primer acertijo, el de la biblioteca."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Lo que escuchas",
+          "Qué significa",
+          "Para qué sirve"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "who / which / that sin pausa"
+            },
+            {
+              "texto": "identifica"
+            },
+            {
+              "texto": "elegir la respuesta"
+            }
+          ],
+          [
+            {
+              "texto": "who / which con pausa"
+            },
+            {
+              "texto": "dato extra"
+            },
+            {
+              "texto": "confirmar lo elegido"
+            }
+          ],
+          [
+            {
+              "texto": "where / whose"
+            },
+            {
+              "texto": "lugar o posesión"
+            },
+            {
+              "texto": "localizar a la persona o el lugar"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-29": {
+      "explicacion": {
+        "titulo": "Describir a alguien especial con datos esenciales y extra",
+        "texto": "Al describir a una persona o un lugar querido, mezcla dos tipos de datos. Los esenciales identifican y van sin comas: the village where she lives, the person who taught me to cook. Los extra añaden un detalle y van entre comas: My grandmother, who is very generous, lives here. Elige bien el relativo: who para personas, which para cosas, whose para posesión (whose smile) y where para lugares. Evita repetir el sujeto después del relativo y escribe frases cortas, una cláusula relativa por frase."
+      },
+      "patron": {
+        "texto": "Persona o lugar, + who/which + dato extra, + idea principal:",
+        "formula": [
+          {
+            "texto": "My grandmother,",
+            "nota": "a quién describes"
+          },
+          {
+            "texto": "who is very generous,",
+            "nota": "dato extra con comas"
+          },
+          {
+            "texto": "lives in the village where I spent my childhood.",
+            "nota": "lo principal + where para identificar el lugar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The house where she lives it is small and cosy.",
+          "correcto": "The house where she lives is small and cosy.",
+          "explicacion": "Where ya sustituye al lugar y la oración sigue con el verbo: no se repite it. En español a veces lo decimos, en inglés no."
+        },
+        {
+          "incorrecto": "She is the person which taught me to cook.",
+          "correcto": "She is the person who taught me to cook.",
+          "explicacion": "Para personas se usa who (o that), no which, que es para cosas."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Tom cómo es su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Tell me about your grandmother.",
+            "traduccion": "Cuéntame de tu abuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "She is the person who taught me to cook. She lives in the village where I spent my childhood.",
+            "traduccion": "Es la persona que me enseñó a cocinar. Vive en el pueblo donde pasé mi infancia."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is her house big?",
+            "traduccion": "¿Su casa es grande?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. Her house, which is small and cosy, has a big garden.",
+            "traduccion": "No. Su casa, que es pequeña y acogedora, tiene un jardín grande."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué dato extra menciona Ana sobre la casa de su abuela?",
+          "opciones": [
+            {
+              "es": "Que es pequeña y acogedora."
+            },
+            {
+              "es": "Que está en su pueblo."
+            },
+            {
+              "es": "Que tiene un jardín grande."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Her house, which is small and cosy»: lo que va entre comas es el dato extra. El jardín grande es lo que la casa tiene, no una cláusula relativa."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quieres",
+          "Usa",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "identificar"
+            },
+            {
+              "texto": "who / which / where sin comas"
+            },
+            {
+              "texto": "the village where she lives"
+            }
+          ],
+          [
+            {
+              "texto": "añadir un dato"
+            },
+            {
+              "texto": "who / which entre comas"
+            },
+            {
+              "texto": "My grandmother, who is very generous, lives here."
+            }
+          ],
+          [
+            {
+              "texto": "decir de quién es algo"
+            },
+            {
+              "texto": "whose + nombre"
+            },
+            {
+              "texto": "a friend whose smile makes everyone happy"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-30": {
+      "explicacion": {
+        "titulo": "Dar la bienvenida: presentar personas y lugares",
+        "texto": "Para recibir a un recién llegado, presenta lo que necesita con cláusulas relativas. Identifica con who, which, that o where sin comas: the pharmacy that you need, the square where we meet. Añade un dato extra entre comas: Sara, who lives next door,… Usa whose para lo que pertenece a alguien: Carlos, whose workshop is behind the library,… y responde a las dudas con datos concretos. Esta clase reúne lo de la semana: datos esenciales y extra, whose, where, when y preposición + relativo."
+      },
+      "patron": {
+        "texto": "Presentar: persona, + who + dato extra, + lo principal:",
+        "formula": [
+          {
+            "texto": "Carlos,",
+            "nota": "la persona que presentas"
+          },
+          {
+            "texto": "who lives next door,",
+            "nota": "dato extra entre comas"
+          },
+          {
+            "texto": "has a workshop where we repair bikes.",
+            "nota": "lo principal + where para identificar el lugar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Carlos, who lives next door he can help you.",
+          "correcto": "Carlos, who lives next door, can help you.",
+          "explicacion": "El dato extra se cierra con coma y no se repite el sujeto con he: who ya es el sujeto de lives."
+        },
+        {
+          "incorrecto": "The friend with who I practise is nice.",
+          "correcto": "The friend with whom I practise is nice.",
+          "explicacion": "Después de una preposición se usa whom, no who: with whom. Otra opción es dejar la preposición al final: the friend who I practise with."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara da la bienvenida a Leo, que acaba de mudarse al barrio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Welcome to the neighbourhood! I am Sara, and I live next door.",
+            "traduccion": "¡Bienvenido al barrio! Soy Sara y vivo al lado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thanks. Is there a bakery nearby?",
+            "traduccion": "Gracias. ¿Hay una panadería cerca?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. The bakery that is on the corner opens at six.",
+            "traduccion": "Sí. La panadería que está en la esquina abre a las seis."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And who can repair my bike?",
+            "traduccion": "¿Y quién puede arreglar mi bici?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Carlos, whose workshop is behind the library, repairs bikes.",
+            "traduccion": "Carlos, cuyo taller está detrás de la biblioteca, arregla bicis."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Quién puede arreglar la bici de Leo, según Sara?",
+          "opciones": [
+            {
+              "es": "Carlos, que tiene un taller detrás de la biblioteca."
+            },
+            {
+              "es": "Sara, que vive al lado."
+            },
+            {
+              "es": "El panadero de la esquina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «Carlos, whose workshop is behind the library, repairs bikes». Sara vive al lado y la panadería está en la esquina, pero ninguno arregla bicis."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quieres",
+          "Usa",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "presentar a alguien"
+            },
+            {
+              "texto": "who entre comas"
+            },
+            {
+              "texto": "Let me introduce you to Carlos, who lives next door."
+            }
+          ],
+          [
+            {
+              "texto": "decir cuál lugar"
+            },
+            {
+              "texto": "that / where sin comas"
+            },
+            {
+              "texto": "The pharmacy that you need is behind the library."
+            }
+          ],
+          [
+            {
+              "texto": "decir de quién es algo"
+            },
+            {
+              "texto": "whose + nombre"
+            },
+            {
+              "texto": "Leo, whose workshop is on the next street, is helpful."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,810 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-10",
+  "title": {
+    "en": "Moving somewhere new",
+    "es": "Empezar en un sitio nuevo"
+  },
+  "objectives": {
+    "es": [
+      "Conversar sobre cómo era la vida antes, qué cuesta ahora y a qué se está acostumbrando, haciendo y contestando preguntas."
+    ]
+  },
+  "concepts": [
+    "n5-getting-used-to-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n5.class-09"
+  ],
+  "usesVocabulary": [
+    "hardest",
+    "arrived",
+    "weather",
+    "yet",
+    "language",
+    "interview"
+  ],
+  "usesPatterns": [
+    "n5-getting-used-to-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "hardest",
+      "es": "más difícil"
+    },
+    {
+      "en": "arrived",
+      "es": "llegaste / llegué"
+    },
+    {
+      "en": "weather",
+      "es": "clima"
+    },
+    {
+      "en": "yet",
+      "es": "ya, todavía"
+    },
+    {
+      "en": "language",
+      "es": "idioma"
+    },
+    {
+      "en": "interview",
+      "es": "entrevista"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-10.t01",
+      "en": "What was the hardest thing when you arrived?",
+      "es": "¿Qué fue lo más difícil cuando llegaste?",
+      "explanationEs": "Se pregunta por el pasado con past simple: was, arrived.",
+      "segments": [
+        "What was the hardest",
+        "thing when you arrived?"
+      ],
+      "audioText": "What was the hardest thing when you arrived?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-5"
+    },
+    {
+      "id": "en.n5.class-10.t02",
+      "en": "I wasn't used to the weather, and I felt lonely.",
+      "es": "No estaba acostumbrado al clima y me sentía solo.",
+      "explanationEs": "Wasn't used to + nombre contesta qué costaba al principio.",
+      "segments": [
+        "I wasn't used to the",
+        "weather, and I felt lonely."
+      ],
+      "audioText": "I wasn't used to the weather, and I felt lonely.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-5"
+    },
+    {
+      "id": "en.n5.class-10.t03",
+      "en": "Are you used to the food yet?",
+      "es": "¿Ya te has acostumbrado a la comida?",
+      "explanationEs": "Yet en preguntas significa «ya»: pregunta si hoy es normal.",
+      "segments": [
+        "Are you used to",
+        "the food yet?"
+      ],
+      "audioText": "Are you used to the food yet?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-5"
+    },
+    {
+      "id": "en.n5.class-10.t04",
+      "en": "I'm still getting used to the language, but I used to be shy and now I speak more.",
+      "es": "Todavía me estoy acostumbrando al idioma, pero antes era tímido y ahora hablo más.",
+      "explanationEs": "Still getting used to = proceso abierto; used to be = pasado que ya no existe.",
+      "segments": [
+        "I'm still getting used to the language, but I",
+        "used to be shy and now I speak more."
+      ],
+      "audioText": "I'm still getting used to the language, but I used to be shy and now I speak more.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-5"
+    },
+    {
+      "id": "en.n5.class-10.t05",
+      "en": "After the interview, I understood how much my life has changed.",
+      "es": "Después de la entrevista entendí cuánto ha cambiado mi vida.",
+      "explanationEs": "Has changed une el pasado con hoy: resultado de los cambios.",
+      "segments": [
+        "After the interview, I understood how",
+        "much my life has changed."
+      ],
+      "audioText": "After the interview, I understood how much my life has changed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c10.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué pregunta le pide a Tom algo que todavía está cambiando?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "What did you used to do?"
+          },
+          {
+            "text": "What are you still getting used to?"
+          },
+          {
+            "text": "What are you used to do?"
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.pg01.seed-0",
+          "feedback": {
+            "es": "Un proceso abierto se pregunta con get used to en -ing: What are you still getting used to?"
+          },
+          "hint": {
+            "es": "Proceso abierto: get used to en -ing."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8ebd66a90e635a7ced47d45aa4b4deb8f82442fcc4a098da9f937ea659480387"
+      },
+      {
+        "id": "en.n5.c10.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Ya estás acostumbrada a la comida?»"
+        },
+        "answer": {
+          "text": "yet",
+          "accepted": [
+            "yet",
+            "now"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-getting-used-to-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.pg02.seed-0",
+          "feedback": {
+            "es": "En preguntas, yet significa «ya» y pide una respuesta sobre hoy; Are you used to the food now? también es correcto."
+          },
+          "hint": {
+            "es": "Es una palabra corta que en preguntas significa «ya»."
+          },
+          "text": "Are you used to the food ___?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:840700224f254b28e2bed95e91040ea8047636c68268431de1480bdf8beb936a"
+      },
+      {
+        "id": "en.n5.c10.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según Tom, ¿qué hacía antes de mudarse?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He takes the bus."
+          },
+          {
+            "text": "He is getting used to walking."
+          },
+          {
+            "text": "He walked to work."
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.pg03.seed-0",
+          "feedback": {
+            "es": "Used to walk es un hábito pasado que terminó; hoy toma el autobús."
+          },
+          "hint": {
+            "es": "Used to + verbo base habla de un hábito que ya terminó."
+          },
+          "text": "Tom: 'Back home I used to walk to work. Here I take the bus.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ac41651d7e66b05ea0b0ec0e864f097d576b5dfdd006b9b3a6392ca229968e24"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c10.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «¿Qué solías hacer en tu país?»"
+        },
+        "answer": {
+          "text": "What did you use to do back home",
+          "tokens": [
+            "What",
+            "did",
+            "you",
+            "use",
+            "to",
+            "do",
+            "back",
+            "home"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.p01.seed-0",
+          "feedback": {
+            "es": "Con did, el verbo principal va en base: use to do."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04d1ef7c6a842cea7978c0dc9678c8870bd41a90abd3b07b3f73f2bf0d1ced6b"
+      },
+      {
+        "id": "en.n5.c10.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué le costó al hablante al llegar."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The weather was difficult for him."
+          },
+          {
+            "text": "The food was difficult for him."
+          },
+          {
+            "text": "The language was difficult for him."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.p02.seed-0",
+          "feedback": {
+            "es": "El hablante dice que lo más difícil fue el clima; wasn't used to the rain lo confirma."
+          },
+          "audio": "The hardest thing was the weather. I wasn't used to the rain.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dcb75da1ecc529a3cb916c3695458e3e5d6961299113fadbbb56d4ce94088c7a"
+      },
+      {
+        "id": "en.n5.c10.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ahora ya estoy acostumbrado a hablar inglés.»"
+        },
+        "answer": {
+          "text": "speaking",
+          "accepted": [
+            "speaking"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.p03.seed-0",
+          "feedback": {
+            "es": "Con be used to, el verbo lleva -ing: speaking English."
+          },
+          "text": "Now I'm used to ___ English."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97dad68a5c1e62d84fa84d9cb7d9e494f2079fd7473401e77dfd2052f29f1427"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c10.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según las notas, ¿qué sigue siendo un proceso para la persona entrevistada?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She is still getting used to the cold."
+          },
+          {
+            "text": "She is still getting used to the language."
+          },
+          {
+            "text": "She is still getting used to her job."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5",
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.e01.seed-0",
+          "feedback": {
+            "es": "Las notas dicen que todavía está aprendiendo el idioma; el frío fue al llegar y el trabajo ya le gusta."
+          },
+          "text": "Interview notes: Arrived in March. At first, she felt lonely and cold. Now: has friends, likes the job, still learning the language."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ab20f33f767a371e5f99eecb27c356f34b9144c6d3e29426321386235f872a37"
+      },
+      {
+        "id": "en.n5.c10.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo se mueve ahora el hablante."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "By bike."
+          },
+          {
+            "text": "On foot."
+          },
+          {
+            "text": "By train."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5",
+          "n5-getting-used-to-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.e02.seed-0",
+          "feedback": {
+            "es": "Used to cycle es el pasado; hoy está acostumbrado a tomar el tren."
+          },
+          "audio": "Back home, I used to cycle to school and to work. Here I'm used to taking the train, and I like it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6faac49f54abad1fdb6123da60635408cb83c03df87463c56875d6226f916cc6"
+      },
+      {
+        "id": "en.n5.c10.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Al principio no estaba acostumbrada a la comida.»"
+        },
+        "answer": {
+          "text": "wasn't",
+          "accepted": [
+            "wasn't",
+            "was not"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5",
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.e03.seed-0",
+          "feedback": {
+            "es": "Al principio cuenta el pasado y no estar acostumbrada se dice wasn't used to."
+          },
+          "text": "At first, I ___ used to the food."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a3f5d3f4c3ade140809574e6890c3c93c6936695aa45edb3765beaebbcb9d99d"
+      },
+      {
+        "id": "en.n5.c10.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la entrevista a un amigo con los datos dados (30–80 palabras)."
+        },
+        "answer": {
+          "text": "Before, Tom used to walk to school. When he arrived, he wasn't used to the weather, and he is still getting used to the language. What did you use to do back home? And are you used to the food yet?",
+          "accepted": [
+            "Before, Tom used to walk to school. When he arrived, he wasn't used to the weather, and he is still getting used to the language. What did you use to do back home? And are you used to the food yet?",
+            "Tom used to walk to school. When he arrived, he wasn't used to the weather, and now he is getting used to the language. What did you use to do in your country? Are you used to the food yet?",
+            "Before he moved, my friend used to walk to school. At first he was not used to the weather, and he is still getting used to the language. What did you use to do back home? Are you used to it yet?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5",
+          "n5-getting-used-to-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.e04.seed-0",
+          "feedback": {
+            "es": "La entrevista combina used to (antes), wasn't used to (al llegar), am getting used to (proceso) y las dos preguntas pedidas."
+          },
+          "text": "Entrevistas a un amigo que se mudó. Cuenta su caso: antes caminaba al colegio; al llegar no estaba acostumbrado al clima; ahora sigue acostumbrándose al idioma. Añade dos preguntas para él: una con «What did you use to do…?» y otra con «Are you used to…?».",
+          "scoring": {
+            "wordRange": [
+              30,
+              80
+            ],
+            "evidenceGroups": [
+              [
+                "used to walk",
+                "used to go to school"
+              ],
+              [
+                "wasn't used to",
+                "was not used to"
+              ],
+              [
+                "getting used to"
+              ],
+              [
+                "What did you use to"
+              ],
+              [
+                "Are you used to",
+                "are you used to"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:09abf67235a00a4d7fe65f1b2d2291c2d0e79225255b6d5d2c43955cfcfbdb58"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c10.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según la respuesta, ¿qué es ya habitual para la persona?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The weather."
+          },
+          {
+            "text": "The language."
+          },
+          {
+            "text": "Both of them."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.r01.seed-0",
+          "feedback": {
+            "es": "Dice «I'm used to it now» sobre el clima y «I'm still getting used to it» sobre el idioma: solo el clima es habitual."
+          },
+          "text": "Reply: 'The weather? I'm used to it now. The language? I'm still getting used to it.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2f5d47f2539a3c00adfa1c0846380f96d9a51ca0370c4cd1151f2294c8ad78df"
+      },
+      {
+        "id": "en.n5.c10.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo está el hablante hoy."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He misses home more than before."
+          },
+          {
+            "text": "He misses home less than before."
+          },
+          {
+            "text": "He wants to go home tonight."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.r02.seed-0",
+          "feedback": {
+            "es": "Used to be homesick es el pasado; hoy duerme bien, así que echa de menos su casa mucho menos que antes."
+          },
+          "audio": "I used to be homesick every night, but now I sleep well.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cca4beba54259d3082382fcea49dec49c019d6b6e41d420a965091bd623209fd"
+      },
+      {
+        "id": "en.n5.c10.r03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada pregunta de la entrevista con lo que pide."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Are you used to it yet?",
+              {
+                "es": "Pregunta si ya es normal."
+              }
+            ],
+            [
+              "What are you getting used to now?",
+              {
+                "es": "Pregunta por un proceso abierto."
+              }
+            ],
+            [
+              "What did you use to do?",
+              {
+                "es": "Pregunta por un hábito del pasado."
+              }
+            ],
+            [
+              "What was the hardest thing?",
+              {
+                "es": "Pregunta por una dificultad al llegar."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c10.r03.seed-0",
+          "feedback": {
+            "es": "Cada pregunta busca un dato distinto: lo de hoy, lo que está en proceso, el hábito pasado o la dificultad inicial."
+          },
+          "pairs": [
+            [
+              "Are you used to it yet?",
+              {
+                "es": "Pregunta si ya es normal."
+              }
+            ],
+            [
+              "What are you getting used to now?",
+              {
+                "es": "Pregunta por un proceso abierto."
+              }
+            ],
+            [
+              "What did you use to do?",
+              {
+                "es": "Pregunta por un hábito del pasado."
+              }
+            ],
+            [
+              "What was the hardest thing?",
+              {
+                "es": "Pregunta por una dificultad al llegar."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:87a58ec67b07289a20d570a0ed04ce499d1ba271fea85eae0791b3ffe5759846"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c10.e01": {
+      "reteach": "en.n5.class-10.t01",
+      "review": "en.n5.c10.r01"
+    },
+    "en.n5.c10.e02": {
+      "reteach": "en.n5.class-10.t02",
+      "review": "en.n5.c10.r02"
+    },
+    "en.n5.c10.e03": {
+      "reteach": "en.n5.class-10.t03",
+      "review": "en.n5.c10.r03"
+    },
+    "en.n5.c10.e04": {
+      "reteach": "en.n5.class-10.t04",
+      "review": "en.n5.c10.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n5-getting-used-to-1",
+    "n5-getting-used-to-2",
+    "n5-getting-used-to-3",
+    "n5-getting-used-to-4",
+    "n5-getting-used-to-5"
+  ]
+}

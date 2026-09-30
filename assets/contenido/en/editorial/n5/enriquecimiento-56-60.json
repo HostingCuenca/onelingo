@@ -1,0 +1,709 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "classes": {
+    "en.n5.class-56": {
+      "explicacion": {
+        "titulo": "Más allá de said y asked: la intención de quien habla",
+        "texto": "Said y asked cuentan qué se dijo, pero no cómo lo dijo la persona. Los verbos de reporte añaden la intención: admitted (reconoce algo que hizo), denied (lo niega), insisted (lo repite con firmeza), urged (pide con insistencia que alguien actúe), warned (avisa de un peligro), promised (se compromete), suggested (propone) y wondered (se pregunta algo). Al reportar en pasado, el tiempo suele retroceder un paso: «Fui yo» → Tom admitted that it was him. Para elegir el verbo, fíjate en la intención de la cita, no solo en sus palabras."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de reporte + that + lo que dijo:",
+        "formula": [
+          {
+            "texto": "Tom",
+            "nota": "quien habló"
+          },
+          {
+            "texto": "admitted that",
+            "nota": "verbo de reporte: muestra la intención"
+          },
+          {
+            "texto": "he had broken the window.",
+            "nota": "lo que dijo, un paso atrás en el tiempo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia denied that she has taken the last cake.",
+          "correcto": "Mia denied that she had taken the last cake.",
+          "explicacion": "Con un verbo de reporte en pasado, el tiempo retrocede: has taken pasa a had taken."
+        },
+        {
+          "incorrecto": "Leo wondered if was the shop open.",
+          "correcto": "Leo wondered if the shop was open.",
+          "explicacion": "En una pregunta reportada el orden es el de una afirmación (the shop was), sin inversión como en «¿estaba la tienda abierta?»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Tom lo que pasó ayer en clase.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Yesterday Leo broke the class window with a ball.",
+            "traduccion": "Ayer Leo rompió la ventana de la clase con una pelota."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What did he say to the teacher?",
+            "traduccion": "¿Qué le dijo él a la profesora?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "First he denied it. Then he admitted that he had kicked the ball.",
+            "traduccion": "Primero lo negó. Después reconoció que había pateado la pelota."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the teacher?",
+            "traduccion": "¿Y la profesora?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "She urged him to tell his parents.",
+            "traduccion": "Le pidió con insistencia que se lo contara a sus padres."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Leo primero y qué hizo después?",
+          "opciones": [
+            {
+              "es": "Primero lo negó y después reconoció lo que había hecho."
+            },
+            {
+              "es": "Primero lo reconoció y después lo negó."
+            },
+            {
+              "es": "Primero insistió en que fue un accidente y después se fue."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «First he denied it. Then he admitted…»: negó primero y reconoció después. No se habla de accidente ni de que se fuera."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo (base)",
+          "Intención",
+          "Cita original"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "admit"
+            },
+            {
+              "texto": "reconoce algo que hizo"
+            },
+            {
+              "texto": "I broke the window."
+            }
+          ],
+          [
+            {
+              "texto": "deny"
+            },
+            {
+              "texto": "niega algo"
+            },
+            {
+              "texto": "I didn't take it."
+            }
+          ],
+          [
+            {
+              "texto": "insist"
+            },
+            {
+              "texto": "repite con firmeza"
+            },
+            {
+              "texto": "I am telling the truth!"
+            }
+          ],
+          [
+            {
+              "texto": "urge"
+            },
+            {
+              "texto": "pide con insistencia que alguien actúe"
+            },
+            {
+              "texto": "Please hurry!"
+            }
+          ],
+          [
+            {
+              "texto": "warn"
+            },
+            {
+              "texto": "avisa de un peligro"
+            },
+            {
+              "texto": "Be careful: it is dangerous."
+            }
+          ],
+          [
+            {
+              "texto": "wonder"
+            },
+            {
+              "texto": "se pregunta algo"
+            },
+            {
+              "texto": "Is the shop still open?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-57": {
+      "explicacion": {
+        "titulo": "Verbos de reporte y su patrón",
+        "texto": "Cada verbo de reporte pide su propia estructura, y hay que aprenderla junto con el verbo. Con -ing: suggest, admit, deny (Tom suggested taking a taxi). Con to + verbo: promise, offer, refuse (Leo promised to call). Con persona + to + verbo: advise, warn, urge (The doctor advised me to rest); en negativo, not to. Con persona + of + -ing: accuse (Sara accused him of lying). Con that + oración: casi todos (Tom admitted that he was wrong). Ojo: «suggest me to go» es un error muy frecuente; suggest nunca lleva persona + to."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de reporte + patrón:",
+        "formula": [
+          {
+            "texto": "Leo",
+            "nota": "quien habla"
+          },
+          {
+            "texto": "promised to",
+            "nota": "verbo + to: un compromiso"
+          },
+          {
+            "texto": "call me later.",
+            "nota": "verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Tom suggested me to take a taxi.",
+          "correcto": "Tom suggested taking a taxi.",
+          "explicacion": "Suggest no admite persona + to. Se usa -ing (suggested taking) o that + oración."
+        },
+        {
+          "incorrecto": "Sara accused her brother to read her messages.",
+          "correcto": "Sara accused her brother of reading her messages.",
+          "explicacion": "Accuse lleva una preposición fija, of, y después un verbo con -ing; en español «acusó de leer» también lleva de."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le cuenta a Mia lo que pasó en la reunión de vecinos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What happened at the meeting last night?",
+            "traduccion": "¿Qué pasó anoche en la reunión?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "At the meeting, Mr Lopez refused to turn the music down, and Mrs Diaz accused him of ignoring the rules.",
+            "traduccion": "En la reunión, el señor López se negó a bajar la música y la señora Díaz lo acusó de ignorar las normas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Did they solve it?",
+            "traduccion": "¿Lo solucionaron?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. He promised to keep it quiet after ten.",
+            "traduccion": "Sí. Prometió mantenerla baja después de las diez."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de qué acusó la señora Díaz al señor López?",
+          "opciones": [
+            {
+              "es": "De ignorar las normas."
+            },
+            {
+              "es": "De romper el equipo de música."
+            },
+            {
+              "es": "De llegar tarde a la reunión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Mrs Diaz accused him of ignoring the rules». Lo de la música es lo que él se negó a bajar y la hora de llegada no se menciona."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Patrón",
+          "Verbos",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "verbo + -ing"
+            },
+            {
+              "texto": "suggest, admit, deny"
+            },
+            {
+              "texto": "Tom suggested taking a taxi."
+            }
+          ],
+          [
+            {
+              "texto": "verbo + to + base"
+            },
+            {
+              "texto": "promise, offer, refuse"
+            },
+            {
+              "texto": "Leo promised to call me later."
+            }
+          ],
+          [
+            {
+              "texto": "verbo + persona + to + base"
+            },
+            {
+              "texto": "advise, warn, urge"
+            },
+            {
+              "texto": "The doctor advised me to rest."
+            }
+          ],
+          [
+            {
+              "texto": "verbo + persona + of + -ing"
+            },
+            {
+              "texto": "accuse"
+            },
+            {
+              "texto": "Sara accused her brother of reading her messages."
+            }
+          ],
+          [
+            {
+              "texto": "verbo + that + oración"
+            },
+            {
+              "texto": "admit, promise, warn, insist"
+            },
+            {
+              "texto": "Ana insisted that she was right."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-58": {
+      "explicacion": {
+        "titulo": "¿Fiel o distorsionado? Comparar original y reporte",
+        "texto": "Un reporte fiel conserva tres cosas: el significado (might no se convierte en promised), las personas y los tiempos (I → he; am → was; did → had done) y las referencias de tiempo y lugar (today → that day, tomorrow → the next day, here → there, now → then). Una versión distorsionada exagera o suaviza lo dicho, omite un detalle importante o confunde quién habló. Para comprobarlo, compara la cita original con el reporte frase por frase. Si lo dicho sigue siendo cierto, a veces se deja el presente: Ana said the Earth is round."
+      },
+      "patron": {
+        "texto": "Cita original → reporte fiel:",
+        "formula": [
+          {
+            "texto": "Tom said",
+            "nota": "quien habló"
+          },
+          {
+            "texto": "he was tired",
+            "nota": "I am → he was: cambian persona y tiempo"
+          },
+          {
+            "texto": "then.",
+            "nota": "now → then: cambia la referencia de tiempo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia said that she will call tomorrow.",
+          "correcto": "Mia said that she would call the next day.",
+          "explicacion": "Al reportar más tarde, will retrocede a would y tomorrow pasa a the next day."
+        },
+        {
+          "incorrecto": "Ana said that I had been there the day before.",
+          "correcto": "Ana said that she had been there the day before.",
+          "explicacion": "La persona también cambia: el «I» de Ana es she en el reporte, no I."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Tom comprueban si un reporte sobre Mia es fiel.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Ana told me that Mia promised to come to the party.",
+            "traduccion": "Ana me dijo que Mia prometió venir a la fiesta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is not faithful. Mia only said she might come.",
+            "traduccion": "Eso no es fiel. Mia solo dijo que quizá vendría."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So she didn't promise?",
+            "traduccion": "¿Entonces no lo prometió?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. The original message was «I may come if I finish early».",
+            "traduccion": "No. El mensaje original era «puede que vaya si termino temprano»."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambió Ana al contar lo que dijo Mia?",
+          "opciones": [
+            {
+              "es": "Convirtió «quizá venga» en una promesa."
+            },
+            {
+              "es": "Cambió la fecha de la fiesta."
+            },
+            {
+              "es": "Olvidó quién dijo el mensaje."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo explica que Mia solo dijo que quizá vendría (might) y Ana lo contó como promised. La fecha y quién habló no cambian."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Cita original",
+          "Reporte fiel",
+          "Qué cambia"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I am tired now."
+            },
+            {
+              "texto": "He said he was tired then."
+            },
+            {
+              "texto": "persona, tiempo y «now»"
+            }
+          ],
+          [
+            {
+              "texto": "I saw it yesterday."
+            },
+            {
+              "texto": "She said she had seen it the day before."
+            },
+            {
+              "texto": "retroceso y «yesterday»"
+            }
+          ],
+          [
+            {
+              "texto": "We will come tomorrow."
+            },
+            {
+              "texto": "He said they would come the next day."
+            },
+            {
+              "texto": "will → would y «tomorrow»"
+            }
+          ],
+          [
+            {
+              "texto": "I may be late."
+            },
+            {
+              "texto": "He said he might be late."
+            },
+            {
+              "texto": "may → might: mismo grado"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-59": {
+      "explicacion": {
+        "titulo": "Volver a contar una conversación con verbos de reporte",
+        "texto": "Para volver a contar una conversación, ordena lo dicho con conectores (first, afterwards, finally) y elige un verbo de reporte que muestre la intención de cada frase: told me that (afirmación), asked me if (pregunta), promised to (promesa), warned me not to (advertencia), complained that (queja), mentioned that (dato). La pregunta reportada pierde la inversión: She asked if I could help, no «could I». El tiempo suele retroceder un paso, pero si lo dicho sigue siendo cierto puedes dejar el presente: Ana told me that the shop closes at six. Usa al menos cuatro verbos distintos."
+      },
+      "patron": {
+        "texto": "Conector + verbo de reporte + contenido:",
+        "formula": [
+          {
+            "texto": "Afterwards,",
+            "nota": "conector: ordena el relato"
+          },
+          {
+            "texto": "she asked me",
+            "nota": "verbo de reporte: pregunta"
+          },
+          {
+            "texto": "if I could help.",
+            "nota": "if + orden normal, sin inversión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She asked me if could I help her.",
+          "correcto": "She asked me if I could help her.",
+          "explicacion": "La pregunta reportada mantiene el orden de una afirmación (I could), sin inversión ni signo de pregunta."
+        },
+        {
+          "incorrecto": "She said me that she had lost her phone.",
+          "correcto": "She told me that she had lost her phone.",
+          "explicacion": "Said no admite persona directamente; con persona se usa told me. En español «me dijo» sí funciona, pero en inglés cambia el verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Sara lo que dijo su profesor de música después del concierto.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What did Mr Reyes say after the concert?",
+            "traduccion": "¿Qué dijo el señor Reyes después del concierto?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He told me that we had played very well, and he asked if we could practise on Saturday.",
+            "traduccion": "Me dijo que habíamos tocado muy bien y preguntó si podíamos ensayar el sábado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Did he promise anything?",
+            "traduccion": "¿Prometió algo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He promised to bring new songs, but he warned us not to be late.",
+            "traduccion": "Prometió traer canciones nuevas, pero nos advirtió que no llegáramos tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué advirtió el profesor?",
+          "opciones": [
+            {
+              "es": "Que no llegaran tarde."
+            },
+            {
+              "es": "Que tocaran más fuerte."
+            },
+            {
+              "es": "Que trajeran sus propias canciones."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «he warned us not to be late»: la advertencia es no llegar tarde. Traer canciones nuevas es lo que él prometió."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Acto de habla",
+          "Verbo de reporte",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "afirmación"
+            },
+            {
+              "texto": "told me that"
+            },
+            {
+              "texto": "She told me that she had lost it."
+            }
+          ],
+          [
+            {
+              "texto": "pregunta"
+            },
+            {
+              "texto": "asked me if / wondered whether"
+            },
+            {
+              "texto": "She asked me if I could help."
+            }
+          ],
+          [
+            {
+              "texto": "promesa"
+            },
+            {
+              "texto": "promised to"
+            },
+            {
+              "texto": "I promised to help her."
+            }
+          ],
+          [
+            {
+              "texto": "advertencia"
+            },
+            {
+              "texto": "warned me not to"
+            },
+            {
+              "texto": "She warned me not to tell anyone."
+            }
+          ],
+          [
+            {
+              "texto": "queja"
+            },
+            {
+              "texto": "complained that"
+            },
+            {
+              "texto": "She complained that nobody helped her."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-60": {
+      "explicacion": {
+        "titulo": "Transmitir un mensaje sin deformarlo",
+        "texto": "Pasar un mensaje entre tres personas exige tres filtros. Primero, quién habló y a quién se lo pasas: Tom asked me to tell you that he will be late (cambian I y you). Segundo, la pregunta: Mia wants to know if you can come (sin inversión). Tercero, si alguien lo deformó, aclara con las palabras exactas: That's not exactly what she said; she said she might. Elige el verbo de reporte que muestre la intención (warned, promised, asked), retrocede el tiempo si hace falta y mantén el presente si el hecho sigue siendo cierto."
+      },
+      "patron": {
+        "texto": "Quién lo dijo + encargo + mensaje + pregunta:",
+        "formula": [
+          {
+            "texto": "Tom asked me to tell you",
+            "nota": "quién habló y a quién se lo pasas"
+          },
+          {
+            "texto": "that he will be late,",
+            "nota": "el mensaje: sigue siendo cierto, se queda en presente"
+          },
+          {
+            "texto": "and Mia wants to know if you can come.",
+            "nota": "la pregunta: if + orden normal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia wants to know if can you bring the tickets.",
+          "correcto": "Mia wants to know if you can bring the tickets.",
+          "explicacion": "La pregunta reportada mantiene el orden de una afirmación (you can), sin inversión."
+        },
+        {
+          "incorrecto": "Tom asked me that I tell you he will be late.",
+          "correcto": "Tom asked me to tell you that he will be late.",
+          "explicacion": "Para un encargo se usa asked + persona + to + verbo, no that + oración."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara pasa a Leo un mensaje de Carlos.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Carlos asked me to tell you that the meeting is on Friday.",
+            "traduccion": "Carlos me pidió que te dijera que la reunión es el viernes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Did he ask anything else?",
+            "traduccion": "¿Preguntó algo más?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. He wants to know if you can bring the report.",
+            "traduccion": "Sí. Quiere saber si puedes traer el informe."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Please tell him I will come. And let me clarify: I said I might bring the report, not that I would.",
+            "traduccion": "Por favor, dile que iré. Y déjame aclarar: dije que quizá traería el informe, no que lo traería."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere aclarar Leo?",
+          "opciones": [
+            {
+              "es": "Que dijo que quizá traería el informe, no que lo traería seguro."
+            },
+            {
+              "es": "Que no puede ir a la reunión del viernes."
+            },
+            {
+              "es": "Que Carlos cambió la hora de la reunión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «I said I might bring the report, not that I would». Sí va a la reunión y nadie habla de cambiar la hora."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué transmites",
+          "Cómo lo dices",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "mensaje"
+            },
+            {
+              "texto": "asked me to tell you that…"
+            },
+            {
+              "texto": "Tom asked me to tell you that he will be late."
+            }
+          ],
+          [
+            {
+              "texto": "pregunta"
+            },
+            {
+              "texto": "wants to know if…"
+            },
+            {
+              "texto": "Mia wants to know if you can come."
+            }
+          ],
+          [
+            {
+              "texto": "advertencia"
+            },
+            {
+              "texto": "warned us not to…"
+            },
+            {
+              "texto": "He warned us not to park there."
+            }
+          ],
+          [
+            {
+              "texto": "aclaración"
+            },
+            {
+              "texto": "That is not exactly what… said: …"
+            },
+            {
+              "texto": "That is not exactly what she said: she said she might."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

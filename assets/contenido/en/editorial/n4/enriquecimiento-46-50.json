@@ -1,0 +1,696 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "classes": {
+    "en.n4.class-46": {
+      "explicacion": {
+        "titulo": "La palabra base y sus afijos",
+        "texto": "Muchas palabras inglesas pertenecen a una familia: tienen una palabra base y algo añadido delante (prefijo) o detrás (sufijo). Los prefijos un-, dis- e im- dan el significado contrario (happy → unhappy). Los sufijos cambian la categoría: -ness forma sustantivos (kind → kindness) y -ful forma adjetivos con el sentido «lleno de» (care → careful). Si reconoces la base, entiendes la palabra aunque sea nueva."
+      },
+      "patron": {
+        "texto": "Prefijo / base / sufijo:",
+        "formula": [
+          {
+            "texto": "un- + happy",
+            "nota": "prefijo: lo contrario"
+          },
+          {
+            "texto": "kind + -ness",
+            "nota": "sufijo: adjetivo → sustantivo"
+          },
+          {
+            "texto": "care + -ful",
+            "nota": "sufijo: lleno de cuidado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She is a very kindness person.",
+          "correcto": "She is a very kind person.",
+          "explicacion": "Kindness es un sustantivo; delante de person necesitas el adjetivo kind."
+        },
+        {
+          "incorrecto": "Tom is unpatient.",
+          "correcto": "Tom is impatient.",
+          "explicacion": "Antes de p el prefijo contrario es im-, no un-: impatient."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara hablan de un compañero nuevo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Is the new student unhappy?",
+            "traduccion": "¿Está triste el alumno nuevo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, he is shy, but he is very kind.",
+            "traduccion": "No, es tímido, pero es muy amable."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I like his kindness. He is never impatient with us.",
+            "traduccion": "Me gusta su amabilidad. Nunca es impaciente con nosotros."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, and he is always careful with his work.",
+            "traduccion": "Sí, y siempre es cuidadoso con su trabajo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo es el alumno nuevo?",
+          "opciones": [
+            {
+              "es": "Tímido y amable."
+            },
+            {
+              "es": "Infeliz y descuidado."
+            },
+            {
+              "es": "Impaciente y deshonesto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «he is shy, but he is very kind»: es tímido y amable."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Base",
+          "Afijo",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "unhappy"
+            },
+            {
+              "texto": "happy"
+            },
+            {
+              "texto": "un-"
+            },
+            {
+              "texto": "no feliz"
+            }
+          ],
+          [
+            {
+              "texto": "kindness"
+            },
+            {
+              "texto": "kind"
+            },
+            {
+              "texto": "-ness"
+            },
+            {
+              "texto": "cualidad de ser amable"
+            }
+          ],
+          [
+            {
+              "texto": "careful"
+            },
+            {
+              "texto": "care"
+            },
+            {
+              "texto": "-ful"
+            },
+            {
+              "texto": "lleno de cuidado"
+            }
+          ],
+          [
+            {
+              "texto": "dishonest"
+            },
+            {
+              "texto": "honest"
+            },
+            {
+              "texto": "dis-"
+            },
+            {
+              "texto": "no honrado"
+            }
+          ],
+          [
+            {
+              "texto": "impatient"
+            },
+            {
+              "texto": "patient"
+            },
+            {
+              "texto": "im-"
+            },
+            {
+              "texto": "no paciente"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-47": {
+      "explicacion": {
+        "titulo": "Sufijos y prefijos que cambian la palabra",
+        "texto": "Con los sufijos cambias la categoría: -ness y -ity forman sustantivos (sad → sadness, creative → creativity), -ful significa «con» (helpful) y -less significa «sin» (helpless). Con los prefijos un-, dis- e im- niegas el significado (reliable → unreliable, polite → impolite). Elige la forma según lo que pide la frase: después de a lot of o de her necesitas un sustantivo; después de be o delante de un sustantivo, un adjetivo. No hay regla perfecta: aprende las familias."
+      },
+      "patron": {
+        "texto": "Base + afijo = nueva categoría:",
+        "formula": [
+          {
+            "texto": "help + -ful",
+            "nota": "adjetivo: con ayuda"
+          },
+          {
+            "texto": "help + -less",
+            "nota": "adjetivo: sin ayuda"
+          },
+          {
+            "texto": "sad + -ness",
+            "nota": "sustantivo: la cualidad"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia has a lot of creative.",
+          "correcto": "Mia has a lot of creativity.",
+          "explicacion": "Después de a lot of hace falta un sustantivo: creativity, no el adjetivo."
+        },
+        {
+          "incorrecto": "It is unpolite to arrive late.",
+          "correcto": "It is impolite to arrive late.",
+          "explicacion": "Polite lleva el prefijo im-, no un-."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo eligen a una persona para ayudar en el club.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Who can help with the club?",
+            "traduccion": "¿Quién puede ayudar con el club?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Tom is reliable, and he is always helpful.",
+            "traduccion": "Tom es fiable y siempre es servicial."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What about Mia? She has a lot of creativity.",
+            "traduccion": "¿Y Mia? Tiene mucha creatividad."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but she is sometimes late.",
+            "traduccion": "Sí, pero a veces llega tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo propone a Tom?",
+          "opciones": [
+            {
+              "es": "Porque es fiable y servicial."
+            },
+            {
+              "es": "Porque es muy creativo."
+            },
+            {
+              "es": "Porque siempre llega tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Tom is reliable, and he is always helpful». La creatividad es de Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Base",
+          "Con afijo",
+          "Qué hace"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "help"
+            },
+            {
+              "texto": "helpful / helpless"
+            },
+            {
+              "texto": "-ful = con, -less = sin"
+            }
+          ],
+          [
+            {
+              "texto": "sad"
+            },
+            {
+              "texto": "sadness"
+            },
+            {
+              "texto": "-ness forma un sustantivo"
+            }
+          ],
+          [
+            {
+              "texto": "creative"
+            },
+            {
+              "texto": "creativity"
+            },
+            {
+              "texto": "-ity forma un sustantivo"
+            }
+          ],
+          [
+            {
+              "texto": "polite"
+            },
+            {
+              "texto": "impolite"
+            },
+            {
+              "texto": "im- niega el sentido"
+            }
+          ],
+          [
+            {
+              "texto": "reliable"
+            },
+            {
+              "texto": "unreliable"
+            },
+            {
+              "texto": "un- niega el sentido"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-48": {
+      "explicacion": {
+        "titulo": "Adivinar palabras nuevas",
+        "texto": "Cuando aparece una palabra desconocida, no la busques enseguida: sepárala. Primero localiza la base que ya conoces (forget, use, enjoy), luego añade el significado del afijo (-less = sin; -ful = con o que tiende a; -able = que se puede; un- = no) y por último comprueba con la frase: el contexto suele confirmar tu idea. Así entiendes palabras nuevas y evitas confundir -ing con -able: enjoying describe lo que sientes; enjoyable, lo que se puede disfrutar."
+      },
+      "patron": {
+        "texto": "Base + afijo + contexto = significado:",
+        "formula": [
+          {
+            "texto": "forget + -ful",
+            "nota": "base conocida + afijo: que tiende a olvidar"
+          },
+          {
+            "texto": "forgetful",
+            "nota": "= olvidadizo"
+          },
+          {
+            "texto": "He often forgets his keys.",
+            "nota": "el contexto confirma el significado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My phone is useful; it never works.",
+          "correcto": "My phone is useless; it never works.",
+          "explicacion": "-ful es «con utilidad» y -less es «sin utilidad»; el contexto pide -less."
+        },
+        {
+          "incorrecto": "The picnic was enjoying, and everyone had fun.",
+          "correcto": "The picnic was enjoyable, and everyone had fun.",
+          "explicacion": "Enjoying no describe el picnic; enjoyable significa «que se puede disfrutar»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Mia hablan de un compañero de clase.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Is Leo forgetful?",
+            "traduccion": "¿Es olvidadizo Leo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, but he is thoughtful. Yesterday he brought me a drink.",
+            "traduccion": "Sí, pero es considerado. Ayer me trajo una bebida."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And is the new teacher unfriendly?",
+            "traduccion": "¿Y la profesora nueva es antipática?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, her lessons are enjoyable.",
+            "traduccion": "No, sus clases son agradables."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Leo ayer?",
+          "opciones": [
+            {
+              "es": "Le llevó una bebida a Mia."
+            },
+            {
+              "es": "Olvidó sus llaves."
+            },
+            {
+              "es": "Rompió una ventana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cuenta que Leo «brought me a drink»: por eso lo llama thoughtful."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Afijo",
+          "Idea",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "-less"
+            },
+            {
+              "texto": "sin"
+            },
+            {
+              "texto": "useless"
+            }
+          ],
+          [
+            {
+              "texto": "-ful"
+            },
+            {
+              "texto": "con o que tiende a"
+            },
+            {
+              "texto": "forgetful"
+            }
+          ],
+          [
+            {
+              "texto": "-able"
+            },
+            {
+              "texto": "que se puede"
+            },
+            {
+              "texto": "enjoyable"
+            }
+          ],
+          [
+            {
+              "texto": "un-"
+            },
+            {
+              "texto": "no"
+            },
+            {
+              "texto": "unfriendly"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-49": {
+      "explicacion": {
+        "titulo": "Describir el carácter con ejemplos",
+        "texto": "Para describir a alguien no basta con decir un adjetivo: demuéstralo. Usa un adjetivo de carácter (generous), añade un ejemplo con for example y cierra con un sustantivo derivado precedido de her o his (her generosity). Cuida la categoría: después de be o very va un adjetivo (very generous) y después de a lot of o de her va un sustantivo (a lot of bravery). Cambiar un adjetivo por su sustantivo es el error más frecuente."
+      },
+      "patron": {
+        "texto": "Persona + adjetivo + ejemplo + sustantivo:",
+        "formula": [
+          {
+            "texto": "Rosa is generous;",
+            "nota": "adjetivo de carácter"
+          },
+          {
+            "texto": "for example, she shares her lunch.",
+            "nota": "ejemplo con un hecho"
+          },
+          {
+            "texto": "Her generosity makes us smile.",
+            "nota": "sustantivo derivado con her o his"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Rosa is very generosity.",
+          "correcto": "Rosa is very generous.",
+          "explicacion": "Después de very va un adjetivo: generous; generosity es un sustantivo."
+        },
+        {
+          "incorrecto": "Leo has a lot of brave.",
+          "correcto": "Leo has a lot of bravery.",
+          "explicacion": "Después de a lot of hace falta un sustantivo: bravery, no el adjetivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Tom cómo es su hermana Rosa.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What is your sister like?",
+            "traduccion": "¿Cómo es tu hermana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Rosa is generous and cheerful. For example, she shares her lunch with everyone.",
+            "traduccion": "Rosa es generosa y alegre. Por ejemplo, comparte su almuerzo con todos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And is she shy?",
+            "traduccion": "¿Y es tímida?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Only at first. Her shyness disappears quickly.",
+            "traduccion": "Solo al principio. Su timidez desaparece pronto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Rosa para mostrar su generosidad?",
+          "opciones": [
+            {
+              "es": "Comparte su almuerzo con todos."
+            },
+            {
+              "es": "Habla delante de la clase."
+            },
+            {
+              "es": "Siempre dice la verdad."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana lo dice con un ejemplo: «she shares her lunch with everyone»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Adjetivo",
+          "Sustantivo",
+          "Ejemplo de conducta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "generous"
+            },
+            {
+              "texto": "generosity"
+            },
+            {
+              "texto": "She shares her lunch."
+            }
+          ],
+          [
+            {
+              "texto": "brave"
+            },
+            {
+              "texto": "bravery"
+            },
+            {
+              "texto": "He speaks in front of the class."
+            }
+          ],
+          [
+            {
+              "texto": "shy"
+            },
+            {
+              "texto": "shyness"
+            },
+            {
+              "texto": "She says little at first."
+            }
+          ],
+          [
+            {
+              "texto": "honest"
+            },
+            {
+              "texto": "honesty"
+            },
+            {
+              "texto": "He always tells the truth."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-50": {
+      "explicacion": {
+        "titulo": "Escribir una referencia",
+        "texto": "Una referencia breve tiene tres partes. Primero presentas a la persona y para qué la recomiendas (I am writing a reference for…). Después das dos o tres cualidades, cada una con un ejemplo (responsible, enthusiastic, good at teamwork) y algún sustantivo derivado (her enthusiasm). Por último cierras con I recommend her as a volunteer. Cuida las preposiciones fijas (enthusiastic about) y las parejas naturales (take responsibility, give support)."
+      },
+      "patron": {
+        "texto": "Presentación + cualidades con ejemplo + recomendación:",
+        "formula": [
+          {
+            "texto": "I am writing a reference for Mia.",
+            "nota": "presentación: quién y para qué"
+          },
+          {
+            "texto": "She is responsible; for example, she takes responsibility.",
+            "nota": "cualidad + ejemplo"
+          },
+          {
+            "texto": "I recommend her as a volunteer.",
+            "nota": "cierre: recommend + persona + as"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia is enthusiastic of every task.",
+          "correcto": "Mia is enthusiastic about every task.",
+          "explicacion": "Enthusiastic se une con about, no con of."
+        },
+        {
+          "incorrecto": "I recommend her for be a volunteer.",
+          "correcto": "I recommend her as a volunteer.",
+          "explicacion": "Para indicar la función se usa as + sustantivo, no for + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pide a Sara que escriba una referencia para Leo, que quiere ser voluntario.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Can you write a reference for Leo? He wants to be a volunteer at the animal club.",
+            "traduccion": "¿Puedes escribir una referencia para Leo? Quiere ser voluntario en el club de animales."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Of course. Leo is responsible and very enthusiastic.",
+            "traduccion": "Claro. Leo es responsable y muy entusiasta."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What will you say about his teamwork?",
+            "traduccion": "¿Qué dirás de su trabajo en equipo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "He gives support to new members. I recommend him as a volunteer.",
+            "traduccion": "Da apoyo a los miembros nuevos. Lo recomiendo como voluntario."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿para qué quiere Leo la referencia?",
+          "opciones": [
+            {
+              "es": "Para ser voluntario en el club de animales."
+            },
+            {
+              "es": "Para entrar en un equipo de fútbol."
+            },
+            {
+              "es": "Para pedir una medalla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que Leo wants to be a volunteer at the animal club."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presentación"
+            },
+            {
+              "texto": "I am writing a reference for…"
+            }
+          ],
+          [
+            {
+              "texto": "Cualidad"
+            },
+            {
+              "texto": "She is enthusiastic about…"
+            }
+          ],
+          [
+            {
+              "texto": "Ejemplo"
+            },
+            {
+              "texto": "For example, she gives support to…"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "I recommend her as a volunteer."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Independiente: revisadas las 5 clases contra el mapa N4 (concepto, fase, canDo, tarea de evaluación); progresión input, forma, comprensión, producción, transferencia coherente.",
+      "P1 corregidos: 48 evaluación[0] revelaba 'forgetful' (respuesta de evaluación[3]) y su definición; 49 repaso[1] ambiguo (bravery/honesty) al no indicar la base; 49 repaso[2] pedía un ejemplo libre con coincidencia exacta (rúbrica flexible); 50 práctica[0] admitía 'help' por no dar el sentido de 'apoyo' en la consigna; 49 y 50 redacciones de evaluación alargadas (modelos de ~50 palabras, rango 35–100/110) con evidencias con variantes; escritura corta cerrada (47, 49, 50) convertida a rúbrica.",
+      "P2: 46 práctica[1] feedback citaba 'great' inexistente en el ítem; 48 práctica[0] feedback no coincidía con el texto; 49 repaso[0] opción casi idéntica al audio; 48 evaluación[1] opción con 'she' sin base; 47 enseñanza nombra -able en 'reliable'; 50 repaso[0] texto incoherente (unfriendly/shyness) corregido.",
+      "Validador y construcción OK; sin P0/P1 pendientes."
+    ]
+  }
+}

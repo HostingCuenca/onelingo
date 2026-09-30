@@ -1,0 +1,882 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-39",
+  "title": {
+    "en": "Rewrite for a new reader",
+    "es": "Reescribir para otro lector"
+  },
+  "objectives": {
+    "es": [
+      "Reescribir un mensaje informal en formal, y al revés, sin perder la información."
+    ]
+  },
+  "concepts": [
+    "n4-tone-and-audience-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-38"
+  ],
+  "usesVocabulary": [
+    "ill",
+    "attend",
+    "would",
+    "information",
+    "email",
+    "coordinator",
+    "because"
+  ],
+  "usesPatterns": [
+    "n4-tone-and-audience-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "ill",
+      "es": "enfermo/a"
+    },
+    {
+      "en": "attend",
+      "es": "asistir"
+    },
+    {
+      "en": "would",
+      "es": "querría"
+    },
+    {
+      "en": "information",
+      "es": "información"
+    },
+    {
+      "en": "email",
+      "es": "correo"
+    },
+    {
+      "en": "coordinator",
+      "es": "coordinador/a"
+    },
+    {
+      "en": "because",
+      "es": "porque"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-39.t01",
+      "en": "Hi Leo, I can't come because I'm ill.",
+      "es": "Hola, Leo, no puedo ir porque estoy enfermo.",
+      "explanationEs": "Versión informal: contracciones can't e I'm y un saludo corto.",
+      "segments": [
+        "Hi Leo, I can't",
+        "come because I'm ill."
+      ],
+      "audioText": "Hi Leo, I can't come because I'm ill.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-4"
+    },
+    {
+      "id": "en.n4.class-39.t02",
+      "en": "Dear Mr Brown, I am afraid that I cannot attend because I am ill.",
+      "es": "Estimado señor Brown, me temo que no puedo asistir porque estoy enfermo.",
+      "explanationEs": "Versión formal: formas completas (cannot, I am), Dear + título y I am afraid that.",
+      "segments": [
+        "Dear Mr Brown, I am afraid that",
+        "I cannot attend because I am ill."
+      ],
+      "audioText": "Dear Mr Brown, I am afraid that I cannot attend because I am ill.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-4"
+    },
+    {
+      "id": "en.n4.class-39.t03",
+      "en": "I would like to ask about the trip.",
+      "es": "Me gustaría preguntar por el viaje.",
+      "explanationEs": "I would like to + verbo sustituye a I want to en un mensaje formal.",
+      "segments": [
+        "I would like to",
+        "ask about the trip."
+      ],
+      "audioText": "I would like to ask about the trip.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-4"
+    },
+    {
+      "id": "en.n4.class-39.t04",
+      "en": "Could you please send me the information by email?",
+      "es": "¿Podría enviarme la información por correo, por favor?",
+      "explanationEs": "Could you please suaviza la petición; can you es más informal.",
+      "segments": [
+        "Could you please send me",
+        "the information by email?"
+      ],
+      "audioText": "Could you please send me the information by email?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-4"
+    },
+    {
+      "id": "en.n4.class-39.t05",
+      "en": "I am writing to the coordinator of the school club.",
+      "es": "Escribo a la coordinadora del club del colegio.",
+      "explanationEs": "I am writing to + destinatario abre el propósito del correo formal.",
+      "segments": [
+        "I am writing to the",
+        "coordinator of the school club."
+      ],
+      "audioText": "I am writing to the coordinator of the school club.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c39.pg01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me gustaría preguntar por el viaje.»"
+        },
+        "answer": {
+          "text": "I would like to ask about the trip",
+          "tokens": [
+            "I",
+            "would",
+            "like",
+            "to",
+            "ask",
+            "about",
+            "the",
+            "trip"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-tone-and-audience-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.pg01.seed-0",
+          "feedback": {
+            "es": "I would like to + verbo sustituye al informal I want to: I would like to ask."
+          },
+          "hint": {
+            "es": "Empieza con el sujeto y la fórmula cortés que sustituye a I want."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6f22f6fe59782a73a831c0ab3839fb95359394bddcfe238c1722f661e7153cd3"
+      },
+      {
+        "id": "en.n4.c39.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Me temo que no puedo asistir.»"
+        },
+        "answer": {
+          "text": "afraid",
+          "accepted": [
+            "afraid"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-tone-and-audience-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.pg02.seed-0",
+          "feedback": {
+            "es": "I am afraid that es la fórmula cortés para dar una mala noticia en un mensaje formal."
+          },
+          "hint": {
+            "es": "Es la palabra con la que empieza una disculpa cortés."
+          },
+          "text": "I am ___ that I cannot attend."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04b6fe184fa896d3f707660aef388170dca66dbe5ac204c2d25f3452c8e4bb46"
+      },
+      {
+        "id": "en.n4.c39.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la versión formal de «Can you send me the information?»"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Could you please send me the information?"
+          },
+          {
+            "text": "Can you send me the information?"
+          },
+          {
+            "text": "Send me the information, thanks!"
+          }
+        ],
+        "teaches": [
+          "n4-tone-and-audience-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.pg03.seed-0",
+          "feedback": {
+            "es": "Could you please suaviza la petición y es la forma formal. Can you… y la orden con thanks son informales."
+          },
+          "hint": {
+            "es": "Busca la fórmula de petición más cortés."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:049348de88cb65275a178f0800d5df4e60c44035f46c1d3ef3e4d4506631b8e4"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c39.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la versión formal de la frase."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I can't come to the meeting."
+          },
+          {
+            "text": "I would like to attend the meeting."
+          },
+          {
+            "text": "Come to the meeting, please!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.p01.seed-0",
+          "feedback": {
+            "es": "I would like to attend the meeting sustituye a I want to come con la fórmula formal would like to."
+          },
+          "audio": "I want to come to the meeting.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4a55eea6e16921c40b297777378b9e26be2921e2522ad3f32ee3f0341b4747ca"
+      },
+      {
+        "id": "en.n4.c39.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las dos frases formales."
+        },
+        "answer": {
+          "text": "cannot | Could",
+          "accepted": [
+            "cannot | Could"
+          ],
+          "parts": [
+            {
+              "text": "cannot",
+              "accepted": [
+                "cannot",
+                "can not"
+              ]
+            },
+            {
+              "text": "Could",
+              "accepted": [
+                "Could",
+                "could"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.p02.seed-0",
+          "feedback": {
+            "es": "La versión formal usa cannot, sin contracción, y Could you please en lugar de Can you."
+          },
+          "sentences": [
+            "I am afraid that I ___ attend.",
+            "___ you please help me?"
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          },
+          "text": "Informal: «I can't come.» · «Can you help me?»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aac3d350289e80245ba5bcaa085656eab5a3365e0cc0ed01df3fcb6f61a62ec0"
+      },
+      {
+        "id": "en.n4.c39.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la versión formal de la frase?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Thanks a lot for your help!"
+          },
+          {
+            "text": "Thank you a lot for help!"
+          },
+          {
+            "text": "Thank you very much for your help."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.p03.seed-0",
+          "feedback": {
+            "es": "Thank you very much for your help es la forma formal: sin thanks a lot ni exclamación."
+          },
+          "text": "Thanks a lot for your help!"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e03fb43e08642033a465d194d5587f68d821802366e787e1efa5038242eb9744"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c39.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe el mensaje como un correo formal al coordinador del colegio (70 a 90 palabras)."
+        },
+        "answer": {
+          "text": "Dear Mr Brown, I am writing to tell you that I cannot attend the club on Friday because I am ill. As a result, I am afraid that I will miss the meeting. Could you please send me the information about the trip by email? In addition, I would like to know the time and the place. Thank you very much for your help. I hope that I can come next week. Kind regards, Sam Lopez",
+          "accepted": [
+            "Dear Mr Brown, I am writing to tell you that I cannot attend the club on Friday because I am ill. As a result, I am afraid that I will miss the meeting. Could you please send me the information about the trip by email? In addition, I would like to know the time and the place. Thank you very much for your help. I hope that I can come next week. Kind regards, Sam Lopez",
+            "Dear Mr Brown, I am writing to inform you that I cannot attend the school club on Friday because I am ill. I am afraid that I will miss the meeting; however, I would like to ask about the trip. Could you please send me the information by email? In addition, I would like to know the time and the place. Thank you very much for your help. Kind regards, Sam Lopez"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.e01.seed-0",
+          "feedback": {
+            "es": "Un buen correo formal abre con Dear + título, explica el propósito con I am writing to, usa cannot, could you please, dos conectores (as a result, in addition, however…) y Thank you, e incluye todos los datos: club, viernes, enfermedad e información del viaje."
+          },
+          "text": "Mensaje a tu amigo: «Hi Sam! I can't come to club on Friday, I'm ill. Can you send me the info about the trip? Thanks a lot! Bye!» Reescríbelo para el Sr. Brown, coordinador del club.",
+          "scoring": {
+            "wordRange": [
+              50,
+              120
+            ],
+            "evidenceGroups": [
+              [
+                "Dear Mr Brown",
+                "Dear Sir",
+                "Dear Mr",
+                "Dear Coordinator",
+                "Dear Sir or Madam"
+              ],
+              [
+                "I am writing to",
+                "I am writing",
+                "I write to",
+                "I would like to tell you",
+                "I would like to inform you",
+                "I am contacting you"
+              ],
+              [
+                "cannot",
+                "can not",
+                "am unable to",
+                "am not able to",
+                "will not be able to",
+                "would not be able to"
+              ],
+              [
+                "am ill",
+                "am sick",
+                "am unwell",
+                "am not well",
+                "feel ill",
+                "feel sick",
+                "am not feeling well"
+              ],
+              [
+                "Friday"
+              ],
+              [
+                "trip"
+              ],
+              [
+                "information",
+                "info",
+                "details"
+              ],
+              [
+                "Could you please",
+                "Could you",
+                "Would you please",
+                "Would you mind",
+                "I would like to ask you to",
+                "I would be grateful",
+                "I would appreciate"
+              ],
+              [
+                "as a result",
+                "however",
+                "although",
+                "therefore",
+                "nevertheless",
+                "consequently"
+              ],
+              [
+                "in addition",
+                "moreover",
+                "furthermore",
+                "as a result",
+                "however",
+                "although",
+                "besides"
+              ],
+              [
+                "Thank you",
+                "Thank you very much",
+                "I appreciate",
+                "I am grateful"
+              ],
+              [
+                "Kind regards",
+                "Best regards",
+                "Yours sincerely",
+                "Yours faithfully",
+                "Sincerely",
+                "With kind regards",
+                "Regards"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:894f78a4afbbad73217869168997d2e586c05558303c84fa50954e4b71487349"
+      },
+      {
+        "id": "en.n4.c39.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la versión formal del mensaje."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Thank you very much for the information. I will see you on Friday."
+          },
+          {
+            "text": "Thanks for the information. See you on Friday, bye!"
+          },
+          {
+            "text": "Thank you very much for the information. I cannot come on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.e02.seed-0",
+          "feedback": {
+            "es": "Thank you very much for the information sustituye a Thanks a lot for the information! y mantiene el mensaje: gracias y hasta el viernes. Las otras opciones siguen siendo informales o cambian el mensaje."
+          },
+          "audio": "Thanks a lot for the information! See you on Friday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9f517cd4d2f91008c4b6d70ce93211fdcda4ee10b17b742fa99b42d151031fe8"
+      },
+      {
+        "id": "en.n4.c39.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué cambio convierte bien esta frase en formal?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I can't attend because I'm ill!"
+          },
+          {
+            "text": "I am afraid that I cannot attend because I am ill."
+          },
+          {
+            "text": "Hi Mr Brown, I can't attend."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.e03.seed-0",
+          "feedback": {
+            "es": "La versión formal usa formas completas y I am afraid that: I cannot y I am ill. Las otras opciones conservan contracciones o el saludo informal."
+          },
+          "text": "Dear Mr Brown, I can't attend because I'm ill."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c4055fd92320d5daca9e2cde8fde207d3bb837cffa46acb6b70f3ffba91d7461"
+      },
+      {
+        "id": "en.n4.c39.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Me gustaría saber la hora.»"
+        },
+        "answer": {
+          "text": "would",
+          "accepted": [
+            "would"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.e04.seed-0",
+          "feedback": {
+            "es": "Would like to sustituye a want to en un mensaje formal: I would like to know."
+          },
+          "text": "I ___ like to know the time."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0b7bbd6159d852336db847de0fbae247725a6c8540c52e8e1fc20533b8699eb9"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c39.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase sigue siendo informal en este correo?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I am writing to ask about the trip."
+          },
+          {
+            "text": "Kind regards."
+          },
+          {
+            "text": "Thanks a lot!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.r01.seed-0",
+          "feedback": {
+            "es": "Thanks a lot! es informal; en un correo formal se escribe Thank you very much."
+          },
+          "text": "Dear Mr Brown, I am writing to ask about the trip. Thanks a lot! Kind regards."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9927240aa3a9c038104ef4e6a31c5c934a0d01119237f6c30283eec7c1efea39"
+      },
+      {
+        "id": "en.n4.c39.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pide la persona."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The information about the trip."
+          },
+          {
+            "text": "A ticket for the trip."
+          },
+          {
+            "text": "A meeting with the coordinator."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.r02.seed-0",
+          "feedback": {
+            "es": "Could you please send me the information… la persona pide la información del viaje. No pide un billete ni una reunión."
+          },
+          "audio": "Dear Mr Brown, I would like to ask about the trip. Could you please send me the information by email? Kind regards.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:52ab551fe2d8771e44454ad25aa3c69a369d17b88c8e31765aeff6d35739bd6b"
+      },
+      {
+        "id": "en.n4.c39.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una versión informal para tu amigo Leo: no puedes ir a la reunión."
+        },
+        "answer": {
+          "text": "Sorry, I can't come to the meeting.",
+          "accepted": [
+            "Sorry, I can't come to the meeting.",
+            "I can't come to the meeting, sorry.",
+            "Sorry, I can't go to the meeting.",
+            "Sorry Leo, I can't come to the meeting.",
+            "Hi Leo, sorry, I can't come to the meeting.",
+            "Sorry, I can't make it to the meeting.",
+            "Sorry, I can't be at the meeting.",
+            "I'm sorry, I can't come to the meeting."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c39.r03.seed-0",
+          "feedback": {
+            "es": "Con un amigo, la frase es corta, con contracción y una disculpa informal: Sorry, I can't come. Se aceptan variantes como go o make it."
+          },
+          "text": "Formal: I am afraid that I cannot attend the meeting.",
+          "scoring": {
+            "wordRange": [
+              3,
+              16
+            ],
+            "evidenceGroups": [
+              [
+                "can't come",
+                "can't go",
+                "can't make it",
+                "can't be there",
+                "can't be at",
+                "cannot come",
+                "cannot go",
+                "cannot make it"
+              ],
+              [
+                "sorry",
+                "hi",
+                "hey"
+              ],
+              [
+                "meeting",
+                "come",
+                "go",
+                "make it",
+                "be there",
+                "be at"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fa1da848fb86c64cae07c2ba782498180dc73f3273f5b513236426fe3780106e"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c39.e01": {
+      "reteach": "en.n4.class-39.t01",
+      "review": "en.n4.c39.r01"
+    },
+    "en.n4.c39.e02": {
+      "reteach": "en.n4.class-39.t02",
+      "review": "en.n4.c39.r02"
+    },
+    "en.n4.c39.e03": {
+      "reteach": "en.n4.class-39.t03",
+      "review": "en.n4.c39.r03"
+    },
+    "en.n4.c39.e04": {
+      "reteach": "en.n4.class-39.t04",
+      "review": "en.n4.c39.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

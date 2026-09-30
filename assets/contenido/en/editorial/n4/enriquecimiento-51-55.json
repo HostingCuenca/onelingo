@@ -1,0 +1,681 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "classes": {
+    "en.n4.class-51": {
+      "explicacion": {
+        "titulo": "Las frases que sostienen una reunión",
+        "texto": "Cada momento de una reunión tiene sus frases fijas. Para abrir: Let's start the meeting. Para opinar: In my opinion… Para interrumpir con cortesía: Sorry to interrupt, but… Para aclarar: Could you explain that again, please? o What do you mean? Para resumir: To sum up… Para cerrar: That is all for today. Aprende cada frase como un bloque, sin traducirla palabra por palabra. Y recuerda: cuanto más suave es la frase (Could you…?, Sorry to…), más cortés suena."
+      },
+      "patron": {
+        "texto": "Función + frase fija:",
+        "formula": [
+          {
+            "texto": "Let's start the meeting.",
+            "nota": "abrir: la frase de quien dirige"
+          },
+          {
+            "texto": "In my opinion, …",
+            "nota": "opinar: añade tu frase completa"
+          },
+          {
+            "texto": "Sorry to interrupt, but …",
+            "nota": "interrumpir con cortesía"
+          },
+          {
+            "texto": "To sum up, …",
+            "nota": "resumir antes de cerrar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, the club needs a new name.",
+          "correcto": "In my opinion, the club needs a new name.",
+          "explicacion": "«Según yo» es un calco del español. En inglés se dice in my opinion."
+        },
+        {
+          "incorrecto": "Explain me that again.",
+          "correcto": "Could you explain that again, please?",
+          "explicacion": "Explain me suena a orden y no se usa así. Could you…? es la forma cortés de pedir una aclaración."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana dirige la reunión del club de radio de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Let's start the meeting. We need a name for our radio club.",
+            "traduccion": "Empecemos la reunión. Necesitamos un nombre para nuestro club de radio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "In my opinion, a short name is better.",
+            "traduccion": "En mi opinión, un nombre corto es mejor."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sorry to interrupt, but what do you mean by short?",
+            "traduccion": "Perdona que te interrumpa, pero ¿qué quieres decir con corto?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I mean one word, like Wave.",
+            "traduccion": "Quiero decir una sola palabra, como Wave."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "To sum up, we want a short name. That is all for today.",
+            "traduccion": "En resumen, queremos un nombre corto. Eso es todo por hoy."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué interrumpe Mia a Leo?",
+          "opciones": [
+            {
+              "es": "Para que Leo aclare qué quiere decir con «corto»."
+            },
+            {
+              "es": "Para proponer otro nombre para el club."
+            },
+            {
+              "es": "Para cerrar la reunión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «Sorry to interrupt, but what do you mean by short?»: interrumpe con cortesía para pedir una aclaración."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase",
+          "Cortesía"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Abrir"
+            },
+            {
+              "texto": "Let's start the meeting."
+            },
+            {
+              "texto": "neutra"
+            }
+          ],
+          [
+            {
+              "texto": "Opinar"
+            },
+            {
+              "texto": "In my opinion, …"
+            },
+            {
+              "texto": "neutra"
+            }
+          ],
+          [
+            {
+              "texto": "Interrumpir"
+            },
+            {
+              "texto": "Sorry to interrupt, but …"
+            },
+            {
+              "texto": "muy cortés"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "Could you explain that again, please?"
+            },
+            {
+              "texto": "cortés"
+            }
+          ],
+          [
+            {
+              "texto": "Resumir y cerrar"
+            },
+            {
+              "texto": "To sum up, … / That is all for today."
+            },
+            {
+              "texto": "neutra"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-52": {
+      "explicacion": {
+        "titulo": "Sugerir y discrepar con cortesía",
+        "texto": "Para proponer algo tienes tres estructuras: How about + verbo en -ing (How about making a poster?), Why don't we + verbo base (Why don't we meet on Friday?) y Let's + verbo base (Let's start now). Para aceptar: I agree / That is a good idea. Para discrepar no digas solo «No»: reconoce la idea (I see your point, but…), muestra tu duda (I am not sure about…) y ofrece una alternativa (How about Saturday instead?). Después de how about va -ing; después de why don't we y let's, el verbo base, sin to."
+      },
+      "patron": {
+        "texto": "Propuesta + duda cortés + alternativa:",
+        "formula": [
+          {
+            "texto": "How about making a poster?",
+            "nota": "how about + verbo en -ing"
+          },
+          {
+            "texto": "Why don't we meet on Friday?",
+            "nota": "why don't we + verbo base"
+          },
+          {
+            "texto": "I see your point, but I am not sure.",
+            "nota": "reconoces la idea y dudas"
+          },
+          {
+            "texto": "How about Saturday instead?",
+            "nota": "alternativa con instead"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "How about to make a poster?",
+          "correcto": "How about making a poster?",
+          "explicacion": "Después de how about va el verbo en -ing, no to + verbo."
+        },
+        {
+          "incorrecto": "I am not agree with you.",
+          "correcto": "I don't agree with you, but I see your point.",
+          "explicacion": "Agree ya es un verbo: no se usa con be. Se niega con don't, y but I see your point suaviza el desacuerdo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo eligen el día del picnic del club.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "How about having the picnic on Sunday?",
+            "traduccion": "¿Qué tal si hacemos el picnic el domingo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I see your point, but I am not sure about Sunday. It is too hot.",
+            "traduccion": "Entiendo lo que dices, pero no estoy seguro del domingo. Hace demasiado calor."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Why don't we have it on Saturday instead?",
+            "traduccion": "¿Por qué no lo hacemos el sábado en su lugar?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a good idea. I agree.",
+            "traduccion": "Es una buena idea. Estoy de acuerdo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo no está seguro del domingo?",
+          "opciones": [
+            {
+              "es": "Porque hace demasiado calor."
+            },
+            {
+              "es": "Porque tiene otra reunión."
+            },
+            {
+              "es": "Porque no le gusta el picnic."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «It is too hot» justo después de dudar del domingo. No menciona otra reunión ni rechaza el picnic."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Frase",
+          "Después va…"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Sugerir"
+            },
+            {
+              "texto": "How about"
+            },
+            {
+              "texto": "verbo en -ing"
+            }
+          ],
+          [
+            {
+              "texto": "Sugerir"
+            },
+            {
+              "texto": "Why don't we"
+            },
+            {
+              "texto": "verbo base"
+            }
+          ],
+          [
+            {
+              "texto": "Sugerir"
+            },
+            {
+              "texto": "Let's"
+            },
+            {
+              "texto": "verbo base"
+            }
+          ],
+          [
+            {
+              "texto": "Discrepar"
+            },
+            {
+              "texto": "I see your point, but"
+            },
+            {
+              "texto": "una duda o una alternativa"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-53": {
+      "explicacion": {
+        "titulo": "Decisión, responsable y plazo",
+        "texto": "Cuando escuchas una reunión busca tres datos: qué se decidió, quién lo hará y para cuándo. La decisión aparece con We decided to… / The decision is to… / Everyone agreed to… El responsable, con X is responsible for… o X is in charge of… El plazo, con by + día o The deadline is… Ojo con las correcciones («Thursday… sorry, Friday»): vale el último dato. Y no confundas a quien propone una idea con quien queda a cargo de hacerla."
+      },
+      "patron": {
+        "texto": "Decisión + responsable + plazo:",
+        "formula": [
+          {
+            "texto": "We decided to hold the sale on Saturday.",
+            "nota": "decisión: decided to + verbo base"
+          },
+          {
+            "texto": "Mia is responsible for the posters,",
+            "nota": "responsable: is responsible for / is in charge of"
+          },
+          {
+            "texto": "and the deadline is Wednesday.",
+            "nota": "plazo: the deadline is / by + día"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia is responsible of the posters.",
+          "correcto": "Mia is responsible for the posters.",
+          "explicacion": "En inglés se dice responsible for, no responsible of (calco de «responsable de»)."
+        },
+        {
+          "incorrecto": "We decided hold the sale on Saturday.",
+          "correcto": "We decided to hold the sale on Saturday.",
+          "explicacion": "Después de decided va to + verbo base: decided to hold."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos repasan lo que se decidió en la reunión de la venta de pasteles.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What did we decide about the bake sale?",
+            "traduccion": "¿Qué decidimos sobre la venta de pasteles?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We decided to hold it on Saturday at the school gate.",
+            "traduccion": "Decidimos hacerla el sábado en la puerta de la escuela."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Who is in charge of the cakes?",
+            "traduccion": "¿Quién se encarga de los pasteles?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Tom is responsible for the cakes. His deadline is Friday.",
+            "traduccion": "Tom es el responsable de los pasteles. Su fecha límite es el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién se encarga de los pasteles y para cuándo?",
+          "opciones": [
+            {
+              "es": "Tom, para el viernes."
+            },
+            {
+              "es": "Carlos, para el sábado."
+            },
+            {
+              "es": "Sara, para el viernes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que Tom es responsable de los pasteles y que su fecha límite es el viernes. El sábado es el día de la venta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Pregunta",
+          "Frases clave"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Decisión"
+            },
+            {
+              "texto": "¿Qué se decidió?"
+            },
+            {
+              "texto": "We decided to… / The decision is to…"
+            }
+          ],
+          [
+            {
+              "texto": "Responsable"
+            },
+            {
+              "texto": "¿Quién lo hará?"
+            },
+            {
+              "texto": "…is responsible for… / …is in charge of…"
+            }
+          ],
+          [
+            {
+              "texto": "Plazo"
+            },
+            {
+              "texto": "¿Para cuándo?"
+            },
+            {
+              "texto": "The deadline is… / by Friday"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-54": {
+      "explicacion": {
+        "titulo": "Cómo se escribe un acta",
+        "texto": "El acta (minutes) resume lo que pasó en la reunión con un tono objetivo: sin «yo opino». Las cosas que ya ocurrieron van en pasado (Eight members attended; we discussed; we decided to…) y las tareas futuras con will + verbo base y by + fecha (Sara will send the posters by 5 June). Ordena el texto con First, Then, After that y Finally. Incluye siempre: fecha, asistentes, decisiones, responsable y plazo de cada tarea, y la próxima reunión."
+      },
+      "patron": {
+        "texto": "Pasado para lo hecho + will para las tareas:",
+        "formula": [
+          {
+            "texto": "First, we discussed the fair.",
+            "nota": "conector + verbo en pasado"
+          },
+          {
+            "texto": "Then we decided to hold it on 20 June.",
+            "nota": "decided to + verbo base"
+          },
+          {
+            "texto": "Sara will send the posters by 5 June.",
+            "nota": "responsable + will + by + fecha"
+          },
+          {
+            "texto": "The next meeting is on 3 June.",
+            "nota": "cierre: fecha de la próxima reunión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We discuss about the fair.",
+          "correcto": "We discussed the fair.",
+          "explicacion": "En el acta lo ocurrido va en pasado, y discuss no lleva about: se dice discuss the fair."
+        },
+        {
+          "incorrecto": "Sara will sends the posters by 5 June.",
+          "correcto": "Sara will send the posters by 5 June.",
+          "explicacion": "Después de will va el verbo base, sin -s: will send."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana prepara el acta de la reunión con ayuda de Leo.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I am writing the minutes. Who attended the meeting?",
+            "traduccion": "Estoy escribiendo el acta. ¿Quién asistió a la reunión?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Eight members attended. First, we discussed the school fair.",
+            "traduccion": "Asistieron ocho miembros. Primero, hablamos de la feria de la escuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then we decided to hold it on 20 June, right?",
+            "traduccion": "Luego decidimos celebrarla el 20 de junio, ¿verdad?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. Finally, Sara will send the posters by 5 June.",
+            "traduccion": "Sí. Por último, Sara enviará los carteles antes del 5 de junio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tarea quedó para Sara?",
+          "opciones": [
+            {
+              "es": "Enviar los carteles antes del 5 de junio."
+            },
+            {
+              "es": "Escribir el acta de la reunión."
+            },
+            {
+              "es": "Elegir la fecha de la feria."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Sara will send the posters by 5 June». El acta la escribe Ana y la fecha de la feria ya se decidió en grupo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del acta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Asistentes"
+            },
+            {
+              "texto": "Eight members attended the meeting."
+            }
+          ],
+          [
+            {
+              "texto": "Lo hablado"
+            },
+            {
+              "texto": "First, we discussed the fair."
+            }
+          ],
+          [
+            {
+              "texto": "Decisión"
+            },
+            {
+              "texto": "Then we decided to hold it on 20 June."
+            }
+          ],
+          [
+            {
+              "texto": "Tarea y plazo"
+            },
+            {
+              "texto": "Finally, Sara will send the posters by 5 June."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "The next meeting is on 3 June."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-55": {
+      "explicacion": {
+        "titulo": "Dirigir una reunión breve",
+        "texto": "Dirigir una reunión es repartir turnos y llegar a una decisión. Sigue este orden: 1) abre (Welcome, everyone. Let's start.), 2) da la palabra (Tom, it is your turn.), 3) pide más ideas (Does anyone have another idea?), 4) si hay desacuerdo, suaviza y propón (I see your point, but… How about…?), 5) resume con will y by (To sum up, Tom will… by Friday) y 6) cierra (That is all for today. Thanks, everyone). Quien dirige habla poco y deja hablar a los demás."
+      },
+      "patron": {
+        "texto": "Abrir + turno + resumen + cierre:",
+        "formula": [
+          {
+            "texto": "Welcome, everyone.",
+            "nota": "abrir la reunión"
+          },
+          {
+            "texto": "Mia, it is your turn.",
+            "nota": "dar la palabra: it is your turn"
+          },
+          {
+            "texto": "To sum up, Tom will buy the food by Friday.",
+            "nota": "resumir: tarea + will + by"
+          },
+          {
+            "texto": "That is all for today.",
+            "nota": "cerrar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Anyone has another idea?",
+          "correcto": "Does anyone have another idea?",
+          "explicacion": "La pregunta necesita does; como does ya lleva la -s, el verbo va sin ella: have."
+        },
+        {
+          "incorrecto": "It is turn of Mia.",
+          "correcto": "It is Mia's turn.",
+          "explicacion": "En inglés el dueño va delante con 's: Mia's turn. «Turno de Mia» no se traduce con of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana dirige la reunión del club para elegir el día de la fiesta.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Welcome, everyone. Today I will lead the meeting.",
+            "traduccion": "Bienvenidos todos. Hoy dirigiré yo la reunión."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Tom, it is your turn. What is your idea?",
+            "traduccion": "Tom, es tu turno. ¿Cuál es tu idea?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "How about having the party on Friday?",
+            "traduccion": "¿Qué tal si hacemos la fiesta el viernes?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I see your point, but I am not sure about Friday.",
+            "traduccion": "Entiendo lo que dices, pero no estoy segura del viernes."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Does anyone have another idea?",
+            "traduccion": "¿Alguien tiene otra idea?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Why don't we have it on Saturday?",
+            "traduccion": "¿Por qué no la hacemos el sábado?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Ana cuando Mia duda del viernes?",
+          "opciones": [
+            {
+              "es": "Pregunta si alguien tiene otra idea."
+            },
+            {
+              "es": "Cierra la reunión."
+            },
+            {
+              "es": "Elige el viernes sin más."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tras la duda de Mia, Ana pregunta «Does anyone have another idea?». Así deja hablar a los demás en lugar de decidir sola."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Abrir"
+            },
+            {
+              "texto": "Welcome, everyone. Let's start the meeting."
+            }
+          ],
+          [
+            {
+              "texto": "Dar la palabra"
+            },
+            {
+              "texto": "Mia, it is your turn."
+            }
+          ],
+          [
+            {
+              "texto": "Pedir ideas"
+            },
+            {
+              "texto": "Does anyone have another idea?"
+            }
+          ],
+          [
+            {
+              "texto": "Resumir"
+            },
+            {
+              "texto": "To sum up, Tom will buy the food by Friday."
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "That is all for today."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

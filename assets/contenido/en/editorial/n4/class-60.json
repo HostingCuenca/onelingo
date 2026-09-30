@@ -1,0 +1,771 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-60",
+  "title": {
+    "en": "Solve a faulty product",
+    "es": "Resolver un producto defectuoso"
+  },
+  "objectives": {
+    "es": [
+      "Mantener una conversación con un vendedor para resolver un producto defectuoso: explicar el fallo, pedir con cortesía, negociar y confirmar la solución."
+    ]
+  },
+  "concepts": [
+    "n4-shops-and-repairs-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-59"
+  ],
+  "usesVocabulary": [
+    "receipt",
+    "warranty",
+    "return",
+    "option",
+    "manager",
+    "confirm"
+  ],
+  "usesPatterns": [
+    "n4-shops-and-repairs-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "receipt",
+      "es": "recibo"
+    },
+    {
+      "en": "warranty",
+      "es": "garantía"
+    },
+    {
+      "en": "return",
+      "es": "devolver"
+    },
+    {
+      "en": "option",
+      "es": "opción"
+    },
+    {
+      "en": "manager",
+      "es": "gerente"
+    },
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-60.t01",
+      "en": "I bought this camera last week, and here is my receipt.",
+      "es": "Compré esta cámara la semana pasada y aquí está mi recibo.",
+      "explanationEs": "Receipt: el papel que prueba la compra; se muestra al explicar el fallo.",
+      "segments": [
+        "I bought this camera last week,",
+        "and here is my receipt."
+      ],
+      "audioText": "I bought this camera last week, and here is my receipt.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-5"
+    },
+    {
+      "id": "en.n4.class-60.t02",
+      "en": "It is still under warranty, so we can replace it for free.",
+      "es": "Todavía está en garantía, así que podemos sustituirla gratis.",
+      "explanationEs": "Under warranty (no in warranty): la garantía cubre el arreglo o el cambio.",
+      "segments": [
+        "It is still under warranty, so",
+        "we can replace it for free."
+      ],
+      "audioText": "It is still under warranty, so we can replace it for free.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-5"
+    },
+    {
+      "id": "en.n4.class-60.t03",
+      "en": "Would you like to return it or have it repaired?",
+      "es": "¿Quiere devolverla o que la reparen?",
+      "explanationEs": "Return es devolver; have it repaired es el servicio de reparación.",
+      "segments": [
+        "Would you like to return",
+        "it or have it repaired?"
+      ],
+      "audioText": "Would you like to return it or have it repaired?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-5"
+    },
+    {
+      "id": "en.n4.class-60.t04",
+      "en": "The other option is to have it repaired for free.",
+      "es": "La otra opción es repararla gratis.",
+      "explanationEs": "The other option is to + verbo: así se negocia una alternativa.",
+      "segments": [
+        "The other option is to",
+        "have it repaired for free."
+      ],
+      "audioText": "The other option is to have it repaired for free.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-5"
+    },
+    {
+      "id": "en.n4.class-60.t05",
+      "en": "Let me check with my manager.",
+      "es": "Déjeme consultarlo con mi gerente.",
+      "explanationEs": "El vendedor usa manager cuando necesita una decisión superior.",
+      "segments": [
+        "Let me check",
+        "with my manager."
+      ],
+      "audioText": "Let me check with my manager.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-5"
+    },
+    {
+      "id": "en.n4.class-60.t06",
+      "en": "So, to confirm, we will send you a new one on Friday.",
+      "es": "Entonces, para confirmar, le enviaremos una nueva el viernes.",
+      "explanationEs": "To confirm repite lo acordado antes de terminar.",
+      "segments": [
+        "So, to confirm, we will send",
+        "you a new one on Friday."
+      ],
+      "audioText": "So, to confirm, we will send you a new one on Friday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c60.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase dice que el producto sigue cubierto por la garantía?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It is still under warranty."
+          },
+          {
+            "text": "It is still in warranty."
+          },
+          {
+            "text": "It is still on warranty."
+          }
+        ],
+        "teaches": [
+          "n4-shops-and-repairs-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.pg01.seed-0",
+          "feedback": {
+            "es": "En inglés la garantía se expresa con under warranty. Las otras preposiciones son calcos del español."
+          },
+          "hint": {
+            "es": "La preposición significa «bajo»."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cc21269b30cdedc2c4cea8cb05044e644cda8678f41b48ee9eb27c203ce72b47"
+      },
+      {
+        "id": "en.n4.c60.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Aquí está mi recibo.»"
+        },
+        "answer": {
+          "text": "receipt",
+          "accepted": [
+            "receipt"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-shops-and-repairs-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.pg02.seed-0",
+          "feedback": {
+            "es": "El receipt es el papel que prueba la compra y se enseña al pedir una devolución."
+          },
+          "hint": {
+            "es": "Es el papel que muestra la compra."
+          },
+          "text": "Here is my ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:40d9293f45e8f25fb93093ce74faaf130e3eae8ece006bbf007722d3c2b63ae1"
+      },
+      {
+        "id": "en.n4.c60.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «¿Podría devolverlo, por favor?»"
+        },
+        "answer": {
+          "text": "Could I return it please",
+          "tokens": [
+            "Could",
+            "I",
+            "return",
+            "it",
+            "please"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-shops-and-repairs-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.pg03.seed-0",
+          "feedback": {
+            "es": "Could I + verbo base pide permiso con cortesía; please suaviza la petición."
+          },
+          "hint": {
+            "es": "Empieza con la forma cortés de pedir permiso."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:09afa750b71492481187f3a771b92f63d2b063a843070b6fd6a0dfbb7e5167ff"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c60.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pide la clienta sobre la lámpara."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She wants to return it for a refund."
+          },
+          {
+            "text": "She wants the shop to repair the lamp."
+          },
+          {
+            "text": "She wants a different lamp."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.p01.seed-0",
+          "feedback": {
+            "es": "«Have it repaired» es pedir que la reparen. No habla de devolver el dinero ni de cambiarla."
+          },
+          "audio": "Hello. I bought this lamp on Monday, and it stopped working yesterday. I would like to have it repaired.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:660bfc0b959d6ddce4e3c092e2d06de871c708392065a864678ca7ac02da3c41"
+      },
+      {
+        "id": "en.n4.c60.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase confirma lo acordado?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "So, I want to replace the phone on Friday."
+          },
+          {
+            "text": "So, could you replace the phone on Friday?"
+          },
+          {
+            "text": "So, to confirm, you will replace the phone on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.p02.seed-0",
+          "feedback": {
+            "es": "Confirmar es repetir lo acordado con to confirm y un verbo en futuro. Las otras dos frases piden o expresan un deseo."
+          },
+          "text": "They agreed: the shop will replace the phone on Friday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9e494330629a3fa3f59c86e16806ec2d7f12d78463719ecf024437015be65a5f"
+      },
+      {
+        "id": "en.n4.c60.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Podría hablar con el gerente?»"
+        },
+        "answer": {
+          "text": "manager",
+          "accepted": [
+            "manager"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.p03.seed-0",
+          "feedback": {
+            "es": "Manager es el gerente: la persona a la que se acude cuando el vendedor no puede resolver."
+          },
+          "text": "Could I speak to the ___?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bba7b9edee2b962050724eaecabdeab49bdc8ae696a9f20fb9c3fe8604be1599"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c60.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué acuerdan."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They will get a new speaker on Friday."
+          },
+          {
+            "text": "They will give her a refund on Friday."
+          },
+          {
+            "text": "They will repair it on Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5",
+          "n4-shops-and-repairs-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.e01.seed-0",
+          "feedback": {
+            "es": "La tienda dice «we can replace it on Friday»: sustituirán el altavoz. No hablan de reembolso ni de reparación."
+          },
+          "audio": "Mia: Hello, my speaker stopped working after two days. Shop: When did you buy it? Mia: Two days ago. Could I return it? Shop: It is under warranty, so we can replace it on Friday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7c0f976ee95cba5093d1be630b9a8e5e0b9a0c00caf1ba64e216f2822413395c"
+      },
+      {
+        "id": "en.n4.c60.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase resume bien el acuerdo final?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The shop will refund the tablet on Monday."
+          },
+          {
+            "text": "The shop will repair the tablet by Monday."
+          },
+          {
+            "text": "The customer will repair the tablet by Monday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5",
+          "n4-shops-and-repairs-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.e02.seed-0",
+          "feedback": {
+            "es": "El cliente elige la reparación y el plazo es el lunes. Las otras opciones cambian la solución o quién repara."
+          },
+          "text": "Notes: Faulty tablet. Customer wants a refund. Shop offers an exchange or a repair. Customer chooses the repair by Monday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:eca745577d4ddf95d20e8f21e6fe0bb298397bbedc223a1fea6c7b0aef756300"
+      },
+      {
+        "id": "en.n4.c60.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Otra opción es hacer revisar la batería.»"
+        },
+        "answer": {
+          "text": "checked",
+          "accepted": [
+            "checked"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5",
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.e03.seed-0",
+          "feedback": {
+            "es": "Have + the battery + checked: el participio va después de la cosa y otra persona hace el trabajo."
+          },
+          "text": "Another option is to have the battery ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e88616297b40b492a9f72eefbd6b26e700468d0d5ab2e145bc0671aac6f80e57"
+      },
+      {
+        "id": "en.n4.c60.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe lo que dices tú en la tienda (90–120 palabras)."
+        },
+        "answer": {
+          "text": "Hello. I bought this camera last week, and here is my receipt. Unfortunately, it does not turn on, and I used it only twice. Could I return it, please? I see that it is under warranty. I would like an exchange, please, because I need a camera for a trip on Saturday. The other option is to have it repaired, but one week is too long for me. So, to confirm, you will give me a new camera today. Thank you very much for your help, and sorry for the trouble.",
+          "accepted": [
+            "Hello. I bought this camera last week, and here is my receipt. Unfortunately, it does not turn on, and I used it only twice. Could I return it, please? I see that it is under warranty. I would like an exchange, please, because I need a camera for a trip on Saturday. The other option is to have it repaired, but one week is too long for me. So, to confirm, you will give me a new camera today. Thank you very much for your help, and sorry for the trouble.",
+            "Hello. I bought this camera on 20 May, and here is my receipt. It does not turn on, and I used it only twice. Could you exchange it, please? I hope we can solve this today. I know I have two options, but I would like the exchange because I need a camera for a trip on Saturday. A repair takes one week, and that is too long. So, to confirm, I will take a new camera today. Thank you for your help."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5",
+          "n4-shops-and-repairs-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.e04.seed-0",
+          "feedback": {
+            "es": "Una buena respuesta explica el fallo con el recibo, pide con cortesía, elige una opción con una razón y confirma lo acordado."
+          },
+          "text": "Escena en una tienda: la cámara que compraste hace una semana (recibo del 20 de mayo) no enciende. Pides devolverla. Te ofrecen cambiarla o repararla en una semana. Tú eliges el cambio porque la necesitas para un viaje el sábado, y confirmas. Escribe lo que dirías tú.",
+          "scoring": {
+            "wordRange": [
+              75,
+              130
+            ],
+            "evidenceGroups": [
+              [
+                "receipt"
+              ],
+              [
+                "it does not turn on",
+                "it doesn't turn on",
+                "stopped working",
+                "does not work"
+              ],
+              [
+                "could i return",
+                "could you exchange",
+                "i would like",
+                "could i exchange"
+              ],
+              [
+                "exchange",
+                "new camera",
+                "replace"
+              ],
+              [
+                "to confirm",
+                "just to confirm"
+              ],
+              [
+                "trip",
+                "saturday"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9fbb898e7ee55b54f65cdcede15af25ddca8456ab48a9870777ac22059e65ac7"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c60.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué responde el cliente con cortesía?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "No refund? That is terrible!"
+          },
+          {
+            "text": "Then I will never come back."
+          },
+          {
+            "text": "I see. Could you replace it instead?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.r01.seed-0",
+          "feedback": {
+            "es": "El cliente acepta el «no» con I see y propone una alternativa con could you… instead. Las otras respuestas son bruscas."
+          },
+          "text": "Seller: We cannot give a refund. The customer wants to stay polite."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:03e69236ee8cfeeee526b5666a1b276b750ca4ef64f8daa077a4263a49706193"
+      },
+      {
+        "id": "en.n4.c60.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Tengo dos opciones: reembolso o cambio.»"
+        },
+        "answer": {
+          "text": "options",
+          "accepted": [
+            "options"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.r02.seed-0",
+          "feedback": {
+            "es": "Options es el plural de option; la tienda suele ofrecer dos opciones."
+          },
+          "text": "I have two ___: a refund or an exchange."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:76365097f5ea840ddf5a58a08189ff4085a3e73b25bfd344be72ed8872b2cb0c"
+      },
+      {
+        "id": "en.n4.c60.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me gustaría cambiarlo, por favor.»"
+        },
+        "answer": {
+          "text": "I would like to exchange it please",
+          "tokens": [
+            "I",
+            "would",
+            "like",
+            "to",
+            "exchange",
+            "it",
+            "please"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c60.r03.seed-0",
+          "feedback": {
+            "es": "I would like to + verbo base es la forma cortés de pedir algo; please la suaviza."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c92cd45a0fc3279df3499ca55a0cf2b9d2778ebb68748cfabe96117210ad5dcc"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c60.e01": {
+      "reteach": "en.n4.class-60.t01",
+      "review": "en.n4.c60.r01"
+    },
+    "en.n4.c60.e02": {
+      "reteach": "en.n4.class-60.t02",
+      "review": "en.n4.c60.r02"
+    },
+    "en.n4.c60.e03": {
+      "reteach": "en.n4.class-60.t03",
+      "review": "en.n4.c60.r03"
+    },
+    "en.n4.c60.e04": {
+      "reteach": "en.n4.class-60.t04",
+      "review": "en.n4.c60.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n4-shops-and-repairs-1",
+    "n4-shops-and-repairs-2",
+    "n4-shops-and-repairs-3",
+    "n4-shops-and-repairs-4",
+    "n4-shops-and-repairs-5"
+  ]
+}

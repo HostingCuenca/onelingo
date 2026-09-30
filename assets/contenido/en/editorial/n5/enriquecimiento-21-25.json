@@ -1,0 +1,649 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "classes": {
+    "en.n5.class-21": {
+      "explicacion": {
+        "titulo": "Graduar la probabilidad: bound to, likely to, chances are",
+        "texto": "En inglés la probabilidad se gradúa con expresiones fijas. Casi seguro: be bound to + verbo (The team is bound to win). Probable: be likely to + verbo, there is a good chance (that) + frase, chances are (that) + frase y may well + verbo. Poco probable: be unlikely to + verbo. Ojo: bound to no es obligación, es certeza, y con el tiempo atmosférico hace falta «it»: It is bound to rain."
+      },
+      "patron": {
+        "texto": "Sujeto + be bound / likely / unlikely to + verbo:",
+        "formula": [
+          {
+            "texto": "Our team",
+            "nota": "sujeto obligatorio: una persona, un grupo o «it»"
+          },
+          {
+            "texto": "is bound to",
+            "nota": "casi seguro (is likely to = probable; is unlikely to = improbable)"
+          },
+          {
+            "texto": "win on Saturday.",
+            "nota": "verbo base + dato"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Is bound to rain on Saturday.",
+          "correcto": "It is bound to rain on Saturday.",
+          "explicacion": "Calco de «seguro que llueve»: en inglés el sujeto es obligatorio y, con el tiempo atmosférico, es «it»."
+        },
+        {
+          "incorrecto": "Our team is probable to win.",
+          "correcto": "Our team is likely to win.",
+          "explicacion": "Con una persona o un equipo como sujeto, «es probable que» se dice be likely to. Probable solo aparece en It is probable that…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom hablan del partido del sábado entre su colegio y el colegio Hill.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Who is going to win on Saturday?",
+            "traduccion": "¿Quién va a ganar el sábado?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Our team is bound to win. We have not lost a match this year.",
+            "traduccion": "Nuestro equipo seguro que gana. No hemos perdido ningún partido este año."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Will Leo score?",
+            "traduccion": "¿Marcará Leo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "He is likely to score, but Mia is unlikely to play because of her leg.",
+            "traduccion": "Es probable que marque, pero es improbable que Mia juegue por su pierna."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the weather?",
+            "traduccion": "¿Y el tiempo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Chances are that it will rain, so the match may start late.",
+            "traduccion": "Lo más probable es que llueva, así que el partido puede empezar tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué es casi seguro el sábado?",
+          "opciones": [
+            {
+              "es": "Que su equipo ganará."
+            },
+            {
+              "es": "Que Leo marcará."
+            },
+            {
+              "es": "Que el partido empezará tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «bound to win»: para ella es casi seguro. Que Leo marque es solo probable (likely) y el retraso es solo «chances are»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Probabilidad",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Casi seguro"
+            },
+            {
+              "texto": "The team is bound to win."
+            }
+          ],
+          [
+            {
+              "texto": "Probable"
+            },
+            {
+              "texto": "The team is likely to win. / Chances are that the team will win. / There is a good chance that the team will win. / The team may well win."
+            }
+          ],
+          [
+            {
+              "texto": "Poco probable"
+            },
+            {
+              "texto": "The team is unlikely to win."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-22": {
+      "explicacion": {
+        "titulo": "Especular con must have been + -ing o participio",
+        "texto": "Para especular sobre el pasado se usa modal + have + participio. Aquí añadimos dos variantes con been. Acción en curso: must / might / can't have been + -ing (He must have been sleeping). Algo que le pasó a una cosa o persona, en pasiva: must / might / can't have been + participio (The cake might have been taken). Must es casi seguro, might y could es posible, y can't es imposible. La palabra been no puede faltar."
+      },
+      "patron": {
+        "texto": "Sujeto + must / might / can't + have been + -ing o participio:",
+        "formula": [
+          {
+            "texto": "Our neighbour",
+            "nota": "sujeto: quien actúa (-ing) o quien recibe la acción (participio)"
+          },
+          {
+            "texto": "must have been",
+            "nota": "modal + have been: must = casi seguro, might = posible, can't = imposible"
+          },
+          {
+            "texto": "sleeping.",
+            "nota": "-ing si la acción estaba en curso; participio (stolen, taken) si algo le pasó al sujeto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The cake might have taken by the dog.",
+          "correcto": "The cake might have been taken by the dog.",
+          "explicacion": "En pasiva falta been: la tarta recibe la acción. Sin been la frase diría que la tarta se llevó algo."
+        },
+        {
+          "incorrecto": "Mia mustn't have been cooking, because the cake came from the shop.",
+          "correcto": "Mia can't have been cooking, because the cake came from the shop.",
+          "explicacion": "Para decir que algo es imposible en el pasado se usa can't o couldn't have been. Mustn't expresa prohibición, no deducción."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo encuentran la cocina en desorden después de la fiesta de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look! The cake is gone.",
+            "traduccion": "¡Mira! La tarta ha desaparecido."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It might have been taken by the dog.",
+            "traduccion": "Puede que se la llevara el perro."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The dog can't have been in the kitchen. The door was closed all night.",
+            "traduccion": "El perro no puede haber estado en la cocina. La puerta estuvo cerrada toda la noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then a guest must have been eating it. Tom has cake on his face.",
+            "traduccion": "Entonces un invitado debió de estar comiéndosela. Tom tiene tarta en la cara."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes! Tom must have been eating it in the night.",
+            "traduccion": "¡Sí! Tom debió de estar comiéndosela por la noche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Sara descarta al perro?",
+          "opciones": [
+            {
+              "es": "Porque la puerta de la cocina estuvo cerrada toda la noche."
+            },
+            {
+              "es": "Porque el perro estaba durmiendo en el jardín."
+            },
+            {
+              "es": "Porque Tom vio al perro salir de la cocina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice que el perro «can't have been in the kitchen» porque la puerta estuvo cerrada toda la noche. Nadie menciona el jardín ni que Tom viera al perro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "must have been + -ing (casi seguro)"
+            },
+            {
+              "texto": "The neighbour must have been sleeping."
+            }
+          ],
+          [
+            {
+              "texto": "might have been + -ing (posible)"
+            },
+            {
+              "texto": "A guest might have been using the kitchen."
+            }
+          ],
+          [
+            {
+              "texto": "can't have been + -ing (imposible)"
+            },
+            {
+              "texto": "Mia can't have been cooking."
+            }
+          ],
+          [
+            {
+              "texto": "must have been + participio"
+            },
+            {
+              "texto": "The costume must have been stolen."
+            }
+          ],
+          [
+            {
+              "texto": "might have been + participio"
+            },
+            {
+              "texto": "The cake might have been taken."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-23": {
+      "explicacion": {
+        "titulo": "Escuchar la duda: causa, grado y pista",
+        "texto": "Cuando alguien especula, el grado de certeza está en el modal, no en el tono de voz. En cada frase busca tres datos: la causa (qué se cree que falló), el grado y la pista (because…). Certeza alta: must have. Probable: may well have. Posible pero dudoso: might (just) have, could have. Seguro que no: can't have, couldn't have. Un buen oyente anota los tres datos antes de decidir quién está más seguro."
+      },
+      "patron": {
+        "texto": "Causa + grado de certeza + pista:",
+        "formula": [
+          {
+            "texto": "The goalkeeper",
+            "nota": "causa: quién o qué se cree que falló"
+          },
+          {
+            "texto": "must have been injured,",
+            "nota": "grado: must = casi seguro; may well = probable; might = posible; can't = imposible"
+          },
+          {
+            "texto": "because he did not move.",
+            "nota": "pista: because + un hecho observado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The defence must be tired after extra time.",
+          "correcto": "The defence must have been tired after extra time.",
+          "explicacion": "Para especular sobre un hecho pasado hace falta have + participio. Must be habla del presente."
+        },
+        {
+          "incorrecto": "The defence can have been tired after extra time.",
+          "correcto": "The defence may well have been tired after extra time.",
+          "explicacion": "Calco de «puede haber estado cansada»: can no se usa para especular sobre el pasado. Se usan may, might o could + have + participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de tres comentaristas después de perder la final.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Why did we lose the final?",
+            "traduccion": "¿Por qué perdimos la final?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Carlos says the goalkeeper must have been injured. He did not move for the first goal.",
+            "traduccion": "Carlos dice que el portero debió de lesionarse. No se movió en el primer gol."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sara thinks the defence may well have been tired after extra time.",
+            "traduccion": "Sara piensa que bien puede que la defensa estuviera cansada tras la prórroga."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And Tom says the referee can't have been the cause. He was fair all game.",
+            "traduccion": "Y Tom dice que el árbitro no puede haber sido la causa. Fue justo todo el partido."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So only Carlos is sure.",
+            "traduccion": "Entonces solo Carlos está seguro."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. Sara says it is probable, and Tom just says it was bad luck.",
+            "traduccion": "Sí. Sara dice que es probable y Tom solo dice que fue mala suerte."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué causa ve Sara como probable?",
+          "opciones": [
+            {
+              "es": "Que la defensa estuviera cansada."
+            },
+            {
+              "es": "Que el portero estuviera lesionado."
+            },
+            {
+              "es": "Que el árbitro cometiera un error."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara usa «may well have been tired»: para ella es probable que la defensa estuviera cansada. La lesión del portero la da Carlos, y el árbitro queda descartado por Tom."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Grado",
+          "Señales"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Casi seguro"
+            },
+            {
+              "texto": "must have been, was bound to"
+            }
+          ],
+          [
+            {
+              "texto": "Probable"
+            },
+            {
+              "texto": "may well have been, probably"
+            }
+          ],
+          [
+            {
+              "texto": "Posible pero dudoso"
+            },
+            {
+              "texto": "might (just) have been, could have been"
+            }
+          ],
+          [
+            {
+              "texto": "Seguro que no"
+            },
+            {
+              "texto": "can't have been, couldn't have been"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-24": {
+      "explicacion": {
+        "titulo": "Defender una teoría con pistas",
+        "texto": "Una teoría tiene tres partes: lo que piensas (My theory is that…), las pruebas que la apoyan (One clue is that…; The evidence suggests that…) y cuánta seguridad tienes (must have, may well have, might have, can't have). Une la idea con la pista con because o con so, pero no con las dos. Da siempre dos grados distintos: uno fuerte para lo que las pistas apoyan y otro suave para lo que solo imaginas."
+      },
+      "patron": {
+        "texto": "Teoría + grado de certeza + pista:",
+        "formula": [
+          {
+            "texto": "My theory is that",
+            "nota": "introduce la teoría: is, no «says»"
+          },
+          {
+            "texto": "someone must have been using the library,",
+            "nota": "idea con su grado: must / may well / might have been"
+          },
+          {
+            "texto": "because there are footprints on the floor.",
+            "nota": "pista: un hecho que se ve, con because"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My theory says that someone was inside.",
+          "correcto": "My theory is that someone was inside.",
+          "explicacion": "Calco de «mi teoría dice que…». En inglés una teoría «es» algo: My theory is that…, no «says»."
+        },
+        {
+          "incorrecto": "Because there are footprints, so someone must have been here.",
+          "correcto": "There are footprints, so someone must have been here.",
+          "explicacion": "Calco de «como hay huellas, así que…». En inglés no se juntan because y so: usa uno solo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos hablan de las luces de la biblioteca vieja, que se encienden de noche.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The lights in the old library are on every night. What is your theory?",
+            "traduccion": "Las luces de la biblioteca vieja están encendidas cada noche. ¿Cuál es tu teoría?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "My theory is that the caretaker must have been working there. There are footprints by the window.",
+            "traduccion": "Mi teoría es que el conserje debió de estar trabajando allí. Hay huellas junto a la ventana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That is possible, but the caretaker can't have been there on Monday. He was at the match.",
+            "traduccion": "Es posible, pero el conserje no pudo estar allí el lunes. Estaba en el partido."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then chances are that a student found a way in. The window was open.",
+            "traduccion": "Entonces lo más probable es que un estudiante encontrara la forma de entrar. La ventana estaba abierta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Mia duda de la teoría de Carlos?",
+          "opciones": [
+            {
+              "es": "Porque el conserje estaba en el partido el lunes."
+            },
+            {
+              "es": "Porque no hay huellas junto a la ventana."
+            },
+            {
+              "es": "Porque la ventana estaba cerrada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia responde «the caretaker can't have been there on Monday. He was at the match»: da una razón concreta. Las huellas y la ventana abierta las menciona Carlos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué haces",
+          "Cómo lo dices"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presentar la teoría"
+            },
+            {
+              "texto": "My theory is that…"
+            }
+          ],
+          [
+            {
+              "texto": "Dar una pista"
+            },
+            {
+              "texto": "One clue is that… / The evidence suggests that…"
+            }
+          ],
+          [
+            {
+              "texto": "Afirmar con fuerza"
+            },
+            {
+              "texto": "Someone must have been inside."
+            }
+          ],
+          [
+            {
+              "texto": "Dudar"
+            },
+            {
+              "texto": "It may well / might have been a student."
+            }
+          ],
+          [
+            {
+              "texto": "Descartar"
+            },
+            {
+              "texto": "It can't have been the caretaker, because…"
+            }
+          ],
+          [
+            {
+              "texto": "Unir pista y hecho"
+            },
+            {
+              "texto": "That would explain why…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-25": {
+      "explicacion": {
+        "titulo": "Discutir teorías: proponer, cuestionar y acordar",
+        "texto": "Discutir una teoría es un intercambio por turnos: propones, cuestionas y acuerdas. Propón con I think it might have been… o Chances are that… Cuestiona con cortesía: reconoce la idea y da una razón (That is possible, but it can't have been…, because…). Acepta una objeción con Good point o I see what you mean. Cierra con So we agree that it is most likely… Usa pistas, no solo opiniones, y mezcla los grados: must, may well, might, can't."
+      },
+      "patron": {
+        "texto": "Propuesta + objeción amable + acuerdo:",
+        "formula": [
+          {
+            "texto": "I think it might have been taken by mistake.",
+            "nota": "propuesta: I think + might have been + participio"
+          },
+          {
+            "texto": "That is possible, but it can't have been Leo,",
+            "nota": "objeción: reconoce la idea + but + razón"
+          },
+          {
+            "texto": "so we agree it is most likely in the canteen.",
+            "nota": "acuerdo: we agree + most likely"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree with you.",
+          "correcto": "I agree with you.",
+          "explicacion": "Calco de «estoy de acuerdo». En inglés agree es un verbo: I agree, sin am."
+        },
+        {
+          "incorrecto": "It is probably that Leo took it by mistake.",
+          "correcto": "It is likely that Leo took it by mistake.",
+          "explicacion": "Calco de «es probablemente que». Probably es un adverbio (Leo probably took it); con It is hace falta el adjetivo likely."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia ha perdido su mochila en el colegio y Tom le ayuda a pensar.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "My backpack has disappeared. I left it in the hall at lunch.",
+            "traduccion": "Mi mochila ha desaparecido. La dejé en el vestíbulo a la hora de comer."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I think it might have been taken by mistake. There are two blue backpacks in our class.",
+            "traduccion": "Creo que puede que se la hayan llevado por error. Hay dos mochilas azules en nuestra clase."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That is possible, but Leo can't have taken it. He was with me the whole lunch break.",
+            "traduccion": "Es posible, pero Leo no puede habérsela llevado. Estuvo conmigo toda la hora de la comida."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good point. Then chances are that it is still in the canteen.",
+            "traduccion": "Buen argumento. Entonces lo más probable es que siga en la cantina."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I agree. Let's look there first.",
+            "traduccion": "Estoy de acuerdo. Busquemos allí primero."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Mia descarta que Leo se llevara la mochila?",
+          "opciones": [
+            {
+              "es": "Porque Leo estuvo con ella toda la hora de la comida."
+            },
+            {
+              "es": "Porque Leo tiene una mochila azul."
+            },
+            {
+              "es": "Porque Leo no fue al colegio ese día."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «He was with me the whole lunch break»: esa es su razón. La mochila azul la menciona Tom como otra posibilidad."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué haces",
+          "Qué dices"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "I think it might have been… / Chances are that…"
+            }
+          ],
+          [
+            {
+              "texto": "Cuestionar con amabilidad"
+            },
+            {
+              "texto": "That is possible, but it can't have been…, because…"
+            }
+          ],
+          [
+            {
+              "texto": "Aceptar una objeción"
+            },
+            {
+              "texto": "Good point. / I see what you mean."
+            }
+          ],
+          [
+            {
+              "texto": "Estar de acuerdo"
+            },
+            {
+              "texto": "I agree. / That makes sense."
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar el acuerdo"
+            },
+            {
+              "texto": "So it is most likely that…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,644 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "classes": {
+    "en.n5.class-81": {
+      "explicacion": {
+        "titulo": "Discrepar con educación: reconocer, suavizar, explicar",
+        "texto": "Discrepar no es lo mismo que ser brusco. Una respuesta brusca dice «no» sin más (That's a bad idea). Una respuesta suave hace tres cosas: reconoce la idea (I see your point), suaviza el desacuerdo (I'm afraid…, I'm not sure I agree…) y da una razón o una alternativa (my main concern is…, could we try…?). Una respuesta evasiva (We can talk about it later) ni acepta ni rechaza. En inglés el tono pesa tanto como la opinión: un «no» seco suena maleducado aunque tengas razón."
+      },
+      "patron": {
+        "texto": "Reconocer + suavizar + razón:",
+        "formula": [
+          {
+            "texto": "I see your point,",
+            "nota": "reconoces la idea del otro"
+          },
+          {
+            "texto": "but I'm afraid",
+            "nota": "suavizas el desacuerdo: I'm afraid + oración"
+          },
+          {
+            "texto": "it doesn't work for me",
+            "nota": "tu postura, dicha sin atacar"
+          },
+          {
+            "texto": "because of the noise.",
+            "nota": "la razón que la sostiene"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'm not agree with your proposal.",
+          "correcto": "I don't agree with your proposal.",
+          "explicacion": "Calco de «no estoy de acuerdo». En inglés agree es un verbo: I don't agree, nunca I'm not agree."
+        },
+        {
+          "incorrecto": "My main preoccupation is the noise.",
+          "correcto": "My main concern is the noise.",
+          "explicacion": "Preoccupation suena a obsesión. Para una preocupación razonable que justifica tu postura se dice concern."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana propone turnos de limpieza en el piso y Tom responde.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I have a proposal. Everyone cleans the kitchen on Saturday morning.",
+            "traduccion": "Tengo una propuesta. Todos limpiamos la cocina el sábado por la mañana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I see your point, Ana, but I'm afraid Saturday doesn't work for me. I work until noon.",
+            "traduccion": "Entiendo tu punto, Ana, pero me temo que el sábado no me viene bien. Trabajo hasta el mediodía."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then how about Sunday?",
+            "traduccion": "Entonces, ¿qué tal el domingo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That could work. Thanks for asking.",
+            "traduccion": "Eso podría funcionar. Gracias por preguntar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Tom para discrepar con suavidad?",
+          "opciones": [
+            {
+              "es": "Reconoce la idea de Ana y explica por qué el sábado no le viene bien."
+            },
+            {
+              "es": "Rechaza la propuesta sin dar ninguna razón."
+            },
+            {
+              "es": "Deja la propuesta sin contestar y habla de otra cosa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I see your point» y da su razón: trabaja hasta el mediodía. No rechaza en seco ni evade la propuesta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de respuesta",
+          "Ejemplo",
+          "Efecto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Brusca"
+            },
+            {
+              "texto": "That's a bad idea."
+            },
+            {
+              "texto": "rechaza sin razón"
+            }
+          ],
+          [
+            {
+              "texto": "Suave"
+            },
+            {
+              "texto": "I see your point, but I'm afraid it doesn't work for me."
+            },
+            {
+              "texto": "reconoce, discrepa y explica"
+            }
+          ],
+          [
+            {
+              "texto": "Evasiva"
+            },
+            {
+              "texto": "We can talk about it later."
+            },
+            {
+              "texto": "no contesta la propuesta"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-82": {
+      "explicacion": {
+        "titulo": "Proponer, poner condiciones y llegar a un punto medio",
+        "texto": "En una negociación cotidiana hay tres movimientos. Proponer: I'd suggest we… / How about…? Poner una condición: as long as… o provided that… (más formal), y decir qué pasa si no se cumple: otherwise… Y contraofertar: si no aceptas, propones otra cosa que cede algo (Let's meet halfway). Tras as long as y provided that va una oración completa en presente, sin will: as long as you pay, no as long as you will pay. Y How about va con -ing: How about cooking in turns?"
+      },
+      "patron": {
+        "texto": "Propuesta + condición + consecuencia:",
+        "formula": [
+          {
+            "texto": "I'd suggest we share the rota,",
+            "nota": "propuesta: I'd suggest + we + verbo base"
+          },
+          {
+            "texto": "as long as everyone does their part;",
+            "nota": "condición: as long as / provided that + presente"
+          },
+          {
+            "texto": "otherwise, we change it.",
+            "nota": "qué pasa si no se cumple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You can stay as long as you will pay your part.",
+          "correcto": "You can stay as long as you pay your part.",
+          "explicacion": "Tras as long as no se usa will aunque hables del futuro: basta el presente."
+        },
+        {
+          "incorrecto": "How about to cook in turns?",
+          "correcto": "How about cooking in turns?",
+          "explicacion": "Tras how about va -ing (o un nombre), no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo quiere invitar a amigos entre semana y Mia estudia por las mañanas.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Can my friends come over on Wednesdays?",
+            "traduccion": "¿Pueden venir mis amigos los miércoles?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I have early classes on Thursday. How about Fridays instead?",
+            "traduccion": "Tengo clases temprano el jueves. ¿Qué tal los viernes?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Fridays are hard for me. I'd suggest Wednesdays, provided that they leave before ten.",
+            "traduccion": "Los viernes me vienen mal. Yo sugeriría los miércoles, siempre y cuando se vayan antes de las diez."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK, let's meet halfway. Wednesdays, as long as they're quiet after nine.",
+            "traduccion": "Vale, lleguemos a un punto medio. Los miércoles, siempre que estén en silencio después de las nueve."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué condición pone Mia al final?",
+          "opciones": [
+            {
+              "es": "Que sus amigos estén en silencio después de las nueve."
+            },
+            {
+              "es": "Que sus amigos se vayan antes de las diez."
+            },
+            {
+              "es": "Que sus amigos vengan solo los viernes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cierra el acuerdo con «as long as they're quiet after nine». La condición de las diez era de Leo y los viernes era la primera oferta de Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Expresión",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "I'd suggest… / How about…?"
+            },
+            {
+              "texto": "How about cooking in turns?"
+            }
+          ],
+          [
+            {
+              "texto": "Condición"
+            },
+            {
+              "texto": "as long as / provided that"
+            },
+            {
+              "texto": "as long as you clean it"
+            }
+          ],
+          [
+            {
+              "texto": "Punto medio"
+            },
+            {
+              "texto": "Let's meet halfway"
+            },
+            {
+              "texto": "Let's meet halfway: £30 and £20."
+            }
+          ],
+          [
+            {
+              "texto": "Consecuencia"
+            },
+            {
+              "texto": "otherwise"
+            },
+            {
+              "texto": "Otherwise, we change it."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-83": {
+      "explicacion": {
+        "titulo": "Escuchar una disputa: postura, necesidad y cesión",
+        "texto": "En una disputa cada parte tiene tres cosas: su postura (lo que pide: position), su necesidad (por qué lo pide: need) y lo que podría ceder (what they are willing to give up). Las posturas chocan, pero las necesidades suelen dejar un terreno común (common ground) para el acuerdo. Al escuchar, busca «I want…» (postura), «because I need…» (necesidad) y «I'm willing to…» (cesión). Después de willing va siempre to + verbo base."
+      },
+      "patron": {
+        "texto": "Postura + necesidad + cesión:",
+        "formula": [
+          {
+            "texto": "Leo wants music after ten,",
+            "nota": "postura: lo que pide"
+          },
+          {
+            "texto": "because he needs time to relax;",
+            "nota": "necesidad: por qué lo pide"
+          },
+          {
+            "texto": "he is willing to use headphones.",
+            "nota": "cesión: be willing to + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo is willing use headphones.",
+          "correcto": "Leo is willing to use headphones.",
+          "explicacion": "Be willing va seguido de to + verbo base, igual que «dispuesto a» lleva a en español."
+        },
+        {
+          "incorrecto": "Leo wants that Mia uses headphones.",
+          "correcto": "Leo wants Mia to use headphones.",
+          "explicacion": "Calco de «quiere que use». Con want se dice persona + to + verbo base, sin that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana pregunta a Tom por qué Leo y Mia están enfadados.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why is Leo upset with Mia?",
+            "traduccion": "¿Por qué Leo está molesto con Mia?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Leo wants to play music after ten, but Mia has early classes.",
+            "traduccion": "Leo quiere poner música después de las diez, pero Mia tiene clases temprano."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "So what does each of them need?",
+            "traduccion": "Entonces, ¿qué necesita cada uno?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Leo needs time to relax. Mia needs to sleep. Leo is willing to use headphones.",
+            "traduccion": "Leo necesita tiempo para relajarse. Mia necesita dormir. Leo está dispuesto a usar auriculares."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿qué está dispuesto a hacer Leo?",
+          "opciones": [
+            {
+              "es": "Usar auriculares."
+            },
+            {
+              "es": "Cambiar de piso."
+            },
+            {
+              "es": "Poner música solo los domingos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom lo dice al final: «Leo is willing to use headphones». Poner música es su postura y dormir es la necesidad de Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Pregunta",
+          "Señal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "¿Qué pide?"
+            },
+            {
+              "texto": "I want… / I'd like…"
+            }
+          ],
+          [
+            {
+              "texto": "Necesidad"
+            },
+            {
+              "texto": "¿Por qué lo pide?"
+            },
+            {
+              "texto": "because I need… / I have to…"
+            }
+          ],
+          [
+            {
+              "texto": "Cesión"
+            },
+            {
+              "texto": "¿Qué puede dar?"
+            },
+            {
+              "texto": "I'm willing to… / I can give up…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-84": {
+      "explicacion": {
+        "titulo": "Un mensaje de acuerdo en cuatro partes",
+        "texto": "Un buen mensaje de acuerdo tiene cuatro partes: 1) Reconoces: I appreciate your message… / I understand that… 2) Dices tu parte con una razón: For me, the problem is… 3) Propones un término medio: Would it work if we tried…? / How about…, as long as…? 4) Cierras sin imponer: Let me know… Tras would it work if va pasado simple (we tried), aunque hables del futuro: el pasado suaviza la propuesta. Evita el tono de orden (You must…)."
+      },
+      "patron": {
+        "texto": "Reconocer + mi parte + propuesta + cierre:",
+        "formula": [
+          {
+            "texto": "I appreciate your message,",
+            "nota": "reconoces a la otra persona"
+          },
+          {
+            "texto": "but for me the problem is the noise late at night.",
+            "nota": "tu parte, con la razón"
+          },
+          {
+            "texto": "Would it work if we tried quiet hours after ten?",
+            "nota": "propuesta: would it work if + pasado simple"
+          },
+          {
+            "texto": "Let me know what you think.",
+            "nota": "cierre abierto, sin imponer"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Would it work if we will try a trial month?",
+          "correcto": "Would it work if we tried a trial month?",
+          "explicacion": "Después de if no va will. Para proponer con amabilidad se usa pasado simple."
+        },
+        {
+          "incorrecto": "Regarding to the rota, I prefer Sunday.",
+          "correcto": "Regarding the rota, I prefer Sunday.",
+          "explicacion": "Regarding no lleva to: es «sobre» o «en cuanto a» por sí solo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara revisa con Tom un mensaje que va a enviar a Leo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I wrote to Leo about the rota. Can you check my message?",
+            "traduccion": "Le escribí a Leo sobre el turno. ¿Puedes revisar mi mensaje?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sure. Start with I appreciate your message. It sounds kind.",
+            "traduccion": "Claro. Empieza con I appreciate your message. Suena amable."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then I say what I need: quiet after ten. Is that too direct?",
+            "traduccion": "Luego digo lo que necesito: silencio después de las diez. ¿Es demasiado directo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. Add Would it work if we tried it for a month? so it sounds like a proposal.",
+            "traduccion": "No. Añade Would it work if we tried it for a month? para que suene como una propuesta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿para qué sirve la frase «Would it work if we tried it for a month?»",
+          "opciones": [
+            {
+              "es": "Para que el mensaje suene como una propuesta y no como una orden."
+            },
+            {
+              "es": "Para recordarle a Leo que pague la renta."
+            },
+            {
+              "es": "Para cancelar el turno de limpieza."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom la recomienda «so it sounds like a proposal»: suaviza lo que Sara necesita y abre la negociación."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1. Reconocer"
+            },
+            {
+              "texto": "I appreciate… / I understand that…"
+            }
+          ],
+          [
+            {
+              "texto": "2. Tu parte"
+            },
+            {
+              "texto": "For me, the problem is…"
+            }
+          ],
+          [
+            {
+              "texto": "3. Propuesta"
+            },
+            {
+              "texto": "Would it work if we tried…?"
+            }
+          ],
+          [
+            {
+              "texto": "4. Cierre"
+            },
+            {
+              "texto": "Let me know if this works for you."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-85": {
+      "explicacion": {
+        "titulo": "Cerrar una disputa: postura, cesión y confirmación",
+        "texto": "Para cerrar una disputa lleva la conversación por pasos: 1) Di tu postura con calma (I'd like… because…). 2) Escucha y resume lo que oyes (So what you need is…). 3) Cede algo (I'm willing to…). 4) Propón un término medio con condición (How about…, as long as…?). 5) Confirma lo acordado (Just to confirm…) y fija una revisión (Let's review it in a month). Si solo expones tu postura y propones sin escuchar, el otro siente que no le has oído."
+      },
+      "patron": {
+        "texto": "Postura, cesión, acuerdo y confirmación:",
+        "formula": [
+          {
+            "texto": "I'd like quiet after ten,",
+            "nota": "tu postura: lo que pides"
+          },
+          {
+            "texto": "but I'm willing to give up my Saturdays.",
+            "nota": "tu cesión: be willing to"
+          },
+          {
+            "texto": "Just to confirm: quiet on weeknights, free weekends.",
+            "nota": "confirmas lo acordado"
+          },
+          {
+            "texto": "Let's review it in a month.",
+            "nota": "fijas una revisión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We agreed in the new rule.",
+          "correcto": "We agreed on the new rule.",
+          "explicacion": "Con agree se usa on para el asunto o with para la persona, no in."
+        },
+        {
+          "incorrecto": "Is OK if guests leave by eleven?",
+          "correcto": "Is it OK if guests leave by eleven?",
+          "explicacion": "En inglés la frase necesita sujeto: Is it OK…? No se puede omitir it como en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia cierran su disputa sobre las visitas entre semana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I'd like friends over on weeknights, because I work all weekend.",
+            "traduccion": "Me gustaría invitar a amigos entre semana, porque trabajo todo el fin de semana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I have early classes, so I need quiet after ten.",
+            "traduccion": "Tengo clases temprano, así que necesito silencio después de las diez."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'm willing to keep it quiet. How about friends until ten, as long as they're quiet?",
+            "traduccion": "Estoy dispuesto a mantener silencio. ¿Qué tal amigos hasta las diez, siempre que no hagan ruido?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Agreed. Just to confirm: friends until ten on weeknights, and we review it in a month.",
+            "traduccion": "De acuerdo. Solo para confirmar: amigos hasta las diez entre semana, y lo revisamos en un mes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué confirma Mia al final?",
+          "opciones": [
+            {
+              "es": "Amigos hasta las diez entre semana y revisar la norma en un mes."
+            },
+            {
+              "es": "Amigos hasta medianoche solo los fines de semana."
+            },
+            {
+              "es": "Ningún invitado entre semana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «Just to confirm» y repite lo acordado: amigos hasta las diez entre semana y revisión en un mes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "I'd like… because…"
+            }
+          ],
+          [
+            {
+              "texto": "Escuchar"
+            },
+            {
+              "texto": "So what you need is…"
+            }
+          ],
+          [
+            {
+              "texto": "Ceder"
+            },
+            {
+              "texto": "I'm willing to… / I can give up…"
+            }
+          ],
+          [
+            {
+              "texto": "Término medio"
+            },
+            {
+              "texto": "How about…, as long as…?"
+            }
+          ],
+          [
+            {
+              "texto": "Confirmar"
+            },
+            {
+              "texto": "Just to confirm…"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Aritmética verificada: clase 82 punto medio entre 250 y 300 = 275.",
+      "P1 corregido: feedback que citaban posiciones de opciones ('la segunda', 'el primer mensaje'), inválidas porque el constructor reordena las respuestas; ahora citan el contenido.",
+      "P1: 83 ev.[2] tenía dos respuestas defendibles (Mia needs birds/shade); reformulado. 85: 'That ___ fair' aceptaba solo sounds (añadido seems); 'agree on/to' admite ambos.",
+      "P1: escritura de C84 y C85 alargada a ~50 palabras con rúbrica (reconocer, razón, propuesta, condición, cierre/plazo; aceptar, ceder, condicionar, confirmar).",
+      "P2: retirados rellenos de 4.ª opción (C82); provided/providing aceptadas; feedback de 81 ajustado a la frase real."
+    ]
+  }
+}

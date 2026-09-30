@@ -1,0 +1,810 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-07",
+  "title": {
+    "en": "Used to or would",
+    "es": "Used to o would"
+  },
+  "objectives": {
+    "es": [
+      "Elegir used to o would para hábitos pasados y evitar would con estados."
+    ]
+  },
+  "concepts": [
+    "n4-memories-past-habits-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-06"
+  ],
+  "usesVocabulary": [
+    "summer",
+    "lake",
+    "boat",
+    "grandparents",
+    "story",
+    "afraid",
+    "would",
+    "used to"
+  ],
+  "usesPatterns": [
+    "n4-memories-past-habits-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "summer",
+      "es": "verano"
+    },
+    {
+      "en": "lake",
+      "es": "lago"
+    },
+    {
+      "en": "boat",
+      "es": "barco"
+    },
+    {
+      "en": "grandparents",
+      "es": "abuelos"
+    },
+    {
+      "en": "story",
+      "es": "historia"
+    },
+    {
+      "en": "afraid",
+      "es": "asustado, con miedo"
+    },
+    {
+      "en": "would",
+      "es": "soler (hábito pasado)"
+    },
+    {
+      "en": "used to",
+      "es": "soler, antes + verbo"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-07.t01",
+      "en": "Every summer, we would visit my grandparents at the lake.",
+      "es": "Cada verano visitábamos a mis abuelos en el lago.",
+      "explanationEs": "Would + verbo base: una acción repetida; antes se ha dicho la época (every summer).",
+      "segments": [
+        "Every summer, we would visit",
+        "my grandparents at the lake."
+      ],
+      "audioText": "Every summer, we would visit my grandparents at the lake.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-memories-past-habits-2"
+    },
+    {
+      "id": "en.n4.class-07.t02",
+      "en": "We used to swim in the lake every morning.",
+      "es": "Nadábamos en el lago todas las mañanas.",
+      "explanationEs": "Used to también vale para acciones repetidas.",
+      "segments": [
+        "We used to swim in",
+        "the lake every morning."
+      ],
+      "audioText": "We used to swim in the lake every morning.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-memories-past-habits-2"
+    },
+    {
+      "id": "en.n4.class-07.t03",
+      "en": "My grandfather used to have a small boat.",
+      "es": "Mi abuelo tenía un barco pequeño.",
+      "explanationEs": "Have es un estado: aquí solo used to, nunca would.",
+      "segments": [
+        "My grandfather used to",
+        "have a small boat."
+      ],
+      "audioText": "My grandfather used to have a small boat.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-memories-past-habits-2"
+    },
+    {
+      "id": "en.n4.class-07.t04",
+      "en": "After dinner, he would tell us a story, and we would listen.",
+      "es": "Después de cenar, nos contaba una historia y nosotros escuchábamos.",
+      "explanationEs": "Would + tell / would + listen: dos acciones que se repetían cada noche.",
+      "segments": [
+        "After dinner, he would tell us",
+        "a story, and we would listen."
+      ],
+      "audioText": "After dinner, he would tell us a story, and we would listen.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-memories-past-habits-2"
+    },
+    {
+      "id": "en.n4.class-07.t05",
+      "en": "I used to be afraid of the water, but my grandfather helped me.",
+      "es": "Yo tenía miedo del agua, pero mi abuelo me ayudó.",
+      "explanationEs": "Be es un estado: used to be, no would be.",
+      "segments": [
+        "I used to be afraid of the",
+        "water, but my grandfather helped me."
+      ],
+      "audioText": "I used to be afraid of the water, but my grandfather helped me.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-memories-past-habits-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c07.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase correcta: «Mi abuelo tenía un perro pequeño.»"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "My grandfather would have a small dog."
+          },
+          {
+            "text": "My grandfather used to have a small dog."
+          },
+          {
+            "text": "My grandfather was having a small dog."
+          }
+        ],
+        "teaches": [
+          "n4-memories-past-habits-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.pg01.seed-0",
+          "feedback": {
+            "es": "Have es un estado, y con los estados solo se usa used to; would queda para acciones repetidas."
+          },
+          "hint": {
+            "es": "Tener es un estado: no se usa would."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:164716cf5ca920817c257ddd2ff6a46a5bb96c8a7e7c4dfec1469547952fe598"
+      },
+      {
+        "id": "en.n4.c07.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Cada verano visitábamos a nuestros primos.»"
+        },
+        "answer": {
+          "text": "would",
+          "accepted": [
+            "would",
+            "used to"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-memories-past-habits-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.pg02.seed-0",
+          "feedback": {
+            "es": "Con una acción repetida y una época clara (every summer), valen would y used to."
+          },
+          "hint": {
+            "es": "Es una acción repetida: sirven dos expresiones."
+          },
+          "text": "Every summer, we ___ visit our cousins."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:25323a23201ef48616248fb1aad13e928e9759e6e8d3db615d502b61f191d6ea"
+      },
+      {
+        "id": "en.n4.c07.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Después de la escuela, jugábamos en el jardín.»"
+        },
+        "answer": {
+          "text": "After school we would play in the garden",
+          "tokens": [
+            "After",
+            "school",
+            "we",
+            "would",
+            "play",
+            "in",
+            "the",
+            "garden"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-memories-past-habits-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.pg03.seed-0",
+          "feedback": {
+            "es": "Would va antes del verbo base (play) y After school sitúa la época del hábito."
+          },
+          "hint": {
+            "es": "Would va antes del verbo base."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b285b4beadf744e059682a1f26862512324820bada7059f3ed3fc76cbe99f21d"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c07.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hacían cada mañana."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "They cooked breakfast."
+          },
+          {
+            "text": "They visited a village."
+          },
+          {
+            "text": "They went swimming."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.p01.seed-0",
+          "feedback": {
+            "es": "«Every morning we would swim» es el hábito: nadaban antes del desayuno."
+          },
+          "audio": "When I was small, we used to live near a lake, and every morning we would swim before breakfast.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:01162e82d5c4c5c022684f05aa600da986a4e3b4b2120cdff17b100213c47610"
+      },
+      {
+        "id": "en.n4.c07.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es incorrecta con would?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We would know all our neighbours."
+          },
+          {
+            "text": "We would play outside every evening."
+          },
+          {
+            "text": "We would visit Grandma on Sundays."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.p02.seed-0",
+          "feedback": {
+            "es": "Know es un estado y no admite would; las otras dos frases son acciones repetidas y sí lo admiten."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:50761bf4f0a0f90334c47846560cccf3faa6a8f14ced8e292c6f8b9821ebe13d"
+      },
+      {
+        "id": "en.n4.c07.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su explicación."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "We would swim every day.",
+              {
+                "es": "acción repetida con would"
+              }
+            ],
+            [
+              "We used to have a boat.",
+              {
+                "es": "estado con used to"
+              }
+            ],
+            [
+              "We would have a boat.",
+              {
+                "es": "incorrecta: estado con would"
+              }
+            ],
+            [
+              "We used to swim every day.",
+              {
+                "es": "acción repetida con used to"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.p03.seed-0",
+          "feedback": {
+            "es": "Las acciones repetidas admiten would y used to; los estados solo admiten used to."
+          },
+          "pairs": [
+            [
+              "We would swim every day.",
+              {
+                "es": "acción repetida con would"
+              }
+            ],
+            [
+              "We used to have a boat.",
+              {
+                "es": "estado con used to"
+              }
+            ],
+            [
+              "We would have a boat.",
+              {
+                "es": "incorrecta: estado con would"
+              }
+            ],
+            [
+              "We used to swim every day.",
+              {
+                "es": "acción repetida con used to"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a817de7fdcee91d6e0a018033dca34ea9fcd43f5ee92724146d4c268a3662099"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c07.e01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Vivíamos en un pueblo. Cada verano íbamos al lago.»"
+        },
+        "answer": {
+          "text": "used | would",
+          "accepted": [
+            "used | would"
+          ],
+          "parts": [
+            {
+              "text": "used",
+              "accepted": [
+                "used"
+              ]
+            },
+            {
+              "text": "would",
+              "accepted": [
+                "would",
+                "used to"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.e01.seed-0",
+          "feedback": {
+            "es": "Live es un estado y pide used to; go es una acción repetida y admite would o used to."
+          },
+          "sentences": [
+            "We ___ to live in a village.",
+            "Every summer, we ___ go to the lake."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b11d975f6c3b414bc715217513259cf12525686ece538c121c9c1e386bf1d196"
+      },
+      {
+        "id": "en.n4.c07.e02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Corrige el error: «Vivíamos en un piso pequeño.»"
+        },
+        "answer": {
+          "text": "We used to live in a small flat.",
+          "accepted": [
+            "We used to live in a small flat.",
+            "We lived in a small flat.",
+            "We used to live in a small apartment.",
+            "We lived in a small apartment."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.e02.seed-0",
+          "feedback": {
+            "es": "Live es un estado: se corrige con used to live; también es válido el pasado simple lived."
+          },
+          "text": "Frase con error: We would live in a small flat."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:989e04eb72a65ef02b3a4421f0f9578ffde666cc10bb6d356fd4204b675eaea7"
+      },
+      {
+        "id": "en.n4.c07.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo es ahora el hermano."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He is still scared."
+          },
+          {
+            "text": "He is not scared now."
+          },
+          {
+            "text": "He was never scared."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.e03.seed-0",
+          "feedback": {
+            "es": "«Used to be afraid… but now he sleeps with no light»: antes tenía miedo y ahora ya no."
+          },
+          "audio": "My brother used to be afraid of the dark, but now he sleeps with no light.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:83b74d0cbd60785113344b586cb5ab429b0153202a2d4636c7c917ecd4651b63"
+      },
+      {
+        "id": "en.n4.c07.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el texto, ¿qué hacía la familia cada sábado?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "They worked in the garden."
+          },
+          {
+            "text": "They visited a village."
+          },
+          {
+            "text": "They ate outside."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.e04.seed-0",
+          "feedback": {
+            "es": "«Every Saturday, they would eat outside» cuenta el hábito de los sábados: comían fuera."
+          },
+          "text": "When Ana was a child, her family used to have a garden. Every Saturday, they would eat outside."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1065fcf0baccc499807ebc29bcf70985b7b4d3c781c82407ec53282ef11b5fe8"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c07.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase correcta: «Vivíamos cerca de un río.»"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We used to live near a river."
+          },
+          {
+            "text": "We would live near a river."
+          },
+          {
+            "text": "We were living near a river."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.r01.seed-0",
+          "feedback": {
+            "es": "Live es un estado: solo admite used to. Would y was living no expresan una situación habitual pasada."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04345d5de0f5b17876a3c0033596e3d1979bc41558091d6f8418fc075b9dd7b3"
+      },
+      {
+        "id": "en.n4.c07.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hacían los niños cada tarde."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "They told stories."
+          },
+          {
+            "text": "They listened to stories."
+          },
+          {
+            "text": "They read books."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.r02.seed-0",
+          "feedback": {
+            "es": "Would tell y would listen son dos hábitos: el abuelo contaba y los niños escuchaban."
+          },
+          "audio": "Every evening, my grandfather would tell us a story, and we would listen.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ca47b7a4ec2937f0fcfaf27b1a01898d7ea6fb611197f81432076b70922ec345"
+      },
+      {
+        "id": "en.n4.c07.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Nadábamos en el río todos los días.»"
+        },
+        "answer": {
+          "text": "We used to swim in the river every day",
+          "tokens": [
+            "We",
+            "used",
+            "to",
+            "swim",
+            "in",
+            "the",
+            "river",
+            "every",
+            "day"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-memories-past-habits-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c07.r03.seed-0",
+          "feedback": {
+            "es": "Used to + swim cuenta una acción repetida del pasado; every day marca que se repetía."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:de2de3510d29af612240cd5e7de43148f272a7c580080742e25c7c3509cbec55"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c07.e01": {
+      "reteach": "en.n4.class-07.t01",
+      "review": "en.n4.c07.r01"
+    },
+    "en.n4.c07.e02": {
+      "reteach": "en.n4.class-07.t02",
+      "review": "en.n4.c07.r02"
+    },
+    "en.n4.c07.e03": {
+      "reteach": "en.n4.class-07.t03",
+      "review": "en.n4.c07.r03"
+    },
+    "en.n4.c07.e04": {
+      "reteach": "en.n4.class-07.t04",
+      "review": "en.n4.c07.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

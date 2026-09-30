@@ -1,0 +1,776 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-91",
+  "title": {
+    "en": "Spot the structure",
+    "es": "Reconocer la estructura"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer en una anécdota breve tiempos verbales, condicionales, causativos y verbos de reporte del nivel."
+    ]
+  },
+  "concepts": [
+    "n5-integrated-stories-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n5.class-90"
+  ],
+  "usesVocabulary": [
+    "anecdote",
+    "stolen",
+    "afterwards",
+    "replaced",
+    "insurance",
+    "careless",
+    "admitted"
+  ],
+  "usesPatterns": [
+    "n5-integrated-stories-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "anecdote",
+      "es": "anécdota"
+    },
+    {
+      "en": "stolen",
+      "es": "robado"
+    },
+    {
+      "en": "afterwards",
+      "es": "después"
+    },
+    {
+      "en": "replaced",
+      "es": "reemplazado"
+    },
+    {
+      "en": "insurance",
+      "es": "seguro"
+    },
+    {
+      "en": "careless",
+      "es": "descuidado"
+    },
+    {
+      "en": "admitted",
+      "es": "admitió"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-91.t01",
+      "en": "Carlos told an anecdote: he had been saving for a year when his phone was stolen.",
+      "es": "Carlos contó una anécdota: llevaba un año ahorrando cuando le robaron el teléfono.",
+      "explanationEs": "Had been saving es una actividad en curso anterior al robo (was stolen, pasiva del pasado).",
+      "segments": [
+        "Carlos told an anecdote: he had been saving",
+        "for a year when his phone was stolen."
+      ],
+      "audioText": "Carlos told an anecdote: he had been saving for a year when his phone was stolen.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-1"
+    },
+    {
+      "id": "en.n5.class-91.t02",
+      "en": "Afterwards, he had the phone replaced at a small shop.",
+      "es": "Después, hizo que le cambiaran el teléfono en una tienda pequeña.",
+      "explanationEs": "Had + cosa + participio: otra persona hace la acción por ti (causativo).",
+      "segments": [
+        "Afterwards, he had the phone",
+        "replaced at a small shop."
+      ],
+      "audioText": "Afterwards, he had the phone replaced at a small shop.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-1"
+    },
+    {
+      "id": "en.n5.class-91.t03",
+      "en": "The assistant told him that he should have bought insurance.",
+      "es": "El dependiente le dijo que debería haber comprado un seguro.",
+      "explanationEs": "Told him that es un reporte; should have + participio critica algo que no se hizo.",
+      "segments": [
+        "The assistant told him that",
+        "he should have bought insurance."
+      ],
+      "audioText": "The assistant told him that he should have bought insurance.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-1"
+    },
+    {
+      "id": "en.n5.class-91.t04",
+      "en": "If he hadn't been so careless, he would still have his phone today.",
+      "es": "Si no hubiera sido tan descuidado, todavía tendría su teléfono hoy.",
+      "explanationEs": "If + had + participio, would + verbo base: causa pasada y resultado presente (condicional mixto).",
+      "segments": [
+        "If he hadn't been so careless, he",
+        "would still have his phone today."
+      ],
+      "audioText": "If he hadn't been so careless, he would still have his phone today.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-1"
+    },
+    {
+      "id": "en.n5.class-91.t05",
+      "en": "He admitted that he had never read the rules.",
+      "es": "Admitió que nunca había leído las normas.",
+      "explanationEs": "Admitted that + oración: verbo de reporte; had read sitúa lo leído antes de admitirlo.",
+      "segments": [
+        "He admitted that he had",
+        "never read the rules."
+      ],
+      "audioText": "He admitted that he had never read the rules.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-integrated-stories-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c91.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿En cuál de estas oraciones una actividad venía ocurriendo antes de otro hecho pasado?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Sara has been waiting for an hour, and the bus is late."
+          },
+          {
+            "text": "Sara had been waiting for an hour when the bus came."
+          },
+          {
+            "text": "Sara waited for the bus and went home."
+          }
+        ],
+        "teaches": [
+          "n5-integrated-stories-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.pg01.seed-0",
+          "feedback": {
+            "es": "Had been waiting describe una actividad en curso antes de que llegara el autobús. Has been waiting llega hasta hoy, y waited and went home es un hecho terminado."
+          },
+          "hint": {
+            "es": "Busca had been + verbo con -ing y un segundo hecho en pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:70fd2483850adb2803b11cdf273d261e0cd7e6e38ad790d230e5be45f5787a1a"
+      },
+      {
+        "id": "en.n5.c91.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿En cuál de estas oraciones otra persona hace algo por Tom?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Tom repaired his bike on Monday."
+          },
+          {
+            "text": "Tom has repaired his bike twice."
+          },
+          {
+            "text": "Tom had his bike repaired on Monday."
+          }
+        ],
+        "teaches": [
+          "n5-integrated-stories-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.pg02.seed-0",
+          "feedback": {
+            "es": "Had + cosa + participio significa que el arreglo lo hizo otra persona. Las otras dos dicen que Tom lo arregló o lo ha arreglado él mismo."
+          },
+          "hint": {
+            "es": "Fíjate en had + cosa + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:08325c90e5bd6e34f8c88b1568cf34781b692be7df77a67ca638986bce1f733e"
+      },
+      {
+        "id": "en.n5.c91.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La doctora me dijo que descansara.»"
+        },
+        "answer": {
+          "text": "me",
+          "accepted": [
+            "me"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-integrated-stories-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.pg03.seed-0",
+          "feedback": {
+            "es": "Con told va siempre una persona antes de that: told me that."
+          },
+          "hint": {
+            "es": "Con told va la persona a quien se le dice."
+          },
+          "text": "The doctor told ___ that I should rest."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dd8e0abea5ca05066dfc20341918792b2d0ae5a7e553a2aa9db20fc171ff9821"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c91.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada oración con la estructura que contiene."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I had been running when it started to rain.",
+              {
+                "es": "actividad en curso anterior a otro hecho"
+              }
+            ],
+            [
+              "If I hadn't missed the bus, I would be at work now.",
+              {
+                "es": "condicional: causa pasada, resultado de hoy"
+              }
+            ],
+            [
+              "Mia had her hair cut on Friday.",
+              {
+                "es": "otra persona lo hace por ti"
+              }
+            ],
+            [
+              "Leo admitted that he had lost the key.",
+              {
+                "es": "verbo de reporte con that"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.p01.seed-0",
+          "feedback": {
+            "es": "Cada pista en la forma revela un significado: had been + -ing, if + had + participio, had + cosa + participio y admitted that."
+          },
+          "pairs": [
+            [
+              "I had been running when it started to rain.",
+              {
+                "es": "actividad en curso anterior a otro hecho"
+              }
+            ],
+            [
+              "If I hadn't missed the bus, I would be at work now.",
+              {
+                "es": "condicional: causa pasada, resultado de hoy"
+              }
+            ],
+            [
+              "Mia had her hair cut on Friday.",
+              {
+                "es": "otra persona lo hace por ti"
+              }
+            ],
+            [
+              "Leo admitted that he had lost the key.",
+              {
+                "es": "verbo de reporte con that"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:82edb20412ee9d983ed265936335bf9bb3e0c3995ffed366405ef12330c19bc1"
+      },
+      {
+        "id": "en.n5.c91.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué describe la frase."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "An activity that was in progress before the concert."
+          },
+          {
+            "text": "A plan for the next concert."
+          },
+          {
+            "text": "Something that will happen after the concert."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.p02.seed-0",
+          "feedback": {
+            "es": "Had been standing describe una actividad en curso antes del concierto: estuvieron de pie haciendo fila durante tres horas."
+          },
+          "audio": "Before the concert, we had been standing in line for three hours.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e58e662c421140f90f7c57aaa5bb40cfc540d38caf67b2f2bdeeb81fb345c656"
+      },
+      {
+        "id": "en.n5.c91.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Si no hubiera llovido, habríamos ido a la playa.»"
+        },
+        "answer": {
+          "text": "If it hadn't rained we would have gone to the beach",
+          "tokens": [
+            "If",
+            "it",
+            "hadn't",
+            "rained",
+            "we",
+            "would",
+            "have",
+            "gone",
+            "to",
+            "the",
+            "beach"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.p03.seed-0",
+          "feedback": {
+            "es": "El condicional del pasado lleva if + had + participio y would have + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6e69673d75ae7677750a129231ded7477e40a8fe2b90a7c74d48afa27d9c08e8"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c91.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "En el texto de Leo, ¿qué oración es el condicional que une un hecho pasado con hoy?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He told me that he should have rested."
+          },
+          {
+            "text": "If he hadn't hurt his knee, he would be at the race today."
+          },
+          {
+            "text": "Leo had been training for a race when he hurt his knee."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.e01.seed-0",
+          "feedback": {
+            "es": "If + had + participio, would + base conecta la lesión pasada con lo que no puede hacer hoy. Las otras dos frases son un reporte y una actividad anterior."
+          },
+          "text": "Last year Leo had been training for a race when he hurt his knee. He told me that he should have rested. If he hadn't hurt his knee, he would be at the race today."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:37c9c959ce8679cf822c453292a3612afe3ce6f58282ea57ea8dfb65f4f74a5f"
+      },
+      {
+        "id": "en.n5.c91.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién arregló el coche."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She fixed it herself."
+          },
+          {
+            "text": "Her brother fixed it at home."
+          },
+          {
+            "text": "A mechanic fixed it for her."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.e02.seed-0",
+          "feedback": {
+            "es": "Had her car repaired indica que lo hizo un mecánico por ella, no que lo arregló ella misma."
+          },
+          "audio": "Sara had her car repaired at the garage on Monday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d59eb8e45eb40db1d9a767b8855fd6f11bebe06e60fbb32bef06b2491c55e2bd"
+      },
+      {
+        "id": "en.n5.c91.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si no me hubiera perdido, habría llegado a tiempo.»"
+        },
+        "answer": {
+          "text": "would have",
+          "accepted": [
+            "would have"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.e03.seed-0",
+          "feedback": {
+            "es": "El resultado de un condicional del pasado se forma con would have + participio."
+          },
+          "text": "If I hadn't got lost, I ___ arrived on time."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4d4102affc85754411820dbb2923ed6a3fb88abffdf6c0d832bf388c770a9eeb"
+      },
+      {
+        "id": "en.n5.c91.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "Tom suspendió el examen porque no estudió. ¿Qué frase expresa su arrepentimiento?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I should have studied more."
+          },
+          {
+            "text": "I should study more next time."
+          },
+          {
+            "text": "I would study more if I could."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.e04.seed-0",
+          "feedback": {
+            "es": "Should have + participio lamenta algo que ya pasó. Las otras dos miran al futuro o a una posibilidad."
+          },
+          "text": "Tom no estudió y suspendió el examen."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9917c2c4bf0e72507f8b5137e16781ce5de9d1d8c76fc7d537e41103b126ff15"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c91.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estas oraciones reporta algo que alguien admitió?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Ana had her tickets printed at the shop."
+          },
+          {
+            "text": "Ana admitted that she had forgotten the tickets."
+          },
+          {
+            "text": "Ana has been forgetting her tickets all week."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.r01.seed-0",
+          "feedback": {
+            "es": "Admitted that reporta lo que Ana reconoció. Las otras frases son un causativo y una actividad que dura hasta hoy."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:511d4c674157da155a9f0c756296885f16d9fbc7ee6563fc333d01361921b851"
+      },
+      {
+        "id": "en.n5.c91.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Hicieron que un albañil les arreglara el tejado.»"
+        },
+        "answer": {
+          "text": "repaired",
+          "accepted": [
+            "repaired",
+            "fixed"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.r02.seed-0",
+          "feedback": {
+            "es": "En el causativo, después de have + cosa va el participio: had the roof repaired."
+          },
+          "text": "They had the roof ___ by a builder last summer."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:90fa6024b5281e18509867626e5405f173ea1fdfa7ae2a6b18a83d70345b3fb7"
+      },
+      {
+        "id": "en.n5.c91.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Llevaba dos años ahorrando cuando lo compró.»"
+        },
+        "answer": {
+          "text": "She had been saving for two years when she bought it",
+          "tokens": [
+            "She",
+            "had",
+            "been",
+            "saving",
+            "for",
+            "two",
+            "years",
+            "when",
+            "she",
+            "bought",
+            "it"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-integrated-stories-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c91.r03.seed-0",
+          "feedback": {
+            "es": "Had been saving + for two years presenta la actividad anterior al momento de la compra."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0a1049df6b0db8bb29692319c67303b2a5eebcac63779dc58199af2e96ad8acb"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c91.e01": {
+      "reteach": "en.n5.class-91.t01",
+      "review": "en.n5.c91.r01"
+    },
+    "en.n5.c91.e02": {
+      "reteach": "en.n5.class-91.t02",
+      "review": "en.n5.c91.r02"
+    },
+    "en.n5.c91.e03": {
+      "reteach": "en.n5.class-91.t03",
+      "review": "en.n5.c91.r03"
+    },
+    "en.n5.c91.e04": {
+      "reteach": "en.n5.class-91.t04",
+      "review": "en.n5.c91.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,400 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "classes": {
+    "en.n5.class-41": {
+      "explicacion": {
+        "titulo": "Responder sin repetir: so y not",
+        "texto": "En inglés, cuando respondes a una pregunta de sí o no con una opinión o un deseo, no repites toda la frase: usas so para el «sí» y not para el «no». Con think, suppose y guess: I think so, I guess so. Para el «no» con think, se niega el verbo: I don't think so. Con hope y I'm afraid el no es not: I hope not, I'm afraid not. Ojo: nunca «I hope no» ni «I think no». Y I'm afraid so significa «me temo que sí» (una mala noticia)."
+      },
+      "patron": {
+        "texto": "Pregunta + verbo de opinión o deseo + so / not:",
+        "formula": [
+          {
+            "texto": "Is Mia coming?",
+            "nota": "pregunta de sí o no"
+          },
+          {
+            "texto": "I think / I hope / I'm afraid",
+            "nota": "verbo de opinión, deseo o lamento"
+          },
+          {
+            "texto": "so. / not.",
+            "nota": "so = sí; not = no (I don't think so para negar con think)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Will it rain? I think no.",
+          "correcto": "Will it rain? I don't think so.",
+          "explicacion": "Calco de «creo que no». Con think el no se forma negando el verbo: I don't think so."
+        },
+        {
+          "incorrecto": "Is the test tomorrow? I'm afraid yes.",
+          "correcto": "Is the test tomorrow? I'm afraid so.",
+          "explicacion": "Calco de «me temo que sí». Tras afraid, el sí se dice so, no yes."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan por chat antes de la fiesta de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Is Tom coming to Mia's party tonight?",
+            "traduccion": "¿Viene Tom a la fiesta de Mia esta noche?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I think so. He said he would probably come after work.",
+            "traduccion": "Creo que sí. Dijo que probablemente vendría después del trabajo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Will Carlos bring his guitar?",
+            "traduccion": "¿Traerá Carlos su guitarra?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'm afraid not. It's broken.",
+            "traduccion": "Me temo que no. Está rota."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Will the music be loud? I hope not. I have a test tomorrow.",
+            "traduccion": "¿Estará alta la música? Espero que no. Tengo un examen mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué responde Leo sobre la guitarra de Carlos?",
+          "opciones": [
+            {
+              "es": "Que no la traerá, porque está rota."
+            },
+            {
+              "es": "Que probablemente la traerá."
+            },
+            {
+              "es": "Que no sabe si la traerá."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo contesta «I'm afraid not» y explica que la guitarra está rota: Carlos no la traerá."
+        }
+      }
+    },
+    "en.n5.class-42": {
+      "explicacion": {
+        "titulo": "Sonar natural: vaguedad y elipsis",
+        "texto": "En una conversación informal casi nadie habla con frases completas ni con datos exactos. Hay dos recursos. El lenguaje vago: sort of / kind of («más o menos»), or so («aproximadamente») y and stuff / or something («y cosas así»). Y la elipsis, que omite el principio de la frase: Fancy a pizza? en lugar de Do you fancy a pizza? Se omiten sujeto y auxiliar cuando el contexto los aclara. No lo uses en un correo formal ni en un examen."
+      },
+      "patron": {
+        "texto": "Frase completa → versión informal:",
+        "formula": [
+          {
+            "texto": "Fancy a pizza?",
+            "nota": "elipsis: se omite Do you"
+          },
+          {
+            "texto": "I'm sort of tired,",
+            "nota": "sort of suaviza la idea"
+          },
+          {
+            "texto": "at eight or so, and stuff.",
+            "nota": "or so y and stuff dejan el dato vago"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'm kind tired.",
+          "correcto": "I'm kind of tired.",
+          "explicacion": "Kind y sort siempre llevan of: kind of tired, sort of tired."
+        },
+        {
+          "incorrecto": "I bought pizza, drinks and others.",
+          "correcto": "I bought pizza, drinks and stuff.",
+          "explicacion": "Calco de «y otros». Para cerrar una lista con vaguedad se dice and stuff, no «and others»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Ana organizan el sábado por mensaje.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Got any plans for Saturday?",
+            "traduccion": "¿Tienes planes para el sábado?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Not really. Fancy a trip to the lake?",
+            "traduccion": "Realmente no. ¿Te apetece una excursión al lago?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure. How long does it take?",
+            "traduccion": "Claro. ¿Cuánto se tarda?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "An hour or so. I'll bring sandwiches and stuff.",
+            "traduccion": "Una hora, más o menos. Llevaré bocadillos y cosas así."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuánto se tarda en llegar al lago?",
+          "opciones": [
+            {
+              "es": "Una hora, más o menos."
+            },
+            {
+              "es": "Exactamente dos horas."
+            },
+            {
+              "es": "Media hora."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «An hour or so»: or so indica una cantidad aproximada, no exacta."
+        }
+      }
+    },
+    "en.n5.class-43": {
+      "explicacion": {
+        "titulo": "Modismos de amistad: sentido por contexto",
+        "texto": "Un modismo funciona como una sola palabra: no se traduce palabra por palabra. Hit it off es «congeniar», fall out es «pelearse», make up es «hacer las paces», drift apart es «distanciarse poco a poco», lose touch es «perder el contacto» y get on like a house on fire es «llevarse de maravilla». El verbo se conjuga (fell out, made up) pero el resto no cambia. Para entender un chat, lee lo que pasa antes y después: el contexto casi siempre aclara el sentido."
+      },
+      "patron": {
+        "texto": "Modismo + contexto = significado:",
+        "formula": [
+          {
+            "texto": "They hit it off",
+            "nota": "modismo: no se traduce palabra por palabra"
+          },
+          {
+            "texto": "at the party,",
+            "nota": "contexto: dónde y cuándo"
+          },
+          {
+            "texto": "so they talked all night.",
+            "nota": "consecuencia que confirma el sentido"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We hit off at once.",
+          "correcto": "We hit it off at once.",
+          "explicacion": "Al traducir «congeniamos» se pierde it: el modismo completo es hit it off."
+        },
+        {
+          "incorrecto": "We made the peace after the argument.",
+          "correcto": "We made up after the argument.",
+          "explicacion": "Calco de «hicimos las paces». En inglés se dice make up, sin la palabra paz."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de la nueva compañera de piso de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Did you meet Sara's new friend?",
+            "traduccion": "¿Conociste a la nueva amiga de Sara?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes! We hit it off at once. We talked about music for two hours.",
+            "traduccion": "¡Sí! Congeniamos enseguida. Hablamos de música durante dos horas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Nice! Sara fell out with her old friend, didn't she?",
+            "traduccion": "¡Qué bien! Sara se peleó con su antigua amiga, ¿verdad?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, it was only a small argument, but they made up last week.",
+            "traduccion": "Sí, fue solo una pequeña discusión, pero hicieron las paces la semana pasada."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo terminó la pelea de Sara con su antigua amiga?",
+          "opciones": [
+            {
+              "es": "Hicieron las paces la semana pasada."
+            },
+            {
+              "es": "Siguen sin hablarse."
+            },
+            {
+              "es": "Se mudaron a otra ciudad."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «they made up last week»: hicieron las paces tras una pequeña discusión."
+        }
+      }
+    },
+    "en.n5.class-44": {
+      "explicacion": {
+        "titulo": "Ponerse al día por mensaje",
+        "texto": "Un mensaje informal a un amigo suena natural cuando mezcla un saludo cálido (Hi Mia!), elipsis (Been busy. Hope you're well.), lenguaje vago (or so, and stuff, sort of), quizá un modismo de amistad (we hit it off, we lost touch) y una exclamación con so o such. Se dice so + adjetivo (so good) y such + a/an + adjetivo + sustantivo (such a long time). Empieza preguntando, cuenta tus novedades y cierra con un plan: Let's catch up soon."
+      },
+      "patron": {
+        "texto": "Saludo + exclamación + novedades + plan:",
+        "formula": [
+          {
+            "texto": "It's so good to hear from you!",
+            "nota": "so + adjetivo: exclamación"
+          },
+          {
+            "texto": "It's been such a long time.",
+            "nota": "such + a + adjetivo + sustantivo"
+          },
+          {
+            "texto": "Let's catch up soon, mate.",
+            "nota": "cierre informal con un plan"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It's such good to see you.",
+          "correcto": "It's so good to see you.",
+          "explicacion": "Such necesita un sustantivo (such a good friend). Con un adjetivo solo se usa so."
+        },
+        {
+          "incorrecto": "It was so a long time.",
+          "correcto": "It was such a long time.",
+          "explicacion": "So no se usa con a + sustantivo. Con a/an + adjetivo + sustantivo se dice such a."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo se escriben después de mucho tiempo sin hablar.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Leo! It's so good to hear from you! It's been ages.",
+            "traduccion": "¡Leo! ¡Qué bien saber de ti! Han pasado siglos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I know! I've been busy lately. New job, new flat and stuff.",
+            "traduccion": "¡Lo sé! He estado ocupado últimamente. Trabajo nuevo, piso nuevo y cosas así."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Those are such big changes! Are you free on Saturday to catch up?",
+            "traduccion": "¡Son cambios tan grandes! ¿Estás libre el sábado para ponernos al día?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure. Fancy a coffee at four or so?",
+            "traduccion": "Claro. ¿Te apetece un café a las cuatro, más o menos?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué ha estado ocupado Leo?",
+          "opciones": [
+            {
+              "es": "Tiene un trabajo nuevo y un piso nuevo."
+            },
+            {
+              "es": "Ha estado de viaje con Ana."
+            },
+            {
+              "es": "Está preparando un examen."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «New job, new flat and stuff»: sus cambios recientes lo han tenido ocupado."
+        }
+      }
+    },
+    "en.n5.class-45": {
+      "explicacion": {
+        "titulo": "Charla en una fiesta: todo el bloque a la vez",
+        "texto": "En una fiesta no hace falta hablar perfecto: hace falta mantener la charla. Usa lo que has practicado: respuestas cortas con so y not (I think so, I'm afraid not), lenguaje vago y elipsis (Fancy a drink? At eight or so), modismos de amistad (we hit it off, we lost touch) y exclamaciones con so y such. Para mover la conversación: By the way… cambia de tema, Speaking of… conecta con lo que se acaba de decir y Actually… corrige con suavidad. Despídete con Keep in touch!"
+      },
+      "patron": {
+        "texto": "Pregunta → respuesta corta + comentario → nuevo tema:",
+        "formula": [
+          {
+            "texto": "Do you know the host?",
+            "nota": "pregunta abierta para empezar la charla"
+          },
+          {
+            "texto": "I think so, actually.",
+            "nota": "respuesta corta con so"
+          },
+          {
+            "texto": "By the way, fancy a drink?",
+            "nota": "conector + elipsis para cambiar de tema"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Speaking about music, fancy a dance?",
+          "correcto": "Speaking of music, fancy a dance?",
+          "explicacion": "Calco de «hablando de». La expresión fija es speaking of."
+        },
+        {
+          "incorrecto": "Do you know the host? I think that yes.",
+          "correcto": "Do you know the host? I think so.",
+          "explicacion": "Calco de «creo que sí». Se dice I think so, sin that ni yes."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana se conocen en una fiesta en casa de unos amigos.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Hi, I'm Tom. Do you know the host?",
+            "traduccion": "Hola, soy Tom. ¿Conoces al anfitrión?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Sort of. We hit it off at school, but we lost touch for ages.",
+            "traduccion": "Más o menos. Congeniamos en el colegio, pero perdimos el contacto durante siglos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Such a long time! Is Leo here too?",
+            "traduccion": "¡Cuánto tiempo! ¿Está Leo aquí también?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I'm afraid not. He's sort of ill.",
+            "traduccion": "Me temo que no. Está algo enfermo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo conoce Ana al anfitrión?",
+          "opciones": [
+            {
+              "es": "Se hicieron amigos en el colegio, pero perdieron el contacto."
+            },
+            {
+              "es": "Son primos y viven juntos."
+            },
+            {
+              "es": "Se conocieron ayer en la fiesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que congeniaron en el colegio y que perdieron el contacto mucho tiempo."
+        }
+      }
+    }
+  }
+}

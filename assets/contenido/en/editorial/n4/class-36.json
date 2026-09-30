@@ -1,0 +1,800 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-36",
+  "title": {
+    "en": "Same message, different voice",
+    "es": "El mismo mensaje con otra voz"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer si un mensaje es formal, neutro o informal por su saludo, su vocabulario y su estructura."
+    ]
+  },
+  "concepts": [
+    "n4-tone-and-audience-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-35"
+  ],
+  "usesVocabulary": [
+    "dear",
+    "regards",
+    "thanks",
+    "please",
+    "could",
+    "afraid",
+    "formal",
+    "informal",
+    "neutral"
+  ],
+  "usesPatterns": [
+    "n4-tone-and-audience-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "dear",
+      "es": "querido/a, estimado/a"
+    },
+    {
+      "en": "regards",
+      "es": "saludos"
+    },
+    {
+      "en": "thanks",
+      "es": "gracias"
+    },
+    {
+      "en": "please",
+      "es": "por favor"
+    },
+    {
+      "en": "could",
+      "es": "podría"
+    },
+    {
+      "en": "afraid",
+      "es": "me temo"
+    },
+    {
+      "en": "formal",
+      "es": "de tono serio y cortés"
+    },
+    {
+      "en": "informal",
+      "es": "de tono cercano y relajado"
+    },
+    {
+      "en": "neutral",
+      "es": "neutro"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-36.t01",
+      "en": "Hi Leo, can you send me the file? Thanks!",
+      "es": "Hola, Leo, ¿puedes enviarme el archivo? ¡Gracias!",
+      "explanationEs": "Mensaje informal: saludo corto, can you y una exclamación.",
+      "segments": [
+        "Hi Leo, can you send",
+        "me the file? Thanks!"
+      ],
+      "audioText": "Hi Leo, can you send me the file? Thanks!",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-1"
+    },
+    {
+      "id": "en.n4.class-36.t02",
+      "en": "Dear Mr Brown, could you please send me the file?",
+      "es": "Estimado señor Brown, ¿podría enviarme el archivo, por favor?",
+      "explanationEs": "Mensaje formal: Dear + título, could you y please.",
+      "segments": [
+        "Dear Mr Brown, could you",
+        "please send me the file?"
+      ],
+      "audioText": "Dear Mr Brown, could you please send me the file?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-1"
+    },
+    {
+      "id": "en.n4.class-36.t03",
+      "en": "Thanks for the notes! Talk soon.",
+      "es": "¡Gracias por los apuntes! Hablamos pronto.",
+      "explanationEs": "En un mensaje informal se usan frases cortas y despedidas como Talk soon.",
+      "segments": [
+        "Thanks for the",
+        "notes! Talk soon."
+      ],
+      "audioText": "Thanks for the notes! Talk soon.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-1"
+    },
+    {
+      "id": "en.n4.class-36.t04",
+      "en": "I am afraid that I cannot attend the meeting.",
+      "es": "Me temo que no puedo asistir a la reunión.",
+      "explanationEs": "Formal: forma completa cannot, sin contracción, y la fórmula I am afraid that.",
+      "segments": [
+        "I am afraid that I",
+        "cannot attend the meeting."
+      ],
+      "audioText": "I am afraid that I cannot attend the meeting.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-1"
+    },
+    {
+      "id": "en.n4.class-36.t05",
+      "en": "Thank you for your help. Kind regards, Ana.",
+      "es": "Gracias por su ayuda. Saludos cordiales, Ana.",
+      "explanationEs": "Kind regards es la despedida formal más habitual.",
+      "segments": [
+        "Thank you for your",
+        "help. Kind regards, Ana."
+      ],
+      "audioText": "Thank you for your help. Kind regards, Ana.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c36.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué mensaje está escrito en tono formal?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Dear Ms Green, could you please call me tomorrow? Kind regards."
+          },
+          {
+            "text": "Hi Ms Green, can you call me tomorrow? Bye!"
+          },
+          {
+            "text": "Call me tomorrow, thanks!"
+          }
+        ],
+        "teaches": [
+          "n4-tone-and-audience-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.pg01.seed-0",
+          "feedback": {
+            "es": "Dear + título, could you please y Kind regards son señales formales. Las otras dos opciones usan saludo informal, contracciones o exclamaciones."
+          },
+          "hint": {
+            "es": "El saludo y la forma de pedir cambian según quién lee."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:242ad287eb482aabe5b9656e5deafd95c4bfa7f73f9603e00555102fb38fb82a"
+      },
+      {
+        "id": "en.n4.c36.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Querida Sra. Smith:»"
+        },
+        "answer": {
+          "text": "Dear",
+          "accepted": [
+            "Dear"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-tone-and-audience-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.pg02.seed-0",
+          "feedback": {
+            "es": "Dear es el saludo con el que empieza un mensaje o una carta formal, seguido del título y el apellido."
+          },
+          "hint": {
+            "es": "Es la palabra con que empieza un correo a alguien a quien no conoces bien."
+          },
+          "text": "___ Mrs Smith,"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6c9ab49fbc8f38c2b39c6619f795a08bfbe17b33d132125111c733fc998c2c25"
+      },
+      {
+        "id": "en.n4.c36.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la versión formal de «Sorry, I can't come»?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Sorry, I can't come!"
+          },
+          {
+            "text": "I am afraid that I cannot come."
+          },
+          {
+            "text": "I can't come, sorry."
+          }
+        ],
+        "teaches": [
+          "n4-tone-and-audience-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.pg03.seed-0",
+          "feedback": {
+            "es": "I am afraid that I cannot come es la fórmula formal: forma completa cannot y una disculpa cortés. Las otras dos conservan la contracción o el tono coloquial."
+          },
+          "hint": {
+            "es": "Piensa en la fórmula cortés para dar una mala noticia y en la forma sin contracción."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7dc8ecef51df02e86814c3439149fbd59b0dcc813eb64f386788bb233146f1ee"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c36.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige a quién va dirigido el mensaje."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "To a close friend."
+          },
+          {
+            "text": "To his little brother."
+          },
+          {
+            "text": "To a person he does not know well."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.p01.seed-0",
+          "feedback": {
+            "es": "El mensaje empieza con Dear Ms Green y termina con Kind regards: es un mensaje formal, para una persona a quien no conoce bien."
+          },
+          "audio": "Dear Ms Green, I would like to ask about the trip. Kind regards, Tom.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c642191e071d1fa889bb835c19db3ef1c841f25bde56ecda5457f3e70d02eaad"
+      },
+      {
+        "id": "en.n4.c36.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Con qué frase cierras un correo formal?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Kind regards,"
+          },
+          {
+            "text": "See you later!"
+          },
+          {
+            "text": "Bye bye, thanks!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.p02.seed-0",
+          "feedback": {
+            "es": "Kind regards es la despedida habitual de los correos formales. See you later y Bye bye son despedidas informales."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b77bb8686d7cf8aa3f8d266b0fa3ae4d8b65e543d1d29bf57db8dee82c38e4be"
+      },
+      {
+        "id": "en.n4.c36.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Gracias, ¡hasta luego!»"
+        },
+        "answer": {
+          "text": "later",
+          "accepted": [
+            "later"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.p03.seed-0",
+          "feedback": {
+            "es": "See you later! es una despedida informal, propia de amigos y compañeros."
+          },
+          "text": "Thanks, see you ___!"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:26ed3da05fc8184e6118c67e13acfcee849d16d02457e5a17f853afccbd74733"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c36.e01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada mensaje con la persona que lo va a leer."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Hi Leo, see you at six!",
+              {
+                "es": "un amigo cercano"
+              }
+            ],
+            [
+              "Dear Ms Green, I am writing to ask about the trip.",
+              {
+                "es": "la directora del colegio"
+              }
+            ],
+            [
+              "Dear Mr Brown, could you please send me the file?",
+              {
+                "es": "un jefe de empresa"
+              }
+            ],
+            [
+              "Thanks for the notes, Sara! Talk soon.",
+              {
+                "es": "una compañera de clase"
+              }
+            ],
+            [
+              "Mum, I'm at the park. Back at six!",
+              {
+                "es": "tu madre"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.e01.seed-0",
+          "feedback": {
+            "es": "El saludo, el vocabulario y el tema indican el lector: los saludos con Hi o Mum son cercanos, y Dear + título es para personas a quienes no conoces bien."
+          },
+          "pairs": [
+            [
+              "Hi Leo, see you at six!",
+              {
+                "es": "un amigo cercano"
+              }
+            ],
+            [
+              "Dear Ms Green, I am writing to ask about the trip.",
+              {
+                "es": "la directora del colegio"
+              }
+            ],
+            [
+              "Dear Mr Brown, could you please send me the file?",
+              {
+                "es": "un jefe de empresa"
+              }
+            ],
+            [
+              "Thanks for the notes, Sara! Talk soon.",
+              {
+                "es": "una compañera de clase"
+              }
+            ],
+            [
+              "Mum, I'm at the park. Back at six!",
+              {
+                "es": "tu madre"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ea4bc67a5c81c26dc72341912cc166dc434c31f39db1a1875d2b21ba0742299a"
+      },
+      {
+        "id": "en.n4.c36.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el tipo de mensaje."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A formal message to a manager."
+          },
+          {
+            "text": "An informal message to a friend."
+          },
+          {
+            "text": "A formal email to a teacher."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.e02.seed-0",
+          "feedback": {
+            "es": "Hi, sorry, la contracción can't, see you on Monday y la exclamación indican un mensaje informal para un amigo."
+          },
+          "audio": "Hi Sara! I can't come today, sorry. See you on Monday!",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4085609556a2d1fcc3fff1e2264fe2d4cf19d18a20d4c3edb282d0836ce51b39"
+      },
+      {
+        "id": "en.n4.c36.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué tono tiene este mensaje?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Informal"
+          },
+          {
+            "text": "Neutral"
+          },
+          {
+            "text": "Formal"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.e03.seed-0",
+          "feedback": {
+            "es": "Dear Mr Brown, I am afraid that I cannot y Kind regards marcan un tono formal: forma completa, fórmula de cortesía y despedida formal."
+          },
+          "text": "Dear Mr Brown, I am afraid that I cannot attend the meeting. Kind regards, Ana Lopez."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:19685180e7e207871d24063a2ceefaf25926a2a2e6d6206a8d4151c8c335a10d"
+      },
+      {
+        "id": "en.n4.c36.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Querida Sra. Green, ¿podría llamarme mañana?»"
+        },
+        "answer": {
+          "text": "Dear Ms Green could you call me tomorrow",
+          "tokens": [
+            "Dear",
+            "Ms",
+            "Green",
+            "could",
+            "you",
+            "call",
+            "me",
+            "tomorrow"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.e04.seed-0",
+          "feedback": {
+            "es": "Dear + título + apellido abre el mensaje formal y could you introduce la petición cortés, seguida de la acción y del momento."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3395f107ff8d489da4a3cf26127a24455c388c6266a9306d763796d70534ea7d"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c36.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué despedida es informal?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Bye for now!"
+          },
+          {
+            "text": "Kind regards,"
+          },
+          {
+            "text": "Thank you very much for your help."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.r01.seed-0",
+          "feedback": {
+            "es": "Bye for now! es informal y cercana. Kind regards y Thank you very much for your help son fórmulas formales."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:eb560c6ca689521b8d8662a2b47f00265f13c84c351884d6101ebcc743fd5193"
+      },
+      {
+        "id": "en.n4.c36.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace formal a este mensaje."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It uses short words and a friendly goodbye."
+          },
+          {
+            "text": "It uses could you please and thank you."
+          },
+          {
+            "text": "It says see you later."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.r02.seed-0",
+          "feedback": {
+            "es": "Could you please y Thank you for your help son fórmulas formales. No hay frases cortas ni despedidas cercanas."
+          },
+          "audio": "Could you please tell me the time of the meeting? Thank you for your help.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5bff475710fbef57b5ec930064f55f98fae82447545e9de8b3f7b205dead6059"
+      },
+      {
+        "id": "en.n4.c36.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el mensaje formal: «Me temo que no puedo asistir a la reunión.»"
+        },
+        "answer": {
+          "text": "cannot",
+          "accepted": [
+            "cannot",
+            "can not"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c36.r03.seed-0",
+          "feedback": {
+            "es": "La forma formal es cannot, sin contracción, después de I am afraid that."
+          },
+          "text": "I am afraid that I ___ attend the meeting."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8c647e9840222a94a3611d6f0741f7ac5e97220e9460771d9e18c9665f43e6f4"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c36.e01": {
+      "reteach": "en.n4.class-36.t01",
+      "review": "en.n4.c36.r01"
+    },
+    "en.n4.c36.e02": {
+      "reteach": "en.n4.class-36.t02",
+      "review": "en.n4.c36.r02"
+    },
+    "en.n4.c36.e03": {
+      "reteach": "en.n4.class-36.t03",
+      "review": "en.n4.c36.r03"
+    },
+    "en.n4.c36.e04": {
+      "reteach": "en.n4.class-36.t04",
+      "review": "en.n4.c36.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

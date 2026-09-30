@@ -1,0 +1,630 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "classes": {
+    "en.n4.class-31": {
+      "explicacion": {
+        "titulo": "Pregunta directa y pregunta transmitida",
+        "texto": "Cuando cuentas una pregunta que otra persona hizo, haces tres cambios. Primero, el orden: dejas de usar do, does o did y vuelves a sujeto + verbo (asked where I lived, no «where did I live»). Segundo, si la pregunta no tenía palabra interrogativa, entra if o whether, que significan «si». Tercero, no hay signo de interrogación y el verbo suele retroceder un tiempo: live pasa a lived y is pasa a was."
+      },
+      "patron": {
+        "texto": "Quién pregunta + asked + if / palabra interrogativa + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "Mia asked",
+            "nota": "quién pregunta y el verbo que transmite"
+          },
+          {
+            "texto": "where / if",
+            "nota": "wh-word, o if/whether en preguntas de sí o no"
+          },
+          {
+            "texto": "I lived.",
+            "nota": "orden afirmativo: sujeto + verbo, sin do ni «?»"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia asked where did I live.",
+          "correcto": "Mia asked where I lived.",
+          "explicacion": "Es un calco de la pregunta directa. Al transmitir se vuelve al orden normal, sujeto + verbo, y desaparece did."
+        },
+        {
+          "incorrecto": "Tom asked me was I hungry.",
+          "correcto": "Tom asked me if I was hungry.",
+          "explicacion": "En español «preguntó si» lleva «si»; en inglés hace falta if o whether antes del sujeto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo vuelve de hablar con la profesora y Ana le pregunta qué le preguntaron.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What did the teacher ask you?",
+            "traduccion": "¿Qué te preguntó la profesora?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She asked where I lived.",
+            "traduccion": "Me preguntó dónde vivía."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She wanted to know if I walked to school.",
+            "traduccion": "Quería saber si iba caminando a la escuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And what did you say?",
+            "traduccion": "¿Y qué dijiste?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I said that I took the bus.",
+            "traduccion": "Dije que tomaba el autobús."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiso saber la profesora además de dónde vive Leo?",
+          "opciones": [
+            {
+              "es": "Si Leo va caminando a la escuela."
+            },
+            {
+              "es": "Si Leo toma el autobús cada día."
+            },
+            {
+              "es": "Si Leo vive cerca de Ana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «She wanted to know if I walked to school». El autobús es la respuesta de Leo, no la pregunta de la profesora, y Ana no aparece en esa pregunta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta directa",
+          "Pregunta transmitida"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Where do you live?"
+            },
+            {
+              "texto": "…asked where I lived."
+            }
+          ],
+          [
+            {
+              "texto": "Are you hungry?"
+            },
+            {
+              "texto": "…asked if I was hungry."
+            }
+          ],
+          [
+            {
+              "texto": "What time does it start?"
+            },
+            {
+              "texto": "…asked what time it started."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-32": {
+      "explicacion": {
+        "titulo": "Retroceso de tiempos y cambios de lugar y tiempo",
+        "texto": "Al contar lo que alguien dijo antes, el punto de vista cambia. Los verbos retroceden: can pasa a could, will pasa a would, am/is/are pasan a was/were. Las señales de tiempo y lugar también cambian: tomorrow pasa a the next day, today a that day, now a then y here a there. Las órdenes y peticiones no retroceden: se usa told o asked + persona + to + verbo (o not to si es negativa). Y nunca pongas do ni did en la pregunta transmitida."
+      },
+      "patron": {
+        "texto": "Quién pregunta + asked if + sujeto + verbo retrocedido + cuándo:",
+        "formula": [
+          {
+            "texto": "Ana asked",
+            "nota": "verbo que transmite la pregunta"
+          },
+          {
+            "texto": "if I could come",
+            "nota": "if + sujeto + verbo retrocedido (can → could)"
+          },
+          {
+            "texto": "the next day.",
+            "nota": "tomorrow → the next day"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She told me open the door.",
+          "correcto": "She told me to open the door.",
+          "explicacion": "Después de told + persona hace falta to + verbo. En español no hay partícula, pero en inglés es obligatoria."
+        },
+        {
+          "incorrecto": "Ana asked if I can come the next day.",
+          "correcto": "Ana asked if I could come the next day.",
+          "explicacion": "Al contar la pregunta en pasado, can retrocede a could; si no, se mezclan dos momentos."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos no fue al entrenamiento y Mia le cuenta lo que dijo el entrenador.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What did the coach say?",
+            "traduccion": "¿Qué dijo el entrenador?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He told us to bring water.",
+            "traduccion": "Nos dijo que lleváramos agua."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Did he ask anything?",
+            "traduccion": "¿Preguntó algo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He asked if we could come the next day.",
+            "traduccion": "Preguntó si podíamos ir al día siguiente."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He asked me not to be late.",
+            "traduccion": "Me pidió que no llegara tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiso saber el entrenador?",
+          "opciones": [
+            {
+              "es": "Si podían ir al día siguiente."
+            },
+            {
+              "es": "Si tenían agua suficiente."
+            },
+            {
+              "es": "Si Mia llegaría tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «He asked if we could come the next day». Llevar agua fue una orden, y llegar tarde fue una petición a Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Lo que se dijo",
+          "Cómo se cuenta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Can you come tomorrow?"
+            },
+            {
+              "texto": "…asked if I could come the next day."
+            }
+          ],
+          [
+            {
+              "texto": "Open your books."
+            },
+            {
+              "texto": "…told us to open our books."
+            }
+          ],
+          [
+            {
+              "texto": "Don't tell Leo."
+            },
+            {
+              "texto": "…asked me not to tell Leo."
+            }
+          ],
+          [
+            {
+              "texto": "Will we meet here?"
+            },
+            {
+              "texto": "…asked if we would meet there."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-33": {
+      "explicacion": {
+        "titulo": "El verbo de transmisión muestra la intención",
+        "texto": "No todo lo que alguien dice se cuenta con said. El verbo que elijas dice qué quiso hacer esa persona: told (orden), asked (petición), advised (consejo), warned (advertencia de peligro), promised (compromiso) y suggested (propuesta). Con told, asked, advised y warned la estructura es persona + to + verbo (o not to). Promised va solo con to + verbo. Suggested lleva -ing: suggested going. Ojo: nunca uses said + persona + to; para órdenes el verbo es told."
+      },
+      "patron": {
+        "texto": "Quién + verbo de transmisión + persona + (not) to + acción:",
+        "formula": [
+          {
+            "texto": "Mia",
+            "nota": "quién habla"
+          },
+          {
+            "texto": "warned us",
+            "nota": "warned + persona: advertencia"
+          },
+          {
+            "texto": "not to touch the paint.",
+            "nota": "not to + verbo: lo que no se debe hacer"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sara suggested to go to the park.",
+          "correcto": "Sara suggested going to the park.",
+          "explicacion": "Suggest no admite to + verbo: se dice suggested going."
+        },
+        {
+          "incorrecto": "The coach said us to run.",
+          "correcto": "The coach told us to run.",
+          "explicacion": "Said no lleva persona + to. Para dar una orden a alguien el verbo es told."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Leo lo que dijeron sus amigos sobre el viaje de fin de curso.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What did Mia say about the trip?",
+            "traduccion": "¿Qué dijo Mia sobre el viaje?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "She suggested going by train.",
+            "traduccion": "Sugirió ir en tren."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Tom?",
+            "traduccion": "¿Y Tom?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "He warned us not to forget our tickets.",
+            "traduccion": "Nos advirtió que no olvidáramos los billetes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Did anyone promise anything?",
+            "traduccion": "¿Alguien prometió algo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, Carlos promised to bring the food.",
+            "traduccion": "Sí, Carlos prometió llevar la comida."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué prometió Carlos?",
+          "opciones": [
+            {
+              "es": "Llevar la comida."
+            },
+            {
+              "es": "Comprar los billetes."
+            },
+            {
+              "es": "Ir en tren con el grupo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Carlos promised to bring the food». Comprar billetes no se menciona: Tom solo advirtió de no olvidarlos, y el tren fue una sugerencia de Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Intención",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "consejo"
+            },
+            {
+              "texto": "advised me to rest"
+            }
+          ],
+          [
+            {
+              "texto": "peligro"
+            },
+            {
+              "texto": "warned us not to touch"
+            }
+          ],
+          [
+            {
+              "texto": "compromiso"
+            },
+            {
+              "texto": "promised to call"
+            }
+          ],
+          [
+            {
+              "texto": "propuesta"
+            },
+            {
+              "texto": "suggested going"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-34": {
+      "explicacion": {
+        "titulo": "Cómo contar una conversación completa",
+        "texto": "Para contar una conversación a alguien que no estuvo, sigue un orden. Primero sitúa la escena (yesterday, at school) y di quiénes hablaron. Después cuenta cada intervención con el verbo adecuado: said that + tiempo retrocedido para afirmaciones, asked if o asked + wh-word para preguntas, asked o told + persona + to para peticiones, suggested + -ing y promised + to. Usa first, then y finally para ordenar, y cambia los pronombres: I se convierte en she o he. Revisa al final que cada verbo retroceda un tiempo."
+      },
+      "patron": {
+        "texto": "Escena + said that + asked if + suggested + finally:",
+        "formula": [
+          {
+            "texto": "Ana said that she was tired.",
+            "nota": "afirmación: said that + verbo retrocedido"
+          },
+          {
+            "texto": "Leo asked if she wanted to rest.",
+            "nota": "pregunta: asked if + sujeto + verbo"
+          },
+          {
+            "texto": "He suggested meeting on Saturday.",
+            "nota": "propuesta: suggested + -ing"
+          },
+          {
+            "texto": "Finally, he told her not to worry.",
+            "nota": "orden o consejo final: told + persona + not to"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She said me that she was tired.",
+          "correcto": "She told me that she was tired.",
+          "explicacion": "Said no lleva persona directa: se dice said that… o told me that…. Con la persona, el verbo es told."
+        },
+        {
+          "incorrecto": "He asked to her if she wanted to rest.",
+          "correcto": "He asked her if she wanted to rest.",
+          "explicacion": "En inglés asked lleva la persona sin preposición: no existe «asked to her». Se dice asked her."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia no fue a la reunión del club y Tom le cuenta lo que dijeron Ana y Leo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tell me about the club meeting!",
+            "traduccion": "¡Cuéntame cómo fue la reunión del club!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Ana said that she was tired. Leo asked if she wanted to go home.",
+            "traduccion": "Ana dijo que estaba cansada. Leo preguntó si quería irse a casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And what did she say?",
+            "traduccion": "¿Y qué respondió ella?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "She asked him to wait. Then he suggested meeting on Saturday.",
+            "traduccion": "Le pidió que esperara. Luego él sugirió vernos el sábado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pidió Ana a Leo?",
+          "opciones": [
+            {
+              "es": "Que esperara."
+            },
+            {
+              "es": "Que la llevara a casa."
+            },
+            {
+              "es": "Que se reuniera el sábado con ella."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «She asked him to wait». Que Leo preguntara si quería irse a casa fue su pregunta, y vernos el sábado fue su propuesta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Lo que se dijo",
+          "Cómo se cuenta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "«I'm tired.»"
+            },
+            {
+              "texto": "She said that she was tired."
+            }
+          ],
+          [
+            {
+              "texto": "«Do you want to rest?»"
+            },
+            {
+              "texto": "He asked if she wanted to rest."
+            }
+          ],
+          [
+            {
+              "texto": "«Let's meet on Saturday.»"
+            },
+            {
+              "texto": "He suggested meeting on Saturday."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-35": {
+      "explicacion": {
+        "titulo": "Contar un mensaje que otra persona no escuchó",
+        "texto": "Cuando pasas un mensaje de voz, cuenta solo lo principal: qué, cuándo, dónde y qué hay que llevar o hacer. Si quien habló todavía lo mantiene o usas says, asks o tells en presente, no hace falta retroceder el tiempo: Mia says that the match is on Sunday. Si hablas del pasado, usa said y retrocede. Cuando te preguntan algo que no sabes, responde con I don't know + palabra interrogativa + sujeto + verbo: I don't know where the match is, nunca «where is the match»."
+      },
+      "patron": {
+        "texto": "Mia says that + dato. Carlos told us to + acción. I don't know where + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "Mia says that",
+            "nota": "says: el mensaje sigue vigente"
+          },
+          {
+            "texto": "the match is on Sunday.",
+            "nota": "el dato, sin retroceso de tiempo"
+          },
+          {
+            "texto": "I don't know where",
+            "nota": "respuesta a una duda: no tengo ese dato"
+          },
+          {
+            "texto": "the match is.",
+            "nota": "sujeto + verbo, no «is the match»"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I don't know where is the match.",
+          "correcto": "I don't know where the match is.",
+          "explicacion": "Después de I don't know + wh-word el verbo va detrás del sujeto, como en una frase afirmativa."
+        },
+        {
+          "incorrecto": "Carlos told that we arrive early.",
+          "correcto": "Carlos told us to arrive early.",
+          "explicacion": "Told necesita a la persona y to + verbo: no se construye con that + presente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom se perdió el mensaje de voz del grupo y Sara se lo cuenta.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I missed the voice message. What did Mia say?",
+            "traduccion": "Me perdí el mensaje de voz. ¿Qué dijo Mia?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She says that the match is on Sunday.",
+            "traduccion": "Dice que el partido es el domingo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Where is it?",
+            "traduccion": "¿Dónde es?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I don't know where it is. She asks if you can bring a ball.",
+            "traduccion": "No sé dónde es. Pregunta si puedes llevar un balón."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato no conoce Sara?",
+          "opciones": [
+            {
+              "es": "Dónde será el partido."
+            },
+            {
+              "es": "Cuándo será el partido."
+            },
+            {
+              "es": "Quién llevará el balón."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I don't know where it is». El día sí lo conoce (domingo), y quien debe llevar el balón es Tom."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Cómo se dice"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "El mensaje sigue vigente"
+            },
+            {
+              "texto": "Mia says that the match is on Sunday."
+            }
+          ],
+          [
+            {
+              "texto": "El mensaje ya es pasado"
+            },
+            {
+              "texto": "Mia said that the match was on Sunday."
+            }
+          ],
+          [
+            {
+              "texto": "Hay una pregunta pendiente"
+            },
+            {
+              "texto": "She asks if you can bring a ball."
+            }
+          ],
+          [
+            {
+              "texto": "No tengo el dato"
+            },
+            {
+              "texto": "I don't know where it is."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C31: corregido feedback de repaso[0] (hablaba de 'studied' pero el texto decía 'worked'); opción de escucha de eval[1] reparafraseada de forma fiel (la biblioteca abre los domingos).",
+      "C32: distractor absurdo 'next tomorrow' sustituido por 'the day before' y 'that night'; eval[2] ya no presenta 'if I can' como única alternativa incorrecta (sin retroceso era defendible); escribir de eval[0] convertido a rúbrica con variantes (whether, following day, him/Leo) y más aceptadas.",
+      "C33: consignas de escucha que revelaban el verbo ('propuesta de Leo/Mia') reescritas para que la respuesta exija escuchar.",
+      "C34: consigna de practica[2] atribuía a Tom la pregunta de Mia; opción de escucha con copia literal reparafraseada; rúbrica de eval[0] ampliada (asked her if, suggested that they meet, could not go, etc.) y modelo de 71 palabras dentro del rango del mapa; repaso[0] con más variantes; audio de repaso[1] sin la palabra 'promise' para no regalar el verbo.",
+      "C35: evaluación de transferencia completada con la duda de Tom (I don't know where...) como pide el mapa, modelo de 41 palabras (>=50 % del mínimo de 80) con rúbrica flexible; repaso[2] convertido a rúbrica con variantes whether/could/next day/following day.",
+      "Sin opciones de relleno (todas las preguntas con 3 opciones). Observación P2 no corregida: algunos 'ordenar' admiten un único orden aunque existan otros (p. ej. C37 repaso[2]); la consigna en español fija el orden esperado."
+    ]
+  }
+}

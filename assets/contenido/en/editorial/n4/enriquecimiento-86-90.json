@@ -1,0 +1,684 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 86,
+    "end": 90
+  },
+  "classes": {
+    "en.n4.class-86": {
+      "explicacion": {
+        "titulo": "Consejo, obligación, permiso y prohibición",
+        "texto": "En una guía de viaje casi cada frase cumple una de cuatro funciones, y el modal te la dice. Consejo: should («es buena idea»). Obligación: must, have to («no hay opción»). Permiso: can, may, be allowed to («puedes, si quieres»). Prohibición: mustn't, can't, forbidden («no se puede»). Después del modal va el verbo base, sin to. Ojo: mustn't prohíbe, no significa «no tienes que»; para «no hace falta» se usa don't have to."
+      },
+      "patron": {
+        "texto": "Función + modal + acción:",
+        "formula": [
+          {
+            "texto": "You should buy a ticket.",
+            "nota": "consejo: should + verbo base"
+          },
+          {
+            "texto": "You must show your passport.",
+            "nota": "obligación: must / have to + verbo base"
+          },
+          {
+            "texto": "You are allowed to take photos.",
+            "nota": "permiso: can, may, be allowed to"
+          },
+          {
+            "texto": "You mustn't smoke here.",
+            "nota": "prohibición: mustn't, can't, forbidden"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You must to show your passport at the airport.",
+          "correcto": "You must show your passport at the airport.",
+          "explicacion": "En español «debes mostrar» lleva un infinitivo, pero must va seguido del verbo base, sin to."
+        },
+        {
+          "incorrecto": "You don't must smoke in the station.",
+          "correcto": "You mustn't smoke in the station.",
+          "explicacion": "Must no usa don't. La negación es mustn't (o must not) y expresa prohibición."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le explica a Carlos lo que leyó en una guía antes de su viaje.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I read the guide. You must show your passport at the airport.",
+            "traduccion": "Leí la guía. Debes mostrar tu pasaporte en el aeropuerto."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "OK. Can I take photos in the museum?",
+            "traduccion": "Vale. ¿Puedo hacer fotos en el museo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, you are allowed to take photos, but you mustn't touch the pictures.",
+            "traduccion": "Sí, puedes hacer fotos, pero no debes tocar los cuadros."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What about the bus?",
+            "traduccion": "¿Y el autobús?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A tip: you should buy your bus ticket early.",
+            "traduccion": "Un consejo: deberías comprar tu billete de autobús con tiempo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué consejo, y no obligación, le da Sara a Carlos?",
+          "opciones": [
+            {
+              "es": "Mostrar el pasaporte en el aeropuerto."
+            },
+            {
+              "es": "No tocar los cuadros del museo."
+            },
+            {
+              "es": "Comprar con tiempo el billete de autobús."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Sara dice «A tip: you should buy your bus ticket early». El pasaporte es una obligación (must) y los cuadros una prohibición (mustn't)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Modal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "consejo"
+            },
+            {
+              "texto": "should"
+            },
+            {
+              "texto": "You should buy a ticket."
+            }
+          ],
+          [
+            {
+              "texto": "obligación"
+            },
+            {
+              "texto": "must, have to"
+            },
+            {
+              "texto": "You must show your passport."
+            }
+          ],
+          [
+            {
+              "texto": "permiso"
+            },
+            {
+              "texto": "can, may, be allowed to"
+            },
+            {
+              "texto": "You can sit here."
+            }
+          ],
+          [
+            {
+              "texto": "prohibición"
+            },
+            {
+              "texto": "mustn't, can't, forbidden"
+            },
+            {
+              "texto": "You mustn't smoke here."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-87": {
+      "explicacion": {
+        "titulo": "Consejo fuerte, preferencia, norma y permiso",
+        "texto": "Cinco estructuras para hablar de viaje. Had better + verbo base es un consejo fuerte con consecuencia («más te vale»). Would rather + verbo base expresa preferencia: I would rather stay… Be supposed to + verbo indica lo que se espera o manda la norma, y be allowed to + verbo, lo que se permite. Needn't + verbo base significa «no hace falta». Ojo: had better, would rather y needn't no llevan to; be supposed to y be allowed to sí."
+      },
+      "patron": {
+        "texto": "Cinco estructuras de viaje:",
+        "formula": [
+          {
+            "texto": "You had better leave early.",
+            "nota": "had better + verbo base: consejo fuerte"
+          },
+          {
+            "texto": "I would rather stay in a hostel.",
+            "nota": "would rather + verbo base: preferencia"
+          },
+          {
+            "texto": "Guests are supposed to leave by eleven.",
+            "nota": "be supposed to + verbo: se espera"
+          },
+          {
+            "texto": "You needn't bring towels.",
+            "nota": "needn't + verbo base: no hace falta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You had better to leave early.",
+          "correcto": "You had better leave early.",
+          "explicacion": "Had better va con el verbo base, sin to, aunque en español «más te vale» se construya con infinitivo."
+        },
+        {
+          "incorrecto": "Guests are supposed leave the room before eleven.",
+          "correcto": "Guests are supposed to leave the room before eleven.",
+          "explicacion": "A diferencia de had better, be supposed lleva to delante del verbo: supposed to leave."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan la salida del albergue para tomar el tren.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "We had better leave early tomorrow, or we will miss the train.",
+            "traduccion": "Más nos vale salir temprano mañana, o perderemos el tren."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I would rather stay here one more hour, but you are right.",
+            "traduccion": "Preferiría quedarme aquí una hora más, pero tienes razón."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Guests are supposed to leave the room before eleven.",
+            "traduccion": "Se supone que los huéspedes dejan la habitación antes de las once."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK. And we needn't bring towels; the hostel has them.",
+            "traduccion": "Vale. Y no hace falta que llevemos toallas; el albergue las tiene."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no necesitan llevar Mia y Tom?",
+          "opciones": [
+            {
+              "es": "Billetes de tren."
+            },
+            {
+              "es": "Toallas."
+            },
+            {
+              "es": "Mapas de la ciudad."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Mia dice «we needn't bring towels; the hostel has them». El albergue ya las tiene, así que no hace falta llevarlas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "had better + verbo base"
+            },
+            {
+              "texto": "consejo fuerte"
+            },
+            {
+              "texto": "You had better leave early."
+            }
+          ],
+          [
+            {
+              "texto": "would rather + verbo base"
+            },
+            {
+              "texto": "preferencia"
+            },
+            {
+              "texto": "I would rather stay here."
+            }
+          ],
+          [
+            {
+              "texto": "be supposed to + verbo"
+            },
+            {
+              "texto": "se espera, norma"
+            },
+            {
+              "texto": "Guests are supposed to leave."
+            }
+          ],
+          [
+            {
+              "texto": "be allowed to + verbo"
+            },
+            {
+              "texto": "permiso"
+            },
+            {
+              "texto": "Children are allowed to swim."
+            }
+          ],
+          [
+            {
+              "texto": "needn't + verbo base"
+            },
+            {
+              "texto": "no hace falta"
+            },
+            {
+              "texto": "You needn't bring towels."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-88": {
+      "explicacion": {
+        "titulo": "Obligación, opción y recomendación en consejos de viajeros",
+        "texto": "Cuando otros viajeros te cuentan consejos, distingue tres niveles. Obligación: must, have to, compulsory, be supposed to (no hay elección). Permiso u opción: can, be allowed to, optional (tú decides). Recomendación: should, had better, recommend (el consejo es bueno, pero no obligatorio). Escucha el modal y las palabras compulsory u optional. Ojo: recommend va con -ing (recommends arriving), no con to + verbo; y had better suena fuerte, pero sigue siendo un consejo."
+      },
+      "patron": {
+        "texto": "Nivel + señal:",
+        "formula": [
+          {
+            "texto": "A deposit is compulsory.",
+            "nota": "obligación: must, compulsory, supposed to"
+          },
+          {
+            "texto": "Breakfast is optional.",
+            "nota": "opción o permiso: can, allowed to, optional"
+          },
+          {
+            "texto": "You had better ask at reception.",
+            "nota": "recomendación: should, had better, recommend"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The receptionist recommends to arrive before six.",
+          "correcto": "The receptionist recommends arriving before six.",
+          "explicacion": "Recommend no va con to + verbo como «recomendar + infinitivo»: se usa -ing (o that + oración)."
+        },
+        {
+          "incorrecto": "Guests are allowed cook in the kitchen.",
+          "correcto": "Guests are allowed to cook in the kitchen.",
+          "explicacion": "Después de allowed hay que poner to antes del verbo: be allowed to cook."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara leen los comentarios de otros viajeros sobre un albergue.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What do other travellers say about the hostel?",
+            "traduccion": "¿Qué dicen otros viajeros del albergue?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A deposit is compulsory, but breakfast is optional.",
+            "traduccion": "El depósito es obligatorio, pero el desayuno es opcional."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Anything about the kitchen?",
+            "traduccion": "¿Algo sobre la cocina?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Guests are allowed to cook, but they are supposed to clean it.",
+            "traduccion": "Los huéspedes pueden cocinar, pero se supone que deben limpiarla."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the night bus?",
+            "traduccion": "¿Y el autobús nocturno?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "At reception you had better ask about it; the last one leaves early.",
+            "traduccion": "En recepción más te vale preguntar; el último sale temprano."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es opcional en el albergue?",
+          "opciones": [
+            {
+              "es": "El desayuno."
+            },
+            {
+              "es": "El depósito."
+            },
+            {
+              "es": "Limpiar la cocina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «breakfast is optional»: los huéspedes deciden. El depósito es obligatorio y limpiar la cocina es lo que se espera."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Nivel",
+          "Señales",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "obligación"
+            },
+            {
+              "texto": "must, compulsory, supposed to"
+            },
+            {
+              "texto": "A deposit is compulsory."
+            }
+          ],
+          [
+            {
+              "texto": "opción o permiso"
+            },
+            {
+              "texto": "can, allowed to, optional"
+            },
+            {
+              "texto": "Breakfast is optional."
+            }
+          ],
+          [
+            {
+              "texto": "recomendación"
+            },
+            {
+              "texto": "should, had better, recommends"
+            },
+            {
+              "texto": "You had better ask at reception."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-89": {
+      "explicacion": {
+        "titulo": "Consejos para un visitante: normas, preferencias y avisos",
+        "texto": "Un texto de consejos para alguien que llega por primera vez tiene tres partes. Normas: you are supposed to, you must, you mustn't. Consejos y preferencias: you had better…, locals would rather…. Avisos: Be careful… o a word of warning…. Une las ideas con but, so y because. Ojo: advice es incontable (my advice, no «my advices»), y los días en plural llevan on: crowded on Saturdays."
+      },
+      "patron": {
+        "texto": "Norma + consejo + aviso:",
+        "formula": [
+          {
+            "texto": "You are supposed to buy a ticket first.",
+            "nota": "norma: be supposed to / must + verbo"
+          },
+          {
+            "texto": "Locals would rather take the bus.",
+            "nota": "preferencia o consejo: would rather / had better"
+          },
+          {
+            "texto": "Be careful: it is crowded at noon, so go early.",
+            "nota": "aviso: be careful + motivo + consejo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is very crowded in Saturdays.",
+          "correcto": "It is very crowded on Saturdays.",
+          "explicacion": "Con los días de la semana se usa on, no in: on Saturdays, on Friday."
+        },
+        {
+          "incorrecto": "My advices for a first visit are simple.",
+          "correcto": "My advice for a first visit is simple.",
+          "explicacion": "En español «consejos» se cuenta, pero advice es incontable: no lleva -s y el verbo va en singular."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos va a visitar Cuenca por primera vez y le pide consejos a Ana.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "It is my first visit to Cuenca. Any advice?",
+            "traduccion": "Es mi primera visita a Cuenca. ¿Algún consejo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Be careful: the old town is crowded on Saturdays, so you had better go early.",
+            "traduccion": "Ten cuidado: el casco antiguo está lleno de gente los sábados, así que más te vale ir temprano."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the museums?",
+            "traduccion": "¿Y los museos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "You are allowed to take photos, but you mustn't touch the statues.",
+            "traduccion": "Puedes hacer fotos, pero no debes tocar las estatuas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thanks. Where do locals eat?",
+            "traduccion": "Gracias. ¿Dónde come la gente del lugar?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Locals would rather eat at the market than in a restaurant.",
+            "traduccion": "La gente del lugar prefiere comer en el mercado que en un restaurante."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo está lleno de gente el casco antiguo?",
+          "opciones": [
+            {
+              "es": "Los domingos."
+            },
+            {
+              "es": "Los sábados."
+            },
+            {
+              "es": "Por la noche."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana dice «the old town is crowded on Saturdays». Los domingos y la noche no se mencionan."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del texto",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Norma"
+            },
+            {
+              "texto": "You are supposed to… / You must…"
+            }
+          ],
+          [
+            {
+              "texto": "Prohibición"
+            },
+            {
+              "texto": "You mustn't…"
+            }
+          ],
+          [
+            {
+              "texto": "Consejo o preferencia"
+            },
+            {
+              "texto": "You had better… / Locals would rather…"
+            }
+          ],
+          [
+            {
+              "texto": "Aviso"
+            },
+            {
+              "texto": "Be careful… / A word of warning…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-90": {
+      "explicacion": {
+        "titulo": "Acordar un viaje: proponer, preferir, negociar y cerrar",
+        "texto": "Para decidir un viaje entre amigos sigues cuatro pasos. Propones con I suggest + -ing (I suggest going…). Dices tu preferencia con I would rather + verbo base (I would rather go…). Negocias con un trato (How about a deal?) y fijas lo práctico con we had better o we can split. Cierras con Agreed! y repites el plan. Ojo: después de suggest va -ing (no to + verbo) y would rather necesita would: no basta «I rather»."
+      },
+      "patron": {
+        "texto": "Proponer + preferir + cerrar:",
+        "formula": [
+          {
+            "texto": "I suggest going to the beach.",
+            "nota": "proponer: suggest + -ing"
+          },
+          {
+            "texto": "I would rather go to the mountains.",
+            "nota": "preferir: would rather + verbo base"
+          },
+          {
+            "texto": "We had better book the hostel now.",
+            "nota": "lo práctico: had better + verbo base"
+          },
+          {
+            "texto": "Agreed! We split the cost.",
+            "nota": "cerrar: Agreed! + el plan"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I suggest to go to the beach.",
+          "correcto": "I suggest going to the beach.",
+          "explicacion": "Suggest va con -ing. En español «sugiero ir» lleva infinitivo, pero en inglés no se dice suggest to go."
+        },
+        {
+          "incorrecto": "I rather go to the mountains.",
+          "correcto": "I would rather go to the mountains.",
+          "explicacion": "Would rather es una expresión completa: sin would no funciona, aunque en español solo digas «prefiero»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo eligen adónde ir en su primer viaje juntos.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I suggest going to the beach for the weekend.",
+            "traduccion": "Sugiero ir a la playa el fin de semana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I would rather go to the mountains. The beach is crowded.",
+            "traduccion": "Preferiría ir a las montañas. La playa está llena de gente."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK, the mountains. We had better book the hostel now; the budget is small.",
+            "traduccion": "Vale, las montañas. Más nos vale reservar el albergue ya; el presupuesto es pequeño."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Agreed! We can split the cost.",
+            "traduccion": "¡De acuerdo! Podemos dividir el gasto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿adónde irán Ana y Leo?",
+          "opciones": [
+            {
+              "es": "A la playa."
+            },
+            {
+              "es": "A un lago."
+            },
+            {
+              "es": "A las montañas."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Leo prefiere las montañas porque la playa está llena de gente y Ana acepta: «OK, the mountains»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "I suggest going to…"
+            }
+          ],
+          [
+            {
+              "texto": "Preferir"
+            },
+            {
+              "texto": "I would rather go to…"
+            }
+          ],
+          [
+            {
+              "texto": "Negociar"
+            },
+            {
+              "texto": "How about a deal?"
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "Agreed! We split the cost."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Bloque alineado con el mapa N4 86-90 (consejo/obligación/permiso/prohibición, had better/would rather/be supposed to/needn't, consejos de viajeros, consejos al visitante, negociar un viaje).",
+      "C86: feedback corregido. C87: ordenar fiel a 'supposed to' (antes 'deben'), distractores de escuchar sin ambigüedad (hablar en habitaciones), aceptadas don't have to.",
+      "C88: texto de guiada ya no revela la respuesta de otro ítem (optional), relacionar sin solape opción/permiso, aceptada 'coming'.",
+      "C89: escritura ampliada de 3 a 5 frases (~45 palabras) con rúbrica de 5 grupos flexibles; feedback de escuchar corregido.",
+      "C90: escritura ampliada (~54 palabras) y coherente con la situación (propone montaña, negocia trato, cierra), audio de escuchar coherente (Leo prefiere junio), rúbricas con variantes.",
+      "Sin P0/P1 pendientes; P2 aceptados: algunos ítems repiten frases de la enseñanza."
+    ]
+  }
+}

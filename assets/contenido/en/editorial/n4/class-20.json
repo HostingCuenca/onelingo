@@ -1,0 +1,818 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-20",
+  "title": {
+    "en": "Solve it together",
+    "es": "Resolverlo entre todos"
+  },
+  "objectives": {
+    "es": [
+      "Debatir explicaciones posibles de un caso: proponer con could have, descartar con can't have y una razón, defender la más probable y acordar qué comprobar."
+    ]
+  },
+  "concepts": [
+    "n4-everyday-mysteries-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-19"
+  ],
+  "usesVocabulary": [
+    "explanation",
+    "likely",
+    "agree",
+    "reason",
+    "check",
+    "theory",
+    "heavy",
+    "neighbour"
+  ],
+  "usesPatterns": [
+    "n4-everyday-mysteries-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "explanation",
+      "es": "explicación"
+    },
+    {
+      "en": "likely",
+      "es": "probable"
+    },
+    {
+      "en": "agree",
+      "es": "estar de acuerdo"
+    },
+    {
+      "en": "reason",
+      "es": "razón"
+    },
+    {
+      "en": "check",
+      "es": "comprobar"
+    },
+    {
+      "en": "theory",
+      "es": "teoría, hipótesis"
+    },
+    {
+      "en": "heavy",
+      "es": "pesado"
+    },
+    {
+      "en": "neighbour",
+      "es": "vecino"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-20.t01",
+      "en": "I think the first explanation is the most likely.",
+      "es": "Creo que la primera explicación es la más probable.",
+      "explanationEs": "The most likely + sustantivo: la más probable entre varias.",
+      "segments": [
+        "I think the first explanation",
+        "is the most likely."
+      ],
+      "audioText": "I think the first explanation is the most likely.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-5"
+    },
+    {
+      "id": "en.n4.class-20.t02",
+      "en": "I agree: it can't have been the wind, because the bike is heavy.",
+      "es": "Estoy de acuerdo: no pudo ser el viento, porque la bici es pesada.",
+      "explanationEs": "I agree es un verbo (no I am agree). Después, can't have + razón.",
+      "segments": [
+        "I agree: it can't have been the",
+        "wind, because the bike is heavy."
+      ],
+      "audioText": "I agree: it can't have been the wind, because the bike is heavy.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-5"
+    },
+    {
+      "id": "en.n4.class-20.t03",
+      "en": "That is a good reason, but we should check the footprints first.",
+      "es": "Es una buena razón, pero deberíamos comprobar las huellas primero.",
+      "explanationEs": "Good reason reconoce el argumento; but + propuesta.",
+      "segments": [
+        "That is a good reason, but",
+        "we should check the footprints first."
+      ],
+      "audioText": "That is a good reason, but we should check the footprints first.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-5"
+    },
+    {
+      "id": "en.n4.class-20.t04",
+      "en": "Your theory is possible, but it is less likely.",
+      "es": "Tu teoría es posible, pero es menos probable.",
+      "explanationEs": "Less likely: una opción posible pero menos fuerte.",
+      "segments": [
+        "Your theory is possible, but",
+        "it is less likely."
+      ],
+      "audioText": "Your theory is possible, but it is less likely.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-5"
+    },
+    {
+      "id": "en.n4.class-20.t05",
+      "en": "It could have been the neighbour, but I don't think so.",
+      "es": "Podría haber sido el vecino, pero no lo creo.",
+      "explanationEs": "Could have been propone; I don't think so rechaza con suavidad.",
+      "segments": [
+        "It could have been the neighbour,",
+        "but I don't think so."
+      ],
+      "audioText": "It could have been the neighbour, but I don't think so.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c20.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Un compañero propone algo dudoso. ¿Cómo lo descartas con una razón?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It must have been the wind, because the bike is heavy."
+          },
+          {
+            "text": "It might have been the wind, because the bike is heavy."
+          },
+          {
+            "text": "It can't have been the wind, because the bike is heavy."
+          }
+        ],
+        "teaches": [
+          "n4-everyday-mysteries-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.pg01.seed-0",
+          "feedback": {
+            "es": "Para descartar se usa can't have + because + razón: la bici pesada explica por qué el viento no pudo moverla."
+          },
+          "hint": {
+            "es": "Descartar = can't have + because + una razón."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:df2ba558b6a846cb172803bd74419e20e4a5d440fed41f24a5997ffb4183aa11"
+      },
+      {
+        "id": "en.n4.c20.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La explicación más probable es la del vecino.»"
+        },
+        "answer": {
+          "text": "most",
+          "accepted": [
+            "most"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-everyday-mysteries-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.pg02.seed-0",
+          "feedback": {
+            "es": "Entre varias opciones se usa el superlativo: the most likely."
+          },
+          "hint": {
+            "es": "Entre varias opciones se usa el superlativo."
+          },
+          "text": "The ___ likely explanation is the neighbour's."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f52bbfdb1685c88cfbc429d5d6243ff3e9ec25762b424f4d9b46ed6bffa4c65d"
+      },
+      {
+        "id": "en.n4.c20.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Estoy de acuerdo: no pudo ser el perro.»"
+        },
+        "answer": {
+          "text": "I agree it can't have been the dog",
+          "tokens": [
+            "I",
+            "agree",
+            "it",
+            "can't",
+            "have",
+            "been",
+            "the",
+            "dog"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-everyday-mysteries-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.pg03.seed-0",
+          "feedback": {
+            "es": "I agree abre la frase y can't have been descarta la idea."
+          },
+          "hint": {
+            "es": "Empieza con I agree."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6b2b062d5a6e06a06100c6e81a52f8215a9c26156714eceb547d8ae02af16db0"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c20.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su función en el debate."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "It could have been the neighbour.",
+              {
+                "es": "Propone una posibilidad."
+              }
+            ],
+            [
+              "It can't have been the wind.",
+              {
+                "es": "Descarta una idea."
+              }
+            ],
+            [
+              "The most likely explanation is Tom.",
+              {
+                "es": "Defiende la más probable."
+              }
+            ],
+            [
+              "Let's check the footprints.",
+              {
+                "es": "Propone comprobarlo."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.p01.seed-0",
+          "feedback": {
+            "es": "Cada frase cumple un paso del debate: proponer, descartar, defender o comprobar."
+          },
+          "pairs": [
+            [
+              "It could have been the neighbour.",
+              {
+                "es": "Propone una posibilidad."
+              }
+            ],
+            [
+              "It can't have been the wind.",
+              {
+                "es": "Descarta una idea."
+              }
+            ],
+            [
+              "The most likely explanation is Tom.",
+              {
+                "es": "Defiende la más probable."
+              }
+            ],
+            [
+              "Let's check the footprints.",
+              {
+                "es": "Propone comprobarlo."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9c5823b4d6f65ef6916fa9effc9ecadafcb7b70fe617d759073b4605c05d6503"
+      },
+      {
+        "id": "en.n4.c20.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué razón da Mia."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The bike is too heavy for the wind."
+          },
+          {
+            "text": "The bike was locked."
+          },
+          {
+            "text": "The wind was not strong."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.p02.seed-0",
+          "feedback": {
+            "es": "Mia descarta el viento con una razón: la bicicleta pesa demasiado."
+          },
+          "audio": "Leo says the wind took the bike. Mia says it can't have been the wind, because the bike is heavy.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2281ff4a6a35bf57fe9d78899658bfbc6c9cf7ca4b524eb580fb8bff5cbb37b8"
+      },
+      {
+        "id": "en.n4.c20.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es una buena razón, pero debemos comprobarlo.»"
+        },
+        "answer": {
+          "text": "check",
+          "accepted": [
+            "check"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.p03.seed-0",
+          "feedback": {
+            "es": "Check es el verbo para proponer verificar la idea antes de aceptarla."
+          },
+          "text": "That is a good reason, but we should ___ it first."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:07dc5989df5ab00c196073d4e7c3eeba0b06c8ae45fd9f9c7c73ac3242709a77"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c20.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué explicación queda descartada y por qué."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Leo, because he was at school."
+          },
+          {
+            "text": "A thief, because the door was locked."
+          },
+          {
+            "text": "The sofa, because it is too small."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5",
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.e01.seed-0",
+          "feedback": {
+            "es": "Mia descarta al ladrón con can't have y una razón: la puerta estaba cerrada con llave."
+          },
+          "audio": "Sara says: Three explanations. One, a thief took the laptop. Two, Leo borrowed it. Three, it is under the sofa. Mia says: It can't have been a thief, because the door was locked. Sara says: I agree. The most likely explanation is that Leo borrowed it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7f4b5ad7f76df11b3405556f3b24c61750747667106eb03d580a0d4739903549"
+      },
+      {
+        "id": "en.n4.c20.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la explicación más razonable con estas pistas."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The dog must have opened the window."
+          },
+          {
+            "text": "A small child must have come in through the window."
+          },
+          {
+            "text": "A tall person might have come in through the door."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5",
+          "n4-everyday-mysteries-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.e02.seed-0",
+          "feedback": {
+            "es": "Las huellas grandes y la ventana cerrada apuntan a una persona alta por la puerta; el perro dormía."
+          },
+          "text": "The footprints are very big. The window is closed. The dog was asleep all day."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a16d3bac30ee4751753124274503e227ab901746805e49686d0ecd9533422b66"
+      },
+      {
+        "id": "en.n4.c20.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No estoy de acuerdo: no puede haber sido el gato.»"
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't",
+            "couldn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5",
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.e03.seed-0",
+          "feedback": {
+            "es": "Descartar una explicación con seguridad se hace con can't have + participio."
+          },
+          "text": "I don't agree: it ___ have been the cat."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:832f70e433155bd207b1de30874309e3ef035cccf64aa5c85ffd352d8812ad68"
+      },
+      {
+        "id": "en.n4.c20.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe tu postura: descarta una explicación y defiende otra."
+        },
+        "answer": {
+          "text": "It can't have been the wind, because the bike is very heavy. The most likely explanation is that Tom borrowed it, because he has a key. Let's check with him first.",
+          "accepted": [
+            "It can't have been the wind, because the bike is very heavy. The most likely explanation is that Tom borrowed it, because he has a key. Let's check with him first.",
+            "The wind can't have moved it: the bike is too heavy. Tom probably borrowed it, because he has a key. Let's ask him."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5",
+          "n4-everyday-mysteries-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.e04.seed-0",
+          "feedback": {
+            "es": "Una postura completa descarta con can't have y una razón, defiende la explicación más probable y propone comprobarla."
+          },
+          "text": "Caso: desapareció la bicicleta de Sara. Explicaciones: el viento la movió; Tom la pidió prestada; un ladrón. La bici es muy pesada y Tom tiene una llave del garaje. Descarta una, defiende otra con la razón y propón comprobar.",
+          "scoring": {
+            "wordRange": [
+              20,
+              70
+            ],
+            "evidenceGroups": [
+              [
+                "can't have been the wind",
+                "couldn't have been the wind",
+                "wind can't have",
+                "wind couldn't have",
+                "can't be the wind"
+              ],
+              [
+                "most likely",
+                "probably"
+              ],
+              [
+                "he has a key",
+                "has a key",
+                "has the key",
+                "a key"
+              ],
+              [
+                "check with",
+                "Let's ask",
+                "Let's check",
+                "we should check",
+                "we should ask"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d25a43f6a7dd534e9ee99dd6ef658edb934dcb9f46853c1ac4b6e44d2bfc612f"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c20.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo de segura está la persona."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Not sure: it is only possible."
+          },
+          {
+            "text": "Completely sure."
+          },
+          {
+            "text": "Sure that it is impossible."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.r01.seed-0",
+          "feedback": {
+            "es": "Might have + participio señala una posibilidad, no una certeza."
+          },
+          "audio": "Her phone is off. She might have run out of battery.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4115f094ff683022e5b2a15f7a55daa65fd24d6204c84b8709b8e14319c6942c"
+      },
+      {
+        "id": "en.n4.c20.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ojalá hubiera llevado un paraguas.»"
+        },
+        "answer": {
+          "text": "taken",
+          "accepted": [
+            "taken",
+            "brought"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.r02.seed-0",
+          "feedback": {
+            "es": "El arrepentimiento pasado pide wish + had + participio: taken."
+          },
+          "text": "I wish I had ___ an umbrella with me."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d80abd8ebffeb48a58e812443e3effe4b9aa6c7bbe059392c4a4dbed42f8e0c4"
+      },
+      {
+        "id": "en.n4.c20.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que descarta una idea sobre el pasado."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "You must have seen him: he was away."
+          },
+          {
+            "text": "You can't have seen him: he was away."
+          },
+          {
+            "text": "You might see him: he was away."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c20.r03.seed-0",
+          "feedback": {
+            "es": "«Estaba fuera» contradice la idea de haberlo visto: can't have + participio."
+          },
+          "text": "Dices que viste a Leo en el parque, pero Leo estaba de viaje."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6bbcd114062a034d82b766ee09a1082e0ddd07ce04171bf4b5460df14fe2a115"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c20.e01": {
+      "reteach": "en.n4.class-20.t01",
+      "review": "en.n4.c20.r01"
+    },
+    "en.n4.c20.e02": {
+      "reteach": "en.n4.class-20.t02",
+      "review": "en.n4.c20.r02"
+    },
+    "en.n4.c20.e03": {
+      "reteach": "en.n4.class-20.t03",
+      "review": "en.n4.c20.r03"
+    },
+    "en.n4.c20.e04": {
+      "reteach": "en.n4.class-20.t04",
+      "review": "en.n4.c20.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n4-everyday-mysteries-1",
+    "n4-everyday-mysteries-2",
+    "n4-everyday-mysteries-3",
+    "n4-everyday-mysteries-4",
+    "n4-everyday-mysteries-5"
+  ]
+}

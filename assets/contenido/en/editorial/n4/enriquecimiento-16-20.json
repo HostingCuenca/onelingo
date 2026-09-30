@@ -1,0 +1,601 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "classes": {
+    "en.n4.class-16": {
+      "explicacion": {
+        "titulo": "Seguro, posible, imposible",
+        "texto": "Must, might, could y can't sirven para deducir algo del presente a partir de pistas. Must = casi seguro, porque las pistas son claras: «The lights are on, so he must be at home». Might y could = es posible, pero no estoy seguro. Can't = casi imposible, porque una pista lo contradice. Ojo: aquí must no significa «deber», y lo contrario de must be no es mustn't, sino can't be. Después del modal va el verbo base, sin to."
+      },
+      "patron": {
+        "texto": "Pista + modal + verbo base:",
+        "formula": [
+          {
+            "texto": "He must be at home.",
+            "nota": "casi seguro: must + verbo base"
+          },
+          {
+            "texto": "He might be in the garden.",
+            "nota": "posible: might / could + verbo base"
+          },
+          {
+            "texto": "He can't be at school.",
+            "nota": "casi imposible: can't + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He mustn't be at home: the lights are off.",
+          "correcto": "He can't be at home: the lights are off.",
+          "explicacion": "Mustn't expresa prohibición. Para deducir que algo es casi imposible se usa can't."
+        },
+        {
+          "incorrecto": "She must to be tired.",
+          "correcto": "She must be tired.",
+          "explicacion": "Después de un modal va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo están frente a la casa de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The lights are on. Sara must be at home.",
+            "traduccion": "Las luces están encendidas. Sara debe de estar en casa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Maybe. She might be out: she often leaves the lights on.",
+            "traduccion": "Quizá. Podría haber salido: a menudo deja las luces encendidas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "But her bike is here. She can't be far.",
+            "traduccion": "Pero su bici está aquí. No puede estar lejos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then she could be in the garden.",
+            "traduccion": "Entonces podría estar en el jardín."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pista usa Mia para pensar que Sara está en casa?",
+          "opciones": [
+            {
+              "es": "Las luces están encendidas."
+            },
+            {
+              "es": "Se oye música dentro de la casa."
+            },
+            {
+              "es": "La puerta del jardín está abierta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The lights are on. Sara must be at home». Esa es su pista; la bici le sirve para decir que no puede estar lejos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Modal",
+          "Seguridad"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "must be"
+            },
+            {
+              "texto": "casi seguro (pistas claras)"
+            }
+          ],
+          [
+            {
+              "texto": "might / could be"
+            },
+            {
+              "texto": "posible, pero no estoy seguro"
+            }
+          ],
+          [
+            {
+              "texto": "can't be"
+            },
+            {
+              "texto": "casi imposible (una pista lo contradice)"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-17": {
+      "explicacion": {
+        "titulo": "Debió de ser: deducir el pasado",
+        "texto": "Para deducir sobre el pasado se usa modal + have + participio. Must have = casi seguro de que ocurrió («I must have left them in the car»). Might have / could have = es posible que ocurriera. Can't have = casi seguro de que NO ocurrió. Se pronuncia /əv/, por eso muchos escriben «must of»: siempre es have. Y para negar una deducción no se usa mustn't have, sino can't have."
+      },
+      "patron": {
+        "texto": "Pista + modal + have + participio:",
+        "formula": [
+          {
+            "texto": "I must have left them in the car.",
+            "nota": "casi seguro: must have + participio"
+          },
+          {
+            "texto": "They might have fallen out of my pocket.",
+            "nota": "posible: might / could have + participio"
+          },
+          {
+            "texto": "You can't have lost them at school.",
+            "nota": "casi imposible: can't have + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She must of left the keys at home.",
+          "correcto": "She must have left the keys at home.",
+          "explicacion": "Después del modal va have, nunca of: suenan igual, pero se escribe have."
+        },
+        {
+          "incorrecto": "They might left the keys in the car.",
+          "correcto": "They might have left the keys in the car.",
+          "explicacion": "En las deducciones sobre el pasado falta have: modal + have + participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara no encuentra sus llaves y habla con Tom.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I can't find my keys! I must have left them in the car.",
+            "traduccion": "¡No encuentro mis llaves! Seguro que las dejé en el coche."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "You can't have left them there. I saw them on the table.",
+            "traduccion": "No pudiste dejarlas ahí. Yo las vi sobre la mesa."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then someone might have taken them.",
+            "traduccion": "Entonces alguien podría habérselas llevado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Or they could have fallen out of your pocket.",
+            "traduccion": "O podrían habérsete caído del bolsillo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Tom cree que las llaves no están en el coche?",
+          "opciones": [
+            {
+              "es": "Porque las vio sobre la mesa."
+            },
+            {
+              "es": "Porque el coche estaba cerrado."
+            },
+            {
+              "es": "Porque Sara las perdió en la calle."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I saw them on the table»: esa pista contradice la idea de Sara y por eso usa can't have."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Modal",
+          "Significado y ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "must have + participio"
+            },
+            {
+              "texto": "casi seguro que ocurrió: You must have left them."
+            }
+          ],
+          [
+            {
+              "texto": "might / could have + participio"
+            },
+            {
+              "texto": "quizá ocurrió: They might have fallen out."
+            }
+          ],
+          [
+            {
+              "texto": "can't have + participio"
+            },
+            {
+              "texto": "casi seguro que no ocurrió: You can't have lost them."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-18": {
+      "explicacion": {
+        "titulo": "Pistas y deducciones en un misterio",
+        "texto": "Resolver un misterio es decidir cuánta seguridad te da cada pista. Un hecho directo («an empty plate, crumbs on the floor») permite must have: casi seguro. Una pista a medias («muddy footprints») solo permite might have o could have. Una pista que contradice una idea («the footprints are too small») permite can't have. Al escuchar, anota primero la pista y luego elige el modal; explica con because o so."
+      },
+      "patron": {
+        "texto": "Pista + conclusión con modal + have:",
+        "formula": [
+          {
+            "texto": "There are crumbs on the floor,",
+            "nota": "pista: lo que ves o escuchas"
+          },
+          {
+            "texto": "so someone must have eaten the cake.",
+            "nota": "conclusión segura: must have + participio"
+          },
+          {
+            "texto": "The dog can't have opened the door.",
+            "nota": "descarte: can't have + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are footprints, so someone must have came in.",
+          "correcto": "There are footprints, so someone must have come in.",
+          "explicacion": "Tras must have va el participio (come), no el pasado simple (came)."
+        },
+        {
+          "incorrecto": "The footprints are small, so a man mustn't have made them.",
+          "correcto": "The footprints are small, so a man can't have made them.",
+          "explicacion": "Para descartar una idea se usa can't have, no mustn't have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia descubren que el pastel ha desaparecido.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The cake is gone! The plate is empty.",
+            "traduccion": "¡El pastel ha desaparecido! El plato está vacío."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Look: there are crumbs on the floor and muddy footprints by the door.",
+            "traduccion": "Mira: hay migas en el suelo y huellas embarradas junto a la puerta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Someone must have eaten it. It might have been Rex.",
+            "traduccion": "Alguien debió de comérselo. Podría haber sido Rex."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It can't have been Rex. These footprints are from shoes.",
+            "traduccion": "No pudo ser Rex. Estas huellas son de zapatos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then someone must have come in from the garden.",
+            "traduccion": "Entonces alguien debió de entrar desde el jardín."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Mia descarta a Rex?",
+          "opciones": [
+            {
+              "es": "Porque las huellas son de zapatos."
+            },
+            {
+              "es": "Porque Rex no come pastel."
+            },
+            {
+              "es": "Porque Rex estaba en el jardín."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «It can't have been Rex. These footprints are from shoes». La pista contradice la idea de que fuera el perro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de pista",
+          "Deducción"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho directo (plato vacío, migas)"
+            },
+            {
+              "texto": "must have + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Pista a medias (huellas embarradas)"
+            },
+            {
+              "texto": "might / could have + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Pista que contradice (huellas pequeñas)"
+            },
+            {
+              "texto": "can't have + participio"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-19": {
+      "explicacion": {
+        "titulo": "Justificar una deducción por escrito",
+        "texto": "Una deducción escrita tiene cuatro partes: 1) el hecho que te preocupa («Ana has not answered my message»); 2) la pista que observas («she was online ten minutes ago»); 3) la deducción con el modal adecuado: must si las pistas son claras, might o could si solo es posible, can't si una pista lo contradice; 4) lo que harás para comprobarlo («I will call her tonight»). Une las ideas con because y so."
+      },
+      "patron": {
+        "texto": "Hecho + pista + deducción + comprobación:",
+        "formula": [
+          {
+            "texto": "Ana has not answered my message.",
+            "nota": "el hecho"
+          },
+          {
+            "texto": "She was online ten minutes ago, so she can't be asleep.",
+            "nota": "pista + descarte con can't"
+          },
+          {
+            "texto": "She might have run out of battery.",
+            "nota": "causa posible: might have + participio"
+          },
+          {
+            "texto": "I will call her tonight to check.",
+            "nota": "comprobación: will + verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She might has run out of battery.",
+          "correcto": "She might have run out of battery.",
+          "explicacion": "Después de might va have, nunca has: modal + have + participio."
+        },
+        {
+          "incorrecto": "I am not sure, but she must be in a meeting.",
+          "correcto": "I am not sure, but she might be in a meeting.",
+          "explicacion": "Must expresa casi seguridad. Si no estás seguro, usa might o could."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom hablan de un mensaje sin respuesta.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Has Ana answered your message?",
+            "traduccion": "¿Ana ha respondido tu mensaje?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. She was online at noon, so she can't be asleep.",
+            "traduccion": "No. Estuvo conectada al mediodía, así que no puede estar dormida."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She might be in a meeting. She has one every Friday.",
+            "traduccion": "Podría estar en una reunión. Tiene una cada viernes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Or her phone might have run out of battery.",
+            "traduccion": "O a su teléfono se le podría haber acabado la batería."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Call her tonight to check.",
+            "traduccion": "Llámala esta noche para comprobarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Tom cree que Ana no está durmiendo?",
+          "opciones": [
+            {
+              "es": "Porque estuvo conectada al mediodía."
+            },
+            {
+              "es": "Porque tiene una reunión cada viernes."
+            },
+            {
+              "es": "Porque su teléfono no tiene batería."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «She was online at noon, so she can't be asleep». Las otras dos son posibilidades que propone Mia y él mismo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del texto",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "Ana has not answered my message."
+            }
+          ],
+          [
+            {
+              "texto": "Pista"
+            },
+            {
+              "texto": "She was online at noon."
+            }
+          ],
+          [
+            {
+              "texto": "Deducción"
+            },
+            {
+              "texto": "She can't be asleep. / She might be busy."
+            }
+          ],
+          [
+            {
+              "texto": "Comprobación"
+            },
+            {
+              "texto": "I will call her tonight to check."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-20": {
+      "explicacion": {
+        "titulo": "Resolverlo entre todos",
+        "texto": "Para resolver un caso en equipo sigue cuatro pasos. 1) Propón una explicación con could have o might have. 2) Descarta otra con can't have y una razón con because. 3) Compara el grado de probabilidad: «The most likely explanation is…». 4) Acuerda qué comprobar: «Let's check…». Sé amable al discrepar: «I see your point, but…». Con tres o más opciones se usa most likely, no more likely."
+      },
+      "patron": {
+        "texto": "Proponer + descartar + defender + acordar:",
+        "formula": [
+          {
+            "texto": "It could have been the neighbour.",
+            "nota": "propón: could have + participio"
+          },
+          {
+            "texto": "It can't have been the wind, because the bike is heavy.",
+            "nota": "descarta: can't have + because + razón"
+          },
+          {
+            "texto": "The most likely explanation is Tom.",
+            "nota": "defiende: the most likely explanation is…"
+          },
+          {
+            "texto": "Let's check with him first.",
+            "nota": "acuerda: Let's + verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree with you.",
+          "correcto": "I agree with you.",
+          "explicacion": "Agree es un verbo: no se usa con be, aunque en español digamos «estoy de acuerdo»."
+        },
+        {
+          "incorrecto": "The more likely explanation is the neighbour's.",
+          "correcto": "The most likely explanation is the neighbour's.",
+          "explicacion": "Entre tres o más opciones se usa el superlativo (the most likely), no more."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, Leo y Mia buscan la bicicleta de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "We have three explanations: a thief, Tom or the wind.",
+            "traduccion": "Tenemos tres explicaciones: un ladrón, Tom o el viento."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It can't have been the wind, because the bike is heavy.",
+            "traduccion": "No pudo ser el viento, porque la bici es pesada."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I agree. The most likely explanation is that Tom borrowed it.",
+            "traduccion": "Estoy de acuerdo. La explicación más probable es que Tom la pidió prestada."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Maybe. A thief could have taken it too. Let's check with Tom first.",
+            "traduccion": "Quizá. Un ladrón también podría habérsela llevado. Comprobémoslo primero con Tom."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué explicación descarta Mia y por qué?",
+          "opciones": [
+            {
+              "es": "El viento, porque la bici es pesada."
+            },
+            {
+              "es": "A Tom, porque no estaba en casa."
+            },
+            {
+              "es": "Un ladrón, porque no hay huellas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «It can't have been the wind, because the bike is heavy». Descarta el viento con can't have y una razón."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "It could have been…"
+            }
+          ],
+          [
+            {
+              "texto": "Descartar"
+            },
+            {
+              "texto": "It can't have been…, because…"
+            }
+          ],
+          [
+            {
+              "texto": "Defender"
+            },
+            {
+              "texto": "The most likely explanation is…"
+            }
+          ],
+          [
+            {
+              "texto": "Acordar"
+            },
+            {
+              "texto": "Let's check…"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Clase 16: eva0 reescrita para que might sea la única respuesta defendible; audio de pra1 con sujeto explícito (The family).",
+      "Clases 17, 18, 20: se acepta couldn't en can't have (correcto en inglés).",
+      "Clase 19: ordenar ambiguo (because movible) sustituido; rúbrica de escritura con variantes (hasn't replied, I'll call...); aceptadas más naturales.",
+      "Clase 17 y 20: rúbricas de escritura más flexibles.",
+      "Escritura de 19 (36 palabras) y 20 (31) por encima del 50 % de la política; se mantienen."
+    ]
+  }
+}

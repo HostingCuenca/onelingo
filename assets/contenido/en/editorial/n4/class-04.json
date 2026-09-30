@@ -1,0 +1,780 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-04",
+  "title": {
+    "en": "Explain what had happened",
+    "es": "Explicar lo que había pasado"
+  },
+  "objectives": {
+    "es": [
+      "Escribir una explicación de una situación inesperada indicando lo que ya había sucedido."
+    ]
+  },
+  "concepts": [
+    "n4-earlier-events-4"
+  ],
+  "skills": [
+    "gramática",
+    "escritura",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-03"
+  ],
+  "usesVocabulary": [
+    "discover",
+    "unfortunately",
+    "everyone",
+    "empty",
+    "realise",
+    "wrong",
+    "date",
+    "poster"
+  ],
+  "usesPatterns": [
+    "n4-earlier-events-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "discover",
+      "es": "descubrir"
+    },
+    {
+      "en": "unfortunately",
+      "es": "por desgracia"
+    },
+    {
+      "en": "everyone",
+      "es": "todos"
+    },
+    {
+      "en": "empty",
+      "es": "vacío"
+    },
+    {
+      "en": "realise",
+      "es": "darse cuenta"
+    },
+    {
+      "en": "wrong",
+      "es": "equivocado"
+    },
+    {
+      "en": "date",
+      "es": "fecha"
+    },
+    {
+      "en": "poster",
+      "es": "cartel"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-04.t01",
+      "en": "I was surprised to discover that the class had already finished.",
+      "es": "Me sorprendió descubrir que la clase ya había terminado.",
+      "explanationEs": "Discover + that + oración: lo descubierto va con had + participio si ya había pasado.",
+      "segments": [
+        "I was surprised to discover that",
+        "the class had already finished."
+      ],
+      "audioText": "I was surprised to discover that the class had already finished.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-4"
+    },
+    {
+      "id": "en.n4.class-04.t02",
+      "en": "Unfortunately, the shop had closed an hour before I got there.",
+      "es": "Por desgracia, la tienda había cerrado una hora antes de que yo llegara.",
+      "explanationEs": "Unfortunately abre el problema; had closed es lo que pasó antes de llegar.",
+      "segments": [
+        "Unfortunately, the shop had closed an",
+        "hour before I got there."
+      ],
+      "audioText": "Unfortunately, the shop had closed an hour before I got there.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-4"
+    },
+    {
+      "id": "en.n4.class-04.t03",
+      "en": "Everyone had gone home, and the room was completely empty.",
+      "es": "Todos se habían ido a casa y la sala estaba completamente vacía.",
+      "explanationEs": "Had gone es el antecedente; was empty describe lo que viste.",
+      "segments": [
+        "Everyone had gone home, and",
+        "the room was completely empty."
+      ],
+      "audioText": "Everyone had gone home, and the room was completely empty.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-4"
+    },
+    {
+      "id": "en.n4.class-04.t04",
+      "en": "I did not realise that I had read the wrong date on the poster.",
+      "es": "No me di cuenta de que había leído mal la fecha del cartel.",
+      "explanationEs": "Realise that + had read: el error ya estaba hecho antes de darte cuenta.",
+      "segments": [
+        "I did not realise that I had",
+        "read the wrong date on the poster."
+      ],
+      "audioText": "I did not realise that I had read the wrong date on the poster.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-earlier-events-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c04.pg01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Descubrí que la clase ya había terminado.»"
+        },
+        "answer": {
+          "text": "I discovered that the class had already finished",
+          "tokens": [
+            "I",
+            "discovered",
+            "that",
+            "the",
+            "class",
+            "had",
+            "already",
+            "finished"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-earlier-events-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.pg01.seed-0",
+          "feedback": {
+            "es": "Primero el sujeto y el verbo de descubrir; después that y la acción anterior con had already finished."
+          },
+          "hint": {
+            "es": "Empieza con I discovered that y termina con el participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0cd7ec1f60f57610b1253b59e482e8c52eaa264d816847bd47c5d2906b915996"
+      },
+      {
+        "id": "en.n4.c04.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Cuando llegué, descubrí que todos se habían ido a casa.»"
+        },
+        "answer": {
+          "text": "gone",
+          "accepted": [
+            "gone"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-earlier-events-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.pg02.seed-0",
+          "feedback": {
+            "es": "Had gone es el past perfect de go: todos se fueron antes de que yo llegara."
+          },
+          "hint": {
+            "es": "Es el participio irregular del verbo ir."
+          },
+          "text": "When I arrived, I discovered that everyone had ___ home."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b646e41ebeb371ff6d8c1cb9d453faf4deafdc87d869b88e9646bbd048a542ac"
+      },
+      {
+        "id": "en.n4.c04.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase completa: «Descubrí que la tienda ya había cerrado.»"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I discovered that the shop already closed."
+          },
+          {
+            "text": "I discovered that the shop had already closed."
+          },
+          {
+            "text": "Discovered that the shop had already closed."
+          }
+        ],
+        "teaches": [
+          "n4-earlier-events-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.pg03.seed-0",
+          "feedback": {
+            "es": "Hay que decir el sujeto (I) y usar had + participio para lo que ya había ocurrido; en inglés no se omite el sujeto."
+          },
+          "hint": {
+            "es": "Incluye el sujeto y had + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:74448a907f45dbeb74cacfc5806b122884a408d64354c29ba3c3639b5d252ce8"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c04.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la frase en inglés con discover."
+        },
+        "answer": {
+          "text": "I discovered that the concert had finished.",
+          "accepted": [
+            "I discovered that the concert had finished.",
+            "I discovered that the concert had already finished.",
+            "I discovered that the concert had ended."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.p01.seed-0",
+          "feedback": {
+            "es": "Se escribe I discovered that + sujeto + had + participio: el concierto terminó antes del descubrimiento."
+          },
+          "text": "Frase: descubrí que el concierto había terminado."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7485312caa4b563bae5cfe28b872fb086707830263b563d849f0289fbf22b111"
+      },
+      {
+        "id": "en.n4.c04.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La tienda había cerrado. No me di cuenta de que había leído mal la fecha.»"
+        },
+        "answer": {
+          "text": "had | realise",
+          "accepted": [
+            "had | realise"
+          ],
+          "parts": [
+            {
+              "text": "had",
+              "accepted": [
+                "had"
+              ]
+            },
+            {
+              "text": "realise",
+              "accepted": [
+                "realise"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.p02.seed-0",
+          "feedback": {
+            "es": "La primera frase necesita had para lo anterior; la segunda, realise: darse cuenta de que había leído mal."
+          },
+          "sentences": [
+            "Unfortunately, the shop ___ closed before I arrived.",
+            "I did not ___ that I had read the wrong date."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0fa2dd3ac0e6cfb203df4903a252228070960e6864222ef116ffa32a5a2fe181"
+      },
+      {
+        "id": "en.n4.c04.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Por desgracia, el autobús ya se había ido.»"
+        },
+        "answer": {
+          "text": "Unfortunately the bus had already left",
+          "tokens": [
+            "Unfortunately",
+            "the",
+            "bus",
+            "had",
+            "already",
+            "left"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.p03.seed-0",
+          "feedback": {
+            "es": "Unfortunately abre la frase; después el sujeto y had already left para lo que pasó antes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1cf70a66fbdab063d43a9757459c30b97f4b79d737b4353782623933c8cbca92"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c04.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el relato completo: llegada, descubrimiento y motivo (unas 40 palabras)."
+        },
+        "answer": {
+          "text": "Last Saturday I went to the cinema with my friend. When we got to the cinema, we discovered that the film had already started. Unfortunately, I had read the wrong time on the poster. Everyone had gone inside, so we went home.",
+          "accepted": [
+            "Last Saturday I went to the cinema with my friend. When we got to the cinema, we discovered that the film had already started. Unfortunately, I had read the wrong time on the poster. Everyone had gone inside, so we went home.",
+            "On Saturday my friend and I went to the cinema. When we arrived, we realised that the film had already begun, because I had read the wrong time on the poster. Unfortunately, everyone had gone inside, so we went back home.",
+            "Last Saturday I went to the cinema with a friend. When I got there, I found out that the film had started an hour before. I had read the wrong time on the poster. Everyone had gone in, so we went home."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.e01.seed-0",
+          "feedback": {
+            "es": "Un buen relato llega, descubre lo anterior con had + participio, explica el motivo y cuenta qué hicisteis después."
+          },
+          "text": "Relato: el sábado fuiste al cine con un amigo. Al llegar, descubriste que la película ya había empezado porque habías leído mal la hora en el cartel. Por desgracia, todos habían entrado ya, así que volvisteis a casa.",
+          "scoring": {
+            "wordRange": [
+              28,
+              70
+            ],
+            "evidenceGroups": [
+              [
+                "When we got to",
+                "When I got to",
+                "When we arrived",
+                "When I arrived",
+                "got to the cinema",
+                "arrived at the cinema",
+                "When I got there",
+                "When we got there"
+              ],
+              [
+                "discovered that",
+                "realised that",
+                "realized that",
+                "found out that",
+                "saw that"
+              ],
+              [
+                "had already started",
+                "had started",
+                "had already begun",
+                "had begun"
+              ],
+              [
+                "wrong time",
+                "wrong hour",
+                "read the time wrong",
+                "had misread"
+              ],
+              [
+                "so we went home",
+                "we went home",
+                "we went back home",
+                "we went back",
+                "we left"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b2d6a1083231e0da7c67c069ba007d5a2a742776842a2f0f8585304c49db8c49"
+      },
+      {
+        "id": "en.n4.c04.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la explicación correcta de Sara?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "When I got there, the library closed."
+          },
+          {
+            "text": "When I got there, the library has already closed."
+          },
+          {
+            "text": "When I got there, the library had already closed."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.e02.seed-0",
+          "feedback": {
+            "es": "La biblioteca cerró a las cuatro, antes de que Sara llegara a las cinco; por eso va con had already closed."
+          },
+          "text": "Sara got to the library at five. It closed at four."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1fed5e178d4c4148b2347622e30c44dbec4cecf7ef492aee3841d4b6fc3db459"
+      },
+      {
+        "id": "en.n4.c04.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «No me di cuenta de que había escrito mal la hora.»"
+        },
+        "answer": {
+          "text": "I did not realise that I had written the wrong time",
+          "tokens": [
+            "I",
+            "did",
+            "not",
+            "realise",
+            "that",
+            "I",
+            "had",
+            "written",
+            "the",
+            "wrong",
+            "time"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.e03.seed-0",
+          "feedback": {
+            "es": "I did not realise that introduce el descubrimiento, y had written the wrong time es lo que ya había ocurrido."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c8b00b8880ccf69987c5fc876775b3c8f41d7b560f01120a27cb7211d5b8b2a9"
+      },
+      {
+        "id": "en.n4.c04.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué encontró la hablante en el gimnasio."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "An empty room."
+          },
+          {
+            "text": "A noisy class."
+          },
+          {
+            "text": "A closed door."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.e04.seed-0",
+          "feedback": {
+            "es": "Descubrió que todos se habían ido y que la sala estaba vacía; no se habla de clase ni de puerta cerrada."
+          },
+          "audio": "When I got to the gym, I discovered that everyone had gone home, and the room was empty.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7f4a3722e8abfa292ac794174217dcca4a7b29cd1a1207f9aae907545ed7a50b"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c04.r01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la frase: por desgracia, al llegar al gimnasio todos se habían ido."
+        },
+        "answer": {
+          "text": "Unfortunately, when I got to the gym, everyone had gone.",
+          "accepted": [
+            "Unfortunately, when I got to the gym, everyone had gone.",
+            "Unfortunately, when I arrived at the gym, everyone had gone.",
+            "Unfortunately, everyone had gone when I got to the gym."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.r01.seed-0",
+          "feedback": {
+            "es": "Unfortunately abre el problema, when + pasado simple da el momento y everyone had gone expresa lo anterior."
+          },
+          "text": "Frase: Por desgracia, cuando llegué al gimnasio, todos se habían ido."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7278ce46dc028a9c4248c969d132a4cc1f24ece04d3122f663e32c10c69a62d7"
+      },
+      {
+        "id": "en.n4.c04.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cuál fue el error de la hablante."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She had lost her ticket."
+          },
+          {
+            "text": "She had made a mistake with the time."
+          },
+          {
+            "text": "She had gone to the wrong station."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.r02.seed-0",
+          "feedback": {
+            "es": "La hablante reconoce que había leído mal la hora; por eso su amigo ya se había ido."
+          },
+          "audio": "I got to the station at nine, but my friend had already left. Unfortunately, I had read the wrong time.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d87321f571b15620b4268ee28e41ffb4ced16f8daa0e332717c0c1dc5c0fcbf3"
+      },
+      {
+        "id": "en.n4.c04.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige cómo explica Tom lo que descubrió."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I discovered that the shop closes at five."
+          },
+          {
+            "text": "I discovered that the shop will close at five."
+          },
+          {
+            "text": "I discovered that the shop had closed at five."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-earlier-events-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c04.r03.seed-0",
+          "feedback": {
+            "es": "Tom llegó a las seis y la tienda cerró a las cinco: lo anterior se dice con had closed."
+          },
+          "text": "Tom got to the shop at six. It closed at five."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0144966cad418c10e93dedff18008d29e53d9799100b584a35149cf8223a0bd"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c04.e01": {
+      "reteach": "en.n4.class-04.t01",
+      "review": "en.n4.c04.r01"
+    },
+    "en.n4.c04.e02": {
+      "reteach": "en.n4.class-04.t02",
+      "review": "en.n4.c04.r02"
+    },
+    "en.n4.c04.e03": {
+      "reteach": "en.n4.class-04.t03",
+      "review": "en.n4.c04.r03"
+    },
+    "en.n4.c04.e04": {
+      "reteach": "en.n4.class-04.t04",
+      "review": "en.n4.c04.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

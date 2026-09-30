@@ -1,0 +1,473 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n5.class-36": {
+      "explicacion": {
+        "titulo": "Aunque, mientras que y a pesar de",
+        "texto": "Although, whereas, despite e in spite of unen dos ideas que contrastan, pero se construyen de forma distinta. Although y whereas van seguidos de sujeto + verbo: although it rains; whereas my sister likes cities. Although expresa algo inesperado; whereas compara dos cosas. Despite e in spite of van seguidos de un sustantivo o un -ing (despite the rain, despite being tired) o de the fact that + cláusula. Ojo: en inglés no se dice «although… but…»: basta con uno."
+      },
+      "patron": {
+        "texto": "Idea A + conector + idea B:",
+        "formula": [
+          {
+            "texto": "Although the town is crowded,",
+            "nota": "although + sujeto + verbo: lo que contrasta"
+          },
+          {
+            "texto": "the centre is noisy, whereas the park is quiet.",
+            "nota": "whereas + sujeto + verbo: dos cosas distintas"
+          },
+          {
+            "texto": "Despite the traffic, we arrived.",
+            "nota": "despite + sustantivo o -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although the town is crowded, but it is beautiful.",
+          "correcto": "Although the town is crowded, it is beautiful.",
+          "explicacion": "En español se dice «aunque… pero…», pero en inglés although ya contrasta y no se añade but."
+        },
+        {
+          "incorrecto": "Despite it was raining, we went out.",
+          "correcto": "Despite the rain, we went out.",
+          "explicacion": "Despite va seguido de un sustantivo o -ing, no de sujeto + verbo. Con cláusula completa: despite the fact that it was raining."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Leo cómo es su barrio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Is your neighbourhood nice, Mia?",
+            "traduccion": "¿Tu barrio es bonito, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Although it is crowded, I love it.",
+            "traduccion": "Aunque está lleno de gente, me encanta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Crowded? My neighbourhood is quiet, whereas yours is busy.",
+            "traduccion": "¿Lleno de gente? Mi barrio es tranquilo, mientras que el tuyo es muy movido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. And despite the traffic, I can walk to school.",
+            "traduccion": "Sí. Y a pesar del tráfico, puedo ir andando al colegio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué puede hacer Mia a pesar del tráfico?",
+          "opciones": [
+            {
+              "es": "Ir andando al colegio."
+            },
+            {
+              "es": "Dormir con las ventanas abiertas."
+            },
+            {
+              "es": "Usar el tranvía."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Despite the traffic, I can walk to school». Lo de la gente y el barrio tranquilo es lo que comparan, no lo que hace ella."
+        }
+      }
+    },
+    "en.n5.class-37": {
+      "explicacion": {
+        "titulo": "Datos extra con who, which, whose y participios",
+        "texto": "Una cláusula de información extra añade un dato sobre algo que el oyente ya puede identificar. Va entre comas y se podría quitar sin cambiar la idea principal. Usa who para personas, which para cosas y whose para posesión; en este caso nunca that. Puedes acortarla: el participio de presente (-ing) sustituye a who/which + verbo activo (tourists taking photos) y el participio de pasado sustituye a which + pasiva (the museum, built in 1890)."
+      },
+      "patron": {
+        "texto": "Idea principal con un dato extra entre comas:",
+        "formula": [
+          {
+            "texto": "The old bridge,",
+            "nota": "el nombre que ya está identificado"
+          },
+          {
+            "texto": "which crosses the river,",
+            "nota": "who / which / whose + verbo: dato extra"
+          },
+          {
+            "texto": "The museum, built in 1890,",
+            "nota": "participio de pasado = which was built"
+          },
+          {
+            "texto": "is now a school.",
+            "nota": "la idea principal continúa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The old bridge, that crosses the river, is beautiful.",
+          "correcto": "The old bridge, which crosses the river, is beautiful.",
+          "explicacion": "En cláusulas entre comas no se usa that. Las cosas llevan which y las personas who."
+        },
+        {
+          "incorrecto": "The museum, which built in 1890, is now a school.",
+          "correcto": "The museum, built in 1890, is now a school.",
+          "explicacion": "Which built sugiere que el museo construyó algo. Con la pasiva hace falta was built; o, más corto, solo el participio: built."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le enseña a Carlos una foto de su ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Who is the woman in front of the bakery?",
+            "traduccion": "¿Quién es la mujer que está delante de la panadería?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is Ana, whose family runs the bakery.",
+            "traduccion": "Es Ana, cuya familia lleva la panadería."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the big building behind her?",
+            "traduccion": "¿Y el edificio grande que hay detrás de ella?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It is the museum, built in 1890. It is always full of tourists.",
+            "traduccion": "Es el museo, construido en 1890. Siempre está lleno de turistas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién es Ana?",
+          "opciones": [
+            {
+              "es": "Una mujer cuya familia lleva la panadería."
+            },
+            {
+              "es": "La guía del museo."
+            },
+            {
+              "es": "Una turista que hace fotos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «That is Ana, whose family runs the bakery». El museo aparece después y los turistas no son Ana."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Equivale a",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "who / which / whose + verbo"
+            },
+            {
+              "texto": "cláusula completa"
+            },
+            {
+              "texto": "Ana, whose family runs the bakery,"
+            }
+          ],
+          [
+            {
+              "texto": "participio de presente (-ing)"
+            },
+            {
+              "texto": "who / which + verbo activo"
+            },
+            {
+              "texto": "tourists taking photos"
+            }
+          ],
+          [
+            {
+              "texto": "participio de pasado"
+            },
+            {
+              "texto": "which + pasiva"
+            },
+            {
+              "texto": "the museum, built in 1890,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-38": {
+      "explicacion": {
+        "titulo": "Dato esencial y dato añadido en una guía",
+        "texto": "Las guías mezclan dos tipos de datos en la misma oración. El dato esencial dice de cuál hablas y no lleva comas: the ferry that leaves at nine (hay más de un ferry). El dato añadido es extra, va entre comas y se puede quitar: the lighthouse, which was built in 1870. Truco de lectura: tapa la parte entre comas; si la frase sigue identificando lo mismo, era información añadida. That solo se usa en datos esenciales; en los añadidos usa who o which."
+      },
+      "patron": {
+        "texto": "Dato esencial (sin comas) o dato añadido (entre comas):",
+        "formula": [
+          {
+            "texto": "The street that goes up to the tower",
+            "nota": "esencial: sin comas, dice cuál de las calles"
+          },
+          {
+            "texto": "is very narrow.",
+            "nota": "la idea principal"
+          },
+          {
+            "texto": "The lighthouse, which was built in 1870,",
+            "nota": "añadido: entre comas, se puede quitar"
+          },
+          {
+            "texto": "is open on Sundays.",
+            "nota": "la idea principal continúa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The ferry, which leaves at nine, goes to the island.",
+          "correcto": "The ferry that leaves at nine goes to the island.",
+          "explicacion": "Con comas parece un dato extra, como si solo hubiera un ferry. Si hay varios y debes identificar uno, usa that sin comas."
+        },
+        {
+          "incorrecto": "Our guide, that has lived here for forty years, knows every street.",
+          "correcto": "Our guide, who has lived here for forty years, knows every street.",
+          "explicacion": "Entre comas no se usa that. Las personas llevan who y las cosas which."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom lee un folleto de la ciudad y Mia le pregunta por los barcos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Does every ferry go to the island?",
+            "traduccion": "¿Todos los ferris van a la isla?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. The ferry that leaves at ten goes there. The other one goes to the market.",
+            "traduccion": "No. El ferri que sale a las diez va allí. El otro va al mercado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the guide? Is he good?",
+            "traduccion": "¿Y el guía? ¿Es bueno?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. Our guide, who speaks four languages, is very friendly.",
+            "traduccion": "Sí. Nuestro guía, que habla cuatro idiomas, es muy amable."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué ferri va a la isla?",
+          "opciones": [
+            {
+              "es": "El que sale a las diez."
+            },
+            {
+              "es": "Cualquier ferri del puerto."
+            },
+            {
+              "es": "El que va al mercado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «The ferry that leaves at ten goes there». Ese dato esencial, sin comas, distingue el ferri de la isla del otro."
+        }
+      }
+    },
+    "en.n5.class-39": {
+      "explicacion": {
+        "titulo": "Describir un barrio con oraciones largas",
+        "texto": "Para describir un barrio con naturalidad, mezcla tres recursos. Contraste: although + sujeto + verbo, whereas para comparar dos lugares y despite + sustantivo o -ing. Dato extra: who, which o whose entre comas, o un participio (built in 1950, families reading books). Un párrafo de tres o cuatro oraciones con estructuras distintas suena mejor que muchas frases cortas. Revisa que despite no lleve sujeto + verbo."
+      },
+      "patron": {
+        "texto": "Barrio + contraste + dato extra:",
+        "formula": [
+          {
+            "texto": "Although my neighbourhood is small,",
+            "nota": "contraste: although + sujeto + verbo"
+          },
+          {
+            "texto": "it is very lively.",
+            "nota": "la idea principal"
+          },
+          {
+            "texto": "The playground, which is on the corner,",
+            "nota": "dato extra entre comas"
+          },
+          {
+            "texto": "is full of families.",
+            "nota": "la idea principal continúa"
+          },
+          {
+            "texto": "Despite the traffic, the park is peaceful.",
+            "nota": "contraste corto: despite + sustantivo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Despite my neighbourhood is small, it is lively.",
+          "correcto": "Although my neighbourhood is small, it is lively.",
+          "explicacion": "Despite no va seguido de sujeto + verbo. Con una cláusula completa usa although."
+        },
+        {
+          "incorrecto": "The playground, who is on the corner, is full of families.",
+          "correcto": "The playground, which is on the corner, is full of families.",
+          "explicacion": "Who solo se usa con personas. El parque infantil es una cosa: which."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara describe su barrio a Carlos, que no lo conoce.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Tell me about your neighbourhood, Sara.",
+            "traduccion": "Cuéntame cómo es tu barrio, Sara."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Although it is small, it is very lively. The library, which is on the corner, is always full.",
+            "traduccion": "Aunque es pequeño, es muy animado. La biblioteca, que está en la esquina, siempre está llena."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Is it noisy?",
+            "traduccion": "¿Es ruidoso?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Despite the traffic, it is peaceful at night.",
+            "traduccion": "A pesar del tráfico, por la noche es tranquilo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo es el barrio de Sara por la noche?",
+          "opciones": [
+            {
+              "es": "Tranquilo, a pesar del tráfico."
+            },
+            {
+              "es": "Ruidoso por los coches."
+            },
+            {
+              "es": "Vacío porque todos viajan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Despite the traffic, it is peaceful at night». El tráfico existe, pero no impide que por la noche haya tranquilidad."
+        }
+      }
+    },
+    "en.n5.class-40": {
+      "explicacion": {
+        "titulo": "Guiar a una visita con oraciones complejas",
+        "texto": "Cuando recibes a una visita, tu trabajo es guiar y responder dudas con frases claras. Sigue este orden: 1) bienvenida (Welcome to…), 2) presenta cada lugar con un dato extra entre comas (The market, which opens at seven, …), 3) contrasta dos opciones con although o whereas, 4) recomienda con I recommend + lugar o -ing y explica si vale la pena (it is worth it). Ojo: worth va con -ing (worth visiting) y recommend también (I recommend visiting), nunca con to."
+      },
+      "patron": {
+        "texto": "Bienvenida + lugar con dato extra + contraste + recomendación:",
+        "formula": [
+          {
+            "texto": "Welcome to our neighbourhood!",
+            "nota": "bienvenida: welcome to + lugar"
+          },
+          {
+            "texto": "The market, which opens at seven,",
+            "nota": "lugar + dato extra entre comas"
+          },
+          {
+            "texto": "is lively, whereas the library is quiet.",
+            "nota": "contraste entre dos lugares"
+          },
+          {
+            "texto": "I recommend visiting the market.",
+            "nota": "recomendación: I recommend + -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I recommend to visit the old market.",
+          "correcto": "I recommend visiting the old market.",
+          "explicacion": "Después de recommend va un -ing (o un sustantivo), no to + verbo. Se dice I recommend visiting."
+        },
+        {
+          "incorrecto": "The castle is worth to visit.",
+          "correcto": "The castle is worth visiting.",
+          "explicacion": "Worth va seguido de -ing: worth visiting. En español «vale la pena visitar» lleva infinitivo, pero en inglés no."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo da la bienvenida a Sara, que visita su barrio por primera vez.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Welcome to our neighbourhood, Sara!",
+            "traduccion": "¡Bienvenida a nuestro barrio, Sara!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thank you. What do you recommend?",
+            "traduccion": "Gracias. ¿Qué me recomiendas?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The old market, which opens at seven. Although it is crowded, it is worth it.",
+            "traduccion": "El mercado antiguo, que abre a las siete. Aunque está lleno de gente, vale la pena."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the museum?",
+            "traduccion": "¿Y el museo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is expensive, whereas the market is free. I recommend the market first.",
+            "traduccion": "Es caro, mientras que el mercado es gratis. Te recomiendo primero el mercado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué recomienda Leo primero?",
+          "opciones": [
+            {
+              "es": "El mercado, que es gratis."
+            },
+            {
+              "es": "El museo, que es caro."
+            },
+            {
+              "es": "La biblioteca de la esquina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I recommend the market first». El museo es caro, mientras que el mercado es gratis."
+        }
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C39 (producción) y C40 (transferencia): modelos de escritura ampliados a 45 y 50 palabras; C39 incorpora la cláusula participial que exige el mapa (ENS nueva + explicación) y rúbrica con grupos de variantes.",
+      "Rúbricas cortas C37, C39, C40 flexibilizadas: neighbour/neighbor, quiet/quieter/peaceful/calm, noisy/noisier, which has/which is near, who works/who is my neighbour, worth it/worth visiting/worth seeing; C40 repaso ahora pide explícitamente although. Validadas con el simulador de corrección de la app (respuestas alternativas plausibles).",
+      "C37 repaso: eliminado el 4.º distractor de relleno; C40 practica: distractor que era defendible (although + dos lugares) sustituido por el error taught (although … whereas).",
+      "C36: feedback corregidos (playa, no mar; redacción de Although); C38: feedback sin ordinales. Dificultad: clases de forma accesibles para entrada a B2; sin P0/P1 pendientes."
+    ]
+  }
+}

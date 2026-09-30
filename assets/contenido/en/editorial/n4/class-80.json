@@ -1,0 +1,785 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-80",
+  "title": {
+    "en": "Chat with a visitor",
+    "es": "Conversar con un visitante"
+  },
+  "objectives": {
+    "es": [
+      "Conversar con un visitante: confirmar datos con tags, comparar con both y neither, y hacer preguntas de seguimiento."
+    ]
+  },
+  "concepts": [
+    "n4-culture-and-traditions-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-79"
+  ],
+  "usesVocabulary": [
+    "visitor",
+    "local",
+    "recommend",
+    "taste",
+    "interested",
+    "welcome",
+    "enjoy"
+  ],
+  "usesPatterns": [
+    "n4-culture-and-traditions-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "visitor",
+      "es": "visitante"
+    },
+    {
+      "en": "local",
+      "es": "local, del lugar"
+    },
+    {
+      "en": "recommend",
+      "es": "recomendar"
+    },
+    {
+      "en": "taste",
+      "es": "sabor, probar"
+    },
+    {
+      "en": "interested",
+      "es": "interesado"
+    },
+    {
+      "en": "welcome",
+      "es": "bienvenido"
+    },
+    {
+      "en": "enjoy",
+      "es": "disfrutar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-80.t01",
+      "en": "Welcome! You are a visitor here, aren't you?",
+      "es": "¡Bienvenido! Eres visitante aquí, ¿verdad?",
+      "explanationEs": "Un tag confirma lo que ya ves o supones; are → aren't you.",
+      "segments": [
+        "Welcome! You are a",
+        "visitor here, aren't you?"
+      ],
+      "audioText": "Welcome! You are a visitor here, aren't you?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-5"
+    },
+    {
+      "id": "en.n4.class-80.t02",
+      "en": "You haven't tried the local food, have you?",
+      "es": "No has probado la comida local, ¿verdad?",
+      "explanationEs": "Con haven't se repite have: haven't → have you.",
+      "segments": [
+        "You haven't tried the",
+        "local food, have you?"
+      ],
+      "audioText": "You haven't tried the local food, have you?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-5"
+    },
+    {
+      "id": "en.n4.class-80.t03",
+      "en": "Both of us are interested in old traditions.",
+      "es": "A los dos nos interesan las tradiciones antiguas.",
+      "explanationEs": "Both of us = los dos; el verbo va en plural.",
+      "segments": [
+        "Both of us are",
+        "interested in old traditions."
+      ],
+      "audioText": "Both of us are interested in old traditions.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-5"
+    },
+    {
+      "id": "en.n4.class-80.t04",
+      "en": "Neither of us likes the taste of spicy food.",
+      "es": "A ninguno de los dos nos gusta el sabor de la comida picante.",
+      "explanationEs": "Neither of us ya es negativo: el verbo va en afirmativo.",
+      "segments": [
+        "Neither of us likes the",
+        "taste of spicy food."
+      ],
+      "audioText": "Neither of us likes the taste of spicy food.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-5"
+    },
+    {
+      "id": "en.n4.class-80.t05",
+      "en": "I recommend the soup. Do you enjoy spicy food?",
+      "es": "Te recomiendo la sopa. ¿Disfrutas de la comida picante?",
+      "explanationEs": "Recomienda algo y añade una pregunta de seguimiento para seguir hablando.",
+      "segments": [
+        "I recommend the soup. Do",
+        "you enjoy spicy food?"
+      ],
+      "audioText": "I recommend the soup. Do you enjoy spicy food?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-culture-and-traditions-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c80.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Confirma que alguien es nuevo: «Eres nuevo aquí, ¿verdad?»"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "You are new here, don't you?"
+          },
+          {
+            "text": "You are new here, isn't it?"
+          },
+          {
+            "text": "You are new here, aren't you?"
+          }
+        ],
+        "teaches": [
+          "n4-culture-and-traditions-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.pg01.seed-0",
+          "feedback": {
+            "es": "La frase usa are con you, así que el tag es aren't you?"
+          },
+          "hint": {
+            "es": "El auxiliar es are y el pronombre, you."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e4d22dc8e54a454191bb338bc36a9fc7306000d0f629bf7c19ba5405906e5236"
+      },
+      {
+        "id": "en.n4.c80.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Me interesa la música local. — A mí también.»"
+        },
+        "answer": {
+          "text": "am",
+          "accepted": [
+            "am"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-culture-and-traditions-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.pg02.seed-0",
+          "feedback": {
+            "es": "La frase usa am, y la respuesta repite ese auxiliar: So am I."
+          },
+          "hint": {
+            "es": "Repite el auxiliar de la frase: I am → So … I."
+          },
+          "text": "I am interested in the local music. — So ___ I."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2d401d17fadddef929dc26dc910b99ba533c31e10f6e576a4f2d9cdec71d7127"
+      },
+      {
+        "id": "en.n4.c80.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué pregunta de seguimiento continúa la charla?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "What do you enjoy most about it?"
+          },
+          {
+            "text": "I love it too, isn't it?"
+          },
+          {
+            "text": "Neither do I."
+          }
+        ],
+        "teaches": [
+          "n4-culture-and-traditions-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.pg03.seed-0",
+          "feedback": {
+            "es": "Una pregunta de seguimiento pide más información y mantiene la conversación."
+          },
+          "hint": {
+            "es": "Una pregunta de seguimiento pide más información."
+          },
+          "text": "Visitor: I love the local soup."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c9ecfca589d40488a31de231706896c172bd14a28f9af4b61c77934dc3c2423e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c80.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No has visitado el mercado, ¿verdad?»"
+        },
+        "answer": {
+          "text": "have",
+          "accepted": [
+            "have"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.p01.seed-0",
+          "feedback": {
+            "es": "Haven't es negativo, así que el tag es afirmativo con el mismo auxiliar: have you."
+          },
+          "text": "You haven't visited the market, ___ you?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ea187d5d3e2d5a517d6aa9b1a26b2653550d999a1cd9e632928a54429cb16491"
+      },
+      {
+        "id": "en.n4.c80.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «A los dos nos interesan las tradiciones locales.»"
+        },
+        "answer": {
+          "text": "Both of us are interested in local traditions.",
+          "tokens": [
+            "Both",
+            "of",
+            "us",
+            "are",
+            "interested",
+            "in",
+            "local",
+            "traditions."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.p02.seed-0",
+          "feedback": {
+            "es": "Both of us lleva el verbo en plural: are interested in."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:78ee4bce0d47965a2ee83f122ed1390372da752f063aa0bc165ae69036972437"
+      },
+      {
+        "id": "en.n4.c80.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Responde a un visitante con «Yo tampoco»."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "So do I."
+          },
+          {
+            "text": "Neither do I."
+          },
+          {
+            "text": "Neither am I."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.p03.seed-0",
+          "feedback": {
+            "es": "La frase negativa con don't pide la respuesta Neither do I."
+          },
+          "text": "Visitor: I don't like noisy places."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7b15fdd716c21e7b680b1aa1a2dcfb7e11a05b83a466a5b57e376209a41d6dcc"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c80.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué probó Tom."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He ate the local soup."
+          },
+          {
+            "text": "He ate nothing."
+          },
+          {
+            "text": "He ate the sweet cake."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5",
+          "n4-culture-and-traditions-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.e01.seed-0",
+          "feedback": {
+            "es": "Tom no probó la sopa, pero sí el pastel, que le pareció delicioso."
+          },
+          "audio": "Mia asks Tom: You haven't tried the soup, have you? Tom says no, but he tried the cake, and it was delicious.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:220a00b3da37429c4ce1c0e96b3823f1de8ae5832dcc172e7646fab6d15ddd27"
+      },
+      {
+        "id": "en.n4.c80.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según Sara, ¿qué tienen en común ella y el visitante?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They like quiet festivals."
+          },
+          {
+            "text": "They like noisy places."
+          },
+          {
+            "text": "They prefer big festivals."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5",
+          "n4-culture-and-traditions-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.e02.seed-0",
+          "feedback": {
+            "es": "Sara dice que a ninguno de los dos les gustan los lugares ruidosos y que los dos prefieren festivales tranquilos."
+          },
+          "text": "Sara tells a visitor: 'Neither of us likes noisy places, and both of us prefer quiet festivals.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6be55ee0b95b54aacfed24c487de047956030e5dde4e585705754b55db6da497"
+      },
+      {
+        "id": "en.n4.c80.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa los dos tags de la charla con el visitante."
+        },
+        "answer": {
+          "text": "aren't | have",
+          "accepted": [
+            "aren't | have"
+          ],
+          "parts": [
+            {
+              "text": "aren't",
+              "accepted": [
+                "aren't"
+              ]
+            },
+            {
+              "text": "have",
+              "accepted": [
+                "have"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5",
+          "n4-culture-and-traditions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.e03.seed-0",
+          "feedback": {
+            "es": "La primera frase es afirmativa con are (aren't you); la segunda, negativa con haven't (have you)."
+          },
+          "sentences": [
+            "You are a visitor, ___ you?",
+            "You haven't tried the soup, ___ you?"
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          },
+          "text": "«Eres visitante, ¿verdad?» «No has probado la sopa, ¿verdad?»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0deedea5ff3f31920611bf124f4274f9870d469d222457968c28fa0e67e1ebfa"
+      },
+      {
+        "id": "en.n4.c80.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe tu charla: dos tags, una comparación y dos preguntas de seguimiento."
+        },
+        "answer": {
+          "text": "Welcome! You are a visitor, aren't you? You haven't tried the local soup, have you? Both of us are interested in old traditions, and neither of us likes noisy places. I recommend the soup. What do you enjoy most? Do you like spicy food?",
+          "accepted": [
+            "Welcome! You are a visitor, aren't you? You haven't tried the local soup, have you? Both of us are interested in old traditions, and neither of us likes noisy places. I recommend the soup. What do you enjoy most? Do you like spicy food?",
+            "You are new here, aren't you? You haven't tried the local soup, have you? We are both interested in local traditions, and neither of us likes noisy places. What do you like most? Do you enjoy spicy food?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5",
+          "n4-culture-and-traditions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.e04.seed-0",
+          "feedback": {
+            "es": "Una buena charla junta tags para confirmar datos, both of us o neither of us para comparar y preguntas de seguimiento para seguir hablando."
+          },
+          "text": "Hablas con un visitante. Confirma con un tag que es visitante y otro que no ha probado la sopa. Di que a los dos os interesan las tradiciones y que a ninguno le gustan los lugares ruidosos. Recomienda la sopa y haz dos preguntas: qué le gusta más y si le gusta la comida picante.",
+          "scoring": {
+            "wordRange": [
+              30,
+              80
+            ],
+            "evidenceGroups": [
+              [
+                "aren't you",
+                "haven't you",
+                "have you",
+                "don't you",
+                "isn't it"
+              ],
+              [
+                "both of us",
+                "we are both",
+                "we both",
+                "neither of us"
+              ],
+              [
+                "what do you",
+                "which do you",
+                "do you like",
+                "do you enjoy"
+              ],
+              [
+                "I recommend",
+                "soup",
+                "traditions"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:182bd8b3767c1c4adae0acf27be6a5fc9eddefe9a1d065ec69ed090646eb6157"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c80.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quieren hacer."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "They want to buy costumes."
+          },
+          {
+            "text": "They want to watch the parade."
+          },
+          {
+            "text": "They do not want to go."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.r01.seed-0",
+          "feedback": {
+            "es": "Both of us want to see the parade: a los dos les gustaría ver el desfile."
+          },
+          "audio": "Neither of us has a costume, but both of us want to see the parade.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b8cf4b9a9a2ef6fe0b4bd5f6a6547f06cead1a9371a28c7985b96ca676723b5e"
+      },
+      {
+        "id": "en.n4.c80.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué respuesta suena natural a «I love traditional dances»?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "So am I. Which one is your favourite?"
+          },
+          {
+            "text": "Neither do I. Which one is your favourite?"
+          },
+          {
+            "text": "So do I. Which one is your favourite?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.r02.seed-0",
+          "feedback": {
+            "es": "Love lleva do, así que la respuesta es So do I, y la pregunta continúa la charla."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4fb413c2616bba71a53dec80f85d0619151e09090e058df3ca31921a4467820d"
+      },
+      {
+        "id": "en.n4.c80.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una frase: a los dos os gusta el pastel dulce."
+        },
+        "answer": {
+          "text": "Both of us like the sweet cake.",
+          "accepted": [
+            "Both of us like the sweet cake.",
+            "We both like the sweet cake."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-culture-and-traditions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c80.r03.seed-0",
+          "feedback": {
+            "es": "Both of us + verbo en plural expresa que a los dos os gusta algo."
+          },
+          "text": "Idea: a los dos (both) os gusta el pastel (cake) dulce (sweet)."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:68de41cb7f0a123976d37d4236793102e2b212771f6b4507b11559cce2ca8c19"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c80.e01": {
+      "reteach": "en.n4.class-80.t01",
+      "review": "en.n4.c80.r01"
+    },
+    "en.n4.c80.e02": {
+      "reteach": "en.n4.class-80.t02",
+      "review": "en.n4.c80.r02"
+    },
+    "en.n4.c80.e03": {
+      "reteach": "en.n4.class-80.t03",
+      "review": "en.n4.c80.r03"
+    },
+    "en.n4.c80.e04": {
+      "reteach": "en.n4.class-80.t04",
+      "review": "en.n4.c80.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n4-culture-and-traditions-1",
+    "n4-culture-and-traditions-2",
+    "n4-culture-and-traditions-3",
+    "n4-culture-and-traditions-4",
+    "n4-culture-and-traditions-5"
+  ]
+}

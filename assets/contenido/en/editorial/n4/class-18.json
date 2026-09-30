@@ -1,0 +1,796 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-18",
+  "title": {
+    "en": "Clues in a small mystery",
+    "es": "Pistas en un pequeño misterio"
+  },
+  "objectives": {
+    "es": [
+      "Extraer pistas de una escena de misterio y relacionar cada pista con la deducción que realmente apoya (must have, might have, can't have)."
+    ]
+  },
+  "concepts": [
+    "n4-everyday-mysteries-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-17"
+  ],
+  "usesVocabulary": [
+    "cake",
+    "plate",
+    "crumbs",
+    "empty",
+    "muddy",
+    "footprints",
+    "clue",
+    "suspect"
+  ],
+  "usesPatterns": [
+    "n4-everyday-mysteries-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "cake",
+      "es": "pastel"
+    },
+    {
+      "en": "plate",
+      "es": "plato"
+    },
+    {
+      "en": "crumbs",
+      "es": "migas"
+    },
+    {
+      "en": "empty",
+      "es": "vacío"
+    },
+    {
+      "en": "muddy",
+      "es": "embarrado"
+    },
+    {
+      "en": "footprints",
+      "es": "huellas"
+    },
+    {
+      "en": "clue",
+      "es": "pista"
+    },
+    {
+      "en": "suspect",
+      "es": "sospechoso"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-18.t01",
+      "en": "The plate is empty and there are crumbs on the floor. Someone must have eaten the cake.",
+      "es": "El plato está vacío y hay migas en el suelo. Alguien debió de comerse el pastel.",
+      "explanationEs": "Pistas directas (plate, crumbs) permiten must have.",
+      "segments": [
+        "The plate is empty and there are crumbs on",
+        "the floor. Someone must have eaten the cake."
+      ],
+      "audioText": "The plate is empty and there are crumbs on the floor. Someone must have eaten the cake.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-3"
+    },
+    {
+      "id": "en.n4.class-18.t02",
+      "en": "There are muddy footprints by the back door. Someone might have come in from the garden.",
+      "es": "Hay huellas embarradas junto a la puerta de atrás. Alguien podría haber entrado desde el jardín.",
+      "explanationEs": "Una pista a medias (muddy) solo permite might have.",
+      "segments": [
+        "There are muddy footprints by the back door.",
+        "Someone might have come in from the garden."
+      ],
+      "audioText": "There are muddy footprints by the back door. Someone might have come in from the garden.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-3"
+    },
+    {
+      "id": "en.n4.class-18.t03",
+      "en": "The footprints are very small, so a tall man can't have made them.",
+      "es": "Las huellas son muy pequeñas, así que un hombre alto no puede haberlas hecho.",
+      "explanationEs": "Una pista que contradice la idea permite can't have.",
+      "segments": [
+        "The footprints are very small, so a",
+        "tall man can't have made them."
+      ],
+      "audioText": "The footprints are very small, so a tall man can't have made them.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-3"
+    },
+    {
+      "id": "en.n4.class-18.t04",
+      "en": "The footprints are a good clue: the thief could have been a child.",
+      "es": "Las huellas son una buena pista: el ladrón podría haber sido un niño.",
+      "explanationEs": "Could have been: una posibilidad con esa pista.",
+      "segments": [
+        "The footprints are a good clue: the",
+        "thief could have been a child."
+      ],
+      "audioText": "The footprints are a good clue: the thief could have been a child.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-3"
+    },
+    {
+      "id": "en.n4.class-18.t05",
+      "en": "Our main suspect is the dog, but the dog can't have opened the door.",
+      "es": "Nuestro principal sospechoso es el perro, pero el perro no puede haber abierto la puerta.",
+      "explanationEs": "Se descarta al sospechoso con can't have y una razón.",
+      "segments": [
+        "Our main suspect is the dog, but",
+        "the dog can't have opened the door."
+      ],
+      "audioText": "Our main suspect is the dog, but the dog can't have opened the door.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c18.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué deducción apoyan estas pistas?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Someone must have eaten the cake."
+          },
+          {
+            "text": "The cake can't have been eaten."
+          },
+          {
+            "text": "The plate might be in the garden."
+          }
+        ],
+        "teaches": [
+          "n4-everyday-mysteries-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.pg01.seed-0",
+          "feedback": {
+            "es": "Un plato vacío y migas en el suelo son pistas directas: apoyan una conclusión casi segura con must have."
+          },
+          "hint": {
+            "es": "Dos pistas directas llevan a una conclusión casi segura."
+          },
+          "text": "There are crumbs on the floor and the plate is empty."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:767f7d4c9837f09c4979b5634a0035b3025e1774fd4af340091d6be5eb1dd543"
+      },
+      {
+        "id": "en.n4.c18.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Las huellas son pequeñas: un adulto no puede haberlas hecho.»"
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't",
+            "couldn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-everyday-mysteries-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.pg02.seed-0",
+          "feedback": {
+            "es": "Que las huellas sean pequeñas contradice la idea del adulto: can't have."
+          },
+          "hint": {
+            "es": "Pregúntate si unas huellas pequeñas permiten que fuera un adulto."
+          },
+          "text": "The footprints are small, so an adult ___ have made them."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e613f3d338793e7bbf2aa2b8ce065063a6086b383eb1b22c33be6d9250b2542a"
+      },
+      {
+        "id": "en.n4.c18.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la conclusión prudente para una pista a medias."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Someone must have come in."
+          },
+          {
+            "text": "Someone might have come in."
+          },
+          {
+            "text": "Someone can't have come in."
+          }
+        ],
+        "teaches": [
+          "n4-everyday-mysteries-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.pg03.seed-0",
+          "feedback": {
+            "es": "Con una sola pista a medias solo se puede decir que es posible: might have."
+          },
+          "hint": {
+            "es": "Una sola pista a medias no permite estar seguro."
+          },
+          "text": "There are muddy footprints by the door."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:37bd1a1f0c5eff6afe3300dccb1e59eb3ef26de7beeb1c906f92b7f05a9dd7bc"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c18.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la idea que queda descartada."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Coming in through the back door."
+          },
+          {
+            "text": "Eating the cake in the garden."
+          },
+          {
+            "text": "Coming in through the window."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.p01.seed-0",
+          "feedback": {
+            "es": "Can't have come in through the window descarta esa vía de entrada."
+          },
+          "audio": "The window is closed and locked. The thief can't have come in through the window.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:afb6403596273248873a058cf64799363f99d4e5b8308b3d9130dcd89076e286"
+      },
+      {
+        "id": "en.n4.c18.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pista motiva la deducción."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The dog made a noise in the night."
+          },
+          {
+            "text": "The window was open."
+          },
+          {
+            "text": "The plate was empty."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.p02.seed-0",
+          "feedback": {
+            "es": "La pista es que el perro ladraba a medianoche; de ahí la posibilidad (might have been)."
+          },
+          "audio": "The dog was barking at midnight. Someone might have been in the garden.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5e173074f062e7452e3bfd7f4c9e80fc797fef30c79505a1a8efa2907655a35b"
+      },
+      {
+        "id": "en.n4.c18.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada pista con la deducción que apoya."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "There are muddy footprints.",
+              {
+                "es": "Alguien pudo entrar por el jardín."
+              }
+            ],
+            [
+              "The plate is empty and there are crumbs.",
+              {
+                "es": "Alguien se comió el pastel, casi seguro."
+              }
+            ],
+            [
+              "The footprints are too small for a man.",
+              {
+                "es": "Un hombre no pudo dejarlas."
+              }
+            ],
+            [
+              "The back door is locked.",
+              {
+                "es": "Nadie pudo entrar por ahí."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.p03.seed-0",
+          "feedback": {
+            "es": "Cada pista apoya un grado distinto: posible, casi seguro o descartado."
+          },
+          "pairs": [
+            [
+              "There are muddy footprints.",
+              {
+                "es": "Alguien pudo entrar por el jardín."
+              }
+            ],
+            [
+              "The plate is empty and there are crumbs.",
+              {
+                "es": "Alguien se comió el pastel, casi seguro."
+              }
+            ],
+            [
+              "The footprints are too small for a man.",
+              {
+                "es": "Un hombre no pudo dejarlas."
+              }
+            ],
+            [
+              "The back door is locked.",
+              {
+                "es": "Nadie pudo entrar por ahí."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a580f6d2a9944a14271a154a90db3d99f61b2e6725440b66c44c5720d317240a"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c18.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué concluye la persona."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The bike was never at home."
+          },
+          {
+            "text": "Someone took the bike, almost certainly."
+          },
+          {
+            "text": "The bike will be back tomorrow."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.e01.seed-0",
+          "feedback": {
+            "es": "Must have taken indica una conclusión casi segura: alguien se llevó la bicicleta."
+          },
+          "audio": "My bike is gone and the door is open. There are fresh footprints on the path, so a thief must have taken it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1ed04c310bf846e0b2d18b33d568db576d5b98a632d863f362c508bab175cbe0"
+      },
+      {
+        "id": "en.n4.c18.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la deducción que respaldan estas pistas."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The person must have come in through the window."
+          },
+          {
+            "text": "The person can't have used the back door."
+          },
+          {
+            "text": "The person can't have come in through the window."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.e02.seed-0",
+          "feedback": {
+            "es": "La ventana cerrada y las huellas junto a la puerta descartan la ventana: can't have come in."
+          },
+          "text": "The window is closed. The footprints are by the back door."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:981f9ad2568b7033ee5d373d344351f6755547674234dfab9ab6cc2c43d2801a"
+      },
+      {
+        "id": "en.n4.c18.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Las huellas empiezan en el jardín: alguien pudo entrar por ahí.»"
+        },
+        "answer": {
+          "text": "might",
+          "accepted": [
+            "might",
+            "could"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.e03.seed-0",
+          "feedback": {
+            "es": "Las huellas son una pista a medias: solo permiten una posibilidad, might have."
+          },
+          "text": "The footprints start in the garden, so someone ___ have come in from there."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7f5974235dbc5994c2cd2cc3f62cf819a6929398ca945bd801692e27e10f1b35"
+      },
+      {
+        "id": "en.n4.c18.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El gato no puede haberse comido todo el pastel.»"
+        },
+        "answer": {
+          "text": "The cat can't have eaten the whole cake",
+          "tokens": [
+            "The",
+            "cat",
+            "can't",
+            "have",
+            "eaten",
+            "the",
+            "whole",
+            "cake"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.e04.seed-0",
+          "feedback": {
+            "es": "Un gato pequeño no come un pastel entero: se descarta con can't have + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8a1f07b5847d4352c7c14db7b3e804fe9ebb53310f955802f93c6dceb599e34e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c18.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase sobre el pasado bien formada."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They might have lost the map."
+          },
+          {
+            "text": "They might lost the map."
+          },
+          {
+            "text": "They might has lost the map."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.r01.seed-0",
+          "feedback": {
+            "es": "Para una posibilidad pasada se usa might have + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7234ce7b6786ad22431367bdd5c558c251970182c59aa42eb8e938dcadafdbf9"
+      },
+      {
+        "id": "en.n4.c18.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No estoy segura, pero puede que esté en su cuarto.»"
+        },
+        "answer": {
+          "text": "might",
+          "accepted": [
+            "might",
+            "could"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.r02.seed-0",
+          "feedback": {
+            "es": "Con «no estoy segura» se usa might o could: solo es una posibilidad."
+          },
+          "text": "I am not sure, but she ___ be in her room."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9ea4e82045f63fc42de80322d5f55bfda243ac9a12fdbba50011728682822da2"
+      },
+      {
+        "id": "en.n4.c18.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué tipo de frase es."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "a question"
+          },
+          {
+            "text": "advice"
+          },
+          {
+            "text": "a complaint"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c18.r03.seed-0",
+          "feedback": {
+            "es": "If I were you, I would… es la fórmula para dar un consejo."
+          },
+          "audio": "If I were you, I would call her today.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:615f33a03f3c107e8df7f7ea3826e3eb358b4e2e3ae5f5c64d0036c9d95986ee"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c18.e01": {
+      "reteach": "en.n4.class-18.t01",
+      "review": "en.n4.c18.r01"
+    },
+    "en.n4.c18.e02": {
+      "reteach": "en.n4.class-18.t02",
+      "review": "en.n4.c18.r02"
+    },
+    "en.n4.c18.e03": {
+      "reteach": "en.n4.class-18.t03",
+      "review": "en.n4.c18.r03"
+    },
+    "en.n4.c18.e04": {
+      "reteach": "en.n4.class-18.t04",
+      "review": "en.n4.c18.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,620 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "classes": {
+    "en.n4.class-81": {
+      "explicacion": {
+        "titulo": "Hecho confirmado o información sin comprobar",
+        "texto": "Una noticia puede presentar algo como un hecho o como información sin comprobar. El hecho usa verbos directos y una fuente oficial: The mayor announced… La información dudosa lleva una señal: apparently y reportedly (adverbios al inicio, con coma), it seems that + oración, o may + verbo. Estas palabras no dicen «es falso»: dicen «todavía no está confirmado». Ojo: apparently no significa «claramente», sino «según parece»."
+      },
+      "patron": {
+        "texto": "Tres formas de restar certeza:",
+        "formula": [
+          {
+            "texto": "Apparently, the road is closed.",
+            "nota": "adverbio + coma + noticia: al parecer"
+          },
+          {
+            "texto": "It seems that the road is closed.",
+            "nota": "it seems that + oración completa: parece que"
+          },
+          {
+            "texto": "The road may be closed.",
+            "nota": "sujeto + may + verbo base: puede que"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Seems that the festival is cancelled.",
+          "correcto": "It seems that the festival is cancelled.",
+          "explicacion": "En español se omite el sujeto («parece que»). En inglés seems necesita it delante."
+        },
+        {
+          "incorrecto": "The team may to play tonight.",
+          "correcto": "The team may play tonight.",
+          "explicacion": "Después de may va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Leo una noticia que vio sobre el nuevo puente de la ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Did you see the news? Apparently, the new bridge will open on Monday.",
+            "traduccion": "¿Viste la noticia? Al parecer, el nuevo puente abrirá el lunes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Is that official?",
+            "traduccion": "¿Es oficial?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Not yet. The mayor has not announced anything.",
+            "traduccion": "Todavía no. El alcalde no ha anunciado nada."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So it may open later.",
+            "traduccion": "Entonces puede que abra más tarde."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. It seems that the workers need one more week.",
+            "traduccion": "Sí. Parece que los trabajadores necesitan una semana más."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Ana no presenta la apertura del puente como un hecho?",
+          "opciones": [
+            {
+              "es": "Porque Leo vio el puente cerrado."
+            },
+            {
+              "es": "Porque el alcalde todavía no ha anunciado nada."
+            },
+            {
+              "es": "Porque los trabajadores ya terminaron la obra."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana dice que el alcalde «has not announced anything». Sin anuncio oficial, la fecha es solo información no comprobada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal",
+          "Grado de certeza"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "announced, confirmed"
+            },
+            {
+              "texto": "hecho confirmado"
+            }
+          ],
+          [
+            {
+              "texto": "apparently, reportedly"
+            },
+            {
+              "texto": "información de fuente no comprobada"
+            }
+          ],
+          [
+            {
+              "texto": "it seems that, may"
+            },
+            {
+              "texto": "posibilidad, no seguro"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-82": {
+      "explicacion": {
+        "titulo": "Atribuir y suavizar: according to, seems, appears",
+        "texto": "Hay dos maneras de no dar una noticia como segura. La primera atribuye: According to + fuente, + noticia (According to the police, …). La información es de la fuente, no tuya: según se usa para otra persona o institución, no para tu opinión (para eso, I think). La segunda suaviza: It seems that + oración, o sujeto + seems/appears + to + verbo (The driver appears to be fine). Ojo: according siempre lleva to, y con un sujeto propio delante de seems/appears va to + verbo, nunca that."
+      },
+      "patron": {
+        "texto": "Atribuir o suavizar:",
+        "formula": [
+          {
+            "texto": "According to the police, the fire started there.",
+            "nota": "according to + fuente, + noticia"
+          },
+          {
+            "texto": "It seems that the driver is fine.",
+            "nota": "it seems that + sujeto + verbo"
+          },
+          {
+            "texto": "The driver seems to be fine.",
+            "nota": "sujeto + seems/appears + to + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According the police, the fire started in the kitchen.",
+          "correcto": "According to the police, the fire started in the kitchen.",
+          "explicacion": "«Según la policía» no lleva preposición en español, pero en inglés according siempre va con to."
+        },
+        {
+          "incorrecto": "The driver seems that he is fine.",
+          "correcto": "The driver seems to be fine.",
+          "explicacion": "Con un sujeto delante (the driver), seems va con to + verbo. La forma con that solo existe con it: It seems that the driver is fine."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom hablan de un incendio que vieron en las noticias.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What happened at the shop?",
+            "traduccion": "¿Qué pasó en la tienda?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "According to the police, the fire started in the kitchen.",
+            "traduccion": "Según la policía, el incendio empezó en la cocina."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is everyone safe?",
+            "traduccion": "¿Están todos a salvo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The owner appears to be fine, but nobody has confirmed it.",
+            "traduccion": "El dueño parece estar bien, pero nadie lo ha confirmado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So we only know one thing for sure.",
+            "traduccion": "Entonces solo sabemos una cosa con seguridad."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. The police said where the fire started.",
+            "traduccion": "Sí. La policía dijo dónde empezó el incendio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato se atribuye a una fuente concreta?",
+          "opciones": [
+            {
+              "es": "Que el dueño de la tienda está bien."
+            },
+            {
+              "es": "Que todos están a salvo."
+            },
+            {
+              "es": "Dónde empezó el incendio, según la policía."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Tom dice «According to the police, the fire started in the kitchen». Lo del dueño lo suaviza con appears to y nadie lo ha confirmado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "According to + fuente"
+            },
+            {
+              "texto": "According to a witness, the man ran out."
+            }
+          ],
+          [
+            {
+              "texto": "It seems that + oración"
+            },
+            {
+              "texto": "It seems that the driver is fine."
+            }
+          ],
+          [
+            {
+              "texto": "Sujeto + seems to + verbo"
+            },
+            {
+              "texto": "The storm seems to be moving away."
+            }
+          ],
+          [
+            {
+              "texto": "Sujeto + appears to + verbo"
+            },
+            {
+              "texto": "The driver appears to be fine."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-83": {
+      "explicacion": {
+        "titulo": "Hecho o versión: qué oyes y qué significa",
+        "texto": "Para entender una noticia oída, separa el hecho de la versión. El hecho llega con una confirmación: The council confirmed… Una versión la presenta alguien y quien informa no la garantiza: claims, says, denies, allegedly. También bajan la certeza frases como «there is no evidence» o «it is unclear». Si dos partes cuentan cosas opuestas (la empresa afirma, los trabajadores niegan), ninguna es todavía un hecho. Ojo: después de deny va -ing o that, no to + verbo."
+      },
+      "patron": {
+        "texto": "Hecho o versión en una noticia:",
+        "formula": [
+          {
+            "texto": "The council confirmed the date.",
+            "nota": "hecho: fuente oficial y verbo directo"
+          },
+          {
+            "texto": "The company claims the mistake was small.",
+            "nota": "versión: claims, says, denies, allegedly"
+          },
+          {
+            "texto": "There is no evidence yet.",
+            "nota": "señal de que todavía no es un hecho"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are no evidences yet.",
+          "correcto": "There is no evidence yet.",
+          "explicacion": "En español «pruebas» es plural, pero evidence es incontable en inglés: no lleva -s ni se cuenta."
+        },
+        {
+          "incorrecto": "The club denies to know the story.",
+          "correcto": "The club denies knowing the story.",
+          "explicacion": "Después de deny se usa -ing o that + oración, no to + verbo como en español («niega saber»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos comentan en el recreo la noticia sobre el nuevo entrenador del club.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I heard the news about the club. Did the club confirm the new coach?",
+            "traduccion": "Oí la noticia sobre el club. ¿Confirmó el club al nuevo entrenador?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No. The club denies it, but a reporter claims it is a fact.",
+            "traduccion": "No. El club lo niega, pero un reportero afirma que es un hecho."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So who is right?",
+            "traduccion": "¿Entonces quién tiene razón?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It is unclear. There is no evidence yet.",
+            "traduccion": "No está claro. Todavía no hay pruebas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then it is only a version, not a fact.",
+            "traduccion": "Entonces es solo una versión, no un hecho."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué la noticia del nuevo entrenador todavía no es un hecho?",
+          "opciones": [
+            {
+              "es": "Porque el club lo niega y todavía no hay pruebas."
+            },
+            {
+              "es": "Porque el reportero cambió su versión."
+            },
+            {
+              "es": "Porque el club confirmó otra fecha."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice que el club lo niega y que no hay pruebas. Sin confirmación ni pruebas, lo del reportero es solo una versión."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal que oyes",
+          "Qué indica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "confirmed, announced"
+            },
+            {
+              "texto": "hecho"
+            }
+          ],
+          [
+            {
+              "texto": "claims, says, denies"
+            },
+            {
+              "texto": "versión de alguien"
+            }
+          ],
+          [
+            {
+              "texto": "allegedly, reportedly"
+            },
+            {
+              "texto": "versión sin pruebas"
+            }
+          ],
+          [
+            {
+              "texto": "no evidence, unclear"
+            },
+            {
+              "texto": "todavía no es un hecho"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-84": {
+      "explicacion": {
+        "titulo": "Un resumen prudente en tres capas",
+        "texto": "Un resumen cauteloso tiene tres capas. Primero, los hechos confirmados, en afirmativo (A blackout left…). Después, la fuente: according to…, a spokesperson said that… Por último, lo no comprobado con reportedly, apparently o may, y una frase de estado con so far: So far, nobody has confirmed the cause. Usa however para separar lo seguro de lo incierto. No pongas señales de duda delante de un hecho ya confirmado, y con so far usa el present perfect, no el presente."
+      },
+      "patron": {
+        "texto": "Hecho + fuente + cautela:",
+        "formula": [
+          {
+            "texto": "A blackout left the city without power.",
+            "nota": "hecho confirmado, sin señales de duda"
+          },
+          {
+            "texto": "A spokesperson said that workers are repairing the lines.",
+            "nota": "fuente: quién lo dice"
+          },
+          {
+            "texto": "Reportedly, a fire caused it; so far, nobody has confirmed it.",
+            "nota": "cautela + estado actual de la información"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "So far, the company doesn't give any update.",
+          "correcto": "So far, the company has given no update.",
+          "explicacion": "En español «hasta ahora no da» usa presente, pero so far pide present perfect: has given."
+        },
+        {
+          "incorrecto": "A spokesperson said me that power may return tonight.",
+          "correcto": "A spokesperson said that power may return tonight.",
+          "explicacion": "Con said no se pone persona detrás: said that. Para nombrar a la persona se usa told me."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana lee a Leo el resumen de una noticia que va a publicar en la web de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Let me read my summary. A blackout left part of the city without power last night.",
+            "traduccion": "Déjame leer mi resumen. Un apagón dejó parte de la ciudad sin luz anoche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good. Is that a fact?",
+            "traduccion": "Bien. ¿Eso es un hecho?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. A spokesperson said that workers are still repairing the lines. Reportedly, a fire caused it.",
+            "traduccion": "Sí. Un portavoz dijo que los trabajadores todavía reparan las líneas. Según se informa, lo causó un incendio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Add this: so far, nobody has confirmed the cause.",
+            "traduccion": "Añade esto: hasta ahora, nadie ha confirmado la causa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe añadir Ana a su resumen?",
+          "opciones": [
+            {
+              "es": "Que un incendio causó el apagón."
+            },
+            {
+              "es": "Que hasta ahora nadie ha confirmado la causa."
+            },
+            {
+              "es": "Que el portavoz confirmó la causa."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Leo pide añadir «so far, nobody has confirmed the cause». El incendio ya aparece en el resumen y el portavoz solo habló de las reparaciones."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del resumen",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "A blackout left part of the city without power."
+            }
+          ],
+          [
+            {
+              "texto": "Fuente"
+            },
+            {
+              "texto": "A spokesperson said that workers are repairing."
+            }
+          ],
+          [
+            {
+              "texto": "Cautela"
+            },
+            {
+              "texto": "Reportedly, a fire caused it."
+            }
+          ],
+          [
+            {
+              "texto": "Estado"
+            },
+            {
+              "texto": "So far, nobody has confirmed the cause."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-85": {
+      "explicacion": {
+        "titulo": "Una noticia que cambia: decir, corregir, actualizar",
+        "texto": "Cuando una noticia cambia, haces tres cosas: cuentas lo que se decía (Earlier, a reporter said…), corriges con cortesía (Actually, the latest update says… / Let me correct that…) y actualizas manteniendo la cautela (It seems that… / apparently). Ojo con dos falsos amigos: actually no significa «actualmente», sino «en realidad»; «actualmente» se dice at the moment. Y «en vez de» con un nombre es instead of, no instead solo."
+      },
+      "patron": {
+        "texto": "Antes + corrección + actualización:",
+        "formula": [
+          {
+            "texto": "Earlier, a reporter said the bridge was closed.",
+            "nota": "antes: lo que se decía, en pasado"
+          },
+          {
+            "texto": "Actually, the latest update says it is open.",
+            "nota": "corrección: actually + el dato nuevo"
+          },
+          {
+            "texto": "It seems that the police closed a small road instead.",
+            "nota": "actualización prudente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Actually, we wait for the latest update.",
+          "correcto": "At the moment, we are waiting for the latest update.",
+          "explicacion": "Actually no es «actualmente»: significa «en realidad». Para «ahora mismo» se usa at the moment."
+        },
+        {
+          "incorrecto": "The police closed a small road instead the bridge.",
+          "correcto": "The police closed a small road instead of the bridge.",
+          "explicacion": "Antes de un nombre, «en vez de» se dice instead of. Instead solo va al final o al inicio de la frase."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom cuenta una noticia y Mia le dice que ya cambió.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you hear? Earlier, a reporter said the bridge was closed.",
+            "traduccion": "¿Te enteraste? Hace un rato, un reportero dijo que el puente estaba cerrado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Actually, the latest update says it is open again.",
+            "traduccion": "En realidad, la última novedad dice que está abierto otra vez."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh, sorry. Then the first report was a mistake.",
+            "traduccion": "Ay, perdón. Entonces la primera noticia fue un error."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No problem. Apparently, the police closed a small road instead.",
+            "traduccion": "No pasa nada. Al parecer, la policía cerró una calle pequeña en su lugar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato nuevo da Mia sobre el puente?",
+          "opciones": [
+            {
+              "es": "Que la policía cerró el puente."
+            },
+            {
+              "es": "Que el puente nunca salió en las noticias."
+            },
+            {
+              "es": "Que el puente está abierto otra vez."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Mia dice «the latest update says it is open again». Lo de la calle pequeña es lo que cerró la policía, no el puente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Contar lo de antes"
+            },
+            {
+              "texto": "Earlier, a reporter said…"
+            }
+          ],
+          [
+            {
+              "texto": "Corregir"
+            },
+            {
+              "texto": "Actually, the latest update says…"
+            }
+          ],
+          [
+            {
+              "texto": "Rectificar"
+            },
+            {
+              "texto": "Let me correct that…"
+            }
+          ],
+          [
+            {
+              "texto": "Actualizar con cautela"
+            },
+            {
+              "texto": "It seems that… / Apparently, …"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Bloque alineado con el mapa N4 81-85 (certeza, atribución, comprensión, resumen prudente, noticia que cambia) y con progresión entre clases.",
+      "C81: añadida variante rumor (ortografía EE. UU.) al ítem de completar; C82: explicación corregida (según no se usa para la opinión propia), rúbrica de escritura flexibilizada (thief/robber, bike/bicycle, it appears that), feedback corregidos, aceptada 'like'.",
+      "C83: diálogo más claro (Did the club confirm…), relacionar sin solapes (dicho sin pruebas / no hay respuesta clara), pista de guiada útil, erratas en feedback corregidas.",
+      "C84: 'without light' sustituido por 'without power' (inglés natural), distractor corregido, tarea de escritura ampliada a ~40 palabras con tres marcadores de cautela, rúbrica flexible.",
+      "C85: diálogo sin incoherencia, consigna de guiada clara, escritura ampliada a ~40 palabras (política: ≥50 % del mínimo del mapa), rúbricas con variantes.",
+      "Sin P0/P1 pendientes; P2 aceptados: distractores muy simples en guiada C81 e ítems de completar que repiten frases de la enseñanza."
+    ]
+  }
+}

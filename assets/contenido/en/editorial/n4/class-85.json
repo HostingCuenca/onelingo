@@ -1,0 +1,823 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-85",
+  "title": {
+    "en": "Share a developing story",
+    "es": "Compartir una noticia en desarrollo"
+  },
+  "objectives": {
+    "es": [
+      "Contar una noticia que cambia: decir lo que se contaba antes, corregirlo con cortesía y actualizar con prudencia."
+    ]
+  },
+  "concepts": [
+    "n4-news-and-certainty-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-84"
+  ],
+  "usesVocabulary": [
+    "earlier",
+    "latest",
+    "actually",
+    "instead",
+    "correct",
+    "mistake",
+    "update",
+    "apparently"
+  ],
+  "usesPatterns": [
+    "n4-news-and-certainty-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "earlier",
+      "es": "antes / hace un rato"
+    },
+    {
+      "en": "latest",
+      "es": "último"
+    },
+    {
+      "en": "actually",
+      "es": "en realidad"
+    },
+    {
+      "en": "instead",
+      "es": "en su lugar"
+    },
+    {
+      "en": "correct",
+      "es": "corregir"
+    },
+    {
+      "en": "mistake",
+      "es": "error"
+    },
+    {
+      "en": "update",
+      "es": "novedad"
+    },
+    {
+      "en": "apparently",
+      "es": "al parecer"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-85.t01",
+      "en": "Earlier, a reporter said that the bridge was closed.",
+      "es": "Hace un rato, un reportero dijo que el puente estaba cerrado.",
+      "explanationEs": "Earlier abre lo que se decía antes. El verbo va en pasado.",
+      "segments": [
+        "Earlier, a reporter said that",
+        "the bridge was closed."
+      ],
+      "audioText": "Earlier, a reporter said that the bridge was closed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-5"
+    },
+    {
+      "id": "en.n4.class-85.t02",
+      "en": "The latest update says that the bridge is open again.",
+      "es": "La última novedad dice que el puente está abierto otra vez.",
+      "explanationEs": "Latest = último, el más reciente. The latest update reemplaza lo anterior.",
+      "segments": [
+        "The latest update says that",
+        "the bridge is open again."
+      ],
+      "audioText": "The latest update says that the bridge is open again.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-5"
+    },
+    {
+      "id": "en.n4.class-85.t03",
+      "en": "Actually, the first report was a mistake: the bridge was never closed.",
+      "es": "En realidad, la primera noticia fue un error: el puente nunca estuvo cerrado.",
+      "explanationEs": "Actually = en realidad (no «actualmente»). Introduce una corrección.",
+      "segments": [
+        "Actually, the first report was a",
+        "mistake: the bridge was never closed."
+      ],
+      "audioText": "Actually, the first report was a mistake: the bridge was never closed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-5"
+    },
+    {
+      "id": "en.n4.class-85.t04",
+      "en": "Apparently, the police closed a small road instead.",
+      "es": "Al parecer, la policía cerró una calle pequeña en su lugar.",
+      "explanationEs": "Instead = en su lugar. Con un nombre delante se dice instead of.",
+      "segments": [
+        "Apparently, the police closed",
+        "a small road instead."
+      ],
+      "audioText": "Apparently, the police closed a small road instead.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-5"
+    },
+    {
+      "id": "en.n4.class-85.t05",
+      "en": "Let me correct that: the fire was in the next street.",
+      "es": "Déjame corregirlo: el incendio fue en la calle de al lado.",
+      "explanationEs": "Let me correct that es una forma educada de rectificar un dato.",
+      "segments": [
+        "Let me correct that: the fire",
+        "was in the next street."
+      ],
+      "audioText": "Let me correct that: the fire was in the next street.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-news-and-certainty-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c85.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Quieres corregir un dato. ¿Qué frase introduce bien la corrección?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "At the moment, the road is wrong."
+          },
+          {
+            "text": "Actually, the latest update says the road is open."
+          },
+          {
+            "text": "Instead the update, the road is open."
+          }
+        ],
+        "teaches": [
+          "n4-news-and-certainty-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.pg01.seed-0",
+          "feedback": {
+            "es": "Actually introduce un dato distinto de lo dicho antes. At the moment significa ahora mismo y instead the no existe."
+          },
+          "hint": {
+            "es": "Busca la palabra que introduce un dato distinto de lo que se dijo antes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7bfd0c4c3e6c7aa1a20df1b0d5a988e6c0e2b0a3e74b12f59431e8e9ab0c4bcb"
+      },
+      {
+        "id": "en.n4.c85.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La policía cerró una calle pequeña en vez del puente.»"
+        },
+        "answer": {
+          "text": "instead of",
+          "accepted": [
+            "instead of"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-news-and-certainty-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.pg02.seed-0",
+          "feedback": {
+            "es": "Instead of + nombre significa en vez de: aquí, una calle pequeña en lugar del puente."
+          },
+          "hint": {
+            "es": "Es una expresión de dos palabras para cambiar una opción por otra."
+          },
+          "text": "The police closed a small road ___ the bridge."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6c771423137e7a64cb5cdf70ff5fcdf8456135148e13501bbd1da8ad309d4ff9"
+      },
+      {
+        "id": "en.n4.c85.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Déjame corregirlo: el incendio fue en la calle de al lado.»"
+        },
+        "answer": {
+          "text": "Let me correct that the fire was in the next street",
+          "tokens": [
+            "Let",
+            "me",
+            "correct",
+            "that",
+            "the",
+            "fire",
+            "was",
+            "in",
+            "the",
+            "next",
+            "street"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-news-and-certainty-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.pg03.seed-0",
+          "feedback": {
+            "es": "Let me correct that es la fórmula para rectificar, y después va el dato correcto con su propio sujeto y verbo."
+          },
+          "hint": {
+            "es": "Empieza con la fórmula para rectificarte y después da el dato."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:981006ea81daa7f07c35d5d66b5d5a0ec41723a16919f75880f0e46784ee2e49"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c85.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cuándo será el concierto."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "On Friday, as planned."
+          },
+          {
+            "text": "It will not happen."
+          },
+          {
+            "text": "The day after Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.p01.seed-0",
+          "feedback": {
+            "es": "Earlier se cuenta la versión antigua y actually la corrige: el concierto es el sábado, el día después del viernes."
+          },
+          "audio": "Earlier, a friend said the concert was cancelled. Actually, the concert is on Saturday instead of Friday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b5ce60a35503b4a06a84285368099b3c8724668f9f38ab343ace0585174bae3a"
+      },
+      {
+        "id": "en.n4.c85.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que actualiza la noticia con prudencia."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Apparently, the bus has arrived, but the station has not confirmed it."
+          },
+          {
+            "text": "The bus has arrived for sure."
+          },
+          {
+            "text": "The bus is still late, and that is a fact."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.p02.seed-0",
+          "feedback": {
+            "es": "El conductor lo dice pero la estación no lo ha confirmado: apparently actualiza la noticia sin darla por segura."
+          },
+          "text": "Earlier, people said the bus was late. A driver now says it has arrived, but the station has not confirmed it."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ba1305e925c2ff1b74a4cd2f86167bcbbe78a3d62cc3b459696e885997985848"
+      },
+      {
+        "id": "en.n4.c85.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Perdona, fue un error. El partido es el domingo.»"
+        },
+        "answer": {
+          "text": "mistake",
+          "accepted": [
+            "mistake"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.p03.seed-0",
+          "feedback": {
+            "es": "Mistake = error. Sirve para admitir que el dato anterior era incorrecto."
+          },
+          "text": "Sorry, that was a ___. The match is on Sunday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f559d7785fede3ed7c48c60d0964e298764ac3d37de586b26c219f0090f01dcc"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c85.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige a qué hora abre la escuela."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "At nine."
+          },
+          {
+            "text": "An hour after nine."
+          },
+          {
+            "text": "It stays closed today."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5",
+          "n4-news-and-certainty-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.e01.seed-0",
+          "feedback": {
+            "es": "La novedad más reciente corrige a quienes dijeron que estaba cerrada: abre a las diez, una hora después de las nueve."
+          },
+          "audio": "Earlier, some people said the school was closed. Actually, the latest update says it opens at ten. The director has not confirmed the reason.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:78b5117621111897e16ad25d35a26b41c91255f5b37913249293279f4938e5a5"
+      },
+      {
+        "id": "en.n4.c85.e02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe cuatro frases para corregir a tu amigo sobre el concierto."
+        },
+        "answer": {
+          "text": "Earlier, people said that the concert tonight was cancelled. Actually, the latest update says that it is still on. It seems that it starts an hour later, but nobody has explained why. Apparently, the band arrived late, but that is not confirmed.",
+          "accepted": [
+            "Earlier, people said that the concert tonight was cancelled. Actually, the latest update says that it is still on. It seems that it starts an hour later, but nobody has explained why. Apparently, the band arrived late, but that is not confirmed.",
+            "At first, people said the concert was cancelled. Actually, the new update says it is on. It appears that it starts an hour later, but nobody has said why. A neighbour says the band was late, but nobody has confirmed it."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5",
+          "n4-news-and-certainty-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.e02.seed-0",
+          "feedback": {
+            "es": "La respuesta cuenta lo que se decía, corrige con actually, da el dato nuevo con it seems that o apparently y deja sin confirmar lo del vecino."
+          },
+          "text": "Charla: un amigo dice que el concierto de esta noche está cancelado; lo oyó antes. La última novedad dice que sigue en pie, pero empieza una hora más tarde; nadie ha explicado por qué. Un vecino dice que la banda llegó tarde, pero no está confirmado. Escribe cuatro frases: lo que se decía, la corrección con actually, el dato nuevo con prudencia y lo del vecino.",
+          "scoring": {
+            "wordRange": [
+              30,
+              90
+            ],
+            "evidenceGroups": [
+              [
+                "earlier",
+                "at first",
+                "before"
+              ],
+              [
+                "actually"
+              ],
+              [
+                "latest update",
+                "new update",
+                "last update",
+                "latest news"
+              ],
+              [
+                "seems",
+                "appears",
+                "apparently",
+                "may",
+                "reportedly"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c053ac2749cdab85d1e26086fb92f1a311592b551e930ffaa3c93d4fce8bd20d"
+      },
+      {
+        "id": "en.n4.c85.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Según un vecino, hubo un incendio. Parece que nadie está herido.»"
+        },
+        "answer": {
+          "text": "to | seems",
+          "accepted": [
+            "to | seems"
+          ],
+          "parts": [
+            {
+              "text": "to",
+              "accepted": [
+                "to"
+              ]
+            },
+            {
+              "text": "seems",
+              "accepted": [
+                "seems",
+                "appears"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5",
+          "n4-news-and-certainty-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.e03.seed-0",
+          "feedback": {
+            "es": "La fuente se atribuye con according to y la impresión sobre los heridos se suaviza con it seems that."
+          },
+          "sentences": [
+            "According ___ a neighbour, there was a fire.",
+            "It ___ that nobody is hurt."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5cb6b99c0cf951713976bf085d24b13fc8fec2076b6d3e6479d2fdd7c00d9a1b"
+      },
+      {
+        "id": "en.n4.c85.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué debes decir a un amigo sobre el parque?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The park is closed, and that is a fact."
+          },
+          {
+            "text": "The park is open, because the reporter is wrong."
+          },
+          {
+            "text": "It is unclear: a reporter and the council say different things."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5",
+          "n4-news-and-certainty-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.e04.seed-0",
+          "feedback": {
+            "es": "Dos partes dicen cosas opuestas y no hay foto: el dato no está claro. Las otras respuestas eligen un bando sin pruebas."
+          },
+          "text": "A reporter said the park is closed. The council says it is open. There is no photo yet."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8deabab0f43974a9acdd2a9b4ab6a18a48fca68f042483deda39b89b5292f2ba"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c85.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase usa bien actually para corregir un dato?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Actually, the match starts at six, not at five."
+          },
+          {
+            "text": "Actually, we are waiting for the bus at the moment."
+          },
+          {
+            "text": "Actually, the prices are going up these days."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.r01.seed-0",
+          "feedback": {
+            "es": "Actually corrige un dato anterior (a las seis, no a las cinco). No sirve para decir ahora mismo: para eso está at the moment."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:85ca5c21b4bbae6834a25d289af08f6f068ad783b5e7163a4c9ff1d2279fee4a"
+      },
+      {
+        "id": "en.n4.c85.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué corrige el hablante."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The park opened last year."
+          },
+          {
+            "text": "The mayor said nothing official about the park."
+          },
+          {
+            "text": "The reporter is the mayor."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.r02.seed-0",
+          "feedback": {
+            "es": "El hablante corrige que el alcalde confirmara el parque: solo un reportero dijo que quizá abra."
+          },
+          "audio": "Let me correct that. The mayor did not confirm the new park. A reporter only said it may open next year.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:449e455bbbd90fcbef86a5a4d248ce420d9b597741ef07d4e5f479db44b7af09"
+      },
+      {
+        "id": "en.n4.c85.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Corrige a tu amigo con la información más reciente del texto."
+        },
+        "answer": {
+          "text": "Actually, the latest update says the train leaves at six, not at five.",
+          "accepted": [
+            "Actually, the latest update says the train leaves at six, not at five.",
+            "Let me correct that: the latest update says the train leaves at six instead of five."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-news-and-certainty-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c85.r03.seed-0",
+          "feedback": {
+            "es": "La corrección empieza con actually, cita la última novedad y da la hora nueva: a las seis, no a las cinco."
+          },
+          "text": "Tu amigo dijo que el tren sale a las cinco. La última información dice que sale a las seis. Corrígelo con una frase.",
+          "scoring": {
+            "wordRange": [
+              8,
+              25
+            ],
+            "evidenceGroups": [
+              [
+                "actually",
+                "let me correct that"
+              ],
+              [
+                "latest update",
+                "new update",
+                "last update",
+                "latest information",
+                "latest news",
+                "most recent update",
+                "newest update"
+              ],
+              [
+                "six",
+                "6"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dbf8a09500c25bfbddac215d6d4f9d127d158eadab0b61dd7c19efff57a53137"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c85.e01": {
+      "reteach": "en.n4.class-85.t01",
+      "review": "en.n4.c85.r01"
+    },
+    "en.n4.c85.e02": {
+      "reteach": "en.n4.class-85.t02",
+      "review": "en.n4.c85.r02"
+    },
+    "en.n4.c85.e03": {
+      "reteach": "en.n4.class-85.t03",
+      "review": "en.n4.c85.r03"
+    },
+    "en.n4.c85.e04": {
+      "reteach": "en.n4.class-85.t04",
+      "review": "en.n4.c85.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n4-news-and-certainty-1",
+    "n4-news-and-certainty-2",
+    "n4-news-and-certainty-3",
+    "n4-news-and-certainty-4",
+    "n4-news-and-certainty-5"
+  ]
+}

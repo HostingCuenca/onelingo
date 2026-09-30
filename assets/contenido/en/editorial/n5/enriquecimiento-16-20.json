@@ -1,0 +1,408 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "classes": {
+    "en.n5.class-16": {
+      "explicacion": {
+        "titulo": "El futuro visto desde el pasado",
+        "texto": "Cuando cuentas un plan del pasado usas las formas del futuro «movidas» al pasado. Was/were going to significa «iba a»: un plan, a menudo no cumplido (I was going to call you, but…). Was/were about to es «estaba a punto de»: algo inminente, muchas veces interrumpido (Leo was about to leave when…). Would expresa lo que alguien prometió o esperaba (Mia promised she would come). Para saber si el plan se cumplió, busca pistas: but, instead y turned out suelen decir que no; and she did, que sí."
+      },
+      "patron": {
+        "texto": "Plan del pasado + lo que pasó de verdad:",
+        "formula": [
+          {
+            "texto": "I was going to call you,",
+            "nota": "plan: was going to + verbo base"
+          },
+          {
+            "texto": "but my phone died,",
+            "nota": "lo que ocurrió: pasado simple; but suele marcar que no se cumplió"
+          },
+          {
+            "texto": "so I sent a message instead.",
+            "nota": "cómo se resolvió"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Yesterday I am going to call you, but my phone died.",
+          "correcto": "Yesterday I was going to call you, but my phone died.",
+          "explicacion": "Hablas del pasado («ayer»): el plan va en was going to, no en am going to."
+        },
+        {
+          "incorrecto": "I was going to called you.",
+          "correcto": "I was going to call you.",
+          "explicacion": "Después de was going to va el verbo en forma base (call), nunca en pasado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom se disculpa ante Ana por no haber ido el día anterior.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Sorry I didn't come yesterday, Ana. I was going to call you.",
+            "traduccion": "Perdona por no venir ayer, Ana. Iba a llamarte."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What happened?",
+            "traduccion": "¿Qué pasó?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I was about to leave when it started to snow. The roads were closed.",
+            "traduccion": "Estaba a punto de salir cuando empezó a nevar. Las carreteras estaban cerradas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Don't worry. Call me tomorrow.",
+            "traduccion": "No te preocupes. Llámame mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿qué interrumpió su salida?",
+          "opciones": [
+            {
+              "es": "Empezó a nevar."
+            },
+            {
+              "es": "Su teléfono se apagó."
+            },
+            {
+              "es": "Ana lo llamó por teléfono."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I was about to leave when it started to snow». La nieve interrumpió lo que estaba a punto de hacer."
+        }
+      }
+    },
+    "en.n5.class-17": {
+      "explicacion": {
+        "titulo": "Will have been + -ing: cuánto tiempo llevaré",
+        "texto": "El future perfect continuous mide cuánto tiempo llevará ocurriendo una actividad en un punto futuro: By June I will have been training for a year. Piensa en junio y mira hacia atrás. Se forma con will have been + verbo en -ing y suele ir con by + momento y for + duración. Si cuentas un resultado o una cantidad, usa will have + participio: By then she will have run one marathon. Con verbos de estado (be, know, have) no hay -ing: they will have been married for ten years."
+      },
+      "patron": {
+        "texto": "By + momento futuro, will have been + -ing + for…:",
+        "formula": [
+          {
+            "texto": "By June,",
+            "nota": "punto futuro desde el que miramos atrás"
+          },
+          {
+            "texto": "I will have been training",
+            "nota": "will have been + verbo en -ing: actividad en curso"
+          },
+          {
+            "texto": "for a whole year.",
+            "nota": "for + cuánto tiempo llevará"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By June I will have been train for a year.",
+          "correcto": "By June I will have been training for a year.",
+          "explicacion": "Después de will have been el verbo va en -ing: training, no train."
+        },
+        {
+          "incorrecto": "By then I will be training for a year.",
+          "correcto": "By then I will have been training for a year.",
+          "explicacion": "El español dice «para entonces llevaré un año entrenando», pero en inglés la duración hasta un punto futuro pide will have been + -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a Ana por su primer maratón.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "When is your marathon, Ana?",
+            "traduccion": "¿Cuándo es tu maratón, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "In June. By then I will have been training for a year.",
+            "traduccion": "En junio. Para entonces llevaré un año entrenando."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "A whole year! Will you have run one before?",
+            "traduccion": "¡Un año entero! ¿Habrás corrido alguno antes?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. It will be my first marathon.",
+            "traduccion": "No. Será mi primer maratón."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿cuánto tiempo llevará entrenando en junio?",
+          "opciones": [
+            {
+              "es": "Un año."
+            },
+            {
+              "es": "Seis meses."
+            },
+            {
+              "es": "Dos años."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «By then I will have been training for a year». La duración se mide hasta junio, el punto futuro."
+        }
+      }
+    },
+    "en.n5.class-18": {
+      "explicacion": {
+        "titulo": "Plan, cambio y resultado",
+        "texto": "Cuando alguien cuenta un viaje que casi no ocurrió, hay tres capas. El plan original usa was going to o would (We were going to go by car). El cambio aparece con but, was about to… when… o instead (We were about to cancel when Carlos offered…). El resultado va en pasado simple y suele empezar con in the end (we reached the coast). Al escuchar o leer, etiqueta cada frase con una de esas tres capas y luego ordénalas para reconstruir la historia."
+      },
+      "patron": {
+        "texto": "Plan + cambio + resultado:",
+        "formula": [
+          {
+            "texto": "We were going to go by car,",
+            "nota": "plan original: was going to + verbo"
+          },
+          {
+            "texto": "but we were about to cancel when Carlos offered to take us by train,",
+            "nota": "cambio: but / was about to… when…"
+          },
+          {
+            "texto": "and in the end we reached the coast.",
+            "nota": "resultado: pasado simple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We were going to go by car, but we go by train.",
+          "correcto": "We were going to go by car, but we went by train.",
+          "explicacion": "Lo que ocurrió de verdad es pasado: went, no go."
+        },
+        {
+          "incorrecto": "We were about cancelling the trip.",
+          "correcto": "We were about to cancel the trip.",
+          "explicacion": "La estructura es was about to + verbo base; no se usa -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Tom cómo terminó el viaje a la costa.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you go to the coast with Mia on Saturday?",
+            "traduccion": "¿Fuiste a la costa con Mia el sábado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, but it almost didn't happen. We were going to go by car.",
+            "traduccion": "Sí, pero casi no ocurrió. Íbamos a ir en coche."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So what happened?",
+            "traduccion": "¿Y qué pasó?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Mia's brother needed his car, but Carlos offered to take us by train.",
+            "traduccion": "El hermano de Mia necesitaba su coche, pero Carlos se ofreció a llevarnos en tren."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿cómo fueron finalmente a la costa?",
+          "opciones": [
+            {
+              "es": "En tren, con Carlos."
+            },
+            {
+              "es": "En el coche del hermano de Mia."
+            },
+            {
+              "es": "En autobús."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Carlos offered to take us by train». El coche ya no estaba disponible."
+        }
+      }
+    },
+    "en.n5.class-19": {
+      "explicacion": {
+        "titulo": "Escribir metas a cinco años",
+        "texto": "Un buen texto sobre tus metas combina tres cosas. Primero, un resultado para un punto futuro con will have + participio: I will have finished my degree. Segundo, una duración con will have been + -ing: I will have been living abroad for two years. Tercero, un plan que abandonaste, con was going to + but + gave up, o lo que esperabas con would. Une las ideas con by then, in five years, so y but, y evita mezclar «will be» con duraciones acumuladas."
+      },
+      "patron": {
+        "texto": "Punto futuro + duración + plan abandonado:",
+        "formula": [
+          {
+            "texto": "By then, I will have been living abroad for two years,",
+            "nota": "duración hasta el punto futuro: will have been + -ing"
+          },
+          {
+            "texto": "so my English will be fluent.",
+            "nota": "consecuencia: will + verbo"
+          },
+          {
+            "texto": "I was going to study music, but I gave up that dream.",
+            "nota": "plan abandonado: was going to + but"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In five years I will be living abroad since two years.",
+          "correcto": "In five years I will have been living abroad for two years.",
+          "explicacion": "Para medir duración hasta un punto futuro se usa will have been + -ing con for, no will be con since."
+        },
+        {
+          "incorrecto": "I thought I will be a singer.",
+          "correcto": "I thought I would be a singer.",
+          "explicacion": "Lo que pensaste ayer sobre el futuro pide would, no will: el verbo principal está en pasado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a Ana por sus planes de futuro.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Where will you be in five years, Ana?",
+            "traduccion": "¿Dónde estarás dentro de cinco años, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I will have finished my degree, and I will have been working abroad for one year.",
+            "traduccion": "Habré terminado mi carrera y llevaré un año trabajando en el extranjero."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Abroad? I thought you would stay here.",
+            "traduccion": "¿En el extranjero? Pensé que te quedarías aquí."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I was going to, but I gave up that plan. I want to see new places.",
+            "traduccion": "Iba a hacerlo, pero renuncié a ese plan. Quiero conocer sitios nuevos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué plan abandonó?",
+          "opciones": [
+            {
+              "es": "Quedarse a vivir en su ciudad."
+            },
+            {
+              "es": "Terminar la carrera."
+            },
+            {
+              "es": "Ahorrar para una casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo pregunta por quedarse aquí y Ana responde: «I was going to, but I gave up that plan»."
+        }
+      }
+    },
+    "en.n5.class-20": {
+      "explicacion": {
+        "titulo": "Coordinar un viaje en familia",
+        "texto": "Para organizar un viaje que cambió de planes, junta cuatro piezas. El plan anterior: We were going to stay in a hotel. La decisión nueva: we will rent a house instead. Los plazos, con by: We need to book it by Friday (hasta ese momento, no después). Una duración hasta la salida: Dad will have been saving for a year. Y las peticiones, corteses: Would it be possible to…? Could you…? Cierra confirmando lo acordado: Then we all agree."
+      },
+      "patron": {
+        "texto": "Plan anterior + decisión + plazo:",
+        "formula": [
+          {
+            "texto": "We were going to stay in a hotel,",
+            "nota": "plan anterior: was going to + verbo"
+          },
+          {
+            "texto": "but we will rent a house instead.",
+            "nota": "decisión actual: will + verbo"
+          },
+          {
+            "texto": "We need to book it by Friday.",
+            "nota": "plazo: by + momento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We must book the tickets until Friday.",
+          "correcto": "We must book the tickets by Friday.",
+          "explicacion": "Until marca hasta cuándo dura algo; by marca el límite para hacer algo una vez. Para un plazo se usa by."
+        },
+        {
+          "incorrecto": "Could you to confirm the dates?",
+          "correcto": "Could you confirm the dates?",
+          "explicacion": "Después de could va el verbo en forma base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara organizan el viaje de la familia y fijan plazos.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "We were going to stay in a hotel, but it is too expensive.",
+            "traduccion": "Íbamos a alojarnos en un hotel, pero es demasiado caro."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Let's rent a house instead. We need to book it by Friday.",
+            "traduccion": "Alquilemos una casa. Tenemos que reservarla antes del viernes."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Would it be possible to pay the deposit next week?",
+            "traduccion": "¿Sería posible pagar el anticipo la semana que viene?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. The deadline for the deposit is the twentieth.",
+            "traduccion": "Sí. El plazo del anticipo es el veinte."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿qué hay que hacer antes del viernes?",
+          "opciones": [
+            {
+              "es": "Reservar la casa."
+            },
+            {
+              "es": "Pagar el anticipo."
+            },
+            {
+              "es": "Comprar los billetes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «We need to book it by Friday». El anticipo tiene otro plazo: el veinte."
+        }
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C16: guiada[2] tenía respuesta no decidible (el texto no decía que Sara trajo el pastel; 'We cannot know' era defendible): texto corregido; consigna eval[0] ya no dice 'mensaje de disculpa'; variantes añadidas en escribir repaso[1].",
+      "C17: will have studied aceptado en duración con for; consigna de escuchar eval[2] sin 'celebrarán' (no está en el audio); más variantes de 'dentro de un año'.",
+      "C18: feedback del escuchar practica[1] citaba 'casa de Leo' (el audio dice 'my house'); variantes en escribir repaso[1].",
+      "C19: escribir evaluación ampliado de 14–36 a 40–90 palabras (modelo 61, variantes de 51) con rúbrica de 5 grupos que tolera 'also'; opciones de escuchar practica[2] concretas (antes 'Years as a teacher and a small house'); se admiten will have lived/played/saved.",
+      "C20: escribir evaluación ampliado de 18–48 a 40–90 palabras (modelo 59) con rúbrica de 6 grupos; 'will have been staying' eliminado de aceptadas de eval[2] (con un recuento de ciudades no es defendible) y se acepta 'will have been' («habremos estado»); opciones del escuchar eval[1] sin inferencia no dicha ('to book it'); will have saved aceptado.",
+      "Nota P2 no corregida: dificultad general B1 alto; respetada por mapa."
+    ]
+  }
+}

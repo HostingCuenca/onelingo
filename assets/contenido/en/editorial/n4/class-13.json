@@ -1,0 +1,794 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-13",
+  "title": {
+    "en": "Real, unreal or impossible?",
+    "es": "¿Real, irreal o imposible?"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir en una conversación qué condiciones son reales, irreales en el presente o imposibles en el pasado y qué hecho real las contradice."
+    ]
+  },
+  "concepts": [
+    "n4-regrets-and-wishes-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-12"
+  ],
+  "usesVocabulary": [
+    "real",
+    "unreal",
+    "lottery",
+    "picnic",
+    "umbrella",
+    "wet",
+    "cancelled",
+    "sunny"
+  ],
+  "usesPatterns": [
+    "n4-regrets-and-wishes-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "real",
+      "es": "real, posible"
+    },
+    {
+      "en": "unreal",
+      "es": "irreal, imaginado"
+    },
+    {
+      "en": "lottery",
+      "es": "lotería"
+    },
+    {
+      "en": "picnic",
+      "es": "comida campestre"
+    },
+    {
+      "en": "umbrella",
+      "es": "paraguas"
+    },
+    {
+      "en": "wet",
+      "es": "mojado"
+    },
+    {
+      "en": "cancelled",
+      "es": "cancelado"
+    },
+    {
+      "en": "sunny",
+      "es": "soleado"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-13.t01",
+      "en": "If it is sunny tomorrow, we will have a picnic.",
+      "es": "Si mañana hace sol, haremos un picnic.",
+      "explanationEs": "Condición real: todavía es posible. If + presente, will.",
+      "segments": [
+        "If it is sunny tomorrow,",
+        "we will have a picnic."
+      ],
+      "audioText": "If it is sunny tomorrow, we will have a picnic.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-3"
+    },
+    {
+      "id": "en.n4.class-13.t02",
+      "en": "If I won the lottery, I would buy a small house by the sea.",
+      "es": "Si ganara la lotería, compraría una casita junto al mar.",
+      "explanationEs": "Condición irreal en el presente: if + pasado, would. No gano la lotería.",
+      "segments": [
+        "If I won the lottery, I would",
+        "buy a small house by the sea."
+      ],
+      "audioText": "If I won the lottery, I would buy a small house by the sea.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-3"
+    },
+    {
+      "id": "en.n4.class-13.t03",
+      "en": "If I had an umbrella, I would not get wet.",
+      "es": "Si tuviera un paraguas, no me mojaría.",
+      "explanationEs": "Irreal en el presente: hoy no tengo paraguas.",
+      "segments": [
+        "If I had an umbrella,",
+        "I would not get wet."
+      ],
+      "audioText": "If I had an umbrella, I would not get wet.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-3"
+    },
+    {
+      "id": "en.n4.class-13.t04",
+      "en": "If it had rained on Saturday, we would have cancelled the picnic.",
+      "es": "Si hubiera llovido el sábado, habríamos cancelado el picnic.",
+      "explanationEs": "Imposible en el pasado: no llovió. If + had + participio, would have + participio.",
+      "segments": [
+        "If it had rained on Saturday,",
+        "we would have cancelled the picnic."
+      ],
+      "audioText": "If it had rained on Saturday, we would have cancelled the picnic.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-3"
+    },
+    {
+      "id": "en.n4.class-13.t05",
+      "en": "Winning the lottery is an unreal dream, but tomorrow's picnic is a real plan.",
+      "es": "Ganar la lotería es un sueño irreal, pero el picnic de mañana es un plan real.",
+      "explanationEs": "Real = puede cumplirse; unreal = solo se imagina.",
+      "segments": [
+        "Winning the lottery is an unreal dream,",
+        "but tomorrow's picnic is a real plan."
+      ],
+      "audioText": "Winning the lottery is an unreal dream, but tomorrow's picnic is a real plan.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-regrets-and-wishes-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c13.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué tipo de condición es?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "unreal"
+          },
+          {
+            "text": "real"
+          },
+          {
+            "text": "impossible"
+          }
+        ],
+        "teaches": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.pg01.seed-0",
+          "feedback": {
+            "es": "Si hace frío mañana todavía puede ocurrir: es una condición real con if + presente y will."
+          },
+          "hint": {
+            "es": "Mira si el plan todavía puede cumplirse mañana."
+          },
+          "text": "If it is cold tomorrow, we will stay at home."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:92b23b7583cb492d3676adfd57cb4178f0d6f57a51290c9fd82cedfb1f6a0078"
+      },
+      {
+        "id": "en.n4.c13.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hecho real contradice esta condición?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I will buy a car."
+          },
+          {
+            "text": "I had a car yesterday."
+          },
+          {
+            "text": "I do not have a car."
+          }
+        ],
+        "teaches": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.pg02.seed-0",
+          "feedback": {
+            "es": "If + pasado imagina algo que hoy no es cierto: en realidad no tengo coche."
+          },
+          "hint": {
+            "es": "La condición imagina algo que hoy no es verdad."
+          },
+          "text": "If I had a car, I would drive to the beach."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7381ccbdc8dffae9081a97d9ccade56f2bcee80f23665c2402a4e8d6b9b260b0"
+      },
+      {
+        "id": "en.n4.c13.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si llueve el domingo, nos quedaremos en casa.»"
+        },
+        "answer": {
+          "text": "rains",
+          "accepted": [
+            "rains"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.pg03.seed-0",
+          "feedback": {
+            "es": "En una condición real, el verbo de if va en presente (rains), no con will."
+          },
+          "hint": {
+            "es": "Tras if, una condición real lleva presente."
+          },
+          "text": "If it ___ on Sunday, we will stay at home."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:630628a261ac97d1925f8862565b2fa31a803ac8d1a11dfb30e49d279b2e3bc0"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c13.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige de qué tipo es la condición."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "unreal"
+          },
+          {
+            "text": "real"
+          },
+          {
+            "text": "impossible"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.p01.seed-0",
+          "feedback": {
+            "es": "If + pasado y would: imagina algo que hoy no es cierto, porque la bici está rota."
+          },
+          "audio": "If I had a bike, I would ride to school. But my bike is broken.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6ee0484a3b0e6ec481a60ef1d89c4324be86b351977b9b262047ab9bdfb7d91f"
+      },
+      {
+        "id": "en.n4.c13.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pasó con el tren."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The train was on time."
+          },
+          {
+            "text": "The train was late."
+          },
+          {
+            "text": "They did not go to the match."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.p02.seed-0",
+          "feedback": {
+            "es": "Con if + had + participio se habla de un hecho que no ocurrió: el tren no llegó a tiempo."
+          },
+          "audio": "If the train had been on time, we would have seen the start of the match.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c7b8e12a7d972adbd86dcf2ba1b6685a38d37a8f13f12e93308190c0a5acd5ab"
+      },
+      {
+        "id": "en.n4.c13.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada condición con el hecho real."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "If we had more time, we would stay.",
+              {
+                "es": "Ahora no tenemos tiempo."
+              }
+            ],
+            [
+              "If she had called, I would have answered.",
+              {
+                "es": "Ayer ella no llamó."
+              }
+            ],
+            [
+              "If he is late, we will start without him.",
+              {
+                "es": "Aún no sabemos si llegará tarde."
+              }
+            ],
+            [
+              "If I had a dog, I would walk it every day.",
+              {
+                "es": "Hoy no tengo perro."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.p03.seed-0",
+          "feedback": {
+            "es": "La forma de la condición indica si el hecho real es presente, pasado o todavía posible."
+          },
+          "pairs": [
+            [
+              "If we had more time, we would stay.",
+              {
+                "es": "Ahora no tenemos tiempo."
+              }
+            ],
+            [
+              "If she had called, I would have answered.",
+              {
+                "es": "Ayer ella no llamó."
+              }
+            ],
+            [
+              "If he is late, we will start without him.",
+              {
+                "es": "Aún no sabemos si llegará tarde."
+              }
+            ],
+            [
+              "If I had a dog, I would walk it every day.",
+              {
+                "es": "Hoy no tengo perro."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fed690fe6d80a9ee01d592197c27332ffab448c1852b157de589105cadd1abaa"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c13.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige lo que Leo no hizo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He did not go to school."
+          },
+          {
+            "text": "He did not see Mia."
+          },
+          {
+            "text": "He did not study for the test."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.e01.seed-0",
+          "feedback": {
+            "es": "Si Leo hubiera sabido lo del examen, habría estudiado: por tanto, no estudió."
+          },
+          "audio": "Leo says: If I had known about the test, I would have studied. Mia says: It was on the board last week.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:429dd78262f0e7e07b88f360870ff10e882e0891dbcadfc83191b378fb51015c"
+      },
+      {
+        "id": "en.n4.c13.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué tipo de condición expresa esta frase?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "unreal"
+          },
+          {
+            "text": "real"
+          },
+          {
+            "text": "impossible"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.e02.seed-0",
+          "feedback": {
+            "es": "If + pasado y would hablan de algo que hoy no ocurre: ahora no tienen tiempo."
+          },
+          "text": "If we had more time, we would visit the museum."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6dbf0ebaa7906325befb20f9ca5542900468f7b82c925dcf5a3239228fb1f024"
+      },
+      {
+        "id": "en.n4.c13.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estas condiciones todavía es posible?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "If it had stopped raining, we would have walked to the park."
+          },
+          {
+            "text": "If it stops raining, we will walk to the park."
+          },
+          {
+            "text": "If I were a bird, I would fly to the park."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.e03.seed-0",
+          "feedback": {
+            "es": "Solo la primera usa if + presente y will: todavía puede ocurrir. Las otras imaginan algo irreal o pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0921ea2a2340fe9890e39e2dba7478e2e99897835657b6ee55f066e54ad36e5"
+      },
+      {
+        "id": "en.n4.c13.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si tuviera más dinero, compraría una casa junto al mar.»"
+        },
+        "answer": {
+          "text": "had",
+          "accepted": [
+            "had"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.e04.seed-0",
+          "feedback": {
+            "es": "En la condición irreal del presente, tras if va el pasado simple: had."
+          },
+          "text": "If I ___ more money, I would buy a house by the sea."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d71cd664646021ee22b918a59da90674be2191f4088e7613037db1308b88b1f6"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c13.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase con wish que habla del presente."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I wish I had had a dog."
+          },
+          {
+            "text": "I wish I have a dog."
+          },
+          {
+            "text": "I wish I had a dog."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.r01.seed-0",
+          "feedback": {
+            "es": "Wish + pasado simple habla de hoy: ahora no tengo perro."
+          },
+          "text": "Ahora no tengo perro y me gustaría tener uno."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:559fe30bc1455bb2a6a8a375c2c46b42f62d87c8fd29aad9bd61872157615474"
+      },
+      {
+        "id": "en.n4.c13.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si hubiera comido algo, no habría tenido hambre.»"
+        },
+        "answer": {
+          "text": "been",
+          "accepted": [
+            "been"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.r02.seed-0",
+          "feedback": {
+            "es": "El tercer condicional pide would have + participio; el participio de be es been."
+          },
+          "text": "If I had eaten, I would not have ___ hungry."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1f3585707656b703bbfe33dbd30594643951eccc74fae3c9880ff26d567e820f"
+      },
+      {
+        "id": "en.n4.c13.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hacía el abuelo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He often told stories at night."
+          },
+          {
+            "text": "He told one story last night."
+          },
+          {
+            "text": "He wrote stories at school."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-regrets-and-wishes-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c13.r03.seed-0",
+          "feedback": {
+            "es": "Used to + verbo describe un hábito pasado: contaba un cuento cada noche."
+          },
+          "audio": "When I was a child, my grandfather used to tell us a story every night.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97858b42efb0a71745f54372cab66814be3392b3fed0ad842fb216ea3d618faa"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c13.e01": {
+      "reteach": "en.n4.class-13.t01",
+      "review": "en.n4.c13.r01"
+    },
+    "en.n4.c13.e02": {
+      "reteach": "en.n4.class-13.t02",
+      "review": "en.n4.c13.r02"
+    },
+    "en.n4.c13.e03": {
+      "reteach": "en.n4.class-13.t03",
+      "review": "en.n4.c13.r03"
+    },
+    "en.n4.c13.e04": {
+      "reteach": "en.n4.class-13.t04",
+      "review": "en.n4.c13.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

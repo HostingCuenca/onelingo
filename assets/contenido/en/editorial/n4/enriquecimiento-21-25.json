@@ -1,0 +1,644 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "classes": {
+    "en.n4.class-21": {
+      "explicacion": {
+        "titulo": "Activa o pasiva: ¿qué quieres destacar?",
+        "texto": "En inglés, si lo importante es lo que se hace y no quién lo hace, se usa la voz pasiva: be + participio. Activa: The baker bakes the bread (destaca al panadero). Pasiva: The bread is baked (destaca el pan). Se elige la pasiva cuando quien actúa no se conoce, es obvio o no importa. Si aun así quieres nombrarlo, añade by al final: The first loaf is baked by the owner. En español solemos decir «se hornea»; en inglés la cosa pasa a ser el sujeto y va antes de is."
+      },
+      "patron": {
+        "texto": "Lo importante + be + participio (+ by + quién):",
+        "formula": [
+          {
+            "texto": "The bread",
+            "nota": "lo que importa va primero, como sujeto"
+          },
+          {
+            "texto": "is baked",
+            "nota": "is/are + participio: la acción sin decir quién"
+          },
+          {
+            "texto": "every morning.",
+            "nota": "cuándo o dónde; by + quién solo si aporta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The bread is bake every morning.",
+          "correcto": "The bread is baked every morning.",
+          "explicacion": "Después de is/are va el participio (baked), no el verbo base. Sin él, la frase queda incompleta."
+        },
+        {
+          "incorrecto": "Is sold fresh bread here.",
+          "correcto": "Fresh bread is sold here.",
+          "explicacion": "Calco de «se vende pan fresco». En inglés lo que se vende pasa a ser el sujeto y va antes de is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana pasan por una panadería antes de ir a la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "This bread smells good. Is it fresh?",
+            "traduccion": "Este pan huele bien. ¿Es fresco?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. The dough is made at five o'clock, and the loaves are baked in a big oven.",
+            "traduccion": "Sí. La masa se prepara a las cinco y las hogazas se hornean en un horno grande."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And when is the bread sold?",
+            "traduccion": "¿Y cuándo se vende el pan?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is sold at seven, before school.",
+            "traduccion": "Se vende a las siete, antes de la escuela."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué pasa con la masa a las cinco?",
+          "opciones": [
+            {
+              "es": "Se prepara."
+            },
+            {
+              "es": "Se hornea."
+            },
+            {
+              "es": "Se vende."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «The dough is made at five o'clock». Hornear y vender ocurren después."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Voz activa (destaca quién)",
+          "Voz pasiva (destaca qué)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Customers buy fresh bread."
+            },
+            {
+              "texto": "Fresh bread is bought."
+            }
+          ],
+          [
+            {
+              "texto": "The baker cleans the oven."
+            },
+            {
+              "texto": "The oven is cleaned."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-22": {
+      "explicacion": {
+        "titulo": "La pasiva en todos los tiempos",
+        "texto": "La pasiva siempre es be + participio; lo que cambia es la forma de be. Presente: is/are made. Pasado: was/were made. Present perfect (ya hecho): has/have been made. Futuro: will be made. Con modales: must/can/should be made. Con will y con los modales, be no cambia: nunca se escribe will is ni must are. El participio va siempre al final y no cambia con el sujeto: been wrapped, be wrapped, is wrapped."
+      },
+      "patron": {
+        "texto": "Sujeto + forma de be o modal + participio:",
+        "formula": [
+          {
+            "texto": "The chocolate",
+            "nota": "lo que se hace, como sujeto"
+          },
+          {
+            "texto": "has been / will be / must be",
+            "nota": "be cambia según el tiempo o el modal"
+          },
+          {
+            "texto": "wrapped.",
+            "nota": "participio: no cambia nunca"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The chocolate must to be stored in a cool place.",
+          "correcto": "The chocolate must be stored in a cool place.",
+          "explicacion": "Después de un modal va be sin to, igual que con can o should, aunque en español digamos «tiene que guardarse»."
+        },
+        {
+          "incorrecto": "The box has wrapped in paper.",
+          "correcto": "The box has been wrapped in paper.",
+          "explicacion": "Falta been: has been + participio forma la pasiva. Sin been, has wrapped sería una frase activa y le falta el objeto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia visita un taller de chocolate con su primo Leo, que trabaja allí.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Is the chocolate ready?",
+            "traduccion": "¿Está listo el chocolate?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Almost. The cocoa beans have been roasted.",
+            "traduccion": "Casi. Los granos de cacao ya se han tostado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And when will the boxes be delivered?",
+            "traduccion": "¿Y cuándo se entregarán las cajas?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "They will be delivered on Friday.",
+            "traduccion": "Se entregarán el viernes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. The chocolate must be stored in a cool place.",
+            "traduccion": "Bien. El chocolate debe guardarse en un lugar fresco."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿qué ya está hecho?",
+          "opciones": [
+            {
+              "es": "Los granos ya se han tostado."
+            },
+            {
+              "es": "Las cajas ya se han entregado."
+            },
+            {
+              "es": "El chocolate ya se ha guardado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «The cocoa beans have been roasted». Las cajas se entregarán el viernes, así que todavía no están entregadas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tiempo o modal",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "presente"
+            },
+            {
+              "texto": "is / are + participio"
+            },
+            {
+              "texto": "Beans are roasted."
+            }
+          ],
+          [
+            {
+              "texto": "pasado"
+            },
+            {
+              "texto": "was / were + participio"
+            },
+            {
+              "texto": "A batch was roasted."
+            }
+          ],
+          [
+            {
+              "texto": "present perfect"
+            },
+            {
+              "texto": "has / have been + participio"
+            },
+            {
+              "texto": "The box has been wrapped."
+            }
+          ],
+          [
+            {
+              "texto": "futuro"
+            },
+            {
+              "texto": "will be + participio"
+            },
+            {
+              "texto": "The box will be delivered."
+            }
+          ],
+          [
+            {
+              "texto": "modal"
+            },
+            {
+              "texto": "must / can / should be + participio"
+            },
+            {
+              "texto": "Chocolate must be stored cool."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-23": {
+      "explicacion": {
+        "titulo": "Seguir un proceso: conectores y pasiva",
+        "texto": "Cuando alguien explica cómo se hace algo, escucha dos cosas. Los conectores marcan el orden: first, then, next, after that, finally. Los verbos pasivos dicen qué le pasa al producto: is cut, is woven, is pressed. Cuidado con before y after: After the hat is shaped, it is pressed = primero se moldea. Before the hat is sold, it is checked = primero se revisa. En before, lo que oyes primero ocurre después. Si oyes by + persona, es un dato extra; by hand o by machine explican cómo."
+      },
+      "patron": {
+        "texto": "Conector + producto + is/are + participio:",
+        "formula": [
+          {
+            "texto": "First,",
+            "nota": "conector de orden: first, then, next, after that, finally"
+          },
+          {
+            "texto": "the straw",
+            "nota": "el producto que pasa por el proceso"
+          },
+          {
+            "texto": "is cut and dried.",
+            "nota": "is + dos participios: dos pasos seguidos"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "First is the straw cut and dried.",
+          "correcto": "First, the straw is cut and dried.",
+          "explicacion": "Calco de «primero se corta la paja». En inglés el producto va antes de is: the straw is cut."
+        },
+        {
+          "incorrecto": "After that, the hat pressed with a hot iron.",
+          "correcto": "After that, the hat is pressed with a hot iron.",
+          "explicacion": "Falta is. Sin be + participio, parece que el sombrero es quien plancha."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le enseña a Carlos cómo se hacen los sombreros en un taller de su ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "How is a hat made here?",
+            "traduccion": "¿Cómo se hace aquí un sombrero?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "First, the straw is cut and dried in the sun.",
+            "traduccion": "Primero, la paja se corta y se seca al sol."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then it is woven by an artisan. After that, the hat is shaped.",
+            "traduccion": "Luego la teje un artesano. Después, al sombrero se le da forma."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And finally?",
+            "traduccion": "¿Y por último?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Finally, it is pressed and sold.",
+            "traduccion": "Por último, se plancha y se vende."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿qué pasa justo después de tejer la paja?",
+          "opciones": [
+            {
+              "es": "Se le da forma al sombrero."
+            },
+            {
+              "es": "Se plancha y se vende."
+            },
+            {
+              "es": "Se corta y se seca la paja."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Then it is woven by an artisan. After that, the hat is shaped». Cortar y secar va antes; planchar y vender va al final."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Qué marca"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "First"
+            },
+            {
+              "texto": "el primer paso"
+            }
+          ],
+          [
+            {
+              "texto": "Then / Next"
+            },
+            {
+              "texto": "el paso siguiente"
+            }
+          ],
+          [
+            {
+              "texto": "After that"
+            },
+            {
+              "texto": "lo que viene después"
+            }
+          ],
+          [
+            {
+              "texto": "Before + hecho"
+            },
+            {
+              "texto": "ese hecho ocurre después del otro"
+            }
+          ],
+          [
+            {
+              "texto": "Finally"
+            },
+            {
+              "texto": "el último paso"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-24": {
+      "explicacion": {
+        "titulo": "Describir un proceso: pasiva, conectores y by",
+        "texto": "Para describir cómo se prepara algo, usa la pasiva: lo que importa es lo que le pasa al producto (The milk is heated), no quién lo hace. Ordena los pasos con conectores: first, then, next, after that, finally. Añade by + persona solo cuando aporta algo: The recipe was created by my grandmother es un dato valioso; The milk is heated by someone no dice nada, así que se quita. Varía las estructuras y no repitas siempre el mismo conector. Escribe cada paso en una frase corta."
+      },
+      "patron": {
+        "texto": "Conector + producto + is + participio:",
+        "formula": [
+          {
+            "texto": "First,",
+            "nota": "conector: marca el orden del paso"
+          },
+          {
+            "texto": "the milk is heated,",
+            "nota": "pasiva: producto + is + participio"
+          },
+          {
+            "texto": "then the cocoa is added.",
+            "nota": "then une el siguiente paso con otra pasiva"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The milk is heated by someone.",
+          "correcto": "The milk is heated.",
+          "explicacion": "By someone no aporta ningún dato: en un proceso la pasiva ya evita decir quién, y añadir un agente vacío suena forzado."
+        },
+        {
+          "incorrecto": "First the milk is heating, then the cocoa is adding.",
+          "correcto": "First, the milk is heated, and then the cocoa is added.",
+          "explicacion": "Is heating es presente continuo (ocurre ahora). En un proceso se usa el participio: heated, added."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a Mia cómo se prepara el chocolate caliente que hizo su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "This hot chocolate is very good. What is the recipe?",
+            "traduccion": "Este chocolate caliente está muy bueno. ¿Cuál es la receta?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "First, the milk is heated. Then the cocoa is added.",
+            "traduccion": "Primero se calienta la leche. Luego se añade el cacao."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is stirred for five minutes and served hot.",
+            "traduccion": "Se remueve cinco minutos y se sirve caliente."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Who created the recipe?",
+            "traduccion": "¿Quién creó la receta?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It was created by my grandmother.",
+            "traduccion": "La creó mi abuela."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Mia, ¿qué se hace justo después de calentar la leche?",
+          "opciones": [
+            {
+              "es": "Se añade el cacao."
+            },
+            {
+              "es": "Se remueve cinco minutos."
+            },
+            {
+              "es": "Se sirve caliente."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «First, the milk is heated. Then the cocoa is added». Remover y servir vienen más tarde."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quieres decir",
+          "Usa",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "el orden"
+            },
+            {
+              "texto": "First / Then / Next / After that / Finally"
+            },
+            {
+              "texto": "First, the milk is heated."
+            }
+          ],
+          [
+            {
+              "texto": "qué le pasa al producto"
+            },
+            {
+              "texto": "is / are + participio"
+            },
+            {
+              "texto": "The cocoa is added."
+            }
+          ],
+          [
+            {
+              "texto": "quién, si es importante"
+            },
+            {
+              "texto": "by + persona"
+            },
+            {
+              "texto": "The recipe was created by my grandmother."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-25": {
+      "explicacion": {
+        "titulo": "Presentar un producto local en tres partes",
+        "texto": "Cuando un visitante pregunta por un producto típico, responde en tres partes. Primero, cómo se hace: pasiva y conectores (First, the straw is cut. Then it is woven). Segundo, su historia: has been made here for a hundred years (algo que sigue hoy) o was created in 1900 (un momento pasado). Tercero, un consejo para comprarlo: should be kept dry, I recommend… Usa by solo si nombra algo importante. Esta clase reúne lo que aprendiste: pasiva en varios tiempos, pasos en orden y descripción de procesos."
+      },
+      "patron": {
+        "texto": "Qué es + cómo se hace + historia + consejo:",
+        "formula": [
+          {
+            "texto": "This local hat",
+            "nota": "qué producto es"
+          },
+          {
+            "texto": "is made by hand",
+            "nota": "proceso: pasiva en presente"
+          },
+          {
+            "texto": "and has been made here for a hundred years.",
+            "nota": "historia: has been + participio"
+          },
+          {
+            "texto": "It should be kept dry.",
+            "nota": "consejo: modal + be + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This hat is made here since 1900.",
+          "correcto": "This hat has been made here since 1900.",
+          "explicacion": "Since marca algo que empezó en el pasado y sigue hoy: se usa present perfect (has been made), no presente, aunque en español digamos «se hace desde»."
+        },
+        {
+          "incorrecto": "Buy it in the market local.",
+          "correcto": "Buy it at the local market.",
+          "explicacion": "Calco del orden español «el mercado local». En inglés el adjetivo va antes del nombre: the local market."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia visita una ciudad de montaña y Carlos le explica cómo se hacen los sombreros del lugar.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What is this hat? Is it made here?",
+            "traduccion": "¿Qué es este sombrero? ¿Se hace aquí?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes. It is made by hand from straw, and it has been made here for a hundred years.",
+            "traduccion": "Sí. Se hace a mano con paja y se hace aquí desde hace cien años."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Where can I buy one?",
+            "traduccion": "¿Dónde puedo comprar uno?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is sold at the local market. My advice is to buy it from an artisan.",
+            "traduccion": "Se vende en el mercado local. Mi consejo es comprarlo a un artesano."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué consejo da Carlos para comprar el sombrero?",
+          "opciones": [
+            {
+              "es": "Comprarlo a un artesano."
+            },
+            {
+              "es": "Comprarlo en una tienda grande."
+            },
+            {
+              "es": "Preguntar el precio primero."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «My advice is to buy it from an artisan». El mercado es el lugar donde se vende, no el consejo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la respuesta",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "cómo se hace"
+            },
+            {
+              "texto": "conectores + is / are + participio"
+            },
+            {
+              "texto": "First, the straw is cut. Then it is woven."
+            }
+          ],
+          [
+            {
+              "texto": "historia"
+            },
+            {
+              "texto": "has / have been + participio"
+            },
+            {
+              "texto": "It has been made here for years."
+            }
+          ],
+          [
+            {
+              "texto": "consejo"
+            },
+            {
+              "texto": "should / must be + participio"
+            },
+            {
+              "texto": "It must be kept dry."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

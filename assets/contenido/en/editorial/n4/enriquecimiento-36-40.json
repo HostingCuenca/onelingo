@@ -1,0 +1,646 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n4.class-36": {
+      "explicacion": {
+        "titulo": "Formal, neutro o informal: el lector decide",
+        "texto": "El tono de un mensaje depende de quién lo va a leer, no del tema. A un amigo o a tu familia le escribes en tono informal: Hi Leo, frases cortas, contracciones (can't, I'm), exclamaciones y despedidas como Talk soon. A un desconocido, a un director o a una empresa le escribes en tono formal: Dear Mr Brown, frases completas sin contracciones, could you please, I am afraid that y Kind regards. Entre esos dos extremos está el tono neutro, correcto y sin fórmulas ni exclamaciones. Busca estas pistas para reconocerlo."
+      },
+      "patron": {
+        "texto": "Saludo + petición + despedida (tono formal):",
+        "formula": [
+          {
+            "texto": "Dear Mr Brown,",
+            "nota": "saludo formal: Dear + título + apellido"
+          },
+          {
+            "texto": "could you please send me the file?",
+            "nota": "petición cortés: could you please"
+          },
+          {
+            "texto": "Kind regards.",
+            "nota": "despedida formal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mr Brown, can you send me the file? Thanks!",
+          "correcto": "Dear Mr Brown, could you please send me the file? Kind regards.",
+          "explicacion": "Mezcla un saludo formal con una petición y una despedida informales. Todo el mensaje debe mantener la misma voz."
+        },
+        {
+          "incorrecto": "Dear Brown, could you please help me?",
+          "correcto": "Dear Mr Brown, could you please help me?",
+          "explicacion": "En inglés Dear va con título y apellido (Mr Brown). Dear + apellido solo suena seco, y el nombre de pila es para mensajes informales."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le enseña a Tom dos mensajes: uno para una amiga y otro para la directora.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Who are your messages for?",
+            "traduccion": "¿Para quién son tus mensajes?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "One is for Mia. It says, Hi Mia, see you later!",
+            "traduccion": "Uno es para Mia. Dice: «Hola, Mia, ¡hasta luego!»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the other one?",
+            "traduccion": "¿Y el otro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is for the director. It starts with Dear Ms Green.",
+            "traduccion": "Es para la directora. Empieza con Dear Ms Green."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo empieza el mensaje para la directora?",
+          "opciones": [
+            {
+              "es": "Con un saludo formal: Dear Ms Green."
+            },
+            {
+              "es": "Con un saludo informal: Hi Mia."
+            },
+            {
+              "es": "Con una despedida: See you later."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «It is for the director. It starts with Dear Ms Green». Hi Mia y See you later son del mensaje para su amiga."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Informal",
+          "Formal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Saludo"
+            },
+            {
+              "texto": "Hi Leo,"
+            },
+            {
+              "texto": "Dear Mr Brown,"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "can you send me the file?"
+            },
+            {
+              "texto": "could you please send me the file?"
+            }
+          ],
+          [
+            {
+              "texto": "Despedida"
+            },
+            {
+              "texto": "Thanks!"
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-37": {
+      "explicacion": {
+        "titulo": "Conectores que ordenan un texto",
+        "texto": "Los conectores unen ideas y dicen cómo se relacionan. However marca un contraste entre dos frases: The hotel is cheap; however, it is far (punto o punto y coma antes, coma después). Although también contrasta, pero dentro de una sola frase: Although it rained, we played. No se dice «although… but»: en inglés basta con una sola palabra de contraste, aunque en español a veces se oiga «aunque… pero». In addition añade una idea (además) y as a result da la consecuencia (por eso, como resultado). Ambos se escriben al principio de la frase con una coma detrás."
+      },
+      "patron": {
+        "texto": "Idea + however + contraste / consecuencia:",
+        "formula": [
+          {
+            "texto": "The hotel is cheap;",
+            "nota": "primera idea, cerrada con punto y coma o punto"
+          },
+          {
+            "texto": "however,",
+            "nota": "conector de contraste + coma"
+          },
+          {
+            "texto": "it is far from the beach.",
+            "nota": "idea opuesta a la primera"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although it was raining, but we played in the park.",
+          "correcto": "Although it was raining, we played in the park.",
+          "explicacion": "Aunque… pero se calca del español. En inglés basta con although: but sobra y la frase queda incorrecta."
+        },
+        {
+          "incorrecto": "The hotel is cheap, however it is far.",
+          "correcto": "The hotel is cheap; however, it is far.",
+          "explicacion": "However no puede unir dos frases solo con una coma. Lleva punto o punto y coma delante y coma detrás."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom comparan dos hoteles para las vacaciones.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Which hotel do you like?",
+            "traduccion": "¿Qué hotel te gusta?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The first one is cheap. However, it is far from the beach.",
+            "traduccion": "El primero es barato. Sin embargo, está lejos de la playa."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the second one?",
+            "traduccion": "¿Y el segundo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Although it is expensive, it has a kitchen. In addition, it is near the beach.",
+            "traduccion": "Aunque es caro, tiene cocina. Además, está cerca de la playa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué ventaja tiene el segundo hotel?",
+          "opciones": [
+            {
+              "es": "Tiene cocina y está cerca de la playa."
+            },
+            {
+              "es": "Es más barato que el primero."
+            },
+            {
+              "es": "Está lejos de la playa, pero es barato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Although it is expensive, it has a kitchen. In addition, it is near the beach». El precio es su desventaja, no una ventaja."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Función",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "however"
+            },
+            {
+              "texto": "contraste entre frases"
+            },
+            {
+              "texto": "The room is small; however, it is clean."
+            }
+          ],
+          [
+            {
+              "texto": "although"
+            },
+            {
+              "texto": "contraste en una frase"
+            },
+            {
+              "texto": "Although it rained, we played."
+            }
+          ],
+          [
+            {
+              "texto": "in addition"
+            },
+            {
+              "texto": "añadir una idea"
+            },
+            {
+              "texto": "In addition, it has a kitchen."
+            }
+          ],
+          [
+            {
+              "texto": "as a result"
+            },
+            {
+              "texto": "consecuencia"
+            },
+            {
+              "texto": "As a result, we missed the film."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-38": {
+      "explicacion": {
+        "titulo": "Descubre al lector y responde con su tono",
+        "texto": "Antes de contestar un mensaje, averigua quién lo escribe y quién lo leerá. Las pistas están en el saludo (Hi Sara frente a Dear parents), en el vocabulario (customers, everyone) y en el estilo (contracciones y exclamaciones frente a frases completas). Tu respuesta debe usar el mismo tono: informal para un amigo, formal y cortés para familias o clientes, neutro y amable para un grupo. Además, contesta a todo lo que te preguntan y usa will para prometer una respuesta, nunca el presente."
+      },
+      "patron": {
+        "texto": "Saludo con pista + mensaje + respuesta cortés:",
+        "formula": [
+          {
+            "texto": "Dear parents,",
+            "nota": "pista del lector: Dear + grupo = tono formal"
+          },
+          {
+            "texto": "the school trip will leave at eight o'clock.",
+            "nota": "el mensaje: información"
+          },
+          {
+            "texto": "Thank you for the information.",
+            "nota": "respuesta con el mismo tono formal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear parents, thanks a lot, bye!",
+          "correcto": "Dear parents, thank you very much. Kind regards.",
+          "explicacion": "Un saludo formal no combina con thanks a lot y bye. Mantén el tono formal de principio a fin."
+        },
+        {
+          "incorrecto": "Thank you for your message. I reply tomorrow.",
+          "correcto": "Thank you for your message. I will reply tomorrow.",
+          "explicacion": "Para prometer una respuesta en el futuro se usa will. El presente simple no expresa esa promesa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo recibe un mensaje y Mia le pregunta a quién va dirigido.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What does the message say?",
+            "traduccion": "¿Qué dice el mensaje?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It starts with Dear parents, so it is for my mother.",
+            "traduccion": "Empieza con Dear parents, así que es para mi madre."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then who will write the reply?",
+            "traduccion": "Entonces, ¿quién escribirá la respuesta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My mother will reply in a formal tone.",
+            "traduccion": "Mi madre responderá con un tono formal."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿para quién es el mensaje?",
+          "opciones": [
+            {
+              "es": "Para la madre de Leo."
+            },
+            {
+              "es": "Para Leo y Mia."
+            },
+            {
+              "es": "Para el director de la escuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «It starts with Dear parents, so it is for my mother». Por eso ella, y no Leo, escribe la respuesta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pista del mensaje",
+          "Lector probable",
+          "Tono de la respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hi Sara, … pizza!"
+            },
+            {
+              "texto": "una amiga"
+            },
+            {
+              "texto": "informal"
+            }
+          ],
+          [
+            {
+              "texto": "Dear parents,"
+            },
+            {
+              "texto": "familias del colegio"
+            },
+            {
+              "texto": "formal"
+            }
+          ],
+          [
+            {
+              "texto": "Hello, everyone!"
+            },
+            {
+              "texto": "un grupo"
+            },
+            {
+              "texto": "neutro y amable"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-39": {
+      "explicacion": {
+        "titulo": "Reescribir: misma información, otra voz",
+        "texto": "Reescribir es cambiar la voz de un mensaje sin perder la información: quién, qué y cuándo. De informal a formal: saluda con Dear + título, cambia las contracciones por formas completas (can't → cannot, I'm → I am), convierte can you en could you please, I want en I would like, thanks en thank you very much, y cierra con Kind regards. De formal a informal haces lo contrario: Hi, contracciones y frases cortas. Revisa al final que siga diciendo lo mismo y que ninguna frase mezcle las dos voces."
+      },
+      "patron": {
+        "texto": "Dear + título, propósito, petición y cierre:",
+        "formula": [
+          {
+            "texto": "Dear Mr Brown,",
+            "nota": "saludo formal"
+          },
+          {
+            "texto": "I am writing to ask about the trip.",
+            "nota": "propósito: I am writing to + verbo"
+          },
+          {
+            "texto": "Could you please send me the information?",
+            "nota": "petición cortés"
+          },
+          {
+            "texto": "Kind regards.",
+            "nota": "despedida formal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I would like ask about the trip.",
+          "correcto": "I would like to ask about the trip.",
+          "explicacion": "Después de would like hace falta to + verbo. En español «me gustaría preguntar» no lleva partícula, pero en inglés sí."
+        },
+        {
+          "incorrecto": "Dear Mr Brown, I can't attend because I'm ill.",
+          "correcto": "Dear Mr Brown, I cannot attend because I am ill.",
+          "explicacion": "Un saludo formal exige formas completas. Las contracciones can't e I'm pertenecen a la voz informal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Tom cómo cambia su mensaje para enviarlo a la coordinadora.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What is your first message?",
+            "traduccion": "¿Cuál es tu primer mensaje?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I can't come because I'm ill. It is for my friend.",
+            "traduccion": "No puedo ir porque estoy enferma. Es para mi amigo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the email to the coordinator?",
+            "traduccion": "¿Y el correo a la coordinadora?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "In the email I will write: I am afraid that I cannot attend because I am ill.",
+            "traduccion": "En el correo escribiré: me temo que no puedo asistir porque estoy enferma."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo cambia Ana «I can't come» en el correo?",
+          "opciones": [
+            {
+              "es": "Usa la forma completa I am afraid that I cannot attend."
+            },
+            {
+              "es": "Usa la misma frase con un signo de exclamación."
+            },
+            {
+              "es": "Quita el motivo de su ausencia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «I am afraid that I cannot attend because I am ill». Cambia la contracción por cannot y añade I am afraid that; el motivo se conserva."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Informal",
+          "Formal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I can't come."
+            },
+            {
+              "texto": "I am afraid that I cannot attend."
+            }
+          ],
+          [
+            {
+              "texto": "Can you send it?"
+            },
+            {
+              "texto": "Could you please send it?"
+            }
+          ],
+          [
+            {
+              "texto": "Thanks a lot!"
+            },
+            {
+              "texto": "Thank you very much."
+            }
+          ],
+          [
+            {
+              "texto": "I want to ask…"
+            },
+            {
+              "texto": "I would like to ask…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-40": {
+      "explicacion": {
+        "titulo": "Un problema, dos destinatarios",
+        "texto": "Cuando explicas un mismo problema a dos personas, la información es la misma (qué pasa, cuándo, cuánto dura y qué pides), pero la voz cambia. Al vecino le escribes en tono informal y amable: Hi Sam, frases cortas, contracciones y Could you … please. A la administración, en tono formal: Dear Mr Jones, I am writing to complain about…, frases completas, datos exactos, una petición cortés y Kind regards. Usa conectores como as a result para la consecuencia y however para un contraste, y cuenta lo que dijo otra persona con told me that."
+      },
+      "patron": {
+        "texto": "Saludo + problema + consecuencia + petición:",
+        "formula": [
+          {
+            "texto": "Hi Sam, / Dear Mr Jones,",
+            "nota": "saludo informal o formal, según el lector"
+          },
+          {
+            "texto": "the music is very loud at night.",
+            "nota": "el problema con datos"
+          },
+          {
+            "texto": "As a result, I cannot sleep.",
+            "nota": "consecuencia: as a result + coma"
+          },
+          {
+            "texto": "Could you please turn it down?",
+            "nota": "petición cortés"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am writing for complain about the noise.",
+          "correcto": "I am writing to complain about the noise.",
+          "explicacion": "For + verbo es un calco de «para quejarme». El propósito se expresa con to + verbo base."
+        },
+        {
+          "incorrecto": "The music is very loud, however I cannot sleep.",
+          "correcto": "The music is very loud. As a result, I cannot sleep.",
+          "explicacion": "However marca un contraste, y aquí hay una consecuencia: el ruido impide dormir. Para eso se usa as a result."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Carlos cómo escribirá dos mensajes sobre la música del vecino.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What will you write to your neighbour?",
+            "traduccion": "¿Qué le escribirás a tu vecino?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Hi Sam, the music is very loud at night. Could you turn it down, please?",
+            "traduccion": "Hola, Sam, la música está muy fuerte por la noche. ¿Podrías bajarla, por favor?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And what will you write to the administration?",
+            "traduccion": "¿Y qué le escribirás a la administración?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Dear Mr Jones, I am writing to complain about the noise. Kind regards.",
+            "traduccion": "Estimado Sr. Jones, le escribo para quejarme del ruido. Saludos cordiales."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué diferencia hay entre los dos mensajes de Sara?",
+          "opciones": [
+            {
+              "es": "Al vecino lo saluda con Hi y a la administración con Dear Mr Jones."
+            },
+            {
+              "es": "Al vecino le escribe en formal y a la administración en informal."
+            },
+            {
+              "es": "Los dos mensajes empiezan igual."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara usa Hi Sam con su vecino y Dear Mr Jones con la administración: informal para uno, formal para el otro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Al vecino (informal)",
+          "A la administración (formal)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Saludo"
+            },
+            {
+              "texto": "Hi Sam,"
+            },
+            {
+              "texto": "Dear Mr Jones,"
+            }
+          ],
+          [
+            {
+              "texto": "Problema"
+            },
+            {
+              "texto": "The music is very loud at night."
+            },
+            {
+              "texto": "I am writing to complain about the noise at night."
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Could you turn it down, please?"
+            },
+            {
+              "texto": "I would like to ask you to solve this problem."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Thanks for understanding!"
+            },
+            {
+              "texto": "Kind regards."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C36: eval[3] ordenar sin 'please' (con 'please could you' / 'could you please' había dos órdenes válidos).",
+      "C37: explicación corregida (aunque... pero sí se oye en español); distractor 'free, but small' de eval[1] que era factualmente cierto sustituido; escribir de eval[3] con 49 variantes aceptadas (presente/pasado coherentes, ambos órdenes, cold/very cold/outside).",
+      "C38: guiada[0] ambigua sobre quién es 'la amiga' reescrita y sin nombre ajeno; eval[0] con texto coherente con el feedback ('I am afraid that').",
+      "C39: modelo de eval[0] ahora incluye los dos conectores exigidos por el mapa (as a result, in addition) y rúbrica con grupos de contenido (Friday, trip, information) y variantes de saludo/cierre (Yours sincerely, Best regards); repaso[2] convertido a rúbrica; diálogo de situación con frase más natural.",
+      "C40: rúbricas de eval[0] y eval[1] ampliadas con variantes (Hello/Hey, noisy, can't sleep/unable to sleep, but/although, told/said/promised, Could you/I would like to ask you to, cierres formales); feedback con concordancia corregida.",
+      "Sin opciones de relleno. Observación P2 no corregida: C36 eval[0] relacionar distingue 'amigo' de 'compañera' solo por género y tema; C37 repaso[2] ordenar acepta un único orden."
+    ]
+  }
+}

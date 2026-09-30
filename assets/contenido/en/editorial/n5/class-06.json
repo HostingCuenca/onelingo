@@ -1,0 +1,777 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-06",
+  "title": {
+    "en": "Used to or used to doing?",
+    "es": "¿Lo solía hacer o ya me acostumbré?"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir used to + verbo (hábito pasado que ya no existe) de be used to + -ing (algo que ya resulta normal hoy)."
+    ]
+  },
+  "concepts": [
+    "n5-getting-used-to-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n5.class-05"
+  ],
+  "usesVocabulary": [
+    "village",
+    "noise",
+    "crowded",
+    "commute",
+    "quiet",
+    "queue",
+    "strange"
+  ],
+  "usesPatterns": [
+    "n5-getting-used-to-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "village",
+      "es": "pueblo"
+    },
+    {
+      "en": "noise",
+      "es": "ruido"
+    },
+    {
+      "en": "crowded",
+      "es": "abarrotado"
+    },
+    {
+      "en": "commute",
+      "es": "trayecto al trabajo"
+    },
+    {
+      "en": "quiet",
+      "es": "tranquilo"
+    },
+    {
+      "en": "queue",
+      "es": "cola"
+    },
+    {
+      "en": "strange",
+      "es": "extraño"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-06.t01",
+      "en": "Mia used to live in a quiet village, but now she lives in a big city.",
+      "es": "Mia vivía en un pueblo tranquilo, pero ahora vive en una gran ciudad.",
+      "explanationEs": "Used to + verbo base: un hábito o estado del pasado que ya no existe.",
+      "segments": [
+        "Mia used to live in a quiet village,",
+        "but now she lives in a big city."
+      ],
+      "audioText": "Mia used to live in a quiet village, but now she lives in a big city.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-1"
+    },
+    {
+      "id": "en.n5.class-06.t02",
+      "en": "She is used to the noise now, so she sleeps well.",
+      "es": "Ya está acostumbrada al ruido, así que duerme bien.",
+      "explanationEs": "Be used to + nombre: algo que ya no te resulta extraño.",
+      "segments": [
+        "She is used to the noise",
+        "now, so she sleeps well."
+      ],
+      "audioText": "She is used to the noise now, so she sleeps well.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-1"
+    },
+    {
+      "id": "en.n5.class-06.t03",
+      "en": "She is used to taking a crowded bus to work.",
+      "es": "Está acostumbrada a tomar un autobús abarrotado para ir al trabajo.",
+      "explanationEs": "Be used to + -ing: estás acostumbrado a hacer algo; el verbo lleva -ing.",
+      "segments": [
+        "She is used to taking",
+        "a crowded bus to work."
+      ],
+      "audioText": "She is used to taking a crowded bus to work.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-1"
+    },
+    {
+      "id": "en.n5.class-06.t04",
+      "en": "She used to walk to school, and her commute took five minutes.",
+      "es": "Antes iba andando al colegio y su trayecto duraba cinco minutos.",
+      "explanationEs": "Used to + walk: acción habitual del pasado; hoy ya no ocurre.",
+      "segments": [
+        "She used to walk to school,",
+        "and her commute took five minutes."
+      ],
+      "audioText": "She used to walk to school, and her commute took five minutes.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-1"
+    },
+    {
+      "id": "en.n5.class-06.t05",
+      "en": "When she was a child, she would walk through the village every Sunday.",
+      "es": "Cuando era niña, solía pasear por el pueblo cada domingo.",
+      "explanationEs": "Would + verbo también cuenta hábitos pasados repetidos, pero no sirve para estados.",
+      "segments": [
+        "When she was a child, she would",
+        "walk through the village every Sunday."
+      ],
+      "audioText": "When she was a child, she would walk through the village every Sunday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c06.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según Leo, ¿qué frase es verdadera?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He played the piano in the past, but not now."
+          },
+          {
+            "text": "He plays the piano every day now."
+          },
+          {
+            "text": "He is learning to play the piano."
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.pg01.seed-0",
+          "feedback": {
+            "es": "Used to + verbo habla de un hábito pasado que ya no existe: Leo tocaba el piano, pero hoy no toca."
+          },
+          "hint": {
+            "es": "Used to + verbo habla de algo que ya no ocurre."
+          },
+          "text": "Leo: 'I used to play the piano every day. Now I don't play at all.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c657fe2a9da0d9c20c5fc4f3d5d0c9230e5ba6ca054a7066bf0fe7bfe67e7fc1"
+      },
+      {
+        "id": "en.n5.c06.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según Sara, ¿cómo le resulta el frío hoy?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It feels strange to her."
+          },
+          {
+            "text": "It feels normal to her."
+          },
+          {
+            "text": "She wants to move somewhere hot."
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.pg02.seed-0",
+          "feedback": {
+            "es": "Be used to significa que algo ya no resulta extraño: para Sara el frío ya es normal, por eso no usa abrigo en octubre."
+          },
+          "hint": {
+            "es": "Be used to significa que ya no te resulta extraño."
+          },
+          "text": "Sara: 'I'm used to the cold weather now. I don't wear a coat in October.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f62823abe0110ae7c171cf308c77985c7e69cd5fbd08270d679636afe3dc7418"
+      },
+      {
+        "id": "en.n5.c06.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estoy acostumbrado a levantarme temprano.»"
+        },
+        "answer": {
+          "text": "getting",
+          "accepted": [
+            "getting"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-getting-used-to-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.pg03.seed-0",
+          "feedback": {
+            "es": "Con be used to, el verbo que sigue lleva -ing: I'm used to getting up."
+          },
+          "hint": {
+            "es": "Después de be used to va un verbo con -ing."
+          },
+          "text": "I'm used to ___ up early."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:938c57a995c8ab6e0120813d3ef54d490b45de902a2d0328d1cb2fdb7206f32e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c06.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Antes iba al trabajo en bicicleta.»"
+        },
+        "answer": {
+          "text": "I used to cycle to work",
+          "tokens": [
+            "I",
+            "used",
+            "to",
+            "cycle",
+            "to",
+            "work"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.p01.seed-0",
+          "feedback": {
+            "es": "Used to + verbo base cuenta un hábito que ya no existe; cycle va sin -ing ni to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:981da20f1b31ed3cf10e3fa5f43361a637990518dc39b06c40c3b8c7df805153"
+      },
+      {
+        "id": "en.n5.c06.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué ha cambiado en la cena del hablante."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He eats earlier than before."
+          },
+          {
+            "text": "He never eats dinner now."
+          },
+          {
+            "text": "He eats later than before."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.p02.seed-0",
+          "feedback": {
+            "es": "El hablante cenaba antes a una hora y ahora cena más tarde: se acostumbró al nuevo horario."
+          },
+          "audio": "I used to eat dinner at six, but now I'm used to eating at nine.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0a3face0c1370f9be43b9e56cfbfa61514e3d48addda8810984bd4e941c8139d"
+      },
+      {
+        "id": "en.n5.c06.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con lo que significa."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I used to live in a village.",
+              {
+                "es": "Antes vivía allí; ya no."
+              }
+            ],
+            [
+              "I'm used to the noise.",
+              {
+                "es": "El ruido ya me resulta normal."
+              }
+            ],
+            [
+              "I'm used to taking the bus.",
+              {
+                "es": "Tomar el autobús ya es normal para mí."
+              }
+            ],
+            [
+              "I would visit my grandmother on Sundays.",
+              {
+                "es": "Antes la visitaba todos los domingos."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.p03.seed-0",
+          "feedback": {
+            "es": "Used to habla del pasado que terminó; be used to habla de lo que hoy ya es normal."
+          },
+          "pairs": [
+            [
+              "I used to live in a village.",
+              {
+                "es": "Antes vivía allí; ya no."
+              }
+            ],
+            [
+              "I'm used to the noise.",
+              {
+                "es": "El ruido ya me resulta normal."
+              }
+            ],
+            [
+              "I'm used to taking the bus.",
+              {
+                "es": "Tomar el autobús ya es normal para mí."
+              }
+            ],
+            [
+              "I would visit my grandmother on Sundays.",
+              {
+                "es": "Antes la visitaba todos los domingos."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cb85be585182a4e23a0dfae32c9ae06e07dabc53235063e8549f60dd3abfef52"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c06.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según la nota, ¿qué frase dice lo que Carlos ya no hace?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He no longer works at night."
+          },
+          {
+            "text": "He no longer works in the morning."
+          },
+          {
+            "text": "He has never worked at night."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.e01.seed-0",
+          "feedback": {
+            "es": "Used to work at night indica que antes trabajaba de noche y ahora no. Las otras opciones cambian la hora o dicen «nunca»."
+          },
+          "text": "Note: 'Carlos used to work at night, but he works in the morning now. He is used to it.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ad1e0dae4e243f42812272229192304fbbf59a5679721975791cafc23a9b821c"
+      },
+      {
+        "id": "en.n5.c06.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo le afecta el ruido de la calle al hablante."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It keeps him awake at night."
+          },
+          {
+            "text": "It doesn't keep him awake."
+          },
+          {
+            "text": "It makes him go out late."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.e02.seed-0",
+          "feedback": {
+            "es": "Be used to the noise significa que ya no le molesta: por eso duerme bien."
+          },
+          "audio": "I'm used to the noise of the street, so I sleep very well.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dd593aaa1ae3f2db46615c16d97b821c538fb3933a7bc842a9f3d84ad349c6c5"
+      },
+      {
+        "id": "en.n5.c06.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Antes vivía en un pueblo, pero ahora vivo en la ciudad.»"
+        },
+        "answer": {
+          "text": "used",
+          "accepted": [
+            "used"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.e03.seed-0",
+          "feedback": {
+            "es": "Para un hábito o estado del pasado que ya no existe se usa used to + verbo base."
+          },
+          "text": "I ___ to live in a village, but now I live in the city."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:66ec814702313532231f2f26b0a0b652e9752aa26e5d6cd815609893f9d598a2"
+      },
+      {
+        "id": "en.n5.c06.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Ya estoy acostumbrado a caminar bajo la lluvia.»"
+        },
+        "answer": {
+          "text": "I'm used to walking in the rain",
+          "tokens": [
+            "I'm",
+            "used",
+            "to",
+            "walking",
+            "in",
+            "the",
+            "rain"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.e04.seed-0",
+          "feedback": {
+            "es": "Be used to + -ing: walking lleva -ing porque to es una preposición."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e75b292d2b2eefb9f09cddac6e2847dcae6f3606c9aabc4096f45143b1034d2"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c06.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según Mia, ¿cómo era antes?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She is shy now."
+          },
+          {
+            "text": "She has always talked to everyone."
+          },
+          {
+            "text": "She was shy in the past."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.r01.seed-0",
+          "feedback": {
+            "es": "Used to be shy cuenta un estado del pasado que ya no es cierto: ahora Mia habla con todos."
+          },
+          "text": "Mia: 'I used to be shy. Now I talk to everyone.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5709e67ff4baeb6db6d952541e7a578bf1432aae72dad65f2ac1d8d95ac2f650"
+      },
+      {
+        "id": "en.n5.c06.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué ha cambiado para el hermano."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He has a place of his own now."
+          },
+          {
+            "text": "He lives with the speaker now."
+          },
+          {
+            "text": "He has no place to live."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.r02.seed-0",
+          "feedback": {
+            "es": "Used to share a room es el pasado; ahora tiene su propio departamento, así que ya no comparte habitación con el hablante."
+          },
+          "audio": "My brother used to share a room with me, but now he has his own flat.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:309f4c70cbb72f2f253f7a9407e1427e8982a1e8178a314102c967b0b2093ee2"
+      },
+      {
+        "id": "en.n5.c06.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estamos acostumbrados a esperar en la cola.»"
+        },
+        "answer": {
+          "text": "waiting",
+          "accepted": [
+            "waiting"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c06.r03.seed-0",
+          "feedback": {
+            "es": "Con be used to el verbo lleva -ing: we're used to waiting."
+          },
+          "text": "We're used to ___ in the queue."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2173de2952de1011b71b091014fd3999d961e00f6916cb3919fbdfdf10e47ff3"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c06.e01": {
+      "reteach": "en.n5.class-06.t01",
+      "review": "en.n5.c06.r01"
+    },
+    "en.n5.c06.e02": {
+      "reteach": "en.n5.class-06.t02",
+      "review": "en.n5.c06.r02"
+    },
+    "en.n5.c06.e03": {
+      "reteach": "en.n5.class-06.t03",
+      "review": "en.n5.c06.r03"
+    },
+    "en.n5.c06.e04": {
+      "reteach": "en.n5.class-06.t04",
+      "review": "en.n5.c06.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

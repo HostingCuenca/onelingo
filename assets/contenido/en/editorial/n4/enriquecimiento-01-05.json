@@ -1,0 +1,603 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "classes": {
+    "en.n4.class-01": {
+      "explicacion": {
+        "titulo": "Dos acciones pasadas: cuál ocurrió primero",
+        "texto": "Cuando cuentas algo pasado, a veces hay dos acciones: una ocurrió antes y otra después. La que ocurrió antes se dice con past perfect: had + participio (had left, had lost). La que ocurrió después, con past simple (arrived, found). En español suele ser «había + participio»: «el tren ya se había ido». Fíjate en el orden real de los hechos, no en el orden de las frases: una historia puede contar primero lo reciente y luego lo anterior."
+      },
+      "patron": {
+        "texto": "When + past simple, + sujeto + had + participio:",
+        "formula": [
+          {
+            "texto": "When we arrived at the station,",
+            "nota": "momento del relato: past simple"
+          },
+          {
+            "texto": "the train",
+            "nota": "sujeto de la acción anterior"
+          },
+          {
+            "texto": "had already left.",
+            "nota": "had + participio: lo que ya había pasado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When we arrived at the station, the train already left.",
+          "correcto": "When we arrived at the station, the train had already left.",
+          "explicacion": "Si el tren se fue antes de llegar, hace falta had + participio. Con left solo parece que se fue en ese momento."
+        },
+        {
+          "incorrecto": "Grandma had lose her ring before the wedding.",
+          "correcto": "Grandma had lost her ring before the wedding.",
+          "explicacion": "Después de had va el participio pasado (lost), no el verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom llega tarde y le cuenta a Ana qué pasó en la estación.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why are you so late, Tom?",
+            "traduccion": "¿Por qué llegas tan tarde, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "When I arrived at the station, the train had already left.",
+            "traduccion": "Cuando llegué a la estación, el tren ya se había ido."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Oh no! Why did you miss it?",
+            "traduccion": "¡Ay, no! ¿Por qué lo perdiste?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I had forgotten my phone at home, so I went back for it.",
+            "traduccion": "Había olvidado el móvil en casa, así que volví por él."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué había pasado ya cuando Tom llegó a la estación?",
+          "opciones": [
+            {
+              "es": "Ana ya había comprado los billetes."
+            },
+            {
+              "es": "El tren ya se había ido."
+            },
+            {
+              "es": "Tom ya había encontrado el móvil."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Tom dice «the train had already left»: el tren salió antes de que él llegara. Lo del móvil explica por qué llegó tarde."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pasó antes (had + participio)",
+          "Pasó después (past simple)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The train had left."
+            },
+            {
+              "texto": "We arrived."
+            }
+          ],
+          [
+            {
+              "texto": "She had lost her ring."
+            },
+            {
+              "texto": "She found it."
+            }
+          ],
+          [
+            {
+              "texto": "Nobody had told Ana."
+            },
+            {
+              "texto": "Ana was surprised."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-02": {
+      "explicacion": {
+        "titulo": "Past perfect o pasado simple",
+        "texto": "Con dos pasados simples cuentas los hechos en orden: When Ana's phone rang, Leo left (primero sonó, luego salió). Con past perfect marcas lo que ya había pasado antes de ese momento: Leo had already left. Algunas palabras ayudan: already (ya), just (acababa de), never… before (nunca antes) y by the time (para cuando). Decide según el orden real: ¿qué ocurrió primero?"
+      },
+      "patron": {
+        "texto": "By the time + past simple, + sujeto + had + marcador + participio:",
+        "formula": [
+          {
+            "texto": "By the time we got there,",
+            "nota": "momento de referencia: past simple"
+          },
+          {
+            "texto": "the band",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "had already started.",
+            "nota": "had + already/just/never + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By the time we got there, the band already started.",
+          "correcto": "By the time we got there, the band had already started.",
+          "explicacion": "Con by the time la acción anterior necesita had + participio; already started sin had suena a acción de ese momento."
+        },
+        {
+          "incorrecto": "I never had seen snow before the trip.",
+          "correcto": "I had never seen snow before the trip.",
+          "explicacion": "Never va entre had y el participio, no antes de had."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Tom por qué llegó tarde al concierto.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Were you at the concert last night?",
+            "traduccion": "¿Estuviste anoche en el concierto?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, but I was late. By the time I got there, the band had already started.",
+            "traduccion": "Sí, pero llegué tarde. Para cuando llegué, la banda ya había empezado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Did you hear the first song?",
+            "traduccion": "¿Oíste la primera canción?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No. When I found my seat, they had just finished it.",
+            "traduccion": "No. Cuando encontré mi asiento, acababan de terminarla."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué había pasado cuando Mia encontró su asiento?",
+          "opciones": [
+            {
+              "es": "La banda todavía no había empezado."
+            },
+            {
+              "es": "Mia había oído toda la primera canción."
+            },
+            {
+              "es": "La banda acababa de terminar la primera canción."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Mia dice «they had just finished it»: la primera canción terminó un momento antes de que ella se sentara."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Marcador",
+          "Con had + participio"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "already (ya)"
+            },
+            {
+              "texto": "The film had already started."
+            }
+          ],
+          [
+            {
+              "texto": "just (acababa de)"
+            },
+            {
+              "texto": "I had just sat down."
+            }
+          ],
+          [
+            {
+              "texto": "never … before (nunca antes)"
+            },
+            {
+              "texto": "She had never flown before."
+            }
+          ],
+          [
+            {
+              "texto": "by the time (para cuando)"
+            },
+            {
+              "texto": "By the time I called, he had gone."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-03": {
+      "explicacion": {
+        "titulo": "Escuchar el antecedente y la consecuencia",
+        "texto": "Para entender por qué pasó algo en un mensaje de voz, busca tres datos: el antecedente (lo que ya había pasado, con had + participio), la consecuencia (lo que ocurrió después, en pasado simple) y la hora. Las palabras clave te guían: because (porque) anuncia el antecedente y so (así que) anuncia la consecuencia. No intentes entender todo: escucha primero la razón y después lo que hizo la persona."
+      },
+      "patron": {
+        "texto": "Consecuencia + because + antecedente:",
+        "formula": [
+          {
+            "texto": "Leo was late",
+            "nota": "consecuencia: past simple"
+          },
+          {
+            "texto": "because",
+            "nota": "porque: anuncia la causa"
+          },
+          {
+            "texto": "he had missed the bus.",
+            "nota": "antecedente: had + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She was late because her train has been cancelled.",
+          "correcto": "She was late because her train had been cancelled.",
+          "explicacion": "La causa ocurrió antes de ese momento pasado: pide had been, no has been."
+        },
+        {
+          "incorrecto": "He arrived late because of he had missed the bus.",
+          "correcto": "He arrived late because he had missed the bus.",
+          "explicacion": "Because of va con un nombre; antes de una oración completa se usa solo because."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom comentan el mensaje de voz de Leo.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Did you hear Leo's message?",
+            "traduccion": "¿Escuchaste el mensaje de Leo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. He said there had been an accident on the bridge.",
+            "traduccion": "Sí. Dijo que había habido un accidente en el puente."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "So that is why he was late.",
+            "traduccion": "Así que por eso llegó tarde."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, and his bus waited for an hour.",
+            "traduccion": "Sí, y su autobús esperó una hora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué había pasado antes del retraso de Leo?",
+          "opciones": [
+            {
+              "es": "Había habido un accidente en el puente."
+            },
+            {
+              "es": "Leo había perdido el autobús."
+            },
+            {
+              "es": "Tom había llamado a Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «there had been an accident on the bridge»: es la causa anterior. Que el autobús esperara una hora es la consecuencia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra clave",
+          "Qué anuncia"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "because"
+            },
+            {
+              "texto": "el antecedente: por qué pasó"
+            }
+          ],
+          [
+            {
+              "texto": "so"
+            },
+            {
+              "texto": "la consecuencia: lo que ocurrió después"
+            }
+          ],
+          [
+            {
+              "texto": "by the time / when"
+            },
+            {
+              "texto": "el momento de referencia"
+            }
+          ],
+          [
+            {
+              "texto": "at + hora"
+            },
+            {
+              "texto": "la hora del hecho"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-04": {
+      "explicacion": {
+        "titulo": "Cómo explicar lo que había pasado",
+        "texto": "Una buena explicación tiene cuatro pasos. 1) Dónde llegaste: When I got to the gym (pasado simple). 2) Qué descubriste: I discovered that… o I realised that… 3) Qué había pasado antes: the class had already finished (had + participio). 4) Qué hiciste: so I went home. En inglés no se puede omitir el sujeto: no digas «discovered that…», di I discovered that…"
+      },
+      "patron": {
+        "texto": "When I got to + lugar, + I discovered that + had + participio:",
+        "formula": [
+          {
+            "texto": "When I got to the gym,",
+            "nota": "dónde llegaste: past simple"
+          },
+          {
+            "texto": "I discovered that",
+            "nota": "qué descubriste: sujeto + verbo"
+          },
+          {
+            "texto": "the class had already finished.",
+            "nota": "lo anterior: had + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I arrived, I discovered that the class finished.",
+          "correcto": "When I arrived, I discovered that the class had finished.",
+          "explicacion": "Lo que ya había terminado antes de llegar va en had + participio; finished solo no marca que fuera anterior."
+        },
+        {
+          "incorrecto": "When I arrived, discovered that the class had finished.",
+          "correcto": "When I arrived, I discovered that the class had finished.",
+          "explicacion": "En español se puede omitir el sujeto, pero en inglés hay que decir I."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo vuelve pronto a casa y le cuenta a Ana qué pasó.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why did you come back so early, Leo?",
+            "traduccion": "¿Por qué volviste tan pronto, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I went to the gym, but the class had already finished.",
+            "traduccion": "Fui al gimnasio, pero la clase ya había terminado."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Really? What time did it finish?",
+            "traduccion": "¿De verdad? ¿A qué hora terminó?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At six. I had read the wrong time on the poster.",
+            "traduccion": "A las seis. Había leído mal la hora en el cartel."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué error había cometido Leo?",
+          "opciones": [
+            {
+              "es": "Había olvidado la llave del gimnasio."
+            },
+            {
+              "es": "Había leído mal la hora en el cartel."
+            },
+            {
+              "es": "Había llegado un día tarde."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Leo dice «I had read the wrong time on the poster»: leyó mal la hora y por eso la clase ya había terminado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué decir"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1. Llegar"
+            },
+            {
+              "texto": "When I got to the gym,"
+            }
+          ],
+          [
+            {
+              "texto": "2. Descubrir"
+            },
+            {
+              "texto": "I discovered that"
+            }
+          ],
+          [
+            {
+              "texto": "3. Lo anterior"
+            },
+            {
+              "texto": "the class had already finished,"
+            }
+          ],
+          [
+            {
+              "texto": "4. Qué hiciste"
+            },
+            {
+              "texto": "so I went home."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-05": {
+      "explicacion": {
+        "titulo": "Aclarar un malentendido en cuatro pasos",
+        "texto": "Para aclarar un malentendido sigue cuatro pasos. 1) Di lo que pensabas: I thought you had forgotten… 2) Explica lo que había (o no había) pasado con had + participio o had not + participio. 3) Pide disculpas: I am sorry / I apologise. 4) Propón otra fecha: Shall we meet on Saturday instead? En esta clase se juntan las formas del bloque: had + participio, already, just, never before y by the time."
+      },
+      "patron": {
+        "texto": "I thought + had + participio; I had not + participio; Shall we…?",
+        "formula": [
+          {
+            "texto": "I thought you had forgotten the plan.",
+            "nota": "lo que creías: thought + had + participio"
+          },
+          {
+            "texto": "But my phone had stopped working.",
+            "nota": "lo que había pasado de verdad"
+          },
+          {
+            "texto": "Shall we meet on Saturday instead?",
+            "nota": "propuesta: Shall we + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I had not see your message.",
+          "correcto": "I had not seen your message.",
+          "explicacion": "Después de had not va el participio pasado (seen), no el verbo base."
+        },
+        {
+          "incorrecto": "I suggest to meet on Saturday instead.",
+          "correcto": "I suggest we meet on Saturday instead.",
+          "explicacion": "Suggest no lleva to + verbo: se dice suggest + sujeto + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo esperó a Ana en el parque y ahora hablan del malentendido.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Ana, I waited for you at the park for an hour!",
+            "traduccion": "¡Ana, te esperé en el parque una hora!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Oh no, Leo, I am so sorry. I had a fever, and my phone had stopped working.",
+            "traduccion": "Ay, no, Leo, lo siento mucho. Tenía fiebre y mi teléfono había dejado de funcionar."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I thought you had forgotten the plan.",
+            "traduccion": "Pensé que habías olvidado el plan."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No, I had not forgotten it. Shall we meet on Saturday instead?",
+            "traduccion": "No, no lo había olvidado. ¿Quedamos el sábado en su lugar?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, Saturday is perfect.",
+            "traduccion": "Sí, el sábado es perfecto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Ana para arreglar el malentendido?",
+          "opciones": [
+            {
+              "es": "Volver al parque hoy mismo."
+            },
+            {
+              "es": "Cancelar el plan definitivamente."
+            },
+            {
+              "es": "Quedar el sábado en lugar de hoy."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Ana pregunta «Shall we meet on Saturday instead?»: propone quedar el sábado y Leo acepta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Decir lo que creías"
+            },
+            {
+              "texto": "I thought you had forgotten the plan."
+            }
+          ],
+          [
+            {
+              "texto": "Explicar lo que había pasado"
+            },
+            {
+              "texto": "My phone had stopped working."
+            }
+          ],
+          [
+            {
+              "texto": "Pedir disculpas"
+            },
+            {
+              "texto": "I am sorry. / I apologise."
+            }
+          ],
+          [
+            {
+              "texto": "Proponer otra fecha"
+            },
+            {
+              "texto": "Shall we meet on Saturday instead?"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C1-C5 revisadas contra el mapa N4 (past perfect): continuidad con N3 C100 correcta; explicaciones, patrones y 2 errores reales verificados.",
+      "P1 corregidos: consignas multiparte sin traduccion ambigua (C4 pra, C5 pra) ahora con traduccion; audio no natural C1 eva1; distractor dudoso C2 'just had left'; consigna C2 rep1 incoherente con la respuesta; C5 eva0 y rep1 revelaban/inventaban datos (concert) y calcaban el escribir.",
+      "Escrituras alargadas (>=50% del minimo del mapa) con rubrica justa: C4 eva0 18->42 palabras y C5 eva2 19->43, 5 grupos de evidencias con variantes (realised/realized, apologise/apologize) y 2 variantes aceptadas.",
+      "P2: never aceptado en C5 gui1; realise; gloss de taxi; frase C2 'that song at a concert'."
+    ]
+  }
+}

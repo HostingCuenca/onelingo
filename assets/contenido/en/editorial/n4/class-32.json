@@ -1,0 +1,811 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-32",
+  "title": {
+    "en": "Order and tense in reports",
+    "es": "Orden y tiempos en lo transmitido"
+  },
+  "objectives": {
+    "es": [
+      "Transformar preguntas y órdenes directas en estilo indirecto con retroceso de tiempos, orden afirmativo y cambios de tiempo y lugar."
+    ]
+  },
+  "concepts": [
+    "n4-messages-and-gossip-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-31"
+  ],
+  "usesVocabulary": [
+    "told",
+    "asked",
+    "could",
+    "would",
+    "there",
+    "then",
+    "the next day",
+    "that day"
+  ],
+  "usesPatterns": [
+    "n4-messages-and-gossip-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "told",
+      "es": "dijo / ordenó"
+    },
+    {
+      "en": "asked",
+      "es": "pidió / preguntó"
+    },
+    {
+      "en": "could",
+      "es": "podía"
+    },
+    {
+      "en": "would",
+      "es": "iba a"
+    },
+    {
+      "en": "there",
+      "es": "allí"
+    },
+    {
+      "en": "then",
+      "es": "entonces"
+    },
+    {
+      "en": "the next day",
+      "es": "al día siguiente"
+    },
+    {
+      "en": "that day",
+      "es": "ese día"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-32.t01",
+      "en": "The teacher told us to open our books.",
+      "es": "La profesora nos dijo que abriéramos los libros.",
+      "explanationEs": "Una orden se transmite con told + persona + to + verbo base.",
+      "segments": [
+        "The teacher told us",
+        "to open our books."
+      ],
+      "audioText": "The teacher told us to open our books.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-2"
+    },
+    {
+      "id": "en.n4.class-32.t02",
+      "en": "Mia asked me not to tell Leo.",
+      "es": "Mia me pidió que no se lo dijera a Leo.",
+      "explanationEs": "Una petición negativa lleva not to antes del verbo.",
+      "segments": [
+        "Mia asked me not",
+        "to tell Leo."
+      ],
+      "audioText": "Mia asked me not to tell Leo.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-2"
+    },
+    {
+      "id": "en.n4.class-32.t03",
+      "en": "Ana asked if I could come the next day.",
+      "es": "Ana preguntó si yo podía venir al día siguiente.",
+      "explanationEs": "Can retrocede a could y tomorrow pasa a the next day.",
+      "segments": [
+        "Ana asked if I could",
+        "come the next day."
+      ],
+      "audioText": "Ana asked if I could come the next day.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-2"
+    },
+    {
+      "id": "en.n4.class-32.t04",
+      "en": "Sara asked where I was going that day.",
+      "es": "Sara preguntó adónde iba yo ese día.",
+      "explanationEs": "Are going pasa a was going, y today pasa a that day.",
+      "segments": [
+        "Sara asked where I",
+        "was going that day."
+      ],
+      "audioText": "Sara asked where I was going that day.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-2"
+    },
+    {
+      "id": "en.n4.class-32.t05",
+      "en": "Tom asked if we would meet there.",
+      "es": "Tom preguntó si nos veríamos allí.",
+      "explanationEs": "Will pasa a would y here pasa a there.",
+      "segments": [
+        "Tom asked if we",
+        "would meet there."
+      ],
+      "audioText": "Tom asked if we would meet there.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-2"
+    },
+    {
+      "id": "en.n4.class-32.t06",
+      "en": "Leo asked what I was doing then.",
+      "es": "Leo preguntó qué estaba haciendo yo entonces.",
+      "explanationEs": "Now pasa a then: el momento ya es pasado para quien cuenta.",
+      "segments": [
+        "Leo asked what I",
+        "was doing then."
+      ],
+      "audioText": "Leo asked what I was doing then.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-messages-and-gossip-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c32.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cómo se transmite la orden «Close the door», dicha por Sara?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Sara told me close the door."
+          },
+          {
+            "text": "Sara told that I close the door."
+          },
+          {
+            "text": "Sara told me to close the door."
+          }
+        ],
+        "teaches": [
+          "n4-messages-and-gossip-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.pg01.seed-0",
+          "feedback": {
+            "es": "Una orden se transmite con told + persona + to + verbo base. Sin to, o con that, la estructura no es correcta."
+          },
+          "hint": {
+            "es": "Después de la persona, el verbo necesita la partícula del infinitivo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aec822b6667bd9fc9f6968821cbd78db0897d97275c972ab2a5baa3865732cca"
+      },
+      {
+        "id": "en.n4.c32.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ana preguntó si yo podía venir.»"
+        },
+        "answer": {
+          "text": "could",
+          "accepted": [
+            "could"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-messages-and-gossip-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.pg02.seed-0",
+          "feedback": {
+            "es": "Can retrocede a could cuando cuentas lo que alguien preguntó en el pasado."
+          },
+          "hint": {
+            "es": "Piensa en cómo cambia can cuando se cuenta algo que ya se dijo."
+          },
+          "text": "Ana asked if I ___ come."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:eabcc84f404ff8d02a80716f8995cbfd2603ef7cef149c09513b4247f867e040"
+      },
+      {
+        "id": "en.n4.c32.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué expresión sustituye a «tomorrow» al transmitir lo dicho ayer?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "the next day"
+          },
+          {
+            "text": "the day before"
+          },
+          {
+            "text": "that night"
+          }
+        ],
+        "teaches": [
+          "n4-messages-and-gossip-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.pg03.seed-0",
+          "feedback": {
+            "es": "Tomorrow se convierte en the next day cuando cuentas la frase desde otro momento. The day before corresponde a yesterday y that night a tonight."
+          },
+          "hint": {
+            "es": "Desde el momento del relato, ese «mañana» ya es un día pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ea2b39f0bb5f750101f98a0caf66c501e1497879b8cbb081da54c081e444a383"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c32.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Tom preguntó si nos veríamos allí.»"
+        },
+        "answer": {
+          "text": "Tom asked if we would meet there",
+          "tokens": [
+            "Tom",
+            "asked",
+            "if",
+            "we",
+            "would",
+            "meet",
+            "there"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.p01.seed-0",
+          "feedback": {
+            "es": "Will pasa a would y here pasa a there; después de if va el sujeto y luego el verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4cca579b567753889364c40054c70163a2fc3ffd08be4c98194f373c729769e1"
+      },
+      {
+        "id": "en.n4.c32.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa lo que Sara preguntó: «¿Adónde vas hoy?» y «¿Puedes ayudarme?»"
+        },
+        "answer": {
+          "text": "was | could",
+          "accepted": [
+            "was | could"
+          ],
+          "parts": [
+            {
+              "text": "was",
+              "accepted": [
+                "was"
+              ]
+            },
+            {
+              "text": "could",
+              "accepted": [
+                "could"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.p02.seed-0",
+          "feedback": {
+            "es": "Are going pasa a was going y can pasa a could; los dos tiempos retroceden en el relato."
+          },
+          "sentences": [
+            "Sara asked where I ___ going that day.",
+            "Sara asked if I ___ help her."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          },
+          "text": "Direct: «Where are you going today?» · «Can you help me?»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c27babceb7c3befea1071c1de7b0b0c47858a23688780abc2a4a76929fd57d8c"
+      },
+      {
+        "id": "en.n4.c32.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige lo que pidió el entrenador."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The coach asked if we had water."
+          },
+          {
+            "text": "The coach wanted us to take water."
+          },
+          {
+            "text": "The coach said we could not drink water."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.p03.seed-0",
+          "feedback": {
+            "es": "Told us to bring water: es una orden de llevar agua. No pregunta si hay agua ni prohíbe beberla."
+          },
+          "audio": "The coach told us to bring water.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d3052bc4353a1f8292c7dde9ad64bc592b7e045cf08b46acb942fd3f5e39d55"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c32.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la pregunta transmitida de Ana a Leo."
+        },
+        "answer": {
+          "text": "Ana asked Leo if he would help her the next day.",
+          "accepted": [
+            "Ana asked Leo if he would help her the next day.",
+            "Ana asked Leo whether he would help her the next day.",
+            "Ana asked Leo if he would help her the following day.",
+            "Ana asked Leo whether he would help her the following day.",
+            "Ana asked him if he would help her the next day.",
+            "Ana asked him whether he would help her the next day.",
+            "Ana asked Leo if he would be able to help her the next day.",
+            "Ana asked Leo if he would help her the day after."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.e01.seed-0",
+          "feedback": {
+            "es": "Hay que cambiar will por would, you por he, me por her y tomorrow por the next day, con if y orden afirmativo. Se aceptan variantes como whether o the following day."
+          },
+          "text": "Ana to Leo: «Will you help me tomorrow?»",
+          "scoring": {
+            "wordRange": [
+              7,
+              16
+            ],
+            "evidenceGroups": [
+              [
+                "asked Leo if",
+                "asked Leo whether",
+                "asked him if",
+                "asked him whether",
+                "wanted to know if",
+                "wanted to know whether",
+                "wanted to know if Leo"
+              ],
+              [
+                "he would help",
+                "he would be able to help",
+                "Leo would help",
+                "he was going to help"
+              ],
+              [
+                "help her",
+                "help Ana"
+              ],
+              [
+                "the next day",
+                "the following day",
+                "next day",
+                "the day after"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3d71ab9e369ef812853fc865df38a378cbbed1a4745820bb432b891e1c0b1692"
+      },
+      {
+        "id": "en.n4.c32.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige lo que quería Mia."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Mia asked if I would wait."
+          },
+          {
+            "text": "Mia told me to wait for her."
+          },
+          {
+            "text": "Mia did not want me to wait."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.e02.seed-0",
+          "feedback": {
+            "es": "Asked me not to wait: Mia no quería que la esperaran. Con not to se transmite una petición negativa."
+          },
+          "audio": "Mia asked me not to wait for her.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:495292d0b3f2ba5ca97ec774b1457a66ff3982c805e5cc7b0b233e2d3ca2a8cc"
+      },
+      {
+        "id": "en.n4.c32.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase transmite bien la pregunta de Leo?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Leo asked if I could come the next day."
+          },
+          {
+            "text": "Leo asked if could I come the next day."
+          },
+          {
+            "text": "Leo asked if I will come tomorrow."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.e03.seed-0",
+          "feedback": {
+            "es": "Con can se retrocede a could y tomorrow pasa a the next day: if I could come the next day. Las otras opciones invierten el orden de la pregunta directa o mantienen will y tomorrow."
+          },
+          "text": "Yesterday Leo said: «Can you come tomorrow?»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cbb4c153c0b96fd73a31df98bf3a4842d1c281a383be161e79074d77edc11a13"
+      },
+      {
+        "id": "en.n4.c32.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Carlos preguntó qué hacía yo entonces.»"
+        },
+        "answer": {
+          "text": "then",
+          "accepted": [
+            "then"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.e04.seed-0",
+          "feedback": {
+            "es": "Now pasa a then cuando cuentas la pregunta desde otro momento."
+          },
+          "text": "Carlos asked what I was doing ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f1911dfded24e10a8a4910e3049f2e60dc32c55c511debae353bfe530e481c8a"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c32.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cómo se transmite la petición del profesor?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The teacher asked us don't touch the screen."
+          },
+          {
+            "text": "The teacher asked us not to touch the screen."
+          },
+          {
+            "text": "The teacher asked us if not touch the screen."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.r01.seed-0",
+          "feedback": {
+            "es": "Una petición negativa se transmite con asked + persona + not to + verbo: asked us not to touch."
+          },
+          "text": "The teacher says: «Please don't touch the screen.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:915f8b24ae11e8a4d0b84ac5c2559ca8b31c1593dd5b489583dc6dd5c013b250"
+      },
+      {
+        "id": "en.n4.c32.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué debe hacer Leo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Go home."
+          },
+          {
+            "text": "Call the coach."
+          },
+          {
+            "text": "Stay in that place."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.r02.seed-0",
+          "feedback": {
+            "es": "Told Leo to wait there: la orden es quedarse en ese lugar. No le pide irse ni llamar."
+          },
+          "audio": "The coach told Leo to wait there.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:45d8a80a47e05987ab648e81ea1f51bf7017216501d4e5a3898a4125ba2a7d31"
+      },
+      {
+        "id": "en.n4.c32.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Carlos me dijo que abriera la ventana.»"
+        },
+        "answer": {
+          "text": "Carlos told me to open the window",
+          "tokens": [
+            "Carlos",
+            "told",
+            "me",
+            "to",
+            "open",
+            "the",
+            "window"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-messages-and-gossip-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c32.r03.seed-0",
+          "feedback": {
+            "es": "Told + me + to + verbo base: la orden se cuenta con infinitivo con to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dbc76608df297173afa522af57cb82cf3d913523055faeae8860b609b430dbe7"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c32.e01": {
+      "reteach": "en.n4.class-32.t01",
+      "review": "en.n4.c32.r01"
+    },
+    "en.n4.c32.e02": {
+      "reteach": "en.n4.class-32.t02",
+      "review": "en.n4.c32.r02"
+    },
+    "en.n4.c32.e03": {
+      "reteach": "en.n4.class-32.t03",
+      "review": "en.n4.c32.r03"
+    },
+    "en.n4.c32.e04": {
+      "reteach": "en.n4.class-32.t04",
+      "review": "en.n4.c32.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

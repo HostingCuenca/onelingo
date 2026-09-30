@@ -1,0 +1,572 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "classes": {
+    "en.n4.class-66": {
+      "explicacion": {
+        "titulo": "Futuro en curso o futuro completado",
+        "texto": "En una predicción puedes mirar la acción desde dentro o desde fuera. Will be + gerundio (future continuous) presenta una acción en curso en un momento futuro: At nine tomorrow, the robot will be cleaning = a esa hora estará a mitad. Will have + participio (future perfect) presenta una acción terminada antes de ese momento: By nine tomorrow, the robot will have cleaned = a esa hora ya habrá acabado. Señales: this time next year, at + hora, in + año indican acción en curso; by + fecha indica algo terminado antes."
+      },
+      "patron": {
+        "texto": "En curso o terminado en un momento futuro:",
+        "formula": [
+          {
+            "texto": "At nine tomorrow, the robot",
+            "nota": "momento futuro + sujeto"
+          },
+          {
+            "texto": "will be cleaning",
+            "nota": "will be + gerundio: en curso a esa hora"
+          },
+          {
+            "texto": "the lab. By nine, it will have cleaned it.",
+            "nota": "will have + participio: terminado antes de las nueve"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The robot will have clean the lab by nine.",
+          "correcto": "The robot will have cleaned the lab by nine.",
+          "explicacion": "El future perfect usa participio pasado (cleaned), no el verbo base."
+        },
+        {
+          "incorrecto": "At nine tomorrow, the robot will cleaning the lab.",
+          "correcto": "At nine tomorrow, the robot will be cleaning the lab.",
+          "explicacion": "El future continuous necesita be entre will y el gerundio: will be cleaning."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom hablan de sus planes para el año que viene.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What will you be doing this time next year, Tom?",
+            "traduccion": "¿Qué estarás haciendo dentro de un año, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I will be working with robots in a big lab.",
+            "traduccion": "Estaré trabajando con robots en un laboratorio grande."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And will you have finished your course by then?",
+            "traduccion": "¿Y habrás terminado tu curso para entonces?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, I will have finished it by June.",
+            "traduccion": "Sí, lo habré terminado para junio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué habrá hecho Tom antes de junio?",
+          "opciones": [
+            {
+              "es": "Habrá terminado su curso."
+            },
+            {
+              "es": "Estará trabajando en el laboratorio."
+            },
+            {
+              "es": "Habrá construido un robot."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I will have finished it by June». Trabajar con robots es lo que estará haciendo dentro de un año, no lo que habrá terminado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Qué dice",
+          "Señales"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "will be + gerundio"
+            },
+            {
+              "texto": "acción en curso en ese momento"
+            },
+            {
+              "texto": "this time next year, at nine, in 2035"
+            }
+          ],
+          [
+            {
+              "texto": "will have + participio"
+            },
+            {
+              "texto": "acción terminada antes del momento"
+            },
+            {
+              "texto": "by nine, by next year, by 2035"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-67": {
+      "explicacion": {
+        "titulo": "Formar will be doing y will have done",
+        "texto": "Future continuous: will be + gerundio (I will be working). Future perfect: will have + participio (I will have finished); los verbos regulares añaden -ed y los irregulares cambian: build/built, become/become. En preguntas, will va primero: Will you be working? Will you have finished? En negativas se añade not: will not have finished. By + fecha, in two years y by the time + presente simple sitúan el momento: By the time you arrive, it will have started. No pongas will después de by the time."
+      },
+      "patron": {
+        "texto": "By the time + presente, will have + participio:",
+        "formula": [
+          {
+            "texto": "By the time you arrive,",
+            "nota": "by the time + presente simple (sin will)"
+          },
+          {
+            "texto": "the engineers will have fixed",
+            "nota": "will have + participio: terminado antes"
+          },
+          {
+            "texto": "the app.",
+            "nota": "el resto de la idea"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By the time you will arrive, the engineers will have fixed the app.",
+          "correcto": "By the time you arrive, the engineers will have fixed the app.",
+          "explicacion": "Tras by the time se usa presente simple; will solo aparece en la otra parte de la frase."
+        },
+        {
+          "incorrecto": "In two years, I will have save enough money for a laptop.",
+          "correcto": "In two years, I will have saved enough money for a laptop.",
+          "explicacion": "Después de will have va el participio pasado: saved, no save."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos hablan del portátil que Sara quiere comprar.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I want a new laptop, but I have saved only half of the money.",
+            "traduccion": "Quiero un portátil nuevo, pero solo he ahorrado la mitad del dinero."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "By next June, you will have saved enough.",
+            "traduccion": "Para el próximo junio habrás ahorrado lo suficiente."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I hope so. This time next year, I will be using it every day.",
+            "traduccion": "Eso espero. Dentro de un año, a estas alturas, lo estaré usando cada día."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo habrá ahorrado Sara lo suficiente?",
+          "opciones": [
+            {
+              "es": "Para el próximo junio."
+            },
+            {
+              "es": "Dentro de dos años."
+            },
+            {
+              "es": "Dentro de un año, a estas alturas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «By next June, you will have saved enough». Usar el portátil cada día es lo que estará haciendo dentro de un año."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Afirmativa",
+          "Pregunta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "future continuous"
+            },
+            {
+              "texto": "I will be using a laptop."
+            },
+            {
+              "texto": "Will you be using a laptop?"
+            }
+          ],
+          [
+            {
+              "texto": "future perfect"
+            },
+            {
+              "texto": "I will have saved money."
+            },
+            {
+              "texto": "Will you have saved money?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-68": {
+      "explicacion": {
+        "titulo": "Situar las predicciones en una línea de tiempo",
+        "texto": "Para seguir un pódcast de predicciones, anota tres datos de cada una: el año o marcador (by 2028, in 2030, this time next year), la forma y la idea. Will be + gerundio significa que algo estará ocurriendo en ese momento; will have + participio, que ya habrá ocurrido antes. En tu línea de tiempo escribe la fecha y una palabra clave, no la frase entera. Escucha también quién habla: el invitado (guest) hace las predicciones y el presentador (host) pregunta."
+      },
+      "patron": {
+        "texto": "Fecha + forma + idea:",
+        "formula": [
+          {
+            "texto": "By 2028,",
+            "nota": "by + año: para entonces ya habrá ocurrido"
+          },
+          {
+            "texto": "schools will have replaced",
+            "nota": "will have + participio: cambio terminado"
+          },
+          {
+            "texto": "paper books with tablets.",
+            "nota": "qué cambia"
+          },
+          {
+            "texto": "In 2030, a robot will be helping",
+            "nota": "in + año + will be + gerundio: estará pasando"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By 2028, schools will replacing paper books with tablets.",
+          "correcto": "By 2028, schools will have replaced paper books with tablets.",
+          "explicacion": "Para decir que algo ya habrá cambiado se usa will have + participio, no will + gerundio."
+        },
+        {
+          "incorrecto": "In 2030, a robot will be help each patient.",
+          "correcto": "In 2030, a robot will be helping each patient.",
+          "explicacion": "Tras will be va el gerundio: helping."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia escuchan un pódcast sobre el futuro.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The guest says something new about 2033.",
+            "traduccion": "El invitado dice algo nuevo sobre 2033."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes: by 2033, many homes will have made their own energy.",
+            "traduccion": "Sí: para 2033, muchas casas habrán producido su propia energía."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And what will the doctors be doing in 2030?",
+            "traduccion": "¿Y qué estarán haciendo los médicos en 2030?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "A robot will be helping each patient in a small town.",
+            "traduccion": "Un robot estará ayudando a cada paciente en un pueblo pequeño."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pasará para 2033?",
+          "opciones": [
+            {
+              "es": "Muchas casas habrán producido su propia energía."
+            },
+            {
+              "es": "Un robot estará ayudando a cada paciente."
+            },
+            {
+              "es": "Los médicos habrán cerrado los pueblos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «by 2033, many homes will have made their own energy». Lo del robot y los pacientes es para 2030."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal que oyes",
+          "Qué anotas"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "By 2028 + will have + participio"
+            },
+            {
+              "texto": "ya ocurrido antes de 2028"
+            }
+          ],
+          [
+            {
+              "texto": "In 2030 + will be + gerundio"
+            },
+            {
+              "texto": "en curso durante 2030"
+            }
+          ],
+          [
+            {
+              "texto": "This time next year + will be + gerundio"
+            },
+            {
+              "texto": "en curso dentro de un año"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-69": {
+      "explicacion": {
+        "titulo": "Predecir con distinto grado de seguridad",
+        "texto": "Al predecir la vida diaria combina tres cosas: un marco de tiempo (In 2035, By 2035), la forma (will be + gerundio para lo que estará ocurriendo, will have + participio para lo que ya habrá cambiado) y el grado de seguridad. De mayor a menor: I am sure / will definitely, will probably, I think, might, I am not sure. El adverbio va después de will y antes del resto: will probably be, will definitely have. No lo pongas entre be y el gerundio."
+      },
+      "patron": {
+        "texto": "Marco de tiempo + seguridad + forma futura:",
+        "formula": [
+          {
+            "texto": "In 2035,",
+            "nota": "marco de tiempo"
+          },
+          {
+            "texto": "I will probably be working",
+            "nota": "will + adverbio + be + gerundio: probable y en curso"
+          },
+          {
+            "texto": "from home.",
+            "nota": "el resto de la idea"
+          },
+          {
+            "texto": "I will definitely have changed my routine.",
+            "nota": "will definitely have + participio: seguro y ya hecho"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will be probably working from home.",
+          "correcto": "I will probably be working from home.",
+          "explicacion": "El adverbio probably va justo después de will, antes de be."
+        },
+        {
+          "incorrecto": "In ten years I will be live in a new city.",
+          "correcto": "In ten years I will be living in a new city.",
+          "explicacion": "Tras will be va el gerundio: living."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom hablan de cómo será su vida en 2035.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What will your daily life be like in 2035, Tom?",
+            "traduccion": "¿Cómo será tu vida diaria en 2035, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I will probably be working from home three days a week.",
+            "traduccion": "Probablemente estaré trabajando desde casa tres días a la semana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And will you have changed your habits?",
+            "traduccion": "¿Y habrás cambiado tus hábitos?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I am sure I will have saved money, but I might be living in a different city.",
+            "traduccion": "Estoy seguro de que habré ahorrado dinero, pero quizá esté viviendo en otra ciudad."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿qué es seguro?",
+          "opciones": [
+            {
+              "es": "Que habrá ahorrado dinero."
+            },
+            {
+              "es": "Que vivirá en otra ciudad."
+            },
+            {
+              "es": "Que trabajará en casa cinco días."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I am sure I will have saved money». Vivir en otra ciudad es solo posible (might) y trabajar en casa es probable (probably)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Seguridad",
+          "Cómo decirlo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Total"
+            },
+            {
+              "texto": "I am sure / I will definitely be working"
+            }
+          ],
+          [
+            {
+              "texto": "Alta"
+            },
+            {
+              "texto": "I will probably be working"
+            }
+          ],
+          [
+            {
+              "texto": "Media"
+            },
+            {
+              "texto": "I think I will be working"
+            }
+          ],
+          [
+            {
+              "texto": "Posible"
+            },
+            {
+              "texto": "I might be working"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-70": {
+      "explicacion": {
+        "titulo": "Acordar el futuro probable",
+        "texto": "En un debate sobre el futuro sigue cuatro pasos. 1) Opina con seguridad graduada: In my opinion, ... will be working / is likely to be... 2) Duda con cortesía: I see your point, but I think it is unlikely; I disagree a little, because... 3) Da una razón con will have + participio: the batteries will not have improved by then. 4) Acuerda: Let us put it on our list. Reconocer primero la idea del otro suena mucho más amable que decir simplemente no."
+      },
+      "patron": {
+        "texto": "Reconocer + dudar + razón:",
+        "formula": [
+          {
+            "texto": "I see your point,",
+            "nota": "reconoce la idea del otro"
+          },
+          {
+            "texto": "but I think it is unlikely",
+            "nota": "duda con cortesía"
+          },
+          {
+            "texto": "because the batteries will not have improved by then.",
+            "nota": "razón con will have + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am disagree with your idea.",
+          "correcto": "I disagree with your idea.",
+          "explicacion": "Disagree ya es un verbo: no se usa con am (no «estoy disagree»)."
+        },
+        {
+          "incorrecto": "Robots are likely be working in many homes.",
+          "correcto": "Robots are likely to be working in many homes.",
+          "explicacion": "Tras likely va to + verbo base: likely to be."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos preparan una lista con las ideas más probables.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Which idea is the most likely by 2035: robot taxis or solar homes?",
+            "traduccion": "¿Qué idea es la más probable para 2035: los taxis robot o las casas solares?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "In my opinion, robot taxis will be working in our city by then.",
+            "traduccion": "En mi opinión, los taxis robot estarán funcionando en nuestra ciudad para entonces."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I see your point, but I think it is unlikely. Cars will have become electric first.",
+            "traduccion": "Entiendo tu punto, pero creo que es poco probable. Antes los coches se habrán vuelto eléctricos."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "OK, I agree. Let us put solar homes on our list.",
+            "traduccion": "Vale, estoy de acuerdo. Pongamos las casas solares en nuestra lista."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué deciden poner en su lista?",
+          "opciones": [
+            {
+              "es": "Las casas solares."
+            },
+            {
+              "es": "Los taxis robot."
+            },
+            {
+              "es": "Los coches eléctricos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos termina diciendo «Let us put solar homes on our list». Los taxis robot fue su primera opinión, pero Sara la duda."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quieres…",
+          "Dices…"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Dar tu opinión"
+            },
+            {
+              "texto": "In my opinion, robot taxis are likely."
+            }
+          ],
+          [
+            {
+              "texto": "Dudar con cortesía"
+            },
+            {
+              "texto": "I see your point, but I think it is unlikely."
+            }
+          ],
+          [
+            {
+              "texto": "Dar una razón"
+            },
+            {
+              "texto": "I disagree, because the chance is small."
+            }
+          ],
+          [
+            {
+              "texto": "Acordar"
+            },
+            {
+              "texto": "Let us put it on our list."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

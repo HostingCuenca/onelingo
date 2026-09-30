@@ -1,0 +1,712 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n4.class-91": {
+      "explicacion": {
+        "titulo": "Leer una canción como una historia",
+        "texto": "Una canción narrativa funciona como un cuento breve. Para entenderla busca tres datos. Personajes: ¿quién habla y de quién habla? (I, my grandpa). Secuencia: palabras como every evening, then, last night y finally marcan el orden de los hechos, y los verbos en pasado cuentan lo que ya ocurrió. Sentimientos: adjetivos como lonely o proud dicen cómo se siente el personaje, y because da la razón. No necesitas entender cada palabra: busca quién, cuándo y cómo se siente."
+      },
+      "patron": {
+        "texto": "Cuándo + personaje + sentimiento + razón:",
+        "formula": [
+          {
+            "texto": "In the first verse,",
+            "nota": "cuándo: el lugar de la historia"
+          },
+          {
+            "texto": "the girl",
+            "nota": "personaje: quién"
+          },
+          {
+            "texto": "was never lonely",
+            "nota": "sentimiento: cómo se sentía"
+          },
+          {
+            "texto": "because her grandfather sang every evening.",
+            "nota": "razón: por qué"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Then the girl moves to the city and forgot the words.",
+          "correcto": "Then the girl moved to the city and forgot the words.",
+          "explicacion": "En una historia contada en pasado, todos los hechos van en pasado (moved, forgot). Mezclar tiempos confunde el orden de los hechos."
+        },
+        {
+          "incorrecto": "At the end, the girl is proud for her grandfather.",
+          "correcto": "At the end, the girl is proud of her grandfather.",
+          "explicacion": "El adjetivo proud se construye con of («orgullosa de»), no con for."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom leen la letra de una canción de práctica para su clase de inglés.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Who is the main character in this song?",
+            "traduccion": "¿Quién es el personaje principal de esta canción?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "A little girl. In the first verse, her grandfather sang every evening.",
+            "traduccion": "Una niña pequeña. En la primera estrofa, su abuelo cantaba cada tarde."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And how did she feel in the city?",
+            "traduccion": "¿Y cómo se sentía ella en la ciudad?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "She was lonely. She missed the river.",
+            "traduccion": "Se sentía sola. Echaba de menos el río."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "How does the song end?",
+            "traduccion": "¿Cómo termina la canción?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Finally, she found his old letter and felt proud.",
+            "traduccion": "Por último, encontró su vieja carta y se sintió orgullosa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo termina la canción?",
+          "opciones": [
+            {
+              "es": "La niña encuentra la carta de su abuelo y se siente orgullosa."
+            },
+            {
+              "es": "La niña vuelve al río y canta con su abuelo."
+            },
+            {
+              "es": "El abuelo se muda a la ciudad y se siente solo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom lo dice al final: «Finally, she found his old letter and felt proud». La niña no vuelve al río y el abuelo no se muda."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué buscar",
+          "Pregunta",
+          "Pistas en la letra"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Personajes"
+            },
+            {
+              "texto": "¿Quién?"
+            },
+            {
+              "texto": "I, my grandpa, the girl"
+            }
+          ],
+          [
+            {
+              "texto": "Secuencia"
+            },
+            {
+              "texto": "¿Qué pasó primero?"
+            },
+            {
+              "texto": "every evening, then, last night, finally"
+            }
+          ],
+          [
+            {
+              "texto": "Sentimientos"
+            },
+            {
+              "texto": "¿Cómo se siente?"
+            },
+            {
+              "texto": "lonely, proud, because"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-92": {
+      "explicacion": {
+        "titulo": "Las cinco herramientas del narrador",
+        "texto": "Para narrar con precisión elige la herramienta según lo que cuentas. Un hecho anterior a otro pasado: had + participio (Leo had closed the windows). Una costumbre que ya no existe: used to + verbo base. Lo que no ocurrió: if + had + participio, would have + participio. Para identificar a alguien: who (persona) o which (cosa). Para contar lo que alguien dijo: told + persona + that, y el verbo retrocede un paso (forgot pasa a had forgotten). Ojo: en inglés if no lleva would have; ese va solo en la segunda parte."
+      },
+      "patron": {
+        "texto": "Cinco herramientas para narrar:",
+        "formula": [
+          {
+            "texto": "had + participio",
+            "nota": "un hecho anterior a otro pasado"
+          },
+          {
+            "texto": "used to + verbo base",
+            "nota": "una costumbre pasada"
+          },
+          {
+            "texto": "if + had + participio,",
+            "nota": "la condición que no ocurrió"
+          },
+          {
+            "texto": "would have + participio",
+            "nota": "su resultado imaginado"
+          },
+          {
+            "texto": "who / which, told + that",
+            "nota": "relativa y mensaje contado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If she would have taken her umbrella, she would have stayed dry.",
+          "correcto": "If she had taken her umbrella, she would have stayed dry.",
+          "explicacion": "Después de if se usa had + participio, no would have. Would have va solo en la segunda parte."
+        },
+        {
+          "incorrecto": "Mia said me that she had forgotten it.",
+          "correcto": "Mia told me that she had forgotten it.",
+          "explicacion": "Said no lleva persona detrás (said that…); con persona se usa told: told me that…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara llega a casa de Leo después de una tormenta y le pregunta qué pasó.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Why were the windows closed when I arrived?",
+            "traduccion": "¿Por qué estaban cerradas las ventanas cuando llegué?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Because I had closed them before the storm arrived.",
+            "traduccion": "Porque las había cerrado antes de que llegara la tormenta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Who was with you?",
+            "traduccion": "¿Quién estaba contigo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My neighbour, who lives next door. She told me that she had forgotten her umbrella.",
+            "traduccion": "Mi vecina, que vive al lado. Me dijo que había olvidado su paraguas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "If she had taken it, she would have stayed dry.",
+            "traduccion": "Si lo hubiera llevado, se habría mantenido seca."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but she used to forget it every time!",
+            "traduccion": "Sí, pero ¡solía olvidarlo siempre!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué estaban cerradas las ventanas?",
+          "opciones": [
+            {
+              "es": "Leo las había cerrado antes de que llegara la tormenta."
+            },
+            {
+              "es": "La vecina las cerró cuando empezó la lluvia."
+            },
+            {
+              "es": "Sara las cerró al llegar a la casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lo explica con un antecedente: «I had closed them before the storm arrived». Ni la vecina ni Sara tocaron las ventanas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Herramienta",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Antecedente"
+            },
+            {
+              "texto": "had + participio"
+            },
+            {
+              "texto": "Leo had closed the windows."
+            }
+          ],
+          [
+            {
+              "texto": "Costumbre pasada"
+            },
+            {
+              "texto": "used to + verbo base"
+            },
+            {
+              "texto": "We used to sing in the car."
+            }
+          ],
+          [
+            {
+              "texto": "Hipótesis pasada"
+            },
+            {
+              "texto": "if + had + participio, would have + participio"
+            },
+            {
+              "texto": "If she had taken it, she would have stayed dry."
+            }
+          ],
+          [
+            {
+              "texto": "Relativa"
+            },
+            {
+              "texto": "who (personas), which (cosas)"
+            },
+            {
+              "texto": "The neighbour who found the key…"
+            }
+          ],
+          [
+            {
+              "texto": "Mensaje contado"
+            },
+            {
+              "texto": "told + persona + that"
+            },
+            {
+              "texto": "Mia told us that she had forgotten it."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-93": {
+      "explicacion": {
+        "titulo": "Quién dice qué en una historia de varias voces",
+        "texto": "Cuando varias personas cuentan la misma historia, cada voz aporta su versión. Para saber quién dice qué, fíjate en tres pistas. Primera: I o we señalan a quien habla; he o she, a otra persona. Segunda: los verbos que atribuyen, como says that, thinks, remembers o agrees. Tercera: los datos que se pueden comparar, como la hora o el lugar. Si dos voces dan datos distintos, no están de acuerdo. Al contar lo que otro dijo, I cambia a he o she."
+      },
+      "patron": {
+        "texto": "Hablante + verbo que atribuye + dato:",
+        "formula": [
+          {
+            "texto": "Mia",
+            "nota": "hablante: quién cuenta esta versión"
+          },
+          {
+            "texto": "says that",
+            "nota": "atribuye: lo que ella cuenta"
+          },
+          {
+            "texto": "she closed the gate",
+            "nota": "dato: I cambia a she"
+          },
+          {
+            "texto": "before dinner.",
+            "nota": "detalle de tiempo para comparar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree with Leo about the time.",
+          "correcto": "I agree with Leo about the time.",
+          "explicacion": "En español «estoy de acuerdo» lleva estar, pero en inglés agree es un verbo: I agree (sin am)."
+        },
+        {
+          "incorrecto": "Mia says that I closed the gate.",
+          "correcto": "Mia says that she closed the gate.",
+          "explicacion": "Al contar lo que dijo otra persona, su «I» pasa a she o he. Si dejas I, parece que hablas tú."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Tom comentan las versiones de cómo se escapó el perro Rex.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia says that she closed the gate before dinner.",
+            "traduccion": "Mia dice que cerró el portón antes de la cena."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "But Sara remembers a different detail. She saw Rex in the street at six.",
+            "traduccion": "Pero Sara recuerda un detalle distinto. Vio a Rex en la calle a las seis."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So the gate was open at six?",
+            "traduccion": "¿Entonces el portón estaba abierto a las seis?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. Sara and I agree, but Mia does not.",
+            "traduccion": "Sí. Sara y yo estamos de acuerdo, pero Mia no."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién vio a Rex en la calle a las seis?",
+          "opciones": [
+            {
+              "es": "Sara"
+            },
+            {
+              "es": "Mia"
+            },
+            {
+              "es": "Tom"
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que Sara recuerda un detalle: «She saw Rex in the street at six». Mia habla del portón cerrado y Tom solo pregunta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pista",
+          "Qué indica",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / we"
+            },
+            {
+              "texto": "quien habla"
+            },
+            {
+              "texto": "I saw Rex in the street."
+            }
+          ],
+          [
+            {
+              "texto": "says that / thinks"
+            },
+            {
+              "texto": "lo que cree o cuenta otro hablante"
+            },
+            {
+              "texto": "Leo thinks that the gate was open."
+            }
+          ],
+          [
+            {
+              "texto": "agree / does not agree"
+            },
+            {
+              "texto": "si dos voces coinciden"
+            },
+            {
+              "texto": "Sara agrees with Leo."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-94": {
+      "explicacion": {
+        "titulo": "Una historia breve con giro, paso a paso",
+        "texto": "Una historia con giro sigue un orden. 1) Rutina: used to + verbo (Sara used to walk past a shop). 2) Antecedente: had + participio da lo ocurrido antes (a camera which her grandfather had lost). 3) Giro: suddenly o but then rompen la rutina, y la acción va en pasado simple. 4) Reflexión: if + had + participio, would have + participio. 5) Una frase contada: told her mother that… 6) Final con una lección. Conecta los pasos con one day, suddenly y in the end."
+      },
+      "patron": {
+        "texto": "Rutina + antecedente + giro + reflexión:",
+        "formula": [
+          {
+            "texto": "Every Saturday, she used to…",
+            "nota": "rutina: lo que hacía siempre"
+          },
+          {
+            "texto": "One day, she found… which… had lost",
+            "nota": "antecedente: lo ocurrido antes"
+          },
+          {
+            "texto": "Suddenly, she saw…",
+            "nota": "giro: lo inesperado"
+          },
+          {
+            "texto": "If she had…, she would have…",
+            "nota": "reflexión sobre el pasado"
+          },
+          {
+            "texto": "She told… that…",
+            "nota": "una frase contada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Suddenly, she was seeing her own face in the photo.",
+          "correcto": "Suddenly, she saw her own face in the photo.",
+          "explicacion": "Suddenly presenta un hecho rápido y único: va con el pasado simple (saw), no con el continuo (was seeing)."
+        },
+        {
+          "incorrecto": "If she had not entered the shop, she would never found it.",
+          "correcto": "If she had not entered the shop, she would never have found it.",
+          "explicacion": "Después de would never se necesita have + participio: would never have found. No olvides have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Leo la idea de su historia para el proyecto de clase.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What is your story about?",
+            "traduccion": "¿De qué trata tu historia?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A girl who used to walk past a shop every Saturday.",
+            "traduccion": "De una niña que solía pasar delante de una tienda cada sábado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What happens one day?",
+            "traduccion": "¿Qué pasa un día?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She found a camera which her grandfather had lost. Suddenly, she saw her own face in a photo.",
+            "traduccion": "Encontró una cámara que su abuelo había perdido. De repente, vio su propia cara en una foto."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Nice twist! And the ending?",
+            "traduccion": "¡Qué buen giro! ¿Y el final?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She learned a lesson: a small habit can change a life.",
+            "traduccion": "Aprendió una lección: un pequeño hábito puede cambiar una vida."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el giro de la historia de Sara?",
+          "opciones": [
+            {
+              "es": "La niña ve su propia cara en una foto de la cámara."
+            },
+            {
+              "es": "La niña pierde la cámara de su abuelo."
+            },
+            {
+              "es": "La niña deja de pasar por la tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lo llama «Nice twist» justo después de que Sara dice «Suddenly, she saw her own face in a photo». Perder la cámara es el antecedente del abuelo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la historia",
+          "Herramienta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Rutina"
+            },
+            {
+              "texto": "used to + verbo"
+            },
+            {
+              "texto": "Sara used to walk past a shop."
+            }
+          ],
+          [
+            {
+              "texto": "Antecedente"
+            },
+            {
+              "texto": "had + participio"
+            },
+            {
+              "texto": "…a camera which her grandfather had lost."
+            }
+          ],
+          [
+            {
+              "texto": "Giro"
+            },
+            {
+              "texto": "suddenly + pasado simple"
+            },
+            {
+              "texto": "Suddenly, she saw her own face."
+            }
+          ],
+          [
+            {
+              "texto": "Reflexión"
+            },
+            {
+              "texto": "if + had + participio, would have + participio"
+            },
+            {
+              "texto": "If she had not entered, she would never have found it."
+            }
+          ],
+          [
+            {
+              "texto": "Frase contada"
+            },
+            {
+              "texto": "told + persona + that"
+            },
+            {
+              "texto": "She told her mother that it was a surprise."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-95": {
+      "explicacion": {
+        "titulo": "Presentar una historia y responder preguntas",
+        "texto": "Una presentación tiene dos momentos. Primero cuentas la historia en orden: abre con I am going to present…, usa one day, suddenly e in the end, y recuerda had + participio para lo que pasó antes. Después viene el turno del público: responde a cada question con una respuesta corta y una razón con because. Para las decisiones usa decided + to + verbo. Para cerrar con naturalidad añade una coletilla (question tag): una frase afirmativa lleva coletilla negativa (It was a surprise, wasn't it?) y al revés. El público responde: Yes, it was."
+      },
+      "patron": {
+        "texto": "Narración + respuesta + coletilla:",
+        "formula": [
+          {
+            "texto": "I am going to present my story.",
+            "nota": "apertura: anuncia lo que harás"
+          },
+          {
+            "texto": "One day, suddenly, she found…",
+            "nota": "narración en orden"
+          },
+          {
+            "texto": "She decided to keep it because…",
+            "nota": "respuesta: decisión + razón"
+          },
+          {
+            "texto": "It was a surprise, wasn't it?",
+            "nota": "coletilla: invita al público a coincidir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It was a surprise, isn't it?",
+          "correcto": "It was a surprise, wasn't it?",
+          "explicacion": "La coletilla repite el verbo y el tiempo de la frase: was → wasn't. En español «¿verdad?» sirve para todo, en inglés no."
+        },
+        {
+          "incorrecto": "She decided for keep the camera.",
+          "correcto": "She decided to keep the camera.",
+          "explicacion": "Después de decide se usa to + verbo base. For no sirve para expresar la finalidad con infinitivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara presenta su historia en clase y Leo, del público, le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Why did the girl keep the camera?",
+            "traduccion": "¿Por qué guardó la niña la cámara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Because her grandfather had used it every summer.",
+            "traduccion": "Porque su abuelo la había usado cada verano."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And what did she decide to do?",
+            "traduccion": "¿Y qué decidió hacer?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She decided to look for his old photos. It was a good decision, wasn't it?",
+            "traduccion": "Decidió buscar sus fotos antiguas. Fue una buena decisión, ¿verdad?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, it was.",
+            "traduccion": "Sí, lo fue."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué guardó la niña la cámara?",
+          "opciones": [
+            {
+              "es": "Porque su abuelo la había usado cada verano."
+            },
+            {
+              "es": "Porque la había comprado ella misma."
+            },
+            {
+              "es": "Porque quería venderla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara responde con una razón: «Because her grandfather had used it every summer». Nadie habla de comprarla ni de venderla."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Frase",
+          "Coletilla",
+          "Respuesta del público"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "It was a surprise,"
+            },
+            {
+              "texto": "wasn't it?"
+            },
+            {
+              "texto": "Yes, it was."
+            }
+          ],
+          [
+            {
+              "texto": "She didn't open it,"
+            },
+            {
+              "texto": "did she?"
+            },
+            {
+              "texto": "No, she didn't."
+            }
+          ],
+          [
+            {
+              "texto": "He had found it,"
+            },
+            {
+              "texto": "hadn't he?"
+            },
+            {
+              "texto": "Yes, he had."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

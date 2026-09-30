@@ -1,0 +1,824 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-58",
+  "title": {
+    "en": "What went wrong?",
+    "es": "¿Qué salió mal?"
+  },
+  "objectives": {
+    "es": [
+      "Extraer de una llamada de servicio el problema, lo que pide el cliente y la solución que ofrece la tienda."
+    ]
+  },
+  "concepts": [
+    "n4-shops-and-repairs-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n4.class-57"
+  ],
+  "usesVocabulary": [
+    "faulty",
+    "damaged",
+    "refund",
+    "replace",
+    "missing",
+    "exchange",
+    "order"
+  ],
+  "usesPatterns": [
+    "n4-shops-and-repairs-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "faulty",
+      "es": "defectuoso"
+    },
+    {
+      "en": "damaged",
+      "es": "dañado"
+    },
+    {
+      "en": "refund",
+      "es": "reembolso"
+    },
+    {
+      "en": "replace",
+      "es": "sustituir"
+    },
+    {
+      "en": "missing",
+      "es": "que falta"
+    },
+    {
+      "en": "exchange",
+      "es": "cambiar, canjear"
+    },
+    {
+      "en": "order",
+      "es": "pedido"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-58.t01",
+      "en": "My headphones are faulty: the left side does not work.",
+      "es": "Mis auriculares son defectuosos: el lado izquierdo no funciona.",
+      "explanationEs": "Faulty describe un producto que no funciona bien: es la parte del problema.",
+      "segments": [
+        "My headphones are faulty: the",
+        "left side does not work."
+      ],
+      "audioText": "My headphones are faulty: the left side does not work.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-3"
+    },
+    {
+      "id": "en.n4.class-58.t02",
+      "en": "The box arrived damaged.",
+      "es": "La caja llegó dañada.",
+      "explanationEs": "Damaged = estropeado al llegar; el problema se dice con un adjetivo.",
+      "segments": [
+        "The box",
+        "arrived damaged."
+      ],
+      "audioText": "The box arrived damaged.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-3"
+    },
+    {
+      "id": "en.n4.class-58.t03",
+      "en": "I would like a refund for the faulty lamp.",
+      "es": "Quisiera un reembolso por la lámpara defectuosa.",
+      "explanationEs": "I would like + cosa: la petición cortés del cliente.",
+      "segments": [
+        "I would like a refund",
+        "for the faulty lamp."
+      ],
+      "audioText": "I would like a refund for the faulty lamp.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-3"
+    },
+    {
+      "id": "en.n4.class-58.t04",
+      "en": "Could you replace it with a new one?",
+      "es": "¿Podría sustituirlo por uno nuevo?",
+      "explanationEs": "Could you + verbo base: otra petición cortés; replace = poner uno nuevo.",
+      "segments": [
+        "Could you replace it",
+        "with a new one?"
+      ],
+      "audioText": "Could you replace it with a new one?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-3"
+    },
+    {
+      "id": "en.n4.class-58.t05",
+      "en": "One part is missing from my order.",
+      "es": "Falta una pieza en mi pedido.",
+      "explanationEs": "Missing indica que algo no está; from my order dice de dónde falta.",
+      "segments": [
+        "One part is missing",
+        "from my order."
+      ],
+      "audioText": "One part is missing from my order.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-3"
+    },
+    {
+      "id": "en.n4.class-58.t06",
+      "en": "We can exchange it for the blue one.",
+      "es": "Podemos cambiarlo por el azul.",
+      "explanationEs": "We can + verbo base: así ofrece la tienda una solución.",
+      "segments": [
+        "We can exchange it",
+        "for the blue one."
+      ],
+      "audioText": "We can exchange it for the blue one.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-shops-and-repairs-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c58.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es el problema del cliente?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The item is too expensive."
+          },
+          {
+            "text": "The item was damaged when it arrived."
+          },
+          {
+            "text": "The item arrived late."
+          }
+        ],
+        "teaches": [
+          "n4-shops-and-repairs-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.pg01.seed-0",
+          "feedback": {
+            "es": "El problema es lo que está mal: la caja llegó dañada. Replace it es la solución que ofrece la tienda, no el problema."
+          },
+          "hint": {
+            "es": "El problema es lo que está mal, no lo que ofrece la tienda."
+          },
+          "text": "Customer: The box arrived damaged. Shop: We can replace it."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3752eab6dc6b8bce2cbeb795d99bc5c8f9ffd535c6516401ac998031074ccbc0"
+      },
+      {
+        "id": "en.n4.c58.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Quisiera un reembolso, por favor.»"
+        },
+        "answer": {
+          "text": "like",
+          "accepted": [
+            "like"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-shops-and-repairs-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.pg02.seed-0",
+          "feedback": {
+            "es": "I would like + cosa es la forma cortés de pedir algo en una tienda."
+          },
+          "hint": {
+            "es": "Es la forma cortés de pedir."
+          },
+          "text": "I would ___ a refund, please."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e9f25e14d75ef18e253d0a7e95c24d164e68509cf5519a2b6dcfb392fe7a1cae"
+      },
+      {
+        "id": "en.n4.c58.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase ofrece una solución?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It stopped working."
+          },
+          {
+            "text": "I would like my money back."
+          },
+          {
+            "text": "We can replace it today."
+          }
+        ],
+        "teaches": [
+          "n4-shops-and-repairs-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.pg03.seed-0",
+          "feedback": {
+            "es": "La solución la ofrece la tienda, con can o will: We can replace it. It stopped working es el problema y la otra frase es la petición."
+          },
+          "hint": {
+            "es": "La solución usa can o will."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2b36b56d31062c9f4c6b87a3db3d841869edb3a74b2fbbc29fee5a9c3938f196"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c58.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pide la clienta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She wants the missing jacket to be sent."
+          },
+          {
+            "text": "She wants her money back."
+          },
+          {
+            "text": "She wants to change the size."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.p01.seed-0",
+          "feedback": {
+            "es": "Could you send it? es la petición: que envíen la chaqueta que falta. No habla de dinero ni de la talla."
+          },
+          "audio": "Hello. I ordered two jackets, but one is missing from the box. Could you send it, please?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0dc5d85d0a81e3af9a67c65877dfc019c83b53e0dc9bd1686ec69e2836b33949"
+      },
+      {
+        "id": "en.n4.c58.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué solución ofrece la tienda."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Their money back."
+          },
+          {
+            "text": "A bigger pair of the same shoes."
+          },
+          {
+            "text": "A repair of the shoes."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.p02.seed-0",
+          "feedback": {
+            "es": "We can change… for a bigger size es la solución: unos zapatos más grandes. No hablan de devolver el dinero ni de reparar."
+          },
+          "audio": "I am sorry about the problem. We can change the blue shoes for a bigger size.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8774888261d3740f59bfdf56c197dc40839c2c121e428344352c8b4bd5ddec71"
+      },
+      {
+        "id": "en.n4.c58.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su tipo de dato en la llamada."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "My order is missing one part.",
+              {
+                "es": "problema"
+              }
+            ],
+            [
+              "I would like to change it, please.",
+              {
+                "es": "petición"
+              }
+            ],
+            [
+              "We will send a new one tomorrow.",
+              {
+                "es": "solución"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.p03.seed-0",
+          "feedback": {
+            "es": "Hay tres datos en una llamada: el problema lo cuenta el cliente, la petición es lo que pide y la solución la ofrece la tienda."
+          },
+          "pairs": [
+            [
+              "My order is missing one part.",
+              {
+                "es": "problema"
+              }
+            ],
+            [
+              "I would like to change it, please.",
+              {
+                "es": "petición"
+              }
+            ],
+            [
+              "We will send a new one tomorrow.",
+              {
+                "es": "solución"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9313b4c82330b65cd772665e62b08441ecf586ad6a8fa105ff4fa56ded0dd45b"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c58.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la llamada y elige qué solución ofrece la tienda."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A refund of the whole price."
+          },
+          {
+            "text": "A repair next month."
+          },
+          {
+            "text": "A new printer instead of the refund."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.e01.seed-0",
+          "feedback": {
+            "es": "La tienda rechaza el reembolso («cannot give a refund») y ofrece sustituirla por una nueva. La solución no es lo que pide el cliente."
+          },
+          "audio": "Customer: Hello, my printer stopped working after one week. I would like a refund. Shop: I am sorry. We cannot give a refund, but we can replace it with a new printer.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a7075ec617ab97dff3433caee20b91a1db9d738643567d9b37cc04d70ad5fb1a"
+      },
+      {
+        "id": "en.n4.c58.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué problema y qué petición tiene la llamada?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Part of the table is missing, and the customer wants it sent today."
+          },
+          {
+            "text": "The table is damaged, and the customer wants a refund today."
+          },
+          {
+            "text": "The table is faulty, and the customer wants to exchange it."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.e02.seed-0",
+          "feedback": {
+            "es": "El problema es que faltan dos patas y la petición es que las envíen hoy. Las otras opciones cambian el problema o la petición."
+          },
+          "text": "Call: The table is missing two legs. I would like you to send them today."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:92d65b47e7eed789fd4e67f6be3e44e566a7128e33b744f45348674379def65c"
+      },
+      {
+        "id": "en.n4.c58.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Podrían cambiarlo por otro?»"
+        },
+        "answer": {
+          "text": "exchange",
+          "accepted": [
+            "exchange",
+            "change"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.e03.seed-0",
+          "feedback": {
+            "es": "Exchange it for another one significa cambiarlo por otro; could you + verbo base es una petición cortés."
+          },
+          "text": "Could you ___ it for another one?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:73aceeedae2726b45d24850baf92c1308395c0775483b7a575d376482dc46b9b"
+      },
+      {
+        "id": "en.n4.c58.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Resume la llamada: problema, petición y solución."
+        },
+        "answer": {
+          "text": "The backpack arrived damaged. The customer would like a new one, and the shop will send it on Monday.",
+          "accepted": [
+            "The backpack arrived damaged. The customer would like a new one, and the shop will send it on Monday.",
+            "The customer says the backpack is damaged. She wants a new one. The shop will send it on Monday."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.e04.seed-0",
+          "feedback": {
+            "es": "Un buen resumen nombra el problema (damaged), la petición (would like / wants) y la solución con will y el día."
+          },
+          "text": "Llamada: la mochila llegó dañada. La clienta quiere una nueva. La tienda ofrece enviarla el lunes.",
+          "scoring": {
+            "wordRange": [
+              10,
+              35
+            ],
+            "evidenceGroups": [
+              [
+                "damaged"
+              ],
+              [
+                "would like",
+                "wants",
+                "asks for",
+                "asked for"
+              ],
+              [
+                "new one",
+                "new backpack",
+                "replacement",
+                "a new"
+              ],
+              [
+                "will send",
+                "can send",
+                "sends",
+                "is going to send"
+              ],
+              [
+                "monday"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:03cabb8dc12ab3a65d392c46741118adcbfb22c6c0c4d0b3cebd5df3d1e9607d"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c58.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué solución ofrece la tienda?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A refund by Friday."
+          },
+          {
+            "text": "A new lamp by Friday."
+          },
+          {
+            "text": "A repair by Friday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.r01.seed-0",
+          "feedback": {
+            "es": "La tienda dice «We can send you a new lamp by Friday»: ofrece una lámpara nueva. No habla de reembolso ni de reparación."
+          },
+          "text": "Customer: The lamp is faulty. Shop: We can send you a new lamp by Friday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9294cb8c9188251d004ccc9246dfaf6f79b8c6061bb9356cd7c8f02de21e7394"
+      },
+      {
+        "id": "en.n4.c58.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quiere la clienta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "To get a new camera."
+          },
+          {
+            "text": "To get the camera repaired."
+          },
+          {
+            "text": "To get her money back."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.r02.seed-0",
+          "feedback": {
+            "es": "Could I have my money back? es la petición: quiere que le devuelvan el dinero. No pide una cámara nueva ni una reparación."
+          },
+          "audio": "I would like to return this camera. It does not turn on. Could I have my money back?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fb427c25560a272b7db98215de94c43e76e38e39243baa46d511fda0b08d46ec"
+      },
+      {
+        "id": "en.n4.c58.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Faltan dos piezas en mi pedido.»"
+        },
+        "answer": {
+          "text": "Two parts are missing from my order",
+          "tokens": [
+            "Two",
+            "parts",
+            "are",
+            "missing",
+            "from",
+            "my",
+            "order"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-shops-and-repairs-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c58.r03.seed-0",
+          "feedback": {
+            "es": "Missing from my order dice que algo no está en el pedido; two parts es lo que falta."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d6b6865f6bf1a3b8b9eb75914e958807187a2b2b44fd99a36f64abd3838807b7"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c58.e01": {
+      "reteach": "en.n4.class-58.t01",
+      "review": "en.n4.c58.r01"
+    },
+    "en.n4.c58.e02": {
+      "reteach": "en.n4.class-58.t02",
+      "review": "en.n4.c58.r02"
+    },
+    "en.n4.c58.e03": {
+      "reteach": "en.n4.class-58.t03",
+      "review": "en.n4.c58.r03"
+    },
+    "en.n4.c58.e04": {
+      "reteach": "en.n4.class-58.t04",
+      "review": "en.n4.c58.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

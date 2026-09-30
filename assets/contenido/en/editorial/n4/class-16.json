@@ -1,0 +1,783 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-16",
+  "title": {
+    "en": "Certain, possible, impossible",
+    "es": "Seguro, posible, imposible"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer el grado de seguridad que expresan must, might, could y can't cuando deduces algo del presente a partir de una pista."
+    ]
+  },
+  "concepts": [
+    "n4-everyday-mysteries-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-15"
+  ],
+  "usesVocabulary": [
+    "neighbour",
+    "parcel",
+    "sure",
+    "bird",
+    "roof",
+    "asleep",
+    "barking",
+    "lights"
+  ],
+  "usesPatterns": [
+    "n4-everyday-mysteries-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "neighbour",
+      "es": "vecino"
+    },
+    {
+      "en": "parcel",
+      "es": "paquete"
+    },
+    {
+      "en": "sure",
+      "es": "seguro"
+    },
+    {
+      "en": "bird",
+      "es": "pájaro"
+    },
+    {
+      "en": "roof",
+      "es": "tejado"
+    },
+    {
+      "en": "asleep",
+      "es": "dormido"
+    },
+    {
+      "en": "barking",
+      "es": "ladrando"
+    },
+    {
+      "en": "lights",
+      "es": "luces"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-16.t01",
+      "en": "The lights are on, so my neighbour must be at home.",
+      "es": "Las luces están encendidas, así que mi vecino debe de estar en casa.",
+      "explanationEs": "Must + verbo base: casi seguro, por pistas claras. No significa «deber» aquí.",
+      "segments": [
+        "The lights are on, so my",
+        "neighbour must be at home."
+      ],
+      "audioText": "The lights are on, so my neighbour must be at home.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-1"
+    },
+    {
+      "id": "en.n4.class-16.t02",
+      "en": "That parcel might be for Tom, but I am not sure.",
+      "es": "Ese paquete podría ser para Tom, pero no estoy seguro.",
+      "explanationEs": "Might + verbo base: es posible, pero no hay seguridad.",
+      "segments": [
+        "That parcel might be for Tom,",
+        "but I am not sure."
+      ],
+      "audioText": "That parcel might be for Tom, but I am not sure.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-1"
+    },
+    {
+      "id": "en.n4.class-16.t03",
+      "en": "It could be a bird on the roof.",
+      "es": "Podría ser un pájaro en el tejado.",
+      "explanationEs": "Could + verbo base también expresa algo posible.",
+      "segments": [
+        "It could be a",
+        "bird on the roof."
+      ],
+      "audioText": "It could be a bird on the roof.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-1"
+    },
+    {
+      "id": "en.n4.class-16.t04",
+      "en": "She can't be asleep: I can hear her music.",
+      "es": "No puede estar dormida: oigo su música.",
+      "explanationEs": "Can't + verbo base: casi imposible, porque una pista lo contradice.",
+      "segments": [
+        "She can't be asleep: I",
+        "can hear her music."
+      ],
+      "audioText": "She can't be asleep: I can hear her music.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-1"
+    },
+    {
+      "id": "en.n4.class-16.t05",
+      "en": "The dog is barking, so there must be someone at the door.",
+      "es": "El perro está ladrando, así que debe de haber alguien en la puerta.",
+      "explanationEs": "Must + verbo base: la conclusión más probable con una pista clara.",
+      "segments": [
+        "The dog is barking, so there",
+        "must be someone at the door."
+      ],
+      "audioText": "The dog is barking, so there must be someone at the door.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-everyday-mysteries-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c16.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el modal que encaja con las pistas."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "might"
+          },
+          {
+            "text": "must"
+          },
+          {
+            "text": "can't"
+          }
+        ],
+        "teaches": [
+          "n4-everyday-mysteries-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.pg01.seed-0",
+          "feedback": {
+            "es": "Dos pistas claras (luces y música) llevan a una deducción casi segura: must."
+          },
+          "hint": {
+            "es": "Hay dos pistas claras, así que la deducción es casi segura."
+          },
+          "text": "The lights are on and I can hear music. Sara ___ be at home."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:655a9dc83e2948898d2f68040ed360f3a2c2badd314325859e16359098ee29f4"
+      },
+      {
+        "id": "en.n4.c16.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el modal que encaja con la pista de la tienda."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "must"
+          },
+          {
+            "text": "might"
+          },
+          {
+            "text": "can't"
+          }
+        ],
+        "teaches": [
+          "n4-everyday-mysteries-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.pg02.seed-0",
+          "feedback": {
+            "es": "La tienda cerrada contradice la idea de que esté abierta: can't be."
+          },
+          "hint": {
+            "es": "Pregúntate si una tienda cerrada puede estar abierta."
+          },
+          "text": "It is three in the morning and the shop is closed. It ___ be open."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5e01c3516cd6fa55f1f0bd13beb5d7918a7128da4c6f296da6528a2de11e6e09"
+      },
+      {
+        "id": "en.n4.c16.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El perro podría estar en el jardín.»"
+        },
+        "answer": {
+          "text": "The dog might be in the garden",
+          "tokens": [
+            "The",
+            "dog",
+            "might",
+            "be",
+            "in",
+            "the",
+            "garden"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-everyday-mysteries-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.pg03.seed-0",
+          "feedback": {
+            "es": "Might + be expresa algo posible; el modal va antes del verbo base."
+          },
+          "hint": {
+            "es": "El modal might va justo antes de be."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:150cec19ec80850372c9f77ccd518ddd07853426ac99b901eb4c2e6498b8cfcd"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c16.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su grado de seguridad."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "He must be at home.",
+              {
+                "es": "Casi seguro."
+              }
+            ],
+            [
+              "He might be at home.",
+              {
+                "es": "Posible, no estoy seguro."
+              }
+            ],
+            [
+              "He can't be at home.",
+              {
+                "es": "Casi imposible."
+              }
+            ],
+            [
+              "He is at home.",
+              {
+                "es": "Seguro: es un hecho."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.p01.seed-0",
+          "feedback": {
+            "es": "Cada forma marca un grado distinto: hecho, casi seguro, posible o casi imposible."
+          },
+          "pairs": [
+            [
+              "He must be at home.",
+              {
+                "es": "Casi seguro."
+              }
+            ],
+            [
+              "He might be at home.",
+              {
+                "es": "Posible, no estoy seguro."
+              }
+            ],
+            [
+              "He can't be at home.",
+              {
+                "es": "Casi imposible."
+              }
+            ],
+            [
+              "He is at home.",
+              {
+                "es": "Seguro: es un hecho."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9786695ec0e91ab9e892313d279d97ba48fd1167548606b88ab0dd0c9c3212a0"
+      },
+      {
+        "id": "en.n4.c16.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la conclusión de quien habla."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The family is out."
+          },
+          {
+            "text": "The family is in the house."
+          },
+          {
+            "text": "The family might be in the house."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.p02.seed-0",
+          "feedback": {
+            "es": "Can't be expresa una conclusión casi segura de que no están: las luces apagadas y la puerta cerrada lo indican."
+          },
+          "audio": "The lights are off and the door is locked. The family can't be at home.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f68574fa0f02163e598e771ee0ee78403abf77cee6c4b9853bca4512d88868e5"
+      },
+      {
+        "id": "en.n4.c16.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Debe de tener hambre: no ha comido nada.»"
+        },
+        "answer": {
+          "text": "must",
+          "accepted": [
+            "must"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.p03.seed-0",
+          "feedback": {
+            "es": "Con una pista clara (no ha comido) la deducción es casi segura: must."
+          },
+          "text": "He ___ be hungry: he has not eaten anything."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a4ca7e1e528a75dbca085141a44693e71af9957acec76ebc7f2e37a591576794"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c16.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el modal que mejor refleja la seguridad de quien habla."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "must"
+          },
+          {
+            "text": "might"
+          },
+          {
+            "text": "can't"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.e01.seed-0",
+          "feedback": {
+            "es": "El silencio no prueba que duerma, porque a menudo lee en su cuarto: solo es una posibilidad, might."
+          },
+          "text": "The house is quiet, but she often reads in her room. She ___ be asleep."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:82d6bce8e0313633713630b06184efa7212519056b3ae7e468537cd4c8c4394b"
+      },
+      {
+        "id": "en.n4.c16.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué tan segura está la persona."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The speaker is completely sure."
+          },
+          {
+            "text": "The speaker saw a bird."
+          },
+          {
+            "text": "The speaker is not certain."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.e02.seed-0",
+          "feedback": {
+            "es": "Might + be y «I am not sure» indican que solo es una posibilidad."
+          },
+          "audio": "I hear a noise on the roof. It might be a bird, but I am not sure.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3374f7c2ef469c7071ecf87ec03fe121deeefb29baa500b0c572ae76ee159ffa"
+      },
+      {
+        "id": "en.n4.c16.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No puede ser el profesor: hoy está de vacaciones.»"
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.e03.seed-0",
+          "feedback": {
+            "es": "Que hoy esté de vacaciones contradice la idea: can't be."
+          },
+          "text": "It ___ be the teacher: he is on holiday today."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:64d1b3d733f928cc071d6577254a88cb9fe6f461286d0ae3d6b8d1e10883e4d3"
+      },
+      {
+        "id": "en.n4.c16.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Esa llave debe de ser de la cocina.»"
+        },
+        "answer": {
+          "text": "That key must be for the kitchen",
+          "tokens": [
+            "That",
+            "key",
+            "must",
+            "be",
+            "for",
+            "the",
+            "kitchen"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.e04.seed-0",
+          "feedback": {
+            "es": "Must + be expresa una deducción casi segura con el verbo base detrás."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5dc54d5da2e3a979c810e6ef6c287292c36292142277b680c95f40ef5ab2f4ed"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c16.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase con wish sobre el pasado."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I wish I had taken the bus."
+          },
+          {
+            "text": "I wish I took the bus."
+          },
+          {
+            "text": "I wish I would take the bus."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.r01.seed-0",
+          "feedback": {
+            "es": "Lamentar algo que ya ocurrió pide wish + had + participio."
+          },
+          "text": "Ayer fui andando, llovió y llegué mojado."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:54b41f7e52b6ff882be3484e273734257d5020413921f0b65612b134a60ae952"
+      },
+      {
+        "id": "en.n4.c16.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y clasifica la condición que oyes."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "unreal"
+          },
+          {
+            "text": "real"
+          },
+          {
+            "text": "impossible"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.r02.seed-0",
+          "feedback": {
+            "es": "If + presente y will forman una condición real: todavía puede ocurrir."
+          },
+          "audio": "If it rains on Friday, we will stay at home.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aab2929a73d44a069069d51e7496bac46e181864f777def4ad0ed42900005949"
+      },
+      {
+        "id": "en.n4.c16.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si ella hubiera salido antes, habría tomado el tren.»"
+        },
+        "answer": {
+          "text": "taken",
+          "accepted": [
+            "taken"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-everyday-mysteries-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c16.r03.seed-0",
+          "feedback": {
+            "es": "El tercer condicional pide would have + participio: taken."
+          },
+          "text": "If she had left earlier, she would have ___ the train."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3e0d6640133f78199ef440c30329a94f9ed1c605ce44b16c8031816a895c743d"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c16.e01": {
+      "reteach": "en.n4.class-16.t01",
+      "review": "en.n4.c16.r01"
+    },
+    "en.n4.c16.e02": {
+      "reteach": "en.n4.class-16.t02",
+      "review": "en.n4.c16.r02"
+    },
+    "en.n4.c16.e03": {
+      "reteach": "en.n4.class-16.t03",
+      "review": "en.n4.c16.r03"
+    },
+    "en.n4.c16.e04": {
+      "reteach": "en.n4.class-16.t04",
+      "review": "en.n4.c16.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

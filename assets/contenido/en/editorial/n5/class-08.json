@@ -1,0 +1,780 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-08",
+  "title": {
+    "en": "A new life in a podcast",
+    "es": "Una vida nueva en un pódcast"
+  },
+  "objectives": {
+    "es": [
+      "Seguir el relato de una adaptación e identificar qué costó al principio, qué sigue en proceso y qué ya es habitual."
+    ]
+  },
+  "concepts": [
+    "n5-getting-used-to-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n5.class-07"
+  ],
+  "usesVocabulary": [
+    "snow",
+    "lonely",
+    "winter",
+    "alone",
+    "job",
+    "nervous"
+  ],
+  "usesPatterns": [
+    "n5-getting-used-to-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "snow",
+      "es": "nieve"
+    },
+    {
+      "en": "lonely",
+      "es": "solo, sin compañía"
+    },
+    {
+      "en": "winter",
+      "es": "invierno"
+    },
+    {
+      "en": "alone",
+      "es": "solo"
+    },
+    {
+      "en": "job",
+      "es": "trabajo"
+    },
+    {
+      "en": "nervous",
+      "es": "nervioso"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-08.t01",
+      "en": "In my first year, I wasn't used to the snow, and I felt lonely.",
+      "es": "En mi primer año no estaba acostumbrado a la nieve y me sentía solo.",
+      "explanationEs": "Wasn't used to + nombre: en aquel momento no era normal (columna «antes»).",
+      "segments": [
+        "In my first year, I wasn't used",
+        "to the snow, and I felt lonely."
+      ],
+      "audioText": "In my first year, I wasn't used to the snow, and I felt lonely.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-3"
+    },
+    {
+      "id": "en.n5.class-08.t02",
+      "en": "I'm still getting used to the dark winter afternoons.",
+      "es": "Todavía me estoy acostumbrando a las tardes oscuras de invierno.",
+      "explanationEs": "Am getting used to: el proceso sigue abierto (columna «en proceso»).",
+      "segments": [
+        "I'm still getting used to",
+        "the dark winter afternoons."
+      ],
+      "audioText": "I'm still getting used to the dark winter afternoons.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-3"
+    },
+    {
+      "id": "en.n5.class-08.t03",
+      "en": "I've already got used to my job, so I don't feel nervous now.",
+      "es": "Ya me he acostumbrado a mi trabajo, así que ahora no me siento nervioso.",
+      "explanationEs": "Have got used to + nombre: el proceso terminó (columna «ya habitual»).",
+      "segments": [
+        "I've already got used to my job,",
+        "so I don't feel nervous now."
+      ],
+      "audioText": "I've already got used to my job, so I don't feel nervous now.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-3"
+    },
+    {
+      "id": "en.n5.class-08.t04",
+      "en": "Now I'm used to living alone, but I used to live with my parents.",
+      "es": "Ahora estoy acostumbrado a vivir solo, pero antes vivía con mis padres.",
+      "explanationEs": "Am used to + -ing es lo de hoy; used to + verbo base es el pasado que ya no existe.",
+      "segments": [
+        "Now I'm used to living alone, but",
+        "I used to live with my parents."
+      ],
+      "audioText": "Now I'm used to living alone, but I used to live with my parents.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-3"
+    },
+    {
+      "id": "en.n5.class-08.t05",
+      "en": "It was hard to get used to cooking alone.",
+      "es": "Fue difícil acostumbrarme a cocinar solo.",
+      "explanationEs": "It was hard to get used to + -ing: cuenta una dificultad del pasado.",
+      "segments": [
+        "It was hard to get",
+        "used to cooking alone."
+      ],
+      "audioText": "It was hard to get used to cooking alone.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-getting-used-to-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c08.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el pódcast, ¿en qué punto está la adaptación del hablante al ruido?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The speaker is fully used to it."
+          },
+          {
+            "text": "The speaker dislikes the noise."
+          },
+          {
+            "text": "The speaker is still getting used to it."
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.pg01.seed-0",
+          "feedback": {
+            "es": "Am getting used to indica un proceso que sigue abierto: todavía se está adaptando."
+          },
+          "hint": {
+            "es": "Busca am getting used to: el proceso no ha terminado."
+          },
+          "text": "Podcast: 'I'm getting used to the noise in my new flat.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:beebb0fc73bcc59f661144a7462890470f43715dfaf45dc58a07f0ae26b141ad"
+      },
+      {
+        "id": "en.n5.c08.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el pódcast, ¿cómo le resulta el trabajo al hablante?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The job feels normal now."
+          },
+          {
+            "text": "The job still feels new."
+          },
+          {
+            "text": "The speaker has no job."
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.pg02.seed-0",
+          "feedback": {
+            "es": "Have got used to significa que el proceso terminó: el trabajo ya le parece normal."
+          },
+          "hint": {
+            "es": "Have got used to habla de un proceso que ya acabó."
+          },
+          "text": "Podcast: 'I've got used to my job, so I don't feel nervous any more.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:66df7e47a85d14daa9e0e26c761c69c2abbcb8e112d639404769134c3849ef13"
+      },
+      {
+        "id": "en.n5.c08.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el pódcast, ¿qué pasaba en el primer invierno?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The snow felt normal."
+          },
+          {
+            "text": "The snow felt strange."
+          },
+          {
+            "text": "The speaker loved the snow."
+          }
+        ],
+        "teaches": [
+          "n5-getting-used-to-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.pg03.seed-0",
+          "feedback": {
+            "es": "Wasn't used to habla del pasado: entonces la nieve no era normal, le resultaba extraña."
+          },
+          "hint": {
+            "es": "Wasn't used to habla del pasado: entonces no era normal."
+          },
+          "text": "Podcast: 'I wasn't used to the snow in my first winter.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b412e3ad5ff2863fe667145163852279401d9ae56cde91abfef334ca122edd2e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c08.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo vive el hablante hoy."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He lives with his family."
+          },
+          {
+            "text": "He wants to move soon."
+          },
+          {
+            "text": "He lives alone without problems."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.p01.seed-0",
+          "feedback": {
+            "es": "Am used to living alone significa que hoy vivir solo ya es normal."
+          },
+          "audio": "It was hard at first, but now I'm used to living alone.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a477b68d60a46d4ea390db1595d05909eaf9a7af753589d3e0b520c5ddefbd77"
+      },
+      {
+        "id": "en.n5.c08.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Todavía me estoy acostumbrando a los inviernos largos.»"
+        },
+        "answer": {
+          "text": "I'm still getting used to long winters",
+          "tokens": [
+            "I'm",
+            "still",
+            "getting",
+            "used",
+            "to",
+            "long",
+            "winters"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.p02.seed-0",
+          "feedback": {
+            "es": "Still + am getting used to marca un proceso que no ha terminado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b0d0534d9b1f1461f8e571561a282aa5a6750014f0baf46931bb50da4cd4d7bc"
+      },
+      {
+        "id": "en.n5.c08.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su columna del relato."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I wasn't used to the noise.",
+              {
+                "es": "Antes: costaba"
+              }
+            ],
+            [
+              "I'm getting used to the food.",
+              {
+                "es": "En proceso: todavía cambia"
+              }
+            ],
+            [
+              "I'm used to the bus.",
+              {
+                "es": "Ya habitual: ya es normal"
+              }
+            ],
+            [
+              "I used to cook with my mother.",
+              {
+                "es": "Antes: ya no ocurre"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.p03.seed-0",
+          "feedback": {
+            "es": "Cada auxiliar da una pista: wasn't y used to son del pasado, getting es un proceso, am used to es lo de hoy."
+          },
+          "pairs": [
+            [
+              "I wasn't used to the noise.",
+              {
+                "es": "Antes: costaba"
+              }
+            ],
+            [
+              "I'm getting used to the food.",
+              {
+                "es": "En proceso: todavía cambia"
+              }
+            ],
+            [
+              "I'm used to the bus.",
+              {
+                "es": "Ya habitual: ya es normal"
+              }
+            ],
+            [
+              "I used to cook with my mother.",
+              {
+                "es": "Antes: ya no ocurre"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:46d46af5320a39683c5ac584de5bbcf65f9fd6dcbd3e4df4038d917ea9886924"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c08.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según las notas, ¿qué frase describe a Leo en el mes 6?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He is getting used to school."
+          },
+          {
+            "text": "He is used to school."
+          },
+          {
+            "text": "He wasn't used to school."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.e01.seed-0",
+          "feedback": {
+            "es": "En el mes 6 le gusta casi todo, pero algunos días aún cuestan: el proceso está abierto, is getting used to. Ser normal es el mes 12 y no querer ir, el mes 1."
+          },
+          "text": "Notes: Month 1: Leo does not want to go to school. Month 6: Leo likes most days, but some days are still hard. Month 12: school feels normal to him."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1fc7ed2b60d4a5ddf5749458d44fbb4623a957fb49008915ce0c13549cd42088"
+      },
+      {
+        "id": "en.n5.c08.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace ahora el hablante."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He skips dinner."
+          },
+          {
+            "text": "He cooks for other people."
+          },
+          {
+            "text": "He eats earlier than before."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.e02.seed-0",
+          "feedback": {
+            "es": "Cook for my neighbours muestra que ya cena tarde con normalidad y hasta cocina para otros."
+          },
+          "audio": "At first I wasn't used to eating dinner so late. Now it's normal, and I cook for my neighbours, too.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0f9ce650ee58b309c94c5034e02e43ab7c9b9d13b977b86f928e9ab7586d0958"
+      },
+      {
+        "id": "en.n5.c08.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ya estoy acostumbrado a vivir solo.»"
+        },
+        "answer": {
+          "text": "living",
+          "accepted": [
+            "living"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.e03.seed-0",
+          "feedback": {
+            "es": "Con be used to, el verbo lleva -ing: I'm used to living alone."
+          },
+          "text": "I'm used to ___ alone."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4262f632f2a690b7abcce904696b4a5529e5f96c9e094422bb0c7cc9ed6bf058"
+      },
+      {
+        "id": "en.n5.c08.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «No estaba acostumbrado al largo invierno.»"
+        },
+        "answer": {
+          "text": "I wasn't used to the long winter",
+          "tokens": [
+            "I",
+            "wasn't",
+            "used",
+            "to",
+            "the",
+            "long",
+            "winter"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.e04.seed-0",
+          "feedback": {
+            "es": "Wasn't used to + nombre habla de algo que entonces no era normal; el pasado pide be en pasado, no am."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:73a9d010b6ce211d8bcec11d461539ba8757881312c54525b4f5cb012351725e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c08.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el pódcast, ¿qué ya es habitual para el hablante?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Feeling lonely."
+          },
+          {
+            "text": "Looking for a job."
+          },
+          {
+            "text": "Living in the city."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.r01.seed-0",
+          "feedback": {
+            "es": "I'm used to the city indica que vivir en la ciudad ya es normal; sentirse solo era al principio."
+          },
+          "text": "Podcast: 'My neighbours are kind. At first I felt lonely, but now I have friends. I'm used to the city, and I like my job.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5f272c8fdc6658ef45f1979d156daf36f1770c8d2b4864f5407d9789d44032f6"
+      },
+      {
+        "id": "en.n5.c08.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué dice el hablante sobre hablar inglés."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It is getting easier, but not normal yet."
+          },
+          {
+            "text": "It is already completely normal."
+          },
+          {
+            "text": "It was easy from the start."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.r02.seed-0",
+          "feedback": {
+            "es": "Am getting used to it significa que mejora, pero todavía no es del todo normal."
+          },
+          "audio": "I still get nervous when I speak English, but I'm getting used to it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fa5ee616ada4a8e1e13ee4e388b1d8989dba377d87354f13d4728fc095e600b4"
+      },
+      {
+        "id": "en.n5.c08.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Antes vivía con mis padres.»"
+        },
+        "answer": {
+          "text": "used",
+          "accepted": [
+            "used"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-getting-used-to-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c08.r03.seed-0",
+          "feedback": {
+            "es": "Para un estado del pasado que ya no existe se usa used to + verbo base."
+          },
+          "text": "I ___ to live with my parents."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f6793d01ce471aa4b1b2be9af8924e3f0d72fac274d66bd3542eb727017003b4"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c08.e01": {
+      "reteach": "en.n5.class-08.t01",
+      "review": "en.n5.c08.r01"
+    },
+    "en.n5.c08.e02": {
+      "reteach": "en.n5.class-08.t02",
+      "review": "en.n5.c08.r02"
+    },
+    "en.n5.c08.e03": {
+      "reteach": "en.n5.class-08.t03",
+      "review": "en.n5.c08.r03"
+    },
+    "en.n5.c08.e04": {
+      "reteach": "en.n5.class-08.t04",
+      "review": "en.n5.c08.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

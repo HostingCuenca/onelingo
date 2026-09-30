@@ -1,0 +1,693 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n4",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n4.class-96": {
+      "explicacion": {
+        "titulo": "Hechos, deducciones y opiniones en un caso real",
+        "texto": "Un caso real mezcla tres tipos de información. Un hecho se puede comprobar (The bus left at eight). Una deducción es una conclusión que sacas de una prueba: se marca con must have + participio (casi seguro que pasó), can't have + participio (casi seguro que no pasó) o probably. Una opinión es lo que alguien piensa y se marca con I think o in my opinion. Para analizar un caso, separa qué hechos tienes, qué pruebas respaldan tu deducción y qué es solo opinión. Con must solo no puedes hablar del pasado: necesitas have."
+      },
+      "patron": {
+        "texto": "Hecho, deducción y opinión:",
+        "formula": [
+          {
+            "texto": "The message gave the wrong gate.",
+            "nota": "hecho: se puede comprobar"
+          },
+          {
+            "texto": "They must have waited there,",
+            "nota": "deducción: must have + participio"
+          },
+          {
+            "texto": "because nobody met Mia.",
+            "nota": "prueba que respalda la deducción"
+          },
+          {
+            "texto": "In my opinion, it was a bad plan.",
+            "nota": "opinión: lo que piensa alguien"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The bus must leave early, because the road is empty.",
+          "correcto": "The bus must have left early, because the road is empty.",
+          "explicacion": "Para deducir algo del pasado se usa must have + participio (must have left). Must leave habla del presente o del futuro."
+        },
+        {
+          "incorrecto": "Mia can't has lost the message.",
+          "correcto": "Mia can't have lost the message.",
+          "explicacion": "Después de un modal (can't, must) se usa have y el verbo base, nunca has, aunque el sujeto sea she o Mia."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos leen el informe de un viaje de intercambio y separan hechos y deducciones.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The report says that Mia's suitcase did not arrive.",
+            "traduccion": "El informe dice que la maleta de Mia no llegó."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That is a fact. The host family must have waited at the wrong gate, because nobody met her.",
+            "traduccion": "Eso es un hecho. La familia anfitriona debió de esperar en la puerta equivocada, porque nadie la recibió."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Is that a fact too?",
+            "traduccion": "¿Eso también es un hecho?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No, it is a conclusion. The evidence is the message: it gave the wrong gate.",
+            "traduccion": "No, es una conclusión. La prueba es el mensaje: daba la puerta equivocada."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tipo de información es que la familia esperó en la puerta equivocada?",
+          "opciones": [
+            {
+              "es": "Una conclusión apoyada en una prueba."
+            },
+            {
+              "es": "Un hecho que ya se comprobó."
+            },
+            {
+              "es": "Una opinión personal de Ana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos la llama «a conclusion» y da la prueba: el mensaje con la puerta equivocada. Lo comprobado es solo que la maleta no llegó."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Cómo se marca",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "se puede comprobar"
+            },
+            {
+              "texto": "The plane landed at six."
+            }
+          ],
+          [
+            {
+              "texto": "Deducción"
+            },
+            {
+              "texto": "must have / can't have + participio"
+            },
+            {
+              "texto": "They must have waited at the wrong gate."
+            }
+          ],
+          [
+            {
+              "texto": "Opinión"
+            },
+            {
+              "texto": "I think / in my opinion"
+            },
+            {
+              "texto": "In my opinion, the food was good."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-97": {
+      "explicacion": {
+        "titulo": "Revisar antes de escribir: tiempos, pasiva, relativas y registro",
+        "texto": "Antes de enviar un mensaje, revisa cuatro cosas. Tiempos: los hechos van en pasado simple (arrived) y lo que ocurrió antes, en had + participio (had landed). Pasiva: si importa lo que pasó y no quién lo hizo, usa be + participio (The suitcase was sent). Relativas: who para personas y which o that para cosas, sin repetir el sujeto (the teacher who organised the trip). Registro: en un mensaje formal pide con Could you please…? en lugar de dar órdenes (Give me…)."
+      },
+      "patron": {
+        "texto": "Revisión en cuatro pasos:",
+        "formula": [
+          {
+            "texto": "The plane had already landed",
+            "nota": "tiempos: had + participio para lo anterior"
+          },
+          {
+            "texto": "The suitcase was sent",
+            "nota": "pasiva: was + participio"
+          },
+          {
+            "texto": "the teacher who organised the trip",
+            "nota": "relativa: who + verbo, sin repetir sujeto"
+          },
+          {
+            "texto": "Could you please send me a refund?",
+            "nota": "registro: petición educada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The suitcase sent to the wrong airport.",
+          "correcto": "The suitcase was sent to the wrong airport.",
+          "explicacion": "La pasiva necesita be antes del participio: was sent. Sin was, la frase queda incompleta, como «la maleta enviada»."
+        },
+        {
+          "incorrecto": "The teacher who she organised the trip called us.",
+          "correcto": "The teacher who organised the trip called us.",
+          "explicacion": "Who ya hace de sujeto de organised. No se repite con she, como sí puede pasar en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara revisa con Tom el mensaje que escribió a la organizadora del viaje.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Is my message polite?",
+            "traduccion": "¿Mi mensaje es educado?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Not yet. You wrote: Give me a refund. It is better to write: Could you please send me a refund?",
+            "traduccion": "Todavía no. Escribiste: Dame un reembolso. Es mejor escribir: ¿Podría enviarme un reembolso, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the first line? I wrote: When we arrived, the plane already landed.",
+            "traduccion": "¿Y la primera línea? Escribí: Cuando llegamos, el avión ya aterrizó."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Write had already landed. The plane landed before you arrived.",
+            "traduccion": "Escribe had already landed. El avión aterrizó antes de que llegaran."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thanks. I will correct both mistakes before I send it.",
+            "traduccion": "Gracias. Corregiré los dos errores antes de enviarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué hay que escribir «had already landed»?",
+          "opciones": [
+            {
+              "es": "Porque el avión aterrizó antes de que llegaran."
+            },
+            {
+              "es": "Porque la frase es una petición educada."
+            },
+            {
+              "es": "Porque hay que evitar la pasiva."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica: «The plane landed before you arrived». El antecedente se escribe con had + participio; la petición educada es otro error distinto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Revisa",
+          "Error típico",
+          "Forma correcta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tiempos"
+            },
+            {
+              "texto": "The plane already landed when we arrived."
+            },
+            {
+              "texto": "The plane had already landed when we arrived."
+            }
+          ],
+          [
+            {
+              "texto": "Pasiva"
+            },
+            {
+              "texto": "The suitcase sent to the wrong city."
+            },
+            {
+              "texto": "The suitcase was sent to the wrong city."
+            }
+          ],
+          [
+            {
+              "texto": "Relativa"
+            },
+            {
+              "texto": "The teacher who she organised the trip"
+            },
+            {
+              "texto": "The teacher who organised the trip"
+            }
+          ],
+          [
+            {
+              "texto": "Registro"
+            },
+            {
+              "texto": "Give me a refund."
+            },
+            {
+              "texto": "Could you please send me a refund?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-98": {
+      "explicacion": {
+        "titulo": "Quién dice qué y con cuánta seguridad",
+        "texto": "En un incidente con varios testigos, cada hablante tiene su versión y su grado de seguridad. Primero identifica quién habla: por I, por el nombre o por says that. Después mide la certeza: seguro (is sure that, is certain that), probable (probably), posible (might have + participio) o no comprobado (apparently, nobody has confirmed it). Solo lo confirmado es un hecho; lo demás es una versión. Si dos hablantes dan datos distintos, anota quién, qué dice y con cuánta seguridad."
+      },
+      "patron": {
+        "texto": "Hablante + grado de certeza + dato:",
+        "formula": [
+          {
+            "texto": "Sara",
+            "nota": "hablante: quién cuenta"
+          },
+          {
+            "texto": "is sure that",
+            "nota": "certeza alta"
+          },
+          {
+            "texto": "the bus left at six.",
+            "nota": "dato"
+          },
+          {
+            "texto": "Leo thinks it might have left early.",
+            "nota": "posibilidad: might have + participio"
+          },
+          {
+            "texto": "Apparently, the road was closed.",
+            "nota": "información sin confirmar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is sure that the bus left at six.",
+          "correcto": "It is certain that the bus left at six.",
+          "explicacion": "Sure describe a personas (Sara is sure). Con it is se usa certain: it is certain that… (en español, «es seguro que» sirve para los dos casos)."
+        },
+        {
+          "incorrecto": "Leo thinks that the bus might left early.",
+          "correcto": "Leo thinks that the bus might have left early.",
+          "explicacion": "Para una posibilidad sobre el pasado se necesita might have + participio. Might left no es correcto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana comparan lo que dicen tres testigos de un incidente en la estación.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Sara is sure that the bus left at six.",
+            "traduccion": "Sara está segura de que el autobús salió a las seis."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Carlos is not certain. He thinks it might have left at half past six.",
+            "traduccion": "Carlos no está seguro. Piensa que pudo salir a las seis y media."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And Leo?",
+            "traduccion": "¿Y Leo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Leo says that, apparently, the road was closed, but nobody has confirmed it.",
+            "traduccion": "Leo dice que, al parecer, la carretera estaba cerrada, pero nadie lo ha confirmado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So there is some doubt about the exact time.",
+            "traduccion": "Entonces hay algo de duda sobre la hora exacta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dice Carlos sobre la hora?",
+          "opciones": [
+            {
+              "es": "No está seguro: cree que pudo salir a las seis y media."
+            },
+            {
+              "es": "Está seguro de que salió a las seis."
+            },
+            {
+              "es": "Dice que la carretera estaba cerrada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana cuenta que Carlos «is not certain» y que cree que «might have left at half past six». La certeza alta es de Sara y la carretera es lo que dice Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Grado de certeza",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "is sure that / is certain that"
+            },
+            {
+              "texto": "alto"
+            },
+            {
+              "texto": "Sara is sure that the bus left at six."
+            }
+          ],
+          [
+            {
+              "texto": "probably / must have"
+            },
+            {
+              "texto": "medio"
+            },
+            {
+              "texto": "Tom says that the driver probably forgot."
+            }
+          ],
+          [
+            {
+              "texto": "might have / may have"
+            },
+            {
+              "texto": "bajo"
+            },
+            {
+              "texto": "Leo thinks it might have left early."
+            }
+          ],
+          [
+            {
+              "texto": "apparently / nobody has confirmed"
+            },
+            {
+              "texto": "sin comprobar"
+            },
+            {
+              "texto": "Apparently, the road was closed."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-99": {
+      "explicacion": {
+        "titulo": "Un mensaje de solución en cuatro partes",
+        "texto": "Un buen mensaje de solución tiene cuatro partes. 1) Saludo y motivo: Dear…, I am writing to explain… 2) Narración en pasado: pasado simple para los hechos y had + participio para lo anterior. 3) Hipótesis: if + had + participio, would have + participio, para indicar cómo se habría evitado el problema. 4) Petición educada: Could you please…? o I would appreciate it if you could…, y un cierre con Thank you y Sincerely. Antes de enviar, revisa tiempos, cortesía y errores de orden."
+      },
+      "patron": {
+        "texto": "Motivo + narración + hipótesis + petición:",
+        "formula": [
+          {
+            "texto": "Dear Ms Lopez, I am writing to explain…",
+            "nota": "motivo: saludo formal + propósito"
+          },
+          {
+            "texto": "When we arrived, nobody had told us…",
+            "nota": "narración: pasado + antecedente"
+          },
+          {
+            "texto": "If you had called, we would have…",
+            "nota": "hipótesis sobre el pasado"
+          },
+          {
+            "texto": "Could you please…?",
+            "nota": "petición educada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I write to you for explain a problem.",
+          "correcto": "I am writing to explain a problem.",
+          "explicacion": "Para expresar el propósito se usa to + verbo, no for + verbo. En un mensaje se dice I am writing to…"
+        },
+        {
+          "incorrecto": "I would appreciate if you could arrange a refund.",
+          "correcto": "I would appreciate it if you could arrange a refund.",
+          "explicacion": "Falta it: I would appreciate it if… En español «agradecería que» no lleva ese pronombre."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos preparan un mensaje para la organizadora del viaje.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Let us start with the problem. What happened?",
+            "traduccion": "Empecemos con el problema. ¿Qué pasó?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The host family had not received our message, so nobody met us.",
+            "traduccion": "La familia anfitriona no había recibido nuestro mensaje, así que nadie nos recibió."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. Now think about the past. If they had received it, what would have happened?",
+            "traduccion": "Bien. Ahora piensa en el pasado. Si lo hubieran recibido, ¿qué habría pasado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "If they had received it, they would have waited at the right gate.",
+            "traduccion": "Si lo hubieran recibido, habrían esperado en la puerta correcta."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Perfect. Finish with a polite request: Could you please send the family a new message?",
+            "traduccion": "Perfecto. Termina con una petición educada: ¿Podría enviar a la familia un mensaje nuevo, por favor?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué debe terminar el mensaje?",
+          "opciones": [
+            {
+              "es": "Con una petición educada."
+            },
+            {
+              "es": "Con una queja enfadada."
+            },
+            {
+              "es": "Con la fecha del viaje."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «Finish with a polite request». Antes van el problema y la hipótesis, y nadie habla de la fecha."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Qué hacer",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Motivo"
+            },
+            {
+              "texto": "saludo formal + propósito"
+            },
+            {
+              "texto": "Dear Ms Lopez, I am writing to explain a problem."
+            }
+          ],
+          [
+            {
+              "texto": "Narración"
+            },
+            {
+              "texto": "pasado simple + had + participio"
+            },
+            {
+              "texto": "The family had not received our message."
+            }
+          ],
+          [
+            {
+              "texto": "Hipótesis"
+            },
+            {
+              "texto": "if + had + participio, would have + participio"
+            },
+            {
+              "texto": "If you had called, we would have found a solution."
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Could you please… / I would appreciate it if…"
+            },
+            {
+              "texto": "Could you please replace the ticket?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n4.class-100": {
+      "explicacion": {
+        "titulo": "Desempeño final B1: contar, deducir, transmitir y acordar",
+        "texto": "El desempeño final junta cuatro funciones en una sola conversación. Contar lo ocurrido: pasado simple y had + participio para lo anterior. Deducir causas: must have, can't have o might have + participio, con la prueba que lo respalda. Transmitir mensajes: said o told + that, con el verbo un paso atrás (will pasa a would). Acordar una solución: I suggest…, if + had + participio para explicar cómo se evitó, y Do we have a deal? Elige la herramienta según lo que necesites hacer en ese momento."
+      },
+      "patron": {
+        "texto": "Relato + deducción + mensaje + acuerdo:",
+        "formula": [
+          {
+            "texto": "The family had not received our message,",
+            "nota": "relato: pasado + antecedente"
+          },
+          {
+            "texto": "so it must have gone to the wrong address.",
+            "nota": "deducción: must have + participio"
+          },
+          {
+            "texto": "The teacher said that she would call.",
+            "nota": "mensaje transmitido: will pasa a would"
+          },
+          {
+            "texto": "I suggest a new message. Do we have a deal?",
+            "nota": "acuerdo: propuesta + cierre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The teacher promised that she will call the family.",
+          "correcto": "The teacher promised that she would call the family.",
+          "explicacion": "En discurso indirecto el verbo retrocede un paso: will pasa a would."
+        },
+        {
+          "incorrecto": "If we would send a new message, they might answer.",
+          "correcto": "If we send a new message, they might answer.",
+          "explicacion": "Después de if no se usa would: se usa el presente (If we send…). Would va en la otra parte de la frase."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia habla con Carlos, el coordinador del intercambio, sobre lo que pasó en el aeropuerto.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What happened at the airport, Mia?",
+            "traduccion": "¿Qué pasó en el aeropuerto, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "There was a misunderstanding. The host family had not received our message.",
+            "traduccion": "Hubo un malentendido. La familia anfitriona no había recibido nuestro mensaje."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The cause must have been the wrong address. The school told me that they would send a new message.",
+            "traduccion": "La causa debió de ser la dirección equivocada. El colegio me dijo que enviaría un mensaje nuevo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I suggest that we call the family today. Do we have a deal?",
+            "traduccion": "Sugiero que llamemos hoy a la familia. ¿Tenemos un trato?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, we have a deal. I promise that I will call them at four.",
+            "traduccion": "Sí, tenemos un trato. Prometo que los llamaré a las cuatro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué acuerdan Mia y Carlos?",
+          "opciones": [
+            {
+              "es": "Llamar hoy a la familia."
+            },
+            {
+              "es": "Esperar hasta mañana para escribir."
+            },
+            {
+              "es": "Cambiar de familia anfitriona."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia sugiere llamar a la familia hoy y Carlos responde «Yes, we have a deal». Nadie propone esperar ni cambiar de familia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Herramienta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Contar lo ocurrido"
+            },
+            {
+              "texto": "pasado simple + had + participio"
+            },
+            {
+              "texto": "The family had not received our message."
+            }
+          ],
+          [
+            {
+              "texto": "Deducir una causa"
+            },
+            {
+              "texto": "must have / can't have / might have + participio"
+            },
+            {
+              "texto": "It must have gone to the wrong address."
+            }
+          ],
+          [
+            {
+              "texto": "Transmitir un mensaje"
+            },
+            {
+              "texto": "said / told + that (will → would)"
+            },
+            {
+              "texto": "She said that she would call."
+            }
+          ],
+          [
+            {
+              "texto": "Acordar"
+            },
+            {
+              "texto": "I suggest… / Do we have a deal?"
+            },
+            {
+              "texto": "I suggest a new message today."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

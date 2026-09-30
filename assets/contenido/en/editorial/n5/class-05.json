@@ -1,0 +1,821 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 5,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n5.class-05",
+  "title": {
+    "en": "Meeting an old friend",
+    "es": "Reencuentro con una amistad antigua"
+  },
+  "objectives": {
+    "es": [
+      "Mantener un reencuentro eligiendo el tiempo según hables de resultado, duración o suceso concreto, y preguntar con how long y what have you been doing."
+    ]
+  },
+  "concepts": [
+    "n5-changing-lives-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n5.class-04"
+  ],
+  "usesVocabulary": [
+    "ages",
+    "lately",
+    "abroad",
+    "news",
+    "married",
+    "touch"
+  ],
+  "usesPatterns": [
+    "n5-changing-lives-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "ages",
+      "es": "mucho tiempo"
+    },
+    {
+      "en": "lately",
+      "es": "últimamente"
+    },
+    {
+      "en": "abroad",
+      "es": "en el extranjero"
+    },
+    {
+      "en": "news",
+      "es": "noticias"
+    },
+    {
+      "en": "married",
+      "es": "casado"
+    },
+    {
+      "en": "touch",
+      "es": "contacto"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n5.class-05.t01",
+      "en": "It's been ages! What have you been doing lately?",
+      "es": "¡Cuánto tiempo! ¿Qué has estado haciendo últimamente?",
+      "explanationEs": "La pregunta abierta sobre actividades recientes usa have you been + -ing.",
+      "segments": [
+        "It's been ages! What have",
+        "you been doing lately?"
+      ],
+      "audioText": "It's been ages! What have you been doing lately?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-5"
+    },
+    {
+      "id": "en.n5.class-05.t02",
+      "en": "I've been working abroad for two years, and I moved back in May.",
+      "es": "Llevo dos años trabajando en el extranjero y volví en mayo.",
+      "explanationEs": "For dos años = duración; moved back in May = hecho con fecha.",
+      "segments": [
+        "I've been working abroad for two years,",
+        "and I moved back in May."
+      ],
+      "audioText": "I've been working abroad for two years, and I moved back in May.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-5"
+    },
+    {
+      "id": "en.n5.class-05.t03",
+      "en": "Tell me your news! How long have you been married?",
+      "es": "¡Cuéntame tus novedades! ¿Cuánto tiempo llevas casado?",
+      "explanationEs": "How long + have you been pregunta por la duración de un estado.",
+      "segments": [
+        "Tell me your news! How",
+        "long have you been married?"
+      ],
+      "audioText": "Tell me your news! How long have you been married?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-5"
+    },
+    {
+      "id": "en.n5.class-05.t04",
+      "en": "I've got some great news: I've got a new job, and I started on Monday.",
+      "es": "Tengo una gran noticia: tengo un trabajo nuevo y empecé el lunes.",
+      "explanationEs": "El resultado se dice con I've got; el día concreto, con past simple (started).",
+      "segments": [
+        "I've got some great news: I've got a",
+        "new job, and I started on Monday."
+      ],
+      "audioText": "I've got some great news: I've got a new job, and I started on Monday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-5"
+    },
+    {
+      "id": "en.n5.class-05.t05",
+      "en": "We lost touch after school, but I've thought about you many times.",
+      "es": "Perdimos el contacto después del colegio, pero he pensado en ti muchas veces.",
+      "explanationEs": "Lost touch es un suceso pasado; I've thought cuenta cuántas veces, sin fecha.",
+      "segments": [
+        "We lost touch after school, but",
+        "I've thought about you many times."
+      ],
+      "audioText": "We lost touch after school, but I've thought about you many times.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n5-changing-lives-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n5.c05.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué pregunta invita a contar qué ha hecho alguien últimamente?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "What you have been doing lately?"
+          },
+          {
+            "text": "What have you doing lately?"
+          },
+          {
+            "text": "What have you been doing lately?"
+          }
+        ],
+        "teaches": [
+          "n5-changing-lives-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.pg01.seed-0",
+          "feedback": {
+            "es": "En una pregunta el auxiliar va antes del sujeto y hace falta been: What have you been doing? Las otras opciones rompen el orden o omiten been."
+          },
+          "hint": {
+            "es": "En las preguntas, el auxiliar va antes del sujeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:334bff66c67b2d3ea2fcc2a6b7a27bd89ac2eb75015604b7907492bd4ac2031b"
+      },
+      {
+        "id": "en.n5.c05.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Cuánto tiempo llevas casado?»"
+        },
+        "answer": {
+          "text": "married",
+          "accepted": [
+            "married"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n5-changing-lives-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.pg02.seed-0",
+          "feedback": {
+            "es": "Estar casado es un estado, no una actividad: how long have you been married?"
+          },
+          "hint": {
+            "es": "Es el estado civil, no una actividad: no lleva -ing."
+          },
+          "text": "How long have you been ___?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:405b94ac864076670953f510391a11ed3dc3d6c816031629742e57fcd0edded0"
+      },
+      {
+        "id": "en.n5.c05.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Ana quiere saber cuánto lleva Leo con ese trabajo. ¿Qué pregunta le hace?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "How long have you had it?"
+          },
+          {
+            "text": "When did you have it?"
+          },
+          {
+            "text": "How long do you have it?"
+          }
+        ],
+        "teaches": [
+          "n5-changing-lives-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.pg03.seed-0",
+          "feedback": {
+            "es": "Para preguntar cuánto dura algo que sigue hoy se usa how long + have you had. Las otras opciones cambian el tiempo."
+          },
+          "hint": {
+            "es": "Duración hasta hoy: how long + have you + participio."
+          },
+          "text": "Leo: 'I got a new job in January. I love it.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0924073e82703484c8a6bfe2eb02b8738e5d30b31c6b5d5ea1db4cd318694f7c"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n5.c05.p01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «He estado trabajando en el extranjero desde enero.»"
+        },
+        "answer": {
+          "text": "I've been working abroad since January",
+          "tokens": [
+            "I've",
+            "been",
+            "working",
+            "abroad",
+            "since",
+            "January"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.p01.seed-0",
+          "feedback": {
+            "es": "Since January marca el inicio y been working la actividad que llega hasta hoy."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8ef1ea536a2acfd645bbd17a28ee0a31fb8dd5f1cacd7f85b042e18d6a188884"
+      },
+      {
+        "id": "en.n5.c05.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué dice la persona sobre su amistad."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The friends speak every week and see each other daily."
+          },
+          {
+            "text": "The friends stopped speaking, but one still thinks of the other."
+          },
+          {
+            "text": "The friends never met at school."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.p02.seed-0",
+          "feedback": {
+            "es": "Lost touch significa perder el contacto; I've thought about you a lot muestra que sigue recordándolo."
+          },
+          "audio": "We lost touch after school, but I've thought about you a lot.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8b3a7b30271664253b2072ba1900c81e1cc6067e305399d7e959344dc57ed1a9"
+      },
+      {
+        "id": "en.n5.c05.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál cuenta un hecho con fecha en un reencuentro?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I've moved back in May."
+          },
+          {
+            "text": "I've been moving back in May."
+          },
+          {
+            "text": "I moved back in May."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.p03.seed-0",
+          "feedback": {
+            "es": "In May es una fecha concreta: past simple, moved back. Con fechas no se usa have."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0e5aa4bbd9d6a6deef5626267857e9e177a28c740a3805c33f5b0e6e03a046af"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n5.c05.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué respuesta encaja con la pregunta «How long have you been living here?»"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "For two years."
+          },
+          {
+            "text": "Since two years."
+          },
+          {
+            "text": "I've lived here two years ago."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5",
+          "n5-changing-lives-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.e01.seed-0",
+          "feedback": {
+            "es": "How long pide una duración y se responde con for + tiempo. Since exige un punto de inicio (since 2021) y ago pide past simple, no present perfect."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3f0fd79df40e09bd95d288841dbbd46ede4b2d365477a5b833feada526488fcf"
+      },
+      {
+        "id": "en.n5.c05.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué dice el hablante sobre un examen."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He began a new course that month."
+          },
+          {
+            "text": "He did well in an exam that month."
+          },
+          {
+            "text": "He travelled abroad that month."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5",
+          "n5-changing-lives-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.e02.seed-0",
+          "feedback": {
+            "es": "Passed the final test significa que aprobó un examen: lo hizo bien en junio."
+          },
+          "audio": "It's been ages! I've been studying Spanish since 2021, and I passed the final test in June.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1801eeab077e15d8afece92b01a35dab35ee68f77c0a839a098f73ea80495353"
+      },
+      {
+        "id": "en.n5.c05.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Vi a Mia la semana pasada.»"
+        },
+        "answer": {
+          "text": "saw",
+          "accepted": [
+            "saw"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5",
+          "n5-changing-lives-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.e03.seed-0",
+          "feedback": {
+            "es": "Last week es un momento terminado: past simple, saw."
+          },
+          "text": "I ___ Mia last week."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:581dcb5832141e794544594b4c2e208394dde9f394e6f7053b904f3f9dfcaf2e"
+      },
+      {
+        "id": "en.n5.c05.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe tu parte del reencuentro con los datos dados (30–90 palabras)."
+        },
+        "answer": {
+          "text": "It's been ages! I've been working abroad since January, and I've been learning Portuguese. I started the classes in March, and I moved back home in May. Tell me your news! How long have you lived here? And what have you been doing lately?",
+          "accepted": [
+            "It's been ages! I've been working abroad since January, and I've been learning Portuguese. I started the classes in March, and I moved back home in May. Tell me your news! How long have you lived here? And what have you been doing lately?",
+            "Hello! It's been ages. I have been working abroad since January, and I have been learning Portuguese. I began the classes in March, and I came back home in May. How long have you been here? What have you been doing lately?",
+            "Long time no see! Since January I've been working abroad, and I'm learning Portuguese. I started classes in March. I moved back in May. What have you been doing lately? And how long have you lived here?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5",
+          "n5-changing-lives-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.e04.seed-0",
+          "feedback": {
+            "es": "Un reencuentro mezcla los tres tiempos: have been + -ing, past simple con fecha y las preguntas how long y what have you been doing."
+          },
+          "text": "Te encuentras con un amigo al que no ves desde hace años. Cuéntale: trabajas en el extranjero desde enero y estás aprendiendo portugués (empezaste las clases en marzo); volviste a casa en mayo. Pídele sus novedades y haz dos preguntas: una con «How long…?» y otra con «What have you been doing…?».",
+          "scoring": {
+            "wordRange": [
+              30,
+              90
+            ],
+            "evidenceGroups": [
+              [
+                "I've been working abroad",
+                "I have been working abroad",
+                "I've been working in another country"
+              ],
+              [
+                "since January"
+              ],
+              [
+                "in March",
+                "last March",
+                "March"
+              ],
+              [
+                "moved back",
+                "came back",
+                "returned",
+                "went back",
+                "got back"
+              ],
+              [
+                "How long have you",
+                "how long has it been"
+              ],
+              [
+                "What have you been doing",
+                "what have you been up to"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:31007e2de5964f4ed946e5f3f5b4db3d93f8a369f7c60a63da232f830346349e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n5.c05.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el mensaje, ¿cómo va todo desde junio?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Things are getting worse."
+          },
+          {
+            "text": "Nothing has changed."
+          },
+          {
+            "text": "Things are getting better."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.r01.seed-0",
+          "feedback": {
+            "es": "El amigo dice que se siente mejor desde junio: las cosas van a mejor, no igual ni peor."
+          },
+          "text": "Friend: 'I've had a bad year, but I've been feeling better since June.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3cd83b4304b0ed5183a57442ae4378fe327bec5cdcb43699242375f14b8c2b25"
+      },
+      {
+        "id": "en.n5.c05.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué cuenta el audio sobre la vida de Mia fuera de casa."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She has lived away from home for years."
+          },
+          {
+            "text": "She has just arrived in the country."
+          },
+          {
+            "text": "She is going to get married soon."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.r02.seed-0",
+          "feedback": {
+            "es": "Has been living abroad for five years indica que lleva años lejos de casa; got married there es un hecho pasado."
+          },
+          "audio": "Mia has been living abroad for five years, and she got married there in 2022.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:81cb10437f5b81b972c9d2e57db79a065d7304f2c856e28f8a34ee86ceedf19f"
+      },
+      {
+        "id": "en.n5.c05.r03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase del reencuentro con lo que hace."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "What have you been up to?",
+              {
+                "es": "Pregunta por actividades recientes."
+              }
+            ],
+            [
+              "How long have you been married?",
+              {
+                "es": "Pregunta por la duración."
+              }
+            ],
+            [
+              "I've got a new job.",
+              {
+                "es": "Cuenta un resultado."
+              }
+            ],
+            [
+              "We got married in June.",
+              {
+                "es": "Cuenta un hecho con fecha."
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n5-changing-lives-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n5.c05.r03.seed-0",
+          "feedback": {
+            "es": "Cada frase tiene su función en la charla: actividad, duración, resultado y suceso con fecha."
+          },
+          "pairs": [
+            [
+              "What have you been up to?",
+              {
+                "es": "Pregunta por actividades recientes."
+              }
+            ],
+            [
+              "How long have you been married?",
+              {
+                "es": "Pregunta por la duración."
+              }
+            ],
+            [
+              "I've got a new job.",
+              {
+                "es": "Cuenta un resultado."
+              }
+            ],
+            [
+              "We got married in June.",
+              {
+                "es": "Cuenta un hecho con fecha."
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3cb403f81190767ff00790aed0296070b6e6258016575d8f6e7b9638727cf613"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n5.c05.e01": {
+      "reteach": "en.n5.class-05.t01",
+      "review": "en.n5.c05.r01"
+    },
+    "en.n5.c05.e02": {
+      "reteach": "en.n5.class-05.t02",
+      "review": "en.n5.c05.r02"
+    },
+    "en.n5.c05.e03": {
+      "reteach": "en.n5.class-05.t03",
+      "review": "en.n5.c05.r03"
+    },
+    "en.n5.c05.e04": {
+      "reteach": "en.n5.class-05.t04",
+      "review": "en.n5.c05.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n5-changing-lives-1",
+    "n5-changing-lives-2",
+    "n5-changing-lives-3",
+    "n5-changing-lives-4",
+    "n5-changing-lives-5"
+  ]
+}

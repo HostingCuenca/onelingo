@@ -1,0 +1,623 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "classes": {
+    "en.n5.class-66": {
+      "explicacion": {
+        "titulo": "Expresiones idiomáticas: sentido figurado",
+        "texto": "Una expresión idiomática (idiom) es una frase fija cuyo significado no sale de sumar sus palabras: a piece of cake no habla de pasteles, significa algo muy fácil. Algunas son transparentes, porque la imagen ayuda (break the ice: romper el hielo del primer encuentro); otras son opacas y no se adivinan (spill the beans). Para entenderlas, descarta primero la lectura literal, que casi siempre es absurda en ese contexto, y apóyate en la situación. Aprende la expresión completa: si cambias una palabra, deja de funcionar."
+      },
+      "patron": {
+        "texto": "Contexto + expresión fija = sentido figurado:",
+        "formula": [
+          {
+            "texto": "The exam was",
+            "nota": "contexto: de qué se habla"
+          },
+          {
+            "texto": "a piece of cake,",
+            "nota": "expresión fija: muy fácil, no un trozo de pastel"
+          },
+          {
+            "texto": "so I finished early.",
+            "nota": "consecuencia que confirma el sentido"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The exam was eaten bread.",
+          "correcto": "The exam was a piece of cake.",
+          "explicacion": "Es un calco de «pan comido»: cada idioma tiene su imagen y en inglés es a piece of cake."
+        },
+        {
+          "incorrecto": "I have to hit the book tonight.",
+          "correcto": "I have to hit the books tonight.",
+          "explicacion": "Las expresiones fijas no cambian de forma: hit the books va siempre en plural."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom hablan del examen y de la fiesta sorpresa de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How was your exam, Tom?",
+            "traduccion": "¿Cómo te fue en el examen, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It was a piece of cake, but now I feel under the weather.",
+            "traduccion": "Fue pan comido, pero ahora me siento mal."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Stay home. And please do not spill the beans about Mia's party.",
+            "traduccion": "Quédate en casa. Y por favor no sueltes el secreto de la fiesta de Mia."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Do not worry, I will not.",
+            "traduccion": "No te preocupes, no lo haré."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo se siente Tom hoy?",
+          "opciones": [
+            {
+              "es": "Un poco enfermo."
+            },
+            {
+              "es": "Muy contento por la fiesta."
+            },
+            {
+              "es": "Nervioso por el examen."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que se siente under the weather: es decir, un poco mal de salud."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Sentido real",
+          "Lectura literal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a piece of cake"
+            },
+            {
+              "texto": "algo muy fácil"
+            },
+            {
+              "texto": "un trozo de pastel"
+            }
+          ],
+          [
+            {
+              "texto": "under the weather"
+            },
+            {
+              "texto": "sentirse mal"
+            },
+            {
+              "texto": "debajo del tiempo"
+            }
+          ],
+          [
+            {
+              "texto": "break the ice"
+            },
+            {
+              "texto": "empezar una conversación"
+            },
+            {
+              "texto": "romper hielo de verdad"
+            }
+          ],
+          [
+            {
+              "texto": "spill the beans"
+            },
+            {
+              "texto": "contar un secreto"
+            },
+            {
+              "texto": "derramar frijoles"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-67": {
+      "explicacion": {
+        "titulo": "Expresiones fijas: qué cambia y qué no",
+        "texto": "Las expresiones fijas tienen una forma que no se puede cambiar: no puedes decir a lot in my plate ni an arm and one leg. Lo que sí cambia es el verbo, que se adapta al tiempo y a la persona (she has a lot on her plate, it cost an arm and a leg), y el posesivo (my, her, our). Con be in the same boat usa be: we are, we were, we will be. Memoriza cada expresión como un bloque y mira qué parte se puede conjugar."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo (cambia) + parte fija (no cambia):",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "has",
+            "nota": "verbo: concuerda con el sujeto y el tiempo"
+          },
+          {
+            "texto": "a lot on her plate.",
+            "nota": "posesivo: cambia; el resto es fijo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She has a lot in her plate.",
+          "correcto": "She has a lot on her plate.",
+          "explicacion": "La preposición de la expresión es on y no se puede cambiar, aunque en español digamos «en el plato»."
+        },
+        {
+          "incorrecto": "The ticket costed an arm and a leg.",
+          "correcto": "The ticket cost an arm and a leg.",
+          "explicacion": "Cost es irregular: su pasado es cost, no costed."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pide ayuda a Tom con un trabajo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Can you help me with this project?",
+            "traduccion": "¿Puedes ayudarme con este proyecto?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry, I have a lot on my plate this week.",
+            "traduccion": "Lo siento, esta semana tengo mucho por hacer."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We are in the same boat! I have three exams.",
+            "traduccion": "¡Estamos igual! Yo tengo tres exámenes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Let us talk on Saturday, so we are on the same page.",
+            "traduccion": "Hablemos el sábado, así estamos de acuerdo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Tom no puede ayudar esta semana?",
+          "opciones": [
+            {
+              "es": "Tiene mucho trabajo pendiente."
+            },
+            {
+              "es": "Está enfermo."
+            },
+            {
+              "es": "No conoce el proyecto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que tiene a lot on his plate: mucho por hacer esta semana."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Presente",
+          "Pasado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "be in the same boat"
+            },
+            {
+              "texto": "We are in the same boat."
+            },
+            {
+              "texto": "We were in the same boat."
+            }
+          ],
+          [
+            {
+              "texto": "cost an arm and a leg"
+            },
+            {
+              "texto": "It costs an arm and a leg."
+            },
+            {
+              "texto": "It cost an arm and a leg."
+            }
+          ],
+          [
+            {
+              "texto": "have a lot on my plate"
+            },
+            {
+              "texto": "She has a lot on her plate."
+            },
+            {
+              "texto": "She had a lot on her plate."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-68": {
+      "explicacion": {
+        "titulo": "Leer una costumbre: origen, participantes y normas",
+        "texto": "Cuando leas la descripción de un festival busca cuatro datos: el origen (cuándo y por qué empezó, en pasado: began, started), los participantes (quién toma parte, en presente: everyone, families), las normas (lo que se debe o se espera: are supposed to, must, do not) y una expresión que lo resume. Be supposed to significa «se supone que» y no «suponer»: lleva to + verbo base. Take part va con in, no con of."
+      },
+      "patron": {
+        "texto": "Origen + participantes + norma:",
+        "formula": [
+          {
+            "texto": "The festival began long ago,",
+            "nota": "origen: pasado simple"
+          },
+          {
+            "texto": "and everyone takes part.",
+            "nota": "participantes: presente simple"
+          },
+          {
+            "texto": "You are supposed to dress up.",
+            "nota": "norma: be supposed to + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We are supposed bring a gift.",
+          "correcto": "We are supposed to bring a gift.",
+          "explicacion": "Después de supposed se necesita to + verbo base: supposed to bring."
+        },
+        {
+          "incorrecto": "Children take part of the festival.",
+          "correcto": "Children take part in the festival.",
+          "explicacion": "La preposición de take part es in, no of, aunque en español se diga «participar de»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana visita un pueblo y Carlos le explica su festival.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What is the festival about, Carlos?",
+            "traduccion": "¿De qué trata el festival, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is a tradition that began two hundred years ago. Everyone in town takes part.",
+            "traduccion": "Es una tradición que empezó hace doscientos años. Todo el pueblo participa."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Do I have to dress up?",
+            "traduccion": "¿Tengo que disfrazarme?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, you are supposed to wear special clothes. It is an unwritten rule.",
+            "traduccion": "Sí, se supone que te pones ropa especial. Es una norma no escrita."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué se supone que debe hacer Ana en el festival?",
+          "opciones": [
+            {
+              "es": "Ponerse ropa especial."
+            },
+            {
+              "es": "Llegar tarde."
+            },
+            {
+              "es": "Cocinar para todos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que Ana is supposed to wear special clothes: es la norma no escrita del festival."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Pregunta",
+          "Pista en el texto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Origen"
+            },
+            {
+              "texto": "¿Cuándo empezó?"
+            },
+            {
+              "texto": "began, started, years ago"
+            }
+          ],
+          [
+            {
+              "texto": "Participantes"
+            },
+            {
+              "texto": "¿Quién participa?"
+            },
+            {
+              "texto": "everyone, children, families"
+            }
+          ],
+          [
+            {
+              "texto": "Normas"
+            },
+            {
+              "texto": "¿Qué se espera?"
+            },
+            {
+              "texto": "supposed to, must, do not"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-69": {
+      "explicacion": {
+        "titulo": "Explicar una costumbre propia",
+        "texto": "Para explicar una costumbre a alguien que no la conoce sigue un orden: qué es y cuándo (every year), el origen con prudencia (it is said that… o as far as I know…, para no afirmar lo que no sabes), los pasos con first, then y finally, tus sentimientos (I feel proud) y una o dos expresiones que den color (not a piece of cake, in the same boat). Usa el presente simple para lo habitual y el pasado para el origen."
+      },
+      "patron": {
+        "texto": "Qué es + origen + pasos + sentimiento:",
+        "formula": [
+          {
+            "texto": "Every year, we gather.",
+            "nota": "qué hacemos y cuándo"
+          },
+          {
+            "texto": "It is said that it started long ago.",
+            "nota": "origen con prudencia"
+          },
+          {
+            "texto": "First we cook, then we eat.",
+            "nota": "pasos: first, then"
+          },
+          {
+            "texto": "I feel proud.",
+            "nota": "sentimiento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It says that the custom started long ago.",
+          "correcto": "It is said that the custom started long ago.",
+          "explicacion": "«Se dice que» es it is said that; it says no funciona porque no hay nadie que hable."
+        },
+        {
+          "incorrecto": "First we gather, after we cook.",
+          "correcto": "First we gather, then we cook.",
+          "explicacion": "After solo no sirve para decir «después»: usa then o after that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pide a Carlos que le explique una costumbre de su pueblo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Carlos, can you explain the custom of your town?",
+            "traduccion": "Carlos, ¿puedes explicarme la costumbre de tu pueblo?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Sure. Every year, all the families gather in the main square.",
+            "traduccion": "Claro. Cada año todas las familias se reúnen en la plaza principal."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And how did it start?",
+            "traduccion": "¿Y cómo empezó?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "As far as I know, it is very old. First we sing, then we eat together, and I always feel proud.",
+            "traduccion": "Hasta donde sé, es muy antigua. Primero cantamos, luego comemos juntos y siempre me siento orgulloso."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Carlos, ¿qué hacen primero las familias en la plaza?",
+          "opciones": [
+            {
+              "es": "Cantan."
+            },
+            {
+              "es": "Comen juntas."
+            },
+            {
+              "es": "Limpian la plaza."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice first we sing: lo primero que hacen es cantar; comer viene después."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Origen"
+            },
+            {
+              "texto": "As far as I know… / It is said that…"
+            }
+          ],
+          [
+            {
+              "texto": "Pasos"
+            },
+            {
+              "texto": "First… / Then… / Finally…"
+            }
+          ],
+          [
+            {
+              "texto": "Sentimientos"
+            },
+            {
+              "texto": "I feel proud / I look forward to it"
+            }
+          ],
+          [
+            {
+              "texto": "Expresión"
+            },
+            {
+              "texto": "It is not a piece of cake / We are in the same boat"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-70": {
+      "explicacion": {
+        "titulo": "Comparar costumbres y aclarar malentendidos",
+        "texto": "Para comparar costumbres usa whereas (mientras que) o while: In my country we hug, whereas here people shake hands. Whereas no es instead ni but: marca un contraste entre dos cosas. Si alguien te entiende mal, aclara con What I meant was… o I did not mean…, sin ponerte a la defensiva. Y para reaccionar cuando por fin entiendes usa That explains it!, I see o Really? That is interesting. Misunderstanding es un sustantivo: a misunderstanding."
+      },
+      "patron": {
+        "texto": "Comparar + aclarar + reaccionar:",
+        "formula": [
+          {
+            "texto": "In my country we hug,",
+            "nota": "tu costumbre"
+          },
+          {
+            "texto": "whereas here people shake hands.",
+            "nota": "contraste con whereas"
+          },
+          {
+            "texto": "What I meant was that it is friendly.",
+            "nota": "aclaración"
+          },
+          {
+            "texto": "That explains it!",
+            "nota": "reacción al entender"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In my country we hug, instead here people shake hands.",
+          "correcto": "In my country we hug, whereas here people shake hands.",
+          "explicacion": "Para contrastar dos costumbres se usa whereas; instead significa «en lugar de» y no compara."
+        },
+        {
+          "incorrecto": "It was a misunderstood between us.",
+          "correcto": "It was a misunderstanding between us.",
+          "explicacion": "Tras el artículo a hace falta un sustantivo: misunderstanding, no el participio misunderstood."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo acaba de mudarse y Ana le explica por qué un vecino lo abrazó.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Yesterday a neighbour hugged me. I was surprised.",
+            "traduccion": "Ayer un vecino me abrazó. Me sorprendí."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Here we greet friends with a hug. Where are you from?",
+            "traduccion": "Aquí saludamos a los amigos con un abrazo. ¿De dónde eres?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "In my country people shake hands, whereas here it is more friendly.",
+            "traduccion": "En mi país la gente se da la mano, mientras que aquí es más cercano."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That explains it! What I meant was that a hug is friendly.",
+            "traduccion": "¡Eso lo explica! Lo que quise decir es que un abrazo es algo amable."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo saludan en el país de Leo?",
+          "opciones": [
+            {
+              "es": "Se dan la mano."
+            },
+            {
+              "es": "Se abrazan."
+            },
+            {
+              "es": "Se besan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que en su país people shake hands: se saludan dándose la mano."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Comparar"
+            },
+            {
+              "texto": "In my country… whereas here…"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "What I meant was… / I did not mean…"
+            }
+          ],
+          [
+            {
+              "texto": "Reaccionar"
+            },
+            {
+              "texto": "That explains it! / I see."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C66-70: expresiones idiomáticas y costumbres correctas; diálogos naturales; respuestas únicas y defendibles.",
+      "P1 corregidos: pista de C66 guiada2 que revelaba las tres respuestas; escritura de C69 (76 palabras: origen, pasos, dos expresiones, comparación, sentimiento) y C70 (57 palabras: comparación, malentendido, expresiones) ampliada desde ~21 palabras con rúbricas de 5-6 grupos flexibles, verificadas; C69 repaso2 pasa a rúbrica flexible.",
+      "P1: C70 practica1 era ambigua (colegio del hablante vs aquí) y copiaba el audio; C69 evaluacion1 pide la edad con cifras; C68 practica1/evaluacion1 en frases completas; C70 practica0 consigna no coincidía con la respuesta.",
+      "P2: opciones de relleno eliminadas (C68 guiada1, C69 guiada1 y evaluacion0, C70 guiada1, evaluacion0 y repaso0); fuga de 'break the ice' entre C66 evaluacion0 y evaluacion3 corregida; nota de C67 sobre el posesivo de 'the ball is in your court'; patrón de C70 con 'that'."
+    ]
+  }
+}

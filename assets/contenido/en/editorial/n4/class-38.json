@@ -1,0 +1,780 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 4,
+  "cefr": "B1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n4.class-38",
+  "title": {
+    "en": "Who is the reader?",
+    "es": "¿Quién es el lector?"
+  },
+  "objectives": {
+    "es": [
+      "Deducir a quién se dirige un texto o audio y elegir la respuesta cuyo tono corresponde."
+    ]
+  },
+  "concepts": [
+    "n4-tone-and-audience-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n4.class-37"
+  ],
+  "usesVocabulary": [
+    "reader",
+    "reply",
+    "tone",
+    "parents",
+    "customers",
+    "everyone",
+    "delay",
+    "free"
+  ],
+  "usesPatterns": [
+    "n4-tone-and-audience-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "reader",
+      "es": "lector"
+    },
+    {
+      "en": "reply",
+      "es": "responder / respuesta"
+    },
+    {
+      "en": "tone",
+      "es": "tono"
+    },
+    {
+      "en": "parents",
+      "es": "padres"
+    },
+    {
+      "en": "customers",
+      "es": "clientes"
+    },
+    {
+      "en": "everyone",
+      "es": "todos"
+    },
+    {
+      "en": "delay",
+      "es": "retraso"
+    },
+    {
+      "en": "free",
+      "es": "libre"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n4.class-38.t01",
+      "en": "Hi Sara, are you free on Friday? I'm making pizza!",
+      "es": "Hola, Sara, ¿estás libre el viernes? ¡Voy a hacer pizza!",
+      "explanationEs": "Hi + nombre, I'm y la exclamación indican un amigo: la respuesta también será informal.",
+      "segments": [
+        "Hi Sara, are you free",
+        "on Friday? I'm making pizza!"
+      ],
+      "audioText": "Hi Sara, are you free on Friday? I'm making pizza!",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-3"
+    },
+    {
+      "id": "en.n4.class-38.t02",
+      "en": "Dear parents, the school trip will leave at eight o'clock.",
+      "es": "Estimados padres, la excursión saldrá a las ocho.",
+      "explanationEs": "Dear + un grupo (parents) indica un lector plural y un tono formal.",
+      "segments": [
+        "Dear parents, the school trip",
+        "will leave at eight o'clock."
+      ],
+      "audioText": "Dear parents, the school trip will leave at eight o'clock.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-3"
+    },
+    {
+      "id": "en.n4.class-38.t03",
+      "en": "Dear customers, we are sorry for the delay.",
+      "es": "Estimados clientes, lamentamos el retraso.",
+      "explanationEs": "Customers son las personas que compran: el tono es formal y cortés.",
+      "segments": [
+        "Dear customers, we are",
+        "sorry for the delay."
+      ],
+      "audioText": "Dear customers, we are sorry for the delay.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-3"
+    },
+    {
+      "id": "en.n4.class-38.t04",
+      "en": "Hello, everyone! Please read the new rules.",
+      "es": "¡Hola a todos! Por favor, lean las nuevas reglas.",
+      "explanationEs": "Everyone indica un grupo: tono neutro y amable.",
+      "segments": [
+        "Hello, everyone! Please read",
+        "the new rules."
+      ],
+      "audioText": "Hello, everyone! Please read the new rules.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-3"
+    },
+    {
+      "id": "en.n4.class-38.t05",
+      "en": "Thank you for your message. I will reply tomorrow.",
+      "es": "Gracias por su mensaje. Responderé mañana.",
+      "explanationEs": "Una respuesta cortés mantiene el tono formal y usa will para el futuro.",
+      "segments": [
+        "Thank you for your message.",
+        "I will reply tomorrow."
+      ],
+      "audioText": "Thank you for your message. I will reply tomorrow.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n4-tone-and-audience-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n4.c38.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Sara contesta a este mensaje. ¿Qué respuesta tiene el tono adecuado?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Dear Sir, I am afraid that I am not free."
+          },
+          {
+            "text": "Dear Sir, I will reply tomorrow."
+          },
+          {
+            "text": "Yes, I'm free! See you on Friday!"
+          }
+        ],
+        "teaches": [
+          "n4-tone-and-audience-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.pg01.seed-0",
+          "feedback": {
+            "es": "El mensaje es informal (Hi, I'm, !), así que la respuesta también usa contracciones y una exclamación. Las otras opciones son formales y no corresponden a una amiga."
+          },
+          "hint": {
+            "es": "El tono de la respuesta imita el del mensaje."
+          },
+          "text": "Hi Sara, are you free on Friday? I'm making pizza!"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:08d102f5c9b2b879abb0d710b797ccb11598e96b1d466fa0cf5d2eed7bfbe408"
+      },
+      {
+        "id": "en.n4.c38.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿A quién se dirige este mensaje?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "To people who buy from the shop."
+          },
+          {
+            "text": "To a close friend."
+          },
+          {
+            "text": "To a teacher."
+          }
+        ],
+        "teaches": [
+          "n4-tone-and-audience-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.pg02.seed-0",
+          "feedback": {
+            "es": "Customers son las personas que compran en una tienda: Dear customers se dirige al público que compra allí."
+          },
+          "hint": {
+            "es": "La palabra después de Dear nombra a los lectores."
+          },
+          "text": "Dear customers, we are sorry for the delay."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a70b8e56619a9ea3eae24944ae045b6e30f2a6ad92d8c1fbeaf90050f3da11f9"
+      },
+      {
+        "id": "en.n4.c38.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Gracias por tu mensaje. Responderé mañana.»"
+        },
+        "answer": {
+          "text": "will",
+          "accepted": [
+            "will"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n4-tone-and-audience-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.pg03.seed-0",
+          "feedback": {
+            "es": "Will expresa la promesa de responder más adelante; el presente no la expresa."
+          },
+          "hint": {
+            "es": "Expresa una decisión o promesa para el futuro."
+          },
+          "text": "Thank you for your message. I ___ reply tomorrow."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c6700450448122fd8b754f0468478470a8e0eb5b4e732670d2fa4ce3e0f66adc"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n4.c38.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién es el lector del mensaje."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A close friend."
+          },
+          {
+            "text": "A group of people."
+          },
+          {
+            "text": "A manager."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.p01.seed-0",
+          "feedback": {
+            "es": "Hello, everyone! se dirige a un grupo de personas. No es un mensaje personal para un amigo ni para un jefe."
+          },
+          "audio": "Hello, everyone! Please read the new rules before Monday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04b40508e57375e5b12bac5592893b19a668f31b7ffe5d55c49273b70b4ec281"
+      },
+      {
+        "id": "en.n4.c38.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué respuesta mantiene el tono del mensaje?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Thanks! See you there, bye!"
+          },
+          {
+            "text": "Got it!"
+          },
+          {
+            "text": "Thank you for the information. Kind regards."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.p02.seed-0",
+          "feedback": {
+            "es": "El mensaje es formal (Dear parents), y la mejor respuesta conserva esa cortesía: Thank you… y Kind regards."
+          },
+          "text": "Dear parents, the school trip will leave at eight o'clock."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d6b5a5a2ed5b69c946acc8fc2a460b30552357e0c5bff0726c3fc0d956d8873"
+      },
+      {
+        "id": "en.n4.c38.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada mensaje con su lector."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Hi Tom, thanks for the pizza!",
+              {
+                "es": "un amigo"
+              }
+            ],
+            [
+              "Dear parents, the trip is on Friday.",
+              {
+                "es": "familias del colegio"
+              }
+            ],
+            [
+              "Dear customers, the shop is closed on Monday.",
+              {
+                "es": "clientes de una tienda"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.p03.seed-0",
+          "feedback": {
+            "es": "Dear customers se dirige a clientes, Dear parents a las familias y Hi + nombre a una persona cercana."
+          },
+          "pairs": [
+            [
+              "Hi Tom, thanks for the pizza!",
+              {
+                "es": "un amigo"
+              }
+            ],
+            [
+              "Dear parents, the trip is on Friday.",
+              {
+                "es": "familias del colegio"
+              }
+            ],
+            [
+              "Dear customers, the shop is closed on Monday.",
+              {
+                "es": "clientes de una tienda"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2fbc639590f583717a8713a5880463d9d304f8184d1a08556084478d710f5083"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n4.c38.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué respuesta de la señora Green tiene el tono adecuado?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Dear Mr Brown, thank you for telling me. Kind regards."
+          },
+          {
+            "text": "Hi Tom! No problem, see you!"
+          },
+          {
+            "text": "Thanks, bye!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.e01.seed-0",
+          "feedback": {
+            "es": "Quien escribe usa un tono formal (Dear Ms Green, I am afraid, Kind regards), por lo que la respuesta formal Dear Mr Brown… mantiene ese tono."
+          },
+          "text": "Dear Ms Green, I am afraid that I cannot come to the meeting on Monday. Kind regards, Tom Brown."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c84b06814a28f7a188661f4ab040e6efd6b0b340fc4daaba1fe4b6b78e6bed7c"
+      },
+      {
+        "id": "en.n4.c38.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la respuesta con el tono adecuado para Leo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Dear Sir, I am afraid that I cannot come."
+          },
+          {
+            "text": "Sure! What time?"
+          },
+          {
+            "text": "Thank you for your message. Kind regards."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.e02.seed-0",
+          "feedback": {
+            "es": "El mensaje es informal (Hi Leo, tonight), por lo que la respuesta informal Sure! What time? encaja. Las otras dos son formales."
+          },
+          "audio": "Hi Leo! Are you free tonight? We are making pizza.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6a5057c167d0013dca6f6ad71a6a94ce547b8499c683895146ecc19875428896"
+      },
+      {
+        "id": "en.n4.c38.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué tono usa quien escribe?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A relaxed tone for a friend."
+          },
+          {
+            "text": "An angry tone."
+          },
+          {
+            "text": "A polite, formal tone."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.e03.seed-0",
+          "feedback": {
+            "es": "Dear Mr Jones y thank you for your help indican un tono formal y educado: no es informal ni enfadado."
+          },
+          "text": "Dear Mr Jones, thank you for your help with the trip."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d9f87e54fac79ef1a5d2f2f51ec30c0d82bd15fdd18137b0f8703ab135af18ee"
+      },
+      {
+        "id": "en.n4.c38.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Muchas gracias por su ayuda. Saludos cordiales.»"
+        },
+        "answer": {
+          "text": "regards",
+          "accepted": [
+            "regards"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.e04.seed-0",
+          "feedback": {
+            "es": "Kind regards es la despedida formal que cierra una respuesta cortés."
+          },
+          "text": "Thank you very much for your help. Kind ___,"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a980a8ac733b1e644370f737a64098367c9917850dca6bf343517170fbe455e1"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n4.c38.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué mensaje va dirigido a un grupo?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Hello, everyone! The party starts at six."
+          },
+          {
+            "text": "Dear Ms Green, I am afraid that I cannot come."
+          },
+          {
+            "text": "Hi Tom, see you later!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.r01.seed-0",
+          "feedback": {
+            "es": "Hello, everyone! se dirige a muchas personas a la vez. Las otras opciones se dirigen a una sola persona."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ccf6657f60075c2124b11844c1e436cd64a4dd09ba57c5f2754ab21298aa8a16"
+      },
+      {
+        "id": "en.n4.c38.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la respuesta del señor Brown para Ana."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Hi Ana! Yes, go for it!"
+          },
+          {
+            "text": "Dear Ana, thank you for your message. I will reply tomorrow."
+          },
+          {
+            "text": "See you later, Ana!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.r02.seed-0",
+          "feedback": {
+            "es": "Ana escribe en tono formal (Dear Mr Brown, Kind regards); la respuesta formal y cortés es Dear Ana… I will reply tomorrow."
+          },
+          "audio": "Dear Mr Brown, I would like to ask about the trip. Kind regards, Ana.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4de08722d840bb779b7f9442112c8503dbe632773d9682d4a3c0f122551abc46"
+      },
+      {
+        "id": "en.n4.c38.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Querida Sra. Green, gracias por su ayuda.»"
+        },
+        "answer": {
+          "text": "Dear Ms Green thank you for your help",
+          "tokens": [
+            "Dear",
+            "Ms",
+            "Green",
+            "thank",
+            "you",
+            "for",
+            "your",
+            "help"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n4-tone-and-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n4.c38.r03.seed-0",
+          "feedback": {
+            "es": "Dear + título abre el mensaje formal y thank you for your help es la fórmula de agradecimiento cortés."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:154819f7805304b3ad4356025b814b2a67d1b3c8ac1d5d9f2644936e825cc6f1"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n4.c38.e01": {
+      "reteach": "en.n4.class-38.t01",
+      "review": "en.n4.c38.r01"
+    },
+    "en.n4.c38.e02": {
+      "reteach": "en.n4.class-38.t02",
+      "review": "en.n4.c38.r02"
+    },
+    "en.n4.c38.e03": {
+      "reteach": "en.n4.class-38.t03",
+      "review": "en.n4.c38.r03"
+    },
+    "en.n4.c38.e04": {
+      "reteach": "en.n4.class-38.t04",
+      "review": "en.n4.c38.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}
