@@ -1,0 +1,768 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-01",
+  "title": {
+    "en": "She'll talk for hours",
+    "es": "Se pasa horas hablando"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer will, would y always + continuo para hablar de conductas típicas o molestas de alguien."
+    ]
+  },
+  "concepts": [
+    "n6-narrative-precision-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n5.class-100"
+  ],
+  "usesVocabulary": [
+    "always",
+    "hum",
+    "snore",
+    "stubborn",
+    "complaining",
+    "habit"
+  ],
+  "usesPatterns": [
+    "n6-narrative-precision-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "always",
+      "es": "siempre"
+    },
+    {
+      "en": "hum",
+      "es": "tararear"
+    },
+    {
+      "en": "snore",
+      "es": "roncar"
+    },
+    {
+      "en": "stubborn",
+      "es": "terco"
+    },
+    {
+      "en": "complaining",
+      "es": "quejándose"
+    },
+    {
+      "en": "habit",
+      "es": "costumbre, manía"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-01.t01",
+      "en": "My grandfather will sit in the garden for hours and hum old songs.",
+      "es": "Mi abuelo se sienta en el jardín durante horas y tararea canciones antiguas.",
+      "explanationEs": "Will + verbo base presenta una conducta típica: así es él, lo hace siempre.",
+      "segments": [
+        "My grandfather will sit in the garden",
+        "for hours and hum old songs."
+      ],
+      "audioText": "My grandfather will sit in the garden for hours and hum old songs.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-narrative-precision-1"
+    },
+    {
+      "id": "en.n6.class-01.t02",
+      "en": "When we were kids, my brother would snore so loudly that we heard him downstairs.",
+      "es": "Cuando éramos niños, mi hermano roncaba tan fuerte que lo oíamos desde abajo.",
+      "explanationEs": "Would + verbo base cuenta una conducta repetida del pasado; solo sirve con acciones, no con estados.",
+      "segments": [
+        "When we were kids, my brother would snore",
+        "so loudly that we heard him downstairs."
+      ],
+      "audioText": "When we were kids, my brother would snore so loudly that we heard him downstairs.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-narrative-precision-1"
+    },
+    {
+      "id": "en.n6.class-01.t03",
+      "en": "My aunt is always complaining about the weather!",
+      "es": "¡Mi tía siempre se está quejando del tiempo!",
+      "explanationEs": "Always + presente continuo: la costumbre molesta a quien habla; hay una queja.",
+      "segments": [
+        "My aunt is always",
+        "complaining about the weather!"
+      ],
+      "audioText": "My aunt is always complaining about the weather!",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-narrative-precision-1"
+    },
+    {
+      "id": "en.n6.class-01.t04",
+      "en": "Sara is stubborn: she will never ask for help.",
+      "es": "Sara es terca: nunca pide ayuda.",
+      "explanationEs": "Will never + verbo base describe un rasgo de carácter, no una decisión de hoy.",
+      "segments": [
+        "Sara is stubborn: she will",
+        "never ask for help."
+      ],
+      "audioText": "Sara is stubborn: she will never ask for help.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-narrative-precision-1"
+    },
+    {
+      "id": "en.n6.class-01.t05",
+      "en": "Nina has a funny habit: she will always talk to her plants.",
+      "es": "Nina tiene una manía graciosa: siempre habla con sus plantas.",
+      "explanationEs": "Will + always sin -ing describe un rasgo con cariño; la queja aparece con always + presente continuo.",
+      "segments": [
+        "Nina has a funny habit: she",
+        "will always talk to her plants."
+      ],
+      "audioText": "Nina has a funny habit: she will always talk to her plants.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-narrative-precision-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c01.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase presenta lo que hace él como rasgo típico suyo?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "My neighbour is watering his plants at the moment."
+          },
+          {
+            "text": "My neighbour will water his plants at six every morning."
+          },
+          {
+            "text": "My neighbour watered his plants yesterday."
+          }
+        ],
+        "teaches": [
+          "n6-narrative-precision-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.pg01.seed-0",
+          "feedback": {
+            "es": "Will + verbo base presenta la conducta como típica de él; las otras dos frases hablan de un momento concreto, ahora o ayer."
+          },
+          "hint": {
+            "es": "Busca will + verbo base, sin un momento concreto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c04a29c2f4004760a7ecc40dd8106909d60eb184de0f5fe2a37047b9b29ae9e3"
+      },
+      {
+        "id": "en.n6.c01.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Cuando era pequeña, mi prima se sentaba bajo la mesa en cada tormenta.»"
+        },
+        "answer": {
+          "text": "would",
+          "accepted": [
+            "would",
+            "used to"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-narrative-precision-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.pg02.seed-0",
+          "feedback": {
+            "es": "Sit es una acción repetida en el pasado, así que would + verbo base cuenta la costumbre."
+          },
+          "hint": {
+            "es": "Es una costumbre del pasado con una acción que se repite."
+          },
+          "text": "When I was little, my cousin ___ sit under the table in every storm."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1796974390e920af78e6fd98051c2f9149ef99a729664e2b39799a38ece4a503"
+      },
+      {
+        "id": "en.n6.c01.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estas frases contiene una queja por una costumbre?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Leo always remembers my birthday."
+          },
+          {
+            "text": "Leo will remember my birthday."
+          },
+          {
+            "text": "Leo is always forgetting my birthday!"
+          }
+        ],
+        "teaches": [
+          "n6-narrative-precision-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.pg03.seed-0",
+          "feedback": {
+            "es": "Always + presente continuo añade molestia: el hablante critica la repetición. Las otras dos frases son neutras."
+          },
+          "hint": {
+            "es": "Busca always entre be y un verbo en -ing."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:71c97ae0cf256f7a2f1f1b906ca5c16fc25d02ece92faa1353de124e32e034b4"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c01.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con lo que expresa."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "My dad will fall asleep in front of the TV.",
+              {
+                "es": "Rasgo típico de su carácter"
+              }
+            ],
+            [
+              "We would swim in the river every summer.",
+              {
+                "es": "Costumbre repetida del pasado"
+              }
+            ],
+            [
+              "Tom is always leaving his shoes on the floor!",
+              {
+                "es": "Queja por una costumbre"
+              }
+            ],
+            [
+              "My sister plays tennis on Saturdays.",
+              {
+                "es": "Costumbre neutra, sin opinión"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.p01.seed-0",
+          "feedback": {
+            "es": "Cada forma tiene su matiz: will = rasgo típico, would = pasado, always + continuo = queja y presente simple = dato neutro."
+          },
+          "pairs": [
+            [
+              "My dad will fall asleep in front of the TV.",
+              {
+                "es": "Rasgo típico de su carácter"
+              }
+            ],
+            [
+              "We would swim in the river every summer.",
+              {
+                "es": "Costumbre repetida del pasado"
+              }
+            ],
+            [
+              "Tom is always leaving his shoes on the floor!",
+              {
+                "es": "Queja por una costumbre"
+              }
+            ],
+            [
+              "My sister plays tennis on Saturdays.",
+              {
+                "es": "Costumbre neutra, sin opinión"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:188863b75fbf9f9679b6002505162b877b32fcec92d9a7a771f290e7193abde2"
+      },
+      {
+        "id": "en.n6.c01.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué siente quien habla."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The speaker is tired of this happening so often."
+          },
+          {
+            "text": "The speaker says it happened only once."
+          },
+          {
+            "text": "The speaker is happy because she found them."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.p02.seed-0",
+          "feedback": {
+            "es": "Always + presente continuo («is always losing») expresa fastidio por algo que se repite."
+          },
+          "audio": "Our teacher is always losing her glasses.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:980a822627396e8c0822183656790df3d812f922270b6abee1c31c2b1f3ed8f3"
+      },
+      {
+        "id": "en.n6.c01.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mi abuela siempre está perdiendo las llaves.»"
+        },
+        "answer": {
+          "text": "My grandmother is always losing her keys",
+          "tokens": [
+            "My",
+            "grandmother",
+            "is",
+            "always",
+            "losing",
+            "her",
+            "keys"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.p03.seed-0",
+          "feedback": {
+            "es": "La queja se construye con be + always + verbo en -ing: is always losing."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9bbb3a5e0fa60f52820ffadfe4674dd8e8892aa8067728263c441893549b0ef0"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c01.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "En el texto sobre Nico, ¿qué frase es una queja actual?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He will argue about football for hours."
+          },
+          {
+            "text": "He is always borrowing my pens!"
+          },
+          {
+            "text": "He would sing in the kitchen at six."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.e01.seed-0",
+          "feedback": {
+            "es": "«Is always borrowing» muestra la molestia de ahora; will describe su carácter y would, una costumbre de cuando eran pequeños."
+          },
+          "text": "My cousin Nico is a character. He will argue about football for hours. When we were small, he would sing in the kitchen at six. Now he is always borrowing my pens!"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:24394dab1979d286adf403ff5da8e6f41a2a8c2b27c1f40f5068553023a649a8"
+      },
+      {
+        "id": "en.n6.c01.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hacía el padre cuando eran niños."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He sings in the hall every day now."
+          },
+          {
+            "text": "He sang in the hall only once."
+          },
+          {
+            "text": "He used to make a lot of noise with his singing."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.e02.seed-0",
+          "feedback": {
+            "es": "Would + verbo base, con «when we were kids», cuenta una costumbre del pasado: cantaba fuerte cada mañana."
+          },
+          "audio": "When we were kids, Dad would sing loudly in the hall every morning.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:69860d268a3e08168a0b79060a104068d8267c480f1d1726a7e0caa459c0476a"
+      },
+      {
+        "id": "en.n6.c01.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mi hermano pequeño nunca comparte sus cosas; es así.»"
+        },
+        "answer": {
+          "text": "will",
+          "accepted": [
+            "will"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.e03.seed-0",
+          "feedback": {
+            "es": "Will never + verbo base describe un rasgo de carácter de hoy: «es así»."
+          },
+          "text": "My little brother ___ never share his things; that is just how he is."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:accf1d0e80e6a4da1d4ae302f118e84bb452596adaca7ee47f57978a63e1eb93"
+      },
+      {
+        "id": "en.n6.c01.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "Leo está harto de su vecino. ¿Qué frase expresa su queja?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "My neighbour is always playing loud music at night!"
+          },
+          {
+            "text": "My neighbour played loud music last night."
+          },
+          {
+            "text": "My neighbour will play loud music tonight."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.e04.seed-0",
+          "feedback": {
+            "es": "La queja por algo repetido lleva always + presente continuo; las otras frases hablan de una noche concreta."
+          },
+          "text": "Leo está harto: su vecino pone música alta por la noche, una y otra vez."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b87dc2f071e44f0f3be3c0447666f7963dc13e132ac1ffe3e15ce995831bc844"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c01.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Hoy ya no ocurre: ¿qué frase habla de una costumbre del pasado?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "We will play cards every Sunday evening."
+          },
+          {
+            "text": "We would play cards every Sunday evening."
+          },
+          {
+            "text": "We play cards every Sunday evening."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.r01.seed-0",
+          "feedback": {
+            "es": "Would + verbo base cuenta una costumbre que ya no existe; will la presenta como rasgo de hoy y el presente simple, como dato actual."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:19cf4cd9171a2b79f39e65111fd1572dbe28961d4593518cb94feb7bfccb82f5"
+      },
+      {
+        "id": "en.n6.c01.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mi hermana siempre está cambiando de opinión.»"
+        },
+        "answer": {
+          "text": "changing",
+          "accepted": [
+            "changing"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.r02.seed-0",
+          "feedback": {
+            "es": "Tras always en una queja, el verbo va en -ing: is always changing."
+          },
+          "text": "My sister is always ___ her mind."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2e521134b5564387273f3259e8bdbc109025f1b8272fbd64ead8c28781d27765"
+      },
+      {
+        "id": "en.n6.c01.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Mi abuelo se pasa horas hablando de trenes.»"
+        },
+        "answer": {
+          "text": "My grandfather will talk about trains for hours",
+          "tokens": [
+            "My",
+            "grandfather",
+            "will",
+            "talk",
+            "about",
+            "trains",
+            "for",
+            "hours"
+          ],
+          "accepted": [
+            "My grandfather will talk about trains for hours",
+            "My grandfather will talk for hours about trains"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-narrative-precision-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c01.r03.seed-0",
+          "feedback": {
+            "es": "Will + verbo base presenta la conducta como típica de él; for hours puede ir antes o después del complemento."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3bd7a671b9f1896af212ba5020079bc7f17ab6b4164d96f1e144d25369f3d0f6"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c01.e01": {
+      "reteach": "en.n6.class-01.t01",
+      "review": "en.n6.c01.r01"
+    },
+    "en.n6.c01.e02": {
+      "reteach": "en.n6.class-01.t02",
+      "review": "en.n6.c01.r02"
+    },
+    "en.n6.c01.e03": {
+      "reteach": "en.n6.class-01.t03",
+      "review": "en.n6.c01.r03"
+    },
+    "en.n6.c01.e04": {
+      "reteach": "en.n6.class-01.t04",
+      "review": "en.n6.c01.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

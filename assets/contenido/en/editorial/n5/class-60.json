@@ -143,7 +143,7 @@
     {
       "id": "en.n5.class-60.t04",
       "en": "No, that is not exactly what he said: he warned us not to park there.",
-      "es": "No, eso no es exactamente lo que dijo: nos advirtió que no aparcáramos allí.",
+      "es": "No, eso no es exactamente lo que dijo: nos advirtió que no estacionáramos allí.",
       "explanationEs": "Exactly marca que quieres recuperar las palabras precisas de quien habló.",
       "segments": [
         "No, that is not exactly what he said:",
@@ -319,13 +319,13 @@
         },
         "choices": [
           {
-            "text": "That the concert is on Friday, and where she will sit."
+            "text": "That the concert is on Friday, and whether she wants a ticket."
           },
           {
             "text": "That the concert is cancelled, and whether she wants a refund."
           },
           {
-            "text": "That the money is lost, and why she is late."
+            "text": "That the concert is cancelled, and why she wants her money back."
           }
         ],
         "teaches": [],
@@ -337,7 +337,7 @@
           "variantSeed": "0",
           "variantId": "en.n5.c60.p01.seed-0",
           "feedback": {
-            "es": "Hay un mensaje (el concierto se cancela) y una pregunta (si quiere que le devuelvan el dinero). Las otras opciones inventan datos."
+            "es": "Hay un mensaje (el concierto se cancela) y una pregunta (si quiere que le devuelvan el dinero). Las otras versiones cambian el mensaje o convierten la pregunta en un «por qué»."
           },
           "audio": "Tell Ana the concert is cancelled, and ask her if she wants her money back.",
           "audioMode": "tts",
@@ -354,7 +354,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:6000678d4bd2cec357775edc2f43edb158287b31e8ab538f7b2a3e330ba91dd5"
+        "contentHash": "sha256:41cc5c790fb455b65101aa26369becd62ccc2b002f556c6afc7eb28159d565db"
       },
       {
         "id": "en.n5.c60.p02",
@@ -573,7 +573,7 @@
             "text": "Yes, Ana kept Leo's meaning."
           },
           {
-            "text": "No, Ana changed the day."
+            "text": "No, Ana turned a promise into a possibility."
           },
           {
             "text": "No, Ana turned a possibility into a promise."
@@ -606,20 +606,20 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:28d54638ad28b547583d4f55868332c2ad8f66e75a06773ec898ae886543e788"
+        "contentHash": "sha256:9d1b1ab30cd38320caf16d4d49af3a068de4bc53e4a4e5bade6f813512481d3e"
       },
       {
         "id": "en.n5.c60.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe el mensaje que pasas a Leo: dos mensajes y una pregunta."
+          "es": "Escribe tu mensaje a Leo: dos mensajes, una pregunta y una aclaración."
         },
         "answer": {
-          "text": "Carlos said that the meeting is on Friday, he asked you to bring the report, and he wants to know if you can arrive early.",
+          "text": "Carlos asked me to tell you that the meeting is on Friday, and he asked you to bring the report. He also wants to know if you can arrive early. Let me clarify something: he didn't say the meeting starts at nine; he said it might start at nine. That is not exactly the same thing.",
           "accepted": [
-            "Carlos said that the meeting is on Friday, he asked you to bring the report, and he wants to know if you can arrive early.",
-            "Carlos told me that the meeting is on Friday. He asked you to bring the report and wants to know if you can come early.",
-            "Carlos said the meeting is on Friday, asked you to bring the report, and wants to know whether you can arrive early."
+            "Carlos asked me to tell you that the meeting is on Friday, and he asked you to bring the report. He also wants to know if you can arrive early. Let me clarify something: he didn't say the meeting starts at nine; he said it might start at nine. That is not exactly the same thing.",
+            "Carlos told me that the meeting is on Friday, and he asked you to bring the report. He wants to know whether you can come early. Let me clarify: he didn't say the meeting starts at nine, he said it might start at nine. That is not exactly what he said.",
+            "Carlos asked me to tell you that the meeting is on Friday and that you should bring the report. He also wants to know if you can arrive early. To clarify, he did not say the meeting starts at nine; he said it might start at nine. That is not exactly the same."
           ]
         },
         "choices": [],
@@ -633,27 +633,27 @@
           "variantSeed": "0",
           "variantId": "en.n5.c60.e04.seed-0",
           "feedback": {
-            "es": "El mensaje se pasa con said/told that, el encargo con asked you to y la pregunta con wants to know if, sin inversión."
+            "es": "Un buen mensaje transmite lo que Carlos dijo (told me that / asked you to), pasa su pregunta con if y sin inversión, y aclara con didn't say… he said… might."
           },
-          "text": "Datos: Carlos dijo que la reunión es el viernes; te pidió que lleves el informe; quiere saber si puedes llegar temprano.",
+          "text": "Datos (le escribes a Leo): Carlos te pidió que le digas que la reunión es el viernes y que lleve el informe; quiere saber si Leo puede llegar temprano; aclara que Carlos no dijo que la reunión empieza a las nueve, sino que quizá empiece a las nueve.",
           "scoring": {
             "wordRange": [
-              14,
-              45
+              42,
+              90
             ],
             "evidenceGroups": [
-              [
-                "meeting"
-              ],
               [
                 "Friday"
               ],
               [
-                "asked you to",
-                "wants you to"
+                "report"
               ],
               [
-                "report"
+                "asked you to",
+                "asked me to",
+                "told me to",
+                "wants you to",
+                "asked you"
               ],
               [
                 "if",
@@ -661,6 +661,17 @@
               ],
               [
                 "early"
+              ],
+              [
+                "clarify",
+                "exactly",
+                "not what",
+                "did not say",
+                "the same thing",
+                "not the same"
+              ],
+              [
+                "might"
               ]
             ]
           }
@@ -670,7 +681,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:c45a3d75e709bc4f5313a6111c50f109c7cb510f62716accd04c08aa76289583"
+        "contentHash": "sha256:b9f5e0b91f0131c1b2e3ee7c3e013f74522eb96f09e3e0fc14a9957fc80e993c"
       }
     ],
     "review": [

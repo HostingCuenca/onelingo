@@ -470,14 +470,14 @@
         "id": "en.n4.c94.e01",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe una historia de tres frases con rutina, antecedente y giro."
+          "es": "Escribe una historia corta: rutina, antecedente, giro, hipótesis y una frase contada."
         },
         "answer": {
-          "text": "Every afternoon, Leo used to walk his dog. One day, he found a key that his grandfather had hidden. Suddenly, the key opened an old door.",
+          "text": "Every evening, Leo used to walk his dog in the park. One day, he found a bag which a woman had lost. Suddenly, the woman ran to him and smiled. It was her bag! If Leo had stayed at home, he would never have met her. She told him that she was very happy.",
           "accepted": [
-            "Every afternoon, Leo used to walk his dog. One day, he found a key that his grandfather had hidden. Suddenly, the key opened an old door.",
-            "Every afternoon, Leo used to walk his dog. One day, he found a key which his grandfather had hidden. Suddenly, it opened an old door.",
-            "Leo used to walk his dog every afternoon. One day he found a key that his grandfather had hidden. Suddenly, the key opened an old door."
+            "Every evening, Leo used to walk his dog in the park. One day, he found a bag which a woman had lost. Suddenly, the woman ran to him and smiled. It was her bag! If Leo had stayed at home, he would never have met her. She told him that she was very happy.",
+            "Leo used to walk his dog in the park every evening. One day, he found a bag that a woman had lost. Suddenly, the woman ran to him and smiled: it was her bag! If Leo had stayed at home, he would never have met her. She told him that she was very happy.",
+            "Every evening, Leo used to walk his dog in the park. One day, he found a bag that a woman had lost. Suddenly, the woman ran to him and smiled. It was her bag! If he had stayed at home, he would never have met her. She said that she was very happy."
           ]
         },
         "choices": [],
@@ -490,30 +490,48 @@
           "variantSeed": "0",
           "variantId": "en.n4.c94.e01.seed-0",
           "feedback": {
-            "es": "La historia pide rutina (used to), antecedente (had hidden) y giro (suddenly) en pasado, en ese orden."
+            "es": "La historia sigue el orden del relato: rutina (used to), antecedente (had lost), giro (suddenly), hipótesis (if + had + participio, would have) y una frase contada (told him that)."
           },
-          "text": "Datos: Leo paseaba al perro cada tarde. Un día encontró una llave que su abuelo había escondido. De repente, la llave abrió una puerta vieja.",
+          "text": "Datos: cada tarde, Leo solía pasear a su perro por el parque. Un día encontró una bolsa que una mujer había perdido. De repente, la mujer corrió hacia él y sonrió: ¡era su bolsa! Si Leo se hubiera quedado en casa, nunca la habría conocido. Ella le dijo que estaba muy feliz.",
           "scoring": {
             "wordRange": [
-              16,
-              40
+              36,
+              80
             ],
             "evidenceGroups": [
               [
                 "used to"
               ],
               [
-                "found a key",
-                "found the key"
+                "found a bag",
+                "found the bag"
               ],
               [
-                "had hidden",
-                "had put",
-                "had left"
+                "had lost",
+                "had left",
+                "had dropped",
+                "had forgotten"
               ],
               [
                 "suddenly",
                 "but then"
+              ],
+              [
+                "if leo had",
+                "if he had"
+              ],
+              [
+                "would never have met",
+                "wouldn't have met",
+                "would not have met",
+                "would never have seen"
+              ],
+              [
+                "told him that",
+                "told him she",
+                "said that",
+                "said she",
+                "told him he"
               ]
             ]
           }
@@ -523,7 +541,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:8b559be2f86b659e72c687b06ee2009d03fdc0a6abcd8b02e71588f2ae9aa8bb"
+        "contentHash": "sha256:9956e6f841c36aead5eb7b7f9af6a3418629dbd2b02754257c1669213b6f1290"
       },
       {
         "id": "en.n4.c94.e02",
@@ -572,9 +590,9 @@
           "es": "Completa las tres frases con la forma que falta."
         },
         "answer": {
-          "text": "used | already | helped",
+          "text": "used | had | would",
           "accepted": [
-            "used | already | helped"
+            "used | had | would"
           ],
           "parts": [
             {
@@ -584,16 +602,15 @@
               ]
             },
             {
-              "text": "already",
+              "text": "had",
               "accepted": [
-                "already",
-                "just"
+                "had"
               ]
             },
             {
-              "text": "helped",
+              "text": "would",
               "accepted": [
-                "helped"
+                "would"
               ]
             }
           ]
@@ -612,8 +629,8 @@
           },
           "sentences": [
             "Every winter, my aunt ___ to make soup.",
-            "When I arrived, the film had ___ started.",
-            "If he had asked, she would have ___ him."
+            "When I arrived, the film ___ already started.",
+            "If he had asked, she ___ have helped him."
           ],
           "scoring": {
             "parts": 3,
@@ -625,13 +642,13 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:faf1794323e690216dd03bef7092a46b561c2f6fedbd028cfee0065d566eca19"
+        "contentHash": "sha256:546e3ea881f30146aef858976d7e399745b4150bc7f2cc23afbc17e050e343d3"
       },
       {
         "id": "en.n4.c94.e04",
         "format": "ordenar",
         "prompt": {
-          "es": "Ordena: «Mi abuelo me contó que había vivido allí de niño.»"
+          "es": "Ordena: «Mi abuelo me contó que había vivido allí.»"
         },
         "answer": {
           "text": "My grandfather told me that he had lived there",
@@ -665,7 +682,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:b57bfc80e1087a6e43698f9774da9a9c50abb4451c2773729800e1dd084d0a2e"
+        "contentHash": "sha256:a82c9d6cf8bc6d2e84ef4f8afb67f923b2161b861a251100c45f616c8440090d"
       }
     ],
     "review": [

@@ -1,0 +1,816 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-25",
+  "title": {
+    "en": "Report on a local issue",
+    "es": "Informe sobre un asunto del barrio"
+  },
+  "objectives": {
+    "es": [
+      "Presentar un problema local con estilo nominal en un informe breve y explicarlo después con frases verbales sencillas."
+    ]
+  },
+  "concepts": [
+    "n6-noun-phrases-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n6.class-24"
+  ],
+  "usesVocabulary": [
+    "issue",
+    "crossing",
+    "figure",
+    "proposal",
+    "recommendation",
+    "accident",
+    "conclusion",
+    "traffic"
+  ],
+  "usesPatterns": [
+    "n6-noun-phrases-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "issue",
+      "es": "asunto, problema"
+    },
+    {
+      "en": "crossing",
+      "es": "paso de peatones"
+    },
+    {
+      "en": "figure",
+      "es": "cifra"
+    },
+    {
+      "en": "proposal",
+      "es": "propuesta"
+    },
+    {
+      "en": "recommendation",
+      "es": "recomendación"
+    },
+    {
+      "en": "accident",
+      "es": "accidente"
+    },
+    {
+      "en": "conclusion",
+      "es": "conclusión"
+    },
+    {
+      "en": "traffic",
+      "es": "tráfico"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-25.t01",
+      "en": "The main issue is the increase in traffic outside the school.",
+      "es": "El problema principal es el aumento del tráfico frente a la escuela.",
+      "explanationEs": "El informe nombra el asunto con un sustantivo: the increase in traffic.",
+      "segments": [
+        "The main issue is the increase",
+        "in traffic outside the school."
+      ],
+      "audioText": "The main issue is the increase in traffic outside the school.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-5"
+    },
+    {
+      "id": "en.n6.class-25.t02",
+      "en": "The figure shows a rise of thirty per cent in two years.",
+      "es": "La cifra muestra una subida del treinta por ciento en dos años.",
+      "explanationEs": "Figure y a rise of introducen datos con un estilo nominal.",
+      "segments": [
+        "The figure shows a rise of",
+        "thirty per cent in two years."
+      ],
+      "audioText": "The figure shows a rise of thirty per cent in two years.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-5"
+    },
+    {
+      "id": "en.n6.class-25.t03",
+      "en": "The lack of a crossing has led to two accidents.",
+      "es": "La falta de un paso de peatones ha llevado a dos accidentes.",
+      "explanationEs": "La causa (the lack of a crossing) y el resultado (accidents) se unen con has led to.",
+      "segments": [
+        "The lack of a crossing",
+        "has led to two accidents."
+      ],
+      "audioText": "The lack of a crossing has led to two accidents.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-5"
+    },
+    {
+      "id": "en.n6.class-25.t04",
+      "en": "Our proposal is the installation of a crossing near the gate.",
+      "es": "Nuestra propuesta es la instalación de un paso de peatones cerca de la puerta.",
+      "explanationEs": "Proposal abre la solución y installation la nombra como sustantivo.",
+      "segments": [
+        "Our proposal is the installation of",
+        "a crossing near the gate."
+      ],
+      "audioText": "Our proposal is the installation of a crossing near the gate.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-5"
+    },
+    {
+      "id": "en.n6.class-25.t05",
+      "en": "In conclusion, this recommendation would bring an improvement in safety.",
+      "es": "En conclusión, esta recomendación traería una mejora de la seguridad.",
+      "explanationEs": "In conclusion cierra el informe y would bring marca el efecto esperado.",
+      "segments": [
+        "In conclusion, this recommendation would",
+        "bring an improvement in safety."
+      ],
+      "audioText": "In conclusion, this recommendation would bring an improvement in safety.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c25.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase del informe presenta el problema con un sustantivo?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The main issue is that traffic increases."
+          },
+          {
+            "text": "The main issue is the increase in traffic."
+          },
+          {
+            "text": "Traffic is the main issue because it grows."
+          }
+        ],
+        "teaches": [
+          "n6-noun-phrases-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.pg01.seed-0",
+          "feedback": {
+            "es": "El estilo nominal convierte increase en el sustantivo an increase in traffic y lo usa como núcleo de la frase."
+          },
+          "hint": {
+            "es": "Busca el sustantivo derivado de increase seguido de in."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:67e09ae1a8fea22cee9989b15563247f0fe64b9c2b01a7581cbb64e147ac81b8"
+      },
+      {
+        "id": "en.n6.c25.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Nuestra propuesta es la instalación de un paso de peatones.»"
+        },
+        "answer": {
+          "text": "proposal",
+          "accepted": [
+            "proposal"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-noun-phrases-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.pg02.seed-0",
+          "feedback": {
+            "es": "Propose pasa a proposal: es el sustantivo que presenta la solución."
+          },
+          "hint": {
+            "es": "Es el sustantivo de la solución que ofreces al final del informe."
+          },
+          "text": "Our ___ is the installation of a crossing."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:61bc1b32091a5058975c1cc9e1672bfb3d153f9992c23f0c64246c516c8c5b91"
+      },
+      {
+        "id": "en.n6.c25.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La cifra muestra un aumento del treinta por ciento.»"
+        },
+        "answer": {
+          "text": "The figure shows an increase of thirty per cent",
+          "tokens": [
+            "The",
+            "figure",
+            "shows",
+            "an",
+            "increase",
+            "of",
+            "thirty",
+            "per",
+            "cent"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-noun-phrases-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.pg03.seed-0",
+          "feedback": {
+            "es": "Con porcentajes se usa of: an increase of thirty per cent; el sujeto es the figure."
+          },
+          "hint": {
+            "es": "Empieza con The figure y usa of antes del número."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:157b35e1538dc94e3856ab77b0c1647e835a137acebcb41234b505a48e5481ff"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c25.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase une la causa con el resultado?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Two accidents have led to a lack of crossing."
+          },
+          {
+            "text": "The crossing has led to a lack of accidents."
+          },
+          {
+            "text": "The lack of a crossing has led to two accidents."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.p01.seed-0",
+          "feedback": {
+            "es": "La causa es la falta del paso de peatones y el resultado son los accidentes; has led to los une en ese orden."
+          },
+          "text": "Causa: no hay paso de peatones. Resultado: ha habido dos accidentes."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e91937703dbc6ddc8d8a9468ca668b41f3f8aa367c12bd6a46f25ff627add3b"
+      },
+      {
+        "id": "en.n6.c25.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase del informe con su explicación oral."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "the increase in traffic",
+              {
+                "es": "cada año vienen más coches"
+              }
+            ],
+            [
+              "the lack of a crossing",
+              {
+                "es": "no hay paso de peatones"
+              }
+            ],
+            [
+              "the installation of a crossing",
+              {
+                "es": "queremos instalar un paso"
+              }
+            ],
+            [
+              "a fall in accidents",
+              {
+                "es": "hay menos accidentes"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.p02.seed-0",
+          "feedback": {
+            "es": "Cada sustantivo del informe se dice oralmente con un verbo: venir, no haber, instalar y haber menos."
+          },
+          "pairs": [
+            [
+              "the increase in traffic",
+              {
+                "es": "cada año vienen más coches"
+              }
+            ],
+            [
+              "the lack of a crossing",
+              {
+                "es": "no hay paso de peatones"
+              }
+            ],
+            [
+              "the installation of a crossing",
+              {
+                "es": "queremos instalar un paso"
+              }
+            ],
+            [
+              "a fall in accidents",
+              {
+                "es": "hay menos accidentes"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f4440fac2ab1fcb43ad79959a78f627ef66f165fadd61b0b0a2d1afe337fa715"
+      },
+      {
+        "id": "en.n6.c25.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe la propuesta como frase formal con un sustantivo."
+        },
+        "answer": {
+          "text": "The installation of a crossing near the gate is our proposal.",
+          "accepted": [
+            "The installation of a crossing near the gate is our proposal.",
+            "Our proposal is the installation of a crossing near the gate."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.p03.seed-0",
+          "feedback": {
+            "es": "Install pasa a installation y la propuesta se presenta con un sustantivo."
+          },
+          "text": "Propuesta: «Queremos instalar un paso de peatones cerca de la puerta.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3977ec66aba933c58bb4bd5c154f30bc892e512d56499c0df44dd8627004f553"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c25.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué ocurre frente a la escuela según el audio."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "More cars come and there is no safe place to cross."
+          },
+          {
+            "text": "Fewer cars come because there is a new crossing."
+          },
+          {
+            "text": "The school has closed because of the traffic."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5",
+          "n6-noun-phrases-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.e01.seed-0",
+          "feedback": {
+            "es": "El audio presenta el aumento del tráfico y la falta de un paso de peatones: más coches y ningún lugar seguro para cruzar."
+          },
+          "audio": "There has been an increase in traffic outside the school, and the lack of a crossing is a big problem for children.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3f961552a55cec9dc411e4a872f90891932914277c25e136f1372d2642b47be1"
+      },
+      {
+        "id": "en.n6.c25.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Hay una falta de aparcamiento cerca de la estación.»"
+        },
+        "answer": {
+          "text": "of",
+          "accepted": [
+            "of"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5",
+          "n6-noun-phrases-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.e02.seed-0",
+          "feedback": {
+            "es": "Lack se combina siempre con of: a lack of parking."
+          },
+          "text": "There is a lack ___ parking near the station."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ce6a74c87c4cd48f2c67ecafcc17ba00197c435a75a79e8c108e2220bc3e101f"
+      },
+      {
+        "id": "en.n6.c25.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase desempaqueta «The opening of the crossing led to a fall in accidents»?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "They closed the crossing, so there were more accidents."
+          },
+          {
+            "text": "They opened the crossing, so there were fewer accidents."
+          },
+          {
+            "text": "The accidents opened a new crossing."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5",
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.e03.seed-0",
+          "feedback": {
+            "es": "Opening esconde open y a fall in accidents esconde «hubo menos accidentes»: abrieron el paso y bajaron los accidentes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:df957e630f2a50673acb6d5c4f29024ca2e8f21bf5af090b8f31a1695ad2a0ea"
+      },
+      {
+        "id": "en.n6.c25.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe un informe formal de 60 a 120 palabras con los datos dados."
+        },
+        "answer": {
+          "text": "The main issue is the increase in traffic outside the school. The figure shows a rise of thirty per cent in two years. The lack of a crossing has led to two accidents, and there is also a lack of parking. Our proposal is the installation of a crossing near the gate and a waiting area for cars. In conclusion, this recommendation would bring an improvement in safety.",
+          "accepted": [
+            "The main issue is the increase in traffic outside the school. The figure shows a rise of thirty per cent in two years. The lack of a crossing has led to two accidents, and there is also a lack of parking. Our proposal is the installation of a crossing near the gate and a waiting area for cars. In conclusion, this recommendation would bring an improvement in safety.",
+            "The main issue is the increase in traffic near the school. The figure shows an increase of thirty per cent in two years. The lack of a crossing has led to two accidents, and there is a lack of parking. Our proposal is the installation of a crossing near the gate and a waiting area for cars. In conclusion, the recommendation would bring an improvement in safety."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5",
+          "n6-noun-phrases-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.e04.seed-0",
+          "feedback": {
+            "es": "El informe presenta el problema con increase, la causa con lack of y el resultado con has led to, y cierra con proposal, installation, conclusion y improvement."
+          },
+          "text": "Datos del barrio: hay más tráfico frente a la escuela (un treinta por ciento más en dos años). No hay paso de peatones y ha habido dos accidentes. Faltan plazas de aparcamiento. Propuesta: instalar un paso de peatones cerca de la puerta y crear una zona de espera para los coches. Con esto habrá más seguridad. Escribe el informe con estilo nominal: problema, causa, propuesta y conclusión.",
+          "scoring": {
+            "wordRange": [
+              60,
+              120
+            ],
+            "evidenceGroups": [
+              [
+                "increase in traffic",
+                "increase in the traffic",
+                "rise in traffic",
+                "growth in traffic",
+                "increase in the number of cars"
+              ],
+              [
+                "lack of a crossing",
+                "lack of crossing",
+                "lack of a pedestrian",
+                "absence of a crossing",
+                "lack of a zebra"
+              ],
+              [
+                "installation of",
+                "creation of",
+                "construction of"
+              ],
+              [
+                "in conclusion",
+                "to conclude",
+                "to sum up",
+                "in summary"
+              ],
+              [
+                "improvement",
+                "increase in safety",
+                "safer",
+                "more safety"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:95e70e68b042ab89af67f8d380588b6781cad8bd38cfc5b95b27b0c07d330d8e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c25.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase del informe usa la preposición fija correcta?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "There was a reduction of in the number accidents."
+          },
+          {
+            "text": "There was a reduction at the number of accidents."
+          },
+          {
+            "text": "There was a reduction in the number of accidents."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.r01.seed-0",
+          "feedback": {
+            "es": "Reduction se combina con in: a reduction in the number of accidents. Las otras opciones mezclan las preposiciones o el orden."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1dbe0162e08eff8750bdc6558ce045abecb69608061406ded9c9dd86e75ce802"
+      },
+      {
+        "id": "en.n6.c25.r02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Explica el problema en voz alta con verbos, sin sustantivos de acción."
+        },
+        "answer": {
+          "text": "There is no crossing, so two accidents happened.",
+          "accepted": [
+            "There is no crossing, so two accidents happened.",
+            "There is no crossing and two accidents have happened."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.r02.seed-0",
+          "feedback": {
+            "es": "Al explicarlo oralmente, the lack of a crossing vuelve a ser there is no crossing y has led to se convierte en so."
+          },
+          "text": "Informe: «The lack of a crossing has led to two accidents.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d0a15845e7accadf50a430b7cb9089b7e9e02ca57d9a3f33ee221e3ec1f55e70"
+      },
+      {
+        "id": "en.n6.c25.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué propone el informe."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Build more crossings near the school."
+          },
+          {
+            "text": "Close the school for a week."
+          },
+          {
+            "text": "Reduce the number of crossings."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c25.r03.seed-0",
+          "feedback": {
+            "es": "El audio dice «an increase in the number of crossings»: la propuesta es que haya más pasos de peatones."
+          },
+          "audio": "Our recommendation is an increase in the number of crossings near the school.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8c77e0b54a1ec32a70af8a0b834adb3c67b20d470db8961a23b16f3c2258c312"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c25.e01": {
+      "reteach": "en.n6.class-25.t01",
+      "review": "en.n6.c25.r01"
+    },
+    "en.n6.c25.e02": {
+      "reteach": "en.n6.class-25.t02",
+      "review": "en.n6.c25.r02"
+    },
+    "en.n6.c25.e03": {
+      "reteach": "en.n6.class-25.t03",
+      "review": "en.n6.c25.r03"
+    },
+    "en.n6.c25.e04": {
+      "reteach": "en.n6.class-25.t04",
+      "review": "en.n6.c25.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n6-noun-phrases-1",
+    "n6-noun-phrases-2",
+    "n6-noun-phrases-3",
+    "n6-noun-phrases-4",
+    "n6-noun-phrases-5"
+  ]
+}

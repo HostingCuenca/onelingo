@@ -225,7 +225,7 @@
         "id": "en.n4.c100.pg02",
         "format": "completar",
         "prompt": {
-          "es": "Completa: «Nos prometió que llamaría a la familia.»"
+          "es": "Completa: «Prometió que llamaría a la familia.»"
         },
         "answer": {
           "text": "would",
@@ -255,7 +255,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:36bc81a7123f2e970f6fb30a66bd46d8f9c8b8eb2f941f102b6461a2151df792"
+        "contentHash": "sha256:0fef6a4b5bcab2b5665670e5c7909c9bfc2bca523859d7d58e1f9c3540b872ea"
       },
       {
         "id": "en.n4.c100.pg03",
@@ -542,8 +542,10 @@
               "accepted": [
                 "Could",
                 "Would",
+                "Can",
                 "could",
-                "would"
+                "would",
+                "can"
               ]
             }
           ]
@@ -576,7 +578,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:5fb24cf8e91abf000c3239d48e361deb99383f11bdd0e588f5122540f096b33d"
+        "contentHash": "sha256:b17c4fcd86feabc5145b2d6b4324a50da2c8b39eb2824db61e161fd5a5ff31ca"
       },
       {
         "id": "en.n4.c100.e03",
@@ -631,14 +633,14 @@
         "id": "en.n4.c100.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe el mensaje final: lo ocurrido, una hipótesis y tu sugerencia."
+          "es": "Escribe tu mensaje final: relato, deducción, mensaje transmitido y acuerdo."
         },
         "answer": {
-          "text": "The host family had not received the message, so nobody met us. If they had received it, they would have waited at the right gate. I suggest that we call them today.",
+          "text": "There was a misunderstanding at the airport. The host family had not received our message, so nobody met me. The address must have been wrong, because the message came back. The school told me that they would send a new message. If they had checked the address, they would have avoided the problem. I suggest that we call the family today. Do we have a deal?",
           "accepted": [
-            "The host family had not received the message, so nobody met us. If they had received it, they would have waited at the right gate. I suggest that we call them today.",
-            "The host family hadn't received the message, so nobody met us. If the family had received it, they would have waited at the right gate. I suggest that we call them today.",
-            "The family had not received the message, so nobody met us. If they had received it, they would have waited at the right gate. I suggest that we phone them today."
+            "There was a misunderstanding at the airport. The host family had not received our message, so nobody met me. The address must have been wrong, because the message came back. The school told me that they would send a new message. If they had checked the address, they would have avoided the problem. I suggest that we call the family today. Do we have a deal?",
+            "There was a misunderstanding at the airport. The host family hadn't received our message, so nobody met me. The address must have been wrong, because the message came back. The school told me that they would send a new message. If the school had checked the address, they would have avoided the problem. I suggest that we phone the family today. Do we have a deal?",
+            "There was a misunderstanding at the airport. The family had not received our message, so nobody met me. The address must have been wrong, because the message came back. The school said that they would send a new message. If they had checked the address, they would have avoided the problem. I suggest that we call the family today. Do we have a deal?"
           ]
         },
         "choices": [],
@@ -652,39 +654,66 @@
           "variantSeed": "0",
           "variantId": "en.n4.c100.e04.seed-0",
           "feedback": {
-            "es": "El mensaje final junta el relato con antecedente (had not received), la hipótesis (would have waited) y la propuesta (I suggest)."
+            "es": "El mensaje final junta el relato con antecedente (had not received), la causa deducida (must have been), el mensaje transmitido (told me that… would), la hipótesis (would have avoided) y la propuesta con cierre (I suggest… Do we have a deal?)."
           },
-          "text": "Datos: la familia no había recibido el mensaje, así que nadie nos recibió. Si lo hubiera recibido, habría esperado en la puerta correcta. Sugiere llamar hoy.",
+          "text": "Datos: cuéntale a tu coordinador lo que pasó: la familia anfitriona no había recibido el mensaje, así que nadie te recibió en el aeropuerto. Deduce la causa: la dirección debió de estar equivocada, porque el mensaje volvió. Transmite lo que te dijo la escuela: que enviaría un mensaje nuevo. Hipótesis: si hubieran comprobado la dirección, habrían evitado el problema. Sugiere llamar hoy a la familia y cierra el acuerdo.",
           "scoring": {
             "wordRange": [
-              22,
-              55
+              45,
+              110
             ],
             "evidenceGroups": [
               [
                 "had not received",
                 "hadn't received",
-                "did not receive",
-                "didn't receive"
+                "had not got",
+                "hadn't got"
               ],
               [
-                "if they had received",
-                "if the family had received",
-                "if they had got"
+                "must have been",
+                "must have gone",
+                "can't have been",
+                "might have been",
+                "might have gone",
+                "probably"
               ],
               [
-                "would have waited",
-                "would have been"
+                "told me that",
+                "told us that",
+                "said that",
+                "said they",
+                "promised that"
+              ],
+              [
+                "if they had",
+                "if the school had",
+                "if we had",
+                "if the family had"
+              ],
+              [
+                "would have avoided",
+                "would have prevented",
+                "would have solved",
+                "would not have happened",
+                "wouldn't have happened"
               ],
               [
                 "i suggest",
                 "we could",
+                "let's",
                 "let us",
-                "let's"
+                "why don't we",
+                "how about"
               ],
               [
                 "call",
                 "phone"
+              ],
+              [
+                "do we have a deal",
+                "we have a deal",
+                "deal",
+                "agree"
               ]
             ]
           }
@@ -694,7 +723,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:8311a2c74555bfb4ba57fd9327499eb81ff3899a4c38d9db8f536d86e90be131"
+        "contentHash": "sha256:841a089a701f0c64bde6f368b7d1a7d8f3de3388ab8f1183c48aef003ca9eb9f"
       }
     ],
     "review": [

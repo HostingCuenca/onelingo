@@ -508,7 +508,7 @@
           "variantSeed": "0",
           "variantId": "en.n5.c59.e01.seed-0",
           "feedback": {
-            "es": "La primera retrocede los tiempos, reporta la pregunta con if y orden normal y usa promised to. Las otras tienen inversión, tiempos sin retroceso o patrones mal formados."
+            "es": "La versión correcta retrocede los tiempos, reporta la pregunta con if y orden normal y usa promised to. Las demás tienen inversión, tiempos sin retroceso o patrones mal formados."
           },
           "text": "Ana: «I'm late because the bus broke down.» Leo: «Are you coming to the party?» Ana: «I promise I'll come at eight.»"
         },
@@ -517,7 +517,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:f0ad4f995a8969e098297ff81acccd412f0c9adf6a0bd0cb435acb7805d3e6ec"
+        "contentHash": "sha256:f989d5e454337f698f780ecfb0e11096025fbc1ee18b2c5201930f3ec589a013"
       },
       {
         "id": "en.n5.c59.e02",
@@ -605,14 +605,14 @@
         "id": "en.n5.c59.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Cuenta lo que pasó usando un verbo de reporte para cada frase."
+          "es": "Cuenta la conversación en orden, con un verbo de reporte distinto para cada frase."
         },
         "answer": {
-          "text": "Ana said she was tired, Leo asked if she wanted to rest, and she promised to sleep early.",
+          "text": "Ana told Leo that she was tired. He asked her if she wanted to rest, and she promised to sleep early. Then he warned her not to use her phone in bed, and she complained that the neighbours made a lot of noise. Finally, she mentioned that the shop closes at six.",
           "accepted": [
-            "Ana said she was tired, Leo asked if she wanted to rest, and she promised to sleep early.",
-            "Ana told Leo that she was tired. He asked her if she wanted to rest, and she promised to go to bed early.",
-            "Ana said that she was tired, Leo asked whether she wanted to rest, and she promised to sleep early."
+            "Ana told Leo that she was tired. He asked her if she wanted to rest, and she promised to sleep early. Then he warned her not to use her phone in bed, and she complained that the neighbours made a lot of noise. Finally, she mentioned that the shop closes at six.",
+            "Ana said that she was tired. Leo asked her whether she wanted to rest, and she promised to sleep early. Afterwards, he warned her not to use her phone in bed, and she complained that the neighbors made a lot of noise. Finally, she mentioned that the shop closes at six.",
+            "Ana told Leo that she was tired. He asked if she wanted to rest, and she promised to go to bed early. Then he warned her not to use her phone in bed, and she complained that the neighbours were very noisy. Finally, she mentioned that the shop closed at six."
           ]
         },
         "choices": [],
@@ -625,21 +625,18 @@
           "variantSeed": "0",
           "variantId": "en.n5.c59.e04.seed-0",
           "feedback": {
-            "es": "Cada acto de habla lleva su verbo: said/told para la afirmación, asked if para la pregunta y promised to para la promesa."
+            "es": "Cada acto de habla lleva su verbo: told/said (afirmación), asked if (pregunta), promised to (promesa), warned not to (advertencia), complained that (queja) y mentioned that (dato); la tienda sigue cerrando a las seis, así que el presente es válido."
           },
-          "text": "Datos: Ana dijo que estaba cansada; Leo le preguntó si quería descansar; ella prometió dormir temprano.",
+          "text": "Datos: Ana dijo que estaba cansada; Leo le preguntó si quería descansar; ella prometió dormir temprano; él le advirtió que no usara el móvil en la cama; ella se quejó de que los vecinos hacían mucho ruido; por último, mencionó que la tienda cierra a las seis.",
           "scoring": {
             "wordRange": [
-              12,
-              40
+              38,
+              85
             ],
             "evidenceGroups": [
               [
-                "said",
-                "told"
-              ],
-              [
-                "tired"
+                "told",
+                "said"
               ],
               [
                 "asked"
@@ -649,10 +646,16 @@
                 "whether"
               ],
               [
-                "promised"
+                "promised",
+                "promise"
               ],
               [
-                "early"
+                "warned",
+                "warn"
+              ],
+              [
+                "complained",
+                "complain"
               ]
             ]
           }
@@ -662,7 +665,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:210ba20c392e33baf2dd9338f6dd6ea63a28467911bb2acdc1b27e329fe01ece"
+        "contentHash": "sha256:a1faec7fd642592b8e6029d968733c33016897856e59c071463d9ad30a374b53"
       }
     ],
     "review": [

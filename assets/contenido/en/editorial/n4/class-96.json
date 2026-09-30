@@ -557,7 +557,7 @@
         "id": "en.n4.c96.e03",
         "format": "completar",
         "prompt": {
-          "es": "Completa las tres frases con la palabra que falta."
+          "es": "Completa con las marcas de un hecho, una deducción y una opinión."
         },
         "answer": {
           "text": "fact | must | In",
@@ -574,7 +574,10 @@
             {
               "text": "must",
               "accepted": [
-                "must"
+                "must",
+                "might",
+                "may",
+                "could"
               ]
             },
             {
@@ -613,20 +616,20 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:e405553da9e7afe9f9dbf5c7acf570ce5d51a7ad788280a31c7d642ed20ca606"
+        "contentHash": "sha256:cc22cddc95a09bc31753793b17cadbb9862c7f21aaf0909d2d31886ada31801e"
       },
       {
         "id": "en.n4.c96.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe un hecho con su deducción y tu opinión sobre el plan."
+          "es": "Escribe un análisis breve: hechos, deducciones y tu opinión sobre el caso."
         },
         "answer": {
-          "text": "The message gave the wrong gate, so the family must have waited there. In my opinion, it was a bad plan.",
+          "text": "Mia's suitcase did not arrive. The message gave the wrong gate, so the host family must have waited there, because nobody met Mia. Mia can't have lost the message: it is still on her phone. In my opinion, it was a bad plan.",
           "accepted": [
-            "The message gave the wrong gate, so the family must have waited there. In my opinion, it was a bad plan.",
-            "The message gave the wrong gate, so the family must have waited there. I think it was a bad plan.",
-            "The message gave the wrong gate, so the host family must have waited there. In my opinion, it was a bad idea."
+            "Mia's suitcase did not arrive. The message gave the wrong gate, so the host family must have waited there, because nobody met Mia. Mia can't have lost the message: it is still on her phone. In my opinion, it was a bad plan.",
+            "Mia's suitcase did not arrive. The message gave the wrong gate, so the family must have waited there, because nobody met her. She can't have lost the message: it is still on her phone. I think it was a bad plan.",
+            "Mia's suitcase did not arrive. The message gave the wrong gate, so the host family must have waited there, because nobody met Mia. Mia can't have lost the message: it is still on her phone. In my opinion, it was a bad idea."
           ]
         },
         "choices": [],
@@ -639,22 +642,35 @@
           "variantSeed": "0",
           "variantId": "en.n4.c96.e04.seed-0",
           "feedback": {
-            "es": "Un buen análisis separa el hecho (gave the wrong gate), la deducción (must have waited) y la opinión (in my opinion)."
+            "es": "Un buen análisis separa los hechos (did not arrive, gave the wrong gate), las deducciones con su prueba (must have waited, can't have lost) y la opinión (in my opinion)."
           },
-          "text": "Hecho: el mensaje daba la puerta equivocada. Deducción: la familia esperó allí. Opinión: fue un mal plan.",
+          "text": "Hecho: la maleta de Mia no llegó. Hecho: el mensaje daba la puerta equivocada. Deducción: la familia esperó allí, porque nadie recibió a Mia. Deducción: Mia no perdió el mensaje, porque sigue en su teléfono. Opinión: fue un mal plan.",
           "scoring": {
             "wordRange": [
-              14,
-              30
+              30,
+              75
             ],
             "evidenceGroups": [
+              [
+                "did not arrive",
+                "didn't arrive",
+                "did not come",
+                "didn't come"
+              ],
               [
                 "wrong gate"
               ],
               [
                 "must have waited",
                 "must have been",
+                "might have waited",
                 "probably waited"
+              ],
+              [
+                "can't have lost",
+                "cannot have lost",
+                "could not have lost",
+                "can't have deleted"
               ],
               [
                 "in my opinion",
@@ -673,7 +689,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:b3498074b133fcd856c58cd0e9c287b8713ecff397104db83e1455b5271d523e"
+        "contentHash": "sha256:06f255faac40e95c60603a530cd1e8654676801b89cd0bb26056e3c2f21d56da"
       }
     ],
     "review": [

@@ -1,0 +1,612 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "classes": {
+    "en.n6.class-01": {
+      "explicacion": {
+        "titulo": "Will, would y always para hablar de cómo es alguien",
+        "texto": "En inglés, will y would no solo hablan del futuro: también describen cómo es alguien. Will + verbo base dice lo que una persona hace típicamente hoy: «My uncle will talk for hours». Would + verbo base lo dice del pasado, solo con acciones repetidas. Always + presente continuo («He is always losing his keys») añade molestia: no es solo frecuencia, es una queja. Si solo informas de una costumbre neutra, usa el presente simple: «My uncle works on Sundays»."
+      },
+      "patron": {
+        "texto": "Persona + forma + conducta:",
+        "formula": [
+          {
+            "texto": "My uncle will talk…",
+            "nota": "will + verbo base: rasgo típico de hoy"
+          },
+          {
+            "texto": "My uncle would talk…",
+            "nota": "would + verbo base: costumbre del pasado"
+          },
+          {
+            "texto": "My uncle is always talking…",
+            "nota": "always + presente continuo: queja"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I was young, I would have a dog.",
+          "correcto": "When I was young, I had a dog.",
+          "explicacion": "Would no se usa con estados como have (tener): para estados se dice el pasado simple o used to."
+        },
+        {
+          "incorrecto": "She always is complaining about it.",
+          "correcto": "She is always complaining about it.",
+          "explicacion": "En la queja, always va entre be y el verbo en -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom hablan de su familia durante un almuerzo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "My uncle Ben will talk for hours about fishing.",
+            "traduccion": "Mi tío Ben se pasa horas hablando de pesca."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My dad is the same. He is always telling the same story!",
+            "traduccion": "Mi padre es igual. ¡Siempre está contando la misma historia!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "When we were small, Ben would fall asleep at the table and snore.",
+            "traduccion": "Cuando éramos pequeños, Ben se dormía en la mesa y roncaba."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Ha! And my grandma would hum while she cooked.",
+            "traduccion": "¡Ja! Y mi abuela tarareaba mientras cocinaba."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿qué hace su padre que le molesta?",
+          "opciones": [
+            {
+              "es": "Habla durante horas de pesca."
+            },
+            {
+              "es": "Cuenta siempre la misma historia."
+            },
+            {
+              "es": "Ronca en la mesa."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Tom dice «He is always telling the same story!»: always + presente continuo expresa su molestia. Lo de la pesca y los ronquidos lo cuenta Mia sobre su tío."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Qué expresa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "plays (presente simple)"
+            },
+            {
+              "texto": "Costumbre neutra"
+            }
+          ],
+          [
+            {
+              "texto": "will + verbo base"
+            },
+            {
+              "texto": "Rasgo típico de hoy"
+            }
+          ],
+          [
+            {
+              "texto": "would + verbo base"
+            },
+            {
+              "texto": "Costumbre repetida del pasado"
+            }
+          ],
+          [
+            {
+              "texto": "is always + -ing"
+            },
+            {
+              "texto": "Queja por una costumbre"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-02": {
+      "explicacion": {
+        "titulo": "Would acentuado y keep + -ing: criticar una conducta",
+        "texto": "Would tiene dos caras. Neutro, cuenta una costumbre del pasado, igual que used to: «Grandpa would spoil us». Acentuado (con énfasis al hablar), critica: «You would interrupt me!» significa «¡Típico de ti!» y no habla del pasado, sino de algo que acaba de pasar. Keep + -ing también critica: algo se repite sin parar («He keeps boasting»). Recuerda: used to sirve con acciones y estados; would, solo con acciones."
+      },
+      "patron": {
+        "texto": "Crítica + conducta:",
+        "formula": [
+          {
+            "texto": "You would…",
+            "nota": "would acentuado: «típico de ti»"
+          },
+          {
+            "texto": "He keeps…",
+            "nota": "keep: repite algo sin parar"
+          },
+          {
+            "texto": "…interrupting me.",
+            "nota": "el verbo después de keep va en -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He keeps to interrupt me.",
+          "correcto": "He keeps interrupting me.",
+          "explicacion": "Keep va seguido de un verbo en -ing, no de to + verbo."
+        },
+        {
+          "incorrecto": "We would live in a small flat when I was a child.",
+          "correcto": "We used to live in a small flat when I was a child.",
+          "explicacion": "Live es un estado: para estados se usa used to; would solo sirve con acciones repetidas."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia hablan del nuevo móvil de Tom.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Did you see Tom's new phone?",
+            "traduccion": "¿Viste el móvil nuevo de Tom?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes! He keeps showing it to everyone.",
+            "traduccion": "¡Sí! No deja de enseñárselo a todo el mundo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "He would! When we were kids, he would boast about his bike, too.",
+            "traduccion": "¡Normal en él! Cuando éramos niños, también presumía de su bici."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And now he keeps interrupting me when I speak.",
+            "traduccion": "Y ahora no deja de interrumpirme cuando hablo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿qué hacía Tom cuando eran niños?",
+          "opciones": [
+            {
+              "es": "Interrumpía a los demás."
+            },
+            {
+              "es": "Presumía de su bici."
+            },
+            {
+              "es": "Enseñaba su móvil nuevo."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Leo dice «he would boast about his bike»: would neutro cuenta una costumbre del pasado. Lo del móvil y las interrupciones es de ahora."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Matiz"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "You would…! (con énfasis)"
+            },
+            {
+              "texto": "Crítica: «típico de ti»"
+            }
+          ],
+          [
+            {
+              "texto": "He keeps + -ing"
+            },
+            {
+              "texto": "Crítica: lo repite sin parar"
+            }
+          ],
+          [
+            {
+              "texto": "would + verbo base (neutro)"
+            },
+            {
+              "texto": "Recuerdo de una costumbre pasada"
+            }
+          ],
+          [
+            {
+              "texto": "used to + verbo base"
+            },
+            {
+              "texto": "Hábito o estado pasado"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-03": {
+      "explicacion": {
+        "titulo": "Presente histórico: contar el clímax como si ocurriera ahora",
+        "texto": "Al contar una anécdota, el inglés usa el pasado para preparar la escena y el presente histórico para el momento más intenso: «So there I am… the doors close!». El hecho sigue siendo pasado; el cambio de tiempo solo crea tensión y hace la escena más vívida. Las señales son so there I am, suddenly o next thing I know. Cuando acaba el momento intenso, se vuelve al pasado. No cuentes toda la historia en presente ni mezcles tiempos sin razón."
+      },
+      "patron": {
+        "texto": "Pasado → presente histórico → pasado:",
+        "formula": [
+          {
+            "texto": "I was at the station…",
+            "nota": "pasado: prepara la escena"
+          },
+          {
+            "texto": "So there I am,",
+            "nota": "señal: cambio al presente histórico"
+          },
+          {
+            "texto": "I grab my bag…",
+            "nota": "presente: el clímax, rápido y vivo"
+          },
+          {
+            "texto": "Afterwards, we laughed.",
+            "nota": "vuelta al pasado: cierre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Yesterday I go to the station and I am late.",
+          "correcto": "Yesterday I went to the station and I was late.",
+          "explicacion": "Con un marcador de pasado como yesterday, la historia va en pasado; el presente histórico entra solo en el clímax, con una señal."
+        },
+        {
+          "incorrecto": "So there I was, and suddenly my train arrives, and I grabbed my bag.",
+          "correcto": "So there I am, and suddenly my train arrives, and I grab my bag.",
+          "explicacion": "Dentro del clímax se mantiene un solo tiempo: no se salta entre pasado y presente sin razón."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana llega sin aliento y le cuenta a Carlos lo que le ha pasado.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Why are you out of breath, Ana?",
+            "traduccion": "¿Por qué estás sin aliento, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Listen! I was at the station when I noticed my ticket was missing. So there I am, and my train leaves in one minute!",
+            "traduccion": "¡Escucha! Estaba en la estación cuando noté que me faltaba el billete. ¡Y ahí estoy yo, y mi tren sale en un minuto!"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I grab my bag, I sprint to the platform, and the whistle blows!",
+            "traduccion": "¡Agarro mi bolso, corro al andén y suena el silbato!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pasa en el momento más tenso de la historia de Ana?",
+          "opciones": [
+            {
+              "es": "Se sienta a esperar el siguiente tren."
+            },
+            {
+              "es": "Corre al andén mientras suena el silbato."
+            },
+            {
+              "es": "Vuelve a casa a buscar el billete."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "El clímax va en presente histórico: «I grab my bag, I sprint to the platform, and the whistle blows!». El billete lo nota antes, en pasado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la anécdota",
+          "Tiempo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escena"
+            },
+            {
+              "texto": "Pasado simple y continuo"
+            }
+          ],
+          [
+            {
+              "texto": "Señal (so there I am)"
+            },
+            {
+              "texto": "Cambio al presente"
+            }
+          ],
+          [
+            {
+              "texto": "Clímax"
+            },
+            {
+              "texto": "Presente histórico"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Vuelta al pasado"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-04": {
+      "explicacion": {
+        "titulo": "Una anécdota de infancia en cuatro partes",
+        "texto": "Una anécdota personal tiene cuatro partes y cada una pide su tiempo. Escena: pasado simple y would para lo que hacías siempre. Antecedente: had been + -ing para lo que llevabas haciendo antes del momento clave, con for + tiempo, nunca «since». Clímax: presente histórico, con una señal como «So there I am». Final: vuelta al pasado simple. Antes de escribir, anota una frase para cada parte y comprueba cada tiempo."
+      },
+      "patron": {
+        "texto": "Escena + antecedente + clímax + final:",
+        "formula": [
+          {
+            "texto": "I would climb…",
+            "nota": "escena: costumbre con would"
+          },
+          {
+            "texto": "I had been climbing… when…",
+            "nota": "antecedente: lo que llevabas haciendo"
+          },
+          {
+            "texto": "So there I am… I hear…",
+            "nota": "clímax: presente histórico"
+          },
+          {
+            "texto": "I never climbed it again.",
+            "nota": "final: pasado simple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Since ten minutes I was climbing when I reached the branch.",
+          "correcto": "I had been climbing for ten minutes when I reached the branch.",
+          "explicacion": "La duración se dice con for + tiempo, y la actividad anterior al hecho clave va en had been + -ing."
+        },
+        {
+          "incorrecto": "I never climbed again that tree.",
+          "correcto": "I never climbed that tree again.",
+          "explicacion": "Again va al final, después del complemento: never climbed that tree again."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pide a Ana una historia de su infancia.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Do you have a scary childhood story, Ana?",
+            "traduccion": "¿Tienes alguna historia de miedo de tu infancia, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes! Every summer I would climb the big tree in my grandma's garden.",
+            "traduccion": "¡Sí! Cada verano trepaba al árbol grande del jardín de mi abuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "One day I had been climbing for ten minutes when I heard a loud noise. So there I am, terrified, on a branch!",
+            "traduccion": "Un día llevaba diez minutos trepando cuando oí un ruido fuerte. ¡Y ahí estoy yo, aterrorizada, en una rama!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What did you do?",
+            "traduccion": "¿Qué hiciste?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Grandpa ran to get a ladder. The rescue was quick, but I never climbed that tree again.",
+            "traduccion": "El abuelo corrió a buscar una escalera. El rescate fue rápido, pero nunca volví a subir a ese árbol."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cuánto tiempo llevaba Ana trepando cuando oyó el ruido?",
+          "opciones": [
+            {
+              "es": "Una hora."
+            },
+            {
+              "es": "Diez minutos."
+            },
+            {
+              "es": "Un minuto."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana dice «I had been climbing for ten minutes when I heard a loud noise»: for + tiempo marca cuánto llevaba haciéndolo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Tiempo y señal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escena"
+            },
+            {
+              "texto": "would / pasado simple"
+            }
+          ],
+          [
+            {
+              "texto": "Antecedente"
+            },
+            {
+              "texto": "had been + -ing, for + tiempo"
+            }
+          ],
+          [
+            {
+              "texto": "Clímax"
+            },
+            {
+              "texto": "presente histórico: So there I am"
+            }
+          ],
+          [
+            {
+              "texto": "Final"
+            },
+            {
+              "texto": "pasado simple, never … again"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-05": {
+      "explicacion": {
+        "titulo": "Contar y aclarar: el orden de los hechos",
+        "texto": "En una conversación familiar vas a escuchar una historia, contar otra y aclarar dudas. Al contar, combina lo aprendido: would para la costumbre, had + participio con earlier that day para lo anterior, meanwhile para lo simultáneo y presente histórico para el clímax. Al escuchar, si no ves el orden, pregunta: «Do you mean…?» o «What order…?». Fíjate en que no se dice «What means that?»: en inglés se dice «What do you mean?»."
+      },
+      "patron": {
+        "texto": "Historia + aclaración:",
+        "formula": [
+          {
+            "texto": "Earlier that day, he had lost…",
+            "nota": "hecho anterior: had + participio"
+          },
+          {
+            "texto": "Meanwhile, his wife was waiting…",
+            "nota": "lo simultáneo: pasado continuo"
+          },
+          {
+            "texto": "So there he is…",
+            "nota": "clímax: presente histórico"
+          },
+          {
+            "texto": "Sorry, do you mean…?",
+            "nota": "aclaración de la duda"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What means that? Was it before the party?",
+          "correcto": "What do you mean? Was it before the party?",
+          "explicacion": "En inglés se pregunta What do you mean?; el verbo mean necesita do y sujeto."
+        },
+        {
+          "incorrecto": "Before to arrive, he has lost his wallet.",
+          "correcto": "Before he arrived, he had lost his wallet.",
+          "explicacion": "Before va con una oración completa, y lo anterior a un hecho pasado lleva had + participio, no has."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Leo la historia de su tío en la reunión familiar.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "At the reunion, my uncle told us his story. Earlier that day, he had lost his wallet.",
+            "traduccion": "En la reunión, mi tío nos contó su historia. Más temprano ese día había perdido la cartera."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sorry, do you mean before the reunion started?",
+            "traduccion": "Perdona, ¿quieres decir antes de que empezara la reunión?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes! Meanwhile, my aunt was waiting outside in the car.",
+            "traduccion": "¡Sí! Mientras tanto, mi tía esperaba fuera, en el coche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh, now I understand the order.",
+            "traduccion": "Ah, ahora entiendo el orden."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué aclara Leo con su pregunta?",
+          "opciones": [
+            {
+              "es": "Si el tío llegó en coche."
+            },
+            {
+              "es": "Si la tía estaba dentro de la casa."
+            },
+            {
+              "es": "Si el tío perdió la cartera antes de la reunión."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Leo pregunta «do you mean before the reunion started?» para situar la pérdida de la cartera en el tiempo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Qué marca"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Earlier that day + had + participio"
+            },
+            {
+              "texto": "Hecho anterior"
+            }
+          ],
+          [
+            {
+              "texto": "Meanwhile + pasado continuo"
+            },
+            {
+              "texto": "Acción simultánea"
+            }
+          ],
+          [
+            {
+              "texto": "So there he is + presente"
+            },
+            {
+              "texto": "Clímax"
+            }
+          ],
+          [
+            {
+              "texto": "Do you mean…? / What do you mean?"
+            },
+            {
+              "texto": "Aclaración"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

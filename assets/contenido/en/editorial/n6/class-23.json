@@ -1,0 +1,762 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-23",
+  "title": {
+    "en": "Unpacking dense sentences",
+    "es": "Desempaquetar frases densas"
+  },
+  "objectives": {
+    "es": [
+      "Desempaquetar frases densas con sustantivos abstractos para recuperar quién hace qué y cuál es la causa y el resultado."
+    ]
+  },
+  "concepts": [
+    "n6-noun-phrases-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n6.class-22"
+  ],
+  "usesVocabulary": [
+    "ban",
+    "centre",
+    "pollution",
+    "cyclist",
+    "lane",
+    "construction",
+    "opening",
+    "delay"
+  ],
+  "usesPatterns": [
+    "n6-noun-phrases-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "ban",
+      "es": "prohibición"
+    },
+    {
+      "en": "centre",
+      "es": "centro"
+    },
+    {
+      "en": "pollution",
+      "es": "contaminación"
+    },
+    {
+      "en": "cyclist",
+      "es": "ciclista"
+    },
+    {
+      "en": "lane",
+      "es": "carril"
+    },
+    {
+      "en": "construction",
+      "es": "construcción"
+    },
+    {
+      "en": "opening",
+      "es": "apertura"
+    },
+    {
+      "en": "delay",
+      "es": "retraso"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-23.t01",
+      "en": "The introduction of a ban on cars in the centre led to a fall in pollution.",
+      "es": "La introducción de una prohibición de coches en el centro llevó a una caída de la contaminación.",
+      "explanationEs": "Desempaquetada: el ayuntamiento prohibió los coches y la contaminación bajó.",
+      "segments": [
+        "The introduction of a ban on cars in",
+        "the centre led to a fall in pollution."
+      ],
+      "audioText": "The introduction of a ban on cars in the centre led to a fall in pollution.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-3"
+    },
+    {
+      "id": "en.n6.class-23.t02",
+      "en": "The construction of a new bike lane took six months.",
+      "es": "La construcción de un carril bici nuevo tardó seis meses.",
+      "explanationEs": "Desempaquetada: alguien construyó el carril y tardaron seis meses.",
+      "segments": [
+        "The construction of a new",
+        "bike lane took six months."
+      ],
+      "audioText": "The construction of a new bike lane took six months.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-3"
+    },
+    {
+      "id": "en.n6.class-23.t03",
+      "en": "The closure of the bridge caused a delay for every cyclist.",
+      "es": "El cierre del puente causó un retraso a cada ciclista.",
+      "explanationEs": "Desempaquetada: cerraron el puente y por eso los ciclistas llegaron tarde.",
+      "segments": [
+        "The closure of the bridge caused",
+        "a delay for every cyclist."
+      ],
+      "audioText": "The closure of the bridge caused a delay for every cyclist.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-3"
+    },
+    {
+      "id": "en.n6.class-23.t04",
+      "en": "Every cyclist welcomed the opening of the new path.",
+      "es": "Cada ciclista celebró la apertura del nuevo camino.",
+      "explanationEs": "La frase no dice quién abrió el camino: el sustantivo opening oculta al autor.",
+      "segments": [
+        "Every cyclist welcomed the opening",
+        "of the new path."
+      ],
+      "audioText": "Every cyclist welcomed the opening of the new path.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-3"
+    },
+    {
+      "id": "en.n6.class-23.t05",
+      "en": "A fall in pollution was the result of the ban.",
+      "es": "Una caída de la contaminación fue el resultado de la prohibición.",
+      "explanationEs": "Result of une la causa (the ban) con el efecto (a fall in pollution).",
+      "segments": [
+        "A fall in pollution was",
+        "the result of the ban."
+      ],
+      "audioText": "A fall in pollution was the result of the ban.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-noun-phrases-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c23.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase desempaqueta bien «the discussion of the plan»?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "They forgot the plan."
+          },
+          {
+            "text": "The plan discussed them."
+          },
+          {
+            "text": "They discussed the plan."
+          }
+        ],
+        "teaches": [
+          "n6-noun-phrases-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.pg01.seed-0",
+          "feedback": {
+            "es": "Discussion viene del verbo discuss: «the discussion of the plan» equivale a «they discussed the plan»."
+          },
+          "hint": {
+            "es": "Busca el verbo que esconde el sustantivo discussion y quién lo realiza."
+          },
+          "text": "The discussion of the plan took two hours."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:38f4af0ddee0fb4a24bd24d847abd991430d870c8b22b4f9832543688102feef"
+      },
+      {
+        "id": "en.n6.c23.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La apertura del puente causó un retraso.»"
+        },
+        "answer": {
+          "text": "opening",
+          "accepted": [
+            "opening"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-noun-phrases-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.pg02.seed-0",
+          "feedback": {
+            "es": "Open pasa a opening: es el sustantivo de la acción de abrir."
+          },
+          "hint": {
+            "es": "Es el sustantivo de open y termina en -ing."
+          },
+          "text": "The ___ of the bridge caused a delay."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d35669f271343516ff43117f0ddbd39ec28c2a2e09a579b6b54834491ed544e4"
+      },
+      {
+        "id": "en.n6.c23.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El cierre de la carretera llevó a un retraso.»"
+        },
+        "answer": {
+          "text": "The closure of the road led to a delay",
+          "tokens": [
+            "The",
+            "closure",
+            "of",
+            "the",
+            "road",
+            "led",
+            "to",
+            "a",
+            "delay"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-noun-phrases-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.pg03.seed-0",
+          "feedback": {
+            "es": "Sustantivo de acción + of + led to + resultado: es el patrón de la frase densa."
+          },
+          "hint": {
+            "es": "Empieza con el sustantivo de acción y deja el resultado para el final."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ede9182a64b7a3b97d05e26f1c8088241feac0a9ea685ef1f332c5a10c89aa26"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c23.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase dice quién hace qué en el titular?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The council closed the centre to cars, so pollution fell."
+          },
+          {
+            "text": "Cars closed the centre, so pollution fell."
+          },
+          {
+            "text": "The council closed the centre, so pollution increased."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.p01.seed-0",
+          "feedback": {
+            "es": "La causa es que el ayuntamiento cerró el centro y el resultado es que la contaminación bajó; las otras opciones cambian el autor o el resultado."
+          },
+          "text": "The closure of the centre to cars led to a fall in pollution."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cb4dd3f032be4889e5dc56670c00c293090b8ba57a2158eef9b88bdfcff7b5c0"
+      },
+      {
+        "id": "en.n6.c23.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase densa con su versión en español."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "The introduction of a ban",
+              {
+                "es": "Alguien introdujo una prohibición"
+              }
+            ],
+            [
+              "The construction of a lane",
+              {
+                "es": "Alguien construyó un carril"
+              }
+            ],
+            [
+              "A delay for cyclists",
+              {
+                "es": "Los ciclistas llegan tarde"
+              }
+            ],
+            [
+              "A fall in pollution",
+              {
+                "es": "La contaminación baja"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.p02.seed-0",
+          "feedback": {
+            "es": "Cada frase densa esconde un verbo: introducir, construir, retrasarse y bajar."
+          },
+          "pairs": [
+            [
+              "The introduction of a ban",
+              {
+                "es": "Alguien introdujo una prohibición"
+              }
+            ],
+            [
+              "The construction of a lane",
+              {
+                "es": "Alguien construyó un carril"
+              }
+            ],
+            [
+              "A delay for cyclists",
+              {
+                "es": "Los ciclistas llegan tarde"
+              }
+            ],
+            [
+              "A fall in pollution",
+              {
+                "es": "La contaminación baja"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2ef2ecd0323019f5a0bce2e6e19c0ae99ace75edcf5b6104983237320a124eb9"
+      },
+      {
+        "id": "en.n6.c23.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe la frase densa con sujeto y verbo explícitos."
+        },
+        "answer": {
+          "text": "They closed the bridge, so the drivers were upset.",
+          "accepted": [
+            "They closed the bridge, so the drivers were upset.",
+            "The council closed the bridge, so the drivers were upset.",
+            "They closed the bridge and the drivers were upset."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.p03.seed-0",
+          "feedback": {
+            "es": "Closure esconde close: alguien cerró el puente y por eso los conductores se molestaron."
+          },
+          "text": "The closure of the bridge upset the drivers."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5a4a676251c51d95e67768ccc856dfe4298daf04082422aee78629db7cb9e1c3"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c23.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hizo el ayuntamiento."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It closed a lane."
+          },
+          {
+            "text": "It opened a new lane."
+          },
+          {
+            "text": "It built a road for cars."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.e01.seed-0",
+          "feedback": {
+            "es": "El audio dice «opening of a new lane»: el ayuntamiento abrió un carril nuevo y el tráfico bajó."
+          },
+          "audio": "The council's opening of a new lane led to a fall in traffic.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97528d12660ae224dfbc4a5f878ca00c2fb02b1854c764a0ae862481010ddf3a"
+      },
+      {
+        "id": "en.n6.c23.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la causa del retraso según la frase?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A delay for every driver"
+          },
+          {
+            "text": "The opening of the old road"
+          },
+          {
+            "text": "The construction of the new road"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.e02.seed-0",
+          "feedback": {
+            "es": "Antes de led to está la causa (la construcción de la carretera) y después el resultado (el retraso)."
+          },
+          "text": "The construction of the new road led to a delay for every driver."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d6116999de8989c96d1ce42267a0f8b8c020f3ca0bf9671663c379019dbb9c8b"
+      },
+      {
+        "id": "en.n6.c23.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La prohibición de coches redujo la contaminación.»"
+        },
+        "answer": {
+          "text": "ban",
+          "accepted": [
+            "ban"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.e03.seed-0",
+          "feedback": {
+            "es": "Ban es el sustantivo de la acción de prohibir y se combina con on."
+          },
+          "text": "The ___ on cars reduced pollution."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a6d5a4aead8756a1b4203ee41de9af486475b810f7fe1f92c5e9f25c19555107"
+      },
+      {
+        "id": "en.n6.c23.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Desempaqueta la frase: quién hizo qué y qué resultado hubo."
+        },
+        "answer": {
+          "text": "They opened the new tram line, so there was less car traffic.",
+          "accepted": [
+            "They opened the new tram line, so there was less car traffic.",
+            "The council opened a new tram line, so car traffic fell."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.e04.seed-0",
+          "feedback": {
+            "es": "Opening esconde open y a fall in car traffic esconde traffic fell: cada sustantivo vuelve a ser un verbo."
+          },
+          "text": "The opening of the new tram line led to a fall in car traffic."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:601ee768c97f3ec028f9e90731414cc18d474d165b84a6c8f4541502dbf25d7c"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c23.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es la versión densa de «They banned cars, so pollution fell»?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The ban on cars led to a fall in pollution."
+          },
+          {
+            "text": "The cars led to a ban on pollution."
+          },
+          {
+            "text": "A fall in cars led to a ban."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.r01.seed-0",
+          "feedback": {
+            "es": "La causa pasa a ser un sustantivo (the ban on cars) y el resultado también (a fall in pollution), unidos por led to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d988b31ce274cf9ac4ade619b1c7bded329f4987b3b8146ba031cb99acdf591e"
+      },
+      {
+        "id": "en.n6.c23.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El retraso fue el resultado del cierre del puente.»"
+        },
+        "answer": {
+          "text": "The delay was the result of the closure of the bridge",
+          "tokens": [
+            "The",
+            "delay",
+            "was",
+            "the",
+            "result",
+            "of",
+            "the",
+            "closure",
+            "of",
+            "the",
+            "bridge"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.r02.seed-0",
+          "feedback": {
+            "es": "Result of une un efecto (the delay) con su causa (the closure of the bridge)."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:272f859a3cfdf37046e5f366aaf0d91f713521afc32458efc1b8d644a4b5a697"
+      },
+      {
+        "id": "en.n6.c23.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La construcción del carril tardó seis meses.»"
+        },
+        "answer": {
+          "text": "construction",
+          "accepted": [
+            "construction"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-noun-phrases-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c23.r03.seed-0",
+          "feedback": {
+            "es": "Construct pasa a construction con el sufijo -tion: es el sustantivo de construir."
+          },
+          "text": "The ___ of the lane took six months."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9bfd5c31c7c8d43184cd50de895d7d4f57d01aa7fd14ccfed39e02da177238cd"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c23.e01": {
+      "reteach": "en.n6.class-23.t01",
+      "review": "en.n6.c23.r01"
+    },
+    "en.n6.c23.e02": {
+      "reteach": "en.n6.class-23.t02",
+      "review": "en.n6.c23.r02"
+    },
+    "en.n6.c23.e03": {
+      "reteach": "en.n6.class-23.t03",
+      "review": "en.n6.c23.r03"
+    },
+    "en.n6.c23.e04": {
+      "reteach": "en.n6.class-23.t04",
+      "review": "en.n6.c23.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

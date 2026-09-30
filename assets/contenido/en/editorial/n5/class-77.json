@@ -224,10 +224,10 @@
           "variantSeed": "0",
           "variantId": "en.n5.c77.pg01.seed-0",
           "feedback": {
-            "es": "Consequently marca que el segundo hecho es el resultado del primero."
+            "es": "Consequently marca que lo que sigue al punto y coma es el resultado de lo que precede."
           },
           "hint": {
-            "es": "Aquí el segundo hecho es la consecuencia del primero."
+            "es": "Lo que viene después es la consecuencia de lo que dice la primera parte de la frase."
           },
           "text": "Fuel prices rose; ___, bus tickets cost more."
         },
@@ -236,7 +236,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:41839c0e9d3e474eae03e067b4a880e791ae6d4198f1b0dda260c053b100d317"
+        "contentHash": "sha256:5c04460288c62306c7b0245fab754f180c20a5fcc067ec9d89e3c5c15776b75e"
       },
       {
         "id": "en.n5.c77.pg02",
@@ -322,7 +322,7 @@
         "id": "en.n5.c77.p01",
         "format": "completar",
         "prompt": {
-          "es": "Completa el resumen con los conectores y matizadores adecuados."
+          "es": "Completa el resumen con: consequently, whereas, arguably y tend to."
         },
         "answer": {
           "text": "consequently | whereas | arguably | tend to",
@@ -385,7 +385,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:6e11809f3a10bc290e25966d9c51aa49bf523738ede005b7fda21b7859482e2b"
+        "contentHash": "sha256:3a402424a4e37141d2dab0b6a15cc7c348b61d3f4faa6fc0a969ee98fc9dfca5"
       },
       {
         "id": "en.n5.c77.p02",
@@ -440,7 +440,7 @@
             "text": "The team won the final."
           },
           {
-            "text": "The team was not the winner."
+            "text": "The team did not win the final."
           },
           {
             "text": "The team did not play."
@@ -472,7 +472,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:7ac2e4182d599519718eba51b61f7b2561a99d3423d81206befad8611be53bdd"
+        "contentHash": "sha256:4cb6a997609296ce778ca20b1ee16629896289e14556a61d4f2a61f1f92894b0"
       }
     ],
     "evaluation": [
@@ -505,16 +505,16 @@
           "variantSeed": "0",
           "variantId": "en.n5.c77.e01.seed-0",
           "feedback": {
-            "es": "Moreover suma un argumento a favor del plan; nevertheless y consequently no suman sino contrastan o concluyen."
+            "es": "Moreover suma un segundo punto a favor de la aplicación; nevertheless y consequently no suman sino que contrastan o concluyen."
           },
-          "text": "The plan is cheap; ___, it is very fast."
+          "text": "The app is free; ___, it is easy to use."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:1e0163bafcae181ebbf0f9a7099987c4b7bd19657bbbcb48131d519ec08bae90"
+        "contentHash": "sha256:2767f789c772c47a03299ef073b410208e1b97a16d33b7cc2b2fdbe53ce8b6f8"
       },
       {
         "id": "en.n5.c77.e02",
@@ -721,7 +721,8 @@
           "accepted": [
             "The train left late; nevertheless, it arrived on time.",
             "The train was late; nevertheless, it arrived on time.",
-            "The train left late. Nevertheless, it arrived on time."
+            "The train left late. Nevertheless, it arrived on time.",
+            "The train departed late; nevertheless, it arrived on time."
           ]
         },
         "choices": [],
@@ -736,14 +737,36 @@
           "feedback": {
             "es": "Nevertheless une un hecho negativo (salió tarde) con un resultado que sorprende (llegó a la hora)."
           },
-          "text": "Datos: el tren salió con retraso; aun así llegó a la hora. Usa «nevertheless»."
+          "text": "Datos: el tren salió con retraso; aun así llegó a la hora. Usa «nevertheless».",
+          "scoring": {
+            "wordRange": [
+              6,
+              25
+            ],
+            "evidenceGroups": [
+              [
+                "train"
+              ],
+              [
+                "nevertheless"
+              ],
+              [
+                "late",
+                "delayed",
+                "delay"
+              ],
+              [
+                "on time"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:ab824d7e5304398c1959c76f2a43d9960dec1ddc2309626d50389779bdf877c4"
+        "contentHash": "sha256:881d642164d8ebd34c73d82503c3492eba6fb9f96dd8e5baf33dc42cc1236a74"
       }
     ]
   },

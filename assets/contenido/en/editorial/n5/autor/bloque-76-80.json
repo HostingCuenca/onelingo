@@ -251,7 +251,8 @@
             "respuesta": "claims",
             "aceptadas": [
               "claims",
-              "insists"
+              "insists",
+              "argues"
             ],
             "pista": "El verbo deja claro que nadie lo ha comprobado."
           },
@@ -357,14 +358,15 @@
             "respuesta": "insists",
             "aceptadas": [
               "insists",
-              "claims"
+              "claims",
+              "argues"
             ]
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
-            "consigna": "¿Cuál de las dos frases del texto es una opinión?",
+            "consigna": "¿Cuál de estas frases es una opinión y no un hecho?",
             "feedback": "Great idea expresa un juicio personal; el número de estudiantes se puede comprobar.",
             "opciones": [
               "Some parents think it is a great idea.",
@@ -619,7 +621,7 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué conector formal indica resultado?",
-            "feedback": "Consequently marca que el segundo hecho es el resultado del primero.",
+            "feedback": "Consequently marca que lo que sigue al punto y coma es el resultado de lo que precede.",
             "opciones": [
               "consequently",
               "nevertheless",
@@ -627,7 +629,7 @@
             ],
             "respuesta": 0,
             "texto": "Fuel prices rose; ___, bus tickets cost more.",
-            "pista": "Aquí el segundo hecho es la consecuencia del primero."
+            "pista": "Lo que viene después es la consecuencia de lo que dice la primera parte de la frase."
           },
           {
             "formato": "completar",
@@ -656,7 +658,7 @@
         "practica": [
           {
             "formato": "completar",
-            "consigna": "Completa el resumen con los conectores y matizadores adecuados.",
+            "consigna": "Completa el resumen con: consequently, whereas, arguably y tend to.",
             "feedback": "Cada hueco pide una función: resultado (consequently), contraste (whereas), matiz (arguably) y hábito (tend to).",
             "frases": [
               "The museum increased its prices; ___, fewer families visited.",
@@ -705,7 +707,7 @@
             "feedback": "Nevertheless presenta un contraste: entrenaron mucho y, aun así, perdieron.",
             "audio": "The team trained hard; nevertheless, it lost the final.",
             "opciones": [
-              "The team was not the winner.",
+              "The team did not win the final.",
               "The team won the final.",
               "The team did not play."
             ],
@@ -716,14 +718,14 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué conector formal añade un argumento más fuerte?",
-            "feedback": "Moreover suma un argumento a favor del plan; nevertheless y consequently no suman sino contrastan o concluyen.",
+            "feedback": "Moreover suma un segundo punto a favor de la aplicación; nevertheless y consequently no suman sino que contrastan o concluyen.",
             "opciones": [
               "moreover",
               "nevertheless",
               "consequently"
             ],
             "respuesta": 0,
-            "texto": "The plan is cheap; ___, it is very fast."
+            "texto": "The app is free; ___, it is easy to use."
           },
           {
             "formato": "completar",
@@ -789,9 +791,32 @@
             "respuesta": "The train left late; nevertheless, it arrived on time.",
             "aceptadas": [
               "The train was late; nevertheless, it arrived on time.",
-              "The train left late. Nevertheless, it arrived on time."
+              "The train left late. Nevertheless, it arrived on time.",
+              "The train departed late; nevertheless, it arrived on time."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                6,
+                25
+              ],
+              "evidencias": [
+                [
+                  "train"
+                ],
+                [
+                  "nevertheless"
+                ],
+                [
+                  "late",
+                  "delayed",
+                  "delay"
+                ],
+                [
+                  "on time"
+                ]
+              ]
+            }
           }
         ]
       }
@@ -1008,14 +1033,14 @@
               "es": "El hecho de que el parque cierra los domingos."
             },
             {
-              "es": "Que destacan el enfado de las familias."
+              "es": "Que se centran en las familias."
             },
             {
               "es": "Que mencionan la hierba nueva."
             }
           ],
           "respuesta": 0,
-          "feedback": "Mia dice: «Both give the same fact: the park closes on Sundays». El enfado de las familias solo lo destaca A y la hierba nueva solo la menciona B."
+          "feedback": "Mia dice: «Both give the same fact: the park closes on Sundays». Centrarse en las familias lo hace solo A, y mencionar la hierba nueva solo B."
         }
       },
       "ejercicios": {
@@ -1036,11 +1061,11 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué titular es neutral?",
-            "feedback": "El titular con el dato concreto y un verbo sin emoción es neutral; los otros llevan juicios en wastes y gives away.",
+            "feedback": "El titular con el dato concreto y un verbo sin emoción es neutral; los otros llevan juicios en wastes y takes away.",
             "opciones": [
               "Council spends 2,000 dollars on new bridge.",
               "Council wastes money on new bridge.",
-              "Council gives away money on new bridge."
+              "Council takes away money from the new bridge."
             ],
             "respuesta": 0,
             "pista": "Un titular neutral da datos, no juicios."
@@ -1110,7 +1135,7 @@
         "evaluacion": [
           {
             "formato": "completar",
-            "consigna": "Completa la tabla comparativa con los datos de las dos versiones.",
+            "consigna": "Completa la comparación con los datos de las dos versiones.",
             "feedback": "Cada hueco sale del texto: el viaje (trip), la palabra cargada (angry) y el motivo (weather).",
             "frases": [
               "Both versions report that the students cannot go on the ___.",
@@ -1121,7 +1146,8 @@
               {
                 "respuesta": "trip",
                 "aceptadas": [
-                  "trip"
+                  "trip",
+                  "school trip"
                 ]
               },
               {
@@ -1138,12 +1164,12 @@
               }
             ],
             "minimo": 3,
-            "texto": "Version A: Angry students lose their school trip. Version B: The school cancels the trip because of the weather."
+            "texto": "Version A: Angry students miss their school trip. Version B: The school cancels the trip because of the weather."
           },
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige qué versión usa palabras más cargadas y por qué.",
-            "feedback": "Peaceful lleva un juicio sobre la multitud; move es un verbo neutral. Por eso la primera versión está más cargada.",
+            "feedback": "Peaceful lleva un juicio sobre la multitud; move es un verbo neutral. Por eso la versión A está más cargada.",
             "audio": "Version A: Police drive a peaceful crowd away from the road. Version B: Police move a crowd away from the road.",
             "opciones": [
               "Version A, because peaceful shows an opinion.",
@@ -1270,8 +1296,8 @@
       ],
       "ensenanza": [
         {
-          "en": "A balanced summary gives both sides of the story, and a good writer will summarise them in fair words.",
-          "es": "Un resumen equilibrado da los dos lados de la historia, y un buen autor los resumirá con palabras justas.",
+          "en": "A balanced summary is fair: it gives both sides of the story, and a good writer will summarise them clearly.",
+          "es": "Un resumen equilibrado es justo: da los dos lados de la historia, y un buen autor los resumirá con claridad.",
           "nota": "Balanced = sin inclinarse por un lado; fair = justo, sin juicios."
         },
         {
@@ -1555,43 +1581,54 @@
           {
             "formato": "escribir",
             "consigna": "Escribe un resumen equilibrado de la noticia con sus dos fuentes.",
-            "feedback": "Un buen resumen da el hecho, las dos fuentes con contraste, una consecuencia y un matiz final.",
-            "texto": "Noticia: el ayuntamiento cerró la piscina municipal durante el verano. Según el ayuntamiento, la piscina necesita reparaciones. Según los vecinos, cerrarla en verano es un error. Consecuencia: los niños no tienen dónde nadar. Escribe 3 o 4 frases con dos fuentes, un contraste, una consecuencia y un matizador.",
-            "respuesta": "The council closed the public pool for the summer. According to the council, the pool needs repairs, whereas residents claim that closing it in summer is a mistake. Consequently, children have no place to swim. Arguably, the repairs should have been done in winter.",
+            "feedback": "Un buen resumen da el hecho, las dos fuentes con contraste, una consecuencia y dos matices.",
+            "texto": "Noticia: el ayuntamiento cerró la piscina municipal durante el verano. Según el ayuntamiento, la piscina necesita reparaciones. Según los vecinos, cerrarla en verano es un error. Consecuencia: los niños no tienen dónde nadar. Se espera que reabra en septiembre. Escribe 4 o 5 frases: hecho, dos fuentes con contraste, consecuencia y dos matices.",
+            "respuesta": "The council closed the public pool for the summer. According to the council, the pool needs repairs, whereas residents claim that closing it in summer is a mistake. Consequently, children have no place to swim. Arguably, the repairs should have been done in winter. It would seem that the pool will reopen in September.",
             "aceptadas": [
-              "The council closed the public pool for the summer. The council says that it needs repairs, while residents argue that closing it in summer is a mistake. As a result, children have no place to swim. It would seem that the repairs could have been done in winter."
+              "The council closed the public pool for the summer. The council says that it needs repairs, while residents argue that closing it in summer is a mistake. As a result, children have no place to swim. It would seem that the pool will reopen in September, and arguably the repairs should have been done in winter."
             ],
             "textoIdioma": "es",
             "rubrica": {
               "palabras": [
-                30,
-                90
+                40,
+                110
               ],
               "evidencias": [
                 [
                   "According to the council",
                   "The council says",
-                  "The council claims"
+                  "The council claims",
+                  "The council argues"
                 ],
                 [
                   "whereas",
                   "while",
-                  "however"
+                  "however",
+                  "but"
                 ],
                 [
                   "residents claim",
                   "residents say",
                   "residents argue",
-                  "according to residents"
+                  "according to residents",
+                  "residents think",
+                  "residents believe"
                 ],
                 [
                   "Consequently",
-                  "As a result"
+                  "As a result",
+                  "Therefore",
+                  "As a consequence"
                 ],
                 [
                   "Arguably",
                   "It would seem",
                   "tend to"
+                ],
+                [
+                  "reopen",
+                  "open again",
+                  "September"
                 ]
               ]
             }
@@ -1623,9 +1660,35 @@
             "respuesta": "It would seem that students sleep more, according to the director.",
             "aceptadas": [
               "According to the director, it would seem that students sleep more.",
-              "According to the director, students sleep more, it would seem."
+              "According to the director, students sleep more, it would seem.",
+              "The director says it would seem that students sleep more."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                8,
+                30
+              ],
+              "evidencias": [
+                [
+                  "according to the director",
+                  "the director says",
+                  "the director said",
+                  "the director claims",
+                  "the director thinks",
+                  "the director believes"
+                ],
+                [
+                  "it would seem"
+                ],
+                [
+                  "sleep more",
+                  "sleeping more",
+                  "more sleep",
+                  "sleeps more"
+                ]
+              ]
+            }
           }
         ]
       }
@@ -1895,9 +1958,9 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué respuesta concede un punto y matiza la crítica?",
-            "feedback": "Concede el punto con you have a point y matiza con fairly; las otras respuestas rechazan o exageran.",
+            "feedback": "Concede el punto con you have a point y matiza con I would say… to some extent; las otras respuestas rechazan o exageran.",
             "opciones": [
-              "You have a point, but I would say it was only fairly biased.",
+              "You have a point, but I would say it gave both sides to some extent.",
               "You are totally wrong.",
               "I agree, it was a terrible report."
             ],
@@ -1954,24 +2017,25 @@
           },
           {
             "formato": "escribir",
-            "consigna": "Escribe tu valoración de la cobertura: opinión suavizada, evidencia y una concesión.",
-            "feedback": "Una buena valoración abre con una opinión suave, da evidencia, concede un punto y termina con on balance.",
-            "texto": "Caso: una noticia sobre el cierre de una piscina. Tiene dos fuentes (el ayuntamiento y los vecinos), pero el titular dice «Ayuntamiento deja sin piscina a los niños». Escribe 3 frases: tu valoración suavizada, la evidencia y una concesión.",
-            "respuesta": "I would say the coverage was fairly balanced because it gave both sides. You have a point about the headline: it was rather loaded. On balance, the report was fair.",
+            "consigna": "Escribe tu valoración: opinión suavizada, evidencia, concesión y conclusión.",
+            "feedback": "Una buena valoración abre con una opinión suave, da evidencia, concede un punto, matiza y termina con on balance.",
+            "texto": "Caso: una noticia sobre el cierre de una piscina. Tiene dos fuentes (el ayuntamiento y los vecinos), pero el titular dice «Ayuntamiento deja sin piscina a los niños». Escribe 4 o 5 frases: tu valoración suavizada, la evidencia, una concesión, un matiz y una conclusión.",
+            "respuesta": "I would say the coverage was fairly balanced because it gave both sides of the story. The council and the residents both explained their reasons. You have a point about the headline: it was rather loaded. That said, the report named its sources, so to some extent the criticism is not fair. On balance, the coverage was fair.",
             "aceptadas": [
-              "In my opinion, the coverage was fairly balanced because it gave both sides. That said, to some extent the headline was loaded, and you have a point about it. On balance, it was fair."
+              "In my opinion, the coverage was fairly balanced because it gave both sides. That said, to some extent the headline was loaded, and you have a point about it. The report named both sources. On balance, it was fair."
             ],
             "textoIdioma": "es",
             "rubrica": {
               "palabras": [
-                20,
-                70
+                35,
+                110
               ],
               "evidencias": [
                 [
                   "I would say",
                   "In my opinion",
-                  "I think"
+                  "I think",
+                  "I believe"
                 ],
                 [
                   "fairly",
@@ -1979,16 +2043,25 @@
                   "to some extent"
                 ],
                 [
-                  "both sides"
+                  "both sides",
+                  "two sides",
+                  "both sources"
                 ],
                 [
                   "You have a point",
+                  "That criticism is valid",
+                  "I agree",
+                  "you are right"
+                ],
+                [
                   "That said",
-                  "I agree"
+                  "However",
+                  "but"
                 ],
                 [
                   "On balance",
-                  "Overall"
+                  "Overall",
+                  "In conclusion"
                 ]
               ]
             }
@@ -2036,12 +2109,60 @@
             "respuesta": "You have a point, but it was fairly balanced.",
             "aceptadas": [
               "That criticism is valid; that said, the coverage was fairly balanced.",
-              "You have a point. That said, it was fairly balanced."
+              "You have a point. That said, it was fairly balanced.",
+              "You are right, but I would say it was fairly balanced."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                6,
+                30
+              ],
+              "evidencias": [
+                [
+                  "you have a point",
+                  "that criticism is valid",
+                  "your criticism is valid",
+                  "you are right",
+                  "that is a valid point",
+                  "criticism is valid"
+                ],
+                [
+                  "but",
+                  "that said",
+                  "however",
+                  "although",
+                  "though",
+                  "nevertheless"
+                ],
+                [
+                  "fairly",
+                  "rather",
+                  "to some extent",
+                  "somewhat",
+                  "partly",
+                  "balanced",
+                  "fair"
+                ]
+              ]
+            }
           }
         ]
       }
     }
-  ]
+  ],
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C76-C80 revisadas contra el mapa n5 v2 (concepto, fase, canDo, tarea de evaluación); continuidad de 76 a 80 correcta.",
+      "C77: corregidos pista y feedback que citaban posición (bloqueaba el constructor y, en cascada, el léxico de C78-C80); el hueco múltiple pasa a banco de palabras (consequently, whereas, arguably, tend to) para dejar una sola respuesta; ítem de moreover sin estímulo copiado de la enseñanza y sin lectura ambigua con nevertheless.",
+      "C78: titular neutral/cargado sin inglés antinatural (gives away); texto de la evaluación sin segundo término cargado (lose); opción del diálogo alineada con lo que dicen Mia y Tom; feedback sin ordinal.",
+      "C79 y C80: escritura de evaluación ampliada (54-58 palabras, más del 50 % del mínimo del mapa), con dos matizadores / concesión y matiz, rúbrica de 6 grupos con variantes y rango realista; repasos de escritura con rúbrica en lugar de coincidencia exacta.",
+      "C76: verbos de postura alternativos aceptados (argues). C79: frase de enseñanza reescrita (sin «in fair words»).",
+      "C80 práctica: la respuesta que concede y matiza ya no usa «only fairly biased», poco natural.",
+      "Pendiente P2 (limitación del formato): en «ordenar» solo hay una secuencia válida; frases con adverbial fijo al final o al inicio (C72, C74, C79) podrían admitir otro orden natural."
+    ]
+  }
 }

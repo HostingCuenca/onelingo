@@ -1,0 +1,613 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "classes": {
+    "en.n6.class-21": {
+      "explicacion": {
+        "titulo": "De verbo a sustantivo: la acción dentro del titular",
+        "texto": "En los titulares, las noticias y los resúmenes en inglés, las acciones y las cualidades suelen aparecer como sustantivos. Decide pasa a decision, arrive a arrival, reduce a reduction, improve a improvement y el adjetivo safe a safety. Esto se llama nominalización: «They decided to close the park» se condensa en «The decision to close the park». Para entenderlo, busca el verbo o el adjetivo escondido en el sustantivo y pregunta qué pasó y quién lo hizo."
+      },
+      "patron": {
+        "texto": "Sustantivo derivado + of / to / in + resto:",
+        "formula": [
+          {
+            "texto": "The decision",
+            "nota": "sustantivo: viene del verbo decide"
+          },
+          {
+            "texto": "to close",
+            "nota": "lo que se decidió hacer"
+          },
+          {
+            "texto": "the park.",
+            "nota": "lo que se cierra"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The arrive of the bus was late.",
+          "correcto": "The arrival of the bus was late.",
+          "explicacion": "Después de the va un sustantivo: arrive es un verbo y su sustantivo es arrival."
+        },
+        {
+          "incorrecto": "There was a reduce in noise.",
+          "correcto": "There was a reduction in noise.",
+          "explicacion": "Tras there was a hace falta un sustantivo: reduction, no el verbo reduce."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo leen los titulares del periódico del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I do not understand this headline: The decision to close the library surprised the residents.",
+            "traduccion": "No entiendo este titular: La decisión de cerrar la biblioteca sorprendió a los vecinos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is easy. The council decided to close the library, and the residents were surprised.",
+            "traduccion": "Es fácil. El ayuntamiento decidió cerrar la biblioteca y los vecinos se sorprendieron."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And this one? The arrival of the new bus led to an improvement in the service.",
+            "traduccion": "¿Y este? La llegada del autobús nuevo llevó a una mejora del servicio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The new bus arrived, and the service improved.",
+            "traduccion": "El autobús nuevo llegó y el servicio mejoró."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo explica Leo el titular sobre la biblioteca?",
+          "opciones": [
+            {
+              "es": "Con un verbo: el ayuntamiento decidió cerrarla y los vecinos se sorprendieron."
+            },
+            {
+              "es": "Con un adjetivo: la biblioteca es nueva y los vecinos están contentos."
+            },
+            {
+              "es": "Con una queja: los vecinos cerraron la biblioteca por sorpresa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo convierte «The decision to close» en «The council decided to close»: recupera el verbo escondido."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo o adjetivo",
+          "Sustantivo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "decide"
+            },
+            {
+              "texto": "decision"
+            }
+          ],
+          [
+            {
+              "texto": "arrive"
+            },
+            {
+              "texto": "arrival"
+            }
+          ],
+          [
+            {
+              "texto": "reduce"
+            },
+            {
+              "texto": "reduction"
+            }
+          ],
+          [
+            {
+              "texto": "improve"
+            },
+            {
+              "texto": "improvement"
+            }
+          ],
+          [
+            {
+              "texto": "safe"
+            },
+            {
+              "texto": "safety"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-22": {
+      "explicacion": {
+        "titulo": "Sufijos y preposiciones fijas",
+        "texto": "Muchos sustantivos abstractos se forman añadiendo un sufijo: -tion (invite → invitation, solve → solution), -ment (agree → agreement), -ness (kind → kindness), -ity (able → ability) y -ure (press → pressure). Además, cada sustantivo suele pedir una preposición fija que no siempre coincide con el español: a lack of, a reason for, an increase in, an effect on, a solution to. Aprende el bloque completo y no solo la palabra suelta."
+      },
+      "patron": {
+        "texto": "Artículo + sustantivo + preposición fija + resto:",
+        "formula": [
+          {
+            "texto": "There is a lack",
+            "nota": "sustantivo de cantidad o necesidad"
+          },
+          {
+            "texto": "of",
+            "nota": "preposición fija: lack siempre va con of"
+          },
+          {
+            "texto": "parking.",
+            "nota": "lo que falta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There is a lack for parking near the station.",
+          "correcto": "There is a lack of parking near the station.",
+          "explicacion": "En español decimos «falta de» y en inglés también: lack of. Con for la frase suena a «una falta para»."
+        },
+        {
+          "incorrecto": "What is the reason of the delay?",
+          "correcto": "What is the reason for the delay?",
+          "explicacion": "Reason se combina con for: the reason for something. Of no funciona con este sustantivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom hablan de la excursión de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Is the school trip cancelled, Ana?",
+            "traduccion": "¿Se canceló la excursión de la escuela, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. There is a lack of money.",
+            "traduccion": "Sí. Hay una falta de dinero."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "We need a solution to this problem.",
+            "traduccion": "Necesitamos una solución a este problema."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Carlos has the ability to organise a sale of cakes.",
+            "traduccion": "Carlos tiene la capacidad de organizar una venta de pasteles."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good idea. Thank you for your kindness, Carlos!",
+            "traduccion": "Buena idea. ¡Gracias por tu amabilidad, Carlos!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿por qué no se hace la excursión?",
+          "opciones": [
+            {
+              "es": "Porque falta dinero."
+            },
+            {
+              "es": "Porque falta tiempo."
+            },
+            {
+              "es": "Porque los alumnos no quieren ir."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «There is a lack of money»: la excursión se cancela por falta de dinero."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Sufijo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "-tion"
+            },
+            {
+              "texto": "invitation, solution"
+            }
+          ],
+          [
+            {
+              "texto": "-ment"
+            },
+            {
+              "texto": "agreement"
+            }
+          ],
+          [
+            {
+              "texto": "-ness"
+            },
+            {
+              "texto": "kindness"
+            }
+          ],
+          [
+            {
+              "texto": "-ity"
+            },
+            {
+              "texto": "ability"
+            }
+          ],
+          [
+            {
+              "texto": "-ure"
+            },
+            {
+              "texto": "pressure"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-23": {
+      "explicacion": {
+        "titulo": "Desempaquetar frases densas",
+        "texto": "Los textos formales esconden acciones en sustantivos y por eso cuesta saber quién hace qué. Para desempaquetar una frase, busca el sustantivo que viene de un verbo (introduction → introduce), pregunta quién hizo esa acción (suele estar tras of o queda sin decir) y escribe una frase nueva con sujeto y verbo. Verbos como led to, caused o was the result of unen la causa con el resultado: «The ban led to a fall in pollution» es «The council banned cars, so pollution fell»."
+      },
+      "patron": {
+        "texto": "Sustantivo de acción + of + led to + sustantivo de resultado:",
+        "formula": [
+          {
+            "texto": "The introduction of a ban",
+            "nota": "causa: alguien introdujo una prohibición"
+          },
+          {
+            "texto": "led to",
+            "nota": "une la causa con el resultado"
+          },
+          {
+            "texto": "a fall in pollution.",
+            "nota": "resultado: la contaminación bajó"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The ban led to a fall of pollution.",
+          "correcto": "The ban led to a fall in pollution.",
+          "explicacion": "Fall, como increase y reduction, se combina con in: a fall in pollution."
+        },
+        {
+          "incorrecto": "The introduction of a ban led to that pollution fell.",
+          "correcto": "The introduction of a ban led to a fall in pollution.",
+          "explicacion": "Después de led to va un sustantivo (a fall), no una frase con that y verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia no entiende una frase de un artículo y Leo se la explica.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I do not understand this sentence: The introduction of a ban on cars led to a fall in pollution.",
+            "traduccion": "No entiendo esta frase: La introducción de una prohibición de coches llevó a una caída de la contaminación."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is simple. The council introduced a ban on cars.",
+            "traduccion": "Es simple. El ayuntamiento introdujo una prohibición de coches."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the result?",
+            "traduccion": "¿Y el resultado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Pollution fell in the centre. The ban is the reason.",
+            "traduccion": "La contaminación bajó en el centro. La prohibición es el motivo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo explica Leo la frase difícil de Mia?",
+          "opciones": [
+            {
+              "es": "Dice quién hizo qué: el ayuntamiento prohibió los coches y bajó la contaminación."
+            },
+            {
+              "es": "Dice que los coches aumentaron la contaminación del centro."
+            },
+            {
+              "es": "Dice que el ayuntamiento no hizo nada y todo sigue igual."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo recupera el verbo escondido («The council introduced a ban») y después el resultado («Pollution fell»)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Frase densa",
+          "Frase desempaquetada"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The closure of the bridge"
+            },
+            {
+              "texto": "They closed the bridge."
+            }
+          ],
+          [
+            {
+              "texto": "a delay for every cyclist"
+            },
+            {
+              "texto": "every cyclist was late"
+            }
+          ],
+          [
+            {
+              "texto": "the construction of a lane"
+            },
+            {
+              "texto": "they built a lane"
+            }
+          ],
+          [
+            {
+              "texto": "a fall in pollution"
+            },
+            {
+              "texto": "pollution fell"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-24": {
+      "explicacion": {
+        "titulo": "Decirlo de forma más formal",
+        "texto": "Para pasar de una nota informal a un párrafo formal, convierte los verbos y adjetivos en sustantivos y agrúpalos con of, in y to: people complain → complaints; they collect the rubbish → the collection of rubbish; the council responded slowly → the council's slow response. Abre con el problema (There have been many complaints about…), sigue con la causa (the lack of…) y cierra con una propuesta (The installation of… would bring…). Con cuatro nominalizaciones ya suena formal; no hace falta usarlas en cada frase."
+      },
+      "patron": {
+        "texto": "Problema, causa y propuesta:",
+        "formula": [
+          {
+            "texto": "There have been many complaints about the rubbish.",
+            "nota": "problema: complaints viene de complain"
+          },
+          {
+            "texto": "The lack of bins is the main cause.",
+            "nota": "causa: lack of + sustantivo"
+          },
+          {
+            "texto": "The installation of more bins would bring an improvement.",
+            "nota": "propuesta: installation viene de install"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There have been many complains about the rubbish.",
+          "correcto": "There have been many complaints about the rubbish.",
+          "explicacion": "Complain es el verbo; el sustantivo es complaint, con -t: complaints en plural."
+        },
+        {
+          "incorrecto": "The installation of more bins bring an improvement.",
+          "correcto": "The installation of more bins brings an improvement.",
+          "explicacion": "El sujeto es installation (singular), no bins: el verbo concuerda con la palabra principal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana prepara una nota para el ayuntamiento y Leo la ayuda a mejorarla.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What are you writing, Ana?",
+            "traduccion": "¿Qué estás escribiendo, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "A note for the council. People complain and they do not collect the rubbish often.",
+            "traduccion": "Una nota para el ayuntamiento. La gente se queja y no recogen la basura a menudo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Make it formal: There have been many complaints about the collection of rubbish.",
+            "traduccion": "Hazlo formal: Ha habido muchas quejas por la recogida de la basura."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. And the lack of bins?",
+            "traduccion": "Bien. ¿Y la falta de contenedores?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. The installation of more bins would bring an improvement.",
+            "traduccion": "Sí. La instalación de más contenedores traería una mejora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué cambia Leo en la frase de Ana?",
+          "opciones": [
+            {
+              "es": "Convierte los verbos complain y collect en los sustantivos complaints y collection."
+            },
+            {
+              "es": "Cambia el tema de la nota: ya no habla de la basura."
+            },
+            {
+              "es": "Quita las quejas y deja solo una propuesta de contenedores."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «many complaints about the collection of rubbish»: complain y collect pasan a sustantivos, que es lo que hace formal la nota."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Nota informal",
+          "Versión formal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "People complain a lot."
+            },
+            {
+              "texto": "There have been many complaints."
+            }
+          ],
+          [
+            {
+              "texto": "They collect the rubbish once a week."
+            },
+            {
+              "texto": "The collection of rubbish happens once a week."
+            }
+          ],
+          [
+            {
+              "texto": "They installed more bins."
+            },
+            {
+              "texto": "The installation of more bins took place."
+            }
+          ],
+          [
+            {
+              "texto": "The council answered late."
+            },
+            {
+              "texto": "The council's response was late."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-25": {
+      "explicacion": {
+        "titulo": "Informe nominal y explicación oral",
+        "texto": "Un informe formal presenta el problema con sustantivos (the increase in traffic, the lack of a crossing), los datos con figure y una propuesta con installation o improvement. Cuando lo cuentas en voz alta conviene hacer lo contrario: desempaqueta los sustantivos en verbos y habla con frases sencillas («More cars come to the school, and there is no crossing»). Aquí integras todo el bloque: reconocer la acción escondida, usar el sufijo y la preposición correctos, entender una frase densa y escribir con estilo formal."
+      },
+      "patron": {
+        "texto": "Problema, datos, causa, propuesta y conclusión:",
+        "formula": [
+          {
+            "texto": "The main issue is the increase in traffic.",
+            "nota": "problema: sustantivo de acción"
+          },
+          {
+            "texto": "The lack of a crossing has led to accidents.",
+            "nota": "causa y resultado"
+          },
+          {
+            "texto": "Our proposal is the installation of a crossing.",
+            "nota": "propuesta con installation"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lack of a crossing has led to that two accidents happened.",
+          "correcto": "The lack of a crossing has led to two accidents.",
+          "explicacion": "Led to va seguido de un sustantivo (two accidents), no de that + frase verbal."
+        },
+        {
+          "incorrecto": "There is an increase of traffic outside the school.",
+          "correcto": "There is an increase in traffic outside the school.",
+          "explicacion": "Increase se combina con in: an increase in traffic, como a reduction in o a fall in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos preparan un informe para la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look at the figure. There is an increase in traffic outside the school.",
+            "traduccion": "Mira la cifra. Hay un aumento del tráfico frente a la escuela."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, and the lack of a crossing has led to two accidents.",
+            "traduccion": "Sí, y la falta de un paso de peatones ha llevado a dos accidentes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "What is our proposal?",
+            "traduccion": "¿Cuál es nuestra propuesta?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The installation of a crossing near the gate.",
+            "traduccion": "La instalación de un paso de peatones cerca de la puerta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Carlos, ¿qué ha causado los dos accidentes?",
+          "opciones": [
+            {
+              "es": "La falta de un paso de peatones frente a la escuela."
+            },
+            {
+              "es": "El aumento del número de ciclistas en el barrio."
+            },
+            {
+              "es": "La instalación de una puerta nueva."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «the lack of a crossing has led to two accidents»: la causa es la falta del paso de peatones."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Informe escrito",
+          "Explicación oral"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "the increase in traffic"
+            },
+            {
+              "texto": "more cars come every year"
+            }
+          ],
+          [
+            {
+              "texto": "the lack of a crossing"
+            },
+            {
+              "texto": "there is no crossing"
+            }
+          ],
+          [
+            {
+              "texto": "the installation of a crossing"
+            },
+            {
+              "texto": "we want to install a crossing"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

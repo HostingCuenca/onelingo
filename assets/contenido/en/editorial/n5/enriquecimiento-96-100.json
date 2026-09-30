@@ -1,0 +1,669 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n5",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n5.class-96": {
+      "explicacion": {
+        "titulo": "Leer una opinión: postura, apoyos y concesión",
+        "texto": "Un artículo de opinión tiene partes que puedes marcar. La postura es lo que defiende el autor (In my view…). Los apoyos son los datos o razones que la sostienen (There is evidence that…). La concesión reconoce un punto del otro lado (Admittedly…) pero no cambia la postura: después llega However y el autor vuelve a su idea. El lenguaje cauteloso (arguably, tend to, it seems) suaviza lo que afirma. Marca también las estructuras del nivel: tiempos, condicionales, causativos y verbos de reporte."
+      },
+      "patron": {
+        "texto": "Partes de una opinión:",
+        "formula": [
+          {
+            "texto": "In my view, schools give too much homework.",
+            "nota": "postura: lo que defiende el autor"
+          },
+          {
+            "texto": "There is evidence that tired students make more mistakes.",
+            "nota": "apoyo: dato o razón que la sostiene"
+          },
+          {
+            "texto": "Admittedly, some homework helps.",
+            "nota": "concesión: reconoce un punto contrario"
+          },
+          {
+            "texto": "However, every night is too much.",
+            "nota": "vuelta a la postura"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, homework is useless.",
+          "correcto": "In my view, homework is useless.",
+          "explicacion": "«Según yo» es un calco: en inglés se dice in my view o in my opinion, no according to me."
+        },
+        {
+          "incorrecto": "Admittedly, homework helps, but however it should be shorter.",
+          "correcto": "Admittedly, homework helps. However, it should be shorter.",
+          "explicacion": "But y however hacen el mismo trabajo: no van juntos. However abre una frase nueva y lleva coma."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo comentan un texto sobre los deberes.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I read a text about homework. The writer says, In my view, schools give too much of it.",
+            "traduccion": "Leí un texto sobre los deberes. El autor dice: En mi opinión, los colegios ponen demasiados."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Does he give any evidence?",
+            "traduccion": "¿Da alguna prueba?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. Tired students make more mistakes. But admittedly, he says some homework helps.",
+            "traduccion": "Sí. Los estudiantes cansados cometen más errores. Pero admite que algunos deberes ayudan."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So he isn't completely against homework.",
+            "traduccion": "Entonces no está totalmente en contra de los deberes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Exactly. However, he still wants less of it.",
+            "traduccion": "Exacto. Sin embargo, sigue queriendo menos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la concesión del autor?",
+          "opciones": [
+            {
+              "es": "Que algunos deberes ayudan."
+            },
+            {
+              "es": "Que los estudiantes cansados cometen más errores."
+            },
+            {
+              "es": "Que los colegios deberían poner más deberes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «admittedly, he says some homework helps»: el autor reconoce un punto a favor de los deberes, aunque mantiene su postura."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Qué hace",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "dice lo que defiende el autor"
+            },
+            {
+              "texto": "In my view, …"
+            }
+          ],
+          [
+            {
+              "texto": "Apoyo"
+            },
+            {
+              "texto": "aporta pruebas o razones"
+            },
+            {
+              "texto": "There is evidence that …"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "reconoce un punto contrario"
+            },
+            {
+              "texto": "Admittedly, …"
+            }
+          ],
+          [
+            {
+              "texto": "Cautela"
+            },
+            {
+              "texto": "suaviza lo que afirma"
+            },
+            {
+              "texto": "arguably, tend to, it seems"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-97": {
+      "explicacion": {
+        "titulo": "Revisar un borrador por capas",
+        "texto": "Revisar es distinto de escribir: se mira el texto por capas. 1) Sentido: ¿dice lo que quiero? 2) Estructura y conectores: ¿se ve la relación entre las ideas (however, therefore)? 3) Precisión: cambia las palabras vagas (thing, stuff) por exactas y corta lo repetido o innecesario. 4) Gramática: revisa los tiempos y los patrones verbales. Lee el texto en voz alta y registra cada cambio con tres datos: qué sustituyes, por qué lo sustituyes y qué mejora."
+      },
+      "patron": {
+        "texto": "Registrar un cambio de revisión:",
+        "formula": [
+          {
+            "texto": "I replaced the word thing",
+            "nota": "qué cambias"
+          },
+          {
+            "texto": "with ticket,",
+            "nota": "por qué lo sustituyes"
+          },
+          {
+            "texto": "because it is clearer.",
+            "nota": "qué mejora el cambio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I revised the draft and corrected the mistakes of spelling.",
+          "correcto": "I revised the draft and corrected the spelling mistakes.",
+          "explicacion": "Los sustantivos se colocan delante de otro sustantivo sin of: spelling mistakes, no mistakes of spelling."
+        },
+        {
+          "incorrecto": "I have revised my draft yesterday.",
+          "correcto": "I revised my draft yesterday.",
+          "explicacion": "Con una hora o fecha terminada (yesterday) se usa pasado simple, no present perfect."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo revisa con Ana el borrador de un texto para su club.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Your draft is good, Ana, but the second paragraph is wordy.",
+            "traduccion": "Tu borrador es bueno, Ana, pero el segundo párrafo tiene demasiadas palabras."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "You're right. I'll cut it to two clear sentences. What about the first paragraph?",
+            "traduccion": "Tienes razón. Lo reduciré a dos frases claras. ¿Y el primer párrafo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "You wrote thing three times. That's vague. Replace it with exact words.",
+            "traduccion": "Escribiste thing tres veces. Es vago. Cámbialo por palabras exactas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good point. And I'll read it aloud before I send it.",
+            "traduccion": "Buena observación. Y lo leeré en voz alta antes de enviarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué problema tiene el primer párrafo?",
+          "opciones": [
+            {
+              "es": "Repite la palabra thing, que es vaga."
+            },
+            {
+              "es": "Tiene demasiadas palabras."
+            },
+            {
+              "es": "Tiene errores en los tiempos verbales."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que Ana escribió thing tres veces y que es vago. Lo de tener demasiadas palabras se refiere al segundo párrafo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Capa de revisión",
+          "Qué revisas"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Sentido"
+            },
+            {
+              "texto": "¿dice lo que quiero decir?"
+            }
+          ],
+          [
+            {
+              "texto": "Conectores"
+            },
+            {
+              "texto": "however, therefore, so: ¿se ve la relación?"
+            }
+          ],
+          [
+            {
+              "texto": "Precisión"
+            },
+            {
+              "texto": "palabras vagas, repeticiones, texto de más"
+            }
+          ],
+          [
+            {
+              "texto": "Gramática"
+            },
+            {
+              "texto": "tiempos y patrones verbales"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-98": {
+      "explicacion": {
+        "titulo": "Integrar un texto y un audio",
+        "texto": "Cuando lees un texto y escuchas un audio sobre el mismo tema, compáralos como dos fuentes. Anota lo que coincide (both…, similarly), lo que cambia (whereas, unlike, the sources differ on…) y lo que solo dice una fuente. Después escribe una conclusión con evidencia: According to the text… and the speaker says… Si los datos se contradicen, no elijas al azar: di que las fuentes difieren y qué habría que comprobar. Puedes repetir el audio y releer el texto: úsalos para comprobar cada dato."
+      },
+      "patron": {
+        "texto": "Comparar dos fuentes:",
+        "formula": [
+          {
+            "texto": "According to the text,",
+            "nota": "fuente 1: lo que dice el texto"
+          },
+          {
+            "texto": "the speaker says …,",
+            "nota": "fuente 2: lo que dice el audio"
+          },
+          {
+            "texto": "whereas / unlike …",
+            "nota": "la diferencia entre ambas"
+          },
+          {
+            "texto": "In conclusion, …",
+            "nota": "lo que se puede afirmar con evidencia"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Both sources says the same.",
+          "correcto": "Both sources say the same.",
+          "explicacion": "Both sources es plural: el verbo no lleva -s. Se dice both sources say."
+        },
+        {
+          "incorrecto": "The audio is different of the text.",
+          "correcto": "The audio is different from the text.",
+          "explicacion": "En inglés different va con from (o to), no con of como en «diferente de»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia comparan un artículo con un informe de radio sobre una excursión.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The article says the trip is on Friday, and the radio says Friday too.",
+            "traduccion": "El artículo dice que la excursión es el viernes, y la radio también dice viernes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. But the article says it costs ten pounds, whereas the radio says twelve.",
+            "traduccion": "Bien. Pero el artículo dice que cuesta diez libras, mientras que la radio dice doce."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So the sources differ on the price.",
+            "traduccion": "Entonces las fuentes difieren en el precio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. Both agree on the date, so the conclusion is: check the price with the school.",
+            "traduccion": "Sí. Las dos coinciden en la fecha, así que la conclusión es: confirmar el precio con el colegio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué coinciden las dos fuentes?",
+          "opciones": [
+            {
+              "es": "En la fecha de la excursión."
+            },
+            {
+              "es": "En el precio de la excursión."
+            },
+            {
+              "es": "En el lugar de la excursión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Both agree on the date»: coinciden en que la excursión es el viernes. En el precio difieren."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué compruebas",
+          "Expresión útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Coinciden"
+            },
+            {
+              "texto": "Both … / Similarly, …"
+            }
+          ],
+          [
+            {
+              "texto": "Difieren"
+            },
+            {
+              "texto": "whereas / unlike / the sources differ on …"
+            }
+          ],
+          [
+            {
+              "texto": "Solo una fuente"
+            },
+            {
+              "texto": "According to the text, … but the speaker does not mention …"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "In conclusion, …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-99": {
+      "explicacion": {
+        "titulo": "Hablar un minuto con estructura",
+        "texto": "Una intervención oral de un minuto se organiza en cinco bloques. Introducción: My topic today is… o I'd like to talk about…. Dos argumentos: Firstly… Secondly…, cada uno con una razón o una prueba. Hipótesis: Suppose… o If… + would. Concesión: Admittedly…, seguida de However… para volver a tu postura. Cierre: In short, … con tu postura. Habla con frases cortas, haz una pausa tras cada bloque y practica en voz alta o grabándote: el guion escrito te sirve de mapa."
+      },
+      "patron": {
+        "texto": "Cinco bloques de una intervención:",
+        "formula": [
+          {
+            "texto": "My topic today is school start times.",
+            "nota": "introducción: el tema"
+          },
+          {
+            "texto": "Firstly, … Secondly, …",
+            "nota": "dos argumentos con su razón"
+          },
+          {
+            "texto": "Suppose schools started at nine, …",
+            "nota": "hipótesis: suppose + pasado, would"
+          },
+          {
+            "texto": "Admittedly, … However, …",
+            "nota": "concesión y vuelta a tu postura"
+          },
+          {
+            "texto": "In short, …",
+            "nota": "cierre con tu postura"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In resume, a later start is a good idea.",
+          "correcto": "In short, a later start is a good idea.",
+          "explicacion": "Resume en inglés es un verbo o un currículum, no «en resumen». Para cerrar se dice in short, in conclusion o to sum up."
+        },
+        {
+          "incorrecto": "Suppose schools would start at nine, students would be calmer.",
+          "correcto": "Suppose schools started at nine, students would be calmer.",
+          "explicacion": "Después de suppose se usa pasado simple para la hipótesis; would solo va en el resultado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara ensaya con Carlos una charla sobre el horario del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Listen to my introduction: My topic today is whether schools should start later.",
+            "traduccion": "Escucha mi introducción: Mi tema de hoy es si los colegios deberían empezar más tarde."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good! What are your two arguments?",
+            "traduccion": "¡Bien! ¿Cuáles son tus dos argumentos?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Firstly, teenagers need more sleep. Secondly, mornings would be calmer.",
+            "traduccion": "En primer lugar, los adolescentes necesitan dormir más. En segundo lugar, las mañanas serían más tranquilas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Add a point for the other side: admittedly, some parents would have to change their schedules.",
+            "traduccion": "Añade un punto para el otro lado: es cierto que algunos padres tendrían que cambiar sus horarios."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le sugiere Carlos que añada?",
+          "opciones": [
+            {
+              "es": "Un punto para el otro lado sobre los horarios de los padres."
+            },
+            {
+              "es": "Un tercer argumento sobre el sueño."
+            },
+            {
+              "es": "Un final con agradecimientos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos le propone una concesión: reconocer que algunos padres tendrían que cambiar sus horarios."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Bloque",
+          "Estructura útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Introducción"
+            },
+            {
+              "texto": "My topic today is… / I'd like to talk about…"
+            }
+          ],
+          [
+            {
+              "texto": "Argumentos"
+            },
+            {
+              "texto": "Firstly… / Secondly… + razón"
+            }
+          ],
+          [
+            {
+              "texto": "Hipótesis"
+            },
+            {
+              "texto": "Suppose… + pasado, … would…"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Admittedly… However…"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "In short, … / To sum up, …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n5.class-100": {
+      "explicacion": {
+        "titulo": "Resolver un caso nuevo con todo el nivel",
+        "texto": "En el desempeño final no hay una sola estructura: cada función pide la suya. Contar un cambio: used to + verbo base para el hábito pasado y has been + -ing desde un momento hasta hoy. Imaginar otra situación: if + had + participio, would + verbo base, o wish + had + participio. Reportar a dos personas: told us that… / said that… con un paso atrás en el tiempo. Argumentar con cautela: in my view, arguably, admittedly… however. Por último, registra una revisión: qué cambiaste y por qué. Lee los datos del caso, planifica un párrafo por función y escribe entre 130 y 170 palabras."
+      },
+      "patron": {
+        "texto": "Cinco funciones, cinco estructuras:",
+        "formula": [
+          {
+            "texto": "The club used to open… but since January it has been opening…",
+            "nota": "contar un cambio"
+          },
+          {
+            "texto": "If the club had asked, it would still be open.",
+            "nota": "hipótesis o deseo: if + had, would / wish + had"
+          },
+          {
+            "texto": "The director told us that… Mr Lee said that…",
+            "nota": "reportar lo que dijeron dos personas"
+          },
+          {
+            "texto": "In my view, this is arguably a mistake. Admittedly… However…",
+            "nota": "argumentar con cautela"
+          },
+          {
+            "texto": "Final revision: I changed soon to by March.",
+            "nota": "registrar una revisión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Since January, it opens only on weekdays.",
+          "correcto": "Since January, it has been opening only on weekdays.",
+          "explicacion": "Since + punto de inicio hasta hoy pide present perfect (aquí, continuo). El presente simple no sirve."
+        },
+        {
+          "incorrecto": "I wish they would have asked for help earlier.",
+          "correcto": "I wish they had asked for help earlier.",
+          "explicacion": "Para lamentar el pasado se usa wish + had + participio, nunca would have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia hablan del cambio de horario del club juvenil de su barrio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Did you hear? The club used to open on Saturdays, but now it only opens on weekdays.",
+            "traduccion": "¿Te enteraste? El club solía abrir los sábados, pero ahora solo abre entre semana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The director told us that the club had run out of money.",
+            "traduccion": "La directora nos dijo que el club se había quedado sin dinero."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I wish they had asked the town for help earlier.",
+            "traduccion": "Ojalá hubieran pedido ayuda a la ciudad antes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Arguably it's a mistake, but admittedly, money is a real problem.",
+            "traduccion": "Podría decirse que es un error, pero es cierto que el dinero es un problema real."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué lamenta Leo?",
+          "opciones": [
+            {
+              "es": "Que el club no pidiera ayuda a la ciudad antes."
+            },
+            {
+              "es": "Que el club abra solo los sábados."
+            },
+            {
+              "es": "Que la directora haya cambiado de trabajo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «I wish they had asked the town for help earlier»: lamenta que el club no pidiera ayuda a tiempo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Contar un cambio"
+            },
+            {
+              "texto": "used to / has been + -ing"
+            },
+            {
+              "texto": "It used to open… It has been opening…"
+            }
+          ],
+          [
+            {
+              "texto": "Imaginar"
+            },
+            {
+              "texto": "if + had, would / wish + had"
+            },
+            {
+              "texto": "If it had asked, it would be open."
+            }
+          ],
+          [
+            {
+              "texto": "Reportar"
+            },
+            {
+              "texto": "told us that / said that"
+            },
+            {
+              "texto": "The director told us that…"
+            }
+          ],
+          [
+            {
+              "texto": "Argumentar con cautela"
+            },
+            {
+              "texto": "in my view, arguably, admittedly"
+            },
+            {
+              "texto": "It is arguably a mistake."
+            }
+          ],
+          [
+            {
+              "texto": "Revisar"
+            },
+            {
+              "texto": "I changed … to … because …"
+            },
+            {
+              "texto": "I changed soon to by March."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

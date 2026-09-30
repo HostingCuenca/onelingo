@@ -9,22 +9,18 @@
     "en.n4.class-66": {
       "explicacion": {
         "titulo": "Futuro en curso o futuro completado",
-        "texto": "En una predicción puedes mirar la acción desde dentro o desde fuera. Will be + gerundio (future continuous) presenta una acción en curso en un momento futuro: At nine tomorrow, the robot will be cleaning = a esa hora estará a mitad. Will have + participio (future perfect) presenta una acción terminada antes de ese momento: By nine tomorrow, the robot will have cleaned = a esa hora ya habrá acabado. Señales: this time next year, at + hora, in + año indican acción en curso; by + fecha indica algo terminado antes."
+        "texto": "En una predicción puedes mirar la acción desde dentro o desde fuera. Will be + gerundio (future continuous) presenta una acción en curso en un momento futuro: At nine tomorrow, the robot will be cleaning = a esa hora estará a mitad. Will have + participio (future perfect) presenta una acción terminada antes de ese momento: By nine tomorrow, the robot will have cleaned = a esa hora ya habrá acabado. Señales: this time next year, at + hora, in + año suelen indicar una acción en curso; by + fecha suele indicar algo terminado antes."
       },
       "patron": {
         "texto": "En curso o terminado en un momento futuro:",
         "formula": [
           {
-            "texto": "At nine tomorrow, the robot",
-            "nota": "momento futuro + sujeto"
+            "texto": "At nine tomorrow, the robot will be cleaning the lab.",
+            "nota": "momento futuro + will be + gerundio: a esa hora la acción está en curso"
           },
           {
-            "texto": "will be cleaning",
-            "nota": "will be + gerundio: en curso a esa hora"
-          },
-          {
-            "texto": "the lab. By nine, it will have cleaned it.",
-            "nota": "will have + participio: terminado antes de las nueve"
+            "texto": "By nine tomorrow, the robot will have cleaned the lab.",
+            "nota": "by + momento + will have + participio: terminada antes de esa hora"
           }
         ]
       },
@@ -164,7 +160,7 @@
           {
             "hablante": "Sara",
             "texto": "I hope so. This time next year, I will be using it every day.",
-            "traduccion": "Eso espero. Dentro de un año, a estas alturas, lo estaré usando cada día."
+            "traduccion": "Eso espero. Dentro de un año, por estas fechas, lo estaré usando cada día."
           }
         ],
         "item": {
@@ -178,7 +174,7 @@
               "es": "Dentro de dos años."
             },
             {
-              "es": "Dentro de un año, a estas alturas."
+              "es": "Dentro de un año, por estas fechas."
             }
           ],
           "respuesta": 0,
@@ -290,7 +286,7 @@
               "es": "Un robot estará ayudando a cada paciente."
             },
             {
-              "es": "Los médicos habrán cerrado los pueblos."
+              "es": "Un robot habrá sustituido a los médicos."
             }
           ],
           "respuesta": 0,
@@ -383,8 +379,8 @@
           },
           {
             "hablante": "Ana",
-            "texto": "And will you have changed your habits?",
-            "traduccion": "¿Y habrás cambiado tus hábitos?"
+            "texto": "And will you have saved money by then?",
+            "traduccion": "¿Y habrás ahorrado dinero para entonces?"
           },
           {
             "hablante": "Tom",
@@ -505,8 +501,8 @@
           },
           {
             "hablante": "Carlos",
-            "texto": "OK, I agree. Let us put solar homes on our list.",
-            "traduccion": "Vale, estoy de acuerdo. Pongamos las casas solares en nuestra lista."
+            "texto": "OK, I agree. Let us put electric cars on our list.",
+            "traduccion": "Vale, estoy de acuerdo. Pongamos los coches eléctricos en nuestra lista."
           }
         ],
         "item": {
@@ -514,17 +510,17 @@
           "consigna": "Según el diálogo, ¿qué deciden poner en su lista?",
           "opciones": [
             {
-              "es": "Las casas solares."
+              "es": "Los coches eléctricos."
             },
             {
               "es": "Los taxis robot."
             },
             {
-              "es": "Los coches eléctricos."
+              "es": "Las casas solares."
             }
           ],
           "respuesta": 0,
-          "feedback": "Carlos termina diciendo «Let us put solar homes on our list». Los taxis robot fue su primera opinión, pero Sara la duda."
+          "feedback": "Carlos termina diciendo «Let us put electric cars on our list», porque Sara duda de los taxis robot y dice que los coches eléctricos llegarán antes. Las casas solares solo aparecen en la pregunta inicial."
         }
       },
       "tabla": {
@@ -568,5 +564,21 @@
         ]
       }
     }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Distractores de C66 (guiada 1) y C68 redibujados: ya no son copias de los modelos de enseñanza; se eliminan opciones absurdas de relleno (teléfono/taxis/'sell the shops', etc.).",
+      "Paráfrasis de escucha ajustadas: C66 p1 (working on the device / already fixed / start after six), C68 e1 (having robots pick the fruit), C68 p1, C70 p2, C69 e2, C65 e2.",
+      "Glosas sin relleno: go on, might, point, guest, host, engineer, expert, advice, coach, shoes, reason, keep, stop/remember/try/sleep; 'plan' = plan de acción (el validador rechaza el calco idéntico) y 'robot (máquina)' se mantiene por la misma razón.",
+      "C69 e1: la rúbrica rechazaba el propio modelo (grupo 'will be working' no casaba con 'will probably be working'); se corrige con variantes 'be working/living/using…'.",
+      "C65 e1 ampliado de 16 a ~48 palabras con rúbrica de 4 grupos (reconocer, try+gerundio, segundo consejo, promesa/plan).",
+      "C62 e1 (went on studying English) y C64 guiada 2 (tried eating fruit) corregidos para evitar dobles lecturas; C62 tabla con 'never forget seeing'.",
+      "C65 diálogo: 'forget to set my alarm' natural; 'shoes' = zapatos; C66–C67 'a estas alturas' sustituido por 'por estas fechas'.",
+      "C70 diálogo: el acuerdo final (coches eléctricos) ahora se sigue de la duda de Sara.",
+      "Sin posiciones de opción en feedback; builder OK."
+    ]
   }
 }

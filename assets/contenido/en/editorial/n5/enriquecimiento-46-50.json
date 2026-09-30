@@ -132,13 +132,13 @@
           },
           {
             "hablante": "Tom",
-            "texto": "Had I known, I would have asked him too.",
-            "traduccion": "De haberlo sabido, también se lo habría pedido a él."
+            "texto": "I didn't pass. Had I known, I would have asked him too.",
+            "traduccion": "Yo no aprobé. De haberlo sabido, yo también se lo habría pedido a él."
           },
           {
             "hablante": "Ana",
-            "texto": "If you had asked, he would be helping you now.",
-            "traduccion": "Si se lo hubieras pedido, ahora te estaría ayudando a ti."
+            "texto": "If you had asked him, you would be happier now.",
+            "traduccion": "Si se lo hubieras pedido, ahora estarías más contento."
           }
         ],
         "item": {
@@ -363,8 +363,8 @@
           },
           {
             "hablante": "Leo",
-            "texto": "But if I had stayed here last year, I would be with my family now.",
-            "traduccion": "Pero si me hubiera quedado aquí el año pasado, ahora estaría con mi familia."
+            "texto": "But I would miss my family. If I had taken the stable job last year, I would be living near them now.",
+            "traduccion": "Pero echaría de menos a mi familia. Si hubiera aceptado el trabajo estable el año pasado, ahora estaría viviendo cerca de ellos."
           },
           {
             "hablante": "Mia",
@@ -391,5 +391,18 @@
         }
       }
     }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C46: consigna de completar desambiguada («carrera universitaria», no career); rúbrica de escribir admite today, had taken/followed/heard e «hadn't ignored».",
+      "C47: último turno del diálogo corregido (antes «he would be helping you now» era ilógico); Tom dice que no aprobó y Ana responde con un 2→3 coherente.",
+      "C48: aceptada «choice» en completar (sinónimo natural de decision).",
+      "C49: escribir de evaluación ampliado de 29 a 69 palabras (4 condicionales, razones; rango 40-110, 4 grupos con variantes) y 2 variantes aceptadas de 58-59 palabras; completar multiparte con traducción para que weren't/were no sea ambiguo; rúbrica de práctica más flexible (hadn't, now/today).",
+      "C50: escribir de evaluación ampliado de 24 a 65 palabras (dos opciones con consecuencias, hipótesis mixta, If I were you, consejo razonado; rango 40-110) y 2 variantes de 59-61 palabras; diálogo de situación coherente (Leo duda entre ofertas y compara con el trabajo estable del año pasado).",
+      "Rúbricas simuladas con la lógica de correccion.dart: modelo y variantes pasan."
+    ]
   }
 }

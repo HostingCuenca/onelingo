@@ -404,7 +404,7 @@
         },
         "choices": [
           {
-            "text": "You have a point, but I would say it was only fairly biased."
+            "text": "You have a point, but I would say it gave both sides to some extent."
           },
           {
             "text": "You are totally wrong."
@@ -422,7 +422,7 @@
           "variantSeed": "0",
           "variantId": "en.n5.c80.p02.seed-0",
           "feedback": {
-            "es": "Concede el punto con you have a point y matiza con fairly; las otras respuestas rechazan o exageran."
+            "es": "Concede el punto con you have a point y matiza con I would say… to some extent; las otras respuestas rechazan o exageran."
           },
           "text": "Friend: «The news was completely biased.»"
         },
@@ -431,7 +431,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:6d55bf9a73d0432ee609a101b75e46344abc90fd15f9f3c86d3525f278762803"
+        "contentHash": "sha256:fe99cb14857efa8ef0c12793ba88ef4dbe3e055b1e68b99236cf4de12bdbaf86"
       },
       {
         "id": "en.n5.c80.p03",
@@ -603,13 +603,13 @@
         "id": "en.n5.c80.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe tu valoración de la cobertura: opinión suavizada, evidencia y una concesión."
+          "es": "Escribe tu valoración: opinión suavizada, evidencia, concesión y conclusión."
         },
         "answer": {
-          "text": "I would say the coverage was fairly balanced because it gave both sides. You have a point about the headline: it was rather loaded. On balance, the report was fair.",
+          "text": "I would say the coverage was fairly balanced because it gave both sides of the story. The council and the residents both explained their reasons. You have a point about the headline: it was rather loaded. That said, the report named its sources, so to some extent the criticism is not fair. On balance, the coverage was fair.",
           "accepted": [
-            "I would say the coverage was fairly balanced because it gave both sides. You have a point about the headline: it was rather loaded. On balance, the report was fair.",
-            "In my opinion, the coverage was fairly balanced because it gave both sides. That said, to some extent the headline was loaded, and you have a point about it. On balance, it was fair."
+            "I would say the coverage was fairly balanced because it gave both sides of the story. The council and the residents both explained their reasons. You have a point about the headline: it was rather loaded. That said, the report named its sources, so to some extent the criticism is not fair. On balance, the coverage was fair.",
+            "In my opinion, the coverage was fairly balanced because it gave both sides. That said, to some extent the headline was loaded, and you have a point about it. The report named both sources. On balance, it was fair."
           ]
         },
         "choices": [],
@@ -623,19 +623,20 @@
           "variantSeed": "0",
           "variantId": "en.n5.c80.e04.seed-0",
           "feedback": {
-            "es": "Una buena valoración abre con una opinión suave, da evidencia, concede un punto y termina con on balance."
+            "es": "Una buena valoración abre con una opinión suave, da evidencia, concede un punto, matiza y termina con on balance."
           },
-          "text": "Caso: una noticia sobre el cierre de una piscina. Tiene dos fuentes (el ayuntamiento y los vecinos), pero el titular dice «Ayuntamiento deja sin piscina a los niños». Escribe 3 frases: tu valoración suavizada, la evidencia y una concesión.",
+          "text": "Caso: una noticia sobre el cierre de una piscina. Tiene dos fuentes (el ayuntamiento y los vecinos), pero el titular dice «Ayuntamiento deja sin piscina a los niños». Escribe 4 o 5 frases: tu valoración suavizada, la evidencia, una concesión, un matiz y una conclusión.",
           "scoring": {
             "wordRange": [
-              20,
-              70
+              35,
+              110
             ],
             "evidenceGroups": [
               [
                 "I would say",
                 "In my opinion",
-                "I think"
+                "I think",
+                "I believe"
               ],
               [
                 "fairly",
@@ -643,16 +644,25 @@
                 "to some extent"
               ],
               [
-                "both sides"
+                "both sides",
+                "two sides",
+                "both sources"
               ],
               [
                 "You have a point",
+                "That criticism is valid",
+                "I agree",
+                "you are right"
+              ],
+              [
                 "That said",
-                "I agree"
+                "However",
+                "but"
               ],
               [
                 "On balance",
-                "Overall"
+                "Overall",
+                "In conclusion"
               ]
             ]
           }
@@ -662,7 +672,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:5713c1501b913dc966a19b0f6ac16cd50867d7a2a9225c1d23d9c10a7c553251"
+        "contentHash": "sha256:42ecc8e19e6decfc02b46a26b77a84be46f35acb59613eaf3fb91e724651a3db"
       }
     ],
     "review": [
@@ -797,7 +807,8 @@
           "accepted": [
             "You have a point, but it was fairly balanced.",
             "That criticism is valid; that said, the coverage was fairly balanced.",
-            "You have a point. That said, it was fairly balanced."
+            "You have a point. That said, it was fairly balanced.",
+            "You are right, but I would say it was fairly balanced."
           ]
         },
         "choices": [],
@@ -812,14 +823,47 @@
           "feedback": {
             "es": "Se concede con you have a point y se matiza con fairly: la crítica es válida pero no total."
           },
-          "text": "Tu amigo dice que la cobertura fue parcial. Concede que su crítica es válida, pero matiza."
+          "text": "Tu amigo dice que la cobertura fue parcial. Concede que su crítica es válida, pero matiza.",
+          "scoring": {
+            "wordRange": [
+              6,
+              30
+            ],
+            "evidenceGroups": [
+              [
+                "you have a point",
+                "that criticism is valid",
+                "your criticism is valid",
+                "you are right",
+                "that is a valid point",
+                "criticism is valid"
+              ],
+              [
+                "but",
+                "that said",
+                "however",
+                "although",
+                "though",
+                "nevertheless"
+              ],
+              [
+                "fairly",
+                "rather",
+                "to some extent",
+                "somewhat",
+                "partly",
+                "balanced",
+                "fair"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:d14a542f07efdfaef584d9ffb9eba64bb60fd09dae7aa9c3fb578a06b3f24787"
+        "contentHash": "sha256:80210b54745134e45fb589730a40657c3a71b6670502b5e6f59e28185ff94a79"
       }
     ]
   },

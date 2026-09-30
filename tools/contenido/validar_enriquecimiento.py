@@ -191,7 +191,12 @@ def palabras_no_ensenadas(cid: str, e: dict, conocidas: set[str]) -> list[str]:
     textos += [x.get("en", "") for x in e.get("ejemplos", [])]
     faltan = set()
     for t in textos:
-        faltan |= {w for w in validar_ruta.palabras(t) if not validar_ruta.conocida(w, conocidas)}
+        faltan |= {
+            w for w in validar_ruta.palabras(t)
+            # Afijos citados en tablas de formación de palabras («-ful», «un-»).
+            if not (w.startswith("-") or w.endswith("-"))
+            and not validar_ruta.conocida(w, conocidas)
+        }
     return sorted(faltan)
 
 
@@ -224,7 +229,10 @@ def validar(path: Path, unidades: dict[str, dict] | None = None) -> tuple[list[s
         errores.append(f"{path.name}: clases {sorted(clases)} no coinciden con el rango {sorted(esperadas)}")
     for cid, e in clases.items():
         err, av = validar_clase(cid, e, unidades.get(cid))
-        if cid in conocidas:
+        # Los bloques de autoría compacta ya pasaron el control de léxico
+        # (más estricto) de construir_bloque.py.
+        compacto = (path.parent / "autor" / f"bloque-{rango.get('start', 0):02d}-{rango.get('end', 0):02d}.json").exists()
+        if cid in conocidas and not compacto:
             faltan = palabras_no_ensenadas(cid, e, conocidas[cid])
             if faltan:
                 err.append(f"{cid}: palabras inglesas no enseñadas antes: {', '.join(faltan)}")

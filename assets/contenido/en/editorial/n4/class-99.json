@@ -235,7 +235,8 @@
         "answer": {
           "text": "on",
           "accepted": [
-            "on"
+            "on",
+            "in"
           ]
         },
         "choices": [],
@@ -248,10 +249,10 @@
           "variantSeed": "0",
           "variantId": "en.n4.c99.pg02.seed-0",
           "feedback": {
-            "es": "La expresión es on time («a tiempo»), en la segunda parte del tercer condicional."
+            "es": "Las expresiones on time (puntual) e in time (con tiempo suficiente) traducen «a tiempo» en la segunda parte del tercer condicional."
           },
           "hint": {
-            "es": "Es la preposición de «a tiempo»."
+            "es": "Piensa en «a tiempo»: la preposición que va antes de time."
           },
           "text": "If you had warned us, we would have arrived ___ time."
         },
@@ -260,7 +261,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:433ee761c1c784562c33a6e9ff62be66b882495d08913f9708f277c5d4999e95"
+        "contentHash": "sha256:c66c2e3097004938d12d912143834fd1e783c0a2cf44143b549875368f784822"
       },
       {
         "id": "en.n4.c99.pg03",
@@ -475,14 +476,14 @@
         "id": "en.n4.c99.e01",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe un mensaje breve: problema, hipótesis y petición de reembolso."
+          "es": "Escribe tu mensaje a la Sra. López: problema, hipótesis, petición y cierre."
         },
         "answer": {
-          "text": "Dear Ms Lopez, the bus was delayed, so I waited at the station for an hour. If the school had told me, I would have taken the train. Could you please send me a refund?",
+          "text": "Dear Ms Lopez, I am writing to explain a problem with our exchange trip. Our plane arrived late, so we missed the bus. The host family had not received our message, so nobody met us and we waited for two hours. If the school had warned the family, they would have met us at the airport. Could you please send us a refund for the bus ticket? Thank you for your time. Sincerely, Mia.",
           "accepted": [
-            "Dear Ms Lopez, the bus was delayed, so I waited at the station for an hour. If the school had told me, I would have taken the train. Could you please send me a refund?",
-            "Dear Ms Lopez, the bus was late, so I waited at the station for an hour. If the school had warned me, I would have taken the train. Could you please send me a refund?",
-            "Dear Ms Lopez, the bus was delayed, so I waited for an hour at the station. If the school had told me, I would have gone by train. I would appreciate it if you could send me a refund."
+            "Dear Ms Lopez, I am writing to explain a problem with our exchange trip. Our plane arrived late, so we missed the bus. The host family had not received our message, so nobody met us and we waited for two hours. If the school had warned the family, they would have met us at the airport. Could you please send us a refund for the bus ticket? Thank you for your time. Sincerely, Mia.",
+            "Dear Ms Lopez, I am writing to explain a problem with our exchange trip. Our plane was late, so we missed the bus. The host family had not received our message, so nobody met us and we waited for two hours. If the school had told the family, they would have waited for us at the airport. I would appreciate it if you could send us a refund for the bus ticket. Thank you for your time. Sincerely, Mia.",
+            "Dear Ms Lopez, I am writing to explain a problem with our exchange trip. Our plane arrived late, so we missed the bus. The family had not received our message, so nobody met us and we waited for two hours. If the school had warned them, they would have met us at the airport. Could you please send us a refund for the ticket? Thank you for your time. Sincerely, Mia."
           ]
         },
         "choices": [],
@@ -495,33 +496,47 @@
           "variantSeed": "0",
           "variantId": "en.n4.c99.e01.seed-0",
           "feedback": {
-            "es": "El mensaje completo abre con Dear, cuenta lo ocurrido en pasado, añade la hipótesis (if + had + participio, would have) y cierra con una petición educada."
+            "es": "El mensaje completo abre con Dear, cuenta lo ocurrido en pasado (arrived late, had not received), plantea la hipótesis (if + had + participio, would have met), pide con cortesía y cierra con Thank you y Sincerely."
           },
-          "text": "Datos: el autobús se retrasó y Mia esperó una hora en la estación. Si la escuela hubiera avisado, habría ido en tren. Pide un reembolso del billete.",
+          "text": "Datos: escribe a la Sra. López. El avión llegó tarde y perdieron el autobús. La familia anfitriona no había recibido el mensaje, así que nadie los recibió y esperaron dos horas. Hipótesis: si la escuela hubiera avisado a la familia, los habrían recibido en el aeropuerto. Pide un reembolso del billete del autobús y cierra con una despedida formal.",
           "scoring": {
             "wordRange": [
-              24,
-              60
+              50,
+              110
             ],
             "evidenceGroups": [
               [
                 "dear"
               ],
               [
-                "was delayed",
+                "i am writing to",
+                "i'm writing to"
+              ],
+              [
+                "arrived late",
                 "was late",
-                "arrived late"
+                "was delayed",
+                "landed late"
               ],
               [
-                "if the school had told me",
-                "if the school had warned me",
-                "if you had told me",
-                "if i had known"
+                "had not received",
+                "hadn't received",
+                "had not got",
+                "had not been told"
               ],
               [
-                "would have taken the train",
-                "would have gone by train",
-                "would have taken a train"
+                "if the school had",
+                "if they had",
+                "if you had",
+                "if someone had",
+                "if we had"
+              ],
+              [
+                "would have met",
+                "would have waited",
+                "would have picked",
+                "would have been waiting",
+                "would have arrived"
               ],
               [
                 "could you please",
@@ -530,6 +545,10 @@
               ],
               [
                 "refund"
+              ],
+              [
+                "sincerely",
+                "thank you"
               ]
             ]
           }
@@ -539,7 +558,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:b1ee8989c17aebf28edc049013ae8146de9deb72c76bec6ed4c23a94db92c956"
+        "contentHash": "sha256:0228f6142b35be6574c35aa8852b5eeb8d71733511ae4e20f08c132bca2dea56"
       },
       {
         "id": "en.n4.c99.e02",
@@ -682,14 +701,15 @@
           "scoring": {
             "parts": 3,
             "minimumCorrect": 3
-          }
+          },
+          "text": "Traducción de las frases: «Estimada Sra. López, le escribo sobre nuestro viaje de intercambio.» «Si hubieran llamado, habríamos encontrado una solución.» «Le agradecería que pudiera cambiar la fecha.»"
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:aaa6c85fd063ce5efee57441705acb4ab91e2285ea6cde59a31819883b81137c"
+        "contentHash": "sha256:edd6f2cdbfc850d8457fb92aabca70047f1687a00c9f17c1cfe6cdd92e0fcedd"
       }
     ],
     "review": [
