@@ -24,10 +24,16 @@ LIBRARY_OUT = ROOT / "assets/contenido/en/exercise-library.json"
 ACTIVATION_OUT = ROOT / "assets/contenido/en/exercise-activation.json"
 COURSE_OUT = ROUTE_DIR / "curso.json"
 VERSION = "2026.09.30-en-pulido.1"
-LEVELS = (
-    {"id": "n1", "count": 100, "cefr": "A1", "internal": 1, "first_order": 7},
-    {"id": "n2", "count": 100, "cefr": "A2", "internal": 2, "first_order": 107},
-    {"id": "n3", "count": 90, "cefr": "B1", "internal": 3, "first_order": 207},
+# Corte publicado: clases aprobadas (GO) por nivel, siempre contiguas desde C1.
+# Ampliarlo es una decisión explícita tras la revisión independiente.
+CUT = {"n1": 100, "n2": 100, "n3": 90}
+CEFR = {"n1": "A1", "n2": "A2", "n3": "B1", "n4": "B1", "n5": "B2", "n6": "B2",
+        "n7": "B2", "n8": "C1", "n9": "C1", "n10": "C1"}
+LEVELS = tuple(
+    {"id": level, "count": count, "cefr": CEFR[level], "internal": int(level[1:]),
+     "first_order": 7 + 100 * (int(level[1:]) - 1)}
+    for level, count in CUT.items()
+    if count > 0
 )
 
 

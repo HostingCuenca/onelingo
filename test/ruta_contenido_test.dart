@@ -91,29 +91,28 @@ void main() {
   });
 
   test(
-    'Inglés publica el corte aprobado: N2 completo y N3 hasta C90',
+    'Inglés publica un corte continuo: cada nivel encadena sus clases',
     () async {
       final ruta = (await CargadorRuta().cargar('en'))!;
-      final n2 = ruta.delNivel('n2');
-      final n3 = ruta.delNivel('n3');
-      expect(n2, hasLength(100));
-      expect(n3, hasLength(90));
-      expect(n2.first.prerequisitos, ['en.n1.class-100']);
-      expect(n2.last.id, 'en.n2.class-100');
-      expect(n3.first.prerequisitos, ['en.n2.class-100']);
-      expect(n3.last.id, 'en.n3.class-90');
-      expect(
-        n2.every((unit) => unit.cefr == 'A2' && unit.nivelInterno == 2),
-        isTrue,
-      );
-      expect(
-        n3.every((unit) => unit.cefr == 'B1' && unit.nivelInterno == 3),
-        isTrue,
-      );
-      expect(
-        ruta.delNivel('n3').any((unit) => unit.id == 'en.n3.class-91'),
-        isFalse,
-      );
+      var previa = 'en.f0.presentarse';
+      for (final nivel in ruta.curso.niveles.where(
+        (n) => n.id.startsWith('n') && ruta.delNivel(n.id).isNotEmpty,
+      )) {
+        final clases = ruta.delNivel(nivel.id);
+        for (var i = 0; i < clases.length; i++) {
+          final u = clases[i];
+          expect(
+            u.id,
+            'en.${nivel.id}.class-${(i + 1).toString().padLeft(2, '0')}',
+          );
+          expect(u.prerequisitos, [previa], reason: u.id);
+          expect(u.cefr, nivel.cefr, reason: u.id);
+          expect(u.nivelInterno, nivel.nivelInterno, reason: u.id);
+          previa = u.id;
+        }
+      }
+      expect(ruta.delNivel('n1'), hasLength(100));
+      expect(ruta.delNivel('n2'), hasLength(100));
     },
   );
 

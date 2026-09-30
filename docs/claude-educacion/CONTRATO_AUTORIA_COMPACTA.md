@@ -68,6 +68,13 @@ Campos comunes: `formato`, `consigna` (español, ≤ 90 caracteres, **única** e
 - Clase de cierre (múltiplo de 5): la evaluación mezcla lo del bloque (la herramienta asigna los conceptos).
 - Enriquecimiento: mismas reglas que `CONTRATO_ENRIQUECIMIENTO.md` (explicación ≥ 80 caracteres, 2 errores, diálogo 3–6 líneas con 2 personajes, ítem de 3 opciones que se responde leyendo el diálogo).
 
+## Trucos (del piloto N3 C91–95)
+
+- Un `texto` en español (datos para escribir) lleva `"textoIdioma": "es"`; si no, se revisa como inglés.
+- Cada frase de `ensenanza` debe contener una entrada del vocabulario **exactamente** (el plural «volunteers» no cuenta para «volunteer»): incluye la forma que usas.
+- No repitas en `relacionar` una respuesta ya usada en otro ítem de la misma sección.
+- Un `escuchar` no debe tener como respuesta la misma frase del audio copiada literal: pregunta por el sentido (quién, cuándo, por qué).
+
 ## Reglas de calidad para el autor (el revisor las verifica)
 
 - Una sola respuesta defendible por ítem; distractores plausibles y claramente incorrectos.
