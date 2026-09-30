@@ -14,5 +14,9 @@ python3 - <<'PY'
 import json, glob
 go = sum(len(json.load(open(f))["classes"]) for f in glob.glob("assets/contenido/en/editorial/n*/enriquecimiento-*.json")
          if json.load(open(f)).get("review", {}).get("status") == "GO")
-print(f"Clases enriquecidas con GO: {go}/290")
+import sys
+sys.path.insert(0, "tools/contenido")
+import generar_runtime_n1 as c
+total = sum(spec["count"] for spec in c.LEVELS)
+print(f"Clases enriquecidas con GO: {go} · clases publicadas: {total}")
 PY
