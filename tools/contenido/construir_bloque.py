@@ -514,6 +514,24 @@ def vocabulario_previo(nivel_num: int, antes_de: int) -> set[str]:
     return res
 
 
+LINEA_BASE_C1 = Path(__file__).resolve().parent / "linea-base-c1.json"
+
+
+def linea_base_c1(nivel_num: int, antes_de: int) -> tuple[set[str], set[str]]:
+    """Léxico y vocabulario anteriores a la clase según el estado previo al pase
+    C1 (congelado). Así las metas de un bloque no dependen de lo que otros
+    agentes reescriban en paralelo en bloques anteriores."""
+    lex = lexico_previo(8, 1)          # N1–N7, sin cambios en el pase
+    voc = vocabulario_previo(8, 1)
+    base = json.loads(LINEA_BASE_C1.read_text(encoding="utf-8"))["classes"]
+    for cid, d in base.items():
+        n, k = int(cid.split(".")[1][1:]), numero(cid)
+        if n < nivel_num or (n == nivel_num and k < antes_de):
+            lex |= set(d["lex"])
+            voc |= set(d["voc"])
+    return lex, voc
+
+
 def comprobar_c1(c: dict, cid: str, previo: set[str], nivel_num: int, mapa_clase: dict,
                  voc_previo: set[str]) -> list[str]:
     m = METAS_C1.get(nivel_num)
@@ -596,13 +614,20 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
     clases: list[dict] = []
     previos_bloque: list[str] = []
     lex = lexico_previo(nivel_num, ini)
-    voc_previo = vocabulario_previo(nivel_num, ini) if doc.get("pase") == "c1" else set()
+    pase_c1 = doc.get("pase") == "c1"
+    lex_nuevas: set[str] = set()
+    voc_previo: set[str] = set()
+    if pase_c1:
+        # Léxico: lo actual más la línea base (reescribir un bloque anterior no
+        # rompe los siguientes). «Nuevas»: contra la línea base congelada.
+        lex_nuevas, voc_previo = linea_base_c1(nivel_num, ini)
+        lex |= lex_nuevas
     for c in compactas:
         cid = f"en.{nivel}.class-{c['n']:02d}"
         errores += comprobar_lexico(c, cid, lex)
         errores += comprobar_rubricas(c, cid)
-        if doc.get("pase") == "c1":
-            errores += comprobar_c1(c, cid, lex, nivel_num, mapa.get(cid), voc_previo)
+        if pase_c1:
+            errores += comprobar_c1(c, cid, lex_nuevas, nivel_num, mapa.get(cid), voc_previo)
         try:
             clase = construir_clase(c, nivel_num=nivel_num, mapa=mapa, previos_bloque=list(previos_bloque))
         except (ErrorAutoria, KeyError, ValueError, TypeError) as exc:
@@ -612,15 +637,18 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
         previos_bloque.append(clase["concepts"][0])
         # Lo enseñado y practicado en esta clase cuenta para las siguientes.
         voc_previo |= {" ".join(sorted(palabras(v["en"]))) for v in c["vocabulario"]}
+        de_la_clase: set[str] = set()
         for v in c["vocabulario"]:
-            lex |= palabras(v["en"])
+            de_la_clase |= palabras(v["en"])
         for t in c["ensenanza"]:
-            lex |= palabras(t["en"])
-        lex |= textos_ensenanza_enriquecimiento(enriquecimiento(c))
+            de_la_clase |= palabras(t["en"])
+        de_la_clase |= textos_ensenanza_enriquecimiento(enriquecimiento(c))
         for clave in POOLS:
             for it in c["ejercicios"][clave]:
                 for t in textos_ingleses_item(it):
-                    lex |= palabras(t)
+                    de_la_clase |= palabras(t)
+        lex |= de_la_clase
+        lex_nuevas |= de_la_clase
         # Enriquecimiento con la validación común (unidad sintética).
         unidad = {"pasos": [{"tipo": "ejemplos", "items": [{"texto": t["en"]} for t in c["ensenanza"]]}]}
         err, _ = ve.validar_clase(cid, enriquecimiento(c), unidad)
