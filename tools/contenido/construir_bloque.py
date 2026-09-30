@@ -171,7 +171,8 @@ def textos_ingleses_item(it: dict) -> list[str]:
         textos += [o for o in it.get("opciones", []) if isinstance(o, str)]
     if isinstance(it.get("respuesta"), str):
         textos.append(it["respuesta"])
-    textos += it.get("aceptadas", [])
+    # Las «aceptadas» no se muestran: solo corrigen lo que escribe el alumno,
+    # que puede usar sinónimos correctos no enseñados (cozy, ocean…).
     for campo in ("audio", "texto"):
         if it.get(campo) and it.get("textoIdioma", "en") == "en":
             textos.append(it[campo])
@@ -179,7 +180,6 @@ def textos_ingleses_item(it: dict) -> list[str]:
     textos += it.get("frases", [])
     for parte in it.get("partes", []):
         textos.append(parte.get("respuesta", ""))
-        textos += parte.get("aceptadas", [])
     return textos
 
 
