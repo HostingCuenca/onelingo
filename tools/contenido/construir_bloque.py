@@ -53,8 +53,10 @@ def palabras(texto: str) -> set[str]:
 
 def raices(w: str) -> set[str]:
     res = {w}
-    if w.endswith("'s"):
-        res.add(w[:-2])
+    # Contracciones: you'd, he'll, we've, they're, I'm, Mia's → forma base.
+    for c in ("'s", "'d", "'ll", "'ve", "'re", "'m"):
+        if w.endswith(c) and len(w) > len(c):
+            res.add(w[: -len(c)])
     for suf, reps in (("ies", ("y",)), ("ied", ("y",)), ("iest", ("y",)), ("ier", ("y",)),
                       ("es", ("", "e")), ("s", ("",)), ("ed", ("", "e")), ("d", ("",)),
                       ("ing", ("", "e")), ("est", ("", "e")), ("er", ("", "e")), ("ly", ("",)),
