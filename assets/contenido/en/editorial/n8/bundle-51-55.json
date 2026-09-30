@@ -494,7 +494,9 @@
               "accepted": [
                 "Tom says it is great, but he means it is bad.",
                 "Tom says the food is great, but he means he dislikes it.",
-                "Tom says the food is great, but he means it is not good."
+                "Tom says the food is great, but he means it is not good.",
+                "Tom says the food is great, but he really means it is bad.",
+                "He says it is great, but he means he does not like it."
               ]
             },
             "choices": [],
@@ -509,14 +511,59 @@
               "feedback": {
                 "es": "El gesto contradice la frase: Tom deja la comida en el plato, así que quiere decir que no le gusta."
               },
-              "text": "TOM: The food is great. (He leaves the food on his plate.)"
+              "text": "TOM: The food is great. (He leaves the food on his plate.)",
+              "scoring": {
+                "wordRange": [
+                  6,
+                  35
+                ],
+                "evidenceGroups": [
+                  [
+                    "tom says",
+                    "he says"
+                  ],
+                  [
+                    "but he means",
+                    "but he really means",
+                    "but he actually means",
+                    "but what he means is",
+                    "but what he really means",
+                    "but he means that",
+                    "but he wants to say",
+                    "but he really thinks",
+                    "but he thinks",
+                    "but in fact he"
+                  ],
+                  [
+                    "it is bad",
+                    "is bad",
+                    "it is not good",
+                    "not good",
+                    "it is not great",
+                    "it is not tasty",
+                    "it is terrible",
+                    "it is awful",
+                    "it is disgusting",
+                    "he dislikes",
+                    "he does not like",
+                    "he did not like",
+                    "he hates",
+                    "he is not enjoying",
+                    "the food is not",
+                    "the food is terrible",
+                    "the food is awful",
+                    "the food is disgusting",
+                    "he is disappointed"
+                  ]
+                ]
+              }
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:a17b993e65de0cc9370061593fa268dda2d10b11a34da21a5cfce597ef9ad334"
+            "contentHash": "sha256:6393df156f797a3f0ec75cd062cd25d1ed4bea175da791735f1c56f9c83c2b92"
           }
         ],
         "evaluation": [
@@ -531,7 +578,7 @@
             },
             "choices": [
               {
-                "text": "He asks her to tell him about the project at once."
+                "text": "He offers to cook her a fresh dinner while she talks."
               },
               {
                 "text": "He goes to bed before she finishes eating."
@@ -549,7 +596,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c51.e01.seed-0",
               "feedback": {
-                "es": "Tom dice que lo entiende y guarda la cena en el horno: un gesto en lugar de más preguntas."
+                "es": "Tom dice que lo entiende y guarda la cena en el horno: un gesto en lugar de más preguntas; no cocina otra ni se va a dormir."
               },
               "audio": "In the scene, Sara comes home late and finds Tom still awake at the kitchen table. He asks whether the meeting went well. She answers that it was fine and that she is not hungry. After a long pause she says that the manager mentioned a new project, and that she would rather not talk about it tonight. Tom says that he understands, but he quietly puts her dinner in the oven.",
               "audioMode": "tts",
@@ -566,7 +613,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:7bc0771381d3616b651630c659de98300101cc28b978a17d46b6d956a15b014a"
+            "contentHash": "sha256:6b9acf4296a5a94d778f0944bfb52bb966332ee72d40f7c5cd84397f453dfcc6"
           },
           {
             "id": "en.n8.c51.e02",
@@ -582,10 +629,10 @@
                 "text": "That the meeting was not as fine as she says."
               },
               {
-                "text": "That she is thinking about what to cook for dinner."
+                "text": "That she is annoyed with Tom for waiting up for her."
               },
               {
-                "text": "That she has not understood Tom's question."
+                "text": "That she is too tired to answer the question."
               }
             ],
             "teaches": [],
@@ -597,7 +644,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c51.e02.seed-0",
               "feedback": {
-                "es": "La pausa contradice su «it was fine»: da a entender que algo del proyecto la preocupa."
+                "es": "La pausa contradice su «it was fine»: da a entender que algo del proyecto la preocupa, no que esté molesta con Tom ni cansada."
               },
               "audio": "In the scene, Sara comes home late and finds Tom still awake at the kitchen table. He asks whether the meeting went well. She answers that it was fine and that she is not hungry. After a long pause she says that the manager mentioned a new project, and that she would rather not talk about it tonight. Tom says that he understands, but he quietly puts her dinner in the oven.",
               "audioMode": "tts",
@@ -614,7 +661,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:79c9a9fbedaae55757e3a2667439672c702f565e9be16814ba9fd05a9dd8f18d"
+            "contentHash": "sha256:13917d9fcbcff090eb6e5e3047b587f559912fb1170a186650a438d9af3eff91"
           },
           {
             "id": "en.n8.c51.e03",
@@ -660,13 +707,13 @@
             },
             "choices": [
               {
-                "text": "It gives the actor a sentence to say aloud."
+                "text": "It shows that Sara is offended by Tom's remark."
               },
               {
                 "text": "It hints that Sara is not being completely honest."
               },
               {
-                "text": "It tells the director where to place the camera."
+                "text": "It signals that Sara is searching for another compliment to give."
               }
             ],
             "teaches": [],
@@ -678,7 +725,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c51.e04.seed-0",
               "feedback": {
-                "es": "La acotación describe una pausa antes de hablar: sugiere duda y contradice el «Really» de la primera línea."
+                "es": "La acotación describe una pausa antes de hablar: sugiere que Sara no es del todo sincera, pues después solo menciona un defecto."
               },
               "text": "SARA: (putting the keys on the table) It is a lovely apartment, Tom. Really.\nTOM: You do not have to be polite.\nSARA: (after a pause) I only said that the street is a little noisy."
             },
@@ -687,7 +734,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:e38bd70b3574c059cd17c5b41379aa65bcf5d6006bd00777b7cf1b090e34f4bb"
+            "contentHash": "sha256:be99e97c5c2fb2c78321dc77aa72e4577c36f8247cae4fb48e86c45ac0593edc"
           }
         ],
         "review": [
@@ -735,13 +782,17 @@
             "id": "en.n8.c51.r02",
             "format": "completar",
             "prompt": {
-              "es": "Completa: «Una pausa larga puede dar a entender que se eligen bien las palabras.»"
+              "es": "Completa: «Quien mira la puerta al aceptar quedarse da a entender que prefiere irse.»"
             },
             "answer": {
               "text": "imply",
               "accepted": [
                 "imply",
-                "suggest"
+                "suggest",
+                "indicate",
+                "signal",
+                "show",
+                "hint"
               ]
             },
             "choices": [],
@@ -754,16 +805,16 @@
               "variantSeed": "0",
               "variantId": "en.n8.c51.r02.seed-0",
               "feedback": {
-                "es": "Imply significa dar a entender algo sin decirlo de forma directa: la pausa insinúa cuidado al hablar."
+                "es": "Imply significa dar a entender algo sin decirlo de forma directa: mirar la puerta insinúa que el personaje preferiría irse."
               },
-              "text": "Even when a character says very little, silence carries meaning. A long pause can ___ that the speaker is choosing every word with great care."
+              "text": "A character who keeps looking at the door while agreeing to stay may ___ that he would rather leave."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:c7fede38c6ac9c154818c5216b71ff1b78caa1f9867262bac821437295225346"
+            "contentHash": "sha256:00b8d64c24d88de7ea1a50875745eca141b5f7df762451c139a89ba0b102ca19"
           },
           {
             "id": "en.n8.c51.r03",
@@ -1103,7 +1154,11 @@
             "answer": {
               "text": "wooden",
               "accepted": [
-                "wooden"
+                "wooden",
+                "stiff",
+                "flat",
+                "lifeless",
+                "robotic"
               ]
             },
             "choices": [],
@@ -1128,7 +1183,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:c7a500a16ad633acfe6fef627258d4a6a0d41e72e78f9c93182a5d1d266974dc"
+            "contentHash": "sha256:b66dd89afe8e10000b18e908fa9c7c63045519d18348891dde3f80a5b990ff63"
           },
           {
             "id": "en.n8.c52.pg03",
@@ -1324,8 +1379,27 @@
               "text": "What I liked most was the pace of the film.",
               "accepted": [
                 "What I liked most was the pace of the film.",
+                "What I liked most was the pace of the movie.",
                 "What I liked most was the pace.",
-                "What I liked most was the pace of the story."
+                "What I liked most was the pace of the story.",
+                "What I liked the most was the pace of the film.",
+                "What I liked the most was the pace of the movie.",
+                "What I liked the most was the pace.",
+                "What I liked the most was the pace of the story.",
+                "What I like most was the pace of the film.",
+                "What I like most was the pace of the movie.",
+                "What I like most was the pace.",
+                "What I like most was the pace of the story.",
+                "What I liked best was the pace of the film.",
+                "What I liked best was the pace of the movie.",
+                "What I liked best was the pace.",
+                "What I liked best was the pace of the story.",
+                "The thing I liked most was the pace of the film.",
+                "The thing I liked most was the pace of the movie.",
+                "The thing I liked most was the pace.",
+                "The thing I liked most was the pace of the story.",
+                "What I liked most about the film was the pace.",
+                "What I liked most about the movie was the pace."
               ]
             },
             "choices": [],
@@ -1347,7 +1421,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:bc96d8c201b45783a49bfceba6dc236783f31efcd694aff5a09a139c7280f13b"
+            "contentHash": "sha256:9f64ea33c12facbac26bcea695b6be2bd14f66fbd4ba34a1b1dc2dcd7e6a0824"
           }
         ],
         "evaluation": [
@@ -1365,10 +1439,10 @@
                 "text": "The quiet performance of the lead actor."
               },
               {
-                "text": "How new the story is for the viewer."
+                "text": "The slow pace, which he enjoys more than anything else."
               },
               {
-                "text": "The speed of the editing in every scene."
+                "text": "The story, which he remembers better than the acting."
               }
             ],
             "teaches": [],
@@ -1380,9 +1454,9 @@
               "variantSeed": "0",
               "variantId": "en.n8.c52.e01.seed-0",
               "feedback": {
-                "es": "Destaca la interpretación contenida del protagonista; admite que la historia no es original y que el ritmo es lento."
+                "es": "Destaca la interpretación sobria del protagonista, que apenas levanta la voz; admite que la historia no es original y que el ritmo es lento, y eso no lo elogia."
               },
-              "audio": "I went to see the new drama expecting very little, and I was wrong. The pace is slow, yes, and the plot is hardly original, but the lead actor's performance is so understated that you move to the edge of your seat to catch every word. It is not the story that stays in the mind; it is the silence between the lines. I would not call it gripping, but it is undeniably convincing.",
+              "audio": "I went to see the new drama expecting very little, and I was wrong. The pace is slow, yes, and the plot is hardly original, but the lead actor hardly raises her voice, yet you move to the edge of your seat to catch every word. It is not the story that stays in the mind; it is the silence between the lines. I would not call it gripping, but it is undeniably convincing.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -1397,7 +1471,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:7917363459e1c35dc36d61f6233358ee798d4d1384e3f7027f2744fce568eb01"
+            "contentHash": "sha256:eef4a609bc93cbe75d27fae2c0748d4f6a585251566f17b8fd0a1e1f8aeb5210"
           },
           {
             "id": "en.n8.c52.e02",
@@ -1430,7 +1504,7 @@
               "feedback": {
                 "es": "Empieza esperando poco y acaba elogiando la interpretación, pero dice que no es absorbente: es positiva con reservas."
               },
-              "audio": "I went to see the new drama expecting very little, and I was wrong. The pace is slow, yes, and the plot is hardly original, but the lead actor's performance is so understated that you move to the edge of your seat to catch every word. It is not the story that stays in the mind; it is the silence between the lines. I would not call it gripping, but it is undeniably convincing.",
+              "audio": "I went to see the new drama expecting very little, and I was wrong. The pace is slow, yes, and the plot is hardly original, but the lead actor hardly raises her voice, yet you move to the edge of your seat to catch every word. It is not the story that stays in the mind; it is the silence between the lines. I would not call it gripping, but it is undeniably convincing.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -1445,7 +1519,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:d03edc58f8406f80a4bdc9473416ba88a2dd58ca24e28ec8ab2d41945888c415"
+            "contentHash": "sha256:09828452c871665106b90167f955394fc205a11f9d1f10bf9147c44c14f2fd1d"
           },
           {
             "id": "en.n8.c52.e03",
@@ -1456,7 +1530,12 @@
             "answer": {
               "text": "understated",
               "accepted": [
-                "understated"
+                "understated",
+                "restrained",
+                "subtle",
+                "subdued",
+                "muted",
+                "low-key"
               ]
             },
             "choices": [],
@@ -1478,7 +1557,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:e3621664b4ee15ba7a7dde6137ee501e40f926f0450f9be845f4ca66bbe74098"
+            "contentHash": "sha256:4b227b4f130beb2b1f7bf791fa1a0a2b459f440b59a13df393f0027ac8ec8754"
           },
           {
             "id": "en.n8.c52.e04",
@@ -1491,13 +1570,13 @@
             },
             "choices": [
               {
-                "text": "Positive: it recommends the film without any reservations."
+                "text": "Positive: it finds the whole film gripping and only doubts the lead actor."
               },
               {
-                "text": "Negative: it advises readers to avoid the film entirely, whatever their taste."
+                "text": "Negative: it praises the ending but finds the opening too slow."
               },
               {
-                "text": "Mixed: it praises the start and the lead, but criticises the ending."
+                "text": "Mixed: it likes the opening and the lead actor but finds the ending hard to believe."
               }
             ],
             "teaches": [],
@@ -1509,7 +1588,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c52.e04.seed-0",
               "feedback": {
-                "es": "Elogia la primera hora y a la actriz principal, pero critica el final inverosímil: la actitud es mixta."
+                "es": "Elogia la primera hora y al protagonista, pero critica el final inverosímil: la actitud es mixta, no positiva sin reservas ni negativa."
               },
               "text": "Review: 'The film has a gripping first hour, but the last act is so far-fetched that I wanted the thriller to end sooner. Even so, the lead actor is convincing enough to keep you watching until the very last scene.'"
             },
@@ -1518,7 +1597,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:81e8c0c54ea46de7d602b5df4a85ce6a547a13a19ca78255cee3374ef664dd97"
+            "contentHash": "sha256:66d48e0a7ed081980a64ffc62962a23b740df1a2771034839c7061e8e741027f"
           }
         ],
         "review": [
@@ -1536,7 +1615,7 @@
                 "text": "That the twists follow a pattern so familiar that they no longer surprise."
               },
               {
-                "text": "That the twists are so difficult that most of the audience cannot follow them."
+                "text": "That the twists are too unlikely to be believable."
               },
               {
                 "text": "That the script copies a famous scene from another film."
@@ -1560,7 +1639,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:0831ec4c8f4bbc2361ad8c969beaa01ad84433c93ed493086bea68afc36fe278"
+            "contentHash": "sha256:1b068c5fc70bbd47fbcfc111b98b18be445219b81a93b51709bfef5bc46f4ec1"
           },
           {
             "id": "en.n8.c52.r02",
@@ -1932,7 +2011,8 @@
             "answer": {
               "text": "sarcastic",
               "accepted": [
-                "sarcastic"
+                "sarcastic",
+                "ironic"
               ]
             },
             "choices": [],
@@ -1957,7 +2037,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:4a431541664201eb021fafb717123519da106d93febb12fde01b972891a4dd0c"
+            "contentHash": "sha256:0b0456be6eca5eb4279685f01f12b76da0181f7a68795fbd24e83ba7f33eaef0"
           },
           {
             "id": "en.n8.c53.pg03",
@@ -2155,7 +2235,11 @@
               "accepted": [
                 "She sounds anxious because she repeats the same question.",
                 "She sounds anxious because she keeps repeating the same question.",
-                "She sounds anxious because she asks the same question again."
+                "She sounds anxious because she asks the same question again.",
+                "She sounds anxious because she repeats the same question again.",
+                "She sounds anxious because she keeps asking the same question.",
+                "She sounds anxious because she asks the same question over and over.",
+                "She sounds anxious because she asks the same question again and again."
               ]
             },
             "choices": [],
@@ -2177,7 +2261,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:babde23bf8b2c3075b655d73f3b818bae7b41801aec0ab3d1b555e0da19372c5"
+            "contentHash": "sha256:6591b54ca66469cb2537d2a236ffe49c46aac5859c8517513a6e0a6571928f42"
           }
         ],
         "evaluation": [
@@ -2243,7 +2327,7 @@
                 "text": "Dismissive: he says the job in Madrid does not matter."
               },
               {
-                "text": "Anxious: he asks Ana to reassure him about the decision."
+                "text": "Defensive: he snaps at Ana for asking about the job."
               },
               {
                 "text": "Evasive: after a pause he changes the subject to dinner."
@@ -2258,7 +2342,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c53.e02.seed-0",
               "feedback": {
-                "es": "Tras la pausa responde «it depends» y cambia de tema: evita contestar, lo que muestra una actitud evasiva."
+                "es": "Tras la pausa responde «it depends» y cambia de tema: evita contestar, lo que muestra una actitud evasiva, sin restar importancia al trabajo ni atacar a Ana."
               },
               "audio": "In the scene, Ana calls her brother Tom to ask whether he has told their parents about the job in Madrid. Tom answers that he has been very busy. Ana says that she is not angry, she just needs to know. After a long pause Tom says that it depends, and then asks whether Ana has had dinner. She says she can wait until tomorrow, but her voice is noticeably colder.",
               "audioMode": "tts",
@@ -2275,18 +2359,21 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:4f7b44f927975297c7102abbd9b9dc50c814341b78fb05e51815f38593319e73"
+            "contentHash": "sha256:238db7153e22f7209fb93c41bebd7845ffd345ecf56ca49ceb3ecfb1622454ca"
           },
           {
             "id": "en.n8.c53.e03",
             "format": "completar",
             "prompt": {
-              "es": "Completa: «Empezó a contestar con brusquedad a todos.»"
+              "es": "Completa: «Estaba tan tenso que contestaba con brusquedad a cualquiera que preguntara.»"
             },
             "answer": {
               "text": "snap",
               "accepted": [
-                "snap"
+                "snap",
+                "shout",
+                "yell",
+                "bark"
               ]
             },
             "choices": [],
@@ -2299,16 +2386,16 @@
               "variantSeed": "0",
               "variantId": "en.n8.c53.e03.seed-0",
               "feedback": {
-                "es": "Snap at + persona significa contestar con brusquedad; encaja con una actitud a la defensiva."
+                "es": "Snap at + persona significa contestar con brusquedad; encaja con quien tiene algo que ocultar y se pone a la defensiva."
               },
-              "text": "When I asked about the contract, he began to ___ at everyone in the room, which made me think that he had something to hide."
+              "text": "He was so tense that he would ___ at anyone who asked him a simple question, and that made me think he had something to hide."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:799c4d79c66a8ebfd22340a66b3232535672cef6e80704a7bebc25ba1e370cc3"
+            "contentHash": "sha256:616b1f811b6d11fb3b615078a6dee022d791ed0b50cc9af2bb49bd77f32665b5"
           },
           {
             "id": "en.n8.c53.e04",
@@ -2321,13 +2408,13 @@
             },
             "choices": [
               {
-                "text": "That she is still upset, even though she says it is fine."
+                "text": "That she is still upset, although she insists that everything is fine."
               },
               {
-                "text": "That she is pleased and wants to thank Tom for his kind offer."
+                "text": "That she genuinely prefers to keep the meeting at eight."
               },
               {
-                "text": "That she has not understood what Tom is offering."
+                "text": "That she is worried that Tom will get into trouble with the manager."
               }
             ],
             "teaches": [],
@@ -2339,7 +2426,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c53.e04.seed-0",
               "feedback": {
-                "es": "Su sarcasmo inicial («just what I needed») contradice «it is fine»: sigue molesta, aunque diga lo contrario."
+                "es": "Su sarcasmo inicial («just what I needed») contradice «it is fine»: sigue molesta aunque diga lo contrario; no prefiere la hora ni teme por Tom."
               },
               "text": "Mia: Great, another meeting at eight. Just what I needed.\nTom: I can ask the manager to move it, if you like.\nMia: No, no, it is fine. Do not bother."
             },
@@ -2348,7 +2435,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:482ce3b470b4cf9d85edfe4f40bef32aeecfdf9c03ab18336e3193851014eace"
+            "contentHash": "sha256:c3c6094e322cc0b4a0d4b7bc77c984532527bab0a803a4129787d78cfb64323a"
           }
         ],
         "review": [
@@ -2396,12 +2483,17 @@
             "id": "en.n8.c53.r02",
             "format": "completar",
             "prompt": {
-              "es": "Completa: «Los periodistas empezaron a desconfiar de que ocultaran la verdadera razón.»"
+              "es": "Completa: «Me dio una razón distinta cada vez y empecé a desconfiar de sus explicaciones.»"
             },
             "answer": {
               "text": "suspicious",
               "accepted": [
-                "suspicious"
+                "suspicious",
+                "wary",
+                "sceptical",
+                "skeptical",
+                "distrustful",
+                "mistrustful"
               ]
             },
             "choices": [],
@@ -2414,33 +2506,33 @@
               "variantSeed": "0",
               "variantId": "en.n8.c53.r02.seed-0",
               "feedback": {
-                "es": "Suspicious describe a quien desconfía; aquí, los periodistas ante las respuestas evasivas."
+                "es": "Suspicious of describe a quien desconfía de algo; aquí, de las explicaciones cambiantes de otra persona."
               },
-              "text": "The minister refused to answer any direct question. The reporters grew ___ that the real reason was being hidden from them."
+              "text": "She gave me a different reason every time I asked, and slowly I became ___ of her explanations."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:4007305260c5301c6f554f81980747214fd6d0ee340f6652f3c77a337808b7aa"
+            "contentHash": "sha256:4ebb2b833b8773ba2093cde4d38119e4b174f133e41838fc157844d966c76910"
           },
           {
             "id": "en.n8.c53.r03",
             "format": "ordenar",
             "prompt": {
-              "es": "Ordena: «Habla despacio para tranquilizar a un colega nervioso.»"
+              "es": "Ordena: «Mantén la calma para tranquilizar a un amigo ansioso.»"
             },
             "answer": {
-              "text": "Speak slowly to reassure a nervous colleague",
+              "text": "Stay calm to reassure an anxious friend",
               "tokens": [
-                "Speak",
-                "slowly",
+                "Stay",
+                "calm",
                 "to",
                 "reassure",
-                "a",
-                "nervous",
-                "colleague"
+                "an",
+                "anxious",
+                "friend"
               ]
             },
             "choices": [],
@@ -2453,7 +2545,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c53.r03.seed-0",
               "feedback": {
-                "es": "Speak slowly indica el modo y to reassure + persona expresa el fin: tranquilizar a alguien."
+                "es": "Stay calm indica cómo actuar y to reassure + persona expresa el fin: tranquilizar a alguien que está ansioso."
               }
             },
             "accessibility": {
@@ -2461,7 +2553,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:e04a31f51895bfcd76e8de5a4c6ce113a1e0de8c8173cc3cd73178443c5418cc"
+            "contentHash": "sha256:7388b1fe78ecdf983c84f8b8146b733b2963385292a05cbee2aab185bdb7a997"
           }
         ]
       },
@@ -2969,8 +3061,15 @@
               "text": "What moved me most was the silence.",
               "accepted": [
                 "What moved me most was the silence.",
+                "What moved me most was the silence of the scene.",
+                "What moved me the most was the silence.",
+                "What moved me the most was the silence of the scene.",
+                "What touched me most was the silence.",
+                "What touched me most was the silence of the scene.",
                 "What I found most moving was the silence.",
-                "What moved me most was the silence of the scene."
+                "What I found most moving was the silence of the scene.",
+                "What I found the most moving was the silence.",
+                "What I found the most moving was the silence of the scene."
               ]
             },
             "choices": [],
@@ -2992,7 +3091,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:9522eb5e330d8da230d567f7f6c43aafeccde5647bfcf3c8d0a6c1eb3d111565"
+            "contentHash": "sha256:a91d0e01473c260c31830744f7b69606020db01abe811d84bee5ee10769c7b41"
           }
         ],
         "evaluation": [
@@ -3007,10 +3106,10 @@
             },
             "choices": [
               {
-                "text": "The long speech she gives on the pier."
+                "text": "The silence, which shows that she is unsure."
               },
               {
-                "text": "The music that begins when she leaves."
+                "text": "The sound of the waves around the pier."
               },
               {
                 "text": "The tickets moving away on the water."
@@ -3025,9 +3124,9 @@
               "variantSeed": "0",
               "variantId": "en.n8.c54.e01.seed-0",
               "feedback": {
-                "es": "Son los billetes que se alejan sobre el agua los que revelan su decisión; no hay música ni discurso."
+                "es": "Son los pasajes que se alejan sobre el agua los que revelan su decisión; el silencio y las olas crean el ambiente, pero no muestran qué decide."
               },
-              "audio": "The scene at the harbour is the turning point of the film. The woman stands on the pier, takes out the two tickets and throws them into the sea. There is no music and no speech, just the sound of the waves. What makes the moment strong is the silence, and it is the tickets moving away on the water that reveal her decision. Some viewers find it too slow, but I think the slow pace is exactly why it pays off.",
+              "audio": "The scene at the harbour is the turning point of the film. The woman stands on the pier, takes out the two tickets and throws them into the sea. There is no music and no speech, just the sound of the waves. What makes the moment strong is the silence, and it is the tickets moving away on the water that reveal her decision. Some viewers find it too slow, but I think the slow pace is exactly what makes the moment so strong.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -3042,7 +3141,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:309c5927dff6b828b6ab0c9738292bbd3c811103178b6559e46c5e6088f6f38f"
+            "contentHash": "sha256:2444e6014b20eef91b07a367a41d0d88127240e354c2cd95fdab278b352d0cb1"
           },
           {
             "id": "en.n8.c54.e02",
@@ -3058,10 +3157,10 @@
                 "text": "That it is justified because it makes the scene stronger."
               },
               {
-                "text": "That it is the main problem of the scene."
+                "text": "That it is a mistake that the silence only partly makes up for."
               },
               {
-                "text": "That it should be cut from the final version."
+                "text": "That it will only appeal to viewers with a lot of patience."
               }
             ],
             "teaches": [],
@@ -3073,9 +3172,9 @@
               "variantSeed": "0",
               "variantId": "en.n8.c54.e02.seed-0",
               "feedback": {
-                "es": "Admite que algunos espectadores lo ven lento, pero sostiene que por eso la escena da resultado: defiende el ritmo."
+                "es": "Admite que algunos espectadores lo ven lento, pero sostiene que ese ritmo es lo que hace fuerte la escena: defiende el ritmo."
               },
-              "audio": "The scene at the harbour is the turning point of the film. The woman stands on the pier, takes out the two tickets and throws them into the sea. There is no music and no speech, just the sound of the waves. What makes the moment strong is the silence, and it is the tickets moving away on the water that reveal her decision. Some viewers find it too slow, but I think the slow pace is exactly why it pays off.",
+              "audio": "The scene at the harbour is the turning point of the film. The woman stands on the pier, takes out the two tickets and throws them into the sea. There is no music and no speech, just the sound of the waves. What makes the moment strong is the silence, and it is the tickets moving away on the water that reveal her decision. Some viewers find it too slow, but I think the slow pace is exactly what makes the moment so strong.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -3090,18 +3189,20 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:7099da703227600dd7cd68e82e5b0f1dc2e9eb2a4b7e890ca5cc517a2011c89f"
+            "contentHash": "sha256:5a7742df7a6b6c99402b6df780a8375cac47ac9e5b0ca5945c6f1a6bd372b318"
           },
           {
             "id": "en.n8.c54.e03",
             "format": "completar",
             "prompt": {
-              "es": "Completa: «A medida que la escena se desarrolla, el público lo comprende.»"
+              "es": "Completa: «El director deja que la historia se desarrolle despacio, detalle a detalle.»"
             },
             "answer": {
               "text": "unfold",
               "accepted": [
-                "unfold"
+                "unfold",
+                "develop",
+                "evolve"
               ]
             },
             "choices": [],
@@ -3114,16 +3215,16 @@
               "variantSeed": "0",
               "variantId": "en.n8.c54.e03.seed-0",
               "feedback": {
-                "es": "Unfold describe algo que se desarrolla poco a poco, como una escena cuya tensión crece."
+                "es": "Unfold describe algo que se desarrolla poco a poco, como una historia que se va revelando con cada detalle."
               },
-              "text": "At first nothing seems to happen. As the scene begins to ___, the audience slowly realises that the door will never open."
+              "text": "The plot is simple, but the director lets the story ___ slowly, one small detail at a time."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:7b81ef1a069d86e1a07608fdc596be1e7bf323c6079b45057e633ff1d510ae33"
+            "contentHash": "sha256:bfc9ce6604d71f20578b6a6edbea38999088699d997b2c4b7ffb8972b93e6405"
           },
           {
             "id": "en.n8.c54.e04",
@@ -3160,35 +3261,113 @@
                   [
                     "opens the door",
                     "opens the letter",
+                    "opens the",
                     "walks into",
+                    "walks in",
+                    "enters the",
+                    "enters her",
                     "sits down",
+                    "sits at",
                     "says nothing",
                     "reads the letter",
+                    "reads it",
+                    "reads the",
+                    "drops her keys",
+                    "drops the keys",
+                    "drops her",
                     "walks away",
-                    "stops at the door"
+                    "leaves the",
+                    "stops at the door",
+                    "stops at",
+                    "switches off the light",
+                    "turns off the light",
+                    "puts out the light",
+                    "turns out the light",
+                    "does not say",
+                    "does not speak",
+                    "stays silent",
+                    "without a word",
+                    "for ten seconds",
+                    "for 10 seconds",
+                    "looks at the",
+                    "sees the",
+                    "sees a chair",
+                    "sees an empty"
                   ],
                   [
                     "what makes",
                     "what i liked",
+                    "what i like",
                     "what really",
                     "what stays",
                     "what i remember",
-                    "what i found"
-                  ],
-                  [
+                    "what i found",
+                    "what i find",
+                    "what moves",
+                    "what moved",
+                    "what strikes",
+                    "what stands out",
+                    "what i love",
+                    "what i admire",
+                    "what impresses",
+                    "what matters",
+                    "what works",
+                    "what i noticed",
+                    "what i notice",
+                    "what touches",
+                    "what touched",
+                    "what is most",
+                    "what is so",
+                    "what creates",
+                    "what builds",
+                    "what gives",
                     "it is the",
                     "it is her",
                     "it is his",
-                    "it is this"
+                    "it is this",
+                    "it is that",
+                    "it is not the",
+                    "it is only",
+                    "it is what",
+                    "it is also",
+                    "it is especially",
+                    "it is silence"
                   ],
                   [
                     "works because",
-                    "is moving because",
+                    "works well because",
+                    "works so well because",
+                    "is effective because",
+                    "is powerful because",
                     "is gripping because",
+                    "is moving because",
                     "is strong because",
-                    "moving because",
+                    "is tense because",
+                    "is successful because",
+                    "is memorable because",
+                    "is convincing because",
+                    "is brilliant because",
+                    "is great because",
+                    "is excellent because",
+                    "is important because",
+                    "is sad because",
+                    "is touching because",
+                    "is beautiful because",
+                    "succeeds because",
+                    "is effective since",
+                    "works since",
                     "because the audience",
-                    "because nobody"
+                    "because nobody",
+                    "because it shows",
+                    "because it makes",
+                    "because it trusts",
+                    "because it builds",
+                    "because it lets",
+                    "because the silence",
+                    "because the scene",
+                    "because the tension",
+                    "because of the",
+                    "since the audience"
                   ]
                 ]
               }
@@ -3198,7 +3377,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:1bfab2baf37b6f6104dea757978573d47a7c5304e32fb3635cb5b88c88d89467"
+            "contentHash": "sha256:d5ec8ceea7c0543c18aaab28b9686e1c23387a5b64b13b0df68faa299f0312f8"
           }
         ],
         "review": [
@@ -3213,7 +3392,7 @@
             },
             "choices": [
               {
-                "text": "To save money by avoiding an expensive scene."
+                "text": "To shift attention to the mother's face so that the accident matters less."
               },
               {
                 "text": "To let the audience imagine the event through the mother's reaction."
@@ -3240,7 +3419,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:e48f20b85277da0daea2c237838dfadd5df87de48d7f4dfa0aa97b3d7ff9b02a"
+            "contentHash": "sha256:18ceadec19382bc4835516ebe8cda09df22fadfa10a3b47e26d2dba464610b35"
           },
           {
             "id": "en.n8.c54.r02",
@@ -3279,23 +3458,21 @@
             "id": "en.n8.c54.r03",
             "format": "ordenar",
             "prompt": {
-              "es": "Ordena: «Esa escena es el punto de inflexión porque el público descubre la verdad.»"
+              "es": "Ordena: «El punto de inflexión llega cuando por fin se revela la verdad.»"
             },
             "answer": {
-              "text": "That scene is the turning point because the audience learns the truth",
+              "text": "The turning point comes when the truth is finally revealed",
               "tokens": [
-                "That",
-                "scene",
-                "is",
-                "the",
+                "The",
                 "turning",
                 "point",
-                "because",
+                "comes",
+                "when",
                 "the",
-                "audience",
-                "learns",
-                "the",
-                "truth"
+                "truth",
+                "is",
+                "finally",
+                "revealed"
               ]
             },
             "choices": [],
@@ -3308,7 +3485,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c54.r03.seed-0",
               "feedback": {
-                "es": "Because introduce la razón: el público descubre la verdad, y eso convierte la escena en el punto de inflexión."
+                "es": "When introduce el momento exacto: el punto de inflexión llega con la revelación de la verdad, y is finally revealed usa el pasivo."
               }
             },
             "accessibility": {
@@ -3316,7 +3493,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:fcf8112365c4fe419fe4cee8e8a478a7d786faafbe82b9c8b9b5b748641f9480"
+            "contentHash": "sha256:1ee0fb7caf75c5fd5bfab152e8ed31dac273e55b3729cb50eca9a836783f7db3"
           }
         ]
       },
@@ -3822,7 +3999,9 @@
                 "I see your point, but it is worth watching.",
                 "Fair enough, but I would argue that it is worth watching.",
                 "I see your point, but I think it is worth watching.",
-                "Fair enough, but it is still worth watching."
+                "Fair enough, but it is still worth watching.",
+                "I see your point, but I would argue that the ending is worth the wait.",
+                "To be fair, it is slow, but the last scene is worth it."
               ]
             },
             "choices": [],
@@ -3837,14 +4016,79 @@
               "feedback": {
                 "es": "Se reconoce la objeción (I see your point, fair enough) y se defiende con but y una razón: worth watching."
               },
-              "text": "Sara dice: «It is too slow.» Reconoce su punto y defiende la película en una frase breve."
+              "text": "Sara dice: «It is too slow.» Reconoce su punto y defiende la película en una frase breve.",
+              "scoring": {
+                "wordRange": [
+                  6,
+                  40
+                ],
+                "evidenceGroups": [
+                  [
+                    "i see your point",
+                    "fair enough",
+                    "to be fair",
+                    "you have a point",
+                    "you are right",
+                    "i understand",
+                    "i agree that",
+                    "that is true",
+                    "it is true that",
+                    "i see why",
+                    "i know it is slow",
+                    "it is slow",
+                    "it is a little slow"
+                  ],
+                  [
+                    "but it is worth",
+                    "but i think",
+                    "but i would argue",
+                    "but i believe",
+                    "but i still",
+                    "but it is still",
+                    "but even so",
+                    "even so",
+                    "but the ending",
+                    "but the last scene",
+                    "but the final scene",
+                    "but it is not too slow",
+                    "but it is not that slow",
+                    "but it pays",
+                    "but it is",
+                    "however"
+                  ],
+                  [
+                    "worth watching",
+                    "worth seeing",
+                    "worth it",
+                    "worth your time",
+                    "worth the wait",
+                    "the ending",
+                    "the last scene",
+                    "the final scene",
+                    "the pace",
+                    "the performances",
+                    "the acting",
+                    "the script",
+                    "the plot",
+                    "the story",
+                    "hold up",
+                    "pays off",
+                    "pay off",
+                    "hit so hard",
+                    "hits so hard",
+                    "the silence",
+                    "slow opening",
+                    "slow pace"
+                  ]
+                ]
+              }
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:0af1ea68e235589dd45f84cc24ec252a32670a9fb57a80e29e8032ce01c7fa7d"
+            "contentHash": "sha256:245532761c7afe2e578d556b535cb936c7c57639fa5819946801cab8ea1bf724"
           }
         ],
         "evaluation": [
@@ -3862,10 +4106,10 @@
                 "text": "That the scene stays too long on one image."
               },
               {
-                "text": "That the old woman's coat looks too expensive."
+                "text": "That the scene shows too little about the old woman's past."
               },
               {
-                "text": "That the camera moves too quickly for the viewer."
+                "text": "That the club should not show an old black-and-white film."
               }
             ],
             "teaches": [],
@@ -3878,7 +4122,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c55.e01.seed-0",
               "feedback": {
-                "es": "Sara dice que una escena tan lenta es excesiva: su objeción es la duración sin movimiento de la cámara."
+                "es": "Sara dice que una escena tan lenta es excesiva: su objeción es que la cámara se queda demasiado tiempo en una sola imagen, no la falta de pasado ni el tipo de película."
               },
               "audio": "Last night at the film club, Carlos recommended an old black-and-white drama. In the key scene, an old woman opens a cupboard, takes out a coat and smells it, and the camera stays on her for almost a minute. Sara objected that such a slow scene is too much, and Carlos replied that he saw her point, but that the long silence is what makes the loss feel real. By the end of the night, three members had promised to rewatch it.",
               "audioMode": "tts",
@@ -3895,7 +4139,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:7c7751e291bfea65207f6ea792a2a0aeb046dbe43948aabee2486613a8b2017e"
+            "contentHash": "sha256:ec42b8c593f4c1f51fe8b75be8408466cdd8d7e18a8949b99f6354add1b2b206"
           },
           {
             "id": "en.n8.c55.e02",
@@ -3908,13 +4152,13 @@
             },
             "choices": [
               {
-                "text": "That the club decided never to watch slow films again."
+                "text": "That Sara changed her mind and now considers the scene the best in the film."
               },
               {
                 "text": "That Carlos's argument persuaded several members to give the film another try."
               },
               {
-                "text": "That Sara's objection convinced the whole club to reject the film."
+                "text": "That the club found both arguments weak and dropped the subject."
               }
             ],
             "teaches": [],
@@ -3927,7 +4171,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c55.e02.seed-0",
               "feedback": {
-                "es": "Tres miembros prometen volver a ver la película: el argumento de Carlos los convenció de darle otra oportunidad."
+                "es": "Tres miembros prometen volver a ver la película: el argumento de Carlos los convenció de darle otra oportunidad, aunque nadie dice que Sara cambiara de opinión."
               },
               "audio": "Last night at the film club, Carlos recommended an old black-and-white drama. In the key scene, an old woman opens a cupboard, takes out a coat and smells it, and the camera stays on her for almost a minute. Sara objected that such a slow scene is too much, and Carlos replied that he saw her point, but that the long silence is what makes the loss feel real. By the end of the night, three members had promised to rewatch it.",
               "audioMode": "tts",
@@ -3944,7 +4188,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:4fd2c8fd0e3d5517c493bb1f0f300ef233087c6b13c578c068a6d218f7e35742"
+            "contentHash": "sha256:323b9174a595c73ae2fbf55eb910059ab224807f9895e18c07f9208fef37d9e3"
           },
           {
             "id": "en.n8.c55.e03",
@@ -3955,7 +4199,12 @@
             "answer": {
               "text": "argue",
               "accepted": [
-                "argue"
+                "argue",
+                "say",
+                "maintain",
+                "contend",
+                "suggest",
+                "claim"
               ]
             },
             "choices": [],
@@ -3978,7 +4227,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:66a25b66571da15faecefdec2571600aed59e67a0e73bb618e698ad04e3ed1bb"
+            "contentHash": "sha256:f5e9f9db175f561ca8d1744be5397233d03feae0c377af7bfb6b0cc1fd33d842"
           },
           {
             "id": "en.n8.c55.e04",
@@ -4004,7 +4253,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c55.e04.seed-0",
               "feedback": {
-                "es": "Una buena intervención recomienda con una razón, describe la escena en presente con énfasis y responde a la objeción reconociéndola antes de contraargumentar."
+                "es": "Una buena intervención recomienda con una razón, describe la escena en presente y responde a la objeción reconociéndola antes de contraargumentar."
               },
               "text": "Situación: recomiendas la película «The Last Lighthouse». Describe su escena clave (un anciano llega a la lámpara del faro, se sienta y no dice nada durante diez segundos). Sara objeta que el ritmo es demasiado lento. Escribe tu intervención: recomienda con una razón, describe la escena en presente, reconoce la objeción y respóndela.",
               "scoring": {
@@ -4015,33 +4264,83 @@
                 "evidenceGroups": [
                   [
                     "i would recommend",
+                    "would recommend",
                     "i recommend",
-                    "i would strongly recommend"
+                    "i strongly recommend",
+                    "i highly recommend",
+                    "i can recommend",
+                    "recommend it",
+                    "recommend this film",
+                    "recommend the film",
+                    "recommend the last lighthouse",
+                    "recommend watching"
                   ],
                   [
-                    "sits down",
                     "says nothing",
+                    "says not a word",
+                    "does not say",
+                    "does not speak",
+                    "without saying",
+                    "without a word",
+                    "stays silent",
+                    "sits down",
+                    "sits on",
+                    "sits by",
+                    "sits in",
+                    "sits and",
+                    "climbs the",
+                    "climbs up",
+                    "climbs to the top",
                     "reaches the top",
-                    "climbs to the top"
-                  ],
-                  [
-                    "what makes",
-                    "what i liked",
-                    "what really",
-                    "what stays",
-                    "what i remember"
+                    "reaches the lamp",
+                    "arrives at the lamp",
+                    "gets to the top",
+                    "goes up",
+                    "walks up",
+                    "for ten seconds",
+                    "for 10 seconds"
                   ],
                   [
                     "i see your point",
                     "fair enough",
                     "to be fair",
-                    "you have a point"
+                    "you have a point",
+                    "you are right",
+                    "i understand",
+                    "i take your point",
+                    "i agree that",
+                    "that is a fair point",
+                    "good point",
+                    "you make a good point",
+                    "that is true",
+                    "it is true that",
+                    "i can see why",
+                    "i see why",
+                    "i know it is slow",
+                    "it is slow",
+                    "the pace is slow",
+                    "the first hour is slow"
                   ],
                   [
                     "i would argue that",
                     "i would say that",
                     "even so",
-                    "i still think"
+                    "i still think",
+                    "i still believe",
+                    "i still feel",
+                    "i would still",
+                    "but i think",
+                    "but i believe",
+                    "but i would",
+                    "that said",
+                    "nevertheless",
+                    "however i",
+                    "however the",
+                    "however it",
+                    "even though",
+                    "it is still worth",
+                    "but it is worth",
+                    "still worth"
                   ]
                 ]
               }
@@ -4051,7 +4350,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:6449afc4b71bd002105396620f5e81ab1422f35661539db2d16459a322f72a69"
+            "contentHash": "sha256:c24c9d58bf27d8696e1268fe351c9b5558fc79d9e617a0dd2957aa5265afd461"
           }
         ],
         "review": [
@@ -4099,12 +4398,13 @@
             "id": "en.n8.c55.r02",
             "format": "completar",
             "prompt": {
-              "es": "Completa: «No me encanta el final, pero, para ser justos, la interpretación es estupenda.»"
+              "es": "Completa: «Hay varios buenos actores, pero una interpretación destaca de verdad.»"
             },
             "answer": {
-              "text": "fair",
+              "text": "stands",
               "accepted": [
-                "fair"
+                "stands",
+                "stood"
               ]
             },
             "choices": [],
@@ -4117,36 +4417,37 @@
               "variantSeed": "0",
               "variantId": "en.n8.c55.r02.seed-0",
               "feedback": {
-                "es": "To be fair introduce un reconocimiento honesto: aquí, un punto a favor tras señalar defectos."
+                "es": "Stand out significa destacar entre otras cosas; con un sujeto singular en presente se dice stands out."
               },
-              "text": "I do not love the ending, and some scenes are too long. But to be ___, the acting is great and the film is never boring."
+              "text": "Several actors in the film are good, but one performance really ___ out: the old man's, who hardly speaks."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:b6bab39ee979090696ed7be5ad67290513035253d3253987ef102af058726778"
+            "contentHash": "sha256:47ec17ec807edc888027d155ab13692a5bf7b0b4f1e17fb206dd28f7d0e36b8a"
           },
           {
             "id": "en.n8.c55.r03",
             "format": "ordenar",
             "prompt": {
-              "es": "Ordena: «Aun así, sostengo que la película resiste el paso del tiempo.»"
+              "es": "Ordena: «Aun así, la película resistirá bien el paso del tiempo cuando la vuelvas a ver.»"
             },
             "answer": {
-              "text": "Even so I would argue that the film holds up",
+              "text": "Even so the film will hold up when you rewatch it",
               "tokens": [
                 "Even",
                 "so",
-                "I",
-                "would",
-                "argue",
-                "that",
                 "the",
                 "film",
-                "holds",
-                "up"
+                "will",
+                "hold",
+                "up",
+                "when",
+                "you",
+                "rewatch",
+                "it"
               ]
             },
             "choices": [],
@@ -4159,7 +4460,7 @@
               "variantSeed": "0",
               "variantId": "en.n8.c55.r03.seed-0",
               "feedback": {
-                "es": "Even so mantiene la postura y I would argue that la presenta con cautela: the film holds up."
+                "es": "Even so mantiene la postura tras ceder un punto, y will hold up when you rewatch it expresa que la película resistirá al volver a verla."
               }
             },
             "accessibility": {
@@ -4167,7 +4468,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:2528bb07d97ad52e1985c7effbd2120d2e9f5fec06c44addcaf308d5493502ea"
+            "contentHash": "sha256:b36461cfafd1ba435d83d43569b5dc78229bfb121ae639e09f3ec4da98b93eef"
           }
         ]
       },

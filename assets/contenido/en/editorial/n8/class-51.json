@@ -472,7 +472,9 @@
           "accepted": [
             "Tom says it is great, but he means it is bad.",
             "Tom says the food is great, but he means he dislikes it.",
-            "Tom says the food is great, but he means it is not good."
+            "Tom says the food is great, but he means it is not good.",
+            "Tom says the food is great, but he really means it is bad.",
+            "He says it is great, but he means he does not like it."
           ]
         },
         "choices": [],
@@ -487,14 +489,59 @@
           "feedback": {
             "es": "El gesto contradice la frase: Tom deja la comida en el plato, así que quiere decir que no le gusta."
           },
-          "text": "TOM: The food is great. (He leaves the food on his plate.)"
+          "text": "TOM: The food is great. (He leaves the food on his plate.)",
+          "scoring": {
+            "wordRange": [
+              6,
+              35
+            ],
+            "evidenceGroups": [
+              [
+                "tom says",
+                "he says"
+              ],
+              [
+                "but he means",
+                "but he really means",
+                "but he actually means",
+                "but what he means is",
+                "but what he really means",
+                "but he means that",
+                "but he wants to say",
+                "but he really thinks",
+                "but he thinks",
+                "but in fact he"
+              ],
+              [
+                "it is bad",
+                "is bad",
+                "it is not good",
+                "not good",
+                "it is not great",
+                "it is not tasty",
+                "it is terrible",
+                "it is awful",
+                "it is disgusting",
+                "he dislikes",
+                "he does not like",
+                "he did not like",
+                "he hates",
+                "he is not enjoying",
+                "the food is not",
+                "the food is terrible",
+                "the food is awful",
+                "the food is disgusting",
+                "he is disappointed"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:a17b993e65de0cc9370061593fa268dda2d10b11a34da21a5cfce597ef9ad334"
+        "contentHash": "sha256:6393df156f797a3f0ec75cd062cd25d1ed4bea175da791735f1c56f9c83c2b92"
       }
     ],
     "evaluation": [
@@ -509,7 +556,7 @@
         },
         "choices": [
           {
-            "text": "He asks her to tell him about the project at once."
+            "text": "He offers to cook her a fresh dinner while she talks."
           },
           {
             "text": "He goes to bed before she finishes eating."
@@ -527,7 +574,7 @@
           "variantSeed": "0",
           "variantId": "en.n8.c51.e01.seed-0",
           "feedback": {
-            "es": "Tom dice que lo entiende y guarda la cena en el horno: un gesto en lugar de más preguntas."
+            "es": "Tom dice que lo entiende y guarda la cena en el horno: un gesto en lugar de más preguntas; no cocina otra ni se va a dormir."
           },
           "audio": "In the scene, Sara comes home late and finds Tom still awake at the kitchen table. He asks whether the meeting went well. She answers that it was fine and that she is not hungry. After a long pause she says that the manager mentioned a new project, and that she would rather not talk about it tonight. Tom says that he understands, but he quietly puts her dinner in the oven.",
           "audioMode": "tts",
@@ -544,7 +591,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:7bc0771381d3616b651630c659de98300101cc28b978a17d46b6d956a15b014a"
+        "contentHash": "sha256:6b9acf4296a5a94d778f0944bfb52bb966332ee72d40f7c5cd84397f453dfcc6"
       },
       {
         "id": "en.n8.c51.e02",
@@ -560,10 +607,10 @@
             "text": "That the meeting was not as fine as she says."
           },
           {
-            "text": "That she is thinking about what to cook for dinner."
+            "text": "That she is annoyed with Tom for waiting up for her."
           },
           {
-            "text": "That she has not understood Tom's question."
+            "text": "That she is too tired to answer the question."
           }
         ],
         "teaches": [],
@@ -575,7 +622,7 @@
           "variantSeed": "0",
           "variantId": "en.n8.c51.e02.seed-0",
           "feedback": {
-            "es": "La pausa contradice su «it was fine»: da a entender que algo del proyecto la preocupa."
+            "es": "La pausa contradice su «it was fine»: da a entender que algo del proyecto la preocupa, no que esté molesta con Tom ni cansada."
           },
           "audio": "In the scene, Sara comes home late and finds Tom still awake at the kitchen table. He asks whether the meeting went well. She answers that it was fine and that she is not hungry. After a long pause she says that the manager mentioned a new project, and that she would rather not talk about it tonight. Tom says that he understands, but he quietly puts her dinner in the oven.",
           "audioMode": "tts",
@@ -592,7 +639,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:79c9a9fbedaae55757e3a2667439672c702f565e9be16814ba9fd05a9dd8f18d"
+        "contentHash": "sha256:13917d9fcbcff090eb6e5e3047b587f559912fb1170a186650a438d9af3eff91"
       },
       {
         "id": "en.n8.c51.e03",
@@ -638,13 +685,13 @@
         },
         "choices": [
           {
-            "text": "It gives the actor a sentence to say aloud."
+            "text": "It shows that Sara is offended by Tom's remark."
           },
           {
             "text": "It hints that Sara is not being completely honest."
           },
           {
-            "text": "It tells the director where to place the camera."
+            "text": "It signals that Sara is searching for another compliment to give."
           }
         ],
         "teaches": [],
@@ -656,7 +703,7 @@
           "variantSeed": "0",
           "variantId": "en.n8.c51.e04.seed-0",
           "feedback": {
-            "es": "La acotación describe una pausa antes de hablar: sugiere duda y contradice el «Really» de la primera línea."
+            "es": "La acotación describe una pausa antes de hablar: sugiere que Sara no es del todo sincera, pues después solo menciona un defecto."
           },
           "text": "SARA: (putting the keys on the table) It is a lovely apartment, Tom. Really.\nTOM: You do not have to be polite.\nSARA: (after a pause) I only said that the street is a little noisy."
         },
@@ -665,7 +712,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:e38bd70b3574c059cd17c5b41379aa65bcf5d6006bd00777b7cf1b090e34f4bb"
+        "contentHash": "sha256:be99e97c5c2fb2c78321dc77aa72e4577c36f8247cae4fb48e86c45ac0593edc"
       }
     ],
     "review": [
@@ -713,13 +760,17 @@
         "id": "en.n8.c51.r02",
         "format": "completar",
         "prompt": {
-          "es": "Completa: «Una pausa larga puede dar a entender que se eligen bien las palabras.»"
+          "es": "Completa: «Quien mira la puerta al aceptar quedarse da a entender que prefiere irse.»"
         },
         "answer": {
           "text": "imply",
           "accepted": [
             "imply",
-            "suggest"
+            "suggest",
+            "indicate",
+            "signal",
+            "show",
+            "hint"
           ]
         },
         "choices": [],
@@ -732,16 +783,16 @@
           "variantSeed": "0",
           "variantId": "en.n8.c51.r02.seed-0",
           "feedback": {
-            "es": "Imply significa dar a entender algo sin decirlo de forma directa: la pausa insinúa cuidado al hablar."
+            "es": "Imply significa dar a entender algo sin decirlo de forma directa: mirar la puerta insinúa que el personaje preferiría irse."
           },
-          "text": "Even when a character says very little, silence carries meaning. A long pause can ___ that the speaker is choosing every word with great care."
+          "text": "A character who keeps looking at the door while agreeing to stay may ___ that he would rather leave."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:c7fede38c6ac9c154818c5216b71ff1b78caa1f9867262bac821437295225346"
+        "contentHash": "sha256:00b8d64c24d88de7ea1a50875745eca141b5f7df762451c139a89ba0b102ca19"
       },
       {
         "id": "en.n8.c51.r03",
