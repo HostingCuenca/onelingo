@@ -1,0 +1,672 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-27: contexto presenta a Rex como el perro de Ana y Tom.",
+      "class-28: explicación del error «Opens the door» reescrita (la -s viene de confundir «abre» imperativo con «él abre»).",
+      "Aceptado: ejemplos 0 y 1 de class-30 son instrucciones reales con put (la clase enseña imperativos), no metalenguaje.",
+      "Aceptado: opciones del ítem en español. Revisado sin cambios: 26, 29, 30."
+    ]
+  },
+  "classes": {
+    "en.n1.class-26": {
+      "explicacion": {
+        "titulo": "Next to y between: al lado de y entre",
+        "texto": "Next to significa «al lado de» y son dos palabras que van siempre juntas: The chair is next to the table. No se dice next of. Between significa «entre» y necesita dos referencias unidas por and (between the chair and the sofa) o un plural con número (between two chairs). Igual que con in, on y under, la frase lleva is: The ball is next to the sofa."
+      },
+      "patron": {
+        "texto": "Objeto + is + between + lugar 1 + and + lugar 2:",
+        "formula": [
+          {
+            "texto": "The ball",
+            "nota": "lo que ubicamos"
+          },
+          {
+            "texto": "is between",
+            "nota": "está entre"
+          },
+          {
+            "texto": "the chair",
+            "nota": "primera referencia"
+          },
+          {
+            "texto": "and the sofa.",
+            "nota": "and + segunda referencia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "next to"
+            },
+            {
+              "texto": "al lado de"
+            },
+            {
+              "texto": "The bed is next to the window."
+            }
+          ],
+          [
+            {
+              "texto": "between … and …"
+            },
+            {
+              "texto": "entre … y …"
+            },
+            {
+              "texto": "The bag is between the chair and the table."
+            }
+          ],
+          [
+            {
+              "texto": "between two …"
+            },
+            {
+              "texto": "entre dos …"
+            },
+            {
+              "texto": "The table is between two chairs."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The chair is next of the table.",
+          "correcto": "The chair is next to the table.",
+          "explicacion": "Es un calco de «al lado de». En inglés se dice next to."
+        },
+        {
+          "incorrecto": "The ball is between the chair.",
+          "correcto": "The ball is between the chair and the sofa.",
+          "explicacion": "Between necesita dos referencias: la silla y el sofá, unidas por and."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia busca su bolsa en la sala y Leo le ayuda.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Where is my bag?",
+            "traduccion": "¿Dónde está mi bolsa?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is next to the door.",
+            "traduccion": "Está al lado de la puerta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, that is Ana's bag.",
+            "traduccion": "No, esa es la bolsa de Ana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh! Your bag is between the sofa and the window.",
+            "traduccion": "¡Oh! Tu bolsa está entre el sofá y la ventana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes! Thank you, Leo.",
+            "traduccion": "¡Sí! Gracias, Leo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está la bolsa de Mia?",
+          "opciones": [
+            {
+              "es": "Entre el sofá y la ventana."
+            },
+            {
+              "es": "Al lado de la puerta."
+            },
+            {
+              "es": "Debajo del sofá."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "La bolsa de al lado de la puerta es de Ana. Leo dice: «Your bag is between the sofa and the window»."
+        }
+      }
+    },
+    "en.n1.class-27": {
+      "explicacion": {
+        "titulo": "Repaso: cinco posiciones en una imagen",
+        "texto": "Para describir una imagen sigue tres pasos: nombra el objeto (A red ball), pon is y elige la posición mirando bien: in (dentro), on (encima), under (debajo), next to (al lado) o between … and … (entre dos cosas). Usa a si mencionas algo por primera vez (A ball is in a box) y the si ya se sabe cuál. El color va antes del objeto: a red ball, a green sofa."
+      },
+      "patron": {
+        "texto": "A + color + objeto + is + posición + lugar:",
+        "formula": [
+          {
+            "texto": "A red ball",
+            "nota": "a + color + objeto"
+          },
+          {
+            "texto": "is",
+            "nota": "está"
+          },
+          {
+            "texto": "next to",
+            "nota": "posición: in, on, under, next to, between"
+          },
+          {
+            "texto": "a green sofa.",
+            "nota": "la referencia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Posición",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "in"
+            },
+            {
+              "texto": "dentro de"
+            }
+          ],
+          [
+            {
+              "texto": "on"
+            },
+            {
+              "texto": "encima de"
+            }
+          ],
+          [
+            {
+              "texto": "under"
+            },
+            {
+              "texto": "debajo de"
+            }
+          ],
+          [
+            {
+              "texto": "next to"
+            },
+            {
+              "texto": "al lado de"
+            }
+          ],
+          [
+            {
+              "texto": "between … and …"
+            },
+            {
+              "texto": "entre … y …"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "A ball red is on a table.",
+          "correcto": "A red ball is on a table.",
+          "explicacion": "El color va antes del objeto: red ball, no ball red (en español decimos «pelota roja»)."
+        },
+        {
+          "incorrecto": "The ball is next the sofa.",
+          "correcto": "The ball is next to the sofa.",
+          "explicacion": "Next to va siempre con to. Sin to la frase queda incompleta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom juegan a «¿Dónde está?» en la sala con su perro Rex.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Where is Rex?",
+            "traduccion": "¿Dónde está Rex?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Rex is under the table.",
+            "traduccion": "Rex está debajo de la mesa."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And where is the red ball?",
+            "traduccion": "¿Y dónde está la pelota roja?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The red ball is between the sofa and the chair.",
+            "traduccion": "La pelota roja está entre el sofá y la silla."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And my book?",
+            "traduccion": "¿Y mi libro?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is on the table.",
+            "traduccion": "Está encima de la mesa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está Rex?",
+          "opciones": [
+            {
+              "es": "Debajo de la mesa."
+            },
+            {
+              "es": "Encima de la mesa."
+            },
+            {
+              "es": "Entre el sofá y la silla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Rex is under the table». El libro está encima de la mesa."
+        }
+      }
+    },
+    "en.n1.class-28": {
+      "explicacion": {
+        "titulo": "Instrucciones: el verbo va primero",
+        "texto": "Para dar una instrucción (imperativo) se empieza directamente con el verbo, sin sujeto: Open the book (Abre el libro). La misma forma sirve para una persona o para varias: Sit down es «siéntate» y también «siéntense». El verbo no lleva -s ni se pone you delante. Algunas instrucciones llevan una palabra extra que no se quita: sit down (siéntate), stand up (ponte de pie)."
+      },
+      "patron": {
+        "texto": "Verbo + cosa:",
+        "formula": [
+          {
+            "texto": "Open",
+            "nota": "el verbo va primero, sin sujeto"
+          },
+          {
+            "texto": "the book.",
+            "nota": "sobre qué se hace la acción"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Instrucción",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Open the door."
+            },
+            {
+              "texto": "Abre la puerta."
+            }
+          ],
+          [
+            {
+              "texto": "Close the book."
+            },
+            {
+              "texto": "Cierra el libro."
+            }
+          ],
+          [
+            {
+              "texto": "Sit down."
+            },
+            {
+              "texto": "Siéntate."
+            }
+          ],
+          [
+            {
+              "texto": "Stand up."
+            },
+            {
+              "texto": "Ponte de pie."
+            }
+          ],
+          [
+            {
+              "texto": "Read the book."
+            },
+            {
+              "texto": "Lee el libro."
+            }
+          ],
+          [
+            {
+              "texto": "Write your name."
+            },
+            {
+              "texto": "Escribe tu nombre."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Opens the door.",
+          "correcto": "Open the door.",
+          "explicacion": "En español «abre» es igual que «él abre», y por eso a veces se añade -s. La instrucción en inglés usa el verbo sin -s: open."
+        },
+        {
+          "incorrecto": "You sit down.",
+          "correcto": "Sit down.",
+          "explicacion": "Con you suena a «tú te sientas». La instrucción empieza directamente con el verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara es la profesora; Tom y Mia llegan a clase.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Good morning! Sit down.",
+            "traduccion": "¡Buenos días! Siéntense."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good morning!",
+            "traduccion": "¡Buenos días!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Tom, open the book and read.",
+            "traduccion": "Tom, abre el libro y lee."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And me?",
+            "traduccion": "¿Y yo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Mia, stand up and close the door.",
+            "traduccion": "Mia, ponte de pie y cierra la puerta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tiene que hacer Mia?",
+          "opciones": [
+            {
+              "es": "Ponerse de pie y cerrar la puerta."
+            },
+            {
+              "es": "Abrir el libro y leer."
+            },
+            {
+              "es": "Escribir su nombre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara le dice a Mia: «Stand up and close the door». Tom es quien abre el libro y lee."
+        }
+      }
+    },
+    "en.n1.class-29": {
+      "explicacion": {
+        "titulo": "Please y don't: pedir con cortesía y prohibir",
+        "texto": "Please vuelve cortés una instrucción. Puede ir al principio (Please sit down) o al final, después de una coma (Sit down, please). Para prohibir se usa don't + verbo: Don't run (No corras). Después de don't el verbo no cambia y no lleva sujeto. No se dice «No run»: en una instrucción, el «no» del español es don't. Para «mirar algo» se dice look at: Look at the book."
+      },
+      "patron": {
+        "texto": "Don't + verbo + cosa:",
+        "formula": [
+          {
+            "texto": "Don't",
+            "nota": "no (prohibición)"
+          },
+          {
+            "texto": "touch",
+            "nota": "verbo sin cambios"
+          },
+          {
+            "texto": "the door.",
+            "nota": "sobre qué"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Instrucción"
+            },
+            {
+              "texto": "verbo …"
+            },
+            {
+              "texto": "Open the book."
+            }
+          ],
+          [
+            {
+              "texto": "Petición cortés"
+            },
+            {
+              "texto": "Please + verbo …"
+            },
+            {
+              "texto": "Please sit down."
+            }
+          ],
+          [
+            {
+              "texto": "Prohibición"
+            },
+            {
+              "texto": "Don't + verbo …"
+            },
+            {
+              "texto": "Don't run."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "No run.",
+          "correcto": "Don't run.",
+          "explicacion": "En una instrucción, «no» se dice don't, no no."
+        },
+        {
+          "incorrecto": "Look the book.",
+          "correcto": "Look at the book.",
+          "explicacion": "Para «mirar algo» hace falta at: look at the book."
+        }
+      ],
+      "situacion": {
+        "contexto": "En casa, Sara habla con su hijo Leo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, please sit down.",
+            "traduccion": "Leo, por favor, siéntate."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. Look at my photo!",
+            "traduccion": "Vale. ¡Mira mi foto!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Nice! Please close the door.",
+            "traduccion": "¡Qué bonita! Por favor, cierra la puerta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the window?",
+            "traduccion": "¿Y la ventana?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, don't close the window.",
+            "traduccion": "No, no cierres la ventana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no debe cerrar Leo?",
+          "opciones": [
+            {
+              "es": "La ventana."
+            },
+            {
+              "es": "La puerta."
+            },
+            {
+              "es": "El libro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Don't close the window». La puerta sí debe cerrarla."
+        }
+      }
+    },
+    "en.n1.class-30": {
+      "explicacion": {
+        "titulo": "Integración: instrucciones con lugar",
+        "texto": "Aquí se combinan todas las instrucciones. Put + cosa + lugar dice dónde colocar algo: Put the book on the table. Con and se unen dos acciones: Sit down and write your name. Please vuelve cortés la instrucción y don't la convierte en prohibición: Don't put the ball on the table. Recuerda: el verbo va primero, sin sujeto; después la cosa y al final el lugar (on, under, next to…)."
+      },
+      "patron": {
+        "texto": "Put + cosa + posición + lugar:",
+        "formula": [
+          {
+            "texto": "Put",
+            "nota": "el verbo va primero"
+          },
+          {
+            "texto": "the bag",
+            "nota": "qué cosa"
+          },
+          {
+            "texto": "under",
+            "nota": "dónde: in, on, under, next to…"
+          },
+          {
+            "texto": "the chair.",
+            "nota": "el lugar"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Instrucción"
+            },
+            {
+              "texto": "Put the book on the table."
+            }
+          ],
+          [
+            {
+              "texto": "Petición cortés"
+            },
+            {
+              "texto": "Please close the door."
+            }
+          ],
+          [
+            {
+              "texto": "Prohibición"
+            },
+            {
+              "texto": "Don't put the ball on the table."
+            }
+          ],
+          [
+            {
+              "texto": "Dos acciones"
+            },
+            {
+              "texto": "Sit down and write your name."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Put on the table the book.",
+          "correcto": "Put the book on the table.",
+          "explicacion": "En inglés primero va la cosa (the book) y después el lugar (on the table)."
+        },
+        {
+          "incorrecto": "Sit down and you write your name.",
+          "correcto": "Sit down and write your name.",
+          "explicacion": "Después de and, la segunda instrucción tampoco lleva sujeto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y su hermano Tom ordenan el dormitorio de Tom.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, please put the books on the desk.",
+            "traduccion": "Tom, por favor, pon los libros encima del escritorio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. And the ball?",
+            "traduccion": "Vale. ¿Y la pelota?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Put the ball in the box.",
+            "traduccion": "Pon la pelota dentro de la caja."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And my bag?",
+            "traduccion": "¿Y mi bolsa?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Put your bag under the bed. Don't put it on the chair.",
+            "traduccion": "Pon tu bolsa debajo de la cama. No la pongas encima de la silla."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde debe poner Tom la pelota?",
+          "opciones": [
+            {
+              "es": "Dentro de la caja."
+            },
+            {
+              "es": "Debajo de la cama."
+            },
+            {
+              "es": "Encima del escritorio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Put the ball in the box». La bolsa va debajo de la cama."
+        }
+      }
+    }
+  }
+}

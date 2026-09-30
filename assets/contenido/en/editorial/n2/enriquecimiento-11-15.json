@@ -1,0 +1,674 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 11,
+    "end": 15
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-13: traducción de «No, I didn't.» → «No, no las encontré.» (fiel).",
+      "class-14: diálogo reordenado (5 líneas) para que Leo no hable dos turnos seguidos; se mantiene «noticed the wrong platform» porque was/were aún no se han enseñado.",
+      "Aceptado: opciones del ítem en español; avisos del validador «opción correcta apenas aparece»."
+    ]
+  },
+  "classes": {
+    "en.n2.class-11": {
+      "explicacion": {
+        "titulo": "Pasado regular con -ed y expresiones de tiempo",
+        "texto": "El pasado simple de los verbos regulares se forma con -ed y es igual para todas las personas: I visited, she visited, they visited. Ortografía: si el verbo termina en -e, solo se añade -d (arrive → arrived); si termina en vocal + consonante y es corto, se dobla la consonante (plan → planned). Expresiones de pasado: yesterday (ayer), last night (anoche), on Monday. Ago significa «hace» y va después de la cantidad, al revés que en español: ten minutes ago (hace diez minutos)."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo-ed + complemento + expresión de pasado:",
+        "formula": [
+          {
+            "texto": "The bus",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "arrived",
+            "nota": "arrive + -d: pasado regular"
+          },
+          {
+            "texto": "ten minutes ago.",
+            "nota": "cantidad + ago = hace…"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Regla",
+          "Pasado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "visit"
+            },
+            {
+              "texto": "+ -ed"
+            },
+            {
+              "texto": "visited"
+            }
+          ],
+          [
+            {
+              "texto": "arrive"
+            },
+            {
+              "texto": "termina en -e: + -d"
+            },
+            {
+              "texto": "arrived"
+            }
+          ],
+          [
+            {
+              "texto": "plan"
+            },
+            {
+              "texto": "dobla la consonante + -ed"
+            },
+            {
+              "texto": "planned"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The bus arrived ago ten minutes.",
+          "correcto": "The bus arrived ten minutes ago.",
+          "explicacion": "Ago va después de la cantidad: ten minutes ago, no «ago ten minutes»."
+        },
+        {
+          "incorrecto": "We watch a film last night.",
+          "correcto": "We watched a film last night.",
+          "explicacion": "Con last night la acción es pasada: el verbo lleva -ed."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pregunta a Leo por qué no contestó ayer.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Leo, I called you last night!",
+            "traduccion": "¡Leo, te llamé anoche!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sorry! I visited my grandmother yesterday.",
+            "traduccion": "¡Perdón! Ayer visité a mi abuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "At night?",
+            "traduccion": "¿Por la noche?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, we cooked dinner together. I arrived home ten minutes ago.",
+            "traduccion": "Sí, cocinamos la cena juntos. Llegué a casa hace diez minutos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a quién visitó Leo ayer?",
+          "opciones": [
+            {
+              "es": "A su abuela."
+            },
+            {
+              "es": "A Ana."
+            },
+            {
+              "es": "A su tía."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I visited my grandmother yesterday»."
+        }
+      }
+    },
+    "en.n2.class-12": {
+      "explicacion": {
+        "titulo": "Verbos irregulares frecuentes en pasado",
+        "texto": "Muchos verbos frecuentes no forman el pasado con -ed: tienen una forma propia que hay que aprender de memoria. Go → went, have → had, make → made, see → saw, take → took, buy → bought, come → came, give → gave. Como en los regulares, la forma es la misma para todas las personas: I went, she went, they went. El error típico es añadir -ed a estos verbos (goed, haved, comed, taked). Had también sirve para comidas: We had lunch (almorzamos)."
+      },
+      "patron": {
+        "texto": "Sujeto + pasado irregular + complemento:",
+        "formula": [
+          {
+            "texto": "We",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "went",
+            "nota": "pasado de go, sin -ed"
+          },
+          {
+            "texto": "to the market",
+            "nota": "adónde"
+          },
+          {
+            "texto": "early.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Presente",
+          "Pasado",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "go"
+            },
+            {
+              "texto": "went"
+            },
+            {
+              "texto": "fue / fuimos"
+            }
+          ],
+          [
+            {
+              "texto": "have"
+            },
+            {
+              "texto": "had"
+            },
+            {
+              "texto": "tuvo / tomó"
+            }
+          ],
+          [
+            {
+              "texto": "make"
+            },
+            {
+              "texto": "made"
+            },
+            {
+              "texto": "hizo"
+            }
+          ],
+          [
+            {
+              "texto": "see"
+            },
+            {
+              "texto": "saw"
+            },
+            {
+              "texto": "vio"
+            }
+          ],
+          [
+            {
+              "texto": "take"
+            },
+            {
+              "texto": "took"
+            },
+            {
+              "texto": "tomó"
+            }
+          ],
+          [
+            {
+              "texto": "buy"
+            },
+            {
+              "texto": "bought"
+            },
+            {
+              "texto": "compró"
+            }
+          ],
+          [
+            {
+              "texto": "come"
+            },
+            {
+              "texto": "came"
+            },
+            {
+              "texto": "vino"
+            }
+          ],
+          [
+            {
+              "texto": "give"
+            },
+            {
+              "texto": "gave"
+            },
+            {
+              "texto": "dio"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We goed to the market early.",
+          "correcto": "We went to the market early.",
+          "explicacion": "Go es irregular: su pasado es went, no goed."
+        },
+        {
+          "incorrecto": "Yesterday I buy fresh bread.",
+          "correcto": "Yesterday I bought fresh bread.",
+          "explicacion": "Con yesterday va pasado; el pasado de buy es bought."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos hablan de su sábado.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "On Saturday, I went to the market with my grandmother.",
+            "traduccion": "El sábado fui al mercado con mi abuela."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I went to the park. I saw Tom there.",
+            "traduccion": "Yo fui al parque. Allí vi a Tom."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We bought fresh bread and had breakfast together.",
+            "traduccion": "Compramos pan fresco y desayunamos juntas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Tom came to my house after the park.",
+            "traduccion": "Tom vino a mi casa después del parque."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a quién vio Carlos en el parque?",
+          "opciones": [
+            {
+              "es": "A Tom."
+            },
+            {
+              "es": "A la abuela de Mia."
+            },
+            {
+              "es": "A Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «I went to the park. I saw Tom there»."
+        }
+      }
+    },
+    "en.n2.class-13": {
+      "explicacion": {
+        "titulo": "Preguntas y negaciones en pasado con did",
+        "texto": "Para preguntar en pasado se pone did delante del sujeto y el verbo vuelve a su forma base: Did you find the address? (no Did you found). Con when, why o where: palabra interrogativa + did + sujeto + verbo base: Why did Ana leave early? Para negar se usa didn't + verbo base: I didn't find it. El pasado se marca una sola vez, en did. En español basta la entonación para preguntar; en inglés did es obligatorio."
+      },
+      "patron": {
+        "texto": "Where/When/Why + did + sujeto + verbo base?",
+        "formula": [
+          {
+            "texto": "Where",
+            "nota": "palabra interrogativa"
+          },
+          {
+            "texto": "did",
+            "nota": "marca el pasado"
+          },
+          {
+            "texto": "you",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "leave the keys?",
+            "nota": "verbo base, sin -ed"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Afirmativa"
+            },
+            {
+              "texto": "I found the address."
+            }
+          ],
+          [
+            {
+              "texto": "Negativa"
+            },
+            {
+              "texto": "I didn't find the address."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "Did you find the address?"
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta con wh-"
+            },
+            {
+              "texto": "When did the bus arrive?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He didn't answered yesterday.",
+          "correcto": "He didn't answer yesterday.",
+          "explicacion": "Después de didn't el verbo va en forma base: answer, sin -ed."
+        },
+        {
+          "incorrecto": "Where you left the keys?",
+          "correcto": "Where did you leave the keys?",
+          "explicacion": "La pregunta en pasado necesita did, y el verbo vuelve a la forma base: leave."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom busca sus llaves antes de ir a la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, did you find your keys?",
+            "traduccion": "Tom, ¿encontraste tus llaves?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, I didn't. They are not in my bag.",
+            "traduccion": "No, no las encontré. No están en mi bolsa."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Where did you leave them yesterday?",
+            "traduccion": "¿Dónde las dejaste ayer?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I don't remember. Wait... they are in my jacket!",
+            "traduccion": "No me acuerdo. Espera... ¡están en mi chaqueta!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde estaban las llaves de Tom?",
+          "opciones": [
+            {
+              "es": "En su chaqueta."
+            },
+            {
+              "es": "En su bolsa."
+            },
+            {
+              "es": "En la escuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «they are in my jacket!»."
+        }
+      }
+    },
+    "en.n2.class-14": {
+      "explicacion": {
+        "titulo": "Contar en orden: first, then, next, finally",
+        "texto": "Para contar una historia en orden se ponen conectores al principio de la frase, seguidos de coma: First (primero), Then (después), Next (a continuación), Suddenly (de repente, para algo inesperado) y Finally (finalmente, el último paso). Then y next casi significan lo mismo: úsalos para no repetir. Los verbos van en pasado simple: I checked, I walked, I bought. Ojo: «después», solo al inicio, no se dice After, sino Then o After that."
+      },
+      "patron": {
+        "texto": "Conector + coma + sujeto + verbo en pasado:",
+        "formula": [
+          {
+            "texto": "First,",
+            "nota": "conector de orden + coma"
+          },
+          {
+            "texto": "I",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "checked",
+            "nota": "verbo en pasado"
+          },
+          {
+            "texto": "the train time.",
+            "nota": "complemento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Significado",
+          "Uso"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "First"
+            },
+            {
+              "texto": "primero"
+            },
+            {
+              "texto": "inicia la historia"
+            }
+          ],
+          [
+            {
+              "texto": "Then / Next"
+            },
+            {
+              "texto": "después / a continuación"
+            },
+            {
+              "texto": "pasos siguientes"
+            }
+          ],
+          [
+            {
+              "texto": "Suddenly"
+            },
+            {
+              "texto": "de repente"
+            },
+            {
+              "texto": "algo inesperado"
+            }
+          ],
+          [
+            {
+              "texto": "Finally"
+            },
+            {
+              "texto": "finalmente"
+            },
+            {
+              "texto": "último paso"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "After, I bought my ticket.",
+          "correcto": "Then, I bought my ticket.",
+          "explicacion": "«Después», solo al inicio, se dice Then o After that, no After."
+        },
+        {
+          "incorrecto": "Then, she call a taxi.",
+          "correcto": "Then, she called a taxi.",
+          "explicacion": "En una historia pasada el verbo va en pasado: called."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le cuenta a Mia su viaje en tren al pueblo de su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "First, we walked to the station. Then, we bought our tickets.",
+            "traduccion": "Primero caminamos hasta la estación. Después compramos los billetes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And then?",
+            "traduccion": "¿Y después?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Suddenly, my brother noticed the wrong platform!",
+            "traduccion": "¡De repente, mi hermano notó que era el andén equivocado!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh no!",
+            "traduccion": "¡Oh, no!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Next, we took a later train. Finally, we arrived in my grandmother's town.",
+            "traduccion": "A continuación tomamos un tren más tarde. Finalmente llegamos al pueblo de mi abuela."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hicieron justo después de caminar hasta la estación?",
+          "opciones": [
+            {
+              "es": "Compraron los billetes."
+            },
+            {
+              "es": "Tomaron un tren más tarde."
+            },
+            {
+              "es": "Llegaron al pueblo de la abuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «First, we walked to the station. Then, we bought our tickets»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "Suddenly, I noticed the wrong platform.",
+          "es": "De repente, noté que era el andén equivocado.",
+          "nota": "Suddenly introduce un hecho inesperado."
+        }
+      ]
+    },
+    "en.n2.class-15": {
+      "explicacion": {
+        "titulo": "Contar un día que cambió los planes",
+        "texto": "Esta clase integra el pasado para contar un imprevisto. Usa pasado regular (-ed: cancelled, changed, decided) e irregular (sent, found, bought, came), y didn't + verbo base para lo que no pasó: Mia didn't continue her journey. Decided to + verbo presenta la nueva decisión; instead, al final, indica que hiciste otra cosa en lugar del plan, y because of + sustantivo da la causa: because of the storm. Ordena la historia con First, Then y Finally."
+      },
+      "patron": {
+        "texto": "Because of + causa, + sujeto + decided to + verbo + instead:",
+        "formula": [
+          {
+            "texto": "Because of the storm,",
+            "nota": "causa: because of + sustantivo"
+          },
+          {
+            "texto": "we decided to",
+            "nota": "decisión: decided to + verbo base"
+          },
+          {
+            "texto": "stay at home",
+            "nota": "lo que hicimos"
+          },
+          {
+            "texto": "instead.",
+            "nota": "en lugar del plan"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We decided stay in town.",
+          "correcto": "We decided to stay in town.",
+          "explicacion": "Decide va seguido de to + verbo: decided to stay."
+        },
+        {
+          "incorrecto": "We didn't went to the park.",
+          "correcto": "We didn't go to the park.",
+          "explicacion": "Después de didn't va el verbo base: go, no went."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Sara por su sábado.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you go to the park on Saturday?",
+            "traduccion": "¿Fuiste al parque el sábado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, we didn't. A storm changed our plans.",
+            "traduccion": "No. Una tormenta cambió nuestros planes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What did you do?",
+            "traduccion": "¿Qué hicieron?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "We decided to stay at home instead. We made dinner and watched a film.",
+            "traduccion": "En su lugar, decidimos quedarnos en casa. Hicimos la cena y vimos una película."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Sara no fue al parque?",
+          "opciones": [
+            {
+              "es": "Por una tormenta."
+            },
+            {
+              "es": "Porque perdió el autobús."
+            },
+            {
+              "es": "Porque hizo la cena."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «A storm changed our plans»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "We decided to stay in town instead.",
+          "es": "En su lugar, decidimos quedarnos en la ciudad.",
+          "nota": "Decided to + verbo presenta la nueva decisión; instead: en lugar del plan."
+        }
+      ]
+    }
+  }
+}

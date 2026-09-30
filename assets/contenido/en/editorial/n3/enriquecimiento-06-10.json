@@ -1,0 +1,583 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 6,
+    "end": 10
+  },
+  "classes": {
+    "en.n3.class-06": {
+      "explicacion": {
+        "titulo": "Past continuous: el fondo de una escena",
+        "texto": "Para describir lo que estaba pasando en una escena del pasado se usa was/were + verbo en -ing: It was raining (estaba lloviendo). Passengers were waiting (los pasajeros esperaban). Was va con I, he, she, it o un sujeto singular; were, con you, we, they o un sujeto plural. Esta forma crea el fondo; el hecho breve que ocurre en esa escena va en past simple: Traffic was moving when a door slammed. Ojo: el sujeto es obligatorio, también it para el tiempo."
+      },
+      "patron": {
+        "texto": "Sujeto + was/were + verbo en -ing + lugar:",
+        "formula": [
+          {
+            "texto": "The passengers",
+            "nota": "sujeto plural"
+          },
+          {
+            "texto": "were waiting",
+            "nota": "were + -ing: acción en curso"
+          },
+          {
+            "texto": "on the platform.",
+            "nota": "dónde ocurría"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / he / she / it"
+            },
+            {
+              "texto": "was + -ing"
+            },
+            {
+              "texto": "It was raining."
+            }
+          ],
+          [
+            {
+              "texto": "you / we / they"
+            },
+            {
+              "texto": "were + -ing"
+            },
+            {
+              "texto": "People were waiting."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Was raining at six.",
+          "correcto": "It was raining at six.",
+          "explicacion": "En español decimos «estaba lloviendo» sin sujeto, pero en inglés hace falta it."
+        },
+        {
+          "incorrecto": "My friends was playing in the park.",
+          "correcto": "My friends were playing in the park.",
+          "explicacion": "Con un sujeto plural (my friends) se usa were."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Leo cómo estaba el parque ayer por la tarde.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What was happening in the park?",
+            "traduccion": "¿Qué pasaba en el parque?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It was raining, but some children were playing with a ball.",
+            "traduccion": "Estaba lloviendo, pero unos niños jugaban con una pelota."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Their father was waiting under a tree.",
+            "traduccion": "Su padre esperaba debajo de un árbol."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And what were you doing?",
+            "traduccion": "¿Y tú qué hacías?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I was reading on a bench.",
+            "traduccion": "Yo estaba leyendo en un banco."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué estaba haciendo Mia?",
+          "opciones": [
+            {
+              "es": "Estaba leyendo en un banco."
+            },
+            {
+              "es": "Estaba jugando con una pelota."
+            },
+            {
+              "es": "Estaba esperando debajo de un árbol."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I was reading on a bench». Los niños jugaban y su padre esperaba."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "It was a cold evening, and people were walking home.",
+          "es": "Era una tarde fría y la gente volvía a casa.",
+          "nota": "Was/were + -ing describe lo que estaba pasando: el fondo de la escena."
+        }
+      ]
+    },
+    "en.n3.class-07": {
+      "explicacion": {
+        "titulo": "When y while: fondo e interrupción",
+        "texto": "Para contar que algo breve interrumpió una acción en curso, combina dos pasados: la acción larga con was/were + -ing y el hecho breve en past simple. While (mientras) suele ir con la acción larga: While we were walking, the rain started. When (cuando) suele ir con el hecho breve: I was cooking when the phone rang. Si la frase empieza con While o When, pon una coma entre las dos partes. Y no inviertas el sujeto: the phone rang, no rang the phone."
+      },
+      "patron": {
+        "texto": "Acción en curso + when + hecho breve:",
+        "formula": [
+          {
+            "texto": "I was cooking",
+            "nota": "fondo: was + -ing"
+          },
+          {
+            "texto": "when",
+            "nota": "cuando: introduce el hecho breve"
+          },
+          {
+            "texto": "the phone rang.",
+            "nota": "hecho breve: past simple"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Va con…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "while"
+            },
+            {
+              "texto": "la acción larga: was/were + -ing"
+            },
+            {
+              "texto": "While we were walking, it started to rain."
+            }
+          ],
+          [
+            {
+              "texto": "when"
+            },
+            {
+              "texto": "el hecho breve: past simple"
+            },
+            {
+              "texto": "I was cooking when the phone rang."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was cooking when the phone was ringing.",
+          "correcto": "I was cooking when the phone rang.",
+          "explicacion": "El hecho breve que interrumpe va en past simple (rang), no en -ing."
+        },
+        {
+          "incorrecto": "While I was cooking, rang the phone.",
+          "correcto": "While I was cooking, the phone rang.",
+          "explicacion": "Es un calco de «sonó el teléfono». En inglés el sujeto va delante del verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le cuenta a Ana qué le pasó ayer con la lluvia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Did you see the rain yesterday?",
+            "traduccion": "¿Viste la lluvia ayer?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes! I was walking home when it started.",
+            "traduccion": "¡Sí! Iba caminando a casa cuando empezó."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Oh no! What did you do?",
+            "traduccion": "¡Oh, no! ¿Qué hiciste?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I waited at the bus stop.",
+            "traduccion": "Esperé en la parada del autobús."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "While I was waiting, my sister arrived with an umbrella.",
+            "traduccion": "Mientras esperaba, llegó mi hermana con un paraguas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hacía Tom cuando empezó a llover?",
+          "opciones": [
+            {
+              "es": "Caminaba a casa."
+            },
+            {
+              "es": "Esperaba en la parada."
+            },
+            {
+              "es": "Hablaba con su hermana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I was walking home when it started». Esperó en la parada después."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "While Mia was reading, the alarm rang.",
+          "es": "Mientras Mia leía, sonó la alarma.",
+          "nota": "While + acción larga (was reading); el hecho breve (rang) en past simple."
+        }
+      ]
+    },
+    "en.n3.class-08": {
+      "explicacion": {
+        "titulo": "La cronología de un incidente",
+        "texto": "Para contar un incidente en orden, sigue tres pasos. El escenario: qué estaba pasando, con was/were + -ing (People were shopping). La interrupción: el hecho breve en past simple, a menudo con when o suddenly (Suddenly, a glass broke). La reacción: lo que se hizo después, también en past simple, con so o afterwards (so we moved away). Un testigo cuenta solo lo que vio u oyó. Ojo: «después», solo y al principio de la frase, es afterwards; after necesita algo detrás."
+      },
+      "patron": {
+        "texto": "Escenario + interrupción + reacción:",
+        "formula": [
+          {
+            "texto": "Mia was reading",
+            "nota": "escenario: was + -ing"
+          },
+          {
+            "texto": "when a glass fell,",
+            "nota": "interrupción: when + past simple"
+          },
+          {
+            "texto": "so she cleaned the floor.",
+            "nota": "reacción: so + past simple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Suddenly, fell a shelf.",
+          "correcto": "Suddenly, a shelf fell.",
+          "explicacion": "Es un calco de «de repente, cayó un estante». En inglés el sujeto va antes del verbo."
+        },
+        {
+          "incorrecto": "After, we moved away.",
+          "correcto": "Afterwards, we moved away.",
+          "explicacion": "«Después», sin nada detrás, es afterwards. After necesita algo después: after the fall."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le cuenta a su padre, Carlos, lo que pasó en una tienda.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What happened at the shop?",
+            "traduccion": "¿Qué pasó en la tienda?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "People were shopping, and I was looking at the games.",
+            "traduccion": "La gente compraba y yo miraba los juegos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Suddenly, a shelf fell near the door.",
+            "traduccion": "De repente, cayó un estante cerca de la puerta."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Oh no! What did you do?",
+            "traduccion": "¡Oh, no! ¿Qué hiciste?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Afterwards, we moved away, and a worker closed that part of the shop.",
+            "traduccion": "Después, nos alejamos y un trabajador cerró esa parte de la tienda."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué estaba haciendo Leo antes de la caída?",
+          "opciones": [
+            {
+              "es": "Miraba los juegos."
+            },
+            {
+              "es": "Cerraba la puerta."
+            },
+            {
+              "es": "Ayudaba a un trabajador."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I was looking at the games». Es el escenario, en was + -ing."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "People were shopping when a shelf fell. Afterwards, everyone left the shop.",
+          "es": "La gente compraba cuando cayó un estante. Después, todos salieron de la tienda.",
+          "nota": "Escenario, interrupción y reacción, en ese orden."
+        },
+        {
+          "indice": 1,
+          "en": "It was getting dark, and people were waiting at the bus stop.",
+          "es": "Estaba oscureciendo y la gente esperaba en la parada del autobús.",
+          "nota": "El escenario: qué pasaba y dónde, con was/were + -ing."
+        },
+        {
+          "indice": 2,
+          "en": "The witness heard a loud noise and saw the broken glass.",
+          "es": "El testigo oyó un ruido fuerte y vio el vidrio roto.",
+          "nota": "Un testigo cuenta solo lo que vio u oyó."
+        }
+      ]
+    },
+    "en.n3.class-09": {
+      "explicacion": {
+        "titulo": "Contar una interrupción: contexto, reacción y final",
+        "texto": "Un buen relato de un incidente tiene cuatro partes: el contexto en past continuous (I was carrying a tray), la interrupción breve en past simple con when (when I slipped), la reacción en past simple (so a friend shouted a warning) y el desenlace con eventually: Eventually, the area was safe. Ojo: eventually no significa «eventualmente» (a veces); significa «al final, después de un tiempo». Para «a veces» se dice sometimes."
+      },
+      "patron": {
+        "texto": "Contexto + interrupción + reacción + desenlace:",
+        "formula": [
+          {
+            "texto": "I was carrying a tray",
+            "nota": "contexto: was + -ing"
+          },
+          {
+            "texto": "when I slipped,",
+            "nota": "interrupción: past simple"
+          },
+          {
+            "texto": "so my friend shouted.",
+            "nota": "reacción: so + past simple"
+          },
+          {
+            "texto": "Eventually, everything was fine.",
+            "nota": "desenlace: eventually (al final)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was carrying a tray when I was slipping.",
+          "correcto": "I was carrying a tray when I slipped.",
+          "explicacion": "La interrupción es un hecho breve: va en past simple (slipped)."
+        },
+        {
+          "incorrecto": "We eventually eat pizza on Sundays.",
+          "correcto": "We sometimes eat pizza on Sundays.",
+          "explicacion": "Eventually es «al final», no «eventualmente». Para «a veces» se usa sometimes."
+        }
+      ],
+      "situacion": {
+        "contexto": "En el comedor de la escuela, Tom ve que Mia tiene la chaqueta mojada.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Why is your jacket wet?",
+            "traduccion": "¿Por qué tienes la chaqueta mojada?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I was carrying my tray when I slipped.",
+            "traduccion": "Llevaba mi bandeja cuando me resbalé."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My juice spilled, so Leo shouted, \"Be careful!\"",
+            "traduccion": "Se me derramó el jugo, así que Leo gritó: «¡Cuidado!»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Are you OK?",
+            "traduccion": "¿Estás bien?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. A teacher checked the floor, and eventually we finished lunch.",
+            "traduccion": "Sí. Una profesora revisó el suelo y al final terminamos de comer."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Leo?",
+          "opciones": [
+            {
+              "es": "Gritó para avisar."
+            },
+            {
+              "es": "Revisó el suelo."
+            },
+            {
+              "es": "Se resbaló con la bandeja."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cuenta: «Leo shouted, Be careful!». La profesora revisó el suelo y Mia fue quien se resbaló."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Before the problem, people were eating and talking.",
+          "es": "Antes del problema, la gente comía y hablaba.",
+          "nota": "El contexto: lo que pasaba antes, con was/were + -ing."
+        }
+      ]
+    },
+    "en.n3.class-10": {
+      "explicacion": {
+        "titulo": "Explicar un retraso y pedir una solución",
+        "texto": "Para explicar un retraso, sigue este orden: 1) qué estabas haciendo, en past continuous (I was travelling to the clinic); 2) la causa, un hecho breve en past simple (when a van blocked the road); 3) qué hiciste después, con horas (At 9:40, I took a taxi); 4) una petición concreta y amable: Could I have a later appointment? Could you move my booking? Después de could, el verbo va en forma base y sin to."
+      },
+      "patron": {
+        "texto": "Fondo + causa + reacción + petición:",
+        "formula": [
+          {
+            "texto": "I was travelling to the clinic",
+            "nota": "fondo: was + -ing"
+          },
+          {
+            "texto": "when a van blocked the road.",
+            "nota": "causa: hecho breve en past simple"
+          },
+          {
+            "texto": "I took a taxi at 9:40.",
+            "nota": "reacción con hora"
+          },
+          {
+            "texto": "Could I have a later appointment?",
+            "nota": "petición: could + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Can you to change my appointment?",
+          "correcto": "Could you change my appointment?",
+          "explicacion": "Después de can o could el verbo va sin to; could suena más amable."
+        },
+        {
+          "incorrecto": "I arrived late because the traffic.",
+          "correcto": "I arrived late because of the traffic.",
+          "explicacion": "Because va delante de una frase con verbo; delante de un nombre solo se usa because of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo llega tarde a clase y habla con su profesora, Sara.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, you are late. What happened?",
+            "traduccion": "Leo, llegas tarde. ¿Qué pasó?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I was travelling by bus when it broke down.",
+            "traduccion": "Iba en autobús cuando se averió."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We waited for twenty minutes, so I walked here.",
+            "traduccion": "Esperamos veinte minutos, así que vine caminando."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I missed the test. Could I do it tomorrow?",
+            "traduccion": "Me perdí la prueba. ¿Podría hacerla mañana?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, you can do it tomorrow at nine.",
+            "traduccion": "Sí, puedes hacerla mañana a las nueve."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Leo?",
+          "opciones": [
+            {
+              "es": "Hacer la prueba mañana."
+            },
+            {
+              "es": "Esperar el autobús."
+            },
+            {
+              "es": "Llamar a su madre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo pide: «Could I do it tomorrow?». Sara acepta: mañana a las nueve."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I was travelling to the clinic by bus.",
+          "es": "Iba a la clínica en autobús.",
+          "nota": "Empieza con el trayecto en curso: was + -ing."
+        },
+        {
+          "indice": 1,
+          "en": "A van blocked the road at 9:25.",
+          "es": "Una furgoneta bloqueó la carretera a las 9:25.",
+          "nota": "La causa: un hecho breve en past simple."
+        },
+        {
+          "indice": 2,
+          "en": "My appointment was at ten, but I arrived at 10:20.",
+          "es": "Mi cita era a las diez, pero llegué a las 10:20.",
+          "nota": "Las horas concretas permiten comprobar el retraso."
+        },
+        {
+          "indice": 3,
+          "en": "I got off the bus and took an alternative route.",
+          "es": "Me bajé del autobús y tomé una ruta alternativa.",
+          "nota": "La reacción: qué hiciste después, en past simple."
+        },
+        {
+          "indice": 4,
+          "en": "Could you move my appointment to 10:30?",
+          "es": "¿Podría cambiar mi cita a las 10:30?",
+          "nota": "Petición concreta y amable: could + verbo base."
+        },
+        {
+          "indice": 5,
+          "en": "I was checking in for my flight when the fire alarm sounded. Staff moved everyone outside at 7:20. Could you book me on the 10:15 flight?",
+          "es": "Estaba haciendo el registro de mi vuelo cuando sonó la alarma de incendios. El personal sacó a todos afuera a las 7:20. ¿Podría reservarme en el vuelo de las 10:15?",
+          "nota": "Fondo, causa, reacción con hora y petición concreta."
+        }
+      ]
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisado sin cambios: class-06 a class-10. Explicaciones correctas (was/were + -ing, when/while, afterwards vs after, eventually ≠ «eventualmente», could + verbo base); errores plausibles de hispanohablantes; ítems con una sola respuesta.",
+      "P2 aceptado: class-10, error 1 corrige a la vez can→could y quita to; la explicación cubre ambos cambios.",
+      "P2 aceptado: class-08 conserva los ejemplos 3–4 originales (algo metalingüísticos, pero frases reales con traducción fiel).",
+      "Avisos del validador sobre opciones en español: esperados."
+    ]
+  }
+}

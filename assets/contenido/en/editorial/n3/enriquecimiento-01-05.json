@@ -1,0 +1,593 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "classes": {
+    "en.n3.class-01": {
+      "explicacion": {
+        "titulo": "Present perfect: un resultado que importa ahora",
+        "texto": "El present perfect (have/has + participio) cuenta una acción pasada cuyo resultado se nota ahora: I have repaired the lamp, so it works now (he reparado la lámpara, así que ahora funciona). Usa has con he, she, it o un solo nombre. Just (acabar de) y already (ya) van entre have y el participio; yet (todavía, ya) va al final en negativas y preguntas. Si dices cuándo pasó (yesterday, last Friday), usa past simple: I repaired it yesterday."
+      },
+      "patron": {
+        "texto": "Sujeto + have/has + participio + resultado actual:",
+        "formula": [
+          {
+            "texto": "Leo",
+            "nota": "sujeto: una persona (he)"
+          },
+          {
+            "texto": "has repaired",
+            "nota": "has + participio"
+          },
+          {
+            "texto": "the broken lamp,",
+            "nota": "lo que cambió"
+          },
+          {
+            "texto": "so it works now.",
+            "nota": "so + resultado que se ve ahora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "have + participio"
+            },
+            {
+              "texto": "We have cleaned the room."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "has + participio"
+            },
+            {
+              "texto": "Leo has fixed the shelf."
+            }
+          ],
+          [
+            {
+              "texto": "negativa"
+            },
+            {
+              "texto": "have/has not + participio"
+            },
+            {
+              "texto": "The team has not finished yet."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have repaired the lamp yesterday.",
+          "correcto": "I repaired the lamp yesterday.",
+          "explicacion": "Con un momento terminado (yesterday, last Friday) se usa past simple, no present perfect."
+        },
+        {
+          "incorrecto": "Leo have fixed the shelf.",
+          "correcto": "Leo has fixed the shelf.",
+          "explicacion": "Con he, she, it o un solo nombre (Leo) se usa has."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia vuelve a casa y habla con su hermano Leo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, is my lamp still broken?",
+            "traduccion": "Leo, ¿mi lámpara sigue rota?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. I have just repaired it, so it works now.",
+            "traduccion": "No. Acabo de repararla, así que ahora funciona."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good! Have you cleaned your room yet?",
+            "traduccion": "¡Bien! ¿Ya has limpiado tu habitación?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Not yet. But our mother has already made dinner.",
+            "traduccion": "Todavía no. Pero nuestra madre ya ha hecho la cena."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tarea sigue sin hacerse?",
+          "opciones": [
+            {
+              "es": "Limpiar su habitación."
+            },
+            {
+              "es": "Reparar la lámpara."
+            },
+            {
+              "es": "Hacer la cena."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo responde «Not yet» cuando Mia le pregunta si ha limpiado su habitación."
+        }
+      }
+    },
+    "en.n3.class-02": {
+      "explicacion": {
+        "titulo": "Experiencia (have been) o hecho con fecha (went)",
+        "texto": "Para hablar de experiencias de tu vida sin decir cuándo, usa present perfect: Have you ever worked abroad? (¿alguna vez has trabajado en el extranjero?). Ever va en preguntas; never ya es negativo, así que no lleva not: I have never been abroad. Cuando das una fecha o un momento terminado (in 2022, last May, yesterday), cambia a past simple: I visited the centre in 2022. Lo natural es dar primero la experiencia y después el detalle con fecha."
+      },
+      "patron": {
+        "texto": "Experiencia sin fecha + detalle con fecha:",
+        "formula": [
+          {
+            "texto": "She has given several talks;",
+            "nota": "experiencia: has + participio, sin fecha"
+          },
+          {
+            "texto": "she spoke here",
+            "nota": "detalle concreto: past simple"
+          },
+          {
+            "texto": "last May.",
+            "nota": "momento terminado"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Quiero decir…",
+          "Tiempo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "experiencia, sin fecha"
+            },
+            {
+              "texto": "have/has + participio"
+            },
+            {
+              "texto": "Have you ever been abroad?"
+            }
+          ],
+          [
+            {
+              "texto": "hecho con fecha"
+            },
+            {
+              "texto": "past simple"
+            },
+            {
+              "texto": "We visited the centre in 2022."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have visited the centre in 2022.",
+          "correcto": "I visited the centre in 2022.",
+          "explicacion": "Con una fecha terminada (in 2022) se usa past simple."
+        },
+        {
+          "incorrecto": "I haven't never been abroad.",
+          "correcto": "I have never been abroad.",
+          "explicacion": "En inglés no hay doble negación: never ya es negativo, no se añade not."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara hablan de viajes en el recreo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Have you ever been abroad, Sara?",
+            "traduccion": "¿Alguna vez has estado en el extranjero, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, I have. I travelled to Spain with my family last summer.",
+            "traduccion": "Sí. Viajé a España con mi familia el verano pasado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Really? I have never travelled abroad.",
+            "traduccion": "¿De verdad? Yo nunca he viajado al extranjero."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My brother has visited several countries.",
+            "traduccion": "Mi hermano ha visitado varios países."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién no ha viajado nunca al extranjero?",
+          "opciones": [
+            {
+              "es": "Tom."
+            },
+            {
+              "es": "Sara."
+            },
+            {
+              "es": "El hermano de Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I have never travelled abroad». Sara viajó a España el verano pasado."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Have you ever been to a concert? Yes, I went to one last May.",
+          "es": "¿Alguna vez has ido a un concierto? Sí, fui a uno en mayo pasado.",
+          "nota": "Primero la experiencia (have been) y luego el detalle con fecha (went)."
+        }
+      ]
+    },
+    "en.n3.class-03": {
+      "explicacion": {
+        "titulo": "Resultado, fecha y método de un cambio",
+        "texto": "Una actualización clara tiene tres datos. El resultado general va en present perfect porque importa ahora: The service has improved. La fecha concreta va en past simple con on + día: We installed it on 12 March. El método dice cómo se hizo: We solved it by replacing the cable (by + verbo en -ing). Para pedir estos datos pregunta con did: When did you change it? How did you solve it? Después de did el verbo va en forma base (change, no changed)."
+      },
+      "patron": {
+        "texto": "Resultado general + hecho con fecha + método:",
+        "formula": [
+          {
+            "texto": "The service has improved.",
+            "nota": "resultado general: has + participio"
+          },
+          {
+            "texto": "We fixed it",
+            "nota": "hecho concreto: past simple"
+          },
+          {
+            "texto": "on 12 March",
+            "nota": "fecha: on + día y mes"
+          },
+          {
+            "texto": "by replacing the cable.",
+            "nota": "método: by + verbo en -ing"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Pide",
+          "Respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "When did you…?"
+            },
+            {
+              "texto": "fecha u hora"
+            },
+            {
+              "texto": "On 12 March."
+            }
+          ],
+          [
+            {
+              "texto": "How did you…?"
+            },
+            {
+              "texto": "método"
+            },
+            {
+              "texto": "By replacing the cable."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When did you changed it?",
+          "correcto": "When did you change it?",
+          "explicacion": "Después de did el verbo va en forma base: did ya marca el pasado."
+        },
+        {
+          "incorrecto": "We have installed the system on 12 March.",
+          "correcto": "We installed the system on 12 March.",
+          "explicacion": "Con una fecha concreta se usa past simple, no present perfect."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia vuelve a la biblioteca de la escuela después de las vacaciones y habla con Tom.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The school library looks different!",
+            "traduccion": "¡La biblioteca de la escuela se ve diferente!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, it has improved. It is quieter now.",
+            "traduccion": "Sí, ha mejorado. Ahora es más silenciosa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "When did they change it?",
+            "traduccion": "¿Cuándo la cambiaron?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "They installed new lights on 3 May.",
+            "traduccion": "Pusieron luces nuevas el 3 de mayo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And how did they make it quieter?",
+            "traduccion": "¿Y cómo la hicieron más silenciosa?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "They moved the computers to another room.",
+            "traduccion": "Movieron los ordenadores a otra sala."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo consiguieron que la biblioteca fuera más silenciosa?",
+          "opciones": [
+            {
+              "es": "Movieron los ordenadores a otra sala."
+            },
+            {
+              "es": "Pusieron luces nuevas."
+            },
+            {
+              "es": "La cerraron por la tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom responde a «how»: «They moved the computers to another room». Las luces son el cambio del 3 de mayo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "When did you make the change? We made it on 12 March.",
+          "es": "¿Cuándo hicieron el cambio? Lo hicimos el 12 de marzo.",
+          "nota": "When pide la fecha; la respuesta la da en past simple."
+        },
+        {
+          "indice": 4,
+          "en": "The bus service has become more reliable. They added two buses on 1 May.",
+          "es": "El servicio de autobús se ha vuelto más fiable. Añadieron dos autobuses el 1 de mayo.",
+          "nota": "Resultado general, fecha y método (añadir dos autobuses) en una sola actualización."
+        }
+      ]
+    },
+    "en.n3.class-04": {
+      "explicacion": {
+        "titulo": "Informar del progreso: logro, efecto y siguiente paso",
+        "texto": "Para contar cómo va un proyecto, empieza por el logro en present perfect y une su efecto actual con so: We have completed the first stage, so testing can begin now. Luego da una prueba concreta en past simple con fecha: We tested it on Monday. Termina con el siguiente paso: Next, we will add new guides. Después de can y will el verbo va en forma base (can begin, will add). Already (ya) va después de can: users can already open it."
+      },
+      "patron": {
+        "texto": "Logro + efecto actual + detalle con fecha + siguiente paso:",
+        "formula": [
+          {
+            "texto": "We have completed the website,",
+            "nota": "logro: have + participio"
+          },
+          {
+            "texto": "so families can use it now.",
+            "nota": "efecto actual: so + can + verbo base"
+          },
+          {
+            "texto": "We tested it on Monday.",
+            "nota": "detalle con fecha: past simple"
+          },
+          {
+            "texto": "Next, we will add photos.",
+            "nota": "siguiente paso: next + will"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We have completed the stage, so testing can begins.",
+          "correcto": "We have completed the stage, so testing can begin.",
+          "explicacion": "Después de can el verbo va en forma base, sin -s."
+        },
+        {
+          "incorrecto": "We tested it the Monday.",
+          "correcto": "We tested it on Monday.",
+          "explicacion": "Con los días de la semana se usa on y no se pone artículo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, la profesora, pregunta a Leo por el proyecto del jardín de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How is the school garden project, Leo?",
+            "traduccion": "¿Cómo va el proyecto del jardín de la escuela, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We have planted ten new trees, so the garden looks green now.",
+            "traduccion": "Hemos plantado diez árboles nuevos, así que el jardín ya se ve verde."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Very good! When did you plant them?",
+            "traduccion": "¡Muy bien! ¿Cuándo los plantaron?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We planted them on Tuesday.",
+            "traduccion": "Los plantamos el martes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Next, we will paint the old chairs.",
+            "traduccion": "Después, vamos a pintar las sillas viejas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el siguiente paso del proyecto?",
+          "opciones": [
+            {
+              "es": "Pintar las sillas viejas."
+            },
+            {
+              "es": "Plantar árboles nuevos."
+            },
+            {
+              "es": "Regar el jardín el martes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo termina con «Next, we will paint the old chairs». Los árboles ya están plantados."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "We have painted the classroom, so it looks bright now.",
+          "es": "Hemos pintado el aula, así que ahora se ve luminosa.",
+          "nota": "El logro (have painted) y su efecto actual unidos con so."
+        },
+        {
+          "indice": 4,
+          "en": "Next, we will invite families to see it.",
+          "es": "Después, invitaremos a las familias a verla.",
+          "nota": "El cierre: next + will + el siguiente paso."
+        }
+      ]
+    },
+    "en.n3.class-05": {
+      "explicacion": {
+        "titulo": "Ponerse al día: el cambio, los detalles y las preguntas",
+        "texto": "Cuando te reencuentras con alguien, cuenta primero el cambio con present perfect y su efecto actual: I have moved to a new house, so I go to a different school now. Después añade detalles en past simple: I moved in August. Para seguir la charla, pregunta con did: When did you move? How did you find it? En español no hay auxiliar en las preguntas, pero en inglés did es obligatorio. Contesta con un dato concreto, no solo yes o no."
+      },
+      "patron": {
+        "texto": "Cambio + efecto actual + pregunta de seguimiento:",
+        "formula": [
+          {
+            "texto": "I have joined a club,",
+            "nota": "cambio: have + participio"
+          },
+          {
+            "texto": "so I have new friends now.",
+            "nota": "efecto actual"
+          },
+          {
+            "texto": "When did you join?",
+            "nota": "pregunta de seguimiento: did + verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "How you found the job?",
+          "correcto": "How did you find the job?",
+          "explicacion": "Las preguntas en pasado necesitan did, y el verbo vuelve a la forma base (find)."
+        },
+        {
+          "incorrecto": "My neighbour recommended me the course.",
+          "correcto": "My neighbour recommended the course to me.",
+          "explicacion": "Recommend no funciona como «me recomendó»: se recomienda algo to someone."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom se encuentra con Ana después del verano.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Ana! I have not seen you for a long time.",
+            "traduccion": "¡Ana! Hace mucho que no te veo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I have moved to a new house, so I go to a different school now.",
+            "traduccion": "Me he mudado a una casa nueva, así que ahora voy a otra escuela."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh! When did you move?",
+            "traduccion": "¡Oh! ¿Cuándo te mudaste?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "In August. My aunt recommended the house to my parents.",
+            "traduccion": "En agosto. Mi tía les recomendó la casa a mis padres."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién recomendó la casa nueva?",
+          "opciones": [
+            {
+              "es": "La tía de Ana."
+            },
+            {
+              "es": "Los padres de Ana."
+            },
+            {
+              "es": "Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «My aunt recommended the house to my parents»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "When did you start? How did you hear about it?",
+          "es": "¿Cuándo empezaste? ¿Cómo te enteraste?",
+          "nota": "Dos preguntas de seguimiento: una pide la fecha y otra el modo."
+        },
+        {
+          "indice": 4,
+          "en": "When did you start? I started on 8 February.",
+          "es": "¿Cuándo empezaste? Empecé el 8 de febrero.",
+          "nota": "Responde con un dato concreto, no solo yes o no."
+        },
+        {
+          "indice": 5,
+          "en": "Mara: I have joined a community kitchen, so I cook for families now. Leo: When did you start? Mara: On 8 February. My neighbour told me about it.",
+          "es": "Mara: Me he unido a una cocina comunitaria, así que ahora cocino para familias. Leo: ¿Cuándo empezaste? Mara: El 8 de febrero. Mi vecina me habló de ella.",
+          "nota": "Cambio con efecto actual, pregunta de seguimiento y respuesta con fecha y modo."
+        }
+      ]
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-04 (P1): la explicación decía que already va «delante de can», pero el ejemplo (users can already open it) lo pone detrás → «va después de can».",
+      "class-01 (P2): consigna «¿qué no ha hecho Leo todavía?» → «¿qué tarea sigue sin hacerse?»; Leo tampoco hizo la cena (la hizo su madre), así que el distractor podía leerse como correcto.",
+      "Revisado sin cambios: class-02, 03, 05. Ejemplos sustitutos reales y coherentes (by + -ing, recommend … to me, did + verbo base practicados en la clase).",
+      "Avisos del validador «la opción correcta apenas aparece en el diálogo»: esperados con opciones en español; todas se deducen solo del diálogo."
+    ]
+  }
+}

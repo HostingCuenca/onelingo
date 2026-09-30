@@ -1,0 +1,665 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-24: contexto aclara que Rex es el perro de Tom (antes aparecía sin presentar).",
+      "class-24: traducción fiel de «No, it is not. The box is on the table.» → «No, no está. La caja…».",
+      "Aceptado: opciones del ítem en español (aviso del validador «apenas aparece»); «There is not / There are not» sin contracciones, coherente con los ejercicios; error «a room living» como calco de orden plausible.",
+      "Revisado sin cambios: 21, 22, 23 (ejemplos 1–5 sustituidos correctamente), 25 (ejemplo 2).",
+      "Coordinador: encabezado vacío de la tabla de en.n1.class-21 → «Distancia» (el validador de rutas exige texto de apoyo).",
+      "Coordinador: encabezado vacío de la tabla de en.n1.class-23 → «Tipo» (el validador de rutas exige texto de apoyo)."
+    ]
+  },
+  "classes": {
+    "en.n1.class-21": {
+      "explicacion": {
+        "titulo": "Habitaciones y muebles: a y el plural",
+        "texto": "Para nombrar una habitación o un mueble se usa This is o That is + a + sustantivo: This is a kitchen (Esta es una cocina). En inglés el artículo no tiene género: a sirve para «un» y para «una» (an delante de sonido vocal). No se omite: This is a bed, no This is bed. Con varias cosas se usa These/Those are + plural, sin a: These are chairs. Fíjate en las palabras compuestas: bedroom (dormitorio), bathroom (baño), living room (sala)."
+      },
+      "patron": {
+        "texto": "This/That is + a + habitación o mueble:",
+        "formula": [
+          {
+            "texto": "This is",
+            "nota": "una cosa cerca (lejos: That is)"
+          },
+          {
+            "texto": "a",
+            "nota": "un o una: no cambia con el género"
+          },
+          {
+            "texto": "kitchen.",
+            "nota": "la habitación o el mueble"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Distancia",
+          "Una cosa",
+          "Varias cosas"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Cerca"
+            },
+            {
+              "texto": "This is a chair."
+            },
+            {
+              "texto": "These are chairs."
+            }
+          ],
+          [
+            {
+              "texto": "Lejos"
+            },
+            {
+              "texto": "That is a bed."
+            },
+            {
+              "texto": "Those are beds."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "These are a chairs.",
+          "correcto": "These are chairs.",
+          "explicacion": "A significa «un/una» y solo va con una cosa. Con el plural (chairs) no se pone a."
+        },
+        {
+          "incorrecto": "This is a room living.",
+          "correcto": "This is a living room.",
+          "explicacion": "En inglés la palabra que describe va primero: living room (sala), como bedroom (bed + room). No se sigue el orden del español «sala de estar»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña su casa a su amiga Mia.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "This is my home, Mia. This is the kitchen.",
+            "traduccion": "Esta es mi casa, Mia. Esta es la cocina."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is that a bedroom?",
+            "traduccion": "¿Eso es un dormitorio?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, that is a bathroom. This is my bedroom.",
+            "traduccion": "No, eso es un baño. Este es mi dormitorio."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh, that is a big bed!",
+            "traduccion": "¡Oh, esa es una cama grande!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es la habitación que Mia señala primero?",
+          "opciones": [
+            {
+              "es": "Un baño."
+            },
+            {
+              "es": "Un dormitorio."
+            },
+            {
+              "es": "Una cocina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia pregunta «Is that a bedroom?» y Leo responde: «No, that is a bathroom»."
+        }
+      }
+    },
+    "en.n1.class-22": {
+      "explicacion": {
+        "titulo": "Hay: there is y there are",
+        "texto": "There is y there are significan «hay». Con una sola cosa se usa there is + a/an: There is a bed. Con varias, there are + plural: There are two chairs. En español «hay» no cambia, pero en inglés sí: is para una cosa y are para varias. There no se puede quitar: no se dice «Is a bed». Tampoco se traduce «hay» con have: have significa «tener»."
+      },
+      "patron": {
+        "texto": "There is/are + cosa:",
+        "formula": [
+          {
+            "texto": "There",
+            "nota": "siempre al principio: no se omite"
+          },
+          {
+            "texto": "are",
+            "nota": "varias cosas → are; una → is"
+          },
+          {
+            "texto": "two chairs.",
+            "nota": "número o sustantivo en plural (-s)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Cuántas",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "una cosa"
+            },
+            {
+              "texto": "there is + a/an"
+            },
+            {
+              "texto": "There is a sofa."
+            }
+          ],
+          [
+            {
+              "texto": "varias cosas"
+            },
+            {
+              "texto": "there are + plural"
+            },
+            {
+              "texto": "There are two tables."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There is two chairs.",
+          "correcto": "There are two chairs.",
+          "explicacion": "En español «hay» sirve para todo, pero en inglés con varias cosas se usa are."
+        },
+        {
+          "incorrecto": "Have two beds.",
+          "correcto": "There are two beds.",
+          "explicacion": "«Hay» no se dice con have (tener). Para decir que algo existe se usa there is / there are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia visita a Carlos y mira su dormitorio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Carlos, is this your bedroom?",
+            "traduccion": "Carlos, ¿este es tu dormitorio?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes. There is a bed and there is a desk.",
+            "traduccion": "Sí. Hay una cama y hay un escritorio."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh, there are two chairs!",
+            "traduccion": "¡Oh, hay dos sillas!"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, and there are three books.",
+            "traduccion": "Sí, y hay tres libros."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántas sillas hay en el dormitorio de Carlos?",
+          "opciones": [
+            {
+              "es": "Dos."
+            },
+            {
+              "es": "Tres."
+            },
+            {
+              "es": "Una."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «There are two chairs». Tres son los libros."
+        }
+      }
+    },
+    "en.n1.class-23": {
+      "explicacion": {
+        "titulo": "¿Hay…? y no hay: preguntas y negativas con there",
+        "texto": "Para preguntar «¿hay…?» se cambia el orden: el verbo va delante de there. Is there + una cosa? (Is there a sofa?) / Are there + varias? (Are there beds?). La respuesta corta repite there y el verbo: Yes, there is. / No, there are not. No basta con «Yes, is». Para negar se pone not después de is o are: There is not a bed. En español la pregunta solo cambia la entonación; en inglés cambia el orden."
+      },
+      "patron": {
+        "texto": "Is/Are + there + cosa?",
+        "formula": [
+          {
+            "texto": "Is",
+            "nota": "una cosa → is; varias → are"
+          },
+          {
+            "texto": "there",
+            "nota": "va después del verbo en la pregunta"
+          },
+          {
+            "texto": "a sofa?",
+            "nota": "lo que buscas"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Una cosa",
+          "Varias cosas"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "Is there a bed?"
+            },
+            {
+              "texto": "Are there beds?"
+            }
+          ],
+          [
+            {
+              "texto": "Sí"
+            },
+            {
+              "texto": "Yes, there is."
+            },
+            {
+              "texto": "Yes, there are."
+            }
+          ],
+          [
+            {
+              "texto": "No"
+            },
+            {
+              "texto": "No, there is not."
+            },
+            {
+              "texto": "No, there are not."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There is a sofa?",
+          "correcto": "Is there a sofa?",
+          "explicacion": "En español basta con la entonación («¿Hay un sofá?»), pero en inglés la pregunta empieza con is o are."
+        },
+        {
+          "incorrecto": "Yes, is.",
+          "correcto": "Yes, there is.",
+          "explicacion": "La respuesta corta necesita there: Yes, there is / No, there is not."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana visita la casa nueva de Leo.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Is this your new home, Leo?",
+            "traduccion": "¿Esta es tu casa nueva, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. There is a big kitchen.",
+            "traduccion": "Sí. Hay una cocina grande."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Are there two bathrooms?",
+            "traduccion": "¿Hay dos baños?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, there are not. There is one bathroom.",
+            "traduccion": "No, no hay dos. Hay un baño."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Is there a sofa?",
+            "traduccion": "¿Hay un sofá?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, there is not.",
+            "traduccion": "No, no hay."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántos baños hay en la casa nueva de Leo?",
+          "opciones": [
+            {
+              "es": "Uno."
+            },
+            {
+              "es": "Dos."
+            },
+            {
+              "es": "Ninguno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «No, there are not. There is one bathroom»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 1,
+          "en": "There are not two bathrooms.",
+          "es": "No hay dos baños.",
+          "nota": "Are not niega con un plural."
+        },
+        {
+          "indice": 2,
+          "en": "Is there a sofa? Yes, there is.",
+          "es": "¿Hay un sofá? Sí, hay.",
+          "nota": "Is va delante de there para preguntar por una cosa."
+        },
+        {
+          "indice": 3,
+          "en": "Are there tables? Yes, there are.",
+          "es": "¿Hay mesas? Sí, hay.",
+          "nota": "Are there pregunta por varias cosas."
+        },
+        {
+          "indice": 4,
+          "en": "Is there a bathroom? No, there is not.",
+          "es": "¿Hay un baño? No, no hay.",
+          "nota": "La respuesta corta repite there + is."
+        },
+        {
+          "indice": 5,
+          "en": "Are there beds? No, there are not.",
+          "es": "¿Hay camas? No, no hay.",
+          "nota": "Con plural la respuesta es there are not."
+        }
+      ]
+    },
+    "en.n1.class-24": {
+      "explicacion": {
+        "titulo": "In, on y under: dónde está algo",
+        "texto": "In, on y under dicen dónde está algo. In es «dentro de» (in the box), on es «encima de, sobre» (on the table) y under es «debajo de» (under the chair). En español «en» sirve para dentro y para encima («en la mesa»), pero en inglés hay que elegir: si está sobre una superficie, on; si está dentro, in. Under no lleva of: under the table. La frase necesita is (está): The ball is on the table."
+      },
+      "patron": {
+        "texto": "Objeto + is + in/on/under + lugar:",
+        "formula": [
+          {
+            "texto": "The book",
+            "nota": "lo que ubicamos"
+          },
+          {
+            "texto": "is",
+            "nota": "está (verbo be)"
+          },
+          {
+            "texto": "under",
+            "nota": "posición: in, on o under"
+          },
+          {
+            "texto": "the chair.",
+            "nota": "el lugar de referencia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "in"
+            },
+            {
+              "texto": "dentro de"
+            },
+            {
+              "texto": "The ball is in the box."
+            }
+          ],
+          [
+            {
+              "texto": "on"
+            },
+            {
+              "texto": "encima de, sobre"
+            },
+            {
+              "texto": "The book is on the table."
+            }
+          ],
+          [
+            {
+              "texto": "under"
+            },
+            {
+              "texto": "debajo de"
+            },
+            {
+              "texto": "The bag is under the chair."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The book is in the table.",
+          "correcto": "The book is on the table.",
+          "explicacion": "Es un calco de «en la mesa». Si está encima de una superficie, se usa on."
+        },
+        {
+          "incorrecto": "The ball under the table.",
+          "correcto": "The ball is under the table.",
+          "explicacion": "Falta is. En inglés la frase necesita el verbo: «está» = is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom busca su pelota en su dormitorio; Mia le ayuda y Rex, el perro de Tom, también está allí.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Where is my ball?",
+            "traduccion": "¿Dónde está mi pelota?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is it in the box?",
+            "traduccion": "¿Está dentro de la caja?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, it is not. The box is on the table.",
+            "traduccion": "No, no está. La caja está encima de la mesa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh! The ball is under the bed.",
+            "traduccion": "¡Oh! La pelota está debajo de la cama."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And Rex is on the bed!",
+            "traduccion": "¡Y Rex está encima de la cama!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está la pelota de Tom?",
+          "opciones": [
+            {
+              "es": "Debajo de la cama."
+            },
+            {
+              "es": "Dentro de la caja."
+            },
+            {
+              "es": "Encima de la mesa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The ball is under the bed». La caja está encima de la mesa."
+        }
+      }
+    },
+    "en.n1.class-25": {
+      "explicacion": {
+        "titulo": "Integración: describir un plano de la casa",
+        "texto": "Para describir un plano sigue dos pasos. Primero di qué hay y en qué habitación: There is a bed in the bedroom / There are two chairs in the kitchen. Después ubica un objeto ya conocido con the: The ball is on the table. Para preguntar usa Is there…? o Are there…?, y responde Yes, there is / No, there is not. Comprueba siempre si es una cosa (is) o varias (are) y mira bien el plano antes de elegir."
+      },
+      "patron": {
+        "texto": "There is/are + cosa + in the + habitación:",
+        "formula": [
+          {
+            "texto": "There are",
+            "nota": "hay (varias → are)"
+          },
+          {
+            "texto": "two chairs",
+            "nota": "cuántas y qué"
+          },
+          {
+            "texto": "in the kitchen.",
+            "nota": "en qué habitación: in + the"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "decir qué hay"
+            },
+            {
+              "texto": "There is/are …"
+            },
+            {
+              "texto": "There is a bed in the bedroom."
+            }
+          ],
+          [
+            {
+              "texto": "preguntar"
+            },
+            {
+              "texto": "Is/Are there …?"
+            },
+            {
+              "texto": "Is there a sofa in the living room?"
+            }
+          ],
+          [
+            {
+              "texto": "ubicar algo"
+            },
+            {
+              "texto": "The … is on/under …"
+            },
+            {
+              "texto": "The ball is under the table."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In the kitchen is two chairs.",
+          "correcto": "There are two chairs in the kitchen.",
+          "explicacion": "Es un calco de «En la cocina hay dos sillas». «Hay» con varias cosas es there are."
+        },
+        {
+          "incorrecto": "Is a bed in the bedroom?",
+          "correcto": "Is there a bed in the bedroom?",
+          "explicacion": "En la pregunta no se omite there: Is there…?"
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara dibuja el plano de su casa y Carlos le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Is there a sofa in the living room?",
+            "traduccion": "¿Hay un sofá en la sala?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, there is. And there is a ball on the sofa.",
+            "traduccion": "Sí, hay. Y hay una pelota encima del sofá."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Are there chairs in the kitchen?",
+            "traduccion": "¿Hay sillas en la cocina?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, there are three chairs. The table is small.",
+            "traduccion": "Sí, hay tres sillas. La mesa es pequeña."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Is there a desk in your bedroom?",
+            "traduccion": "¿Hay un escritorio en tu dormitorio?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, there is not.",
+            "traduccion": "No, no hay."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está la pelota?",
+          "opciones": [
+            {
+              "es": "Encima del sofá."
+            },
+            {
+              "es": "Debajo de la mesa."
+            },
+            {
+              "es": "En el dormitorio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «There is a ball on the sofa»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Is there a sofa in the living room? Yes, there is.",
+          "es": "¿Hay un sofá en la sala? Sí, hay.",
+          "nota": "Pregunta por un objeto en una habitación y respuesta corta con there is."
+        }
+      ]
+    }
+  }
+}

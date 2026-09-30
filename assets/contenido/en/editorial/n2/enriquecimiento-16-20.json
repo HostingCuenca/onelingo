@@ -1,0 +1,639 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-17: error 2 «Had a fountain in the park» → «In the park had a fountain» (calco real de «En el parque había…»; «The park had a fountain» sería correcto) y explicación ajustada en paralelo.",
+      "class-19: error 2 «While I walked to school…» era gramatical en inglés; sustituido por el error típico «During I was walking…» → «While I was walking…».",
+      "Aceptado: opciones del ítem en español (el aviso «la opción correcta apenas aparece en el diálogo» es esperable); ejemplos de enseñanza del runtime sin metalenguaje, no requieren sustitución."
+    ]
+  },
+  "classes": {
+    "en.n2.class-16": {
+      "explicacion": {
+        "titulo": "Was y were: describir el pasado",
+        "texto": "Was y were son el pasado de be (am/is/are) y traducen tanto «era/fue» como «estaba/estuvo». Was va con I, he, she, it y con un sujeto singular (the café, the weather). Were va con you, we, they y con sujetos plurales (the streets, Leo and Nina). Para negar: wasn't / weren't. El adjetivo no cambia: tired vale para una persona o para varias. Y, a diferencia del español, el sujeto es obligatorio: «Estaba cansado» → I was tired."
+      },
+      "patron": {
+        "texto": "Sujeto + was/were + cómo o dónde estaba + cuándo:",
+        "formula": [
+          {
+            "texto": "The streets",
+            "nota": "sujeto plural"
+          },
+          {
+            "texto": "were",
+            "nota": "plural → were; singular → was"
+          },
+          {
+            "texto": "empty",
+            "nota": "cómo estaban (adjetivo)"
+          },
+          {
+            "texto": "after midnight.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Afirmativa",
+          "Negativa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / he / she / it"
+            },
+            {
+              "texto": "was"
+            },
+            {
+              "texto": "wasn't"
+            }
+          ],
+          [
+            {
+              "texto": "you / we / they"
+            },
+            {
+              "texto": "were"
+            },
+            {
+              "texto": "weren't"
+            }
+          ],
+          [
+            {
+              "texto": "the café, my suitcase"
+            },
+            {
+              "texto": "was"
+            },
+            {
+              "texto": "wasn't"
+            }
+          ],
+          [
+            {
+              "texto": "the streets, Leo and Nina"
+            },
+            {
+              "texto": "were"
+            },
+            {
+              "texto": "weren't"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My cousins was tired after the journey.",
+          "correcto": "My cousins were tired after the journey.",
+          "explicacion": "My cousins es plural: con sujetos plurales se usa were."
+        },
+        {
+          "incorrecto": "Was very tired yesterday.",
+          "correcto": "I was very tired yesterday.",
+          "explicacion": "En inglés el sujeto no se omite: «Estaba cansado» necesita I delante de was."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia por su visita al museo de ayer.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "How was the museum yesterday?",
+            "traduccion": "¿Qué tal estuvo el museo ayer?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It was very quiet in the morning.",
+            "traduccion": "Estaba muy tranquilo por la mañana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the bus?",
+            "traduccion": "¿Y el autobús?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The bus was crowded, and my brother and I were tired.",
+            "traduccion": "El autobús iba lleno de gente, y mi hermano y yo estábamos cansados."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Mia, ¿cómo estaba el museo por la mañana?",
+          "opciones": [
+            {
+              "es": "Muy tranquilo."
+            },
+            {
+              "es": "Lleno de gente."
+            },
+            {
+              "es": "Cerrado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «It was very quiet in the morning». Lo que iba lleno era el autobús."
+        }
+      }
+    },
+    "en.n2.class-17": {
+      "explicacion": {
+        "titulo": "There was y there were: lo que había",
+        "texto": "Para decir que algo «había» en el pasado se usa there was con un elemento singular o incontable (a long queue, some noise) y there were con plurales (two notices). En español «había» no cambia, pero en inglés hay que mirar lo que viene después. Para negar: there wasn't a… (singular) y there weren't any… (plural). Este «había» no se traduce con had: «En el parque había una fuente» es There was a fountain in the park, no In the park had a fountain."
+      },
+      "patron": {
+        "texto": "There + was/were + qué había + dónde:",
+        "formula": [
+          {
+            "texto": "There were",
+            "nota": "plural → were; singular o incontable → was"
+          },
+          {
+            "texto": "two benches",
+            "nota": "lo que había"
+          },
+          {
+            "texto": "beside the entrance.",
+            "nota": "dónde estaba"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Qué viene después",
+          "Afirmativa",
+          "Negativa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a/an + singular"
+            },
+            {
+              "texto": "There was a lift."
+            },
+            {
+              "texto": "There wasn't a lift."
+            }
+          ],
+          [
+            {
+              "texto": "incontable (noise)"
+            },
+            {
+              "texto": "There was some noise."
+            },
+            {
+              "texto": "There wasn't any noise."
+            }
+          ],
+          [
+            {
+              "texto": "plural"
+            },
+            {
+              "texto": "There were two notices."
+            },
+            {
+              "texto": "There weren't any notices."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There was two benches in the park.",
+          "correcto": "There were two benches in the park.",
+          "explicacion": "Two benches es plural, así que va there were, aunque en español digamos «había»."
+        },
+        {
+          "incorrecto": "In the park had a fountain.",
+          "correcto": "There was a fountain in the park.",
+          "explicacion": "Calco de «En el parque había una fuente»: para decir que algo existía se usa there was, no had."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le cuenta a Sara cómo era la casa antigua de su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How was the old house, Leo?",
+            "traduccion": "¿Cómo era la casa antigua, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It was nice. There was a small fountain near the door.",
+            "traduccion": "Era bonita. Había una fuente pequeña cerca de la puerta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the rooms?",
+            "traduccion": "¿Y las habitaciones?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "There were three bedrooms, but there wasn't a lift.",
+            "traduccion": "Había tres dormitorios, pero no había ascensor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿qué no había en la casa?",
+          "opciones": [
+            {
+              "es": "Ascensor."
+            },
+            {
+              "es": "Una fuente."
+            },
+            {
+              "es": "Dormitorios."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «there wasn't a lift». Sí había una fuente y tres dormitorios."
+        }
+      }
+    },
+    "en.n2.class-18": {
+      "explicacion": {
+        "titulo": "Pasado continuo: was/were + -ing",
+        "texto": "El pasado continuo describe una acción que estaba en curso en un momento concreto del pasado: «estaba esperando», «estaban conduciendo». Se forma con was o were + verbo en -ing: was con I, he, she, it; were con you, we, they. Para negar: wasn't / weren't + -ing. Para preguntar, was/were va antes del sujeto: Were you studying? Suele ir con una hora (at seven, at midnight). Hacen falta las dos partes: ni «I was wait» ni «I waiting»."
+      },
+      "patron": {
+        "texto": "Sujeto + was/were + verbo-ing + momento del pasado:",
+        "formula": [
+          {
+            "texto": "They",
+            "nota": "sujeto plural"
+          },
+          {
+            "texto": "were driving",
+            "nota": "were + verbo en -ing: acción en curso"
+          },
+          {
+            "texto": "home",
+            "nota": "adónde"
+          },
+          {
+            "texto": "at midnight.",
+            "nota": "el momento del pasado"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Afirmativa",
+          "Negativa",
+          "Pregunta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / he / she / it"
+            },
+            {
+              "texto": "was cooking"
+            },
+            {
+              "texto": "wasn't cooking"
+            },
+            {
+              "texto": "Was she cooking?"
+            }
+          ],
+          [
+            {
+              "texto": "you / we / they"
+            },
+            {
+              "texto": "were cooking"
+            },
+            {
+              "texto": "weren't cooking"
+            },
+            {
+              "texto": "Were they cooking?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was cook dinner at seven.",
+          "correcto": "I was cooking dinner at seven.",
+          "explicacion": "Después de was/were el verbo lleva -ing: was cooking."
+        },
+        {
+          "incorrecto": "We waiting for the bus at nine.",
+          "correcto": "We were waiting for the bus at nine.",
+          "explicacion": "El -ing solo no basta: hace falta were delante, como «estábamos» en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia qué hacía su familia ayer a las siete.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What were you doing at seven yesterday, Mia?",
+            "traduccion": "¿Qué estabas haciendo ayer a las siete, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I was cooking dinner with my father.",
+            "traduccion": "Estaba cocinando la cena con mi padre."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And your brother?",
+            "traduccion": "¿Y tu hermano?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He wasn't cooking. He was sleeping on the sofa!",
+            "traduccion": "Él no estaba cocinando. ¡Estaba durmiendo en el sofá!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué hacía el hermano de Mia a las siete?",
+          "opciones": [
+            {
+              "es": "Estaba durmiendo."
+            },
+            {
+              "es": "Estaba cocinando."
+            },
+            {
+              "es": "Estaba estudiando."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «He was sleeping on the sofa». La que cocinaba era ella, con su padre."
+        }
+      }
+    },
+    "en.n2.class-19": {
+      "explicacion": {
+        "titulo": "Acciones interrumpidas: when y while",
+        "texto": "Para contar que una acción larga fue interrumpida por otra breve se combinan dos tiempos: la acción en curso va en pasado continuo (was/were + -ing) y la interrupción, en pasado simple (rang, dropped, went out). When suele acompañar a la acción breve (when the phone rang) y while a la larga (while we were walking). En español usamos el imperfecto («mientras caminábamos»); en inglés ese fondo va con -ing, no en pasado simple."
+      },
+      "patron": {
+        "texto": "Acción larga (was/were + -ing) + when + acción breve (pasado simple):",
+        "formula": [
+          {
+            "texto": "I was making dinner",
+            "nota": "acción en curso: was + -ing"
+          },
+          {
+            "texto": "when",
+            "nota": "en el momento en que"
+          },
+          {
+            "texto": "the phone rang.",
+            "nota": "interrupción breve: pasado simple"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Va con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "when"
+            },
+            {
+              "texto": "la acción breve (pasado simple)"
+            },
+            {
+              "texto": "I was reading when the lights went out."
+            }
+          ],
+          [
+            {
+              "texto": "while"
+            },
+            {
+              "texto": "la acción larga (was/were + -ing)"
+            },
+            {
+              "texto": "The lights went out while they were studying."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was reading when the lights were going out.",
+          "correcto": "I was reading when the lights went out.",
+          "explicacion": "La interrupción es breve y puntual: va en pasado simple (went out), no con -ing."
+        },
+        {
+          "incorrecto": "During I was walking to school, it started to rain.",
+          "correcto": "While I was walking to school, it started to rain.",
+          "explicacion": "«Mientras» + acción en curso se dice while (+ was/were + -ing); during solo va con un sustantivo: during the class."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom hablan de la noche en que se fue la luz en su barrio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What were you doing when the lights went out?",
+            "traduccion": "¿Qué estabas haciendo cuando se apagaron las luces?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I was reading in my bedroom.",
+            "traduccion": "Estaba leyendo en mi dormitorio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I was cooking dinner, and suddenly I dropped my phone!",
+            "traduccion": "Estaba cocinando la cena y, de repente, ¡se me cayó el teléfono!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And my sister was sleeping on the sofa!",
+            "traduccion": "¡Y mi hermana estaba durmiendo en el sofá!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué hacía Sara cuando se apagaron las luces?",
+          "opciones": [
+            {
+              "es": "Estaba leyendo en su dormitorio."
+            },
+            {
+              "es": "Estaba cocinando la cena."
+            },
+            {
+              "es": "Estaba durmiendo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I was reading in my bedroom». Tom cocinaba y la hermana de Sara dormía."
+        }
+      }
+    },
+    "en.n2.class-20": {
+      "explicacion": {
+        "titulo": "Contar una historia: escenario, fondo, evento y cierre",
+        "texto": "Una historia breve en pasado tiene cuatro partes y cada una usa una forma que ya conoces. Escenario: dónde y cómo era todo, con was/were y there was/were (We were at a campsite. There was a path.). Fondo: lo que estaba pasando, con was/were + -ing (We were cooking dinner). Evento: lo que ocurrió de repente, en pasado simple con when o while (when it started to rain). Cierre: cómo terminó, en pasado simple (We returned to the tent)."
+      },
+      "patron": {
+        "texto": "Escenario + fondo + evento + cierre:",
+        "formula": [
+          {
+            "texto": "It was late, and there were no lights.",
+            "nota": "escenario: was/were, there was/were"
+          },
+          {
+            "texto": "We were looking for the flashlight",
+            "nota": "fondo: was/were + -ing"
+          },
+          {
+            "texto": "when Mia found it.",
+            "nota": "evento: when + pasado simple"
+          },
+          {
+            "texto": "We returned to the tent.",
+            "nota": "cierre: pasado simple"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escenario"
+            },
+            {
+              "texto": "was / were"
+            },
+            {
+              "texto": "Mia and Ben were at a campsite."
+            }
+          ],
+          [
+            {
+              "texto": "Escenario"
+            },
+            {
+              "texto": "there was / there were"
+            },
+            {
+              "texto": "There was a path behind the tent."
+            }
+          ],
+          [
+            {
+              "texto": "Fondo"
+            },
+            {
+              "texto": "was / were + -ing"
+            },
+            {
+              "texto": "Ben was checking the path."
+            }
+          ],
+          [
+            {
+              "texto": "Evento y cierre"
+            },
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "Mia noticed the flashlight."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Last Saturday we was at a campsite.",
+          "correcto": "Last Saturday we were at a campsite.",
+          "explicacion": "Con we se usa were, también al empezar un relato."
+        },
+        {
+          "incorrecto": "While Ben checked the path, Mia was noticing the flashlight.",
+          "correcto": "While Ben was checking the path, Mia noticed the flashlight.",
+          "explicacion": "El fondo (revisaba) va con -ing y el hallazgo puntual (notó) en pasado simple, no al revés."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le cuenta a Mia su fin de semana de campamento con su familia.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Last Saturday, my family and I were at a campsite.",
+            "traduccion": "El sábado pasado, mi familia y yo estábamos en un campamento."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Was it nice?",
+            "traduccion": "¿Estuvo bien?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes! There was a small lake near our tent. But we were cooking dinner when it started to rain.",
+            "traduccion": "¡Sí! Había un lago pequeño cerca de nuestra tienda. Pero estábamos cocinando la cena cuando empezó a llover."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh no! What did you do?",
+            "traduccion": "¡Oh, no! ¿Y qué hicieron?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We returned to the tent and played cards.",
+            "traduccion": "Regresamos a la tienda y jugamos a las cartas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pasó mientras la familia de Leo cocinaba la cena?",
+          "opciones": [
+            {
+              "es": "Empezó a llover."
+            },
+            {
+              "es": "Encontraron un lago."
+            },
+            {
+              "es": "Perdieron la tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «We were cooking dinner when it started to rain»."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,648 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 11,
+    "end": 15
+  },
+  "classes": {
+    "en.n3.class-11": {
+      "explicacion": {
+        "titulo": "Señales de una historia: at first, suddenly, eventually",
+        "texto": "Los conectores de tiempo ordenan una historia. At first (al principio) presenta la situación inicial. Suddenly (de repente) anuncia el giro inesperado. Later (más tarde) coloca un hecho después. Meanwhile (mientras tanto) cuenta algo que pasa al mismo tiempo. Eventually (al final, tras un tiempo) presenta el desenlace. Suelen ir al principio de la frase, seguidos de coma. Ojo: at first va sin the, aunque en español digamos «al principio»."
+      },
+      "patron": {
+        "texto": "Conector + coma + hecho:",
+        "formula": [
+          {
+            "texto": "At first, the street was calm.",
+            "nota": "situación inicial"
+          },
+          {
+            "texto": "Suddenly, a cyclist stopped.",
+            "nota": "giro inesperado: past simple"
+          },
+          {
+            "texto": "Later, the police arrived.",
+            "nota": "hecho posterior"
+          },
+          {
+            "texto": "Eventually, everyone was safe.",
+            "nota": "desenlace"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Significa",
+          "Función"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "at first"
+            },
+            {
+              "texto": "al principio"
+            },
+            {
+              "texto": "situación inicial"
+            }
+          ],
+          [
+            {
+              "texto": "suddenly"
+            },
+            {
+              "texto": "de repente"
+            },
+            {
+              "texto": "giro inesperado"
+            }
+          ],
+          [
+            {
+              "texto": "later"
+            },
+            {
+              "texto": "más tarde"
+            },
+            {
+              "texto": "hecho posterior"
+            }
+          ],
+          [
+            {
+              "texto": "meanwhile"
+            },
+            {
+              "texto": "mientras tanto"
+            },
+            {
+              "texto": "al mismo tiempo"
+            }
+          ],
+          [
+            {
+              "texto": "eventually"
+            },
+            {
+              "texto": "al final"
+            },
+            {
+              "texto": "desenlace"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "At the first, the street was calm.",
+          "correcto": "At first, the street was calm.",
+          "explicacion": "Es un calco de «al principio». En inglés se dice at first, sin the."
+        },
+        {
+          "incorrecto": "Suddenly, the phone was ringing.",
+          "correcto": "Suddenly, the phone rang.",
+          "explicacion": "Suddenly anuncia un hecho breve e inesperado: va en past simple, no en -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le pregunta a Ana por el día de campo con la familia.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "How was the picnic?",
+            "traduccion": "¿Qué tal el día de campo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "At first, the weather was nice and warm.",
+            "traduccion": "Al principio, hacía buen tiempo y calor."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Suddenly, it started to rain.",
+            "traduccion": "De repente, empezó a llover."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What did you do?",
+            "traduccion": "¿Qué hicieron?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "We ran to the car. Meanwhile, Leo was carrying the food. Eventually, we ate at home.",
+            "traduccion": "Corrimos al coche. Mientras tanto, Leo llevaba la comida. Al final, comimos en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo terminó el día de campo?",
+          "opciones": [
+            {
+              "es": "Comieron en casa."
+            },
+            {
+              "es": "Comieron en el parque bajo la lluvia."
+            },
+            {
+              "es": "Leo se olvidó la comida."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana termina con «Eventually, we ate at home». Eventually presenta el desenlace."
+        }
+      }
+    },
+    "en.n3.class-12": {
+      "explicacion": {
+        "titulo": "Past perfect: had + participio",
+        "texto": "El past perfect (had + participio) marca la acción que ocurrió antes de otra acción pasada: The bus had left before we arrived (el autobús había salido antes de que llegáramos). La acción más reciente va en past simple (arrived). Had es igual para todos los sujetos: I had, she had, they had. Equivale a «había + participio». Already (ya) va entre had y el participio: I had already eaten. Ojo con los participios irregulares: eaten, left, gone."
+      },
+      "patron": {
+        "texto": "Hecho anterior (had + participio) + hecho posterior:",
+        "formula": [
+          {
+            "texto": "The bus",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "had left",
+            "nota": "had + participio: pasó primero"
+          },
+          {
+            "texto": "before we arrived.",
+            "nota": "past simple: pasó después"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "afirmativa"
+            },
+            {
+              "texto": "had + participio"
+            },
+            {
+              "texto": "She had left."
+            }
+          ],
+          [
+            {
+              "texto": "negativa"
+            },
+            {
+              "texto": "had not (hadn't) + participio"
+            },
+            {
+              "texto": "I had not eaten."
+            }
+          ],
+          [
+            {
+              "texto": "con already"
+            },
+            {
+              "texto": "had already + participio"
+            },
+            {
+              "texto": "They had already gone."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I arrived, the bus has left.",
+          "correcto": "When I arrived, the bus had left.",
+          "explicacion": "Para algo anterior a otro hecho pasado se usa had, no has."
+        },
+        {
+          "incorrecto": "She had not ate lunch.",
+          "correcto": "She had not eaten lunch.",
+          "explicacion": "Después de had va el participio (eaten), no el pasado (ate)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a Tom por la película que iba a ver con Leo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Did you see the film with Leo?",
+            "traduccion": "¿Viste la película con Leo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. When I arrived, the film had already started.",
+            "traduccion": "No. Cuando llegué, la película ya había empezado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh no! Why were you late?",
+            "traduccion": "¡Oh, no! ¿Por qué llegaste tarde?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I had left my ticket at home, so I went back for it.",
+            "traduccion": "Me había dejado la entrada en casa, así que volví a buscarla."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué había pasado antes de que Tom llegara?",
+          "opciones": [
+            {
+              "es": "La película había empezado."
+            },
+            {
+              "es": "Leo se había ido a casa."
+            },
+            {
+              "es": "Tom había comprado otra entrada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «When I arrived, the film had already started». Had started es el hecho anterior."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I had closed the window before the rain started.",
+          "es": "Había cerrado la ventana antes de que empezara a llover.",
+          "nota": "Had + participio (had closed): la misma forma para todos los sujetos."
+        },
+        {
+          "indice": 3,
+          "en": "When we got to the station, the train had left.",
+          "es": "Cuando llegamos a la estación, el tren había salido.",
+          "nota": "El hecho anterior va con had (had left); el posterior, en past simple (got)."
+        }
+      ]
+    },
+    "en.n3.class-13": {
+      "explicacion": {
+        "titulo": "La causa anterior y el giro de un relato",
+        "texto": "En un relato, la causa de un problema suele haber ocurrido antes; por eso se cuenta en past perfect: We turned back because the road had closed. Because (porque) une el problema con su causa. El giro cambia la situación y puede ser positivo con luckily (por suerte): Luckily, a driver offered help. La consecuencia es el resultado final, en past simple, a menudo con so: so we arrived on time. Ojo: «por suerte» se dice luckily, nunca for luck."
+      },
+      "patron": {
+        "texto": "Problema + causa anterior + giro + consecuencia:",
+        "formula": [
+          {
+            "texto": "We were late",
+            "nota": "problema"
+          },
+          {
+            "texto": "because the bus had left.",
+            "nota": "causa anterior: had + participio"
+          },
+          {
+            "texto": "Luckily, a neighbour stopped,",
+            "nota": "giro positivo"
+          },
+          {
+            "texto": "so we arrived on time.",
+            "nota": "consecuencia: past simple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I couldn't pay because I left my wallet at home before.",
+          "correcto": "I couldn't pay because I had left my wallet at home.",
+          "explicacion": "La causa ocurrió antes: se expresa con had + participio, sin añadir before."
+        },
+        {
+          "incorrecto": "For luck, a friend helped us.",
+          "correcto": "Luckily, a friend helped us.",
+          "explicacion": "Es un calco de «por suerte». En inglés se dice luckily."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, la profesora, le pregunta a Leo por la excursión de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, did you go on the school trip?",
+            "traduccion": "Leo, ¿fuiste a la excursión de la escuela?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but when I arrived, the bus had already left.",
+            "traduccion": "Sí, pero cuando llegué, el autobús ya se había ido."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Oh no! What happened then?",
+            "traduccion": "¡Oh, no! ¿Y qué pasó entonces?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Luckily, my uncle was at home, so he drove me to the museum.",
+            "traduccion": "Por suerte, mi tío estaba en casa, así que me llevó en coche al museo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Eventually, I found my class there.",
+            "traduccion": "Al final, encontré a mi clase allí."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál fue el giro positivo?",
+          "opciones": [
+            {
+              "es": "Su tío lo llevó al museo."
+            },
+            {
+              "es": "El autobús lo esperó."
+            },
+            {
+              "es": "Su clase volvió a buscarlo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Luckily, my uncle was at home, so he drove me to the museum». Luckily introduce el giro."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The road had closed, so we could not drive to school.",
+          "es": "La carretera había cerrado, así que no pudimos ir en coche a la escuela.",
+          "nota": "La causa ocurrió antes: had + participio (had closed)."
+        },
+        {
+          "indice": 3,
+          "en": "Eventually, we arrived home safely.",
+          "es": "Al final, llegamos a casa sanos y salvos.",
+          "nota": "La consecuencia: el resultado final, en past simple."
+        },
+        {
+          "indice": 4,
+          "en": "The rain stopped, so the game started again.",
+          "es": "La lluvia paró, así que el partido volvió a empezar.",
+          "nota": "Un cambio (the rain stopped) produce una consecuencia clara (so…)."
+        }
+      ]
+    },
+    "en.n3.class-14": {
+      "explicacion": {
+        "titulo": "Escribir una historia con giro",
+        "texto": "Para escribir una historia de 60–80 palabras, planifica cuatro etapas. 1) Contexto: cuándo, dónde y qué pasaba, con was/were + -ing (It was a cold morning, and I was waiting outside). 2) Hecho anterior en past perfect, que explica la situación (I had left my notes at home). 3) Giro en past simple, con suddenly. 4) Desenlace con eventually. Une las etapas con and, because y so, y al final revisa que el orden de los hechos no se contradiga."
+      },
+      "patron": {
+        "texto": "Contexto + hecho anterior + giro + desenlace:",
+        "formula": [
+          {
+            "texto": "It was raining, and we were walking home.",
+            "nota": "contexto: was/were + -ing"
+          },
+          {
+            "texto": "I had left my coat at school.",
+            "nota": "hecho anterior: had + participio"
+          },
+          {
+            "texto": "Suddenly, my aunt stopped her car.",
+            "nota": "giro: suddenly + past simple"
+          },
+          {
+            "texto": "Eventually, we arrived home dry.",
+            "nota": "desenlace: eventually"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was worried because I lost my key before.",
+          "correcto": "I was worried because I had lost my key.",
+          "explicacion": "El hecho anterior que explica la situación va en past perfect (had lost)."
+        },
+        {
+          "incorrecto": "I was worried because I had forgot my notes.",
+          "correcto": "I was worried because I had forgotten my notes.",
+          "explicacion": "Después de had va el participio (forgotten), no el pasado (forgot)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Ana lo que pasó en su paseo al lago.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What happened on your trip to the lake?",
+            "traduccion": "¿Qué pasó en tu paseo al lago?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It was a warm morning, and we were walking by the lake.",
+            "traduccion": "Era una mañana cálida y caminábamos junto al lago."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My brother was sad because he had lost his ball.",
+            "traduccion": "Mi hermano estaba triste porque había perdido su pelota."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Suddenly, our uncle arrived with the ball. Eventually, we had lunch together by the water.",
+            "traduccion": "De repente, llegó nuestro tío con la pelota. Al final, comimos juntos junto al agua."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué estaba triste el hermano de Mia?",
+          "opciones": [
+            {
+              "es": "Había perdido su pelota."
+            },
+            {
+              "es": "Su tío no había llegado."
+            },
+            {
+              "es": "No había comido."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «he had lost his ball». Es el hecho anterior que explica la situación."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "It was Saturday evening, and we were cooking in the kitchen.",
+          "es": "Era sábado por la tarde y estábamos cocinando en la cocina.",
+          "nota": "Contexto: cuándo, dónde y qué pasaba (was/were + -ing)."
+        },
+        {
+          "indice": 1,
+          "en": "We were worried because we had lost the map.",
+          "es": "Estábamos preocupados porque habíamos perdido el mapa.",
+          "nota": "Hecho anterior con had + participio: explica la situación."
+        },
+        {
+          "indice": 2,
+          "en": "Suddenly, the lights went out.",
+          "es": "De repente, se fue la luz.",
+          "nota": "El giro cambia lo que pasa después."
+        },
+        {
+          "indice": 3,
+          "en": "Eventually, we found the road home.",
+          "es": "Al final, encontramos el camino a casa.",
+          "nota": "El desenlace resuelve el cambio."
+        },
+        {
+          "indice": 4,
+          "en": "We were walking in the park because we had finished our work. Suddenly, it started to rain. Eventually, we ran home.",
+          "es": "Paseábamos por el parque porque habíamos terminado nuestro trabajo. De repente, empezó a llover. Al final, corrimos a casa.",
+          "nota": "Las etapas conectadas y en orden: contexto, hecho anterior, giro y desenlace."
+        }
+      ]
+    },
+    "en.n3.class-15": {
+      "explicacion": {
+        "titulo": "Contar una historia y aclarar dudas",
+        "texto": "Al contar una historia pueden pedirte aclaraciones: What happened first? (¿qué pasó primero?), Why were you late? (¿por qué llegaste tarde?), How did it end? (¿cómo terminó?). Responde con los mismos hechos del relato, sin inventar otra versión. Para la causa anterior usa had + participio: Because I had left my keys inside. Las preguntas en pasado llevan did + verbo base (How did it end?), pero what happened no lleva did, porque what es el sujeto."
+      },
+      "patron": {
+        "texto": "Pregunta de aclaración + respuesta coherente:",
+        "formula": [
+          {
+            "texto": "What happened first?",
+            "nota": "pregunta: what es el sujeto, sin did"
+          },
+          {
+            "texto": "I had left my keys inside.",
+            "nota": "respuesta: hecho anterior con had + participio"
+          },
+          {
+            "texto": "Then a neighbour opened the door.",
+            "nota": "lo que pasó después: past simple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What did happen first?",
+          "correcto": "What happened first?",
+          "explicacion": "Cuando what es el sujeto de la pregunta, no se usa did."
+        },
+        {
+          "incorrecto": "How did the story ended?",
+          "correcto": "How did the story end?",
+          "explicacion": "Después de did el verbo va en forma base (end)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le pregunta a Tom por qué llegó tarde a la fiesta de cumpleaños.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Why were you late for the party?",
+            "traduccion": "¿Por qué llegaste tarde a la fiesta?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I had left the present at home, so I went back for it.",
+            "traduccion": "Me había dejado el regalo en casa, así que volví a buscarlo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What happened then?",
+            "traduccion": "¿Y qué pasó entonces?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Suddenly, it started to rain, but my sister gave me a lift.",
+            "traduccion": "De repente, empezó a llover, pero mi hermana me llevó en coche."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Eventually, I arrived before we ate the cake.",
+            "traduccion": "Al final, llegué antes de que comiéramos la tarta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pasó primero a Tom?",
+          "opciones": [
+            {
+              "es": "Se había dejado el regalo en casa."
+            },
+            {
+              "es": "Empezó a llover."
+            },
+            {
+              "es": "Su hermana lo llevó en coche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I had left the present at home». Had left marca el hecho más antiguo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "What happened first? I had left my keys in the flat.",
+          "es": "¿Qué pasó primero? Me había dejado las llaves en el piso.",
+          "nota": "La primera aclaración identifica el hecho más antiguo."
+        },
+        {
+          "indice": 1,
+          "en": "I was late because I had left my keys in the flat.",
+          "es": "Llegué tarde porque me había dejado las llaves en el piso.",
+          "nota": "La causa anterior va con had + participio."
+        },
+        {
+          "indice": 2,
+          "en": "Suddenly, a neighbour opened the door for me.",
+          "es": "De repente, un vecino me abrió la puerta.",
+          "nota": "El giro cambia lo que pasa después."
+        },
+        {
+          "indice": 3,
+          "en": "Eventually, I reached the event before lunch.",
+          "es": "Al final, llegué al evento antes del almuerzo.",
+          "nota": "El desenlace responde cómo terminó la historia."
+        },
+        {
+          "indice": 4,
+          "en": "How did it end? I arrived before lunch began.",
+          "es": "¿Cómo terminó? Llegué antes de que empezara el almuerzo.",
+          "nota": "La respuesta repite los hechos del relato, sin cambiarlos."
+        },
+        {
+          "indice": 5,
+          "en": "At first, I was carrying food to a community event. I was late because I had left my keys in the flat. Suddenly, a neighbour opened the building door for me. Eventually, I reached the event before lunch began.",
+          "es": "Al principio, llevaba comida a un evento comunitario. Llegué tarde porque me había dejado las llaves en el piso. De repente, un vecino me abrió la puerta del edificio. Al final, llegué al evento antes de que empezara el almuerzo.",
+          "nota": "Relato completo: contexto, causa anterior, giro y final."
+        }
+      ]
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-13 (P1): Leo respondía «No» a «did you go on the school trip?» y luego llegaba al museo con su clase → «Yes, but when I arrived, the bus had already left.» (traducción ajustada).",
+      "class-14 (P1): el error «It was a cold morning, and I waited outside the school» no es agramatical → sustituido por «I was worried because I had forgot my notes» → «had forgotten», estructura que practica la clase (pg02).",
+      "class-15 (P2): «I arrived before the cake» → «I arrived before we ate the cake» (traducción ajustada).",
+      "Revisado sin cambios: class-11, 12. Avisos del validador sobre opciones en español: esperados."
+    ]
+  }
+}

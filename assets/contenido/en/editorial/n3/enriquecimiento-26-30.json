@@ -1,0 +1,623 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-26: feedback citaba «We are meeting Tom…», el diálogo dice «Rex and I are meeting Tom…»: corregido.",
+      "class-26/28/29: ejemplos que copiaban respuestas de ordenar/escribir cambiados (park closer; quieter room; rooms could be small).",
+      "class-27: ejemplo 3 casi idéntico a la respuesta del ejercicio escribir → «If I had a free weekend, I would visit Grandma and could go to the cinema.»",
+      "class-28: ejemplo 3 duplicaba el ejemplo 0 conservado y ejemplo 4 era la respuesta exacta del ejercicio escribir: sustituidos (taxi/trains delayed; practise the answers).",
+      "class-30: error 2 corregía dos cosas a la vez (more y tiempo verbal) → «I prefer more the cinema → I prefer the cinema»; «We agree!» → «I agree!»; «Do we agree?» → «Do we all agree?».",
+      "Aceptado: opciones del ítem en español."
+    ]
+  },
+  "classes": {
+    "en.n3.class-26": {
+      "explicacion": {
+        "titulo": "Imaginar: if + pasado, would + verbo",
+        "texto": "Para imaginar algo que no es real ahora se usa if + pasado y would/could + verbo base: If I lived near the sea, I would swim every day (pero no vivo cerca del mar). Ese pasado no habla del pasado: marca que es imaginario. Con be se usa were: If I were rich… En español usamos subjuntivo («si viviera») y condicional («nadaría»). Un plan real, en cambio, lleva datos concretos: We are taking the train at eight."
+      },
+      "patron": {
+        "texto": "If + pasado, + would + verbo base:",
+        "formula": [
+          {
+            "texto": "If I lived near the sea,",
+            "nota": "if + pasado: no es real ahora"
+          },
+          {
+            "texto": "I would swim",
+            "nota": "would + verbo base: el resultado imaginado"
+          },
+          {
+            "texto": "every day.",
+            "nota": "complemento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If I would have more time, I would cook.",
+          "correcto": "If I had more time, I would cook.",
+          "explicacion": "En la parte con if va el pasado (had), no would."
+        },
+        {
+          "incorrecto": "If I lived near the sea, I will swim every day.",
+          "correcto": "If I lived near the sea, I would swim every day.",
+          "explicacion": "Si la condición es imaginaria (lived), el resultado va con would, no con will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de mascotas.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "If I had a big garden, I would have a dog.",
+            "traduccion": "Si tuviera un jardín grande, tendría un perro."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I have a dog! His name is Rex.",
+            "traduccion": "¡Yo tengo un perro! Se llama Rex."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "If my flat were bigger, I could have a dog too.",
+            "traduccion": "Si mi piso fuera más grande, también podría tener un perro."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Rex and I are meeting Tom at the park at four. Come with us!",
+            "traduccion": "Rex y yo vamos a ver a Tom en el parque a las cuatro. ¡Ven con nosotros!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es un plan real y no algo imaginado?",
+          "opciones": [
+            {
+              "es": "Leo y Rex verán a Tom en el parque a las cuatro."
+            },
+            {
+              "es": "Ana tendrá un perro."
+            },
+            {
+              "es": "Ana vivirá en un piso más grande."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "«Rex and I are meeting Tom at the park at four» es un arreglo con hora. Lo de Ana usa if + pasado (had, were): es imaginario."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "If I had a garden, I would grow vegetables.",
+          "es": "Si tuviera un jardín, cultivaría verduras.",
+          "nota": "No tengo jardín: if + pasado imagina otra situación."
+        },
+        {
+          "indice": 1,
+          "en": "If the tickets were cheaper, we would take the train.",
+          "es": "Si los boletos fueran más baratos, tomaríamos el tren.",
+          "nota": "Were marca que la condición no es real ahora."
+        },
+        {
+          "indice": 2,
+          "en": "If I knew French, I would read that book.",
+          "es": "Si supiera francés, leería ese libro.",
+          "nota": "Would + verbo base (read) da el resultado imaginado."
+        },
+        {
+          "indice": 3,
+          "en": "If the park were closer, we could walk there.",
+          "es": "Si el parque estuviera más cerca, podríamos ir caminando.",
+          "nota": "Could: una posibilidad, no un plan."
+        },
+        {
+          "indice": 4,
+          "en": "We are taking the 8:10 train tomorrow.",
+          "es": "Mañana tomamos el tren de las 8:10.",
+          "nota": "Plan real: hay hora concreta y presente continuo."
+        },
+        {
+          "indice": 5,
+          "en": "If I had a longer holiday, I would visit my cousins. But this Friday, I am visiting my aunt.",
+          "es": "Si tuviera unas vacaciones más largas, visitaría a mis primos. Pero este viernes voy a visitar a mi tía.",
+          "nota": "La primera frase imagina; la segunda es un plan confirmado."
+        }
+      ]
+    },
+    "en.n3.class-27": {
+      "explicacion": {
+        "titulo": "Would o could en una hipótesis",
+        "texto": "En una hipótesis, would presenta lo que decidirías hacer: If I had time, I would visit Grandma (la visitaría, lo tengo claro). Could presenta una posibilidad, una opción: we could visit the castle (podríamos). Después de would y could va el verbo base: sin to, sin -s y sin -ed (she would come, no she would comes). La condición sigue siendo if + pasado: If we had time… Con if + pasado no se usa can: se usa could."
+      },
+      "patron": {
+        "texto": "If + pasado, + would (decisión) / could (posibilidad):",
+        "formula": [
+          {
+            "texto": "If we had a free day,",
+            "nota": "if + pasado: situación imaginaria"
+          },
+          {
+            "texto": "we would visit Grandma",
+            "nota": "would + verbo base: lo que decidimos"
+          },
+          {
+            "texto": "and could go to the beach.",
+            "nota": "could + verbo base: una posibilidad"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Modal",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "would + verbo"
+            },
+            {
+              "texto": "decisión (haría)"
+            },
+            {
+              "texto": "If I knew the answer, I would tell you."
+            }
+          ],
+          [
+            {
+              "texto": "could + verbo"
+            },
+            {
+              "texto": "posibilidad (podría)"
+            },
+            {
+              "texto": "If I had a car, I could visit you."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If she were free, she would comes to the party.",
+          "correcto": "If she were free, she would come to the party.",
+          "explicacion": "Después de would va el verbo base, sin -s."
+        },
+        {
+          "incorrecto": "If we had a car, we can visit you.",
+          "correcto": "If we had a car, we could visit you.",
+          "explicacion": "En una hipótesis con if + pasado se usa could, no can."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia imaginan un día sin clases.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "If we had a free day tomorrow, what would you do?",
+            "traduccion": "Si mañana tuviéramos un día libre, ¿qué harías?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I would go to the beach with my family.",
+            "traduccion": "Iría a la playa con mi familia."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Me too! And we could swim or play games.",
+            "traduccion": "¡Yo también! Y podríamos nadar o jugar."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "But we do not have a free day. We have school!",
+            "traduccion": "Pero no tenemos un día libre. ¡Tenemos clase!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué decidiría hacer Mia?",
+          "opciones": [
+            {
+              "es": "Ir a la playa con su familia."
+            },
+            {
+              "es": "Nadar o jugar."
+            },
+            {
+              "es": "Ir a clase."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I would go to the beach»: would marca su decisión. Nadar o jugar son solo posibilidades (could)."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "If I had more money, I would save it.",
+          "es": "Si tuviera más dinero, lo ahorraría.",
+          "nota": "If + pasado (had): la situación imaginaria."
+        },
+        {
+          "indice": 1,
+          "en": "If the job were closer, I would take it.",
+          "es": "Si el trabajo estuviera más cerca, lo aceptaría.",
+          "nota": "Would: la decisión que tomaría."
+        },
+        {
+          "indice": 2,
+          "en": "If we had time, we could visit the castle.",
+          "es": "Si tuviéramos tiempo, podríamos visitar el castillo.",
+          "nota": "Could: una opción posible, no una decisión."
+        },
+        {
+          "indice": 3,
+          "en": "If I had a free weekend, I would visit Grandma and could go to the cinema.",
+          "es": "Si tuviera un fin de semana libre, visitaría a la abuela y podría ir al cine.",
+          "nota": "Would para la decisión; could para la posibilidad."
+        },
+        {
+          "indice": 4,
+          "en": "If she were free, she would come with us.",
+          "es": "Si estuviera libre, vendría con nosotros.",
+          "nota": "Después de would, verbo base: come, no comes ni to come."
+        },
+        {
+          "indice": 5,
+          "en": "If the weather were better, we could eat outside or walk by the river.",
+          "es": "Si hiciera mejor tiempo, podríamos comer fuera o pasear junto al río.",
+          "nota": "Dos posibilidades con could: nadie ha decidido todavía."
+        }
+      ]
+    },
+    "en.n3.class-28": {
+      "explicacion": {
+        "titulo": "Aconsejar con If I were you",
+        "texto": "Para dar un consejo amable, te imaginas en el lugar del otro: If I were you, I would ask the teacher (yo que tú, le preguntaría al profesor). Se usa were, would + verbo base y, si quieres, la razón con because. Suena más suave que una orden (Ask the teacher!) o que you must, porque la otra persona decide. En español decimos «yo que tú» o «yo en tu lugar»; en inglés hace falta la frase completa If I were you."
+      },
+      "patron": {
+        "texto": "If I were you, + I would + consejo + because + razón:",
+        "formula": [
+          {
+            "texto": "If I were you,",
+            "nota": "me imagino en tu lugar"
+          },
+          {
+            "texto": "I would take the early bus",
+            "nota": "would + verbo: el consejo"
+          },
+          {
+            "texto": "because the roads are busy after eight.",
+            "nota": "because + la razón"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If I were you, I will ask for help.",
+          "correcto": "If I were you, I would ask for help.",
+          "explicacion": "Con If I were you, el consejo va con would, no con will."
+        },
+        {
+          "incorrecto": "I in your place would ask the teacher.",
+          "correcto": "If I were you, I would ask the teacher.",
+          "explicacion": "Es un calco de «yo en tu lugar». En inglés se dice If I were you."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le cuenta a Ana que está cansado en clase.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I am always tired at school.",
+            "traduccion": "Siempre estoy cansado en la escuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Do you go to bed late?",
+            "traduccion": "¿Te acuestas tarde?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, I watch films until midnight.",
+            "traduccion": "Sí, veo películas hasta medianoche."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "If I were you, I would go to bed at ten because you need more sleep.",
+            "traduccion": "Yo que tú, me acostaría a las diez, porque necesitas dormir más."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Ana le da ese consejo a Leo?",
+          "opciones": [
+            {
+              "es": "Porque Leo necesita dormir más."
+            },
+            {
+              "es": "Porque las películas son malas."
+            },
+            {
+              "es": "Porque la escuela empieza a las diez."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana da la razón con because: «because you need more sleep»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 1,
+          "en": "If I were you, I would ask for a quieter room.",
+          "es": "Yo que tú, pediría una habitación más tranquila.",
+          "nota": "Es un consejo, no una orden: la otra persona decide."
+        },
+        {
+          "indice": 2,
+          "en": "If I were you, I would take the early bus because the roads are busy after eight.",
+          "es": "Yo que tú, tomaría el autobús temprano, porque las carreteras están llenas después de las ocho.",
+          "nota": "Because añade la razón del consejo."
+        },
+        {
+          "indice": 3,
+          "en": "If I were in your position, I would take a taxi because the trains are delayed.",
+          "es": "Si estuviera en tu lugar, tomaría un taxi, porque los trenes van con retraso.",
+          "nota": "In your position es otra forma de imaginarse en el lugar del otro."
+        },
+        {
+          "indice": 4,
+          "en": "If I were you, I would practise the answers because you could feel calmer.",
+          "es": "Yo que tú, practicaría las respuestas, porque podrías sentirte más tranquilo.",
+          "nota": "El consejo responde a un problema y da la razón con because."
+        },
+        {
+          "indice": 5,
+          "en": "If I were moving, I would label the boxes because unpacking would be easier.",
+          "es": "Si me estuviera mudando, etiquetaría las cajas, porque desembalar sería más fácil.",
+          "nota": "Situación imaginada, opción (label the boxes) y razón (because…)."
+        }
+      ]
+    },
+    "en.n3.class-29": {
+      "explicacion": {
+        "titulo": "Comparar dos opciones imaginadas",
+        "texto": "Para comparar dos opciones imaginadas, da una ventaja y un límite de cada una con would o could: A village would be quiet, but the buses could be slow. El límite se introduce con but (pero), although (aunque) o, en una frase nueva, However, (sin embargo). Con although no se añade but. Termina con una conclusión según tu prioridad: If saving money mattered more, I would choose the bus."
+      },
+      "patron": {
+        "texto": "Ventaja + límite + conclusión según la prioridad:",
+        "formula": [
+          {
+            "texto": "The train would be fast,",
+            "nota": "ventaja con would"
+          },
+          {
+            "texto": "but it would cost more.",
+            "nota": "but + límite"
+          },
+          {
+            "texto": "If I wanted to save money, I would take the bus.",
+            "nota": "conclusión: if + pasado, would"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although the train is fast, but it is expensive.",
+          "correcto": "Although the train is fast, it is expensive.",
+          "explicacion": "Although ya une las dos ideas: no se añade but."
+        },
+        {
+          "incorrecto": "The bus would be more cheap.",
+          "correcto": "The bus would be cheaper.",
+          "explicacion": "Cheap es un adjetivo corto: el comparativo es cheaper, no more cheap."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom piensan dónde hacer la fiesta de cumpleaños de Ana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "A party at the park would be fun, but it could rain.",
+            "traduccion": "Una fiesta en el parque sería divertida, pero podría llover."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "At home we would stay dry. However, your house is small.",
+            "traduccion": "En casa no nos mojaríamos. Sin embargo, tu casa es pequeña."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "My priority is space for all my friends.",
+            "traduccion": "Mi prioridad es tener espacio para todos mis amigos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Then I would choose the park.",
+            "traduccion": "Entonces yo elegiría el parque."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué límite tiene la fiesta en casa?",
+          "opciones": [
+            {
+              "es": "La casa es pequeña."
+            },
+            {
+              "es": "Podría llover."
+            },
+            {
+              "es": "Sería aburrida."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom presenta el límite con However: «your house is small». La lluvia es el límite del parque."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The city would offer more courses.",
+          "es": "La ciudad ofrecería más cursos.",
+          "nota": "Would presenta una ventaja de una opción imaginada."
+        },
+        {
+          "indice": 1,
+          "en": "The village would be quiet, although the buses could be slow.",
+          "es": "El pueblo sería tranquilo, aunque los autobuses podrían ser lentos.",
+          "nota": "Although introduce el límite dentro de la misma frase."
+        },
+        {
+          "indice": 2,
+          "en": "However, the rooms could be small there.",
+          "es": "Sin embargo, allí las habitaciones podrían ser pequeñas.",
+          "nota": "However, con coma, abre una frase nueva con la dificultad."
+        },
+        {
+          "indice": 3,
+          "en": "My priority is saving money, so the bus would be better.",
+          "es": "Mi prioridad es ahorrar dinero, así que el autobús sería mejor.",
+          "nota": "La prioridad decide cuál de las dos opciones gana."
+        },
+        {
+          "indice": 4,
+          "en": "If I had to choose, I would live in the village.",
+          "es": "Si tuviera que elegir, viviría en el pueblo.",
+          "nota": "La conclusión usa if + pasado y would."
+        },
+        {
+          "indice": 5,
+          "en": "A large city would offer more courses but cost more. A smaller city would be cheaper, although it might offer fewer subjects. If saving money mattered more, I would choose the smaller city.",
+          "es": "Una ciudad grande ofrecería más cursos, pero costaría más. Una ciudad más pequeña sería más barata, aunque podría ofrecer menos asignaturas. Si ahorrar dinero importara más, elegiría la ciudad más pequeña.",
+          "nota": "Ventaja y límite de cada opción, y conclusión según la prioridad."
+        }
+      ]
+    },
+    "en.n3.class-30": {
+      "explicacion": {
+        "titulo": "Negociar con un presupuesto imaginario",
+        "texto": "Esta clase junta todo el bloque. Plantea la situación con if + pasado (If we had $40…), comprueba qué se puede pagar (we could afford the museum; can't afford = no nos alcanza), di la preferencia de cada uno (Leo would prefer the park), compara ventajas y límites con but o although, aconseja con If I were you y cierra con un compromiso: una opción que satisface a los dos. Ojo: se dice pay for the tickets (pagar los boletos)."
+      },
+      "patron": {
+        "texto": "Presupuesto imaginario + lo que se puede pagar + acuerdo:",
+        "formula": [
+          {
+            "texto": "If we had $40,",
+            "nota": "if + pasado: presupuesto imaginario"
+          },
+          {
+            "texto": "we could afford",
+            "nota": "could afford: podríamos pagar"
+          },
+          {
+            "texto": "the museum and lunch.",
+            "nota": "la opción que cabe en el presupuesto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If we had $40, we could pay the tickets.",
+          "correcto": "If we had $40, we could pay for the tickets.",
+          "explicacion": "Es un calco de «pagar los boletos». En inglés se dice pay for + lo que compras."
+        },
+        {
+          "incorrecto": "I prefer more the cinema.",
+          "correcto": "I prefer the cinema.",
+          "explicacion": "Es un calco de «prefiero más el cine». Prefer ya significa «me gusta más»: no lleva more."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara les pregunta a Mia y Leo qué harían el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "If you had thirty dollars together, what would you do on Saturday?",
+            "traduccion": "Si tuvieran treinta dólares entre los dos, ¿qué harían el sábado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I would prefer the cinema, but the tickets cost forty dollars.",
+            "traduccion": "Yo preferiría el cine, pero los boletos cuestan cuarenta dólares."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We could not afford that. The park and a pizza would cost twenty.",
+            "traduccion": "No nos alcanzaría. El parque y una pizza costarían veinte."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK, that is a good compromise. I agree!",
+            "traduccion": "Vale, es un buen compromiso. ¡Estoy de acuerdo!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no eligen el cine?",
+          "opciones": [
+            {
+              "es": "Porque cuesta más de treinta dólares."
+            },
+            {
+              "es": "Porque a Leo no le gusta el cine."
+            },
+            {
+              "es": "Porque el cine está cerrado el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que los boletos cuestan cuarenta dólares, y Leo responde «We could not afford that»: no les alcanza con treinta."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "If we had $300, we could choose the $260 cabin.",
+          "es": "Si tuviéramos 300 dólares, podríamos elegir la cabaña de 260.",
+          "nota": "If + pasado plantea el presupuesto imaginario."
+        },
+        {
+          "indice": 1,
+          "en": "We could afford the museum, but not the concert.",
+          "es": "Nos alcanzaría para el museo, pero no para el concierto.",
+          "nota": "Afford: tener dinero suficiente para algo."
+        },
+        {
+          "indice": 2,
+          "en": "Nina would prefer a quiet room, and Omar would prefer a central location.",
+          "es": "Nina preferiría una habitación tranquila y Omar, una ubicación céntrica.",
+          "nota": "Primero se dice la preferencia de cada persona."
+        },
+        {
+          "indice": 3,
+          "en": "The hostel would be cheaper, although the rooms would be shared.",
+          "es": "El albergue sería más barato, aunque las habitaciones serían compartidas.",
+          "nota": "Una ventaja y un límite de la misma opción."
+        },
+        {
+          "indice": 4,
+          "en": "The flat is a good compromise. Do we all agree?",
+          "es": "El piso es un buen compromiso. ¿Estamos todos de acuerdo?",
+          "nota": "El compromiso satisface a los dos; luego se pide el acuerdo."
+        },
+        {
+          "indice": 5,
+          "en": "If Maya and Theo had $240, the music-and-dinner package would include both of their preferences. If I were them, I would choose it.",
+          "es": "Si Maya y Theo tuvieran 240 dólares, el paquete de música y cena incluiría las preferencias de los dos. Si yo fuera ellos, lo elegiría.",
+          "nota": "Presupuesto imaginario, preferencias y consejo con If I were…"
+        }
+      ]
+    }
+  }
+}

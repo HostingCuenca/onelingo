@@ -1,0 +1,630 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin cambios. Explicaciones correctas y alineadas con los ejercicios (presente continuo de arreglo, will de decisión, will de predicción, elección entre futuros, plan de grupo con if + presente).",
+      "Aceptado: traducciones en presente español («Yo compro un poco», «Te presto el mío») porque ilustran justo el contraste que explica la clase.",
+      "Aceptado: opciones del ítem en español; ejemplos de enseñanza del runtime correctos."
+    ]
+  },
+  "classes": {
+    "en.n2.class-26": {
+      "explicacion": {
+        "titulo": "Presente continuo para planes acordados",
+        "texto": "El presente continuo (am/is/are + verbo en -ing) no solo habla de ahora: también expresa planes ya acordados, con día u hora y muchas veces con otra persona: I'm meeting Sara at six tomorrow. La expresión de tiempo (tomorrow, tonight, on Friday) indica que es futuro. En español solemos usar el presente simple («Ceno con Leo esta noche»), pero en inglés, para un plan fijado, se dice We're having dinner with Leo tonight, no We have dinner…"
+      },
+      "patron": {
+        "texto": "Sujeto + am/is/are + verbo-ing + con quién o qué + cuándo:",
+        "formula": [
+          {
+            "texto": "I'm meeting",
+            "nota": "am + verbo en -ing: plan ya acordado"
+          },
+          {
+            "texto": "Sara",
+            "nota": "con quién"
+          },
+          {
+            "texto": "at six tomorrow.",
+            "nota": "cuándo: hora y día"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Plan acordado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I"
+            },
+            {
+              "texto": "I'm seeing the dentist on Friday."
+            }
+          ],
+          [
+            {
+              "texto": "he / she"
+            },
+            {
+              "texto": "She is taking the train on Saturday."
+            }
+          ],
+          [
+            {
+              "texto": "you / we / they"
+            },
+            {
+              "texto": "We're having dinner with Leo tonight."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "Are you joining us after work?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I meet Sara tomorrow at six.",
+          "correcto": "I'm meeting Sara at six tomorrow.",
+          "explicacion": "Para un plan acordado se usa el presente continuo, no el presente simple como en español («quedo con Sara»)."
+        },
+        {
+          "incorrecto": "She is see the dentist on Friday.",
+          "correcto": "She is seeing the dentist on Friday.",
+          "explicacion": "Después de is hace falta el verbo en -ing: is seeing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo quiere quedar con Mia este fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Are you free on Saturday, Mia?",
+            "traduccion": "¿Estás libre el sábado, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, I'm seeing my grandma on Saturday morning.",
+            "traduccion": "No, veo a mi abuela el sábado por la mañana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And on Sunday?",
+            "traduccion": "¿Y el domingo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We're having lunch with my cousins. Are you joining us?",
+            "traduccion": "Almorzamos con mis primos. ¿Te unes a nosotros?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure, thanks!",
+            "traduccion": "¡Claro, gracias!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué plan tiene Mia para el domingo?",
+          "opciones": [
+            {
+              "es": "Almorzar con sus primos."
+            },
+            {
+              "es": "Ver a su abuela."
+            },
+            {
+              "es": "Ir al dentista."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «We're having lunch with my cousins». A su abuela la ve el sábado."
+        }
+      }
+    },
+    "en.n2.class-27": {
+      "explicacion": {
+        "titulo": "Will: decisiones en el momento",
+        "texto": "Will + verbo en forma base expresa una decisión que tomas en el mismo momento de hablar, muchas veces para ofrecer ayuda: The phone is ringing. I'll answer it. Normalmente se usa la forma corta I'll (= I will). El verbo va siempre en forma base: I'll carry, no I'll carries ni I'll to carry. Si el plan ya estaba decidido antes, no se usa will. En español a menudo decimos «Ya contesto yo» en presente; en inglés el presente simple aquí suena mal: hace falta I'll."
+      },
+      "patron": {
+        "texto": "Lo que pasa ahora + I'll + verbo base:",
+        "formula": [
+          {
+            "texto": "It's cold in here.",
+            "nota": "la situación que ves ahora"
+          },
+          {
+            "texto": "I'll",
+            "nota": "I will: lo decido en este momento"
+          },
+          {
+            "texto": "close the window.",
+            "nota": "verbo en forma base + complemento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Situación ahora",
+          "Decisión en el momento"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The phone is ringing."
+            },
+            {
+              "texto": "I'll answer it."
+            }
+          ],
+          [
+            {
+              "texto": "Those bags look heavy."
+            },
+            {
+              "texto": "I'll carry them."
+            }
+          ],
+          [
+            {
+              "texto": "We don't have any milk."
+            },
+            {
+              "texto": "I'll get some."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The phone is ringing. I answer it.",
+          "correcto": "The phone is ringing. I'll answer it.",
+          "explicacion": "Una decisión tomada al momento se expresa con will (I'll), no con el presente."
+        },
+        {
+          "incorrecto": "Those bags look heavy. I'll to carry them.",
+          "correcto": "Those bags look heavy. I'll carry them.",
+          "explicacion": "Después de will va el verbo en forma base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom están en casa por la mañana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Oh no, we don't have any milk.",
+            "traduccion": "Oh, no, no tenemos leche."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I'll get some.",
+            "traduccion": "Yo compro un poco."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thanks! And it's cold in here.",
+            "traduccion": "¡Gracias! Y hace frío aquí."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I'll close the window.",
+            "traduccion": "Cierro la ventana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué decide hacer Tom cuando Ana dice que hace frío?",
+          "opciones": [
+            {
+              "es": "Cerrar la ventana."
+            },
+            {
+              "es": "Comprar leche."
+            },
+            {
+              "es": "Abrir la puerta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «it's cold in here» y Tom responde: «I'll close the window»."
+        }
+      }
+    },
+    "en.n2.class-28": {
+      "explicacion": {
+        "titulo": "Will para predicciones generales",
+        "texto": "Will + verbo base también sirve para predecir: decir lo que crees o lo que se sabe que pasará, sin un plan y sin una prueba que estés viendo ahora. Suele ir con I think, con probably o con el pronóstico: The forecast says it will rain tomorrow. Probably va entre will y el verbo: will probably become. Compara: It is going to rain (veo nubes ahora) y I think it will rain tomorrow (es mi opinión o lo dice el pronóstico). Igual que con going to, «Lloverá» necesita sujeto: It will rain."
+      },
+      "patron": {
+        "texto": "I think + sujeto + will + verbo base + cuándo:",
+        "formula": [
+          {
+            "texto": "I think",
+            "nota": "introduce una opinión sobre el futuro"
+          },
+          {
+            "texto": "prices",
+            "nota": "de qué se habla"
+          },
+          {
+            "texto": "will increase",
+            "nota": "will + verbo en forma base"
+          },
+          {
+            "texto": "next year.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Marcador",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I think"
+            },
+            {
+              "texto": "I think prices will increase next year."
+            }
+          ],
+          [
+            {
+              "texto": "probably"
+            },
+            {
+              "texto": "Cities will probably become warmer."
+            }
+          ],
+          [
+            {
+              "texto": "the forecast says"
+            },
+            {
+              "texto": "The forecast says it will rain tomorrow."
+            }
+          ],
+          [
+            {
+              "texto": "in the next…"
+            },
+            {
+              "texto": "Life will change in the next twenty years."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The forecast says will rain tomorrow.",
+          "correcto": "The forecast says it will rain tomorrow.",
+          "explicacion": "«Lloverá» no lleva sujeto en español, pero en inglés hace falta it."
+        },
+        {
+          "incorrecto": "I think prices will to increase next year.",
+          "correcto": "I think prices will increase next year.",
+          "explicacion": "Después de will va el verbo en forma base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom tienen un pícnic mañana y miran el pronóstico.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "The forecast says it will rain tomorrow morning.",
+            "traduccion": "El pronóstico dice que lloverá mañana por la mañana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh no! Our picnic is tomorrow.",
+            "traduccion": "¡Oh, no! Nuestro pícnic es mañana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I think the afternoon will probably be nice.",
+            "traduccion": "Creo que la tarde probablemente estará bien."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then we can have the picnic after lunch.",
+            "traduccion": "Entonces podemos hacer el pícnic después del almuerzo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el pronóstico, ¿cuándo va a llover?",
+          "opciones": [
+            {
+              "es": "Mañana por la mañana."
+            },
+            {
+              "es": "Mañana por la tarde."
+            },
+            {
+              "es": "Hoy después del almuerzo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «it will rain tomorrow morning». Para la tarde cree que hará buen tiempo."
+        }
+      }
+    },
+    "en.n2.class-29": {
+      "explicacion": {
+        "titulo": "Elegir el futuro: -ing o will",
+        "texto": "Antes de hablar del futuro, pregúntate qué tipo de futuro es. ¿Ya está organizado, con hora, reserva o calendario? Presente continuo: We're taking the 8:15 train tomorrow. ¿Lo decides o lo ofreces ahora mismo, al ver un problema? Will: The doorbell is ringing. I'll open the door. ¿Es una opinión o predicción? I think + will: I think our team will win. En español todas pueden ir en presente («mañana tomamos el tren», «ya abro yo»), pero en inglés cada caso tiene su forma."
+      },
+      "patron": {
+        "texto": "Tres futuros, tres formas:",
+        "formula": [
+          {
+            "texto": "We're taking the train tomorrow.",
+            "nota": "arreglo ya fijado → be + -ing"
+          },
+          {
+            "texto": "The doorbell is ringing. I'll open the door.",
+            "nota": "decisión en el momento → will"
+          },
+          {
+            "texto": "I think our team will win.",
+            "nota": "opinión o predicción → I think + will"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Arreglo fijado (hora, reserva)"
+            },
+            {
+              "texto": "am/is/are + -ing"
+            },
+            {
+              "texto": "I'm meeting Nora at four."
+            }
+          ],
+          [
+            {
+              "texto": "Decisión u oferta al momento"
+            },
+            {
+              "texto": "will + verbo base"
+            },
+            {
+              "texto": "I'll lend you mine."
+            }
+          ],
+          [
+            {
+              "texto": "Predicción u opinión"
+            },
+            {
+              "texto": "I think + will"
+            },
+            {
+              "texto": "I think our team will win."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'll meet Nora at four; it's in my calendar.",
+          "correcto": "I'm meeting Nora at four; it's in my calendar.",
+          "explicacion": "Si ya está en el calendario, es un arreglo: se usa el presente continuo, no will."
+        },
+        {
+          "incorrecto": "No one has a pen. I lend you mine.",
+          "correcto": "No one has a pen. I'll lend you mine.",
+          "explicacion": "La oferta surge en el momento: hace falta will (I'll), no el presente como en «te presto el mío»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le pregunta a Leo por sus planes de mañana.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What are you doing tomorrow, Leo?",
+            "traduccion": "¿Qué haces mañana, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'm taking the early train to visit my grandpa. It's in my calendar.",
+            "traduccion": "Tomo el tren temprano para visitar a mi abuelo. Está en mi calendario."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I think it will be cold. Do you have a coat?",
+            "traduccion": "Creo que hará frío. ¿Tienes abrigo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, I don't.",
+            "traduccion": "No, no tengo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I'll lend you mine.",
+            "traduccion": "Te presto el mío."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué decide Sara en el momento, al oír la respuesta de Leo?",
+          "opciones": [
+            {
+              "es": "Prestarle su abrigo."
+            },
+            {
+              "es": "Tomar el tren temprano."
+            },
+            {
+              "es": "Visitar a su abuelo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo no tiene abrigo y Sara decide al momento: «I'll lend you mine»."
+        }
+      }
+    },
+    "en.n2.class-30": {
+      "explicacion": {
+        "titulo": "Coordinar un plan de grupo",
+        "texto": "Un buen mensaje de grupo combina los tres futuros del bloque, cada uno con su función. El encuentro ya acordado va en presente continuo: We're meeting at the library at ten on Saturday. Las tareas asignadas, también: Maya is sending the message tonight. Las ofertas que surgen al hablar llevan will: We need drinks. I'll bring some. Las previsiones, I think + will: I think everyone will arrive on time. Y el plan B: if + presente, will en la otra parte: If the park is busy, we'll use the backup venue."
+      },
+      "patron": {
+        "texto": "Encuentro + tarea + oferta + previsión:",
+        "formula": [
+          {
+            "texto": "We're meeting at the library at ten.",
+            "nota": "arreglo fijado: be + -ing"
+          },
+          {
+            "texto": "Maya is sending the message tonight.",
+            "nota": "tarea ya asignada: be + -ing"
+          },
+          {
+            "texto": "We need drinks. I'll bring some.",
+            "nota": "oferta en el momento: will"
+          },
+          {
+            "texto": "I think everyone will arrive on time.",
+            "nota": "previsión: I think + will"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Encuentro o tarea fijada"
+            },
+            {
+              "texto": "am/is/are + -ing"
+            },
+            {
+              "texto": "We're meeting at ten on Saturday."
+            }
+          ],
+          [
+            {
+              "texto": "Oferta en el momento"
+            },
+            {
+              "texto": "will"
+            },
+            {
+              "texto": "I'll bring some."
+            }
+          ],
+          [
+            {
+              "texto": "Previsión"
+            },
+            {
+              "texto": "I think + will"
+            },
+            {
+              "texto": "I think everyone will arrive before ten."
+            }
+          ],
+          [
+            {
+              "texto": "Plan B"
+            },
+            {
+              "texto": "if + presente, will"
+            },
+            {
+              "texto": "If the park is busy, we'll use the backup venue."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the park will be busy, we'll use the backup venue.",
+          "correcto": "If the park is busy, we'll use the backup venue.",
+          "explicacion": "Después de if va el presente (is), aunque la otra parte lleve will."
+        },
+        {
+          "incorrecto": "We need drinks. I bring some.",
+          "correcto": "We need drinks. I'll bring some.",
+          "explicacion": "Una oferta que se decide al hablar va con will (I'll), no en presente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Mia organizan una salida de amigos para el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "We're meeting at the park at ten on Saturday.",
+            "traduccion": "Nos reunimos en el parque a las diez el sábado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We need drinks. I'll bring some.",
+            "traduccion": "Necesitamos bebidas. Yo llevo algunas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thanks! Leo is sending the message to everyone tonight.",
+            "traduccion": "¡Gracias! Leo envía el mensaje a todos esta noche."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "If the park is busy, we'll use the library.",
+            "traduccion": "Si el parque está lleno, usaremos la biblioteca."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Quién va a llevar las bebidas?",
+          "opciones": [
+            {
+              "es": "Mia."
+            },
+            {
+              "es": "Carlos."
+            },
+            {
+              "es": "Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «We need drinks. I'll bring some». Leo se encarga del mensaje."
+        }
+      }
+    }
+  }
+}

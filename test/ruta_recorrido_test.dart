@@ -232,8 +232,20 @@ void main() {
   ) async {
     await montar(tester, const UnidadScreen(unidadId: 'en.n1.class-01'));
     expect(find.text('Presentarse y dar datos personales'), findsOneWidget);
+    // Enriquecimiento: la clase empieza explicando la regla en español.
+    expect(
+      find.text('Presentarte: my name is, I am from, I live in'),
+      findsOneWidget,
+    );
+    await tester.scrollUntilVisible(
+      find.textContaining('Objetivo:'),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.textContaining('Objetivo:'), findsOneWidget);
-    await texto(tester, 'SIGUIENTE');
+    for (var i = 0; i < 4 && find.text('hello').evaluate().isEmpty; i++) {
+      await texto(tester, 'SIGUIENTE');
+    }
     expect(find.text('hello'), findsOneWidget);
     expect(find.text('Práctica con ayuda'), findsNothing);
   });

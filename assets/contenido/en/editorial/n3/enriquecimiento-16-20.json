@@ -1,0 +1,561 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-16: ejemplo 4 «Look at the sky. It will rain soon» (nota: predicción «a partir de lo que vemos») → «I think it will rain tomorrow.»: la predicción con evidencia visible se enseña con going to; se evita reforzar una regla dudosa (P1).",
+      "class-16: explicación del error 1 matizada: el presente simple no es agramatical; para un arreglo personal se prefiere presente continuo.",
+      "class-18: «the park stays the same» → «the place stays the same» (respuesta más natural a «Is it still at the park?»); feedback ajustado.",
+      "class-19: opción correcta «antes del domingo» → «a más tardar el sábado» (fiel a «by Saturday», sin inferencia).",
+      "class-20: «Instead va al final» → «suele ir al final» (también puede abrir frase: Instead, …).",
+      "Aceptado: opciones del ítem en español (avisos del validador esperables)."
+    ]
+  },
+  "classes": {
+    "en.n3.class-16": {
+      "explicacion": {
+        "titulo": "Arreglo, intención o predicción",
+        "texto": "El inglés elige la forma de futuro según lo seguro que es el plan. Arreglo confirmado (hay hora, cita o reserva): presente continuo, We are meeting Ana at six. Intención (algo que decides hacer): be going to, I am going to call Leo. Predicción (lo que crees que pasará): will, It will rain; may indica que quizá pase. En español decimos «nos vemos a las seis» en presente simple; en inglés un arreglo lleva am/is/are + -ing."
+      },
+      "patron": {
+        "texto": "Tres formas, tres grados de certeza:",
+        "formula": [
+          {
+            "texto": "We are meeting at six.",
+            "nota": "arreglo: am/is/are + -ing + hora fijada"
+          },
+          {
+            "texto": "I am going to call Leo.",
+            "nota": "intención: am/is/are going to + verbo"
+          },
+          {
+            "texto": "It will rain.",
+            "nota": "predicción: will + verbo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Grado de certeza",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "arreglo confirmado"
+            },
+            {
+              "texto": "am/is/are + -ing"
+            },
+            {
+              "texto": "We are having lunch at noon."
+            }
+          ],
+          [
+            {
+              "texto": "intención"
+            },
+            {
+              "texto": "am/is/are going to + verbo"
+            },
+            {
+              "texto": "I am going to check the menu."
+            }
+          ],
+          [
+            {
+              "texto": "predicción"
+            },
+            {
+              "texto": "will + verbo"
+            },
+            {
+              "texto": "The road will be busy."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We meet the tutor at six tomorrow.",
+          "correcto": "We are meeting the tutor at six tomorrow.",
+          "explicacion": "Es un calco de «nos reunimos con el tutor mañana». Para un arreglo personal ya acordado, el inglés usa el presente continuo."
+        },
+        {
+          "incorrecto": "I going to bring the map.",
+          "correcto": "I am going to bring the map.",
+          "explicacion": "Be going to necesita am/is/are: I am going to…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan del plan del sábado.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What are we doing on Saturday?",
+            "traduccion": "¿Qué vamos a hacer el sábado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We are meeting Ana at the park at ten.",
+            "traduccion": "Nos vemos con Ana en el parque a las diez."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good! I am going to bring sandwiches.",
+            "traduccion": "¡Bien! Voy a llevar sándwiches."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good idea. The forecast says it will be hot.",
+            "traduccion": "Buena idea. El pronóstico dice que hará calor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es un arreglo ya confirmado?",
+          "opciones": [
+            {
+              "es": "Verse con Ana en el parque a las diez."
+            },
+            {
+              "es": "Llevar sándwiches."
+            },
+            {
+              "es": "Que hará calor."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «We are meeting Ana at the park at ten»: presente continuo con hora fijada. Los sándwiches son una intención (going to) y el calor, una predicción (will)."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "We are meeting the tutor at six tomorrow.",
+          "es": "Nos reunimos con el tutor mañana a las seis.",
+          "nota": "Presente continuo con hora fijada: un arreglo confirmado."
+        },
+        {
+          "indice": 1,
+          "en": "I am going to bring the printed map.",
+          "es": "Voy a traer el mapa impreso.",
+          "nota": "Be going to: una intención que ya decidí."
+        },
+        {
+          "indice": 3,
+          "en": "The room is booked for Friday.",
+          "es": "La sala está reservada para el viernes.",
+          "nota": "Booked: una reserva, es decir, un plan seguro."
+        },
+        {
+          "indice": 4,
+          "en": "I think it will rain tomorrow.",
+          "es": "Creo que lloverá mañana.",
+          "nota": "Will: una predicción, lo que creemos que pasará."
+        }
+      ]
+    },
+    "en.n3.class-17": {
+      "explicacion": {
+        "titulo": "When, before, as soon as + presente",
+        "texto": "Después de when, before, after, as soon as (en cuanto) y until (hasta que), el inglés usa presente simple aunque hable del futuro: When the guide arrives, we will begin. El will va solo en la otra parte de la frase. En español aquí usamos subjuntivo («cuando llegue»); en inglés se usa el presente normal, con -s para he/she/it (arrives, opens). Nunca: when the guide will arrive."
+      },
+      "patron": {
+        "texto": "Conector + presente simple, + will + verbo:",
+        "formula": [
+          {
+            "texto": "As soon as",
+            "nota": "conector de tiempo (en cuanto)"
+          },
+          {
+            "texto": "the door opens,",
+            "nota": "presente simple, aunque es futuro"
+          },
+          {
+            "texto": "we will go in.",
+            "nota": "will + verbo: la acción futura"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When the film will start, we will turn off our phones.",
+          "correcto": "When the film starts, we will turn off our phones.",
+          "explicacion": "Después de when no va will: se usa presente simple (starts)."
+        },
+        {
+          "incorrecto": "We will wait until Grandma come back.",
+          "correcto": "We will wait until Grandma comes back.",
+          "explicacion": "Es un calco de «hasta que vuelva». Con he/she (Grandma) el presente lleva -s: comes."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y su hermana Sara van a ir al cine.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tom, are you ready? The film starts at five.",
+            "traduccion": "Tom, ¿estás listo? La película empieza a las cinco."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Not yet. I am looking for my jacket.",
+            "traduccion": "Todavía no. Estoy buscando mi chaqueta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "OK. As soon as you are ready, we will leave.",
+            "traduccion": "Vale. En cuanto estés listo, saldremos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Can we buy some water before the film starts?",
+            "traduccion": "¿Podemos comprar agua antes de que empiece la película?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, we will buy it when we arrive.",
+            "traduccion": "Sí, la compraremos cuando lleguemos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo saldrán hacia el cine?",
+          "opciones": [
+            {
+              "es": "En cuanto Tom esté listo."
+            },
+            {
+              "es": "Cuando empiece la película."
+            },
+            {
+              "es": "Cuando compren agua."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «As soon as you are ready, we will leave»: are va en presente aunque se refiere al futuro."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "When the guide arrives, we will begin.",
+          "es": "Cuando llegue el guía, empezaremos.",
+          "nota": "Después de when, presente simple (arrives), aunque se habla del futuro."
+        },
+        {
+          "indice": 3,
+          "en": "After the class finishes, we will play in the park.",
+          "es": "Cuando termine la clase, jugaremos en el parque.",
+          "nota": "After también va con presente: finishes, no will finish."
+        }
+      ]
+    },
+    "en.n3.class-18": {
+      "explicacion": {
+        "titulo": "Qué cambió y qué sigue igual",
+        "texto": "Cuando un plan cambia, separa lo que cambió de lo que sigue igual. Lo nuevo se marca con moved to (se pasó a), now (ahora) o changed. Lo que no cambia, con still (todavía, sigue), remains o stays the same. Still va después de is/are (The room is still B2), pero antes de los demás verbos (Ana still hosts the class). En español «sigue siendo» no se traduce palabra por palabra: se dice is still."
+      },
+      "patron": {
+        "texto": "Lo que cambió + but + lo que sigue igual:",
+        "formula": [
+          {
+            "texto": "The class moved to Friday,",
+            "nota": "moved to + dato nuevo"
+          },
+          {
+            "texto": "but",
+            "nota": "contraste entre lo nuevo y lo que se conserva"
+          },
+          {
+            "texto": "the room is still B2.",
+            "nota": "is still: el dato no cambia"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The room still is B2.",
+          "correcto": "The room is still B2.",
+          "explicacion": "Still va después de is/are, no antes."
+        },
+        {
+          "incorrecto": "The match moved for Sunday.",
+          "correcto": "The match moved to Sunday.",
+          "explicacion": "Es un calco de «se pasó para el domingo». Con move se usa to para el nuevo día."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a Leo por su partido.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Is your match still on Saturday?",
+            "traduccion": "¿Tu partido sigue siendo el sábado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, it moved to Sunday.",
+            "traduccion": "No, se pasó al domingo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is it still at the park?",
+            "traduccion": "¿Sigue siendo en el parque?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, the place stays the same. But now it starts at eleven.",
+            "traduccion": "Sí, el lugar sigue igual. Pero ahora empieza a las once."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato del partido no cambió?",
+          "opciones": [
+            {
+              "es": "El lugar."
+            },
+            {
+              "es": "El día."
+            },
+            {
+              "es": "La hora."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «the place stays the same». El día pasó al domingo (moved to Sunday) y la hora ahora es a las once (now)."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "The old time was six, but the new time is seven.",
+          "es": "La hora antigua era a las seis, pero la nueva es a las siete.",
+          "nota": "Old y new separan el dato original y el actualizado."
+        },
+        {
+          "indice": 3,
+          "en": "The day changed, but the room stays the same.",
+          "es": "El día cambió, pero la sala sigue igual.",
+          "nota": "Changed marca el cambio; stays the same, lo que no cambia."
+        },
+        {
+          "indice": 5,
+          "en": "The class moved to Friday at seven. It is now in Hall 9, but Ana is still the host.",
+          "es": "La clase se pasó al viernes a las siete. Ahora es en la sala 9, pero Ana sigue siendo la anfitriona.",
+          "nota": "Moved to y now marcan cambios; still, lo que se mantiene."
+        }
+      ]
+    },
+    "en.n3.class-19": {
+      "explicacion": {
+        "titulo": "Quién hace qué y para cuándo",
+        "texto": "Para coordinar un plan, cada tarea necesita tres datos: quién (Lena), qué hará con will (will send the map) y para cuándo, con by (by noon = como muy tarde al mediodía) o before (antes de). Si algo puede fallar, añade una alternativa con if + presente: If rain starts, we will meet indoors. Cierra con Please confirm by Thursday. Ojo: by no es «por»; by Friday significa «a más tardar el viernes»."
+      },
+      "patron": {
+        "texto": "Persona + will + tarea + plazo:",
+        "formula": [
+          {
+            "texto": "Tom",
+            "nota": "quién se encarga"
+          },
+          {
+            "texto": "will bring",
+            "nota": "will + verbo: la tarea"
+          },
+          {
+            "texto": "the chairs",
+            "nota": "qué"
+          },
+          {
+            "texto": "by Friday.",
+            "nota": "by + plazo: a más tardar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Tom will bring the chairs until Friday.",
+          "correcto": "Tom will bring the chairs by Friday.",
+          "explicacion": "Until indica que algo dura hasta ese momento; para un plazo se usa by."
+        },
+        {
+          "incorrecto": "If it will rain, we will meet indoors.",
+          "correcto": "If it rains, we will meet indoors.",
+          "explicacion": "Después de if va presente simple; will va solo en el resultado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana organiza el cumpleaños de la abuela con Leo y Mia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Grandma's party is on Sunday. Leo, you will buy the cake by Saturday.",
+            "traduccion": "La fiesta de la abuela es el domingo. Leo, tú comprarás el pastel a más tardar el sábado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. And Mia?",
+            "traduccion": "Vale. ¿Y Mia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Mia will make the cards by Friday.",
+            "traduccion": "Mia hará las tarjetas a más tardar el viernes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And if it rains?",
+            "traduccion": "¿Y si llueve?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "If it rains, we will have the party in the kitchen. Please confirm by tonight.",
+            "traduccion": "Si llueve, haremos la fiesta en la cocina. Confirmen antes de esta noche, por favor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tarea tiene Leo?",
+          "opciones": [
+            {
+              "es": "Comprar el pastel a más tardar el sábado."
+            },
+            {
+              "es": "Hacer las tarjetas."
+            },
+            {
+              "es": "Preparar la cocina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Leo, you will buy the cake by Saturday»: will + tarea + by + plazo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "Ben will bring the cups by Friday.",
+          "es": "Ben traerá los vasos a más tardar el viernes.",
+          "nota": "Persona + will + tarea + by + plazo."
+        }
+      ]
+    },
+    "en.n3.class-20": {
+      "explicacion": {
+        "titulo": "Cambiar parte de un plan",
+        "texto": "Renegociar es cambiar una parte del plan y conservar el resto. Junta las formas de este bloque: lo cancelado y lo nuevo (The talk is cancelled; we will meet online instead), lo que se mantiene (lunch remains at noon), quién se encarga (Marta will lead the walk at nine), una alternativa con if + presente (If the hall closes, we will use the online room) y una confirmación (Please confirm before Thursday). Instead (en su lugar) suele ir al final de la frase."
+      },
+      "patron": {
+        "texto": "Cambio + lo que se mantiene + alternativa + cierre:",
+        "formula": [
+          {
+            "texto": "The talk is cancelled,",
+            "nota": "lo que cambia"
+          },
+          {
+            "texto": "but lunch remains at noon.",
+            "nota": "remains: lo que se conserva"
+          },
+          {
+            "texto": "If it rains, we will eat inside.",
+            "nota": "if + presente: la alternativa"
+          },
+          {
+            "texto": "Please confirm.",
+            "nota": "cierre: pedir confirmación"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will meet instead online.",
+          "correcto": "We will meet online instead.",
+          "explicacion": "Instead (en su lugar) suele ir al final de la frase, no entre el verbo y online."
+        },
+        {
+          "incorrecto": "Please confirm me before Thursday.",
+          "correcto": "Please confirm before Thursday.",
+          "explicacion": "Es un calco de «confírmame». Confirm no lleva me; si hace falta, se dice confirm with me."
+        }
+      ],
+      "situacion": {
+        "contexto": "La excursión de la escuela cambia y Carlos, el profesor, lo explica a Mia.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "The museum visit is cancelled, but the picnic remains at twelve.",
+            "traduccion": "La visita al museo se cancela, pero el picnic sigue a las doce."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What will we do in the morning?",
+            "traduccion": "¿Qué haremos por la mañana?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We will visit the library instead. Sara will lead the group at nine.",
+            "traduccion": "Visitaremos la biblioteca en su lugar. Sara guiará al grupo a las nueve."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And if it rains?",
+            "traduccion": "¿Y si llueve?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "If it rains, we will have the picnic in the school hall. Please confirm by Friday.",
+            "traduccion": "Si llueve, haremos el picnic en el salón de la escuela. Confirmen antes del viernes, por favor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué parte del plan no cambia?",
+          "opciones": [
+            {
+              "es": "El picnic a las doce."
+            },
+            {
+              "es": "La visita al museo."
+            },
+            {
+              "es": "La visita a la biblioteca a las doce."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «the picnic remains at twelve»: remains marca lo que se conserva. El museo se cancela y la biblioteca es a las nueve."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The talk is cancelled, but lunch remains at noon.",
+          "es": "La charla se cancela, pero el almuerzo sigue al mediodía.",
+          "nota": "Una parte cambia y otra se conserva (remains)."
+        },
+        {
+          "indice": 4,
+          "en": "The hall remains booked, but the speaker changes.",
+          "es": "El salón sigue reservado, pero cambia el ponente.",
+          "nota": "Remains booked: esa parte del plan continúa."
+        },
+        {
+          "indice": 5,
+          "en": "The workshop is moving to Thursday. Ana is going to send the new timetable. If it rains, we will use the covered patio. Please confirm before Thursday.",
+          "es": "El taller se pasa al jueves. Ana va a enviar el nuevo horario. Si llueve, usaremos el patio cubierto. Confirmen antes del jueves, por favor.",
+          "nota": "Arreglo, intención, alternativa con if y confirmación en un solo mensaje."
+        }
+      ]
+    }
+  }
+}

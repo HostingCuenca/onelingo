@@ -80,6 +80,8 @@ def validar_clase(cid: str, e: dict, clase: dict | None) -> tuple[list[str], lis
     tabla = e.get("tabla")
     if tabla is not None:
         columnas = tabla.get("columnas") or []
+        if any(not str(c).strip() for c in columnas):
+            errores.append(f"{cid}.tabla: encabezado de columna vacío")
         for i, fila in enumerate(tabla.get("filas") or []):
             if len(fila) != len(columnas):
                 errores.append(f"{cid}.tabla.filas[{i}]: {len(fila)} celdas para {len(columnas)} columnas")

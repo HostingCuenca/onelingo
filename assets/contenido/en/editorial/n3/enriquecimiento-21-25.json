@@ -1,0 +1,533 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-23: dos turnos seguidos de Ana fusionados en uno; «fee» de biblioteca traducido como «multa»; consigna y opciones en singular (Mia).",
+      "class-25: error 2 «we will take the next» (elipsis aceptable en inglés oral; regla «next necesita nombre» imprecisa, P1) → «we will lose the bus / miss the bus», calco real de «perder el autobús».",
+      "class-25: diálogo «she will wait at the stop» → «…at the stop at five» para que la consecuencia de unless sea clara.",
+      "class-25: reemplazados ejemplo 0 (instrucción «Check the delay… before choosing») y ejemplo 5 (etiqueta «Ferry case:» y traducción resumida).",
+      "Aceptado: variación léxica billete/boletos/computadoras; opciones del ítem en español."
+    ]
+  },
+  "classes": {
+    "en.n3.class-21": {
+      "explicacion": {
+        "titulo": "If + presente, will + verbo",
+        "texto": "Para una condición real o probable se usa if + presente simple y, en el resultado, will + verbo: If the bus is late, we will take a taxi. Aunque hable del futuro, después de if no va will (no: if the bus will be late). Las dos partes pueden cambiar de orden: We will take a taxi if the bus is late; con if al principio se pone coma. Es como en español «si llueve, llevaremos paraguas»: si + presente."
+      },
+      "patron": {
+        "texto": "If + presente, + will + verbo:",
+        "formula": [
+          {
+            "texto": "If the train is late,",
+            "nota": "if + presente: la condición probable"
+          },
+          {
+            "texto": "we will call",
+            "nota": "will + verbo: el resultado"
+          },
+          {
+            "texto": "Grandma.",
+            "nota": "complemento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the train will be late, we will call Grandma.",
+          "correcto": "If the train is late, we will call Grandma.",
+          "explicacion": "Después de if se usa presente simple, no will."
+        },
+        {
+          "incorrecto": "If the shop is closed, we go to the market tomorrow.",
+          "correcto": "If the shop is closed, we will go to the market tomorrow.",
+          "explicacion": "En español decimos «vamos mañana» en presente; en inglés el resultado futuro necesita will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo habla con su padre, Carlos, del plan para mañana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Are we going to the beach tomorrow?",
+            "traduccion": "¿Vamos a ir a la playa mañana?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes. If it is hot, we will swim.",
+            "traduccion": "Sí. Si hace calor, nadaremos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And if it rains?",
+            "traduccion": "¿Y si llueve?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "If it rains, we will visit the museum.",
+            "traduccion": "Si llueve, visitaremos el museo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And if the bus is full?",
+            "traduccion": "¿Y si el autobús está lleno?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then we will take the train.",
+            "traduccion": "Entonces tomaremos el tren."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué harán si llueve?",
+          "opciones": [
+            {
+              "es": "Visitarán el museo."
+            },
+            {
+              "es": "Irán a nadar."
+            },
+            {
+              "es": "Tomarán el tren."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «If it rains, we will visit the museum»: if + presente (rains) y will + verbo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "If the train is delayed, we will call the accommodation.",
+          "es": "Si el tren se retrasa, llamaremos al alojamiento.",
+          "nota": "If + presente (is delayed) para la condición; will para el resultado."
+        }
+      ]
+    },
+    "en.n3.class-22": {
+      "explicacion": {
+        "titulo": "If, unless y when",
+        "texto": "Los tres conectores llevan presente simple, y la otra parte, will. If (si): algo que puede pasar o no. Unless (a menos que): significa if… not; Unless you run, you will miss the bus = If you do not run… Con unless el verbo va en afirmativo, sin not. When (cuando): algo que seguro pasará (When the bus arrives…). Ojo: when no equivale a «si»; si no es seguro que pase, se usa if."
+      },
+      "patron": {
+        "texto": "Unless + presente afirmativo, + will + verbo:",
+        "formula": [
+          {
+            "texto": "Unless",
+            "nota": "a menos que (= if … not)"
+          },
+          {
+            "texto": "we leave now,",
+            "nota": "presente en afirmativo, sin not"
+          },
+          {
+            "texto": "we will miss the bus.",
+            "nota": "resultado con will"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "if"
+            },
+            {
+              "texto": "si (puede pasar o no)"
+            },
+            {
+              "texto": "If the weather changes, we will stay inside."
+            }
+          ],
+          [
+            {
+              "texto": "unless"
+            },
+            {
+              "texto": "a menos que (= if … not)"
+            },
+            {
+              "texto": "Unless you confirm, the hotel will release the room."
+            }
+          ],
+          [
+            {
+              "texto": "when"
+            },
+            {
+              "texto": "cuando (seguro que pasa)"
+            },
+            {
+              "texto": "When boarding starts, we will join the queue."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Unless you don't call, the hotel will release the room.",
+          "correcto": "Unless you call, the hotel will release the room.",
+          "explicacion": "Unless ya significa «si no»: no se añade don't."
+        },
+        {
+          "incorrecto": "When it rains tomorrow, we will stay at home.",
+          "correcto": "If it rains tomorrow, we will stay at home.",
+          "explicacion": "La lluvia no es segura: se usa if. When es para algo que seguro va a pasar."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom quieren ir al cine.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The film starts at six. Unless we leave now, we will be late.",
+            "traduccion": "La película empieza a las seis. A menos que salgamos ahora, llegaremos tarde."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. When we arrive, I will buy the tickets.",
+            "traduccion": "Vale. Cuando lleguemos, compraré los boletos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And if there are no tickets?",
+            "traduccion": "¿Y si no hay boletos?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "If there are no tickets, we will go to the park.",
+            "traduccion": "Si no hay boletos, iremos al parque."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pasará si no salen ahora?",
+          "opciones": [
+            {
+              "es": "Llegarán tarde."
+            },
+            {
+              "es": "Irán al parque."
+            },
+            {
+              "es": "Tom comprará los boletos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «Unless we leave now, we will be late»: unless = if we do not leave now."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 5,
+          "en": "If it rains, we will stay inside. Unless we leave now, we will miss the bus. When the bus arrives, we will get on.",
+          "es": "Si llueve, nos quedaremos dentro. A menos que salgamos ahora, perderemos el autobús. Cuando llegue el autobús, subiremos.",
+          "nota": "If: posible; unless: si no; when: seguro."
+        }
+      ]
+    },
+    "en.n3.class-23": {
+      "explicacion": {
+        "titulo": "Leer reglas y sus consecuencias",
+        "texto": "Las reglas de una reserva o un aviso dicen qué pasa si se cumple una condición. Primero busca la condición (if, unless, when, after, before, up to) y luego lee solo la consecuencia escrita, sin añadir nada: If you arrive after 22:00, message the hotel. El imperativo (message, show) y must indican obligación; will indica lo que pasará. Up to twenty kilos significa «hasta veinte kilos». Después de must va el verbo sin to."
+      },
+      "patron": {
+        "texto": "Condición + consecuencia escrita:",
+        "formula": [
+          {
+            "texto": "If your bag weighs over twenty kilos,",
+            "nota": "la condición, con su límite"
+          },
+          {
+            "texto": "you will pay",
+            "nota": "will: lo que pasará"
+          },
+          {
+            "texto": "a fee.",
+            "nota": "la consecuencia exacta, sin añadir nada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You must to show identification.",
+          "correcto": "You must show identification.",
+          "explicacion": "Después de must va el verbo sin to."
+        },
+        {
+          "incorrecto": "When the deposit will arrive, the office will email the receipt.",
+          "correcto": "When the deposit arrives, the office will email the receipt.",
+          "explicacion": "Después de when se usa presente simple, aunque se hable del futuro."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y su prima Ana leen las reglas de la biblioteca.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Can I take five books?",
+            "traduccion": "¿Puedo llevarme cinco libros?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. The rule says you can take up to four books.",
+            "traduccion": "No. La regla dice que puedes llevarte hasta cuatro libros."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And if I return them late?",
+            "traduccion": "¿Y si los devuelvo tarde?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "If you return them late, you will pay a fee. And unless you show your card, you cannot use the computers.",
+            "traduccion": "Si los devuelves tarde, pagarás una multa. Y a menos que muestres tu tarjeta, no puedes usar las computadoras."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según las reglas del diálogo, ¿qué pasa si Mia devuelve los libros tarde?",
+          "opciones": [
+            {
+              "es": "Pagará una multa."
+            },
+            {
+              "es": "No podrá usar las computadoras."
+            },
+            {
+              "es": "Solo podrá llevar cuatro libros."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana lee «If you return them late, you will pay a fee». Las computadoras dependen de la tarjeta, no del retraso."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 5,
+          "en": "Unless you pay a deposit, the host will not keep the room.",
+          "es": "A menos que pagues un depósito, el anfitrión no guardará la habitación.",
+          "nota": "La regla dice la condición (unless) y la consecuencia exacta (will not keep)."
+        }
+      ]
+    },
+    "en.n3.class-24": {
+      "explicacion": {
+        "titulo": "Plan A y plan B",
+        "texto": "Un plan de contingencia prepara una respuesta para cada problema probable. Cada problema va con if + presente y cada respuesta con will: If the road floods, we will use the hill route. Instead (en su lugar) o backup (alternativa) muestran que cambias el plan original. Ordena los pasos: primero compruebas (check the forecast), luego decides y al final avisas (update the group). Después de before se usa -ing: before choosing."
+      },
+      "patron": {
+        "texto": "Problema probable + respuesta alternativa:",
+        "formula": [
+          {
+            "texto": "If the train is cancelled,",
+            "nota": "if + presente: el problema"
+          },
+          {
+            "texto": "we will take",
+            "nota": "will + verbo: la respuesta"
+          },
+          {
+            "texto": "the bus instead.",
+            "nota": "instead: en lugar del plan original"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the train is cancel, we will take the bus.",
+          "correcto": "If the train is cancelled, we will take the bus.",
+          "explicacion": "Con is se necesita el participio: cancelled."
+        },
+        {
+          "incorrecto": "We will check the forecast before to choose the route.",
+          "correcto": "We will check the forecast before choosing the route.",
+          "explicacion": "Es un calco de «antes de elegir». Después de before va el verbo con -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y su padre, Carlos, preparan una excursión al lago.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Tomorrow we are going to the lake. I will check the forecast at seven.",
+            "traduccion": "Mañana vamos al lago. Revisaré el pronóstico a las siete."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And if it rains?",
+            "traduccion": "¿Y si llueve?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "If it rains, we will visit the museum instead.",
+            "traduccion": "Si llueve, visitaremos el museo en su lugar."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And if the train is cancelled?",
+            "traduccion": "¿Y si cancelan el tren?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then we will take the bus. I will message Grandma when we decide.",
+            "traduccion": "Entonces tomaremos el autobús. Le escribiré a la abuela cuando decidamos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué harán si cancelan el tren?",
+          "opciones": [
+            {
+              "es": "Tomarán el autobús."
+            },
+            {
+              "es": "Visitarán el museo."
+            },
+            {
+              "es": "Se quedarán en casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos responde «Then we will take the bus». El museo es la alternativa si llueve."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "If it rains, we will visit the museum instead.",
+          "es": "Si llueve, visitaremos el museo en su lugar.",
+          "nota": "Un problema probable (if + presente) y una respuesta práctica (will)."
+        },
+        {
+          "indice": 5,
+          "en": "Plan A: we will walk to the lake. Plan B: if the path is closed, we will take the bus.",
+          "es": "Plan A: caminaremos al lago. Plan B: si el sendero está cerrado, tomaremos el autobús.",
+          "nota": "El plan B solo se usa si se cumple la condición."
+        }
+      ]
+    },
+    "en.n3.class-25": {
+      "explicacion": {
+        "titulo": "Resolver un viaje con problemas",
+        "texto": "Cuando un viaje se complica, combina lo aprendido. Comprueba los datos: el retraso (The train is forty minutes late) y el tiempo mínimo de conexión. Decide con if + presente y will: If the connection is too short, we will take the next train. Revisa las reglas con unless: Unless we call before six, the hotel will release the room. Avisa con when: When the platform is confirmed, I will send it to you. Da la razón con because."
+      },
+      "patron": {
+        "texto": "Dato comprobado + decisión + aviso:",
+        "formula": [
+          {
+            "texto": "Our train is forty minutes late,",
+            "nota": "el dato: cantidad + late"
+          },
+          {
+            "texto": "so we will take the next train.",
+            "nota": "so + will: la decisión"
+          },
+          {
+            "texto": "I will message Grandma.",
+            "nota": "el aviso a quien te espera"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The train is late forty minutes.",
+          "correcto": "The train is forty minutes late.",
+          "explicacion": "La cantidad de tiempo va antes de late."
+        },
+        {
+          "incorrecto": "If the train is late, we will lose the bus.",
+          "correcto": "If the train is late, we will miss the bus.",
+          "explicacion": "Es un calco de «perder el autobús». Para un transporte que no alcanzas se usa miss; lose es perder un objeto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia viaja en tren con su madre, Sara, a casa de la abuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look, our train is forty minutes late.",
+            "traduccion": "Mira, nuestro tren lleva cuarenta minutos de retraso."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then we will miss the bus at five.",
+            "traduccion": "Entonces perderemos el autobús de las cinco."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What will we do?",
+            "traduccion": "¿Qué haremos?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "We will take the next bus at six. Unless we call Grandma, she will wait at the stop at five.",
+            "traduccion": "Tomaremos el siguiente autobús, a las seis. A menos que llamemos a la abuela, nos esperará en la parada a las cinco."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I will call her now.",
+            "traduccion": "La llamo ahora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué autobús tomarán?",
+          "opciones": [
+            {
+              "es": "El de las seis."
+            },
+            {
+              "es": "El de las cinco."
+            },
+            {
+              "es": "Ninguno: irán en taxi."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «We will take the next bus at six», porque con el retraso perderán el de las cinco."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The train is forty minutes late, so we will miss the connection.",
+          "es": "El tren lleva cuarenta minutos de retraso, así que perderemos la conexión.",
+          "nota": "Primero el dato comprobado (forty minutes late) y luego la decisión."
+        },
+        {
+          "indice": 2,
+          "en": "Our ticket allows one free change.",
+          "es": "Nuestro billete permite un cambio gratuito.",
+          "nota": "Antes de decidir, comprueba lo que el billete permite."
+        },
+        {
+          "indice": 4,
+          "en": "I will message my companion: we are taking the next train because of the delay.",
+          "es": "Le escribiré a mi acompañante: tomamos el siguiente tren por el retraso.",
+          "nota": "El aviso da la decisión y la razón (because of)."
+        },
+        {
+          "indice": 5,
+          "en": "If the 16:00 ferry is cancelled, we will take the 17:30 ferry. Unless we call the hotel before six, it will release our room. When the time is confirmed, I will send it to you.",
+          "es": "Si cancelan el ferry de las 16:00, tomaremos el de las 17:30. A menos que llamemos al hotel antes de las seis, liberará nuestra habitación. Cuando se confirme la hora, te la enviaré.",
+          "nota": "If, unless y when en un solo mensaje de viaje."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,569 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-02: diálogo «on Monday and Friday» → «on Mondays and Fridays» (hábito recurrente) y traducción «los lunes y los viernes»; feedback ajustado.",
+      "class-04: explicación: añadido «(en EE. UU., on the weekend)» junto a at the weekend.",
+      "Aceptado: opciones del ítem en español; avisos del validador «opción correcta apenas aparece» (las opciones son paráfrasis en español del diálogo)."
+    ]
+  },
+  "classes": {
+    "en.n2.class-01": {
+      "explicacion": {
+        "titulo": "Horarios diarios: presente simple y usually",
+        "texto": "Para contar un horario diario se usa el presente simple: I start, we finish. Con he/she/it o un nombre (Leo, her bus ride) el verbo lleva -s: she starts, it takes, Leo works; con I/you/we/they no lleva -s. Usually (normalmente) va delante del verbo principal: I usually start at eight, no I start usually. Before y after sitúan una acción antes o después de otra (before lunch, after work), y take(s) + tiempo dice cuánto dura algo: My commute takes thirty minutes."
+      },
+      "patron": {
+        "texto": "Sujeto + usually + verbo + complemento + hora:",
+        "formula": [
+          {
+            "texto": "I",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "usually start",
+            "nota": "usually va delante del verbo"
+          },
+          {
+            "texto": "my shift",
+            "nota": "qué empieza"
+          },
+          {
+            "texto": "at eight.",
+            "nota": "at + hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Verbo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "start, take, finish"
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "starts, takes, finishes"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She usually start her shift at eight.",
+          "correcto": "She usually starts her shift at eight.",
+          "explicacion": "Con she el verbo lleva -s, aunque usually vaya delante."
+        },
+        {
+          "incorrecto": "I start usually my shift at eight.",
+          "correcto": "I usually start my shift at eight.",
+          "explicacion": "Usually va delante del verbo principal, no detrás como en «empiezo normalmente»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia cómo es su día en la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What time do you start school, Mia?",
+            "traduccion": "¿A qué hora empiezas la escuela, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I usually start at eight. The bus takes thirty minutes.",
+            "traduccion": "Normalmente empiezo a las ocho. El autobús tarda treinta minutos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Do you have a break?",
+            "traduccion": "¿Tienes un descanso?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, a short break before lunch. After school, I study for an hour.",
+            "traduccion": "Sí, un descanso corto antes del almuerzo. Después de la escuela, estudio durante una hora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuánto tarda el autobús de Mia?",
+          "opciones": [
+            {
+              "es": "Treinta minutos."
+            },
+            {
+              "es": "Una hora."
+            },
+            {
+              "es": "Ocho minutos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The bus takes thirty minutes»."
+        }
+      }
+    },
+    "en.n2.class-02": {
+      "explicacion": {
+        "titulo": "How often y how long: frecuencia y duración",
+        "texto": "How often pregunta con qué frecuencia y how long, cuánto dura algo. Después va do o does + sujeto + verbo base: How often does Sam cook? (no How often Sam does cook). Para responder: once (una vez), twice (dos veces), three times… + a week o a month; también once every month. «Dos veces por semana» es twice a week, sin «por». Para la duración se usa last (durar): The class lasts an hour; con he/she/it lleva -s."
+      },
+      "patron": {
+        "texto": "How often / How long + do/does + sujeto + verbo base?",
+        "formula": [
+          {
+            "texto": "How often",
+            "nota": "con qué frecuencia (how long: cuánto dura)"
+          },
+          {
+            "texto": "does",
+            "nota": "does con he/she/it; do con I/you/we/they"
+          },
+          {
+            "texto": "Sam",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "cook at home?",
+            "nota": "verbo en forma base"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Veces",
+          "Inglés"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1 vez por semana"
+            },
+            {
+              "texto": "once a week"
+            }
+          ],
+          [
+            {
+              "texto": "2 veces por semana"
+            },
+            {
+              "texto": "twice a week"
+            }
+          ],
+          [
+            {
+              "texto": "3 veces por semana"
+            },
+            {
+              "texto": "three times a week"
+            }
+          ],
+          [
+            {
+              "texto": "1 vez cada mes"
+            },
+            {
+              "texto": "once every month"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I exercise twice for week.",
+          "correcto": "I exercise twice a week.",
+          "explicacion": "«Por semana» se dice a week, no for week."
+        },
+        {
+          "incorrecto": "How long does the class lasts?",
+          "correcto": "How long does the class last?",
+          "explicacion": "Después de does el verbo va en forma base: last, sin -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pregunta a Leo por su clase de música.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "How often do you have music class, Leo?",
+            "traduccion": "¿Con qué frecuencia tienes clase de música, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Twice a week, on Mondays and Fridays.",
+            "traduccion": "Dos veces por semana, los lunes y los viernes."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "How long does the class last?",
+            "traduccion": "¿Cuánto dura la clase?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It lasts an hour. And we go to the park once every month.",
+            "traduccion": "Dura una hora. Y vamos al parque una vez cada mes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué frecuencia tiene Leo clase de música?",
+          "opciones": [
+            {
+              "es": "Dos veces por semana."
+            },
+            {
+              "es": "Una vez cada mes."
+            },
+            {
+              "es": "Una vez por semana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Twice a week, on Mondays and Fridays»."
+        }
+      }
+    },
+    "en.n2.class-03": {
+      "explicacion": {
+        "titulo": "Verbos de estado y verbos de acción",
+        "texto": "Algunos verbos describen estados (lo que sabes, piensas, necesitas, prefieres o de quién es algo): know, understand, believe, need, prefer, belong. Casi nunca van con -ing, aunque en español digamos «lo estoy entendiendo»: I understand, no I am understanding. Con he/she/it llevan -s: Lina knows, this key belongs to Omar. Los verbos de acción, como carry o wait, sí usan am/is/are + -ing para lo que pasa ahora: They are waiting outside now."
+      },
+      "patron": {
+        "texto": "Estado: forma simple · Acción ahora: am/is/are + -ing:",
+        "formula": [
+          {
+            "texto": "I need",
+            "nota": "estado: forma simple, sin -ing"
+          },
+          {
+            "texto": "my key,",
+            "nota": "lo que necesito"
+          },
+          {
+            "texto": "and Tom is carrying",
+            "nota": "acción ahora: is + -ing"
+          },
+          {
+            "texto": "the boxes.",
+            "nota": "lo que lleva"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Verbos",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "estado (sin -ing)"
+            },
+            {
+              "texto": "know, understand, believe, need, prefer, belong"
+            },
+            {
+              "texto": "She knows the answer."
+            }
+          ],
+          [
+            {
+              "texto": "acción (con -ing ahora)"
+            },
+            {
+              "texto": "carry, wait"
+            },
+            {
+              "texto": "They are waiting outside now."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am understanding the instructions.",
+          "correcto": "I understand the instructions.",
+          "explicacion": "Understand es un verbo de estado: no se usa con -ing aunque en español digamos «estoy entendiendo»."
+        },
+        {
+          "incorrecto": "This bag is belonging to Ana.",
+          "correcto": "This bag belongs to Ana.",
+          "explicacion": "Belong expresa de quién es algo: forma simple con -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia llevan cajas a la casa nueva de la familia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, I need the key.",
+            "traduccion": "Mia, necesito la llave."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I am carrying two boxes now. Wait!",
+            "traduccion": "Ahora estoy llevando dos cajas. ¡Espera!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is this key yours?",
+            "traduccion": "¿Esta llave es tuya?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, that key belongs to Leo. Mine is in my bag.",
+            "traduccion": "No, esa llave es de Leo. La mía está en mi bolsa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién es la llave que tiene Tom?",
+          "opciones": [
+            {
+              "es": "De Leo."
+            },
+            {
+              "es": "De Mia."
+            },
+            {
+              "es": "De Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «that key belongs to Leo»."
+        }
+      }
+    },
+    "en.n2.class-04": {
+      "explicacion": {
+        "titulo": "Una semana típica: on, during, in, at",
+        "texto": "Para describir una semana típica se usa el presente simple con expresiones de tiempo. On va con días (on Saturday), during con periodos (during the week), in con partes del día (in the evening) y at the weekend (en EE. UU., on the weekend) es «el fin de semana»; from Monday to Friday es «de lunes a viernes». En español «el sábado» no lleva preposición; en inglés hace falta on. Normally y occasionally van delante del verbo, y con he/she el verbo lleva -s: he occasionally has, he works."
+      },
+      "patron": {
+        "texto": "Expresión de tiempo + sujeto + (adverbio) + verbo:",
+        "formula": [
+          {
+            "texto": "On Saturday,",
+            "nota": "on + día"
+          },
+          {
+            "texto": "we",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "normally do",
+            "nota": "adverbio delante del verbo"
+          },
+          {
+            "texto": "our chores.",
+            "nota": "la actividad"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Preposición",
+          "Con…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "on"
+            },
+            {
+              "texto": "días"
+            },
+            {
+              "texto": "on Saturday"
+            }
+          ],
+          [
+            {
+              "texto": "during"
+            },
+            {
+              "texto": "periodos"
+            },
+            {
+              "texto": "during the week"
+            }
+          ],
+          [
+            {
+              "texto": "in"
+            },
+            {
+              "texto": "partes del día"
+            },
+            {
+              "texto": "in the evening"
+            }
+          ],
+          [
+            {
+              "texto": "at"
+            },
+            {
+              "texto": "el fin de semana"
+            },
+            {
+              "texto": "at the weekend"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In Saturday, we do our chores.",
+          "correcto": "On Saturday, we do our chores.",
+          "explicacion": "Con los días de la semana se usa on, no in."
+        },
+        {
+          "incorrecto": "Leo occasionally have training in the evening.",
+          "correcto": "Leo occasionally has training in the evening.",
+          "explicacion": "Con he/she (Leo), have cambia a has."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le pregunta a Sara cómo es su semana.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What do you normally do during the week, Sara?",
+            "traduccion": "¿Qué haces normalmente durante la semana, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I go to school from Monday to Friday. On Monday, I have training in the evening.",
+            "traduccion": "Voy a la escuela de lunes a viernes. El lunes tengo entrenamiento por la tarde."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And at the weekend?",
+            "traduccion": "¿Y el fin de semana?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "On Saturday, we do our chores. On Sunday, I make time for friends.",
+            "traduccion": "El sábado hacemos las tareas de casa. El domingo reservo tiempo para mis amigos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué día tiene Sara entrenamiento?",
+          "opciones": [
+            {
+              "es": "El lunes."
+            },
+            {
+              "es": "El sábado."
+            },
+            {
+              "es": "El domingo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «On Monday, I have training in the evening»."
+        }
+      }
+    },
+    "en.n2.class-05": {
+      "explicacion": {
+        "titulo": "Leer un perfil de rutina",
+        "texto": "Un perfil de rutina describe a otra persona con el presente simple: Eva has…, she meets…, his commute lasts…. Al leerlo, busca tres cosas: la frecuencia (usually = normalmente, rarely = rara vez; van delante del verbo), las horas y duraciones (after seven, lasts forty minutes) y los contrastes con but. Rarely ya es casi negativo: no lleva not. Al responder, recuerda: he/she + verbo con -s y has, no have. En contrastes, repite el verbo: but her hours are not."
+      },
+      "patron": {
+        "texto": "Sujeto (he/she) + adverbio + verbo con -s + detalle:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "otra persona: tercera persona"
+          },
+          {
+            "texto": "rarely works",
+            "nota": "rarely = rara vez; verbo con -s"
+          },
+          {
+            "texto": "after seven.",
+            "nota": "el detalle de hora"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Eva have a flexible work schedule.",
+          "correcto": "Eva has a flexible work schedule.",
+          "explicacion": "Con he/she (Eva) se usa has, no have."
+        },
+        {
+          "incorrecto": "Her deadlines are fixed, but her hours not.",
+          "correcto": "Her deadlines are fixed, but her hours are not.",
+          "explicacion": "En español basta «pero sus horas no»; en inglés hay que repetir el verbo: are not."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Leo cómo es la rutina de su hermana Sara.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Does Sara have a fixed schedule?",
+            "traduccion": "¿Sara tiene un horario fijo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, her schedule is flexible. She usually studies online.",
+            "traduccion": "No, su horario es flexible. Normalmente estudia en línea."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Does she study at night?",
+            "traduccion": "¿Estudia por la noche?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She rarely studies after seven. She has a good balance.",
+            "traduccion": "Rara vez estudia después de las siete. Tiene un buen equilibrio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué frecuencia estudia Sara después de las siete?",
+          "opciones": [
+            {
+              "es": "Rara vez."
+            },
+            {
+              "es": "Normalmente."
+            },
+            {
+              "es": "Todos los días."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «She rarely studies after seven»."
+        }
+      }
+    }
+  }
+}

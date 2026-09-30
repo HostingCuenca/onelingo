@@ -1,0 +1,595 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-35: distractor «En la sala, con su abuela» sustituido por «Encima de la mesa»: la mesa podía estar en la sala y la opción era discutible; ahora hay una única respuesta y se contrasta under/on. Feedback ajustado.",
+      "Aceptado: Rex reaparece como mascota del abuelo de Sara (otra familia); 's enseñado en class-18.",
+      "Aceptado: opciones del ítem en español; ítem de escucha de class-34 con audio de una línea del diálogo.",
+      "Revisado sin cambios: 31, 32 (ejemplo 4), 33, 34."
+    ]
+  },
+  "classes": {
+    "en.n1.class-31": {
+      "explicacion": {
+        "titulo": "Describir tu casa y tu familia",
+        "texto": "Para describir tu casa y tu familia combinas lo que ya sabes: Welcome to + lugar para recibir (Welcome to my house), This is para presentar, There is/are para decir qué hay, is in para decir dónde está alguien (My grandma is in the living room) y has got para lo que tiene una persona (My grandpa has got a pet). Elige el posesivo según el dueño: my (mi), our (nuestro), their (de ellos). Con he o she, has got."
+      },
+      "patron": {
+        "texto": "Welcome to + posesivo + lugar:",
+        "formula": [
+          {
+            "texto": "Welcome to",
+            "nota": "bienvenido/a a"
+          },
+          {
+            "texto": "our",
+            "nota": "posesivo: my, our, their…"
+          },
+          {
+            "texto": "house.",
+            "nota": "el lugar"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "recibir"
+            },
+            {
+              "texto": "Welcome to my house."
+            }
+          ],
+          [
+            {
+              "texto": "decir qué hay"
+            },
+            {
+              "texto": "There are two bedrooms."
+            }
+          ],
+          [
+            {
+              "texto": "ubicar a alguien"
+            },
+            {
+              "texto": "My grandma is in the living room."
+            }
+          ],
+          [
+            {
+              "texto": "decir qué tiene"
+            },
+            {
+              "texto": "My grandpa has got a pet."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My grandpa have got a pet.",
+          "correcto": "My grandpa has got a pet.",
+          "explicacion": "My grandpa es he: se usa has got."
+        },
+        {
+          "incorrecto": "The house of my grandma is small.",
+          "correcto": "My grandma's house is small.",
+          "explicacion": "Es un calco de «la casa de mi abuela». Con personas se usa 's: my grandma's house."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara recibe a su amiga Mia en su casa.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Hello, Mia! Welcome to my house.",
+            "traduccion": "¡Hola, Mia! Bienvenida a mi casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thank you! Your house is nice.",
+            "traduccion": "¡Gracias! Tu casa es bonita."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "This is my grandma. My grandpa is in the kitchen.",
+            "traduccion": "Esta es mi abuela. Mi abuelo está en la cocina."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is that your dog?",
+            "traduccion": "¿Ese es tu perro?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, that is my grandpa's pet. Its name is Rex.",
+            "traduccion": "No, es la mascota de mi abuelo. Se llama Rex."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de quién es el perro?",
+          "opciones": [
+            {
+              "es": "Del abuelo de Sara."
+            },
+            {
+              "es": "De Sara."
+            },
+            {
+              "es": "De la abuela de Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «No, that is my grandpa's pet»."
+        }
+      }
+    },
+    "en.n1.class-32": {
+      "explicacion": {
+        "titulo": "Una visita: turnos del diálogo",
+        "texto": "Una visita sigue turnos fijos. Quien recibe dice Hello! Welcome to my house, y quien llega responde Thank you. Luego se presenta la casa: This is the living room. Para preguntar si hay algo se usa Is there…? y se responde Yes, there is o No, there is not. Para invitar se usa please: Please sit down. Escucha cada turno y piensa qué respuesta encaja; Thank you sirve después de una bienvenida o una invitación."
+      },
+      "patron": {
+        "texto": "Turnos de una visita:",
+        "formula": [
+          {
+            "texto": "Welcome to my house.",
+            "nota": "dice quien vive allí"
+          },
+          {
+            "texto": "Thank you.",
+            "nota": "responde quien llega"
+          },
+          {
+            "texto": "Please sit down.",
+            "nota": "invitación cortés"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Turno",
+          "Frase",
+          "Respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Bienvenida"
+            },
+            {
+              "texto": "Welcome to my house."
+            },
+            {
+              "texto": "Thank you."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "Is there a sofa?"
+            },
+            {
+              "texto": "Yes, there is."
+            }
+          ],
+          [
+            {
+              "texto": "Invitación"
+            },
+            {
+              "texto": "Please sit down."
+            },
+            {
+              "texto": "Thank you."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Thanks you.",
+          "correcto": "Thank you.",
+          "explicacion": "Se dice thank you (sin s) o thanks, pero no las dos cosas juntas."
+        },
+        {
+          "incorrecto": "Please you sit down.",
+          "correcto": "Please sit down.",
+          "explicacion": "En una invitación no se pone you: please + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo visita por primera vez la casa de Ana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Hello, Leo! Welcome to my house.",
+            "traduccion": "¡Hola, Leo! Bienvenido a mi casa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thank you, Ana.",
+            "traduccion": "Gracias, Ana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "This is the living room. Please sit down.",
+            "traduccion": "Esta es la sala. Por favor, siéntate."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thank you. Is there a bathroom here?",
+            "traduccion": "Gracias. ¿Hay un baño aquí?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, there is. It is next to the kitchen.",
+            "traduccion": "Sí, hay. Está al lado de la cocina."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está el baño?",
+          "opciones": [
+            {
+              "es": "Al lado de la cocina."
+            },
+            {
+              "es": "Al lado de la sala."
+            },
+            {
+              "es": "No hay baño."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana responde: «Yes, there is. It is next to the kitchen»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Yes, there is.",
+          "es": "Sí, hay.",
+          "nota": "La respuesta corta repite there is; no se dice solo «Yes, is»."
+        }
+      ]
+    },
+    "en.n1.class-33": {
+      "explicacion": {
+        "titulo": "Leer con atención: a, the y plurales",
+        "texto": "Al leer, fíjate en dos pistas. A (o an) presenta algo por primera vez: There is a sofa. The se usa cuando ya se sabe de qué se habla, en singular o plural: The sofa is green. The chairs are green. La -s final indica plural y cambia el verbo: is con una cosa y are con varias. El adjetivo nunca lleva -s: green chairs. Pregúntate en cada frase: ¿es algo nuevo o ya mencionado? ¿una cosa o varias?"
+      },
+      "patron": {
+        "texto": "The + plural + are + adjetivo:",
+        "formula": [
+          {
+            "texto": "The chairs",
+            "nota": "the: ya se mencionaron; -s: varias"
+          },
+          {
+            "texto": "are",
+            "nota": "varias → are"
+          },
+          {
+            "texto": "green.",
+            "nota": "el adjetivo no lleva -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Primera vez (a / plural)",
+          "Ya mencionado (the)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "There is a sofa."
+            },
+            {
+              "texto": "The sofa is green."
+            }
+          ],
+          [
+            {
+              "texto": "There are two chairs."
+            },
+            {
+              "texto": "The chairs are green."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The chairs are greens.",
+          "correcto": "The chairs are green.",
+          "explicacion": "En español decimos «verdes», pero en inglés el adjetivo no cambia en plural."
+        },
+        {
+          "incorrecto": "There is a sofa. A sofa is green.",
+          "correcto": "There is a sofa. The sofa is green.",
+          "explicacion": "La segunda vez ya sabemos qué sofá es: se usa the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le describe su dormitorio a Ana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "This is my bedroom. There is a bed and a desk.",
+            "traduccion": "Este es mi dormitorio. Hay una cama y un escritorio."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The bed is big!",
+            "traduccion": "¡La cama es grande!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. There are two chairs next to the desk.",
+            "traduccion": "Sí. Hay dos sillas al lado del escritorio."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Are the chairs blue?",
+            "traduccion": "¿Las sillas son azules?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, the chairs are red. The desk is blue.",
+            "traduccion": "No, las sillas son rojas. El escritorio es azul."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de qué color son las sillas?",
+          "opciones": [
+            {
+              "es": "Rojas."
+            },
+            {
+              "es": "Azules."
+            },
+            {
+              "es": "Verdes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «The chairs are red». Lo azul es el escritorio."
+        }
+      }
+    },
+    "en.n1.class-34": {
+      "explicacion": {
+        "titulo": "Escuchar dónde está algo",
+        "texto": "Una frase de ubicación sigue siempre el mismo orden: objeto + is + posición + lugar (The book is on the table). Al escuchar, busca primero el objeto (the book, the bag) y después la palabra de posición, que es corta y se dice rápido: in, on, under, next to, between. Next to suena casi como una sola palabra, y between anuncia dos referencias o un plural (two chairs). Presta atención a la -s final: chair o chairs."
+      },
+      "patron": {
+        "texto": "Objeto + is + posición + lugar:",
+        "formula": [
+          {
+            "texto": "The bag",
+            "nota": "1.º: el objeto"
+          },
+          {
+            "texto": "is",
+            "nota": "está"
+          },
+          {
+            "texto": "next to",
+            "nota": "2.º: la posición"
+          },
+          {
+            "texto": "the table.",
+            "nota": "3.º: el lugar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The sofa is next the table.",
+          "correcto": "The sofa is next to the table.",
+          "explicacion": "To se oye débil, pero no se omite: next to."
+        },
+        {
+          "incorrecto": "The table is between two chair.",
+          "correcto": "The table is between two chairs.",
+          "explicacion": "Después de two el sustantivo va en plural. La -s se oye poco, pero hay que escribirla."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia busca sus cosas y Leo le responde desde la sala.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, where is my book?",
+            "traduccion": "Leo, ¿dónde está mi libro?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is on the table.",
+            "traduccion": "Está encima de la mesa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And my bag?",
+            "traduccion": "¿Y mi bolsa?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Your bag is under the chair.",
+            "traduccion": "Tu bolsa está debajo de la silla."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the ball?",
+            "traduccion": "¿Y la pelota?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The ball is next to the sofa.",
+            "traduccion": "La pelota está al lado del sofá."
+          }
+        ],
+        "item": {
+          "formato": "escuchar",
+          "consigna": "Escucha una frase del diálogo. ¿Dónde está la bolsa de Mia?",
+          "opciones": [
+            {
+              "es": "Debajo de la silla."
+            },
+            {
+              "es": "Encima de la mesa."
+            },
+            {
+              "es": "Al lado del sofá."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Your bag is under the chair».",
+          "audio": "Your bag is under the chair."
+        }
+      }
+    },
+    "en.n1.class-35": {
+      "explicacion": {
+        "titulo": "Evaluación: la casa, la familia y las visitas",
+        "texto": "Esta evaluación mezcla todo el bloque. Antes de responder, identifica qué te piden: presentar (This is my house), decir qué hay (There is + una cosa / There are + varias), ubicar (in, on, under, next to, between), responder en una visita (Welcome to my house → Thank you) o decir qué tiene alguien (My grandpa has got a pet). Revisa siempre singular o plural y el posesivo: our es «nuestro» y their, «de ellos»."
+      },
+      "patron": {
+        "texto": "There is/are + cosa + lugar:",
+        "formula": [
+          {
+            "texto": "There are",
+            "nota": "varias cosas → are"
+          },
+          {
+            "texto": "two chairs",
+            "nota": "número + plural"
+          },
+          {
+            "texto": "in the living room.",
+            "nota": "dónde"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tarea",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presentar"
+            },
+            {
+              "texto": "This is my house."
+            }
+          ],
+          [
+            {
+              "texto": "Decir qué hay"
+            },
+            {
+              "texto": "There are two chairs in the living room."
+            }
+          ],
+          [
+            {
+              "texto": "Ubicar"
+            },
+            {
+              "texto": "The book is under the table."
+            }
+          ],
+          [
+            {
+              "texto": "Responder"
+            },
+            {
+              "texto": "Welcome to my house. — Thank you."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The book is under of the table.",
+          "correcto": "The book is under the table.",
+          "explicacion": "Es un calco de «debajo de». Under no lleva of."
+        },
+        {
+          "incorrecto": "My grandpa has got a pet small.",
+          "correcto": "My grandpa has got a small pet.",
+          "explicacion": "El adjetivo va antes del sustantivo: small pet."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos visita la casa de la familia de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Hello, Carlos! Welcome to our house.",
+            "traduccion": "¡Hola, Carlos! Bienvenido a nuestra casa."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thank you! Is that your grandma?",
+            "traduccion": "¡Gracias! ¿Esa es tu abuela?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. She is in the living room. Please sit down.",
+            "traduccion": "Sí. Está en la sala. Por favor, siéntate."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thank you. Is this your book?",
+            "traduccion": "Gracias. ¿Este es tu libro?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, it is my brother's book. My book is under the table.",
+            "traduccion": "No, es el libro de mi hermano. Mi libro está debajo de la mesa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está el libro de Mia?",
+          "opciones": [
+            {
+              "es": "Debajo de la mesa."
+            },
+            {
+              "es": "Encima de la mesa."
+            },
+            {
+              "es": "Encima de la silla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «My book is under the table» (debajo, no encima). El otro libro es de su hermano."
+        }
+      }
+    }
+  }
+}
