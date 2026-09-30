@@ -9,84 +9,84 @@
     "en.n8.class-76": {
       "explicacion": {
         "titulo": "Las jugadas de un hilo de reclamación",
-        "texto": "Un hilo de correos avanza por «jugadas». Chase: recuerdas algo pendiente (I am writing to follow up on…; I have not yet received…). Escalate: subes el nivel porque no hay respuesta (I am copying my manager; I will escalate this). Confirm o acknowledge: confirmas lo acordado o acusas recibo (Thank you for confirming…). Close the loop: cierras el asunto e informas del resultado (Just to close the loop…). Reconocer la jugada de cada correo te dice qué se espera del siguiente."
+        "texto": "Un hilo de reclamación avanza por «jugadas», y cada una transmite una actitud distinta. Chase recuerda con paciencia algo pendiente; escalate sube el asunto a alguien con más autoridad y suena más duro, por eso llega después de un recordatorio; acknowledge pide o da confirmación de que el mensaje llegó; close the loop avisa del resultado final. En C1 importa lo que el remitente da a entender: «as a gentle reminder» es paciente; «I will have no choice but to…» anuncia una consecuencia."
       },
       "patron": {
-        "texto": "Jugada + fórmula + dato:",
+        "texto": "Jugada + dato pendiente + actitud:",
         "formula": [
           {
-            "texto": "I am writing to follow up",
-            "nota": "jugada: recordar lo pendiente"
+            "texto": "I am writing to chase",
+            "nota": "jugada: recuerdas algo pendiente"
           },
           {
-            "texto": "on my email of 3 May,",
-            "nota": "el dato que se recuerda"
+            "texto": "the outstanding refund,",
+            "nota": "el dato concreto que falta"
           },
           {
-            "texto": "as it is still unresolved.",
-            "nota": "el motivo de la insistencia"
+            "texto": "since nobody has replied to my previous messages.",
+            "nota": "el motivo de la insistencia, sin reproche"
           }
         ]
       },
       "erroresFrecuentes": [
         {
-          "incorrecto": "I am writing for follow up my email.",
-          "correcto": "I am writing to follow up on my email.",
-          "explicacion": "Después de I am writing va to + verbo para dar el propósito; for no sirve para eso."
+          "incorrecto": "I am writing for chase my refund.",
+          "correcto": "I am writing to chase my refund.",
+          "explicacion": "El propósito se expresa con to + verbo base; for se usa con sustantivos (for a refund), no con verbos."
         },
         {
-          "incorrecto": "I have not received any answer since two weeks.",
-          "correcto": "I have not received any answer for two weeks.",
-          "explicacion": "Since pide un momento de inicio (since Monday); para una duración («desde hace dos semanas») se usa for."
+          "incorrecto": "Please acknowledge the reception of this email.",
+          "correcto": "Please acknowledge receipt of this email.",
+          "explicacion": "Reception es la recepción de un hotel o de una señal. Acusar recibo se dice acknowledge receipt, sin artículo."
         }
       ],
       "situacion": {
-        "contexto": "Tom espera la reparación de su lavadora y Ana le aconseja cómo seguir el hilo de correos.",
+        "contexto": "Tom lleva semanas esperando la reparación de su lavadora y Ana le explica qué jugada conviene en cada momento.",
         "dialogo": [
           {
             "hablante": "Tom",
-            "texto": "I wrote to the shop two weeks ago, and they have not replied.",
-            "traduccion": "Escribí a la tienda hace dos semanas y no han respondido."
+            "texto": "I wrote to the shop twice about the washing machine, and nobody has replied.",
+            "traduccion": "Escribí dos veces a la tienda por la lavadora y nadie ha respondido."
           },
           {
             "hablante": "Ana",
-            "texto": "Send a reminder. Start with: I am writing to follow up on my email.",
-            "traduccion": "Envía un recordatorio. Empieza con: escribo para dar seguimiento a mi correo."
+            "texto": "Then send a gentle reminder first. If the matter is still unresolved next week, you can escalate it to a senior manager.",
+            "traduccion": "Entonces envía primero un recordatorio amable. Si el asunto sigue sin resolverse la semana que viene, puedes escalarlo a un directivo."
           },
           {
             "hablante": "Tom",
-            "texto": "And if they still say nothing, I will escalate it to the manager.",
-            "traduccion": "Y si siguen sin decir nada, lo escalaré al gerente."
+            "texto": "Will that not sound too strong?",
+            "traduccion": "¿No sonará demasiado duro?"
           },
           {
             "hablante": "Ana",
-            "texto": "Good. When it is solved, close the loop with a short thank-you.",
-            "traduccion": "Bien. Cuando esté resuelto, cierra el tema con un breve agradecimiento."
+            "texto": "Not if you stay polite. And when it is fixed, close the loop with a short thank-you, so that they know the case is finished.",
+            "traduccion": "No si te mantienes cortés. Y cuando esté arreglada, cierra el asunto con un breve agradecimiento, para que sepan que el caso ha terminado."
           }
         ],
         "item": {
           "formato": "elegir",
-          "consigna": "Según el diálogo, ¿qué hará Tom si la tienda sigue sin responder?",
+          "consigna": "Según Ana, ¿cuándo debería Tom escalar el asunto?",
           "opciones": [
             {
-              "es": "Escalará el asunto al gerente."
+              "es": "Si sigue sin resolverse después del recordatorio."
             },
             {
-              "es": "Enviará un agradecimiento y cerrará el asunto."
+              "es": "Desde el primer mensaje, para ganar tiempo."
             },
             {
-              "es": "Pedirá un reembolso a Ana."
+              "es": "Solo cuando la lavadora ya esté arreglada."
             }
           ],
           "respuesta": 0,
-          "feedback": "Tom dice «I will escalate it to the manager»: escalar es la jugada siguiente al recordatorio; agradecer y cerrar se hace cuando ya está resuelto."
+          "feedback": "Ana propone primero un recordatorio amable y solo después, si el asunto sigue sin resolverse, escalarlo a un directivo."
         }
       },
       "tabla": {
         "columnas": [
           "Jugada",
           "Fórmula típica",
-          "Qué hace"
+          "Actitud que transmite"
         ],
         "filas": [
           [
@@ -94,10 +94,10 @@
               "texto": "Chase"
             },
             {
-              "texto": "I am writing to follow up on…"
+              "texto": "I am writing to chase…"
             },
             {
-              "texto": "recuerda algo pendiente"
+              "texto": "paciente y cortés"
             }
           ],
           [
@@ -108,29 +108,29 @@
               "texto": "I will escalate this to…"
             },
             {
-              "texto": "sube el nivel"
+              "texto": "firme, con consecuencia"
             }
           ],
           [
             {
-              "texto": "Confirm"
+              "texto": "Acknowledge"
             },
             {
-              "texto": "Thank you for confirming…"
+              "texto": "Please acknowledge receipt…"
             },
             {
-              "texto": "confirma o acusa recibo"
+              "texto": "pide una confirmación"
             }
           ],
           [
             {
-              "texto": "Close"
+              "texto": "Close the loop"
             },
             {
               "texto": "Just to close the loop…"
             },
             {
-              "texto": "cierra y avisa del final"
+              "texto": "cordial, informa del final"
             }
           ]
         ]
@@ -139,7 +139,7 @@
     "en.n8.class-77": {
       "explicacion": {
         "titulo": "Firme no es lo mismo que brusco",
-        "texto": "Una frase brusca («Answer me now») se arregla sin perder firmeza. Mantén los dos datos duros, qué quieres y para cuándo, y cambia el envoltorio: suaviza con just, kindly, I am afraid…; pide con I would be grateful if you could…; cierra con I look forward to hearing from you by… Recuerda además el causativo: have + objeto + participio («have the heater repaired») pide que lo haga otra persona; repair solo dice que lo haces tú."
+        "texto": "Una frase seca («Answer me now») se arregla sin perder firmeza: mantén los dos datos duros, qué quieres y para cuándo, y cambia el envoltorio. Suaviza con just, kindly o I am afraid; pide con I would be grateful if you could…; repite la petición con reiterate y cierra con I look forward to hearing from you. Repasa también el causativo: have + objeto + participio («have the heater repaired») pide que lo haga otra persona; repair solo dice que lo haces tú."
       },
       "patron": {
         "texto": "I would be grateful if you could + verbo + plazo:",
@@ -153,7 +153,7 @@
             "nota": "petición concreta: could + verbo base"
           },
           {
-            "texto": "by Friday.",
+            "texto": "no later than Friday.",
             "nota": "plazo firme: no se suaviza"
           }
         ]
@@ -162,7 +162,7 @@
         {
           "incorrecto": "I would be grateful if you can confirm the date by Friday.",
           "correcto": "I would be grateful if you could confirm the date by Friday.",
-          "explicacion": "Después de I would be grateful if se usa could, no can: el pasado marca cortesía."
+          "explicacion": "Después de I would be grateful if se usa could, no can: el pasado marca la cortesía."
         },
         {
           "incorrecto": "I would like to repair the heater by Friday.",
@@ -171,83 +171,85 @@
         }
       ],
       "situacion": {
-        "contexto": "Carlos escribió a un taller dos veces y Mia le ayuda a suavizar su tercer mensaje.",
+        "contexto": "Carlos escribió dos veces a un taller y Mia le ayuda a suavizar su tercer mensaje.",
         "dialogo": [
           {
             "hablante": "Carlos",
             "texto": "My draft says: Answer me today or I will complain.",
-            "traduccion": "Mi borrador dice: respóndeme hoy o me quejaré."
+            "traduccion": "Mi borrador dice: respóndame hoy o me quejaré."
           },
           {
             "hablante": "Mia",
-            "texto": "It is too blunt. Try: Could you kindly reply today?",
-            "traduccion": "Es demasiado brusco. Prueba: ¿Podría responder hoy, por favor?"
+            "texto": "It sounds curt. Try: Could you kindly reply today? And I want the bike repaired by Friday, so say it politely.",
+            "traduccion": "Suena seco. Prueba: ¿Podría responder hoy, por favor? Y quiero la bici reparada para el viernes, así que dilo con cortesía."
           },
           {
             "hablante": "Carlos",
-            "texto": "And the bike? I want it repaired by Friday.",
-            "traduccion": "¿Y la bici? Quiero que esté reparada para el viernes."
+            "texto": "Is that not too soft?",
+            "traduccion": "¿No es demasiado suave?"
           },
           {
             "hablante": "Mia",
-            "texto": "Keep the date. Just add: I am afraid I must remain firm about it.",
-            "traduccion": "Mantén la fecha. Solo añade: me temo que debo mantenerme firme con ella."
+            "texto": "No. Keep the date and add: I am afraid I must remain firm about it.",
+            "traduccion": "No. Mantén la fecha y añade: me temo que debo mantenerme firme con ella."
           }
         ],
         "item": {
           "formato": "elegir",
-          "consigna": "Según el diálogo, ¿qué mantiene Mia en el mensaje suavizado?",
+          "consigna": "Según el diálogo, ¿qué cambia Mia en el borrador de Carlos?",
           "opciones": [
             {
-              "es": "El plazo del viernes, pero con un tono cortés."
+              "es": "El tono, pero no la fecha del viernes."
             },
             {
-              "es": "La queja, pero sin ninguna fecha."
+              "es": "La fecha del viernes, pero no el tono."
             },
             {
-              "es": "Solo el agradecimiento, sin pedir nada."
+              "es": "Todo el mensaje, incluida la queja."
             }
           ],
           "respuesta": 0,
-          "feedback": "Mia dice «Keep the date» y añade «I am afraid I must remain firm about it»: el plazo se mantiene y solo cambia el tono."
+          "feedback": "Mia suaviza la petición con kindly y I am afraid, pero dice «Keep the date»: el plazo se mantiene y solo cambia el tono."
         }
       },
       "tabla": {
         "columnas": [
-          "Frase brusca",
-          "Versión firme y cortés"
+          "Versión seca",
+          "Versión firme y cortés",
+          "Qué cambia"
         ],
         "filas": [
           [
             {
-              "texto": "Answer me now."
+              "texto": "Send me the part now."
             },
             {
-              "texto": "I would be grateful if you could reply today."
+              "texto": "Could you kindly send me the part by Friday?"
+            },
+            {
+              "texto": "petición con plazo, sin orden"
             }
           ],
           [
             {
-              "texto": "You are late."
+              "texto": "You never answer."
             },
             {
-              "texto": "I am afraid the part has not arrived yet."
+              "texto": "I am afraid I have not had a reply."
+            },
+            {
+              "texto": "un hecho en lugar de un reproche"
             }
           ],
           [
             {
-              "texto": "Fix it by Friday."
+              "texto": "Fix it today."
             },
             {
-              "texto": "I would like to have it repaired by Friday."
-            }
-          ],
-          [
-            {
-              "texto": "Tell me the date."
+              "texto": "I would be grateful to have it repaired today."
             },
             {
-              "texto": "Could you kindly confirm the date?"
+              "texto": "causativo: pides que lo hagan"
             }
           ]
         ]
@@ -256,7 +258,7 @@
     "en.n8.class-78": {
       "explicacion": {
         "titulo": "Problema, plazo y solución acordada",
-        "texto": "Para entender una cadena de correos busca tres cosas: el problema (qué falla y desde cuándo), el plazo (una fecha de visita, un límite del cliente o un tiempo de espera) y la solución acordada (quién hace qué y cuándo; suele ir tras As agreed…). Los datos cambian de un correo a otro y manda el último. Fíjate en las palabras que corrigen lo anterior (but, too long) y en las que cierran un acuerdo (as agreed, please confirm). Un plazo no es una solución: la solución incluye la acción acordada."
+        "texto": "Para entender una cadena de correos busca tres cosas: el problema (qué falla y desde cuándo), el plazo (una visita, un límite del cliente o un tiempo de espera) y la solución acordada (quién hace qué y cuándo; suele ir tras As agreed…). Los datos cambian de un correo a otro y manda el último. Vigila las palabras que corrigen lo anterior (but, however, too long) y lo que un correo da a entender sin decirlo: un gesto de cortesía no es una admisión de culpa, y un plazo no es una solución."
       },
       "patron": {
         "texto": "Problema → plazo → solución acordada:",
@@ -270,8 +272,8 @@
             "nota": "plazo: cuándo"
           },
           {
-            "texto": "as agreed, the part comes by courier.",
-            "nota": "solución acordada: quién hace qué"
+            "texto": "but, as agreed, the part comes by courier.",
+            "nota": "corrección + solución acordada: quién hace qué"
           }
         ]
       },
@@ -279,16 +281,16 @@
         {
           "incorrecto": "The spare part takes a week for arrive.",
           "correcto": "The spare part takes a week to arrive.",
-          "explicacion": "Después de takes + tiempo va to + verbo («tarda una semana en llegar»), no for."
+          "explicacion": "Después de take + tiempo va to + verbo («tarda una semana en llegar»), no for."
         },
         {
           "incorrecto": "The engineer can visit at Monday morning.",
           "correcto": "The engineer can visit on Monday morning.",
-          "explicacion": "Con días se usa on (on Monday), no at como a veces se calca del español."
+          "explicacion": "Con días se usa on (on Monday), no at, como a veces se calca del español."
         }
       ],
       "situacion": {
-        "contexto": "Mia lee en voz alta a Leo el correo de una tienda.",
+        "contexto": "Mia lee en voz alta a Leo el correo de una tienda sobre su portátil.",
         "dialogo": [
           {
             "hablante": "Mia",
@@ -313,7 +315,7 @@
           {
             "hablante": "Mia",
             "texto": "They say it takes five days by courier.",
-            "traduccion": "Dicen que tarda cinco días por mensajero."
+            "traduccion": "Dicen que tarda cinco días por mensajería."
           }
         ],
         "item": {
@@ -327,7 +329,7 @@
               "es": "Porque el técnico es amigo de Mia."
             },
             {
-              "es": "Porque la pieza llega por mensajero."
+              "es": "Porque la pieza llega por mensajería."
             }
           ],
           "respuesta": 0,
@@ -336,9 +338,9 @@
       },
       "tabla": {
         "columnas": [
-          "Dato",
-          "Qué buscar",
-          "Señal"
+          "Qué buscas",
+          "Dónde suele estar",
+          "Señal típica"
         ],
         "filas": [
           [
@@ -346,10 +348,10 @@
               "texto": "Problema"
             },
             {
-              "texto": "qué falla y desde cuándo"
+              "texto": "primer correo"
             },
             {
-              "texto": "has a leak / does not work"
+              "texto": "has a leak, is faulty, stopped working"
             }
           ],
           [
@@ -357,21 +359,21 @@
               "texto": "Plazo"
             },
             {
-              "texto": "una fecha o un tiempo"
+              "texto": "respuesta de la empresa"
             },
             {
-              "texto": "by Friday / takes a week"
+              "texto": "can visit on Monday, takes a week"
             }
           ],
           [
             {
-              "texto": "Solución"
+              "texto": "Solución acordada"
             },
             {
-              "texto": "la acción acordada"
+              "texto": "último correo"
             },
             {
-              "texto": "As agreed, … / I confirm that…"
+              "texto": "as agreed, please confirm"
             }
           ]
         ]
@@ -380,7 +382,7 @@
     "en.n8.class-79": {
       "explicacion": {
         "titulo": "Un reclamo firme y cortés en cinco partes",
-        "texto": "Un correo de reclamo a una empresa que ya no respondió una vez tiene cinco partes. 1) Referencia: recuerda tu correo anterior (I am writing again about…). 2) Problema: hechos y fechas, sin insultos (the heater has been broken for three weeks). 3) Petición y plazo: una acción concreta con fecha (Please resolve this by Friday). 4) Consecuencia: el siguiente paso, con cortesía (Failing that, I will make a formal complaint). 5) Cierre: confías en una respuesta pronta (I trust that…)."
+        "texto": "Un correo de reclamo a una empresa que ya no respondió una vez tiene cinco partes. 1) Referencia: recuerda tu correo anterior con fecha. 2) Problema: hechos y fechas, sin insultos (unacceptable califica la situación, no a las personas). 3) Petición y plazo: una acción concreta con fecha, apoyada si puedes en un derecho (I am entitled to…). 4) Consecuencia: el siguiente paso, con cortesía (Failing that…). 5) Cierre: confías en una respuesta pronta y pides una garantía (I trust that…)."
       },
       "patron": {
         "texto": "Referencia + problema + petición + consecuencia:",
@@ -390,7 +392,7 @@
             "nota": "referencia: recuerdas el primer correo"
           },
           {
-            "texto": "The heater has been broken for three weeks.",
+            "texto": "The heating has not worked for three weeks.",
             "nota": "problema con un hecho y una fecha"
           },
           {
@@ -507,6 +509,17 @@
             {
               "texto": "Failing that, I will make a complaint."
             }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "I trust that…"
+            },
+            {
+              "texto": "I trust that you will reply promptly."
+            }
           ]
         ]
       }
@@ -514,7 +527,7 @@
     "en.n8.class-80": {
       "explicacion": {
         "titulo": "Del correo de la empresa al acuerdo",
-        "texto": "Un caso de servicio completo junta tres movimientos. Primero, entender la respuesta: qué ofrece la empresa y con qué límites (parcial no es total). Segundo, redactar tu petición final: qué pides exactamente y para cuándo. Tercero, gestionar la contraoferta: aceptar (I am happy to accept…), rechazar con cortesía (I am afraid I must decline…) o negociar (I am willing to settle for… on the condition that…; Could we meet halfway?). Usa fórmulas de seguimiento firmes y suaviza el tono, nunca el plazo."
+        "texto": "Un caso de servicio completo junta tres movimientos. Primero, entender la respuesta: qué ofrece la empresa y con qué límites (parcial no es total). Segundo, redactar tu petición final: qué pides y para cuándo. Tercero, gestionar la contraoferta: aceptar (I am happy to accept…), rechazar con cortesía (I am afraid I must decline…) o negociar (I am willing to settle for… on the condition that…; Could we meet halfway?). Suaviza el tono, nunca el plazo, y deja constancia de que actúas de buena fe."
       },
       "patron": {
         "texto": "Respuesta + contraoferta + condición:",
@@ -537,7 +550,7 @@
         {
           "incorrecto": "I am agree with your counteroffer.",
           "correcto": "I agree with your counteroffer.",
-          "explicacion": "Agree es un verbo, no un adjetivo: no se usa con am (I am agree), aunque en español sea «estoy de acuerdo»."
+          "explicacion": "Agree es un verbo, no un adjetivo: no se usa con am, aunque en español sea «estoy de acuerdo»."
         },
         {
           "incorrecto": "I will settle for a partial refund on condition that to repair the machine.",
@@ -590,7 +603,8 @@
       "tabla": {
         "columnas": [
           "Decisión",
-          "Fórmula"
+          "Fórmula",
+          "Efecto en la otra parte"
         ],
         "filas": [
           [
@@ -599,6 +613,9 @@
             },
             {
               "texto": "I am happy to accept your counteroffer."
+            },
+            {
+              "texto": "cierra el asunto"
             }
           ],
           [
@@ -607,6 +624,9 @@
             },
             {
               "texto": "I am afraid I must decline."
+            },
+            {
+              "texto": "firme pero cortés"
             }
           ],
           [
@@ -615,6 +635,9 @@
             },
             {
               "texto": "I am willing to settle for… on the condition that…"
+            },
+            {
+              "texto": "abre un acuerdo con límites"
             }
           ],
           [
@@ -623,25 +646,13 @@
             },
             {
               "texto": "Could we meet halfway?"
+            },
+            {
+              "texto": "pide una concesión mutua"
             }
           ]
         ]
       }
     }
-  },
-  "review": {
-    "status": "GO",
-    "reviewer": "claude-reviewer-independiente",
-    "date": "2026-09-30",
-    "notes": [
-      "Revisión independiente C76-C80 (N8, correos de servicio): concordancia con el mapa verificada (input/form/comprehension/production/transfer).",
-      "C76: error frecuente dudoso («escalate to» sin objeto es habitual en inglés de empresa) sustituido por since/for; feedback ilegible y errata corregidos; consigna de ordenar alineada con el modelo.",
-      "C77: relacionar ambiguo (Answer me now / Tell me the date admitían ambas fórmulas) rehecho con versiones corteses y etiquetas inequívocas; ordenar con orden alternativo aceptado.",
-      "C79: audio con «Failing that» ilógico reescrito (petición + consecuencia); fechas de la tarea de escritura ajustadas a viernes reales (12 y 26 de junio); variante apologize aceptada.",
-      "C80: «Could we meet you halfway?» corregido a «Could we meet halfway?».",
-      "Completar multirrespuesta: aceptadas ampliadas con sinónimos naturales (confirm/acknowledge receipt, at your earliest opportunity, reject/refuse, take/refer, hope/trust...).",
-      "Escritura C77/C79/C80: modelos de 21-24, 146-160 y 153-180 palabras con rúbrica flexible y respuestas aceptadas que pasan su propia rúbrica; rango realista.",
-      "P2 pendiente (no bloquea): dificultad de C78 cercana a B2; regionalismos aislados («portátil»)."
-    ]
   }
 }

@@ -1,6 +1,7 @@
 {
   "schema": "onelingo.editorial.compact-block.v1",
   "level": "n9",
+  "pase": "c1",
   "range": {
     "start": 21,
     "end": 25
@@ -16,8 +17,8 @@
       ],
       "vocabulario": [
         {
-          "en": "chair",
-          "es": "presidente o presidenta de la reunión"
+          "en": "chair the meeting",
+          "es": "presidir la reunión"
         },
         {
           "en": "secretary",
@@ -52,35 +53,48 @@
           "es": "aclarar"
         },
         {
-          "en": "vote",
-          "es": "votar"
+          "en": "call for a vote",
+          "es": "pedir que se vote"
+        },
+        {
+          "en": "digress",
+          "es": "divagar, salirse del tema"
+        },
+        {
+          "en": "take the floor",
+          "es": "tomar la palabra"
         }
       ],
       "ensenanza": [
         {
-          "en": "As chair, Ana opens the meeting and reads the first item on the agenda.",
-          "es": "Como presidenta, Ana abre la reunión y lee el primer punto del orden del día.",
-          "nota": "Quien preside (chair) abre, da los turnos y cierra la sesión."
+          "en": "Whoever agrees to chair the meeting should open the session, read out each item on the agenda in order and give every member a fair turn to speak.",
+          "es": "Quien acepta presidir la reunión debe abrir la sesión, leer cada punto del orden del día por orden y dar a cada miembro un turno justo para hablar.",
+          "nota": "Chair the meeting: abrir, dar turnos y cerrar. Item es cada punto del orden del día (agenda)."
         },
         {
-          "en": "The secretary writes the minutes, so every member can check what was agreed.",
-          "es": "La secretaria redacta el acta para que cada miembro pueda comprobar lo acordado.",
-          "nota": "Minutes es el acta escrita de la reunión; no significa «minutos» aquí."
+          "en": "The secretary writes the minutes while the discussion is still going on, so that anyone who missed the session can see what was decided and by whom.",
+          "es": "La secretaria redacta el acta mientras la discusión sigue en marcha, para que quien faltó a la sesión pueda ver qué se decidió y quién lo decidió.",
+          "nota": "Minutes es el acta escrita, nunca «minutos» en este contexto."
         },
         {
-          "en": "I would like to propose that we move the next meeting to Thursday.",
-          "es": "Me gustaría proponer que traslademos la próxima reunión al jueves.",
-          "nota": "I would like to propose + that + oración: abre una propuesta con cortesía."
+          "en": "If a speaker begins to digress, the chair may politely steer the discussion back by saying that the new point belongs under a different item.",
+          "es": "Si alguien empieza a divagar, quien preside puede reconducir la discusión con educación diciendo que el nuevo punto pertenece a otro apartado.",
+          "nota": "Digress: salirse del tema. Steer back: devolver la conversación a su cauce."
         },
         {
-          "en": "Sorry to interrupt, but could I clarify one point before we vote?",
-          "es": "Perdón por interrumpir, pero ¿podría aclarar un punto antes de votar?",
-          "nota": "Sorry to + verbo base pide permiso; could I… suaviza la petición."
+          "en": "Members who wish to take the floor should wait to be recognised, because it is considered rude to interrupt a colleague who is still speaking.",
+          "es": "Los miembros que quieran tomar la palabra deben esperar a que se les conceda, porque se considera de mala educación interrumpir a un compañero que aún habla.",
+          "nota": "Take the floor: empezar a hablar con el permiso de la presidencia."
         },
         {
-          "en": "Mia, let me finish this item, and then you can clarify your question.",
-          "es": "Mia, déjame terminar este punto y luego podrás aclarar tu pregunta.",
-          "nota": "El chair controla los turnos: let me finish / then you can…"
+          "en": "Sorry to interrupt, but could I clarify one point before the chair decides to call for a vote on the proposal?",
+          "es": "Perdona que interrumpa, pero ¿podría aclarar un punto antes de que la presidencia decida pedir que se vote la propuesta?",
+          "nota": "Sorry to + verbo base pide permiso; could I clarify suaviza la petición; call for a vote somete algo a votación."
+        },
+        {
+          "en": "Once the debate is over, any member may propose a motion, and the chair will call for a vote only after somebody has seconded it.",
+          "es": "Cuando termina el debate, cualquier miembro puede proponer una moción, y la presidencia pedirá la votación solo después de que alguien la secunde.",
+          "nota": "Propose a motion abre una propuesta formal; la votación llega cuando alguien la apoya (second)."
         }
       ],
       "explicacion": {
@@ -219,194 +233,164 @@
         "guiada": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué función cumple esta intervención en el acta?",
-            "feedback": "Ana saluda y pasa al primer punto del orden del día: abrir la sesión es tarea de quien la preside. No propone una votación ni redacta el acta.",
+            "consigna": "Lee la intervención de Ana en el acta. ¿Qué función cumple?",
+            "texto": "Ana: Good evening, everyone. Before we begin, let me remind you that we have three items on the agenda tonight and that Sara will write the minutes. Let's start with the new bench.",
             "opciones": [
-              "She opens the meeting.",
-              "She proposes a vote.",
-              "She writes the minutes."
+              "She opens the session and explains how the evening will run.",
+              "She proposes a motion and asks the members to decide on it.",
+              "She interrupts a speaker to correct something said earlier."
             ],
             "respuesta": 0,
-            "texto": "Ana: Good evening, everyone. Let's start with item one.",
-            "pista": "Piensa en qué hace quien dirige la sesión cuando empieza."
+            "feedback": "Ana saluda, presenta el orden del día y asigna el acta: abre la sesión, tarea propia de quien preside. No propone ni interrumpe.",
+            "pista": "Piensa en qué hace quien preside al comenzar, antes de que nadie haya hablado."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Perdona que te interrumpa, pero ¿puedo aclarar un punto?»",
-            "feedback": "Sorry to + verbo base: interrupt es el verbo que pide permiso para cortar la palabra.",
-            "texto": "Sorry to ___, but could I clarify one point?",
-            "respuesta": "interrupt",
+            "consigna": "Completa: «Leo, creo que te estás saliendo del tema de este punto.»",
+            "texto": "Leo has been describing his summer holiday for ten minutes now. Ana smiles and says, «Leo, I think you are starting to ___ from the item we are discussing.»",
+            "respuesta": "digress",
             "aceptadas": [
-              "interrupt"
+              "digress"
             ],
-            "pista": "Es el verbo de cortar la palabra a alguien; tras to va la forma base."
+            "feedback": "Digress from es la colocación para apartarse del tema principal: lo que hace Leo al contar sus vacaciones.",
+            "pista": "Es el verbo que significa salirse del tema; tras to va la forma base."
           },
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «Me gustaría proponer que votemos hoy.»",
-            "feedback": "La propuesta cortés empieza con I would like to propose that y continúa con sujeto + verbo.",
-            "respuesta": "I would like to propose that we vote today",
-            "pista": "Empieza con la fórmula de cortesía I would like to y acaba con el momento."
+            "consigna": "Ordena: «Cada miembro debe esperar a la presidencia antes de tomar la palabra.»",
+            "respuesta": "Each member must wait for the chair before they take the floor",
+            "feedback": "Take the floor es la colocación de empezar a hablar con permiso; must wait for the chair marca la obligación de esperar.",
+            "pista": "Empieza por el sujeto Each member y acaba con la colocación del turno de palabra."
           }
         ],
         "practica": [
           {
-            "formato": "relacionar",
-            "consigna": "Relaciona cada rol o documento de la reunión con su tarea.",
-            "feedback": "El chair dirige, el secretary anota, el agenda ordena los puntos y el member participa con voz y voto.",
-            "pares": [
-              [
-                "chair",
-                "Da la palabra y dirige la sesión"
-              ],
-              [
-                "secretary",
-                "Anota lo que se acuerda"
-              ],
-              [
-                "agenda",
-                "Lista los puntos que se tratarán"
-              ],
-              [
-                "member",
-                "Participa, propone y vota"
-              ]
-            ]
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué hizo la presidencia cuando un miembro se fue por las ramas.",
+            "audio": "At last night's residents' meeting, the chair opened the session by thanking everyone for coming and reading out the three items on the agenda. The secretary, who was writing the minutes, reminded the members that anyone wishing to take the floor should raise a hand first. Halfway through the first item, one member went off the subject and began talking about parking fines, so the chair politely steered the discussion back. A second member then proposed a motion about the bench, and, once it had been seconded, the chair asked everyone to vote.",
+            "opciones": [
+              "She brought the discussion back to the item in hand.",
+              "She suggested a separate motion about the parking fines.",
+              "She asked the secretary to read the minutes aloud again."
+            ],
+            "respuesta": 0,
+            "feedback": "La presidencia reconduce el debate al punto que tocaba («steered the discussion back»). Las multas de aparcamiento quedan fuera del tema."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige la función de esta intervención.",
-            "feedback": "«I would like to propose» abre una propuesta y luego pregunta si conviene a todos: el grupo tiene que decidir.",
-            "audio": "I would like to propose that we move the meeting to Thursday. Is that convenient for everyone?",
+            "consigna": "Escucha otra vez y elige qué ocurrió justo antes de la votación.",
+            "audio": "At last night's residents' meeting, the chair opened the session by thanking everyone for coming and reading out the three items on the agenda. The secretary, who was writing the minutes, reminded the members that anyone wishing to take the floor should raise a hand first. Halfway through the first item, one member went off the subject and began talking about parking fines, so the chair politely steered the discussion back. A second member then proposed a motion about the bench, and, once it had been seconded, the chair asked everyone to vote.",
             "opciones": [
-              "He suggests a plan for the group to decide.",
-              "He asks someone to repeat a figure.",
-              "He closes the meeting."
+              "Somebody backed the motion about the bench.",
+              "The secretary read out last month's minutes.",
+              "The chair announced the end of the meeting."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "La moción sobre el banco fue secundada («had been seconded») y solo entonces se votó; el acta y el cierre no se mencionan en ese momento."
           },
           {
-            "formato": "elegir",
-            "consigna": "¿Cuál es la forma cortés de pedir permiso para aclarar algo?",
-            "feedback": "Could I + verbo base es una petición suave. Las otras dos afirman o mandan, en lugar de pedir turno.",
-            "opciones": [
-              "Could I clarify one point, please?",
-              "I clarify this point now.",
-              "You must clarify this point."
+            "formato": "relacionar",
+            "consigna": "Relaciona cada expresión de la reunión con su función.",
+            "pares": [
+              [
+                "chair the meeting",
+                "Abrir la sesión, dar turnos y mantener el orden"
+              ],
+              [
+                "secretary",
+                "Anotar lo acordado y redactar el acta"
+              ],
+              [
+                "put the motion to the members",
+                "Someter una propuesta a la decisión de los miembros"
+              ],
+              [
+                "take the floor",
+                "Empezar a hablar con permiso de la presidencia"
+              ]
             ],
-            "respuesta": 0
+            "feedback": "Cada expresión designa una función distinta: dirigir, anotar, decidir por votación y pedir turno de palabra."
           }
         ],
         "evaluacion": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué hace Carlos al final del acta?",
-            "feedback": "«The meeting is closed» es la fórmula de cierre de quien preside. Carlos no pregunta nada ni propone una votación.",
+            "consigna": "Según el acta, ¿qué función cumple la intervención de Tom?",
+            "texto": "Item 2: the community garden. Mia: I would like to propose that we open the garden on Saturdays. Tom: Sorry to interrupt, Mia, but could I clarify one point? Who pays for the water? Mia: The council does. Leo: That is a fair point, but we are drifting; the water is a separate item. Ana: Thank you, Leo. Let us return to Mia's proposal and ask the members to decide.",
             "opciones": [
-              "He closes the meeting.",
-              "He asks for a clarification.",
-              "He proposes a vote."
+              "He cuts in politely to ask about the cost.",
+              "He takes the floor to propose a separate motion on water.",
+              "He closes the item and moves on to the next one."
             ],
             "respuesta": 0,
-            "texto": "Carlos: Thank you, everyone. That is all for today, so the meeting is closed."
+            "feedback": "«Sorry to interrupt… could I clarify…?» es la fórmula de quien corta con cortesía para aclarar un dato; aquí, quién paga el agua."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "En ese acta, ¿qué da a entender Leo con su comentario sobre el agua?",
+            "texto": "Item 2: the community garden. Mia: I would like to propose that we open the garden on Saturdays. Tom: Sorry to interrupt, Mia, but could I clarify one point? Who pays for the water? Mia: The council does. Leo: That is a fair point, but we are drifting; the water is a separate item. Ana: Thank you, Leo. Let us return to Mia's proposal and ask the members to decide.",
+            "opciones": [
+              "That the water question belongs under another item.",
+              "That the council should not pay for the garden water.",
+              "That Mia should drop her proposal about Saturdays."
+            ],
+            "respuesta": 0,
+            "feedback": "Leo admite que la pregunta es razonable, pero dice que es «a separate item»: pertenece a otro punto. Ana lo confirma al volver a la propuesta de Mia."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué quiere aclarar el hablante.",
-            "feedback": "Pide aclarar si cada miembro vota por separado o si solo vota una persona por familia. No pregunta por la fecha ni por el acta.",
-            "audio": "Excuse me, could I clarify something before we vote? Does each member get one vote, or only one vote for each family?",
+            "consigna": "Escucha y elige qué pretende la presidencia con este mensaje.",
+            "audio": "Right, that is the first item finished. Before we move on, may I remind everyone that we are already ten minutes over time? Mia, you have held the floor for quite a while, and Tom has been waiting patiently to speak. So, Mia, if you could wrap up in one sentence, Tom can ask his question, and after that we will put the motion to the members.",
             "opciones": [
-              "Whether votes count by person or by family.",
-              "When the next meeting will be.",
-              "Who is writing the record."
+              "To limit Mia's turn politely so the meeting keeps moving.",
+              "To blame Tom for waiting so long before speaking.",
+              "To postpone the decision on the motion until next month."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "La presidencia pide a Mia que concluya y da paso a Tom sin reprocharle nada: gestiona el tiempo con cortesía. La moción no se aplaza."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Votamos el lunes.» «Propongo una fecha.» «Lee el acta de la semana pasada.»",
-            "feedback": "Las tres piezas del vocabulario de reunión: vote para decidir, propose para sugerir y minutes para el acta.",
-            "frases": [
-              "We ___ on the new plan on Monday.",
-              "I would like to ___ a date.",
-              "Ana reads the ___ from last week."
+            "consigna": "Completa: «Si nadie quiere añadir nada, pediré que se vote la propuesta.»",
+            "texto": "After a long and careful debate, the members agreed that the proposal was clear. The chair looked around the room and said, «If nobody wishes to add anything, I will ___ for a vote on the proposal.»",
+            "respuesta": "call",
+            "aceptadas": [
+              "call",
+              "ask"
             ],
-            "partes": [
-              {
-                "respuesta": "vote",
-                "aceptadas": [
-                  "vote"
-                ]
-              },
-              {
-                "respuesta": "propose",
-                "aceptadas": [
-                  "propose",
-                  "suggest"
-                ]
-              },
-              {
-                "respuesta": "minutes",
-                "aceptadas": [
-                  "minutes"
-                ]
-              }
-            ]
-          },
-          {
-            "formato": "relacionar",
-            "consigna": "Relaciona cada frase de una reunión con su función.",
-            "feedback": "Cada frase tiene una fórmula reconocible: move on to para avanzar, could you repeat para aclarar, sorry, but para cortar con cortesía y I propose para sugerir.",
-            "pares": [
-              [
-                "Let's move on to item two.",
-                "Pasar al siguiente punto"
-              ],
-              [
-                "Could you repeat that figure, please?",
-                "Pedir una aclaración"
-              ],
-              [
-                "Sorry, but we are running out of time.",
-                "Interrumpir con cortesía"
-              ],
-              [
-                "I propose that we vote now.",
-                "Hacer una propuesta"
-              ]
-            ]
+            "feedback": "Call for a vote es la colocación fija para pedir que se someta algo a votación; con ask se diría ask for a vote."
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué hace Sara en esta parte del acta?",
-            "feedback": "Sara empieza con «I would like to propose»: propone algo al grupo. Tom y Ana reaccionan a su propuesta.",
+            "consigna": "Según el acta, ¿qué deja claro la presidencia en su respuesta a Carlos?",
+            "texto": "Minutes, item 4. Sara proposed moving the summer party to June. The members voted, and the proposal was approved. Carlos then objected that the hall would not be free that month. Ana, as chair, replied that objections must be raised before a vote, so the decision would stand.",
             "opciones": [
-              "She proposes something to the group.",
-              "She writes the minutes.",
-              "She closes the meeting."
+              "That his objection came too late to change the result.",
+              "That the vote must be repeated because of his objection.",
+              "That the secretary should remove the vote from the minutes."
             ],
             "respuesta": 0,
-            "texto": "Sara: I would like to propose that we ask the council for a new bench. Tom: I agree with Sara. Ana: Then let's vote."
+            "feedback": "Ana recuerda que las objeciones se plantean antes de votar: la decisión ya está tomada y se mantiene. No pide repetir la votación ni borrarla del acta."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué hizo la secretaria.",
-            "feedback": "La secretaria leyó el acta del mes pasado; quien abrió la reunión fue la presidenta.",
-            "audio": "Our chair opened the meeting, and then our secretary read the minutes from last month. After that, we moved on to the first item.",
+            "consigna": "Escucha y elige qué hace el hablante con su intervención.",
+            "audio": "If I could just come in here for a moment, I think we may be going off the point. The agenda says the bench comes first, and the parking problem is a different matter, so perhaps we could note it down for next month and return to the bench before we run out of time.",
             "opciones": [
-              "She read the record of the last meeting.",
-              "She opened the meeting.",
-              "She proposed a vote."
+              "He brings the meeting back politely to the planned item.",
+              "He proposes a motion on the parking problem.",
+              "He asks the secretary to read back the last minutes."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Pide turno con cortesía y propone aparcar el otro tema para volver a lo previsto: reconduce, no propone ni pide el acta."
           },
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «Déjame terminar este punto y luego aclaras tu pregunta.»",
-            "feedback": "El turno se ordena con let me finish y después you can clarify: primero termina quien habla.",
-            "respuesta": "Let me finish this item and then you can clarify your question"
+            "consigna": "Ordena: «Déjame terminar este punto y luego podrás aclarar tu pregunta.»",
+            "respuesta": "Let me finish this item and then you can clarify your question",
+            "feedback": "Quien preside controla los turnos: let me finish marca que termina primero y then you can clarify cede la palabra después."
           }
         ]
       }
@@ -437,8 +421,8 @@
           "es": "convencido"
         },
         {
-          "en": "compromise",
-          "es": "término medio"
+          "en": "reach a compromise",
+          "es": "llegar a un término medio"
         },
         {
           "en": "concern",
@@ -455,38 +439,50 @@
         {
           "en": "go along with",
           "es": "aceptar, estar de acuerdo con"
+        },
+        {
+          "en": "in principle",
+          "es": "en principio"
+        },
+        {
+          "en": "feasible",
+          "es": "viable, factible"
+        },
+        {
+          "en": "endorse",
+          "es": "respaldar, avalar"
         }
       ],
       "ensenanza": [
         {
-          "en": "I support Mia's idea, and I would like to build on it.",
-          "es": "Apoyo la idea de Mia y me gustaría desarrollarla.",
-          "nota": "Build on + idea: partes de lo que ya se dijo y añades algo nuevo."
+          "en": "I fully support Mia's idea and would gladly endorse it at the next meeting, but first I would like to build on it by suggesting that we test it for a month.",
+          "es": "Apoyo por completo la idea de Mia y la respaldaré con gusto en la próxima reunión, pero antes me gustaría desarrollarla sugiriendo que la probemos un mes.",
+          "nota": "Build on + idea: partes de lo dicho y añades algo. Support y endorse expresan apoyo; endorse es más formal."
         },
         {
-          "en": "That is a fair point, and I can go along with the new date.",
-          "es": "Es un argumento razonable y puedo aceptar la nueva fecha.",
-          "nota": "Go along with + nombre: aceptas lo propuesto, aunque no sea tu primera opción."
+          "en": "That is a fair point, and although it was not my first choice, I can go along with the new date for the sake of the group.",
+          "es": "Es un punto razonable y, aunque no era mi primera opción, puedo aceptar la nueva fecha por el bien del grupo.",
+          "nota": "Go along with + nombre: aceptas lo propuesto aunque no fuera tu preferencia."
         },
         {
-          "en": "I have some reservations about the price, because it is higher than last year.",
-          "es": "Tengo algunas reservas sobre el precio, porque es más alto que el año pasado.",
-          "nota": "Have reservations about + nombre: dudas educadas, sin decir «no»."
+          "en": "I have some reservations about the price, so I am not convinced that the plan is feasible without extra funding from the council.",
+          "es": "Tengo algunas reservas sobre el precio, así que no estoy convencido de que el plan sea viable sin más fondos del ayuntamiento.",
+          "nota": "Have reservations about + nombre: dudas educadas. Not convinced that + oración: desacuerdo suave."
         },
         {
-          "en": "I am not convinced that one meeting a month is enough.",
-          "es": "No estoy convencido de que una reunión al mes sea suficiente.",
-          "nota": "Not convinced that + oración: desacuerdo suave sobre un hecho o un plan."
+          "en": "In principle I am happy with the proposal, but my main concern is that nobody has said who will pay if the costs rise.",
+          "es": "En principio estoy de acuerdo con la propuesta, pero mi principal preocupación es que nadie ha dicho quién pagará si suben los costes.",
+          "nota": "In principle concede lo general y prepara la objeción; concern nombra el problema concreto."
         },
         {
-          "en": "My main concern is the cost, so could we find a compromise?",
-          "es": "Mi principal preocupación es el coste, así que, ¿podemos buscar un término medio?",
-          "nota": "Concern nombra el problema; compromise ofrece una salida a ambas partes."
+          "en": "Rather than vote and leave half the room unhappy, could we reach a compromise that feels fair to both sides, even if nobody gets everything?",
+          "es": "En lugar de votar y dejar descontenta a la mitad de la sala, ¿podríamos llegar a un término medio que resulte justo para ambas partes, aunque nadie consiga todo?",
+          "nota": "Reach a compromise: llegar a una solución con cesiones mutuas; could we… la propone con suavidad."
         },
         {
-          "en": "Tom will be speaking to the council on Friday, so I have no objection to waiting.",
-          "es": "Tom hablará con el ayuntamiento el viernes, así que no tengo objeción en esperar.",
-          "nota": "Will be + -ing presenta algo que estará en marcha en un momento futuro."
+          "en": "I have no objection to waiting, provided that the council confirms the budget in writing before anything is signed.",
+          "es": "No tengo ninguna objeción a esperar, siempre que el ayuntamiento confirme el presupuesto por escrito antes de firmar nada.",
+          "nota": "No objection to + -ing/nombre: aceptación formal; provided that introduce la condición."
         }
       ],
       "explicacion": {
@@ -621,167 +617,172 @@
         "guiada": [
           {
             "formato": "completar",
-            "consigna": "Completa: «Tengo algunas reservas sobre el precio.»",
-            "feedback": "Reservations va con about: «reservas sobre algo».",
-            "texto": "I have some reservations ___ the price.",
-            "respuesta": "about",
+            "consigna": "Completa: «Me gustaría desarrollar la idea de Carlos y usar la sala en verano.»",
+            "texto": "Carlos has suggested using the school hall on Fridays. Mia nods and says, «I would like to ___ on Carlos's idea and use the hall in summer too.»",
+            "respuesta": "build",
             "aceptadas": [
-              "about"
+              "build"
             ],
-            "pista": "Es la preposición que equivale a «sobre» en esta expresión."
+            "feedback": "Build on es el verbo con partícula para partir de la idea de otro y añadir algo; Mia no rechaza la propuesta, la amplía.",
+            "pista": "Es el verbo que va con on cuando desarrollas la idea de otra persona."
           },
           {
             "formato": "elegir",
-            "consigna": "¿Qué expresión añade algo a la idea de otra persona?",
-            "feedback": "Build on parte de la idea de Ana y la amplía. Las otras dos expresan dudas sobre ella.",
+            "consigna": "Tom propone subir la cuota. ¿Qué respuesta expresa una reserva sin cerrar el acuerdo?",
+            "texto": "Tom: I suggest we raise the yearly fee to thirty dollars, because the roof needs repairs and the club has no savings.",
             "opciones": [
-              "I would like to build on Ana's idea.",
-              "I have some reservations about Ana's idea.",
-              "I am not convinced that Ana's idea works."
+              "I see the need, but I have my doubts about raising it so sharply.",
+              "I see the need, so I have no objection to raising it at all.",
+              "I see the need, but I am simply not willing to discuss it."
             ],
             "respuesta": 0,
-            "pista": "Busca la expresión que parte de lo dicho para ampliarlo."
+            "feedback": "Reconoce la necesidad y duda solo del método («reservations about»), sin negarse a hablar. Las otras aceptan del todo o bloquean la conversación.",
+            "pista": "Busca la respuesta que reconoce la necesidad y pone dudas al método, sin rechazar el diálogo."
           },
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «No estoy convencido de que este plan funcione.»",
-            "feedback": "Not convinced va seguido de that + sujeto + verbo: that this plan works.",
-            "respuesta": "I am not convinced that this plan works",
-            "pista": "Después de convinced va that y una oración completa."
+            "consigna": "Ordena: «En principio estoy de acuerdo, pero mi principal preocupación es el coste.»",
+            "respuesta": "In principle I agree but my main concern is the cost",
+            "feedback": "In principle abre la concesión general y but my main concern introduce la duda concreta.",
+            "pista": "Empieza por la fórmula que concede lo general y termina con lo que te preocupa."
           }
         ],
         "practica": [
           {
-            "formato": "elegir",
-            "consigna": "¿Qué hace Mia con la propuesta de Carlos?",
-            "feedback": "Mia dice «That is a fair point» y enseguida añade su preocupación (the price). Acepta una parte y pone un reparo.",
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué pedía Leo para los estudiantes.",
+            "audio": "At the sports club's monthly meeting, the treasurer proposed raising the yearly fee to cover the cost of a new roof. Leo said he supported the idea in principle, but he was not sure that thirty dollars was realistic for students, and he asked whether the club could find a middle way with a lower fee for members under eighteen. Mia then offered to add to that suggestion with a payment plan, and Tom, who had opposed the fee at first, told the group that he could now go along with it, provided the roof repairs were finished before winter.",
             "opciones": [
-              "She agrees with part of it and raises a concern.",
-              "She supports it completely.",
-              "She asks the chair to close the meeting."
+              "A lower fee for members under eighteen.",
+              "A payment plan paid over several months.",
+              "A delay until the roof repairs are finished."
             ],
             "respuesta": 0,
-            "texto": "Carlos: We could use the school hall on Fridays, because it is big and close to the park. Mia: That is a fair point, but my concern is the price."
+            "feedback": "Leo pide una cuota menor para menores de dieciocho. El plan de pagos es de Mia y la condición de las reparaciones, de Tom."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué propone el hablante.",
-            "feedback": "Duda de que una hora baste y propone un término medio: noventa minutos. No pide votar ni acortar la reunión.",
-            "audio": "I am not convinced that one hour is enough. Could we find a compromise, maybe ninety minutes?",
+            "consigna": "Escucha otra vez y elige qué condición pone Tom para aceptar la subida.",
+            "audio": "At the sports club's monthly meeting, the treasurer proposed raising the yearly fee to cover the cost of a new roof. Leo said he supported the idea in principle, but he was not sure that thirty dollars was realistic for students, and he asked whether the club could find a middle way with a lower fee for members under eighteen. Mia then offered to add to that suggestion with a payment plan, and Tom, who had opposed the fee at first, told the group that he could now go along with it, provided the roof repairs were finished before winter.",
             "opciones": [
-              "A different length that might suit everyone.",
-              "A vote against the whole plan.",
-              "A shorter meeting for everyone."
+              "That the repairs are completed before winter begins.",
+              "That students always pay less than other members.",
+              "That the treasurer shows the accounts once more."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Tom acepta «provided the roof repairs were finished before winter»: la condición es el calendario de las obras, no el precio para estudiantes."
           },
           {
-            "formato": "completar",
-            "consigna": "Completa: «Puedo aceptar la nueva fecha.»",
-            "feedback": "Go along with + nombre: aceptar algo propuesto por otros.",
-            "texto": "I can go along ___ the new date.",
-            "respuesta": "with",
-            "aceptadas": [
-              "with"
-            ]
+            "formato": "relacionar",
+            "consigna": "Relaciona cada fórmula de reunión con lo que expresa quien la usa.",
+            "pares": [
+              [
+                "I can go along with that",
+                "Acepto, aunque no fuera mi primera opción"
+              ],
+              [
+                "I have my doubts about it",
+                "Expreso dudas sin rechazar de plano"
+              ],
+              [
+                "I would like to add to that",
+                "Parto de tu idea y añado algo nuevo"
+              ],
+              [
+                "Could we find a middle way?",
+                "Propongo que las dos partes cedan algo"
+              ]
+            ],
+            "feedback": "Cada fórmula ocupa un punto distinto entre aceptar y discrepar: aceptar, dudar, ampliar y negociar."
           }
         ],
         "evaluacion": [
           {
             "formato": "elegir",
-            "consigna": "¿Cuál de estas frases pone una reserva sin ofender?",
-            "feedback": "Reconoce lo dicho (fair point) y después expresa la duda (reservations about). Las otras dos cierran la conversación.",
+            "consigna": "Lee el correo de Sara. ¿Qué actitud muestra hacia el cambio a los jueves?",
+            "texto": "Hi all, thanks for circulating the proposal to move our meetings to Thursdays. In principle I have no objection, and I can go along with the change, although Thursdays are hard for me because of my evening class. I wonder whether we could find a middle way and switch between Tuesdays and Thursdays? Either way, I would rather have a decision by the end of the month. Best, Sara",
             "opciones": [
-              "That is a fair point, but I have some reservations about the date.",
-              "That is wrong. We will not change the date.",
-              "I do not want to hear about the date."
+              "She accepts it reluctantly but would prefer a compromise.",
+              "She rejects it, yet tries to sound polite about it.",
+              "She welcomes it and has no difficulty with Thursdays."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Sara acepta («no objection», «go along with») pero señala una dificultad y propone alternar días: aceptación a regañadientes que busca un punto medio."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "En ese correo, ¿con qué propósito menciona Sara su clase de la tarde?",
+            "texto": "Hi all, thanks for circulating the proposal to move our meetings to Thursdays. In principle I have no objection, and I can go along with the change, although Thursdays are hard for me because of my evening class. I wonder whether we could find a middle way and switch between Tuesdays and Thursdays? Either way, I would rather have a decision by the end of the month. Best, Sara",
+            "opciones": [
+              "To explain the difficulty without refusing the change.",
+              "To ask the group to cancel the Thursday meetings completely.",
+              "To suggest that other members also attend evening classes."
+            ],
+            "respuesta": 0,
+            "feedback": "Sara da el motivo de su dificultad pero mantiene su aceptación, y por eso propone una solución intermedia en lugar de pedir que se cancele."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige cómo reacciona el hablante ante el nuevo horario.",
-            "feedback": "No tiene objeción (acepta el horario) y construye sobre la idea de Leo con un recordatorio.",
-            "audio": "I have no objection to the new time, and I would like to build on Leo's idea: we could send a reminder the day before.",
+            "consigna": "Escucha y elige qué busca la hablante con su intervención.",
+            "audio": "I do appreciate the thought that has gone into this, and in principle I am on board. But I have to be honest: I am not convinced the figures are realistic, because the quotes we have seen only cover materials, not the work itself. Could we ask for one more quote before we go any further?",
             "opciones": [
-              "He accepts the time and adds a suggestion.",
-              "He refuses the time and asks for a vote.",
-              "He asks for an explanation of the time."
+              "To hold off on deciding until the real cost is clearer.",
+              "To reject the plan on the grounds of its purpose.",
+              "To ask the group to approve the budget at once."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Acepta la idea pero duda de las cifras y pide otro presupuesto antes de comprometerse: busca retrasar la decisión hasta conocer el coste real."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Apoyo tu plan.» «Mi preocupación es el coste.» «Un término medio.»",
-            "feedback": "Support apoya un plan, concern nombra el problema y compromise ofrece una salida intermedia.",
-            "frases": [
-              "I ___ your plan.",
-              "My main ___ is the cost.",
-              "Could we find a ___?"
+            "consigna": "Completa: «No me opongo, pero sí tengo algunas dudas sobre el calendario.»",
+            "texto": "Tom did not say no, but he made his doubts clear to the group. «I am not against the plan, but I do have some ___ about the timing.»",
+            "respuesta": "reservations",
+            "aceptadas": [
+              "reservations",
+              "doubts",
+              "concerns"
             ],
-            "partes": [
-              {
-                "respuesta": "support",
-                "aceptadas": [
-                  "support"
-                ]
-              },
-              {
-                "respuesta": "concern",
-                "aceptadas": [
-                  "concern",
-                  "worry"
-                ]
-              },
-              {
-                "respuesta": "compromise",
-                "aceptadas": [
-                  "compromise"
-                ]
-              }
-            ]
-          },
-          {
-            "formato": "ordenar",
-            "consigna": "Ordena: «Tengo una objeción al nuevo horario.»",
-            "feedback": "Objection va con to: to the new timetable.",
-            "respuesta": "I have an objection to the new timetable"
+            "feedback": "Have some reservations about es la colocación cortés para dudar sin oponerse; objections sería más fuerte y suele ir con to."
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué hace Leo con la propuesta de Tom?",
-            "feedback": "Leo dice «That is a fair point» (acepta la razón de Tom) y luego duda de que las siete den tiempo suficiente a la gente.",
+            "consigna": "Según el diálogo, ¿qué hace Tom con la propuesta de Carlos?",
+            "texto": "Carlos: I propose we hold the tournament in July. Mia: I support that, and I think we could use it to raise money for new goals. Tom: I am not convinced that July works, because half the players will be on holiday.",
             "opciones": [
-              "He accepts the reason but doubts the start time.",
-              "He supports the proposal completely.",
-              "He builds on it with a new suggestion."
+              "He doubts that the date is practical and gives a reason.",
+              "He backs the date and adds an idea for raising money.",
+              "He objects to the tournament itself and wants it dropped."
             ],
             "respuesta": 0,
-            "texto": "Tom: I suggest that we start at seven, because most people finish work at six. Leo: That is a fair point, but I am not convinced that seven gives people enough time to get here."
+            "feedback": "Tom duda de la fecha y da un motivo (los jugadores estarán de vacaciones). La idea de recaudar dinero es de Mia, y nadie pide anular el torneo."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué pide Sara al grupo.",
-            "feedback": "Sara tiene dudas sobre el coste y pide un término medio antes de votar.",
-            "audio": "Sara has reservations about the cost, so she asks the group to find a compromise before the vote.",
+            "consigna": "Escucha y elige qué ha cambiado en la postura de la hablante.",
+            "audio": "I will be honest: I came tonight fully planning to vote against this. But after hearing both sides, I can see that neither of you is asking for the impossible. So here is my suggestion: we keep Saturdays as the main day, which is what Leo wants, and Tom gets his Sunday sessions once a month. If nobody has a serious objection, I would be happy to go along with that.",
             "opciones": [
-              "A middle solution before voting.",
-              "A vote without delay.",
-              "An apology from the chair."
+              "She has moved from a likely no to backing a middle path.",
+              "She has decided not to vote because the sides cannot agree.",
+              "She still rejects both options but will not say so openly."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Venía a votar en contra, pero ve que ambos piden algo razonable y propone un reparto de días: pasa de la oposición a apoyar una solución intermedia."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Me gustaría desarrollar tu idea.»",
-            "feedback": "Build on + idea: partir de una idea para ampliarla.",
-            "texto": "I would like to build ___ your idea.",
-            "respuesta": "on",
+            "consigna": "Completa: «Me gusta en principio, pero dudo que sea viable con dos voluntarios.»",
+            "texto": "The club wants to open a second café in the park. Sara says, «I like it in principle, but I wonder whether it is really ___ with only two volunteers.»",
+            "respuesta": "feasible",
             "aceptadas": [
-              "on"
-            ]
+              "feasible",
+              "realistic",
+              "possible",
+              "workable"
+            ],
+            "feedback": "Feasible significa viable en la práctica; Sara acepta la idea pero cuestiona si se puede llevar a cabo con tan poca gente."
           }
         ]
       }
@@ -824,40 +825,56 @@
           "es": "acción"
         },
         {
-          "en": "responsible",
-          "es": "responsable"
+          "en": "be responsible for",
+          "es": "encargarse de, ser responsable de"
+        },
+        {
+          "en": "consensus",
+          "es": "consenso"
+        },
+        {
+          "en": "dissent",
+          "es": "disconformidad, desacuerdo"
+        },
+        {
+          "en": "sticking point",
+          "es": "obstáculo principal en una negociación"
+        },
+        {
+          "en": "put forward",
+          "es": "presentar, plantear (una propuesta)"
         }
       ],
       "ensenanza": [
         {
-          "en": "Carlos is in favour of the new bike lane, but Mia is opposed to it.",
-          "es": "Carlos está a favor del nuevo carril bici, pero Mia se opone.",
-          "nota": "Be in favour of / be opposed to + nombre: así se declara una postura."
+          "en": "Carlos is in favour of the new bike lane, whereas Mia is opposed to it, so the group has not yet reached a consensus on the proposal.",
+          "es": "Carlos está a favor del nuevo carril bici, mientras que Mia se opone, así que el grupo aún no ha alcanzado un consenso sobre la propuesta.",
+          "nota": "Be in favour of / be opposed to + nombre declara una postura; consensus es el acuerdo de todos sin votar."
         },
         {
-          "en": "The proposal is to close the street on Sundays, and the vote is on 12 May.",
-          "es": "La propuesta es cerrar la calle los domingos y la votación es el 12 de mayo.",
-          "nota": "Proposal es la idea sobre la mesa; the proposal is to + verbo la resume."
+          "en": "Leo put forward the proposal, and his position is clear, but I am afraid I cannot agree, because it would cost far more than the council has promised.",
+          "es": "Leo presentó la propuesta y su postura está clara, pero me temo que no puedo estar de acuerdo, porque costaría mucho más de lo que el ayuntamiento ha prometido.",
+          "nota": "Put forward: presentar una propuesta ante el grupo. I am afraid I cannot agree es un desacuerdo educado; position resume lo que alguien defiende."
         },
         {
-          "en": "Leo's position is clear, but I am afraid I cannot agree.",
-          "es": "La postura de Leo está clara, pero me temo que no puedo estar de acuerdo.",
-          "nota": "I am afraid I cannot agree es una señal de desacuerdo educado."
+          "en": "Although Tom voiced his dissent, the discussion was constructive: everybody wanted safer streets, and the only sticking point was the cost.",
+          "es": "Aunque Tom expresó su desacuerdo, el debate fue constructivo: todos querían calles más seguras y el único obstáculo era el coste.",
+          "nota": "Voice dissent: expresar desacuerdo. Sticking point: el obstáculo concreto que bloquea un acuerdo."
         },
         {
-          "en": "I take your point, Leo, but the proposal costs too much.",
-          "es": "Entiendo tu punto, Leo, pero la propuesta cuesta demasiado.",
-          "nota": "I take your point, but… reconoce lo dicho y discrepa a continuación."
+          "en": "I take your point, Leo, but the real obstacle is not the idea itself; it is finding a volunteer willing to manage the scheme.",
+          "es": "Entiendo lo que dices, Leo, pero el verdadero obstáculo no es la idea, sino encontrar a un voluntario dispuesto a gestionar el proyecto.",
+          "nota": "I take your point reconoce lo dicho antes de discrepar; volunteer es quien se ofrece sin que se lo pidan."
         },
         {
-          "en": "Sara will volunteer to write to the council, and the deadline is Friday.",
-          "es": "Sara se ofrecerá a escribir al ayuntamiento y el plazo es el viernes.",
-          "nota": "Will + verbo con el nombre de la persona: quien se ofrece queda como responsable."
+          "en": "Whoever agrees to be responsible for an action must also be given a deadline, otherwise nobody can check whether it has been done.",
+          "es": "Quien acepta encargarse de una acción debe recibir también un plazo; si no, nadie puede comprobar si se ha cumplido.",
+          "nota": "Be responsible for + nombre asigna la tarea; action y deadline completan el acuerdo: qué, quién y cuándo."
         },
         {
-          "en": "At the end, the chair repeats each action and says who is responsible for it.",
-          "es": "Al final, la presidenta repite cada acción y dice quién es responsable de ella.",
-          "nota": "Cada acción acordada lleva una persona y un plazo."
+          "en": "At the end, the chair repeats each action point, names the person who will carry it out and states the date by which it must be finished.",
+          "es": "Al final, la presidencia repite cada punto de acción, nombra a la persona que lo llevará a cabo y indica la fecha límite.",
+          "nota": "Cada acción acordada lleva un responsable y una fecha; la presidencia los repite para dejarlos claros."
         }
       ],
       "explicacion": {
@@ -992,181 +1009,167 @@
         "guiada": [
           {
             "formato": "elegir",
-            "consigna": "¿Cuál es la postura de Carlos?",
-            "feedback": "Carlos dice «I am in favour of the bike lane»: está a favor, y da una razón (más seguridad para los niños).",
+            "consigna": "Lee la intervención de Carlos. ¿Cuál es exactamente su postura?",
+            "texto": "Carlos: I am in favour of the bike lane, but only if the council agrees to pay for the new signs. Otherwise, I am afraid I would have to vote against it.",
             "opciones": [
-              "He supports the bike lane.",
-              "He opposes the bike lane.",
-              "He has no opinion yet."
+              "He backs it, but only if the council funds the signs.",
+              "He backs it fully, whatever the council decides about the signs.",
+              "He rejects it, unless the signs are made much smaller."
             ],
             "respuesta": 0,
-            "texto": "Carlos: I am in favour of the bike lane. It makes the street safer for children.",
-            "pista": "Busca la expresión que dice si alguien está a favor o en contra."
+            "feedback": "Carlos apoya el carril con una condición («only if»): que el ayuntamiento pague los carteles. Sin ella votaría en contra.",
+            "pista": "Fíjate en la condición que introduce only if: sin ella cambia su voto."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Mia se opone al plan.»",
-            "feedback": "Opposed va con to: «opuesta a».",
-            "texto": "Mia is opposed ___ the plan.",
-            "respuesta": "to",
+            "consigna": "Completa: «Me temo que me opongo al plan: quita la mitad del aparcamiento.»",
+            "texto": "Mia does not want the lane on her street. At the meeting she says, «I am afraid I am ___ to the plan, because it removes half of the parking.»",
+            "respuesta": "opposed",
             "aceptadas": [
-              "to"
+              "opposed"
             ],
-            "pista": "Es la preposición que acompaña a opposed, como «a» en español."
+            "feedback": "Be opposed to + nombre declara una postura en contra; la preposición que acompaña a opposed es siempre to.",
+            "pista": "Es el adjetivo de postura contraria que se construye con to."
           },
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «Sara se ofrecerá a escribir al ayuntamiento.»",
-            "feedback": "Sujeto + will + volunteer + to + verbo: quien se ofrece queda como responsable.",
-            "respuesta": "Sara will volunteer to write to the council",
-            "pista": "Sujeto + will + volunteer, y después to + verbo."
+            "consigna": "Ordena: «La decisión final se alcanzó por consenso y nadie expresó su desacuerdo.»",
+            "respuesta": "The final decision was reached by consensus and nobody voiced dissent",
+            "feedback": "Reach a decision by consensus: decidir sin votar; voice dissent: expresar abiertamente el desacuerdo.",
+            "pista": "Empieza por el sujeto The final decision y acaba con la expresión del desacuerdo."
           }
         ],
         "practica": [
           {
-            "formato": "relacionar",
-            "consigna": "Relaciona cada frase del debate con lo que expresa.",
-            "feedback": "Cada frase tiene su marca: in favour of y opposed to dan la postura, the proposal is to presenta la idea y will + by fija responsable y plazo.",
-            "pares": [
-              [
-                "I am in favour of the bike lane.",
-                "Una postura a favor"
-              ],
-              [
-                "I am opposed to the bike lane.",
-                "Una postura en contra"
-              ],
-              [
-                "The proposal is to try it for a month.",
-                "Una propuesta"
-              ],
-              [
-                "Leo will book the hall by Monday.",
-                "Una acción con responsable y plazo"
-              ]
-            ]
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué propone Leo para desbloquear el debate.",
+            "audio": "Last Thursday, the residents' association met to discuss turning Oak Street into a cycle route. Carlos argued strongly in favour, pointing out that two children had been hurt on that street last year. Mia accepted the risk but insisted that removing the parking would hurt the elderly residents, who depend on their cars. Leo suggested a compromise: a trial of three months, after which the association would review the results. Everybody accepted it, although Mia said she would wait for the results before changing her mind. Sara will write to the council by Friday.",
+            "opciones": [
+              "A three-month trial followed by a review.",
+              "A total ban on parking in the street.",
+              "A vote delayed until the council replies."
+            ],
+            "respuesta": 0,
+            "feedback": "Leo sugiere una prueba de tres meses con revisión posterior. La prohibición de aparcar es el temor de Mia, y la carta al ayuntamiento es una acción de Sara."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige quién apoya el cambio.",
-            "feedback": "Tom se opone y Sara apoya el cambio porque el nuevo horario da más tiempo a los miembros.",
-            "audio": "Tom is opposed to the change, but Sara is in favour of it. She says the new timetable gives members more time.",
+            "consigna": "Escucha otra vez y elige qué postura mantiene Mia al final de la reunión.",
+            "audio": "Last Thursday, the residents' association met to discuss turning Oak Street into a cycle route. Carlos argued strongly in favour, pointing out that two children had been hurt on that street last year. Mia accepted the risk but insisted that removing the parking would hurt the elderly residents, who depend on their cars. Leo suggested a compromise: a trial of three months, after which the association would review the results. Everybody accepted it, although Mia said she would wait for the results before changing her mind. Sara will write to the council by Friday.",
             "opciones": [
-              "Sara, because she thinks members get more time.",
-              "Tom, because he wants more time.",
-              "Nobody has a position yet."
-            ],
-            "respuesta": 0
-          },
-          {
-            "formato": "elegir",
-            "consigna": "¿Qué acción tiene Sara y para cuándo?",
-            "feedback": "Ana asigna a Sara los carteles con plazo jueves; llamar al colegio es de Leo, con plazo martes.",
-            "opciones": [
-              "Print the posters by Thursday.",
-              "Call the school by Tuesday.",
-              "Write to the council by Friday."
+              "She accepts the trial but has not changed her mind yet.",
+              "She now backs the route without any remaining doubts.",
+              "She has left the association because of the decision."
             ],
             "respuesta": 0,
-            "texto": "Ana: To sum up, Leo will call the school, and the deadline is Tuesday. Sara will print the posters by Thursday."
+            "feedback": "Mia acepta la prueba pero dice que esperará a ver los resultados antes de cambiar de opinión: su postura sigue siendo cautelosa."
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada frase del debate con su función en la tabla de la reunión.",
+            "pares": [
+              [
+                "Mia insisted that the parking must stay",
+                "Postura contraria, con un motivo concreto"
+              ],
+              [
+                "Leo suggested a three-month trial",
+                "Propuesta intermedia para desbloquear el debate"
+              ],
+              [
+                "Sara will write to the council by Friday",
+                "Acción con responsable y plazo"
+              ],
+              [
+                "Everybody accepted the trial",
+                "Acuerdo del grupo"
+              ]
+            ],
+            "feedback": "Una postura defiende algo con un motivo, una propuesta ofrece una salida, una acción lleva responsable y plazo, y un acuerdo recoge lo que todos aceptan."
           }
         ],
         "evaluacion": [
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige la postura de Mia y su motivo.",
-            "feedback": "Mia reconoce lo dicho y luego dice que no puede estar de acuerdo: la fecha es demasiado pronto para las familias.",
-            "audio": "The chair asks if anyone objects to the new date. Mia says: I take your point, but I am afraid I cannot agree. The date is too early for families.",
+            "consigna": "Escucha el resumen de la presidencia. ¿En qué coinciden Leo y Sara?",
+            "audio": "The chair summed up the debate on the new market. Leo is in favour, because it would bring customers to the high street. Sara shares his view but wants a limit on the number of stalls. Tom is worried about noise and litter and thinks the market should be held only once a month. Nobody is completely against the idea, so the chair suggested a three-month trial on the first Saturday of each month. Carlos agreed to contact the sellers by the end of the week.",
             "opciones": [
-              "She opposes the date because it is too early for families.",
-              "She supports the date because it saves money.",
-              "She asks the chair to repeat the date."
+              "Both welcome the market, though Sara would cap the stalls.",
+              "Both want the market to be held only once a month.",
+              "Both fear that the market will cause noise and litter."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Leo apoya el mercado y Sara comparte su opinión, aunque quiere limitar los puestos. El ruido y la suciedad preocupan a Tom, no a ellos."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha otra vez. ¿Qué se deduce de la postura de Tom?",
+            "audio": "The chair summed up the debate on the new market. Leo is in favour, because it would bring customers to the high street. Sara shares his view but wants a limit on the number of stalls. Tom is worried about noise and litter and thinks the market should be held only once a month. Nobody is completely against the idea, so the chair suggested a three-month trial on the first Saturday of each month. Carlos agreed to contact the sellers by the end of the week.",
+            "opciones": [
+              "He is not against the market but wants to limit its impact.",
+              "He will vote against any trial, whatever its length.",
+              "He does not care, since the market will not affect him."
+            ],
+            "respuesta": 0,
+            "feedback": "Tom no rechaza el mercado: pide solo una vez al mes por el ruido y la suciedad. Quiere reducir el impacto, no impedirlo."
           },
           {
             "formato": "elegir",
-            "consigna": "Según el acta, ¿quién se opone y por qué?",
-            "feedback": "En el acta, Tom aparece como opuesto (Opposed: Tom) y su motivo es la lluvia; Leo y Sara están a favor.",
+            "consigna": "Según el acta, ¿quién hará la siguiente gestión y para cuándo?",
+            "texto": "Item 3. Proposal: keep the library open later on Saturdays. In favour: Mia, Leo. Against: Tom (staffing costs). Not sure: Sara. Action: Carlos will ask the library for the figures by 14 May. The vote will take place at the next meeting.",
             "opciones": [
-              "Tom, because of the rain.",
-              "Sara, because of the date.",
-              "Leo, because of the cost."
+              "Carlos, who must obtain the figures by 14 May.",
+              "Tom, who must explain the staffing costs by 14 May.",
+              "Sara, who must state her position by the next meeting."
             ],
             "respuesta": 0,
-            "texto": "Item 3. Proposal: hold the summer party in the park. In favour: Leo, Sara. Opposed: Tom (rain). Action: Sara will book the park by 1 June."
+            "feedback": "El acta asigna la acción a Carlos con fecha: pedir las cifras a la biblioteca antes del 14 de mayo. Tom y Sara no tienen acción asignada."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Leo se opone.» «La propuesta es cerrar.» «Tom es responsable.»",
-            "feedback": "Opposed to marca la postura en contra, the proposal is to presenta la idea y responsible for asigna la tarea.",
-            "frases": [
-              "Leo is ___ to the new date.",
-              "The ___ is to close the street on Sundays.",
-              "Tom is ___ for the letter."
+            "consigna": "Completa: «La presidencia le recordó que el plazo era el viernes.»",
+            "texto": "Nobody wanted to be left with the whole job. In the end Sara agreed to take charge of the letter, and the chair reminded her that the ___ was Friday.",
+            "respuesta": "deadline",
+            "aceptadas": [
+              "deadline"
             ],
-            "partes": [
-              {
-                "respuesta": "opposed",
-                "aceptadas": [
-                  "opposed"
-                ]
-              },
-              {
-                "respuesta": "proposal",
-                "aceptadas": [
-                  "proposal"
-                ]
-              },
-              {
-                "respuesta": "responsible",
-                "aceptadas": [
-                  "responsible"
-                ]
-              }
-            ]
-          },
-          {
-            "formato": "ordenar",
-            "consigna": "Ordena: «El plazo para escribir al ayuntamiento es el lunes.»",
-            "feedback": "Deadline nombra el plazo: the deadline to + verbo + is + día.",
-            "respuesta": "The deadline to write to the council is Monday"
+            "feedback": "Deadline es la fecha límite de una acción; en el acta va siempre junto a la persona responsable."
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
-            "consigna": "Según el resumen de Ana, ¿quién es responsable de las entradas?",
-            "feedback": "Ana lo dice al final: «Carlos is responsible for the tickets». Leo llama al colegio y Mia avisa a las familias.",
+            "consigna": "¿Qué deja entrever Mia con su comentario sobre las plazas para bicicletas?",
+            "texto": "Mia: I take your point, Leo, but I am afraid I cannot agree. The scheme sounds sensible on paper, yet nobody has explained who will look after the bike racks once the council's money runs out.",
             "opciones": [
-              "Carlos",
-              "Leo",
-              "Mia"
+              "That her real worry is who will look after the racks later.",
+              "That she likes the scheme but dislikes its location.",
+              "That she will accept it as soon as the money is confirmed."
             ],
             "respuesta": 0,
-            "texto": "Ana: Let's review the actions. Leo will call the school by Tuesday. Mia will tell the families, and Carlos is responsible for the tickets."
+            "feedback": "Mia no discute la idea en sí, sino quién se hará cargo cuando se acabe el dinero: su preocupación real es el mantenimiento a largo plazo."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige cómo está el grupo.",
-            "feedback": "Dos miembros están a favor y dos en contra: el grupo está dividido y por eso se propone votar.",
-            "audio": "The group is divided. Two members are in favour of a shorter meeting, and two are opposed to it, so the chair suggests a vote next week.",
+            "consigna": "Escucha y elige qué se deduce del resumen de la presidencia.",
+            "audio": "Well, to sum up where we are: four members favour a pilot scheme, two are against it, and one has not yet made up her mind. There is no consensus, but there is enough agreement to try something small. Leo will draft the wording, Mia will check it with the school, and both will report back at the next meeting.",
             "opciones": [
-              "Half support the idea and half oppose it.",
-              "Everyone supports the idea.",
-              "Nobody wants to vote."
+              "That a small trial is possible even though the group is divided.",
+              "That the vote has been postponed until a majority appears.",
+              "That the two who disagree must now leave the working group."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Hay cuatro a favor, dos en contra y una indecisa, pero la presidencia ve suficiente acuerdo para empezar con algo pequeño."
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «El plazo para la carta es el viernes.»",
-            "feedback": "Deadline es la fecha límite: the deadline for + nombre.",
-            "texto": "The ___ for the letter is Friday.",
-            "respuesta": "deadline",
+            "consigna": "Completa: «Como nadie quería escribir la carta, Sara decidió ofrecerse.»",
+            "texto": "Nobody wanted to write the letter to the council, so in the end Sara decided to ___ to do it herself.",
+            "respuesta": "volunteer",
             "aceptadas": [
-              "deadline"
-            ]
+              "volunteer"
+            ],
+            "feedback": "Volunteer to + verbo base: ofrecerse por iniciativa propia; Sara no recibe el encargo, lo asume."
           }
         ]
       }
@@ -1212,33 +1215,54 @@
         {
           "en": "set aside",
           "es": "dejar a un lado"
+        },
+        {
+          "en": "paraphrase",
+          "es": "parafrasear, decir con otras palabras"
+        },
+        {
+          "en": "reiterate",
+          "es": "reiterar, repetir para subrayar"
+        },
+        {
+          "en": "hold that thought",
+          "es": "guarda esa idea (para después)"
+        },
+        {
+          "en": "weigh in",
+          "es": "opinar, intervenir en un debate"
         }
       ],
       "ensenanza": [
         {
-          "en": "If I could just come in here, briefly: the date is Friday, not Thursday.",
-          "es": "Si me permiten intervenir aquí, brevemente: la fecha es el viernes, no el jueves.",
+          "en": "If I could just come in here, briefly: the date is Friday, not Thursday, and I would hate us to plan around the wrong day.",
+          "es": "Si pudiera intervenir un momento, brevemente: la fecha es el viernes, no el jueves, y no me gustaría que planificáramos con el día equivocado.",
           "nota": "If I could just come in here abre turno con cortesía; briefly promete una intervención corta."
         },
         {
-          "en": "Could you expand on that briefly, Sara?",
-          "es": "¿Podrías ampliar eso brevemente, Sara?",
-          "nota": "Could you expand on…? pide más detalle sin sonar a reproche."
+          "en": "Could you expand on that briefly, Sara, before the rest of us weigh in and the discussion moves on to something else?",
+          "es": "¿Podrías ampliar eso brevemente, Sara, antes de que el resto opinemos y la discusión pase a otra cosa?",
+          "nota": "Could you expand on…? pide más detalle sin reproche; weigh in es dar tu opinión en un debate."
         },
         {
-          "en": "If I understand you correctly, you want to keep the meeting on Tuesdays.",
-          "es": "Si te entiendo bien, quieres mantener la reunión los martes.",
-          "nota": "If I understand you correctly + lo que entendiste: comprueba antes de responder."
+          "en": "If I understand you correctly, you want to keep the meetings on Tuesdays; let me paraphrase that to be sure we are all hearing the same thing.",
+          "es": "Si te entiendo bien, quieres mantener las reuniones los martes; déjame parafrasearlo para asegurarnos de que todos oímos lo mismo.",
+          "nota": "If I understand you correctly + lo que entendiste: comprueba antes de responder. Paraphrase: decirlo con otras palabras."
         },
         {
-          "en": "To summarise: Leo wants a trial, Mia wants a vote, and Tom wants more time.",
-          "es": "Resumiendo: Leo quiere una prueba, Mia quiere una votación y Tom quiere más tiempo.",
-          "nota": "To summarise + una postura por persona, con verbos neutros (wants)."
+          "en": "To summarise: Leo wants a trial, Mia wants a vote, and Tom wants more time, but nobody has yet reached a decision.",
+          "es": "Resumiendo: Leo quiere una prueba, Mia quiere una votación y Tom quiere más tiempo, pero nadie ha tomado aún una decisión.",
+          "nota": "To summarise + una postura por persona, con verbos neutros (wants), sin añadir tu opinión."
         },
         {
-          "en": "That is a different topic, so let us set it aside and stick to the agenda.",
-          "es": "Ese es otro tema, así que dejémoslo a un lado y ciñámonos al orden del día.",
+          "en": "That is a different topic, so let us set it aside and stick to the agenda, because we need a decision before eight.",
+          "es": "Ese es otro tema, así que dejémoslo a un lado y ciñámonos al orden del día, porque necesitamos una decisión antes de las ocho.",
           "nota": "Set aside aparta un tema; stick to devuelve al orden del día."
+        },
+        {
+          "en": "Hold that thought, Tom; I would like to reiterate the main point before we move on, so that nobody leaves with the wrong impression.",
+          "es": "Guarda esa idea, Tom; me gustaría reiterar el punto principal antes de continuar, para que nadie se vaya con una impresión equivocada.",
+          "nota": "Hold that thought pide esperar sin descartar la idea; reiterate repite para subrayar."
         }
       ],
       "explicacion": {
@@ -1378,86 +1402,100 @@
         "guiada": [
           {
             "formato": "completar",
-            "consigna": "Completa: «Si te entiendo bien, quieres el martes.»",
-            "feedback": "Modifica al verbo understand, por eso es un adverbio: correctly.",
-            "texto": "If I understand you ___, you want Tuesday.",
+            "consigna": "Completa: «Si te he entendido bien, quieres trasladar la reunión a los martes.»",
+            "texto": "Sara has been talking for several minutes, and Ana is not sure that she has followed the argument. She says, «If I understand you ___, you would like to move the meeting to Tuesdays.»",
             "respuesta": "correctly",
             "aceptadas": [
-              "correctly"
+              "correctly",
+              "right"
             ],
-            "pista": "Es el adverbio que modifica a understand: adjetivo + ly."
+            "feedback": "If I understand you correctly es la fórmula para comprobar lo entendido antes de responder; correctly modifica al verbo understand.",
+            "pista": "Es el adverbio que significa «bien, sin error» y acompaña a understand."
           },
           {
             "formato": "elegir",
-            "consigna": "¿Qué frase abre el turno con cortesía?",
-            "feedback": "If I could just come in here pide permiso y promete brevedad. Las otras dos son órdenes y cortan a los demás.",
+            "consigna": "Tom se equivoca de fecha. ¿Qué frase abre turno con cortesía?",
+            "texto": "Tom is halfway through a long explanation about the cost of the hall when Mia realises that he has given the wrong date for the next meeting.",
             "opciones": [
-              "If I could just come in here, briefly…",
-              "Stop talking. It is my turn.",
-              "Everyone listen to me now."
+              "If I could just come in here, briefly: the date is Friday, not Thursday.",
+              "Stop. You have the date wrong, so let me explain it properly.",
+              "Sorry, but nobody is listening, so this date will do for me."
             ],
             "respuesta": 0,
-            "pista": "Busca la fórmula que pide permiso en lugar de ordenar."
+            "feedback": "If I could just come in here pide turno y corrige el dato sin reproche. Las otras frases cortan con brusquedad o ignoran el error.",
+            "pista": "Busca la fórmula que pide permiso y promete brevedad antes de corregir."
           },
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «Resumiendo: Leo quiere una prueba y Mia quiere una votación.»",
-            "feedback": "Un resumen fiel empieza con To summarise y da una postura por persona con wants.",
-            "respuesta": "To summarise: Leo wants a trial and Mia wants a vote",
-            "pista": "Empieza con To summarise y usa un verbo wants por persona."
+            "consigna": "Ordena: «Dejemos ese tema a un lado y ciñámonos al orden del día.»",
+            "respuesta": "Let us set that topic aside and stick to the agenda",
+            "feedback": "Set aside aparta el tema que no toca y stick to devuelve a la reunión al orden del día.",
+            "pista": "Empieza por Let us y termina con lo que hay que respetar."
           }
         ],
         "practica": [
           {
-            "formato": "elegir",
-            "consigna": "¿Qué resumen transmite fielmente las dos posturas?",
-            "feedback": "Sara pide una sala mayor y Tom prefiere esperar porque cuesta más. Las otras opciones cambian o mezclan las posturas.",
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué le propuso Ana a Tom cuando empezó a divagar.",
+            "audio": "The neighbourhood meeting was going well until Tom began a long story about a parking ticket he had received in March. After several minutes, Ana, who was chairing, cut in politely: if I could just come in here, Tom, I think we are drifting from the agenda. She suggested that he hold that thought until the end, when there would be time for other business. Tom nodded, a little embarrassed. Then Mia offered to paraphrase the council's letter, so that everybody would be sure of the deadline, and Ana thanked her and asked the secretary to note it down.",
             "opciones": [
-              "To summarise: Sara wants a bigger room, and Tom prefers to wait.",
-              "To summarise: Sara and Tom both want a bigger room.",
-              "To summarise: Tom wants a bigger room, and Sara prefers to wait."
+              "To come back to his story after the agenda items.",
+              "To close the item and move on to the vote at once.",
+              "To let the secretary cut his story from the minutes."
             ],
             "respuesta": 0,
-            "texto": "Sara: I think we need a bigger room. Tom: I am not sure. A bigger room costs more, so I prefer to wait."
+            "feedback": "Ana le pide que guarde la idea hasta el final, cuando haya tiempo para otros asuntos. No cierra el punto ni borra nada del acta."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué quiere el hablante.",
-            "feedback": "Pide apartar el tema nuevo y ceñirse al orden del día: volver a los puntos previstos.",
-            "audio": "Sorry, but that is a different topic. Could we set it aside and stick to the agenda?",
+            "consigna": "Escucha otra vez y elige con qué propósito ofrece Mia parafrasear la carta.",
+            "audio": "The neighbourhood meeting was going well until Tom began a long story about a parking ticket he had received in March. After several minutes, Ana, who was chairing, cut in politely: if I could just come in here, Tom, I think we are drifting from the agenda. She suggested that he hold that thought until the end, when there would be time for other business. Tom nodded, a little embarrassed. Then Mia offered to paraphrase the council's letter, so that everybody would be sure of the deadline, and Ana thanked her and asked the secretary to note it down.",
             "opciones": [
-              "To return to the planned items.",
-              "To end the meeting now.",
-              "To vote on the new topic."
+              "To make sure everybody has understood the deadline.",
+              "To correct a mistake Tom made about the ticket.",
+              "To show that the secretary had recorded it wrongly."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Mia quiere que todos tengan claro el plazo de la carta, y por eso lo dice con otras palabras. Tom y la secretaria no cometen ningún error."
           },
           {
-            "formato": "completar",
-            "consigna": "Completa: «¿Podrías ampliar ese punto?»",
-            "feedback": "Expand on + tema: pedir más detalle sobre algo.",
-            "texto": "Could you expand ___ that point?",
-            "respuesta": "on",
-            "aceptadas": [
-              "on"
-            ]
+            "formato": "relacionar",
+            "consigna": "Relaciona cada intervención con la función que cumple en la reunión.",
+            "pares": [
+              [
+                "Sorry to interrupt, but could I clarify a date?",
+                "Interrumpir con cortesía para aclarar"
+              ],
+              [
+                "Could you expand on that point, please?",
+                "Pedir más detalle sin reproche"
+              ],
+              [
+                "To summarise: Mia wants Sundays and Leo wants Saturdays.",
+                "Resumir las posturas de forma neutra"
+              ],
+              [
+                "Let us return to the agenda, please.",
+                "Reconducir la reunión al orden del día"
+              ]
+            ],
+            "feedback": "Cada fórmula tiene una función: aclarar con permiso, pedir detalle, resumir sin juzgar y reconducir."
           }
         ],
         "evaluacion": [
           {
             "formato": "escribir",
-            "consigna": "Escribe seis intervenciones para una reunión de barrio.",
-            "feedback": "Una buena secuencia abre turno con cortesía, pide ampliar, comprueba lo entendido, resume sin opinar, aporta algo y reconduce al orden del día.",
-            "texto": "Reunión de la asociación de vecinos sobre un mercado semanal. Posturas: Leo quiere un mercado los sábados; Mia prefiere los domingos porque las familias están libres; Tom tiene una preocupación por el ruido. Escribe seis intervenciones: 1) una interrupción educada para aclarar una fecha; 2) una petición para que Leo amplíe; 3) una comprobación de lo que entendiste de Mia; 4) un resumen fiel de las tres posturas; 5) tu aportación; 6) una frase para volver al orden del día.",
-            "respuesta": "1. Sorry to interrupt, but could I clarify the date? Is the market every Saturday, or only in summer? 2. Leo, could you expand on that briefly? How many people will come to the market, and who will help? 3. If I understand you correctly, Mia, you prefer Sundays because families are free on that day. 4. To summarise: Leo wants a Saturday market, Mia wants Sundays for families, and Tom has a concern about the noise. 5. I would like to build on Leo's idea: we could try it for one month, and then we vote. 6. That is a different topic, so let us set it aside and stick to the agenda, please.",
-            "aceptadas": [
-              "1. Excuse me, could I clarify one thing? Does the market start in May or in June? 2. Mia, could you expand on that briefly? Why do you prefer Sundays, and do the families agree? 3. If I understand you correctly, Tom, you are worried about the noise. 4. To sum up: Leo wants Saturdays, Mia wants Sundays, and Tom is concerned about the noise. 5. I support a trial month, and I would like to build on it: we can ask the neighbours again after four weeks. 6. Let us stick to the agenda now, and we can discuss the prices later."
-            ],
+            "consigna": "Escribe seis intervenciones para una reunión de barrio sobre un mercado.",
+            "texto": "Reunión de la asociación de vecinos sobre un mercado semanal. Posturas: Leo quiere un mercado los sábados; Mia prefiere los domingos porque las familias están libres; Tom se preocupa por el ruido y la basura. Escribe seis intervenciones: 1) una interrupción educada para aclarar una fecha; 2) una petición para que Leo amplíe su idea brevemente; 3) una comprobación de lo que entendiste de Mia; 4) un resumen neutral de las tres posturas; 5) tu aportación, partiendo de la idea de Leo; 6) una frase para dejar un tema a un lado y volver al orden del día.",
             "textoIdioma": "es",
+            "respuesta": "1. Sorry to interrupt, but could I clarify the date? Is the market every Saturday, or only during the summer months? 2. Leo, could you expand on that briefly? I would like to know how many stalls you expect and who will look after them. 3. If I understand you correctly, Mia, you would prefer Sundays because most families are free on that day. 4. To summarise: Leo wants a Saturday market, Mia would rather use Sundays for families, and Tom is concerned about the noise and the litter. 5. I would like to build on Leo's idea: we could run a trial for one month and then ask the neighbours what they think of it. 6. That is a different topic, so let us set it aside and stick to the agenda, please.",
+            "aceptadas": [
+              "1. Excuse me, could I clarify one thing? Does the market start in May or in June, and does it finish before the winter? 2. Mia, could you expand on that briefly? Why do you prefer Sundays, and do the other families agree with you? 3. If I understand you correctly, Tom, you are worried about the noise and the litter, and you would like the market to be smaller. 4. To sum up: Leo wants Saturdays, Mia wants Sundays, and Tom is concerned about the noise, so nobody has yet accepted a final date. 5. I support a trial month, and I would like to build on it: we can ask the neighbours again after four weeks and then vote. 6. Let us stick to the agenda now, and we can discuss the prices later, when everybody has had a chance to speak."
+            ],
             "rubrica": {
               "palabras": [
                 100,
-                230
+                240
               ],
               "evidencias": [
                 [
@@ -1467,9 +1505,10 @@
                   "Could I just come in"
                 ],
                 [
-                  "expand on",
-                  "say more about",
-                  "tell us more about"
+                  "could you expand on",
+                  "can you expand on",
+                  "could you say more about",
+                  "could you tell us more about"
                 ],
                 [
                   "If I understand you correctly",
@@ -1485,112 +1524,72 @@
                 ],
                 [
                   "I would like to build on",
-                  "I support",
-                  "I agree with",
-                  "I have some reservations"
+                  "build on Leo",
+                  "I support a trial",
+                  "I agree with Leo"
                 ],
                 [
                   "stick to the agenda",
                   "back to the agenda",
-                  "return to the agenda"
+                  "return to the agenda",
+                  "keep to the agenda"
                 ]
               ]
-            }
+            },
+            "feedback": "Un buen conjunto de intervenciones usa una fórmula distinta para cada función: interrumpir, ampliar, comprobar, resumir, aportar y reconducir."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué hace el hablante con lo que oyó.",
-            "feedback": "Primero comprueba lo entendido (If I understand you correctly) y luego pide más detalle (expand on that). No resume ni aparta ningún tema.",
-            "audio": "If I understand you correctly, you think the meeting should start at seven. Could you expand on that briefly? I am not sure everyone can come so early.",
+            "consigna": "Escucha y elige qué pretende la hablante al pedirle a Leo que amplíe su idea.",
+            "audio": "I hear what you are saying, Leo, and I do not doubt that Saturdays work well for you. What I am trying to understand is whether the market would really bring in more customers, or just more noise. Could you expand on that briefly? Then the rest of us can weigh in.",
             "opciones": [
-              "He checks what he understood and asks for more detail.",
-              "He summarises three positions.",
-              "He sets a topic aside."
+              "To test the benefit of his idea without rejecting it.",
+              "To stop Leo from going on with his proposal.",
+              "To show that she has already decided against it."
             ],
-            "respuesta": 0
-          },
-          {
-            "formato": "completar",
-            "consigna": "Completa: «Si puedo intervenir…» «Resumiendo:» «Ciñámonos al orden del día.»",
-            "feedback": "Come in abre turno, summarise resume y stick to devuelve la reunión al orden del día.",
-            "frases": [
-              "If I could just ___ in here, briefly:",
-              "To ___: Leo wants May.",
-              "Let us ___ to the agenda."
-            ],
-            "partes": [
-              {
-                "respuesta": "come",
-                "aceptadas": [
-                  "come"
-                ]
-              },
-              {
-                "respuesta": "summarise",
-                "aceptadas": [
-                  "summarise",
-                  "summarize"
-                ]
-              },
-              {
-                "respuesta": "stick",
-                "aceptadas": [
-                  "stick"
-                ]
-              }
-            ]
+            "respuesta": 0,
+            "feedback": "Reconoce su postura y pide más detalle sobre el beneficio real: quiere valorar la idea, no frenarla ni rechazarla de antemano."
           },
           {
             "formato": "elegir",
-            "consigna": "¿Qué resumen es neutral y no añade opinión?",
-            "feedback": "Un resumen fiel solo cuenta lo que cada persona quiere. Decir que alguien tiene razón o no la tiene es opinión del que resume.",
+            "consigna": "¿Qué resumen de estas dos intervenciones es neutral y fiel?",
+            "texto": "Mia: I would rather hold the market on Sundays, because families are free and the park is quiet. Leo: Saturdays work better for me, since most of the sellers are busy with their own shops on Sundays, and the high street is full on Saturdays.",
             "opciones": [
-              "To summarise: Mia prefers Sundays and Leo prefers Saturdays.",
-              "To summarise: Mia is right about Sundays.",
-              "To summarise: Leo is wrong about Saturdays."
+              "To summarise: Mia prefers Sundays for families, and Leo prefers Saturdays for the sellers.",
+              "To summarise: Mia wants Sundays because she thinks that Leo's plan for Saturdays would not work.",
+              "To summarise: both agree on Sundays, but Leo would like to start the market in June."
             ],
             "respuesta": 0,
-            "texto": "Mia: I prefer Sundays, because families are free. Leo: I prefer Saturdays, because the park is full."
+            "feedback": "Un resumen neutral atribuye a cada persona su preferencia y su motivo sin opinar. Los otros atribuyen una crítica que Mia no hace o un acuerdo que no existe."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa: «Lo siento, Tom, pero tenemos que ceñirnos al orden del día.»",
+            "texto": "It is already ten to nine, and the meeting has hardly begun the second item. The chair says, «I am sorry, Tom, but we have to ___ to the agenda.»",
+            "respuesta": "stick",
+            "aceptadas": [
+              "stick",
+              "keep",
+              "return",
+              "go back"
+            ],
+            "feedback": "Stick to the agenda es la colocación para ceñirse a lo previsto; el resto de verbos no admiten esa preposición con ese sentido."
           }
         ],
         "repaso": [
           {
-            "formato": "elegir",
-            "consigna": "¿Qué frase sirve para comprobar que has entendido bien?",
-            "feedback": "Se comprueba con If I understand you correctly + lo entendido. Las otras dos resumen o reconducen.",
-            "opciones": [
-              "If I understand you correctly, you want a trial month.",
-              "To summarise, everyone wants a trial month.",
-              "Let us stick to the agenda, please."
-            ],
-            "respuesta": 0
-          },
-          {
-            "formato": "escuchar",
-            "consigna": "Escucha y elige qué sugiere para el orden del día.",
-            "feedback": "Propone dejar el autobús para el final y seguir con el punto del huerto, que es el siguiente del orden del día.",
-            "audio": "We have spent ten minutes on the bus, but the agenda says the garden is next. Could we set the bus aside and come back to it at the end?",
-            "opciones": [
-              "To leave the bus for later and continue with the agenda.",
-              "To vote on the bus now.",
-              "To cancel the garden item."
-            ],
-            "respuesta": 0
-          },
-          {
             "formato": "escribir",
-            "consigna": "Interrumpe con educación para aclarar una hora.",
-            "feedback": "La interrupción cortés pide permiso (sorry to interrupt), anuncia que aclarará algo (could I clarify) y da la pregunta concreta.",
-            "texto": "Quieres interrumpir con educación a Tom y aclarar si la reunión empieza a las siete o a las ocho.",
-            "respuesta": "Sorry to interrupt, Tom, but could I clarify something? Does the meeting start at seven or at eight?",
-            "aceptadas": [
-              "Excuse me, Tom. Could I clarify the time? Does the meeting start at seven or at eight?"
-            ],
+            "consigna": "Interrumpe con educación para aclarar una hora y aparca otro tema.",
+            "texto": "Quieres interrumpir con educación a Tom para aclarar si la reunión empieza a las siete o a las ocho, y proponer dejar a un lado el tema del aparcamiento hasta entonces.",
             "textoIdioma": "es",
+            "respuesta": "Sorry to interrupt, Tom, but could I clarify something? Does the meeting start at seven or at eight? If it is at eight, we could set the parking topic aside until then.",
+            "aceptadas": [
+              "Excuse me, Tom. Could I clarify the time? Does the meeting start at seven or at eight? I suggest that we set the parking topic aside until then."
+            ],
             "rubrica": {
               "palabras": [
-                10,
-                30
+                15,
+                45
               ],
               "evidencias": [
                 [
@@ -1611,9 +1610,34 @@
                 [
                   "eight",
                   "8"
+                ],
+                [
+                  "set the parking topic aside",
+                  "set that topic aside",
+                  "set it aside",
+                  "put the parking topic aside"
                 ]
               ]
-            }
+            },
+            "feedback": "La intervención junta cortesía, una pregunta concreta con las dos horas y la propuesta de dejar el otro tema a un lado."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige con qué fin usa la presidencia esa fórmula con Leo.",
+            "audio": "The chair had asked everyone to keep their comments to two minutes, but Leo was already at five. Rather than stop him abruptly, she waited for a pause and said: thank you, Leo, that is very helpful. May I just check that I have understood? You want a trial month, and then a vote. If so, perhaps Sara could give her view before we run out of time.",
+            "opciones": [
+              "To limit Leo's turn gently while keeping a friendly tone.",
+              "To reject Leo's proposal before anyone else speaks.",
+              "To ask Sara to replace Leo as the main speaker."
+            ],
+            "respuesta": 0,
+            "feedback": "La presidencia agradece, resume lo entendido y cede el turno a Sara: acorta la intervención con amabilidad, sin rechazar la propuesta."
+          },
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «¿Podrías ampliar brevemente ese punto antes de que opinemos nosotros?»",
+            "respuesta": "Could you expand on that briefly before we weigh in",
+            "feedback": "Could you expand on… pide más detalle con cortesía y before we weigh in explica que los demás opinarán después."
           }
         ]
       }
@@ -1655,33 +1679,58 @@
         {
           "en": "record",
           "es": "registrar, dejar constancia de"
+        },
+        {
+          "en": "quorum",
+          "es": "quórum (mínimo de asistentes para decidir)"
+        },
+        {
+          "en": "abstain",
+          "es": "abstenerse"
+        },
+        {
+          "en": "unanimously",
+          "es": "por unanimidad"
+        },
+        {
+          "en": "carry a motion",
+          "es": "aprobar una moción"
+        },
+        {
+          "en": "report back",
+          "es": "informar de vuelta al grupo"
         }
       ],
       "ensenanza": [
         {
-          "en": "Apologies were received from Carlos, who cannot attend tonight.",
-          "es": "Se recibieron disculpas de Carlos, que no puede asistir esta noche.",
-          "nota": "Apologies were received from… es la fórmula del acta para los ausentes con aviso."
+          "en": "Apologies were received from Carlos, who cannot attend tonight, but we still have a quorum, so the meeting may go ahead.",
+          "es": "Se recibieron las disculpas de Carlos, que no puede asistir esta noche, pero aun así tenemos quórum, así que la reunión puede continuar.",
+          "nota": "Apologies were received from… es la fórmula del acta para los ausentes con aviso; quorum es el mínimo de asistentes para decidir."
         },
         {
-          "en": "The members voted to approve the new timetable, and the decision is in the minutes.",
-          "es": "Los miembros votaron aprobar el nuevo horario y la decisión consta en el acta.",
-          "nota": "Voted to approve + nombre: la decisión tomada por votación."
+          "en": "It takes a simple majority to carry a motion, so two members chose to abstain rather than take sides in the argument.",
+          "es": "Hace falta una mayoría simple para aprobar una moción, así que dos miembros prefirieron abstenerse en lugar de tomar partido en la discusión.",
+          "nota": "Carry a motion: la moción sale adelante. Abstain: no votar ni a favor ni en contra."
         },
         {
-          "en": "Any other business? No? Then I adjourn the meeting at eight o'clock.",
-          "es": "¿Algún otro asunto? ¿No? Entonces levanto la sesión a las ocho.",
+          "en": "The members voted unanimously to approve the new timetable, and the decision is noted in the minutes for everybody to see.",
+          "es": "Los miembros votaron por unanimidad aprobar el nuevo horario, y la decisión queda anotada en el acta para que todos la vean.",
+          "nota": "Unanimously: sin ningún voto en contra. Voted to approve + nombre: la decisión tomada por votación."
+        },
+        {
+          "en": "Any other business? No? Then, since nobody wishes to add anything, I adjourn the meeting at eight o'clock.",
+          "es": "¿Otros asuntos? ¿No? Entonces, como nadie desea añadir nada, levanto la sesión a las ocho.",
           "nota": "Any other business? es la última pregunta de quien preside; adjourn cierra la sesión."
         },
         {
-          "en": "The secretary will record each decision, the person responsible and the deadline.",
-          "es": "La secretaria dejará constancia de cada decisión, de la persona responsable y del plazo.",
-          "nota": "El acta recoge tres datos: qué se decidió, quién lo hará y para cuándo."
+          "en": "The secretary will record each decision, the person responsible and the deadline, and will report back to the group with a draft of the minutes.",
+          "es": "La secretaria registrará cada decisión, la persona responsable y el plazo, e informará al grupo con un borrador del acta.",
+          "nota": "Record: dejar constancia por escrito. Report back: volver al grupo con el resultado de una tarea."
         },
         {
-          "en": "The decision was clear: Sara will ask the council for a bench by 10 June.",
-          "es": "La decisión estaba clara: Sara pedirá un banco al ayuntamiento antes del 10 de junio.",
-          "nota": "Was clear para el acta; will + by + fecha para la acción y el plazo."
+          "en": "Good minutes are concise: they note each decision, say who will act and by when, and leave out the arguments that led to it.",
+          "es": "Un acta bien hecha es concisa: anota cada decisión, dice quién actuará y para cuándo, y omite los argumentos que llevaron a ella.",
+          "nota": "El acta recoge tres datos: qué se decidió, quién lo hará y para cuándo; no transcribe el debate."
         }
       ],
       "explicacion": {
@@ -1808,100 +1857,100 @@
         "guiada": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué registra esta frase en el acta?",
-            "feedback": "Apologies were received from… deja constancia de alguien que no puede asistir y lo avisó. No es una decisión ni una acción con plazo.",
+            "consigna": "¿Qué registra en el acta esta intervención de Ana?",
+            "texto": "Ana: Apologies were received from Carlos, who cannot attend tonight. As we still have a quorum, I suggest that we begin with the first item.",
             "opciones": [
-              "Someone who cannot come and said so before.",
-              "A decision made by vote.",
-              "An action with a deadline."
+              "A member who warned he cannot come, and enough people to start.",
+              "A decision taken by vote before the discussion began.",
+              "An action given to Carlos with a date to finish it."
             ],
             "respuesta": 0,
-            "texto": "Ana: Apologies were received from Carlos, who cannot attend tonight.",
-            "pista": "Fíjate en la palabra apologies: ¿quién no está presente?"
+            "feedback": "Ana anota la ausencia avisada de Carlos y confirma que hay quórum para empezar. Aún no hay votación ni acciones asignadas.",
+            "pista": "Piensa en quién falta y en si quedan suficientes personas para decidir."
           },
           {
             "formato": "completar",
             "consigna": "Completa: «Los miembros votaron aprobar el nuevo horario.»",
-            "feedback": "Voted to approve + nombre: es la fórmula para dejar constancia de una decisión votada.",
-            "texto": "The members voted to ___ the new timetable.",
+            "texto": "After a short debate, the chair asked for a show of hands. Ten members raised their hands in favour and two against, so the members voted to ___ the new timetable.",
             "respuesta": "approve",
             "aceptadas": [
-              "approve"
+              "approve",
+              "accept"
             ],
-            "pista": "Es el verbo de dar por buena una propuesta tras una votación."
+            "feedback": "Vote to approve + nombre es la fórmula del acta para una decisión tomada por votación; aquí diez votos superan a dos.",
+            "pista": "Es el verbo que significa dar el visto bueno a algo tras votar."
           },
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «Sara es responsable de la carta y el plazo es el lunes.»",
-            "feedback": "El acta une responsable y plazo: is responsible for + nombre, and the deadline is + día.",
-            "respuesta": "Sara is responsible for the letter and the deadline is Monday",
-            "pista": "Dos partes unidas por and: primero el responsable, después el plazo."
+            "consigna": "Ordena: «Como nadie tiene nada más que añadir, levanto la sesión.»",
+            "respuesta": "As nobody has anything else to add I adjourn the meeting",
+            "feedback": "Adjourn the meeting cierra la sesión cuando ya no quedan asuntos; as nobody has anything else explica el motivo.",
+            "pista": "Empieza por la razón (As nobody…) y termina con el verbo que cierra la sesión."
           }
         ],
         "practica": [
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige cómo terminó la reunión.",
-            "feedback": "Como nadie tenía otro asunto que tratar, la presidenta cerró la sesión a las ocho.",
-            "audio": "The chair asked if anybody had any other business. Nobody spoke, so she closed the meeting at eight.",
+            "consigna": "Escucha y elige qué se acordó sobre la puerta del salón.",
+            "audio": "It was nearly eight o'clock when Ana, who was chairing, looked around the hall and asked whether there was any other business. Leo mentioned that the door still did not close properly, and Sara reminded everyone that the same problem had been reported in March without any result. Ana asked Tom to check the lock, and he promised to report back by Wednesday. Nobody had anything else to add, so she thanked the members for coming and adjourned the meeting. The secretary said she would circulate the minutes within two days.",
             "opciones": [
-              "Nobody had more topics, so the chair closed it.",
-              "The group voted to continue tomorrow.",
-              "The secretary left before the end."
+              "Tom will check the lock and tell the group by Wednesday.",
+              "Leo will repair the door before the next meeting.",
+              "The hall will close until the door has been fixed."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Ana encarga a Tom revisar la cerradura y él promete informar el miércoles. Leo solo avisa del problema y el salón no se cierra."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha otra vez. ¿Qué sugiere el comentario de Sara sobre marzo?",
+            "audio": "It was nearly eight o'clock when Ana, who was chairing, looked around the hall and asked whether there was any other business. Leo mentioned that the door still did not close properly, and Sara reminded everyone that the same problem had been reported in March without any result. Ana asked Tom to check the lock, and he promised to report back by Wednesday. Nobody had anything else to add, so she thanked the members for coming and adjourned the meeting. The secretary said she would circulate the minutes within two days.",
+            "opciones": [
+              "That the problem has been ignored for too long.",
+              "That the problem only appeared this week.",
+              "That Leo reported the problem to the wrong person."
+            ],
+            "respuesta": 0,
+            "feedback": "Sara recuerda que el problema ya se comunicó en marzo sin resultado: sugiere que se lleva meses sin atender, no que sea nuevo."
           },
           {
             "formato": "relacionar",
-            "consigna": "Relaciona cada línea del acta con su tipo.",
-            "feedback": "Cada línea del acta cumple un papel: apologies para ausencias, voted to approve para decisiones, will + by para acciones y adjourned para el cierre.",
+            "consigna": "Relaciona cada línea del acta con el tipo de dato que recoge.",
             "pares": [
               [
                 "Apologies were received from Mia.",
-                "Ausencia justificada"
+                "Ausencia avisada"
               ],
               [
-                "The members voted to approve the budget.",
-                "Decisión votada"
+                "Tom chose not to vote either way.",
+                "Abstención en la votación"
               ],
               [
-                "Tom will call the club by Friday.",
+                "Sara will call the club by Friday.",
                 "Acción con responsable y plazo"
               ],
               [
-                "The meeting was adjourned at nine.",
+                "The chair adjourned the meeting at nine.",
                 "Cierre de la sesión"
               ]
-            ]
-          },
-          {
-            "formato": "elegir",
-            "consigna": "¿Qué se acordó en «otros asuntos»?",
-            "feedback": "Leo avisa de que la puerta no cierra y Ana asigna la revisión a Tom con plazo el miércoles. Leo no la repara.",
-            "opciones": [
-              "Tom will check the door by Wednesday.",
-              "Leo will repair the door by Wednesday.",
-              "The hall will close on Wednesday."
             ],
-            "respuesta": 0,
-            "texto": "Ana: Any other business? Leo: Yes, one thing. The door of the hall does not close. Ana: Thank you, Leo. Tom will check it by Wednesday."
+            "feedback": "Cada línea del acta recoge un dato distinto: quién faltó, cómo se votó, quién actúa y cuándo terminó la sesión."
           }
         ],
         "evaluacion": [
           {
             "formato": "escribir",
-            "consigna": "Redacta el acta con acuerdos, responsables y plazos.",
-            "feedback": "Un acta completa recoge las disculpas, cada decisión con su responsable y su plazo, las reservas y el cierre de la sesión.",
-            "texto": "Reunión del club de barrio, 12 de mayo, 19:00. Preside Ana y es secretaria Sara. Ausente con aviso: Carlos. Punto 1, huerto comunitario: Leo propone abrir los sábados y los miércoles por la tarde; se vota y se aprueba; Leo es responsable de hablar con los vecinos y el plazo es el 20 de mayo. Punto 2, fiesta de verano: Mia tiene dudas por el precio; se acuerda buscar un término medio; Tom pedirá precios al ayuntamiento antes del viernes 15. Otros asuntos: ninguno. Se levanta la sesión a las 20:00.",
-            "respuesta": "Minutes of the neighbourhood club meeting, 12 May, 7 p.m. Chair: Ana. Secretary: Sara. Apologies were received from Carlos, who could not attend. Item 1: community garden. Leo proposed opening the garden on Saturdays and on Wednesday evenings. The chair asked for a vote, and the members voted to approve the proposal. Action: Leo is responsible for speaking to the neighbours about the new opening times, and the deadline is 20 May. Item 2: summer party. Mia had reservations about the price, so the group agreed to look for a compromise. Action: Tom will ask the council for prices by Friday 15 May. Any other business: none. The chair adjourned the meeting at 8 p.m.",
-            "aceptadas": [
-              "Minutes of the club meeting on 12 May at 7 p.m. The chair was Ana and the secretary was Sara. Apologies were received from Carlos, who cannot attend this month. Item 1: the community garden. Leo proposed that it opens on Saturdays and on Wednesday evenings, and the members voted to approve this. Leo will speak to the neighbours by 20 May. Item 2: the summer party. Mia is not convinced that the price is fair, so the group will look for a compromise. Tom is responsible for asking the council for prices, and the deadline is Friday 15 May. There was no other business, and the chair adjourned the meeting at 8 p.m."
-            ],
+            "consigna": "Redacta el acta con decisiones, responsables y plazos.",
+            "texto": "Reunión del club de barrio, 12 de mayo, 19:00. Preside Ana y es secretaria Sara. Ausente con aviso: Carlos; hay quórum. Punto 1, huerto comunitario: Leo propone abrir los sábados y los miércoles por la tarde; se vota y se aprueba, con la abstención de Tom; Leo es responsable de hablar con los vecinos y el plazo es el 20 de mayo. Punto 2, fiesta de verano: Mia tiene dudas por el precio; se acuerda buscar un término medio; Tom pedirá precios al ayuntamiento antes del viernes 15 e informará en la próxima reunión. Otros asuntos: ninguno. Se levanta la sesión a las 20:00.",
             "textoIdioma": "es",
+            "respuesta": "Minutes of the neighbourhood club meeting, 12 May, 7 p.m. Chair: Ana. Secretary: Sara. Apologies were received from Carlos, who could not attend, but the meeting had a quorum, so the members were able to begin. Item 1: community garden. Leo proposed opening the garden on Saturdays and on Wednesday evenings. The chair asked for a vote, and the motion was carried, with Tom choosing to abstain. Action: Leo is responsible for speaking to the neighbours about the new opening times, and the deadline is 20 May. Item 2: summer party. Mia had reservations about the price, so the group agreed to look for a compromise. Action: Tom will ask the council for prices by Friday 15 May and report back at the next meeting. Any other business: none. The chair adjourned the meeting at 8 p.m., and the secretary will circulate these minutes within two days.",
+            "aceptadas": [
+              "Minutes of the club meeting on 12 May at 7 p.m. The chair was Ana and the secretary was Sara. Apologies were received from Carlos, who cannot attend this month, and there was a quorum, so the meeting went ahead as planned. Item 1: the community garden. Leo proposed that it should open on Saturdays and on Wednesday evenings, and the members voted to approve this, although Tom abstained. Leo will speak to the neighbours about the new times by 20 May. Item 2: the summer party. Mia is not convinced that the price is fair, so the group will look for a compromise. Tom is responsible for asking the council for prices, and the deadline is Friday 15 May, when he will report back to the group. There was no other business, and the chair adjourned the meeting at 8 p.m."
+            ],
             "rubrica": {
               "palabras": [
-                100,
-                240
+                125,
+                260
               ],
               "evidencias": [
                 [
@@ -1912,18 +1961,31 @@
                   "Carlos cannot attend"
                 ],
                 [
+                  "had a quorum",
+                  "was a quorum",
+                  "have a quorum",
+                  "quorum was present"
+                ],
+                [
+                  "motion was carried",
                   "voted to approve",
                   "voted to accept",
-                  "voted for",
                   "voted in favour",
-                  "approved"
+                  "motion was approved",
+                  "members approved"
+                ],
+                [
+                  "Tom abstained",
+                  "Tom choosing to abstain",
+                  "Tom chose to abstain",
+                  "Tom did not vote",
+                  "with Tom abstaining"
                 ],
                 [
                   "Leo is responsible",
                   "Leo will be responsible",
                   "Leo will speak",
-                  "Leo will talk",
-                  "Leo will"
+                  "Leo will talk"
                 ],
                 [
                   "20 May",
@@ -1932,9 +1994,9 @@
                   "May 20th"
                 ],
                 [
-                  "Tom will",
+                  "Tom will ask",
                   "Tom is responsible",
-                  "Tom is going to"
+                  "Tom is going to ask"
                 ],
                 [
                   "15 May",
@@ -1944,132 +2006,115 @@
                   "Friday 15"
                 ],
                 [
-                  "adjourned",
+                  "adjourned the meeting",
                   "closed the meeting",
-                  "meeting closed",
-                  "meeting ended",
-                  "ended the meeting",
-                  "closed the session",
-                  "meeting was closed"
-                ],
-                [
-                  "compromise",
-                  "middle ground",
-                  "middle solution"
+                  "meeting was adjourned",
+                  "meeting was closed",
+                  "ended the meeting"
                 ]
               ]
-            }
+            },
+            "feedback": "Un acta completa recoge quién faltó, si había quórum, qué se votó, quién actúa y para cuándo, y cómo se cerró la sesión."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige la acción acordada.",
-            "feedback": "La acción es de Leo (no de Sara, que solo tiene una preocupación) y el plazo es el jueves; el 9 de junio es la próxima reunión.",
-            "audio": "The chair says: Item four is the noise in the hall. Sara has a concern, and Leo will ask the neighbours by Thursday. The next meeting is on 9 June.",
+            "consigna": "Escucha y elige qué se deduce de la abstención de Mia.",
+            "audio": "Let me make sure that we have this right before I close the item. The committee agreed to accept the new opening hours, although Mia did not vote because she wants to see the figures first. Tom will collect those figures and send them to everyone by the twentieth, and Sara will add them to the minutes. If the figures change the picture, we will reopen the matter at the June meeting.",
             "opciones": [
-              "Leo will ask the neighbours by Thursday.",
-              "Sara will ask the neighbours by Thursday.",
-              "Leo will ask the council on 9 June."
+              "That she may change her view once she sees the numbers.",
+              "That she voted against the new opening hours.",
+              "That she did not attend the meeting at all."
             ],
-            "respuesta": 0
-          },
-          {
-            "formato": "completar",
-            "consigna": "Completa: «no puede asistir» «La decisión estaba clara» «Levanto la sesión.»",
-            "feedback": "Attend es «asistir», decision es la decisión del acta y adjourn es el verbo que cierra la sesión.",
-            "frases": [
-              "Apologies were received from Tom, who cannot ___ tonight.",
-              "The ___ was clear: the club will meet on Thursdays.",
-              "Any other business? No? Then I ___ the meeting."
-            ],
-            "partes": [
-              {
-                "respuesta": "attend",
-                "aceptadas": [
-                  "attend",
-                  "come"
-                ]
-              },
-              {
-                "respuesta": "decision",
-                "aceptadas": [
-                  "decision"
-                ]
-              },
-              {
-                "respuesta": "adjourn",
-                "aceptadas": [
-                  "adjourn",
-                  "close"
-                ]
-              }
-            ]
+            "respuesta": 0,
+            "feedback": "Mia no votó porque quiere ver las cifras antes; no vota en contra ni falta. La presidencia admite reabrir el asunto si los números cambian el panorama."
           },
           {
             "formato": "elegir",
-            "consigna": "¿Qué línea del acta tiene responsable y plazo?",
-            "feedback": "Solo «Leo will book the hall by 5 May» dice quién (Leo) y para cuándo (by 5 May). Las otras dos son vagas.",
+            "consigna": "Según el acta, ¿qué decisión se registra sobre la fiesta?",
+            "texto": "Item 3: the summer party. Sara proposed that the club hold the party in the park on 20 June. Tom had reservations about the cost, and Leo suggested asking the council for help. The members agreed to postpone the decision until the council replies. Action: Leo will write to the council by Friday.",
             "opciones": [
-              "Leo will book the hall by 5 May.",
-              "Someone will book the hall soon.",
-              "The hall needs to be booked."
+              "The decision was put off until the council answers.",
+              "The party was approved for 20 June in the park.",
+              "The proposal was rejected because of the cost."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "Los miembros acuerdan aplazar la decisión hasta que responda el ayuntamiento; la fecha del 20 de junio fue solo la propuesta de Sara."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa: «Decidió abstenerse en lugar de votar a favor o en contra.»",
+            "texto": "Sara did not feel that she knew enough about the topic to take sides. She decided to ___ rather than vote for or against the motion.",
+            "respuesta": "abstain",
+            "aceptadas": [
+              "abstain"
+            ],
+            "feedback": "Abstain significa no votar ni a favor ni en contra; se registra en el acta como una abstención."
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué frase abre bien una reunión?",
-            "feedback": "Quien preside abre con un saludo y pasa al primer punto. Interrumpir y cerrar corresponden a otros momentos.",
+            "consigna": "¿Qué da a entender la presidencia al aceptar aplazar el punto del huerto?",
+            "texto": "The meeting was adjourned at 8.15 p.m. Before closing, Leo asked whether the garden item could be carried over to June, as several members had left early. The chair agreed, noting that a decision taken without a quorum would not be valid.",
             "opciones": [
-              "Good evening, everyone. Let's start with the first item on the agenda.",
-              "Sorry to interrupt, but could I clarify one point?",
-              "Any other business? Then the meeting is closed."
+              "That a vote with too few members present would not count.",
+              "That Leo had made a mistake when writing the agenda.",
+              "That the garden item had already been settled in May."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "La presidencia acepta aplazar porque una decisión sin quórum no sería válida: con tantos miembros ausentes, la votación no contaría."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige la postura de Leo.",
-            "feedback": "Leo reconoce el punto de Mia pero defiende los sábados porque la sala está libre. La duda es de Mia.",
-            "audio": "Mia: I am not convinced that Saturdays work. Leo: I take your point, Mia, but the hall is free on Saturdays. Ana: To summarise, Mia doubts the day, and Leo prefers Saturdays because the hall is free.",
+            "consigna": "Escucha la confirmación y elige qué ocurrió con la moción.",
+            "audio": "For the record, let me confirm that a quorum was present and that the motion was carried by eight votes to two, with one member not voting. The decision takes effect on the first of September, and the treasurer will report back at the next meeting.",
             "opciones": [
-              "He prefers Saturdays because the hall is free.",
-              "He doubts that Saturdays work.",
-              "He proposes a vote on Sundays."
+              "It passed, although two members voted against it.",
+              "It failed, because one member did not vote.",
+              "It was postponed until the first of September."
             ],
-            "respuesta": 0
+            "respuesta": 0,
+            "feedback": "La moción salió adelante por ocho votos a dos; el miembro que no votó no cambia el resultado y el 1 de septiembre es la fecha de efecto."
           },
           {
             "formato": "escribir",
-            "consigna": "Redacta una línea del acta con decisión, responsable y plazo.",
-            "feedback": "La línea del acta nombra la decisión, quién la hará y la fecha límite, con verbos neutros.",
-            "texto": "El club decidió comprar balones nuevos. Sara es la responsable y el plazo es el 15 de junio.",
-            "respuesta": "The members decided to buy new balls. Sara is responsible, and the deadline is 15 June.",
-            "aceptadas": [
-              "The club voted to buy new balls. Sara is responsible for it, and the deadline is 15 June.",
-              "The club decided to buy new balls. Sara will buy them by 15 June."
-            ],
+            "consigna": "Redacta una línea del acta: decisión, responsable y plazo.",
+            "texto": "El club votó por unanimidad comprar balones nuevos. Sara es la responsable y informará al grupo antes del 15 de junio.",
             "textoIdioma": "es",
+            "respuesta": "The club voted unanimously to buy new balls. Sara is responsible for ordering them, and she will report back by 15 June.",
+            "aceptadas": [
+              "The members decided unanimously to buy new balls. Sara will order them and report back by 15 June."
+            ],
             "rubrica": {
               "palabras": [
-                8,
-                30
+                12,
+                40
               ],
               "evidencias": [
                 [
-                  "decided to buy",
-                  "voted to buy",
-                  "approved",
-                  "agreed to buy"
+                  "voted unanimously",
+                  "decided unanimously",
+                  "unanimously voted",
+                  "unanimously decided",
+                  "unanimously agreed",
+                  "agreed unanimously",
+                  "approved unanimously",
+                  "unanimously approved"
                 ],
                 [
                   "new balls",
-                  "balls"
+                  "some new balls"
                 ],
                 [
                   "Sara is responsible",
-                  "Sara will"
+                  "Sara will order",
+                  "Sara will buy"
+                ],
+                [
+                  "report back",
+                  "reports back",
+                  "inform the group",
+                  "tell the group"
                 ],
                 [
                   "15 June",
@@ -2078,23 +2123,11 @@
                   "June 15th"
                 ]
               ]
-            }
+            },
+            "feedback": "La línea une la decisión tomada, la persona responsable y la fecha límite, que es lo mínimo que debe recoger un acta."
           }
         ]
       }
     }
-  ],
-  "review": {
-    "status": "GO",
-    "reviewer": "claude-reviewer-independiente",
-    "date": "2026-09-30",
-    "notes": [
-      "C21-25 revisado contra mapa n9 v2: concepto, fase, canDo y tarea de evaluación coinciden y continúan C16-20.",
-      "C21: aceptada 'suggest' en completar; C22: ordenar con 'an objection' (una sola respuesta), reescritos dos estímulos poco naturales (fair point tras sugerencia) y opción de escuchar ambigua.",
-      "C23: escuchar sin etiqueta de hablante ni dato huérfano; completar sin repetir el estímulo de la guiada.",
-      "C24: modelo aceptado de escritura corregido (Tom fiel, sin 'bus'); rúbrica acepta 'summarize'.",
-      "C25: rúbrica de acta añade acuerdo de compromiso, plazo sin 'Friday' suelto; completar acepta 'come'/'close' y ya no repite el estímulo de práctica.",
-      "Modelos de escritura ~115 palabras (>=50 % del mínimo del mapa); rúbricas con variantes."
-    ]
-  }
+  ]
 }

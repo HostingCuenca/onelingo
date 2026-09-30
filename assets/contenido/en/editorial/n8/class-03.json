@@ -35,7 +35,7 @@
   },
   "objectives": {
     "es": [
-      "Extraer la idea general, las cifras y el cambio de plan de mensajes de voz y avisos de estación dichos a velocidad natural."
+      "Extraer la idea general, las cifras, el propósito y el cambio de plan de mensajes de voz y avisos de estación dichos a velocidad natural, e inferir lo que el hablante da a entender."
     ]
   },
   "concepts": [
@@ -58,7 +58,10 @@
     "instead",
     "reschedule",
     "passengers",
-    "desk"
+    "desk",
+    "owing to",
+    "heads-up",
+    "severe disruption"
   ],
   "usesPatterns": [
     "n8-connected-speech-3"
@@ -99,89 +102,101 @@
     {
       "en": "desk",
       "es": "mostrador"
+    },
+    {
+      "en": "owing to",
+      "es": "debido a"
+    },
+    {
+      "en": "heads-up",
+      "es": "aviso previo"
+    },
+    {
+      "en": "severe disruption",
+      "es": "graves trastornos del servicio"
     }
   ],
   "teaching": [
     {
       "id": "en.n8.class-03.t01",
-      "en": "You have one new voicemail from Ana.",
-      "es": "Tienes un mensaje de voz nuevo de Ana.",
-      "explanationEs": "Voicemail es el mensaje que alguien deja cuando no contestas.",
+      "en": "You have one new voicemail from Ana, who says the party has moved and asks you to call her back tonight.",
+      "es": "Tienes un mensaje de voz nuevo de Ana, que dice que la fiesta se ha cambiado y te pide que la llames esta noche.",
+      "explanationEs": "Voicemail es el mensaje que alguien deja cuando no contestas; call back es devolver la llamada.",
       "segments": [
-        "You have one new",
-        "voicemail from Ana."
+        "You have one new voicemail from Ana, who says the party",
+        "has moved and asks you to call her back tonight."
       ],
-      "audioText": "You have one new voicemail from Ana.",
+      "audioText": "You have one new voicemail from Ana, who says the party has moved and asks you to call her back tonight.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-3"
     },
     {
       "id": "en.n8.class-03.t02",
-      "en": "Attention, please: this is an announcement about the eight o'clock train.",
-      "es": "Atención, por favor: este es un aviso sobre el tren de las ocho.",
-      "explanationEs": "Los avisos empiezan con una fórmula: attention, please.",
+      "en": "Attention, please: this announcement concerns the eight o'clock service, which is running twenty minutes behind schedule.",
+      "es": "Atención, por favor: este aviso se refiere al servicio de las ocho, que lleva veinte minutos de retraso.",
+      "explanationEs": "Los avisos empiezan con una fórmula fija (attention, please) y van al grano.",
       "segments": [
-        "Attention, please: this is an announcement",
-        "about the eight o'clock train."
+        "Attention, please: this announcement concerns the eight o'clock",
+        "service, which is running twenty minutes behind schedule."
       ],
-      "audioText": "Attention, please: this is an announcement about the eight o'clock train.",
+      "audioText": "Attention, please: this announcement concerns the eight o'clock service, which is running twenty minutes behind schedule.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-3"
     },
     {
       "id": "en.n8.class-03.t03",
-      "en": "The quarter past six train to Leeds is delayed by twenty minutes.",
-      "es": "El tren de las seis y cuarto a Leeds se retrasa veinte minutos.",
-      "explanationEs": "Delayed by + cantidad indica cuánto se retrasa.",
+      "en": "Owing to severe disruption on the line, the quarter past six train to Leeds is delayed by twenty minutes.",
+      "es": "Debido a graves trastornos en la línea, el tren de las seis y cuarto a Leeds se retrasa veinte minutos.",
+      "explanationEs": "Owing to introduce la causa; delayed by + cantidad indica cuánto se retrasa.",
       "segments": [
-        "The quarter past six train to",
-        "Leeds is delayed by twenty minutes."
+        "Owing to severe disruption on the line, the quarter past",
+        "six train to Leeds is delayed by twenty minutes."
       ],
-      "audioText": "The quarter past six train to Leeds is delayed by twenty minutes.",
+      "audioText": "Owing to severe disruption on the line, the quarter past six train to Leeds is delayed by twenty minutes.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-3"
     },
     {
       "id": "en.n8.class-03.t04",
-      "en": "Passengers for London should go to platform four instead of platform two.",
-      "es": "Los pasajeros a Londres deben ir al andén cuatro en lugar del dos.",
+      "en": "Passengers for London should use platform four instead of platform two, because the usual track is closed for repairs.",
+      "es": "Los pasajeros a Londres deben usar el andén cuatro en lugar del dos, porque la vía habitual está cerrada por obras.",
       "explanationEs": "Instead of señala el cambio: primero lo nuevo, después lo antiguo.",
       "segments": [
-        "Passengers for London should go to",
-        "platform four instead of platform two."
+        "Passengers for London should use platform four instead of platform",
+        "two, because the usual track is closed for repairs."
       ],
-      "audioText": "Passengers for London should go to platform four instead of platform two.",
+      "audioText": "Passengers for London should use platform four instead of platform two, because the usual track is closed for repairs.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-3"
     },
     {
       "id": "en.n8.class-03.t05",
-      "en": "Your flight has been cancelled, so please go to the desk to reschedule.",
-      "es": "Su vuelo ha sido cancelado, así que vaya al mostrador para cambiarlo.",
-      "explanationEs": "Cancelled y reschedule avisan de un cambio de plan.",
+      "en": "Your flight has been cancelled, so please go to the desk to reschedule, or ask for a full refund if you prefer.",
+      "es": "Su vuelo ha sido cancelado, así que acuda al mostrador para cambiarlo o pida un reembolso completo si lo prefiere.",
+      "explanationEs": "Cancelled y reschedule avisan de un cambio de plan; el aviso suele ofrecer dos salidas.",
       "segments": [
-        "Your flight has been cancelled, so please",
-        "go to the desk to reschedule."
+        "Your flight has been cancelled, so please go to the desk",
+        "to reschedule, or ask for a full refund if you prefer."
       ],
-      "audioText": "Your flight has been cancelled, so please go to the desk to reschedule.",
+      "audioText": "Your flight has been cancelled, so please go to the desk to reschedule, or ask for a full refund if you prefer.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-3"
     },
     {
       "id": "en.n8.class-03.t06",
-      "en": "I can't meet at six, so let's meet at seven instead.",
-      "es": "No puedo quedar a las seis, así que quedemos a las siete.",
-      "explanationEs": "Not… instead: lo que se cancela y lo que lo sustituye.",
+      "en": "I'm just giving you a heads-up: I can't meet at six, so could we make it seven instead?",
+      "es": "Solo te aviso con antelación: no puedo quedar a las seis, así que ¿podríamos dejarlo en las siete?",
+      "explanationEs": "Heads-up es un aviso previo informal; not… instead marca lo que se cancela y lo que lo sustituye.",
       "segments": [
-        "I can't meet at six, so",
-        "let's meet at seven instead."
+        "I'm just giving you a heads-up: I can't meet",
+        "at six, so could we make it seven instead?"
       ],
-      "audioText": "I can't meet at six, so let's meet at seven instead.",
+      "audioText": "I'm just giving you a heads-up: I can't meet at six, so could we make it seven instead?",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-3"
@@ -193,20 +208,20 @@
         "id": "en.n8.c03.pg01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el mensaje de voz y elige la idea general."
+          "es": "Escucha el mensaje de voz y elige por qué llama Ana."
         },
         "answer": {
           "index": 0
         },
         "choices": [
           {
-            "text": "The time of the party has changed."
+            "text": "To announce a change and ask for a quick reply."
           },
           {
-            "text": "The party has been cancelled."
+            "text": "To invite Sara to a party for the first time."
           },
           {
-            "text": "Ana needs a lift to the party."
+            "text": "To ask Sara to book another hall."
           }
         ],
         "teaches": [
@@ -218,12 +233,12 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.pg01.seed-0",
           "feedback": {
-            "es": "La idea general es un cambio de hora: now at eight, not at seven."
+            "es": "Ana avisa del cambio de día y pide una respuesta rápida: no es una invitación nueva ni una petición de sala."
           },
           "hint": {
-            "es": "Piensa en por qué llama Ana, no en los números."
+            "es": "Fíjate en lo que Ana pide al final, no solo en lo que cuenta."
           },
-          "audio": "Hello, this is Ana. The party is now at eight, not at seven. Please call me back if that is a problem.",
+          "audio": "Hi Sara, it's Ana. I'm just giving you a heads-up: the party has been moved to Saturday, because the hall is booked on Friday. Everyone else has said yes, so please tell me by tonight if Saturday is a problem for you. Thanks!",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -238,26 +253,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:2893233844d57be5b1a23ad4b3e4afc54513fd64be82d190316e370c48838a6d"
+        "contentHash": "sha256:544be398338bc7d57f7257686e57f90476d00a33af54bbe99ee5c415f77919d2"
       },
       {
         "id": "en.n8.c03.pg02",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el mismo mensaje y elige a qué hora es la fiesta."
+          "es": "Escucha el mismo mensaje y elige hasta cuándo debe responder Sara."
         },
         "answer": {
           "index": 1
         },
         "choices": [
           {
-            "text": "At seven."
+            "text": "By Friday."
           },
           {
-            "text": "At eight."
+            "text": "By tonight."
           },
           {
-            "text": "At nine."
+            "text": "By Saturday morning."
           }
         ],
         "teaches": [
@@ -269,12 +284,12 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.pg02.seed-0",
           "feedback": {
-            "es": "La hora buena va con now y la descartada con not: la fiesta es a las ocho."
+            "es": "El plazo aparece tras «please tell me»: esta noche. El viernes y el sábado son fechas de la sala y la fiesta."
           },
           "hint": {
-            "es": "Now marca lo nuevo; not marca lo que se descarta."
+            "es": "Busca el plazo justo después de «please tell me»."
           },
-          "audio": "Hello, this is Ana. The party is now at eight, not at seven. Please call me back if that is a problem.",
+          "audio": "Hi Sara, it's Ana. I'm just giving you a heads-up: the party has been moved to Saturday, because the hall is booked on Friday. Everyone else has said yes, so please tell me by tonight if Saturday is a problem for you. Thanks!",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -289,18 +304,19 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:909fb3537a34c3b9dfcdfbefecb7609350363c32b0215a641cf4661f40fd6754"
+        "contentHash": "sha256:52b3f0db695ad22ba7af03d8c127dc5114d2a8d4769d07eb49aed4bba6ff505a"
       },
       {
         "id": "en.n8.c03.pg03",
         "format": "completar",
         "prompt": {
-          "es": "Completa el aviso: «El tren se retrasa quince minutos.»"
+          "es": "Completa el aviso: «Los pasajeros a Londres deben ir ahora al andén cuatro.»"
         },
         "answer": {
-          "text": "delayed",
+          "text": "platform",
           "accepted": [
-            "delayed"
+            "platform",
+            "track"
           ]
         },
         "choices": [],
@@ -313,19 +329,19 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.pg03.seed-0",
           "feedback": {
-            "es": "Delayed es retrasado: aparece en los avisos de transporte."
+            "es": "Platform es el andén: en las estaciones se dice platform four, con el número después."
           },
           "hint": {
-            "es": "Es el adjetivo de «retrasado»."
+            "es": "Es el lugar de la estación donde se sube al tren."
           },
-          "text": "The train is ___ by fifteen minutes."
+          "text": "Passengers for London should now go to ___ four, because the usual track is closed for repairs. We apologise for the change."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:3e3a68f987c5b70854203d47e94dba34b4e3081bb3a789062f16253c9bfd1adc"
+        "contentHash": "sha256:d50bda27b4d7ccc9032cdc8ff6b1478927e526f0e48c84f6eae5553bc01e3a0a"
       }
     ],
     "practice": [
@@ -333,20 +349,20 @@
         "id": "en.n8.c03.p01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el aviso y elige cuántos minutos se retrasa el tren."
+          "es": "Escucha el aviso y elige qué pueden hacer los pasajeros del tren suprimido."
         },
         "answer": {
           "index": 2
         },
         "choices": [
           {
-            "text": "Fifteen minutes."
+            "text": "Wait at the station for the same train to leave later."
           },
           {
-            "text": "Fifty minutes."
+            "text": "Take a replacement bus to Manchester."
           },
           {
-            "text": "Twenty minutes."
+            "text": "Take a later train or ask for their money back."
           }
         ],
         "teaches": [],
@@ -358,9 +374,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.p01.seed-0",
           "feedback": {
-            "es": "El aviso dice delayed by twenty minutes; quarter past eight es la hora original, no el retraso."
+            "es": "El aviso ofrece dos opciones: subir al siguiente tren o reclamar el reembolso; no menciona autobuses sustitutivos."
           },
-          "audio": "Attention, please. The quarter past eight train to Leeds is delayed by twenty minutes. It will now leave from platform four instead of platform two. We apologise for the delay.",
+          "audio": "Attention, please. Owing to a signal failure near Crewe, all services to Manchester are subject to severe disruption. The quarter past five train is delayed by approximately forty minutes, and the five forty-five has been cancelled. Passengers holding tickets for the cancelled service may board the next train or claim a full refund at the information desk. We apologise for the inconvenience and thank you for your patience.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -375,26 +391,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:6ef20190f14c246c7179c83f528f694138631710a99c374028d5acf43617b835"
+        "contentHash": "sha256:589dd098da1f85c2070dd15e042dbe7096c7362e73afaa482c9c4aeed79562e9"
       },
       {
         "id": "en.n8.c03.p02",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el aviso y elige qué cambio se anuncia para los pasajeros."
+          "es": "Escucha el aviso otra vez y elige cuánto se retrasa el tren de las cinco y cuarto."
         },
         "answer": {
           "index": 0
         },
         "choices": [
           {
-            "text": "The train now leaves from another platform."
+            "text": "About forty minutes."
           },
           {
-            "text": "The train now goes to another city."
+            "text": "About fourteen minutes."
           },
           {
-            "text": "The train is cancelled for today."
+            "text": "About four minutes."
           }
         ],
         "teaches": [],
@@ -406,9 +422,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.p02.seed-0",
           "feedback": {
-            "es": "Now… platform four instead of platform two indica un cambio de andén, no de destino."
+            "es": "Forty y fourteen se confunden: forty lleva el acento al principio y fourteen al final; el aviso dice forty."
           },
-          "audio": "Attention, please. The quarter past eight train to Leeds is delayed by twenty minutes. It will now leave from platform four instead of platform two. We apologise for the delay.",
+          "audio": "Attention, please. Owing to a signal failure near Crewe, all services to Manchester are subject to severe disruption. The quarter past five train is delayed by approximately forty minutes, and the five forty-five has been cancelled. Passengers holding tickets for the cancelled service may board the next train or claim a full refund at the information desk. We apologise for the inconvenience and thank you for your patience.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -423,38 +439,38 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9bc080942e70e1f0edae90ba06aaddd3d7192c653fa0079d30f879adc867b488"
+        "contentHash": "sha256:1baa77164faaf457b4039722f931a865aca9a0fc0f7cfe9e4b4f27065ef6e991"
       },
       {
         "id": "en.n8.c03.p03",
         "format": "relacionar",
         "prompt": {
-          "es": "Relaciona cada palabra de los avisos con su significado."
+          "es": "Relaciona cada expresión de los avisos con su significado."
         },
         "answer": {
           "pairs": [
             [
-              "delayed",
+              "severe disruption",
               {
-                "es": "retrasado"
+                "es": "graves trastornos del servicio"
               }
             ],
             [
-              "cancelled",
+              "apologise for the inconvenience",
               {
-                "es": "cancelado"
+                "es": "pedir disculpas por las molestias"
               }
             ],
             [
-              "platform",
+              "claim a full refund",
               {
-                "es": "andén"
+                "es": "reclamar el reembolso completo"
               }
             ],
             [
-              "reschedule",
+              "give someone a heads-up",
               {
-                "es": "cambiar de fecha u hora"
+                "es": "avisar a alguien con antelación"
               }
             ]
           ]
@@ -469,31 +485,31 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.p03.seed-0",
           "feedback": {
-            "es": "Son las cuatro palabras que más aparecen cuando un viaje o una cita cambia."
+            "es": "Son fórmulas fijas de avisos y mensajes: aprenderlas enteras ayuda a reconocerlas a velocidad natural."
           },
           "pairs": [
             [
-              "delayed",
+              "severe disruption",
               {
-                "es": "retrasado"
+                "es": "graves trastornos del servicio"
               }
             ],
             [
-              "cancelled",
+              "apologise for the inconvenience",
               {
-                "es": "cancelado"
+                "es": "pedir disculpas por las molestias"
               }
             ],
             [
-              "platform",
+              "claim a full refund",
               {
-                "es": "andén"
+                "es": "reclamar el reembolso completo"
               }
             ],
             [
-              "reschedule",
+              "give someone a heads-up",
               {
-                "es": "cambiar de fecha u hora"
+                "es": "avisar a alguien con antelación"
               }
             ]
           ]
@@ -503,7 +519,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:40f51db57d9ac36030ed2d10b1258585b251ebf219b2ee5961460424508c933d"
+        "contentHash": "sha256:198b1919fa641ff0b2d9404f353a1f6e00e877b156528cd7aee6dd4cafd47e6a"
       }
     ],
     "evaluation": [
@@ -511,20 +527,20 @@
         "id": "en.n8.c03.e01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el mensaje de voz y elige por qué llama Carlos."
+          "es": "Escucha el mensaje de Carlos y elige qué pretende con él."
         },
         "answer": {
           "index": 1
         },
         "choices": [
           {
-            "text": "To cancel the dinner."
+            "text": "To cancel the dinner and apologise to Tom for calling so late."
           },
           {
-            "text": "To say he will arrive late."
+            "text": "To offer Tom a choice between a late start and another day."
           },
           {
-            "text": "To ask Tom to cook for him."
+            "text": "To ask Tom to collect him from the bus stop later."
           }
         ],
         "teaches": [],
@@ -536,9 +552,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.e01.seed-0",
           "feedback": {
-            "es": "Carlos no cancela: avisa de que llegará más tarde porque su autobús va con retraso."
+            "es": "Carlos propone empezar sin él o quedar mañana; no cancela y no pide que lo recojan."
           },
-          "audio": "Hi Tom, it's Carlos. I can't meet you at six. My bus is delayed, so I'll arrive at half past seven instead. Please start dinner without me. Call me back if that's a problem.",
+          "audio": "Hi Tom, it's Carlos. Sorry to call so late. I know we agreed to meet at six, but my bus has been delayed and I won't get there before half past seven. Could you start dinner without me? Actually, if you would rather wait, we could meet tomorrow instead; I'm free after four. I'd hate to cancel the whole thing, because I've been looking forward to this all week. Anyway, call me back when you get this, and don't worry about the bus; I'll manage.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -553,26 +569,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:296fd69a276f44833f29724e911ad64b108a97655526d3fbf14ec4d2ca71695a"
+        "contentHash": "sha256:485071cb9979efcf64b4ceb8d483924e464cb8f211a788c3c6ca107b7a735dca"
       },
       {
         "id": "en.n8.c03.e02",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha otra vez y elige la hora que Carlos descarta."
+          "es": "Escucha otra vez y elige qué deja entrever Carlos sobre el plan."
         },
         "answer": {
           "index": 2
         },
         "choices": [
           {
-            "text": "Half past seven."
+            "text": "That he has already lost interest in the dinner."
           },
           {
-            "text": "Quarter past seven."
+            "text": "That he blames Tom for not warning him earlier."
           },
           {
-            "text": "Six o'clock."
+            "text": "That he would much rather keep the plan than cancel."
           }
         ],
         "teaches": [],
@@ -584,9 +600,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.e02.seed-0",
           "feedback": {
-            "es": "Carlos dice «I can't meet you at six»: las seis es la hora que descarta; half past seven es la nueva."
+            "es": "«I'd hate to cancel the whole thing» y «looking forward to this all week» dejan claro que prefiere mantener el plan."
           },
-          "audio": "Hi Tom, it's Carlos. I can't meet you at six. My bus is delayed, so I'll arrive at half past seven instead. Please start dinner without me. Call me back if that's a problem.",
+          "audio": "Hi Tom, it's Carlos. Sorry to call so late. I know we agreed to meet at six, but my bus has been delayed and I won't get there before half past seven. Could you start dinner without me? Actually, if you would rather wait, we could meet tomorrow instead; I'm free after four. I'd hate to cancel the whole thing, because I've been looking forward to this all week. Anyway, call me back when you get this, and don't worry about the bus; I'll manage.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -601,26 +617,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:077f6cc2818e89303661513dfef99e90577d484fc7b24be8be9e81cfe4266c0c"
+        "contentHash": "sha256:74c3f8223f29b3cca018728d01bfa3b556197b706ff90bebf15cf434d708c953"
       },
       {
         "id": "en.n8.c03.e03",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el aviso del aeropuerto y elige qué deben hacer los pasajeros."
+          "es": "Escucha el aviso del aeropuerto y elige qué condición exige el hotel gratuito."
         },
         "answer": {
           "index": 0
         },
         "choices": [
           {
-            "text": "Go to the desk to change the flight."
+            "text": "Registering before eleven."
           },
           {
-            "text": "Wait at the gate for the plane."
+            "text": "Choosing a refund instead of a new flight."
           },
           {
-            "text": "Take a train to Madrid."
+            "text": "Booking the nine o'clock flight in advance."
           }
         ],
         "teaches": [],
@@ -632,9 +648,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.e03.seed-0",
           "feedback": {
-            "es": "El aviso pide ir al mostrador para cambiar el vuelo cancelado."
+            "es": "El hotel se cubre solo «for passengers who register before eleven»: la condición es registrarse a tiempo."
           },
-          "audio": "Good evening. Flight two four one to Madrid is cancelled. Passengers should go to the desk to reschedule. The next flight leaves tomorrow at nine. The airline will pay for a hotel tonight.",
+          "audio": "Good evening. Flight two four one to Madrid has been cancelled owing to bad weather. Passengers should go to the desk to change their booking, or ask for a full refund if they prefer not to travel. The next flight leaves tomorrow at nine, and the airline will cover a hotel tonight, but only for passengers who register before eleven.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -649,18 +665,20 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:40d94c817e4836f01a1d7191ee0456c0196f5b01a58291c4fda0b190cc28f869"
+        "contentHash": "sha256:f331b09f4913bd094992eebe63a4af1c0e0a687567fba30a86a50954b87b508b"
       },
       {
         "id": "en.n8.c03.e04",
         "format": "completar",
         "prompt": {
-          "es": "Completa el aviso: «Su vuelo ha sido cancelado.»"
+          "es": "Completa la petición: «¿Podríamos cambiar la reunión al jueves por la tarde?»"
         },
         "answer": {
-          "text": "cancelled",
+          "text": "reschedule",
           "accepted": [
-            "cancelled"
+            "reschedule",
+            "rearrange",
+            "move"
           ]
         },
         "choices": [],
@@ -673,16 +691,16 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.e04.seed-0",
           "feedback": {
-            "es": "Cancelled indica que el vuelo ya no sale y obliga a cambiar de plan."
+            "es": "Reschedule + fecha nueva es el verbo preciso para cambiar una cita ya fijada; se usa con for."
           },
-          "text": "Your flight has been ___."
+          "text": "I'm afraid Tuesday no longer works for me. Would it be possible to ___ our meeting for Thursday afternoon instead?"
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:21109ae86e907c1016f887e387004cece2b58979af16efa128260efd7b80e89b"
+        "contentHash": "sha256:d5f9a63441095fe825bdfef9d373137cb5ab30d11023cd3dfe1e97de06dc5d9a"
       }
     ],
     "review": [
@@ -690,20 +708,20 @@
         "id": "en.n8.c03.r01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha el mensaje de la clínica y elige qué ha cambiado."
+          "es": "Escucha a la clínica y elige qué debe hacer el paciente si ninguna fecha le conviene."
         },
         "answer": {
           "index": 1
         },
         "choices": [
           {
-            "text": "Only the day; the time is the same."
+            "text": "Wait for a new letter with a third date."
           },
           {
-            "text": "Both the day and the time of the visit."
+            "text": "Phone the clinic again to find another time."
           },
           {
-            "text": "Only the time; the day is the same."
+            "text": "Come on Monday at ten anyway."
           }
         ],
         "teaches": [],
@@ -715,9 +733,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.r01.seed-0",
           "feedback": {
-            "es": "La cita pasa de lunes a las diez a martes a las once: cambian el día y la hora, no solo uno de los dos."
+            "es": "La clínica pide que, si ninguna opción sirve, el paciente llame otra vez para buscar otro horario."
           },
-          "audio": "Hello, this is the dentist's office. Your appointment on Monday at ten has been moved. It is now on Tuesday at eleven. Please call us back if that does not work.",
+          "audio": "Hello, this is Dr Patel's clinic. Your appointment on Monday at ten has had to be moved because the doctor is attending a conference. We can offer you Tuesday at eleven or Thursday at half past two. If neither suits you, please call us back and we'll look for another time.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -732,26 +750,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:5cff89fc929c1479941d73fd92a3009a3035fda2917057d4f41435b3ce14798f"
+        "contentHash": "sha256:78855c0e48b06e617b3a5c091311a1e3e0ce7855172b9b94d6c5c0acba237b8b"
       },
       {
         "id": "en.n8.c03.r02",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha a Mia y elige el precio de cada entrada."
+          "es": "Escucha el mensaje de Mia y elige qué da a entender sobre la entrada del oyente."
         },
         "answer": {
           "index": 2
         },
         "choices": [
           {
-            "text": "Fifteen pounds."
+            "text": "It will cost fifty pounds, even with the student discount."
           },
           {
-            "text": "A hundred pounds."
+            "text": "It has already been paid for by Leo, so nothing is needed."
           },
           {
-            "text": "Fifty pounds."
+            "text": "It could go to Leo if there is no answer tonight."
           }
         ],
         "teaches": [],
@@ -763,9 +781,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.r02.seed-0",
           "feedback": {
-            "es": "Fifty lleva el acento al principio; a hundred es el total de las dos entradas."
+            "es": "«Otherwise, I'll offer yours to Leo» implica que la entrada pasará a Leo si no hay respuesta esta noche."
           },
-          "audio": "Hello, it's Mia. The tickets are fifty pounds each, so I need a hundred for two. Can you bring the money?",
+          "audio": "Hello, it's Mia. The tickets are fifty pounds each, but there's a student discount that brings them down to thirty-five. I need the money by Thursday, so if you want one, let me know tonight. Otherwise, I'll offer yours to Leo.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -780,22 +798,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:7dfc8c28d5ea01ab815ae4a5aab261ede28110db137f95fb3d848c31634b6e35"
+        "contentHash": "sha256:4fdca1b349b458ad4faeecd2a430ee0e515c32c84e73b4efcc89bcfe52518f99"
       },
       {
         "id": "en.n8.c03.r03",
         "format": "ordenar",
         "prompt": {
-          "es": "Ordena: «Por favor, devuélveme la llamada más tarde.»"
+          "es": "Ordena: «Por favor, devuélveme la llamada en cuanto puedas.»"
         },
         "answer": {
-          "text": "Please call me back later",
+          "text": "Please call me back as soon as you can",
           "tokens": [
             "Please",
             "call",
             "me",
             "back",
-            "later"
+            "as",
+            "soon",
+            "as",
+            "you",
+            "can"
           ]
         },
         "choices": [],
@@ -808,7 +830,7 @@
           "variantSeed": "0",
           "variantId": "en.n8.c03.r03.seed-0",
           "feedback": {
-            "es": "En call back el pronombre se coloca en medio: call me back."
+            "es": "En call back el pronombre va en medio, y as soon as you can cierra la petición con cortesía."
           }
         },
         "accessibility": {
@@ -816,7 +838,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:43853d5e88e82bca82a8f79a7b164acd8ace655c3c6668152393760da6c4a61f"
+        "contentHash": "sha256:5ed94ffab4a5f232dd533289297288b7b40108c384efc65ce641acc6946c4b99"
       }
     ]
   },

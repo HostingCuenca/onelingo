@@ -35,7 +35,7 @@
   },
   "objectives": {
     "es": [
-      "Predecir cómo se enlazan y se omiten sonidos entre palabras (next day, old man, turn it off) y completar frases dictadas con la forma realmente pronunciada."
+      "Predecir cómo se enlazan y se omiten sonidos entre palabras (turn it off, next day, old man), distinguir frases casi idénticas por el acento y completar frases dictadas con la forma escrita real."
     ]
   },
   "concepts": [
@@ -56,7 +56,12 @@
     "drop",
     "swallow",
     "stressed",
-    "link"
+    "link",
+    "syllable",
+    "elision",
+    "unstressed",
+    "run together",
+    "tell apart"
   ],
   "usesPatterns": [
     "n8-connected-speech-2"
@@ -89,89 +94,109 @@
     {
       "en": "link",
       "es": "enlazar"
+    },
+    {
+      "en": "syllable",
+      "es": "sílaba"
+    },
+    {
+      "en": "elision",
+      "es": "elisión (omisión de un sonido)"
+    },
+    {
+      "en": "unstressed",
+      "es": "átona, sin acento"
+    },
+    {
+      "en": "run together",
+      "es": "fundirse (las palabras)"
+    },
+    {
+      "en": "tell apart",
+      "es": "distinguir"
     }
   ],
   "teaching": [
     {
       "id": "en.n8.class-02.t01",
-      "en": "When people talk fast, they blend words, so 'pick it up' sounds like one word.",
-      "es": "Cuando la gente habla rápido, une las palabras, y «pick it up» suena como una sola palabra.",
-      "explanationEs": "Pick it up se oye «pi-ki-tup»: las palabras se funden.",
+      "en": "When people talk quickly, they blend words together, so 'pick it up' can sound like a single word with three syllables.",
+      "es": "Cuando la gente habla rápido, une las palabras, de modo que «pick it up» puede sonar como una sola palabra de tres sílabas.",
+      "explanationEs": "Pick it up se oye «pi-ki-tup»: las palabras se funden en un solo bloque.",
       "segments": [
-        "When people talk fast, they blend words, so",
-        "'pick it up' sounds like one word."
+        "When people talk quickly, they blend words together, so 'pick it",
+        "up' can sound like a single word with three syllables."
       ],
-      "audioText": "When people talk fast, they blend words, so 'pick it up' sounds like one word.",
+      "audioText": "When people talk quickly, they blend words together, so 'pick it up' can sound like a single word with three syllables.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-2"
     },
     {
       "id": "en.n8.class-02.t02",
-      "en": "A final consonant joins the next vowel: 'turn it off' sounds like 'tur-ni-toff'.",
-      "es": "Una consonante final se une a la vocal siguiente: «turn it off» suena «tur-ni-toff».",
+      "en": "A final consonant often links to the vowel at the start of the next word, which is why 'turn it off' sounds like 'tur-ni-toff'.",
+      "es": "Una consonante final suele enlazarse con la vocal inicial de la palabra siguiente, y por eso «turn it off» suena «tur-ni-toff».",
       "explanationEs": "La n de turn y la t de it pasan a empezar la sílaba siguiente.",
       "segments": [
-        "A final consonant joins the next vowel:",
-        "'turn it off' sounds like 'tur-ni-toff'."
+        "A final consonant often links to the vowel at the start of",
+        "the next word, which is why 'turn it off' sounds like 'tur-ni-toff'."
       ],
-      "audioText": "A final consonant joins the next vowel: 'turn it off' sounds like 'tur-ni-toff'.",
+      "audioText": "A final consonant often links to the vowel at the start of the next word, which is why 'turn it off' sounds like 'tur-ni-toff'.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-2"
     },
     {
       "id": "en.n8.class-02.t03",
-      "en": "Many speakers drop the t in 'next day', so you hear 'nex day'.",
-      "es": "Muchos hablantes omiten la t de «next day», y se oye «nex day».",
-      "explanationEs": "La t casi desaparece entre dos consonantes, pero se escribe.",
+      "en": "Many speakers drop the t in 'next day'; this elision makes two separate words run together as one smooth phrase, 'nex day'.",
+      "es": "Muchos hablantes omiten la t de «next day»; esta elisión hace que dos palabras separadas se fundan en una sola frase fluida, «nex day».",
+      "explanationEs": "La t casi desaparece entre dos consonantes, pero se sigue escribiendo.",
       "segments": [
-        "Many speakers drop the t in 'next",
-        "day', so you hear 'nex day'."
+        "Many speakers drop the t in 'next day'; this elision makes",
+        "two separate words run together as one smooth phrase, 'nex day'."
       ],
-      "audioText": "Many speakers drop the t in 'next day', so you hear 'nex day'.",
+      "audioText": "Many speakers drop the t in 'next day'; this elision makes two separate words run together as one smooth phrase, 'nex day'.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-2"
     },
     {
       "id": "en.n8.class-02.t04",
-      "en": "We swallow the d in 'old man', and it sounds like 'ol man'.",
-      "es": "Nos tragamos la d de «old man», y suena «ol man».",
-      "explanationEs": "La d entre dos consonantes se debilita mucho.",
+      "en": "We usually swallow the d in 'old man', so what you hear is closer to 'ol man' than to the written words.",
+      "es": "Normalmente nos tragamos la d de «old man», así que lo que oyes se parece más a «ol man» que a las palabras escritas.",
+      "explanationEs": "Las formas entre comillas aproximan el sonido: no son ortografía.",
       "segments": [
-        "We swallow the d in 'old man',",
-        "and it sounds like 'ol man'."
+        "We usually swallow the d in 'old man', so what you",
+        "hear is closer to 'ol man' than to the written words."
       ],
-      "audioText": "We swallow the d in 'old man', and it sounds like 'ol man'.",
+      "audioText": "We usually swallow the d in 'old man', so what you hear is closer to 'ol man' than to the written words.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-2"
     },
     {
       "id": "en.n8.class-02.t05",
-      "en": "In 'I can't find my keys', the stressed word is 'keys'.",
-      "es": "En «I can't find my keys», la palabra acentuada es «keys».",
-      "explanationEs": "Las palabras importantes se pronuncian más fuerte y largas.",
+      "en": "In 'We're meeting at the station', the stressed syllables are 'meet' and 'sta', while the unstressed words almost disappear.",
+      "es": "En «We're meeting at the station», las sílabas acentuadas son «meet» y «sta», mientras que las palabras átonas casi desaparecen.",
+      "explanationEs": "Stressed = sílaba fuerte y larga; unstressed = sílaba breve y débil.",
       "segments": [
-        "In 'I can't find my keys',",
-        "the stressed word is 'keys'."
+        "In 'We're meeting at the station', the stressed syllables are",
+        "'meet' and 'sta', while the unstressed words almost disappear."
       ],
-      "audioText": "In 'I can't find my keys', the stressed word is 'keys'.",
+      "audioText": "In 'We're meeting at the station', the stressed syllables are 'meet' and 'sta', while the unstressed words almost disappear.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-2"
     },
     {
       "id": "en.n8.class-02.t06",
-      "en": "You link 'last' and 'night' in fast speech, and the t almost disappears.",
-      "es": "Enlazas «last» y «night» al hablar rápido, y la t casi desaparece.",
-      "explanationEs": "Al enlazar dos palabras, la consonante débil se pierde.",
+      "en": "Learners who cannot tell apart 'ice cream' and 'I scream' should listen for where the words link, not for the spelling.",
+      "es": "Quienes no logran distinguir «ice cream» de «I scream» deberían fijarse en dónde se enlazan las palabras, no en la ortografía.",
+      "explanationEs": "Las dos frases suenan casi igual; cambia dónde cae el acento y cómo se enlaza la consonante.",
       "segments": [
-        "You link 'last' and 'night' in fast",
-        "speech, and the t almost disappears."
+        "Learners who cannot tell apart 'ice cream' and 'I scream' should",
+        "listen for where the words link, not for the spelling."
       ],
-      "audioText": "You link 'last' and 'night' in fast speech, and the t almost disappears.",
+      "audioText": "Learners who cannot tell apart 'ice cream' and 'I scream' should listen for where the words link, not for the spelling.",
       "audioMode": "tts",
       "languageCode": "en",
       "patternId": "n8-connected-speech-2"
@@ -183,20 +208,20 @@
         "id": "en.n8.c02.pg01",
         "format": "elegir",
         "prompt": {
-          "es": "¿Qué sonido se une a la vocal en «turn it»?"
+          "es": "En «turn it off», ¿qué ocurre entre «turn» y «it» al hablar rápido?"
         },
         "answer": {
           "index": 2
         },
         "choices": [
           {
-            "text": "The t of it"
+            "text": "The n of turn disappears before the vowel of it."
           },
           {
-            "text": "The u of turn"
+            "text": "The t of it is said alone after a clear pause."
           },
           {
-            "text": "The n of turn"
+            "text": "The n of turn links to the vowel of it."
           }
         ],
         "teaches": [
@@ -208,29 +233,31 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.pg01.seed-0",
           "feedback": {
-            "es": "La consonante final n pasa a empezar la sílaba siguiente: tur-nit."
+            "es": "La n final de turn se enlaza con la vocal de it: no desaparece ni se separa con pausa."
           },
           "hint": {
-            "es": "Busca la consonante final de la primera palabra."
-          }
+            "es": "Piensa en lo que hace una consonante final ante una vocal."
+          },
+          "text": "Could you turn it off before you leave? I can't concentrate with all this noise."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:acf16f5e24f78282a8e32c785b11b580bca423de16976da5ae1490bea2343652"
+        "contentHash": "sha256:cef66f75c1abf399f96b13b977dd836c955c69480bba31bd46f5097bd0cf0a37"
       },
       {
         "id": "en.n8.c02.pg02",
         "format": "completar",
         "prompt": {
-          "es": "Escucha y completa: «Nos veremos al día siguiente.»"
+          "es": "Escucha y completa: «Quedaremos al día siguiente, cuando todos hayan leído el informe.»"
         },
         "answer": {
           "text": "next",
           "accepted": [
-            "next"
+            "next",
+            "following"
           ]
         },
         "choices": [],
@@ -243,36 +270,38 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.pg02.seed-0",
           "feedback": {
-            "es": "En habla rápida se oye «nex day», pero la palabra completa se escribe next."
+            "es": "En habla rápida la t de next casi no suena («nex day»), pero la palabra se escribe completa."
           },
           "hint": {
-            "es": "En habla rápida suena «nex»: escribe la palabra completa."
+            "es": "En el audio suena «nex»: escribe la palabra entera."
           },
-          "text": "We'll meet the ___ day.",
-          "audio": "We'll meet the next day."
+          "text": "We didn't finish on Friday, so we'll meet the ___ day, when everyone has had time to read the report.",
+          "audio": "We didn't finish on Friday, so we'll meet the next day, when everyone has had time to read the report."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:24b1ab0c264fbaf6373acb96f798215b6603d62b1673d2eff08926f50626f71b"
+        "contentHash": "sha256:448c557c45c27f0e3fa9f62ce029aab4515276d24deb32067629ae1ad96f8a81"
       },
       {
         "id": "en.n8.c02.pg03",
         "format": "ordenar",
         "prompt": {
-          "es": "Ordena: «Apágalo antes de irte.»"
+          "es": "Ordena: «Recógelo cuando tengas ocasión.»"
         },
         "answer": {
-          "text": "Turn it off before you leave",
+          "text": "Pick it up when you get a chance",
           "tokens": [
-            "Turn",
+            "Pick",
             "it",
-            "off",
-            "before",
+            "up",
+            "when",
             "you",
-            "leave"
+            "get",
+            "a",
+            "chance"
           ]
         },
         "choices": [],
@@ -285,10 +314,10 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.pg03.seed-0",
           "feedback": {
-            "es": "Turn it off se enlaza (tur-ni-toff) y va antes del resto de la frase."
+            "es": "El verbo frasal pick up separa el pronombre: pick it up, y las tres palabras se enlazan al hablar."
           },
           "hint": {
-            "es": "Empieza por el verbo."
+            "es": "Empieza por el verbo frasal con el pronombre en medio."
           }
         },
         "accessibility": {
@@ -296,7 +325,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:bfebf658dd2237d5b8e16ab8225c9cfe66b485dbd5d326825c4124b8d2898a21"
+        "contentHash": "sha256:49795f1ef7b7cc0d607116ca699e7411a7337cb2e33ab6d0358541ec3bd1ba38"
       }
     ],
     "practice": [
@@ -304,20 +333,20 @@
         "id": "en.n8.c02.p01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha y elige qué dice la hablante."
+          "es": "Escucha y elige qué consejo da la profesora a sus alumnos."
         },
         "answer": {
           "index": 0
         },
         "choices": [
           {
-            "text": "She saw an older person outdoors."
+            "text": "Follow the rhythm of the whole phrase before analysing single words."
           },
           {
-            "text": "She met an old friend at home."
+            "text": "Write down each separate word before hearing the rhythm."
           },
           {
-            "text": "She saw a young man at school."
+            "text": "Slow the recording down until every sound is clear."
           }
         ],
         "teaches": [],
@@ -329,9 +358,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.p01.seed-0",
           "feedback": {
-            "es": "An old man se une a-nold-man: old man significa hombre mayor."
+            "es": "La profesora pide captar primero el ritmo de la frase y completar después los detalles, no analizar palabra por palabra."
           },
-          "audio": "I saw an old man in the park.",
+          "audio": "A pronunciation coach tells her class to stop listening for separate words. In an old man, she explains, the n moves onto old and the d almost disappears, so the whole phrase sounds smooth. Her advice is to catch the rhythm first and fill in the details afterwards.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -346,38 +375,38 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:6544391632e29149f7189c4d05bf8d455d53b6c01a5b1a6033a43dda2f2a5951"
+        "contentHash": "sha256:e058f218eb1a783c51f1dc447b777c07ff687aef9a243296c28c6d0beb921013"
       },
       {
         "id": "en.n8.c02.p02",
         "format": "relacionar",
         "prompt": {
-          "es": "Relaciona cada frase con cómo suena (transcripción aproximada, no es ortografía)."
+          "es": "Relaciona cada frase con el fenómeno que ocurre al decirla rápido."
         },
         "answer": {
           "pairs": [
             [
               "turn it off",
               {
-                "es": "tur-ni-toff"
+                "es": "enlace: la n pasa a la vocal"
               }
             ],
             [
-              "next day",
+              "last night",
               {
-                "es": "nex day"
+                "es": "elisión: la t casi no suena"
               }
             ],
             [
               "old man",
               {
-                "es": "ol man"
+                "es": "elisión: la d casi desaparece"
               }
             ],
             [
               "kind of",
               {
-                "es": "kinda"
+                "es": "fusión: suena como una sola palabra"
               }
             ]
           ]
@@ -392,31 +421,31 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.p02.seed-0",
           "feedback": {
-            "es": "Cada pareja muestra un enlace o una omisión típica del habla rápida; la derecha solo aproxima el sonido."
+            "es": "Turn it off enlaza consonante y vocal; last night y old man pierden una t o una d; kind of se funde en kinda."
           },
           "pairs": [
             [
               "turn it off",
               {
-                "es": "tur-ni-toff"
+                "es": "enlace: la n pasa a la vocal"
               }
             ],
             [
-              "next day",
+              "last night",
               {
-                "es": "nex day"
+                "es": "elisión: la t casi no suena"
               }
             ],
             [
               "old man",
               {
-                "es": "ol man"
+                "es": "elisión: la d casi desaparece"
               }
             ],
             [
               "kind of",
               {
-                "es": "kinda"
+                "es": "fusión: suena como una sola palabra"
               }
             ]
           ]
@@ -426,21 +455,28 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:dd0c1d49a803e1004d8b258c799c831c12db62c41dff73fd34ca8925a393d830"
+        "contentHash": "sha256:73d2ae1ed56404d9e0205865ca28d669a2598926f7af0fcfd35b7e8b63301cc7"
       },
       {
         "id": "en.n8.c02.p03",
-        "format": "completar",
+        "format": "elegir",
         "prompt": {
-          "es": "Escucha y completa: «Anoche me quedé en casa.»"
+          "es": "Ana no captó la hora. ¿Qué palabras debe acentuar Mia al repetirla?"
         },
         "answer": {
-          "text": "last",
-          "accepted": [
-            "last"
-          ]
+          "index": 1
         },
-        "choices": [],
+        "choices": [
+          {
+            "text": "Please, don't and late."
+          },
+          {
+            "text": "Meeting, station and nine."
+          },
+          {
+            "text": "We're, at and the."
+          }
+        ],
         "teaches": [],
         "requires": [
           "n8-connected-speech-2"
@@ -450,17 +486,16 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.p03.seed-0",
           "feedback": {
-            "es": "Last night suena «las night»: la t casi desaparece entre dos consonantes."
+            "es": "Las palabras de contenido que llevan la información (meeting, station, nine) reciben el acento; las demás se debilitan."
           },
-          "text": "I stayed at home ___ night.",
-          "audio": "I stayed at home last night."
+          "text": "Mia says, quickly: 'We're meeting at the station at nine, so please don't be late.' Ana missed the time and asks her to repeat it."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:8e9d2b01760410605f1819bc09fb5864b1dbe64c4ec2a5978791de084eb90614"
+        "contentHash": "sha256:2f85ff4693f81eeb9284180485948e87b6d4b6a4abefac7b2f10795f6981b804"
       }
     ],
     "evaluation": [
@@ -468,20 +503,20 @@
         "id": "en.n8.c02.e01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha las dos órdenes y elige qué se pide."
+          "es": "Escucha el pódcast y elige qué estrategia recomienda Sara."
         },
         "answer": {
-          "index": 1
+          "index": 2
         },
         "choices": [
           {
-            "text": "Switch something off and drop it."
+            "text": "Write down every word on paper before thinking about the meaning."
           },
           {
-            "text": "Switch something on and lift something."
+            "text": "Ask speakers to slow down until each word is separate."
           },
           {
-            "text": "Wait for him and pick a day."
+            "text": "Start from the stressed syllables and add the small words later."
           }
         ],
         "teaches": [],
@@ -493,9 +528,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.e01.seed-0",
           "feedback": {
-            "es": "Turn it on y pick it up son dos enlaces consonante-vocal: tur-ni-ton, pi-ki-tup."
+            "es": "Sara recomienda construir la frase a partir de las sílabas acentuadas; las palabras pequeñas encajan después."
           },
-          "audio": "Turn it on, and pick it up.",
+          "audio": "In this week's language podcast, Sara explains why learners struggle with fast speech. She points out that check it out does not sound like three separate words; it sounds like one. The same happens with best friend, where the t almost disappears. Her advice is not to write down every word, but to listen for the stressed syllables and build the sentence around them. Only then, she says, do the small words fall into place.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -510,26 +545,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:197ea13b5021c058d60ec673033e80c2ed46de661ccdd2b19f9dd569efae57fe"
+        "contentHash": "sha256:c4f5145c4bcfc0622e4254d082207e7ba160433b600ebdba08b5ccf4dbcb0f97"
       },
       {
         "id": "en.n8.c02.e02",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha y elige la expresión que oyes en la frase."
+          "es": "Escucha otra vez y elige qué da a entender Sara sobre anotar cada palabra."
         },
         "answer": {
-          "index": 2
+          "index": 0
         },
         "choices": [
           {
-            "text": "the nice day"
+            "text": "That it is not the best way to follow fast speech."
           },
           {
-            "text": "the same day"
+            "text": "That it is useful only for beginners at a slow pace."
           },
           {
-            "text": "the next day"
+            "text": "That it is impossible even for fluent speakers."
           }
         ],
         "teaches": [],
@@ -541,9 +576,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.e02.seed-0",
           "feedback": {
-            "es": "Aunque la t se omite al hablar, la forma escrita mantiene next; nice y same suenan distinto."
+            "es": "Al decir «not to write down every word», Sara sugiere que no es la mejor estrategia, sin llegar a llamarla imposible."
           },
-          "audio": "We'll go the next day.",
+          "audio": "In this week's language podcast, Sara explains why learners struggle with fast speech. She points out that check it out does not sound like three separate words; it sounds like one. The same happens with best friend, where the t almost disappears. Her advice is not to write down every word, but to listen for the stressed syllables and build the sentence around them. Only then, she says, do the small words fall into place.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -558,18 +593,20 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:fa3ca9cc8f6151c28c7886559bc5e32b52b054cc8b25590840921c1992b80017"
+        "contentHash": "sha256:3718f1a7c985056a0606336cce6409ae271a9cd6bc80d82f92c18dea40fe5df8"
       },
       {
         "id": "en.n8.c02.e03",
         "format": "completar",
         "prompt": {
-          "es": "Escucha y completa: «Ayudó a un anciano.»"
+          "es": "Completa: la t casi muda de «best friend» es un caso de «elisión»."
         },
         "answer": {
-          "text": "old",
+          "text": "elision",
           "accepted": [
-            "old"
+            "elision",
+            "omission",
+            "deletion"
           ]
         },
         "choices": [],
@@ -582,36 +619,34 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.e03.seed-0",
           "feedback": {
-            "es": "An old man se enlaza, y la d se debilita, pero se escribe old."
+            "es": "Elision es el nombre del proceso por el que un sonido se omite al hablar rápido, como la t entre dos consonantes."
           },
-          "text": "She helped an ___ man.",
-          "audio": "She helped an old man."
+          "text": "The almost silent t in best friend is an example of ___, because the sound simply disappears between two consonants."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:b7f7da44acfb68ad1c035d4bb8e0da80dafc3a31383967e5a224875c73cb8704"
+        "contentHash": "sha256:5741489e1c22c956c82272cda29b1858aa2aa25ca5e4a73e7b7effbe81300805"
       },
       {
         "id": "en.n8.c02.e04",
         "format": "ordenar",
         "prompt": {
-          "es": "Ordena: «Me quedé despierto toda la noche.»"
+          "es": "Ordena: «Los hablantes suelen omitir la t entre dos consonantes.»"
         },
         "answer": {
-          "text": "I stayed up all night",
+          "text": "Speakers often drop the t between two consonants",
           "tokens": [
-            "I",
-            "stayed",
-            "up",
-            "all",
-            "night"
-          ],
-          "accepted": [
-            "I stayed up all night",
-            "All night I stayed up"
+            "Speakers",
+            "often",
+            "drop",
+            "the",
+            "t",
+            "between",
+            "two",
+            "consonants"
           ]
         },
         "choices": [],
@@ -624,7 +659,7 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.e04.seed-0",
           "feedback": {
-            "es": "Stay up significa quedarse despierto; all night indica cuánto tiempo y suele ir al final."
+            "es": "Drop the t describe la elisión: el sonido casi desaparece cuando queda entre dos consonantes."
           }
         },
         "accessibility": {
@@ -632,7 +667,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:0f06762fdef2238e82c943c3b851912580c050a2726247a36187fabe04271407"
+        "contentHash": "sha256:3004be3ba4053a15f1c585860b3c02f19575ffc53b277fdb2c70777c19a7d53d"
       }
     ],
     "review": [
@@ -640,20 +675,20 @@
         "id": "en.n8.c02.r01",
         "format": "escuchar",
         "prompt": {
-          "es": "Escucha y elige cuál es el problema del hablante."
+          "es": "Escucha la anécdota de Tom y elige en qué se fijó al repetir la grabación."
         },
         "answer": {
-          "index": 0
+          "index": 1
         },
         "choices": [
           {
-            "text": "He cannot find something he needs."
+            "text": "How fast the speaker was talking."
           },
           {
-            "text": "He found his wallet easily."
+            "text": "Which syllable carried the stress."
           },
           {
-            "text": "He lost his phone."
+            "text": "Whether the final s was clear."
           }
         ],
         "teaches": [],
@@ -665,9 +700,9 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.r01.seed-0",
           "feedback": {
-            "es": "Can't con find y anywhere indican que busca algo sin éxito."
+            "es": "Ice cream acentúa la primera sílaba; I scream acentúa scream. Ese cambio de acento le dio la pista."
           },
-          "audio": "I can't find my wallet anywhere.",
+          "audio": "Tom wrote I scream in his notes, but the sentence was about a dessert. When he listened again, he noticed that the stress fell on the first syllable, ice, and he realised the speaker had said ice cream.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -682,26 +717,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:e78a98ec8e5a39ad6cc328115214f735ab232c288cbcb6b96afb19517db4969b"
+        "contentHash": "sha256:f7e2a2b3110bfa88fde889bc0aedc52c3ec25590d1a04d21a30d0679c78a5bed"
       },
       {
         "id": "en.n8.c02.r02",
         "format": "elegir",
         "prompt": {
-          "es": "¿Qué palabra suena más acentuada en «We're meeting at the station»?"
+          "es": "¿Qué sugiere Ana al acentuar «she» en esta frase?"
         },
         "answer": {
-          "index": 1
+          "index": 2
         },
         "choices": [
           {
-            "text": "the"
+            "text": "That nobody took any money at all."
           },
           {
-            "text": "station"
+            "text": "That Ana blames the person mentioned for taking it."
           },
           {
-            "text": "at"
+            "text": "That someone else may have taken the money."
           }
         ],
         "teaches": [],
@@ -713,27 +748,35 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.r02.seed-0",
           "feedback": {
-            "es": "Station es una palabra de contenido y lleva el acento; the y at son débiles y rápidas."
-          }
+            "es": "Al acentuar she, Ana niega que sea esa persona, lo que implica que otra pudo haberlo hecho."
+          },
+          "text": "Ana says: 'I didn't say SHE took the money.' The stress falls on the word she."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:26ceaaa40af12a8f1675fa0d839b802e2f7002d71e6d37ee87101b191b21cfe3"
+        "contentHash": "sha256:4405c25b97acacbce577652fa85b3ff671583840b6181feceb3ae34971070e2b"
       },
       {
         "id": "en.n8.c02.r03",
         "format": "completar",
         "prompt": {
-          "es": "Completa: «Se traga la d en old man.»"
+          "es": "Completa: al decir «first class» deprisa, la t «se omite» y las palabras se funden."
         },
         "answer": {
-          "text": "swallow",
+          "text": "dropped",
           "accepted": [
-            "swallow",
-            "drop"
+            "dropped",
+            "swallowed",
+            "omitted",
+            "skipped",
+            "lost",
+            "silent",
+            "elided",
+            "deleted",
+            "missing"
           ]
         },
         "choices": [],
@@ -746,16 +789,16 @@
           "variantSeed": "0",
           "variantId": "en.n8.c02.r03.seed-0",
           "feedback": {
-            "es": "Swallow (o drop) significa tragarse u omitir un sonido: la d casi no se oye, pero se escribe."
+            "es": "La t entre dos consonantes se omite en habla rápida: es un caso de elisión."
           },
-          "text": "We ___ the d in old man."
+          "text": "When we say first class quickly, the t is ___ and the two words run together."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9b9362a3013b00700b6d97ccceb16f581b5d5a6941386521ef6c958efdf5b7a2"
+        "contentHash": "sha256:08fc40f108a17cc1549f7091f7dd0fef9746541ed592d4a647dc2f42a166d011"
       }
     ]
   },
