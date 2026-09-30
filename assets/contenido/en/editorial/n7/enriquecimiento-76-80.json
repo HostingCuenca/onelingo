@@ -1,0 +1,666 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "classes": {
+    "en.n7.class-76": {
+      "explicacion": {
+        "titulo": "Órdenes, peticiones y sugerencias",
+        "texto": "Un líder usa tres tipos de frases y la forma cambia el tono. La orden es un imperativo directo (Line up now): no deja margen. La petición suaviza con could you…, would you mind… o please y pide un favor. La sugerencia propone sin obligar: How about…, You might want to… Entre la petición y la orden está I'd like everyone to…, amable pero clara. Elige según el momento: seguridad pide firmeza; ayuda pide cortesía; ideas piden opciones."
+      },
+      "patron": {
+        "texto": "Tipo de frase → forma:",
+        "formula": [
+          {
+            "texto": "Line up now.",
+            "nota": "orden: verbo base, sin suavizar"
+          },
+          {
+            "texto": "Could you help, please?",
+            "nota": "petición: could you + verbo base + please"
+          },
+          {
+            "texto": "How about starting early?",
+            "nota": "sugerencia: how about + verbo en -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could you to check the equipment, please?",
+          "correcto": "Could you check the equipment, please?",
+          "explicacion": "Tras could you va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "How about to start with a short break?",
+          "correcto": "How about starting with a short break?",
+          "explicacion": "Después de how about se usa un verbo en -ing, no un infinitivo con to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara es la entrenadora y Leo ayuda como voluntario antes de un partido.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Line up at the gate, everyone. I need the players ready.",
+            "traduccion": "Fórmense en la puerta, todos. Necesito a los jugadores listos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Should I help with something?",
+            "traduccion": "¿Ayudo con algo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. Could you check the equipment, please?",
+            "traduccion": "Sí. ¿Podrías revisar el material, por favor?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure. How about starting with the balls?",
+            "traduccion": "Claro. ¿Y si empiezo por los balones?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Sara cuando dice «Could you check the equipment, please?»",
+          "opciones": [
+            {
+              "es": "Pide un favor con cortesía."
+            },
+            {
+              "es": "Da una orden sin suavizar."
+            },
+            {
+              "es": "Propone una idea opcional."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Could you… please es una petición cortés; la orden directa fue la primera frase de Sara (Line up) y la idea opcional la propone Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Forma",
+          "Margen de la otra persona"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "orden"
+            },
+            {
+              "texto": "verbo base / must"
+            },
+            {
+              "texto": "ninguno"
+            }
+          ],
+          [
+            {
+              "texto": "petición"
+            },
+            {
+              "texto": "Could you…, please?"
+            },
+            {
+              "texto": "puede negociar"
+            }
+          ],
+          [
+            {
+              "texto": "sugerencia"
+            },
+            {
+              "texto": "How about… / You might want to…"
+            },
+            {
+              "texto": "decide libremente"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-77": {
+      "explicacion": {
+        "titulo": "Expectativas y responsabilidades",
+        "texto": "Para repartir trabajo hay cuatro estructuras. Be expected to + verbo base dice lo que el grupo espera de ti. Be responsible for + nombre o -ing indica quién responde si algo falla. Be in charge of + nombre o -ing indica quién dirige o gestiona algo. It's up to you (whether…) te deja decidir. Las preposiciones son fijas: responsible FOR, in charge OF, expected TO. Ojo: en español se dice «responsable DE», pero en inglés responsible FOR; in charge OF sí lleva of, como el español."
+      },
+      "patron": {
+        "texto": "Persona + estructura + tarea:",
+        "formula": [
+          {
+            "texto": "Mia",
+            "nota": "la persona a quien se asigna algo"
+          },
+          {
+            "texto": "is responsible for",
+            "nota": "responsible + for: quien responde"
+          },
+          {
+            "texto": "the equipment.",
+            "nota": "la tarea: un nombre o un verbo en -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He is responsible of the keys.",
+          "correcto": "He is responsible for the keys.",
+          "explicacion": "Con responsible se usa for, no of como en el español «responsable de»."
+        },
+        {
+          "incorrecto": "She is in charge to order the food.",
+          "correcto": "She is in charge of ordering the food.",
+          "explicacion": "In charge va con of, y después de una preposición el verbo va en -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana reparte tareas antes del entrenamiento del equipo juvenil.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, you are in charge of the water today.",
+            "traduccion": "Tom, hoy tú te encargas del agua."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And who is responsible for the balls?",
+            "traduccion": "¿Y quién es responsable de los balones?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Mia is responsible for the equipment. You are expected to help her at the end.",
+            "traduccion": "Mia es responsable del material. Se espera que tú la ayudes al final."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Understood. And where do we warm up?",
+            "traduccion": "Entendido. ¿Y dónde calentamos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It's up to you. Inside or outside, both are fine.",
+            "traduccion": "Depende de ustedes. Dentro o fuera, ambas opciones sirven."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué se espera de Tom al final del entrenamiento?",
+          "opciones": [
+            {
+              "es": "Que ayude a Mia con el material."
+            },
+            {
+              "es": "Que decida dónde calienta el equipo."
+            },
+            {
+              "es": "Que reparta el agua entre los jugadores."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana le dice a Tom: «You are expected to help her at the end». Del agua se encarga desde el principio y el calentamiento es decisión del grupo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "be expected to + base"
+            },
+            {
+              "texto": "se espera de ti"
+            },
+            {
+              "texto": "You are expected to sign in."
+            }
+          ],
+          [
+            {
+              "texto": "be responsible for"
+            },
+            {
+              "texto": "respondes si falla"
+            },
+            {
+              "texto": "Mia is responsible for the equipment."
+            }
+          ],
+          [
+            {
+              "texto": "be in charge of"
+            },
+            {
+              "texto": "diriges o gestionas"
+            },
+            {
+              "texto": "Carlos is in charge of the schedule."
+            }
+          ],
+          [
+            {
+              "texto": "it's up to you"
+            },
+            {
+              "texto": "la decisión es tuya"
+            },
+            {
+              "texto": "It's up to you whether you train."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-78": {
+      "explicacion": {
+        "titulo": "Elogio, crítica constructiva y crítica destructiva",
+        "texto": "El elogio nombra algo concreto que la persona hizo bien (you explained the rules clearly). La crítica constructiva señala UN punto mejorable y ofrece un camino: Next time, try to…, because… Habla de una acción y de un momento. La crítica destructiva ataca a la persona (your attitude is terrible), generaliza con always o never y no propone nada. Las pistas del tono están en las palabras: next time, try to, could abren una salida; never, terrible y nobody la cierran."
+      },
+      "patron": {
+        "texto": "Hecho concreto + siguiente paso + razón:",
+        "formula": [
+          {
+            "texto": "You passed late in the second half,",
+            "nota": "un hecho concreto, no un juicio sobre la persona"
+          },
+          {
+            "texto": "so next time",
+            "nota": "abre la puerta al cambio futuro"
+          },
+          {
+            "texto": "try to pass earlier,",
+            "nota": "el cambio que se propone"
+          },
+          {
+            "texto": "because it will improve our speed.",
+            "nota": "la razón que motiva el cambio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Next time, try pass earlier.",
+          "correcto": "Next time, try to pass earlier.",
+          "explicacion": "Try + to + verbo base significa «intentar hacer»; try pass no existe como estructura."
+        },
+        {
+          "incorrecto": "You explained the rules very clear.",
+          "correcto": "You explained the rules very clearly.",
+          "explicacion": "Para modificar un verbo se usa un adverbio (clearly), no un adjetivo (clear)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos, el entrenador, habla con Tom después del partido.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Tom, I liked your effort today. You explained the rules clearly to the new players.",
+            "traduccion": "Tom, me gustó tu esfuerzo hoy. Explicaste las reglas con claridad a los jugadores nuevos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thanks. Was everything fine?",
+            "traduccion": "Gracias. ¿Todo estuvo bien?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Almost. Next time, try to start the game earlier; that will improve our schedule.",
+            "traduccion": "Casi. La próxima vez, intenta empezar el partido antes; eso mejorará nuestro horario."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. But Leo said that I never listen.",
+            "traduccion": "Vale. Pero Leo dijo que yo nunca escucho."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That was a destructive comment. Ignore it.",
+            "traduccion": "Ese fue un comentario destructivo. Ignóralo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tipo de feedback es «next time, try to start the game earlier»?",
+          "opciones": [
+            {
+              "es": "Crítica constructiva: señala un punto y propone un cambio."
+            },
+            {
+              "es": "Elogio: nombra algo que Tom hizo bien."
+            },
+            {
+              "es": "Crítica destructiva: ataca a Tom como persona."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos propone un cambio concreto (empezar antes) y da una razón; el elogio fue la primera frase y el comentario destructivo el de Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Pista",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "elogio"
+            },
+            {
+              "texto": "acción concreta bien hecha"
+            },
+            {
+              "texto": "You explained the rules clearly."
+            }
+          ],
+          [
+            {
+              "texto": "constructiva"
+            },
+            {
+              "texto": "next time + try to"
+            },
+            {
+              "texto": "Next time, try to pass earlier."
+            }
+          ],
+          [
+            {
+              "texto": "destructiva"
+            },
+            {
+              "texto": "never / always + juicio personal"
+            },
+            {
+              "texto": "You never listen to anybody."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-79": {
+      "explicacion": {
+        "titulo": "Feedback específico con estructuras causativas",
+        "texto": "Un feedback útil tiene tres partes: algo positivo concreto, un punto de mejora concreto y un siguiente paso. Para el paso, las estructuras causativas dicen quién hace qué. Have + persona + verbo base encarga algo (I will have Tom show you). Get + persona + to + verbo lo consigue (I will get him to show you). Make + persona + verbo base provoca un efecto (that made the team feel confident). Let + persona + verbo base permite. Nunca pongas to después de have, make o let."
+      },
+      "patron": {
+        "texto": "Positivo + mejora + siguiente paso causativo:",
+        "formula": [
+          {
+            "texto": "You were calm under pressure,",
+            "nota": "aspecto positivo concreto"
+          },
+          {
+            "texto": "but your timing needs work;",
+            "nota": "punto de mejora concreto"
+          },
+          {
+            "texto": "I will have Tom",
+            "nota": "have + persona: encargas la tarea"
+          },
+          {
+            "texto": "show you the system.",
+            "nota": "verbo base, sin to"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will have Tom to show you the system.",
+          "correcto": "I will have Tom show you the system.",
+          "explicacion": "Después de have + persona el verbo va en forma base, sin to; solo get lleva to."
+        },
+        {
+          "incorrecto": "She made me to practise again.",
+          "correcto": "She made me practise again.",
+          "explicacion": "Make + persona + verbo base no lleva to; el español «me hizo practicar» tienta a añadirlo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara evalúa el trabajo de Leo, un voluntario nuevo, en la mesa de inscripción.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, you were calm with the parents, and that made them feel safe.",
+            "traduccion": "Leo, estuviste tranquilo con los padres y eso hizo que se sintieran seguros."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thanks. Was there anything to fix?",
+            "traduccion": "Gracias. ¿Había algo que corregir?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Your timing with the queue needs work. I will have Mia show you her system.",
+            "traduccion": "Tu ritmo con la cola necesita mejorar. Haré que Mia te enseñe su sistema."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good idea. Can I get the new people to sign in first?",
+            "traduccion": "Buena idea. ¿Puedo conseguir que los nuevos se registren primero?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, try it tomorrow.",
+            "traduccion": "Sí, pruébalo mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué siguiente paso propone Sara para mejorar?",
+          "opciones": [
+            {
+              "es": "Que Mia le enseñe su sistema de la cola."
+            },
+            {
+              "es": "Que Leo hable menos con los padres."
+            },
+            {
+              "es": "Que los nuevos voluntarios lo sustituyan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I will have Mia show you her system». Lo de hacer que los nuevos se registren primero lo propone Leo después."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "make + persona + base"
+            },
+            {
+              "texto": "provocar un efecto"
+            },
+            {
+              "texto": "That made the team feel confident."
+            }
+          ],
+          [
+            {
+              "texto": "have + persona + base"
+            },
+            {
+              "texto": "encargar algo"
+            },
+            {
+              "texto": "I will have Tom show you."
+            }
+          ],
+          [
+            {
+              "texto": "get + persona + to + base"
+            },
+            {
+              "texto": "conseguir que alguien lo haga"
+            },
+            {
+              "texto": "I will get Mia to sign the form."
+            }
+          ],
+          [
+            {
+              "texto": "let + persona + base"
+            },
+            {
+              "texto": "permitir"
+            },
+            {
+              "texto": "Let her try the drill again."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-80": {
+      "explicacion": {
+        "titulo": "Dirigir la jornada: asignar, negociar, evaluar",
+        "texto": "Dirigir una jornada junta todo lo anterior. Asignas con you are in charge of… o could you cover…, fijas expectativas con you are expected to… e it's up to you…, y eliges el tono según el riesgo: firme para seguridad, cortés para favores. Si hay un desacuerdo, concedes primero (I see your point, but…) y propones una solución (How about we swap shifts?). Al evaluar, nombra un hecho concreto y un paso con have o get (I will have Mia show you)."
+      },
+      "patron": {
+        "texto": "Concesión + propuesta justa:",
+        "formula": [
+          {
+            "texto": "I see your point,",
+            "nota": "reconoces la posición del otro"
+          },
+          {
+            "texto": "but it is fair",
+            "nota": "tu razón de justicia"
+          },
+          {
+            "texto": "that everyone takes a turn.",
+            "nota": "oración completa con sujeto y verbo"
+          },
+          {
+            "texto": "How about we swap shifts?",
+            "nota": "propuesta concreta para resolver el desacuerdo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will assign you for the water stall.",
+          "correcto": "I will assign you to the water stall.",
+          "explicacion": "Assign se construye con to (assign someone to a place o a task), no con for."
+        },
+        {
+          "incorrecto": "Is fair that everybody takes a turn.",
+          "correcto": "It is fair that everybody takes a turn.",
+          "explicacion": "En español se omite el sujeto («es justo que…»), pero en inglés hace falta el sujeto it."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana coordina el día de voluntariado del barrio y reparte los puestos entre Tom y Carlos.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, you are in charge of the registration table. Carlos, could you cover the water stall until noon?",
+            "traduccion": "Tom, tú te encargas de la mesa de inscripción. Carlos, ¿podrías cubrir el puesto de agua hasta el mediodía?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I would rather work on the stage. It is not fair that Tom always chooses first.",
+            "traduccion": "Preferiría trabajar en el escenario. No es justo que Tom siempre elija primero."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I see your point, Carlos. How about you and Tom swap shifts after noon?",
+            "traduccion": "Entiendo tu punto, Carlos. ¿Y si tú y Tom intercambian turnos después del mediodía?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That works for me.",
+            "traduccion": "Me parece bien."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué solución propone Ana al desacuerdo?",
+          "opciones": [
+            {
+              "es": "Que Carlos y Tom intercambien turnos después del mediodía."
+            },
+            {
+              "es": "Que Carlos deje el escenario para siempre."
+            },
+            {
+              "es": "Que Tom elija primero todos los puestos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana propone: «How about you and Tom swap shifts after noon?». Es un término medio entre las dos posturas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "asignar"
+            },
+            {
+              "texto": "be in charge of / could you cover…"
+            },
+            {
+              "texto": "Mia, you are in charge of the registration table."
+            }
+          ],
+          [
+            {
+              "texto": "negociar"
+            },
+            {
+              "texto": "I see your point, but… / How about we…"
+            },
+            {
+              "texto": "How about we swap shifts after noon?"
+            }
+          ],
+          [
+            {
+              "texto": "evaluar"
+            },
+            {
+              "texto": "hecho concreto + have/get"
+            },
+            {
+              "texto": "I will have Mia show you her system."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Completar multiparte sin traducción (76-80 práctica): añadido texto en español con traducción; aceptadas ampliadas donde hay variante legítima (supposed, what about, orden alternativo).",
+      "C76: estímulo de evaluación que copiaba una frase de enseñanza sustituido; aceptadas de la reescritura con could you ampliadas (sin please).",
+      "C77: aclarada la nota sobre preposiciones (responsible FOR, in charge OF); estímulo en español de eval 0 que sonaba a obligación corregido; rúbrica acepta contracciones.",
+      "C79: 'fix the queue' sustituido por 'manage the queue'; audio de evaluación que repetía la frase de enseñanza reescrito; rúbrica exige de verdad have/get y rango alineado con la consigna.",
+      "P2 pendiente: C76-C77 usan estructuras B1+/B2 bajo para el nivel N7; la tarea de cierre C80 sí alcanza B2."
+    ]
+  }
+}

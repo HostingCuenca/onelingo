@@ -1,0 +1,805 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-20",
+  "title": {
+    "en": "Weigh the evidence together",
+    "es": "Sopesar las pruebas en grupo"
+  },
+  "objectives": {
+    "es": [
+      "Sopesar pruebas en equipo: proponer dos hipótesis con modales, descartar una con can't have y concluir citando la evidencia."
+    ]
+  },
+  "concepts": [
+    "n8-inference-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-19"
+  ],
+  "usesVocabulary": [
+    "missing",
+    "trophy",
+    "cabinet",
+    "hypothesis",
+    "cleaner",
+    "stranger",
+    "locked",
+    "theory"
+  ],
+  "usesPatterns": [
+    "n8-inference-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "missing",
+      "es": "desaparecido"
+    },
+    {
+      "en": "trophy",
+      "es": "trofeo"
+    },
+    {
+      "en": "cabinet",
+      "es": "armario, vitrina"
+    },
+    {
+      "en": "hypothesis",
+      "es": "hipótesis"
+    },
+    {
+      "en": "cleaner",
+      "es": "persona de la limpieza"
+    },
+    {
+      "en": "stranger",
+      "es": "extraño, desconocido"
+    },
+    {
+      "en": "locked",
+      "es": "cerrado con llave"
+    },
+    {
+      "en": "theory",
+      "es": "teoría"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-20.t01",
+      "en": "The trophy is missing from the cabinet.",
+      "es": "El trofeo ha desaparecido del armario.",
+      "explanationEs": "Planteamiento del caso: un dato, sin culpables todavía.",
+      "segments": [
+        "The trophy is missing",
+        "from the cabinet."
+      ],
+      "audioText": "The trophy is missing from the cabinet.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-5"
+    },
+    {
+      "id": "en.n8.class-20.t02",
+      "en": "One hypothesis is that the cleaner moved it; another is that it might have fallen behind the cabinet.",
+      "es": "Una hipótesis es que la persona de la limpieza lo movió; otra es que puede haberse caído detrás del armario.",
+      "explanationEs": "Dos hipótesis: might have + participio expresa lo posible, no lo seguro.",
+      "segments": [
+        "One hypothesis is that the cleaner moved it; another",
+        "is that it might have fallen behind the cabinet."
+      ],
+      "audioText": "One hypothesis is that the cleaner moved it; another is that it might have fallen behind the cabinet.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-5"
+    },
+    {
+      "id": "en.n8.class-20.t03",
+      "en": "A stranger can't have taken it, because the door was locked all night.",
+      "es": "Un extraño no puede haberlo cogido, porque la puerta estuvo cerrada con llave toda la noche.",
+      "explanationEs": "Can't have + participio descarta: es casi imposible según la evidencia.",
+      "segments": [
+        "A stranger can't have taken it, because",
+        "the door was locked all night."
+      ],
+      "audioText": "A stranger can't have taken it, because the door was locked all night.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-5"
+    },
+    {
+      "id": "en.n8.class-20.t04",
+      "en": "Since the cabinet is not broken, it must have been opened with a key.",
+      "es": "Como el armario no está roto, debe de haberse abierto con una llave.",
+      "explanationEs": "Must have + participio: conclusión casi segura apoyada en un dato.",
+      "segments": [
+        "Since the cabinet is not broken, it",
+        "must have been opened with a key."
+      ],
+      "audioText": "Since the cabinet is not broken, it must have been opened with a key.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-5"
+    },
+    {
+      "id": "en.n8.class-20.t05",
+      "en": "My theory is that the cleaner moved the trophy to polish it, and the evidence supports that.",
+      "es": "Mi teoría es que la persona de la limpieza movió el trofeo para sacarle brillo, y la evidencia lo apoya.",
+      "explanationEs": "Theory + evidence: una conclusión con pruebas, sin afirmar de más.",
+      "segments": [
+        "My theory is that the cleaner moved the trophy",
+        "to polish it, and the evidence supports that."
+      ],
+      "audioText": "My theory is that the cleaner moved the trophy to polish it, and the evidence supports that.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c20.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la hipótesis posible, pero no segura."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It must have been stolen by a stranger."
+          },
+          {
+            "text": "It can't be anywhere."
+          },
+          {
+            "text": "It might have fallen behind the cabinet."
+          }
+        ],
+        "teaches": [
+          "n8-inference-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.pg01.seed-0",
+          "feedback": {
+            "es": "Might have + participio expresa una posibilidad; las otras frases afirman demasiado sin pruebas."
+          },
+          "hint": {
+            "es": "Might indica posible, no seguro."
+          },
+          "text": "El trofeo no está en la vitrina y no hay señales de robo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:735727dabf2d3a404f4d7202b432943204601718c8e46d7d631ab43b65470f48"
+      },
+      {
+        "id": "en.n8.c20.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Un extraño no puede haberlo hecho: la puerta estaba cerrada.»"
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't",
+            "cannot",
+            "couldn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-inference-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.pg02.seed-0",
+          "feedback": {
+            "es": "Can't have + participio descarta algo que, según la evidencia, es imposible."
+          },
+          "hint": {
+            "es": "Descarta con la forma negativa de can."
+          },
+          "text": "A stranger ___ have done it; the door was locked."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e044ba4834b6161321f522b1242253e02c28307cf4488cd6ea4ab1dd2064ab7d"
+      },
+      {
+        "id": "en.n8.c20.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La persona de la limpieza debe de haberlo movido.»"
+        },
+        "answer": {
+          "text": "The cleaner must have moved it",
+          "tokens": [
+            "The",
+            "cleaner",
+            "must",
+            "have",
+            "moved",
+            "it"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-inference-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.pg03.seed-0",
+          "feedback": {
+            "es": "Must have + participio expresa una conclusión casi segura sobre el pasado."
+          },
+          "hint": {
+            "es": "Must have + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8a5cfd63389a2825122a4c8b2876d80fdc1ddfd239dad8d037f423af9bbf5095"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c20.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha a Tom y elige qué hace con las pistas."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He offers two possible explanations."
+          },
+          {
+            "text": "He is sure that the dog ate it."
+          },
+          {
+            "text": "He thinks that nobody came in."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.p01.seed-0",
+          "feedback": {
+            "es": "Con could have y might have ofrece dos explicaciones posibles sin afirmar ninguna."
+          },
+          "audio": "Tom says the window was open, the cake is gone and there are small muddy prints on the table. The dog could have jumped up, or a child might have come in.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1ccebf76fe6637a85d58ccb40aa506f825134ce464fc4434693ad79dcf05eadb"
+      },
+      {
+        "id": "en.n8.c20.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Puede que se haya caído» y «Un extraño no puede haberlo cogido»."
+        },
+        "answer": {
+          "text": "might | can't",
+          "accepted": [
+            "might | can't"
+          ],
+          "parts": [
+            {
+              "text": "might",
+              "accepted": [
+                "might",
+                "could",
+                "may"
+              ]
+            },
+            {
+              "text": "can't",
+              "accepted": [
+                "can't",
+                "cannot",
+                "couldn't"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.p02.seed-0",
+          "feedback": {
+            "es": "Might have expresa lo posible y can't have lo descarta: dos grados distintos de certeza."
+          },
+          "sentences": [
+            "It ___ have fallen behind the cabinet, but I am not sure.",
+            "The door was locked, so a stranger ___ have taken it."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c9ce85272995e342d99810941dfd23147caf8ba82c964244aff7a274e71d5d53"
+      },
+      {
+        "id": "en.n8.c20.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige cómo rechaza Tom la idea de Sara con una prueba."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "That could be true, because the cleaner wasn't here today."
+          },
+          {
+            "text": "That can't be right, because the cleaner wasn't here today."
+          },
+          {
+            "text": "That must be right, because the cleaner wasn't here today."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.p03.seed-0",
+          "feedback": {
+            "es": "Rechazar una idea con prueba pide can't be right + because; las otras opciones contradicen el dato."
+          },
+          "text": "Sara propone que la persona de la limpieza movió el trofeo, pero Tom recuerda que hoy no vino a trabajar."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:76e810e365ae3a6def23de1893bc0bb0c889a05051730a7c8a8acac051289c82"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c20.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién deduce y por qué."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Rex told Mia that he wanted food."
+          },
+          {
+            "text": "Mia implied that Rex was hungry."
+          },
+          {
+            "text": "Mia deduced from his behaviour that Rex wanted food."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5",
+          "n8-inference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.e01.seed-0",
+          "feedback": {
+            "es": "Rex no dice nada, pero su conducta es la pista: Mia es quien infiere."
+          },
+          "audio": "Rex never said that he was hungry. But he sat next to the fridge, so Mia inferred that he wanted food.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6ba7986f8b67440f51d59656b100d567721d29545247ef655194fb5172f19e8c"
+      },
+      {
+        "id": "en.n8.c20.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige qué efecto tiene lo que oyó el vecino sobre la versión del dueño."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The neighbour lends weight to the owner's story."
+          },
+          {
+            "text": "The neighbour casts doubt on the owner's story."
+          },
+          {
+            "text": "The neighbour points to a stranger."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5",
+          "n8-inference-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.e02.seed-0",
+          "feedback": {
+            "es": "Oír su música toda la tarde encaja con que estaba en casa: refuerza su versión."
+          },
+          "text": "El dueño dice que estuvo toda la tarde en casa. Su vecino oyó su música desde las cinco hasta las ocho."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d04e6a55397af61d3d965dd40bb0cfe1fc5f980b7810a284ffc4ebf2bc9c0476"
+      },
+      {
+        "id": "en.n8.c20.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la conclusión más prudente con una sola pista."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The mud proves that the gardener took the trophy."
+          },
+          {
+            "text": "The mud suggests that someone came in from the garden."
+          },
+          {
+            "text": "The mud rules out every other explanation."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5",
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.e03.seed-0",
+          "feedback": {
+            "es": "Con una sola pista solo cabe suggest: prove y rules out afirman demasiado."
+          },
+          "text": "Solo tienes una pista: hay barro en el suelo de la escuela."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc5048a1cb6908f179388ef094fab3802eec7039b11004b1cdaea26830b3969a"
+      },
+      {
+        "id": "en.n8.c20.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el caso: dos hipótesis, un descarte y una conclusión con pruebas."
+        },
+        "answer": {
+          "text": "The trophy is missing from the cabinet, and I have two theories. First, a stranger might have taken it during the night. Second, the cleaner could have moved it. Both ideas are possible at first, but only one fits the evidence. The door was locked all night, so a stranger can't have come in. Also, the cabinet is not broken, which points to someone with a key. The cleaner has a key and came yesterday, so the cleaner must have moved the trophy. I can't be completely sure, so we should ask the cleaner first.",
+          "accepted": [
+            "The trophy is missing from the cabinet, and I have two theories. First, a stranger might have taken it during the night. Second, the cleaner could have moved it. Both ideas are possible at first, but only one fits the evidence. The door was locked all night, so a stranger can't have come in. Also, the cabinet is not broken, which points to someone with a key. The cleaner has a key and came yesterday, so the cleaner must have moved the trophy. I can't be completely sure, so we should ask the cleaner first.",
+            "We have two possible explanations for the missing trophy. A stranger may have taken it, or the cleaner might have moved it. A stranger cannot have taken it, because the door was locked all night and the cabinet is not broken. Since the cleaner has a key and came yesterday, the most likely explanation is that the cleaner moved it. I am not certain, so we should ask tomorrow."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5",
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.e04.seed-0",
+          "feedback": {
+            "es": "El texto debe proponer dos hipótesis, descartar la del extraño por la puerta cerrada y concluir con la llave de la persona de la limpieza."
+          },
+          "text": "Caso: ha desaparecido el trofeo del armario de la escuela. Pistas: (1) el armario no está roto; (2) la puerta del aula estuvo cerrada con llave toda la noche; (3) la persona de la limpieza tiene una llave y vino ayer. Escribe en inglés (70–150 palabras): propón dos hipótesis con might o could (un extraño y la persona de la limpieza), descarta una con can't have y explica por qué, y concluye con evidencia (must have o probably).",
+          "scoring": {
+            "wordRange": [
+              65,
+              170
+            ],
+            "evidenceGroups": [
+              [
+                "might have",
+                "could have",
+                "may have"
+              ],
+              [
+                "can't have",
+                "cannot have",
+                "couldn't have",
+                "could not have"
+              ],
+              [
+                "locked",
+                "not broken",
+                "not been broken",
+                "unbroken",
+                "key"
+              ],
+              [
+                "must have",
+                "probably",
+                "most likely",
+                "likely",
+                "suggest",
+                "points to",
+                "point to",
+                "conclude"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f594de89e3299e12b5668c31fc7818da7ab01a11f9e31e53aa348fc0f40f1b92"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c20.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que describe lo que hizo quien leyó el silencio."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I implied that she was sad from her silence."
+          },
+          {
+            "text": "I suggest that she was sad from my silence."
+          },
+          {
+            "text": "I inferred that she was sad from her silence."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.r01.seed-0",
+          "feedback": {
+            "es": "Quien deduce a partir de una pista es quien infiere; implied y suggest no encajan con ese papel."
+          },
+          "text": "Tu amiga no dijo que estaba triste, pero tú lo dedujiste por su silencio."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:94fabedd43feea75c1c88238abd6301088fcca0ce386fe07e38d43fbd27aedaa"
+      },
+      {
+        "id": "en.n8.c20.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El barro apunta al jardín.»"
+        },
+        "answer": {
+          "text": "points",
+          "accepted": [
+            "points"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.r02.seed-0",
+          "feedback": {
+            "es": "Point to con sujeto singular (the mud) lleva -s: points to."
+          },
+          "text": "The mud ___ to the garden."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c18e87c4f50c7a16ae062ffef39a2db5eba6c133e0baf9c29aa8ce47798f6a5f"
+      },
+      {
+        "id": "en.n8.c20.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Podría ser cierto, pero necesitamos más pruebas.»"
+        },
+        "answer": {
+          "text": "That could be true but we need more evidence",
+          "tokens": [
+            "That",
+            "could",
+            "be",
+            "true",
+            "but",
+            "we",
+            "need",
+            "more",
+            "evidence"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c20.r03.seed-0",
+          "feedback": {
+            "es": "That could be true acepta la idea como posible; but we need more evidence pide pruebas antes de decidir."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:968b1c8a9513bba79545e58845d524e5efedc7cf4c8f06fb5ee2e3aba69a7dd1"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c20.e01": {
+      "reteach": "en.n8.class-20.t01",
+      "review": "en.n8.c20.r01"
+    },
+    "en.n8.c20.e02": {
+      "reteach": "en.n8.class-20.t02",
+      "review": "en.n8.c20.r02"
+    },
+    "en.n8.c20.e03": {
+      "reteach": "en.n8.class-20.t03",
+      "review": "en.n8.c20.r03"
+    },
+    "en.n8.c20.e04": {
+      "reteach": "en.n8.class-20.t04",
+      "review": "en.n8.c20.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n8-inference-1",
+    "n8-inference-2",
+    "n8-inference-3",
+    "n8-inference-4",
+    "n8-inference-5"
+  ]
+}

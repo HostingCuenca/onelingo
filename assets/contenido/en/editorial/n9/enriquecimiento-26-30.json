@@ -1,0 +1,622 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "classes": {
+    "en.n9.class-26": {
+      "explicacion": {
+        "titulo": "Las preguntas detrás de la pregunta",
+        "texto": "Detrás de cada pregunta de entrevista hay una intención. Las de motivación (Why do you want…?) buscan tus razones; las de experiencia (Tell me about a time when…) buscan un hecho real del pasado; las hipotéticas (What would you do if…?) buscan cómo razonas. Por eso se responden distinto: con una razón, con una historia o con una decisión en would. Identifica el tipo por el comienzo de la pregunta antes de contestar."
+      },
+      "patron": {
+        "texto": "Tipo de pregunta y lo que busca:",
+        "formula": [
+          {
+            "texto": "Why do you want the scholarship?",
+            "nota": "motivación: busca tu razón"
+          },
+          {
+            "texto": "Tell me about a time when you led a team.",
+            "nota": "experiencia: busca un hecho pasado"
+          },
+          {
+            "texto": "What would you do if the plan failed?",
+            "nota": "hipotética: busca tu forma de decidir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What would you do if the plan will fail?",
+          "correcto": "What would you do if the plan failed?",
+          "explicacion": "En la pregunta hipotética, después de if se usa el pasado (failed), no will."
+        },
+        {
+          "incorrecto": "Tell me a time when you worked in a team.",
+          "correcto": "Tell me about a time when you worked in a team.",
+          "explicacion": "Falta about: «cuéntame sobre una vez que…» se dice tell me about a time when."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia hace una entrevista para una beca de música.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why do you want this scholarship, Mia?",
+            "traduccion": "¿Por qué quieres esta beca, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I want to study music, and my family cannot pay for the course.",
+            "traduccion": "Quiero estudiar música y mi familia no puede pagar el curso."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Tell me about a time when you worked in a team.",
+            "traduccion": "Cuéntame sobre una vez en que trabajaste en equipo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Last year I organised a school concert with twenty students.",
+            "traduccion": "El año pasado organicé un concierto escolar con veinte estudiantes."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And what would you do if the concert had no money?",
+            "traduccion": "¿Y qué harías si el concierto no tuviera dinero?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cuenta Mia para responder a la pregunta sobre trabajo en equipo?",
+          "opciones": [
+            {
+              "es": "Que organizó un concierto escolar con veinte estudiantes."
+            },
+            {
+              "es": "Que su familia no puede pagar el curso."
+            },
+            {
+              "es": "Que pediría dinero si el concierto no tuviera."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia responde con un hecho pasado: «Last year I organised a school concert with twenty students». Lo de la familia responde a la pregunta de motivación."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Empieza por…",
+          "Tipo",
+          "Se responde con…"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Why do you want…?"
+            },
+            {
+              "texto": "Motivación"
+            },
+            {
+              "texto": "Una razón clara"
+            }
+          ],
+          [
+            {
+              "texto": "Tell me about a time when…"
+            },
+            {
+              "texto": "Experiencia pasada"
+            },
+            {
+              "texto": "Una historia con resultado"
+            }
+          ],
+          [
+            {
+              "texto": "What would you do if…?"
+            },
+            {
+              "texto": "Hipotética"
+            },
+            {
+              "texto": "Una decisión con would"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-27": {
+      "explicacion": {
+        "titulo": "Lo que querían saber",
+        "texto": "Para contar lo que te preguntaron no copies la pregunta: resúmela. Con un tema usa enquire about + nombre (They enquired about my experience). Con una pregunta de sí o no, wanted to know whether/if + sujeto + verbo. Con why, how o what, wanted to know + why/how/what + sujeto + verbo. Con una petición, I was asked to + verbo. Probe significa indagar más. El orden es el de una afirmación (sin did ni inversión) y el tiempo retrocede un paso: do pasa a did."
+      },
+      "patron": {
+        "texto": "Verbo de reporte + contenido:",
+        "formula": [
+          {
+            "texto": "They wanted to know",
+            "nota": "verbo de reporte en pasado"
+          },
+          {
+            "texto": "whether I could work at weekends.",
+            "nota": "whether + sujeto + verbo: sin inversión"
+          },
+          {
+            "texto": "I was asked to describe one project.",
+            "nota": "be asked to + verbo: resume una petición"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "They wanted to know whether did I work at weekends.",
+          "correcto": "They wanted to know whether I worked at weekends.",
+          "explicacion": "En una pregunta indirecta no hay inversión ni did: whether + sujeto + verbo."
+        },
+        {
+          "incorrecto": "They enquired about if I had experience.",
+          "correcto": "They enquired about my experience.",
+          "explicacion": "Enquire about lleva un nombre (my experience). Para una pregunta de sí o no se usa wanted to know whether/if."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos cuenta a Ana cómo fue su entrevista de voluntariado.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "How was your interview, Carlos?",
+            "traduccion": "¿Cómo fue tu entrevista, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Long! They enquired about my volunteer work, and they wanted to know whether I could start in June.",
+            "traduccion": "¡Larga! Preguntaron por mi trabajo voluntario y querían saber si podía empezar en junio."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Was that all?",
+            "traduccion": "¿Eso fue todo?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No. I was asked to describe one project, and then the panel probed my reasons.",
+            "traduccion": "No. Me pidieron que describiera un proyecto y luego el comité indagó en mis razones."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué querían saber sobre junio?",
+          "opciones": [
+            {
+              "es": "Si Carlos podía empezar en junio."
+            },
+            {
+              "es": "Por qué Carlos eligió junio."
+            },
+            {
+              "es": "Cuánto ganaría Carlos en junio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «they wanted to know whether I could start in June». Es una pregunta de sí o no, no de motivo ni de dinero."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta original",
+          "Informe conciso"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Do you work at weekends?"
+            },
+            {
+              "texto": "They wanted to know whether I worked at weekends."
+            }
+          ],
+          [
+            {
+              "texto": "What is your experience?"
+            },
+            {
+              "texto": "They enquired about my experience."
+            }
+          ],
+          [
+            {
+              "texto": "Describe a problem."
+            },
+            {
+              "texto": "I was asked to describe a problem."
+            }
+          ],
+          [
+            {
+              "texto": "Why did you apply?"
+            },
+            {
+              "texto": "They wanted to know why I had applied."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-28": {
+      "explicacion": {
+        "titulo": "¿Era eso lo que preguntaron?",
+        "texto": "Un informe fiel no copia las palabras: conserva el sentido. Compara con el original tres cosas: la intención (¿pregunta, pide o cuestiona?), el contenido (nada añadido ni omitido) y el grado (¿insistieron de verdad o solo preguntaron?). Los fallos típicos son omitir una condición, exagerar (they demanded) y cambiar el tipo de pregunta, por ejemplo de sí o no a why. Fíjate también en el verbo de reporte: asked, enquired about o pressed no significan lo mismo."
+      },
+      "patron": {
+        "texto": "Original → informe fiel o infiel:",
+        "formula": [
+          {
+            "texto": "Original: Can you work at weekends?",
+            "nota": "pregunta de sí o no"
+          },
+          {
+            "texto": "Faithful: They asked whether I could work at weekends.",
+            "nota": "verbo neutro + whether + orden afirmativo"
+          },
+          {
+            "texto": "Not faithful: They demanded that I work at weekends.",
+            "nota": "cambia el grado: exagera"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "They asked me what was my experience.",
+          "correcto": "They asked me what my experience was.",
+          "explicacion": "En estilo indirecto no hay inversión: what + sujeto + verbo (my experience was)."
+        },
+        {
+          "incorrecto": "They asked me if I can start in June.",
+          "correcto": "They asked me if I could start in June.",
+          "explicacion": "Con un verbo de reporte en pasado, el verbo retrocede un paso: can pasa a could."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom cuenta a Ana cómo fue su entrevista; ella comprueba su relato.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "The panel was hard. They challenged my answer about teamwork.",
+            "traduccion": "El comité fue duro. Cuestionaron mi respuesta sobre el trabajo en equipo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Did they? What did they actually say?",
+            "traduccion": "¿Sí? ¿Qué dijeron en realidad?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "They asked me to give one more example.",
+            "traduccion": "Me pidieron que diera un ejemplo más."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is not a challenge, Tom. You exaggerate. They only asked for more detail.",
+            "traduccion": "Eso no es cuestionar, Tom. Exageras. Solo pidieron más detalle."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "You are right. They were friendly.",
+            "traduccion": "Tienes razón. Fueron amables."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pidió realmente el comité?",
+          "opciones": [
+            {
+              "es": "Un ejemplo más."
+            },
+            {
+              "es": "Que Tom cambiara su respuesta."
+            },
+            {
+              "es": "Que Tom explicara por qué trabaja en equipo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom reconoce: «They asked me to give one more example». Cuestionar la respuesta fue una exageración suya."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de informe",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Fiel"
+            },
+            {
+              "texto": "They asked whether I could work at weekends."
+            }
+          ],
+          [
+            {
+              "texto": "Omite una condición"
+            },
+            {
+              "texto": "They asked about weekends."
+            }
+          ],
+          [
+            {
+              "texto": "Exagera"
+            },
+            {
+              "texto": "They demanded that I work at weekends."
+            }
+          ],
+          [
+            {
+              "texto": "Cambia el tipo de pregunta"
+            },
+            {
+              "texto": "They asked why I work at weekends."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-29": {
+      "explicacion": {
+        "titulo": "Responder con evidencias",
+        "texto": "Una respuesta con evidencias tiene partes claras. En la de conducta (Tell me about a time when…): situación y acción en pasado simple (the club lost its hall, I asked…), experiencia general con present perfect (I have worked…) y cierre con resultado y lección (As a result…; I learned…). En la hipotética (What would you do if…?): decisión con would + verbo base, un motivo y, si hace falta, It would depend on… En ambas, un ejemplo concreto pesa más que un adjetivo."
+      },
+      "patron": {
+        "texto": "Situación + acción + resultado:",
+        "formula": [
+          {
+            "texto": "When the club lost its hall,",
+            "nota": "situación en pasado simple"
+          },
+          {
+            "texto": "I took the initiative and asked the library.",
+            "nota": "acción propia en pasado"
+          },
+          {
+            "texto": "As a result, we kept our meetings.",
+            "nota": "resultado: as a result + pasado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am working in a shop for two years.",
+          "correcto": "I have worked in a shop for two years.",
+          "explicacion": "Una experiencia que empezó en el pasado y llega hasta hoy se cuenta con present perfect, no con el presente."
+        },
+        {
+          "incorrecto": "If I will have a problem, I would speak to the leader.",
+          "correcto": "If I had a problem, I would speak to the leader.",
+          "explicacion": "En la hipótesis se usa if + pasado y would + verbo base; después de if no va will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia responde a las preguntas de una entrevista para un programa de voluntariado.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tell me about a time when you took the initiative.",
+            "traduccion": "Cuéntame sobre una vez en que tomaste la iniciativa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Last spring, our school garden had no water. I asked the council for a tap, and I collected forty names.",
+            "traduccion": "La primavera pasada, el huerto del colegio no tenía agua. Pedí un grifo al ayuntamiento y reuní cuarenta nombres."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And what was the outcome?",
+            "traduccion": "¿Y cuál fue el resultado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "As a result, the garden got a tap, and I learned that asking early works.",
+            "traduccion": "Como resultado, el huerto consiguió un grifo y aprendí que pedir pronto funciona."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. What would you do if a volunteer did not come to work?",
+            "traduccion": "Bien. ¿Qué harías si un voluntario no viniera a trabajar?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It would depend, but I would speak to that person first.",
+            "traduccion": "Dependería, pero hablaría primero con esa persona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué resultado obtuvo Mia?",
+          "opciones": [
+            {
+              "es": "El huerto consiguió un grifo."
+            },
+            {
+              "es": "Mia reunió cuarenta nombres."
+            },
+            {
+              "es": "El ayuntamiento cerró el huerto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «the garden got a tap». Reunir nombres fue su acción, no el resultado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Estructura de la respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Conducta"
+            },
+            {
+              "texto": "When… I… As a result… I learned…"
+            }
+          ],
+          [
+            {
+              "texto": "Experiencia general"
+            },
+            {
+              "texto": "I have handled… before. For example…"
+            }
+          ],
+          [
+            {
+              "texto": "Hipotética"
+            },
+            {
+              "texto": "I would… because… It would depend on…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-30": {
+      "explicacion": {
+        "titulo": "La entrevista completa y su informe",
+        "texto": "La entrevista simulada junta todo el bloque. Primero respondes: una razón para las preguntas de motivación, una historia con resultado para las de experiencia y would para las hipotéticas. Después cuentas lo ocurrido con estilo indirecto: They asked why…, They wanted to know whether…, I was asked to…, They enquired about… Por último, una autoevaluación breve: On reflection, I was more confident when… y Next time I aim to… Usa el pasado y retrocede los tiempos del original."
+      },
+      "patron": {
+        "texto": "Informe + autoevaluación:",
+        "formula": [
+          {
+            "texto": "They wanted to know whether I felt nervous,",
+            "nota": "informe: wanted to know + whether + pasado"
+          },
+          {
+            "texto": "and I said that I felt confident.",
+            "nota": "mi respuesta: said that + pasado"
+          },
+          {
+            "texto": "On reflection, next time I aim to add a reason.",
+            "nota": "autoevaluación: on reflection + aim to + verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I said them that I felt nervous.",
+          "correcto": "I told them that I felt nervous.",
+          "explicacion": "Con say no se nombra a la persona: I said that… o I told them that…"
+        },
+        {
+          "incorrecto": "They asked me how did I prepare.",
+          "correcto": "They asked me how I had prepared.",
+          "explicacion": "En el informe no hay inversión ni did: how + sujeto + verbo, con el tiempo retrocedido."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos cuenta a Sara cómo le fue en la entrevista de la beca.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How was the interview, Carlos?",
+            "traduccion": "¿Cómo fue la entrevista, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Overall, good. They wanted to know whether I felt nervous, and I said that I felt confident.",
+            "traduccion": "En general, bien. Querían saber si me sentía nervioso y dije que me sentía seguro."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "What was the hardest question?",
+            "traduccion": "¿Cuál fue la pregunta más difícil?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I was asked to name one weakness. On reflection, my answer was too short.",
+            "traduccion": "Me pidieron que nombrara un punto débil. Pensándolo bien, mi respuesta fue demasiado corta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Next time, add an example.",
+            "traduccion": "La próxima vez, añade un ejemplo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué piensa Carlos de su respuesta sobre el punto débil?",
+          "opciones": [
+            {
+              "es": "Que fue demasiado corta."
+            },
+            {
+              "es": "Que fue la mejor de la entrevista."
+            },
+            {
+              "es": "Que estuvo llena de ejemplos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «my answer was too short». Es Sara quien le sugiere añadir un ejemplo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué cuento",
+          "Estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Un tema"
+            },
+            {
+              "texto": "They enquired about…"
+            }
+          ],
+          [
+            {
+              "texto": "Una pregunta de sí o no"
+            },
+            {
+              "texto": "They wanted to know whether…"
+            }
+          ],
+          [
+            {
+              "texto": "Una petición"
+            },
+            {
+              "texto": "I was asked to…"
+            }
+          ],
+          [
+            {
+              "texto": "Lo que respondí"
+            },
+            {
+              "texto": "I said that…"
+            }
+          ],
+          [
+            {
+              "texto": "Mi valoración"
+            },
+            {
+              "texto": "On reflection… / Next time I aim to…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,784 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 10,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n10.class-28",
+  "title": {
+    "en": "Read a diplomatic statement",
+    "es": "Leer un comunicado diplomático"
+  },
+  "objectives": {
+    "es": [
+      "Leer un comunicado entre dos asociaciones y traducir sus frases diplomáticas a lenguaje directo, repasando las preguntas reportadas."
+    ]
+  },
+  "concepts": [
+    "n10-diplomacy-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n10.class-27"
+  ],
+  "usesVocabulary": [
+    "statement",
+    "frank",
+    "concern",
+    "regret",
+    "committed",
+    "association",
+    "reconsider"
+  ],
+  "usesPatterns": [
+    "n10-diplomacy-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "statement",
+      "es": "comunicado, declaración"
+    },
+    {
+      "en": "frank",
+      "es": "franco, sin rodeos"
+    },
+    {
+      "en": "concern",
+      "es": "preocupación"
+    },
+    {
+      "en": "regret",
+      "es": "lamentar"
+    },
+    {
+      "en": "committed",
+      "es": "comprometido"
+    },
+    {
+      "en": "association",
+      "es": "asociación"
+    },
+    {
+      "en": "reconsider",
+      "es": "reconsiderar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n10.class-28.t01",
+      "en": "We note with concern that the garden has not been cleaned.",
+      "es": "Observamos con preocupación que el jardín no se ha limpiado.",
+      "explanationEs": "We note with concern no es neutral: significa «estamos molestos y queremos que se arregle».",
+      "segments": [
+        "We note with concern that the",
+        "garden has not been cleaned."
+      ],
+      "audioText": "We note with concern that the garden has not been cleaned.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-diplomacy-3"
+    },
+    {
+      "id": "en.n10.class-28.t02",
+      "en": "Our association held frank discussions about the rent.",
+      "es": "Nuestra asociación mantuvo conversaciones francas sobre el alquiler.",
+      "explanationEs": "Frank discussions suele esconder un desacuerdo fuerte que se dijo con claridad.",
+      "segments": [
+        "Our association held frank",
+        "discussions about the rent."
+      ],
+      "audioText": "Our association held frank discussions about the rent.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-diplomacy-3"
+    },
+    {
+      "id": "en.n10.class-28.t03",
+      "en": "We regret that the meeting ended early.",
+      "es": "Lamentamos que la reunión terminara pronto.",
+      "explanationEs": "We regret expresa pesar y, sin decirlo, sugiere que alguien tuvo la responsabilidad.",
+      "segments": [
+        "We regret that the",
+        "meeting ended early."
+      ],
+      "audioText": "We regret that the meeting ended early.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-diplomacy-3"
+    },
+    {
+      "id": "en.n10.class-28.t04",
+      "en": "We remain committed to finding a solution.",
+      "es": "Seguimos comprometidos con encontrar una solución.",
+      "explanationEs": "Remain committed to dice que quieren seguir hablando, pero aún no hay acuerdo.",
+      "segments": [
+        "We remain committed to",
+        "finding a solution."
+      ],
+      "audioText": "We remain committed to finding a solution.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-diplomacy-3"
+    },
+    {
+      "id": "en.n10.class-28.t05",
+      "en": "The committee asked whether the association would reconsider its decision.",
+      "es": "El comité preguntó si la asociación reconsideraría su decisión.",
+      "explanationEs": "Pregunta reportada: whether + sujeto + verbo, sin invertir el orden y con would por el paso al pasado.",
+      "segments": [
+        "The committee asked whether the",
+        "association would reconsider its decision."
+      ],
+      "audioText": "The committee asked whether the association would reconsider its decision.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-diplomacy-3"
+    },
+    {
+      "id": "en.n10.class-28.t06",
+      "en": "This statement does not mean that the talks have ended.",
+      "es": "Este comunicado no significa que las conversaciones hayan terminado.",
+      "explanationEs": "El comunicado es un texto oficial; lo importante es leer qué dice entre líneas.",
+      "segments": [
+        "This statement does not mean",
+        "that the talks have ended."
+      ],
+      "audioText": "This statement does not mean that the talks have ended.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-diplomacy-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n10.c28.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué quiere decir realmente esta frase del comunicado?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "We are pleased that the garden is dirty."
+          },
+          {
+            "text": "We are unhappy and want the garden cleaned."
+          },
+          {
+            "text": "We have no opinion about the garden."
+          }
+        ],
+        "teaches": [
+          "n10-diplomacy-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.pg01.seed-0",
+          "feedback": {
+            "es": "Note with concern señala un problema y pide un cambio; no es una observación neutral."
+          },
+          "hint": {
+            "es": "Una frase con concern no es neutral: indica un problema."
+          },
+          "text": "We note with concern that the garden is dirty."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a10b7b518c5b6fe9e9f5bd8070e04688653a1201182cff1c6910a12d7c7c9074"
+      },
+      {
+        "id": "en.n10.c28.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Lamentamos que la reunión terminara pronto.»"
+        },
+        "answer": {
+          "text": "regret",
+          "accepted": [
+            "regret"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-diplomacy-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.pg02.seed-0",
+          "feedback": {
+            "es": "We regret that… es la fórmula formal para expresar pesar por algo ocurrido."
+          },
+          "hint": {
+            "es": "Es el verbo que expresa pesar y empieza por r."
+          },
+          "text": "We ___ that the meeting ended early."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ea4377c0ed53a365ba13112ca3ef0dde9ac05f455b3c95373b57a982e1d13a5d"
+      },
+      {
+        "id": "en.n10.c28.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El comité preguntó si la asociación aceptaría el plan.»"
+        },
+        "answer": {
+          "text": "The committee asked whether the association would accept the plan",
+          "tokens": [
+            "The",
+            "committee",
+            "asked",
+            "whether",
+            "the",
+            "association",
+            "would",
+            "accept",
+            "the",
+            "plan"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-diplomacy-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.pg03.seed-0",
+          "feedback": {
+            "es": "Después de whether va el sujeto y luego el verbo: no se invierte el orden."
+          },
+          "hint": {
+            "es": "Tras whether el orden es sujeto + verbo, como en una afirmación."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:314592354cc07750292dc413f727c0e329f3f39936d4e0ec47cf019ded8c5061"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n10.c28.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase del comunicado con su significado directo."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "We note with concern…",
+              {
+                "es": "Estamos preocupados y queremos que cambie"
+              }
+            ],
+            [
+              "frank discussions",
+              {
+                "es": "Discusiones duras, con desacuerdo"
+              }
+            ],
+            [
+              "We regret that…",
+              {
+                "es": "Lamentamos que haya pasado"
+              }
+            ],
+            [
+              "We remain committed to…",
+              {
+                "es": "Seguimos queriendo resolverlo, sin acuerdo aún"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.p01.seed-0",
+          "feedback": {
+            "es": "Cada fórmula diplomática esconde un mensaje directo: preocupación, desacuerdo, pesar o voluntad de seguir."
+          },
+          "pairs": [
+            [
+              "We note with concern…",
+              {
+                "es": "Estamos preocupados y queremos que cambie"
+              }
+            ],
+            [
+              "frank discussions",
+              {
+                "es": "Discusiones duras, con desacuerdo"
+              }
+            ],
+            [
+              "We regret that…",
+              {
+                "es": "Lamentamos que haya pasado"
+              }
+            ],
+            [
+              "We remain committed to…",
+              {
+                "es": "Seguimos queriendo resolverlo, sin acuerdo aún"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:235ad0cc37572a5f8a0f9c340ac51c60b4ff2a5b2b6f76501095756922bb1925"
+      },
+      {
+        "id": "en.n10.c28.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué indica el comunicado."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Everyone agreed and the problem is solved."
+          },
+          {
+            "text": "The association has stopped the talks."
+          },
+          {
+            "text": "There was a disagreement, but they still want a solution."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.p02.seed-0",
+          "feedback": {
+            "es": "Frank indica un desacuerdo y remains committed, que siguen queriendo resolverlo."
+          },
+          "audio": "The association has issued a short statement. It says that the discussions were frank, and that it remains committed to finding a solution.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1ee63d774f001cc2738a9ca620d3de720a73f3ad3298789e46ea12ee3040d5f8"
+      },
+      {
+        "id": "en.n10.c28.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase reporta bien la pregunta «Will you attend the meeting?»?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "They asked whether we would attend the meeting."
+          },
+          {
+            "text": "They asked whether would we attend the meeting."
+          },
+          {
+            "text": "They asked will we attend the meeting."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.p03.seed-0",
+          "feedback": {
+            "es": "La pregunta reportada pasa will a would y mantiene el orden afirmativo tras whether."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a46273ac2bce28a095a5eccea5c777738e17d9f263c6120380abb6e1d5f69a49"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n10.c28.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Según el comunicado, ¿cuál es la situación real?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The two sides signed an agreement."
+          },
+          {
+            "text": "The two sides disagree and have not solved it yet."
+          },
+          {
+            "text": "The club has left the talks."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.e01.seed-0",
+          "feedback": {
+            "es": "Frank discussions, sin acuerdo y con nuevas conversaciones, indican un desacuerdo aún sin resolver."
+          },
+          "text": "Statement. The club held frank discussions with the association. No agreement was reached. The talks will continue next week."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c8aec2bc091597a2f8efba7130e448b44c7f320c0917e701ef00a4bd21c43e8c"
+      },
+      {
+        "id": "en.n10.c28.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué siente la asociación sobre el alquiler."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It is happy with the new rent."
+          },
+          {
+            "text": "It does not care about the rent."
+          },
+          {
+            "text": "It is worried that the rent has risen."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.e02.seed-0",
+          "feedback": {
+            "es": "We note with concern expresa preocupación: la subida del alquiler es un problema."
+          },
+          "audio": "We note with concern that the rent has risen. The two associations held frank discussions, and we hope to find a fair solution.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8c41355faf390f40fc8f258ad8252ee3b1e0dabe4d4ad9e6f7fef021a0093cb3"
+      },
+      {
+        "id": "en.n10.c28.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Seguimos comprometidos con encontrar una solución.»"
+        },
+        "answer": {
+          "text": "committed",
+          "accepted": [
+            "committed",
+            "dedicated"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.e03.seed-0",
+          "feedback": {
+            "es": "Remain committed to + -ing es la fórmula para decir que se sigue queriendo resolver."
+          },
+          "text": "We remain ___ to finding a solution."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f852a8d3cae265b633bbe1d02b9c868b90311057857e500a415affa78ea0a755"
+      },
+      {
+        "id": "en.n10.c28.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reporta la pregunta del vecino con whether o if."
+        },
+        "answer": {
+          "text": "He asked whether the club had cancelled the meeting.",
+          "accepted": [
+            "He asked whether the club had cancelled the meeting.",
+            "He asked if the club had cancelled the meeting.",
+            "The neighbour asked whether the club had cancelled the meeting."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.e04.seed-0",
+          "feedback": {
+            "es": "La pregunta reportada mantiene el orden afirmativo y retrocede el tiempo: did cancel pasa a had cancelled."
+          },
+          "text": "The neighbour asked: «Did the club cancel the meeting?»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9d1b4f760b085296bdd6c5abb692c69b194d8db0c6c35bcf47bd3c802ebf3950"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n10.c28.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué significa «frank discussions» en lenguaje directo?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The groups argued openly."
+          },
+          {
+            "text": "The groups agreed quickly."
+          },
+          {
+            "text": "The groups did not meet."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.r01.seed-0",
+          "feedback": {
+            "es": "Frank discussions describe una conversación sin rodeos que probablemente fue tensa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a0520cc4014e46cbdbd53365e7087294bbbb8aba5968434f35a9685fbda4323c"
+      },
+      {
+        "id": "en.n10.c28.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Reconsiderarán su decisión?»"
+        },
+        "answer": {
+          "text": "reconsider",
+          "accepted": [
+            "reconsider"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.r02.seed-0",
+          "feedback": {
+            "es": "Reconsider significa volver a pensar una decisión ya tomada."
+          },
+          "text": "Will they ___ their decision?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bf510208df84f6ceeb64b88ec12349b468a88e38080a360293f38fefba2c2dc5"
+      },
+      {
+        "id": "en.n10.c28.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Preguntó si la asociación había recibido la carta.»"
+        },
+        "answer": {
+          "text": "He asked whether the association had received the letter",
+          "tokens": [
+            "He",
+            "asked",
+            "whether",
+            "the",
+            "association",
+            "had",
+            "received",
+            "the",
+            "letter"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-diplomacy-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c28.r03.seed-0",
+          "feedback": {
+            "es": "La pregunta reportada mantiene el orden afirmativo y pone el verbo en pasado perfecto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0f4697c278819fe654b6e06aebda7baa4a5e7eb479e90f4679541523302a665f"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n10.c28.e01": {
+      "reteach": "en.n10.class-28.t01",
+      "review": "en.n10.c28.r01"
+    },
+    "en.n10.c28.e02": {
+      "reteach": "en.n10.class-28.t02",
+      "review": "en.n10.c28.r02"
+    },
+    "en.n10.c28.e03": {
+      "reteach": "en.n10.class-28.t03",
+      "review": "en.n10.c28.r03"
+    },
+    "en.n10.c28.e04": {
+      "reteach": "en.n10.class-28.t04",
+      "review": "en.n10.c28.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

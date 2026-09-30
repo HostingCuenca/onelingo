@@ -1,0 +1,627 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "classes": {
+    "en.n10.class-16": {
+      "explicacion": {
+        "titulo": "Cuando «quizá» significa «no»",
+        "texto": "En muchos contextos del inglés, sobre todo el británico y el profesional, se evita el «no» directo. Se usan frases amables que funcionan como rechazo o desacuerdo: «That might be difficult», «I will think about it», «We must have lunch sometime», «With respect…». Las pistas: modales de duda (might, could), minimizadores (a bit, slightly) y la ausencia de fecha o alternativa. No es falsedad, es cortesía; en español un «no puedo» directo suele ser más aceptable. Es una tendencia: el contexto manda."
+      },
+      "patron": {
+        "texto": "Suavizador + frase vaga + sin compromiso = rechazo cortés:",
+        "formula": [
+          {
+            "texto": "That might be",
+            "nota": "modal de duda: might en lugar de «no puedo»"
+          },
+          {
+            "texto": "a bit difficult",
+            "nota": "minimizador: «un poco difícil»"
+          },
+          {
+            "texto": "at the moment.",
+            "nota": "sin fecha ni alternativa: no hay compromiso"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am not agree with you, with respect.",
+          "correcto": "With respect, I do not agree with you.",
+          "explicacion": "En inglés se dice I do not agree (verbo agree con do), no «I am not agree»; y With respect suele ir al principio."
+        },
+        {
+          "incorrecto": "I will think it and tell you.",
+          "correcto": "I will think about it and tell you.",
+          "explicacion": "Think necesita about: think about it significa «pensarlo»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Leo que Tom no respondió como ella esperaba.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom said “That might be difficult” when I asked him to help on Saturday.",
+            "traduccion": "Tom dijo «Eso podría ser difícil» cuando le pedí ayuda el sábado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "In English that is usually a polite no. Did he offer another day?",
+            "traduccion": "En inglés eso suele ser un no cortés. ¿Ofreció otro día?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No. He only said he was busy.",
+            "traduccion": "No. Solo dijo que estaba ocupado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then it is a no. Say thanks and ask somebody else.",
+            "traduccion": "Entonces es un no. Da las gracias y pídeselo a otra persona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concluye Leo sobre «That might be difficult»?",
+          "opciones": [
+            {
+              "es": "Que Tom probablemente rechaza la petición."
+            },
+            {
+              "es": "Que Tom ayudará si se lo piden otra vez."
+            },
+            {
+              "es": "Que Tom necesita más tiempo para decidir."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo explica que en inglés suele ser un no cortés, y Tom no ofreció otro día: es un rechazo indirecto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dicen",
+          "Suele significar"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "That might be difficult."
+            },
+            {
+              "texto": "No puedo (o no quiero)."
+            }
+          ],
+          [
+            {
+              "texto": "I will think about it."
+            },
+            {
+              "texto": "Probablemente no."
+            }
+          ],
+          [
+            {
+              "texto": "We must have lunch sometime."
+            },
+            {
+              "texto": "Adiós amable, sin plan."
+            }
+          ],
+          [
+            {
+              "texto": "With respect, I see it differently."
+            },
+            {
+              "texto": "No estoy de acuerdo."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-17": {
+      "explicacion": {
+        "titulo": "Generalizar con cuidado",
+        "texto": "Las afirmaciones absolutas («All people here are rude») casi nunca son ciertas y pueden ofender. Para generalizar con cuidado el inglés ofrece: tend to + verbo base («People tend to be punctual»); marcadores de «en general» al inicio (by and large, as a rule, on the whole); it is not unusual for + sujeto + to + verbo; y cuantificadores como many, most o some en lugar de all. Diferencia con el español: «soler» no tiene verbo equivalente; se usa tend to o usually, y tend to va siempre seguido de to + verbo base."
+      },
+      "patron": {
+        "texto": "Marcador + grupo + tend to + verbo base:",
+        "formula": [
+          {
+            "texto": "By and large,",
+            "nota": "marcador: «en general»"
+          },
+          {
+            "texto": "people here",
+            "nota": "sujeto: un grupo, no «todos»"
+          },
+          {
+            "texto": "tend to",
+            "nota": "tendencia: «suelen»; con sujeto plural, sin -s"
+          },
+          {
+            "texto": "be punctual.",
+            "nota": "verbo base detrás de tend to"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "People here tends to be punctual.",
+          "correcto": "People here tend to be punctual.",
+          "explicacion": "People es plural: tend va sin -s."
+        },
+        {
+          "incorrecto": "People here use to arrive late.",
+          "correcto": "People here tend to arrive late.",
+          "explicacion": "«Soler» no se dice use to; use to se refiere a hábitos del pasado. Para tendencias actuales, tend to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo vuelve de un viaje y habla de la gente de un pueblo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "In that town, all the people are rude.",
+            "traduccion": "En ese pueblo, toda la gente es maleducada."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "All of them? That is an absolute claim.",
+            "traduccion": "¿Toda? Es una afirmación absoluta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Well, most of the people I met were reserved.",
+            "traduccion": "Bueno, la mayoría de las personas que conocí eran reservadas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Better. Say: people there tend to be reserved at first.",
+            "traduccion": "Mejor. Di: allí la gente suele ser reservada al principio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué hace Ana con la frase de Leo?",
+          "opciones": [
+            {
+              "es": "Le pide una frase más matizada que «all»."
+            },
+            {
+              "es": "Le pide que confirme que todos son maleducados."
+            },
+            {
+              "es": "Le dice que «reserved» es una palabra prohibida."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana señala que «all the people» es absoluto y propone una versión con tend to, más justa y matizada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Absoluto",
+          "Matizado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "All people here are punctual."
+            },
+            {
+              "texto": "People here tend to be punctual."
+            }
+          ],
+          [
+            {
+              "texto": "Shops are always closed on Sundays."
+            },
+            {
+              "texto": "As a rule, shops are closed on Sundays."
+            }
+          ],
+          [
+            {
+              "texto": "Everybody eats late."
+            },
+            {
+              "texto": "It is not unusual for people to eat late."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-18": {
+      "explicacion": {
+        "titulo": "Malentendidos: busca el supuesto oculto",
+        "texto": "Un malentendido cultural casi nunca es mala educación: cada persona parte de un supuesto (assumption) distinto sobre la hora de cenar, los zapatos, el silencio o el sentido de «We will see». Para descifrarlo: 1) ¿qué pasó?, 2) ¿qué esperaba cada uno?, 3) ¿cuál es la mejor reacción? Suele ser preguntar con tacto y explicar tu costumbre, sin acusar. Frases útiles: «I assumed that…», «In my country it is usual to…», «I did not realise that…»."
+      },
+      "patron": {
+        "texto": "I assumed that + lo que creía, but + lo que ocurre:",
+        "formula": [
+          {
+            "texto": "I assumed that",
+            "nota": "supuesto: lo que yo creía"
+          },
+          {
+            "texto": "dinner was at eight,",
+            "nota": "el supuesto concreto"
+          },
+          {
+            "texto": "but they usually eat at six.",
+            "nota": "realidad: lo que hace la otra familia"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am embarrassing because I arrived late.",
+          "correcto": "I am embarrassed because I arrived late.",
+          "explicacion": "Con -ed se describe cómo se siente la persona (embarrassed); -ing describe lo que causa la situación."
+        },
+        {
+          "incorrecto": "In my country is usual to eat late.",
+          "correcto": "In my country it is usual to eat late.",
+          "explicacion": "En inglés el sujeto it es obligatorio: it is usual to…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le explica a Carlos por qué la estudiante de intercambio se sintió incómoda en la cena.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Why did Marta look embarrassed at dinner?",
+            "traduccion": "¿Por qué Marta parecía avergonzada en la cena?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She assumed that we eat late, so she arrived at eight. We had finished at seven.",
+            "traduccion": "Supuso que cenamos tarde, así que llegó a las ocho. Habíamos terminado a las siete."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So it was a misunderstanding, not bad manners.",
+            "traduccion": "Entonces fue un malentendido, no mala educación."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. Next time I will tell her our custom and ask about hers.",
+            "traduccion": "Sí. La próxima vez le contaré nuestra costumbre y le preguntaré por la suya."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué se sintió incómoda Marta?",
+          "opciones": [
+            {
+              "es": "Supuso que se cenaba tarde y llegó cuando ya habían terminado."
+            },
+            {
+              "es": "Llegó demasiado pronto y nadie la saludó."
+            },
+            {
+              "es": "No le gustó la comida y lo dijo en voz alta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que Marta supuso que cenaban tarde y llegó a las ocho, cuando ya habían terminado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Qué buscar",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "¿Qué pasó?"
+            },
+            {
+              "texto": "El hecho"
+            },
+            {
+              "texto": "Tom kept his shoes on."
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué esperaba cada uno?"
+            },
+            {
+              "texto": "El supuesto"
+            },
+            {
+              "texto": "He assumed it was fine."
+            }
+          ],
+          [
+            {
+              "texto": "¿Cuál es la mejor reacción?"
+            },
+            {
+              "texto": "Preguntar con tacto"
+            },
+            {
+              "texto": "Is it the custom to take them off?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-19": {
+      "explicacion": {
+        "titulo": "Explicar una costumbre sin juzgar",
+        "texto": "Para explicar una costumbre a alguien de fuera: 1) presenta qué es y cuándo ocurre; 2) generaliza con cuidado (tend to, by and large: no todos, no siempre); 3) da un ejemplo concreto (for example); 4) compara sin juzgar con whereas, in some countries… o neither way is better. Evita «we are right / you are strange». Si algo puede sorprender, avísalo: «It may seem unusual at first». En español a veces decimos «eso es raro»; en inglés suena mejor different."
+      },
+      "patron": {
+        "texto": "Costumbre + generalización + ejemplo + comparación:",
+        "formula": [
+          {
+            "texto": "Sunday lunch is a custom,",
+            "nota": "presenta la costumbre"
+          },
+          {
+            "texto": "and relatives tend to arrive at noon.",
+            "nota": "generalización matizada"
+          },
+          {
+            "texto": "For example, we all share one dish,",
+            "nota": "ejemplo concreto"
+          },
+          {
+            "texto": "whereas in some countries people eat separately.",
+            "nota": "comparación sin juzgar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We have this custom since many years.",
+          "correcto": "We have had this custom for many years.",
+          "explicacion": "Con una duración se usa for y el present perfect: have had… for many years; since se reserva para un punto de partida."
+        },
+        {
+          "incorrecto": "The visitors must to take off their shoes.",
+          "correcto": "Visitors have to take off their shoes.",
+          "explicacion": "Must no lleva to; la forma con to es have to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana explica a Tom, que viene de otro país, cómo es el almuerzo del domingo en su casa.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Is it true that everyone shares the same dish at your Sunday lunch?",
+            "traduccion": "¿Es verdad que todos comparten el mismo plato en vuestro almuerzo del domingo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "By and large, yes. We tend to put one big dish in the middle.",
+            "traduccion": "En general, sí. Solemos poner un plato grande en el centro."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "In my country we each have our own plate.",
+            "traduccion": "En mi país cada uno tiene su propio plato."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Neither way is better. Whereas you eat separately, we like to share.",
+            "traduccion": "Ninguna forma es mejor. Mientras que vosotros coméis por separado, a nosotros nos gusta compartir."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo compara Ana las dos costumbres?",
+          "opciones": [
+            {
+              "es": "Sin decir que una sea mejor: señala la diferencia."
+            },
+            {
+              "es": "Dice que su costumbre es mejor que la de Tom."
+            },
+            {
+              "es": "Dice que la costumbre de Tom es extraña."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Neither way is better» y usa whereas para contrastar: describe la diferencia sin juzgar."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué hacer",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presentar"
+            },
+            {
+              "texto": "Decir qué es"
+            },
+            {
+              "texto": "Sunday lunch is a custom."
+            }
+          ],
+          [
+            {
+              "texto": "Generalizar"
+            },
+            {
+              "texto": "tend to / by and large"
+            },
+            {
+              "texto": "We tend to eat late."
+            }
+          ],
+          [
+            {
+              "texto": "Ejemplo"
+            },
+            {
+              "texto": "for example"
+            },
+            {
+              "texto": "For example, we share one dish."
+            }
+          ],
+          [
+            {
+              "texto": "Comparar"
+            },
+            {
+              "texto": "whereas / in some countries"
+            },
+            {
+              "texto": "…whereas in mine we share."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-20": {
+      "explicacion": {
+        "titulo": "Recibir a un invitado sin choques",
+        "texto": "Recibir a un invitado extranjero combina tres habilidades. Primero, da la bienvenida y explica tus costumbres con matices (We tend to…, By and large…). Segundo, si hay un malentendido, aclara sin culpar: Let me clarify…, We did not mean to…, I apologise for… Tercero, ante una pregunta incómoda, reconócela con calidez (Good question!), responde con honestidad amable y evita «siempre» y «nunca». El objetivo no es tener razón, sino que el invitado se sienta a gusto (feel at home)."
+      },
+      "patron": {
+        "texto": "Bienvenida + costumbre matizada + aclaración amable:",
+        "formula": [
+          {
+            "texto": "Please feel at home.",
+            "nota": "bienvenida cálida"
+          },
+          {
+            "texto": "We tend to take off our shoes,",
+            "nota": "costumbre con matiz"
+          },
+          {
+            "texto": "but let me clarify:",
+            "nota": "aclaración: abre el malentendido"
+          },
+          {
+            "texto": "we did not mean to be rude.",
+            "nota": "intención: sin culpar a nadie"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I apologise you for the confusion.",
+          "correcto": "I apologise for the confusion.",
+          "explicacion": "Apologise va seguido de for + motivo; si quieres nombrar a la persona, se añade to: I apologise to you for…"
+        },
+        {
+          "incorrecto": "Please, you feel like in your house.",
+          "correcto": "Please feel at home.",
+          "explicacion": "«Sentirse como en casa» se dice feel at home; no se traduce palabra por palabra."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos, un invitado extranjero, y Sara, su anfitriona, hablan durante la cena.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Why is nobody eating? The food is on the table.",
+            "traduccion": "¿Por qué no come nadie? La comida está en la mesa."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Let me clarify: in my family we wait until everybody sits down. I should have told you.",
+            "traduccion": "Déjame aclarar: en mi familia esperamos a que todos se sienten. Debería habértelo dicho."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No problem. Can I ask something? Do families here never talk at dinner?",
+            "traduccion": "Sin problema. ¿Puedo preguntar algo? ¿Las familias de aquí nunca hablan en la cena?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good question! By and large, we talk a lot, but some families tend to be quiet.",
+            "traduccion": "¡Buena pregunta! En general hablamos mucho, pero algunas familias suelen ser calladas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo responde Sara a la pregunta de Carlos?",
+          "opciones": [
+            {
+              "es": "Con amabilidad y matices, sin decir «siempre» ni «nunca»."
+            },
+            {
+              "es": "Diciendo que todas las familias hablan siempre."
+            },
+            {
+              "es": "Negándose a contestar porque la pregunta es incómoda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara reconoce la pregunta con «Good question!» y responde con by and large y tend to, sin absolutos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Qué decir",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Bienvenida"
+            },
+            {
+              "texto": "feel at home"
+            },
+            {
+              "texto": "Please feel at home."
+            }
+          ],
+          [
+            {
+              "texto": "Costumbre"
+            },
+            {
+              "texto": "tend to…"
+            },
+            {
+              "texto": "We tend to eat at six."
+            }
+          ],
+          [
+            {
+              "texto": "Malentendido"
+            },
+            {
+              "texto": "Let me clarify…"
+            },
+            {
+              "texto": "Let me clarify: we did not mean to be rude."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta incómoda"
+            },
+            {
+              "texto": "Good question…"
+            },
+            {
+              "texto": "Good question! Let me explain."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

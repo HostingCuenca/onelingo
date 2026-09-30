@@ -1,0 +1,620 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n8.class-36": {
+      "explicacion": {
+        "titulo": "Metáforas que usas sin notarlo",
+        "texto": "Una metáfora dice que algo es otra cosa para transmitir una idea: no habla de temperatura ni de peso reales. En el inglés cotidiano las usamos sin darnos cuenta: feel down (la tristeza es «hacia abajo»), a warm welcome (el afecto es calor), time is running out (el tiempo se vacía como un depósito), a bright idea (la inteligencia es luz). Para entenderlas, busca la palabra que no puede ser literal y pregúntate qué sentimiento o idea transmite. Muchas se parecen al español, pero no todas: no traduzcas palabra por palabra."
+      },
+      "patron": {
+        "texto": "Imagen física + idea abstracta:",
+        "formula": [
+          {
+            "texto": "a bright",
+            "nota": "imagen de luz"
+          },
+          {
+            "texto": "idea",
+            "nota": "idea abstracta"
+          },
+          {
+            "texto": "→ a good idea",
+            "nota": "significado real, sin imagen"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The time is finishing.",
+          "correcto": "Time is running out.",
+          "explicacion": "«Se acaba el tiempo» no se traduce con finish: la metáfora inglesa es time is running out."
+        },
+        {
+          "incorrecto": "They gave us a hot welcome.",
+          "correcto": "They gave us a warm welcome.",
+          "explicacion": "La metáfora fija usa warm (afecto agradable). Hot welcome suena exagerado y puede entenderse como una recepción hostil."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia ve a Leo preocupado en la oficina el lunes.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "You look down, Leo. What happened?",
+            "traduccion": "Te veo decaído, Leo. ¿Qué pasa?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Time is running out. I have a flood of emails and the report is due today.",
+            "traduccion": "Se me acaba el tiempo. Tengo una avalancha de correos y el informe vence hoy."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Let me help. I have a bright idea: you write the summary and I check the numbers.",
+            "traduccion": "Déjame ayudarte. Tengo una idea brillante: tú escribes el resumen y yo reviso las cifras."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thanks, Mia. That would be a great help.",
+            "traduccion": "Gracias, Mia. Me vendría genial."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué está decaído Leo?",
+          "opciones": [
+            {
+              "es": "Tiene muchos correos y poco tiempo para entregar el informe."
+            },
+            {
+              "es": "Ha perdido su trabajo esta mañana."
+            },
+            {
+              "es": "Tiene frío en la oficina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Time is running out» y «a flood of emails»: le falta tiempo y tiene muchísimo trabajo pendiente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Significado real"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "feel down"
+            },
+            {
+              "texto": "sentirse triste"
+            }
+          ],
+          [
+            {
+              "texto": "a warm welcome"
+            },
+            {
+              "texto": "una bienvenida cariñosa"
+            }
+          ],
+          [
+            {
+              "texto": "time is running out"
+            },
+            {
+              "texto": "queda poco tiempo"
+            }
+          ],
+          [
+            {
+              "texto": "a flood of emails"
+            },
+            {
+              "texto": "muchísimos correos"
+            }
+          ],
+          [
+            {
+              "texto": "a heavy heart"
+            },
+            {
+              "texto": "tristeza"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-37": {
+      "explicacion": {
+        "titulo": "Símil, metáfora y personificación",
+        "texto": "Las tres figuras crean imágenes, pero de forma distinta. El símil usa un conector: as + adjetivo + as (as busy as a bee) o like + nombre (like an angry lion). La metáfora lo quita y afirma que una cosa es otra: The exam is a mountain. La personificación da acciones humanas a cosas: the wind whispers, the storm is angry. Regla práctica: si ves as…as o like, es símil; si dice «X is a Y», es metáfora; si algo no humano hace algo humano, es personificación."
+      },
+      "patron": {
+        "texto": "Tres formas de imagen:",
+        "formula": [
+          {
+            "texto": "as busy as a bee",
+            "nota": "as + adjetivo + as → símil"
+          },
+          {
+            "texto": "like an angry lion",
+            "nota": "like + nombre → símil"
+          },
+          {
+            "texto": "The exam is a mountain",
+            "nota": "sujeto + is a + imagen → metáfora"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He is as busy like a bee.",
+          "correcto": "He is as busy as a bee.",
+          "explicacion": "En el símil as…as, los dos conectores son as. Like se usa en otra estructura: like a bee."
+        },
+        {
+          "incorrecto": "The storm roared as an angry lion.",
+          "correcto": "The storm roared like an angry lion.",
+          "explicacion": "Delante de un nombre, «como» se dice like; as se usa para funciones, como en as a teacher."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos habla con Ana de sus exámenes finales.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "How is your week, Carlos?",
+            "traduccion": "¿Cómo va tu semana, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I'm as busy as a bee. The exam is a mountain, and I can't see the top.",
+            "traduccion": "Estoy ocupadísimo. El examen es una montaña y no veo la cima."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Don't worry. Think of a path: every day you climb a little.",
+            "traduccion": "No te preocupes. Piensa en un sendero: cada día subes un poco."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "You're right. Even the storm outside seems to whisper: keep going.",
+            "traduccion": "Tienes razón. Hasta la tormenta de fuera parece susurrar: sigue adelante."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué imagen usa Carlos para decir que el examen es enorme?",
+          "opciones": [
+            {
+              "es": "Una montaña cuya cima no se ve."
+            },
+            {
+              "es": "Una abeja que no deja de volar."
+            },
+            {
+              "es": "Una tormenta que ruge toda la noche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «The exam is a mountain, and I can't see the top»: es una metáfora de algo enorme."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Figura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "símil"
+            },
+            {
+              "texto": "as busy as a bee / like a lion"
+            }
+          ],
+          [
+            {
+              "texto": "metáfora"
+            },
+            {
+              "texto": "The exam is a mountain."
+            }
+          ],
+          [
+            {
+              "texto": "personificación"
+            },
+            {
+              "texto": "The wind whispers."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-38": {
+      "explicacion": {
+        "titulo": "Crónicas y partes del tiempo",
+        "texto": "Las crónicas deportivas y los partes del tiempo están llenos de lenguaje figurado porque buscan imágenes vivas. En deporte: crushed (ganar de forma aplastante), a wall (defensa impenetrable), a sinking ship (equipo que se hunde), a rollercoaster (partido de altibajos). En el tiempo: a blanket of snow, storm clouds are gathering (se acerca lluvia), the sun chases the clouds away. Estrategia: localiza la expresión, pregúntate qué acción real describe y compruébalo con los datos del texto (marcador, temperatura, hora)."
+      },
+      "patron": {
+        "texto": "Expresión figurada + dato que la confirma:",
+        "formula": [
+          {
+            "texto": "Storm clouds are gathering",
+            "nota": "imagen: las nubes se reúnen"
+          },
+          {
+            "texto": "over the coast,",
+            "nota": "lugar: dato del texto"
+          },
+          {
+            "texto": "so take an umbrella.",
+            "nota": "consecuencia real: va a llover"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The match was a Russian mountain.",
+          "correcto": "The match was a rollercoaster.",
+          "explicacion": "«Montaña rusa» no se calca: en inglés es rollercoaster."
+        },
+        {
+          "incorrecto": "The sun will persecute the clouds.",
+          "correcto": "The sun will chase the clouds away.",
+          "explicacion": "Persecute significa perseguir a una persona por sus ideas; para ahuyentar se usa chase away."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Carlos comentan el partido de ayer y el tiempo de mañana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Did you see the match? City crushed United!",
+            "traduccion": "¿Viste el partido? ¡El City aplastó al United!"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I did. Their defence was a wall, and United were a sinking ship.",
+            "traduccion": "Sí. Su defensa fue un muro y el United era un barco que se hundía."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The forecast says storm clouds are gathering, so take an umbrella to the next game.",
+            "traduccion": "El pronóstico dice que se acumulan nubarrones, así que lleva paraguas al próximo partido."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good idea. I hope the sun chases the clouds away.",
+            "traduccion": "Buena idea. Ojalá el sol ahuyente las nubes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo fue el partido del City?",
+          "opciones": [
+            {
+              "es": "Ganó con claridad y su defensa no dejó pasar a nadie."
+            },
+            {
+              "es": "Perdió aunque atacó mucho."
+            },
+            {
+              "es": "Empató con un gol en el último minuto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "«Crushed» indica una victoria clara y «their defence was a wall» que la defensa fue impenetrable."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Sentido real"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "crushed"
+            },
+            {
+              "texto": "ganó con claridad"
+            }
+          ],
+          [
+            {
+              "texto": "a wall"
+            },
+            {
+              "texto": "defensa muy sólida"
+            }
+          ],
+          [
+            {
+              "texto": "a sinking ship"
+            },
+            {
+              "texto": "equipo que se hunde en el partido"
+            }
+          ],
+          [
+            {
+              "texto": "a blanket of snow"
+            },
+            {
+              "texto": "capa de nieve que lo cubre todo"
+            }
+          ],
+          [
+            {
+              "texto": "storm clouds are gathering"
+            },
+            {
+              "texto": "va a llover pronto"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-39": {
+      "explicacion": {
+        "titulo": "Tu propia imagen, explicada",
+        "texto": "Crear tu propia imagen es escoger una comparación que nadie haya gastado y explicarla. Usa tres herramientas: una metáfora (Autumn is a golden painter), un símil (like a carpet) y una personificación (the leaves dance). Elige imágenes que se vean, se oigan o se toquen, y evita los tópicos como as white as snow. Añade una frase con because para explicar por qué funciona. Una sola imagen clara vale más que cinco mezcladas: cuida que las tres describan el mismo lugar o la misma estación."
+      },
+      "patron": {
+        "texto": "Metáfora + símil + personificación + porque:",
+        "formula": [
+          {
+            "texto": "Autumn is a golden painter.",
+            "nota": "metáfora: X is a Y"
+          },
+          {
+            "texto": "The leaves lie like a carpet.",
+            "nota": "símil: like + nombre"
+          },
+          {
+            "texto": "They dance in the wind,",
+            "nota": "personificación: verbo humano"
+          },
+          {
+            "texto": "because…",
+            "nota": "explicas por qué funciona"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The leaves are like a carpet golden.",
+          "correcto": "The leaves are like a golden carpet.",
+          "explicacion": "En inglés el adjetivo va delante del nombre: a golden carpet, no a carpet golden."
+        },
+        {
+          "incorrecto": "I chose “carpet” because shows how soft the leaves are.",
+          "correcto": "I chose “carpet” because it shows how soft the leaves are.",
+          "explicacion": "En inglés el sujeto es obligatorio: hace falta it antes de shows."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le lee a Leo un poema sobre el otoño.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Listen: autumn is a golden painter, and the leaves lie like a carpet.",
+            "traduccion": "Escucha: el otoño es un pintor dorado y las hojas yacen como una alfombra."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I love the painter. Why a painter?",
+            "traduccion": "Me encanta el pintor. ¿Por qué un pintor?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Because autumn changes every tree from green to gold. The leaves dance too, but I want to cut that line.",
+            "traduccion": "Porque el otoño cambia cada árbol de verde a dorado. Las hojas también bailan, pero quiero quitar esa línea."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Keep it! The dance shows that the wind is playful.",
+            "traduccion": "¡Déjala! El baile muestra que el viento es juguetón."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué compara Mia el otoño con un pintor?",
+          "opciones": [
+            {
+              "es": "Porque cambia el color de los árboles de verde a dorado."
+            },
+            {
+              "es": "Porque pinta las casas del pueblo."
+            },
+            {
+              "es": "Porque trae menos luz al día."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia explica con «because autumn changes every tree from green to gold»: el otoño «pinta» los árboles."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Figura",
+          "Ejemplo de otoño"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "metáfora"
+            },
+            {
+              "texto": "Autumn is a golden painter."
+            }
+          ],
+          [
+            {
+              "texto": "símil"
+            },
+            {
+              "texto": "The leaves lie like a carpet."
+            }
+          ],
+          [
+            {
+              "texto": "personificación"
+            },
+            {
+              "texto": "The leaves dance in the wind."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-40": {
+      "explicacion": {
+        "titulo": "Una metáfora que dura todo el texto",
+        "texto": "Una metáfora extendida convierte una imagen en el hilo de todo el texto. Elige un campo (por ejemplo, un viaje) y reparte sus elementos entre tus ideas: mapa, brújula, camino, pasos, destino. Regla de oro: no mezcles imágenes; si empiezas con un viaje, no pases a una batalla. Estructura: 1) abre con la metáfora, 2) desarróllala con tres o cuatro elementos del mismo campo, 3) cierra con una reflexión (Looking back…) que diga en sentido literal lo que aprendiste. Así el lector entiende la imagen y la idea."
+      },
+      "patron": {
+        "texto": "Imagen + desarrollo + cierre reflexivo:",
+        "formula": [
+          {
+            "texto": "Learning English is a journey.",
+            "nota": "abres con la metáfora"
+          },
+          {
+            "texto": "Grammar is my map; mistakes are turns in the road.",
+            "nota": "desarrollas con el mismo campo"
+          },
+          {
+            "texto": "Looking back, I learned that…",
+            "nota": "cierre: lección en sentido literal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Learning English is a journey, and grammar is my sword.",
+          "correcto": "Learning English is a journey, and grammar is my map.",
+          "explicacion": "Sword es de una batalla y mezcla dos imágenes. En un viaje, la gramática puede ser el mapa."
+        },
+        {
+          "incorrecto": "One day I will arrive to my destination.",
+          "correcto": "One day I will reach my destination.",
+          "explicacion": "Arrive no lleva objeto directo: se dice arrive at, o mejor reach + destination."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara revisa con Tom el ensayo que él escribió sobre aprender inglés.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Your essay opens well: learning English is a journey.",
+            "traduccion": "Tu ensayo empieza bien: aprender inglés es un viaje."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thanks. Then I say grammar is my map and mistakes are the turns in the road.",
+            "traduccion": "Gracias. Luego digo que la gramática es mi mapa y los errores son los giros del camino."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Nice. But you wrote that vocabulary is a sword. That is a mixed image.",
+            "traduccion": "Bien. Pero escribiste que el vocabulario es una espada. Es una imagen mezclada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "You are right. I'll change it to a compass and finish with a lesson.",
+            "traduccion": "Tienes razón. Lo cambiaré por una brújula y terminaré con una reflexión."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué problema detecta Sara en el ensayo de Tom?",
+          "opciones": [
+            {
+              "es": "Mezcla una espada con el viaje: la imagen no es coherente."
+            },
+            {
+              "es": "No usa ninguna metáfora."
+            },
+            {
+              "es": "El ensayo es demasiado corto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «vocabulary is a sword. That is a mixed image»: la espada no pertenece al campo del viaje."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Idea del aprendizaje",
+          "Elemento del viaje"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "gramática"
+            },
+            {
+              "texto": "el mapa"
+            }
+          ],
+          [
+            {
+              "texto": "vocabulario"
+            },
+            {
+              "texto": "la brújula"
+            }
+          ],
+          [
+            {
+              "texto": "errores"
+            },
+            {
+              "texto": "giros del camino"
+            }
+          ],
+          [
+            {
+              "texto": "meta"
+            },
+            {
+              "texto": "el destino"
+            }
+          ],
+          [
+            {
+              "texto": "paciencia"
+            },
+            {
+              "texto": "el ritmo de los pasos"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C36: error 2 («luminous idea») sustituido por «hot welcome» porque luminous/brilliant son aceptables en inglés; repaso completar reescrito («time is running out», el anterior «My time is running out» sugería muerte).",
+      "C37: clasificación símil/metáfora/personificación revisada ítem a ítem: cada uno tiene una sola respuesta según las tres reglas enseñadas (as…as/like, X is a Y, verbo humano); opción del audio del aula reformulada (no afirmaba «nadie escucha»).",
+      "C38: feedback corregido (el texto dice que el segundo gol «aplastó» al equipo, no que lo hundió).",
+      "C39: borrador del mar cambiado a «it whispers» (con «blue animal», «sleeps» era ambiguo entre personificación y metáfora extendida); aceptados as/since; modelo de escritura simplificado a una imagen coherente (antes contradecía la regla de no mezclar imágenes) y rúbrica más flexible (like, as…as variados, verbos humanos).",
+      "C40: rúbrica abierta a otros campos de metáfora (no solo viaje/jardín) y más cierres; respuesta aceptada alargada (94 palabras quedaba fuera del rango 100–240).",
+      "P2 sin resolver: C39 recomienda evitar tópicos (as white as snow) tras enseñar tópicos en C37; dificultad léxica baja para C1 por el vocabulario acumulado."
+    ]
+  }
+}

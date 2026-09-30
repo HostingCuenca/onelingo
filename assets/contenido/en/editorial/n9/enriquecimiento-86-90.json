@@ -1,0 +1,606 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 86,
+    "end": 90
+  },
+  "classes": {
+    "en.n9.class-86": {
+      "explicacion": {
+        "titulo": "La escala de firmeza al discrepar",
+        "texto": "Discrepar con tacto no es hablar sin claridad: es elegir cuánta fuerza das a tu mensaje. Piensa en una escala: brusco («You are wrong»), directo («I don't agree»), suavizado («I'm afraid I don't quite agree») y muy diplomático («I wonder if we could look at it differently»). Los recursos son aperturas (I appreciate…, but), suavizantes (slightly, rather), verbos de opinión (I tend to think, I suppose) y preguntas o sugerencias (I wonder…, Perhaps we could…). Sigue diciendo lo que piensas: suavizar no es esconder tu opinión."
+      },
+      "patron": {
+        "texto": "Apertura + suavizante + tu posición + alternativa:",
+        "formula": [
+          {
+            "texto": "I appreciate your idea, but",
+            "nota": "apertura: reconoces lo bueno"
+          },
+          {
+            "texto": "I'm afraid I see it slightly differently.",
+            "nota": "posición suavizada: I'm afraid + slightly"
+          },
+          {
+            "texto": "Perhaps we could try another option.",
+            "nota": "alternativa con perhaps + could"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'm afraid of we can't finish by Friday.",
+          "correcto": "I'm afraid we can't finish by Friday.",
+          "explicacion": "Delante de una oración, I'm afraid va solo: no lleva of."
+        },
+        {
+          "incorrecto": "I am not agree with you, frankly.",
+          "correcto": "Frankly, I don't agree with you.",
+          "explicacion": "Agree es un verbo: se niega con don't, no con am not (calco de «no estoy de acuerdo»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia eligen el destino de la excursión de fin de curso.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I think we should go to the museum.",
+            "traduccion": "Creo que deberíamos ir al museo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I appreciate the idea, but I'm afraid it is slightly far for a school trip.",
+            "traduccion": "Agradezco la idea, pero me temo que está algo lejos para una excursión escolar."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Really? I suppose you are right about the bus.",
+            "traduccion": "¿De verdad? Supongo que tienes razón con el autobús."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Perhaps we could visit the park instead, and I wonder whether everyone would like that.",
+            "traduccion": "Quizá podríamos visitar el parque, y me pregunto si a todos les gustaría."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué propone Leo en lugar del museo?",
+          "opciones": [
+            {
+              "es": "Visitar el parque, si a todos les parece bien."
+            },
+            {
+              "es": "Ir al museo en autobús."
+            },
+            {
+              "es": "Cancelar la excursión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Perhaps we could visit the park instead, and I wonder whether everyone would like that»: propone el parque."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Firmeza",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1. brusca"
+            },
+            {
+              "texto": "You are wrong."
+            }
+          ],
+          [
+            {
+              "texto": "2. directa"
+            },
+            {
+              "texto": "I don't agree."
+            }
+          ],
+          [
+            {
+              "texto": "3. suavizada"
+            },
+            {
+              "texto": "I'm afraid I don't quite agree."
+            }
+          ],
+          [
+            {
+              "texto": "4. muy diplomática"
+            },
+            {
+              "texto": "I wonder if we could look at it differently."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-87": {
+      "explicacion": {
+        "titulo": "Matizar y tomar distancia",
+        "texto": "Para discrepar sin chocar puedes tomar distancia de lo que dices. Seem y appear (It seems that…, X appears to…) presentan tu opinión como una impresión, no como un hecho. Los modales (might, could) y adverbios como arguably, somewhat o possibly restan firmeza. Las preguntas indirectas (Could you tell me whether…?) suenan más corteses y usan orden de afirmación: «whether the budget is fixed», no «is the budget fixed». Albeit (+ adjetivo o grupo breve) y notwithstanding (+ nombre) reconocen un punto contrario sin romper tu argumento."
+      },
+      "patron": {
+        "texto": "Distancia + posición + concesión:",
+        "formula": [
+          {
+            "texto": "It seems that",
+            "nota": "distancia: una impresión, no un hecho"
+          },
+          {
+            "texto": "the plan is somewhat expensive,",
+            "nota": "posición suavizada con somewhat"
+          },
+          {
+            "texto": "albeit well organised.",
+            "nota": "albeit + adjetivo: concesión breve"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could you tell me where is the budget?",
+          "correcto": "Could you tell me where the budget is?",
+          "explicacion": "En la pregunta indirecta el orden es el de una afirmación: where the budget is."
+        },
+        {
+          "incorrecto": "The idea is good, albeit it is expensive.",
+          "correcto": "The idea is good, albeit expensive.",
+          "explicacion": "Albeit va con un adjetivo o un grupo breve, no con una oración con verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara revisan el plan de un torneo escolar.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Could you tell me whether the budget is already fixed?",
+            "traduccion": "¿Podrías decirme si el presupuesto ya está fijado?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It appears to be fixed, albeit not finished. The plan is arguably a good one, but it might need more time.",
+            "traduccion": "Parece estar fijado, aunque no terminado. El plan es posiblemente bueno, pero podría necesitar más tiempo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Notwithstanding the cost, I think it is worth it.",
+            "traduccion": "A pesar del costo, creo que merece la pena."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pregunta Sara al principio?",
+          "opciones": [
+            {
+              "es": "Si el presupuesto ya está decidido."
+            },
+            {
+              "es": "Cuánto cuesta el torneo."
+            },
+            {
+              "es": "Quién organiza el torneo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara pregunta «whether the budget is already fixed»: quiere saber si el presupuesto está decidido."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "seem / appear"
+            },
+            {
+              "texto": "The plan seems expensive."
+            }
+          ],
+          [
+            {
+              "texto": "modal"
+            },
+            {
+              "texto": "This might need more time."
+            }
+          ],
+          [
+            {
+              "texto": "adverbio"
+            },
+            {
+              "texto": "arguably the best option"
+            }
+          ],
+          [
+            {
+              "texto": "pregunta indirecta"
+            },
+            {
+              "texto": "Could you tell me whether it is ready?"
+            }
+          ],
+          [
+            {
+              "texto": "concesión"
+            },
+            {
+              "texto": "a good, albeit expensive, plan"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-88": {
+      "explicacion": {
+        "titulo": "Leer entre líneas",
+        "texto": "Las personas corteses rara vez dicen «no» directamente. Frases como «That might be difficult», «I'll think about it», «Maybe another time» o «That's an interesting idea» suelen ser rechazos o dudas. Para interpretarlas busca señales: ¿hay una hora o un compromiso concreto (acepta)? ¿hay vaguedad, un «but» después de un elogio o ninguna alternativa (rechaza)? ¿dudan, cambian de tema o el tono suena plano (duda)? Decide entre acepta, duda o rechaza y apóyate en la frase exacta que lo indica."
+      },
+      "patron": {
+        "texto": "Frase + señal → lectura:",
+        "formula": [
+          {
+            "texto": "“Maybe another time.”",
+            "nota": "frase vaga, sin fecha"
+          },
+          {
+            "texto": "+ no alternative",
+            "nota": "señal: nadie propone otro día"
+          },
+          {
+            "texto": "→ she declines politely",
+            "nota": "lectura: rechazo cortés"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She said “Maybe another time”, so she will come tomorrow.",
+          "correcto": "She said “Maybe another time”, so she will not come tomorrow.",
+          "explicacion": "«Maybe another time» sin fecha es un rechazo cortés, no una promesa."
+        },
+        {
+          "incorrecto": "“I'll think about it” always means yes.",
+          "correcto": "“I'll think about it” often means the person is not sure.",
+          "explicacion": "«I'll think about it» suele mostrar duda, no un sí seguro."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia invita a Tom a una fiesta y Tom responde con rodeos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Would you like to come to my party on Saturday?",
+            "traduccion": "¿Te gustaría venir a mi fiesta el sábado?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That sounds lovely, but I have a lot to do this weekend.",
+            "traduccion": "Suena genial, pero tengo mucho que hacer este fin de semana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Oh. Could you come for an hour?",
+            "traduccion": "Oh. ¿Podrías venir una hora?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I'll think about it. Maybe another time.",
+            "traduccion": "Lo pensaré. Quizá otro día."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué quiere decir realmente Tom?",
+          "opciones": [
+            {
+              "es": "Que probablemente no irá."
+            },
+            {
+              "es": "Que irá seguro a la fiesta."
+            },
+            {
+              "es": "Que no ha entendido la invitación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom no da hora ni compromiso: usa «but», «I'll think about it» y «Maybe another time», que juntos suenan a rechazo cortés."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Frase",
+          "Lectura probable"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I'll be there at six."
+            },
+            {
+              "texto": "acepta"
+            }
+          ],
+          [
+            {
+              "texto": "I'll think about it."
+            },
+            {
+              "texto": "duda"
+            }
+          ],
+          [
+            {
+              "texto": "That might be difficult."
+            },
+            {
+              "texto": "rechaza con cortesía"
+            }
+          ],
+          [
+            {
+              "texto": "Maybe another time."
+            },
+            {
+              "texto": "rechaza sin decirlo"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-89": {
+      "explicacion": {
+        "titulo": "Discrepar sin dañar la relación",
+        "texto": "Un desacuerdo bien llevado tiene cuatro pasos: (1) reconoce lo razonable (You make a fair point); (2) marca el contraste con although, while o however (Although I see your point, I see it differently); (3) expresa tu posición con matices (I'm not entirely convinced); (4) ofrece una alternativa (How about…? Instead of… we could…). Así la otra persona siente que la escuchas y que hay una salida. En español se dice «aunque… pero»; en inglés se usa uno solo: although… sin but."
+      },
+      "patron": {
+        "texto": "Reconocer + concesión + posición + alternativa:",
+        "formula": [
+          {
+            "texto": "You make a fair point,",
+            "nota": "reconoces lo válido"
+          },
+          {
+            "texto": "although I see it slightly differently.",
+            "nota": "concesión + posición matizada"
+          },
+          {
+            "texto": "Instead of cancelling,",
+            "nota": "alternativa: instead of + -ing"
+          },
+          {
+            "texto": "we could meet halfway.",
+            "nota": "propuesta con could"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Instead to cancel, we could move it.",
+          "correcto": "Instead of cancelling, we could move it.",
+          "explicacion": "Después de instead se usa of + verbo en -ing, no to + verbo."
+        },
+        {
+          "incorrecto": "Although I understand you, but I think it is expensive.",
+          "correcto": "Although I understand you, I think it is expensive.",
+          "explicacion": "Although ya marca el contraste: no se añade but (calco de «aunque… pero»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo discrepan sobre dónde celebrar el cumpleaños de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I think we should have the party at a restaurant.",
+            "traduccion": "Creo que deberíamos celebrar la fiesta en un restaurante."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "You make a fair point about the food, although I'm not entirely convinced about the cost.",
+            "traduccion": "Tienes razón en lo de la comida, aunque no estoy del todo convencido por el costo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What do you suggest instead?",
+            "traduccion": "¿Qué sugieres en su lugar?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Let's meet halfway: we cook at my house, and Mia chooses the cake.",
+            "traduccion": "Busquemos un punto medio: cocinamos en mi casa y Mia elige la tarta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué propone Leo como punto medio?",
+          "opciones": [
+            {
+              "es": "Cocinar en su casa y dejar que Mia elija la tarta."
+            },
+            {
+              "es": "Ir a un restaurante caro."
+            },
+            {
+              "es": "Cancelar el cumpleaños."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «we cook at my house, and Mia chooses the cake»: esa es su propuesta de compromiso."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1. reconocer"
+            },
+            {
+              "texto": "You make a fair point."
+            }
+          ],
+          [
+            {
+              "texto": "2. matizar"
+            },
+            {
+              "texto": "I'm not entirely convinced."
+            }
+          ],
+          [
+            {
+              "texto": "3. alternativa"
+            },
+            {
+              "texto": "How about a picnic instead?"
+            }
+          ],
+          [
+            {
+              "texto": "4. compromiso"
+            },
+            {
+              "texto": "Let's meet halfway."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-90": {
+      "explicacion": {
+        "titulo": "Reparar un malentendido entre culturas",
+        "texto": "Cuando personas de culturas distintas chocan, casi siempre hay un malentendido, no mala intención. Para repararlo: (1) nombra el problema sin culpar (I think there was a misunderstanding); (2) aclara tu intención (I did not intend to offend you); (3) reconoce el efecto (I am sorry it sounded rude); (4) explica la costumbre sin justificarte (In my country it is a custom…); (5) propón seguir adelante (Could we start again?). Usa lo aprendido: suavizantes, preguntas indirectas y alternativas."
+      },
+      "patron": {
+        "texto": "Malentendido + intención + disculpa + siguiente paso:",
+        "formula": [
+          {
+            "texto": "I think there was a misunderstanding.",
+            "nota": "nombra el problema sin culpar"
+          },
+          {
+            "texto": "I did not intend to offend you,",
+            "nota": "aclara tu intención"
+          },
+          {
+            "texto": "and I apologise if it sounded rude.",
+            "nota": "reconoce el efecto"
+          },
+          {
+            "texto": "Could we start again?",
+            "nota": "propone seguir adelante"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I did not intend offend you.",
+          "correcto": "I did not intend to offend you.",
+          "explicacion": "Intend va seguido de to + verbo: intend to offend."
+        },
+        {
+          "incorrecto": "I apologise you for the misunderstanding.",
+          "correcto": "I apologise for the misunderstanding.",
+          "explicacion": "Apologise va con for + motivo; si nombras a la persona, se usa to you."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia, de Ecuador, y Tom, de Escocia, hablan de un malentendido sobre una invitación.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I think there was a misunderstanding. When you said maybe, I thought you did not want to come.",
+            "traduccion": "Creo que hubo un malentendido. Cuando dijiste «quizá», pensé que no querías venir."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I did not intend to offend you. In my country it is a custom to say maybe when we are not sure.",
+            "traduccion": "No tuve la intención de ofenderte. En mi país es costumbre decir «quizá» cuando no estamos seguros."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thank you for telling me. In my country maybe often means no.",
+            "traduccion": "Gracias por decírmelo. En mi país «quizá» suele significar no."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then let me clarify: I would love to come on Saturday.",
+            "traduccion": "Entonces déjame aclarar: me encantaría ir el sábado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué hubo un malentendido entre Mia y Tom?",
+          "opciones": [
+            {
+              "es": "Mia dijo «maybe» por costumbre y Tom lo entendió como un no."
+            },
+            {
+              "es": "Tom llegó tarde a la fiesta."
+            },
+            {
+              "es": "Mia no recibió la invitación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia explica que en su país «maybe» se dice por costumbre cuando no se está seguro; Tom lo leyó como un no."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Para qué sirve"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "nombrar el malentendido"
+            },
+            {
+              "texto": "no culpar a nadie"
+            }
+          ],
+          [
+            {
+              "texto": "aclarar la intención"
+            },
+            {
+              "texto": "mostrar que no fue a propósito"
+            }
+          ],
+          [
+            {
+              "texto": "disculparse"
+            },
+            {
+              "texto": "reconocer el efecto"
+            }
+          ],
+          [
+            {
+              "texto": "proponer un nuevo plan"
+            },
+            {
+              "texto": "dejar la relación abierta"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

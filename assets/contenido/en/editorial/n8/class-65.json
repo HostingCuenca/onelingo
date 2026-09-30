@@ -1,0 +1,848 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-65",
+  "title": {
+    "en": "Fact-check and rewrite",
+    "es": "Verificar y reescribir"
+  },
+  "objectives": {
+    "es": [
+      "Detectar afirmaciones sin fuente en un mensaje, reescribirlas con atribución y cautela, y justificar cada cambio."
+    ]
+  },
+  "concepts": [
+    "n8-news-framing-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-64"
+  ],
+  "usesVocabulary": [
+    "rumour",
+    "verify",
+    "obviously",
+    "apparently",
+    "proof",
+    "suggest",
+    "unverified"
+  ],
+  "usesPatterns": [
+    "n8-news-framing-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "rumour",
+      "es": "rumor"
+    },
+    {
+      "en": "verify",
+      "es": "verificar, comprobar"
+    },
+    {
+      "en": "obviously",
+      "es": "obviamente (sin pruebas)"
+    },
+    {
+      "en": "apparently",
+      "es": "al parecer"
+    },
+    {
+      "en": "proof",
+      "es": "prueba(s)"
+    },
+    {
+      "en": "suggest",
+      "es": "sugerir, apuntar a"
+    },
+    {
+      "en": "unverified",
+      "es": "sin verificar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-65.t01",
+      "en": "The post says the school will close, but it is only a rumour.",
+      "es": "La publicación dice que el colegio cerrará, pero es solo un rumor.",
+      "explanationEs": "Sin fuente ni pruebas, una afirmación es un rumor aunque se escriba como un hecho.",
+      "segments": [
+        "The post says the school will close,",
+        "but it is only a rumour."
+      ],
+      "audioText": "The post says the school will close, but it is only a rumour.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-5"
+    },
+    {
+      "id": "en.n8.class-65.t02",
+      "en": "Before you share the message, verify the claim with a reliable source.",
+      "es": "Antes de compartir el mensaje, verifica la afirmación con una fuente fiable.",
+      "explanationEs": "Verify es el primer paso del chequeo: buscar la fuente original antes de repetir el dato.",
+      "segments": [
+        "Before you share the message, verify",
+        "the claim with a reliable source."
+      ],
+      "audioText": "Before you share the message, verify the claim with a reliable source.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-5"
+    },
+    {
+      "id": "en.n8.class-65.t03",
+      "en": "Obviously, the new rule is unfair.",
+      "es": "Obviamente, la nueva norma es injusta.",
+      "explanationEs": "Obviously y everyone knows presentan una opinión como si fuera un hecho: es la señal clásica de una afirmación sin fuente.",
+      "segments": [
+        "Obviously, the new",
+        "rule is unfair."
+      ],
+      "audioText": "Obviously, the new rule is unfair.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-5"
+    },
+    {
+      "id": "en.n8.class-65.t04",
+      "en": "Apparently, the school will close in June, but there is no proof yet.",
+      "es": "Al parecer, el colegio cerrará en junio, pero todavía no hay pruebas.",
+      "explanationEs": "Apparently da el dato con cautela. Proof es incontable: there is no proof, no «there are no proofs».",
+      "segments": [
+        "Apparently, the school will close in June,",
+        "but there is no proof yet."
+      ],
+      "audioText": "Apparently, the school will close in June, but there is no proof yet.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-5"
+    },
+    {
+      "id": "en.n8.class-65.t05",
+      "en": "These numbers suggest that the school may lose pupils next year.",
+      "es": "Estas cifras apuntan a que el colegio podría perder alumnos el año próximo.",
+      "explanationEs": "Suggest + that + may: dos formas de cautela juntas, apropiadas cuando hay indicios pero no una confirmación.",
+      "segments": [
+        "These numbers suggest that the school",
+        "may lose pupils next year."
+      ],
+      "audioText": "These numbers suggest that the school may lose pupils next year.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-5"
+    },
+    {
+      "id": "en.n8.class-65.t06",
+      "en": "An unverified message is not a fact until a source confirms it.",
+      "es": "Un mensaje sin verificar no es un hecho hasta que una fuente lo confirma.",
+      "explanationEs": "Unverified dice con claridad que el dato no está comprobado; es mejor que callar la duda.",
+      "segments": [
+        "An unverified message is not a",
+        "fact until a source confirms it."
+      ],
+      "audioText": "An unverified message is not a fact until a source confirms it.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c65.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la reescritura que atribuye el dato a una fuente."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The canteen will close, obviously."
+          },
+          {
+            "text": "Everyone knows the canteen closes in June."
+          },
+          {
+            "text": "According to the school, the canteen will close in June."
+          }
+        ],
+        "teaches": [
+          "n8-news-framing-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.pg01.seed-0",
+          "feedback": {
+            "es": "According to the school nombra la fuente; las otras opciones repiten la afirmación sin fuente."
+          },
+          "hint": {
+            "es": "Busca quién dice el dato."
+          },
+          "text": "Message: Everyone knows the canteen will close."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:da655b9177791e2ef4bd6cb1ac061d856864608af6ac239415e705c79dbd3238"
+      },
+      {
+        "id": "en.n8.c65.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Al parecer, el café cerrará, pero todavía no hay pruebas.»"
+        },
+        "answer": {
+          "text": "Apparently",
+          "accepted": [
+            "Apparently",
+            "Reportedly"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-news-framing-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.pg02.seed-0",
+          "feedback": {
+            "es": "Apparently da el dato con cautela: no afirma que el café cierre, solo que eso parece."
+          },
+          "hint": {
+            "es": "Adverbio que significa «al parecer»."
+          },
+          "text": "___, the café will close, but there is no proof yet."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b6377d4357e467f723bd628a7a848d45423f1b5f82862d3a7ed300c39c896e9c"
+      },
+      {
+        "id": "en.n8.c65.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Según la carta, el colegio podría cerrar.»"
+        },
+        "answer": {
+          "text": "According to the letter the school may close",
+          "tokens": [
+            "According",
+            "to",
+            "the",
+            "letter",
+            "the",
+            "school",
+            "may",
+            "close"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-news-framing-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.pg03.seed-0",
+          "feedback": {
+            "es": "According to + fuente abre la frase y may marca la cautela: la carta no lo confirma del todo."
+          },
+          "hint": {
+            "es": "Empieza atribuyendo la fuente con According to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d97c8e43b12d616e38a5f3ea2fa9eb22bfc7ddac3100600b88e60864b830fae"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c65.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada problema de un mensaje con el arreglo adecuado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Everyone knows the price will rise.",
+              {
+                "es": "atribuir el dato a una fuente con according to"
+              }
+            ],
+            [
+              "Obviously, the plan failed.",
+              {
+                "es": "quitar el adverbio y aportar una fuente"
+              }
+            ],
+            [
+              "The café will close in May.",
+              {
+                "es": "bajar la certeza con may o con una fórmula cauta"
+              }
+            ],
+            [
+              "There is no proof yet.",
+              {
+                "es": "decir claramente qué falta por comprobar"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.p01.seed-0",
+          "feedback": {
+            "es": "Cada problema tiene su arreglo: atribuir la fuente, quitar la certeza falsa, bajarla o decir lo que falta."
+          },
+          "pairs": [
+            [
+              "Everyone knows the price will rise.",
+              {
+                "es": "atribuir el dato a una fuente con according to"
+              }
+            ],
+            [
+              "Obviously, the plan failed.",
+              {
+                "es": "quitar el adverbio y aportar una fuente"
+              }
+            ],
+            [
+              "The café will close in May.",
+              {
+                "es": "bajar la certeza con may o con una fórmula cauta"
+              }
+            ],
+            [
+              "There is no proof yet.",
+              {
+                "es": "decir claramente qué falta por comprobar"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:145b469ae018d160950fbd50632e01b3c084b84c77764be6362b03c89761d89b"
+      },
+      {
+        "id": "en.n8.c65.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo trata el locutor el mensaje del colegio."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He treats it as information nobody has checked."
+          },
+          {
+            "text": "He treats it as a confirmed fact."
+          },
+          {
+            "text": "He treats it as an official announcement."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.p02.seed-0",
+          "feedback": {
+            "es": "El locutor nota que no hay fuente y habla de un rumor: la información no está comprobada."
+          },
+          "audio": "The message says the pool will close, but it has no source. In fact, it is only a rumour.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ab0ad19d1c3d84b3305a58c5de2feac1d8b931cf6592cec1099f1756dc6f931c"
+      },
+      {
+        "id": "en.n8.c65.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estas cifras sugieren que el colegio pierde alumnos.»"
+        },
+        "answer": {
+          "text": "suggest",
+          "accepted": [
+            "suggest"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.p03.seed-0",
+          "feedback": {
+            "es": "Suggest + that marca un indicio sin afirmar una certeza; con sujeto plural va sin -s."
+          },
+          "text": "These numbers ___ that the school is losing pupils."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d327b53798046ca7174c59d0de409522582f616ad077a5971f7b37be5fd09c31"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c65.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el titular cauto sobre el mensaje sin verificar de la piscina."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Pool closure slammed by angry parents."
+          },
+          {
+            "text": "Message about pool closure is unverified, school says."
+          },
+          {
+            "text": "Pool closure hailed as a boost for pupils."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5",
+          "n8-news-framing-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.e01.seed-0",
+          "feedback": {
+            "es": "Unverified, school says es neutral y cuida la certeza; slammed y hailed añaden un enfoque."
+          },
+          "text": "Hecho: circula un mensaje sin fuente que dice que la piscina cerrará; el colegio aún no lo ha confirmado."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cf7dce5ba1a78a31cf9199c5226be38a80757066ca3256a00fbb9b1e347d293f"
+      },
+      {
+        "id": "en.n8.c65.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el titular y elige su expansión."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The pool reopened last May."
+          },
+          {
+            "text": "The pool will never open again."
+          },
+          {
+            "text": "People think the pool will open again in spring."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5",
+          "n8-news-framing-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.e02.seed-0",
+          "feedback": {
+            "es": "Expected to + verbo es una expectativa; el titular omite is y the pool."
+          },
+          "audio": "Pool expected to reopen in May.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6243ae63d67c1cdeaeb28468786227926c1691309353a691e242441f03accaa2"
+      },
+      {
+        "id": "en.n8.c65.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase del texto que es una afirmación sin fuente."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Everyone knows it is the best in the country."
+          },
+          {
+            "text": "The town library opens at nine, according to its website."
+          },
+          {
+            "text": "The mayor said the library will get new books in May."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5",
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.e03.seed-0",
+          "feedback": {
+            "es": "Everyone knows no nombra fuente ni pruebas; las otras dos frases atribuyen el dato a una web y a la alcaldesa."
+          },
+          "text": "The town library opens at nine, according to its website. Everyone knows it is the best in the country. The mayor said the library will get new books in May."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a2b606a38568753608c72d598d092dd739d269a0cbca0a4e7af897ee2d93c057"
+      },
+      {
+        "id": "en.n8.c65.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe las tres afirmaciones del mensaje y justifica cada cambio."
+        },
+        "answer": {
+          "text": "1. According to a letter from the council, the school may close in June, but nobody has confirmed the date. 2. Apparently the director might leave, but there is no proof yet, so this news is unverified. 3. Some parents say the canteen food is not good, and a health report suggests that the menu needs more fruit. I changed the first sentence because it had no source. I changed the second one because it sounded too certain. I changed the third one because it gave an opinion as a fact.",
+          "accepted": [
+            "1. According to a letter from the council, the school may close in June, but nobody has confirmed the date. 2. Apparently the director might leave, but there is no proof yet, so this news is unverified. 3. Some parents say the canteen food is not good, and a health report suggests that the menu needs more fruit. I changed the first sentence because it had no source. I changed the second one because it sounded too certain. I changed the third one because it gave an opinion as a fact.",
+            "First, the letter from the council says that the school could close in June, so I added the source. Second, there is no proof that the director is leaving, so I wrote that it is only a rumour and that nobody has confirmed it. Third, I do not know if the canteen food is bad, but some parents say it is, and a report suggests that more fruit is needed. I changed each claim because the original message gave no sources and sounded certain."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5",
+          "n8-news-framing-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.e04.seed-0",
+          "feedback": {
+            "es": "Un buen chequeo reescribe cada afirmación con fuente o cautela y explica por qué: sin fuente, sin pruebas o con opinión presentada como hecho."
+          },
+          "text": "Mensaje del chat: «Obviously the school will close in June. Everyone knows the director is leaving. The canteen food is bad.» Escribe en inglés entre 70 y 200 palabras: reescribe cada afirmación con una fuente o con cautela, y explica en una frase por qué cambiaste cada una.",
+          "scoring": {
+            "wordRange": [
+              70,
+              200
+            ],
+            "evidenceGroups": [
+              [
+                "according to",
+                "a letter from",
+                "the council says",
+                "the school said",
+                "the report says",
+                "a report suggests",
+                "told",
+                "said"
+              ],
+              [
+                "apparently",
+                "may",
+                "might",
+                "could",
+                "suggests",
+                "reportedly",
+                "is thought to",
+                "is expected to"
+              ],
+              [
+                "no proof",
+                "unverified",
+                "nobody has confirmed",
+                "not confirmed",
+                "no evidence",
+                "only a rumour",
+                "rumor",
+                "no source",
+                "has not confirmed"
+              ],
+              [
+                "I changed",
+                "I added",
+                "I wrote",
+                "because",
+                "the reason"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:24ac28198b64ece0584ac56cb4fb79e080c48acb69b0be8094be1c29a7d88e9b"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c65.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la reescritura cauta del mensaje que afirma algo sin pruebas."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The park will close, obviously, say all people."
+          },
+          {
+            "text": "The park may close, but the council has not confirmed it."
+          },
+          {
+            "text": "The park closes, it is obvious, for everybody."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.r01.seed-0",
+          "feedback": {
+            "es": "May y has not confirmed reconocen que falta la confirmación; las otras siguen afirmando sin fuente."
+          },
+          "text": "Message: It is obvious that the park will close."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2cbbed91017350bbfbfd61e7f9527c8bf294b6e8c8576de16ba0501377ad0f9d"
+      },
+      {
+        "id": "en.n8.c65.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué debemos hacer con esa noticia."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Share it with everyone at once."
+          },
+          {
+            "text": "Write that it is certain."
+          },
+          {
+            "text": "Wait for a reliable confirmation."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.r02.seed-0",
+          "feedback": {
+            "es": "Como el club no lo ha confirmado y la noticia está sin verificar, hay que esperar una confirmación fiable."
+          },
+          "audio": "Someone wrote that the match is cancelled, but the club has not confirmed it, so the news is unverified.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d1d7943cb2a0c2a9eeebd3829a332b61210272bb7d28849e568a9b5699ab18f8"
+      },
+      {
+        "id": "en.n8.c65.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Verifica la afirmación antes de compartirla.»"
+        },
+        "answer": {
+          "text": "Verify",
+          "accepted": [
+            "Verify"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c65.r03.seed-0",
+          "feedback": {
+            "es": "Verify es el primer paso del chequeo: comprueba el dato antes de repetirlo."
+          },
+          "text": "___ the claim before you share it."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c1c3fea34cc82e0b6128daae3b53fbc1b8f2fd1ca748c4937e712e7e81a47e71"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c65.e01": {
+      "reteach": "en.n8.class-65.t01",
+      "review": "en.n8.c65.r01"
+    },
+    "en.n8.c65.e02": {
+      "reteach": "en.n8.class-65.t02",
+      "review": "en.n8.c65.r02"
+    },
+    "en.n8.c65.e03": {
+      "reteach": "en.n8.class-65.t03",
+      "review": "en.n8.c65.r03"
+    },
+    "en.n8.c65.e04": {
+      "reteach": "en.n8.class-65.t04",
+      "review": "en.n8.c65.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n8-news-framing-1",
+    "n8-news-framing-2",
+    "n8-news-framing-3",
+    "n8-news-framing-4",
+    "n8-news-framing-5"
+  ]
+}

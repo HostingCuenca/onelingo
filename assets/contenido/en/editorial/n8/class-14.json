@@ -1,0 +1,764 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-14",
+  "title": {
+    "en": "Reply with a hint",
+    "es": "Responder con una indirecta"
+  },
+  "objectives": {
+    "es": [
+      "Escribir réplicas que sugieren sin afirmar: rechazar una invitación, criticar con tacto, pedir que te lleven y cerrar con una aclaración."
+    ]
+  },
+  "concepts": [
+    "n8-implication-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-13"
+  ],
+  "usesVocabulary": [
+    "invitation",
+    "decline",
+    "plans",
+    "busy",
+    "interesting",
+    "ride",
+    "clarify",
+    "salty"
+  ],
+  "usesPatterns": [
+    "n8-implication-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "invitation",
+      "es": "invitación"
+    },
+    {
+      "en": "decline",
+      "es": "rechazar con cortesía"
+    },
+    {
+      "en": "plans",
+      "es": "planes"
+    },
+    {
+      "en": "busy",
+      "es": "ocupado"
+    },
+    {
+      "en": "interesting",
+      "es": "interesante"
+    },
+    {
+      "en": "ride",
+      "es": "que te lleven en coche"
+    },
+    {
+      "en": "clarify",
+      "es": "aclarar"
+    },
+    {
+      "en": "salty",
+      "es": "salado"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-14.t01",
+      "en": "Thanks for the invitation! I'd love to, but I have a lot of homework.",
+      "es": "¡Gracias por la invitación! Me encantaría, pero tengo muchos deberes.",
+      "explanationEs": "«I'd love to, but…» + excusa es un no implícito y amable.",
+      "segments": [
+        "Thanks for the invitation! I'd love to,",
+        "but I have a lot of homework."
+      ],
+      "audioText": "Thanks for the invitation! I'd love to, but I have a lot of homework.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-4"
+    },
+    {
+      "id": "en.n8.class-14.t02",
+      "en": "I might have other plans that evening, so I may have to decline.",
+      "es": "Puede que tenga otros planes esa tarde, así que quizá tenga que rechazar.",
+      "explanationEs": "Might/may + plans deja la puerta entreabierta: probablemente no.",
+      "segments": [
+        "I might have other plans that evening,",
+        "so I may have to decline."
+      ],
+      "audioText": "I might have other plans that evening, so I may have to decline.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-4"
+    },
+    {
+      "id": "en.n8.class-14.t03",
+      "en": "The soup is... interesting. Is it a new recipe?",
+      "es": "La sopa es... interesante. ¿Es una receta nueva?",
+      "explanationEs": "La pausa y interesting dicen «no me gusta» sin ofender.",
+      "segments": [
+        "The soup is... interesting. Is",
+        "it a new recipe?"
+      ],
+      "audioText": "The soup is... interesting. Is it a new recipe?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-4"
+    },
+    {
+      "id": "en.n8.class-14.t04",
+      "en": "It's quite a long way home, isn't it? I could use a ride.",
+      "es": "Hay bastante camino hasta casa, ¿verdad? Me vendría bien que me lleven.",
+      "explanationEs": "Una observación con tag pide ayuda sin pedirla directamente.",
+      "segments": [
+        "It's quite a long way home, isn't",
+        "it? I could use a ride."
+      ],
+      "audioText": "It's quite a long way home, isn't it? I could use a ride.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-4"
+    },
+    {
+      "id": "en.n8.class-14.t05",
+      "en": "Let me clarify: I did like the soup, but it was a bit salty.",
+      "es": "Déjame aclarar: la sopa me gustó, pero estaba un poco salada.",
+      "explanationEs": "Let me clarify abre una aclaración cortés cuando la indirecta no se entendió.",
+      "segments": [
+        "Let me clarify: I did like the",
+        "soup, but it was a bit salty."
+      ],
+      "audioText": "Let me clarify: I did like the soup, but it was a bit salty.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c14.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta que rechaza con tacto la invitación."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "No. I hate movies."
+          },
+          {
+            "text": "Yes, I will come, of course."
+          },
+          {
+            "text": "Thanks for the invitation! I'd love to, but I have plans."
+          }
+        ],
+        "teaches": [
+          "n8-implication-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.pg01.seed-0",
+          "feedback": {
+            "es": "Agradecer y dar una excusa deja claro el no sin decirlo: es el rechazo con tacto."
+          },
+          "hint": {
+            "es": "Busca agradecimiento + excusa, sin un no directo."
+          },
+          "text": "Mia te invita al cine, pero no quieres ir y tampoco quieres ofenderla."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c725d9ed0877e4f94ea99ff47b8ba0d2fc93c7ff08c73b9b42bb90cd98cfa938"
+      },
+      {
+        "id": "en.n8.c14.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No sé si puedo ir. Puede que tenga planes con mi familia.»"
+        },
+        "answer": {
+          "text": "plans",
+          "accepted": [
+            "plans"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-implication-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.pg02.seed-0",
+          "feedback": {
+            "es": "Might + plans deja la puerta entreabierta: indica un probable no sin ser brusco."
+          },
+          "hint": {
+            "es": "Sustantivo plural: lo que organizas para un día."
+          },
+          "text": "I'm not sure I can come. I might have ___ with my family."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1f905334abe6da421bb008cd18068032463c054a5b6a342ed2a95293d552145d"
+      },
+      {
+        "id": "en.n8.c14.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Es bastante tarde, ¿no?»"
+        },
+        "answer": {
+          "text": "It is quite late isn't it",
+          "tokens": [
+            "It",
+            "is",
+            "quite",
+            "late",
+            "isn't",
+            "it"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-implication-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.pg03.seed-0",
+          "feedback": {
+            "es": "Una observación con tag invita a confirmar y sugiere que conviene terminar."
+          },
+          "hint": {
+            "es": "La coletilla confirma lo que ya sabes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5b5d4260a30e0d4e28d3fb4d2840be3072abd5b5a3a65050291a3b834992616e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c14.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la crítica con tacto, sin decir que no te gusta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It's... interesting. Is it a new recipe?"
+          },
+          {
+            "text": "It is terrible."
+          },
+          {
+            "text": "I love it. Can I have more?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.p01.seed-0",
+          "feedback": {
+            "es": "La pausa y interesting evitan decir «me disgusta»; la pregunta suaviza la crítica."
+          },
+          "text": "Quieres decir que la tarta de tu amiga no te gusta, sin ofenderla."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d560201dcbbcbd8ca830acff9b4a59491de5bf0dba2e2881673d687464ab6e74"
+      },
+      {
+        "id": "en.n8.c14.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es muy tarde, ¿verdad? Me vendría bien que me lleven a casa.»"
+        },
+        "answer": {
+          "text": "ride",
+          "accepted": [
+            "ride",
+            "lift"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.p02.seed-0",
+          "feedback": {
+            "es": "Could use a ride es una petición disfrazada: sugiere que necesitas que te lleven."
+          },
+          "text": "It's very late, isn't it? I could use a ___ home."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2de70a98887a12dbbb7b060c256b85ff8d336765d8050196ffee4a2cff5d0cd4"
+      },
+      {
+        "id": "en.n8.c14.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Déjame aclarar que no estoy enfadado.»"
+        },
+        "answer": {
+          "text": "Let me clarify that I am not angry",
+          "tokens": [
+            "Let",
+            "me",
+            "clarify",
+            "that",
+            "I",
+            "am",
+            "not",
+            "angry"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.p03.seed-0",
+          "feedback": {
+            "es": "Let me clarify + that introduce la aclaración final sin disculparte de más."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dad0c0c363a5a66f9a98fb928708d65f46cfc494e52c01942673f0c0929762ca"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c14.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que pide que pare con una indirecta amable."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Play louder, please."
+          },
+          {
+            "text": "Your guitar sounds lovely, but it's quite late, isn't it?"
+          },
+          {
+            "text": "I hate guitars. Stop now."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.e01.seed-0",
+          "feedback": {
+            "es": "Elogiar, recordar la hora y cerrar con un tag sugiere parar sin acusar."
+          },
+          "text": "Tu vecino toca la guitarra a las once de la noche. Quieres que pare, pero sin pelearte."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:83e21c4e5bcb208abac42173d6e268f2c7e122553c7f066eb71edac8b30c6bec"
+      },
+      {
+        "id": "en.n8.c14.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Gracias por preguntar, pero preferiría no ir.»"
+        },
+        "answer": {
+          "text": "rather",
+          "accepted": [
+            "rather"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.e02.seed-0",
+          "feedback": {
+            "es": "I'd rather not es la forma natural de rechazar con cortesía."
+          },
+          "text": "Thank you for asking, but I'd ___ not."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a94e25323d2262f904b3c24aa87c84ab62f6cd0b5d1b0328cb68459b9a117acb"
+      },
+      {
+        "id": "en.n8.c14.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me encantaría, pero esta noche estoy ocupado.»"
+        },
+        "answer": {
+          "text": "I would love to but I am busy tonight",
+          "tokens": [
+            "I",
+            "would",
+            "love",
+            "to",
+            "but",
+            "I",
+            "am",
+            "busy",
+            "tonight"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.e03.seed-0",
+          "feedback": {
+            "es": "Primero el deseo (I would love to) y luego la excusa con but: es un rechazo implícito."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:abe6c125b2153b7d9ac657633b4df0fe1c32335237fcd469ec1e44ff9ded6308"
+      },
+      {
+        "id": "en.n8.c14.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe tu chat con Mia: cinco indirectas y una aclaración final."
+        },
+        "answer": {
+          "text": "Thanks for the invitation! I'd love to, but I might have other plans on Saturday, so I'm not sure I can come. The soup is... interesting. Is it a new recipe? It's getting late, isn't it? Some of us have classes tomorrow. Some people are always a bit late, aren't they? It's a long way home, isn't it? I could use a ride. Let me clarify: the soup is a bit salty, but I'm not angry, and I'd rather not promise about Saturday, because my weekend is busy.",
+          "accepted": [
+            "Thanks for the invitation! I'd love to, but I might have other plans on Saturday, so I'm not sure I can come. The soup is... interesting. Is it a new recipe? It's getting late, isn't it? Some of us have classes tomorrow. Some people are always a bit late, aren't they? It's a long way home, isn't it? I could use a ride. Let me clarify: the soup is a bit salty, but I'm not angry, and I'd rather not promise about Saturday, because my weekend is busy.",
+            "Thank you for asking! I would love to come, but I may have plans on Saturday, so I can't be sure. The soup is different... is it a new recipe? It's quite late, don't you think? Tomorrow is a school day. Some friends are a little late sometimes, aren't they? It's a long way home, isn't it? I could use a lift. To clarify, the soup is a little salty, but I am not angry, and I would rather not promise about Saturday, because I might be busy."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.e04.seed-0",
+          "feedback": {
+            "es": "Una buena respuesta rechaza con excusa, critica con una pausa, sugiere con tags que es tarde o que alguien llega tarde, pide que te lleven y cierra aclarando."
+          },
+          "text": "Chatea con Mia (60–150 palabras). Escribe cinco réplicas con una indirecta cada una, sin decir «no» ni «quiero», y una aclaración final: 1) te invita a una fiesta el sábado y no quieres ir; 2) te pregunta si te gusta su sopa, que está salada; 3) es muy tarde y quieres irte; 4) una amiga llega siempre tarde y quieres reprochárselo con tacto (usa una question tag); 5) necesitas que te lleven a casa (usa una question tag); 6) aclara al final qué querías decir.",
+          "scoring": {
+            "wordRange": [
+              60,
+              150
+            ],
+            "evidenceGroups": [
+              [
+                "I'd love to",
+                "I would love to",
+                "other plans",
+                "have plans",
+                "might have",
+                "may have",
+                "plans",
+                "busy",
+                "decline"
+              ],
+              [
+                "interesting",
+                "different",
+                "salty",
+                "unusual",
+                "new recipe"
+              ],
+              [
+                "isn't it",
+                "aren't they",
+                "aren't you",
+                "aren't we",
+                "don't you think",
+                "doesn't it",
+                "wasn't it",
+                "won't you",
+                "shouldn't we"
+              ],
+              [
+                "a ride",
+                "a lift",
+                "take me home",
+                "drive me",
+                "give me a ride",
+                "give me a lift"
+              ],
+              [
+                "let me clarify",
+                "to clarify",
+                "clarify",
+                "what i meant",
+                "what i mean",
+                "i meant",
+                "i didn't mean",
+                "to be clear"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d816b93f5046c358f0c598593d7e84ec064f5ecd71cbf9a82ea54494666fc41a"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c14.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que critica con tacto el regalo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It's bad. Take it back."
+          },
+          {
+            "text": "It's the best gift ever."
+          },
+          {
+            "text": "It's... different. Thank you for thinking of me."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.r01.seed-0",
+          "feedback": {
+            "es": "Different tras una pausa evita decir «feo» y el agradecimiento mantiene el tono amable."
+          },
+          "text": "Tu tía te regala un jersey muy feo."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ec4b12f26a1d5bf80609beab5c6fbe4b5f742e86332afd0524c92c482ab20f61"
+      },
+      {
+        "id": "en.n8.c14.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Déjame aclarar lo que quería decir.»"
+        },
+        "answer": {
+          "text": "clarify",
+          "accepted": [
+            "clarify"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.r02.seed-0",
+          "feedback": {
+            "es": "Let me clarify abre una aclaración cortés cuando la indirecta no se entendió."
+          },
+          "text": "Let me ___ what I meant."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1c8dadf3d1948627bbdb0ef2987447d8e3c692365b053307ca980b33f1359e2b"
+      },
+      {
+        "id": "en.n8.c14.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Estoy un poco ocupado el sábado.»"
+        },
+        "answer": {
+          "text": "I am a bit busy on Saturday",
+          "tokens": [
+            "I",
+            "am",
+            "a",
+            "bit",
+            "busy",
+            "on",
+            "Saturday"
+          ],
+          "accepted": [
+            "I am a bit busy on Saturday",
+            "On Saturday I am a bit busy"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c14.r03.seed-0",
+          "feedback": {
+            "es": "A bit suaviza busy: es una excusa amable que sugiere no poder."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:31458b5a1d785b424b3daf0dae1a1eaf9a5aa01cfa5517fc688d7aac27fccb80"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c14.e01": {
+      "reteach": "en.n8.class-14.t01",
+      "review": "en.n8.c14.r01"
+    },
+    "en.n8.c14.e02": {
+      "reteach": "en.n8.class-14.t02",
+      "review": "en.n8.c14.r02"
+    },
+    "en.n8.c14.e03": {
+      "reteach": "en.n8.class-14.t03",
+      "review": "en.n8.c14.r03"
+    },
+    "en.n8.c14.e04": {
+      "reteach": "en.n8.class-14.t04",
+      "review": "en.n8.c14.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

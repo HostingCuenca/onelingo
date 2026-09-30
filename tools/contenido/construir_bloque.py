@@ -381,6 +381,64 @@ def enriquecimiento(c: dict) -> dict:
     return e
 
 
+_FIJAS = {"can't": "can not", "cannot": "can not", "won't": "will not", "shan't": "shall not",
+          "i'm": "i am", "let's": "let us"}
+_CON_S = {"he", "she", "it", "that", "what", "there", "where", "who", "here", "how"}
+
+
+def _expandir(palabra: str) -> str:
+    """Igual que expandirContracciones en correccion.dart."""
+    if palabra in _FIJAS:
+        return _FIJAS[palabra]
+    if palabra.endswith("n't") and len(palabra) > 3:
+        return palabra[:-3] + " not"
+    m = re.fullmatch(r"([a-z]+)'(re|ve|ll|d|s)", palabra)
+    if not m:
+        return palabra
+    base, suf = m.groups()
+    return {"re": f"{base} are", "ve": f"{base} have", "ll": f"{base} will", "d": f"{base} would"}.get(
+        suf, f"{base} is" if base in _CON_S else palabra)
+
+
+def _norm_rubrica(t: str) -> str:
+    t = t.lower().replace("’", "'").replace("‘", "'")
+    t = re.sub(r"[.,!?¡¿;:/\"“”«»()—–…]", " ", t)
+    t = " ".join(_expandir(w) for w in t.split())
+    return " " + re.sub(r"\s+", " ", t).strip() + " "
+
+
+def cumple_rubrica(texto: str, rub: dict) -> bool:
+    """Réplica de la corrección de la app (correccion.dart) para autocomprobar."""
+    n = len(_norm_rubrica(texto).split())
+    lo, hi = rub["palabras"]
+    if not lo <= n <= hi:
+        return False
+    dada = _norm_rubrica(texto)
+    for grupo in rub["evidencias"]:
+        ok = False
+        for frase in grupo:
+            ev = _norm_rubrica(frase).strip()
+            if ev and (f" {ev} " in dada or re.search(rf" {re.escape(ev)}(?:s|es|d|ed|ing) ", dada)):
+                ok = True
+                break
+        if not ok:
+            return False
+    return True
+
+
+def comprobar_rubricas(c: dict, cid: str) -> list[str]:
+    errores = []
+    for clave in POOLS:
+        for k, it in enumerate(c["ejercicios"][clave], 1):
+            rub = it.get("rubrica")
+            if it["formato"] != "escribir" or not rub:
+                continue
+            for texto in [it["respuesta"], *it.get("aceptadas", [])]:
+                if not cumple_rubrica(texto, rub):
+                    errores.append(f"{cid} {clave}[{k}]: el modelo o una respuesta aceptada no supera su propia rúbrica: {texto[:60]!r}")
+    return errores
+
+
 def comprobar_lexico(c: dict, cid: str, previo: set[str]) -> list[str]:
     clase = set(previo)
     for v in c["vocabulario"]:
@@ -438,6 +496,7 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
     for c in compactas:
         cid = f"en.{nivel}.class-{c['n']:02d}"
         errores += comprobar_lexico(c, cid, lex)
+        errores += comprobar_rubricas(c, cid)
         try:
             clase = construir_clase(c, nivel_num=nivel_num, mapa=mapa, previos_bloque=list(previos_bloque))
         except (ErrorAutoria, KeyError, ValueError, TypeError) as exc:

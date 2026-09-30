@@ -1,0 +1,591 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "classes": {
+    "en.n9.class-51": {
+      "explicacion": {
+        "titulo": "Las cuatro partes de una propuesta",
+        "texto": "Una propuesta (proposal) es un documento escrito y completo; un pitch es la versión oral y breve para convencer en pocos minutos. Casi todas siguen el mismo orden: objetivo (The objective is to…), beneficio (The main benefit is that…), plan (We outline… / We recommend…) y petición (We request…). Reconocer cada parte te permite leer rápido y localizar lo que buscas. Los verbos recommend, suggest y propose introducen lo que el autor aconseja, y la petición suele quedar al final."
+      },
+      "patron": {
+        "texto": "Objetivo + beneficio + plan + petición:",
+        "formula": [
+          {
+            "texto": "The objective is to…",
+            "nota": "qué quiere lograr la propuesta"
+          },
+          {
+            "texto": "The main benefit is that…",
+            "nota": "quién gana y qué gana"
+          },
+          {
+            "texto": "We outline… / We recommend…",
+            "nota": "el plan y lo que se aconseja"
+          },
+          {
+            "texto": "We request…",
+            "nota": "lo que se pide, al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The objective of the proposal is create a market.",
+          "correcto": "The objective of the proposal is to create a market.",
+          "explicacion": "Tras is, el objetivo necesita to + verbo base: is to create."
+        },
+        {
+          "incorrecto": "We request to the council a grant.",
+          "correcto": "We request a grant from the council.",
+          "explicacion": "Request no lleva to: lo que pides va directo después del verbo y el organismo con from."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le lee a Leo el resumen de su propuesta para el mercado del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Listen to the start of our proposal: the objective is to turn the empty square into a weekend market.",
+            "traduccion": "Escucha el comienzo de nuestra propuesta: el objetivo es convertir la plaza vacía en un mercado de fin de semana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good. Now the benefit. Who benefits?",
+            "traduccion": "Bien. Ahora el beneficio. ¿Quién sale ganando?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The main benefit is that families will have a safe place to meet. Then we outline three steps and end with a request for a grant.",
+            "traduccion": "El principal beneficio es que las familias tendrán un lugar seguro donde reunirse. Después esbozamos tres pasos y terminamos con la petición de una subvención."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Perfect. The request should come last, so nobody forgets it.",
+            "traduccion": "Perfecto. La petición debe ir al final para que nadie la olvide."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué parte de la propuesta va al final?",
+          "opciones": [
+            {
+              "es": "La petición de una subvención."
+            },
+            {
+              "es": "El objetivo del mercado."
+            },
+            {
+              "es": "El plan en tres pasos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana termina con «a request for a grant»: la petición cierra la propuesta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Frase típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Objetivo"
+            },
+            {
+              "texto": "The objective is to…"
+            }
+          ],
+          [
+            {
+              "texto": "Beneficio"
+            },
+            {
+              "texto": "The main benefit is that…"
+            }
+          ],
+          [
+            {
+              "texto": "Plan"
+            },
+            {
+              "texto": "We outline… / We recommend…"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "We request…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-52": {
+      "explicacion": {
+        "titulo": "Recommend that y compañía",
+        "texto": "Tras recommend, suggest, propose e insist puedes usar that + sujeto + verbo en forma base: «We recommend that the council approve…». El verbo no lleva -s aunque el sujeto sea he, she o it. Con suggest, propose y recommend también puedes usar -ing cuando no hace falta nombrar al sujeto: «Mia suggests postponing». Lo que no existe es «suggest to postpone» ni «suggest me to go». Con it is essential that ocurre lo mismo: that + forma base (be, not happen, go…)."
+      },
+      "patron": {
+        "texto": "Verbo de propuesta + that + sujeto + forma base:",
+        "formula": [
+          {
+            "texto": "We recommend",
+            "nota": "verbo de propuesta"
+          },
+          {
+            "texto": "that the council",
+            "nota": "nuevo sujeto"
+          },
+          {
+            "texto": "approve the budget.",
+            "nota": "verbo base: sin -s ni -ed"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I suggest to postpone the concert.",
+          "correcto": "I suggest postponing the concert.",
+          "explicacion": "Suggest no admite to + infinitivo: usa -ing o that + sujeto + verbo base."
+        },
+        {
+          "incorrecto": "We recommend that the council approves the budget.",
+          "correcto": "We recommend that the council approve the budget.",
+          "explicacion": "Tras recommend that el verbo va en forma base: approve, aunque el sujeto sea singular."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom preparan un concierto al aire libre y el pronóstico anuncia lluvia.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "The forecast worries me. I suggest postponing the concert.",
+            "traduccion": "El pronóstico me preocupa. Sugiero aplazar el concierto."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Carlos insists that we keep the date. He says the tickets are sold.",
+            "traduccion": "Carlos insiste en que mantengamos la fecha. Dice que las entradas están vendidas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then I recommend that the stage have a roof and that the organisers check the forecast every day.",
+            "traduccion": "Entonces recomiendo que el escenario tenga techo y que los organizadores revisen el pronóstico cada día."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. It is essential that nobody wait outside in the rain.",
+            "traduccion": "Bien. Es imprescindible que nadie espere fuera bajo la lluvia."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué sugiere Sara al principio de la conversación?",
+          "opciones": [
+            {
+              "es": "Aplazar el concierto."
+            },
+            {
+              "es": "Cancelar todas las entradas."
+            },
+            {
+              "es": "Cambiar el escenario de sitio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «I suggest postponing the concert»: suggest + -ing."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Patrones correctos"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "suggest"
+            },
+            {
+              "texto": "suggest doing / suggest that we do"
+            }
+          ],
+          [
+            {
+              "texto": "recommend"
+            },
+            {
+              "texto": "recommend doing / recommend that she do"
+            }
+          ],
+          [
+            {
+              "texto": "propose"
+            },
+            {
+              "texto": "propose doing / propose that we do"
+            }
+          ],
+          [
+            {
+              "texto": "insist"
+            },
+            {
+              "texto": "insist that he do"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-53": {
+      "explicacion": {
+        "titulo": "Leer una propuesta con ojo crítico",
+        "texto": "Antes de presentar una propuesta conviene buscar sus puntos débiles, como lo hará quien decide. Los más comunes son la vaguedad (sin cifras ni fechas), los plazos poco realistas, los supuestos que nadie ha comprobado y los riesgos sin plan B. Nómbralos con vague, unrealistic, rest on an assumption u overlook, y justifícalos con because: «It is vague because it gives no numbers». Anticipar las preguntas previsibles (who pays, who builds…) te deja responder antes de que te lo reprochen."
+      },
+      "patron": {
+        "texto": "Punto débil + because + razón:",
+        "formula": [
+          {
+            "texto": "The plan is unrealistic",
+            "nota": "nombras el punto débil"
+          },
+          {
+            "texto": "because",
+            "nota": "justificas"
+          },
+          {
+            "texto": "three volunteers cannot finish in two weeks.",
+            "nota": "la razón concreta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree that the plan is unrealistic.",
+          "correcto": "I agree that the plan is unrealistic.",
+          "explicacion": "«Estar de acuerdo» es un verbo en inglés: I agree, sin am."
+        },
+        {
+          "incorrecto": "The plan depends of one assumption.",
+          "correcto": "The plan depends on one assumption.",
+          "explicacion": "Depend va con on, no con of: depends on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo revisan la propuesta del huerto comunitario que escribió Ana.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I read the garden proposal. It is vague: it says «many families» but gives no numbers.",
+            "traduccion": "Leí la propuesta del huerto. Es vaga: dice «muchas familias» pero no da cifras."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And finishing in two weeks is unrealistic with only three volunteers.",
+            "traduccion": "Y terminar en dos semanas es poco realista con solo tres voluntarios."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Agreed. It also rests on one assumption, that the council will pay. There is no contingency if it does not.",
+            "traduccion": "De acuerdo. Además se apoya en un supuesto, que el consejo pagará. No hay plan de contingencia si no lo hace."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then we should anticipate that question on Thursday: who pays if the council says no?",
+            "traduccion": "Entonces deberíamos anticipar esa pregunta el jueves: ¿quién paga si el consejo dice que no?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pregunta cree Leo que hay que anticipar para el jueves?",
+          "opciones": [
+            {
+              "es": "Quién paga si el consejo dice que no."
+            },
+            {
+              "es": "Cuántas familias viven en el barrio."
+            },
+            {
+              "es": "Cuándo termina el invierno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «who pays if the council says no?»; es la pregunta que hay que prever."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Punto débil",
+          "Señal en el texto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "vague"
+            },
+            {
+              "texto": "«many people» sin cifras"
+            }
+          ],
+          [
+            {
+              "texto": "unrealistic"
+            },
+            {
+              "texto": "«in two weeks» sin medios"
+            }
+          ],
+          [
+            {
+              "texto": "assumption"
+            },
+            {
+              "texto": "«the council will pay» sin pruebas"
+            }
+          ],
+          [
+            {
+              "texto": "no contingency"
+            },
+            {
+              "texto": "sin plan B ante un riesgo"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-54": {
+      "explicacion": {
+        "titulo": "Hitos, plazos y presupuesto",
+        "texto": "Un calendario fiable fija cada hito con su fecha. Con by + fecha y no later than + fecha usa el futuro perfecto (will have signed): la acción estará terminada para entonces. Within + plazo da el margen («within two weeks»). El futuro continuo (will be advertising) describe lo que estará en marcha, y el perfecto continuo (will have been preparing) mide cuánto tiempo llevas. En el presupuesto, allocate X to Y reparte el dinero. Cuida el orden: primero los hitos en secuencia y al final las cifras."
+      },
+      "patron": {
+        "texto": "Hito + plazo + tiempo futuro:",
+        "formula": [
+          {
+            "texto": "We will have signed the contract",
+            "nota": "futuro perfecto: estará hecho"
+          },
+          {
+            "texto": "by the end of March,",
+            "nota": "by / no later than + fecha"
+          },
+          {
+            "texto": "and within two weeks we will be advertising.",
+            "nota": "within + plazo; futuro continuo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will have signed the contract until March.",
+          "correcto": "We will have signed the contract by March.",
+          "explicacion": "Para marcar el límite de un plazo se usa by, no until: «hasta» se traduce distinto según el sentido."
+        },
+        {
+          "incorrecto": "Within of two weeks we will be advertising.",
+          "correcto": "Within two weeks we will be advertising.",
+          "explicacion": "Within no lleva of: es «dentro de» sin preposición adicional."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos, el tesorero, revisan el calendario del festival del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Let's check the schedule. The venue contract must be signed by the end of March.",
+            "traduccion": "Revisemos el calendario. El contrato del local debe estar firmado para finales de marzo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Fine. Then within two weeks we will be advertising in schools and shops.",
+            "traduccion": "Bien. Entonces en dos semanas estaremos promocionando en colegios y tiendas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the insurance fee? I will have paid it no later than 15 April.",
+            "traduccion": "¿Y la cuota del seguro? La habré pagado como muy tarde el 15 de abril."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Great. We will allocate 500 dollars to it, and the rest goes to music.",
+            "traduccion": "Genial. Destinaremos 500 dólares al seguro y el resto a la música."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cuándo habrá pagado Carlos la cuota del seguro, como muy tarde?",
+          "opciones": [
+            {
+              "es": "El 15 de abril."
+            },
+            {
+              "es": "A finales de marzo."
+            },
+            {
+              "es": "Dentro de dos semanas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «no later than 15 April»: ese es su plazo máximo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Marcador",
+          "Se combina con"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "by + fecha / no later than + fecha"
+            },
+            {
+              "texto": "will have + participio"
+            }
+          ],
+          [
+            {
+              "texto": "within + plazo"
+            },
+            {
+              "texto": "will + verbo / will be + -ing"
+            }
+          ],
+          [
+            {
+              "texto": "by the time + presente"
+            },
+            {
+              "texto": "will have been + -ing"
+            }
+          ],
+          [
+            {
+              "texto": "allocate X to Y"
+            },
+            {
+              "texto": "reparto del presupuesto"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-55": {
+      "explicacion": {
+        "titulo": "Proponer y responder a objeciones",
+        "texto": "Una propuesta completa une todo lo anterior: objetivo, beneficio, plan con fechas y petición. Cuando alguien objeta, no te defiendas con un «no»: reconoce la duda (Admittedly…, That is a fair objection), muestra que la entendiste (I understand your concern) y responde con un hecho o un plan (we will have cleaned…, we have a fallback plan). Así tranquilizas a quien decide sin renunciar a tu propuesta. Recuerda recommend that + forma base y los marcadores by, no later than y within."
+      },
+      "patron": {
+        "texto": "Reconocer + responder con un plan:",
+        "formula": [
+          {
+            "texto": "That is a fair objection,",
+            "nota": "reconoces la duda"
+          },
+          {
+            "texto": "but",
+            "nota": "contraste"
+          },
+          {
+            "texto": "we will have cleaned the square by midnight.",
+            "nota": "respuesta concreta con futuro"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will reassure to the residents.",
+          "correcto": "We will reassure the residents.",
+          "explicacion": "Reassure es transitivo: la persona va directamente después del verbo, sin to."
+        },
+        {
+          "incorrecto": "That is a fair objection, but we recommend that the council approves the plan.",
+          "correcto": "That is a fair objection, but we recommend that the council approve the plan.",
+          "explicacion": "Tras recommend that el verbo va en forma base: approve."
+        }
+      ],
+      "situacion": {
+        "contexto": "Durante una reunión de barrio, Sara, vecina de la plaza, le plantea una duda a Ana sobre su festival.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I like the idea, but my concern is the noise after ten.",
+            "traduccion": "Me gusta la idea, pero mi preocupación es el ruido después de las diez."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a fair objection. To reassure every resident, the music will stop at ten.",
+            "traduccion": "Es una objeción razonable. Para tranquilizar a cada vecino, la música se detendrá a las diez."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And who will clean the square?",
+            "traduccion": "¿Y quién limpiará la plaza?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "We will have cleaned it by midnight, and we will be checking the street again at six.",
+            "traduccion": "La habremos limpiado antes de medianoche y estaremos revisando la calle otra vez a las seis."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Con qué responde Ana a la preocupación por el ruido?",
+          "opciones": [
+            {
+              "es": "Con que la música se detendrá a las diez."
+            },
+            {
+              "es": "Con que el festival será en otro barrio."
+            },
+            {
+              "es": "Con que repartirá tapones para los oídos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana responde «the music will stop at ten»: da un hecho concreto que atiende la preocupación."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Objeción",
+          "Respuesta con plan"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "It will be too loud."
+            },
+            {
+              "texto": "The music will stop at ten."
+            }
+          ],
+          [
+            {
+              "texto": "It costs too much."
+            },
+            {
+              "texto": "We will allocate only 2,000 dollars and ask for a grant."
+            }
+          ],
+          [
+            {
+              "texto": "Nobody will come."
+            },
+            {
+              "texto": "We will be advertising in every school."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

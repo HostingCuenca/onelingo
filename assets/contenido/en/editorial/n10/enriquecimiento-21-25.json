@@ -1,0 +1,669 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "classes": {
+    "en.n10.class-21": {
+      "explicacion": {
+        "titulo": "Conceder, rebatir y concluir",
+        "texto": "En un debate bien construido el hablante primero reconoce un punto del otro lado (concesión): Admittedly…, I concede that…, That is a valid point. Después da un giro con but, yet, even so o nevertheless y defiende su postura (refutación). Al final cierra con To conclude… Conceder no es rendirse: hace que tu refutación suene justa. Al escuchar, busca la palabra de giro: lo anterior es la concesión y lo posterior es lo que el hablante realmente defiende."
+      },
+      "patron": {
+        "texto": "Concesión + giro + refutación + conclusión:",
+        "formula": [
+          {
+            "texto": "Admittedly, phones can help,",
+            "nota": "concesión: reconoces un punto del otro lado"
+          },
+          {
+            "texto": "but they distract the class.",
+            "nota": "giro y refutación: lo que realmente defiendes"
+          },
+          {
+            "texto": "To conclude, a ban is fairer.",
+            "nota": "conclusión: cierre de tu postura"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Admittedly, phones are useful, however they distract the class.",
+          "correcto": "Admittedly, phones are useful; however, they distract the class.",
+          "explicacion": "However no une dos frases como but: necesita punto y coma o punto delante y coma detrás. Si prefieres una coma sola, usa but."
+        },
+        {
+          "incorrecto": "I concede you that the ban is fair.",
+          "correcto": "I concede that the ban is fair.",
+          "explicacion": "En español se concede algo a alguien, pero en inglés concede va directo con that + frase; no se añade you."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comentan el debate que han tenido en clase sobre los móviles.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "You spoke for the ban today. What was your best point?",
+            "traduccion": "Hoy hablaste a favor de la prohibición. ¿Cuál fue tu mejor punto?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Admittedly, phones can help in an emergency. Nevertheless, the school already has a phone in the office.",
+            "traduccion": "Es cierto que los móviles pueden ayudar en una emergencia. Sin embargo, el colegio ya tiene un teléfono en la oficina."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. And how did you conclude?",
+            "traduccion": "Bien. ¿Y cómo concluiste?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "To conclude, a ban during lessons is fairer, because pupils can still use phones at break.",
+            "traduccion": "Para concluir, una prohibición durante las clases es más justa, porque los alumnos aún pueden usar el móvil en el recreo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concede Tom antes de rebatir?",
+          "opciones": [
+            {
+              "es": "Que los móviles pueden ayudar en una emergencia."
+            },
+            {
+              "es": "Que el colegio ya tiene un teléfono en la oficina."
+            },
+            {
+              "es": "Que los alumnos pueden usar el móvil en el recreo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Admittedly, phones can help in an emergency» y solo después rebate con «Nevertheless…»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Admittedly… / I concede that…"
+            },
+            {
+              "texto": "Admittedly, phones can help."
+            }
+          ],
+          [
+            {
+              "texto": "Refutación"
+            },
+            {
+              "texto": "but / yet / nevertheless"
+            },
+            {
+              "texto": "Nevertheless, teachers need a rule."
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "To conclude…"
+            },
+            {
+              "texto": "To conclude, a ban is fairer."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-22": {
+      "explicacion": {
+        "titulo": "Por mucho que… y por muy… que…",
+        "texto": "Además de although tienes tres estructuras concesivas más precisas: Much as + sujeto + verbo («por mucho que»), However + adjetivo + sujeto + verbo («por muy… que») y adjetivo + as/though + sujeto + verbo («aunque sea…»). En inglés no hay subjuntivo: el verbo va en presente o pasado normal. El adjetivo va delante, el sujeto va antes del verbo (nada de inversión) y la segunda parte no lleva but."
+      },
+      "patron": {
+        "texto": "Concesión avanzada + tu postura:",
+        "formula": [
+          {
+            "texto": "Much as I admire the plan,",
+            "nota": "Much as + sujeto + verbo: «por mucho que»"
+          },
+          {
+            "texto": "However tempting the offer is,",
+            "nota": "However + adjetivo + sujeto + verbo"
+          },
+          {
+            "texto": "Tempting as the offer is,",
+            "nota": "adjetivo + as/though + sujeto + verbo"
+          },
+          {
+            "texto": "we say no.",
+            "nota": "tu postura va después, sin but"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "However is tempting the offer, we say no.",
+          "correcto": "However tempting the offer is, we say no.",
+          "explicacion": "No se invierte el orden como en español: However + adjetivo + sujeto + verbo, en ese orden."
+        },
+        {
+          "incorrecto": "Much as I admire the plan, but the fee is too high.",
+          "correcto": "Much as I admire the plan, the fee is too high.",
+          "explicacion": "En español se tolera «aunque… pero»; en inglés Much as ya marca el contraste y la segunda parte no lleva but."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos hablan de apuntarse a un gimnasio nuevo del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Are you joining the new gym, Sara?",
+            "traduccion": "¿Te apuntas al gimnasio nuevo, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Much as I admire the trainers, the fee is too high for me.",
+            "traduccion": "Por mucho que admire a los entrenadores, la cuota es demasiado alta para mí."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "However tempting the free week is, it is only a week, isn't it?",
+            "traduccion": "Por muy tentadora que sea la semana gratis, solo es una semana, ¿no?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Exactly. I will wait for a better offer.",
+            "traduccion": "Exacto. Esperaré a una oferta mejor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no se apunta Sara al gimnasio?",
+          "opciones": [
+            {
+              "es": "Porque la cuota le parece demasiado alta."
+            },
+            {
+              "es": "Porque no admira a los entrenadores."
+            },
+            {
+              "es": "Porque la semana gratis ya terminó."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara concede con «Much as I admire the trainers» y remata con «the fee is too high»: el motivo es la cuota."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Ejemplo",
+          "Equivale a"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Much as + sujeto + verbo"
+            },
+            {
+              "texto": "Much as I admire the plan, the fee is high."
+            },
+            {
+              "texto": "por mucho que"
+            }
+          ],
+          [
+            {
+              "texto": "However + adj + sujeto + verbo"
+            },
+            {
+              "texto": "However strict it is, it is fair."
+            },
+            {
+              "texto": "por muy… que"
+            }
+          ],
+          [
+            {
+              "texto": "Adj + as/though + sujeto + verbo"
+            },
+            {
+              "texto": "Clever as it is, it has a flaw."
+            },
+            {
+              "texto": "aunque sea…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-23": {
+      "explicacion": {
+        "titulo": "Tesis, evidencia y objeción",
+        "texto": "Para seguir un debate escuchado, busca tres piezas. La tesis (claim) es lo que el hablante defiende: My claim is… La evidencia son datos que se pueden comprobar: a survey, figures, According to… Una opinión («I think…») no es evidencia. La objeción (objection) es el argumento contrario y la réplica (rebuttal) responde a ella. Recuerda que evidence es incontable: se dice the evidence shows, nunca evidences."
+      },
+      "patron": {
+        "texto": "Tesis + evidencia + objeción + réplica:",
+        "formula": [
+          {
+            "texto": "My claim is that…",
+            "nota": "tesis: lo que defiendes"
+          },
+          {
+            "texto": "The evidence is a survey…",
+            "nota": "evidencia: dato comprobable"
+          },
+          {
+            "texto": "One objection is that…",
+            "nota": "objeción: la postura contraria"
+          },
+          {
+            "texto": "The rebuttal is that…",
+            "nota": "réplica: respuesta a la objeción"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The evidences show that shoppers prefer quiet streets.",
+          "correcto": "The evidence shows that shoppers prefer quiet streets.",
+          "explicacion": "Evidence es incontable en inglés: no lleva -s y el verbo va en singular, aunque en español digamos «las pruebas»."
+        },
+        {
+          "incorrecto": "Following the survey, sixty per cent of shoppers prefer quiet streets.",
+          "correcto": "According to the survey, sixty per cent of shoppers prefer quiet streets.",
+          "explicacion": "«Según la encuesta» se dice According to the survey; following significa «después de» o «siguiendo»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia preparan el debate del colegio sobre cerrar al tráfico el centro los domingos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What is our claim?",
+            "traduccion": "¿Cuál es nuestra tesis?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Cars should stay out of the town centre on Sundays.",
+            "traduccion": "Los coches deberían quedarse fuera del centro los domingos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And our evidence?",
+            "traduccion": "¿Y nuestra evidencia?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "A survey: sixty per cent of shoppers prefer a quiet street. The other team will object that older people cannot walk far.",
+            "traduccion": "Una encuesta: el sesenta por ciento de los clientes prefiere una calle tranquila. El otro equipo objetará que las personas mayores no pueden caminar lejos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato usan como evidencia?",
+          "opciones": [
+            {
+              "es": "Una encuesta: el 60 % de los clientes prefiere una calle tranquila."
+            },
+            {
+              "es": "La opinión de Tom sobre el tráfico."
+            },
+            {
+              "es": "La objeción de las personas mayores."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «A survey: sixty per cent of shoppers prefer a quiet street»; la objeción es lo que dirá el otro equipo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Señal que oyes",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "My claim is that…"
+            },
+            {
+              "texto": "My claim is that shops should close."
+            }
+          ],
+          [
+            {
+              "texto": "Evidencia"
+            },
+            {
+              "texto": "According to… / The survey shows…"
+            },
+            {
+              "texto": "According to the survey, most agree."
+            }
+          ],
+          [
+            {
+              "texto": "Objeción"
+            },
+            {
+              "texto": "One objection is that…"
+            },
+            {
+              "texto": "One objection is that it costs jobs."
+            }
+          ],
+          [
+            {
+              "texto": "Réplica"
+            },
+            {
+              "texto": "The rebuttal is that…"
+            },
+            {
+              "texto": "The rebuttal is that it saves energy."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-24": {
+      "explicacion": {
+        "titulo": "Rebatir con tacto y firmeza",
+        "texto": "Para rebatir sin sonar agresivo, concede primero y luego combina tres recursos. Atenúa lo que no puedes probar con arguably o it seems that; refuerza lo que sí sostienes con undoubtedly, clearly o essential; y destaca lo importante con una frase hendida: What matters is… («lo que importa es…») o It is the cost that… («es el coste lo que…»). No mezcles atenuación y refuerzo en la misma afirmación, y recuerda que tras It is + elemento va that, no what."
+      },
+      "patron": {
+        "texto": "Concesión + énfasis + matiz:",
+        "formula": [
+          {
+            "texto": "That is a reasonable point,",
+            "nota": "concesión: reconoces algo al otro lado"
+          },
+          {
+            "texto": "but what matters is the cost.",
+            "nota": "frase hendida con What…is para destacar"
+          },
+          {
+            "texto": "It is the cost that families overlook.",
+            "nota": "frase hendida con It is…that"
+          },
+          {
+            "texto": "The fee is undoubtedly high.",
+            "nota": "refuerzo (undoubtedly) o atenuante (arguably)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is the cost what worries me, not the design.",
+          "correcto": "It is the cost that worries me, not the design.",
+          "explicacion": "En español se dice «es el coste lo que me preocupa», pero en inglés, tras It is + elemento, se usa that."
+        },
+        {
+          "incorrecto": "The plan is undoubtedly arguably the cheapest option.",
+          "correcto": "The plan is arguably the cheapest option.",
+          "explicacion": "Arguably atenúa y undoubtedly refuerza: juntos se contradicen. Elige según cuánto puedas probar."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana defiende la cuota del club deportivo del colegio y Leo la rebate con tacto.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I think the club fee is fair. It is arguably the lowest in town.",
+            "traduccion": "Creo que la cuota del club es justa. Es posiblemente la más baja de la ciudad."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a reasonable point, but what matters is the cost for families.",
+            "traduccion": "Es un punto razonable, pero lo que importa es el coste para las familias."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "But the club needs the money.",
+            "traduccion": "Pero el club necesita el dinero."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I agree. However, it is the cost for families that the club overlooks, and it is undoubtedly too high for some.",
+            "traduccion": "Estoy de acuerdo. Sin embargo, es el coste para las familias lo que el club pasa por alto, y sin duda es demasiado alto para algunas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dice Leo que el club pasa por alto?",
+          "opciones": [
+            {
+              "es": "El coste para las familias."
+            },
+            {
+              "es": "La necesidad de dinero del club."
+            },
+            {
+              "es": "El precio más bajo de la ciudad."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «it is the cost for families that the club overlooks»: la frase hendida destaca el coste."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hendida con What"
+            },
+            {
+              "texto": "What + sujeto + verbo + is + X"
+            },
+            {
+              "texto": "What matters is the price."
+            }
+          ],
+          [
+            {
+              "texto": "Hendida con It"
+            },
+            {
+              "texto": "It is + X + that + verbo"
+            },
+            {
+              "texto": "It is the price that worries us."
+            }
+          ],
+          [
+            {
+              "texto": "Atenuante"
+            },
+            {
+              "texto": "arguably / it seems that"
+            },
+            {
+              "texto": "The plan is arguably unfair."
+            }
+          ],
+          [
+            {
+              "texto": "Refuerzo"
+            },
+            {
+              "texto": "undoubtedly / clearly"
+            },
+            {
+              "texto": "The fee is undoubtedly high."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-25": {
+      "explicacion": {
+        "titulo": "Debate vecinal: todo el bloque junto",
+        "texto": "En un debate vecinal encadenas lo aprendido en el bloque: tesis (My position is that…), dos argumentos con evidencia (First…, According to…), una concesión (Admittedly…, Much as I…) seguida de una refutación (nevertheless, what matters is…, it is… that…) y una conclusión (To conclude…). Varía el tono con arguably y undoubtedly. Escucha primero qué concede el otro: así sabrás cuál es su verdadera objeción y podrás responderla con precisión."
+      },
+      "patron": {
+        "texto": "Tesis + argumentos + concesión + refutación + conclusión:",
+        "formula": [
+          {
+            "texto": "My position is that the park should open later.",
+            "nota": "tesis: tu postura desde el principio"
+          },
+          {
+            "texto": "First, the petition shows…; second, …",
+            "nota": "dos argumentos con su evidencia"
+          },
+          {
+            "texto": "Much as I understand the rubbish problem,",
+            "nota": "concesión: reconoces el punto contrario"
+          },
+          {
+            "texto": "what matters is that families have a safe place.",
+            "nota": "refutación con frase hendida"
+          },
+          {
+            "texto": "To conclude, a compromise is possible.",
+            "nota": "conclusión con término medio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "As a conclusion, I support the petition.",
+          "correcto": "To conclude, I support the petition.",
+          "explicacion": "Calco de «como conclusión»: para cerrar se dice To conclude o In conclusion, no as a conclusion."
+        },
+        {
+          "incorrecto": "Although the park has rubbish, however the residents use it.",
+          "correcto": "Although the park has rubbish, the residents use it.",
+          "explicacion": "Although ya marca el contraste; no se añade however en la segunda parte, igual que no se suma but."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Ana debaten en la reunión del barrio cuándo debe cerrar el parque.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "My position is that the park should close at eight, because of the noise.",
+            "traduccion": "Mi postura es que el parque debería cerrar a las ocho, por el ruido."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Much as I understand the noise problem, what matters is that families have a safe place in the evening.",
+            "traduccion": "Por mucho que entienda el problema del ruido, lo que importa es que las familias tengan un lugar seguro por la tarde."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Admittedly, the playground is busy. Nevertheless, the residents near the park cannot sleep.",
+            "traduccion": "Es cierto que la zona de juegos está concurrida. Sin embargo, los vecinos cercanos al parque no pueden dormir."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "To conclude, let us find a compromise: open until ten, with a quiet rule after nine.",
+            "traduccion": "Para concluir, busquemos un acuerdo: abierto hasta las diez, con una norma de silencio después de las nueve."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué acuerdo propone Ana?",
+          "opciones": [
+            {
+              "es": "Abrir hasta las diez, con silencio desde las nueve."
+            },
+            {
+              "es": "Cerrar el parque a las ocho."
+            },
+            {
+              "es": "Abrir el parque toda la noche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana propone «open until ten, with a quiet rule after nine»: un término medio entre ambas posturas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Lo que haces",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "Dices qué defiendes"
+            },
+            {
+              "texto": "My position is that…"
+            }
+          ],
+          [
+            {
+              "texto": "Argumento"
+            },
+            {
+              "texto": "Das un dato o hecho"
+            },
+            {
+              "texto": "First, the petition shows…"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Reconoces un punto"
+            },
+            {
+              "texto": "Admittedly… / Much as I…"
+            }
+          ],
+          [
+            {
+              "texto": "Refutación"
+            },
+            {
+              "texto": "Rebates con énfasis"
+            },
+            {
+              "texto": "What matters is… / It is… that…"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "Cierras con un acuerdo"
+            },
+            {
+              "texto": "To conclude, a compromise…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

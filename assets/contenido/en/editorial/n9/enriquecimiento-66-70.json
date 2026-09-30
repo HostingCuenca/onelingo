@@ -1,0 +1,578 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "classes": {
+    "en.n9.class-66": {
+      "explicacion": {
+        "titulo": "Instrucción, ánimo y retroalimentación",
+        "texto": "Un buen líder combina tres tipos de lenguaje. La instrucción usa el imperativo y dice qué hacer ahora: Pass the ball sooner. El ánimo motiva y reconoce el esfuerzo: I love your effort, Keep going. La retroalimentación mira hacia atrás y hacia adelante: nombra un punto fuerte, un dato concreto y algo que mejorar. Para clasificar una frase, fíjate en el verbo (¿orden, elogio o descripción de lo que pasó?) y en el tono. Cuando nadie da un dato, el comentario suele ser solo ánimo."
+      },
+      "patron": {
+        "texto": "Retroalimentación útil:",
+        "formula": [
+          {
+            "texto": "Your strength is your speed,",
+            "nota": "punto fuerte: reconoce lo que funciona"
+          },
+          {
+            "texto": "but your passes were late in the second half,",
+            "nota": "dato concreto, no una opinión"
+          },
+          {
+            "texto": "so try looking up before you pass.",
+            "nota": "mejora posible y accionable"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Make the pass more early.",
+          "correcto": "Pass the ball earlier.",
+          "explicacion": "Early es corto: su comparativo es earlier, no more early; y para dar la orden basta el verbo pass."
+        },
+        {
+          "incorrecto": "I want to give you a feedback.",
+          "correcto": "I want to give you some feedback.",
+          "explicacion": "Feedback es incontable: no lleva a ni plural; se dice some feedback o a piece of feedback."
+        }
+      ],
+      "situacion": {
+        "contexto": "El entrenador Carlos habla con su capitana Mia al final del entrenamiento.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Pass the ball sooner, Mia, and stay in your position.",
+            "traduccion": "Pasa el balón antes, Mia, y mantén tu posición."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK, coach.",
+            "traduccion": "De acuerdo, entrenador."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Well done today. I love your effort; you never gave up.",
+            "traduccion": "Bien hecho hoy. Me encanta tu esfuerzo; nunca te rendiste."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thanks. What can I improve?",
+            "traduccion": "Gracias. ¿Qué puedo mejorar?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Your strength is your speed. You can improve by looking up before you pass.",
+            "traduccion": "Tu punto fuerte es tu velocidad. Puedes mejorar levantando la vista antes de pasar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué mejora concreta le propone Carlos a Mia?",
+          "opciones": [
+            {
+              "es": "Levantar la vista antes de pasar el balón."
+            },
+            {
+              "es": "Correr más despacio en el campo."
+            },
+            {
+              "es": "Dejar de jugar en su posición."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos termina con una mejora accionable: looking up before you pass."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Instrucción"
+            },
+            {
+              "texto": "Pass the ball sooner."
+            }
+          ],
+          [
+            {
+              "texto": "Ánimo"
+            },
+            {
+              "texto": "You can do it!"
+            }
+          ],
+          [
+            {
+              "texto": "Retroalimentación"
+            },
+            {
+              "texto": "Your strength is your speed, but you can improve your passing."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-67": {
+      "explicacion": {
+        "titulo": "Preguntas que entrenan",
+        "texto": "Un coach no da la solución: hace preguntas para que la otra persona la encuentre. Son abiertas (empiezan por What o How y no se responden con sí o no) y a menudo hipotéticas: What would it take to...? What would you do if...? What's stopping you from...? Evita Why don't you...?, que es un consejo disfrazado. Convertir un consejo en pregunta: You should practise daily se vuelve What would help you practise daily?"
+      },
+      "patron": {
+        "texto": "Pregunta de coaching:",
+        "formula": [
+          {
+            "texto": "What would it take",
+            "nota": "What would it take: «¿qué haría falta?»"
+          },
+          {
+            "texto": "to reach",
+            "nota": "to + verbo base, no for"
+          },
+          {
+            "texto": "your goal this month?",
+            "nota": "la meta de la otra persona"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What would it take for reach your goal?",
+          "correcto": "What would it take to reach your goal?",
+          "explicacion": "Después de take va to + verbo base; for + infinitivo es un calco de «para»."
+        },
+        {
+          "incorrecto": "What is stopping you to speak?",
+          "correcto": "What is stopping you from speaking?",
+          "explicacion": "Stop you from va seguido de -ing: from speaking."
+        }
+      ],
+      "situacion": {
+        "contexto": "Después de un entrenamiento, Carlos habla con Tom, que quiere dirigir al equipo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I want to lead the team, but I feel nervous.",
+            "traduccion": "Quiero dirigir al equipo, pero me siento nervioso."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What's stopping you from leading?",
+            "traduccion": "¿Qué te impide dirigir?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I'm not confident when everyone looks at me.",
+            "traduccion": "No tengo seguridad cuando todos me miran."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What would you do if you were more confident?",
+            "traduccion": "¿Qué harías si tuvieras más seguridad?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I would speak louder and give clear instructions.",
+            "traduccion": "Hablaría más alto y daría instrucciones claras."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué haría Tom si tuviera más seguridad?",
+          "opciones": [
+            {
+              "es": "Hablaría más alto y daría instrucciones claras."
+            },
+            {
+              "es": "Dejaría de entrenar con el equipo."
+            },
+            {
+              "es": "Pediría a Carlos que dirigiera por él."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom responde a la pregunta hipotética: speak louder y give clear instructions."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Consejo directo",
+          "Pregunta de coaching"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "You should talk to her."
+            },
+            {
+              "texto": "What would it take to talk to her?"
+            }
+          ],
+          [
+            {
+              "texto": "Stop worrying."
+            },
+            {
+              "texto": "What's stopping you from feeling calm?"
+            }
+          ],
+          [
+            {
+              "texto": "Practise more."
+            },
+            {
+              "texto": "What could you try to practise more?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-68": {
+      "explicacion": {
+        "titulo": "Retroalimentación que ayuda",
+        "texto": "Para valorar un comentario, aplica tres criterios. ¿Es específico? Cita un hecho (I noticed that you rushed...) en lugar de una impresión (You did fine). ¿Es respetuoso? Habla de lo que se hizo, no de cómo es la persona (nada de You never listen). ¿Es accionable? Propone algo que se pueda hacer (Next time, breathe before you shoot). Un comentario vago o irrespetuoso puede sonar sincero, pero no ayuda a mejorar. Al escuchar, pregúntate qué criterio falta."
+      },
+      "patron": {
+        "texto": "Observación + siguiente paso:",
+        "formula": [
+          {
+            "texto": "I noticed that you rushed your last two passes,",
+            "nota": "hecho concreto: específico y respetuoso"
+          },
+          {
+            "texto": "so next time,",
+            "nota": "conector hacia la mejora"
+          },
+          {
+            "texto": "breathe before you shoot.",
+            "nota": "paso accionable"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I suggest you to practise more.",
+          "correcto": "I suggest you practise more.",
+          "explicacion": "Después de suggest you va el verbo base sin to; también se puede decir suggest that you practise."
+        },
+        {
+          "incorrecto": "I noticed you rush your passes yesterday.",
+          "correcto": "I noticed that you rushed your last two passes.",
+          "explicacion": "Para hablar de algo que ya pasó, noticed va con un verbo en pasado: rushed."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, coordinadora de voluntarios, da retroalimentación a Ana después de explicar un juego a los niños del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Ana, I noticed that you rushed the rules, so some children looked confused.",
+            "traduccion": "Ana, me fijé en que hiciste con prisa las reglas, así que algunos niños parecían confundidos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I was nervous.",
+            "traduccion": "Estaba nerviosa."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I suggest you breathe and repeat the rules slowly. Your examples were helpful because they were clear.",
+            "traduccion": "Te sugiero que respires y repitas las reglas despacio. Tus ejemplos fueron útiles porque eran claros."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thanks. That is something I can do.",
+            "traduccion": "Gracias. Eso es algo que puedo hacer."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sugerencia concreta le da Sara a Ana?",
+          "opciones": [
+            {
+              "es": "Que respire y repita las reglas despacio."
+            },
+            {
+              "es": "Que deje de explicar juegos."
+            },
+            {
+              "es": "Que hable solo con los adultos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara termina con pasos accionables: breathe y repeat the rules slowly."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Criterio",
+          "Ejemplo que cumple"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Específica"
+            },
+            {
+              "texto": "I noticed that you rushed your last two passes."
+            }
+          ],
+          [
+            {
+              "texto": "Respetuosa"
+            },
+            {
+              "texto": "Next time, breathe before you shoot."
+            }
+          ],
+          [
+            {
+              "texto": "Accionable"
+            },
+            {
+              "texto": "I suggest you practise your left foot twice a week."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-69": {
+      "explicacion": {
+        "titulo": "Hablar al equipo tras una derrota",
+        "texto": "Tras perder, una charla de entrenador tiene tres partes. Primero reconoce la emoción y un esfuerzo concreto: I know the defeat hurts; I'm proud of how you defended. Después, una sola crítica específica con However: However, we lost the ball too often in the middle. Cierra con el siguiente paso en forma de pregunta de coaching: What will it take to bounce back next Saturday? No culpes a nadie ni digas que todo estuvo bien: combina reconocimiento, verdad y plan."
+      },
+      "patron": {
+        "texto": "Charla tras una derrota:",
+        "formula": [
+          {
+            "texto": "I'm proud of how you defended,",
+            "nota": "reconocimiento específico"
+          },
+          {
+            "texto": "however, we lost the ball too often,",
+            "nota": "crítica concreta con however"
+          },
+          {
+            "texto": "so what would help us keep it next week?",
+            "nota": "siguiente paso como pregunta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'm proud for your effort.",
+          "correcto": "I'm proud of your effort.",
+          "explicacion": "Proud va con of: proud of + sustantivo o -ing."
+        },
+        {
+          "incorrecto": "Despite of the defeat, I'm proud of you.",
+          "correcto": "Despite the defeat, I'm proud of you.",
+          "explicacion": "Despite no lleva of; se dice despite o in spite of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Después de perder un partido, el entrenador Carlos habla con el equipo y con su capitana Mia.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I know the defeat hurts. Despite it, I'm proud of how you defended.",
+            "traduccion": "Sé que la derrota duele. A pesar de ello, estoy orgulloso de cómo defendisteis."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We lost the ball too often, coach.",
+            "traduccion": "Perdimos el balón demasiadas veces, entrenador."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, however, that is fixable. What will it take for us to bounce back on Saturday?",
+            "traduccion": "Sí, sin embargo, tiene arreglo. ¿Qué hará falta para recuperarnos el sábado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Shorter passes and more talking on the field.",
+            "traduccion": "Pases más cortos y hablar más en el campo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Mia, ¿qué hace falta para recuperarse el sábado?",
+          "opciones": [
+            {
+              "es": "Pases más cortos y hablar más en el campo."
+            },
+            {
+              "es": "Cambiar de entrenador."
+            },
+            {
+              "es": "Jugar en otro campo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia responde a la pregunta de coaching: shorter passes y more talking."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la charla",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Reconocimiento"
+            },
+            {
+              "texto": "I'm proud of how you defended in the second half."
+            }
+          ],
+          [
+            {
+              "texto": "Crítica concreta"
+            },
+            {
+              "texto": "However, we lost the ball too often in the middle."
+            }
+          ],
+          [
+            {
+              "texto": "Siguiente paso"
+            },
+            {
+              "texto": "What will it take to bounce back next Saturday?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-70": {
+      "explicacion": {
+        "titulo": "Guiar a un equipo por un cambio",
+        "texto": "Al anunciar un cambio, sigue cuatro pasos: anuncia (I want to announce...), explica el motivo (The reason is...), presenta el plan (Here is the plan...) y ofrece apoyo (We will support you with...). Después atiende las preocupaciones: reconócelas (I understand your concern), refléjalas (It sounds like you feel...) y pregunta (What would make it easier?). Esta clase de cierre integra lo del bloque: lenguaje de ánimo, preguntas de coaching y retroalimentación clara."
+      },
+      "patron": {
+        "texto": "Anunciar un cambio:",
+        "formula": [
+          {
+            "texto": "The reason is that more families are coming,",
+            "nota": "razón del cambio"
+          },
+          {
+            "texto": "so here is the plan:",
+            "nota": "presenta los pasos"
+          },
+          {
+            "texto": "we will support you with a clear guide.",
+            "nota": "apoyo concreto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I want to announce you a change.",
+          "correcto": "I want to announce a change.",
+          "explicacion": "Announce no se usa con persona directa; se dice announce a change (to the team) o tell you about a change."
+        },
+        {
+          "incorrecto": "I understand your concerns about to work earlier.",
+          "correcto": "I understand your concern about working earlier.",
+          "explicacion": "Después de una preposición (about) va -ing, no to + infinitivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, coordinadora de un huerto comunitario, anuncia un cambio a los voluntarios Tom y Ana.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I want to announce a change. From next month, we will have two shifts on Saturdays.",
+            "traduccion": "Quiero anunciar un cambio. A partir del próximo mes habrá dos turnos los sábados."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Why the change?",
+            "traduccion": "¿Por qué el cambio?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The reason is simple: more families are coming, and we need more time.",
+            "traduccion": "El motivo es sencillo: vienen más familias y necesitamos más tiempo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I'm worried about starting earlier.",
+            "traduccion": "Me preocupa empezar más temprano."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I understand your concern. We will support you with a guide, and you can choose your shift.",
+            "traduccion": "Entiendo tu preocupación. Te apoyaremos con una guía y podrás elegir tu turno."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿por qué hay un cambio de horario?",
+          "opciones": [
+            {
+              "es": "Porque vienen más familias y hace falta más tiempo."
+            },
+            {
+              "es": "Porque faltan voluntarios."
+            },
+            {
+              "es": "Porque el huerto cierra los sábados."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara da el motivo con The reason is simple: more families are coming."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del mensaje",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Razón"
+            },
+            {
+              "texto": "The reason is that more families are coming."
+            }
+          ],
+          [
+            {
+              "texto": "Plan"
+            },
+            {
+              "texto": "Here is the plan: two shifts instead of one."
+            }
+          ],
+          [
+            {
+              "texto": "Apoyo"
+            },
+            {
+              "texto": "We will support you with a clear guide."
+            }
+          ],
+          [
+            {
+              "texto": "Preocupación"
+            },
+            {
+              "texto": "I understand your concern. What would help?"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

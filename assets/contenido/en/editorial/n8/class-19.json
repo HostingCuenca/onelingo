@@ -1,0 +1,802 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-19",
+  "title": {
+    "en": "Build an inference from evidence",
+    "es": "Construir una inferencia con pruebas"
+  },
+  "objectives": {
+    "es": [
+      "Escribir un párrafo que llegue a una conclusión prudente a partir de tres pistas, y descarte una alternativa con una prueba."
+    ]
+  },
+  "concepts": [
+    "n8-inference-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-18"
+  ],
+  "usesVocabulary": [
+    "clue",
+    "ladder",
+    "paint",
+    "renovation",
+    "apparently",
+    "rule",
+    "alternative",
+    "sign"
+  ],
+  "usesPatterns": [
+    "n8-inference-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "clue",
+      "es": "pista"
+    },
+    {
+      "en": "ladder",
+      "es": "escalera de mano"
+    },
+    {
+      "en": "paint",
+      "es": "pintura, pintar"
+    },
+    {
+      "en": "renovation",
+      "es": "reforma, obras"
+    },
+    {
+      "en": "apparently",
+      "es": "al parecer"
+    },
+    {
+      "en": "rule",
+      "es": "descartar (rule out)"
+    },
+    {
+      "en": "alternative",
+      "es": "alternativa"
+    },
+    {
+      "en": "sign",
+      "es": "letrero, cartel"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-19.t01",
+      "en": "There is a ladder outside the café, and I can smell paint.",
+      "es": "Hay una escalera fuera de la cafetería y huelo a pintura.",
+      "explanationEs": "Primera pieza: pistas descritas como datos observables, sin interpretarlas.",
+      "segments": [
+        "There is a ladder outside the",
+        "café, and I can smell paint."
+      ],
+      "audioText": "There is a ladder outside the café, and I can smell paint.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-4"
+    },
+    {
+      "id": "en.n8.class-19.t02",
+      "en": "These clues suggest that the café is closed for a renovation.",
+      "es": "Estas pistas sugieren que la cafetería está cerrada por reformas.",
+      "explanationEs": "Conclusión prudente con suggest: no «it is», sino lo que las pistas apuntan.",
+      "segments": [
+        "These clues suggest that the café",
+        "is closed for a renovation."
+      ],
+      "audioText": "These clues suggest that the café is closed for a renovation.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-4"
+    },
+    {
+      "id": "en.n8.class-19.t03",
+      "en": "Apparently, the owner has ordered a new sign.",
+      "es": "Al parecer, el dueño ha encargado un letrero nuevo.",
+      "explanationEs": "Apparently marca información vista u oída que aún no se ha comprobado.",
+      "segments": [
+        "Apparently, the owner has",
+        "ordered a new sign."
+      ],
+      "audioText": "Apparently, the owner has ordered a new sign.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-4"
+    },
+    {
+      "id": "en.n8.class-19.t04",
+      "en": "We can rule out the alternative that it is closing for good, because of the new sign.",
+      "es": "Podemos descartar la alternativa de que cierre para siempre, por el letrero nuevo.",
+      "explanationEs": "Rule out = descartar; explica la prueba con because of.",
+      "segments": [
+        "We can rule out the alternative that it is",
+        "closing for good, because of the new sign."
+      ],
+      "audioText": "We can rule out the alternative that it is closing for good, because of the new sign.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-4"
+    },
+    {
+      "id": "en.n8.class-19.t05",
+      "en": "Each clue on its own is weak, but together they make a strong case.",
+      "es": "Cada pista por sí sola es débil, pero juntas forman un caso sólido.",
+      "explanationEs": "Varias pistas que coinciden pesan más que una sola.",
+      "segments": [
+        "Each clue on its own is weak,",
+        "but together they make a strong case."
+      ],
+      "audioText": "Each clue on its own is weak, but together they make a strong case.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c19.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que describe una pista sin interpretarla."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The shop has definitely closed for good."
+          },
+          {
+            "text": "There are boxes at the door and the light is off."
+          },
+          {
+            "text": "The owner is a thief."
+          }
+        ],
+        "teaches": [
+          "n8-inference-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.pg01.seed-0",
+          "feedback": {
+            "es": "Una pista es un dato observable; las otras frases ya interpretan más de lo que se ve."
+          },
+          "hint": {
+            "es": "Una pista describe lo que ves."
+          },
+          "text": "Ves que la luz de la tienda está apagada y hay cajas en la puerta."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:39c366cbc683b5ad2df17b1a2f2d88b270fb6c24922c28c72b2fdd41a4508d86"
+      },
+      {
+        "id": "en.n8.c19.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estas pistas sugieren que hay obras.»"
+        },
+        "answer": {
+          "text": "clues",
+          "accepted": [
+            "clues"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-inference-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.pg02.seed-0",
+          "feedback": {
+            "es": "Clues es plural y por eso va con these y suggest sin -s."
+          },
+          "hint": {
+            "es": "Plural de clue."
+          },
+          "text": "These ___ suggest that there is a renovation."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:af8365353713a896371e6e54a59bf4171f19f9eff816b7a4e1c37ca0c00bd9c9"
+      },
+      {
+        "id": "en.n8.c19.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Podemos descartar la lluvia porque la calle está seca.»"
+        },
+        "answer": {
+          "text": "We can rule out rain because the street is dry",
+          "tokens": [
+            "We",
+            "can",
+            "rule",
+            "out",
+            "rain",
+            "because",
+            "the",
+            "street",
+            "is",
+            "dry"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-inference-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.pg03.seed-0",
+          "feedback": {
+            "es": "Rule out + alternativa + because + prueba: descarta con un dato."
+          },
+          "hint": {
+            "es": "Rule out lleva la alternativa detrás."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:79562c085819617c96d28d128b12800de118580a5428ef6ea40f6b1c5ccbae36"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c19.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la conclusión más prudente a partir de las pistas."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "These clues prove that the shop has closed for good."
+          },
+          {
+            "text": "These clues are a mystery with no answer."
+          },
+          {
+            "text": "These clues suggest that the shop is being painted."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.p01.seed-0",
+          "feedback": {
+            "es": "Con pocas pistas, suggest presenta una conclusión posible; prove afirma demasiado."
+          },
+          "text": "Pistas: hay una escalera, huele a pintura y el local lleva tres días cerrado."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc9ebed481ba6afb0884afee6e18f70befddf87e57b7ce86b7636034d684b75f"
+      },
+      {
+        "id": "en.n8.c19.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Cada pista por sí sola es débil» y «juntas forman un caso sólido»."
+        },
+        "answer": {
+          "text": "clue | case",
+          "accepted": [
+            "clue | case"
+          ],
+          "parts": [
+            {
+              "text": "clue",
+              "accepted": [
+                "clue"
+              ]
+            },
+            {
+              "text": "case",
+              "accepted": [
+                "case"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.p02.seed-0",
+          "feedback": {
+            "es": "Clue es la pista individual y case, el conjunto de pruebas que se suman."
+          },
+          "sentences": [
+            "Each ___ on its own is weak.",
+            "Together, they make a strong ___."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:63a546589fd537169f42694baac4502abe5434636330f8875c9311549f7e312e"
+      },
+      {
+        "id": "en.n8.c19.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha las pistas y elige la conclusión del hablante."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He thinks that a shop will open soon."
+          },
+          {
+            "text": "He thinks that the shop is closing."
+          },
+          {
+            "text": "He thinks that the van is stolen."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.p03.seed-0",
+          "feedback": {
+            "es": "Luces, furgoneta de reparto y ventanas tapadas son pistas de una tienda que prepara su apertura."
+          },
+          "audio": "The lights are on at midnight, there is a delivery van outside, and the windows are covered with paper. I think the new shop is getting ready to open.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:606170be3ba229253a21bf4a194857e76f8ee4496c32dc86235822cb5bd525d9"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c19.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe un párrafo con tres pistas, una conclusión y una alternativa descartada."
+        },
+        "answer": {
+          "text": "The bakery has been closed for five days, and there are three clues. First, there is a delivery van at the door. Second, the front has new paint. Third, someone saw the owner with a new sign yesterday. These clues suggest that the bakery is not closing for good: it is probably having a renovation or moving to a bigger place. Of course, each clue on its own is weak, but together they make a strong case. We can rule out the alternative that the owner has left, because of the new sign. I will ask him tomorrow to be sure.",
+          "accepted": [
+            "The bakery has been closed for five days, and there are three clues. First, there is a delivery van at the door. Second, the front has new paint. Third, someone saw the owner with a new sign yesterday. These clues suggest that the bakery is not closing for good: it is probably having a renovation or moving to a bigger place. Of course, each clue on its own is weak, but together they make a strong case. We can rule out the alternative that the owner has left, because of the new sign. I will ask him tomorrow to be sure.",
+            "The bakery has been shut for five days. I can see a van outside, fresh paint on the wall and a new sign in the owner's hand. Together, these clues point to a renovation, although I may be wrong. The bakery is unlikely to be closing for good, because nobody buys a new sign and paints a wall before leaving. I can rule out that alternative, and I will check with the owner tomorrow."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.e01.seed-0",
+          "feedback": {
+            "es": "El párrafo debe describir las tres pistas, concluir con prudencia y descartar la alternativa del cierre definitivo."
+          },
+          "text": "La panadería de tu barrio lleva cinco días cerrada. Pistas: hay una furgoneta de reparto en la puerta, han pintado la fachada y ayer vieron al dueño con un letrero nuevo. Escribe en inglés un párrafo de 80 a 140 palabras: describe las tres pistas, da una conclusión prudente (suggest, probably…) y descarta una alternativa, por ejemplo que cierre para siempre, explicando por qué.",
+          "scoring": {
+            "wordRange": [
+              70,
+              200
+            ],
+            "evidenceGroups": [
+              [
+                "delivery van",
+                "moving van",
+                "a van",
+                "the van",
+                "van"
+              ],
+              [
+                "new paint",
+                "fresh paint",
+                "painted",
+                "paint",
+                "painting"
+              ],
+              [
+                "new sign",
+                "a sign",
+                "the sign",
+                "sign",
+                "signboard"
+              ],
+              [
+                "suggest",
+                "probably",
+                "likely",
+                "may be",
+                "might be",
+                "could be",
+                "point to",
+                "points to",
+                "perhaps",
+                "maybe",
+                "seems",
+                "apparently"
+              ],
+              [
+                "rule out",
+                "rules out",
+                "unlikely",
+                "not closing",
+                "isn't closing",
+                "not going to close",
+                "won't close",
+                "can't be closing",
+                "cannot be closing",
+                "not shutting",
+                "not shut",
+                "not leaving"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d75db74a1e7f86570eeb24caddf392aadabd814cbcc1f471fce54901bc77cebb"
+      },
+      {
+        "id": "en.n8.c19.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Al parecer, vendieron el local la semana pasada.»"
+        },
+        "answer": {
+          "text": "Apparently",
+          "accepted": [
+            "Apparently",
+            "apparently"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.e02.seed-0",
+          "feedback": {
+            "es": "Apparently introduce lo que parece cierto pero no está comprobado."
+          },
+          "text": "___, they sold the shop last week."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:97a397d729a106c2a29afa7df4465d7684420164c5d130688e6cb3e0d59564c4"
+      },
+      {
+        "id": "en.n8.c19.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que descarta una alternativa con su prueba."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "We can rule out a thief, because it is possible."
+          },
+          {
+            "text": "We can rule out a thief, because nothing is missing."
+          },
+          {
+            "text": "We can rule out a thief, because the window is broken."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.e03.seed-0",
+          "feedback": {
+            "es": "Rule out va acompañado de una prueba que lo justifique (nothing is missing); una ventana rota apoyaría al ladrón y «it is possible» no es una prueba."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b21ded8c6450417c18e99f792ceed4ba304db89b0b6757521105099a6fa1419c"
+      },
+      {
+        "id": "en.n8.c19.e04",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la conclusión del hablante sobre el hombre."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He is sure the man painted his own house."
+          },
+          {
+            "text": "He thinks the man took a ladder."
+          },
+          {
+            "text": "He thinks the man probably painted a wall, but he is not sure."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.e04.seed-0",
+          "feedback": {
+            "es": "«It seems likely, although…» expresa una conclusión prudente: probable, pero no segura."
+          },
+          "audio": "There is paint on his shoes, a ladder in his car and a new colour on the wall. Did he paint his house? It seems likely, although it could be a friend's house.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:13cec9d475e23ab7e8db2836bc536a7575c60abe3c41284a19dca925b7eda312"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c19.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la conclusión con el verbo más prudente."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The lights and the car suggest that someone is home."
+          },
+          {
+            "text": "The lights and the car prove that someone is home."
+          },
+          {
+            "text": "The lights and the car are someone at home."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.r01.seed-0",
+          "feedback": {
+            "es": "Con solo dos pistas, suggest es prudente; prove afirma más de lo que permiten las pruebas."
+          },
+          "text": "Solo tienes dos pistas: las luces están encendidas y hay un coche fuera."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:95e21a04ce79827c6d8163b7728f9935b157240ae8312c59c40195661fe067df"
+      },
+      {
+        "id": "en.n8.c19.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Esa alternativa es muy poco probable.»"
+        },
+        "answer": {
+          "text": "That alternative is very unlikely",
+          "tokens": [
+            "That",
+            "alternative",
+            "is",
+            "very",
+            "unlikely"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.r02.seed-0",
+          "feedback": {
+            "es": "Unlikely expresa que una alternativa casi se descarta sin cerrarla del todo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6b4101a3ae87a6c0b2860e33cfd0df12daeb8e8537f9cbcdc7f5946d1d76056a"
+      },
+      {
+        "id": "en.n8.c19.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «No podemos descartar esa posibilidad todavía.»"
+        },
+        "answer": {
+          "text": "rule",
+          "accepted": [
+            "rule"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c19.r03.seed-0",
+          "feedback": {
+            "es": "Rule out es la expresión para descartar; aquí va en infinitivo después de cannot."
+          },
+          "text": "We cannot ___ out that possibility yet."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b6c0026f89dba0caea2035799f396bcd587f431f0c3231da73e133e83f49eeea"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c19.e01": {
+      "reteach": "en.n8.class-19.t01",
+      "review": "en.n8.c19.r01"
+    },
+    "en.n8.c19.e02": {
+      "reteach": "en.n8.class-19.t02",
+      "review": "en.n8.c19.r02"
+    },
+    "en.n8.c19.e03": {
+      "reteach": "en.n8.class-19.t03",
+      "review": "en.n8.c19.r03"
+    },
+    "en.n8.c19.e04": {
+      "reteach": "en.n8.class-19.t04",
+      "review": "en.n8.c19.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -1,0 +1,824 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 9,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n9.class-11",
+  "title": {
+    "en": "Answer first",
+    "es": "La respuesta va primero"
+  },
+  "objectives": {
+    "es": [
+      "Identificar el titular, la petición y el plazo de un mensaje y separar lo esencial del detalle de apoyo."
+    ]
+  },
+  "concepts": [
+    "n9-essential-first-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n9.class-10"
+  ],
+  "usesVocabulary": [
+    "headline",
+    "essential",
+    "detail",
+    "background",
+    "request",
+    "deadline",
+    "confirm",
+    "volunteer",
+    "shift",
+    "bottom line"
+  ],
+  "usesPatterns": [
+    "n9-essential-first-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "headline",
+      "es": "titular"
+    },
+    {
+      "en": "essential",
+      "es": "esencial"
+    },
+    {
+      "en": "detail",
+      "es": "detalle"
+    },
+    {
+      "en": "background",
+      "es": "contexto, antecedentes"
+    },
+    {
+      "en": "request",
+      "es": "petición"
+    },
+    {
+      "en": "deadline",
+      "es": "plazo"
+    },
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    },
+    {
+      "en": "volunteer",
+      "es": "voluntario"
+    },
+    {
+      "en": "shift",
+      "es": "turno"
+    },
+    {
+      "en": "bottom line",
+      "es": "conclusión principal"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n9.class-11.t01",
+      "en": "Headline first: we need three more volunteers for the Saturday shift.",
+      "es": "Lo esencial primero: necesitamos tres voluntarios más para el turno del sábado.",
+      "explanationEs": "El titular abre el mensaje y dice qué se necesita.",
+      "segments": [
+        "Headline first: we need three more",
+        "volunteers for the Saturday shift."
+      ],
+      "audioText": "Headline first: we need three more volunteers for the Saturday shift.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-essential-first-1"
+    },
+    {
+      "id": "en.n9.class-11.t02",
+      "en": "Please confirm by Thursday, because the caterer needs a final number.",
+      "es": "Por favor, confirma antes del jueves, porque el servicio de comida necesita una cifra final.",
+      "explanationEs": "Petición y plazo juntos, con una razón muy breve.",
+      "segments": [
+        "Please confirm by Thursday, because the",
+        "caterer needs a final number."
+      ],
+      "audioText": "Please confirm by Thursday, because the caterer needs a final number.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-essential-first-1"
+    },
+    {
+      "id": "en.n9.class-11.t03",
+      "en": "Some background: last year only twelve people came, so we changed the day.",
+      "es": "Algo de contexto: el año pasado vinieron solo doce personas, así que cambiamos el día.",
+      "explanationEs": "El contexto explica, pero va después de la petición.",
+      "segments": [
+        "Some background: last year only twelve people",
+        "came, so we changed the day."
+      ],
+      "audioText": "Some background: last year only twelve people came, so we changed the day.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-essential-first-1"
+    },
+    {
+      "id": "en.n9.class-11.t04",
+      "en": "The parking is a detail; the essential point is the start time.",
+      "es": "El aparcamiento es un detalle; lo esencial es la hora de inicio.",
+      "explanationEs": "Esencial es lo que el lector necesita para actuar; el resto es detalle.",
+      "segments": [
+        "The parking is a detail; the",
+        "essential point is the start time."
+      ],
+      "audioText": "The parking is a detail; the essential point is the start time.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-essential-first-1"
+    },
+    {
+      "id": "en.n9.class-11.t05",
+      "en": "In short, the request is simple: confirm your shift today.",
+      "es": "En resumen, la petición es simple: confirma tu turno hoy.",
+      "explanationEs": "In short resume y da el titular en una frase.",
+      "segments": [
+        "In short, the request is",
+        "simple: confirm your shift today."
+      ],
+      "audioText": "In short, the request is simple: confirm your shift today.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-essential-first-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n9.c11.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee el mensaje y elige su titular: lo que se necesita ahora."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Only nine people came last year."
+          },
+          {
+            "text": "Please confirm by Thursday."
+          },
+          {
+            "text": "We need five more volunteers on Saturday."
+          }
+        ],
+        "teaches": [
+          "n9-essential-first-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.pg01.seed-0",
+          "feedback": {
+            "es": "El titular dice qué se necesita ahora; el dato del año pasado es contexto y Thursday es el plazo."
+          },
+          "hint": {
+            "es": "El titular dice qué se necesita ahora, no qué pasó antes."
+          },
+          "text": "Hi all. Last year only nine people came to the garden day. This year we need five more volunteers on Saturday. Please confirm by Thursday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b5c1e5c2f1a95d0d41a0e4bc50434ec603022d7ded7a67e2d7d45d0430ed5512"
+      },
+      {
+        "id": "en.n9.c11.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «En resumen, la reunión pasa al viernes.»"
+        },
+        "answer": {
+          "text": "short",
+          "accepted": [
+            "short"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-essential-first-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.pg02.seed-0",
+          "feedback": {
+            "es": "In short es una señal de resumen: anuncia la idea principal en una frase."
+          },
+          "hint": {
+            "es": "Es una señal de resumen de dos palabras: In ___."
+          },
+          "text": "In ___, the meeting moves to Friday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2de9b21df725a5d12de3494236ec11692ce1ef5ba20cd3ba19e9bca41d1d1662"
+      },
+      {
+        "id": "en.n9.c11.pg03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada parte del mensaje con su función."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "headline",
+              {
+                "es": "lo esencial que abre el mensaje"
+              }
+            ],
+            [
+              "request",
+              {
+                "es": "lo que el lector debe hacer"
+              }
+            ],
+            [
+              "deadline",
+              {
+                "es": "la fecha límite"
+              }
+            ],
+            [
+              "background",
+              {
+                "es": "el contexto que va después"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-essential-first-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.pg03.seed-0",
+          "feedback": {
+            "es": "Cada parte responde a una pregunta: qué pasa, qué hago, para cuándo y por qué."
+          },
+          "hint": {
+            "es": "Piensa en qué pregunta responde cada parte."
+          },
+          "pairs": [
+            [
+              "headline",
+              {
+                "es": "lo esencial que abre el mensaje"
+              }
+            ],
+            [
+              "request",
+              {
+                "es": "lo que el lector debe hacer"
+              }
+            ],
+            [
+              "deadline",
+              {
+                "es": "la fecha límite"
+              }
+            ],
+            [
+              "background",
+              {
+                "es": "el contexto que va después"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:82d68fc0db3cc6d0c07b601495641f74b0c6efc55d42b5b1c2c71e13f068e9d2"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n9.c11.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la nota y elige qué debe hacer la persona que escucha."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Arrive at the school before the coach leaves."
+          },
+          {
+            "text": "Call the school at half past seven."
+          },
+          {
+            "text": "Wait for a new message about the time."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.p01.seed-0",
+          "feedback": {
+            "es": "La petición va después de la señal Quick update: llegar al colegio antes de que salga el autobús."
+          },
+          "audio": "Quick update: the coach leaves at eight, so please be at the school by half past seven.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a18bfdd17c81121f053f903aa66fd0a696a3028a539a3a0acd19d8c4851361d1"
+      },
+      {
+        "id": "en.n9.c11.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el mensaje que pone lo esencial primero."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Before I start, let me explain how the food drive began years ago."
+          },
+          {
+            "text": "We need two drivers for the food drive on Sunday; please reply by Friday."
+          },
+          {
+            "text": "Hello, I hope you are well. Last week we talked about many things."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.p02.seed-0",
+          "feedback": {
+            "es": "El mensaje correcto abre con lo que se necesita y con el plazo; los otros dos retrasan la petición."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bb8e866e47fc0c33c21190c13e46871619535a2e7a97dd20e9632576a00f8685"
+      },
+      {
+        "id": "en.n9.c11.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La hora es esencial; el color de las bolsas es un detalle.»"
+        },
+        "answer": {
+          "text": "detail",
+          "accepted": [
+            "detail"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.p03.seed-0",
+          "feedback": {
+            "es": "Un detalle es información de apoyo que no cambia lo que el lector debe hacer."
+          },
+          "text": "The start time is essential; the colour of the bags is a ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4dad204ae3ca559563460f1c1048e01ee4ef28c757277efe7f79ac1b62cbaff6"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n9.c11.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la petición del mensaje."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Bring food to the picnic at noon."
+          },
+          {
+            "text": "Choose a new day for the picnic."
+          },
+          {
+            "text": "Pass the news to your families before midday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.e01.seed-0",
+          "feedback": {
+            "es": "Bottom line da la conclusión y la petición es avisar a las familias antes del mediodía."
+          },
+          "audio": "Bottom line: we are cancelling the picnic because of the rain. Please tell your families before noon.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:66660374fbd01963ffe12fc0248899ae41ced7212f75305370ed5ab37ad31bc4"
+      },
+      {
+        "id": "en.n9.c11.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee el mensaje y elige el plazo que aparece en él."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Tables are needed by Friday."
+          },
+          {
+            "text": "The book sale is on Saturday."
+          },
+          {
+            "text": "The café sells tea as usual."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.e02.seed-0",
+          "feedback": {
+            "es": "El plazo es el viernes para las mesas; el sábado es la fecha del evento, no el plazo."
+          },
+          "text": "Hello everyone. The community centre was quiet last month, and some of you were away, which is understandable. The main point: the book sale moves to Saturday, and we need tables by Friday. The café will sell tea as usual."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9caacc29cbe18947b3328f1e5a4cf9098617ef62ddd55230535928f0428ecf7d"
+      },
+      {
+        "id": "en.n9.c11.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El punto clave es que la reunión pasa al viernes.»"
+        },
+        "answer": {
+          "text": "The key point is that the meeting moves to Friday",
+          "tokens": [
+            "The",
+            "key",
+            "point",
+            "is",
+            "that",
+            "the",
+            "meeting",
+            "moves",
+            "to",
+            "Friday"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.e03.seed-0",
+          "feedback": {
+            "es": "Después de The key point is that viene el titular completo: sujeto y verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1d5e97d6ec943e43b98eab6c2543e0a3035d5299e3a3c8241458960ff2857ee4"
+      },
+      {
+        "id": "en.n9.c11.e04",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada señal con lo que anuncia."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Quick update",
+              {
+                "es": "una novedad breve"
+              }
+            ],
+            [
+              "For context",
+              {
+                "es": "información de fondo"
+              }
+            ],
+            [
+              "Bottom line",
+              {
+                "es": "la conclusión principal"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.e04.seed-0",
+          "feedback": {
+            "es": "Las señales avisan al lector de qué tipo de información llega a continuación."
+          },
+          "pairs": [
+            [
+              "Quick update",
+              {
+                "es": "una novedad breve"
+              }
+            ],
+            [
+              "For context",
+              {
+                "es": "información de fondo"
+              }
+            ],
+            [
+              "Bottom line",
+              {
+                "es": "la conclusión principal"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:916e1acc83386a227fbc2cfdb138cedc39d6b67084305e68e34ca584e5831c57"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n9.c11.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué respuesta a «Can you come on Sunday?» empieza por lo esencial?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Well, let me tell you about my weekend first, and then I will explain."
+          },
+          {
+            "text": "Yes, I can come at ten; I just need a lift."
+          },
+          {
+            "text": "It depends on many things, such as the weather and my brother."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.r01.seed-0",
+          "feedback": {
+            "es": "Responder primero con la decisión y dejar la razón para después es la estructura de titular."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4d9c4f805a1a72832024296048b3756abc0fc8de6fb01de96516f24526c03241"
+      },
+      {
+        "id": "en.n9.c11.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El titular del mensaje está arriba: necesitamos un conductor.»"
+        },
+        "answer": {
+          "text": "headline",
+          "accepted": [
+            "headline"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.r02.seed-0",
+          "feedback": {
+            "es": "El titular es la frase que resume lo esencial y se coloca al principio."
+          },
+          "text": "The ___ of the message is at the top: we need a driver."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e7150b37dc92fee4d126a125adab0606ec420677306f94632ac44d8933c12b2a"
+      },
+      {
+        "id": "en.n9.c11.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pide la persona."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "More time to finish her own shift."
+          },
+          {
+            "text": "A new day for the whole team."
+          },
+          {
+            "text": "Another person to lead Tuesday's shift."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-essential-first-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c11.r03.seed-0",
+          "feedback": {
+            "es": "Tras el titular, la petición es buscar a otra persona antes del lunes."
+          },
+          "audio": "I know it is late, but the headline is simple: I cannot lead the shift on Tuesday. Please find someone else by Monday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:249bbd468061bdd626e8c390cd1c86536c2bad12ee488925e46ce238e8ef205d"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n9.c11.e01": {
+      "reteach": "en.n9.class-11.t01",
+      "review": "en.n9.c11.r01"
+    },
+    "en.n9.c11.e02": {
+      "reteach": "en.n9.class-11.t02",
+      "review": "en.n9.c11.r02"
+    },
+    "en.n9.c11.e03": {
+      "reteach": "en.n9.class-11.t03",
+      "review": "en.n9.c11.r03"
+    },
+    "en.n9.c11.e04": {
+      "reteach": "en.n9.class-11.t04",
+      "review": "en.n9.c11.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

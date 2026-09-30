@@ -1,0 +1,780 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-63",
+  "title": {
+    "en": "Same event, two reports",
+    "es": "Un mismo hecho, dos noticias"
+  },
+  "objectives": {
+    "es": [
+      "Comparar dos noticias del mismo hecho y separar hechos, fuentes, grado de certeza y palabras valorativas."
+    ]
+  },
+  "concepts": [
+    "n8-news-framing-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n8.class-62"
+  ],
+  "usesVocabulary": [
+    "source",
+    "spokesperson",
+    "eyewitness",
+    "allegedly",
+    "insist",
+    "admit",
+    "evidence",
+    "claim"
+  ],
+  "usesPatterns": [
+    "n8-news-framing-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "source",
+      "es": "fuente"
+    },
+    {
+      "en": "spokesperson",
+      "es": "portavoz"
+    },
+    {
+      "en": "eyewitness",
+      "es": "testigo presencial"
+    },
+    {
+      "en": "allegedly",
+      "es": "presuntamente"
+    },
+    {
+      "en": "insist",
+      "es": "insistir, sostener"
+    },
+    {
+      "en": "admit",
+      "es": "reconocer, admitir"
+    },
+    {
+      "en": "evidence",
+      "es": "pruebas"
+    },
+    {
+      "en": "claim",
+      "es": "afirmación; afirmar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-63.t01",
+      "en": "According to the council spokesperson, the festival ended at eight after a power cut.",
+      "es": "Según el portavoz del ayuntamiento, el festival terminó a las ocho tras un corte de luz.",
+      "explanationEs": "According to + fuente es la forma más clara de atribuir un dato; un portavoz es una fuente oficial.",
+      "segments": [
+        "According to the council spokesperson, the festival",
+        "ended at eight after a power cut."
+      ],
+      "audioText": "According to the council spokesperson, the festival ended at eight after a power cut.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-3"
+    },
+    {
+      "id": "en.n8.class-63.t02",
+      "en": "An eyewitness says that hundreds of people panicked when the lights went out.",
+      "es": "Un testigo presencial dice que cientos de personas entraron en pánico cuando se apagaron las luces.",
+      "explanationEs": "Un eyewitness da color y detalle, pero su versión no es un dato confirmado: por eso el verbo es says, no confirmed.",
+      "segments": [
+        "An eyewitness says that hundreds of people",
+        "panicked when the lights went out."
+      ],
+      "audioText": "An eyewitness says that hundreds of people panicked when the lights went out.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-3"
+    },
+    {
+      "id": "en.n8.class-63.t03",
+      "en": "The council allegedly ignored earlier warnings, but it has no comment.",
+      "es": "El ayuntamiento presuntamente ignoró avisos anteriores, pero no hace comentarios.",
+      "explanationEs": "Allegedly baja la certeza: alguien lo afirma, pero todavía no hay pruebas ni confirmación.",
+      "segments": [
+        "The council allegedly ignored earlier warnings,",
+        "but it has no comment."
+      ],
+      "audioText": "The council allegedly ignored earlier warnings, but it has no comment.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-3"
+    },
+    {
+      "id": "en.n8.class-63.t04",
+      "en": "The organisers insist that nobody was hurt, but some admit that the lights were old.",
+      "es": "Los organizadores insisten en que nadie resultó herido, pero algunos reconocen que las luces eran viejas.",
+      "explanationEs": "Insist defiende una versión; admit reconoce algo negativo. Ambos verbos ya interpretan lo que la persona dijo.",
+      "segments": [
+        "The organisers insist that nobody was hurt, but",
+        "some admit that the lights were old."
+      ],
+      "audioText": "The organisers insist that nobody was hurt, but some admit that the lights were old.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-3"
+    },
+    {
+      "id": "en.n8.class-63.t05",
+      "en": "A good report names its source and gives evidence for every claim.",
+      "es": "Una buena noticia nombra su fuente y da pruebas de cada afirmación.",
+      "explanationEs": "Evidence es incontable: no existe el plural evidences. Claim es la afirmación que hay que comprobar.",
+      "segments": [
+        "A good report names its source",
+        "and gives evidence for every claim."
+      ],
+      "audioText": "A good report names its source and gives evidence for every claim.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-news-framing-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c63.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee la noticia del festival y elige qué fuente cita."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "A council spokesperson."
+          },
+          {
+            "text": "A passer-by."
+          },
+          {
+            "text": "A school teacher."
+          }
+        ],
+        "teaches": [
+          "n8-news-framing-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.pg01.seed-0",
+          "feedback": {
+            "es": "La noticia atribuye el dato a «a council spokesperson», una fuente oficial con su cargo."
+          },
+          "hint": {
+            "es": "Busca quién said el dato en el texto."
+          },
+          "text": "The Maple Road festival ended at eight after a power cut, a council spokesperson said. About 300 people were there."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cfa431492682fb4f8099666e03ac315ef0d91e54581960d88936ac3ba53ab825"
+      },
+      {
+        "id": "en.n8.c63.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la palabra de esta noticia que es una valoración y no un hecho."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Friday"
+          },
+          {
+            "text": "Chaos"
+          },
+          {
+            "text": "gates"
+          }
+        ],
+        "teaches": [
+          "n8-news-framing-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.pg02.seed-0",
+          "feedback": {
+            "es": "Chaos es una opinión del autor; Friday y gates son datos que se pueden comprobar."
+          },
+          "hint": {
+            "es": "Un hecho se puede comprobar; una valoración es una opinión."
+          },
+          "text": "Chaos hit the sports centre opening on Friday. Teenagers came through the gates at nine."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1a8471e9bf40a13641c446b3f78668af84a8616b31b491979204d986d3319b97"
+      },
+      {
+        "id": "en.n8.c63.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La noticia no da ninguna prueba de esta afirmación.»"
+        },
+        "answer": {
+          "text": "evidence",
+          "accepted": [
+            "evidence"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-news-framing-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.pg03.seed-0",
+          "feedback": {
+            "es": "Evidence significa pruebas y es incontable: gives no evidence, sin artículo ni plural."
+          },
+          "hint": {
+            "es": "Es lo que hace falta para demostrar que algo es cierto."
+          },
+          "text": "The report gives no ___ for this claim."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:40d5c9b1919a5e96551efddce64a5280ca25cb2a722bc7d94df25e50ac56cb9a"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c63.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada expresión con lo que indica sobre la información."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "A spokesperson said",
+              {
+                "es": "fuente oficial con cargo"
+              }
+            ],
+            [
+              "The organisers insist",
+              {
+                "es": "defienden su propia versión"
+              }
+            ],
+            [
+              "allegedly",
+              {
+                "es": "se afirma sin pruebas"
+              }
+            ],
+            [
+              "according to the report",
+              {
+                "es": "el dato se atribuye a un documento"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.p01.seed-0",
+          "feedback": {
+            "es": "Cada expresión señala quién habla y con cuánta certeza: fuente oficial, versión defendida, duda o documento."
+          },
+          "pairs": [
+            [
+              "A spokesperson said",
+              {
+                "es": "fuente oficial con cargo"
+              }
+            ],
+            [
+              "The organisers insist",
+              {
+                "es": "defienden su propia versión"
+              }
+            ],
+            [
+              "allegedly",
+              {
+                "es": "se afirma sin pruebas"
+              }
+            ],
+            [
+              "according to the report",
+              {
+                "es": "el dato se atribuye a un documento"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4bfefae77ce798e0fcc258d9eb1d500e38eafcae494a73efc85fa624f9b6f6a0"
+      },
+      {
+        "id": "en.n8.c63.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la noticia y elige el dato que confirma la fuente oficial."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The rent is already lower."
+          },
+          {
+            "text": "The sellers will leave the town."
+          },
+          {
+            "text": "The market opens at the weekend."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.p02.seed-0",
+          "feedback": {
+            "es": "El ayuntamiento confirma la apertura del domingo; lo del alquiler es solo lo que afirman algunos vendedores."
+          },
+          "audio": "The town council confirmed that the market opens on Sunday. Some sellers claim the rent is too high.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0f60af76c7e6c156744a418fbd0cf947b6f698be029f60c3533611390f961e90"
+      },
+      {
+        "id": "en.n8.c63.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El organizador reconoce que había demasiadas pocas luces.»"
+        },
+        "answer": {
+          "text": "admits",
+          "accepted": [
+            "admits"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.p03.seed-0",
+          "feedback": {
+            "es": "Admits presenta como un reconocimiento algo negativo: el organizador acepta un fallo."
+          },
+          "text": "The organiser ___ that there were too few lights."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d3a9eaa4fb03f1b98cb188745342f81b67552e49561e4feab27948a3014455c0"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c63.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Compara los dos informes y elige el que tiene una fuente oficial y hechos."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Report A: the head teacher is named as the person who spoke."
+          },
+          {
+            "text": "Report B: a cleaner is named as the person who spoke."
+          },
+          {
+            "text": "Both reports give the same kind of information."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.e01.seed-0",
+          "feedback": {
+            "es": "El informe A cita al director y da hechos; el B se apoya en un testigo con allegedly y en una opinión."
+          },
+          "text": "Report A: The school football final moves to Saturday because the pitch is flooded, the head teacher said. Forty students were due to play on Friday. Report B: Anger at school as the football final is moved. Some parents insist that the head teacher ignored an easy fix, and a cleaner allegedly saw a dry pitch on Thursday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:95cd33b2af9e445bf12fdf810dbd99fd30a99c6794fe8b4d904f404ca65b7210"
+      },
+      {
+        "id": "en.n8.c63.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién sostiene que el edificio cierra antes."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A volunteer at the building."
+          },
+          {
+            "text": "A local shop owner."
+          },
+          {
+            "text": "The town council."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.e02.seed-0",
+          "feedback": {
+            "es": "Insist marca a quien defiende una versión distinta: el dueño de la tienda sostiene que cierra a las cinco."
+          },
+          "audio": "A volunteer says the building closes at six, but a local shop owner insists it closes at five.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:83f30e81961c1f9e00294b28bc0fc9b09b551fde4e9e20b2925ea9db166ef273"
+      },
+      {
+        "id": "en.n8.c63.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Un testigo presencial vio cómo se apagaban las luces.»"
+        },
+        "answer": {
+          "text": "eyewitness",
+          "accepted": [
+            "eyewitness"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.e03.seed-0",
+          "feedback": {
+            "es": "Un eyewitness es quien estuvo presente y vio el hecho con sus propios ojos."
+          },
+          "text": "An ___ saw the lights go out."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4afee27d28bd81d953b07fe140f367d7e433b3e117e11a2a73959f3bbb6f659a"
+      },
+      {
+        "id": "en.n8.c63.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el verbo que marca que el vecino solo afirma algo, sin pruebas."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "said"
+          },
+          {
+            "text": "will open"
+          },
+          {
+            "text": "claims"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.e04.seed-0",
+          "feedback": {
+            "es": "Claims deja la duda sobre el dato del vecino; said es neutral y will open es el dato del alcalde."
+          },
+          "text": "The mayor said the road will open in June. A neighbour claims it will stay closed until autumn."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:371a118da51aff534f34345c4e01c9ec77ef73e501a5f7467123be6b52885d8e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c63.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Compara los dos informes y elige el que usa palabras valorativas de entusiasmo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Report B: great and very happy show an opinion."
+          },
+          {
+            "text": "Report A: announced shows an opinion."
+          },
+          {
+            "text": "Both reports give only facts."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.r01.seed-0",
+          "feedback": {
+            "es": "Great y very happy son valoraciones del autor; announced solo atribuye el dato al ayuntamiento."
+          },
+          "text": "Report A: The new sports centre opens on Friday, the town council announced. It cost about 80,000 euros, according to the budget report. Report B: The great new sports centre finally opens on Friday, and young people are very happy. A shop owner allegedly paid for half of it."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:373c9e70e46e0a6a6991715cdf45e719b764a198fd3d81d16f52a5b08e4aa56c"
+      },
+      {
+        "id": "en.n8.c63.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué dato contradice la versión de los vecinos."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The neighbours saw the road open."
+          },
+          {
+            "text": "The council says the road was closed for less than a week."
+          },
+          {
+            "text": "The road is still closed today."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.r02.seed-0",
+          "feedback": {
+            "es": "El ayuntamiento da una duración distinta (menos de una semana), así que contradice a los vecinos."
+          },
+          "audio": "Two neighbours say the road was closed for a week. The council says it was closed for only two days.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:69bc99955109a63f41c2477a1f8d6bb2b6329307355adae8ac8246f26fda2913"
+      },
+      {
+        "id": "en.n8.c63.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Una buena noticia nombra su fuente.»"
+        },
+        "answer": {
+          "text": "source",
+          "accepted": [
+            "source"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-news-framing-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c63.r03.seed-0",
+          "feedback": {
+            "es": "Source es la persona o documento de donde sale el dato; sin fuente, no se puede comprobar."
+          },
+          "text": "A good report names its ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1fb115b9a3f75602bb0c55bbbb203a0aefe8ae35ba934aac9748a8cf91019485"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c63.e01": {
+      "reteach": "en.n8.class-63.t01",
+      "review": "en.n8.c63.r01"
+    },
+    "en.n8.c63.e02": {
+      "reteach": "en.n8.class-63.t02",
+      "review": "en.n8.c63.r02"
+    },
+    "en.n8.c63.e03": {
+      "reteach": "en.n8.class-63.t03",
+      "review": "en.n8.c63.r03"
+    },
+    "en.n8.c63.e04": {
+      "reteach": "en.n8.class-63.t04",
+      "review": "en.n8.c63.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

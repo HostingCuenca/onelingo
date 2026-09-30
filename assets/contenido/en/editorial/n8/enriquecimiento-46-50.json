@@ -1,0 +1,748 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "classes": {
+    "en.n8.class-46": {
+      "explicacion": {
+        "titulo": "Variedades del inglés: palabras que cambian",
+        "texto": "El inglés tiene varias variedades. Las dos más extendidas son la británica (RU) y la estadounidense (EE. UU.), y muchas palabras cotidianas cambian: lift/elevator, flat/apartment, pavement/sidewalk, lorry/truck. Otras variedades añaden sus propias palabras: arvo (tarde) en Australia, craic (diversión) en Irlanda y lakh (cien mil) en India. Ninguna es «más correcta»: lo útil es reconocer el par y usar la palabra que entiende tu interlocutor. Ojo con los falsos amigos: biscuit en EE. UU. es un panecillo salado, no una galleta."
+      },
+      "patron": {
+        "texto": "Palabra regional = equivalente + variedad:",
+        "formula": [
+          {
+            "texto": "lift",
+            "nota": "palabra británica"
+          },
+          {
+            "texto": "= elevator",
+            "nota": "equivalente estadounidense: el mismo significado (ascensor)"
+          },
+          {
+            "texto": "(Britain / the United States)",
+            "nota": "variedad de origen: indica dónde se usa cada una"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In New York I asked for a biscuit with my tea.",
+          "correcto": "In New York I asked for a cookie with my tea.",
+          "explicacion": "En EE. UU. biscuit es un panecillo salado; para una galleta dulce se dice cookie."
+        },
+        {
+          "incorrecto": "In India, one lakh is one million.",
+          "correcto": "In India, one lakh is one hundred thousand.",
+          "explicacion": "Un lakh son cien mil, no un millón; es una unidad propia del inglés de India."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia, de Boston, visita a Tom en Londres y llega a su edificio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Is there an elevator in your building, Tom?",
+            "traduccion": "¿Hay ascensor en tu edificio, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "We say lift here. Take the lift to the third floor, then my flat is on the left.",
+            "traduccion": "Aquí decimos lift. Sube en el lift hasta la tercera planta y mi piso está a la izquierda."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Flat? In Boston we say apartment.",
+            "traduccion": "¿Flat? En Boston decimos apartment."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Come in, mate! I have tea and a biscuit for you.",
+            "traduccion": "¡Pasa, colega! Tengo té y una galleta para ti."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué palabra usa Tom para lo que Mia llama «elevator»?",
+          "opciones": [
+            {
+              "es": "Usa «lift», la palabra británica."
+            },
+            {
+              "es": "Usa «flat», la palabra británica."
+            },
+            {
+              "es": "Usa «biscuit», la palabra británica."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom responde «We say lift here»: lift es la palabra británica para elevator; flat y biscuit son otras cosas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Reino Unido",
+          "EE. UU.",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "lift"
+            },
+            {
+              "texto": "elevator"
+            },
+            {
+              "texto": "ascensor"
+            }
+          ],
+          [
+            {
+              "texto": "flat"
+            },
+            {
+              "texto": "apartment"
+            },
+            {
+              "texto": "piso"
+            }
+          ],
+          [
+            {
+              "texto": "pavement"
+            },
+            {
+              "texto": "sidewalk"
+            },
+            {
+              "texto": "acera"
+            }
+          ],
+          [
+            {
+              "texto": "lorry"
+            },
+            {
+              "texto": "truck"
+            },
+            {
+              "texto": "camión"
+            }
+          ],
+          [
+            {
+              "texto": "petrol"
+            },
+            {
+              "texto": "gas"
+            },
+            {
+              "texto": "gasolina"
+            }
+          ],
+          [
+            {
+              "texto": "holiday"
+            },
+            {
+              "texto": "vacation"
+            },
+            {
+              "texto": "vacaciones"
+            }
+          ],
+          [
+            {
+              "texto": "rubbish"
+            },
+            {
+              "texto": "trash"
+            },
+            {
+              "texto": "basura"
+            }
+          ],
+          [
+            {
+              "texto": "biscuit"
+            },
+            {
+              "texto": "cookie"
+            },
+            {
+              "texto": "galleta"
+            }
+          ],
+          [
+            {
+              "texto": "queue"
+            },
+            {
+              "texto": "line"
+            },
+            {
+              "texto": "cola"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-47": {
+      "explicacion": {
+        "titulo": "Ortografía y gramática: dos variedades, una elección",
+        "texto": "La variedad británica (RU) y la estadounidense (EE. UU.) coinciden en casi todo, pero cambian algunas ortografías y estructuras. Ortografía: -our/-or (colour/color), -re/-er (centre/center) y la doble l en travelling/traveling. Gramática: have got (RU) / have gotten (EE. UU.) con el sentido de «conseguir», at the weekend / on the weekend, learnt / learned y los sustantivos colectivos (the team are / the team is). Elige una variedad y sé coherente dentro del mismo texto."
+      },
+      "patron": {
+        "texto": "Misma idea, dos formas (RU / EE. UU.):",
+        "formula": [
+          {
+            "texto": "She has got better",
+            "nota": "RU: el participio es got"
+          },
+          {
+            "texto": "She has gotten better",
+            "nota": "EE. UU.: gotten = se ha vuelto / ha conseguido"
+          },
+          {
+            "texto": "at the weekend / on the weekend",
+            "nota": "RU: at; EE. UU.: on"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We travelled to the center of London.",
+          "correcto": "We travelled to the centre of London.",
+          "explicacion": "Mezclas dos variedades: travelled (RU, doble l) pide centre (RU); con center iría traveled."
+        },
+        {
+          "incorrecto": "I have gotten two sisters.",
+          "correcto": "I have got two sisters.",
+          "explicacion": "Gotten significa «conseguir» o «volverse» (EE. UU.); para tener se dice have got o simplemente have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia, de Nueva York, y Tom, de Manchester, comparan cómo escriben.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, your message says centre, but I write center.",
+            "traduccion": "Tom, tu mensaje dice centre, pero yo escribo center."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, that's British. We also say at the weekend, not on the weekend.",
+            "traduccion": "Sí, eso es británico. Y decimos at the weekend, no on the weekend."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And I say gotten: I have gotten tickets for the theater.",
+            "traduccion": "Y yo digo gotten: he conseguido entradas para el teatro."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "We say I have got tickets for the theatre.",
+            "traduccion": "Nosotros decimos I have got tickets for the theatre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo dice Tom «he conseguido entradas»?",
+          "opciones": [
+            {
+              "es": "I have got tickets."
+            },
+            {
+              "es": "I have gotten tickets."
+            },
+            {
+              "es": "I am getting tickets."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom usa la forma británica: I have got tickets; la forma con gotten es la de Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Reino Unido",
+          "EE. UU.",
+          "Tipo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "colour"
+            },
+            {
+              "texto": "color"
+            },
+            {
+              "texto": "ortografía"
+            }
+          ],
+          [
+            {
+              "texto": "centre"
+            },
+            {
+              "texto": "center"
+            },
+            {
+              "texto": "ortografía"
+            }
+          ],
+          [
+            {
+              "texto": "travelling"
+            },
+            {
+              "texto": "traveling"
+            },
+            {
+              "texto": "ortografía"
+            }
+          ],
+          [
+            {
+              "texto": "at the weekend"
+            },
+            {
+              "texto": "on the weekend"
+            },
+            {
+              "texto": "preposición"
+            }
+          ],
+          [
+            {
+              "texto": "has got better"
+            },
+            {
+              "texto": "has gotten better"
+            },
+            {
+              "texto": "gramática"
+            }
+          ],
+          [
+            {
+              "texto": "the team are"
+            },
+            {
+              "texto": "the team is"
+            },
+            {
+              "texto": "concordancia"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-48": {
+      "explicacion": {
+        "titulo": "Entender voces de distintos países",
+        "texto": "Para entender un mensaje de alguien con otro acento no busques captar cada palabra. Sigue tres pasos: 1) el tema (¿una fiesta, un viaje, un plan?); 2) el lugar (¿hay pistas como ciudades o palabras regionales: arvo, craic, y'all?); 3) una palabra regional: adivina su significado por el contexto y, si hace falta, pregunta Sorry, what does … mean? Después de escuchar, compara con la transcripción para entrenar el oído."
+      },
+      "patron": {
+        "texto": "Tema + lugar + palabra regional:",
+        "formula": [
+          {
+            "texto": "We are having a barbie this arvo,",
+            "nota": "tema: una barbacoa por la tarde"
+          },
+          {
+            "texto": "mate,",
+            "nota": "pista de lugar: Australia (y también Reino Unido)"
+          },
+          {
+            "texto": "bring a friend.",
+            "nota": "petición: lo que debes hacer"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'll call you in a fortnight days.",
+          "correcto": "I'll call you in a fortnight.",
+          "explicacion": "Fortnight ya significa dos semanas: no se le añade days ni weeks."
+        },
+        {
+          "incorrecto": "Y'all is coming to the game.",
+          "correcto": "Y'all are coming to the game.",
+          "explicacion": "Y'all significa «ustedes» (plural): el verbo va en plural."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom escucha tres mensajes de voz de amigos de distintos países.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, listen to Jack's message. He says we are having a barbie this arvo.",
+            "traduccion": "Mia, escucha el mensaje de Jack. Dice que vamos a hacer una barbie esta tarde."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "A barbie? Is that a party?",
+            "traduccion": "¿Una barbie? ¿Es una fiesta?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It's a barbecue. He is from Australia, so he says barbie and arvo.",
+            "traduccion": "Es una barbacoa. Jack es de Australia, por eso dice barbie y arvo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thanks, Tom. Now I understand his accent.",
+            "traduccion": "Gracias, Tom. Ahora entiendo su acento."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es un «barbie» para Jack?",
+          "opciones": [
+            {
+              "es": "Una barbacoa."
+            },
+            {
+              "es": "Una muñeca."
+            },
+            {
+              "es": "Una fiesta de disfraces."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica: «It's a barbecue»; Jack es australiano y abrevia la palabra."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado",
+          "Dónde se usa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "barbie"
+            },
+            {
+              "texto": "barbacoa"
+            },
+            {
+              "texto": "Australia"
+            }
+          ],
+          [
+            {
+              "texto": "fortnight"
+            },
+            {
+              "texto": "dos semanas"
+            },
+            {
+              "texto": "Reino Unido, Irlanda, Australia"
+            }
+          ],
+          [
+            {
+              "texto": "mobile"
+            },
+            {
+              "texto": "teléfono móvil"
+            },
+            {
+              "texto": "Reino Unido"
+            }
+          ],
+          [
+            {
+              "texto": "y'all"
+            },
+            {
+              "texto": "ustedes (you all)"
+            },
+            {
+              "texto": "sur de EE. UU."
+            }
+          ],
+          [
+            {
+              "texto": "bloke"
+            },
+            {
+              "texto": "hombre, tipo"
+            },
+            {
+              "texto": "Reino Unido, Australia"
+            }
+          ],
+          [
+            {
+              "texto": "cheers"
+            },
+            {
+              "texto": "gracias"
+            },
+            {
+              "texto": "Reino Unido"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-49": {
+      "explicacion": {
+        "titulo": "Adaptarte a tu lector",
+        "texto": "Adaptarte al interlocutor es una destreza de comunicación. Si sabes de dónde es tu lector, usa su vocabulario: trainers/sneakers, jumper/sweater, boot/trunk, petrol/gas. Si no lo sabes, elige palabras neutras (car, phone, bag) o añade una aclaración breve entre paréntesis: the boot (trunk in the US). Mantén la ortografía coherente con la variedad elegida y evita la jerga muy local (arvo, craic) con quien no la conoce."
+      },
+      "patron": {
+        "texto": "Mensaje + palabra adaptada + aclaración si hace falta:",
+        "formula": [
+          {
+            "texto": "Put your luggage in the boot",
+            "nota": "versión para un lector británico"
+          },
+          {
+            "texto": "(trunk in the US),",
+            "nota": "aclaración breve para otra variedad"
+          },
+          {
+            "texto": "or use a neutral word: the car.",
+            "nota": "palabra neutra: se entiende en todas las variedades"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "For my American friend: Put your rubbish in the boot.",
+          "correcto": "For my American friend: Put your trash in the trunk.",
+          "explicacion": "Con un lector estadounidense conviene su vocabulario: trash y trunk."
+        },
+        {
+          "incorrecto": "I will buy gas at the petrol station.",
+          "correcto": "I will buy petrol at the petrol station.",
+          "explicacion": "Mezclas variedades: si usas petrol station, la palabra coherente es petrol."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana prepara un mensaje de viaje para Tom, de Londres, y para Mia, de Nueva York.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I am writing to Tom and to Mia about the trip. Tom is British, and Mia is American.",
+            "traduccion": "Escribo a Tom y a Mia sobre el viaje. Tom es británico y Mia es estadounidense."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then adapt your words. For Tom, write trainers; for Mia, write sneakers.",
+            "traduccion": "Entonces adapta tus palabras. Para Tom escribe trainers; para Mia escribe sneakers."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And for the car? Boot for Tom and trunk for Mia?",
+            "traduccion": "¿Y para el coche? ¿Boot para Tom y trunk para Mia?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. If you do not know the reader, choose a neutral word.",
+            "traduccion": "Sí. Si no conoces al lector, elige una palabra neutra."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué palabra debe escribir Ana para Mia en lugar de «boot»?",
+          "opciones": [
+            {
+              "es": "Trunk, la palabra estadounidense."
+            },
+            {
+              "es": "Jumper, la palabra estadounidense."
+            },
+            {
+              "es": "Petrol, la palabra estadounidense."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo y Ana acuerdan «boot for Tom and trunk for Mia»: trunk es el equivalente estadounidense."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Lector",
+          "Palabras que elegir",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "británico"
+            },
+            {
+              "texto": "boot / petrol / holiday"
+            },
+            {
+              "texto": "Put the bags in the boot."
+            }
+          ],
+          [
+            {
+              "texto": "estadounidense"
+            },
+            {
+              "texto": "trunk / gas / vacation"
+            },
+            {
+              "texto": "Put the bags in the trunk."
+            }
+          ],
+          [
+            {
+              "texto": "no sé cuál"
+            },
+            {
+              "texto": "palabra neutra o aclaración"
+            },
+            {
+              "texto": "Put the bags in the car."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-50": {
+      "explicacion": {
+        "titulo": "Aclarar malentendidos y confirmar el plan",
+        "texto": "Cuando personas de distintas variedades planean juntas, los malentendidos de vocabulario son normales y se resuelven con educación y precisión. Pasos: 1) aclara sin culpar: Sorry, do you mean…? / Let me clarify…; 2) da el equivalente de cada variedad: in the UK we say flat, in the US apartment; 3) cierra el plan con una confirmación (Just to be clear… / Let me confirm…) y una respuesta corta: That works for me. / Sounds good."
+      },
+      "patron": {
+        "texto": "Aclarar + equivalente + confirmar:",
+        "formula": [
+          {
+            "texto": "Sorry, do you mean a flat or a hotel?",
+            "nota": "aclarar: preguntar sin culpar"
+          },
+          {
+            "texto": "In Britain we say flat; in the US, apartment.",
+            "nota": "equivalente: da la palabra de cada variedad"
+          },
+          {
+            "texto": "Just to be clear, we meet at five.",
+            "nota": "confirmar: resume el acuerdo final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What you mean with boot?",
+          "correcto": "What do you mean by boot?",
+          "explicacion": "La pregunta correcta es What do you mean by…?: lleva do y la preposición by."
+        },
+        {
+          "incorrecto": "I confirm you that we meet at five.",
+          "correcto": "Let me confirm that we meet at five.",
+          "explicacion": "Para confirmar se usa Let me confirm that…; «te confirmo que» no se traduce con I confirm you."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom, desde Londres, Mia, desde Boston, y Jack, desde Sídney, organizan su encuentro en un chat.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I will pick you up at five, and we will put the bags in the boot.",
+            "traduccion": "Os recogeré a las cinco y pondremos las bolsas en el boot."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sorry, do you mean the trunk of the car?",
+            "traduccion": "Perdona, ¿te refieres al trunk del coche?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes! In Britain we say boot. Just to be clear, we meet up at five.",
+            "traduccion": "¡Sí! En el Reino Unido decimos boot. Para que quede claro, quedamos a las cinco."
+          },
+          {
+            "hablante": "Jack",
+            "texto": "That works for me, mate. Sounds good!",
+            "traduccion": "Me viene bien, colega. ¡Suena bien!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué aclara Tom a Mia?",
+          "opciones": [
+            {
+              "es": "Que en Reino Unido el maletero se llama boot."
+            },
+            {
+              "es": "Que el viaje empieza a las seis."
+            },
+            {
+              "es": "Que Jack viaja en otro coche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia pregunta si se refiere al trunk y Tom responde que en el Reino Unido se dice boot; la hora (las cinco) no cambia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Expresión",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "aclarar"
+            },
+            {
+              "texto": "Do you mean…?"
+            },
+            {
+              "texto": "Do you mean the lift?"
+            }
+          ],
+          [
+            {
+              "texto": "explicar"
+            },
+            {
+              "texto": "In the UK we say… / in the US…"
+            },
+            {
+              "texto": "In the US we say elevator."
+            }
+          ],
+          [
+            {
+              "texto": "confirmar"
+            },
+            {
+              "texto": "Just to be clear… / Let me confirm…"
+            },
+            {
+              "texto": "Let me confirm the time."
+            }
+          ],
+          [
+            {
+              "texto": "aceptar"
+            },
+            {
+              "texto": "That works for me. / Sounds good."
+            },
+            {
+              "texto": "Sounds good!"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

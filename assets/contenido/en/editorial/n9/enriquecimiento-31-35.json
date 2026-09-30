@@ -1,0 +1,690 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "classes": {
+    "en.n9.class-31": {
+      "explicacion": {
+        "titulo": "Describir un gráfico: movimiento, cifra y proporción",
+        "texto": "Para leer y describir un gráfico, busca tres pistas. 1) El movimiento: rose, dropped, fluctuate o levelled off, casi siempre con un adverbio (steadily, sharply) que dice la velocidad. 2) La cifra: from 400 to 900 da el principio y el final; by 20 percent dice cuánto cambió (en español «en un 20 %», pero en inglés no se usa in). 3) La proporción: roughly, a quarter, two thirds, the majority. Majority significa más de la mitad."
+      },
+      "patron": {
+        "texto": "Señal + movimiento + cifra aproximada:",
+        "formula": [
+          {
+            "texto": "As the chart shows,",
+            "nota": "señal que abre la descripción"
+          },
+          {
+            "texto": "attendance rose steadily",
+            "nota": "sujeto + verbo de tendencia + adverbio de velocidad"
+          },
+          {
+            "texto": "by roughly 20 percent",
+            "nota": "cuánto cambió, con cifra aproximada"
+          },
+          {
+            "texto": "over the season.",
+            "nota": "periodo que cubre el gráfico"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Attendance rose in 20 percent last year.",
+          "correcto": "Attendance rose by 20 percent last year.",
+          "explicacion": "Para la cantidad de cambio se usa by, no in (en español se dice «en un 20 %»)."
+        },
+        {
+          "incorrecto": "The majority of the fans is young.",
+          "correcto": "The majority of the fans are young.",
+          "explicacion": "Con the majority of + plural, el verbo va en plural: concuerda con fans."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan el informe del club de atletismo del colegio y miran un gráfico de asistencia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Look at the chart, Mia. Attendance rose steadily until March.",
+            "traduccion": "Mira el gráfico, Mia. La asistencia subió de forma constante hasta marzo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, and March was the peak: roughly 900 people came to the match.",
+            "traduccion": "Sí, y marzo fue el punto máximo: vinieron unas 900 personas al partido."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "After that it fluctuated between 600 and 700.",
+            "traduccion": "Después fluctuó entre 600 y 700."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Right. And the majority of the fans, about two thirds, are students.",
+            "traduccion": "Correcto. Y la mayoría de los aficionados, unos dos tercios, son estudiantes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So only a quarter are parents?",
+            "traduccion": "Entonces, ¿solo una cuarta parte son padres?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Roughly, yes.",
+            "traduccion": "Más o menos, sí."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo fue el punto máximo de asistencia y cuánta gente fue?",
+          "opciones": [
+            {
+              "es": "En marzo, con unas 900 personas."
+            },
+            {
+              "es": "En abril, con unas 600 personas."
+            },
+            {
+              "es": "En enero, con unas 400 personas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «March was the peak: roughly 900 people came». Después la asistencia fluctuó entre 600 y 700."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pista en el gráfico",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "línea que sube sin saltos"
+            },
+            {
+              "texto": "rose steadily"
+            }
+          ],
+          [
+            {
+              "texto": "línea que sube de golpe"
+            },
+            {
+              "texto": "rose sharply"
+            }
+          ],
+          [
+            {
+              "texto": "línea en zigzag"
+            },
+            {
+              "texto": "fluctuate"
+            }
+          ],
+          [
+            {
+              "texto": "punto más alto"
+            },
+            {
+              "texto": "the peak"
+            }
+          ],
+          [
+            {
+              "texto": "más de la mitad"
+            },
+            {
+              "texto": "the majority"
+            }
+          ],
+          [
+            {
+              "texto": "el 25 %"
+            },
+            {
+              "texto": "a quarter"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-32": {
+      "explicacion": {
+        "titulo": "Proyectar sin prometer",
+        "texto": "Con datos, will suena a promesa. Los informes usan estructuras que muestran de dónde sale la predicción: is set to + verbo (los datos apuntan a ello), is projected to + verbo (resultado de un cálculo) e is expected to reach + cifra (lo que se espera). Añade el plazo con by 2030 o by then y una marca de prudencia (likely, could, only an estimate). Para la duración hasta un momento futuro: By 2030 … will have been + -ing."
+      },
+      "patron": {
+        "texto": "Dato + estructura de proyección + plazo:",
+        "formula": [
+          {
+            "texto": "The number of members",
+            "nota": "sujeto con el dato que se proyecta"
+          },
+          {
+            "texto": "is projected to",
+            "nota": "proyección calculada, no promesa"
+          },
+          {
+            "texto": "reach 1,200",
+            "nota": "verbo base + cifra"
+          },
+          {
+            "texto": "by 2030.",
+            "nota": "plazo de la proyección"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The club is projected to reaches 500 members.",
+          "correcto": "The club is projected to reach 500 members.",
+          "explicacion": "Después de to va el verbo base, sin -s."
+        },
+        {
+          "incorrecto": "By 2030 the league will be growing for ten years.",
+          "correcto": "By 2030 the league will have been growing for ten years.",
+          "explicacion": "Para medir una duración hasta un momento futuro se usa will have been + -ing; will be growing no dice cuánto lleva creciendo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a Ana, la tesorera del club, cuántos socios tendrán en el futuro.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "How many members will we have in 2030?",
+            "traduccion": "¿Cuántos socios tendremos en 2030?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The latest figures say the club is projected to reach 600 members by then.",
+            "traduccion": "Las últimas cifras dicen que se proyecta que el club llegue a 600 socios para entonces."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a big rise. Is it certain?",
+            "traduccion": "Es una gran subida. ¿Es seguro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. It is only an estimate, so it is likely to change.",
+            "traduccion": "No. Es solo una estimación, así que es probable que cambie."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. So by 2030 we will have been growing for ten years.",
+            "traduccion": "Vale. Entonces, para 2030 llevaremos diez años creciendo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, since 2020.",
+            "traduccion": "Sí, desde 2020."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué dice Ana sobre la cifra de 600 socios?",
+          "opciones": [
+            {
+              "es": "Que es una proyección y puede cambiar, no una certeza."
+            },
+            {
+              "es": "Que es la cifra actual del club."
+            },
+            {
+              "es": "Que el club ya alcanzó esa cifra."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que el club «is projected to reach 600 members» y que «it is only an estimate, so it is likely to change»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Fuerza de la predicción"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "is set to reach"
+            },
+            {
+              "texto": "los datos apuntan con fuerza"
+            }
+          ],
+          [
+            {
+              "texto": "is projected to rise"
+            },
+            {
+              "texto": "resultado de un cálculo"
+            }
+          ],
+          [
+            {
+              "texto": "is expected to fall"
+            },
+            {
+              "texto": "lo que se espera que pase"
+            }
+          ],
+          [
+            {
+              "texto": "is likely to level off"
+            },
+            {
+              "texto": "probable, más prudente"
+            }
+          ],
+          [
+            {
+              "texto": "will have been growing"
+            },
+            {
+              "texto": "duración hasta un momento futuro"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-33": {
+      "explicacion": {
+        "titulo": "¿Eso dicen realmente los datos?",
+        "texto": "Antes de aceptar una afirmación, compárala con los datos. Hay tres veredictos: supported (los datos la apoyan tal cual), exaggerated (hay datos, pero la frase dice más: «todos», «siempre», «demuestra») y unsupported (los datos no dicen nada de eso). Cuidado con la correlation: dos cosas que suben juntas no prueban que una sea la cause de la otra. Para contrastar datos usa unlike, whereas, while y compared with."
+      },
+      "patron": {
+        "texto": "Dato + verbo prudente + límite:",
+        "formula": [
+          {
+            "texto": "The data suggest",
+            "nota": "verbo prudente: apunta, no demuestra"
+          },
+          {
+            "texto": "a link between training and results,",
+            "nota": "una relación entre dos cosas"
+          },
+          {
+            "texto": "but they do not prove",
+            "nota": "el límite de la evidencia"
+          },
+          {
+            "texto": "that one causes the other.",
+            "nota": "la causa que no se puede afirmar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The data prove that sleep causes better grades.",
+          "correcto": "The data suggest that sleep is linked to better grades.",
+          "explicacion": "Dos datos que suben juntos son una correlation; para afirmar la causa hace falta más evidencia, así que se usa suggest."
+        },
+        {
+          "incorrecto": "Boys' teams grew by 3 percent, unlike girls' teams grew by 12 percent.",
+          "correcto": "Boys' teams grew by 3 percent, whereas girls' teams grew by 12 percent.",
+          "explicacion": "Unlike es una preposición y no introduce una cláusula con verbo; para unir dos cláusulas se usa whereas o while."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom leen un informe escolar sobre el sueño y revisan una afirmación del titular.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "The report says everyone who sleeps eight hours gets better grades. Is that true?",
+            "traduccion": "El informe dice que todos los que duermen ocho horas sacan mejores notas. ¿Es verdad?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Not exactly. Only seventy percent of the students did better. The claim is exaggerated.",
+            "traduccion": "No exactamente. Solo el setenta por ciento de los estudiantes mejoró. La afirmación es exagerada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the headline says sleep is the cause.",
+            "traduccion": "Y el titular dice que el sueño es la causa."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The data show a correlation, not a cause. Students who sleep more also study more.",
+            "traduccion": "Los datos muestran una correlación, no una causa. Los estudiantes que duermen más también estudian más."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So, unlike the headline, the evidence is weak.",
+            "traduccion": "Entonces, a diferencia del titular, la evidencia es débil."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué Sara dice que la afirmación del informe está exagerada?",
+          "opciones": [
+            {
+              "es": "Porque solo el 70 % de los estudiantes mejoró, no todos."
+            },
+            {
+              "es": "Porque el informe no incluye ningún dato."
+            },
+            {
+              "es": "Porque nadie durmió ocho horas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que «only seventy percent of the students did better», así que decir que todos mejoran exagera los datos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Veredicto",
+          "Señal en la frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "supported"
+            },
+            {
+              "texto": "cifras que coinciden con lo que se afirma"
+            }
+          ],
+          [
+            {
+              "texto": "exaggerated"
+            },
+            {
+              "texto": "every, always, all, proves, doubled cuando subió un 12 %"
+            }
+          ],
+          [
+            {
+              "texto": "unsupported"
+            },
+            {
+              "texto": "el informe no menciona el tema"
+            }
+          ],
+          [
+            {
+              "texto": "correlation"
+            },
+            {
+              "texto": "rise together, are linked, are associated with"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-34": {
+      "explicacion": {
+        "titulo": "Números que cuentan una historia",
+        "texto": "Una buena descripción de datos tiene tres pasos unidos con conectores. 1) Tendencia: Overall, … rose from 30 to 60. 2) Comparación: Compared with…, whereas…, Meanwhile,… 3) Proyección prudente: If this trend continues, … is likely to…; consequently,…. Para interpretar sin exagerar usa tend to, appear to y partly: dicen qué sugieren los datos, no qué prueban."
+      },
+      "patron": {
+        "texto": "Tendencia + comparación + interpretación + proyección:",
+        "formula": [
+          {
+            "texto": "Overall, swimming rose from 30 to 60 students;",
+            "nota": "tendencia general con cifras"
+          },
+          {
+            "texto": "meanwhile, running stayed the same.",
+            "nota": "comparación con otra línea"
+          },
+          {
+            "texto": "This appears to be partly linked to the new pool.",
+            "nota": "interpretación prudente"
+          },
+          {
+            "texto": "If this continues, swimming is likely to overtake running.",
+            "nota": "proyección prudente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Runners tend to improving in spring.",
+          "correcto": "Runners tend to improve in spring.",
+          "explicacion": "Después de tend to va el verbo base, sin -ing."
+        },
+        {
+          "incorrecto": "Consequently, the pool will maybe need longer hours.",
+          "correcto": "Consequently, the pool may need longer hours.",
+          "explicacion": "Maybe es un adverbio y no va entre will y el verbo; para una proyección prudente se usa may o is likely to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos preparan el informe de salud del colegio y quieren que cuente una historia, no solo una lista de cifras.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I want the report to tell a story, not only list numbers.",
+            "traduccion": "Quiero que el informe cuente una historia, no solo una lista de cifras."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Start with the trend: overall, swimming sessions rose from two to three a week.",
+            "traduccion": "Empieza con la tendencia: en general, las sesiones de natación subieron de dos a tres por semana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then a comparison: meanwhile, running stayed the same.",
+            "traduccion": "Luego una comparación: por su parte, correr se mantuvo igual."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And finish with a cautious forecast: if this continues, the pool is likely to be full by 2030.",
+            "traduccion": "Y termina con una previsión prudente: si esto continúa, es probable que la piscina esté llena en 2030."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. I will add that the rise appears to be linked to the new pool.",
+            "traduccion": "Bien. Añadiré que el aumento parece estar relacionado con la piscina nueva."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué orden propone Carlos para el informe?",
+          "opciones": [
+            {
+              "es": "Tendencia, comparación y previsión prudente."
+            },
+            {
+              "es": "Proyección, tendencia y conclusión definitiva."
+            },
+            {
+              "es": "Comparación, anécdota y lista de cifras."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos propone empezar por la tendencia, seguir con la comparación y terminar con una previsión prudente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Conector o estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tendencia"
+            },
+            {
+              "texto": "Overall, … rose from … to …"
+            }
+          ],
+          [
+            {
+              "texto": "Comparación"
+            },
+            {
+              "texto": "Compared with…, whereas…, Meanwhile,…"
+            }
+          ],
+          [
+            {
+              "texto": "Interpretación"
+            },
+            {
+              "texto": "tend to, appear to, partly due to"
+            }
+          ],
+          [
+            {
+              "texto": "Proyección"
+            },
+            {
+              "texto": "If this trend continues, … is likely to…"
+            }
+          ],
+          [
+            {
+              "texto": "Consecuencia"
+            },
+            {
+              "texto": "Consequently, …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-35": {
+      "explicacion": {
+        "titulo": "Presentar datos y responder al público",
+        "texto": "Una presentación de datos tiene tres movimientos. 1) Anunciar el plan: I will briefly present… 2) Guiar al público por el gráfico: On this slide…, I'd like to highlight… 3) Responder con cautela: valida la pregunta (That is a fair question), contesta con los datos (The figures suggest…), no afirmes causas (I can't say it is the cause) y reconoce un límite (One limitation is that…). Usa la tendencia, la proyección prudente y la distinción entre evidencia y opinión de las clases anteriores."
+      },
+      "patron": {
+        "texto": "Anunciar + guiar + responder con cautela:",
+        "formula": [
+          {
+            "texto": "I will briefly present the results.",
+            "nota": "anuncias el tema y la duración"
+          },
+          {
+            "texto": "On this slide, I'd like to highlight the peak.",
+            "nota": "guías la mirada del público"
+          },
+          {
+            "texto": "That is a fair question. The data suggest a link,",
+            "nota": "validas la pregunta y respondes con datos"
+          },
+          {
+            "texto": "but one limitation is that the sample is small.",
+            "nota": "matizas y reconoces un límite"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will explain you the chart.",
+          "correcto": "I will explain the chart to you.",
+          "explicacion": "Explain lleva el complemento directo (the chart) sin preposición y la persona con to: explain something to someone."
+        },
+        {
+          "incorrecto": "I'd like highlight the peak in May.",
+          "correcto": "I'd like to highlight the peak in May.",
+          "explicacion": "I'd like va seguido de to + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia presenta ante la clase los datos de la liga escolar y Tom, del público, le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "On this slide, I'd like to highlight the peak: attendance reached 900 in March.",
+            "traduccion": "En esta diapositiva quisiera destacar el punto máximo: la asistencia llegó a 900 en marzo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Does that mean the new coach caused the rise?",
+            "traduccion": "¿Eso significa que el nuevo entrenador causó la subida?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That is a fair question. The data suggest a link, but I can't say it is the cause.",
+            "traduccion": "Es una pregunta justa. Los datos sugieren un vínculo, pero no puedo decir que sea la causa."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is the projection certain?",
+            "traduccion": "¿Es segura la proyección?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No. One limitation is that we only have two seasons, so it is only an estimate.",
+            "traduccion": "No. Una limitación es que solo tenemos dos temporadas, así que es solo una estimación."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué Mia no afirma que el entrenador causó la subida?",
+          "opciones": [
+            {
+              "es": "Porque los datos sugieren un vínculo, pero no prueban la causa."
+            },
+            {
+              "es": "Porque el entrenador llegó después del punto máximo."
+            },
+            {
+              "es": "Porque la asistencia no subió."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia responde «The data suggest a link, but I can't say it is the cause»: hay una relación posible, no una causa demostrada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "abrir"
+            },
+            {
+              "texto": "I will briefly present…"
+            }
+          ],
+          [
+            {
+              "texto": "guiar"
+            },
+            {
+              "texto": "On this slide… / I'd like to highlight…"
+            }
+          ],
+          [
+            {
+              "texto": "validar la pregunta"
+            },
+            {
+              "texto": "That is a fair question."
+            }
+          ],
+          [
+            {
+              "texto": "matizar"
+            },
+            {
+              "texto": "The data suggest… but I can't say…"
+            }
+          ],
+          [
+            {
+              "texto": "reconocer un límite"
+            },
+            {
+              "texto": "One limitation is that…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,669 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "classes": {
+    "en.n8.class-71": {
+      "explicacion": {
+        "titulo": "Conceder para convencer",
+        "texto": "En un debate de nivel C1, conceder un punto no es perder: reconoces lo que tiene de cierto la otra postura y enseguida vuelves a tu conclusión. Granted y admittedly van al principio de la frase, con coma, y la réplica llega después, normalmente con but. Be that as it may, that said y even so abren la réplica por sí solos, sin but. Ojo: granted aquí no significa «garantizado»: significa «es cierto, lo admito»."
+      },
+      "patron": {
+        "texto": "Concesión + réplica:",
+        "formula": [
+          {
+            "texto": "Granted, the price is high,",
+            "nota": "concesión: reconoces un punto cierto del otro"
+          },
+          {
+            "texto": "but",
+            "nota": "aquí empieza tu réplica"
+          },
+          {
+            "texto": "the quality is excellent.",
+            "nota": "tu conclusión, que sigue en pie"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Be that as it may, but my opponent is wrong.",
+          "correcto": "Be that as it may, my opponent is wrong.",
+          "explicacion": "Be that as it may ya marca el contraste; añadir but es un calco de «aun así, pero»."
+        },
+        {
+          "incorrecto": "Admittedly that the price is high, it is useful.",
+          "correcto": "Admittedly, the price is high, but it is useful.",
+          "explicacion": "Admittedly lleva coma y no lleva that: no se traduce «es cierto que» palabra por palabra."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom debaten si la ciudad debe cerrar el centro a los coches.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I think the city should close the centre to cars.",
+            "traduccion": "Creo que la ciudad debería cerrar el centro a los coches."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Granted, the air would be cleaner. That said, many shops would lose customers.",
+            "traduccion": "Es cierto que el aire estaría más limpio. Dicho esto, muchas tiendas perderían clientes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Admittedly, some shops would have a problem. Be that as it may, clean air is more important.",
+            "traduccion": "Hay que admitir que algunas tiendas tendrían un problema. Sea como sea, el aire limpio es más importante."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fair enough. Let's look at the numbers first.",
+            "traduccion": "Justo. Miremos primero las cifras."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concede Tom y cómo replica?",
+          "opciones": [
+            {
+              "es": "Concede que el aire estaría más limpio y replica que muchas tiendas perderían clientes."
+            },
+            {
+              "es": "Concede que las tiendas ganarían clientes y replica que el aire sería peor."
+            },
+            {
+              "es": "Concede que los coches son baratos y replica que el centro es pequeño."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Granted, the air would be cleaner» (concesión) y después «That said, many shops would lose customers» (réplica)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Marcador",
+          "Función",
+          "Después viene"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Granted,"
+            },
+            {
+              "texto": "reconoce un punto ajeno"
+            },
+            {
+              "texto": "but + réplica"
+            }
+          ],
+          [
+            {
+              "texto": "Admittedly,"
+            },
+            {
+              "texto": "admite una debilidad"
+            },
+            {
+              "texto": "but + réplica"
+            }
+          ],
+          [
+            {
+              "texto": "Be that as it may,"
+            },
+            {
+              "texto": "«sea como sea»"
+            },
+            {
+              "texto": "la réplica, sin but"
+            }
+          ],
+          [
+            {
+              "texto": "That said, / Even so,"
+            },
+            {
+              "texto": "«dicho esto / aun así»"
+            },
+            {
+              "texto": "la réplica, sin but"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-72": {
+      "explicacion": {
+        "titulo": "Consecuencia y medio en registro formal",
+        "texto": "En un texto formal hay cuatro conectores para hablar de consecuencia y medio. Hence («de ahí») va con un nombre o una oración: hence the drop in traffic. Thereby + -ing indica lo que se consigue con la acción anterior: thereby reducing traffic. Whereby (= by which) presenta un sistema o una regla: a scheme whereby residents pay less. In so doing empieza frase nueva y retoma la acción anterior: «al hacerlo». Son conectores de escritura; al hablar dirías so o by doing this."
+      },
+      "patron": {
+        "texto": "Acción + thereby + -ing:",
+        "formula": [
+          {
+            "texto": "The council raised the fee,",
+            "nota": "la acción o decisión"
+          },
+          {
+            "texto": "thereby",
+            "nota": "con lo cual: une acción y resultado"
+          },
+          {
+            "texto": "reducing traffic.",
+            "nota": "verbo en -ing: la consecuencia"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The council raised the fee, thereby to reduce traffic.",
+          "correcto": "The council raised the fee, thereby reducing traffic.",
+          "explicacion": "Después de thereby va el verbo en -ing; no se usa to + verbo como en «para así reducir»."
+        },
+        {
+          "incorrecto": "The fee is high, hence that traffic is lower.",
+          "correcto": "The fee is high; hence the lower traffic.",
+          "explicacion": "Hence no lleva that, a diferencia de «de ahí que»: va directo con un nombre o una oración."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos leen una noticia sobre el plan de tarifas de su ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "The council has a new scheme whereby drivers pay a fee in the centre.",
+            "traduccion": "El ayuntamiento tiene un plan nuevo por el cual los conductores pagan una tarifa en el centro."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And what is the result?",
+            "traduccion": "¿Y cuál es el resultado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Fewer cars, hence cleaner air.",
+            "traduccion": "Menos coches, de ahí el aire más limpio."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So the fee discourages drivers, thereby reducing traffic?",
+            "traduccion": "Entonces la tarifa desalienta a los conductores y así reduce el tráfico, ¿no?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. The council also lowered the fee for residents. In so doing, it won their support.",
+            "traduccion": "Sí. El ayuntamiento también bajó la tarifa para los residentes. Al hacerlo, ganó su apoyo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué consiguió el ayuntamiento al bajar la tarifa a los residentes?",
+          "opciones": [
+            {
+              "es": "Ganó el apoyo de los residentes."
+            },
+            {
+              "es": "Redujo el tráfico del centro."
+            },
+            {
+              "es": "Prohibió los coches en el centro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «In so doing, it won their support»: el resultado de bajar la tarifa fue ganar apoyo; el menor tráfico viene de la tarifa general, no de esa rebaja."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Después viene",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "hence"
+            },
+            {
+              "texto": "un nombre o una oración"
+            },
+            {
+              "texto": "hence the drop in traffic"
+            }
+          ],
+          [
+            {
+              "texto": "thereby"
+            },
+            {
+              "texto": "un verbo en -ing"
+            },
+            {
+              "texto": "thereby reducing traffic"
+            }
+          ],
+          [
+            {
+              "texto": "whereby"
+            },
+            {
+              "texto": "una oración (un sistema)"
+            },
+            {
+              "texto": "a scheme whereby residents pay less"
+            }
+          ],
+          [
+            {
+              "texto": "In so doing,"
+            },
+            {
+              "texto": "coma + oración"
+            },
+            {
+              "texto": "In so doing, the council won support."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-73": {
+      "explicacion": {
+        "titulo": "El mapa de un debate: cuatro piezas",
+        "texto": "Para seguir un debate de dos voces, construye un mapa con cuatro piezas. El argumento es la postura de alguien con su razón: My main argument is… El contraargumento es la respuesta del otro lado: On the other hand…, But… La concesión es lo que alguien admite: Granted…, Admittedly… El cierre resume: To sum up… Escucha primero quién está a favor y quién en contra y luego ubica cada pieza por su palabra señal. El mapa recoge lo que dicen ellos, no tu opinión."
+      },
+      "patron": {
+        "texto": "Mapa del debate:",
+        "formula": [
+          {
+            "texto": "My main argument is that…",
+            "nota": "argumento: postura y razón"
+          },
+          {
+            "texto": "Granted…, but…",
+            "nota": "concesión y contraargumento"
+          },
+          {
+            "texto": "To sum up,…",
+            "nota": "cierre: resumen final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo is in favour to the ban.",
+          "correcto": "Leo is in favour of the ban.",
+          "explicacion": "«A favor de» se dice in favour of; con to el sentido cambia."
+        },
+        {
+          "incorrecto": "Ana is against to the motion.",
+          "correcto": "Ana is against the motion.",
+          "explicacion": "Against no lleva preposición detrás: es «en contra de» sin de ni to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara comentan un debate escolar sobre los deberes.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The moderator says the motion is that homework should stop.",
+            "traduccion": "La moderadora dice que la moción es que los deberes deberían terminar."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Tom is in favour of it. His main argument is that students are tired.",
+            "traduccion": "Tom está a favor. Su argumento principal es que los estudiantes están cansados."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Ana's counterargument is that practice helps students remember.",
+            "traduccion": "El contraargumento de Ana es que la práctica ayuda a los estudiantes a recordar."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Granted, homework is tiring, she says. That said, she wants short tasks.",
+            "traduccion": "Es cierto que los deberes cansan, dice ella. Dicho esto, quiere tareas cortas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el contraargumento de Ana?",
+          "opciones": [
+            {
+              "es": "Que la práctica ayuda a los estudiantes a recordar."
+            },
+            {
+              "es": "Que los estudiantes están cansados."
+            },
+            {
+              "es": "Que los deberes deben terminar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo cuenta que el contraargumento de Ana es «practice helps students remember»; estar cansados es el argumento de Tom."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Señal en inglés",
+          "Qué anotas"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Argumento"
+            },
+            {
+              "texto": "My main argument is…"
+            },
+            {
+              "texto": "postura y razón"
+            }
+          ],
+          [
+            {
+              "texto": "Contraargumento"
+            },
+            {
+              "texto": "On the other hand… / But…"
+            },
+            {
+              "texto": "respuesta al otro lado"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Granted… / Admittedly…"
+            },
+            {
+              "texto": "lo que admite el orador"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "To sum up…"
+            },
+            {
+              "texto": "resumen final"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-74": {
+      "explicacion": {
+        "titulo": "Conceder con cortesía y rebatir con evidencia",
+        "texto": "Una buena réplica escrita hace dos movimientos por cada punto: concede y rebate. Concedes con I take your point (about…), I would not deny that… o While + oración: While later lessons could help sleep,… Rebates con nonetheless, but o con evidencia: the evidence suggests… Para mantener la cortesía usa with respect y ataca la idea, no a la persona. Estructura recomendada: apertura, concesión 1 y contraargumento 1, concesión 2 y contraargumento 2, y cierre."
+      },
+      "patron": {
+        "texto": "Concesión + nonetheless + contraargumento:",
+        "formula": [
+          {
+            "texto": "I would not deny that teenagers are tired.",
+            "nota": "concesión: admites un punto cierto"
+          },
+          {
+            "texto": "Nonetheless,",
+            "nota": "giro: «aun así»"
+          },
+          {
+            "texto": "the evidence on grades is not clear.",
+            "nota": "contraargumento con datos"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "While a later start helps sleep, but it ends the day later.",
+          "correcto": "While a later start helps sleep, it ends the day later.",
+          "explicacion": "While ya marca el contraste; añadir but es un calco de «aunque…, pero»."
+        },
+        {
+          "incorrecto": "I would not deny that sleep is important, nonetheless buses start early.",
+          "correcto": "I would not deny that sleep is important. Nonetheless, buses start early.",
+          "explicacion": "Nonetheless es un adverbio conector, no una conjunción: va después de punto, no tras una simple coma."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos preparan la réplica a una carta que pide que las clases empiecen a las diez.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The letter says teenagers need more sleep.",
+            "traduccion": "La carta dice que los adolescentes necesitan dormir más."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I take your point about sleep. Nonetheless, buses and work hours will not change.",
+            "traduccion": "Entiendo tu punto sobre el sueño. Aun así, los autobuses y los horarios de trabajo no cambiarán."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. While a later start could help sleep, it would also end the day later.",
+            "traduccion": "Bien. Si bien empezar más tarde podría ayudar a dormir, también haría terminar el día más tarde."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "With respect, that is our strongest point. Let's add the evidence from the school next door.",
+            "traduccion": "Con el debido respeto, ese es nuestro punto más fuerte. Añadamos las pruebas del colegio de al lado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concede Carlos y qué rebate?",
+          "opciones": [
+            {
+              "es": "Concede que hace falta dormir más y rebate que los autobuses y los horarios de trabajo no cambiarán."
+            },
+            {
+              "es": "Concede que los autobuses cambiarán y rebate que los adolescentes duermen demasiado."
+            },
+            {
+              "es": "Concede que las pruebas son claras y rebate que la carta es cortés."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «I take your point about sleep» (concesión) y «Nonetheless, buses and work hours will not change» (contraargumento)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Movimiento",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Conceder"
+            },
+            {
+              "texto": "I take your point about…"
+            },
+            {
+              "texto": "I take your point about sleep."
+            }
+          ],
+          [
+            {
+              "texto": "Conceder"
+            },
+            {
+              "texto": "I would not deny that…"
+            },
+            {
+              "texto": "I would not deny that sleep matters."
+            }
+          ],
+          [
+            {
+              "texto": "Rebatir"
+            },
+            {
+              "texto": "Nonetheless, …"
+            },
+            {
+              "texto": "Nonetheless, buses start early."
+            }
+          ],
+          [
+            {
+              "texto": "Suavizar"
+            },
+            {
+              "texto": "With respect, …"
+            },
+            {
+              "texto": "With respect, one school is not enough."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-75": {
+      "explicacion": {
+        "titulo": "Un turno de panel completo",
+        "texto": "En un panel cada turno tiene un trabajo. La apertura da tu postura en una frase y dos o tres razones (My position is clear…). La concesión admite un punto cierto del otro lado (Granted…, Admittedly…, I take your point…). La refutación responde con evidencia y un conector formal (Nonetheless,…; hence…; thereby + -ing; a scheme whereby…). El cierre sintetiza con On balance… o To sum up… Usa los cuatro movimientos y mantén la cortesía con With respect…"
+      },
+      "patron": {
+        "texto": "Apertura + concesión + refutación + cierre:",
+        "formula": [
+          {
+            "texto": "I am in favour of pedestrian streets,",
+            "nota": "apertura: tu postura"
+          },
+          {
+            "texto": "Granted, congestion is a problem,",
+            "nota": "concesión: un punto cierto del otro lado"
+          },
+          {
+            "texto": "but the evidence… hence…",
+            "nota": "refutación con un conector formal"
+          },
+          {
+            "texto": "On balance, …",
+            "nota": "cierre: síntesis"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The council bans cars, thereby the air is cleaner.",
+          "correcto": "The council bans cars, thereby making the air cleaner.",
+          "explicacion": "Thereby va seguido de un verbo en -ing (making), no de una oración completa."
+        },
+        {
+          "incorrecto": "Admittedly that congestion is a problem, the plan is still good.",
+          "correcto": "Admittedly, congestion is a problem, but the plan is still good.",
+          "explicacion": "Admittedly lleva coma y no that; la réplica se introduce con but."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo ensayan un panel sobre el centro sin coches.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "My opening statement is short: I am in favour of pedestrian streets.",
+            "traduccion": "Mi declaración de apertura es corta: estoy a favor de las calles peatonales."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Granted, congestion is a problem. Nonetheless, shops need customers.",
+            "traduccion": "Es cierto que la congestión es un problema. Aun así, las tiendas necesitan clientes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I take your point. Pedestrian streets bring visitors, thereby helping shops.",
+            "traduccion": "Entiendo tu punto. Las calles peatonales traen visitantes y así ayudan a las tiendas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "On balance, let's test one street first.",
+            "traduccion": "En conjunto, probemos primero una calle."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo responde Sara a la preocupación de Leo por las tiendas?",
+          "opciones": [
+            {
+              "es": "Dice que las calles peatonales traen visitantes y así ayudan a las tiendas."
+            },
+            {
+              "es": "Dice que las tiendas deberían cerrar."
+            },
+            {
+              "es": "Propone probar primero una sola calle."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara responde «Pedestrian streets bring visitors, thereby helping shops»; probar una sola calle es la propuesta de Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Turno",
+          "Función",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "postura y razones"
+            },
+            {
+              "texto": "My position is clear…"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "admitir un punto"
+            },
+            {
+              "texto": "Granted, … / Admittedly, …"
+            }
+          ],
+          [
+            {
+              "texto": "Refutación"
+            },
+            {
+              "texto": "responder con evidencia"
+            },
+            {
+              "texto": "Nonetheless, … / thereby + -ing"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "sintetizar"
+            },
+            {
+              "texto": "On balance, … / To sum up, …"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

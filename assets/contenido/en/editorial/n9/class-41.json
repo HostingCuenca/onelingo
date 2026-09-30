@@ -1,0 +1,792 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 9,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n9.class-41",
+  "title": {
+    "en": "How likely is it?",
+    "es": "¿Qué tan probable es?"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer expresiones de probabilidad (definitely, highly likely, probably, unlikely, a slim chance, no chance), ordenarlas por fuerza y ligarlas al nivel de riesgo de un aviso."
+    ]
+  },
+  "concepts": [
+    "n9-risk-probability-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n9.class-40"
+  ],
+  "usesVocabulary": [
+    "forecast",
+    "hazard",
+    "likely",
+    "unlikely",
+    "probably",
+    "definitely",
+    "chance",
+    "slim",
+    "warning",
+    "highly"
+  ],
+  "usesPatterns": [
+    "n9-risk-probability-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "forecast",
+      "es": "pronóstico"
+    },
+    {
+      "en": "hazard",
+      "es": "peligro, fuente de riesgo"
+    },
+    {
+      "en": "likely",
+      "es": "probable"
+    },
+    {
+      "en": "unlikely",
+      "es": "poco probable"
+    },
+    {
+      "en": "probably",
+      "es": "probablemente"
+    },
+    {
+      "en": "definitely",
+      "es": "sin duda, con seguridad"
+    },
+    {
+      "en": "chance",
+      "es": "posibilidad"
+    },
+    {
+      "en": "slim",
+      "es": "escaso, delgado"
+    },
+    {
+      "en": "warning",
+      "es": "aviso, advertencia"
+    },
+    {
+      "en": "highly",
+      "es": "muy, altamente"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n9.class-41.t01",
+      "en": "The forecast says it will definitely snow on the mountain tonight.",
+      "es": "El pronóstico dice que sin duda nevará en la montaña esta noche.",
+      "explanationEs": "Will definitely + verbo: certeza casi total; el adverbio va después de will.",
+      "segments": [
+        "The forecast says it will definitely",
+        "snow on the mountain tonight."
+      ],
+      "audioText": "The forecast says it will definitely snow on the mountain tonight.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-risk-probability-1"
+    },
+    {
+      "id": "en.n9.class-41.t02",
+      "en": "Heavy rain is highly likely on Saturday, so the warning is serious.",
+      "es": "La lluvia fuerte es muy probable el sábado, así que el aviso es serio.",
+      "explanationEs": "Highly likely: probabilidad alta. Likely es adjetivo: is likely to + verbo.",
+      "segments": [
+        "Heavy rain is highly likely on",
+        "Saturday, so the warning is serious."
+      ],
+      "audioText": "Heavy rain is highly likely on Saturday, so the warning is serious.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-risk-probability-1"
+    },
+    {
+      "id": "en.n9.class-41.t03",
+      "en": "It will probably be cloudy, but it probably won't rain.",
+      "es": "Probablemente estará nublado, pero probablemente no lloverá.",
+      "explanationEs": "Will probably, pero probably won't: con la negación el adverbio va antes de won't.",
+      "segments": [
+        "It will probably be cloudy,",
+        "but it probably won't rain."
+      ],
+      "audioText": "It will probably be cloudy, but it probably won't rain.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-risk-probability-1"
+    },
+    {
+      "id": "en.n9.class-41.t04",
+      "en": "Ice is unlikely before noon, but it is still a hazard after dark.",
+      "es": "Es poco probable que haya hielo antes del mediodía, pero sigue siendo un peligro al anochecer.",
+      "explanationEs": "Unlikely = poco probable. Hazard nombra el peligro; la probabilidad es otra cosa.",
+      "segments": [
+        "Ice is unlikely before noon, but it",
+        "is still a hazard after dark."
+      ],
+      "audioText": "Ice is unlikely before noon, but it is still a hazard after dark.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-risk-probability-1"
+    },
+    {
+      "id": "en.n9.class-41.t05",
+      "en": "There is a slim chance of sunshine, so take a raincoat.",
+      "es": "Hay una posibilidad escasa de sol, así que lleva un impermeable.",
+      "explanationEs": "A slim chance: baja pero no nula. No chance significa imposible.",
+      "segments": [
+        "There is a slim chance of",
+        "sunshine, so take a raincoat."
+      ],
+      "audioText": "There is a slim chance of sunshine, so take a raincoat.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-risk-probability-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n9.c41.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase con la probabilidad más alta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The road might be closed."
+          },
+          {
+            "text": "The road is unlikely to be closed."
+          },
+          {
+            "text": "The road will definitely be closed."
+          }
+        ],
+        "teaches": [
+          "n9-risk-probability-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.pg01.seed-0",
+          "feedback": {
+            "es": "Will definitely deja casi sin duda que ocurrirá; might lo deja abierto y unlikely lo vuelve poco probable."
+          },
+          "hint": {
+            "es": "Busca la forma que casi no deja duda de que ocurrirá."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3b55aaf389799260182bd7b421f2dc10c89d8edbf0306c8bc5a16a103e668186"
+      },
+      {
+        "id": "en.n9.c41.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es muy probable que nieve esta noche.»"
+        },
+        "answer": {
+          "text": "likely",
+          "accepted": [
+            "likely"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-risk-probability-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.pg02.seed-0",
+          "feedback": {
+            "es": "Highly likely + to + verbo expresa una probabilidad alta; likely es el adjetivo que lo permite."
+          },
+          "hint": {
+            "es": "Es el adjetivo que significa «probable» y se escribe antes de to."
+          },
+          "text": "Snow is highly ___ to fall tonight."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1a39acbf12dd4e0cfc9aaab072095f9c96ff005f2ad711fe4b516ca580dd702d"
+      },
+      {
+        "id": "en.n9.c41.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Probablemente no nevará en el valle.»"
+        },
+        "answer": {
+          "text": "It probably won't snow in the valley",
+          "tokens": [
+            "It",
+            "probably",
+            "won't",
+            "snow",
+            "in",
+            "the",
+            "valley"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-risk-probability-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.pg03.seed-0",
+          "feedback": {
+            "es": "Con la negación, probably va antes de won't: probably won't + verbo."
+          },
+          "hint": {
+            "es": "El adverbio va antes de la forma negativa won't."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c598aa3f237f6460d8001af79802a15189b0e1e023477f4f00fabe10217e17bd"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n9.c41.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase del parte con su grado de probabilidad."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Fog will definitely form by dawn.",
+              {
+                "es": "casi seguro"
+              }
+            ],
+            [
+              "The wind will probably drop tonight.",
+              {
+                "es": "probable"
+              }
+            ],
+            [
+              "Sunshine is unlikely before noon.",
+              {
+                "es": "poco probable"
+              }
+            ],
+            [
+              "There is no chance of rain tonight.",
+              {
+                "es": "imposible"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.p01.seed-0",
+          "feedback": {
+            "es": "Definitely marca casi certeza, probably una probabilidad media-alta, unlikely poca y no chance la excluye."
+          },
+          "pairs": [
+            [
+              "Fog will definitely form by dawn.",
+              {
+                "es": "casi seguro"
+              }
+            ],
+            [
+              "The wind will probably drop tonight.",
+              {
+                "es": "probable"
+              }
+            ],
+            [
+              "Sunshine is unlikely before noon.",
+              {
+                "es": "poco probable"
+              }
+            ],
+            [
+              "There is no chance of rain tonight.",
+              {
+                "es": "imposible"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f2c95b40a95aa9b625d5296c39bc6f8cd0b010684821ab4db0cff318ed5560d8"
+      },
+      {
+        "id": "en.n9.c41.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué es lo más seguro según el pronóstico."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Low temperatures are certain."
+          },
+          {
+            "text": "Rain after lunch is certain."
+          },
+          {
+            "text": "A storm on Sunday is certain."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.p02.seed-0",
+          "feedback": {
+            "es": "Solo el frío lleva definitely; la lluvia es probable y la tormenta es poco probable."
+          },
+          "audio": "Good morning. The forecast is mixed. It will definitely be cold, it will probably rain after lunch, and a storm is unlikely until Sunday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1f674a37089ba853291ef76e10bf4f4453d3370fef66bd2be47037dbd49bc9e1"
+      },
+      {
+        "id": "en.n9.c41.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Hay una posibilidad escasa de que lleguemos a tiempo.»"
+        },
+        "answer": {
+          "text": "slim",
+          "accepted": [
+            "slim",
+            "small",
+            "slight"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.p03.seed-0",
+          "feedback": {
+            "es": "A slim chance indica una probabilidad baja pero no nula."
+          },
+          "text": "There is a ___ chance that we will arrive on time."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:708cecbfb3a76680b2f7dd3f350d3f0f11a438fc534e5951851c9655da55aca4"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n9.c41.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que recoge lo que dice el capitán del puerto."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "There is a slim chance of leaving the harbour today."
+          },
+          {
+            "text": "There is no chance of leaving the harbour today."
+          },
+          {
+            "text": "The ferry will probably leave the harbour today."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.e01.seed-0",
+          "feedback": {
+            "es": "Si navegar es imposible, el inglés dice no chance; slim chance y probably dejan una puerta abierta."
+          },
+          "text": "The ferry captain says it is impossible to leave the harbour today."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0c0caf3cddf59a3589f97343b5baa61192b23e64ca92243d139a0331c11feb2b"
+      },
+      {
+        "id": "en.n9.c41.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué es probable que ocurra con el vuelo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The flight will be cancelled."
+          },
+          {
+            "text": "The fog will clear at six."
+          },
+          {
+            "text": "The departure will be delayed."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.e02.seed-0",
+          "feedback": {
+            "es": "Probably leave a little late anuncia un retraso; la cancelación es unlikely y las noticias a las seis son seguras."
+          },
+          "audio": "Passengers, the flight will probably leave a little late because of fog. Cancellation is very unlikely, and we will definitely give you news at six.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bade6097d83f8dd37148d3079b9a512e9e19492c8ff4d618a3c525d0c223bd25"
+      },
+      {
+        "id": "en.n9.c41.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El pronóstico dice que probablemente no helará esta noche.»"
+        },
+        "answer": {
+          "text": "probably won't",
+          "accepted": [
+            "probably won't",
+            "probably will not"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.e03.seed-0",
+          "feedback": {
+            "es": "Con la negación, probably se coloca antes de won't."
+          },
+          "text": "The forecast says it ___ freeze tonight."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:69b99c2a8ec202934f1ef108ae754361b7f9b59b1d1bcf041acc8d4e005c1e57"
+      },
+      {
+        "id": "en.n9.c41.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La nieve es un peligro, pero es poco probable esta semana.»"
+        },
+        "answer": {
+          "text": "Snow is a hazard, but it is unlikely this week",
+          "tokens": [
+            "Snow",
+            "is",
+            "a",
+            "hazard,",
+            "but",
+            "it",
+            "is",
+            "unlikely",
+            "this",
+            "week"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.e04.seed-0",
+          "feedback": {
+            "es": "Hazard nombra el peligro y unlikely rebaja su probabilidad; but une ambas ideas."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7f39ad60506798e4d399a254ca7b6df15c928fec49cf69401fc080ca3cd680ac"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n9.c41.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que encaja con una posibilidad en la que no estás seguro."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The train might be late."
+          },
+          {
+            "text": "The train will definitely be late."
+          },
+          {
+            "text": "The train can't be late."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.r01.seed-0",
+          "feedback": {
+            "es": "Might deja la posibilidad abierta; definitely la vuelve casi segura y can't la excluye."
+          },
+          "text": "Your friend asks if the train will be late. You think it could happen, but you are not sure."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2bd11e2bb851d44c7d4e3430d15e49ae522948c1e7c68c87976432e0d531f601"
+      },
+      {
+        "id": "en.n9.c41.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué piensa la persona de la tienda."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The shop is certainly still open."
+          },
+          {
+            "text": "She believes the shop is already shut."
+          },
+          {
+            "text": "The shop opens again later tonight."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.r02.seed-0",
+          "feedback": {
+            "es": "La hablante da una posibilidad escasa de que siga abierta y cree que ya ha cerrado."
+          },
+          "audio": "Sorry, I can't promise anything. There is a slim chance the shop is still open, but honestly, it has probably closed by now.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ac4d5047f44b7f4a8679ed308ba5f121d582b9783a76696417cbde37130ca4d0"
+      },
+      {
+        "id": "en.n9.c41.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El hielo es un peligro para los conductores.»"
+        },
+        "answer": {
+          "text": "hazard",
+          "accepted": [
+            "hazard",
+            "danger"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-risk-probability-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c41.r03.seed-0",
+          "feedback": {
+            "es": "Hazard nombra la fuente de peligro; aquí, el hielo en la carretera."
+          },
+          "text": "Ice is a ___ for drivers."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:260874df06bdc76dece27c26a7268c3ce4e9b56fb3dfa563c1ecbbe3c515a798"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n9.c41.e01": {
+      "reteach": "en.n9.class-41.t01",
+      "review": "en.n9.c41.r01"
+    },
+    "en.n9.c41.e02": {
+      "reteach": "en.n9.class-41.t02",
+      "review": "en.n9.c41.r02"
+    },
+    "en.n9.c41.e03": {
+      "reteach": "en.n9.class-41.t03",
+      "review": "en.n9.c41.r03"
+    },
+    "en.n9.c41.e04": {
+      "reteach": "en.n9.class-41.t04",
+      "review": "en.n9.c41.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

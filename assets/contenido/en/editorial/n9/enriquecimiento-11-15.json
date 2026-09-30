@@ -1,0 +1,677 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 11,
+    "end": 15
+  },
+  "classes": {
+    "en.n9.class-11": {
+      "explicacion": {
+        "titulo": "Titular, petición y plazo: la respuesta va primero",
+        "texto": "En español solemos preparar el terreno antes de pedir algo. En los mensajes profesionales en inglés, el lector busca primero la conclusión: el titular (qué pasa o qué se necesita), la petición (qué debe hacer) y el plazo (hasta cuándo). Después viene el contexto y el detalle. Señales como «In short», «Quick update» o «Bottom line» anuncian que lo esencial llega ya. Si el mensaje empieza con historia, el lector tarda en saber qué hacer."
+      },
+      "patron": {
+        "texto": "Titular + petición + plazo; después el contexto:",
+        "formula": [
+          {
+            "texto": "We need six volunteers",
+            "nota": "titular: qué se necesita"
+          },
+          {
+            "texto": "Please reply",
+            "nota": "petición: lo que debe hacer el lector"
+          },
+          {
+            "texto": "by Friday.",
+            "nota": "plazo: fecha límite"
+          },
+          {
+            "texto": "Background: …",
+            "nota": "el contexto y el detalle, al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Last month we talked about the garden, and there were problems with the schedule, so I am writing to ask if you can come.",
+          "correcto": "Can you come on Saturday? We need one more volunteer for the garden.",
+          "explicacion": "Calco de la estructura española: primero contexto y al final la petición. En inglés profesional la petición abre el mensaje."
+        },
+        {
+          "incorrecto": "Please send the list until Friday.",
+          "correcto": "Please send the list by Friday.",
+          "explicacion": "Until indica que algo continúa hasta un momento; para un plazo límite se usa by."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia leen un mensaje largo de Sara, la coordinadora del grupo de voluntarios.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Did you read Sara's message? It is very long.",
+            "traduccion": "¿Leíste el mensaje de Sara? Es muy largo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. The headline is at the top: we need two more volunteers on Saturday.",
+            "traduccion": "Sí. El titular está arriba: necesitamos dos voluntarios más el sábado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And what is the deadline?",
+            "traduccion": "¿Y cuál es el plazo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Friday at noon. The rest is background about the old schedule.",
+            "traduccion": "El viernes al mediodía. Lo demás es contexto sobre el horario anterior."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es lo que Mia llama «background» en el mensaje?",
+          "opciones": [
+            {
+              "es": "Información sobre el horario anterior."
+            },
+            {
+              "es": "La petición de dos voluntarios más."
+            },
+            {
+              "es": "El plazo del viernes al mediodía."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que el titular es la petición de voluntarios y que «the rest is background about the old schedule»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Pregunta que responde",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Titular"
+            },
+            {
+              "texto": "¿Qué pasa?"
+            },
+            {
+              "texto": "We need two drivers."
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "¿Qué debo hacer?"
+            },
+            {
+              "texto": "Please confirm."
+            }
+          ],
+          [
+            {
+              "texto": "Plazo"
+            },
+            {
+              "texto": "¿Para cuándo?"
+            },
+            {
+              "texto": "by Thursday"
+            }
+          ],
+          [
+            {
+              "texto": "Contexto"
+            },
+            {
+              "texto": "¿Por qué?"
+            },
+            {
+              "texto": "Last year only twelve came."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-12": {
+      "explicacion": {
+        "titulo": "Decir lo mismo con menos palabras",
+        "texto": "En inglés se evita repetir lo que ya se sabe. Con la elipsis se omite lo repetido tras un auxiliar (and Sara will, too). Con one/ones se sustituye un nombre ya mencionado (the evening one). Las cláusulas relativas se reducen quitando who/that + be (the guests invited, the people waiting). Y con la compresión nominal un verbo pasa a nombre (decided → the decision to). Comprime solo si el lector sigue entendiendo quién hace qué."
+      },
+      "patron": {
+        "texto": "Nombre + participio (sin who were) + resto:",
+        "formula": [
+          {
+            "texto": "The guests",
+            "nota": "el nombre al que se refiere"
+          },
+          {
+            "texto": "invited to the launch",
+            "nota": "participio: sustituye a «who were invited»"
+          },
+          {
+            "texto": "must reply today.",
+            "nota": "el verbo principal de la frase"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The guests who invited to the launch must reply today.",
+          "correcto": "The guests invited to the launch must reply today.",
+          "explicacion": "Con who hace falta were (who were invited). Sin who, basta el participio invited; «who invited» significaría que ellos invitan."
+        },
+        {
+          "incorrecto": "Tom will attend the class, and Sara does, too.",
+          "correcto": "Tom will attend the class, and Sara will, too.",
+          "explicacion": "La elipsis exige repetir el mismo auxiliar de la primera parte: will con will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom revisan un mensaje para el grupo antes de enviarlo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Is this too long? «The guests who were invited to the launch must reply today.»",
+            "traduccion": "¿Es demasiado largo? «The guests who were invited to the launch must reply today.»"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Cut it: «The guests invited to the launch must reply today.» It says the same with fewer words.",
+            "traduccion": "Córtalo: «The guests invited to the launch must reply today.» Dice lo mismo con menos palabras."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. And «We decided to postpone the trip»?",
+            "traduccion": "Bien. ¿Y «We decided to postpone the trip»?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Try «The decision to postpone the trip», and then say what it caused.",
+            "traduccion": "Prueba «The decision to postpone the trip» y luego di qué causó."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué palabras quita Sara de la frase de Tom sobre los invitados?",
+          "opciones": [
+            {
+              "es": "«who were»: queda «guests invited»."
+            },
+            {
+              "es": "«the launch»: queda «guests invited today»."
+            },
+            {
+              "es": "«must reply»: queda «guests who were invited»."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara convierte «The guests who were invited…» en «The guests invited…»: desaparecen who were."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Técnica",
+          "Versión larga",
+          "Versión comprimida"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Elipsis"
+            },
+            {
+              "texto": "Tom will attend, and Sara will attend, too."
+            },
+            {
+              "texto": "Tom will attend, and Sara will, too."
+            }
+          ],
+          [
+            {
+              "texto": "Sustitución"
+            },
+            {
+              "texto": "the evening shift"
+            },
+            {
+              "texto": "the evening one"
+            }
+          ],
+          [
+            {
+              "texto": "Relativa reducida"
+            },
+            {
+              "texto": "The guests who were invited"
+            },
+            {
+              "texto": "The guests invited"
+            }
+          ],
+          [
+            {
+              "texto": "Nominalización"
+            },
+            {
+              "texto": "We decided to postpone it."
+            },
+            {
+              "texto": "The decision to postpone it"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-13": {
+      "explicacion": {
+        "titulo": "Escuchar lo esencial en una nota de voz larga",
+        "texto": "En un audio largo no hace falta entender cada palabra: busca el gist, es decir, la decisión y lo que se espera de ti. Los marcadores de resumen (Anyway, Basically, The upshot is that…) avisan de que llega la conclusión. Las anécdotas y los datos laterales suelen ir antes o tras By the way. Y muchas peticiones no suenan a petición: I wonder whether…, It would be great if someone could… o I am not sure who is… piden una acción sin decir «por favor»."
+      },
+      "patron": {
+        "texto": "Marcador + decisión + petición implícita:",
+        "formula": [
+          {
+            "texto": "Anyway, the upshot is that",
+            "nota": "marcador: llega la conclusión"
+          },
+          {
+            "texto": "we leave on Friday.",
+            "nota": "la decisión"
+          },
+          {
+            "texto": "I wonder whether someone could book it.",
+            "nota": "petición implícita: espera que alguien actúe"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The upshot is what we leave on Friday.",
+          "correcto": "The upshot is that we leave on Friday.",
+          "explicacion": "Calco de «lo esencial es lo que…». Para introducir una oración completa se usa that, no what."
+        },
+        {
+          "incorrecto": "I wonder whether does anyone have a spare key?",
+          "correcto": "I wonder whether anyone has a spare key.",
+          "explicacion": "En una pregunta indirecta el orden es el de una afirmación: sin does ni inversión, y sin signo de pregunta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos no tiene tiempo de oír la nota de voz de tres minutos de Ana y Mia se la resume.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Ana's voice note is three minutes long. What is the gist?",
+            "traduccion": "La nota de voz de Ana dura tres minutos. ¿Cuál es la idea general?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Anyway, the upshot is that the flight moves to Saturday.",
+            "traduccion": "En fin, lo esencial es que el vuelo pasa al sábado."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And does she want something?",
+            "traduccion": "¿Y quiere algo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She says she wonders whether anyone can book the hotel. That is really a request.",
+            "traduccion": "Dice que se pregunta si alguien puede reservar el hotel. Eso es realmente una petición."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then I will book it today.",
+            "traduccion": "Entonces lo reservo hoy."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide realmente Ana sin decirlo de forma directa?",
+          "opciones": [
+            {
+              "es": "Que alguien reserve el hotel."
+            },
+            {
+              "es": "Que alguien cambie el vuelo al sábado."
+            },
+            {
+              "es": "Que alguien escuche la nota completa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia explica que «she wonders whether anyone can book the hotel» es, en la práctica, una petición de reservar."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal",
+          "Qué anuncia",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Anyway"
+            },
+            {
+              "texto": "vuelta a lo principal"
+            },
+            {
+              "texto": "Anyway, we leave at nine."
+            }
+          ],
+          [
+            {
+              "texto": "The upshot is that"
+            },
+            {
+              "texto": "la conclusión"
+            },
+            {
+              "texto": "The upshot is that we stay."
+            }
+          ],
+          [
+            {
+              "texto": "By the way"
+            },
+            {
+              "texto": "dato lateral, prescindible"
+            },
+            {
+              "texto": "By the way, it rained."
+            }
+          ],
+          [
+            {
+              "texto": "I wonder whether"
+            },
+            {
+              "texto": "petición implícita"
+            },
+            {
+              "texto": "I wonder whether you could call."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-14": {
+      "explicacion": {
+        "titulo": "Un mensaje breve: petición, razón, plazo y siguiente paso",
+        "texto": "Un mensaje de menos de cien palabras necesita cuatro piezas en este orden: la petición (Could you…? / Can anyone…?), una razón breve (so, as, which means), el plazo con by + día y el siguiente paso (Next step: …). Para advertir de una consecuencia usa otherwise, no «in the contrary». En notas y listas puedes omitir sujeto y verbo (Six tables needed). Evita fórmulas largas como «I am writing to inform you that…»: el lector quiere actuar, no leer un preámbulo."
+      },
+      "patron": {
+        "texto": "Petición + razón + plazo + siguiente paso:",
+        "formula": [
+          {
+            "texto": "Could you lend us six chairs?",
+            "nota": "petición: pregunta breve con Could you"
+          },
+          {
+            "texto": "We only have four, so …",
+            "nota": "razón breve con so, as o which means"
+          },
+          {
+            "texto": "Please reply by Thursday.",
+            "nota": "plazo: by + día"
+          },
+          {
+            "texto": "Next step: I will send the list.",
+            "nota": "siguiente paso: acción y responsable"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am writing to you with the aim of asking you if it would be possible that you lend us six chairs.",
+          "correcto": "Could you lend us six chairs?",
+          "explicacion": "Calco del español formal: rodear la petición la esconde. En inglés profesional una pregunta directa con Could you es cortés y clara."
+        },
+        {
+          "incorrecto": "Please reply by Thursday, in the contrary we will ask the school.",
+          "correcto": "Please reply by Thursday; otherwise, we will ask the school.",
+          "explicacion": "«En caso contrario» no se traduce palabra por palabra: la forma natural es otherwise."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo revisan el mensaje que Ana enviará a los vecinos para la fiesta de la calle.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Is this clear? «Could you lend us six tables for Saturday? The hall has only four. Please reply by Thursday. Next step: I will send the list.»",
+            "traduccion": "¿Está claro? «¿Podrían prestarnos seis mesas para el sábado? La sala solo tiene cuatro. Respondan antes del jueves. Siguiente paso: enviaré la lista.»"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. The request, the reason, the deadline and the next step are all there.",
+            "traduccion": "Sí. La petición, la razón, el plazo y el siguiente paso están todos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Should I add the history of the street party?",
+            "traduccion": "¿Añado la historia de la fiesta de la calle?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. Otherwise the request gets lost.",
+            "traduccion": "No. Si no, la petición se pierde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué aconseja Leo no añadir la historia de la fiesta?",
+          "opciones": [
+            {
+              "es": "Porque la petición se perdería entre tanto texto."
+            },
+            {
+              "es": "Porque el plazo ya está fijado en el mensaje."
+            },
+            {
+              "es": "Porque a los vecinos no les gusta la fiesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Otherwise the request gets lost»: demasiado contexto esconde la petición."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Fórmula útil",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Could you… / Can anyone…?"
+            },
+            {
+              "texto": "Can anyone lend us chairs?"
+            }
+          ],
+          [
+            {
+              "texto": "Razón"
+            },
+            {
+              "texto": "so / as / which means"
+            },
+            {
+              "texto": "as the hall has only four"
+            }
+          ],
+          [
+            {
+              "texto": "Plazo"
+            },
+            {
+              "texto": "by + día"
+            },
+            {
+              "texto": "by Thursday"
+            }
+          ],
+          [
+            {
+              "texto": "Consecuencia"
+            },
+            {
+              "texto": "otherwise"
+            },
+            {
+              "texto": "otherwise, we ask the school"
+            }
+          ],
+          [
+            {
+              "texto": "Siguiente paso"
+            },
+            {
+              "texto": "Next step: …"
+            },
+            {
+              "texto": "Next step: I will send the list."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-15": {
+      "explicacion": {
+        "titulo": "Informar al grupo: un minuto para hablar y un resumen para actuar",
+        "texto": "Una exposición de un minuto sigue el orden que ya conoces: titular, avance y petición, con señales como Quick update o To recap. No cuentes la historia completa: el detalle queda para quien pregunte. Después, deja un resumen escrito solo con las acciones: quién (Sara), qué (calls the school) y para cuándo (by Monday). Así el grupo sabe qué hacer sin volver a escucharte. Cuidado con responsible for (no «of») y con to recap (no «to resume»)."
+      },
+      "patron": {
+        "texto": "Titular + avance + acciones (quién, qué, cuándo):",
+        "formula": [
+          {
+            "texto": "We have collected 240 kilos,",
+            "nota": "titular: lo esencial de la situación"
+          },
+          {
+            "texto": "progress is good,",
+            "nota": "avance: cómo va todo"
+          },
+          {
+            "texto": "Sara will call the school",
+            "nota": "quién y qué"
+          },
+          {
+            "texto": "by Monday.",
+            "nota": "para cuándo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sara is responsible of the vans.",
+          "correcto": "Sara is responsible for the vans.",
+          "explicacion": "Calco de «responsable de»: en inglés responsible va con for."
+        },
+        {
+          "incorrecto": "To resume: the boxes are ready.",
+          "correcto": "To recap: the boxes are ready.",
+          "explicacion": "Falso amigo: resume significa reanudar (continuar algo). Para resumir se usa recap o summarise."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pide a Carlos una exposición rápida de cómo va la colecta de comida del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Carlos, can you give us the headline in one minute?",
+            "traduccion": "Carlos, ¿puedes darnos el titular en un minuto?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Sure. We have collected 240 kilos of food. Progress is good, but we need three volunteers to sort it.",
+            "traduccion": "Claro. Hemos recogido 240 kilos de comida. El avance es bueno, pero necesitamos tres voluntarios para clasificarla."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And who is responsible for the delivery?",
+            "traduccion": "¿Y quién es responsable de la entrega?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Tom will deliver the boxes by Friday. To recap: sort on Thursday, deliver on Friday.",
+            "traduccion": "Tom entregará las cajas antes del viernes. Para resumir: clasificar el jueves, entregar el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Carlos al grupo en su exposición?",
+          "opciones": [
+            {
+              "es": "Tres voluntarios para clasificar la comida."
+            },
+            {
+              "es": "Tres furgonetas para llevar las cajas."
+            },
+            {
+              "es": "Tres días más para recoger comida."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «we need three volunteers to sort it»: esa es la petición; Tom se ocupa de la entrega."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Qué incluye",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Exposición (1 minuto)"
+            },
+            {
+              "texto": "titular, avance y petición"
+            },
+            {
+              "texto": "We have collected 240 kilos; we need three volunteers."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre oral"
+            },
+            {
+              "texto": "señal de resumen"
+            },
+            {
+              "texto": "To recap, …"
+            }
+          ],
+          [
+            {
+              "texto": "Resumen escrito"
+            },
+            {
+              "texto": "acción + responsable + fecha"
+            },
+            {
+              "texto": "Next action: Sara calls the school by Monday."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,765 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-18",
+  "title": {
+    "en": "What the letter doesn't say",
+    "es": "Lo que la carta no dice"
+  },
+  "objectives": {
+    "es": [
+      "Inferir con prudencia lo que una carta personal no dice y justificar cada inferencia citando la frase que la apoya."
+    ]
+  },
+  "concepts": [
+    "n8-inference-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n8.class-17"
+  ],
+  "usesVocabulary": [
+    "quiet",
+    "reliable",
+    "protect",
+    "worry",
+    "quote",
+    "lonely",
+    "postcard",
+    "gate"
+  ],
+  "usesPatterns": [
+    "n8-inference-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "quiet",
+      "es": "tranquilo, silencioso"
+    },
+    {
+      "en": "reliable",
+      "es": "de fiar, fiable"
+    },
+    {
+      "en": "protect",
+      "es": "proteger"
+    },
+    {
+      "en": "worry",
+      "es": "preocuparse"
+    },
+    {
+      "en": "quote",
+      "es": "citar"
+    },
+    {
+      "en": "lonely",
+      "es": "solo, con soledad"
+    },
+    {
+      "en": "postcard",
+      "es": "postal"
+    },
+    {
+      "en": "gate",
+      "es": "verja, portón"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-18.t01",
+      "en": "The house is very quiet now, wrote Gran, so I infer that she misses Clara.",
+      "es": "«La casa está muy tranquila ahora», escribió la abuela, así que deduzco que echa de menos a Clara.",
+      "explanationEs": "Quiet sugiere soledad: se infiere la emoción aunque el texto no la diga.",
+      "segments": [
+        "The house is very quiet now, wrote Gran,",
+        "so I infer that she misses Clara."
+      ],
+      "audioText": "The house is very quiet now, wrote Gran, so I infer that she misses Clara.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-3"
+    },
+    {
+      "id": "en.n8.class-18.t02",
+      "en": "She watered the plants every day, which shows that she is reliable.",
+      "es": "Regó las plantas todos los días, lo que muestra que es de fiar.",
+      "explanationEs": "Una acción repetida apunta a un rasgo de carácter.",
+      "segments": [
+        "She watered the plants every day,",
+        "which shows that she is reliable."
+      ],
+      "audioText": "She watered the plants every day, which shows that she is reliable.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-3"
+    },
+    {
+      "id": "en.n8.class-18.t03",
+      "en": "He called twice, but Gran told him that Clara was busy; maybe she wants to protect her.",
+      "es": "Él llamó dos veces, pero la abuela le dijo que Clara estaba ocupada; quizá quiere protegerla.",
+      "explanationEs": "Maybe introduce una inferencia prudente, no un hecho.",
+      "segments": [
+        "He called twice, but Gran told him that Clara",
+        "was busy; maybe she wants to protect her."
+      ],
+      "audioText": "He called twice, but Gran told him that Clara was busy; maybe she wants to protect her.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-3"
+    },
+    {
+      "id": "en.n8.class-18.t04",
+      "en": "Gran says don't worry, but people who write that often worry themselves.",
+      "es": "La abuela dice «no te preocupes», pero quienes escriben eso suelen estar preocupados.",
+      "explanationEs": "Lo dicho puede contradecir lo sentido: infiere con cuidado.",
+      "segments": [
+        "Gran says don't worry, but people",
+        "who write that often worry themselves."
+      ],
+      "audioText": "Gran says don't worry, but people who write that often worry themselves.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-3"
+    },
+    {
+      "id": "en.n8.class-18.t05",
+      "en": "A letter shows what the writer chooses to say, so we must quote the words that support our inference.",
+      "es": "Una carta muestra lo que el autor decide decir, así que debemos citar las palabras que apoyan nuestra deducción.",
+      "explanationEs": "Quote: cita la frase y explica qué deduces de ella.",
+      "segments": [
+        "A letter shows what the writer chooses to say, so",
+        "we must quote the words that support our inference."
+      ],
+      "audioText": "A letter shows what the writer chooses to say, so we must quote the words that support our inference.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-inference-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c18.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la inferencia mejor apoyada por la carta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Gran probably misses Clara."
+          },
+          {
+            "text": "Gran is angry with Clara."
+          },
+          {
+            "text": "Gran has sold the house."
+          }
+        ],
+        "teaches": [
+          "n8-inference-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.pg01.seed-0",
+          "feedback": {
+            "es": "La frase sobre la casa tranquila es la pista: no habla de enfado ni de una venta, así que lo prudente es que echa de menos a Clara."
+          },
+          "hint": {
+            "es": "Busca la frase sobre la casa."
+          },
+          "text": "Dear Clara, thanks for the postcard. The house is very quiet now, but the plants are fine. I fixed the gate and your brother called twice. Take your time. Love, Gran"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f07237d6b824568442519a82173dd62ae8d34fae39be260783049ce14519dc29"
+      },
+      {
+        "id": "en.n8.c18.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La abuela escribió que la casa está muy tranquila; quizá se sienta sola.»"
+        },
+        "answer": {
+          "text": "quiet",
+          "accepted": [
+            "quiet",
+            "silent"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-inference-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.pg02.seed-0",
+          "feedback": {
+            "es": "Quiet es la palabra de la pista: describe la casa sin ruido, y de ahí se infiere la soledad."
+          },
+          "hint": {
+            "es": "¿Qué adjetivo dice que no hay ruido?"
+          },
+          "text": "Gran wrote, 'The house is very ___ now,' so she may feel lonely."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b54f2f691b27001af173d4a96fd8384a4ea04c6b0c2ef4db0aae66d8f1d25f51"
+      },
+      {
+        "id": "en.n8.c18.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Deduzco que la abuela quiere que ella llame.»"
+        },
+        "answer": {
+          "text": "I infer that Gran wants her to call",
+          "tokens": [
+            "I",
+            "infer",
+            "that",
+            "Gran",
+            "wants",
+            "her",
+            "to",
+            "call"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-inference-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.pg03.seed-0",
+          "feedback": {
+            "es": "I infer that + oración presenta tu conclusión a partir de una pista del texto."
+          },
+          "hint": {
+            "es": "Empieza con I infer that."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:64a4e4d445142bf1d1d98fac98071682762114a09345b035bf8f0ed78fec2e75"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c18.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el rasgo de Gran que muestran esas dos acciones."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She is lonely."
+          },
+          {
+            "text": "She is reliable."
+          },
+          {
+            "text": "She is angry."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.p01.seed-0",
+          "feedback": {
+            "es": "Cumplir tareas cada día indica que es de fiar; ni soledad ni enfado aparecen en esas frases."
+          },
+          "text": "Gran wrote: 'I watered your plants every day, and I fixed the gate.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d482e09f76443a0532e89ef6de0570e53a5adccd32acffc6060883d64a9e5b5b"
+      },
+      {
+        "id": "en.n8.c18.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la carta y elige la inferencia más prudente."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She is having a great social life."
+          },
+          {
+            "text": "She is angry with Leo."
+          },
+          {
+            "text": "She may feel lonely but does not want to worry him."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.p02.seed-0",
+          "feedback": {
+            "es": "No salir en una semana y pedir que no se preocupe sugieren una soledad que prefiere ocultar."
+          },
+          "audio": "Dear Leo, everything is fine here. Don't worry about me. I have not gone out for a week, but the books are lovely.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:593e5db1c292519442ec148fb66758b4d7a64a2b8afe1898575a7bfbd5a088a5"
+      },
+      {
+        "id": "en.n8.c18.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada cita con la inferencia que apoya."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Your brother called twice.",
+              {
+                "es": "Alguien quiere hablar con Clara"
+              }
+            ],
+            [
+              "I told him you were busy.",
+              {
+                "es": "Gran quiere protegerla"
+              }
+            ],
+            [
+              "Don't worry about me.",
+              {
+                "es": "Quizá ella sí está preocupada"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.p03.seed-0",
+          "feedback": {
+            "es": "Cada cita es una pista distinta: las llamadas muestran interés, la excusa protege y la frase final puede esconder preocupación."
+          },
+          "pairs": [
+            [
+              "Your brother called twice.",
+              {
+                "es": "Alguien quiere hablar con Clara"
+              }
+            ],
+            [
+              "I told him you were busy.",
+              {
+                "es": "Gran quiere protegerla"
+              }
+            ],
+            [
+              "Don't worry about me.",
+              {
+                "es": "Quizá ella sí está preocupada"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a31a9022875e224572c1fc6de0dce69972cef3c55cdbe00f6240df542cb83013"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c18.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la inferencia que el texto apoya sobre Mia."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Mia looks after Gran."
+          },
+          {
+            "text": "Mia is the doctor."
+          },
+          {
+            "text": "Mia is angry with Gran."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.e01.seed-0",
+          "feedback": {
+            "es": "Mia viene cada tarde mientras Gran debe descansar: lo más prudente es que la cuida."
+          },
+          "text": "Dear Tom, thanks for the flowers. It was kind of you to remember. The doctor says I must rest, so I don't go out much, but Mia comes every afternoon. Love, Gran"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2afe465014ddad2b03912a794cac7b61f569e755efe2d45f1b2bb4044c65afd1"
+      },
+      {
+        "id": "en.n8.c18.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la carta y elige qué deduces del remitente."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He does not like the flat."
+          },
+          {
+            "text": "He misses her and hopes that she will visit."
+          },
+          {
+            "text": "He wants to rent the room to a stranger."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.e02.seed-0",
+          "feedback": {
+            "es": "«I only wish you were here» y el dormitorio vacío sugieren que la echa de menos."
+          },
+          "audio": "Dear Sara, the new flat is great. The neighbours are friendly, and the park is near. I only wish you were here. The second bedroom is empty.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d030ac2d3c0564e05382cd55081946861ad3ebcc3b7979690be290fb9def9f44"
+      },
+      {
+        "id": "en.n8.c18.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Mia siempre cumple lo que promete: es de fiar.»"
+        },
+        "answer": {
+          "text": "reliable",
+          "accepted": [
+            "reliable"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.e03.seed-0",
+          "feedback": {
+            "es": "Cumplir siempre lo prometido es la evidencia de que es reliable."
+          },
+          "text": "Mia always keeps her promises, so she is ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:35e4150e584e30ce88cfa7dfbada40b0f98a8eb12cc57b75e6255ac00f62c3a3"
+      },
+      {
+        "id": "en.n8.c18.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Cita la frase que apoya tu deducción.»"
+        },
+        "answer": {
+          "text": "Quote the sentence that supports your inference",
+          "tokens": [
+            "Quote",
+            "the",
+            "sentence",
+            "that",
+            "supports",
+            "your",
+            "inference"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.e04.seed-0",
+          "feedback": {
+            "es": "Quote abre la instrucción de justificar: la frase citada es la evidencia de tu deducción."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:14ef529e28258bf7ad9acf72bfa663ac36652c728ad9b53558862c2663853c4e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c18.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la inferencia más prudente sobre Carlos."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Carlos does not like Ana."
+          },
+          {
+            "text": "Carlos went to another party."
+          },
+          {
+            "text": "Carlos wanted to come but could not."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.r01.seed-0",
+          "feedback": {
+            "es": "Se disculpa, da motivos y promete la próxima vez: lo más prudente es que quería ir."
+          },
+          "text": "Dear Ana, I'm sorry I missed your party. I had a headache, and then the bus never came. Next time, I promise. Carlos"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:381a53b87c1acf35a9bf4aa86731133bfc5379c833a656cc45e3d872f64e338b"
+      },
+      {
+        "id": "en.n8.c18.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Clara estaba ocupada, dijo la abuela; quizá quiere protegerla.»"
+        },
+        "answer": {
+          "text": "protect",
+          "accepted": [
+            "protect"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.r02.seed-0",
+          "feedback": {
+            "es": "Protect expresa el motivo que se infiere de la excusa: la abuela quiere cuidar a Clara, aunque no lo diga."
+          },
+          "text": "Gran said that Clara was busy; maybe she wants to ___ her."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b9284f2554bfd1a30fd581ff8b5aa316ad3dbb4e86e2c84d9943a51052b4275e"
+      },
+      {
+        "id": "en.n8.c18.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la cita que mejor apoya que Mia se siente sola."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Nobody talks to me."
+          },
+          {
+            "text": "The weather is lovely."
+          },
+          {
+            "text": "The café is full."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-inference-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c18.r03.seed-0",
+          "feedback": {
+            "es": "Que nadie le hable apoya la soledad; el buen tiempo y el café lleno no dicen nada sobre ella."
+          },
+          "text": "Mia wrote: 'The weather is lovely. I walk alone every day. The café is full, but nobody talks to me.'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fc427ec568b0f80766edd573d2367adfd91ea8b5207f34f685c1f977eab4dd81"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c18.e01": {
+      "reteach": "en.n8.class-18.t01",
+      "review": "en.n8.c18.r01"
+    },
+    "en.n8.c18.e02": {
+      "reteach": "en.n8.class-18.t02",
+      "review": "en.n8.c18.r02"
+    },
+    "en.n8.c18.e03": {
+      "reteach": "en.n8.class-18.t03",
+      "review": "en.n8.c18.r03"
+    },
+    "en.n8.c18.e04": {
+      "reteach": "en.n8.class-18.t04",
+      "review": "en.n8.c18.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

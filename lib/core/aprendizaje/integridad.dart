@@ -11,6 +11,8 @@ List<String> palabrasMeta(String texto) => texto
     .toLowerCase()
     .replaceAll(_puntuacion, ' ')
     .split(RegExp(r'\s+'))
+    // Comillas simples de cita ('once', shopkeepers') no son parte de la palabra.
+    .map((p) => p.replaceAll(RegExp(r"^'+|'+$"), ''))
     .where((p) => p.isNotEmpty && p != '-')
     .toList();
 

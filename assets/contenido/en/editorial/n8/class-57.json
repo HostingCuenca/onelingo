@@ -1,0 +1,822 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-57",
+  "title": {
+    "en": "Paraphrase and summarise",
+    "es": "Parafrasear y resumir"
+  },
+  "objectives": {
+    "es": [
+      "Parafrasear y resumir lo que dice otra persona con verbos de habla (claim, point out, admit, suggest, deny, refuse, promise, warn) y su patrón."
+    ]
+  },
+  "concepts": [
+    "n8-short-audio-segments-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-56"
+  ],
+  "usesVocabulary": [
+    "claim",
+    "point out",
+    "admit",
+    "suggest",
+    "deny",
+    "refuse",
+    "promise",
+    "warn",
+    "summary"
+  ],
+  "usesPatterns": [
+    "n8-short-audio-segments-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "claim",
+      "es": "afirmar (algo discutible)"
+    },
+    {
+      "en": "point out",
+      "es": "señalar"
+    },
+    {
+      "en": "admit",
+      "es": "admitir"
+    },
+    {
+      "en": "suggest",
+      "es": "sugerir"
+    },
+    {
+      "en": "deny",
+      "es": "negar"
+    },
+    {
+      "en": "refuse",
+      "es": "negarse"
+    },
+    {
+      "en": "promise",
+      "es": "prometer"
+    },
+    {
+      "en": "warn",
+      "es": "advertir"
+    },
+    {
+      "en": "summary",
+      "es": "resumen"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-57.t01",
+      "en": "Some experts claim that eight hours of sleep is too much.",
+      "es": "Algunos expertos afirman que ocho horas de sueño son demasiadas.",
+      "explanationEs": "Claim + that + oración: afirmas algo que otros pueden discutir.",
+      "segments": [
+        "Some experts claim that eight hours",
+        "of sleep is too much."
+      ],
+      "audioText": "Some experts claim that eight hours of sleep is too much.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-short-audio-segments-2"
+    },
+    {
+      "id": "en.n8.class-57.t02",
+      "en": "Critics point out that the study is small, so the summary must be careful.",
+      "es": "Los críticos señalan que el estudio es pequeño, así que el resumen debe ser prudente.",
+      "explanationEs": "Point out + that: señalas un dato, normalmente para matizar lo que se dijo.",
+      "segments": [
+        "Critics point out that the study is",
+        "small, so the summary must be careful."
+      ],
+      "audioText": "Critics point out that the study is small, so the summary must be careful.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-short-audio-segments-2"
+    },
+    {
+      "id": "en.n8.class-57.t03",
+      "en": "Many people admit checking their phones at night, but some deny doing it.",
+      "es": "Mucha gente admite revisar el móvil por la noche, pero algunos niegan hacerlo.",
+      "explanationEs": "Admit y deny + -ing: reconocer o negar una acción.",
+      "segments": [
+        "Many people admit checking their phones at",
+        "night, but some deny doing it."
+      ],
+      "audioText": "Many people admit checking their phones at night, but some deny doing it.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-short-audio-segments-2"
+    },
+    {
+      "id": "en.n8.class-57.t04",
+      "en": "Doctors suggest going to bed earlier, and they warn people not to drink coffee late.",
+      "es": "Los médicos sugieren acostarse más temprano y advierten a la gente de que no tome café tarde.",
+      "explanationEs": "Suggest + -ing; warn + persona + (not) to + verbo.",
+      "segments": [
+        "Doctors suggest going to bed earlier, and they",
+        "warn people not to drink coffee late."
+      ],
+      "audioText": "Doctors suggest going to bed earlier, and they warn people not to drink coffee late.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-short-audio-segments-2"
+    },
+    {
+      "id": "en.n8.class-57.t05",
+      "en": "Some guests refuse to answer, and others promise to reply later.",
+      "es": "Algunos invitados se niegan a responder y otros prometen contestar más tarde.",
+      "explanationEs": "Refuse y promise + to + verbo: negarse o comprometerse a hacer algo.",
+      "segments": [
+        "Some guests refuse to answer, and",
+        "others promise to reply later."
+      ],
+      "audioText": "Some guests refuse to answer, and others promise to reply later.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-short-audio-segments-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c57.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que resume lo que hace el presentador con este dato."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The host points out that the study is small."
+          },
+          {
+            "text": "The host denies that the study is small."
+          },
+          {
+            "text": "The host refuses to read the study."
+          }
+        ],
+        "teaches": [
+          "n8-short-audio-segments-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.pg01.seed-0",
+          "feedback": {
+            "es": "Dar el número de participantes sin discutirlo es señalar un dato: point out + that."
+          },
+          "hint": {
+            "es": "Él no niega el dato ni se niega a nada: lo muestra."
+          },
+          "text": "«The study has only twenty people,» says the host."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dfa7b4a4381bd1d882f6371ddece7e013fa9994029c7ad0eed3763fccd38a686"
+      },
+      {
+        "id": "en.n8.c57.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ella admitió haber cometido un error.»"
+        },
+        "answer": {
+          "text": "making",
+          "accepted": [
+            "making",
+            "having made"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-short-audio-segments-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.pg02.seed-0",
+          "feedback": {
+            "es": "Admit puede ir seguido de un verbo en -ing: admitted making."
+          },
+          "hint": {
+            "es": "Después de admit puede ir un verbo en -ing."
+          },
+          "text": "She admitted ___ a mistake."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b58fdc6503c669af6b4dfcd3ceed48afc7138218083ae011670933b29b588f50"
+      },
+      {
+        "id": "en.n8.c57.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El médico sugirió dormir más.»"
+        },
+        "answer": {
+          "text": "The doctor suggested sleeping more",
+          "tokens": [
+            "The",
+            "doctor",
+            "suggested",
+            "sleeping",
+            "more"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-short-audio-segments-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.pg03.seed-0",
+          "feedback": {
+            "es": "Suggest se construye con -ing: suggested sleeping."
+          },
+          "hint": {
+            "es": "El verbo que sigue a suggested lleva -ing."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:048a790558278c895fab455f161e630aabbee3bd1e1c31ed6f86266660d31d95"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c57.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las tres frases resumen con el verbo de habla correcto."
+        },
+        "answer": {
+          "text": "claims | refused | denied",
+          "accepted": [
+            "claims | refused | denied"
+          ],
+          "parts": [
+            {
+              "text": "claims",
+              "accepted": [
+                "claims",
+                "claimed"
+              ]
+            },
+            {
+              "text": "refused",
+              "accepted": [
+                "refused",
+                "refuses"
+              ]
+            },
+            {
+              "text": "denied",
+              "accepted": [
+                "denied",
+                "denies"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.p01.seed-0",
+          "feedback": {
+            "es": "Afirmar algo discutible es claim + that, negarse a hablar es refuse + to y negar un hecho es deny + -ing."
+          },
+          "sentences": [
+            "The guest ___ that sleep is more important than food.",
+            "The boy ___ to tell the truth about the noise.",
+            "She ___ taking the money from the box."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          },
+          "text": "Traducción: «El invitado afirma que dormir es más importante que comer.» «El chico se negó a decir la verdad sobre el ruido.» «Ella negó haber tomado el dinero de la caja.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:eb662de0b680513815595abdf5b1436d9dd515d19d229a6a0b31e457a9b7965d"
+      },
+      {
+        "id": "en.n8.c57.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase con el patrón correcto para suggest."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The host suggested to take a break."
+          },
+          {
+            "text": "The host suggested taking a break."
+          },
+          {
+            "text": "The host suggested us to take a break."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.p02.seed-0",
+          "feedback": {
+            "es": "Suggest admite -ing o that + oración; las otras dos usan to + verbo, que no es posible con suggest."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:35560933cf7eff60723f6738538f3eff74193fc9e86be6637ef12df9a4beb925"
+      },
+      {
+        "id": "en.n8.c57.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Parafrasea en inglés: «Responderé a todos los mensajes», dice la presentadora."
+        },
+        "answer": {
+          "text": "The host promises to reply to every message.",
+          "accepted": [
+            "The host promises to reply to every message.",
+            "The host promised to reply to every message.",
+            "The host promises to reply to all the messages."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.p03.seed-0",
+          "feedback": {
+            "es": "Un compromiso de futuro se resume con promise + to + verbo."
+          },
+          "text": "Frase original: «Responderé a todos los mensajes.» La presentadora lo dice al final del programa."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e95f469294502ac2c7b81a681544b9f95e7b80ae8f2fde79aac5e46e2a0c8943"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c57.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige lo que hace la doctora con el estudio."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She denies that the study exists."
+          },
+          {
+            "text": "She promises to repeat the study."
+          },
+          {
+            "text": "She explains that the study is too small to be sure."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.e01.seed-0",
+          "feedback": {
+            "es": "Señala que solo participaron veinte estudiantes: un dato que matiza el resultado."
+          },
+          "audio": "Some experts say that coffee is bad for sleep. But the doctor points out that the study only included twenty students, so the result is not clear.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a68ce00e9955b75a7ca08b6f8945a5e60e15f9d5286b01a5ae06039c77f1198d"
+      },
+      {
+        "id": "en.n8.c57.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase resume correctamente lo que dice Leo?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Leo admitted forgetting the password."
+          },
+          {
+            "text": "Leo denied forgetting the password."
+          },
+          {
+            "text": "Leo warned us about the password."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.e02.seed-0",
+          "feedback": {
+            "es": "Pide perdón por haber olvidado la clave: reconoce un error, así que se resume con admit + -ing."
+          },
+          "text": "LEO: «I forgot the password, sorry.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0d5c902679d1cf5ee1c71331037238e73db9d232ddf4a77619cfb605c2d3be5a"
+      },
+      {
+        "id": "en.n8.c57.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres resúmenes con el patrón correcto."
+        },
+        "answer": {
+          "text": "going | to | out",
+          "accepted": [
+            "going | to | out"
+          ],
+          "parts": [
+            {
+              "text": "going",
+              "accepted": [
+                "going"
+              ]
+            },
+            {
+              "text": "to",
+              "accepted": [
+                "to"
+              ]
+            },
+            {
+              "text": "out",
+              "accepted": [
+                "out"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.e03.seed-0",
+          "feedback": {
+            "es": "Suggest pide -ing, promise pide to + verbo y point out se escribe con la partícula out antes de that."
+          },
+          "sentences": [
+            "The doctor suggested ___ to bed earlier.",
+            "They promised ___ call us tomorrow.",
+            "The host pointed ___ that the study was small."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          },
+          "text": "Traducción: «El médico sugirió acostarse más temprano.» «Prometieron llamarnos mañana.» «El presentador señaló que el estudio era pequeño.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:532e55b7996acf276093c00846d2e0ba5bc251de5f6f8fad0cbcf1a605efad44"
+      },
+      {
+        "id": "en.n8.c57.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Parafrasea en inglés: «No rompí la ventana», dice Ana."
+        },
+        "answer": {
+          "text": "Ana denied breaking the window.",
+          "accepted": [
+            "Ana denied breaking the window.",
+            "Ana denied that she broke the window.",
+            "Ana denied having broken the window."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.e04.seed-0",
+          "feedback": {
+            "es": "Negar un hecho propio se resume con deny + -ing o con deny + that + oración."
+          },
+          "text": "Frase original: «No rompí la ventana.» Ana habla con su profesor."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:166f37e0b8181c7b91bb0eb012bc631cefb86cd6f5bf77149fd7b923eb54919e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c57.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la frase que resume lo que hace Tom."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Tom denies eating the last cake."
+          },
+          {
+            "text": "Tom admits eating the last cake."
+          },
+          {
+            "text": "Tom suggests eating the last cake."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.r01.seed-0",
+          "feedback": {
+            "es": "Dice que sí se lo comió: reconoce algo incómodo, admit + -ing."
+          },
+          "text": "TOM: «Yes, I ate the last cake.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:12235ec02fbf2f6b8eb0a3f0c1ff1a20fa1e5d2cc17b857e544771f389ee3671"
+      },
+      {
+        "id": "en.n8.c57.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Los invitados se negaron a responder la pregunta.»"
+        },
+        "answer": {
+          "text": "The guests refused to answer the question",
+          "tokens": [
+            "The",
+            "guests",
+            "refused",
+            "to",
+            "answer",
+            "the",
+            "question"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.r02.seed-0",
+          "feedback": {
+            "es": "Refuse + to + verbo: se negaron a responder."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ac8c276787a63a00c9d8681c1e7446890650f3140b81f0482ba290cbfdb7f05f"
+      },
+      {
+        "id": "en.n8.c57.r03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada verbo de habla con lo que expresa."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "claim",
+              {
+                "es": "afirmar algo discutible"
+              }
+            ],
+            [
+              "point out",
+              {
+                "es": "señalar un dato"
+              }
+            ],
+            [
+              "warn",
+              {
+                "es": "advertir de un peligro"
+              }
+            ],
+            [
+              "refuse",
+              {
+                "es": "negarse a hacer algo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-short-audio-segments-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c57.r03.seed-0",
+          "feedback": {
+            "es": "Cada verbo de habla añade una actitud: afirmar, señalar, advertir o negarse."
+          },
+          "pairs": [
+            [
+              "claim",
+              {
+                "es": "afirmar algo discutible"
+              }
+            ],
+            [
+              "point out",
+              {
+                "es": "señalar un dato"
+              }
+            ],
+            [
+              "warn",
+              {
+                "es": "advertir de un peligro"
+              }
+            ],
+            [
+              "refuse",
+              {
+                "es": "negarse a hacer algo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:929114883301cc03b61b989c56c03e82c9754e1dad9d123e84909c353e82c6b1"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c57.e01": {
+      "reteach": "en.n8.class-57.t01",
+      "review": "en.n8.c57.r01"
+    },
+    "en.n8.c57.e02": {
+      "reteach": "en.n8.class-57.t02",
+      "review": "en.n8.c57.r02"
+    },
+    "en.n8.c57.e03": {
+      "reteach": "en.n8.class-57.t03",
+      "review": "en.n8.c57.r03"
+    },
+    "en.n8.c57.e04": {
+      "reteach": "en.n8.class-57.t04",
+      "review": "en.n8.c57.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

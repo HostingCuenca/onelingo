@@ -1,0 +1,669 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n9.class-36": {
+      "explicacion": {
+        "titulo": "Las partes de un informe y sus marcadores",
+        "texto": "Un informe breve tiene partes fijas, y cada una se anuncia con un marcador: Summary (resume todo), Introduction: The aim of this report is to… (objetivo), Method: The method was… (cómo se recogieron los datos), Findings: The main findings show that… (qué salió), Conclusion y Recommendation: The conclusion is that… / It is recommended that… El tono es objetivo: sin I think, sin exclamaciones y sin lenguaje emocional. Se habla de datos, no de sentimientos."
+      },
+      "patron": {
+        "texto": "Marcador de la sección + contenido neutro:",
+        "formula": [
+          {
+            "texto": "The aim of this report is to",
+            "nota": "introducción: el objetivo"
+          },
+          {
+            "texto": "examine students' sleep habits.",
+            "nota": "verbo base + tema del informe"
+          },
+          {
+            "texto": "The main findings show that",
+            "nota": "resultados: lo que salió de los datos"
+          },
+          {
+            "texto": "It is recommended that",
+            "nota": "recomendación final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The aim of this report is examine the sleep of students.",
+          "correcto": "The aim of this report is to examine the sleep of students.",
+          "explicacion": "Después de The aim is va to + verbo base; en español «es examinar» no lleva nada, pero en inglés hace falta to."
+        },
+        {
+          "incorrecto": "The main findings shows that 62 percent sleep little.",
+          "correcto": "The main findings show that 62 percent sleep little.",
+          "explicacion": "Findings es plural y el verbo debe concordar: show."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara ha escrito un informe sobre el sueño para la revista del colegio y Leo la ayuda a ordenarlo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I've written a report on sleep habits, but the teacher says it is hard to follow.",
+            "traduccion": "He escrito un informe sobre hábitos de sueño, pero la profesora dice que es difícil de seguir."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Start with the aim: The aim of this report is to examine how much students sleep.",
+            "traduccion": "Empieza con el objetivo: El objetivo de este informe es examinar cuánto duermen los estudiantes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then the method: an online survey with 120 respondents.",
+            "traduccion": "Luego el método: una encuesta en línea con 120 encuestados."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. After that, the findings. Keep the tone neutral, so no «I think».",
+            "traduccion": "Correcto. Después, los resultados. Mantén el tono neutro, así que nada de «creo que»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the conclusion and the recommendation go at the end.",
+            "traduccion": "Y la conclusión y la recomendación van al final."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué orden de partes y qué tono propone Leo para el informe?",
+          "opciones": [
+            {
+              "es": "Objetivo, método, resultados, conclusión y recomendación, con tono neutro."
+            },
+            {
+              "es": "Recomendación, resultados y objetivo, con tono personal."
+            },
+            {
+              "es": "Método, conclusión y objetivo, sin resultados."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo propone objetivo (aim), método, resultados (findings) y, al final, conclusión y recomendación, sin «I think»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Marcador típico"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Summary"
+            },
+            {
+              "texto": "This report examines… The key finding is…"
+            }
+          ],
+          [
+            {
+              "texto": "Introduction"
+            },
+            {
+              "texto": "The aim of this report is to…"
+            }
+          ],
+          [
+            {
+              "texto": "Method"
+            },
+            {
+              "texto": "The method was… / Data were collected…"
+            }
+          ],
+          [
+            {
+              "texto": "Findings"
+            },
+            {
+              "texto": "The main findings show that…"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusion"
+            },
+            {
+              "texto": "The conclusion is that…"
+            }
+          ],
+          [
+            {
+              "texto": "Recommendation"
+            },
+            {
+              "texto": "It is recommended that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-37": {
+      "explicacion": {
+        "titulo": "Matizar lo que dicen los datos",
+        "texto": "Un informe no afirma más de lo que los datos permiten. Por eso convierte frases rotundas («Screens ruin sleep») en frases matizadas con estructuras impersonales: There is some evidence that… (hay indicios), It appears that… (parece que), It remains unclear whether… (no está claro si) y To some extent… (hasta cierto punto). Tras unclear se usa whether, no that. Además, may, tend to y adverbios como largely o somewhat bajan el grado de certeza."
+      },
+      "patron": {
+        "texto": "Matizador impersonal + hallazgo:",
+        "formula": [
+          {
+            "texto": "It appears that",
+            "nota": "inferencia prudente: parece que"
+          },
+          {
+            "texto": "screen use",
+            "nota": "sujeto del hallazgo"
+          },
+          {
+            "texto": "may affect sleep,",
+            "nota": "verbo con may: grado bajo de certeza"
+          },
+          {
+            "texto": "to some extent.",
+            "nota": "limita el alcance"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It remains unclear that the later start improves sleep.",
+          "correcto": "It remains unclear whether the later start improves sleep.",
+          "explicacion": "Con unclear se expresa la duda con whether; that presentaría el dato como seguro."
+        },
+        {
+          "incorrecto": "There are some evidences that screens affect sleep.",
+          "correcto": "There is some evidence that screens affect sleep.",
+          "explicacion": "Evidence es incontable: no tiene plural y va con is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana enseña a Tom el borrador de su informe y Tom le sugiere suavizar una frase demasiado rotunda.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Your draft says: «Screens ruin students' sleep.» That sounds too strong.",
+            "traduccion": "Tu borrador dice: «Las pantallas arruinan el sueño de los estudiantes». Suena demasiado fuerte."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "But many students said they sleep badly after using their phones.",
+            "traduccion": "Pero muchos estudiantes dijeron que duermen mal después de usar el móvil."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, but the survey only shows an association. How about: There is some evidence that screens affect sleep?",
+            "traduccion": "Sí, pero la encuesta solo muestra una asociación. ¿Qué tal: Hay algunos indicios de que las pantallas afectan al sueño?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Better. And we don't know whether the effect is big. It remains unclear how big it is.",
+            "traduccion": "Mejor. Y no sabemos si el efecto es grande. Sigue sin estar claro cuánto es."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Exactly. A report should say what the data allow, not more.",
+            "traduccion": "Exacto. Un informe debe decir lo que permiten los datos, no más."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué Tom propone cambiar la frase de Ana?",
+          "opciones": [
+            {
+              "es": "Porque la encuesta solo muestra una asociación y la frase es demasiado rotunda."
+            },
+            {
+              "es": "Porque la frase tiene errores de gramática."
+            },
+            {
+              "es": "Porque nadie usó el móvil antes de dormir."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que la encuesta «only shows an association» y propone «There is some evidence that…», que admite que la evidencia es limitada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Grado de certeza",
+          "Matizador"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Alto"
+            },
+            {
+              "texto": "The data indicate that…"
+            }
+          ],
+          [
+            {
+              "texto": "Medio"
+            },
+            {
+              "texto": "It appears that… / There is some evidence that…"
+            }
+          ],
+          [
+            {
+              "texto": "Bajo"
+            },
+            {
+              "texto": "It remains unclear whether…"
+            }
+          ],
+          [
+            {
+              "texto": "Alcance limitado"
+            },
+            {
+              "texto": "To some extent… / largely / somewhat"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-38": {
+      "explicacion": {
+        "titulo": "¿Hecho, inferencia u opinión?",
+        "texto": "Un informe mezcla tres tipos de enunciados. Un hecho (fact) se puede comprobar y suele llevar cifras o fuente: According to the survey, 62 percent… Una inferencia es una conclusión deducida de los hechos y lleva matizadores: suggests, presumably, is likely to. Una opinión es una valoración personal: in my opinion, should, unfortunately, obviously. Reportedly atribuye un dato a otros sin confirmarlo. La pista está en las palabras: cifra + fuente = hecho; presumably = inferencia; should = opinión."
+      },
+      "patron": {
+        "texto": "Pista lingüística → tipo de enunciado:",
+        "formula": [
+          {
+            "texto": "According to the survey, 62 percent…",
+            "nota": "hecho: cifra y fuente"
+          },
+          {
+            "texto": "Presumably, screens explain the drop.",
+            "nota": "inferencia: matizador de probabilidad"
+          },
+          {
+            "texto": "In my opinion, schools should start later.",
+            "nota": "opinión: valoración personal y should"
+          },
+          {
+            "texto": "Reportedly, the school has cut homework.",
+            "nota": "dato atribuido y sin confirmar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, schools should start later.",
+          "correcto": "In my opinion, schools should start later.",
+          "explicacion": "Según yo se dice In my opinion; according to se usa para atribuir un dato a otra persona o a un documento."
+        },
+        {
+          "incorrecto": "Is a fact that 62 percent sleep little.",
+          "correcto": "It is a fact that 62 percent sleep little.",
+          "explicacion": "En inglés el sujeto no puede omitirse: hace falta it aunque en español se diga «es un hecho»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo analizan frases de un informe escolar para decidir cuáles son hechos y cuáles opiniones.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at this sentence: «Schools should start later.» Is it a fact?",
+            "traduccion": "Mira esta frase: «Los colegios deberían empezar más tarde». ¿Es un hecho?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, it's an opinion. The word should gives it away.",
+            "traduccion": "No, es una opinión. La palabra should lo delata."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And this one: «According to the survey, 62 percent sleep less than eight hours.»",
+            "traduccion": "¿Y esta otra: «Según la encuesta, el 62 % duerme menos de ocho horas»?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That's a fact, and it names the source.",
+            "traduccion": "Es un hecho y nombra la fuente."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What about: «Presumably, screens are the cause»?",
+            "traduccion": "¿Y «Presumiblemente, las pantallas son la causa»?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That's an inference. Presumably shows it isn't certain.",
+            "traduccion": "Es una inferencia. Presumably muestra que no es seguro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pista indica que «Schools should start later» es una opinión?",
+          "opciones": [
+            {
+              "es": "La palabra should."
+            },
+            {
+              "es": "La cifra del 62 %."
+            },
+            {
+              "es": "La fuente: la encuesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «The word should gives it away»: should marca una valoración, no algo comprobable."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Pistas en la frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "fact"
+            },
+            {
+              "texto": "cifras, fechas, According to…, It is a fact that…"
+            }
+          ],
+          [
+            {
+              "texto": "inference"
+            },
+            {
+              "texto": "suggests, presumably, is likely to, appears to"
+            }
+          ],
+          [
+            {
+              "texto": "opinion"
+            },
+            {
+              "texto": "In my opinion, should, unfortunately, obviously"
+            }
+          ],
+          [
+            {
+              "texto": "sin confirmar"
+            },
+            {
+              "texto": "reportedly, is said to"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-39": {
+      "explicacion": {
+        "titulo": "Escribir los resultados de una encuesta",
+        "texto": "Un apartado de resultados enlaza cifras con conectores formales: furthermore (añade), nevertheless (contrasta: «sin embargo», más formal que but), therefore (consecuencia). Cita las fuentes con according to…, the national survey stated that… o consistent with…, y matiza al menos dos afirmaciones con it appears that, may o tend to. Orden: dato, conector, interpretación prudente y fuente. Con porcentajes no se usa the: Forty percent of respondents…"
+      },
+      "patron": {
+        "texto": "Dato + conector + afirmación matizada + fuente:",
+        "formula": [
+          {
+            "texto": "Sixty percent of respondents sleep under eight hours;",
+            "nota": "dato con porcentaje"
+          },
+          {
+            "texto": "furthermore, the percentage is higher in the final year.",
+            "nota": "conector que añade"
+          },
+          {
+            "texto": "This may be linked to exams,",
+            "nota": "afirmación matizada"
+          },
+          {
+            "texto": "consistent with the national survey.",
+            "nota": "fuente integrada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The sample is small, therefore the results are unclear.",
+          "correcto": "The sample is small; therefore, the results are unclear.",
+          "explicacion": "Therefore no puede unir dos oraciones con una coma sola: necesita punto y coma (o punto) delante y coma detrás."
+        },
+        {
+          "incorrecto": "The 40 percent of respondents use a phone after midnight.",
+          "correcto": "Forty percent of respondents use a phone after midnight.",
+          "explicacion": "Con porcentajes no se usa the delante de la cifra, aunque en español se diga «el 40 %»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Ana redactan la sección de resultados de la encuesta del colegio sobre el sueño.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I've got the numbers: forty percent of respondents sleep under seven hours.",
+            "traduccion": "Ya tengo las cifras: el cuarenta por ciento de los encuestados duerme menos de siete horas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Add a connector. Furthermore, the percentage is higher in the final year.",
+            "traduccion": "Añade un conector. Además, el porcentaje es más alto en el último curso."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And a contrast: a minority sleep well; nevertheless, they still feel tired.",
+            "traduccion": "Y un contraste: una minoría duerme bien; sin embargo, aun así se siente cansada."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Hmm, let's be more careful. It appears that exams may play a role.",
+            "traduccion": "Mmm, seamos más prudentes. Parece que los exámenes pueden influir."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the source: consistent with the national survey.",
+            "traduccion": "Y la fuente: coherente con la encuesta nacional."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué sugiere Ana para que el apartado de resultados sea más prudente?",
+          "opciones": [
+            {
+              "es": "Decir que los exámenes quizá influyen, con «may play a role»."
+            },
+            {
+              "es": "Afirmar que los exámenes son la causa."
+            },
+            {
+              "es": "Eliminar todas las cifras."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana propone «It appears that exams may play a role»: dos matizadores (appears y may) en lugar de una causa afirmada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Conector o estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "añadir"
+            },
+            {
+              "texto": "furthermore, moreover"
+            }
+          ],
+          [
+            {
+              "texto": "contrastar"
+            },
+            {
+              "texto": "nevertheless, however, whereas"
+            }
+          ],
+          [
+            {
+              "texto": "consecuencia"
+            },
+            {
+              "texto": "therefore, consequently"
+            }
+          ],
+          [
+            {
+              "texto": "fuente"
+            },
+            {
+              "texto": "according to…, stated that…, consistent with…"
+            }
+          ],
+          [
+            {
+              "texto": "matizar"
+            },
+            {
+              "texto": "it appears that, may, tend to"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-40": {
+      "explicacion": {
+        "titulo": "Del informe al resumen oral",
+        "texto": "El mini informe y el resumen oral comparten el esqueleto, pero no el estilo. Por escrito: secciones (aim, method, findings, conclusion), tono neutro y afirmaciones matizadas. Oralmente, en un minuto: anuncia (I will outline…), da el punto clave (The key point is that…), añade una cifra y una cautela (It appears that…, although more evidence is needed) y cierra con To conclude… y una recomendación. Las frases orales son más cortas y repiten la idea central."
+      },
+      "patron": {
+        "texto": "Visión general + punto clave + cautela + recomendación:",
+        "formula": [
+          {
+            "texto": "This report gives an overview of the school commute.",
+            "nota": "anuncio del tema"
+          },
+          {
+            "texto": "The key point is that most students use the bus.",
+            "nota": "idea central con dato"
+          },
+          {
+            "texto": "It appears that journeys are long, although more evidence is needed.",
+            "nota": "cautela"
+          },
+          {
+            "texto": "To conclude, we recommend a second morning bus.",
+            "nota": "cierre con recomendación"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will make a resume of the report.",
+          "correcto": "I will give a summary of the report.",
+          "explicacion": "Resume suena parecido a «resumen», pero significa currículum; el resumen es summary."
+        },
+        {
+          "incorrecto": "We recommend to take a second bus.",
+          "correcto": "We recommend taking a second bus.",
+          "explicacion": "Después de recommend se usa -ing o un sustantivo; no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo ensaya con Sara un resumen de un minuto sobre el informe del transporte escolar.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I have one minute. How should I start?",
+            "traduccion": "Tengo un minuto. ¿Cómo debería empezar?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Say: «I will outline the main findings of our report on the school commute.»",
+            "traduccion": "Di: «Esbozaré los principales resultados de nuestro informe sobre el trayecto al colegio»."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then the key point: most students arrive by bus, and the trip takes over forty minutes.",
+            "traduccion": "Luego el punto clave: la mayoría llega en autobús y el viaje dura más de cuarenta minutos."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. Now be careful: say it appears that late buses are the main problem.",
+            "traduccion": "Bien. Ahora sé prudente: di que parece que los autobuses tardíos son el problema principal."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And I finish with: «To conclude, we recommend a second morning bus.»",
+            "traduccion": "Y termino con: «Para concluir, recomendamos un segundo autobús por la mañana»."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Con qué debe cerrar Leo su resumen de un minuto?",
+          "opciones": [
+            {
+              "es": "Con una conclusión y una recomendación."
+            },
+            {
+              "es": "Con una lista de todas las cifras."
+            },
+            {
+              "es": "Con una disculpa por el tiempo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que termina con «To conclude, we recommend a second morning bus»: cierre con conclusión y recomendación."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Por escrito",
+          "En el resumen oral"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Introduction"
+            },
+            {
+              "texto": "I will outline…"
+            }
+          ],
+          [
+            {
+              "texto": "Findings"
+            },
+            {
+              "texto": "The key point is that…"
+            }
+          ],
+          [
+            {
+              "texto": "Afirmación matizada"
+            },
+            {
+              "texto": "It appears that… although more evidence is needed"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusion + recommendation"
+            },
+            {
+              "texto": "To conclude, we recommend…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

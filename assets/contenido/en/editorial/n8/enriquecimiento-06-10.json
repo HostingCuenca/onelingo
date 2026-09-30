@@ -1,0 +1,660 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 6,
+    "end": 10
+  },
+  "classes": {
+    "en.n8.class-06": {
+      "explicacion": {
+        "titulo": "El pasado como cortesía",
+        "texto": "En inglés un tiempo pasado no siempre habla del pasado: también crea distancia, y la distancia suena cortés. «I wonder if you can help» es directo; «I was wondering if you could help» es mucho más suave, aunque pides la ayuda ahora. La escala va de menor a mayor cortesía: orden (Give me…), Can you…?, Could you…?, I was wondering if you could…. Cuanto más alejas el verbo (pasado, continuo, could), más amable suena la petición."
+      },
+      "patron": {
+        "texto": "I was wondering / hoping + if + you could + verbo base:",
+        "formula": [
+          {
+            "texto": "I was wondering",
+            "nota": "pasado continuo: distancia y cortesía"
+          },
+          {
+            "texto": "if you could",
+            "nota": "could en lugar de can: aún más distancia"
+          },
+          {
+            "texto": "give me a hand?",
+            "nota": "lo que pides, en verbo base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was wondering if you help me.",
+          "correcto": "I was wondering if you could help me.",
+          "explicacion": "Después de I was wondering if se necesita could (o would): el verbo solo no hace la petición."
+        },
+        {
+          "incorrecto": "Do you mind to open the window?",
+          "correcto": "Do you mind opening the window?",
+          "explicacion": "Mind va seguido de -ing, no de to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia quiere pedir prestada la bici a su vecina y Tom le aconseja cómo decirlo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I want to say to my neighbour, 'Lend me your bike.'",
+            "traduccion": "Quiero decirle a mi vecina: «Préstame tu bici»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That sounds too direct. Say, 'I was wondering if I could borrow your bike.'",
+            "traduccion": "Suena demasiado directo. Di: «Me preguntaba si podría pedirte prestada la bici»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Does the past tense mean I borrowed it yesterday?",
+            "traduccion": "¿El pasado quiere decir que la pedí prestada ayer?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. The past only makes the request softer.",
+            "traduccion": "No. El pasado solo hace la petición más suave."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace el pasado en «I was wondering if…»?",
+          "opciones": [
+            {
+              "es": "Suaviza la petición."
+            },
+            {
+              "es": "Indica que ocurrió ayer."
+            },
+            {
+              "es": "Hace la petición más directa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom aclara que el pasado solo suaviza la petición; no cambia el momento en que se pide."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Nivel",
+          "Frase",
+          "Qué la suaviza"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Directo"
+            },
+            {
+              "texto": "Give me a hand."
+            },
+            {
+              "texto": "imperativo, sin suavizar"
+            }
+          ],
+          [
+            {
+              "texto": "Normal"
+            },
+            {
+              "texto": "Can you give me a hand?"
+            },
+            {
+              "texto": "can"
+            }
+          ],
+          [
+            {
+              "texto": "Cortés"
+            },
+            {
+              "texto": "Could you give me a hand?"
+            },
+            {
+              "texto": "could (pasado de can)"
+            }
+          ],
+          [
+            {
+              "texto": "Muy cortés"
+            },
+            {
+              "texto": "I was wondering if you could give me a hand."
+            },
+            {
+              "texto": "pasado continuo + could"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-07": {
+      "explicacion": {
+        "titulo": "Verbos de estado en continuo: conducta y actitud",
+        "texto": "Los verbos de estado (be, know, like, love, think) normalmente no se usan en continuo: decimos I know, no I am knowing. Pero con be + adjetivo de conducta (silly, rude, strict) sí existe be being, y significa «te estás comportando así ahora», no «eres así». Compara: He is rude (su carácter) y He is being rude (hoy, en este momento). También hay usos coloquiales como I'm loving it, que dan énfasis. No lo uses con rasgos fijos (tall, old)."
+      },
+      "patron": {
+        "texto": "Sujeto + be + being + adjetivo de conducta:",
+        "formula": [
+          {
+            "texto": "You",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "are being",
+            "nota": "be + being: conducta temporal"
+          },
+          {
+            "texto": "silly today.",
+            "nota": "adjetivo que una persona puede elegir; hoy, no siempre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He is being tall.",
+          "correcto": "He is tall.",
+          "explicacion": "Being solo funciona con conductas que se pueden elegir (silly, rude); la altura es un rasgo fijo."
+        },
+        {
+          "incorrecto": "I am knowing the answer.",
+          "correcto": "I know the answer.",
+          "explicacion": "Know es un verbo de estado y no se usa en continuo; se dice I know."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana habla con Leo, que hoy se comporta de forma distinta con su hermano.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "You're being very strict with your brother today.",
+            "traduccion": "Hoy estás siendo muy estricto con tu hermano."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I know. Normally I'm not strict, but he is being annoying.",
+            "traduccion": "Lo sé. Normalmente no soy estricto, pero él está siendo pesado."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK, but please be kind to him.",
+            "traduccion": "Vale, pero sé amable con él, por favor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo es Leo normalmente con su hermano?",
+          "opciones": [
+            {
+              "es": "No suele ser estricto."
+            },
+            {
+              "es": "Siempre es muy estricto."
+            },
+            {
+              "es": "Nunca le habla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Normally I'm not strict»; hoy solo se está comportando así."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Matiz",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "be + adjetivo"
+            },
+            {
+              "texto": "carácter, siempre"
+            },
+            {
+              "texto": "She is generous."
+            }
+          ],
+          [
+            {
+              "texto": "be being + adjetivo"
+            },
+            {
+              "texto": "conducta temporal"
+            },
+            {
+              "texto": "She's being generous today."
+            }
+          ],
+          [
+            {
+              "texto": "love / like (simple)"
+            },
+            {
+              "texto": "gusto estable"
+            },
+            {
+              "texto": "I love it."
+            }
+          ],
+          [
+            {
+              "texto": "I'm loving it"
+            },
+            {
+              "texto": "énfasis coloquial, actual"
+            },
+            {
+              "texto": "I'm loving this song."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-08": {
+      "explicacion": {
+        "titulo": "Perspectiva del tiempo en un relato",
+        "texto": "En unas memorias el tiempo verbal te da la perspectiva. El pasado simple cuenta hechos terminados, uno tras otro (I moved). El pasado continuo (was walking) pinta la escena de fondo o una acción interrumpida. Used to y would expresan un hábito pasado; would solo sirve para acciones repetidas, no para estados (se dice I used to be shy, no I would be shy). Y el past perfect (had left) señala algo que pasó antes del momento que se cuenta. Al leer, pregunta: ¿hábito, escena, hecho o algo anterior?"
+      },
+      "patron": {
+        "texto": "Escena + hecho puntual + hecho anterior:",
+        "formula": [
+          {
+            "texto": "I was walking home",
+            "nota": "acción en curso: escena de fondo"
+          },
+          {
+            "texto": "when it started to rain,",
+            "nota": "hecho puntual que interrumpe"
+          },
+          {
+            "texto": "and I had already forgotten my umbrella.",
+            "nota": "hecho anterior: past perfect"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I was young, I would be shy.",
+          "correcto": "When I was young, I used to be shy.",
+          "explicacion": "Would no se usa con estados como be; para un estado pasado se usa used to o el pasado simple."
+        },
+        {
+          "incorrecto": "When I arrived, the film already started.",
+          "correcto": "When I arrived, the film had already started.",
+          "explicacion": "Lo que ocurrió antes de otro momento del pasado lleva past perfect: had + participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara lee en voz alta un fragmento de las memorias de su abuela y Carlos le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Listen: 'Every morning I would walk to the river.'",
+            "traduccion": "Escucha: «Cada mañana caminaba hasta el río»."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Was that once or many times?",
+            "traduccion": "¿Fue una vez o muchas?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Many times. Would shows a habit.",
+            "traduccion": "Muchas veces. Would indica una costumbre."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And 'I was walking home when it started to rain'?",
+            "traduccion": "¿Y «I was walking home when it started to rain»?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a scene in progress, and the rain interrupted it.",
+            "traduccion": "Es una escena en curso, y la lluvia la interrumpió."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué expresa «would» en «I would walk to the river»?",
+          "opciones": [
+            {
+              "es": "Una costumbre repetida."
+            },
+            {
+              "es": "Una acción única."
+            },
+            {
+              "es": "Un plan futuro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que would muestra una costumbre: muchas veces, no una sola."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Perspectiva",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hábito pasado"
+            },
+            {
+              "texto": "used to / would + base"
+            },
+            {
+              "texto": "I would walk to the river."
+            }
+          ],
+          [
+            {
+              "texto": "Escena en curso"
+            },
+            {
+              "texto": "was / were + -ing"
+            },
+            {
+              "texto": "I was walking home."
+            }
+          ],
+          [
+            {
+              "texto": "Hecho puntual"
+            },
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "It started to rain."
+            }
+          ],
+          [
+            {
+              "texto": "Hecho anterior"
+            },
+            {
+              "texto": "had + participio"
+            },
+            {
+              "texto": "I had forgotten my umbrella."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-09": {
+      "explicacion": {
+        "titulo": "Dos versiones: cercana y distante",
+        "texto": "Un mismo mensaje puede escribirse con distinta distancia social. Con un amigo usa el presente simple, can y un tono directo: Can you water my plants? Con una persona a quien apenas conoces, suaviza con un tiempo de distancia (I was wondering if you could…, I was hoping…), could o would, y fórmulas de cortesía (if it is no trouble, I'd be grateful). El continuo de actitud (I hope I'm not being a nuisance) añade consideración. Mantén el mismo registro de principio a fin."
+      },
+      "patron": {
+        "texto": "Versión cercana ↔ versión distante:",
+        "formula": [
+          {
+            "texto": "Can you water my plants?",
+            "nota": "cercano: presente + can"
+          },
+          {
+            "texto": "I was wondering if you could…",
+            "nota": "distante: pasado continuo + could"
+          },
+          {
+            "texto": "I hope I'm not being a nuisance.",
+            "nota": "actitud: continuo con be being"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mrs Green, can you water my plants, mate?",
+          "correcto": "Dear Mrs Green, I was wondering if you could water my plants.",
+          "explicacion": "No mezcles el saludo formal con una petición directa ni con palabras de amigos; mantén un solo registro."
+        },
+        {
+          "incorrecto": "I was wondering if you can water my plants.",
+          "correcto": "I was wondering if you could water my plants.",
+          "explicacion": "Tras I was wondering if, el segundo verbo también se pone en forma de distancia: could."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom prepara dos mensajes para sus vecinos y Ana le da consejos.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I'm going away next week. Can I write, 'Can you water my plants?' to Mrs Green?",
+            "traduccion": "Me voy la semana que viene. ¿Puedo escribirle a la Sra. Green: «¿Puedes regar mis plantas?»?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No, that is too direct for Mrs Green. Say, 'I was wondering if you could water my plants.'",
+            "traduccion": "No, es demasiado directo para la Sra. Green. Di: «Me preguntaba si podría regar mis plantas»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And for my friend Leo?",
+            "traduccion": "¿Y para mi amigo Leo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "For Leo, 'Can you water my plants?' is fine.",
+            "traduccion": "Para Leo, «¿Puedes regar mis plantas?» está bien."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué versión usa Tom con su amigo Leo?",
+          "opciones": [
+            {
+              "es": "La cercana: Can you…?"
+            },
+            {
+              "es": "La distante: I was wondering…"
+            },
+            {
+              "es": "Ninguna: no le escribe."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que con Leo basta Can you water my plants?, y que con la Sra. Green hace falta la versión distante."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Versión cercana",
+          "Versión distante"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Saludo"
+            },
+            {
+              "texto": "Hi Anna,"
+            },
+            {
+              "texto": "Dear Mrs Green,"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Can you water my plants?"
+            },
+            {
+              "texto": "I was wondering if you could water my plants."
+            }
+          ],
+          [
+            {
+              "texto": "Actitud"
+            },
+            {
+              "texto": "You're being an angel."
+            },
+            {
+              "texto": "I hope I'm not being a nuisance."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Thanks!"
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-10": {
+      "explicacion": {
+        "titulo": "Tres perspectivas en una entrevista",
+        "texto": "En una entrevista de vida cambias de perspectiva con el tiempo verbal. Para un recuerdo, usa distancia: pasado simple para los hechos, was living para la escena de fondo, used to o would para el hábito y had + participio para lo anterior (At that time…). Para tu opinión actual, usa el presente con continuo de actitud (These days I'm being more honest, I'm loving…). Para pedir algo al entrevistador, vuelve a la distancia cortés: I was wondering if you could… Las marcas At that time y These days te ayudan a cambiar de perspectiva."
+      },
+      "patron": {
+        "texto": "Pasado con distancia + presente con actitud + petición cortés:",
+        "formula": [
+          {
+            "texto": "At that time I was living with my grandparents,",
+            "nota": "recuerdo: escena del pasado con distancia"
+          },
+          {
+            "texto": "but these days I'm being more honest about it.",
+            "nota": "opinión actual: continuo de actitud"
+          },
+          {
+            "texto": "I was wondering if you could repeat that?",
+            "nota": "petición cortés: distancia en el verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I was a child, I am living in a small village.",
+          "correcto": "When I was a child, I lived in a small village.",
+          "explicacion": "Un recuerdo de la infancia se cuenta en pasado; mezclar con el presente rompe la perspectiva."
+        },
+        {
+          "incorrecto": "These days I am liking my job.",
+          "correcto": "These days I like my job.",
+          "explicacion": "Like es un verbo de estado y no suele ir en continuo; para dar énfasis coloquial se usa I'm loving."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara entrevista a su abuelo sobre su vida para un trabajo del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Grandpa, could you tell me about your childhood?",
+            "traduccion": "Abuelo, ¿podrías hablarme de tu infancia?"
+          },
+          {
+            "hablante": "Grandpa",
+            "texto": "At that time I was living in a tiny village. Every morning I would walk to school.",
+            "traduccion": "En aquella época vivía en un pueblo diminuto. Cada mañana caminaba hasta la escuela."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And what is your opinion of life these days?",
+            "traduccion": "¿Y qué opinas de la vida hoy en día?"
+          },
+          {
+            "hablante": "Grandpa",
+            "texto": "These days I'm being more honest, and I'm loving my slow mornings.",
+            "traduccion": "Hoy en día soy más sincero y me encantan mis mañanas lentas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hacía el abuelo cada mañana de niño?",
+          "opciones": [
+            {
+              "es": "Caminaba hasta la escuela."
+            },
+            {
+              "es": "Trabajaba en una panadería."
+            },
+            {
+              "es": "Dormía hasta tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "El abuelo dice: «Every morning I would walk to school», una costumbre de su infancia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Perspectiva",
+          "Marca",
+          "Forma"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Recuerdo con distancia"
+            },
+            {
+              "texto": "At that time, back then"
+            },
+            {
+              "texto": "was living, would, had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Opinión actual"
+            },
+            {
+              "texto": "These days, now"
+            },
+            {
+              "texto": "be being + adjetivo, I'm loving"
+            }
+          ],
+          [
+            {
+              "texto": "Petición cortés"
+            },
+            {
+              "texto": "I was wondering…"
+            },
+            {
+              "texto": "pasado continuo + could"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C6-C7: corregida enseñanza contradictoria (He is rude/being rude), 'usually never' antinatural, aceptado behavior/behaviour y órdenes alternativos.",
+      "C8: patrón con sentido lógico (paraguas ya olvidado); quitada la filtración de respuestas entre textos y audio/completar; repaso incluye futuro (mapa: spiral review de futuros).",
+      "C9-C10: rúbricas con variantes (fechas, had + participio, petición cortés), rangos realistas; audio de tono coherente (Dear Mrs Green).",
+      "P2 sin resolver: ítems de metalenguaje (qué hace el pasado) tienden a responderse por patrón."
+    ]
+  }
+}

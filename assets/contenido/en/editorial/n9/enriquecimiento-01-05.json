@@ -1,0 +1,409 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "classes": {
+    "en.n9.class-01": {
+      "explicacion": {
+        "titulo": "Leer el ambiente antes de hablar",
+        "texto": "Cada intercambio de una charla cumple una función. La apertura (opener) suele ser una pregunta ligera sobre el contexto que compartís. El interés genuino se reconoce por los ecos («Oh, really?»), las preguntas de detalle y las respuestas largas; el desinterés, por respuestas secas o miradas al móvil. El cambio de tema suena a «By the way…» y el cierre es breve y cálido: agradece, da un motivo y deja la puerta abierta. En español a veces nos despedimos con largas fórmulas; en inglés lo breve suena más natural."
+      },
+      "patron": {
+        "texto": "Función + frase típica:",
+        "formula": [
+          {
+            "texto": "How do you know the bride?",
+            "nota": "apertura: pregunta ligera sobre el contexto"
+          },
+          {
+            "texto": "Oh, really? Tell me more.",
+            "nota": "interés: eco más petición de detalles"
+          },
+          {
+            "texto": "Anyway, I should let you get back to your table.",
+            "nota": "cierre: motivo amable para terminar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What do you do in life?",
+          "correcto": "What do you do for a living?",
+          "explicacion": "«¿A qué te dedicas en la vida?» es un calco; en inglés se pregunta «for a living»."
+        },
+        {
+          "incorrecto": "Nice to meet you, bye!",
+          "correcto": "It was nice meeting you!",
+          "explicacion": "Al despedirte se usa el pasado con -ing («It was nice meeting you»); «Nice to meet you» es para el primer saludo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo se conocen en una boda, junto a la mesa de los postres.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "So, how do you know the bride?",
+            "traduccion": "Entonces, ¿de qué conoces a la novia?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We shared an office a few years ago. And you?",
+            "traduccion": "Compartimos oficina hace unos años. ¿Y tú?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "She's my cousin. Oh, you shared an office? Tell me more.",
+            "traduccion": "Es mi prima. ¿Ah, compartisteis oficina? Cuéntame más."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Well, she always brought cake on Fridays, and nobody worked.",
+            "traduccion": "Bueno, siempre traía pastel los viernes y nadie trabajaba."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Ha! Anyway, I should let you get back to your table.",
+            "traduccion": "¡Ja! En fin, debería dejarte volver a tu mesa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo cierra Ana la conversación?",
+          "opciones": [
+            {
+              "es": "Le pide su tarjeta de contacto."
+            },
+            {
+              "es": "Dice que lo deja volver a su mesa."
+            },
+            {
+              "es": "Le pregunta más detalles sobre el pastel."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana termina con «I should let you get back to your table»: un cierre breve y amable."
+        }
+      }
+    },
+    "en.n9.class-02": {
+      "explicacion": {
+        "titulo": "Una presentación que se recuerda",
+        "texto": "Una presentación memorable cabe en tres piezas: quién eres (nombre y ocupación), un gancho (un detalle concreto o curioso) y una pregunta que devuelve la palabra. Evita el estilo currículum («I work in marketing…»): suena soso. Repasa también las coletillas: a una frase afirmativa le corresponde una coletilla negativa (isn't it?) y a una negativa, una afirmativa (did they?). Con entonación descendente buscas acuerdo; con ascendente, una respuesta real. Todo debe durar unos diez segundos."
+      },
+      "patron": {
+        "texto": "Nombre + ocupación + gancho + pregunta:",
+        "formula": [
+          {
+            "texto": "I'm Ana, a vet",
+            "nota": "nombre y ocupación, en una sola frase"
+          },
+          {
+            "texto": "who once pulled a dog out of a frozen lake.",
+            "nota": "gancho: un detalle concreto que se recuerda"
+          },
+          {
+            "texto": "What brings you to the event?",
+            "nota": "pregunta abierta para devolver la palabra"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I work as teacher in a small school.",
+          "correcto": "I work as a teacher in a small school.",
+          "explicacion": "Las profesiones llevan artículo (a/an) en inglés; en español se omite."
+        },
+        {
+          "incorrecto": "It's a lovely venue, no?",
+          "correcto": "It's a lovely venue, isn't it?",
+          "explicacion": "El «¿no?» español se traduce con una coletilla en inglés: isn't it, aren't they, didn't we…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom se presentan durante el descanso de un congreso.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Hi, I'm Tom. I'm an engineer, and I build guitars in my garage. What about you?",
+            "traduccion": "Hola, soy Tom. Soy ingeniero y construyo guitarras en mi garaje. ¿Y tú?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'm Mia. I design bridges. It's a lovely venue, isn't it?",
+            "traduccion": "Soy Mia. Diseño puentes. Es un lugar precioso, ¿verdad?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is. Wait, bridges? Have you built a famous one?",
+            "traduccion": "Lo es. Espera, ¿puentes? ¿Has construido alguno famoso?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Not yet, but I'd like to.",
+            "traduccion": "Todavía no, pero me gustaría."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el gancho de Tom?",
+          "opciones": [
+            {
+              "es": "Diseña puentes famosos."
+            },
+            {
+              "es": "Enseña ingeniería a adolescentes."
+            },
+            {
+              "es": "Construye guitarras en su garaje."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Tom se presenta con su ocupación y añade «I build guitars in my garage»: ese es su gancho."
+        }
+      }
+    },
+    "en.n9.class-03": {
+      "explicacion": {
+        "titulo": "Interés real o simple cortesía",
+        "texto": "Para saber si alguien quiere seguir hablando, busca al menos dos pistas. Interés genuino: ecos que repiten un dato con subida («Seven languages?»), reacciones cortas seguidas de una pregunta de detalle («Wow! How did you start?») y una voz con altibajos. Cortesía: sonidos sueltos (mm, right), respuestas sin pregunta, dudas, un «That's interesting.» plano y un cambio de tema. Un solo indicio no basta: decide con el conjunto."
+      },
+      "patron": {
+        "texto": "Eco + reacción + pregunta de detalle:",
+        "formula": [
+          {
+            "texto": "Seven languages?",
+            "nota": "eco: repite el dato con entonación ascendente"
+          },
+          {
+            "texto": "Wow, that's amazing.",
+            "nota": "reacción breve, con voz animada"
+          },
+          {
+            "texto": "How did you learn them all?",
+            "nota": "pregunta de detalle: mantiene el tema"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia looked boring, so I stopped talking.",
+          "correcto": "Mia looked bored, so I stopped talking.",
+          "explicacion": "Bored describe cómo se siente alguien; boring, lo que resulta aburrido."
+        },
+        {
+          "incorrecto": "That's very interested!",
+          "correcto": "That's very interesting!",
+          "explicacion": "Interesting es lo que provoca interés; interested es cómo estás tú."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Leo su libro de recetas en una feria.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I spent two years writing a book of recipes in Italian.",
+            "traduccion": "Pasé dos años escribiendo un libro de recetas en italiano."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "In Italian? How did you learn it?",
+            "traduccion": "¿En italiano? ¿Cómo lo aprendiste?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I lived in Naples as a student. Do you cook?",
+            "traduccion": "Viví en Nápoles de estudiante. ¿Tú cocinas?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Hmm. A bit. That's interesting.",
+            "traduccion": "Hmm. Un poco. Qué interesante."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Right... Well, I should find my friends.",
+            "traduccion": "Ya... Bueno, debería ir a buscar a mis amigos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué señal muestra el interés genuino de Leo al principio?",
+          "opciones": [
+            {
+              "es": "Repite «In Italian?» y pregunta cómo aprendió el idioma."
+            },
+            {
+              "es": "Dice «That's interesting» sin preguntar nada."
+            },
+            {
+              "es": "Mira el móvil mientras Sara habla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo hace un eco («In Italian?») y una pregunta de detalle; al final solo responde con frases planas."
+        }
+      }
+    },
+    "en.n9.class-04": {
+      "explicacion": {
+        "titulo": "Mantener viva la conversación",
+        "texto": "Para sostener una charla, combina tres movimientos en cada turno: un eco o una reacción breve, una aportación personal corta (dos o tres frases) y una pregunta de seguimiento sobre un detalle que el otro mencionó. Así equilibras escuchar y compartir. Evita las preguntas invasivas (dinero, edad, política) y no divagues: si te sales del tema, vuelve con «Anyway, you were saying…». La pregunta de seguimiento demuestra que escuchaste."
+      },
+      "patron": {
+        "texto": "Eco + aportación breve + pregunta de seguimiento:",
+        "formula": [
+          {
+            "texto": "You played the piano?",
+            "nota": "eco: repite el detalle con subida"
+          },
+          {
+            "texto": "I tried it once and I was terrible.",
+            "nota": "aportación personal breve, que corresponde"
+          },
+          {
+            "texto": "How did you start?",
+            "nota": "pregunta de seguimiento sobre ese detalle"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Tell me more about you.",
+          "correcto": "Tell me more about yourself.",
+          "explicacion": "Con «about» se usa el pronombre reflexivo: yourself, no you."
+        },
+        {
+          "incorrecto": "I'm used to talk a lot at parties.",
+          "correcto": "I'm used to talking a lot at parties.",
+          "explicacion": "En «be used to» la palabra «to» es una preposición y va seguida de -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia charlan en una boda después de la cena.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I grew up by the sea in Manta.",
+            "traduccion": "Crecí junto al mar, en Manta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "By the sea? What was that like?",
+            "traduccion": "¿Junto al mar? ¿Cómo fue?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Loud, salty and beautiful. What about you?",
+            "traduccion": "Ruidoso, salado y maravilloso. ¿Y tú?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'm a city girl, but I learned to swim at forty.",
+            "traduccion": "Soy de ciudad, pero aprendí a nadar a los cuarenta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué detalle recoge Mia para hacer su pregunta de seguimiento?",
+          "opciones": [
+            {
+              "es": "Que Leo aprendió a nadar a los cuarenta."
+            },
+            {
+              "es": "Que Leo creció junto al mar."
+            },
+            {
+              "es": "Que Leo vive en una ciudad grande."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Mia repite «By the sea?» y pregunta «What was that like?»: toma el detalle que Leo acaba de dar."
+        }
+      }
+    },
+    "en.n9.class-05": {
+      "explicacion": {
+        "titulo": "Conocer, conectar y dar seguimiento",
+        "texto": "Un buen mensaje de seguimiento se escribe al día siguiente y tiene cuatro piezas: un recordatorio de dónde os conocisteis, un detalle de la charla, una propuesta concreta (qué, cuándo y dónde) y una salida fácil. El registro es cordial y semiformal: contracciones sí, «Dear Sir» no, y nada de frases vagas como «let's keep in touch». Son cuatro o cinco frases, no un párrafo largo. La propuesta concreta es lo que convierte un buen encuentro en un segundo encuentro."
+      },
+      "patron": {
+        "texto": "Recordatorio + detalle + propuesta + salida fácil:",
+        "formula": [
+          {
+            "texto": "We met at the wedding, by the cake table.",
+            "nota": "recordatorio: dónde y cuándo os conocisteis"
+          },
+          {
+            "texto": "You said you were training for a marathon.",
+            "nota": "detalle que demuestra que escuchaste"
+          },
+          {
+            "texto": "Would you like to have coffee next Thursday?",
+            "nota": "propuesta concreta con día y plan"
+          },
+          {
+            "texto": "No worries if you are busy.",
+            "nota": "salida fácil para no presionar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Would you like to take a coffee with me on Thursday?",
+          "correcto": "Would you like to have coffee with me on Thursday?",
+          "explicacion": "En inglés se dice «have coffee»; «take a coffee» es calco de «tomar un café»."
+        },
+        {
+          "incorrecto": "Let's keep us in touch.",
+          "correcto": "Let's keep in touch.",
+          "explicacion": "«Keep in touch» no lleva pronombre reflexivo aunque en español digamos «mantenernos»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos revisan el mensaje que ella va a enviar a un hombre que conoció en una feria.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Did you send a message to the man from the book fair?",
+            "traduccion": "¿Enviaste un mensaje al hombre de la feria del libro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Not yet. I wrote: 'Let's keep in touch.'",
+            "traduccion": "Todavía no. Escribí: «Mantengámonos en contacto»."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That's vague. Mention the marathon he talked about and suggest coffee next Thursday.",
+            "traduccion": "Eso es vago. Menciona el maratón del que habló y propón un café el próximo jueves."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good idea. 'Would you like to have coffee next Thursday at ten? No worries if you are busy.'",
+            "traduccion": "Buena idea. «¿Te apetece tomar un café el próximo jueves a las diez? No pasa nada si estás ocupado»."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué corrige Carlos del mensaje de Ana?",
+          "opciones": [
+            {
+              "es": "Que es demasiado largo y formal."
+            },
+            {
+              "es": "Que no da las gracias por la feria."
+            },
+            {
+              "es": "Que es vago: debe incluir un detalle y una propuesta concreta."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Carlos dice «That's vague» y pide un detalle (el maratón) y una propuesta concreta (café el jueves)."
+        }
+      }
+    }
+  }
+}

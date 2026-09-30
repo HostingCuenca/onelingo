@@ -70,7 +70,7 @@
         },
         {
           "en": "Shock as bus fares rise again.",
-          "es": "Impacto: los billetes de autobús suben otra vez.",
+          "es": "Impacto: las tarifas del autobús suben otra vez.",
           "nota": "Titular real: sin verbo to be ni artículos, y con shock como palabra de impacto."
         },
         {
@@ -260,7 +260,11 @@
               {
                 "respuesta": "calm",
                 "aceptadas": [
-                  "calm"
+                  "calm",
+                  "neutral",
+                  "balanced",
+                  "plain",
+                  "fair"
                 ]
               },
               {
@@ -272,7 +276,8 @@
               {
                 "respuesta": "misleading",
                 "aceptadas": [
-                  "misleading"
+                  "misleading",
+                  "loaded"
                 ]
               }
             ],
@@ -292,15 +297,15 @@
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige por qué el titular resulta exagerado.",
+            "consigna": "Escucha y elige qué dice el artículo sobre el parque.",
             "audio": "The headline says crisis for families, but the article says the park will close for two days for repairs.",
             "opciones": [
-              "The real problem is much smaller than the headline suggests.",
-              "The park will close for good and families must move.",
-              "Families asked the council to call it a crisis."
+              "The park will be shut for just two days.",
+              "The park will be shut for two weeks.",
+              "The park will be shut until the crisis is over."
             ],
             "respuesta": 0,
-            "feedback": "El parque solo cierra dos días por obras; llamarlo crisis es desproporcionado."
+            "feedback": "El artículo dice que el parque solo cierra dos días por obras; llamarlo crisis es desproporcionado."
           }
         ],
         "evaluacion": [
@@ -314,7 +319,7 @@
               "Bridge crisis hits drivers"
             ],
             "respuesta": 0,
-            "feedback": "El primero da los datos del artículo; los otros usan shock y crisis para dramatizar un desvío de tres días."
+            "feedback": "El titular que da los datos del artículo es el neutro; los otros usan shock y crisis para dramatizar un desvío de tres días."
           },
           {
             "formato": "elegir",
@@ -322,11 +327,11 @@
             "texto": "Panic as local shop raises coffee price by ten cents",
             "opciones": [
               "Panic",
-              "local",
-              "cents"
+              "raises",
+              "coffee"
             ],
             "respuesta": 0,
-            "feedback": "«Panic» hace sonar grave una subida de diez céntimos; local y cents solo describen."
+            "feedback": "«Panic» hace sonar grave una subida de diez céntimos; raises y coffee solo describen el hecho."
           },
           {
             "formato": "escuchar",
@@ -346,7 +351,7 @@
             "pares": [
               [
                 "Bus fares rise again",
-                "Los billetes de autobús suben otra vez."
+                "Las tarifas del autobús suben otra vez."
               ],
               [
                 "Park opens again after repairs",
@@ -361,7 +366,7 @@
                 "Cambia la hora del almuerzo en el colegio."
               ]
             ],
-            "feedback": "Cada titular comprime la noticia; en el último, chaos es la palabra con carga para un simple cambio de hora."
+            "feedback": "Cada titular comprime la noticia; en «Chaos at school…», chaos es la palabra con carga para un simple cambio de hora."
           }
         ],
         "repaso": [
@@ -369,30 +374,33 @@
             "formato": "ordenar",
             "consigna": "Ordena: «El titular suele poner la palabra más fuerte al principio.»",
             "respuesta": "The headline often puts the strongest word first",
-            "feedback": "La palabra con más énfasis suele ir al inicio del titular, antes de los hechos."
+            "feedback": "La palabra con más énfasis suele ir al inicio del titular, antes de los hechos.",
+            "aceptadas": [
+              "Often the headline puts the strongest word first"
+            ]
           },
           {
             "formato": "elegir",
             "consigna": "¿Qué frase describe bien un titular engañoso?",
             "opciones": [
               "Its words can be true, but the emphasis gives readers the wrong idea.",
-              "It always contains a false number.",
-              "It never mentions the main fact."
+              "It always contains a false number that the article corrects.",
+              "It never mentions the main fact of the story."
             ],
             "respuesta": 0,
             "feedback": "Un titular engañoso puede usar palabras ciertas y aun así orientar mal al lector con su énfasis."
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué funciona como gancho en el titular.",
+            "consigna": "Escucha y elige qué palabra es el gancho del titular.",
             "audio": "Leo read the headline Shock as school bus is ten minutes late. He said the first word was the hook, because the real story was small.",
             "opciones": [
-              "A strong word at the start.",
-              "The number of minutes.",
-              "The name of the school."
+              "Shock",
+              "minutes",
+              "school"
             ],
             "respuesta": 0,
-            "feedback": "Leo dice que la primera palabra (shock) es el gancho: una palabra fuerte que atrapa al lector."
+            "feedback": "Leo dice que la primera palabra es el gancho, y el titular empieza por shock: una palabra fuerte que atrapa al lector."
           }
         ]
       }
@@ -623,7 +631,7 @@
         "guiada": [
           {
             "formato": "elegir",
-            "consigna": "Tom dijo: «Leo rompió la ventana». ¿Cómo lo reporta?",
+            "consigna": "Tom culpa a Leo: «Leo rompió la ventana». ¿Cómo se reporta como acusación?",
             "opciones": [
               "Tom accused Leo of breaking the window.",
               "Tom accused Leo to break the window.",
@@ -631,7 +639,7 @@
             ],
             "respuesta": 0,
             "feedback": "Con accuse se usa persona + of + -ing: accused Leo of breaking.",
-            "pista": "Después de accused y la persona va of, y el verbo termina en -ing."
+            "pista": "Fíjate en la preposición y en la forma del verbo que pide accuse después de la persona."
           },
           {
             "formato": "completar",
@@ -660,7 +668,7 @@
             "frases": [
               "The teacher accused two students ___ copying the test.",
               "The club claimed ___ have sold every ticket.",
-              "The player denied ___ the rule."
+              "The player said he did not break the rule. He denied ___ the rule."
             ],
             "partes": [
               {
@@ -779,7 +787,7 @@
             "opciones": [
               "Ana",
               "Tom",
-              "Nobody"
+              "Both of them"
             ],
             "respuesta": 0,
             "feedback": "Ana pidió perdón por olvidar las entradas; Tom solo insistió en esperar fuera."
@@ -1002,7 +1010,8 @@
             "texto": "A claim without ___ cannot be checked.",
             "respuesta": "evidence",
             "aceptadas": [
-              "evidence"
+              "evidence",
+              "proof"
             ],
             "feedback": "Evidence son las pruebas que permiten verificar una afirmación.",
             "pista": "Es lo que necesitas para poder comprobar lo que alguien afirma."
@@ -1049,15 +1058,15 @@
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué parte de la publicación se puede verificar.",
+            "consigna": "Escucha y elige el dato de la publicación que se puede verificar.",
             "audio": "Mia read a post about the new swimming pool. It said the pool had cost two hundred thousand dollars. The post also said the mayor was obviously wasting money.",
             "opciones": [
-              "The amount the pool cost.",
-              "The idea that the mayor wastes money.",
-              "The idea that the pool is too big."
+              "The pool's price was 200,000 dollars.",
+              "The pool's price was 2,000,000 dollars.",
+              "The mayor is wasting money."
             ],
             "respuesta": 0,
-            "feedback": "El coste de la piscina es una cifra que se puede comprobar; lo de malgastar dinero es un juicio con obviously."
+            "feedback": "La publicación da una cifra de coste que se puede comprobar en las cuentas; lo de malgastar dinero es un juicio con obviously."
           }
         ],
         "evaluacion": [
@@ -1079,7 +1088,7 @@
             "texto": "Headline: Mayor's cousin wins bus contract. Article: The council chose the cheapest company.",
             "opciones": [
               "That the contract was a favour to a relative.",
-              "That the mayor drove the bus.",
+              "That the cousin drives buses for the council.",
               "That the company was the cheapest."
             ],
             "respuesta": 0,
@@ -1134,7 +1143,12 @@
             "formato": "ordenar",
             "consigna": "Ordena: «Según la encuesta, la mitad de los vecinos usa el parque.»",
             "respuesta": "According to the survey half of the neighbours use the park",
-            "feedback": "Según una fuente se dice according to + fuente; después va el dato: half of the neighbours."
+            "feedback": "Según una fuente se dice according to + fuente; después va el dato: half of the neighbours.",
+            "aceptadas": [
+              "Half of the neighbours use the park according to the survey",
+              "Half of the neighbours use the park, according to the survey",
+              "According to the survey, half of the neighbours use the park"
+            ]
           },
           {
             "formato": "elegir",
@@ -1149,15 +1163,15 @@
           },
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué frase es una opinión.",
+            "consigna": "Escucha y elige la opinión que aparece en el artículo.",
             "audio": "The article says the school has two hundred students, and that the canteen serves the best pizza in town.",
             "opciones": [
-              "That the canteen's pizza is better than any other.",
-              "That the school has two hundred students.",
-              "That the article is two pages long."
+              "The canteen's pizza is the best around.",
+              "The canteen's food is the worst around.",
+              "The school has two hundred students."
             ],
             "respuesta": 0,
-            "feedback": "«The best pizza in town» es un juicio personal; el número de alumnos es un dato."
+            "feedback": "El artículo califica la pizza como la mejor de la ciudad: es un juicio personal; el número de alumnos es un dato y la peor comida no se menciona."
           }
         ]
       }
@@ -1402,7 +1416,7 @@
             ],
             "respuesta": 0,
             "feedback": "According to + fuente ya atribuye el dato; añadir said o cambiar el orden rompe la frase.",
-            "pista": "Después de according to va solo la fuente, sin verbo."
+            "pista": "Fíjate en qué va justo después de according to: ¿un verbo o solo la fuente?"
           },
           {
             "formato": "completar",
@@ -1421,15 +1435,18 @@
             "consigna": "Ordena: «Un periodista preguntó si el mercado abriría el sábado.»",
             "respuesta": "A reporter asked whether the market would open on Saturday",
             "feedback": "La pregunta reportada lleva whether y el orden de una afirmación: the market would open.",
-            "pista": "Después de whether va el sujeto y luego would + verbo."
+            "pista": "Después de whether va el sujeto y luego would + verbo.",
+            "aceptadas": [
+              "A reporter asked if the market would open on Saturday"
+            ]
           }
         ],
         "practica": [
           {
             "formato": "completar",
-            "consigna": "Completa tres frases de un resumen con sus atribuciones.",
+            "consigna": "Completa con: testigo · confirmado · portavoz",
             "frases": [
-              "According to a ___, the water reached half a metre.",
+              "According to a ___, the street was under water.",
               "The cause has not been ___ yet.",
               "The council's ___ says the market will reopen soon."
             ],
@@ -1443,18 +1460,19 @@
               {
                 "respuesta": "confirmed",
                 "aceptadas": [
-                  "confirmed"
+                  "confirmed",
+                  "verified",
+                  "checked"
                 ]
               },
               {
                 "respuesta": "spokesperson",
                 "aceptadas": [
-                  "spokesperson",
-                  "statement"
+                  "spokesperson"
                 ]
               }
             ],
-            "feedback": "Un testigo aporta lo que vio, confirmed marca lo verificado y el portavoz es la fuente oficial."
+            "feedback": "Un testigo aporta lo que vio, confirmed marca lo verificado y el portavoz es la fuente oficial del ayuntamiento."
           },
           {
             "formato": "escribir",
@@ -1465,7 +1483,8 @@
             "aceptadas": [
               "According to the mayor the market will close on Monday for repairs.",
               "According to the mayor, the market will close on Monday because of repairs.",
-              "According to the mayor, the market closes on Monday for repairs."
+              "According to the mayor, the market closes on Monday for repairs.",
+              "The market will close on Monday for repairs, according to the mayor."
             ],
             "feedback": "La frase empieza con According to + fuente y después da el dato completo."
           },
@@ -1474,7 +1493,7 @@
             "consigna": "Escucha y elige qué responde la oficina de la alcaldesa.",
             "audio": "A reporter asked whether the traders would receive help. The mayor's office said that it was too early to confirm anything.",
             "opciones": [
-              "That nothing can be confirmed yet.",
+              "That it is still too early to be sure of anything.",
               "That the traders will get money tomorrow.",
               "That the reporter's question was wrong."
             ],
@@ -1488,17 +1507,21 @@
             "consigna": "¿Qué versión marca bien que un dato no está confirmado?",
             "opciones": [
               "The fire was started by a lamp, according to a neighbour, but the police have not confirmed it yet.",
-              "The fire was started by a lamp, and everybody knows it.",
-              "The fire was certainly started by a lamp, a witness said."
+              "The fire was started by a lamp, and everybody in the street knows it is true.",
+              "The fire was certainly started by a lamp, the newspaper said, so there is no doubt."
             ],
             "respuesta": 0,
-            "feedback": "Solo la primera atribuye el dato a un vecino y avisa de que la policía aún no lo ha confirmado."
+            "feedback": "Solo la versión que atribuye el dato a un vecino y avisa de que la policía aún no lo ha confirmado marca bien la duda."
           },
           {
             "formato": "ordenar",
             "consigna": "Ordena: «Según la alcaldesa, el agua llegó hasta la puerta.»",
             "respuesta": "According to the mayor the water reached the door",
-            "feedback": "Primero la fuente (according to the mayor) y después el dato atribuido."
+            "feedback": "La fuente (according to the mayor) puede ir al principio o al final; el dato atribuido es el agua que llegó a la puerta.",
+            "aceptadas": [
+              "The water reached the door according to the mayor",
+              "The water reached the door, according to the mayor"
+            ]
           },
           {
             "formato": "escuchar",
@@ -1552,20 +1575,32 @@
                   "no one has confirmed",
                   "nobody has been able to confirm",
                   "cannot be confirmed",
-                  "not been able to confirm"
+                  "not been able to confirm",
+                  "unconfirmed",
+                  "not yet confirmed",
+                  "hasn't been confirmed",
+                  "has yet to be confirmed",
+                  "remains unconfirmed",
+                  "cannot confirm",
+                  "can't confirm"
                 ],
                 [
                   "reportedly",
                   "allegedly",
                   "is said to",
                   "according to one source",
-                  "one source said"
+                  "one source said",
+                  "is believed to",
+                  "supposedly",
+                  "is thought to"
                 ],
                 [
                   "asked whether",
                   "asked if",
                   "wanted to know whether",
-                  "wanted to know if"
+                  "wanted to know if",
+                  "asked me whether",
+                  "a journalist asked"
                 ]
               ]
             }
@@ -1590,14 +1625,15 @@
             "respuesta": "verify",
             "aceptadas": [
               "verify",
-              "confirm"
+              "confirm",
+              "check"
             ],
             "feedback": "Verify es el verbo para comprobar que una cifra o un dato es cierto."
           },
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige quién niega lo que dijo el testigo.",
-            "audio": "According to a witness, the bus was full. The driver denied it, and the company said it could not check the number of passengers.",
+            "audio": "According to a student, the bus was full. The driver denied it, and the company said it could not check the number of passengers.",
             "opciones": [
               "The driver.",
               "The company.",
@@ -1798,13 +1834,13 @@
           },
           {
             "hablante": "Carlos",
-            "texto": "So the post is misleading. Did anyone admit a plan to sell it?",
-            "traduccion": "Entonces la publicación es engañosa. ¿Alguien reconoció un plan para venderla?"
+            "texto": "So the post is misleading. Did anyone admit planning to sell it?",
+            "traduccion": "Entonces la publicación es engañosa. ¿Alguien reconoció que planeaba venderla?"
           },
           {
             "hablante": "Sara",
-            "texto": "No. A spokesperson denied any plan to sell it.",
-            "traduccion": "No. Un portavoz negó cualquier plan de venderla."
+            "texto": "No. A spokesperson denied planning to sell it.",
+            "traduccion": "No. Un portavoz negó estar planeando venderla."
           },
           {
             "hablante": "Carlos",
@@ -1861,34 +1897,66 @@
             "consigna": "Ordena: «Comprueba la publicación con dos fuentes antes de compartirla.»",
             "respuesta": "Check the post with two sources before sharing it",
             "feedback": "Después de before va un verbo en -ing: before sharing it.",
-            "pista": "Después de before va un verbo terminado en -ing."
+            "pista": "Después de before va un verbo terminado en -ing.",
+            "aceptadas": [
+              "Before sharing it, check the post with two sources",
+              "Before sharing it check the post with two sources"
+            ]
           }
         ],
         "practica": [
           {
             "formato": "elegir",
             "consigna": "¿Qué frase atribuye bien lo que dice el periódico?",
-            "texto": "Post: Five thousand people signed the petition. Newspaper: about five hundred people signed it.",
+            "texto": "Post: The bus fare will rise by five dollars. Newspaper: the fare will rise by about ten cents.",
             "opciones": [
-              "According to the newspaper, only about five hundred people signed the petition.",
-              "According to the newspaper said, five thousand people signed the petition.",
-              "The newspaper denied to sign the petition."
+              "According to the newspaper, the fare will rise by only about ten cents.",
+              "According to the newspaper said, the fare will rise by five dollars.",
+              "The newspaper accused the bus company to raise the fare by five dollars."
             ],
             "respuesta": 0,
-            "feedback": "According to + fuente da la cifra del periódico; las otras opciones mezclan said con according to o usan mal denied."
+            "feedback": "According to + fuente da la cifra real del periódico; las otras opciones mezclan said con according to o usan mal accuse."
           },
           {
             "formato": "escribir",
             "consigna": "Corrige la publicación citando al ayuntamiento.",
-            "texto": "Publicación: «The pool closes forever.» Comunicado del ayuntamiento: cerrará seis semanas por reparaciones. Escribe una frase de aclaración con according to.",
+            "texto": "Publicación: «The park closes forever.» Comunicado del ayuntamiento: el parque cerrará dos semanas por reparaciones. Escribe una frase de aclaración con according to.",
             "textoIdioma": "es",
-            "respuesta": "According to the council, the pool will close for six weeks for repairs, not forever.",
+            "respuesta": "According to the council, the park will close for two weeks for repairs, not forever.",
             "aceptadas": [
-              "According to the council the pool will close for six weeks for repairs, not forever.",
-              "According to the council, the pool will only close for six weeks for repairs.",
-              "According to the council, the pool will close for repairs for six weeks, not for ever."
+              "According to the council the park will close for two weeks for repairs, not forever.",
+              "According to the council, the park will only close for two weeks for repairs.",
+              "According to the council, the park will close for repairs for two weeks, not for ever.",
+              "The park will close for two weeks for repairs, not forever, according to the council."
             ],
-            "feedback": "La aclaración cita la fuente con according to y contrasta el dato real con la exageración."
+            "feedback": "La aclaración cita la fuente con according to y contrasta el dato real (dos semanas) con la exageración.",
+            "rubrica": {
+              "palabras": [
+                9,
+                24
+              ],
+              "evidencias": [
+                [
+                  "according to the council",
+                  "the council's statement",
+                  "the council said",
+                  "the council says",
+                  "the statement says"
+                ],
+                [
+                  "two weeks",
+                  "2 weeks",
+                  "14 days",
+                  "a fortnight"
+                ],
+                [
+                  "not forever",
+                  "not for ever",
+                  "not for good",
+                  "only"
+                ]
+              ]
+            }
           },
           {
             "formato": "escuchar",
@@ -1896,8 +1964,8 @@
             "audio": "Sara shared the post at once. Later, Carlos showed her the council statement, so she deleted it and wrote a correction.",
             "opciones": [
               "She removed the post and posted a correction.",
-              "She shared it with more friends.",
-              "She wrote a new rumour."
+              "She removed the post but said nothing else.",
+              "She kept the post and added the council's statement."
             ],
             "respuesta": 0,
             "feedback": "Sara borró la publicación y escribió una rectificación al ver el comunicado."
@@ -1906,37 +1974,37 @@
         "evaluacion": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué titular sobre la piscina es el más neutro?",
+            "consigna": "¿Qué titular sobre la biblioteca es el más neutro?",
             "opciones": [
-              "Pool to close for six weeks for repairs",
-              "Shock as council closes pool",
-              "Crisis: pool closed forever?"
+              "Library to open an hour later on Fridays",
+              "Shock as council cuts library hours",
+              "Crisis: library hours slashed?"
             ],
             "respuesta": 0,
-            "feedback": "El primer titular da los hechos; shock y crisis son palabras con carga que dramatizan."
+            "feedback": "El titular que solo da el dato es el neutro; shock y crisis son palabras con carga que dramatizan un cambio pequeño."
           },
           {
             "formato": "elegir",
-            "consigna": "El portavoz dijo: «We did not sell the pool». ¿Cómo se reporta?",
+            "consigna": "El gerente dijo: «We did not close the shop early». ¿Cómo se reporta?",
             "opciones": [
-              "The spokesperson denied selling the pool.",
-              "The spokesperson admitted selling the pool.",
-              "The spokesperson denied to sell the pool."
+              "The manager denied closing the shop early.",
+              "The manager admitted closing the shop early.",
+              "The manager denied to close the shop early."
             ],
             "respuesta": 0,
-            "feedback": "El portavoz niega una venta pasada y deny se construye con -ing; admitted diría lo contrario."
+            "feedback": "El gerente niega una acción pasada y deny se construye con -ing; admitted diría lo contrario."
           },
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige qué dato de la publicación se comprueba en la web oficial.",
-            "audio": "The post says the pool opened in 1998 and that the mayor obviously lied about the repairs. The council website gives the opening year, but nobody has any evidence about the repairs.",
+            "audio": "The post says the pool has eight lanes and that the mayor obviously lied about the repairs. The council website lists the lanes, but nobody has any evidence about the repairs.",
             "opciones": [
-              "The year the pool opened.",
+              "The number of lanes in the pool.",
               "That the mayor lied about the repairs.",
               "That everybody loves the pool."
             ],
             "respuesta": 0,
-            "feedback": "El año de apertura se comprueba en la web del ayuntamiento; lo de que el alcalde mintió es un juicio sin pruebas."
+            "feedback": "El número de carriles se comprueba en la web del ayuntamiento; lo de que el alcalde mintió es un juicio sin pruebas."
           },
           {
             "formato": "escribir",
@@ -1960,7 +2028,10 @@
                   "post says",
                   "post states",
                   "claims that",
-                  "says that the"
+                  "says that the",
+                  "the post said",
+                  "says that the pool",
+                  "viral post"
                 ],
                 [
                   "according to",
@@ -1986,7 +2057,12 @@
                   "allegedly",
                   "rumour",
                   "hoax",
-                  "misleading"
+                  "misleading",
+                  "not been confirmed",
+                  "hasn't been confirmed",
+                  "cannot be confirmed",
+                  "still unknown",
+                  "exaggerat"
                 ],
                 [
                   "before you share",
@@ -2003,9 +2079,9 @@
         "repaso": [
           {
             "formato": "ordenar",
-            "consigna": "Ordena: «El periódico informó de que solo unas quinientas personas firmaron.»",
-            "respuesta": "The newspaper reported that only about five hundred people signed",
-            "feedback": "Reported that + dato atribuye la cifra al periódico."
+            "consigna": "Ordena: «El periódico informó de que el concierto se canceló por la lluvia.»",
+            "respuesta": "The newspaper reported that the concert was cancelled because of rain",
+            "feedback": "Reported that + dato atribuye la noticia al periódico."
           },
           {
             "formato": "completar",
@@ -2024,8 +2100,8 @@
             "audio": "Mia read that the park was closed. A witness said the gate was locked for one day only, and the official statement agreed. Mia decided the claim exaggerated the story.",
             "opciones": [
               "That the claim makes the closure sound bigger than it was.",
-              "That the park closed for good.",
-              "That the witness was lying."
+              "That the park closed for good and nobody told the public.",
+              "That the witness was lying to the newspaper."
             ],
             "respuesta": 0,
             "feedback": "Mia contrasta al testigo con el comunicado oficial y concluye que la afirmación exagera."
@@ -2033,5 +2109,18 @@
         ]
       }
     }
-  ]
+  ],
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Quitados solapes de respuesta entre ítems: clase 65 separa el escenario de práctica (tarifa de bus, parque) del de evaluación (biblioteca, gerente, carriles de la piscina); clase 64 y 62 sin repeticiones de palabra-respuesta en audios/consignas.",
+      "Escuchas reescritas para exigir escucha (61 p2/r2, 63 p2/r2, 65 p2); distractores más plausibles y sin respuesta más larga que las demás.",
+      "Completar multiparte con una sola respuesta defendible: aceptadas ampliadas (61 p0, 63 g1, 64 p0/r1) o consigna con pista de traducción; 62 p0 tercera frase contextualizada.",
+      "Feedback sin alusiones a posición de opción; pistas de guiada suavizadas para no dar la respuesta literal.",
+      "65 p1 con rúbrica (modelo de 15 palabras); 64 e3 y 65 e3 rúbricas con más variantes; ordenar con órdenes alternativos en aceptadas.",
+      "Español neutro (tarifas en lugar de billetes). Escritura evaluada con modelos de 116-129 palabras (>=50% del rango del mapa)."
+    ]
+  }
 }

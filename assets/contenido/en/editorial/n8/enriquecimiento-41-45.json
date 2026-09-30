@@ -1,0 +1,654 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "classes": {
+    "en.n8.class-41": {
+      "explicacion": {
+        "titulo": "Modismos de emociones y dinero: el significado no está en cada palabra",
+        "texto": "Un modismo es una expresión fija cuyo significado no sale de traducir palabra por palabra: under the weather no habla del clima, sino de sentirse un poco enfermo. Para entenderlo, lee lo que lo rodea: aparecen pistas como a cold, exhausted o the job. Algunos modismos engañan porque el español usa una imagen parecida con otro sentido: on cloud nine es felicidad total, pero «estar en las nubes» es estar distraído. Primero reconócelo por el contexto; después úsalo tal cual, sin cambiar sus palabras."
+      },
+      "patron": {
+        "texto": "Modismo + pista de contexto = significado:",
+        "formula": [
+          {
+            "texto": "She is on cloud nine,",
+            "nota": "modismo: sentido figurado, no se traduce palabra por palabra"
+          },
+          {
+            "texto": "she is thrilled",
+            "nota": "pista del contexto: confirma la emoción"
+          },
+          {
+            "texto": "= very happy.",
+            "nota": "significado: lo que quiere decir el hablante"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It will cost an eye of the face.",
+          "correcto": "It will cost an arm and a leg.",
+          "explicacion": "Calco de «costar un ojo de la cara». En inglés la imagen es otra: an arm and a leg."
+        },
+        {
+          "incorrecto": "I am in the clouds because I won the prize.",
+          "correcto": "I am on cloud nine because I won the prize.",
+          "explicacion": "«Estar en las nubes» en español es estar distraído; en inglés la felicidad se dice on cloud nine."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia no fue al concierto del sábado y Tom le pregunta por qué.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Why didn't you come to the concert, Mia?",
+            "traduccion": "¿Por qué no viniste al concierto, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'm a bit under the weather. I have a cold and I'm exhausted.",
+            "traduccion": "Estoy un poco pachucha. Tengo un resfriado y estoy agotada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh no! And the tickets cost an arm and a leg, so I'm broke now.",
+            "traduccion": "¡Vaya! Y las entradas costaron un ojo de la cara, así que ahora estoy sin dinero."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I will rest. And you should save for a rainy day!",
+            "traduccion": "Descansaré. ¡Y tú deberías ahorrar para tiempos difíciles!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no fue Mia al concierto?",
+          "opciones": [
+            {
+              "es": "Porque estaba un poco enferma y cansada."
+            },
+            {
+              "es": "Porque las entradas costaban demasiado para ella."
+            },
+            {
+              "es": "Porque estaba muy feliz y prefirió celebrar en casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que está «under the weather»: tiene un resfriado y está agotada. Lo de las entradas caras es problema de Tom."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Modismo",
+          "Significado",
+          "Tema"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "under the weather"
+            },
+            {
+              "texto": "un poco enfermo"
+            },
+            {
+              "texto": "salud"
+            }
+          ],
+          [
+            {
+              "texto": "on cloud nine"
+            },
+            {
+              "texto": "muy feliz"
+            },
+            {
+              "texto": "emociones"
+            }
+          ],
+          [
+            {
+              "texto": "feel blue"
+            },
+            {
+              "texto": "estar triste"
+            },
+            {
+              "texto": "emociones"
+            }
+          ],
+          [
+            {
+              "texto": "break the bank"
+            },
+            {
+              "texto": "costar demasiado"
+            },
+            {
+              "texto": "dinero"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-42": {
+      "explicacion": {
+        "titulo": "Modismos flexibles y modismos fijos",
+        "texto": "Hay dos tipos de modismos. Los flexibles son verbos con un complemento fijo: el verbo cambia de tiempo y persona (spill → spilled, is spilling) y el posesivo concuerda con el sujeto (pull my / your / his leg). Las demás palabras no se tocan: si dices spill the secret, ya no es el modismo. Los fijos (once in a blue moon, out of the blue, by and large) no admiten ningún cambio: ni plural, ni otro artículo, ni otro orden. Ante la duda, cópialo tal como lo aprendiste."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo del modismo (tiempo y persona) + resto fijo:",
+        "formula": [
+          {
+            "texto": "Ana",
+            "nota": "sujeto: decide la persona y el posesivo"
+          },
+          {
+            "texto": "spilled",
+            "nota": "el verbo cambia: tiempo y persona"
+          },
+          {
+            "texto": "the beans",
+            "nota": "resto fijo: no se modifica"
+          },
+          {
+            "texto": "yesterday.",
+            "nota": "el tiempo lo marca la frase"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It happens one time in a blue moon.",
+          "correcto": "It happens once in a blue moon.",
+          "explicacion": "Once in a blue moon es fijo: no se cambia once por one time ni se añade otra palabra."
+        },
+        {
+          "incorrecto": "Are you pulling me the leg?",
+          "correcto": "Are you pulling my leg?",
+          "explicacion": "Calco de «¿me estás tomando el pelo?»: en inglés se usa el posesivo (my leg), no me + the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo preparan una fiesta sorpresa para Dan, pero Dan parece saberlo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Dan knows about the party. Who spilled the beans?",
+            "traduccion": "Dan sabe lo de la fiesta. ¿Quién reveló el secreto?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Not me! He called me out of the blue and asked about the cake.",
+            "traduccion": "¡Yo no! Me llamó de repente y preguntó por la tarta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Are you pulling my leg, Leo?",
+            "traduccion": "¿Me estás tomando el pelo, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, I'm serious. He sounded happy.",
+            "traduccion": "No, hablo en serio. Sonaba contento."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Dan que sorprendió a Leo?",
+          "opciones": [
+            {
+              "es": "Lo llamó de repente y preguntó por la tarta."
+            },
+            {
+              "es": "Se puso furioso y canceló la fiesta."
+            },
+            {
+              "es": "Le contó a Sara el secreto de la fiesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que Dan lo llamó «out of the blue» (sin avisar) y preguntó por la tarta; Dan ni se enfadó ni reveló nada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Modismo",
+          "Tipo",
+          "Formas posibles"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "spill the beans"
+            },
+            {
+              "texto": "flexible"
+            },
+            {
+              "texto": "spills / spilled / is spilling the beans"
+            }
+          ],
+          [
+            {
+              "texto": "hit the roof"
+            },
+            {
+              "texto": "flexible"
+            },
+            {
+              "texto": "hit / hits / is hitting the roof"
+            }
+          ],
+          [
+            {
+              "texto": "pull my leg"
+            },
+            {
+              "texto": "flexible con posesivo"
+            },
+            {
+              "texto": "pull my / your / his / her leg"
+            }
+          ],
+          [
+            {
+              "texto": "once in a blue moon"
+            },
+            {
+              "texto": "fijo"
+            },
+            {
+              "texto": "no cambia"
+            }
+          ],
+          [
+            {
+              "texto": "out of the blue"
+            },
+            {
+              "texto": "fijo"
+            },
+            {
+              "texto": "no cambia"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-43": {
+      "explicacion": {
+        "titulo": "Literal o figurado: lo decide el contexto",
+        "texto": "Un mismo modismo puede usarse en sentido literal o figurado. Decide con el contexto: si hay un objeto real (hielo en un estanque, un pastel en la mesa), es literal; si se habla de una situación social, una tarea o una decisión (an awkward meeting, an exam), es figurado. En una charla en audio, los modismos suelen ir enlazados sin pausas: escucha la frase entera antes de decidir y pregúntate qué sentido tendría si fuera literal."
+      },
+      "patron": {
+        "texto": "Modismo + contexto: ¿objeto real o situación?",
+        "formula": [
+          {
+            "texto": "The boys broke the ice on the pond,",
+            "nota": "contexto literal: hay un objeto real (hielo, estanque)"
+          },
+          {
+            "texto": "Ana told a joke to break the ice.",
+            "nota": "contexto figurado: una situación social incómoda"
+          },
+          {
+            "texto": "The exam was a piece of cake.",
+            "nota": "figurado: hablamos de una tarea, no de un pastel"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The ball is on your court.",
+          "correcto": "The ball is in your court.",
+          "explicacion": "La preposición del modismo es in: the ball is in your court."
+        },
+        {
+          "incorrecto": "I need to hit the book tonight.",
+          "correcto": "I need to hit the books tonight.",
+          "explicacion": "El modismo va en plural: hit the books; en singular pierde su sentido."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan después del examen de inglés.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "How was the exam, Mia?",
+            "traduccion": "¿Cómo fue el examen, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "A piece of cake! I finished in twenty minutes.",
+            "traduccion": "¡Pan comido! Terminé en veinte minutos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Lucky you. I need to hit the books tonight.",
+            "traduccion": "Qué suerte. Yo tengo que ponerme a estudiar esta noche."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Let's study together, but let's call it a day at nine.",
+            "traduccion": "Estudiemos juntos, pero dejémoslo por hoy a las nueve."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Mia con «call it a day at nine»?",
+          "opciones": [
+            {
+              "es": "Dejar de estudiar a las nueve."
+            },
+            {
+              "es": "Llamar a un amigo a las nueve."
+            },
+            {
+              "es": "Empezar el examen a las nueve."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "«Call it a day» significa parar por hoy: Mia propone estudiar juntos y terminar a las nueve."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Modismo",
+          "Sentido literal",
+          "Sentido figurado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "break the ice"
+            },
+            {
+              "texto": "romper hielo de verdad"
+            },
+            {
+              "texto": "relajar el ambiente"
+            }
+          ],
+          [
+            {
+              "texto": "a piece of cake"
+            },
+            {
+              "texto": "un trozo de pastel"
+            },
+            {
+              "texto": "algo muy fácil"
+            }
+          ],
+          [
+            {
+              "texto": "hit the books"
+            },
+            {
+              "texto": "golpear libros"
+            },
+            {
+              "texto": "estudiar mucho"
+            }
+          ],
+          [
+            {
+              "texto": "the ball is in your court"
+            },
+            {
+              "texto": "la pelota está en tu pista"
+            },
+            {
+              "texto": "te toca decidir"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-44": {
+      "explicacion": {
+        "titulo": "Modismos con medida: situación, lector y dosis",
+        "texto": "Usar bien los modismos es cuestión de situación y de dosis. Con amigos y en mensajes informales suenan naturales; en una carta formal, un informe o un correo a alguien que no conoces es mejor el inglés claro (plain English). Regla práctica: un modismo por idea y, como mucho, dos o tres en un texto corto. Antes de usarlo, comprueba que entiendes su significado, que el tono encaja con el lector y que el mensaje seguiría claro sin él."
+      },
+      "patron": {
+        "texto": "Idea clara + un modismo bien elegido + versión sencilla:",
+        "formula": [
+          {
+            "texto": "We're all in the same boat,",
+            "nota": "modismo informal: uno solo por idea"
+          },
+          {
+            "texto": "so let's study together.",
+            "nota": "el resto del mensaje sigue claro"
+          },
+          {
+            "texto": "In plain English: we all have the same problem.",
+            "nota": "versión sin modismos, para lectores formales o que no lo conocen"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Sir, I'm under the weather, so the ball is in your court.",
+          "correcto": "Dear Sir, I am ill, so please tell me your decision.",
+          "explicacion": "En una carta formal se sustituyen los modismos por inglés claro: I am ill y tell me your decision."
+        },
+        {
+          "incorrecto": "I'm in the same boat with you.",
+          "correcto": "I'm in the same boat as you.",
+          "explicacion": "Después de the same se usa as: the same boat as you, no with."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo revisan la nota que Ana va a mandar a su amiga Mia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I wrote: Hi Mia! We're all in the same boat, so let's study together.",
+            "traduccion": "Escribí: ¡Hola, Mia! Estamos todos en la misma situación, así que estudiemos juntos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That's good. It's informal, and one idiom is enough.",
+            "traduccion": "Está bien. Es informal y con un modismo basta."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Should I add another idiom, like bite the bullet?",
+            "traduccion": "¿Debería añadir otro modismo, como bite the bullet?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. Don't overdo it. Keep the tone friendly and simple.",
+            "traduccion": "No. No exageres. Mantén un tono amable y sencillo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué consejo da Leo sobre los modismos?",
+          "opciones": [
+            {
+              "es": "Usar pocos y mantener un tono sencillo."
+            },
+            {
+              "es": "Usar muchos para sonar más natural."
+            },
+            {
+              "es": "No usar ninguno con los amigos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «don't overdo it»: un modismo basta y el tono debe ser amable y sencillo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Lector",
+          "Mejor opción"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "nota a un amigo"
+            },
+            {
+              "texto": "informal"
+            },
+            {
+              "texto": "uno o dos modismos"
+            }
+          ],
+          [
+            {
+              "texto": "correo a un jefe nuevo"
+            },
+            {
+              "texto": "formal"
+            },
+            {
+              "texto": "inglés claro"
+            }
+          ],
+          [
+            {
+              "texto": "mensaje a alguien de otro país"
+            },
+            {
+              "texto": "no sabes qué entenderá"
+            },
+            {
+              "texto": "inglés claro o modismo explicado"
+            }
+          ],
+          [
+            {
+              "texto": "discurso breve"
+            },
+            {
+              "texto": "público mixto"
+            },
+            {
+              "texto": "un modismo bien elegido"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-45": {
+      "explicacion": {
+        "titulo": "Una anécdota con modismos y glosas",
+        "texto": "Una anécdota con modismos se sostiene en tres piezas: una secuencia clara (first, then, luckily…), pocos modismos bien integrados y una aclaración cuando el oyente puede no conocerlos. Para glosar un modismo añade which means…, in other words… o that is… con palabras sencillas justo después. No expliques todos, solo los menos conocidos (the last straw, in the nick of time). Y cuida la dosis: cuatro modismos en un día caótico bastan; más y la historia suena forzada."
+      },
+      "patron": {
+        "texto": "Hecho + modismo + glosa (which means…):",
+        "formula": [
+          {
+            "texto": "My bus broke down,",
+            "nota": "hecho: lo que ocurrió, en pasado simple"
+          },
+          {
+            "texto": "and that was the last straw,",
+            "nota": "modismo integrado en la historia"
+          },
+          {
+            "texto": "which means I could not take any more.",
+            "nota": "glosa: explicación sencilla para quien no conoce el modismo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It was the last straw, what means I was angry.",
+          "correcto": "It was the last straw, which means I was angry.",
+          "explicacion": "Para explicar, el inglés usa which means; what means es un calco del español «lo que significa»."
+        },
+        {
+          "incorrecto": "We arrived in the nick of the time.",
+          "correcto": "We arrived in the nick of time.",
+          "explicacion": "In the nick of time es fijo y no lleva the delante de time."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo cuenta a Sara, que aprende inglés, su lunes caótico.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Monday was chaotic. My bus broke down, and then my phone died. That was the last straw!",
+            "traduccion": "El lunes fue caótico. Se averió mi autobús y luego se quedó sin batería mi teléfono. ¡Fue la gota que colmó el vaso!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The last straw? What does that mean?",
+            "traduccion": "¿«The last straw»? ¿Qué significa eso?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It means I could not take any more. But the meeting was cancelled, so it was a blessing in disguise.",
+            "traduccion": "Significa que ya no podía más. Pero la reunión se canceló, así que fue un mal que vino bien."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "In other words, something bad became something good.",
+            "traduccion": "Dicho de otra manera, algo malo se volvió bueno."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere decir «the last straw» para Leo?",
+          "opciones": [
+            {
+              "es": "Que ya no podía aguantar más."
+            },
+            {
+              "es": "Que perdió la reunión por culpa del autobús."
+            },
+            {
+              "es": "Que fue lo mejor de su día."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lo explica con «It means I could not take any more»: el teléfono sin batería fue lo último que pudo soportar."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "abrir la historia"
+            },
+            {
+              "texto": "Let me tell you an anecdote about…"
+            }
+          ],
+          [
+            {
+              "texto": "secuenciar"
+            },
+            {
+              "texto": "First… then… luckily…"
+            }
+          ],
+          [
+            {
+              "texto": "glosar un modismo"
+            },
+            {
+              "texto": "…, which means… / …, in other words…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

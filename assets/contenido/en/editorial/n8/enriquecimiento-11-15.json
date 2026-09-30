@@ -1,0 +1,627 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 11,
+    "end": 15
+  },
+  "classes": {
+    "en.n8.class-11": {
+      "explicacion": {
+        "titulo": "Lo que dice y lo que quiere decir",
+        "texto": "Muchas frases en inglés dicen una cosa y piden otra. El significado literal es lo que dicen las palabras; el implícito es lo que el hablante quiere que entiendas. Para distinguirlos pregúntate: ¿quién lo dice?, ¿en qué situación? y ¿qué haría alguien que solo oyera las palabras? Si la frase no encaja con la situación (hace frío, pero nadie habla del clima), busca la petición, la queja o el rechazo que hay detrás. En español pasa igual: «¡Qué calor hace aquí!» suele pedir que abran la ventana."
+      },
+      "patron": {
+        "texto": "Frase + situación = mensaje implícito:",
+        "formula": [
+          {
+            "texto": "It's a bit cold in here.",
+            "nota": "lo que dice: hace frío (literal)"
+          },
+          {
+            "texto": "The window is open.",
+            "nota": "la situación: un dato del contexto que cambia el sentido"
+          },
+          {
+            "texto": "= Please close it.",
+            "nota": "lo que quiere: una petición implícita"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The project implies ten people.",
+          "correcto": "The project involves ten people.",
+          "explicacion": "«Implicar» en español suele ser «involucrar»; en inglés imply es «dar a entender», y para personas o partes se usa involve."
+        },
+        {
+          "incorrecto": "She complained me about the noise.",
+          "correcto": "She complained to me about the noise.",
+          "explicacion": "Complain lleva to delante de la persona y about delante del motivo; no admite complemento directo de persona."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara están en el salón; la ventana está abierta y hace frío.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "It's a bit cold in here.",
+            "traduccion": "Hace un poco de frío aquí."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Do you want a jacket?",
+            "traduccion": "¿Quieres una chaqueta?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, thanks. I'm just saying the window is open.",
+            "traduccion": "No, gracias. Solo digo que la ventana está abierta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Oh, I see. I'll close it.",
+            "traduccion": "Ah, ya entiendo. La cerraré."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quería Tom de verdad?",
+          "opciones": [
+            {
+              "es": "Que Sara cerrara la ventana."
+            },
+            {
+              "es": "Que Sara le prestara una chaqueta."
+            },
+            {
+              "es": "Saber qué tiempo hacía fuera."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom rechaza la chaqueta y señala la ventana abierta: su frase sobre el frío era una indirecta para que Sara la cierre."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Réplica",
+          "Literal",
+          "Implícito"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Could you be any louder?"
+            },
+            {
+              "texto": "Pregunta si puedes hacer más ruido"
+            },
+            {
+              "texto": "Haz menos ruido"
+            }
+          ],
+          [
+            {
+              "texto": "I'll think about it."
+            },
+            {
+              "texto": "Lo pensaré"
+            },
+            {
+              "texto": "Probablemente no"
+            }
+          ],
+          [
+            {
+              "texto": "Is that your third coffee?"
+            },
+            {
+              "texto": "Pregunta cuántos cafés llevas"
+            },
+            {
+              "texto": "Bebes demasiado"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-12": {
+      "explicacion": {
+        "titulo": "Coletillas que preguntan y coletillas que retan",
+        "texto": "Una coletilla normal lleva polaridad opuesta a la frase (afirmativa + negativa, o al revés) y pregunta de verdad: You didn't promise, did you? Cuando la coletilla tiene la misma polaridad (afirmativa + afirmativa), ya no pregunta: reta, se burla o reprocha. Quien habla no espera información; muestra duda, fastidio o broma. Tras un imperativo, will you? pide algo con prisa. Como aquí no oyes la entonación, fíjate en la polaridad y en el contexto."
+      },
+      "patron": {
+        "texto": "Frase + coletilla:",
+        "formula": [
+          {
+            "texto": "Oh, you're the expert now,",
+            "nota": "frase afirmativa: lo que el hablante dice sin creerlo"
+          },
+          {
+            "texto": "are you?",
+            "nota": "coletilla afirmativa: misma polaridad = reto o burla"
+          },
+          {
+            "texto": "You didn't promise, did you?",
+            "nota": "polaridad opuesta = pregunta real para confirmar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You can't fix it, isn't it?",
+          "correcto": "You can't fix it, can you?",
+          "explicacion": "La coletilla repite el auxiliar de la frase (can); «isn't it» no es un comodín como el español «¿no?»."
+        },
+        {
+          "incorrecto": "You didn't promise to pay, didn't you?",
+          "correcto": "You didn't promise to pay, did you?",
+          "explicacion": "Tras una frase negativa, la coletilla de verdad es afirmativa; repetir la negación no pregunta lo mismo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo prepara una tarta y su hermana Mia duda de que la termine bien.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I can make this cake by myself.",
+            "traduccion": "Puedo hacer esta tarta yo solo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "You can make it by yourself, can you?",
+            "traduccion": "¿Puedes hacerla tú solo, eh?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes! Why? Don't you believe me?",
+            "traduccion": "¡Sí! ¿Por qué? ¿No me crees?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Last time you forgot the sugar, remember?",
+            "traduccion": "La última vez olvidaste el azúcar, ¿recuerdas?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué muestra Mia con su coletilla?",
+          "opciones": [
+            {
+              "es": "Que duda de que Leo pueda hacerlo solo."
+            },
+            {
+              "es": "Que quiere aprender la receta."
+            },
+            {
+              "es": "Que está segura de que Leo lo hará bien."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo pregunta «Don't you believe me?» y Mia recuerda que olvidó el azúcar: su coletilla afirmativa expresa duda."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Polaridad",
+          "Ejemplo",
+          "Intención"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Opuesta"
+            },
+            {
+              "texto": "You didn't promise, did you?"
+            },
+            {
+              "texto": "Confirmar un dato"
+            }
+          ],
+          [
+            {
+              "texto": "Misma (afirmativa)"
+            },
+            {
+              "texto": "You can fix it, can you?"
+            },
+            {
+              "texto": "Retar o dudar"
+            }
+          ],
+          [
+            {
+              "texto": "Misma (afirmativa)"
+            },
+            {
+              "texto": "Too lazy to cook, are you?"
+            },
+            {
+              "texto": "Reprochar o bromear"
+            }
+          ],
+          [
+            {
+              "texto": "Imperativo"
+            },
+            {
+              "texto": "Turn it down, will you?"
+            },
+            {
+              "texto": "Pedir con impaciencia"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-13": {
+      "explicacion": {
+        "titulo": "Atenuación e ironía: cuando las palabras no encajan",
+        "texto": "El inglés cotidiano suele decir menos de lo que siente (understatement): «not bad» suele ser «muy bueno», «a bit late» puede ser «dos horas tarde» y «a small problem» puede ser un desastre. La ironía dice lo contrario de lo que significa: «Brilliant!» cuando todo sale mal. Para interpretarlas fíjate en tres pistas: la situación (¿de verdad es bueno?), el tono o las palabras exageradas, y la reacción de los demás. Si la frase contradice los hechos, es ironía; si los minimiza, es atenuación."
+      },
+      "patron": {
+        "texto": "Palabras suaves o positivas + hechos que las contradicen:",
+        "formula": [
+          {
+            "texto": "We have a small problem,",
+            "nota": "palabras suaves: atenuación"
+          },
+          {
+            "texto": "(the flood is in the kitchen)",
+            "nota": "hechos: mucho más graves que lo dicho"
+          },
+          {
+            "texto": "= a big problem.",
+            "nota": "significado real: lo contrario de «pequeño»"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He was sarcastical when he said brilliant.",
+          "correcto": "He was sarcastic when he said brilliant.",
+          "explicacion": "El adjetivo inglés es sarcastic, sin -al; en español «sarcástico» no lleva esa terminación."
+        },
+        {
+          "incorrecto": "They said us that the concert was not bad.",
+          "correcto": "They told us that the concert was not bad.",
+          "explicacion": "Say no admite complemento de persona directo: con «a nosotros» se usa tell."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le cuenta a Ana cómo fue el concierto al que fue anoche.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "How was the concert?",
+            "traduccion": "¿Qué tal el concierto?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Not bad.",
+            "traduccion": "No estuvo mal."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Only not bad?",
+            "traduccion": "¿Solo no estuvo mal?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Well, the crowd sang every song, the band played three extra songs and we stayed until midnight.",
+            "traduccion": "Bueno, el público cantó todas las canciones, la banda tocó tres más y nos quedamos hasta medianoche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué piensa Carlos del concierto?",
+          "opciones": [
+            {
+              "es": "Que le gustó mucho."
+            },
+            {
+              "es": "Que fue mediocre."
+            },
+            {
+              "es": "Que se aburrió y se fue pronto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «not bad», pero describe un público que canta y una noche que llega hasta medianoche: es una atenuación de algo muy bueno."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Figura",
+          "Dice",
+          "Quiere decir"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Atenuación"
+            },
+            {
+              "texto": "not bad"
+            },
+            {
+              "texto": "muy bueno"
+            }
+          ],
+          [
+            {
+              "texto": "Atenuación"
+            },
+            {
+              "texto": "a bit late"
+            },
+            {
+              "texto": "muy tarde"
+            }
+          ],
+          [
+            {
+              "texto": "Ironía"
+            },
+            {
+              "texto": "brilliant!"
+            },
+            {
+              "texto": "qué desastre"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-14": {
+      "explicacion": {
+        "titulo": "Sugerir en lugar de decir: rechazar, criticar y pedir con tacto",
+        "texto": "Para rechazar, pedir o criticar sin ser brusco, el inglés prefiere sugerir: «I'd love to, but…» + excusa = no; «I might have plans» = probablemente no; «interesting» tras una pausa = no me gusta; «It's a long way home, isn't it?» = llévame. La question tag invita al otro a confirmar y hace amable la indirecta. Si no te entienden, aclara sin disculparte de más: «Let me clarify…». Sugerir no es mentir: la excusa debe ser verdadera o al menos posible."
+      },
+      "patron": {
+        "texto": "Agradecer + I'd love to, but + excusa / pista + tag:",
+        "formula": [
+          {
+            "texto": "Thanks for the invitation!",
+            "nota": "agradecer primero suaviza el mensaje"
+          },
+          {
+            "texto": "I'd love to, but I might have plans.",
+            "nota": "deseo + but + excusa: rechazo implícito"
+          },
+          {
+            "texto": "It's late, isn't it?",
+            "nota": "observación + tag: sugerencia que pide confirmar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Thank you, but I prefer no.",
+          "correcto": "Thank you, but I'd rather not.",
+          "explicacion": "«Prefiero que no» se dice I'd rather not; «I prefer no» es un calco del español."
+        },
+        {
+          "incorrecto": "It's a long way to home, isn't it?",
+          "correcto": "It's a long way home, isn't it?",
+          "explicacion": "Home es adverbio de lugar: no lleva to delante."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia invita a Tom a su fiesta del sábado.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Are you coming to my party on Saturday, Tom?",
+            "traduccion": "¿Vienes a mi fiesta el sábado, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thanks for the invitation! I'd love to, but I might have other plans.",
+            "traduccion": "¡Gracias por la invitación! Me encantaría, pero puede que tenga otros planes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Other plans? Do you mean you can't come?",
+            "traduccion": "¿Otros planes? ¿Quieres decir que no puedes venir?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Let me clarify: I have a busy weekend, so I'd rather not promise.",
+            "traduccion": "Déjame aclarar: tengo un fin de semana ocupado, así que prefiero no prometerlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere decir realmente Tom?",
+          "opciones": [
+            {
+              "es": "Que probablemente no irá a la fiesta."
+            },
+            {
+              "es": "Que irá seguro, pero tarde."
+            },
+            {
+              "es": "Que quiere cambiar la fecha de la fiesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom no promete nada («I'd rather not promise») y habla de otros planes y de un fin de semana ocupado: es un no cortés."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quieres…",
+          "Indirecta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Decir que no"
+            },
+            {
+              "texto": "I'd love to, but I have plans."
+            }
+          ],
+          [
+            {
+              "texto": "Criticar con tacto"
+            },
+            {
+              "texto": "It's... interesting."
+            }
+          ],
+          [
+            {
+              "texto": "Pedir que te lleven"
+            },
+            {
+              "texto": "It's a long way home, isn't it?"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "Let me clarify: ..."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-15": {
+      "explicacion": {
+        "titulo": "Leer entre líneas en la mesa familiar",
+        "texto": "En una cena familiar casi nada se dice directamente. Un reproche puede llegar como pregunta («Is that all you're having?»), como generalización con some («Some relatives only call…») o como queja suave («Nobody ever…»). Para responder con tacto: 1) interpreta qué quiere la persona, 2) responde al sentimiento, no a la frase literal, 3) suaviza con una indirecta propia («I couldn't eat another bite») y 4) cierra con una question tag que invite a coincidir («…doesn't it?»). Así unes lo que ya sabes: lo literal y lo implícito, las coletillas y la atenuación."
+      },
+      "patron": {
+        "texto": "Interpreta, responde con tacto y cierra con tag:",
+        "formula": [
+          {
+            "texto": "Is that all you're having?",
+            "nota": "réplica: pregunta literal, crítica implícita"
+          },
+          {
+            "texto": "I couldn't eat another bite,",
+            "nota": "respuesta con tacto: indirecta amable"
+          },
+          {
+            "texto": "but the dessert looks lovely, doesn't it?",
+            "nota": "cierre: frase positiva + tag para reconciliar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can't eat nothing more.",
+          "correcto": "I can't eat anything more.",
+          "explicacion": "En inglés la doble negación no refuerza: con can't se usa anything o any, no nothing."
+        },
+        {
+          "incorrecto": "The dessert looks lovely, isn't it?",
+          "correcto": "The dessert looks lovely, doesn't it?",
+          "explicacion": "La coletilla repite el verbo de la frase (looks → doesn't it), no un «isn't it» universal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y su primo Leo oyen a la abuela quejarse durante la cena.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Did you hear Grandma? Nobody ever asks for seconds these days.",
+            "traduccion": "¿Has oído a la abuela? Hoy en día nadie repite plato."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She wants us to eat more, doesn't she?",
+            "traduccion": "Quiere que comamos más, ¿verdad?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Of course! I'll say I couldn't eat another bite, but the dessert looks lovely.",
+            "traduccion": "¡Claro! Diré que no podría comer ni un bocado más, pero que el postre tiene buena pinta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good idea. Then she won't feel sad.",
+            "traduccion": "Buena idea. Así no se pondrá triste."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere la abuela en realidad?",
+          "opciones": [
+            {
+              "es": "Que sus nietos repitan plato."
+            },
+            {
+              "es": "Que nadie coma más."
+            },
+            {
+              "es": "Que cocinen ellos la próxima vez."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo interpreta la queja sobre los segundos platos como «she wants us to eat more», y Sara lo confirma."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Réplica",
+          "Literal",
+          "Mensaje implícito"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Is that all you're having?"
+            },
+            {
+              "texto": "Pregunta cuánto cenas"
+            },
+            {
+              "texto": "Come más"
+            }
+          ],
+          [
+            {
+              "texto": "Nobody ever asks for seconds."
+            },
+            {
+              "texto": "Un dato sobre la gente"
+            },
+            {
+              "texto": "Repite plato"
+            }
+          ],
+          [
+            {
+              "texto": "Some relatives only call when…"
+            },
+            {
+              "texto": "Un dato sobre algunos parientes"
+            },
+            {
+              "texto": "Reproche a alguien presente"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C11: consigna de escucha (evaluacion[0]) ahora indica que habla un anfitrión; antes 'guests' aparecía solo en las opciones.",
+      "C12: evaluacion[1] era ambigua (did/didn't you); consigna y feedback fijan el reproche burlón con misma polaridad.",
+      "C13: ordenar con segundo orden válido en aceptadas.",
+      "C14: modelo de escritura ampliado de ~65 a 88 palabras (5 indirectas + aclaración, como el mapa); enunciado alineado (antes listaba 4 indirectas); rúbrica de 5 grupos con variantes (se eliminan 'aren't we' absurdo y 'wasn't it'); rango 60–150; 'lift' (británico) aceptado en practica[1]; orden alternativo en repaso[2].",
+      "C15: guiada[1] aceptaba solo 'any' aunque 'anything/much' son correctos; modelo de escritura ampliado de 64 a 90 palabras con justificación de las tres interpretaciones; rúbrica de 4 grupos con variantes y rango 70–160 coherente con el enunciado.",
+      "Mapa: rangos 140–190 (C14) y 160–210 (C15); modelos de 88 palabras (63 % del mínimo) y 90 (56 %), por encima del umbral de ~50 % de la política."
+    ]
+  }
+}

@@ -1,0 +1,441 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "classes": {
+    "en.n8.class-61": {
+      "explicacion": {
+        "titulo": "Un titular no solo informa: encuadra",
+        "texto": "El mismo hecho (la tarifa del autobús sube) puede leerse como neutral, crítico o positivo según las palabras del titular. Verbos como raises o says mantienen el tono neutral; slam y hit by cargan la noticia de crítica; hail y boost la cargan de elogio. Para reconocer el enfoque, busca la palabra cargada y pregúntate quién aparece como víctima y quién como responsable. En español pasa igual («critican» frente a «arremeten»), pero el inglés de los titulares usa verbos muy cortos y muy fuertes."
+      },
+      "patron": {
+        "texto": "Hecho + verbo (neutral o cargado) = enfoque:",
+        "formula": [
+          {
+            "texto": "The council raises the fare",
+            "nota": "verbo plano: enfoque neutral"
+          },
+          {
+            "texto": "Residents slam the council",
+            "nota": "verbo cargado de crítica: enfoque crítico"
+          },
+          {
+            "texto": "Many hail a boost for commuters",
+            "nota": "palabras de elogio: enfoque positivo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The council rises the fare by ten per cent.",
+          "correcto": "The council raises the fare by ten per cent.",
+          "explicacion": "Raise lleva complemento (sube algo); rise no lo lleva (algo sube solo)."
+        },
+        {
+          "incorrecto": "Residents slam to the council over the fare.",
+          "correcto": "Residents slam the council over the fare.",
+          "explicacion": "Slam es transitivo: va directo con su objeto, sin «a» como en «critican al ayuntamiento»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo leen tres titulares sobre la misma subida de precio del autobús.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Look, Leo. This headline says residents slam the council over the higher fare.",
+            "traduccion": "Mira, Leo. Este titular dice que los vecinos arremeten contra el ayuntamiento por la tarifa más alta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And this one says many people hail the new buses as a boost for every commuter.",
+            "traduccion": "Y este dice que mucha gente aclama los nuevos autobuses como un impulso para cada viajero diario."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is the same news, but the angle is very different.",
+            "traduccion": "Es la misma noticia, pero el enfoque es muy distinto."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. The first one is negative and the second one is positive.",
+            "traduccion": "Claro. El primero es crítico y el segundo es positivo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And this third one is neutral: the council raises the fare.",
+            "traduccion": "Y este tercero es neutral: el ayuntamiento sube la tarifa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué titular presenta la noticia de forma positiva y por qué?",
+          "opciones": [
+            {
+              "es": "El de los nuevos autobuses, porque usa palabras de elogio."
+            },
+            {
+              "es": "El de los vecinos, porque usa un verbo de crítica dura."
+            },
+            {
+              "es": "El de la tarifa, porque solo informa del hecho."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lee el titular de los nuevos autobuses con hail y boost, dos palabras de elogio; el de los vecinos es crítico y el de la tarifa es neutral."
+        }
+      }
+    },
+    "en.n8.class-62": {
+      "explicacion": {
+        "titulo": "Los titulares comprimen la gramática",
+        "texto": "Para ahorrar espacio, los titulares omiten artículos y el verbo be. Usan el presente para hechos ya ocurridos (Councillors vote = votaron), to + verbo para el futuro (School strike to start = empezará) y el participio para la pasiva sin be (Pool closed = se ha cerrado). Para expandir un titular: 1) añade the/a, 2) recupera el auxiliar, 3) elige el tiempo correcto. También abundan las formas impersonales (is expected to, reportedly), que dan el dato sin nombrar la fuente, y las palabras cortas como hike, probe o bid."
+      },
+      "patron": {
+        "texto": "Titular comprimido → frase completa:",
+        "formula": [
+          {
+            "texto": "Councillors vote to close",
+            "nota": "presente = pasado: voted to close"
+          },
+          {
+            "texto": "School strike to start",
+            "nota": "to + verbo = futuro: is going to start"
+          },
+          {
+            "texto": "Pool closed for repairs",
+            "nota": "participio = pasiva sin be: has been closed"
+          },
+          {
+            "texto": "Fares expected to rise",
+            "nota": "expected to = se espera: are expected to rise"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The pool is expected to reopens in May.",
+          "correcto": "The pool is expected to reopen in May.",
+          "explicacion": "Después de to va el verbo base, sin -s, aunque el sujeto sea singular."
+        },
+        {
+          "incorrecto": "The councillors voted for close the pool.",
+          "correcto": "The councillors voted to close the pool.",
+          "explicacion": "En inglés se dice vote to + verbo; «votar para cerrar» con for es un calco del español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom leen los titulares del periódico del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at this headline: School strike to start on Monday.",
+            "traduccion": "Mira este titular: La huelga escolar empezará el lunes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That means the strike is going to start on Monday. It has not started yet.",
+            "traduccion": "Eso significa que la huelga va a empezar el lunes. Todavía no ha empezado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And this one? Councillors vote to close the town pool.",
+            "traduccion": "¿Y este? Los concejales votan cerrar la piscina municipal."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Here the present tense is about the past. The councillors voted yesterday.",
+            "traduccion": "Aquí el presente habla del pasado. Los concejales votaron ayer."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So when will the pool close?",
+            "traduccion": "Entonces, ¿cuándo cerrará la piscina?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is expected to close in May, and the cost is reportedly high.",
+            "traduccion": "Se espera que cierre en mayo, y se dice que el coste es alto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿qué significa el titular «Councillors vote to close the town pool»?",
+          "opciones": [
+            {
+              "es": "Que los concejales ya votaron cerrarla ayer."
+            },
+            {
+              "es": "Que los concejales votarán mañana."
+            },
+            {
+              "es": "Que los concejales votan todos los días."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica que en el titular el presente habla del pasado: «The councillors voted yesterday»."
+        }
+      }
+    },
+    "en.n8.class-63": {
+      "explicacion": {
+        "titulo": "Hechos, fuentes, certeza y valoración",
+        "texto": "Dos noticias pueden contar el mismo hecho y diferir en tres cosas. La fuente: ¿quién lo dice? (un spokesperson oficial, un eyewitness, nadie). La certeza: said o confirmed son firmes; claims o allegedly dejan la duda; insist y admit ya interpretan lo dicho. Y las palabras valorativas (chaos, shocking), que son opinión y no pueden comprobarse, a diferencia de los hechos (a las ocho, 300 personas). Para comparar dos noticias, sepáralo todo en una tabla: hecho, fuente, certeza y valoración."
+      },
+      "patron": {
+        "texto": "Fuente + verbo de certeza + hecho o valoración:",
+        "formula": [
+          {
+            "texto": "A spokesperson said",
+            "nota": "fuente oficial y verbo firme: dato fiable"
+          },
+          {
+            "texto": "An eyewitness claims",
+            "nota": "testigo y verbo que deja la duda"
+          },
+          {
+            "texto": "the council allegedly ignored",
+            "nota": "allegedly: se afirma, sin pruebas"
+          },
+          {
+            "texto": "the chaos",
+            "nota": "palabra valorativa: opinión, no hecho"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are no evidences that the power cut was planned.",
+          "correcto": "There is no evidence that the power cut was planned.",
+          "explicacion": "Evidence es incontable: va en singular y sin plural, igual que «pruebas» en español se usa en plural."
+        },
+        {
+          "incorrecto": "The organisers insist in that nobody was hurt.",
+          "correcto": "The organisers insist that nobody was hurt.",
+          "explicacion": "En inglés insist va directo con that; el «insistir en que» del español no lleva preposición."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos comparan dos noticias sobre el mismo corte de luz en un festival.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look at these two reports about the festival. Both talk about the power cut.",
+            "traduccion": "Mira estas dos noticias sobre el festival. Las dos hablan del corte de luz."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The first one says a spokesperson confirmed that the festival ended at eight.",
+            "traduccion": "La primera dice que un portavoz confirmó que el festival terminó a las ocho."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The second one has an eyewitness who claims hundreds of people panicked.",
+            "traduccion": "La segunda tiene un testigo que afirma que cientos de personas entraron en pánico."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And it says the council allegedly ignored warnings. Where is the evidence?",
+            "traduccion": "Y dice que el ayuntamiento presuntamente ignoró los avisos. ¿Dónde están las pruebas?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Exactly. The first report gives facts and a clear source. The second one uses a strong word: chaos.",
+            "traduccion": "Exacto. La primera da hechos y una fuente clara. La segunda usa una palabra fuerte: caos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿qué diferencia principal hay entre las dos noticias?",
+          "opciones": [
+            {
+              "es": "La primera da hechos y una fuente clara; la segunda usa una palabra fuerte."
+            },
+            {
+              "es": "La primera usa un testigo y la segunda, un portavoz oficial."
+            },
+            {
+              "es": "La primera es muy larga y la segunda es muy corta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara resume: la primera da hechos y una fuente clara, y la segunda usa «chaos», una valoración."
+        }
+      }
+    },
+    "en.n8.class-64": {
+      "explicacion": {
+        "titulo": "La noticia breve: pirámide, fuentes y cautela",
+        "texto": "Una noticia breve va de lo más importante a lo menos: titular, lead (qué pasó, cuánto, cuándo, dónde) y detalles. Cada dato importante lleva su fuente: said, according to, told. El grado de certeza se marca con el verbo y con formas impersonales (is expected to, is believed to, may). El tono es neutral: sin chaos ni amazing; las opiniones van entre comillas y atribuidas (said one pupil). Con dos fuentes distintas, por ejemplo la organizadora y el director, la noticia resulta equilibrada."
+      },
+      "patron": {
+        "texto": "Hecho + fuente + grado de certeza:",
+        "formula": [
+          {
+            "texto": "The fair raised 950 euros",
+            "nota": "hecho con cifra en el lead"
+          },
+          {
+            "texto": "the organiser said",
+            "nota": "fuente atribuida con said"
+          },
+          {
+            "texto": "The final figure is expected to be confirmed",
+            "nota": "pasiva impersonal: todavía no es seguro"
+          },
+          {
+            "texto": "\"It was good,\" said one pupil",
+            "nota": "cita textual con su fuente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to the head teacher said, the fair will return.",
+          "correcto": "According to the head teacher, the fair will return.",
+          "explicacion": "Según el director se dice con According to + fuente, o bien con said, pero no con las dos a la vez."
+        },
+        {
+          "incorrecto": "The final figure expects to reach 1,500 euros.",
+          "correcto": "The final figure is expected to reach 1,500 euros.",
+          "explicacion": "La cifra no «espera»: se espera de ella. En inglés hace falta la pasiva is expected to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo escriben una noticia breve para el periódico escolar sobre la feria solidaria.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Let's write the lead first: The school fair raised 1,200 euros for charity.",
+            "traduccion": "Escribamos primero el lead: La feria del colegio recaudó 1.200 euros para una organización benéfica."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good. Now we need a source. The organiser said it, so we add that.",
+            "traduccion": "Bien. Ahora necesitamos una fuente. Lo dijo la organizadora, así que lo añadimos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the turnout? We do not know the final figure yet.",
+            "traduccion": "¿Y la asistencia? Todavía no sabemos la cifra final."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then we write: the final figure is expected to be higher.",
+            "traduccion": "Entonces escribimos: se espera que la cifra final sea mayor."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Right. We cannot say it is certain. One pupil also gave us a quote.",
+            "traduccion": "Bien. No podemos decir que es seguro. Además, un alumno nos dio una cita."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo deben presentar la cifra final de asistentes?",
+          "opciones": [
+            {
+              "es": "Como algo esperado, porque todavía no es seguro."
+            },
+            {
+              "es": "Como un dato confirmado por el director."
+            },
+            {
+              "es": "Como una opinión de un alumno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que no conocen la cifra final, así que Leo propone «is expected to be higher», una fórmula cautelosa."
+        }
+      }
+    },
+    "en.n8.class-65": {
+      "explicacion": {
+        "titulo": "Chequear y reescribir: fuente + cautela",
+        "texto": "Para comprobar un texto, busca afirmaciones sin fuente: frases con everyone knows, obviously o it is clear that, y datos sin nombre ni documento. Reescríbelas con dos movimientos. 1) Atribuir: according to the letter, the director said. 2) Ajustar la certeza: apparently, may, these numbers suggest. Si no hay ninguna fuente, no inventes: escribe que está unverified o que there is no proof yet. Después justifica el cambio: «añadí la fuente» o «bajé la certeza», porque un buen chequeo explica qué se cambió y por qué."
+      },
+      "patron": {
+        "texto": "Afirmación sin fuente → fuente + certeza:",
+        "formula": [
+          {
+            "texto": "Obviously, the school will close.",
+            "nota": "afirmación sin fuente, presentada como hecho"
+          },
+          {
+            "texto": "According to the letter,",
+            "nota": "paso 1: añade la fuente"
+          },
+          {
+            "texto": "the school may close",
+            "nota": "paso 2: ajusta la certeza (may, apparently)"
+          },
+          {
+            "texto": "There is no proof yet.",
+            "nota": "di con claridad qué falta comprobar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are no proofs that the school will close.",
+          "correcto": "There is no proof that the school will close.",
+          "explicacion": "Proof es incontable en este sentido: va en singular, igual que evidence."
+        },
+        {
+          "incorrecto": "The letter says that the school maybe will close.",
+          "correcto": "The letter says that the school may close.",
+          "explicacion": "Maybe + will es un calco de «quizá cerrará»; en inglés la cautela se marca con may + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana revisan un mensaje del chat del curso que dice que cancelarán la excursión.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "This message says obviously the trip is cancelled. Is that true?",
+            "traduccion": "Este mensaje dice que, obviamente, la excursión está cancelada. ¿Es verdad?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is only a rumour. There is no source and no proof.",
+            "traduccion": "Es solo un rumor. No hay fuente ni pruebas."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So we should verify it. The teacher's email says nothing about a cancellation.",
+            "traduccion": "Entonces debemos verificarlo. El correo del profesor no dice nada de una cancelación."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then we rewrite it: Apparently the trip may be cancelled, but the teacher has not confirmed it.",
+            "traduccion": "Entonces lo reescribimos: Al parecer la excursión podría cancelarse, pero el profesor no lo ha confirmado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. Now the message is honest about what we know.",
+            "traduccion": "Bien. Ahora el mensaje es honesto sobre lo que sabemos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué hay que reescribir el mensaje del chat?",
+          "opciones": [
+            {
+              "es": "Porque afirma la cancelación sin fuente ni pruebas."
+            },
+            {
+              "es": "Porque el profesor confirmó que hay cancelación."
+            },
+            {
+              "es": "Porque el mensaje está escrito con faltas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que es un rumor sin fuente ni pruebas, así que lo reescriben con cautela y sin afirmar la cancelación."
+        }
+      }
+    }
+  }
+}

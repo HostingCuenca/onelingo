@@ -1,0 +1,670 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "classes": {
+    "en.n10.class-26": {
+      "explicacion": {
+        "titulo": "Salvar la cara del otro",
+        "texto": "Salvar la cara (save face) es darle a otra persona una salida digna tras un error o un comentario brusco. En inglés se consigue quitando peso al error (It's easily done, No harm done), asumiendo parte del problema (I may not have been clear) o suponiendo buena intención (I'm sure you didn't mean it that way). Para lamentar algo propio del pasado usa wish / if only + had + participio: I wish I had explained it better. Nunca empieces por you always / you never."
+      },
+      "patron": {
+        "texto": "Quitar peso + asumir parte + suponer buena intención:",
+        "formula": [
+          {
+            "texto": "It's easily done.",
+            "nota": "quitas peso al error: le puede pasar a cualquiera"
+          },
+          {
+            "texto": "I may not have been clear.",
+            "nota": "asumes parte del problema"
+          },
+          {
+            "texto": "I'm sure you didn't mean it that way.",
+            "nota": "supones buena intención"
+          },
+          {
+            "texto": "I wish I had explained it better.",
+            "nota": "lamento propio: wish + had + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It's easy done; don't worry.",
+          "correcto": "It's easily done; don't worry.",
+          "explicacion": "Done es un participio y lo modifica un adverbio: easily, no el adjetivo easy."
+        },
+        {
+          "incorrecto": "I wish I explained it better.",
+          "correcto": "I wish I had explained it better.",
+          "explicacion": "Para lamentar algo pasado el inglés exige had + participio; el español usa el pretérito y por eso se cuela explained."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia olvidó enviar una lista y Tom intenta que no se sienta mal.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, I forgot to send the list to everyone. I feel bad.",
+            "traduccion": "Tom, olvidé enviar la lista a todos. Me siento mal."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It's easily done. No harm done; the meeting is tomorrow.",
+            "traduccion": "Es fácil que pase. No ha pasado nada; la reunión es mañana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I wish I had checked it twice.",
+            "traduccion": "Ojalá lo hubiera revisado dos veces."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And I may not have been clear about the deadline. Let's move on.",
+            "traduccion": "Y puede que yo no fuera claro con el plazo. Sigamos adelante."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo ayuda Tom a que Mia no se sienta mal?",
+          "opciones": [
+            {
+              "es": "Le quita peso al olvido y asume parte de la culpa."
+            },
+            {
+              "es": "Le pide que envíe la lista otra vez hoy."
+            },
+            {
+              "es": "Le dice que la reunión ya ha empezado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «It's easily done» y «I may not have been clear about the deadline»: normaliza el error y comparte la culpa."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Frase que salva la cara",
+          "Efecto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Error pequeño de otro"
+            },
+            {
+              "texto": "It's easily done."
+            },
+            {
+              "texto": "lo normaliza"
+            }
+          ],
+          [
+            {
+              "texto": "Malentendido"
+            },
+            {
+              "texto": "I may not have been clear."
+            },
+            {
+              "texto": "reparte la culpa"
+            }
+          ],
+          [
+            {
+              "texto": "Comentario brusco"
+            },
+            {
+              "texto": "I'm sure you didn't mean it that way."
+            },
+            {
+              "texto": "supone buena intención"
+            }
+          ],
+          [
+            {
+              "texto": "Mi propio fallo"
+            },
+            {
+              "texto": "I wish I had explained it better."
+            },
+            {
+              "texto": "lamenta sin dramatizar"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-27": {
+      "explicacion": {
+        "titulo": "Dejar la puerta abierta sin prometer",
+        "texto": "Cuando no puedes o no quieres decir ni sí ni no todavía, el inglés cortés usa respuestas que no comprometen: I'll bear that in mind («lo tendré en cuenta»), Let me get back to you («ya te respondo»), I can't promise anything, It depends on… Dejan la puerta abierta sin mentir: no dices «sí», dices «aún no lo sé». Así mantienes la relación y ganas tiempo. Cuidado con la gramática: bear that in mind, depends on, y con can't promise el resto va en positivo: anything, no nothing."
+      },
+      "patron": {
+        "texto": "Reconocer + no prometer + dejar abierto:",
+        "formula": [
+          {
+            "texto": "That is worth considering,",
+            "nota": "reconoces la petición sin aceptarla"
+          },
+          {
+            "texto": "but I can't promise anything;",
+            "nota": "avisas de que no hay garantía"
+          },
+          {
+            "texto": "let me get back to you on Friday.",
+            "nota": "fijas cuándo responderás"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It depends of the budget.",
+          "correcto": "It depends on the budget.",
+          "explicacion": "En español «depende de», pero en inglés depend va con on."
+        },
+        {
+          "incorrecto": "I can't promise nothing.",
+          "correcto": "I can't promise anything.",
+          "explicacion": "El español admite la doble negación («no prometo nada»); en inglés con una negación basta y se usa anything."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia pide a Tom que le ayude a pintar el local del club el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, could you help me paint the club room on Saturday?",
+            "traduccion": "Tom, ¿podrías ayudarme a pintar el local del club el sábado?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is worth considering. I can't promise anything, but I'll bear it in mind.",
+            "traduccion": "Merece la pena considerarlo. No puedo prometer nada, pero lo tendré en cuenta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I need to know by Thursday.",
+            "traduccion": "Necesito saberlo para el jueves."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It depends on my mum's plans. Let me get back to you on Wednesday.",
+            "traduccion": "Depende de los planes de mi madre. Déjame que te conteste el miércoles."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué decide Tom?",
+          "opciones": [
+            {
+              "es": "No promete nada y responderá el miércoles."
+            },
+            {
+              "es": "Acepta ayudar a pintar el sábado."
+            },
+            {
+              "es": "Rechaza ayudar porque ya tiene otros planes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I can't promise anything» y «Let me get back to you on Wednesday»: ni acepta ni rechaza."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Petición difícil",
+          "Respuesta no comprometida",
+          "Qué evita"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Piden una fecha"
+            },
+            {
+              "texto": "I don't want to commit to a date yet."
+            },
+            {
+              "texto": "fijar algo pronto"
+            }
+          ],
+          [
+            {
+              "texto": "Piden dinero"
+            },
+            {
+              "texto": "I'll check the budget first."
+            },
+            {
+              "texto": "decir sí o no"
+            }
+          ],
+          [
+            {
+              "texto": "Piden un favor"
+            },
+            {
+              "texto": "I can't promise anything."
+            },
+            {
+              "texto": "prometer en falso"
+            }
+          ],
+          [
+            {
+              "texto": "Piden una decisión"
+            },
+            {
+              "texto": "Let me get back to you."
+            },
+            {
+              "texto": "contestar con prisa"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-28": {
+      "explicacion": {
+        "titulo": "Lo que dicen de verdad los comunicados",
+        "texto": "Los comunicados diplomáticos dicen cosas duras con palabras suaves. We note with concern equivale a «estamos preocupados y queremos que cambie»; frank discussions, a «discutimos con dureza»; we regret, a «lamentamos lo ocurrido y nos afecta»; we remain committed to…, a «seguimos dispuestos, pero no hay acuerdo». Para interpretar, busca el verbo emocional y el hecho que hay detrás. Las preguntas que citan a otros mantienen el orden afirmativo: asked whether the association would reconsider."
+      },
+      "patron": {
+        "texto": "Fórmula diplomática = significado directo:",
+        "formula": [
+          {
+            "texto": "We note with concern…",
+            "nota": "= estamos preocupados y queremos un cambio"
+          },
+          {
+            "texto": "frank discussions",
+            "nota": "= un desacuerdo fuerte, dicho con claridad"
+          },
+          {
+            "texto": "We remain committed to…",
+            "nota": "= seguimos en la mesa, sin acuerdo aún"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The committee asked whether would the association reconsider.",
+          "correcto": "The committee asked whether the association would reconsider.",
+          "explicacion": "En una pregunta reportada el orden es afirmativo: sujeto + verbo. La inversión solo va en la pregunta directa."
+        },
+        {
+          "incorrecto": "We remain committed with finding a solution.",
+          "correcto": "We remain committed to finding a solution.",
+          "explicacion": "Committed se une a to, no a with, aunque en español digamos «comprometidos con»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos leen un comunicado entre la asociación del jardín y el club del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look at the statement. It says the two groups held frank discussions.",
+            "traduccion": "Mira el comunicado. Dice que los dos grupos mantuvieron conversaciones francas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That usually means they argued. What else does it say?",
+            "traduccion": "Eso suele significar que discutieron. ¿Qué más dice?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It notes with concern that the garden is not clean, and it says they remain committed to finding a solution.",
+            "traduccion": "Observa con preocupación que el jardín no está limpio, y dice que siguen comprometidos con encontrar una solución."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So they are unhappy, but they still want to talk.",
+            "traduccion": "Es decir, están descontentos, pero quieren seguir hablando."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué significa «frank discussions» para Carlos?",
+          "opciones": [
+            {
+              "es": "Que los dos grupos discutieron con dureza."
+            },
+            {
+              "es": "Que los dos grupos se pusieron de acuerdo."
+            },
+            {
+              "es": "Que los dos grupos no llegaron a hablar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos explica «That usually means they argued»: lo franco esconde un desacuerdo fuerte."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Frase del comunicado",
+          "Lenguaje directo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "We note with concern…"
+            },
+            {
+              "texto": "Estamos preocupados y queremos que cambie"
+            }
+          ],
+          [
+            {
+              "texto": "frank discussions"
+            },
+            {
+              "texto": "Discusión dura, con desacuerdo"
+            }
+          ],
+          [
+            {
+              "texto": "We regret that…"
+            },
+            {
+              "texto": "Lamentamos lo ocurrido y nos afecta"
+            }
+          ],
+          [
+            {
+              "texto": "We remain committed to…"
+            },
+            {
+              "texto": "Seguimos queriendo resolverlo, sin acuerdo aún"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-29": {
+      "explicacion": {
+        "titulo": "Quejarse sin provocar un conflicto",
+        "texto": "Una queja suave tiene tres piezas. Primero describe el problema sin acusar: Lately, the kitchen has been a mess. Después expresa el deseo con wish + would (una conducta que molesta: I wish you would…) o if only + pasado (una situación: If only the walls were thicker). Por último pide de forma indirecta: I was wondering if you could… / I would appreciate it if you could… Para citar lo que otra persona preguntó, usa una pregunta reportada con whether o if y orden afirmativo."
+      },
+      "patron": {
+        "texto": "Describir + deseo + petición indirecta:",
+        "formula": [
+          {
+            "texto": "Lately, the kitchen has been a mess.",
+            "nota": "describes el problema sin acusar"
+          },
+          {
+            "texto": "I wish you would wash up on the same day.",
+            "nota": "deseo: wish + would para una conducta"
+          },
+          {
+            "texto": "I was wondering if you could tidy it tonight.",
+            "nota": "petición indirecta con could"
+          },
+          {
+            "texto": "Mia asked whether we could agree on a rota.",
+            "nota": "pregunta reportada con whether"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I wish you will wash the dishes on the same day.",
+          "correcto": "I wish you would wash the dishes on the same day.",
+          "explicacion": "Tras wish el verbo retrocede: will pasa a would, igual que el español usa el imperfecto de subjuntivo."
+        },
+        {
+          "incorrecto": "I was wondering if could you keep the music down.",
+          "correcto": "I was wondering if you could keep the music down.",
+          "explicacion": "Después de I was wondering if el orden es afirmativo: sujeto + could; no se invierte como en una pregunta directa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo comparten piso y ella le pide con tacto que baje la música.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Leo, I was wondering if you could keep the music down after eleven.",
+            "traduccion": "Leo, me preguntaba si podrías bajar la música después de las once."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh, sorry. I didn't realise it was so loud.",
+            "traduccion": "Ay, perdona. No me di cuenta de que estaba tan alta."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It's fine. I wish you would use your headphones late at night, though.",
+            "traduccion": "No pasa nada. Aunque ojalá usaras auriculares por la noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good idea. I would appreciate it if you told me next time.",
+            "traduccion": "Buena idea. Te agradecería que me lo dijeras la próxima vez."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pide Ana a Leo?",
+          "opciones": [
+            {
+              "es": "Que baje la música después de las once y use auriculares."
+            },
+            {
+              "es": "Que apague la música todo el día."
+            },
+            {
+              "es": "Que se mude a otro piso."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana pide bajar la música con «I was wondering if…» y añade «I wish you would use your headphones»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Describir"
+            },
+            {
+              "texto": "Lately, … has been …"
+            },
+            {
+              "texto": "Lately, the noise has been loud."
+            }
+          ],
+          [
+            {
+              "texto": "Deseo sobre una conducta"
+            },
+            {
+              "texto": "I wish you would + verbo"
+            },
+            {
+              "texto": "I wish you would knock first."
+            }
+          ],
+          [
+            {
+              "texto": "Deseo sobre una situación"
+            },
+            {
+              "texto": "If only + pasado"
+            },
+            {
+              "texto": "If only the walls were thicker."
+            }
+          ],
+          [
+            {
+              "texto": "Petición indirecta"
+            },
+            {
+              "texto": "I was wondering if you could…"
+            },
+            {
+              "texto": "I was wondering if you could help."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-30": {
+      "explicacion": {
+        "titulo": "Mediar en la reunión del piso",
+        "texto": "Mediar es dirigir con tacto: dar turno, resumir lo dicho y cerrar con un acuerdo. Combina lo visto en el bloque: la queja suave (I wish you would…, If only…), las peticiones y preguntas indirectas (I was wondering if…, Could I ask whether…?), las preguntas reportadas (Mia asked whether…) y las fórmulas para reconocer al otro y no comprometerse antes de tiempo. Antes de acordar, resume qué ha dicho cada uno; al final, cierra con una pregunta de acuerdo: Are we all happy with that?"
+      },
+      "patron": {
+        "texto": "Abrir + queja suave + pregunta indirecta + acuerdo:",
+        "formula": [
+          {
+            "texto": "Let me mediate; first on the agenda: the chores.",
+            "nota": "abres la reunión y das orden"
+          },
+          {
+            "texto": "I wish we could settle this today.",
+            "nota": "deseo: wish + could, sin presionar"
+          },
+          {
+            "texto": "Could I ask whether everyone agrees?",
+            "nota": "pregunta indirecta con whether"
+          },
+          {
+            "texto": "Are we all happy to start the rota on Monday?",
+            "nota": "cierre con pregunta de acuerdo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I wish we can settle it today.",
+          "correcto": "I wish we could settle it today.",
+          "explicacion": "Tras wish el verbo retrocede: can pasa a could. Wish + can no existe en inglés."
+        },
+        {
+          "incorrecto": "Mia asked whether could we settle the chores tonight.",
+          "correcto": "Mia asked whether we could settle the chores tonight.",
+          "explicacion": "En la pregunta reportada el orden es afirmativo: sujeto + could; la inversión queda para la pregunta directa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara dirige la reunión de su piso compartido, con Carlos y Ana.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Let me mediate. First on the agenda: the chores.",
+            "traduccion": "Permitid que medie. Lo primero en el orden del día: las tareas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I was wondering if we could have a rota. The kitchen has been a mess.",
+            "traduccion": "Me preguntaba si podríamos tener un cuadrante. La cocina ha estado hecha un desastre."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I wish we could settle it tonight. Mia asked me whether we could start on Monday.",
+            "traduccion": "Ojalá pudiéramos zanjarlo esta noche. Mia me preguntó si podíamos empezar el lunes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Fair enough. Shall we propose a rota from Monday?",
+            "traduccion": "Me parece justo. ¿Proponemos un cuadrante desde el lunes?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué proponen al final?",
+          "opciones": [
+            {
+              "es": "Empezar un cuadrante de tareas el lunes."
+            },
+            {
+              "es": "Dejar las tareas para el mes próximo."
+            },
+            {
+              "es": "Que Mia decida sola."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara resume: «Shall we propose a rota from Monday?», recogiendo lo que pidieron Carlos y Ana."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Abrir"
+            },
+            {
+              "texto": "Let me mediate…"
+            },
+            {
+              "texto": "Let me mediate; everyone has two minutes."
+            }
+          ],
+          [
+            {
+              "texto": "Queja suave"
+            },
+            {
+              "texto": "I wish we could…"
+            },
+            {
+              "texto": "I wish we could settle the chores today."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta indirecta"
+            },
+            {
+              "texto": "Could I ask whether…?"
+            },
+            {
+              "texto": "Could I ask whether everyone agrees?"
+            }
+          ],
+          [
+            {
+              "texto": "Reportar"
+            },
+            {
+              "texto": "She asked whether…"
+            },
+            {
+              "texto": "Mia asked whether we could start on Monday."
+            }
+          ],
+          [
+            {
+              "texto": "Acordar"
+            },
+            {
+              "texto": "Are we all happy to…?"
+            },
+            {
+              "texto": "Are we all happy to start on Monday?"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

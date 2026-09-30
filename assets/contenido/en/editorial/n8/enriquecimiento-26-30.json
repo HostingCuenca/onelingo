@@ -1,0 +1,683 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "classes": {
+    "en.n8.class-26": {
+      "explicacion": {
+        "titulo": "Reconocer el registro: formal o informal",
+        "texto": "El registro es el nivel de formalidad de un mensaje y se reconoce por sus marcas. Un mensaje informal lleva saludos como Hi o Hey, contracciones (I'm, can't), verbos frasales (sort out), jerga y cierres como Cheers. Uno formal usa Dear + apellido, frases completas sin contracciones, verbos más largos y peticiones como I would be grateful if you could… y cierres como Yours sincerely. Ojo: ser educado no es lo mismo que ser formal; Please y Thank you valen en ambos."
+      },
+      "patron": {
+        "texto": "Saludo + petición + cierre en el mismo registro (formal):",
+        "formula": [
+          {
+            "texto": "Dear Mr Hill,",
+            "nota": "saludo formal"
+          },
+          {
+            "texto": "I would be grateful if you could repair it.",
+            "nota": "petición formal: sin contracciones, con could"
+          },
+          {
+            "texto": "Yours sincerely,",
+            "nota": "cierre formal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mr Hill, can you sort it out? Cheers!",
+          "correcto": "Dear Mr Hill, could you please repair it? Yours sincerely,",
+          "explicacion": "No mezcles registros: Dear es formal, pero can you, sort it out y Cheers son informales."
+        },
+        {
+          "incorrecto": "I would be grateful if you can repair the heater.",
+          "correcto": "I would be grateful if you could repair the heater.",
+          "explicacion": "La petición formal con would be grateful if va con could, no con can."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia debe escribirle al casero sobre la calefacción y pide consejo a Leo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I need to write to the landlord about the heater.",
+            "traduccion": "Tengo que escribir al casero sobre la calefacción."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Start with Dear Mr Hill, not Hey. It is a formal message.",
+            "traduccion": "Empieza con Dear Mr Hill, no con Hey. Es un mensaje formal."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Can I write: Can you fix it, please?",
+            "traduccion": "¿Puedo escribir: ¿Puedes arreglarlo, por favor?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Better: I would be grateful if you could repair it. Polite and formal.",
+            "traduccion": "Mejor: Le agradecería que lo reparara. Educado y formal."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And for Tom I can use Hey and Cheers, because he is my friend.",
+            "traduccion": "Y para Tom puedo usar Hey y Cheers, porque es mi amigo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué saludo recomienda Leo para el mensaje al casero?",
+          "opciones": [
+            {
+              "es": "Dear Mr Hill, porque es un mensaje formal."
+            },
+            {
+              "es": "Hey, porque así suena más cercano."
+            },
+            {
+              "es": "Hi Mr Hill, porque es neutro para todos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Start with Dear Mr Hill, not Hey», porque es un mensaje formal."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Marca",
+          "Informal",
+          "Formal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Saludo"
+            },
+            {
+              "texto": "Hi / Hey"
+            },
+            {
+              "texto": "Dear Mr Hill"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Can you…?"
+            },
+            {
+              "texto": "I would be grateful if you could…"
+            }
+          ],
+          [
+            {
+              "texto": "Verbo"
+            },
+            {
+              "texto": "sort out"
+            },
+            {
+              "texto": "resolve"
+            }
+          ],
+          [
+            {
+              "texto": "Forma"
+            },
+            {
+              "texto": "I'm, don't"
+            },
+            {
+              "texto": "I am, do not"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Cheers"
+            },
+            {
+              "texto": "Yours sincerely"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-27": {
+      "explicacion": {
+        "titulo": "Cambiar el registro de una frase",
+        "texto": "Para pasar de informal a formal cambia tres cosas. 1) Verbos frasales por verbos formales: put off → postpone, get → obtain, help → assist, need → require, say sorry → apologise. 2) Contracciones por formas completas: we've → we have. 3) Muchas veces la voz activa por pasiva: We've put off the meeting → The meeting has been postponed. Para ir al revés, haz lo contrario. Cuidado con los falsos amigos: assist significa ayudar; asistir a una reunión es attend."
+      },
+      "patron": {
+        "texto": "Fórmula formal: regret to inform + pasiva + disculpa:",
+        "formula": [
+          {
+            "texto": "We regret to inform you",
+            "nota": "fórmula formal, sin contracciones"
+          },
+          {
+            "texto": "that the meeting has been postponed.",
+            "nota": "pasiva: el agente desaparece"
+          },
+          {
+            "texto": "We apologise for the delay.",
+            "nota": "apologise en lugar de sorry"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We regret to inform you that we've put off the meeting.",
+          "correcto": "We regret to inform you that the meeting has been postponed.",
+          "explicacion": "Una frase formal no mezcla contracciones ni verbos frasales: usa la pasiva y postpone."
+        },
+        {
+          "incorrecto": "I assisted the meeting yesterday.",
+          "correcto": "I attended the meeting yesterday.",
+          "explicacion": "Assist significa ayudar, no asistir; para estar presente en un evento se usa attend."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara redactan el aviso de un viaje escolar para la directora.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I wrote: Sorry, we've put off the trip.",
+            "traduccion": "Escribí: Lo siento, hemos aplazado el viaje."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is informal. For the head teacher write: We regret to inform you that the trip has been postponed.",
+            "traduccion": "Eso es informal. Para la directora escribe: Lamentamos informarle de que el viaje se ha aplazado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So put off becomes postpone, and sorry becomes apologise?",
+            "traduccion": "¿Entonces put off pasa a postpone y sorry pasa a apologise?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. And remember: no contractions in a formal message.",
+            "traduccion": "Sí. Y recuerda: sin contracciones en un mensaje formal."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo se pasa put off al registro formal?",
+          "opciones": [
+            {
+              "es": "Se cambia por postpone."
+            },
+            {
+              "es": "Se cambia por cancel."
+            },
+            {
+              "es": "Se cambia por apologise."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lo resume: put off pasa a postpone y sorry a apologise."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Informal",
+          "Formal",
+          "Cambio"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "put off"
+            },
+            {
+              "texto": "postpone"
+            },
+            {
+              "texto": "verbo frasal → verbo formal"
+            }
+          ],
+          [
+            {
+              "texto": "get"
+            },
+            {
+              "texto": "obtain"
+            },
+            {
+              "texto": "verbo corto → verbo formal"
+            }
+          ],
+          [
+            {
+              "texto": "help"
+            },
+            {
+              "texto": "assist"
+            },
+            {
+              "texto": "no es asistir a un evento"
+            }
+          ],
+          [
+            {
+              "texto": "need"
+            },
+            {
+              "texto": "require"
+            },
+            {
+              "texto": "verbo corto → verbo formal"
+            }
+          ],
+          [
+            {
+              "texto": "we've, don't"
+            },
+            {
+              "texto": "we have, do not"
+            },
+            {
+              "texto": "sin contracciones"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-28": {
+      "explicacion": {
+        "titulo": "Qué tono transmite un mensaje",
+        "texto": "El tono es la actitud que transmite un mensaje, más allá de su información. Se reconoce por expresiones concretas: thanks y exclamaciones crean un tono amistoso; Finally! puede sonar sarcástico; una orden sin please (Send it now) suena exigente; I was wondering if… es prudente; As I already said… es frío. Para explicarlo di: The message sounds + adjetivo + because of + expresión. Después de sounds va un adjetivo, no un adverbio."
+      },
+      "patron": {
+        "texto": "The message sounds + adjetivo + because of + expresión:",
+        "formula": [
+          {
+            "texto": "The message sounds",
+            "nota": "sounds + adjetivo"
+          },
+          {
+            "texto": "demanding",
+            "nota": "tono percibido"
+          },
+          {
+            "texto": "because of the phrase «Send it now».",
+            "nota": "because of + expresión que lo revela"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The message sounds coldly.",
+          "correcto": "The message sounds cold.",
+          "explicacion": "Después de sounds se usa un adjetivo (cold), no un adverbio (coldly)."
+        },
+        {
+          "incorrecto": "It sounds like friendly.",
+          "correcto": "It sounds friendly.",
+          "explicacion": "Con un adjetivo no se usa like: sounds friendly; con un nombre sí: sounds like a friendly message."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom leen un mensaje que recibió un vecino y analizan su tono.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "The neighbour wrote: «Finally! Thanks for answering.»",
+            "traduccion": "El vecino escribió: «¡Por fin! Gracias por contestar.»"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That sounds sarcastic.",
+            "traduccion": "Eso suena sarcástico."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Because of Finally?",
+            "traduccion": "¿Por la palabra Finally?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. Without it, the tone would be friendly.",
+            "traduccion": "Sí. Sin ella, el tono sería amistoso."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué palabra hace que el mensaje suene sarcástico?",
+          "opciones": [
+            {
+              "es": "La palabra Finally."
+            },
+            {
+              "es": "La palabra Thanks."
+            },
+            {
+              "es": "La palabra answering."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana señala que Finally es la causa del tono sarcástico; sin ella el mensaje sería amistoso."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Tono",
+          "Por qué"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Send it now."
+            },
+            {
+              "texto": "exigente"
+            },
+            {
+              "texto": "orden sin please"
+            }
+          ],
+          [
+            {
+              "texto": "Finally!"
+            },
+            {
+              "texto": "sarcástico"
+            },
+            {
+              "texto": "critica la demora"
+            }
+          ],
+          [
+            {
+              "texto": "I was wondering if…"
+            },
+            {
+              "texto": "prudente"
+            },
+            {
+              "texto": "petición indirecta"
+            }
+          ],
+          [
+            {
+              "texto": "As I already said…"
+            },
+            {
+              "texto": "frío"
+            },
+            {
+              "texto": "reproche por repetir"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-29": {
+      "explicacion": {
+        "titulo": "Un mensaje, tres lectores",
+        "texto": "Cuando la petición es la misma, el registro cambia según quién lee. A un amigo: Hi Tom, can we swap…? Cheers! (informal, con contracciones). A una profesora: Dear Mrs Lee, I would like to reschedule… Kind regards (formal, cortés). A una empresa desconocida: Dear Sir or Madam, I am writing to ask… I would be grateful if you could… Yours faithfully (muy formal). En todos: di qué quieres cambiar, propone cuándo estás disponible y no mezcles marcas de registros distintos."
+      },
+      "patron": {
+        "texto": "Saludo + petición clara + propuesta + cierre del mismo registro:",
+        "formula": [
+          {
+            "texto": "Dear Mrs Lee,",
+            "nota": "saludo según el destinatario"
+          },
+          {
+            "texto": "I would like to reschedule my appointment.",
+            "nota": "petición: qué quieres cambiar"
+          },
+          {
+            "texto": "Would Monday be convenient for you?",
+            "nota": "propuesta concreta de nueva fecha"
+          },
+          {
+            "texto": "Kind regards,",
+            "nota": "cierre coherente con el saludo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mrs Lee, can you swap my appointment? Cheers!",
+          "correcto": "Dear Mrs Lee, I would like to reschedule my appointment. Kind regards.",
+          "explicacion": "Un saludo formal exige una petición y un cierre formales: no mezcles can you, swap y Cheers."
+        },
+        {
+          "incorrecto": "I am available the Monday after school.",
+          "correcto": "I am available on Monday after school.",
+          "explicacion": "Con los días de la semana se usa on, sin the: on Monday."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia debe cambiar una cita y pide ayuda a Sara para escribir tres mensajes distintos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I must change my appointment. I will write to Tom, to my teacher and to the dentist.",
+            "traduccion": "Debo cambiar mi cita. Escribiré a Tom, a mi profesora y al dentista."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Same request, three readers. For Tom you can write: Hi Tom, can we swap days?",
+            "traduccion": "La misma petición, tres lectores. Para Tom puedes escribir: Hi Tom, can we swap days?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And for the dentist?",
+            "traduccion": "¿Y para el dentista?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Use Dear Sir or Madam and I would be grateful if you could offer me another time.",
+            "traduccion": "Usa Dear Sir or Madam e I would be grateful if you could offer me another time."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué los tres mensajes de Mia son diferentes?",
+          "opciones": [
+            {
+              "es": "Porque cada destinatario exige un registro distinto."
+            },
+            {
+              "es": "Porque cada mensaje pide una cosa distinta."
+            },
+            {
+              "es": "Porque Mia quiere cambiar tres citas el mismo día."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que la petición es la misma pero los lectores son tres: Tom, la profesora y el dentista, y cada uno pide un registro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Destinatario",
+          "Saludo y petición",
+          "Cierre"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Amigo"
+            },
+            {
+              "texto": "Hi Tom, can we swap…?"
+            },
+            {
+              "texto": "Cheers"
+            }
+          ],
+          [
+            {
+              "texto": "Profesora"
+            },
+            {
+              "texto": "Dear Mrs Lee, I would like to reschedule…"
+            },
+            {
+              "texto": "Kind regards"
+            }
+          ],
+          [
+            {
+              "texto": "Empresa"
+            },
+            {
+              "texto": "Dear Sir or Madam, I am writing to…"
+            },
+            {
+              "texto": "Yours faithfully"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-30": {
+      "explicacion": {
+        "titulo": "Reparar el tono en un conflicto",
+        "texto": "En un conflicto, el tono puede empeorar el problema. Primero localiza los errores de tono: órdenes secas (Turn it down NOW!), mayúsculas, acusaciones (you always…) y sarcasmo. Después repara el mensaje con cuatro pasos: empieza con una disculpa o empatía (I am sorry that…), describe el problema sin culpar, haz una petición concreta con could y una hora, y cierra con gracias. No pongas but tras la disculpa: la anula."
+      },
+      "patron": {
+        "texto": "Disculpa + problema sin culpar + petición concreta + gracias:",
+        "formula": [
+          {
+            "texto": "I am sorry that the music disturbed you.",
+            "nota": "disculpa: I am sorry that + hecho"
+          },
+          {
+            "texto": "Could we agree to turn it down after ten?",
+            "nota": "petición concreta: could + hora"
+          },
+          {
+            "texto": "Thank you for your patience.",
+            "nota": "cierre amable, en registro formal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You always make noise, so stop it now.",
+          "correcto": "Could you lower the music after ten, please?",
+          "explicacion": "Evita la acusación (you always) y la orden: pide con could y una hora concreta."
+        },
+        {
+          "incorrecto": "I'm sorry, but you are the one who makes noise.",
+          "correcto": "I am sorry that the music disturbed you, and I will turn it down after ten.",
+          "explicacion": "Con but la disculpa se anula y aparece un reproche: discúlpate sin reproche y ofrece una solución."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos recibe una nota enfadada de su vecino y pide ayuda a Ana para responder.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Look at the note from my neighbour: «Your music is terrible. Turn it down NOW!»",
+            "traduccion": "Mira la nota de mi vecino: «Tu música es horrible. ¡Bájala AHORA!»"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The tone is rude. There are two problems: the order and the capital letters.",
+            "traduccion": "El tono es grosero. Hay dos problemas: la orden y las mayúsculas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I will reply: I am sorry that the music disturbed you. Could we agree on ten o'clock?",
+            "traduccion": "Responderé: Siento que la música le molestara. ¿Podríamos acordar las diez?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Much better: apology, problem and a concrete request.",
+            "traduccion": "Mucho mejor: disculpa, problema y una petición concreta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué solución concreta propone Carlos al vecino?",
+          "opciones": [
+            {
+              "es": "Acordar una hora, las diez, para la música."
+            },
+            {
+              "es": "Comprar unos auriculares nuevos."
+            },
+            {
+              "es": "Dejar de hablar con el vecino."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos propone en su respuesta «Could we agree on ten o'clock?»: una hora concreta para la música."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Error de tono",
+          "Ejemplo",
+          "Reparación"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Orden brusca"
+            },
+            {
+              "texto": "Turn it down NOW!"
+            },
+            {
+              "texto": "Could you turn it down after ten?"
+            }
+          ],
+          [
+            {
+              "texto": "Acusación"
+            },
+            {
+              "texto": "You always make noise."
+            },
+            {
+              "texto": "I find it difficult to sleep when…"
+            }
+          ],
+          [
+            {
+              "texto": "Disculpa con but"
+            },
+            {
+              "texto": "I'm sorry, but you…"
+            },
+            {
+              "texto": "I am sorry that… and I will…"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C26-30 revisadas contra el mapa N8 v2 (registro y tono).",
+      "C26: escuchar de evaluación ahora exige oír las marcas; ítem de mezcla de registros con frases nuevas (antes copiaba el error de la enseñanza); rúbrica de petición formal.",
+      "C27: fugas de respuesta corregidas (audio/opciones de evaluación revelaban inform/apologise); añadida pasiva y variantes apologise/apologize; consigna de assist aclara 'verbo formal'; distractores plausibles.",
+      "C28: eliminada opción de relleno; 'blunt' aceptado para 'Send it now'; rúbrica para suavizar el tono.",
+      "C29: audio coherente con 'Dear Sir or Madam'; ordenar de evaluación ya no duplica el completar; firma del relacionar corregida; rúbrica del mensaje a Tom; rango 75-180 con cierres y saludos variados.",
+      "C30: nombre del vecino incluido en el enunciado (la rúbrica exigía Mr Hill); audio sarcástico distinto del de la práctica; rúbricas flexibles en los tres escribir.",
+      "P2 abiertos (no bloquean): frases sencillas por restricción de léxico previo para un nivel C1 de entrada."
+    ]
+  }
+}

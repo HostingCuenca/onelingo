@@ -1,0 +1,613 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "classes": {
+    "en.n8.class-51": {
+      "explicacion": {
+        "titulo": "Diálogo, acotación y subtexto",
+        "texto": "Un guion tiene tres capas. El diálogo es lo que los personajes dicen en voz alta. Las acotaciones describen acciones, gestos o tono y van entre paréntesis, en presente: (She looks away.). El subtexto es lo que el personaje quiere decir pero no dice: se nota en pausas, respuestas cortas, cambios de tema o gestos que contradicen las palabras. Para explicarlo usa says … but means …. No lo confundas con la acotación: la acotación describe lo que se ve; el subtexto interpreta lo que se oculta."
+      },
+      "patron": {
+        "texto": "Personaje + says + línea, but + means + subtexto:",
+        "formula": [
+          {
+            "texto": "Ana says «I am fine»,",
+            "nota": "says + lo que se pronuncia (diálogo)"
+          },
+          {
+            "texto": "but she means",
+            "nota": "but + means: contraste con lo que quiere decir"
+          },
+          {
+            "texto": "she is worried.",
+            "nota": "el subtexto: lo que oculta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What does mean her silence?",
+          "correcto": "What does her silence mean?",
+          "explicacion": "En preguntas con does el sujeto va antes del verbo: does her silence mean, no does mean her silence."
+        },
+        {
+          "incorrecto": "The script tells that Ana is nervous.",
+          "correcto": "The script says that Ana is nervous.",
+          "explicacion": "Tell necesita una persona (tells us); para citar lo que dice un texto se usa say."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo leen juntos una escena de un guion para el club de teatro.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at this script. Ana says, «I am fine, go without me.»",
+            "traduccion": "Mira este guion. Ana dice: «Estoy bien, ve sin mí.»"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "But the stage direction says she looks at the door and pauses.",
+            "traduccion": "Pero la acotación dice que mira la puerta y hace una pausa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. She says she is fine, but she means she wants Tom to stay.",
+            "traduccion": "Sí. Dice que está bien, pero quiere decir que quiere que Tom se quede."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then the pause is the subtext.",
+            "traduccion": "Entonces la pausa es el subtexto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere decir Ana en realidad?",
+          "opciones": [
+            {
+              "es": "Que está contenta de quedarse sola."
+            },
+            {
+              "es": "Que quiere que Tom se quede con ella."
+            },
+            {
+              "es": "Que quiere irse a otro lugar."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Mia lo explica con says … but means …: Ana dice que está bien, pero quiere que Tom se quede."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Qué es",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Diálogo"
+            },
+            {
+              "texto": "Lo que se dice en voz alta"
+            },
+            {
+              "texto": "I am fine."
+            }
+          ],
+          [
+            {
+              "texto": "Acotación"
+            },
+            {
+              "texto": "Lo que se hace o cómo se dice"
+            },
+            {
+              "texto": "(She looks away.)"
+            }
+          ],
+          [
+            {
+              "texto": "Subtexto"
+            },
+            {
+              "texto": "Lo que se quiere decir sin decirlo"
+            },
+            {
+              "texto": "She is worried."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-52": {
+      "explicacion": {
+        "titulo": "Adjetivos precisos para reseñar una película",
+        "texto": "Para reseñar una película usa adjetivos precisos en lugar de good o bad y di siempre qué aspecto evalúas: la trama y el guion (gripping, far-fetched, predictable), la interpretación (convincing, understated, wooden, over the top) o el ritmo (fast, slow). La estructura es aspecto + be + adjetivo + because: The plot was gripping because… Para destacar tu parte favorita repasa la oración enfática: What I liked most was… Cuidado con moving (conmovedor), no moved: el final es moving; tú estás moved."
+      },
+      "patron": {
+        "texto": "Aspecto + be + adjetivo evaluativo + because:",
+        "formula": [
+          {
+            "texto": "The plot",
+            "nota": "aspecto: trama, interpretación o ritmo"
+          },
+          {
+            "texto": "was far-fetched",
+            "nota": "be + adjetivo evaluativo preciso"
+          },
+          {
+            "texto": "because nobody would do that in real life.",
+            "nota": "razón que justifica el juicio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The ending was very moved.",
+          "correcto": "The ending was very moving.",
+          "explicacion": "El final es moving (conmovedor); moved describe a la persona que siente la emoción."
+        },
+        {
+          "incorrecto": "What I liked it most was the acting.",
+          "correcto": "What I liked most was the acting.",
+          "explicacion": "En la oración enfática no se repite it: What I liked most was…, igual que «lo que más me gustó fue…»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara salen del cine y comentan la película.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "So, what did you think of the film?",
+            "traduccion": "Bueno, ¿qué te pareció la película?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The plot was far-fetched, but the performance was convincing.",
+            "traduccion": "La trama era inverosímil, pero la interpretación era convincente."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I agree. The pace was slow at first, and the ending was moving.",
+            "traduccion": "Estoy de acuerdo. El ritmo era lento al principio y el final era conmovedor."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What I liked most was the understated acting of the old actor.",
+            "traduccion": "Lo que más me gustó fue la actuación contenida del actor mayor."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "For me, it was the script that made it gripping.",
+            "traduccion": "Para mí, fue el guion lo que la hizo absorbente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué fue lo que más le gustó a Tom?",
+          "opciones": [
+            {
+              "es": "El final conmovedor de la película."
+            },
+            {
+              "es": "La trama inverosímil de la historia."
+            },
+            {
+              "es": "La actuación contenida del actor mayor."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Tom usa la oración enfática What I liked most was… y nombra la actuación contenida del actor mayor."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Aspecto",
+          "Juicio positivo",
+          "Juicio negativo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "plot"
+            },
+            {
+              "texto": "gripping"
+            },
+            {
+              "texto": "far-fetched"
+            }
+          ],
+          [
+            {
+              "texto": "acting"
+            },
+            {
+              "texto": "convincing"
+            },
+            {
+              "texto": "wooden"
+            }
+          ],
+          [
+            {
+              "texto": "pace"
+            },
+            {
+              "texto": "fast"
+            },
+            {
+              "texto": "slow"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-53": {
+      "explicacion": {
+        "titulo": "Oír la actitud sin ver la escena",
+        "texto": "En una escena solo de audio no ves los gestos: entiendes la actitud por las palabras y el tono. Busca tres tipos de pista: palabras (great, whatever, well…), estructura (respuestas cortas, una pregunta como respuesta, cambios de tema) y pausas o dudas. Para describir una actitud usa sounds + adjetivo, sin -ly: she sounds anxious. Y apoya siempre tu juicio con una pista: because she repeats the question. El mismo texto puede sonar distinto según el tono: el adjetivo describe cómo habla, no qué dice."
+      },
+      "patron": {
+        "texto": "Personaje + sounds + actitud + because + pista:",
+        "formula": [
+          {
+            "texto": "Leo sounds",
+            "nota": "sounds + adjetivo: cómo suena el personaje"
+          },
+          {
+            "texto": "defensive",
+            "nota": "la actitud: adjetivo, sin -ly"
+          },
+          {
+            "texto": "because he answers with another question.",
+            "nota": "because + la pista verbal que lo demuestra"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo sounds defensively when I ask about the money.",
+          "correcto": "Leo sounds defensive when I ask about the money.",
+          "explicacion": "Después de sound va un adjetivo (defensive), no un adverbio en -ly."
+        },
+        {
+          "incorrecto": "Her tone sounds like sarcastic.",
+          "correcto": "Her tone sounds sarcastic.",
+          "explicacion": "Sound + adjetivo va directo; like solo se usa delante de un sustantivo (sounds like a joke)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom escuchan una obra de radio y hablan de la escena entre una madre y su hijo.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Listen to this scene. The mother asks, «Where were you?»",
+            "traduccion": "Escucha esta escena. La madre pregunta: «¿Dónde estabas?»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the son answers, «Why do you ask?» He sounds defensive.",
+            "traduccion": "Y el hijo responde: «¿Por qué preguntas?» Suena a la defensiva."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, and then he says, «Well… nowhere.» The pause is a clue.",
+            "traduccion": "Sí, y luego dice: «Bueno… en ningún sitio.» La pausa es una pista."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So the mother becomes suspicious, but she tries to stay calm.",
+            "traduccion": "Así que la madre desconfía, pero intenta mantener la calma."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pista muestra que el hijo duda al responder?",
+          "opciones": [
+            {
+              "es": "La pausa y el «Well…» antes de contestar."
+            },
+            {
+              "es": "El tono sarcástico con el que habla la madre."
+            },
+            {
+              "es": "La pregunta que la madre repite tres veces."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana señala que la pausa antes de «nowhere» es una pista: el hijo duda y evita contestar."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Actitud",
+          "Pista típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "sarcastic"
+            },
+            {
+              "texto": "dice lo contrario de lo que piensa"
+            }
+          ],
+          [
+            {
+              "texto": "defensive"
+            },
+            {
+              "texto": "responde con otra pregunta o con una excusa"
+            }
+          ],
+          [
+            {
+              "texto": "hesitant"
+            },
+            {
+              "texto": "hace pausas y dice «well…»"
+            }
+          ],
+          [
+            {
+              "texto": "dismissive"
+            },
+            {
+              "texto": "respuestas cortas como «whatever»"
+            }
+          ],
+          [
+            {
+              "texto": "anxious"
+            },
+            {
+              "texto": "repite preguntas y pide seguridad"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-54": {
+      "explicacion": {
+        "titulo": "Reseñar una escena",
+        "texto": "Una reseña de escena tiene tres partes. Primero cuentas lo que pasa en presente narrativo: the teacher opens the door and freezes. Después destacas lo más importante con una oración enfática: What makes the scene gripping is the silence, o It is the silence that builds the tension. Por último cierras con una valoración razonada: di si funciona y por qué con because. Mantén el presente de principio a fin: no mezcles opened con freezes en la misma secuencia."
+      },
+      "patron": {
+        "texto": "Presente narrativo + oración enfática + valoración:",
+        "formula": [
+          {
+            "texto": "The woman opens the letter and freezes.",
+            "nota": "presente narrativo: todos los verbos en presente"
+          },
+          {
+            "texto": "What makes the scene gripping is the silence.",
+            "nota": "oración enfática: What … is + lo destacado"
+          },
+          {
+            "texto": "It works because the audience fears the truth.",
+            "nota": "valoración razonada: because + motivo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In the scene, the teacher opened the door and freezes.",
+          "correcto": "In the scene, the teacher opens the door and freezes.",
+          "explicacion": "En el presente narrativo todos los verbos van en presente; no mezcles pasado y presente."
+        },
+        {
+          "incorrecto": "What makes the scene gripping it is the silence.",
+          "correcto": "What makes the scene gripping is the silence.",
+          "explicacion": "En la oración enfática no se repite it: What … is + lo destacado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Ana comentan su escena favorita de una película en el club de cine.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "In my favourite scene, the teacher opens the door and freezes.",
+            "traduccion": "En mi escena favorita, la profesora abre la puerta y se queda inmóvil."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Why is it so strong?",
+            "traduccion": "¿Por qué es tan fuerte?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What makes it gripping is the silence. Nobody speaks for ten seconds.",
+            "traduccion": "Lo que la hace absorbente es el silencio. Nadie habla durante diez segundos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And the chair?",
+            "traduccion": "¿Y la silla?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is the empty chair that shows he is too late.",
+            "traduccion": "Es la silla vacía lo que muestra que él llega demasiado tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace que la escena de Mia sea absorbente?",
+          "opciones": [
+            {
+              "es": "La música de fondo."
+            },
+            {
+              "es": "El silencio de diez segundos."
+            },
+            {
+              "es": "El diálogo de la profesora."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Mia usa What makes it gripping is… y nombra el silencio en el que nadie habla durante diez segundos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la reseña",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Narrar"
+            },
+            {
+              "texto": "The woman opens the letter and freezes."
+            }
+          ],
+          [
+            {
+              "texto": "Destacar"
+            },
+            {
+              "texto": "What makes… is… / It is… that…"
+            }
+          ],
+          [
+            {
+              "texto": "Valorar"
+            },
+            {
+              "texto": "It works because…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-55": {
+      "explicacion": {
+        "titulo": "Recomendar y debatir en el cineclub",
+        "texto": "En un cineclub haces tres cosas seguidas. Recomiendas la película con una razón (I would recommend it because…). Describes su escena clave en presente narrativo, con una oración enfática (What makes it moving is the silence). Y respondes a las objeciones sin atacar: primero reconoces (I see your point, fair enough) y luego contraargumentas (but, even so, I would argue that…). No te quedes en «it is good»: justifica siempre y responde a lo que dice la otra persona, no a lo que tú esperabas."
+      },
+      "patron": {
+        "texto": "Recomendación + escena + respuesta a la objeción:",
+        "formula": [
+          {
+            "texto": "I would recommend it because the script is gripping.",
+            "nota": "recomendación razonada"
+          },
+          {
+            "texto": "In the key scene, she opens the door and freezes.",
+            "nota": "escena clave en presente narrativo"
+          },
+          {
+            "texto": "I see your point, but",
+            "nota": "reconoces la objeción"
+          },
+          {
+            "texto": "I would argue that the slow pace is worth it.",
+            "nota": "contraargumento con I would argue that"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I see your point, but I am not agree.",
+          "correcto": "I see your point, but I do not agree.",
+          "explicacion": "Agree es un verbo: se niega con do not agree; I am agree es un calco de «estoy de acuerdo»."
+        },
+        {
+          "incorrecto": "It is worth to watch twice.",
+          "correcto": "It is worth watching twice.",
+          "explicacion": "Después de worth va un verbo en -ing, no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara hablan en el cineclub sobre una película que Tom quiere recomendar.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I would recommend «The Last Lighthouse». It is worth watching twice.",
+            "traduccion": "Yo recomendaría «The Last Lighthouse». Vale la pena verla dos veces."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I see your point, but the pace is very slow.",
+            "traduccion": "Entiendo tu punto, pero el ritmo es muy lento."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fair enough. Even so, what makes it special is the last scene.",
+            "traduccion": "Me parece justo. Aun así, lo que la hace especial es la última escena."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Hmm. I will rewatch it before I decide.",
+            "traduccion": "Mmm. La volveré a ver antes de decidir."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué objeción pone Sara a la película?",
+          "opciones": [
+            {
+              "es": "Que la actuación es exagerada."
+            },
+            {
+              "es": "Que el final es previsible."
+            },
+            {
+              "es": "Que el ritmo es muy lento."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Sara dice «the pace is very slow»: su objeción es el ritmo; Tom la reconoce con fair enough y responde con even so."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Recomendar"
+            },
+            {
+              "texto": "I would recommend it because…"
+            }
+          ],
+          [
+            {
+              "texto": "Describir la escena"
+            },
+            {
+              "texto": "In the scene, she opens… / What makes it… is…"
+            }
+          ],
+          [
+            {
+              "texto": "Reconocer la objeción"
+            },
+            {
+              "texto": "I see your point / Fair enough"
+            }
+          ],
+          [
+            {
+              "texto": "Contraargumentar"
+            },
+            {
+              "texto": "Even so, … / I would argue that…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

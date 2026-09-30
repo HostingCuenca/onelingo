@@ -434,7 +434,15 @@
           "accepted": [
             "Allegedly, the neighbour broke the gate.",
             "The neighbour allegedly broke the gate.",
-            "The neighbour broke the gate, allegedly."
+            "The neighbour broke the gate, allegedly.",
+            "A neighbour allegedly broke the gate.",
+            "Allegedly, a neighbour broke the gate.",
+            "Allegedly, the neighbour broke the garden gate.",
+            "The neighbour allegedly broke the garden gate.",
+            "Allegedly, a neighbour broke the garden gate.",
+            "A neighbour allegedly broke the garden gate.",
+            "Allegedly, the neighbor broke the gate.",
+            "The neighbor allegedly broke the gate."
           ]
         },
         "choices": [],
@@ -449,14 +457,43 @@
           "feedback": {
             "es": "Allegedly puede ir al principio o delante del verbo y deja claro que nadie lo ha probado."
           },
-          "text": "Dicen que un vecino rompió la puerta del jardín, pero nadie lo ha probado. Escribe una frase en inglés con allegedly."
+          "text": "Dicen que un vecino rompió la puerta del jardín, pero nadie lo ha probado. Escribe una frase en inglés con allegedly.",
+          "scoring": {
+            "wordRange": [
+              4,
+              14
+            ],
+            "evidenceGroups": [
+              [
+                "allegedly"
+              ],
+              [
+                "neighbour",
+                "neighbor",
+                "neighbours",
+                "neighbors"
+              ],
+              [
+                "broke",
+                "damaged",
+                "smashed",
+                "destroyed",
+                "kicked"
+              ],
+              [
+                "gate",
+                "garden gate",
+                "door"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:b420314ad27c25e6fb70ec361a10b410e7d36126cc6abacd362dd07d18d43fb4"
+        "contentHash": "sha256:16b479a10b79a9f26221f200b41a86136807e378dbef56d4aaab0e1f9ef6f62f"
       }
     ],
     "evaluation": [
@@ -464,7 +501,7 @@
         "id": "en.n7.c91.e01",
         "format": "elegir",
         "prompt": {
-          "es": "¿Qué frase habla de algo que hoy sigue siendo verdad?"
+          "es": "¿Qué frase dice que algo nos ayuda ahora, en el presente?"
         },
         "answer": {
           "index": 0
@@ -497,7 +534,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:0532f1c78e177ccfc936286ada12d7c2ac03163fea9bcf76dc26c21409b352ef"
+        "contentHash": "sha256:9046e222613f262a0e55516fdac9c3d0afef2e16857293029d40e540c1346802"
       },
       {
         "id": "en.n7.c91.e02",
@@ -594,9 +631,9 @@
           "es": "Completa tres frases que contrastan matices."
         },
         "answer": {
-          "text": "Had | rely | latter",
+          "text": "Had | rely | former",
           "accepted": [
-            "Had | rely | latter"
+            "Had | rely | former"
           ],
           "parts": [
             {
@@ -613,9 +650,9 @@
               ]
             },
             {
-              "text": "latter",
+              "text": "former",
               "accepted": [
-                "latter"
+                "former"
               ]
             }
           ]
@@ -630,24 +667,25 @@
           "variantSeed": "0",
           "variantId": "en.n7.c91.e04.seed-0",
           "feedback": {
-            "es": "Had it not been for mira al pasado, rely on expresa depender de algo y the latter es el segundo de dos."
+            "es": "Had it not been for mira al pasado, rely on expresa depender de algo y the former es el primero de dos elementos mencionados."
           },
           "sentences": [
             "___ it not been for the map, we would have got lost.",
             "If it weren't for Leo, I would ___ on the bus every day.",
-            "I like tea and coffee, but I prefer the ___: it is stronger."
+            "Two shops opened on our street: the ___ sold bread, and the latter sold fish."
           ],
           "scoring": {
             "parts": 3,
             "minimumCorrect": 3
-          }
+          },
+          "text": "Piezas: «de no ser por…» · «depender de» · «el primero de dos»."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:2a316bdd345c36f461528e3f96415a300f2ad5f66c686b4cd13bed36eb54bb89"
+        "contentHash": "sha256:4855d86530465a7dd53e4ecc6c43c15c15d0e7c65debdd3c64b90a698066e2d7"
       }
     ],
     "review": [
@@ -758,6 +796,10 @@
             "still",
             "be",
             "lost"
+          ],
+          "accepted": [
+            "If it weren't for your help I would still be lost",
+            "I would still be lost if it weren't for your help"
           ]
         },
         "choices": [],
@@ -778,7 +820,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:5d585fdfae308930f8f40ac05a5deb1c62cd60df76662a8babc2de3f7ec303af"
+        "contentHash": "sha256:adb441d33f04449baa69f142732a7b2ca321fb9bd681e9d531b873544c5d6863"
       }
     ]
   },

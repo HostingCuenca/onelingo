@@ -1,0 +1,819 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-15",
+  "title": {
+    "en": "Read between the lines at a family dinner",
+    "es": "Leer entre líneas en una cena familiar"
+  },
+  "objectives": {
+    "es": [
+      "Integrar el bloque en una cena familiar: interpretar tres réplicas indirectas, responder a dos con tacto y cerrar con una question tag."
+    ]
+  },
+  "concepts": [
+    "n8-implication-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-14"
+  ],
+  "usesVocabulary": [
+    "dinner",
+    "seconds",
+    "dessert",
+    "relatives",
+    "leftovers",
+    "bite",
+    "lovely"
+  ],
+  "usesPatterns": [
+    "n8-implication-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "dinner",
+      "es": "cena"
+    },
+    {
+      "en": "seconds",
+      "es": "repetir plato, segunda ración"
+    },
+    {
+      "en": "dessert",
+      "es": "postre"
+    },
+    {
+      "en": "relatives",
+      "es": "parientes"
+    },
+    {
+      "en": "leftovers",
+      "es": "sobras"
+    },
+    {
+      "en": "bite",
+      "es": "bocado"
+    },
+    {
+      "en": "lovely",
+      "es": "precioso, rico"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-15.t01",
+      "en": "Is that all you're having for dinner?",
+      "es": "¿Eso es todo lo que vas a cenar?",
+      "explanationEs": "Pregunta literal, crítica implícita: «come más».",
+      "segments": [
+        "Is that all you're",
+        "having for dinner?"
+      ],
+      "audioText": "Is that all you're having for dinner?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-5"
+    },
+    {
+      "id": "en.n8.class-15.t02",
+      "en": "Nobody ever asks for seconds these days.",
+      "es": "Hoy en día nadie repite plato.",
+      "explanationEs": "Reproche suave: quien habla quiere que repitas.",
+      "segments": [
+        "Nobody ever asks for",
+        "seconds these days."
+      ],
+      "audioText": "Nobody ever asks for seconds these days.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-5"
+    },
+    {
+      "id": "en.n8.class-15.t03",
+      "en": "I couldn't eat another bite, but the dessert looks lovely, doesn't it?",
+      "es": "No podría comer ni un bocado más, pero el postre tiene buena pinta, ¿verdad?",
+      "explanationEs": "Rechazo amable + tag que invita a coincidir.",
+      "segments": [
+        "I couldn't eat another bite, but",
+        "the dessert looks lovely, doesn't it?"
+      ],
+      "audioText": "I couldn't eat another bite, but the dessert looks lovely, doesn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-5"
+    },
+    {
+      "id": "en.n8.class-15.t04",
+      "en": "Some relatives only call when they need something.",
+      "es": "Algunos parientes solo llaman cuando necesitan algo.",
+      "explanationEs": "Some + generalización: reproche dirigido a alguien de la mesa.",
+      "segments": [
+        "Some relatives only call",
+        "when they need something."
+      ],
+      "audioText": "Some relatives only call when they need something.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-5"
+    },
+    {
+      "id": "en.n8.class-15.t05",
+      "en": "The leftovers were so good that I'd happily take some home, if there are any.",
+      "es": "Las sobras estaban tan buenas que me llevaría algunas a casa, si quedan.",
+      "explanationEs": "Petición disfrazada de comentario.",
+      "segments": [
+        "The leftovers were so good that I'd happily",
+        "take some home, if there are any."
+      ],
+      "audioText": "The leftovers were so good that I'd happily take some home, if there are any.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-implication-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c15.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige qué espera de verdad la abuela."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She hopes that you will eat more."
+          },
+          {
+            "text": "She is proud that nobody finishes it."
+          },
+          {
+            "text": "She asks who cooked the rice."
+          }
+        ],
+        "teaches": [
+          "n8-implication-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.pg01.seed-0",
+          "feedback": {
+            "es": "Quejarse de que nadie acaba el arroz es un reproche suave: quiere que comas más."
+          },
+          "hint": {
+            "es": "Piensa en qué haría feliz a quien se queja."
+          },
+          "text": "Tu abuela mira las fuentes llenas y dice: «Nobody ever finishes my rice.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2f91a4281ee5d2f04d533e2fb7c83eb6c0cd915c189855ddae7ad5f8c66da420"
+      },
+      {
+        "id": "en.n8.c15.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Gracias, pero de verdad no puedo comer más.»"
+        },
+        "answer": {
+          "text": "any",
+          "accepted": [
+            "any",
+            "anything",
+            "much"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-implication-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.pg02.seed-0",
+          "feedback": {
+            "es": "Con can't se dice any more, anything more o much more; «nothing more» sería una doble negación y en inglés no refuerza."
+          },
+          "hint": {
+            "es": "Con una negación, no se usa nothing."
+          },
+          "text": "Thank you, but I really can't eat ___ more."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:734c3b3a383f3366e9d8fc6706e95b68d0a65073f07ed94180b1bb58d1c97c50"
+      },
+      {
+        "id": "en.n8.c15.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El pastel tiene buena pinta, ¿verdad?»"
+        },
+        "answer": {
+          "text": "doesn't",
+          "accepted": [
+            "doesn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-implication-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.pg03.seed-0",
+          "feedback": {
+            "es": "Looks es afirmativo, así que la coletilla de verdad es doesn't it?, no isn't it."
+          },
+          "hint": {
+            "es": "Repite el verbo looks con do en negativo."
+          },
+          "text": "The cake looks lovely, ___ it?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:62a3dc07060670238589f600b9878f3f38582b67c683af0d1b0da7cb4933d1d0"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c15.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha a tu tía y elige qué reprocha sin decirlo."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She tells a funny story about cooking."
+          },
+          {
+            "text": "She hints that the others should help or say thanks."
+          },
+          {
+            "text": "She asks for the recipe."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.p01.seed-0",
+          "feedback": {
+            "es": "«Some of us» y «you know» señalan un reproche indirecto: el trabajo no se ha agradecido."
+          },
+          "audio": "Some of us cooked all afternoon, you know.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6bb16ac0f2d44431bd63882f54d208893efdbfd89a23959fc77513d62611552c"
+      },
+      {
+        "id": "en.n8.c15.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Las sobras tienen buena pinta, ¿verdad?»"
+        },
+        "answer": {
+          "text": "The leftovers look lovely don't they",
+          "tokens": [
+            "The",
+            "leftovers",
+            "look",
+            "lovely",
+            "don't",
+            "they"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.p02.seed-0",
+          "feedback": {
+            "es": "Leftovers es plural, por eso la coletilla es don't they."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6761431afe53d81e568a69fefb04c32ee53f17c20a4bb7a994a94874e1c89b9f"
+      },
+      {
+        "id": "en.n8.c15.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada réplica con su mensaje implícito."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Is that all you're having?",
+              {
+                "es": "Quiere que comas más"
+              }
+            ],
+            [
+              "Some relatives only call when they need something.",
+              {
+                "es": "Reprocha a alguien presente"
+              }
+            ],
+            [
+              "Nobody ever asks for seconds.",
+              {
+                "es": "Quiere que repitas plato"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.p03.seed-0",
+          "feedback": {
+            "es": "Una pregunta, una generalización con some y una queja con nobody disfrazan peticiones y reproches."
+          },
+          "pairs": [
+            [
+              "Is that all you're having?",
+              {
+                "es": "Quiere que comas más"
+              }
+            ],
+            [
+              "Some relatives only call when they need something.",
+              {
+                "es": "Reprocha a alguien presente"
+              }
+            ],
+            [
+              "Nobody ever asks for seconds.",
+              {
+                "es": "Quiere que repitas plato"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7b194803a1ef1857f8131e610e0e47375a47b8a522bbf368cb7cf510e8c06267"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c15.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha a tu tío y elige a quién critica de forma indirecta."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He thanks everyone for visiting often."
+          },
+          {
+            "text": "He complains about the food."
+          },
+          {
+            "text": "He criticises a relative who rarely visits."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5",
+          "n8-implication-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.e01.seed-0",
+          "feedback": {
+            "es": "«Some people… once a year, of course» dirige la crítica a quien rara vez viene."
+          },
+          "audio": "It's lovely to see everyone today. Some people can only visit once a year, of course.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ddee6a9fc3165bddec67f038d90bbba642e0cc4bdce512164fea2eb76b877281"
+      },
+      {
+        "id": "en.n8.c15.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta con tacto para rechazar la ración."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It's delicious, but I'm full. Could I have some later?"
+          },
+          {
+            "text": "I'm not hungry. Stop giving me food."
+          },
+          {
+            "text": "Yes, please, give me twice as much!"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5",
+          "n8-implication-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.e02.seed-0",
+          "feedback": {
+            "es": "Elogiar, explicar que estás lleno y ofrecer comer más tarde rechaza sin herir."
+          },
+          "text": "Tu abuela te sirve otra ración enorme. Estás lleno y no quieres ofenderla."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cf845f16c0bcd12c1adb80db71ce9b50903d72dc87b53abdc8608b35b57d17a5"
+      },
+      {
+        "id": "en.n8.c15.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige qué piensa tu abuelo del postre, por lo que dice y hace."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He thinks it is nothing special."
+          },
+          {
+            "text": "He thinks it is very good."
+          },
+          {
+            "text": "He wants to try a different one."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5",
+          "n8-implication-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.e03.seed-0",
+          "feedback": {
+            "es": "Se sirve más: «not bad» es una atenuación y en realidad le gusta mucho."
+          },
+          "text": "Tu abuelo prueba el postre, dice «Not bad» y se sirve una segunda ración."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6fca2528522fe87eef1c79e72c07545f0869a8fba27bbf63a85c4330e3420244"
+      },
+      {
+        "id": "en.n8.c15.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe qué quiere cada pariente y cómo respondes."
+        },
+        "answer": {
+          "text": "My mother asks if that is all I'm having, so she wants me to eat more. My grandmother says nobody asks for seconds, so she hopes that I will ask. My uncle says some relatives only call when they need something, so he is hinting that I do not call enough. Mum, I couldn't eat another bite, but the dessert looks lovely, doesn't it? Grandma, everything is delicious, so I'll have some later, if that's all right. Uncle, I'm sorry I've been busy, but I'll call more often, won't I?",
+          "accepted": [
+            "My mother asks if that is all I'm having, so she wants me to eat more. My grandmother says nobody asks for seconds, so she hopes that I will ask. My uncle says some relatives only call when they need something, so he is hinting that I do not call enough. Mum, I couldn't eat another bite, but the dessert looks lovely, doesn't it? Grandma, everything is delicious, so I'll have some later, if that's all right. Uncle, I'm sorry I've been busy, but I'll call more often, won't I?",
+            "Mum would like me to eat more, because she asked if that was all I was having. Grandma wants me to have seconds, since she says nobody asks for them any more. My uncle suggests that some of us never call. Mum, I can't eat any more, but the dessert looks lovely, doesn't it? Grandma, it's delicious, so maybe later? Uncle, I'm sorry, I've been busy, but I'll call soon, won't I?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5",
+          "n8-implication-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.e04.seed-0",
+          "feedback": {
+            "es": "El texto debe interpretar a los tres parientes con su motivo, responder con tacto a dos y acabar con una coletilla."
+          },
+          "text": "Cena familiar. Tres comentarios: a) tu madre dice «Is that all you're having?»; b) tu abuela dice «Nobody ever asks for seconds these days»; c) tu tío dice «Some relatives only call when they need something». Escribe en inglés (70–160 palabras): qué quiere decir cada uno y por qué, tu respuesta con tacto a tu madre y a tu abuela, y una respuesta al tío que termine con una question tag.",
+          "scoring": {
+            "wordRange": [
+              70,
+              160
+            ],
+            "evidenceGroups": [
+              [
+                "eat more",
+                "seconds",
+                "more food",
+                "have more",
+                "second helping"
+              ],
+              [
+                "hinting",
+                "hints",
+                "hinted",
+                "suggests",
+                "suggesting",
+                "means that",
+                "implies",
+                "is saying that",
+                "criticises",
+                "criticising",
+                "criticizes",
+                "criticizing",
+                "not call",
+                "don't call",
+                "never call",
+                "doesn't call"
+              ],
+              [
+                "doesn't it",
+                "won't i",
+                "isn't it",
+                "wouldn't you",
+                "don't they",
+                "aren't they",
+                "don't you think",
+                "shouldn't i"
+              ],
+              [
+                "another bite",
+                "any more",
+                "anything more",
+                "i'm full",
+                "i am full",
+                "a bit full",
+                "later",
+                "delicious"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b2c4660e1ac6b0ff729a2da272eef5945633fca546ba81ccfae7d85a6096bf12"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c15.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige qué insinúa el primo con su frase."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He thanks the guests for coming."
+          },
+          {
+            "text": "He asks who wants more food."
+          },
+          {
+            "text": "He hints that someone comes only for the food."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.r01.seed-0",
+          "feedback": {
+            "es": "Some people y only señalan un reproche encubierto: alguien viene solo por la comida."
+          },
+          "text": "Un primo dice en la mesa: «Some people only visit when there's free food.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9651be53c3027e0e8e6eb3cf04d1c9ea9186d2e51fc8e901febc622892d7b936"
+      },
+      {
+        "id": "en.n8.c15.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Hoy en día nadie pide repetir plato, y hay muchas sobras.»"
+        },
+        "answer": {
+          "text": "seconds",
+          "accepted": [
+            "seconds"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.r02.seed-0",
+          "feedback": {
+            "es": "Seconds es la segunda ración: si nadie la pide, sobra comida."
+          },
+          "text": "Nobody asks for ___ these days, and there are lots of leftovers."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1e2c4f366bddb6eecdaf708e8fda6da42ce6ae9f2e0eb1d6df294a32c18858ad"
+      },
+      {
+        "id": "en.n8.c15.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la coletilla correcta para «La cena estuvo genial, ¿verdad?»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The dinner was great, wasn't it?"
+          },
+          {
+            "text": "The dinner was great, isn't it?"
+          },
+          {
+            "text": "The dinner was great, was it?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-implication-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c15.r03.seed-0",
+          "feedback": {
+            "es": "Was en afirmativo pide wasn't it?; was it? mantendría la polaridad y sonaría a duda."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:64e4758dfadaaa2fa3871c6ec85cb11a23940f56616b6d0f354e811beae96732"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c15.e01": {
+      "reteach": "en.n8.class-15.t01",
+      "review": "en.n8.c15.r01"
+    },
+    "en.n8.c15.e02": {
+      "reteach": "en.n8.class-15.t02",
+      "review": "en.n8.c15.r02"
+    },
+    "en.n8.c15.e03": {
+      "reteach": "en.n8.class-15.t03",
+      "review": "en.n8.c15.r03"
+    },
+    "en.n8.c15.e04": {
+      "reteach": "en.n8.class-15.t04",
+      "review": "en.n8.c15.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n8-implication-1",
+    "n8-implication-2",
+    "n8-implication-3",
+    "n8-implication-4",
+    "n8-implication-5"
+  ]
+}

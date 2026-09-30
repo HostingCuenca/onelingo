@@ -1,0 +1,576 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "classes": {
+    "en.n9.class-61": {
+      "explicacion": {
+        "titulo": "Acusar, describir o decir cómo te sientes",
+        "texto": "En una discusión, la misma queja puede sonar de tres maneras. La acusación ataca a la persona: You always ignore me. La descripción neutral solo cuenta hechos que se ven: The sink was full. El mensaje en primera persona dice tu emoción y cuándo aparece: I feel frustrated when... Para encontrar la queja de fondo, pregúntate qué siente quien habla. Los dos últimos tipos abren la conversación; el primero suele cerrarla."
+      },
+      "patron": {
+        "texto": "Mensaje en primera persona:",
+        "formula": [
+          {
+            "texto": "I feel frustrated",
+            "nota": "I feel + emoción: nombra lo que sientes"
+          },
+          {
+            "texto": "when",
+            "nota": "conector: cuándo aparece la emoción"
+          },
+          {
+            "texto": "plans change at the last minute.",
+            "nota": "hecho observable, sin juicio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I feel that you are always selfish.",
+          "correcto": "I feel upset when you forget my plans.",
+          "explicacion": "«I feel that...» suele esconder un juicio sobre la otra persona; después de I feel va una emoción (upset, frustrated)."
+        },
+        {
+          "incorrecto": "I am frustrating when plans change.",
+          "correcto": "I am frustrated when plans change.",
+          "explicacion": "Frustrated describe a quien siente la emoción; frustrating describe lo que la causa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y su hermano Leo hablan después de una semana tensa en casa.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, I want to talk. The dishes were in the sink again this morning.",
+            "traduccion": "Leo, quiero hablar. Los platos estaban otra vez en el fregadero esta mañana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "You always blame me for the mess!",
+            "traduccion": "¡Siempre me echas la culpa del desorden!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I don't blame you. I feel frustrated when I cook and the sink is full.",
+            "traduccion": "No te culpo. Me siento frustrada cuando cocino y el fregadero está lleno."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. I feel tired after work, and I forget.",
+            "traduccion": "Vale. Me siento cansado después del trabajo y se me olvida."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué mensaje de Mia dice cómo se siente sin acusar?",
+          "opciones": [
+            {
+              "es": "Dice que se siente frustrada cuando cocina y el fregadero está lleno."
+            },
+            {
+              "es": "Dice que Leo siempre deja todo sucio porque es perezoso."
+            },
+            {
+              "es": "Dice que Leo no sabe cocinar ni limpiar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia usa «I feel frustrated when...»: nombra su emoción y el hecho, sin atacar a Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de frase",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Acusación"
+            },
+            {
+              "texto": "You never help me."
+            }
+          ],
+          [
+            {
+              "texto": "Descripción neutral"
+            },
+            {
+              "texto": "The sink was full this morning."
+            }
+          ],
+          [
+            {
+              "texto": "Mensaje en primera persona"
+            },
+            {
+              "texto": "I feel tired when I cook alone."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-62": {
+      "explicacion": {
+        "titulo": "Escucha reflexiva: devolver lo que oyes",
+        "texto": "Antes de responder a una queja, devuelve lo que has oído: What I'm hearing is that... o It sounds like... Nombra la emoción (overwhelmed, left out) y la necesidad (you need more help) y termina comprobando: Is that right? No defiendas ni juzgues: reflejar no es dar la razón, es demostrar que escuchas. Con wish y if only puedes reflejar un deseo: It sounds like you wish we had more time (wish + pasado simple)."
+      },
+      "patron": {
+        "texto": "Escucha reflexiva:",
+        "formula": [
+          {
+            "texto": "It sounds like",
+            "nota": "It sounds like + sujeto + verbo: sin that"
+          },
+          {
+            "texto": "you feel overwhelmed",
+            "nota": "la emoción que oyes"
+          },
+          {
+            "texto": "because you need more help.",
+            "nota": "la necesidad detrás de la queja"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It sounds that you are tired.",
+          "correcto": "It sounds like you are tired.",
+          "explicacion": "Después de sounds va like antes de una oración: «sounds like + sujeto + verbo»."
+        },
+        {
+          "incorrecto": "What I'm hearing is that you are wrong.",
+          "correcto": "What I'm hearing is that you feel overwhelmed.",
+          "explicacion": "Reflejar es nombrar la emoción o la necesidad de la otra persona, no decir quién tiene razón."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo llega cansado a casa y su hermana Mia escucha su queja.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I cook, I clean and I work. Nobody says thank you!",
+            "traduccion": "Cocino, limpio y trabajo. ¡Nadie me da las gracias!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What I'm hearing is that you feel overwhelmed, and you need some thanks. Is that right?",
+            "traduccion": "Lo que te escucho decir es que te sientes agobiado y necesitas un agradecimiento. ¿Es así?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. I wish someone would say thank you.",
+            "traduccion": "Sí. Ojalá alguien me diera las gracias."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thank you, Leo. From now on, I'll help you with the dishes.",
+            "traduccion": "Gracias, Leo. A partir de ahora te ayudaré con los platos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué reformula Mia de lo que dice Leo?",
+          "opciones": [
+            {
+              "es": "Que Leo se siente agobiado y necesita que le den las gracias."
+            },
+            {
+              "es": "Que Leo debería cocinar menos y trabajar más."
+            },
+            {
+              "es": "Que Leo no quiere ayuda con los platos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia nombra la emoción (overwhelmed) y la necesidad (some thanks) y comprueba con Is that right?"
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Queja",
+          "Reformulación"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "You never help me!"
+            },
+            {
+              "texto": "It sounds like you feel overwhelmed and you need more help."
+            }
+          ],
+          [
+            {
+              "texto": "Nobody asks my opinion."
+            },
+            {
+              "texto": "What I'm hearing is that you feel left out."
+            }
+          ],
+          [
+            {
+              "texto": "We never have time."
+            },
+            {
+              "texto": "It sounds like you wish we had more time together."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-63": {
+      "explicacion": {
+        "titulo": "Señales de escalada y de reparación",
+        "texto": "Un diálogo tenso va en una de dos direcciones. Se agrava con sarcasmo (Oh, great...), interrupciones, generalizaciones (always, never) y respuestas a la defensiva. Se repara con reconocimiento (Fair point), disculpas breves, un tono más bajo, una pausa y preguntas sobre cómo arreglarlo. Al escuchar, no te quedes en el tema: busca la frase que cambia la dirección, porque marca el momento en que alguien decide escalar o reparar."
+      },
+      "patron": {
+        "texto": "Reparación en tres pasos:",
+        "formula": [
+          {
+            "texto": "Fair point.",
+            "nota": "reconoce lo razonable de la otra persona"
+          },
+          {
+            "texto": "I was defensive,",
+            "nota": "admite tu parte"
+          },
+          {
+            "texto": "and I'm sorry.",
+            "nota": "disculpa breve"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'm sorry for interrupt you.",
+          "correcto": "I'm sorry for interrupting you.",
+          "explicacion": "Después de una preposición (for) el verbo va en -ing: for interrupting."
+        },
+        {
+          "incorrecto": "I'm agree with your point.",
+          "correcto": "I agree with your point.",
+          "explicacion": "Agree es un verbo, no un adjetivo: no se usa con am/is/are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos discuten porque él canceló un plan, hasta que uno de los dos cambia el rumbo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "You cancelled again. Oh, great, what a surprise.",
+            "traduccion": "Has cancelado otra vez. Vaya, genial, qué sorpresa."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Fair point. I was late last time, too, and I'm sorry.",
+            "traduccion": "Buen punto. La última vez también llegué tarde y lo siento."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thanks. I was sarcastic, and I'm sorry. I felt hurt.",
+            "traduccion": "Gracias. Fui sarcástica y lo siento. Me sentí dolida."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Let's take a break, then decide together what to do.",
+            "traduccion": "Hagamos una pausa y luego decidamos juntos qué hacer."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué inicia la reparación?",
+          "opciones": [
+            {
+              "es": "Carlos reconoce que tiene parte de razón y se disculpa."
+            },
+            {
+              "es": "Sara sigue con sarcasmo hasta el final."
+            },
+            {
+              "es": "Carlos se niega a seguir hablando."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Fair point y I'm sorry marcan el giro: Carlos deja de defenderse y repara."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Escalada",
+          "Reparación"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Oh, great, you forgot again."
+            },
+            {
+              "texto": "Fair point. I forgot, and I'm sorry."
+            }
+          ],
+          [
+            {
+              "texto": "You always interrupt me."
+            },
+            {
+              "texto": "Please let me finish, then I'll listen."
+            }
+          ],
+          [
+            {
+              "texto": "That's not fair!"
+            },
+            {
+              "texto": "Let's take a break and talk later."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-64": {
+      "explicacion": {
+        "titulo": "Un mensaje en primera persona completo",
+        "texto": "Para quejarte sin culpar, construye tres piezas. Primero, el mensaje: I feel tired when the music is loud, because I start work early. Después, la petición con cortesía: Would you mind turning it down? (mind va seguido de -ing). Si tú también te excediste, disculpa equilibrada: I'm sorry I raised my voice, but I do need some quiet. Cierra con un acuerdo (Let's agree on...) y, si quieres, un arrepentimiento: I wish I had asked first."
+      },
+      "patron": {
+        "texto": "Queja + petición:",
+        "formula": [
+          {
+            "texto": "I feel tired",
+            "nota": "emoción que sientes"
+          },
+          {
+            "texto": "when the music is loud after midnight,",
+            "nota": "hecho concreto, sin juicio"
+          },
+          {
+            "texto": "would you mind turning it down?",
+            "nota": "petición cortés: mind + -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Would you mind to turn the music down?",
+          "correcto": "Would you mind turning the music down?",
+          "explicacion": "Después de mind va el verbo en -ing, no to + infinitivo."
+        },
+        {
+          "incorrecto": "I wish I have asked you first.",
+          "correcto": "I wish I had asked you first.",
+          "explicacion": "Para lamentar algo pasado, wish va seguido de pasado perfecto (had + participio)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y su compañero de piso Tom hablan del ruido nocturno.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tom, I feel tired when the music is loud after midnight, because I start work early. Would you mind turning it down after ten?",
+            "traduccion": "Tom, me siento cansada cuando la música está alta después de medianoche, porque empiezo a trabajar temprano. ¿Te importaría bajarla después de las diez?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Of course. I'm sorry, and I appreciate you telling me.",
+            "traduccion": "Claro. Lo siento y te agradezco que me lo digas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thanks. I'm sorry I raised my voice last week, too.",
+            "traduccion": "Gracias. Siento también haber alzado la voz la semana pasada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Let's agree on quiet hours after ten, then.",
+            "traduccion": "Acordemos entonces horas de silencio después de las diez."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué acuerdan Sara y Tom?",
+          "opciones": [
+            {
+              "es": "Horas de silencio después de las diez."
+            },
+            {
+              "es": "Que Tom se mude a otro piso."
+            },
+            {
+              "es": "Que Sara use auriculares por la noche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom acepta bajar la música y Sara y él fijan horas de silencio después de las diez."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Queja sin culpar"
+            },
+            {
+              "texto": "I feel tired when the music is loud."
+            }
+          ],
+          [
+            {
+              "texto": "Petición cortés"
+            },
+            {
+              "texto": "Would you mind turning it down?"
+            }
+          ],
+          [
+            {
+              "texto": "Disculpa equilibrada"
+            },
+            {
+              "texto": "I'm sorry I raised my voice, but I need some quiet."
+            }
+          ],
+          [
+            {
+              "texto": "Arrepentimiento"
+            },
+            {
+              "texto": "I wish I had asked you first."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-65": {
+      "explicacion": {
+        "titulo": "El mediador: resumir, buscar lo común y fijar",
+        "texto": "Mediar es ayudar sin tomar partido. Resume cada postura con el mismo peso (Ana needs..., and Tom needs...), señala lo que tienen en común (You both want...), propone una salida sin imponerla (What if we...? / Could we agree that...?) y repite lo pactado (So we agreed that...). Al final, fija el acuerdo por escrito y una fecha de revisión. Esta clase de cierre reúne lo del bloque: mensajes sin culpa, escucha reflexiva, tono de reparación y petición cortés."
+      },
+      "patron": {
+        "texto": "Mediar y proponer una salida:",
+        "formula": [
+          {
+            "texto": "Ana feels tired and Tom needs time to practise,",
+            "nota": "resumen equilibrado de las dos posturas"
+          },
+          {
+            "texto": "so what if we try a compromise",
+            "nota": "propuesta con What if, sin imponer"
+          },
+          {
+            "texto": "and review it on Sunday?",
+            "nota": "fecha de revisión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Let me resume what you said.",
+          "correcto": "Let me summarise what you said.",
+          "explicacion": "Resume en inglés no es «resumir»: para resumir se dice summarise (o summarize)."
+        },
+        {
+          "incorrecto": "Both of them has a point.",
+          "correcto": "Both of them have a point.",
+          "explicacion": "Both es plural: lleva el verbo en plural (have)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia media entre sus hermanos Ana y Leo, que discuten por el almuerzo del domingo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Let me summarise. Ana feels tired when plans change, and Leo needs time with his friends.",
+            "traduccion": "Déjame resumir. Ana se siente cansada cuando cambian los planes y Leo necesita tiempo con sus amigos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, that is right.",
+            "traduccion": "Sí, eso es."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I wish I had told her earlier.",
+            "traduccion": "Ojalá se lo hubiera dicho antes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What if Leo tells Ana by Friday, and Ana keeps Sunday lunch free until then? Let's review it in two weeks.",
+            "traduccion": "¿Y si Leo se lo dice a Ana antes del viernes y Ana deja libre el almuerzo del domingo hasta entonces? Lo revisamos en dos semanas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is fair.",
+            "traduccion": "Me parece justo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Mia para resolver el desacuerdo?",
+          "opciones": [
+            {
+              "es": "Que Leo avise antes del viernes, que Ana deje libre el domingo y que lo revisen en dos semanas."
+            },
+            {
+              "es": "Que Leo no vea a sus amigos los domingos."
+            },
+            {
+              "es": "Que Ana organice el almuerzo sin consultar a Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia propone avisar a tiempo, reservar el domingo y revisar el acuerdo en dos semanas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso del mediador",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Resumir"
+            },
+            {
+              "texto": "Let me summarise: Ana needs..., and Tom needs..."
+            }
+          ],
+          [
+            {
+              "texto": "Lo común"
+            },
+            {
+              "texto": "It seems you both want..."
+            }
+          ],
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "What if we try a compromise?"
+            }
+          ],
+          [
+            {
+              "texto": "Fijar"
+            },
+            {
+              "texto": "So we agreed that..."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

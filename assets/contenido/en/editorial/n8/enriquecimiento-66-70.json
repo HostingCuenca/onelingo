@@ -1,0 +1,451 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "classes": {
+    "en.n8.class-66": {
+      "explicacion": {
+        "titulo": "Quién cuenta y cuánto sabe",
+        "texto": "La voz narrativa responde a dos preguntas: ¿quién cuenta la historia? y ¿cuánto sabe? En primera persona (I, my) el narrador es un personaje y solo conoce lo que vive. En tercera persona limitada (she, Mara) el narrador sigue a un solo personaje y entramos en su mente. En tercera persona omnisciente el narrador sabe lo que piensan y ocultan varios personajes. Busca pistas: el pronombre, cuántas mentes se abren y si el narrador sabe más que los personajes. Con she no basta: hay que contar las mentes."
+      },
+      "patron": {
+        "texto": "Pista del texto → tipo de narrador:",
+        "formula": [
+          {
+            "texto": "I open the letter",
+            "nota": "I / my: primera persona"
+          },
+          {
+            "texto": "Mara wonders why",
+            "nota": "una sola mente: tercera limitada"
+          },
+          {
+            "texto": "Mara fears… her father hides…",
+            "nota": "varias mentes: omnisciente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The narrator tells to us what Mara fears.",
+          "correcto": "The narrator tells us what Mara fears.",
+          "explicacion": "Tell lleva directamente el complemento us; no va con to en esta estructura."
+        },
+        {
+          "incorrecto": "Readers wonder what does her father want.",
+          "correcto": "Readers wonder what her father wants.",
+          "explicacion": "Después de wonder la pregunta pierde la inversión: what her father wants, no what does he want."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo leen un fragmento de cuento para la clase de literatura y deciden quién lo cuenta.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Listen: I open the letter and my hands tremble. Who is the narrator?",
+            "traduccion": "Escucha: Abro la carta y me tiemblan las manos. ¿Quién es el narrador?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is first person. The clue is the word I.",
+            "traduccion": "Es primera persona. La pista es la palabra I."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Now this one: Mara opens the letter and wonders why her father has written.",
+            "traduccion": "Ahora este: Mara abre la carta y se pregunta por qué ha escrito su padre."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is third person, limited. We only see inside Mara's mind.",
+            "traduccion": "Eso es tercera persona limitada. Solo vemos dentro de la mente de Mara."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And if the narrator also tells us what her father hides, it becomes omniscient.",
+            "traduccion": "Y si el narrador también nos cuenta lo que oculta su padre, se vuelve omnisciente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿qué pista muestra que el primer fragmento está en primera persona?",
+          "opciones": [
+            {
+              "es": "La palabra I, porque el narrador habla de sí mismo."
+            },
+            {
+              "es": "El nombre de Mara, porque es el personaje central."
+            },
+            {
+              "es": "El verbo tremble, porque expresa una emoción."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que la pista es la palabra I: el narrador se nombra a sí mismo, así que es un personaje que cuenta su historia."
+        }
+      }
+    },
+    "en.n8.class-67": {
+      "explicacion": {
+        "titulo": "Narrador y personaje en la misma frase",
+        "texto": "El estilo indirecto libre mezcla la voz del narrador con la del personaje. Sigue en tercera persona y en pasado, pero sin verbos como she thought o she said. Se reconoce por rasgos de la voz directa: preguntas sin inversión de indirecta (Was he late?), exclamaciones (What a silly idea!), adverbios del momento del personaje (now, tomorrow) y palabras como surely. Compara: Mara thought that he would be late es indirecto; He would be late again! es libre. Pregúntate siempre: ¿quién habla aquí, el narrador o el personaje?"
+      },
+      "patron": {
+        "texto": "Narración + rasgos del pensamiento:",
+        "formula": [
+          {
+            "texto": "Mara looked at the clock.",
+            "nota": "narración: hecho en pasado"
+          },
+          {
+            "texto": "Was he really going to be late?",
+            "nota": "pregunta directa: pensamiento de Mara"
+          },
+          {
+            "texto": "What a silly idea!",
+            "nota": "exclamación: voz del personaje"
+          },
+          {
+            "texto": "He would surely come tomorrow.",
+            "nota": "tomorrow con would: mirada del personaje"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mara wondered was he really going to be late.",
+          "correcto": "Mara wondered if he was really going to be late.",
+          "explicacion": "Con wondered la pregunta se hace indirecta: lleva if y pierde la inversión. La pregunta directa sin verbo de pensar es estilo libre."
+        },
+        {
+          "incorrecto": "She stopped at the door. What a silly idea this is!",
+          "correcto": "She stopped at the door. What a silly idea this was!",
+          "explicacion": "El estilo libre mantiene el pasado del narrador (was, would); no se pasa al presente del personaje."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom leen un fragmento de novela y discuten cuál es la voz del personaje.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Read this: Mara looked at the clock. Was he really going to be late again?",
+            "traduccion": "Lee esto: Mara miró el reloj. ¿De verdad iba a llegar tarde otra vez?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The first sentence is the narrator. The question is Mara's own thought.",
+            "traduccion": "La primera frase es el narrador. La pregunta es el pensamiento de la propia Mara."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "How do you know? There is no she thought.",
+            "traduccion": "¿Cómo lo sabes? No hay un she thought."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Exactly. The question has no verb of thinking, and it asks something directly. That is how the writer lets us hear her voice.",
+            "traduccion": "Exacto. La pregunta no tiene verbo de pensar y pregunta directamente. Así deja el autor que oigamos su voz."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And What a silly idea this was! is her voice too.",
+            "traduccion": "Y ¡Qué idea tan tonta era esta! también es su voz."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Tom, ¿qué hace que «Was he really going to be late again?» sea un pensamiento de Mara?",
+          "opciones": [
+            {
+              "es": "Es una pregunta directa sin she wondered ni she thought."
+            },
+            {
+              "es": "Lleva el verbo thought delante de la frase."
+            },
+            {
+              "es": "Está escrita en primera persona."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica que la pregunta no lleva verbo de pensar y se plantea directamente: por eso es la voz de Mara."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estilo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "narración"
+            },
+            {
+              "texto": "Mara looked at the clock."
+            }
+          ],
+          [
+            {
+              "texto": "indirecto"
+            },
+            {
+              "texto": "Mara thought that he would be late."
+            }
+          ],
+          [
+            {
+              "texto": "indirecto libre"
+            },
+            {
+              "texto": "He would be late again!"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-68": {
+      "explicacion": {
+        "titulo": "Del gesto al ánimo y al motivo",
+        "texto": "En un cuento, el ánimo del personaje casi nunca se dice con una sola palabra: se deduce de lo que hace y de cómo se cuenta. Fíjate en tres cosas. 1) Los adjetivos de ánimo (anxious, relieved, guilty, reluctant). 2) Las acciones que lo muestran (hesitate, avoid, stare). 3) El motivo: ¿por qué actúa así? Al responder una pregunta de comprensión, cita la pista del texto en vez de adivinar. Una expresión clave puede tener sentido literal y emocional: elige el que encaja con la escena."
+      },
+      "patron": {
+        "texto": "Ánimo + acción + motivo:",
+        "formula": [
+          {
+            "texto": "Mara feels anxious",
+            "nota": "adjetivo de ánimo"
+          },
+          {
+            "texto": "so she avoids her friends",
+            "nota": "acción que lo muestra"
+          },
+          {
+            "texto": "because the exam is tomorrow",
+            "nota": "motivo: la causa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Tom felt relieved because nobody has seen him.",
+          "correcto": "Tom felt relieved because nobody had seen him.",
+          "explicacion": "En un relato en pasado, lo anterior se cuenta con had + participio, no con has."
+        },
+        {
+          "incorrecto": "She avoided to talk to her friends.",
+          "correcto": "She avoided talking to her friends.",
+          "explicacion": "Avoid va seguido de un verbo en -ing, no de to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos comentan un fragmento de cuento en el que un chico no se atreve a entrar en casa.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "In this scene, Dani waits outside the door. He stares at the handle.",
+            "traduccion": "En esta escena, Dani espera fuera de la puerta. Mira fijamente el picaporte."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "He hesitates because he is anxious. What is his motive?",
+            "traduccion": "Duda porque está inquieto. ¿Cuál es su motivo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "He wants to say sorry to his sister, but he feels guilty.",
+            "traduccion": "Quiere pedir perdón a su hermana, pero se siente culpable."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And when she opens the door, he feels relieved.",
+            "traduccion": "Y cuando ella abre la puerta, se siente aliviado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. The text never says he is afraid, but his actions show it.",
+            "traduccion": "Sí. El texto nunca dice que tiene miedo, pero sus acciones lo muestran."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿cómo sabemos lo que siente Dani?",
+          "opciones": [
+            {
+              "es": "Por sus acciones, aunque el texto no dice que tiene miedo."
+            },
+            {
+              "es": "Porque el narrador lo dice con una palabra clara."
+            },
+            {
+              "es": "Porque Dani se lo cuenta a su hermana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que el texto nunca dice que Dani tiene miedo, pero sus acciones (mirar el picaporte, dudar) lo muestran."
+        }
+      }
+    },
+    "en.n8.class-69": {
+      "explicacion": {
+        "titulo": "Verbos de memoria: -ing para recordar, to para no olvidar",
+        "texto": "Algunos verbos cambian de significado según lo que sigue. Remember y forget + -ing hablan de un recuerdo de algo que ya ocurrió (I remember playing…, I will never forget hearing…). Remember y forget + to hablan de una tarea (I must remember to call; I forgot to lock the door). Regret + -ing lamenta algo hecho o no hecho (I regret not saying goodbye). En una escena de recuerdo, cuenta en primera persona, añade detalles de los sentidos (scent, creak, warm) y usa estos verbos para pasar del ahora al antes."
+      },
+      "patron": {
+        "texto": "Verbo de memoria + -ing (recuerdo) o to (tarea):",
+        "formula": [
+          {
+            "texto": "I remember playing",
+            "nota": "remember + -ing: recuerdo de algo vivido"
+          },
+          {
+            "texto": "I must remember to call",
+            "nota": "remember + to: no olvidar hacer algo"
+          },
+          {
+            "texto": "I regret not saying goodbye",
+            "nota": "regret + -ing: lamento lo que hice o no hice"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I remember to play on the porch every summer.",
+          "correcto": "I remember playing on the porch every summer.",
+          "explicacion": "Para un recuerdo de algo vivido se usa remember + -ing; remember to es una tarea pendiente."
+        },
+        {
+          "incorrecto": "I forgot closing the window, so the room was cold.",
+          "correcto": "I forgot to close the window, so the room was cold.",
+          "explicacion": "Forget + to significa que no hiciste algo por olvido; forget + -ing es un recuerdo borrado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Leo un recuerdo de la casa de su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I remember playing on my grandmother's porch every summer.",
+            "traduccion": "Recuerdo haber jugado en el porche de mi abuela cada verano."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Do you remember anything special about it?",
+            "traduccion": "¿Recuerdas algo especial de aquel lugar?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The scent of warm bread and the creak of the old gate. I will never forget hearing that sound.",
+            "traduccion": "El olor del pan caliente y el chirrido de la vieja verja. Nunca olvidaré oír ese sonido."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Do you regret not going there this year?",
+            "traduccion": "¿Lamentas no haber ido allí este año?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "A little. I must remember to call her on Sunday.",
+            "traduccion": "Un poco. Tengo que acordarme de llamarla el domingo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué recuerda Mia de la casa de su abuela?",
+          "opciones": [
+            {
+              "es": "El olor del pan caliente y el chirrido de la verja."
+            },
+            {
+              "es": "El sabor de una sopa y una canción."
+            },
+            {
+              "es": "Una pelea con su hermano en el jardín."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia menciona el olor del pan caliente y el chirrido de la vieja verja como detalles que no olvida."
+        }
+      }
+    },
+    "en.n8.class-70": {
+      "explicacion": {
+        "titulo": "Tres movimientos de una charla de libros",
+        "texto": "En un club de lectura haces tres cosas. Primero resumes lo que pasa (In this chapter, the plot turns when…), para que todos sepan de qué hablas. Después conectas con tu experiencia: I can relate to…, It reminds me of…, I remember + -ing. Por último respondes a otra opinión con tacto: I see your point, but I disagree, o usas although para contrastar. Da siempre un motivo a tu valoración (moving, gripping) y cierra con una pregunta para mantener abierta la conversación."
+      },
+      "patron": {
+        "texto": "Resumen + recuerdo + respuesta cortés:",
+        "formula": [
+          {
+            "texto": "In this chapter, the plot turns",
+            "nota": "resumen: qué pasa"
+          },
+          {
+            "texto": "I can relate because I remember…",
+            "nota": "conexión con tu recuerdo"
+          },
+          {
+            "texto": "I see your point, but I disagree",
+            "nota": "respuesta cortés a otra opinión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am not agree with the ending.",
+          "correcto": "I do not agree with the ending.",
+          "explicacion": "Agree es un verbo, no un adjetivo: se niega con do not agree o se usa disagree; «estar de acuerdo» no lleva be."
+        },
+        {
+          "incorrecto": "It reminds to me my grandmother.",
+          "correcto": "It reminds me of my grandmother.",
+          "explicacion": "Remind lleva persona como complemento directo y of antes de la cosa recordada."
+        }
+      ],
+      "situacion": {
+        "contexto": "En el club de lectura, Sara y Tom comentan un capítulo del libro.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "In this chapter, the plot turns when Mara finds the old letter. I found it very moving.",
+            "traduccion": "En este capítulo, la trama da un giro cuando Mara encuentra la vieja carta. Me pareció muy conmovedor."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I see your point, but I disagree. Although the scene is sad, the ending felt rushed to me.",
+            "traduccion": "Entiendo tu punto, pero no estoy de acuerdo. Aunque la escena es triste, el final me pareció apresurado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Maybe. But I can relate to Mara. I remember waiting for a letter from my grandmother.",
+            "traduccion": "Quizá. Pero yo me identifico con Mara. Recuerdo haber esperado una carta de mi abuela."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is a nice memory. It reminds me of my own summers at the lake.",
+            "traduccion": "Es un bonito recuerdo. Me recuerda mis propios veranos en el lago."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Sara se identifica con Mara?",
+          "opciones": [
+            {
+              "es": "Porque recuerda que esperaba una carta de su abuela."
+            },
+            {
+              "es": "Porque también encontró una carta vieja en un libro."
+            },
+            {
+              "es": "Porque piensa que el final fue apresurado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice que puede identificarse con Mara porque recuerda haber esperado una carta de su abuela; lo del final apresurado lo dice Tom."
+        }
+      }
+    }
+  }
+}

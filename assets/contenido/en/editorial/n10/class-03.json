@@ -1,0 +1,823 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 10,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n10.class-03",
+  "title": {
+    "en": "Keep up with rapid-fire replies",
+    "es": "Seguir un chat grupal rápido"
+  },
+  "objectives": {
+    "es": [
+      "Recuperar lo que se omite o se sustituye en réplicas rápidas (I'd love to, So have I, Neither did she, I hope so, I'm afraid not)."
+    ]
+  },
+  "concepts": [
+    "n10-native-like-conversation-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n10.class-02"
+  ],
+  "usesVocabulary": [
+    "invitation",
+    "exhausted",
+    "neither",
+    "hope",
+    "afraid",
+    "rather",
+    "I'd love to",
+    "I'd rather not"
+  ],
+  "usesPatterns": [
+    "n10-native-like-conversation-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "invitation",
+      "es": "invitación"
+    },
+    {
+      "en": "exhausted",
+      "es": "agotado"
+    },
+    {
+      "en": "neither",
+      "es": "tampoco"
+    },
+    {
+      "en": "hope",
+      "es": "esperar (que)"
+    },
+    {
+      "en": "afraid",
+      "es": "me temo"
+    },
+    {
+      "en": "rather",
+      "es": "más bien, preferir"
+    },
+    {
+      "en": "I'd love to",
+      "es": "me encantaría"
+    },
+    {
+      "en": "I'd rather not",
+      "es": "prefiero que no"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n10.class-03.t01",
+      "en": "\"Would you like to come to the wedding?\" \"I'd love to. Thanks for the invitation.\"",
+      "es": "«¿Te gustaría venir a la boda?» «Me encantaría. Gracias por la invitación.»",
+      "explanationEs": "I'd love to omite el verbo que ya se dijo (come): solo queda to.",
+      "segments": [
+        "\"Would you like to come to the wedding?\"",
+        "\"I'd love to. Thanks for the invitation.\""
+      ],
+      "audioText": "\"Would you like to come to the wedding?\" \"I'd love to. Thanks for the invitation.\"",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-native-like-conversation-3"
+    },
+    {
+      "id": "en.n10.class-03.t02",
+      "en": "\"I'm exhausted.\" \"So am I.\"",
+      "es": "«Estoy agotado.» «Yo también.»",
+      "explanationEs": "So + auxiliar + sujeto = yo también. El auxiliar es el de la frase original: am.",
+      "segments": [
+        "\"I'm exhausted.\" \"So",
+        "am I.\""
+      ],
+      "audioText": "\"I'm exhausted.\" \"So am I.\"",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-native-like-conversation-3"
+    },
+    {
+      "id": "en.n10.class-03.t03",
+      "en": "\"I didn't sleep well.\" \"Neither did I.\"",
+      "es": "«No dormí bien.» «Yo tampoco.»",
+      "explanationEs": "Neither + auxiliar + sujeto = yo tampoco; el verbo se omite y el auxiliar copia didn't.",
+      "segments": [
+        "\"I didn't sleep well.\"",
+        "\"Neither did I.\""
+      ],
+      "audioText": "\"I didn't sleep well.\" \"Neither did I.\"",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-native-like-conversation-3"
+    },
+    {
+      "id": "en.n10.class-03.t04",
+      "en": "\"Will the tickets be cheap?\" \"I hope so.\"",
+      "es": "«¿Serán baratas las entradas?» «Espero que sí.»",
+      "explanationEs": "So sustituye a toda la oración (the tickets will be cheap). En negativo: I hope not.",
+      "segments": [
+        "\"Will the tickets be",
+        "cheap?\" \"I hope so.\""
+      ],
+      "audioText": "\"Will the tickets be cheap?\" \"I hope so.\"",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-native-like-conversation-3"
+    },
+    {
+      "id": "en.n10.class-03.t05",
+      "en": "\"Is the restaurant still open?\" \"I'm afraid not.\"",
+      "es": "«¿Sigue abierto el restaurante?» «Me temo que no.»",
+      "explanationEs": "I'm afraid not da una mala noticia con educación y sustituye a «it isn't open».",
+      "segments": [
+        "\"Is the restaurant still",
+        "open?\" \"I'm afraid not.\""
+      ],
+      "audioText": "\"Is the restaurant still open?\" \"I'm afraid not.\"",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-native-like-conversation-3"
+    },
+    {
+      "id": "en.n10.class-03.t06",
+      "en": "\"Shall we walk home?\" \"I'd rather not. It's late.\"",
+      "es": "«¿Volvemos andando?» «Prefiero que no. Es tarde.»",
+      "explanationEs": "I'd rather not omite el verbo de la propuesta (walk home).",
+      "segments": [
+        "\"Shall we walk home?\" \"I'd",
+        "rather not. It's late.\""
+      ],
+      "audioText": "\"Shall we walk home?\" \"I'd rather not. It's late.\"",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-native-like-conversation-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n10.c03.pg01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Vienes a cenar?» — «Me encantaría.»"
+        },
+        "answer": {
+          "text": "to",
+          "accepted": [
+            "to"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-native-like-conversation-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.pg01.seed-0",
+          "feedback": {
+            "es": "I'd love to omite el verbo ya mencionado (come) y deja solo to."
+          },
+          "hint": {
+            "es": "Es la partícula del infinitivo omitido."
+          },
+          "text": "\"Are you coming to dinner?\" \"I'd love ___.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3b8ef5ef7bf6d4156ecef7726b53725ba3985a38b234ccb08cf1759bbd598975"
+      },
+      {
+        "id": "en.n10.c03.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué réplica significa «yo tampoco»?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Neither am I."
+          },
+          {
+            "text": "So am I."
+          },
+          {
+            "text": "Neither I am."
+          }
+        ],
+        "teaches": [
+          "n10-native-like-conversation-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.pg02.seed-0",
+          "feedback": {
+            "es": "La frase es negativa y usa am not: neither + auxiliar + sujeto (Neither am I). So am I significa «yo también» y Neither I am tiene el orden español."
+          },
+          "hint": {
+            "es": "Busca neither + auxiliar + sujeto, copiando el auxiliar de la frase."
+          },
+          "text": "\"I'm not ready.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:77c29eec9accce0dc3fa28b6d38b29a409f1b451d60dc330f3fdeb5b75e6132d"
+      },
+      {
+        "id": "en.n10.c03.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué quiere decir «I hope not» en este intercambio?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I hope the film will be long."
+          },
+          {
+            "text": "I hope the film won't be long."
+          },
+          {
+            "text": "I hope I won't see the film."
+          }
+        ],
+        "teaches": [
+          "n10-native-like-conversation-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.pg03.seed-0",
+          "feedback": {
+            "es": "Not sustituye a la oración negativa: espera que la película no sea larga."
+          },
+          "hint": {
+            "es": "Not reemplaza toda la oración, pero en negativo."
+          },
+          "text": "\"Will the film be long?\" \"I hope not.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9f69d83bdcf0ae4e89248b85893ad38a3099437f69bac9f83627354999793c83"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n10.c03.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quiere decir la segunda persona."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She will help with the homework."
+          },
+          {
+            "text": "She hasn't finished her homework."
+          },
+          {
+            "text": "She has finished her homework too."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.p01.seed-0",
+          "feedback": {
+            "es": "So have I = yo también: la segunda persona también ha terminado los deberes. Se omite el verbo y se copia el auxiliar have."
+          },
+          "audio": "I've finished my homework. So have I.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e01aef7c814239c0458d53f907dc6ad3b9cb8796dc5cedfc0d5a13b2f53cbde"
+      },
+      {
+        "id": "en.n10.c03.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada réplica con su significado."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I'd love to.",
+              {
+                "es": "Acepto y omito el verbo de la invitación"
+              }
+            ],
+            [
+              "So have I.",
+              {
+                "es": "Yo también: frase positiva con have"
+              }
+            ],
+            [
+              "Neither did she.",
+              {
+                "es": "Ella tampoco: pasado negativo"
+              }
+            ],
+            [
+              "I'm afraid not.",
+              {
+                "es": "Lo siento, pero no"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.p02.seed-0",
+          "feedback": {
+            "es": "Cada réplica elíptica sustituye u omite parte de la frase anterior: to (verbo omitido), So have I (también), Neither did she (tampoco), I'm afraid not (mala noticia)."
+          },
+          "pairs": [
+            [
+              "I'd love to.",
+              {
+                "es": "Acepto y omito el verbo de la invitación"
+              }
+            ],
+            [
+              "So have I.",
+              {
+                "es": "Yo también: frase positiva con have"
+              }
+            ],
+            [
+              "Neither did she.",
+              {
+                "es": "Ella tampoco: pasado negativo"
+              }
+            ],
+            [
+              "I'm afraid not.",
+              {
+                "es": "Lo siento, pero no"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:62a906c000addce2eb6146eb70c0a8a8bd6c4615a4aba9529b618fc44ca8692f"
+      },
+      {
+        "id": "en.n10.c03.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa «yo también / yo tampoco» con el auxiliar de cada frase."
+        },
+        "answer": {
+          "text": "have | do | did",
+          "accepted": [
+            "have | do | did"
+          ],
+          "parts": [
+            {
+              "text": "have",
+              "accepted": [
+                "have",
+                "Have"
+              ]
+            },
+            {
+              "text": "do",
+              "accepted": [
+                "do",
+                "Do"
+              ]
+            },
+            {
+              "text": "did",
+              "accepted": [
+                "did",
+                "Did"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.p03.seed-0",
+          "feedback": {
+            "es": "El auxiliar copia el de la frase original: have (have never tried), do (love) y did (didn't)."
+          },
+          "sentences": [
+            "\"I've never tried Thai food.\" \"Neither ___ I.\"",
+            "\"I love this song.\" \"So ___ I.\"",
+            "\"She didn't reply.\" \"Neither ___ he.\""
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9bf04bfc327c9e4087d9978ee6bc4bfe5455738d42bee83834a460f3c1e31d32"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n10.c03.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué verbo se omite en «I'd love to»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Come to the concert."
+          },
+          {
+            "text": "Work at the concert."
+          },
+          {
+            "text": "Go home."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.e01.seed-0",
+          "feedback": {
+            "es": "I'd love to omite el verbo de la pregunta: se sobreentiende «come to the concert». La frase con but añade el motivo."
+          },
+          "audio": "Are you coming to the concert? I'd love to, but I'm working.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5f77c160f3a7187255f1849c096852ab0ba8d8bcba7c90d25fa168d18a34795d"
+      },
+      {
+        "id": "en.n10.c03.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué dice realmente la segunda persona con «I'm afraid not»?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I'm afraid I don't want any milk."
+          },
+          {
+            "text": "I'm afraid there isn't any milk left."
+          },
+          {
+            "text": "I'm afraid you can't have any milk."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.e02.seed-0",
+          "feedback": {
+            "es": "I'm afraid not sustituye a la oración negativa completa: «I'm afraid there isn't any milk left». Es una mala noticia dicha con educación."
+          },
+          "text": "\"Is there any milk left?\" \"I'm afraid not.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f546b9fa5f4b93916871cd766d80bff73beeacff8423db4ddfdfda3c7afb2499"
+      },
+      {
+        "id": "en.n10.c03.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Ella no sabe nadar.» — «Yo tampoco.»"
+        },
+        "answer": {
+          "text": "can",
+          "accepted": [
+            "can",
+            "Can"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.e03.seed-0",
+          "feedback": {
+            "es": "La frase original usa can't, así que la réplica copia can: Neither can I."
+          },
+          "text": "\"She can't swim.\" \"Neither ___ I.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8dbdeebc84c5687da81d04aea0d023913993e799a2bc8216af5206d588edc425"
+      },
+      {
+        "id": "en.n10.c03.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la réplica a «I don't want to go»: «Yo tampoco. Prefiero que no.»"
+        },
+        "answer": {
+          "text": "Neither do I. I'd rather not.",
+          "tokens": [
+            "Neither",
+            "do",
+            "I.",
+            "I'd",
+            "rather",
+            "not."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.e04.seed-0",
+          "feedback": {
+            "es": "Don't pide Neither do I, y I'd rather not omite el verbo go."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4916fb7b84065b02325944bf4592f0cbc4376456495a4bc766a6da906ec4a5ef"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n10.c03.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué omite el segundo hablante en «I'd rather not»?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Walk to work."
+          },
+          {
+            "text": "Stay at home."
+          },
+          {
+            "text": "Take the bus."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.r01.seed-0",
+          "feedback": {
+            "es": "Rather not omite el verbo de la propuesta: «I'd rather not take the bus». El motivo viene después."
+          },
+          "text": "\"Shall we take the bus?\" \"I'd rather not. It takes too long.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7d373c64f4c2f9d05ee434b1e8dc45ce962ca09e4cd2937704ee59b455c36a78"
+      },
+      {
+        "id": "en.n10.c03.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién disfrutó de la película."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Leo"
+          },
+          {
+            "text": "Mia"
+          },
+          {
+            "text": "Tom"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.r02.seed-0",
+          "feedback": {
+            "es": "Neither did Mia = Mia tampoco disfrutó, igual que Tom. Solo Leo disfrutó, por el contraste con but."
+          },
+          "audio": "Tom didn't enjoy the film. Neither did Mia. But Leo loved it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d655e66e2ba29ca9bb98d60412455af38e33330826410a5921b904b1bf58466f"
+      },
+      {
+        "id": "en.n10.c03.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Viene Tom?» — «Creo que sí. Dijo que llegaría a las ocho.»"
+        },
+        "answer": {
+          "text": "so",
+          "accepted": [
+            "so"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-native-like-conversation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c03.r03.seed-0",
+          "feedback": {
+            "es": "So sustituye a toda la oración: I think so = I think he's coming."
+          },
+          "text": "\"Is Tom coming?\" \"I think ___. He said he would be here by eight.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:05901c5425142c3cb1e45cd6b18bfd5f4eaa04ef6142383f7e8125c43db697df"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n10.c03.e01": {
+      "reteach": "en.n10.class-03.t01",
+      "review": "en.n10.c03.r01"
+    },
+    "en.n10.c03.e02": {
+      "reteach": "en.n10.class-03.t02",
+      "review": "en.n10.c03.r02"
+    },
+    "en.n10.c03.e03": {
+      "reteach": "en.n10.class-03.t03",
+      "review": "en.n10.c03.r03"
+    },
+    "en.n10.c03.e04": {
+      "reteach": "en.n10.class-03.t04",
+      "review": "en.n10.c03.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

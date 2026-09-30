@@ -287,6 +287,11 @@
             "before",
             "sharing",
             "it"
+          ],
+          "accepted": [
+            "Check the post with two sources before sharing it",
+            "Before sharing it, check the post with two sources",
+            "Before sharing it check the post with two sources"
           ]
         },
         "choices": [],
@@ -310,7 +315,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:f0f4ac873a2689b6ae58af16f44e02890d461cca36a752734f6ce3140f60a81c"
+        "contentHash": "sha256:ab6e726fca7c520044728acd3f102031ff845c3faace7c71f4ff8c58adf3331c"
       }
     ],
     "practice": [
@@ -325,13 +330,13 @@
         },
         "choices": [
           {
-            "text": "According to the newspaper, only about five hundred people signed the petition."
+            "text": "According to the newspaper, the fare will rise by only about ten cents."
           },
           {
-            "text": "According to the newspaper said, five thousand people signed the petition."
+            "text": "According to the newspaper said, the fare will rise by five dollars."
           },
           {
-            "text": "The newspaper denied to sign the petition."
+            "text": "The newspaper accused the bus company to raise the fare by five dollars."
           }
         ],
         "teaches": [],
@@ -343,16 +348,16 @@
           "variantSeed": "0",
           "variantId": "en.n7.c65.p01.seed-0",
           "feedback": {
-            "es": "According to + fuente da la cifra del periódico; las otras opciones mezclan said con according to o usan mal denied."
+            "es": "According to + fuente da la cifra real del periódico; las otras opciones mezclan said con according to o usan mal accuse."
           },
-          "text": "Post: Five thousand people signed the petition. Newspaper: about five hundred people signed it."
+          "text": "Post: The bus fare will rise by five dollars. Newspaper: the fare will rise by about ten cents."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:19f23db8bc1165e46fcd08d362a1a7f386e55a74d78c2e84d411843c65be2d2e"
+        "contentHash": "sha256:8daaf68fd53d52d59805c7e0b903e4984a8168007f5849048755f9410a0bbf4e"
       },
       {
         "id": "en.n7.c65.p02",
@@ -361,12 +366,13 @@
           "es": "Corrige la publicación citando al ayuntamiento."
         },
         "answer": {
-          "text": "According to the council, the pool will close for six weeks for repairs, not forever.",
+          "text": "According to the council, the park will close for two weeks for repairs, not forever.",
           "accepted": [
-            "According to the council, the pool will close for six weeks for repairs, not forever.",
-            "According to the council the pool will close for six weeks for repairs, not forever.",
-            "According to the council, the pool will only close for six weeks for repairs.",
-            "According to the council, the pool will close for repairs for six weeks, not for ever."
+            "According to the council, the park will close for two weeks for repairs, not forever.",
+            "According to the council the park will close for two weeks for repairs, not forever.",
+            "According to the council, the park will only close for two weeks for repairs.",
+            "According to the council, the park will close for repairs for two weeks, not for ever.",
+            "The park will close for two weeks for repairs, not forever, according to the council."
           ]
         },
         "choices": [],
@@ -379,16 +385,43 @@
           "variantSeed": "0",
           "variantId": "en.n7.c65.p02.seed-0",
           "feedback": {
-            "es": "La aclaración cita la fuente con according to y contrasta el dato real con la exageración."
+            "es": "La aclaración cita la fuente con according to y contrasta el dato real (dos semanas) con la exageración."
           },
-          "text": "Publicación: «The pool closes forever.» Comunicado del ayuntamiento: cerrará seis semanas por reparaciones. Escribe una frase de aclaración con according to."
+          "text": "Publicación: «The park closes forever.» Comunicado del ayuntamiento: el parque cerrará dos semanas por reparaciones. Escribe una frase de aclaración con according to.",
+          "scoring": {
+            "wordRange": [
+              9,
+              24
+            ],
+            "evidenceGroups": [
+              [
+                "according to the council",
+                "the council's statement",
+                "the council said",
+                "the council says",
+                "the statement says"
+              ],
+              [
+                "two weeks",
+                "2 weeks",
+                "14 days",
+                "a fortnight"
+              ],
+              [
+                "not forever",
+                "not for ever",
+                "not for good",
+                "only"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:505554c1952ae2a325d91bbc90d1dc523838c563c6b2885acbebf5e022471a9f"
+        "contentHash": "sha256:feb9bc7d3c82d93528c97531dddf14bc57b568304dd68d1e888d2c35842f8538"
       },
       {
         "id": "en.n7.c65.p03",
@@ -401,13 +434,13 @@
         },
         "choices": [
           {
-            "text": "She shared it with more friends."
+            "text": "She removed the post but said nothing else."
           },
           {
             "text": "She removed the post and posted a correction."
           },
           {
-            "text": "She wrote a new rumour."
+            "text": "She kept the post and added the council's statement."
           }
         ],
         "teaches": [],
@@ -436,7 +469,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:69d9dcd1b8c3493b6e0585d581785108b90da633a889665c3e47630902fe5526"
+        "contentHash": "sha256:1fb3b0c65ef582dc3d7b0f82875c6db427d74feb771e2f47195ac81e15761b59"
       }
     ],
     "evaluation": [
@@ -444,20 +477,20 @@
         "id": "en.n7.c65.e01",
         "format": "elegir",
         "prompt": {
-          "es": "¿Qué titular sobre la piscina es el más neutro?"
+          "es": "¿Qué titular sobre la biblioteca es el más neutro?"
         },
         "answer": {
           "index": 2
         },
         "choices": [
           {
-            "text": "Shock as council closes pool"
+            "text": "Shock as council cuts library hours"
           },
           {
-            "text": "Crisis: pool closed forever?"
+            "text": "Crisis: library hours slashed?"
           },
           {
-            "text": "Pool to close for six weeks for repairs"
+            "text": "Library to open an hour later on Fridays"
           }
         ],
         "teaches": [],
@@ -470,7 +503,7 @@
           "variantSeed": "0",
           "variantId": "en.n7.c65.e01.seed-0",
           "feedback": {
-            "es": "El primer titular da los hechos; shock y crisis son palabras con carga que dramatizan."
+            "es": "El titular que solo da el dato es el neutro; shock y crisis son palabras con carga que dramatizan un cambio pequeño."
           }
         },
         "accessibility": {
@@ -478,26 +511,26 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:862cf9833ea341bd93261f04b89f3fb292b392766c568cad7d01d86182af97f4"
+        "contentHash": "sha256:52fd989d7d1d0a3244eb890ad7450669a622397a215b44745843777bb36a0582"
       },
       {
         "id": "en.n7.c65.e02",
         "format": "elegir",
         "prompt": {
-          "es": "El portavoz dijo: «We did not sell the pool». ¿Cómo se reporta?"
+          "es": "El gerente dijo: «We did not close the shop early». ¿Cómo se reporta?"
         },
         "answer": {
           "index": 0
         },
         "choices": [
           {
-            "text": "The spokesperson denied selling the pool."
+            "text": "The manager denied closing the shop early."
           },
           {
-            "text": "The spokesperson admitted selling the pool."
+            "text": "The manager admitted closing the shop early."
           },
           {
-            "text": "The spokesperson denied to sell the pool."
+            "text": "The manager denied to close the shop early."
           }
         ],
         "teaches": [],
@@ -510,7 +543,7 @@
           "variantSeed": "0",
           "variantId": "en.n7.c65.e02.seed-0",
           "feedback": {
-            "es": "El portavoz niega una venta pasada y deny se construye con -ing; admitted diría lo contrario."
+            "es": "El gerente niega una acción pasada y deny se construye con -ing; admitted diría lo contrario."
           }
         },
         "accessibility": {
@@ -518,7 +551,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:c52479c583a100a67e231fdf3b2bf06a3472c72c497619ef217522a99fcef977"
+        "contentHash": "sha256:7df0dfc3a672f8d99e7aa191976a533e7086beda8f55b8e33764036b9dd1ac06"
       },
       {
         "id": "en.n7.c65.e03",
@@ -534,7 +567,7 @@
             "text": "That the mayor lied about the repairs."
           },
           {
-            "text": "The year the pool opened."
+            "text": "The number of lanes in the pool."
           },
           {
             "text": "That everybody loves the pool."
@@ -550,9 +583,9 @@
           "variantSeed": "0",
           "variantId": "en.n7.c65.e03.seed-0",
           "feedback": {
-            "es": "El año de apertura se comprueba en la web del ayuntamiento; lo de que el alcalde mintió es un juicio sin pruebas."
+            "es": "El número de carriles se comprueba en la web del ayuntamiento; lo de que el alcalde mintió es un juicio sin pruebas."
           },
-          "audio": "The post says the pool opened in 1998 and that the mayor obviously lied about the repairs. The council website gives the opening year, but nobody has any evidence about the repairs.",
+          "audio": "The post says the pool has eight lanes and that the mayor obviously lied about the repairs. The council website lists the lanes, but nobody has any evidence about the repairs.",
           "audioMode": "tts",
           "languageCode": "en",
           "speedOptions": [
@@ -567,7 +600,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:86c9ccbcc29193a7d9648900c6931fea9d7dd8704d8f1da3b00e5fbbe23a79e7"
+        "contentHash": "sha256:905d85de3571860c190f944045f9f560c51759d552e41f25b2eaa24ede7fecc5"
       },
       {
         "id": "en.n7.c65.e04",
@@ -608,7 +641,10 @@
                 "post says",
                 "post states",
                 "claims that",
-                "says that the"
+                "says that the",
+                "the post said",
+                "says that the pool",
+                "viral post"
               ],
               [
                 "according to",
@@ -634,7 +670,12 @@
                 "allegedly",
                 "rumour",
                 "hoax",
-                "misleading"
+                "misleading",
+                "not been confirmed",
+                "hasn't been confirmed",
+                "cannot be confirmed",
+                "still unknown",
+                "exaggerat"
               ],
               [
                 "before you share",
@@ -652,7 +693,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:c6809ac6211a7c5b77b64a5517de1438990c8057a1de907c8d9522a6a3f81a63"
+        "contentHash": "sha256:3d7acac703d90f79ec88c1d4a5f0827badb210ffc839fde058059df467a98da9"
       }
     ],
     "review": [
@@ -660,21 +701,22 @@
         "id": "en.n7.c65.r01",
         "format": "ordenar",
         "prompt": {
-          "es": "Ordena: «El periódico informó de que solo unas quinientas personas firmaron.»"
+          "es": "Ordena: «El periódico informó de que el concierto se canceló por la lluvia.»"
         },
         "answer": {
-          "text": "The newspaper reported that only about five hundred people signed",
+          "text": "The newspaper reported that the concert was cancelled because of rain",
           "tokens": [
             "The",
             "newspaper",
             "reported",
             "that",
-            "only",
-            "about",
-            "five",
-            "hundred",
-            "people",
-            "signed"
+            "the",
+            "concert",
+            "was",
+            "cancelled",
+            "because",
+            "of",
+            "rain"
           ]
         },
         "choices": [],
@@ -687,7 +729,7 @@
           "variantSeed": "0",
           "variantId": "en.n7.c65.r01.seed-0",
           "feedback": {
-            "es": "Reported that + dato atribuye la cifra al periódico."
+            "es": "Reported that + dato atribuye la noticia al periódico."
           }
         },
         "accessibility": {
@@ -695,7 +737,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:d4016252bcf9492ef2899de8f7839ab8802b25323fca037348b9dcb0dc7fec2c"
+        "contentHash": "sha256:be0ad62cecbb415d45da646042a6a162b7adfe9103b0c1c0c238e16a2fd89525"
       },
       {
         "id": "en.n7.c65.r02",
@@ -742,10 +784,10 @@
         },
         "choices": [
           {
-            "text": "That the park closed for good."
+            "text": "That the park closed for good and nobody told the public."
           },
           {
-            "text": "That the witness was lying."
+            "text": "That the witness was lying to the newspaper."
           },
           {
             "text": "That the claim makes the closure sound bigger than it was."
@@ -777,7 +819,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:12cdeabe822ab54d31cdb2b9bf144699bfc2a3a30c9fc2c4a51db55143feeaa7"
+        "contentHash": "sha256:516815b94f6f4152bd7766fc2c63cd4e8eedfefd6af920ec626ab2bbe9cfc6c1"
       }
     ]
   },

@@ -1,0 +1,657 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 6,
+    "end": 10
+  },
+  "classes": {
+    "en.n10.class-06": {
+      "explicacion": {
+        "titulo": "Mostrar en lugar de contar",
+        "texto": "Contar (tell) nombra la emoción: She was nervous. Mostrar (show) da lo que el lector vería, oiría u olería, y le deja deducir la emoción: Her hands began to tremble; She bit her nails. Para mostrar usa acciones concretas, reacciones del cuerpo y detalles de los cinco sentidos. Contar sigue siendo útil para resumir tiempo o información. Para hábitos y fondo de la escena en pasado, repasa used to (estados y hábitos: The house used to smell of pine) y would (solo acciones repetidas: We would sit on the wall)."
+      },
+      "patron": {
+        "texto": "Emoción oculta = reacción + detalle:",
+        "formula": [
+          {
+            "texto": "Her hands began to tremble",
+            "nota": "reacción del cuerpo, sin decir «nervous»"
+          },
+          {
+            "texto": "as she opened",
+            "nota": "acción simultánea en pasado simple"
+          },
+          {
+            "texto": "the letter.",
+            "nota": "objeto concreto que el lector puede ver"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "His hands were shaking of anger.",
+          "correcto": "His hands were shaking with anger.",
+          "explicacion": "La causa de una reacción del cuerpo se introduce con with: shaking with anger, no «of» (calco de «de rabia»)."
+        },
+        {
+          "incorrecto": "We would live in a small flat when I was a child.",
+          "correcto": "We used to live in a small flat when I was a child.",
+          "explicacion": "Live es un estado, no una acción que se repite: con estados se usa used to; would solo sirve para acciones repetidas."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo corrigen el relato de Leo para un taller de escritura.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "You wrote, \"She was nervous.\" Can you show it instead?",
+            "traduccion": "Escribiste «Estaba nerviosa». ¿Puedes mostrarlo en su lugar?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure. Her hands began to tremble as she opened the letter.",
+            "traduccion": "Claro. Las manos le empezaron a temblar al abrir la carta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Better! Now I can see it. What about the old house?",
+            "traduccion": "¡Mejor! Ahora lo veo. ¿Y la casa vieja?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It used to smell of pine and wet wool. We would sit by the fire every evening.",
+            "traduccion": "Solía oler a pino y a lana mojada. Nos sentábamos junto al fuego cada tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambió Leo para mostrar el nervio?",
+          "opciones": [
+            {
+              "es": "Escribió una reacción del cuerpo: le temblaban las manos."
+            },
+            {
+              "es": "Añadió la palabra «very» delante de «nervous»."
+            },
+            {
+              "es": "Quitó la carta del relato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo sustituyó «She was nervous» por «Her hands began to tremble…»: una reacción del cuerpo que el lector puede ver, en lugar de nombrar la emoción."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Contar (tell)",
+          "Mostrar (show)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "She was nervous."
+            },
+            {
+              "texto": "Her hands began to tremble."
+            }
+          ],
+          [
+            {
+              "texto": "He was angry."
+            },
+            {
+              "texto": "He slammed the door so hard that the glasses rattled."
+            }
+          ],
+          [
+            {
+              "texto": "The kitchen smelled bad."
+            },
+            {
+              "texto": "The smell of burnt milk filled the kitchen."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-07": {
+      "explicacion": {
+        "titulo": "Anteposición, fragmentos y ritmo",
+        "texto": "En la narrativa, el inglés altera el orden normal para dar ritmo. Anteposición de lugar: Down the hill ran the dog; si el sujeto es un nombre, el verbo va antes (ran the dog), pero con pronombre no hay inversión (Down the hill it ran). Un adverbio negativo al inicio pide auxiliar + sujeto: Never had she seen such a view. Los fragmentos sin verbo (Silence. Then footsteps.) crean tensión. Alterna frases largas con una corta que golpea. Son recursos literarios: si los usas en cada frase, pierden efecto."
+      },
+      "patron": {
+        "texto": "Lugar + verbo + sujeto:",
+        "formula": [
+          {
+            "texto": "Down the hill",
+            "nota": "lugar o dirección al inicio"
+          },
+          {
+            "texto": "ran",
+            "nota": "el verbo va antes del sujeto"
+          },
+          {
+            "texto": "the dog.",
+            "nota": "sujeto: un nombre, no un pronombre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Down the hill ran it.",
+          "correcto": "Down the hill it ran.",
+          "explicacion": "Con un pronombre como sujeto no hay inversión: lugar + pronombre + verbo."
+        },
+        {
+          "incorrecto": "Never she had seen such a place.",
+          "correcto": "Never had she seen such a place.",
+          "explicacion": "Tras never al inicio, el auxiliar va antes del sujeto: never had she. El orden «never she had» es un calco del español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Mia un párrafo de su relato y ella le sugiere cambios de ritmo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I wrote: A dog ran down the hill. There was silence. Then I heard footsteps.",
+            "traduccion": "Escribí: Un perro corrió colina abajo. Hubo silencio. Luego oí pasos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Try this: Down the hill ran the dog. Silence. Then footsteps.",
+            "traduccion": "Prueba esto: Colina abajo corrió el perro. Silencio. Luego, pasos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Why no verb after silence?",
+            "traduccion": "¿Por qué no hay verbo después de silence?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "One short word makes the moment tense. But don't do it every time.",
+            "traduccion": "Una palabra corta hace el momento más tenso. Pero no lo hagas siempre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿para qué sirve el fragmento «Silence.»?",
+          "opciones": [
+            {
+              "es": "Para crear tensión en un momento concreto."
+            },
+            {
+              "es": "Para sustituir siempre al verbo."
+            },
+            {
+              "es": "Para explicar una regla de gramática."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que un fragmento corto hace el momento tenso, y añade que no se debe usar siempre."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Orden normal",
+          "Anteposición"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The dog ran down the hill."
+            },
+            {
+              "texto": "Down the hill ran the dog."
+            }
+          ],
+          [
+            {
+              "texto": "A letter lay on the table."
+            },
+            {
+              "texto": "On the table lay a letter."
+            }
+          ],
+          [
+            {
+              "texto": "She had never seen such a view."
+            },
+            {
+              "texto": "Never had she seen such a view."
+            }
+          ],
+          [
+            {
+              "texto": "It ran down the hill."
+            },
+            {
+              "texto": "Down the hill it ran."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-08": {
+      "explicacion": {
+        "titulo": "Saltos en el tiempo de una anécdota",
+        "texto": "Una anécdota casi nunca va en orden. La línea principal se cuenta en pasado simple (arrived, gave, talked). Lo anterior va en pasado perfecto (had promised, had told) y lo que ya duraba antes de un hecho, en pasado perfecto continuo (had been waiting). Lo posterior, visto desde el pasado, con would + verbo (she would marry him). Los marcadores ayudan: years earlier, by the time, three years later. Para reconstruir el orden real, ordena por tiempo verbal y marcadores, no por el orden en que aparece cada frase."
+      },
+      "patron": {
+        "texto": "Hecho principal + fondo anterior:",
+        "formula": [
+          {
+            "texto": "By the time the train arrived,",
+            "nota": "hecho principal en past simple"
+          },
+          {
+            "texto": "she had been waiting",
+            "nota": "fondo anterior: past perfect continuous"
+          },
+          {
+            "texto": "for two hours.",
+            "nota": "duración hasta ese momento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I arrived, she was cooking for three hours.",
+          "correcto": "When I arrived, she had been cooking for three hours.",
+          "explicacion": "Was cooking no expresa una duración que llega hasta un momento pasado. Para eso se usa had been + -ing."
+        },
+        {
+          "incorrecto": "After she had arrived, she had sat down and had opened the letter.",
+          "correcto": "After she had arrived, she sat down and opened the letter.",
+          "explicacion": "Una vez fijado el momento anterior con had arrived, los hechos siguientes vuelven al pasado simple."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a su abuela cómo conoció a su abuelo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Grandma, how did you meet Grandpa?",
+            "traduccion": "Abuela, ¿cómo conociste al abuelo?"
+          },
+          {
+            "hablante": "Grandma",
+            "texto": "It was 1962. I had been waiting at the station for two hours.",
+            "traduccion": "Era 1962. Llevaba dos horas esperando en la estación."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Two hours? Why?",
+            "traduccion": "¿Dos horas? ¿Por qué?"
+          },
+          {
+            "hablante": "Grandma",
+            "texto": "My cousin's train was late. Then a stranger gave me his umbrella.",
+            "traduccion": "El tren de mi primo llegaba tarde. Entonces un desconocido me dio su paraguas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Was that Grandpa?",
+            "traduccion": "¿Ese era el abuelo?"
+          },
+          {
+            "hablante": "Grandma",
+            "texto": "It was. I didn't know it then, but I would marry him three years later.",
+            "traduccion": "Sí. Entonces no lo sabía, pero me casaría con él tres años después."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuánto tiempo llevaba esperando la abuela cuando apareció el desconocido?",
+          "opciones": [
+            {
+              "es": "Dos horas."
+            },
+            {
+              "es": "Tres años."
+            },
+            {
+              "es": "Una noche entera."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "La abuela dice «I had been waiting at the station for two hours»: esa duración llega hasta el momento en que el desconocido le dio el paraguas. Los tres años son hasta la boda."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tiempo verbal",
+          "Lugar en la historia",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Past simple"
+            },
+            {
+              "texto": "Línea principal"
+            },
+            {
+              "texto": "The train arrived."
+            }
+          ],
+          [
+            {
+              "texto": "Past perfect"
+            },
+            {
+              "texto": "Antes de la línea principal"
+            },
+            {
+              "texto": "Her father had promised…"
+            }
+          ],
+          [
+            {
+              "texto": "Past perfect continuous"
+            },
+            {
+              "texto": "Actividad en curso antes del hecho"
+            },
+            {
+              "texto": "She had been waiting…"
+            }
+          ],
+          [
+            {
+              "texto": "Would + verbo"
+            },
+            {
+              "texto": "Después, visto desde el pasado"
+            },
+            {
+              "texto": "She would marry him."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-09": {
+      "explicacion": {
+        "titulo": "Escena, giro y desenlace",
+        "texto": "Una anécdota con giro tiene tres partes. Escena: el fondo en pasado continuo con detalles (The rain was tapping on the windows). Hecho y giro: algo la rompe en pasado simple (Suddenly, a woman sat down), a menudo con una intención que no se cumple o una acción interrumpida: I was about to pay when… / I was going to call the police, but then… Desenlace: se anticipa con would, y tras little se invierte: Little did I know that she would become my partner. Sigue el orden escena → hecho → giro → desenlace."
+      },
+      "patron": {
+        "texto": "Fondo + was about to + interrupción:",
+        "formula": [
+          {
+            "texto": "I was about to pay",
+            "nota": "intención a punto de cumplirse: was about to + verbo base"
+          },
+          {
+            "texto": "when",
+            "nota": "conector: justo entonces"
+          },
+          {
+            "texto": "I realised my wallet was gone.",
+            "nota": "interrupción en past simple: el giro"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was about to paying when I realised my wallet was gone.",
+          "correcto": "I was about to pay when I realised my wallet was gone.",
+          "explicacion": "Was about to va seguido del verbo en forma base (pay), no de -ing."
+        },
+        {
+          "incorrecto": "Little I knew that she would become my partner.",
+          "correcto": "Little did I know that she would become my partner.",
+          "explicacion": "Little al inicio pide inversión con did, y el verbo vuelve a forma base: little did I know."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le cuenta a Sara cómo conoció a su socia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "It was raining, and the café was nearly empty. I was about to pay when I realised my wallet was gone.",
+            "traduccion": "Llovía y el café estaba casi vacío. Iba a pagar cuando me di cuenta de que mi cartera había desaparecido."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Oh no! What did you do?",
+            "traduccion": "¡Ay, no! ¿Qué hiciste?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I was going to call the police, but then a woman handed me my wallet.",
+            "traduccion": "Iba a llamar a la policía, pero entonces una mujer me entregó la cartera."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Really? Who was she?",
+            "traduccion": "¿En serio? ¿Quién era?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Little did I know, she would become my business partner.",
+            "traduccion": "Yo no tenía ni idea de que se convertiría en mi socia."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué iba a hacer Tom cuando la mujer le dio la cartera?",
+          "opciones": [
+            {
+              "es": "Llamar a la policía."
+            },
+            {
+              "es": "Pagar el café."
+            },
+            {
+              "es": "Irse a casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I was going to call the police, but then a woman handed me my wallet»: la mujer interrumpió su intención."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la anécdota",
+          "Forma típica",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escena"
+            },
+            {
+              "texto": "Past continuous"
+            },
+            {
+              "texto": "The rain was tapping on the windows."
+            }
+          ],
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "Past simple"
+            },
+            {
+              "texto": "Suddenly, a woman sat down."
+            }
+          ],
+          [
+            {
+              "texto": "Giro"
+            },
+            {
+              "texto": "Was about to / was going to + interrupción"
+            },
+            {
+              "texto": "I was about to pay when…"
+            }
+          ],
+          [
+            {
+              "texto": "Desenlace"
+            },
+            {
+              "texto": "Would + verbo"
+            },
+            {
+              "texto": "She would become my partner."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-10": {
+      "explicacion": {
+        "titulo": "Contar la anécdota en la reunión",
+        "texto": "Contar una anécdota en una reunión junta todo lo aprendido. Abre con un hábito o una escena mostrada (At every reunion, my uncle would…; The kitchen smelled of coffee…). Rompe la escena con un hecho en past simple o con was about to; da el giro mirando hacia atrás (had been planning) y anticipa el final con Little did I know… + would. Cierra con una frase corta o un fragmento (Silence. Then laughter.). Después, responde al público con naturalidad: un eco, un marcador (Anyway, To be honest) y respuestas cortas."
+      },
+      "patron": {
+        "texto": "Escena + hecho + giro + desenlace:",
+        "formula": [
+          {
+            "texto": "At every reunion, my uncle would tell…",
+            "nota": "escena o hábito: would / used to"
+          },
+          {
+            "texto": "I was about to cut the cake when…",
+            "nota": "hecho que la rompe, en past simple"
+          },
+          {
+            "texto": "Little did we know that… had been planning…",
+            "nota": "giro mirando atrás y desenlace anticipado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I opened the door and I see my grandmother with the cake.",
+          "correcto": "I opened the door and saw my grandmother with the cake.",
+          "explicacion": "En una anécdota en pasado no se mezcla el presente: todos los verbos de la línea principal van en past simple."
+        },
+        {
+          "incorrecto": "Did you really ate the whole cake?",
+          "correcto": "Did you really eat the whole cake?",
+          "explicacion": "Tras did el verbo vuelve a la forma base: did you eat, no did you ate."
+        }
+      ],
+      "situacion": {
+        "contexto": "En la reunión familiar, Ana cuenta una anécdota de su abuela y Leo le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The kitchen smelled of coffee, and I was about to cut the cake when I noticed the candles had gone out.",
+            "traduccion": "La cocina olía a café y yo iba a cortar la tarta cuando vi que las velas se habían apagado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Had they? Why?",
+            "traduccion": "¿Sí? ¿Por qué?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Little did I know, my grandmother had been planning a prank for weeks. The cake was made of bread!",
+            "traduccion": "No tenía ni idea de que mi abuela llevaba semanas planeando una broma. ¡La tarta era de pan!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No way! Did you eat it?",
+            "traduccion": "¡No puede ser! ¿Te lo comiste?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I did. Silence. Then everyone started laughing.",
+            "traduccion": "Sí. Silencio. Luego todos empezaron a reír."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué había preparado la abuela de Ana?",
+          "opciones": [
+            {
+              "es": "Una broma: la tarta estaba hecha de pan."
+            },
+            {
+              "es": "Una tarta gigante de chocolate."
+            },
+            {
+              "es": "Una sorpresa para Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que su abuela llevaba semanas planeando una broma y que la tarta era de pan."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escena"
+            },
+            {
+              "texto": "Used to / would, past continuous, sentidos"
+            },
+            {
+              "texto": "The kitchen smelled of coffee…"
+            }
+          ],
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "Past simple, was about to"
+            },
+            {
+              "texto": "I was about to cut the cake when…"
+            }
+          ],
+          [
+            {
+              "texto": "Giro"
+            },
+            {
+              "texto": "Had been + -ing, Little did I know"
+            },
+            {
+              "texto": "…had been planning the prank for weeks."
+            }
+          ],
+          [
+            {
+              "texto": "Final"
+            },
+            {
+              "texto": "Fragmento o frase corta"
+            },
+            {
+              "texto": "Silence. Then laughter."
+            }
+          ],
+          [
+            {
+              "texto": "Público"
+            },
+            {
+              "texto": "Eco + marcador"
+            },
+            {
+              "texto": "Did you? Anyway, …"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,875 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 9,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n9.class-85",
+  "title": {
+    "en": "A press summary",
+    "es": "Un resumen de prensa"
+  },
+  "objectives": {
+    "es": [
+      "Resumir un artículo de divulgación con lenguaje nominal y explicarlo después en lenguaje llano, con verbos y personas."
+    ]
+  },
+  "concepts": [
+    "n9-nominal-style-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n9.class-84"
+  ],
+  "usesVocabulary": [
+    "expansion",
+    "allocation",
+    "participation",
+    "summary",
+    "gardener",
+    "plot",
+    "researcher"
+  ],
+  "usesPatterns": [
+    "n9-nominal-style-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "expansion",
+      "es": "expansión"
+    },
+    {
+      "en": "allocation",
+      "es": "reparto"
+    },
+    {
+      "en": "participation",
+      "es": "participación"
+    },
+    {
+      "en": "summary",
+      "es": "resumen"
+    },
+    {
+      "en": "gardener",
+      "es": "jardinero"
+    },
+    {
+      "en": "plot",
+      "es": "parcela"
+    },
+    {
+      "en": "researcher",
+      "es": "investigador"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n9.class-85.t01",
+      "en": "The expansion of community gardens has changed many European cities.",
+      "es": "La expansión de los huertos comunitarios ha cambiado muchas ciudades europeas.",
+      "explanationEs": "expansion: el sustantivo de expand, ideal para abrir un resumen.",
+      "segments": [
+        "The expansion of community gardens",
+        "has changed many European cities."
+      ],
+      "audioText": "The expansion of community gardens has changed many European cities.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-nominal-style-5"
+    },
+    {
+      "id": "en.n9.class-85.t02",
+      "en": "Participation in a garden brings neighbours together.",
+      "es": "La participación en un huerto une a los vecinos.",
+      "explanationEs": "participation + in: nombra lo que hacen las personas como una idea.",
+      "segments": [
+        "Participation in a garden",
+        "brings neighbours together."
+      ],
+      "audioText": "Participation in a garden brings neighbours together.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-nominal-style-5"
+    },
+    {
+      "id": "en.n9.class-85.t03",
+      "en": "A researcher found a reduction in stress among people who work in gardens.",
+      "es": "Un investigador halló una reducción del estrés entre las personas que trabajan en huertos.",
+      "explanationEs": "reduction in + sustantivo: el dato central del resumen.",
+      "segments": [
+        "A researcher found a reduction in stress",
+        "among people who work in gardens."
+      ],
+      "audioText": "A researcher found a reduction in stress among people who work in gardens.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-nominal-style-5"
+    },
+    {
+      "id": "en.n9.class-85.t04",
+      "en": "Each gardener has a small plot and a key to the shared tools.",
+      "es": "Cada jardinero tiene una parcela pequeña y una llave de las herramientas comunes.",
+      "explanationEs": "Esta frase ya es llana: sujeto, verbo y objeto concretos.",
+      "segments": [
+        "Each gardener has a small plot and",
+        "a key to the shared tools."
+      ],
+      "audioText": "Each gardener has a small plot and a key to the shared tools.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-nominal-style-5"
+    },
+    {
+      "id": "en.n9.class-85.t05",
+      "en": "The allocation of public land remains a matter for the council.",
+      "es": "El reparto del suelo público sigue siendo un asunto del ayuntamiento.",
+      "explanationEs": "allocation of: nominalización que esconde quién reparte y a quién.",
+      "segments": [
+        "The allocation of public land remains",
+        "a matter for the council."
+      ],
+      "audioText": "The allocation of public land remains a matter for the council.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-nominal-style-5"
+    },
+    {
+      "id": "en.n9.class-85.t06",
+      "en": "A good summary keeps the main facts and leaves out small details.",
+      "es": "Un buen resumen conserva los datos principales y deja fuera los detalles pequeños.",
+      "explanationEs": "summary: lo que escribes al final; breve, con datos y sin ejemplos.",
+      "segments": [
+        "A good summary keeps the main",
+        "facts and leaves out small details."
+      ],
+      "audioText": "A good summary keeps the main facts and leaves out small details.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-nominal-style-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n9.c85.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la versión llana de la frase sobre los huertos comunitarios."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Community gardens are stressed by expansion."
+          },
+          {
+            "text": "More people have started gardens, and they feel less stressed."
+          },
+          {
+            "text": "Stress has led to more community gardens."
+          }
+        ],
+        "teaches": [
+          "n9-nominal-style-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.pg01.seed-0",
+          "feedback": {
+            "es": "La versión llana cambia expansion y reduction por verbos y personas."
+          },
+          "hint": {
+            "es": "Vuelve de cada sustantivo al verbo: ¿quién hace qué?"
+          },
+          "text": "The expansion of community gardens has led to a reduction in stress."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7f5f38778f0c12d6858fad2aefc46113fc4fde899fa5cc28ed9635f9d4b1e005"
+      },
+      {
+        "id": "en.n9.c85.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La participación en el huerto une a los vecinos.»"
+        },
+        "answer": {
+          "text": "Participation",
+          "accepted": [
+            "Participation"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-nominal-style-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.pg02.seed-0",
+          "feedback": {
+            "es": "Participation es el sustantivo de participate y abre la frase como sujeto."
+          },
+          "hint": {
+            "es": "Es el sustantivo de participate y va con mayúscula al principio."
+          },
+          "text": "___ in the garden brings neighbours together."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:86596af50ecad8182d0a7d97b6cc2aad216a2aeefffc4869f47d9cd3aa787b65"
+      },
+      {
+        "id": "en.n9.c85.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Cada jardinero tiene una parcela pequeña.»"
+        },
+        "answer": {
+          "text": "Each gardener has a small plot",
+          "tokens": [
+            "Each",
+            "gardener",
+            "has",
+            "a",
+            "small",
+            "plot"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-nominal-style-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.pg03.seed-0",
+          "feedback": {
+            "es": "Each gardener es el sujeto, has el verbo y a small plot lo que tiene."
+          },
+          "hint": {
+            "es": "Sujeto, verbo has y después lo que tiene."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9277cd18d69771ad5ddc4379926b06e6cbe3a9f4ac65241a1dd8603574bf63ba"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n9.c85.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada frase nominal con su versión llana en español."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "the expansion of community gardens",
+              {
+                "es": "cada vez más gente crea huertos"
+              }
+            ],
+            [
+              "a reduction in stress",
+              {
+                "es": "la gente se siente menos estresada"
+              }
+            ],
+            [
+              "the allocation of public land",
+              {
+                "es": "el ayuntamiento decide quién recibe el terreno"
+              }
+            ],
+            [
+              "participation in a garden",
+              {
+                "es": "los vecinos cuidan juntos el huerto"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.p01.seed-0",
+          "feedback": {
+            "es": "Cada frase nominal se puede explicar con un verbo y una persona."
+          },
+          "pairs": [
+            [
+              "the expansion of community gardens",
+              {
+                "es": "cada vez más gente crea huertos"
+              }
+            ],
+            [
+              "a reduction in stress",
+              {
+                "es": "la gente se siente menos estresada"
+              }
+            ],
+            [
+              "the allocation of public land",
+              {
+                "es": "el ayuntamiento decide quién recibe el terreno"
+              }
+            ],
+            [
+              "participation in a garden",
+              {
+                "es": "los vecinos cuidan juntos el huerto"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e12acd20747439fc6082e058d941f30dec7ee584a1c619877d4671728b76f64e"
+      },
+      {
+        "id": "en.n9.c85.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el resumen y elige su versión llana."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Food costs have led to more gardens in every family."
+          },
+          {
+            "text": "Families pay less because gardens are expensive."
+          },
+          {
+            "text": "More people have gardens, so many families spend less on food."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.p02.seed-0",
+          "feedback": {
+            "es": "Expansion vuelve a «more people have gardens» y reduction in food costs a «spend less on food»."
+          },
+          "audio": "The expansion of community gardens has led to a reduction in food costs for many families.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:47a1adf0c9d5ff3f6dd226a0dd1277ded76e69264a21d9c711912c01dfe8f984"
+      },
+      {
+        "id": "en.n9.c85.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Un investigador halló menos estrés entre los jardineros.»"
+        },
+        "answer": {
+          "text": "researcher",
+          "accepted": [
+            "researcher"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.p03.seed-0",
+          "feedback": {
+            "es": "Researcher es la persona que investiga."
+          },
+          "text": "A ___ found less stress among gardeners."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4c4aaf3786ae56748ea1e4b4e36f2cdfb6143d3f646a7432d5b5759dfb358154"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n9.c85.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Resume el artículo en 60 a 90 palabras con lenguaje nominal."
+        },
+        "answer": {
+          "text": "The fast expansion of community gardens in European cities has led to a reduction in stress and in food costs for many families. Participation has brought neighbours together. However, a lack of public land limits further growth, and councils disagree about the allocation of plots: some give them to schools and others to older people. A fair system for the allocation of land is the next step.",
+          "accepted": [
+            "The fast expansion of community gardens in European cities has led to a reduction in stress and in food costs for many families. Participation has brought neighbours together. However, a lack of public land limits further growth, and councils disagree about the allocation of plots: some give them to schools and others to older people. A fair system for the allocation of land is the next step.",
+            "The expansion of community gardens across European cities has produced a fall in stress and in spending on food. Participation brings neighbours together, but the allocation of scarce public land divides the councils, because some want to give plots to schools and others to older people. A fair system is now necessary."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5",
+          "n9-nominal-style-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.e01.seed-0",
+          "feedback": {
+            "es": "Un buen resumen nominal nombra la expansión, el efecto (una reducción), la participación y el límite (falta de terreno y reparto)."
+          },
+          "text": "Community gardens are growing fast in European cities. In the last ten years, thousands of neighbours have started to grow vegetables together on small plots of public land. Researchers say that gardeners feel less stress and eat more fresh food, and many families spend less money on food. However, there is not enough land in the cities, and councils disagree about who should receive the plots. Some councils give the plots to schools, others to older people. A fair system is the next step.",
+          "scoring": {
+            "wordRange": [
+              50,
+              110
+            ],
+            "evidenceGroups": [
+              [
+                "expansion",
+                "growth",
+                "spread"
+              ],
+              [
+                "reduction in",
+                "decrease in",
+                "fall in",
+                "less stress",
+                "stress reduction"
+              ],
+              [
+                "participation",
+                "involvement",
+                "take part",
+                "taking part"
+              ],
+              [
+                "lack of",
+                "shortage of",
+                "not enough",
+                "limited land",
+                "limits",
+                "scarce"
+              ],
+              [
+                "allocation",
+                "who should receive",
+                "distribution"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:45d40a1bd10efae26d627d2b1f406f4028abab71c2e5f882881bf573de42a8c0"
+      },
+      {
+        "id": "en.n9.c85.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué problema menciona la frase del resumen de prensa?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Councils do not agree about who gets the land."
+          },
+          {
+            "text": "Neighbours do not want to take part."
+          },
+          {
+            "text": "There is more stress than before."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5",
+          "n9-nominal-style-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.e02.seed-0",
+          "feedback": {
+            "es": "«The allocation of land divides the councils» significa que los ayuntamientos no se ponen de acuerdo sobre quién recibe el terreno."
+          },
+          "text": "Participation has brought neighbours together, but the allocation of land divides the councils."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2663b58ad754ae0b1d1e0a57653c7c6eeac063023dd6aad349d0bd91a22f0ef0"
+      },
+      {
+        "id": "en.n9.c85.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Pasa cada frase llana a versión nominal con el sustantivo del paréntesis."
+        },
+        "answer": {
+          "text": "reduction | growth | disagreement",
+          "accepted": [
+            "reduction | growth | disagreement"
+          ],
+          "parts": [
+            {
+              "text": "reduction",
+              "accepted": [
+                "reduction"
+              ]
+            },
+            {
+              "text": "growth",
+              "accepted": [
+                "growth"
+              ]
+            },
+            {
+              "text": "disagreement",
+              "accepted": [
+                "disagreement"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5",
+          "n9-nominal-style-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.e03.seed-0",
+          "feedback": {
+            "es": "Reduce, grow y disagree dan reduction, growth y disagreement."
+          },
+          "sentences": [
+            "Stress is falling, so there is a ___ in stress. (reduce)",
+            "Gardens are growing fast, so the ___ of gardens is clear. (grow)",
+            "The councils do not agree, so there is ___ about the plots. (disagree)"
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:04f07bbcf9c2e60837cd6d6e444f43cb5fdfdf099afe6a89bf23c1a3ce026f49"
+      },
+      {
+        "id": "en.n9.c85.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La escasez de terreno limita la expansión.»"
+        },
+        "answer": {
+          "text": "A shortage of land limits the expansion",
+          "tokens": [
+            "A",
+            "shortage",
+            "of",
+            "land",
+            "limits",
+            "the",
+            "expansion"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5",
+          "n9-nominal-style-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.e04.seed-0",
+          "feedback": {
+            "es": "A shortage of land es la causa y limits the expansion el efecto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9987dca53315e72203d32c86514a8ec2ef0f3e9bb4293913acecf5c385e24f2c"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n9.c85.r01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la explicación oral y elige qué dice sobre el terreno público."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The council wants to sell all the land."
+          },
+          {
+            "text": "Someone must decide who uses the limited land."
+          },
+          {
+            "text": "Everyone can use the land without rules."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.r01.seed-0",
+          "feedback": {
+            "es": "La versión llana dice que hay poco terreno y que alguien (the council) debe decidir quién lo usa."
+          },
+          "audio": "In plain English: there is not much public land, so the council has to decide who can use it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0aabb1112e2cf3ff9265db1472d358671296d7c3a89f2c8949edd6672007a71d"
+      },
+      {
+        "id": "en.n9.c85.r02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Explica en lenguaje llano, con verbos y personas, la frase del artículo (40-60 palabras)"
+        },
+        "answer": {
+          "text": "More and more people are starting community gardens, and they feel less stressed. But there is not much land in the cities, so councils must decide who gets a plot, and they do not always agree about it. Everyone can take part, and neighbours meet each other every week.",
+          "accepted": [
+            "More and more people are starting community gardens, and they feel less stressed. But there is not much land in the cities, so councils must decide who gets a plot, and they do not always agree about it. Everyone can take part, and neighbours meet each other every week.",
+            "Many people now start gardens in the city. Gardening helps them relax, and they feel less stressed. The problem is that there is little land, so the council has to choose who can use it. They also meet their neighbours there."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.r02.seed-0",
+          "feedback": {
+            "es": "La versión llana cambia expansion, reduction y allocation por verbos con personas: people start, they feel less stressed, the council decides."
+          },
+          "text": "Explica a un amigo, con verbos y personas, esta frase: «The expansion of community gardens has led to a reduction in stress, although the allocation of land remains difficult.»",
+          "scoring": {
+            "wordRange": [
+              30,
+              75
+            ],
+            "evidenceGroups": [
+              [
+                "more and more people",
+                "more people",
+                "many people",
+                "people start",
+                "people are starting",
+                "people have started"
+              ],
+              [
+                "feel less",
+                "less stress",
+                "less stressed",
+                "relax",
+                "calm"
+              ],
+              [
+                "decide who",
+                "decides who",
+                "must decide",
+                "has to decide",
+                "have to decide",
+                "choose who",
+                "has to choose"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:31148360587f457a25966d70a55759a0d051a359ceedf649294d95b983f71535"
+      },
+      {
+        "id": "en.n9.c85.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El resumen deja fuera los detalles pequeños.»"
+        },
+        "answer": {
+          "text": "summary",
+          "accepted": [
+            "summary"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-nominal-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c85.r03.seed-0",
+          "feedback": {
+            "es": "Summary es el texto breve que conserva solo los datos principales."
+          },
+          "text": "A good ___ leaves out small details."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f19a7c638f868d7c0b38d5d8125efbe5f02e9b2604570d83a9810a7b27fcacb7"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n9.c85.e01": {
+      "reteach": "en.n9.class-85.t01",
+      "review": "en.n9.c85.r01"
+    },
+    "en.n9.c85.e02": {
+      "reteach": "en.n9.class-85.t02",
+      "review": "en.n9.c85.r02"
+    },
+    "en.n9.c85.e03": {
+      "reteach": "en.n9.class-85.t03",
+      "review": "en.n9.c85.r03"
+    },
+    "en.n9.c85.e04": {
+      "reteach": "en.n9.class-85.t04",
+      "review": "en.n9.c85.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n9-nominal-style-1",
+    "n9-nominal-style-2",
+    "n9-nominal-style-3",
+    "n9-nominal-style-4",
+    "n9-nominal-style-5"
+  ]
+}

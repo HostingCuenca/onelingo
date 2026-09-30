@@ -22,7 +22,9 @@ CAMPOS_HUELLA = {
 
 def palabras(texto):
     texto = texto.replace("’", "'").replace("___", " ")
-    return [p for p in PUNTUACION.sub(" ", texto.lower()).split() if p and p != "-"]
+    # Comillas simples de cita ('once', shopkeepers') no forman parte de la palabra.
+    res = [p.strip("'") for p in PUNTUACION.sub(" ", texto.lower()).split()]
+    return [p for p in res if p and p != "-"]
 
 
 def bases(w):

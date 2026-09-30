@@ -1,0 +1,874 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 9,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n9.class-21",
+  "title": {
+    "en": "Who says what in a meeting",
+    "es": "Quién dice qué en una reunión"
+  },
+  "objectives": {
+    "es": [
+      "Identificar quién dirige, quién anota y qué función cumple cada intervención en una reunión de vecinos."
+    ]
+  },
+  "concepts": [
+    "n9-community-meetings-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n9.class-20"
+  ],
+  "usesVocabulary": [
+    "chair",
+    "secretary",
+    "agenda",
+    "item",
+    "minutes",
+    "member",
+    "propose",
+    "interrupt",
+    "clarify",
+    "vote"
+  ],
+  "usesPatterns": [
+    "n9-community-meetings-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "chair",
+      "es": "presidente o presidenta de la reunión"
+    },
+    {
+      "en": "secretary",
+      "es": "secretario o secretaria"
+    },
+    {
+      "en": "agenda",
+      "es": "orden del día"
+    },
+    {
+      "en": "item",
+      "es": "punto (del orden del día)"
+    },
+    {
+      "en": "minutes",
+      "es": "acta"
+    },
+    {
+      "en": "member",
+      "es": "miembro"
+    },
+    {
+      "en": "propose",
+      "es": "proponer"
+    },
+    {
+      "en": "interrupt",
+      "es": "interrumpir"
+    },
+    {
+      "en": "clarify",
+      "es": "aclarar"
+    },
+    {
+      "en": "vote",
+      "es": "votar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n9.class-21.t01",
+      "en": "As chair, Ana opens the meeting and reads the first item on the agenda.",
+      "es": "Como presidenta, Ana abre la reunión y lee el primer punto del orden del día.",
+      "explanationEs": "Quien preside (chair) abre, da los turnos y cierra la sesión.",
+      "segments": [
+        "As chair, Ana opens the meeting and",
+        "reads the first item on the agenda."
+      ],
+      "audioText": "As chair, Ana opens the meeting and reads the first item on the agenda.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-community-meetings-1"
+    },
+    {
+      "id": "en.n9.class-21.t02",
+      "en": "The secretary writes the minutes, so every member can check what was agreed.",
+      "es": "La secretaria redacta el acta para que cada miembro pueda comprobar lo acordado.",
+      "explanationEs": "Minutes es el acta escrita de la reunión; no significa «minutos» aquí.",
+      "segments": [
+        "The secretary writes the minutes, so every",
+        "member can check what was agreed."
+      ],
+      "audioText": "The secretary writes the minutes, so every member can check what was agreed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-community-meetings-1"
+    },
+    {
+      "id": "en.n9.class-21.t03",
+      "en": "I would like to propose that we move the next meeting to Thursday.",
+      "es": "Me gustaría proponer que traslademos la próxima reunión al jueves.",
+      "explanationEs": "I would like to propose + that + oración: abre una propuesta con cortesía.",
+      "segments": [
+        "I would like to propose that we",
+        "move the next meeting to Thursday."
+      ],
+      "audioText": "I would like to propose that we move the next meeting to Thursday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-community-meetings-1"
+    },
+    {
+      "id": "en.n9.class-21.t04",
+      "en": "Sorry to interrupt, but could I clarify one point before we vote?",
+      "es": "Perdón por interrumpir, pero ¿podría aclarar un punto antes de votar?",
+      "explanationEs": "Sorry to + verbo base pide permiso; could I… suaviza la petición.",
+      "segments": [
+        "Sorry to interrupt, but could I",
+        "clarify one point before we vote?"
+      ],
+      "audioText": "Sorry to interrupt, but could I clarify one point before we vote?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-community-meetings-1"
+    },
+    {
+      "id": "en.n9.class-21.t05",
+      "en": "Mia, let me finish this item, and then you can clarify your question.",
+      "es": "Mia, déjame terminar este punto y luego podrás aclarar tu pregunta.",
+      "explanationEs": "El chair controla los turnos: let me finish / then you can…",
+      "segments": [
+        "Mia, let me finish this item, and",
+        "then you can clarify your question."
+      ],
+      "audioText": "Mia, let me finish this item, and then you can clarify your question.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n9-community-meetings-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n9.c21.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué función cumple esta intervención en el acta?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She opens the meeting."
+          },
+          {
+            "text": "She proposes a vote."
+          },
+          {
+            "text": "She writes the minutes."
+          }
+        ],
+        "teaches": [
+          "n9-community-meetings-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.pg01.seed-0",
+          "feedback": {
+            "es": "Ana saluda y pasa al primer punto del orden del día: abrir la sesión es tarea de quien la preside. No propone una votación ni redacta el acta."
+          },
+          "hint": {
+            "es": "Piensa en qué hace quien dirige la sesión cuando empieza."
+          },
+          "text": "Ana: Good evening, everyone. Let's start with item one."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:aa1886885754b3333a0472001e691043bb363903a198235ced4bdcd4b0c08324"
+      },
+      {
+        "id": "en.n9.c21.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Perdona que te interrumpa, pero ¿puedo aclarar un punto?»"
+        },
+        "answer": {
+          "text": "interrupt",
+          "accepted": [
+            "interrupt"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-community-meetings-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.pg02.seed-0",
+          "feedback": {
+            "es": "Sorry to + verbo base: interrupt es el verbo que pide permiso para cortar la palabra."
+          },
+          "hint": {
+            "es": "Es el verbo de cortar la palabra a alguien; tras to va la forma base."
+          },
+          "text": "Sorry to ___, but could I clarify one point?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cbff805062d67c5b1e23830b6cf8878e463b9800844f630ba4a2d240cfd596e9"
+      },
+      {
+        "id": "en.n9.c21.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me gustaría proponer que votemos hoy.»"
+        },
+        "answer": {
+          "text": "I would like to propose that we vote today",
+          "tokens": [
+            "I",
+            "would",
+            "like",
+            "to",
+            "propose",
+            "that",
+            "we",
+            "vote",
+            "today"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n9-community-meetings-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.pg03.seed-0",
+          "feedback": {
+            "es": "La propuesta cortés empieza con I would like to propose that y continúa con sujeto + verbo."
+          },
+          "hint": {
+            "es": "Empieza con la fórmula de cortesía I would like to y acaba con el momento."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:939ae0d6fb1551c2c872b18455b82693e4cad5cb4c1cf846935445a6816c1b73"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n9.c21.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada rol o documento de la reunión con su tarea."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "chair",
+              {
+                "es": "Da la palabra y dirige la sesión"
+              }
+            ],
+            [
+              "secretary",
+              {
+                "es": "Anota lo que se acuerda"
+              }
+            ],
+            [
+              "agenda",
+              {
+                "es": "Lista los puntos que se tratarán"
+              }
+            ],
+            [
+              "member",
+              {
+                "es": "Participa, propone y vota"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.p01.seed-0",
+          "feedback": {
+            "es": "El chair dirige, el secretary anota, el agenda ordena los puntos y el member participa con voz y voto."
+          },
+          "pairs": [
+            [
+              "chair",
+              {
+                "es": "Da la palabra y dirige la sesión"
+              }
+            ],
+            [
+              "secretary",
+              {
+                "es": "Anota lo que se acuerda"
+              }
+            ],
+            [
+              "agenda",
+              {
+                "es": "Lista los puntos que se tratarán"
+              }
+            ],
+            [
+              "member",
+              {
+                "es": "Participa, propone y vota"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f5a797766c1c574ca2389f927c805d19e3f5a459a5636010cb14af29acebcb40"
+      },
+      {
+        "id": "en.n9.c21.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige la función de esta intervención."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "He asks someone to repeat a figure."
+          },
+          {
+            "text": "He suggests a plan for the group to decide."
+          },
+          {
+            "text": "He closes the meeting."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.p02.seed-0",
+          "feedback": {
+            "es": "«I would like to propose» abre una propuesta y luego pregunta si conviene a todos: el grupo tiene que decidir."
+          },
+          "audio": "I would like to propose that we move the meeting to Thursday. Is that convenient for everyone?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e114ae3b09d2ffedadb51c7b4a2b121135a59fb59a67dbd45f33853c14365248"
+      },
+      {
+        "id": "en.n9.c21.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es la forma cortés de pedir permiso para aclarar algo?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I clarify this point now."
+          },
+          {
+            "text": "You must clarify this point."
+          },
+          {
+            "text": "Could I clarify one point, please?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.p03.seed-0",
+          "feedback": {
+            "es": "Could I + verbo base es una petición suave. Las otras dos afirman o mandan, en lugar de pedir turno."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1b2acc5a5a364a361de2c358407b5faaa8d2a19533feab9b5d9b871d0cc99354"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n9.c21.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace Carlos al final del acta?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He closes the meeting."
+          },
+          {
+            "text": "He asks for a clarification."
+          },
+          {
+            "text": "He proposes a vote."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.e01.seed-0",
+          "feedback": {
+            "es": "«The meeting is closed» es la fórmula de cierre de quien preside. Carlos no pregunta nada ni propone una votación."
+          },
+          "text": "Carlos: Thank you, everyone. That is all for today, so the meeting is closed."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9fffdc3487fc30fab5e0f4247861e52a1c0c228084577f76844ccbbada273490"
+      },
+      {
+        "id": "en.n9.c21.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quiere aclarar el hablante."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "When the next meeting will be."
+          },
+          {
+            "text": "Whether votes count by person or by family."
+          },
+          {
+            "text": "Who is writing the record."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.e02.seed-0",
+          "feedback": {
+            "es": "Pide aclarar si cada miembro vota por separado o si solo vota una persona por familia. No pregunta por la fecha ni por el acta."
+          },
+          "audio": "Excuse me, could I clarify something before we vote? Does each member get one vote, or only one vote for each family?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d7a7830146e27b6cf41c605eebec495286c4d148592ed79f709ea01773829a35"
+      },
+      {
+        "id": "en.n9.c21.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Votamos el lunes.» «Propongo una fecha.» «Lee el acta de la semana pasada.»"
+        },
+        "answer": {
+          "text": "vote | propose | minutes",
+          "accepted": [
+            "vote | propose | minutes"
+          ],
+          "parts": [
+            {
+              "text": "vote",
+              "accepted": [
+                "vote"
+              ]
+            },
+            {
+              "text": "propose",
+              "accepted": [
+                "propose"
+              ]
+            },
+            {
+              "text": "minutes",
+              "accepted": [
+                "minutes"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.e03.seed-0",
+          "feedback": {
+            "es": "Las tres piezas del vocabulario de reunión: vote para decidir, propose para sugerir y minutes para el acta."
+          },
+          "sentences": [
+            "We ___ on the new plan on Monday.",
+            "I would like to ___ a date.",
+            "Ana reads the ___ from last week."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cc9906767ba3824ab199652234a6f127df0535d023b1b3560e8bbfddc5a6bc11"
+      },
+      {
+        "id": "en.n9.c21.e04",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase de una reunión con su función."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Let's move on to item two.",
+              {
+                "es": "Pasar al siguiente punto"
+              }
+            ],
+            [
+              "Could you repeat that figure, please?",
+              {
+                "es": "Pedir una aclaración"
+              }
+            ],
+            [
+              "Sorry, but we are running out of time.",
+              {
+                "es": "Interrumpir con cortesía"
+              }
+            ],
+            [
+              "I propose that we vote now.",
+              {
+                "es": "Hacer una propuesta"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.e04.seed-0",
+          "feedback": {
+            "es": "Cada frase tiene una fórmula reconocible: move on to para avanzar, could you repeat para aclarar, sorry, but para cortar con cortesía y I propose para sugerir."
+          },
+          "pairs": [
+            [
+              "Let's move on to item two.",
+              {
+                "es": "Pasar al siguiente punto"
+              }
+            ],
+            [
+              "Could you repeat that figure, please?",
+              {
+                "es": "Pedir una aclaración"
+              }
+            ],
+            [
+              "Sorry, but we are running out of time.",
+              {
+                "es": "Interrumpir con cortesía"
+              }
+            ],
+            [
+              "I propose that we vote now.",
+              {
+                "es": "Hacer una propuesta"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ce93d4e12492a20f7e1193f5d7b5a7801affb12712bcdee15737aa255a947455"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n9.c21.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace Sara en esta parte del acta?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She writes the minutes."
+          },
+          {
+            "text": "She closes the meeting."
+          },
+          {
+            "text": "She proposes something to the group."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.r01.seed-0",
+          "feedback": {
+            "es": "Sara empieza con «I would like to propose»: propone algo al grupo. Tom y Ana reaccionan a su propuesta."
+          },
+          "text": "Sara: I would like to propose that we ask the council for a new bench. Tom: I agree with Sara. Ana: Then let's vote."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:970d055f0ec3d6a5d30109aa44ff7cf320519463ca06042e56460bb8b80725b7"
+      },
+      {
+        "id": "en.n9.c21.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hizo la secretaria."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She read the record of the last meeting."
+          },
+          {
+            "text": "She opened the meeting."
+          },
+          {
+            "text": "She proposed a vote."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.r02.seed-0",
+          "feedback": {
+            "es": "La secretaria leyó el acta del mes pasado; quien abrió la reunión fue la presidenta."
+          },
+          "audio": "Our chair opened the meeting, and then our secretary read the minutes from last month. After that, we moved on to the first item.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ec6134514ba642fa0715c8b65ba472a08e5e98777363a7653521400fc74995ee"
+      },
+      {
+        "id": "en.n9.c21.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Déjame terminar este punto y luego aclaras tu pregunta.»"
+        },
+        "answer": {
+          "text": "Let me finish this item and then you can clarify your question",
+          "tokens": [
+            "Let",
+            "me",
+            "finish",
+            "this",
+            "item",
+            "and",
+            "then",
+            "you",
+            "can",
+            "clarify",
+            "your",
+            "question"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n9-community-meetings-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n9.c21.r03.seed-0",
+          "feedback": {
+            "es": "El turno se ordena con let me finish y después you can clarify: primero termina quien habla."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:563829befba2b80207e04b507236eaea8daba43635738a8be7439609b2067776"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n9.c21.e01": {
+      "reteach": "en.n9.class-21.t01",
+      "review": "en.n9.c21.r01"
+    },
+    "en.n9.c21.e02": {
+      "reteach": "en.n9.class-21.t02",
+      "review": "en.n9.c21.r02"
+    },
+    "en.n9.c21.e03": {
+      "reteach": "en.n9.class-21.t03",
+      "review": "en.n9.c21.r03"
+    },
+    "en.n9.c21.e04": {
+      "reteach": "en.n9.class-21.t04",
+      "review": "en.n9.c21.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

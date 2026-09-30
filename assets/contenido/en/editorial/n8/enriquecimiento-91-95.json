@@ -1,0 +1,415 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n8.class-91": {
+      "explicacion": {
+        "titulo": "Tono, registro y lo implícito",
+        "texto": "Un mismo contenido cambia de sentido según tres cosas. El tono es la actitud del mensaje (cordial, brusco, sarcástico). El registro es el nivel de formalidad: no hablas igual con un amigo que con tu directora. Lo implícito es lo que se sugiere sin decirlo: una indirecta describe un hecho (hace frío) pero pide una acción (cierra la ventana). Busca pistas en las palabras (please, grateful, hey), en las estructuras (would, could) y en el contexto. Con sarcasmo, las palabras dicen lo contrario de lo que se quiere decir."
+      },
+      "patron": {
+        "texto": "Pista + efecto en el mensaje:",
+        "formula": [
+          {
+            "texto": "Wow, great timing.",
+            "nota": "tono sarcástico: palabra positiva, sentido negativo"
+          },
+          {
+            "texto": "I would be grateful if you could…",
+            "nota": "registro formal: would + could"
+          },
+          {
+            "texto": "It's cold in here.",
+            "nota": "indirecta: describe un hecho y pide una acción"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Hey Mr Silva, send me the file now.",
+          "correcto": "Dear Mr Silva, I would be grateful if you could send me the file.",
+          "explicacion": "Con un superior el registro debe ser formal: saludo con Dear, would y could. «Hey» y la orden directa suenan bruscos."
+        },
+        {
+          "incorrecto": "I would like that you confirm the date.",
+          "correcto": "I would like you to confirm the date.",
+          "explicacion": "Calco de «quisiera que confirmes». En inglés se dice would like + persona + to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom leen dos mensajes del grupo de teatro y comentan su tono.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Sara wrote: “Great, another change at the last minute.”",
+            "traduccion": "Sara escribió: «Genial, otro cambio a última hora.»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That sounds sarcastic. She is not happy about it.",
+            "traduccion": "Suena sarcástico. No está contenta con eso."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the director wrote: “I would be grateful if you could arrive early.”",
+            "traduccion": "Y la directora escribió: «Le agradecería que pudiera llegar temprano.»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is formal, but polite. She wants us there early.",
+            "traduccion": "Eso es formal, pero cortés. Quiere que lleguemos temprano."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo interpreta Tom los dos mensajes?",
+          "opciones": [
+            {
+              "es": "El de Sara es sarcástico y el de la directora es formal y cortés."
+            },
+            {
+              "es": "El de Sara es cordial y el de la directora es brusco."
+            },
+            {
+              "es": "Los dos son sarcásticos y ninguno pide nada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que el mensaje de Sara «sounds sarcastic» y que el de la directora es «formal, but polite»."
+        }
+      }
+    },
+    "en.n8.class-92": {
+      "explicacion": {
+        "titulo": "Cinco formas del matiz",
+        "texto": "Este repaso junta cinco formas. Tag: la frase lleva al final el auxiliar contrario (You forgot it, didn't you?). Deducción: must have + participio si estás casi seguro y can't have si es imposible. Wish: pasado simple para el presente (I wish I had more time), had + participio para el pasado (I wish I had listened) y would para quejas. Énfasis: It was Tom who… o What I need is… Cautela: may indicate, it could be argued that. En español usamos el subjuntivo; en inglés cambia el tiempo verbal."
+      },
+      "patron": {
+        "texto": "Forma + matiz:",
+        "formula": [
+          {
+            "texto": "You forgot the tickets, didn't you?",
+            "nota": "tag: auxiliar contrario al final"
+          },
+          {
+            "texto": "He must have missed the bus.",
+            "nota": "deducción: must have + participio"
+          },
+          {
+            "texto": "I wish I had more time.",
+            "nota": "deseo: wish + pasado simple"
+          },
+          {
+            "texto": "It was Tom who broke the window.",
+            "nota": "énfasis: It was + quién + who"
+          },
+          {
+            "texto": "The findings may indicate…",
+            "nota": "cautela: may indicate"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You forgot the tickets, isn't it?",
+          "correcto": "You forgot the tickets, didn't you?",
+          "explicacion": "En inglés el tag repite el auxiliar y el sujeto de la frase: forgot pide didn't you; isn't it no sirve para todo."
+        },
+        {
+          "incorrecto": "I wish I would have more time.",
+          "correcto": "I wish I had more time.",
+          "explicacion": "Calco de «ojalá tuviera». Para un deseo sobre el presente se usa wish + pasado simple, no would have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo no encuentran las entradas del concierto.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "You left the tickets at home, didn't you?",
+            "traduccion": "Dejaste las entradas en casa, ¿verdad?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No, I must have put them in my other bag.",
+            "traduccion": "No, debo de haberlas metido en mi otra bolsa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I wish you had checked this morning.",
+            "traduccion": "Ojalá hubieras mirado esta mañana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It was my brother who used that bag yesterday, so I will call him.",
+            "traduccion": "Fue mi hermano quien usó esa bolsa ayer, así que lo llamaré."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué deduce Ana sobre las entradas?",
+          "opciones": [
+            {
+              "es": "Que probablemente las metió en su otra bolsa."
+            },
+            {
+              "es": "Que Leo las perdió en el concierto."
+            },
+            {
+              "es": "Que el concierto está cancelado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «I must have put them in my other bag»: usa must have + participio para deducir lo que probablemente hizo."
+        }
+      }
+    },
+    "en.n8.class-93": {
+      "explicacion": {
+        "titulo": "Cómo analizar una letra",
+        "texto": "Para analizar una letra responde tres preguntas. ¿De qué trata? El tema es la idea central. ¿Cómo suena? El tono es la actitud o el ambiente (calm, tender, sad). ¿Qué recursos usa? Un símil compara con like o as; una metáfora dice que una cosa es otra; una personificación da acciones humanas a un objeto. Además, el estribillo se repite para subrayar la idea y cada estrofa añade un detalle. Apoya siempre tu respuesta en una línea de la letra."
+      },
+      "patron": {
+        "texto": "Tema + tono + recurso:",
+        "formula": [
+          {
+            "texto": "The theme is comfort.",
+            "nota": "tema: la idea central de la letra"
+          },
+          {
+            "texto": "The tone is calm and tender.",
+            "nota": "tono: el ambiente; después de be va un adjetivo"
+          },
+          {
+            "texto": "“The city is a sleeping giant” is a metaphor.",
+            "nota": "recurso: cita la línea y nombra el recurso"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lyric talks about of the bus ride home.",
+          "correcto": "The lyric is about the bus ride home.",
+          "explicacion": "«Trata de» se dice is about; talk about no lleva of."
+        },
+        {
+          "incorrecto": "The tone of the song is calmly.",
+          "correcto": "The tone of the song is calm.",
+          "explicacion": "Después de be se usa un adjetivo (calm), no un adverbio (calmly)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo leen la letra de una canción nueva en clase de inglés.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What is the theme of this lyric?",
+            "traduccion": "¿Cuál es el tema de esta letra?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I think it is about getting home safely after a long day.",
+            "traduccion": "Creo que trata de llegar a casa sano y salvo después de un largo día."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the simile in the chorus? “Like a paper boat on a slow river.”",
+            "traduccion": "¿Y el símil del estribillo? «Como un barquito de papel en un río lento.»"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It makes the singer sound small, but calm.",
+            "traduccion": "Hace que la cantante parezca pequeña, pero tranquila."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué efecto tiene el símil del estribillo para Leo?",
+          "opciones": [
+            {
+              "es": "Hace que la cantante parezca pequeña pero tranquila."
+            },
+            {
+              "es": "Hace que la cantante parezca enfadada y fuerte."
+            },
+            {
+              "es": "Muestra que la cantante está perdida y asustada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «It makes the singer sound small, but calm»: el símil del barquito transmite pequeñez y calma."
+        }
+      }
+    },
+    "en.n8.class-94": {
+      "explicacion": {
+        "titulo": "Tiempos y recursos del relato",
+        "texto": "En un relato combinas tiempos. El pasado simple cuenta las acciones puntuales (I opened the door), el pasado continuo pinta el escenario o lo que estaba pasando (It was raining) y el pasado perfecto marca lo que ocurrió antes (the train had left). El narrador en primera persona dice I. Para dar color añade un símil (like a wall) y para destacar un detalle usa una oración enfática: What I remember most is… o It was… who/that… En español usamos el imperfecto y el pluscuamperfecto; en inglés hay que elegir el tiempo con cuidado."
+      },
+      "patron": {
+        "texto": "Escenario + acción + antes + recurso:",
+        "formula": [
+          {
+            "texto": "It was raining",
+            "nota": "past continuous: el escenario"
+          },
+          {
+            "texto": "when I reached the station,",
+            "nota": "past simple: la acción"
+          },
+          {
+            "texto": "the last train had left.",
+            "nota": "past perfect: lo que pasó antes"
+          },
+          {
+            "texto": "The silence was like a wall.",
+            "nota": "símil con like"
+          },
+          {
+            "texto": "What I remember most is the smell.",
+            "nota": "énfasis con What… is"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I arrived, the train already left.",
+          "correcto": "When I arrived, the train had already left.",
+          "explicacion": "Para una acción anterior a otra del pasado se usa had + participio (had left), no el pasado simple."
+        },
+        {
+          "incorrecto": "It was raining when I was reaching the station.",
+          "correcto": "It was raining when I reached the station.",
+          "explicacion": "La llegada es una acción puntual: va en pasado simple. El continuo se reserva para el escenario."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Mia el principio de su relato para el club de escritura.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Here is my opening: It was raining when I reached the station.",
+            "traduccion": "Aquí está mi inicio: Llovía cuando llegué a la estación."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good scene. But the train left before you arrived, right?",
+            "traduccion": "Buena escena. Pero el tren salió antes de que llegaras, ¿no?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. So I wrote: the last train had already left.",
+            "traduccion": "Sí. Así que escribí: el último tren ya había salido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Nice. Now add a simile: the silence was like a wall.",
+            "traduccion": "Bien. Ahora añade un símil: el silencio era como un muro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué usa Tom «had already left»?",
+          "opciones": [
+            {
+              "es": "Porque el tren salió antes de que él llegara."
+            },
+            {
+              "es": "Porque el tren salía justo cuando llegó."
+            },
+            {
+              "es": "Porque el tren todavía no había llegado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia recuerda que el tren salió antes de que Tom llegara y Tom usa had already left, el pasado perfecto, para esa acción anterior."
+        }
+      }
+    },
+    "en.n8.class-95": {
+      "explicacion": {
+        "titulo": "Las cuatro jugadas de una reunión",
+        "texto": "En una reunión cortés se encadenan cuatro jugadas. Primero, una propuesta clara (I'd like to propose…; What if we…?). Segundo, una concesión: reconoces un punto del otro (Admittedly…; I take your point). Tercero, una discrepancia con tacto: no dices «estás equivocado», sino With respect, I see it differently o I'm not sure it would work. Por último, un acuerdo concreto con plazo (Shall we agree to try it for a month?). Suaviza con perhaps, a bit o might y cierra con To sum up."
+      },
+      "patron": {
+        "texto": "Propuesta + concesión + discrepancia + acuerdo:",
+        "formula": [
+          {
+            "texto": "I'd like to propose a small garden.",
+            "nota": "propuesta: clara y cortés"
+          },
+          {
+            "texto": "Admittedly, it would cost more,",
+            "nota": "concesión: reconoces un punto"
+          },
+          {
+            "texto": "but I'm not sure it would work.",
+            "nota": "discrepancia con tacto: duda, no ataque"
+          },
+          {
+            "texto": "Shall we agree to try it for a month?",
+            "nota": "acuerdo: plazo concreto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You are wrong, so we can't do it.",
+          "correcto": "I take your point, but I'm not sure it would work.",
+          "explicacion": "Decir «you are wrong» cierra la conversación; reconoce el punto y expresa duda con I'm not sure."
+        },
+        {
+          "incorrecto": "I'm not agree with the cost.",
+          "correcto": "I don't agree with the cost.",
+          "explicacion": "Agree es un verbo, no un adjetivo: se niega con don't agree, no con I'm not agree."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana, Tom y Mia están en la reunión de vecinos y Ana propone un huerto junto a la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I'd like to propose a small garden next to the school.",
+            "traduccion": "Me gustaría proponer un pequeño huerto junto a la escuela."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Admittedly, it is a nice idea, but I'm not sure we have the budget.",
+            "traduccion": "Es cierto que es una buena idea, pero no estoy seguro de que tengamos presupuesto."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I take your point. Could we agree to start small and review the cost in June?",
+            "traduccion": "Acepto tu punto. ¿Podríamos acordar empezar poco a poco y revisar el coste en junio?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That sounds fair. I agree.",
+            "traduccion": "Me parece justo. Estoy de acuerdo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué acuerdan Ana y Tom?",
+          "opciones": [
+            {
+              "es": "Empezar con un huerto pequeño y revisar el coste en junio."
+            },
+            {
+              "es": "Cancelar el huerto porque no hay presupuesto."
+            },
+            {
+              "es": "Pedir más dinero al ayuntamiento en junio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana propone «start small and review the cost in June» y Tom responde «That sounds fair. I agree»."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,571 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 86,
+    "end": 90
+  },
+  "classes": {
+    "en.n8.class-86": {
+      "explicacion": {
+        "titulo": "Señalizar una charla",
+        "texto": "Una charla se sigue mejor cuando el orador «señala el camino» (signposting). Hay tres momentos: la apertura (Today I want to present…, I will outline…, firstly…), las transiciones (Let's move on to…, Now I'd like to turn to…) y el cierre (To sum up…, Finally…). Estas expresiones no aportan datos: avisan al público de dónde está la charla. En C1 conviene elegir la fórmula que encaja con el momento y evitar calcos del español como «pass to the next point»."
+      },
+      "patron": {
+        "texto": "Transición: Now I'd like to + turn to + tema:",
+        "formula": [
+          {
+            "texto": "Now I'd like to",
+            "nota": "anuncia el paso a otra parte"
+          },
+          {
+            "texto": "turn to",
+            "nota": "turn to + tema, no turn at ni pass to"
+          },
+          {
+            "texto": "the question of noise.",
+            "nota": "el tema de la parte siguiente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Let's pass to the results.",
+          "correcto": "Let's move on to the results.",
+          "explicacion": "«Pasemos a» se calca como pass to. Para cambiar de parte en una charla se dice move on to."
+        },
+        {
+          "incorrecto": "I am going to talk you about our survey.",
+          "correcto": "I am going to talk to you about our survey.",
+          "explicacion": "Con talk se necesita to antes de la persona (talk to you) y about antes del tema."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom ensaya la apertura de su charla y Ana le da su opinión.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Good morning, everyone. Today I want to present our neighbourhood survey. Firstly, I will explain the method.",
+            "traduccion": "Buenos días a todos. Hoy quiero presentar nuestra encuesta del barrio. En primer lugar, explicaré el método."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good opening, Tom. Now practise the transition to the results.",
+            "traduccion": "Buena apertura, Tom. Ahora practica la transición a los resultados."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Let's move on to the results.",
+            "traduccion": "Pasemos a los resultados."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Perfect. Clear phrases help the audience follow you.",
+            "traduccion": "Perfecto. Las frases claras ayudan al público a seguirte."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo abre Tom su charla?",
+          "opciones": [
+            {
+              "es": "Anuncia que presentará la encuesta del barrio y explicará primero el método."
+            },
+            {
+              "es": "Empieza por los resultados y deja el método para el final."
+            },
+            {
+              "es": "Pide al público que haga preguntas antes de empezar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom abre con «Today I want to present our neighbourhood survey» y anuncia con «Firstly» que explicará el método."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Expresiones"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "apertura"
+            },
+            {
+              "texto": "Today I want to present… · I will outline… · Firstly,…"
+            }
+          ],
+          [
+            {
+              "texto": "transición"
+            },
+            {
+              "texto": "Let's move on to… · Now I'd like to turn to…"
+            }
+          ],
+          [
+            {
+              "texto": "cierre"
+            },
+            {
+              "texto": "To sum up,… · Finally,…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-87": {
+      "explicacion": {
+        "titulo": "Describir tendencias y cifras",
+        "texto": "Para describir un gráfico combina tres piezas: un verbo o sustantivo de tendencia (rise, fall, grow, drop, remain stable), un adverbio o adjetivo que da la intensidad (sharply, slightly, gradually; a steady rise) y una aproximación para la cifra (roughly, around, just under, just over, nearly). Los cambios se completan con from… to… (el punto de partida y de llegada) o con by (cuánto cambió): rose from 900 to 1,200; rose by 300. Si el periodo ya terminó, la tendencia va en pasado."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de tendencia + adverbio + from… to…:",
+        "formula": [
+          {
+            "texto": "Bus use",
+            "nota": "sujeto: lo que se mide"
+          },
+          {
+            "texto": "rose sharply",
+            "nota": "verbo de cambio + adverbio de intensidad"
+          },
+          {
+            "texto": "from 2,000 to 3,500 passengers.",
+            "nota": "punto de partida y de llegada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Bus use rose from 2,000 until 3,500 passengers.",
+          "correcto": "Bus use rose from 2,000 to 3,500 passengers.",
+          "explicacion": "«De… hasta…» lleva a veces a escribir until. Con from se usa to para indicar el punto de llegada."
+        },
+        {
+          "incorrecto": "The figure increased of 20 percent.",
+          "correcto": "The figure increased by 20 percent.",
+          "explicacion": "Para decir cuánto cambia una cifra se usa by, no of («aumentó en un 20 %» = increased by 20 percent)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo preparan la descripción de un gráfico sobre el transporte de su ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at the chart. Bus use rose sharply in March.",
+            "traduccion": "Mira el gráfico. El uso del autobús subió bruscamente en marzo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, from two thousand to three and a half thousand. How do we say the tram figure?",
+            "traduccion": "Sí, de dos mil a tres mil quinientos. ¿Cómo decimos la cifra del tranvía?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "There was a steady rise, from nine hundred to roughly twelve hundred.",
+            "traduccion": "Hubo una subida constante, de novecientos a unos mil doscientos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the cyclists?",
+            "traduccion": "¿Y los ciclistas?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "They fell slightly in June.",
+            "traduccion": "Bajaron ligeramente en junio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pasó con los ciclistas en junio?",
+          "opciones": [
+            {
+              "es": "Su número bajó un poco."
+            },
+            {
+              "es": "Su número subió bruscamente."
+            },
+            {
+              "es": "Su número se mantuvo estable."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que los ciclistas «fell slightly in June»: fell es bajar y slightly indica un cambio pequeño."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Idea",
+          "Expresiones"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "sube"
+            },
+            {
+              "texto": "rise · grow · increase"
+            }
+          ],
+          [
+            {
+              "texto": "baja"
+            },
+            {
+              "texto": "fall · drop · decrease"
+            }
+          ],
+          [
+            {
+              "texto": "no cambia"
+            },
+            {
+              "texto": "remain steady · remain stable"
+            }
+          ],
+          [
+            {
+              "texto": "aproximación"
+            },
+            {
+              "texto": "roughly · around · just under · just over · nearly"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-88": {
+      "explicacion": {
+        "titulo": "Seguir la estructura de una charla",
+        "texto": "Seguir una charla en audio es más fácil si sabes qué esperar: apertura (quién habla y de qué trata), tres o cuatro puntos principales y cierre (resumen e invitación a preguntas). Mientras escuchas, anota solo palabras clave, no frases. Las señales te dicen dónde estás: «I will cover three main points» anuncia el esquema, «The second key point is…» abre el segundo punto y «To recap…» avisa de que empieza el cierre. Si pierdes un dato, espera la siguiente señal y retoma el hilo."
+      },
+      "patron": {
+        "texto": "Número de punto + señal + tema para anotar:",
+        "formula": [
+          {
+            "texto": "The second key point",
+            "nota": "señal: abre el punto 2"
+          },
+          {
+            "texto": "is",
+            "nota": "conector: después va el tema"
+          },
+          {
+            "texto": "safety.",
+            "nota": "palabra clave que debes anotar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will explain you the second point.",
+          "correcto": "I will explain the second point to you.",
+          "explicacion": "Con explain, la persona va detrás con to: explain something to someone («explicarte algo» no se dice explain you)."
+        },
+        {
+          "incorrecto": "In resume, the talk has three parts.",
+          "correcto": "To recap, the talk has three parts.",
+          "explicacion": "«En resumen» no se traduce como in resume. Para cerrar se dice to recap o to sum up."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara comparan sus notas después de escuchar una charla en clase.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I wrote: opening, three main points, closing.",
+            "traduccion": "Yo escribí: apertura, tres puntos principales, cierre."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I noted the points: cost, safety and comfort. The speaker said «To recap» before the closing.",
+            "traduccion": "Yo anoté los puntos: coste, seguridad y comodidad. La oradora dijo «To recap» antes del cierre."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. The second key point was safety. She covered it briefly.",
+            "traduccion": "Sí. El segundo punto clave fue la seguridad. Lo trató brevemente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Leo, ¿qué anunció la oradora antes del cierre?",
+          "opciones": [
+            {
+              "es": "Dijo «To recap», la señal de que empezaba el cierre."
+            },
+            {
+              "es": "Dijo que iba a tratar tres puntos principales."
+            },
+            {
+              "es": "Dijo que la seguridad era su primer punto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo cuenta que la oradora dijo «To recap» antes del cierre: es la señal de que empieza el resumen final."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la charla",
+          "Qué anotar"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "apertura"
+            },
+            {
+              "texto": "el tema y cuántos puntos anuncia"
+            }
+          ],
+          [
+            {
+              "texto": "puntos"
+            },
+            {
+              "texto": "una palabra clave y un dato por punto"
+            }
+          ],
+          [
+            {
+              "texto": "cierre"
+            },
+            {
+              "texto": "el resumen y la invitación a preguntas"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-89": {
+      "explicacion": {
+        "titulo": "El guion de una charla breve",
+        "texto": "Un guion de dos minutos sigue la estructura que ya conoces: apertura (saludo, tema y número de partes), desarrollo con señalizadores (Firstly, Now let's move on to…) y cierre (To sum up… y una invitación a preguntas). Incluye una tendencia con cifras (Our club grew from 12 to 30 members) y escribe frases cortas, pensadas para decirse en voz alta: una idea por frase. Unas 150 a 220 palabras equivalen a unos dos minutos a un ritmo tranquilo."
+      },
+      "patron": {
+        "texto": "Señalizador + tema del punto + tendencia con cifras:",
+        "formula": [
+          {
+            "texto": "Now let's move on to",
+            "nota": "señalizador de transición"
+          },
+          {
+            "texto": "our club:",
+            "nota": "tema del punto"
+          },
+          {
+            "texto": "it rose from 12 to 30 in a year.",
+            "nota": "tendencia: verbo + from… to… + periodo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Thank you for listen me.",
+          "correcto": "Thank you for listening.",
+          "explicacion": "Después de for va el verbo en -ing (listening); «escucharme» no se traduce con me."
+        },
+        {
+          "incorrecto": "Today I will speak about my hobby, which is the swimming.",
+          "correcto": "Today I will talk about my hobby, which is swimming.",
+          "explicacion": "Con deportes y juegos en general no se usa the: my hobby is swimming."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana ensaya su guion en voz alta ante Tom.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Good morning, everyone. My topic is football, and I will cover three points.",
+            "traduccion": "Buenos días a todos. Mi tema es el fútbol y trataré tres puntos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. Do not read too fast. Make a pause after each key point.",
+            "traduccion": "Bien. No leas demasiado rápido. Haz una pausa después de cada punto clave."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK. Firstly, our school team is growing: it rose from twelve to thirty players in a year.",
+            "traduccion": "De acuerdo. En primer lugar, el equipo de nuestro colegio está creciendo: subió de doce a treinta jugadores en un año."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Great, a clear trend with figures. Now rehearse it aloud.",
+            "traduccion": "Genial, una tendencia clara con cifras. Ahora ensáyalo en voz alta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué consejo le da Tom a Ana?",
+          "opciones": [
+            {
+              "es": "Hacer una pausa después de cada punto clave y no leer demasiado rápido."
+            },
+            {
+              "es": "Añadir más cifras en cada frase del guion."
+            },
+            {
+              "es": "Empezar directamente por el cierre de la charla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom le dice «Do not read too fast. Make a pause after each key point»: pide un ritmo más lento y una pausa tras cada punto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del guion",
+          "Qué incluir"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "apertura"
+            },
+            {
+              "texto": "saludo, tema y número de partes"
+            }
+          ],
+          [
+            {
+              "texto": "desarrollo"
+            },
+            {
+              "texto": "señalizadores y una tendencia con cifras"
+            }
+          ],
+          [
+            {
+              "texto": "cierre"
+            },
+            {
+              "texto": "To sum up… y una invitación a preguntas"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-90": {
+      "explicacion": {
+        "titulo": "Responder preguntas difíciles",
+        "texto": "Responder preguntas difíciles sin perder el control requiere tres recursos. Si no entiendes, pide aclaración (Could you clarify…? Could you rephrase that?). Si no tienes el dato exacto, sé honesto y matiza (As far as I know…; I'm afraid I don't have an accurate figure, but…; I would need to check). Si alguien cuestiona tu conclusión, reconoce lo válido y mantén tu postura con cautela (That is a fair challenge. To a certain extent you are right, but…). Es mejor una respuesta honesta y matizada que inventar una cifra."
+      },
+      "patron": {
+        "texto": "Reconocer + conceder + mantener con cautela:",
+        "formula": [
+          {
+            "texto": "That is a fair challenge.",
+            "nota": "reconoce la pregunta como razonable"
+          },
+          {
+            "texto": "To a certain extent, you are right,",
+            "nota": "concede lo que es cierto"
+          },
+          {
+            "texto": "but the trend still seems clear.",
+            "nota": "mantiene la conclusión con cautela"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Can you repeat me the question?",
+          "correcto": "Could you repeat the question?",
+          "explicacion": "Repeat no lleva pronombre de persona (repeat me): se dice repeat the question o repeat it for me."
+        },
+        {
+          "incorrecto": "As far I know, the figure is 400.",
+          "correcto": "As far as I know, the figure is 400.",
+          "explicacion": "La expresión completa es as far as I know: falta el segundo as."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara termina su charla y Tom hace dos preguntas difíciles.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "You said the club grew. What was the exact figure last year?",
+            "traduccion": "Dijiste que el club creció. ¿Cuál fue la cifra exacta del año pasado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "As far as I know, it was around thirty, but I would need to check.",
+            "traduccion": "Hasta donde sé, fue de unos treinta, pero tendría que comprobarlo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Could it be because of the new room, not the books?",
+            "traduccion": "¿Podría deberse a la sala nueva y no a los libros?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair challenge. To a certain extent you are right, but the trend still seems clear.",
+            "traduccion": "Es una objeción razonable. En cierta medida tienes razón, pero la tendencia sigue pareciendo clara."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo responde Sara cuando no recuerda la cifra exacta?",
+          "opciones": [
+            {
+              "es": "Da una cifra aproximada y admite que tendría que comprobarla."
+            },
+            {
+              "es": "Inventa una cifra exacta para sonar segura."
+            },
+            {
+              "es": "Pide que Tom repita la pregunta más despacio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «As far as I know, it was around thirty, but I would need to check»: da una aproximación honesta y reconoce que debe comprobarla."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "no entiendes"
+            },
+            {
+              "texto": "Could you clarify that, please?"
+            }
+          ],
+          [
+            {
+              "texto": "no tienes el dato"
+            },
+            {
+              "texto": "I'm afraid I don't have an accurate figure."
+            }
+          ],
+          [
+            {
+              "texto": "te cuestionan"
+            },
+            {
+              "texto": "That is a fair challenge."
+            }
+          ],
+          [
+            {
+              "texto": "ofreces más información"
+            },
+            {
+              "texto": "I can give you more detail afterwards."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

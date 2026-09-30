@@ -1,0 +1,622 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "classes": {
+    "en.n8.class-56": {
+      "explicacion": {
+        "titulo": "Marcadores para abrir, cambiar, resumir y cerrar",
+        "texto": "Un segmento de pódcast se apoya en marcadores del discurso oral que avisan al oyente de lo que viene. Abrir: welcome back, to begin with. Cambiar de tema: anyway, moving on, by the way. Retomar una idea: as I was saying. Resumir: so, to sum up, in short. Cerrar: before we go, that is all for today. No son adornos: cada marcador tiene una función y en la lengua oral se coloca al principio de la frase, seguido de una pausa o coma: Anyway, let us move on. No se combinan con but: anyway ya hace el cambio de tema."
+      },
+      "patron": {
+        "texto": "Marcador + coma + idea nueva:",
+        "formula": [
+          {
+            "texto": "Anyway,",
+            "nota": "marcador al inicio de la frase, seguido de coma"
+          },
+          {
+            "texto": "let us talk about screens.",
+            "nota": "la idea nueva que introduce el marcador"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Anyway, but let us talk about screens.",
+          "correcto": "Anyway, let us talk about screens.",
+          "explicacion": "Anyway ya cambia de tema: no se añade but (calco de «pero bueno»)."
+        },
+        {
+          "incorrecto": "In resume, the guest gives three tips.",
+          "correcto": "To sum up, the guest gives three tips.",
+          "explicacion": "«En resumen» se dice to sum up o in short; in resume no existe en inglés."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo escuchan un segmento de pódcast y analizan cómo lo estructura la presentadora.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Listen to the host: «Welcome back. To begin with, our topic is sleep.»",
+            "traduccion": "Escucha a la presentadora: «Bienvenidos de nuevo. Para empezar, nuestro tema es el sueño.»"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And then she says, «Anyway, let us hear our guest.»",
+            "traduccion": "Y luego dice: «Bueno, escuchemos a nuestro invitado.»"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Anyway is a marker: she moves on to the next part.",
+            "traduccion": "Anyway es un marcador: pasa a la siguiente parte."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "At the end she says, «Before we go, thank you for listening.»",
+            "traduccion": "Al final dice: «Antes de despedirnos, gracias por escuchar.»"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is the closing marker.",
+            "traduccion": "Ese es el marcador de cierre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué función tiene «Before we go»?",
+          "opciones": [
+            {
+              "es": "Abrir el segmento."
+            },
+            {
+              "es": "Cambiar de tema."
+            },
+            {
+              "es": "Cerrar el segmento."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Leo lo dice: «Before we go, thank you for listening» es el marcador de cierre del segmento."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Marcadores"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Abrir"
+            },
+            {
+              "texto": "welcome back, to begin with"
+            }
+          ],
+          [
+            {
+              "texto": "Cambiar de tema"
+            },
+            {
+              "texto": "anyway, moving on, by the way"
+            }
+          ],
+          [
+            {
+              "texto": "Retomar"
+            },
+            {
+              "texto": "as I was saying"
+            }
+          ],
+          [
+            {
+              "texto": "Resumir"
+            },
+            {
+              "texto": "so, to sum up, in short"
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "before we go, that is all for today"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-57": {
+      "explicacion": {
+        "titulo": "Verbos de habla y su patrón",
+        "texto": "Parafrasear es contar con tus palabras lo que dijo otra persona, y el verbo de habla que eliges muestra la actitud: claim afirma algo discutible, point out señala un dato, admit reconoce algo incómodo, suggest propone. Cada verbo pide su patrón: verbo + that + oración (claim, point out, admit, suggest), verbo + -ing (admit, suggest, deny) y verbo + to + verbo (refuse, promise). Al resumir, el tiempo retrocede un paso: «I sleep badly» pasa a She admitted that she slept badly. Ojo: suggest nunca se construye con to + verbo."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de habla + that / -ing / to + verbo:",
+        "formula": [
+          {
+            "texto": "The host",
+            "nota": "sujeto: quien habló"
+          },
+          {
+            "texto": "points out",
+            "nota": "verbo de habla: señala un dato"
+          },
+          {
+            "texto": "that the study is small.",
+            "nota": "that + oración completa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The host suggested to take a break.",
+          "correcto": "The host suggested taking a break.",
+          "explicacion": "Suggest se construye con -ing o con that + oración; nunca con to + verbo."
+        },
+        {
+          "incorrecto": "The guest refused answering.",
+          "correcto": "The guest refused to answer.",
+          "explicacion": "Refuse va seguido de to + verbo, no de -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pregunta a Leo por un pódcast sobre el sueño que él acaba de escuchar.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What did the guest say about sleep?",
+            "traduccion": "¿Qué dijo el invitado sobre el sueño?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "He admitted that he sleeps only five hours.",
+            "traduccion": "Admitió que solo duerme cinco horas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Did he claim that screens are the problem?",
+            "traduccion": "¿Afirmó que las pantallas son el problema?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, and he suggested turning off the phone an hour before bed.",
+            "traduccion": "Sí, y sugirió apagar el móvil una hora antes de dormir."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sugirió el invitado?",
+          "opciones": [
+            {
+              "es": "Dormir siempre ocho horas."
+            },
+            {
+              "es": "Apagar el móvil una hora antes de dormir."
+            },
+            {
+              "es": "Dejar de tomar café por la tarde."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Leo usa suggested + -ing: el invitado sugirió apagar el móvil una hora antes de dormir."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Patrón",
+          "Verbos",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "+ that + oración"
+            },
+            {
+              "texto": "claim, point out, admit, suggest"
+            },
+            {
+              "texto": "She claims that sleep matters."
+            }
+          ],
+          [
+            {
+              "texto": "+ -ing"
+            },
+            {
+              "texto": "admit, suggest, deny"
+            },
+            {
+              "texto": "He denied taking the money."
+            }
+          ],
+          [
+            {
+              "texto": "+ to + verbo"
+            },
+            {
+              "texto": "refuse, promise, agree"
+            },
+            {
+              "texto": "They refused to answer."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-58": {
+      "explicacion": {
+        "titulo": "Idea principal, detalles y recomendación",
+        "texto": "Para tomar notas de un segmento de audio no escribas todo: separa tres niveles. La idea principal es el mensaje central y suele aparecer al principio o al final. Los detalles la apoyan con datos, razones y ejemplos; escúchalos tras marcadores como first, second, also o for example. La recomendación es lo que el locutor te pide hacer, casi siempre en el cierre. Un buen esquema tiene una línea de idea principal, tres detalles cortos y una recomendación, escritos con palabras clave y no con frases enteras."
+      },
+      "patron": {
+        "texto": "Esquema: idea principal + detalles + recomendación:",
+        "formula": [
+          {
+            "texto": "Main idea: teenagers need more sleep.",
+            "nota": "el mensaje central del segmento"
+          },
+          {
+            "texto": "Detail: many go to bed late.",
+            "nota": "un dato, razón o ejemplo que lo apoya"
+          },
+          {
+            "texto": "Recommendation: put the phone away.",
+            "nota": "lo que el locutor te pide hacer"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The main idea it is that sleep is important.",
+          "correcto": "The main idea is that sleep is important.",
+          "explicacion": "En inglés el sujeto no se repite con it: The main idea is that…"
+        },
+        {
+          "incorrecto": "The researches say that teenagers sleep too little.",
+          "correcto": "The research says that teenagers sleep too little.",
+          "explicacion": "Research es incontable: no lleva plural y el verbo va en singular (research says)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Ana escuchan un segmento de radio sobre el sueño y toman notas.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What is the main idea of this segment?",
+            "traduccion": "¿Cuál es la idea principal de este segmento?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That a good habit can improve your sleep.",
+            "traduccion": "Que un buen hábito puede mejorar el sueño."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And a detail?",
+            "traduccion": "¿Y un detalle?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The research says that teenagers sleep six hours, for example.",
+            "traduccion": "La investigación dice que los adolescentes duermen seis horas, por ejemplo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What is the recommendation? Put the phone away an hour before bed?",
+            "traduccion": "¿Y la recomendación? ¿Guardar el móvil una hora antes de dormir?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la idea principal del segmento?",
+          "opciones": [
+            {
+              "es": "Que los adolescentes duermen seis horas."
+            },
+            {
+              "es": "Que hay que guardar el móvil antes de dormir."
+            },
+            {
+              "es": "Que un buen hábito puede mejorar el sueño."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Leo la da directamente: la idea principal es que un buen hábito mejora el sueño; las seis horas son un detalle."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Nivel",
+          "Pregunta",
+          "Señales"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Idea principal"
+            },
+            {
+              "texto": "¿De qué trata todo el segmento?"
+            },
+            {
+              "texto": "the message is…, so…"
+            }
+          ],
+          [
+            {
+              "texto": "Detalle"
+            },
+            {
+              "texto": "¿Qué dato o razón la apoya?"
+            },
+            {
+              "texto": "first, second, for example"
+            }
+          ],
+          [
+            {
+              "texto": "Recomendación"
+            },
+            {
+              "texto": "¿Qué debo hacer?"
+            },
+            {
+              "texto": "my advice is…, you should…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-59": {
+      "explicacion": {
+        "titulo": "Resumir un segmento con la postura de cada hablante",
+        "texto": "Un resumen de un segmento de audio cuenta lo esencial con tus palabras y conserva la postura de cada hablante. Sigue este orden: presenta el segmento (tema y hablantes); resume lo principal de cada uno con verbos de habla variados (claims that, admits that, suggests…) en lugar de repetir says; indica su postura (sounds confident, seems cautious); y cierra con overall. Sé fiel: no añadas opiniones tuyas y atribuye cada idea con according to o con el verbo adecuado. Para hablar de lo que dice el segmento usa el presente."
+      },
+      "patron": {
+        "texto": "Hablante + verbo de habla + idea + postura:",
+        "formula": [
+          {
+            "texto": "Sara claims that",
+            "nota": "hablante + verbo de habla variado"
+          },
+          {
+            "texto": "phones are useful tools,",
+            "nota": "la idea, contada con tus palabras"
+          },
+          {
+            "texto": "and she sounds confident.",
+            "nota": "la postura: sounds + adjetivo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to the guest, she thinks that phones are useful.",
+          "correcto": "According to the guest, phones are useful.",
+          "explicacion": "According to ya atribuye la idea a la invitada: no se añade she thinks."
+        },
+        {
+          "incorrecto": "The host sounds more cautiously than the guest.",
+          "correcto": "The host sounds more cautious than the guest.",
+          "explicacion": "Después de sounds va un adjetivo (more cautious), no un adverbio en -ly."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comparan sus resúmenes de un segmento de tecnología antes de entregarlos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I wrote the summary of the technology segment. The guest claims that phones are useful tools.",
+            "traduccion": "Escribí el resumen del segmento de tecnología. La invitada afirma que los móviles son herramientas útiles."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the host? Does he agree?",
+            "traduccion": "¿Y el presentador? ¿Está de acuerdo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No. He is more cautious, whereas the guest sounds confident.",
+            "traduccion": "No. Él es más cauteloso, mientras que la invitada suena segura."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. Add the stance of each speaker and finish with overall.",
+            "traduccion": "Bien. Añade la postura de cada hablante y termina con overall."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK. Overall, both want better learning.",
+            "traduccion": "De acuerdo. En conjunto, ambos quieren aprender mejor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo describe Mia la postura del presentador?",
+          "opciones": [
+            {
+              "es": "Más segura que la de la invitada."
+            },
+            {
+              "es": "Más cautelosa que la de la invitada."
+            },
+            {
+              "es": "Igual de segura que la de la invitada."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Mia dice «He is more cautious, whereas the guest sounds confident»: el presentador es más cauteloso."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso del resumen",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presentar"
+            },
+            {
+              "texto": "In this segment, the host and… discuss…"
+            }
+          ],
+          [
+            {
+              "texto": "Atribuir ideas"
+            },
+            {
+              "texto": "She claims / admits / suggests that…"
+            }
+          ],
+          [
+            {
+              "texto": "Indicar la postura"
+            },
+            {
+              "texto": "He sounds cautious, whereas she sounds confident."
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "Overall, …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-60": {
+      "explicacion": {
+        "titulo": "Responder a un oyente con tacto",
+        "texto": "Responder a un oyente que malinterpretó un segmento requiere cuatro movimientos. Primero agradeces y nombras el malentendido con cortesía (Thank you for your message; there seems to be a misunderstanding). Después corriges con precisión (What she actually said was that…, In fact, she…) apoyándote en un verbo de habla exacto: no claimed, sino admitted. Concede lo que el oyente tiene de razón (To be fair, …). Por último propones un tema nuevo con una razón. Corrige la idea, no a la persona. Ojo: actually es «en realidad», no «actualmente»."
+      },
+      "patron": {
+        "texto": "Malentendido + corrección + concesión + tema nuevo:",
+        "formula": [
+          {
+            "texto": "There seems to be a misunderstanding.",
+            "nota": "nombras el malentendido con cortesía"
+          },
+          {
+            "texto": "What she actually said was that phones can help,",
+            "nota": "corriges: What … actually said was that…"
+          },
+          {
+            "texto": "not that they are always good.",
+            "nota": "not that…: lo que no dijo"
+          },
+          {
+            "texto": "Next week, I propose a segment about homework.",
+            "nota": "propones un tema nuevo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Actually we are recording the new segment.",
+          "correcto": "Right now we are recording the new segment.",
+          "explicacion": "Actually significa «en realidad», no «actualmente»; para «actualmente» usa right now o currently."
+        },
+        {
+          "incorrecto": "What she actually said it was that phones help.",
+          "correcto": "What she actually said was that phones help.",
+          "explicacion": "En la oración enfática no se repite it: What … said was that…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana, la presentadora, y Leo leen el mensaje de un oyente que entendió mal el segmento.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "A listener says the guest claimed that phones are always good.",
+            "traduccion": "Un oyente dice que la invitada afirmó que los móviles siempre son buenos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a misunderstanding. What she actually said was that phones can be useful.",
+            "traduccion": "Eso es un malentendido. Lo que dijo en realidad fue que los móviles pueden ser útiles."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "To be fair, she also admitted that some students get distracted.",
+            "traduccion": "Para ser justos, también admitió que algunos estudiantes se distraen."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. Let us correct it, and propose a new segment about homework.",
+            "traduccion": "Exacto. Corrijámoslo y propongamos un segmento nuevo sobre los deberes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dijo en realidad la invitada?",
+          "opciones": [
+            {
+              "es": "Que los móviles siempre son buenos."
+            },
+            {
+              "es": "Que hay que prohibir los móviles."
+            },
+            {
+              "es": "Que los móviles pueden ser útiles."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Leo corrige con What she actually said was that phones can be useful: no dijo que fueran siempre buenos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Movimiento",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Nombrar"
+            },
+            {
+              "texto": "There seems to be a misunderstanding."
+            }
+          ],
+          [
+            {
+              "texto": "Corregir"
+            },
+            {
+              "texto": "What she actually said was that… / In fact, she…"
+            }
+          ],
+          [
+            {
+              "texto": "Conceder"
+            },
+            {
+              "texto": "To be fair, you are right about…"
+            }
+          ],
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "Next week, I propose… because…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

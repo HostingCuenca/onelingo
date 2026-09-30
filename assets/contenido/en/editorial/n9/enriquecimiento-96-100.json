@@ -1,0 +1,646 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n9.class-96": {
+      "explicacion": {
+        "titulo": "Leer una opinión con ojo crítico",
+        "texto": "Para leer un artículo de opinión con ojo crítico busca cinco cosas. La tesis: lo que el autor defiende (argues, claims). La postura: sus palabras valorativas («a welcome change»). Las concesiones: admittedly… but… reconoce un punto y sigue. Las suposiciones: ideas que da por ciertas sin pruebas (always, obviously). Las inferencias: lo que puedes deducir con una pista del texto. Cuando justifiques una inferencia, cita la pista: «even parents now walk» indica que antes se andaba poco."
+      },
+      "patron": {
+        "texto": "Tesis + concesión + inferencia:",
+        "formula": [
+          {
+            "texto": "The writer argues that cities should be slower,",
+            "nota": "la tesis: lo que defiende el autor"
+          },
+          {
+            "texto": "admittedly, some drivers will complain,",
+            "nota": "la concesión: reconoce un punto contrario"
+          },
+          {
+            "texto": "but the word 'even' lets us infer that walking was rare.",
+            "nota": "la inferencia: deducción apoyada en una pista"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The article argues that the cities are too fast.",
+          "correcto": "The article argues that cities are too fast.",
+          "explicacion": "Con un plural general («las ciudades») el inglés no usa the: cities are…, no the cities are…"
+        },
+        {
+          "incorrecto": "We can infer of the word 'even' that walking was rare.",
+          "correcto": "We can infer from the word 'even' that walking was rare.",
+          "explicacion": "Se infiere algo a partir de una pista: infer + from. Of no sirve aquí."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo leen juntos un artículo de opinión sobre calles más lentas.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "The writer argues that cities should be slower.",
+            "traduccion": "El autor sostiene que las ciudades deberían ser más lentas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Admittedly, he says some drivers will complain.",
+            "traduccion": "Es cierto que dice que algunos conductores se quejarán."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, but he writes: even parents now walk to school.",
+            "traduccion": "Sí, pero escribe: hasta los padres van ahora andando al colegio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So we can infer that walking was rare before.",
+            "traduccion": "Entonces podemos inferir que antes era raro ir andando."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué deducen Sara y Leo de la palabra «even»?",
+          "opciones": [
+            {
+              "es": "Que antes era raro ir andando al colegio."
+            },
+            {
+              "es": "Que los conductores ya no se quejan."
+            },
+            {
+              "es": "Que el autor no tiene una tesis."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo concluye «we can infer that walking was rare before»: la pista es even junto a now. La queja de los conductores es la concesión del autor, y la tesis sí aparece."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Pregunta",
+          "Pista en el texto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Thesis"
+            },
+            {
+              "texto": "¿Qué defiende el autor?"
+            },
+            {
+              "texto": "argues, claims, believes"
+            }
+          ],
+          [
+            {
+              "texto": "Concession"
+            },
+            {
+              "texto": "¿Qué reconoce?"
+            },
+            {
+              "texto": "admittedly… but…"
+            }
+          ],
+          [
+            {
+              "texto": "Assumption"
+            },
+            {
+              "texto": "¿Qué da por cierto?"
+            },
+            {
+              "texto": "always, obviously, everyone"
+            }
+          ],
+          [
+            {
+              "texto": "Inference"
+            },
+            {
+              "texto": "¿Qué puedo deducir?"
+            },
+            {
+              "texto": "even, now, still"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-97": {
+      "explicacion": {
+        "titulo": "Editar con precisión: registro, cohesión y matiz",
+        "texto": "Editar con precisión es revisar un borrador con seis comprobaciones agrupadas en tres áreas. Registro: ¿el saludo y las palabras encajan con el lector? Cohesión: ¿hay conectores (however, so, although) o son frases cortas y sueltas? Matiz: ¿las afirmaciones fuertes se ajustan con seem, appear, may, many, some? Además, sustituye lo vago (soon) por datos exactos (by Friday). Un cambio vale solo si mejora el borrador: cambiar una palabra por un sinónimo sin ganar precisión no cuenta."
+      },
+      "patron": {
+        "texto": "Problema + edición:",
+        "formula": [
+          {
+            "texto": "Everyone hates the food.",
+            "nota": "el problema: afirmación exagerada"
+          },
+          {
+            "texto": "Many students seem to dislike the food,",
+            "nota": "la edición: matiz con many + seem to"
+          },
+          {
+            "texto": "so we will ask the director by Friday.",
+            "nota": "cohesión (so) y dato exacto (by Friday)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It seems that the price has raised.",
+          "correcto": "It seems that the price has risen.",
+          "explicacion": "Raise es transitivo (raise the price); rise no lleva complemento: the price has risen. Confusión muy común en hispanohablantes."
+        },
+        {
+          "incorrecto": "However the menu is better, students complain.",
+          "correcto": "Although the menu is better, students complain.",
+          "explicacion": "However no une dos cláusulas con una coma, como «aunque». Usa although, o separa con punto: The menu is better. However, students complain."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Ana el borrador de su mensaje a la directora del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "My draft starts with Hi all and says everyone hates the food.",
+            "traduccion": "Mi borrador empieza con Hi all y dice que todos odian la comida."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Use Dear Ms Lopez for the director, and write many students seem to dislike the food.",
+            "traduccion": "Usa Dear Ms Lopez para la directora y escribe que a muchos estudiantes parece no gustarles la comida."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And We will ask soon?",
+            "traduccion": "¿Y «Preguntaremos pronto»?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Change soon to by Friday. Exact details make the message stronger.",
+            "traduccion": "Cambia soon por by Friday. Los datos exactos hacen más fuerte el mensaje."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué cambia Ana «everyone hates the food»?",
+          "opciones": [
+            {
+              "es": "Porque es una afirmación exagerada y conviene matizarla."
+            },
+            {
+              "es": "Porque el saludo es demasiado formal para la directora."
+            },
+            {
+              "es": "Porque falta un conector entre dos frases."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana propone «many students seem to dislike the food»: suaviza una afirmación exagerada. El saludo lo cambia por otra razón (registro) y no se habla de conectores."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Área",
+          "Borrador débil",
+          "Edición"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Registro"
+            },
+            {
+              "texto": "Hi all."
+            },
+            {
+              "texto": "Dear Ms Lopez,"
+            }
+          ],
+          [
+            {
+              "texto": "Cohesión"
+            },
+            {
+              "texto": "The menu is new. Students like it."
+            },
+            {
+              "texto": "The menu is new, and students seem to like it."
+            }
+          ],
+          [
+            {
+              "texto": "Matiz"
+            },
+            {
+              "texto": "Everyone hates it."
+            },
+            {
+              "texto": "Many students seem to dislike it."
+            }
+          ],
+          [
+            {
+              "texto": "Vaguedad"
+            },
+            {
+              "texto": "We will ask soon."
+            },
+            {
+              "texto": "We will ask by Friday."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-98": {
+      "explicacion": {
+        "titulo": "Sintetizar dos fuentes: comparar, no resumir por separado",
+        "texto": "Sintetizar no es resumir dos textos uno tras otro: es compararlos. Sigue tres pasos. Primero, di qué dice cada fuente con According to… Segundo, señala coincidencias (both, likewise) y diferencias (whereas, however, but). Tercero, evalúa y concluye: si hay una discrepancia, nómbrala, piensa por qué (¿quién habla?, ¿cuándo?) y cierra con Overall… Escribe un solo párrafo coherente con la cifra exacta de cada fuente, sin mezclar los datos."
+      },
+      "patron": {
+        "texto": "Fuente A + contraste + fuente B + conclusión:",
+        "formula": [
+          {
+            "texto": "According to the radio, 400 people visited,",
+            "nota": "la fuente A con su dato"
+          },
+          {
+            "texto": "whereas the newspaper gives 300.",
+            "nota": "contraste con la fuente B"
+          },
+          {
+            "texto": "Overall, both sources agree that visits fell.",
+            "nota": "conclusión: lo que coincide"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The radio says 400 visitors, in the other hand the newspaper says 300.",
+          "correcto": "The radio says 400 visitors; on the other hand, the newspaper says 300.",
+          "explicacion": "Calco de «por otra parte». En inglés es on the other hand (con on), y mejor con punto y coma o punto antes."
+        },
+        {
+          "incorrecto": "The two sources are agree that visits fell.",
+          "correcto": "The two sources agree that visits fell.",
+          "explicacion": "Calco de «están de acuerdo»: agree es un verbo y no lleva be."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo comparan un audio de radio con un artículo sobre la biblioteca del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The radio says the library will close in June.",
+            "traduccion": "La radio dice que la biblioteca cerrará en junio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The article says July. That is a discrepancy.",
+            "traduccion": "El artículo dice julio. Es una discrepancia."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "But both sources agree that visits fell last year.",
+            "traduccion": "Pero las dos fuentes coinciden en que las visitas cayeron el año pasado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So, overall, they agree on the problem but differ on the date.",
+            "traduccion": "Entonces, en conjunto, coinciden en el problema pero difieren en la fecha."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué difieren las dos fuentes?",
+          "opciones": [
+            {
+              "es": "En el mes en que cerrará la biblioteca."
+            },
+            {
+              "es": "En si las visitas cayeron el año pasado."
+            },
+            {
+              "es": "En quién dirige la biblioteca."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "La radio dice junio y el artículo julio: esa es la discrepancia. Las dos fuentes coinciden en la caída de visitas y nadie habla de quién dirige la biblioteca."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Conectores",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Coincidencia"
+            },
+            {
+              "texto": "both, likewise"
+            },
+            {
+              "texto": "Both sources agree that visits fell."
+            }
+          ],
+          [
+            {
+              "texto": "Diferencia"
+            },
+            {
+              "texto": "whereas, however"
+            },
+            {
+              "texto": "The radio says June, whereas the article says July."
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "overall"
+            },
+            {
+              "texto": "Overall, they agree on the problem."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-99": {
+      "explicacion": {
+        "titulo": "Una respuesta oral de dos minutos, paso a paso",
+        "texto": "Una respuesta oral de dos minutos necesita una estructura para no perderte. Postura: To begin with, I would… / On balance, … Razón con ejemplo: because…, for instance… Matiz: That said, … / although…, que muestra que ves el otro lado. Cierre breve. Si llega una pregunta inesperada, no te bloquees: reconoce (That is a fair point), gana tiempo (Let me think for a moment) y responde con la misma estructura, pero más corta. Habla con frases completas y pausas, no con una lista de palabras."
+      },
+      "patron": {
+        "texto": "Postura + razón + ejemplo + matiz:",
+        "formula": [
+          {
+            "texto": "On balance, I would accept the sponsor,",
+            "nota": "la postura: sopesada y clara"
+          },
+          {
+            "texto": "because the club needs equipment.",
+            "nota": "la razón: because + hecho"
+          },
+          {
+            "texto": "For instance, the nets are broken.",
+            "nota": "el ejemplo: un caso concreto"
+          },
+          {
+            "texto": "That said, I would set one condition.",
+            "nota": "el matiz: condición sin cambiar de postura"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It depends of the conditions.",
+          "correcto": "It depends on the conditions.",
+          "explicacion": "Calco de «depende de». En inglés depend va con on."
+        },
+        {
+          "incorrecto": "Let me to think for a moment.",
+          "correcto": "Let me think for a moment.",
+          "explicacion": "Después de let + persona va el verbo sin to. Calco de «déjame a pensar»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana practica con Carlos una entrevista oral: debe responder a un dilema sobre un patrocinador.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Would you accept money from a café that sells sweet drinks?",
+            "traduccion": "¿Aceptarías dinero de un café que vende bebidas azucaradas?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "To begin with, yes, because the club needs new equipment.",
+            "traduccion": "Para empezar, sí, porque el club necesita equipo nuevo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "But what about the health of the children?",
+            "traduccion": "Pero ¿y la salud de los niños?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a fair point. Let me think for a moment. That said, I would ask the café to sell water too.",
+            "traduccion": "Es una buena observación. Déjame pensar un momento. Dicho esto, le pediría al café que también venda agua."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo responde Ana a la pregunta inesperada sobre la salud?",
+          "opciones": [
+            {
+              "es": "Reconoce el punto, gana tiempo y propone una condición."
+            },
+            {
+              "es": "Cambia de tema y habla del equipo."
+            },
+            {
+              "es": "Dice que no entiende la pregunta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «That is a fair point», pide un momento y añade «That said, I would ask the café to sell water too»: reconoce, gana tiempo y propone una condición."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Fórmulas",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "To begin with, / On balance,"
+            },
+            {
+              "texto": "To begin with, I would accept the sponsor."
+            }
+          ],
+          [
+            {
+              "texto": "Ejemplo"
+            },
+            {
+              "texto": "For instance, / For example,"
+            },
+            {
+              "texto": "For instance, the nets are broken."
+            }
+          ],
+          [
+            {
+              "texto": "Matiz"
+            },
+            {
+              "texto": "That said, / although"
+            },
+            {
+              "texto": "That said, I would set one condition."
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta inesperada"
+            },
+            {
+              "texto": "That is a fair point. / Let me think for a moment."
+            },
+            {
+              "texto": "That is a fair point. Let me think for a moment."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-100": {
+      "explicacion": {
+        "titulo": "Una tarea final: analizar, negociar y resumir",
+        "texto": "La evaluación final integra lo aprendido en tres pasos. Analiza el caso: nombra a cada parte, su preocupación y lo que tienen en común. Negocia con tacto: reconoce (I see your concern), discrepa con matiz (I see it slightly differently), propone un compromiso con condiciones (provided that, in exchange for) y repara si hace falta (there was a misunderstanding). Resume con matiz: To summarise + acuerdo + reserva (although, seems, may), con datos exactos y sin exagerar. Adapta siempre el registro al lector."
+      },
+      "patron": {
+        "texto": "Reconocer + discrepar + proponer + resumir:",
+        "formula": [
+          {
+            "texto": "I see your concern,",
+            "nota": "reconocer la postura del otro"
+          },
+          {
+            "texto": "but I see it slightly differently:",
+            "nota": "discrepar con tacto"
+          },
+          {
+            "texto": "a small garden could work, provided that ten spaces stay.",
+            "nota": "proponer un compromiso con condición"
+          },
+          {
+            "texto": "To summarise, the outcome seems acceptable to most residents.",
+            "nota": "resumir con matiz"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "To resume, the residents accepted a compromise.",
+          "correcto": "To summarise, the residents accepted a compromise.",
+          "explicacion": "Falso amigo: «resumir» es summarise; resume en inglés significa «reanudar»."
+        },
+        {
+          "incorrecto": "I would like to propose you a compromise.",
+          "correcto": "I would like to propose a compromise to you.",
+          "explicacion": "En inglés propose lleva primero lo que se propone y después to + persona; «proponerte» no se calca."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos preparan el resumen de una reunión de vecinos sobre un solar vacío.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "The residents disagree: some want a garden, and others want parking.",
+            "traduccion": "Los vecinos no se ponen de acuerdo: unos quieren un jardín y otros aparcamiento."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "A compromise could be a small garden, provided that ten parking spaces stay on the lot.",
+            "traduccion": "Un compromiso podría ser un jardín pequeño, siempre que diez plazas de aparcamiento sigan en el solar."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The outcome seems acceptable, although one concern remains: the noise.",
+            "traduccion": "El resultado parece aceptable, aunque queda una preocupación: el ruido."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "To summarise, most residents accept the compromise, but the noise concern remains.",
+            "traduccion": "Para resumir, la mayoría de los vecinos acepta el compromiso, pero la preocupación por el ruido sigue ahí."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué preocupación sigue sin resolverse?",
+          "opciones": [
+            {
+              "es": "El ruido."
+            },
+            {
+              "es": "El número de plazas de aparcamiento."
+            },
+            {
+              "es": "El tamaño del jardín."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara y Carlos coinciden: «one concern remains: the noise». Las plazas de aparcamiento y el tamaño del jardín forman parte del compromiso."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Función",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1. Analizar"
+            },
+            {
+              "texto": "nombrar partes y preocupaciones"
+            },
+            {
+              "texto": "the concern of each resident"
+            }
+          ],
+          [
+            {
+              "texto": "2. Negociar"
+            },
+            {
+              "texto": "reconocer, discrepar, proponer"
+            },
+            {
+              "texto": "I see your concern, but… provided that…"
+            }
+          ],
+          [
+            {
+              "texto": "3. Resumir"
+            },
+            {
+              "texto": "acuerdo + reserva"
+            },
+            {
+              "texto": "To summarise, … although one concern remains."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,889 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-30",
+  "title": {
+    "en": "Fix the tone in a neighbour dispute",
+    "es": "Corregir el tono en un conflicto de vecinos"
+  },
+  "objectives": {
+    "es": [
+      "Localizar los errores de tono de un intercambio entre vecinos y redactar una respuesta reparadora en el registro adecuado, con disculpa y petición concreta."
+    ]
+  },
+  "concepts": [
+    "n8-style-register-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n8.class-29"
+  ],
+  "usesVocabulary": [
+    "neighbour",
+    "complaint",
+    "apology",
+    "considerate",
+    "rude",
+    "solution",
+    "reply",
+    "blame"
+  ],
+  "usesPatterns": [
+    "n8-style-register-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "neighbour",
+      "es": "vecino"
+    },
+    {
+      "en": "complaint",
+      "es": "queja"
+    },
+    {
+      "en": "apology",
+      "es": "disculpa"
+    },
+    {
+      "en": "considerate",
+      "es": "considerado"
+    },
+    {
+      "en": "rude",
+      "es": "grosero"
+    },
+    {
+      "en": "solution",
+      "es": "solución"
+    },
+    {
+      "en": "reply",
+      "es": "respuesta"
+    },
+    {
+      "en": "blame",
+      "es": "culpar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-30.t01",
+      "en": "The note is rude because it gives an order and blames the neighbour.",
+      "es": "La nota es grosera porque da una orden y culpa al vecino.",
+      "explanationEs": "Rude: orden seca + acusación. Se localiza antes de reparar.",
+      "segments": [
+        "The note is rude because it gives",
+        "an order and blames the neighbour."
+      ],
+      "audioText": "The note is rude because it gives an order and blames the neighbour.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-style-register-5"
+    },
+    {
+      "id": "en.n8.class-30.t02",
+      "en": "A considerate reply begins with an apology: I am sorry that the music disturbed you.",
+      "es": "Una respuesta considerada empieza con una disculpa: Siento que la música le molestara.",
+      "explanationEs": "Apology + I am sorry that + hecho: sin reproches.",
+      "segments": [
+        "A considerate reply begins with an apology: I",
+        "am sorry that the music disturbed you."
+      ],
+      "audioText": "A considerate reply begins with an apology: I am sorry that the music disturbed you.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-style-register-5"
+    },
+    {
+      "id": "en.n8.class-30.t03",
+      "en": "A good complaint never attacks the person; it describes the problem.",
+      "es": "Una buena queja nunca ataca a la persona: describe el problema.",
+      "explanationEs": "Queja educada: hechos, no acusaciones.",
+      "segments": [
+        "A good complaint never attacks the",
+        "person; it describes the problem."
+      ],
+      "audioText": "A good complaint never attacks the person; it describes the problem.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-style-register-5"
+    },
+    {
+      "id": "en.n8.class-30.t04",
+      "en": "We can find a solution together if we both listen.",
+      "es": "Podemos encontrar una solución juntos si los dos escuchamos.",
+      "explanationEs": "Solution: propuesta conjunta y concreta.",
+      "segments": [
+        "We can find a solution",
+        "together if we both listen."
+      ],
+      "audioText": "We can find a solution together if we both listen.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-style-register-5"
+    },
+    {
+      "id": "en.n8.class-30.t05",
+      "en": "Do not blame the neighbour: describe the problem and suggest one concrete step.",
+      "es": "No culpes al vecino: describe el problema y propón un paso concreto.",
+      "explanationEs": "Blame: evita acusar; concreta una hora o una acción.",
+      "segments": [
+        "Do not blame the neighbour: describe the",
+        "problem and suggest one concrete step."
+      ],
+      "audioText": "Do not blame the neighbour: describe the problem and suggest one concrete step.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-style-register-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c30.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Localiza el error de tono en la nota del vecino."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The order with capital letters sounds rude."
+          },
+          {
+            "text": "The word music is too formal."
+          },
+          {
+            "text": "The note is too long and apologetic."
+          }
+        ],
+        "teaches": [
+          "n8-style-register-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.pg01.seed-0",
+          "feedback": {
+            "es": "La orden Turn it down NOW! con mayúsculas es directa y hostil; ese es el error de tono."
+          },
+          "hint": {
+            "es": "Mira el imperativo y las mayúsculas."
+          },
+          "text": "Your music is terrible. Turn it down NOW!"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:996e06a7e7b9af3a8a1c7cf905d8ffe41c57532aabcf01414a97c2fadc751572"
+      },
+      {
+        "id": "en.n8.c30.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Lamento que la música le molestara.»"
+        },
+        "answer": {
+          "text": "sorry",
+          "accepted": [
+            "sorry"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-style-register-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.pg02.seed-0",
+          "feedback": {
+            "es": "I am sorry that + hecho abre una disculpa sin reproche."
+          },
+          "hint": {
+            "es": "Así empieza la disculpa."
+          },
+          "text": "I am ___ that the music disturbed you."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e247ecf7484a874875c78198250a8e51cfb71b4f14a3e98a04eebfd0a7989cb7"
+      },
+      {
+        "id": "en.n8.c30.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena la petición cortés: «¿Podría bajar la música después de las diez?»"
+        },
+        "answer": {
+          "text": "Could you lower the music after ten",
+          "tokens": [
+            "Could",
+            "you",
+            "lower",
+            "the",
+            "music",
+            "after",
+            "ten"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-style-register-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.pg03.seed-0",
+          "feedback": {
+            "es": "Could you + verbo + hora concreta: una petición cortés y precisa."
+          },
+          "hint": {
+            "es": "Empieza por Could you."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:40cdd228a0847d95b108214425bb6d3305e3c49ee8638b606ad0e1b5a51b4cea"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c30.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta con el tono adecuado para la nota del vecino."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Stop complaining. The dog is fine."
+          },
+          {
+            "text": "I am sorry about the barking. Could we find a solution together?"
+          },
+          {
+            "text": "Maybe you should look for another home, then."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.p01.seed-0",
+          "feedback": {
+            "es": "Una disculpa y una propuesta conjunta calman el conflicto; las otras respuestas son hostiles."
+          },
+          "text": "Your dog barks all day! Do something!"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ba08db31bef5078d48e1f84dc75b2396db3ba3148e772f27b0636f9c71f38d7e"
+      },
+      {
+        "id": "en.n8.c30.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con el problema de tono que muestra."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "You never listen!",
+              {
+                "es": "acusación"
+              }
+            ],
+            [
+              "Turn it down NOW!",
+              {
+                "es": "orden brusca"
+              }
+            ],
+            [
+              "Oh, great, another party.",
+              {
+                "es": "sarcasmo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.p02.seed-0",
+          "feedback": {
+            "es": "Never es una acusación, el imperativo con mayúsculas es una orden brusca y great con ironía es sarcasmo."
+          },
+          "pairs": [
+            [
+              "You never listen!",
+              {
+                "es": "acusación"
+              }
+            ],
+            [
+              "Turn it down NOW!",
+              {
+                "es": "orden brusca"
+              }
+            ],
+            [
+              "Oh, great, another party.",
+              {
+                "es": "sarcasmo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f6137396d6b195152a810e0c521537075eda8d75667ae9dc5dd45ab551d9614e"
+      },
+      {
+        "id": "en.n8.c30.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe con tono cortés: «Turn the music down now!»"
+        },
+        "answer": {
+          "text": "Could you turn the music down, please?",
+          "accepted": [
+            "Could you turn the music down, please?",
+            "Could you please turn the music down?",
+            "Would you mind turning the music down?",
+            "Could you please turn down the music?",
+            "Could you turn down the music, please?",
+            "Would you mind turning down the music?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.p03.seed-0",
+          "feedback": {
+            "es": "Could you… please? convierte la orden en una petición cortés."
+          },
+          "text": "Turn the music down now!",
+          "scoring": {
+            "wordRange": [
+              4,
+              18
+            ],
+            "evidenceGroups": [
+              [
+                "could you",
+                "would you",
+                "would you mind",
+                "can you please",
+                "please could you",
+                "i was wondering",
+                "would it be possible"
+              ],
+              [
+                "music"
+              ],
+              [
+                "down",
+                "lower",
+                "quieter",
+                "quiet",
+                "volume"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1db7ea0f25540973dd275cae6bcda033711e375ab576252f19cb1f5fb7f871ea"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c30.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Clasifica el registro de la respuesta al vecino."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Informal, because of the greeting."
+          },
+          {
+            "text": "Informal, because of slang."
+          },
+          {
+            "text": "Formal, because of Dear and I would be grateful."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5",
+          "n8-style-register-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.e01.seed-0",
+          "feedback": {
+            "es": "Dear Mr Hill e I would be grateful if you could… son marcas formales."
+          },
+          "text": "Dear Mr Hill, I would be grateful if you could lower the volume after ten. Kind regards, Mia"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7d429b7786598beac0fb30cb5844b97f04ec0b5fea8edd22469826051a2e51ef"
+      },
+      {
+        "id": "en.n8.c30.e02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Pasa a formal: «Sorry, we've put off the party.»"
+        },
+        "answer": {
+          "text": "We apologise; we have decided to postpone the party.",
+          "accepted": [
+            "We apologise; we have decided to postpone the party.",
+            "We apologise. We have postponed the party.",
+            "We regret to inform you that the party has been postponed.",
+            "The party has been postponed. We apologise.",
+            "We apologize; we have decided to postpone the party.",
+            "We regret to inform you that the party has been postponed. We apologise."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5",
+          "n8-style-register-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.e02.seed-0",
+          "feedback": {
+            "es": "Sin contracciones: apologise sustituye a sorry y postpone a put off."
+          },
+          "text": "Sorry, we've put off the party.",
+          "scoring": {
+            "wordRange": [
+              5,
+              28
+            ],
+            "evidenceGroups": [
+              [
+                "we apologise",
+                "we apologize",
+                "i apologise",
+                "i apologize",
+                "we regret",
+                "we are sorry to"
+              ],
+              [
+                "postponed",
+                "postpone"
+              ],
+              [
+                "party"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:85f43445f3b222c68dc440916890f0be68b17bdb43c2afcabd3a0d6332da43ab"
+      },
+      {
+        "id": "en.n8.c30.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el mensaje y elige su tono."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It sounds sarcastic: the speaker is complaining about the noise."
+          },
+          {
+            "text": "It sounds friendly: the speaker is happy about the noise."
+          },
+          {
+            "text": "It sounds apologetic: the speaker is sorry about the noise."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5",
+          "n8-style-register-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.e03.seed-0",
+          "feedback": {
+            "es": "Oh, lovely dicho de una mala noticia es ironía: el tono es sarcástico y el hablante se queja."
+          },
+          "audio": "Oh, lovely. Another night without any sleep.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e1618cbfb2bf1e8b3b3765a13df6a21583b21e3431d6864e3cc4f80f877252eb"
+      },
+      {
+        "id": "en.n8.c30.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Repara el conflicto: localiza dos errores y responde (75-190 palabras)."
+        },
+        "answer": {
+          "text": "The note has two tone problems: it gives a rude order with capital letters, and it blames me with the word always. Here is my reply. Dear Mr Hill, I am sorry that the music disturbed you last night. I understand that it is difficult to sleep when there is noise. I would like to propose a solution: I will turn the music down after ten every evening, and I will tell my guests too. Would that be convenient for you? Thank you for your patience, and please tell me if there is any other problem. Kind regards, Carlos",
+          "accepted": [
+            "The note has two tone problems: it gives a rude order with capital letters, and it blames me with the word always. Here is my reply. Dear Mr Hill, I am sorry that the music disturbed you last night. I understand that it is difficult to sleep when there is noise. I would like to propose a solution: I will turn the music down after ten every evening, and I will tell my guests too. Would that be convenient for you? Thank you for your patience, and please tell me if there is any other problem. Kind regards, Carlos",
+            "The note is rude for two reasons: the order with capital letters and the word always which blames me. My reply: Dear Mr Hill, I apologise that my music disturbed you. I know that noise at night makes it hard to sleep. I would like to suggest a solution: from now on, I will keep the music down after ten, and my friends will know the rule. Would that be convenient for you? Thank you very much for telling me. Yours sincerely, Carlos"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5",
+          "n8-style-register-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.e04.seed-0",
+          "feedback": {
+            "es": "Una buena reparación nombra los errores de tono y responde con disculpa, problema sin culpar, petición concreta y cierre formal."
+          },
+          "text": "Caso: tu vecino, Mr Hill, te dejó esta nota: «Your music is terrible!! Turn it down NOW, you always do this!». Escribe: 1) dos errores de tono de la nota; 2) una respuesta formal con disculpa, el problema y una petición concreta (bajar la música a las diez).",
+          "scoring": {
+            "wordRange": [
+              75,
+              190
+            ],
+            "evidenceGroups": [
+              [
+                "rude",
+                "order",
+                "orders",
+                "capital letters",
+                "capital",
+                "impolite",
+                "aggressive",
+                "blunt",
+                "demanding",
+                "harsh",
+                "unfriendly",
+                "shouting"
+              ],
+              [
+                "always",
+                "blames",
+                "blame",
+                "blaming",
+                "accusation",
+                "accuses",
+                "accusing",
+                "you always",
+                "fault"
+              ],
+              [
+                "i am sorry",
+                "i apologise",
+                "i apologize",
+                "my apologies",
+                "apologise",
+                "apologize",
+                "sorry that"
+              ],
+              [
+                "after ten",
+                "at ten",
+                "after 10",
+                "at 10",
+                "by 10",
+                "10 pm",
+                "10 p.m.",
+                "10 o'clock",
+                "ten o'clock",
+                "by ten",
+                "before ten"
+              ],
+              [
+                "dear mr",
+                "dear mrs",
+                "dear ms",
+                "dear neighbour",
+                "dear neighbor",
+                "dear sir"
+              ],
+              [
+                "kind regards",
+                "yours sincerely",
+                "best regards",
+                "yours faithfully",
+                "best wishes",
+                "warm regards",
+                "sincerely",
+                "thank you"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1483d21c48508e9648d78b6d69ac3b3669b52bd12ddae610aad2cf61aa97b235"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c30.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta que repara el tono sin acusar."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It is not my fault that you are so angry."
+          },
+          {
+            "text": "I understand it is difficult to sleep. Could we agree on a quiet hour?"
+          },
+          {
+            "text": "I'm sorry, but you are the one who makes noise."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.r01.seed-0",
+          "feedback": {
+            "es": "Muestra empatía y propone una hora tranquila; las otras culpan al vecino o anulan la disculpa con but."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:29755897a1618283b93b9fb056f28a70dd08cff4be77215f8ed1e42f1baae071"
+      },
+      {
+        "id": "en.n8.c30.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Una queja educada describe el problema y pide algo concreto.»"
+        },
+        "answer": {
+          "text": "complaint",
+          "accepted": [
+            "complaint"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.r02.seed-0",
+          "feedback": {
+            "es": "Una queja educada se limita a los hechos y propone un paso concreto."
+          },
+          "text": "A polite ___ describes the problem and asks for something concrete."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5e50ec884a57ec989a22b01c890118f587daf71955b5c780262c64a3d5b06e01"
+      },
+      {
+        "id": "en.n8.c30.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Lamento que el ruido le molestara anoche.»"
+        },
+        "answer": {
+          "text": "I am sorry that the noise disturbed you last night",
+          "tokens": [
+            "I",
+            "am",
+            "sorry",
+            "that",
+            "the",
+            "noise",
+            "disturbed",
+            "you",
+            "last",
+            "night"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-style-register-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c30.r03.seed-0",
+          "feedback": {
+            "es": "I am sorry that + hecho: la disculpa considerada sin reproche."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c89de5a1310dabc1101f7ed35de9dea3d565228aebf520741628a149b4ef74d8"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c30.e01": {
+      "reteach": "en.n8.class-30.t01",
+      "review": "en.n8.c30.r01"
+    },
+    "en.n8.c30.e02": {
+      "reteach": "en.n8.class-30.t02",
+      "review": "en.n8.c30.r02"
+    },
+    "en.n8.c30.e03": {
+      "reteach": "en.n8.class-30.t03",
+      "review": "en.n8.c30.r03"
+    },
+    "en.n8.c30.e04": {
+      "reteach": "en.n8.class-30.t04",
+      "review": "en.n8.c30.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n8-style-register-1",
+    "n8-style-register-2",
+    "n8-style-register-3",
+    "n8-style-register-4",
+    "n8-style-register-5"
+  ]
+}

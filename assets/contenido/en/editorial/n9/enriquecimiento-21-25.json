@@ -1,0 +1,661 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "classes": {
+    "en.n9.class-21": {
+      "explicacion": {
+        "titulo": "Quién dice qué en una reunión",
+        "texto": "En una reunión cada intervención cumple una función. Quien preside (chair) abre la sesión, da la palabra y la cierra; el secretary anota lo acordado en el acta (minutes); los members proponen, aclaran, interrumpen con cortesía y votan. Para clasificar una frase pregúntate qué hace: ¿abre, propone, aclara, interrumpe, da turno o cierra? La fórmula con la que empieza suele delatar la función."
+      },
+      "patron": {
+        "texto": "Fórmula + petición:",
+        "formula": [
+          {
+            "texto": "Sorry to interrupt,",
+            "nota": "fórmula de cortesía: pide permiso para cortar la palabra"
+          },
+          {
+            "texto": "but could I clarify",
+            "nota": "could I + verbo base: petición suave de turno"
+          },
+          {
+            "texto": "one point",
+            "nota": "lo que quieres aclarar"
+          },
+          {
+            "texto": "before we vote?",
+            "nota": "momento: antes de que se decida"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sorry for interrupt, but I have a question.",
+          "correcto": "Sorry to interrupt, but I have a question.",
+          "explicacion": "Para pedir perdón por algo que vas a hacer ahora se usa sorry to + verbo base, no sorry for + verbo."
+        },
+        {
+          "incorrecto": "Let's discuss about the next item.",
+          "correcto": "Let's discuss the next item.",
+          "explicacion": "En español se «discute sobre» algo, pero en inglés discuss lleva complemento directo: sin about."
+        }
+      ],
+      "situacion": {
+        "contexto": "Reunión de la asociación de vecinos sobre un banco nuevo para el parque.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Good evening, everyone. Let's start with the first item on the agenda: the new bench in the park.",
+            "traduccion": "Buenas noches a todos. Empecemos con el primer punto del orden del día: el banco nuevo del parque."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry to interrupt, but could I clarify one point? Does the council pay for it?",
+            "traduccion": "Perdón por interrumpir, pero ¿podría aclarar un punto? ¿Lo paga el ayuntamiento?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, Tom. Sara is writing the minutes tonight.",
+            "traduccion": "Sí, Tom. Sara escribe el acta esta noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I would like to propose that we vote on the place next week.",
+            "traduccion": "Me gustaría proponer que votemos el lugar la semana que viene."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good idea. Let's discuss the place first.",
+            "traduccion": "Buena idea. Hablemos primero del lugar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién anota lo que se acuerda esta noche?",
+          "opciones": [
+            {
+              "es": "Sara, que escribe el acta."
+            },
+            {
+              "es": "Tom, que pide una aclaración."
+            },
+            {
+              "es": "Leo, que propone una votación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Sara is writing the minutes tonight». Tom aclara y Leo propone, pero no anotan."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Fórmula típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Abrir"
+            },
+            {
+              "texto": "Let's start with the first item."
+            }
+          ],
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "I would like to propose that…"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "Could I clarify one point?"
+            }
+          ],
+          [
+            {
+              "texto": "Interrumpir"
+            },
+            {
+              "texto": "Sorry to interrupt, but…"
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "That is all for today."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-22": {
+      "explicacion": {
+        "titulo": "Sumarse o poner reparos",
+        "texto": "En una reunión hay dos movimientos: sumarse y poner reparos. Para sumarte: I support…, That is a fair point, I can go along with… y, si quieres añadir algo, I would like to build on… Para poner reparos sin ofender: I have some reservations about + nombre, I am not convinced that + oración o My concern is… Después de un reparo conviene ofrecer una salida: Could we find a compromise? Ojo: reservations va con about, y not convinced, con that."
+      },
+      "patron": {
+        "texto": "Reconocer + reserva + salida:",
+        "formula": [
+          {
+            "texto": "That is a fair point,",
+            "nota": "reconoces lo dicho antes de discrepar"
+          },
+          {
+            "texto": "but I have some reservations about the price.",
+            "nota": "reserva: have reservations about + nombre"
+          },
+          {
+            "texto": "Could we find a compromise?",
+            "nota": "salida: propuesta de término medio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have some reservations of the price.",
+          "correcto": "I have some reservations about the price.",
+          "explicacion": "Reservations lleva about, no of: equivale a «reservas sobre algo»."
+        },
+        {
+          "incorrecto": "I am not convinced of that one meeting is enough.",
+          "correcto": "I am not convinced that one meeting is enough.",
+          "explicacion": "Delante de una oración completa se usa that: not convinced that + sujeto + verbo. Of solo va delante de un nombre."
+        }
+      ],
+      "situacion": {
+        "contexto": "Los vecinos deciden cuándo abrir el huerto comunitario.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I suggest that we open the garden only on Saturdays. Water is expensive.",
+            "traduccion": "Sugiero que abramos el huerto solo los sábados. El agua es cara."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair point, but I have some reservations. Many neighbours work on Saturdays.",
+            "traduccion": "Es un argumento razonable, pero tengo algunas reservas. Muchos vecinos trabajan los sábados."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I support Leo's idea, and I would like to build on it: Saturdays and Wednesday evenings.",
+            "traduccion": "Apoyo la idea de Leo y me gustaría desarrollarla: sábados y miércoles por la tarde."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I can go along with that.",
+            "traduccion": "Puedo aceptar eso."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. Could we try it for one month?",
+            "traduccion": "Bien. ¿Podemos probarlo durante un mes?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué tiene reservas Sara?",
+          "opciones": [
+            {
+              "es": "Porque muchos vecinos trabajan los sábados."
+            },
+            {
+              "es": "Porque el agua cuesta demasiado."
+            },
+            {
+              "es": "Porque el huerto solo abriría los miércoles."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Many neighbours work on Saturdays». El agua cara es el argumento de Leo y los miércoles los añade Carlos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Quiero…",
+          "Puedo decir…"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apoyar"
+            },
+            {
+              "texto": "I support… / I can go along with…"
+            }
+          ],
+          [
+            {
+              "texto": "Ampliar una idea"
+            },
+            {
+              "texto": "I would like to build on…"
+            }
+          ],
+          [
+            {
+              "texto": "Poner un reparo"
+            },
+            {
+              "texto": "I have some reservations about…"
+            }
+          ],
+          [
+            {
+              "texto": "Dudar"
+            },
+            {
+              "texto": "I am not convinced that…"
+            }
+          ],
+          [
+            {
+              "texto": "Buscar una salida"
+            },
+            {
+              "texto": "Could we find a compromise?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-23": {
+      "explicacion": {
+        "titulo": "Posturas, propuestas y acciones",
+        "texto": "Para seguir un debate separa tres cosas. La postura es lo que piensa cada persona: Carlos is in favour of…, Mia is opposed to… La propuesta es lo que se plantea hacer: The proposal is to… La acción dice quién hará qué y para cuándo: Sara will write… by Friday. Atento a las señales de desacuerdo (I take your point, but…; I am afraid I cannot agree) y espera al resumen final de quien preside: lo que alguien dice no siempre es lo que se acuerda."
+      },
+      "patron": {
+        "texto": "Postura + propuesta + acción:",
+        "formula": [
+          {
+            "texto": "Mia is opposed to the bike lane,",
+            "nota": "postura: be opposed to / in favour of + nombre"
+          },
+          {
+            "texto": "so the proposal is a trial month.",
+            "nota": "propuesta: the proposal is…"
+          },
+          {
+            "texto": "Tom will write to the council by Friday.",
+            "nota": "acción: persona + will + verbo + plazo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Carlos is in favour to the bike lane.",
+          "correcto": "Carlos is in favour of the bike lane.",
+          "explicacion": "«A favor de» se dice in favour of; la preposición es of, no to."
+        },
+        {
+          "incorrecto": "Mia is opposed with the plan.",
+          "correcto": "Mia is opposed to the plan.",
+          "explicacion": "Opposed va con to: «opuesta a», no with."
+        }
+      ],
+      "situacion": {
+        "contexto": "Reunión de vecinos: se debate cerrar una calle los domingos.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Item two: the proposal is to close Green Street on Sundays. Carlos, what is your position?",
+            "traduccion": "Punto dos: la propuesta es cerrar Green Street los domingos. Carlos, ¿cuál es tu postura?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I am in favour of it. The children can play safely.",
+            "traduccion": "Estoy a favor. Los niños pueden jugar con seguridad."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I take your point, Carlos, but I am opposed to it. The shops lose customers on Sundays.",
+            "traduccion": "Entiendo tu punto, Carlos, pero estoy en contra. Las tiendas pierden clientes los domingos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thank you. Tom will write to the council about a trial month, and the deadline is Friday.",
+            "traduccion": "Gracias. Tom escribirá al ayuntamiento sobre un mes de prueba y el plazo es el viernes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fine. I am responsible for the letter.",
+            "traduccion": "De acuerdo. Yo soy el responsable de la carta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué acción queda acordada?",
+          "opciones": [
+            {
+              "es": "Tom escribe al ayuntamiento y el plazo es el viernes."
+            },
+            {
+              "es": "Mia habla con las tiendas el viernes."
+            },
+            {
+              "es": "Carlos prepara la votación del domingo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Tom will write to the council… the deadline is Friday». Carlos y Mia solo dan su postura."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué busco",
+          "Cómo suena"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "…is in favour of… / …is opposed to…"
+            }
+          ],
+          [
+            {
+              "texto": "Propuesta"
+            },
+            {
+              "texto": "The proposal is to…"
+            }
+          ],
+          [
+            {
+              "texto": "Desacuerdo"
+            },
+            {
+              "texto": "I take your point, but… / I am afraid I cannot agree."
+            }
+          ],
+          [
+            {
+              "texto": "Acción"
+            },
+            {
+              "texto": "…will + verbo + by + día"
+            }
+          ],
+          [
+            {
+              "texto": "Responsable"
+            },
+            {
+              "texto": "…is responsible for…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-24": {
+      "explicacion": {
+        "titulo": "Interrumpir, aclarar y reconducir",
+        "texto": "En producción, cada intervención lleva tres piezas. Primero abres el turno con cortesía: If I could just come in here… Después haces lo que necesitas: pedir más detalle (Could you expand on that?), comprobar lo entendido (If I understand you correctly…) o resumir (To summarise…). Por último devuelves la reunión al punto: Let us stick to the agenda. Al resumir posturas ajenas usa verbos neutros (wants, prefers) y no añadas tu opinión."
+      },
+      "patron": {
+        "texto": "Abrir turno + comprobar + reconducir:",
+        "formula": [
+          {
+            "texto": "If I could just come in here,",
+            "nota": "abres turno con cortesía"
+          },
+          {
+            "texto": "if I understand you correctly, you want a trial.",
+            "nota": "compruebas lo que entendiste"
+          },
+          {
+            "texto": "Let us stick to the agenda.",
+            "nota": "devuelves la reunión al orden del día"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "To resume: Leo wants a trial.",
+          "correcto": "To summarise: Leo wants a trial.",
+          "explicacion": "Falso amigo: resume significa «reanudar». «Resumir» se dice summarise."
+        },
+        {
+          "incorrecto": "If I understand you correct, you want Tuesdays.",
+          "correcto": "If I understand you correctly, you want Tuesdays.",
+          "explicacion": "Modifica al verbo understand, así que lleva adverbio (correctly), no el adjetivo correct."
+        }
+      ],
+      "situacion": {
+        "contexto": "Los padres y madres del colegio deciden adónde irá la excursión de la clase.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Item three is the class trip. Leo, what is your proposal?",
+            "traduccion": "El punto tres es la excursión de la clase. Leo, ¿cuál es tu propuesta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I think we should go to the science museum in May.",
+            "traduccion": "Creo que deberíamos ir al museo de ciencias en mayo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "If I understand you correctly, you want to go in May. Could you expand on that briefly?",
+            "traduccion": "Si te entiendo bien, quieres ir en mayo. ¿Podrías ampliarlo brevemente?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. The tickets are cheaper in May, and the weather is better.",
+            "traduccion": "Sí. Las entradas son más baratas en mayo y hace mejor tiempo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "To summarise: Leo wants May, and we still need to pay for the bus.",
+            "traduccion": "Resumiendo: Leo quiere mayo y todavía tenemos que pagar el autobús."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thank you, Mia. Let us discuss the bus now.",
+            "traduccion": "Gracias, Mia. Hablemos ahora del autobús."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Tom después de comprobar lo que entendió?",
+          "opciones": [
+            {
+              "es": "Pide a Leo que amplíe su propuesta."
+            },
+            {
+              "es": "Resume las posturas de todos."
+            },
+            {
+              "es": "Pide dejar el tema a un lado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «If I understand you correctly…» y después «Could you expand on that briefly?». El resumen lo hace Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Entrar en la conversación"
+            },
+            {
+              "texto": "If I could just come in here…"
+            }
+          ],
+          [
+            {
+              "texto": "Pedir más detalle"
+            },
+            {
+              "texto": "Could you expand on that?"
+            }
+          ],
+          [
+            {
+              "texto": "Comprobar"
+            },
+            {
+              "texto": "If I understand you correctly…"
+            }
+          ],
+          [
+            {
+              "texto": "Resumir"
+            },
+            {
+              "texto": "To summarise: X wants…, Y prefers…"
+            }
+          ],
+          [
+            {
+              "texto": "Reconducir"
+            },
+            {
+              "texto": "Let us stick to the agenda."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-25": {
+      "explicacion": {
+        "titulo": "Dirigir la reunión y redactar el acta",
+        "texto": "Dirigir y escribir el acta son dos caras del mismo trabajo. Quien preside abre la sesión, recoge las disculpas (Apologies were received from…), sigue el orden del día, pide votar y cierra con Any other business? … I adjourn the meeting. El acta, en tercera persona, registra cada decisión con responsable y plazo: Sara will ask the council by 10 June. Usa verbos neutros (voted to approve) y fechas exactas: lo que no consta en el acta no se acordó."
+      },
+      "patron": {
+        "texto": "Decisión + responsable + plazo:",
+        "formula": [
+          {
+            "texto": "The members voted to approve the timetable.",
+            "nota": "decisión: voted to approve + nombre"
+          },
+          {
+            "texto": "Sara is responsible for the letter",
+            "nota": "responsable: is responsible for + nombre"
+          },
+          {
+            "texto": "and will send it by 10 June.",
+            "nota": "plazo: will + verbo + by + fecha"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Carlos cannot assist tonight.",
+          "correcto": "Carlos cannot attend tonight.",
+          "explicacion": "Falso amigo: assist significa «ayudar». «Asistir a una reunión» se dice attend."
+        },
+        {
+          "incorrecto": "The members approved to change the date.",
+          "correcto": "The members voted to change the date.",
+          "explicacion": "Approve lleva nombre (approve the change), no to + verbo. Con un verbo se dice voted to change."
+        }
+      ],
+      "situacion": {
+        "contexto": "El comité de un club deportivo de barrio celebra su reunión mensual.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Good evening. Apologies were received from Carlos, who cannot attend tonight. Item one: the new balls.",
+            "traduccion": "Buenas noches. Se recibieron disculpas de Carlos, que no puede asistir esta noche. Punto uno: los balones nuevos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I would like to propose that we buy them this month.",
+            "traduccion": "Me gustaría proponer que los compremos este mes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I support that. I will record it in the minutes.",
+            "traduccion": "Lo apoyo. Lo dejaré registrado en el acta."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The members voted to approve it. Leo is responsible for the order, and the deadline is 15 May.",
+            "traduccion": "Los miembros votaron aprobarlo. Leo es responsable del pedido y el plazo es el 15 de mayo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Any other business? No? Then I adjourn the meeting.",
+            "traduccion": "¿Algún otro asunto? ¿No? Entonces levanto la sesión."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién es responsable del pedido y para cuándo?",
+          "opciones": [
+            {
+              "es": "Leo, que tiene hasta el 15 de mayo."
+            },
+            {
+              "es": "Sara, que tiene hasta el 15 de mayo."
+            },
+            {
+              "es": "Carlos, que tiene hasta el 15 de junio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Leo is responsible for the order, and the deadline is 15 May». Sara solo escribe el acta y Carlos está ausente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del acta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Ausencias"
+            },
+            {
+              "texto": "Apologies were received from Carlos."
+            }
+          ],
+          [
+            {
+              "texto": "Decisión"
+            },
+            {
+              "texto": "The members voted to approve the plan."
+            }
+          ],
+          [
+            {
+              "texto": "Acción"
+            },
+            {
+              "texto": "Leo will book the hall by 5 May."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "The meeting was adjourned at eight o'clock."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -60,7 +60,8 @@
     "attack",
     "personal",
     "reply",
-    "sample"
+    "sample",
+    "generalization"
   ],
   "usesPatterns": [
     "n7-argument-structure-3"
@@ -105,6 +106,10 @@
     {
       "en": "sample",
       "es": "muestra"
+    },
+    {
+      "en": "generalization",
+      "es": "generalización (ortografía americana)"
     }
   ],
   "teaching": [
@@ -599,7 +604,8 @@
             {
               "text": "generalisation",
               "accepted": [
-                "generalisation"
+                "generalisation",
+                "generalization"
               ]
             },
             {
@@ -637,7 +643,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:3cdb06c31391315095e93e424b6b1a1e4f1b0b6abb485366e0d5b19086f15884"
+        "contentHash": "sha256:8542309fb4afaecfe766fe3fb40598853c2fb03a19292ad501307c21c580097b"
       }
     ],
     "review": [
@@ -770,7 +776,8 @@
           "text": "That may be a coincidence, not a cause. Do you have any evidence?",
           "accepted": [
             "That may be a coincidence, not a cause. Do you have any evidence?",
-            "That could be a coincidence, not a cause. Can you show any evidence?"
+            "That could be a coincidence, not a cause. Can you show any evidence?",
+            "That may be a coincidence, not a cause. Can you show me any evidence?"
           ]
         },
         "choices": [],
@@ -785,14 +792,53 @@
           "feedback": {
             "es": "La réplica nombra el fallo (una casualidad, no una causa) y pide una prueba sin atacar a la persona."
           },
-          "text": "Argumento: My neighbour's dog barked and then the power went out, so the dog caused it."
+          "text": "Argumento: My neighbour's dog barked and then the power went out, so the dog caused it.",
+          "scoring": {
+            "wordRange": [
+              7,
+              35
+            ],
+            "evidenceGroups": [
+              [
+                "coincidence",
+                "not a cause",
+                "not the cause",
+                "false cause",
+                "only chance",
+                "just chance",
+                "only a coincidence"
+              ],
+              [
+                "evidence",
+                "proof",
+                "facts",
+                "data",
+                "examples",
+                "prove",
+                "show that"
+              ],
+              [
+                "do you have",
+                "can you",
+                "could you",
+                "would you",
+                "is there",
+                "what evidence",
+                "how do you know",
+                "where is",
+                "show me",
+                "give me",
+                "what proof"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:10f72235192b45394340954e081256c9eadc941d66e993934c3cdcd1837dd943"
+        "contentHash": "sha256:12efc0efa223ba1357ea5d0c521584db12b910dc74b43f3e6970ad9f51847a62"
       }
     ]
   },

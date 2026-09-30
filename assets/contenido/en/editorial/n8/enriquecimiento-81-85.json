@@ -1,0 +1,584 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "classes": {
+    "en.n8.class-81": {
+      "explicacion": {
+        "titulo": "Afirmación, prueba y opinión",
+        "texto": "En un texto de estudio no todas las oraciones hacen el mismo trabajo. La afirmación (claim) es la idea que el autor defiende. La prueba (evidence) la apoya con datos, cifras, una fuente o un ejemplo: according to a survey…, the data show that… La opinión dice lo que alguien siente o cree sin poder comprobarlo: in my opinion…, I feel that… En C1 no basta con entender el significado: hay que reconocer la función de cada oración. Una afirmación sin pruebas es solo una opinión."
+      },
+      "patron": {
+        "texto": "Afirmación + prueba que la apoya:",
+        "formula": [
+          {
+            "texto": "Teenagers need more sleep.",
+            "nota": "afirmación: la idea que se defiende"
+          },
+          {
+            "texto": "According to a survey of 300 students,",
+            "nota": "prueba: fuente + dato que se puede comprobar"
+          },
+          {
+            "texto": "68 percent sleep under seven hours.",
+            "nota": "resultado concreto de la prueba"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, school should start later.",
+          "correcto": "In my opinion, school should start later.",
+          "explicacion": "«Según yo» se calca como according to me. Según (according to) se usa con una fuente (a survey, a report); para opinar, in my opinion."
+        },
+        {
+          "incorrecto": "There are strong evidences that teenagers need more sleep.",
+          "correcto": "There is strong evidence that teenagers need more sleep.",
+          "explicacion": "Evidence es incontable: no lleva plural ni artículo a. Se dice strong evidence y there is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia leen un artículo para un trabajo de clase sobre el horario escolar.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The article says school should start at nine. Is that evidence?",
+            "traduccion": "El artículo dice que la escuela debería empezar a las nueve. ¿Eso es una prueba?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, that is the claim. The evidence comes next: according to a survey of 300 students, most of them sleep under seven hours.",
+            "traduccion": "No, esa es la afirmación. La prueba viene después: según una encuesta a 300 estudiantes, la mayoría duerme menos de siete horas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And this sentence? In my opinion, mornings are boring.",
+            "traduccion": "¿Y esta frase? En mi opinión, las mañanas son aburridas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is only an opinion. The writer gives no data.",
+            "traduccion": "Eso es solo una opinión. El autor no da datos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué frase es solo una opinión?",
+          "opciones": [
+            {
+              "es": "La de que las mañanas son aburridas, porque no da datos."
+            },
+            {
+              "es": "La de la encuesta a 300 estudiantes, porque cita una fuente."
+            },
+            {
+              "es": "La de que la escuela debería empezar a las nueve."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que «mornings are boring» es solo una opinión porque no hay datos; la encuesta es la prueba y la hora de inicio es la afirmación."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Señales típicas"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "afirmación"
+            },
+            {
+              "texto": "The claim is that… · Experts argue that…"
+            }
+          ],
+          [
+            {
+              "texto": "prueba"
+            },
+            {
+              "texto": "According to… · The data show that… · A survey of…"
+            }
+          ],
+          [
+            {
+              "texto": "opinión"
+            },
+            {
+              "texto": "In my opinion… · I think… · I feel that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-82": {
+      "explicacion": {
+        "titulo": "Cómo matizar una afirmación",
+        "texto": "En el lenguaje académico evitas decir «esto es así» cuando los datos solo apuntan en una dirección. Se matiza de tres formas: verbos (suggest, indicate, appear to, tend to), modales (may, might, could) y expresiones (to a certain extent, it could be argued that, there is limited evidence that). Matizar no es dudar: es decir exactamente hasta dónde llegan tus pruebas. Un solo recurso por idea suele bastar; apilar varios (perhaps it may possibly…) suena confuso."
+      },
+      "patron": {
+        "texto": "Datos + verbo de cautela + afirmación:",
+        "formula": [
+          {
+            "texto": "The findings",
+            "nota": "sujeto: los datos, no «yo»"
+          },
+          {
+            "texto": "may indicate that",
+            "nota": "modal + verbo de cautela: apunta, no prueba"
+          },
+          {
+            "texto": "short naps improve memory.",
+            "nota": "la afirmación, ya matizada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Teenagers tend to sleeping later than adults.",
+          "correcto": "Teenagers tend to sleep later than adults.",
+          "explicacion": "Después de tend to va el verbo en forma base, no en -ing."
+        },
+        {
+          "incorrecto": "To certain extent, online classes are useful.",
+          "correcto": "To a certain extent, online classes are useful.",
+          "explicacion": "La expresión lleva artículo: to a certain extent («en cierta medida»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom leen un artículo sobre las siestas para su grupo de estudio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "The article says short naps improve memory. Great, I will sleep in class!",
+            "traduccion": "El artículo dice que las siestas cortas mejoran la memoria. ¡Genial, dormiré en clase!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Careful. It says the findings may indicate that, not that they prove it.",
+            "traduccion": "Cuidado. Dice que los resultados podrían indicarlo, no que lo prueben."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What is the difference?",
+            "traduccion": "¿Cuál es la diferencia?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The sample had only 40 students. So there is limited evidence, and the effect is true only to a certain extent.",
+            "traduccion": "La muestra tenía solo 40 estudiantes. Así que hay pocas pruebas y el efecto es cierto solo en cierta medida."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿por qué el artículo usa «may indicate»?",
+          "opciones": [
+            {
+              "es": "Porque solo estudiaron a 40 estudiantes y las pruebas son limitadas."
+            },
+            {
+              "es": "Porque el artículo duda de que dormir sea bueno para la salud."
+            },
+            {
+              "es": "Porque Tom no entendió bien el artículo y lo leyó mal."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que la muestra era de solo 40 estudiantes: hay pruebas limitadas, por eso el texto dice may indicate y no prueba."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "verbo"
+            },
+            {
+              "texto": "The results suggest that…"
+            }
+          ],
+          [
+            {
+              "texto": "modal"
+            },
+            {
+              "texto": "The findings may indicate that…"
+            }
+          ],
+          [
+            {
+              "texto": "expresión"
+            },
+            {
+              "texto": "To a certain extent, … · It could be argued that…"
+            }
+          ],
+          [
+            {
+              "texto": "evidencia escasa"
+            },
+            {
+              "texto": "There is limited evidence that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-83": {
+      "explicacion": {
+        "titulo": "Cómo leer un resumen académico",
+        "texto": "Un resumen académico (abstract) cuenta un estudio completo en pocas líneas y casi siempre sigue el mismo orden: objetivo (aim: por qué se hizo), método (method: a quién y cómo) y conclusión (qué encontraron y con qué cautela). Para localizar cada parte busca señales: The aim of this study is to…, The sample included…, The authors conclude that… La conclusión suele venir matizada (may suggest, is likely to), no como verdad absoluta. Lee primero las señales y después los detalles."
+      },
+      "patron": {
+        "texto": "Objetivo + muestra + conclusión cautelosa:",
+        "formula": [
+          {
+            "texto": "The aim of this study is to examine…",
+            "nota": "objetivo: qué pregunta quiere responder"
+          },
+          {
+            "texto": "The sample included 120 participants.",
+            "nota": "método: quién participó"
+          },
+          {
+            "texto": "The authors conclude that … may …",
+            "nota": "conclusión: qué encontraron, con cautela"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The aim of this study is examine how sleep affects memory.",
+          "correcto": "The aim of this study is to examine how sleep affects memory.",
+          "explicacion": "Después de The aim is va to + verbo base: falta to."
+        },
+        {
+          "incorrecto": "The aim of the study is to know how sleep affects memory.",
+          "correcto": "The aim of the study is to examine how sleep affects memory.",
+          "explicacion": "«Conocer» no se traduce como know en un objetivo de investigación: se usa examine, investigate o find out."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom leen un resumen académico para una tarea y Tom no encuentra la conclusión.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I cannot find the conclusion in this abstract.",
+            "traduccion": "No encuentro la conclusión en este resumen."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Start with the aim. The aim is to examine how sleep affects exam performance.",
+            "traduccion": "Empieza por el objetivo. El objetivo es examinar cómo afecta el sueño al rendimiento en los exámenes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the sample?",
+            "traduccion": "¿Y la muestra?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "There were 120 participants. At the end, the authors conclude that more sleep may improve scores.",
+            "traduccion": "Hubo 120 participantes. Al final, los autores concluyen que dormir más podría mejorar las notas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿dónde está la conclusión del resumen?",
+          "opciones": [
+            {
+              "es": "Al final, donde los autores dicen que dormir más podría mejorar las notas."
+            },
+            {
+              "es": "Al principio, donde se explica el objetivo del estudio."
+            },
+            {
+              "es": "En los 120 participantes, que son la muestra."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que al final los autores concluyen que más sueño podría mejorar las notas: «conclude that» marca la conclusión, no el objetivo ni la muestra."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del resumen",
+          "Señal frecuente"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "objetivo"
+            },
+            {
+              "texto": "The aim of this study is to…"
+            }
+          ],
+          [
+            {
+              "texto": "método"
+            },
+            {
+              "texto": "The sample included… · Participants followed…"
+            }
+          ],
+          [
+            {
+              "texto": "resultado"
+            },
+            {
+              "texto": "The results show that… · The group scored higher…"
+            }
+          ],
+          [
+            {
+              "texto": "conclusión"
+            },
+            {
+              "texto": "The authors conclude that… may…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-84": {
+      "explicacion": {
+        "titulo": "Un párrafo con cautela",
+        "texto": "Un párrafo académico cauteloso tiene tres partes: una afirmación clara, la evidencia que la apoya (una cifra, una encuesta, un estudio) y una conclusión matizada. Usa al menos tres recursos de cautela de tipos distintos: un verbo (suggest, seem), un modal (may, might) y una expresión (to a certain extent, it could be argued that). No pongas cautela en todo: si tienes una cifra concreta, dila sin rodeos y reserva el matiz para la interpretación de esa cifra."
+      },
+      "patron": {
+        "texto": "Afirmación + evidencia + conclusión cautelosa:",
+        "formula": [
+          {
+            "texto": "Short sessions may be more effective.",
+            "nota": "afirmación con un modal de cautela"
+          },
+          {
+            "texto": "A survey of 200 students found that…",
+            "nota": "evidencia: fuente y cifra sin matizar"
+          },
+          {
+            "texto": "This suggests that regular review helps.",
+            "nota": "conclusión con un verbo de cautela"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Perhaps the results may possibly suggest that sessions help.",
+          "correcto": "The results may suggest that short sessions help.",
+          "explicacion": "Apilar perhaps + may + possibly suena confuso. Un recurso por idea basta para matizar."
+        },
+        {
+          "incorrecto": "The effect may depend of the subject.",
+          "correcto": "The effect may depend on the subject.",
+          "explicacion": "Depend va con on, no con of: «depender de» se dice depend on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pide a Leo que revise su párrafo sobre hábitos de estudio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Your paragraph says the survey proves short sessions work.",
+            "traduccion": "Tu párrafo dice que la encuesta prueba que las sesiones cortas funcionan."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. Fifty students improved.",
+            "traduccion": "Sí. Cincuenta estudiantes mejoraron."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Careful. Fifty is a small sample. Try this: the survey suggests that short sessions may work.",
+            "traduccion": "Cuidado. Cincuenta es una muestra pequeña. Prueba esto: la encuesta sugiere que las sesiones cortas pueden funcionar."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Better. And I can end with: to a certain extent, regular review helps.",
+            "traduccion": "Mejor. Y puedo terminar con: en cierta medida, repasar con regularidad ayuda."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué cambia Leo en el párrafo de Mia y por qué?",
+          "opciones": [
+            {
+              "es": "Suaviza «proves» porque una muestra de cincuenta estudiantes es pequeña."
+            },
+            {
+              "es": "Quita la encuesta porque cincuenta estudiantes son pocos."
+            },
+            {
+              "es": "Añade una opinión personal para que el párrafo sea más claro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo cambia proves por suggests y may work: con solo cincuenta estudiantes, la conclusión debe ser cautelosa, no absoluta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del párrafo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "afirmación"
+            },
+            {
+              "texto": "Short study sessions may be more effective."
+            }
+          ],
+          [
+            {
+              "texto": "evidencia"
+            },
+            {
+              "texto": "A survey of 200 students found that…"
+            }
+          ],
+          [
+            {
+              "texto": "conclusión"
+            },
+            {
+              "texto": "This suggests that regular review helps, to a certain extent."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-85": {
+      "explicacion": {
+        "titulo": "Presentar hallazgos y responder objeciones",
+        "texto": "Presentar hallazgos a un grupo tiene tres movimientos: resumir el estudio con fidelidad (qué se hizo y qué se encontró), dar una conclusión cautelosa (the findings suggest…) y responder a las objeciones sin ponerte a la defensiva. Para responder, reconoce lo razonable (That is a fair point), admite la limitación (One limitation is that…) y mantén tu conclusión con matiz (Nevertheless, the results are likely to be valid). Reconocer un límite no debilita tu argumento: lo hace más creíble."
+      },
+      "patron": {
+        "texto": "Reconocer + admitir el límite + mantener con cautela:",
+        "formula": [
+          {
+            "texto": "That is a fair point,",
+            "nota": "reconoce la objeción"
+          },
+          {
+            "texto": "one limitation is that the sample was small;",
+            "nota": "admite el límite del estudio"
+          },
+          {
+            "texto": "nevertheless, the findings are likely to be valid.",
+            "nota": "mantiene la conclusión con cautela"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree that it is a fair point.",
+          "correcto": "I agree that it is a fair point.",
+          "explicacion": "Agree es un verbo: no lleva am. Se dice I agree, no I am agree («estoy de acuerdo»)."
+        },
+        {
+          "incorrecto": "Nevertheless, but more research is needed.",
+          "correcto": "Nevertheless, more research is needed.",
+          "explicacion": "Nevertheless ya expresa el contraste («sin embargo»): no se añade but («pero»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara presenta su estudio al grupo y Tom plantea una objeción.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Let me summarise: the findings suggest that students who sleep more tend to score higher.",
+            "traduccion": "Permítanme resumir: los hallazgos sugieren que los estudiantes que duermen más suelen sacar mejores notas."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "But the sample was only 40 students. Is that a problem?",
+            "traduccion": "Pero la muestra fueron solo 40 estudiantes. ¿Es un problema?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair point. It is a limitation. Nevertheless, the results are likely to be valid for our age group.",
+            "traduccion": "Es un punto razonable. Es una limitación. Aun así, los resultados probablemente son válidos para nuestro grupo de edad."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK, but more research is needed.",
+            "traduccion": "De acuerdo, pero hace falta más investigación."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I agree.",
+            "traduccion": "Estoy de acuerdo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo responde Sara a la objeción de Tom?",
+          "opciones": [
+            {
+              "es": "Admite que la muestra es una limitación, pero mantiene una conclusión cautelosa."
+            },
+            {
+              "es": "Niega que la muestra sea pequeña y dice que los datos son perfectos."
+            },
+            {
+              "es": "Cambia de tema y no responde a la pregunta de Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «That is a fair point. It is a limitation» y después mantiene la conclusión con «nevertheless… likely to be valid»: reconoce el límite y defiende el resultado con cautela."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Movimiento",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "resumir"
+            },
+            {
+              "texto": "Let me summarise… · The main findings suggest…"
+            }
+          ],
+          [
+            {
+              "texto": "admitir un límite"
+            },
+            {
+              "texto": "One limitation is that…"
+            }
+          ],
+          [
+            {
+              "texto": "reconocer la objeción"
+            },
+            {
+              "texto": "That is a fair point."
+            }
+          ],
+          [
+            {
+              "texto": "mantener la conclusión"
+            },
+            {
+              "texto": "Nevertheless, the results are likely to be valid."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

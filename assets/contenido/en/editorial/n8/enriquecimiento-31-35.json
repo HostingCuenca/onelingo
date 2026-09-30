@@ -1,0 +1,629 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n8",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "classes": {
+    "en.n8.class-31": {
+      "explicacion": {
+        "titulo": "Cuatro grados de petición",
+        "texto": "En inglés, cuanto mayor es el favor o la distancia con la otra persona, más larga e indirecta es la petición. Hay cuatro grados: orden directa (Lend me…), neutro (Could you lend me…?), indirecto (I was wondering if you might…; Would you mind lending…?) y muy indirecto (I don't suppose you could…; Would it be at all possible to…?). Las fórmulas muy indirectas dejan al otro una salida fácil para decir que no. No significan que dudes: es cortesía. Con un amigo basta un grado bajo; con un jefe o un vecino y un favor grande, sube un grado."
+      },
+      "patron": {
+        "texto": "Fórmula indirecta + could/might + verbo base:",
+        "formula": [
+          {
+            "texto": "I don't suppose",
+            "nota": "petición muy indirecta: espera un «no»"
+          },
+          {
+            "texto": "you could",
+            "nota": "could, no can: el pasado crea distancia"
+          },
+          {
+            "texto": "lend me your ladder?",
+            "nota": "verbo base + lo que pides"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Would you mind to lend me your ladder?",
+          "correcto": "Would you mind lending me your ladder?",
+          "explicacion": "Después de Would you mind se usa el verbo en -ing, no to + verbo."
+        },
+        {
+          "incorrecto": "Would it be possible you to lend me the ladder?",
+          "correcto": "Would it be possible for you to lend me the ladder?",
+          "explicacion": "Con possible, la persona que hace la acción se introduce con for: for you to lend. Decir «possible you to lend» es un calco del español «posible que tú…»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia necesita una escalera y se la pide a su vecino Tom.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Hi Tom. I don't suppose you could lend me your ladder this weekend?",
+            "traduccion": "Hola, Tom. No creo que puedas prestarme tu escalera este fin de semana, ¿verdad?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Of course. Would you like it on Saturday?",
+            "traduccion": "Claro. ¿La quieres el sábado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That would be great. Would it be possible to have it before noon?",
+            "traduccion": "Genial. ¿Sería posible tenerla antes del mediodía?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No problem. I'll leave it by your door at nine.",
+            "traduccion": "Sin problema. La dejaré junto a tu puerta a las nueve."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Mia y cómo responde Tom?",
+          "opciones": [
+            {
+              "es": "Pide una escalera con una fórmula muy indirecta y Tom acepta."
+            },
+            {
+              "es": "Ordena a Tom que le deje la escalera y él se niega."
+            },
+            {
+              "es": "Pregunta si Tom tiene escalera y él no lo sabe."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia abre con «I don't suppose you could…» y Tom contesta «Of course» y le deja la escalera junto a la puerta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Grado",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "directo"
+            },
+            {
+              "texto": "Lend me…"
+            }
+          ],
+          [
+            {
+              "texto": "neutro"
+            },
+            {
+              "texto": "Could you lend me…?"
+            }
+          ],
+          [
+            {
+              "texto": "indirecto"
+            },
+            {
+              "texto": "I was wondering if you might…"
+            }
+          ],
+          [
+            {
+              "texto": "muy indirecto"
+            },
+            {
+              "texto": "I don't suppose you could…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-32": {
+      "explicacion": {
+        "titulo": "Eufemismos y atenuaciones",
+        "texto": "Los eufemismos suavizan los temas delicados: muerte, dinero, trabajo, salud. En vez de la palabra cruda se usa otra más suave: died → passed away; fired → let go; unemployed → between jobs; old → elderly; bad → not the best. Esta última es una atenuación (understatement): dice menos de lo que siente. Ojo con el registro: passed away es respetuoso ante una familia que sufre; con amigos que bromean se puede decir died. Elige según la persona y el momento, y recuerda que el mensaje real sigue ahí."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo + expresión suave:",
+        "formula": [
+          {
+            "texto": "He",
+            "nota": "sujeto: la persona de quien hablas"
+          },
+          {
+            "texto": "is between jobs",
+            "nota": "eufemismo de «is unemployed»"
+          },
+          {
+            "texto": "at the moment.",
+            "nota": "el marco temporal suaviza aún más"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He is between works at the moment.",
+          "correcto": "He is between jobs at the moment.",
+          "explicacion": "La expresión fija es between jobs. «Trabajos» se traduce aquí con jobs, no con works."
+        },
+        {
+          "incorrecto": "My grandmother has passed away yesterday.",
+          "correcto": "My grandmother passed away yesterday.",
+          "explicacion": "Con yesterday se usa el pasado simple, no el presente perfecto: passed away es un hecho terminado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo pregunta a Sara por su vecino, al que no ve desde hace semanas.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Is your neighbour at home? I haven't seen him.",
+            "traduccion": "¿Tu vecino está en casa? No lo he visto."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I'm afraid he passed away last month.",
+            "traduccion": "Me temo que falleció el mes pasado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh, I'm so sorry. Was he ill?",
+            "traduccion": "Lo siento mucho. ¿Estaba enfermo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "He was elderly, and his health was not the best.",
+            "traduccion": "Era mayor y su salud no era la mejor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le ocurrió al vecino de Sara?",
+          "opciones": [
+            {
+              "es": "Falleció el mes pasado; era mayor y su salud era frágil."
+            },
+            {
+              "es": "Se mudó porque perdió su trabajo."
+            },
+            {
+              "es": "Está enfermo en el hospital desde ayer."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara usa «passed away» para decir que murió, y «elderly» y «not the best» para explicar su edad y su salud."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión cruda",
+          "Versión suave"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "died"
+            },
+            {
+              "texto": "passed away"
+            }
+          ],
+          [
+            {
+              "texto": "fired"
+            },
+            {
+              "texto": "let go"
+            }
+          ],
+          [
+            {
+              "texto": "unemployed"
+            },
+            {
+              "texto": "between jobs"
+            }
+          ],
+          [
+            {
+              "texto": "old"
+            },
+            {
+              "texto": "elderly"
+            }
+          ],
+          [
+            {
+              "texto": "bad"
+            },
+            {
+              "texto": "not the best"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-33": {
+      "explicacion": {
+        "titulo": "Mala noticia en voz baja",
+        "texto": "En una consulta médica la mala noticia casi nunca se dice de frente. Se envuelve con atenuadores: it seems, a bit, slightly, might, I wonder if, I'd suggest. Cada uno baja el volumen, pero el mensaje real sigue ahí: «It seems your pressure is slightly high» significa «tienes la tensión alta». Para entender, quita los atenuadores y mira qué queda: la noticia más la acción que te piden. Si tras un atenuador hay una recomendación (I'd suggest…), normalmente es una instrucción."
+      },
+      "patron": {
+        "texto": "Atenuador + noticia + acción suave:",
+        "formula": [
+          {
+            "texto": "It seems that",
+            "nota": "atenuador de distancia"
+          },
+          {
+            "texto": "your pressure is slightly high.",
+            "nota": "slightly rebaja el adjetivo"
+          },
+          {
+            "texto": "I'd suggest a new test.",
+            "nota": "recomendación suave = instrucción"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Your pressure is slight high.",
+          "correcto": "Your pressure is slightly high.",
+          "explicacion": "Para modificar un adjetivo (high) hace falta un adverbio: slightly, no slight."
+        },
+        {
+          "incorrecto": "I suggest to rest for a week.",
+          "correcto": "I suggest you rest for a week.",
+          "explicacion": "Después de suggest no se usa to + verbo: se dice suggest (that) + sujeto + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom visita a la doctora Sara para conocer sus análisis.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Thank you for coming, Tom. It seems your blood pressure is slightly high.",
+            "traduccion": "Gracias por venir, Tom. Parece que tu presión arterial está un poco alta."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is that serious?",
+            "traduccion": "¿Es grave?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It is a bit worrying, to be honest. I'd suggest less coffee.",
+            "traduccion": "Es algo preocupante, para ser sincera. Te sugeriría menos café."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Do I need to come back?",
+            "traduccion": "¿Tengo que volver?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I wonder if you could come back on Friday for another test.",
+            "traduccion": "Me pregunto si podrías volver el viernes para otra prueba."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué le pide realmente la doctora a Tom?",
+          "opciones": [
+            {
+              "es": "Que tome menos café y vuelva el viernes a otra prueba."
+            },
+            {
+              "es": "Que no vuelva hasta el mes que viene."
+            },
+            {
+              "es": "Que tome más café y descanse."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tras los atenuadores, Sara le pide dos cosas: «I'd suggest less coffee» y «come back on Friday for another test»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Atenuador",
+          "Mensaje real"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "It seems that…"
+            },
+            {
+              "texto": "hay un problema, aunque no se dice de golpe"
+            }
+          ],
+          [
+            {
+              "texto": "a bit / slightly + adjetivo"
+            },
+            {
+              "texto": "el problema es real"
+            }
+          ],
+          [
+            {
+              "texto": "I wonder if we could…"
+            },
+            {
+              "texto": "quiero que lo hagamos"
+            }
+          ],
+          [
+            {
+              "texto": "I'd suggest…"
+            },
+            {
+              "texto": "debes hacerlo"
+            }
+          ],
+          [
+            {
+              "texto": "might"
+            },
+            {
+              "texto": "es probable"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-34": {
+      "explicacion": {
+        "titulo": "El no amable, en cuatro piezas",
+        "texto": "Rechazar la propuesta de un amigo sin herirlo tiene cuatro piezas: 1) reconocer la idea (It's a great idea), 2) decir que no con claridad pero suave (I'm afraid I can't; I'd rather not), 3) dar el motivo con atenuadores (honestly, a bit, perhaps) y 4) ofrecer una alternativa (How about… instead?). Tres atenuadores bastan: si pones más, el «no» se pierde y el amigo no sabe qué has dicho. Claro no es lo mismo que brusco: el amigo debe entender que es un no."
+      },
+      "patron": {
+        "texto": "Reconocer + rechazo suave + motivo + alternativa:",
+        "formula": [
+          {
+            "texto": "It's a great idea, but",
+            "nota": "reconoces lo bueno"
+          },
+          {
+            "texto": "I'm afraid I can't",
+            "nota": "rechazo claro y cortés"
+          },
+          {
+            "texto": "because the budget is a bit tight.",
+            "nota": "motivo con atenuador"
+          },
+          {
+            "texto": "How about a day trip instead?",
+            "nota": "alternativa concreta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'd rather to do something smaller.",
+          "correcto": "I'd rather do something smaller.",
+          "explicacion": "Después de would rather va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "How about to go on a day trip instead?",
+          "correcto": "How about going on a day trip instead?",
+          "explicacion": "Después de How about se usa el verbo en -ing, no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo invita a Ana a un fin de semana en la costa; ella no puede permitírselo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I've booked a hotel at the coast for the weekend. It costs 200 euros each.",
+            "traduccion": "He reservado un hotel en la costa para el fin de semana. Cuesta 200 euros cada uno."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It's a great idea, Leo. But honestly, I'm a bit worried about the budget this month.",
+            "traduccion": "Es una gran idea, Leo. Pero, sinceramente, me preocupa un poco el presupuesto de este mes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So you can't come?",
+            "traduccion": "¿Entonces no puedes venir?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I'm afraid I can't this time. How about a day trip to the lake instead?",
+            "traduccion": "Me temo que esta vez no puedo. ¿Qué tal una excursión de un día al lago?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That sounds good. I'll cancel the hotel.",
+            "traduccion": "Suena bien. Cancelaré el hotel."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo responde Ana a la propuesta de Leo?",
+          "opciones": [
+            {
+              "es": "Rechaza con claridad, da el motivo del dinero y propone una excursión de un día."
+            },
+            {
+              "es": "Acepta el hotel, pero pide un descuento."
+            },
+            {
+              "es": "Dice que no sin dar motivos ni alternativa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana reconoce la idea, dice «I'm afraid I can't», da el motivo (el presupuesto) y ofrece «a day trip to the lake instead»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "reconocer"
+            },
+            {
+              "texto": "It's a great idea, but…"
+            }
+          ],
+          [
+            {
+              "texto": "rechazar"
+            },
+            {
+              "texto": "I'm afraid I can't…"
+            }
+          ],
+          [
+            {
+              "texto": "motivo suave"
+            },
+            {
+              "texto": "Honestly, I'm a bit worried about…"
+            }
+          ],
+          [
+            {
+              "texto": "alternativa"
+            },
+            {
+              "texto": "How about… instead?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n8.class-35": {
+      "explicacion": {
+        "titulo": "Contar lo que otros preguntaron",
+        "texto": "Transmitir una pregunta exige dos cambios: la pregunta pasa a frase afirmativa (sin do/does/did y sin signo de interrogación) y el verbo retrocede un paso: «Can the landlord repair it?» → «Tom asked whether the landlord could repair it». Las preguntas de sí o no llevan if o whether; las de why, when o what conservan su palabra interrogativa. Después viene tu respuesta diplomática, que reúne todo el bloque: fórmulas indirectas, atenuadores, un rechazo claro y una alternativa."
+      },
+      "patron": {
+        "texto": "Sujeto + asked/wondered + if/whether + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "Tom asked",
+            "nota": "quién preguntó: verbo en pasado"
+          },
+          {
+            "texto": "whether",
+            "nota": "if/whether para preguntas de sí o no"
+          },
+          {
+            "texto": "the landlord could repair the heating.",
+            "nota": "orden afirmativo; could en lugar de can"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Tom asked me whether could the landlord repair it.",
+          "correcto": "Tom asked me whether the landlord could repair it.",
+          "explicacion": "En la pregunta transmitida el sujeto va antes del verbo: no se invierte el orden como en la pregunta directa."
+        },
+        {
+          "incorrecto": "Mia wanted to know why did the rent go up.",
+          "correcto": "Mia wanted to know why the rent had gone up.",
+          "explicacion": "Tras wanted to know no se usa did: la frase es afirmativa y el verbo retrocede a had gone up."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo representa a los inquilinos de un piso y habla con la casera, Sara.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Hi Leo. What did the other tenants ask you?",
+            "traduccion": "Hola, Leo. ¿Qué te preguntaron los otros inquilinos?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Tom asked whether you could repair the heating. Mia wanted to know why the rent had gone up.",
+            "traduccion": "Tom preguntó si podrías reparar la calefacción. Mia quería saber por qué había subido el alquiler."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I see. The repair is possible next week, but the rent has to stay higher, I'm afraid.",
+            "traduccion": "Ya veo. La reparación es posible la semana que viene, pero el alquiler tiene que seguir más alto, me temo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I will tell them. Thank you for your reply, Sara.",
+            "traduccion": "Se lo diré. Gracias por tu respuesta, Sara."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué preguntas transmite Leo a Sara?",
+          "opciones": [
+            {
+              "es": "Si se puede arreglar la calefacción y por qué subió el alquiler."
+            },
+            {
+              "es": "Si el alquiler puede bajar y cuándo llega el casero."
+            },
+            {
+              "es": "Por qué la calefacción está rota y si Tom puede irse."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Tom asked whether you could repair the heating» y «Mia wanted to know why the rent had gone up»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta directa",
+          "Pregunta transmitida"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Can you repair it?"
+            },
+            {
+              "texto": "She asked whether I could repair it."
+            }
+          ],
+          [
+            {
+              "texto": "Why has the rent gone up?"
+            },
+            {
+              "texto": "He wanted to know why the rent had gone up."
+            }
+          ],
+          [
+            {
+              "texto": "Will you call me?"
+            },
+            {
+              "texto": "They wondered if I would call them."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C31: ítems de registro (jefa / mejor amigo) con una sola respuesta defendible por situación visible; error frecuente 2 sustituido por «possible you to lend» (el anterior «possible that you lend» no es claramente incorrecto); añadido favor (EE. UU.).",
+      "C32: frase de enseñanza «let go of three workers» corregida a «let three workers go»; el repaso incluye ahora pregunta transmitida con if/whether (mapa: spiral review de preguntas transmitidas) en lugar del completar débil de gently; aceptado cozy no posible por léxico (solo cosy).",
+      "C33: aceptado appears en el repaso de seems.",
+      "C34-C35: rúbricas de escritura ampliadas para no rechazar respuestas buenas (asked me if/whether, tres atenuadores sugeridos en cualquier combinación, más fórmulas de alternativa); modelos y aceptadas verificados contra todos los grupos y el rango.",
+      "P2 sin resolver: la dificultad léxica de los ítems es baja para C1 por la restricción de vocabulario enseñado; el «tres atenuadores» de C34 no se puede exigir con grupos de evidencia."
+    ]
+  }
+}

@@ -1,0 +1,631 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n7.class-96": {
+      "explicacion": {
+        "titulo": "Leer una columna de opinión como analista",
+        "texto": "Al analizar una columna de opinión, busca cuatro cosas. La tesis: la idea que el autor defiende (The columnist argues that…). El tono: cómo lo dice (calm, ironic). Los marcadores de postura: palabras que conceden (admittedly), contraponen (nevertheless) o suavizan (seem to, may). Y la cohesión: cómo se enlazan las ideas (this + sustantivo, the former / the latter). Distingue siempre lo que el autor afirma de lo que solo sugiere."
+      },
+      "patron": {
+        "texto": "Ficha de análisis de una columna:",
+        "formula": [
+          {
+            "texto": "The columnist argues that …",
+            "nota": "tesis"
+          },
+          {
+            "texto": "Her tone is calm and ironic.",
+            "nota": "tono"
+          },
+          {
+            "texto": "Admittedly, …; nevertheless, …",
+            "nota": "marcadores de postura: concede y contrapone"
+          },
+          {
+            "texto": "the former … the latter",
+            "nota": "cohesión: referencia a dos elementos"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The columnist argues to ban cars from the square.",
+          "correcto": "The columnist argues that cars should be banned from the square.",
+          "explicacion": "Argue va seguido de that + oración, no de to + verbo."
+        },
+        {
+          "incorrecto": "The benefits outweigh to the costs.",
+          "correcto": "The benefits outweigh the costs.",
+          "explicacion": "Outweigh es transitivo: no lleva preposición (no outweigh to)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom analizan para clase una columna del periódico del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I am analysing this column for class. What is the thesis?",
+            "traduccion": "Estoy analizando esta columna para clase. ¿Cuál es la tesis?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The columnist argues that the market square should be free of cars.",
+            "traduccion": "La columnista sostiene que la plaza del mercado debería estar libre de coches."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And her stance? She says, admittedly, some shops may lose customers.",
+            "traduccion": "¿Y su postura? Dice que, es cierto, algunas tiendas pueden perder clientes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, but nevertheless she insists that the benefits outweigh the costs. The tone is calm.",
+            "traduccion": "Sí, pero aun así insiste en que los beneficios pesan más que los costes. El tono es tranquilo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo trata la columnista la objeción de las tiendas?",
+          "opciones": [
+            {
+              "es": "La admite, pero sostiene que los beneficios pesan más."
+            },
+            {
+              "es": "La ignora por completo."
+            },
+            {
+              "es": "La usa para cambiar de tesis."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que admite el problema («admittedly») pero que insiste en que los beneficios pesan más que los costes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Cómo se dice"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "The columnist argues that …"
+            }
+          ],
+          [
+            {
+              "texto": "Tono"
+            },
+            {
+              "texto": "Her tone is calm / ironic."
+            }
+          ],
+          [
+            {
+              "texto": "Concesión y contraste"
+            },
+            {
+              "texto": "Admittedly, …; nevertheless, …"
+            }
+          ],
+          [
+            {
+              "texto": "Cohesión"
+            },
+            {
+              "texto": "this + sustantivo; the former / the latter"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-97": {
+      "explicacion": {
+        "titulo": "Editar un borrador: cuatro revisiones",
+        "texto": "Revisar un borrador es tomar decisiones y poder justificarlas. Registro: cambia el léxico coloquial por uno neutro (kids → children). Referencia: sustituye un this vago por this + sustantivo (this decision). Conectores: moreover, however y nevertheless se escriben con punto y coma antes y coma después. Forma: fewer con contables, the number of + plural con verbo en singular. Y al final, recorta lo que no añade nada."
+      },
+      "patron": {
+        "texto": "Cuatro revisiones para un borrador:",
+        "formula": [
+          {
+            "texto": "replaced kids with children",
+            "nota": "registro: léxico coloquial → neutro"
+          },
+          {
+            "texto": "This decision surprised …",
+            "nota": "referencia: this + sustantivo"
+          },
+          {
+            "texto": "; moreover, it is easy to test.",
+            "nota": "conector: ; y , alrededor"
+          },
+          {
+            "texto": "Fewer people … the number was",
+            "nota": "forma: fewer y the number of"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There were less people at the meeting.",
+          "correcto": "There were fewer people at the meeting.",
+          "explicacion": "Con sustantivos contables (people) se usa fewer, no less."
+        },
+        {
+          "incorrecto": "The plan is cheap, however it is slow.",
+          "correcto": "The plan is cheap; however, it is slow.",
+          "explicacion": "However entre cláusulas lleva punto y coma antes y coma después."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom revisan una carta que Mia escribe al ayuntamiento.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Here is my draft: The kids need a new playground. This is important.",
+            "traduccion": "Este es mi borrador: los niños necesitan un parque nuevo. Esto es importante."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Replace kids with children; the tone is too casual for the council. And This what?",
+            "traduccion": "Sustituye kids por children; el tono es demasiado informal para el ayuntamiento. Y ¿esto qué?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "This lack of space, then. Also, there were less children last year. Is that wrong?",
+            "traduccion": "Esta falta de espacio, entonces. Y el año pasado había menos niños. ¿Está mal?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes: with countable nouns, say fewer children.",
+            "traduccion": "Sí: con sustantivos contables, di fewer children."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Tom pregunta «This what?»?",
+          "opciones": [
+            {
+              "es": "Porque this es vago: falta un sustantivo que diga a qué se refiere."
+            },
+            {
+              "es": "Porque this es demasiado informal."
+            },
+            {
+              "es": "Porque Mia usó mal la palabra important."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom pregunta «This what?» porque el this de Mia no dice a qué se refiere; ella lo arregla con «This lack of space»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Revisión",
+          "Antes → Después"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Registro"
+            },
+            {
+              "texto": "kids → children"
+            }
+          ],
+          [
+            {
+              "texto": "Referencia"
+            },
+            {
+              "texto": "This → This decision"
+            }
+          ],
+          [
+            {
+              "texto": "Conector"
+            },
+            {
+              "texto": "…, however it → …; however, it"
+            }
+          ],
+          [
+            {
+              "texto": "Forma"
+            },
+            {
+              "texto": "less people → fewer people"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-98": {
+      "explicacion": {
+        "titulo": "Seguir una discusión: quién dice qué y por qué",
+        "texto": "En una discusión rápida, apunta para cada persona cuatro datos: su postura (lo que defiende), su razón (el porqué), su concesión (lo que admite del otro) y si cambia de opinión. Escucha verbos de postura como insists on, concedes that, is torn between, proposes, y conectores como but, yet o still, que señalan contraste. Atribuye cada idea a quien la dice y no mezcles las posturas de dos personas."
+      },
+      "patron": {
+        "texto": "Matriz de una discusión:",
+        "formula": [
+          {
+            "texto": "Carlos insists on building …",
+            "nota": "postura firme"
+          },
+          {
+            "texto": "Ana concedes that …, but …",
+            "nota": "concesión y vuelta a la postura"
+          },
+          {
+            "texto": "Sara is torn between … and …",
+            "nota": "duda entre dos opciones"
+          },
+          {
+            "texto": "Tom changed his mind after …",
+            "nota": "cambio de opinión y su causa"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Carlos insists to build a car park.",
+          "correcto": "Carlos insists on building a car park.",
+          "explicacion": "Insist va con on + -ing (o that + oración), no con to + verbo."
+        },
+        {
+          "incorrecto": "Sara is torn between the garden or the car park.",
+          "correcto": "Sara is torn between the garden and the car park.",
+          "explicacion": "Between lleva and, no or, para unir las dos opciones."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo comentan la reunión de vecinos sobre un solar vacío.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Did you follow the meeting? Carlos insists on building a car park.",
+            "traduccion": "¿Seguiste la reunión? Carlos insiste en construir un aparcamiento."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but Ana concedes that parking is a problem.",
+            "traduccion": "Sí, pero Ana admite que aparcar es un problema."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And Sara proposes a compromise: half garden, half car park.",
+            "traduccion": "Y Sara propone un compromiso: mitad jardín, mitad aparcamiento."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Tom was against it at first, but he changed his mind.",
+            "traduccion": "Tom estaba en contra al principio, pero cambió de opinión."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Sara?",
+          "opciones": [
+            {
+              "es": "Dividir el solar entre jardín y aparcamiento."
+            },
+            {
+              "es": "Construir solo un aparcamiento."
+            },
+            {
+              "es": "Dejar el solar vacío."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cuenta que Sara propone «half garden, half car park»: un compromiso entre las dos posturas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Cómo se dice"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "Carlos insists on building …"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Ana concedes that …, but …"
+            }
+          ],
+          [
+            {
+              "texto": "Duda"
+            },
+            {
+              "texto": "Sara is torn between … and …"
+            }
+          ],
+          [
+            {
+              "texto": "Cambio"
+            },
+            {
+              "texto": "Tom changed his mind after …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-99": {
+      "explicacion": {
+        "titulo": "Defender una postura y responder objeciones",
+        "texto": "Una intervención matizada tiene cinco piezas: una postura con condición (On balance, I would support…, provided that…), una razón con cautela (It seems likely that…), el reconocimiento de la objeción (That is a fair objection / I take your point), tu respuesta (however, although…) y un cierre (To sum up…). Usa would y evita decir You are wrong: el tacto te permite discrepar sin perder a tu oyente. Tras provided that se usa presente, no will."
+      },
+      "patron": {
+        "texto": "Intervención con tacto:",
+        "formula": [
+          {
+            "texto": "On balance, I would support …, provided that …",
+            "nota": "postura con condición"
+          },
+          {
+            "texto": "It seems likely that …",
+            "nota": "razón con cautela"
+          },
+          {
+            "texto": "That is a fair objection; however, …",
+            "nota": "objeción reconocida y respuesta"
+          },
+          {
+            "texto": "To sum up, …",
+            "nota": "cierre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I would support it, provided that the library will add more staff.",
+          "correcto": "I would support it, provided that the library adds more staff.",
+          "explicacion": "Tras provided that se usa presente, no will."
+        },
+        {
+          "incorrecto": "That objection has no sense.",
+          "correcto": "That objection does not make sense.",
+          "explicacion": "En inglés se dice make sense, no have sense."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara ensaya su intervención con Carlos, que hace de objetor.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "On balance, I would support longer opening hours, provided that the library adds more staff.",
+            "traduccion": "En conjunto, apoyaría un horario más largo, siempre que la biblioteca añada más personal."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "But who will pay for the extra staff?",
+            "traduccion": "¿Pero quién pagará al personal extra?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair objection; however, the cost would be small compared with the benefits.",
+            "traduccion": "Es una objeción razonable; sin embargo, el coste sería pequeño comparado con los beneficios."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I take your point. It seems likely that more students would use it.",
+            "traduccion": "Reconozco tu argumento. Parece probable que más estudiantes la usarían."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo responde Sara a la objeción del coste?",
+          "opciones": [
+            {
+              "es": "Reconoce que es razonable y explica que el coste sería pequeño."
+            },
+            {
+              "es": "Rechaza la objeción sin dar razones."
+            },
+            {
+              "es": "Cambia de postura y se opone al plan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «That is a fair objection; however…»: acepta la objeción y responde con un argumento."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura con condición"
+            },
+            {
+              "texto": "On balance, I would support …, provided that …"
+            }
+          ],
+          [
+            {
+              "texto": "Razón con cautela"
+            },
+            {
+              "texto": "It seems likely that …"
+            }
+          ],
+          [
+            {
+              "texto": "Objeción"
+            },
+            {
+              "texto": "That is a fair objection; however, …"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "To sum up, …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-100": {
+      "explicacion": {
+        "titulo": "Caso final: un informe completo",
+        "texto": "El desempeño final junta todo el nivel en un solo texto. Cuenta lo ocurrido con cronología precisa (By midnight, … had flooded). Razona un escenario alternativo (Had the alarm worked, … would have …). Atribuye las fuentes con cautela: according to para lo que dice alguien, apparently o allegedly para lo que no está probado. Propón con tacto (Would the committee consider…?) y cierra con una nota de revisión que documente qué cambiaste (registro, referencia, forma) y por qué."
+      },
+      "patron": {
+        "texto": "Informe con cinco piezas:",
+        "formula": [
+          {
+            "texto": "By midnight, … had flooded.",
+            "nota": "cronología precisa"
+          },
+          {
+            "texto": "Had the alarm worked, … would have …",
+            "nota": "escenario alternativo"
+          },
+          {
+            "texto": "According to …; apparently, …",
+            "nota": "fuentes con cautela"
+          },
+          {
+            "texto": "Would the committee consider …?",
+            "nota": "propuesta con tacto"
+          },
+          {
+            "texto": "Revision: I replaced … with …",
+            "nota": "nota de revisión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, the alarm was broken.",
+          "correcto": "In my view, the alarm was broken.",
+          "explicacion": "According to se usa para fuentes ajenas; para tu opinión, in my view o I think."
+        },
+        {
+          "incorrecto": "By midnight, the basement flooded already.",
+          "correcto": "By midnight, the basement had already flooded.",
+          "explicacion": "By + hora pide pasado perfecto (had flooded), y already va entre had y el participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo redactan el informe del incidente del centro comunitario.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I am writing the incident report. By midnight, the basement had flooded.",
+            "traduccion": "Estoy escribiendo el informe del incidente. A medianoche, el sótano se había inundado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Add that the alarm had not gone off. According to the caretaker, the pipe burst at six.",
+            "traduccion": "Añade que la alarma no había sonado. Según el conserje, la tubería reventó a las seis."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Apparently, nobody read his message until later. Should I write that?",
+            "traduccion": "Al parecer, nadie leyó su mensaje hasta más tarde. ¿Lo escribo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but carefully. And add a revision note: what you changed and why.",
+            "traduccion": "Sí, pero con cuidado. Y añade una nota de revisión: qué cambiaste y por qué."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo pide escribir con cuidado lo del mensaje del conserje?",
+          "opciones": [
+            {
+              "es": "Porque solo parece que nadie lo leyó: no está confirmado."
+            },
+            {
+              "es": "Porque el conserje nunca envió el mensaje."
+            },
+            {
+              "es": "Porque el mensaje llegó antes de la inundación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Apparently…»: es un indicio sin confirmar, por eso Leo recomienda escribirlo con cautela."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Cronología"
+            },
+            {
+              "texto": "By midnight, the basement had flooded."
+            }
+          ],
+          [
+            {
+              "texto": "Alternativa"
+            },
+            {
+              "texto": "Had the alarm worked, … would have …"
+            }
+          ],
+          [
+            {
+              "texto": "Fuentes"
+            },
+            {
+              "texto": "According to …; apparently, …"
+            }
+          ],
+          [
+            {
+              "texto": "Propuesta y revisión"
+            },
+            {
+              "texto": "Would the committee consider …? Revision: I replaced …"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "96: texto de evaluación 0 ya no contiene 'outweigh' (respuesta de otro ítem); completar multiparte con pistas en español (tesis/postura/pesar más que).",
+      "97: relacionar de evaluación ya no revela 'fewer' (respuesta del ítem de corrección); 'informal' aceptado junto a 'casual'; pistas en español en el completar multiparte.",
+      "98: audios de evaluación/repaso ya no contienen lot, drivers, compromise ni 'changed my mind' (respuestas de otros ítems); 'divided' aceptado; pistas en español.",
+      "99: escribir de práctica con rúbrica; objeción del modelo de evaluación con lógica coherente; rango de palabras de la rúbrica 90-240; 'reasonable' aceptado en evaluación 3; pistas en español.",
+      "100: modelo con nota de revisión coherente (no citaba una disculpa inexistente); variantes de escenario alternativo y evidencias de rúbrica ampliadas; feedback reescrito."
+    ]
+  }
+}

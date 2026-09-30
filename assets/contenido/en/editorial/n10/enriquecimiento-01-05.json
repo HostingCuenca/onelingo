@@ -1,0 +1,457 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "classes": {
+    "en.n10.class-01": {
+      "explicacion": {
+        "titulo": "Ecos y fichas de respuesta",
+        "texto": "En una charla informal, el inglés casi nunca contesta con un simple «yes» o «no»: devuelve un eco. El eco repite el auxiliar de la frase, con su pronombre y con la misma polaridad (I've joined… → Have you?; She didn't call → Didn't she?). No pide información: muestra interés o sorpresa, y suele ir seguido de una pregunta. No lo confundas con la question tag (You've met him, haven't you?), que tiene polaridad contraria y pide confirmar lo que ya crees. Otras fichas: Fair enough, No way!, Guess what?"
+      },
+      "patron": {
+        "texto": "Afirmación + eco + pregunta:",
+        "formula": [
+          {
+            "texto": "\"I've joined a choir.\"",
+            "nota": "afirmación con auxiliar (have)"
+          },
+          {
+            "texto": "\"Have you?\"",
+            "nota": "eco: mismo auxiliar + pronombre; muestra interés"
+          },
+          {
+            "texto": "Since when?",
+            "nota": "pregunta breve que mantiene viva la charla"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "\"She lives in Dublin.\" \"Is she?\"",
+          "correcto": "\"She lives in Dublin.\" \"Does she?\"",
+          "explicacion": "El eco repite el auxiliar de la frase original: lives → does. Usar siempre is no suena a eco."
+        },
+        {
+          "incorrecto": "You've met my colleague, no?",
+          "correcto": "You've met my colleague, haven't you?",
+          "explicacion": "«¿no?» es un calco del español. La tag copia el auxiliar con polaridad contraria: have → haven't you?"
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo cenan con amigos y Leo cuenta una novedad.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I've joined a choir.",
+            "traduccion": "Me he apuntado a un coro."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Have you? Since when?",
+            "traduccion": "¿Ah, sí? ¿Desde cuándo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Since March. We sing on Thursdays.",
+            "traduccion": "Desde marzo. Cantamos los jueves."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Fair enough. You've always loved singing, haven't you?",
+            "traduccion": "Vale, tiene sentido. Siempre te ha encantado cantar, ¿verdad?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I have. And guess what? We're singing in June.",
+            "traduccion": "Sí. ¿Y a que no sabes qué? Cantamos en junio."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No way! I'll come.",
+            "traduccion": "¡No puede ser! Iré."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Ana con «haven't you?»?",
+          "opciones": [
+            {
+              "es": "Pide a Leo que confirme algo que ya cree."
+            },
+            {
+              "es": "Muestra sorpresa por una novedad."
+            },
+            {
+              "es": "Cambia de tema."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «You've always loved singing, haven't you?»: la tag pide confirmar algo que ya piensa, y Leo contesta «I have». La sorpresa la expresa antes con «Have you?»."
+        }
+      }
+    },
+    "en.n10.class-02": {
+      "explicacion": {
+        "titulo": "Cabeza y cola en la charla oral",
+        "texto": "En la conversación oral, el inglés saca el tema de la frase. Con la cabeza (head) el tema va primero y un pronombre lo retoma: My brother, he's a cook. Con la cola (tail) la frase completa va primero y el tema se añade al final: He's a cook, my brother. En español puedes omitir el sujeto; en inglés el pronombre es obligatorio y concuerda con el nombre (sister → she, neighbours → they, film → it). Son recursos del habla informal: en un texto formal no se usan."
+      },
+      "patron": {
+        "texto": "Cabeza + pronombre + comentario:",
+        "formula": [
+          {
+            "texto": "That film,",
+            "nota": "cabeza: el tema de la charla"
+          },
+          {
+            "texto": "it",
+            "nota": "pronombre obligatorio que retoma el tema"
+          },
+          {
+            "texto": "was brilliant.",
+            "nota": "comentario sobre el tema"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "That film, was brilliant.",
+          "correcto": "That film, it was brilliant.",
+          "explicacion": "En español se omite el sujeto, pero en inglés tras la cabeza hace falta el pronombre: it."
+        },
+        {
+          "incorrecto": "My neighbours, it's never quiet.",
+          "correcto": "My neighbours, they're never quiet.",
+          "explicacion": "El pronombre debe concordar con el tema: neighbours es plural, así que se usa they."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia vuelven a casa después de la fiesta de un amigo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you like the party?",
+            "traduccion": "¿Te gustó la fiesta?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The music, it was brilliant. But the food, it was terrible.",
+            "traduccion": "La música, genial. Pero la comida, terrible."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Was it? I thought the cook did a good job.",
+            "traduccion": "¿Sí? Yo creía que la cocinera lo había hecho bien."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She's lovely, the cook. But the pasta was cold.",
+            "traduccion": "Es un encanto, la cocinera. Pero la pasta estaba fría."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué piensa Mia de la cocinera?",
+          "opciones": [
+            {
+              "es": "Que es encantadora, aunque la pasta estaba fría."
+            },
+            {
+              "es": "Que cocina fatal y no volverá a ir."
+            },
+            {
+              "es": "Que es la hermana de Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «She's lovely, the cook»: usa una cola para hablar de la cocinera y luego añade que la pasta estaba fría."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Cabeza",
+          "Cola"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "My brother, he's a cook."
+            },
+            {
+              "texto": "He's a cook, my brother."
+            }
+          ],
+          [
+            {
+              "texto": "That film, it was brilliant."
+            },
+            {
+              "texto": "It was brilliant, that film."
+            }
+          ],
+          [
+            {
+              "texto": "Your parents, they're lovely."
+            },
+            {
+              "texto": "They're lovely, your parents."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-03": {
+      "explicacion": {
+        "titulo": "Réplicas cortas: lo omitido y lo sustituido",
+        "texto": "Cuando contestas rápido, no repites lo que el otro ya dijo. Hay tres recursos. Uno: dejar solo to (I'd love to = I'd love to come). Dos: So/Neither + auxiliar + sujeto para «yo también / yo tampoco»; el auxiliar copia el de la frase original (am, do, did, have, can…). Tres: sustituir la oración entera con so o not (I hope so, I think so, I hope not, I'm afraid not). Para entender una réplica, busca el auxiliar y reconstruye el verbo que falta en la frase anterior."
+      },
+      "patron": {
+        "texto": "Frase + réplica elíptica:",
+        "formula": [
+          {
+            "texto": "\"I didn't sleep well.\"",
+            "nota": "frase original con el auxiliar didn't"
+          },
+          {
+            "texto": "Neither",
+            "nota": "yo tampoco (se usa tras una frase negativa)"
+          },
+          {
+            "texto": "did I.",
+            "nota": "auxiliar copiado + sujeto nuevo; el verbo se omite"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "\"I'm tired.\" \"So I am.\"",
+          "correcto": "\"I'm tired.\" \"So am I.\"",
+          "explicacion": "So I am significa «sí, es verdad, lo estoy» y confirma lo que dijo el otro. Para «yo también» el auxiliar va delante del sujeto: So am I."
+        },
+        {
+          "incorrecto": "\"I didn't see him.\" \"Neither I did.\"",
+          "correcto": "\"I didn't see him.\" \"Neither did I.\"",
+          "explicacion": "Tras neither el auxiliar va antes del sujeto (inversión): Neither did I. «Neither I did» es un calco del orden español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara hablan de la boda de Mia: todavía no han recibido la invitación.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Are you going to Mia's wedding?",
+            "traduccion": "¿Vas a la boda de Mia?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'd love to, but I haven't got the invitation.",
+            "traduccion": "Me encantaría, pero no tengo la invitación."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I haven't either. Do you think they forgot us?",
+            "traduccion": "Yo tampoco. ¿Crees que se olvidaron de nosotros?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I hope not. Shall we ask her?",
+            "traduccion": "Espero que no. ¿Se lo preguntamos?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I'd rather not. Let's wait until Friday.",
+            "traduccion": "Prefiero que no. Esperemos hasta el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere decir Leo con «I hope not»?",
+          "opciones": [
+            {
+              "es": "Que espera que no se hayan olvidado de ellos."
+            },
+            {
+              "es": "Que espera no ir a la boda."
+            },
+            {
+              "es": "Que espera que Sara no vaya."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo contesta a «Do you think they forgot us?» con «I hope not»: not sustituye a toda la oración (I hope they didn't forget us)."
+        }
+      }
+    },
+    "en.n10.class-04": {
+      "explicacion": {
+        "titulo": "Marcadores para llevar la charla",
+        "texto": "Los marcadores de discurso guían la conversación y suelen ir al inicio de la réplica, seguidos de coma. By the way y speaking of… cambian de tema (el primero, algo que se te ocurre; el segundo, enlazando con lo dicho). Anyway vuelve al tema principal. To be honest da una opinión sincera sin sonar brusco. Come to think of it marca un recuerdo repentino. Actually corrige o matiza con cortesía: ¡no significa «actualmente»! Usa pocos y variados: si los repites en cada frase, suenas ensayado."
+      },
+      "patron": {
+        "texto": "Marcador + coma + idea:",
+        "formula": [
+          {
+            "texto": "By the way,",
+            "nota": "marcador: abre un tema nuevo"
+          },
+          {
+            "texto": "did you call",
+            "nota": "la pregunta o idea nueva"
+          },
+          {
+            "texto": "the landlord?",
+            "nota": "el resto de la frase es normal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "To say the truth, I didn't enjoy it.",
+          "correcto": "To be honest, I didn't enjoy it.",
+          "explicacion": "«Para decir la verdad» no se dice así en inglés: usa to be honest o to tell the truth."
+        },
+        {
+          "incorrecto": "Come to think it, Mia has the key.",
+          "correcto": "Come to think of it, Mia has the key.",
+          "explicacion": "Es una expresión fija y lleva of: come to think of it."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Carlos organizan una cena para el sábado y se desvían del tema.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "So, are we doing the dinner at my place?",
+            "traduccion": "Entonces, ¿hacemos la cena en mi casa?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "To be honest, your flat is a bit small, isn't it?",
+            "traduccion": "Para ser sincero, tu piso es un poco pequeño, ¿verdad?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fair enough. By the way, did you see Mia's new flat?",
+            "traduccion": "Vale. Por cierto, ¿has visto el piso nuevo de Mia?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Not yet. Anyway, what about Saturday at her place?",
+            "traduccion": "Todavía no. En fin, ¿qué tal el sábado en su casa?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good idea. Come to think of it, she has a big table.",
+            "traduccion": "Buena idea. Ahora que lo pienso, ella tiene una mesa grande."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿para qué usa Carlos «Anyway»?",
+          "opciones": [
+            {
+              "es": "Para volver al plan de la cena."
+            },
+            {
+              "es": "Para cambiar a un tema completamente nuevo."
+            },
+            {
+              "es": "Para pedir que Tom confirme algo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom se ha desviado hablando del piso de Mia; Carlos dice «Anyway, what about Saturday…?» para volver al plan de la cena."
+        }
+      }
+    },
+    "en.n10.class-05": {
+      "explicacion": {
+        "titulo": "La sobremesa: los cuatro recursos juntos",
+        "texto": "En una sobremesa se combinan los recursos de la charla informal: ecos para reaccionar (Is she? Did it?), cabeza o cola para hablar de alguien (My sister, she's…; She's lovely, your sister), elipsis para acordar o rechazar (Neither can I, I'd love to, I'd rather not) y marcadores para dirigir el rumbo (By the way, Anyway, To be honest). Propón un tema, reacciona a lo que dicen los demás y cambia de tema con un marcador. Si solo hablas tú, no es una conversación."
+      },
+      "patron": {
+        "texto": "Tema + reacción + cambio de tema:",
+        "formula": [
+          {
+            "texto": "\"By the way, my sister, she's making the dessert.\"",
+            "nota": "marcador + cabeza: propones el tema"
+          },
+          {
+            "texto": "\"Is she? I'd love to try it.\"",
+            "nota": "eco + elipsis: reaccionas al comentario"
+          },
+          {
+            "texto": "\"Anyway, shall we help?\"",
+            "nota": "marcador: cambias o vuelves al plan"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "\"I can't eat another bite.\" \"So can I.\"",
+          "correcto": "\"I can't eat another bite.\" \"Neither can I.\"",
+          "explicacion": "Tras una frase negativa se usa neither, no so: So can I significaría «yo sí puedo»."
+        },
+        {
+          "incorrecto": "Is very good, that soup.",
+          "correcto": "It's very good, that soup.",
+          "explicacion": "En español se omite el sujeto, pero en inglés la frase de la cola necesita pronombre: It's."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, Carlos y Tom terminan de cenar en casa de Sara y siguen charlando.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "It's a great recipe, this soup. Did you make it, Sara?",
+            "traduccion": "Es una gran receta, esta sopa. ¿La hiciste tú, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I did. My grandmother, she gave me the recipe.",
+            "traduccion": "Sí. Mi abuela me dio la receta."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Did she? Lucky you. By the way, have you heard the gossip about Mia?",
+            "traduccion": "¿Sí? Qué suerte. Por cierto, ¿habéis oído el cotilleo sobre Mia?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No. Go on!",
+            "traduccion": "No. ¡Sigue!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "She's moving to Madrid.",
+            "traduccion": "Se muda a Madrid."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No way! Anyway, let's do the dishes.",
+            "traduccion": "¡No puede ser! En fin, fregamos los platos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién le dio a Sara la receta de la sopa?",
+          "opciones": [
+            {
+              "es": "Su abuela."
+            },
+            {
+              "es": "Carlos."
+            },
+            {
+              "es": "Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «My grandmother, she gave me the recipe»: la cabeza nombra primero a la abuela y el pronombre she retoma el tema."
+        }
+      }
+    }
+  }
+}

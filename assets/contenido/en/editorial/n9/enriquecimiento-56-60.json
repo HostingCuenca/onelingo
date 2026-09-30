@@ -1,0 +1,583 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "classes": {
+    "en.n9.class-56": {
+      "explicacion": {
+        "titulo": "Posturas e intereses",
+        "texto": "En una negociación, la postura (position) es lo que pides: «baja el alquiler». El interés (interest) es la razón que hay debajo: «necesito ahorrar para estudiar». Dos personas con posturas opuestas suelen tener intereses compatibles, por eso conviene preguntar why antes de regatear. El punto en común (common ground) es lo que ambos quieren y sirve de base para negociar. La prioridad (priority) dice qué importa más y en qué cosas puedes ser flexible."
+      },
+      "patron": {
+        "texto": "Postura + interés + punto en común:",
+        "formula": [
+          {
+            "texto": "My position is…",
+            "nota": "lo que pido"
+          },
+          {
+            "texto": "because my real interest is…",
+            "nota": "la razón de fondo"
+          },
+          {
+            "texto": "We both want…, so we have common ground.",
+            "nota": "lo que nos une"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We have a common ground.",
+          "correcto": "We have common ground.",
+          "explicacion": "Common ground es incontable: no lleva a ni plural."
+        },
+        {
+          "incorrecto": "She is flexible in the price.",
+          "correcto": "She is flexible about the price.",
+          "explicacion": "Con flexible la preposición habitual es about (o on), no in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia, inquilina, negocia el alquiler con Carlos, el dueño de su piso.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "My position is simple: lower the rent by 100 dollars.",
+            "traduccion": "Mi postura es simple: bajar el alquiler 100 dólares."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Why is that your position?",
+            "traduccion": "¿Por qué esa es tu postura?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My real interest is to save money for my course. I am flexible about the date of the change.",
+            "traduccion": "Mi verdadero interés es ahorrar para mi curso. Soy flexible con la fecha del cambio."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then we have common ground: I want a tenant who stays for a long time, and you want a stable price.",
+            "traduccion": "Entonces tenemos un punto en común: yo quiero un inquilino que se quede mucho tiempo y tú quieres un precio estable."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cuál es el verdadero interés de Mia?",
+          "opciones": [
+            {
+              "es": "Ahorrar dinero para su curso."
+            },
+            {
+              "es": "Mudarse a otro piso pronto."
+            },
+            {
+              "es": "Cambiar la fecha del contrato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «my real interest is to save money for my course»: esa es su razón de fondo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Concepto",
+          "Ejemplo (alquiler)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "Lower the rent by 100 dollars."
+            }
+          ],
+          [
+            {
+              "texto": "Interés de fondo"
+            },
+            {
+              "texto": "I need to save for my course."
+            }
+          ],
+          [
+            {
+              "texto": "Punto en común"
+            },
+            {
+              "texto": "We both want a long, stable contract."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-57": {
+      "explicacion": {
+        "titulo": "Paquetes de acuerdo",
+        "texto": "Un paquete (package) une varias peticiones en un intercambio: das algo y recibes algo. Tres fórmulas clave: in exchange for + nombre o -ing (a cambio de…), on the understanding that + cláusula (con la condición de que…) y If you could…, we could… (propuesta suave y condicional). Con be willing to + verbo muestras que cedes sin sonar débil. A diferencia de un ultimátum («si no pagas, no firmo»), estas fórmulas dejan la condición clara y mantienen la puerta abierta. Recuerda: in exchange for, nunca «in exchange of»."
+      },
+      "patron": {
+        "texto": "Concesión + condición:",
+        "formula": [
+          {
+            "texto": "We are willing to accept a longer contract",
+            "nota": "concesión con willing to"
+          },
+          {
+            "texto": "in exchange for / on the understanding that",
+            "nota": "señala lo que recibes o la condición"
+          },
+          {
+            "texto": "a lower rent / the rent is paid on time.",
+            "nota": "nombre o cláusula con sujeto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In exchange of a longer contract, we lower the rent.",
+          "correcto": "In exchange for a longer contract, we lower the rent.",
+          "explicacion": "«A cambio de» se dice in exchange for; la preposición of es un calco."
+        },
+        {
+          "incorrecto": "We accept on the understanding to pay on time.",
+          "correcto": "We accept on the understanding that we pay on time.",
+          "explicacion": "On the understanding va seguido de that + cláusula con sujeto, no de infinitivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom quiere renovar el alquiler y negocia con Sara, la propietaria.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I am willing to sign for two years in exchange for a lower rent.",
+            "traduccion": "Estoy dispuesto a firmar por dos años a cambio de un alquiler más bajo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "If you could pay on the first of each month, we could accept that package.",
+            "traduccion": "Si pudieras pagar el día uno de cada mes, podríamos aceptar ese paquete."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fine, on the understanding that you waive the deposit.",
+            "traduccion": "Bien, con la condición de que renuncies al depósito."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Agreed, but only if the flat stays in good condition.",
+            "traduccion": "De acuerdo, pero solo si el piso se mantiene en buen estado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué ofrece Tom a cambio de un alquiler más bajo?",
+          "opciones": [
+            {
+              "es": "Firmar por dos años."
+            },
+            {
+              "es": "Pagar el depósito doble."
+            },
+            {
+              "es": "Repintar todo el piso."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I am willing to sign for two years in exchange for a lower rent»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Fórmula",
+          "Se construye con"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "in exchange for"
+            },
+            {
+              "texto": "nombre o -ing: in exchange for a longer contract"
+            }
+          ],
+          [
+            {
+              "texto": "on the understanding that"
+            },
+            {
+              "texto": "cláusula: on the understanding that you pay early"
+            }
+          ],
+          [
+            {
+              "texto": "If you could…, we could…"
+            },
+            {
+              "texto": "verbo base en ambas partes: If you could pay early, we could lower the price."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-58": {
+      "explicacion": {
+        "titulo": "¿Dónde está el acuerdo?",
+        "texto": "Al escuchar una negociación conviene distinguir qué es una oferta, qué es una concesión y cuán firme es cada compromiso. «In principle» y «tentative» avisan de que todavía no hay acuerdo firme; «subject to» añade una condición previa; «meet halfway» marca una concesión mutua; «commit» y «binding» indican un compromiso real. Para registrar un acuerdo final, busca quién cede qué y qué condiciones siguen pendientes."
+      },
+      "patron": {
+        "texto": "Oferta + condición + firmeza:",
+        "formula": [
+          {
+            "texto": "We can offer 900 dollars a month,",
+            "nota": "oferta concreta"
+          },
+          {
+            "texto": "subject to a two-year contract,",
+            "nota": "condición pendiente"
+          },
+          {
+            "texto": "but that is only tentative.",
+            "nota": "firmeza: provisional"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I commit me to pay the deposit.",
+          "correcto": "I commit to paying the deposit.",
+          "explicacion": "Commit no es reflexivo en inglés y va con to + -ing o nombre."
+        },
+        {
+          "incorrecto": "We accept subject of a two-year contract.",
+          "correcto": "We accept subject to a two-year contract.",
+          "explicacion": "La expresión es subject to, con to, no of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos hablan por teléfono sobre el alquiler del piso de ella.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "In principle, I can accept 900 dollars, subject to a two-year contract.",
+            "traduccion": "En principio puedo aceptar 900 dólares, sujeto a un contrato de dos años."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That sounds tentative. Can you commit to it today?",
+            "traduccion": "Suena provisional. ¿Puedes comprometerte hoy?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I can commit to the price, but the repairs are still only tentative.",
+            "traduccion": "Puedo comprometerme con el precio, pero las reparaciones siguen siendo provisionales."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Fine. Let's meet halfway: a two-year contract now, and the repairs in a written, binding list.",
+            "traduccion": "Bien. Lleguemos a un punto medio: contrato de dos años ahora y las reparaciones en una lista escrita y vinculante."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Carlos, ¿qué sigue sin estar asegurado?",
+          "opciones": [
+            {
+              "es": "Las reparaciones del piso."
+            },
+            {
+              "es": "El precio de 900 dólares."
+            },
+            {
+              "es": "La duración del contrato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos se compromete con el precio, pero dice que las reparaciones son todavía «tentative»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Fuerza del compromiso"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "in principle / tentative"
+            },
+            {
+              "texto": "débil: todavía no está cerrado"
+            }
+          ],
+          [
+            {
+              "texto": "subject to…"
+            },
+            {
+              "texto": "condicionado: falta algo previo"
+            }
+          ],
+          [
+            {
+              "texto": "I can commit to…"
+            },
+            {
+              "texto": "firme: promesa concreta"
+            }
+          ],
+          [
+            {
+              "texto": "binding"
+            },
+            {
+              "texto": "obliga a las dos partes"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-59": {
+      "explicacion": {
+        "titulo": "Ceder para lograr",
+        "texto": "Una concesión condicionada cede algo a cambio de algo: das un paso, pero lo atas a una condición. Provided that y as long as exigen que la condición se cumpla para que la concesión valga; unless mantiene la concesión salvo que ocurra algo; otherwise avisa de la consecuencia si no se cumple. Después de estas conjunciones el verbo va en presente, no en futuro. Y si la oferta te parece alta, responde con una contraoferta: «Here is my counteroffer…». Así avanzas sin decir simplemente «no»."
+      },
+      "patron": {
+        "texto": "Concesión + condición + contraoferta:",
+        "formula": [
+          {
+            "texto": "I can concede the parking place",
+            "nota": "concesión"
+          },
+          {
+            "texto": "provided that you pay the deposit this week;",
+            "nota": "condición en presente"
+          },
+          {
+            "texto": "otherwise, here is my counteroffer: 880.",
+            "nota": "consecuencia y nueva propuesta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will sign as long as you will fix the heating.",
+          "correcto": "We will sign as long as you fix the heating.",
+          "explicacion": "Tras as long as, provided that o unless el verbo va en presente, no en futuro."
+        },
+        {
+          "incorrecto": "We will not sign unless you don't fix the heating.",
+          "correcto": "We will not sign unless you fix the heating.",
+          "explicacion": "Unless ya significa «si no»: añadir don't duplica la negación."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara, compañeros de piso, negocian el cuarto grande y los gastos.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I can concede the bigger room, provided that you pay the bills on time.",
+            "traduccion": "Puedo cederte el cuarto más grande, siempre que pagues las facturas a tiempo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I will pay them as long as you share the internet costs.",
+            "traduccion": "Las pagaré mientras tú compartas los gastos de internet."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is too high for me. Here is my counteroffer: I pay a third of the internet, and I will not sign unless we write it down.",
+            "traduccion": "Es demasiado para mí. Esta es mi contraoferta: yo pago un tercio del internet y no firmaré a menos que lo escribamos."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Deal. Otherwise, we will argue again in a month.",
+            "traduccion": "Trato hecho. De lo contrario, volveremos a discutir en un mes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué contraoferta hace Tom?",
+          "opciones": [
+            {
+              "es": "Pagar un tercio del internet."
+            },
+            {
+              "es": "Pagar todas las facturas él solo."
+            },
+            {
+              "es": "Quedarse con el cuarto más pequeño."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom propone «I pay a third of the internet» como contraoferta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Conjunción",
+          "Sentido y ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "provided that"
+            },
+            {
+              "texto": "solo si: We will sign provided that you fix the heating."
+            }
+          ],
+          [
+            {
+              "texto": "as long as"
+            },
+            {
+              "texto": "mientras / siempre que: …as long as you stay two years."
+            }
+          ],
+          [
+            {
+              "texto": "unless"
+            },
+            {
+              "texto": "a menos que: We will not sign unless you fix it."
+            }
+          ],
+          [
+            {
+              "texto": "otherwise"
+            },
+            {
+              "texto": "si no, …: Pay on time; otherwise, we will review it."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-60": {
+      "explicacion": {
+        "titulo": "Confirmar lo acordado por escrito",
+        "texto": "Una negociación termina bien cuando lo acordado queda por escrito. El mensaje de confirmación resume los puntos (Just to recap…), nombra quién hace qué y cuándo (the rota starts on Monday), repite las condiciones (provided that…) y pide corregir cualquier malentendido (please reply if…). Escribe en tono cordial y preciso: no añades nada nuevo, solo fijas lo pactado. Antes, en la mesa, expresa tus intereses, cede con condiciones y confirma con frases como «So we agree that…»."
+      },
+      "patron": {
+        "texto": "Resumen + acuerdo + condición + petición de corregir:",
+        "formula": [
+          {
+            "texto": "Just to recap,",
+            "nota": "abre el resumen"
+          },
+          {
+            "texto": "we will split the bills equally,",
+            "nota": "lo acordado: sujeto + will"
+          },
+          {
+            "texto": "provided that everyone pays by the fifth.",
+            "nota": "condición"
+          },
+          {
+            "texto": "Please reply if anything is wrong.",
+            "nota": "invita a corregir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "As discussed, the rota will start since Monday.",
+          "correcto": "As discussed, the rota will start on Monday.",
+          "explicacion": "Para una fecha de inicio se usa on Monday, no since: «desde» no se traduce siempre por since."
+        },
+        {
+          "incorrecto": "Please reply me today if there is a misunderstanding.",
+          "correcto": "Please reply today if there is a misunderstanding.",
+          "explicacion": "Reply no lleva complemento directo de persona: reply today o reply to me."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom cierran los últimos detalles de su piso compartido antes de firmar el contrato.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Just to recap: we split the bills equally, and the rota starts on Monday.",
+            "traduccion": "Solo para resumir: repartimos las facturas a partes iguales y el turno empieza el lunes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, and guests may stay two nights, provided that we tell each other in advance.",
+            "traduccion": "Sí, y los invitados pueden quedarse dos noches, siempre que nos avisemos con antelación."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I will confirm everything in writing tonight, so there is no misunderstanding.",
+            "traduccion": "Lo confirmaré todo por escrito esta noche, para que no haya malentendidos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Perfect. Please send it before I sign the contract.",
+            "traduccion": "Perfecto. Por favor, envíalo antes de que firme el contrato."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué hará Mia esta noche?",
+          "opciones": [
+            {
+              "es": "Enviar por escrito lo acordado."
+            },
+            {
+              "es": "Firmar el contrato de alquiler."
+            },
+            {
+              "es": "Cambiar el turno de limpieza."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I will confirm everything in writing tonight»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del mensaje",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Motivo"
+            },
+            {
+              "texto": "I am writing to confirm what we agreed."
+            }
+          ],
+          [
+            {
+              "texto": "Acuerdos"
+            },
+            {
+              "texto": "We will split the bills equally."
+            }
+          ],
+          [
+            {
+              "texto": "Condiciones"
+            },
+            {
+              "texto": "…provided that everyone pays by the fifth."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Please reply if you see a misunderstanding."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,656 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n9",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "classes": {
+    "en.n9.class-16": {
+      "explicacion": {
+        "titulo": "Informal, neutro o formal: el registro de un mensaje",
+        "texto": "El registro es el nivel de formalidad de lo que escribes y depende de quién lo lee. Lo delatan el saludo (Hey / Hello Mrs Kent / Dear Sir or Madam), la forma de pedir (Can you…? / Could you…? / I would be grateful if you could…), las palabras (get / obtain) y el cierre (Cheers / Thanks / Kind regards). Un mismo mensaje puede escribirse en los tres registros. Lo importante es reconocer las pistas y no mezclarlas."
+      },
+      "patron": {
+        "texto": "Saludo + petición + cierre, según el lector:",
+        "formula": [
+          {
+            "texto": "Hey / Hello Mrs Kent / Dear Sir or Madam,",
+            "nota": "saludo: informal, neutro o formal"
+          },
+          {
+            "texto": "can you / could you / I would be grateful if you could",
+            "nota": "la petición crece en formalidad"
+          },
+          {
+            "texto": "Cheers! / Thanks. / Kind regards,",
+            "nota": "cierre acorde al saludo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Sir or Madam, can you fix the heating, thanks?",
+          "correcto": "Dear Sir or Madam, could you please fix the heating? Thank you.",
+          "explicacion": "Se mezclan un saludo formal con una petición y un cierre informales. Hay que mantener un solo registro de principio a fin."
+        },
+        {
+          "incorrecto": "I am writing regarding of my booking.",
+          "correcto": "I am writing regarding my booking.",
+          "explicacion": "Calco de «con respecto de»: regarding ya incluye la preposición y va seguido del nombre."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom quiere escribir a su casera sobre la calefacción y pide consejo a Mia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I need to write to my landlady about the heating. Is «Hey, fix the heating, cheers» OK?",
+            "traduccion": "Tengo que escribir a mi casera sobre la calefacción. ¿Sirve «Hey, fix the heating, cheers»?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, that is too casual. Try «Hello Mrs Kent, could you look at the heating? I would be grateful.»",
+            "traduccion": "No, es demasiado informal. Prueba «Hello Mrs Kent, could you look at the heating? I would be grateful.»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And for my friend Leo?",
+            "traduccion": "¿Y para mi amigo Leo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "For Leo, «Hey, can you send me the photos? Cheers!» is perfect.",
+            "traduccion": "Para Leo, «Hey, can you send me the photos? Cheers!» es perfecto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no sirve «Hey, fix the heating, cheers» para la casera?",
+          "opciones": [
+            {
+              "es": "Porque es demasiado informal para ella."
+            },
+            {
+              "es": "Porque es demasiado largo para ella."
+            },
+            {
+              "es": "Porque no menciona la calefacción."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «that is too casual» y propone un mensaje neutro y cortés para la casera."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Rasgo",
+          "Informal",
+          "Formal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Saludo"
+            },
+            {
+              "texto": "Hey!"
+            },
+            {
+              "texto": "Dear Sir or Madam,"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Can you send it?"
+            },
+            {
+              "texto": "I would be grateful if you could send it."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Cheers!"
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ],
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Hi, about the flight…"
+            },
+            {
+              "texto": "I am writing regarding the flight."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-17": {
+      "explicacion": {
+        "titulo": "Palabras sencillas y precisas según el lector",
+        "texto": "Muchas ideas tienen dos nombres: un phrasal verb (look into, get back to, buy, help) más cotidiano y un verbo de origen latino (investigate, respond, purchase, assistance) más formal. Elige según el lector, no según lo «elegante» que suene. Además, elimina lo redundante: return back, repeat again, advance planning, meet together. Y decide entre activa (We approved your request: directa y cálida) y pasiva (Your request has been approved: oficial, sin nombrar al responsable)."
+      },
+      "patron": {
+        "texto": "Misma idea, registro distinto:",
+        "formula": [
+          {
+            "texto": "I will look into it",
+            "nota": "phrasal verb: cercano y cotidiano"
+          },
+          {
+            "texto": "We will investigate it",
+            "nota": "verbo latino: formal, para empresas"
+          },
+          {
+            "texto": "We approved it / It has been approved",
+            "nota": "activa: cálida; pasiva: oficial"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Please repeat again the number.",
+          "correcto": "Please repeat the number.",
+          "explicacion": "Repeat ya incluye la idea de «otra vez»; again es redundante, como en return back."
+        },
+        {
+          "incorrecto": "We will investigate about the complaint.",
+          "correcto": "We will investigate the complaint.",
+          "explicacion": "En español se dice «investigar sobre», pero investigate va directamente seguido de su objeto, sin about."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara escribe a un cliente y Carlos revisa el texto antes de enviarlo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I wrote: «We will look into your complaint and get back to you.» Is it OK for a customer?",
+            "traduccion": "Escribí: «We will look into your complaint and get back to you.» ¿Sirve para un cliente?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is friendly, but for a company I would write: «We will investigate your complaint and respond by Friday.»",
+            "traduccion": "Es cercano, pero para una empresa escribiría: «We will investigate your complaint and respond by Friday.»"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And «Please return back the form»?",
+            "traduccion": "¿Y «Please return back the form»?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Remove back. Return already means bring back, so back is redundant.",
+            "traduccion": "Quita back. Return ya significa devolver, así que back es redundante."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué quita Carlos la palabra «back» de «return back»?",
+          "opciones": [
+            {
+              "es": "Porque return ya incluye la idea de volver."
+            },
+            {
+              "es": "Porque back es demasiado formal."
+            },
+            {
+              "es": "Porque el cliente no entiende esa palabra."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos explica que return ya significa devolver, así que back no aporta nada y es redundante."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Cotidiano",
+          "Formal",
+          "Sin redundancia"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "look into"
+            },
+            {
+              "texto": "investigate"
+            },
+            {
+              "texto": "return (no «return back»)"
+            }
+          ],
+          [
+            {
+              "texto": "get back to"
+            },
+            {
+              "texto": "respond"
+            },
+            {
+              "texto": "repeat (no «repeat again»)"
+            }
+          ],
+          [
+            {
+              "texto": "buy"
+            },
+            {
+              "texto": "purchase"
+            },
+            {
+              "texto": "meet (no «meet together»)"
+            }
+          ],
+          [
+            {
+              "texto": "help"
+            },
+            {
+              "texto": "assistance"
+            },
+            {
+              "texto": "plan (no «advance plan»)"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-18": {
+      "explicacion": {
+        "titulo": "¿Brusco o rígido? Diagnosticar el tono",
+        "texto": "Un mensaje puede fallar por dos extremos. Es brusco (blunt, abrupt) cuando da una orden sin marcador de cortesía: Give me the file today. Es rígido (stiff) cuando usa fórmulas oficiales donde bastaría una frase sencilla: I am writing to inform you that lunch is ready. Los marcadores de cortesía lo arreglan: could/would, would you mind + -ing, I would appreciate it, unfortunately, I am afraid that… Ser directo no es ser grosero si hay contexto; ser indirecto suaviza, pero no lo exageres."
+      },
+      "patron": {
+        "texto": "Petición cortés: marcador + pregunta + gracias:",
+        "formula": [
+          {
+            "texto": "Would you mind",
+            "nota": "marcador de cortesía + -ing"
+          },
+          {
+            "texto": "sending me the file by noon?",
+            "nota": "la petición con su plazo"
+          },
+          {
+            "texto": "I would appreciate it.",
+            "nota": "agradecimiento por adelantado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Would you mind to send me the file?",
+          "correcto": "Would you mind sending me the file?",
+          "explicacion": "Mind va seguido de -ing, no de to + verbo. En español «te importaría enviar» lleva infinitivo, pero en inglés no."
+        },
+        {
+          "incorrecto": "I would appreciate if you send me the file.",
+          "correcto": "I would appreciate it if you could send me the file.",
+          "explicacion": "Hace falta it después de appreciate y could para que la petición suene cortés; «if you send» suena seco."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Leo que un vecino le escribió un mensaje que la molestó.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My neighbour wrote: «Move your car now.» Why do I feel angry?",
+            "traduccion": "Mi vecino escribió: «Move your car now.» ¿Por qué me molesta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is blunt: it gives an order with no polite marker.",
+            "traduccion": "Es brusco: da una orden sin ningún marcador de cortesía."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "How would you say it?",
+            "traduccion": "¿Cómo lo dirías tú?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Would you mind moving your car, please? I need to park the van.",
+            "traduccion": "¿Te importaría mover tu coche, por favor? Necesito aparcar la furgoneta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué corrige Leo en el mensaje del vecino?",
+          "opciones": [
+            {
+              "es": "Añade un marcador de cortesía y una razón."
+            },
+            {
+              "es": "Lo hace más largo y más oficial."
+            },
+            {
+              "es": "Elimina la petición del mensaje."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo convierte la orden en Would you mind…, please? y añade la razón del vecino."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Mensaje",
+          "Diagnóstico",
+          "Corrección"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Give me the file today."
+            },
+            {
+              "texto": "brusco"
+            },
+            {
+              "texto": "Could you send me the file today?"
+            }
+          ],
+          [
+            {
+              "texto": "I am writing to inform you that lunch is ready."
+            },
+            {
+              "texto": "rígido"
+            },
+            {
+              "texto": "Lunch is ready!"
+            }
+          ],
+          [
+            {
+              "texto": "No."
+            },
+            {
+              "texto": "seco"
+            },
+            {
+              "texto": "I am afraid that is not possible."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-19": {
+      "explicacion": {
+        "titulo": "Reescribir una petición para tres lectores",
+        "texto": "La petición es la misma, pero cambia el lector. A un compañero: saludo informal, pregunta breve (could we swap…?) y Cheers. A un profesor: Dear + apellido, Would it be possible to…? o I was wondering whether…, una razón y agradecimiento. A un gerente: Dear Sir or Madam, I am writing regarding…, I would be grateful if you could… y Kind regards. Suaviza con would/could y wondering; refuerza solo si hay urgencia real (essential). Conectores como therefore o moreover pertenecen al registro formal."
+      },
+      "patron": {
+        "texto": "Saludo + petición suavizada + razón + cierre:",
+        "formula": [
+          {
+            "texto": "Dear Mr Lee,",
+            "nota": "saludo: marca el registro"
+          },
+          {
+            "texto": "would it be possible to move my session to Friday?",
+            "nota": "petición suavizada"
+          },
+          {
+            "texto": "I will be away on Thursday.",
+            "nota": "razón breve"
+          },
+          {
+            "texto": "Thank you for your time.",
+            "nota": "cierre acorde al lector"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Sir or Madam, I wanna move my booking to Friday.",
+          "correcto": "Dear Sir or Madam, I would like to move my booking to Friday.",
+          "explicacion": "Wanna es coloquial y choca con un saludo formal. Mantén I would like to hasta el final."
+        },
+        {
+          "incorrecto": "I was wondering if you can move the session?",
+          "correcto": "I was wondering whether you could move the session.",
+          "explicacion": "Con I was wondering se usa could (no can), y la frase es una pregunta indirecta: sin signo de interrogación."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia debe mover su sesión del jueves al viernes y le pide consejo a Tom sobre cómo escribirlo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I must move my Thursday session to Friday. Do I send the same message to everyone?",
+            "traduccion": "Tengo que mover mi sesión del jueves al viernes. ¿Envío el mismo mensaje a todos?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. For Sam, say: «Could we swap Thursday for Friday? Cheers!»",
+            "traduccion": "No. Para Sam, di: «Could we swap Thursday for Friday? Cheers!»"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And for Mr Lee?",
+            "traduccion": "¿Y para el señor Lee?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Use «Would it be possible to move my session to Friday?» and add a reason.",
+            "traduccion": "Usa «Would it be possible to move my session to Friday?» y añade una razón."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambia Tom de un mensaje a otro?",
+          "opciones": [
+            {
+              "es": "La forma de saludar y de pedir, según el lector."
+            },
+            {
+              "es": "La fecha que se propone en cada mensaje."
+            },
+            {
+              "es": "El motivo del cambio de sesión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom propone una pregunta breve con Cheers para Sam y Would it be possible… más una razón para Mr Lee."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Lector",
+          "Saludo",
+          "Petición",
+          "Cierre"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Compañero"
+            },
+            {
+              "texto": "Hey Sam,"
+            },
+            {
+              "texto": "Could we swap…?"
+            },
+            {
+              "texto": "Cheers!"
+            }
+          ],
+          [
+            {
+              "texto": "Profesor"
+            },
+            {
+              "texto": "Dear Mr Lee,"
+            },
+            {
+              "texto": "Would it be possible to…?"
+            },
+            {
+              "texto": "Thank you for your time."
+            }
+          ],
+          [
+            {
+              "texto": "Gerente"
+            },
+            {
+              "texto": "Dear Sir or Madam,"
+            },
+            {
+              "texto": "I would be grateful if you could…"
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n9.class-20": {
+      "explicacion": {
+        "titulo": "Una reclamación que consigue resultados",
+        "texto": "Una reclamación eficaz sigue un orden: motivo (I am writing to complain about…), hechos con fechas (bought on 3 March, arrived two weeks late), tu reacción en una frase (I was disappointed), una petición concreta (a replacement or a full refund) y un plazo (by Friday). La firmeza viene de los hechos y de expresiones como unacceptable o I expect you to…, no de los insultos. La respuesta de la empresa agradece, se disculpa, da la solución con plazo y cierra con cortesía. Mantén el mismo registro formal de principio a fin."
+      },
+      "patron": {
+        "texto": "Motivo + hechos + petición + plazo:",
+        "formula": [
+          {
+            "texto": "I am writing to complain about the oven",
+            "nota": "motivo: qué reclamas"
+          },
+          {
+            "texto": "It arrived two weeks late and is faulty.",
+            "nota": "hechos: fecha y problema"
+          },
+          {
+            "texto": "I would be grateful if you could arrange a replacement",
+            "nota": "petición concreta"
+          },
+          {
+            "texto": "by Friday.",
+            "nota": "plazo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I want that you refund me the money.",
+          "correcto": "I would like you to refund the money.",
+          "explicacion": "Calco de «quiero que me devuelvan»: en inglés want/would like se construyen con objeto + to + verbo, no con that."
+        },
+        {
+          "incorrecto": "I am writing to you for complain about the oven.",
+          "correcto": "I am writing to complain about the oven.",
+          "explicacion": "Para expresar finalidad se usa to + verbo; «for + verbo» es un calco de «para quejarme»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos recibió un horno defectuoso y Sara le explica cómo escribir la reclamación.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "My oven arrived two weeks late, and it is faulty. I am very angry.",
+            "traduccion": "Mi horno llegó con dos semanas de retraso y está defectuoso. Estoy muy enfadado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Do not write angry words. Give the facts: the date, the problem and what you want.",
+            "traduccion": "No escribas palabras enfadadas. Da los hechos: la fecha, el problema y lo que quieres."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So I write: «I am writing to complain about the oven I bought on 3 March.»",
+            "traduccion": "Entonces escribo: «I am writing to complain about the oven I bought on 3 March.»"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. Then ask for a replacement or a refund by Friday.",
+            "traduccion": "Bien. Luego pide un producto nuevo o el reembolso antes del viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe incluir la reclamación de Carlos?",
+          "opciones": [
+            {
+              "es": "La fecha, el problema y lo que quiere."
+            },
+            {
+              "es": "Palabras duras para mostrar su enfado."
+            },
+            {
+              "es": "Solo una disculpa para la empresa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara le pide los hechos (fecha y problema) y una petición concreta con plazo, no palabras enfadadas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Reclamación",
+          "Respuesta de la empresa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "I am writing to complain about…"
+            },
+            {
+              "texto": "Thank you for your message."
+            }
+          ],
+          [
+            {
+              "texto": "Hechos / disculpa"
+            },
+            {
+              "texto": "It arrived two weeks late."
+            },
+            {
+              "texto": "Please accept our apologies."
+            }
+          ],
+          [
+            {
+              "texto": "Petición / solución"
+            },
+            {
+              "texto": "I would be grateful if you could arrange a replacement."
+            },
+            {
+              "texto": "We will send a replacement by Friday."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "I look forward to your reply."
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,785 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 8,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n8.class-33",
+  "title": {
+    "en": "Softened messages at the clinic",
+    "es": "Mensajes suavizados en la consulta"
+  },
+  "objectives": {
+    "es": [
+      "Identificar atenuadores (it seems, a bit, slightly, might, I wonder if, I'd suggest) en una consulta médica y entender qué mensaje real esconden."
+    ]
+  },
+  "concepts": [
+    "n8-indirect-language-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n8.class-32"
+  ],
+  "usesVocabulary": [
+    "seems",
+    "slightly",
+    "results",
+    "patient",
+    "suggest",
+    "wonder",
+    "blood",
+    "pressure",
+    "a bit"
+  ],
+  "usesPatterns": [
+    "n8-indirect-language-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "seems",
+      "es": "parece"
+    },
+    {
+      "en": "slightly",
+      "es": "ligeramente, un poco"
+    },
+    {
+      "en": "results",
+      "es": "resultados"
+    },
+    {
+      "en": "patient",
+      "es": "paciente"
+    },
+    {
+      "en": "suggest",
+      "es": "sugerir, recomendar"
+    },
+    {
+      "en": "wonder",
+      "es": "preguntarse"
+    },
+    {
+      "en": "blood",
+      "es": "sangre"
+    },
+    {
+      "en": "pressure",
+      "es": "presión"
+    },
+    {
+      "en": "a bit",
+      "es": "un poco"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n8.class-33.t01",
+      "en": "It seems that your blood pressure is slightly high.",
+      "es": "Parece que tu presión arterial está un poco alta.",
+      "explanationEs": "It seems that y slightly suavizan la noticia: el mensaje real es «tienes la tensión alta».",
+      "segments": [
+        "It seems that your blood",
+        "pressure is slightly high."
+      ],
+      "audioText": "It seems that your blood pressure is slightly high.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-indirect-language-3"
+    },
+    {
+      "id": "en.n8.class-33.t02",
+      "en": "The results are a bit worrying, to be honest.",
+      "es": "Los resultados son algo preocupantes, para ser sincero.",
+      "explanationEs": "A bit + adjetivo rebaja la noticia; a bit worrying puede significar «preocupante».",
+      "segments": [
+        "The results are a bit",
+        "worrying, to be honest."
+      ],
+      "audioText": "The results are a bit worrying, to be honest.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-indirect-language-3"
+    },
+    {
+      "id": "en.n8.class-33.t03",
+      "en": "I wonder if we could try a different medicine.",
+      "es": "Me pregunto si podríamos probar otra medicina.",
+      "explanationEs": "I wonder if + could: parece una duda, pero el médico suele proponer un cambio.",
+      "segments": [
+        "I wonder if we could",
+        "try a different medicine."
+      ],
+      "audioText": "I wonder if we could try a different medicine.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-indirect-language-3"
+    },
+    {
+      "id": "en.n8.class-33.t04",
+      "en": "I'd suggest you rest for a week.",
+      "es": "Te sugeriría que descansaras una semana.",
+      "explanationEs": "I'd suggest suena amable, pero el médico espera que lo hagas.",
+      "segments": [
+        "I'd suggest you rest",
+        "for a week."
+      ],
+      "audioText": "I'd suggest you rest for a week.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-indirect-language-3"
+    },
+    {
+      "id": "en.n8.class-33.t05",
+      "en": "The patient might need a second test next week.",
+      "es": "Puede que el paciente necesite otra prueba la semana que viene.",
+      "explanationEs": "Might suaviza: en una consulta suele significar que hay que hacerla.",
+      "segments": [
+        "The patient might need a",
+        "second test next week."
+      ],
+      "audioText": "The patient might need a second test next week.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n8-indirect-language-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n8.c33.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué mensaje real esconde la frase de la doctora?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "There is a real problem, said gently."
+          },
+          {
+            "text": "There is nothing to worry about."
+          },
+          {
+            "text": "The doctor has lost the results."
+          }
+        ],
+        "teaches": [
+          "n8-indirect-language-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.pg01.seed-0",
+          "feedback": {
+            "es": "Quitando «it seems» y «small», queda una noticia clara: hay un problema real, dicho con suavidad."
+          },
+          "hint": {
+            "es": "Quita it seems y small: ¿qué noticia queda?"
+          },
+          "text": "Doctor: “It seems there is a small problem with your results.”"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7ddf4e625a5b16a9dfc29e1cb276630a0fb76dc03209a46985399f6ccb366a66"
+      },
+      {
+        "id": "en.n8.c33.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Me pregunto si podríamos hacer otra prueba.»"
+        },
+        "answer": {
+          "text": "wonder",
+          "accepted": [
+            "wonder"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-indirect-language-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.pg02.seed-0",
+          "feedback": {
+            "es": "I wonder if we could… presenta una propuesta del médico como si fuera una duda."
+          },
+          "hint": {
+            "es": "Es el verbo que significa «preguntarse»."
+          },
+          "text": "I ___ if we could do another test."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:23a898137c8dde5038ab7b74239fec0bd009de2802051b5d0bfe7535049b04dd"
+      },
+      {
+        "id": "en.n8.c33.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Parece que tu garganta está un poco roja.»"
+        },
+        "answer": {
+          "text": "It seems that your throat is slightly red",
+          "tokens": [
+            "It",
+            "seems",
+            "that",
+            "your",
+            "throat",
+            "is",
+            "slightly",
+            "red"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n8-indirect-language-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.pg03.seed-0",
+          "feedback": {
+            "es": "It seems that abre la frase con distancia y slightly suaviza el adjetivo red."
+          },
+          "hint": {
+            "es": "Empieza con el atenuador it seems that y termina con el adjetivo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:66390655f58411e5615ae5eb0d8000a3340fa7cc17cf7ec381a8de356026974e"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n8.c33.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada atenuador con el mensaje real del médico."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "slightly high",
+              {
+                "es": "más alto de lo normal"
+              }
+            ],
+            [
+              "a bit worrying",
+              {
+                "es": "preocupante de verdad"
+              }
+            ],
+            [
+              "I'd suggest a rest.",
+              {
+                "es": "debes descansar"
+              }
+            ],
+            [
+              "I wonder if you could wait.",
+              {
+                "es": "te pido que esperes"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.p01.seed-0",
+          "feedback": {
+            "es": "Cada atenuador rebaja un mensaje concreto: problema, preocupación, instrucción o petición."
+          },
+          "pairs": [
+            [
+              "slightly high",
+              {
+                "es": "más alto de lo normal"
+              }
+            ],
+            [
+              "a bit worrying",
+              {
+                "es": "preocupante de verdad"
+              }
+            ],
+            [
+              "I'd suggest a rest.",
+              {
+                "es": "debes descansar"
+              }
+            ],
+            [
+              "I wonder if you could wait.",
+              {
+                "es": "te pido que esperes"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:851e6a49e8eac5cdffaad0b7ae75e0d2277f4dda8279eb8dccc0e40e42abbc61"
+      },
+      {
+        "id": "en.n8.c33.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué debe hacer la paciente."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Run for two more weeks."
+          },
+          {
+            "text": "Take a break from sport for two weeks."
+          },
+          {
+            "text": "Go to the hospital tonight."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.p02.seed-0",
+          "feedback": {
+            "es": "«I'd suggest you stop running» es una recomendación firme: debe dejar el deporte dos semanas."
+          },
+          "audio": "I'd suggest you stop running for two weeks. It seems your knee is slightly sore.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6192596120a8812fece0eb42d7b5f7bec96b7d6a5721c1b097972e18d7b22655"
+      },
+      {
+        "id": "en.n8.c33.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La paciente debe descansar dos días.»"
+        },
+        "answer": {
+          "text": "patient",
+          "accepted": [
+            "patient"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.p03.seed-0",
+          "feedback": {
+            "es": "Patient es el sustantivo para la persona que recibe la consulta médica."
+          },
+          "text": "The ___ must rest for two days."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b43b96866c654e6ad9cbd5df4523d4d9171a9388d6dfed227ff335ea96c1f07e"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n8.c33.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué espera realmente la doctora de la paciente?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "That she works more this month."
+          },
+          {
+            "text": "That she asks the doctor to rest."
+          },
+          {
+            "text": "That she rests more."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.e01.seed-0",
+          "feedback": {
+            "es": "«I wonder if you could…» es una petición suave: la doctora quiere que descanse más este mes."
+          },
+          "text": "Doctor: “I wonder if you could rest a bit more this month.”"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc8bba1179e394d43442ab3e5a986df9cf7cf24aae85dc7f9af98731d66ae1bb"
+      },
+      {
+        "id": "en.n8.c33.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el mensaje real del médico."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Something may be wrong, so a new test is needed."
+          },
+          {
+            "text": "Everything is perfect and no more tests are needed."
+          },
+          {
+            "text": "The test on Monday has been cancelled."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.e02.seed-0",
+          "feedback": {
+            "es": "«Slightly unusual» y la prueba del lunes indican que puede haber un problema y hay que comprobarlo."
+          },
+          "audio": "The results are slightly unusual, but we need another test on Monday to be sure.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6718b017ca185132b4bb67d40c05cfed55f8cead8df53fab82a01b95e99c3714"
+      },
+      {
+        "id": "en.n8.c33.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Sugeriría que descansaras unos días.»"
+        },
+        "answer": {
+          "text": "suggest",
+          "accepted": [
+            "suggest"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.e03.seed-0",
+          "feedback": {
+            "es": "I'd suggest you + verbo base: recomendación amable que funciona como instrucción."
+          },
+          "text": "I'd ___ you rest for a few days."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2b07a3a0086d296da0e7bdc07ef7b96288ddcb0782203f75dcb035a7f9edb36e"
+      },
+      {
+        "id": "en.n8.c33.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Parece que los resultados son algo preocupantes.»"
+        },
+        "answer": {
+          "text": "It seems that the results are a bit worrying",
+          "tokens": [
+            "It",
+            "seems",
+            "that",
+            "the",
+            "results",
+            "are",
+            "a",
+            "bit",
+            "worrying"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.e04.seed-0",
+          "feedback": {
+            "es": "It seems that atenúa la noticia y a bit worrying rebaja el adjetivo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b7b47f301075ba937be7991cc464de06ae51cdd4112dd57980494d96daf99800"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n8.c33.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué tipo de mensaje es la frase del médico?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A warning that sugar is finished."
+          },
+          {
+            "text": "A polite instruction to eat less sugar."
+          },
+          {
+            "text": "A question about the patient's shopping."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.r01.seed-0",
+          "feedback": {
+            "es": "«It might be a good idea to» suena a sugerencia, pero el médico espera que el paciente coma menos azúcar."
+          },
+          "text": "Doctor: “It might be a good idea to cut down on sugar.”"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bcbfaa489b2d7c9b4c03c7f8b9216f83dbe6f4d1ce9f738128172376195499fb"
+      },
+      {
+        "id": "en.n8.c33.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué noticia da el médico."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The result is very good."
+          },
+          {
+            "text": "The test must be repeated tomorrow."
+          },
+          {
+            "text": "The result is bad, and the medicine must start."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.r02.seed-0",
+          "feedback": {
+            "es": "«Not the best» rebaja la noticia: el resultado no es bueno y hay que empezar la medicina pronto."
+          },
+          "audio": "To be honest, the result is not the best. I'm afraid we need to start the medicine soon.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:47ba54daf78b34eb91cd1a33a236f3b0cb1e0d6df1e6274d318f34730858420e"
+      },
+      {
+        "id": "en.n8.c33.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Su presión parece estar un poco baja.»"
+        },
+        "answer": {
+          "text": "seems",
+          "accepted": [
+            "seems",
+            "appears"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n8-indirect-language-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n8.c33.r03.seed-0",
+          "feedback": {
+            "es": "Seems to be + adjetivo es el atenuador de distancia más habitual."
+          },
+          "text": "Her blood pressure ___ to be slightly low."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dd19540aec7399113f95fa073c1d7434019819ae74be5697f555b6141b6ba345"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n8.c33.e01": {
+      "reteach": "en.n8.class-33.t01",
+      "review": "en.n8.c33.r01"
+    },
+    "en.n8.c33.e02": {
+      "reteach": "en.n8.class-33.t02",
+      "review": "en.n8.c33.r02"
+    },
+    "en.n8.c33.e03": {
+      "reteach": "en.n8.class-33.t03",
+      "review": "en.n8.c33.r03"
+    },
+    "en.n8.c33.e04": {
+      "reteach": "en.n8.class-33.t04",
+      "review": "en.n8.c33.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}
