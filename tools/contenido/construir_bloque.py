@@ -136,7 +136,8 @@ def lexico_previo(nivel_num: int, antes_de: int) -> set[str]:
                 for it in items:
                     a = it.get("answer", {})
                     o = it.get("origin", {})
-                    lex |= palabras(a.get("text", "")) | palabras(" ".join(a.get("accepted", [])))
+                    # Las respuestas aceptadas no se muestran al alumno: no enseñan.
+                    lex |= palabras(a.get("text", ""))
                     lex |= palabras(" ".join(c.get("text", "") for c in it.get("choices", [])))
                     lex |= palabras(o.get("text", "")) | palabras(o.get("audio", ""))
                     for par in o.get("pairs") or []:
@@ -458,19 +459,119 @@ def comprobar_lexico(c: dict, cid: str, previo: set[str]) -> list[str]:
         for celda in fila:
             clase |= palabras(celda.get("texto", ""))
 
-    def revisar(textos: list[str], donde: str) -> None:
+    def revisar(textos: list[str], donde: str, estricto: bool = False) -> None:
         faltan = set()
         for t in textos:
-            propios = nombres_propios(t)
+            # En los ejercicios, un nombre propio en mitad de frase se admite (la
+            # ruta lo declara como vocabulario de la clase). En diálogo, patrón y
+            # errores no: tools/validar_ruta.py exige que esté enseñado o en
+            # «palabrasLibres» (reparto del curso).
+            propios = set() if estricto else nombres_propios(t)
             faltan |= {w for w in palabras(t) if w not in propios and not conocida(w, clase)}
         if faltan:
             errores.append(f"{cid} {donde}: palabras no enseñadas antes ni en la clase: {', '.join(sorted(faltan))}")
 
-    revisar(textos_ens, "situación/patrón/errores")
+    revisar(textos_ens, "situación/patrón/errores", estricto=True)
     for clave in POOLS:
         for k, it in enumerate(c["ejercicios"][clave], 1):
             revisar(textos_ingleses_item(it), f"{clave}[{k}]")
     return errores
+
+
+# ---------------------------------------------------- pase de dificultad C1 --
+# Se activa con "pase": "c1" en el archivo de autor (N8–N10). Metas medibles;
+# la calidad de los distractores y la inferencia las verifica el revisor.
+METAS_C1 = {
+    #   vocab, nuevas, texto largo, estímulos eval/repaso (mín, n), media estímulo, frase enseñanza, escritura
+    8: {"vocab": 10, "nuevas": 4, "largo": 60, "eval": (30, 2), "media": 16, "ensenanza": 12, "escritura": 0.7},
+    9: {"vocab": 11, "nuevas": 5, "largo": 75, "eval": (40, 2), "media": 20, "ensenanza": 13, "escritura": 0.7},
+    10: {"vocab": 12, "nuevas": 6, "largo": 90, "eval": (50, 2), "media": 24, "ensenanza": 14, "escritura": 0.7},
+}
+MAX_CORRECTA_MAS_LARGA = 0.40
+
+
+def _n_palabras(t: str) -> int:
+    return len(PALABRA.findall(str(t or "")))
+
+
+def _estimulo_ingles(it: dict) -> str:
+    partes = [it.get("audio") or ""]
+    if it.get("textoIdioma", "en") == "en":
+        partes.append(it.get("texto") or "")
+    return " ".join(p for p in partes if p)
+
+
+def vocabulario_previo(nivel_num: int, antes_de: int) -> set[str]:
+    """Entradas de vocabulario ya enseñadas (para contar colocaciones nuevas)."""
+    res: set[str] = set()
+    for n in range(1, nivel_num + 1):
+        for d in clases_editoriales(f"n{n}"):
+            if n == nivel_num and numero(d["id"]) >= antes_de:
+                continue
+            res |= {" ".join(sorted(palabras(v["en"]))) for v in d.get("vocabulary", [])}
+    return res
+
+
+def comprobar_c1(c: dict, cid: str, previo: set[str], nivel_num: int, mapa_clase: dict,
+                 voc_previo: set[str]) -> list[str]:
+    m = METAS_C1.get(nivel_num)
+    if not m:
+        return [f"{cid}: el pase C1 solo aplica a N8–N10"]
+    errores = []
+    voc = c["vocabulario"]
+    if len(voc) < m["vocab"]:
+        errores.append(f"{cid} C1: vocabulario {len(voc)} < {m['vocab']} entradas")
+    # Nueva: alguna palabra desconocida, o una colocación (2+ palabras) nunca
+    # enseñada como entrada («draw a conclusion» con palabras ya conocidas).
+    nuevas = [v["en"] for v in voc
+              if any(not conocida(w, previo) for w in palabras(v["en"]))
+              or (len(palabras(v["en"])) >= 2 and " ".join(sorted(palabras(v["en"]))) not in voc_previo)]
+    if len(nuevas) < m["nuevas"]:
+        errores.append(f"{cid} C1: solo {len(nuevas)} entradas de vocabulario nuevas en el curso (mín. {m['nuevas']})")
+    media_ens = sum(_n_palabras(t["en"]) for t in c["ensenanza"]) / max(len(c["ensenanza"]), 1)
+    if media_ens < m["ensenanza"]:
+        errores.append(f"{cid} C1: frases de enseñanza de {media_ens:.1f} palabras de media (mín. {m['ensenanza']})")
+    estimulos = []
+    for clave in POOLS:
+        for it in c["ejercicios"][clave]:
+            n = _n_palabras(_estimulo_ingles(it))
+            if n:
+                estimulos.append((clave, n))
+    if not estimulos or max(n for _, n in estimulos) < m["largo"]:
+        errores.append(f"{cid} C1: ningún texto/audio de ≥ {m['largo']} palabras")
+    minimo, cuantos = m["eval"]
+    if sum(1 for k, n in estimulos if k in ("evaluacion", "repaso") and n >= minimo) < cuantos:
+        errores.append(f"{cid} C1: evaluación+repaso necesitan {cuantos} textos/audios de ≥ {minimo} palabras")
+    if estimulos and sum(n for _, n in estimulos) / len(estimulos) < m["media"]:
+        errores.append(f"{cid} C1: estímulos de {sum(n for _, n in estimulos) / len(estimulos):.1f} palabras de media (mín. {m['media']})")
+    rango = (((mapa_clase or {}).get("assessment") or {}).get("minimumPerformance") or {}).get("wordRange")
+    if rango:
+        modelos = [_n_palabras(it.get("respuesta", "")) for k in ("evaluacion", "repaso")
+                   for it in c["ejercicios"][k] if it["formato"] == "escribir"]
+        objetivo = round(rango[0] * m["escritura"])
+        if not modelos or max(modelos) < objetivo:
+            errores.append(f"{cid} C1: la escritura larga necesita un modelo de ≥ {objetivo} palabras "
+                           f"(70 % de {rango[0]}; hay {max(modelos) if modelos else 0})")
+    return errores
+
+
+def comprobar_opciones_c1(compactas: list[dict], nivel: str) -> list[str]:
+    """La correcta no debe delatarse por ser la única opción más larga."""
+    total = delata = 0
+    for c in compactas:
+        for clave in POOLS:
+            for it in c["ejercicios"][clave]:
+                op = it.get("opciones")
+                if it["formato"] not in ("elegir", "escuchar") or not op or not all(isinstance(o, str) for o in op):
+                    continue
+                largos = [_n_palabras(o) for o in op]
+                total += 1
+                r = it["respuesta"]
+                delata += largos[r] == max(largos) and largos.count(max(largos)) == 1
+    if total and delata / total > MAX_CORRECTA_MAS_LARGA:
+        return [f"{nivel} C1: la correcta es la única opción más larga en {delata}/{total} ítems "
+                f"({100 * delata / total:.0f} %; máx. {100 * MAX_CORRECTA_MAS_LARGA:.0f} %)"]
+    return []
 
 
 def cargar_mapa(nivel_num: int) -> dict:
@@ -493,10 +594,13 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
     clases: list[dict] = []
     previos_bloque: list[str] = []
     lex = lexico_previo(nivel_num, ini)
+    voc_previo = vocabulario_previo(nivel_num, ini) if doc.get("pase") == "c1" else set()
     for c in compactas:
         cid = f"en.{nivel}.class-{c['n']:02d}"
         errores += comprobar_lexico(c, cid, lex)
         errores += comprobar_rubricas(c, cid)
+        if doc.get("pase") == "c1":
+            errores += comprobar_c1(c, cid, lex, nivel_num, mapa.get(cid), voc_previo)
         try:
             clase = construir_clase(c, nivel_num=nivel_num, mapa=mapa, previos_bloque=list(previos_bloque))
         except (ErrorAutoria, KeyError, ValueError, TypeError) as exc:
@@ -505,6 +609,7 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
         clases.append(clase)
         previos_bloque.append(clase["concepts"][0])
         # Lo enseñado y practicado en esta clase cuenta para las siguientes.
+        voc_previo |= {" ".join(sorted(palabras(v["en"]))) for v in c["vocabulario"]}
         for v in c["vocabulario"]:
             lex |= palabras(v["en"])
         for t in c["ensenanza"]:
@@ -518,6 +623,8 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
         unidad = {"pasos": [{"tipo": "ejemplos", "items": [{"texto": t["en"]} for t in c["ensenanza"]]}]}
         err, _ = ve.validar_clase(cid, enriquecimiento(c), unidad)
         errores += err
+    if doc.get("pase") == "c1":
+        errores += comprobar_opciones_c1(compactas, nivel)
     bundle = None
     if not errores:
         bundle = {

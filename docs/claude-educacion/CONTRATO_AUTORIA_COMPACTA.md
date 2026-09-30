@@ -87,3 +87,28 @@ Campos comunes: `formato`, `consigna` (español, ≤ 90 caracteres, **única** e
 - Los datos necesarios están en el ítem (`texto`, `audio`) o en la enseñanza de la clase: nada de «según el registro F18» sin mostrarlo.
 - Temas cotidianos y variados; personajes del curso (Ana, Leo, Mia, Tom, Carlos, Sara, Rex…).
 - Dificultad según el MCER del nivel; progresión entrada → consolidación → salida.
+
+## Pase de dificultad C1 (N8–N10) — `"pase": "c1"`
+
+Actualizado: 2026-09-30. Motivo: las métricas de N8–N10 eran iguales a las de N4–N7 (estímulos de ~15 palabras, ~8 entradas de vocabulario casi todas ya conocidas; la correcta era la única opción más larga en el 42–51 % de los ítems). Con `"pase": "c1"` en el archivo de autor, el constructor exige por clase:
+
+| Meta | N8 | N9 | N10 |
+|---|---|---|---|
+| Entradas de vocabulario (máx. 12) | ≥ 10 | ≥ 11 | 12 |
+| Entradas nuevas en el curso (palabra desconocida o colocación nunca enseñada como entrada) | ≥ 4 | ≥ 5 | ≥ 6 |
+| Media de palabras por frase de enseñanza | ≥ 12 | ≥ 13 | ≥ 14 |
+| Al menos un `texto`/`audio` inglés de … palabras | 60 | 75 | 90 |
+| Textos/audios en evaluación + repaso (2 como mínimo) de … palabras | 30 | 40 | 50 |
+| Media de palabras de los estímulos (ítems con `texto`/`audio`) | ≥ 16 | ≥ 20 | ≥ 24 |
+| Escritura larga (clases con `wordRange` en el mapa): modelo ≥ 70 % del mínimo | ✓ | ✓ | ✓ |
+
+Y por bloque: la correcta es la única opción más larga en ≤ 40 % de los ítems de elegir/escuchar.
+
+Criterios de calidad C1 (los comprueba el revisor):
+
+- **Léxico C1**: colocaciones (reach a verdict, draw a distinction), verbos frasales en su registro, matices de cautela y actitud, vocabulario académico/profesional del tema. No palabras raras gratuitas.
+- **Textos con propósito**: correos, informes, fragmentos de pódcast o reunión narrados, artículos de opinión; sin etiquetas de hablante en `audio` (la voz TTS las leería): monólogo o diálogo contado.
+- **Preguntas de comprensión profunda**: al menos 2 ítems de evaluación + repaso preguntan por implicación, actitud, propósito, postura o inferencia, no por un dato literal.
+- **Distractores cercanos**: misma longitud y registro; parcialmente ciertos, ciertos pero no dichos, generalizaciones excesivas o postura invertida. La correcta suele ser una paráfrasis. Nada absurdo.
+- **Completar con contexto**: huecos que prueban colocación, registro o precisión, dentro de 1–3 frases de contexto; `aceptadas` con todas las respuestas defendibles.
+- **Continuidad**: no se eliminan entradas de `vocabulario` existentes (otras clases pueden depender de ellas); se pueden añadir y se pueden reescribir los ejercicios.
