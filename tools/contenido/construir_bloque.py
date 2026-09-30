@@ -190,7 +190,7 @@ def es(texto: str) -> dict:
 # ------------------------------------------------------------ construcción --
 
 def construir_item(it: dict, *, cid_corto: str, pool: str, k: int, concepto: str,
-                   requiere: list[str]) -> dict:
+                   requiere: list[str], turno: int = 0) -> dict:
     fmt = it["formato"]
     iid = f"{cid_corto}.{PREFIX[pool]}{k:02d}"
     origin: dict = {"kind": "editorial", "variantSeed": "0", "variantId": f"{iid}.seed-0",
@@ -208,8 +208,9 @@ def construir_item(it: dict, *, cid_corto: str, pool: str, k: int, concepto: str
         correcta = int(it["respuesta"])
         if len(opciones) < 3 or not 0 <= correcta < len(opciones):
             raise ErrorAutoria(f"{iid}: se piden ≥3 opciones y respuesta válida")
-        # Posición de la correcta repartida de forma estable (anti-patrón).
-        destino = hash_estable(iid) % len(opciones)
+        # Posición de la correcta repartida por turnos dentro de la clase: la
+        # misma posición nunca supera el 60 % sin añadir opciones de relleno.
+        destino = turno % len(opciones)
         texto_ok = opciones.pop(correcta)
         opciones.insert(destino, texto_ok)
         choices = [{"text": o} for o in opciones]
@@ -292,6 +293,7 @@ def construir_clase(c: dict, *, nivel_num: int, mapa: dict, previos_bloque: list
         })
     pools: dict[str, list] = {}
     cierre = n % 5 == 0
+    turno = n  # desplazamiento por clase para no empezar siempre en la misma posición
     for clave, pool in POOLS.items():
         items = c["ejercicios"][clave]
         if len(items) < MINIMOS[pool]:
@@ -302,7 +304,9 @@ def construir_clase(c: dict, *, nivel_num: int, mapa: dict, previos_bloque: list
             if cierre and pool == "evaluation" and previos_bloque:
                 requiere = [concepto, previos_bloque[(k - 1) % len(previos_bloque)]]
             construidos.append(construir_item(it, cid_corto=cid_corto, pool=pool, k=k,
-                                              concepto=concepto, requiere=requiere))
+                                              concepto=concepto, requiere=requiere, turno=turno))
+            if it["formato"] in ("elegir", "escuchar"):
+                turno += 1
         pools[pool] = construidos
     evaluacion, repaso = pools["evaluation"], pools["review"]
     remediacion = {
