@@ -1,0 +1,842 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-37 (P1 corregido): el «truco» decía que si sigue sujeto + verbo se usa where; es falso en general (a thing which people use). Reescrito: where cuando lo que sigue ya es una frase completa a la que se podría añadir «allí»; which/that cuando falta el sujeto.",
+      "class-37: explicación del error 1 y notas de los ejemplos 3 y 4 alineadas con esa regla.",
+      "class-38 y class-40: explicación del error which→where reformulada con la misma idea (frase completa, ocurre allí).",
+      "class-36: «con -s si es una persona» → «con -s si hablas de una sola persona (a person who repairs; people who want)», coherente con el diálogo.",
+      "Aceptado: class-39 ejemplos 2 y 4 repiten a propósito la misma pista para mostrar la pista extra."
+    ]
+  },
+  "classes": {
+    "en.n3.class-36": {
+      "explicacion": {
+        "titulo": "Personas: who y that",
+        "texto": "Para decir quién es una persona por lo que hace se usa who (o that) después de la palabra que la nombra: A nurse is someone who cares for patients (alguien que cuida a pacientes). En español siempre decimos «que»; en inglés, con personas se usa who, y that también vale. No uses which para personas. Después de who va el verbo directamente, con -s si hablas de una sola persona (a person who repairs; people who want), y sin repetir el sujeto: no digas who she cares."
+      },
+      "patron": {
+        "texto": "Profesión + is + a person/someone + who + lo que hace:",
+        "formula": [
+          {
+            "texto": "A librarian",
+            "nota": "la profesión"
+          },
+          {
+            "texto": "is a person",
+            "nota": "antecedente: una persona"
+          },
+          {
+            "texto": "who",
+            "nota": "con personas: who (o that)"
+          },
+          {
+            "texto": "helps readers find books.",
+            "nota": "lo que hace: verbo con -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Relativo",
+          "Se usa con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "who"
+            },
+            {
+              "texto": "personas"
+            },
+            {
+              "texto": "A nurse is someone who cares for patients."
+            }
+          ],
+          [
+            {
+              "texto": "that"
+            },
+            {
+              "texto": "personas (también)"
+            },
+            {
+              "texto": "A technician is a person that repairs equipment."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "A plumber is a person which repairs water pipes.",
+          "correcto": "A plumber is a person who repairs water pipes.",
+          "explicacion": "Which es para cosas. Para una persona se usa who (o that)."
+        },
+        {
+          "incorrecto": "A nurse is someone who she cares for patients.",
+          "correcto": "A nurse is someone who cares for patients.",
+          "explicacion": "Who ya hace de sujeto: no repitas she, como tampoco dirías «que ella cuida»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia por los trabajos de su familia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, what does your mother do?",
+            "traduccion": "Mia, ¿a qué se dedica tu madre?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She is a nurse. She is someone who cares for children in a hospital.",
+            "traduccion": "Es enfermera. Es alguien que cuida a niños en un hospital."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And your uncle Carlos?",
+            "traduccion": "¿Y tu tío Carlos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He is a plumber. He is a person who repairs water pipes.",
+            "traduccion": "Es plomero. Es una persona que repara tuberías de agua."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My dad is a librarian. He helps people who want to find books.",
+            "traduccion": "Mi papá es bibliotecario. Ayuda a personas que quieren encontrar libros."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace el tío Carlos?",
+          "opciones": [
+            {
+              "es": "Repara tuberías de agua."
+            },
+            {
+              "es": "Cuida a niños en un hospital."
+            },
+            {
+              "es": "Ayuda a encontrar libros."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «He is a person who repairs water pipes». Who presenta lo que hace el tío Carlos."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "A nurse is someone who cares for patients.",
+          "es": "Una enfermera es alguien que cuida a pacientes.",
+          "nota": "Who va después de una persona (someone)."
+        },
+        {
+          "indice": 1,
+          "en": "A plumber is a person who repairs water pipes.",
+          "es": "Un plomero es una persona que repara tuberías de agua.",
+          "nota": "Después de who va el verbo con -s: repairs."
+        },
+        {
+          "indice": 2,
+          "en": "A technician is a person that repairs equipment.",
+          "es": "Un técnico es una persona que repara equipos.",
+          "nota": "That también sirve para personas, sin coma."
+        },
+        {
+          "indice": 3,
+          "en": "An optician is someone who checks your eyes.",
+          "es": "Un óptico es alguien que te revisa la vista.",
+          "nota": "Una tarea concreta identifica a la persona."
+        },
+        {
+          "indice": 4,
+          "en": "A librarian is a person who helps readers find books.",
+          "es": "Un bibliotecario es una persona que ayuda a los lectores a encontrar libros.",
+          "nota": "Who + lo que hace: así se reconoce la profesión."
+        },
+        {
+          "indice": 5,
+          "en": "I need someone who can repair my bike.",
+          "es": "Necesito a alguien que pueda reparar mi bici.",
+          "nota": "Who también sigue a someone cuando buscas ayuda."
+        }
+      ]
+    },
+    "en.n3.class-37": {
+      "explicacion": {
+        "titulo": "Cosas y lugares: which, that y where",
+        "texto": "Para definir una cosa se usa which o that (que): A charger is a device that gives power to a battery. Para un lugar donde ocurre algo se usa where (donde): A clinic is a place where people receive medical care. Truco: si lo que sigue ya es una frase completa a la que podrías añadir «allí» (people receive medical care there), usa where; si le falta el sujeto y va el verbo directamente (gives power), usa which o that. En español a veces decimos «un lugar que la gente…»; en inglés no digas a place which people receive."
+      },
+      "patron": {
+        "texto": "Lugar + where + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "A clinic",
+            "nota": "lo que se define"
+          },
+          {
+            "texto": "is a place",
+            "nota": "antecedente: un lugar"
+          },
+          {
+            "texto": "where",
+            "nota": "lugar → where"
+          },
+          {
+            "texto": "people receive medical care.",
+            "nota": "sujeto + verbo: lo que ocurre allí"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Relativo",
+          "Se usa con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "which / that"
+            },
+            {
+              "texto": "cosas"
+            },
+            {
+              "texto": "A thermometer is a device which measures temperature."
+            }
+          ],
+          [
+            {
+              "texto": "where"
+            },
+            {
+              "texto": "lugares"
+            },
+            {
+              "texto": "A laundrette is a place where people wash clothes."
+            }
+          ],
+          [
+            {
+              "texto": "who / that"
+            },
+            {
+              "texto": "personas"
+            },
+            {
+              "texto": "A nurse is someone who cares for patients."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "A clinic is a place which people receive medical care.",
+          "correcto": "A clinic is a place where people receive medical care.",
+          "explicacion": "People receive medical care ya es una frase completa (ocurre allí): para un lugar así se usa where, no which."
+        },
+        {
+          "incorrecto": "A torch is a thing who gives light.",
+          "correcto": "A torch is a thing which gives light.",
+          "explicacion": "Who es solo para personas. Para una cosa se usa which o that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo acampan con su papá Carlos cerca de un parque.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Dad, what is this?",
+            "traduccion": "Papá, ¿qué es esto?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is a torch. It is a thing which gives light at night.",
+            "traduccion": "Es una linterna. Es una cosa que da luz por la noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Where do we wash our clothes?",
+            "traduccion": "¿Dónde lavamos la ropa?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "There is a laundrette near the park. It is a place where people wash clothes.",
+            "traduccion": "Hay una lavandería cerca del parque. Es un lugar donde la gente lava ropa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is there a shop that sells food?",
+            "traduccion": "¿Hay una tienda que venda comida?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, next to the laundrette.",
+            "traduccion": "Sí, al lado de la lavandería."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está la tienda que vende comida?",
+          "opciones": [
+            {
+              "es": "Al lado de la lavandería."
+            },
+            {
+              "es": "Dentro del parque."
+            },
+            {
+              "es": "Al lado de la casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «Yes, next to the laundrette»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "A thermometer is a device which measures temperature.",
+          "es": "Un termómetro es un aparato que mide la temperatura.",
+          "nota": "Which para una cosa: después va el verbo (measures)."
+        },
+        {
+          "indice": 1,
+          "en": "A charger is a device that gives power to a battery.",
+          "es": "Un cargador es un aparato que da energía a una batería.",
+          "nota": "That también sirve para cosas."
+        },
+        {
+          "indice": 2,
+          "en": "A torch is a thing which gives light at night.",
+          "es": "Una linterna es una cosa que da luz por la noche.",
+          "nota": "Sin coma: la información es necesaria para saber qué es."
+        },
+        {
+          "indice": 3,
+          "en": "A clinic is a place where people receive medical care.",
+          "es": "Una clínica es un lugar donde la gente recibe atención médica.",
+          "nota": "Where para lugares; después va una frase completa (sujeto + verbo)."
+        },
+        {
+          "indice": 4,
+          "en": "A laundrette is a place where people wash clothes.",
+          "es": "Una lavandería es un lugar donde la gente lava ropa.",
+          "nota": "People wash clothes (allí) es una frase completa, por eso where."
+        },
+        {
+          "indice": 5,
+          "en": "A bottle opener is a tool that opens bottles, and a kitchen is a place where we cook.",
+          "es": "Un abridor es una herramienta que abre botellas, y una cocina es un lugar donde cocinamos.",
+          "nota": "Cosa con that; lugar con where."
+        }
+      ]
+    },
+    "en.n3.class-38": {
+      "explicacion": {
+        "titulo": "Encontrar el referente en un anuncio",
+        "texto": "En un anuncio, la parte con who, which/that o where dice exactamente qué persona, cosa o lugar se describe. Busca la palabra que va justo antes del relativo: ese es el referente (someone who repairs watches → quien repara relojes). Horarios, colores o personas que aparecen cerca son información extra y no cambian la respuesta. Estrategia: 1) localiza who, which, that o where; 2) mira la palabra anterior; 3) lee la acción que sigue."
+      },
+      "patron": {
+        "texto": "Referente + relativo + acción que lo define:",
+        "formula": [
+          {
+            "texto": "Visit the centre",
+            "nota": "referente: un lugar"
+          },
+          {
+            "texto": "where",
+            "nota": "lugar → where"
+          },
+          {
+            "texto": "residents can borrow tools.",
+            "nota": "la actividad que lo identifica"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Si ves…",
+          "Buscas…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "who"
+            },
+            {
+              "texto": "una persona"
+            },
+            {
+              "texto": "someone who repairs watches"
+            }
+          ],
+          [
+            {
+              "texto": "which / that"
+            },
+            {
+              "texto": "una cosa o un servicio"
+            },
+            {
+              "texto": "a service that delivers medicine"
+            }
+          ],
+          [
+            {
+              "texto": "where"
+            },
+            {
+              "texto": "un lugar"
+            },
+            {
+              "texto": "the centre where residents borrow tools"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Visit the centre which residents can borrow tools.",
+          "correcto": "Visit the centre where residents can borrow tools.",
+          "explicacion": "Residents can borrow tools ya es una frase completa (ocurre allí): para un lugar así se usa where."
+        },
+        {
+          "incorrecto": "Ask for Tom, which repairs watches.",
+          "correcto": "Ask for Tom, who repairs watches.",
+          "explicacion": "Tom es una persona: se usa who, no which."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo leen un anuncio en la puerta de la biblioteca de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look, Leo! This advert is about the library.",
+            "traduccion": "¡Mira, Leo! Este anuncio es sobre la biblioteca."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What does it say?",
+            "traduccion": "¿Qué dice?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Ask for Tom, who helps students find books. He works in the mornings.",
+            "traduccion": "Pregunta por Tom, que ayuda a los estudiantes a encontrar libros. Trabaja por las mañanas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the room where we can study?",
+            "traduccion": "¿Y la sala donde podemos estudiar?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is next to the library. It opens at three.",
+            "traduccion": "Está al lado de la biblioteca. Abre a las tres."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el anuncio, ¿qué hace Tom?",
+          "opciones": [
+            {
+              "es": "Ayuda a los estudiantes a encontrar libros."
+            },
+            {
+              "es": "Abre la sala de estudio a las tres."
+            },
+            {
+              "es": "Trabaja por las tardes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "El anuncio dice: «Ask for Tom, who helps students find books». Who presenta lo que hace Tom."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Visit the centre where residents can borrow tools.",
+          "es": "Visita el centro donde los vecinos pueden pedir herramientas prestadas.",
+          "nota": "Where + actividad: el referente es el centro, un lugar."
+        },
+        {
+          "indice": 1,
+          "en": "Ask for Tom, who repairs watches. He works on Mondays.",
+          "es": "Pregunta por Tom, que repara relojes. Trabaja los lunes.",
+          "nota": "Who repairs watches identifica a Tom; el día es información extra."
+        },
+        {
+          "indice": 2,
+          "en": "It is a service that delivers medicine on the same day.",
+          "es": "Es un servicio que entrega medicinas el mismo día.",
+          "nota": "That delivers medicine dice qué servicio es."
+        },
+        {
+          "indice": 3,
+          "en": "Our shop opens at eight. Ask for the person who fits new locks.",
+          "es": "Nuestra tienda abre a las ocho. Pregunta por la persona que pone cerraduras nuevas.",
+          "nota": "El horario es extra; who fits new locks dice a quién buscar."
+        },
+        {
+          "indice": 4,
+          "en": "Take the card which records each visitor's arrival.",
+          "es": "Toma la tarjeta que registra la llegada de cada visitante.",
+          "nota": "Which identifica la tarjeta, una cosa."
+        },
+        {
+          "indice": 5,
+          "en": "Go to the room where you can borrow books; it closes at six.",
+          "es": "Ve a la sala donde puedes pedir libros prestados; cierra a las seis.",
+          "nota": "Where + actividad define el lugar; it closes at six es extra."
+        }
+      ]
+    },
+    "en.n3.class-39": {
+      "explicacion": {
+        "titulo": "Acertijos: definir sin nombrar",
+        "texto": "Un acertijo describe algo sin decir su nombre. Usa la estructura de definición: para una persona, someone who… (This is someone who cuts hair); para un objeto, a device o a tool which/that…; para un lugar, a place where… Da una función clara y una pista extra para que solo haya una respuesta. Después de where hace falta un sujeto: a place where people catch buses, no a place where catch buses."
+      },
+      "patron": {
+        "texto": "It is + tipo + relativo + función:",
+        "formula": [
+          {
+            "texto": "It is",
+            "nota": "presenta el acertijo"
+          },
+          {
+            "texto": "a place",
+            "nota": "tipo: persona, objeto o lugar"
+          },
+          {
+            "texto": "where",
+            "nota": "relativo según el tipo"
+          },
+          {
+            "texto": "passengers wait for trains.",
+            "nota": "función que lo identifica"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Inicio del acertijo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "persona"
+            },
+            {
+              "texto": "This is someone who…"
+            },
+            {
+              "texto": "This is someone who designs buildings."
+            }
+          ],
+          [
+            {
+              "texto": "objeto"
+            },
+            {
+              "texto": "It is a tool which/that…"
+            },
+            {
+              "texto": "It is a tool which measures distance."
+            }
+          ],
+          [
+            {
+              "texto": "lugar"
+            },
+            {
+              "texto": "It is a place where…"
+            },
+            {
+              "texto": "It is a place where people catch buses."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This is someone which cuts hair.",
+          "correcto": "This is someone who cuts hair.",
+          "explicacion": "Someone es una persona: se usa who, no which."
+        },
+        {
+          "incorrecto": "It is a place where catch buses.",
+          "correcto": "It is a place where people catch buses.",
+          "explicacion": "Después de where va una frase con sujeto: people catch buses."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom juegan a los acertijos durante un viaje en tren.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I have a riddle. It is a place where passengers wait for trains.",
+            "traduccion": "Tengo un acertijo. Es un lugar donde los pasajeros esperan los trenes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is it a station?",
+            "traduccion": "¿Es una estación?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes! Now it is your turn.",
+            "traduccion": "¡Sí! Ahora te toca a ti."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "This is someone who helps children learn at school.",
+            "traduccion": "Es alguien que ayuda a los niños a aprender en la escuela."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "A teacher!",
+            "traduccion": "¡Un profesor!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la respuesta del acertijo de Ana?",
+          "opciones": [
+            {
+              "es": "Una estación."
+            },
+            {
+              "es": "Un profesor."
+            },
+            {
+              "es": "Un tren."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana describe «a place where passengers wait for trains», y Tom acierta: «Is it a station?»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "This is someone who designs buildings.",
+          "es": "Es alguien que diseña edificios.",
+          "nota": "Acertijo de persona: someone who + función, sin decir el nombre."
+        },
+        {
+          "indice": 1,
+          "en": "This is someone who repairs instruments.",
+          "es": "Es alguien que repara instrumentos.",
+          "nota": "Who para la persona que hay que adivinar."
+        },
+        {
+          "indice": 2,
+          "en": "It is a tool which measures distance.",
+          "es": "Es una herramienta que mide distancias.",
+          "nota": "Which o that para el objeto."
+        },
+        {
+          "indice": 3,
+          "en": "It is a place where passengers wait for trains.",
+          "es": "Es un lugar donde los pasajeros esperan los trenes.",
+          "nota": "Where para el lugar, seguido de sujeto + verbo."
+        },
+        {
+          "indice": 4,
+          "en": "It is a tool which measures distance. Builders often use it.",
+          "es": "Es una herramienta que mide distancias. Los constructores la usan a menudo.",
+          "nota": "Una función y una pista extra hacen única la respuesta."
+        },
+        {
+          "indice": 5,
+          "en": "It is a machine that dries clothes, and you can find it in many homes.",
+          "es": "Es una máquina que seca la ropa, y la puedes encontrar en muchas casas.",
+          "nota": "Objeto con that + una pista extra."
+        }
+      ]
+    },
+    "en.n3.class-40": {
+      "explicacion": {
+        "titulo": "Recomendar un servicio: persona, servicio y lugar",
+        "texto": "Para recomendar un servicio, define primero sus tres partes: la persona (Mina, who repairs hiking boots), el servicio (a plan which includes collection) y el lugar (a workshop where customers can watch the repair). Después compara las opciones y termina con I recommend… because… Con un nombre propio la parte con who va entre comas, porque ya sabemos quién es. Ojo: no digas I recommend you this service; di I recommend this service."
+      },
+      "patron": {
+        "texto": "I recommend + persona, who + función, + because + razón:",
+        "formula": [
+          {
+            "texto": "I recommend Tom,",
+            "nota": "lo que recomiendas"
+          },
+          {
+            "texto": "who repairs electric bikes,",
+            "nota": "who: define a la persona (entre comas)"
+          },
+          {
+            "texto": "because",
+            "nota": "porque"
+          },
+          {
+            "texto": "his plan includes collection.",
+            "nota": "razón ligada a la necesidad"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Relativo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "persona"
+            },
+            {
+              "texto": "who / that"
+            },
+            {
+              "texto": "Ask for Mina, who repairs hiking boots."
+            }
+          ],
+          [
+            {
+              "texto": "servicio"
+            },
+            {
+              "texto": "which / that"
+            },
+            {
+              "texto": "a plan which includes collection"
+            }
+          ],
+          [
+            {
+              "texto": "lugar"
+            },
+            {
+              "texto": "where"
+            },
+            {
+              "texto": "a workshop where customers can watch the repair"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I recommend you this workshop.",
+          "correcto": "I recommend this workshop.",
+          "explicacion": "Es un calco de «te recomiendo». Recommend va directamente con lo que se recomienda."
+        },
+        {
+          "incorrecto": "It is a workshop which customers can watch the repair.",
+          "correcto": "It is a workshop where customers can watch the repair.",
+          "explicacion": "Es un lugar y customers can watch the repair ya es una frase completa (ocurre allí): se usa where."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana tiene la bici rota y le pide consejo a su amigo Leo.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My bike is broken. Can you recommend a workshop?",
+            "traduccion": "Mi bici está rota. ¿Me recomiendas un taller?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. I recommend the workshop where my dad takes his bike.",
+            "traduccion": "Sí. Te recomiendo el taller donde mi papá lleva su bici."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is next to the park.",
+            "traduccion": "Está al lado del parque."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Who repairs the bikes there?",
+            "traduccion": "¿Quién repara las bicis allí?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Ask for Tom, who repairs bikes on the same day.",
+            "traduccion": "Pregunta por Tom, que repara bicis el mismo día."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está el taller que recomienda Leo?",
+          "opciones": [
+            {
+              "es": "Al lado del parque."
+            },
+            {
+              "es": "Al lado de la estación."
+            },
+            {
+              "es": "En la casa de Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «It is next to the park»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I need someone who repairs electric bikes.",
+          "es": "Necesito a alguien que repare bicis eléctricas.",
+          "nota": "Primero di la necesidad; luego busca quien la cumple."
+        },
+        {
+          "indice": 1,
+          "en": "Ask for Mina, who repairs hiking boots.",
+          "es": "Pregunta por Mina, que repara botas de montaña.",
+          "nota": "Con un nombre propio: coma + who."
+        },
+        {
+          "indice": 2,
+          "en": "They offer a service which collects broken lamps from your home.",
+          "es": "Ofrecen un servicio que recoge lámparas rotas en tu casa.",
+          "nota": "Which o that define el servicio."
+        },
+        {
+          "indice": 3,
+          "en": "It is a workshop where customers can watch the repair.",
+          "es": "Es un taller donde los clientes pueden ver la reparación.",
+          "nota": "Where define el lugar."
+        },
+        {
+          "indice": 4,
+          "en": "The first mechanic repairs ordinary bikes, but the second one repairs electric bikes.",
+          "es": "El primer mecánico repara bicis normales, pero el segundo repara bicis eléctricas.",
+          "nota": "Compara las dos opciones antes de elegir."
+        },
+        {
+          "indice": 5,
+          "en": "I recommend Tom, who repairs electric bikes, because his plan includes collection.",
+          "es": "Recomiendo a Tom, que repara bicis eléctricas, porque su plan incluye la recogida.",
+          "nota": "Recomendación + persona definida + razón con because."
+        }
+      ]
+    }
+  }
+}

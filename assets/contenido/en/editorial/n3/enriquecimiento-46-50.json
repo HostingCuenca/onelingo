@@ -1,0 +1,822 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-48: la explicación del error «Eli said he will work on Monday» se matiza («lo normal es que will pase a would»), porque sin contexto will no es agramatical si el lunes aún no ha llegado.",
+      "class-49: en el diálogo, «OK. And what must you do?» (poco natural) → «OK. And you?» / «Bien. ¿Y tú?».",
+      "Aceptado: class-47 ejemplo 2 usa tell = contar (tells me a story), válido como tell + persona.",
+      "Resto correcto: said/told, told + persona + to, conservación de hora/lugar/acción; ítems con una única respuesta."
+    ]
+  },
+  "classes": {
+    "en.n3.class-46": {
+      "explicacion": {
+        "titulo": "Contar lo que dijo alguien: said y told",
+        "texto": "Para contar lo que dijo otra persona se usa said (dijo) o told (le dijo a alguien): Mia said the shop was closed. Si nombras a quien escucha, usa told + persona: Mia told Leo the shop was closed. Lo más importante es ser fiel: quién habló y qué dijo (objeto, lugar, hora) no cambian. Al contarlo, el verbo suele pasar al pasado (is → was, can → could, will → would) y today pasa a that day."
+      },
+      "patron": {
+        "texto": "Hablante + said + contenido fiel:",
+        "formula": [
+          {
+            "texto": "Nora",
+            "nota": "hablante: quien dijo el mensaje"
+          },
+          {
+            "texto": "said",
+            "nota": "dijo (sin persona detrás)"
+          },
+          {
+            "texto": "she needed the blue folder",
+            "nota": "contenido fiel: need → needed"
+          },
+          {
+            "texto": "that day.",
+            "nota": "today → that day"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Mensaje original",
+          "Reporte"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Pablo: The room is ready."
+            },
+            {
+              "texto": "Pablo said the room was ready."
+            }
+          ],
+          [
+            {
+              "texto": "Ben: I can open the shop."
+            },
+            {
+              "texto": "Ben said he could open the shop."
+            }
+          ],
+          [
+            {
+              "texto": "Eva a Tom: Bring the keys."
+            },
+            {
+              "texto": "Eva told Tom to bring the keys."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia said Leo the shop was closed.",
+          "correcto": "Mia told Leo the shop was closed.",
+          "explicacion": "Si nombras a quien escucha (Leo), se usa told, no said."
+        },
+        {
+          "incorrecto": "Ana said she will send the menu that night.",
+          "correcto": "Ana said she would send the menu that night.",
+          "explicacion": "Al contar lo que alguien dijo, will pasa a would."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo vuelve de la escuela y su mamá Sara le pregunta por un aviso.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, what did your teacher say?",
+            "traduccion": "Leo, ¿qué dijo tu profesora?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She said the school trip was on Friday.",
+            "traduccion": "Dijo que la excursión de la escuela era el viernes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Did she say anything about lunch?",
+            "traduccion": "¿Dijo algo sobre el almuerzo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. She told us to bring a sandwich and water.",
+            "traduccion": "Sí. Nos dijo que lleváramos un sándwich y agua."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Mia said she could not go.",
+            "traduccion": "Y Mia dijo que no podía ir."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué les dijo la profesora que llevaran?",
+          "opciones": [
+            {
+              "es": "Un sándwich y agua."
+            },
+            {
+              "es": "Un libro y agua."
+            },
+            {
+              "es": "Nada para el almuerzo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «She told us to bring a sandwich and water». Told + persona (us) + to + verbo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Ben said, \"I can open the shop.\"",
+          "es": "Ben dijo: «Puedo abrir la tienda».",
+          "nota": "Mensaje original: las palabras exactas del hablante."
+        },
+        {
+          "indice": 3,
+          "en": "Ben said he could open the shop.",
+          "es": "Ben dijo que podía abrir la tienda.",
+          "nota": "El reporte conserva hablante y contenido; can pasa a could."
+        },
+        {
+          "indice": 4,
+          "en": "Nora said she needed the blue folder that day.",
+          "es": "Nora dijo que necesitaba la carpeta azul ese día.",
+          "nota": "Today pasa a that day; the blue folder no cambia."
+        }
+      ]
+    },
+    "en.n3.class-47": {
+      "explicacion": {
+        "titulo": "Say o tell",
+        "texto": "Say y tell significan «decir», pero se construyen distinto. Say (pasado said) va directamente con lo que se dice: Lina said the bus was late. Tell (pasado told) necesita a la persona que escucha justo después, sin to: Lina told Omar the bus was late. Para pedir algo: told + persona + to + verbo (Eva told Leo to wait). Como en español decimos «le dijo», es fácil decir said me o said Omar; con la persona detrás, usa told."
+      },
+      "patron": {
+        "texto": "Hablante + told + persona + to + acción:",
+        "formula": [
+          {
+            "texto": "Eva",
+            "nota": "hablante"
+          },
+          {
+            "texto": "told",
+            "nota": "pasado de tell: lleva persona detrás"
+          },
+          {
+            "texto": "Leo",
+            "nota": "quien escucha, sin to delante"
+          },
+          {
+            "texto": "to wait.",
+            "nota": "to + verbo: lo que le pide"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "say / said"
+            },
+            {
+              "texto": "say + lo que se dice"
+            },
+            {
+              "texto": "Lina said the bus was late."
+            }
+          ],
+          [
+            {
+              "texto": "tell / told"
+            },
+            {
+              "texto": "tell + persona + lo que se dice"
+            },
+            {
+              "texto": "Lina told Omar the bus was late."
+            }
+          ],
+          [
+            {
+              "texto": "tell / told"
+            },
+            {
+              "texto": "tell + persona + to + verbo"
+            },
+            {
+              "texto": "Eva told Leo to wait."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My dad said me to clean my room.",
+          "correcto": "My dad told me to clean my room.",
+          "explicacion": "Es un calco de «me dijo que…». Con la persona (me) detrás del verbo se usa told."
+        },
+        {
+          "incorrecto": "Tom told that the park was closed.",
+          "correcto": "Tom said that the park was closed.",
+          "explicacion": "Told necesita a la persona que escucha. Si no la nombras, usa said."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo llega a casa y su hermana Mia le cuenta la llamada de su papá.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Mia, did Dad call?",
+            "traduccion": "Mia, ¿llamó papá?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. He said he was at the shop.",
+            "traduccion": "Sí. Dijo que estaba en la tienda."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Did he tell you anything for me?",
+            "traduccion": "¿Te dijo algo para mí?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. He told you to wash the dishes.",
+            "traduccion": "Sí. Te dijo que lavaras los platos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh no! And what did he tell you?",
+            "traduccion": "¡Oh, no! ¿Y a ti qué te dijo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He told me to feed Rex.",
+            "traduccion": "Me dijo que le diera de comer a Rex."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tiene que hacer Leo?",
+          "opciones": [
+            {
+              "es": "Lavar los platos."
+            },
+            {
+              "es": "Darle de comer a Rex."
+            },
+            {
+              "es": "Ir a la tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «He told you to wash the dishes». Darle de comer a Rex es la tarea de Mia."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Eva said the shop was open.",
+          "es": "Eva dijo que la tienda estaba abierta.",
+          "nota": "Said + lo que se dice, sin persona detrás."
+        },
+        {
+          "indice": 2,
+          "en": "My grandmother tells me a story every night.",
+          "es": "Mi abuela me cuenta un cuento cada noche.",
+          "nota": "Tell en presente + persona (me) + lo que se cuenta."
+        },
+        {
+          "indice": 4,
+          "en": "Nina told Sam to call his grandmother.",
+          "es": "Nina le dijo a Sam que llamara a su abuela.",
+          "nota": "Told + persona (Sam) + to + verbo."
+        },
+        {
+          "indice": 5,
+          "en": "Rosa said the café closed at five, and she told Leo to arrive early.",
+          "es": "Rosa dijo que el café cerraba a las cinco y le dijo a Leo que llegara temprano.",
+          "nota": "Said sin persona; told con persona."
+        }
+      ]
+    },
+    "en.n3.class-48": {
+      "explicacion": {
+        "titulo": "Comparar el mensaje original y el reporte",
+        "texto": "Para saber si un reporte es fiel, compáralo con el mensaje original dato por dato: persona, lugar, hora y acción. Algunos cambios son normales: la persona cambia con quien cuenta el mensaje (I → she) y el verbo pasa al pasado (will → would, arrive → arrived). Pero la hora, el lugar y la acción no deben cambiar: si Lia dijo five, el reporte debe decir five. Si alguno de esos datos cambia, el reporte no es fiel."
+      },
+      "patron": {
+        "texto": "Original → reporte fiel:",
+        "formula": [
+          {
+            "texto": "Nia: I will print it at nine.",
+            "nota": "mensaje original"
+          },
+          {
+            "texto": "Nia said",
+            "nota": "hablante + said"
+          },
+          {
+            "texto": "she would print it",
+            "nota": "I → she, will → would: cambios normales"
+          },
+          {
+            "texto": "at nine.",
+            "nota": "la hora no cambia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "¿Puede cambiar?",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "persona"
+            },
+            {
+              "texto": "sí, con la perspectiva"
+            },
+            {
+              "texto": "I → she"
+            }
+          ],
+          [
+            {
+              "texto": "hora"
+            },
+            {
+              "texto": "no"
+            },
+            {
+              "texto": "at six → at six"
+            }
+          ],
+          [
+            {
+              "texto": "lugar"
+            },
+            {
+              "texto": "no"
+            },
+            {
+              "texto": "outside → outside"
+            }
+          ],
+          [
+            {
+              "texto": "acción"
+            },
+            {
+              "texto": "no"
+            },
+            {
+              "texto": "call → call"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Nia said I would print it at nine.",
+          "correcto": "Nia said she would print it at nine.",
+          "explicacion": "Quien cuenta el mensaje no es Nia: I pasa a she."
+        },
+        {
+          "incorrecto": "Eli said he will work on Monday.",
+          "correcto": "Eli said he would work on Monday.",
+          "explicacion": "En un reporte en pasado, lo normal es que will pase a would; el día (Monday) se mantiene."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana deja un mensaje de voz; luego Tom se lo cuenta a Mia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I will wait for you at the park gate at four.",
+            "traduccion": "Los esperaré en la puerta del parque a las cuatro."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Mia, Ana said she would wait for us at the park gate at five.",
+            "traduccion": "Mia, Ana dijo que nos esperaría en la puerta del parque a las cinco."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "At five? Let me see her message.",
+            "traduccion": "¿A las cinco? Déjame ver su mensaje."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, Tom. She said she would wait at four!",
+            "traduccion": "No, Tom. ¡Dijo que esperaría a las cuatro!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato cambió Tom al contar el mensaje?",
+          "opciones": [
+            {
+              "es": "La hora."
+            },
+            {
+              "es": "El lugar."
+            },
+            {
+              "es": "La persona que espera."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dijo «at four», pero Tom dijo «at five». El lugar (the park gate) sí se conservó."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Nia said, \"I will print it at nine.\"",
+          "es": "Nia dijo: «Lo imprimiré a las nueve».",
+          "nota": "Mensaje original: las palabras exactas."
+        },
+        {
+          "indice": 1,
+          "en": "Nia said she would print it at nine.",
+          "es": "Nia dijo que lo imprimiría a las nueve.",
+          "nota": "Reporte fiel: I → she, will → would; nine no cambia."
+        },
+        {
+          "indice": 2,
+          "en": "Bo said they would meet outside.",
+          "es": "Bo dijo que se verían afuera.",
+          "nota": "El lugar (outside) se conserva."
+        },
+        {
+          "indice": 3,
+          "en": "Lia said she arrived at five.",
+          "es": "Lia dijo que llegaba a las cinco.",
+          "nota": "La hora del original (five) se mantiene exacta."
+        },
+        {
+          "indice": 4,
+          "en": "Jo said she would deliver the box.",
+          "es": "Jo dijo que entregaría la caja.",
+          "nota": "La acción (deliver) no se cambia por otra."
+        },
+        {
+          "indice": 5,
+          "en": "Eli said he worked on Monday.",
+          "es": "Eli dijo que trabajaba el lunes.",
+          "nota": "Monday es el dato original: no lo cambies por Tuesday."
+        }
+      ]
+    },
+    "en.n3.class-49": {
+      "explicacion": {
+        "titulo": "Transmitir un mensaje: fuente, dato y acción",
+        "texto": "Transmitir un mensaje es pasar a otra persona lo que alguien dijo. Una buena nota tiene tres partes: la fuente (quién lo dijo: Eva said…), el dato exacto (hora, lugar) y la acción del destinatario (told Tom to bring the tickets). Si hay dos mensajes, sepáralos: cada fuente con su dato y su tarea. Para la acción puedes usar must + verbo, sin to: Leo must collect it. No inventes ni cambies horas."
+      },
+      "patron": {
+        "texto": "Fuente + said + dato + told + destinatario + to + acción:",
+        "formula": [
+          {
+            "texto": "Eva said",
+            "nota": "fuente: quién lo dijo"
+          },
+          {
+            "texto": "the bus left at eight",
+            "nota": "dato exacto"
+          },
+          {
+            "texto": "and told Tom",
+            "nota": "destinatario"
+          },
+          {
+            "texto": "to bring the tickets.",
+            "nota": "acción que debe hacer"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Pregunta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "fuente"
+            },
+            {
+              "texto": "¿Quién lo dijo?"
+            },
+            {
+              "texto": "Eva said…"
+            }
+          ],
+          [
+            {
+              "texto": "dato"
+            },
+            {
+              "texto": "¿Qué, cuándo, dónde?"
+            },
+            {
+              "texto": "the bus left at eight"
+            }
+          ],
+          [
+            {
+              "texto": "destinatario y acción"
+            },
+            {
+              "texto": "¿Quién hace qué?"
+            },
+            {
+              "texto": "told Tom to bring the tickets"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Eva said Tom to bring the tickets.",
+          "correcto": "Eva told Tom to bring the tickets.",
+          "explicacion": "Con destinatario (Tom) se usa told, no said."
+        },
+        {
+          "incorrecto": "Leo must to collect the key before five.",
+          "correcto": "Leo must collect the key before five.",
+          "explicacion": "Después de must va el verbo sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a su hermano Leo lo que dijo la abuela por teléfono.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, Grandma called.",
+            "traduccion": "Leo, llamó la abuela."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What did she say?",
+            "traduccion": "¿Qué dijo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She said lunch was at one on Sunday, and she told you to bring the cake.",
+            "traduccion": "Dijo que el almuerzo era a la una el domingo, y te dijo que llevaras el pastel."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. And you?",
+            "traduccion": "Bien. ¿Y tú?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I must buy bread.",
+            "traduccion": "Debo comprar pan."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe llevar Leo?",
+          "opciones": [
+            {
+              "es": "El pastel."
+            },
+            {
+              "es": "El pan."
+            },
+            {
+              "es": "El almuerzo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «she told you to bring the cake». El pan es la tarea de Mia."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Eva said the bus left at eight.",
+          "es": "Eva dijo que el bus salía a las ocho.",
+          "nota": "Fuente (Eva) + dato exacto (at eight)."
+        },
+        {
+          "indice": 1,
+          "en": "Eva told Tom to bring the tickets.",
+          "es": "Eva le dijo a Tom que llevara los boletos.",
+          "nota": "Told + destinatario (Tom) + to + acción."
+        },
+        {
+          "indice": 2,
+          "en": "Mina said the key was at reception, so Leo must collect it before five.",
+          "es": "Mina dijo que la llave estaba en recepción, así que Leo debe recogerla antes de las cinco.",
+          "nota": "Dato + acción del destinatario con must."
+        },
+        {
+          "indice": 3,
+          "en": "Omar said the parcel was ready and told Bea to collect it before noon.",
+          "es": "Omar dijo que el paquete estaba listo y le dijo a Bea que lo recogiera antes del mediodía.",
+          "nota": "No cambies la hora: before noon."
+        },
+        {
+          "indice": 4,
+          "en": "Luis said the class moved to Room Four at three.",
+          "es": "Luis dijo que la clase se cambió a la sala cuatro a las tres.",
+          "nota": "Lugar y hora exactos, como en el mensaje original."
+        },
+        {
+          "indice": 5,
+          "en": "Sara said the visit was on Monday at nine. Carlos told Ana to test the projector before noon.",
+          "es": "Sara dijo que la visita era el lunes a las nueve. Carlos le dijo a Ana que probara el proyector antes del mediodía.",
+          "nota": "Dos fuentes, cada una con su dato y su tarea."
+        }
+      ]
+    },
+    "en.n3.class-50": {
+      "explicacion": {
+        "titulo": "Resolver un cambio de horario",
+        "texto": "En una cadena de mensajes cada persona dice algo distinto y pide una acción. Para resolverla: 1) cuenta cada voz por separado, con said para el dato y told + persona + to para la petición; 2) conserva exactos los días, las horas y los lugares; 3) termina con la confirmación final: Sara confirmed Sunday at ten. Recuerda los cambios normales del reporte (I → she, can → could, will → would). El horario final debe salir de los mensajes, sin inventar."
+      },
+      "patron": {
+        "texto": "Dato con said + petición con told → confirmación:",
+        "formula": [
+          {
+            "texto": "Ava said the call moved to Tuesday at four",
+            "nota": "voz 1: dato con said"
+          },
+          {
+            "texto": "and told Ben to update the calendar.",
+            "nota": "petición: told + persona + to"
+          },
+          {
+            "texto": "Cia confirmed",
+            "nota": "confirmación final"
+          },
+          {
+            "texto": "Tuesday at four.",
+            "nota": "el horario no cambia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué haces",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "cuenta cada voz"
+            },
+            {
+              "texto": "Ava said she could meet at three."
+            }
+          ],
+          [
+            {
+              "texto": "2"
+            },
+            {
+              "texto": "nombra quién recibe la acción"
+            },
+            {
+              "texto": "…and told Leo to bring the agenda."
+            }
+          ],
+          [
+            {
+              "texto": "3"
+            },
+            {
+              "texto": "cierra con la confirmación"
+            },
+            {
+              "texto": "The team confirmed Wednesday at five in Room One."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Omar told to Nina to move the chairs.",
+          "correcto": "Omar told Nina to move the chairs.",
+          "explicacion": "Es un calco de «le dijo a Nina». Después de told la persona va sin to."
+        },
+        {
+          "incorrecto": "Nora said she can arrive at five.",
+          "correcto": "Nora said she could arrive at five.",
+          "explicacion": "Al contar el mensaje, can pasa a could; la hora (five) no cambia."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Leo por el partido del fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Leo, is the game still on Saturday?",
+            "traduccion": "Leo, ¿el partido sigue siendo el sábado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. Sara said the park was closed because of the rain.",
+            "traduccion": "No. Sara dijo que el parque estaba cerrado por la lluvia."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She told Carlos to find another place.",
+            "traduccion": "Le dijo a Carlos que buscara otro lugar."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Did he find one?",
+            "traduccion": "¿Encontró uno?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. Carlos said the school hall was free on Sunday at ten, and Sara confirmed it.",
+            "traduccion": "Sí. Carlos dijo que el salón de la escuela estaba libre el domingo a las diez, y Sara lo confirmó."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo es ahora el partido?",
+          "opciones": [
+            {
+              "es": "El domingo a las diez."
+            },
+            {
+              "es": "El sábado a las diez."
+            },
+            {
+              "es": "El domingo a las once."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dijo que el salón estaba libre «on Sunday at ten», y Sara lo confirmó."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Iris said she could meet at two, and Leo said he needed a later time.",
+          "es": "Iris dijo que podía reunirse a las dos, y Leo dijo que necesitaba una hora más tarde.",
+          "nota": "Cada hablante conserva su propio dato."
+        },
+        {
+          "indice": 1,
+          "en": "Ava said she could meet at three and told Leo to bring the agenda.",
+          "es": "Ava dijo que podía reunirse a las tres y le dijo a Leo que llevara la agenda.",
+          "nota": "Said da el dato; told + persona da la petición."
+        },
+        {
+          "indice": 2,
+          "en": "Nora said she could arrive at five.",
+          "es": "Nora dijo que podía llegar a las cinco.",
+          "nota": "I → she y can → could: cambios normales del reporte."
+        },
+        {
+          "indice": 3,
+          "en": "Ben said he had updated the calendar and told Cia to send the link.",
+          "es": "Ben dijo que había actualizado el calendario y le dijo a Cia que enviara el enlace.",
+          "nota": "Cada mensaje trae una acción para otra persona."
+        },
+        {
+          "indice": 4,
+          "en": "Tuesday at four in Room Two is confirmed.",
+          "es": "Queda confirmado el martes a las cuatro en la sala dos.",
+          "nota": "La confirmación final repite día, hora y lugar exactos."
+        },
+        {
+          "indice": 5,
+          "en": "Rae said the field was closed and told Omar to find a hall. Omar said Hall One was free on Friday at ten. Rae confirmed Friday at ten in Hall One.",
+          "es": "Rae dijo que el campo estaba cerrado y le dijo a Omar que buscara un salón. Omar dijo que el Hall One estaba libre el viernes a las diez. Rae confirmó el viernes a las diez en el Hall One.",
+          "nota": "Cadena completa: tres mensajes y una confirmación."
+        }
+      ]
+    }
+  }
+}

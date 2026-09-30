@@ -1,0 +1,820 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1. Explicaciones, patrones y errores coherentes con los ejercicios de phrasal verbs (51-55); todos los ejemplos de enseñanza con metalenguaje ('This context is clear') quedan sustituidos.",
+      "P2 corregido en class-54: 'fill in the card for Grandma' (poco natural para una tarjeta de felicitación) → 'fill in the form for the party room'; opción y feedback del ítem ajustados.",
+      "P2 corregido en class-55: mochila perdida 'at the park … under the seats' → 'at the bus station' (asientos coherentes con el lugar).",
+      "Avisos del validador ('la opción correcta apenas aparece') aceptados: las opciones están en español y se responden leyendo el diálogo."
+    ]
+  },
+  "classes": {
+    "en.n3.class-51": {
+      "explicacion": {
+        "titulo": "Phrasal verbs: la acción completa",
+        "texto": "Un phrasal verb es un verbo + una partícula (on, off, up, for, in) que juntos tienen un significado propio: turn on = encender, turn off = apagar, pick up = recoger, look for = buscar, fill in = completar (un formulario). No traduzcas por partes: aquí turn no significa «girar». Usa el contexto para elegir: si la habitación está oscura, turn on the light; si falta la llave, look for the key. Ojo: look for lleva for antes de lo que buscas."
+      },
+      "patron": {
+        "texto": "Acción completa + objeto + contexto:",
+        "formula": [
+          {
+            "texto": "Turn on",
+            "nota": "phrasal verb: encender"
+          },
+          {
+            "texto": "the light",
+            "nota": "el objeto"
+          },
+          {
+            "texto": "when the room is dark.",
+            "nota": "el contexto que explica la acción"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Phrasal verb",
+          "Significado",
+          "Contexto típico"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "turn on / turn off"
+            },
+            {
+              "texto": "encender / apagar"
+            },
+            {
+              "texto": "la luz, el horno, la pantalla"
+            }
+          ],
+          [
+            {
+              "texto": "pick up"
+            },
+            {
+              "texto": "recoger"
+            },
+            {
+              "texto": "un paquete listo"
+            }
+          ],
+          [
+            {
+              "texto": "look for"
+            },
+            {
+              "texto": "buscar"
+            },
+            {
+              "texto": "una llave que falta"
+            }
+          ],
+          [
+            {
+              "texto": "fill in"
+            },
+            {
+              "texto": "completar"
+            },
+            {
+              "texto": "un formulario en blanco"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am looking my keys.",
+          "correcto": "I am looking for my keys.",
+          "explicacion": "Buscar algo es look for: sin for, la frase no está completa."
+        },
+        {
+          "incorrecto": "Can you open the light?",
+          "correcto": "Can you turn on the light?",
+          "explicacion": "La luz no se «abre» en inglés: se enciende con turn on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo están en casa por la noche.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The room is dark. Can you turn on the light?",
+            "traduccion": "La habitación está oscura. ¿Puedes encender la luz?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure. Where is my book? I am looking for it.",
+            "traduccion": "Claro. ¿Dónde está mi libro? Lo estoy buscando."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is on the table. And pick up your bag, please.",
+            "traduccion": "Está en la mesa. Y recoge tu bolsa, por favor."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. I will turn off the TV, too.",
+            "traduccion": "Vale. También voy a apagar la tele."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué está buscando Leo?",
+          "opciones": [
+            {
+              "es": "Su libro."
+            },
+            {
+              "es": "Su bolsa."
+            },
+            {
+              "es": "La tele."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo pregunta «Where is my book?» y dice «I am looking for it»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Turn on the light. The room is dark.",
+          "es": "Enciende la luz. La habitación está oscura.",
+          "nota": "Turn on = encender: la oscuridad explica la acción."
+        },
+        {
+          "indice": 1,
+          "en": "Pick up the parcel at reception.",
+          "es": "Recoge el paquete en recepción.",
+          "nota": "Pick up = recoger algo que ya está listo."
+        },
+        {
+          "indice": 2,
+          "en": "Look for the key. It is missing.",
+          "es": "Busca la llave. No está.",
+          "nota": "Look for = buscar; for va antes de la cosa."
+        },
+        {
+          "indice": 3,
+          "en": "Fill in the form before the appointment.",
+          "es": "Completa el formulario antes de la cita.",
+          "nota": "Fill in = completar los espacios de un formulario."
+        },
+        {
+          "indice": 4,
+          "en": "Turn off the oven after dinner.",
+          "es": "Apaga el horno después de cenar.",
+          "nota": "Turn off = apagar; es lo contrario de turn on."
+        },
+        {
+          "indice": 5,
+          "en": "The key is missing, so we look for it.",
+          "es": "Falta la llave, así que la buscamos.",
+          "nota": "El contexto (falta algo) te dice qué phrasal verb usar."
+        }
+      ]
+    },
+    "en.n3.class-52": {
+      "explicacion": {
+        "titulo": "Dónde va el objeto: turn it off",
+        "texto": "Con turn on/off, pick up y fill in, un objeto nominal puede ir detrás de la partícula o en medio: Turn off the screen = Turn the screen off. Pero si el objeto es un pronombre (it, them), va siempre en medio: Turn it off, Pick them up. «Turn off it» y «Pick up them» son incorrectos. En español el pronombre se pega al verbo (apágala, recógelos); en inglés se coloca entre el verbo y la partícula, y no se puede omitir."
+      },
+      "patron": {
+        "texto": "Verbo + pronombre + partícula:",
+        "formula": [
+          {
+            "texto": "Pick",
+            "nota": "el verbo"
+          },
+          {
+            "texto": "them",
+            "nota": "pronombre: siempre en medio"
+          },
+          {
+            "texto": "up",
+            "nota": "la partícula, al final"
+          },
+          {
+            "texto": "at reception.",
+            "nota": "dónde"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Objeto",
+          "Posibles órdenes"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "nombre: the screen"
+            },
+            {
+              "texto": "turn off the screen / turn the screen off"
+            }
+          ],
+          [
+            {
+              "texto": "pronombre: it"
+            },
+            {
+              "texto": "turn it off (solo en medio)"
+            }
+          ],
+          [
+            {
+              "texto": "nombre: the keys"
+            },
+            {
+              "texto": "pick up the keys / pick the keys up"
+            }
+          ],
+          [
+            {
+              "texto": "pronombre: them"
+            },
+            {
+              "texto": "pick them up (solo en medio)"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Pick up them now.",
+          "correcto": "Pick them up now.",
+          "explicacion": "Con pronombre (them), el objeto va entre pick y up."
+        },
+        {
+          "incorrecto": "The TV is on. Turn off, please.",
+          "correcto": "The TV is on. Turn it off, please.",
+          "explicacion": "En español basta «apágala», pero en inglés hay que decir el objeto: it."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara ve que Tom ha dejado cosas por la casa.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tom, your books are on the chair.",
+            "traduccion": "Tom, tus libros están en la silla."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry! I will pick them up now.",
+            "traduccion": "¡Perdón! Los recojo ahora."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the TV is on.",
+            "traduccion": "Y la tele está encendida."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK, I will turn it off.",
+            "traduccion": "Vale, la apago."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "En «I will pick them up», ¿a qué se refiere them?",
+          "opciones": [
+            {
+              "es": "A los libros de Tom."
+            },
+            {
+              "es": "A la tele."
+            },
+            {
+              "es": "A la silla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara habla de «your books» y Tom contesta «I will pick them up»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Turn the screen off after work.",
+          "es": "Apaga la pantalla después del trabajo.",
+          "nota": "Con un nombre, también vale turn off the screen."
+        },
+        {
+          "indice": 1,
+          "en": "Turn it off after work.",
+          "es": "Apágala después del trabajo.",
+          "nota": "It va siempre entre turn y off."
+        },
+        {
+          "indice": 2,
+          "en": "Pick the parcel up at reception.",
+          "es": "Recoge el paquete en recepción.",
+          "nota": "Un nombre puede ir en medio o al final."
+        },
+        {
+          "indice": 3,
+          "en": "Pick it up at reception.",
+          "es": "Recógelo en recepción.",
+          "nota": "No se dice pick up it."
+        },
+        {
+          "indice": 4,
+          "en": "Fill the form in before noon.",
+          "es": "Completa el formulario antes del mediodía.",
+          "nota": "Fill the form in = fill in the form."
+        },
+        {
+          "indice": 5,
+          "en": "Fill it in before noon.",
+          "es": "Complétalo antes del mediodía.",
+          "nota": "Con pronombre, solo este orden: fill it in."
+        }
+      ]
+    },
+    "en.n3.class-53": {
+      "explicacion": {
+        "titulo": "Deducir la acción por el resultado",
+        "texto": "A veces nadie nombra la acción: la deduces por el resultado. Si una sala oscura ahora tiene luz, alguien turned on the light. Si el paquete ya no está, alguien picked it up. Si alguien revisa bolsos y cajones, está looking for algo. Si el formulario no tiene espacios vacíos, alguien filled it in. Compara la situación de antes con el resultado de después. Como la acción ya ocurrió, usa el pasado: turned on, picked up, looked for, filled in."
+      },
+      "patron": {
+        "texto": "Antes + después → acción:",
+        "formula": [
+          {
+            "texto": "The room was dark;",
+            "nota": "situación de antes"
+          },
+          {
+            "texto": "now it is bright,",
+            "nota": "resultado que se ve"
+          },
+          {
+            "texto": "so someone turned on the light.",
+            "nota": "acción deducida, en pasado"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Resultado",
+          "Acción deducida"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "hay luz en la sala"
+            },
+            {
+              "texto": "turned on the light"
+            }
+          ],
+          [
+            {
+              "texto": "el paquete ya no está"
+            },
+            {
+              "texto": "picked up the parcel"
+            }
+          ],
+          [
+            {
+              "texto": "revisa todos los bolsillos"
+            },
+            {
+              "texto": "is looking for something"
+            }
+          ],
+          [
+            {
+              "texto": "no quedan espacios vacíos"
+            },
+            {
+              "texto": "filled in the form"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She looked her wallet under the seats.",
+          "correcto": "She looked for her wallet under the seats.",
+          "explicacion": "Buscar es look for: el for no se puede quitar."
+        },
+        {
+          "incorrecto": "The form is complete, so someone fill it in.",
+          "correcto": "The form is complete, so someone filled it in.",
+          "explicacion": "El resultado ya se ve, así que la acción ocurrió antes: pasado (filled)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia notan cambios en casa por la mañana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The room was dark this morning. Now it is bright.",
+            "traduccion": "La habitación estaba oscura esta mañana. Ahora hay luz."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, Dad pressed the switch.",
+            "traduccion": "Sí, papá pulsó el interruptor."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the parcel is not at the door now.",
+            "traduccion": "Y el paquete ya no está en la puerta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Look, Sara has it in her hands.",
+            "traduccion": "Mira, Sara lo tiene en las manos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Sara?",
+          "opciones": [
+            {
+              "es": "Recogió el paquete."
+            },
+            {
+              "es": "Encendió la luz."
+            },
+            {
+              "es": "Buscó el paquete."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "El paquete ya no está en la puerta y Sara «has it in her hands»: lo recogió (picked it up)."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The room was dark. Now it is bright, so someone turned on the light.",
+          "es": "La sala estaba oscura. Ahora hay luz, así que alguien encendió la luz.",
+          "nota": "El resultado (luz) revela la acción: turned on."
+        },
+        {
+          "indice": 1,
+          "en": "The parcel is in your hands, so you picked it up.",
+          "es": "Tienes el paquete en las manos, así que lo recogiste.",
+          "nota": "Resultado visible → picked it up."
+        },
+        {
+          "indice": 2,
+          "en": "She checks every bag, so she is looking for something.",
+          "es": "Revisa todos los bolsos, así que está buscando algo.",
+          "nota": "Revisar muchos sitios indica look for."
+        },
+        {
+          "indice": 3,
+          "en": "The form has no empty boxes, so someone filled it in.",
+          "es": "El formulario no tiene casillas vacías, así que alguien lo completó.",
+          "nota": "Sin espacios en blanco → filled in."
+        },
+        {
+          "indice": 4,
+          "en": "The oven is cold now, so someone turned it off.",
+          "es": "El horno ahora está frío, así que alguien lo apagó.",
+          "nota": "El cambio de caliente a frío indica turned off."
+        },
+        {
+          "indice": 5,
+          "en": "The key was missing. Now it is on the desk, so someone looked for it.",
+          "es": "Faltaba la llave. Ahora está en el escritorio, así que alguien la buscó.",
+          "nota": "Compara antes y después para deducir la acción."
+        }
+      ]
+    },
+    "en.n3.class-54": {
+      "explicacion": {
+        "titulo": "Instrucciones en orden: First, Next, Finally",
+        "texto": "Para dar instrucciones prácticas usa el imperativo, sin sujeto: Pick up the badge (no You pick up…). Ordena los pasos con First, Next y Finally. Cada paso necesita una acción completa con su objeto y, si hace falta, el lugar: First, pick up the badge at reception. Next, fill in the card. Finally, turn on the projector. Si repites el objeto, usa un pronombre en medio: pick it up, fill it in. Ojo: «en primer lugar» es First, no At first."
+      },
+      "patron": {
+        "texto": "Orden + acción + objeto + lugar:",
+        "formula": [
+          {
+            "texto": "First,",
+            "nota": "primer paso"
+          },
+          {
+            "texto": "pick up",
+            "nota": "acción en imperativo"
+          },
+          {
+            "texto": "the badge",
+            "nota": "el objeto"
+          },
+          {
+            "texto": "at reception.",
+            "nota": "el lugar"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "First (primero)"
+            },
+            {
+              "texto": "First, pick up the badge at reception."
+            }
+          ],
+          [
+            {
+              "texto": "Next (luego)"
+            },
+            {
+              "texto": "Next, fill in the visitor card."
+            }
+          ],
+          [
+            {
+              "texto": "Finally (por último)"
+            },
+            {
+              "texto": "Finally, turn on the projector."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "At first, pick up the badge at reception.",
+          "correcto": "First, pick up the badge at reception.",
+          "explicacion": "At first significa «al principio» (antes de un cambio); para el primer paso se usa First."
+        },
+        {
+          "incorrecto": "Finally, turn on.",
+          "correcto": "Finally, turn on the projector.",
+          "explicacion": "Cada instrucción necesita su objeto: ¿encender qué?"
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le explica a Tom cómo ayudar con la fiesta de la abuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What do I do first?",
+            "traduccion": "¿Qué hago primero?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "First, pick up the cake at the shop.",
+            "traduccion": "Primero, recoge el pastel en la tienda."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. And next?",
+            "traduccion": "Vale. ¿Y luego?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Next, fill in the form for the party room. Finally, turn on the lights.",
+            "traduccion": "Luego, completa el formulario de la sala de la fiesta. Por último, enciende las luces."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿qué debe hacer Tom en segundo lugar?",
+          "opciones": [
+            {
+              "es": "Completar el formulario de la sala."
+            },
+            {
+              "es": "Recoger el pastel."
+            },
+            {
+              "es": "Encender las luces."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «Next, fill in the form for the party room»: next marca el segundo paso."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "First, pick up the badge at reception.",
+          "es": "Primero, recoge la credencial en recepción.",
+          "nota": "First abre la secuencia; el imperativo no lleva sujeto."
+        },
+        {
+          "indice": 1,
+          "en": "Next, fill in the visitor card.",
+          "es": "Luego, completa la tarjeta de visitante.",
+          "nota": "Next marca el paso siguiente."
+        },
+        {
+          "indice": 2,
+          "en": "Finally, turn on the projector.",
+          "es": "Por último, enciende el proyector.",
+          "nota": "Finally cierra la secuencia."
+        },
+        {
+          "indice": 3,
+          "en": "Pick it up at reception.",
+          "es": "Recógela en recepción.",
+          "nota": "Si ya se nombró el objeto, pronombre en medio: pick it up."
+        },
+        {
+          "indice": 4,
+          "en": "Fill the card in, and then turn the projector on.",
+          "es": "Completa la tarjeta y luego enciende el proyector.",
+          "nota": "And then une dos pasos seguidos."
+        },
+        {
+          "indice": 5,
+          "en": "First, pick up the badge. Next, fill in the card. Finally, turn on the projector.",
+          "es": "Primero, recoge la credencial. Luego, completa la tarjeta. Por último, enciende el proyector.",
+          "nota": "Tres acciones completas en un orden útil."
+        }
+      ]
+    },
+    "en.n3.class-55": {
+      "explicacion": {
+        "titulo": "Resolver una pérdida en tres fases",
+        "texto": "Esta clase une todo el bloque para resolver una pérdida en tres fases. 1) Búsqueda: I looked for my bag near the seats. 2) Informe: I filled in the lost-item form (o I filled the form in). 3) Recogida: I will pick it up at the desk at three. Recuerda: look for lleva for antes del objeto; con pronombre, pick it up y fill it in; y el resultado te dice qué pasó (they found it). Cierra siempre con el lugar y la hora de la recogida."
+      },
+      "patron": {
+        "texto": "Fase de recogida: acción + pronombre + lugar + hora:",
+        "formula": [
+          {
+            "texto": "I will pick",
+            "nota": "acción futura"
+          },
+          {
+            "texto": "it up",
+            "nota": "pronombre entre pick y up"
+          },
+          {
+            "texto": "at the information desk",
+            "nota": "lugar exacto"
+          },
+          {
+            "texto": "at four.",
+            "nota": "hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Fase",
+          "Acción",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "búsqueda"
+            },
+            {
+              "texto": "look for"
+            },
+            {
+              "texto": "I looked for my bag near the seats."
+            }
+          ],
+          [
+            {
+              "texto": "informe"
+            },
+            {
+              "texto": "fill in"
+            },
+            {
+              "texto": "I filled in the lost-item form."
+            }
+          ],
+          [
+            {
+              "texto": "recogida"
+            },
+            {
+              "texto": "pick up"
+            },
+            {
+              "texto": "I will pick it up at four."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I looked my bag under the seats.",
+          "correcto": "I looked for my bag under the seats.",
+          "explicacion": "Sin for, look no significa «buscar»."
+        },
+        {
+          "incorrecto": "I will pick up it at the desk at three.",
+          "correcto": "I will pick it up at the desk at three.",
+          "explicacion": "El pronombre it va entre pick y up."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le cuenta a Ana que perdió su mochila en la estación de autobuses.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I lost my backpack at the bus station. I looked for it under the seats.",
+            "traduccion": "Perdí mi mochila en la estación de autobuses. La busqué debajo de los asientos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Did you fill in the lost-item form?",
+            "traduccion": "¿Completaste el formulario de objetos perdidos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, with my phone number. They found it!",
+            "traduccion": "Sí, con mi número de teléfono. ¡La encontraron!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good! When can you pick it up?",
+            "traduccion": "¡Qué bien! ¿Cuándo puedes recogerla?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "At four, at the information desk.",
+            "traduccion": "A las cuatro, en el mostrador de información."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde recogerá Carlos la mochila?",
+          "opciones": [
+            {
+              "es": "En el mostrador de información."
+            },
+            {
+              "es": "Debajo de los asientos."
+            },
+            {
+              "es": "En su casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «At four, at the information desk»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Look for the lost suitcase near the airport seats.",
+          "es": "Busca la maleta perdida cerca de los asientos del aeropuerto.",
+          "nota": "Fase 1: la búsqueda empieza con look for."
+        },
+        {
+          "indice": 1,
+          "en": "Fill the lost-item form in with code A18.",
+          "es": "Completa el formulario de objetos perdidos con el código A18.",
+          "nota": "Fase 2: el objeto nominal puede ir en medio de fill in."
+        },
+        {
+          "indice": 2,
+          "en": "The clerk found the suitcase at Desk Seven.",
+          "es": "El empleado encontró la maleta en el mostrador siete.",
+          "nota": "El resultado cierra la búsqueda."
+        },
+        {
+          "indice": 3,
+          "en": "Pick it up at Desk Seven at three.",
+          "es": "Recógela en el mostrador siete a las tres.",
+          "nota": "Fase 3: pronombre en medio, lugar y hora exactos."
+        },
+        {
+          "indice": 4,
+          "en": "I will pick it up at three and show my passport.",
+          "es": "La recogeré a las tres y mostraré mi pasaporte.",
+          "nota": "Confirma cuándo y cómo recoges el objeto."
+        },
+        {
+          "indice": 5,
+          "en": "I looked for my suitcase, filled in the form, and I will pick it up at three.",
+          "es": "Busqué mi maleta, completé el formulario y la recogeré a las tres.",
+          "nota": "Las tres fases en una sola frase."
+        }
+      ]
+    }
+  }
+}

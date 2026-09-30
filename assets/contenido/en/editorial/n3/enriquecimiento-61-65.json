@@ -1,0 +1,836 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1 tras correcciones. Estado de tareas, preguntas indirectas, notas de reunión, actualización y renegociación coherentes con los ejercicios; ejemplos de metalenguaje sustituidos en las 5 clases.",
+      "P1 corregido en class-62: la opción 'En la escuela de Tom' podía considerarse también correcta (el aula está en su escuela nueva) y 'A las nueve' no era un lugar; distractores → 'Enfrente de la biblioteca' / 'Al lado del comedor'.",
+      "P1 corregido en class-63: el error 1 decía 'will (o el verbo con -s)', lo que sugería 'Mia tests the form by Friday' para un compromiso futuro; se quita el paréntesis.",
+      "P2 corregido en class-63: 'by + día' se traducía 'antes del …', en contradicción con la propia explicación ('como muy tarde'); traducciones, opciones del ítem y ejemplos → 'para el …'."
+    ]
+  },
+  "classes": {
+    "en.n3.class-61": {
+      "explicacion": {
+        "titulo": "Estado de una tarea: prioridad, progreso, bloqueo",
+        "texto": "Para informar del estado de una tarea hay tres categorías. Prioridad (priority): lo urgente, lo que va primero (The slides are due today). Progreso (progress): lo que avanza (The draft is moving; The test is almost ready). Bloqueo (blocker): lo que está parado y no puede seguir (The login is blocked; We have no access). La frase típica es tarea + be + estado: The login is blocked. En español basta «está bloqueado», pero en inglés el sujeto es obligatorio: It is blocked."
+      },
+      "patron": {
+        "texto": "Tarea + be + estado:",
+        "formula": [
+          {
+            "texto": "The login",
+            "nota": "la tarea (sujeto obligatorio)"
+          },
+          {
+            "texto": "is blocked",
+            "nota": "be + estado: bloqueo"
+          },
+          {
+            "texto": "today.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Estado",
+          "Señales",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "prioridad"
+            },
+            {
+              "texto": "due today, urgent"
+            },
+            {
+              "texto": "The slides are due today."
+            }
+          ],
+          [
+            {
+              "texto": "progreso"
+            },
+            {
+              "texto": "moving, almost ready"
+            },
+            {
+              "texto": "The draft is almost ready."
+            }
+          ],
+          [
+            {
+              "texto": "bloqueo"
+            },
+            {
+              "texto": "blocked, no access, waiting"
+            },
+            {
+              "texto": "The login is blocked."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The login is block.",
+          "correcto": "The login is blocked.",
+          "explicacion": "El estado se dice con el participio: blocked, con -ed."
+        },
+        {
+          "incorrecto": "The survey? Is blocked.",
+          "correcto": "The survey? It is blocked.",
+          "explicacion": "En inglés el sujeto no se omite: «está bloqueada» → it is blocked."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a Leo cómo va su trabajo de clase.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "How is our project?",
+            "traduccion": "¿Cómo va nuestro proyecto?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The draft is almost ready.",
+            "traduccion": "El borrador está casi listo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. What is the priority?",
+            "traduccion": "Bien. ¿Cuál es la prioridad?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The slides. They are due today.",
+            "traduccion": "Las diapositivas. Hay que entregarlas hoy."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the survey?",
+            "traduccion": "¿Y la encuesta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is blocked. We have no access to the computer.",
+            "traduccion": "Está bloqueada. No tenemos acceso al ordenador."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tarea está bloqueada?",
+          "opciones": [
+            {
+              "es": "La encuesta."
+            },
+            {
+              "es": "Las diapositivas."
+            },
+            {
+              "es": "El borrador."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice sobre la encuesta: «It is blocked. We have no access to the computer»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The slides are due today, so they are a priority.",
+          "es": "Las diapositivas hay que entregarlas hoy, así que son prioridad.",
+          "nota": "Prioridad: lo urgente va primero."
+        },
+        {
+          "indice": 1,
+          "en": "The draft is moving; it is almost ready.",
+          "es": "El borrador avanza; está casi listo.",
+          "nota": "Progreso: el trabajo avanza."
+        },
+        {
+          "indice": 2,
+          "en": "The login is blocked, so the test cannot continue.",
+          "es": "El inicio de sesión está bloqueado, así que la prueba no puede seguir.",
+          "nota": "Bloqueo: algo impide continuar."
+        },
+        {
+          "indice": 3,
+          "en": "This task is urgent, but that task is blocked.",
+          "es": "Esta tarea es urgente, pero esa está bloqueada.",
+          "nota": "Una tarea puede ser urgente o estar bloqueada."
+        },
+        {
+          "indice": 4,
+          "en": "Update: the report is ready, but we have no access to the data.",
+          "es": "Actualización: el informe está listo, pero no tenemos acceso a los datos.",
+          "nota": "Una actualización nombra el estado actual de cada tarea."
+        },
+        {
+          "indice": 5,
+          "en": "The slides are a priority, the draft is moving, and the login is blocked.",
+          "es": "Las diapositivas son prioridad, el borrador avanza y el inicio de sesión está bloqueado.",
+          "nota": "Las tres categorías en una sola actualización."
+        }
+      ]
+    },
+    "en.n3.class-62": {
+      "explicacion": {
+        "titulo": "Preguntas corteses: Could you tell me…?",
+        "texto": "Para pedir un dato con cortesía, empieza con Could you tell me… y añade la palabra interrogativa (when, where, who, why, how long). Después va el orden de una afirmación: sujeto + verbo, sin do/does y sin invertir is. When does the review end? → Could you tell me when the review ends? Where is the file? → Could you tell me where the file is? Si who es el sujeto, el orden no cambia: Could you tell me who owns the task?"
+      },
+      "patron": {
+        "texto": "Apertura cortés + palabra interrogativa + orden afirmativo:",
+        "formula": [
+          {
+            "texto": "Could you tell me",
+            "nota": "apertura cortés"
+          },
+          {
+            "texto": "where",
+            "nota": "qué dato pides: un lugar"
+          },
+          {
+            "texto": "the file",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "is?",
+            "nota": "verbo al final, como en una afirmación"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta directa",
+          "Pregunta cortés"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "When does the review end?"
+            },
+            {
+              "texto": "Could you tell me when the review ends?"
+            }
+          ],
+          [
+            {
+              "texto": "Where is the file?"
+            },
+            {
+              "texto": "Could you tell me where the file is?"
+            }
+          ],
+          [
+            {
+              "texto": "Who owns the task?"
+            },
+            {
+              "texto": "Could you tell me who owns the task?"
+            }
+          ],
+          [
+            {
+              "texto": "How long is the meeting?"
+            },
+            {
+              "texto": "Could you tell me how long the meeting is?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could you tell me where is the file?",
+          "correcto": "Could you tell me where the file is?",
+          "explicacion": "Tras Could you tell me va el orden afirmativo: sujeto + is."
+        },
+        {
+          "incorrecto": "Could you tell me when does the class start?",
+          "correcto": "Could you tell me when the class starts?",
+          "explicacion": "Se quita does y el verbo lleva -s, como en una afirmación."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom llega a una escuela nueva y habla con Ana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Excuse me. Could you tell me when the class starts?",
+            "traduccion": "Perdona. ¿Podrías decirme cuándo empieza la clase?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It starts at nine.",
+            "traduccion": "Empieza a las nueve."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And could you tell me where the room is?",
+            "traduccion": "¿Y podrías decirme dónde está el aula?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Sure. It is next to the library.",
+            "traduccion": "Claro. Está al lado de la biblioteca."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está el aula?",
+          "opciones": [
+            {
+              "es": "Al lado de la biblioteca."
+            },
+            {
+              "es": "Enfrente de la biblioteca."
+            },
+            {
+              "es": "Al lado del comedor."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana responde a la pregunta de Tom: «It is next to the library»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Could you tell me when the review ends?",
+          "es": "¿Podrías decirme cuándo termina la revisión?",
+          "nota": "Could you tell me abre una pregunta cortés."
+        },
+        {
+          "indice": 1,
+          "en": "Could you tell me when the call starts?",
+          "es": "¿Podrías decirme cuándo empieza la llamada?",
+          "nota": "When pide una hora o una fecha."
+        },
+        {
+          "indice": 2,
+          "en": "Could you tell me where the file is?",
+          "es": "¿Podrías decirme dónde está el archivo?",
+          "nota": "Orden afirmativo: the file is, no is the file."
+        },
+        {
+          "indice": 3,
+          "en": "Could you tell me who owns the task?",
+          "es": "¿Podrías decirme quién es responsable de la tarea?",
+          "nota": "Who es el sujeto: el orden no cambia."
+        },
+        {
+          "indice": 4,
+          "en": "Could you tell me why the build is blocked?",
+          "es": "¿Podrías decirme por qué está bloqueada la compilación?",
+          "nota": "Why pide una razón."
+        },
+        {
+          "indice": 5,
+          "en": "Could you tell me how long the meeting is?",
+          "es": "¿Podrías decirme cuánto dura la reunión?",
+          "nota": "How long pide una duración."
+        }
+      ]
+    },
+    "en.n3.class-63": {
+      "explicacion": {
+        "titulo": "Notas de reunión: tarea, responsable y plazo",
+        "texto": "En unas notas de reunión, cada acción tiene tres datos: la tarea (qué: test the form), el responsable u owner (quién: Mia) y el plazo o deadline (cuándo: by Friday). La frase típica es responsable + will + tarea + by/on + día. By Friday significa «como muy tarde el viernes»; on Friday, «el viernes». No uses until para un plazo: until indica algo que dura hasta ese momento. Para completar la tabla, busca una persona, un verbo con su objeto y un día."
+      },
+      "patron": {
+        "texto": "Responsable + will + tarea + plazo:",
+        "formula": [
+          {
+            "texto": "Mia",
+            "nota": "responsable (owner)"
+          },
+          {
+            "texto": "will test the form",
+            "nota": "la tarea"
+          },
+          {
+            "texto": "by Friday.",
+            "nota": "plazo: como muy tarde el viernes"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tarea",
+          "Responsable",
+          "Plazo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "test the form"
+            },
+            {
+              "texto": "Mia"
+            },
+            {
+              "texto": "by Friday"
+            }
+          ],
+          [
+            {
+              "texto": "send the invite"
+            },
+            {
+              "texto": "Leo"
+            },
+            {
+              "texto": "by Thursday"
+            }
+          ],
+          [
+            {
+              "texto": "check the figures"
+            },
+            {
+              "texto": "Noor"
+            },
+            {
+              "texto": "by Monday"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia test the form by Friday.",
+          "correcto": "Mia will test the form by Friday.",
+          "explicacion": "Una acción futura acordada en la reunión necesita will: Mia will test."
+        },
+        {
+          "incorrecto": "Leo will send the invite until Thursday.",
+          "correcto": "Leo will send the invite by Thursday.",
+          "explicacion": "«Hasta el jueves» como plazo es by Thursday; until indica duración."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana, Leo y Mia preparan una fiesta de cumpleaños.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The party is on Saturday. Who will send the invites?",
+            "traduccion": "La fiesta es el sábado. ¿Quién enviará las invitaciones?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I will send them by Thursday.",
+            "traduccion": "Yo las enviaré para el jueves."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Mia, can you check the food list?",
+            "traduccion": "Bien. Mia, ¿puedes revisar la lista de comida?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, I will check it by Friday.",
+            "traduccion": "Sí, la revisaré para el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tarea tiene Mia y cuál es su plazo?",
+          "opciones": [
+            {
+              "es": "Revisar la lista de comida para el viernes."
+            },
+            {
+              "es": "Enviar las invitaciones para el jueves."
+            },
+            {
+              "es": "Revisar la lista de comida el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I will check it by Friday»: it es la lista de comida."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Mia will test the form by Friday.",
+          "es": "Mia probará el formulario para el viernes.",
+          "nota": "Responsable + will + tarea + plazo."
+        },
+        {
+          "indice": 1,
+          "en": "Leo will send the invite by Thursday.",
+          "es": "Leo enviará la invitación para el jueves.",
+          "nota": "By Thursday: como muy tarde el jueves."
+        },
+        {
+          "indice": 2,
+          "en": "Noor will check the figures by Monday.",
+          "es": "Noor revisará las cifras para el lunes.",
+          "nota": "Un nombre de persona indica el responsable."
+        },
+        {
+          "indice": 3,
+          "en": "The owner is Mia, and the deadline is Friday.",
+          "es": "La responsable es Mia y el plazo es el viernes.",
+          "nota": "Owner = quién; deadline = cuándo."
+        },
+        {
+          "indice": 4,
+          "en": "Iris will prepare the room by Wednesday.",
+          "es": "Iris preparará la sala para el miércoles.",
+          "nota": "Cada acción tiene sus tres datos."
+        },
+        {
+          "indice": 5,
+          "en": "Jon will upload the notes by Friday, and Sara will check the budget by Monday.",
+          "es": "Jon subirá las notas para el viernes y Sara revisará el presupuesto para el lunes.",
+          "nota": "Dos acciones: dos responsables y dos plazos."
+        }
+      ]
+    },
+    "en.n3.class-64": {
+      "explicacion": {
+        "titulo": "Una actualización útil en cuatro partes",
+        "texto": "Una actualización útil tiene cuatro partes, cada una con su tiempo verbal. 1) Lo terminado, en pasado o present perfect: I finished the draft / I have finished the outline. 2) Lo actual, en presente continuo: I am preparing the slides. 3) El bloqueo y su causa: The figures are blocked because the file is missing. 4) La petición de ayuda: Could you send the figures? En español «estoy preparando» lleva estar; en inglés no olvides am/is/are."
+      },
+      "patron": {
+        "texto": "Terminado + actual + bloqueo + petición:",
+        "formula": [
+          {
+            "texto": "I finished the draft,",
+            "nota": "terminado: pasado"
+          },
+          {
+            "texto": "I am preparing the slides,",
+            "nota": "actual: am + -ing"
+          },
+          {
+            "texto": "but the figures are blocked.",
+            "nota": "bloqueo"
+          },
+          {
+            "texto": "Could you send them?",
+            "nota": "petición de ayuda"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "terminado"
+            },
+            {
+              "texto": "pasado / have + participio"
+            },
+            {
+              "texto": "I finished the draft."
+            }
+          ],
+          [
+            {
+              "texto": "actual"
+            },
+            {
+              "texto": "am/is/are + -ing"
+            },
+            {
+              "texto": "I am preparing the slides."
+            }
+          ],
+          [
+            {
+              "texto": "bloqueo"
+            },
+            {
+              "texto": "is/are blocked because…"
+            },
+            {
+              "texto": "The figures are blocked."
+            }
+          ],
+          [
+            {
+              "texto": "petición"
+            },
+            {
+              "texto": "Could you…?"
+            },
+            {
+              "texto": "Could you send the figures?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I finish the draft yesterday.",
+          "correcto": "I finished the draft yesterday.",
+          "explicacion": "Con yesterday, el trabajo terminado va en pasado: finished."
+        },
+        {
+          "incorrecto": "Now I preparing the slides.",
+          "correcto": "Now I am preparing the slides.",
+          "explicacion": "El presente continuo necesita am/is/are antes del -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le pregunta a Carlos por su parte del trabajo de clase.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How is your part of the project?",
+            "traduccion": "¿Cómo va tu parte del proyecto?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I finished the draft yesterday. Now I am preparing the slides.",
+            "traduccion": "Terminé el borrador ayer. Ahora estoy preparando las diapositivas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good! Is there a problem?",
+            "traduccion": "¡Bien! ¿Hay algún problema?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The photos are blocked because the file is missing. Could you send it?",
+            "traduccion": "Las fotos están bloqueadas porque falta el archivo. ¿Me lo podrías enviar?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pide Carlos a Sara?",
+          "opciones": [
+            {
+              "es": "Que le envíe el archivo."
+            },
+            {
+              "es": "Que prepare las diapositivas."
+            },
+            {
+              "es": "Que termine el borrador."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos pregunta «Could you send it?»: it es el archivo que falta."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I finished the draft yesterday.",
+          "es": "Terminé el borrador ayer.",
+          "nota": "Parte 1: lo terminado, en pasado."
+        },
+        {
+          "indice": 1,
+          "en": "I am preparing the slides now.",
+          "es": "Ahora estoy preparando las diapositivas.",
+          "nota": "Parte 2: lo actual, con am + -ing."
+        },
+        {
+          "indice": 2,
+          "en": "The figures are blocked because the file is missing.",
+          "es": "Las cifras están bloqueadas porque falta el archivo.",
+          "nota": "Parte 3: el bloqueo y su causa."
+        },
+        {
+          "indice": 3,
+          "en": "Could you send the figures before the review?",
+          "es": "¿Podrías enviar las cifras antes de la revisión?",
+          "nota": "Parte 4: una petición clara."
+        },
+        {
+          "indice": 4,
+          "en": "I have finished the outline, and I am checking the data.",
+          "es": "He terminado el esquema y estoy revisando los datos.",
+          "nota": "Have finished también informa de algo terminado."
+        },
+        {
+          "indice": 5,
+          "en": "I finished the report, I am preparing the slides, but the figures are blocked. Could you help?",
+          "es": "Terminé el informe, estoy preparando las diapositivas, pero las cifras están bloqueadas. ¿Me podrías ayudar?",
+          "nota": "Las cuatro partes en una actualización."
+        }
+      ]
+    },
+    "en.n3.class-65": {
+      "explicacion": {
+        "titulo": "Renegociar la carga de trabajo",
+        "texto": "Para renegociar la carga, junta todo el bloque. 1) Di el estado: qué es prioridad y por qué (The report is urgent because the client is waiting), qué avanza y qué está bloqueado. 2) Pregunta con cortesía: Could you tell me when the data will be ready? 3) Reparte con responsables: Mia can finish the report, and Leo can check the data. 4) Pide un nuevo plazo: Could we move the deadline to Monday? Al final, confirma quién hace qué y cuándo."
+      },
+      "patron": {
+        "texto": "Petición cortés de un nuevo plazo:",
+        "formula": [
+          {
+            "texto": "Could we",
+            "nota": "propuesta cortés"
+          },
+          {
+            "texto": "move the deadline",
+            "nota": "la acción: cambiar el plazo"
+          },
+          {
+            "texto": "to Monday?",
+            "nota": "el nuevo día (to, no for)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "estado"
+            },
+            {
+              "texto": "The report is urgent, but the data is blocked."
+            }
+          ],
+          [
+            {
+              "texto": "pregunta"
+            },
+            {
+              "texto": "Could you tell me when the data will be ready?"
+            }
+          ],
+          [
+            {
+              "texto": "reparto"
+            },
+            {
+              "texto": "Mia can finish the report, and Leo can check the data."
+            }
+          ],
+          [
+            {
+              "texto": "nuevo plazo"
+            },
+            {
+              "texto": "Could we move the deadline to Monday?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could you tell me when will the data be ready?",
+          "correcto": "Could you tell me when the data will be ready?",
+          "explicacion": "En la pregunta cortés va el orden afirmativo: the data will be."
+        },
+        {
+          "incorrecto": "Could we move the deadline for Monday?",
+          "correcto": "Could we move the deadline to Monday?",
+          "explicacion": "Mover algo a otro día es move … to, no for."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan con Ana sobre su trabajo de ciencias.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The report is a priority, but the data is blocked.",
+            "traduccion": "El informe es prioridad, pero los datos están bloqueados."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Friday is impossible. Could we move the deadline to Monday?",
+            "traduccion": "El viernes es imposible. ¿Podríamos pasar el plazo al lunes?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Could you tell me who will finish the report?",
+            "traduccion": "¿Podrías decirme quién terminará el informe?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I will finish the report, and Leo will check the data.",
+            "traduccion": "Yo terminaré el informe y Leo revisará los datos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK. Monday is the new deadline.",
+            "traduccion": "De acuerdo. El lunes es el nuevo plazo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hará Leo?",
+          "opciones": [
+            {
+              "es": "Revisar los datos."
+            },
+            {
+              "es": "Terminar el informe."
+            },
+            {
+              "es": "Cambiar el plazo al viernes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «Leo will check the data»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The report is urgent because the client is waiting.",
+          "es": "El informe es urgente porque el cliente está esperando.",
+          "nota": "Estado: la prioridad con su razón."
+        },
+        {
+          "indice": 1,
+          "en": "The slides are moving, but the data is blocked.",
+          "es": "Las diapositivas avanzan, pero los datos están bloqueados.",
+          "nota": "Estado: progreso y bloqueo."
+        },
+        {
+          "indice": 2,
+          "en": "Could you tell me when the data will be ready?",
+          "es": "¿Podrías decirme cuándo estarán listos los datos?",
+          "nota": "Pregunta cortés con orden afirmativo."
+        },
+        {
+          "indice": 3,
+          "en": "Mia can finish the report, and Leo can check the data.",
+          "es": "Mia puede terminar el informe y Leo puede revisar los datos.",
+          "nota": "Reparto: cada tarea con su responsable."
+        },
+        {
+          "indice": 4,
+          "en": "Could we move the deadline to Monday?",
+          "es": "¿Podríamos pasar el plazo al lunes?",
+          "nota": "Petición de un nuevo plazo: move … to."
+        },
+        {
+          "indice": 5,
+          "en": "Friday is impossible, so Monday is the new deadline.",
+          "es": "El viernes es imposible, así que el lunes es el nuevo plazo.",
+          "nota": "Cierre: se confirma el plazo."
+        }
+      ]
+    }
+  }
+}

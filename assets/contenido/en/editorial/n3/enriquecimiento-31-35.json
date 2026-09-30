@@ -1,0 +1,739 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin cambios. Explicaciones, patrones, errores (enjoy to read, finish to clean, want learn, wants to visits, need sleeping, because is good…) e ítems correctos; cada ítem tiene una sola respuesta deducible del diálogo.",
+      "Aceptado: class-31 ejemplo 3 y fila de tabla «Keep practising every morning.» es un imperativo real, no metalenguaje.",
+      "Aceptado (P2): class-31 «every evening I keep practising the piano» es algo forzado como hábito, pero correcto."
+    ]
+  },
+  "classes": {
+    "en.n3.class-31": {
+      "explicacion": {
+        "titulo": "Enjoy, avoid, finish, keep + -ing",
+        "texto": "Algunos verbos van seguidos de otra acción en -ing, nunca de to ni del verbo solo: enjoy (disfrutar), avoid (evitar), finish (terminar de) y keep (seguir). I enjoy reading (disfruto leer). En español usamos el infinitivo («disfruto leer», «termino de limpiar»), por eso es fácil decir enjoy to read o finish to clean; en inglés es enjoy reading, finish cleaning. Con he/she/it solo el primer verbo lleva -s: Mina keeps practising. Aquí keep significa «seguir», no «guardar»."
+      },
+      "patron": {
+        "texto": "Sujeto + enjoy/avoid/finish/keep + verbo en -ing:",
+        "formula": [
+          {
+            "texto": "We",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "avoid",
+            "nota": "verbo de preferencia o hábito"
+          },
+          {
+            "texto": "driving",
+            "nota": "actividad en -ing (no to drive)"
+          },
+          {
+            "texto": "after dark.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "enjoy"
+            },
+            {
+              "texto": "disfrutar"
+            },
+            {
+              "texto": "I enjoy reading on the bus."
+            }
+          ],
+          [
+            {
+              "texto": "avoid"
+            },
+            {
+              "texto": "evitar"
+            },
+            {
+              "texto": "We avoid driving after dark."
+            }
+          ],
+          [
+            {
+              "texto": "finish"
+            },
+            {
+              "texto": "terminar de"
+            },
+            {
+              "texto": "They finish cleaning before lunch."
+            }
+          ],
+          [
+            {
+              "texto": "keep"
+            },
+            {
+              "texto": "seguir"
+            },
+            {
+              "texto": "Keep practising every morning."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I enjoy to read on the bus.",
+          "correcto": "I enjoy reading on the bus.",
+          "explicacion": "Es un calco de «disfruto leer». Después de enjoy va la actividad en -ing, no to + verbo."
+        },
+        {
+          "incorrecto": "I finish to clean at six.",
+          "correcto": "I finish cleaning at six.",
+          "explicacion": "«Terminar de limpiar» es finish cleaning: sin to y sin «de», con el verbo en -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia qué hace después de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, what do you enjoy doing after school?",
+            "traduccion": "Mia, ¿qué te gusta hacer después de la escuela?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I enjoy reading in the park.",
+            "traduccion": "Disfruto leer en el parque."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Do you read on the bus too?",
+            "traduccion": "¿También lees en el bus?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, I avoid reading on the bus. It is too noisy.",
+            "traduccion": "No, evito leer en el bus. Hay demasiado ruido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And every evening I keep practising the piano.",
+            "traduccion": "Y cada tarde sigo practicando el piano."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué evita hacer Mia?",
+          "opciones": [
+            {
+              "es": "Leer en el bus."
+            },
+            {
+              "es": "Leer en el parque."
+            },
+            {
+              "es": "Practicar el piano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I avoid reading on the bus». Avoid + -ing indica lo que evita."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "She enjoys walking home after school.",
+          "es": "Le gusta volver a casa caminando después de la escuela.",
+          "nota": "Con she, enjoys lleva -s; walking sigue en -ing."
+        }
+      ]
+    },
+    "en.n3.class-32": {
+      "explicacion": {
+        "titulo": "Want, need, decide, hope + to + verbo",
+        "texto": "Para hablar de planes, deseos y necesidades se usan want (querer), need (necesitar), decide (decidir) y hope (esperar), seguidos de to + verbo base: I want to learn, We need to leave. No uses -ing (want learning) ni quites el to (want learn). En español basta el infinitivo («quiero aprender»); en inglés el to es obligatorio. Con he/she/it solo cambia el primer verbo: She wants to change. El verbo después de to no cambia nunca: she hopes to visit, no to visits."
+      },
+      "patron": {
+        "texto": "Sujeto + want/need/decide/hope + to + verbo base:",
+        "formula": [
+          {
+            "texto": "We",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "decided",
+            "nota": "verbo de intención (aquí en pasado)"
+          },
+          {
+            "texto": "to join",
+            "nota": "to + verbo base"
+          },
+          {
+            "texto": "the course.",
+            "nota": "el resto del plan"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "want"
+            },
+            {
+              "texto": "querer"
+            },
+            {
+              "texto": "I want to learn a new skill."
+            }
+          ],
+          [
+            {
+              "texto": "need"
+            },
+            {
+              "texto": "necesitar"
+            },
+            {
+              "texto": "We need to leave before dark."
+            }
+          ],
+          [
+            {
+              "texto": "decide"
+            },
+            {
+              "texto": "decidir"
+            },
+            {
+              "texto": "She decided to call her adviser."
+            }
+          ],
+          [
+            {
+              "texto": "hope"
+            },
+            {
+              "texto": "esperar"
+            },
+            {
+              "texto": "They hope to find a quieter flat."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I want learn a new skill.",
+          "correcto": "I want to learn a new skill.",
+          "explicacion": "Es un calco de «quiero aprender». En inglés, después de want hace falta to."
+        },
+        {
+          "incorrecto": "He wants to visits the museum.",
+          "correcto": "He wants to visit the museum.",
+          "explicacion": "La -s de he solo va en el primer verbo (wants). Después de to, el verbo queda en forma base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo hablan de sus planes para el fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, what do you want to do on Saturday?",
+            "traduccion": "Leo, ¿qué quieres hacer el sábado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I want to visit the museum with my brother.",
+            "traduccion": "Quiero visitar el museo con mi hermano."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Do you need to buy tickets?",
+            "traduccion": "¿Necesitan comprar entradas?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, we need to buy them on Friday.",
+            "traduccion": "Sí, necesitamos comprarlas el viernes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Nice! I hope to go with you.",
+            "traduccion": "¡Qué bien! Espero ir con ustedes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo necesitan comprar las entradas?",
+          "opciones": [
+            {
+              "es": "El viernes."
+            },
+            {
+              "es": "El sábado."
+            },
+            {
+              "es": "Hoy."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «we need to buy them on Friday». Need + to + verbo expresa la necesidad."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "She needs to rest before the game.",
+          "es": "Ella necesita descansar antes del partido.",
+          "nota": "Needs lleva -s; después de to, rest queda igual."
+        }
+      ]
+    },
+    "en.n3.class-33": {
+      "explicacion": {
+        "titulo": "¿Gusto o plan? -ing frente a to",
+        "texto": "Esta clase mezcla las dos familias de verbos. Enjoy, avoid, finish y keep + -ing hablan de gustos y hábitos: lo que haces (o evitas) normalmente. Want, need, decide y hope + to + verbo hablan de planes, necesidades y metas: lo que quieres o tienes que hacer. Mira el primer verbo: decide la forma del segundo y también el significado. Mara enjoys cycling (le gusta), but she wants to walk tomorrow (es su plan)."
+      },
+      "patron": {
+        "texto": "Gusto (-ing) + but + plan (to + verbo):",
+        "formula": [
+          {
+            "texto": "Mara enjoys cycling,",
+            "nota": "gusto: enjoy + -ing"
+          },
+          {
+            "texto": "but",
+            "nota": "contraste"
+          },
+          {
+            "texto": "she wants to walk tomorrow.",
+            "nota": "plan: want + to + verbo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Verbos",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "gusto o hábito"
+            },
+            {
+              "texto": "enjoy, avoid, finish, keep + -ing"
+            },
+            {
+              "texto": "I enjoy walking after work."
+            }
+          ],
+          [
+            {
+              "texto": "plan o necesidad"
+            },
+            {
+              "texto": "want, need, decide, hope + to"
+            },
+            {
+              "texto": "I need to sleep earlier."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I need sleeping earlier.",
+          "correcto": "I need to sleep earlier.",
+          "explicacion": "Need expresa una necesidad o un plan: lleva to + verbo, no -ing."
+        },
+        {
+          "incorrecto": "I avoid to eat late.",
+          "correcto": "I avoid eating late.",
+          "explicacion": "Avoid habla de un hábito: lleva el verbo en -ing, no to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos, el papá de Ana, le pregunta por su semana.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Ana, what do you enjoy doing on Saturdays?",
+            "traduccion": "Ana, ¿qué te gusta hacer los sábados?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I enjoy swimming with Sara.",
+            "traduccion": "Disfruto nadar con Sara."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And this week?",
+            "traduccion": "¿Y esta semana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I have a test, so I need to study.",
+            "traduccion": "Tengo un examen, así que necesito estudiar."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I also want to sleep earlier.",
+            "traduccion": "También quiero dormir más temprano."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es un plan de Ana para esta semana, no un gusto?",
+          "opciones": [
+            {
+              "es": "Dormir más temprano."
+            },
+            {
+              "es": "Nadar con Sara."
+            },
+            {
+              "es": "Leer en la cama."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «I also want to sleep earlier». Want + to expresa un plan; enjoy swimming es un gusto."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Avoid eating late if you want to sleep better.",
+          "es": "Evita comer tarde si quieres dormir mejor.",
+          "nota": "Avoid + -ing (hábito) y want + to (meta) en la misma frase."
+        },
+        {
+          "indice": 3,
+          "en": "Tom enjoys playing tennis, but he needs to study today.",
+          "es": "A Tom le gusta jugar al tenis, pero hoy necesita estudiar.",
+          "nota": "Enjoys playing es un gusto; needs to study es una necesidad."
+        },
+        {
+          "indice": 4,
+          "en": "I avoid eating sugar, but I want to try your cake.",
+          "es": "Evito comer azúcar, pero quiero probar tu pastel.",
+          "nota": "El primer verbo decide: avoid → -ing, want → to."
+        }
+      ]
+    },
+    "en.n3.class-34": {
+      "explicacion": {
+        "titulo": "Explicar una rutina con because",
+        "texto": "Para explicar una rutina combina lo aprendido: un gusto o hábito con -ing (I enjoy walking, I avoid using screens), una meta con to (I hope to cook more) y una razón con because (porque). Después de because va una frase completa con sujeto y verbo: because it helps my back, no because back. Como en inglés el sujeto es obligatorio, no digas because is good: di because it is good (porque es bueno)."
+      },
+      "patron": {
+        "texto": "Hábito + because + razón:",
+        "formula": [
+          {
+            "texto": "I avoid using screens late",
+            "nota": "hábito: avoid + -ing"
+          },
+          {
+            "texto": "because",
+            "nota": "porque"
+          },
+          {
+            "texto": "I want to sleep better.",
+            "nota": "razón: sujeto + verbo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "gusto o hábito"
+            },
+            {
+              "texto": "enjoy / avoid + -ing"
+            },
+            {
+              "texto": "I enjoy walking."
+            }
+          ],
+          [
+            {
+              "texto": "meta"
+            },
+            {
+              "texto": "hope / want + to"
+            },
+            {
+              "texto": "I hope to cook more at home."
+            }
+          ],
+          [
+            {
+              "texto": "razón"
+            },
+            {
+              "texto": "because + sujeto + verbo"
+            },
+            {
+              "texto": "because it gives me energy"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I enjoy walking because is good for me.",
+          "correcto": "I enjoy walking because it is good for me.",
+          "explicacion": "En inglés el sujeto es obligatorio: después de because hace falta it."
+        },
+        {
+          "incorrecto": "I hope cooking more at home.",
+          "correcto": "I hope to cook more at home.",
+          "explicacion": "Hope expresa una meta: lleva to + verbo, no -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Leo por qué va caminando a la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Leo, why do you walk to school?",
+            "traduccion": "Leo, ¿por qué vas caminando a la escuela?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I enjoy walking because it gives me energy.",
+            "traduccion": "Disfruto caminar porque me da energía."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Do you play games on your phone at night?",
+            "traduccion": "¿Juegas en el teléfono por la noche?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. I avoid using screens late because I want to sleep better.",
+            "traduccion": "No. Evito usar pantallas tarde porque quiero dormir mejor."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good idea!",
+            "traduccion": "¡Buena idea!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo evita usar pantallas tarde?",
+          "opciones": [
+            {
+              "es": "Porque quiere dormir mejor."
+            },
+            {
+              "es": "Porque le da energía."
+            },
+            {
+              "es": "Porque no tiene teléfono."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I avoid using screens late because I want to sleep better». Because introduce la razón."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "I enjoy stretching because it helps my back.",
+          "es": "Disfruto estirarme porque me ayuda con la espalda.",
+          "nota": "Because + sujeto + verbo (it helps) explica la razón."
+        },
+        {
+          "indice": 4,
+          "en": "I hope to exercise more because I want to feel active.",
+          "es": "Espero hacer más ejercicio porque quiero sentirme activo.",
+          "nota": "Meta con to + razón con because."
+        }
+      ]
+    },
+    "en.n3.class-35": {
+      "explicacion": {
+        "titulo": "Acordar una rutina: gustos, planes y razones",
+        "texto": "Esta clase de cierre une todo el bloque para acordar una rutina. Los gustos y hábitos van con enjoy, avoid o keep + -ing (We enjoy cooking). Las metas y necesidades van con want, need, decide o hope + to (We want to sleep better). Añade una razón con because y termina con acciones concretas: We will avoid eating late. Antes de decidir, revisa el primer verbo: él dice si el segundo va en -ing o con to."
+      },
+      "patron": {
+        "texto": "Gusto (-ing) + meta (to) + because + razón:",
+        "formula": [
+          {
+            "texto": "We enjoy cooking,",
+            "nota": "gusto: enjoy + -ing"
+          },
+          {
+            "texto": "and we want to eat earlier",
+            "nota": "meta: want + to"
+          },
+          {
+            "texto": "because",
+            "nota": "porque"
+          },
+          {
+            "texto": "we need to sleep better.",
+            "nota": "razón"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "gusto o hábito"
+            },
+            {
+              "texto": "enjoy / avoid / keep + -ing"
+            },
+            {
+              "texto": "We avoid eating late."
+            }
+          ],
+          [
+            {
+              "texto": "meta o necesidad"
+            },
+            {
+              "texto": "want / need / decide / hope + to"
+            },
+            {
+              "texto": "We hope to walk daily."
+            }
+          ],
+          [
+            {
+              "texto": "acción acordada"
+            },
+            {
+              "texto": "will + verbo"
+            },
+            {
+              "texto": "We will review the plan on Sunday."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We want sleeping better.",
+          "correcto": "We want to sleep better.",
+          "explicacion": "Want es de intención: lleva to + verbo, no -ing."
+        },
+        {
+          "incorrecto": "We will avoid to eat late.",
+          "correcto": "We will avoid eating late.",
+          "explicacion": "Aunque la frase esté en futuro, avoid sigue llevando el verbo en -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara, la mamá de Mia y Leo, quiere cambiar la rutina de la familia.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "We need to sleep better. What can we change?",
+            "traduccion": "Necesitamos dormir mejor. ¿Qué podemos cambiar?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We can avoid using phones after nine.",
+            "traduccion": "Podemos evitar usar el teléfono después de las nueve."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I enjoy cooking. I can cook dinner earlier.",
+            "traduccion": "Me gusta cocinar. Puedo preparar la cena más temprano."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Perfect! And I hope to walk with you after dinner.",
+            "traduccion": "¡Perfecto! Y espero caminar con ustedes después de la cena."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK. We will review the plan on Sunday.",
+            "traduccion": "De acuerdo. Revisaremos el plan el domingo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién va a preparar la cena más temprano?",
+          "opciones": [
+            {
+              "es": "Leo."
+            },
+            {
+              "es": "Mia."
+            },
+            {
+              "es": "Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I enjoy cooking. I can cook dinner earlier»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "We enjoy walking, and we want to walk more because it gives us energy.",
+          "es": "Disfrutamos caminar y queremos caminar más porque nos da energía.",
+          "nota": "Gusto con -ing, meta con to y razón con because."
+        },
+        {
+          "indice": 3,
+          "en": "We will avoid eating late, cook at home and walk after dinner.",
+          "es": "Evitaremos comer tarde, cocinaremos en casa y caminaremos después de la cena.",
+          "nota": "Tres acciones concretas hacen el plan realista."
+        },
+        {
+          "indice": 4,
+          "en": "We will review the plan on Sunday.",
+          "es": "Revisaremos el plan el domingo.",
+          "nota": "Will + verbo cierra el acuerdo con una fecha."
+        },
+        {
+          "indice": 5,
+          "en": "We enjoy cooking together because it gives us energy. We want to sleep better, so we will avoid using screens after nine. We also hope to walk after dinner. We will review these three actions on Sunday.",
+          "es": "Disfrutamos cocinar juntos porque nos da energía. Queremos dormir mejor, así que evitaremos usar pantallas después de las nueve. También esperamos caminar después de la cena. Revisaremos estas tres acciones el domingo.",
+          "nota": "Modelo completo: dos patrones -ing, dos con to, una razón y tres acciones."
+        }
+      ]
+    }
+  }
+}
