@@ -75,6 +75,11 @@ Campos comunes: `formato`, `consigna` (español, ≤ 90 caracteres, **única** e
 - No repitas en `relacionar` una respuesta ya usada en otro ítem de la misma sección.
 - Un `escuchar` no debe tener como respuesta la misma frase del audio copiada literal: pregunta por el sentido (quién, cuándo, por qué).
 
+- (Revisión del piloto) Las opciones de `escuchar` son **paráfrasis** del audio, no copias literales.
+- Ningún `texto` o `audio` de un ítem revela la respuesta de otro ítem de la clase.
+- Rúbricas de escritura flexibles: cada grupo de evidencias con variantes (cifras en número y letra, fechas en varios formatos, sinónimos) y respuestas aceptadas con esas variantes.
+- Tratamiento de «tú» en español neutro (no «vosotros»); fechas como «para el 14 de junio» cuando es «by».
+
 ## Reglas de calidad para el autor (el revisor las verifica)
 
 - Una sola respuesta defendible por ítem; distractores plausibles y claramente incorrectos.

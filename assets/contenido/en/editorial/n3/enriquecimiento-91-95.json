@@ -1,0 +1,672 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n3.class-91": {
+      "explicacion": {
+        "titulo": "Leer un encargo: obligaciones y límites",
+        "texto": "Un encargo (brief) es un texto corto con las reglas del proyecto. Busca cinco datos: goal (el objetivo), audience (para quién es), limit (dinero, días o reglas), role (quién hace qué) y evidence (la prueba que hay que entregar). Las obligaciones usan must + verbo: The team must send photos. Lo prohibido usa must not. Y can only marca un límite: Volunteers can only work on Saturdays. En español «deber» sirve para todo; en inglés cada expresión dice algo distinto."
+      },
+      "patron": {
+        "texto": "Quién + obligación + qué y cuándo:",
+        "formula": [
+          {
+            "texto": "The team",
+            "nota": "quién: el equipo o una persona"
+          },
+          {
+            "texto": "must send",
+            "nota": "must + verbo base: obligación del encargo"
+          },
+          {
+            "texto": "photos by 14 June.",
+            "nota": "qué entregar y hasta cuándo (by + fecha)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The team must to send photos.",
+          "correcto": "The team must send photos.",
+          "explicacion": "Después de must va el verbo base sin to, igual que con can o should, aunque en español digamos «tiene que enviar»."
+        },
+        {
+          "incorrecto": "The team no must spend more than £600.",
+          "correcto": "The team must not spend more than £600.",
+          "explicacion": "La negación va después de must: must not. No se pone no delante, como en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom leen el encargo del jardín de lectura de la biblioteca.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Look, the library has a new brief.",
+            "traduccion": "Mira, la biblioteca tiene un encargo nuevo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What is the goal?",
+            "traduccion": "¿Cuál es el objetivo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "We must make a quiet garden behind the library for families.",
+            "traduccion": "Debemos crear un jardín tranquilo detrás de la biblioteca para las familias."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "What is the limit?",
+            "traduccion": "¿Cuál es el límite?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The budget is £600, and we must finish by 14 June.",
+            "traduccion": "El presupuesto es de £600 y debemos terminar a más tardar el 14 de junio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué límites de dinero y de tiempo menciona Ana?",
+          "opciones": [
+            {
+              "es": "Que los voluntarios solo trabajen los sábados."
+            },
+            {
+              "es": "£600 de presupuesto y terminar el 14 de junio."
+            },
+            {
+              "es": "£60 de presupuesto y terminar el 14 de julio."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana dice: «The budget is £600, and we must finish by 14 June». Lo de los sábados no sale en el diálogo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dato del encargo",
+          "Cómo aparece"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Goal"
+            },
+            {
+              "texto": "The goal is to + verbo"
+            }
+          ],
+          [
+            {
+              "texto": "Audience"
+            },
+            {
+              "texto": "The audience is + personas"
+            }
+          ],
+          [
+            {
+              "texto": "Limit"
+            },
+            {
+              "texto": "must not + verbo / can only + verbo"
+            }
+          ],
+          [
+            {
+              "texto": "Role"
+            },
+            {
+              "texto": "Mia is responsible for + nombre"
+            }
+          ],
+          [
+            {
+              "texto": "Evidence"
+            },
+            {
+              "texto": "The team must send + prueba + by + fecha"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-92": {
+      "explicacion": {
+        "titulo": "Organizar una propuesta con conectores",
+        "texto": "Una propuesta clara tiene cuatro partes y cada una tiene su conector. 1) The problem is that… dice qué falla ahora. 2) For example… da una prueba, un dato real. 3) So we propose… presenta la solución que responde al problema. 4) As a result… + may dice lo que se espera; con may no prometes un resultado seguro. Para dar una razón dentro de la frase usa because. Ojo: en español «por eso» suena natural, pero en inglés se dice so, no for that."
+      },
+      "patron": {
+        "texto": "Problema + evidencia + solución + resultado:",
+        "formula": [
+          {
+            "texto": "The problem is that the space has no shade.",
+            "nota": "problema: The problem is that + oración"
+          },
+          {
+            "texto": "For example, families leave early.",
+            "nota": "evidencia: for example + dato real"
+          },
+          {
+            "texto": "So we propose a small garden.",
+            "nota": "solución: so we propose + la acción"
+          },
+          {
+            "texto": "As a result, more families may stay.",
+            "nota": "resultado: as a result + may"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Families leave early. For that, we propose a garden.",
+          "correcto": "Families leave early, so we propose a garden.",
+          "explicacion": "Calco de «por eso». Para unir problema y solución se usa so, no for that."
+        },
+        {
+          "incorrecto": "As a result, more families will stay.",
+          "correcto": "As a result, more families may stay.",
+          "explicacion": "Will promete un resultado seguro. En una propuesta se usa may: es lo que esperas, no una garantía."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a Mia el esquema de la propuesta para el jardín.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Do you have a plan for the proposal?",
+            "traduccion": "¿Tienes un plan para la propuesta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. The problem is that the space behind the library has no shade.",
+            "traduccion": "Sí. El problema es que el espacio detrás de la biblioteca no tiene sombra."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What is the evidence?",
+            "traduccion": "¿Cuál es la prueba?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "For example, families leave after ten minutes.",
+            "traduccion": "Por ejemplo, las familias se van a los diez minutos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. What is the solution?",
+            "traduccion": "Bien. ¿Cuál es la solución?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So we propose benches and trees. As a result, more families may stay.",
+            "traduccion": "Así que proponemos bancos y árboles. Como resultado, más familias pueden quedarse."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué resultado espera Leo?",
+          "opciones": [
+            {
+              "es": "Que la biblioteca cierre más tarde."
+            },
+            {
+              "es": "Que más familias se queden."
+            },
+            {
+              "es": "Que las familias se vayan antes."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Leo termina con «more families may stay»: espera que se queden más familias, sin asegurarlo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Conector",
+          "Sirve para"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Problema"
+            },
+            {
+              "texto": "The problem is that"
+            },
+            {
+              "texto": "decir qué falla"
+            }
+          ],
+          [
+            {
+              "texto": "Evidencia"
+            },
+            {
+              "texto": "For example / because"
+            },
+            {
+              "texto": "dar un dato o una razón"
+            }
+          ],
+          [
+            {
+              "texto": "Solución"
+            },
+            {
+              "texto": "So we propose"
+            },
+            {
+              "texto": "presentar la acción"
+            }
+          ],
+          [
+            {
+              "texto": "Resultado"
+            },
+            {
+              "texto": "As a result … may"
+            },
+            {
+              "texto": "decir lo esperado sin prometer"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-93": {
+      "explicacion": {
+        "titulo": "Posturas, puntos en común y condiciones",
+        "texto": "En una reunión cada persona tiene una postura: apoya (supports), está de acuerdo con condiciones (agrees, but only if…) o se opone (disagrees). Al escuchar, apunta tres cosas: qué quiere cada uno, qué tienen en común y qué condiciones ponen. Las condiciones usan only if, as long as («con tal de que») y unless («a menos que»), y siempre van con presente: I support it as long as it closes early. Ojo: en inglés es Carlos agrees, no «is agree»."
+      },
+      "patron": {
+        "texto": "Postura + condición:",
+        "formula": [
+          {
+            "texto": "Carlos supports the garden,",
+            "nota": "postura: supports (he/she lleva -s)"
+          },
+          {
+            "texto": "but only if",
+            "nota": "condición necesaria: only if"
+          },
+          {
+            "texto": "there is a safety plan.",
+            "nota": "la condición, en presente (no will)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Carlos is agree with the plan.",
+          "correcto": "Carlos agrees with the plan.",
+          "explicacion": "Calco de «está de acuerdo». Agree es un verbo: con he/she es agrees, sin is."
+        },
+        {
+          "incorrecto": "Tom will support it as long as it will close at six.",
+          "correcto": "Tom will support it as long as it closes at six.",
+          "explicacion": "Después de as long as, only if o unless se usa presente, no will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan de lo que dijeron tres vecinos en la reunión del jardín.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What did people say about the garden?",
+            "traduccion": "¿Qué dijo la gente sobre el jardín?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sara supports it because families need a quiet place.",
+            "traduccion": "Sara lo apoya porque las familias necesitan un lugar tranquilo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Carlos?",
+            "traduccion": "¿Y Carlos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He agrees, but only if there is a safety plan.",
+            "traduccion": "Está de acuerdo, pero solo si hay un plan de seguridad."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What about Tom?",
+            "traduccion": "¿Y Tom?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He disagrees because he worries about noise on Saturdays.",
+            "traduccion": "No está de acuerdo porque le preocupa el ruido los sábados."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué condición pone Carlos?",
+          "opciones": [
+            {
+              "es": "Que el jardín cierre a las seis."
+            },
+            {
+              "es": "Que haya menos ruido los sábados."
+            },
+            {
+              "es": "Que haya un plan de seguridad."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Mia cuenta: «He agrees, but only if there is a safety plan». El ruido es la preocupación de Tom."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal",
+          "Significa",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "as long as"
+            },
+            {
+              "texto": "con tal de que"
+            },
+            {
+              "texto": "…as long as it closes at six."
+            }
+          ],
+          [
+            {
+              "texto": "only if"
+            },
+            {
+              "texto": "solo si"
+            },
+            {
+              "texto": "…only if there is a safety plan."
+            }
+          ],
+          [
+            {
+              "texto": "unless"
+            },
+            {
+              "texto": "a menos que"
+            },
+            {
+              "texto": "…unless it stays open late."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-94": {
+      "explicacion": {
+        "titulo": "Redactar el borrador: quién, qué, cuándo y cómo se mide",
+        "texto": "Un borrador de propuesta necesita cuatro datos concretos: tareas, responsables, plazo y medición. Para repartir una tarea usa will + verbo (Ana will order the plants) o is responsible for + nombre. El plazo se marca con by + fecha: by 14 June es «a más tardar el 14 de junio»; until no sirve, porque significa «hasta» en el sentido de durar. Para medir, elige algo que se pueda contar y repetir: We will count the families every Saturday. Evita frases vagas como we will try."
+      },
+      "patron": {
+        "texto": "Quién + tarea + plazo:",
+        "formula": [
+          {
+            "texto": "Ana",
+            "nota": "quién: una persona concreta"
+          },
+          {
+            "texto": "will order",
+            "nota": "will + verbo base: compromiso"
+          },
+          {
+            "texto": "the plants by 1 May.",
+            "nota": "la tarea y su plazo: by + fecha"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo is responsible of the budget.",
+          "correcto": "Leo is responsible for the budget.",
+          "explicacion": "Calco de «responsable de». En inglés es responsible for + nombre."
+        },
+        {
+          "incorrecto": "The volunteers will finish the garden until 14 June.",
+          "correcto": "The volunteers will finish the garden by 14 June.",
+          "explicacion": "Until es «hasta» con duración; para un plazo máximo se usa by."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos reparten las tareas del jardín.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Who will order the plants?",
+            "traduccion": "¿Quién pedirá las plantas?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I will order them by 1 May.",
+            "traduccion": "Yo las pediré para el 1 de mayo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Leo is responsible for the budget.",
+            "traduccion": "Bien. Leo es responsable del presupuesto."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And how will we measure the result?",
+            "traduccion": "¿Y cómo mediremos el resultado?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "We will count the families every Saturday.",
+            "traduccion": "Contaremos las familias cada sábado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo comprobarán el resultado?",
+          "opciones": [
+            {
+              "es": "Contando las plantas cada mes."
+            },
+            {
+              "es": "Contando las familias cada sábado."
+            },
+            {
+              "es": "Preguntando a Leo cada semana."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana responde: «We will count the families every Saturday». Leo solo se encarga del presupuesto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué incluir",
+          "Cómo decirlo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tarea"
+            },
+            {
+              "texto": "Ana will order the plants."
+            }
+          ],
+          [
+            {
+              "texto": "Responsable"
+            },
+            {
+              "texto": "Leo is responsible for the budget."
+            }
+          ],
+          [
+            {
+              "texto": "Plazo"
+            },
+            {
+              "texto": "…by 14 June."
+            }
+          ],
+          [
+            {
+              "texto": "Medición"
+            },
+            {
+              "texto": "We will count the families every Saturday."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-95": {
+      "explicacion": {
+        "titulo": "Presentar y responder objeciones",
+        "texto": "Una presentación tiene dos momentos: presentar y responder. Abre con Today I will present… y ordena con First, Then y Finally. En las preguntas sigue tres pasos: 1) reconoce la objeción (That is a good point), 2) responde con evidencia (The evidence shows that…) y 3) si hace falta, ofrece un ajuste con if + presente y will (If the noise is a problem, we will adjust the hours). Ojo: evidence no tiene plural en inglés: the evidence shows, no «the evidences show»."
+      },
+      "patron": {
+        "texto": "Reconocer + evidencia + ajuste:",
+        "formula": [
+          {
+            "texto": "That is a good point.",
+            "nota": "reconoce la objeción"
+          },
+          {
+            "texto": "The evidence shows that families stay.",
+            "nota": "responde con un dato: evidence shows that…"
+          },
+          {
+            "texto": "If it is noisy, we will adjust the hours.",
+            "nota": "ajuste: if + presente, will + verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the noise will be a problem, we will adjust the hours.",
+          "correcto": "If the noise is a problem, we will adjust the hours.",
+          "explicacion": "Después de if se usa presente, no will; will va solo en la otra parte de la frase."
+        },
+        {
+          "incorrecto": "The evidences show that families stay longer.",
+          "correcto": "The evidence shows that families stay longer.",
+          "explicacion": "Evidence no tiene plural en inglés; se usa con verbo en singular."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana presenta la propuesta del jardín de lectura y Tom hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I have a question. Who will pay for the benches?",
+            "traduccion": "Tengo una pregunta. ¿Quién pagará los bancos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thank you for the question. The council will pay the £600, and Leo is responsible for the budget.",
+            "traduccion": "Gracias por la pregunta. El ayuntamiento pagará los £600 y Leo es responsable del presupuesto."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And what if the garden is noisy?",
+            "traduccion": "¿Y si el jardín es ruidoso?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a good point. If the noise is a problem, we will adjust the opening hours.",
+            "traduccion": "Es un buen punto. Si el ruido es un problema, ajustaremos el horario de apertura."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hará el equipo si hay ruido?",
+          "opciones": [
+            {
+              "es": "Quitará los bancos del jardín."
+            },
+            {
+              "es": "Pedirá más presupuesto a Leo."
+            },
+            {
+              "es": "Cambiará el horario de apertura."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Ana responde: «we will adjust the opening hours». Los bancos y el presupuesto se mencionan en la pregunta anterior."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Empezar"
+            },
+            {
+              "texto": "Today I will present our proposal."
+            }
+          ],
+          [
+            {
+              "texto": "Ordenar"
+            },
+            {
+              "texto": "First… Then… Finally…"
+            }
+          ],
+          [
+            {
+              "texto": "Reconocer"
+            },
+            {
+              "texto": "That is a good point."
+            }
+          ],
+          [
+            {
+              "texto": "Responder"
+            },
+            {
+              "texto": "The evidence shows that…"
+            }
+          ],
+          [
+            {
+              "texto": "Ajustar"
+            },
+            {
+              "texto": "If…, we will adjust…"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "P1 corregidos: escuchas cuya opción correcta copiaba el audio (C91 p02, C92 e02, C93 p02/e02/r02, C94 p02/r02, C95 e03) ahora piden fecha, nombre o paráfrasis de sentido; C95 e03 ya no se deduce del caso.",
+      "P1 corregidos: filtraciones entre ítems de la misma clase (C91 e01/e02/e03 y r01/r02, C93 r01/r02, C94 e02 y r01/r02) eliminando de los textos los datos que revelaban otras respuestas; C91 e03 ya no recibe «audience» del texto.",
+      "P1 corregidos: rúbricas y respuestas cortas demasiado rígidas (C91 e04, C92 e04, C94 e04/r03, C95 e04) con evidencias equivalentes (fechas, will/synonyms, presupuesto £400, datos del caso) y rangos realistas conforme al mapa (90–120 y 100–140).",
+      "P2: traducciones neutras (sus preguntas, a más tardar, visitan), explicación de must to, distractores del presupuesto C95 e01, diálogo C95 coherente con quién paga, sinónimos aceptados (never, since/as).",
+      "Sin P0/P1 pendientes; mapa, patrón, errores, situaciones y progresión 91→95 coherentes con el mapa editorial v2."
+    ]
+  }
+}
