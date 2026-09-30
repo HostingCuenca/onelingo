@@ -1,0 +1,644 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin cambios. Explicaciones correctas (could como cortesía, may formal, shall para ofrecer, can't + verbo base), errores plausibles (calco «¿Abro la puerta?» → Do I open, «Yes, clear», «How I can help»), ítems con una sola respuesta verificable en el diálogo.",
+      "Ejemplo 4 de metalenguaje sustituido correctamente en class-61, 62, 63 y 64; class-65 EJ4 es un diálogo real (se conserva).",
+      "Avisos del validador esperados por opciones en español."
+    ]
+  },
+  "classes": {
+    "en.n2.class-61": {
+      "explicacion": {
+        "titulo": "Pedir algo con can y could",
+        "texto": "Para pedirle a alguien que haga algo se usa Can you + verbo base…? (directo y amable) o Could you + verbo base…? (más suave y cortés, ideal con adultos o personas que no conoces). Aquí could no habla del pasado: solo suaviza la petición. El orden es can/could + you + verbo base, y el verbo no lleva -s: Could you open the window? Con please suena aún más amable. En español basta la entonación («¿Me abres la ventana?»); en inglés hace falta can o could delante de you."
+      },
+      "patron": {
+        "texto": "Can / Could + you + verbo base + resto + please?",
+        "formula": [
+          {
+            "texto": "Could you",
+            "nota": "petición cortés (can = más directo)"
+          },
+          {
+            "texto": "open the window,",
+            "nota": "verbo base + lo que se pide"
+          },
+          {
+            "texto": "please?",
+            "nota": "más amable"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You can help me with this box?",
+          "correcto": "Can you help me with this box?",
+          "explicacion": "En la pregunta, can va delante de you; la entonación sola no basta."
+        },
+        {
+          "incorrecto": "Could you opens the window?",
+          "correcto": "Could you open the window?",
+          "explicacion": "Después de could va el verbo base, sin -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana lleva sus cosas a su habitación nueva y le pide ayuda a su hermano Tom.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, can you help me with this box, please?",
+            "traduccion": "Tom, ¿puedes ayudarme con esta caja, por favor?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. Is it heavy?",
+            "traduccion": "Sí. ¿Es pesada?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, it has my books. Could you carry it to my room?",
+            "traduccion": "Sí, tiene mis libros. ¿Podrías llevarla a mi habitación?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. Could you open the door, please?",
+            "traduccion": "Vale. ¿Podrías abrir la puerta, por favor?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pide Tom a Ana?",
+          "opciones": [
+            {
+              "es": "Que abra la puerta."
+            },
+            {
+              "es": "Que lleve la caja."
+            },
+            {
+              "es": "Que le explique algo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Could you open the door, please?». Es Ana quien le pide llevar la caja."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Could you carry these books to my room, please?",
+          "es": "¿Podrías llevar estos libros a mi habitación, por favor?",
+          "nota": "Could you + verbo base forma una petición suave y cortés."
+        }
+      ]
+    },
+    "en.n2.class-62": {
+      "explicacion": {
+        "titulo": "Pedir permiso con may y can",
+        "texto": "Para pedir permiso se usa Can I + verbo base…? en situaciones cotidianas y May I + verbo base…? cuando quieres sonar más formal o cortés (con un profesor, en un museo). Para dar permiso se dice You can… o You may…: You may enter the museum now. El orden es may/can + sujeto + verbo base, sin -s y sin to: May I use your phone? En español decimos «¿Puedo…?» para todo; en inglés may es la opción más educada."
+      },
+      "patron": {
+        "texto": "May / Can + I + verbo base + resto + please?",
+        "formula": [
+          {
+            "texto": "May I",
+            "nota": "pido permiso de forma cortés"
+          },
+          {
+            "texto": "use your phone,",
+            "nota": "verbo base + lo que quiero hacer"
+          },
+          {
+            "texto": "please?",
+            "nota": "más amable"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Informal",
+          "Formal"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "pedir permiso"
+            },
+            {
+              "texto": "Can I sit here?"
+            },
+            {
+              "texto": "May I sit here?"
+            }
+          ],
+          [
+            {
+              "texto": "dar permiso"
+            },
+            {
+              "texto": "You can enter now."
+            },
+            {
+              "texto": "You may enter now."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can sit in this seat?",
+          "correcto": "Can I sit in this seat?",
+          "explicacion": "En la pregunta, can va delante de I; la entonación sola no basta."
+        },
+        {
+          "incorrecto": "May I to use your phone?",
+          "correcto": "May I use your phone?",
+          "explicacion": "Después de may va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia visita un museo y habla con Sara, que trabaja en la entrada.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Good morning. May I enter the museum now?",
+            "traduccion": "Buenos días. ¿Puedo entrar al museo ahora?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, you may enter now.",
+            "traduccion": "Sí, puedes entrar ahora."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Can I bring my big bag?",
+            "traduccion": "¿Puedo llevar mi bolsa grande?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sorry, visitors can bring a small bag, but not a big bag.",
+            "traduccion": "Lo siento, los visitantes pueden traer una bolsa pequeña, pero no una grande."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "May I use my phone in the museum?",
+            "traduccion": "¿Puedo usar mi teléfono en el museo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, you may.",
+            "traduccion": "Sí, puedes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no se permite en el museo?",
+          "opciones": [
+            {
+              "es": "Una bolsa grande."
+            },
+            {
+              "es": "Usar el teléfono."
+            },
+            {
+              "es": "Entrar ahora."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «visitors can bring a small bag, but not a big bag»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "May I sit in this seat, please?",
+          "es": "¿Puedo sentarme en este asiento, por favor?",
+          "nota": "May I suena más cortés que Can I: úsalo con personas que no conoces o en lugares formales."
+        }
+      ]
+    },
+    "en.n2.class-63": {
+      "explicacion": {
+        "titulo": "Ofrecer ayuda con can y shall",
+        "texto": "Para ofrecer ayuda se usa Can I + verbo base…? (Can I carry your bag?) o Shall I + verbo base…? (Shall I open the door?). En español solemos decir «¿Te llevo la bolsa?» o «¿Abro la puerta?», en presente; en inglés no se dice Do I open…?. Para proponer algo que hacemos juntos se usa Shall we…?: Shall we call a cab? (¿Llamamos a un taxi?). Después de shall va el verbo base, sin -s y sin to."
+      },
+      "patron": {
+        "texto": "Shall / Can + I / we + verbo base + resto?",
+        "formula": [
+          {
+            "texto": "Shall I",
+            "nota": "ofrezco hacerlo yo (Shall we = juntos)"
+          },
+          {
+            "texto": "open the door",
+            "nota": "verbo base + la acción"
+          },
+          {
+            "texto": "for you?",
+            "nota": "para quién"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Quién hace la acción",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Can I…?"
+            },
+            {
+              "texto": "yo, para ayudarte"
+            },
+            {
+              "texto": "Can I carry your bag?"
+            }
+          ],
+          [
+            {
+              "texto": "Shall I…?"
+            },
+            {
+              "texto": "yo, para ayudarte"
+            },
+            {
+              "texto": "Shall I open the door?"
+            }
+          ],
+          [
+            {
+              "texto": "Shall we…?"
+            },
+            {
+              "texto": "nosotros, juntos"
+            },
+            {
+              "texto": "Shall we call a cab?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Do I open the door?",
+          "correcto": "Shall I open the door?",
+          "explicacion": "Es un calco de «¿Abro la puerta?». Para ofrecer una acción se usa Shall I o Can I."
+        },
+        {
+          "incorrecto": "Shall I to carry your bag?",
+          "correcto": "Shall I carry your bag?",
+          "explicacion": "Después de shall va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo salen de la tienda con muchas bolsas y empieza a llover.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "These bags are very heavy.",
+            "traduccion": "Estas bolsas son muy pesadas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Can I carry one bag for you?",
+            "traduccion": "¿Te llevo una bolsa?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, please. Thank you. And it is raining!",
+            "traduccion": "Sí, por favor. Gracias. ¡Y está lloviendo!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Shall I open my umbrella?",
+            "traduccion": "¿Abro mi paraguas?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good idea. And shall we call a cab?",
+            "traduccion": "Buena idea. ¿Y llamamos a un taxi?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Ana al final?",
+          "opciones": [
+            {
+              "es": "Llamar a un taxi."
+            },
+            {
+              "es": "Abrir el paraguas."
+            },
+            {
+              "es": "Esperar en la tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «shall we call a cab?». Shall we propone una acción juntos."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Shall I bring you an umbrella?",
+          "es": "¿Te traigo un paraguas?",
+          "nota": "Shall I + verbo base ofrece hacer algo por otra persona."
+        }
+      ]
+    },
+    "en.n2.class-64": {
+      "explicacion": {
+        "titulo": "Responder con cortesía: aceptar o rechazar",
+        "texto": "Al responder a una petición, la decisión debe quedar clara y la respuesta debe ser amable. Para aceptar: Yes, of course. o Certainly (más formal), y luego I can…. Para rechazar: Sorry, I can't… o I am not available, con una razón breve; se suaviza con Thanks for asking, but… Un simple No o I can't sin sorry suena brusco en inglés. Ojo: «¡claro!» no se traduce clear, sino of course. Después de can/can't el verbo va en forma base: I can help."
+      },
+      "patron": {
+        "texto": "Sorry, + I can't + verbo base + right now:",
+        "formula": [
+          {
+            "texto": "Sorry,",
+            "nota": "suaviza el rechazo"
+          },
+          {
+            "texto": "I can't help",
+            "nota": "can't + verbo base: la decisión clara"
+          },
+          {
+            "texto": "right now.",
+            "nota": "ahora mismo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "aceptar"
+            },
+            {
+              "texto": "Yes, of course. I can help you."
+            }
+          ],
+          [
+            {
+              "texto": "aceptar (formal)"
+            },
+            {
+              "texto": "Certainly, I can explain it."
+            }
+          ],
+          [
+            {
+              "texto": "rechazar"
+            },
+            {
+              "texto": "Sorry, I can't help right now."
+            }
+          ],
+          [
+            {
+              "texto": "suavizar un no"
+            },
+            {
+              "texto": "Thanks for asking, but I am not available."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Yes, clear. I can help you.",
+          "correcto": "Yes, of course. I can help you.",
+          "explicacion": "«Claro» no se traduce clear: se dice of course o certainly."
+        },
+        {
+          "incorrecto": "Sorry, I not can help right now.",
+          "correcto": "Sorry, I can't help right now.",
+          "explicacion": "La negación de can es can't (cannot); not no va delante de can."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia necesita ayuda con un problema de la tarea y se lo pide a Tom y a Sara.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, could you explain this problem, please?",
+            "traduccion": "Tom, ¿podrías explicarme este problema, por favor?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry, I can't help right now. I am very busy.",
+            "traduccion": "Lo siento, no puedo ayudar ahora mismo. Estoy muy ocupado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sara, can you help me?",
+            "traduccion": "Sara, ¿puedes ayudarme?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, of course. I am available now.",
+            "traduccion": "Sí, por supuesto. Ahora estoy disponible."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thanks, Sara!",
+            "traduccion": "¡Gracias, Sara!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién acepta ayudar a Mia?",
+          "opciones": [
+            {
+              "es": "Sara."
+            },
+            {
+              "es": "Tom."
+            },
+            {
+              "es": "Nadie."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Sorry, I can't help right now»; Sara responde «Yes, of course»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Thanks for asking, but I can't help right now.",
+          "es": "Gracias por preguntar, pero no puedo ayudar ahora mismo.",
+          "nota": "El rechazo es claro (can't) y thanks lo hace amable."
+        }
+      ]
+    },
+    "en.n2.class-65": {
+      "explicacion": {
+        "titulo": "Una conversación de servicio completa",
+        "texto": "Una conversación de servicio une todo lo visto. El empleado abre con How can I help you?. El cliente pide con Could you…, please?. El empleado pide permiso con May I see…? y ofrece ayuda con Shall I…?. Se acepta con Certainly, Of course o Yes, please, y se cierra con Thank you. That solves my problem. Estrategia: saluda, di el problema en una frase, pide la solución con could y agradece al final. Recuerda: en las preguntas, can, could, may y shall van delante del sujeto."
+      },
+      "patron": {
+        "texto": "Could you + verbo base + objeto + please?",
+        "formula": [
+          {
+            "texto": "Could you",
+            "nota": "petición cortés del cliente"
+          },
+          {
+            "texto": "change this service ticket,",
+            "nota": "verbo base + lo que se pide"
+          },
+          {
+            "texto": "please?",
+            "nota": "más amable"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Quién",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "abrir"
+            },
+            {
+              "texto": "empleado"
+            },
+            {
+              "texto": "How can I help you?"
+            }
+          ],
+          [
+            {
+              "texto": "pedir"
+            },
+            {
+              "texto": "cliente"
+            },
+            {
+              "texto": "Could you change this ticket, please?"
+            }
+          ],
+          [
+            {
+              "texto": "pedir permiso"
+            },
+            {
+              "texto": "empleado"
+            },
+            {
+              "texto": "May I see your receipt?"
+            }
+          ],
+          [
+            {
+              "texto": "ofrecer"
+            },
+            {
+              "texto": "empleado"
+            },
+            {
+              "texto": "Shall I call a colleague?"
+            }
+          ],
+          [
+            {
+              "texto": "cerrar"
+            },
+            {
+              "texto": "cliente"
+            },
+            {
+              "texto": "Thank you. That solves my problem."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "How I can help you?",
+          "correcto": "How can I help you?",
+          "explicacion": "En la pregunta, can va delante del sujeto I."
+        },
+        {
+          "incorrecto": "Thank you. That solve my problem.",
+          "correcto": "Thank you. That solves my problem.",
+          "explicacion": "That equivale a it: el verbo lleva -s (solves)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom va al mostrador de una tienda de juguetes para cambiar un regalo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Good morning. How can I help you?",
+            "traduccion": "Buenos días. ¿Cómo puedo ayudarte?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Could you change this ball, please? It is too small.",
+            "traduccion": "¿Podrías cambiar esta pelota, por favor? Es demasiado pequeña."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Certainly. May I see your receipt?",
+            "traduccion": "Por supuesto. ¿Puedo ver tu recibo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. Here is my receipt.",
+            "traduccion": "Sí. Aquí está mi recibo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Shall I bring you a bigger ball?",
+            "traduccion": "¿Te traigo una pelota más grande?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, please. Thank you. That solves my problem.",
+            "traduccion": "Sí, por favor. Gracias. Eso resuelve mi problema."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué quiere Tom cambiar la pelota?",
+          "opciones": [
+            {
+              "es": "Porque es demasiado pequeña."
+            },
+            {
+              "es": "Porque no tiene recibo."
+            },
+            {
+              "es": "Porque es demasiado grande."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «It is too small», y Sara le ofrece una más grande."
+        }
+      }
+    }
+  }
+}

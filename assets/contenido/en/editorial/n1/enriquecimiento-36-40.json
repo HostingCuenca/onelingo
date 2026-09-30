@@ -1,0 +1,525 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-36: texto del patrón «Persona + verbo + qué + cuándo» → «qué o adónde», porque el ejemplo usa go to school.",
+      "class-37: explicación del error «I am drink water» matizada («Am solo va con adjetivos o nombres» era una generalización excesiva).",
+      "Aceptado (P2): el error «Drink water they» (class-38) es menos frecuente que el primero, pero refleja la posposición del sujeto del español.",
+      "Aceptado (P2): classes 39, 40 y 44 repiten el error de every day entre sujeto y verbo; es coherente con clases de integración.",
+      "Avisos del validador sobre opciones del ítem: opciones en español, esperables; todas se responden solo con el diálogo."
+    ]
+  },
+  "classes": {
+    "en.n1.class-36": {
+      "explicacion": {
+        "titulo": "Verbos de rutina: work, study, eat, drink, play, go",
+        "texto": "Estos verbos cuentan lo que haces cada día: work (trabajar), study (estudiar), eat (comer), drink (beber), play (jugar) y go (ir). Van después de la persona: I study English. Fíjate en las combinaciones fijas: play soccer va sin «al» (no play the soccer), y go to school lleva to pero no the: «voy a la escuela» es I go to school. Every day (todos los días) suele ir al final de la frase."
+      },
+      "patron": {
+        "texto": "Persona + verbo + qué o adónde + cuándo:",
+        "formula": [
+          {
+            "texto": "We",
+            "nota": "quién lo hace"
+          },
+          {
+            "texto": "go",
+            "nota": "el verbo de la rutina"
+          },
+          {
+            "texto": "to school",
+            "nota": "adónde: to, sin the"
+          },
+          {
+            "texto": "every day.",
+            "nota": "cuándo: al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I play the soccer.",
+          "correcto": "I play soccer.",
+          "explicacion": "En español decimos «jugar al fútbol», pero en inglés los deportes van sin the: play soccer."
+        },
+        {
+          "incorrecto": "I go school every day.",
+          "correcto": "I go to school every day.",
+          "explicacion": "Con go hace falta to para decir adónde vas: go to school (ir a la escuela)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan en el parque de lo que hacen cada día.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, I play soccer every day.",
+            "traduccion": "Leo, juego fútbol todos los días."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I study English every day.",
+            "traduccion": "Yo estudio inglés todos los días."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I go to school, and I drink water.",
+            "traduccion": "Voy a la escuela y bebo agua."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We eat at home.",
+            "traduccion": "Nosotros comemos en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Mia todos los días?",
+          "opciones": [
+            {
+              "es": "Juega fútbol."
+            },
+            {
+              "es": "Estudia inglés."
+            },
+            {
+              "es": "Come en la escuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I play soccer every day». Quien estudia inglés todos los días es Leo."
+        }
+      }
+    },
+    "en.n1.class-37": {
+      "explicacion": {
+        "titulo": "I, you, we, they + verbo base",
+        "texto": "Con I, you, we y they el verbo no cambia: I work, you work, we work, they work. En español cambia la terminación (trabajo, trabajas, trabajamos, trabajan) y por eso podemos omitir el sujeto; en inglés el verbo no dice quién lo hace, así que el sujeto es obligatorio. You sirve para «tú», «usted» y «ustedes». Tampoco se añade am, is o are delante del verbo: «bebo agua» es I drink water."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo base + complemento:",
+        "formula": [
+          {
+            "texto": "They",
+            "nota": "sujeto obligatorio: ellos o ellas"
+          },
+          {
+            "texto": "play",
+            "nota": "verbo base, igual para I, you, we, they"
+          },
+          {
+            "texto": "soccer.",
+            "nota": "qué hacen"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Inglés",
+          "Español"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I work."
+            },
+            {
+              "texto": "Trabajo."
+            }
+          ],
+          [
+            {
+              "texto": "You work."
+            },
+            {
+              "texto": "Trabajas / Trabajan (ustedes)."
+            }
+          ],
+          [
+            {
+              "texto": "We work."
+            },
+            {
+              "texto": "Trabajamos."
+            }
+          ],
+          [
+            {
+              "texto": "They work."
+            },
+            {
+              "texto": "Trabajan (ellos)."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am drink water.",
+          "correcto": "I drink water.",
+          "explicacion": "«Bebo» ya es el verbo drink; no se añade am. Am va con adjetivos o nombres (I am happy), no delante de otro verbo."
+        },
+        {
+          "incorrecto": "Play soccer every day.",
+          "correcto": "They play soccer every day.",
+          "explicacion": "Sin sujeto la frase parece una orden («¡Jueguen fútbol!»). Para decir «juegan fútbol» hace falta They."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos son hermanos y hablan con su amigo Tom en el recreo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I play soccer at school.",
+            "traduccion": "Juego fútbol en la escuela."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "We study English at home.",
+            "traduccion": "Nosotros estudiamos inglés en casa."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, we study English every day.",
+            "traduccion": "Sí, estudiamos inglés todos los días."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My cousins play soccer at home.",
+            "traduccion": "Mis primos juegan fútbol en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quiénes estudian inglés en casa?",
+          "opciones": [
+            {
+              "es": "Sara y Carlos."
+            },
+            {
+              "es": "Tom."
+            },
+            {
+              "es": "Los primos de Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «We study English at home», y we son ella y su hermano Carlos."
+        }
+      }
+    },
+    "en.n1.class-38": {
+      "explicacion": {
+        "titulo": "El orden fijo: sujeto + verbo + objeto",
+        "texto": "En inglés la oración sigue casi siempre el mismo orden: quién (sujeto) + qué hace (verbo) + qué cosa (objeto): I drink coffee. En español podemos mover las palabras («el café lo bebo yo», «beben agua ellos»), pero en inglés no: el sujeto va primero y el objeto justo después del verbo. Si cambias el orden, la frase suena mal o cambia de sentido."
+      },
+      "patron": {
+        "texto": "Quién + qué hace + qué cosa:",
+        "formula": [
+          {
+            "texto": "You",
+            "nota": "sujeto: siempre primero"
+          },
+          {
+            "texto": "drink",
+            "nota": "verbo"
+          },
+          {
+            "texto": "coffee.",
+            "nota": "objeto: justo después del verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "English I study.",
+          "correcto": "I study English.",
+          "explicacion": "En español se puede decir «el inglés lo estudio yo», pero en inglés el objeto va después del verbo."
+        },
+        {
+          "incorrecto": "Drink water they.",
+          "correcto": "They drink water.",
+          "explicacion": "En español el sujeto puede ir al final («beben agua ellos»); en inglés siempre va al principio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom están en la cocina de Ana por la mañana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tom, my parents drink coffee.",
+            "traduccion": "Tom, mis padres beben café."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I drink water.",
+            "traduccion": "Yo bebo agua."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "We drink water, and they drink coffee.",
+            "traduccion": "Nosotros bebemos agua y ellos beben café."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I study English. And you?",
+            "traduccion": "Yo estudio inglés. ¿Y tú?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I study English, and I play soccer.",
+            "traduccion": "Estudio inglés y juego fútbol."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué beben los padres de Ana?",
+          "opciones": [
+            {
+              "es": "Café."
+            },
+            {
+              "es": "Agua."
+            },
+            {
+              "es": "Leche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «My parents drink coffee». Ana y Tom beben agua."
+        }
+      }
+    },
+    "en.n1.class-39": {
+      "explicacion": {
+        "titulo": "Dónde y cuándo: al final de la oración",
+        "texto": "Después del objeto se dice dónde (at home, at school, at the office) y al final cuándo (every day): I study English at home every day. El lugar nunca va entre el verbo y el objeto: no digas I study at home English. En español es normal empezar con «todos los días» o ponerlo en medio («yo todos los días bebo agua»); en inglés lo más natural es dejarlo al final: I drink water every day."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo + objeto + lugar + tiempo:",
+        "formula": [
+          {
+            "texto": "I",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "study English",
+            "nota": "verbo + objeto, siempre juntos"
+          },
+          {
+            "texto": "at home",
+            "nota": "dónde"
+          },
+          {
+            "texto": "every day.",
+            "nota": "cuándo: al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I study at home English.",
+          "correcto": "I study English at home.",
+          "explicacion": "El objeto (English) va pegado al verbo; el lugar va después."
+        },
+        {
+          "incorrecto": "I every day drink water.",
+          "correcto": "I drink water every day.",
+          "explicacion": "En español decimos «yo todos los días bebo agua», pero en inglés every day va al final."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara conversan en el parque sobre su semana.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I play soccer at school every day.",
+            "traduccion": "Juego fútbol en la escuela todos los días."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I study English at home every day.",
+            "traduccion": "Estudio inglés en casa todos los días."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "My parents work at the office.",
+            "traduccion": "Mis padres trabajan en la oficina."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My parents work at home.",
+            "traduccion": "Mis padres trabajan en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde estudia inglés Sara?",
+          "opciones": [
+            {
+              "es": "En casa."
+            },
+            {
+              "es": "En la escuela."
+            },
+            {
+              "es": "En la oficina."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I study English at home every day». En la escuela juega Carlos."
+        }
+      }
+    },
+    "en.n1.class-40": {
+      "explicacion": {
+        "titulo": "Mi día en seis frases",
+        "texto": "Para contar tu día, usa frases cortas que sigan siempre el mismo orden: I + verbo + qué + dónde + cuándo. Empieza con I y cambia de verbo en cada frase: study, drink, go, play, eat, work. Añade el lugar con at (at home, at school, at the office) o to si vas a algún sitio (go to school), y deja every day al final. Antes de terminar, revisa dos cosas: el sujeto I en cada frase y nada de am delante del verbo."
+      },
+      "patron": {
+        "texto": "Una frase de tu día:",
+        "formula": [
+          {
+            "texto": "I",
+            "nota": "empieza siempre con el sujeto"
+          },
+          {
+            "texto": "go",
+            "nota": "un verbo distinto en cada frase"
+          },
+          {
+            "texto": "to school",
+            "nota": "adónde o dónde"
+          },
+          {
+            "texto": "every day.",
+            "nota": "cuándo: al final"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Frase del día"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "study"
+            },
+            {
+              "texto": "I study English every day."
+            }
+          ],
+          [
+            {
+              "texto": "drink"
+            },
+            {
+              "texto": "I drink water at home."
+            }
+          ],
+          [
+            {
+              "texto": "go"
+            },
+            {
+              "texto": "I go to school every day."
+            }
+          ],
+          [
+            {
+              "texto": "play"
+            },
+            {
+              "texto": "I play soccer at school."
+            }
+          ],
+          [
+            {
+              "texto": "eat"
+            },
+            {
+              "texto": "I eat at home."
+            }
+          ],
+          [
+            {
+              "texto": "work"
+            },
+            {
+              "texto": "I work at the office."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I eat in home.",
+          "correcto": "I eat at home.",
+          "explicacion": "«En casa» es at home, no in home. Lo mismo con at school."
+        },
+        {
+          "incorrecto": "I every day study English.",
+          "correcto": "I study English every day.",
+          "explicacion": "Every day no va entre el sujeto y el verbo: va al final."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Leo cómo es su día.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I go to school every day.",
+            "traduccion": "Voy a la escuela todos los días."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I study English, and I play soccer at school.",
+            "traduccion": "Estudio inglés y juego fútbol en la escuela."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I study English at home.",
+            "traduccion": "Yo estudio inglés en casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I eat at home, and I drink water.",
+            "traduccion": "Como en casa y bebo agua."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I eat at school.",
+            "traduccion": "Yo como en la escuela."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde come Mia?",
+          "opciones": [
+            {
+              "es": "En casa."
+            },
+            {
+              "es": "En la escuela."
+            },
+            {
+              "es": "En el parque."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I eat at home». Quien come en la escuela es Leo."
+        }
+      }
+    }
+  }
+}

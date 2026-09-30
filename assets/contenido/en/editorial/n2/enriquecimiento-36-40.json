@@ -1,0 +1,618 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-36: ejemplo 2 «We visited the museum in 2024» → «We visited Quito in 2024» (no revelar la respuesta del ejercicio de completar).",
+      "class-37: ítem con dos respuestas defendibles («Subir al bus» también era verdad: el bus acaba de llegar). Pregunta cambiada a «¿qué ha hecho ya Leo?» con una sola respuesta correcta; trampa del «ya» redactada con más claridad.",
+      "class-38: ejemplo 2 «I have known Sam for ten years» (idéntico al ejercicio de completar) → «My sister has worked at the clinic for two years».",
+      "class-39: patrón «has just won … It happened yesterday» → «It happened this morning» (just + yesterday era incoherente)."
+    ]
+  },
+  "classes": {
+    "en.n2.class-36": {
+      "explicacion": {
+        "titulo": "Present perfect o pasado simple",
+        "texto": "Si dices cuándo pasó algo con un tiempo terminado (yesterday, last Monday, on Friday, in 2024), usa el pasado simple: I finished it yesterday. Si no dices cuándo, o lo que importa es el resultado ahora, usa el present perfect: I have lost my keys (ahora no las tengo); She has recently changed jobs. Las preguntas con When piden un momento terminado, así que van en pasado: When did you buy it? Ojo: en algunos países se dice «lo he comprado ayer», pero en inglés, con yesterday, nunca va have."
+      },
+      "patron": {
+        "texto": "Sin fecha → present perfect; con fecha terminada → pasado simple:",
+        "formula": [
+          {
+            "texto": "I have lost my keys.",
+            "nota": "present perfect: sin fecha, importa ahora"
+          },
+          {
+            "texto": "I lost them",
+            "nota": "pasado simple: lost"
+          },
+          {
+            "texto": "yesterday.",
+            "nota": "tiempo terminado → pasado simple"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tiempo",
+          "Cuándo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "yesterday, last Monday, in 2024, on Friday"
+            },
+            {
+              "texto": "I finished the book yesterday."
+            }
+          ],
+          [
+            {
+              "texto": "present perfect"
+            },
+            {
+              "texto": "sin fecha, recently, resultado ahora"
+            },
+            {
+              "texto": "She has recently changed jobs."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have seen that film last week.",
+          "correcto": "I saw that film last week.",
+          "explicacion": "Last week es un tiempo terminado: se usa el pasado simple (saw)."
+        },
+        {
+          "incorrecto": "When have you bought this phone?",
+          "correcto": "When did you buy this phone?",
+          "explicacion": "When pide un momento concreto del pasado: se pregunta con did."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana ayuda a su hermano Tom a prepararse para la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Have you found your keys, Tom?",
+            "traduccion": "¿Has encontrado tus llaves, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, I have not found them.",
+            "traduccion": "No, no las he encontrado."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Did you have them yesterday?",
+            "traduccion": "¿Las tenías ayer?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. I lost them on Monday, at the park.",
+            "traduccion": "No. Las perdí el lunes, en el parque."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo perdió Tom sus llaves?",
+          "opciones": [
+            {
+              "es": "El lunes."
+            },
+            {
+              "es": "Ayer."
+            },
+            {
+              "es": "Esta mañana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I lost them on Monday»: con un día concreto usa el pasado simple."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "We visited Quito in 2024.",
+          "es": "Visitamos Quito en 2024.",
+          "nota": "Con una fecha concreta (in 2024) se usa el pasado simple."
+        }
+      ]
+    },
+    "en.n2.class-37": {
+      "explicacion": {
+        "titulo": "Already, yet y just",
+        "texto": "Just significa «acabar de»: The train has just left (el tren acaba de salir). Already significa «ya» en frases afirmativas: I have already completed the form. Los dos van entre have/has y el participio. Yet va al final: en preguntas significa «ya» (Have you called the clinic yet?) y en negativas, «todavía» (The doctor has not arrived yet). Trampa: en español «ya» sirve para already y para yet; si la frase es una pregunta o lleva not, usa yet al final."
+      },
+      "patron": {
+        "texto": "Sujeto + have/has + just/already + participio / … + yet:",
+        "formula": [
+          {
+            "texto": "The bus",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "has just",
+            "nota": "acaba de: just entre has y el participio"
+          },
+          {
+            "texto": "arrived.",
+            "nota": "participio"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado",
+          "Lugar",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "just"
+            },
+            {
+              "texto": "acabar de"
+            },
+            {
+              "texto": "entre have y participio"
+            },
+            {
+              "texto": "The train has just left."
+            }
+          ],
+          [
+            {
+              "texto": "already"
+            },
+            {
+              "texto": "ya (afirmativa)"
+            },
+            {
+              "texto": "entre have y participio"
+            },
+            {
+              "texto": "I have already completed the form."
+            }
+          ],
+          [
+            {
+              "texto": "yet"
+            },
+            {
+              "texto": "ya (pregunta) / todavía (negativa)"
+            },
+            {
+              "texto": "al final"
+            },
+            {
+              "texto": "Have you called the clinic yet?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have yet finished the form.",
+          "correcto": "I have already finished the form.",
+          "explicacion": "En una afirmación, «ya» es already. Yet solo va en preguntas y negativas."
+        },
+        {
+          "incorrecto": "Have you yet called Grandma?",
+          "correcto": "Have you called Grandma yet?",
+          "explicacion": "Yet va al final de la pregunta, no delante del participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo se preparan para una excursión de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Have you packed your bag yet, Leo?",
+            "traduccion": "¿Ya has preparado tu bolsa, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, I have already packed it.",
+            "traduccion": "Sí, ya la he preparado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Look! The bus has just arrived.",
+            "traduccion": "¡Mira! El bus acaba de llegar."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Quick! I have not eaten my breakfast yet!",
+            "traduccion": "¡Rápido! ¡Todavía no he comido mi desayuno!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué ha hecho ya Leo?",
+          "opciones": [
+            {
+              "es": "Preparar la bolsa."
+            },
+            {
+              "es": "Comer el desayuno."
+            },
+            {
+              "es": "Subir al bus."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I have already packed it». El desayuno todavía no (not… yet) y el bus acaba de llegar (has just arrived)."
+        }
+      }
+    },
+    "en.n2.class-38": {
+      "explicacion": {
+        "titulo": "For y since con el present perfect",
+        "texto": "Para una situación que empezó en el pasado y sigue ahora, el inglés usa el present perfect: I have lived here for five years. For + duración (for two hours, for six months) y since + punto de inicio (since June, since Monday, since 2022). Trampa: en español decimos «vivo aquí desde hace cinco años» en presente y con «desde», pero en inglés no se usa el presente (I live here since…) y «desde hace» se dice con for, no con since."
+      },
+      "patron": {
+        "texto": "Sujeto + have/has + participio + for (duración) / since (inicio):",
+        "formula": [
+          {
+            "texto": "We",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "have lived",
+            "nota": "present perfect: empezó antes y sigue"
+          },
+          {
+            "texto": "here",
+            "nota": "lugar"
+          },
+          {
+            "texto": "for six months.",
+            "nota": "for + duración (o since + inicio)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Va con…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "for"
+            },
+            {
+              "texto": "una duración"
+            },
+            {
+              "texto": "for five years, for two hours"
+            }
+          ],
+          [
+            {
+              "texto": "since"
+            },
+            {
+              "texto": "un punto de inicio"
+            },
+            {
+              "texto": "since June, since Monday, since 2022"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I live here since 2020.",
+          "correcto": "I have lived here since 2020.",
+          "explicacion": "Si la situación empezó antes y sigue, se usa el present perfect, no el presente."
+        },
+        {
+          "incorrecto": "We have studied English since three years.",
+          "correcto": "We have studied English for three years.",
+          "explicacion": "Three years es una duración: va con for. «Desde hace» no se dice con since."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara conoce a Tom, un compañero nuevo de clase.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "How long have you lived here, Tom?",
+            "traduccion": "¿Cuánto tiempo llevas viviendo aquí, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I have lived here for two months.",
+            "traduccion": "Vivo aquí desde hace dos meses."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Is that your dog?",
+            "traduccion": "¿Ese es tu perro?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, that is Rex. He has lived with us since June.",
+            "traduccion": "Sí, es Rex. Vive con nosotros desde junio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuánto tiempo lleva Tom viviendo allí?",
+          "opciones": [
+            {
+              "es": "Dos meses."
+            },
+            {
+              "es": "Desde junio."
+            },
+            {
+              "es": "Dos años."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I have lived here for two months». Desde junio es lo que lleva Rex con ellos."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "My sister has worked at the clinic for two years.",
+          "es": "Mi hermana trabaja en la clínica desde hace dos años.",
+          "nota": "For + duración: responde a «¿cuánto tiempo?»."
+        },
+        {
+          "indice": 3,
+          "en": "They have lived there since Monday.",
+          "es": "Viven allí desde el lunes.",
+          "nota": "Since + punto de inicio: dice cuándo empezó."
+        }
+      ]
+    },
+    "en.n2.class-39": {
+      "explicacion": {
+        "titulo": "Dar una noticia y pedir detalles",
+        "texto": "Una noticia reciente se abre con el present perfect, a menudo con just: Marta has just won a prize. Si luego se habla de detalles concretos (cuándo, dónde, qué pasó), se cambia al pasado simple porque ya son hechos terminados: When did it happen? Where was it? It happened yesterday. Recuerda: en preguntas con did el verbo va en forma base (When did it happen?, no happened), y con una fecha no se usa have."
+      },
+      "patron": {
+        "texto": "Noticia (present perfect) → detalle (pasado simple):",
+        "formula": [
+          {
+            "texto": "Our team has just won",
+            "nota": "noticia: has just + participio"
+          },
+          {
+            "texto": "When did it happen?",
+            "nota": "pregunta por el detalle: did + verbo base"
+          },
+          {
+            "texto": "It happened this morning.",
+            "nota": "detalle terminado: pasado simple"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Marta has won a prize yesterday.",
+          "correcto": "Marta won a prize yesterday.",
+          "explicacion": "Con yesterday el hecho está terminado: se usa el pasado simple."
+        },
+        {
+          "incorrecto": "When did it happened?",
+          "correcto": "When did it happen?",
+          "explicacion": "Después de did, el verbo va en forma base: happen."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo llega a casa con una noticia para su hermana Ana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I have some news! Our team has just won the match.",
+            "traduccion": "¡Tengo una noticia! Nuestro equipo acaba de ganar el partido."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "When did you play?",
+            "traduccion": "¿Cuándo jugaron?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We played this morning.",
+            "traduccion": "Jugamos esta mañana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Where was the match?",
+            "traduccion": "¿Dónde fue el partido?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At the park near the school.",
+            "traduccion": "En el parque cerca de la escuela."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde fue el partido?",
+          "opciones": [
+            {
+              "es": "En el parque cerca de la escuela."
+            },
+            {
+              "es": "En la casa de Leo."
+            },
+            {
+              "es": "En otra ciudad."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «At the park near the school»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "When did the ceremony take place?",
+          "es": "¿Cuándo tuvo lugar la ceremonia?",
+          "nota": "El detalle del momento se pregunta en pasado simple: did + verbo base."
+        },
+        {
+          "indice": 3,
+          "en": "It happened at the school, near the park.",
+          "es": "Ocurrió en la escuela, cerca del parque.",
+          "nota": "El detalle del lugar va en pasado simple: happened."
+        }
+      ]
+    },
+    "en.n2.class-40": {
+      "explicacion": {
+        "titulo": "Contar una actualización personal",
+        "texto": "Para contar cómo te va se combinan los tiempos. Los cambios recientes, sin fecha, van en present perfect: I have started a new course; I have made progress lately. Con for o since dices cuánto dura algo: I have lived here since May. Con already, un logro que ya está hecho: I have already finished two units. Pero si nombras un momento terminado (yesterday, last week, in June), usa el pasado simple: My first challenge happened yesterday."
+      },
+      "patron": {
+        "texto": "Cambio reciente + duración / momento concreto:",
+        "formula": [
+          {
+            "texto": "I have made progress",
+            "nota": "cambio reciente: present perfect"
+          },
+          {
+            "texto": "since May,",
+            "nota": "since + inicio (o for + duración)"
+          },
+          {
+            "texto": "but I missed the bus yesterday.",
+            "nota": "momento terminado: pasado simple"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Para contar…",
+          "Tiempo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "un cambio reciente"
+            },
+            {
+              "texto": "present perfect (+ lately)"
+            },
+            {
+              "texto": "I have felt more confident lately."
+            }
+          ],
+          [
+            {
+              "texto": "cuánto dura"
+            },
+            {
+              "texto": "present perfect + for/since"
+            },
+            {
+              "texto": "I have worked there since May."
+            }
+          ],
+          [
+            {
+              "texto": "un logro hecho"
+            },
+            {
+              "texto": "have + already"
+            },
+            {
+              "texto": "I have already made progress."
+            }
+          ],
+          [
+            {
+              "texto": "un momento terminado"
+            },
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "My first challenge happened yesterday."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have made progress since two months.",
+          "correcto": "I have made progress for two months.",
+          "explicacion": "Two months es una duración: va con for. Since va con un inicio (since May)."
+        },
+        {
+          "incorrecto": "I have started the course last Tuesday.",
+          "correcto": "I started the course last Tuesday.",
+          "explicacion": "Last Tuesday es un momento terminado: pasado simple, sin have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a su abuelo Carlos cómo le va en la escuela nueva.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "How is your new school, Mia?",
+            "traduccion": "¿Qué tal tu escuela nueva, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Very good! I have made new friends lately.",
+            "traduccion": "¡Muy bien! Últimamente he hecho amigos nuevos."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And your English?",
+            "traduccion": "¿Y tu inglés?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I have already finished two units, but I missed the bus yesterday.",
+            "traduccion": "Ya he terminado dos unidades, pero ayer perdí el bus."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pasó a Mia ayer?",
+          "opciones": [
+            {
+              "es": "Perdió el bus."
+            },
+            {
+              "es": "Terminó dos unidades."
+            },
+            {
+              "es": "Hizo amigos nuevos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I missed the bus yesterday»: un momento terminado, en pasado simple."
+        }
+      }
+    }
+  }
+}

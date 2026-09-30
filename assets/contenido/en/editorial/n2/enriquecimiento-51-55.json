@@ -1,0 +1,613 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-51: «en inglés no se dice a water» era demasiado absoluto (a water se oye al pedir); matizado a «como materia, milk y water no llevan a».",
+      "class-55: error 1 «two items missings» → «two missings items» (el error típico es pluralizar el adjetivo; «two items missing» es inglés aceptable) y explicación ajustada; explicación general matizada: missing también va tras be (two items are missing).",
+      "Avisos del validador «la opción correcta apenas aparece» esperados: opciones en español; todas las respuestas se verifican en el diálogo.",
+      "Aceptado: class-54 EJ0/EJ4 con notas algo técnicas pero en español y coherentes con la evaluación; class-51 usa enough (enseñado en su EJ3)."
+    ]
+  },
+  "classes": {
+    "en.n2.class-51": {
+      "explicacion": {
+        "titulo": "Contables e incontables: repaso",
+        "texto": "Los sustantivos contables se pueden contar: tienen singular y plural (an apple, four apples) y en plural van con there are. Los incontables nombran materias (water, milk, rice, flour): no llevan a/an ni -s y van con there is. Para una cantidad sin número se usa some: There is some milk. Para contar una materia se usa un envase contable + of: four bottles of water, two packages of flour. Ojo: como materia, milk y water no llevan a: se dice some milk, no a milk."
+      },
+      "patron": {
+        "texto": "Número + contable en plural / some + incontable:",
+        "formula": [
+          {
+            "texto": "We bought",
+            "nota": "sujeto + verbo"
+          },
+          {
+            "texto": "four apples",
+            "nota": "número + contable en plural (-s)"
+          },
+          {
+            "texto": "and some rice.",
+            "nota": "some + incontable, sin -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Uso",
+          "Contable",
+          "Incontable"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "con número"
+            },
+            {
+              "texto": "four bananas"
+            },
+            {
+              "texto": "two bottles of milk"
+            }
+          ],
+          [
+            {
+              "texto": "con there"
+            },
+            {
+              "texto": "there are three chairs"
+            },
+            {
+              "texto": "there is some rice"
+            }
+          ],
+          [
+            {
+              "texto": "¿lleva -s?"
+            },
+            {
+              "texto": "sí: apples"
+            },
+            {
+              "texto": "no: water, flour"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There is three chairs in the kitchen.",
+          "correcto": "There are three chairs in the kitchen.",
+          "explicacion": "Con un plural contable (three chairs) se usa there are, no there is."
+        },
+        {
+          "incorrecto": "There is a milk in the fridge.",
+          "correcto": "There is some milk in the fridge.",
+          "explicacion": "Milk es incontable: no lleva a. Para una cantidad sin número se usa some."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo preparan un pastel en casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "We need flour and milk for the cake.",
+            "traduccion": "Necesitamos harina y leche para el pastel."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "There is some flour in the kitchen.",
+            "traduccion": "Hay harina en la cocina."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. We have enough flour.",
+            "traduccion": "Bien. Tenemos suficiente harina."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "But we need two bottles of milk.",
+            "traduccion": "Pero necesitamos dos botellas de leche."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And there are four bananas on the table!",
+            "traduccion": "¡Y hay cuatro plátanos en la mesa!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué les falta para el pastel?",
+          "opciones": [
+            {
+              "es": "Dos botellas de leche."
+            },
+            {
+              "es": "Harina."
+            },
+            {
+              "es": "Cuatro plátanos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «But we need two bottles of milk». La harina ya la tienen."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "We have four apples and some milk.",
+          "es": "Tenemos cuatro manzanas y leche.",
+          "nota": "Apples se cuenta (four apples); milk es incontable y va con some, sin -s."
+        }
+      ]
+    },
+    "en.n2.class-52": {
+      "explicacion": {
+        "titulo": "A few, a little y enough",
+        "texto": "Para una cantidad pequeña, el inglés mira si el sustantivo se puede contar. A few va con contables en plural (a few snacks, a few napkins) y a little con incontables (a little juice, a little time). Los dos significan «unos pocos / un poco» y tienen sentido positivo: hay algo, aunque no mucho. Enough (suficiente) sirve para los dos tipos y va delante del sustantivo: enough plates, enough time. En español «poco» vale para todo; en inglés no."
+      },
+      "patron": {
+        "texto": "Sujeto + have + a few / a little / enough + sustantivo:",
+        "formula": [
+          {
+            "texto": "We have",
+            "nota": "sujeto + have"
+          },
+          {
+            "texto": "a few snacks",
+            "nota": "a few + contable en plural"
+          },
+          {
+            "texto": "and a little juice.",
+            "nota": "a little + incontable, sin -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Cantidad",
+          "Contable (plural)",
+          "Incontable"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "poca, pero hay"
+            },
+            {
+              "texto": "a few plates"
+            },
+            {
+              "texto": "a little juice"
+            }
+          ],
+          [
+            {
+              "texto": "suficiente"
+            },
+            {
+              "texto": "enough plates"
+            },
+            {
+              "texto": "enough time"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We have a little plates for the guests.",
+          "correcto": "We have a few plates for the guests.",
+          "explicacion": "Plates se puede contar: con plurales contables se usa a few, no a little."
+        },
+        {
+          "incorrecto": "We have plates enough for everyone.",
+          "correcto": "We have enough plates for everyone.",
+          "explicacion": "En español se dice «platos suficientes», pero en inglés enough va delante del sustantivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan la comida para los invitados de la fiesta de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "We have a few snacks for the guests.",
+            "traduccion": "Tenemos unos pocos aperitivos para los invitados."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is there enough juice?",
+            "traduccion": "¿Hay suficiente zumo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, there is only a little juice in the jug.",
+            "traduccion": "No, solo hay un poco de zumo en la jarra."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I can buy some juice. Do we have enough plates?",
+            "traduccion": "Puedo comprar zumo. ¿Tenemos suficientes platos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, we have enough plates for everyone.",
+            "traduccion": "Sí, tenemos suficientes platos para todos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué va a comprar Tom?",
+          "opciones": [
+            {
+              "es": "Zumo."
+            },
+            {
+              "es": "Platos."
+            },
+            {
+              "es": "Aperitivos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Solo hay a little juice, y Tom dice: «I can buy some juice»."
+        }
+      }
+    },
+    "en.n2.class-53": {
+      "explicacion": {
+        "titulo": "Too much y too many: demasiado",
+        "texto": "Too much y too many significan «demasiado / demasiados» y expresan un problema: hay más de lo que conviene. Too many va con contables en plural (too many boxes, too many people) y too much con incontables (too much sugar, too much noise). Ojo con dos palabras: people ya es plural (there are too many people) y luggage (equipaje) es incontable, así que no lleva -s: too much luggage. Delante de un adjetivo solo se usa too: too hot."
+      },
+      "patron": {
+        "texto": "Too much + incontable / too many + contable en plural:",
+        "formula": [
+          {
+            "texto": "We have",
+            "nota": "sujeto + have"
+          },
+          {
+            "texto": "too much luggage",
+            "nota": "too much + incontable"
+          },
+          {
+            "texto": "and too many bags.",
+            "nota": "too many + contable en plural"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sustantivo",
+          "Tipo",
+          "Demasiado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "sugar"
+            },
+            {
+              "texto": "incontable"
+            },
+            {
+              "texto": "too much sugar"
+            }
+          ],
+          [
+            {
+              "texto": "noise"
+            },
+            {
+              "texto": "incontable"
+            },
+            {
+              "texto": "too much noise"
+            }
+          ],
+          [
+            {
+              "texto": "boxes"
+            },
+            {
+              "texto": "contable (plural)"
+            },
+            {
+              "texto": "too many boxes"
+            }
+          ],
+          [
+            {
+              "texto": "people"
+            },
+            {
+              "texto": "contable (plural)"
+            },
+            {
+              "texto": "too many people"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are too much people here.",
+          "correcto": "There are too many people here.",
+          "explicacion": "People es un plural contable: va con too many."
+        },
+        {
+          "incorrecto": "We have too many luggages.",
+          "correcto": "We have too much luggage.",
+          "explicacion": "Luggage es incontable: no lleva -s y va con too much."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo quieren hacer la tarea juntos en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "There are too many people in the park today.",
+            "traduccion": "Hay demasiadas personas en el parque hoy."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And there is too much noise here.",
+            "traduccion": "Y hay demasiado ruido aquí."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We can go to my house. It is quiet.",
+            "traduccion": "Podemos ir a mi casa. Es tranquila."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good idea! But I have too many bags.",
+            "traduccion": "¡Buena idea! Pero tengo demasiadas bolsas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No problem. I can help you.",
+            "traduccion": "No hay problema. Puedo ayudarte."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué quieren irse del parque?",
+          "opciones": [
+            {
+              "es": "Porque hay demasiada gente y ruido."
+            },
+            {
+              "es": "Porque hace demasiado calor."
+            },
+            {
+              "es": "Porque Sara tiene demasiadas bolsas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «too many people» y Sara añade «too much noise»."
+        }
+      }
+    },
+    "en.n2.class-54": {
+      "explicacion": {
+        "titulo": "Planificar cantidades para un evento",
+        "texto": "Para planificar un evento se calcula lo que necesita cada invitado y se compara con lo que ya hay. Se usan las formas de cantidad: enough + sustantivo para lo suficiente (enough cups), a few con contables (a few extra sandwiches), a little con incontables (a little juice) y too much / too many para el exceso. Para lo que falta se usa número + more + sustantivo: we need ten more plates. En español «más» va detrás (diez platos más); en inglés more va delante del sustantivo."
+      },
+      "patron": {
+        "texto": "For + número + guests, we need + número + more + plural:",
+        "formula": [
+          {
+            "texto": "For twenty guests,",
+            "nota": "para cuántas personas"
+          },
+          {
+            "texto": "we need",
+            "nota": "la necesidad"
+          },
+          {
+            "texto": "ten more plates.",
+            "nota": "número + more + plural: lo que falta"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "lo suficiente"
+            },
+            {
+              "texto": "enough + sustantivo"
+            },
+            {
+              "texto": "enough cups"
+            }
+          ],
+          [
+            {
+              "texto": "poco (contable)"
+            },
+            {
+              "texto": "a few + plural"
+            },
+            {
+              "texto": "a few extra sandwiches"
+            }
+          ],
+          [
+            {
+              "texto": "poco (incontable)"
+            },
+            {
+              "texto": "a little + incontable"
+            },
+            {
+              "texto": "a little juice"
+            }
+          ],
+          [
+            {
+              "texto": "lo que falta"
+            },
+            {
+              "texto": "número + more"
+            },
+            {
+              "texto": "eight more sandwiches"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We need ten plates more.",
+          "correcto": "We need ten more plates.",
+          "explicacion": "En español decimos «diez platos más», pero en inglés more va delante del sustantivo."
+        },
+        {
+          "incorrecto": "We need enough cup for everyone.",
+          "correcto": "We need enough cups for everyone.",
+          "explicacion": "Cup es contable: después de enough va en plural."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos preparan la fiesta de cumpleaños de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "We have ten guests for the event.",
+            "traduccion": "Tenemos diez invitados para el evento."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We have six plates, so we need four more plates.",
+            "traduccion": "Tenemos seis platos, así que necesitamos cuatro platos más."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And we have twelve cups. That is enough.",
+            "traduccion": "Y tenemos doce vasos. Es suficiente."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We should buy a little juice and a few extra sandwiches.",
+            "traduccion": "Deberíamos comprar un poco de zumo y unos pocos sándwiches extra."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántos platos más necesitan?",
+          "opciones": [
+            {
+              "es": "Cuatro."
+            },
+            {
+              "es": "Seis."
+            },
+            {
+              "es": "Doce."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «We have six plates, so we need four more plates»."
+        }
+      }
+    },
+    "en.n2.class-55": {
+      "explicacion": {
+        "titulo": "Resolver un problema de compras",
+        "texto": "Para resolver un problema de compras primero se dice qué pasa y después se propone una solución. El problema: The receipt shows… (el recibo muestra), two items are missing (faltan dos artículos), the wrong plates (los platos equivocados), too many / not enough. La solución: the shop will replace them (la tienda los reemplazará) o we should ask for a refund (deberíamos pedir un reembolso). So une el problema con la solución. Missing y wrong son adjetivos: nunca llevan -s y, junto a un sustantivo, van delante (two missing items)."
+      },
+      "patron": {
+        "texto": "Problema + so + solución:",
+        "formula": [
+          {
+            "texto": "The delivery has the wrong plates,",
+            "nota": "el problema: wrong + sustantivo"
+          },
+          {
+            "texto": "so",
+            "nota": "así que: une problema y solución"
+          },
+          {
+            "texto": "the shop will replace them.",
+            "nota": "la solución"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The receipt shows two missings items.",
+          "correcto": "The receipt shows two missing items.",
+          "explicacion": "Missing es un adjetivo: en inglés los adjetivos no llevan -s, aunque el sustantivo sea plural."
+        },
+        {
+          "incorrecto": "We have not enough bread.",
+          "correcto": "We don't have enough bread.",
+          "explicacion": "Para negar el verbo have se usa don't: we don't have enough."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y su hermano Leo revisan la compra que llegó a casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The receipt shows six bottles of juice.",
+            "traduccion": "El recibo muestra seis botellas de zumo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "But there are only four bottles in the bag.",
+            "traduccion": "Pero solo hay cuatro botellas en la bolsa."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "So two bottles are missing. And these are the wrong plates.",
+            "traduccion": "Entonces faltan dos botellas. Y estos son los platos equivocados."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The shop will replace the plates.",
+            "traduccion": "La tienda reemplazará los platos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And we should ask for a refund for the juice.",
+            "traduccion": "Y deberíamos pedir un reembolso por el zumo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué van a hacer con el zumo que falta?",
+          "opciones": [
+            {
+              "es": "Pedir un reembolso."
+            },
+            {
+              "es": "Cambiarlo por platos."
+            },
+            {
+              "es": "Comprarlo en otra tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «We should ask for a refund for the juice»."
+        }
+      }
+    }
+  }
+}

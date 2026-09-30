@@ -1,0 +1,644 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin hallazgos P0/P1. Explicaciones, patrones y errores (falta de do/does, -s tras does, «at the seven», who + does, studys) coinciden con los ejercicios.",
+      "Situaciones cotidianas, ítems con una sola respuesta deducible del diálogo; avisos del validador por opciones en español, aceptados.",
+      "Ejemplos de enseñanza del runtime correctos; no requieren sustitución."
+    ]
+  },
+  "classes": {
+    "en.n1.class-51": {
+      "explicacion": {
+        "titulo": "Preguntas con what, where y when",
+        "texto": "Para pedir información (no un sí o un no), la palabra interrogativa va al principio: what (qué) pregunta por una cosa o una actividad, where (dónde) por un lugar y when (cuándo) por un momento. Después se sigue el orden de las preguntas de sí/no: do/does + sujeto + verbo en forma base. Usa does con he, she o un nombre de persona, y do con I, you, we y they. En español basta «¿Dónde trabaja?», pero en inglés no se pueden omitir ni do/does ni el sujeto."
+      },
+      "patron": {
+        "texto": "Palabra interrogativa + do/does + sujeto + verbo base:",
+        "formula": [
+          {
+            "texto": "Where",
+            "nota": "pregunta por un lugar"
+          },
+          {
+            "texto": "does",
+            "nota": "con he/she; con you/they → do"
+          },
+          {
+            "texto": "he",
+            "nota": "sujeto obligatorio"
+          },
+          {
+            "texto": "work?",
+            "nota": "verbo en forma base, sin -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Pregunta por",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "what"
+            },
+            {
+              "texto": "una cosa o actividad"
+            },
+            {
+              "texto": "What do you drink?"
+            }
+          ],
+          [
+            {
+              "texto": "where"
+            },
+            {
+              "texto": "un lugar"
+            },
+            {
+              "texto": "Where does he work?"
+            }
+          ],
+          [
+            {
+              "texto": "when"
+            },
+            {
+              "texto": "un momento"
+            },
+            {
+              "texto": "When do you study English?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Where he works?",
+          "correcto": "Where does he work?",
+          "explicacion": "Falta el auxiliar does. Y cuando está does, el verbo va sin -s: work, no works."
+        },
+        {
+          "incorrecto": "What does she reads?",
+          "correcto": "What does she read?",
+          "explicacion": "Does ya marca que es she; el verbo principal queda en forma base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia conoce a Tom, un compañero nuevo de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Where do you study English, Tom?",
+            "traduccion": "¿Dónde estudias inglés, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "At school. My sister studies English at home.",
+            "traduccion": "En la escuela. Mi hermana estudia inglés en casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "When does she study?",
+            "traduccion": "¿Cuándo estudia ella?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "In the morning.",
+            "traduccion": "Por la mañana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What does she read?",
+            "traduccion": "¿Qué lee ella?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "She reads English books.",
+            "traduccion": "Lee libros en inglés."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo estudia inglés la hermana de Tom?",
+          "opciones": [
+            {
+              "es": "Por la mañana."
+            },
+            {
+              "es": "Por la noche."
+            },
+            {
+              "es": "En la escuela, con Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia pregunta «When does she study?» y Tom responde «In the morning»."
+        }
+      }
+    },
+    "en.n1.class-52": {
+      "explicacion": {
+        "titulo": "What time: ¿a qué hora?",
+        "texto": "What time significa «a qué hora». Va al principio y sigue el orden de las preguntas: What time + do/does + sujeto + verbo base. Para responder se usa at + la hora: at seven o'clock (a las siete). O'clock solo va con horas exactas y se puede omitir: at seven. Ojo: en español decimos «a las siete», pero en inglés no hay artículo; nunca «at the seven». Con he, she o class, el verbo de la respuesta lleva -s: Class starts at eight."
+      },
+      "patron": {
+        "texto": "What time + do/does + sujeto + verbo base:",
+        "formula": [
+          {
+            "texto": "What time",
+            "nota": "a qué hora"
+          },
+          {
+            "texto": "does",
+            "nota": "class = it → does"
+          },
+          {
+            "texto": "class",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "start?",
+            "nota": "verbo base después de does"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "What time do you get up?"
+            },
+            {
+              "texto": "I get up at seven o'clock."
+            }
+          ],
+          [
+            {
+              "texto": "What time does class start?"
+            },
+            {
+              "texto": "Class starts at eight o'clock."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I get up at the seven.",
+          "correcto": "I get up at seven o'clock.",
+          "explicacion": "No se traduce «las»: at + número, con o'clock si quieres."
+        },
+        {
+          "incorrecto": "What time class starts?",
+          "correcto": "What time does class start?",
+          "explicacion": "La pregunta necesita does, y con does el verbo vuelve a la forma base: start."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de sus mañanas antes de ir a la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What time do you get up, Leo?",
+            "traduccion": "¿A qué hora te levantas, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I get up at seven o'clock.",
+            "traduccion": "Me levanto a las siete."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And what time does class start?",
+            "traduccion": "¿Y a qué hora empieza la clase?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At eight o'clock.",
+            "traduccion": "A las ocho."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What time does your sister get up?",
+            "traduccion": "¿A qué hora se levanta tu hermana?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She gets up at eight. She is late!",
+            "traduccion": "Se levanta a las ocho. ¡Llega tarde!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué hora se levanta la hermana de Leo?",
+          "opciones": [
+            {
+              "es": "A las ocho."
+            },
+            {
+              "es": "A las siete."
+            },
+            {
+              "es": "A las seis."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «She gets up at eight». A las siete se levanta Leo."
+        }
+      }
+    },
+    "en.n1.class-53": {
+      "explicacion": {
+        "titulo": "Who como sujeto: Who cooks dinner?",
+        "texto": "Cuando who (quién) pregunta por la persona que hace la acción, who es el sujeto de la pregunta y no se usa do ni does. El verbo lleva -s, igual que con he o she: Who cooks dinner? (¿Quién cocina la cena?). La respuesta nombra a la persona con el verbo también con -s: My father cooks dinner. En español la pregunta tiene el mismo orden («¿Quién cocina?»), así que no añadas does."
+      },
+      "patron": {
+        "texto": "Who + verbo con -s + resto:",
+        "formula": [
+          {
+            "texto": "Who",
+            "nota": "quién: es el sujeto"
+          },
+          {
+            "texto": "cooks",
+            "nota": "verbo con -s, sin does"
+          },
+          {
+            "texto": "dinner?",
+            "nota": "lo demás"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Who cooks dinner?"
+            },
+            {
+              "texto": "My father cooks dinner."
+            }
+          ],
+          [
+            {
+              "texto": "Who plays soccer?"
+            },
+            {
+              "texto": "Tom plays soccer."
+            }
+          ],
+          [
+            {
+              "texto": "Who studies English?"
+            },
+            {
+              "texto": "Ana studies English."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Who does cook dinner?",
+          "correcto": "Who cooks dinner?",
+          "explicacion": "Who es el sujeto de la pregunta: no hace falta does."
+        },
+        {
+          "incorrecto": "Who cook dinner?",
+          "correcto": "Who cooks dinner?",
+          "explicacion": "Who funciona como he o she: el verbo lleva -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le pregunta a Sara quién hace cada cosa en su casa.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Who cooks dinner in your family, Sara?",
+            "traduccion": "¿Quién cocina la cena en tu familia, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My father cooks dinner.",
+            "traduccion": "Mi padre cocina la cena."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Who drinks coffee?",
+            "traduccion": "¿Quién toma café?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My mother drinks coffee.",
+            "traduccion": "Mi madre toma café."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And who plays soccer?",
+            "traduccion": "¿Y quién juega fútbol?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My brother plays soccer.",
+            "traduccion": "Mi hermano juega fútbol."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién cocina la cena en la familia de Sara?",
+          "opciones": [
+            {
+              "es": "Su padre."
+            },
+            {
+              "es": "Su madre."
+            },
+            {
+              "es": "Su hermano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara responde: «My father cooks dinner»."
+        }
+      }
+    },
+    "en.n1.class-54": {
+      "explicacion": {
+        "titulo": "Preguntas sobre rutinas: elige la palabra",
+        "texto": "Para preguntar por una rutina, decide primero qué dato quieres: what (qué actividad), where (dónde), when (cuándo), what time (a qué hora) o who (quién). Con what, where, when y what time se usa do/does + sujeto + verbo base: What time does she get up? Con who como sujeto no hay do/does y el verbo lleva -s: Who cooks dinner? Recuerda: does con he, she o un nombre; do con I, you, we y they."
+      },
+      "patron": {
+        "texto": "Palabra interrogativa + do/does + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "When",
+            "nota": "el dato que quieres: un momento"
+          },
+          {
+            "texto": "do",
+            "nota": "do con you/they; does con he/she"
+          },
+          {
+            "texto": "you",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "play soccer?",
+            "nota": "verbo base + resto"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Quiero saber…",
+          "Pregunta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "la actividad"
+            },
+            {
+              "texto": "What do you study?"
+            }
+          ],
+          [
+            {
+              "texto": "el lugar"
+            },
+            {
+              "texto": "Where does he study English?"
+            }
+          ],
+          [
+            {
+              "texto": "el momento"
+            },
+            {
+              "texto": "When do they play soccer?"
+            }
+          ],
+          [
+            {
+              "texto": "la hora"
+            },
+            {
+              "texto": "What time does she get up?"
+            }
+          ],
+          [
+            {
+              "texto": "la persona"
+            },
+            {
+              "texto": "Who cooks dinner?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Where you study English?",
+          "correcto": "Where do you study English?",
+          "explicacion": "En español no hay auxiliar, pero en inglés do es obligatorio en la pregunta."
+        },
+        {
+          "incorrecto": "Who does cook dinner?",
+          "correcto": "Who cooks dinner?",
+          "explicacion": "Cuando who es el sujeto no se usa does; el verbo lleva -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le hace preguntas a Leo para una tarea de clase sobre rutinas.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What time do you get up, Leo?",
+            "traduccion": "¿A qué hora te levantas, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At seven o'clock.",
+            "traduccion": "A las siete."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Where do you study English?",
+            "traduccion": "¿Dónde estudias inglés?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At school and at home.",
+            "traduccion": "En la escuela y en casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Who cooks dinner in your house?",
+            "traduccion": "¿Quién cocina la cena en tu casa?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My grandma cooks dinner.",
+            "traduccion": "Mi abuela cocina la cena."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde estudia inglés Leo?",
+          "opciones": [
+            {
+              "es": "En la escuela y en casa."
+            },
+            {
+              "es": "Solo en casa."
+            },
+            {
+              "es": "En casa de su abuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo responde a «Where do you study English?»: «At school and at home»."
+        }
+      }
+    },
+    "en.n1.class-55": {
+      "explicacion": {
+        "titulo": "La agenda de dos personas",
+        "texto": "Para describir la agenda de otra persona se usa la tercera persona: el verbo lleva -s (Ana gets up, Leo works) y study cambia a studies. Cada dato responde a una pregunta: ¿a qué hora? (at seven o'clock), ¿qué? (studies English), ¿dónde? (at school, at home). Para comparar a dos personas se pregunta con who: Who gets up at seven o'clock? La respuesta corta es el nombre + does: Ana does. Estrategia: lee dato por dato y fíjate a quién corresponde cada uno."
+      },
+      "patron": {
+        "texto": "Persona + verbo con -s + dato:",
+        "formula": [
+          {
+            "texto": "Ana",
+            "nota": "una persona (she)"
+          },
+          {
+            "texto": "gets up",
+            "nota": "verbo con -s"
+          },
+          {
+            "texto": "at seven o'clock.",
+            "nota": "la hora, con at"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Ana",
+          "Leo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "se levanta"
+            },
+            {
+              "texto": "at seven o'clock"
+            },
+            {
+              "texto": "at eight o'clock"
+            }
+          ],
+          [
+            {
+              "texto": "actividad"
+            },
+            {
+              "texto": "studies English at school"
+            },
+            {
+              "texto": "works at home"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo work at home.",
+          "correcto": "Leo works at home.",
+          "explicacion": "Leo es he: el verbo lleva -s."
+        },
+        {
+          "incorrecto": "Ana studys English at school.",
+          "correcto": "Ana studies English at school.",
+          "explicacion": "Con consonante + y, la y cambia a ies: study → studies."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a Carlos por la agenda de sus padres.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What time does your mother get up, Carlos?",
+            "traduccion": "¿A qué hora se levanta tu madre, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "She gets up at seven o'clock. She is a teacher. She works at a school.",
+            "traduccion": "Se levanta a las siete. Es profesora. Trabaja en una escuela."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And your father?",
+            "traduccion": "¿Y tu padre?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "He gets up at eight o'clock. He works at home.",
+            "traduccion": "Se levanta a las ocho. Trabaja en casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Who cooks dinner?",
+            "traduccion": "¿Quién cocina la cena?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "My father does.",
+            "traduccion": "Mi padre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién trabaja en casa?",
+          "opciones": [
+            {
+              "es": "El padre de Carlos."
+            },
+            {
+              "es": "La madre de Carlos."
+            },
+            {
+              "es": "Carlos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice de su padre: «He works at home». Su madre trabaja en una escuela."
+        }
+      }
+    }
+  }
+}

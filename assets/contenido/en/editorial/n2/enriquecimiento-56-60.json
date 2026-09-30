@@ -1,0 +1,606 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-59: error 2 «because is a long line» → «because is wet / because it is wet»: la corrección anterior cambiaba la frase entera; ahora solo falta el sujeto it (calco de «porque está mojado»).",
+      "class-60: ítem «¿qué no hace falta llevar?» tenía el distractor «Zapatos cerrados», no mencionado en el diálogo (ambiguo); ahora «¿qué no hace falta hacer?» con opciones todas presentes en el diálogo (comida / registrarse / agua).",
+      "class-60: ejemplo 0 era metalenguaje («A practical guide separates rules, warnings, and recommendations») → sustituido por una frase real de guía con should.",
+      "Aceptado (P2): class-57 «When must I come home?» es algo formal pero correcto y practica must; class-59 EJ0/EJ2 («this is a required rule / advice») se leen como frases de aviso reales.",
+      "Avisos del validador esperados por opciones en español."
+    ]
+  },
+  "classes": {
+    "en.n2.class-56": {
+      "explicacion": {
+        "titulo": "Have to y don't have to",
+        "texto": "Have to significa «tener que»: expresa una obligación que viene de fuera (una norma, el horario, la escuela). Con he/she/it o un nombre en singular se usa has to: Maya has to register. La negación don't / doesn't have to no prohíbe: significa «no hace falta» (You don't have to bring equipment = no es necesario traerlo). Para preguntar se pone do/does delante del sujeto: Do visitors have to wear a uniform? Después de to va el verbo en forma base."
+      },
+      "patron": {
+        "texto": "Sujeto + have to / has to / don't have to + verbo base:",
+        "formula": [
+          {
+            "texto": "Maya",
+            "nota": "sujeto singular (she)"
+          },
+          {
+            "texto": "has to register",
+            "nota": "has to + verbo base: obligación"
+          },
+          {
+            "texto": "before her first shift.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Afirmativa",
+          "Negativa",
+          "Pregunta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "have to wear"
+            },
+            {
+              "texto": "don't have to wear"
+            },
+            {
+              "texto": "Do they have to wear…?"
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "has to wear"
+            },
+            {
+              "texto": "doesn't have to wear"
+            },
+            {
+              "texto": "Does she have to wear…?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Ana have to register her ID.",
+          "correcto": "Ana has to register her ID.",
+          "explicacion": "Con un nombre en singular (Ana = she) se usa has to."
+        },
+        {
+          "incorrecto": "Does Leo has to wear a uniform?",
+          "correcto": "Does Leo have to wear a uniform?",
+          "explicacion": "Does ya marca la tercera persona: el verbo vuelve a have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a su hermano Tom por la excursión de la escuela de mañana.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Do we have to wear a uniform tomorrow?",
+            "traduccion": "¿Tenemos que llevar uniforme mañana?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, we don't have to wear a uniform.",
+            "traduccion": "No, no tenemos que llevar uniforme."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Do we have to bring food?",
+            "traduccion": "¿Tenemos que traer comida?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, the school gives us lunch. But we have to be at school at eight.",
+            "traduccion": "No, la escuela nos da el almuerzo. Pero tenemos que estar en la escuela a las ocho."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es obligatorio para la excursión?",
+          "opciones": [
+            {
+              "es": "Estar en la escuela a las ocho."
+            },
+            {
+              "es": "Llevar uniforme."
+            },
+            {
+              "es": "Traer comida."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «we have to be at school at eight». El uniforme y la comida no hacen falta (don't have to)."
+        }
+      }
+    },
+    "en.n2.class-57": {
+      "explicacion": {
+        "titulo": "Must y mustn't: regla y prohibición",
+        "texto": "Must expresa una regla firme u obligación: Workers must wear a helmet. Mustn't (must not) expresa una prohibición: «no se debe», «está prohibido». Cuidado: mustn't no es lo mismo que don't have to, que solo significa «no hace falta». Must no cambia con la persona (she must, nunca she musts) y va seguido del verbo base sin to: must wear, no must to wear. Se usa mucho en señales y normas de seguridad."
+      },
+      "patron": {
+        "texto": "Sujeto + must / mustn't + verbo base + resto:",
+        "formula": [
+          {
+            "texto": "Visitors",
+            "nota": "a quién se aplica la norma"
+          },
+          {
+            "texto": "mustn't touch",
+            "nota": "mustn't + verbo base: prohibición"
+          },
+          {
+            "texto": "the emergency button.",
+            "nota": "lo que está prohibido"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "must + verbo"
+            },
+            {
+              "texto": "obligación firme"
+            },
+            {
+              "texto": "You must wear a helmet."
+            }
+          ],
+          [
+            {
+              "texto": "mustn't + verbo"
+            },
+            {
+              "texto": "prohibición"
+            },
+            {
+              "texto": "You mustn't touch it."
+            }
+          ],
+          [
+            {
+              "texto": "don't have to + verbo"
+            },
+            {
+              "texto": "no hace falta"
+            },
+            {
+              "texto": "You don't have to bring it."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You must to wear a helmet.",
+          "correcto": "You must wear a helmet.",
+          "explicacion": "Después de must va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "She musts use the main entrance.",
+          "correcto": "She must use the main entrance.",
+          "explicacion": "Must no cambia con la persona: nunca lleva -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo va al parque en bicicleta y su madre, Ana, le recuerda las reglas.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Leo, you must wear a helmet on your bicycle.",
+            "traduccion": "Leo, debes usar casco en tu bicicleta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. Can I go to the park?",
+            "traduccion": "Vale. ¿Puedo ir al parque?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, but you mustn't go near the street.",
+            "traduccion": "Sí, pero no debes acercarte a la calle."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And when must I come home?",
+            "traduccion": "¿Y a qué hora debo volver a casa?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "You must come home at six.",
+            "traduccion": "Debes volver a casa a las seis."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tiene prohibido Leo?",
+          "opciones": [
+            {
+              "es": "Acercarse a la calle."
+            },
+            {
+              "es": "Ir al parque."
+            },
+            {
+              "es": "Volver a casa a las seis."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «you mustn't go near the street». Mustn't marca la prohibición."
+        }
+      }
+    },
+    "en.n2.class-58": {
+      "explicacion": {
+        "titulo": "Should y shouldn't: dar consejos",
+        "texto": "Should sirve para dar un consejo: «deberías». No es una obligación como must o have to, sino una recomendación. Shouldn't (should not) aconseja no hacer algo: You shouldn't look at a screen for hours. Como must, no cambia con la persona y va con el verbo base sin to: she should rest. Para pedir consejo, should va delante del sujeto: What should I do? La razón del consejo se añade con because: You should rest because you have a headache."
+      },
+      "patron": {
+        "texto": "Sujeto + should / shouldn't + verbo base + because + razón:",
+        "formula": [
+          {
+            "texto": "You",
+            "nota": "a quién se aconseja"
+          },
+          {
+            "texto": "should make an appointment",
+            "nota": "should + verbo base: consejo"
+          },
+          {
+            "texto": "because your cough is getting worse.",
+            "nota": "because + la razón"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You should to rest.",
+          "correcto": "You should rest.",
+          "explicacion": "Después de should va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "What I should do?",
+          "correcto": "What should I do?",
+          "explicacion": "En la pregunta, should va delante del sujeto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a su hermano Tom que se siente mal.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I have a headache, Tom.",
+            "traduccion": "Tengo dolor de cabeza, Tom."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "You should rest in a quiet room.",
+            "traduccion": "Deberías descansar en una habitación tranquila."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Can I play on my tablet?",
+            "traduccion": "¿Puedo jugar con mi tableta?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, you shouldn't look at a screen. You should drink some water.",
+            "traduccion": "No, no deberías mirar una pantalla. Deberías beber agua."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le aconseja Tom además de descansar?",
+          "opciones": [
+            {
+              "es": "Beber agua."
+            },
+            {
+              "es": "Jugar con la tableta."
+            },
+            {
+              "es": "Pedir una cita."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «You should drink some water». La tableta no se aconseja (shouldn't look at a screen)."
+        }
+      }
+    },
+    "en.n2.class-59": {
+      "explicacion": {
+        "titulo": "Explicar reglas y consejos",
+        "texto": "Una indicación puede tener distinta fuerza. Obligatorio (required): must o have to (Visitors must sign in). Prohibido (prohibited): mustn't (You mustn't use this door). Opcional (optional): don't have to (You don't have to print the ticket). Consejo (advice): should (You should arrive early). Para explicar una norma, añade la razón con because o so: You should arrive early because the line is long. No confundas mustn't (está prohibido) con don't have to (no hace falta)."
+      },
+      "patron": {
+        "texto": "Indicación + because + razón:",
+        "formula": [
+          {
+            "texto": "You mustn't enter",
+            "nota": "la indicación: aquí, una prohibición"
+          },
+          {
+            "texto": "because",
+            "nota": "introduce la razón"
+          },
+          {
+            "texto": "the floor is wet.",
+            "nota": "la razón"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Fuerza",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "obligatorio (required)"
+            },
+            {
+              "texto": "must / have to"
+            },
+            {
+              "texto": "Visitors must sign in."
+            }
+          ],
+          [
+            {
+              "texto": "prohibido (prohibited)"
+            },
+            {
+              "texto": "mustn't"
+            },
+            {
+              "texto": "You mustn't use this door."
+            }
+          ],
+          [
+            {
+              "texto": "opcional (optional)"
+            },
+            {
+              "texto": "don't have to"
+            },
+            {
+              "texto": "You don't have to print it."
+            }
+          ],
+          [
+            {
+              "texto": "consejo (advice)"
+            },
+            {
+              "texto": "should"
+            },
+            {
+              "texto": "You should arrive early."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You don't have to use this door; it is prohibited.",
+          "correcto": "You mustn't use this door; it is prohibited.",
+          "explicacion": "Lo prohibido va con mustn't. Don't have to solo significa que no hace falta."
+        },
+        {
+          "incorrecto": "You mustn't enter because is wet.",
+          "correcto": "You mustn't enter because it is wet.",
+          "explicacion": "Después de because hace falta un sujeto (it), aunque en español se omita («porque está mojado»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Ana leen el aviso de la biblioteca de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The notice says we must sign in at the entrance.",
+            "traduccion": "El aviso dice que debemos registrarnos en la entrada."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And we mustn't eat in the library because the books are new.",
+            "traduccion": "Y no debemos comer en la biblioteca porque los libros son nuevos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Do we have to show our ID?",
+            "traduccion": "¿Tenemos que mostrar nuestra identificación?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No, it is optional. But we should arrive early because the library is very busy.",
+            "traduccion": "No, es opcional. Pero deberíamos llegar temprano porque la biblioteca está muy concurrida."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es solo un consejo?",
+          "opciones": [
+            {
+              "es": "Llegar temprano."
+            },
+            {
+              "es": "Registrarse en la entrada."
+            },
+            {
+              "es": "No comer en la biblioteca."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «we should arrive early». Should da un consejo; must y mustn't son reglas."
+        }
+      }
+    },
+    "en.n2.class-60": {
+      "explicacion": {
+        "titulo": "Una guía práctica: reglas, avisos y consejos",
+        "texto": "Una guía práctica ordena la información según su fuerza: primero lo necesario (have to, must), después las advertencias y prohibiciones (mustn't), lo que no hace falta (don't have to) y al final las recomendaciones (should, shouldn't). Cada consejo se entiende mejor con una razón: because… Elige la forma según lo que quieres decir: must = regla firme, don't have to = opcional, should = consejo. Recuerda: «no tienes que» (don't have to) no significa «no debes» (mustn't)."
+      },
+      "patron": {
+        "texto": "Regla + ; + consejo + because + razón:",
+        "formula": [
+          {
+            "texto": "You must wear closed shoes;",
+            "nota": "regla firme"
+          },
+          {
+            "texto": "you should carry water",
+            "nota": "recomendación"
+          },
+          {
+            "texto": "because it is hot.",
+            "nota": "la razón del consejo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la guía",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "requisito"
+            },
+            {
+              "texto": "have to"
+            },
+            {
+              "texto": "You have to sign in."
+            }
+          ],
+          [
+            {
+              "texto": "advertencia"
+            },
+            {
+              "texto": "must / mustn't"
+            },
+            {
+              "texto": "You mustn't enter alone."
+            }
+          ],
+          [
+            {
+              "texto": "no necesario"
+            },
+            {
+              "texto": "don't have to"
+            },
+            {
+              "texto": "You don't have to bring supplies."
+            }
+          ],
+          [
+            {
+              "texto": "recomendación"
+            },
+            {
+              "texto": "should / shouldn't"
+            },
+            {
+              "texto": "You shouldn't touch hot tools."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You mustn't bring supplies because we have them.",
+          "correcto": "You don't have to bring supplies because we have them.",
+          "explicacion": "Si algo no hace falta, se usa don't have to. Mustn't lo prohibiría."
+        },
+        {
+          "incorrecto": "Visitors has to sign in.",
+          "correcto": "Visitors have to sign in.",
+          "explicacion": "Visitors es plural (they): se usa have to, no has to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom escriben una guía práctica para el picnic de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Rule: everyone has to sign in at the entrance.",
+            "traduccion": "Regla: todos tienen que registrarse en la entrada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Warning: you mustn't go into the water alone.",
+            "traduccion": "Advertencia: no debes entrar al agua solo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "You don't have to bring food. The school gives us lunch.",
+            "traduccion": "No tienes que traer comida. La escuela nos da el almuerzo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Recommendation: you should carry water because it is hot.",
+            "traduccion": "Recomendación: deberías llevar agua porque hace calor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según la guía, ¿qué no hace falta hacer?",
+          "opciones": [
+            {
+              "es": "Traer comida."
+            },
+            {
+              "es": "Registrarse en la entrada."
+            },
+            {
+              "es": "Llevar agua."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «You don't have to bring food». Registrarse es obligatorio (has to) y llevar agua es un consejo (should)."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Recommendation: you should read the checklist before the visit.",
+          "es": "Recomendación: deberías leer la lista antes de la visita.",
+          "nota": "Una guía práctica etiqueta cada parte; aquí, una recomendación con should."
+        }
+      ]
+    }
+  }
+}

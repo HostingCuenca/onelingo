@@ -41,3 +41,35 @@ Registro acumulado por autores y revisores del enriquecimiento. No se corrigen e
 | n3.c05.e01 | Dos respuestas defendibles | autor N3 1–15 |
 | n3.c10.e03 | La consigna dice 18:30 y la respuesta «6:30 flight» | autor N3 1–15 |
 | n3.c08.e04 | Opciones en inglés telegráfico («van hit sign») | autor N3 1–15 |
+| n1.c37.p02, c37.e02, c38.pg02, c40.p02, c41.p02, c41.e02 | Varias respuestas válidas, solo una aceptada | autor N1 36–50 |
+| n1.c44.p01, n1.c45.p01 | Ambas opciones gramaticales: solo de memoria | autor N1 36–50 |
+| n1.c41.e03 | «It works at home.» poco natural | autor N1 36–50 |
+| n1.c43.pg02, c43.e02, c50.pg02 | Dice «Corrige» y no hay nada que corregir | autor N1 36–50 |
+| n1.c49, n1.c50 | Título y objetivo en inglés en los metadatos | autor N1 36–50 |
+| n2.c36.pg02, c36.e02, c39.pg02, c41.e02, c42.e02, c43.pg02, c43.e02, c45.e02 | «Completar» sin verbo ni dirección (patrón sistémico) | autor N2 31–45 |
+| n2.c39.e03 | «When did it play» poco natural | autor N2 31–45 |
+| n2.c35.e01 | Consigna confusa (menciona camping sin relación) | autor N2 31–45 |
+| n2.c45.e01 | La consigna prioriza comodidad y la respuesta justifica con «quieter» | autor N2 31–45 |
+| n2.c35.pg03, n2.c36.e04 | Estructuras antes de enseñarse (most proud; just) | autor N2 31–45 |
+| n1.c51–c58 (pg02/p02/e02) | «Completar» ambiguos (Where/When, números) | autor N1 51–65 |
+| n1.c63.pg01, n1.c63.p01 | Respuesta en la consigna | autor N1 51–65 |
+| n2.c55.p01 | Respuesta válida de pg03 no aceptada | autor N2 51–65 |
+| n2.c64.e03 | Consigna ambigua; «Sorry, I can't help right now.» no aceptada | autor N2 51–65 |
+| n2.c58.p03 | Inglés en el campo `es` | autor N2 51–65 |
+| n2.c57.e03, n2.c59.e02 | Palabras no enseñadas (safety glasses, samples, lab; pictures, inside) | autor N2 51–65 |
+| n2.c64.p03, n2.c65.p03 | Pares de vocabulario erróneos (course = supuesto; ticket = billete) | autor N2 51–65 |
+
+**Patrón sistémico «completar» sin pista:** 668 ítems (N1 362, N2 251, N3 55) muestran solo «Completa: I ___ in Lima.» sin traducción ni opciones. Corrección central en curso: `correcciones-completar.json` por nivel (frase con hueco + traducción completa como pista + respuestas aceptadas).
+| n3.c63.pg02, c63.e03, c54.pg01 | Irresolubles sin contexto / circular | autor N3 51–65 |
+| n3.c61.pg02, c64.pg02, c65.pg02, c62.pg02 | Huecos ambiguos | autor N3 51–65 |
+| n3.c52.p02 | El audio dice «switch it off» y las opciones «turn it off» | autor N3 51–65 |
+| n3.c61 («The draft is moving»), n3.c61.e04 | Inglés discutible | autor N3 51–65 |
+| n3.c52.e04, c56.e04, c57.e04, c58.e04, c62.e04 | Prometen 6–12 pares y hay 5 | autor N3 51–65 |
+| n3.c61–c65 | Feedback de ejercicios en inglés | autor N3 51–65 |
+| n3.c37.e04, c38.e01, c46.pg01, c48.pg02, c49.pg01, c50.p01 | Irresolubles: no se muestra el texto fuente | autor N3 31–50 |
+| n3.c36.pg02, c37.pg01, c50.e01 | Respuesta en la consigna | autor N3 31–50 |
+| n3.c31.p02, c31.e03, c31.e04, c32.p02, c37.p01, c39.pg02, c33.e04, c48.e04 | Emparejamientos o respuestas ambiguas | autor N3 31–50 |
+| n3.c32.e04, n3.c47.e04 | Dicen «seis» y hay 5 pares | autor N3 31–50 |
+| n3.c46.pg03, c46.p02, c47.p01, c49.p01 | Pares de vocabulario de relleno | autor N3 31–50 |
+| n3.c40.pg02, c47.pg03, c49.pg02, c50.pg03 | Pista irrelevante | autor N3 31–50 |
+| n3.c35.pg02, c35.pg03, c34.e04, c35.e03, c35.e04, c37.p03, c37.e03, c39.p03, c38.p03, c38.e04 | Inglés poco natural o modelo incoherente | autor N3 31–50 |

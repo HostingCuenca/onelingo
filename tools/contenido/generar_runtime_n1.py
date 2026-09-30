@@ -109,8 +109,54 @@ def family_id(exercise_id: str) -> str:
     return "ex.onelingo." + exercise_id.replace("en.", "", 1)
 
 
+FILL_CUES: dict[str, dict] = {}
+
+
+def load_fill_cues() -> dict[str, dict]:
+    """Pistas de «completar» aprobadas (correcciones-completar.json con GO).
+
+    Cada entrada da la frase con hueco, su traducción completa como pista y
+    las respuestas aceptadas con esa pista.
+    """
+    cues: dict[str, dict] = {}
+    for spec in LEVELS:
+        path = EDITORIAL / spec["id"] / "correcciones-completar.json"
+        if not path.exists():
+            continue
+        document = json.loads(path.read_text(encoding="utf-8"))
+        if document.get("review", {}).get("status") != "GO":
+            continue
+        for exercise_id, entry in document["items"].items():
+            if entry["frase"].count("___") != 1:
+                raise ValueError(f"{exercise_id}: la frase debe tener un solo hueco")
+            if not entry.get("pista", "").strip():
+                raise ValueError(f"{exercise_id}: falta la pista")
+            cues[exercise_id] = entry
+    return cues
+
+
+def apply_fill_cue(source: dict) -> None:
+    cue = FILL_CUES.get(source.get("id", ""))
+    if cue is None or source.get("format") != "completar":
+        return
+    answer = source.setdefault("answer", {})
+    original = str(answer.get("text", ""))
+    accepted = list(dict.fromkeys([original, *answer.get("accepted", []), *cue.get("aceptadas", [])]))
+    answer["accepted"] = accepted
+    origin = source.setdefault("origin", {})
+    passage = str(origin.get("text") or "").strip()
+    if passage and passage != "___" and "___" not in passage:
+        # «Lee y completa»: se conserva el texto de lectura encima de la frase.
+        origin["text"] = f"{passage}\n\n{cue['frase']}"
+        source["prompt"] = {"es": f"Lee y completa la frase: «{cue['pista']}»"}
+    else:
+        origin["text"] = cue["frase"]
+        source["prompt"] = {"es": f"Completa la frase: «{cue['pista']}»"}
+
+
 def normalized_exercise(document: dict, class_document: dict) -> dict:
     source = deepcopy(document)
+    apply_fill_cue(source)
     origin = source.setdefault("origin", {})
     if (
         source.get("format") == "completar"
@@ -547,6 +593,8 @@ def route_unit(
 
 
 def compile_runtime() -> tuple[dict[str, dict], dict, dict, dict]:
+    FILL_CUES.clear()
+    FILL_CUES.update(load_fill_cues())
     library = {
         "schema": "exercise-library/1",
         "libraryId": "onelingo-en-editorial",

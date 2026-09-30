@@ -482,10 +482,30 @@ class _ItemViewState extends State<ItemView> {
             ],
           ];
         }
+        // «Lee y completa»: el texto de lectura va en una tarjeta y la frase
+        // con el hueco debajo, separados por una línea en blanco.
+        final textoCompleto = item.texto ?? '';
+        final corte = textoCompleto.lastIndexOf('\n\n');
+        final lectura = corte < 0 ? null : textoCompleto.substring(0, corte);
+        final frase = corte < 0
+            ? textoCompleto
+            : textoCompleto.substring(corte + 2);
         return [
           ...audioEnunciado(),
+          if (lectura != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 14),
+              child: Tarjeta(
+                color: OL.moradoSuave,
+                sombra: false,
+                child: Text(
+                  lectura,
+                  style: const TextStyle(fontSize: 17, height: 1.4),
+                ),
+              ),
+            ),
           Text(
-            (item.texto ?? '').replaceAll(
+            frase.replaceAll(
               '___',
               opcionCompletar ?? (escrito.text.isEmpty ? '____' : escrito.text),
             ),

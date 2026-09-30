@@ -1,0 +1,532 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin cambios. Explicaciones, patrones, tablas y errores coinciden con los ejercicios (he/she/it, -s/-es/-ies, concordancia, rutina y perfil).",
+      "Nombres propios nuevos Luna (class-44) y Sol (class-45) presentes en palabrasLibres de curso.json.",
+      "Avisos del validador sobre opciones del ítem: opciones en español, esperables; cada ítem tiene una sola respuesta según el diálogo."
+    ]
+  },
+  "classes": {
+    "en.n1.class-41": {
+      "explicacion": {
+        "titulo": "He, she, it: el verbo lleva -s",
+        "texto": "Cuando hablas de una sola persona o cosa (he, she, it, Ana, mi madre), el verbo en presente lleva -s: he works, she lives, it works. Con I, you, we y they no hay -s: I work, they work. It se usa para cosas y animales: It works significa «funciona». Como en inglés el verbo casi no cambia, no puedes omitir el sujeto: «trabaja en casa» es He works at home o She works at home."
+      },
+      "patron": {
+        "texto": "He/She/It + verbo con -s:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "una persona: ella"
+          },
+          {
+            "texto": "drinks",
+            "nota": "drink + -s"
+          },
+          {
+            "texto": "water.",
+            "nota": "qué bebe"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Verbo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "sin -s"
+            },
+            {
+              "texto": "They play soccer."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "con -s"
+            },
+            {
+              "texto": "He plays soccer."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She live in Ecuador.",
+          "correcto": "She lives in Ecuador.",
+          "explicacion": "Con she (una persona) el verbo lleva -s: lives."
+        },
+        {
+          "incorrecto": "Works at home.",
+          "correcto": "He works at home.",
+          "explicacion": "En español «trabaja en casa» no necesita sujeto; en inglés hay que decir quién: He o She."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a Mia unas fotos de su familia.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "This is my sister. She plays soccer.",
+            "traduccion": "Esta es mi hermana. Ella juega fútbol."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is that your brother?",
+            "traduccion": "¿Ese es tu hermano?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. He lives in Ecuador.",
+            "traduccion": "Sí. Él vive en Ecuador."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "He works at home, and he eats at home.",
+            "traduccion": "Trabaja en casa y come en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién juega fútbol?",
+          "opciones": [
+            {
+              "es": "La hermana de Leo."
+            },
+            {
+              "es": "El hermano de Leo."
+            },
+            {
+              "es": "Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «This is my sister. She plays soccer». Su hermano vive en Ecuador y trabaja en casa."
+        }
+      }
+    },
+    "en.n1.class-42": {
+      "explicacion": {
+        "titulo": "Cómo se forma el verbo con he/she: -s, -es, -ies",
+        "texto": "Con he, she o it casi todos los verbos añaden -s: works, plays. Si el verbo termina en -o, -ch, -sh o -s, se añade -es: goes, watches. Si termina en consonante + y, la y cambia a -ies: study → studies. Si antes de la y hay vocal, solo se añade -s: play → plays. Have es irregular: he has. Ojo con have breakfast: significa «desayunar», no «tener desayuno»."
+      },
+      "patron": {
+        "texto": "He/She + verbo con su terminación:",
+        "formula": [
+          {
+            "texto": "He",
+            "nota": "una persona: él"
+          },
+          {
+            "texto": "studies",
+            "nota": "study: consonante + y → -ies"
+          },
+          {
+            "texto": "English.",
+            "nota": "qué estudia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo termina en…",
+          "Cambio",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "casi todos"
+            },
+            {
+              "texto": "+ s"
+            },
+            {
+              "texto": "work → works"
+            }
+          ],
+          [
+            {
+              "texto": "-o, -ch"
+            },
+            {
+              "texto": "+ es"
+            },
+            {
+              "texto": "go → goes, watch → watches"
+            }
+          ],
+          [
+            {
+              "texto": "consonante + y"
+            },
+            {
+              "texto": "y → ies"
+            },
+            {
+              "texto": "study → studies"
+            }
+          ],
+          [
+            {
+              "texto": "vocal + y"
+            },
+            {
+              "texto": "+ s"
+            },
+            {
+              "texto": "play → plays"
+            }
+          ],
+          [
+            {
+              "texto": "have (irregular)"
+            },
+            {
+              "texto": "has"
+            },
+            {
+              "texto": "He has breakfast."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He studys English.",
+          "correcto": "He studies English.",
+          "explicacion": "Study termina en consonante + y: la y cambia a -ies."
+        },
+        {
+          "incorrecto": "She haves breakfast at home.",
+          "correcto": "She has breakfast at home.",
+          "explicacion": "Have es irregular: con he o she se dice has."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara hablan de sus hermanos en el recreo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "My sister studies English every day.",
+            "traduccion": "Mi hermana estudia inglés todos los días."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My brother goes to school. He plays soccer at school.",
+            "traduccion": "Mi hermano va a la escuela. Juega fútbol en la escuela."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And at home?",
+            "traduccion": "¿Y en casa?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "He watches TV at home.",
+            "traduccion": "Ve televisión en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace el hermano de Sara en casa?",
+          "opciones": [
+            {
+              "es": "Ve televisión."
+            },
+            {
+              "es": "Juega fútbol."
+            },
+            {
+              "es": "Estudia inglés."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «He watches TV at home». Juega fútbol en la escuela, y quien estudia inglés es la hermana de Tom."
+        }
+      }
+    },
+    "en.n1.class-43": {
+      "explicacion": {
+        "titulo": "Concordancia: ¿-s o sin -s?",
+        "texto": "Antes de escribir el verbo, mira el sujeto. Si es una sola persona o cosa (he, she, it, my mother, Ana), el verbo lleva -s: My mother works. Si son varias personas o es I, you, we o they, no lleva -s: My parents work. El error más común es olvidar la -s (he work); el segundo, ponerla con un sujeto plural (they plays). Recuerda las formas especiales: goes, studies, watches y has."
+      },
+      "patron": {
+        "texto": "Una persona + verbo con -s:",
+        "formula": [
+          {
+            "texto": "My mother",
+            "nota": "una persona → como she"
+          },
+          {
+            "texto": "works",
+            "nota": "verbo con -s"
+          },
+          {
+            "texto": "at home.",
+            "nota": "dónde"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Verbo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they / my parents"
+            },
+            {
+              "texto": "work, go, study, have"
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it / my mother"
+            },
+            {
+              "texto": "works, goes, studies, has"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My mother work at home.",
+          "correcto": "My mother works at home.",
+          "explicacion": "My mother es una sola persona (she): el verbo lleva -s."
+        },
+        {
+          "incorrecto": "My brothers plays soccer.",
+          "correcto": "My brothers play soccer.",
+          "explicacion": "My brothers son varios (they): el verbo va sin -s. La -s del sujeto plural no pasa al verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de sus familias camino de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My parents work at home.",
+            "traduccion": "Mis padres trabajan en casa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My mother works at the office.",
+            "traduccion": "Mi madre trabaja en la oficina."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "My sister goes to school, and she has breakfast at school.",
+            "traduccion": "Mi hermana va a la escuela y desayuna en la escuela."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My brother has breakfast at home.",
+            "traduccion": "Mi hermano desayuna en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde trabaja la madre de Leo?",
+          "opciones": [
+            {
+              "es": "En la oficina."
+            },
+            {
+              "es": "En casa."
+            },
+            {
+              "es": "En la escuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «My mother works at the office». Los que trabajan en casa son los padres de Ana."
+        }
+      }
+    },
+    "en.n1.class-44": {
+      "explicacion": {
+        "titulo": "La rutina de otra persona",
+        "texto": "Para contar la rutina de alguien, nómbralo en la primera frase (Ana studies English every day) y después usa she o he para no repetir el nombre. Un nombre de una sola persona funciona como he o she, así que todos los verbos llevan -s: studies, drinks, goes, plays, watches. Mantén el orden de siempre: persona + verbo + qué + dónde + cuándo."
+      },
+      "patron": {
+        "texto": "Nombre o she/he + verbo con -s + lugar + tiempo:",
+        "formula": [
+          {
+            "texto": "Ana",
+            "nota": "una persona → como she"
+          },
+          {
+            "texto": "goes",
+            "nota": "verbo con -es"
+          },
+          {
+            "texto": "to school",
+            "nota": "adónde"
+          },
+          {
+            "texto": "every day.",
+            "nota": "cuándo: al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Ana study English every day.",
+          "correcto": "Ana studies English every day.",
+          "explicacion": "Ana es una sola persona, como she: study cambia a studies."
+        },
+        {
+          "incorrecto": "She every day goes to school.",
+          "correcto": "She goes to school every day.",
+          "explicacion": "Every day va al final, no entre el sujeto y el verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le cuenta a Mia la rutina de su prima Luna.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "My cousin Luna studies English every day.",
+            "traduccion": "Mi prima Luna estudia inglés todos los días."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "At school?",
+            "traduccion": "¿En la escuela?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, she studies English at home.",
+            "traduccion": "No, estudia inglés en casa."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "She plays soccer at school, and she watches TV at home.",
+            "traduccion": "Juega fútbol en la escuela y ve televisión en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Luna en la escuela?",
+          "opciones": [
+            {
+              "es": "Juega fútbol."
+            },
+            {
+              "es": "Estudia inglés."
+            },
+            {
+              "es": "Ve televisión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «She plays soccer at school». Estudia inglés y ve televisión en casa."
+        }
+      }
+    },
+    "en.n1.class-45": {
+      "explicacion": {
+        "titulo": "El perfil de una persona",
+        "texto": "Un perfil presenta a alguien en pocas frases. Empieza con This is + nombre (una persona: this is, no these are). Luego usa she o he con verbos en -s: dónde vive (She lives in Ecuador), qué estudia (She studies English every day), dónde trabaja (She works at the office) y qué más hace (She plays soccer at school). Con países y ciudades se usa in; con home, school y the office, at."
+      },
+      "patron": {
+        "texto": "Presentar + datos con she/he:",
+        "formula": [
+          {
+            "texto": "This is Ana.",
+            "nota": "presenta a la persona"
+          },
+          {
+            "texto": "She lives in Ecuador.",
+            "nota": "dato personal: in + país"
+          },
+          {
+            "texto": "She studies English every day.",
+            "nota": "rutina con -ies y tiempo al final"
+          },
+          {
+            "texto": "She works at the office.",
+            "nota": "trabajo: at + lugar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This is Ana. He lives in Ecuador.",
+          "correcto": "This is Ana. She lives in Ecuador.",
+          "explicacion": "Ana es una mujer: se usa she. He es para un hombre o un niño."
+        },
+        {
+          "incorrecto": "She lives at Ecuador.",
+          "correcto": "She lives in Ecuador.",
+          "explicacion": "Con países y ciudades se usa in: in Ecuador, in Lima. At va con home, school y the office."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le presenta a Tom a su amiga Sol en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tom, this is Sol. She is my friend.",
+            "traduccion": "Tom, esta es Sol. Es mi amiga."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Hello, Sol!",
+            "traduccion": "¡Hola, Sol!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She lives in Peru. She studies English every day.",
+            "traduccion": "Vive en Perú. Estudia inglés todos los días."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "She plays soccer at school, and she watches TV at home.",
+            "traduccion": "Juega fútbol en la escuela y ve televisión en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde vive Sol?",
+          "opciones": [
+            {
+              "es": "En Perú."
+            },
+            {
+              "es": "En Ecuador."
+            },
+            {
+              "es": "En Chile."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «She lives in Peru»."
+        }
+      }
+    }
+  }
+}

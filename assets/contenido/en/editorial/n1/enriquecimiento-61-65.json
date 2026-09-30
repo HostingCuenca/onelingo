@@ -1,0 +1,642 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-64 (P1 corregido): la explicación del error «What you do in the evening?» decía «faltan los dos do»; solo falta el auxiliar. Reescrita.",
+      "class-62: distractor «Va al gimnasio a las seis» podía ser cierto también el sábado (rutina diaria sin día) → «Lee en casa.», para que haya una sola respuesta correcta.",
+      "class-63: fila de tabla «Saturday: park, morning» → «Saturday: park» / «Leo walks in the park on Saturday.» (la frase completa omitía el día; ahora coincide con el ejercicio guiado).",
+      "class-64: traducción «Leo en casa» (confundible con el personaje Leo) → «Yo leo en casa».",
+      "class-65: «No, he is never late on Monday» → «No, he is never late.» (respuesta más natural a «Is he often late?»); traducción ajustada.",
+      "Aceptado: opciones del ítem en español (avisos del validador), «on the weekend» con nota sobre el británico «at the weekend»."
+    ]
+  },
+  "classes": {
+    "en.n1.class-61": {
+      "explicacion": {
+        "titulo": "Contar mi rutina paso a paso",
+        "texto": "Para contar tu rutina usa I + verbo en forma base (I get up, I take a shower). Ordena los pasos con then (luego) y añade la hora con at: I get up at six o'clock. Then I take a shower. La frecuencia va antes del verbo (I usually study English in the morning) y el día, con on (on Friday). Ojo: «me levanto», «me ducho» y «me acuesto» no llevan «me» en inglés: get up, take a shower, go to bed."
+      },
+      "patron": {
+        "texto": "Acción + hora, luego Then + siguiente acción:",
+        "formula": [
+          {
+            "texto": "I get up",
+            "nota": "primera acción, con I"
+          },
+          {
+            "texto": "at six o'clock.",
+            "nota": "at + hora"
+          },
+          {
+            "texto": "Then",
+            "nota": "luego: el paso siguiente"
+          },
+          {
+            "texto": "I take a shower.",
+            "nota": "nueva acción"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Español",
+          "Inglés"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "me levanto"
+            },
+            {
+              "texto": "I get up"
+            }
+          ],
+          [
+            {
+              "texto": "me ducho"
+            },
+            {
+              "texto": "I take a shower"
+            }
+          ],
+          [
+            {
+              "texto": "me acuesto"
+            },
+            {
+              "texto": "I go to bed"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Then I take shower.",
+          "correcto": "Then I take a shower.",
+          "explicacion": "Se dice take a shower, con a."
+        },
+        {
+          "incorrecto": "I go to the bed at ten.",
+          "correcto": "I go to bed at ten.",
+          "explicacion": "Go to bed (acostarse) va sin the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le cuenta a Mia cómo son sus mañanas de escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What time do you get up, Carlos?",
+            "traduccion": "¿A qué hora te levantas, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I get up at six o'clock. Then I take a shower.",
+            "traduccion": "Me levanto a las seis. Luego me ducho."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And then?",
+            "traduccion": "¿Y luego?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then I eat breakfast and I walk to school.",
+            "traduccion": "Luego desayuno y camino a la escuela."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What time do you go to bed?",
+            "traduccion": "¿A qué hora te acuestas?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I usually go to bed at ten.",
+            "traduccion": "Normalmente me acuesto a las diez."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Carlos justo después de levantarse?",
+          "opciones": [
+            {
+              "es": "Se ducha."
+            },
+            {
+              "es": "Desayuna."
+            },
+            {
+              "es": "Camina a la escuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «I get up at six o'clock. Then I take a shower»."
+        }
+      }
+    },
+    "en.n1.class-62": {
+      "explicacion": {
+        "titulo": "La rutina de otra persona",
+        "texto": "Para contar la rutina de otra persona (my sister, he, she), el verbo lleva -s: gets up, takes, works. Algunos cambian un poco más: go → goes, study → studies. En las negativas y en las preguntas, la -s pasa a does y el verbo queda en forma base: She doesn't work on Saturday. What time does she go to bed? La marca de tercera persona aparece una sola vez: nunca «doesn't works» ni «does she goes»."
+      },
+      "patron": {
+        "texto": "Persona + frecuencia + verbo con -s + lugar:",
+        "formula": [
+          {
+            "texto": "My sister",
+            "nota": "una persona = she"
+          },
+          {
+            "texto": "usually",
+            "nota": "frecuencia"
+          },
+          {
+            "texto": "goes",
+            "nota": "go → goes"
+          },
+          {
+            "texto": "to the gym.",
+            "nota": "el lugar"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Afirmativa",
+          "Negativa",
+          "Pregunta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "She works."
+            },
+            {
+              "texto": "She doesn't work."
+            },
+            {
+              "texto": "Does she work?"
+            }
+          ],
+          [
+            {
+              "texto": "She goes to the gym."
+            },
+            {
+              "texto": "She doesn't go to the gym."
+            },
+            {
+              "texto": "Does she go to the gym?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My brother go to the gym.",
+          "correcto": "My brother goes to the gym.",
+          "explicacion": "My brother es he: go cambia a goes."
+        },
+        {
+          "incorrecto": "What time does she goes to bed?",
+          "correcto": "What time does she go to bed?",
+          "explicacion": "Does ya lleva la marca de she; el verbo queda en forma base: go."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le cuenta a Ana la rutina de su hermano mayor.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What time does your brother get up, Tom?",
+            "traduccion": "¿A qué hora se levanta tu hermano, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "He gets up at six o'clock. Then he goes to the gym.",
+            "traduccion": "Se levanta a las seis. Luego va al gimnasio."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Does he work on Saturday?",
+            "traduccion": "¿Trabaja el sábado?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, he doesn't work on Saturday. He plays soccer.",
+            "traduccion": "No, no trabaja el sábado. Juega fútbol."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What time does he go to bed?",
+            "traduccion": "¿A qué hora se acuesta?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "At ten o'clock. He is always tired!",
+            "traduccion": "A las diez. ¡Siempre está cansado!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace el hermano de Tom el sábado?",
+          "opciones": [
+            {
+              "es": "Juega fútbol."
+            },
+            {
+              "es": "Trabaja."
+            },
+            {
+              "es": "Lee en casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «he doesn't work on Saturday. He plays soccer»."
+        }
+      }
+    },
+    "en.n1.class-63": {
+      "explicacion": {
+        "titulo": "Leer un horario",
+        "texto": "Un horario da la información en pocas palabras: Monday: Ana studies English at seven. Para leerlo, busca primero el día, luego la actividad y al final la hora o la parte del día. Al pasarlo a una frase completa, añade las preposiciones: on + día, at + hora, in + parte del día (in the morning). Early significa «temprano», y the weekend, «el fin de semana» (Saturday y Sunday): on the weekend. Con el nombre de una persona, el verbo lleva -s."
+      },
+      "patron": {
+        "texto": "Persona + actividad + hora + día:",
+        "formula": [
+          {
+            "texto": "Ana studies English",
+            "nota": "persona + actividad (verbo con -s)"
+          },
+          {
+            "texto": "at seven",
+            "nota": "at + hora"
+          },
+          {
+            "texto": "on Monday.",
+            "nota": "on + día"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Horario",
+          "Frase completa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Monday: English, seven"
+            },
+            {
+              "texto": "Ana studies English at seven on Monday."
+            }
+          ],
+          [
+            {
+              "texto": "Saturday: park"
+            },
+            {
+              "texto": "Leo walks in the park on Saturday."
+            }
+          ],
+          [
+            {
+              "texto": "Sunday: get up early"
+            },
+            {
+              "texto": "Leo gets up early on Sunday."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo walks in the park in Saturday.",
+          "correcto": "Leo walks in the park on Saturday.",
+          "explicacion": "Con los días se usa on, aunque el parque lleve in."
+        },
+        {
+          "incorrecto": "Leo never works in the weekend.",
+          "correcto": "Leo never works on the weekend.",
+          "explicacion": "Se dice on the weekend (en inglés británico, at the weekend)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le lee a Mia el horario de su familia, pegado en la cocina.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look, Mia. Monday: my brother plays soccer at seven.",
+            "traduccion": "Mira, Mia. Lunes: mi hermano juega fútbol a las siete."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And on Friday?",
+            "traduccion": "¿Y el viernes?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Friday: my mother goes to the gym in the evening.",
+            "traduccion": "Viernes: mi madre va al gimnasio por la noche."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And on the weekend?",
+            "traduccion": "¿Y el fin de semana?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "On Saturday we walk in the park. On Sunday we get up early.",
+            "traduccion": "El sábado caminamos en el parque. El domingo nos levantamos temprano."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el horario que lee Sara, ¿qué hace la familia el sábado?",
+          "opciones": [
+            {
+              "es": "Camina en el parque."
+            },
+            {
+              "es": "Se levanta temprano."
+            },
+            {
+              "es": "Va al gimnasio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara lee: «On Saturday we walk in the park». Levantarse temprano es el domingo."
+        }
+      }
+    },
+    "en.n1.class-64": {
+      "explicacion": {
+        "titulo": "Escuchar una entrevista corta",
+        "texto": "En una entrevista sobre rutinas, la palabra del principio de la pregunta te dice qué dato vas a oír: what time → una hora (at six), where → un lugar (at home), what → una actividad (I study English). What do you do? significa «¿Qué haces?»: el primer do es el auxiliar y el segundo es el verbo «hacer». Para devolver la pregunta se dice What about you? (¿Y tú?). Estrategia: escucha la palabra interrogativa y busca solo ese dato en la respuesta."
+      },
+      "patron": {
+        "texto": "What + do + sujeto + do + cuándo:",
+        "formula": [
+          {
+            "texto": "What",
+            "nota": "pregunta por una actividad"
+          },
+          {
+            "texto": "do you do",
+            "nota": "do auxiliar + do «hacer»: ¿qué haces?"
+          },
+          {
+            "texto": "in the evening?",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Si oyes…",
+          "Espera…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "What time…?"
+            },
+            {
+              "texto": "una hora"
+            },
+            {
+              "texto": "At six o'clock."
+            }
+          ],
+          [
+            {
+              "texto": "Where…?"
+            },
+            {
+              "texto": "un lugar"
+            },
+            {
+              "texto": "At home."
+            }
+          ],
+          [
+            {
+              "texto": "What do you do…?"
+            },
+            {
+              "texto": "una actividad"
+            },
+            {
+              "texto": "I study English."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What you do in the evening?",
+          "correcto": "What do you do in the evening?",
+          "explicacion": "Falta el auxiliar do. En What do you do?, el primer do es el auxiliar y el segundo es el verbo «hacer»."
+        },
+        {
+          "incorrecto": "I get up usually at six.",
+          "correcto": "I usually get up at six.",
+          "explicacion": "En la respuesta, usually va antes del verbo get up."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo entrevista a Sara para una tarea de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What time do you get up, Sara?",
+            "traduccion": "¿A qué hora te levantas, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I usually get up at six.",
+            "traduccion": "Normalmente me levanto a las seis."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What do you do in the evening?",
+            "traduccion": "¿Qué haces por la noche?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I read at home. What about you?",
+            "traduccion": "Yo leo en casa. ¿Y tú?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I often listen to music in the evening.",
+            "traduccion": "A menudo escucho música por la noche."
+          }
+        ],
+        "item": {
+          "formato": "escuchar",
+          "audio": "I often listen to music in the evening.",
+          "consigna": "Escucha la respuesta de Leo. ¿Qué hace él por la noche?",
+          "opciones": [
+            {
+              "es": "A menudo escucha música."
+            },
+            {
+              "es": "Lee en casa."
+            },
+            {
+              "es": "Se levanta a las seis."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I often listen to music in the evening». Sara es la que lee en casa."
+        }
+      }
+    },
+    "en.n1.class-65": {
+      "explicacion": {
+        "titulo": "Repaso: rutinas en primera y tercera persona",
+        "texto": "Esta clase mezcla todo lo de rutinas. Revisa cuatro puntos: 1) Con I, verbo base (I get up); con he, she o un nombre, verbo con -s (he goes, she takes). 2) En negativas y preguntas, doesn't/does + verbo base: He doesn't work. What time does he go to bed? 3) La frecuencia va antes del verbo normal, pero después de be: He usually goes… / He is never late. 4) Tiempo: at + hora, on + día, in + parte del día."
+      },
+      "patron": {
+        "texto": "Persona + frecuencia + verbo + lugar + día + hora:",
+        "formula": [
+          {
+            "texto": "He",
+            "nota": "tercera persona"
+          },
+          {
+            "texto": "usually",
+            "nota": "frecuencia antes del verbo"
+          },
+          {
+            "texto": "goes to the gym",
+            "nota": "verbo con -s + lugar"
+          },
+          {
+            "texto": "on Friday",
+            "nota": "on + día"
+          },
+          {
+            "texto": "at eight.",
+            "nota": "at + hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Punto",
+          "Ejemplo correcto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "tercera persona"
+            },
+            {
+              "texto": "She takes a shower."
+            }
+          ],
+          [
+            {
+              "texto": "negativa"
+            },
+            {
+              "texto": "He doesn't work on Sunday."
+            }
+          ],
+          [
+            {
+              "texto": "pregunta"
+            },
+            {
+              "texto": "What time does he go to bed?"
+            }
+          ],
+          [
+            {
+              "texto": "frecuencia con be"
+            },
+            {
+              "texto": "He is never late."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My brother usually go to the gym.",
+          "correcto": "My brother usually goes to the gym.",
+          "explicacion": "Usually no cambia el verbo: con my brother (he) se usa goes."
+        },
+        {
+          "incorrecto": "He never is late.",
+          "correcto": "He is never late.",
+          "explicacion": "Con be, never va después: is never."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pregunta a Carlos por los domingos en su casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What time do you get up on Sunday, Carlos?",
+            "traduccion": "¿A qué hora te levantas el domingo, Carlos?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I get up at eight. Then I walk in the park.",
+            "traduccion": "Me levanto a las ocho. Luego camino en el parque."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And your brother?",
+            "traduccion": "¿Y tu hermano?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "He doesn't get up early on Sunday. He gets up at ten!",
+            "traduccion": "Él no se levanta temprano el domingo. ¡Se levanta a las diez!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Is he often late?",
+            "traduccion": "¿Llega tarde a menudo?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No, he is never late.",
+            "traduccion": "No, nunca llega tarde."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué hora se levanta el hermano de Carlos el domingo?",
+          "opciones": [
+            {
+              "es": "A las diez."
+            },
+            {
+              "es": "A las ocho."
+            },
+            {
+              "es": "A las seis, temprano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «He gets up at ten!». A las ocho se levanta Carlos."
+        }
+      }
+    }
+  }
+}

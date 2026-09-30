@@ -1,0 +1,546 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-41: intercambiados los hablantes para que Rex siga siendo el perro de Tom (como en class-38); opciones y feedback ajustados.",
+      "class-43: contexto aclara que Mia y Tom son hermanos («our house»).",
+      "class-44: ejemplo 3 «Both are comfortable, while I prefer…» (while mal usado) → «…, but I prefer the quieter hotel».",
+      "class-45: la trampa de recommend se matiza (no se pone you delante de la opción) en lugar de una regla absoluta."
+    ]
+  },
+  "classes": {
+    "en.n2.class-41": {
+      "explicacion": {
+        "titulo": "Comparativos cortos: -er + than",
+        "texto": "Para comparar dos cosas con un adjetivo corto se añade -er y el segundo elemento va con than (que): Leo is taller than Tom. Si el adjetivo termina en consonante + y, la y cambia a i: heavy → heavier. Si tiene una sílaba y termina en una sola vocal + consonante, esta se dobla: big → bigger. Trampas: no se usa more con adjetivos cortos (more tall) y «que» se dice than, no that. Después de than se puede usar me: taller than me."
+      },
+      "patron": {
+        "texto": "Sujeto + is + adjetivo-er + than + segundo elemento:",
+        "formula": [
+          {
+            "texto": "My brother",
+            "nota": "primer elemento"
+          },
+          {
+            "texto": "is taller",
+            "nota": "adjetivo corto + -er"
+          },
+          {
+            "texto": "than me.",
+            "nota": "than + segundo elemento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Adjetivo",
+          "Regla",
+          "Comparativo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "tall"
+            },
+            {
+              "texto": "+ -er"
+            },
+            {
+              "texto": "taller"
+            }
+          ],
+          [
+            {
+              "texto": "heavy"
+            },
+            {
+              "texto": "y → i + -er"
+            },
+            {
+              "texto": "heavier"
+            }
+          ],
+          [
+            {
+              "texto": "big"
+            },
+            {
+              "texto": "doble consonante + -er"
+            },
+            {
+              "texto": "bigger"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My brother is more tall than me.",
+          "correcto": "My brother is taller than me.",
+          "explicacion": "Tall es un adjetivo corto: lleva -er, no more."
+        },
+        {
+          "incorrecto": "This bag is heavier that mine.",
+          "correcto": "This bag is heavier than mine.",
+          "explicacion": "En una comparación «que» se dice than, no that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Leo comparan a sus perros en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "My dog Rex is taller than your dog.",
+            "traduccion": "Mi perro Rex es más alto que tu perro."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, but my dog Luna is faster than Rex.",
+            "traduccion": "Sí, pero mi perra Luna es más rápida que Rex."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Rex is heavier, and he is quieter.",
+            "traduccion": "Rex es más pesado y es más tranquilo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué perro es más rápido?",
+          "opciones": [
+            {
+              "es": "Luna, la perra de Leo."
+            },
+            {
+              "es": "Rex, el perro de Tom."
+            },
+            {
+              "es": "Los dos son igual de rápidos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «My dog Luna is faster than Rex»."
+        }
+      }
+    },
+    "en.n2.class-42": {
+      "explicacion": {
+        "titulo": "Comparativos largos: more + adjetivo + than",
+        "texto": "Con adjetivos largos (la mayoría de los de dos o más sílabas que no terminan en -y, como comfortable, expensive o interesting) no se añade -er: se pone more delante y el adjetivo no cambia: more comfortable than (más cómodo que). Es la forma más parecida al español «más… que». Trampas: no se dice comfortabler ni more cheaper (cheap es corto: cheaper), y «que» es than, no that."
+      },
+      "patron": {
+        "texto": "Sujeto + is + more + adjetivo largo + than + segundo elemento:",
+        "formula": [
+          {
+            "texto": "The armchair",
+            "nota": "primer elemento"
+          },
+          {
+            "texto": "is more comfortable",
+            "nota": "more + adjetivo largo sin cambios"
+          },
+          {
+            "texto": "than the stool.",
+            "nota": "than + segundo elemento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Adjetivo",
+          "Tipo",
+          "Comparativo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "cheap"
+            },
+            {
+              "texto": "corto"
+            },
+            {
+              "texto": "cheaper than"
+            }
+          ],
+          [
+            {
+              "texto": "comfortable"
+            },
+            {
+              "texto": "largo"
+            },
+            {
+              "texto": "more comfortable than"
+            }
+          ],
+          [
+            {
+              "texto": "expensive"
+            },
+            {
+              "texto": "largo"
+            },
+            {
+              "texto": "more expensive than"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This sofa is comfortabler than the chair.",
+          "correcto": "This sofa is more comfortable than the chair.",
+          "explicacion": "Comfortable es largo: se usa more, sin -er."
+        },
+        {
+          "incorrecto": "The book is more interesting that the film.",
+          "correcto": "The book is more interesting than the film.",
+          "explicacion": "«Que» en una comparación es than, no that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Sara buscan una silla nueva para la habitación de Ana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "This chair is more comfortable than the stool.",
+            "traduccion": "Esta silla es más cómoda que el taburete."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, but it is more expensive.",
+            "traduccion": "Sí, pero es más cara."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The stool is cheaper, but I want the chair.",
+            "traduccion": "El taburete es más barato, pero quiero la silla."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es más caro?",
+          "opciones": [
+            {
+              "es": "La silla."
+            },
+            {
+              "es": "El taburete."
+            },
+            {
+              "es": "Los dos cuestan lo mismo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana habla de la silla y Sara dice: «Yes, but it is more expensive»."
+        }
+      }
+    },
+    "en.n2.class-43": {
+      "explicacion": {
+        "titulo": "Comparativos irregulares: better, worse, farther",
+        "texto": "Tres adjetivos muy usados no siguen la regla: good → better (mejor), bad → worse (peor) y far → farther (más lejos). Por eso no se dice gooder ni more good, badder ni more bad. Para cantidades se usa more (más) y less (menos) delante del sustantivo: more space, less noise. El segundo elemento va, como siempre, con than: This plan is better than the first one."
+      },
+      "patron": {
+        "texto": "Sujeto + is + better/worse/farther + than + segundo elemento:",
+        "formula": [
+          {
+            "texto": "Your idea",
+            "nota": "primer elemento"
+          },
+          {
+            "texto": "is better",
+            "nota": "good → better (irregular)"
+          },
+          {
+            "texto": "than mine.",
+            "nota": "than + segundo elemento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Adjetivo",
+          "Comparativo",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "good"
+            },
+            {
+              "texto": "better"
+            },
+            {
+              "texto": "mejor"
+            }
+          ],
+          [
+            {
+              "texto": "bad"
+            },
+            {
+              "texto": "worse"
+            },
+            {
+              "texto": "peor"
+            }
+          ],
+          [
+            {
+              "texto": "far"
+            },
+            {
+              "texto": "farther"
+            },
+            {
+              "texto": "más lejos"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Your idea is more good than mine.",
+          "correcto": "Your idea is better than mine.",
+          "explicacion": "Good es irregular: su comparativo es better."
+        },
+        {
+          "incorrecto": "The traffic is more bad today.",
+          "correcto": "The traffic is worse today.",
+          "explicacion": "Bad es irregular: su comparativo es worse."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y su hermano Tom deciden a qué parque ir el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The new park is farther from our house.",
+            "traduccion": "El parque nuevo está más lejos de nuestra casa."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, but it is better. It has more space.",
+            "traduccion": "Sí, pero es mejor. Tiene más espacio."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The old park is closer, but it has less space.",
+            "traduccion": "El parque viejo está más cerca, pero tiene menos espacio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Then we can go to the new park!",
+            "traduccion": "¡Entonces podemos ir al parque nuevo!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué parque está más lejos de la casa?",
+          "opciones": [
+            {
+              "es": "El parque nuevo."
+            },
+            {
+              "es": "El parque viejo."
+            },
+            {
+              "es": "Los dos están igual de lejos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The new park is farther from our house»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "The new room has more space and less noise.",
+          "es": "La habitación nueva tiene más espacio y menos ruido.",
+          "nota": "More y less van delante de un sustantivo: más espacio, menos ruido."
+        }
+      ]
+    },
+    "en.n2.class-44": {
+      "explicacion": {
+        "titulo": "Comparar dos opciones y dar tu preferencia",
+        "texto": "Para comparar dos opciones se nombran los criterios (precio, espacio, comodidad) con comparativos, y se dicen la ventaja (advantage) y la desventaja (disadvantage). While une dos frases que contrastan: Hotel A is cheaper, while Hotel B is more comfortable; después de while va otra frase completa con verbo. Both (ambos) va con verbo en plural: Both are comfortable. Al final se dice la preferencia: I prefer the blue bag."
+      },
+      "patron": {
+        "texto": "Opción A + comparativo, while + opción B + comparativo:",
+        "formula": [
+          {
+            "texto": "The red bag is cheaper,",
+            "nota": "opción A y su punto fuerte"
+          },
+          {
+            "texto": "while",
+            "nota": "mientras que: introduce el contraste"
+          },
+          {
+            "texto": "the blue bag is bigger.",
+            "nota": "opción B con su propio verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Both is comfortable.",
+          "correcto": "Both are comfortable.",
+          "explicacion": "Both habla de dos cosas: el verbo va en plural (are)."
+        },
+        {
+          "incorrecto": "Hotel A is cheaper, while Hotel B more comfortable.",
+          "correcto": "Hotel A is cheaper, while Hotel B is more comfortable.",
+          "explicacion": "Después de while va una frase completa: hace falta el verbo is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo eligen una bolsa para la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The red bag is cheaper, while the blue bag is bigger.",
+            "traduccion": "La bolsa roja es más barata, mientras que la azul es más grande."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The main advantage of the blue bag is the space.",
+            "traduccion": "La principal ventaja de la bolsa azul es el espacio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Its disadvantage is the price.",
+            "traduccion": "Su desventaja es el precio."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Both are nice, but I prefer the blue bag.",
+            "traduccion": "Las dos son bonitas, pero prefiero la bolsa azul."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la desventaja de la bolsa azul?",
+          "opciones": [
+            {
+              "es": "El precio."
+            },
+            {
+              "es": "El espacio."
+            },
+            {
+              "es": "El color."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «Its disadvantage is the price»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "Both are comfortable, but I prefer the quieter hotel.",
+          "es": "Los dos son cómodos, pero prefiero el hotel más silencioso.",
+          "nota": "Both va con are; al final se dice la preferencia con I prefer."
+        }
+      ]
+    },
+    "en.n2.class-45": {
+      "explicacion": {
+        "titulo": "Recomendar la mejor opción con because",
+        "texto": "Para recomendar se dice I recommend + la opción + because + la razón: I recommend the train because it is faster. La razón suele ser un comparativo (cheaper, more reliable, better) o que encaja con lo que la persona necesita: more suitable for your needs, better for your budget. Overall (en general) resume la decisión. Trampas: en español decimos «te recomiendo…», pero en inglés no se pone you delante de la opción (I recommend the bus, no I recommend you the bus); y después de because hace falta sujeto: because it is."
+      },
+      "patron": {
+        "texto": "I recommend + opción + because + sujeto + razón:",
+        "formula": [
+          {
+            "texto": "I recommend",
+            "nota": "la recomendación (sin you)"
+          },
+          {
+            "texto": "the library",
+            "nota": "la opción"
+          },
+          {
+            "texto": "because it is quieter.",
+            "nota": "because + sujeto + comparativo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I recommend you the bus.",
+          "correcto": "I recommend the bus.",
+          "explicacion": "Es un calco de «te recomiendo». Después de recommend va directamente la opción."
+        },
+        {
+          "incorrecto": "I recommend the bus because is cheaper.",
+          "correcto": "I recommend the bus because it is cheaper.",
+          "explicacion": "Después de because hace falta un sujeto: it is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom busca un lugar para estudiar y le pide consejo a su hermana Ana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I need a quiet place to study.",
+            "traduccion": "Necesito un lugar tranquilo para estudiar."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I recommend the library because it is quieter than the café.",
+            "traduccion": "Te recomiendo la biblioteca porque es más tranquila que el café."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "But the café is closer.",
+            "traduccion": "Pero el café está más cerca."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, but the library is more suitable for your needs. It is better overall.",
+            "traduccion": "Sí, pero la biblioteca es más adecuada para lo que necesitas. En general es mejor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué ventaja tiene el café?",
+          "opciones": [
+            {
+              "es": "Está más cerca."
+            },
+            {
+              "es": "Es más tranquilo."
+            },
+            {
+              "es": "Es mejor en general."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «But the café is closer»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "The first hotel is cheaper, but the second one is better for our needs.",
+          "es": "El primer hotel es más barato, pero el segundo es mejor para nuestras necesidades.",
+          "nota": "Antes de recomendar se comparan las opciones con las necesidades."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,621 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin hallazgos P0/P1. Posición del adverbio (antes del verbo, después de be), never sin doble negación y at/on/in bien explicados y alineados con los ejercicios.",
+      "P2 aceptado: «in the night» se marca como error de rutina (at night), válido a nivel A1.",
+      "Ítems con una sola respuesta deducible del diálogo; avisos del validador por opciones en español, aceptados. Ejemplos del runtime correctos."
+    ]
+  },
+  "classes": {
+    "en.n1.class-56": {
+      "explicacion": {
+        "titulo": "Always, usually y often: ¿con qué frecuencia?",
+        "texto": "Always (siempre), usually (normalmente) y often (a menudo) dicen con qué frecuencia pasa algo. Con un verbo normal van entre el sujeto y el verbo: I always walk to school. En español podemos moverlos («camino siempre»), pero en inglés no se ponen detrás del verbo: nunca «I walk always». El adverbio no cambia el verbo: con he, she o un nombre se mantiene la -s: She usually takes the bus."
+      },
+      "patron": {
+        "texto": "Sujeto + frecuencia + verbo + resto:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "usually",
+            "nota": "frecuencia: antes del verbo"
+          },
+          {
+            "texto": "takes",
+            "nota": "verbo con -s (she)"
+          },
+          {
+            "texto": "the bus.",
+            "nota": "el resto de la frase"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "always"
+            },
+            {
+              "texto": "siempre"
+            }
+          ],
+          [
+            {
+              "texto": "usually"
+            },
+            {
+              "texto": "normalmente, casi siempre"
+            }
+          ],
+          [
+            {
+              "texto": "often"
+            },
+            {
+              "texto": "a menudo, muchas veces"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I walk always to school.",
+          "correcto": "I always walk to school.",
+          "explicacion": "Con un verbo normal, always va antes del verbo, no después."
+        },
+        {
+          "incorrecto": "Ana always study English.",
+          "correcto": "Ana always studies English.",
+          "explicacion": "El adverbio no quita la -s: Ana es she, así que studies."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia hablan de cómo van a la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, I always walk to school.",
+            "traduccion": "Mia, yo siempre camino a la escuela."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I usually take the bus.",
+            "traduccion": "Yo normalmente tomo el autobús."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And your brother?",
+            "traduccion": "¿Y tu hermano?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He often walks to school.",
+            "traduccion": "Él camina a la escuela a menudo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo va Mia normalmente a la escuela?",
+          "opciones": [
+            {
+              "es": "En autobús."
+            },
+            {
+              "es": "Caminando."
+            },
+            {
+              "es": "En carro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I usually take the bus». Tom y el hermano de Mia caminan."
+        }
+      }
+    },
+    "en.n1.class-57": {
+      "explicacion": {
+        "titulo": "Sometimes y never",
+        "texto": "Sometimes significa «a veces» y never, «nunca». Van en el mismo lugar que always o usually: entre el sujeto y el verbo (I sometimes drink coffee). Never ya es negativo, así que el verbo va en afirmativo: He never drinks coffee. En español decimos «no toma nunca café», con doble negación, pero en inglés never no se combina con don't ni doesn't. Con he, she o un nombre, el verbo conserva la -s."
+      },
+      "patron": {
+        "texto": "Sujeto + never/sometimes + verbo afirmativo:",
+        "formula": [
+          {
+            "texto": "He",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "never",
+            "nota": "nunca: ya es negativo"
+          },
+          {
+            "texto": "drinks",
+            "nota": "verbo afirmativo, con -s"
+          },
+          {
+            "texto": "coffee.",
+            "nota": "el resto"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "always"
+            },
+            {
+              "texto": "siempre"
+            }
+          ],
+          [
+            {
+              "texto": "usually"
+            },
+            {
+              "texto": "normalmente"
+            }
+          ],
+          [
+            {
+              "texto": "often"
+            },
+            {
+              "texto": "a menudo"
+            }
+          ],
+          [
+            {
+              "texto": "sometimes"
+            },
+            {
+              "texto": "a veces"
+            }
+          ],
+          [
+            {
+              "texto": "never"
+            },
+            {
+              "texto": "nunca"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He doesn't never drink coffee.",
+          "correcto": "He never drinks coffee.",
+          "explicacion": "Never ya niega; no se añade doesn't."
+        },
+        {
+          "incorrecto": "I drink sometimes milk.",
+          "correcto": "I sometimes drink milk.",
+          "explicacion": "Sometimes va antes del verbo, igual que always o usually."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de lo que beben por la mañana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What do you drink in the morning, Leo?",
+            "traduccion": "¿Qué bebes por la mañana, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I usually drink milk. I sometimes drink water.",
+            "traduccion": "Normalmente bebo leche. A veces bebo agua."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Do you drink coffee?",
+            "traduccion": "¿Tomas café?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, I never drink coffee. My father always drinks coffee!",
+            "traduccion": "No, nunca tomo café. ¡Mi padre siempre toma café!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué frecuencia toma café Leo?",
+          "opciones": [
+            {
+              "es": "Nunca."
+            },
+            {
+              "es": "A veces."
+            },
+            {
+              "es": "Siempre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I never drink coffee». El que siempre toma café es su padre."
+        }
+      }
+    },
+    "en.n1.class-58": {
+      "explicacion": {
+        "titulo": "Frecuencia con be y con otros verbos",
+        "texto": "La posición del adverbio de frecuencia depende del verbo. Con am, is o are, el adverbio va después: She is always happy. Con cualquier otro verbo, va antes: She always walks to school. Truco: si la frase tiene be, el adverbio va detrás de be; si no, se pone delante del verbo principal. Con never tampoco se añade not: They are never late (nunca llegan tarde)."
+      },
+      "patron": {
+        "texto": "Sujeto + be + frecuencia + resto:",
+        "formula": [
+          {
+            "texto": "I am",
+            "nota": "be: am, is, are"
+          },
+          {
+            "texto": "always",
+            "nota": "después de be"
+          },
+          {
+            "texto": "on time.",
+            "nota": "el resto"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Orden",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "be (am, is, are)"
+            },
+            {
+              "texto": "be + adverbio"
+            },
+            {
+              "texto": "He is often tired."
+            }
+          ],
+          [
+            {
+              "texto": "otro verbo"
+            },
+            {
+              "texto": "adverbio + verbo"
+            },
+            {
+              "texto": "He often takes the bus."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I always am on time.",
+          "correcto": "I am always on time.",
+          "explicacion": "Con be, el adverbio va después: am always."
+        },
+        {
+          "incorrecto": "They are not never late.",
+          "correcto": "They are never late.",
+          "explicacion": "Never ya es negativo; no se añade not."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos hablan de sus compañeros de clase.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tom is always happy.",
+            "traduccion": "Tom siempre está contento."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, and he is never late. He usually walks to school.",
+            "traduccion": "Sí, y nunca llega tarde. Normalmente camina a la escuela."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Mia is often late. She sometimes takes the bus.",
+            "traduccion": "Mia llega tarde a menudo. A veces toma el autobús."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And she is often tired in the morning.",
+            "traduccion": "Y a menudo está cansada por la mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién no llega tarde nunca?",
+          "opciones": [
+            {
+              "es": "Tom."
+            },
+            {
+              "es": "Mia."
+            },
+            {
+              "es": "Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice de Tom: «he is never late». Mia, en cambio, «is often late»."
+        }
+      }
+    },
+    "en.n1.class-59": {
+      "explicacion": {
+        "titulo": "At, on e in con el tiempo",
+        "texto": "En español usamos «a las», «el» o «en», pero en inglés la preposición depende del tipo de tiempo. At va con las horas: at seven o'clock. On va con los días: on Monday (el lunes, sin the). In va con los meses y las partes del día: in July, in the morning, in the afternoon, in the evening. Excepción: at night (de noche). Los días y los meses se escriben con mayúscula: Monday, July."
+      },
+      "patron": {
+        "texto": "Actividad + preposición + tiempo:",
+        "formula": [
+          {
+            "texto": "We study English",
+            "nota": "la actividad"
+          },
+          {
+            "texto": "on",
+            "nota": "on + día"
+          },
+          {
+            "texto": "Monday.",
+            "nota": "día, con mayúscula"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Preposición",
+          "Se usa con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "at"
+            },
+            {
+              "texto": "horas; night"
+            },
+            {
+              "texto": "at seven o'clock, at night"
+            }
+          ],
+          [
+            {
+              "texto": "on"
+            },
+            {
+              "texto": "días"
+            },
+            {
+              "texto": "on Monday, on Saturday"
+            }
+          ],
+          [
+            {
+              "texto": "in"
+            },
+            {
+              "texto": "meses; partes del día"
+            },
+            {
+              "texto": "in July, in the morning"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We study English in Monday.",
+          "correcto": "We study English on Monday.",
+          "explicacion": "Con los días de la semana se usa on."
+        },
+        {
+          "incorrecto": "He studies in the night.",
+          "correcto": "He studies at night.",
+          "explicacion": "Night es la excepción: at night, sin the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom hablan de su fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Do you play soccer on Saturday, Tom?",
+            "traduccion": "¿Juegas fútbol el sábado, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, in the morning. On Sunday I study English.",
+            "traduccion": "Sí, por la mañana. El domingo estudio inglés."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What time do you study?",
+            "traduccion": "¿A qué hora estudias?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "At seven in the evening.",
+            "traduccion": "A las siete de la noche."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I study English at night.",
+            "traduccion": "Yo estudio inglés de noche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo estudia inglés Tom?",
+          "opciones": [
+            {
+              "es": "El domingo, a las siete."
+            },
+            {
+              "es": "El sábado por la mañana."
+            },
+            {
+              "es": "El lunes, a las siete."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «On Sunday I study English» y luego «At seven in the evening»."
+        }
+      }
+    },
+    "en.n1.class-60": {
+      "explicacion": {
+        "titulo": "Mi calendario: frecuencia y tiempo",
+        "texto": "Un calendario personal junta lo aprendido: quién, con qué frecuencia, qué actividad y cuándo. Orden habitual: sujeto + frecuencia + verbo + resto + tiempo: I usually study English in the evening. Para el tiempo: at + hora, on + día, in + parte del día. Si combinas día y hora, mantén las dos preposiciones: on Friday at eight o'clock. Para preguntar por el calendario de alguien: What time do you study on Monday?"
+      },
+      "patron": {
+        "texto": "Sujeto + frecuencia + actividad + día + hora:",
+        "formula": [
+          {
+            "texto": "I",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "sometimes",
+            "nota": "frecuencia, antes del verbo"
+          },
+          {
+            "texto": "play soccer",
+            "nota": "la actividad"
+          },
+          {
+            "texto": "on Friday",
+            "nota": "on + día"
+          },
+          {
+            "texto": "at eight o'clock.",
+            "nota": "at + hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Día",
+          "Actividad"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Monday, at seven"
+            },
+            {
+              "texto": "study English"
+            }
+          ],
+          [
+            {
+              "texto": "Friday, at eight"
+            },
+            {
+              "texto": "play soccer"
+            }
+          ],
+          [
+            {
+              "texto": "Sunday"
+            },
+            {
+              "texto": "read at home"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I study usually in the evening.",
+          "correcto": "I usually study in the evening.",
+          "explicacion": "Usually va antes del verbo study."
+        },
+        {
+          "incorrecto": "I play soccer in Friday at the eight.",
+          "correcto": "I play soccer on Friday at eight.",
+          "explicacion": "On + día; at + hora, sin the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le pregunta a Leo por su semana mientras él mira su calendario.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What time do you study English on Monday, Leo?",
+            "traduccion": "¿A qué hora estudias inglés el lunes, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At seven in the evening.",
+            "traduccion": "A las siete de la noche."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And on Friday?",
+            "traduccion": "¿Y el viernes?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "On Friday I play soccer at eight o'clock.",
+            "traduccion": "El viernes juego fútbol a las ocho."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Do you study on Sunday?",
+            "traduccion": "¿Estudias el domingo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, I never study on Sunday. I usually read at home.",
+            "traduccion": "No, nunca estudio el domingo. Normalmente leo en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Leo normalmente el domingo?",
+          "opciones": [
+            {
+              "es": "Lee en casa."
+            },
+            {
+              "es": "Estudia inglés."
+            },
+            {
+              "es": "Juega fútbol."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I never study on Sunday. I usually read at home»."
+        }
+      }
+    }
+  }
+}

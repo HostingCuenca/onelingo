@@ -1,0 +1,592 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-50: explicación «repasa todo el presente simple» → «repasa las negativas, las preguntas y las respuestas cortas del presente simple» (alcance real de la clase).",
+      "class-50: traducción «No. Leo libros.» → «No. Yo leo libros.» para no confundir el verbo con el personaje Leo.",
+      "Aceptado: traducciones «Sí.» / «No.» para respuestas cortas (equivalente natural en español).",
+      "Avisos del validador sobre opciones del ítem: opciones en español, esperables."
+    ]
+  },
+  "classes": {
+    "en.n1.class-46": {
+      "explicacion": {
+        "titulo": "Negativas: don't y doesn't",
+        "texto": "En español basta con poner «no» delante del verbo. En inglés hace falta un auxiliar: don't con I, you, we y they (I don't eat meat) y doesn't con he, she e it (He doesn't drive a car). Después de don't o doesn't el verbo va en forma base, sin -s: la -s ya está en doesn't. Like funciona al revés que «gustar»: «a ella no le gusta el café» es She doesn't like coffee."
+      },
+      "patron": {
+        "texto": "Sujeto + don't/doesn't + verbo base:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "una persona → doesn't"
+          },
+          {
+            "texto": "doesn't",
+            "nota": "no (con he, she, it)"
+          },
+          {
+            "texto": "drink",
+            "nota": "verbo base, sin -s"
+          },
+          {
+            "texto": "milk.",
+            "nota": "qué no bebe"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Negativa",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "don't + verbo"
+            },
+            {
+              "texto": "We don't eat meat."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "doesn't + verbo"
+            },
+            {
+              "texto": "He doesn't drive a car."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I no eat meat.",
+          "correcto": "I don't eat meat.",
+          "explicacion": "Es un calco de «no como carne». En inglés el «no» del verbo es don't (o doesn't)."
+        },
+        {
+          "incorrecto": "She doesn't likes coffee.",
+          "correcto": "She doesn't like coffee.",
+          "explicacion": "Después de doesn't el verbo va sin -s: la -s ya está en doesn't."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo preparan la comida en casa de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I don't eat meat.",
+            "traduccion": "Yo no como carne."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I eat meat, and I don't drink milk.",
+            "traduccion": "Yo como carne y no bebo leche."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "My brother doesn't drink milk. He drinks water.",
+            "traduccion": "Mi hermano no bebe leche. Bebe agua."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And your parents?",
+            "traduccion": "¿Y tus padres?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "They don't eat meat.",
+            "traduccion": "Ellos no comen carne."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién come carne?",
+          "opciones": [
+            {
+              "es": "Leo."
+            },
+            {
+              "es": "Mia."
+            },
+            {
+              "es": "Los padres de Mia."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I don't eat meat» y sus padres tampoco («They don't eat meat»). Leo dice: «I eat meat»."
+        }
+      }
+    },
+    "en.n1.class-47": {
+      "explicacion": {
+        "titulo": "Respuestas cortas: Yes, I do / No, she doesn't",
+        "texto": "A una pregunta con do o does («¿Juegas fútbol?») se responde con Yes o No + sujeto + do/does o don't/doesn't: Yes, I do. No, I don't. Con he, she o it se usa does y doesn't: Yes, she does. No, he doesn't. En español decimos «Sí, juego», pero en inglés no se repite el verbo principal: no digas Yes, I play. Un «Yes» o «No» a secas es correcto, pero la respuesta corta suena más natural."
+      },
+      "patron": {
+        "texto": "Yes/No + sujeto + auxiliar:",
+        "formula": [
+          {
+            "texto": "Yes,",
+            "nota": "sí"
+          },
+          {
+            "texto": "she",
+            "nota": "la persona de la pregunta"
+          },
+          {
+            "texto": "does.",
+            "nota": "she → does; con I, you, we, they → do"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Sí",
+          "No"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "Yes, I do."
+            },
+            {
+              "texto": "No, I don't."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "Yes, she does."
+            },
+            {
+              "texto": "No, she doesn't."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Yes, I play.",
+          "correcto": "Yes, I do.",
+          "explicacion": "En español respondemos «Sí, juego», pero en inglés la respuesta corta repite do, no el verbo."
+        },
+        {
+          "incorrecto": "No, she don't.",
+          "correcto": "No, she doesn't.",
+          "explicacion": "Con she (y he, it) la respuesta negativa es doesn't."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Ana hablan en el patio de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Ana, do you play soccer?",
+            "traduccion": "Ana, ¿juegas fútbol?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, I do.",
+            "traduccion": "Sí."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And your sister? Does she play soccer?",
+            "traduccion": "¿Y tu hermana? ¿Juega fútbol?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No, she doesn't. She reads books.",
+            "traduccion": "No. Ella lee libros."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace la hermana de Ana?",
+          "opciones": [
+            {
+              "es": "Lee libros."
+            },
+            {
+              "es": "Juega fútbol."
+            },
+            {
+              "es": "Ve televisión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana responde «No, she doesn't» (no juega fútbol) y añade: «She reads books»."
+        }
+      }
+    },
+    "en.n1.class-48": {
+      "explicacion": {
+        "titulo": "Preguntas con Do y Does",
+        "texto": "En español una pregunta puede ser igual que la afirmación con otra entonación: «¿Estudias inglés?». En inglés se pone Do o Does al principio: Do con I, you, we y they (Do you study English?) y Does con he, she e it (Does she read books?). Después va el sujeto y el verbo en forma base, sin -s: la -s ya está en Does. Se responde con las respuestas cortas: Yes, she does / No, she doesn't."
+      },
+      "patron": {
+        "texto": "Do/Does + sujeto + verbo base + ?:",
+        "formula": [
+          {
+            "texto": "Does",
+            "nota": "abre la pregunta (he, she, it)"
+          },
+          {
+            "texto": "she",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "read",
+            "nota": "verbo base, sin -s"
+          },
+          {
+            "texto": "books?",
+            "nota": "qué"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Auxiliar",
+          "Sujeto",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Do"
+            },
+            {
+              "texto": "I / you / we / they"
+            },
+            {
+              "texto": "Do they play soccer?"
+            }
+          ],
+          [
+            {
+              "texto": "Does"
+            },
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "Does he listen to music?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Does she reads books?",
+          "correcto": "Does she read books?",
+          "explicacion": "La -s ya está en Does; el verbo va en forma base: read."
+        },
+        {
+          "incorrecto": "Do he listen to music?",
+          "correcto": "Does he listen to music?",
+          "explicacion": "Con he, she o it la pregunta empieza con Does."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara hablan en casa de Sara.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Do you listen to music, Sara?",
+            "traduccion": "¿Escuchas música, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, I do. I listen to music at home.",
+            "traduccion": "Sí. Escucho música en casa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Does your brother read books?",
+            "traduccion": "¿Tu hermano lee libros?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, he doesn't. He plays soccer.",
+            "traduccion": "No. Él juega fútbol."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Sara en casa?",
+          "opciones": [
+            {
+              "es": "Escucha música."
+            },
+            {
+              "es": "Lee libros."
+            },
+            {
+              "es": "Juega fútbol."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I listen to music at home». Su hermano no lee libros: juega fútbol."
+        }
+      }
+    },
+    "en.n1.class-49": {
+      "explicacion": {
+        "titulo": "Entrevista sobre hábitos",
+        "texto": "En una entrevista haces preguntas de sí o no y la otra persona responde corto. Para preguntar a alguien usa Do you + verbo base (Do you read books?) y responde Yes, I do o No, I don't. Para preguntar por otra persona usa Does + nombre o she/he (Does Ana listen to music?) y responde Yes, she does o No, she doesn't. Después de Do o Does el verbo nunca lleva -s."
+      },
+      "patron": {
+        "texto": "Pregunta y respuesta corta:",
+        "formula": [
+          {
+            "texto": "Do you",
+            "nota": "pregunta a quien tienes delante"
+          },
+          {
+            "texto": "play soccer?",
+            "nota": "verbo base + qué"
+          },
+          {
+            "texto": "Yes, I do.",
+            "nota": "respuesta corta con do"
+          },
+          {
+            "texto": "No, I don't.",
+            "nota": "o la negativa con don't"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Sí",
+          "No"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Do you read books?"
+            },
+            {
+              "texto": "Yes, I do."
+            },
+            {
+              "texto": "No, I don't."
+            }
+          ],
+          [
+            {
+              "texto": "Does Ana listen to music?"
+            },
+            {
+              "texto": "Yes, she does."
+            },
+            {
+              "texto": "No, she doesn't."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Does Ana studies English?",
+          "correcto": "Does Ana study English?",
+          "explicacion": "Después de Does el verbo va en forma base: study."
+        },
+        {
+          "incorrecto": "Is Ana listen to music?",
+          "correcto": "Does Ana listen to music?",
+          "explicacion": "Para preguntar por una acción se usa Does, no is."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia entrevista a Carlos para una tarea de la clase de inglés.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Carlos, do you read books?",
+            "traduccion": "Carlos, ¿lees libros?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, I do.",
+            "traduccion": "Sí."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Do you drink coffee?",
+            "traduccion": "¿Bebes café?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No, I don't. I drink water.",
+            "traduccion": "No. Bebo agua."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Does your sister listen to music?",
+            "traduccion": "¿Tu hermana escucha música?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, she does.",
+            "traduccion": "Sí."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué responde Carlos sobre el café?",
+          "opciones": [
+            {
+              "es": "Que no bebe café: bebe agua."
+            },
+            {
+              "es": "Que bebe café todos los días."
+            },
+            {
+              "es": "Que su hermana bebe café."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos responde: «No, I don't. I drink water»."
+        }
+      }
+    },
+    "en.n1.class-50": {
+      "explicacion": {
+        "titulo": "Corrige y produce: negativas, preguntas y respuestas",
+        "texto": "Esta clase repasa las negativas, las preguntas y las respuestas cortas del presente simple. Antes de responder, revisa tres cosas. 1) ¿Es I, you, we, they o es he, she, it? Eso decide don't/doesn't y do/does. 2) Después de don't, doesn't, do o does, el verbo va sin -s: She doesn't play, Does he read? 3) La respuesta corta repite el auxiliar: Yes, he does; No, I don't. Si la frase lleva dos -s (doesn't plays), sobra una."
+      },
+      "patron": {
+        "texto": "Pregunta, respuesta y negativa:",
+        "formula": [
+          {
+            "texto": "Does Ana",
+            "nota": "una persona → Does"
+          },
+          {
+            "texto": "drink coffee?",
+            "nota": "verbo base"
+          },
+          {
+            "texto": "No, she doesn't.",
+            "nota": "respuesta corta"
+          },
+          {
+            "texto": "She doesn't drink coffee.",
+            "nota": "negativa completa: verbo sin -s"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Afirmativa",
+          "Negativa",
+          "Pregunta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "He reads books."
+            },
+            {
+              "texto": "He doesn't read books."
+            },
+            {
+              "texto": "Does he read books?"
+            }
+          ],
+          [
+            {
+              "texto": "They read books."
+            },
+            {
+              "texto": "They don't read books."
+            },
+            {
+              "texto": "Do they read books?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Do she read books?",
+          "correcto": "Does she read books?",
+          "explicacion": "Con she la pregunta empieza con Does."
+        },
+        {
+          "incorrecto": "Yes, he do.",
+          "correcto": "Yes, he does.",
+          "explicacion": "Con he la respuesta corta usa does."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Luna se encuentran en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Luna, do you play soccer?",
+            "traduccion": "Luna, ¿juegas fútbol?"
+          },
+          {
+            "hablante": "Luna",
+            "texto": "No, I don't. I read books.",
+            "traduccion": "No. Yo leo libros."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Does your brother play soccer?",
+            "traduccion": "¿Tu hermano juega fútbol?"
+          },
+          {
+            "hablante": "Luna",
+            "texto": "Yes, he does. He plays soccer at school every day.",
+            "traduccion": "Sí. Juega fútbol en la escuela todos los días."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién juega fútbol?",
+          "opciones": [
+            {
+              "es": "El hermano de Luna."
+            },
+            {
+              "es": "Luna."
+            },
+            {
+              "es": "Tom y Luna."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Luna dice «No, I don't» (ella no juega) y de su hermano: «Yes, he does»."
+        }
+      }
+    }
+  }
+}
