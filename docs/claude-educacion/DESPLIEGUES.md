@@ -119,3 +119,21 @@ Rollback disponible:
 ```bash
 ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-5-n2-n3-review/web-retirada-post-release && cp -al backups/20260930-edu-5-n2-n3-review/web-anterior web'
 ```
+
+## Release: 20260930-edu-6-pulido
+
+Fecha: 2026-09-30 16:30 UTC · Responsable: Claude (Claude Code)
+Contenido: pulido de N1–N3 C1–C90 (auditoría 2026-09-30): 290/290 clases enriquecidas (explicación, patrón, tabla, errores reales, situación con diálogo e ítem propio, ejemplos reales), 668 pistas de «completar», ~200 ejercicios corregidos y 429 ítems con tercera opción; app: fichas desordenadas, contracciones, umbral redondeado, repaso sin bucle, audio en ordenar/completar, nivel elegido en el diagnóstico, MCER por nivel, hash web, producción abierta (216 variantes), JSON compactos. Solo web; backend sin cambios.
+Commit: `d60f7a4` (contenido `bf0d57b`), rama `claude/educacion-multilenguaje`.
+Build: `main.dart.js` sha256 `e6eca1c7da207a9c…`; biblioteca `c5039f628c87e5b4…` versión `2026.09.30-en-pulido.1`.
+Pruebas: 176 Flutter (1 omitida), 61 herramientas, validar_ruta 10 idiomas 0 errores, validar_enriquecimiento 0 errores; recorrido visual en local y en producción (N2 C50).
+Backup: `/var/www/onelingo/backups/20260930-edu-6-pulido/` (`web-anterior` = edu-5, `env.sha256`, `apache-onelingo-le-ssl.conf.bak`); staging `staging/20260930-edu-6-pulido/` (`build-web.sha256`, `web-retirada`).
+Ruta desplegada: `/var/www/onelingo/web` (apk y avatar por hardlink desde la release anterior, renombre atómico).
+Servidor: `AddOutputFilterByType DEFLATE application/json` en el vhost 443 de onelingo; `apache2ctl configtest` OK y `systemctl reload apache2` (recarga suave). Biblioteca 3,6 MB → 589 KB y N3 1,5 MB → 325 KB transferidos.
+Health check: `/api/salud` OK; `onelingo-api` online sin reinicio; `.env` igual; APK, avatar y assets 200; dlex responde.
+Resultado: OK. Lock creado y liberado.
+Rollback:
+```bash
+ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20260930-edu-6-pulido; mv web staging/20260930-edu-6-pulido/web-retirada-post && cp -al $B/web-anterior web'
+# gzip: cp $B/apache-onelingo-le-ssl.conf.bak "$(readlink -f /etc/apache2/sites-enabled/onelingo.hostingcuenca.com-le-ssl.conf)" && apache2ctl configtest && systemctl reload apache2
+```

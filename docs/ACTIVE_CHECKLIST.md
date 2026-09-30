@@ -56,8 +56,8 @@
 - [x] Poblar y validar Inglés N3 C71–C80: 10 clases y 130 ejercicios integrados en `shadow` tras auditoría iterativa, simulación de estudiantes y GO independiente.
 - [x] Poblar y validar Inglés N3 C81–C90: 10 clases y 130 ejercicios integrados en `shadow`; incluye rúbricas deterministas para escritura libre, remediación por habilidad y GO independiente.
 - [x] Auditar las 290 clases publicadas y pulirlas (auditoría 2026-09-30): app, enriquecimiento 290/290, pistas de completar, correcciones de ítems.
-- [ ] Desplegar `20260930-edu-6-pulido` (build local listo; requiere autorización).
-- [ ] Activar compresión gzip de JSON en Apache (requiere autorización; ~7 MB → ~1 MB).
+- [x] Desplegar `20260930-edu-6-pulido` (2026-09-30).
+- [x] Compresión gzip de JSON en Apache (2026-09-30).
 - [ ] Separar el léxico de validación del vocabulario enseñado (auditoría #15).
 - [ ] Producir Inglés N3 C91–C95 (`community-project`) en staging, con autoría, simulación, corrección y GO independiente.
 - [ ] Producir Inglés N3 C96–C100 (`b1-entry-capstone`) y revisar el bloque completo por ser cierre de nivel.
