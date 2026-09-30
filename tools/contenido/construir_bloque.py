@@ -442,12 +442,17 @@ def comprobar_rubricas(c: dict, cid: str) -> list[str]:
     return errores
 
 
-def comprobar_lexico(c: dict, cid: str, previo: set[str]) -> list[str]:
+def comprobar_lexico(c: dict, cid: str, previo: set[str], previo_estricto: set[str] | None = None) -> list[str]:
     clase = set(previo)
+    # Diálogo, patrón y errores: solo el léxico actual (como validar_ruta), sin
+    # la línea base del pase C1, que conserva palabras ya retiradas.
+    clase_estricta = set(previo if previo_estricto is None else previo_estricto)
     for v in c["vocabulario"]:
         clase |= palabras(v["en"])
+        clase_estricta |= palabras(v["en"])
     for t in c["ensenanza"]:
         clase |= palabras(t["en"])
+        clase_estricta |= palabras(t["en"])
     enr = enriquecimiento(c)
     # El diálogo y el patrón deben usar lo ya enseñado + lo de esta clase.
     errores = []
@@ -460,6 +465,7 @@ def comprobar_lexico(c: dict, cid: str, previo: set[str]) -> list[str]:
     for fila in (enr.get("tabla") or {}).get("filas", []):
         for celda in fila:
             clase |= palabras(celda.get("texto", ""))
+            clase_estricta |= palabras(celda.get("texto", ""))
 
     def revisar(textos: list[str], donde: str, estricto: bool = False) -> None:
         faltan = set()
@@ -469,7 +475,8 @@ def comprobar_lexico(c: dict, cid: str, previo: set[str]) -> list[str]:
             # errores no: tools/validar_ruta.py exige que esté enseñado o en
             # «palabrasLibres» (reparto del curso).
             propios = set() if estricto else nombres_propios(t)
-            faltan |= {w for w in palabras(t) if w not in propios and not conocida(w, clase)}
+            lexico = clase_estricta if estricto else clase
+            faltan |= {w for w in palabras(t) if w not in propios and not conocida(w, lexico)}
         if faltan:
             errores.append(f"{cid} {donde}: palabras no enseñadas antes ni en la clase: {', '.join(sorted(faltan))}")
 
@@ -614,6 +621,7 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
     clases: list[dict] = []
     previos_bloque: list[str] = []
     lex = lexico_previo(nivel_num, ini)
+    lex_actual = set(lex)
     pase_c1 = doc.get("pase") == "c1"
     lex_nuevas: set[str] = set()
     voc_previo: set[str] = set()
@@ -624,7 +632,7 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
         lex |= lex_nuevas
     for c in compactas:
         cid = f"en.{nivel}.class-{c['n']:02d}"
-        errores += comprobar_lexico(c, cid, lex)
+        errores += comprobar_lexico(c, cid, lex, lex_actual)
         errores += comprobar_rubricas(c, cid)
         if pase_c1:
             errores += comprobar_c1(c, cid, lex_nuevas, nivel_num, mapa.get(cid), voc_previo)
@@ -648,6 +656,7 @@ def construir(ruta: Path, solo_validar: bool = False) -> int:
                 for t in textos_ingleses_item(it):
                     de_la_clase |= palabras(t)
         lex |= de_la_clase
+        lex_actual |= de_la_clase
         lex_nuevas |= de_la_clase
         # Enriquecimiento con la validación común (unidad sintética).
         unidad = {"pasos": [{"tipo": "ejemplos", "items": [{"texto": t["en"]} for t in c["ensenanza"]]}]}

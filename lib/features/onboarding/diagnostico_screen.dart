@@ -1,7 +1,7 @@
+import '../../core/barajar.dart';
 import '../../shared/widgets/activity_loading.dart';
 import '../../shared/widgets/feedback_experience.dart';
 
-import 'dart:math';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -270,7 +270,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       cargando = false;
       q = p;
       fichas = p?.tipo == TipoDiag.ordenar
-          ? (p!.aceptadas.first.split(RegExp(r'\s+'))..shuffle(Random()))
+          ? barajarDistinto(p!.aceptadas.first.split(RegExp(r'\s+')))
           : [];
       resultado = finalizado;
     });

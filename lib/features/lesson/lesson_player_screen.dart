@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/barajar.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/efectos.dart';
 import '../../core/voz.dart';
@@ -201,6 +202,9 @@ class _StepViewState extends State<_StepView> {
   bool? correcto; // null = sin comprobar
   String seleccion = '';
   List<String> banco = [];
+
+  /// Opciones en orden aleatorio: en los datos la correcta suele ir primero.
+  late final List<String> opciones = barajarDistinto(s.options);
   List<String> respuesta = [];
   final texto = TextEditingController();
   bool mostrarTraduccion = false;
@@ -223,7 +227,7 @@ class _StepViewState extends State<_StepView> {
   void initState() {
     super.initState();
     if (s.type == StepType.orderWords) {
-      banco = s.answer.split(' ')..shuffle();
+      banco = barajarDistinto(s.answer.split(' '));
     }
     if (s.type == StepType.roleplay) {
       final primera = _replicas().first;
@@ -484,7 +488,7 @@ class _StepViewState extends State<_StepView> {
         ),
       ),
       const SizedBox(height: 14),
-      for (final o in s.options)
+      for (final o in opciones)
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: AnimatedScale(
