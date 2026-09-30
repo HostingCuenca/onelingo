@@ -1,0 +1,783 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1. Titular/detalle, according to/reported/said (con backshift is → was y told me vs said me), hecho/opinión/incertidumbre, resumen sin causas y comparación de fuentes: correctos y alineados con los ejercicios.",
+      "class-74: ejemplo 5 «The director reported three facts, and the card gives no cause» era inexacto (un dato procede del aviso, no del director) → «The card gives three facts, but it gives no cause.» con traducción y nota ajustadas.",
+      "P2 sin cambio: class-71 «When did it open?» (ideal «reopen», pero la forma base no está enseñada; se acepta); class-72 «The paper reported no rain for Sunday» es comprensible aunque «reported» encaja mejor con hechos pasados.",
+      "Avisos del validador por opciones en español: revisados, ítems con una sola respuesta correcta."
+    ]
+  },
+  "classes": {
+    "en.n3.class-71": {
+      "explicacion": {
+        "titulo": "Titular y detalle confirmado",
+        "texto": "Un titular (headline) es un título muy corto: suele quitar los artículos y usar presente simple aunque hable de algo que ya pasó: Market reopens (Reabre el mercado). El detalle o entradilla es una oración completa que confirma los datos exactos (qué, cuántos, cuándo, dónde): The market reopened two stalls at noon. Lee el titular para saber el tema y busca en el detalle los números, horas y lugares. Una opinión (A reader thinks…) no es un detalle confirmado."
+      },
+      "patron": {
+        "texto": "Titular breve + detalle completo:",
+        "formula": [
+          {
+            "texto": "Market reopens.",
+            "nota": "titular: sin artículo y en presente"
+          },
+          {
+            "texto": "The market reopened",
+            "nota": "detalle: oración completa, en pasado"
+          },
+          {
+            "texto": "two stalls at noon.",
+            "nota": "datos exactos: número y hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Titular",
+          "Detalle confirmado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Park reopens"
+            },
+            {
+              "texto": "The park reopened the north gate at nine."
+            }
+          ],
+          [
+            {
+              "texto": "School adds buses"
+            },
+            {
+              "texto": "The school added two buses on Monday."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Market reopen.",
+          "correcto": "Market reopens.",
+          "explicacion": "El titular va en presente simple: con un sujeto singular, el verbo lleva -s."
+        },
+        {
+          "incorrecto": "The market reopened two stalls in noon.",
+          "correcto": "The market reopened two stalls at noon.",
+          "explicacion": "Con horas (noon, nine, 10:00) se usa at, no in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le lee a Ana una noticia de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What is in the school news?",
+            "traduccion": "¿Qué hay en las noticias de la escuela?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The headline is: Pool reopens.",
+            "traduccion": "El titular es: Reabre la piscina."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "When did it open?",
+            "traduccion": "¿Cuándo abrió?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The detail says the pool reopened on Monday at ten.",
+            "traduccion": "El detalle dice que la piscina reabrió el lunes a las diez."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "A student thinks the water is cold, but that is an opinion.",
+            "traduccion": "Un estudiante cree que el agua está fría, pero eso es una opinión."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué detalle está confirmado?",
+          "opciones": [
+            {
+              "es": "La piscina reabrió el lunes a las diez."
+            },
+            {
+              "es": "El agua de la piscina está fría."
+            },
+            {
+              "es": "La piscina abre hasta las ocho."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "El detalle dice «the pool reopened on Monday at ten». Lo del agua fría es solo una opinión."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Headline: Park reopens.",
+          "es": "Titular: Reabre el parque.",
+          "nota": "Título corto: sin artículo y en presente."
+        },
+        {
+          "indice": 1,
+          "en": "The park reopened the north gate at nine.",
+          "es": "El parque reabrió la puerta norte a las nueve.",
+          "nota": "Detalle: oración completa con datos exactos."
+        },
+        {
+          "indice": 2,
+          "en": "Headline: School adds buses. Detail: The school added two buses on Monday.",
+          "es": "Titular: La escuela añade autobuses. Detalle: La escuela añadió dos autobuses el lunes.",
+          "nota": "Primero el tema; después, el detalle confirmado."
+        },
+        {
+          "indice": 3,
+          "en": "The café added twelve tables on Friday.",
+          "es": "La cafetería añadió doce mesas el viernes.",
+          "nota": "Un número y un día hacen exacto el detalle."
+        },
+        {
+          "indice": 4,
+          "en": "A reader thinks the market is too small.",
+          "es": "Un lector cree que el mercado es demasiado pequeño.",
+          "nota": "Esto es una opinión, no un detalle confirmado."
+        },
+        {
+          "indice": 5,
+          "en": "Headline: Depot reopens. Detail: The depot reopened two gates at seven.",
+          "es": "Titular: Reabre el depósito. Detalle: El depósito reabrió dos puertas a las siete.",
+          "nota": "El titular breve va separado de los hechos confirmados."
+        }
+      ]
+    },
+    "en.n3.class-72": {
+      "explicacion": {
+        "titulo": "Nombrar la fuente: according to, reported, said",
+        "texto": "Para no presentar como seguro lo que dice otra persona, nombra la fuente. According to + fuente, al principio: According to the notice, prices may change (según el aviso…). Con verbo: The paper reported a delay; The nurse said the clinic was busy. Said y reported van en pasado, y lo que sigue a said suele pasar al pasado (is → was). Añade may o might si no es seguro. Ojo: «según» es according to (con to), y «me dijo» es told me, no said me."
+      },
+      "patron": {
+        "texto": "According to + fuente + información prudente:",
+        "formula": [
+          {
+            "texto": "According to the notice,",
+            "nota": "según + fuente, con coma"
+          },
+          {
+            "texto": "prices",
+            "nota": "la información"
+          },
+          {
+            "texto": "may change.",
+            "nota": "may: la fuente no lo da por seguro"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "According to + fuente, …"
+            },
+            {
+              "texto": "According to the radio, the bridge may close."
+            }
+          ],
+          [
+            {
+              "texto": "fuente + reported + dato"
+            },
+            {
+              "texto": "The paper reported a delay at the port."
+            }
+          ],
+          [
+            {
+              "texto": "fuente + said + frase en pasado"
+            },
+            {
+              "texto": "The nurse said the clinic was busy."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According the notice, tickets may sell out.",
+          "correcto": "According to the notice, tickets may sell out.",
+          "explicacion": "According siempre lleva to delante de la fuente."
+        },
+        {
+          "incorrecto": "The nurse said me the clinic was busy.",
+          "correcto": "The nurse said the clinic was busy.",
+          "explicacion": "Said no lleva persona detrás; para decir a quién, usa told me."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia quieren ir a la playa el fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Let's go to the beach on Saturday!",
+            "traduccion": "¡Vamos a la playa el sábado!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "According to the radio, it may rain on Saturday.",
+            "traduccion": "Según la radio, puede que llueva el sábado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh no. And Sunday?",
+            "traduccion": "¡Oh, no! ¿Y el domingo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The paper reported no rain for Sunday.",
+            "traduccion": "El periódico informó de que el domingo no lloverá."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My dad said the beach was open on Sunday too.",
+            "traduccion": "Mi papá dijo que la playa también abría el domingo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good! Then let's go on Sunday.",
+            "traduccion": "¡Bien! Entonces vamos el domingo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dijo la radio?",
+          "opciones": [
+            {
+              "es": "Que puede llover el sábado."
+            },
+            {
+              "es": "Que el domingo no lloverá."
+            },
+            {
+              "es": "Que la playa está cerrada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «According to the radio, it may rain on Saturday». Lo del domingo sin lluvia viene del periódico."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "According to the notice, entry starts at nine.",
+          "es": "Según el aviso, la entrada empieza a las nueve.",
+          "nota": "According to + fuente, al principio de la frase."
+        },
+        {
+          "indice": 1,
+          "en": "The paper reported a delay at the port.",
+          "es": "El periódico informó de un retraso en el puerto.",
+          "nota": "Reported une el dato con su fuente."
+        },
+        {
+          "indice": 2,
+          "en": "According to the radio, the road may reopen.",
+          "es": "Según la radio, puede que la carretera reabra.",
+          "nota": "May: la fuente no lo da por seguro."
+        },
+        {
+          "indice": 3,
+          "en": "The guide said the path was short.",
+          "es": "El guía dijo que el camino era corto.",
+          "nota": "Said + frase en pasado (is → was)."
+        },
+        {
+          "indice": 4,
+          "en": "The nurse said the clinic was busy.",
+          "es": "La enfermera dijo que la clínica estaba llena.",
+          "nota": "Said cuenta lo que dijo alguien; no prueba que sea cierto."
+        },
+        {
+          "indice": 5,
+          "en": "According to the weather office, rain might start at noon.",
+          "es": "Según la oficina meteorológica, podría empezar a llover a mediodía.",
+          "nota": "Fuente + might: información atribuida y prudente."
+        }
+      ]
+    },
+    "en.n3.class-73": {
+      "explicacion": {
+        "titulo": "Hecho, opinión o incertidumbre",
+        "texto": "Para clasificar una afirmación, busca la palabra que lo indica (el marcador). Hecho: confirmed, shows o un registro: A photo shows two buses. Opinión: thinks o believes: The editor thinks the queue is unfair; es lo que alguien piensa, no una prueba. Incertidumbre: may: The next ferry may be late; puede pasar o no. Justifica siempre con la palabra exacta del texto. Ojo: thinks y believes llevan -s con he/she, y después de may va el verbo base (may be, no may is)."
+      },
+      "patron": {
+        "texto": "Afirmación + marcador + justificación:",
+        "formula": [
+          {
+            "texto": "The road may close.",
+            "nota": "la afirmación"
+          },
+          {
+            "texto": "It is uncertain",
+            "nota": "el tipo: fact, opinion o uncertain"
+          },
+          {
+            "texto": "because it uses may.",
+            "nota": "la palabra exacta que lo prueba"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Marcadores",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "hecho"
+            },
+            {
+              "texto": "confirmed, shows"
+            },
+            {
+              "texto": "A photo shows two buses at the station."
+            }
+          ],
+          [
+            {
+              "texto": "opinión"
+            },
+            {
+              "texto": "thinks, believes"
+            },
+            {
+              "texto": "My brother thinks the film is boring."
+            }
+          ],
+          [
+            {
+              "texto": "incertidumbre"
+            },
+            {
+              "texto": "may"
+            },
+            {
+              "texto": "The road may close tonight."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The editor think the queue is unfair.",
+          "correcto": "The editor thinks the queue is unfair.",
+          "explicacion": "Con he/she (the editor) el verbo lleva -s: thinks, believes."
+        },
+        {
+          "incorrecto": "The ferry may is late.",
+          "correcto": "The ferry may be late.",
+          "explicacion": "Después de may va el verbo en forma base: may be."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo leen la nota de la escuela sobre la excursión.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The note says the bus for Friday is confirmed.",
+            "traduccion": "La nota dice que el autobús del viernes está confirmado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good! Tom thinks the museum is boring.",
+            "traduccion": "¡Bien! Tom cree que el museo es aburrido."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is only his opinion.",
+            "traduccion": "Eso es solo su opinión."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The note also says it may rain.",
+            "traduccion": "La nota también dice que puede que llueva."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "So it is uncertain. Let's take our coats!",
+            "traduccion": "Entonces es incierto. ¡Llevemos los abrigos!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es un hecho confirmado?",
+          "opciones": [
+            {
+              "es": "El autobús del viernes."
+            },
+            {
+              "es": "Que el museo es aburrido."
+            },
+            {
+              "es": "Que va a llover."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "La nota dice «the bus for Friday is confirmed». Thinks marca una opinión y may, incertidumbre."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The bus for Friday is confirmed.",
+          "es": "El autobús del viernes está confirmado.",
+          "nota": "Hecho: el marcador es confirmed."
+        },
+        {
+          "indice": 1,
+          "en": "My teacher believes the test is easy.",
+          "es": "Mi profesora cree que el examen es fácil.",
+          "nota": "Opinión: believes muestra lo que alguien cree."
+        },
+        {
+          "indice": 2,
+          "en": "The road may close tonight.",
+          "es": "Puede que la carretera cierre esta noche.",
+          "nota": "Incertidumbre: may deja el resultado abierto."
+        },
+        {
+          "indice": 3,
+          "en": "A photo shows two buses at the station.",
+          "es": "Una foto muestra dos autobuses en la estación.",
+          "nota": "Hecho: shows presenta una prueba."
+        },
+        {
+          "indice": 4,
+          "en": "Ana thinks the market is too busy.",
+          "es": "Ana cree que el mercado está demasiado lleno.",
+          "nota": "Opinión: thinks + lo que piensa una persona."
+        },
+        {
+          "indice": 5,
+          "en": "It is uncertain because the note says may.",
+          "es": "Es incierto porque la nota dice may.",
+          "nota": "Clasifica y cita la palabra exacta del texto."
+        }
+      ]
+    },
+    "en.n3.class-74": {
+      "explicacion": {
+        "titulo": "Resumir sin añadir",
+        "texto": "Resumir es contar solo los hechos importantes, sin añadir nada. 1) Elige los tres datos de la ficha. 2) Conserva la fuente: The director reported that…, According to the notice, … 3) Mantén los detalles exactos: horas, números, días. 4) No inventes causas: si la ficha no dice por qué, no escribas because; puedes decir The card gives no cause for the reopening. Ojo con el orden: «mesas de estudio» es study desks (el nombre que describe va delante)."
+      },
+      "patron": {
+        "texto": "Fuente + reported that + hecho exacto:",
+        "formula": [
+          {
+            "texto": "The director reported that",
+            "nota": "fuente + reported that"
+          },
+          {
+            "texto": "the east room reopened",
+            "nota": "el hecho, en pasado"
+          },
+          {
+            "texto": "on Monday.",
+            "nota": "detalle exacto: el día"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "En el resumen",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "la fuente"
+            },
+            {
+              "texto": "According to the notice, …"
+            }
+          ],
+          [
+            {
+              "texto": "el dato exacto"
+            },
+            {
+              "texto": "the library added twelve study desks"
+            }
+          ],
+          [
+            {
+              "texto": "sin causa inventada"
+            },
+            {
+              "texto": "The card gives no cause for the reopening."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The library added twelve desks of study.",
+          "correcto": "The library added twelve study desks.",
+          "explicacion": "Calco de «mesas de estudio»: en inglés, study va delante de desks."
+        },
+        {
+          "incorrecto": "The director reported that the east room reopened in Monday.",
+          "correcto": "The director reported that the east room reopened on Monday.",
+          "explicacion": "Con días de la semana se usa on, no in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Tom las noticias de la biblioteca de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What did the library notice say?",
+            "traduccion": "¿Qué decía el aviso de la biblioteca?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "According to the notice, the library added ten new computers.",
+            "traduccion": "Según el aviso, la biblioteca añadió diez computadoras nuevas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the teacher reported that the reading room reopened on Tuesday.",
+            "traduccion": "Y la profesora informó de que la sala de lectura reabrió el martes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Why did the reading room close?",
+            "traduccion": "¿Por qué cerró la sala de lectura?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The notice gives no cause, so I cannot say.",
+            "traduccion": "El aviso no da ninguna causa, así que no lo puedo decir."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué cerró la sala de lectura?",
+          "opciones": [
+            {
+              "es": "El aviso no lo dice."
+            },
+            {
+              "es": "Por la lluvia."
+            },
+            {
+              "es": "Para poner computadoras nuevas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «The notice gives no cause». Un buen resumen no inventa la causa."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "According to the notice, the library added twelve study desks.",
+          "es": "Según el aviso, la biblioteca añadió doce mesas de estudio.",
+          "nota": "Fuente + dato exacto."
+        },
+        {
+          "indice": 1,
+          "en": "The director reported that the east room reopened on Monday.",
+          "es": "El director informó de que la sala este reabrió el lunes.",
+          "nota": "Reported that conserva la fuente en el resumen."
+        },
+        {
+          "indice": 2,
+          "en": "The director said the café will open at 08:00 next week.",
+          "es": "El director dijo que la cafetería abrirá a las 08:00 la semana que viene.",
+          "nota": "La hora exacta no se cambia."
+        },
+        {
+          "indice": 3,
+          "en": "The card gives no cause for the reopening.",
+          "es": "La ficha no da ninguna causa de la reapertura.",
+          "nota": "Si no hay causa, no la inventes."
+        },
+        {
+          "indice": 4,
+          "en": "The teacher reported that the school garden opened on Friday.",
+          "es": "La profesora informó de que el huerto de la escuela abrió el viernes.",
+          "nota": "Un día y un lugar conservan el detalle exacto."
+        },
+        {
+          "indice": 5,
+          "en": "The card gives three facts, but it gives no cause.",
+          "es": "La ficha da tres hechos, pero no da ninguna causa.",
+          "nota": "El resumen conserva esos hechos y no añade causas."
+        }
+      ]
+    },
+    "en.n3.class-75": {
+      "explicacion": {
+        "titulo": "Comparar dos informes",
+        "texto": "Para comparar dos informes, usa todo el bloque: separa titular y detalle, nombra cada fuente (According to the radio…), distingue hecho, opinión e incertidumbre, y no añadas causas. Luego busca: 1) coincidencias: Both sources say the path reopened on Tuesday; 2) diferencias: The website says two entrances; the radio says one; 3) verificación: si no coinciden, no elijas el número mayor: I would check the current map. Both va sin the y con el verbo en plural."
+      },
+      "patron": {
+        "texto": "Diferencia entre fuentes + verificación:",
+        "formula": [
+          {
+            "texto": "The website says two entrances;",
+            "nota": "fuente A y su dato"
+          },
+          {
+            "texto": "the radio says one,",
+            "nota": "fuente B: el dato no coincide"
+          },
+          {
+            "texto": "so I would check the current map.",
+            "nota": "verificación: un paso concreto"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "coincidencia"
+            },
+            {
+              "texto": "Both sources say the market reopened on Friday."
+            }
+          ],
+          [
+            {
+              "texto": "diferencia"
+            },
+            {
+              "texto": "The notice says twenty desks; the radio says eighteen."
+            }
+          ],
+          [
+            {
+              "texto": "verificación"
+            },
+            {
+              "texto": "I would check the current notice."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The both sources say Tuesday.",
+          "correcto": "Both sources say Tuesday.",
+          "explicacion": "Calco de «las dos fuentes»: both no lleva the delante."
+        },
+        {
+          "incorrecto": "Both sources says the path reopened.",
+          "correcto": "Both sources say the path reopened.",
+          "explicacion": "Both sources es plural: el verbo va sin -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia comparan dos mensajes sobre la feria de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The school website says the fair starts on Saturday at ten.",
+            "traduccion": "La web de la escuela dice que la feria empieza el sábado a las diez."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The radio said Saturday too, but at eleven.",
+            "traduccion": "La radio también dijo el sábado, pero a las once."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So both sources say Saturday, but the time is different.",
+            "traduccion": "Entonces las dos fuentes dicen el sábado, pero la hora es distinta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I would check the notice at school tomorrow.",
+            "traduccion": "Yo revisaría mañana el aviso de la escuela."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué coinciden las dos fuentes?",
+          "opciones": [
+            {
+              "es": "En el día: el sábado."
+            },
+            {
+              "es": "En la hora: las diez."
+            },
+            {
+              "es": "En la hora: las once."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «both sources say Saturday, but the time is different». La hora es la diferencia que hay que verificar."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Headline: River path reopens.",
+          "es": "Titular: Reabre el camino del río.",
+          "nota": "El titular es más corto que su detalle."
+        },
+        {
+          "indice": 1,
+          "en": "According to the council, the path reopened on Tuesday.",
+          "es": "Según el ayuntamiento, el camino reabrió el martes.",
+          "nota": "According to + fuente: el dato tiene dueño."
+        },
+        {
+          "indice": 2,
+          "en": "The editor thinks the path is safe, but the gate may close.",
+          "es": "El editor cree que el camino es seguro, pero puede que la puerta cierre.",
+          "nota": "Thinks marca opinión; may, incertidumbre."
+        },
+        {
+          "indice": 3,
+          "en": "Both sources say the path reopened on Tuesday.",
+          "es": "Las dos fuentes dicen que el camino reabrió el martes.",
+          "nota": "Coincidencia: both + verbo en plural."
+        },
+        {
+          "indice": 4,
+          "en": "The website says two entrances; the radio says only one.",
+          "es": "La web dice dos entradas; la radio dice solo una.",
+          "nota": "Diferencia: un dato que no coincide."
+        },
+        {
+          "indice": 5,
+          "en": "Neither source confirms the cause, so I would check with the office.",
+          "es": "Ninguna fuente confirma la causa, así que lo consultaría con la oficina.",
+          "nota": "Sin causa confirmada: verifica en lugar de inventar."
+        }
+      ]
+    }
+  }
+}

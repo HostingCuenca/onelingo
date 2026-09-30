@@ -1,0 +1,706 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-97 (P1): el diálogo usaba «the best» con dos botellas, contradiciendo la propia regla («entre tres o más»); → «the big bottle is better for the party», traducción y feedback ajustados.",
+      "class-99: ejemplo 5, «by Friday» traducido «para el viernes» (no «antes del viernes»).",
+      "class-100: el repaso de cierre cubría solo las clases 81–100; ahora recoge todo el nivel 2 (pasado continuo, will, present perfect, as… as, obligación, viajes, trabajo, salud).",
+      "class-100: ejemplo 5 sustituido por la misma frase con traducción fiel («Sí, puedo», «llegar temprano»).",
+      "Aceptado: ejemplo 1 de class-100 («Compare the prices…») es un imperativo natural.",
+      "Avisos «la opción correcta apenas aparece» esperables: opciones del ítem en español."
+    ]
+  },
+  "classes": {
+    "en.n2.class-96": {
+      "explicacion": {
+        "titulo": "Repaso: el marcador temporal elige el tiempo verbal",
+        "texto": "Para elegir el tiempo verbal, busca el marcador. Rutina con usually o every Monday: presente simple (I check; he checks, con -s). Algo que pasa ahora, con now: am/is/are + -ing (I am preparing the plan). Pasado terminado con yesterday o last night: pasado simple (I finished, I called). Plan con tomorrow: be going to + verbo (I am going to call). Desde un momento hasta hoy, con since: have/has + participio (I have worked here since March). En español «trabajo aquí desde marzo» va en presente; en inglés no."
+      },
+      "patron": {
+        "texto": "Marcador + tiempo verbal adecuado:",
+        "formula": [
+          {
+            "texto": "Yesterday I called;",
+            "nota": "yesterday → pasado simple"
+          },
+          {
+            "texto": "now I am writing,",
+            "nota": "now → am/is/are + -ing"
+          },
+          {
+            "texto": "and tomorrow I am going to visit.",
+            "nota": "tomorrow → be going to + verbo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Marcador",
+          "Tiempo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "usually, every Monday"
+            },
+            {
+              "texto": "presente simple"
+            },
+            {
+              "texto": "I check the schedule."
+            }
+          ],
+          [
+            {
+              "texto": "now"
+            },
+            {
+              "texto": "presente continuo"
+            },
+            {
+              "texto": "I am checking the schedule."
+            }
+          ],
+          [
+            {
+              "texto": "yesterday"
+            },
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "I checked the schedule."
+            }
+          ],
+          [
+            {
+              "texto": "tomorrow"
+            },
+            {
+              "texto": "be going to"
+            },
+            {
+              "texto": "I am going to check it."
+            }
+          ],
+          [
+            {
+              "texto": "since March"
+            },
+            {
+              "texto": "have/has + participio"
+            },
+            {
+              "texto": "I have worked here since March."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I work here since March.",
+          "correcto": "I have worked here since March.",
+          "explicacion": "Con since (desde) se usa have/has + participio, aunque en español vaya en presente."
+        },
+        {
+          "incorrecto": "Yesterday I finish the report.",
+          "correcto": "Yesterday I finished the report.",
+          "explicacion": "Yesterday pide pasado simple: finish → finished."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara llama a su amigo Tom por la tarde.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What are you doing now, Tom?",
+            "traduccion": "¿Qué estás haciendo ahora, Tom?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I am making a card for my grandmother.",
+            "traduccion": "Estoy haciendo una tarjeta para mi abuela."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Nice! Did you visit her yesterday?",
+            "traduccion": "¡Qué bien! ¿La visitaste ayer?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, I called her yesterday. I am going to visit her tomorrow.",
+            "traduccion": "No, la llamé ayer. Voy a visitarla mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Tom ayer?",
+          "opciones": [
+            {
+              "es": "Llamó a su abuela."
+            },
+            {
+              "es": "Visitó a su abuela."
+            },
+            {
+              "es": "Hizo una tarjeta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I called her yesterday». La visita es mañana y la tarjeta la hace ahora."
+        }
+      }
+    },
+    "en.n2.class-97": {
+      "explicacion": {
+        "titulo": "Repaso: enough, fewer/less y comparaciones",
+        "texto": "Enough (suficiente) va delante del sustantivo: enough chairs. Para «menos» el inglés mira si se puede contar: fewer + contables en plural (fewer plates) y less + incontables (less water). Para comparar dos cosas: adjetivo corto + -er + than (cheaper than) o more + adjetivo largo + than (more expensive than). Para la igualdad: as + adjetivo + as (as large as). Entre tres o más: the + -est o the best. En español «menos» y «más» sirven para todo; en inglés la forma cambia."
+      },
+      "patron": {
+        "texto": "A + is + adjetivo -er + than + B:",
+        "formula": [
+          {
+            "texto": "The bus",
+            "nota": "primera opción"
+          },
+          {
+            "texto": "is cheaper",
+            "nota": "adjetivo corto + -er"
+          },
+          {
+            "texto": "than the train,",
+            "nota": "than: «que»"
+          },
+          {
+            "texto": "and it has enough seats.",
+            "nota": "enough + sustantivo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Idea",
+          "Contables",
+          "Incontables"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "menos"
+            },
+            {
+              "texto": "fewer chairs"
+            },
+            {
+              "texto": "less water"
+            }
+          ],
+          [
+            {
+              "texto": "más"
+            },
+            {
+              "texto": "more chairs"
+            },
+            {
+              "texto": "more water"
+            }
+          ],
+          [
+            {
+              "texto": "suficiente"
+            },
+            {
+              "texto": "enough chairs"
+            },
+            {
+              "texto": "enough water"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We need less chairs.",
+          "correcto": "We need fewer chairs.",
+          "explicacion": "Chairs se puede contar: con contables en plural se usa fewer."
+        },
+        {
+          "incorrecto": "The bus is more cheap than the train.",
+          "correcto": "The bus is cheaper than the train.",
+          "explicacion": "Cheap es un adjetivo corto: lleva -er, no more."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos compran lo que falta para la fiesta de Mia.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "We have eight guests and ten cups. That is enough.",
+            "traduccion": "Tenemos ocho invitados y diez vasos. Es suficiente."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. And the juice? The big bottle is three dollars, and the small bottle is two.",
+            "traduccion": "Bien. ¿Y el zumo? La botella grande cuesta tres dólares y la pequeña, dos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The small bottle is cheaper, but the big bottle has more juice.",
+            "traduccion": "La botella pequeña es más barata, pero la grande tiene más zumo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then the big bottle is better for the party.",
+            "traduccion": "Entonces la botella grande es mejor para la fiesta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué botella compran para la fiesta?",
+          "opciones": [
+            {
+              "es": "La grande."
+            },
+            {
+              "es": "La pequeña."
+            },
+            {
+              "es": "Ninguna."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «the big bottle is better for the party», porque tiene más zumo. Con dos opciones se usa better, no the best."
+        }
+      }
+    },
+    "en.n2.class-98": {
+      "explicacion": {
+        "titulo": "Repaso: modales para pedir, permitir, aconsejar y prohibir",
+        "texto": "Cada modal tiene una función. Could you + verbo…? pide algo con cortesía. May I…? pide permiso (Yes, you may). Should da un consejo: You should rest. Have to marca un requisito u obligación: Visitors have to show identification. Mustn't prohíbe: You mustn't block the exit. Ojo: don't have to no prohíbe; significa «no hace falta». Después de could, may, should y must va el verbo base sin to; have to sí lleva to. Para responder con cortesía: Yes, of course o Sorry, I can't."
+      },
+      "patron": {
+        "texto": "Sujeto + modal + verbo base + resto:",
+        "formula": [
+          {
+            "texto": "You",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "mustn't",
+            "nota": "modal: prohibición"
+          },
+          {
+            "texto": "block",
+            "nota": "verbo base, sin to"
+          },
+          {
+            "texto": "the emergency exit.",
+            "nota": "el resto de la frase"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Modal",
+          "Función",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Could you…?"
+            },
+            {
+              "texto": "petición"
+            },
+            {
+              "texto": "Could you help me, please?"
+            }
+          ],
+          [
+            {
+              "texto": "May I…?"
+            },
+            {
+              "texto": "permiso"
+            },
+            {
+              "texto": "May I use this chair?"
+            }
+          ],
+          [
+            {
+              "texto": "should"
+            },
+            {
+              "texto": "consejo"
+            },
+            {
+              "texto": "You should rest."
+            }
+          ],
+          [
+            {
+              "texto": "have to"
+            },
+            {
+              "texto": "requisito"
+            },
+            {
+              "texto": "Visitors have to show identification."
+            }
+          ],
+          [
+            {
+              "texto": "mustn't"
+            },
+            {
+              "texto": "prohibición"
+            },
+            {
+              "texto": "You mustn't block the exit."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You should to rest before the game.",
+          "correcto": "You should rest before the game.",
+          "explicacion": "Después de should va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "You don't have to block the exit.",
+          "correcto": "You mustn't block the exit.",
+          "explicacion": "Don't have to significa «no hace falta»; para prohibir se usa mustn't."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hacen un trabajo en la biblioteca y hablan con Sara, la bibliotecaria.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "May I use this computer?",
+            "traduccion": "¿Puedo usar este ordenador?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, you may. But you mustn't eat here.",
+            "traduccion": "Sí, puedes. Pero no debes comer aquí."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Could you help me with this book, please?",
+            "traduccion": "¿Podría ayudarme con este libro, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, of course.",
+            "traduccion": "Sí, claro."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Leo, you look tired. You should rest after this.",
+            "traduccion": "Leo, pareces cansado. Deberías descansar después de esto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué está prohibido en la biblioteca?",
+          "opciones": [
+            {
+              "es": "Comer."
+            },
+            {
+              "es": "Usar el ordenador."
+            },
+            {
+              "es": "Pedir ayuda con un libro."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «you mustn't eat here». Mustn't expresa prohibición."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "Visitors have to show identification at the door.",
+          "es": "Los visitantes tienen que mostrar identificación en la puerta.",
+          "nota": "Have to expresa un requisito del lugar: no es opcional."
+        },
+        {
+          "indice": 5,
+          "en": "Sorry, I can't help you now. I am very busy.",
+          "es": "Lo siento, no puedo ayudarte ahora. Estoy muy ocupado.",
+          "nota": "Para rechazar con cortesía: Sorry + I can't + un motivo breve. Para aceptar: Yes, of course."
+        }
+      ]
+    },
+    "en.n2.class-99": {
+      "explicacion": {
+        "titulo": "Proyecto A2: objetivo, avance, cantidad, plazo y petición",
+        "texto": "Un proyecto se comunica con datos concretos, uno por frase. Estrategia: 1) el objetivo: Our project goal is a reading afternoon for ten children; 2) lo hecho y lo que hacéis ahora: Yesterday we booked the room; now we are checking the steps; 3) cantidad y precio: enough, less than, cheaper than; 4) obligación y plazo: We have to finish before the deadline; 5) petición a un responsable: Could you confirm the list? Termina con la actualización (update) y el siguiente paso."
+      },
+      "patron": {
+        "texto": "We have to + verbo + before the deadline; + petición:",
+        "formula": [
+          {
+            "texto": "We have to finish",
+            "nota": "have to + verbo base: obligación"
+          },
+          {
+            "texto": "before the deadline.",
+            "nota": "before + el plazo, sin of"
+          },
+          {
+            "texto": "Could you confirm the list?",
+            "nota": "petición cortés a un responsable"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The materials cost less that the budget.",
+          "correcto": "The materials cost less than the budget.",
+          "explicacion": "En las comparaciones, «que» es than, no that."
+        },
+        {
+          "incorrecto": "We have to finish before of the deadline.",
+          "correcto": "We have to finish before the deadline.",
+          "explicacion": "Before va directamente con el sustantivo: «antes del plazo» es before the deadline."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo preparan en el colegio una tarde de lectura para niños.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Yesterday we booked the room for the reading afternoon.",
+            "traduccion": "Ayer reservamos la sala para la tarde de lectura."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good. Now I am checking the materials. We have enough books.",
+            "traduccion": "Bien. Ahora estoy revisando los materiales. Tenemos suficientes libros."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And the markers? Pack A is cheaper than Pack B.",
+            "traduccion": "¿Y los rotuladores? El paquete A es más barato que el paquete B."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then let's choose Pack A. The deadline is Friday.",
+            "traduccion": "Entonces elijamos el paquete A. El plazo es el viernes."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Could you send the update to the teacher?",
+            "traduccion": "¿Podrías enviar la actualización a la profesora?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, I will send it today.",
+            "traduccion": "Sí, la enviaré hoy."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hicieron Ana y Leo ayer?",
+          "opciones": [
+            {
+              "es": "Reservaron la sala."
+            },
+            {
+              "es": "Revisaron los materiales."
+            },
+            {
+              "es": "Enviaron la actualización."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Yesterday we booked the room». Los materiales se revisan ahora y la actualización se envía hoy."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 5,
+          "en": "The place is Room A, the time is four, we need ten chairs, and Leo has to finish by Friday.",
+          "es": "El lugar es la sala A, la hora es las cuatro, necesitamos diez sillas y Leo tiene que terminar para el viernes.",
+          "nota": "Un buen resumen da lugar y hora, cantidad, responsable y plazo."
+        }
+      ]
+    },
+    "en.n2.class-100": {
+      "explicacion": {
+        "titulo": "Cierre del nivel 2: todo lo que ya sabes hacer",
+        "texto": "¡Fin del nivel 2! Ya sabes situar acciones en el tiempo: rutinas (usually), ahora (am/is/are + -ing), pasado (yesterday, was/were + -ing), planes (going to, will) y experiencias hasta hoy (have + participio: ever, already, since). Comparas y mides (cheaper than, the best, as… as, enough, fewer/less). Pides, das permiso, aconsejas, obligas y prohíbes (could you, may I, should, have to, mustn't) y te defiendes en viajes, trabajo, salud, casa, tecnología y planes con amigos. Estrategia final: frases cortas, un dato en cada una, una petición cortés y una confirmación."
+      },
+      "patron": {
+        "texto": "Pasado + ahora + petición + respuesta:",
+        "formula": [
+          {
+            "texto": "Yesterday we booked the room;",
+            "nota": "pasado: lo que ya está hecho"
+          },
+          {
+            "texto": "now we are preparing the update.",
+            "nota": "ahora: am/is/are + -ing"
+          },
+          {
+            "texto": "Could you bring the list?",
+            "nota": "petición cortés"
+          },
+          {
+            "texto": "Yes, I can.",
+            "nota": "respuesta que confirma"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "tiempo"
+            },
+            {
+              "texto": "Yesterday we booked the room."
+            }
+          ],
+          [
+            {
+              "texto": "cantidad"
+            },
+            {
+              "texto": "Eight chairs are enough."
+            }
+          ],
+          [
+            {
+              "texto": "comparación"
+            },
+            {
+              "texto": "Room A is quieter than Room B."
+            }
+          ],
+          [
+            {
+              "texto": "requisito"
+            },
+            {
+              "texto": "We have to arrive early."
+            }
+          ],
+          [
+            {
+              "texto": "petición y respuesta"
+            },
+            {
+              "texto": "Could you bring the list? Yes, I can."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Yesterday we have finished the plan.",
+          "correcto": "Yesterday we finished the plan.",
+          "explicacion": "Con yesterday se usa pasado simple, no have + participio."
+        },
+        {
+          "incorrecto": "Room A is more quiet than Room B.",
+          "correcto": "Room A is quieter than Room B.",
+          "explicacion": "Quiet es un adjetivo corto: lleva -er, no more."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos preparan una clase de cocina del club del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Yesterday we booked Room A for the cooking class.",
+            "traduccion": "Ayer reservamos la sala A para la clase de cocina."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. Now I am checking the list. We have eight students and ten chairs.",
+            "traduccion": "Bien. Ahora estoy revisando la lista. Tenemos ocho alumnos y diez sillas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So ten chairs are enough. And Room A is quieter than Room B.",
+            "traduccion": "Entonces diez sillas son suficientes. Y la sala A es más tranquila que la sala B."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We have to arrive early on Saturday. Could you bring the plates?",
+            "traduccion": "Tenemos que llegar temprano el sábado. ¿Podrías traer los platos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, of course. I will bring them at nine.",
+            "traduccion": "Sí, claro. Los traeré a las nueve."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué llevará Mia el sábado?",
+          "opciones": [
+            {
+              "es": "Los platos."
+            },
+            {
+              "es": "Las sillas."
+            },
+            {
+              "es": "La lista."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos pregunta: «Could you bring the plates?», y Mia responde: «Yes, of course»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Could you bring the materials, please?",
+          "es": "¿Podrías traer los materiales, por favor?",
+          "nota": "Una petición cortés con could coordina una acción sin imponerla."
+        },
+        {
+          "indice": 3,
+          "en": "Yes, I can. The class is on Friday at four in Room A.",
+          "es": "Sí, puedo. La clase es el viernes a las cuatro en la sala A.",
+          "nota": "Al responder, confirma la hora y el lugar."
+        },
+        {
+          "indice": 4,
+          "en": "The result is good: the room is ready. The next step is to send the list.",
+          "es": "El resultado es bueno: la sala está lista. El siguiente paso es enviar la lista.",
+          "nota": "Result resume lo logrado y next step dice qué falta."
+        },
+        {
+          "indice": 5,
+          "en": "Ava: We booked Room A yesterday. Now our plan is for Friday at four with six students. Eight chairs are enough, and A is quieter than B. We have to arrive early. Leo, could you bring the worksheets? Leo: Yes, I can.",
+          "es": "Ava: Ayer reservamos la sala A. Ahora nuestro plan es para el viernes a las cuatro con seis estudiantes. Ocho sillas son suficientes y la A es más tranquila que la B. Tenemos que llegar temprano. Leo, ¿podrías traer las fichas? Leo: Sí, puedo.",
+          "nota": "El diálogo repasa tiempo, cantidad, comparación, requisito, petición y respuesta."
+        }
+      ]
+    }
+  }
+}

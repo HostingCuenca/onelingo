@@ -1,0 +1,269 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {"start": 81, "end": 85},
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1. Explicaciones, patrones, errores y situaciones coinciden con los ejercicios de 81-85; ítems con una única respuesta deducible del diálogo.",
+      "class-83: traducción de la línea final de la situación pasada a imperativo («Añade…») para reflejar el imperativo que enseña la clase. Ejemplo 4 (Keep using examples; add one reason…) es un comentario real de profesor: se acepta.",
+      "class-84: situación, añadido 'correctly' (spell eighteen of twenty words correctly) para que coincida con «escribir bien».",
+      "class-85: añadido ejemplo índice 5 con traducción fiel (antes «Mejoré» resumía «My score improved»). Nota P2: la situación reutiliza los datos de Tom (5→7, meta 9) del ejercicio de escucha, pero pregunta otra cosa."
+    ]
+  },
+  "classes": {
+    "en.n3.class-81": {
+      "explicacion": {
+        "titulo": "Hablar de tu aprendizaje: fortaleza, dificultad y meta",
+        "texto": "Para hablar de cómo aprendes, separa tres ideas. La fortaleza es lo que ya haces bien, en presente o con can: I already understand short texts; I can spell familiar words. La dificultad es un problema actual: I find spelling difficult; I forget words. La meta es un resultado futuro, con want / hope / aim / would like + to + verbo: I want to improve my pronunciation. Ojo: «me cuesta la ortografía» no es «I find difficult the spelling», sino I find spelling difficult (find + cosa + difficult)."
+      },
+      "patron": {
+        "texto": "Fortaleza + dificultad + meta:",
+        "formula": [
+          {"texto": "I already understand short texts,", "nota": "fortaleza: algo que ya haces bien (presente)"},
+          {"texto": "but I find spelling difficult.", "nota": "dificultad: find + cosa + difficult"},
+          {"texto": "My goal is to", "nota": "meta: goal is to / want to / hope to"},
+          {"texto": "improve my spelling.", "nota": "verbo base + lo que quieres mejorar"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Función", "Expresiones", "Ejemplo"],
+        "filas": [
+          [{"texto": "fortaleza"}, {"texto": "can, already + presente, My strength is…"}, {"texto": "I can give clear examples."}],
+          [{"texto": "dificultad"}, {"texto": "I find … difficult, I forget, I cannot…"}, {"texto": "I cannot remember new verbs."}],
+          [{"texto": "meta"}, {"texto": "want to, hope to, aim to, would like to"}, {"texto": "I hope to understand longer talks."}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "I want improve my pronunciation.", "correcto": "I want to improve my pronunciation.", "explicacion": "Después de want, hope o aim hace falta to antes del verbo."},
+        {"incorrecto": "I find difficult the spelling.", "correcto": "I find spelling difficult.", "explicacion": "Calco de «me resulta difícil la ortografía». En inglés: find + cosa + difficult, y sin the para hablar en general."}
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan de su clase de inglés antes de un examen.",
+        "dialogo": [
+          {"hablante": "Leo", "texto": "What is your strength, Mia?", "traduccion": "¿Cuál es tu fortaleza, Mia?"},
+          {"hablante": "Mia", "texto": "I already understand short texts, but I find spelling difficult.", "traduccion": "Ya entiendo textos cortos, pero me cuesta la ortografía."},
+          {"hablante": "Leo", "texto": "My strength is spelling. But I forget words when people speak quickly.", "traduccion": "Mi fortaleza es la ortografía. Pero olvido palabras cuando la gente habla rápido."},
+          {"hablante": "Mia", "texto": "So what is your goal?", "traduccion": "Entonces, ¿cuál es tu meta?"},
+          {"hablante": "Leo", "texto": "I want to follow fast conversations.", "traduccion": "Quiero seguir conversaciones rápidas."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la dificultad de Leo?",
+          "opciones": [
+            {"es": "Olvida palabras cuando la gente habla rápido."},
+            {"es": "La ortografía."},
+            {"es": "Entender textos cortos."}
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I forget words when people speak quickly». La ortografía es su fortaleza, y los textos cortos son la fortaleza de Mia."
+        }
+      }
+    },
+    "en.n3.class-82": {
+      "explicacion": {
+        "titulo": "Propósito: to + verbo y so that + sujeto",
+        "texto": "Para decir para qué haces algo tienes dos formas. To + verbo base, cuando solo sigue un verbo: I review my notes to remember key ideas. So that + sujeto + verbo (a menudo can), cuando sigue una oración completa: I record my voice so that I can notice mistakes. En español «para» sirve para todo, pero en inglés no se dice for remember (con verbo va to) ni to I can (después de to nunca va sujeto)."
+      },
+      "patron": {
+        "texto": "Estrategia + so that + sujeto + can + verbo:",
+        "formula": [
+          {"texto": "I record my voice", "nota": "la estrategia: lo que haces"},
+          {"texto": "so that", "nota": "para que: introduce una oración con sujeto"},
+          {"texto": "I can notice mistakes.", "nota": "sujeto + can + verbo base: el propósito"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Conector", "Después va", "Ejemplo"],
+        "filas": [
+          [{"texto": "to"}, {"texto": "verbo base"}, {"texto": "I review my notes to remember key ideas."}],
+          [{"texto": "so that"}, {"texto": "sujeto + can / verbo"}, {"texto": "I use pictures so that I can remember new nouns."}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "I review my notes for remember key ideas.", "correcto": "I review my notes to remember key ideas.", "explicacion": "Calco de «para recordar». Delante de un verbo, el propósito se dice con to, no con for."},
+        {"incorrecto": "I use large cards to I can read the words.", "correcto": "I use large cards so that I can read the words.", "explicacion": "Si después viene un sujeto (I can…), se usa so that. To va seguido directamente del verbo."}
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a su hermana Sara cómo estudia inglés.",
+        "dialogo": [
+          {"hablante": "Tom", "texto": "How do you learn new words, Sara?", "traduccion": "¿Cómo aprendes palabras nuevas, Sara?"},
+          {"hablante": "Sara", "texto": "I use cards with pictures to remember them.", "traduccion": "Uso tarjetas con dibujos para recordarlas."},
+          {"hablante": "Tom", "texto": "And your pronunciation?", "traduccion": "¿Y tu pronunciación?"},
+          {"hablante": "Sara", "texto": "I record my voice so that I can notice my mistakes.", "traduccion": "Grabo mi voz para poder notar mis errores."},
+          {"hablante": "Tom", "texto": "Good idea. I will write examples to understand new expressions.", "traduccion": "Buena idea. Escribiré ejemplos para entender expresiones nuevas."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿para qué graba Sara su voz?",
+          "opciones": [
+            {"es": "Para notar sus errores."},
+            {"es": "Para recordar palabras nuevas."},
+            {"es": "Para entender expresiones nuevas."}
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I record my voice so that I can notice my mistakes». Las tarjetas son para recordar palabras, y escribir ejemplos es el plan de Tom."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "I test myself every day to find gaps.", "es": "Me pongo a prueba todos los días para encontrar lagunas.", "nota": "Estrategia (test myself) + to + propósito (find gaps)."}
+      ]
+    },
+    "en.n3.class-83": {
+      "explicacion": {
+        "titulo": "Del comentario a la acción: logro, problema y siguiente paso",
+        "texto": "Un comentario de tu profesor suele tener tres partes. El logro, lo que ya haces bien: Your ideas are clear. El problema, a menudo después de but o however: but you sometimes miss an ending. El siguiente paso, en imperativo (verbo base, sin sujeto) o con The next step is to + verbo: Check each verb before you finish. Un buen paso es específico: dice qué hacer y dónde, y luego se puede comprobar. «Rewrite three sentences» es mejor que «Practise more». No leas todo el comentario como una crítica: conserva el logro."
+      },
+      "patron": {
+        "texto": "Logro + problema + siguiente paso:",
+        "formula": [
+          {"texto": "Your ideas are clear,", "nota": "logro: lo que debes conservar"},
+          {"texto": "but two answers have no reasons.", "nota": "problema concreto, después de but"},
+          {"texto": "Add a reason", "nota": "siguiente paso: imperativo (verbo base)"},
+          {"texto": "to each answer.", "nota": "dónde: hace la acción comprobable"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Parte", "Señales", "Ejemplo"],
+        "filas": [
+          [{"texto": "logro"}, {"texto": "clear, well, correctly"}, {"texto": "Your headings help the reader."}],
+          [{"texto": "problema"}, {"texto": "but, however, no, sometimes miss"}, {"texto": "Two paragraphs have no examples."}],
+          [{"texto": "siguiente paso"}, {"texto": "imperativo, The next step is to…"}, {"texto": "Add an example to each paragraph."}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "The next step is check each verb.", "correcto": "The next step is to check each verb.", "explicacion": "Después de The next step is, el verbo va con to: is to check."},
+        {"incorrecto": "Your ideas are clear, but you miss sometimes an ending.", "correcto": "Your ideas are clear, but you sometimes miss an ending.", "explicacion": "En español decimos «omites a veces», pero en inglés sometimes va delante del verbo principal."}
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a su padre Carlos el comentario de su profesora sobre un cuento.",
+        "dialogo": [
+          {"hablante": "Leo", "texto": "Dad, my teacher wrote some feedback on my story.", "traduccion": "Papá, mi profesora escribió unos comentarios sobre mi cuento."},
+          {"hablante": "Carlos", "texto": "What does it say?", "traduccion": "¿Qué dice?"},
+          {"hablante": "Leo", "texto": "Your story has a clear beginning, but three sentences have no full stop.", "traduccion": "Tu cuento tiene un comienzo claro, pero tres frases no tienen punto."},
+          {"hablante": "Carlos", "texto": "So what is the next step?", "traduccion": "Entonces, ¿cuál es el siguiente paso?"},
+          {"hablante": "Leo", "texto": "Add a full stop to those three sentences.", "traduccion": "Añade un punto a esas tres frases."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el comentario, ¿qué hace bien Leo?",
+          "opciones": [
+            {"es": "El comienzo del cuento es claro."},
+            {"es": "Todas sus frases tienen punto."},
+            {"es": "Su cuento es muy largo."}
+          ],
+          "respuesta": 0,
+          "feedback": "El logro es «a clear beginning». El problema son las tres frases sin punto."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "Well done: you used six new words correctly.", "es": "Muy bien: usaste seis palabras nuevas correctamente.", "nota": "Un logro: algo que ya haces bien y debes conservar."},
+        {"indice": 3, "en": "Rewrite three incorrect sentences before Friday.", "es": "Reescribe tres frases incorrectas antes del viernes.", "nota": "Paso específico: qué, cuántas y cuándo. Es mejor que «Practise more»."}
+      ]
+    },
+    "en.n3.class-84": {
+      "explicacion": {
+        "titulo": "Un plan de estudio: meta, tarea, frecuencia, plazo y evidencia",
+        "texto": "Un plan útil responde cinco preguntas. Meta medible, con un número: eight of ten words. Tarea, lo que harás, con will + verbo base: I will test five words. Frecuencia, cada cuánto: every evening, twice a week, on Monday and Friday. Plazo, para cuándo: in two weeks, by Sunday. Evidencia, lo que guardas para comprobar: my scores, my recordings. Ojo: for ten minutes es duración, no frecuencia. Y «dos veces por semana» es twice a week, no two times for week."
+      },
+      "patron": {
+        "texto": "Tarea + frecuencia + evidencia + propósito:",
+        "formula": [
+          {"texto": "I will test five words", "nota": "tarea: will + verbo base"},
+          {"texto": "every evening", "nota": "frecuencia: cada cuánto"},
+          {"texto": "and save my scores", "nota": "evidencia: lo que guardas"},
+          {"texto": "to check my progress.", "nota": "propósito con to"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Parte", "Pregunta", "Ejemplo"],
+        "filas": [
+          [{"texto": "meta"}, {"texto": "¿cuánto?"}, {"texto": "eight of ten questions"}],
+          [{"texto": "tarea"}, {"texto": "¿qué haré?"}, {"texto": "I will record a one-minute answer."}],
+          [{"texto": "frecuencia"}, {"texto": "¿cada cuánto?"}, {"texto": "twice a week, every day"}],
+          [{"texto": "plazo"}, {"texto": "¿para cuándo?"}, {"texto": "in two weeks, by Sunday"}],
+          [{"texto": "evidencia"}, {"texto": "¿qué guardaré?"}, {"texto": "my scores, the audio files"}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "I will practise two times for week.", "correcto": "I will practise twice a week.", "explicacion": "Calco de «dos veces por semana». En inglés se dice twice a week (o two times a week), con a."},
+        {"incorrecto": "I will to save my scores.", "correcto": "I will save my scores.", "explicacion": "Después de will va el verbo base, sin to."}
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a Ana por su plan para el examen de ortografía.",
+        "dialogo": [
+          {"hablante": "Mia", "texto": "What is your plan for the spelling test, Ana?", "traduccion": "¿Cuál es tu plan para el examen de ortografía, Ana?"},
+          {"hablante": "Ana", "texto": "My goal is to spell eighteen of twenty words correctly in two weeks.", "traduccion": "Mi meta es escribir bien dieciocho de veinte palabras en dos semanas."},
+          {"hablante": "Mia", "texto": "How often will you practise?", "traduccion": "¿Cada cuánto vas a practicar?"},
+          {"hablante": "Ana", "texto": "Every evening, for ten minutes.", "traduccion": "Todas las noches, durante diez minutos."},
+          {"hablante": "Mia", "texto": "And your evidence?", "traduccion": "¿Y tu evidencia?"},
+          {"hablante": "Ana", "texto": "I will save my scores and compare them on Sunday.", "traduccion": "Guardaré mis puntuaciones y las compararé el domingo."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué frecuencia practicará Ana?",
+          "opciones": [
+            {"es": "Todas las noches."},
+            {"es": "Dos veces por semana."},
+            {"es": "Solo el domingo."}
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Every evening, for ten minutes». For ten minutes es la duración; el domingo solo comparará sus puntuaciones."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "I will spell sixteen of twenty words correctly by Sunday.", "es": "Escribiré bien dieciséis de veinte palabras para el domingo.", "nota": "Meta medible: un número que después se puede comprobar."},
+        {"indice": 1, "en": "I will record a one-minute answer.", "es": "Grabaré una respuesta de un minuto.", "nota": "Tarea: una acción concreta con will + verbo base."},
+        {"indice": 2, "en": "I will practise twice a week, on Monday and Friday.", "es": "Practicaré dos veces por semana, el lunes y el viernes.", "nota": "Frecuencia: cada cuánto. For ten minutes sería duración."},
+        {"indice": 4, "en": "I will compare my first and last scores to check my progress.", "es": "Compararé mi primera y mi última puntuación para comprobar mi progreso.", "nota": "La evidencia debe medir lo mismo que la meta."}
+      ]
+    },
+    "en.n3.class-85": {
+      "explicacion": {
+        "titulo": "Revisar el plan: progreso, obstáculo y ajuste",
+        "texto": "Para revisar un plan, primero mira la evidencia en pasado: My score rose from four to six (rise es irregular: rose). Luego distingue progreso de meta alcanzada: seis de diez es progreso, pero la meta era ocho. Después nombra el obstáculo y el ajuste con so + will: Noise was an obstacle, so I will study in a quiet room. Mantén la meta y cambia la tarea o el horario (keep the goal, adjust the task). Por último, acuerda cuándo revisarás otra vez: We will check my next recording on Friday."
+      },
+      "patron": {
+        "texto": "Evidencia + obstáculo + ajuste:",
+        "formula": [
+          {"texto": "My score rose from four to six,", "nota": "evidencia en pasado: from … to"},
+          {"texto": "but noise was an obstacle,", "nota": "obstáculo: lo que impidió avanzar"},
+          {"texto": "so I will study in a quiet room.", "nota": "ajuste: so + will + verbo; la meta se mantiene"}
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "My score rised from four to six.", "correcto": "My score rose from four to six.", "explicacion": "Rise es irregular: el pasado es rose, no rised."},
+        {"incorrecto": "My score improved of four to six.", "correcto": "My score improved from four to six.", "explicacion": "Calco de «de cuatro a seis». En inglés el cambio se dice con from … to."}
+      ],
+      "situacion": {
+        "contexto": "Sara le pregunta a su hermano Tom cómo va su plan de estudio.",
+        "dialogo": [
+          {"hablante": "Sara", "texto": "How is your study plan, Tom?", "traduccion": "¿Cómo va tu plan de estudio, Tom?"},
+          {"hablante": "Tom", "texto": "My score rose from five to seven. My goal is nine.", "traduccion": "Mi puntuación subió de cinco a siete. Mi meta es nueve."},
+          {"hablante": "Sara", "texto": "That shows progress! Was there an obstacle?", "traduccion": "¡Eso muestra progreso! ¿Hubo algún obstáculo?"},
+          {"hablante": "Tom", "texto": "Yes. The television was loud in the evening, so I missed two sessions.", "traduccion": "Sí. La televisión estaba alta por la noche, así que me perdí dos sesiones."},
+          {"hablante": "Sara", "texto": "So what will you change?", "traduccion": "Entonces, ¿qué vas a cambiar?"},
+          {"hablante": "Tom", "texto": "I will keep my goal, but I will study in my room in the morning.", "traduccion": "Mantendré mi meta, pero estudiaré en mi cuarto por la mañana."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambia Tom en su plan?",
+          "opciones": [
+            {"es": "Dónde y cuándo estudia."},
+            {"es": "Su meta: ahora es siete."},
+            {"es": "Nada: todo sigue igual."}
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «I will keep my goal, but I will study in my room in the morning». Mantiene la meta de nueve y cambia el lugar y el horario."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "I will look at my scores before I change my plan.", "es": "Miraré mis puntuaciones antes de cambiar mi plan.", "nota": "Primero la evidencia; después, el cambio."},
+        {"indice": 3, "en": "I will keep my goal, but I will change my study time.", "es": "Mantendré mi meta, pero cambiaré mi horario de estudio.", "nota": "Se ajusta la tarea o el horario, no la meta."},
+        {"indice": 5, "en": "I explain clearly, but I miss endings. I record my answers to hear my errors. My score improved, but noise interrupted my practice. I will use a quiet room twice a week and check my next recording on Friday.", "es": "Explico con claridad, pero omito terminaciones. Grabo mis respuestas para oír mis errores. Mi puntuación mejoró, pero el ruido interrumpió mi práctica. Usaré una sala tranquila dos veces por semana y revisaré mi siguiente grabación el viernes.", "nota": "Revisión completa: perfil, estrategia, evidencia, obstáculo y ajuste."}
+      ]
+    }
+  }
+}

@@ -1,0 +1,599 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-74: explicación «Could you repeat exactly which pages…» (poco natural) → «Could you tell me exactly which pages…».",
+      "class-74: error 2 ahora es par mínimo: «Could you repeat me the deadline?» → «Could you repeat the deadline?» (antes cambiaba también Can→Could).",
+      "class-75: patrón sin coma empalmada: «Ana is responsible for preparing the report | by Friday, | and next I will check it.»",
+      "class-71–73: responsible for + -ing, due by/until, working on/in y el contraste pasado / am + -ing / next + will, correctos y alineados con los ejercicios.",
+      "Aceptado: avisos del validador sobre opciones en español; ejemplo 5 de la clase 75 (modelo integrado) se mantiene."
+    ]
+  },
+  "classes": {
+    "en.n2.class-71": {
+      "explicacion": {
+        "titulo": "Repartir tareas: my task is to… y responsible for + -ing",
+        "texto": "Para decir qué tiene que hacer cada uno hay dos formas. My task is to + verbo: My task is to prepare the report (mi tarea es preparar…). Be responsible for + verbo en -ing: Lina is responsible for checking the list. En español decimos «responsable de revisar», pero en inglés es for (no of) y el verbo lleva -ing: responsible for preparing. Con he/she, el presente lleva -s: Each team member prepares one section."
+      },
+      "patron": {
+        "texto": "Persona + is responsible for + verbo-ing + tarea:",
+        "formula": [
+          {
+            "texto": "Lina",
+            "nota": "quién"
+          },
+          {
+            "texto": "is responsible for",
+            "nota": "be + responsible for (no of)"
+          },
+          {
+            "texto": "checking",
+            "nota": "verbo + -ing después de for"
+          },
+          {
+            "texto": "the list.",
+            "nota": "la tarea"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "my task is to + verbo"
+            },
+            {
+              "texto": "My task is to prepare the list."
+            }
+          ],
+          [
+            {
+              "texto": "be responsible for + -ing"
+            },
+            {
+              "texto": "I am responsible for checking the emails."
+            }
+          ],
+          [
+            {
+              "texto": "he / she + verbo con -s"
+            },
+            {
+              "texto": "Tom checks the answers."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am responsible of check the emails.",
+          "correcto": "I am responsible for checking the emails.",
+          "explicacion": "Se dice responsible for, y después el verbo lleva -ing."
+        },
+        {
+          "incorrecto": "My task is prepare the list.",
+          "correcto": "My task is to prepare the list.",
+          "explicacion": "Después de my task is va to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo, Mia y Ana reparten las tareas de un proyecto para la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What is my task?",
+            "traduccion": "¿Cuál es mi tarea?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Your task is to prepare the photos.",
+            "traduccion": "Tu tarea es preparar las fotos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. And who is responsible for checking the answers?",
+            "traduccion": "Vale. ¿Y quién es responsable de revisar las respuestas?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Ana is responsible for checking them.",
+            "traduccion": "Ana es responsable de revisarlas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, and I will submit the project to the teacher on Friday.",
+            "traduccion": "Sí, y entregaré el proyecto al profesor el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué tiene que hacer Ana?",
+          "opciones": [
+            {
+              "es": "Revisar las respuestas y entregar el proyecto."
+            },
+            {
+              "es": "Preparar las fotos."
+            },
+            {
+              "es": "Revisar las fotos de Leo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Ana is responsible for checking them», y Ana añade que entregará el proyecto."
+        }
+      }
+    },
+    "en.n2.class-72": {
+      "explicacion": {
+        "titulo": "Plazos: deadline, due, by y before",
+        "texto": "Para hablar de plazos: The deadline is Friday (el plazo es el viernes) o The essay is due on Monday (vence el lunes). By + momento significa «como muy tarde»: by noon = hasta el mediodía, incluido. Before significa «antes de», sin incluir ese momento: before the meeting. Para decir cuándo puedes: I am available after three. Con días va on (on Monday) y con horas at (at five). Fechas: 30 June (británico) o June 30 (estadounidense)."
+      },
+      "patron": {
+        "texto": "Tarea + is due + by + momento límite:",
+        "formula": [
+          {
+            "texto": "The essay",
+            "nota": "la tarea"
+          },
+          {
+            "texto": "is due",
+            "nota": "vence"
+          },
+          {
+            "texto": "by Thursday evening.",
+            "nota": "by = como muy tarde (ese momento incluido)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "by"
+            },
+            {
+              "texto": "como muy tarde (incluido)"
+            },
+            {
+              "texto": "by noon"
+            }
+          ],
+          [
+            {
+              "texto": "before"
+            },
+            {
+              "texto": "antes de"
+            },
+            {
+              "texto": "before the meeting"
+            }
+          ],
+          [
+            {
+              "texto": "due"
+            },
+            {
+              "texto": "vence, hay que entregarlo"
+            },
+            {
+              "texto": "due on Monday"
+            }
+          ],
+          [
+            {
+              "texto": "available"
+            },
+            {
+              "texto": "disponible"
+            },
+            {
+              "texto": "available after three"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The essay is due until Friday.",
+          "correcto": "The essay is due by Friday.",
+          "explicacion": "Para un plazo se usa by; until indica que algo dura hasta ese momento."
+        },
+        {
+          "incorrecto": "I am available in Monday.",
+          "correcto": "I am available on Monday.",
+          "explicacion": "Con los días de la semana se usa on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom organizan un proyecto de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "When is the project due?",
+            "traduccion": "¿Cuándo vence el proyecto?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It is due by Friday at five.",
+            "traduccion": "Hay que entregarlo el viernes a las cinco como muy tarde."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Can we meet before the weekend?",
+            "traduccion": "¿Podemos reunirnos antes del fin de semana?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. I am available on Wednesday after three.",
+            "traduccion": "Sí. Estoy disponible el miércoles después de las tres."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. We can finish the draft before Thursday.",
+            "traduccion": "Bien. Podemos terminar el borrador antes del jueves."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo está disponible Sara?",
+          "opciones": [
+            {
+              "es": "El miércoles después de las tres."
+            },
+            {
+              "es": "El viernes a las cinco."
+            },
+            {
+              "es": "El jueves por la mañana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I am available on Wednesday after three». El viernes a las cinco es el plazo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "The deadline is 30 June.",
+          "es": "El plazo es el 30 de junio.",
+          "nota": "En inglés británico se escribe 30 June; en estadounidense, June 30. Las dos formas son correctas."
+        }
+      ]
+    },
+    "en.n2.class-73": {
+      "explicacion": {
+        "titulo": "Informar del avance: finished, working on y next",
+        "texto": "Una actualización breve tiene tres partes y cada una usa un tiempo distinto. Lo terminado va en pasado: I finished the introduction. Lo que haces ahora, con am/is/are + -ing: I am working on the chart now (working on = trabajando en). Lo que viene después, con Next, I will + verbo: Next, I will check the references. Si hay un problema, añade but: There is one issue, but we are on track (vamos según lo previsto)."
+      },
+      "patron": {
+        "texto": "Terminado (pasado) + ahora (am + -ing) + después (next, will):",
+        "formula": [
+          {
+            "texto": "I finished the notes,",
+            "nota": "pasado: ya está hecho"
+          },
+          {
+            "texto": "I am working on the slides,",
+            "nota": "am + -ing + on: lo que hago ahora"
+          },
+          {
+            "texto": "and next I will check them.",
+            "nota": "next + will + verbo: lo que viene"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am working in the chart now.",
+          "correcto": "I am working on the chart now.",
+          "explicacion": "Se dice working on + la tarea, no in."
+        },
+        {
+          "incorrecto": "Now I work on the summary.",
+          "correcto": "Now I am working on the summary.",
+          "explicacion": "Para lo que haces en este momento se usa am + -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo preparan una presentación para la escuela y la profesora Sara les pregunta cómo van.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Mia, Leo, how is the project going?",
+            "traduccion": "Mia, Leo, ¿cómo va el proyecto?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I finished the map.",
+            "traduccion": "Terminé el mapa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And I am working on the slides now.",
+            "traduccion": "Y yo estoy trabajando ahora en las diapositivas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. Is there any issue?",
+            "traduccion": "Bien. ¿Hay algún problema?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "One photo is missing, but we are on track.",
+            "traduccion": "Falta una foto, pero vamos según lo previsto."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Next, we will check the questions.",
+            "traduccion": "Después, revisaremos las preguntas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué está trabajando Leo ahora?",
+          "opciones": [
+            {
+              "es": "En las diapositivas."
+            },
+            {
+              "es": "En el mapa."
+            },
+            {
+              "es": "En las preguntas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I am working on the slides now». El mapa ya está terminado y las preguntas vienen después."
+        }
+      }
+    },
+    "en.n2.class-74": {
+      "explicacion": {
+        "titulo": "Pedir una aclaración",
+        "texto": "Cuando no entiendes algo, pide una ayuda concreta. Para una palabra: What do you mean by + palabra? (¿Qué quieres decir con…?). Para oír otra vez un dato: Could you repeat the room number? Para que lo expliquen mejor: Could you clarify the instructions? Para ver cómo se hace: Could you give me an example? Exactly hace la pregunta más precisa: Could you tell me exactly which pages we need to read? Empieza diciendo qué no entiendes: I do not understand step two."
+      },
+      "patron": {
+        "texto": "What do you mean + by + palabra?",
+        "formula": [
+          {
+            "texto": "What do you mean",
+            "nota": "¿qué quieres decir…?"
+          },
+          {
+            "texto": "by",
+            "nota": "con: presenta la palabra"
+          },
+          {
+            "texto": "draft?",
+            "nota": "la palabra que no entiendes"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Problema",
+          "Pregunta útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "no entiendes una palabra"
+            },
+            {
+              "texto": "What do you mean by draft?"
+            }
+          ],
+          [
+            {
+              "texto": "no oíste un dato"
+            },
+            {
+              "texto": "Could you repeat the room number?"
+            }
+          ],
+          [
+            {
+              "texto": "la instrucción no está clara"
+            },
+            {
+              "texto": "Could you clarify the instructions?"
+            }
+          ],
+          [
+            {
+              "texto": "no sabes cómo se hace"
+            },
+            {
+              "texto": "Could you give me an example?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What means optional?",
+          "correcto": "What does optional mean?",
+          "explicacion": "En la pregunta hace falta does, y mean va al final, sin -s."
+        },
+        {
+          "incorrecto": "Could you repeat me the deadline?",
+          "correcto": "Could you repeat the deadline?",
+          "explicacion": "Repeat no lleva me: se repite algo, no a alguien."
+        }
+      ],
+      "situacion": {
+        "contexto": "En clase, la profesora Sara da una tarea y Tom pide aclaraciones.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Read pages ten to twelve and write a draft.",
+            "traduccion": "Leed las páginas de la diez a la doce y escribid un borrador."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry, could you repeat the pages, please?",
+            "traduccion": "Perdón, ¿podría repetir las páginas, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Pages ten to twelve.",
+            "traduccion": "De la diez a la doce."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And what do you mean by draft?",
+            "traduccion": "¿Y qué quiere decir con draft?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A first version. It is not the final work.",
+            "traduccion": "Una primera versión. No es el trabajo final."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Tom primero?",
+          "opciones": [
+            {
+              "es": "Que Sara repita las páginas."
+            },
+            {
+              "es": "Un ejemplo de borrador."
+            },
+            {
+              "es": "Que Sara aclare el plazo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice primero: «could you repeat the pages, please?». Después pregunta qué es draft."
+        }
+      }
+    },
+    "en.n2.class-75": {
+      "explicacion": {
+        "titulo": "Simulación: organizar un trabajo en equipo",
+        "texto": "En esta simulación se juntan las formas de la unidad para organizar un trabajo: quién hace qué (Omar is responsible for preparing the slides), el plazo (due by Monday at noon), el estado (The outline is finished; Omar is working on the chart), una aclaración (Could you clarify the priority?) y la siguiente acción (Next, Zoe will check the slides). Estrategia: reparte y fija el plazo, informa del estado, pregunta lo que no esté claro y termina confirmando la tarea y la hora."
+      },
+      "patron": {
+        "texto": "Responsable + plazo + siguiente paso:",
+        "formula": [
+          {
+            "texto": "Ana is responsible for preparing the report",
+            "nota": "quién y qué: for + -ing"
+          },
+          {
+            "texto": "by Friday,",
+            "nota": "plazo: by = como muy tarde"
+          },
+          {
+            "texto": "and next I will check it.",
+            "nota": "siguiente acción con will"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The report is finish, and Ana is work on the results.",
+          "correcto": "The report is finished, and Ana is working on the results.",
+          "explicacion": "«Terminado» es finished, con -ed; lo que hace ahora lleva am/is/are + -ing."
+        },
+        {
+          "incorrecto": "Could you clarify me the priority?",
+          "correcto": "Could you clarify the priority?",
+          "explicacion": "Clarify no lleva me detrás: se aclara algo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia, Tom y Leo organizan el pícnic de la clase del viernes.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Our priority is the class picnic on Friday.",
+            "traduccion": "Nuestra prioridad es el pícnic de la clase del viernes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. What are our tasks?",
+            "traduccion": "Vale. ¿Cuáles son nuestras tareas?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Tom, you are responsible for preparing the games. Leo, you are responsible for buying the food.",
+            "traduccion": "Tom, tú eres responsable de preparar los juegos. Leo, tú eres responsable de comprar la comida."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Could you clarify the time of the picnic?",
+            "traduccion": "¿Podrías aclarar la hora del pícnic?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is on Friday at eleven. Please buy the food by Thursday.",
+            "traduccion": "Es el viernes a las once. Por favor, compra la comida el jueves como muy tarde."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I am working on the games now. Next, I will check them with Sara.",
+            "traduccion": "Estoy trabajando ahora en los juegos. Después, los revisaré con Sara."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de qué es responsable Leo?",
+          "opciones": [
+            {
+              "es": "De comprar la comida."
+            },
+            {
+              "es": "De preparar los juegos."
+            },
+            {
+              "es": "De revisar los juegos con Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia le dice a Leo: «you are responsible for buying the food». Los juegos son tarea de Tom."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Here is the status: the outline is finished, and Tom is working on the chart.",
+          "es": "Este es el estado: el esquema está terminado y Tom está trabajando en el gráfico.",
+          "nota": "Status resume el avance: lo terminado (finished) y lo que se hace ahora (working on)."
+        },
+        {
+          "indice": 3,
+          "en": "Could you clarify the priority? Is the report or the chart first?",
+          "es": "¿Podrías aclarar la prioridad? ¿Va primero el informe o el gráfico?",
+          "nota": "Priority es lo que se hace primero; si no está claro, se pide una aclaración."
+        },
+        {
+          "indice": 4,
+          "en": "I confirm the task: I will check the slides by Monday at noon.",
+          "es": "Confirmo la tarea: revisaré las diapositivas el lunes al mediodía como muy tarde.",
+          "nota": "Al final se confirma la tarea, el plazo y la siguiente acción."
+        }
+      ]
+    }
+  }
+}

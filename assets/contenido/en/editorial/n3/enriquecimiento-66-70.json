@@ -1,0 +1,855 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1. Explicaciones, patrones, errores, situaciones e ítems coherentes con los ejercicios (capas temporales, have been + -ing, 4 campos de reclamación, reclamación factual, reprogramación).",
+      "class-67: traducción del diálogo «Estoy esperando aquí desde las cuatro» → «Llevo aquí esperando desde las cuatro» (coherente con «llevo… esperando» que enseña la clase).",
+      "class-70: traducción «Estamos esperando desde las seis» → «Llevamos esperando desde las seis».",
+      "class-70: explicación, paso 4 reescrito para evitar dos dos puntos seguidos («…; solo es compatible si las cumple todas. Si falla una, dilo: Route B arrives too late.»).",
+      "Avisos del validador («la opción correcta apenas aparece en el diálogo») son esperables: las opciones están en español; comprobado a mano que cada ítem tiene una única respuesta deducible del diálogo."
+    ]
+  },
+  "classes": {
+    "en.n3.class-66": {
+      "explicacion": {
+        "titulo": "Experiencia, incidente fechado e impacto actual",
+        "texto": "Para contar un problema de viaje, separa tres capas de tiempo. 1) Experiencia general, sin fecha: present perfect (have/has + participio): I have travelled alone before. 2) Incidente con día o fecha: pasado simple: The delay began on Monday. 3) Impacto que sigue ahora: presente con still (todavía): My bag is still missing. En español a veces decimos «he perdido la maleta el lunes»; en inglés, con un tiempo terminado (on Monday, yesterday) va pasado simple: I lost my bag on Monday."
+      },
+      "patron": {
+        "texto": "Experiencia + incidente fechado + impacto actual:",
+        "formula": [
+          {
+            "texto": "I have used this route before;",
+            "nota": "experiencia: have + participio, sin fecha"
+          },
+          {
+            "texto": "it failed on Friday;",
+            "nota": "incidente: pasado simple + día"
+          },
+          {
+            "texto": "I am still delayed.",
+            "nota": "impacto actual: still + presente"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Capa",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "experiencia general"
+            },
+            {
+              "texto": "have/has + participio"
+            },
+            {
+              "texto": "I have travelled by ferry before."
+            }
+          ],
+          [
+            {
+              "texto": "incidente fechado"
+            },
+            {
+              "texto": "pasado simple + fecha"
+            },
+            {
+              "texto": "The delay began on Monday."
+            }
+          ],
+          [
+            {
+              "texto": "impacto actual"
+            },
+            {
+              "texto": "presente + still"
+            },
+            {
+              "texto": "My suitcase is still missing."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have lost my bag on Monday.",
+          "correcto": "I lost my bag on Monday.",
+          "explicacion": "Con una fecha terminada (on Monday) se usa pasado simple, no have + participio."
+        },
+        {
+          "incorrecto": "My bag still is missing.",
+          "correcto": "My bag is still missing.",
+          "explicacion": "Still va después de am/is/are y antes del verbo principal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara llama a su amiga Ana desde la estación durante un viaje con su padre.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Where are you, Sara?",
+            "traduccion": "¿Dónde estás, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I am still at the station with my dad.",
+            "traduccion": "Todavía estoy en la estación con mi papá."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Oh no! What happened?",
+            "traduccion": "¡Oh, no! ¿Qué pasó?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Our train was cancelled at nine this morning.",
+            "traduccion": "Nuestro tren se canceló a las nueve de esta mañana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Have you taken that train before?",
+            "traduccion": "¿Has tomado ese tren antes?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, I have taken it many times.",
+            "traduccion": "Sí, lo he tomado muchas veces."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué situación continúa ahora?",
+          "opciones": [
+            {
+              "es": "Sara sigue en la estación."
+            },
+            {
+              "es": "Sara viaja en tren por primera vez."
+            },
+            {
+              "es": "Sara está en casa con su papá."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «I am still at the station»: still marca el impacto que sigue ahora."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I have travelled by ferry before.",
+          "es": "He viajado en ferry antes.",
+          "nota": "Experiencia general: have + participio, sin fecha."
+        },
+        {
+          "indice": 1,
+          "en": "The delay began on Monday.",
+          "es": "El retraso empezó el lunes.",
+          "nota": "Incidente fechado: pasado simple + día."
+        },
+        {
+          "indice": 2,
+          "en": "I am still waiting at the port.",
+          "es": "Todavía estoy esperando en el puerto.",
+          "nota": "Impacto actual: still + presente."
+        },
+        {
+          "indice": 3,
+          "en": "My bag is still missing.",
+          "es": "Mi maleta sigue sin aparecer.",
+          "nota": "Still va después de is."
+        },
+        {
+          "indice": 4,
+          "en": "My train left late on 3 May.",
+          "es": "Mi tren salió tarde el 3 de mayo.",
+          "nota": "Una fecha hace que el dato se pueda comprobar."
+        },
+        {
+          "indice": 5,
+          "en": "I have used this route before; it failed on Friday; I am still delayed.",
+          "es": "He usado esta ruta antes; falló el viernes; sigo con retraso.",
+          "nota": "Las tres capas juntas: experiencia, incidente fechado e impacto actual."
+        }
+      ]
+    },
+    "en.n3.class-67": {
+      "explicacion": {
+        "titulo": "Llevo… esperando: have/has been + -ing",
+        "texto": "Para una acción que empezó antes y sigue ahora se usa have/has been + verbo en -ing: I have been waiting for two hours (llevo dos horas esperando). Have va con I, you, we y they; has, con he, she e it. For + cantidad de tiempo (for two hours, for three days). Since + momento de inicio (since nine, since Monday). En español decimos «llevo dos horas esperando» o «espero desde hace dos horas»; en inglés no sirve el presente (I wait) ni «since two hours»."
+      },
+      "patron": {
+        "texto": "Sujeto + have/has been + -ing + for/since:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "sujeto (he/she/it → has)"
+          },
+          {
+            "texto": "has been",
+            "nota": "has been; con I/you/we/they, have been"
+          },
+          {
+            "texto": "calling",
+            "nota": "verbo en -ing"
+          },
+          {
+            "texto": "since nine.",
+            "nota": "since + inicio; for + duración"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Va con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "for"
+            },
+            {
+              "texto": "cantidad de tiempo"
+            },
+            {
+              "texto": "We have been driving for four hours."
+            }
+          ],
+          [
+            {
+              "texto": "since"
+            },
+            {
+              "texto": "momento de inicio"
+            },
+            {
+              "texto": "She has been calling since nine."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I wait here for two hours.",
+          "correcto": "I have been waiting here for two hours.",
+          "explicacion": "Para «llevo dos horas esperando» no sirve el presente: se usa have been + -ing."
+        },
+        {
+          "incorrecto": "We have been travelling since three days.",
+          "correcto": "We have been travelling for three days.",
+          "explicacion": "Tres días es una duración: va con for. Since va con el momento de inicio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom llega tarde al parque, donde Mia lo espera.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Sorry, Mia! Have you been waiting long?",
+            "traduccion": "¡Perdón, Mia! ¿Llevas mucho rato esperando?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes! I have been waiting here since four.",
+            "traduccion": "¡Sí! Llevo aquí esperando desde las cuatro."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The bus was late. I have been travelling for an hour.",
+            "traduccion": "El autobús se retrasó. Llevo una hora viajando."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And Leo has been calling you for twenty minutes!",
+            "traduccion": "¡Y Leo lleva veinte minutos llamándote!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh! My phone is in my bag.",
+            "traduccion": "¡Oh! Mi teléfono está en mi mochila."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿desde cuándo espera Mia?",
+          "opciones": [
+            {
+              "es": "Desde las cuatro."
+            },
+            {
+              "es": "Desde hace veinte minutos."
+            },
+            {
+              "es": "Desde hace una hora."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I have been waiting here since four». Since marca el inicio."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I have been waiting for two hours.",
+          "es": "Llevo dos horas esperando.",
+          "nota": "Con I: have been + -ing; for + duración."
+        },
+        {
+          "indice": 1,
+          "en": "She has been calling since nine.",
+          "es": "Lleva llamando desde las nueve.",
+          "nota": "Con she: has been; since + hora de inicio."
+        },
+        {
+          "indice": 2,
+          "en": "We have been driving for four hours.",
+          "es": "Llevamos cuatro horas conduciendo.",
+          "nota": "For responde a «¿cuánto tiempo?» con una cantidad."
+        },
+        {
+          "indice": 3,
+          "en": "My sister has been travelling since Tuesday.",
+          "es": "Mi hermana lleva viajando desde el martes.",
+          "nota": "Since responde con el momento en que empezó."
+        },
+        {
+          "indice": 4,
+          "en": "Our train has been waiting at the station for twenty minutes.",
+          "es": "Nuestro tren lleva veinte minutos esperando en la estación.",
+          "nota": "Algo temporal que empezó antes y sigue ahora."
+        },
+        {
+          "indice": 5,
+          "en": "They have been waiting for two hours.",
+          "es": "Llevan dos horas esperando.",
+          "nota": "Sujeto, have been, verbo en -ing y duración."
+        }
+      ]
+    },
+    "en.n3.class-68": {
+      "explicacion": {
+        "titulo": "Comprender una reclamación: cuatro datos",
+        "texto": "Al escuchar una reclamación, anota por separado cuatro datos. 1) Incidencia: qué salió mal (My train was cancelled). 2) Evidencia: un código, billete o recibo (ticket K19). 3) Petición: lo que pide el viajero, a menudo con Please… o Could you…? (Could you trace my suitcase?). 4) Respuesta: lo que promete el personal, con will (I will check and reply at four). No añadas nada que nadie dijo: si nadie promete dinero (refund, compensation), no lo anotes."
+      },
+      "patron": {
+        "texto": "Incidencia + evidencia + petición + respuesta:",
+        "formula": [
+          {
+            "texto": "My train was cancelled.",
+            "nota": "incidencia: qué salió mal"
+          },
+          {
+            "texto": "Ticket K19.",
+            "nota": "evidencia: un código comprobable"
+          },
+          {
+            "texto": "Please find another train.",
+            "nota": "petición del viajero"
+          },
+          {
+            "texto": "I will check and reply at four.",
+            "nota": "respuesta: lo que promete el personal (will)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Dato",
+          "Pista",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "incidencia"
+            },
+            {
+              "texto": "qué salió mal"
+            },
+            {
+              "texto": "The suitcase did not arrive."
+            }
+          ],
+          [
+            {
+              "texto": "evidencia"
+            },
+            {
+              "texto": "código, billete, recibo"
+            },
+            {
+              "texto": "baggage receipt B42"
+            }
+          ],
+          [
+            {
+              "texto": "petición"
+            },
+            {
+              "texto": "Please… / Could you…?"
+            },
+            {
+              "texto": "Please trace my suitcase."
+            }
+          ],
+          [
+            {
+              "texto": "respuesta"
+            },
+            {
+              "texto": "will + acción"
+            },
+            {
+              "texto": "I will check and call at six."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Please find other train.",
+          "correcto": "Please find another train.",
+          "explicacion": "«Otro tren» es another train; other va con the o con un plural (other trains)."
+        },
+        {
+          "incorrecto": "Could you trace my suitcase missing?",
+          "correcto": "Could you trace my missing suitcase?",
+          "explicacion": "El adjetivo va antes del nombre: my missing suitcase."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y su hijo Leo están en el aeropuerto: su maleta no llegó.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Excuse me. Our suitcase did not arrive.",
+            "traduccion": "Disculpe. Nuestra maleta no llegó."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Do you have your baggage receipt?",
+            "traduccion": "¿Tiene su recibo de equipaje?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, it is B42.",
+            "traduccion": "Sí, es el B42."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Could you trace our suitcase, please?",
+            "traduccion": "¿Podría localizar nuestra maleta, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Of course. I will check the system and call you at six.",
+            "traduccion": "Claro. Revisaré el sistema y le llamaré a las seis."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué promete Sara?",
+          "opciones": [
+            {
+              "es": "Revisar el sistema y llamar a las seis."
+            },
+            {
+              "es": "Devolverles el dinero del viaje."
+            },
+            {
+              "es": "Comprarles una maleta nueva."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «I will check the system and call you at six». No promete dinero ni una maleta nueva."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The suitcase did not arrive.",
+          "es": "La maleta no llegó.",
+          "nota": "Incidencia: qué salió mal."
+        },
+        {
+          "indice": 1,
+          "en": "My baggage receipt is B42.",
+          "es": "Mi recibo de equipaje es el B42.",
+          "nota": "Evidencia: un código que se puede comprobar."
+        },
+        {
+          "indice": 2,
+          "en": "Could you trace my missing suitcase?",
+          "es": "¿Podría localizar mi maleta perdida?",
+          "nota": "Petición: Could you + acción."
+        },
+        {
+          "indice": 3,
+          "en": "I will check the system and email you tonight.",
+          "es": "Revisaré el sistema y le escribiré esta noche.",
+          "nota": "Respuesta: lo que promete el personal, con will."
+        },
+        {
+          "indice": 4,
+          "en": "My train was cancelled. Ticket K19. Please find another train.",
+          "es": "Mi tren se canceló. Billete K19. Por favor, busque otro tren.",
+          "nota": "Incidencia, evidencia y petición, en ese orden."
+        },
+        {
+          "indice": 5,
+          "en": "The agent will check and reply at five. She did not offer a refund.",
+          "es": "La agente revisará y responderá a las cinco. No ofreció un reembolso.",
+          "nota": "Anota solo lo prometido; no inventes compensación."
+        }
+      ]
+    },
+    "en.n3.class-69": {
+      "explicacion": {
+        "titulo": "Escribir una reclamación con hechos",
+        "texto": "Una reclamación eficaz es breve y comprobable. Sigue este orden. 1) Datos: servicio, fecha y hora: I am writing about train R18 on 6 May. 2) Cronología: hora prevista y hora real: It was scheduled for 08:10 but arrived at 09:05. 3) Impacto concreto: Because of this delay, I missed the 10:00 coach. 4) Petición proporcionada: Please explain the delay and review my £12 taxi cost. Evita exageraciones (terribly bad) y no pidas lo que los hechos no apoyan."
+      },
+      "patron": {
+        "texto": "Hora prevista + hora real + impacto:",
+        "formula": [
+          {
+            "texto": "It was scheduled for 13:15",
+            "nota": "hora prevista: scheduled for"
+          },
+          {
+            "texto": "but departed at 14:40.",
+            "nota": "hora real, con but"
+          },
+          {
+            "texto": "Because of this delay,",
+            "nota": "because of + nombre: la causa"
+          },
+          {
+            "texto": "I missed the 15:10 bus.",
+            "nota": "impacto concreto"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "datos"
+            },
+            {
+              "texto": "I am writing about flight J72 on 18 November."
+            }
+          ],
+          [
+            {
+              "texto": "cronología"
+            },
+            {
+              "texto": "It was scheduled for 13:15 but departed at 14:40."
+            }
+          ],
+          [
+            {
+              "texto": "impacto"
+            },
+            {
+              "texto": "Because of this delay, I missed the airport bus and paid €17 for a taxi."
+            }
+          ],
+          [
+            {
+              "texto": "petición"
+            },
+            {
+              "texto": "Please explain the delay and review my €17 taxi cost."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The flight was scheduled to 13:15.",
+          "correcto": "The flight was scheduled for 13:15.",
+          "explicacion": "«Previsto para» una hora es scheduled for, no scheduled to."
+        },
+        {
+          "incorrecto": "Because this delay, I missed the bus.",
+          "correcto": "Because of this delay, I missed the bus.",
+          "explicacion": "Antes de un nombre (this delay) se usa because of; because va antes de sujeto + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y su hermano Tom escriben una reclamación por el tren del sábado.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What do we write first?",
+            "traduccion": "¿Qué escribimos primero?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The train, the date and the time: train R18 on 6 May, due at 08:10.",
+            "traduccion": "El tren, la fecha y la hora: tren R18 el 6 de mayo, previsto a las 08:10."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It arrived at 09:05, so we missed the coach and paid £12 for a taxi.",
+            "traduccion": "Llegó a las 09:05, así que perdimos el autocar y pagamos 12 £ por un taxi."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then we ask them to review the £12 taxi cost.",
+            "traduccion": "Entonces les pedimos que revisen el gasto de 12 £ del taxi."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Can we ask for a free holiday too?",
+            "traduccion": "¿Podemos pedir también unas vacaciones gratis?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. Our request must be proportionate.",
+            "traduccion": "No. Nuestra petición tiene que ser proporcionada."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué van a pedir Ana y Tom?",
+          "opciones": [
+            {
+              "es": "Que revisen el gasto de 12 £ del taxi."
+            },
+            {
+              "es": "Unas vacaciones gratis."
+            },
+            {
+              "es": "Un billete nuevo para el 6 de mayo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «we ask them to review the £12 taxi cost» y rechaza pedir unas vacaciones: la petición debe ser proporcionada."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I am writing about train R18 on 6 May.",
+          "es": "Le escribo por el tren R18 del 6 de mayo.",
+          "nota": "Abre con el servicio y la fecha."
+        },
+        {
+          "indice": 1,
+          "en": "It was scheduled for 08:10 but arrived at 09:05.",
+          "es": "Estaba previsto a las 08:10, pero llegó a las 09:05.",
+          "nota": "Hora prevista y hora real, en orden."
+        },
+        {
+          "indice": 2,
+          "en": "Because of this delay, I missed the 10:00 coach.",
+          "es": "Por este retraso, perdí el autocar de las 10:00.",
+          "nota": "Un impacto concreto, no una queja general."
+        },
+        {
+          "indice": 3,
+          "en": "Please explain the delay and review my £12 taxi cost.",
+          "es": "Por favor, expliquen el retraso y revisen mi gasto de 12 £ en taxi.",
+          "nota": "Petición proporcionada a los hechos."
+        },
+        {
+          "indice": 4,
+          "en": "I paid £12 for a taxi, and I have the receipt.",
+          "es": "Pagué 12 £ por un taxi y tengo el recibo.",
+          "nota": "Un gasto documentado apoya la petición."
+        },
+        {
+          "indice": 5,
+          "en": "I am writing about flight J72 on 18 November. It was scheduled for 13:15 but departed at 14:40.",
+          "es": "Le escribo por el vuelo J72 del 18 de noviembre. Estaba previsto a las 13:15, pero salió a las 14:40.",
+          "nota": "Modelo de inicio: datos comprobables y cronología."
+        }
+      ]
+    },
+    "en.n3.class-70": {
+      "explicacion": {
+        "titulo": "Resolver una cancelación: todo el bloque",
+        "texto": "Esta clase une el bloque para pedir una alternativa. 1) Incidente fechado, en pasado: Flight AX40 was cancelled at 10:15. 2) Espera que sigue: I have been waiting since 08:45. 3) Evidencia: booking R81. 4) Compara cada ruta con cada restricción (hora de llegada, maleta, bicicleta); solo es compatible si las cumple todas. Si falla una, dilo: Route B arrives too late. 5) Confirma ruta, asiento y referencia: The agent confirmed route A, seat 18C, under reference N44. No inventes compensación."
+      },
+      "patron": {
+        "texto": "Ruta + condiciones + conclusión:",
+        "formula": [
+          {
+            "texto": "Route A arrives at 16:50",
+            "nota": "primera condición: la hora de llegada"
+          },
+          {
+            "texto": "and accepts my bag,",
+            "nota": "segunda condición: el equipaje"
+          },
+          {
+            "texto": "so it meets both limits.",
+            "nota": "so + conclusión: es compatible"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "incidente"
+            },
+            {
+              "texto": "Flight AX40 was cancelled at 10:15."
+            }
+          ],
+          [
+            {
+              "texto": "espera"
+            },
+            {
+              "texto": "I have been waiting since 08:45."
+            }
+          ],
+          [
+            {
+              "texto": "comparación"
+            },
+            {
+              "texto": "Route B arrives at 18:25, so it is too late."
+            }
+          ],
+          [
+            {
+              "texto": "confirmación"
+            },
+            {
+              "texto": "The agent confirmed route A, seat 18C, under reference N44."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am waiting since 08:45.",
+          "correcto": "I have been waiting since 08:45.",
+          "explicacion": "Para una espera que empezó antes y sigue ahora: have been + -ing con since."
+        },
+        {
+          "incorrecto": "Route C does not accepts bicycles.",
+          "correcto": "Route C does not accept bicycles.",
+          "explicacion": "Después de does not, el verbo va en forma base, sin -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y su padre Carlos están en el puerto; su ferry se canceló.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Our ferry was cancelled at seven. We have been waiting since six.",
+            "traduccion": "Nuestro ferry se canceló a las siete. Llevamos esperando desde las seis."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "There are three routes. Route A arrives at one and accepts bicycles.",
+            "traduccion": "Hay tres rutas. La ruta A llega a la una y acepta bicicletas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And route B?",
+            "traduccion": "¿Y la ruta B?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Route B arrives at three. Route C does not accept bicycles.",
+            "traduccion": "La ruta B llega a las tres. La ruta C no acepta bicicletas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "We need to arrive before two with our bicycles. Route A, please.",
+            "traduccion": "Necesitamos llegar antes de las dos con nuestras bicicletas. La ruta A, por favor."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "OK. Route A is confirmed under booking Q73.",
+            "traduccion": "Muy bien. La ruta A queda confirmada con la reserva Q73."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no les sirve la ruta B?",
+          "opciones": [
+            {
+              "es": "Llega demasiado tarde."
+            },
+            {
+              "es": "No acepta bicicletas."
+            },
+            {
+              "es": "Salió a las siete."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "La ruta B llega a las tres, y Carlos necesita llegar antes de las dos."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Coach K8 was cancelled at 09:10.",
+          "es": "El autocar K8 se canceló a las 09:10.",
+          "nota": "Incidente fechado: pasado."
+        },
+        {
+          "indice": 1,
+          "en": "I have been waiting since 08:30.",
+          "es": "Estoy esperando desde las 08:30.",
+          "nota": "Espera que sigue: have been + -ing + since."
+        },
+        {
+          "indice": 2,
+          "en": "My ticket is P14.",
+          "es": "Mi billete es el P14.",
+          "nota": "Evidencia comprobable para la petición."
+        },
+        {
+          "indice": 3,
+          "en": "Route B arrives at 15:25, so it is too late.",
+          "es": "La ruta B llega a las 15:25, así que es demasiado tarde.",
+          "nota": "Compara cada ruta con cada límite."
+        },
+        {
+          "indice": 4,
+          "en": "Staff confirmed route A, seat 7, under booking W36.",
+          "es": "El personal confirmó la ruta A, asiento 7, con la reserva W36.",
+          "nota": "Confirmación completa: ruta, asiento y referencia."
+        },
+        {
+          "indice": 5,
+          "en": "Route A arrives at 14:20 and accepts bicycles, so it meets both limits.",
+          "es": "La ruta A llega a las 14:20 y acepta bicicletas, así que cumple los dos límites.",
+          "nota": "Solo es compatible la ruta que cumple todas las condiciones."
+        }
+      ]
+    }
+  }
+}

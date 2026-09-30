@@ -1,0 +1,301 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {"start": 86, "end": 90},
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1 restantes. Todos los ejemplos con metalenguaje y notas en inglés quedan sustituidos por frases reales con traducción fiel.",
+      "class-86 (P1 corregido): 'We are the actors, so we can change it' era inglés poco natural y traducción infiel («responsables»); ahora 'We leave the paper there, so we can change this.' Explicación: «no dice» → «no menciona».",
+      "class-88: ejemplo 1 reformulado a 'The stations cost £1,800, and the park fund will pay.' (antes 'cost £1,800 from the park fund', forzado).",
+      "class-90: ejemplo 1 'so staff count 85 bottles' → 'so staff find 85 bottles' (relación causa-efecto lógica); explicación glosa while («mientras que»).",
+      "Nota P2: class-89 explica propose + nombre/-ing; es incompleto (también propose that…) pero no incorrecto para B1."
+    ]
+  },
+  "classes": {
+    "en.n3.class-86": {
+      "explicacion": {
+        "titulo": "Causa, efecto y actor: so y because",
+        "texto": "Para analizar un problema de tu barrio separa tres datos. La causa es la acción que lo provoca: Visitors leave bottles in the park. El efecto es el resultado que se observa: the paths become dirty. El actor es quien puede cambiar esa acción: park visitors. Se unen con so (causa, so efecto) o con because (efecto because causa). Ojo: because va delante de una oración completa (because visitors leave bottles); because of solo va delante de un nombre. Y no inventes efectos que el registro no menciona."
+      },
+      "patron": {
+        "texto": "Causa + so + efecto; actor + can change:",
+        "formula": [
+          {"texto": "Cafés pour oil into drains,", "nota": "causa: la acción que empieza el problema"},
+          {"texto": "so the pipes become blocked.", "nota": "so + efecto: el resultado"},
+          {"texto": "Café managers", "nota": "actor: quién realiza la acción"},
+          {"texto": "can change this.", "nota": "can change: puede cambiarlo"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Parte", "Pregunta", "Ejemplo"],
+        "filas": [
+          [{"texto": "causa"}, {"texto": "¿por qué empieza?"}, {"texto": "Visitors leave bottles in the park."}],
+          [{"texto": "efecto"}, {"texto": "¿qué pasa?"}, {"texto": "The paths become dirty."}],
+          [{"texto": "actor"}, {"texto": "¿quién puede cambiarlo?"}, {"texto": "park visitors"}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "The paths are dirty because of visitors leave bottles.", "correcto": "The paths are dirty because visitors leave bottles.", "explicacion": "Delante de una oración (visitors leave bottles) va because; because of solo va delante de un nombre (because of the bottles)."},
+        {"incorrecto": "Drivers leave engines running, so is worse the air.", "correcto": "Drivers leave engines running, so the air is worse.", "explicacion": "Calco de «así que es peor el aire». En inglés, después de so va sujeto + verbo: the air is worse."}
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom ven mucho papel en el jardín de su escuela.",
+        "dialogo": [
+          {"hablante": "Mia", "texto": "Why is there so much paper in the school garden?", "traduccion": "¿Por qué hay tanto papel en el jardín de la escuela?"},
+          {"hablante": "Tom", "texto": "Students eat in the yard and leave paper on the tables.", "traduccion": "Los estudiantes comen en el patio y dejan papel en las mesas."},
+          {"hablante": "Mia", "texto": "And then the wind carries it into the garden.", "traduccion": "Y luego el viento lo lleva al jardín."},
+          {"hablante": "Tom", "texto": "Yes. We leave the paper there, so we can change this.", "traduccion": "Sí. Nosotros dejamos el papel ahí, así que podemos cambiar esto."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la causa del problema?",
+          "opciones": [
+            {"es": "Los estudiantes dejan papel en las mesas del patio."},
+            {"es": "El jardín de la escuela está lleno de papel."},
+            {"es": "Los jardineros no limpian el jardín."}
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Students … leave paper on the tables». Esa es la causa; el papel en el jardín es el efecto, y nadie habla de jardineros."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "Visitors leave bottles in the park.", "es": "Los visitantes dejan botellas en el parque.", "nota": "Causa: la acción que empieza el problema."},
+        {"indice": 1, "en": "The paths become dirty after weekends.", "es": "Los senderos se ensucian después de los fines de semana.", "nota": "Efecto: el resultado que se observa y se registra."},
+        {"indice": 2, "en": "Park visitors can change this.", "es": "Los visitantes del parque pueden cambiar esto.", "nota": "Actor: quien realiza la acción y puede cambiarla."},
+        {"indice": 3, "en": "Cafés pour oil into drains, so the pipes become blocked.", "es": "Las cafeterías echan aceite por los desagües, así que las tuberías se tapan.", "nota": "So une la causa con el efecto."},
+        {"indice": 4, "en": "The stream contains soil after rain because builders left the ground uncovered.", "es": "El arroyo tiene tierra después de la lluvia porque los constructores dejaron el suelo descubierto.", "nota": "Because presenta la causa. Di solo lo que muestra el registro."},
+        {"indice": 5, "en": "Drivers leave engines running outside the school, so the air becomes worse. Drivers can change this.", "es": "Los conductores dejan los motores encendidos frente a la escuela, así que el aire empeora. Los conductores pueden cambiarlo.", "nota": "Causa, efecto y actor de un mismo caso."}
+      ]
+    },
+    "en.n3.class-87": {
+      "explicacion": {
+        "titulo": "Proponer con cautela: if + pasiva + may",
+        "texto": "Para explicar qué puede pasar si se aplica una medida, une dos partes. La condición usa if + pasiva en presente (is/are + participio), porque importa la medida y no quién la hace: If waste is collected separately… Is con singular (waste, the path), are con plural (trees, leaks). El resultado usa may + verbo base, que significa «puede que»: bin volume may fall. Will prometería un resultado seguro. Ojo: después de if va presente, no will: If trees are planted, no If trees will be planted."
+      },
+      "patron": {
+        "texto": "If + pasiva (medida) + may (resultado posible):",
+        "formula": [
+          {"texto": "If", "nota": "condición real"},
+          {"texto": "the leaks are repaired,", "nota": "medida en pasiva: are + participio (plural)"},
+          {"texto": "water use", "nota": "lo que puede cambiar"},
+          {"texto": "may fall.", "nota": "may + verbo base: posible, no seguro"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Sujeto", "Condición en pasiva", "Resultado con may"],
+        "filas": [
+          [{"texto": "singular: waste, oil, the path"}, {"texto": "If waste is collected separately,"}, {"texto": "bin volume may fall."}],
+          [{"texto": "plural: trees, leaks, lights"}, {"texto": "If trees are planted near the road,"}, {"texto": "shade may increase."}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "If the trees will be planted, shade may increase.", "correcto": "If the trees are planted, shade may increase.", "explicacion": "En la parte de if se usa presente, no will, aunque hable del futuro."},
+        {"incorrecto": "If waste is collect separately, bin volume may fall.", "correcto": "If waste is collected separately, bin volume may fall.", "explicacion": "La pasiva necesita el participio: is collected, no is collect."}
+      ],
+      "situacion": {
+        "contexto": "Ana y su padre Carlos hablan de cómo gastar menos agua en casa.",
+        "dialogo": [
+          {"hablante": "Ana", "texto": "Dad, the kitchen tap has a leak again.", "traduccion": "Papá, el grifo de la cocina gotea otra vez."},
+          {"hablante": "Carlos", "texto": "Yes. If it is repaired this week, our water use may fall.", "traduccion": "Sí. Si se repara esta semana, puede que baje nuestro consumo de agua."},
+          {"hablante": "Ana", "texto": "And the garden?", "traduccion": "¿Y el jardín?"},
+          {"hablante": "Carlos", "texto": "If the plants are watered in the evening, we may use less water.", "traduccion": "Si las plantas se riegan por la noche, puede que usemos menos agua."},
+          {"hablante": "Ana", "texto": "So will we save water?", "traduccion": "Entonces, ¿ahorraremos agua?"},
+          {"hablante": "Carlos", "texto": "Maybe. It is not certain.", "traduccion": "Quizás. No es seguro."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué medida propone Carlos para el jardín?",
+          "opciones": [
+            {"es": "Regar las plantas por la noche."},
+            {"es": "Reparar el grifo de la cocina."},
+            {"es": "No regar las plantas nunca."}
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «If the plants are watered in the evening, we may use less water». Reparar el grifo es la medida para la cocina."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "The path is cleaned every week.", "es": "El sendero se limpia cada semana.", "nota": "Proceso en pasiva: importa la medida, no quién la hace."},
+        {"indice": 1, "en": "If waste is collected separately, bin volume may fall.", "es": "Si los residuos se recogen por separado, el volumen de los contenedores puede bajar.", "nota": "If + presente: una condición real."},
+        {"indice": 2, "en": "If lights are turned off after closing, electricity use may fall.", "es": "Si se apagan las luces después del cierre, el consumo de electricidad puede bajar.", "nota": "May: un resultado posible, no garantizado."},
+        {"indice": 3, "en": "If two trees are planted near the road, shade may increase.", "es": "Si se plantan dos árboles cerca de la carretera, puede aumentar la sombra.", "nota": "Trees es plural: are planted. Con waste (singular) sería is collected."},
+        {"indice": 4, "en": "If deliveries are scheduled before eight, traffic may decrease.", "es": "Si las entregas se programan antes de las ocho, el tráfico puede disminuir.", "nota": "Medida en pasiva, condición con if y resultado prudente."},
+        {"indice": 5, "en": "If the tap is repaired this month, we may use less water.", "es": "Si se repara el grifo este mes, puede que usemos menos agua.", "nota": "Singular: is repaired. El resultado con may no promete nada seguro."}
+      ]
+    },
+    "en.n3.class-88": {
+      "explicacion": {
+        "titulo": "Leer una propuesta: cinco datos clave",
+        "texto": "Al leer o escuchar una propuesta, busca cinco datos. Problema: lo que pasa ahora (single-use bottles near the playground). Medida: la acción propuesta (install two refill stations). Coste: cuánto y de qué fondo (£1,800 from the park fund). Beneficio: lo que se espera, con may o fewer (fewer bottles). Preocupación: lo que alguien teme, con worries about + nombre o worries that + oración. Atribuye cada opinión a la persona correcta. Ojo: se dice worries about the noise, no worries for the noise."
+      },
+      "patron": {
+        "texto": "Apoyo + preocupación de una persona:",
+        "formula": [
+          {"texto": "Bo supports the plan,", "nota": "apoyo: supports con -s (he/she)"},
+          {"texto": "but he worries", "nota": "preocupación: worries con -s"},
+          {"texto": "about evening noise.", "nota": "about + nombre: lo que le preocupa"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Dato", "Señales", "Ejemplo"],
+        "filas": [
+          [{"texto": "problema"}, {"texto": "near, too many"}, {"texto": "single-use bottles near the playground"}],
+          [{"texto": "medida"}, {"texto": "install, proposal"}, {"texto": "two refill stations"}],
+          [{"texto": "coste"}, {"texto": "£, from the … fund"}, {"texto": "£1,800 from the park fund"}],
+          [{"texto": "beneficio"}, {"texto": "may, fewer"}, {"texto": "fewer single-use bottles"}],
+          [{"texto": "preocupación"}, {"texto": "worries about / that"}, {"texto": "evening maintenance noise"}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "Bo worries for the noise.", "correcto": "Bo worries about the noise.", "explicacion": "Calco de «se preocupa por». En inglés, worry va con about + nombre."},
+        {"incorrecto": "Bo worry that the work will be noisy.", "correcto": "Bo worries that the work will be noisy.", "explicacion": "Con he/she (Bo) el presente lleva -s: worries."}
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom leen una propuesta para el patio de su escuela.",
+        "dialogo": [
+          {"hablante": "Mia", "texto": "Look, there is a proposal for the school yard.", "traduccion": "Mira, hay una propuesta para el patio de la escuela."},
+          {"hablante": "Tom", "texto": "What is the measure?", "traduccion": "¿Cuál es la medida?"},
+          {"hablante": "Mia", "texto": "Three new bins. The school fund will pay for them.", "traduccion": "Tres contenedores nuevos. Los pagará el fondo de la escuela."},
+          {"hablante": "Tom", "texto": "Good. There may be less paper on the ground.", "traduccion": "Bien. Puede que haya menos papel en el suelo."},
+          {"hablante": "Mia", "texto": "Leo supports it, but he worries that the bins will be full on Fridays.", "traduccion": "Leo la apoya, pero le preocupa que los contenedores estén llenos los viernes."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le preocupa a Leo?",
+          "opciones": [
+            {"es": "Que los contenedores estén llenos los viernes."},
+            {"es": "Quién va a pagar los contenedores."},
+            {"es": "Que haya papel en el suelo."}
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cuenta: «he worries that the bins will be full on Fridays». Quién paga ya está claro (el fondo de la escuela), y menos papel es el beneficio que espera Tom."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "The problem is single-use bottles near the playground.", "es": "El problema son las botellas de un solo uso cerca de la zona de juegos.", "nota": "Problema: lo que pasa ahora."},
+        {"indice": 1, "en": "The stations cost £1,800, and the park fund will pay.", "es": "Las estaciones cuestan £1.800, y las pagará el fondo del parque.", "nota": "Coste: la cantidad y quién paga."},
+        {"indice": 2, "en": "There may be fewer bottles near the playground.", "es": "Puede que haya menos botellas cerca de la zona de juegos.", "nota": "Beneficio esperado: may, sin prometer."},
+        {"indice": 3, "en": "Ana supports the plan because families need water, but Bo worries about evening noise.", "es": "Ana apoya el plan porque las familias necesitan agua, pero a Bo le preocupa el ruido por la noche.", "nota": "Cada opinión va con su persona."},
+        {"indice": 4, "en": "The council will count the bottles near the playground each month.", "es": "El ayuntamiento contará las botellas cerca de la zona de juegos cada mes.", "nota": "Indicador: un conteo repetido que muestra si cambia el problema."},
+        {"indice": 5, "en": "Problem: single-use bottles near the playground. Measure: two refill stations. Cost: £1,800 from the park fund. Benefit: fewer bottles. Bo’s concern: evening maintenance noise.", "es": "Problema: botellas de un solo uso cerca de la zona de juegos. Medida: dos estaciones de recarga. Coste: £1.800 del fondo del parque. Beneficio: menos botellas. Preocupación de Bo: el ruido del mantenimiento por la noche.", "nota": "Los cinco datos de una misma propuesta."}
+      ]
+    },
+    "en.n3.class-89": {
+      "explicacion": {
+        "titulo": "Proponer una acción práctica",
+        "texto": "Una propuesta práctica sigue cinco pasos. Dato de partida, con un número: Oak Street records 120 cups every Friday. Acción concreta con lugar y coste: I propose a £900 refill station beside the bus stop. Condición y efecto prudente: If the station is installed, cup use may fall. Razón con because, que une la acción con la causa: because people can refill bottles. Indicador para comprobar: Volunteers should count cups before and after. Ojo: después de propose va un nombre o -ing (I propose installing…), y después de should, el verbo base sin to."
+      },
+      "patron": {
+        "texto": "Condición + efecto posible + razón:",
+        "formula": [
+          {"texto": "If the station is installed,", "nota": "condición: if + pasiva"},
+          {"texto": "cup use may fall", "nota": "efecto prudente: may + verbo base"},
+          {"texto": "because people can refill their bottles.", "nota": "razón: por qué la acción ataca la causa"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Paso", "Ejemplo"],
+        "filas": [
+          [{"texto": "dato de partida"}, {"texto": "Oak Street records 120 cups every Friday."}],
+          [{"texto": "acción, lugar y coste"}, {"texto": "I propose a £900 refill station beside the bus stop."}],
+          [{"texto": "condición y efecto"}, {"texto": "If the station is installed, cup use may fall."}],
+          [{"texto": "razón"}, {"texto": "because people can refill bottles"}],
+          [{"texto": "indicador"}, {"texto": "Count cups for four Fridays before and after."}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "I propose install a refill station.", "correcto": "I propose a refill station.", "explicacion": "Después de propose va un nombre (a refill station) o un verbo con -ing (installing), no el verbo base."},
+        {"incorrecto": "Volunteers should to count the cups.", "correcto": "Volunteers should count the cups.", "explicacion": "Después de should va el verbo base, sin to."}
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo preparan una propuesta para su clase.",
+        "dialogo": [
+          {"hablante": "Sara", "texto": "Our class uses thirty paper cups every day.", "traduccion": "Nuestra clase usa treinta vasos de papel cada día."},
+          {"hablante": "Leo", "texto": "I propose a water tap beside the classroom door. It costs £900.", "traduccion": "Propongo un grifo de agua junto a la puerta del aula. Cuesta £900."},
+          {"hablante": "Sara", "texto": "Why will it help?", "traduccion": "¿Por qué va a ayudar?"},
+          {"hablante": "Leo", "texto": "If the tap is installed, cup use may fall, because students can refill their bottles.", "traduccion": "Si se instala el grifo, puede bajar el uso de vasos, porque los estudiantes pueden rellenar sus botellas."},
+          {"hablante": "Sara", "texto": "And how can we check it?", "traduccion": "¿Y cómo podemos comprobarlo?"},
+          {"hablante": "Leo", "texto": "We should count the cups for two weeks before and two weeks after.", "traduccion": "Deberíamos contar los vasos durante dos semanas antes y dos semanas después."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo comprobarán si la medida funciona?",
+          "opciones": [
+            {"es": "Contando los vasos dos semanas antes y dos después."},
+            {"es": "Preguntando a los estudiantes una vez."},
+            {"es": "Comprando más vasos de papel."}
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «We should count the cups for two weeks before and two weeks after». Es el indicador: el mismo conteo antes y después."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "Oak Street records 120 disposable cups every Friday.", "es": "En Oak Street se registran 120 vasos desechables cada viernes.", "nota": "Dato de partida: el problema con un número."},
+        {"indice": 1, "en": "I propose a £900 refill station beside the bus stop.", "es": "Propongo una estación de recarga de £900 junto a la parada del autobús.", "nota": "Acción práctica: qué, dónde y cuánto cuesta."},
+        {"indice": 2, "en": "If the station is installed and signed, cup use may fall.", "es": "Si la estación se instala y se señaliza, puede bajar el uso de vasos.", "nota": "Condición con if + pasiva y efecto con may: posible, no seguro."},
+        {"indice": 3, "en": "Cup use may fall because people can refill their bottles.", "es": "El uso de vasos puede bajar porque la gente puede rellenar sus botellas.", "nota": "Because explica por qué la acción ataca la causa."},
+        {"indice": 4, "en": "Volunteers should count discarded cups for four Fridays before and after.", "es": "Los voluntarios deberían contar los vasos tirados durante cuatro viernes antes y después.", "nota": "Indicador: el mismo conteo en periodos iguales."},
+        {"indice": 5, "en": "Oak Street records 120 cups every Friday. I propose a £900 refill station beside the bus stop. If it is installed, cup use may fall because people can refill bottles. Volunteers should count cups before and after.", "es": "En Oak Street se registran 120 vasos cada viernes. Propongo una estación de recarga de £900 junto a la parada del autobús. Si se instala, puede bajar el uso de vasos porque la gente puede rellenar botellas. Los voluntarios deberían contar los vasos antes y después.", "nota": "Propuesta completa: dato, acción, condición, razón e indicador."}
+      ]
+    },
+    "en.n3.class-90": {
+      "explicacion": {
+        "titulo": "Llegar a un acuerdo: posturas, responsable y plazo",
+        "texto": "Para acordar una medida entre personas con prioridades distintas, primero reconoce cada postura; while («mientras que») las contrasta: Residents want clean paths, while the café worries about cost. Luego fija una acción con responsable y plazo: The park will install two refill points by 1 June. By + fecha es «como muy tarde»; until significa «hasta» (una duración). Después, el resultado prudente (If the points are installed, bottle waste may fall) y un indicador (Staff will count bottles for six weekends). Ojo: want + nombre, no want that."
+      },
+      "patron": {
+        "texto": "Responsable + will + acción + by + fecha:",
+        "formula": [
+          {"texto": "The park and the café", "nota": "responsables del acuerdo"},
+          {"texto": "will install two refill points", "nota": "acción acordada: will + verbo base"},
+          {"texto": "by 1 June.", "nota": "plazo: by = como muy tarde"}
+        ]
+      },
+      "tabla": {
+        "columnas": ["Parte del acuerdo", "Ejemplo"],
+        "filas": [
+          [{"texto": "posturas"}, {"texto": "Residents want clean paths, while the café worries about cost."}],
+          [{"texto": "acción, responsable y plazo"}, {"texto": "The park will install two refill points by 1 June."}],
+          [{"texto": "resultado prudente"}, {"texto": "If the points are installed, bottle waste may fall."}],
+          [{"texto": "indicador"}, {"texto": "Staff will count bottles for six weekends."}]
+        ]
+      },
+      "erroresFrecuentes": [
+        {"incorrecto": "The park will install two refill points until 1 June.", "correcto": "The park will install two refill points by 1 June.", "explicacion": "Until es «hasta» y marca una duración. Para un plazo («como muy tarde el 1 de junio») se usa by."},
+        {"incorrecto": "Residents want that the paths are clean.", "correcto": "Residents want clean paths.", "explicacion": "Calco de «quieren que…». En inglés want no va con that: want + nombre (o want + persona + to + verbo)."}
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia llegan a un acuerdo sobre un punto de agua para su escuela.",
+        "dialogo": [
+          {"hablante": "Tom", "texto": "Students want a refill point in the yard, while the school worries about cost.", "traduccion": "Los estudiantes quieren un punto de recarga en el patio, mientras que a la escuela le preocupa el coste."},
+          {"hablante": "Mia", "texto": "So the school will pay half, and the parents will pay half.", "traduccion": "Entonces la escuela pagará la mitad y los padres pagarán la otra mitad."},
+          {"hablante": "Tom", "texto": "Good. When will it be ready?", "traduccion": "Bien. ¿Cuándo estará listo?"},
+          {"hablante": "Mia", "texto": "The school will install it by 1 June.", "traduccion": "La escuela lo instalará, como muy tarde, el 1 de junio."},
+          {"hablante": "Tom", "texto": "And we will count the bottles in the bins for four weeks.", "traduccion": "Y nosotros contaremos las botellas de los contenedores durante cuatro semanas."}
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo estará instalado el punto de recarga?",
+          "opciones": [
+            {"es": "Como muy tarde, el 1 de junio."},
+            {"es": "A partir del 1 de junio."},
+            {"es": "Dentro de cuatro semanas."}
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The school will install it by 1 June». By marca el plazo: ese día o antes. Las cuatro semanas son para contar las botellas."
+        }
+      },
+      "ejemplos": [
+        {"indice": 0, "en": "Residents want clean paths, while the café worries about cost.", "es": "Los vecinos quieren senderos limpios, mientras que a la cafetería le preocupa el coste.", "nota": "While contrasta dos posturas distintas."},
+        {"indice": 1, "en": "Visitors leave bottles, so staff find 85 bottles each weekend.", "es": "Los visitantes dejan botellas, así que el personal encuentra 85 botellas cada fin de semana.", "nota": "Causa y efecto documentados en el registro."},
+        {"indice": 2, "en": "The measure is two refill points, and the café is concerned about cost.", "es": "La medida son dos puntos de recarga, y a la cafetería le preocupa el coste.", "nota": "Registra la medida y cada postura."},
+        {"indice": 3, "en": "The park and the café will install two refill points by 1 June.", "es": "El parque y la cafetería instalarán dos puntos de recarga, como muy tarde, el 1 de junio.", "nota": "Acción, responsables y plazo: by = como muy tarde."},
+        {"indice": 4, "en": "Staff will count discarded bottles for six weekends.", "es": "El personal contará las botellas tiradas durante seis fines de semana.", "nota": "Indicador medible para el seguimiento."},
+        {"indice": 5, "en": "Residents want clean paths, while the café is concerned about cost. The park and the café will install two refill points by 1 June. If the points are installed, bottle waste may fall. Staff will count discarded bottles for six weekends.", "es": "Los vecinos quieren senderos limpios, mientras que a la cafetería le preocupa el coste. El parque y la cafetería instalarán dos puntos de recarga, como muy tarde, el 1 de junio. Si se instalan los puntos, pueden bajar los residuos de botellas. El personal contará las botellas tiradas durante seis fines de semana.", "nota": "Acuerdo completo: posturas, acción, responsables, plazo, resultado prudente e indicador."}
+      ]
+    }
+  }
+}

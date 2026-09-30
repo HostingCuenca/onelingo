@@ -1,0 +1,839 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-100: explicación ampliada para recapitular el nivel (familia y posesión: have got, my/mine, there is/are; pedir con I'd like), sin «so», que el proyecto no practica; nota del patrón «cierre con invitación» → «despedida con on + día»; explicación del error «I am studying English every day» matizada («lo normal»).",
+      "class-98: en la situación, «How many apples are there?» se respondía con «some apples»; ahora «There are three apples».",
+      "class-96: la explicación añade how many / how much, que evalúa e03.",
+      "Aceptado: class-99 usa etiquetas de tarjeta en inglés (introduce yourself, routine, request) glosadas; validador sin errores."
+    ]
+  },
+  "classes": {
+    "en.n1.class-96": {
+      "explicacion": {
+        "titulo": "Repaso espaciado del Nivel 1",
+        "texto": "Repaso espaciado: volver a formas vistas hace tiempo para no olvidarlas. Recuerda: -s con he/she/it en la rutina (She works at home); can/can't + verbo base, y but para contrastar (I can cook, but I can't drive); some con plurales o incontables (some apples, some milk), how many con plurales y how much con incontables; I'd like para pedir; am/is/are + -ing para lo que pasa ahora; y mine (mío) sin sustantivo detrás. Estrategia: antes de responder, pregúntate ¿quién?, ¿cuándo? (every day o now) y ¿cuánto?"
+      },
+      "patron": {
+        "texto": "Rutina + but + lo que pasa ahora:",
+        "formula": [
+          {
+            "texto": "He works at home,",
+            "nota": "rutina: -s con he"
+          },
+          {
+            "texto": "but",
+            "nota": "contraste"
+          },
+          {
+            "texto": "now he is reading.",
+            "nota": "ahora: is + -ing"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Uso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "verbo + -s"
+            },
+            {
+              "texto": "rutina de he/she/it"
+            },
+            {
+              "texto": "She works at home."
+            }
+          ],
+          [
+            {
+              "texto": "can / can't"
+            },
+            {
+              "texto": "capacidad"
+            },
+            {
+              "texto": "I can swim."
+            }
+          ],
+          [
+            {
+              "texto": "some"
+            },
+            {
+              "texto": "cantidad"
+            },
+            {
+              "texto": "There is some milk."
+            }
+          ],
+          [
+            {
+              "texto": "I'd like"
+            },
+            {
+              "texto": "pedir"
+            },
+            {
+              "texto": "I'd like some soup."
+            }
+          ],
+          [
+            {
+              "texto": "am/is/are + -ing"
+            },
+            {
+              "texto": "ahora"
+            },
+            {
+              "texto": "He is reading now."
+            }
+          ],
+          [
+            {
+              "texto": "mine"
+            },
+            {
+              "texto": "de quién es"
+            },
+            {
+              "texto": "This book is mine."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "This book is my.",
+          "correcto": "This book is mine.",
+          "explicacion": "My va siempre delante de un sustantivo (my book). Sin sustantivo detrás se usa mine."
+        },
+        {
+          "incorrecto": "She work at home.",
+          "correcto": "She works at home.",
+          "explicacion": "En la rutina, con he/she/it el verbo lleva -s: she works."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara llega a casa y habla con su hermano Leo en la cocina.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Is there any milk?",
+            "traduccion": "¿Hay leche?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, there is some milk. And there are some apples.",
+            "traduccion": "Sí, hay leche. Y hay manzanas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Where is Ana?",
+            "traduccion": "¿Dónde está Ana?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She is swimming now.",
+            "traduccion": "Está nadando ahora."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And this bag? Is it yours?",
+            "traduccion": "¿Y esta mochila? ¿Es tuya?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, it is mine.",
+            "traduccion": "Sí, es mía."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Ana ahora?",
+          "opciones": [
+            {
+              "es": "Está nadando."
+            },
+            {
+              "es": "Está en la cocina."
+            },
+            {
+              "es": "Está comiendo manzanas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «She is swimming now»."
+        }
+      }
+    },
+    "en.n1.class-97": {
+      "explicacion": {
+        "titulo": "Leer y escribir un texto corto",
+        "texto": "Para entender un texto corto, lee primero la pregunta y busca las palabras clave: usually → rutina (presente simple: I usually study); right now → acción de este momento (I'm reading); because → la causa; on + día y at + hora → una cita (on Saturday at ten). Para escribir sobre ti, sigue el mismo orden: quién eres y dónde vives, tu rutina, qué haces ahora, qué te gusta y por qué, y un plan. Recuerda: I like + -ing (I like reading)."
+      },
+      "patron": {
+        "texto": "Marcador + acción + lugar:",
+        "formula": [
+          {
+            "texto": "Right now,",
+            "nota": "ahora mismo"
+          },
+          {
+            "texto": "I'm reading",
+            "nota": "I am + -ing: acción de este momento"
+          },
+          {
+            "texto": "at the café.",
+            "nota": "dónde ocurre"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra clave",
+          "Indica",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "usually"
+            },
+            {
+              "texto": "rutina"
+            },
+            {
+              "texto": "I usually study."
+            }
+          ],
+          [
+            {
+              "texto": "right now"
+            },
+            {
+              "texto": "acción de ahora"
+            },
+            {
+              "texto": "I'm reading."
+            }
+          ],
+          [
+            {
+              "texto": "because"
+            },
+            {
+              "texto": "causa"
+            },
+            {
+              "texto": "because it is relaxing"
+            }
+          ],
+          [
+            {
+              "texto": "on / at"
+            },
+            {
+              "texto": "día / hora"
+            },
+            {
+              "texto": "on Saturday at ten"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Right now, I read at the café.",
+          "correcto": "Right now, I'm reading at the café.",
+          "explicacion": "Right now pide el presente continuo: am/is/are + -ing."
+        },
+        {
+          "incorrecto": "I like read because it is relaxing.",
+          "correcto": "I like reading because it is relaxing.",
+          "explicacion": "En español «me gusta leer», pero en inglés detrás de like se usa el verbo con -ing: I like reading."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le escribe mensajes a su amiga Mia.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Hi, Mia! Right now, I'm reading at the café.",
+            "traduccion": "¡Hola, Mia! Ahora mismo estoy leyendo en la cafetería."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Do you read every day?",
+            "traduccion": "¿Lees todos los días?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, I usually read in the morning. I like reading because it is relaxing.",
+            "traduccion": "Sí, normalmente leo por la mañana. Me gusta leer porque es relajante."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Are you free on Saturday?",
+            "traduccion": "¿Estás libre el sábado?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes! Let's meet at ten.",
+            "traduccion": "¡Sí! Quedemos a las diez."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según los mensajes, ¿cuándo lee Carlos normalmente?",
+          "opciones": [
+            {
+              "es": "Por la mañana."
+            },
+            {
+              "es": "El sábado a las diez."
+            },
+            {
+              "es": "Solo en la cafetería."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos escribe: «I usually read in the morning»."
+        }
+      }
+    },
+    "en.n1.class-98": {
+      "explicacion": {
+        "titulo": "Evaluación final del Nivel 1",
+        "texto": "La evaluación final mezcla las formas clave del nivel. Antes de responder, identifica qué se pide: presentarte (My name is…, I live near…); una rutina (presente simple, con -s en he/she/it: Ana works); lo que pasa ahora (am/is/are + -ing); una capacidad (can/can't + verbo base); una cantidad (there is/are, some; how many con plurales y how much con incontables); o una petición (Can I have…?, I'd like…). Pistas de tiempo: every day y usually → rutina; now → ahora."
+      },
+      "patron": {
+        "texto": "Ahora + but + rutina:",
+        "formula": [
+          {
+            "texto": "Leo is cooking now,",
+            "nota": "ahora: is + -ing"
+          },
+          {
+            "texto": "but",
+            "nota": "contraste"
+          },
+          {
+            "texto": "he usually reads",
+            "nota": "rutina: usually + verbo con -s"
+          },
+          {
+            "texto": "at night.",
+            "nota": "por la noche"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "¿Qué se pide?",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "rutina"
+            },
+            {
+              "texto": "presente simple"
+            },
+            {
+              "texto": "Ana works at home."
+            }
+          ],
+          [
+            {
+              "texto": "ahora"
+            },
+            {
+              "texto": "am/is/are + -ing"
+            },
+            {
+              "texto": "I am talking to Ana."
+            }
+          ],
+          [
+            {
+              "texto": "capacidad"
+            },
+            {
+              "texto": "can / can't"
+            },
+            {
+              "texto": "I can cook."
+            }
+          ],
+          [
+            {
+              "texto": "cantidad"
+            },
+            {
+              "texto": "how many / how much"
+            },
+            {
+              "texto": "How much milk is there?"
+            }
+          ],
+          [
+            {
+              "texto": "pedir"
+            },
+            {
+              "texto": "Can I have…? / I'd like…"
+            },
+            {
+              "texto": "Can I have some water?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are some rice in the kitchen.",
+          "correcto": "There is some rice in the kitchen.",
+          "explicacion": "Rice es incontable: va con there is, aunque en la frase haya some."
+        },
+        {
+          "incorrecto": "How many milk is there?",
+          "correcto": "How much milk is there?",
+          "explicacion": "Milk es incontable: se pregunta con how much. How many es para plurales: how many apples."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana visita a su amigo Leo, que está en la cocina.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Hi, Leo! Are you busy?",
+            "traduccion": "¡Hola, Leo! ¿Estás ocupado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right now, I am cooking. I can cook, but I can't dance!",
+            "traduccion": "Ahora mismo estoy cocinando. ¡Sé cocinar, pero no sé bailar!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "How many apples are there?",
+            "traduccion": "¿Cuántas manzanas hay?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "There are three apples, and there is some rice.",
+            "traduccion": "Hay tres manzanas, y hay arroz."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Can I have an apple, please?",
+            "traduccion": "¿Me das una manzana, por favor?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure!",
+            "traduccion": "¡Claro!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Ana?",
+          "opciones": [
+            {
+              "es": "Una manzana."
+            },
+            {
+              "es": "Arroz."
+            },
+            {
+              "es": "Ayuda para cocinar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Can I have an apple, please?»."
+        }
+      }
+    },
+    "en.n1.class-99": {
+      "explicacion": {
+        "titulo": "Conversación guiada por tarjetas",
+        "texto": "En una conversación guiada, cada tarjeta indica qué tipo de frase debes decir. Lee la palabra clave y usa su forma: introduce yourself → My name is… / I live near here; routine → I usually + verbo; gustos → I like + -ing; capacidad → I can + verbo base; right now → I am + -ing; invitar → Are you free on…?; request (pedir) → I'd like…, please. Estrategia: responde con frases completas y con sujeto; en inglés no se puede decir solo «usually get up»."
+      },
+      "patron": {
+        "texto": "Gusto + and + capacidad:",
+        "formula": [
+          {
+            "texto": "I like",
+            "nota": "gusto"
+          },
+          {
+            "texto": "reading",
+            "nota": "like + verbo con -ing"
+          },
+          {
+            "texto": "and I can",
+            "nota": "and une; can = capacidad"
+          },
+          {
+            "texto": "cook.",
+            "nota": "verbo base, sin to"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tarjeta",
+          "Tu frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "introduce yourself"
+            },
+            {
+              "texto": "My name is Sara."
+            }
+          ],
+          [
+            {
+              "texto": "routine"
+            },
+            {
+              "texto": "I usually get up at seven."
+            }
+          ],
+          [
+            {
+              "texto": "right now"
+            },
+            {
+              "texto": "I am studying."
+            }
+          ],
+          [
+            {
+              "texto": "request"
+            },
+            {
+              "texto": "I'd like some water, please."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can to cook.",
+          "correcto": "I can cook.",
+          "explicacion": "Después de can el verbo va en forma base, sin to."
+        },
+        {
+          "incorrecto": "I live near of here.",
+          "correcto": "I live near here.",
+          "explicacion": "Calco de «cerca de aquí». En inglés near no lleva of: near here, near the park."
+        }
+      ],
+      "situacion": {
+        "contexto": "En clase, Tom y Sara juegan con tarjetas de conversación.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Sara, introduce yourself!",
+            "traduccion": "Sara, ¡preséntate!"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "My name is Sara. I live near here.",
+            "traduccion": "Me llamo Sara. Vivo cerca de aquí."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And your routine?",
+            "traduccion": "¿Y tu rutina?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I usually get up at seven. I like reading and I can cook.",
+            "traduccion": "Normalmente me levanto a las siete. Me gusta leer y sé cocinar."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Are you free on Saturday?",
+            "traduccion": "¿Estás libre el sábado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes! Right now, I am studying, but I am free on Saturday.",
+            "traduccion": "¡Sí! Ahora mismo estoy estudiando, pero el sábado estoy libre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué hora se levanta Sara normalmente?",
+          "opciones": [
+            {
+              "es": "A las siete."
+            },
+            {
+              "es": "A las seis."
+            },
+            {
+              "es": "El sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I usually get up at seven»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "My name is Sara. I live near here.",
+          "es": "Me llamo Sara. Vivo cerca de aquí.",
+          "nota": "Tarjeta de presentación: nombre y lugar."
+        },
+        {
+          "indice": 1,
+          "en": "I usually get up at seven.",
+          "es": "Normalmente me levanto a las siete.",
+          "nota": "Tarjeta de rutina: usually + verbo."
+        },
+        {
+          "indice": 2,
+          "en": "I like reading and I can cook.",
+          "es": "Me gusta leer y sé cocinar.",
+          "nota": "Tarjeta de gusto y capacidad."
+        },
+        {
+          "indice": 3,
+          "en": "Right now, I am studying.",
+          "es": "Ahora mismo estoy estudiando.",
+          "nota": "Tarjeta de ahora mismo: am + -ing."
+        },
+        {
+          "indice": 4,
+          "en": "Are you free on Saturday?",
+          "es": "¿Estás libre el sábado?",
+          "nota": "Tarjeta de invitación: on + día."
+        },
+        {
+          "indice": 5,
+          "en": "I'd like some water, please.",
+          "es": "Quisiera agua, por favor.",
+          "nota": "Tarjeta de petición cortés."
+        }
+      ]
+    },
+    "en.n1.class-100": {
+      "explicacion": {
+        "titulo": "Proyecto My life in English: cierre del Nivel 1",
+        "texto": "¡Cierras el Nivel 1! En el proyecto My life in English escribes sobre ti con lo aprendido: quién eres (My name is…, I live in…); tu familia y tus cosas (have got, my/mine, there is/are); tu rutina en presente simple (I usually get up at seven; -s con he/she/it); gustos y capacidades (I like reading, I can cook); lo que haces ahora (Right now, I am studying); causas con because; pedir con I'd like…, please; y una invitación (Are you free on Saturday? See you!). Revisa -s, am/is/are + -ing, on + día y at + hora."
+      },
+      "patron": {
+        "texto": "Las cinco partes de tu texto:",
+        "formula": [
+          {
+            "texto": "My name is Leo.",
+            "nota": "identidad"
+          },
+          {
+            "texto": "I usually get up at seven.",
+            "nota": "rutina: presente simple"
+          },
+          {
+            "texto": "I like reading and I can cook.",
+            "nota": "gustos y capacidad"
+          },
+          {
+            "texto": "Right now, I am studying English.",
+            "nota": "ahora: am + -ing"
+          },
+          {
+            "texto": "See you on Saturday!",
+            "nota": "cierre: despedida con on + día"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Contenido",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "identidad"
+            },
+            {
+              "texto": "My name is Leo. I live in Quito."
+            }
+          ],
+          [
+            {
+              "texto": "2"
+            },
+            {
+              "texto": "rutina"
+            },
+            {
+              "texto": "I usually get up at seven."
+            }
+          ],
+          [
+            {
+              "texto": "3"
+            },
+            {
+              "texto": "gustos y capacidad"
+            },
+            {
+              "texto": "I like reading and I can cook."
+            }
+          ],
+          [
+            {
+              "texto": "4"
+            },
+            {
+              "texto": "ahora mismo"
+            },
+            {
+              "texto": "Right now, I am studying English."
+            }
+          ],
+          [
+            {
+              "texto": "5"
+            },
+            {
+              "texto": "invitación y cierre"
+            },
+            {
+              "texto": "Are you free on Saturday? See you!"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am live in Quito.",
+          "correcto": "I live in Quito.",
+          "explicacion": "No se junta am con otro verbo en presente simple. Am solo va con el -ing: I am studying."
+        },
+        {
+          "incorrecto": "I am studying English every day.",
+          "correcto": "I study English every day.",
+          "explicacion": "Con every day hablas de una rutina: lo normal es el presente simple. El -ing es para lo que pasa ahora."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a su amiga Mia su proyecto de inglés.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, is this your project?",
+            "traduccion": "Leo, ¿este es tu proyecto?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes! My name is Leo and I live in Quito. I usually get up at seven.",
+            "traduccion": "¡Sí! Me llamo Leo y vivo en Quito. Normalmente me levanto a las siete."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And right now?",
+            "traduccion": "¿Y ahora mismo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right now, I am studying English because I like it.",
+            "traduccion": "Ahora mismo estoy estudiando inglés porque me gusta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Nice project!",
+            "traduccion": "¡Qué buen proyecto!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thank you! Are you free on Saturday?",
+            "traduccion": "¡Gracias! ¿Estás libre el sábado?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué estudia inglés Leo ahora?",
+          "opciones": [
+            {
+              "es": "Porque le gusta."
+            },
+            {
+              "es": "Porque tiene un examen."
+            },
+            {
+              "es": "Porque es sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I am studying English because I like it»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "My name is Leo. I live in Quito.",
+          "es": "Me llamo Leo. Vivo en Quito.",
+          "nota": "Primera parte: identidad y lugar."
+        },
+        {
+          "indice": 1,
+          "en": "I usually get up at seven.",
+          "es": "Normalmente me levanto a las siete.",
+          "nota": "Segunda parte: la rutina, en presente simple."
+        },
+        {
+          "indice": 2,
+          "en": "I like reading and I can cook.",
+          "es": "Me gusta leer y sé cocinar.",
+          "nota": "Tercera parte: gusto y capacidad."
+        },
+        {
+          "indice": 3,
+          "en": "Right now, I am studying English.",
+          "es": "Ahora mismo estoy estudiando inglés.",
+          "nota": "Cuarta parte: la acción de ahora, con am + -ing."
+        },
+        {
+          "indice": 4,
+          "en": "Are you free on Saturday?",
+          "es": "¿Estás libre el sábado?",
+          "nota": "Quinta parte: una invitación para seguir hablando."
+        },
+        {
+          "indice": 5,
+          "en": "See you on Saturday!",
+          "es": "¡Nos vemos el sábado!",
+          "nota": "Cierre: despedida con on + día."
+        }
+      ]
+    }
+  }
+}

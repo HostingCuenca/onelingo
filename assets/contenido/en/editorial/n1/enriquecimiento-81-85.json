@@ -1,0 +1,608 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-84: explicación del error «two persons» matizada (basta for two; en todo caso two people, no persons).",
+      "Aceptado: class-85 ejemplos 0 y 3 juntan dos turnos (mesero/cliente) en una línea; la nota aclara quién habla.",
+      "Aceptado: opciones del ítem en español; avisos del validador «opción correcta apenas aparece» se deben a ello."
+    ]
+  },
+  "classes": {
+    "en.n1.class-81": {
+      "explicacion": {
+        "titulo": "Pedir con amabilidad: I'd like",
+        "texto": "I'd like es la forma corta de I would like y significa «quisiera» o «me gustaría». Es la manera amable de pedir en un restaurante o una tienda; I want (quiero) suena brusco al pedir. Ojo: I like es «me gusta» (en general) y no sirve para pedir. Después va lo que pides: a con un plato contable (a salad), some con algo incontable como water o soup, y the con un plato concreto del menú (the chicken). Cierra con please y, al recibirlo, Thank you."
+      },
+      "patron": {
+        "texto": "I'd like + lo que pides + please:",
+        "formula": [
+          {
+            "texto": "I'd like",
+            "nota": "quisiera: petición amable"
+          },
+          {
+            "texto": "some water,",
+            "nota": "some con algo incontable"
+          },
+          {
+            "texto": "please.",
+            "nota": "por favor: suaviza la petición"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Cuándo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a"
+            },
+            {
+              "texto": "una cosa contable"
+            },
+            {
+              "texto": "I'd like a salad."
+            }
+          ],
+          [
+            {
+              "texto": "some"
+            },
+            {
+              "texto": "algo incontable"
+            },
+            {
+              "texto": "I'd like some water."
+            }
+          ],
+          [
+            {
+              "texto": "the"
+            },
+            {
+              "texto": "un plato concreto"
+            },
+            {
+              "texto": "I'd like the chicken."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I like some water, please.",
+          "correcto": "I'd like some water, please.",
+          "explicacion": "I like significa «me gusta». Para pedir hace falta la 'd: I'd like = quisiera."
+        },
+        {
+          "incorrecto": "I want the chicken.",
+          "correcto": "I'd like the chicken, please.",
+          "explicacion": "Es un calco de «quiero el pollo». En inglés I want suena brusco al pedir; lo amable es I'd like + please."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y su hermano Leo comen en un restaurante; Tom es el mesero.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Hello!",
+            "traduccion": "¡Hola!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Hello. I'd like the salad, please.",
+            "traduccion": "Hola. Quisiera la ensalada, por favor."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'd like some soup, please.",
+            "traduccion": "Quisiera sopa, por favor."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And I'd like some water, please.",
+            "traduccion": "Y quisiera agua, por favor."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thank you.",
+            "traduccion": "Gracias."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Leo?",
+          "opciones": [
+            {
+              "es": "Sopa."
+            },
+            {
+              "es": "Ensalada."
+            },
+            {
+              "es": "Agua."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I'd like some soup, please». La ensalada y el agua las pide Ana."
+        }
+      }
+    },
+    "en.n1.class-82": {
+      "explicacion": {
+        "titulo": "Pedir con Can I have…?",
+        "texto": "Can I have…? es otra forma muy común de pedir: literalmente «¿puedo tener…?», pero equivale a «¿me da…?» o «¿me trae…?». Es una pregunta, así que empieza por Can, luego I, y el signo de interrogación va solo al final. Después de can el verbo va siempre en forma base: have, nunca has. Añade please para sonar amable. En el restaurante, «la cuenta» es the check, no the account. El mesero suele aceptar con Sure (claro)."
+      },
+      "patron": {
+        "texto": "Can + I + have + lo que pides + please?",
+        "formula": [
+          {
+            "texto": "Can I have",
+            "nota": "¿me da…? / ¿me trae…?"
+          },
+          {
+            "texto": "the menu,",
+            "nota": "lo que pides"
+          },
+          {
+            "texto": "please?",
+            "nota": "por favor; termina en ?"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can have some water, please?",
+          "correcto": "Can I have some water, please?",
+          "explicacion": "En español basta con la entonación, pero en inglés la pregunta empieza con Can, antes de I."
+        },
+        {
+          "incorrecto": "Can I have the account, please?",
+          "correcto": "Can I have the check, please?",
+          "explicacion": "En el restaurante «la cuenta» es the check. Account es una cuenta del banco o de una aplicación."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y su hermano Carlos comen en un restaurante; Sara es la mesera.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Can I have the menu, please?",
+            "traduccion": "¿Me trae el menú, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, sure.",
+            "traduccion": "Sí, claro."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Can I have a salad, please?",
+            "traduccion": "¿Me trae una ensalada, por favor?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Can I have some soup and some water?",
+            "traduccion": "¿Me trae sopa y agua?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sure.",
+            "traduccion": "Claro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Carlos?",
+          "opciones": [
+            {
+              "es": "Una ensalada."
+            },
+            {
+              "es": "Sopa y agua."
+            },
+            {
+              "es": "El menú."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «Can I have a salad, please?». Mia pide el menú, la sopa y el agua."
+        }
+      }
+    },
+    "en.n1.class-83": {
+      "explicacion": {
+        "titulo": "Could I have…? y Could you repeat that?",
+        "texto": "Could I have…? pide lo mismo que Can I have…?, pero suena un poco más formal y amable: «¿me podría traer…?». Úsalo como un bloque fijo: Could + I + have + lo que pides; no olvides have. Para pedir que otra persona haga algo se cambia I por you: Could you repeat that, please? (¿Podría repetir eso?). Es la frase ideal cuando no entiendes. Fíjate en that: en inglés se dice qué hay que repetir."
+      },
+      "patron": {
+        "texto": "Could + I + have + cosa + please?",
+        "formula": [
+          {
+            "texto": "Could I have",
+            "nota": "¿me podría traer…? (más formal que can)"
+          },
+          {
+            "texto": "some juice,",
+            "nota": "lo que pides"
+          },
+          {
+            "texto": "please?",
+            "nota": "por favor"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Frase",
+          "Uso"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Can I have…?"
+            },
+            {
+              "texto": "pedir algo (normal)"
+            }
+          ],
+          [
+            {
+              "texto": "Could I have…?"
+            },
+            {
+              "texto": "pedir algo (más formal)"
+            }
+          ],
+          [
+            {
+              "texto": "Could you repeat that?"
+            },
+            {
+              "texto": "pedir que el otro repita"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could I the menu, please?",
+          "correcto": "Could I have the menu, please?",
+          "explicacion": "Falta el verbo: el bloque completo es Could I have…?"
+        },
+        {
+          "incorrecto": "Could you repeat me, please?",
+          "correcto": "Could you repeat that, please?",
+          "explicacion": "Es un calco de «¿me lo repite?». En inglés no se pone me: se repite that (eso)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y su abuela llegan a un restaurante; Tom es el mesero.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "A table for two?",
+            "traduccion": "¿Mesa para dos?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, please. Could I have the menu?",
+            "traduccion": "Sí, por favor. ¿Me podría traer el menú?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sure.",
+            "traduccion": "Claro."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Could I have some juice, please?",
+            "traduccion": "¿Me podría traer jugo, por favor?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry, could you repeat that?",
+            "traduccion": "Perdón, ¿podría repetir eso?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Some juice, please.",
+            "traduccion": "Jugo, por favor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué Sara dice otra vez «Some juice, please»?",
+          "opciones": [
+            {
+              "es": "Porque Tom no la entendió."
+            },
+            {
+              "es": "Porque quiere dos jugos."
+            },
+            {
+              "es": "Porque no hay menú."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Sorry, could you repeat that?». Pide que Sara repita porque no la entendió."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "Could I have a table for two?",
+          "es": "¿Nos podría dar una mesa para dos?",
+          "nota": "A table for two sirve para pedir mesa al entrar."
+        }
+      ]
+    },
+    "en.n1.class-84": {
+      "explicacion": {
+        "titulo": "En el restaurante: with, without y don't",
+        "texto": "Una visita al restaurante sigue un orden: al entrar pides mesa (A table for two, please), luego el menú (Could I have the menu, please?), después el plato (I'd like… o Can I have…?) y al final la cuenta (the check). Para ajustar el plato usa with (con) y without (sin): the chicken with rice, the salad without chicken. Para decir lo que no comes, niega con don't: I don't eat meat, nunca «I no eat meat»."
+      },
+      "patron": {
+        "texto": "I'd like + plato + with/without + ingrediente:",
+        "formula": [
+          {
+            "texto": "I'd like",
+            "nota": "pides con amabilidad"
+          },
+          {
+            "texto": "the chicken",
+            "nota": "el plato"
+          },
+          {
+            "texto": "with rice,",
+            "nota": "with = con; without = sin"
+          },
+          {
+            "texto": "please.",
+            "nota": "por favor"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Al entrar"
+            },
+            {
+              "texto": "A table for two, please."
+            }
+          ],
+          [
+            {
+              "texto": "Para ver los platos"
+            },
+            {
+              "texto": "Could I have the menu, please?"
+            }
+          ],
+          [
+            {
+              "texto": "Para pedir"
+            },
+            {
+              "texto": "I'd like the chicken with rice."
+            }
+          ],
+          [
+            {
+              "texto": "Para pagar"
+            },
+            {
+              "texto": "Can I have the check, please?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I no eat meat.",
+          "correcto": "I don't eat meat.",
+          "explicacion": "En español basta con «no», pero en inglés el verbo se niega con don't delante: I don't eat."
+        },
+        {
+          "incorrecto": "A table for two persons, please.",
+          "correcto": "A table for two, please.",
+          "explicacion": "Calco de «mesa para dos personas». Basta con for two; si lo dices, es two people, no persons."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y su amiga Ana comen en un restaurante; Leo es el mesero.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "A table for two?",
+            "traduccion": "¿Mesa para dos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, please. Could I have the menu?",
+            "traduccion": "Sí, por favor. ¿Me podría traer el menú?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I'd like the chicken with rice, please.",
+            "traduccion": "Quisiera el pollo con arroz, por favor."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I don't eat meat. I'd like the salad without chicken.",
+            "traduccion": "No como carne. Quisiera la ensalada sin pollo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sure.",
+            "traduccion": "Claro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Mia?",
+          "opciones": [
+            {
+              "es": "La ensalada sin pollo."
+            },
+            {
+              "es": "El pollo con arroz."
+            },
+            {
+              "es": "La ensalada con pollo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «I don't eat meat. I'd like the salad without chicken». El pollo con arroz es de Ana."
+        }
+      }
+    },
+    "en.n1.class-85": {
+      "explicacion": {
+        "titulo": "Diálogo entre cliente y mesero",
+        "texto": "Esta clase une todo en un diálogo completo entre customer (cliente) y server (mesero). Sigue el orden: 1) mesa: A table for two? – Yes, please. 2) menú: Could I have the menu, please? 3) pedido: I'd like… o Can I have…? 4) si no entiendes: Sorry, can you repeat that? 5) cuenta: Could I have the check, please? Estrategia: escucha qué pregunta el mesero y responde a eso; si dice Sure, acepta tu petición."
+      },
+      "patron": {
+        "texto": "Pregunta del mesero y respuesta del cliente:",
+        "formula": [
+          {
+            "texto": "A table for two?",
+            "nota": "mesero: ofrece una mesa"
+          },
+          {
+            "texto": "Yes, please.",
+            "nota": "cliente: acepta"
+          },
+          {
+            "texto": "Could I have the menu?",
+            "nota": "cliente: pide la carta"
+          },
+          {
+            "texto": "Sure.",
+            "nota": "mesero: acepta la petición"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Thanks you.",
+          "correcto": "Thank you.",
+          "explicacion": "Se dice Thank you o Thanks, pero no se mezclan: «Thanks you» está mal."
+        },
+        {
+          "incorrecto": "I want the check.",
+          "correcto": "Could I have the check, please?",
+          "explicacion": "Calco de «quiero la cuenta». Con I want suena brusco; mejor Could I have… please?"
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo llegan a un restaurante; Tom es el mesero.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "A table for two?",
+            "traduccion": "¿Mesa para dos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, please. Could I have the menu?",
+            "traduccion": "Sí, por favor. ¿Me podría traer el menú?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'd like the salad, please.",
+            "traduccion": "Quisiera la ensalada, por favor."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Sorry, can you repeat that?",
+            "traduccion": "Perdón, ¿puede repetir eso?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The salad, please.",
+            "traduccion": "La ensalada, por favor."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And can I have some water?",
+            "traduccion": "¿Y me da agua?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pide Ana?",
+          "opciones": [
+            {
+              "es": "El menú y agua."
+            },
+            {
+              "es": "La ensalada."
+            },
+            {
+              "es": "La cuenta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana pide «the menu» y luego «some water». La ensalada la pide Leo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "A table for two? Yes, please.",
+          "es": "¿Mesa para dos? Sí, por favor.",
+          "nota": "El mesero ofrece la mesa y el cliente acepta."
+        },
+        {
+          "indice": 1,
+          "en": "Could I have the menu, please?",
+          "es": "¿Me podría traer el menú, por favor?",
+          "nota": "El cliente pide el menú con cortesía."
+        },
+        {
+          "indice": 2,
+          "en": "I'd like the salad, please.",
+          "es": "Quisiera la ensalada, por favor.",
+          "nota": "I'd like sirve para elegir el plato."
+        },
+        {
+          "indice": 3,
+          "en": "Can I have some water? Sure.",
+          "es": "¿Me da agua? Claro.",
+          "nota": "El cliente pide con Can I have y el mesero acepta con Sure."
+        },
+        {
+          "indice": 4,
+          "en": "Sorry, can you repeat that?",
+          "es": "Perdón, ¿puede repetir eso?",
+          "nota": "Frase para cuando no entiendes al mesero."
+        },
+        {
+          "indice": 5,
+          "en": "Could I have the check, please?",
+          "es": "¿Me podría traer la cuenta, por favor?",
+          "nota": "El diálogo termina pidiendo la cuenta."
+        }
+      ]
+    }
+  }
+}

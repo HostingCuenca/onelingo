@@ -1,0 +1,875 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Sin P0/P1. Género/trama/personaje/reacción, although/however/because (puntuación y «although… but»), postura/razón/reserva/audiencia, reseña equilibrada y recomendación por audiencia: correctos y alineados con los ejercicios.",
+      "class-76: ejemplo 5 «A mystery follows a chef searching for a recipe, and it made the reader curious» → «This mystery follows a chef who searches for a recipe, and it made me curious.» (más natural; coincide con el patrón).",
+      "class-77: ejemplo 1, traducción «el final es fuerte» (calco) → «el final es potente».",
+      "class-79: ejemplo 2, «atrapante» (regional) → «apasionante».",
+      "P2 sin cambio: class-76 error «It is comedy» es menos típico de transferencia (el español dice «una comedia»), pero es un error real de aprendices y la explicación lo aclara.",
+      "Avisos del validador por opciones en español: revisados, ítems con una sola respuesta correcta."
+    ]
+  },
+  "classes": {
+    "en.n3.class-76": {
+      "explicacion": {
+        "titulo": "Hablar de una historia: género, trama, personaje y reacción",
+        "texto": "Para hablar de un libro, una película o un pódcast, separa cuatro partes. Género, el tipo de historia: It is a mystery / a comedy / a drama. Trama, lo que pasa, en presente y sin contar el final: A nurse finds a hidden letter. Personaje, quién es y cómo es: The main character is a determined student. Reacción, cómo te hizo sentir: It made me curious; I laughed a lot. Ojo: «es una comedia» lleva a (It is a comedy) y «una película de misterio» es a mystery film, no a film of mystery."
+      },
+      "patron": {
+        "texto": "Género + trama + reacción:",
+        "formula": [
+          {
+            "texto": "It is a mystery",
+            "nota": "género: con a"
+          },
+          {
+            "texto": "about a chef who searches for a recipe,",
+            "nota": "trama: qué pasa, sin el final"
+          },
+          {
+            "texto": "and it made me curious.",
+            "nota": "reacción: made me + adjetivo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Pregunta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "género"
+            },
+            {
+              "texto": "¿Qué tipo de historia es?"
+            },
+            {
+              "texto": "It is a comedy."
+            }
+          ],
+          [
+            {
+              "texto": "trama"
+            },
+            {
+              "texto": "¿Qué pasa?"
+            },
+            {
+              "texto": "Two cousins open a café."
+            }
+          ],
+          [
+            {
+              "texto": "personaje"
+            },
+            {
+              "texto": "¿Quién es y cómo es?"
+            },
+            {
+              "texto": "The main character is a determined student."
+            }
+          ],
+          [
+            {
+              "texto": "reacción"
+            },
+            {
+              "texto": "¿Cómo me sentí?"
+            },
+            {
+              "texto": "It made me happy."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is comedy.",
+          "correcto": "It is a comedy.",
+          "explicacion": "Con un nombre contable en singular hace falta a: a comedy, a mystery."
+        },
+        {
+          "incorrecto": "It is a film of mystery.",
+          "correcto": "It is a mystery film.",
+          "explicacion": "Calco de «película de misterio»: en inglés, mystery va delante de film."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pregunta a Tom por la película que vio anoche en casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What film did you watch?",
+            "traduccion": "¿Qué película viste?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is a comedy about two brothers and their dog.",
+            "traduccion": "Es una comedia sobre dos hermanos y su perro."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What happens?",
+            "traduccion": "¿Qué pasa?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The dog finds an old map in the garden.",
+            "traduccion": "El perro encuentra un mapa viejo en el jardín."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Did you like it?",
+            "traduccion": "¿Te gustó?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes! The little brother is my favourite character. I laughed all the time.",
+            "traduccion": "¡Sí! El hermano pequeño es mi personaje favorito. Me reí todo el tiempo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pasa en la película?",
+          "opciones": [
+            {
+              "es": "El perro encuentra un mapa viejo en el jardín."
+            },
+            {
+              "es": "Dos hermanos abren un café."
+            },
+            {
+              "es": "Un perro se pierde en el parque."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom cuenta la trama: «The dog finds an old map in the garden»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "It is a mystery.",
+          "es": "Es un misterio.",
+          "nota": "Género: el tipo de historia, con a."
+        },
+        {
+          "indice": 1,
+          "en": "A student finds an old key in her garden.",
+          "es": "Una estudiante encuentra una llave vieja en su jardín.",
+          "nota": "Trama: qué pasa, sin contar el final."
+        },
+        {
+          "indice": 2,
+          "en": "The main character is a determined student.",
+          "es": "La protagonista es una estudiante decidida.",
+          "nota": "Personaje: quién es y cómo es."
+        },
+        {
+          "indice": 3,
+          "en": "The film made me happy.",
+          "es": "La película me hizo feliz.",
+          "nota": "Reacción: made me + adjetivo."
+        },
+        {
+          "indice": 4,
+          "en": "It is science fiction, and it made me curious.",
+          "es": "Es ciencia ficción y me dio curiosidad.",
+          "nota": "Género y reacción: un dato y un sentimiento."
+        },
+        {
+          "indice": 5,
+          "en": "This mystery follows a chef who searches for a recipe, and it made me curious.",
+          "es": "Este misterio sigue a una chef que busca una receta, y me dio curiosidad.",
+          "nota": "Género, trama, personaje y reacción en una frase."
+        }
+      ]
+    },
+    "en.n3.class-77": {
+      "explicacion": {
+        "titulo": "Although, however y because",
+        "texto": "Para dar una opinión equilibrada, une ideas con conectores. Although (aunque) va dentro de una sola oración y le sigue sujeto + verbo: Although the film is long, it stays engaging. However (sin embargo) empieza una segunda oración, o va tras punto y coma, y lleva coma detrás: The opening is slow. However, the ending is strong. Because (porque) da la razón: I recommend it because the dialogue is clear. No cambies la relación: contraste con although/however; causa con because. Error típico: usar although y but juntos."
+      },
+      "patron": {
+        "texto": "Contraste + opinión + razón:",
+        "formula": [
+          {
+            "texto": "Although the plot is simple,",
+            "nota": "although + sujeto + verbo, coma"
+          },
+          {
+            "texto": "the characters are memorable.",
+            "nota": "la idea principal"
+          },
+          {
+            "texto": "I recommend it",
+            "nota": "la opinión"
+          },
+          {
+            "texto": "because they feel real.",
+            "nota": "because + la razón"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "although"
+            },
+            {
+              "texto": "aunque (en la misma oración)"
+            },
+            {
+              "texto": "Although the book is long, it is easy to read."
+            }
+          ],
+          [
+            {
+              "texto": "however"
+            },
+            {
+              "texto": "sin embargo (segunda oración)"
+            },
+            {
+              "texto": "The film is quiet. However, the music is good."
+            }
+          ],
+          [
+            {
+              "texto": "because"
+            },
+            {
+              "texto": "porque (la razón)"
+            },
+            {
+              "texto": "I like the series because the actors are interesting."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although the film is long, but it is fun.",
+          "correcto": "Although the film is long, it is fun.",
+          "explicacion": "En español se puede decir «aunque…, pero…»; en inglés, although no va con but."
+        },
+        {
+          "incorrecto": "The opening is slow, however the ending is strong.",
+          "correcto": "The opening is slow; however, the ending is strong.",
+          "explicacion": "Antes de however va punto o punto y coma, y detrás, una coma."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le pregunta a Mia por el libro que está leyendo.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Do you like your new book, Mia?",
+            "traduccion": "¿Te gusta tu libro nuevo, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. Although it is long, it is easy to read.",
+            "traduccion": "Sí. Aunque es largo, es fácil de leer."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Do you recommend it?",
+            "traduccion": "¿Lo recomiendas?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, because the characters are interesting.",
+            "traduccion": "Sí, porque los personajes son interesantes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "However, the ending is a little sad.",
+            "traduccion": "Sin embargo, el final es un poco triste."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué recomienda Mia el libro?",
+          "opciones": [
+            {
+              "es": "Porque los personajes son interesantes."
+            },
+            {
+              "es": "Porque es corto."
+            },
+            {
+              "es": "Porque el final es feliz."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «because the characters are interesting». Because da la razón; however presenta el límite."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Although the book is long, it is easy to read.",
+          "es": "Aunque el libro es largo, es fácil de leer.",
+          "nota": "Although + frase completa, coma, idea principal."
+        },
+        {
+          "indice": 1,
+          "en": "The opening is slow. However, the ending is strong.",
+          "es": "El inicio es lento. Sin embargo, el final es potente.",
+          "nota": "However empieza la segunda oración y lleva coma."
+        },
+        {
+          "indice": 2,
+          "en": "I recommend the series because the actors are convincing.",
+          "es": "Recomiendo la serie porque los actores son convincentes.",
+          "nota": "Because da la razón de la opinión."
+        },
+        {
+          "indice": 3,
+          "en": "The music is good; however, the story is weak.",
+          "es": "La música es buena; sin embargo, la historia es floja.",
+          "nota": "Una opinión equilibrada elogia y pone un límite."
+        },
+        {
+          "indice": 4,
+          "en": "Although the story is sad, it has a hopeful ending.",
+          "es": "Aunque la historia es triste, tiene un final esperanzador.",
+          "nota": "Although mantiene el contraste; no lo cambies por because."
+        },
+        {
+          "indice": 5,
+          "en": "Although the opening is slow, the characters are strong; I recommend it because they feel real.",
+          "es": "Aunque el inicio es lento, los personajes son sólidos; la recomiendo porque parecen reales.",
+          "nota": "Contraste y razón en una misma opinión."
+        }
+      ]
+    },
+    "en.n3.class-78": {
+      "explicacion": {
+        "titulo": "Qué piensa quien escribe la reseña",
+        "texto": "Para entender qué piensa quien escribe una reseña, busca cuatro pistas. Postura: I recommend it (a favor) o I would not recommend it (en contra). Razones: rasgos concretos, a menudo tras because: because the acting is strong. Reserva: un límite, tras however o but: However, the final scene is long. Audiencia: a quién le puede gustar: Some viewers may enjoy the style. No adivines: justifica con palabras del texto. Una reserva no cambia la postura: se puede recomendar algo con un límite."
+      },
+      "patron": {
+        "texto": "Postura + razón + reserva:",
+        "formula": [
+          {
+            "texto": "I recommend the book",
+            "nota": "postura: a favor"
+          },
+          {
+            "texto": "because the dialogue sounds natural.",
+            "nota": "razón: un rasgo concreto"
+          },
+          {
+            "texto": "However, the first chapter is slow.",
+            "nota": "reserva: however + el límite"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pista",
+          "Palabras clave",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "postura"
+            },
+            {
+              "texto": "recommend / would not recommend"
+            },
+            {
+              "texto": "I would not recommend the series."
+            }
+          ],
+          [
+            {
+              "texto": "razón"
+            },
+            {
+              "texto": "because + rasgo"
+            },
+            {
+              "texto": "because the voices are clear"
+            }
+          ],
+          [
+            {
+              "texto": "reserva"
+            },
+            {
+              "texto": "however, but"
+            },
+            {
+              "texto": "However, the ending is too quick."
+            }
+          ],
+          [
+            {
+              "texto": "audiencia"
+            },
+            {
+              "texto": "may enjoy"
+            },
+            {
+              "texto": "Some readers may enjoy the style."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I no recommend it.",
+          "correcto": "I would not recommend it.",
+          "explicacion": "Para negar se usa un auxiliar: I would not recommend it o I do not recommend it."
+        },
+        {
+          "incorrecto": "I recommend you this film.",
+          "correcto": "I recommend this film to you.",
+          "explicacion": "Calco de «te recomiendo»: primero lo que recomiendas y después to + persona."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Ana por una película de misterio que ella vio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you like the new mystery film?",
+            "traduccion": "¿Te gustó la nueva película de misterio?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, I recommend it because the story is original.",
+            "traduccion": "Sí, la recomiendo porque la historia es original."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is the music good?",
+            "traduccion": "¿La música es buena?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The music is good. However, the ending is very long.",
+            "traduccion": "La música es buena. Sin embargo, el final es muy largo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My little sister likes short films.",
+            "traduccion": "A mi hermana pequeña le gustan las películas cortas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then she may not enjoy it.",
+            "traduccion": "Entonces puede que no le guste."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la reserva de Ana?",
+          "opciones": [
+            {
+              "es": "El final es muy largo."
+            },
+            {
+              "es": "La historia no es original."
+            },
+            {
+              "es": "La música es mala."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «However, the ending is very long». However introduce la reserva, pero ella sigue recomendando la película."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I recommend the podcast.",
+          "es": "Recomiendo el pódcast.",
+          "nota": "Postura positiva."
+        },
+        {
+          "indice": 1,
+          "en": "I would not choose this series.",
+          "es": "Yo no elegiría esta serie.",
+          "nota": "Postura negativa."
+        },
+        {
+          "indice": 2,
+          "en": "The acting is strong, and the plot is original.",
+          "es": "La actuación es buena y la trama es original.",
+          "nota": "Razones: rasgos concretos como evidencia."
+        },
+        {
+          "indice": 3,
+          "en": "However, the first chapter is slow.",
+          "es": "Sin embargo, el primer capítulo es lento.",
+          "nota": "However introduce la reserva que limita el elogio."
+        },
+        {
+          "indice": 4,
+          "en": "Some readers may enjoy the style.",
+          "es": "Puede que a algunos lectores les guste el estilo.",
+          "nota": "Audiencia: suaviza una reseña negativa."
+        },
+        {
+          "indice": 5,
+          "en": "I recommend the mystery because the plot is careful. However, the opening is slow.",
+          "es": "Recomiendo el misterio porque la trama está cuidada. Sin embargo, el inicio es lento.",
+          "nota": "Postura, razón y reserva juntas."
+        }
+      ]
+    },
+    "en.n3.class-79": {
+      "explicacion": {
+        "titulo": "Escribir una reseña equilibrada",
+        "texto": "Una reseña equilibrada tiene cinco partes. 1) Contexto mínimo, sin el final: This mystery follows a student who finds messages in a closed library. 2) Dos razones concretas: The setting is tense, and the main character is convincing because her choices are believable. 3) Un límite con although o however: Although the opening is slow, the mystery becomes engaging. 4) Audiencia: I recommend it to readers who enjoy quiet mysteries. 5) Nada de spoilers. Ojo: «ambiente» es atmosphere, no ambient."
+      },
+      "patron": {
+        "texto": "Recomendación + audiencia:",
+        "formula": [
+          {
+            "texto": "I recommend it",
+            "nota": "la recomendación"
+          },
+          {
+            "texto": "to readers",
+            "nota": "to + a quién"
+          },
+          {
+            "texto": "who enjoy careful clues.",
+            "nota": "who + lo que le gusta a esa audiencia"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "contexto"
+            },
+            {
+              "texto": "This mystery follows a student in a closed library."
+            }
+          ],
+          [
+            {
+              "texto": "razón"
+            },
+            {
+              "texto": "The setting is tense."
+            }
+          ],
+          [
+            {
+              "texto": "límite"
+            },
+            {
+              "texto": "Although the opening is slow, the mystery is engaging."
+            }
+          ],
+          [
+            {
+              "texto": "audiencia"
+            },
+            {
+              "texto": "I recommend it to readers who like careful clues."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The story has a tense ambient.",
+          "correcto": "The story has a tense atmosphere.",
+          "explicacion": "Falso amigo: «ambiente» de una historia es atmosphere."
+        },
+        {
+          "incorrecto": "I recommend it to readers who enjoys quiet mysteries.",
+          "correcto": "I recommend it to readers who enjoy quiet mysteries.",
+          "explicacion": "Who se refiere a readers (plural): el verbo va sin -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo escribe una reseña de su libro para la escuela y habla con Mia.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I am writing a review of my book for school.",
+            "traduccion": "Estoy escribiendo una reseña de mi libro para la escuela."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is it a mystery?",
+            "traduccion": "¿Es un misterio?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. A student finds an old map in his grandma's house.",
+            "traduccion": "Sí. Un estudiante encuentra un mapa viejo en la casa de su abuela."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Do you tell the ending?",
+            "traduccion": "¿Cuentas el final?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No spoilers! Although the opening is slow, the clues are interesting.",
+            "traduccion": "¡Nada de spoilers! Aunque el inicio es lento, las pistas son interesantes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I recommend it to readers who enjoy maps and clues.",
+            "traduccion": "Se lo recomiendo a los lectores que disfrutan con mapas y pistas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué límite menciona Leo?",
+          "opciones": [
+            {
+              "es": "El inicio es lento."
+            },
+            {
+              "es": "Las pistas son malas."
+            },
+            {
+              "es": "El final es triste."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Although the opening is slow, the clues are interesting»: although presenta el límite."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "This mystery follows a student who finds messages in a closed library.",
+          "es": "Este misterio sigue a una estudiante que encuentra mensajes en una biblioteca cerrada.",
+          "nota": "Contexto mínimo: quién y dónde, sin el final."
+        },
+        {
+          "indice": 1,
+          "en": "The setting is tense, and the dialogue feels natural.",
+          "es": "La ambientación es tensa y el diálogo suena natural.",
+          "nota": "Dos razones concretas."
+        },
+        {
+          "indice": 2,
+          "en": "Although the opening is slow, the central mystery becomes engaging.",
+          "es": "Aunque el inicio es lento, el misterio central se vuelve apasionante.",
+          "nota": "Although equilibra elogio y límite."
+        },
+        {
+          "indice": 3,
+          "en": "I recommend it to readers who like careful clues.",
+          "es": "Se lo recomiendo a lectores a los que les gustan las pistas cuidadas.",
+          "nota": "Audiencia: to + quién + who + gusto."
+        },
+        {
+          "indice": 4,
+          "en": "The source does not give the ending, so the review has no spoilers.",
+          "es": "La fuente no da el final, así que la reseña no tiene spoilers.",
+          "nota": "No cuentes ni inventes el final."
+        },
+        {
+          "indice": 5,
+          "en": "The main character is convincing because her choices are believable.",
+          "es": "La protagonista es convincente porque sus decisiones son creíbles.",
+          "nota": "Because convierte el elogio en evidencia."
+        }
+      ]
+    },
+    "en.n3.class-80": {
+      "explicacion": {
+        "titulo": "Recomendar a una audiencia",
+        "texto": "Esta clase une el bloque. 1) Anota lo que necesita la audiencia: género, tono, duración y límites de contenido (nothing scary, under 100 minutes). 2) Compara las tres opciones con las mismas necesidades; descarta la que falle en una sola. 3) Presenta la elegida con género y trama, sin el final. 4) Equilibra con although, however o because. 5) Da una advertencia útil: However, the ending is predictable. Ojo: «dura 94 minutos» es lasts 94 minutes, no has 94 minutes."
+      },
+      "patron": {
+        "texto": "Recomendación + razón + advertencia:",
+        "formula": [
+          {
+            "texto": "I recommend the comedy",
+            "nota": "la obra elegida"
+          },
+          {
+            "texto": "because it meets every limit.",
+            "nota": "because + la razón"
+          },
+          {
+            "texto": "However, the ending is predictable.",
+            "nota": "la advertencia relevante"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "necesidades"
+            },
+            {
+              "texto": "The family wants a comedy under 100 minutes."
+            }
+          ],
+          [
+            {
+              "texto": "comparación"
+            },
+            {
+              "texto": "The first film is too long; the second is scary."
+            }
+          ],
+          [
+            {
+              "texto": "recomendación"
+            },
+            {
+              "texto": "I recommend the third film because it meets every limit."
+            }
+          ],
+          [
+            {
+              "texto": "advertencia"
+            },
+            {
+              "texto": "However, its ending is predictable."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The film has 94 minutes.",
+          "correcto": "The film lasts 94 minutes.",
+          "explicacion": "Calco de «tiene 94 minutos»: la duración se dice con last o con is 94 minutes long."
+        },
+        {
+          "incorrecto": "It is too much long for the club.",
+          "correcto": "It is too long for the club.",
+          "explicacion": "«Demasiado largo» es too long; too much va con nombres, no con adjetivos."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo, Mia y su padre Carlos eligen una película para ver en familia.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Tonight we want a comedy under one hundred minutes, and nothing scary.",
+            "traduccion": "Esta noche queremos una comedia de menos de cien minutos, y nada que dé miedo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The space film is short, but it is scary.",
+            "traduccion": "La película del espacio es corta, pero da miedo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What about the long comedy?",
+            "traduccion": "¿Y la comedia larga?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It lasts two hours, so it is too long.",
+            "traduccion": "Dura dos horas, así que es demasiado larga."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The dog comedy lasts ninety minutes. However, the ending is predictable.",
+            "traduccion": "La comedia del perro dura noventa minutos. Sin embargo, el final es previsible."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I recommend the dog comedy because it meets every limit.",
+            "traduccion": "Recomiendo la comedia del perro porque cumple todos los límites."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no eligen la película del espacio?",
+          "opciones": [
+            {
+              "es": "Porque da miedo."
+            },
+            {
+              "es": "Porque dura dos horas."
+            },
+            {
+              "es": "Porque tiene un final previsible."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «The space film is short, but it is scary». La duración es el problema de la comedia larga."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The club wants a hopeful mystery under 250 pages.",
+          "es": "El club quiere un misterio esperanzador de menos de 250 páginas.",
+          "nota": "Necesidades: género, tono y extensión."
+        },
+        {
+          "indice": 1,
+          "en": "Red Tower meets the page limit, but it has graphic violence.",
+          "es": "Red Tower cumple el límite de páginas, pero tiene violencia gráfica.",
+          "nota": "Compara cada opción con todas las necesidades."
+        },
+        {
+          "indice": 2,
+          "en": "Winter Map is short, but it is sad and has no mystery.",
+          "es": "Winter Map es corta, pero es triste y no tiene misterio.",
+          "nota": "Si una opción falla un límite, queda fuera."
+        },
+        {
+          "indice": 3,
+          "en": "Although the opening is slow, the story is hopeful.",
+          "es": "Aunque el inicio es lento, la historia es esperanzadora.",
+          "nota": "Un conector equilibra la valoración."
+        },
+        {
+          "indice": 4,
+          "en": "It is a mystery about a gardener who finds old letters.",
+          "es": "Es un misterio sobre una jardinera que encuentra cartas antiguas.",
+          "nota": "Contexto de la trama, sin revelar el final."
+        },
+        {
+          "indice": 5,
+          "en": "I recommend Garden Code to the club because it fits every need. However, its opening is slow.",
+          "es": "Recomiendo Garden Code al club porque cumple todas las necesidades. Sin embargo, su inicio es lento.",
+          "nota": "Recomendación con razón y advertencia."
+        }
+      ]
+    }
+  }
+}

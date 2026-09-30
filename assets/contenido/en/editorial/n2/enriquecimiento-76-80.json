@@ -1,0 +1,622 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-76: «Pain suele ir sin a» → «Pain puede ir con o sin a: I have (a) pain in my back» (el ejercicio acepta ambas).",
+      "class-78: «El día y la hora van con for» → «El día va con for y la hora con at»; «before necesita algo detrás» matizado a «suele llevar» (before adverbial existe); contexto identifica a Sara como recepcionista.",
+      "class-80: Carlos pide la cita («I would like an appointment, please») antes de que Sara la dé; integra la forma de la clase 78.",
+      "class-77/79: should sin to/-s y pasados irregulares (falled/hurted, was wait) correctos; ítems con respuesta única.",
+      "Aceptado (P2): en los ejemplos de runtime de la clase 80 algunas traducciones omiten «please» («Recepción: Llega antes»); no es resumen ni metalenguaje."
+    ]
+  },
+  "classes": {
+    "en.n2.class-76": {
+      "explicacion": {
+        "titulo": "Síntomas: have a… y feel…",
+        "texto": "Para decir cómo estás hay dos estructuras. Have + a + síntoma para lo que «tienes»: I have a headache, a cough, a sore throat, a fever. Llevan a aunque en español digamos «tengo fiebre» o «tengo tos». Pain puede ir con o sin a: I have (a) pain in my back. Feel + adjetivo para cómo te sientes: I feel tired, I feel dizzy (no I have dizzy). Con he/she: has y feels. «Me duele la cabeza» se dice I have a headache."
+      },
+      "patron": {
+        "texto": "Sujeto + has/have + a + síntoma + and feels/feel + adjetivo:",
+        "formula": [
+          {
+            "texto": "She has",
+            "nota": "have/has: lo que tienes"
+          },
+          {
+            "texto": "a cough",
+            "nota": "a + síntoma"
+          },
+          {
+            "texto": "and feels",
+            "nota": "feel/feels: cómo te sientes"
+          },
+          {
+            "texto": "dizzy.",
+            "nota": "adjetivo: tired, dizzy"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "have / has + a + síntoma",
+          "feel / feels + adjetivo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I have a headache."
+            },
+            {
+              "texto": "I feel tired."
+            }
+          ],
+          [
+            {
+              "texto": "She has a cough."
+            },
+            {
+              "texto": "She feels dizzy."
+            }
+          ],
+          [
+            {
+              "texto": "He has a fever."
+            },
+            {
+              "texto": "He feels tired."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have fever and headache.",
+          "correcto": "I have a fever and a headache.",
+          "explicacion": "Estos síntomas llevan a delante, aunque en español no lleven artículo."
+        },
+        {
+          "incorrecto": "I have dizzy.",
+          "correcto": "I feel dizzy.",
+          "explicacion": "Dizzy es un adjetivo: va con feel, no con have."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo no se siente bien por la mañana y habla con su madre, Ana.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Leo, how do you feel?",
+            "traduccion": "Leo, ¿cómo te sientes?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I feel tired, and I have a sore throat.",
+            "traduccion": "Me siento cansado y me duele la garganta."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Do you have a fever?",
+            "traduccion": "¿Tienes fiebre?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, but I have a cough.",
+            "traduccion": "No, pero tengo tos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK. You can stay at home today.",
+            "traduccion": "Vale. Hoy puedes quedarte en casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué síntoma NO tiene Leo?",
+          "opciones": [
+            {
+              "es": "Fiebre."
+            },
+            {
+              "es": "Tos."
+            },
+            {
+              "es": "Dolor de garganta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo responde «No» a «Do you have a fever?». Sí tiene tos y dolor de garganta."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "I feel tired and I have a cough, but I do not have a fever.",
+          "es": "Me siento cansado y tengo tos, pero no tengo fiebre.",
+          "nota": "Describe solo lo que notas: have para el síntoma y feel para el estado."
+        }
+      ]
+    },
+    "en.n2.class-77": {
+      "explicacion": {
+        "titulo": "Consejos: should y shouldn't",
+        "texto": "Para dar un consejo se usa should + verbo base (deberías): You should rest. Para desaconsejar algo, shouldn't (should not): You shouldn't drive. Should es igual con todas las personas (she should, no she shoulds) y el verbo va sin to (should drink, no should to drink). Para decir cuándo pedir ayuda: If the problem does not improve, you should contact a professional. Un consejo solo recomienda: no es un diagnóstico ni una promesa."
+      },
+      "patron": {
+        "texto": "Sujeto + should / shouldn't + verbo base:",
+        "formula": [
+          {
+            "texto": "You",
+            "nota": "a quién aconsejas"
+          },
+          {
+            "texto": "should",
+            "nota": "consejo (shouldn't = desaconsejo)"
+          },
+          {
+            "texto": "rest and drink water.",
+            "nota": "verbo base, sin to"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You should to rest.",
+          "correcto": "You should rest.",
+          "explicacion": "Después de should va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "She shoulds drink water.",
+          "correcto": "She should drink water.",
+          "explicacion": "Should no cambia: no lleva -s con he/she."
+        }
+      ],
+      "situacion": {
+        "contexto": "Después de jugar en el parque, Tom no se siente bien y habla con su padre, Carlos.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I have a headache and I feel dizzy.",
+            "traduccion": "Me duele la cabeza y estoy mareado."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "You should sit down and drink water.",
+            "traduccion": "Deberías sentarte y beber agua."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Can I play with Leo later?",
+            "traduccion": "¿Puedo jugar con Leo más tarde?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No, you shouldn't play today. You should rest.",
+            "traduccion": "No, hoy no deberías jugar. Deberías descansar."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And if I do not feel better?",
+            "traduccion": "¿Y si no me siento mejor?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then we will call the doctor.",
+            "traduccion": "Entonces llamaremos al médico."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué no debería hacer Tom hoy?",
+          "opciones": [
+            {
+              "es": "Jugar."
+            },
+            {
+              "es": "Beber agua."
+            },
+            {
+              "es": "Sentarse."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «you shouldn't play today». Beber agua y sentarse son consejos con should."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "You feel tired, so you should rest and you shouldn't drive.",
+          "es": "Te sientes cansado, así que deberías descansar y no deberías conducir.",
+          "nota": "Should recomienda algo; shouldn't desaconseja algo. Es un consejo, no una certeza."
+        }
+      ]
+    },
+    "en.n2.class-78": {
+      "explicacion": {
+        "titulo": "Pedir y confirmar una cita",
+        "texto": "Para pedir una cita con cortesía: I would like to make an appointment (me gustaría pedir una cita); después de would like va to + verbo. El día va con for y la hora con at: for Tuesday at ten. Para comprobar un dato: Could you confirm the time, please? Las indicaciones de la clínica van en imperativo, verbo base sin sujeto: Please arrive ten minutes early and bring the form. «Diez minutos antes» se dice ten minutes early; before suele llevar algo detrás: before the appointment."
+      },
+      "patron": {
+        "texto": "I would like + to make an appointment + for + día + at + hora:",
+        "formula": [
+          {
+            "texto": "I would like",
+            "nota": "petición cortés"
+          },
+          {
+            "texto": "to make an appointment",
+            "nota": "to + verbo: pedir una cita"
+          },
+          {
+            "texto": "for Tuesday at ten.",
+            "nota": "for + día; at + hora"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I would like make an appointment.",
+          "correcto": "I would like to make an appointment.",
+          "explicacion": "Después de would like va to + verbo."
+        },
+        {
+          "incorrecto": "Please arrive ten minutes before.",
+          "correcto": "Please arrive ten minutes early.",
+          "explicacion": "Sin decir antes de qué, lo natural es early; before suele llevar algo detrás (before the appointment)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana llama a la clínica para pedir una cita para su hijo Leo y habla con Sara, la recepcionista.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Hello. I would like to make an appointment for my son.",
+            "traduccion": "Hola. Me gustaría pedir una cita para mi hijo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "We have Tuesday at ten.",
+            "traduccion": "Tenemos el martes a las diez."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Tuesday is good. Could you confirm the time, please?",
+            "traduccion": "El martes está bien. ¿Podría confirmar la hora, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Tuesday at ten. Please arrive ten minutes early and bring the form.",
+            "traduccion": "El martes a las diez. Por favor, lleguen diez minutos antes y traigan el formulario."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué hora deben llegar Ana y Leo a la clínica?",
+          "opciones": [
+            {
+              "es": "A las 9:50."
+            },
+            {
+              "es": "A las 10:00."
+            },
+            {
+              "es": "A las 10:10."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "La cita es a las diez y Sara dice «arrive ten minutes early»: a las 9:50."
+        }
+      }
+    },
+    "en.n2.class-79": {
+      "explicacion": {
+        "titulo": "Contar lo que pasó: pasado, while y then",
+        "texto": "Para contar lo que pasó se usa el pasado simple. Muchos verbos son irregulares: feel → felt, fall → fell, sit → sat, y hurt no cambia (hurt → hurt). Para una acción que estaba en curso se usa was/were + -ing después de while: while I was waiting (mientras esperaba). El orden se marca con yesterday (ayer), suddenly (de repente), then (después) y after + suceso (after the call). Cuenta los hechos en orden, sin adivinar la causa."
+      },
+      "patron": {
+        "texto": "Yesterday, while + was + -ing, + pasado simple:",
+        "formula": [
+          {
+            "texto": "Yesterday,",
+            "nota": "cuándo pasó"
+          },
+          {
+            "texto": "while I was waiting,",
+            "nota": "while + was + -ing: acción en curso"
+          },
+          {
+            "texto": "I suddenly felt dizzy",
+            "nota": "pasado simple: lo que pasó de repente"
+          },
+          {
+            "texto": "and fell.",
+            "nota": "otro hecho en pasado (fall → fell)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Pasado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "feel"
+            },
+            {
+              "texto": "felt"
+            }
+          ],
+          [
+            {
+              "texto": "fall"
+            },
+            {
+              "texto": "fell"
+            }
+          ],
+          [
+            {
+              "texto": "sit"
+            },
+            {
+              "texto": "sat"
+            }
+          ],
+          [
+            {
+              "texto": "hurt"
+            },
+            {
+              "texto": "hurt"
+            }
+          ],
+          [
+            {
+              "texto": "call"
+            },
+            {
+              "texto": "called"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I falled near the door and hurted my knee.",
+          "correcto": "I fell near the door and hurt my knee.",
+          "explicacion": "Fall y hurt son irregulares: fell y hurt, sin -ed."
+        },
+        {
+          "incorrecto": "While I was wait, I suddenly felt dizzy.",
+          "correcto": "While I was waiting, I suddenly felt dizzy.",
+          "explicacion": "Después de was, el verbo lleva -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le cuenta a Sara qué le pasó ayer en el parque.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What happened to your knee?",
+            "traduccion": "¿Qué le pasó a tu rodilla?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yesterday, while I was running in the park, I fell.",
+            "traduccion": "Ayer, mientras corría en el parque, me caí."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Oh no! Did you hurt your arm too?",
+            "traduccion": "¡Oh, no! ¿También te lastimaste el brazo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, only my knee. Then I sat down and called my mother.",
+            "traduccion": "No, solo la rodilla. Después me senté y llamé a mi madre."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And after the call?",
+            "traduccion": "¿Y después de la llamada?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "After the call, she came to the park.",
+            "traduccion": "Después de la llamada, ella vino al parque."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Mia justo después de caerse?",
+          "opciones": [
+            {
+              "es": "Se sentó y llamó a su madre."
+            },
+            {
+              "es": "Siguió corriendo en el parque."
+            },
+            {
+              "es": "Fue a la clínica con su madre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Then I sat down and called my mother»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Yesterday I fell and hurt my arm, but I do not know why.",
+          "es": "Ayer me caí y me lastimé el brazo, pero no sé por qué.",
+          "nota": "Cuenta los hechos en orden; si no sabes la causa, dilo."
+        }
+      ]
+    },
+    "en.n2.class-80": {
+      "explicacion": {
+        "titulo": "Conversación de salud: juntar todo",
+        "texto": "Esta conversación junta lo aprendido en la unidad, en orden. 1) Síntomas en presente: I have a headache and I feel dizzy. 2) Lo que pasó, en pasado: Yesterday I fell and hurt my knee. 3) Consejo con should: You should rest. 4) Cita con would like: I would like an appointment. 5) Instrucciones en imperativo y confirmación: Please arrive early. — Could you confirm the time? Estrategia: describe los hechos, no adivines la causa y confirma los datos al final."
+      },
+      "patron": {
+        "texto": "Síntoma → consejo → cita → confirmación:",
+        "formula": [
+          {
+            "texto": "Patient: I feel dizzy.",
+            "nota": "síntoma: feel + adjetivo"
+          },
+          {
+            "texto": "Health worker: You should rest.",
+            "nota": "consejo: should + verbo base"
+          },
+          {
+            "texto": "Receptionist: Please arrive early.",
+            "nota": "instrucción en imperativo"
+          },
+          {
+            "texto": "Patient: Could you confirm the time?",
+            "nota": "confirmar el dato de la cita"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "síntoma"
+            },
+            {
+              "texto": "have a… / feel…"
+            },
+            {
+              "texto": "I have a cough."
+            }
+          ],
+          [
+            {
+              "texto": "lo que pasó"
+            },
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "I fell and hurt my knee."
+            }
+          ],
+          [
+            {
+              "texto": "consejo"
+            },
+            {
+              "texto": "should + verbo"
+            },
+            {
+              "texto": "You should rest."
+            }
+          ],
+          [
+            {
+              "texto": "cita"
+            },
+            {
+              "texto": "would like"
+            },
+            {
+              "texto": "I would like an appointment."
+            }
+          ],
+          [
+            {
+              "texto": "confirmación"
+            },
+            {
+              "texto": "Could you confirm…?"
+            },
+            {
+              "texto": "Could you confirm the time?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Yesterday I fall and I hurt my knee.",
+          "correcto": "Yesterday I fell and hurt my knee.",
+          "explicacion": "Lo que pasó ayer va en pasado: fall → fell."
+        },
+        {
+          "incorrecto": "Could you confirm me the time?",
+          "correcto": "Could you confirm the time?",
+          "explicacion": "Confirm no lleva me detrás: se confirma algo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom se cayó en la escuela y su padre, Carlos, llama a la clínica. Sara es la recepcionista.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Hello. My son fell at school, and his arm hurts.",
+            "traduccion": "Hola. Mi hijo se cayó en la escuela y le duele el brazo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Does he feel dizzy?",
+            "traduccion": "¿Está mareado?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No, but he has pain in his arm. I would like an appointment, please.",
+            "traduccion": "No, pero tiene dolor en el brazo. Me gustaría pedir una cita, por favor."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "He should rest. His appointment is on Friday at two.",
+            "traduccion": "Debería descansar. Su cita es el viernes a las dos."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Could you confirm the time, please?",
+            "traduccion": "¿Podría confirmar la hora, por favor?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Friday at two. Please arrive early and bring the form.",
+            "traduccion": "El viernes a las dos. Por favor, lleguen temprano y traigan el formulario."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pasa a Tom?",
+          "opciones": [
+            {
+              "es": "Le duele el brazo."
+            },
+            {
+              "es": "Está mareado."
+            },
+            {
+              "es": "Tiene fiebre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «his arm hurts» y responde «No» a «Does he feel dizzy?»."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,628 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-66: destino «Sol» (nombre libre, no ciudad) → «York», ya usado en la clase; contexto aclara que Carlos vende los billetes.",
+      "class-67–70: explicaciones, patrones, errores (ticket of return / the platform four, opposite of / in the museum, lost the bus / delay, where is… dentro de pregunta / contact with, if + will / will to) y situaciones correctos; ítems con una sola respuesta.",
+      "Aceptado: avisos del validador «la opción correcta apenas aparece» (opciones en español, respondibles leyendo el diálogo).",
+      "Aceptado (P2): ejemplos restantes tipo consejo («Reserve the return ticket and confirm the platform», «Confirm where to ask for help…») son frases reales, no metalenguaje."
+    ]
+  },
+  "classes": {
+    "en.n2.class-66": {
+      "explicacion": {
+        "titulo": "Pedir billetes: single, return, fare y platform",
+        "texto": "Para pedir un billete se dice tipo de billete + to + destino y please al final: A return ticket to Bath, please. Single ticket es «billete de ida» y return ticket, «de ida y vuelta». Para sonar más cortés, empieza con I would like: I would like a single ticket to Oxford for 10:30. El destino va con to. El andén se dice platform + número, sin the: from platform four. Fare es el precio del viaje y departure, la salida."
+      },
+      "patron": {
+        "texto": "(I would like) + tipo de billete + to + destino + (for + hora) + please:",
+        "formula": [
+          {
+            "texto": "I would like",
+            "nota": "petición cortés"
+          },
+          {
+            "texto": "a single ticket",
+            "nota": "tipo: single = ida; return = ida y vuelta"
+          },
+          {
+            "texto": "to Oxford",
+            "nota": "to + destino"
+          },
+          {
+            "texto": "for 10:30, please.",
+            "nota": "for + hora de salida; please al final"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "single ticket"
+            },
+            {
+              "texto": "billete de ida"
+            },
+            {
+              "texto": "A single ticket to Bath"
+            }
+          ],
+          [
+            {
+              "texto": "return ticket"
+            },
+            {
+              "texto": "billete de ida y vuelta"
+            },
+            {
+              "texto": "A return ticket to York"
+            }
+          ],
+          [
+            {
+              "texto": "fare"
+            },
+            {
+              "texto": "precio del viaje"
+            },
+            {
+              "texto": "The fare is twelve pounds."
+            }
+          ],
+          [
+            {
+              "texto": "platform"
+            },
+            {
+              "texto": "andén"
+            },
+            {
+              "texto": "from platform four"
+            }
+          ],
+          [
+            {
+              "texto": "departure"
+            },
+            {
+              "texto": "salida"
+            },
+            {
+              "texto": "The departure is at 9:20."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "A ticket of return to Bath, please.",
+          "correcto": "A return ticket to Bath, please.",
+          "explicacion": "El tipo de billete va delante de ticket: return ticket. No se traduce «de vuelta» con of."
+        },
+        {
+          "incorrecto": "The train leaves from the platform four.",
+          "correcto": "The train leaves from platform four.",
+          "explicacion": "Con platform + número no se usa the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y su hijo Leo le compran a Carlos billetes de tren para visitar a la abuela en York.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Two return tickets to York, please.",
+            "traduccion": "Dos billetes de ida y vuelta a York, por favor."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The fare is ten euros.",
+            "traduccion": "La tarifa es de diez euros."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "When is the departure?",
+            "traduccion": "¿Cuándo es la salida?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "At 9:20, from platform six.",
+            "traduccion": "A las 9:20, desde el andén seis."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Can I carry the tickets?",
+            "traduccion": "¿Puedo llevar yo los billetes?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué billetes compra Sara?",
+          "opciones": [
+            {
+              "es": "Dos billetes de ida y vuelta."
+            },
+            {
+              "es": "Dos billetes de ida."
+            },
+            {
+              "es": "Un billete de ida y vuelta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara pide «Two return tickets»: return ticket es de ida y vuelta."
+        }
+      }
+    },
+    "en.n2.class-67": {
+      "explicacion": {
+        "titulo": "Dar indicaciones con puntos de referencia",
+        "texto": "Para dar indicaciones se usa el imperativo: el verbo en forma base, sin sujeto: Go past the bank, cross the bridge, turn left. Un landmark (punto de referencia) dice dónde girar: turn left at the museum (at + lugar). Para decir dónde está algo: opposite the library (enfrente de), on the corner (en la esquina). Ojo: en español decimos «enfrente de», pero opposite va sin of: opposite the hotel."
+      },
+      "patron": {
+        "texto": "Go past + lugar + and turn left/right + at + lugar:",
+        "formula": [
+          {
+            "texto": "Go past the bank",
+            "nota": "sigue más allá de un lugar"
+          },
+          {
+            "texto": "and turn left",
+            "nota": "gira: left (izquierda) / right (derecha)"
+          },
+          {
+            "texto": "at the museum.",
+            "nota": "at + punto de referencia donde giras"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "go past"
+            },
+            {
+              "texto": "pasar de largo"
+            },
+            {
+              "texto": "Go past the church."
+            }
+          ],
+          [
+            {
+              "texto": "cross"
+            },
+            {
+              "texto": "cruzar"
+            },
+            {
+              "texto": "Cross the bridge."
+            }
+          ],
+          [
+            {
+              "texto": "turn left at"
+            },
+            {
+              "texto": "girar a la izquierda en"
+            },
+            {
+              "texto": "Turn left at the museum."
+            }
+          ],
+          [
+            {
+              "texto": "opposite"
+            },
+            {
+              "texto": "enfrente de"
+            },
+            {
+              "texto": "opposite the library"
+            }
+          ],
+          [
+            {
+              "texto": "on the corner"
+            },
+            {
+              "texto": "en la esquina"
+            },
+            {
+              "texto": "The café is on the corner."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The station is opposite of the library.",
+          "correcto": "The station is opposite the library.",
+          "explicacion": "Opposite va sin of: no se traduce el «de» de «enfrente de»."
+        },
+        {
+          "incorrecto": "Turn left in the museum.",
+          "correcto": "Turn left at the museum.",
+          "explicacion": "El punto donde giras va con at; in significaría «dentro del museo»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le explica a Tom cómo llegar a su casa desde el parque.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "How do I get to your house from the park?",
+            "traduccion": "¿Cómo llego a tu casa desde el parque?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Cross the bridge and go past the library.",
+            "traduccion": "Cruza el puente y pasa la biblioteca."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And then?",
+            "traduccion": "¿Y después?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Turn left at the café. My house is opposite the shop.",
+            "traduccion": "Gira a la izquierda en la cafetería. Mi casa está enfrente de la tienda."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "On the corner?",
+            "traduccion": "¿En la esquina?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, on the corner.",
+            "traduccion": "Sí, en la esquina."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde tiene que girar Tom?",
+          "opciones": [
+            {
+              "es": "En la cafetería."
+            },
+            {
+              "es": "En la biblioteca."
+            },
+            {
+              "es": "En la tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Turn left at the café». La biblioteca solo la pasa de largo."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Go past the bank and turn left at the museum.",
+          "es": "Pasa el banco y gira a la izquierda en el museo.",
+          "nota": "Go past = seguir más allá de un lugar; at marca el punto de referencia donde giras."
+        }
+      ]
+    },
+    "en.n2.class-68": {
+      "explicacion": {
+        "titulo": "Problemas de viaje: delayed, cancelled, missed",
+        "texto": "Para avisar de un problema se usa be + delayed o cancelled: The train is delayed (va con retraso, pero saldrá más tarde); The ferry is cancelled (no sale). El retraso se indica con by: delayed by forty minutes. Miss es «perder» un tren o autobús porque no llegas a tiempo: I missed the bus. No lo confundas con lose, que es perder un objeto. Para unir problema y solución usa so (así que): The train is cancelled, so take the replacement bus. Para la causa, because."
+      },
+      "patron": {
+        "texto": "Problema (be + delayed/cancelled) + so + solución:",
+        "formula": [
+          {
+            "texto": "The train",
+            "nota": "el servicio"
+          },
+          {
+            "texto": "is cancelled,",
+            "nota": "be + cancelled (no sale) / delayed (sale tarde)"
+          },
+          {
+            "texto": "so take the replacement bus.",
+            "nota": "so + lo que hay que hacer"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I lost the bus because I waited on the wrong platform.",
+          "correcto": "I missed the bus because I waited on the wrong platform.",
+          "explicacion": "Perder un transporte es miss; lose es perder un objeto."
+        },
+        {
+          "incorrecto": "The train is delay forty minutes.",
+          "correcto": "The train is delayed by forty minutes.",
+          "explicacion": "Se dice delayed, con -ed, y el tiempo de retraso va con by."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom esperan en la estación el tren para visitar a su abuela.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Look! The ten o'clock train is cancelled.",
+            "traduccion": "¡Mira! El tren de las diez está cancelado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh no. Is there a replacement bus?",
+            "traduccion": "¡Oh, no! ¿Hay un autobús sustitutorio?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, it leaves at 10:30.",
+            "traduccion": "Sí, sale a las 10:30."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the eleven o'clock train is delayed, so the bus is better.",
+            "traduccion": "Y el tren de las once va con retraso, así que el autobús es mejor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le pasa al tren de las diez?",
+          "opciones": [
+            {
+              "es": "No sale: está cancelado."
+            },
+            {
+              "es": "Sale más tarde: va con retraso."
+            },
+            {
+              "es": "Sale de otro andén."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «The ten o'clock train is cancelled». El que va con retraso es el de las once."
+        }
+      }
+    },
+    "en.n2.class-69": {
+      "explicacion": {
+        "titulo": "Pedir ayuda: Could you help me…? y Where can I…?",
+        "texto": "Para pedir ayuda con cortesía se usa Could you help me + verbo base…?: Could you help me find platform seven? Para preguntar por un lugar: Where is…? o Where can I + verbo…? (Where can I report a lost bag?). Si la pregunta va dentro de otra (Could you show me… / tell me…), después de where el orden es normal, lugar + verbo: Could you show me where platform three is? (no where is platform three). Antes de pedir, explica el problema: I am lost."
+      },
+      "patron": {
+        "texto": "Could you show me + where + lugar + is?",
+        "formula": [
+          {
+            "texto": "Could you",
+            "nota": "petición cortés"
+          },
+          {
+            "texto": "show me",
+            "nota": "muéstrame (tell me = dime)"
+          },
+          {
+            "texto": "where platform three",
+            "nota": "where + el lugar que buscas"
+          },
+          {
+            "texto": "is?",
+            "nota": "el verbo va al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could you show me where is the information desk?",
+          "correcto": "Could you show me where the information desk is?",
+          "explicacion": "Dentro de otra pregunta, el verbo va después del lugar."
+        },
+        {
+          "incorrecto": "I am lost. Could you help me contact with my hotel?",
+          "correcto": "I am lost. Could you help me contact my hotel?",
+          "explicacion": "Contact no lleva with: contact my hotel."
+        }
+      ],
+      "situacion": {
+        "contexto": "En la estación, Ana no encuentra su andén y le pide ayuda a Carlos, que trabaja allí.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Excuse me. Could you help me, please?",
+            "traduccion": "Perdone. ¿Podría ayudarme, por favor?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, of course.",
+            "traduccion": "Sí, claro."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I am lost. Could you show me where platform three is?",
+            "traduccion": "Estoy perdida. ¿Podría mostrarme dónde está el andén tres?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It is opposite the information desk.",
+            "traduccion": "Está enfrente del mostrador de información."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thank you! And where can I buy water?",
+            "traduccion": "¡Gracias! ¿Y dónde puedo comprar agua?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "In the shop on the corner.",
+            "traduccion": "En la tienda de la esquina."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿dónde está el andén tres?",
+          "opciones": [
+            {
+              "es": "Enfrente del mostrador de información."
+            },
+            {
+              "es": "En la esquina, al lado de la tienda."
+            },
+            {
+              "es": "Detrás de la tienda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «It is opposite the information desk». La tienda es para comprar agua."
+        }
+      }
+    },
+    "en.n2.class-70": {
+      "explicacion": {
+        "titulo": "Plan de viaje: will e if",
+        "texto": "Un plan de viaje reúne lo aprendido en la unidad y lo ordena: billete (reserve a return ticket), salida y andén (confirm the platform), ruta con referencias (go past the library) y un plan alternativo (backup plan) por si hay problemas. Para contar el plan usa I will + verbo base: I will reserve the tickets on Friday. Para el problema, if + presente y después will: If the train is cancelled, I will take the bus. Como en español («si se cancela»), después de if no va will."
+      },
+      "patron": {
+        "texto": "If + problema (presente), + I will + solución:",
+        "formula": [
+          {
+            "texto": "If the train is cancelled,",
+            "nota": "if + presente: el problema"
+          },
+          {
+            "texto": "I will take",
+            "nota": "will + verbo base: lo que harás"
+          },
+          {
+            "texto": "the replacement bus.",
+            "nota": "el plan alternativo"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del plan",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "billete"
+            },
+            {
+              "texto": "I will reserve a return ticket."
+            }
+          ],
+          [
+            {
+              "texto": "salida y andén"
+            },
+            {
+              "texto": "I will confirm the platform."
+            }
+          ],
+          [
+            {
+              "texto": "ruta"
+            },
+            {
+              "texto": "I will go past the museum."
+            }
+          ],
+          [
+            {
+              "texto": "plan alternativo"
+            },
+            {
+              "texto": "If the train is cancelled, I will take the bus."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the train will be cancelled, I will take the bus.",
+          "correcto": "If the train is cancelled, I will take the bus.",
+          "explicacion": "Después de if se usa el presente, no will."
+        },
+        {
+          "incorrecto": "I will to reserve the tickets on Friday.",
+          "correcto": "I will reserve the tickets on Friday.",
+          "explicacion": "Después de will va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara planean un viaje en tren para visitar a su abuela el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I will reserve two return tickets for Saturday.",
+            "traduccion": "Reservaré dos billetes de ida y vuelta para el sábado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. The departure is at 8:30 from platform two.",
+            "traduccion": "Bien. La salida es a las 8:30 desde el andén dos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And what is our backup plan?",
+            "traduccion": "¿Y cuál es nuestro plan alternativo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "If the train is cancelled, we will take the bus at 9:00.",
+            "traduccion": "Si el tren se cancela, tomaremos el autobús de las 9:00."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. I will confirm the platform on Saturday morning.",
+            "traduccion": "Vale. Confirmaré el andén el sábado por la mañana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el plan alternativo de Tom y Sara?",
+          "opciones": [
+            {
+              "es": "Tomar el autobús de las 9:00."
+            },
+            {
+              "es": "Salir a las 8:30 desde el andén dos."
+            },
+            {
+              "es": "Comprar billetes de ida el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «If the train is cancelled, we will take the bus at 9:00»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 3,
+          "en": "My backup plan is the bus if the train is cancelled.",
+          "es": "Mi plan alternativo es el autobús si se cancela el tren.",
+          "nota": "Backup plan es la solución preparada por si algo falla."
+        }
+      ]
+    }
+  }
+}

@@ -81,3 +81,18 @@ Registro acumulado por autores y revisores del enriquecimiento. No se corrigen e
 | n2.c69.p02, n2.c74.pg03 | Inglés en el campo `es` de relacionar; «taxi rank» no enseñado | autor N2 66–80 |
 | n2.c75.p03, n2.c77.pg02 | Inglés poco natural | autor N2 66–80 |
 | n2.c70.e03 | Respuesta ambigua entre peticiones de ayuda | autor N2 66–80 |
+| n1.c86–c90.e04 | Distractor basura «… today» | autor N1 81–100 |
+| n1.c88.p01, c88.e01, c88.e03 | «He reads today.»; clave «I read usually.» antinatural | autor N1 81–100 |
+| n1.c89.e01, n1.c89.e03 | Consignas vagas: evalúan simple/continuo, no and/but/or | autor N1 81–100 |
+| n1.c95.e01, n1.c95.e03 | Consigna y respuesta no coinciden (Alex/Jordan; «cita completa») | autor N1 81–100 |
+| n2.c94.pg02, n2.c97.p03 | Inglés en el campo `es` | autor N2 81–100 |
+| n2.c87.e01, n2.c99.p02 | Ambiguos (ningún pack cumple ambas condiciones) | autor N2 81–100 |
+| n2.c87.e02 | Respuesta en la consigna | autor N2 81–100 |
+| n2.c87.p01, n2.c89.e04 | La consigna no coincide con el audio/fuente | autor N2 81–100 |
+| n2.c90.e03, n2.c90.p02 | Modelo incoherente | autor N2 81–100 |
+| N2–N3 relacionar | El tercer par suele ser vocabulario de relleno añadido por el compilador (`normalized_exercise` completa hasta 3 pares) | autores N2/N3 |
+| n3.c67.pg01, c67.pg02, c67.p02 | Ambiguos: no se indica el verbo | autor N3 66–80 |
+| n3.c68.e04, c78.e04, c74.pg01, c74.p01, c80.pg02, c80.p01 | Texto fuente no visible: irresolubles | autor N3 66–80 |
+| n3.c69.pg03, n3.c69.p01 | El feedback contradice el índice de respuesta | autor N3 66–80 |
+| n3.c73.pg03, c73.p02, c73.e02 | La respuesta se dice en el audio | autor N3 66–80 |
+| n3.c73.e04, c68.p01, c72.e04 | Sin marcador; hablante confuso; inglés poco natural | autor N3 66–80 |

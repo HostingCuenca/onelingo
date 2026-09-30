@@ -1,0 +1,744 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 86,
+    "end": 90
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-88 (P1 corregido): la explicación y el error 2 decían que «I read usually» es incorrecto, pero la evaluación de la clase (e01 «I read usually.», e03 «They work usually.») lo da como respuesta correcta. Se retira esa regla del enriquecimiento para no contradecir el ejercicio y se sustituye el error por «She cooks now» → «She is cooking now». AVISO a contenido: esos dos ejercicios son inglés poco natural y contradicen las clases 56-58 (posición de usually); conviene corregirlos.",
+      "class-89: explicación del error «She is tired, but works» matizada (no es agramatical en sí; tras coma + but se repite el sujeto).",
+      "class-90: en la situación (acción de ahora) «so I stay home» → «so I am staying home», coherente con la clase 88 y con el ejercicio pg02; feedback ajustado.",
+      "class-87: traducción «Estoy escribiendo» → «Ahora estoy escribiendo» (recoge now).",
+      "Aceptado: opciones del ítem en español; nombre propio Rex (validado)."
+    ]
+  },
+  "classes": {
+    "en.n1.class-86": {
+      "explicacion": {
+        "titulo": "Lo que pasa ahora: am/is/are + -ing",
+        "texto": "Para hablar de lo que está pasando en este momento se usa el presente continuo: am/is/are + verbo con -ing. I am reading = estoy leyendo. La forma de be cambia con el sujeto: I am; he, she, it is; you, we, they are. Trampa: en español a veces decimos solo «leo ahora», pero en inglés no puedes quitar am/is/are: «I reading» está mal. También hace falta el -ing: «She is cook» está mal. Suele ir con now (ahora) o today (hoy)."
+      },
+      "patron": {
+        "texto": "Sujeto + am/is/are + verbo-ing:",
+        "formula": [
+          {
+            "texto": "She",
+            "nota": "sujeto: he/she/it"
+          },
+          {
+            "texto": "is",
+            "nota": "con she → is"
+          },
+          {
+            "texto": "cooking",
+            "nota": "verbo + -ing"
+          },
+          {
+            "texto": "now.",
+            "nota": "ahora, en este momento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Sujeto",
+          "Be",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I"
+            },
+            {
+              "texto": "am"
+            },
+            {
+              "texto": "I am reading."
+            }
+          ],
+          [
+            {
+              "texto": "he / she / it"
+            },
+            {
+              "texto": "is"
+            },
+            {
+              "texto": "She is cooking."
+            }
+          ],
+          [
+            {
+              "texto": "you / we / they"
+            },
+            {
+              "texto": "are"
+            },
+            {
+              "texto": "They are working."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I reading now.",
+          "correcto": "I am reading now.",
+          "explicacion": "En español basta con un verbo, pero en inglés el presente continuo necesita am/is/are delante del -ing."
+        },
+        {
+          "incorrecto": "She is cook now.",
+          "correcto": "She is cooking now.",
+          "explicacion": "Después de am/is/are el verbo lleva -ing: cook → cooking."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom visita a su amiga Mia un sábado por la mañana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, where is your mother?",
+            "traduccion": "Mia, ¿dónde está tu madre?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "She is cooking now.",
+            "traduccion": "Está cocinando ahora."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And your brothers?",
+            "traduccion": "¿Y tus hermanos?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "They are running in the park.",
+            "traduccion": "Están corriendo en el parque."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And you?",
+            "traduccion": "¿Y tú?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I am reading.",
+            "traduccion": "Estoy leyendo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace la madre de Mia?",
+          "opciones": [
+            {
+              "es": "Está cocinando."
+            },
+            {
+              "es": "Está leyendo."
+            },
+            {
+              "es": "Está corriendo en el parque."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «She is cooking now». Los hermanos corren y Mia lee."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I am reading now.",
+          "es": "Estoy leyendo ahora.",
+          "nota": "I → am + reading."
+        },
+        {
+          "indice": 1,
+          "en": "She is cooking today.",
+          "es": "Ella está cocinando hoy.",
+          "nota": "She → is + cooking."
+        },
+        {
+          "indice": 2,
+          "en": "They are working now.",
+          "es": "Están trabajando ahora.",
+          "nota": "They → are + working."
+        },
+        {
+          "indice": 3,
+          "en": "We are watching now.",
+          "es": "Estamos mirando ahora.",
+          "nota": "We → are + watching."
+        }
+      ]
+    },
+    "en.n1.class-87": {
+      "explicacion": {
+        "titulo": "Más acciones de ahora: cómo se forma el -ing",
+        "texto": "Esta clase amplía el presente continuo con más verbos: washing, writing, listening, playing. Regla del -ing: la mayoría solo añade -ing (play → playing, wash → washing); si el verbo termina en -e, se quita la e (write → writing); y run duplica la n (running). Úsalo para lo que ocurre en este momento, con now. Recuerda: siempre am/is/are delante. Ojo con listen: si dices qué escuchas, lleva to: I am listening to music."
+      },
+      "patron": {
+        "texto": "Sujeto + am/is/are + verbo-ing + now:",
+        "formula": [
+          {
+            "texto": "They",
+            "nota": "sujeto: you/we/they"
+          },
+          {
+            "texto": "are",
+            "nota": "con they → are"
+          },
+          {
+            "texto": "playing",
+            "nota": "play + -ing"
+          },
+          {
+            "texto": "now.",
+            "nota": "en este momento"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Con -ing",
+          "Regla"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "play / wash"
+            },
+            {
+              "texto": "playing / washing"
+            },
+            {
+              "texto": "se añade -ing"
+            }
+          ],
+          [
+            {
+              "texto": "write"
+            },
+            {
+              "texto": "writing"
+            },
+            {
+              "texto": "se quita la e"
+            }
+          ],
+          [
+            {
+              "texto": "run"
+            },
+            {
+              "texto": "running"
+            },
+            {
+              "texto": "se duplica la n"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She is writeing now.",
+          "correcto": "She is writing now.",
+          "explicacion": "Si el verbo termina en -e, la e se quita antes de -ing: write → writing."
+        },
+        {
+          "incorrecto": "I am listening music now.",
+          "correcto": "I am listening to music now.",
+          "explicacion": "En español «escucho música» no lleva preposición, pero en inglés es listen to + lo que escuchas."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos busca a su hermana Sara en casa.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Sara, where are you?",
+            "traduccion": "Sara, ¿dónde estás?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I am in my room. I am writing now.",
+            "traduccion": "Estoy en mi cuarto. Ahora estoy escribiendo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And Leo?",
+            "traduccion": "¿Y Leo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "He is playing with Rex in the park.",
+            "traduccion": "Está jugando con Rex en el parque."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "OK. I am listening to music.",
+            "traduccion": "Vale. Yo estoy escuchando música."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Leo?",
+          "opciones": [
+            {
+              "es": "Está jugando con Rex."
+            },
+            {
+              "es": "Está escribiendo en su cuarto."
+            },
+            {
+              "es": "Está escuchando música."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «He is playing with Rex in the park». Sara escribe y Carlos escucha música."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I am washing now.",
+          "es": "Estoy lavando ahora.",
+          "nota": "wash + -ing → washing."
+        },
+        {
+          "indice": 1,
+          "en": "She is writing now.",
+          "es": "Ella está escribiendo ahora.",
+          "nota": "write pierde la e: writing."
+        },
+        {
+          "indice": 2,
+          "en": "They are listening now.",
+          "es": "Están escuchando ahora.",
+          "nota": "listen + -ing → listening."
+        },
+        {
+          "indice": 3,
+          "en": "We are playing today.",
+          "es": "Estamos jugando hoy.",
+          "nota": "play + -ing → playing."
+        }
+      ]
+    },
+    "en.n1.class-88": {
+      "explicacion": {
+        "titulo": "Rutina o ahora: presente simple frente a continuo",
+        "texto": "El presente simple habla de rutinas: I read every day (leo todos los días), she works every day. El presente continuo habla de lo que pasa ahora: She is cooking now. Pistas: every day y usually → presente simple; now y today → presente continuo. No mezcles las dos formas: «I am read every day» está mal; o I read, o I am reading. Trampa: en español «cocina ahora» está bien, pero en inglés lo que pasa ahora lleva -ing: She is cooking now."
+      },
+      "patron": {
+        "texto": "Rutina (simple) frente a ahora (continuo):",
+        "formula": [
+          {
+            "texto": "She works every day.",
+            "nota": "rutina → presente simple (-s con she)"
+          },
+          {
+            "texto": "Today,",
+            "nota": "hoy, en este momento"
+          },
+          {
+            "texto": "she is cooking.",
+            "nota": "ahora → is + -ing"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Presente simple (rutina)",
+          "Presente continuo (ahora)"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I read every day."
+            },
+            {
+              "texto": "I am reading now."
+            }
+          ],
+          [
+            {
+              "texto": "She works every day."
+            },
+            {
+              "texto": "She is working today."
+            }
+          ],
+          [
+            {
+              "texto": "every day, usually"
+            },
+            {
+              "texto": "now, today"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am read every day.",
+          "correcto": "I read every day.",
+          "explicacion": "Para una rutina se usa el presente simple, sin am. Am solo va con el -ing: I am reading."
+        },
+        {
+          "incorrecto": "She cooks now.",
+          "correcto": "She is cooking now.",
+          "explicacion": "Calco de «cocina ahora». Para lo que pasa en este momento se usa is + -ing, no el presente simple."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom visita a su amiga Ana y pregunta por su familia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Where is your brother Leo?",
+            "traduccion": "¿Dónde está tu hermano Leo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "He is in the kitchen. He is cooking now.",
+            "traduccion": "Está en la cocina. Está cocinando ahora."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Does he cook every day?",
+            "traduccion": "¿Cocina todos los días?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. My mother usually cooks. Leo reads every day.",
+            "traduccion": "No. Normalmente cocina mi madre. Leo lee todos los días."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién cocina normalmente en casa de Ana?",
+          "opciones": [
+            {
+              "es": "Su madre."
+            },
+            {
+              "es": "Su hermano Leo."
+            },
+            {
+              "es": "Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «My mother usually cooks». Leo cocina hoy, pero su rutina es leer."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I read every day.",
+          "es": "Leo todos los días.",
+          "nota": "Every day indica rutina: presente simple, sin am."
+        },
+        {
+          "indice": 1,
+          "en": "She is cooking now.",
+          "es": "Está cocinando ahora.",
+          "nota": "Now: ocurre en este momento → is + -ing."
+        },
+        {
+          "indice": 2,
+          "en": "They work every day.",
+          "es": "Trabajan todos los días.",
+          "nota": "Rutina: presente simple, sin are."
+        },
+        {
+          "indice": 3,
+          "en": "He is reading today.",
+          "es": "Hoy está leyendo.",
+          "nota": "Today: acción de hoy → is + -ing."
+        }
+      ]
+    },
+    "en.n1.class-89": {
+      "explicacion": {
+        "titulo": "Unir ideas: and, but y or",
+        "texto": "And, but y or unen ideas. And (y) suma: I read and write. But (pero) marca un contraste: I want tea, but I have coffee. Or (o) presenta opciones, sobre todo en preguntas: Do you want tea or coffee? Con and puedes unir dos verbos del mismo sujeto (We study and work). Después de but suele ir una frase completa con su sujeto: She is tired, but she works. En inglés no cambian como «y/e» u «o/u»: siempre and y or."
+      },
+      "patron": {
+        "texto": "Idea 1 + conector + idea 2:",
+        "formula": [
+          {
+            "texto": "She is tired,",
+            "nota": "idea 1"
+          },
+          {
+            "texto": "but",
+            "nota": "pero: contraste"
+          },
+          {
+            "texto": "she works.",
+            "nota": "idea 2, con su sujeto"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Significa",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "and"
+            },
+            {
+              "texto": "y"
+            },
+            {
+              "texto": "I read and write."
+            }
+          ],
+          [
+            {
+              "texto": "but"
+            },
+            {
+              "texto": "pero"
+            },
+            {
+              "texto": "I want tea, but I have coffee."
+            }
+          ],
+          [
+            {
+              "texto": "or"
+            },
+            {
+              "texto": "o"
+            },
+            {
+              "texto": "Tea or coffee?"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She is tired, but works.",
+          "correcto": "She is tired, but she works.",
+          "explicacion": "En español se omite el sujeto («pero trabaja»). En inglés, cuando but va tras coma y une dos frases, se repite el sujeto: but she works."
+        },
+        {
+          "incorrecto": "Do you want tea and coffee?",
+          "correcto": "Do you want tea or coffee?",
+          "explicacion": "And significa «los dos». Para elegir uno se usa or."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom visita a su amiga Sara después de la escuela.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Tom, do you want tea or water?",
+            "traduccion": "Tom, ¿quieres té o agua?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Water, please. I like tea, but not today.",
+            "traduccion": "Agua, por favor. Me gusta el té, pero hoy no."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "OK. Water for you and tea for me.",
+            "traduccion": "Vale. Agua para ti y té para mí."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué toma Tom?",
+          "opciones": [
+            {
+              "es": "Agua."
+            },
+            {
+              "es": "Té."
+            },
+            {
+              "es": "Té y agua."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Water, please. I like tea, but not today». El té es para Sara."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I read and write.",
+          "es": "Leo y escribo.",
+          "nota": "And une dos acciones del mismo sujeto."
+        },
+        {
+          "indice": 1,
+          "en": "I want tea, but I have coffee.",
+          "es": "Quiero té, pero tengo café.",
+          "nota": "But introduce un contraste."
+        },
+        {
+          "indice": 2,
+          "en": "Do you want tea or coffee?",
+          "es": "¿Quieres té o café?",
+          "nota": "Or ofrece elegir entre dos opciones."
+        },
+        {
+          "indice": 3,
+          "en": "We study and work.",
+          "es": "Estudiamos y trabajamos.",
+          "nota": "And une study y work."
+        }
+      ]
+    },
+    "en.n1.class-90": {
+      "explicacion": {
+        "titulo": "Causa y consecuencia: because y so",
+        "texto": "Because (porque) da la causa: I stay home because it is raining. So (así que, por eso) da la consecuencia: It is raining, so I stay home. Es la misma idea en orden inverso: resultado + because + causa, o causa + so + resultado. Truco: si en español dirías «porque», usa because; si dirías «así que» o «por eso», usa so. Delante de so se suele poner coma. No uses because y so en la misma frase."
+      },
+      "patron": {
+        "texto": "Causa + so + resultado:",
+        "formula": [
+          {
+            "texto": "It is raining,",
+            "nota": "la causa"
+          },
+          {
+            "texto": "so",
+            "nota": "así que: introduce el resultado"
+          },
+          {
+            "texto": "I stay home.",
+            "nota": "el resultado"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Orden",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "because (porque)"
+            },
+            {
+              "texto": "resultado + because + causa"
+            },
+            {
+              "texto": "I stay home because it is raining."
+            }
+          ],
+          [
+            {
+              "texto": "so (así que)"
+            },
+            {
+              "texto": "causa + so + resultado"
+            },
+            {
+              "texto": "It is raining, so I stay home."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I stay home so it is raining.",
+          "correcto": "I stay home because it is raining.",
+          "explicacion": "La lluvia es la causa, así que va con because (porque). So introduce el resultado."
+        },
+        {
+          "incorrecto": "Because it is raining, so I stay home.",
+          "correcto": "It is raining, so I stay home.",
+          "explicacion": "Calco de «como llueve, así que…». En inglés se usa because o so, no los dos juntos."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo llama a su amiga Ana un sábado lluvioso.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Ana, are you at the park?",
+            "traduccion": "Ana, ¿estás en el parque?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. It is raining, so I am staying home.",
+            "traduccion": "No. Está lloviendo, así que me quedo en casa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I am at home. I am tired because I am studying today.",
+            "traduccion": "Yo estoy en casa. Estoy cansado porque hoy estoy estudiando."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I am reading because I have time.",
+            "traduccion": "Yo estoy leyendo porque tengo tiempo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Ana está en casa?",
+          "opciones": [
+            {
+              "es": "Porque está lloviendo."
+            },
+            {
+              "es": "Porque está cansada."
+            },
+            {
+              "es": "Porque está estudiando."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «It is raining, so I am staying home». Leo es quien está cansado porque estudia."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "I stay home because it is raining.",
+          "es": "Me quedo en casa porque está lloviendo.",
+          "nota": "Because introduce la causa: la lluvia."
+        },
+        {
+          "indice": 1,
+          "en": "It is raining, so I stay home.",
+          "es": "Está lloviendo, así que me quedo en casa.",
+          "nota": "So introduce el resultado; va después de coma."
+        },
+        {
+          "indice": 2,
+          "en": "I am tired because I work today.",
+          "es": "Estoy cansado porque hoy trabajo.",
+          "nota": "Because explica por qué estoy cansado."
+        },
+        {
+          "indice": 3,
+          "en": "I study because I have time.",
+          "es": "Estudio porque tengo tiempo.",
+          "nota": "Because + causa: tengo tiempo."
+        }
+      ]
+    }
+  }
+}

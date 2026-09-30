@@ -1,0 +1,557 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-84: contexto de la situación aclara que Carlos es de la empresa de reparaciones (antes no se sabía quién hablaba con Ana).",
+      "class-85: error 2, corrección alineada como par mínimo («the broken lamp» en ambas frases).",
+      "Aceptado: ejemplo 2 de class-85 («Keep simple evidence…») es un imperativo de consejo natural, no metalenguaje; resto de ejemplos imperativos (class-82, class-85) son frases reales.",
+      "Avisos «la opción correcta apenas aparece» esperables: opciones del ítem en español."
+    ]
+  },
+  "classes": {
+    "en.n2.class-81": {
+      "explicacion": {
+        "titulo": "Avisar de un problema en casa: there is… / is broken",
+        "texto": "Para contar un problema en casa hay dos estructuras. There is a + problema + lugar presenta algo nuevo: There is a leak under the sink (hay una fuga debajo del fregadero). The + objeto + is + estado dice cómo está algo concreto: The heating is broken, The drain is blocked. Broken y blocked son adjetivos, por eso van con is, como «está averiado». En español «hay» no lleva sujeto; en inglés hace falta there. Si suena la alarma de humo o huele a gas, no se repara nada: se sale y se llama a emergencias."
+      },
+      "patron": {
+        "texto": "There is a + problema + lugar:",
+        "formula": [
+          {
+            "texto": "There is",
+            "nota": "hay: presenta el problema"
+          },
+          {
+            "texto": "a leak",
+            "nota": "a + el problema"
+          },
+          {
+            "texto": "under the kitchen sink.",
+            "nota": "dónde está"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Problema",
+          "En inglés"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "fuga"
+            },
+            {
+              "texto": "There is a leak."
+            }
+          ],
+          [
+            {
+              "texto": "desagüe atascado"
+            },
+            {
+              "texto": "The drain is blocked."
+            }
+          ],
+          [
+            {
+              "texto": "corte de luz"
+            },
+            {
+              "texto": "There is a power cut."
+            }
+          ],
+          [
+            {
+              "texto": "calefacción averiada"
+            },
+            {
+              "texto": "The heating is broken."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Is a leak under the sink.",
+          "correcto": "There is a leak under the sink.",
+          "explicacion": "«Hay» se dice there is: en inglés la frase no puede empezar sin sujeto."
+        },
+        {
+          "incorrecto": "The heating doesn't work since this morning.",
+          "correcto": "The heating has not worked since this morning.",
+          "explicacion": "Con since (desde) se usa have/has + participio, no el presente como en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo encuentra agua en el suelo de la cocina y avisa a su madre, Ana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "There is water on the kitchen floor!",
+            "traduccion": "¡Hay agua en el suelo de la cocina!"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Oh no. There is a leak under the sink.",
+            "traduccion": "Oh, no. Hay una fuga debajo del fregadero."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the heating is broken. My room is very cold.",
+            "traduccion": "Y la calefacción está averiada. Mi habitación está muy fría."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK. Please do not touch the sink. I will call your father now.",
+            "traduccion": "Vale. Por favor, no toques el fregadero. Voy a llamar a tu padre ahora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué está fría la habitación de Leo?",
+          "opciones": [
+            {
+              "es": "Porque la calefacción está averiada."
+            },
+            {
+              "es": "Porque hay una fuga debajo del fregadero."
+            },
+            {
+              "es": "Porque hay un corte de luz."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «The heating is broken. My room is very cold»."
+        }
+      }
+    },
+    "en.n2.class-82": {
+      "explicacion": {
+        "titulo": "Servicios públicos: call, report… to",
+        "texto": "Para avisar de un problema en la calle se nombra el servicio responsable. En inglés muchos servicios son dos sustantivos seguidos y el primero funciona como adjetivo: water service (servicio de agua), street lighting (alumbrado público), waste collection (recogida de residuos), account number (número de cuenta). El orden es el contrario del español. Call va sin preposición: Call the water service. Report + problema + to + servicio: Report the power cut to the electricity company. Emergency services es solo para un peligro inmediato."
+      },
+      "patron": {
+        "texto": "Report + problema + to + servicio:",
+        "formula": [
+          {
+            "texto": "Report",
+            "nota": "verbo: informar de algo"
+          },
+          {
+            "texto": "the broken street lamp",
+            "nota": "el problema"
+          },
+          {
+            "texto": "to the council.",
+            "nota": "to + a quién se informa"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Problema",
+          "Servicio"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "tubería de la calle rota"
+            },
+            {
+              "texto": "the water service"
+            }
+          ],
+          [
+            {
+              "texto": "corte de luz en el barrio"
+            },
+            {
+              "texto": "the electricity company"
+            }
+          ],
+          [
+            {
+              "texto": "basura sin recoger"
+            },
+            {
+              "texto": "waste collection"
+            }
+          ],
+          [
+            {
+              "texto": "farola apagada"
+            },
+            {
+              "texto": "the council (street lighting)"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Call to the water service about the pipe.",
+          "correcto": "Call the water service about the pipe.",
+          "explicacion": "Call no lleva to: se llama directamente a alguien (call the council, call my mother)."
+        },
+        {
+          "incorrecto": "Please have your number of account ready.",
+          "correcto": "Please have your account number ready.",
+          "explicacion": "En inglés el sustantivo que describe va delante: account number, no «number of account»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y su padre, Carlos, pasean por el parque del barrio por la tarde.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look, the street lamp in the park is not working.",
+            "traduccion": "Mira, la farola del parque no funciona."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the rubbish is still here. The waste collection did not come today.",
+            "traduccion": "Y la basura sigue aquí. La recogida de residuos no vino hoy."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Can we call the water service?",
+            "traduccion": "¿Podemos llamar al servicio de agua?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "No. The council manages street lighting. I will report the lamp to the council.",
+            "traduccion": "No. El municipio gestiona el alumbrado público. Informaré de la farola al municipio."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the rubbish?",
+            "traduccion": "¿Y la basura?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I will call waste collection too.",
+            "traduccion": "También llamaré a la recogida de residuos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a quién informará Carlos de la farola?",
+          "opciones": [
+            {
+              "es": "Al municipio."
+            },
+            {
+              "es": "Al servicio de agua."
+            },
+            {
+              "es": "A la recogida de residuos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «I will report the lamp to the council»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 4,
+          "en": "Call emergency services only when there is immediate danger.",
+          "es": "Llama a emergencias solo cuando haya un peligro inmediato.",
+          "nota": "Para un problema rutinario se llama al servicio normal con el número de cuenta a mano."
+        }
+      ]
+    },
+    "en.n2.class-83": {
+      "explicacion": {
+        "titulo": "Un aviso completo: dirección, inicio, alcance y referencia",
+        "texto": "Un buen aviso sigue un orden. Primero la dirección, con at delante de un número: at 16 River Road. Luego qué pasa y cuándo empezó, en pasado: The leak started at six (empezó a las seis). Después el alcance con are affected: Two flats are affected (hay dos pisos afectados). Si algo sigue desde una hora, se usa have/has been: There has been a noise since 9 a.m. Di urgent solo si hay peligro, como agua cerca de un enchufe. Al final pide un número de referencia: Could I have a reference number?"
+      },
+      "patron": {
+        "texto": "Problema + started at + hora, + número + are affected:",
+        "formula": [
+          {
+            "texto": "The leak",
+            "nota": "qué pasa"
+          },
+          {
+            "texto": "started at six,",
+            "nota": "started + at + hora: cuándo empezó"
+          },
+          {
+            "texto": "and two flats",
+            "nota": "alcance: número + sustantivo"
+          },
+          {
+            "texto": "are affected.",
+            "nota": "are + affected: están afectados"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am reporting a problem in 16 River Road.",
+          "correcto": "I am reporting a problem at 16 River Road.",
+          "explicacion": "Con una dirección que lleva número se usa at, no in."
+        },
+        {
+          "incorrecto": "Two flats are affect.",
+          "correcto": "Two flats are affected.",
+          "explicacion": "«Están afectados» se dice are affected, con -ed; no con el verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "En el colegio, Tom avisa a su profesora, Sara, de un problema en el baño.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Excuse me. There is water on the floor of the bathroom.",
+            "traduccion": "Perdone. Hay agua en el suelo del baño."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "When did it start?",
+            "traduccion": "¿Cuándo empezó?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It started at ten. And the water is near a socket.",
+            "traduccion": "Empezó a las diez. Y el agua está cerca de un enchufe."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then it is urgent. Are other rooms affected?",
+            "traduccion": "Entonces es urgente. ¿Hay otras salas afectadas?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, two classrooms are affected.",
+            "traduccion": "Sí, hay dos aulas afectadas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thank you, Tom. I will report it and ask for a reference number.",
+            "traduccion": "Gracias, Tom. Voy a avisar y a pedir un número de referencia."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué dice Sara que es urgente?",
+          "opciones": [
+            {
+              "es": "Porque el agua está cerca de un enchufe."
+            },
+            {
+              "es": "Porque empezó a las diez."
+            },
+            {
+              "es": "Porque hay agua en todo el colegio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que el agua está cerca de un enchufe («near a socket») y Sara responde: «Then it is urgent»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "The address is 12 Hill Road, flat 3.",
+          "es": "La dirección es 12 Hill Road, piso 3.",
+          "nota": "El aviso empieza por la dirección completa, antes de describir el problema."
+        },
+        {
+          "indice": 3,
+          "en": "It is urgent because there is smoke in the hall.",
+          "es": "Es urgente porque hay humo en el pasillo.",
+          "nota": "Urgent se usa solo cuando hay peligro o un daño grave."
+        },
+        {
+          "indice": 4,
+          "en": "Can you give me a reference number, please?",
+          "es": "¿Me puede dar un número de referencia, por favor?",
+          "nota": "Al final del aviso se pide el número de referencia para el seguimiento."
+        }
+      ]
+    },
+    "en.n2.class-84": {
+      "explicacion": {
+        "titulo": "Organizar una reparación: available, could you…?",
+        "texto": "Para organizar una reparación se usan fórmulas corteses. Para pedir la cita: I would like to arrange a repair appointment (quisiera concertar una cita). Para ofrecer una franja: I am available on Tuesday from 9 to 11. Con los días se usa on sin artículo (on Tuesday, no «the Tuesday») y la franja va con from… to… Para pedir algo: Could you send an estimate before the repair? Para decir quién abre: The caretaker will provide access. Ojo: el presupuesto de una reparación es estimate; budget es el dinero que tienes para gastar."
+      },
+      "patron": {
+        "texto": "I am available + on + día + from… to…:",
+        "formula": [
+          {
+            "texto": "I am available",
+            "nota": "estoy disponible"
+          },
+          {
+            "texto": "on Tuesday",
+            "nota": "on + día, sin the"
+          },
+          {
+            "texto": "from 9 to 11.",
+            "nota": "from… to…: la franja horaria"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am available the Tuesday.",
+          "correcto": "I am available on Tuesday.",
+          "explicacion": "Con los días de la semana se usa on y no se pone artículo."
+        },
+        {
+          "incorrecto": "Could you send me a budget before the repair?",
+          "correcto": "Could you send me an estimate before the repair?",
+          "explicacion": "El presupuesto de un trabajo es estimate; budget es el dinero que tienes para gastar."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana, la madre de Mia, habla por teléfono con Carlos, de la empresa de reparaciones, para arreglar la lavadora de casa.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Hello. Is Tuesday morning OK for the repair?",
+            "traduccion": "Hola. ¿Le va bien el martes por la mañana para la reparación?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Sorry, I am not available on Tuesday. I am available on Thursday from one to three.",
+            "traduccion": "Lo siento, no estoy disponible el martes. Estoy disponible el jueves de una a tres."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thursday is fine. The technician will come at one.",
+            "traduccion": "El jueves está bien. El técnico irá a la una."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Could you send an estimate before the repair?",
+            "traduccion": "¿Podría enviar un presupuesto antes de la reparación?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Of course. I will send it today.",
+            "traduccion": "Por supuesto. Lo enviaré hoy."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo irá el técnico a casa de Ana?",
+          "opciones": [
+            {
+              "es": "El jueves a la una."
+            },
+            {
+              "es": "El martes por la mañana."
+            },
+            {
+              "es": "El jueves a las tres."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «Thursday is fine. The technician will come at one»."
+        }
+      }
+    },
+    "en.n2.class-85": {
+      "explicacion": {
+        "titulo": "Resolver un problema del barrio: report… to, the solution is to…",
+        "texto": "Para resolver un problema del barrio se unen varios pasos. Habla con calma con el vecino y guarda evidencia segura: fechas y fotos desde lejos. Informa al responsable con report + problema + to + quién: I will report the broken street lamp to the council (el municipio lleva calles y parques; el building manager, las zonas comunes). Propón con The solution is to + verbo: The solution is to repair the gate. Cierra con un seguimiento: We will do a follow-up on Friday. Nunca entres en casa ajena ni publiques datos privados."
+      },
+      "patron": {
+        "texto": "The solution is + to + verbo + resto:",
+        "formula": [
+          {
+            "texto": "The solution is",
+            "nota": "la solución es"
+          },
+          {
+            "texto": "to repair",
+            "nota": "to + verbo base"
+          },
+          {
+            "texto": "the shared gate",
+            "nota": "qué se arregla"
+          },
+          {
+            "texto": "on Tuesday.",
+            "nota": "cuándo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The solution is repair the gate.",
+          "correcto": "The solution is to repair the gate.",
+          "explicacion": "Después de The solution is, el verbo va con to."
+        },
+        {
+          "incorrecto": "I will report to the council the broken lamp.",
+          "correcto": "I will report the broken lamp to the council.",
+          "explicacion": "Primero va lo que informas y después to + a quién: report algo to alguien."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y su vecina Sara ven un banco roto en el parque del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Look, the bench in the park is broken.",
+            "traduccion": "Mira, el banco del parque está roto."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Let's take a photo from here and write down the date.",
+            "traduccion": "Hagamos una foto desde aquí y apuntemos la fecha."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Who can repair it?",
+            "traduccion": "¿Quién puede arreglarlo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The park is public, so I will report it to the council.",
+            "traduccion": "El parque es público, así que informaré al municipio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good idea. Can we check again on Friday?",
+            "traduccion": "Buena idea. ¿Podemos revisarlo otra vez el viernes?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, we will do a follow-up on Friday.",
+            "traduccion": "Sí, haremos un seguimiento el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué evidencia guardan Leo y Sara?",
+          "opciones": [
+            {
+              "es": "Una foto y la fecha."
+            },
+            {
+              "es": "El nombre de un vecino."
+            },
+            {
+              "es": "Un presupuesto de la reparación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «Let's take a photo from here and write down the date»."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n2",
+  "range": {
+    "start": 86,
+    "end": 90
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-86: explicación ya no atribuye «conectar con» al español (contradecía la tabla «conectar a»); ahora: con aparatos, connect to, no connect with.",
+      "class-87: se suaviza «no a meeting online» (no es agramatical como adverbio); se mantiene la regla del adjetivo delante del sustantivo.",
+      "class-88: ejemplo 2 reemplazado por «The battery is low, so charge the phone before the call.» (la frase anterior mezclaba una idea irrelevante sobre la señal).",
+      "class-89: explicación y error 2 matizados: click the icon y click on the icon son correctos; lo incorrecto es «click in».",
+      "Avisos «la opción correcta apenas aparece» esperables: opciones del ítem en español."
+    ]
+  },
+  "classes": {
+    "en.n2.class-86": {
+      "explicacion": {
+        "titulo": "Instrucciones con aparatos: turn on, plug into, connect to",
+        "texto": "Para dar instrucciones con aparatos se usa el imperativo: el verbo base al principio, sin sujeto (Turn on the tablet = Enciende la tableta). Algunos verbos llevan una partícula que cambia el sentido: turn on (encender) y turn off (apagar). Cada acción tiene su preposición: plug the charger into the phone (enchufar en) y connect the headphones to the laptop (conectar a). Tap es tocar la pantalla con el dedo: Tap the app icon to open it. Ojo: con aparatos no se dice connect with, sino connect to."
+      },
+      "patron": {
+        "texto": "Verbo + objeto + preposición + destino:",
+        "formula": [
+          {
+            "texto": "Connect",
+            "nota": "verbo al principio: la orden"
+          },
+          {
+            "texto": "the headphones",
+            "nota": "qué conectas"
+          },
+          {
+            "texto": "to the laptop.",
+            "nota": "to + dónde lo conectas"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Acción",
+          "En inglés"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "encender"
+            },
+            {
+              "texto": "turn on the tablet"
+            }
+          ],
+          [
+            {
+              "texto": "apagar"
+            },
+            {
+              "texto": "turn off the tablet"
+            }
+          ],
+          [
+            {
+              "texto": "enchufar en"
+            },
+            {
+              "texto": "plug the charger into the phone"
+            }
+          ],
+          [
+            {
+              "texto": "conectar a"
+            },
+            {
+              "texto": "connect the headphones to the laptop"
+            }
+          ],
+          [
+            {
+              "texto": "tocar (pantalla)"
+            },
+            {
+              "texto": "tap the app icon"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Connect the headphones with the laptop.",
+          "correcto": "Connect the headphones to the laptop.",
+          "explicacion": "Connect va con to (conectar a), no con with."
+        },
+        {
+          "incorrecto": "Plug the charger to the phone.",
+          "correcto": "Plug the charger into the phone.",
+          "explicacion": "Plug va con into: el cable «entra» en el aparato."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia ayuda a su abuela Luna a usar su tableta nueva.",
+        "dialogo": [
+          {
+            "hablante": "Luna",
+            "texto": "How do I turn on the tablet?",
+            "traduccion": "¿Cómo enciendo la tableta?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Hold the power button here.",
+            "traduccion": "Mantén pulsado aquí el botón de encendido."
+          },
+          {
+            "hablante": "Luna",
+            "texto": "OK. And now I want music.",
+            "traduccion": "Vale. Y ahora quiero música."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Tap the music app icon. Then connect your headphones to the tablet.",
+            "traduccion": "Toca el icono de la aplicación de música. Luego conecta tus auriculares a la tableta."
+          },
+          {
+            "hablante": "Luna",
+            "texto": "Oh, the battery is low!",
+            "traduccion": "¡Oh, la batería está baja!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No problem. Plug the charger into the tablet.",
+            "traduccion": "No pasa nada. Enchufa el cargador en la tableta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe hacer Luna para abrir la música?",
+          "opciones": [
+            {
+              "es": "Tocar el icono de la aplicación de música."
+            },
+            {
+              "es": "Mantener pulsado el botón de encendido."
+            },
+            {
+              "es": "Enchufar el cargador."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Tap the music app icon»."
+        }
+      }
+    },
+    "en.n2.class-87": {
+      "explicacion": {
+        "titulo": "Mensajes y planes en línea: send, reply, share",
+        "texto": "Para organizar un plan en línea se usan órdenes cortas. Send a message to the group about the meeting (envía un mensaje al grupo sobre la reunión). Reply before six (responde antes de las seis); si dices a quién, se usa reply to: Please reply to me. Share the link with the students (comparte el enlace con). Para un horario fijo se usa el presente simple, aunque sea mañana: The online meeting starts at ten. Online funciona aquí como adjetivo y va delante del sustantivo: an online meeting (una reunión en línea)."
+      },
+      "patron": {
+        "texto": "The + online + meeting + starts at + hora:",
+        "formula": [
+          {
+            "texto": "The online meeting",
+            "nota": "online va delante del sustantivo"
+          },
+          {
+            "texto": "starts",
+            "nota": "presente simple para un horario"
+          },
+          {
+            "texto": "at ten.",
+            "nota": "at + hora"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Please reply me before six.",
+          "correcto": "Please reply to me before six.",
+          "explicacion": "Reply necesita to delante de la persona: reply to me, reply to the group."
+        },
+        {
+          "incorrecto": "The meeting online starts at ten.",
+          "correcto": "The online meeting starts at ten.",
+          "explicacion": "Online describe la reunión, así que va delante, como un adjetivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara organizan una reunión en línea para un trabajo de clase.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Can you send a message to the group about the online meeting?",
+            "traduccion": "¿Puedes enviar un mensaje al grupo sobre la reunión en línea?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. The meeting starts at five tomorrow.",
+            "traduccion": "Sí. La reunión empieza mañana a las cinco."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. Please share the link with Leo and Mia.",
+            "traduccion": "Bien. Por favor, comparte el enlace con Leo y Mia."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. And I will ask them to reply before four.",
+            "traduccion": "Vale. Y les pediré que respondan antes de las cuatro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué hora empieza la reunión?",
+          "opciones": [
+            {
+              "es": "A las cinco."
+            },
+            {
+              "es": "A las cuatro."
+            },
+            {
+              "es": "A las diez."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «The meeting starts at five tomorrow». Las cuatro es la hora límite para responder."
+        }
+      }
+    },
+    "en.n2.class-88": {
+      "explicacion": {
+        "titulo": "Explicar un fallo: is not + -ing, because y so",
+        "texto": "Para explicar un problema técnico se dice qué pasa y por qué. Lo que falla ahora se dice con is not + verbo en -ing: My phone is not charging (no carga). Because introduce la causa: …because the cable is loose. So introduce el resultado: The screen is frozen, so I cannot open the app. Después de can o cannot va el verbo base, sin to. Frozen describe una pantalla bloqueada que no responde. Las soluciones son órdenes cortas: restart the tablet, check the cable, move closer to the router."
+      },
+      "patron": {
+        "texto": "Problema + so + resultado:",
+        "formula": [
+          {
+            "texto": "The screen is frozen,",
+            "nota": "el problema"
+          },
+          {
+            "texto": "so",
+            "nota": "así que: introduce el resultado"
+          },
+          {
+            "texto": "I cannot open the app.",
+            "nota": "cannot + verbo base, sin to"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My phone doesn't charging.",
+          "correcto": "My phone is not charging.",
+          "explicacion": "Para lo que pasa ahora se usa is not + -ing; doesn't va con el verbo base."
+        },
+        {
+          "incorrecto": "The screen is frozen, so I cannot to open the app.",
+          "correcto": "The screen is frozen, so I cannot open the app.",
+          "explicacion": "Después de cannot va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo quiere usar su tableta y le pide ayuda a su hermana Ana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Ana, my tablet is not charging.",
+            "traduccion": "Ana, mi tableta no carga."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Check the cable. Is it loose?",
+            "traduccion": "Revisa el cable. ¿Está suelto?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No, the cable is OK. But the screen is frozen, so I cannot open the music app.",
+            "traduccion": "No, el cable está bien. Pero la pantalla está bloqueada, así que no puedo abrir la aplicación de música."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Then restart the tablet.",
+            "traduccion": "Entonces reinicia la tableta."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thanks! Now it works.",
+            "traduccion": "¡Gracias! Ahora funciona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo no puede abrir la aplicación de música?",
+          "opciones": [
+            {
+              "es": "Porque la pantalla está bloqueada."
+            },
+            {
+              "es": "Porque el cable está suelto."
+            },
+            {
+              "es": "Porque la señal es débil."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «The screen is frozen, so I cannot open the music app». El cable está bien."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 2,
+          "en": "The battery is low, so charge the phone before the call.",
+          "es": "La batería está baja, así que carga el teléfono antes de la llamada.",
+          "nota": "So une el problema (batería baja) con la solución: cargar el teléfono."
+        },
+        {
+          "indice": 3,
+          "en": "Please restart the tablet and check the keyboard.",
+          "es": "Por favor, reinicia la tableta y revisa el teclado.",
+          "nota": "Restart y check son dos acciones de solución para un teclado que no funciona."
+        },
+        {
+          "indice": 4,
+          "en": "The Wi-Fi signal is weak, so move closer to the router.",
+          "es": "La señal de Wi-Fi es débil, así que acércate al enrutador.",
+          "nota": "So presenta una solución concreta: acercarse al enrutador."
+        }
+      ]
+    },
+    "en.n2.class-89": {
+      "explicacion": {
+        "titulo": "Instrucciones paso a paso: first, next, then, finally",
+        "texto": "Para dar instrucciones paso a paso, cada paso empieza con un conector de orden: First (primero), Next (después), Then (luego) y Finally (por último). Tras el conector va el verbo en imperativo, sin sujeto: First, turn on the laptop. Next, click the app icon. Después de First, Next y Finally se suele poner coma. Select va sin preposición (select the chat) y click, sin preposición o con on: click the icon o click on the icon, nunca «click in». Ojo: at first significa «al principio», no sirve para numerar pasos."
+      },
+      "patron": {
+        "texto": "Conector + verbo en imperativo + objeto:",
+        "formula": [
+          {
+            "texto": "Next,",
+            "nota": "conector: el paso siguiente"
+          },
+          {
+            "texto": "click",
+            "nota": "verbo en imperativo"
+          },
+          {
+            "texto": "the meeting app icon.",
+            "nota": "sobre qué, sin preposición"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "At first, turn on the laptop.",
+          "correcto": "First, turn on the laptop.",
+          "explicacion": "At first significa «al principio»; para el primer paso de una lista se usa First."
+        },
+        {
+          "incorrecto": "Click in the icon.",
+          "correcto": "Click the icon.",
+          "explicacion": "Click va con lo que pulsas, sin preposición o con on (click on the icon), nunca con in, aunque en español digamos «haz clic en»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le explica a su abuelo, Sol, cómo enviar un mensaje al grupo de la familia.",
+        "dialogo": [
+          {
+            "hablante": "Sol",
+            "texto": "How do I send a message to the family group?",
+            "traduccion": "¿Cómo envío un mensaje al grupo de la familia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "First, tap the message app icon.",
+            "traduccion": "Primero, toca el icono de la aplicación de mensajes."
+          },
+          {
+            "hablante": "Sol",
+            "texto": "OK. And next?",
+            "traduccion": "Vale. ¿Y después?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Next, select the family group. Then type your message.",
+            "traduccion": "Después, selecciona el grupo de la familia. Luego escribe tu mensaje."
+          },
+          {
+            "hablante": "Sol",
+            "texto": "And finally?",
+            "traduccion": "¿Y por último?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Finally, click send.",
+            "traduccion": "Por último, haz clic en enviar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Sol justo después de abrir la aplicación?",
+          "opciones": [
+            {
+              "es": "Selecciona el grupo de la familia."
+            },
+            {
+              "es": "Escribe el mensaje."
+            },
+            {
+              "es": "Hace clic en enviar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Next, select the family group»; después viene escribir el mensaje."
+        }
+      }
+    },
+    "en.n2.class-90": {
+      "explicacion": {
+        "titulo": "Tarea digital: aparato, mensaje, problema y pasos",
+        "texto": "Esta clase une todo lo visto sobre tecnología. Estrategia: 1) acción con el aparato: Turn on the device and open the meeting app; 2) mensaje con el plan: Send the group the time and link; 3) si hay un fallo, If + problema, + solución: If the device is not charging, check the cable and restart it; 4) pasos en orden con First, then y finally; 5) confirmación: reply to confirm. Recuerda: el imperativo va sin sujeto, is not + -ing para lo que falla ahora y then para el paso siguiente."
+      },
+      "patron": {
+        "texto": "If + problema, + solución en imperativo:",
+        "formula": [
+          {
+            "texto": "If the device",
+            "nota": "if + qué aparato"
+          },
+          {
+            "texto": "is not charging,",
+            "nota": "is not + -ing: lo que falla ahora"
+          },
+          {
+            "texto": "check the cable",
+            "nota": "primera acción"
+          },
+          {
+            "texto": "and restart it.",
+            "nota": "segunda acción"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the device not charging, check the cable.",
+          "correcto": "If the device is not charging, check the cable.",
+          "explicacion": "Con -ing hace falta is: is not charging."
+        },
+        {
+          "incorrecto": "First connect the headphones; after share the link.",
+          "correcto": "First connect the headphones; then share the link.",
+          "explicacion": "Para el paso siguiente se usa then; after necesita algo detrás (after class)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo se preparan para una llamada de estudio con su grupo de clase.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The study call is at four. Turn on your tablet, Leo.",
+            "traduccion": "La llamada de estudio es a las cuatro. Enciende tu tableta, Leo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My tablet is not charging!",
+            "traduccion": "¡Mi tableta no carga!"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Check the cable and restart it.",
+            "traduccion": "Revisa el cable y reiníciala."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK, now it works. Can you send me the link?",
+            "traduccion": "Vale, ahora funciona. ¿Me puedes enviar el enlace?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. First I will send the link, then please reply to confirm.",
+            "traduccion": "Sí. Primero enviaré el enlace; luego, por favor, responde para confirmar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe hacer Leo después de recibir el enlace?",
+          "opciones": [
+            {
+              "es": "Responder para confirmar."
+            },
+            {
+              "es": "Reiniciar la tableta."
+            },
+            {
+              "es": "Revisar el cable."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «First I will send the link, then please reply to confirm»."
+        }
+      },
+      "ejemplos": [
+        {
+          "indice": 0,
+          "en": "Turn on the device and open the meeting app.",
+          "es": "Enciende el dispositivo y abre la aplicación de reuniones.",
+          "nota": "Turn on y open son las primeras acciones de la tarea digital."
+        },
+        {
+          "indice": 1,
+          "en": "Send the group message with the meeting time.",
+          "es": "Envía el mensaje del grupo con la hora de la reunión.",
+          "nota": "El mensaje comunica el plan: la hora de la reunión."
+        },
+        {
+          "indice": 2,
+          "en": "If the device is not charging, check the cable and restart it.",
+          "es": "Si el dispositivo no carga, revisa el cable y reinícialo.",
+          "nota": "If presenta el fallo; check y restart son la solución."
+        },
+        {
+          "indice": 3,
+          "en": "First connect the headphones; then share the link.",
+          "es": "Primero conecta los auriculares; luego comparte el enlace.",
+          "nota": "First y then ordenan las instrucciones."
+        },
+        {
+          "indice": 4,
+          "en": "The phone battery is low. First connect the charger, then send the group the time and link; finally reply to confirm.",
+          "es": "La batería del teléfono está baja. Primero conecta el cargador, luego envía al grupo la hora y el enlace; por último, responde para confirmar.",
+          "nota": "La tarea completa une el problema, los pasos en orden y la confirmación."
+        },
+        {
+          "indice": 5,
+          "en": "If the meeting app is frozen, close it and restart the phone.",
+          "es": "Si la aplicación de reuniones está bloqueada, ciérrala y reinicia el teléfono.",
+          "nota": "Una aplicación bloqueada se resuelve en dos pasos: cerrarla y reiniciar el teléfono."
+        }
+      ]
+    }
+  }
+}

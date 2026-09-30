@@ -1,0 +1,587 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n1",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "class-95: «pregunta si la otra persona puede» → «está libre» (fiel a Are you free…?), también en la nota del patrón.",
+      "Aceptado: class-93 «Sorry, I can't at two» es coloquial pero natural en mensajes.",
+      "AVISO a contenido (fuera de este archivo): ejercicio e01 de class-95 pide «la presentación de Alex» y la respuesta es «Hi, I'm Jordan.»."
+    ]
+  },
+  "classes": {
+    "en.n1.class-91": {
+      "explicacion": {
+        "titulo": "Conocer a alguien: nombre y origen",
+        "texto": "Al conocer a alguien: saluda (Hi o Hello), di tu nombre con I'm (soy) y responde Nice to meet you (encantado o encantada de conocerte; no cambia para hombre o mujer). Para preguntar: What's your name? (¿cómo te llamas?) y Where are you from? (¿de dónde eres?). Se responde con from: I'm from Quito. Trampas: «soy de» es I'm from, no «I'm of»; y en la pregunta from va al final: Where are you from?, no «From where are you?»."
+      },
+      "patron": {
+        "texto": "Saludo + I'm + nombre + origen:",
+        "formula": [
+          {
+            "texto": "Hi,",
+            "nota": "saludo"
+          },
+          {
+            "texto": "I'm Mia.",
+            "nota": "I'm + nombre"
+          },
+          {
+            "texto": "I'm from Quito.",
+            "nota": "I'm from + ciudad o país"
+          },
+          {
+            "texto": "Nice to meet you.",
+            "nota": "encantada de conocerte"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "What's your name?"
+            },
+            {
+              "texto": "I'm Mia."
+            }
+          ],
+          [
+            {
+              "texto": "Where are you from?"
+            },
+            {
+              "texto": "I'm from Quito."
+            }
+          ],
+          [
+            {
+              "texto": "Nice to meet you."
+            },
+            {
+              "texto": "Nice to meet you."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I'm of Quito.",
+          "correcto": "I'm from Quito.",
+          "explicacion": "Calco de «soy de Quito». Para el origen se usa from, no of."
+        },
+        {
+          "incorrecto": "From where are you?",
+          "correcto": "Where are you from?",
+          "explicacion": "En español la preposición va delante («¿de dónde?»), pero en inglés from va al final de la pregunta."
+        }
+      ],
+      "situacion": {
+        "contexto": "En el parque, Mia conoce a una niña nueva, Sol.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Hi, I'm Mia. What's your name?",
+            "traduccion": "Hola, soy Mia. ¿Cómo te llamas?"
+          },
+          {
+            "hablante": "Sol",
+            "texto": "Hi, I'm Sol. Nice to meet you.",
+            "traduccion": "Hola, soy Sol. Encantada de conocerte."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Nice to meet you. Where are you from?",
+            "traduccion": "Encantada. ¿De dónde eres?"
+          },
+          {
+            "hablante": "Sol",
+            "texto": "I'm from Lima. And you?",
+            "traduccion": "Soy de Lima. ¿Y tú?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'm from Quito.",
+            "traduccion": "Soy de Quito."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿de dónde es Sol?",
+          "opciones": [
+            {
+              "es": "De Lima."
+            },
+            {
+              "es": "De Quito."
+            },
+            {
+              "es": "No lo dice."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sol dice: «I'm from Lima». Mia es de Quito."
+        }
+      }
+    },
+    "en.n1.class-92": {
+      "explicacion": {
+        "titulo": "Quedar: Are you free…? y Let's meet…",
+        "texto": "Para quedar con alguien, pregunta si está libre: Are you free on Saturday? (¿estás libre el sábado?). Propón con Let's meet at three (quedemos a las tres) y confirma con See you at the café. Si no puedes: Sorry, I'm busy; y ofrece otro día: I can meet on Sunday. Preposiciones: on con los días (on Saturday) y at con la hora o un lugar concreto (at three, at the café). En español decimos «el sábado» y «a las tres», pero en inglés no se pone the."
+      },
+      "patron": {
+        "texto": "Let's meet + on + día + at + hora:",
+        "formula": [
+          {
+            "texto": "Let's meet",
+            "nota": "quedemos: propuesta"
+          },
+          {
+            "texto": "on Sunday",
+            "nota": "on + día"
+          },
+          {
+            "texto": "at three.",
+            "nota": "at + hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Preposición",
+          "Con",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "on"
+            },
+            {
+              "texto": "días"
+            },
+            {
+              "texto": "on Saturday"
+            }
+          ],
+          [
+            {
+              "texto": "at"
+            },
+            {
+              "texto": "horas"
+            },
+            {
+              "texto": "at three"
+            }
+          ],
+          [
+            {
+              "texto": "at"
+            },
+            {
+              "texto": "un lugar concreto"
+            },
+            {
+              "texto": "at the café"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Are you free the Saturday?",
+          "correcto": "Are you free on Saturday?",
+          "explicacion": "Calco de «el sábado». Con los días se usa on, sin the."
+        },
+        {
+          "incorrecto": "Let's meet at the three.",
+          "correcto": "Let's meet at three.",
+          "explicacion": "Calco de «a las tres». Con la hora va at + número, sin the."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo quiere quedar con su amigo Carlos el fin de semana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Carlos, are you free on Saturday?",
+            "traduccion": "Carlos, ¿estás libre el sábado?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Sorry, I'm busy. I can meet on Sunday.",
+            "traduccion": "Lo siento, estoy ocupado. Puedo quedar el domingo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. Let's meet at four.",
+            "traduccion": "Vale. Quedemos a las cuatro."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "OK. See you at the café.",
+            "traduccion": "Vale. Nos vemos en la cafetería."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo quedan Leo y Carlos?",
+          "opciones": [
+            {
+              "es": "El domingo a las cuatro."
+            },
+            {
+              "es": "El sábado a las cuatro."
+            },
+            {
+              "es": "El domingo a las tres."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos está ocupado el sábado y dice «I can meet on Sunday»; Leo propone «at four»."
+        }
+      }
+    },
+    "en.n1.class-93": {
+      "explicacion": {
+        "titulo": "Invitar por mensaje: Would you like to…?",
+        "texto": "Para invitar por mensaje se usa Would you like to…? (¿te gustaría…?) + verbo en forma base: Would you like to meet? No olvides to. Para aceptar: Yes, I'd love to (sí, me encantaría); para rechazar con cortesía: Sorry, I can't (lo siento, no puedo). Cierra con el día: See you on Friday. Trampa: I love es «me encanta» en general; para aceptar una invitación se dice I'd love to, con 'd y con to al final."
+      },
+      "patron": {
+        "texto": "Would you like to + verbo + día/hora?",
+        "formula": [
+          {
+            "texto": "Would you like",
+            "nota": "¿te gustaría…?: invitación amable"
+          },
+          {
+            "texto": "to meet",
+            "nota": "to + verbo base"
+          },
+          {
+            "texto": "on Friday?",
+            "nota": "on + día"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Invitar"
+            },
+            {
+              "texto": "Would you like to meet?"
+            }
+          ],
+          [
+            {
+              "texto": "Aceptar"
+            },
+            {
+              "texto": "Yes, I'd love to."
+            }
+          ],
+          [
+            {
+              "texto": "Rechazar"
+            },
+            {
+              "texto": "Sorry, I can't."
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "See you on Friday."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Would you like meet?",
+          "correcto": "Would you like to meet?",
+          "explicacion": "Después de would you like va to + verbo: to meet."
+        },
+        {
+          "incorrecto": "Yes, I love to.",
+          "correcto": "Yes, I'd love to.",
+          "explicacion": "I love es «me encanta» en general. Para aceptar una invitación se dice I'd love to (me encantaría)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le escribe mensajes a su amigo Tom.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Hi Tom, are you free on Friday?",
+            "traduccion": "Hola Tom, ¿estás libre el viernes?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, I am.",
+            "traduccion": "Sí, lo estoy."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Would you like to meet at the park?",
+            "traduccion": "¿Te gustaría quedar en el parque?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, I'd love to. At two?",
+            "traduccion": "Sí, me encantaría. ¿A las dos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Sorry, I can't at two. Can you meet at four?",
+            "traduccion": "Lo siento, a las dos no puedo. ¿Puedes quedar a las cuatro?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "OK. See you on Friday!",
+            "traduccion": "Vale. ¡Nos vemos el viernes!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según los mensajes, ¿a qué hora quedan Ana y Tom?",
+          "opciones": [
+            {
+              "es": "A las cuatro."
+            },
+            {
+              "es": "A las dos."
+            },
+            {
+              "es": "No quedan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom propone «At two?», pero Ana no puede y propone «at four»; Tom acepta: «OK»."
+        }
+      }
+    },
+    "en.n1.class-94": {
+      "explicacion": {
+        "titulo": "Simulación: horario y menú",
+        "texto": "Esta clase es una simulación: lees un horario y un menú y los usas para quedar y pedir. Horario: The café opens at nine (la cafetería abre a las nueve); opens lleva -s porque the café es it. Menú: The menu has soup and salad; has, no have, por la misma razón. Para pedir: I'd like a sandwich, please o Can I have some tea? Para quedar: Let's meet at ten. Estrategia: busca primero las horas (at + número) y los platos, y luego responde con las fórmulas que ya conoces."
+      },
+      "patron": {
+        "texto": "Lugar + verbo con -s + at + hora:",
+        "formula": [
+          {
+            "texto": "The café",
+            "nota": "una cosa → como it"
+          },
+          {
+            "texto": "opens",
+            "nota": "open + -s con it"
+          },
+          {
+            "texto": "at nine.",
+            "nota": "at + hora"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Para…",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "leer el horario"
+            },
+            {
+              "texto": "The café opens at nine."
+            }
+          ],
+          [
+            {
+              "texto": "leer el menú"
+            },
+            {
+              "texto": "The menu has soup and salad."
+            }
+          ],
+          [
+            {
+              "texto": "pedir"
+            },
+            {
+              "texto": "I'd like a sandwich, please."
+            }
+          ],
+          [
+            {
+              "texto": "quedar"
+            },
+            {
+              "texto": "Let's meet at ten."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The café open at nine.",
+          "correcto": "The café opens at nine.",
+          "explicacion": "The café es it (tercera persona), así que el verbo lleva -s: opens."
+        },
+        {
+          "incorrecto": "The menu have soup and salad.",
+          "correcto": "The menu has soup and salad.",
+          "explicacion": "Con he/she/it, have cambia a has: the menu has."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo quieren ir a una cafetería el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The café opens at nine.",
+            "traduccion": "La cafetería abre a las nueve."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK. Let's meet at ten.",
+            "traduccion": "Vale. Quedemos a las diez."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The menu has soup, salad and sandwiches.",
+            "traduccion": "El menú tiene sopa, ensalada y sándwiches."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'd like a sandwich and some tea.",
+            "traduccion": "Quisiera un sándwich y té."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué hora abre la cafetería?",
+          "opciones": [
+            {
+              "es": "A las nueve."
+            },
+            {
+              "es": "A las diez."
+            },
+            {
+              "es": "A las ocho."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «The café opens at nine». A las diez es la hora de la cita."
+        }
+      }
+    },
+    "en.n1.class-95": {
+      "explicacion": {
+        "titulo": "Evaluación integrada A1: estrategia",
+        "texto": "Esta evaluación junta las situaciones de las últimas clases en una sola conversación. Sigue el orden: 1) preséntate: Hi, I'm… Nice to meet you. 2) pregunta si la otra persona está libre: Are you free at two? 3) invita: Would you like to meet at the café? 4) pide con cortesía: I'd like some tea, please. 5) cierra: See you on Friday. Estrategia: identifica qué función pide cada ejercicio y usa su fórmula completa; revisa at + hora y on + día."
+      },
+      "patron": {
+        "texto": "Una conversación completa, paso a paso:",
+        "formula": [
+          {
+            "texto": "Nice to meet you.",
+            "nota": "presentarte"
+          },
+          {
+            "texto": "Are you free at two?",
+            "nota": "preguntar si está libre"
+          },
+          {
+            "texto": "Would you like to meet at the café?",
+            "nota": "invitar"
+          },
+          {
+            "texto": "See you on Friday.",
+            "nota": "cerrar con el día"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Nice to know you.",
+          "correcto": "Nice to meet you.",
+          "explicacion": "Calco de «encantado de conocerte». Cuando conoces a alguien por primera vez se usa meet."
+        },
+        {
+          "incorrecto": "See you in Friday.",
+          "correcto": "See you on Friday.",
+          "explicacion": "Con los días de la semana se usa on, no in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana conoce en la escuela a una niña nueva, Mar, y la invita.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Hi, I'm Ana. Nice to meet you.",
+            "traduccion": "Hola, soy Ana. Encantada de conocerte."
+          },
+          {
+            "hablante": "Mar",
+            "texto": "Nice to meet you. I'm Mar.",
+            "traduccion": "Encantada. Soy Mar."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Are you free on Friday? Would you like to meet at the café?",
+            "traduccion": "¿Estás libre el viernes? ¿Te gustaría quedar en la cafetería?"
+          },
+          {
+            "hablante": "Mar",
+            "texto": "Yes, I'd love to. At two?",
+            "traduccion": "Sí, me encantaría. ¿A las dos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "OK. See you on Friday!",
+            "traduccion": "Vale. ¡Nos vemos el viernes!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Ana?",
+          "opciones": [
+            {
+              "es": "Quedar el viernes en la cafetería."
+            },
+            {
+              "es": "Quedar el viernes en el parque."
+            },
+            {
+              "es": "Tomar té en su casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana pregunta: «Are you free on Friday? Would you like to meet at the café?»."
+        }
+      }
+    }
+  }
+}
