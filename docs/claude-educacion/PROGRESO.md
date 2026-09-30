@@ -3,15 +3,16 @@
 Última actualización: 2026-09-30
 Responsable: Claude (Claude Code)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
-Fase actual: Inglés N1 y N2 completos y N3 C1–C90 publicados; N3 C91–C100 pendiente de autoría.
-Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 290/1.000 clases editoriales integradas y activas · programa inglés total 29 %
+Fase actual: **Inglés N1–N10 completo y publicado (1.000 clases)**; siguiente fase: revisión del cliente y calidad C1.
+Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases editoriales integradas y activas · programa inglés total 100 %
 
 ## Trabajando ahora
 
-- Pulido de las 290 clases **terminado en local** (commit `bf0d57b`, build `main.dart.js` `e6eca1c7…`). Pendiente de autorización para desplegar como release `20260930-edu-6-pulido`.
-- Siguiente: N3 C91–C100 con el contrato enriquecido desde el origen (explicación, patrón, errores, situación y pistas incluidos en la autoría); después, mapa v2 de N4.
+- Nada en curso. Inglés N1–N10 publicado en `20260930-edu-10-n10-ingles-completo`.
 
 ## Terminado recientemente
+
+- **Inglés N3 C91 → N10 C100 (2026-09-30):** 710 clases por autoría compacta (`CONTRATO_AUTORIA_COMPACTA.md`, `construir_bloque.py`), mapas v2 N4–N10 validados, cada bloque con autor y revisor independientes (GO). Releases edu-7 (N3–N4), edu-8 (N5–N6), edu-9 (N7–N9) y edu-10 (N10). Los revisores corrigieron claves erróneas (P0) en N9 C33/C35/C38/C40, fugas de respuesta, rúbricas laxas y español peninsular. P2 abierto: dificultad léxica de N8–N10 algo baja para C1 (el control «nada sin enseñar» limita el léxico); modelos de escritura larga al 55–75 % del rango del mapa.
 
 - **Pulido de contenido N1–N3 (2026-09-30):** 290/290 clases enriquecidas (explicación en español, patrón, tabla, 2 errores reales, situación con diálogo e ítem propio, ejemplos reales); 668 «completar» con pista de traducción; ~200 ejercicios defectuosos y 429 ítems de dos opciones corregidos. Todo con autor y revisor independientes (`GO`) y validación automática obligatoria en el compilador. Biblioteca `2026.09.30-en-pulido.1`. 176 pruebas Flutter, 61 de herramientas, 10 idiomas sin errores.
 
@@ -41,9 +42,9 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 290/1.000 clases edi
 
 ## Siguiente paso
 
-1. Recoger revisión del cliente sobre N2 y N3 C1–C90 ya publicados.
-2. Completar Inglés N3 C91–C100 por bloques de cinco con validación longitudinal y revisión independiente; después crear el mapa v2 de N4.
-3. Antes de cualquier release nueva, ejecutar el runbook desde un árbol controlado, con lock, backup, salud, consola y recorrido real.
+1. Recoger revisión del cliente sobre N1–N10 publicados.
+2. Calidad C1 (N8–N10): ampliar léxico enseñado para subir la dificultad y endurecer distractores; alinear el control de léxico del constructor con `validar_ruta.py` (nombres propios, formas singulares/plurales y orden de clases).
+3. Auditoría #15 (léxico de validación separado del vocabulario enseñado), imágenes y personajes fijos (#20).
 
 ## Bloqueos
 
@@ -51,9 +52,9 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 290/1.000 clases edi
 
 ## Producción
 
-- Versión desplegada: `20260930-edu-5-n2-n3-review` · `main.dart.js` `72e25f36798f5810…`; backend sin cambios desde `edu-2`.
-- Fecha: 2026-09-30 13:53 UTC
+- Versión desplegada: `20260930-edu-10-n10-ingles-completo` · `main.dart.js` `2d5759d1…`; biblioteca `e1bca6ef…`; backend sin cambios desde `edu-2`.
+- Fecha: 2026-09-30
 - URL: https://onelingo.hostingcuenca.com
-- Estado de salud: `/api/salud` OK; `onelingo-api` online.
-- Respaldo: `/var/www/onelingo/backups/20260930-edu-5-n2-n3-review/web-anterior`
+- Estado de salud: `/api/salud` OK.
+- Respaldo: `/var/www/onelingo/backups/20260930-edu-10-n10-ingles-completo/web-anterior`
 - Rollback: ver `DESPLIEGUES.md`; restauración web completa, sin reinicio de backend.

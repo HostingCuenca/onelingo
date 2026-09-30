@@ -165,3 +165,12 @@ Commit: `978dddd` (+ `fa195b1`) · Build: `main.dart.js` `2d5759d1…` (sin camb
 Pruebas: 177 Flutter (1 omitida), validar_ruta 0 errores, construir_bloque OK en N8 y N9.
 Backup: `/var/www/onelingo/backups/20260930-edu-9-n7-n9/web-anterior` (= edu-8). Health: salud, APK, avatar y `n9-editorial.json` 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-9-n7-n9/web-retirada-post && cp -al backups/20260930-edu-9-n7-n9/web-anterior web'`
+
+## Release: 20260930-edu-10-n10-ingles-completo
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: N10 (C1 dominio) completo, 100 clases con revisión independiente GO. **Inglés N1–N10 completo: 1.000 clases, 13.002 variantes, 1.000 activas.** `validar_ruta.py` recorre los prerrequisitos de forma iterativa (la cadena de ~1.000 unidades superaba el límite de recursión).
+Commit: `d6502aa` · Build: `main.dart.js` `2d5759d1…` (sin cambios de código); biblioteca `e1bca6ef…` (servida igual; 2,5 MB con gzip).
+Pruebas: 177 Flutter (1 omitida), validar_ruta 0 errores en 10 idiomas, construir_bloque OK en los 20 bloques de N10, 1.000/1.000 clases enriquecidas con GO.
+Backup: `/var/www/onelingo/backups/20260930-edu-10-n10-ingles-completo/web-anterior` (= edu-9). Health: salud, APK, avatar, `n10-editorial.json` y biblioteca 200; `curso.json` sirve n8–n10 «publicado»; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-10-n10-ingles-completo/web-retirada-post && cp -al backups/20260930-edu-10-n10-ingles-completo/web-anterior web'`

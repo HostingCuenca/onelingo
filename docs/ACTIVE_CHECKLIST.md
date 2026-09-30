@@ -58,11 +58,13 @@
 - [x] Auditar las 290 clases publicadas y pulirlas (auditoría 2026-09-30): app, enriquecimiento 290/290, pistas de completar, correcciones de ítems.
 - [x] Desplegar `20260930-edu-6-pulido` (2026-09-30).
 - [x] Compresión gzip de JSON en Apache (2026-09-30).
+- [x] Producir, revisar (GO) e integrar Inglés N3 C91 → N10 C100; releases edu-7 a edu-10 (1.000 clases publicadas, 2026-09-30).
+- [ ] Subir la dificultad C1 de N8–N10 (léxico enseñado más amplio, distractores más finos).
 - [ ] Separar el léxico de validación del vocabulario enseñado (auditoría #15).
-- [ ] Producir Inglés N3 C91–C95 (`community-project`) en staging, con autoría, simulación, corrección y GO independiente.
-- [ ] Producir Inglés N3 C96–C100 (`b1-entry-capstone`) y revisar el bloque completo por ser cierre de nivel.
-- [ ] Auditar longitudinalmente N3 C1–C100 y, solo tras GO, ampliar el runtime de 290 a 300 clases.
-- [ ] Crear y aprobar `mapa-n4-editorial-v2.json` antes de iniciar autoría de N4; repetir la puerta por cada nivel hasta N10.
+- [x] Producir Inglés N3 C91–C95 (`community-project`) en staging, con autoría, simulación, corrección y GO independiente.
+- [x] Producir Inglés N3 C96–C100 (`b1-entry-capstone`) y revisar el bloque completo por ser cierre de nivel.
+- [x] Auditar longitudinalmente N3 C1–C100 y, solo tras GO, ampliar el runtime de 290 a 300 clases.
+- [x] Crear y aprobar `mapa-n4-editorial-v2.json` antes de iniciar autoría de N4; repetir la puerta por cada nivel hasta N10.
 - [ ] Vincular las 43 guías gramaticales a IDs del grafo.
 - [ ] Modelar progreso de vocabulario por palabra y situación.
 - [ ] Convertir «restaurante» en mini-ruta piloto y mapear las 50 situaciones.
