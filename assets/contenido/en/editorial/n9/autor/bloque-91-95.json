@@ -131,7 +131,7 @@
     }
    ],
    "situacion": {
-    "contexto": "Leo repasa con Mia el primer mensaje que quiere enviar al jefe de sus prácticas.",
+    "contexto": "Leo repasa con Mia el primer mensaje que quiere enviar al jefe de su pasantía.",
     "dialogo": [
      {
       "hablante": "Leo",
@@ -214,11 +214,11 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige qué muestra la reacción de Sara en la reunión.",
-      "feedback": "Sara reclama su turno con calma («Let me finish this point») y promete cederlo después. No se lo entrega a Carlos ni le dice que sus cifras estén mal: es Carlos quien sostiene que las de ella lo están.",
+      "feedback": "Sara reclama su turno con calma («Let me finish this point») y promete cederlo después. No deja que Carlos termine primero ni le dice que sus cifras estén mal: es Carlos quien sostiene que las de ella lo están.",
       "audio": "During the budget meeting, Sara was explaining her figures when Carlos began to talk over her, insisting that the numbers were wrong. Sara lowered her voice and said: Let me finish this point, and then it is your turn. Carlos sat back, and the room relaxed.",
       "opciones": [
        "She keeps her turn firmly but without attacking him.",
-       "She hands the turn to Carlos so that the room can relax.",
+       "She lets Carlos finish his objection before she continues.",
        "She politely tells Carlos that his own figures are wrong."
       ],
       "respuesta": 0
@@ -304,7 +304,10 @@
       "formato": "ordenar",
       "consigna": "Ordena: «¿Podríamos pasar la reunión al jueves, si te parece bien?»",
       "feedback": "Could we… propone sin imponer y if that suits you deja la decisión final al otro: es un registro cortés y flexible.",
-      "respuesta": "Could we move the meeting to Thursday if that suits you"
+      "respuesta": "Could we move the meeting to Thursday if that suits you",
+      "aceptadas": [
+       "If that suits you could we move the meeting to Thursday"
+      ]
      }
     ],
     "repaso": [
@@ -324,12 +327,12 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige por qué Ana deja de sonreír.",
-      "feedback": "Ana comparte algo personal y Leo cambia de tema sin una pregunta de seguimiento: falta interés sincero. No la interrumpe ni bromea.",
+      "feedback": "Ana comparte algo personal y Leo responde con un comentario vacío y pregunta por el almuerzo, sin ninguna pregunta de seguimiento: falta interés sincero. No habla de su propia mudanza ni cuestiona la decisión de Ana.",
       "audio": "Ana told her new colleague that she had moved to Lima the previous year to join her sister. Leo replied that it sounded nice and immediately asked what time lunch was. Ana stopped smiling and turned back to her screen.",
       "opciones": [
        "Leo showed no interest in what she had just shared.",
-       "Leo interrupted her before she had finished explaining.",
-       "Leo made a joke about her sister and about Lima."
+       "Leo talked about his own move instead of asking about hers.",
+       "Leo questioned whether she should have left her sister behind."
       ],
       "respuesta": 0
      },
@@ -633,12 +636,12 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige cómo presenta el hablante el cierre de la biblioteca.",
-      "feedback": "Were … to plantea una hipótesis remota y la directora niega que exista el plan. Los padres no ignoran el rumor: les preocupa y dicen que protestarían.",
+      "feedback": "Were … to plantea una hipótesis remota y la directora niega que exista el plan. Los padres no hacen campaña todavía: solo dicen que protestarían si llegara a proponerse.",
       "audio": "Were the school to close the library, students would have nowhere quiet to study. The head teacher insists that no such plan exists, but the rumour has already upset many parents, who say they would complain loudly if it were ever proposed.",
       "opciones": [
        "As a hypothetical scenario that nobody has proposed.",
        "As a plan that the head teacher is reluctant to confirm.",
-       "As a rumour that parents have decided to ignore."
+       "As a proposal that parents are already campaigning against."
       ],
       "respuesta": 0
      },
@@ -687,7 +690,12 @@
          "likely",
          "predicted",
          "estimated",
-         "anticipated"
+         "anticipated",
+         "due",
+         "tipped",
+         "poised",
+         "slated",
+         "forecasted"
         ]
        },
        {
@@ -709,11 +717,11 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige qué sugieren los vecinos sobre el ayuntamiento.",
-      "feedback": "La frase con Had the council inspected… es un pasado irreal que atribuyen los vecinos: con inspecciones anteriores el daño habría sido menor. Quien publicará sus conclusiones es la empresa, no el ayuntamiento.",
+      "feedback": "La frase con Had the council inspected… es un pasado irreal que atribuyen los vecinos: con inspecciones anteriores el daño habría sido menor. Nadie dice que el ayuntamiento ignorara pruebas a sabiendas, y quien publicará sus conclusiones es la empresa, no el ayuntamiento.",
       "audio": "According to several reports, the plant is thought to have put waste into the river for years, although its owners have denied any fault. Had the council inspected the site earlier, residents say, the damage would have been far smaller. Fish have disappeared from the lower stretch, and some families have stopped using the water. A full investigation is due to start next month, and the company is set to publish its own findings shortly afterwards.",
       "opciones": [
        "That earlier checks could have reduced the harm.",
-       "That the council has already proved the owners are guilty.",
+       "That the council knowingly ignored evidence of the pollution.",
        "That the council will publish the final findings itself."
       ],
       "respuesta": 0
@@ -755,20 +763,30 @@
          "set to",
          "likely to",
          "estimated to",
-         "anticipated to"
+         "anticipated to",
+         "due to",
+         "tipped to",
+         "forecasted to"
         ],
         [
-         "rise",
-         "increase",
-         "grow",
-         "go up",
-         "climb"
+         "rise by",
+         "increase by",
+         "grow by",
+         "go up by",
+         "climb by",
+         "a rise of",
+         "an increase of",
+         "growth of",
+         "rises by",
+         "increases by"
         ],
         [
          "five per cent",
          "5 per cent",
          "five percent",
-         "5 percent"
+         "5 percent",
+         "5%",
+         "five %"
         ],
         [
          "should there be",
@@ -779,14 +797,30 @@
          "should we delay"
         ],
         [
-         "inform",
-         "notify",
-         "contact",
-         "tell",
-         "warn",
-         "alert",
-         "email",
-         "let"
+         "inform its",
+         "inform our",
+         "inform the",
+         "notify its",
+         "notify our",
+         "notify the",
+         "contact its",
+         "contact our",
+         "contact the",
+         "tell its",
+         "tell our",
+         "tell the",
+         "warn its",
+         "warn the",
+         "alert its",
+         "alert the",
+         "email its",
+         "email the",
+         "let its",
+         "let the",
+         "inform clients",
+         "inform customers",
+         "notify clients",
+         "notify customers"
         ]
        ]
       }
@@ -829,7 +863,8 @@
        "jump",
        "surge",
        "growth",
-       "climb"
+       "climb",
+       "spike"
       ]
      }
     ]
@@ -1012,12 +1047,12 @@
     }
    ],
    "situacion": {
-    "contexto": "Ana y Tom escuchan un fragmento de pódcast sobre un carril bici nuevo.",
+    "contexto": "Ana y Tom escuchan un fragmento de pódcast sobre una ciclovía nueva.",
     "dialogo": [
      {
       "hablante": "Tom",
       "texto": "The host says the new bike lane will 'supposedly' reduce traffic.",
-      "traduccion": "La presentadora dice que el nuevo carril bici «supuestamente» reducirá el tráfico."
+      "traduccion": "La presentadora dice que la nueva ciclovía «supuestamente» reducirá el tráfico."
      },
      {
       "hablante": "Ana",
@@ -1032,7 +1067,7 @@
      {
       "hablante": "Ana",
       "texto": "So she implies the lane helps a little, but not enough.",
-      "traduccion": "O sea, da a entender que el carril ayuda un poco, pero no basta."
+      "traduccion": "O sea, da a entender que la ciclovía ayuda un poco, pero no basta."
      }
     ],
     "item": {
@@ -1040,13 +1075,13 @@
      "consigna": "Según el diálogo, ¿qué da a entender la presentadora con «hardly a solution»?",
      "opciones": [
       {
-       "es": "Que el carril ayuda un poco, pero no resuelve todo."
+       "es": "Que la ciclovía ayuda un poco, pero no resuelve todo."
       },
       {
-       "es": "Que el carril es la solución perfecta para todas las calles."
+       "es": "Que la ciclovía es la solución perfecta para todas las calles."
       },
       {
-       "es": "Que todavía no ha oído nada sobre el carril bici."
+       "es": "Que todavía no ha oído nada sobre la ciclovía."
       }
      ],
      "respuesta": 0,
@@ -1082,7 +1117,11 @@
        "reflective",
        "pensive",
        "yearning",
-       "sentimental"
+       "sentimental",
+       "sad",
+       "bittersweet",
+       "longing",
+       "mournful"
       ],
       "pista": "Es el adjetivo para el tono de quien recuerda el pasado con suave tristeza."
      },
@@ -1104,12 +1143,12 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige qué tono usa el hombre cerca de la puerta.",
-      "feedback": "Decir que es un gran comienzo de semana tras cuarenta minutos de retraso, sin sonreír, es lo contrario de lo que piensa: ironía. No duda del retraso ni lo ignora.",
+      "feedback": "Decir que es un gran comienzo de semana tras cuarenta minutos de retraso, sin sonreír, es lo contrario de lo que piensa: ironía. No está contento con cómo empieza su semana ni considera el retraso irrelevante: protesta entre dientes.",
       "audio": "The train was forty minutes late, and the announcer thanked passengers for their valued patience. A man near the door muttered: Well, that is a great start to my week. He did not smile.",
       "opciones": [
        "Ironic: he means the opposite of what he says.",
-       "Dismissive: he ignores the delay without a word.",
-       "Sceptical: he doubts that the train is really late."
+       "Cheerful: he is genuinely pleased with how his week has started.",
+       "Dismissive: he says the delay is not worth discussing."
       ],
       "respuesta": 0
      },
@@ -1167,7 +1206,7 @@
        "That she hopes to buy the kitchen back one day."
       ],
       "respuesta": 0,
-      "texto": "My grandmother's kitchen has new owners now. They painted the walls white, and I hear the tiles are modern now. I walk past on Sundays, slowly, and the window still smells, somehow, of bread. I do not stop. I never do."
+      "texto": "My grandmother's kitchen has new owners now. They painted the walls white, and I hear they have put in modern tiles. I walk past on Sundays, slowly, and the window still smells, somehow, of bread. I do not stop. I never do."
      },
      {
       "formato": "completar",
@@ -1187,7 +1226,7 @@
        "That the content itself was not strong enough to praise.",
        "That the audience will be moved by the pictures.",
        "That the slides were too colourful to look professional.",
-       "That Tom spoke too quickly for the audience to follow."
+       "That Tom should have rehearsed his delivery more."
       ],
       "respuesta": 0,
       "texto": "Manager's note on Tom's presentation: Thank you, Tom. The slides were very colourful, and you spoke clearly. I am sure the audience will remember the pictures."
@@ -1198,7 +1237,7 @@
       "formato": "escuchar",
       "consigna": "Escucha y elige qué sugiere que la melodía baje en cada repetición.",
       "feedback": "La letra afirma que todo basta, pero la melodía cae y la voz se apaga: la música contradice las palabras y sugiere duda. Nada habla de los vecinos.",
-      "audio": "In the final verse of the song, the singer lists everything she has: a steady job, a small flat and a quiet street. Each line ends with the same phrase, and that is enough, but the melody drops a little every time. By the last chorus, she is almost whispering.",
+      "audio": "In the final verse of the song, the singer lists everything she has: a steady job, a small flat and a quiet street. Each line ends with the same words: and that is enough. But the melody drops a little every time. By the last chorus, she is almost whispering.",
       "opciones": [
        "That she is less convinced than her words claim.",
        "That she has finally accepted her life happily.",
@@ -1543,10 +1582,10 @@
      {
       "formato": "elegir",
       "consigna": "¿Con qué propósito da la autora solo sonidos aislados en este pasaje?",
-      "feedback": "Los sonidos sueltos y la cuenta hasta diez retrasan la explicación y aumentan la inquietud: crean tensión. No hay giro ni tranquilidad.",
+      "feedback": "Los sonidos sueltos y la cuenta hasta diez retrasan la explicación y aumentan la inquietud: crean tensión. La narradora no está tranquila (busca la puerta) y no hay giro.",
       "opciones": [
        "To build tension by delaying what is really happening.",
-       "To reassure the reader that nothing is wrong.",
+       "To show that the narrator is calm and in full control.",
        "To describe the room in everyday, vivid detail.",
        "To introduce a twist that changes the whole story."
       ],
@@ -1556,12 +1595,12 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige qué da a entender el final sobre la narradora.",
-      "feedback": "Pide ayuda antes y escucha la voz amable antes de imaginar el peligro: la experiencia cambió su costumbre. No desconfía de todos ni se arrepiente de pedir ayuda.",
-      "audio": "Looking back, I realise the real problem was never the empty station or the man in the grey coat. It was my habit of expecting the worst, and of staying silent when I needed help. Since that night, I ask for help earlier, and I listen for the kind voice before I imagine the dangerous one. The story ends there, with no lesson spelled out, because the writer trusts the reader to draw one. Perhaps that is why the last paragraph is also the shortest.",
+      "feedback": "Pide ayuda antes y escucha la voz amable antes de imaginar el peligro: la experiencia cambió su costumbre. No confía menos en los extraños ni deja de viajar: lo que cambia es su hábito de callar.",
+      "audio": "Looking back, I realise the real problem was never the empty station or the man in the grey coat. It was my habit of expecting the worst, and of staying silent when I needed help. Since that night, I ask for help earlier, and I listen for the kind voice before I imagine the dangerous one. My sister says that I sound calmer now, and I think that she is right, although I still remember how cold the bench felt.",
       "opciones": [
        "That she has changed a habit, not just lived through a night.",
-       "That she still trusts no stranger she meets.",
-       "That she regrets having asked for help that night."
+       "That she now trusts strangers less than before.",
+       "That she now avoids travelling alone at night."
       ],
       "respuesta": 0
      },
@@ -1579,7 +1618,7 @@
       "formato": "escribir",
       "consigna": "Escribe tu historia de 220 a 270 palabras con gancho, tensión, giro, énfasis y reflexión.",
       "feedback": "Una historia completa abre con un gancho concreto, da una pista y retrasa la respuesta, revela un giro, enfatiza una vez o dos y cierra con una reflexión.",
-      "texto": "Tema: la noche en que perdiste el último tren. Datos: fiesta en otra ciudad; estación vacía a medianoche; el móvil sin batería; oyes pasos; el desconocido resulta ser tu nuevo profesor de ciencias, que te lleva a casa; lo que te asustó fue el silencio; reflexión: pedir ayuda no es debilidad. Incluye gancho, tensión, giro, énfasis (cleft o inversión) y reflexión final.",
+      "texto": "Tema: la noche en que perdiste el último tren. Datos: fiesta en otra ciudad; estación vacía a medianoche; el celular sin batería; oyes pasos; el desconocido resulta ser tu nuevo profesor de ciencias, que te lleva a casa; lo que te asustó fue el silencio; reflexión: pedir ayuda no es debilidad. Incluye gancho, tensión, giro, énfasis (cleft o inversión) y reflexión final.",
       "respuesta": "I still remember the night I missed the last train. I was a student, and I had spent the whole evening at a friend's birthday party in the next town. When I reached the station, the platform was empty and the clock showed midnight. My phone had no battery, and the nearest taxi was far away. I sat on a cold bench and tried to stay calm. It was not the dark that frightened me; it was the silence. Never had I heard a city so quiet. Then, behind me, I heard footsteps. They were slow, and they were coming closer. I held my bag tightly and did not look back. 'Are you waiting for the last train?' a voice asked. I looked up, and my heart stopped. The man in front of me was wearing a long grey coat, and he looked strangely familiar. He turned out to be Mr Duarte, my new science teacher, who lived two streets away. He smiled, offered me a lift and even gave me his phone charger. All the way home I kept thinking about how afraid I had been of a person who only wanted to help. Looking back, I realise that the real problem was not the empty station. It was my habit of expecting the worst and of staying silent when I needed help. Since that night, I ask for help earlier, and I listen for the kind voice before I imagine the dangerous one.",
       "aceptadas": [
        "The night I missed the last train began like any other. I was at a party in the next town, and I left too late. On the platform, the clock showed midnight and nobody was there. I sat down and waited, because my phone had no battery. What frightened me most was the silence. Then I heard footsteps behind me, slow and close. I did not dare to look. The lights were weak, and the wind moved some old paper along the ground. A voice said, 'Are you waiting for the last train?' I looked up, and there was my new science teacher, Mr Duarte, in a long grey coat. It turned out that he lived nearby, and he offered me a lift home. In the car we hardly spoke, but it was warm, and the radio played softly. I felt almost ashamed. I had been afraid of a man who only wanted to help. Looking back, I learned that I often expect the worst when I am alone. Never again will I stay silent when I need help."
@@ -1637,12 +1676,12 @@
     "repaso": [
      {
       "formato": "elegir",
-      "consigna": "¿Qué versión añade tensión antes de revelar al hermano?",
-      "feedback": "La versión con pausas, penumbra y retraso del reconocimiento crea tensión. Las otras revelan todo de inmediato y no dejan espacio a la intriga.",
+      "consigna": "¿Qué versión retrasa más la revelación del hermano para crear tensión?",
+      "feedback": "La versión con pausas, penumbra y retraso del reconocimiento mantiene el suspense. La que empieza con pausas revela al hermano de inmediato, y la tercera lo anuncia de golpe.",
       "opciones": [
        "I opened the door slowly. Nobody spoke. Then, in the half-light, I recognised my brother, smiling and, to my surprise, holding flowers.",
-       "I opened the door, and at once everything was explained: my brother was standing there, smiling, because he had come to apologise.",
-       "I opened the door and was surprised because it was my brother, who was smiling."
+       "I opened the door slowly. Nobody spoke. My brother was standing there, smiling, because he had come to apologise.",
+       "I opened the door and, to my surprise, it was my brother, who was smiling and holding flowers."
       ],
       "respuesta": 0,
       "texto": "Draft: I opened the door. My brother was standing there, smiling. He had come to apologise."
@@ -1666,7 +1705,14 @@
       "texto": "The letter looked ordinary, just a white envelope with a blurred name on it. Little did I ___ that it would change my life.",
       "respuesta": "know",
       "aceptadas": [
-       "know"
+       "know",
+       "realise",
+       "realize",
+       "suspect",
+       "imagine",
+       "dream",
+       "guess",
+       "think"
       ]
      }
     ]
@@ -1738,8 +1784,8 @@
      "nota": "Hacer contactos: retoma lo que dice el otro con una pregunta de seguimiento. Newcomer = recién llegado."
     },
     {
-     "en": "Good morning, Mr Reid, I am writing to the landlord about the flat on Elm Street, which I would like to visit this week.",
-     "es": "Buenos días, le escribo al casero por el departamento de la calle Elm, que me gustaría visitar esta semana.",
+     "en": "Good morning, Mr Reid, I am a newcomer writing about the flat on Elm Street, and I would like to visit it this week.",
+     "es": "Buenos días, señor Reid: soy un recién llegado y le escribo por el departamento de la calle Elm; me gustaría visitarlo esta semana.",
      "nota": "Primer contacto con el casero (landlord): registro formal y motivo claro en la primera frase."
     },
     {
@@ -1980,17 +2026,17 @@
       "texto": "Acabas de llegar a una ciudad nueva. Escribe al casero, el señor Reid: preséntate como recién llegado; ofrece pagar la fianza ahora si el alquiler baja de 700 a 650; ofrece un contrato de doce meses a cambio; propón un compromiso justo; repara un malentendido: querías decir la segunda planta, no la primera; cierra con cortesía.",
       "respuesta": "Dear Mr Reid, Good morning. I am a newcomer to the city, and I am writing about the flat on Elm Street. I arrived last week, and I am looking for a quiet place near my new job. I have seen the photographs, and I would like to visit the flat this week if that is possible. I work as a translator, so I am at home during the day and I will look after the flat carefully. I can pay the deposit now, provided that the rent is 650 a month instead of 700. In exchange for the lower rent, I would sign a twelve-month contract, and I could start on the first of next month. I think that would be a fair compromise for both of us, and I am sure we can reach an agreement that suits you. I also think there was a misunderstanding about the floor: I meant the second floor, not the first. Let me clarify this now so that we can avoid any problem later. Thank you very much for your patience, and I look forward to your reply. Kind regards, Carlos",
       "aceptadas": [
-       "Dear Mr Reid, I have just arrived in the city, so I am new to everything. I am interested in the flat on Elm Street, and I would like to visit it this week. I would pay the deposit today as long as the rent is 650 a month and not 700. In return, I can offer a twelve-month contract, and I can move in at the start of next month. I believe that would be a fair compromise. I also think there was a mix-up about the floor, because what I meant was the second floor. I would like to clarify this before we meet so that nobody is disappointed. Thank you for your time and your patience. Yours sincerely, Carlos"
+       "Dear Mr Reid, I have just arrived in the city, so I am new to everything. I am interested in the flat on Elm Street, and I would like to visit it this week. I work as a translator, so I am at home most of the day and I will take good care of the flat. I would pay the deposit today as long as the rent is 650 a month and not 700. In return, I can offer a twelve-month contract, and I can move in at the start of next month. I believe that would be a fair compromise. I also think there was a mix-up about the floor, because what I meant was the second floor. I would like to clarify this before we meet so that nobody is disappointed. Thank you for your time and your patience, and thank you again for considering my offer. Yours sincerely, Carlos"
       ],
       "textoIdioma": "es",
       "rubrica": {
        "palabras": [
-        110,
+        144,
         330
        ],
        "evidencias": [
         [
-         "newcomer",
+         "a newcomer",
          "new to the city",
          "new in the city",
          "new to town",
@@ -1998,7 +2044,7 @@
          "just arrived",
          "recently arrived",
          "have arrived",
-         "arrived"
+         "i arrived"
         ],
         [
          "provided that",
@@ -2014,9 +2060,10 @@
          "in return"
         ],
         [
-         "misunderstanding",
-         "mix-up",
-         "mixup"
+         "a misunderstanding",
+         "the misunderstanding",
+         "a mix-up",
+         "a mixup"
         ],
         [
          "I meant",
@@ -2027,7 +2074,7 @@
         ],
         [
          "Thank you",
-         "Thanks",
+         "Thanks for",
          "Kind regards",
          "Yours sincerely"
         ]
@@ -2037,11 +2084,11 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige qué revela la condición del casero sobre sus prioridades.",
-      "feedback": "Acepta incluir las facturas a cambio de un año de contrato: prefiere estabilidad a un alquiler mayor. No rechaza nada ni menciona impagos.",
+      "feedback": "Acepta incluir las facturas a cambio de un año de contrato: prefiere estabilidad a un alquiler mayor. No se muestra rígido con el contrato (admite una salida anticipada con dos meses de aviso) ni menciona impagos.",
       "audio": "The tenant said she would take the flat if the bills were included in the rent. The landlord replied that he could do that, but only if she signed for a year. She thought for a moment, asked whether the contract could be ended early in an emergency, and then agreed when he said that it could, provided that she gave two months' notice. He wrote the figures down carefully, and they agreed to meet on Monday.",
       "opciones": [
        "He would rather have a stable tenant than a higher rent.",
-       "He hopes she will refuse so that he can raise the rent.",
+       "He refuses to consider ending the contract early in any situation.",
        "He is mainly worried that the bills will not be paid."
       ],
       "respuesta": 0
@@ -2052,7 +2099,7 @@
       "feedback": "Mantiene las dos peticiones (cambiar la visita y hablar del alquiler) con fórmulas corteses. La segunda sigue siendo una orden y la tercera se disculpa tanto que renuncia a pedir.",
       "opciones": [
        "Good morning, Mr Reid. Would it be possible to move the viewing to another day? I would also like to discuss the rent.",
-       "Good morning, Mr Reid. I am afraid you will have to change the viewing, and the rent must go down.",
+       "Good morning, Mr Reid. I am afraid you will have to change the viewing to another day, and the rent you mentioned must go down.",
        "Dear Mr Reid, I am so sorry to trouble you, but I cannot possibly come, and I will not mention the rent."
       ],
       "respuesta": 0,
@@ -2071,7 +2118,16 @@
        "cut",
        "do",
        "close",
-       "seal"
+       "seal",
+       "clinch",
+       "land",
+       "agree",
+       "finalise",
+       "finalize",
+       "conclude",
+       "secure",
+       "sign",
+       "get"
       ]
      }
     ],
@@ -2079,12 +2135,12 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige por qué este modo de reparar el malentendido funciona.",
-      "feedback": "Reconoce su parte, repite el día correcto y ofrece una solución: repara sin culpar. No acusa al agente de oír mal ni aplaza nada.",
+      "feedback": "Reconoce su parte, repite el día correcto y ofrece una solución: repara sin culpar. No insinúa que el agente oyera mal ni cambia de tema.",
       "audio": "Ana had told the agent that the keys would be ready on Friday. When he phoned on Friday morning, she realised that she had meant Thursday. Instead of defending herself, she apologised for the confusion, repeated the correct day, and offered to collect the keys herself that afternoon.",
       "opciones": [
        "She accepts her share of the confusion and offers a practical solution.",
-       "She shows that the agent made the mistake in the first place.",
-       "She postpones the meeting until the agent has calmed down."
+       "She gently suggests that the agent did not listen carefully.",
+       "She changes the subject to avoid discussing the mistake."
       ],
       "respuesta": 0
      },
@@ -2109,12 +2165,26 @@
       "respuesta": "I accept the contract provided that the rent is 650.",
       "aceptadas": [
        "I will accept the contract providing that the rent is 650.",
-       "I accept the contract as long as the rent is 650."
+       "I accept the contract as long as the rent is 650.",
+       "I will accept the contract provided that the rent is 650.",
+       "I accept the contract providing that the rent is 650.",
+       "I accept the contract so long as the rent is 650."
       ],
       "textoIdioma": "es"
      }
     ]
    }
   }
- ]
+ ],
+ "review": {
+  "status": "GO",
+  "reviewer": "claude-reviewer-c1",
+  "date": "2026-09-30",
+  "notes": [
+   "Revisión independiente C1 (N9 C91–C95) completada: concepto, fase, canDo y tarea del mapa respetados; ≥2 ítems de inferencia/actitud/propósito por clase en evaluación+repaso.",
+   "Claves verificadas contra texto/audio; distractores reescritos como casi-aciertos (inversión de postura, cierto-pero-no-dicho, generalización) en C91–C95 (p. ej. C92 escuchar ayuntamiento, C93 tono irónico, C94 repaso tensión, C95 casero/agente).",
+   "C94 eval escuchar: eliminada la contradicción interna del audio («lesson spelled out»); C95: frase de enseñanza con Mr Reid/landlord incoherente corregida; rúbricas reescritas con frases (C92, C95) y mínimo C95 en 144 palabras (60 % del mapa), aceptada alternativa ampliada.",
+   "Completar: listas `aceptadas` ampliadas con sinónimos defendibles (C92 projected/due/tipped, C93 wistful/sad/bittersweet, C94 know/realise/suspect, C95 strike/clinch/land/agree); español neutro (celular, ciclovía, estacionamiento, a pie)."
+  ]
+ }
 }
