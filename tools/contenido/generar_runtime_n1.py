@@ -154,9 +154,65 @@ def apply_fill_cue(source: dict) -> None:
         source["prompt"] = {"es": f"Completa la frase: «{cue['pista']}»"}
 
 
+ITEM_FIXES: dict[str, dict] = {}
+
+
+def load_item_fixes() -> dict[str, dict]:
+    """Correcciones de ejercicios aprobadas (correcciones-items.json con GO)."""
+    fixes: dict[str, dict] = {}
+    for spec in LEVELS:
+        path = EDITORIAL / spec["id"] / "correcciones-items.json"
+        if not path.exists():
+            continue
+        document = json.loads(path.read_text(encoding="utf-8"))
+        if document.get("review", {}).get("status") != "GO":
+            continue
+        fixes.update(document["items"])
+    return fixes
+
+
+def apply_item_fix(source: dict) -> None:
+    fix = ITEM_FIXES.get(source.get("id", ""))
+    if fix is None:
+        return
+    exercise_id = source["id"]
+    answer = source.setdefault("answer", {})
+    origin = source.setdefault("origin", {})
+    if "prompt" in fix:
+        source["prompt"] = {"es": fix["prompt"]}
+    if "choices" in fix:
+        source["choices"] = [{"text": text} for text in fix["choices"]]
+    if "answerIndex" in fix:
+        answer["index"] = fix["answerIndex"]
+    if "answerText" in fix:
+        answer["text"] = fix["answerText"]
+    if "accepted" in fix:
+        answer["accepted"] = list(dict.fromkeys([answer.get("text", ""), *fix["accepted"]]))
+    if "tokens" in fix:
+        answer["tokens"] = fix["tokens"]
+    for key, target in (("feedback", "feedback"), ("hint", "hint")):
+        if key in fix:
+            origin[target] = {"es": fix[key]}
+    for key in ("text", "audio"):
+        if key in fix:
+            origin[key] = fix[key]
+    if "pairs" in fix:
+        pairs = [[left, {"es": right}] for left, right in fix["pairs"]]
+        origin["pairs"] = pairs
+        answer["pairs"] = pairs
+    if source.get("format") in {"elegir", "escuchar"}:
+        choices = source.get("choices", [])
+        if len(choices) < 3 or not 0 <= int(answer.get("index", -1)) < len(choices):
+            raise ValueError(f"{exercise_id}: corrección con opciones o índice inválidos")
+    if source.get("format") == "ordenar" and answer.get("tokens"):
+        if " ".join(answer["tokens"]) != answer.get("text", "").strip():
+            raise ValueError(f"{exercise_id}: las fichas no forman la respuesta")
+
+
 def normalized_exercise(document: dict, class_document: dict) -> dict:
     source = deepcopy(document)
     apply_fill_cue(source)
+    apply_item_fix(source)
     origin = source.setdefault("origin", {})
     if (
         source.get("format") == "completar"
@@ -600,6 +656,8 @@ def route_unit(
 def compile_runtime() -> tuple[dict[str, dict], dict, dict, dict]:
     FILL_CUES.clear()
     FILL_CUES.update(load_fill_cues())
+    ITEM_FIXES.clear()
+    ITEM_FIXES.update(load_item_fixes())
     library = {
         "schema": "exercise-library/1",
         "libraryId": "onelingo-en-editorial",
