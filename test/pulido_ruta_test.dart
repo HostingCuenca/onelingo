@@ -94,4 +94,29 @@ void main() {
       expect(superaUmbral(0, 0, 0.8), isFalse);
     });
   });
+
+  group('Producción abierta', () {
+    final item = Item.fromJson({
+      'id': 'abierta',
+      'formato': 'escribir',
+      'consigna': {'es': 'Escribe'},
+      'respuesta': 'The request was received on Monday and the repair is being done now.',
+      'abierta': true,
+      'minimoPalabras': 8,
+      'maximoPalabras': 20,
+    });
+
+    test('se completa al llegar al mínimo de palabras, sin texto exacto', () {
+      expect(item.abierta, isTrue);
+      expect(corregir(item, 'My laptop was repaired.', 'en'), isFalse);
+      expect(
+        corregir(
+          item,
+          'My laptop was checked yesterday and it is ready now.',
+          'en',
+        ),
+        isTrue,
+      );
+    });
+  });
 }

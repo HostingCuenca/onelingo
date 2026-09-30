@@ -223,9 +223,14 @@ class Item {
     this.minimoPalabras,
     this.maximoPalabras,
     this.evidenciasEscritura = const [],
+    this.abierta = false,
   });
   final String id;
   final FormatoItem formato;
+
+  /// Producción abierta (escritura larga sin rúbrica): el alumno escribe
+  /// dentro del rango de palabras y compara su texto con el modelo. No puntúa.
+  final bool abierta;
   final TextoApoyo consigna, feedback;
   final TextoApoyo? pista, preguntaApoyo;
   final String? pregunta, respuesta, texto, audio, imagen, imagenAlt;
@@ -272,6 +277,7 @@ class Item {
       partesObligatorias: List<int>.from(
         j['partesObligatorias'] as List? ?? const [],
       ),
+      abierta: j['abierta'] == true,
       minimoPalabras: j['minimoPalabras'] as int?,
       maximoPalabras: j['maximoPalabras'] as int?,
       evidenciasEscritura: [

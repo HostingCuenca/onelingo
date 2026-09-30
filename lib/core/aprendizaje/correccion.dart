@@ -110,16 +110,21 @@ bool soloFallanTildes(Item item, String respuesta, String idioma) =>
     !_coincide(item, respuesta, idioma, true) &&
     _coincide(item, respuesta, idioma, false);
 
+int contarPalabras(String texto) =>
+    normalizar(texto).split(' ').where((palabra) => palabra.isNotEmpty).length;
+
+/// Producción abierta: basta con escribir dentro de la extensión pedida.
+bool produccionAbiertaCompleta(Item item, String respuesta) =>
+    contarPalabras(respuesta) >= (item.minimoPalabras ?? 1);
+
 bool _cumpleRubricaEscritura(Item item, String respuesta, String idioma) {
+  if (item.abierta) return produccionAbiertaCompleta(item, respuesta);
   if (item.evidenciasEscritura.isEmpty ||
       item.minimoPalabras == null ||
       item.maximoPalabras == null) {
     return respuestaEscritaCorrecta(item, respuesta, idioma);
   }
-  final palabras = normalizar(respuesta)
-      .split(' ')
-      .where((palabra) => palabra.isNotEmpty)
-      .length;
+  final palabras = contarPalabras(respuesta);
   if (palabras < item.minimoPalabras! || palabras > item.maximoPalabras!) {
     return false;
   }

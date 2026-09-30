@@ -292,6 +292,7 @@ Item itemDesdeVariante(ExerciseVariant variant) {
         wordRange is List && wordRange.length == 2 && wordRange.last is num
         ? (wordRange.last as num).toInt()
         : null,
+    abierta: scoringMap['openProduction'] == true,
     evidenciasEscritura: [
       for (final grupo in scoringMap['evidenceGroups'] as List? ?? const [])
         if (grupo is List)

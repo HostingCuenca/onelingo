@@ -136,7 +136,43 @@ def normalized_exercise(document: dict, class_document: dict) -> dict:
                         break
         origin["pairs"] = pairs
         source.setdefault("answer", {})["pairs"] = pairs
+    open_production(source)
     return source
+
+
+OPEN_WORDS = 12
+WORD_RANGE = re.compile(r"(\d+)\s*[–-]\s*(\d+)\s*palabras")
+
+
+def open_production(source: dict) -> None:
+    """Escritura larga sin rúbrica: producción abierta, no puntuable.
+
+    Un texto de más de ``OPEN_WORDS`` palabras tiene muchas formas correctas;
+    compararlo con una o dos soluciones exactas rechaza respuestas válidas.
+    Sin IA en runtime, el alumno escribe dentro de un rango de extensión y
+    después compara su texto con el modelo. Los ítems con ``evidenceGroups``
+    conservan su rúbrica determinista y siguen puntuando.
+    """
+    if source.get("format") != "escribir":
+        return
+    origin = source.setdefault("origin", {})
+    scoring = origin.setdefault("scoring", {})
+    if scoring.get("evidenceGroups"):
+        return
+    words = len(str(source.get("answer", {}).get("text", "")).split())
+    if words <= OPEN_WORDS:
+        if not scoring:
+            origin.pop("scoring")
+        return
+    scoring["openProduction"] = True
+    if not scoring.get("wordRange"):
+        prompt = str((source.get("prompt") or {}).get("es", ""))
+        match = WORD_RANGE.search(prompt)
+        scoring["wordRange"] = (
+            [int(match.group(1)), int(match.group(2))]
+            if match
+            else [max(4, round(words * 0.6)), round(words * 1.8) + 5]
+        )
 
 
 def variant(document: dict, pool: str, class_document: dict) -> tuple[dict, dict]:
@@ -230,6 +266,8 @@ def route_item(source: dict, pool: str, class_document: dict) -> dict:
         item["minimoPalabras"], item["maximoPalabras"] = scoring["wordRange"]
     if scoring.get("evidenceGroups"):
         item["evidenciasEscritura"] = scoring["evidenceGroups"]
+    if scoring.get("openProduction"):
+        item["abierta"] = True
     if origin.get("audio") is not None:
         item["audio"] = origin["audio"]
     if origin.get("imageAsset") is not None:

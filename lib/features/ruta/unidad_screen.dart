@@ -354,6 +354,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     final puntuables = [
       for (final p in pantallas)
         if (p.item != null &&
+            !p.item!.abierta &&
             (widget.repaso || p.paso.tipo == TipoPaso.evaluacion))
           '${p.paso.id}:${p.item!.id}',
     ];
@@ -556,7 +557,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           guiada: guiada,
           permitirReintento: !evalua,
           onComprobado: (correcta, respuesta) {
-            if (evalua) {
+            // La producción abierta no puntúa: solo se compara con el modelo.
+            if (evalua && !item.abierta) {
               primeras.putIfAbsent('${p.id}:${item.id}', () => correcta);
             } else if (!correcta) {
               setState(() => _repetirAlFinal(p, item));

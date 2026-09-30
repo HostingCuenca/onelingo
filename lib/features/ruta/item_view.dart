@@ -218,7 +218,10 @@ class _ItemViewState extends State<ItemView> {
           : item.opciones.isNotEmpty
           ? opcionCompletar != null
           : escrito.text.trim().isNotEmpty,
-    FormatoItem.escribir => escrito.text.trim().isNotEmpty,
+    FormatoItem.escribir =>
+      item.abierta
+          ? produccionAbiertaCompleta(item, escrito.text)
+          : escrito.text.trim().isNotEmpty,
     FormatoItem.relacionar => emparejados.length == item.pares.length,
   };
 
@@ -289,6 +292,8 @@ class _ItemViewState extends State<ItemView> {
     enableSuggestions: false,
     textCapitalization: TextCapitalization.none,
     style: const TextStyle(fontSize: 20),
+    minLines: item.abierta ? 4 : 1,
+    maxLines: item.abierta ? 8 : 1,
     decoration: const InputDecoration(
       hintText: 'Escribe tu respuesta',
       border: OutlineInputBorder(),
@@ -524,6 +529,15 @@ class _ItemViewState extends State<ItemView> {
               ),
             ),
           campoTexto(),
+          if (item.abierta)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                '${contarPalabras(escrito.text)} palabras · se piden '
+                '${item.maximoPalabras == null ? 'al menos ${item.minimoPalabras ?? 1}' : 'entre ${item.minimoPalabras ?? 1} y ${item.maximoPalabras}'}',
+                style: const TextStyle(color: OL.gris, fontSize: 15),
+              ),
+            ),
         ];
       case FormatoItem.relacionar:
         return [
@@ -645,7 +659,32 @@ class _ItemViewState extends State<ItemView> {
               style: const TextStyle(fontSize: 17, height: 1.4),
             ),
         ],
-        if (ok != null)
+        if (ok != null && item.abierta)
+          FeedbackDock(
+            child: AnswerFeedback(
+              correct: true,
+              title: '¡Texto listo! Compáralo con el modelo',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.respuesta ?? '',
+                    style: const TextStyle(
+                      fontSize: 17,
+                      height: 1.4,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    t(item.feedback),
+                    style: const TextStyle(fontSize: 17, height: 1.4),
+                  ),
+                ],
+              ),
+            ),
+          )
+        else if (ok != null)
           FeedbackDock(
             child: AnswerFeedback(
               correct: ok,
