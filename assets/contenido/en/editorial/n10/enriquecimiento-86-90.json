@@ -1,0 +1,685 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 86,
+    "end": 90
+  },
+  "classes": {
+    "en.n10.class-86": {
+      "explicacion": {
+        "titulo": "Seguir voces que se solapan",
+        "texto": "En una conversación rápida la gente se interrumpe, termina las frases de otros y habla a la vez. En los textos se marca con un guion (—): «Are we gonna book the room or— / —already did». Tu trabajo es reconstruir la idea aunque falten trozos: fíjate en quién habla, en las formas reducidas (gonna, dunno, kinda) y en las fórmulas de turno: hang on (espera), go ahead (sigue), sorry to interrupt (perdona que corte), as I was saying (como iba diciendo). No intentes entender cada palabra: sigue el hilo."
+      },
+      "patron": {
+        "texto": "Frase interrumpida — frase completada:",
+        "formula": [
+          {
+            "texto": "Mia: So are we gonna book it or—",
+            "nota": "la frase queda cortada (—)"
+          },
+          {
+            "texto": "Tom: —already did.",
+            "nota": "el otro hablante continúa o responde"
+          },
+          {
+            "texto": "Hang on, it says Saturday.",
+            "nota": "fórmula para frenar y corregir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sorry for interrupt you.",
+          "correcto": "Sorry to interrupt you.",
+          "explicacion": "Para pedir perdón antes de hacer algo se usa sorry to + verbo; «por interrumpir» no es for + verbo base."
+        },
+        {
+          "incorrecto": "Can you repeat me the last part?",
+          "correcto": "Can you repeat the last part?",
+          "explicacion": "Repeat no lleva complemento de persona como en español («repítame»): se dice repeat the last part o say that again."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom organizan una cena y hablan tan rápido que a veces se pisan.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "So are we gonna book the room for Friday or—",
+            "traduccion": "¿Y vamos a reservar la sala para el viernes o…?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Already did. I booked it yesterday, but— hang on, it says Saturday.",
+            "traduccion": "Ya lo hice. La reservé ayer, pero… espera, pone sábado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Saturday? No, no, we said Friday! Sorry, go ahead.",
+            "traduccion": "¿Sábado? ¡No, no, dijimos viernes! Perdona, sigue."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Right, I will change it. Sorry, I talked over you.",
+            "traduccion": "Vale, lo cambio. Perdona, te hablé encima."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pasó con la reserva de la sala?",
+          "opciones": [
+            {
+              "es": "Tom la reservó, pero para el sábado en lugar del viernes."
+            },
+            {
+              "es": "Nadie la ha reservado todavía."
+            },
+            {
+              "es": "Mia la reservó para el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I booked it yesterday, but it says Saturday»: reservó, pero con la fecha equivocada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Fórmula",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Frenar"
+            },
+            {
+              "texto": "Hang on"
+            },
+            {
+              "texto": "Espera un momento"
+            }
+          ],
+          [
+            {
+              "texto": "Ceder el turno"
+            },
+            {
+              "texto": "Go ahead"
+            },
+            {
+              "texto": "Sigue, adelante"
+            }
+          ],
+          [
+            {
+              "texto": "Pedir permiso"
+            },
+            {
+              "texto": "Sorry to interrupt"
+            },
+            {
+              "texto": "Perdona que corte"
+            }
+          ],
+          [
+            {
+              "texto": "Retomar"
+            },
+            {
+              "texto": "As I was saying"
+            },
+            {
+              "texto": "Como iba diciendo"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-87": {
+      "explicacion": {
+        "titulo": "Ingleses del mundo",
+        "texto": "El inglés se habla en decenas de países y cada variedad tiene su acento, su ritmo y algunas palabras propias, aunque comparte casi toda la gramática. Aquí practicas lo que se ve en el texto: el léxico y las estructuras. Son rasgos típicos: prepone (India, «adelantar»), how far? y flash me (Nigeria), grand y «I am after + -ing» (Irlanda), arvo, reckon y heaps (Australia). Como la voz de la app es sintética, el acento lo aprenderás oyendo hablantes reales. Si no entiendes una palabra, deduce por el contexto o pide que te la aclaren."
+      },
+      "patron": {
+        "texto": "Rasgo + variedad + significado:",
+        "formula": [
+          {
+            "texto": "prepone the meeting",
+            "nota": "India: adelantar, no retrasar"
+          },
+          {
+            "texto": "flash me",
+            "nota": "Nigeria: llamada perdida de aviso"
+          },
+          {
+            "texto": "I am after finishing",
+            "nota": "Irlanda: acabo de terminar"
+          },
+          {
+            "texto": "this arvo",
+            "nota": "Australia: esta tarde"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am after to finish my exams.",
+          "correcto": "I am after finishing my exams.",
+          "explicacion": "En inglés irlandés after va seguido de -ing: I am after finishing, no after to finish."
+        },
+        {
+          "incorrecto": "We have heaps of times this arvo.",
+          "correcto": "We have heaps of time this arvo.",
+          "explicacion": "Time, cuando significa «tiempo disponible», es incontable: heaps of time, sin -s."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo trabaja con compañeros de otros países y le pide a Ana que le aclare dos expresiones.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "My colleague in India wants to prepone the call. What does that mean?",
+            "traduccion": "Mi compañero de la India quiere «prepone» la llamada. ¿Qué significa?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It means to make it earlier, so the call is at nine, not ten.",
+            "traduccion": "Significa adelantarla, así que la llamada es a las nueve y no a las diez."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And in Ireland they say «I am grand». Is that good?",
+            "traduccion": "Y en Irlanda dicen «I am grand». ¿Eso es bueno?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, it means «I am fine». Not «big».",
+            "traduccion": "Sí, significa «estoy bien». No «grande»."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué significa «prepone» según Ana?",
+          "opciones": [
+            {
+              "es": "Adelantar la llamada a una hora más temprana."
+            },
+            {
+              "es": "Retrasar la llamada a una hora más tarde."
+            },
+            {
+              "es": "Cancelar la llamada."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana lo explica: «to make it earlier», de las diez a las nueve."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "País",
+          "Rasgo",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "India"
+            },
+            {
+              "texto": "prepone"
+            },
+            {
+              "texto": "adelantar una reunión"
+            }
+          ],
+          [
+            {
+              "texto": "Nigeria"
+            },
+            {
+              "texto": "How far? / flash me"
+            },
+            {
+              "texto": "¿qué tal? / toque de llamada"
+            }
+          ],
+          [
+            {
+              "texto": "Ireland (Irlanda)"
+            },
+            {
+              "texto": "grand / I am after + -ing"
+            },
+            {
+              "texto": "bien / acabo de + infinitivo"
+            }
+          ],
+          [
+            {
+              "texto": "Australia"
+            },
+            {
+              "texto": "arvo, reckon, heaps"
+            },
+            {
+              "texto": "tarde, creer, un montón"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-88": {
+      "explicacion": {
+        "titulo": "Lo que se dice y lo que se quiere decir",
+        "texto": "En inglés cotidiano, sobre todo con cortesía, lo importante suele quedar sin decir. Una pausa («Well…»), un suavizador (a bit, I suppose, hardly) o una respuesta vaga (I will think about it, we will see) suelen significar «no» o «no me convence». Estrategia: pregúntate qué esperaba el oyente y si la respuesta cumple esa expectativa; si evita decir sí o no, probablemente es un no amable. Es distinto del español, donde se suele ser más directo: «It is a bit pricey» casi nunca es solo un comentario sobre el precio."
+      },
+      "patron": {
+        "texto": "Pausa + suavizador + respuesta vaga = rechazo amable:",
+        "formula": [
+          {
+            "texto": "Well…",
+            "nota": "pausa: algo va a incomodar"
+          },
+          {
+            "texto": "it is a bit pricey,",
+            "nota": "suavizador: el «no» se disfraza de comentario"
+          },
+          {
+            "texto": "so I will think about it.",
+            "nota": "respuesta vaga: probablemente no"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He said me that it was a bit expensive.",
+          "correcto": "He told me that it was a bit expensive.",
+          "explicacion": "Con persona como complemento se usa told me, no said me: he told me / he said to me."
+        },
+        {
+          "incorrecto": "It is not exactly cheap, no?",
+          "correcto": "It is not exactly cheap, is it?",
+          "explicacion": "La coletilla «¿no?» se traduce con una question tag: is it? después de una frase negativa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos están en una tienda de ropa y Carlos le pregunta por una chaqueta azul.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Do you want to buy the blue jacket?",
+            "traduccion": "¿Quieres comprar la chaqueta azul?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Well… it is a bit pricey, so I will think about it.",
+            "traduccion": "Bueno… es un poco cara, así que lo pensaré."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So, is that a yes?",
+            "traduccion": "Entonces, ¿eso es un sí?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "To be honest, not exactly.",
+            "traduccion": "Sinceramente, no exactamente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué quiere decir realmente Sara?",
+          "opciones": [
+            {
+              "es": "Que probablemente no va a comprar la chaqueta."
+            },
+            {
+              "es": "Que quiere comprar la chaqueta ahora."
+            },
+            {
+              "es": "Que no ha entendido la pregunta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara evita decir que sí («a bit pricey», «I will think about it») y al final confirma: «not exactly»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Lo que dice",
+          "Lo que quiere decir",
+          "Pista"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "It is a bit pricey."
+            },
+            {
+              "texto": "No lo compraré"
+            },
+            {
+              "texto": "a bit + pausa"
+            }
+          ],
+          [
+            {
+              "texto": "I suppose so."
+            },
+            {
+              "texto": "Acepta sin ganas"
+            },
+            {
+              "texto": "I suppose"
+            }
+          ],
+          [
+            {
+              "texto": "I will think about it."
+            },
+            {
+              "texto": "Probablemente no"
+            },
+            {
+              "texto": "respuesta vaga"
+            }
+          ],
+          [
+            {
+              "texto": "Not exactly."
+            },
+            {
+              "texto": "No"
+            },
+            {
+              "texto": "frase negativa suave"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-89": {
+      "explicacion": {
+        "titulo": "De las notas al resumen",
+        "texto": "Al escuchar una charla, apunta solo lo esencial: el tema, dos o tres ideas principales, algún dato concreto (cifras, nombres, fechas) y la conclusión. Las señales del orador te ayudan: first, second, however, in short. Para resumir, atribuye lo que se dijo (The lecturer outlined…, According to her…, She went on to…) y cierra con To summarise o In short. Reformula con tus palabras y no añadas nada que no oyeras: un resumen fiel no incluye datos inventados ni tu opinión. «Resumir» es summarise; resume en inglés significa «reanudar»."
+      },
+      "patron": {
+        "texto": "Fuente + idea principal + detalle + conclusión:",
+        "formula": [
+          {
+            "texto": "According to the lecturer,",
+            "nota": "atribuye la idea a la fuente"
+          },
+          {
+            "texto": "the key benefit is the price.",
+            "nota": "idea principal"
+          },
+          {
+            "texto": "She went on to give a detail:",
+            "nota": "anuncia un dato concreto"
+          },
+          {
+            "texto": "a bike costs one euro.",
+            "nota": "el detalle: cifra o ejemplo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lecturer said us three reasons.",
+          "correcto": "The lecturer told us three reasons.",
+          "explicacion": "Said no lleva persona directamente: se dice told us o said to us."
+        },
+        {
+          "incorrecto": "Resuming, shared bikes are cheap and healthy.",
+          "correcto": "To summarise, shared bikes are cheap and healthy.",
+          "explicacion": "Resume significa «reanudar». Para resumir se usa to summarise o in short."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana no pudo ir a la charla de la mañana y Leo le cuenta lo que tomó en sus apuntes.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What did the lecturer say about shared bikes?",
+            "traduccion": "¿Qué dijo la conferenciante sobre las bicicletas compartidas?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She outlined three reasons. According to her, the key benefit is the price.",
+            "traduccion": "Expuso tres razones. Según ella, el beneficio clave es el precio."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Did she give a detail?",
+            "traduccion": "¿Dio algún detalle?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes, she said a shared bike costs about one euro for half an hour.",
+            "traduccion": "Sí, dijo que una bicicleta compartida cuesta alrededor de un euro por media hora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué detalle dio la conferenciante?",
+          "opciones": [
+            {
+              "es": "Que una bicicleta compartida cuesta cerca de un euro por media hora."
+            },
+            {
+              "es": "Que las bicicletas compartidas son gratis."
+            },
+            {
+              "es": "Que hay mil bicicletas en la ciudad."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «a shared bike costs about one euro for half an hour»; es el dato concreto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué hacer",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Anunciar"
+            },
+            {
+              "texto": "Número de ideas"
+            },
+            {
+              "texto": "She outlined three reasons."
+            }
+          ],
+          [
+            {
+              "texto": "Atribuir"
+            },
+            {
+              "texto": "According to…"
+            },
+            {
+              "texto": "According to her, the key benefit…"
+            }
+          ],
+          [
+            {
+              "texto": "Añadir detalle"
+            },
+            {
+              "texto": "went on to"
+            },
+            {
+              "texto": "She went on to give a detail."
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "To summarise / In short"
+            },
+            {
+              "texto": "To summarise, bikes are cheap."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-90": {
+      "explicacion": {
+        "titulo": "Escuchar, resumir y reaccionar",
+        "texto": "Un episodio de pódcast se trabaja en cuatro pasos: 1) toma notas mientras escuchas; 2) resume con fidelidad lo que se dijo (The host asked…, According to the guest…); 3) señala la implicación, lo que se insinúa sin decirlo (seemed to imply…; «Not exactly» suele ser un no amable); 4) añade tu reacción con matiz (to be fair, I see her point, but…, I would add…, I agree up to a point). Mantén separadas las tres capas: lo dicho, lo insinuado y lo que opinas tú."
+      },
+      "patron": {
+        "texto": "Resumen fiel + implicación + reacción con matiz:",
+        "formula": [
+          {
+            "texto": "According to the guest, it depends.",
+            "nota": "resumen fiel: atribuye lo dicho"
+          },
+          {
+            "texto": "Her answer seemed to imply a doubt.",
+            "nota": "implicación: lo no dicho"
+          },
+          {
+            "texto": "To be fair, I agree up to a point,",
+            "nota": "reacción con matiz"
+          },
+          {
+            "texto": "but I would add one doubt.",
+            "nota": "tu aportación"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "They talk about the work from home.",
+          "correcto": "They talk about working from home.",
+          "explicacion": "Para la actividad en general se usa el gerundio: working from home, no the work from home."
+        },
+        {
+          "incorrecto": "I was surprised for her answer.",
+          "correcto": "I was surprised by her answer.",
+          "explicacion": "Con surprised el agente se introduce con by: surprised by her answer."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom acaban de oír un episodio de pódcast sobre el teletrabajo y lo comentan.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What struck me was that the guest never said working from home was easy.",
+            "traduccion": "Lo que me llamó la atención fue que la invitada nunca dijo que trabajar en casa fuera fácil."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I noticed that too. She seemed to imply that it is lonely.",
+            "traduccion": "Yo también lo noté. Parecía dar a entender que es solitario."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "To be fair, she also mentioned the benefits.",
+            "traduccion": "Para ser justos, también mencionó los beneficios."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "True, but I would add that not everyone has a quiet room.",
+            "traduccion": "Es verdad, pero yo añadiría que no todo el mundo tiene una habitación tranquila."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué insinuó la invitada sin decirlo?",
+          "opciones": [
+            {
+              "es": "Que trabajar en casa puede ser solitario."
+            },
+            {
+              "es": "Que trabajar en casa es muy fácil."
+            },
+            {
+              "es": "Que nadie debería trabajar en casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que la invitada «seemed to imply that it is lonely»: lo insinuó sin decirlo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Capa",
+          "Qué hacer",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Lo dicho"
+            },
+            {
+              "texto": "Resumen fiel"
+            },
+            {
+              "texto": "According to the guest, it depends."
+            }
+          ],
+          [
+            {
+              "texto": "Lo insinuado"
+            },
+            {
+              "texto": "seemed to imply"
+            },
+            {
+              "texto": "Her answer seemed to imply a doubt."
+            }
+          ],
+          [
+            {
+              "texto": "Tu reacción"
+            },
+            {
+              "texto": "to be fair / up to a point"
+            },
+            {
+              "texto": "To be fair, I agree up to a point."
+            }
+          ],
+          [
+            {
+              "texto": "Tu aportación"
+            },
+            {
+              "texto": "I would add"
+            },
+            {
+              "texto": "I would add one doubt."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Bloque 86-90 revisado de forma independiente contra el mapa n10 y continuidad con los bloques anteriores.",
+      "Audio inglés de los escribir de 89/90 (textoIdioma es) verificado a mano: 'Dr', 'Ruiz', 'avenue' y 'Spain' retirados; 'lecture' del repaso 89 sustituido por 'talk'; el modelo, la variante aceptada y las rúbricas se mantienen coherentes con el audio.",
+      "87: clase de variedades centrada en léxico y gramática (la voz TTS no reproduce acentos; la explicación lo dice). Se retiran Delhi y Dublin; 'Ireland' queda enseñada en la tabla.",
+      "88: 'Sam' e interjección 'Hmm' retirados; par ambiguo 'I suppose so'/'We will see' del relacionar desambiguado; 'litotes' (jerga) sustituido por explicación clara.",
+      "90: par ambiguo 'To be fair'/'I would add' desambiguado; aceptadas 'Hold on' y 'surprised' añadidas; evidencia 'i think' (demasiado permisiva) eliminada.",
+      "Escrituras: modelos de 152 y 174 palabras (mínimo 115 y 125 según mapa), rúbricas con variantes."
+    ]
+  }
+}

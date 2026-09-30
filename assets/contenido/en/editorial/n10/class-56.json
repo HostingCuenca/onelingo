@@ -1,0 +1,854 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 10,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n10.class-56",
+  "title": {
+    "en": "Who has the floor?",
+    "es": "¿A quién le toca hablar?"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer quién toma, mantiene, interrumpe o cede el turno en una mesa redonda a partir de las frases que usa cada participante."
+    ]
+  },
+  "concepts": [
+    "n10-panel-discussion-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n10.class-55"
+  ],
+  "usesVocabulary": [
+    "panel",
+    "moderator",
+    "floor",
+    "interrupt",
+    "turn",
+    "hand over",
+    "go ahead"
+  ],
+  "usesPatterns": [
+    "n10-panel-discussion-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "panel",
+      "es": "mesa redonda, panel"
+    },
+    {
+      "en": "moderator",
+      "es": "moderador"
+    },
+    {
+      "en": "floor",
+      "es": "turno de palabra"
+    },
+    {
+      "en": "interrupt",
+      "es": "interrumpir"
+    },
+    {
+      "en": "turn",
+      "es": "turno"
+    },
+    {
+      "en": "hand over",
+      "es": "ceder la palabra"
+    },
+    {
+      "en": "go ahead",
+      "es": "adelante, tienes la palabra"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n10.class-56.t01",
+      "en": "The moderator gave the floor to the first speaker.",
+      "es": "La moderadora dio la palabra al primer orador.",
+      "explanationEs": "Give the floor = dar la palabra; floor aquí es el «turno de palabra», no el suelo.",
+      "segments": [
+        "The moderator gave the floor",
+        "to the first speaker."
+      ],
+      "audioText": "The moderator gave the floor to the first speaker.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-panel-discussion-1"
+    },
+    {
+      "id": "en.n10.class-56.t02",
+      "en": "If I may, I would like to take the floor for a moment.",
+      "es": "Si me permite, me gustaría tomar la palabra un momento.",
+      "explanationEs": "Take the floor = tomar la palabra; If I may es una petición cortés de turno.",
+      "segments": [
+        "If I may, I would like to",
+        "take the floor for a moment."
+      ],
+      "audioText": "If I may, I would like to take the floor for a moment.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-panel-discussion-1"
+    },
+    {
+      "id": "en.n10.class-56.t03",
+      "en": "Sorry to interrupt, but could I ask a quick question?",
+      "es": "Perdona que interrumpa, pero ¿puedo hacer una pregunta rápida?",
+      "explanationEs": "Sorry to interrupt es una interrupción cortés: se disculpa y pide permiso.",
+      "segments": [
+        "Sorry to interrupt, but could",
+        "I ask a quick question?"
+      ],
+      "audioText": "Sorry to interrupt, but could I ask a quick question?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-panel-discussion-1"
+    },
+    {
+      "id": "en.n10.class-56.t04",
+      "en": "As I was saying, the panel cannot ignore the cost.",
+      "es": "Como iba diciendo, la mesa no puede ignorar el coste.",
+      "explanationEs": "As I was saying retoma lo que decías y mantiene tu turno.",
+      "segments": [
+        "As I was saying, the",
+        "panel cannot ignore the cost."
+      ],
+      "audioText": "As I was saying, the panel cannot ignore the cost.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-panel-discussion-1"
+    },
+    {
+      "id": "en.n10.class-56.t05",
+      "en": "That is all from me; I will hand over to the moderator.",
+      "es": "Eso es todo por mi parte; cedo la palabra a la moderadora.",
+      "explanationEs": "Hand over to… cede el turno a otra persona.",
+      "segments": [
+        "That is all from me; I",
+        "will hand over to the moderator."
+      ],
+      "audioText": "That is all from me; I will hand over to the moderator.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-panel-discussion-1"
+    },
+    {
+      "id": "en.n10.class-56.t06",
+      "en": "Go ahead, Leo; it is your turn.",
+      "es": "Adelante, Leo; es tu turno.",
+      "explanationEs": "Go ahead invita a otro a hablar; your turn señala de quién es el turno.",
+      "segments": [
+        "Go ahead, Leo; it",
+        "is your turn."
+      ],
+      "audioText": "Go ahead, Leo; it is your turn.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-panel-discussion-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n10.c56.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué función de turno cumple la frase del texto?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She keeps the turn."
+          },
+          {
+            "text": "She gives the turn to someone."
+          },
+          {
+            "text": "She asks for the turn."
+          }
+        ],
+        "teaches": [
+          "n10-panel-discussion-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.pg01.seed-0",
+          "feedback": {
+            "es": "«If I may…» pide permiso para empezar a hablar: solicita el turno."
+          },
+          "hint": {
+            "es": "Fíjate en quién quiere empezar a hablar."
+          },
+          "text": "If I may, I would like to add one more point."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8d122f37a577c0250f9048af56477ffcb2af0ad45582762a52667de673a80943"
+      },
+      {
+        "id": "en.n10.c56.pg02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace el moderador con esa frase?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He gives the turn to Leo."
+          },
+          {
+            "text": "He keeps the turn for himself."
+          },
+          {
+            "text": "He interrupts Leo."
+          }
+        ],
+        "teaches": [
+          "n10-panel-discussion-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.pg02.seed-0",
+          "feedback": {
+            "es": "Go ahead invita a Leo a hablar: el moderador cede el turno."
+          },
+          "hint": {
+            "es": "Go ahead invita a otra persona a hablar."
+          },
+          "text": "Go ahead, Leo. Tell us what you think."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9dd1bdc644b6b2e1bbab7662874df39641e41f16bad3649e80dee34f6e429acf"
+      },
+      {
+        "id": "en.n10.c56.pg03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Perdona que interrumpa, pero tengo una duda.»"
+        },
+        "answer": {
+          "text": "interrupt",
+          "accepted": [
+            "interrupt"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-panel-discussion-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.pg03.seed-0",
+          "feedback": {
+            "es": "Sorry to interrupt es la disculpa estándar antes de cortar a quien habla."
+          },
+          "hint": {
+            "es": "Es el verbo para cortar a alguien que está hablando."
+          },
+          "text": "Sorry to ___, but I have a question."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:db2afe1cac27c17977a9d0a36ed9ec781eb7ebf1096d646d891324b49c198bcd"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n10.c56.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace la oradora con su turno."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She gives the floor away immediately."
+          },
+          {
+            "text": "She keeps her turn and promises to pass it on."
+          },
+          {
+            "text": "She interrupts another speaker."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.p01.seed-0",
+          "feedback": {
+            "es": "Pide terminar («let me finish») y promete ceder el turno después."
+          },
+          "audio": "Let me finish, please. I was explaining why schools need more funding. Then I will hand over to you.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:03009d760b469fe6014c5691b78dbfb4b6e2994be3d611d25c54cd986b9bf8bb"
+      },
+      {
+        "id": "en.n10.c56.p02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «¿Puedo tomar la palabra un momento?»"
+        },
+        "answer": {
+          "text": "May I take the floor for a moment",
+          "tokens": [
+            "May",
+            "I",
+            "take",
+            "the",
+            "floor",
+            "for",
+            "a",
+            "moment"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.p02.seed-0",
+          "feedback": {
+            "es": "May I… pide permiso de forma cortés, y take the floor es tomar la palabra."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f49d2cc357546205a89cc85cbb3cc784faed17e44f436bb10584e6767fb9fa15"
+      },
+      {
+        "id": "en.n10.c56.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su función de turno."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Can I come in here, please?",
+              {
+                "es": "Pide el turno"
+              }
+            ],
+            [
+              "As I was saying, prices are rising.",
+              {
+                "es": "Mantiene el turno"
+              }
+            ],
+            [
+              "Sorry to interrupt, but I disagree.",
+              {
+                "es": "Interrumpe"
+              }
+            ],
+            [
+              "Over to you, Leo.",
+              {
+                "es": "Cede el turno"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.p03.seed-0",
+          "feedback": {
+            "es": "Cada frase tiene su función: pedir la palabra, conservarla, cortar a alguien o dársela a otro."
+          },
+          "pairs": [
+            [
+              "Can I come in here, please?",
+              {
+                "es": "Pide el turno"
+              }
+            ],
+            [
+              "As I was saying, prices are rising.",
+              {
+                "es": "Mantiene el turno"
+              }
+            ],
+            [
+              "Sorry to interrupt, but I disagree.",
+              {
+                "es": "Interrumpe"
+              }
+            ],
+            [
+              "Over to you, Leo.",
+              {
+                "es": "Cede el turno"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0fc93574627aae07ec0963ac90eef1e315b8ee1e212565f27679e0dea8012c11"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n10.c56.e01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con lo que hace en la mesa."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I would like to respond to that, if I may.",
+              {
+                "es": "Quiere intervenir"
+              }
+            ],
+            [
+              "I have not finished my point yet.",
+              {
+                "es": "Retiene la palabra"
+              }
+            ],
+            [
+              "Sorry, could I stop you there?",
+              {
+                "es": "Corta con cortesía"
+              }
+            ],
+            [
+              "Please, Mia, tell us your view.",
+              {
+                "es": "Invita a otra persona"
+              }
+            ],
+            [
+              "Thank you all; that is our time.",
+              {
+                "es": "Cierra la mesa"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.e01.seed-0",
+          "feedback": {
+            "es": "La función se deduce del verbo y de quién habla: pedir, retener, cortar, invitar o cerrar."
+          },
+          "pairs": [
+            [
+              "I would like to respond to that, if I may.",
+              {
+                "es": "Quiere intervenir"
+              }
+            ],
+            [
+              "I have not finished my point yet.",
+              {
+                "es": "Retiene la palabra"
+              }
+            ],
+            [
+              "Sorry, could I stop you there?",
+              {
+                "es": "Corta con cortesía"
+              }
+            ],
+            [
+              "Please, Mia, tell us your view.",
+              {
+                "es": "Invita a otra persona"
+              }
+            ],
+            [
+              "Thank you all; that is our time.",
+              {
+                "es": "Cierra la mesa"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:608005ae133ea7eb06568dbf0a1b2ef05a21428a8f1c8232757217f588554e37"
+      },
+      {
+        "id": "en.n10.c56.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace la moderadora."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Sara interrupts Tom."
+          },
+          {
+            "text": "Tom keeps talking."
+          },
+          {
+            "text": "The moderator invites Sara to speak."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.e02.seed-0",
+          "feedback": {
+            "es": "Agradece a Tom y cede el turno a Sara con «please go ahead»."
+          },
+          "audio": "Thank you, Tom. That was clear. Sara, I think you wanted to respond. Please go ahead.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:38cd46b28f4cca6f8435c424d860f9f4a0ee79f42ca837d770c45a8994016365"
+      },
+      {
+        "id": "en.n10.c56.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué hace el orador con esas palabras?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He keeps the floor."
+          },
+          {
+            "text": "He hands the floor to someone."
+          },
+          {
+            "text": "He asks for the floor."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.e03.seed-0",
+          "feedback": {
+            "es": "«I have not finished» y «as I was saying» retienen la palabra de quien habla."
+          },
+          "text": "Wait, I have not finished. As I was saying, the cost is only one part of the problem."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7b059808868239cb40792e34ec7f0dc5dbd7331d082780c038605123184fe973"
+      },
+      {
+        "id": "en.n10.c56.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es tu turno, Mia: adelante, por favor.»"
+        },
+        "answer": {
+          "text": "turn",
+          "accepted": [
+            "turn"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.e04.seed-0",
+          "feedback": {
+            "es": "Your turn señala a quién le corresponde hablar ahora."
+          },
+          "text": "It is your ___, Mia: please go ahead."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ec9fb7213a8fdf865a41a89cc65e448cee6c4a268e6fe476935c54d1a5f9be0d"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n10.c56.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué función cumple la frase del texto?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It keeps the floor for the speaker."
+          },
+          {
+            "text": "It politely requests permission to speak."
+          },
+          {
+            "text": "It ends the panel."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.r01.seed-0",
+          "feedback": {
+            "es": "May I… es una petición cortés para intervenir; no retiene el turno ni cierra la mesa."
+          },
+          "text": "Excuse me, may I add something here?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4565654c2df4b6aeaa7a64b98319a832163d6f58cf0b6d4f30c674efadb625ed"
+      },
+      {
+        "id": "en.n10.c56.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Como iba diciendo, la mesa necesita más tiempo.»"
+        },
+        "answer": {
+          "text": "As I was saying, the panel needs more time",
+          "tokens": [
+            "As",
+            "I",
+            "was",
+            "saying,",
+            "the",
+            "panel",
+            "needs",
+            "more",
+            "time"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.r02.seed-0",
+          "feedback": {
+            "es": "As I was saying retoma la idea propia y mantiene el turno de quien habla."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6ea3d41a40f1d02b1da7f8fee23e26cc96b68d2f877ab2c1944704299b25d7c1"
+      },
+      {
+        "id": "en.n10.c56.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo cambia el turno en la mesa."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She asks Carlos to leave."
+          },
+          {
+            "text": "She ends the panel."
+          },
+          {
+            "text": "She passes the turn from Carlos to Ana."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-panel-discussion-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c56.r03.seed-0",
+          "feedback": {
+            "es": "Da las gracias a Carlos y cede la palabra a Ana: un cambio de turno."
+          },
+          "audio": "Carlos, thank you. I will pass to Ana now. Ana, the floor is yours.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5d7b665d6bc71cac49d16c1135dc84e9d95657cc67a183d79578ec0f9448e23a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n10.c56.e01": {
+      "reteach": "en.n10.class-56.t01",
+      "review": "en.n10.c56.r01"
+    },
+    "en.n10.c56.e02": {
+      "reteach": "en.n10.class-56.t02",
+      "review": "en.n10.c56.r02"
+    },
+    "en.n10.c56.e03": {
+      "reteach": "en.n10.class-56.t03",
+      "review": "en.n10.c56.r03"
+    },
+    "en.n10.c56.e04": {
+      "reteach": "en.n10.class-56.t04",
+      "review": "en.n10.c56.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

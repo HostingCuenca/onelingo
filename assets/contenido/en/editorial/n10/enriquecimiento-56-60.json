@@ -1,0 +1,726 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "classes": {
+    "en.n10.class-56": {
+      "explicacion": {
+        "titulo": "¿A quién le toca hablar?",
+        "texto": "En una mesa redonda cada frase tiene una función de turno. Tomar la palabra: If I may… / Can I come in here? Mantenerla: As I was saying… / Let me finish. Interrumpir: Sorry to interrupt, but… Ceder el turno: I will hand over to… / Go ahead… / Over to you. Al escuchar, fíjate en el verbo y en quién habla: el moderador suele dar y ceder turnos; los participantes los piden, los mantienen o interrumpen con cortesía."
+      },
+      "patron": {
+        "texto": "Función de turno + frase:",
+        "formula": [
+          {
+            "texto": "If I may, I would like to add…",
+            "nota": "tomar la palabra con cortesía"
+          },
+          {
+            "texto": "As I was saying,",
+            "nota": "mantener el turno"
+          },
+          {
+            "texto": "Sorry to interrupt, but…",
+            "nota": "interrumpir pidiendo permiso"
+          },
+          {
+            "texto": "Over to you, Leo.",
+            "nota": "ceder el turno a otra persona"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Let me to finish my point.",
+          "correcto": "Let me finish my point.",
+          "explicacion": "Tras let va el verbo en forma base, sin to: let me finish («déjame terminar»)."
+        },
+        {
+          "incorrecto": "I give you the word, Leo.",
+          "correcto": "I give you the floor, Leo.",
+          "explicacion": "«Dar la palabra» se dice give the floor; the word significa «la palabra» como vocablo, no como turno."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia modera una mesa redonda sobre tablets en el colegio, con Tom y Sara.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Welcome to our panel. Tom, you have the floor.",
+            "traduccion": "Bienvenidos a nuestra mesa redonda. Tom, tienes la palabra."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thank you. Schools must think about the cost of tablets first.",
+            "traduccion": "Gracias. Los colegios deben pensar primero en el coste de las tablets."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sorry to interrupt, Tom, but could I add a number?",
+            "traduccion": "Perdona que te interrumpa, Tom, pero ¿puedo añadir una cifra?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Let me finish, Sara. Then I will hand over to you.",
+            "traduccion": "Déjame terminar, Sara. Luego te cedo la palabra."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué hace Tom cuando Sara lo interrumpe?",
+          "opciones": [
+            {
+              "es": "Mantiene su turno y promete cederlo después."
+            },
+            {
+              "es": "Le cede la palabra enseguida a Sara."
+            },
+            {
+              "es": "Abandona la mesa redonda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Let me finish» para retener el turno y añade «Then I will hand over to you»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frases",
+          "Quién suele usarla"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tomar la palabra"
+            },
+            {
+              "texto": "If I may… / Can I come in here?"
+            },
+            {
+              "texto": "Un participante"
+            }
+          ],
+          [
+            {
+              "texto": "Mantener el turno"
+            },
+            {
+              "texto": "As I was saying… / Let me finish."
+            },
+            {
+              "texto": "Quien está hablando"
+            }
+          ],
+          [
+            {
+              "texto": "Interrumpir"
+            },
+            {
+              "texto": "Sorry to interrupt, but…"
+            },
+            {
+              "texto": "Un participante"
+            }
+          ],
+          [
+            {
+              "texto": "Ceder el turno"
+            },
+            {
+              "texto": "Go ahead… / Over to you…"
+            },
+            {
+              "texto": "El moderador o un ponente"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-57": {
+      "explicacion": {
+        "titulo": "Reconducir la mesa redonda",
+        "texto": "Tres funciones, tres fórmulas corteses. Interrumpir: Sorry to cut in, but… / If I could just… Pedir aclaración: Can I just check…? / Could you clarify…? / Do you mean…? Reconducir: Coming back to… / Is that relevant to…? La cortesía sale de una disculpa breve, un modal suave (could, might) y un propósito claro. Tras can o could el verbo va en base, sin to, y cut in no lleva complemento directo."
+      },
+      "patron": {
+        "texto": "Señal cortés + propósito:",
+        "formula": [
+          {
+            "texto": "Sorry to cut in,",
+            "nota": "disculpa breve al interrumpir"
+          },
+          {
+            "texto": "but could I clarify one point?",
+            "nota": "propósito: pides aclarar"
+          },
+          {
+            "texto": "Coming back to the budget,",
+            "nota": "reconduces al tema principal"
+          },
+          {
+            "texto": "who pays?",
+            "nota": "la pregunta que retoma el hilo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sorry for cut in, but I have a question.",
+          "correcto": "Sorry to cut in, but I have a question.",
+          "explicacion": "La disculpa breve es Sorry to + verbo base (Sorry to cut in); for + verbo base no existe: tras for iría -ing."
+        },
+        {
+          "incorrecto": "Can I just to check that you mean the budget?",
+          "correcto": "Can I just check that you mean the budget?",
+          "explicacion": "Tras can va el verbo en forma base, sin to: can I just check."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara modera una mesa y reconduce a Leo, que se ha ido por las ramas.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I think schools should buy tablets. My cousin bought a great phone last week.",
+            "traduccion": "Creo que los colegios deberían comprar tablets. Mi primo compró un móvil estupendo la semana pasada."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sorry to cut in, Leo, but is that relevant to the budget?",
+            "traduccion": "Perdona que te corte, Leo, pero ¿es relevante para el presupuesto?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good point. I was on a tangent.",
+            "traduccion": "Buena observación. Me fui por las ramas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Coming back to the budget, could you clarify how much the tablets cost?",
+            "traduccion": "Volviendo al presupuesto, ¿podrías aclarar cuánto cuestan las tablets?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué le pide Sara a Leo al final?",
+          "opciones": [
+            {
+              "es": "Que aclare cuánto cuestan las tablets."
+            },
+            {
+              "es": "Que hable de su primo."
+            },
+            {
+              "es": "Que termine su turno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara reconduce con «Coming back to the budget» y pide «could you clarify how much the tablets cost»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Interrumpir"
+            },
+            {
+              "texto": "Sorry to cut in, but…"
+            },
+            {
+              "texto": "Sorry to cut in, but I have a number."
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "Can I just check…?"
+            },
+            {
+              "texto": "Can I just check what you mean?"
+            }
+          ],
+          [
+            {
+              "texto": "Reformular"
+            },
+            {
+              "texto": "If I could just rephrase…"
+            },
+            {
+              "texto": "If I could just rephrase that…"
+            }
+          ],
+          [
+            {
+              "texto": "Reconducir"
+            },
+            {
+              "texto": "Coming back to…"
+            },
+            {
+              "texto": "Coming back to the budget…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-58": {
+      "explicacion": {
+        "titulo": "Resumir lo que dijeron los demás",
+        "texto": "Para resumir una mesa redonda, sustituye said por verbos que muestren la postura: stressed (subrayó), doubted (dudó), conceded (reconoció), insisted (insistió), warned (advirtió), suggested (sugirió), admitted (admitió), argued (sostuvo). Elige el verbo por la intención de la persona, no por cortesía: doubted no es denied. Después de that, la frase suele retroceder un tiempo (can → could, will → would). Al escuchar, pregúntate: ¿defiende, duda, avisa o propone?"
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de postura + that + idea:",
+        "formula": [
+          {
+            "texto": "Tom",
+            "nota": "la persona que habló"
+          },
+          {
+            "texto": "stressed that",
+            "nota": "verbo que muestra la postura"
+          },
+          {
+            "texto": "free buses would help poor families.",
+            "nota": "la idea, con un paso atrás (will → would)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia insisted in that we start this year.",
+          "correcto": "Mia insisted that we start this year.",
+          "explicacion": "Ante that no va preposición; in that es un calco de «insistió en que». Con un verbo en -ing sí se usa on: insisted on starting."
+        },
+        {
+          "incorrecto": "Sara doubted that the city can afford them.",
+          "correcto": "Sara doubted that the city could afford them.",
+          "explicacion": "Al resumir lo dicho, el verbo retrocede un tiempo: can pasa a could."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana resume la mesa redonda sobre autobuses gratuitos y Leo comprueba el resumen.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Let me recap the panel. Tom stressed that free buses would help poor families.",
+            "traduccion": "Déjame recapitular la mesa. Tom subrayó que los autobuses gratuitos ayudarían a las familias pobres."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Sara? I think she doubted that the city could afford them.",
+            "traduccion": "¿Y Sara? Creo que dudó de que la ciudad pudiera permitírselos."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Right. Carlos warned that costs could rise, but he conceded that the idea was good.",
+            "traduccion": "Correcto. Carlos advirtió que los costes podían subir, pero reconoció que la idea era buena."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So it is a good idea with some risks.",
+            "traduccion": "Entonces es una buena idea con algunos riesgos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué hizo Carlos, según Ana?",
+          "opciones": [
+            {
+              "es": "Advirtió de que los costes podían subir, pero reconoció que la idea era buena."
+            },
+            {
+              "es": "Dudó de que la ciudad pudiera pagar."
+            },
+            {
+              "es": "Insistió en empezar este año."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que Carlos «warned that costs could rise» y «conceded that the idea was good»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Postura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "stressed"
+            },
+            {
+              "texto": "destaca lo importante"
+            },
+            {
+              "texto": "Tom stressed that safety came first."
+            }
+          ],
+          [
+            {
+              "texto": "doubted"
+            },
+            {
+              "texto": "expresa escepticismo"
+            },
+            {
+              "texto": "Sara doubted that it would work."
+            }
+          ],
+          [
+            {
+              "texto": "conceded"
+            },
+            {
+              "texto": "reconoce a regañadientes"
+            },
+            {
+              "texto": "Leo conceded that it was not perfect."
+            }
+          ],
+          [
+            {
+              "texto": "warned"
+            },
+            {
+              "texto": "avisa de un riesgo"
+            },
+            {
+              "texto": "Carlos warned that prices could rise."
+            }
+          ],
+          [
+            {
+              "texto": "suggested"
+            },
+            {
+              "texto": "propone una acción"
+            },
+            {
+              "texto": "Ana suggested that we try it first."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-59": {
+      "explicacion": {
+        "titulo": "Construir sobre la idea de otro",
+        "texto": "Un buen acuerdo parcial reconoce lo válido y después matiza: I agree up to a point, but… / I partly agree… / That is a valid point; however… Luego amplías: Building on that… / Furthermore… y respaldas con un ejemplo: For instance,… Por último, devuelves el turno con una pregunta a otro participante: Mia, what have you noticed? Así la mesa avanza en lugar de acumular opiniones sueltas. Recuerda: agree es un verbo, no un adjetivo."
+      },
+      "patron": {
+        "texto": "Reconocer + matizar + ampliar + ejemplo + pregunta:",
+        "formula": [
+          {
+            "texto": "That is a valid point,",
+            "nota": "reconoces lo acertado"
+          },
+          {
+            "texto": "but I see one drawback.",
+            "nota": "matizas el acuerdo"
+          },
+          {
+            "texto": "Building on that, for instance, …",
+            "nota": "amplías con un ejemplo"
+          },
+          {
+            "texto": "Tom, what did you notice?",
+            "nota": "devuelves el turno con una pregunta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am partly agree with you.",
+          "correcto": "I partly agree with you.",
+          "explicacion": "Agree es un verbo, no un adjetivo como «de acuerdo»: no lleva am."
+        },
+        {
+          "incorrecto": "Building in what Mia said, I would add a reason.",
+          "correcto": "Building on what Mia said, I would add a reason.",
+          "explicacion": "La expresión es build on («partir de», «apoyarse en»), con la preposición on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos debaten sobre las tablets en clase y se construyen sobre lo que dice el otro.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Tablets help students, and they save paper.",
+            "traduccion": "Las tablets ayudan a los estudiantes y ahorran papel."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I agree up to a point, Ana, but I see one drawback: screens can distract.",
+            "traduccion": "Estoy de acuerdo hasta cierto punto, Ana, pero veo un inconveniente: las pantallas pueden distraer."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a valid point. For instance, my brother stops reading when a message arrives.",
+            "traduccion": "Es un punto válido. Por ejemplo, mi hermano deja de leer cuando llega un mensaje."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Building on that, Ana, what do you do to avoid it?",
+            "traduccion": "Partiendo de eso, Ana, ¿qué haces tú para evitarlo?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué inconveniente señala Carlos?",
+          "opciones": [
+            {
+              "es": "Que las pantallas pueden distraer."
+            },
+            {
+              "es": "Que el papel es caro."
+            },
+            {
+              "es": "Que los alumnos no tienen tablets."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos concede parte de la idea de Ana y señala el inconveniente: «screens can distract»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Acuerdo parcial"
+            },
+            {
+              "texto": "I agree up to a point / I partly agree"
+            },
+            {
+              "texto": "I partly agree with Ana."
+            }
+          ],
+          [
+            {
+              "texto": "Matiz"
+            },
+            {
+              "texto": "…but I see one drawback"
+            },
+            {
+              "texto": "…but I see one drawback."
+            }
+          ],
+          [
+            {
+              "texto": "Ampliar"
+            },
+            {
+              "texto": "Building on that… / Furthermore…"
+            },
+            {
+              "texto": "Building on that, we could test it."
+            }
+          ],
+          [
+            {
+              "texto": "Ejemplo"
+            },
+            {
+              "texto": "For instance,…"
+            },
+            {
+              "texto": "For instance, my class saved paper."
+            }
+          ],
+          [
+            {
+              "texto": "Devolver el turno"
+            },
+            {
+              "texto": "Name + pregunta"
+            },
+            {
+              "texto": "Tom, what did you notice?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-60": {
+      "explicacion": {
+        "titulo": "Moderar una mesa redonda",
+        "texto": "Moderar es estructurar, no opinar. Empieza presentando (Welcome, everyone; tonight's topic is…; Let me introduce…). Da turnos claros (Ana, would you like to start? Tom, it is your turn) y reconduce si hace falta (Sorry to cut in, but coming back to…). Resume con verbos variados (Ana stressed…, Tom doubted…) y cierra agradeciendo (To wrap up…; I am grateful to…). Un buen moderador habla poco y deja que los ponentes se oigan entre sí."
+      },
+      "patron": {
+        "texto": "Presentar + turnos + resumen + cierre:",
+        "formula": [
+          {
+            "texto": "Welcome, everyone; tonight's topic is…",
+            "nota": "presentas la mesa y el tema"
+          },
+          {
+            "texto": "Ana, would you like to start?",
+            "nota": "cedes el primer turno"
+          },
+          {
+            "texto": "Before we move on, let me recap:",
+            "nota": "resumes con verbos variados"
+          },
+          {
+            "texto": "To wrap up, I am grateful to…",
+            "nota": "cierras y agradeces"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I present you our panellists.",
+          "correcto": "Let me introduce our panellists.",
+          "explicacion": "Para presentar personas se usa introduce; present es presentar un tema, un premio o un programa."
+        },
+        {
+          "incorrecto": "To wrap up, I am grateful of all the panellists.",
+          "correcto": "To wrap up, I am grateful to all the panellists.",
+          "explicacion": "Tras grateful la preposición es to + persona; of es un calco del español «agradecido de»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia modera una mesa redonda con Ana y Tom sobre tecnología en el aula.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Welcome, everyone; tonight's topic is technology in the classroom. Ana, would you like to start?",
+            "traduccion": "Bienvenidos todos; el tema de esta noche es la tecnología en el aula. Ana, ¿quieres empezar?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thank you. Tablets have clear benefits, but they need rules.",
+            "traduccion": "Gracias. Las tablets tienen ventajas claras, pero necesitan normas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thanks, Ana. Tom, your turn.",
+            "traduccion": "Gracias, Ana. Tom, tu turno."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I agree up to a point. Screens can distract students, so we need clear rules.",
+            "traduccion": "Estoy de acuerdo hasta cierto punto. Las pantallas pueden distraer a los estudiantes, así que necesitamos normas claras."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "To wrap up, both of you stressed rules. I am grateful to you both.",
+            "traduccion": "Para cerrar, los dos subrayaron las normas. Se lo agradezco a ambos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿En qué coinciden los dos ponentes, según Mia?",
+          "opciones": [
+            {
+              "es": "En que hacen falta normas para las pantallas."
+            },
+            {
+              "es": "En que hay que prohibir las tablets."
+            },
+            {
+              "es": "En que no hay ventajas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia resume: «both of you stressed rules»; Ana y Tom coinciden en la necesidad de normas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Frase",
+          "Función"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Welcome, everyone; tonight's topic is…"
+            },
+            {
+              "texto": "Presentar la mesa"
+            }
+          ],
+          [
+            {
+              "texto": "Turnos"
+            },
+            {
+              "texto": "Ana, would you like to start?"
+            },
+            {
+              "texto": "Ceder la palabra"
+            }
+          ],
+          [
+            {
+              "texto": "Reconducir"
+            },
+            {
+              "texto": "Coming back to the topic…"
+            },
+            {
+              "texto": "Volver al tema"
+            }
+          ],
+          [
+            {
+              "texto": "Resumen"
+            },
+            {
+              "texto": "Ana stressed…, Tom doubted…"
+            },
+            {
+              "texto": "Sintetizar posturas"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "To wrap up, I am grateful to…"
+            },
+            {
+              "texto": "Cerrar y agradecer"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisado 56-60 contra mapa-n10 v2.",
+      "56: Sam (fuera del elenco) sustituido por Leo. 57: error frecuente realista (Sorry for cut in) y consigna natural.",
+      "58: diálogo coherente con la enseñanza (Sara dudó, no Mia) y opciones con retroceso de tiempos coherente con la regla enseñada.",
+      "59: rúbrica sin grupo 'mia' suelto: ahora exige pregunta dirigida a Mia (mia what/how/do...); grupos de acuerdo parcial, punto válido y ampliación con frases completas; distractores de escucha más plausibles.",
+      "60: diálogo corregido (Tom menciona normas para que el resumen de Mia sea cierto); estímulos, modelo y aceptada con retroceso de tiempos (doubted that schools could...); rúbrica con frases completas en 7 grupos; 'Thank you both' a 'all' (tres voces)."
+    ]
+  }
+}

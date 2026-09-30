@@ -1,0 +1,776 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n10.class-36": {
+      "explicacion": {
+        "titulo": "Un plan de negocio: secciones y su lenguaje",
+        "texto": "Un plan de negocio tiene secciones fijas y cada una usa su propio lenguaje. El resumen dice qué harás y para quién; el mercado describe a los clientes objetivo y a la competencia; el marketing explica cómo te darás a conocer (will + verbo); las operaciones dan horarios y turnos; las finanzas indican cuánto dinero necesitas y cuándo habrá beneficio; los riesgos nombran lo que puede salir mal, con may; y el equipo muestra la experiencia de quienes lo harán. Para reconocer una sección, fíjate en las palabras clave y en el tiempo verbal."
+      },
+      "patron": {
+        "texto": "Sección → frase típica:",
+        "formula": [
+          {
+            "texto": "Our target customers are students.",
+            "nota": "mercado: quién compra; customers va en plural"
+          },
+          {
+            "texto": "We will promote the workshop with posters.",
+            "nota": "marketing: will + verbo base"
+          },
+          {
+            "texto": "We need a loan of fifteen thousand dollars.",
+            "nota": "finanzas: cuánto dinero y para qué"
+          },
+          {
+            "texto": "The main risk is that costs may rise.",
+            "nota": "riesgos: may para lo posible pero incierto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will to promote the workshop with posters.",
+          "correcto": "We will promote the workshop with posters.",
+          "explicacion": "Después de will va el verbo base, sin to."
+        },
+        {
+          "incorrecto": "Our objective customers are students and workers.",
+          "correcto": "Our target customers are students and workers.",
+          "explicacion": "«Clientes objetivo» se dice target customers: objective significa «imparcial» y no sirve como calco de «objetivo»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pide a Sara que lea su plan de negocio para comprobar que cada frase está en la sección correcta.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Sara, can you read my business plan? I am not sure each sentence is in the right part.",
+            "traduccion": "Sara, ¿puedes leer mi plan de negocio? No estoy seguro de que cada frase esté en la parte correcta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sure. «We need a loan of fifteen thousand dollars.» That is finance, not the market.",
+            "traduccion": "Claro. «Necesitamos un préstamo de quince mil dólares.» Eso es finanzas, no mercado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. And «Two competitors already repair bikes in the city centre» goes in the market part?",
+            "traduccion": "Cierto. ¿Y «Dos competidores ya reparan bicicletas en el centro» va en la parte de mercado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. And «The main risk is that costs may rise faster than sales» goes under risks.",
+            "traduccion": "Sí. Y «El principal riesgo es que los costes suban más rápido que las ventas» va en riesgos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué sección pertenece la frase sobre el préstamo?",
+          "opciones": [
+            {
+              "es": "A finanzas."
+            },
+            {
+              "es": "Al mercado."
+            },
+            {
+              "es": "A riesgos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara lo dice: «That is finance, not the market»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Sección",
+          "Responde a",
+          "Frase típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Summary"
+            },
+            {
+              "texto": "¿Qué haremos?"
+            },
+            {
+              "texto": "Our plan is to open a workshop."
+            }
+          ],
+          [
+            {
+              "texto": "Market"
+            },
+            {
+              "texto": "¿Quién compra y quién compite?"
+            },
+            {
+              "texto": "Our target customers are students."
+            }
+          ],
+          [
+            {
+              "texto": "Marketing"
+            },
+            {
+              "texto": "¿Cómo nos daremos a conocer?"
+            },
+            {
+              "texto": "We will promote the workshop with posters."
+            }
+          ],
+          [
+            {
+              "texto": "Operations"
+            },
+            {
+              "texto": "¿Cómo funcionará cada día?"
+            },
+            {
+              "texto": "two shifts each day"
+            }
+          ],
+          [
+            {
+              "texto": "Finance"
+            },
+            {
+              "texto": "¿Cuánto dinero y cuándo hay beneficio?"
+            },
+            {
+              "texto": "We need a loan of fifteen thousand dollars."
+            }
+          ],
+          [
+            {
+              "texto": "Risks"
+            },
+            {
+              "texto": "¿Qué puede salir mal?"
+            },
+            {
+              "texto": "costs may rise faster than sales"
+            }
+          ],
+          [
+            {
+              "texto": "Team"
+            },
+            {
+              "texto": "¿Quién lo hará?"
+            },
+            {
+              "texto": "ten years of experience"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-37": {
+      "explicacion": {
+        "titulo": "Vocabulario de negocio con precisión",
+        "texto": "El vocabulario de un pitch es preciso y suele ir con una cifra o una razón. Scope es el alcance de un proyecto; stake, la participación que alguien tiene en el negocio; leverage (verbo), sacar partido de algo que ya tienes, como contactos o una marca; margin, la diferencia entre lo que cobras y lo que cuesta; overheads, los gastos fijos; niche, un hueco de mercado pequeño y concreto; viable, que funciona en la práctica; y scale up, ampliar el negocio (sin que los costes crezcan igual). Usa cada término con un dato que lo concrete."
+      },
+      "patron": {
+        "texto": "Término preciso + dato que lo concreta:",
+        "formula": [
+          {
+            "texto": "The margin",
+            "nota": "término: margin = precio menos coste"
+          },
+          {
+            "texto": "on each repair",
+            "nota": "de qué concretamente"
+          },
+          {
+            "texto": "is about forty per cent.",
+            "nota": "cifra que lo concreta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We can leverage of Leo's contacts.",
+          "correcto": "We can leverage Leo's contacts.",
+          "explicacion": "Leverage es un verbo transitivo: lleva complemento directo, sin of."
+        },
+        {
+          "incorrecto": "The scope of the project is limited at one neighbourhood.",
+          "correcto": "The scope of the project is limited to one neighbourhood.",
+          "explicacion": "Con limited se usa to: limitado a un barrio."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo ensaya su pitch con Sara antes de hablar con un posible socio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Your pitch says the workshop is viable. What is the margin on a repair?",
+            "traduccion": "Tu pitch dice que el taller es viable. ¿Cuál es el margen de una reparación?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "About forty per cent, and our overheads are low.",
+            "traduccion": "Un cuarenta por ciento, y nuestros gastos fijos son bajos."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. And what is the scope of phase one?",
+            "traduccion": "Bien. ¿Y cuál es el alcance de la fase uno?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "One neighbourhood. We will scale up if it works.",
+            "traduccion": "Un barrio. Ampliaremos si funciona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el alcance de la primera fase?",
+          "opciones": [
+            {
+              "es": "Un solo barrio."
+            },
+            {
+              "es": "Toda la ciudad."
+            },
+            {
+              "es": "Dos talleres."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo responde: «One neighbourhood»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Término",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "scope"
+            },
+            {
+              "texto": "alcance"
+            },
+            {
+              "texto": "limited to one neighbourhood"
+            }
+          ],
+          [
+            {
+              "texto": "stake"
+            },
+            {
+              "texto": "participación"
+            },
+            {
+              "texto": "a twenty per cent stake"
+            }
+          ],
+          [
+            {
+              "texto": "leverage"
+            },
+            {
+              "texto": "aprovechar"
+            },
+            {
+              "texto": "leverage our contacts"
+            }
+          ],
+          [
+            {
+              "texto": "margin"
+            },
+            {
+              "texto": "margen"
+            },
+            {
+              "texto": "a forty per cent margin"
+            }
+          ],
+          [
+            {
+              "texto": "overheads"
+            },
+            {
+              "texto": "gastos fijos"
+            },
+            {
+              "texto": "rent and electricity"
+            }
+          ],
+          [
+            {
+              "texto": "scale up"
+            },
+            {
+              "texto": "ampliar el negocio"
+            },
+            {
+              "texto": "scale up to three cities"
+            }
+          ],
+          [
+            {
+              "texto": "niche"
+            },
+            {
+              "texto": "nicho de mercado"
+            },
+            {
+              "texto": "fast repairs near the station"
+            }
+          ],
+          [
+            {
+              "texto": "viable"
+            },
+            {
+              "texto": "viable"
+            },
+            {
+              "texto": "income is higher than costs"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-38": {
+      "explicacion": {
+        "titulo": "Contingencias: Should, in the event of, failing that",
+        "texto": "Un plan de contingencia dice qué harás si algo sale mal. En registro formal se sustituye if por la inversión Should + sujeto + verbo base: Should demand fall, we will… (= If demand falls…). Otras fórmulas son in the event of + sustantivo (In the event of a delay,…) y in the event that + oración (In the event that the supplier is late,…). Failing that introduce el plan B cuando lo primero no funciona. La consecuencia debe ser una acción concreta con will (o would si es muy hipotética)."
+      },
+      "patron": {
+        "texto": "Should + sujeto + verbo base, consecuencia; plan B:",
+        "formula": [
+          {
+            "texto": "Should demand fall,",
+            "nota": "should + sujeto + verbo base (sin -s ni will)"
+          },
+          {
+            "texto": "we will use the cash reserve;",
+            "nota": "consecuencia: acción concreta con will"
+          },
+          {
+            "texto": "failing that,",
+            "nota": "plan B si lo anterior no funciona"
+          },
+          {
+            "texto": "we will ask the bank for a loan.",
+            "nota": "segunda acción"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Should demand falls, we will reduce our hours.",
+          "correcto": "Should demand fall, we will reduce our hours.",
+          "explicacion": "Después de Should el verbo va en base: should ya es el auxiliar y no admite -s."
+        },
+        {
+          "incorrecto": "In the event of the supplier is late, we will call another one.",
+          "correcto": "In the event that the supplier is late, we will call another one.",
+          "explicacion": "In the event of exige un sustantivo; si sigue una oración completa se usa in the event that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos revisa con Leo qué hará el taller si algo sale mal.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What happens if a supplier is late?",
+            "traduccion": "¿Qué pasa si un proveedor se retrasa?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "In the event of a delay, we will buy parts from a local shop. Failing that, we will ask customers to wait.",
+            "traduccion": "En caso de retraso, compraremos piezas en una tienda local. Si eso falla, pediremos a los clientes que esperen."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And if sales are low?",
+            "traduccion": "¿Y si las ventas son bajas?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Should demand fall, we will use the cash reserve and reduce our opening hours.",
+            "traduccion": "Si la demanda baja, usaremos la reserva de efectivo y reduciremos el horario."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hará Leo si falla el proveedor y tampoco hay piezas en la tienda local?",
+          "opciones": [
+            {
+              "es": "Pedir a los clientes que esperen."
+            },
+            {
+              "es": "Cerrar el taller."
+            },
+            {
+              "es": "Usar la reserva de efectivo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo usa «failing that»: si no consigue piezas, «we will ask customers to wait»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Fórmula",
+          "Equivale a",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Should + sujeto + base"
+            },
+            {
+              "texto": "if + presente"
+            },
+            {
+              "texto": "Should demand fall, we will…"
+            }
+          ],
+          [
+            {
+              "texto": "In the event of + sustantivo"
+            },
+            {
+              "texto": "si hay…"
+            },
+            {
+              "texto": "In the event of a delay, we will…"
+            }
+          ],
+          [
+            {
+              "texto": "In the event that + oración"
+            },
+            {
+              "texto": "si ocurre que…"
+            },
+            {
+              "texto": "In the event that the supplier is late, …"
+            }
+          ],
+          [
+            {
+              "texto": "Failing that, …"
+            },
+            {
+              "texto": "si eso falla, …"
+            },
+            {
+              "texto": "Failing that, we will look for another one."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-39": {
+      "explicacion": {
+        "titulo": "Calendario de proyecto: plazos, acciones en curso y encargos",
+        "texto": "Un calendario de proyecto combina tres recursos. Para los plazos, by + futuro perfecto (will have + participio): By the end of March, we will have signed the lease (estará hecho antes de esa fecha). Para acciones en curso, futuro continuo (will be + -ing): This time next month, we will be painting the walls. Para tareas delegadas, have / get + objeto + participio: Leo is having the sign made; we are getting the permit approved (lo hace otra persona). Empieza cada frase por el plazo o el momento y di quién hace qué."
+      },
+      "patron": {
+        "texto": "Plazo + futuro perfecto / continuo; encargos:",
+        "formula": [
+          {
+            "texto": "By the end of March,",
+            "nota": "plazo con by"
+          },
+          {
+            "texto": "we will have signed the lease.",
+            "nota": "will have + participio: hecho antes del plazo"
+          },
+          {
+            "texto": "Meanwhile, we will be painting the walls.",
+            "nota": "will be + -ing: en curso en ese momento"
+          },
+          {
+            "texto": "Leo is having the sign made.",
+            "nota": "have + objeto + participio: lo hace otro"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By the end of March, we will signed the lease.",
+          "correcto": "By the end of March, we will have signed the lease.",
+          "explicacion": "El futuro perfecto necesita have + participio; después de will va el verbo base, no el pasado."
+        },
+        {
+          "incorrecto": "Leo will have the sign make by a carpenter.",
+          "correcto": "Leo will have the sign made by a carpenter.",
+          "explicacion": "En los encargos se usa have + objeto + participio (made): el objeto recibe la acción. Después del objeto no va la base, como sí ocurre en «mandar hacer» en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara planifican los meses antes de abrir el taller.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What is the plan for March?",
+            "traduccion": "¿Cuál es el plan para marzo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "By the end of March, we will have signed the lease. Meanwhile, I am having the sign made.",
+            "traduccion": "Para finales de marzo habremos firmado el contrato de alquiler. Mientras tanto, estoy encargando el cartel."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And who is doing the accounts?",
+            "traduccion": "¿Y quién hace la contabilidad?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I will delegate them to you. This time next month, we will be putting up the shelves.",
+            "traduccion": "Te la delegaré a ti. Dentro de un mes estaremos colocando las estanterías."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién se encargará de la contabilidad?",
+          "opciones": [
+            {
+              "es": "Sara, porque Leo se la delega."
+            },
+            {
+              "es": "Leo, que la hará él mismo."
+            },
+            {
+              "es": "Un carpintero."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I will delegate them to you»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Plazo con acción terminada"
+            },
+            {
+              "texto": "by + will have + participio"
+            },
+            {
+              "texto": "By May, we will have opened."
+            }
+          ],
+          [
+            {
+              "texto": "Acción en curso"
+            },
+            {
+              "texto": "will be + -ing"
+            },
+            {
+              "texto": "We will be painting the walls."
+            }
+          ],
+          [
+            {
+              "texto": "Tarea delegada"
+            },
+            {
+              "texto": "have/get + objeto + participio"
+            },
+            {
+              "texto": "Leo is having the sign made."
+            }
+          ],
+          [
+            {
+              "texto": "Delegar personas"
+            },
+            {
+              "texto": "delegate + tarea + to + persona"
+            },
+            {
+              "texto": "He will delegate the accounts to Sara."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-40": {
+      "explicacion": {
+        "titulo": "Presentar un plan y responder a objeciones",
+        "texto": "Presentar un plan es un desempeño con orden fijo: apertura (saluda y di qué vas a mostrar), calendario (by + will have, will be + -ing), tareas delegadas (have / get + objeto + participio), un riesgo con su contingencia (Should… / In the event of…) y respuesta a las objeciones. Ante una objeción, reconoce la preocupación (I understand that concern), tranquiliza (let me reassure you) y responde con un dato (our forecast is…). Mantén un tono realista: promete lo que puedes cumplir y usa may o expect para lo incierto."
+      },
+      "patron": {
+        "texto": "Apertura → calendario → riesgo → objeción:",
+        "formula": [
+          {
+            "texto": "I will begin with the timeline.",
+            "nota": "apertura: qué vas a mostrar"
+          },
+          {
+            "texto": "By June, we will have opened the doors.",
+            "nota": "calendario: by + will have + participio"
+          },
+          {
+            "texto": "Should demand fall, we will use our reserve.",
+            "nota": "riesgo con contingencia"
+          },
+          {
+            "texto": "I understand that concern, but let me reassure you.",
+            "nota": "objeción: reconocer y tranquilizar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I want to reassure to you about the risk.",
+          "correcto": "I want to reassure you about the risk.",
+          "explicacion": "Reassure es transitivo: lleva directamente a la persona, sin to."
+        },
+        {
+          "incorrecto": "I am agree with your objection.",
+          "correcto": "I agree with your objection.",
+          "explicacion": "Agree es un verbo: no se usa con be; en español «estoy de acuerdo» sí lleva estar."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo presenta su plan a Carlos, que hace de inversor y le plantea una objeción.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Thank you for coming. I will begin my pitch with the timeline: by June, we will have opened the doors.",
+            "traduccion": "Gracias por venir. Empezaré mi presentación con el calendario: para junio habremos abierto las puertas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "My objection is that cycling drops in winter. Is your forecast realistic?",
+            "traduccion": "Mi objeción es que el ciclismo baja en invierno. ¿Es realista su previsión?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I understand that concern, but let me reassure you. Should demand fall, we will use our cash reserve.",
+            "traduccion": "Entiendo esa preocupación, pero permítame tranquilizarle. Si la demanda baja, usaremos nuestra reserva de efectivo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That is a good answer. I would like to see the numbers next week.",
+            "traduccion": "Es una buena respuesta. Me gustaría ver las cifras la semana que viene."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué responde Leo a la objeción de Carlos?",
+          "opciones": [
+            {
+              "es": "Que si baja la demanda usarán su reserva de efectivo."
+            },
+            {
+              "es": "Que el invierno no afecta a las bicicletas."
+            },
+            {
+              "es": "Que cerrarán el taller en invierno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo reconoce la preocupación y responde: «Should demand fall, we will use our cash reserve»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Función",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "saludar y anunciar"
+            },
+            {
+              "texto": "I will begin my pitch with the timeline."
+            }
+          ],
+          [
+            {
+              "texto": "Calendario"
+            },
+            {
+              "texto": "plazos y acciones"
+            },
+            {
+              "texto": "By June, we will have opened the doors."
+            }
+          ],
+          [
+            {
+              "texto": "Encargos"
+            },
+            {
+              "texto": "tareas delegadas"
+            },
+            {
+              "texto": "Leo is having the sign made."
+            }
+          ],
+          [
+            {
+              "texto": "Riesgo"
+            },
+            {
+              "texto": "contingencia"
+            },
+            {
+              "texto": "Should demand fall, we will use our reserve."
+            }
+          ],
+          [
+            {
+              "texto": "Objeción"
+            },
+            {
+              "texto": "reconocer y tranquilizar"
+            },
+            {
+              "texto": "I understand that concern, but let me reassure you."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C39/C40: grupo de evidencia causativo (having/getting + bare 'have a/get the') sustituido por dos grupos concretos objeto+participio (sign made/built..., permit approved/signed...); 'will have' y 'will be' enumerados con participios/gerundios reales; aceptada de C40 e3 incluye ahora cartel y permiso.",
+      "C39: p0 y e1 ya no repiten frases de la ensenanza (walls painted, invoices printed); e2 no repite la frase del dialogo; C39 error 2 explicado sin calco confuso.",
+      "C36: explicacion incluye la seccion Team; error 2 cambiado a calco real 'objective customers'; e0 con distractor Finance; r1 ya no revela el modelo de e3.",
+      "C37: scale up glosado como ampliar (antes 'sin subir costes' como definicion). C38: p1 con opciones parafraseadas; r0 coincide con la traduccion; rubrica e0 ampliada. C40 p0: 'optimistic' (no ensenada) sustituida.",
+      "Sin nombres propios ni interjecciones fuera de reparto (dias y meses ya ensenados en niveles previos)."
+    ]
+  }
+}

@@ -1,0 +1,709 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "classes": {
+    "en.n10.class-51": {
+      "explicacion": {
+        "titulo": "Cómo abren las buenas charlas",
+        "texto": "Las charlas memorables empiezan con un gancho (hook) en los primeros segundos. Cuatro aperturas muy comunes: una pregunta al público (Have you ever…?), una anécdota (Last year, I…), un dato sorprendente (Nine out of ten…) y una promesa (By the end, you will…). Tras el gancho llega una señal de organización (signpost) que anuncia el camino: Let me outline…, First…, In a moment…. Al escuchar, pregúntate qué hace cada frase: ¿engancha o anuncia la estructura?"
+      },
+      "patron": {
+        "texto": "Gancho + promesa + señal de estructura:",
+        "formula": [
+          {
+            "texto": "Have you ever forgotten a name?",
+            "nota": "gancho: una pregunta al público"
+          },
+          {
+            "texto": "By the end, you will remember it.",
+            "nota": "promesa: lo que ganará el público"
+          },
+          {
+            "texto": "First, the problem; then, the solution.",
+            "nota": "señal de estructura: anuncia los pasos"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will make you a question.",
+          "correcto": "I will ask you a question.",
+          "explicacion": "En inglés se pregunta con ask; make a question es un calco de «hacer una pregunta»."
+        },
+        {
+          "incorrecto": "In first place, I will explain the problem.",
+          "correcto": "First, I will explain the problem.",
+          "explicacion": "«En primer lugar» se dice First o Firstly al inicio de la frase; in first place no funciona como señal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara ensaya la apertura de su charla y Leo le da su opinión.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Here is my opening: nine out of ten people forget a talk in a week.",
+            "traduccion": "Esta es mi apertura: nueve de cada diez personas olvidan una charla en una semana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Strong statistic! What comes next?",
+            "traduccion": "¡Un dato potente! ¿Qué viene después?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A promise: by the end, you will remember my three ideas.",
+            "traduccion": "Una promesa: al final, recordarás mis tres ideas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Nice. Now add a signpost, so the audience knows the plan.",
+            "traduccion": "Bien. Ahora añade una señal de organización para que el público conozca el plan."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Let me outline the talk: first the problem, then the solution.",
+            "traduccion": "Déjame esbozar la charla: primero el problema, luego la solución."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué tipo de gancho abre Sara su charla?",
+          "opciones": [
+            {
+              "es": "Con un dato: nueve de cada diez personas olvidan una charla."
+            },
+            {
+              "es": "Con una anécdota sobre un viaje."
+            },
+            {
+              "es": "Con una pregunta sobre el plan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara abre con «nine out of ten people forget a talk»: es una cifra, es decir, un dato; no cuenta una historia ni pregunta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Apertura",
+          "Pista",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Pregunta al público"
+            },
+            {
+              "texto": "Have you ever…?"
+            },
+            {
+              "texto": "Have you ever lost a key?"
+            }
+          ],
+          [
+            {
+              "texto": "Anécdota"
+            },
+            {
+              "texto": "Last year, I…"
+            },
+            {
+              "texto": "Last year, I lost my phone."
+            }
+          ],
+          [
+            {
+              "texto": "Dato o cifra"
+            },
+            {
+              "texto": "Nine out of ten…"
+            },
+            {
+              "texto": "Nine out of ten people lose keys."
+            }
+          ],
+          [
+            {
+              "texto": "Promesa"
+            },
+            {
+              "texto": "By the end, you will…"
+            },
+            {
+              "texto": "By the end, you will never lose a key."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-52": {
+      "explicacion": {
+        "titulo": "Señales y preguntas retóricas",
+        "texto": "Las señales guían al público: First abre; Moreover añade; Having said that contrasta con lo anterior; Moving on cambia de punto; Let me recap repasa; To sum up o To conclude cierran. La pregunta retórica (Who has never…? Why does it matter?) no espera respuesta: sirve para que el público piense y se sienta incluido. Úsala tras una afirmación o un dato, y deja una breve pausa. Ojo: no combines señales que dicen lo mismo (Having said that, but…)."
+      },
+      "patron": {
+        "texto": "Señal + idea, y pregunta retórica:",
+        "formula": [
+          {
+            "texto": "First,",
+            "nota": "abre la serie de ideas"
+          },
+          {
+            "texto": "Moreover,",
+            "nota": "añade un punto más"
+          },
+          {
+            "texto": "Having said that,",
+            "nota": "matiza o contrasta con lo anterior"
+          },
+          {
+            "texto": "who has never been late?",
+            "nota": "pregunta retórica: no espera respuesta"
+          },
+          {
+            "texto": "To sum up,",
+            "nota": "anuncia el cierre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "To resume, we need a simple plan.",
+          "correcto": "To sum up, we need a simple plan.",
+          "explicacion": "«Resumir» no se dice resume (falso amigo: resume es «reanudar»); la señal de cierre es To sum up."
+        },
+        {
+          "incorrecto": "Having said that, but we must be careful.",
+          "correcto": "Having said that, we must be careful.",
+          "explicacion": "Having said that ya marca el contraste («dicho esto, pero…»); no hace falta añadir but."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia ensaya una charla sobre los nombres y Tom le dice qué señales usar.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Who has never forgotten a name? Nobody, right? First, I will explain why we forget names.",
+            "traduccion": "¿Quién no ha olvidado nunca un nombre? Nadie, ¿verdad? Primero, explicaré por qué olvidamos los nombres."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Nice rhetorical question. What comes after that?",
+            "traduccion": "Buena pregunta retórica. ¿Qué viene después?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Moreover, I will show you a simple trick. Having said that, it needs practice.",
+            "traduccion": "Además, te mostraré un truco sencillo. Dicho esto, requiere práctica."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And how do you finish?",
+            "traduccion": "¿Y cómo terminas?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "To sum up, say the name three times.",
+            "traduccion": "En resumen, di el nombre tres veces."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Con qué señal anuncia Mia el final de su charla?",
+          "opciones": [
+            {
+              "es": "To sum up"
+            },
+            {
+              "es": "Moving on"
+            },
+            {
+              "es": "Having said that"
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cierra con «To sum up»: es la señal que anuncia un resumen final; Having said that solo matiza."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Empezar"
+            },
+            {
+              "texto": "First,"
+            },
+            {
+              "texto": "First, I will explain the cost."
+            }
+          ],
+          [
+            {
+              "texto": "Añadir"
+            },
+            {
+              "texto": "Moreover,"
+            },
+            {
+              "texto": "Moreover, it saves time."
+            }
+          ],
+          [
+            {
+              "texto": "Contrastar"
+            },
+            {
+              "texto": "Having said that,"
+            },
+            {
+              "texto": "Having said that, it has risks."
+            }
+          ],
+          [
+            {
+              "texto": "Cambiar de punto"
+            },
+            {
+              "texto": "Moving on,"
+            },
+            {
+              "texto": "Moving on, let us see the plan."
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "To sum up,"
+            },
+            {
+              "texto": "To sum up, the plan works."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-53": {
+      "explicacion": {
+        "titulo": "La estructura de una charla",
+        "texto": "Muchas charlas eficaces siguen este camino: gancho, problema, solución, regla de tres y cierre que retoma el inicio (callback). Al escuchar, localiza cada pieza por su función: el problema señala algo que va mal (The trouble is…), la solución lo arregla (Here is what works…), la regla de tres reúne tres elementos paralelos (fast, cheap and green) y el cierre vuelve a la historia del principio. Conocer la estructura te ayuda a anticipar y a no perderte."
+      },
+      "patron": {
+        "texto": "Gancho → problema → solución → regla de tres → cierre:",
+        "formula": [
+          {
+            "texto": "Imagine a fridge full of food.",
+            "nota": "gancho: una imagen cotidiana"
+          },
+          {
+            "texto": "The trouble is that we waste a third of it.",
+            "nota": "problema: lo que va mal"
+          },
+          {
+            "texto": "Here is what works: plan, share and freeze.",
+            "nota": "solución con una regla de tres"
+          },
+          {
+            "texto": "So, back to that fridge: it is empty.",
+            "nota": "cierre: retoma la imagen inicial"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The rule of the three makes a list easy to remember.",
+          "correcto": "The rule of three makes a list easy to remember.",
+          "explicacion": "En inglés se dice the rule of three, sin artículo ante el número (al contrario que «la regla de los tres»)."
+        },
+        {
+          "incorrecto": "It is fast, cheap and it saves the planet.",
+          "correcto": "It is fast, cheap and green.",
+          "explicacion": "En una regla de tres, los tres elementos deben tener la misma forma (aquí, adjetivos); si no, el ritmo se rompe."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo comentan una charla que acaban de oír sobre el desperdicio de comida.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Did you like the talk about food waste?",
+            "traduccion": "¿Te gustó la charla sobre el desperdicio de comida?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes! She started with a fridge and described the problem: we waste a third of our food.",
+            "traduccion": "¡Sí! Empezó con una nevera y describió el problema: desperdiciamos un tercio de nuestra comida."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And the solution was three steps: plan, share and freeze.",
+            "traduccion": "Y la solución eran tres pasos: planificar, compartir y congelar."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "At the closing she returned to the fridge. A nice callback.",
+            "traduccion": "En el cierre volvió a la nevera. Un buen callback al principio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo cierra la oradora su charla?",
+          "opciones": [
+            {
+              "es": "Volviendo a la imagen de la nevera del principio."
+            },
+            {
+              "es": "Con un dato nuevo sobre la basura."
+            },
+            {
+              "es": "Con una pregunta para el público."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que en el cierre «returned to the fridge»: es un callback a la imagen del inicio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Qué hace",
+          "Pista al escuchar"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Problema"
+            },
+            {
+              "texto": "Muestra lo que va mal"
+            },
+            {
+              "texto": "The trouble is…"
+            }
+          ],
+          [
+            {
+              "texto": "Solución"
+            },
+            {
+              "texto": "Propone cómo arreglarlo"
+            },
+            {
+              "texto": "Here is what works…"
+            }
+          ],
+          [
+            {
+              "texto": "Regla de tres"
+            },
+            {
+              "texto": "Reúne tres elementos paralelos"
+            },
+            {
+              "texto": "Fast, cheap and green"
+            }
+          ],
+          [
+            {
+              "texto": "Callback"
+            },
+            {
+              "texto": "Vuelve al inicio"
+            },
+            {
+              "texto": "Back to the…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-54": {
+      "explicacion": {
+        "titulo": "Énfasis que llega: la inversión",
+        "texto": "La inversión coloca el auxiliar antes del sujeto para dar énfasis, sobre todo tras expresiones negativas o restrictivas: Never have we…, Rarely do we…, Seldom has…, Not only do we… but we also…, Little did we know… Pasos: 1) pon la expresión enfática al inicio; 2) sube el auxiliar (do, have, is…) antes del sujeto; 3) deja el verbo principal en base o participio. No es una pregunta. Úsala una o dos veces: demasiadas suenan artificiales."
+      },
+      "patron": {
+        "texto": "Expresión negativa + auxiliar + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "Never",
+            "nota": "expresión enfática al inicio"
+          },
+          {
+            "texto": "have we",
+            "nota": "el auxiliar va antes del sujeto"
+          },
+          {
+            "texto": "wasted so much energy.",
+            "nota": "verbo en participio y resto de la frase"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Never we have wasted so much energy.",
+          "correcto": "Never have we wasted so much energy.",
+          "explicacion": "Tras Never al inicio, el auxiliar (have) va antes del sujeto (we); el español no invierte así."
+        },
+        {
+          "incorrecto": "Not only we waste time, but also energy.",
+          "correcto": "Not only do we waste time, but we also waste energy.",
+          "explicacion": "Con Not only al inicio hace falta el auxiliar do antes del sujeto, y la segunda parte repite sujeto y verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos ensaya un discurso y Sara le ayuda a darle más énfasis.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Sara, how does this sound? We have never wasted so much energy.",
+            "traduccion": "Sara, ¿qué tal suena esto? Nunca hemos desperdiciado tanta energía."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It is fine, but it has no emphasis. Try: never have we wasted so much energy.",
+            "traduccion": "Está bien, pero no tiene énfasis. Prueba: nunca hemos desperdiciado tanta energía."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Better! And: not only do we waste energy, but we also waste time.",
+            "traduccion": "¡Mejor! Y: no solo desperdiciamos energía, sino también tiempo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. But use inversion only once or twice.",
+            "traduccion": "Sí. Pero usa la inversión solo una o dos veces."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué consejo final le da Sara a Carlos?",
+          "opciones": [
+            {
+              "es": "Usar la inversión solo una o dos veces."
+            },
+            {
+              "es": "Usarla en cada frase de la charla."
+            },
+            {
+              "es": "Evitarla siempre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara termina con «use inversion only once or twice»: el énfasis funciona si no se repite."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Inversión",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Never / Seldom / Rarely"
+            },
+            {
+              "texto": "adverbio + auxiliar + sujeto + verbo"
+            },
+            {
+              "texto": "Rarely do we stop to think."
+            }
+          ],
+          [
+            {
+              "texto": "Not only"
+            },
+            {
+              "texto": "Not only + auxiliar + sujeto, but… also"
+            },
+            {
+              "texto": "Not only do we waste time, but we also waste money."
+            }
+          ],
+          [
+            {
+              "texto": "Little did"
+            },
+            {
+              "texto": "Little did + sujeto + verbo base"
+            },
+            {
+              "texto": "Little did we know."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-55": {
+      "explicacion": {
+        "titulo": "Una charla breve, de principio a fin",
+        "texto": "Una charla de cinco minutos combina todo el bloque: abre con un gancho (pregunta, anécdota, dato o promesa), anuncia tres ideas con señales (First, Moreover, Having said that), añade una regla de tres o una inversión enfática (Seldom have I…) y cierra retomando el inicio con un takeaway claro. Después viene la pregunta del público: agradece (Good question), responde breve y vuelve a tu mensaje. Ensaya en voz alta y cuida el tiempo."
+      },
+      "patron": {
+        "texto": "Gancho + ideas con señales + cierre + pregunta:",
+        "formula": [
+          {
+            "texto": "Have you ever grown your own food?",
+            "nota": "gancho: pregunta al público"
+          },
+          {
+            "texto": "First, start small. Moreover, be patient.",
+            "nota": "ideas con señales de organización"
+          },
+          {
+            "texto": "To sum up, plant one seed. That is my takeaway.",
+            "nota": "cierre con la idea final"
+          },
+          {
+            "texto": "Good question. Let me answer briefly.",
+            "nota": "respuesta a una pregunta del público"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will speak you about my passion.",
+          "correcto": "I will talk to you about my passion.",
+          "explicacion": "Con speak y talk la persona va precedida de to: talk to you, speak to you. «Hablarte de» no se construye con el pronombre directamente."
+        },
+        {
+          "incorrecto": "In the end of my talk, I will show the garden.",
+          "correcto": "At the end of my talk, I will show the garden.",
+          "explicacion": "«Al final de» se dice at the end of; in the end significa «al final, con el tiempo» y no lleva of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana da una charla breve en su club de jardinería y Leo le hace una pregunta.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Have you ever eaten food from your own garden? That is my passion.",
+            "traduccion": "¿Has comido alguna vez comida de tu propio jardín? Esa es mi pasión."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "First, start small. Moreover, even a beginner can harvest a salad. To sum up, plant one seed.",
+            "traduccion": "Primero, empieza pequeño. Además, hasta un principiante puede cosechar una ensalada. En resumen, planta una semilla."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Great talk! Is it expensive to begin?",
+            "traduccion": "¡Gran charla! ¿Es caro empezar?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good question. Not at all: a few seeds and some soil are enough.",
+            "traduccion": "Buena pregunta. Para nada: unas semillas y algo de tierra bastan."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué responde Ana cuando Leo pregunta si es caro empezar?",
+          "opciones": [
+            {
+              "es": "Que no, con unas semillas y algo de tierra basta."
+            },
+            {
+              "es": "Que sí, hace falta un terreno grande."
+            },
+            {
+              "es": "Que no sabe la respuesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana agradece la pregunta y responde: «a few seeds and some soil are enough»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte de la charla",
+          "Qué haces",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Gancho que engancha"
+            },
+            {
+              "texto": "Have you ever grown your own food?"
+            }
+          ],
+          [
+            {
+              "texto": "Ideas"
+            },
+            {
+              "texto": "Tres ideas con señales"
+            },
+            {
+              "texto": "First, start small."
+            }
+          ],
+          [
+            {
+              "texto": "Énfasis"
+            },
+            {
+              "texto": "Inversión o regla de tres"
+            },
+            {
+              "texto": "Seldom have I felt so proud."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Resumen y takeaway"
+            },
+            {
+              "texto": "To sum up, plant one seed."
+            }
+          ],
+          [
+            {
+              "texto": "Preguntas"
+            },
+            {
+              "texto": "Agradecer y responder"
+            },
+            {
+              "texto": "Good question. Let me answer briefly."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisado 51-55 contra mapa-n10 v2: cumple concepto, fase y canDo.",
+      "52: variadas las respuestas-señal (To sum up ya no se repite en 5 ítems; ahora Moving on y pregunta retórica en ordenar); 51/52 con aceptadas ampliadas (movable adverbs, Then/Next/Finally).",
+      "53: traducción de callback y texto de evaluación ajustados; 54: traducción del diálogo sin glosa metalingüística; 55: inversión natural (as proud as), calco speak you explicado, repaso con promesa real.",
+      "Rúbricas 54/55 reescritas: sin palabras sueltas ambiguas (first, is it, try it, remember); grupos de inversión con sujeto, pregunta retórica, regla de tres, gancho, señales, cierre, respuesta al público; rango 110-280 y consigna alineada con el modelo (130-220).",
+      "Sin nombres propios fuera del elenco ni interjecciones no enseñadas."
+    ]
+  }
+}

@@ -1,0 +1,740 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n10.class-91": {
+      "explicacion": {
+        "titulo": "Diagnosticar antes de corregir",
+        "texto": "Corregir sin saber por qué falla se olvida en una semana; diagnosticar el error lo fija. En este nivel los deslices recurrentes caen en cinco categorías: gramática oral (That film, it was brilliant), concesión (Much as I admire her, I disagree), tacto (I was wondering if…), registro académico (the increase in prices) y estilo narrativo (had already started). Ante una frase dudosa, pregúntate: ¿qué categoría es?, ¿qué regla rompe?, ¿cómo suena corregida? Localiza el error exacto antes de reescribir."
+      },
+      "patron": {
+        "texto": "Diagnóstico en cuatro pasos:",
+        "formula": [
+          {
+            "texto": "Spot the slip,",
+            "nota": "localizas la palabra o estructura dudosa"
+          },
+          {
+            "texto": "name the category,",
+            "nota": "oral, concesión, tacto, registro o narración"
+          },
+          {
+            "texto": "apply the rule,",
+            "nota": "recuerdas la regla de esa categoría"
+          },
+          {
+            "texto": "rewrite once.",
+            "nota": "reescribes la frase ya corregida"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Much as I admire the plan, but I cannot support it.",
+          "correcto": "Much as I admire the plan, I cannot support it.",
+          "explicacion": "En español se dice «aunque… pero», pero en inglés much as ya contrasta: but sobra."
+        },
+        {
+          "incorrecto": "The increase of prices worried us.",
+          "correcto": "The increase in prices worried us.",
+          "explicacion": "Calco de «el aumento de los precios»: tras increase, drop o growth, lo que cambia se introduce con in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana enseña a Leo un texto suyo lleno de marcas rojas y deciden ordenar los errores antes de corregirlos.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Let us diagnose the slips before we rewrite anything.",
+            "traduccion": "Diagnostiquemos los deslices antes de reescribir nada."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Here is one: Much as I like the plan, but it is too expensive.",
+            "traduccion": "Aquí hay uno: Aunque me gusta el plan, pero es demasiado caro."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a concession slip. Much as already contrasts, so we drop but.",
+            "traduccion": "Ese es un desliz de concesión. Much as ya contrasta, así que quitamos but."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And this one? The increase of prices.",
+            "traduccion": "¿Y este? The increase of prices."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is register: we say the increase in prices.",
+            "traduccion": "Ese es de registro: decimos the increase in prices."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué error tiene la frase «Much as I like the plan, but…»?",
+          "opciones": [
+            {
+              "es": "Sobra el conector but después de much as."
+            },
+            {
+              "es": "Falta el pronombre al repetir el sujeto."
+            },
+            {
+              "es": "Hay una preposición mal elegida."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lo llama «concession slip»: much as ya expresa el contraste, así que se quita but."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Categoría",
+          "Regla clave",
+          "Frase correcta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Gramática oral"
+            },
+            {
+              "texto": "la cabeza pide un pronombre"
+            },
+            {
+              "texto": "That film, it was brilliant."
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "much as no lleva but"
+            },
+            {
+              "texto": "Much as I admire her, I disagree."
+            }
+          ],
+          [
+            {
+              "texto": "Tacto"
+            },
+            {
+              "texto": "pregunta indirecta con orden afirmativo"
+            },
+            {
+              "texto": "I was wondering whether you could help."
+            }
+          ],
+          [
+            {
+              "texto": "Registro académico"
+            },
+            {
+              "texto": "increase in, no of"
+            },
+            {
+              "texto": "the increase in prices"
+            }
+          ],
+          [
+            {
+              "texto": "Estilo narrativo"
+            },
+            {
+              "texto": "had marca lo anterior"
+            },
+            {
+              "texto": "The film had already started."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-92": {
+      "explicacion": {
+        "titulo": "Reparar con el mínimo cambio",
+        "texto": "Reparar es cambiar solo lo necesario. Marca el error, nombra la regla y toca únicamente las palabras que fallan: un pronombre olvidado (That film, it was brilliant), un conector que sobra (Much as I admire her, I disagree), un orden mal puesto (However expensive the ticket is…), una condición formal (Should demand fall, …), una preposición equivocada (the demand for tickets) o un tiempo que rompe la secuencia (had already left). Después relee la frase entera: si suena natural, está reparada."
+      },
+      "patron": {
+        "texto": "Reparar una frase:",
+        "formula": [
+          {
+            "texto": "Flag the error,",
+            "nota": "lo marcas y nombras su categoría"
+          },
+          {
+            "texto": "swap only the wrong word,",
+            "nota": "cambias lo mínimo necesario"
+          },
+          {
+            "texto": "check the tense and the wording.",
+            "nota": "relees con tiempo y redacción coherentes"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Should demand falls, we will cut costs.",
+          "correcto": "Should demand fall, we will cut costs.",
+          "explicacion": "Tras should invertido no se conjuga el verbo: se usa la forma base, sin -s."
+        },
+        {
+          "incorrecto": "I was wondering if could you help me.",
+          "correcto": "I was wondering if you could help me.",
+          "explicacion": "En la pregunta indirecta el orden es afirmativo (you could); la inversión de la pregunta directa sobra."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom reparan un párrafo con errores antes de entregarlo a su profesor.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Let us flag the errors first. Which line worries you?",
+            "traduccion": "Marquemos primero los errores. ¿Qué línea te preocupa?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Line one: Should sales falls, we will cut costs.",
+            "traduccion": "Línea uno: Should sales falls, we will cut costs."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Repair only the verb. After should, we use the base form: Should sales fall.",
+            "traduccion": "Repara solo el verbo. Después de should, usamos la forma base: Should sales fall."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And line two: The rise of sales. Is the tense wrong?",
+            "traduccion": "Y la línea dos: The rise of sales. ¿Está mal el tiempo verbal?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, the tense is fine. Swap one word: the rise in sales.",
+            "traduccion": "No, el tiempo está bien. Cambia una palabra: the rise in sales."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Tom para «The rise of sales»?",
+          "opciones": [
+            {
+              "es": "Cambiar solo una palabra: of por in."
+            },
+            {
+              "es": "Cambiar el tiempo verbal del párrafo."
+            },
+            {
+              "es": "Reescribir la frase entera."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Swap one word: the rise in sales». Repara lo mínimo y confirma que el tiempo verbal está bien."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Categoría",
+          "Error típico",
+          "Reparación"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Gramática oral"
+            },
+            {
+              "texto": "Neither I can."
+            },
+            {
+              "texto": "Neither can I."
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Though tired was I…"
+            },
+            {
+              "texto": "Tired though I was…"
+            }
+          ],
+          [
+            {
+              "texto": "Contingencia"
+            },
+            {
+              "texto": "Should he arrives…"
+            },
+            {
+              "texto": "Should he arrive…"
+            }
+          ],
+          [
+            {
+              "texto": "Registro"
+            },
+            {
+              "texto": "the demand of tickets"
+            },
+            {
+              "texto": "the demand for tickets"
+            }
+          ],
+          [
+            {
+              "texto": "Narración"
+            },
+            {
+              "texto": "the train already left"
+            },
+            {
+              "texto": "the train had already left"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-93": {
+      "explicacion": {
+        "titulo": "Lo que dice la letra y lo que sugiere",
+        "texto": "Una letra casi nunca lo dice todo. El significado literal es lo que dicen las palabras (a door); el figurado, lo que quieren decir (una promesa que no se cumple). Además, una letra puede implicar cosas que nunca nombra: una luz encendida sugiere que alguien espera. Para interpretarla: busca la metáfora, traduce la imagen a una idea, fíjate en el tono (suave, irónico, resignado) y decide qué se insinúa sin decirse. Apoya siempre tu lectura en una palabra concreta del texto."
+      },
+      "patron": {
+        "texto": "Interpretar un verso:",
+        "formula": [
+          {
+            "texto": "The words say…",
+            "nota": "significado literal"
+          },
+          {
+            "texto": "but the image means…",
+            "nota": "significado figurado"
+          },
+          {
+            "texto": "so the lyrics imply…",
+            "nota": "lo que se insinúa sin decirlo"
+          },
+          {
+            "texto": "in a gentle tone.",
+            "nota": "el tono: suave, irónico, resignado…"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lyrics implies that someone is still waiting.",
+          "correcto": "The lyrics imply that someone is still waiting.",
+          "explicacion": "En español «la letra» es singular, pero lyrics es plural en inglés: pide imply, sin -s."
+        },
+        {
+          "incorrecto": "The tone of the verse is gentle: the singer doesn't blame nobody.",
+          "correcto": "The tone of the verse is gentle: the singer doesn't blame anybody.",
+          "explicacion": "Calco de «no culpa a nadie»: en inglés un solo negativo basta; tras doesn't se usa anybody."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom escuchan juntos una canción e intentan entender qué dice entre líneas.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Listen to these lyrics: I am a paper boat on a long grey river.",
+            "traduccion": "Escucha esta letra: Soy un barquito de papel en un largo río gris."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is a metaphor. The singer feels small and carried by events.",
+            "traduccion": "Es una metáfora. La cantante se siente pequeña y arrastrada por los acontecimientos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is the tone happy?",
+            "traduccion": "¿El tono es alegre?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. Grey is a hint that she feels tired and a little alone.",
+            "traduccion": "No. El gris es un indicio de que se siente cansada y algo sola."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sugiere la palabra «grey» en la letra?",
+          "opciones": [
+            {
+              "es": "Que la cantante se siente cansada y algo sola."
+            },
+            {
+              "es": "Que el río está contaminado."
+            },
+            {
+              "es": "Que el barquito es de papel gris."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que grey es «a hint»: un indicio del estado de ánimo, no una descripción del río."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verso",
+          "Literal",
+          "Figurado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a door that never opens"
+            },
+            {
+              "texto": "una puerta cerrada"
+            },
+            {
+              "texto": "una oportunidad que no llega"
+            }
+          ],
+          [
+            {
+              "texto": "I kept a light on"
+            },
+            {
+              "texto": "una luz encendida"
+            },
+            {
+              "texto": "sigo esperando"
+            }
+          ],
+          [
+            {
+              "texto": "a quiet echo"
+            },
+            {
+              "texto": "un sonido débil"
+            },
+            {
+              "texto": "la ausencia de alguien"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-94": {
+      "explicacion": {
+        "titulo": "Tu relato: cinco movimientos",
+        "texto": "Un buen relato de unas 250 palabras combina lo aprendido en el nivel: una escena mostrada (detalles que revelan la emoción sin nombrarla), un ritmo controlado (anteposición y fragmentos: Down the hill ran the dog. Silence.), un giro que cambia lo que el lector creía y un desenlace que responde a la pregunta inicial, con un toque de humor o ironía. Usa el pasado simple para la acción y had + participio para lo anterior: los tiempos deben ser coherentes de principio a fin."
+      },
+      "patron": {
+        "texto": "Escena, ritmo, giro, final e ironía:",
+        "formula": [
+          {
+            "texto": "Rain tapped the window.",
+            "nota": "escena mostrada, con un detalle concreto"
+          },
+          {
+            "texto": "Down the hill ran the dog. Silence.",
+            "nota": "anteposición y fragmentos para el ritmo"
+          },
+          {
+            "texto": "Then the letter arrived.",
+            "nota": "el giro que cambia lo esperado"
+          },
+          {
+            "texto": "In the end, he laughed.",
+            "nota": "desenlace que cierra la historia"
+          },
+          {
+            "texto": "The director, of course, was late.",
+            "nota": "toque de ironía amable"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Suddenly he was knowing the truth.",
+          "correcto": "Suddenly he knew the truth.",
+          "explicacion": "Know es verbo de estado y no se usa en continuo; el pasado simple basta para el giro."
+        },
+        {
+          "incorrecto": "Yesterday I have found a strange letter.",
+          "correcto": "Yesterday I found a strange letter.",
+          "explicacion": "Con una hora o un día terminado (yesterday) se usa el pasado simple, no el present perfect."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Leo la idea de su relato para el taller de escritura y él le ayuda a pulirla.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My story opens in a kitchen: the radio played while Dad searched for his glasses.",
+            "traduccion": "Mi relato empieza en una cocina: la radio sonaba mientras papá buscaba sus gafas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Nice scene. You show the rush without saying it. What is the twist?",
+            "traduccion": "Buena escena. Muestras las prisas sin decirlas. ¿Cuál es el giro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The glasses were on his head all along.",
+            "traduccion": "Las gafas estaban en su cabeza todo el tiempo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good twist. Add a touch of irony: Dad, of course, blamed the dog.",
+            "traduccion": "Buen giro. Añade un toque de ironía: papá, por supuesto, culpó al perro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el giro del relato de Ana?",
+          "opciones": [
+            {
+              "es": "Las gafas estaban en la cabeza del padre."
+            },
+            {
+              "es": "El perro escondió las gafas."
+            },
+            {
+              "es": "La radio se estropeó."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana lo dice: «The glasses were on his head all along». El perro solo aparece en la ironía que propone Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Movimiento",
+          "Qué hace",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escena"
+            },
+            {
+              "texto": "muestra con detalles"
+            },
+            {
+              "texto": "Her hands shook."
+            }
+          ],
+          [
+            {
+              "texto": "Ritmo"
+            },
+            {
+              "texto": "anteposición y fragmentos"
+            },
+            {
+              "texto": "Into the room walked a stranger."
+            }
+          ],
+          [
+            {
+              "texto": "Giro"
+            },
+            {
+              "texto": "cambia lo esperado"
+            },
+            {
+              "texto": "It was an invitation."
+            }
+          ],
+          [
+            {
+              "texto": "Desenlace"
+            },
+            {
+              "texto": "responde a la pregunta inicial"
+            },
+            {
+              "texto": "In the end, she stayed."
+            }
+          ],
+          [
+            {
+              "texto": "Ironía"
+            },
+            {
+              "texto": "dice lo contrario con humor"
+            },
+            {
+              "texto": "The taxi, of course, was late."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-95": {
+      "explicacion": {
+        "titulo": "La jornada abierta: todo en una intervención",
+        "texto": "La simulación pide combinar lo del bloque en una sola intervención: presentas una idea con un breve contexto narrativo (Last year, the square had been empty…), la defiendes ante una objeción con concesión y tacto (Much as I appreciate…, I was wondering whether…), anticipas imprevistos (Should it rain, …) y cierras con un plan y un plazo (By Friday, we will have…). Antes de entregar, revisa como en la clase 92: marca el error, repara lo mínimo y comprueba el registro."
+      },
+      "patron": {
+        "texto": "Idea, contexto, objeción y plan:",
+        "formula": [
+          {
+            "texto": "I would like to put forward a proposal.",
+            "nota": "presentas la idea con tacto"
+          },
+          {
+            "texto": "Last year, the square had been empty.",
+            "nota": "contexto breve: had para lo anterior"
+          },
+          {
+            "texto": "Much as I appreciate the objection, I was wondering whether…",
+            "nota": "concesión y petición indirecta"
+          },
+          {
+            "texto": "Should it rain, …; by Friday, we will have…",
+            "nota": "contingencia y plazo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Should it will rain, the workshop moves to the hall.",
+          "correcto": "Should it rain, the workshop will move to the hall.",
+          "explicacion": "Tras should invertido el verbo va en forma base; will pertenece a la consecuencia."
+        },
+        {
+          "incorrecto": "We must confirm the stall until Friday.",
+          "correcto": "We must confirm the stall by Friday.",
+          "explicacion": "«Hasta el viernes» es until, pero un plazo («para el viernes, como muy tarde») se dice by."
+        }
+      ],
+      "situacion": {
+        "contexto": "En la reunión de la jornada abierta del barrio, Sara presenta su idea y Carlos pone una objeción.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I would like to put forward a proposal: a story workshop in the square.",
+            "traduccion": "Me gustaría presentar una propuesta: un taller de relatos en la plaza."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Much as I like the idea, the budget is very small.",
+            "traduccion": "Aunque me gusta la idea, el presupuesto es muy pequeño."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I was wondering whether the volunteers could bring the materials. Should it rain, we will move into the hall.",
+            "traduccion": "Me preguntaba si los voluntarios podrían traer los materiales. Si lloviera, nos trasladaremos al salón."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Fair enough. Can you confirm the stall by Friday?",
+            "traduccion": "Me parece justo. ¿Puedes confirmar el puesto para el viernes?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. By Friday, we will have confirmed everything.",
+            "traduccion": "Sí. Para el viernes lo habremos confirmado todo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué objeción pone Carlos a la propuesta?",
+          "opciones": [
+            {
+              "es": "Que el presupuesto es muy pequeño."
+            },
+            {
+              "es": "Que el taller hace demasiado ruido."
+            },
+            {
+              "es": "Que nadie querrá ser voluntario."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos concede primero («Much as I like the idea») y después pone su objeción: «the budget is very small»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Presentar"
+            },
+            {
+              "texto": "put forward a proposal"
+            },
+            {
+              "texto": "I would like to put forward a proposal."
+            }
+          ],
+          [
+            {
+              "texto": "Conceder"
+            },
+            {
+              "texto": "Much as I appreciate…"
+            },
+            {
+              "texto": "Much as I appreciate your concern, …"
+            }
+          ],
+          [
+            {
+              "texto": "Pedir con tacto"
+            },
+            {
+              "texto": "I was wondering whether…"
+            },
+            {
+              "texto": "I was wondering whether we could…"
+            }
+          ],
+          [
+            {
+              "texto": "Prever"
+            },
+            {
+              "texto": "Should + sujeto + base"
+            },
+            {
+              "texto": "Should it rain, …"
+            }
+          ],
+          [
+            {
+              "texto": "Fijar plazo"
+            },
+            {
+              "texto": "By + fecha + will have…"
+            },
+            {
+              "texto": "By Friday, we will have confirmed it."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Rúbricas de escritura endurecidas: sin evidencias de una palabra o de eco del enunciado; 94 ('had' desnudo -> had + participio; anteposición exige frases con verbo/sujeto), 95 (sin 'deadline' suelto) y 93 (literal/implica con frases).",
+      "Nombre propio no enseñado 'Smith' (92) sustituido por Ana; interjección 'Ha!' (94) eliminada.",
+      "93: error frecuente 2 coherente (incorrecto/correcto solo difieren en nobody/anybody); modelo de interpretación corregido (quien dejó la llave es el amigo); versos unificados bajo la canción original «Last Bus Home» en las consignas.",
+      "Ítems cortos de corrección o de 'mostrar' (91, 94, 95) con rúbrica y variantes para no penalizar respuestas válidas; 92 audio redactado de forma natural.",
+      "Modelos de escritura de 150-167 palabras (>50 % del mínimo del mapa); 95 indica la extensión esperada."
+    ]
+  }
+}

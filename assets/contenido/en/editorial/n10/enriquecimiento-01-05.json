@@ -60,8 +60,8 @@
           },
           {
             "hablante": "Ana",
-            "texto": "Fair enough. You've always loved singing, haven't you?",
-            "traduccion": "Vale, tiene sentido. Siempre te ha encantado cantar, ¿verdad?"
+            "texto": "Good for you. You've always loved singing, haven't you?",
+            "traduccion": "Me alegro por ti. Siempre te ha encantado cantar, ¿verdad?"
           },
           {
             "hablante": "Leo",
@@ -369,7 +369,7 @@
     "en.n10.class-05": {
       "explicacion": {
         "titulo": "La sobremesa: los cuatro recursos juntos",
-        "texto": "En una sobremesa se combinan los recursos de la charla informal: ecos para reaccionar (Is she? Did it?), cabeza o cola para hablar de alguien (My sister, she's…; She's lovely, your sister), elipsis para acordar o rechazar (Neither can I, I'd love to, I'd rather not) y marcadores para dirigir el rumbo (By the way, Anyway, To be honest). Propón un tema, reacciona a lo que dicen los demás y cambia de tema con un marcador. Si solo hablas tú, no es una conversación."
+        "texto": "En una sobremesa se combinan los recursos de la charla informal: ecos para reaccionar (Is she? Did he?), cabeza o cola para hablar de alguien (My sister, she's…; She's lovely, your sister), elipsis para acordar o rechazar (Neither can I, I'd love to, I'd rather not) y marcadores para dirigir el rumbo (By the way, Anyway, To be honest). Propón un tema, reacciona a lo que dicen los demás y cambia de tema con un marcador. Si solo hablas tú, no es una conversación."
       },
       "patron": {
         "texto": "Tema + reacción + cambio de tema:",
@@ -392,7 +392,7 @@
         {
           "incorrecto": "\"I can't eat another bite.\" \"So can I.\"",
           "correcto": "\"I can't eat another bite.\" \"Neither can I.\"",
-          "explicacion": "Tras una frase negativa se usa neither, no so: So can I significaría «yo sí puedo»."
+          "explicacion": "Tras una frase negativa se usa neither, no so: So can I significaría «yo también puedo», que contradice lo que dijo el otro."
         },
         {
           "incorrecto": "Is very good, that soup.",
@@ -416,7 +416,7 @@
           {
             "hablante": "Tom",
             "texto": "Did she? Lucky you. By the way, have you heard the gossip about Mia?",
-            "traduccion": "¿Sí? Qué suerte. Por cierto, ¿habéis oído el cotilleo sobre Mia?"
+            "traduccion": "¿Sí? Qué suerte. Por cierto, ¿han oído el cotilleo sobre Mia?"
           },
           {
             "hablante": "Carlos",
@@ -431,7 +431,7 @@
           {
             "hablante": "Sara",
             "texto": "No way! Anyway, let's do the dishes.",
-            "traduccion": "¡No puede ser! En fin, fregamos los platos."
+            "traduccion": "¡No puede ser! En fin, lavemos los platos."
           }
         ],
         "item": {
@@ -453,5 +453,20 @@
         }
       }
     }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C1-C5 revisadas contra el mapa N10 v2 (continúan N9 C100); explicaciones, patrones y errores correctos.",
+      "C1: diálogo más natural (Good for you); opciones de escucha sin género inventado y distractor débil sustituido; consigna de repaso ajustada a 'preferencia'.",
+      "C2: feedback que citaba 'la primera frase' corregido (las opciones se reordenan).",
+      "C3: opciones de escucha neutras; orden alternativo aceptado en ordenar.",
+      "C4: escucha 'umbrella' tenía clave incorrecta (Leo no tenía su propio paraguas): opciones reescritas; aceptadas frank y cola con by the way.",
+      "C5: rúbrica de cabeza/cola estaba vacía de significado (', she', ', my', ', this' coincidían con cualquier texto tras normalizar): sustituida por patrones nombre+pronombre y colas 'your + familiar' (tradeoff: la rúbrica normaliza la puntuación, por lo que una cola no se puede verificar con exactitud); el modelo usaba 'So I do' sin contexto: corregido; escucha reemplazada por pregunta que exige oír; consigna cabeza/cola coherente; español neutro (han, lavemos).",
+      "Modelos de escritura C4/C5 (116/131 palabras) superan el 50% del mínimo del mapa con rúbrica justa.",
+      "P2 aceptado: C1-C3 son de baja dificultad léxica para C1 porque el contenido es gramática oral y el léxico está restringido a lo enseñado."
+    ]
   }
 }

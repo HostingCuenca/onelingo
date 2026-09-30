@@ -9,6 +9,9 @@ import re
 import sys
 from pathlib import Path
 
+# La detección de ciclos recorre la cadena de prerrequisitos (~1000 unidades en inglés).
+sys.setrecursionlimit(20000)
+
 RAIZ = Path(__file__).resolve().parent.parent / "assets" / "contenido"
 ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron", "tabla"}
 ORDEN_TIPOS = ["ensenar", "practica_guiada", "practica_independiente", "situacion", "evaluacion"]
@@ -146,33 +149,33 @@ class Validador:
         for uid in unidades:
             visitar(uid, [])
 
+    @staticmethod
+    def _cadena(u, unidades):
+        """La unidad y todos sus prerrequisitos (iterativo: la ruta de inglés
+        encadena ~1000 unidades y la recursión superaría el límite de Python)."""
+        vistos, pila = set(), [u]
+        while pila:
+            x = pila.pop()
+            if x["id"] in vistos:
+                continue
+            vistos.add(x["id"])
+            yield x
+            pila.extend(unidades[p] for p in x.get("prerequisitos", []) if p in unidades)
+
     def conocidas(self, u, unidades, vistos=None):
-        vistos = vistos if vistos is not None else set()
-        if u["id"] in vistos:
-            return set()
-        vistos.add(u["id"])
-        res = {w for v in u.get("vocabulario", []) for w in palabras(v.get("texto", ""))}
-        # Las celdas de las tablas (escrituras, conjugaciones) también enseñan.
-        res |= {w for p in u.get("pasos", []) if p.get("tipo") == "tabla"
-                for fila in p.get("filas", []) for c in fila if isinstance(c, dict) and "texto" in c
-                for w in palabras(c["texto"])}
-        for p in u.get("prerequisitos", []):
-            if p in unidades:
-                res |= self.conocidas(unidades[p], unidades, vistos)
+        res = set()
+        for x in self._cadena(u, unidades):
+            res |= {w for v in x.get("vocabulario", []) for w in palabras(v.get("texto", ""))}
+            # Las celdas de las tablas (escrituras, conjugaciones) también enseñan.
+            res |= {w for p in x.get("pasos", []) if p.get("tipo") == "tabla"
+                    for fila in p.get("filas", []) for c in fila if isinstance(c, dict) and "texto" in c
+                    for w in palabras(c["texto"])}
         return res
 
     def de_errores(self, u, unidades, vistos=None):
         """Palabras de las frases incorrectas enseñadas (unidad y prerrequisitos)."""
-        vistos = vistos if vistos is not None else set()
-        if u["id"] in vistos:
-            return set()
-        vistos.add(u["id"])
-        res = {w for e in u.get("erroresFrecuentes", [])
-               for w in palabras(re.sub(r"\([^)]*\)", " ", e.get("incorrecto", "")))}
-        for p in u.get("prerequisitos", []):
-            if p in unidades:
-                res |= self.de_errores(unidades[p], unidades, vistos)
-        return res
+        return {w for x in self._cadena(u, unidades) for e in x.get("erroresFrecuentes", [])
+                for w in palabras(re.sub(r"\([^)]*\)", " ", e.get("incorrecto", "")))}
 
     def unidad(self, u, unidades, libres):
         uid = u.get("id", "?")

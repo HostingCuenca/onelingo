@@ -1,0 +1,693 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "classes": {
+    "en.n10.class-71": {
+      "explicacion": {
+        "titulo": "Hecho, afirmación u opinión",
+        "texto": "En una noticia conviven tres tipos de enunciados. Un hecho se puede comprobar en un registro o una medición: The library opened in 1998. Una afirmación (claim) suena a hecho, pero aún necesita pruebas: The app doubles your speed. Una opinión es un juicio personal y no se puede comprobar: It is the best app. Las señales ayudan: the report states y according to the figures apuntan a un hecho con fuente; claims y allegedly, a algo sin probar; in my opinion, a un juicio. Ojo: evidence no tiene plural."
+      },
+      "patron": {
+        "texto": "Fuente + verbo de aviso + contenido + prueba:",
+        "formula": [
+          {
+            "texto": "The website",
+            "nota": "fuente: ¿quién lo dice?"
+          },
+          {
+            "texto": "claims that",
+            "nota": "claims: lo afirma, sin garantía"
+          },
+          {
+            "texto": "the app doubles your speed,",
+            "nota": "contenido que hay que comprobar"
+          },
+          {
+            "texto": "but it offers no evidence.",
+            "nota": "lo que falta: la prueba"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, the new stadium looks better.",
+          "correcto": "In my opinion, the new stadium looks better.",
+          "explicacion": "«Según yo» no existe en inglés: para tu parecer usa in my opinion o I think; according to se reserva para fuentes."
+        },
+        {
+          "incorrecto": "The article shows many evidences.",
+          "correcto": "The article shows a lot of evidence.",
+          "explicacion": "Evidence es incontable: no lleva -s ni many; se dice a lot of evidence o some evidence."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo leen un artículo sobre la cantina de su colegio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at this article. It says the canteen has cut food waste by thirty per cent.",
+            "traduccion": "Mira este artículo. Dice que la cantina ha reducido el desperdicio de comida en un treinta por ciento."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Is that a fact or only a claim?",
+            "traduccion": "¿Es un hecho o solo una afirmación?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is a fact. The article quotes the figures from the school's own report, so anyone can verify them.",
+            "traduccion": "Es un hecho. El artículo cita las cifras del informe del propio colegio, así que cualquiera puede comprobarlas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the headline says it is the best canteen in town. That is just an opinion.",
+            "traduccion": "Y el titular dice que es la mejor cantina de la ciudad. Eso es solo una opinión."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Right. And this line says a student was allegedly sick after lunch, but it gives no source.",
+            "traduccion": "Cierto. Y esta línea dice que un estudiante supuestamente se puso enfermo tras el almuerzo, pero no da ninguna fuente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué acepta Mia la cifra del treinta por ciento como un hecho?",
+          "opciones": [
+            {
+              "es": "Porque el artículo cita las cifras del informe del propio colegio."
+            },
+            {
+              "es": "Porque el titular dice que es la mejor cantina de la ciudad."
+            },
+            {
+              "es": "Porque un estudiante se puso enfermo después de comer."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia lo acepta porque el artículo cita el informe del colegio y «anyone can verify them»; el titular es opinión y el caso del estudiante no tiene fuente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "The report states… / According to the figures…"
+            },
+            {
+              "texto": "The library opened in 1998."
+            }
+          ],
+          [
+            {
+              "texto": "Afirmación"
+            },
+            {
+              "texto": "claims / allegedly"
+            },
+            {
+              "texto": "The app allegedly doubles your speed."
+            }
+          ],
+          [
+            {
+              "texto": "Opinión"
+            },
+            {
+              "texto": "In my opinion / the best"
+            },
+            {
+              "texto": "In my opinion, it is the best app."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-72": {
+      "explicacion": {
+        "titulo": "Causa, correlación o duda",
+        "texto": "Para hablar con rigor de causas separa tres niveles. Causa probada: causes, leads to, results in (Heavy rain causes floods). Correlación: dos datos van juntos, sin decir cuál provoca cuál: is linked to, is associated with, a correlation between X and Y. Posibilidad: may, might o could + verbo base (Hot weather may account for both). Si solo tienes correlación, no escribas causes: escribe is linked to y añade un modal de duda."
+      },
+      "patron": {
+        "texto": "Dato A + relación + dato B + posible explicación:",
+        "formula": [
+          {
+            "texto": "Ice cream sales",
+            "nota": "dato A"
+          },
+          {
+            "texto": "are linked to",
+            "nota": "is/are linked to: relación, no causa"
+          },
+          {
+            "texto": "swimming accidents;",
+            "nota": "dato B"
+          },
+          {
+            "texto": "hot weather may account for both.",
+            "nota": "modal de duda + account for: explicación posible"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There is a correlation of ice cream sales and swimming accidents.",
+          "correcto": "There is a correlation between ice cream sales and swimming accidents.",
+          "explicacion": "«Correlación entre X y Y» se dice a correlation between X and Y; of no se usa para relacionar dos datos."
+        },
+        {
+          "incorrecto": "Hot weather may accounts for both figures.",
+          "correcto": "Hot weather may account for both figures.",
+          "explicacion": "Después de un modal el verbo va en infinitivo sin to y sin -s: may account, no may accounts."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom comentan un artículo sobre las pantallas y las notas.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "This article says more screen time leads to worse grades.",
+            "traduccion": "Este artículo dice que más tiempo de pantalla provoca peores notas."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Does it prove the cause, or is it only a correlation?",
+            "traduccion": "¿Demuestra la causa o es solo una correlación?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It says the two are linked, and the trend is clear in three countries.",
+            "traduccion": "Dice que ambas cosas están relacionadas y que la tendencia es clara en tres países."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Linked is not the same as caused. Tired students may study less and use their phones more.",
+            "traduccion": "Relacionado no es lo mismo que causado. Los estudiantes cansados podrían estudiar menos y usar más el móvil."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "True. It could even be a coincidence, so the headline should say may.",
+            "traduccion": "Cierto. Incluso podría ser una casualidad, así que el titular debería decir «puede»."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué duda Tom de que las pantallas causen las malas notas?",
+          "opciones": [
+            {
+              "es": "Porque los estudiantes cansados podrían estudiar menos y usar más el móvil."
+            },
+            {
+              "es": "Porque el artículo dice que las notas no cambian en tres países."
+            },
+            {
+              "es": "Porque Sara no ha leído el artículo completo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que «linked is not the same as caused» y propone que el cansancio explique ambas cosas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Nivel",
+          "Expresión",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Causa probada"
+            },
+            {
+              "texto": "causes / leads to / results in"
+            },
+            {
+              "texto": "Heavy rain causes floods."
+            }
+          ],
+          [
+            {
+              "texto": "Correlación"
+            },
+            {
+              "texto": "is linked to / is associated with"
+            },
+            {
+              "texto": "Reading is linked to better marks."
+            }
+          ],
+          [
+            {
+              "texto": "Posibilidad"
+            },
+            {
+              "texto": "may / might / could + account for"
+            },
+            {
+              "texto": "Hot weather may account for both."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-73": {
+      "explicacion": {
+        "titulo": "Falacias y sesgos al microscopio",
+        "texto": "Una falacia es un paso que suena convincente pero no se sostiene. Tres muy frecuentes: el falso dilema (solo dos opciones, cuando hay más), la generalización apresurada (una muestra pequeña se convierte en regla para todos) y el ataque personal (se ataca a quien habla, no a su argumento). El sesgo es distinto: la fuente o la muestra favorecen un resultado. Para criticar con precisión, nombra la debilidad y da una razón concreta con because."
+      },
+      "patron": {
+        "texto": "Publicación + debilidad + razón:",
+        "formula": [
+          {
+            "texto": "The post says all teenagers are lazy,",
+            "nota": "lo que afirma la publicación"
+          },
+          {
+            "texto": "but it is a hasty generalisation",
+            "nota": "nombre de la debilidad"
+          },
+          {
+            "texto": "because the sample is only two people.",
+            "nota": "razón concreta con because"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is a generalisation hasty.",
+          "correcto": "It is a hasty generalisation.",
+          "explicacion": "El adjetivo va delante del sustantivo: a hasty generalisation, no «una generalización apresurada» en el orden español."
+        },
+        {
+          "incorrecto": "The sample is too small for prove anything.",
+          "correcto": "The sample is too small to prove anything.",
+          "explicacion": "Tras too small, el propósito se expresa con to + verbo; for + verbo base no existe."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo revisan una publicación que intenta vender un móvil.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Listen to this post: Either you buy this phone or you will be left behind.",
+            "traduccion": "Escucha esta publicación: o compras este móvil o te quedarás atrás."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That sounds like a false dilemma. There are many other options.",
+            "traduccion": "Suena a falso dilema. Hay muchas otras opciones."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "The same post says all students hate homework, because two of the writer's friends do.",
+            "traduccion": "La misma publicación dice que todos los estudiantes odian los deberes, porque dos amigos de quien escribe los odian."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Two friends is a tiny sample. That is a hasty generalisation.",
+            "traduccion": "Dos amigos es una muestra diminuta. Eso es una generalización apresurada."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And one reply says the writer is too young to know anything.",
+            "traduccion": "Y una respuesta dice que quien escribe es demasiado joven para saber nada."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That is a personal attack. It ignores the argument.",
+            "traduccion": "Eso es un ataque personal. Ignora el argumento."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué critica Leo la afirmación sobre los deberes?",
+          "opciones": [
+            {
+              "es": "Porque dos amigos son una muestra demasiado pequeña para hablar de todos los estudiantes."
+            },
+            {
+              "es": "Porque solo ofrece dos opciones: comprar el móvil o quedarse atrás."
+            },
+            {
+              "es": "Porque ataca a la persona que escribe la publicación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo la llama «hasty generalisation»: «two friends is a tiny sample». El falso dilema y el ataque personal son otras partes del diálogo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Debilidad",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "False dilemma"
+            },
+            {
+              "texto": "either … or, solo dos opciones"
+            },
+            {
+              "texto": "Either we ban phones or students never learn."
+            }
+          ],
+          [
+            {
+              "texto": "Hasty generalisation"
+            },
+            {
+              "texto": "pocos casos → todos"
+            },
+            {
+              "texto": "Two rude tourists, so all tourists are rude."
+            }
+          ],
+          [
+            {
+              "texto": "Personal attack"
+            },
+            {
+              "texto": "se ataca a la persona"
+            },
+            {
+              "texto": "She is too young to know anything."
+            }
+          ],
+          [
+            {
+              "texto": "Bias"
+            },
+            {
+              "texto": "fuente parcial"
+            },
+            {
+              "texto": "The survey asked only the fans."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-74": {
+      "explicacion": {
+        "titulo": "Criticar con matices por escrito",
+        "texto": "Una buena crítica no ataca: pondera. Organiza tu texto en cuatro movimientos. Dos críticas justificadas, cada una con su razón (The post seems to overlook…, because…; Arguably, the main weakness is…). Una relación o causa con duda (is likely to be linked to…, although other factors may matter). Y una alternativa razonable (A more balanced approach would be to…; rather than…). Seems to, arguably, likely y to some extent suavizan el juicio sin volverlo vago."
+      },
+      "patron": {
+        "texto": "Crítica matizada + razón + alternativa:",
+        "formula": [
+          {
+            "texto": "The post seems to overlook the sample size,",
+            "nota": "crítica suavizada con seems to"
+          },
+          {
+            "texto": "which is arguably its main weakness.",
+            "nota": "arguably: juicio cauteloso"
+          },
+          {
+            "texto": "A more balanced approach would be",
+            "nota": "alternativa con would be"
+          },
+          {
+            "texto": "to survey every class.",
+            "nota": "la acción que propones"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The post seems that it overlooks the sample size.",
+          "correcto": "The post seems to overlook the sample size.",
+          "explicacion": "Con sujeto concreto, seems va seguido de to + verbo: The post seems to…; seems that solo funciona con it: It seems that…"
+        },
+        {
+          "incorrecto": "A reasonable alternative would be survey every class.",
+          "correcto": "A reasonable alternative would be to survey every class.",
+          "explicacion": "Después de would be, la acción se introduce con to + verbo base: would be to survey; sin to la frase queda incompleta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan una crítica para el blog del colegio sobre una publicación acerca de los deberes.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I want to comment on this post about homework. It says homework is useless.",
+            "traduccion": "Quiero comentar esta publicación sobre los deberes. Dice que los deberes son inútiles."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It seems to use only one survey, and it asked just ten students.",
+            "traduccion": "Parece que usa una sola encuesta y que preguntó solo a diez estudiantes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Right. Arguably, that is its biggest weakness. I will write that the sample is too small.",
+            "traduccion": "Cierto. Se podría argumentar que es su mayor punto débil. Escribiré que la muestra es demasiado pequeña."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And add an alternative: rather than ask ten students, survey every class.",
+            "traduccion": "Y añade una alternativa: en lugar de preguntar a diez estudiantes, encuesta a todos los cursos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. I will also say the rise in complaints is likely to be linked to the new timetable.",
+            "traduccion": "Bien. También diré que es probable que el aumento de quejas esté relacionado con el nuevo horario."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué alternativa propone Tom?",
+          "opciones": [
+            {
+              "es": "Encuestar a todos los cursos en lugar de a diez estudiantes."
+            },
+            {
+              "es": "Quitar los deberes por completo."
+            },
+            {
+              "es": "Preguntar solo a los profesores."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom propone «rather than ask ten students, survey every class»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Criticar con cautela"
+            },
+            {
+              "texto": "seems to / arguably"
+            },
+            {
+              "texto": "The post seems to overlook the sample."
+            }
+          ],
+          [
+            {
+              "texto": "Conceder un grado"
+            },
+            {
+              "texto": "to some extent / likely"
+            },
+            {
+              "texto": "To some extent the claim is fair."
+            }
+          ],
+          [
+            {
+              "texto": "Contrastar"
+            },
+            {
+              "texto": "rather than"
+            },
+            {
+              "texto": "Rather than blaming students, ask why."
+            }
+          ],
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "A reasonable alternative would be to…"
+            },
+            {
+              "texto": "A reasonable alternative would be to survey every class."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-75": {
+      "explicacion": {
+        "titulo": "Verificar una historia viral",
+        "texto": "Verificar es un proceso, no una opinión. Paso 1: separa las afirmaciones y evalúa cada una. Paso 2: busca la fuente original y el contexto (The photo is real, but it is misleading). Paso 3: di qué evidencia falta (There is no evidence that…). Paso 4: da un veredicto matizado con rate as: true, false, partly true, misleading o unproven, y concluye con cautela (Based on the evidence available, the claim is likely to be…). Si solo falta la prueba, no digas que es falso: di unproven."
+      },
+      "patron": {
+        "texto": "Afirmación + veredicto + evidencia que falta + conclusión cauta:",
+        "formula": [
+          {
+            "texto": "The photo is real,",
+            "nota": "afirmación evaluada"
+          },
+          {
+            "texto": "but it is misleading",
+            "nota": "veredicto: real pero engañoso"
+          },
+          {
+            "texto": "because we found no original source.",
+            "nota": "la evidencia que falta"
+          },
+          {
+            "texto": "Overall, the story is likely to be false.",
+            "nota": "conclusión matizada con likely"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The photo is misled because it is very old.",
+          "correcto": "The photo is misleading because it is very old.",
+          "explicacion": "«Engañoso» es misleading (-ing): describe lo que engaña; misled es el participio de mislead y se refiere a la persona engañada."
+        },
+        {
+          "incorrecto": "We rate the claim like false.",
+          "correcto": "We rate the claim as false.",
+          "explicacion": "El veredicto se introduce con rate … as; like se usa para comparar, no para calificar."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia comprueban una historia que dice que su colegio cerrará el año próximo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "This story says our school will close next year. Thousands have shared it.",
+            "traduccion": "Esta historia dice que nuestro colegio cerrará el año que viene. Miles de personas la han compartido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Let's check the original source. It is only a post from an account with no name.",
+            "traduccion": "Comprobemos la fuente original. Es solo una publicación de una cuenta sin nombre."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The council's website says nothing about it, and the head teacher denied it.",
+            "traduccion": "La web del consejo no dice nada y el director lo ha negado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So we cannot confirm it. I would rate it as unproven, and probably false.",
+            "traduccion": "Entonces no podemos confirmarlo. Yo lo calificaría como no probado, y probablemente falso."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo califica Mia la historia y por qué?",
+          "opciones": [
+            {
+              "es": "Como no probada y probablemente falsa, porque no se puede confirmar con una fuente."
+            },
+            {
+              "es": "Como verdadera, porque miles de personas la han compartido."
+            },
+            {
+              "es": "Como engañosa, porque la foto que la acompaña es antigua."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «we cannot confirm it» y la califica de «unproven, and probably false»; que la compartan miles no la prueba."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Veredicto",
+          "Cuándo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "true"
+            },
+            {
+              "texto": "hay prueba comprobable"
+            },
+            {
+              "texto": "The figure is in the official report."
+            }
+          ],
+          [
+            {
+              "texto": "misleading"
+            },
+            {
+              "texto": "dato real, contexto falso"
+            },
+            {
+              "texto": "The photo is real, but it is old."
+            }
+          ],
+          [
+            {
+              "texto": "unproven"
+            },
+            {
+              "texto": "falta evidencia"
+            },
+            {
+              "texto": "We could not confirm it."
+            }
+          ],
+          [
+            {
+              "texto": "false"
+            },
+            {
+              "texto": "la prueba lo contradice"
+            },
+            {
+              "texto": "The head teacher denied it."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisión independiente N10 71-75: sin P0 pendientes.",
+      "71: anuncio/folleto incoherente corregido en feedback; rúbrica de escritura con grupo de tema reforzado.",
+      "72: retirada la variante 'lead' (concordancia incorrecta con 'sugar'); añadido 'can' como respuesta válida en 'account for'.",
+      "73: diálogo 'its friends' corregido a 'the writer's friends'; modelo de escritura reformulado (frase natural) y rúbrica sin grupos solapados ('only two' en dos grupos) ni palabras sueltas.",
+      "74: error frecuente 2 sustituido (la explicación afirmaba que 'in place of + gerundio' no existe, y sí existe; ahora 'would be survey' sin to); rúbricas largas y cortas sin 'likely', 'may' ni 'might' sueltos como única evidencia; grupos ampliados con variantes.",
+      "75: error 1 cambiado de la forma inventada 'misleaded' a 'misled' (palabra real); rúbrica larga: grupos de hedging y contexto sin 'could'/'may' sueltos ni 'last year' suelto.",
+      "Nombres propios: solo reparto del curso; sin interjecciones."
+    ]
+  }
+}

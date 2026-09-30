@@ -1,0 +1,677 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "classes": {
+    "en.n10.class-61": {
+      "explicacion": {
+        "titulo": "Cuatro preguntas, cuatro intenciones",
+        "texto": "Cada pregunta de entrevista busca algo distinto, aunque suene parecida. Tell me about a time… pide una experiencia real en pasado. What would you do if…? es hipotética: evalúa tu criterio. What was your motivation…? pregunta por tus razones. What is your biggest limitation? busca un punto débil y cómo lo trabajas. Could you elaborate…? pide más detalle. Reconocer la intención te dice qué responder: una historia, un razonamiento o una razón personal."
+      },
+      "patron": {
+        "texto": "Pregunta + intención:",
+        "formula": [
+          {
+            "texto": "Tell me about a time when…",
+            "nota": "experiencia: pide una historia real en pasado"
+          },
+          {
+            "texto": "What would you do if…?",
+            "nota": "hipótesis: pide razonar con would"
+          },
+          {
+            "texto": "What was your motivation…?",
+            "nota": "motivación: pide tus razones"
+          },
+          {
+            "texto": "What is your biggest limitation?",
+            "nota": "límite: pide un punto débil y cómo lo trabajas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What would you do if your team misses the deadline?",
+          "correcto": "What would you do if your team missed the deadline?",
+          "explicacion": "En una pregunta hipotética, tras if va pasado simple (missed), no presente."
+        },
+        {
+          "incorrecto": "Could you elaborate about that?",
+          "correcto": "Could you elaborate on that?",
+          "explicacion": "Elaborate se construye con on: elaborate on that, no about."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana practica una entrevista para una beca con la ayuda de Tom.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Tell me about a challenge you faced and how you handled it.",
+            "traduccion": "Cuéntame un reto al que te enfrentaste y cómo lo manejaste."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Last year, our team lost two members a week before the final.",
+            "traduccion": "El año pasado, nuestro equipo perdió a dos miembros una semana antes de la final."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. Now, what would you do if the same thing happened next year?",
+            "traduccion": "Bien. Ahora, ¿qué harías si lo mismo ocurriera el año que viene?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I would share the tasks earlier and ask for help.",
+            "traduccion": "Repartiría las tareas antes y pediría ayuda."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué busca la segunda pregunta de Tom?",
+          "opciones": [
+            {
+              "es": "Saber cómo razonaría Ana ante una situación imaginaria."
+            },
+            {
+              "es": "Saber qué hizo Ana en una experiencia real."
+            },
+            {
+              "es": "Saber por qué Ana quiere la beca."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "«What would you do if…» es una pregunta hipotética: Tom evalúa cómo razonaría Ana, no un hecho ya vivido."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Intención",
+          "Pregunta típica",
+          "Qué responder"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Experiencia"
+            },
+            {
+              "texto": "Tell me about a time when…"
+            },
+            {
+              "texto": "Una historia real en pasado"
+            }
+          ],
+          [
+            {
+              "texto": "Hipótesis"
+            },
+            {
+              "texto": "What would you do if…?"
+            },
+            {
+              "texto": "Un razonamiento con would"
+            }
+          ],
+          [
+            {
+              "texto": "Motivación"
+            },
+            {
+              "texto": "What was your motivation…?"
+            },
+            {
+              "texto": "Tus razones personales"
+            }
+          ],
+          [
+            {
+              "texto": "Límite"
+            },
+            {
+              "texto": "What is your biggest limitation?"
+            },
+            {
+              "texto": "Un punto débil y cómo lo mejoras"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-62": {
+      "explicacion": {
+        "titulo": "Preguntas indirectas y de sondeo",
+        "texto": "En una entrevista, las preguntas indirectas suenan más corteses y dejan hablar al otro. Tras Could you tell me…, I would like to know… o I am curious…, el orden es el de una frase afirmativa: sujeto + verbo, sin did ni inversión (why you chose). Para preguntas de sí/no usa whether o if. Las preguntas de sondeo directas, en cambio, sí llevan auxiliar: To what extent did…? What precisely do you mean by…? Sirven para pedir grado, exactitud o más detalle."
+      },
+      "patron": {
+        "texto": "Apertura + marcador + sujeto + verbo:",
+        "formula": [
+          {
+            "texto": "Could you tell me",
+            "nota": "apertura cortés: invita a responder"
+          },
+          {
+            "texto": "why / how / what / whether",
+            "nota": "marcador: la palabra interrogativa"
+          },
+          {
+            "texto": "you chose this approach?",
+            "nota": "sujeto + verbo afirmativo, sin did"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Could you tell me why did you choose this approach?",
+          "correcto": "Could you tell me why you chose this approach?",
+          "explicacion": "Tras Could you tell me el orden es afirmativo: why you chose, sin did."
+        },
+        {
+          "incorrecto": "To what extent the outcome matched your plan?",
+          "correcto": "To what extent did the outcome match your plan?",
+          "explicacion": "To what extent abre una pregunta directa y necesita auxiliar: did + sujeto + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia entrevista a Leo para la revista del colegio sobre su proyecto de robótica.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Could you tell me what led you to choose this approach?",
+            "traduccion": "¿Podrías decirme qué te llevó a elegir este enfoque?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We tried three designs, and this one was the cheapest to build.",
+            "traduccion": "Probamos tres diseños y este era el más barato de construir."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "To what extent did the outcome match your plan?",
+            "traduccion": "¿Hasta qué punto coincidió el resultado con el plan?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Mostly. The robot worked, but it was slower than we expected.",
+            "traduccion": "En su mayor parte. El robot funcionó, pero fue más lento de lo que esperábamos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo fue el resultado respecto al plan?",
+          "opciones": [
+            {
+              "es": "El robot funcionó, pero más lento de lo previsto."
+            },
+            {
+              "es": "El diseño elegido fue el más caro."
+            },
+            {
+              "es": "El robot no llegó a funcionar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Mostly. The robot worked, but it was slower than we expected»: el resultado coincidió en su mayor parte con el plan."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Indirecta"
+            },
+            {
+              "texto": "Could you tell me + marcador + sujeto + verbo"
+            },
+            {
+              "texto": "Could you tell me how you measured it?"
+            }
+          ],
+          [
+            {
+              "texto": "Sí/no indirecta"
+            },
+            {
+              "texto": "I am curious whether + sujeto + verbo"
+            },
+            {
+              "texto": "I am curious whether it worked."
+            }
+          ],
+          [
+            {
+              "texto": "Sondeo de grado"
+            },
+            {
+              "texto": "To what extent + did/do + sujeto + verbo base"
+            },
+            {
+              "texto": "To what extent did it work?"
+            }
+          ],
+          [
+            {
+              "texto": "Sondeo de precisión"
+            },
+            {
+              "texto": "What precisely do you mean by…?"
+            },
+            {
+              "texto": "What precisely do you mean by success?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-63": {
+      "explicacion": {
+        "titulo": "Respuestas fuertes y respuestas flojas",
+        "texto": "Una respuesta fuerte tiene dos piezas: un ejemplo concreto (qué hiciste, cuándo y cómo) y un resultado que se pueda contar (cifras, plazos, efectos). Una respuesta vaga usa palabras de relleno, como things, somehow o went well, y no dice qué ocurrió. Al escuchar, pregúntate: ¿hay un ejemplo? ¿hay un resultado? Si falta una pieza, el entrevistador pide: Could you be more specific? Con cifras de cambio usa by: fell by forty per cent."
+      },
+      "patron": {
+        "texto": "Ejemplo concreto + resultado medible:",
+        "formula": [
+          {
+            "texto": "I created a checklist for new volunteers,",
+            "nota": "ejemplo: qué hiciste, con un verbo de acción"
+          },
+          {
+            "texto": "and as a result,",
+            "nota": "conector que introduce el resultado"
+          },
+          {
+            "texto": "late arrivals fell from ten to two.",
+            "nota": "resultado: cifras con from… to… o by"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Complaints fell in forty per cent.",
+          "correcto": "Complaints fell by forty per cent.",
+          "explicacion": "Con verbos de aumento o descenso, la cantidad del cambio va con by, no con in."
+        },
+        {
+          "incorrecto": "I made a checklist for reduce the waiting time.",
+          "correcto": "I made a checklist to reduce the waiting time.",
+          "explicacion": "Para la finalidad se usa to + verbo base; for + verbo base es un calco del español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos entrevista a Sara para el equipo de voluntarios de la biblioteca.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "How did you improve the school library?",
+            "traduccion": "¿Cómo mejoraste la biblioteca del colegio?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Oh, I did lots of things, and somehow it went well.",
+            "traduccion": "Ah, hice muchas cosas y de algún modo salió bien."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Could you be more specific?",
+            "traduccion": "¿Podrías ser más concreta?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sure. I created a checklist for returns, and lost books fell by half.",
+            "traduccion": "Claro. Creé una lista de verificación para las devoluciones y los libros perdidos se redujeron a la mitad."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué le falta a la primera respuesta de Sara?",
+          "opciones": [
+            {
+              "es": "Un ejemplo concreto y un resultado medible."
+            },
+            {
+              "es": "Un saludo más formal."
+            },
+            {
+              "es": "Una pregunta para el entrevistador."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara solo dice «lots of things» y «it went well»; Carlos pide concreción y ella añade una acción y una cifra."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Señales",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Vaga"
+            },
+            {
+              "texto": "things, somehow, went well, sort of"
+            },
+            {
+              "texto": "We did things, and it went well."
+            }
+          ],
+          [
+            {
+              "texto": "Con ejemplo, sin resultado"
+            },
+            {
+              "texto": "acción concreta, sin cifras"
+            },
+            {
+              "texto": "I wrote a guide for new volunteers."
+            }
+          ],
+          [
+            {
+              "texto": "Fuerte"
+            },
+            {
+              "texto": "acción concreta + cifras"
+            },
+            {
+              "texto": "I wrote a guide, and errors fell by half."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-64": {
+      "explicacion": {
+        "titulo": "Responder con una historia",
+        "texto": "Una respuesta de entrevista fuerte cuenta una historia con cuatro pasos. Situación y acción van en pasado simple: I was in charge…, I drew up… Lo ocurrido antes de ese momento usa pasado perfecto: nobody had collected the paper. El resultado que sigue vigente hoy usa presente perfecto: our rate has doubled since then. Termina con la lección aprendida: The experience taught me that… Controlar estos tres tiempos evita que la historia se mezcle."
+      },
+      "patron": {
+        "texto": "Situación + acción + resultado + lección:",
+        "formula": [
+          {
+            "texto": "I was in charge of the project;",
+            "nota": "situación: pasado simple"
+          },
+          {
+            "texto": "nobody had collected the paper.",
+            "nota": "antes de la historia: pasado perfecto"
+          },
+          {
+            "texto": "I drew up a rota,",
+            "nota": "acción: pasado simple"
+          },
+          {
+            "texto": "and our rate has doubled.",
+            "nota": "resultado vigente: presente perfecto"
+          },
+          {
+            "texto": "It taught me that…",
+            "nota": "lección aprendida"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I arrived, nobody collected the paper for a week.",
+          "correcto": "When I arrived, nobody had collected the paper for a week.",
+          "explicacion": "Para un hecho anterior al momento que cuentas se usa pasado perfecto: had collected."
+        },
+        {
+          "incorrecto": "Since then, our recycling rate doubled.",
+          "correcto": "Since then, our recycling rate has doubled.",
+          "explicacion": "Un efecto que sigue vigente hoy y since then piden presente perfecto: has doubled."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara solicita ser representante estudiantil y Leo le hace la entrevista.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Tell me about a time you took charge of something.",
+            "traduccion": "Cuéntame una ocasión en que te hiciste cargo de algo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Last spring, I was in charge of the school recycling project. When I arrived, the bins were full because nobody had collected the paper for a week.",
+            "traduccion": "La primavera pasada estaba a cargo del proyecto de reciclaje. Cuando llegué, los contenedores estaban llenos porque nadie había recogido el papel en una semana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What did you do?",
+            "traduccion": "¿Qué hiciste?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I drew up a rota and asked each class to choose a captain. As a result, our recycling rate has doubled since then.",
+            "traduccion": "Elaboré un turno y pedí a cada clase que eligiera un capitán. Como resultado, nuestra tasa de reciclaje se ha duplicado desde entonces."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Sara para resolver el problema?",
+          "opciones": [
+            {
+              "es": "Elaboró un turno y pidió a cada clase que eligiera un capitán."
+            },
+            {
+              "es": "Compró más contenedores con el dinero del colegio."
+            },
+            {
+              "es": "Pidió a los profesores que recogieran el papel."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «I drew up a rota and asked each class to choose a captain»: esa fue su acción."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Tiempo verbal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Situación y acción"
+            },
+            {
+              "texto": "Pasado simple"
+            },
+            {
+              "texto": "I drew up a rota."
+            }
+          ],
+          [
+            {
+              "texto": "Hecho anterior"
+            },
+            {
+              "texto": "Pasado perfecto (had + participio)"
+            },
+            {
+              "texto": "Nobody had collected the paper."
+            }
+          ],
+          [
+            {
+              "texto": "Resultado actual"
+            },
+            {
+              "texto": "Presente perfecto (have/has + participio)"
+            },
+            {
+              "texto": "Our rate has doubled since then."
+            }
+          ],
+          [
+            {
+              "texto": "Lección"
+            },
+            {
+              "texto": "taught me that + presente"
+            },
+            {
+              "texto": "It taught me that rules help."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-65": {
+      "explicacion": {
+        "titulo": "Ser el invitado de un pódcast",
+        "texto": "En un pódcast tu papel es de invitado: abre con cortesía (Thanks for having me), responde con historias de tres pasos (situación, acción y resultado) y usa pasado simple, pasado perfecto y presente perfecto con cuidado. Cuando quieras devolver el turno, usa una pregunta de sondeo: If I may turn that around, to what extent…? Evita respuestas vagas: da ejemplos y cifras. Al final, cierra con una síntesis: To wrap up, if there is one takeaway for the listeners…"
+      },
+      "patron": {
+        "texto": "Abrir + historia + devolver + cerrar:",
+        "formula": [
+          {
+            "texto": "Thanks for having me.",
+            "nota": "abrir con cortesía"
+          },
+          {
+            "texto": "Briefly, last year I was in charge of… and, as a result, …",
+            "nota": "respuesta con historia: situación, acción, resultado"
+          },
+          {
+            "texto": "If I may turn that around, to what extent…?",
+            "nota": "devolver una pregunta de sondeo"
+          },
+          {
+            "texto": "To wrap up, one takeaway is…",
+            "nota": "cerrar con una síntesis"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Thanks for have me here today.",
+          "correcto": "Thanks for having me here today.",
+          "explicacion": "Tras una preposición (for) el verbo va en -ing: for having."
+        },
+        {
+          "incorrecto": "If I may to turn that around, what about you?",
+          "correcto": "If I may turn that around, what about you?",
+          "explicacion": "Tras may va el verbo base sin to: may turn."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana presenta un pódcast y Tom es su invitado.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Welcome to the show, Tom. What was the hardest moment of your project?",
+            "traduccion": "Bienvenido al programa, Tom. ¿Cuál fue el momento más difícil de tu proyecto?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thanks for having me. Briefly, last winter the garden flooded.",
+            "traduccion": "Gracias por invitarme. Brevemente, el invierno pasado se inundó el huerto."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "If I may turn that around, what drew you to this episode?",
+            "traduccion": "Si me permites devolverte la pregunta, ¿qué te atrajo de este episodio?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I love stories about people who start small.",
+            "traduccion": "Me encantan las historias de gente que empieza desde abajo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Tom además de responder?",
+          "opciones": [
+            {
+              "es": "Devuelve una pregunta a la presentadora."
+            },
+            {
+              "es": "Se niega a hablar del huerto."
+            },
+            {
+              "es": "Pide terminar el programa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom responde con «Briefly…» y después usa «If I may turn that around…» para preguntar a Ana qué le atrajo del episodio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Abrir"
+            },
+            {
+              "texto": "Thanks for having me."
+            },
+            {
+              "texto": "Thanks for having me; I am delighted to be here."
+            }
+          ],
+          [
+            {
+              "texto": "Responder"
+            },
+            {
+              "texto": "Briefly, + historia"
+            },
+            {
+              "texto": "Briefly, it began last year, when…"
+            }
+          ],
+          [
+            {
+              "texto": "Devolver"
+            },
+            {
+              "texto": "If I may turn that around, …"
+            },
+            {
+              "texto": "If I may turn that around, what drew you here?"
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "To wrap up, one takeaway is…"
+            },
+            {
+              "texto": "To wrap up, one takeaway is to start small."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C61-65 revisadas contra el mapa v2: fase, concepto, canDo y tarea de evaluación (clasificaciones del mapa repartidas en ítems relacionar).",
+      "C63: los pares de relacionar tenían etiquetas solapadas (dos 'Vaga'); rehechos con categorías distintas (vaga / concreta / solo resultado / solo acción). Rúbrica de reescritura: el grupo de cifras ya no admite 'by'/'from' sueltos; se añaden variantes con 'we'.",
+      "C63: audio de evaluación cambiado para no repetir el ejemplo 'guide' de la enseñanza; repaso sin reutilizar estímulos de la guiada.",
+      "C62: tratamiento de tú unificado en la enseñanza y la consigna; más variantes aceptadas en el ítem de escritura; feedback de la situación corregido.",
+      "Nombres propios e interjecciones comprobados contra vocabulario/enseñanza previos: sin pendientes. Rúbricas de C64/C65 (escritura larga) justas: modelo ~190 palabras, grupos con frases y variantes."
+    ]
+  }
+}

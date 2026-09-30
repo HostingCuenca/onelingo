@@ -1,0 +1,691 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "classes": {
+    "en.n10.class-41": {
+      "explicacion": {
+        "titulo": "Desconfiar del narrador y deducir el pasado",
+        "texto": "Un narrador poco fiable (unreliable) cuenta la historia de modo que no puedes creerle del todo: miente, exagera, oculta algo o solo ve una parte. Las pistas son detalles que chocan con su versión: un objeto, una fecha, otro personaje o una reacción demasiado defensiva. Para deducir qué pasó de verdad usa modal + have + participio: must have (casi seguro que ocurrió), can't have (casi seguro que no ocurrió) y might o could have (es posible). En español dirías «debió de» o «no pudo»; en inglés, el negativo de la deducción es can't, nunca mustn't."
+      },
+      "patron": {
+        "texto": "Pista + deducción sobre el pasado:",
+        "formula": [
+          {
+            "texto": "The boots are muddy,",
+            "nota": "la pista: un detalle que contradice al narrador"
+          },
+          {
+            "texto": "so he must have gone out.",
+            "nota": "casi seguro que ocurrió: must have + participio"
+          },
+          {
+            "texto": "He can't have been at home.",
+            "nota": "casi seguro que no ocurrió: can't have + participio"
+          },
+          {
+            "texto": "He might have exaggerated.",
+            "nota": "posible, sin certeza: might o could have + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "He mustn't have been at home all night.",
+          "correcto": "He can't have been at home all night.",
+          "explicacion": "Para deducir que algo casi seguro no ocurrió se usa can't have; mustn't expresa prohibición."
+        },
+        {
+          "incorrecto": "He must had gone out.",
+          "correcto": "He must have gone out.",
+          "explicacion": "Después de un modal va siempre have + participio; had no puede ir detrás de must."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo comentan una novela de misterio cuyo narrador dice que pasó la noche en casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The narrator says he stayed at home all night.",
+            "traduccion": "El narrador dice que se quedó en casa toda la noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "But his boots were muddy. He must have gone out.",
+            "traduccion": "Pero sus botas estaban embarradas. Debió de salir."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Maybe he is exaggerating. He might have gone out for five minutes.",
+            "traduccion": "Quizá exagera. Puede que saliera cinco minutos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. He can't have been at home, because the ticket in his coat is from the station.",
+            "traduccion": "No. No puede haber estado en casa, porque el billete de su abrigo es de la estación."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pistas usa Leo para dudar del narrador?",
+          "opciones": [
+            {
+              "es": "Las botas embarradas y un billete de la estación."
+            },
+            {
+              "es": "Una carta que el narrador escribió a Ana."
+            },
+            {
+              "es": "Que el narrador admite que salió de casa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo cita las botas embarradas y el billete del abrigo, dos pistas que contradicen al narrador."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Certeza",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Casi seguro que sí"
+            },
+            {
+              "texto": "must have + participio"
+            },
+            {
+              "texto": "He must have gone out."
+            }
+          ],
+          [
+            {
+              "texto": "Casi seguro que no"
+            },
+            {
+              "texto": "can't have + participio"
+            },
+            {
+              "texto": "He can't have been at home."
+            }
+          ],
+          [
+            {
+              "texto": "Posible"
+            },
+            {
+              "texto": "might / could have + participio"
+            },
+            {
+              "texto": "He might have lied."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-42": {
+      "explicacion": {
+        "titulo": "Motivo, símbolo y tema: no son lo mismo",
+        "texto": "Al analizar una obra distingue varios niveles. El motivo (motif) es un elemento que se repite: el agua, una puerta cerrada. El símbolo (symbol) es una cosa concreta que representa una idea: un reloj roto como tiempo perdido. El tema (theme) es la idea general que sostiene la obra: la ambición, la pérdida. El foreshadowing anticipa lo que pasará sin decirlo, y la imagery son las imágenes que crean atmósfera. Para valorar el efecto usa verbos como convey (transmitir) o resonate with (calar en el lector)."
+      },
+      "patron": {
+        "texto": "Elemento + qué representa + efecto:",
+        "formula": [
+          {
+            "texto": "The recurring motif of water",
+            "nota": "el motivo: lo que se repite en la obra"
+          },
+          {
+            "texto": "is a symbol of",
+            "nota": "símbolo: representa una idea"
+          },
+          {
+            "texto": "change.",
+            "nota": "la idea: el tema que apoya"
+          },
+          {
+            "texto": "It will resonate with readers.",
+            "nota": "el efecto: resonate with + personas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The symbol of the novel is that loss changes people.",
+          "correcto": "The theme of the novel is that loss changes people.",
+          "explicacion": "Una idea general es un tema (theme); un símbolo es una cosa concreta que representa esa idea."
+        },
+        {
+          "incorrecto": "The ending resonates to many readers.",
+          "correcto": "The ending resonates with many readers.",
+          "explicacion": "Resonate se construye con with: resonate with + personas."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comentan una novela que han leído para la clase de literatura.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What is the main theme of the novel?",
+            "traduccion": "¿Cuál es el tema principal de la novela?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I think it is the cost of ambition. The broken clock is a symbol of time that has been lost.",
+            "traduccion": "Creo que es el precio de la ambición. El reloj roto es un símbolo del tiempo perdido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the recurring motif of water? Is it foreshadowing?",
+            "traduccion": "¿Y el motivo recurrente del agua? ¿Es un presagio?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, the storm in chapter two is foreshadowing. The cold imagery will resonate with anyone who has left home.",
+            "traduccion": "Sí, la tormenta del capítulo dos es un presagio. Las imágenes frías calarán en cualquiera que haya dejado su casa."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué simboliza el reloj roto?",
+          "opciones": [
+            {
+              "es": "El tiempo que se ha perdido."
+            },
+            {
+              "es": "La ambición de los personajes."
+            },
+            {
+              "es": "La tormenta del capítulo dos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que el reloj roto es «a symbol of time that has been lost»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Término",
+          "Qué es",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "motif"
+            },
+            {
+              "texto": "Elemento que se repite"
+            },
+            {
+              "texto": "the recurring motif of doors"
+            }
+          ],
+          [
+            {
+              "texto": "symbol"
+            },
+            {
+              "texto": "Cosa que representa una idea"
+            },
+            {
+              "texto": "a broken clock"
+            }
+          ],
+          [
+            {
+              "texto": "theme"
+            },
+            {
+              "texto": "Idea central de la obra"
+            },
+            {
+              "texto": "the cost of ambition"
+            }
+          ],
+          [
+            {
+              "texto": "foreshadowing"
+            },
+            {
+              "texto": "Anticipación de lo que vendrá"
+            },
+            {
+              "texto": "a storm before bad news"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-43": {
+      "explicacion": {
+        "titulo": "Leer un relato con cinco preguntas",
+        "texto": "Para comprender un fragmento breve hazte cinco preguntas. ¿Quién lo cuenta? Primera persona (I) o tercera (she, he): eso es el punto de vista. ¿Qué quiere el protagonista? Es su motivación. ¿Cuál es la idea general? Es el tema. ¿Cómo suena el texto? Es el tono: amargo, tenso, tierno. ¿Qué no se dice pero se adivina? Eso se infiere (infer) a partir de una pista. Responde siempre con una prueba: The tone is bitter, because… / We can infer that…, because…"
+      },
+      "patron": {
+        "texto": "Pregunta de análisis + respuesta con prueba:",
+        "formula": [
+          {
+            "texto": "The narrator tells the story in the first person.",
+            "nota": "punto de vista: quién cuenta la historia"
+          },
+          {
+            "texto": "The protagonist wants to prove her brother wrong.",
+            "nota": "motivación: lo que quiere el personaje"
+          },
+          {
+            "texto": "The tone is bitter,",
+            "nota": "tono: la actitud del texto"
+          },
+          {
+            "texto": "because every memory ends in a complaint.",
+            "nota": "la prueba: siempre con because o for example"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The history of the film is about a betrayal.",
+          "correcto": "The plot of the film is about a betrayal.",
+          "explicacion": "History es la historia del pasado; para el argumento de una obra se dice plot o story."
+        },
+        {
+          "incorrecto": "Is clear that the narrator is reluctant.",
+          "correcto": "It is clear that the narrator is reluctant.",
+          "explicacion": "En inglés la frase necesita sujeto: It is clear that…; en español se puede omitir."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos comentan un cuento que han leído para el club de lectura.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Who tells the story?",
+            "traduccion": "¿Quién cuenta la historia?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The protagonist, in the first person. So we only see her viewpoint.",
+            "traduccion": "La protagonista, en primera persona. Así que solo vemos su punto de vista."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "What is her motivation?",
+            "traduccion": "¿Cuál es su motivación?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "She wants to prove her brother wrong. The tone is bitter.",
+            "traduccion": "Quiere demostrar que su hermano se equivocaba. El tono es amargo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And we can infer she is reluctant to go back, because she keeps checking the time.",
+            "traduccion": "Y podemos inferir que no quiere volver, porque no deja de mirar la hora."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pista permite inferir que la protagonista no quiere volver?",
+          "opciones": [
+            {
+              "es": "Que mira la hora una y otra vez."
+            },
+            {
+              "es": "Que dice abiertamente que no quiere volver."
+            },
+            {
+              "es": "Que su hermano se lo ha pedido."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara infiere que no quiere volver porque «she keeps checking the time»; el texto no lo dice."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Palabra clave",
+          "Ejemplo de respuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "¿Quién cuenta?"
+            },
+            {
+              "texto": "narrator / viewpoint"
+            },
+            {
+              "texto": "It is told in the first person."
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué quiere?"
+            },
+            {
+              "texto": "motivation"
+            },
+            {
+              "texto": "She wants to prove him wrong."
+            }
+          ],
+          [
+            {
+              "texto": "¿Cómo suena?"
+            },
+            {
+              "texto": "tone"
+            },
+            {
+              "texto": "The tone is bitter."
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué se deduce?"
+            },
+            {
+              "texto": "infer"
+            },
+            {
+              "texto": "We can infer that she is afraid."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-44": {
+      "explicacion": {
+        "titulo": "Una reseña con pruebas",
+        "texto": "Una buena reseña tiene cinco pasos. Presenta la película en una frase. Deduce algo sobre los personajes con must have, can't have o might have y apóyalo en lo que se ve. Valora con adjetivos precisos (gripping, convincing, stunning) y da siempre un ejemplo: for example, in the first scene… Reconoce un defecto con although y termina recomendando a alguien concreto: I would recommend it to anyone who… Un adjetivo sin ejemplo es solo una opinión; con ejemplo se convierte en un argumento."
+      },
+      "patron": {
+        "texto": "Valoración + prueba + deducción + recomendación:",
+        "formula": [
+          {
+            "texto": "The plot is gripping.",
+            "nota": "valoración con un adjetivo preciso"
+          },
+          {
+            "texto": "For example, she never gets on the train,",
+            "nota": "la prueba: un ejemplo concreto de la película"
+          },
+          {
+            "texto": "so she must have been waiting for someone.",
+            "nota": "deducción sobre el personaje"
+          },
+          {
+            "texto": "I would recommend it to anyone who enjoys slow stories.",
+            "nota": "recomendación dirigida a alguien"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lead actor has a very good actuation.",
+          "correcto": "The lead actor gives a very good performance.",
+          "explicacion": "«Actuación» en inglés es performance; actuation no se usa con ese sentido."
+        },
+        {
+          "incorrecto": "I recommend you to see it.",
+          "correcto": "I recommend that you see it.",
+          "explicacion": "Después de recommend no va «you + to + verbo»; se usa that you + verbo o I recommend seeing it."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo salen del cine después de ver una película de misterio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What did you think of the film?",
+            "traduccion": "¿Qué te pareció la película?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The pacing is slow, but the plot is gripping. The lead actor gives a convincing performance.",
+            "traduccion": "El ritmo es lento, pero la trama engancha. El actor principal da una interpretación convincente."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I think the mother must have known the truth from the start.",
+            "traduccion": "Creo que la madre debió de saber la verdad desde el principio."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "She can't have been surprised at the end; she never asked a single question. I would recommend it.",
+            "traduccion": "No pudo sorprenderse al final; nunca hizo ni una pregunta. Yo la recomendaría."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué opina Leo de la película?",
+          "opciones": [
+            {
+              "es": "Que el ritmo es lento, pero la trama engancha."
+            },
+            {
+              "es": "Que es previsible y no la recomienda."
+            },
+            {
+              "es": "Que el reparto es malo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que el ritmo es lento pero la trama es absorbente, y que recomendaría la película."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Valorar"
+            },
+            {
+              "texto": "The … is gripping / stunning"
+            },
+            {
+              "texto": "The cast is stunning."
+            }
+          ],
+          [
+            {
+              "texto": "Dar prueba"
+            },
+            {
+              "texto": "For example, …"
+            },
+            {
+              "texto": "For example, the last scene."
+            }
+          ],
+          [
+            {
+              "texto": "Conceder"
+            },
+            {
+              "texto": "Although + defecto, + valoración"
+            },
+            {
+              "texto": "Although it is slow, it is gripping."
+            }
+          ],
+          [
+            {
+              "texto": "Recomendar"
+            },
+            {
+              "texto": "I would recommend it to …"
+            },
+            {
+              "texto": "I would recommend it to anyone."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-45": {
+      "explicacion": {
+        "titulo": "Defender una lectura sin cerrar el debate",
+        "texto": "En un club de lectura se discute el significado, no hay una única respuesta. Propón tu lectura con prudencia (I would argue that…, In my reading…), defiéndela con dos deducciones apoyadas en pistas (must have, can't have, might have) y reconoce lo que te conceda el otro (You make a fair point, I concede that…). Si no te convence, dilo con tacto: I see your point, but I am not convinced. Un buen debate combina todo el bloque: pistas del narrador, vocabulario literario y valoración con ejemplos."
+      },
+      "patron": {
+        "texto": "Lectura + pruebas + concesión:",
+        "formula": [
+          {
+            "texto": "I would argue that the ending is ambiguous,",
+            "nota": "tu lectura, presentada con prudencia"
+          },
+          {
+            "texto": "because the narrator can't have been honest.",
+            "nota": "primera deducción apoyada en una pista"
+          },
+          {
+            "texto": "I concede that your reading is plausible,",
+            "nota": "reconoces lo que tiene de válido la otra lectura"
+          },
+          {
+            "texto": "but I am not convinced.",
+            "nota": "mantienes tu postura con educación"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am not agree with your reading.",
+          "correcto": "I do not agree with your reading.",
+          "explicacion": "Agree es un verbo, no un adjetivo: se niega con do not agree, no con am not agree."
+        },
+        {
+          "incorrecto": "The narrator must to have lied.",
+          "correcto": "The narrator must have lied.",
+          "explicacion": "Los modales no llevan to: must have + participio."
+        }
+      ],
+      "situacion": {
+        "contexto": "En el club de lectura, Sara y Carlos discuten el final de una novela.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I would argue that the ending is ambiguous on purpose.",
+            "traduccion": "Yo sostendría que el final es ambiguo a propósito."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I am not convinced. The narrator can't have been honest, so the ending is a lie.",
+            "traduccion": "No me convence. El narrador no puede haber sido sincero, así que el final es una mentira."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair point. I concede that it is plausible that he lied.",
+            "traduccion": "Es un buen punto. Admito que es verosímil que mintiera."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So you agree with me?",
+            "traduccion": "¿Entonces estás de acuerdo conmigo?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Not completely. In my reading, the book never tells us which version is true.",
+            "traduccion": "No del todo. En mi lectura, el libro nunca nos dice qué versión es la verdadera."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué cede Sara?",
+          "opciones": [
+            {
+              "es": "Reconoce que es verosímil que el narrador mintiera."
+            },
+            {
+              "es": "Admite que no leyó el libro."
+            },
+            {
+              "es": "Acepta que el final es feliz."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «I concede that it is plausible that he lied» y aun así mantiene su lectura."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Proponer"
+            },
+            {
+              "texto": "I would argue that…"
+            },
+            {
+              "texto": "I would argue that it is ambiguous."
+            }
+          ],
+          [
+            {
+              "texto": "Deducir"
+            },
+            {
+              "texto": "must / can't / might have + participio"
+            },
+            {
+              "texto": "He can't have been honest."
+            }
+          ],
+          [
+            {
+              "texto": "Conceder"
+            },
+            {
+              "texto": "I concede that… / You make a fair point"
+            },
+            {
+              "texto": "I concede that it is plausible."
+            }
+          ],
+          [
+            {
+              "texto": "Discrepar"
+            },
+            {
+              "texto": "I am not convinced"
+            },
+            {
+              "texto": "I am not convinced by that reading."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisión independiente clases 41-45 (map v2 n10). Sin P0 abiertos.",
+      "P1 corregidos: rúbricas de escritura 44/45 pedían las tres deducciones (must/can't/might) y 'not convinced' no pedido por el mapa; ahora un grupo de modal perfecto, concesión y evidencia del texto; rúbrica 43 sin 'because' suelto.",
+      "P1: consignas de 44/45 alineadas con el rango real (120-200 palabras; modelo 157/169 >= 50% del mínimo del mapa 200-260; rango 100-300).",
+      "P2: sinónimos aceptados (version/story, motivation/goal, reluctant/hesitant, pacing/pace); distractores débiles sustituidos; textos casi copiados de la enseñanza cambiados; 45 eval audio ya no revela 'plausible'; diálogo 45 más natural; traducción 41 corregida.",
+      "Nota de nivel (P2 no bloqueante): los ítems son de dificultad B2 alta más que C1; aceptable por ser bloque de entrada/forma."
+    ]
+  }
+}

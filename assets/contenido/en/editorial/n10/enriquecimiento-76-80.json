@@ -1,0 +1,727 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "classes": {
+    "en.n10.class-76": {
+      "explicacion": {
+        "titulo": "Anatomía de un ensayo",
+        "texto": "Un ensayo de cinco párrafos tiene una estructura predecible. La introducción presenta el tema y termina con la tesis: la idea que todo el texto defiende. Cada párrafo del desarrollo (body) empieza con una topic sentence que anuncia su idea central; el resto la apoya con datos o ejemplos. La conclusión retoma la tesis con otras palabras (restates) y cierra sin añadir ideas nuevas. Leer la tesis y la primera frase de cada párrafo te da el esquema."
+      },
+      "patron": {
+        "texto": "Tesis + frase temática + apoyo + conclusión:",
+        "formula": [
+          {
+            "texto": "Cities should ban cars from their centres.",
+            "nota": "tesis: la idea que defiende el ensayo"
+          },
+          {
+            "texto": "First, cars make the air dirtier.",
+            "nota": "topic sentence: anuncia la idea del párrafo"
+          },
+          {
+            "texto": "Figures from three cities show it.",
+            "nota": "apoyo: datos y ejemplos"
+          },
+          {
+            "texto": "To sum up, centres are better without cars.",
+            "nota": "conclusión: retoma la tesis con otras palabras"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The conclusion resumes the thesis in new words.",
+          "correcto": "The conclusion restates the thesis in new words.",
+          "explicacion": "Resume en inglés significa «reanudar»; para «retomar o resumir» se usa restate o sum up."
+        },
+        {
+          "incorrecto": "The topic sentence announces about the main idea.",
+          "correcto": "The topic sentence announces the main idea.",
+          "explicacion": "Announce es transitivo: lleva complemento directo sin about, como «anunciar la idea»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos analizan un ensayo que su profesora les ha pedido marcar.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Our teacher wants us to mark the thesis. Is it the last sentence of the introduction?",
+            "traduccion": "Nuestra profesora quiere que marquemos la tesis. ¿Es la última frase de la introducción?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes: cities should ban cars from their centres. That is the idea the whole essay argues.",
+            "traduccion": "Sí: las ciudades deberían prohibir los coches en sus centros. Esa es la idea que defiende todo el ensayo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the first body paragraph starts with: First, cars make the air dirtier. Is that a topic sentence?",
+            "traduccion": "Y el primer párrafo del desarrollo empieza con: Primero, los coches ensucian el aire. ¿Es una frase temática?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Exactly. The figures after it support that idea. Then the conclusion restates the thesis.",
+            "traduccion": "Exacto. Las cifras que vienen después respaldan esa idea. Luego la conclusión retoma la tesis."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué función cumple la frase «First, cars make the air dirtier»?",
+          "opciones": [
+            {
+              "es": "Es la frase temática del primer párrafo del desarrollo."
+            },
+            {
+              "es": "Es la tesis de todo el ensayo."
+            },
+            {
+              "es": "Es la conclusión que cierra el texto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos la confirma como topic sentence: abre el párrafo y las cifras posteriores la respaldan."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Dónde está",
+          "Función"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "final de la introducción"
+            },
+            {
+              "texto": "la idea que defiende el ensayo"
+            }
+          ],
+          [
+            {
+              "texto": "Frase temática"
+            },
+            {
+              "texto": "primera frase del párrafo"
+            },
+            {
+              "texto": "anuncia la idea del párrafo"
+            }
+          ],
+          [
+            {
+              "texto": "Apoyo"
+            },
+            {
+              "texto": "resto del párrafo"
+            },
+            {
+              "texto": "cifras, razones y ejemplos"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "último párrafo"
+            },
+            {
+              "texto": "retoma la tesis sin ideas nuevas"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-77": {
+      "explicacion": {
+        "titulo": "Señalar hacia atrás y hacia delante",
+        "texto": "Para no repetir palabras, el inglés escrito enlaza las frases con referencias. This/these + sustantivo resume la idea anterior (This decision…). Such a + sustantivo la califica («una decisión así»). The former y the latter distinguen dos elementos citados, el primero y el segundo; respectively los empareja en el mismo orden. The same evita repetir una acción. Hacia delante apuntan the following y as follows. Comprueba que la referencia sea clara: si hay dos candidatos, repite el sustantivo."
+      },
+      "patron": {
+        "texto": "Idea anterior + referencia + comentario nuevo:",
+        "formula": [
+          {
+            "texto": "The council banned cars from the centre.",
+            "nota": "idea anterior"
+          },
+          {
+            "texto": "This decision",
+            "nota": "this + sustantivo: resume la idea"
+          },
+          {
+            "texto": "surprised many shop owners,",
+            "nota": "comentario nuevo"
+          },
+          {
+            "texto": "and such a change is rarely popular.",
+            "nota": "such a + sustantivo: «un cambio así»"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Cars and bikes cause problems: the former pollute the air and the later block the pavements.",
+          "correcto": "Cars and bikes cause problems: the former pollute the air and the latter block the pavements.",
+          "explicacion": "Se confunden later («más tarde») y latter («el segundo de dos»): para el segundo elemento se escribe latter."
+        },
+        {
+          "incorrecto": "Such decision is rarely popular at first.",
+          "correcto": "Such a decision is rarely popular at first.",
+          "explicacion": "Con un sustantivo contable singular, such lleva artículo: such a decision; el español «tal decisión» no lo necesita."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pide ayuda a Tom para que su informe sobre el transporte no repita las mismas palabras.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My report repeats the new bus lane in every sentence.",
+            "traduccion": "Mi informe repite «el nuevo carril bus» en cada frase."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Try this: The council opened a new bus lane. This decision pleased commuters.",
+            "traduccion": "Prueba esto: El ayuntamiento abrió un nuevo carril bus. Esta decisión agradó a los usuarios."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And for the two groups: commuters and drivers had different views; the former were happy, and the latter were angry.",
+            "traduccion": "Y para los dos grupos: usuarios y conductores tenían opiniones distintas; los primeros estaban contentos y los segundos enfadados."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. Just check that every reference is clear.",
+            "traduccion": "Bien. Solo comprueba que cada referencia sea clara."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo evita Tom repetir «the new bus lane»?",
+          "opciones": [
+            {
+              "es": "Resume la idea con «This decision» en la frase siguiente."
+            },
+            {
+              "es": "Borra la frase donde aparece el carril bus."
+            },
+            {
+              "es": "Cambia «bus lane» por otra palabra en todo el informe."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom propone «This decision pleased commuters»: un sustantivo con this que resume la frase anterior."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Apunta a",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "this / these + sustantivo"
+            },
+            {
+              "texto": "lo anterior"
+            },
+            {
+              "texto": "This decision surprised many owners."
+            }
+          ],
+          [
+            {
+              "texto": "such a + sustantivo"
+            },
+            {
+              "texto": "lo anterior, calificado"
+            },
+            {
+              "texto": "Such a decision is rarely popular."
+            }
+          ],
+          [
+            {
+              "texto": "the former / the latter"
+            },
+            {
+              "texto": "primero / segundo de dos"
+            },
+            {
+              "texto": "The former pollute; the latter block."
+            }
+          ],
+          [
+            {
+              "texto": "the following"
+            },
+            {
+              "texto": "lo que viene"
+            },
+            {
+              "texto": "The following sections explain them."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-78": {
+      "explicacion": {
+        "titulo": "Detectar los fallos de un borrador",
+        "texto": "Un borrador con problemas de coherencia suele mostrar cinco síntomas. Repetición: la misma palabra abre todas las frases. Referencia ambigua: un pronombre (she, it, they) puede ser dos cosas. Salto lógico: pasas de una idea a otra sin la razón que las une. Frase irrelevante: no tiene que ver con el tema. Contradicción: una frase niega otra. Léelo como un lector que no sabe nada y pregunta en cada frase: ¿a qué se refiere?, ¿por qué esta conclusión?, ¿encaja aquí?"
+      },
+      "patron": {
+        "texto": "Dónde + tipo de problema + razón:",
+        "formula": [
+          {
+            "texto": "In sentence two,",
+            "nota": "dónde: localizas la frase"
+          },
+          {
+            "texto": "the pronoun is ambiguous",
+            "nota": "tipo de problema: la referencia no está clara"
+          },
+          {
+            "texto": "because it could mean Ana or Mia.",
+            "nota": "razón: hay dos candidatos posibles"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The sentence is ambiguous because we do not know to who she refers.",
+          "correcto": "The sentence is ambiguous because we do not know who she refers to.",
+          "explicacion": "En inglés la preposición va al final: who she refers to; «a quién» no se traduce con to who."
+        },
+        {
+          "incorrecto": "The second sentence is contradicting to the first one.",
+          "correcto": "The second sentence contradicts the first one.",
+          "explicacion": "Contradict es transitivo y no lleva to: contradicts the first one."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia corrige con Leo el borrador de su informe sobre los autobuses escolares.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I read your draft about the school buses. The plan is good, but the word bus appears in every sentence.",
+            "traduccion": "Leí tu borrador sobre los autobuses escolares. El plan es bueno, pero la palabra «autobús» aparece en todas las frases."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I know. And I wrote: Tom told Carlos he was late. Is that clear?",
+            "traduccion": "Lo sé. Y escribí: Tom le dijo a Carlos que él llegaba tarde. ¿Está claro?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, it is ambiguous. We cannot tell who he is.",
+            "traduccion": "No, es ambiguo. No podemos saber quién es «él»."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Also, I included a sentence about my holiday. Is it irrelevant?",
+            "traduccion": "Además incluí una frase sobre mis vacaciones. ¿Es irrelevante?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, cut it. Everything else makes sense.",
+            "traduccion": "Sí, quítala. Todo lo demás tiene sentido."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué es ambigua la frase «Tom told Carlos he was late»?",
+          "opciones": [
+            {
+              "es": "Porque no se sabe si «he» es Tom o Carlos."
+            },
+            {
+              "es": "Porque repite «bus» en cada frase."
+            },
+            {
+              "es": "Porque no tiene que ver con el tema del informe."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «we cannot tell who he is»: el pronombre tiene dos candidatos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Problema",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Repetición"
+            },
+            {
+              "texto": "misma palabra en cada frase"
+            },
+            {
+              "texto": "The plan… The plan… The plan…"
+            }
+          ],
+          [
+            {
+              "texto": "Referencia ambigua"
+            },
+            {
+              "texto": "un pronombre con dos candidatos"
+            },
+            {
+              "texto": "Ana told Mia she was late."
+            }
+          ],
+          [
+            {
+              "texto": "Salto lógico"
+            },
+            {
+              "texto": "conclusión sin razón"
+            },
+            {
+              "texto": "Sales rose. The plan failed."
+            }
+          ],
+          [
+            {
+              "texto": "Irrelevante"
+            },
+            {
+              "texto": "fuera del tema"
+            },
+            {
+              "texto": "A holiday in a report on buses."
+            }
+          ],
+          [
+            {
+              "texto": "Contradicción"
+            },
+            {
+              "texto": "una frase niega otra"
+            },
+            {
+              "texto": "It is cheap. It costs a lot."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-79": {
+      "explicacion": {
+        "titulo": "Escribir y recortar",
+        "texto": "Escribir bien es escribir y después recortar. Primero redacta el párrafo completo con conectores variados (Admittedly…, nevertheless…, although…). Luego tighten: cambia due to the fact that por because, in order to por to, made a decision por decided, y elimina palabras vacías (very, really, basically). Prefiere la voz activa (The club chose me) y los verbos fuertes. Una frase concisa conserva todo el contenido con menos palabras: si al recortar pierdes una idea, has recortado demasiado."
+      },
+      "patron": {
+        "texto": "Versión larga → versión concisa:",
+        "formula": [
+          {
+            "texto": "Due to the fact that it was late,",
+            "nota": "versión larga: cinco palabras para decir «porque»"
+          },
+          {
+            "texto": "Because it was late,",
+            "nota": "versión concisa: la misma idea con menos palabras"
+          },
+          {
+            "texto": "I decided to leave.",
+            "nota": "verbo fuerte: decided en lugar de made a decision"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I made a decision of studying abroad.",
+          "correcto": "I decided to study abroad.",
+          "explicacion": "«Tomar la decisión de estudiar» no se dice decision of studying; el verbo fuerte decide + to + verbo dice lo mismo con menos palabras."
+        },
+        {
+          "incorrecto": "In order to saving money, I work at weekends.",
+          "correcto": "To save money, I work at weekends.",
+          "explicacion": "Tras in order to va el verbo base, no -ing; y to save solo ya es más conciso que in order to save."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le enseña a Tom el borrador de un texto sobre su decisión de cambiar de colegio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Your draft is good, but this sentence is wordy: Due to the fact that I was nervous, I made a decision to wait.",
+            "traduccion": "Tu borrador es bueno, pero esta frase es verbosa: «Debido a que estaba nerviosa, tomé la decisión de esperar»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "How can I tighten it?",
+            "traduccion": "¿Cómo puedo acortarla?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Try this: Because I was nervous, I decided to wait. It says the same in eight words instead of fourteen.",
+            "traduccion": "Prueba esto: «Because I was nervous, I decided to wait». Dice lo mismo en ocho palabras en lugar de catorce."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Nice. Should I cut really too?",
+            "traduccion": "Bien. ¿Debería quitar también «really»?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, it is redundant. But keep the idea about your mother.",
+            "traduccion": "Sí, es redundante. Pero conserva la idea sobre tu madre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo acorta Tom la frase de Sara?",
+          "opciones": [
+            {
+              "es": "Cambia «due to the fact that» por «because» y «made a decision» por «decided»."
+            },
+            {
+              "es": "Elimina la idea de que Sara estaba nerviosa."
+            },
+            {
+              "es": "La divide en tres frases muy cortas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom propone «Because I was nervous, I decided to wait», con los mismos datos en ocho palabras."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Versión larga",
+          "Versión concisa",
+          "Regla"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "due to the fact that"
+            },
+            {
+              "texto": "because"
+            },
+            {
+              "texto": "una palabra en lugar de cinco"
+            }
+          ],
+          [
+            {
+              "texto": "in order to"
+            },
+            {
+              "texto": "to"
+            },
+            {
+              "texto": "se quita in order"
+            }
+          ],
+          [
+            {
+              "texto": "made a decision"
+            },
+            {
+              "texto": "decided"
+            },
+            {
+              "texto": "verbo fuerte"
+            }
+          ],
+          [
+            {
+              "texto": "at this point in time"
+            },
+            {
+              "texto": "now"
+            },
+            {
+              "texto": "una palabra basta"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-80": {
+      "explicacion": {
+        "titulo": "Un artículo de opinión completo",
+        "texto": "Un artículo de opinión eficaz sigue un camino claro. Introducción con tesis (I will argue that…). Dos argumentos, cada uno con frase temática y ejemplo. Una concesión (I concede that…, Admittedly…) y la respuesta al contraargumento (nevertheless…). Referencias internas que enlazan el texto (as mentioned above, this argument, the former/the latter). Una conclusión que retoma la tesis con otras palabras. Antes de entregarlo, revísalo: quita repeticiones, aclara referencias y recorta lo que sobra."
+      },
+      "patron": {
+        "texto": "Tesis + argumento + concesión + referencia + cierre:",
+        "formula": [
+          {
+            "texto": "I will argue that students should have a say in school rules.",
+            "nota": "tesis: la postura que defiendes"
+          },
+          {
+            "texto": "First, rules that nobody explains are rarely followed.",
+            "nota": "argumento con frase temática"
+          },
+          {
+            "texto": "I concede that students can make mistakes; nevertheless,",
+            "nota": "concesión + contraste"
+          },
+          {
+            "texto": "as mentioned above, a clear reason can persuade them.",
+            "nota": "referencia interna hacia atrás"
+          },
+          {
+            "texto": "In conclusion, students deserve a voice.",
+            "nota": "cierre que retoma la tesis"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree that students should have a say.",
+          "correcto": "I agree that students should have a say.",
+          "explicacion": "Agree ya es un verbo: no lleva am. Se dice I agree, I don't agree o I completely agree."
+        },
+        {
+          "incorrecto": "As it was mentioned above, rules are rarely followed.",
+          "correcto": "As mentioned above, rules are rarely followed.",
+          "explicacion": "La referencia interna es una expresión fija: as mentioned above, sin it was."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos revisan el artículo de opinión que Ana escribe para la revista del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "My opinion piece for the magazine argues that students should have a say in school rules.",
+            "traduccion": "Mi artículo de opinión para la revista sostiene que los estudiantes deberían tener voz y voto en las normas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good thesis. Do you include a counterargument?",
+            "traduccion": "Buena tesis. ¿Incluyes un contraargumento?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. I concede that students may not always choose well, but as mentioned above, rules they helped to write are easier to accept.",
+            "traduccion": "Sí. Reconozco que los estudiantes no siempre elegirán bien, pero, como dije arriba, las normas que ayudaron a escribir se aceptan mejor."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Nice. Have you revised the draft?",
+            "traduccion": "Bien. ¿Has revisado el borrador?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. I cut two repeated sentences and replaced due to the fact that with because.",
+            "traduccion": "Sí. Quité dos frases repetidas y cambié «due to the fact that» por «because»."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo responde Ana al contraargumento?",
+          "opciones": [
+            {
+              "es": "Reconoce que pueden equivocarse, pero dice que las normas que ellos mismos escriben se aceptan mejor."
+            },
+            {
+              "es": "Lo ignora y repite la tesis."
+            },
+            {
+              "es": "Propone que los profesores escriban todas las normas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «I concede that students may not always choose well» y añade que las normas escritas por ellos se aceptan mejor."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "I will argue that…"
+            },
+            {
+              "texto": "I will argue that students should have a say."
+            }
+          ],
+          [
+            {
+              "texto": "Argumento"
+            },
+            {
+              "texto": "First / Second + razón"
+            },
+            {
+              "texto": "First, rules nobody explains are rarely followed."
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "I concede that… / Admittedly…"
+            },
+            {
+              "texto": "I concede that students can make mistakes."
+            }
+          ],
+          [
+            {
+              "texto": "Referencia interna"
+            },
+            {
+              "texto": "as mentioned above / this argument"
+            },
+            {
+              "texto": "As mentioned above, reasons persuade."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "In conclusion…"
+            },
+            {
+              "texto": "In conclusion, students deserve a voice."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisión independiente N10 76-80: sin P0 pendientes.",
+      "76: rúbrica de frase temática sin 'better' suelto como única evidencia.",
+      "77: opciones de escucha parafraseadas (no copia literal); rúbrica de reescritura sin 'teachers' suelto, admite relativas con 'which' y 'that change'; añadida respuesta aceptada con 'which'.",
+      "78: traducción de 'stuff' corregida; patrón con 'the pronoun is ambiguous'; 'Sam' (fuera del reparto) cambiado por 'Tom'; rúbrica sin 'he' suelto ni 'either'.",
+      "79: rúbrica larga exige dos conectores distintos (concesión y contraste), verbo fuerte 'decided' (no 'decision'), sentimiento actual con 'now I' y razones a favor/en contra; quitados 'now', 'list' y 'decision' sueltos.",
+      "80: la app no puede exigir que 'Revision:' sea la última línea; la rúbrica exige la etiqueta 'revision' más un grupo aparte con el cambio documentado ('I cut', 'I replaced'…). Concesión y respuesta al contraargumento pasan a grupos separados; quitado 'of course'; respuesta aceptada ahora contiene 'nevertheless'. Opción del diálogo corregida ('ayudan' → 'ellos mismos escriben').",
+      "Progresión: 'former/latter' (77) se reutiliza bien en 80; 'tighten/concise' (79) en 80; 'rather than' (74) sin duplicar. Nombres propios: solo reparto del curso."
+    ]
+  }
+}

@@ -1,0 +1,752 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 10,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n10.class-67",
+  "title": {
+    "en": "Rephrase, repair, replace",
+    "es": "Reformular, reparar, sustituir"
+  },
+  "objectives": {
+    "es": [
+      "Corregirte a ti mismo y explicar con rodeos una palabra que no recuerdas (what I mean is, or rather, the tool you use for…)."
+    ]
+  },
+  "concepts": [
+    "n10-spontaneous-speaking-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n10.class-66"
+  ],
+  "usesVocabulary": [
+    "rather",
+    "rephrase",
+    "meant",
+    "tool",
+    "stapler",
+    "plumber",
+    "pipes",
+    "archive",
+    "scissors"
+  ],
+  "usesPatterns": [
+    "n10-spontaneous-speaking-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "rather",
+      "es": "más bien, mejor dicho"
+    },
+    {
+      "en": "rephrase",
+      "es": "reformular"
+    },
+    {
+      "en": "meant",
+      "es": "quería decir"
+    },
+    {
+      "en": "tool",
+      "es": "herramienta"
+    },
+    {
+      "en": "stapler",
+      "es": "grapadora"
+    },
+    {
+      "en": "plumber",
+      "es": "fontanero"
+    },
+    {
+      "en": "pipes",
+      "es": "tuberías"
+    },
+    {
+      "en": "archive",
+      "es": "archivo (de documentos)"
+    },
+    {
+      "en": "scissors",
+      "es": "tijeras"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n10.class-67.t01",
+      "en": "We meet on Tuesday, or rather, on Wednesday.",
+      "es": "Nos reunimos el martes, o mejor dicho, el miércoles.",
+      "explanationEs": "Or rather corrige lo que acabas de decir con más precisión.",
+      "segments": [
+        "We meet on Tuesday,",
+        "or rather, on Wednesday."
+      ],
+      "audioText": "We meet on Tuesday, or rather, on Wednesday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-spontaneous-speaking-2"
+    },
+    {
+      "id": "en.n10.class-67.t02",
+      "en": "Sorry, I meant the second floor, not the third.",
+      "es": "Perdón, quería decir el segundo piso, no el tercero.",
+      "explanationEs": "I meant + dato correcto: rectificas un error sin detener la conversación.",
+      "segments": [
+        "Sorry, I meant the second",
+        "floor, not the third."
+      ],
+      "audioText": "Sorry, I meant the second floor, not the third.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-spontaneous-speaking-2"
+    },
+    {
+      "id": "en.n10.class-67.t03",
+      "en": "Let me rephrase that: we need more time to finish.",
+      "es": "Déjame reformularlo: necesitamos más tiempo para terminar.",
+      "explanationEs": "Let me rephrase that + nueva versión: dices lo mismo con otras palabras.",
+      "segments": [
+        "Let me rephrase that: we",
+        "need more time to finish."
+      ],
+      "audioText": "Let me rephrase that: we need more time to finish.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-spontaneous-speaking-2"
+    },
+    {
+      "id": "en.n10.class-67.t04",
+      "en": "I've forgotten the word; it is the tool you use to hold papers together.",
+      "es": "He olvidado la palabra; es la herramienta que se usa para sujetar papeles.",
+      "explanationEs": "Circunlocución: explicas la función del objeto con the tool you use to…",
+      "segments": [
+        "I've forgotten the word; it is the",
+        "tool you use to hold papers together."
+      ],
+      "audioText": "I've forgotten the word; it is the tool you use to hold papers together.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-spontaneous-speaking-2"
+    },
+    {
+      "id": "en.n10.class-67.t05",
+      "en": "I've forgotten the word, but it is someone who fixes leaking pipes.",
+      "es": "He olvidado la palabra, pero es alguien que arregla tuberías con fugas.",
+      "explanationEs": "Para personas: someone who + verbo describe su trabajo sin decir la palabra.",
+      "segments": [
+        "I've forgotten the word, but it",
+        "is someone who fixes leaking pipes."
+      ],
+      "audioText": "I've forgotten the word, but it is someone who fixes leaking pipes.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-spontaneous-speaking-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n10.c67.pg01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El lunes, o mejor dicho, el martes.»"
+        },
+        "answer": {
+          "text": "rather",
+          "accepted": [
+            "rather"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.pg01.seed-0",
+          "feedback": {
+            "es": "Or rather corrige con precisión lo que acabas de decir."
+          },
+          "hint": {
+            "es": "Es la palabra que, tras or, introduce una corrección más exacta."
+          },
+          "text": "On Monday, or ___, on Tuesday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8f55c19235283516849e1444769eeee1633accfd92925048bfded65c5d4a9aa6"
+      },
+      {
+        "id": "en.n10.c67.pg02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Perdón, quería decir el tercer piso.»"
+        },
+        "answer": {
+          "text": "Sorry, I meant the third floor",
+          "tokens": [
+            "Sorry,",
+            "I",
+            "meant",
+            "the",
+            "third",
+            "floor"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.pg02.seed-0",
+          "feedback": {
+            "es": "Sorry, I meant + dato rectifica un error sin cortar la conversación."
+          },
+          "hint": {
+            "es": "Empieza por la disculpa y sigue con el verbo meant."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b090e0100cc07aa4bb3aa4e70894067a8472fd55e173849583f3854a47197d92"
+      },
+      {
+        "id": "en.n10.c67.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es una circunlocución para «plumber»?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Someone who paints old houses."
+          },
+          {
+            "text": "Someone who fixes leaking pipes."
+          },
+          {
+            "text": "Someone who sells kitchen tables."
+          }
+        ],
+        "teaches": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.pg03.seed-0",
+          "feedback": {
+            "es": "Una circunlocución describe a la persona por lo que hace: un fontanero arregla tuberías."
+          },
+          "hint": {
+            "es": "Describe qué hace la persona, sin decir la palabra."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:12fa4bfc583288852eedc9df483b9aee48f19044576a30a20e6cbb164074ed9d"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n10.c67.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Déjame reformular» y «quería decir el sábado»."
+        },
+        "answer": {
+          "text": "rephrase | meant",
+          "accepted": [
+            "rephrase | meant"
+          ],
+          "parts": [
+            {
+              "text": "rephrase",
+              "accepted": [
+                "rephrase"
+              ]
+            },
+            {
+              "text": "meant",
+              "accepted": [
+                "meant"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.p01.seed-0",
+          "feedback": {
+            "es": "Let me rephrase that introduce una nueva versión; I meant rectifica un dato."
+          },
+          "sentences": [
+            "Let me ___ that: the plan is too expensive.",
+            "Sorry, I ___ Saturday, not Friday."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:46e1350eeb4f5d70fb6487c4a489451b41d80db2d2398d506d771aad95aeba5a"
+      },
+      {
+        "id": "en.n10.c67.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué estrategia usa el hablante."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He asks someone to buy paper."
+          },
+          {
+            "text": "He corrects a date."
+          },
+          {
+            "text": "He describes an object until he remembers the word."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.p02.seed-0",
+          "feedback": {
+            "es": "Describe la función del objeto («the tool you use to cut paper») hasta recordar scissors."
+          },
+          "audio": "I need the... what's the word... the tool you use to cut paper. Scissors! Yes, scissors.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d9ef3ba014160d9eb523460479fe2d484f60b2c0d0ea936edec7624c73419a0e"
+      },
+      {
+        "id": "en.n10.c67.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase corrige bien lo que acabas de decir?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "We meet at five, or rather, at six."
+          },
+          {
+            "text": "We meet at five, or better said, at six."
+          },
+          {
+            "text": "We meet at five, and meanwhile, at six."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.p03.seed-0",
+          "feedback": {
+            "es": "Or rather es la forma natural; «or better said» es un calco del español."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3c3ae6889039a4725fd6fbdc4004bd53ff4422ead977df502fb7278ad86c1e88"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n10.c67.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Explica sin decir la palabra: el lugar donde guardan documentos antiguos."
+        },
+        "answer": {
+          "text": "It is the place where they keep old documents.",
+          "accepted": [
+            "It is the place where they keep old documents.",
+            "It's the place where old documents are kept.",
+            "It is a room where they keep old documents.",
+            "It is a place where they store old documents.",
+            "It is the room where old documents are kept."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.e01.seed-0",
+          "feedback": {
+            "es": "La circunlocución usa the place where… y describe la función, sin decir archive."
+          },
+          "text": "No recuerdas la palabra «archive». Descríbela con rodeos en una frase: es el lugar donde guardan documentos antiguos."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cc713309ba24eaf7bd3ee300b9450b6dda1946245947755e9335b82ffae14f85"
+      },
+      {
+        "id": "en.n10.c67.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cuándo estará listo el informe."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "On Monday."
+          },
+          {
+            "text": "The day after Monday."
+          },
+          {
+            "text": "On Wednesday."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.e02.seed-0",
+          "feedback": {
+            "es": "El hablante rectifica con «Sorry, I meant Tuesday»: el informe estará listo el martes, el día después del lunes."
+          },
+          "audio": "We will send the report on Monday. Sorry, I meant Tuesday. Let me rephrase that: the report will be ready on Tuesday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c960f357c81e0123e172baa6c7f8f3759b527adff35c5ee893f81af62ec9758b"
+      },
+      {
+        "id": "en.n10.c67.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Te refieres a la grapadora?»"
+        },
+        "answer": {
+          "text": "stapler",
+          "accepted": [
+            "stapler"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.e03.seed-0",
+          "feedback": {
+            "es": "La descripción de la herramienta que sujeta papeles corresponde a stapler."
+          },
+          "text": "It's the tool you use to hold papers together. — Do you mean the ___?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:01769a4833052b7ee9781b49e84ccfcbe9294207d30826a142867133bf8a2565"
+      },
+      {
+        "id": "en.n10.c67.e04",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es una buena circunlocución para «umbrella»?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It's what you wear on your feet when it rains."
+          },
+          {
+            "text": "It's what you drink when it is cold."
+          },
+          {
+            "text": "It's what you open over your head when it rains."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.e04.seed-0",
+          "feedback": {
+            "es": "Una circunlocución describe la función: el paraguas se abre sobre la cabeza cuando llueve."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fe089ad27b2f13a68a1fee9cde8ab6b7ef47825112364c718db3252c4b48dd4a"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n10.c67.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase rectifica bien un dato?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Sorry, I meant the blue folder, not the red one."
+          },
+          {
+            "text": "Sorry, I am the blue folder, not the red one."
+          },
+          {
+            "text": "Sorry, I meaning the blue folder."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.r01.seed-0",
+          "feedback": {
+            "es": "Sorry, I meant + dato correcto es la forma de rectificar; las otras no tienen sentido gramatical."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d3dc89423a9d748199e681ff87c0ee017d253fdd149b6a0b0319df0cc9a75d8e"
+      },
+      {
+        "id": "en.n10.c67.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Nos vemos el jueves, o mejor dicho, el viernes.»"
+        },
+        "answer": {
+          "text": "We meet on Thursday, or rather, on Friday",
+          "tokens": [
+            "We",
+            "meet",
+            "on",
+            "Thursday,",
+            "or",
+            "rather,",
+            "on",
+            "Friday"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.r02.seed-0",
+          "feedback": {
+            "es": "Or rather introduce la corrección: Thursday pasa a Friday."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b1717d7dc45c9a5657264e67e3bcd20e5b579f6f3d5cc486b81a541d4502e210"
+      },
+      {
+        "id": "en.n10.c67.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Describe con rodeos una palabra: lo que se usa para subir a un sitio alto."
+        },
+        "answer": {
+          "text": "It is the tool you use to climb to a high place.",
+          "accepted": [
+            "It is the tool you use to climb to a high place.",
+            "It's the tool you use to reach high places.",
+            "It is something you climb to reach a high place.",
+            "It's the thing you use to climb up to high places.",
+            "It is what you use to climb to a high place."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-spontaneous-speaking-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c67.r03.seed-0",
+          "feedback": {
+            "es": "La circunlocución describe para qué sirve el objeto con the tool you use to…"
+          },
+          "text": "No recuerdas la palabra «ladder». Descríbela en una frase: es la herramienta que se usa para subir a un lugar alto."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2902f5bdca94431dee9d5c3c3772f4c0a3285bc59aa719d135e8c403b1a1465a"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n10.c67.e01": {
+      "reteach": "en.n10.class-67.t01",
+      "review": "en.n10.c67.r01"
+    },
+    "en.n10.c67.e02": {
+      "reteach": "en.n10.class-67.t02",
+      "review": "en.n10.c67.r02"
+    },
+    "en.n10.c67.e03": {
+      "reteach": "en.n10.class-67.t03",
+      "review": "en.n10.c67.r03"
+    },
+    "en.n10.c67.e04": {
+      "reteach": "en.n10.class-67.t04",
+      "review": "en.n10.c67.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

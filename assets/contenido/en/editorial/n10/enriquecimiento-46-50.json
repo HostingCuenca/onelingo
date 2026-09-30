@@ -1,0 +1,710 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "classes": {
+    "en.n10.class-46": {
+      "explicacion": {
+        "titulo": "Jerga: entender qué dice y dónde se puede decir",
+        "texto": "La jerga (slang) es vocabulario muy informal que oirás entre amigos, en series y en redes. Para reconocerla, pregúntate dos cosas: ¿qué significa en lenguaje neutro? (I'm beat = I am very tired) y ¿dónde se puede decir? Con amigos y compañeros cercanos, sí; en una entrevista, con un cliente o en un correo formal, no. Además, parte de la jerga es regional: mate suena muy británico o australiano, y dude, más estadounidense. Reconocerla te ayuda a entender; usarla solo cuando la situación lo permite evita que suenes descortés."
+      },
+      "patron": {
+        "texto": "Frase coloquial, equivalente neutro y contexto:",
+        "formula": [
+          {
+            "texto": "I'm swamped.",
+            "nota": "coloquial: entre amigos o compañeros cercanos"
+          },
+          {
+            "texto": "= I am very busy.",
+            "nota": "neutro: sirve también en un correo formal"
+          },
+          {
+            "texto": "Bummer! / Awesome!",
+            "nota": "exclamaciones cortas y muy informales"
+          },
+          {
+            "texto": "With friends, not in a job interview.",
+            "nota": "el contexto decide si puedes usarla"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Sir, I'm swamped, so the report will be late.",
+          "correcto": "Dear Sir, I am very busy, so the report will be late.",
+          "explicacion": "En un correo formal no se usa jerga: se cambia swamped por very busy y se mantiene un tono neutro."
+        },
+        {
+          "incorrecto": "I am beaten; I am going to bed.",
+          "correcto": "I'm beat; I'm going to bed.",
+          "explicacion": "Para «agotado» se dice beat; beaten significa derrotado o golpeado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo quiere quedar con Ana esta noche, pero ella no puede.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Hey, are we still on for the cinema tonight?",
+            "traduccion": "Oye, ¿seguimos con lo del cine esta noche?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I'm swamped at work, sorry. And I'm completely beat, too.",
+            "traduccion": "Estoy agobiada de trabajo, perdona. Y además estoy hecha polvo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Bummer! No worries, mate. Let's just chill on Saturday.",
+            "traduccion": "¡Qué fastidio! No pasa nada, amiga. Quedemos a relajarnos el sábado."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Awesome, thanks. Saturday is perfect.",
+            "traduccion": "Genial, gracias. El sábado es perfecto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Ana cancela el plan?",
+          "opciones": [
+            {
+              "es": "Tiene mucho trabajo y está muy cansada."
+            },
+            {
+              "es": "Está enferma y se queda en casa."
+            },
+            {
+              "es": "Prefiere ver otra película."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «I'm swamped at work» y «I'm completely beat»: trabajo y cansancio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Coloquial",
+          "Neutro",
+          "Dónde se usa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "I'm swamped."
+            },
+            {
+              "texto": "I am very busy."
+            },
+            {
+              "texto": "amigos y compañeros"
+            }
+          ],
+          [
+            {
+              "texto": "I'm beat."
+            },
+            {
+              "texto": "I am very tired."
+            },
+            {
+              "texto": "amigos y familia"
+            }
+          ],
+          [
+            {
+              "texto": "Bummer!"
+            },
+            {
+              "texto": "I am disappointed."
+            },
+            {
+              "texto": "amigos"
+            }
+          ],
+          [
+            {
+              "texto": "No worries."
+            },
+            {
+              "texto": "That is fine."
+            },
+            {
+              "texto": "casi siempre, tono cordial"
+            }
+          ],
+          [
+            {
+              "texto": "Awesome!"
+            },
+            {
+              "texto": "Excellent!"
+            },
+            {
+              "texto": "amigos, informal"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-47": {
+      "explicacion": {
+        "titulo": "Bloques que dan fluidez",
+        "texto": "Los hablantes nativos no construyen cada frase desde cero: usan bloques fijos que dan tiempo para pensar y muestran su actitud. The thing is… presenta un problema, To be fair… concede algo justo, It's not like… quita importancia o desmiente, To be honest… introduce una opinión sincera, Anyway… cierra o cambia de tema y Apparently… cuenta lo que has oído. Después del bloque la frase sigue con gramática normal, incluido el gerundio y el infinitivo: forget, expect o decide llevan to + verbo; enjoy o avoid llevan -ing."
+      },
+      "patron": {
+        "texto": "Bloque + idea con to o -ing:",
+        "formula": [
+          {
+            "texto": "The thing is,",
+            "nota": "abre el problema; después va una frase completa"
+          },
+          {
+            "texto": "I forgot to call her.",
+            "nota": "forget + to + verbo: no llamé"
+          },
+          {
+            "texto": "To be fair,",
+            "nota": "concede algo a favor del otro antes de criticar"
+          },
+          {
+            "texto": "she avoids answering unknown numbers.",
+            "nota": "avoid + gerundio: evita contestar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The thing is, I forgot calling her.",
+          "correcto": "The thing is, I forgot to call her.",
+          "explicacion": "Forget + to + verbo significa olvidar hacer algo que tenías pendiente; forget + gerundio es olvidar algo ya hecho."
+        },
+        {
+          "incorrecto": "To be fair with her, she was busy.",
+          "correcto": "To be fair to her, she was busy.",
+          "explicacion": "El bloque lleva la preposición to: to be fair to + persona."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia si ha llamado ya a su amiga Ana.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you call Ana?",
+            "traduccion": "¿Llamaste a Ana?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No. The thing is, I forgot to call her. To be honest, I was swamped all week.",
+            "traduccion": "No. La cuestión es que olvidé llamarla. Para ser sincera, estuve agobiada toda la semana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "To be fair, it's not like she called you either.",
+            "traduccion": "Siendo justos, tampoco es que ella te llamara a ti."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "True. Anyway, I'll call her tonight.",
+            "traduccion": "Es verdad. En fin, la llamaré esta noche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no llamó Mia a Ana?",
+          "opciones": [
+            {
+              "es": "Se le olvidó, porque tuvo una semana llena de trabajo."
+            },
+            {
+              "es": "Ana le pidió que no la llamara."
+            },
+            {
+              "es": "No tiene el número de Ana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I forgot to call her» y «I was swamped all week»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Bloque",
+          "Función",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The thing is,"
+            },
+            {
+              "texto": "presentar el problema"
+            },
+            {
+              "texto": "The thing is, I'm exhausted."
+            }
+          ],
+          [
+            {
+              "texto": "To be fair,"
+            },
+            {
+              "texto": "conceder algo justo"
+            },
+            {
+              "texto": "To be fair, he tried."
+            }
+          ],
+          [
+            {
+              "texto": "It's not like"
+            },
+            {
+              "texto": "quitar importancia"
+            },
+            {
+              "texto": "It's not like I'm angry."
+            }
+          ],
+          [
+            {
+              "texto": "To be honest,"
+            },
+            {
+              "texto": "dar una opinión sincera"
+            },
+            {
+              "texto": "To be honest, I'm not sure."
+            }
+          ],
+          [
+            {
+              "texto": "Anyway,"
+            },
+            {
+              "texto": "cerrar o cambiar de tema"
+            },
+            {
+              "texto": "Anyway, see you Friday."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-48": {
+      "explicacion": {
+        "titulo": "Adivinar palabras nuevas al escuchar",
+        "texto": "Cuando oyes una palabra desconocida en habla natural, no te detengas: sigue escuchando y busca una pista cerca. Puede ser una definición (which means…), un contraste (but, although: suele significar lo contrario), una causa o consecuencia (so, because) o ejemplos próximos (people shouting and laughing). Después deduce un significado y comprueba que encaja en toda la frase; si la frase sigue teniendo sentido, vale. No necesitas entender cada palabra para captar la idea del mensaje."
+      },
+      "patron": {
+        "texto": "Palabra nueva + pista + significado deducido:",
+        "formula": [
+          {
+            "texto": "The flat is cramped,",
+            "nota": "palabra desconocida: no te detengas, sigue escuchando"
+          },
+          {
+            "texto": "so there is hardly room for my suitcase.",
+            "nota": "la pista: una consecuencia que la explica"
+          },
+          {
+            "texto": "So cramped means very small.",
+            "nota": "tu deducción: comprueba que encaja en la frase"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I felt homesick, it means that I missed my family.",
+          "correcto": "I felt homesick, which means I missed my family.",
+          "explicacion": "Para definir lo que acabas de decir se usa which means; «it means» no une las dos frases."
+        },
+        {
+          "incorrecto": "He looked bewildered; he had not idea where to go.",
+          "correcto": "He looked bewildered; he had no idea where to go.",
+          "explicacion": "Delante de un sustantivo se usa no (no idea); not se usa con verbos."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Carlos el mensaje de voz que le envió Leo desde Lisboa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Leo sent me a voice note from Lisbon. He says the flat is cramped.",
+            "traduccion": "Leo me envió una nota de voz desde Lisboa. Dice que el piso es estrecho."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Cramped? What does that mean?",
+            "traduccion": "¿«Cramped»? ¿Qué significa?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "He says there is hardly room for his suitcase, so it must mean very small.",
+            "traduccion": "Dice que apenas hay sitio para su maleta, así que debe de significar muy pequeño."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good guess. Does he like the city?",
+            "traduccion": "Buena deducción. ¿Le gusta la ciudad?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes, the market is bustling, but he feels a bit homesick, too.",
+            "traduccion": "Sí, el mercado está muy animado, pero también se siente algo nostálgico."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo deduce Ana lo que significa cramped?",
+          "opciones": [
+            {
+              "es": "Porque Leo dice que apenas hay sitio para su maleta."
+            },
+            {
+              "es": "Porque lo busca en un diccionario."
+            },
+            {
+              "es": "Porque Leo se lo traduce al español."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana se apoya en la pista «hardly room for his suitcase» para deducir que cramped es muy pequeño."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de pista",
+          "Señal",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Definición"
+            },
+            {
+              "texto": "which means, that is"
+            },
+            {
+              "texto": "I felt homesick, which means I missed home."
+            }
+          ],
+          [
+            {
+              "texto": "Contraste"
+            },
+            {
+              "texto": "but, although"
+            },
+            {
+              "texto": "The room was cramped, but the view was huge."
+            }
+          ],
+          [
+            {
+              "texto": "Consecuencia"
+            },
+            {
+              "texto": "so, because"
+            },
+            {
+              "texto": "It was bustling, so I couldn't hear you."
+            }
+          ],
+          [
+            {
+              "texto": "Ejemplo"
+            },
+            {
+              "texto": "dos puntos, enumeración"
+            },
+            {
+              "texto": "It was bustling: people shouting and laughing."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-49": {
+      "explicacion": {
+        "titulo": "Un diario con voz propia",
+        "texto": "Un diario informal combina tres capas. Primero, bloques que organizan la idea: The thing is…, To be honest…, To be fair…, It's not like… Segundo, expresiones coloquiales de la semana, con moderación: I'm beat, swamped, bummer, awesome, no worries; dos o tres bastan. Tercero, una estrategia de comunicación cuando no entiendes: Sorry, I didn't catch that / Could you rephrase that? Cuenta los hechos en pasado simple y recuerda los verbos con infinitivo: manage to, decide to, forget to."
+      },
+      "patron": {
+        "texto": "Día + bloque + expresión coloquial + estrategia:",
+        "formula": [
+          {
+            "texto": "Monday: I landed in Dublin,",
+            "nota": "el día y un hecho en pasado simple"
+          },
+          {
+            "texto": "and to be honest, I was beat.",
+            "nota": "bloque + expresión coloquial"
+          },
+          {
+            "texto": "I said, «Sorry, I didn't catch that.»",
+            "nota": "estrategia de comunicación"
+          },
+          {
+            "texto": "I managed to sort out my bank card.",
+            "nota": "manage + to + verbo: lograr hacer algo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I managed sorting out my bank card.",
+          "correcto": "I managed to sort out my bank card.",
+          "explicacion": "Manage lleva to + verbo: manage to sort out, no manage + gerundio."
+        },
+        {
+          "incorrecto": "Could you rephrase me that, please?",
+          "correcto": "Could you rephrase that, please?",
+          "explicacion": "Rephrase no lleva complemento de persona: Could you rephrase that?"
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Mia cómo le fue su primera semana en Dublín.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "How was your first week in Dublin?",
+            "traduccion": "¿Cómo te fue la primera semana en Dublín?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Pretty tough. Nobody slowed down, so I kept saying, «Sorry, I didn't catch that.»",
+            "traduccion": "Bastante dura. Nadie hablaba despacio, así que repetía: «Perdona, no he captado eso.»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And did people help?",
+            "traduccion": "¿Y la gente ayudó?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. To be fair, a driver rephrased everything, and I managed to sort out my bank card on Friday.",
+            "traduccion": "Sí. Siendo justos, un conductor me lo dijo todo de otra manera, y el viernes logré arreglar lo de mi tarjeta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Mia cuando no entiende?",
+          "opciones": [
+            {
+              "es": "Dice que no ha captado lo que le dicen."
+            },
+            {
+              "es": "Se va sin contestar."
+            },
+            {
+              "es": "Responde en español."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia repetía «Sorry, I didn't catch that» para pedir aclaración con cortesía."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Capa",
+          "Ejemplos",
+          "Para qué"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Bloques"
+            },
+            {
+              "texto": "The thing is… / To be honest… / It's not like…"
+            },
+            {
+              "texto": "organizar y dar actitud"
+            }
+          ],
+          [
+            {
+              "texto": "Coloquial"
+            },
+            {
+              "texto": "I'm beat / Bummer / Awesome / No worries"
+            },
+            {
+              "texto": "dar voz propia"
+            }
+          ],
+          [
+            {
+              "texto": "Estrategia"
+            },
+            {
+              "texto": "I didn't catch that / Could you rephrase that?"
+            },
+            {
+              "texto": "conseguir que te lo repitan"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-50": {
+      "explicacion": {
+        "titulo": "Resolver un problema en inglés, sin asentir a ciegas",
+        "texto": "Esta clase integra todo el bloque. Cuando tienes un problema en un país extranjero: plantéalo con datos (The heating isn't working), pide una acción con cortesía (Could you send someone to fix it?), y si la otra persona usa jerga que no entiendes, no asientas: repite la expresión y pregunta What do you mean by…? Después confirma con tus palabras (So, to make sure I understand, …). Para resumir la semana usa bloques (To be honest…, The thing is…) y verbos con to o -ing (manage to, avoid + -ing)."
+      },
+      "patron": {
+        "texto": "Problema + petición + aclaración + confirmación:",
+        "formula": [
+          {
+            "texto": "The heating isn't working.",
+            "nota": "el problema, con un dato concreto"
+          },
+          {
+            "texto": "Could you send someone to fix it today?",
+            "nota": "petición cortés con Could you…?"
+          },
+          {
+            "texto": "Sorry, what do you mean by «dodgy»?",
+            "nota": "aclaración: repites la expresión que no entiendes"
+          },
+          {
+            "texto": "So, to make sure I understand, you will send a plumber?",
+            "nota": "confirmas lo que has entendido"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "What means «dodgy»?",
+          "correcto": "What does «dodgy» mean?",
+          "explicacion": "La pregunta necesita el auxiliar does y el verbo mean en forma base: What does … mean?"
+        },
+        {
+          "incorrecto": "Could you to fix the heating today?",
+          "correcto": "Could you fix the heating today?",
+          "explicacion": "Después de could va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara acaba de llegar a la ciudad y habla con su casero, Carlos.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Hello, Carlos. The heating isn't working, and my room is freezing.",
+            "traduccion": "Hola, Carlos. La calefacción no funciona y mi habitación está helada."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes, the heating is a bit dodgy, I know. I will send someone.",
+            "traduccion": "Sí, la calefacción es un poco «dodgy», ya lo sé. Enviaré a alguien."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Sorry, what do you mean by «dodgy»? I didn't catch that.",
+            "traduccion": "Perdone, ¿qué quiere decir con «dodgy»? No lo he entendido."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I mean it is unreliable. It breaks down a lot.",
+            "traduccion": "Quiero decir que no es fiable. Se estropea mucho."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Got it. So, to make sure I understand, you will send a plumber on Friday?",
+            "traduccion": "Entendido. Entonces, para asegurarme, ¿enviará a un fontanero el viernes?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué significa «dodgy» para el casero?",
+          "opciones": [
+            {
+              "es": "Poco fiable: se estropea a menudo."
+            },
+            {
+              "es": "Muy caro de arreglar."
+            },
+            {
+              "es": "Nuevo y moderno."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "El casero lo explica con «it is unreliable. It breaks down a lot»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Plantear"
+            },
+            {
+              "texto": "The … isn't working"
+            },
+            {
+              "texto": "The heating isn't working."
+            }
+          ],
+          [
+            {
+              "texto": "Pedir"
+            },
+            {
+              "texto": "Could you send someone to…?"
+            },
+            {
+              "texto": "Could you send someone to fix it?"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "What do you mean by…?"
+            },
+            {
+              "texto": "What do you mean by «dodgy»?"
+            }
+          ],
+          [
+            {
+              "texto": "Confirmar"
+            },
+            {
+              "texto": "So, to make sure I understand, …"
+            },
+            {
+              "texto": "So, you will come on Friday?"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisión independiente clases 46-50 (map v2 n10). Sin P0 abiertos.",
+      "P1: 'Mr Kane' (nombre fuera del reparto y no enseñado) sustituido por Carlos en clase 50; rúbrica 49/50 sin grupos de un solo nombre/palabra funcional (Monday, heating, fix) ni grupos solapados; se quitó 'managed to' como requisito no pedido en 49.",
+      "Clase 48 (nota del autor): los ítems de escucha ya no nombran en la consigna la palabra cuyo significado se pide (antes se respondían de memoria); preguntan cómo describe la hablante el lugar/tiempo y se necesita oír el audio; significado por contexto sigue en ítems de lectura.",
+      "Escritura larga 49/50: consigna 120-200 palabras, modelos 144/134 y aceptadas 121/125 (>=50% del mínimo del mapa), rango 100-300.",
+      "P2: ítems cortos de escritura con variantes aceptadas o rúbrica de 3 grupos; 'sure' ya no aparece como distractor de otro ítem; traducción 'chunga' sustituida por «dodgy»; error 46 corregido.",
+      "Nota de nivel (P2 no bloqueante): dificultad más baja que C1 en jerga/bloques."
+    ]
+  }
+}

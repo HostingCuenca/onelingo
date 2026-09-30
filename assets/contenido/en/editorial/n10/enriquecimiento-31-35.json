@@ -1,0 +1,766 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "classes": {
+    "en.n10.class-31": {
+      "explicacion": {
+        "titulo": "Nominalización: ideas compactadas en sustantivos",
+        "texto": "Los textos académicos prefieren sustantivos a verbos. En vez de «Cities grew rapidly» escriben «the rapid growth of cities»: el verbo (grow, adopt, reduce) o el adjetivo (aware, efficient) pasa a ser sustantivo (growth, adoption, reduction, awareness, efficiency), el adverbio se vuelve adjetivo (rapidly → rapid) y el sujeto original va detrás de of. Así una oración entera cabe en un bloque que sirve de sujeto de otra frase. Al leer, busca el sustantivo y pregúntate qué verbo o adjetivo había detrás."
+      },
+      "patron": {
+        "texto": "Oración verbal → bloque nominal + verbo nuevo:",
+        "formula": [
+          {
+            "texto": "Cities grew rapidly.",
+            "nota": "oración original: sujeto + verbo + adverbio"
+          },
+          {
+            "texto": "the rapid growth",
+            "nota": "verbo grow → sustantivo growth; el adverbio pasa a adjetivo"
+          },
+          {
+            "texto": "of cities",
+            "nota": "el sujeto original va después de of"
+          },
+          {
+            "texto": "put pressure on housing.",
+            "nota": "el bloque nominal ya es sujeto de una frase nueva"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The grow of cities is rapid.",
+          "correcto": "The growth of cities is rapid.",
+          "explicacion": "Grow es el verbo; el sustantivo es growth. No se puede usar el verbo como sustantivo."
+        },
+        {
+          "incorrecto": "The growth rapid of the company surprised us.",
+          "correcto": "The rapid growth of the company surprised us.",
+          "explicacion": "En inglés el adjetivo va antes del sustantivo; en español «crecimiento rápido» lo pone detrás."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo estudian para un examen y Leo no entiende una frase de un artículo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Ana, I can't follow this sentence: «The rapid adoption of the new method led to a significant reduction in errors.»",
+            "traduccion": "Ana, no entiendo esta frase: «La rápida adopción del nuevo método llevó a una reducción significativa de los errores.»"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It looks heavy, but it packs two stories into one. Teachers adopted the method quickly, and errors fell a lot.",
+            "traduccion": "Parece pesada, pero empaqueta dos historias en una. Los profesores adoptaron el método rápido y los errores bajaron mucho."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So «adoption» comes from «adopt», and «reduction» comes from «reduce»?",
+            "traduccion": "Entonces «adoption» viene de «adopt» y «reduction» de «reduce»."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Exactly. Find the noun, then ask yourself what the verb was.",
+            "traduccion": "Exacto. Busca el sustantivo y pregúntate cuál era el verbo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dos ideas empaqueta la frase del artículo?",
+          "opciones": [
+            {
+              "es": "Que los profesores adoptaron el método rápido y que los errores bajaron mucho."
+            },
+            {
+              "es": "Que los errores aumentaron porque el método era nuevo."
+            },
+            {
+              "es": "Que Leo adoptó un método y Ana lo redujo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana lo resume: «Teachers adopted the method quickly, and errors fell a lot»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo o adjetivo",
+          "Sustantivo",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "grow"
+            },
+            {
+              "texto": "growth"
+            },
+            {
+              "texto": "the growth of cities"
+            }
+          ],
+          [
+            {
+              "texto": "adopt"
+            },
+            {
+              "texto": "adoption"
+            },
+            {
+              "texto": "the adoption of a method"
+            }
+          ],
+          [
+            {
+              "texto": "assess"
+            },
+            {
+              "texto": "assessment"
+            },
+            {
+              "texto": "the assessment of essays"
+            }
+          ],
+          [
+            {
+              "texto": "aware"
+            },
+            {
+              "texto": "awareness"
+            },
+            {
+              "texto": "awareness of the risk"
+            }
+          ],
+          [
+            {
+              "texto": "efficient"
+            },
+            {
+              "texto": "efficiency"
+            },
+            {
+              "texto": "the efficiency of the system"
+            }
+          ],
+          [
+            {
+              "texto": "reduce"
+            },
+            {
+              "texto": "reduction"
+            },
+            {
+              "texto": "a reduction in costs"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-32": {
+      "explicacion": {
+        "titulo": "Valorar un estudio con el adjetivo preciso",
+        "texto": "Para juzgar un estudio, el inglés académico usa adjetivos que dicen cuánta confianza merece. Robust y compelling valoran bien (un resultado sólido; una evidencia que convence); flawed y questionable señalan debilidades; thorough elogia el cuidado del trabajo; tentative indica cautela del autor y conclusive dice que la cuestión queda cerrada. Acompaña siempre el adjetivo con una razón (because, since o dos puntos). Los adjetivos ingleses no varían: robust results, nunca «robusts results»."
+      },
+      "patron": {
+        "texto": "Lo que valoras + be + adjetivo + razón:",
+        "formula": [
+          {
+            "texto": "The results",
+            "nota": "lo que valoras: results, evidence, study, method…"
+          },
+          {
+            "texto": "are robust",
+            "nota": "be + adjetivo evaluativo; nunca toma -s"
+          },
+          {
+            "texto": "because the sample was large.",
+            "nota": "razón con because, since o dos puntos"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The results are robusts.",
+          "correcto": "The results are robust.",
+          "explicacion": "Los adjetivos ingleses no concuerdan en plural: robust sirve para uno o para varios."
+        },
+        {
+          "incorrecto": "The study is flaw because the sample was too small.",
+          "correcto": "The study is flawed because the sample was too small.",
+          "explicacion": "Flaw es el sustantivo (un fallo); para describir el estudio se necesita el adjetivo flawed."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comentan un estudio sobre café y memoria que leyeron para clase.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Did you read the coffee study? It says coffee improves memory.",
+            "traduccion": "¿Leíste el estudio del café? Dice que el café mejora la memoria."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I did, but the sample was tiny: only twelve students. I think the study is flawed.",
+            "traduccion": "Sí, pero la muestra era diminuta: solo doce estudiantes. Creo que el estudio tiene fallos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The authors say their results are tentative, though. They don't say it is conclusive.",
+            "traduccion": "Pero los autores dicen que sus resultados son provisionales. No dicen que sea concluyente."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fair enough. Then the evidence is interesting, but not compelling.",
+            "traduccion": "Es justo. Entonces la evidencia es interesante, pero no convincente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué cree Tom que el estudio tiene fallos?",
+          "opciones": [
+            {
+              "es": "Porque la muestra era de solo doce estudiantes."
+            },
+            {
+              "es": "Porque los autores dicen que sus resultados son concluyentes."
+            },
+            {
+              "es": "Porque el estudio no habla de la memoria."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom lo dice al principio: «the sample was tiny: only twelve students»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Adjetivo",
+          "Valoración",
+          "Razón típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "robust"
+            },
+            {
+              "texto": "sólido"
+            },
+            {
+              "texto": "a large sample; repeated results"
+            }
+          ],
+          [
+            {
+              "texto": "flawed"
+            },
+            {
+              "texto": "con fallos"
+            },
+            {
+              "texto": "a biased sample"
+            }
+          ],
+          [
+            {
+              "texto": "compelling"
+            },
+            {
+              "texto": "convincente"
+            },
+            {
+              "texto": "independent teams agree"
+            }
+          ],
+          [
+            {
+              "texto": "tentative"
+            },
+            {
+              "texto": "provisional"
+            },
+            {
+              "texto": "a small first study"
+            }
+          ],
+          [
+            {
+              "texto": "thorough"
+            },
+            {
+              "texto": "minucioso"
+            },
+            {
+              "texto": "every step is checked"
+            }
+          ],
+          [
+            {
+              "texto": "conclusive"
+            },
+            {
+              "texto": "concluyente"
+            },
+            {
+              "texto": "nothing else is needed"
+            }
+          ],
+          [
+            {
+              "texto": "questionable"
+            },
+            {
+              "texto": "dudoso"
+            },
+            {
+              "texto": "unclear questions"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-33": {
+      "explicacion": {
+        "titulo": "Leer un abstract: cuatro campos y una postura",
+        "texto": "Un abstract resume un estudio en un orden fijo: objetivo (aim: qué se quería averiguar), método (quién, cuántos, cuánto tiempo), resultados (qué se encontró, con cifras) y conclusión (qué significa y qué límites tiene). La postura del autor se lee en el lenguaje: suggest, may o could indican cautela; show, prove o will indican seguridad. Lee primero el objetivo y la última frase: ahí está la idea central y hasta dónde se atreve a llegar el autor."
+      },
+      "patron": {
+        "texto": "Aim → Method → Results → Conclusion:",
+        "formula": [
+          {
+            "texto": "The aim was to examine whether…",
+            "nota": "objetivo: la pregunta del estudio, con whether"
+          },
+          {
+            "texto": "We followed 240 adolescents for a year.",
+            "nota": "método: quién, cuántos y cuánto tiempo"
+          },
+          {
+            "texto": "They slept fifty minutes longer.",
+            "nota": "resultados: lo que se midió, con cifras"
+          },
+          {
+            "texto": "These findings suggest that it may help.",
+            "nota": "conclusión y postura: suggest + may = cautela"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The authors prove that later start times help all teenagers.",
+          "correcto": "The authors suggest that later start times may help some teenagers.",
+          "explicacion": "Un abstract no exagera: prove y all afirman más de lo que el estudio permite; suggest y may mantienen la cautela."
+        },
+        {
+          "incorrecto": "The aim of the study is examine whether sleep matters.",
+          "correcto": "The aim of the study was to examine whether sleep matters.",
+          "explicacion": "Después de aim se usa to + verbo, y el abstract narra el estudio en pasado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos preparan una exposición y Carlos solo tiene dos minutos para entender un artículo.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I only have two minutes. What is the abstract about?",
+            "traduccion": "Solo tengo dos minutos. ¿De qué trata el abstract?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Read the aim and the last sentence. The aim says they examined whether later start times help adolescents.",
+            "traduccion": "Lee el objetivo y la última frase. El objetivo dice que examinaron si las horas de inicio más tardías ayudan a los adolescentes."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the last sentence?",
+            "traduccion": "¿Y la última frase?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It says the findings suggest a benefit, but further research is needed. Their stance is cautious.",
+            "traduccion": "Dice que los hallazgos sugieren un beneficio, pero que hace falta más investigación. Su postura es cauta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué dice Sara que los autores son cautos?",
+          "opciones": [
+            {
+              "es": "Porque dicen que los hallazgos sugieren un beneficio y piden más investigación."
+            },
+            {
+              "es": "Porque dicen que los hallazgos prueban un beneficio para todos."
+            },
+            {
+              "es": "Porque no explican el objetivo del estudio."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara lo explica con la última frase: «the findings suggest a benefit, but further research is needed»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Campo",
+          "Pregunta que responde",
+          "Lenguaje típico"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Aim"
+            },
+            {
+              "texto": "¿Qué se quería averiguar?"
+            },
+            {
+              "texto": "examine whether…"
+            }
+          ],
+          [
+            {
+              "texto": "Method"
+            },
+            {
+              "texto": "¿Quién, cuántos, cuánto tiempo?"
+            },
+            {
+              "texto": "We followed 240 students…"
+            }
+          ],
+          [
+            {
+              "texto": "Results"
+            },
+            {
+              "texto": "¿Qué se encontró?"
+            },
+            {
+              "texto": "…slept longer; …reported less stress"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusion"
+            },
+            {
+              "texto": "¿Qué significa y qué límites tiene?"
+            },
+            {
+              "texto": "suggest; may; further research"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-34": {
+      "explicacion": {
+        "titulo": "Parafrasear y atribuir: los verbos de cita",
+        "texto": "Parafrasear es contar la idea de otra persona con tu propia estructura y tus palabras, y atribuirla siempre. El verbo de cita muestra cómo te sitúas: according to (con to) introduce una fuente neutral; argue y maintain presentan una tesis defendida; suggest es cauteloso; claim toma distancia y acknowledge admite un límite. Tras el verbo va that + oración. Para condensar, usa nominalizaciones («cycling grew» pasa a «the growth in cycling») y no atribuyas dos veces: According to… y argue juntos sobran."
+      },
+      "patron": {
+        "texto": "Fuente + verbo de cita + that + idea condensada:",
+        "formula": [
+          {
+            "texto": "According to the report,",
+            "nota": "atribución neutral: «según…»"
+          },
+          {
+            "texto": "the authors argue that",
+            "nota": "verbo de cita + that + oración"
+          },
+          {
+            "texto": "the growth in cycling",
+            "nota": "nominalización que condensa «cycling grew»"
+          },
+          {
+            "texto": "has reduced car traffic.",
+            "nota": "idea parafraseada con tus palabras"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to the authors, they argue that the plan works.",
+          "correcto": "The authors argue that the plan works.",
+          "explicacion": "Según los autores y «ellos sostienen» repiten la atribución; basta con una de las dos."
+        },
+        {
+          "incorrecto": "According the report, bicycle use has tripled.",
+          "correcto": "According to the report, bicycle use has tripled.",
+          "explicacion": "En inglés es according to; en español «según» no lleva preposición y por eso se olvida el to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan un ensayo y Mia tiene que parafrasear un párrafo en sesenta palabras.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I have to paraphrase this paragraph in sixty words, and I have copied half of it.",
+            "traduccion": "Tengo que parafrasear este párrafo en sesenta palabras y he copiado la mitad."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Change the structure, not only the words. And say who said it: according to the report, or the authors argue that.",
+            "traduccion": "Cambia la estructura, no solo las palabras. Y di quién lo dijo: según el informe, o los autores sostienen que."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then: According to the survey, the new timetable led to a reduction in delays.",
+            "traduccion": "Entonces: Según la encuesta, el nuevo horario llevó a una reducción de los retrasos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Good. Use claim only if you doubt it. If you agree, use argue or maintain.",
+            "traduccion": "Bien. Usa claim solo si dudas. Si estás de acuerdo, usa argue o maintain."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuándo aconseja Tom usar claim?",
+          "opciones": [
+            {
+              "es": "Cuando quien escribe duda de lo que dice la fuente."
+            },
+            {
+              "es": "Cuando la fuente es un informe oficial."
+            },
+            {
+              "es": "Cuando se quiere copiar el texto original."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «Use claim only if you doubt it»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo de cita",
+          "Matiz",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "according to"
+            },
+            {
+              "texto": "fuente neutral"
+            },
+            {
+              "texto": "According to the report, …"
+            }
+          ],
+          [
+            {
+              "texto": "suggest"
+            },
+            {
+              "texto": "cauteloso"
+            },
+            {
+              "texto": "The authors suggest that …"
+            }
+          ],
+          [
+            {
+              "texto": "argue"
+            },
+            {
+              "texto": "defiende una tesis"
+            },
+            {
+              "texto": "The authors argue that …"
+            }
+          ],
+          [
+            {
+              "texto": "maintain"
+            },
+            {
+              "texto": "sostiene con firmeza"
+            },
+            {
+              "texto": "Planners maintain that …"
+            }
+          ],
+          [
+            {
+              "texto": "claim"
+            },
+            {
+              "texto": "toma distancia"
+            },
+            {
+              "texto": "Critics claim that …"
+            }
+          ],
+          [
+            {
+              "texto": "acknowledge"
+            },
+            {
+              "texto": "admite un límite"
+            },
+            {
+              "texto": "The authors acknowledge that …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-35": {
+      "explicacion": {
+        "titulo": "Resumir un estudio: pasiva impersonal y cautela",
+        "texto": "Al resumir un estudio para tu grupo, sigue el orden objetivo, método, resultado y límite. Briefly y overall ayudan a condensar. Para presentar opiniones o hallazgos sin decir quién los sostiene, usa la pasiva impersonal: It is assumed / believed / thought that… o It has been shown that…, con el sujeto it obligatorio (en español basta «se piensa que»). Cuando alguien pregunte si se puede extender el resultado, responde con prudencia: It is difficult to generalise… y conclusión tentative."
+      },
+      "patron": {
+        "texto": "It + be + participio + that + idea:",
+        "formula": [
+          {
+            "texto": "It is widely assumed",
+            "nota": "it + be + participio: opinión general sin decir quién"
+          },
+          {
+            "texto": "that teenagers need more sleep.",
+            "nota": "that + oración completa"
+          },
+          {
+            "texto": "The effect is thought to be small.",
+            "nota": "variante personal: sujeto + be + participio + to + verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It has shown that later start times improve attention.",
+          "correcto": "It has been shown that later start times improve attention.",
+          "explicacion": "En la pasiva impersonal falta been: es has been + participio, no has + participio."
+        },
+        {
+          "incorrecto": "Is thought that the effect is small.",
+          "correcto": "It is thought that the effect is small.",
+          "explicacion": "En inglés la oración necesita sujeto: aunque en español se dice «se piensa que», aquí hay que escribir it."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara presenta un estudio al grupo y Carlos le hace una pregunta sobre lo que encontraron.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Briefly, the aim was to compare two groups of students over eight weeks.",
+            "traduccion": "Brevemente, el objetivo era comparar dos grupos de estudiantes durante ocho semanas."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And what was the result?",
+            "traduccion": "¿Y cuál fue el resultado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Overall, the group with less screen time concentrated better. It has been shown before that screens affect attention.",
+            "traduccion": "En conjunto, el grupo con menos pantalla se concentró mejor. Ya se ha demostrado antes que las pantallas afectan la atención."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Can we generalise that to every school?",
+            "traduccion": "¿Podemos generalizar eso a todos los colegios?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Not really. It is difficult to generalise from one school, so the conclusion is tentative.",
+            "traduccion": "No exactamente. Es difícil generalizar a partir de un colegio, así que la conclusión es provisional."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no se puede generalizar el resultado?",
+          "opciones": [
+            {
+              "es": "Porque el estudio se hizo en un solo colegio."
+            },
+            {
+              "es": "Porque los estudiantes no quisieron participar."
+            },
+            {
+              "es": "Porque el grupo con menos pantalla se concentró peor."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara lo dice: «It is difficult to generalise from one school»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Uso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "It is assumed / believed that…"
+            },
+            {
+              "texto": "opinión general"
+            },
+            {
+              "texto": "It is widely assumed that…"
+            }
+          ],
+          [
+            {
+              "texto": "It has been shown that…"
+            },
+            {
+              "texto": "resultado establecido"
+            },
+            {
+              "texto": "It has been shown that…"
+            }
+          ],
+          [
+            {
+              "texto": "X is thought to + verbo"
+            },
+            {
+              "texto": "variante personal"
+            },
+            {
+              "texto": "The effect is thought to be small."
+            }
+          ],
+          [
+            {
+              "texto": "It is difficult to generalise…"
+            },
+            {
+              "texto": "límite del estudio"
+            },
+            {
+              "texto": "…from one school"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C33: aceptadas de p0 limpiadas de sujetos singulares incompatibles con 'improve'; r0 natural (before drawing conclusions); rubrica e3 ampliada con variantes.",
+      "C34: el dialogo de situacion revelaba la respuesta de p0 (paraphrase con growth in cycling): cambiado de tema; p0 declara la fuente; p1 ya no repite la frase de la lectura de e3; e3 fuente 195 palabras y sin 'Ruiz' (nombre no ensenado); error 2 sustituido por 'According the report' (antes 'argue about that', implausible); e0/e1 sin distractores inverosimiles ni paraphrase literal.",
+      "C34 rubrica e3: los dos grupos de verbo de cita son amplios a proposito (no se puede exigir verbos distintos con grupos); se acepta cualquier par de verbos tomados de la ensenanza.",
+      "C35: modelo e3 alargado a ~100 palabras (politica 50 % del mapa), rubrica [70,200], variantes 'is thought to'; feedback de p0 corregido (citaba generalise que no esta en el audio).",
+      "Sin nombres propios ni interjecciones fuera de reparto ni de lo ensenado en el bloque."
+    ]
+  }
+}

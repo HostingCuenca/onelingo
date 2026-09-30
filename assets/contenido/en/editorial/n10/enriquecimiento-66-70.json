@@ -1,0 +1,695 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "classes": {
+    "en.n10.class-66": {
+      "explicacion": {
+        "titulo": "Ganar tiempo sin perder el hilo",
+        "texto": "Cuando te hacen una pregunta inesperada, no hace falta responder al instante: hay frases para ganar tiempo. Las informales (Hang on, let me think; Hold on) van bien entre amigos. Las neutras (That's a tricky question; Let me see) sirven casi siempre. Las formales (Allow me a moment to consider that) se usan en entrevistas y reuniones. Off the top of my head y offhand avisan de que das un dato de memoria, sin comprobar. Elige la frase según el registro y el momento."
+      },
+      "patron": {
+        "texto": "Frase para ganar tiempo + respuesta:",
+        "formula": [
+          {
+            "texto": "That's a tricky question;",
+            "nota": "valoras la pregunta: neutro"
+          },
+          {
+            "texto": "let me think for a second.",
+            "nota": "pides tiempo: neutro o informal"
+          },
+          {
+            "texto": "Off the top of my head, about twenty.",
+            "nota": "das un dato aproximado de memoria"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Let me to think for a second.",
+          "correcto": "Let me think for a second.",
+          "explicacion": "Tras let me el verbo va en forma base, sin to."
+        },
+        {
+          "incorrecto": "Wait me a moment, please.",
+          "correcto": "Give me a moment, please.",
+          "explicacion": "En inglés no se dice wait me: se usa Give me a moment o Hang on."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia practica una entrevista con Leo y le hace dos preguntas difíciles.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "How many people took part in the final survey?",
+            "traduccion": "¿Cuántas personas participaron en la encuesta final?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Hang on, let me think. Off the top of my head, about two hundred, but I can check.",
+            "traduccion": "Espera, déjame pensar. De memoria, unas doscientas, pero puedo comprobarlo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And what do you consider the main weakness?",
+            "traduccion": "¿Y cuál consideras el principal punto débil?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That's a tricky question. Give me a moment to gather my thoughts.",
+            "traduccion": "Es una pregunta complicada. Dame un momento para ordenar mis ideas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo dice «Off the top of my head»?",
+          "opciones": [
+            {
+              "es": "Porque da una cifra aproximada y ofrece comprobarla."
+            },
+            {
+              "es": "Porque no quiere contestar."
+            },
+            {
+              "es": "Porque no ha oído la pregunta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo da «about two hundred» de memoria y añade «but I can check»: es un dato aproximado, no comprobado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Registro",
+          "Frase",
+          "Cuándo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Informal"
+            },
+            {
+              "texto": "Hang on, let me think."
+            },
+            {
+              "texto": "Con amigos o compañeros"
+            }
+          ],
+          [
+            {
+              "texto": "Neutro"
+            },
+            {
+              "texto": "That's a tricky question."
+            },
+            {
+              "texto": "Casi siempre, antes de responder"
+            }
+          ],
+          [
+            {
+              "texto": "Formal"
+            },
+            {
+              "texto": "Allow me a moment to consider that."
+            },
+            {
+              "texto": "Entrevista, reunión o presentación"
+            }
+          ],
+          [
+            {
+              "texto": "Dato aproximado"
+            },
+            {
+              "texto": "Off the top of my head, …"
+            },
+            {
+              "texto": "Al dar una cifra sin comprobar"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-67": {
+      "explicacion": {
+        "titulo": "Reparar y reformular sobre la marcha",
+        "texto": "Cuando hablas de improviso, te equivocarás o no recordarás una palabra; lo importante es no quedarte parado. Para corregirte usa or rather, sorry, I meant… o let me rephrase that. Si olvidas una palabra, descríbela: the tool you use to…, someone who…, the place where…, it is like a… but for… Esa técnica se llama circunlocución y permite seguir hablando con normalidad hasta que el otro te ayuda o recuerdas la palabra."
+      },
+      "patron": {
+        "texto": "Reparación y circunlocución:",
+        "formula": [
+          {
+            "texto": "We meet on Tuesday,",
+            "nota": "lo que dijiste"
+          },
+          {
+            "texto": "or rather, on Wednesday.",
+            "nota": "corriges con precisión"
+          },
+          {
+            "texto": "It is the tool you use to hold papers together.",
+            "nota": "describes la palabra que no recuerdas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is a tool for to hold papers together.",
+          "correcto": "It is a tool you use to hold papers together.",
+          "explicacion": "No se dice for to: usa the tool you use to + verbo, o for + verbo en -ing."
+        },
+        {
+          "incorrecto": "We start on Friday, or better said, on Saturday.",
+          "correcto": "We start on Friday, or rather, on Saturday.",
+          "explicacion": "«Mejor dicho» no se traduce literalmente: en inglés es or rather."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos no recuerda una palabra en la oficina y Sara le ayuda.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Sara, could you pass me the... sorry, I've forgotten the word. It's the tool you use to hold papers together.",
+            "traduccion": "Sara, ¿puedes pasarme la... perdona, he olvidado la palabra. Es la herramienta que se usa para sujetar papeles."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Do you mean the stapler?",
+            "traduccion": "¿Te refieres a la grapadora?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Exactly. Thanks! Now, the meeting is on Tuesday, or rather, on Wednesday.",
+            "traduccion": "Exacto. ¡Gracias! Y la reunión es el martes, o mejor dicho, el miércoles."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Wednesday? Let me write that down.",
+            "traduccion": "¿El miércoles? Déjame apuntarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Carlos cuando olvida la palabra?",
+          "opciones": [
+            {
+              "es": "Describe el objeto con rodeos hasta que Sara lo adivina."
+            },
+            {
+              "es": "Cambia de tema y se olvida del objeto."
+            },
+            {
+              "es": "Busca la palabra en el diccionario."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «It's the tool you use to hold papers together»: describe la función y Sara dice stapler."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estrategia",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Corregir"
+            },
+            {
+              "texto": "…, or rather, …"
+            },
+            {
+              "texto": "On Monday, or rather, on Tuesday."
+            }
+          ],
+          [
+            {
+              "texto": "Rectificar"
+            },
+            {
+              "texto": "Sorry, I meant …"
+            },
+            {
+              "texto": "Sorry, I meant the blue folder."
+            }
+          ],
+          [
+            {
+              "texto": "Reformular"
+            },
+            {
+              "texto": "Let me rephrase that: …"
+            },
+            {
+              "texto": "Let me rephrase that: it costs too much."
+            }
+          ],
+          [
+            {
+              "texto": "Describir un objeto"
+            },
+            {
+              "texto": "the tool you use to …"
+            },
+            {
+              "texto": "the tool you use to cut paper"
+            }
+          ],
+          [
+            {
+              "texto": "Describir una persona"
+            },
+            {
+              "texto": "someone who …"
+            },
+            {
+              "texto": "someone who fixes leaking pipes"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-68": {
+      "explicacion": {
+        "titulo": "Las cuatro partes de una respuesta improvisada",
+        "texto": "Una respuesta improvisada ordenada tiene cuatro partes. Primero el punto: tu postura en una frase (My point is that…). Después la razón: por qué piensas así (The main reason is that…). Luego un ejemplo que la apoye (For example…). Por último el cierre, que repite el punto (In conclusion…). Si te desvías, reconócelo y vuelve: Sorry, I'm rambling; let me go back to my point. Al escuchar, busca cada parte y fíjate en cuál falta."
+      },
+      "patron": {
+        "texto": "Punto + razón + ejemplo + cierre:",
+        "formula": [
+          {
+            "texto": "My point is that…",
+            "nota": "punto: tu postura"
+          },
+          {
+            "texto": "The main reason is that…",
+            "nota": "razón: por qué"
+          },
+          {
+            "texto": "For example, …",
+            "nota": "ejemplo: un caso concreto"
+          },
+          {
+            "texto": "In conclusion, …",
+            "nota": "cierre: repites el punto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The main reason is because they make streets safer.",
+          "correcto": "The main reason is that they make streets safer.",
+          "explicacion": "Tras The reason is se usa that, no because: «la razón es porque» es un calco."
+        },
+        {
+          "incorrecto": "Briefly said, bike lanes are worth it.",
+          "correcto": "Briefly, bike lanes are worth it.",
+          "explicacion": "En inglés no se dice «briefly said»: basta con briefly o in short."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le hace a Tom una pregunta sorpresa en clase.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, surprise question: should cities build more bike lanes?",
+            "traduccion": "Tom, pregunta sorpresa: ¿deberían las ciudades construir más carriles bici?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "My point is yes. The main reason is that they make streets safer.",
+            "traduccion": "Mi punto es que sí. La razón principal es que hacen las calles más seguras."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Can you give an example?",
+            "traduccion": "¿Puedes dar un ejemplo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "For example, accidents fell in my neighbourhood. In conclusion, they are worth the space.",
+            "traduccion": "Por ejemplo, los accidentes bajaron en mi barrio. En conclusión, valen el espacio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el ejemplo de Tom?",
+          "opciones": [
+            {
+              "es": "Que los accidentes bajaron en su barrio."
+            },
+            {
+              "es": "Que los carriles hacen las calles más seguras."
+            },
+            {
+              "es": "Que los carriles valen el espacio que ocupan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "El ejemplo empieza con «For example»: los accidentes bajaron en su barrio; la razón y el cierre son otras partes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Punto"
+            },
+            {
+              "texto": "My point is that…"
+            },
+            {
+              "texto": "My point is that parks matter."
+            }
+          ],
+          [
+            {
+              "texto": "Razón"
+            },
+            {
+              "texto": "The main reason is that…"
+            },
+            {
+              "texto": "The main reason is that they help people relax."
+            }
+          ],
+          [
+            {
+              "texto": "Ejemplo"
+            },
+            {
+              "texto": "For example, …"
+            },
+            {
+              "texto": "For example, my street has a small park."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "In conclusion, …"
+            },
+            {
+              "texto": "In conclusion, cities need more parks."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-69": {
+      "explicacion": {
+        "titulo": "Un minuto, un tema",
+        "texto": "Cuando te hacen una pregunta sorpresa y tienes un minuto, sigue siempre el mismo orden: gana tiempo (That's a tricky one), elige una postura y comprométete con ella (My stance is that…), da una razón (The main reason is that…), añade un ejemplo (For example…) y cierra en pocas palabras (So, in short…). Si te desvías, repara (Sorry, I'm rambling). Vigila el reloj y deja siempre unos segundos para el cierre. Una postura clara vale más que una respuesta perfecta."
+      },
+      "patron": {
+        "texto": "Ganar tiempo + postura + razón + ejemplo + cierre:",
+        "formula": [
+          {
+            "texto": "That's a tricky one;",
+            "nota": "ganas tiempo"
+          },
+          {
+            "texto": "my stance is that…",
+            "nota": "postura: te comprometes"
+          },
+          {
+            "texto": "The main reason is that… For example, …",
+            "nota": "razón + ejemplo"
+          },
+          {
+            "texto": "So, in short, …",
+            "nota": "cierre breve"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My stance is that I am agree with generalists.",
+          "correcto": "My stance is that I agree with generalists.",
+          "explicacion": "Agree es un verbo, no un adjetivo: se dice I agree, no I am agree."
+        },
+        {
+          "incorrecto": "I must commit me to one stance.",
+          "correcto": "I must commit to one stance.",
+          "explicacion": "Commit to no lleva pronombre reflexivo: commit to one stance."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le da a Tom una pregunta sorpresa y le pone un minuto de reloj.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Ready? Your topic is: specialist or generalist? You have sixty seconds.",
+            "traduccion": "¿Listo? Tu tema es: ¿especialista o generalista? Tienes sesenta segundos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That's a tricky one. My stance is that a generalist has more options.",
+            "traduccion": "Es complicado. Mi postura es que un generalista tiene más opciones."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Why?",
+            "traduccion": "¿Por qué?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The main reason is that jobs change fast. For example, my cousin trained as a nurse and now manages a clinic. So, in short, a generalist adapts.",
+            "traduccion": "La razón principal es que los empleos cambian rápido. Por ejemplo, mi prima se formó como enfermera y ahora dirige una clínica. En resumen, un generalista se adapta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué postura defiende Tom?",
+          "opciones": [
+            {
+              "es": "Que un generalista tiene más opciones."
+            },
+            {
+              "es": "Que un especialista gana más dinero."
+            },
+            {
+              "es": "Que no hay diferencia entre ambos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «My stance is that a generalist has more options»: esa es su postura."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Ganar tiempo"
+            },
+            {
+              "texto": "That's a tricky one."
+            },
+            {
+              "texto": "That's a tricky one; let me think."
+            }
+          ],
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "My stance is that…"
+            },
+            {
+              "texto": "My stance is that specialists earn more."
+            }
+          ],
+          [
+            {
+              "texto": "Razón y ejemplo"
+            },
+            {
+              "texto": "The main reason is that… For example, …"
+            },
+            {
+              "texto": "For example, my uncle is an engineer."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "So, in short, …"
+            },
+            {
+              "texto": "So, in short, I prefer to specialise."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-70": {
+      "explicacion": {
+        "titulo": "Ronda de preguntas sorpresa",
+        "texto": "En una ronda de preguntas sorpresa necesitas usar todo lo aprendido en el bloque: frases para ganar tiempo (That's a tricky one; Let me think), respuesta estructurada con punto, razón, ejemplo y cierre, reparación si te equivocas (Sorry, I meant…) y reformulación si dudas (Let me rephrase that). Mantén la compostura: si dudas, reformula en lugar de detenerte. Al final, recapitula en una frase para dejar clara tu idea."
+      },
+      "patron": {
+        "texto": "Responder, reparar y recapitular:",
+        "formula": [
+          {
+            "texto": "That's a tricky one; my stance is that…",
+            "nota": "ganar tiempo y declarar la postura"
+          },
+          {
+            "texto": "The main reason is that… For example, …",
+            "nota": "razón + ejemplo"
+          },
+          {
+            "texto": "Sorry, I meant… / Let me rephrase that: …",
+            "nota": "reparar o reformular"
+          },
+          {
+            "texto": "To recap, …",
+            "nota": "cerrar con una síntesis"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Instead to stop, I rephrase my answer.",
+          "correcto": "Instead of stopping, I rephrase my answer.",
+          "explicacion": "Instead of va seguido de -ing: instead of stopping."
+        },
+        {
+          "incorrecto": "Let me recap you the main points.",
+          "correcto": "Let me recap the main points for you.",
+          "explicacion": "Recap no lleva un complemento de persona directo: el destinatario va con for you."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara presenta una ronda sorpresa y Leo es el concursante.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Welcome to the surprise round. Contestant Leo, your question: should everyone learn to cook?",
+            "traduccion": "Bienvenidos a la ronda sorpresa. Concursante Leo, tu pregunta: ¿debería todo el mundo aprender a cocinar?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That's a tricky one. My stance is yes, because it saves money. For example, I cook on Sundays. Sorry, I meant Saturdays.",
+            "traduccion": "Es complicado. Mi postura es que sí, porque ahorra dinero. Por ejemplo, yo cocino los domingos. Perdón, quería decir los sábados."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thank you. Now rephrase your answer in one sentence.",
+            "traduccion": "Gracias. Ahora reformula tu respuesta en una frase."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Instead of eating out, cooking saves money and builds a healthy habit.",
+            "traduccion": "En lugar de comer fuera, cocinar ahorra dinero y crea un hábito saludable."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué corrige Leo?",
+          "opciones": [
+            {
+              "es": "Que cocina los sábados, no los domingos."
+            },
+            {
+              "es": "Que cocina todos los días."
+            },
+            {
+              "es": "Que no cocina nunca."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «Sorry, I meant Saturdays»: corrige el día tras haber dicho Sundays."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Qué haces",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Empieza la pregunta"
+            },
+            {
+              "texto": "Ganas tiempo y tomas postura"
+            },
+            {
+              "texto": "That's a tricky one; my stance is yes."
+            }
+          ],
+          [
+            {
+              "texto": "Te equivocas"
+            },
+            {
+              "texto": "Reparas"
+            },
+            {
+              "texto": "Sorry, I meant Saturday."
+            }
+          ],
+          [
+            {
+              "texto": "Dudas o no te explicas"
+            },
+            {
+              "texto": "Reformulas"
+            },
+            {
+              "texto": "Let me rephrase that: …"
+            }
+          ],
+          [
+            {
+              "texto": "Terminas"
+            },
+            {
+              "texto": "Recapitulas"
+            },
+            {
+              "texto": "To recap, cooking saves money."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C66-70 revisadas contra el mapa v2: fase, concepto, canDo y tarea de evaluación (clasificaciones y escritura larga repartidas en ítems).",
+      "C66: el relacionar de evaluación mezclaba categorías ambiguas ('Muy informal' vs 'Informal o neutro'); rehecho con cinco etiquetas distintas.",
+      "C69/C70: rúbricas sin 'because' suelto; en C70 se separan reparación y reformulación en grupos distintos (antes bastaba una). C69: escucha de evaluación reformulada para que exija escuchar (dirección del cambio time→money); error frecuente con corrección mínima (I agree).",
+      "C70: audio de práctica sin el sinsentido 'closed the coast'; consigna de ordenar traducida fielmente (recapitular). C68: nombre del perro cambiado a Rex (personaje del curso); repaso sin reutilizar el estímulo 'I'm rambling'.",
+      "Vocabulario repetido entre clases vecinas (honestly, briefly, surprise) con traducciones coherentes. Nombres propios e interjecciones: sin pendientes."
+    ]
+  }
+}

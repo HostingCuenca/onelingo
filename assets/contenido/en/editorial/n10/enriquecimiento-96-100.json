@@ -1,0 +1,744 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n10",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n10.class-96": {
+      "explicacion": {
+        "titulo": "Leer un artículo de opinión como analista",
+        "texto": "Para analizar un texto largo de opinión no lo leas solo para entenderlo: interrógalo. ¿Cuál es la tesis, la afirmación central? ¿Qué postura muestran los verbos y las cautelas (I would argue, tend to)? ¿Dónde concede el autor un punto antes de rebatirlo? ¿Qué recurso usa (una pregunta retórica, un contraste, un ejemplo)? Y, sobre todo, ¿qué implica sin decirlo? Localiza cada respuesta en una frase concreta del texto: sin evidencia, tu análisis es solo una opinión."
+      },
+      "patron": {
+        "texto": "Analizar un texto de opinión:",
+        "formula": [
+          {
+            "texto": "The thesis is that…",
+            "nota": "la afirmación central del autor"
+          },
+          {
+            "texto": "The author concedes…, but argues…",
+            "nota": "concesión y refutación"
+          },
+          {
+            "texto": "The rhetorical question pushes the reader to…",
+            "nota": "el recurso y su efecto"
+          },
+          {
+            "texto": "The text implies that…",
+            "nota": "lo que se sugiere sin decirlo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The writer concedes that the parents have right.",
+          "correcto": "The writer concedes that the parents are right.",
+          "explicacion": "Calco de «tener razón»: en inglés se dice be right, no have right."
+        },
+        {
+          "incorrecto": "The author wants that the parents change their minds.",
+          "correcto": "The author wants the parents to change their minds.",
+          "explicacion": "Tras want no se usa that: want + alguien + to + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo leen un artículo de opinión en clase y subrayan la tesis y la concesión.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "What is the thesis? I think the writer argues that children should be bored sometimes.",
+            "traduccion": "¿Cuál es la tesis? Creo que el autor defiende que los niños deberían aburrirse a veces."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. And look: Much as I understand the worry. That is a concession.",
+            "traduccion": "Exacto. Y mira: Aunque entiendo la preocupación. Eso es una concesión."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "So the writer admits a point, but does not change the stance.",
+            "traduccion": "Entonces el autor admite un punto, pero no cambia de postura."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Exactly. And the last question is rhetorical: it pushes us to agree.",
+            "traduccion": "Justo. Y la última pregunta es retórica: nos empuja a estar de acuerdo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace el autor con la frase «Much as I understand the worry»?",
+          "opciones": [
+            {
+              "es": "Concede un punto sin cambiar su postura."
+            },
+            {
+              "es": "Cambia de opinión por completo."
+            },
+            {
+              "es": "Pregunta a los lectores qué piensan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana resume que el autor «admits a point, but does not change the stance»: conceder prepara la refutación."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pregunta",
+          "Dónde mirar",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "¿Cuál es la tesis?"
+            },
+            {
+              "texto": "la primera parte"
+            },
+            {
+              "texto": "I would argue that…"
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué concede?"
+            },
+            {
+              "texto": "Much as / Admittedly"
+            },
+            {
+              "texto": "Much as I understand the worry, …"
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué recurso usa?"
+            },
+            {
+              "texto": "preguntas y contrastes"
+            },
+            {
+              "texto": "What, then, should adults do?"
+            }
+          ],
+          [
+            {
+              "texto": "¿Qué implica?"
+            },
+            {
+              "texto": "la última frase"
+            },
+            {
+              "texto": "…may find it hard to sit with anything else."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-97": {
+      "explicacion": {
+        "titulo": "Editar con precisión, capa por capa",
+        "texto": "Editar con precisión es revisar por capas y elegir siempre el cambio mínimo. Mira (1) los tiempos: ¿qué pasó antes?; (2) el registro: ¿a quién escribes?; (3) la cohesión: ¿a qué se refieren this y such?; (4) los conectores: ¿suman, contrastan o dan resultado?; y (5) la concisión: ¿sobra algo? Ante cada marca, nombra la capa, decide el arreglo más pequeño y relee la frase completa para comprobar que el tono sigue siendo el tuyo."
+      },
+      "patron": {
+        "texto": "Corregir una marca de error:",
+        "formula": [
+          {
+            "texto": "Locate the error,",
+            "nota": "encuentras la palabra o relación que falla"
+          },
+          {
+            "texto": "name the layer,",
+            "nota": "tiempo, registro, cohesión, conector o concisión"
+          },
+          {
+            "texto": "choose the smallest fix,",
+            "nota": "cambias lo mínimo que arregla el problema"
+          },
+          {
+            "texto": "read the sentence again.",
+            "nota": "compruebas que suena natural y conserva tu tono"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "In the other hand, the cost was lower.",
+          "correcto": "On the other hand, the cost was lower.",
+          "explicacion": "El conector fijo es on the other hand; la preposición in es un calco de «por otra parte»."
+        },
+        {
+          "incorrecto": "We discussed about the results.",
+          "correcto": "We discussed the results.",
+          "explicacion": "Discuss ya incluye la idea de «sobre»: es transitivo y no admite about."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom revisan el borrador de un informe escolar con doce marcas de error.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Mark nine says: The roads were closed; however, the trucks arrived late.",
+            "traduccion": "La marca nueve dice: Las carreteras estaban cortadas; sin embargo, los camiones llegaron tarde."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "However marks contrast, but this is a result. We need a different connector.",
+            "traduccion": "However marca contraste, pero esto es un resultado. Necesitamos otro conector."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So: The roads were closed; as a result, the trucks arrived late?",
+            "traduccion": "Entonces: Las carreteras estaban cortadas; como resultado, los camiones llegaron tarde, ¿no?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Exactly. And mark ten is wordy: due to the fact that becomes because.",
+            "traduccion": "Justo. Y la marca diez es prolija: due to the fact that pasa a because."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué es incorrecto «however» en la marca nueve?",
+          "opciones": [
+            {
+              "es": "Porque expresa contraste y la frase expresa un resultado."
+            },
+            {
+              "es": "Porque however no se puede usar en un informe."
+            },
+            {
+              "es": "Porque falta una coma detrás de however."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica que «however marks contrast, but this is a result»: el conector debe respetar la lógica."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Capa",
+          "Pregunta",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tiempo"
+            },
+            {
+              "texto": "¿qué pasó antes?"
+            },
+            {
+              "texto": "had already finished"
+            }
+          ],
+          [
+            {
+              "texto": "Registro"
+            },
+            {
+              "texto": "¿a quién escribo?"
+            },
+            {
+              "texto": "if you could send"
+            }
+          ],
+          [
+            {
+              "texto": "Cohesión"
+            },
+            {
+              "texto": "¿a qué se refiere?"
+            },
+            {
+              "texto": "Such a habit…"
+            }
+          ],
+          [
+            {
+              "texto": "Conector"
+            },
+            {
+              "texto": "¿suma, contrasta o da resultado?"
+            },
+            {
+              "texto": "as a result"
+            }
+          ],
+          [
+            {
+              "texto": "Concisión"
+            },
+            {
+              "texto": "¿sobra algo?"
+            },
+            {
+              "texto": "To finish, we need time."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-98": {
+      "explicacion": {
+        "titulo": "Valorar una actuación con criterios",
+        "texto": "Valorar una actuación modelo es aplicar criterios, no dar una impresión. Usa una rúbrica de cuatro: estructura (apertura, razones, cierre), precisión (tiempos, conectores, orden), tacto (concesión, peticiones suaves, contingencias) y evidencia (datos y ejemplos). Para cada criterio cita la frase exacta que lo demuestra y decide si es una fortaleza o una debilidad. Aprender a valorar a otros es la forma más rápida de valorarte a ti mismo."
+      },
+      "patron": {
+        "texto": "Valorar con la rúbrica:",
+        "formula": [
+          {
+            "texto": "One strength is the structure:",
+            "nota": "nombras una fortaleza y su criterio"
+          },
+          {
+            "texto": "she says first, second and finally.",
+            "nota": "citas la evidencia exacta"
+          },
+          {
+            "texto": "One weakness is the tact,",
+            "nota": "nombras una debilidad"
+          },
+          {
+            "texto": "because she never concedes a point.",
+            "nota": "explicas por qué con la frase del texto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The speech is enough clear.",
+          "correcto": "The speech is clear enough.",
+          "explicacion": "En español «suficientemente claro» lleva el adverbio delante; en inglés enough va después del adjetivo."
+        },
+        {
+          "incorrecto": "She made a good job presenting the plan.",
+          "correcto": "She did a good job presenting the plan.",
+          "explicacion": "«Hacer un buen trabajo» es do a good job; make se reserva para crear o fabricar algo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos escuchan la intervención de una compañera y la valoran con una rúbrica de cuatro criterios.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Let us assess Mia's talk with the rubric. Structure first.",
+            "traduccion": "Valoremos la charla de Mia con la rúbrica. Primero, la estructura."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "One strength: she opened clearly and gave two reasons.",
+            "traduccion": "Una fortaleza: abrió con claridad y dio dos razones."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And tact? She said: Much as I appreciate the concern, volunteers could help.",
+            "traduccion": "¿Y el tacto? Dijo: Aunque agradezco la preocupación, los voluntarios podrían ayudar."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Another strength. The only weakness is that she gave no evidence: no survey, no numbers.",
+            "traduccion": "Otra fortaleza. La única debilidad es que no dio evidencia: ni encuesta, ni cifras."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es la única debilidad de la intervención?",
+          "opciones": [
+            {
+              "es": "No dio ninguna evidencia, como datos o cifras."
+            },
+            {
+              "es": "No abrió con claridad."
+            },
+            {
+              "es": "No fue cortés con el público."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice: «The only weakness is that she gave no evidence»; la estructura y el tacto ya habían sido fortalezas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Criterio",
+          "Pregunta",
+          "Señal en la actuación"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Structure"
+            },
+            {
+              "texto": "¿está ordenada?"
+            },
+            {
+              "texto": "first, second, to sum up"
+            }
+          ],
+          [
+            {
+              "texto": "Accuracy"
+            },
+            {
+              "texto": "¿es correcta?"
+            },
+            {
+              "texto": "verbos y conectores exactos"
+            }
+          ],
+          [
+            {
+              "texto": "Tact"
+            },
+            {
+              "texto": "¿suena cortés?"
+            },
+            {
+              "texto": "Much as…, I was wondering whether…"
+            }
+          ],
+          [
+            {
+              "texto": "Evidence"
+            },
+            {
+              "texto": "¿hay datos?"
+            },
+            {
+              "texto": "a survey of two hundred students"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-99": {
+      "explicacion": {
+        "titulo": "Responder completo en tiempo limitado",
+        "texto": "La práctica integrada final pide una respuesta completa en poco tiempo. Haz un esquema de un minuto y sigue este orden: postura en una frase (I would argue that…), ejemplo concreto (For example, …), concesión (Much as… / Admittedly, …), refutación breve y cierre (On balance, …). Si una frase queda poco clara, autocorrígete a la vista: or rather, what I mean is, let me rephrase. Reserva el último minuto para revisar tiempos, conectores y tono."
+      },
+      "patron": {
+        "texto": "Respuesta en tiempo limitado:",
+        "formula": [
+          {
+            "texto": "I would argue that…",
+            "nota": "postura matizada en una frase"
+          },
+          {
+            "texto": "For example, …",
+            "nota": "un ejemplo concreto"
+          },
+          {
+            "texto": "Much as…, …",
+            "nota": "concesión y refutación breve"
+          },
+          {
+            "texto": "Or rather, …",
+            "nota": "autocorrección visible"
+          },
+          {
+            "texto": "On balance, …",
+            "nota": "cierre que resume"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree that the centre should be car-free.",
+          "correcto": "I agree that the centre should be car-free.",
+          "explicacion": "Agree es un verbo, no un adjetivo: no lleva be, a diferencia de «estoy de acuerdo»."
+        },
+        {
+          "incorrecto": "Less people would drive into the centre.",
+          "correcto": "Fewer people would drive into the centre.",
+          "explicacion": "Con nombres contables (people) se usa fewer; less se reserva para lo incontable."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia practican una respuesta cronometrada de diez minutos sobre un caso nuevo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "We have ten minutes. First, a quick outline.",
+            "traduccion": "Tenemos diez minutos. Primero, un esquema rápido."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My stance: I would argue that the town should close the centre to cars on Sundays.",
+            "traduccion": "Mi postura: yo diría que la ciudad debería cerrar el centro a los coches los domingos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. Add an example and a concession.",
+            "traduccion": "Bien. Añade un ejemplo y una concesión."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "For example, the air is cleaner. Admittedly, shops may lose customers. Or rather, some shops.",
+            "traduccion": "Por ejemplo, el aire es más limpio. Es cierto que las tiendas pueden perder clientes. O mejor dicho, algunas tiendas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Nice self-correction. Leave one minute to revise.",
+            "traduccion": "Buena autocorrección. Deja un minuto para revisar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Leo con «Or rather, some shops»?",
+          "opciones": [
+            {
+              "es": "Corrige su frase anterior para ser más preciso."
+            },
+            {
+              "es": "Añade un ejemplo nuevo."
+            },
+            {
+              "es": "Cierra la respuesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia lo llama «self-correction»: Leo pasa de «shops» a «some shops» para no exagerar."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Minutos",
+          "Paso",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "esquema"
+            },
+            {
+              "texto": "stance, example, concession, closing"
+            }
+          ],
+          [
+            {
+              "texto": "4"
+            },
+            {
+              "texto": "postura y ejemplo"
+            },
+            {
+              "texto": "I would argue that…; for example, …"
+            }
+          ],
+          [
+            {
+              "texto": "3"
+            },
+            {
+              "texto": "concesión y refutación"
+            },
+            {
+              "texto": "Admittedly, …; however, …"
+            }
+          ],
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "autocorrección"
+            },
+            {
+              "texto": "or rather, …"
+            }
+          ],
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "revisión final"
+            },
+            {
+              "texto": "tense, connectors, tone"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n10.class-100": {
+      "explicacion": {
+        "titulo": "Tu desempeño final: todo el recorrido en un caso",
+        "texto": "Este es tu desempeño final: un caso nuevo que reúne las cinco hebras del programa. Cuenta un antecedente personal con tiempos coherentes (used to, would, had), argumenta con concesión y refutación (Much as…, I would argue…), muestra tacto ante otra postura (I was wondering whether…), evalúa una fuente con cautela (may, seems) y cierra documentando una revisión (or rather…). Has llegado hasta aquí desde «My name is…»: confía en lo que sabes."
+      },
+      "patron": {
+        "texto": "El caso final en cinco pasos:",
+        "formula": [
+          {
+            "texto": "Years ago, I used to…",
+            "nota": "antecedente personal con tiempos coherentes"
+          },
+          {
+            "texto": "Much as…, I would argue that…",
+            "nota": "argumento con concesión y refutación"
+          },
+          {
+            "texto": "I was wondering whether you agree…",
+            "nota": "tacto ante una postura contraria"
+          },
+          {
+            "texto": "The source may not be reliable.",
+            "nota": "evaluación de la fuente con cautela"
+          },
+          {
+            "texto": "Or rather, …",
+            "nota": "revisión documentada de tu propio texto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have studied English since ten years.",
+          "correcto": "I have studied English for ten years.",
+          "explicacion": "Con una duración se usa for; since se reserva para el punto de inicio (since 2020)."
+        },
+        {
+          "incorrecto": "The information are reliable.",
+          "correcto": "The information is reliable.",
+          "explicacion": "Information es incontable: va en singular, con is, aunque «los datos» sea plural en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo celebran el final del curso y recuerdan cuánto han avanzado antes de hacer la tarea final.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Do you remember your first class? You used to say only your name.",
+            "traduccion": "¿Recuerdas tu primera clase? Solo decías tu nombre."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes! Years ago, I had never spoken English with a stranger.",
+            "traduccion": "¡Sí! Hace años, nunca había hablado inglés con un desconocido."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And now you can evaluate a source, disagree with tact and revise your own writing.",
+            "traduccion": "Y ahora puedes evaluar una fuente, discrepar con tacto y revisar tu propia escritura."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Much as I am nervous about the final task, I feel confident.",
+            "traduccion": "Aunque estoy nerviosa por la tarea final, me siento segura."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "This journey has been long, and this is a real milestone.",
+            "traduccion": "Este recorrido ha sido largo, y este es un verdadero hito."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo se siente Ana ante la tarea final?",
+          "opciones": [
+            {
+              "es": "Algo nerviosa, pero segura de sí misma."
+            },
+            {
+              "es": "Completamente tranquila, sin ningún nervio."
+            },
+            {
+              "es": "Sin ganas de hacerla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana concede con «Much as I am nervous» y mantiene su postura con «I feel confident»."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Hebra",
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tiempo y relato"
+            },
+            {
+              "texto": "used to, would, had"
+            },
+            {
+              "texto": "Years ago, I used to be shy."
+            }
+          ],
+          [
+            {
+              "texto": "Argumento"
+            },
+            {
+              "texto": "much as, I would argue"
+            },
+            {
+              "texto": "Much as it is hard, I would argue it is worth it."
+            }
+          ],
+          [
+            {
+              "texto": "Registro y cautela"
+            },
+            {
+              "texto": "may, seems"
+            },
+            {
+              "texto": "The source may not be reliable."
+            }
+          ],
+          [
+            {
+              "texto": "Lectura crítica"
+            },
+            {
+              "texto": "evidence, data"
+            },
+            {
+              "texto": "It gives no data."
+            }
+          ],
+          [
+            {
+              "texto": "Revisión"
+            },
+            {
+              "texto": "or rather, I changed…"
+            },
+            {
+              "texto": "Or rather, I should say…"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "96: artículo 'Let Them Be Bored' coherente; relacionar sin pares ambiguos (implicación/cautela) y consigna retórica aclarada; escribir con concesión natural (Much as I accept…) y rúbrica con frases.",
+      "97: relacionar sin dos contrastes intercambiables (whereas/nevertheless); 'for Monday'; repaso escribir con rúbrica; 'Keep the tense steady'.",
+      "98: nombre no enseñado 'Nora' sustituido por Mia; rúbrica de valoración con frases y justificación.",
+      "99: tabla de minutos coherente con los diez minutos del diálogo; rúbricas sin palabras sueltas; 'to put it better' corregido.",
+      "100 (cierre del programa): evaluación mezcla lectura crítica, conectores, escucha de criterios y escritura integrada (las 4 evaluaciones enlazan con las clases 96-99); escuchar ya no revela la respuesta en la consigna; escritura con 6 grupos (antecedente, concesión, refutación, fuente con cautela, tacto, revisión) sin palabras funcionales sueltas ni 'however' tras much as; repaso cierra con frase de confianza sobre el recorrido.",
+      "Observación: la hebra de planificación profesional (futuros precisos/delegación) solo se evalúa de forma indirecta; el mapa no la exige en requiredEvidence."
+    ]
+  }
+}

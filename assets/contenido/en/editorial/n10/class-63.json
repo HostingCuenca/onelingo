@@ -1,0 +1,887 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 10,
+  "cefr": "C1",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n10.class-63",
+  "title": {
+    "en": "Strong and weak answers",
+    "es": "Respuestas fuertes y respuestas flojas"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir respuestas de entrevista concretas de las vagas y detectar si a una respuesta le falta un ejemplo o un resultado."
+    ]
+  },
+  "concepts": [
+    "n10-interviews-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n10.class-62"
+  ],
+  "usesVocabulary": [
+    "vague",
+    "specific",
+    "concrete",
+    "somehow",
+    "impact",
+    "measurable",
+    "checklist",
+    "complaints",
+    "figures"
+  ],
+  "usesPatterns": [
+    "n10-interviews-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "vague",
+      "es": "vago, impreciso"
+    },
+    {
+      "en": "specific",
+      "es": "concreto, específico"
+    },
+    {
+      "en": "concrete",
+      "es": "concreto, real"
+    },
+    {
+      "en": "somehow",
+      "es": "de algún modo"
+    },
+    {
+      "en": "impact",
+      "es": "impacto"
+    },
+    {
+      "en": "measurable",
+      "es": "medible"
+    },
+    {
+      "en": "checklist",
+      "es": "lista de verificación"
+    },
+    {
+      "en": "complaints",
+      "es": "quejas"
+    },
+    {
+      "en": "figures",
+      "es": "cifras"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n10.class-63.t01",
+      "en": "We somehow managed to finish everything, and it went really well.",
+      "es": "De algún modo logramos terminarlo todo y salió muy bien.",
+      "explanationEs": "Respuesta vaga: somehow y «went really well» no dicen qué pasó ni con qué resultado.",
+      "segments": [
+        "We somehow managed to finish everything,",
+        "and it went really well."
+      ],
+      "audioText": "We somehow managed to finish everything, and it went really well.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-interviews-3"
+    },
+    {
+      "id": "en.n10.class-63.t02",
+      "en": "I cut the waiting time from ten days to three by creating a checklist.",
+      "es": "Reduje el tiempo de espera de diez días a tres creando una lista de verificación.",
+      "explanationEs": "Respuesta concreta: una acción clara (a checklist) y dos cifras (from… to…).",
+      "segments": [
+        "I cut the waiting time from ten",
+        "days to three by creating a checklist."
+      ],
+      "audioText": "I cut the waiting time from ten days to three by creating a checklist.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-interviews-3"
+    },
+    {
+      "id": "en.n10.class-63.t03",
+      "en": "As a result, complaints fell by forty per cent in two months.",
+      "es": "Como resultado, las quejas bajaron un cuarenta por ciento en dos meses.",
+      "explanationEs": "El resultado medible cierra la respuesta; con cifras se usa by (fell by).",
+      "segments": [
+        "As a result, complaints fell by",
+        "forty per cent in two months."
+      ],
+      "audioText": "As a result, complaints fell by forty per cent in two months.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-interviews-3"
+    },
+    {
+      "id": "en.n10.class-63.t04",
+      "en": "Could you be more specific? I would like a concrete example.",
+      "es": "¿Podrías ser más concreto? Me gustaría un ejemplo real.",
+      "explanationEs": "El entrevistador detecta una respuesta vaga y pide un ejemplo.",
+      "segments": [
+        "Could you be more specific? I",
+        "would like a concrete example."
+      ],
+      "audioText": "Could you be more specific? I would like a concrete example.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-interviews-3"
+    },
+    {
+      "id": "en.n10.class-63.t05",
+      "en": "The impact was measurable: sign-ups rose by a fifth.",
+      "es": "El impacto fue medible: las inscripciones subieron una quinta parte.",
+      "explanationEs": "Impacto medible es un resultado que se puede contar con figures o porcentajes.",
+      "segments": [
+        "The impact was measurable: sign-ups",
+        "rose by a fifth."
+      ],
+      "audioText": "The impact was measurable: sign-ups rose by a fifth.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n10-interviews-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n10.c63.pg01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada respuesta con su valoración."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "We did lots of things.",
+              {
+                "es": "Vaga: ni acción concreta ni cifras"
+              }
+            ],
+            [
+              "I cut costs from nine hundred to six hundred.",
+              {
+                "es": "Concreta: acción y cifras claras"
+              }
+            ],
+            [
+              "Complaints fell by half last year.",
+              {
+                "es": "Resultado medible, pero sin acción concreta"
+              }
+            ],
+            [
+              "I wrote a guide for new volunteers.",
+              {
+                "es": "Ejemplo concreto, pero sin resultado"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-interviews-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.pg01.seed-0",
+          "feedback": {
+            "es": "Una respuesta vaga no informa; la concreta da acción y cifras; «fell by half» es un resultado sin acción, y «I wrote a guide» es una acción sin resultado medible."
+          },
+          "hint": {
+            "es": "Pregúntate dos cosas: ¿dice qué hizo la persona? ¿da un resultado que se pueda contar?"
+          },
+          "pairs": [
+            [
+              "We did lots of things.",
+              {
+                "es": "Vaga: ni acción concreta ni cifras"
+              }
+            ],
+            [
+              "I cut costs from nine hundred to six hundred.",
+              {
+                "es": "Concreta: acción y cifras claras"
+              }
+            ],
+            [
+              "Complaints fell by half last year.",
+              {
+                "es": "Resultado medible, pero sin acción concreta"
+              }
+            ],
+            [
+              "I wrote a guide for new volunteers.",
+              {
+                "es": "Ejemplo concreto, pero sin resultado"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ec785e1f4814d3789afb8b2090805022abd896ebcf09b4033a1cfbe7428c9181"
+      },
+      {
+        "id": "en.n10.c63.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Las quejas bajaron un treinta por ciento.»"
+        },
+        "answer": {
+          "text": "by",
+          "accepted": [
+            "by"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n10-interviews-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.pg02.seed-0",
+          "feedback": {
+            "es": "Con fell, rose o increased, la cantidad del cambio va con by."
+          },
+          "hint": {
+            "es": "Es una preposición corta; no es in."
+          },
+          "text": "Complaints fell ___ thirty per cent."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dc002a59ed543902a1c19988506175c6b84f77dd53a75f32b460787135371941"
+      },
+      {
+        "id": "en.n10.c63.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la respuesta más concreta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I wrote a checklist, and mistakes fell from twelve to four."
+          },
+          {
+            "text": "I did lots of things, and it went well."
+          },
+          {
+            "text": "Somehow, it all worked out in the end."
+          }
+        ],
+        "teaches": [
+          "n10-interviews-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.pg03.seed-0",
+          "feedback": {
+            "es": "La respuesta concreta nombra la acción y da cifras; las otras usan relleno vago."
+          },
+          "hint": {
+            "es": "Busca acción concreta y cifras."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6d01043dfc20f79dafdf6b30e3baeca80f74ca7812625352975c38f6976b9cc4"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n10.c63.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha esta respuesta y elige su valoración."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It has a concrete example but no result."
+          },
+          {
+            "text": "It has neither a concrete example nor a measurable result."
+          },
+          {
+            "text": "It has a measurable result but no example."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.p01.seed-0",
+          "feedback": {
+            "es": "«Helped a lot» y «worked out fine» son frases vagas: no hay acción concreta ni cifras."
+          },
+          "audio": "I helped the team a lot, and everything worked out fine in the end.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:48b22468060b14e066abe32c206b322f03d63aaf005e0b912f390243a6fbbc65"
+      },
+      {
+        "id": "en.n10.c63.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál es el resultado medible de esta respuesta?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "She set up a reading corner."
+          },
+          {
+            "text": "The library became friendlier."
+          },
+          {
+            "text": "Visitors rose from twenty to sixty a week."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.p02.seed-0",
+          "feedback": {
+            "es": "El resultado medible es el que se puede contar: los visitantes pasaron de veinte a sesenta por semana."
+          },
+          "text": "I set up a reading corner in the library. Within two months, the number of visitors rose from twenty to sixty a week."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:09c5ed894cd153a3f9f9b770a9ac647582778fdb08c7955326e16a6583a612e7"
+      },
+      {
+        "id": "en.n10.c63.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Me gustaría un ejemplo concreto.»"
+        },
+        "answer": {
+          "text": "concrete",
+          "accepted": [
+            "concrete",
+            "specific"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.p03.seed-0",
+          "feedback": {
+            "es": "Concrete o specific describen un ejemplo real y detallado, lo contrario de vago."
+          },
+          "text": "I would like a ___ example."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:466a76539b90747b429db68ff178321b6c9c0e1af1872dba861129adb889552d"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n10.c63.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha esta respuesta y elige qué le falta."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It gives an example but no measurable result."
+          },
+          {
+            "text": "It has a measurable result but no example."
+          },
+          {
+            "text": "It has both an example and a result."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.e01.seed-0",
+          "feedback": {
+            "es": "La venta de libros es un ejemplo real, pero «great fun» no se puede contar: falta un resultado medible."
+          },
+          "audio": "Last March, I organised a book sale for my school. People said it was great fun.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:48e4a3b2a7ad598f81ccadeea646f049b25af30747a5de7d151173f09906f4b2"
+      },
+      {
+        "id": "en.n10.c63.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha esta otra respuesta y elige cómo se valora."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It is vague because it has no figures."
+          },
+          {
+            "text": "It has both a concrete example and a measurable result."
+          },
+          {
+            "text": "It has a result but no concrete action."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.e02.seed-0",
+          "feedback": {
+            "es": "Mover el mostrador es una acción concreta y «from forty to seventy» es un resultado medible."
+          },
+          "audio": "We moved the sign-up desk next to the door, and registrations rose from forty to seventy in a month.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:94c0293d47dd64bad49b53cc44e6b97731047ce910ff933230545e1ff11f69a7"
+      },
+      {
+        "id": "en.n10.c63.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué valoración merece esta respuesta?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Vague answer with no example."
+          },
+          {
+            "text": "Good example but no result."
+          },
+          {
+            "text": "Concrete example and measurable result."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.e03.seed-0",
+          "feedback": {
+            "es": "Formar a seis voluntarios es un ejemplo concreto y «none missed a shift» es un resultado que se puede contar."
+          },
+          "text": "I trained six new volunteers in May. Afterwards, none of them missed a shift."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cef50277f802190816600afffa505413e0cdd8b4f838554e2d9912a320f9e576"
+      },
+      {
+        "id": "en.n10.c63.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Fue una respuesta vaga; ¿podrías ser más concreto?»"
+        },
+        "answer": {
+          "text": "vague",
+          "accepted": [
+            "vague"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.e04.seed-0",
+          "feedback": {
+            "es": "Una respuesta vaga carece de detalles; el entrevistador pide que seas más concreto."
+          },
+          "text": "That answer was too ___; could you be more specific?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ecdafe87b70b4e5685b020ed53604ab82ef1ce2bc14e1cf3abac960e5a32f80d"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n10.c63.r01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Une cada frase con lo que muestra de la respuesta."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Sort of a mix of things, really.",
+              {
+                "es": "Vaga: rellena sin informar"
+              }
+            ],
+            [
+              "I introduced a rota, and delays fell by half.",
+              {
+                "es": "Acción y resultado claros"
+              }
+            ],
+            [
+              "I wrote the welcome email in March.",
+              {
+                "es": "Ejemplo concreto, pero sin resultado"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.r01.seed-0",
+          "feedback": {
+            "es": "La frase de relleno no informa; la que nombra una acción y un cambio medible es fuerte; escribir el correo es una acción concreta, pero no da un resultado que se pueda contar."
+          },
+          "pairs": [
+            [
+              "Sort of a mix of things, really.",
+              {
+                "es": "Vaga: rellena sin informar"
+              }
+            ],
+            [
+              "I introduced a rota, and delays fell by half.",
+              {
+                "es": "Acción y resultado claros"
+              }
+            ],
+            [
+              "I wrote the welcome email in March.",
+              {
+                "es": "Ejemplo concreto, pero sin resultado"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0c88dbec7cc9907e2c545f3b123e8f4a5719ebf198bc3d065284a7e33c07a8e7"
+      },
+      {
+        "id": "en.n10.c63.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la versión que añade un resultado medible a «I trained new volunteers»."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I trained new volunteers, and mistakes fell by half."
+          },
+          {
+            "text": "I trained new volunteers, and it was nice."
+          },
+          {
+            "text": "I trained new volunteers, sort of."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.r02.seed-0",
+          "feedback": {
+            "es": "Un resultado medible añade una cifra o un cambio contable: fell by half."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:29176d2b81e2ae60eef6b23948ef7c3ca00073418ca506c6f7f079e8b2c7850c"
+      },
+      {
+        "id": "en.n10.c63.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe la respuesta vaga con un ejemplo concreto y un resultado con cifras."
+        },
+        "answer": {
+          "text": "I created a weekly checklist for the volunteers, and as a result, late arrivals fell from ten to two in a month.",
+          "accepted": [
+            "I created a weekly checklist for the volunteers, and as a result, late arrivals fell from ten to two in a month.",
+            "I wrote a short guide for the volunteers, and as a result, errors fell by half in two months.",
+            "I organised a weekly rota for the team, and absences dropped by thirty per cent in a month.",
+            "I created a weekly rota for the team, and absences fell from twelve to four in two months."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n10-interviews-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n10.c63.r03.seed-0",
+          "feedback": {
+            "es": "Una buena reescritura nombra una acción concreta y cierra con un cambio que se puede medir."
+          },
+          "text": "Respuesta vaga: «I helped with lots of things, and it went well.» Da una acción concreta y un resultado con cifras (from… to… o by).",
+          "scoring": {
+            "wordRange": [
+              14,
+              60
+            ],
+            "evidenceGroups": [
+              [
+                "i created",
+                "i wrote",
+                "i organised",
+                "i organized",
+                "i set up",
+                "i made",
+                "i built",
+                "i designed",
+                "i introduced",
+                "i started",
+                "i prepared",
+                "i trained",
+                "we created",
+                "we wrote",
+                "we organised",
+                "we organized",
+                "we set up",
+                "we introduced",
+                "i developed",
+                "i have created",
+                "i've created",
+                "i have written"
+              ],
+              [
+                "fell",
+                "rose",
+                "increased",
+                "decreased",
+                "dropped",
+                "grew",
+                "went up",
+                "went down",
+                "improved",
+                "reduced",
+                "cut",
+                "halved",
+                "doubled"
+              ],
+              [
+                "fell by",
+                "rose by",
+                "dropped by",
+                "increased by",
+                "decreased by",
+                "reduced by",
+                "grew by",
+                "went down by",
+                "went up by",
+                "fell from",
+                "rose from",
+                "dropped from",
+                "grew from",
+                "increased from",
+                "decreased from",
+                "went down from",
+                "went up from",
+                "per cent",
+                "percent",
+                "%",
+                "by half",
+                "in half"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a029b2c8b645bb0a00913e8d172524f9c8620f1921c66864aecc15f811381d85"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n10.c63.e01": {
+      "reteach": "en.n10.class-63.t01",
+      "review": "en.n10.c63.r01"
+    },
+    "en.n10.c63.e02": {
+      "reteach": "en.n10.class-63.t02",
+      "review": "en.n10.c63.r02"
+    },
+    "en.n10.c63.e03": {
+      "reteach": "en.n10.class-63.t03",
+      "review": "en.n10.c63.r03"
+    },
+    "en.n10.c63.e04": {
+      "reteach": "en.n10.class-63.t04",
+      "review": "en.n10.c63.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}
