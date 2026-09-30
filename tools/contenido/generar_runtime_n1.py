@@ -67,6 +67,8 @@ def enrichments(level: str, units: dict[str, dict]) -> dict[str, dict]:
         document = json.loads(path.read_text(encoding="utf-8"))
         if document.get("review", {}).get("status") != "GO":
             continue
+        if not set(document["classes"]) & set(units):
+            continue  # bloque aún fuera del corte publicado (LEVELS)
         errors, _ = validar_enriquecimiento.validar(path, units)
         if errors:
             raise ValueError(f"{path.name} tiene GO pero no pasa la validación automática: {errors[:5]}")

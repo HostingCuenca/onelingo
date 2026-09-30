@@ -216,6 +216,9 @@ def validar(path: Path, unidades: dict[str, dict] | None = None) -> tuple[list[s
         for n in range(rango.get("start", 0), rango.get("end", -1) + 1)
     }
     clases = doc.get("classes") or {}
+    if clases and not set(clases) & set(unidades):
+        # Bloque nuevo fuera del corte del runtime: lo valida construir_bloque.py.
+        return [], [f"{path.name}: fuera del corte publicado; validado por construir_bloque.py"]
     conocidas = _conocidas_por_clase(unidades, [cid for cid in clases if cid in unidades])
     if set(clases) != esperadas:
         errores.append(f"{path.name}: clases {sorted(clases)} no coinciden con el rango {sorted(esperadas)}")
