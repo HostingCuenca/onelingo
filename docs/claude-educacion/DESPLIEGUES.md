@@ -156,3 +156,12 @@ Commit: `c774806` (+ `cdb57b7`) · Build: `main.dart.js` `2d5759d1…`; bibliote
 Pruebas: 177 Flutter (1 omitida), validar_ruta 0 errores, construir_bloque OK en N5 y N6.
 Backup: `/var/www/onelingo/backups/20260930-edu-8-n5-n6/web-anterior` (= edu-7). Health: salud, APK, avatar y `n6-editorial.json` 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-8-n5-n6/web-retirada-post && cp -al backups/20260930-edu-8-n5-n6/web-anterior web'`
+
+## Release: 20260930-edu-9-n7-n9
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: N7 (B2 dominio), N8 (C1 inicial) y N9 (C1 profesional) completos, 100 clases cada uno, autoría compacta con revisión independiente GO. Total publicado N1–N9: 900 clases. Palabras libres nuevas: ah, Naples.
+Commit: `978dddd` (+ `fa195b1`) · Build: `main.dart.js` `2d5759d1…` (sin cambios de código); biblioteca `348268a8…`.
+Pruebas: 177 Flutter (1 omitida), validar_ruta 0 errores, construir_bloque OK en N8 y N9.
+Backup: `/var/www/onelingo/backups/20260930-edu-9-n7-n9/web-anterior` (= edu-8). Health: salud, APK, avatar y `n9-editorial.json` 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-9-n7-n9/web-retirada-post && cp -al backups/20260930-edu-9-n7-n9/web-anterior web'`
