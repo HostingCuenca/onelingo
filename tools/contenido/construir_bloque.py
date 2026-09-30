@@ -223,6 +223,9 @@ def construir_item(it: dict, *, cid_corto: str, pool: str, k: int, concepto: str
             origin["text"] = it["texto"]
     elif fmt == "ordenar":
         answer = {"text": it["respuesta"], "tokens": it["respuesta"].split()}
+        if it.get("aceptadas"):
+            # Otros órdenes igual de correctos (p. ej. un adverbio movible).
+            answer["accepted"] = list(dict.fromkeys([it["respuesta"], *it["aceptadas"]]))
     elif fmt == "completar":
         if it.get("frases"):
             origin["sentences"] = it["frases"]
