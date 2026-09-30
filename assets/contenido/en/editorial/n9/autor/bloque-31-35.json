@@ -411,7 +411,7 @@
             "opciones": [
               "Cautious: the headline figure hides a minority who walk much less.",
               "Enthusiastic: the June peak proves that all the staff now walk much more.",
-              "Dismissive: the figure is meaningless because a minority walk little."
+              "Dismissive: the figure says nothing because a minority walk little."
             ],
             "respuesta": 0,
             "texto": "Extract from the clinic's report: 'Daily steps among workers rose steadily to a peak of 9,000 in June. However, a quarter of the staff still recorded fewer than 4,000, so the overall figure should be read with care.'"
@@ -876,7 +876,7 @@
             "audio": "Our sales are projected to hold steady this year, but the forecast for next year is much less clear. By then, the new supermarket across the street will have been open for two years, so our figures are likely to fall.",
             "opciones": [
               "A fall in sales, since a new supermarket will be open nearby.",
-              "No change, since this year's projection is to hold steady.",
+              "No change, since sales are already forecast to hold steady.",
               "A rise in sales, since the supermarket will have closed by then."
             ],
             "respuesta": 0
@@ -1206,7 +1206,7 @@
             "opciones": [
               "She would test the menu elsewhere before using it everywhere.",
               "She agrees that the menu must go to every school at once.",
-              "She rejects the claim outright because the figures are unreliable."
+              "She rejects the whole claim because she thinks the figures are unreliable."
             ],
             "respuesta": 0
           },
@@ -1255,7 +1255,7 @@
             "feedback": "La tabla muestra una bajada de solo tres minutos, y el titular habla de acabar con los atascos: lo exagera.",
             "opciones": [
               "That it makes a small change in journey times sound big.",
-              "That it is broadly fair, since journey times did fall after the lanes opened.",
+              "That it is fair, since journey times did fall after the lanes opened.",
               "That the council's table contradicts itself, so nothing can be concluded."
             ],
             "respuesta": 0,
@@ -1598,25 +1598,25 @@
         "evaluacion": [
           {
             "formato": "escuchar",
-            "consigna": "Escucha y elige qué postura adopta la coordinadora sobre el nuevo profesor de ajedrez.",
-            "feedback": "La coordinadora dice que el aumento parece estar en parte vinculado al nuevo profesor, pero se niega a llamarlo causa.",
-            "audio": "In the meeting, the coordinator presented the school's club figures. Overall, the chess club rose from thirty-five to seventy-one members in three years, whereas the volleyball team stayed at around eighty. One teacher said that the new chess teacher had caused the rise. The coordinator answered carefully: the increase appears to be partly linked to his arrival, but the club also moved to a bigger room, so other reasons could matter too. She would not call it a cause. If the trend continues, she added, chess is likely to overtake volleyball, and in that case the school may need extra tables.",
+            "consigna": "Escucha y elige qué postura adopta la coordinadora sobre la piscina nueva.",
+            "feedback": "La coordinadora dice que el aumento parece estar en parte vinculado a la piscina, pero se niega a llamarlo causa.",
+            "audio": "In the meeting, the coordinator presented the school's sports figures. Overall, swimming rose from thirty-five to seventy-one members in three years, whereas running stayed at around eighty. One teacher said that the new pool had caused the rise. The coordinator answered carefully: the increase appears to be partly linked to the pool, but the fees also fell, so other reasons could matter too. She would not call it a cause. If the trend continues, she added, swimming is likely to overtake running, and in that case the pool may need longer opening hours.",
             "opciones": [
-              "That he may partly explain the rise, but is not the cause.",
-              "That he is the main cause and should be copied by other schools.",
-              "That he matters little, since the club moved to a bigger room."
+              "That it may partly explain the rise, but is not the cause.",
+              "That it is the main cause and should be copied by other schools.",
+              "That it matters little, since the fees also fell."
             ],
             "respuesta": 0
           },
           {
             "formato": "escuchar",
             "consigna": "Con el mismo audio, elige qué consecuencia práctica prevé la coordinadora.",
-            "feedback": "Si el ajedrez supera al voleibol, la coordinadora prevé que el colegio podría necesitar más mesas.",
-            "audio": "In the meeting, the coordinator presented the school's club figures. Overall, the chess club rose from thirty-five to seventy-one members in three years, whereas the volleyball team stayed at around eighty. One teacher said that the new chess teacher had caused the rise. The coordinator answered carefully: the increase appears to be partly linked to his arrival, but the club also moved to a bigger room, so other reasons could matter too. She would not call it a cause. If the trend continues, she added, chess is likely to overtake volleyball, and in that case the school may need extra tables.",
+            "feedback": "Si la natación supera a la carrera, la coordinadora prevé que la piscina podría necesitar un horario más largo.",
+            "audio": "In the meeting, the coordinator presented the school's sports figures. Overall, swimming rose from thirty-five to seventy-one members in three years, whereas running stayed at around eighty. One teacher said that the new pool had caused the rise. The coordinator answered carefully: the increase appears to be partly linked to the pool, but the fees also fell, so other reasons could matter too. She would not call it a cause. If the trend continues, she added, swimming is likely to overtake running, and in that case the pool may need longer opening hours.",
             "opciones": [
-              "The school may need extra tables if chess keeps growing.",
-              "The school may need to cut volleyball sessions to make room for chess.",
-              "The school may need to hire a second chess teacher."
+              "The pool may need longer opening hours if swimming keeps growing.",
+              "The school may need to cut running sessions to make room for swimming.",
+              "The school may need to build a second pool if swimming keeps growing."
             ],
             "respuesta": 0
           },
@@ -2238,5 +2238,17 @@
         ]
       }
     }
-  ]
+  ],
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-c1",
+    "date": "2026-09-30",
+    "notes": [
+      "Claves verificadas contra texto/audio en las 5 clases; distractores reescritos como casi-aciertos (actitud invertida, cierto pero no dicho, generalización excesiva) en al menos la mitad de los elegir/escuchar de cada clase.",
+      "C34 y C35: los audios de evaluación repetían el escenario y las cifras de la tarea de escritura (filtraban el modelo); se cambiaron por escenarios distintos (natación/carrera; club de lectura).",
+      "C35 EV completar repetía literalmente la frase de enseñanza 'Let me clarify…'; C33 opción de escuchar copiaba el audio; C32 'Vale' sustituido por 'De acuerdo'.",
+      "Completar: ampliadas las aceptadas defendibles (p. ej. fraction, oscillate, but/yet, inflate, jump/form, theory, Thus/Hence, mention/note); C32 RE completar rehecho (within a decade).",
+      "Vocabulario añadido verificado como colocaciones/expresiones C1 (in the region of, rough estimate, hard evidence, hold up, by contrast, walk through, draw attention to, open the floor)."
+    ]
+  }
 }

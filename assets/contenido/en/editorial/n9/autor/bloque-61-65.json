@@ -224,7 +224,8 @@
       "texto": "Leo knows that something is wrong at home. Every time he tries to ___ up the subject of money, his father changes the subject.",
       "respuesta": "bring",
       "aceptadas": [
-       "bring"
+       "bring",
+       "take"
       ],
       "pista": "Es el verbo que forma «___ up» con el significado de sacar un tema."
      },
@@ -312,7 +313,10 @@
       "aceptadas": [
        "neutral",
        "factual",
-       "objective"
+       "objective",
+       "impartial",
+       "unbiased",
+       "plain"
       ]
      },
      {
@@ -581,7 +585,10 @@
       "texto": "Mia says nobody ever asks her opinion and that she eats alone while the others talk. Tom replies: It ___ like you feel left out, and you need to be included.",
       "respuesta": "sounds",
       "aceptadas": [
-       "sounds"
+       "sounds",
+       "seems",
+       "looks",
+       "feels"
       ],
       "pista": "Es el verbo que va entre It y like, con -s."
      },
@@ -1063,7 +1070,7 @@
       "feedback": "Ana reconoce que el mensaje salió mal y propone hablar: es una señal de reparación.",
       "opciones": [
        "She admits her mistake and suggests talking later, which starts the repair.",
-       "She defends her message and blames Leo for the tone he used in his text.",
+       "She apologises, but only after pointing out that Leo was sarcastic first.",
        "She ignores his comment and changes the subject."
       ],
       "respuesta": 0,
@@ -1188,7 +1195,7 @@
    ],
    "explicacion": {
     "titulo": "Un mensaje en primera persona completo",
-    "texto": "Para quejarte sin culpar, construye tres piezas. Primero, el mensaje: I feel tired when the music is loud, because I start work early. Después, la petición cortés: Would you mind turning it down? (mind va seguido de -ing). Si tú también te excediste, disculpa equilibrada: I'm sorry I raised my voice, but I do need some quiet. Cierra con un acuerdo (Let's agree on...) y, si quieres, un arrepentimiento: I wish I had asked first."
+    "texto": "Para quejarte sin culpar, construye tres piezas. Primero, el mensaje: I feel tired when the music is loud, because I start work early. Después, la petición cortés: Would you mind turning it down? (mind va seguido de -ing). Si tú también te excediste, disculpa equilibrada: I'm sorry I lost my temper, but I do need some quiet. Cierra con un acuerdo (Let's agree on...) y, si quieres, un arrepentimiento: I wish I had asked first."
    },
    "patron": {
     "texto": "Queja + petición:",
@@ -1525,7 +1532,7 @@
       "consigna": "Lee la situación y elige la disculpa equilibrada que Leo debería decir.",
       "feedback": "La disculpa equilibrada pide perdón por la propia parte y mantiene la necesidad; las otras la retiran o culpan.",
       "opciones": [
-       "I'm sorry I raised my voice, but I still need quiet hours at night.",
+       "I'm sorry I shouted, but I still need some quiet hours at night.",
        "I'm sorry you feel that way, and I will never mention it again.",
        "I apologise, but honestly it was your fault that I raised my voice at all."
       ],
@@ -1534,9 +1541,9 @@
      },
      {
       "formato": "completar",
-      "consigna": "Completa: «Lo siento, levanté la voz, pero sí necesito silencio por las noches.»",
+      "consigna": "Completa: «Lo siento, te interrumpí, pero sí necesito terminar mi idea.»",
       "feedback": "But une la disculpa con la necesidad que se mantiene: pides perdón sin retirar lo que necesitas.",
-      "texto": "Sara apologises without dropping her need. She says: I'm sorry I raised my voice, ___ I do need some quiet at night.",
+      "texto": "Leo wants to apologise without dropping his need. He says: I'm sorry I interrupted you, ___ I do need to finish my point.",
       "respuesta": "but",
       "aceptadas": [
        "but",
@@ -1925,9 +1932,9 @@
      },
      {
       "formato": "completar",
-      "consigna": "Completa: «El principal punto de fricción parece ser el almuerzo del domingo.»",
+      "consigna": "Completa: «El verdadero punto de fricción es con qué frecuencia come junta la familia.»",
       "feedback": "Sticking point es el punto de fricción: lo que impide cerrar un acuerdo.",
-      "texto": "Both of them agree on the chores and on the music. The main sticking ___ seems to be Sunday lunch.",
+      "texto": "Both of them agree on the chores and on the music. The real sticking ___ is how often the family eats together.",
       "respuesta": "point",
       "aceptadas": [
        "point"
@@ -1978,5 +1985,18 @@
    }
   }
  ],
- "pase": "c1"
+ "pase": "c1",
+ "review": {
+  "status": "GO",
+  "reviewer": "claude-reviewer-c1",
+  "date": "2026-09-30",
+  "notes": [
+   "Revisión independiente C1 N9 c61-65: claves verificadas contra texto/audio una por una; una sola respuesta defendible por ítem.",
+   "Distractores de inferencia/actitud reescritos como casi-aciertos (actitud invertida, cierto pero no dicho, postura suavizada); c63 e0/r0/r1, c62 p0/p1/e0, c61 e0/e1/r0/r1, c65 r0.",
+   "completar: ampliadas las aceptadas con sinónimos defendibles (whenever/each time/if, validate/acknowledge/understand, deflect/dodge/avoid, but/though/yet, impartial/fair/neutral, etc.).",
+   "Fuga eliminada: frases clave de c64 r2 y c65 e3 coincidían con la explicación/enseñanza; reescritas. c64 p0 pasa a tercera persona (el género no se oía).",
+   "Escritura larga c64/c65: consigna alineada al wordRange del mapa y mínimo de rúbrica al 70 % del rango.",
+   "Español neutro: piso, vale, móvil, enfado sustituidos. Colecciones nuevas (take a break, raise my voice, agree on, own up to, put in writing) usadas con naturalidad y de nivel aceptable C1."
+  ]
+ }
 }
