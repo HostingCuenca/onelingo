@@ -189,10 +189,19 @@ def es(texto: str) -> dict:
 
 # ------------------------------------------------------------ construcción --
 
+ORDINAL = re.compile(
+    r"\b(?:la|el|lo)\s+(?:primer[oa]?|segund[oa]|tercer[oa]?|cuart[oa]|últim[oa])\b"
+    r"|\bopci[oó]n\s+(?:[abcd1-4])\b|\b(?:first|second|third|last)\s+(?:option|answer|choice)\b",
+    re.IGNORECASE,
+)
+
+
 def construir_item(it: dict, *, cid_corto: str, pool: str, k: int, concepto: str,
                    requiere: list[str], turno: int = 0) -> dict:
     fmt = it["formato"]
     iid = f"{cid_corto}.{PREFIX[pool]}{k:02d}"
+    if fmt in ("elegir", "escuchar") and ORDINAL.search(it.get("feedback", "") + " " + it.get("pista", "")):
+        raise ErrorAutoria(f"{iid}: el feedback o la pista citan la posición de una opción; el orden cambia al construir: cita el contenido")
     origin: dict = {"kind": "editorial", "variantSeed": "0", "variantId": f"{iid}.seed-0",
                     "feedback": es(it["feedback"])}
     if pool == "practiceGuided":
