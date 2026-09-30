@@ -147,3 +147,12 @@ Pruebas: 176 Flutter (1 omitida), validar_ruta 10 idiomas 0 errores, construir_b
 Backup: `/var/www/onelingo/backups/20260930-edu-7-n3-n4/web-anterior` (= edu-6), `env.sha256`.
 Health: `/api/salud` 200, `onelingo-api` online sin reinicio, `.env` igual, APK/avatar 200, `n4-editorial.json` servido con gzip. Lock creado y liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-7-n3-n4/web-retirada-post && cp -al backups/20260930-edu-7-n3-n4/web-anterior web'`
+
+## Release: 20260930-edu-8-n5-n6
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: N5 (B2 entrada) y N6 (B2 consolidación) completos, 100 clases cada uno, autoría compacta con revisión independiente GO. Total publicado N1–N6: 600 clases. App: rúbricas de escritura con flexión de la última palabra; validadores con números con símbolo y variantes UK/US.
+Commit: `c774806` (+ `cdb57b7`) · Build: `main.dart.js` `2d5759d1…`; biblioteca `4b4fd601…`.
+Pruebas: 177 Flutter (1 omitida), validar_ruta 0 errores, construir_bloque OK en N5 y N6.
+Backup: `/var/www/onelingo/backups/20260930-edu-8-n5-n6/web-anterior` (= edu-7). Health: salud, APK, avatar y `n6-editorial.json` 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-8-n5-n6/web-retirada-post && cp -al backups/20260930-edu-8-n5-n6/web-anterior web'`
