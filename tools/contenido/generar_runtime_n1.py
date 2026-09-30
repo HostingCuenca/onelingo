@@ -26,7 +26,7 @@ COURSE_OUT = ROUTE_DIR / "curso.json"
 VERSION = "2026.09.30-en-pulido.1"
 # Corte publicado: clases aprobadas (GO) por nivel, siempre contiguas desde C1.
 # Ampliarlo es una decisión explícita tras la revisión independiente.
-CUT = {"n1": 100, "n2": 100, "n3": 100, "n4": 100, "n5": 100, "n6": 100, "n7": 100}
+CUT = {"n1": 100, "n2": 100, "n3": 100, "n4": 100, "n5": 100, "n6": 100, "n7": 100, "n8": 100, "n9": 100}
 CEFR = {"n1": "A1", "n2": "A2", "n3": "B1", "n4": "B1", "n5": "B2", "n6": "B2",
         "n7": "B2", "n8": "C1", "n9": "C1", "n10": "C1"}
 LEVELS = tuple(

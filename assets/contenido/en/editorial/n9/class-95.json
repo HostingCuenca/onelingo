@@ -237,7 +237,8 @@
         "answer": {
           "text": "provided",
           "accepted": [
-            "provided"
+            "provided",
+            "providing"
           ]
         },
         "choices": [],
@@ -262,7 +263,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:50df3a47e14c7080814418c03635e433e14af18a26741ee7015e97bf71678499"
+        "contentHash": "sha256:bf0970ab2543cb8406a990cd39fbe2e00c33450ca8b1e4161851179c621da0fc"
       },
       {
         "id": "en.n9.c95.pg03",
@@ -330,6 +331,10 @@
             "a",
             "shorter",
             "contract"
+          ],
+          "accepted": [
+            "I can offer a bigger deposit in exchange for a shorter contract",
+            "In exchange for a shorter contract I can offer a bigger deposit"
           ]
         },
         "choices": [],
@@ -350,7 +355,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:4f43d235a80ee6a50489bacc47b309d828c4d85401dd27cfb5ac950e27f4d46f"
+        "contentHash": "sha256:415d2ab35447ec92cb3a877ccf12a0e9dd5dfd79128b0f9e3d891a5f8e2629c7"
       },
       {
         "id": "en.n9.c95.p02",
@@ -489,10 +494,10 @@
           "es": "Escribe al casero: preséntate, negocia con condiciones y repara un malentendido."
         },
         "answer": {
-          "text": "Dear Mr Reid, Good morning. I am a newcomer to the city, and I am writing about the flat on Elm Street. I can pay the deposit now, provided that the rent is 650 a month instead of 700. In exchange for the lower rent, I would sign a twelve-month contract. I also think there was a misunderstanding about the floor: I meant the second floor, not the first. Let me clarify this now so that we can avoid any problem later. Thank you very much for your patience, and I look forward to your reply. Kind regards, Carlos",
+          "text": "Dear Mr Reid, Good morning. I am a newcomer to the city, and I am writing about the flat on Elm Street. I arrived last week, and I am looking for a quiet place near my new job. I can pay the deposit now, provided that the rent is 650 a month instead of 700. In exchange for the lower rent, I would sign a twelve-month contract, and I can start on the first of next month. I also think there was a misunderstanding about the floor: I meant the second floor, not the first. Let me clarify this now so that we can avoid any problem later. Thank you very much for your patience, and I look forward to your reply. Kind regards, Carlos",
           "accepted": [
-            "Dear Mr Reid, Good morning. I am a newcomer to the city, and I am writing about the flat on Elm Street. I can pay the deposit now, provided that the rent is 650 a month instead of 700. In exchange for the lower rent, I would sign a twelve-month contract. I also think there was a misunderstanding about the floor: I meant the second floor, not the first. Let me clarify this now so that we can avoid any problem later. Thank you very much for your patience, and I look forward to your reply. Kind regards, Carlos",
-            "Dear Mr Reid, I have just arrived in the city, so I am new to everything. I am interested in the flat on Elm Street. I would pay the deposit today as long as the rent is 650 a month and not 700. In return, I can offer a twelve-month contract. I believe there was a misunderstanding about the floor, because what I meant was the second floor. I would like to clarify this before we meet. Thank you for your time and your patience. Yours sincerely, Carlos"
+            "Dear Mr Reid, Good morning. I am a newcomer to the city, and I am writing about the flat on Elm Street. I arrived last week, and I am looking for a quiet place near my new job. I can pay the deposit now, provided that the rent is 650 a month instead of 700. In exchange for the lower rent, I would sign a twelve-month contract, and I can start on the first of next month. I also think there was a misunderstanding about the floor: I meant the second floor, not the first. Let me clarify this now so that we can avoid any problem later. Thank you very much for your patience, and I look forward to your reply. Kind regards, Carlos",
+            "Dear Mr Reid, I have just arrived in the city, so I am new to everything. I am interested in the flat on Elm Street, and I would like to visit it this week. I would pay the deposit today as long as the rent is 650 a month and not 700. In return, I can offer a twelve-month contract. I believe there was a misunderstanding about the floor, because what I meant was the second floor. I would like to clarify this before we meet. Thank you for your time and your patience. Yours sincerely, Carlos"
           ]
         },
         "choices": [],
@@ -512,19 +517,27 @@
           "scoring": {
             "wordRange": [
               85,
-              170
+              190
             ],
             "evidenceGroups": [
               [
                 "newcomer",
                 "new to the city",
                 "new in the city",
-                "just arrived"
+                "new to town",
+                "new in town",
+                "just arrived",
+                "recently arrived",
+                "have arrived",
+                "arrived"
               ],
               [
                 "provided that",
+                "providing that",
                 "as long as",
-                "on condition that"
+                "so long as",
+                "on condition that",
+                "on the condition that"
               ],
               [
                 "in exchange for",
@@ -532,11 +545,16 @@
                 "in return"
               ],
               [
-                "misunderstanding"
+                "misunderstanding",
+                "mix-up",
+                "mixup"
               ],
               [
                 "I meant",
-                "what I meant"
+                "what I meant",
+                "I was referring to",
+                "I was talking about",
+                "I wanted to say"
               ],
               [
                 "Thank you",
@@ -552,7 +570,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:a71b654b3a27280aeaad1fc4cfde0a4ab8f97cbf8b952246852a1be5eaf4d6a4"
+        "contentHash": "sha256:811b3a7a641a793774e1ffd4a625c20d0ce8910652bb9ccec05e65ab74726c16"
       },
       {
         "id": "en.n9.c95.e02",
@@ -648,12 +666,12 @@
         "id": "en.n9.c95.e04",
         "format": "completar",
         "prompt": {
-          "es": "Completa tres funciones: contacto, condición y reparación."
+          "es": "Completa tres funciones: contacto, intercambio y reparación."
         },
         "answer": {
-          "text": "made | provided | misunderstanding",
+          "text": "made | in | misunderstanding",
           "accepted": [
-            "made | provided | misunderstanding"
+            "made | in | misunderstanding"
           ],
           "parts": [
             {
@@ -663,15 +681,18 @@
               ]
             },
             {
-              "text": "provided",
+              "text": "in",
               "accepted": [
-                "provided"
+                "in"
               ]
             },
             {
               "text": "misunderstanding",
               "accepted": [
-                "misunderstanding"
+                "misunderstanding",
+                "mix-up",
+                "mixup",
+                "confusion"
               ]
             }
           ]
@@ -687,11 +708,11 @@
           "variantSeed": "0",
           "variantId": "en.n9.c95.e04.seed-0",
           "feedback": {
-            "es": "«What made you…?» sostiene el contacto, provided that marca la condición y there was a misunderstanding repara sin culpar."
+            "es": "«What made you…?» sostiene el contacto, in exchange for propone un trueque y there was a misunderstanding repara sin culpar."
           },
           "sentences": [
             "Nice to meet you! What ___ you move to this city?",
-            "I will pay now, ___ that the rent stays the same.",
+            "I will sign for a year ___ exchange for a lower rent.",
             "I think there was a ___ about the date."
           ],
           "scoring": {
@@ -704,7 +725,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:057fc1afa6ebe01988da686685eca030d27c613d1f84c0c6bdac93d9e5e42765"
+        "contentHash": "sha256:8c10f216ed3172a451a9342c5e7eb068fa83a8eef04e4d7ca0844e747898094a"
       }
     ],
     "review": [

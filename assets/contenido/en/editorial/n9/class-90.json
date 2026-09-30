@@ -222,7 +222,8 @@
         "answer": {
           "text": "intend",
           "accepted": [
-            "intend"
+            "intend",
+            "mean"
           ]
         },
         "choices": [],
@@ -247,7 +248,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:02a1cac52f812d2cb6df88935a8e9ad14b10368bb1ae2ec59521ea793d2690a0"
+        "contentHash": "sha256:0233b016840167c26be1a46d073034a5ddfd649d9c350c5a93daed83457cbff1"
       },
       {
         "id": "en.n9.c90.pg03",
@@ -566,16 +567,16 @@
           "variantSeed": "0",
           "variantId": "en.n9.c90.e02.seed-0",
           "feedback": {
-            "es": "Tom entiende «yes» al pie de la letra y Mia usa «maybe» como forma cortés de dudar: el mismo término significa cosas distintas."
+            "es": "Tom lee «maybe» como un no y Mia lo usa como una forma cortés de dudar: la misma palabra significa cosas distintas para cada uno."
           },
-          "text": "Tom: In my country, yes usually means yes. Mia: In mine, maybe can be a polite way to say I am not sure."
+          "text": "Tom: In my country, maybe often means no. Mia: In mine, maybe can be a polite way to say I am not sure."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:f468f69edc037250b7f6228a5ec19ffe8ac176a580785f852ed9de81a64abdeb"
+        "contentHash": "sha256:c829bcb87b13aef6c222e5986af968308912be9a3da5d498e0c797501e388468"
       },
       {
         "id": "en.n9.c90.e03",
@@ -584,28 +585,28 @@
           "es": "Completa el mensaje de reparación con la palabra que falta en cada frase."
         },
         "answer": {
-          "text": "apologise | rude | misunderstanding",
+          "text": "impression | custom | rude",
           "accepted": [
-            "apologise | rude | misunderstanding"
+            "impression | custom | rude"
           ],
           "parts": [
             {
-              "text": "apologise",
+              "text": "impression",
               "accepted": [
-                "apologise",
-                "apologize"
+                "impression"
+              ]
+            },
+            {
+              "text": "custom",
+              "accepted": [
+                "custom",
+                "tradition"
               ]
             },
             {
               "text": "rude",
               "accepted": [
                 "rude"
-              ]
-            },
-            {
-              "text": "misunderstanding",
-              "accepted": [
-                "misunderstanding"
               ]
             }
           ]
@@ -621,25 +622,25 @@
           "variantSeed": "0",
           "variantId": "en.n9.c90.e03.seed-0",
           "feedback": {
-            "es": "Apologise, rude y misunderstanding completan una reparación breve."
+            "es": "Impression, custom y rude completan una explicación cultural breve: el efecto, la costumbre y cómo sonó."
           },
           "sentences": [
-            "I ___ for the confusion.",
-            "I am sorry it sounded ___.",
-            "It was a ___ and not a refusal."
+            "My answer may have given you the wrong ___.",
+            "In my country it is a ___ to greet everyone with a hug.",
+            "I hope my words did not sound ___ to you."
           ],
           "scoring": {
             "parts": 3,
             "minimumCorrect": 3
           },
-          "text": "Pistas en español: disculparse, grosero, malentendido."
+          "text": "Pistas en español: impresión, costumbre, grosero."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:1cc74f8487d184c0ed168f971891e4b215f9c3f728283f1f979683352a0bd016"
+        "contentHash": "sha256:71816c60b5e672d6ce1f4dee62fcc37282dba12e4639f476eb8dd7a970d4bd37"
       },
       {
         "id": "en.n9.c90.e04",
@@ -759,14 +760,48 @@
           "feedback": {
             "es": "Una buena aclaración dice qué querías decir (I meant) y mantiene la puerta abierta con un suavizante."
           },
-          "text": "Un amigo entendió «maybe» como un no. Explica en una frase qué querías decir, con un suavizante."
+          "text": "Un amigo entendió «maybe» como un no. Explica en una frase qué querías decir, con un suavizante.",
+          "scoring": {
+            "wordRange": [
+              6,
+              30
+            ],
+            "evidenceGroups": [
+              [
+                "I meant",
+                "what I meant",
+                "I mean",
+                "I wanted to say",
+                "I was trying to say",
+                "I did not mean",
+                "I didn't mean"
+              ],
+              [
+                "not sure",
+                "unsure",
+                "not certain",
+                "hesitant",
+                "not decided",
+                "polite"
+              ],
+              [
+                "would",
+                "could",
+                "might",
+                "perhaps",
+                "maybe",
+                "I think",
+                "I hope"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9876bcae6fb77b098ee2ef18c4341d4ac7f570c607debd431dbeae41daf9de38"
+        "contentHash": "sha256:daae940037593431e37b43ed003ab785a65c1dd0f4cc3da704837a993a84ecf8"
       },
       {
         "id": "en.n9.c90.r03",
@@ -777,7 +812,8 @@
         "answer": {
           "text": "clarify",
           "accepted": [
-            "clarify"
+            "clarify",
+            "explain"
           ]
         },
         "choices": [],
@@ -799,7 +835,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9e6a463b6f9a1dc5ba4a27576e5f7314dc2e4386737d9f46d519a3c6ca10febc"
+        "contentHash": "sha256:507df93030af86163d751c39820a0b2c23d4ba214ca670fe7e7c6cc70c409cb0"
       }
     ]
   },

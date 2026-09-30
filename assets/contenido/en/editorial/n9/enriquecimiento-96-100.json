@@ -139,7 +139,7 @@
     "en.n9.class-97": {
       "explicacion": {
         "titulo": "Editar con precisión: registro, cohesión y matiz",
-        "texto": "Editar con precisión es revisar un borrador con seis comprobaciones agrupadas en tres áreas. Registro: ¿el saludo y las palabras encajan con el lector? Cohesión: ¿hay conectores (however, so, although) o son frases cortas y sueltas? Matiz: ¿las afirmaciones fuertes se ajustan con seem, appear, may, many, some? Además, sustituye lo vago (soon) por datos exactos (by Friday). Un cambio vale solo si mejora el borrador: cambiar una palabra por un sinónimo sin ganar precisión no cuenta."
+        "texto": "Editar con precisión es revisar un borrador con cuatro comprobaciones. Registro: ¿el saludo y las palabras encajan con el lector? Cohesión: ¿hay conectores (however, so, although) o son frases cortas y sueltas? Matiz: ¿las afirmaciones fuertes se ajustan con seem, appear, may, many, some? Vaguedad: sustituye lo impreciso (soon) por datos exactos (by Friday). Un cambio vale solo si mejora el borrador: cambiar una palabra por un sinónimo sin ganar precisión no cuenta."
       },
       "patron": {
         "texto": "Problema + edición:",
@@ -167,7 +167,7 @@
         {
           "incorrecto": "However the menu is better, students complain.",
           "correcto": "Although the menu is better, students complain.",
-          "explicacion": "However no une dos cláusulas con una coma, como «aunque». Usa although, o separa con punto: The menu is better. However, students complain."
+          "explicacion": "However no equivale a «aunque»: no introduce una cláusula subordinada tras otra con coma. Usa although, o separa con punto: The menu is better. However, students complain."
         }
       ],
       "situacion": {
@@ -180,13 +180,13 @@
           },
           {
             "hablante": "Ana",
-            "texto": "Use Dear Ms Lopez for the director, and write many students seem to dislike the food.",
-            "traduccion": "Usa Dear Ms Lopez para la directora y escribe que a muchos estudiantes parece no gustarles la comida."
+            "texto": "Use Dear Ms Lopez for the director. 'Everyone' overstates the problem, so write many students seem to dislike the food.",
+            "traduccion": "Usa Dear Ms Lopez para la directora. «Todos» exagera el problema, así que escribe que a muchos estudiantes parece no gustarles la comida."
           },
           {
             "hablante": "Tom",
-            "texto": "And We will ask soon?",
-            "traduccion": "¿Y «Preguntaremos pronto»?"
+            "texto": "And what about 'We will ask soon'?",
+            "traduccion": "¿Y qué hago con «Preguntaremos pronto»?"
           },
           {
             "hablante": "Ana",
@@ -642,5 +642,16 @@
         ]
       }
     }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C97: ejemplo 2 sin comillas (inglés no gramatical) corregido; explicación decía '6 comprobaciones en 3 áreas' pero listaba 4: corregida; diálogo: el motivo del cambio de 'everyone' no aparecía, ahora Ana lo explica; rúbrica añade grupo de conector y variantes de matiz.",
+      "C98: eva 1 se respondía solo con el audio: ahora contrasta audio y texto; eva 2 y ordenar ya no repiten whereas/overall del guiado; rúbrica con variantes (neighbors, £200,000, however).",
+      "C99: rúbrica oral-escrita ampliada (postura negativa, variantes de matiz/condición); eva 3 ya no repite la frase de guiado 0; rep 1 ya no repite el audio del guiado 2.",
+      "C100: modelo ampliado de 99 a 125 palabras (política de longitud), rúbrica con summarize/15th June/providing that; audio identifica a Tom; eva 3 no duplica pra 0; C96: concesión eva 3 ya no repite Admittedly del guiado."
+    ]
   }
 }

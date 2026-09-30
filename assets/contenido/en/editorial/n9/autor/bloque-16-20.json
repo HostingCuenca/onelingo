@@ -276,14 +276,14 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige a quién se dirige la persona.",
-      "audio": "Dear Sir or Madam, I am calling regarding my booking. Kindly call me back by Friday.",
+      "audio": "Good afternoon. I am calling regarding my booking. Kindly call me back by Friday.",
       "opciones": [
        "A company, in a formal way.",
        "A friend, in a casual way.",
        "A neighbour, with slang."
       ],
       "respuesta": 0,
-      "feedback": "Dear Sir or Madam, regarding y Kindly son marcas formales propias de una empresa."
+      "feedback": "Good afternoon, regarding y Kindly son marcas formales propias de quien se dirige a una empresa."
      },
      {
       "formato": "completar",
@@ -312,7 +312,7 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha y elige el rasgo que muestra que el mensaje es informal.",
-      "audio": "Hey, it is Sam. Can you send me the photos? Cheers!",
+      "audio": "Hey, it is Sam. Can you call me later? Cheers!",
       "opciones": [
        "It opens and closes with casual words.",
        "It uses long, official phrases.",
@@ -346,9 +346,9 @@
      },
      {
       "formato": "ordenar",
-      "consigna": "Ordena: «Le escribo con respecto a mi reserva.»",
-      "respuesta": "I am writing regarding my booking",
-      "feedback": "La apertura formal es I am writing regarding + nombre."
+      "consigna": "Ordena: «Le agradecería que pudiera confirmar antes del viernes.»",
+      "respuesta": "I would be grateful if you could confirm by Friday",
+      "feedback": "La petición formal es I would be grateful if you could + verbo, y el plazo se marca con by + día."
      }
     ],
     "repaso": [
@@ -688,13 +688,14 @@
      },
      {
       "formato": "completar",
-      "consigna": "Completa: «Su solicitud ha sido aprobada.»",
-      "texto": "Your request has been ___.",
-      "respuesta": "approved",
+      "consigna": "Completa: «Su queja ha sido recibida.»",
+      "texto": "Your complaint has been ___.",
+      "respuesta": "received",
       "aceptadas": [
-       "approved"
+       "received",
+       "registered"
       ],
-      "feedback": "La pasiva has been approved da un tono oficial y no menciona quién decidió."
+      "feedback": "La pasiva has been received da un tono oficial y no menciona quién la recibió."
      },
      {
       "formato": "escuchar",
@@ -712,7 +713,10 @@
       "formato": "ordenar",
       "consigna": "Ordena: «Responderemos a su mensaje antes del viernes.»",
       "respuesta": "We will respond to your message by Friday",
-      "feedback": "Respond se construye con to, y el plazo se marca con by + día."
+      "feedback": "Respond se construye con to, y el plazo se marca con by + día.",
+      "aceptadas": [
+       "We will respond by Friday to your message"
+      ]
      }
     ],
     "repaso": [
@@ -729,22 +733,23 @@
      },
      {
       "formato": "elegir",
-      "consigna": "Elige la frase sin palabras de sobra.",
+      "consigna": "¿Qué frase anuncia el cambio de forma oficial, sin nombrar al responsable?",
       "opciones": [
-       "Please combine the two lists.",
-       "Please combine together the two lists.",
-       "Please combine the two lists together."
+       "The meeting has been postponed.",
+       "We have postponed the meeting.",
+       "I have postponed the meeting."
       ],
       "respuesta": 0,
-      "feedback": "Combine ya indica que se unen las listas; together repite esa idea."
+      "feedback": "La voz pasiva centra la frase en lo ocurrido y no dice quién lo decidió; las activas nombran al responsable."
      },
      {
       "formato": "completar",
-      "consigna": "Completa: «Vamos a investigar el problema.»",
+      "consigna": "Completa con el verbo formal: «Vamos a investigar el problema.»",
       "texto": "We will ___ the problem.",
       "respuesta": "investigate",
       "aceptadas": [
-       "investigate"
+       "investigate",
+       "examine"
       ],
       "feedback": "Investigate va directamente seguido del problema, sin about."
      }
@@ -972,13 +977,13 @@
       "formato": "elegir",
       "consigna": "Elige la corrección que suaviza el mensaje sin perder la petición.",
       "opciones": [
-       "Could you answer my email today, please?",
-       "Answer my email now, please, now.",
-       "I formally request an immediate answer to my email."
+       "Could you send me the report by noon, please?",
+       "Send me the report by noon, please, now.",
+       "I formally request that you send me the report immediately."
       ],
       "respuesta": 0,
-      "feedback": "Could you + please convierte la orden en una petición cortés; la tercera se vuelve rígida.",
-      "texto": "Answer my email now.",
+      "feedback": "Could you + please convierte la orden en una petición cortés y conserva el plazo; la tercera se vuelve rígida.",
+      "texto": "Send me the report by noon.",
       "pista": "Convierte la orden en una pregunta con could."
      }
     ],
@@ -1049,9 +1054,9 @@
       "consigna": "Escucha y elige qué pide la persona y cómo lo hace.",
       "audio": "Good morning. Unfortunately, I cannot attend the meeting on Friday. Would it be possible to move it to Monday?",
       "opciones": [
-       "She politely asks to change the day.",
-       "She orders everyone to come on Monday.",
-       "She cancels the meeting coldly."
+       "The speaker politely asks to change the day.",
+       "The speaker orders everyone to come on Monday.",
+       "The speaker cancels the meeting coldly."
       ],
       "respuesta": 0,
       "feedback": "Unfortunately y Would it be possible? son marcadores de tacto: pide cambiar el día con cortesía."
@@ -1093,21 +1098,21 @@
       "opciones": [
        "That the neighbours make less noise.",
        "That the neighbours leave the building.",
-       "That the neighbours call him after ten."
+       "That the neighbours call later in the evening."
       ],
       "respuesta": 0,
       "feedback": "Keeping the noise down significa hacer menos ruido; la petición va con Would you mind."
      },
      {
       "formato": "elegir",
-      "consigna": "¿Qué mensaje suena rígido entre dos amigos?",
+      "consigna": "¿Qué frase da una mala noticia con tacto?",
       "opciones": [
-       "I am writing to inform you that dinner is ready.",
-       "Dinner is ready, come when you can!",
-       "Dinner is ready! Come whenever."
+       "Unfortunately, your order will arrive late; I am sorry about that.",
+       "Your order is late. Wait.",
+       "Your order is late, and that is not my problem."
       ],
       "respuesta": 0,
-      "feedback": "La fórmula oficial I am writing to inform you that no encaja en una invitación a cenar entre amigos."
+      "feedback": "Unfortunately y una disculpa preparan al lector para la mala noticia; las otras dos la dan sin ningún tacto."
      }
     ]
    }
@@ -1318,7 +1323,7 @@
     "guiada": [
      {
       "formato": "elegir",
-      "consigna": "Elige el saludo que encaja con una petición a un profesor.",
+      "consigna": "Elige el saludo para pedir algo a tu profesor, el señor Lee.",
       "opciones": [
        "Dear Mr Lee,",
        "Hey Lee!",
@@ -1416,7 +1421,8 @@
          "hi sam",
          "could we swap",
          "can we swap",
-         "cheers"
+         "cheers",
+         "hello sam"
         ],
         [
          "dear mr lee",
@@ -1427,13 +1433,20 @@
         [
          "dear sir or madam",
          "i would be grateful",
-         "i am writing regarding"
+         "i am writing regarding",
+         "kind regards"
         ],
         [
          "family event",
          "family thing",
          "family celebration",
-         "family matter"
+         "family matter",
+         "family occasion",
+         "family gathering",
+         "family dinner"
+        ],
+        [
+         "friday"
         ]
        ]
       }
@@ -1503,7 +1516,9 @@
       "texto": "Pídele a Tom que te preste sus apuntes del jueves; tono informal.",
       "respuesta": "Hey Tom, could you lend me your notes from Thursday? Cheers!",
       "aceptadas": [
-       "Hi Tom, can you lend me your notes from Thursday? Thanks!"
+       "Hi Tom, can you lend me your notes from Thursday? Thanks!",
+       "Hey Tom, can you lend me your notes from Thursday? Cheers!",
+       "Hi Tom, could you lend me your notes from Thursday? Thanks!"
       ],
       "feedback": "Un compañero recibe saludo informal, una pregunta breve con could you y un cierre como Cheers.",
       "textoIdioma": "es"
@@ -1814,10 +1829,10 @@
       "opciones": [
        "We will investigate the delay and respond within three days.",
        "We will look into the delay and get back to you in three days.",
-       "We will sort the delay out and come back again in three days."
+       "Leave the delay with us; we will sort it out in three days."
       ],
       "respuesta": 0,
-      "feedback": "Investigate y respond son las opciones formales; la última, además, repite la idea con come back again."
+      "feedback": "Investigate y respond son los verbos formales; las otras opciones usan phrasal verbs (look into, get back to, sort out) y suenan más cercanas."
      },
      {
       "formato": "escuchar",
@@ -1835,7 +1850,7 @@
       "formato": "escribir",
       "consigna": "Escribe la reclamación formal con hechos, tu reacción, una petición concreta y un plazo.",
       "texto": "Compraste un horno el 3 de marzo. Llegó con dos semanas de retraso y está defectuoso. Tenías una cena familiar el sábado y te sentiste decepcionado. El retraso es inaceptable. Pide un horno nuevo o el reembolso completo antes del viernes. Tono formal y firme, con saludo y despedida.",
-      "respuesta": "Dear Sir or Madam, I am writing to complain about the oven I bought on 3 March. The delivery arrived two weeks late, and the oven is faulty. I was disappointed, because we needed it for a family dinner on Saturday. This delay is unacceptable, and I expect you to resolve it. I would therefore be grateful if you could arrange a replacement or a full refund by Friday. I look forward to your reply. Kind regards, Carlos Ruiz",
+      "respuesta": "Dear Sir or Madam, I am writing to complain about the oven I bought on 3 March. The delivery arrived two weeks late, and the oven is faulty. I was disappointed, because we needed it for a family dinner on Saturday. This delay is unacceptable, and I expect you to resolve it. I would therefore be grateful if you could arrange a replacement or a full refund by Friday. Please tell me what you will do about the delay. I look forward to your reply. Kind regards, Carlos Ruiz",
       "aceptadas": [
        "Dear Sir or Madam, I am writing regarding the oven I bought on 3 March. It arrived two weeks late, and it is broken. I am disappointed, because we wanted to use it for a family dinner. Such a delay is unacceptable. I would be grateful if you could send a replacement or refund the full price by Friday. Kind regards, Carlos Ruiz"
       ],
@@ -1856,7 +1871,10 @@
         [
          "two weeks late",
          "2 weeks late",
-         "arrived late"
+         "arrived late",
+         "two weeks after",
+         "delayed by two weeks",
+         "two weeks"
         ],
         [
          "faulty",
@@ -1865,9 +1883,18 @@
          "is not working"
         ],
         [
+         "disappointed",
+         "unacceptable",
+         "not acceptable",
+         "upset"
+        ],
+        [
          "replacement",
          "full refund",
-         "refund the full price"
+         "refund the full price",
+         "new oven",
+         "a refund",
+         "money back"
         ],
         [
          "by friday",
@@ -1947,5 +1974,18 @@
     ]
    }
   }
- ]
+ ],
+ "review": {
+  "status": "GO",
+  "reviewer": "claude-reviewer-independiente",
+  "date": "2026-09-30",
+  "notes": [
+   "Revisadas C16-C20 contra mapa-n9 (registro, precisión, diagnóstico de tono, reescritura para tres lectores, reclamación+respuesta): coherentes.",
+   "P1 corregido: duplicados cercanos eliminados. C18 guiada[0]/[2] usaban el mismo mensaje 'Answer my email now' (ahora guiada[2] usa 'Send me the report by noon'). C16 eval[1] (photos/Cheers) repetía guiada0; C16 eval[3] ordenar repetía guiada1 'I am writing regarding my booking'; C17 eval[1] 'request has been approved' repetía el audio de practica2; C17 repaso[1] repetía el patrón 'together' de guiada2; C18 repaso[2] y practica0 repetían 'I am writing to inform you that'.",
+   "P1 corregido: C16 practica1 audio empezaba con 'Dear Sir or Madam' en una llamada (antinatural); ahora 'Good afternoon'. C19 guiada0 no decía que el profesor se llama Mr Lee (dato necesario ausente).",
+   "P1 corregido: C20 eval[1] afirmaba que 'come back again' es redundante (es inglés natural); distractor y feedback reescritos. C18 opciones de escucha asumían género ('She', 'him'): neutralizadas.",
+   "P2: C17 repaso[2] ahora pide 'verbo formal' (look into también es válido); ordenar C17 eval[3] admite orden alternativo; rúbricas de C19/C20 ampliadas (family occasion, reacción en C20, two weeks, new oven); modelo C20 eval[3] 89 palabras.",
+   "P2 conocido: dificultad moderada para C1 por la restricción léxica del constructor; 'advance planning' como redundancia es discutible pero está enseñada."
+  ]
+ }
 }

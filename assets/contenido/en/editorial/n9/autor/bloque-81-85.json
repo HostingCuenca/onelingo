@@ -54,6 +54,10 @@
     {
      "en": "difference",
      "es": "diferencia"
+    },
+    {
+     "en": "departure",
+     "es": "salida"
     }
    ],
    "ensenanza": [
@@ -124,7 +128,7 @@
        "texto": "decision"
       },
       {
-       "texto": "-e → -ion"
+       "texto": "-de → -sion"
       }
      ],
      [
@@ -398,15 +402,15 @@
      },
      {
       "formato": "elegir",
-      "consigna": "¿Qué versión nominal dice lo mismo que la frase del personal?",
-      "feedback": "La versión correcta cambia arrived por el sustantivo arrival y coloca late delante: the late arrival.",
+      "consigna": "¿Qué versión nominal dice lo mismo que la frase del tren?",
+      "feedback": "La versión correcta cambia departed por el sustantivo departure y coloca late delante: the late departure.",
       "opciones": [
-       "The late arrival of the staff",
-       "The late arrive of the staff",
-       "The arriving late of staff"
+       "The late departure of the train",
+       "The late depart of the train",
+       "The departing late of train"
       ],
       "respuesta": 0,
-      "texto": "The staff arrived late."
+      "texto": "The train departed late."
      }
     ],
     "repaso": [
@@ -713,7 +717,11 @@
       "consigna": "Ordena: «Por un corte de luz, el colegio cerró temprano.»",
       "feedback": "Due to va delante del grupo nominal a power cut y la oración principal sigue después.",
       "respuesta": "Due to a power cut the school closed early",
-      "pista": "Empieza con Due to y un grupo nominal; después viene la oración."
+      "pista": "Empieza con Due to y un grupo nominal; después viene la oración.",
+      "aceptadas": [
+       "The school closed early due to a power cut",
+       "Due to a power cut, the school closed early"
+      ]
      }
     ],
     "practica": [
@@ -800,7 +808,8 @@
       "aceptadas": [
        "Due to",
        "Because of",
-       "As a result of"
+       "As a result of",
+       "Owing to"
       ]
      },
      {
@@ -860,7 +869,10 @@
       "formato": "ordenar",
       "consigna": "Ordena: «Tras la tormenta, hubo daños en dos casas.»",
       "feedback": "Damage se une con to: damage to two houses.",
-      "respuesta": "After the storm there was damage to two houses"
+      "respuesta": "After the storm there was damage to two houses",
+      "aceptadas": [
+       "There was damage to two houses after the storm"
+      ]
      }
     ]
    }
@@ -910,6 +922,10 @@
     {
      "en": "publication",
      "es": "publicación"
+    },
+    {
+     "en": "discussion",
+     "es": "discusión"
     }
    ],
    "ensenanza": [
@@ -1105,7 +1121,8 @@
        {
         "respuesta": "closed",
         "aceptadas": [
-         "closed"
+         "closed",
+         "shut"
         ]
        },
        {
@@ -1242,18 +1259,21 @@
       "aceptadas": [
        "After residents complained, the council closed the park.",
        "The council closed the park because residents complained.",
-       "The council closed the park after the residents complained."
+       "The council closed the park after the residents complained.",
+       "Residents complained, so the council closed the park.",
+       "The council closed the park after the residents had complained.",
+       "The council closed the park because of the residents' complaint."
       ],
       "textoIdioma": "es"
      },
      {
       "formato": "completar",
-      "consigna": "Completa: «La publicación del informe preocupó a los profesores.»",
-      "feedback": "Publish pasa a publication con la terminación -ation.",
-      "texto": "The ___ of the report worried the teachers.",
-      "respuesta": "publication",
+      "consigna": "Completa: «La discusión del plan duró dos horas.»",
+      "feedback": "Discuss pasa a discussion con -ion: alguien discutió el plan durante dos horas.",
+      "texto": "The ___ of the plan lasted two hours.",
+      "respuesta": "discussion",
       "aceptadas": [
-       "publication"
+       "discussion"
       ]
      }
     ]
@@ -1463,7 +1483,8 @@
       "texto": "A ___ of builders caused the delay.",
       "respuesta": "shortage",
       "aceptadas": [
-       "shortage"
+       "shortage",
+       "lack"
       ],
       "pista": "Versión con verbos: There were too few builders."
      },
@@ -1507,7 +1528,7 @@
       "opciones": [
        "The delay in construction caused a late opening and anger among families.",
        "The shortage of builders caused the closure of the library.",
-       "The investment in the library caused a rise in costs."
+       "The anger among families caused a rise in costs."
       ],
       "respuesta": 0
      },
@@ -1538,12 +1559,18 @@
          "delay",
          "late construction",
          "late opening",
-         "late arrival"
+         "late arrival",
+         "delayed",
+         "lateness",
+         "opened late"
         ],
         [
          "shortage of",
          "lack of",
-         "not enough workers"
+         "not enough workers",
+         "too few",
+         "scarcity of",
+         "shortage"
         ],
         [
          "due to",
@@ -1625,7 +1652,37 @@
        "A shortage of staff caused the early closure of the shop.",
        "The shop's early closure was due to a shortage of staff."
       ],
-      "textoIdioma": "es"
+      "textoIdioma": "es",
+      "rubrica": {
+       "palabras": [
+        8,
+        25
+       ],
+       "evidencias": [
+        [
+         "closure",
+         "closing"
+        ],
+        [
+         "due to",
+         "caused",
+         "because of",
+         "as a result of",
+         "result of",
+         "led to",
+         "resulted in",
+         "owing to"
+        ],
+        [
+         "lack of",
+         "shortage of",
+         "no staff",
+         "not enough staff",
+         "too few staff",
+         "scarcity of"
+        ]
+       ]
+      }
      },
      {
       "formato": "completar",
@@ -1770,9 +1827,9 @@
    },
    "erroresFrecuentes": [
     {
-     "incorrecto": "The article reports a reduction of stress among gardeners.",
-     "correcto": "The article reports a reduction in stress among gardeners.",
-     "explicacion": "Con reduction se usa in para lo que disminuye, no of."
+     "incorrecto": "The expansion of community gardens has led a reduction in stress.",
+     "correcto": "The expansion of community gardens has led to a reduction in stress.",
+     "explicacion": "Led se une con to: led to + sustantivo (led to a reduction)."
     },
     {
      "incorrecto": "Gardeners feel better because their participation in gardens.",
@@ -1849,7 +1906,8 @@
       "texto": "___ in the garden brings neighbours together.",
       "respuesta": "Participation",
       "aceptadas": [
-       "Participation"
+       "Participation",
+       "participation"
       ],
       "pista": "Es el sustantivo de participate y va con mayúscula al principio."
      },
@@ -1927,20 +1985,34 @@
         [
          "expansion",
          "growth",
-         "spread"
+         "spread",
+         "expand",
+         "growing",
+         "increase in the number",
+         "rise in"
         ],
         [
          "reduction in",
          "decrease in",
          "fall in",
          "less stress",
-         "stress reduction"
+         "stress reduction",
+         "reduced stress",
+         "lower stress",
+         "stress is lower",
+         "stress decreased",
+         "reduction of"
         ],
         [
          "participation",
          "involvement",
          "take part",
-         "taking part"
+         "taking part",
+         "participate",
+         "participating",
+         "gardening together",
+         "join",
+         "together"
         ],
         [
          "lack of",
@@ -1953,7 +2025,14 @@
         [
          "allocation",
          "who should receive",
-         "distribution"
+         "distribution",
+         "who gets",
+         "who receives",
+         "who can have",
+         "decide who",
+         "choose who",
+         "give plots",
+         "give the plots"
         ]
        ]
       }
@@ -2011,12 +2090,12 @@
      {
       "formato": "escuchar",
       "consigna": "Escucha la explicación oral y elige qué dice sobre el terreno público.",
-      "feedback": "La versión llana dice que hay poco terreno y que alguien (the council) debe decidir quién lo usa.",
+      "feedback": "La versión llana dice que hay poco terreno y que el ayuntamiento debe decidir quién lo usa; no habla de venderlo ni de que sobre terreno.",
       "audio": "In plain English: there is not much public land, so the council has to decide who can use it.",
       "opciones": [
-       "Someone must decide who uses the limited land.",
-       "The council wants to sell all the land.",
-       "Everyone can use the land without rules."
+       "There is little land, so the council chooses who can use it.",
+       "There is a lot of land, so everyone can use it.",
+       "There is little land, so the council wants to sell it."
       ],
       "respuesta": 0
      },
@@ -2065,9 +2144,9 @@
      },
      {
       "formato": "completar",
-      "consigna": "Completa: «El resumen deja fuera los detalles pequeños.»",
-      "feedback": "Summary es el texto breve que conserva solo los datos principales.",
-      "texto": "A good ___ leaves out small details.",
+      "consigna": "Completa: «Leyó el artículo y luego escribió un breve resumen de él.»",
+      "feedback": "Summary es el texto breve que conserva solo los datos principales del artículo.",
+      "texto": "She read the article and then wrote a short ___ of it.",
       "respuesta": "summary",
       "aceptadas": [
        "summary"
@@ -2076,5 +2155,18 @@
     ]
    }
   }
- ]
+ ],
+ "review": {
+  "status": "GO",
+  "reviewer": "claude-reviewer-independiente",
+  "date": "2026-09-30",
+  "notes": [
+   "C81: fuga corregida (la respuesta «arrival» de guiada 2 aparecía en las opciones de evaluación 4; ahora se evalúa departure, añadido al vocabulario). Tabla: decide → decision es -de → -sion.",
+   "C82: añadidas variantes igualmente correctas en ordenar (adverbial móvil) y completar (owing to).",
+   "C83: fuga corregida (repaso 3 repetía «publication», visible en guiada 3, práctica 2 y evaluación 1; ahora evalúa discussion, añadido al vocabulario). Más variantes en la reescritura de repaso 2.",
+   "C84: aceptada «lack» (sinónimo correcto de shortage); rúbricas ampliadas (evaluación 1) y añadida rúbrica a repaso 2 (modelo de 13 palabras); distractor de práctica 2 ya no muestra la respuesta de repaso 3.",
+   "C85: error frecuente 1 sustituido (reduction of no es incorrecto; ahora led → led to); variantes en rúbrica de resumen; distractores de repaso 1 más plausibles; repaso 3 ya no copia la frase de enseñanza.",
+   "P2 pendientes aceptados: varios distractores de elegir/escuchar son claramente incorrectos para un nivel C1; dificultad sostenida por la pragmática, no por el léxico."
+  ]
+ }
 }

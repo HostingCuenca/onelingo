@@ -379,14 +379,17 @@
         "id": "en.n9.c14.p03",
         "format": "escribir",
         "prompt": {
-          "es": "Pide en inglés a una vecina que te preste seis sillas para el sábado."
+          "es": "Pide en inglés a un compañero que te envíe la lista antes del jueves."
         },
         "answer": {
-          "text": "Could you lend me six chairs for Saturday?",
+          "text": "Could you send me the list by Thursday?",
           "accepted": [
-            "Could you lend me six chairs for Saturday?",
-            "Can you lend me six chairs for Saturday?",
-            "Could you lend me six chairs on Saturday?"
+            "Could you send me the list by Thursday?",
+            "Can you send me the list by Thursday?",
+            "Could you send me the list before Thursday?",
+            "Could you send the list to me by Thursday?",
+            "Please send me the list by Thursday.",
+            "Can you send me the list before Thursday?"
           ]
         },
         "choices": [],
@@ -399,16 +402,16 @@
           "variantSeed": "0",
           "variantId": "en.n9.c14.p03.seed-0",
           "feedback": {
-            "es": "Una pregunta breve con Could you + lend + objeto + plazo basta como petición."
+            "es": "Una pregunta breve con Could you + send + objeto + by + día cumple petición y plazo en una sola frase."
           },
-          "text": "Pide a una vecina que te preste seis sillas para el sábado."
+          "text": "Pide a un compañero que te envíe la lista antes del jueves."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:af6489ae02ec6c1fa10d630a6d6dee113f637e248da374e5c5af8a8019270d57"
+        "contentHash": "sha256:9e8807907d567c6d883ea1c5c652e1207182de55d93b4efcda2dbab7bbdc8a42"
       }
     ],
     "evaluation": [
@@ -419,9 +422,9 @@
           "es": "Escribe el mensaje (menos de 100 palabras) con petición, razón, plazo y siguiente paso."
         },
         "answer": {
-          "text": "Hi neighbours, we are organising the street party on Saturday at five. Could anyone lend us twelve chairs? We only have eight, and twenty people are coming. Please let me know by Thursday if you are available; otherwise, we will ask the school. Next step: I will send the final list on Friday. Thank you for your help, and please tell your families, too.",
+          "text": "Hi neighbours, we are organising the street party on Saturday at five and need your help. Could anyone lend us twelve chairs? We only have eight, and twenty people are coming. Please let me know by Thursday if you are available; otherwise, we will ask the school. Next step: I will send the final list on Friday. Thank you for your help, and please tell your families, too.",
           "accepted": [
-            "Hi neighbours, we are organising the street party on Saturday at five. Could anyone lend us twelve chairs? We only have eight, and twenty people are coming. Please let me know by Thursday if you are available; otherwise, we will ask the school. Next step: I will send the final list on Friday. Thank you for your help, and please tell your families, too.",
+            "Hi neighbours, we are organising the street party on Saturday at five and need your help. Could anyone lend us twelve chairs? We only have eight, and twenty people are coming. Please let me know by Thursday if you are available; otherwise, we will ask the school. Next step: I will send the final list on Friday. Thank you for your help, and please tell your families, too.",
             "Hello everyone, the street party is on Saturday at five. Can you lend us twelve chairs, please? We have only eight, as twenty people are coming. Please reply by Thursday, otherwise we will ask the school for some. Next step: I will send you the final list on Friday. Thanks a lot!"
           ]
         },
@@ -461,20 +464,30 @@
                 "only eight",
                 "only 8",
                 "twenty people",
-                "20 people"
+                "20 people",
+                "eight chairs",
+                "8 chairs",
+                "twenty guests",
+                "20 guests"
               ],
               [
                 "by thursday",
                 "before thursday",
                 "no later than thursday",
-                "thursday at the latest"
+                "thursday at the latest",
+                "by the end of thursday",
+                "by thursday at the latest"
               ],
               [
                 "next step",
                 "i will send the final list",
                 "i will send you the final list",
                 "i'll send the final list",
-                "i will send the list"
+                "i will send the list",
+                "send you the list",
+                "send the list",
+                "send you the final list",
+                "send the final list"
               ]
             ]
           }
@@ -484,7 +497,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:a964923f8c4670542b1ffba29d9caf3742a83770232010b46f7f6d33ff58fb15"
+        "contentHash": "sha256:8181fa9a76b8ed430d61f780c1db663784c5674bfa53b0af169b02ef6a942c02"
       },
       {
         "id": "en.n9.c14.e02",
@@ -500,7 +513,7 @@
             "text": "We will see what happens in the following days."
           },
           {
-            "text": "Next step: I will send the final list on Friday."
+            "text": "Next step: Ana will book the hall on Monday."
           },
           {
             "text": "It would be nice if things moved forward soon."
@@ -523,7 +536,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9e087aecdaa1e416251d05f5f73f86a64d4f29fbdd27193592ca63e97e7840d2"
+        "contentHash": "sha256:cf04641d3d310f2ec4c8d33e00a0d71d402edfe4f0b6e936409c795ab2dff7b1"
       },
       {
         "id": "en.n9.c14.e03",
@@ -562,7 +575,7 @@
         "id": "en.n9.c14.e04",
         "format": "ordenar",
         "prompt": {
-          "es": "Ordena: «Dime el viernes si estás libre.»"
+          "es": "Ordena: «Por favor, avísame antes del viernes si estás libre.»"
         },
         "answer": {
           "text": "Please tell me by Friday whether you are free",
@@ -576,6 +589,10 @@
             "you",
             "are",
             "free"
+          ],
+          "accepted": [
+            "Please tell me by Friday whether you are free",
+            "Please tell me whether you are free by Friday"
           ]
         },
         "choices": [],
@@ -596,7 +613,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:0b46dfc552e6e37b1266ceed2eb8b9b98d1244cc7b0486b2c923efc8a680bdfe"
+        "contentHash": "sha256:7d0a7d478c81e083f2fb5015abeedad133287269c606d5c22bebce707701a3b3"
       }
     ],
     "review": [
@@ -694,11 +711,11 @@
           "es": "Condensa el mensaje en una sola frase en inglés."
         },
         "answer": {
-          "text": "Please reply by Friday; otherwise, we will book the hall.",
+          "text": "Please reply today; otherwise, we will cancel the trip.",
           "accepted": [
-            "Please reply by Friday; otherwise, we will book the hall.",
-            "Please reply by Friday, otherwise we will book the hall.",
-            "Please answer by Friday; otherwise, we will book the hall."
+            "Please reply today; otherwise, we will cancel the trip.",
+            "Please reply today, otherwise we will cancel the trip.",
+            "Please answer today; otherwise, we will cancel the trip."
           ]
         },
         "choices": [],
@@ -711,16 +728,16 @@
           "variantSeed": "0",
           "variantId": "en.n9.c14.r03.seed-0",
           "feedback": {
-            "es": "Con by + día y otherwise el mensaje queda en una frase: plazo y consecuencia."
+            "es": "Con un plazo (today) y otherwise el mensaje queda en una frase: lo que se pide y qué pasa si no se cumple."
           },
-          "text": "Necesitamos tu respuesta el viernes como muy tarde; si no, reservaremos la sala."
+          "text": "Necesitamos tu respuesta hoy; si no, cancelaremos la excursión."
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:dc9ba3eacff91621864ff2e8fc9909e87c9d390e4fa55432ae7d73fa95ad9fd7"
+        "contentHash": "sha256:1f9426af6540ceb755c878e64f3f6860ab7637f4e2196c6897d0d263c1b8e857"
       }
     ]
   },

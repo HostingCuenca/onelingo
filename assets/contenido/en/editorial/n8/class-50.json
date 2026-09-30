@@ -281,6 +281,10 @@
             "a",
             "good",
             "plan"
+          ],
+          "accepted": [
+            "That works for me, it is a good plan",
+            "It is a good plan, that works for me"
           ]
         },
         "choices": [],
@@ -304,7 +308,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:4b71bd54d598728a95d598c6b93a876d75af38c4b4d7af8c70b04a79f8427e65"
+        "contentHash": "sha256:586e4292b7317979bdc87125e384278be5bf712b383a24f433c86d56b0dd02be"
       }
     ],
     "practice": [
@@ -339,14 +343,14 @@
           "feedback": {
             "es": "Pavement (RU) es la acera, sidewalk en EE. UU.; una buena aclaración da el equivalente de cada variedad."
           },
-          "text": "Mia: Wait on the pavement. Jack: Sorry, is that the road or the path?"
+          "text": "Tom: Wait on the pavement. Jack: Sorry, is that the road or the path?"
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:2338629df30dca99511400be369a724fcd05c42dec635d84d0a62d0a41e1d739"
+        "contentHash": "sha256:c5dce739efe5f37ec2b9091968464a7403ea089ddd510288354373e12f75f153"
       },
       {
         "id": "en.n8.c50.p02",
@@ -426,7 +430,11 @@
           "text": "Let me clarify: in Britain we say flat.",
           "accepted": [
             "Let me clarify: in Britain we say flat.",
-            "Let me clarify, in Britain we say flat."
+            "Let me clarify, in Britain we say flat.",
+            "Let me clarify: in the UK we say flat.",
+            "Let me clarify, in the UK, we say flat.",
+            "Let me clarify: in the United Kingdom we say flat.",
+            "Let me clarify that in Britain we say flat."
           ]
         },
         "choices": [],
@@ -441,14 +449,38 @@
           "feedback": {
             "es": "Let me clarify + dos puntos + in the UK we say … explica la palabra de tu variedad."
           },
-          "text": "Déjame aclarar: en Reino Unido decimos flat."
+          "text": "Déjame aclarar: en Reino Unido decimos flat.",
+          "scoring": {
+            "wordRange": [
+              6,
+              16
+            ],
+            "evidenceGroups": [
+              [
+                "let me clarify"
+              ],
+              [
+                "in britain",
+                "in the uk",
+                "in the united kingdom",
+                "in england",
+                "in great britain"
+              ],
+              [
+                "we say flat",
+                "we call it a flat",
+                "is called a flat",
+                "say flat"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9ab04c83dba562641e743b986ea8cfb00e78a7194bd627f6d0f3650ec177fa8f"
+        "contentHash": "sha256:45a07586aee1f0862f66474fc1ebae6b69dc9f3992acbd688f341379a52d17b6"
       }
     ],
     "evaluation": [
@@ -608,13 +640,13 @@
         "id": "en.n8.c50.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Resuelve el chat: aclara dos malentendidos y confirma el plan (60-130 palabras)."
+          "es": "Resuelve el chat: aclara dos malentendidos y confirma el plan (70-150 palabras)."
         },
         "answer": {
-          "text": "Hi Mia! Let me clarify: a flat is an apartment, and the lift is the elevator. Just to be clear, we put the luggage in the boot, which is the trunk of the car. Jack, arvo means afternoon, so we meet up at five this afternoon. Let me confirm the plan: we meet at the flat at five. Does that work for everyone? Sounds good!",
+          "text": "Hi Mia! Let me clarify: a flat is an apartment, and the lift is the elevator. Just to be clear, we put the luggage in the boot, which is the trunk of the car. Jack, arvo means afternoon in Australia, so we meet up at five this afternoon. Let me confirm the plan: we meet at the flat at five, take the lift, and leave together. Does that work for everyone? Please tell me if something is not clear, and we can clarify it again. Sounds good!",
           "accepted": [
-            "Hi Mia! Let me clarify: a flat is an apartment, and the lift is the elevator. Just to be clear, we put the luggage in the boot, which is the trunk of the car. Jack, arvo means afternoon, so we meet up at five this afternoon. Let me confirm the plan: we meet at the flat at five. Does that work for everyone? Sounds good!",
-            "Hello everyone! Mia, do you mean the flat? It is an apartment in British English, and the lift is the elevator. Jack, arvo means afternoon, so let us meet at five. Just to confirm: we meet at the flat at five and we put the luggage in the trunk. Does that work for you? Sounds good!"
+            "Hi Mia! Let me clarify: a flat is an apartment, and the lift is the elevator. Just to be clear, we put the luggage in the boot, which is the trunk of the car. Jack, arvo means afternoon in Australia, so we meet up at five this afternoon. Let me confirm the plan: we meet at the flat at five, take the lift, and leave together. Does that work for everyone? Please tell me if something is not clear, and we can clarify it again. Sounds good!",
+            "Hello everyone! Mia, do you mean the flat? It is an apartment in British English, and the lift is the elevator. Jack, arvo means afternoon, so let us meet at five. Just to confirm: we meet at the flat at five and we put the luggage in the trunk, which Tom calls the boot. Does that work for you? Please tell me if you have any other question about a word. Sounds good!"
           ]
         },
         "choices": [],
@@ -633,8 +665,8 @@
           "text": "Tom (Britain): We will meet at the flat and take the lift. Mia (the US): Sorry, what is a flat? And where do we put the luggage? Jack (Australia): See you this arvo, mate. What time?",
           "scoring": {
             "wordRange": [
-              60,
-              130
+              70,
+              150
             ],
             "evidenceGroups": [
               [
@@ -649,7 +681,9 @@
               ],
               [
                 "apartment",
-                "elevator",
+                "elevator"
+              ],
+              [
                 "trunk",
                 "afternoon"
               ],
@@ -658,7 +692,6 @@
                 "let me confirm",
                 "just to confirm",
                 "to confirm",
-                "we meet",
                 "sounds good",
                 "that works"
               ]
@@ -670,7 +703,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:0e9298d6613c97a3c249c22f57c66cf284625b00f6864c7a912131cd547a905d"
+        "contentHash": "sha256:6d04d95c85549bd65f674eec179690ede47b634c0429d9b811af655704403a9b"
       }
     ],
     "review": [
