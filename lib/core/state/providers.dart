@@ -488,9 +488,11 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
       nivelEscala: resultado['idioma'] == state.idiomaMeta
           ? (resultado['escala'] as String? ?? escalaDiagnosticoLegacy)
           : state.nivelEscala,
+      // Manda el nivel que eligió el alumno, no el recomendado por la prueba.
       nivelClienteInicial: resultado['idioma'] == state.idiomaMeta
-          ? ((resultado['nivelCliente'] as num?)?.round() ??
-                nivelClienteDesdeLegacy(nivel))
+          ? (resultado['escala'] == escalaDiagnosticoCliente
+                ? nivel.clamp(0, 10)
+                : nivelClienteDesdeLegacy(nivel))
           : state.nivelCliente,
       fundamentos: resultado['idioma'] == state.idiomaMeta
           ? nivel == 0

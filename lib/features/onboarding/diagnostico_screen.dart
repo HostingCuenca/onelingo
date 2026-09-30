@@ -457,7 +457,8 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     'objetivos': objetivos,
     'evidencias': evidencias,
     'version': 3,
-    'escala': 'onelingo-10-a1-c1-v1',
+    // Nombre comercial de la escala; `escala` identifica la del resultado.
+    'escalaPresentacion': 'onelingo-10-a1-c1-v1',
     'orientativo': true,
     'feedbackInmediato': true,
     'noEvaluado': ['expresión oral'],

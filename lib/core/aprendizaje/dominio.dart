@@ -149,8 +149,9 @@ InfoUnidad _estadoUnidad(
         repaso is Map && repaso['necesitaRefuerzo'] == true;
     return InfoUnidad(
       dominada ? EstadoUnidad.dominada : EstadoUnidad.aprobada,
-      repasoPendiente:
-          necesitaRefuerzo || (proximo != null && !proximo.isAfter(hoy)),
+      // Tras un repaso fallido el siguiente vence al día siguiente: repetirlo
+      // en el acto solo produce un bucle con las mismas preguntas.
+      repasoPendiente: proximo != null && !proximo.isAfter(hoy),
       necesitaRefuerzo: necesitaRefuerzo,
       proximoRepaso: proximo,
     );
@@ -185,7 +186,7 @@ Map<String, dynamic> resumenEvaluacion(
   Map? anterior,
   DateTime ahora,
 ) {
-  final aprobadaAhora = total > 0 && aciertos / total >= u.umbral;
+  final aprobadaAhora = superaUmbral(aciertos, total, u.umbral);
   final yaAprobada = anterior?['aprobada'] == true;
   return {
     'idioma': u.idioma,
@@ -205,6 +206,15 @@ Map<String, dynamic> resumenEvaluacion(
   };
 }
 
+/// Aciertos mínimos para superar [umbral] en una prueba de [total] ítems.
+/// Se redondea hacia abajo para que las pruebas cortas no exijan el 100 %:
+/// con 0,8, 3 de 4 y 2 de 3 aprueban; con 1 o 2 ítems se piden todos.
+int aciertosNecesarios(int total, double umbral) =>
+    total <= 2 ? total : (total * umbral + 1e-9).floor().clamp(1, total);
+
+bool superaUmbral(int aciertos, int total, double umbral) =>
+    total > 0 && aciertos >= aciertosNecesarios(total, umbral);
+
 /// Nuevo registro de repaso espaciado (cajas tipo Leitner).
 Map<String, dynamic> siguienteRepaso(
   UnidadRuta u,
@@ -214,7 +224,7 @@ Map<String, dynamic> siguienteRepaso(
   int total,
   DateTime ahora,
 ) {
-  final acierto = total > 0 && aciertos / total >= u.umbral;
+  final acierto = superaUmbral(aciertos, total, u.umbral);
   final cajaPrevia = anterior?['caja'] as int? ?? 0;
   final caja = acierto ? cajaPrevia + 1 : (cajaPrevia - 2).clamp(0, 99);
   final intervalos = u.intervalosRepaso;
@@ -249,7 +259,7 @@ Map<String, dynamic> siguienteRepaso(
 UnidadRuta? unidadRecomendada(RutaCargada ruta, Map<String, InfoUnidad> e) {
   for (final u in ruta.unidades) {
     final info = e[u.id]!;
-    if (info.necesitaRefuerzo || info.repasoPendiente) return u;
+    if (info.repasoPendiente) return u;
   }
   for (final u in ruta.unidades) {
     final info = e[u.id]!;

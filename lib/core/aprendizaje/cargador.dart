@@ -31,34 +31,34 @@ class CargadorRuta {
       return null;
     }
     final curso = Curso.fromJson(jsonDecode(indice) as Map<String, dynamic>);
-    final unidades = <UnidadRuta>[];
-    for (final m in curso.modulos) {
-      // Un módulo ausente o dañado no debe tumbar el curso entero; las
-      // pruebas de integridad lo detectan antes de publicar.
-      try {
-        final datos =
-            jsonDecode(
-                  await _bundle.loadString(
-                    '${base(idioma)}/${m.archivo}',
-                    cache: false,
-                  ),
-                )
-                as Map<String, dynamic>;
-        final delModulo = [
-          for (final u in datos['unidades'] as List)
-            UnidadRuta.fromJson(
-              u as Map<String, dynamic>,
-              idioma: idioma,
-              nivel: m.nivel,
-              modulo: m.id,
-            ),
-        ];
-        unidades.addAll(delModulo);
-      } catch (e) {
-        modulosConError.add('${m.id}: $e');
-      }
-    }
+    // Los módulos se descargan a la vez (en la web son peticiones HTTP).
+    final porModulo = await Future.wait([
+      for (final m in curso.modulos) _modulo(idioma, m),
+    ]);
+    final unidades = [for (final u in porModulo) ...u];
     unidades.sort((a, b) => a.orden.compareTo(b.orden));
     return RutaCargada(curso, unidades);
+  }
+
+  Future<List<UnidadRuta>> _modulo(String idioma, ModuloIndice m) async {
+    // Un módulo ausente o dañado no debe tumbar el curso entero; las
+    // pruebas de integridad lo detectan antes de publicar.
+    try {
+      final datos = jsonDecode(
+        await _bundle.loadString('${base(idioma)}/${m.archivo}', cache: false),
+      ) as Map<String, dynamic>;
+      return [
+        for (final u in datos['unidades'] as List)
+          UnidadRuta.fromJson(
+            u as Map<String, dynamic>,
+            idioma: idioma,
+            nivel: m.nivel,
+            modulo: m.id,
+          ),
+      ];
+    } catch (e) {
+      modulosConError.add('${m.id}: $e');
+      return const [];
+    }
   }
 }

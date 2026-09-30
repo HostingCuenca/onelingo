@@ -16,6 +16,7 @@ import '../../shared/widgets/widgets.dart';
 import '../../core/efectos.dart';
 import 'celebracion.dart';
 import 'item_view.dart';
+import 'ruta_screen.dart';
 import 'tabla_ruta.dart';
 
 /// Una pantalla del recorrido de la unidad: un paso de enseñanza, el diálogo
@@ -134,6 +135,39 @@ class UnidadScreen extends ConsumerWidget {
       data: (r) {
         final u = r?.unidad(unidadId);
         if (r == null || u == null) {
+          // Unidades retiradas al reorganizar el curso (p. ej. el A1 de 29
+          // unidades pasó a Nivel 1): se ofrece el nivel que las sustituye.
+          final nivel = unidadId.startsWith('en.a1.') ? 'a1-1' : null;
+          final sustituto = r == null || nivel == null
+              ? null
+              : resolverNivelHistorico(r, nivel);
+          if (sustituto != null &&
+              sustituto != nivel &&
+              r!.delNivel(sustituto).isNotEmpty) {
+            return Scaffold(
+              appBar: AppBar(),
+              body: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        'Esta lección se renovó y ahora forma parte de un nivel nuevo.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(height: 20),
+                      BotonPrincipal(
+                        onPressed: () => context.go('/ruta/$sustituto'),
+                        child: const Text('IR AL NIVEL'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
           return Scaffold(
             appBar: AppBar(),
             body: const Center(child: Text('Esta unidad no existe.')),
@@ -320,8 +354,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     reloj.stop();
     if (widget.repaso) {
       registro.repaso(u, aciertos, puntuables.length);
-      final superado =
-          puntuables.isNotEmpty && aciertos / puntuables.length >= u.umbral;
+      final superado = superaUmbral(aciertos, puntuables.length, u.umbral);
       if (superado) Efectos.completado();
       setState(() {
         terminado = true;
@@ -332,7 +365,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     }
     final ok = registro.evaluacion(u, aciertos, puntuables.length);
     final nivel = ok && registro.comprobarNivel(widget.ruta, u.nivel);
-    final aprobadaAhora = aciertos / puntuables.length >= u.umbral;
+    final aprobadaAhora = superaUmbral(aciertos, puntuables.length, u.umbral);
     // Recompensa sonora: fanfarria al completar el nivel, campanas al aprobar.
     if (nivel) {
       Efectos.nivel();
@@ -798,7 +831,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               ),
               const SizedBox(height: 8),
               Text(
-                '$aciertos de $puntuables correctas a la primera. Se necesita el ${(u.umbral * 100).round()} %.',
+                '$aciertos de $puntuables correctas a la primera. Se necesitan ${aciertosNecesarios(puntuables, u.umbral)}.',
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 17),
               ),

@@ -34,8 +34,64 @@ const _tildes = {
 /// Quita las tildes del alfabeto latino (no afecta a otras escrituras).
 String sinTildes(String s) => s.split('').map((c) => _tildes[c] ?? c).join();
 
-String _forma(String s, String idioma) =>
-    idioma == 'zh' || idioma == 'ja' ? _compacta(s) : normalizar(s);
+String _forma(String s, String idioma) => switch (idioma) {
+  'zh' || 'ja' => _compacta(s),
+  'en' => expandirContracciones(normalizar(s)),
+  _ => normalizar(s),
+};
+
+const _contraccionesFijas = {
+  "can't": 'can not',
+  'cannot': 'can not',
+  "won't": 'will not',
+  "shan't": 'shall not',
+  "i'm": 'i am',
+  "let's": 'let us',
+};
+const _conS = {
+  'he',
+  'she',
+  'it',
+  'that',
+  'what',
+  'there',
+  'where',
+  'who',
+  'here',
+  'how',
+};
+final _conSufijo = RegExp(r"^([a-z]+)'(re|ve|ll|d|s)$");
+
+/// Inglés: «I'm», «don't», «she's»… equivalen a su forma completa, para que
+/// una respuesta con contracción no cuente como error. El genitivo sajón
+/// («Tom's», «my brother's») no se toca.
+String expandirContracciones(String normalizada) => normalizada
+    .split(' ')
+    .map((palabra) {
+      final fija = _contraccionesFijas[palabra];
+      if (fija != null) return fija;
+      if (palabra.endsWith("n't") && palabra.length > 3) {
+        return '${palabra.substring(0, palabra.length - 3)} not';
+      }
+      final m = _conSufijo.firstMatch(palabra);
+      if (m == null) return palabra;
+      final base = m.group(1)!;
+      return switch (m.group(2)) {
+        're' => '$base are',
+        've' => '$base have',
+        'll' => '$base will',
+        'd' => '$base would',
+        _ => _conS.contains(base) ? '$base is' : palabra,
+      };
+    })
+    .join(' ');
+
+/// Compara una respuesta escrita con una forma válida con las mismas reglas
+/// que [respuestaEscritaCorrecta] (puntuación, tildes y contracciones).
+bool mismaRespuesta(String dada, String valida, String idioma) {
+  final a = sinTildes(_forma(dada, idioma));
+  return a.isNotEmpty && a == sinTildes(_forma(valida, idioma));
+}
 
 bool _coincide(Item item, String respuesta, String idioma, bool tildes) {
   String f(String s) =>

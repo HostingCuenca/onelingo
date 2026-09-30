@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -107,6 +108,32 @@ class _ItemViewState extends State<ItemView> {
     (i) => i,
   )..shuffle();
 
+  /// Las fichas de «ordenar» llegan en el orden de la respuesta: se muestran
+  /// desordenadas (siempre igual para el mismo ítem) y nunca en el orden
+  /// correcto, para que no baste tocarlas de izquierda a derecha.
+  late final List<int> ordenFichas = _desordenar(widget.item);
+
+  static List<int> _desordenar(Item item) {
+    final n = item.tokens.length;
+    final indices = List.generate(n, (i) => i)
+      ..shuffle(
+        Random(
+          item.id.codeUnits.fold<int>(7, (h, c) => (h * 31 + c) & 0x3fffffff),
+        ),
+      );
+    String texto(List<int> orden) =>
+        [for (final i in orden) item.tokens[i]].join(' ');
+    final correcto = item.tokens.join(' ');
+    for (
+      var giro = 0;
+      giro < n && n > 1 && texto(indices) == correcto;
+      giro++
+    ) {
+      indices.add(indices.removeAt(0));
+    }
+    return indices;
+  }
+
   Item get item => widget.item;
   String t(TextoApoyo? texto) => texto?.en(widget.cadena) ?? '';
 
@@ -154,12 +181,11 @@ class _ItemViewState extends State<ItemView> {
     if (!esCompletarMultipartes) return false;
     final partesCorrectas = <bool>[];
     for (var i = 0; i < escritosPartes.length; i++) {
-      final dada = normalizar(escritosPartes[i].text);
       partesCorrectas.add(
-        dada.isNotEmpty &&
-            item.respuestasPartes[i].any(
-              (respuesta) => normalizar(respuesta) == dada,
-            ),
+        item.respuestasPartes[i].any(
+          (respuesta) =>
+              mismaRespuesta(escritosPartes[i].text, respuesta, widget.idioma),
+        ),
       );
     }
     final partes = item.partesPuntuables ?? item.respuestasPartes.length;
@@ -271,6 +297,21 @@ class _ItemViewState extends State<ItemView> {
     onSubmitted: (_) => comprobar(),
   );
 
+  /// Audio del enunciado para formatos que no son de opción (ordenar o
+  /// completar lo que se escucha).
+  List<Widget> audioEnunciado() => [
+    if (item.audio != null)
+      Padding(
+        padding: const EdgeInsets.only(bottom: 16),
+        child: BotonAudio(
+          texto: item.audio!,
+          idioma: widget.idioma,
+          etiqueta: 'Escuchar el audio',
+          grande: true,
+        ),
+      ),
+  ];
+
   List<Widget> cuerpo() {
     final bloqueado = correcta != null;
     switch (item.formato) {
@@ -347,6 +388,7 @@ class _ItemViewState extends State<ItemView> {
         ];
       case FormatoItem.ordenar:
         return [
+          ...audioEnunciado(),
           Container(
             constraints: const BoxConstraints(minHeight: 64),
             padding: const EdgeInsets.all(12),
@@ -380,7 +422,7 @@ class _ItemViewState extends State<ItemView> {
             spacing: 8,
             runSpacing: 8,
             children: [
-              for (var i = 0; i < item.tokens.length; i++)
+              for (final i in ordenFichas)
                 if (!orden.contains(i))
                   opcionBoton(
                     item.tokens[i],
@@ -394,6 +436,7 @@ class _ItemViewState extends State<ItemView> {
       case FormatoItem.completar:
         if (esCompletarMultipartes) {
           return [
+            ...audioEnunciado(),
             if (item.texto?.trim().isNotEmpty == true)
               Padding(
                 padding: const EdgeInsets.only(bottom: 16),
@@ -435,6 +478,7 @@ class _ItemViewState extends State<ItemView> {
           ];
         }
         return [
+          ...audioEnunciado(),
           Text(
             (item.texto ?? '').replaceAll(
               '___',

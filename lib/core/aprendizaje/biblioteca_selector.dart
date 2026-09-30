@@ -117,7 +117,11 @@ int _hash(String input) {
   var h = 2166136261;
   for (final c in input.codeUnits) {
     h ^= c;
-    h = (h * 16777619) & 0x7fffffff;
+    // (h × primo) mod 2^31 por mitades: en la web los enteros son dobles y el
+    // producto completo (> 2^53) perdería precisión y cambiaría la selección.
+    final bajo = (h & 0xffff) * 16777619;
+    final alto = (((h >> 16) * 16777619) & 0x7fff) << 16;
+    h = (bajo + alto) & 0x7fffffff;
   }
   return h;
 }

@@ -34,6 +34,15 @@ class LevelsScreen extends ConsumerWidget {
       return null;
     }
 
+    // MCER según la escala del curso (Nivel 2 = A2, Nivel 3 = B1…); la
+    // equivalencia histórica solo si el curso no declara el nivel.
+    String cefrNivel(int n) {
+      for (final nv in ruta?.curso.niveles ?? const <NivelCurso>[]) {
+        if (nv.id == 'n$n') return nv.cefr;
+      }
+      return cefrDe(n.toDouble());
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text('Curso de ${meta.nombre}')),
       body: ListView(
@@ -61,7 +70,11 @@ class LevelsScreen extends ConsumerWidget {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Nivel $n · ${cefrDe(n.toDouble())} · ${nivelRuta(n) != null ? 'Ruta guiada' : n.isOdd ? 'Explora' : 'Consolida'}',
+                          'Nivel $n · ${cefrNivel(n)} · ${nivelRuta(n) != null
+                              ? 'Ruta guiada'
+                              : n.isOdd
+                              ? 'Explora'
+                              : 'Consolida'}',
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),

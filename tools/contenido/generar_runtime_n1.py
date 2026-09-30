@@ -451,13 +451,17 @@ def compile_runtime() -> tuple[dict[str, dict], dict, dict, dict]:
     return routes, library, activation, course
 
 
+def compact(value: object) -> str:
+    # Artefactos que descarga la app: sin sangría (≈40 % menos de bytes). La
+    # fuente legible es el JSON editorial de assets/contenido/en/editorial/.
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":")) + "\n"
+
+
 def main() -> int:
     routes, library, activation, course = compile_runtime()
     for level, route in routes.items():
-        (ROUTE_DIR / f"{level}-editorial.json").write_text(
-            json.dumps(route, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-        )
-    LIBRARY_OUT.write_text(json.dumps(library, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        (ROUTE_DIR / f"{level}-editorial.json").write_text(compact(route), encoding="utf-8")
+    LIBRARY_OUT.write_text(compact(library), encoding="utf-8")
     ACTIVATION_OUT.write_text(json.dumps(activation, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     COURSE_OUT.write_text(json.dumps(course, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(
