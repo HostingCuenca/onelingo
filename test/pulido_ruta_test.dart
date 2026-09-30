@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelingo/core/aprendizaje/correccion.dart';
 import 'package:onelingo/core/aprendizaje/dominio.dart';
@@ -118,5 +121,50 @@ void main() {
         isTrue,
       );
     });
+  });
+
+  test('Las 290 clases editoriales enseñan antes de practicar', () {
+    for (final nivel in ['n1', 'n2', 'n3']) {
+      final unidades =
+          (jsonDecode(
+                File('assets/contenido/en/ruta/$nivel-editorial.json')
+                    .readAsStringSync(),
+              ) as Map)['unidades']
+              as List;
+      for (final u in unidades.cast<Map<String, dynamic>>()) {
+        final pasos = (u['pasos'] as List).cast<Map<String, dynamic>>();
+        final tipos = pasos.map((p) => p['tipo']).toList();
+        final id = u['id'];
+        expect(tipos.first, 'explicacion', reason: '$id');
+        expect(tipos, contains('patron'), reason: '$id sin patrón');
+        expect(
+          (pasos.first['titulo'] as Map)['es'],
+          isNot('Objetivo de la clase'),
+          reason: '$id sin explicación real',
+        );
+        final situacion = pasos.firstWhere((p) => p['tipo'] == 'situacion');
+        expect(
+          (situacion['dialogo'] as List).length,
+          greaterThanOrEqualTo(3),
+          reason: '$id situación sin diálogo',
+        );
+        expect(
+          (situacion['items'] as List).every(
+            (i) => !(i['id'] as String).contains('situation-check'),
+          ),
+          isTrue,
+          reason: '$id situación copiada de la práctica',
+        );
+        final errores = (u['erroresFrecuentes'] as List)
+            .cast<Map<String, dynamic>>();
+        expect(errores.length, 2, reason: '$id');
+        expect(
+          errores.every((e) => !(e['incorrecto'] as String).endsWith(' ?')),
+          isTrue,
+          reason: '$id con errores de relleno',
+        );
+      }
+      expect(unidades.length, nivel == 'n3' ? 90 : 100);
+    }
   });
 }
