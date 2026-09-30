@@ -182,4 +182,28 @@ void main() {
       expect(unidades, isNotEmpty);
     }
   });
+
+  test('La rúbrica de escritura admite flexiones regulares', () {
+    final item = Item.fromJson({
+      'id': 'rubrica',
+      'formato': 'escribir',
+      'consigna': {'es': 'Escribe'},
+      'respuesta': 'We sent two complaints and they decided to help.',
+      'minimoPalabras': 5,
+      'maximoPalabras': 30,
+      'evidenciasEscritura': [
+        ['complaint'],
+        ['decide'],
+        ['help'],
+      ],
+    });
+    expect(
+      corregir(item, 'We sent two complaints and they decided to help.', 'en'),
+      isTrue,
+    );
+    expect(
+      corregir(item, 'We sent two letters and they helped.', 'en'),
+      isFalse,
+    );
+  });
 }

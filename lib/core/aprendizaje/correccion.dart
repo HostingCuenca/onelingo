@@ -132,7 +132,13 @@ bool _cumpleRubricaEscritura(Item item, String respuesta, String idioma) {
   return item.evidenciasEscritura.every(
     (grupo) => grupo.any((frase) {
       final evidencia = sinTildes(_forma(frase, idioma));
-      return evidencia.isNotEmpty && dada.contains(' $evidencia ');
+      if (evidencia.isEmpty) return false;
+      if (dada.contains(' $evidencia ')) return true;
+      // La última palabra admite flexiones regulares (complaint → complaints,
+      // decide → decided): el alumno no debe fallar por el número o el tiempo.
+      return idioma == 'en' &&
+          RegExp(' ${RegExp.escape(evidencia)}(?:s|es|d|ed|ing) ')
+              .hasMatch(dada);
     }),
   );
 }
