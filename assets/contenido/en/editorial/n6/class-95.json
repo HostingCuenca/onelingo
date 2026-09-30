@@ -203,7 +203,7 @@
             "es": "Must be + adjetivo deduce cómo está alguien ahora a partir de lo que sabes; should y used to no expresan esa deducción."
           },
           "hint": {
-            "es": "Es una deducción sobre el presente: busca must be."
+            "es": "Es una deducción sobre cómo está ahora: ¿qué modal la expresa?"
           },
           "text": "Tu estudiante de intercambio acaba de llegar tras doce horas de vuelo. Piensas que seguro está cansada."
         },
@@ -212,7 +212,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:52e5c4094cc3081f1c5287bf53b515a8e181f82d7db22ced338054fa4eb0924f"
+        "contentHash": "sha256:b078f116fa8a3cac274ad0ff764940726efdef67d3446d9625facc61ddba0cff"
       },
       {
         "id": "en.n6.c95.pg02",
@@ -239,7 +239,7 @@
             "es": "As long as introduce una condición: «siempre que»."
           },
           "hint": {
-            "es": "La expresión completa es as long as."
+            "es": "Piensa en la expresión inglesa para «siempre que»: falta su primera palabra."
           },
           "text": "You can use my bike ___ long as you bring it back."
         },
@@ -248,7 +248,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:760cfb7a4cdbd963bb51a492f94265d0f014248842e4d08e4196dfaa8862cec6"
+        "contentHash": "sha256:85fb14787336b16cc8ad42e317725272ec2547bdb21e13753b9a9e82bd9d43a5"
       },
       {
         "id": "en.n6.c95.pg03",
@@ -271,6 +271,10 @@
             "down",
             "after",
             "ten"
+          ],
+          "accepted": [
+            "I'd appreciate it if you could turn the music down after ten",
+            "I'd appreciate it if you could turn down the music after ten"
           ]
         },
         "choices": [],
@@ -286,7 +290,7 @@
             "es": "I'd appreciate it if you could… es una petición con tacto y lleva it."
           },
           "hint": {
-            "es": "Empieza con I'd appreciate it if you could y termina con la hora."
+            "es": "Es una petición con tacto; la hora va al final."
           }
         },
         "accessibility": {
@@ -294,7 +298,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:f9f4a1ee4f5005979c8a34f86745ee9ca5d81602735180243a3505a94a56c871"
+        "contentHash": "sha256:7e790a49bb37cb4c9422a17772f3f2126b0c5ac6f28365b8a9437707c830461a"
       }
     ],
     "practice": [
@@ -444,14 +448,36 @@
           "feedback": {
             "es": "La condición se expresa con as long as o provided that más el presente, sin will."
           },
-          "text": "Dejas usar tu ordenador a tu invitada, pero solo si lo apaga al terminar."
+          "text": "Dejas usar tu ordenador a tu invitada, pero solo si lo apaga al terminar.",
+          "scoring": {
+            "wordRange": [
+              9,
+              18
+            ],
+            "evidenceGroups": [
+              [
+                "You can use my computer",
+                "You can use my laptop"
+              ],
+              [
+                "as long as",
+                "provided that",
+                "if you"
+              ],
+              [
+                "turn it off",
+                "switch it off",
+                "turn them off"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:aad36f5e3b706714c18f49fa3fa45d7ad78f238518c7e24bb69a9f661a93f216"
+        "contentHash": "sha256:17391bde29f6d636dca472b6dd20fde15dbf80b6e93bf6fc2997da7c1743d758"
       }
     ],
     "evaluation": [
@@ -589,7 +615,8 @@
           "text": "Welcome, Mia! You must be tired after such a long journey. When I arrived in Dublin, I had forgotten my charger, so my phone died and I got lost. Now about the rules: you can use the kitchen as long as you clean up afterwards. Also, the neighbours are said to have complained about the noise last week, so I'd appreciate it if you could keep the music down after ten. I hope you will be happy here!",
           "accepted": [
             "Welcome, Mia! You must be tired after such a long journey. When I arrived in Dublin, I had forgotten my charger, so my phone died and I got lost. Now about the rules: you can use the kitchen as long as you clean up afterwards. Also, the neighbours are said to have complained about the noise last week, so I'd appreciate it if you could keep the music down after ten. I hope you will be happy here!",
-            "Hello, Mia, and welcome! You must be exhausted after the long journey. When I arrived in Dublin, I had forgotten my charger, so my phone died. Here is one rule: you can use the kitchen provided that you clean up afterwards. The neighbours are said to have complained about the noise, so I would appreciate it if you could keep it down after ten."
+            "Hello, Mia, and welcome! You must be exhausted after the long journey. When I arrived in Dublin, I had forgotten my charger, so my phone died. Here is one rule: you can use the kitchen provided that you clean up afterwards. The neighbours are said to have complained about the noise, so I would appreciate it if you could keep it down after ten.",
+            "Welcome, Mia! You must be tired after such a long journey. When I arrived in Dublin, I had forgotten my charger, so my phone died and I got lost. Now about the rules: you can use the kitchen as long as you clean up afterwards. Also, the neighbors are said to have complained about the noise last week, so I'd appreciate it if you could keep the music down after ten. I hope you will be happy here!"
           ]
         },
         "choices": [],
@@ -613,24 +640,34 @@
             ],
             "evidenceGroups": [
               [
+                "you must be",
                 "must be tired",
-                "must be exhausted",
-                "must be very tired"
+                "must be exhausted"
               ],
               [
                 "had forgotten",
                 "had lost",
-                "had left"
+                "had left",
+                "had missed",
+                "i'd forgotten",
+                "i'd lost",
+                "i'd left"
               ],
               [
                 "as long as",
                 "provided that",
-                "on condition that"
+                "on condition that",
+                "providing that",
+                "so long as",
+                "if you clean"
               ],
               [
                 "are said to have complained",
-                "I'd appreciate it if you could",
-                "I would appreciate it if you could"
+                "i'd appreciate it if you could",
+                "i would appreciate it if you could",
+                "would be grateful if you could",
+                "appreciate it if you",
+                "would you mind"
               ]
             ]
           }
@@ -640,7 +677,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:2b2a2de10c5543966d7189a51fef17df9ec725faa66ed1a265328df5a59c9485"
+        "contentHash": "sha256:c7340552334eadc20e91f4799a65cfcc6d2060d4c85a3a95aebafffd3aaa6113"
       }
     ],
     "review": [
@@ -712,6 +749,10 @@
             "you",
             "are",
             "quiet"
+          ],
+          "accepted": [
+            "You can stay up late as long as you are quiet",
+            "As long as you are quiet you can stay up late"
           ]
         },
         "choices": [],
@@ -732,7 +773,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:c4ae6e0fe8c83739f2012966413850bdf9b7f543d373f7344a35c82f27430113"
+        "contentHash": "sha256:815bba105ae6fa8c28334ba56024ac66ba57bece6f1fb585faf089a1bb10ba04"
       },
       {
         "id": "en.n6.c95.r03",

@@ -1,0 +1,2083 @@
+{
+  "schema": "onelingo.editorial.compact-block.v1",
+  "level": "n7",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "classes": [
+    {
+      "n": 41,
+      "objetivo": "Reconocer redundancias, nominalizaciones vacías y relleno en frases recargadas y elegir la versión más directa.",
+      "habilidades": [
+        "gramática",
+        "lectura",
+        "escucha"
+      ],
+      "vocabulario": [
+        {
+          "en": "wordy",
+          "es": "recargado, con demasiadas palabras"
+        },
+        {
+          "en": "redundant",
+          "es": "redundante, que repite lo ya dicho"
+        },
+        {
+          "en": "concise",
+          "es": "conciso"
+        },
+        {
+          "en": "padding",
+          "es": "relleno"
+        },
+        {
+          "en": "phrase",
+          "es": "expresión, frase corta"
+        },
+        {
+          "en": "cut",
+          "es": "cortar, quitar"
+        },
+        {
+          "en": "direct",
+          "es": "directo"
+        },
+        {
+          "en": "consider",
+          "es": "considerar"
+        },
+        {
+          "en": "repeat",
+          "es": "repetir"
+        },
+        {
+          "en": "plain",
+          "es": "sencillo, llano"
+        }
+      ],
+      "ensenanza": [
+        {
+          "en": "This sentence is wordy: it needs twelve words to say what four words can say.",
+          "es": "Esta frase está recargada: necesita doce palabras para decir lo que cuatro pueden decir.",
+          "nota": "Wordy = usa más palabras de las necesarias sin añadir información."
+        },
+        {
+          "en": "The phrase \"end result\" is redundant, because a result always comes at the end.",
+          "es": "La expresión \"end result\" es redundante, porque un resultado siempre llega al final.",
+          "nota": "Redundant = repite una idea que ya contiene otra palabra."
+        },
+        {
+          "en": "A concise email keeps the point and cuts the padding.",
+          "es": "Un correo conciso conserva la idea principal y corta el relleno.",
+          "nota": "Padding = palabras que llenan espacio sin aportar datos."
+        },
+        {
+          "en": "Instead of \"give consideration to\", use the direct verb consider.",
+          "es": "En lugar de \"give consideration to\", usa el verbo directo consider.",
+          "nota": "Direct = el verbo dice la acción sin rodeos; consider ya contiene la idea de consideration."
+        },
+        {
+          "en": "Do not repeat the same idea: \"completely finished\" is just \"finished\".",
+          "es": "No repitas la misma idea: \"completely finished\" es simplemente \"finished\".",
+          "nota": "Finished ya significa «del todo»; completely no añade nada."
+        },
+        {
+          "en": "A plain word is often stronger than a long phrase.",
+          "es": "Una palabra sencilla suele ser más fuerte que una expresión larga.",
+          "nota": "Because es más sencillo y más fuerte que \"due to the fact that\"."
+        }
+      ],
+      "explicacion": {
+        "titulo": "Tres señales de una frase recargada",
+        "texto": "Un texto recargado suele tener tres síntomas. Redundancia: una palabra repite lo que otra ya dice (end result, free gift). Nominalización vacía: un verbo escondido dentro de un sustantivo (make a decision en vez de decide). Relleno: una fórmula larga que tiene una versión corta (due to the fact that → because; at this point in time → now). Para elegir la versión más directa, pregúntate qué palabras puedes quitar sin perder información. En español solemos aceptar más rodeos; en inglés, la frase corta suena más natural."
+      },
+      "patron": {
+        "texto": "Frase recargada → versión directa:",
+        "formula": [
+          {
+            "texto": "make a decision",
+            "nota": "verbo vacío + sustantivo: la acción real está en el sustantivo"
+          },
+          {
+            "texto": "→ decide",
+            "nota": "el verbo directo dice lo mismo con menos palabras"
+          },
+          {
+            "texto": "end result",
+            "nota": "redundancia: result ya incluye la idea de final"
+          },
+          {
+            "texto": "→ result",
+            "nota": "se quita la palabra que repite la idea"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Versión recargada",
+          "Versión directa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "due to the fact that"
+            },
+            {
+              "texto": "because"
+            }
+          ],
+          [
+            {
+              "texto": "at this point in time"
+            },
+            {
+              "texto": "now"
+            }
+          ],
+          [
+            {
+              "texto": "give consideration to"
+            },
+            {
+              "texto": "consider"
+            }
+          ],
+          [
+            {
+              "texto": "completely finished"
+            },
+            {
+              "texto": "finished"
+            }
+          ],
+          [
+            {
+              "texto": "end result"
+            },
+            {
+              "texto": "result"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Due to that it rained, we stayed in.",
+          "correcto": "Because it rained, we stayed in.",
+          "explicacion": "Calco de «debido a que». Due to va con un sustantivo; antes de una oración completa se usa because."
+        },
+        {
+          "incorrecto": "I am considering to leave early.",
+          "correcto": "I am considering leaving early.",
+          "explicacion": "Consider va con -ing, no con to + infinitivo: considering leaving."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a Mia el aviso de un picnic del club y ella lo recorta.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Is my notice clear? It says: At this point in time, we will make a decision about the picnic.",
+            "traduccion": "¿Está claro mi aviso? Dice: «En este momento del tiempo, tomaremos una decisión sobre el picnic»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is wordy. Try this: Now we will decide about the picnic.",
+            "traduccion": "Está recargado. Prueba esto: «Ahora decidiremos sobre el picnic»."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Shorter, yes. And what about due to the fact that it will rain?",
+            "traduccion": "Más corto, sí. ¿Y qué hago con «due to the fact that it will rain»?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Use because. It is plain and direct.",
+            "traduccion": "Usa because. Es sencillo y directo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambios propone Mia?",
+          "opciones": [
+            {
+              "es": "Sustituir las expresiones largas por now, decide y because."
+            },
+            {
+              "es": "Añadir más palabras para que el aviso suene más formal."
+            },
+            {
+              "es": "Quitar del aviso toda la información del picnic."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cambia at this point in time por now, make a decision por decide y due to the fact that por because: el mismo mensaje con menos palabras."
+        }
+      },
+      "ejercicios": {
+        "guiada": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué palabra repite una idea que ya está en otra?",
+            "feedback": "Result ya indica lo que ocurre al final, así que end repite esa idea. Clear y vote aportan información nueva.",
+            "opciones": [
+              "end",
+              "clear",
+              "vote"
+            ],
+            "respuesta": 0,
+            "texto": "The end result of the vote was a clear win for our team.",
+            "pista": "Pregúntate si un resultado puede venir antes del final."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué versión dice lo mismo con menos palabras?",
+            "feedback": "At this point in time equivale a now: una palabra en lugar de cinco. Las otras versiones añaden todavía más relleno.",
+            "opciones": [
+              "Now we are ready to start.",
+              "At this present moment in time, we are ready to start.",
+              "At this time right now, we are ready to start."
+            ],
+            "respuesta": 0,
+            "texto": "At this point in time, we are ready to start.",
+            "pista": "Cuenta cuántas palabras usa cada versión para decir «ahora»."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa la versión directa: «Decidiremos el viernes.»",
+            "feedback": "Make a decision esconde el verbo decide dentro de un sustantivo; la versión directa usa el verbo.",
+            "texto": "Wordy: We will make a decision on Friday. Direct: We will ___ on Friday.",
+            "respuesta": "decide",
+            "aceptadas": [
+              "decide"
+            ],
+            "pista": "Busca el verbo de la misma familia que decision."
+          }
+        ],
+        "practica": [
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Corta el relleno y conserva la idea principal.»",
+            "feedback": "Dos órdenes unidas por and: cut the padding y keep the main point. Primero se quita lo que sobra y después se conserva lo esencial.",
+            "respuesta": "Cut the padding and keep the main point"
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada expresión recargada con su equivalente corto.",
+            "feedback": "Cada expresión larga se reduce a una palabra: consider, because, soon y can.",
+            "pares": [
+              [
+                "give consideration to",
+                "considerar"
+              ],
+              [
+                "due to the fact that",
+                "porque"
+              ],
+              [
+                "in the near future",
+                "pronto"
+              ],
+              [
+                "has the ability to",
+                "puede"
+              ]
+            ]
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué problema tenía la primera frase.",
+            "feedback": "El hablante explica que gift ya incluye la idea de free: la primera palabra repite lo que dice otra, es decir, es redundante.",
+            "audio": "I wrote that the free gift was a nice surprise. Then I saw the problem. A gift is already free, so the first word adds nothing.",
+            "opciones": [
+              "One word repeats what another word already says.",
+              "One word is too formal for a message to a friend.",
+              "One word is missing before the noun."
+            ],
+            "respuesta": 0
+          }
+        ],
+        "evaluacion": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué versión de la frase es más directa y mantiene el sentido?",
+            "feedback": "Making a plan esconde el verbo plan. Planning dice lo mismo con menos palabras; las otras versiones conservan el rodeo.",
+            "opciones": [
+              "We are planning the trip.",
+              "We are in the middle of making a plan for the trip.",
+              "We are at the stage of making a plan for the trip."
+            ],
+            "respuesta": 0,
+            "texto": "We are in the process of making a plan for the trip."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué hizo Sara con su borrador.",
+            "feedback": "Sara tachó «in the evening»: 5 p.m. ya indica que es por la tarde, así que esas palabras repetían información.",
+            "audio": "Sara's draft said: We will meet at 5 p.m. in the evening. She crossed out two words, because 5 p.m. already tells us it is the evening.",
+            "opciones": [
+              "She crossed out the time of day, which the clock time already shows.",
+              "She crossed out the time, because it was too early.",
+              "She crossed out the meeting place, which was not needed."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa cada frase con la versión directa de la parte recargada.",
+            "feedback": "Cada parte recargada se reduce a una palabra: improved, many y every.",
+            "frases": [
+              "She made an improvement to the text. = She ___ the text.",
+              "We have a large number of members. = We have ___ members.",
+              "Each and every student won a prize. = ___ student won a prize."
+            ],
+            "partes": [
+              {
+                "respuesta": "improved",
+                "aceptadas": [
+                  "improved"
+                ]
+              },
+              {
+                "respuesta": "many",
+                "aceptadas": [
+                  "many",
+                  "lots of",
+                  "a lot of"
+                ]
+              },
+              {
+                "respuesta": "Every",
+                "aceptadas": [
+                  "Every",
+                  "every"
+                ]
+              }
+            ]
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué frase NO tiene redundancias?",
+            "feedback": "Finished ya indica que el proyecto está terminado; completely y entirely repiten esa idea. Solo la versión sin adverbios añadidos es limpia.",
+            "opciones": [
+              "The team finished the project on Friday.",
+              "The team completely finished the project on Friday.",
+              "The team finished the whole project entirely on Friday."
+            ],
+            "respuesta": 0
+          }
+        ],
+        "repaso": [
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Una palabra sencilla suele ser más fuerte que una expresión larga.»",
+            "feedback": "El comparativo stronger than compara una palabra sencilla con una expresión larga; often va entre is y stronger.",
+            "respuesta": "A plain word is often stronger than a long phrase"
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué frase esconde un verbo dentro de un sustantivo?",
+            "feedback": "Gave an answer esconde el verbo answered. La frase directa es She answered my question; repeated tiene otro significado.",
+            "opciones": [
+              "She gave an answer to my question.",
+              "She answered my question.",
+              "She repeated my question."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada término del curso con su significado.",
+            "feedback": "Wordy y padding describen exceso de palabras; redundant, repetición; concise, el equilibrio contrario.",
+            "pares": [
+              [
+                "wordy",
+                "con demasiadas palabras"
+              ],
+              [
+                "redundant",
+                "que repite lo que ya se dijo"
+              ],
+              [
+                "concise",
+                "breve y completo"
+              ],
+              [
+                "padding",
+                "relleno sin información"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "n": 42,
+      "objetivo": "Condensar frases con verbos activos, relativas reducidas y oraciones de participio sin cambiar el significado.",
+      "habilidades": [
+        "gramática",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "vocabulario": [
+        {
+          "en": "tighten",
+          "es": "condensar, hacer más compacta"
+        },
+        {
+          "en": "trim",
+          "es": "recortar"
+        },
+        {
+          "en": "meaning",
+          "es": "significado"
+        },
+        {
+          "en": "email",
+          "es": "correo electrónico"
+        },
+        {
+          "en": "report",
+          "es": "informe"
+        },
+        {
+          "en": "window",
+          "es": "ventana"
+        },
+        {
+          "en": "tired",
+          "es": "cansado"
+        },
+        {
+          "en": "cake",
+          "es": "pastel, tarta"
+        },
+        {
+          "en": "prize",
+          "es": "premio"
+        }
+      ],
+      "ensenanza": [
+        {
+          "en": "Tom wrote the email last night.",
+          "es": "Tom escribió el correo anoche.",
+          "nota": "Voz activa: quien hace la acción va primero. Es más corta que The email was written by Tom."
+        },
+        {
+          "en": "The woman sitting by the window is my aunt.",
+          "es": "La mujer sentada junto a la ventana es mi tía.",
+          "nota": "Relativa reducida: se quitan who is y queda la forma en -ing."
+        },
+        {
+          "en": "Feeling tired, she went to bed early.",
+          "es": "Cansada, se fue a la cama temprano.",
+          "nota": "Participio de presente con el mismo sujeto: sustituye a Because she felt tired."
+        },
+        {
+          "en": "The cake baked by my aunt won first prize.",
+          "es": "El pastel hecho por mi tía ganó el primer premio.",
+          "nota": "Relativa reducida con participio pasado: se quitan that was."
+        },
+        {
+          "en": "Having finished the report, Tom went home.",
+          "es": "Después de terminar el informe, Tom se fue a casa.",
+          "nota": "Having + participio: acción terminada antes de la principal; sustituye a After he had finished."
+        },
+        {
+          "en": "We can trim a long sentence and tighten it without losing its meaning.",
+          "es": "Podemos recortar una frase larga y condensarla sin perder su significado.",
+          "nota": "Tighten y trim: hacer compacto; el significado debe quedar intacto."
+        }
+      ],
+      "explicacion": {
+        "titulo": "Frases más cortas con verbos y participios",
+        "texto": "Para acortar una frase sin cambiar su significado hay cuatro recursos. Voz activa: Tom wrote the email en lugar de The email was written by Tom. Relativa reducida: the woman who is sitting → the woman sitting; the cake that was baked → the cake baked. Participio para causa o secuencia: Because she felt tired → Feeling tired; After he had finished → Having finished. Solo se reduce si la frase principal y el participio comparten sujeto y el sentido sigue claro; en español el gerundio es más libre, en inglés no."
+      },
+      "patron": {
+        "texto": "Frase larga → frase compacta:",
+        "formula": [
+          {
+            "texto": "The cake that was baked by my aunt",
+            "nota": "relativa completa: that + was + participio"
+          },
+          {
+            "texto": "→ The cake baked by my aunt",
+            "nota": "se quitan that was; el participio queda pegado al nombre"
+          },
+          {
+            "texto": "Because she felt tired,",
+            "nota": "causa con verbo conjugado"
+          },
+          {
+            "texto": "→ Feeling tired,",
+            "nota": "participio de presente: mismo sujeto que la frase principal"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Frase larga",
+          "Frase compacta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The email was written by Tom."
+            },
+            {
+              "texto": "Tom wrote the email."
+            }
+          ],
+          [
+            {
+              "texto": "The woman who is sitting by the window"
+            },
+            {
+              "texto": "The woman sitting by the window"
+            }
+          ],
+          [
+            {
+              "texto": "The cake that was baked by my aunt"
+            },
+            {
+              "texto": "The cake baked by my aunt"
+            }
+          ],
+          [
+            {
+              "texto": "Because she felt tired, she went to bed."
+            },
+            {
+              "texto": "Feeling tired, she went to bed."
+            }
+          ],
+          [
+            {
+              "texto": "After he had finished the report, he left."
+            },
+            {
+              "texto": "Having finished the report, he left."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Walking to school, the rain started.",
+          "correcto": "Walking to school, we noticed the rain.",
+          "explicacion": "En español «Caminando al colegio, empezó a llover» es posible; en inglés el sujeto del participio debe ser el de la frase principal."
+        },
+        {
+          "incorrecto": "The woman sits by the window is my aunt.",
+          "correcto": "The woman sitting by the window is my aunt.",
+          "explicacion": "Al quitar who is hay que dejar la forma en -ing; no se mantiene el verbo conjugado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le enseña a Sara la descripción de su pastel para el concurso del barrio y ella la acorta.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I wrote: The cake that was baked by my aunt won a prize at the fair.",
+            "traduccion": "Escribí: «El pastel que fue hecho por mi tía ganó un premio en la feria»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Cut that was. The cake baked by my aunt won a prize at the fair.",
+            "traduccion": "Quita that was. «The cake baked by my aunt won a prize at the fair»."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And this one: Because she felt tired, she went to bed early.",
+            "traduccion": "¿Y esta? «Because she felt tired, she went to bed early»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Try Feeling tired, she went to bed early. The subject is the same, so it works.",
+            "traduccion": "Prueba «Feeling tired, she went to bed early». El sujeto es el mismo, así que funciona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué funciona la versión con Feeling tired?",
+          "opciones": [
+            {
+              "es": "Porque el sujeto de las dos partes de la frase es el mismo."
+            },
+            {
+              "es": "Porque la frase pasa a voz pasiva."
+            },
+            {
+              "es": "Porque se añade un conector más a la frase."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que el sujeto es el mismo (she): un participio solo puede sustituir a la oración de causa si comparte sujeto con la frase principal."
+        }
+      },
+      "ejercicios": {
+        "guiada": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Cuál es la versión compacta con verbo activo?",
+            "feedback": "La voz activa pone primero a quien hace la acción: My aunt won the prize. Las otras versiones cambian la gramática o el significado.",
+            "opciones": [
+              "My aunt won the prize.",
+              "My aunt was won the prize.",
+              "The prize won my aunt."
+            ],
+            "respuesta": 0,
+            "texto": "The prize was won by my aunt.",
+            "pista": "Quien hace la acción va primero y el verbo es activo."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa: «El chico que está leyendo un libro es Leo.»",
+            "feedback": "En la relativa reducida se quitan who is y queda la forma en -ing: The boy reading a book.",
+            "texto": "The boy ___ a book is Leo.",
+            "respuesta": "reading",
+            "aceptadas": [
+              "reading"
+            ],
+            "pista": "Se quitan who is y queda el verbo terminado en -ing."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Cuál es la versión compacta de la frase?",
+            "feedback": "El participio de presente expresa la causa cuando el sujeto es el mismo: Feeling nervous, Leo sat down.",
+            "opciones": [
+              "Feeling nervous, Leo sat down.",
+              "Felt nervous, Leo sat down.",
+              "To feel nervous, Leo sat down."
+            ],
+            "respuesta": 0,
+            "texto": "Because he felt nervous, Leo sat down.",
+            "pista": "Usa la forma en -ing para expresar la causa."
+          }
+        ],
+        "practica": [
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «El pastel hecho por mi abuela ganó un premio.»",
+            "feedback": "Baked va pegado a cake y by my grandmother completa la relativa reducida antes del verbo principal won.",
+            "respuesta": "The cake baked by my grandmother won a prize"
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige quién espera el autobús.",
+            "feedback": "La frase dice que la chica que espera el autobús es la prima del hablante: waiting for the bus es una relativa reducida.",
+            "audio": "Here is my new sentence: The girl waiting for the bus is my cousin.",
+            "opciones": [
+              "The speaker's cousin.",
+              "The speaker's sister.",
+              "The speaker's neighbour."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada frase con su traducción.",
+            "feedback": "El participio de presente expresa causa; Having + participio, acción anterior; los participios después del nombre funcionan como relativas reducidas.",
+            "pares": [
+              [
+                "Feeling hungry,",
+                "Como tenía hambre,"
+              ],
+              [
+                "Having lost my keys,",
+                "Al haber perdido mis llaves,"
+              ],
+              [
+                "The book written by Sara",
+                "El libro escrito por Sara"
+              ],
+              [
+                "The girl sitting there",
+                "La chica sentada allí"
+              ]
+            ]
+          }
+        ],
+        "evaluacion": [
+          {
+            "formato": "escribir",
+            "consigna": "Reescribe con verbo activo para acortar la frase.",
+            "feedback": "La voz activa pone primero a quien hace la acción y elimina was y by: Carlos sent the letter.",
+            "texto": "The letter was sent by Carlos on Monday.",
+            "respuesta": "Carlos sent the letter on Monday.",
+            "aceptadas": [
+              "On Monday, Carlos sent the letter."
+            ]
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué reducción es correcta y conserva el sentido?",
+            "feedback": "Con participio pasado se quitan who were: invited by the teacher. Inviting cambia el significado y were invited deja dos verbos.",
+            "opciones": [
+              "The students invited by the teacher came early.",
+              "The students inviting by the teacher came early.",
+              "The students were invited by the teacher came early."
+            ],
+            "respuesta": 0,
+            "texto": "The students who were invited by the teacher came early."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige por qué Carlos olvidó sus palabras.",
+            "feedback": "Feeling nervous expresa la causa: Carlos olvidó sus palabras porque estaba nervioso.",
+            "audio": "The notes say: Feeling nervous, Carlos forgot his words. Now I understand why he stopped speaking.",
+            "opciones": [
+              "He was nervous.",
+              "He was tired.",
+              "He was late."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa las tres versiones compactas.",
+            "feedback": "Cada versión elimina la parte conjugada: left (participio pasado), Having eaten (acción anterior) y waiting (forma en -ing).",
+            "frases": [
+              "The bag that was left on the bus is mine. = The bag ___ on the bus is mine.",
+              "After she had eaten, Mia went out. = ___ eaten, Mia went out.",
+              "The man who is waiting outside is Tom. = The man ___ outside is Tom."
+            ],
+            "partes": [
+              {
+                "respuesta": "left",
+                "aceptadas": [
+                  "left"
+                ]
+              },
+              {
+                "respuesta": "Having",
+                "aceptadas": [
+                  "Having",
+                  "having"
+                ]
+              },
+              {
+                "respuesta": "waiting",
+                "aceptadas": [
+                  "waiting"
+                ]
+              }
+            ]
+          }
+        ],
+        "repaso": [
+          {
+            "formato": "elegir",
+            "consigna": "¿En qué frase el participio no tiene el mismo sujeto que la principal?",
+            "feedback": "En «Opening the door, the cat ran out» parece que el gato abre la puerta. En las otras frases el sujeto del participio y de la principal coincide.",
+            "opciones": [
+              "Opening the door, the cat ran out.",
+              "Opening the door, Sara saw a cat.",
+              "Tired after work, Leo fell asleep."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Después de comer, caminamos hasta el parque.»",
+            "feedback": "Having eaten lunch es una acción anterior y el sujeto we sigue después de la coma.",
+            "respuesta": "Having eaten lunch, we walked to the park"
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué versión activa de la frase es correcta?",
+            "feedback": "En la versión activa el sujeto que actúa (the school) va primero y el verbo pierde was y by.",
+            "opciones": [
+              "The school gave the prize to Sara.",
+              "The school was given the prize to Sara.",
+              "Sara gave the school the prize."
+            ],
+            "respuesta": 0,
+            "texto": "The prize was given to Sara by the school."
+          }
+        ]
+      }
+    },
+    {
+      "n": 43,
+      "objetivo": "Describir la voz de un texto (cálida, seca, irónica, juguetona) a partir de rasgos de vocabulario y ritmo y citar una pista.",
+      "habilidades": [
+        "gramática",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "vocabulario": [
+        {
+          "en": "voice",
+          "es": "voz (estilo propio al escribir)"
+        },
+        {
+          "en": "tone",
+          "es": "tono"
+        },
+        {
+          "en": "warm",
+          "es": "cálido, cercano"
+        },
+        {
+          "en": "dry",
+          "es": "seco, sobrio"
+        },
+        {
+          "en": "ironic",
+          "es": "irónico"
+        },
+        {
+          "en": "rhythm",
+          "es": "ritmo"
+        },
+        {
+          "en": "playful",
+          "es": "juguetón"
+        },
+        {
+          "en": "quote",
+          "es": "citar"
+        },
+        {
+          "en": "clue",
+          "es": "pista"
+        }
+      ],
+      "ensenanza": [
+        {
+          "en": "A warm voice uses friendly words and speaks directly to the reader.",
+          "es": "Una voz cálida usa palabras amables y habla directamente a quien lee.",
+          "nota": "Warm = cercana: palabras amables, tú y yo en el texto."
+        },
+        {
+          "en": "A dry voice states the facts in short, calm sentences.",
+          "es": "Una voz seca expone los hechos en frases cortas y serenas.",
+          "nota": "Dry = sobria, sin adornos ni bromas."
+        },
+        {
+          "en": "An ironic voice says one thing and means the opposite: Great, another Monday.",
+          "es": "Una voz irónica dice una cosa y quiere decir lo contrario: «Genial, otro lunes».",
+          "nota": "Ironic = dice lo contrario de lo que piensa; el contexto lo delata."
+        },
+        {
+          "en": "The tone is the feeling of the text, and the rhythm is how fast its sentences move.",
+          "es": "El tono es la sensación del texto y el ritmo es la rapidez con que avanzan sus frases.",
+          "nota": "Tone = sentimiento general; rhythm = longitud y velocidad de las frases."
+        },
+        {
+          "en": "A playful writer asks questions and makes jokes to surprise you.",
+          "es": "Quien escribe con tono juguetón hace preguntas y bromas para sorprenderte.",
+          "nota": "Playful = animada, con preguntas, bromas y exclamaciones."
+        },
+        {
+          "en": "To describe a voice, name it and quote one clue from the text.",
+          "es": "Para describir una voz, nómbrala y cita una pista del texto.",
+          "nota": "Quote = copiar unas palabras exactas; clue = la pista que demuestra la voz."
+        }
+      ],
+      "explicacion": {
+        "titulo": "Cómo reconocer la voz de quien escribe",
+        "texto": "La voz es la manera reconocible de sonar de un texto. Se nota en tres rasgos: el vocabulario (palabras amables o neutras), el ritmo (frases largas y fluidas o cortas y secas) y los recursos (preguntas, bromas, exclamaciones). Cuatro voces frecuentes: warm (cercana, habla al lector), dry (sobria, datos y frases cortas), ironic (dice lo contrario de lo que piensa, con humor) y playful (animada, juega con preguntas y bromas). Para describirla, nombra la voz y cita una pista: The voice is dry because the sentences are short."
+      },
+      "patron": {
+        "texto": "La voz + porque + pista:",
+        "formula": [
+          {
+            "texto": "The voice is warm",
+            "nota": "nombre de la voz: be + adjetivo"
+          },
+          {
+            "texto": "because the writer says",
+            "nota": "porque + la pista que lo demuestra"
+          },
+          {
+            "texto": "\"come in and sit down\".",
+            "nota": "cita exacta del texto entre comillas"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Voz",
+          "Pistas en el texto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "warm"
+            },
+            {
+              "texto": "palabras amables; habla directamente al lector"
+            }
+          ],
+          [
+            {
+              "texto": "dry"
+            },
+            {
+              "texto": "frases cortas; datos; sin bromas"
+            }
+          ],
+          [
+            {
+              "texto": "ironic"
+            },
+            {
+              "texto": "dice lo opuesto de lo que siente; exagera"
+            }
+          ],
+          [
+            {
+              "texto": "playful"
+            },
+            {
+              "texto": "preguntas, bromas y exclamaciones"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The voice sounds like warm.",
+          "correcto": "The voice sounds warm.",
+          "explicacion": "Después de sound se usa directamente el adjetivo; sound like va con un sustantivo (sounds like a friend)."
+        },
+        {
+          "incorrecto": "The writer is ironic because he says the contrary.",
+          "correcto": "The writer is ironic because he says the opposite.",
+          "explicacion": "Calco de «dice lo contrario». Para «lo contrario» en inglés se usa the opposite; the contrary es muy formal y poco frecuente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia leen dos notas de una tienda y describen la voz de cada una.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Listen to this note: Come in, sit down, and let me tell you about the best soup in town.",
+            "traduccion": "Escucha esta nota: «Pasa, siéntate y déjame contarte la mejor sopa de la ciudad»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The voice is warm. It speaks to you with friendly words.",
+            "traduccion": "La voz es cálida. Te habla con palabras amables."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And this one: The shop opens at nine. It closes at six. There is no parking.",
+            "traduccion": "¿Y esta? «La tienda abre a las nueve. Cierra a las seis. No hay aparcamiento»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That is dry. The sentences are short and there are no jokes.",
+            "traduccion": "Esa es seca. Las frases son cortas y no hay bromas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué rasgo hace que Mia llame «dry» a la segunda nota?",
+          "opciones": [
+            {
+              "es": "Las frases son cortas y no hay bromas."
+            },
+            {
+              "es": "Las frases son largas y cuentan una historia."
+            },
+            {
+              "es": "Usa palabras amables para hablar al lector."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que la nota es seca porque las frases son cortas y no hay bromas; las palabras amables definen la voz cálida de la primera nota."
+        }
+      },
+      "ejercicios": {
+        "guiada": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué voz transmite la invitación a tomar sopa?",
+            "feedback": "Las palabras amables y el tú directo (Come in, for you) crean una voz cálida.",
+            "opciones": [
+              "warm",
+              "dry",
+              "ironic"
+            ],
+            "respuesta": 0,
+            "texto": "Hello, friend! Come in, sit down and have some soup. I made it just for you.",
+            "pista": "Fíjate en si el texto te habla con cercanía y palabras amables."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué pista demuestra una voz seca en este texto?",
+            "feedback": "El texto solo da hechos en frases cortas, sin adornos ni bromas: esa es la pista de una voz seca.",
+            "opciones": [
+              "Short sentences with facts and no jokes.",
+              "Friendly words that speak to the reader.",
+              "A joke that says the opposite."
+            ],
+            "respuesta": 0,
+            "texto": "The train leaves at 8:10. The ticket costs five dollars. Seats are not reserved.",
+            "pista": "Mira la longitud de las frases y si hay adornos."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa: «La voz suena cálida porque usa palabras amables.»",
+            "feedback": "Tras sound va el adjetivo directamente, y las palabras amables indican una voz cálida: sounds warm.",
+            "texto": "The voice sounds ___ because it uses friendly words.",
+            "respuesta": "warm",
+            "aceptadas": [
+              "warm",
+              "friendly"
+            ],
+            "pista": "Es la voz cercana y amable."
+          }
+        ],
+        "practica": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué voz tiene el comentario sobre la cola?",
+            "feedback": "El hablante dice que le encanta esperar en la cola, pero quiere decir lo contrario: es una voz irónica.",
+            "opciones": [
+              "ironic",
+              "warm",
+              "dry"
+            ],
+            "respuesta": 0,
+            "texto": "I love waiting in line for an hour. It is my favourite hobby."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué texto suena más rápido.",
+            "feedback": "El ritmo depende de la longitud de las frases: las frases breves dan un texto rápido y cortante.",
+            "audio": "Text one has long, slow sentences. Text two has very short ones. Text two feels fast.",
+            "opciones": [
+              "The text whose sentences are brief.",
+              "The text whose sentences are long.",
+              "The text that asks a question."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada voz con su descripción.",
+            "feedback": "Cada voz se reconoce por sus pistas: amabilidad, sobriedad, contraste con lo que se piensa y juego.",
+            "pares": [
+              [
+                "warm",
+                "cercana y amable"
+              ],
+              [
+                "dry",
+                "sobria, con datos"
+              ],
+              [
+                "ironic",
+                "dice lo contrario con humor"
+              ],
+              [
+                "playful",
+                "bromista y animada"
+              ]
+            ]
+          }
+        ],
+        "evaluacion": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué voz tiene el resumen del partido?",
+            "feedback": "Son frases cortas con hechos y sin sentimientos: una voz seca.",
+            "opciones": [
+              "dry",
+              "playful",
+              "warm"
+            ],
+            "respuesta": 0,
+            "texto": "We lost the match 0-5. The coach said nothing. We went home."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué quiere decir realmente la persona.",
+            "feedback": "La persona usa elogios (perfect, I love) para hablar de problemas: la ironía significa lo contrario de lo que dice.",
+            "audio": "What a perfect day. My bus is late, it is raining, and I forgot my homework. I love Mondays.",
+            "opciones": [
+              "The day is going badly.",
+              "The day is going very well.",
+              "The day is not important to her."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa cada pista con la palabra que falta.",
+            "feedback": "Cada voz tiene su pista: frases short, lo opposite de lo que se piensa y hablar directly al lector.",
+            "frases": [
+              "A dry voice uses ___ sentences and no jokes.",
+              "An ironic voice says the ___ of what it means.",
+              "A warm voice speaks ___ to the reader."
+            ],
+            "partes": [
+              {
+                "respuesta": "short",
+                "aceptadas": [
+                  "short"
+                ]
+              },
+              {
+                "respuesta": "opposite",
+                "aceptadas": [
+                  "opposite"
+                ]
+              },
+              {
+                "respuesta": "directly",
+                "aceptadas": [
+                  "directly"
+                ]
+              }
+            ]
+          },
+          {
+            "formato": "escribir",
+            "consigna": "Nombra la voz del texto y cita una pista.",
+            "feedback": "La voz juguetona se reconoce por la pregunta inicial (Guess what?) y la broma final sobre el gato.",
+            "texto": "Guess what? I painted the kitchen green. Yes, all of it! Now my cat looks like a banana.",
+            "respuesta": "The voice is playful because the writer asks a question and makes a joke.",
+            "aceptadas": [
+              "The voice sounds playful because it asks a question and uses a joke.",
+              "The voice is playful because the text has a question and a funny comparison."
+            ],
+            "rubrica": {
+              "palabras": [
+                6,
+                25
+              ],
+              "evidencias": [
+                [
+                  "playful",
+                  "funny"
+                ],
+                [
+                  "question",
+                  "joke",
+                  "exclamation",
+                  "funny comparison"
+                ],
+                [
+                  "because"
+                ]
+              ]
+            }
+          }
+        ],
+        "repaso": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué voz tiene el mensaje del gato y la nevera?",
+            "feedback": "La pregunta inicial, la exclamación y la broma sobre la cena dan una voz juguetona.",
+            "opciones": [
+              "playful",
+              "dry",
+              "ironic"
+            ],
+            "respuesta": 0,
+            "texto": "Guess what? Our cat opened the fridge! Yes, dinner is now a team sport."
+          },
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «La voz es seca porque las frases son cortas.»",
+            "feedback": "The voice is dry nombra la voz y because the sentences are short da la pista.",
+            "respuesta": "The voice is dry because the sentences are short"
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué cita sirve como pista de una voz cálida?",
+            "feedback": "Las palabras amables dirigidas al lector (dear reader, make yourself at home) son la pista de una voz cálida.",
+            "opciones": [
+              "Welcome, dear reader, make yourself at home.",
+              "The office closes at five.",
+              "What a perfect day to be late."
+            ],
+            "respuesta": 0
+          }
+        ]
+      }
+    },
+    {
+      "n": 44,
+      "objetivo": "Editar un borrador para quitar redundancias, verbos vacíos y relleno, variar la longitud de las frases y anotar cada cambio.",
+      "habilidades": [
+        "gramática",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "vocabulario": [
+        {
+          "en": "edit",
+          "es": "editar, revisar un texto"
+        },
+        {
+          "en": "draft",
+          "es": "borrador"
+        },
+        {
+          "en": "change",
+          "es": "cambio"
+        },
+        {
+          "en": "combine",
+          "es": "combinar, unir"
+        },
+        {
+          "en": "vary",
+          "es": "variar"
+        },
+        {
+          "en": "length",
+          "es": "longitud"
+        },
+        {
+          "en": "repetition",
+          "es": "repetición"
+        },
+        {
+          "en": "emphasis",
+          "es": "énfasis"
+        },
+        {
+          "en": "note",
+          "es": "nota"
+        },
+        {
+          "en": "opening",
+          "es": "comienzo, apertura de una frase"
+        }
+      ],
+      "ensenanza": [
+        {
+          "en": "First, edit your draft: cut every word that adds nothing.",
+          "es": "Primero edita tu borrador: corta cada palabra que no aporta nada.",
+          "nota": "Edit = revisar con un objetivo; draft = la primera versión del texto."
+        },
+        {
+          "en": "Every change should make the text shorter or clearer.",
+          "es": "Cada cambio debe hacer el texto más corto o más claro.",
+          "nota": "Change = un cambio concreto; si no mejora nada, no es un buen cambio."
+        },
+        {
+          "en": "When several short sentences follow one another, combine two of them.",
+          "es": "Cuando varias frases cortas se siguen una tras otra, combina dos de ellas.",
+          "nota": "Combine = unir frases con una lista, and o una coma para cambiar el ritmo."
+        },
+        {
+          "en": "Vary the length of your sentences: a long one, then a short one, gives rhythm.",
+          "es": "Varía la longitud de tus frases: una larga y luego una corta dan ritmo.",
+          "nota": "Vary = alternar; length = cuántas palabras tiene una frase."
+        },
+        {
+          "en": "Repetition is fine for emphasis, but three sentences with the same opening feel flat.",
+          "es": "La repetición sirve para dar énfasis, pero tres frases con el mismo comienzo suenan planas.",
+          "nota": "Repetition con propósito es un recurso; sin propósito, es un defecto. Opening = cómo empieza la frase."
+        },
+        {
+          "en": "Write a short note after each change: what you cut and why.",
+          "es": "Escribe una nota corta después de cada cambio: qué cortaste y por qué.",
+          "nota": "Note = anotación de revisión con el patrón I changed X to Y because Z."
+        }
+      ],
+      "explicacion": {
+        "titulo": "Editar un borrador con un plan",
+        "texto": "Editar es revisar con un objetivo, no solo releer. Haz tres cambios de concisión: quita una redundancia (each and every → every), cambia un verbo vacío por uno directo (made a decision → decided) y pasa una frase pasiva a activa. Después haz un cambio de ritmo: une frases cortas seguidas o parte una muy larga para variar la longitud. Anota cada cambio con el patrón I changed X to Y because Z. Edita en este orden: primero el sentido, luego las palabras y, al final, el ritmo."
+      },
+      "patron": {
+        "texto": "Nota de cambio:",
+        "formula": [
+          {
+            "texto": "I changed \"made a decision\"",
+            "nota": "lo que cambiaste: I changed + texto original entre comillas"
+          },
+          {
+            "texto": "to \"decided\"",
+            "nota": "el cambio: to + versión nueva"
+          },
+          {
+            "texto": "because the verb is more direct.",
+            "nota": "la razón: because + efecto (más corto, más directo, más claro)"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de cambio",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Concisión: quitar redundancia"
+            },
+            {
+              "texto": "past experience → experience"
+            }
+          ],
+          [
+            {
+              "texto": "Concisión: verbo directo"
+            },
+            {
+              "texto": "made a list of → listed"
+            }
+          ],
+          [
+            {
+              "texto": "Concisión: voz activa"
+            },
+            {
+              "texto": "The box was opened by Sara. → Sara opened the box."
+            }
+          ],
+          [
+            {
+              "texto": "Ritmo: combinar frases"
+            },
+            {
+              "texto": "We sang. We danced. → We sang and danced."
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I changed \"because of\" for \"because\".",
+          "correcto": "I changed \"because of\" to \"because\".",
+          "explicacion": "Calco de «cambié X por Y». En inglés se cambia una cosa a otra: change X to Y."
+        },
+        {
+          "incorrecto": "I cut the repetition, so the text is more short.",
+          "correcto": "I cut the repetition, so the text is shorter.",
+          "explicacion": "Los adjetivos cortos forman el comparativo con -er (short → shorter), no con more."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Ana su borrador editado y ella lo revisa con él.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "You cut the padding, but the rhythm is flat. Every sentence has seven words.",
+            "traduccion": "Quitaste el relleno, pero el ritmo es plano. Todas las frases tienen siete palabras."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I see. I can combine the second and the third sentence.",
+            "traduccion": "Ya veo. Puedo combinar la segunda y la tercera frase."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Then write a note: I changed two sentences to one because the rhythm was flat.",
+            "traduccion": "Bien. Entonces escribe una nota: «I changed two sentences to one because the rhythm was flat»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And I changed made a decision to decided, because it is more direct.",
+            "traduccion": "Y cambié «made a decision» por «decided», porque es más directo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué problema de ritmo ve Ana en el texto de Tom?",
+          "opciones": [
+            {
+              "es": "Todas las frases tienen casi la misma longitud."
+            },
+            {
+              "es": "Hay una sola frase muy larga en el texto."
+            },
+            {
+              "es": "Faltan datos concretos en la mayoría de las frases."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que cada frase tiene siete palabras: sin variación de longitud el ritmo es plano, y por eso Tom decide combinar dos frases."
+        }
+      },
+      "ejercicios": {
+        "guiada": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué cambio de ritmo mejora estas frases seguidas?",
+            "feedback": "Una lista une las tres acciones iguales en una sola frase más ágil; las otras versiones rompen la gramática o repiten todavía más.",
+            "opciones": [
+              "The club bought seeds, tools and gloves.",
+              "The club bought seeds. Tools. The club gloves.",
+              "The club bought seeds and the club bought tools and the club bought gloves."
+            ],
+            "respuesta": 0,
+            "texto": "The club bought seeds. The club bought tools. The club bought gloves.",
+            "pista": "Une las tres compras iguales en una sola frase."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa la nota: «Cambié «past experience» por «experience».»",
+            "feedback": "En una nota de revisión se usa change X to Y: se cambia una cosa a otra.",
+            "texto": "I changed \"past experience\" ___ \"experience\".",
+            "respuesta": "to",
+            "aceptadas": [
+              "to"
+            ],
+            "pista": "Es la preposición que indica el resultado del cambio."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué nota explica bien el cambio?",
+            "feedback": "Una buena nota nombra el cambio (de pasiva a activa) y da una razón de concisión: más corta y más directa.",
+            "opciones": [
+              "I changed the passive to the active because it is shorter and more direct.",
+              "I changed the students because it sounds nicer.",
+              "I changed the garden because it was old."
+            ],
+            "respuesta": 0,
+            "texto": "Draft: The garden was planted by the students. Edit: The students planted the garden.",
+            "pista": "Busca la nota que nombra el cambio y da una razón de concisión."
+          }
+        ],
+        "practica": [
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Varié la longitud de las frases para mejorar el ritmo.»",
+            "feedback": "La nota dice qué hiciste (varied the length) y para qué (to improve the rhythm).",
+            "respuesta": "I varied the length of the sentences to improve the rhythm"
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué mejoró la persona en su borrador.",
+            "feedback": "Cambiar tres comienzos evita que todas las frases empiecen con We: la variedad de comienzos mejora el ritmo.",
+            "audio": "My draft had six sentences, and every one began with We. I changed three of the openings.",
+            "opciones": [
+              "The sentences now begin in different ways.",
+              "The sentences are now much longer.",
+              "The draft now has fewer facts."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada problema con el cambio que lo corrige.",
+            "feedback": "Cada problema tiene su arreglo: verbo directo, voz activa, quitar la redundancia y variar los comienzos.",
+            "pares": [
+              [
+                "made a list of",
+                "usar un verbo directo"
+              ],
+              [
+                "The box was opened by Sara.",
+                "pasar a voz activa"
+              ],
+              [
+                "past experience",
+                "quitar una palabra repetida"
+              ],
+              [
+                "Five sentences starting with We",
+                "variar el comienzo de las frases"
+              ]
+            ]
+          }
+        ],
+        "evaluacion": [
+          {
+            "formato": "escribir",
+            "consigna": "Edita el borrador: tres cambios de concisión, uno de ritmo y una nota por cambio.",
+            "feedback": "Un borrador bien editado corta relleno (because), verbo directo (decided), redundancia (every member) y mejora el ritmo; cada cambio lleva una nota con razón.",
+            "texto": "Our school garden club meets every Saturday. Due to the fact that the yard was empty, the club made a decision to plant a garden. The garden was planted by each and every member. We planted beans. We planted flowers. We planted trees. At this point in time, the garden is finished. In my personal opinion, it is the best club in the school.",
+            "respuesta": "Our school garden club meets every Saturday. Because the yard was empty, the club decided to plant a garden. Every member planted it. We planted beans, flowers and trees. Now the garden is finished. I think it is the best club in the school.\nChange 1: I changed \"due to the fact that\" to \"because\" because it is shorter and keeps the meaning.\nChange 2: I changed \"made a decision\" to \"decided\" because the verb is more direct.\nChange 3: I changed \"each and every member\" to \"every member\" because the words repeated the same idea.\nChange 4: I combined three short sentences into one because the rhythm was flat.",
+            "aceptadas": [
+              "Our school garden club meets every Saturday. Since the yard was empty, the club decided to plant a garden. Every member planted it. We planted beans, flowers and trees. The garden is now finished. In my opinion, it is the best club in the school.\nChange 1: I changed \"due to the fact that\" to \"since\" because it is shorter.\nChange 2: I changed \"made a decision\" to \"decided\" because it is a direct verb.\nChange 3: I changed \"each and every member\" to \"every member\" because it repeated an idea.\nChange 4: I combined the three short sentences because the rhythm was flat."
+            ],
+            "rubrica": {
+              "palabras": [
+                90,
+                190
+              ],
+              "evidencias": [
+                [
+                  "because the yard was empty",
+                  "since the yard was empty",
+                  "as the yard was empty"
+                ],
+                [
+                  "decided to plant",
+                  "decided to make",
+                  "chose to plant",
+                  "voted to plant"
+                ],
+                [
+                  "every member",
+                  "all members",
+                  "each member"
+                ],
+                [
+                  "beans, flowers and trees",
+                  "beans, flowers, and trees",
+                  "beans and flowers and trees",
+                  "beans, flowers"
+                ],
+                [
+                  "I changed",
+                  "I combined",
+                  "I cut",
+                  "Change 1"
+                ],
+                [
+                  "now the garden",
+                  "the garden is now",
+                  "the garden is finished",
+                  "the garden is ready"
+                ]
+              ]
+            }
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué cambio mejora más el ritmo de este texto?",
+            "feedback": "Las tres primeras frases tienen la misma estructura y longitud; unirlas en una lista rompe la monotonía. Cortar o pasar a pasiva no resuelve el ritmo.",
+            "opciones": [
+              "Combine the first three sentences into one list.",
+              "Cut the last sentence.",
+              "Put all the sentences in the passive."
+            ],
+            "respuesta": 0,
+            "texto": "The room was quiet. The room was dark. The room was empty. Then the lights came on, and everyone started talking at once."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa las notas de revisión con la palabra que falta.",
+            "feedback": "Las notas usan shorter (comparativo), vary in length (alternar longitudes) y for emphasis (finalidad de la repetición).",
+            "frases": [
+              "The edited text is much ___ than the draft.",
+              "Now the sentences ___ in length: long, short, long.",
+              "I kept the repetition in the title ___ emphasis."
+            ],
+            "partes": [
+              {
+                "respuesta": "shorter",
+                "aceptadas": [
+                  "shorter"
+                ]
+              },
+              {
+                "respuesta": "vary",
+                "aceptadas": [
+                  "vary"
+                ]
+              },
+              {
+                "respuesta": "for",
+                "aceptadas": [
+                  "for"
+                ]
+              }
+            ]
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué conservó la persona a propósito.",
+            "feedback": "La persona conservó una palabra repetida en el título para dar más fuerza: la repetición con propósito es un recurso, no un defecto.",
+            "audio": "I edited my draft. I cut the padding and I combined the last two sentences. But I kept a repeated word in the title, because it makes the title stronger.",
+            "opciones": [
+              "A repeated word, to give the title emphasis.",
+              "A long phrase, because it sounded formal.",
+              "The last two sentences, because they were short."
+            ],
+            "respuesta": 0
+          }
+        ],
+        "repaso": [
+          {
+            "formato": "escribir",
+            "consigna": "Edita la frase: corta el relleno y usa un verbo directo.",
+            "feedback": "At this point in time se reduce a now y gave consideration to, al verbo directo considers.",
+            "texto": "At this point in time, the club gave consideration to a new plan.",
+            "respuesta": "Now the club considers a new plan.",
+            "aceptadas": [
+              "Now the club is considering a new plan.",
+              "The club is now considering a new plan."
+            ]
+          },
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Corté la repetición porque decía lo mismo dos veces.»",
+            "feedback": "La nota nombra el cambio (I cut the repetition) y da la razón con because.",
+            "respuesta": "I cut the repetition because it said the same thing twice"
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué versión tiene mejor ritmo?",
+            "feedback": "Alterna una frase corta con otra más larga, y por eso suena más natural. Las otras dos repiten la misma estructura.",
+            "opciones": [
+              "We planted beans. Then, after a long afternoon of work, we sat down and ate.",
+              "We planted beans. We watered beans. We ate beans.",
+              "We planted beans and we watered beans and we ate beans."
+            ],
+            "respuesta": 0
+          }
+        ]
+      }
+    },
+    {
+      "n": 45,
+      "objetivo": "Escribir un boletín de barrio con tres secciones, una voz cálida y concisa, y revisar un párrafo denso.",
+      "habilidades": [
+        "gramática",
+        "lectura",
+        "escucha",
+        "escritura"
+      ],
+      "vocabulario": [
+        {
+          "en": "newsletter",
+          "es": "boletín"
+        },
+        {
+          "en": "section",
+          "es": "sección"
+        },
+        {
+          "en": "headline",
+          "es": "titular"
+        },
+        {
+          "en": "neighbour",
+          "es": "vecino"
+        },
+        {
+          "en": "dense",
+          "es": "denso, muy cargado"
+        },
+        {
+          "en": "greeting",
+          "es": "saludo"
+        },
+        {
+          "en": "polish",
+          "es": "pulir, dar el último repaso a un texto"
+        },
+        {
+          "en": "dish",
+          "es": "plato (de comida)"
+        },
+        {
+          "en": "share",
+          "es": "compartir"
+        },
+        {
+          "en": "event",
+          "es": "evento, acto"
+        }
+      ],
+      "ensenanza": [
+        {
+          "en": "Each section of the newsletter has a short headline.",
+          "es": "Cada sección del boletín tiene un titular corto.",
+          "nota": "Headline = título breve que dice de qué trata la sección."
+        },
+        {
+          "en": "A good newsletter speaks to every neighbour in a warm, clear voice.",
+          "es": "Un buen boletín habla a cada vecino con una voz cálida y clara.",
+          "nota": "Mantén una sola voz en todo el texto: la del saludo, la de las secciones y la del cierre."
+        },
+        {
+          "en": "A dense paragraph is hard to read, so cut the padding and use active verbs.",
+          "es": "Un párrafo denso es difícil de leer, así que quita el relleno y usa verbos activos.",
+          "nota": "Dense = demasiado cargado: muchas palabras para pocos datos."
+        },
+        {
+          "en": "Start with a warm greeting and end with a clear next step.",
+          "es": "Empieza con un saludo cálido y termina con un siguiente paso claro.",
+          "nota": "Greeting = saludo inicial; el cierre dice qué debe hacer el lector."
+        },
+        {
+          "en": "Polish your text last: check the rhythm, the repetition and the headlines.",
+          "es": "Pule tu texto al final: revisa el ritmo, la repetición y los titulares.",
+          "nota": "Polish = último repaso con el plan de edición de la clase anterior."
+        },
+        {
+          "en": "Bring a dish to share, and tell Sara about the event by Friday.",
+          "es": "Trae un plato para compartir y avisa a Sara del evento antes del viernes.",
+          "nota": "Bring a dish to share: to + verbo expresa el propósito; by Friday = como máximo el viernes."
+        }
+      ],
+      "explicacion": {
+        "titulo": "Un boletín con voz, estructura y concisión",
+        "texto": "Un boletín de barrio reúne todo el bloque. Organiza tres secciones, cada una con un titular corto. Mantén una voz constante: una cálida lleva saludo, tú al lector y frases breves. Aplica lo aprendido: verbos activos, sin relleno ni redundancias y con frases de longitud variada. Cada sección dice qué, cuándo y qué debe hacer el lector. Al final, pule el texto: busca párrafos densos, sobre todo verbos escondidos en sustantivos y participios que puedas reducir, y reescríbelos con un verbo directo."
+      },
+      "patron": {
+        "texto": "Sección del boletín:",
+        "formula": [
+          {
+            "texto": "Book swap:",
+            "nota": "titular corto de la sección"
+          },
+          {
+            "texto": "Come and share your old books on Sunday at four.",
+            "nota": "verbo activo + qué + cuándo, con voz cálida"
+          },
+          {
+            "texto": "Bring two books.",
+            "nota": "lo que debe hacer el lector: orden breve"
+          }
+        ]
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del boletín",
+          "Qué hace"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Greeting"
+            },
+            {
+              "texto": "abre con la voz elegida (cálida, seca, juguetona)"
+            }
+          ],
+          [
+            {
+              "texto": "Headline"
+            },
+            {
+              "texto": "titular corto que dice de qué trata la sección"
+            }
+          ],
+          [
+            {
+              "texto": "Body"
+            },
+            {
+              "texto": "qué, cuándo y dónde, en frases activas y de longitud variada"
+            }
+          ],
+          [
+            {
+              "texto": "Closing"
+            },
+            {
+              "texto": "da las gracias o el siguiente paso"
+            }
+          ]
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Bring a dish for share.",
+          "correcto": "Bring a dish to share.",
+          "explicacion": "Para expresar el propósito se usa to + verbo base (to share), no for + verbo."
+        },
+        {
+          "incorrecto": "The market opens at Wednesdays and Saturdays.",
+          "correcto": "The market opens on Wednesdays and Saturdays.",
+          "explicacion": "Con los días de la semana se usa on, aunque en español no haya preposición: «los miércoles»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Mia preparan el boletín de su calle para los vecinos.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I wrote the headline: Street party. Then a short, warm greeting.",
+            "traduccion": "Escribí el titular: «Street party». Luego, un saludo corto y cálido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. But this paragraph is dense. It has forty words and no clear verb.",
+            "traduccion": "Bien. Pero este párrafo es denso. Tiene cuarenta palabras y ningún verbo claro."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I will cut the padding and use active verbs: Join us on 20 May and bring a dish to share.",
+            "traduccion": "Quitaré el relleno y usaré verbos activos: «Join us on 20 May and bring a dish to share»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Much better. Now tell the neighbours who to call: Sara.",
+            "traduccion": "Mucho mejor. Ahora dile a los vecinos a quién llamar: Sara."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué problema tenía el párrafo de Carlos?",
+          "opciones": [
+            {
+              "es": "Era denso: muchas palabras y ningún verbo claro."
+            },
+            {
+              "es": "Era demasiado corto para los vecinos."
+            },
+            {
+              "es": "No tenía ningún titular."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que el párrafo es denso, con cuarenta palabras y sin verbo claro; Carlos lo arregla quitando el relleno y usando verbos activos."
+        }
+      },
+      "ejercicios": {
+        "guiada": [
+          {
+            "formato": "elegir",
+            "consigna": "¿Cuál es el titular de esta sección del boletín?",
+            "feedback": "El titular es la parte corta que va primero y dice de qué trata la sección: Book swap.",
+            "opciones": [
+              "Book swap",
+              "Bring two books",
+              "On Sunday at four"
+            ],
+            "respuesta": 0,
+            "texto": "Book swap. Come and share your old books on Sunday at four. Bring two books.",
+            "pista": "Busca la parte más corta, que va al principio."
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué saludo mantiene una voz cálida?",
+            "feedback": "Un saludo con Hello, neighbours y Welcome se dirige al lector con palabras amables; las otras versiones suenan frías.",
+            "opciones": [
+              "Hello, neighbours! Welcome to our street news.",
+              "To whom it may concern: the following information is provided.",
+              "Attention: read the rules below."
+            ],
+            "respuesta": 0,
+            "pista": "La voz cálida se dirige al lector con palabras amables."
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa: «Trae un plato para compartir.»",
+            "feedback": "El propósito se expresa con to + verbo base: to share.",
+            "texto": "Bring a dish ___ share.",
+            "respuesta": "to",
+            "aceptadas": [
+              "to"
+            ],
+            "pista": "Después de la palabra que falta va un verbo base."
+          }
+        ],
+        "practica": [
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Únete a nosotros el domingo y trae un pastel.»",
+            "feedback": "Dos órdenes breves unidas por and; el día lleva on: on Sunday.",
+            "respuesta": "Join us on Sunday and bring a cake"
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué incluye la última sección.",
+            "feedback": "El plan dice que la última sección da las gracias a los vecinos.",
+            "audio": "Here is the plan for the newsletter. The first section is the news. The second is the events. The last one says thank you to the neighbours.",
+            "opciones": [
+              "A message of thanks to the neighbours.",
+              "The dates of the events.",
+              "The news from the council."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "relacionar",
+            "consigna": "Relaciona cada elemento del boletín con su función.",
+            "feedback": "Cada elemento tiene una función: el titular resume, el saludo marca la voz, el párrafo denso se corrige y pulir es el último repaso.",
+            "pares": [
+              [
+                "headline",
+                "titular corto de una sección"
+              ],
+              [
+                "greeting",
+                "saludo con la voz elegida"
+              ],
+              [
+                "dense paragraph",
+                "párrafo con demasiadas palabras"
+              ],
+              [
+                "polish",
+                "último repaso del ritmo y las repeticiones"
+              ]
+            ]
+          }
+        ],
+        "evaluacion": [
+          {
+            "formato": "escribir",
+            "consigna": "Escribe el boletín de la calle: saludo cálido, tres secciones con titular y cierre.",
+            "feedback": "Un boletín completo tiene saludo, tres secciones con titular, verbos activos, datos claros y un cierre que agradece o da el siguiente paso.",
+            "texto": "Encargo: boletín de la calle Maple, con voz cálida y tres secciones. Datos: 1) Limpieza de la calle el sábado a las 9:00; traer guantes; Carlos pone las bolsas. 2) El mercado abre ahora los miércoles y los sábados, de 8 a 12. 3) Fiesta del barrio el 20 de mayo; traer un plato para compartir; avisar a Sara antes del viernes.",
+            "respuesta": "Hello, neighbours!\nClean-up day: Come and help us clean the street on Saturday at 9:00. It is a good way to meet your neighbours. Bring gloves, and Carlos will bring the bags.\nMarket news: The market now opens on Wednesdays and Saturdays, from 8 to 12. It is a good place to buy fresh fruit, so come early and say hello to the sellers!\nStreet party: Join us on 20 May for a street party. There will be music and good food. Bring a dish to share, and tell Sara before Friday.\nThank you for making our street a friendly place. See you soon!",
+            "aceptadas": [
+              "Hi, neighbours!\nClean-up day: Please join us on Saturday at 9:00 to clean the street. It is a good chance to meet your neighbours. Bring gloves, and Carlos will bring the bags.\nMarket news: From now on, the market opens on Wednesdays and Saturdays from 8 to 12. You can buy fresh fruit there, so come early and say hello to the sellers!\nStreet party: We are having a party on 20 May. There will be music and good food. Bring a dish to share and tell Sara by Friday.\nThanks for helping our street. See you soon!"
+            ],
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                90,
+                190
+              ],
+              "evidencias": [
+                [
+                  "Hello",
+                  "Hi",
+                  "Dear neighbours",
+                  "Dear neighbors",
+                  "Good morning"
+                ],
+                [
+                  "clean-up",
+                  "cleanup",
+                  "clean the street",
+                  "clean up the street",
+                  "cleaning"
+                ],
+                [
+                  "Saturday at 9",
+                  "Saturday at nine",
+                  "9:00",
+                  "9 a.m.",
+                  "9 am",
+                  "9 o'clock"
+                ],
+                [
+                  "Wednesdays and Saturdays",
+                  "Wednesday and Saturday"
+                ],
+                [
+                  "bring a dish",
+                  "bring food",
+                  "bring a plate",
+                  "bring something to share"
+                ],
+                [
+                  "Sara"
+                ],
+                [
+                  "before Friday",
+                  "by Friday",
+                  "until Friday"
+                ]
+              ]
+            }
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Cuál es la versión más directa de este párrafo denso?",
+            "feedback": "La condición con if, el sujeto the committee y el verbo activo will move dicen todo con menos palabras; las otras versiones conservan el rodeo y la pasiva.",
+            "opciones": [
+              "If it rains on Saturday, the committee will move the party inside.",
+              "In the event of the rain on Saturday, the committee will make a decision to move the party to the inside.",
+              "If it rains on Saturday, it will be decided by the committee that the party will be moved inside."
+            ],
+            "respuesta": 0,
+            "texto": "In the event that it rains on Saturday, a decision will be made by the committee to move the party inside."
+          },
+          {
+            "formato": "escuchar",
+            "consigna": "Escucha y elige qué voz usa el autor del aviso.",
+            "feedback": "El autor elogia un problema (el ascensor roto) con exageración: es la voz irónica, que dice lo contrario de lo que siente.",
+            "audio": "Dear neighbours, the lift is broken again. What a great start to the week. We love climbing five floors with the shopping.",
+            "opciones": [
+              "Ironic, because it praises a problem.",
+              "Dry, because it only gives facts.",
+              "Warm, because it speaks directly to you."
+            ],
+            "respuesta": 0
+          },
+          {
+            "formato": "completar",
+            "consigna": "Completa cada frase con la forma que falta.",
+            "feedback": "Cada frase aplica una lección del bloque: relativa reducida (written), participio de presente (Feeling) y voz seca (dry).",
+            "frases": [
+              "The notice that was written by Sara is on the wall. = The notice ___ by Sara is on the wall.",
+              "Because he felt proud, Leo smiled. = ___ proud, Leo smiled.",
+              "The writer uses short sentences, so the voice is ___."
+            ],
+            "partes": [
+              {
+                "respuesta": "written",
+                "aceptadas": [
+                  "written"
+                ]
+              },
+              {
+                "respuesta": "Feeling",
+                "aceptadas": [
+                  "Feeling",
+                  "feeling"
+                ]
+              },
+              {
+                "respuesta": "dry",
+                "aceptadas": [
+                  "dry"
+                ]
+              }
+            ]
+          }
+        ],
+        "repaso": [
+          {
+            "formato": "escribir",
+            "consigna": "Revisa el párrafo denso: corta el relleno y usa un verbo directo.",
+            "feedback": "El párrafo denso se arregla con because, un sujeto activo (Tom) y decided en lugar de a decision was made.",
+            "texto": "Due to the fact that the hall was closed, a decision was made by Tom to hold the meeting in the yard at this point in time.",
+            "respuesta": "Because the hall was closed, Tom decided to hold the meeting in the yard.",
+            "aceptadas": [
+              "Since the hall was closed, Tom decided to hold the meeting in the yard now.",
+              "Tom decided to hold the meeting in the yard because the hall was closed."
+            ],
+            "rubrica": {
+              "palabras": [
+                10,
+                30
+              ],
+              "evidencias": [
+                [
+                  "because",
+                  "since",
+                  "as the hall was closed"
+                ],
+                [
+                  "Tom decided",
+                  "Tom chose",
+                  "Tom had decided"
+                ],
+                [
+                  "in the yard",
+                  "outside",
+                  "in the garden"
+                ]
+              ]
+            }
+          },
+          {
+            "formato": "ordenar",
+            "consigna": "Ordena: «Un boletín cálido habla directamente a los vecinos.»",
+            "feedback": "El sujeto a warm newsletter va antes del verbo speaks; directly to the neighbours cierra la frase.",
+            "respuesta": "A warm newsletter speaks directly to the neighbours"
+          },
+          {
+            "formato": "elegir",
+            "consigna": "¿Qué versión mejora el ritmo de esta sección?",
+            "feedback": "Reúne los datos en una sola frase fluida. Las otras versiones repiten and o quedan incompletas.",
+            "opciones": [
+              "The book club meets on Tuesday, from seven to eight, and it is for everyone.",
+              "The book club meets on Tuesday, and it starts at seven, and it ends at eight, and it is for everyone.",
+              "The book club, Tuesday, seven, eight, everyone."
+            ],
+            "respuesta": 0,
+            "texto": "The book club meets on Tuesday. It starts at seven. It ends at eight. It is for everyone."
+          }
+        ]
+      }
+    }
+  ]
+}

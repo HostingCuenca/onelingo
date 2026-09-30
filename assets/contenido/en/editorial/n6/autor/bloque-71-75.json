@@ -212,8 +212,8 @@
         "guiada": [
           {
             "formato": "elegir",
-            "consigna": "Señala la afirmación de este argumento.",
-            "feedback": "La afirmación es lo que el autor quiere que aceptes; las otras dos frases la apoyan con una razón y con un dato.",
+            "consigna": "Señala la afirmación: lo que el autor quiere que aceptes.",
+            "feedback": "La afirmación es lo que el autor quiere que aceptes; las otras dos frases la apoyan con una razón y con un dato de una encuesta.",
             "opciones": [
               "Schools should start later.",
               "Teenagers need more sleep.",
@@ -225,12 +225,12 @@
           },
           {
             "formato": "elegir",
-            "consigna": "¿Qué frase da la razón de este argumento?",
-            "feedback": "La razón explica por qué y va después de because. «Cars should not enter the city centre» es la afirmación y el informe aporta un dato.",
+            "consigna": "Señala la razón: lo que explica por qué, no la afirmación ni el informe citado.",
+            "feedback": "La razón explica por qué y va después de because. «Cars should not enter the city centre» es la afirmación, y lo que dice el informe es la prueba citada.",
             "opciones": [
               "The air is dirty.",
               "Cars should not enter the city centre.",
-              "Pollution was high last year."
+              "A report says that pollution was high last year."
             ],
             "respuesta": 0,
             "texto": "Cars should not enter the city centre because the air is dirty. A report says that pollution was high last year.",
@@ -244,7 +244,8 @@
             "respuesta": "because",
             "aceptadas": [
               "because",
-              "since"
+              "since",
+              "as"
             ],
             "pista": "Une la afirmación con su razón."
           }
@@ -290,7 +291,10 @@
             "formato": "ordenar",
             "consigna": "Ordena: «Según una encuesta, la mayoría de los estudiantes duermen mal.»",
             "feedback": "La prueba empieza con la fuente (according to a survey) y después da el dato.",
-            "respuesta": "According to a survey most students sleep badly"
+            "respuesta": "According to a survey most students sleep badly",
+            "aceptadas": [
+              "Most students sleep badly according to a survey"
+            ]
           }
         ],
         "evaluacion": [
@@ -372,7 +376,7 @@
           {
             "formato": "elegir",
             "consigna": "Identifica la afirmación en este argumento.",
-            "feedback": "La afirmación es la idea que se defiende; «it can save lives» es la razón y la última frase es la prueba.",
+            "feedback": "La afirmación es la idea que se defiende; «it can save lives» es la razón y «Swimming schools report fewer accidents» es la prueba.",
             "opciones": [
               "Everyone should learn to swim.",
               "It can save lives.",
@@ -466,9 +470,9 @@
           "nota": "Likely to + verbo: es probable que. Un grado entre may y will."
         },
         {
-          "en": "Their injury problems are not new, given that the league started in April.",
-          "es": "Sus problemas de lesiones no son nuevos, dado que la liga empezó en abril.",
-          "nota": "Given that puede ir también al final de la frase."
+          "en": "He may well miss the final, given that the injury is serious.",
+          "es": "Bien podría perderse la final, dado que la lesión es grave.",
+          "nota": "Given that puede ir también al final de la frase, después de la conclusión."
         }
       ],
       "explicacion": {
@@ -677,7 +681,10 @@
             "formato": "ordenar",
             "consigna": "Ordena: «Dado que estudia todos los días, bien podría aprobar.»",
             "feedback": "Given that abre la razón y may well + verbo base gradúa la conclusión.",
-            "respuesta": "Given that she studies every day she may well pass"
+            "respuesta": "Given that she studies every day she may well pass",
+            "aceptadas": [
+              "She may well pass given that she studies every day"
+            ]
           }
         ],
         "evaluacion": [
@@ -724,16 +731,46 @@
             "respuesta": "Given that the team trains a lot, it may well win.",
             "aceptadas": [
               "The team may well win, given that it trains a lot.",
-              "Given that they train a lot, the team may well win."
+              "Given that they train a lot, the team may well win.",
+              "Given that the team trains hard, it may well win the league."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                6,
+                22
+              ],
+              "evidencias": [
+                [
+                  "given that"
+                ],
+                [
+                  "may well"
+                ],
+                [
+                  "train",
+                  "trains",
+                  "training",
+                  "practise",
+                  "practises",
+                  "practice",
+                  "practices",
+                  "work hard",
+                  "works hard"
+                ],
+                [
+                  "win",
+                  "wins"
+                ]
+              ]
+            }
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
             "consigna": "Elige la frase que parte de algo que todavía no sabes.",
-            "feedback": "Assuming presenta una suposición sin comprobar. La segunda contradice la llegada y la tercera no la da por supuesta.",
+            "feedback": "Assuming presenta una suposición sin comprobar. Given that la daría por cierta (y aquí contradice la llegada), y it doesn't follow that solo niega una conclusión.",
             "opciones": [
               "Assuming that the road is open, we will arrive by noon.",
               "Given that the road is closed, we will arrive by noon.",
@@ -1056,12 +1093,14 @@
           },
           {
             "formato": "completar",
-            "consigna": "Completa: «Muchos lo beben, pero eso no lo hace cierto.»",
-            "feedback": "Que sea popular no lo hace true: la mayoría puede equivocarse.",
-            "texto": "Many people drink it, but that does not make it ___.",
+            "consigna": "Completa: «Muchos lo beben, pero eso no hace cierta la afirmación.»",
+            "feedback": "Que sea popular no hace que la afirmación sea true (cierta): la mayoría puede equivocarse.",
+            "texto": "Many people drink it, but that does not make the claim ___.",
             "respuesta": "true",
             "aceptadas": [
-              "true"
+              "true",
+              "correct",
+              "right"
             ]
           },
           {
@@ -1074,7 +1113,46 @@
               "It is only one case, so it cannot prove a rule.",
               "One person is not enough to prove a rule."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                5,
+                25
+              ],
+              "evidencias": [
+                [
+                  "one case",
+                  "one person",
+                  "one week",
+                  "only one",
+                  "just one",
+                  "a single",
+                  "one example",
+                  "one story",
+                  "not enough people",
+                  "only a week",
+                  "only one week"
+                ],
+                [
+                  "prove",
+                  "proof",
+                  "enough",
+                  "evidence",
+                  "rule",
+                  "everyone",
+                  "everybody",
+                  "general",
+                  "all"
+                ],
+                [
+                  "not",
+                  "cannot",
+                  "can not",
+                  "never",
+                  "no"
+                ]
+              ]
+            }
           }
         ],
         "repaso": [
@@ -1379,9 +1457,37 @@
             "texto": "Aunque la idea es popular, no hay pruebas.",
             "respuesta": "Although the idea is popular, there is no evidence.",
             "aceptadas": [
-              "There is no evidence, although the idea is popular."
+              "There is no evidence, although the idea is popular.",
+              "Although the idea is popular, there is no proof.",
+              "Although the idea is popular, there isn't any evidence."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                5,
+                18
+              ],
+              "evidencias": [
+                [
+                  "although"
+                ],
+                [
+                  "popular",
+                  "well known",
+                  "well-known",
+                  "common",
+                  "famous"
+                ],
+                [
+                  "no evidence",
+                  "no proof",
+                  "no data",
+                  "not any evidence",
+                  "not enough evidence",
+                  "no real evidence"
+                ]
+              ]
+            }
           }
         ],
         "evaluacion": [
@@ -1400,7 +1506,7 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué frase reconoce un punto contrario sin usar but?",
-            "feedback": "Although ya expresa el contraste; añadir but es un error común. La tercera frase coloca mal although.",
+            "feedback": "Although ya expresa el contraste; añadir but es un error común. Y poner although al final, tras una coma, deja la frase rota.",
             "opciones": [
               "Although the plan is cheap, it takes a lot of time.",
               "Although the plan is cheap, but it takes a lot of time.",
@@ -1424,15 +1530,15 @@
             "formato": "escribir",
             "consigna": "Evalúa la afirmación con razones a favor, razones en contra y una conclusión graduada.",
             "feedback": "Una valoración equilibrada atribuye la afirmación, da razones a favor y en contra con datos y cierra con certeza graduada.",
-            "texto": "Afirmación: «Desayunar es la comida más importante del día.» Escribe unas 90 palabras: atribúyela a otros, da dos razones a favor con un dato, dos en contra con un punto contrario y cierra con una conclusión graduada.",
+            "texto": "Afirmación: «Desayunar es la comida más importante del día.» Escribe unas 80 palabras: atribúyela a otros, da dos razones a favor con un dato, dos en contra con un punto contrario y cierra con una conclusión graduada.",
             "respuesta": "Some people say that breakfast is the most important meal of the day. On the one hand, a school survey found that students who eat breakfast concentrate better in class. They also have more energy in the morning. On the other hand, the evidence is limited, because most studies only ask people about their habits. Although breakfast helps many students, some people are just not hungry in the morning. I conclude that the claim is partly true, but it depends on the person. It is unlikely that breakfast is equally important for everyone.",
             "aceptadas": [
-              "Some people think that we should do homework every night. On the one hand, a study found that regular practice improves grades. It also helps students learn to organise their time. On the other hand, the evidence is limited, because tired students learn less. Although homework can help, too much of it may hurt sleep. In conclusion, the claim is partly true, but it depends on the student. It is unlikely that the same amount of homework is good for everyone."
+              "Many people say that breakfast is the most important meal of the day. On the one hand, a study found that students who eat breakfast learn better. It also gives them energy for the morning. On the other hand, the evidence is limited, because most studies only ask people about their habits. Although breakfast helps many students, some people are just not hungry in the morning. In conclusion, the claim is partly true, but it depends on the person. It is unlikely that breakfast is equally important for everyone."
             ],
             "textoIdioma": "es",
             "rubrica": {
               "palabras": [
-                70,
+                55,
                 170
               ],
               "evidencias": [
@@ -1448,6 +1554,7 @@
                   "on the one hand",
                   "first of all",
                   "in favour",
+                  "in favor",
                   "one reason",
                   "for example"
                 ],
@@ -1750,7 +1857,8 @@
             "respuesta": "accept",
             "aceptadas": [
               "accept",
-              "admit"
+              "admit",
+              "recognise"
             ],
             "pista": "Reconocer un límite: I accept that…"
           },
@@ -1793,9 +1901,38 @@
             "texto": "Objeción: «Tu encuesta es demasiado pequeña.» Reconoce que es pequeña, pero di que puede mostrar una tendencia.",
             "respuesta": "Fair point, but it may well show a real trend.",
             "aceptadas": [
-              "I accept that it is small, but it may show a trend."
+              "I accept that it is small, but it may show a trend.",
+              "That is true, but it might show a trend."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                6,
+                30
+              ],
+              "evidencias": [
+                [
+                  "fair point",
+                  "i accept",
+                  "i admit",
+                  "i know",
+                  "i understand",
+                  "i agree",
+                  "it is small",
+                  "is small",
+                  "true"
+                ],
+                [
+                  "trend",
+                  "pattern"
+                ],
+                [
+                  "may",
+                  "might",
+                  "could"
+                ]
+              ]
+            }
           }
         ],
         "evaluacion": [
@@ -1846,7 +1983,7 @@
             "textoIdioma": "es",
             "rubrica": {
               "palabras": [
-                75,
+                60,
                 180
               ],
               "evidencias": [
@@ -1930,5 +2067,17 @@
         ]
       }
     }
-  ]
+  ],
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "71 g1: reescrito para tener una sola respuesta desde el ítem (consigna define razón; la opción de dato ahora cita «A report says…»); g0 define afirmación en la consigna.",
+      "73 e2: hueco ligado a «la afirmación» (cierta) y se aceptan true/correct/right; una sola lectura defendible sin pista.",
+      "72 ens6 reemplazada por frase natural; feedbacks que citaban posición (72 repaso0, 74 eval1) reescritos.",
+      "Escribir cortos 72 e3, 73 e3, 74 p2, 75 p2 pasan a rúbrica flexible en lugar de coincidencia exacta; ordenar con orden alternativo (71 p2, 72 p2).",
+      "Rangos mínimos de 74/75 bajados a 55/60 palabras; variante aceptada de 74 sobre el mismo tema."
+    ]
+  }
 }

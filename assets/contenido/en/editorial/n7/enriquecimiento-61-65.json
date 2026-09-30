@@ -1,0 +1,710 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "classes": {
+    "en.n7.class-61": {
+      "explicacion": {
+        "titulo": "Leer un titular con ojo crítico",
+        "texto": "Un titular está comprimido: en inglés suele omitir artículos y auxiliares, usa el presente para hechos pasados (Council cuts bus service) y prefiere palabras cortas y fuertes (crisis, shock). Esas palabras con carga no solo describen el hecho: te dicen qué sentir. Para leerlo con ojo crítico, busca la palabra con carga, imagina su versión neutra y comprueba si el artículo la respalda. Un titular puede ser verdadero palabra por palabra y aun así dar una idea equivocada."
+      },
+      "patron": {
+        "texto": "Titular = sujeto sin artículo + verbo en presente + dato:",
+        "formula": [
+          {
+            "texto": "Council",
+            "nota": "sujeto sin artículo (en un texto normal: the council)"
+          },
+          {
+            "texto": "cuts",
+            "nota": "presente para un hecho ya ocurrido; verbo corto y fuerte"
+          },
+          {
+            "texto": "bus service",
+            "nota": "el dato central, también sin artículo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The title of the news exaggerates the problem.",
+          "correcto": "The headline exaggerates the problem.",
+          "explicacion": "«Título de la noticia» se dice headline; title es el título de un libro o de una película."
+        },
+        {
+          "incorrecto": "The headline is very shocked.",
+          "correcto": "The headline is very shocking.",
+          "explicacion": "Shocking describe lo que causa impacto; shocked describe a la persona que lo siente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo leen una noticia sobre la biblioteca del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at this: Crisis at the library: readers in shock.",
+            "traduccion": "Mira esto: Crisis en la biblioteca: lectores en shock."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Let me read the article. It only says the library will close on Mondays for a month.",
+            "traduccion": "Déjame leer el artículo. Solo dice que la biblioteca cerrará los lunes durante un mes."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "So there is no crisis.",
+            "traduccion": "Entonces no hay ninguna crisis."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. Crisis is the hook, and shock tells you how to feel.",
+            "traduccion": "Exacto. Crisis es el gancho, y shock te dice cómo sentirte."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What would a calm headline say?",
+            "traduccion": "¿Qué diría un titular sereno?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Something like: Library to close on Mondays for a month.",
+            "traduccion": "Algo como: La biblioteca cerrará los lunes durante un mes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué Leo dice que «crisis» es un gancho?",
+          "opciones": [
+            {
+              "es": "Porque el artículo solo habla de cerrar los lunes durante un mes."
+            },
+            {
+              "es": "Porque la biblioteca va a cerrar para siempre."
+            },
+            {
+              "es": "Porque los lectores piden que la biblioteca cierre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo lee el artículo: solo dice que la biblioteca cierra los lunes durante un mes, así que «crisis» exagera."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra con carga",
+          "Versión neutra"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "crisis"
+            },
+            {
+              "texto": "problem"
+            }
+          ],
+          [
+            {
+              "texto": "chaos"
+            },
+            {
+              "texto": "delay"
+            }
+          ],
+          [
+            {
+              "texto": "slams"
+            },
+            {
+              "texto": "criticises"
+            }
+          ],
+          [
+            {
+              "texto": "scrap"
+            },
+            {
+              "texto": "cancel"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-62": {
+      "explicacion": {
+        "titulo": "Verbos de reporte y su patrón",
+        "texto": "Los verbos que usan las noticias para reportar lo que alguien dijo no siguen el patrón del español. Acusar de se dice accuse + persona + of + -ing (accused him of lying). Deny y admit van seguidos de un verbo en -ing (denied taking, admitted leaving). Claim acepta claim to have + participio (claimed to have seen it) y insist pide on + -ing (insisted on paying). Además, el verbo elegido marca postura: denied suena a negación firme; claimed deja abierta la duda de si es verdad."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de reporte + patrón + acción:",
+        "formula": [
+          {
+            "texto": "The neighbours",
+            "nota": "quien acusa o declara"
+          },
+          {
+            "texto": "accused the company of",
+            "nota": "accuse + persona + of (no to ni for)"
+          },
+          {
+            "texto": "dumping waste",
+            "nota": "verbo en -ing, no infinitivo"
+          },
+          {
+            "texto": "in the river.",
+            "nota": "el resto de la información"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The neighbours accused the company to dump waste in the river.",
+          "correcto": "The neighbours accused the company of dumping waste in the river.",
+          "explicacion": "Después de accuse + persona va of + verbo en -ing; el infinitivo con to no se usa aquí."
+        },
+        {
+          "incorrecto": "He denied to take the money.",
+          "correcto": "He denied taking the money.",
+          "explicacion": "Deny se construye con -ing (denied taking), no con to + infinitivo como «negarse a»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara leen una noticia sobre una panadería del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Did you read this? The neighbours accused the bakery of selling old bread.",
+            "traduccion": "¿Has leído esto? Los vecinos acusaron a la panadería de vender pan viejo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "What did the owner say?",
+            "traduccion": "¿Qué dijo el dueño?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "He denied selling anything old. He claimed to have changed the bread every morning.",
+            "traduccion": "Negó haber vendido nada viejo. Aseguró haber cambiado el pan cada mañana."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "So he admitted nothing?",
+            "traduccion": "¿Entonces no reconoció nada?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Only one thing: he admitted leaving a tray outside. But he insisted on keeping the bakery open.",
+            "traduccion": "Solo una cosa: reconoció haber dejado una bandeja fuera. Pero insistió en mantener la panadería abierta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué reconoce el dueño de la panadería?",
+          "opciones": [
+            {
+              "es": "Que dejó una bandeja fuera."
+            },
+            {
+              "es": "Que vendió pan viejo."
+            },
+            {
+              "es": "Que cambió el pan cada mañana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que el dueño admitió dejar una bandeja fuera; lo del pan viejo lo negó y lo de cambiar el pan solo lo aseguró."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Patrón",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "accuse"
+            },
+            {
+              "texto": "accuse + persona + of + -ing"
+            },
+            {
+              "texto": "accused him of lying"
+            }
+          ],
+          [
+            {
+              "texto": "deny"
+            },
+            {
+              "texto": "deny + -ing"
+            },
+            {
+              "texto": "denied taking the money"
+            }
+          ],
+          [
+            {
+              "texto": "admit"
+            },
+            {
+              "texto": "admit + -ing"
+            },
+            {
+              "texto": "admitted breaking the window"
+            }
+          ],
+          [
+            {
+              "texto": "claim"
+            },
+            {
+              "texto": "claim to have + participio"
+            },
+            {
+              "texto": "claimed to have seen it"
+            }
+          ],
+          [
+            {
+              "texto": "insist"
+            },
+            {
+              "texto": "insist on + -ing"
+            },
+            {
+              "texto": "insisted on paying"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-63": {
+      "explicacion": {
+        "titulo": "Hecho, opinión o insinuación",
+        "texto": "Al leer una noticia conviene separar tres cosas. Un hecho (fact) se puede comprobar con cifras, fechas o registros: «sixty per cent of residents». Una opinión dice lo que alguien piensa o siente y suele traer palabras de juicio como obviously, terrible o the best. Una insinuación no afirma nada, pero te empuja a una conclusión: da un dato cierto y deja que tú saques la idea. Pregúntate siempre: ¿puedo verificarlo?, ¿quién lo dice? y ¿qué palabra me empuja a pensar algo?"
+      },
+      "patron": {
+        "texto": "Tres tipos de enunciado:",
+        "formula": [
+          {
+            "texto": "Sixty per cent of residents use the library.",
+            "nota": "hecho: una cifra que se puede verificar"
+          },
+          {
+            "texto": "The library is obviously useless.",
+            "nota": "opinión: palabra de juicio (obviously, useless)"
+          },
+          {
+            "texto": "The mayor, a friend of the owner, says the contract is fair.",
+            "nota": "insinuación: dato cierto que sugiere un favor sin decirlo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, the plan is terrible.",
+          "correcto": "In my opinion, the plan is terrible.",
+          "explicacion": "According to introduce una fuente externa; tu propio parecer se dice in my opinion."
+        },
+        {
+          "incorrecto": "The sixty per cent of residents use the library.",
+          "correcto": "Sixty per cent of residents use the library.",
+          "explicacion": "En inglés no se pone the delante de un porcentaje general, a diferencia del español «el 60 %»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom revisan una publicación sobre los carriles bici de su ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "This post says bike lanes cut accidents by thirty per cent, according to a survey.",
+            "traduccion": "Esta publicación dice que los carriles bici reducen los accidentes un treinta por ciento, según una encuesta."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is that a fact or an opinion?",
+            "traduccion": "¿Eso es un hecho o una opinión?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is a figure from a survey, so we can verify it.",
+            "traduccion": "Es una cifra de una encuesta, así que podemos comprobarla."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And this line: the obviously useless new lanes?",
+            "traduccion": "¿Y esta línea: los nuevos carriles, obviamente inútiles?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is opinion. Obviously and useless tell you what to think.",
+            "traduccion": "Eso es opinión. Obviously y useless te dicen lo que debes pensar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué Ana dice que la cifra del treinta por ciento es un hecho?",
+          "opciones": [
+            {
+              "es": "Porque viene de una encuesta y se puede comprobar."
+            },
+            {
+              "es": "Porque la publicación usa la palabra «obviously»."
+            },
+            {
+              "es": "Porque a todos los vecinos les gustan los carriles."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que es una cifra de una encuesta y que se puede verificar; «obviously» aparece en la frase de opinión."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Pregunta clave",
+          "Señales"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho"
+            },
+            {
+              "texto": "¿Puedo comprobarlo?"
+            },
+            {
+              "texto": "cifras, fechas, according to a survey"
+            }
+          ],
+          [
+            {
+              "texto": "Opinión"
+            },
+            {
+              "texto": "¿Es un juicio personal?"
+            },
+            {
+              "texto": "obviously, terrible, the best, I think"
+            }
+          ],
+          [
+            {
+              "texto": "Insinuación"
+            },
+            {
+              "texto": "¿Qué sugiere sin decirlo?"
+            },
+            {
+              "texto": "seems to imply, a friend of, conveniently"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-64": {
+      "explicacion": {
+        "titulo": "Resumir una noticia atribuyendo cada dato",
+        "texto": "Un buen resumen de noticias atribuye cada afirmación a alguien. Usa according to + fuente (according to an official), un verbo de reporte (a witness said that…) o adverbios como reportedly y allegedly cuando no puedes garantizar el dato. Lo que falta por verificar se marca: has not been confirmed, is still unconfirmed. Lo que alguien preguntó se reporta con asked whether o asked if, con orden de afirmación. Así el lector sabe quién afirma qué y cuánto puede fiarse de ello."
+      },
+      "patron": {
+        "texto": "Fuente + dato, y distancia donde falte confirmación:",
+        "formula": [
+          {
+            "texto": "According to an official,",
+            "nota": "la fuente: quién lo dice"
+          },
+          {
+            "texto": "the market will open again on Saturday.",
+            "nota": "el dato atribuido"
+          },
+          {
+            "texto": "The cause is reportedly a broken pipe,",
+            "nota": "reportedly: se informa, pero no lo aseguras tú"
+          },
+          {
+            "texto": "but this is still unconfirmed.",
+            "nota": "marca explícita de lo no verificado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to the mayor said, the market will open on Saturday.",
+          "correcto": "According to the mayor, the market will open on Saturday.",
+          "explicacion": "According to ya atribuye la frase a la fuente: después va el nombre, no un verbo como said."
+        },
+        {
+          "incorrecto": "A reporter asked whether would there be help for the traders.",
+          "correcto": "A reporter asked whether there would be help for the traders.",
+          "explicacion": "La pregunta reportada conserva el orden de una afirmación: sujeto + verbo, sin inversión."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan un resumen para el periódico del colegio sobre la inundación del mercado.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I am writing the summary of the market flood. Who said the market will open again?",
+            "traduccion": "Estoy escribiendo el resumen de la inundación del mercado. ¿Quién dijo que el mercado volverá a abrir?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "An official. So we write: According to an official, the market will open again on Saturday.",
+            "traduccion": "Un funcionario. Así que escribimos: Según un funcionario, el mercado volverá a abrir el sábado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the broken pipe?",
+            "traduccion": "¿Y la tubería rota?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is only reportedly the cause. We must say it is unconfirmed.",
+            "traduccion": "Según se informa es la causa, nada más. Debemos decir que no está confirmado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. A reporter also asked whether the traders will receive help.",
+            "traduccion": "Bien. Un periodista también preguntó si los comerciantes recibirán ayuda."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Then we add that question too.",
+            "traduccion": "Entonces añadimos también esa pregunta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo deben presentar la causa de la inundación en el resumen?",
+          "opciones": [
+            {
+              "es": "Como una causa no confirmada: «reportedly» una tubería rota."
+            },
+            {
+              "es": "Como un hecho seguro, sin decir la fuente."
+            },
+            {
+              "es": "No deben mencionarla en el resumen."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que la tubería es solo «reportedly» la causa y que hay que señalar que no está confirmada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Recurso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Fuente"
+            },
+            {
+              "texto": "according to + fuente"
+            },
+            {
+              "texto": "according to an official"
+            }
+          ],
+          [
+            {
+              "texto": "Declaración"
+            },
+            {
+              "texto": "said / claimed / told reporters that"
+            },
+            {
+              "texto": "a witness said that the road was closed"
+            }
+          ],
+          [
+            {
+              "texto": "Distancia"
+            },
+            {
+              "texto": "reportedly, allegedly"
+            },
+            {
+              "texto": "allegedly damaged last month"
+            }
+          ],
+          [
+            {
+              "texto": "Duda"
+            },
+            {
+              "texto": "has not been confirmed / unconfirmed"
+            },
+            {
+              "texto": "the figure is unconfirmed"
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "asked whether / if + afirmación"
+            },
+            {
+              "texto": "a reporter asked whether help would arrive"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-65": {
+      "explicacion": {
+        "titulo": "Verificar una publicación viral",
+        "texto": "Verificar una publicación viral lleva cuatro pasos. Primero separa cada afirmación y decide si es un hecho, una opinión o una insinuación. Segundo, contrástala con al menos dos fuentes fiables y atribuye lo que dice cada una (according to…, the newspaper reported that…). Tercero, marca lo que sigue sin confirmar (reportedly, unconfirmed) y usa bien los verbos de reporte (denied taking, accused of…). Cuarto, escribe una aclaración breve con un consejo final antes de compartir."
+      },
+      "patron": {
+        "texto": "Mensaje de aclaración:",
+        "formula": [
+          {
+            "texto": "The post claims that the pool will close forever,",
+            "nota": "qué afirma la publicación"
+          },
+          {
+            "texto": "but according to the council,",
+            "nota": "la fuente fiable que la contradice"
+          },
+          {
+            "texto": "it will only close for repairs.",
+            "nota": "el dato verificado"
+          },
+          {
+            "texto": "Please verify before you share.",
+            "nota": "consejo final al lector"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The post accuses the council to close the pool.",
+          "correcto": "The post accuses the council of closing the pool.",
+          "explicacion": "Accuse + persona va con of + verbo en -ing, como en las noticias de acusación."
+        },
+        {
+          "incorrecto": "Please verify it before to share it.",
+          "correcto": "Please verify it before sharing it.",
+          "explicacion": "Después de before se usa -ing; en español «antes de compartir» no se traduce con to + infinitivo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos revisan una publicación viral sobre la piscina municipal.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Have you seen this post? It says the city is closing the pool forever.",
+            "traduccion": "¿Has visto esta publicación? Dice que la ciudad cierra la piscina para siempre."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That sounds like a rumour. What does the council say?",
+            "traduccion": "Eso suena a rumor. ¿Qué dice el ayuntamiento?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Its statement says the pool will close for six weeks for repairs.",
+            "traduccion": "Su comunicado dice que la piscina cerrará seis semanas por reparaciones."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So the post is misleading. Did anyone admit a plan to sell it?",
+            "traduccion": "Entonces la publicación es engañosa. ¿Alguien reconoció un plan para venderla?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No. A spokesperson denied any plan to sell it.",
+            "traduccion": "No. Un portavoz negó cualquier plan de venderla."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then let us write a correction before more people share it.",
+            "traduccion": "Entonces escribamos una rectificación antes de que más gente la comparta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué dice el ayuntamiento sobre la piscina?",
+          "opciones": [
+            {
+              "es": "Que cerrará seis semanas por reparaciones."
+            },
+            {
+              "es": "Que cerrará para siempre."
+            },
+            {
+              "es": "Que la venderá este año."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara lee el comunicado: la piscina cierra seis semanas por reparaciones; lo de venderla lo negó un portavoz."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué hacer",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1. Separar"
+            },
+            {
+              "texto": "hecho, opinión o insinuación"
+            },
+            {
+              "texto": "forever es una exageración"
+            }
+          ],
+          [
+            {
+              "texto": "2. Contrastar"
+            },
+            {
+              "texto": "dos fuentes con according to"
+            },
+            {
+              "texto": "according to the council"
+            }
+          ],
+          [
+            {
+              "texto": "3. Marcar dudas"
+            },
+            {
+              "texto": "reportedly, unconfirmed"
+            },
+            {
+              "texto": "the plan is still unconfirmed"
+            }
+          ],
+          [
+            {
+              "texto": "4. Corregir"
+            },
+            {
+              "texto": "verbo de reporte con su patrón"
+            },
+            {
+              "texto": "the council denied selling the pool"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

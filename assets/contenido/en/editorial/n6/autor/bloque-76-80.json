@@ -220,11 +220,11 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué titular es el más neutral?",
-            "feedback": "El titular neutral dice qué pasó con un verbo informativo. Forces, shocking y ruins añaden juicio.",
+            "feedback": "El titular neutral dice qué pasó con un verbo informativo. Hits, terrible y spoils añaden juicio.",
             "opciones": [
               "Mayor announces new bus timetable",
-              "Mayor forces shocking bus changes",
-              "Mayor ruins bus timetable"
+              "Mayor hits drivers with terrible bus changes",
+              "Mayor spoils bus timetable"
             ],
             "respuesta": 0,
             "texto": "Tres titulares sobre el mismo horario de autobuses.",
@@ -247,7 +247,7 @@
           {
             "formato": "relacionar",
             "consigna": "Relaciona cada elemento de un titular con lo que hace.",
-            "feedback": "Shocking añade emoción, announces solo informa, «no reason given» deja fuera un dato y la última frase destaca una consecuencia.",
+            "feedback": "Shocking añade emoción, announces solo informa, «no reason given» deja fuera un dato y «Children left with nowhere to read» destaca una consecuencia.",
             "pares": [
               [
                 "shocking",
@@ -303,9 +303,9 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué titular usa una palabra con carga emocional?",
-            "feedback": "Disaster añade emoción fuerte. Los otros dos titulares solo informan de la hora.",
+            "feedback": "Terrible añade emoción fuerte. Los otros dos titulares solo informan de la hora.",
             "opciones": [
-              "Disaster at school concert",
+              "Terrible night at school concert",
               "Concert ends early",
               "School concert finishes at eight"
             ],
@@ -331,16 +331,50 @@
             "respuesta": "Council reduces the library budget by ten per cent.",
             "aceptadas": [
               "Council cuts the library budget by ten per cent.",
-              "The council announces a smaller library budget."
+              "The council lowers the library budget by ten per cent.",
+              "Council reduces library budget by 10%."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                5,
+                16
+              ],
+              "evidencias": [
+                [
+                  "council"
+                ],
+                [
+                  "library"
+                ],
+                [
+                  "reduces",
+                  "reduced",
+                  "cuts",
+                  "cut",
+                  "lowers",
+                  "lowered",
+                  "trims",
+                  "decreases",
+                  "announces"
+                ],
+                [
+                  "ten per cent",
+                  "10 per cent",
+                  "ten percent",
+                  "10 percent",
+                  "10%",
+                  "10 %"
+                ]
+              ]
+            }
           }
         ],
         "repaso": [
           {
             "formato": "elegir",
             "consigna": "¿Qué titular destaca la consecuencia emocional en lugar del hecho?",
-            "feedback": "El primer titular pone en primer plano lo que pierden los niños; los otros dos solo dan un hecho.",
+            "feedback": "«Children lose their favourite place to read» pone en primer plano lo que pierden los niños; los otros titulares solo dan un hecho (cierre o apertura).",
             "opciones": [
               "Children lose their favourite place to read",
               "Library closes on Friday",
@@ -678,10 +712,10 @@
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige qué dato presenta el periodista como un hecho.",
-            "feedback": "El periodista usa states para el incendio, y insists deja como postura de la empresa que el teléfono es seguro.",
-            "audio": "The company insists that the phone is safe. However, the news report states that the fire started in three phones.",
+            "feedback": "El periodista usa states para el incendio (tres teléfonos se incendiaron), mientras que insists deja como postura de la empresa que el teléfono es seguro.",
+            "audio": "The company insists that the phone is safe. However, the news report states that three phones caught fire.",
             "opciones": [
-              "Three of the phones were involved in a fire.",
+              "There was a fire in three of the phones.",
               "The phone is safe for everyone.",
               "The company is honest."
             ],
@@ -712,15 +746,41 @@
           },
           {
             "formato": "escribir",
-            "consigna": "Escribe una frase de noticia que marque distancia: una testigo afirma que el autobús llegó tarde.",
+            "consigna": "Escribe una frase que marque distancia: una testigo afirma que el autobús llegó tarde.",
             "feedback": "Claims marca que es lo que dice la testigo, sin que el periodista lo dé por comprobado.",
             "texto": "Dato: una testigo dice que el autobús llegó tarde, pero no está comprobado.",
             "respuesta": "The witness claims that the bus arrived late.",
             "aceptadas": [
               "A witness claims that the bus was late.",
-              "The witness claims that the bus was late."
+              "The witness claims that the bus was late.",
+              "A witness insists that the bus arrived late."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                5,
+                16
+              ],
+              "evidencias": [
+                [
+                  "witness"
+                ],
+                [
+                  "claims",
+                  "claimed",
+                  "claim",
+                  "alleges",
+                  "insists",
+                  "maintains"
+                ],
+                [
+                  "bus"
+                ],
+                [
+                  "late"
+                ]
+              ]
+            }
           }
         ],
         "repaso": [
@@ -1012,7 +1072,7 @@
                 "diferencia de cifras"
               ],
               [
-                "Nobody confirms that the captain left early.",
+                "Nobody confirms that the coach left early.",
                 "dato sin comprobar"
               ],
               [
@@ -1056,7 +1116,7 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué dato necesita una tercera fuente para confirmarse?",
-            "feedback": "Solo el segundo medio dice que el partido fue injusto, y es una opinión del entrenador sin comprobar.",
+            "feedback": "Solo el medio B dice que el partido fue injusto, y es una opinión del entrenador sin comprobar; el resultado y la victoria aparecen en los dos medios.",
             "opciones": [
               "That the game was unfair.",
               "That the team won.",
@@ -1083,9 +1143,45 @@
             "respuesta": "The two versions differ about the number of visitors.",
             "aceptadas": [
               "The versions differ about how many visitors came.",
-              "They differ about the number of visitors."
+              "They differ about the number of visitors.",
+              "The two notes give different numbers of visitors."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                5,
+                20
+              ],
+              "evidencias": [
+                [
+                  "differ",
+                  "different",
+                  "disagree",
+                  "do not agree",
+                  "not the same"
+                ],
+                [
+                  "number",
+                  "visitors",
+                  "attendance",
+                  "people",
+                  "how many",
+                  "figure",
+                  "figures"
+                ],
+                [
+                  "version",
+                  "versions",
+                  "note",
+                  "notes",
+                  "outlet",
+                  "outlets",
+                  "two",
+                  "they",
+                  "reports"
+                ]
+              ]
+            }
           }
         ],
         "repaso": [
@@ -1326,12 +1422,12 @@
         "guiada": [
           {
             "formato": "elegir",
-            "consigna": "¿Qué titular reescribe sin carga emocional «Greedy firm crushes shoppers»?",
-            "feedback": "El titular neutral deja el hecho y la cifra. Punishes y suffer añaden juicio y emoción.",
+            "consigna": "¿Qué titular reescribe sin carga emocional «Greedy store attacks shoppers»?",
+            "feedback": "El titular neutral deja el hecho y la cifra. Attacks, terrible y spoils añaden juicio y emoción.",
             "opciones": [
-              "Firm raises prices by five per cent",
-              "Firm punishes shoppers again",
-              "Shoppers suffer as firm raises prices"
+              "Store raises prices by five per cent",
+              "Store attacks shoppers with terrible prices",
+              "Store spoils shopping with higher prices"
             ],
             "respuesta": 0,
             "texto": "Dato: la empresa sube los precios un cinco por ciento.",
@@ -1365,7 +1461,7 @@
             "opciones": [
               "According to the school, 200 students joined the club.",
               "200 students joined the club, everyone knows.",
-              "The school was amazed that 200 students joined."
+              "The school was surprised that 200 students joined."
             ],
             "respuesta": 0,
             "texto": "Quieres dar una cifra y decir de quién la sacas.",
@@ -1402,7 +1498,12 @@
             "respuesta": "Bus fare rises by ten per cent",
             "aceptadas": [
               "Bus fares rise by ten per cent",
-              "The bus fare rise is ten per cent"
+              "The bus fare rise is ten per cent",
+              "Bus fares go up by ten per cent",
+              "Bus fares increase by ten per cent",
+              "Bus fare rises by 10%",
+              "Bus fares rise by ten percent",
+              "Bus fares rise by 10 per cent"
             ],
             "textoIdioma": "es"
           }
@@ -1449,7 +1550,7 @@
             "texto": "Noticia sesgada: «El codicioso ayuntamiento golpea a los vecinos con una escandalosa subida del parking.» Datos: desde el 1 de marzo, la tasa sube de 1 a 2 dólares por hora. Portavoz del ayuntamiento: los costes de mantenimiento han subido. Asociación de vecinos: la tasa es demasiado alta para los comercios pequeños. Reescríbela en unas 90 palabras.",
             "respuesta": "City council raises parking fee to two dollars an hour. From the first of March, the fee will rise from one dollar to two dollars an hour. A council spokesperson says that maintenance costs have risen. According to a residents' association, the new fee is too high for small shops. The association also says that some customers may stop coming. The council and the association give different reasons, and the effect on shop sales has not been confirmed.",
             "aceptadas": [
-              "Parking fee to rise in the city centre. The council will raise the fee from one dollar to two dollars an hour on the first of March. A council spokesperson states that maintenance costs have risen. A residents' association says that the new fee is too high for small shops. According to the association, some customers may stop coming. The council has not commented on the effect on sales."
+              "Parking fee to rise to two dollars an hour. The fee is now one dollar an hour. The council will raise the fee from one dollar to two dollars an hour on the first of March. A council spokesperson states that maintenance costs have risen. A residents' association says that the new fee is too high for small shops. According to the association, some customers may stop coming. The council has not commented on the effect on sales."
             ],
             "textoIdioma": "es",
             "rubrica": {
@@ -1466,18 +1567,17 @@
                   "increase"
                 ],
                 [
-                  "spokesperson says",
-                  "spokesperson states",
-                  "spokesperson reports",
+                  "spokesperson",
                   "council says",
-                  "council states"
+                  "council states",
+                  "council reports"
                 ],
                 [
                   "according to",
-                  "association says",
-                  "association states",
-                  "association reports",
-                  "residents say"
+                  "association",
+                  "residents say",
+                  "residents state",
+                  "residents report"
                 ],
                 [
                   "an hour",
@@ -1493,11 +1593,11 @@
           {
             "formato": "elegir",
             "consigna": "¿Qué titular usa lenguaje neutro?",
-            "feedback": "El primero informa del cambio con un verbo neutro. Gives in, forced y victory añaden juicio.",
+            "feedback": "«Museum extends opening hours on Sundays» informa del cambio con un verbo neutro. «Gives in» y «terrible pressure» añaden juicio.",
             "opciones": [
               "Museum extends opening hours on Sundays",
               "Museum finally gives in and opens longer",
-              "Museum forced to open longer in huge victory"
+              "Museum opens longer after terrible pressure"
             ],
             "respuesta": 0,
             "texto": "Tres titulares sobre el mismo cambio de horario.",
@@ -1535,7 +1635,7 @@
       "vocabulario": [
         {
           "en": "viral",
-          "es": "viral"
+          "es": "que se difunde muy rápido"
         },
         {
           "en": "reliable",
@@ -1672,9 +1772,9 @@
           "explicacion": "«Existe un rumor» se dice there is a rumour; it exists no funciona así en inglés."
         },
         {
-          "incorrecto": "It is probably that the post is fake.",
-          "correcto": "The post is probably fake.",
-          "explicacion": "Probably es adverbio y va con el verbo: is probably fake. Con it is hace falta el adjetivo probable."
+          "incorrecto": "It is probably that the post is false.",
+          "correcto": "The post is probably false.",
+          "explicacion": "Probably es adverbio y va con el verbo: is probably false. Con it is hace falta el adjetivo probable."
         }
       ],
       "situacion": {
@@ -1783,7 +1883,7 @@
             "feedback": "Con dos fuentes en contra pero sin poder comprobarlo todo, lo prudente es it is unlikely that…",
             "opciones": [
               "It is unlikely that the post is true.",
-              "The post is definitely a lie.",
+              "The post is definitely false.",
               "The post is certainly true."
             ],
             "respuesta": 0,
@@ -1797,32 +1897,62 @@
             "texto": "Dile a tu amigo que comprobéis la noticia con la radio local.",
             "respuesta": "Let's verify the news with the local radio.",
             "aceptadas": [
+              "Let's verify the news with the local radio.",
               "We should verify the news with the local radio.",
-              "Let's check the news with the local radio."
+              "Let's check the news with the local radio.",
+              "Let us confirm the news with the local radio."
             ],
-            "textoIdioma": "es"
+            "textoIdioma": "es",
+            "rubrica": {
+              "palabras": [
+                5,
+                16
+              ],
+              "evidencias": [
+                [
+                  "let's",
+                  "let us",
+                  "we should",
+                  "we need to",
+                  "we can",
+                  "we must",
+                  "we could",
+                  "shall we",
+                  "why don't we",
+                  "why do not we"
+                ],
+                [
+                  "verify",
+                  "check",
+                  "confirm"
+                ],
+                [
+                  "radio"
+                ]
+              ]
+            }
           }
         ],
         "evaluacion": [
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige qué dice la fuente oficial.",
-            "feedback": "La web del zoo niega la oferta: no regala entradas.",
-            "audio": "The post says that the zoo gives free tickets to everyone who shares it. The zoo website says that there is no such offer.",
+            "feedback": "La web del museo niega la oferta: no regala entradas.",
+            "audio": "The post says that the museum gives free tickets to everyone who shares it. The museum website says that there is no such offer.",
             "opciones": [
-              "The zoo is not giving away tickets.",
-              "The zoo gives tickets to everyone.",
-              "The zoo will close next week."
+              "The museum is not giving away tickets.",
+              "The museum gives tickets to everyone.",
+              "The museum will close next week."
             ],
             "respuesta": 0
           },
           {
             "formato": "elegir",
             "consigna": "¿Cuál es la mejor respuesta para explicar la conclusión a un amigo?",
-            "feedback": "La primera cita el contraste con fuentes y gradúa la certeza. La segunda exagera y la tercera no comprueba nada.",
+            "feedback": "La respuesta que cita dos fuentes contrastadas y gradúa la certeza (may well) es la adecuada. Afirmar 100 % de certeza exagera, y no comprobar nada y fiarse de que todos la comparten no prueba nada.",
             "opciones": [
               "I checked two sources, and they disagree with the post, so it may well be a rumour.",
-              "I checked two sources, and the post is 100 per cent fake, no doubt.",
+              "I checked two sources, and the post is 100 per cent false, no doubt.",
               "I checked nothing, but everybody shares it, so it is true."
             ],
             "respuesta": 0,
@@ -1836,12 +1966,13 @@
             "texto": "Many shares do not ___ that a post is true.",
             "respuesta": "prove",
             "aceptadas": [
-              "prove"
+              "prove",
+              "show"
             ]
           },
           {
             "formato": "escribir",
-            "consigna": "Explica a un amigo si fiarse de la publicación: señales de sesgo, dos fuentes y una conclusión graduada.",
+            "consigna": "Explica a un amigo si fiarse de la publicación: sesgo, dos fuentes y conclusión graduada.",
             "feedback": "La explicación a un amigo nombra señales de sesgo, contrasta dos fuentes y concluye con certeza graduada.",
             "texto": "Publicación: «URGENT! Free bikes for everyone! SHARE NOW before it is deleted!» Datos: la web de la tienda dice que no regala bicicletas; la radio local solo habla de una oferta del 10 % para estudiantes. Escribe a Sam unas 100 palabras.",
             "respuesta": "Hi Sam, I do not think that post is reliable. First, it uses urgent words like URGENT and SHARE NOW, and it does not give a source. Second, I checked two sources. The shop website says that it is not giving away free bikes. The local radio says that there is only a ten per cent offer for students. Given that both sources disagree with the post, it is unlikely that the offer is real. It may well be a rumour, so please do not share it until we can verify it.",
@@ -1877,7 +2008,9 @@
                   "not reliable",
                   "i doubt",
                   "not sure",
-                  "rumour"
+                  "rumour",
+                  "rumor",
+                  "not true"
                 ],
                 [
                   "do not share",
@@ -1908,7 +2041,10 @@
             "formato": "ordenar",
             "consigna": "Ordena: «Bien podría ser solo un rumor.»",
             "feedback": "May well + verbo base expresa que es muy posible, sin ser seguro.",
-            "respuesta": "It may well be just a rumour"
+            "respuesta": "It may well be just a rumour",
+            "aceptadas": [
+              "It may well just be a rumour"
+            ]
           },
           {
             "formato": "completar",
@@ -1918,11 +2054,23 @@
             "respuesta": "verify",
             "aceptadas": [
               "verify",
-              "check"
+              "check",
+              "confirm"
             ]
           }
         ]
       }
     }
-  ]
+  ],
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Feedbacks que citaban posición de opción (76 repaso0, 79 repaso0, 80 eval1, 78 eval1) reescritos por contenido.",
+      "77 e0: audio más natural (three phones caught fire).",
+      "Escribir cortos 76 e3, 77 e3, 78 e3, 80 p2 con rúbrica flexible; 79 p2 con más variantes aceptadas.",
+      "80 e2 acepta prove/show; 80 repaso1/2 variantes; rumour/rumor en rúbrica."
+    ]
+  }
 }

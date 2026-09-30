@@ -1,0 +1,706 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 6,
+    "end": 10
+  },
+  "classes": {
+    "en.n7.class-06": {
+      "explicacion": {
+        "titulo": "Saltos atrás en un relato",
+        "texto": "En un relato, el pasado simple cuenta los hechos en orden (she arrived, she ran). Cuando saltas atrás a algo anterior, cambias a had + participio (she had lost her passport) o a had been + -ing si ese hecho duraba (she had been looking for it). Los marcadores sitúan cada salto: earlier y previously miran atrás, meanwhile une acciones simultáneas, y eventually y afterwards hacen avanzar la historia. Para ordenar un relato, busca primero el tiempo verbal y luego el marcador."
+      },
+      "patron": {
+        "texto": "Hecho principal + hecho anterior:",
+        "formula": [
+          {
+            "texto": "Sara was waiting at the gate;",
+            "nota": "hecho principal: pasado continuo o simple"
+          },
+          {
+            "texto": "earlier, she had lost her passport.",
+            "nota": "hecho anterior: had + participio"
+          },
+          {
+            "texto": "She had been looking for it for an hour.",
+            "nota": "anterior y duradero: had been + -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "When I arrived, the train already left.",
+          "correcto": "When I arrived, the train had already left.",
+          "explicacion": "Un hecho anterior a otro del pasado necesita had + participio; con el pasado simple parecería que ocurrió después."
+        },
+        {
+          "incorrecto": "She was looking for it for an hour before she found it.",
+          "correcto": "She had been looking for it for an hour before she found it.",
+          "explicacion": "Para una acción que duró hasta otro momento del pasado se usa had been + -ing; was looking describe el fondo, no la duración previa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Sara por qué llegó tarde a la puerta de embarque.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Why were you late for your flight, Sara?",
+            "traduccion": "¿Por qué llegaste tarde a tu vuelo, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Earlier, I had lost my passport.",
+            "traduccion": "Antes había perdido mi pasaporte."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Really? What happened next?",
+            "traduccion": "¿En serio? ¿Y qué pasó después?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I had been looking for it for an hour. Eventually, I found it in my coat.",
+            "traduccion": "Llevaba una hora buscándolo. Por fin lo encontré en el abrigo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué llegó tarde Sara a su vuelo?",
+          "opciones": [
+            {
+              "es": "Había perdido el pasaporte y pasó una hora buscándolo."
+            },
+            {
+              "es": "Había perdido el vuelo y tuvo que comprar otro billete."
+            },
+            {
+              "es": "Había dejado el pasaporte en casa de su hermano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «Earlier, I had lost my passport» y «I had been looking for it for an hour»: la búsqueda del pasaporte la retrasó."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Qué marca",
+          "Marcadores"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "had + participio"
+            },
+            {
+              "texto": "salto atrás: hecho anterior"
+            },
+            {
+              "texto": "earlier, previously, by then"
+            }
+          ],
+          [
+            {
+              "texto": "had been + -ing"
+            },
+            {
+              "texto": "salto atrás: acción que duraba"
+            },
+            {
+              "texto": "for an hour, since"
+            }
+          ],
+          [
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "la historia avanza"
+            },
+            {
+              "texto": "eventually, afterwards"
+            }
+          ],
+          [
+            {
+              "texto": "was / were + -ing"
+            },
+            {
+              "texto": "fondo simultáneo"
+            },
+            {
+              "texto": "meanwhile, while"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-07": {
+      "explicacion": {
+        "titulo": "Mirar al futuro desde el pasado",
+        "texto": "Estas formas miran al futuro desde el pasado. Was to + verbo base cuenta un destino que se cumplió (She was to become a legend). Was to have + participio cuenta un plan que no se cumplió (He was to have sung, but he was injured). Would + verbo base también mira adelante desde el pasado, sobre todo con later (She would later become president). Son formas de narración: en una conversación normal dirías She became… o He was going to sing…."
+      },
+      "patron": {
+        "texto": "Destino o plan visto desde el pasado:",
+        "formula": [
+          {
+            "texto": "She was to become a legend.",
+            "nota": "was to + verbo base: destino cumplido"
+          },
+          {
+            "texto": "He was to have sung,",
+            "nota": "was to have + participio: plan que no se cumplió"
+          },
+          {
+            "texto": "but he was injured.",
+            "nota": "el motivo que frustró el plan"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The tour was to have start in May, but it was cancelled.",
+          "correcto": "The tour was to have started in May, but it was cancelled.",
+          "explicacion": "Después de was to have va el participio (started), no el verbo base; esta forma cuenta un plan que no se cumplió."
+        },
+        {
+          "incorrecto": "Years later, she will become the president of the club.",
+          "correcto": "Years later, she would become the president of the club.",
+          "explicacion": "En un relato en pasado, el futuro visto desde entonces se dice would; will mezcla el pasado de la historia con el futuro de quien narra."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo ven una película sobre una cantante llamada Rosa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "This film is about a singer called Rosa.",
+            "traduccion": "Esta película trata de una cantante llamada Rosa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "What happened at her debut?",
+            "traduccion": "¿Qué pasó en su debut?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It was a small concert, but she was to become a legend.",
+            "traduccion": "Fue un concierto pequeño, pero estaba destinada a ser una leyenda."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the tour?",
+            "traduccion": "¿Y la gira?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It was to have started in May, but she was injured.",
+            "traduccion": "Tenía que haber empezado en mayo, pero ella se lesionó."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pasó con la gira de Rosa?",
+          "opciones": [
+            {
+              "es": "Iba a empezar en mayo, pero Rosa se lesionó."
+            },
+            {
+              "es": "Empezó en mayo con mucho éxito."
+            },
+            {
+              "es": "Se canceló porque no había entradas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «It was to have started in May, but she was injured»: el plan no se cumplió porque Rosa se lesionó."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Significado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "was to + base"
+            },
+            {
+              "texto": "destino que se cumplió"
+            },
+            {
+              "texto": "She was to become a legend."
+            }
+          ],
+          [
+            {
+              "texto": "was to have + participio"
+            },
+            {
+              "texto": "plan que no se cumplió"
+            },
+            {
+              "texto": "The tour was to have started in May."
+            }
+          ],
+          [
+            {
+              "texto": "would + base"
+            },
+            {
+              "texto": "futuro visto desde el pasado"
+            },
+            {
+              "texto": "She would later become president."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-08": {
+      "explicacion": {
+        "titulo": "Orden y duración en un viaje",
+        "texto": "Los marcadores de secuencia te dicen el orden y la duración. For + tiempo da la duración (for five hours). Until marca dónde termina una espera. Ever since y since marcan el punto de inicio de algo que llega hasta hoy (con present perfect). No sooner had… than y hardly had… when unen dos hechos casi seguidos: el primero lleva had y va justo antes del segundo. Para no perderte, dibuja una línea de tiempo y coloca cada dato."
+      },
+      "patron": {
+        "texto": "Marcador + hecho + hecho:",
+        "formula": [
+          {
+            "texto": "No sooner had we sat down",
+            "nota": "primer hecho: no sooner had + sujeto + participio"
+          },
+          {
+            "texto": "than the boarding call started.",
+            "nota": "segundo hecho, casi a la vez: than + pasado simple"
+          },
+          {
+            "texto": "We waited until the gate opened.",
+            "nota": "until marca el final de la espera"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Hardly we had landed when my phone rang.",
+          "correcto": "Hardly had we landed when my phone rang.",
+          "explicacion": "Después de hardly o no sooner al principio, el auxiliar va antes del sujeto: hardly had we…."
+        },
+        {
+          "incorrecto": "Since five hours, I am at the airport.",
+          "correcto": "I have been at the airport for five hours.",
+          "explicacion": "La duración se dice con for, el inicio con since, y con ellos se usa present perfect, no el presente como en «desde hace cinco horas»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Sara cómo fue su viaje a Madrid.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "How was your trip to Madrid?",
+            "traduccion": "¿Cómo fue tu viaje a Madrid?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Long! The flight was delayed, so we waited at the stopover for five hours.",
+            "traduccion": "¡Largo! El vuelo se retrasó, así que esperamos en la escala cinco horas."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Did you sleep?",
+            "traduccion": "¿Dormiste?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No sooner had I closed my eyes than the boarding call started.",
+            "traduccion": "Apenas había cerrado los ojos cuando empezó la llamada de embarque."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And now?",
+            "traduccion": "¿Y ahora?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Ever since then, I have hated stopovers.",
+            "traduccion": "Desde entonces, odio las escalas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué pasó justo después de que Sara cerrara los ojos?",
+          "opciones": [
+            {
+              "es": "Empezó la llamada de embarque."
+            },
+            {
+              "es": "Se retrasó el vuelo."
+            },
+            {
+              "es": "Aterrizó en Madrid."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «No sooner had I closed my eyes than the boarding call started»: la llamada llegó enseguida."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Marcador",
+          "Indica",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "for"
+            },
+            {
+              "texto": "duración"
+            },
+            {
+              "texto": "for five hours"
+            }
+          ],
+          [
+            {
+              "texto": "until"
+            },
+            {
+              "texto": "fin de la espera"
+            },
+            {
+              "texto": "until the gate opened"
+            }
+          ],
+          [
+            {
+              "texto": "ever since"
+            },
+            {
+              "texto": "inicio hasta hoy"
+            },
+            {
+              "texto": "Ever since that trip, I have hated stopovers."
+            }
+          ],
+          [
+            {
+              "texto": "no sooner… than / hardly… when"
+            },
+            {
+              "texto": "dos hechos seguidos"
+            },
+            {
+              "texto": "Hardly had we landed when my phone rang."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-09": {
+      "explicacion": {
+        "titulo": "Un año en una línea de tiempo",
+        "texto": "Para resumir un año, construye una línea de tiempo con varios tiempos. Antes de un hecho pasado usa had + participio o had been + -ing (I had been studying for four years). El hecho pasado va en pasado simple (I graduated). Lo que pasa ahora va en presente continuo (I am working). Lo que estará cumplido en una fecha usa will have + participio (I will have saved), y lo que estará en curso, will be + -ing (I will be working abroad). Enlaza con by the time, now, by next June o this time next year."
+      },
+      "patron": {
+        "texto": "Antes → hecho → ahora → futuro:",
+        "formula": [
+          {
+            "texto": "I had been studying for four years,",
+            "nota": "anterior y duradero: had been + -ing"
+          },
+          {
+            "texto": "and I graduated in June.",
+            "nota": "hecho pasado: pasado simple"
+          },
+          {
+            "texto": "Now I am working at an agency.",
+            "nota": "situación actual: presente continuo"
+          },
+          {
+            "texto": "By next June I will have saved money.",
+            "nota": "previsión cumplida: will have + participio"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "By next June, I will have save some money.",
+          "correcto": "By next June, I will have saved some money.",
+          "explicacion": "Después de will have va el participio (saved), no el verbo base: el futuro perfecto presenta el ahorro como algo ya cumplido para esa fecha."
+        },
+        {
+          "incorrecto": "When I got the interview, I applied to ten agencies.",
+          "correcto": "When I got the interview, I had applied to ten agencies.",
+          "explicacion": "Lo que ocurrió antes del momento pasado de referencia pide had + participio; con el pasado simple parece posterior."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pregunta a Leo cómo ha sido su año.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, how was your year?",
+            "traduccion": "Leo, ¿cómo fue tu año?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I graduated in June, after I had been studying for four years.",
+            "traduccion": "Me gradué en junio, después de estudiar cuatro años."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And now?",
+            "traduccion": "¿Y ahora?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'm working at a travel agency. By next June, I will have saved enough for a trip.",
+            "traduccion": "Trabajo en una agencia de viajes. Para el próximo junio habré ahorrado lo suficiente para un viaje."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué prevé Leo para el próximo junio?",
+          "opciones": [
+            {
+              "es": "Habrá ahorrado lo suficiente para un viaje."
+            },
+            {
+              "es": "Estará estudiando otra vez."
+            },
+            {
+              "es": "Se habrá graduado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «By next June, I will have saved enough for a trip»: future perfect para algo que estará hecho en esa fecha."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tiempo",
+          "Función",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "had been + -ing"
+            },
+            {
+              "texto": "hecho anterior que duró"
+            },
+            {
+              "texto": "I had been studying for four years."
+            }
+          ],
+          [
+            {
+              "texto": "pasado simple"
+            },
+            {
+              "texto": "hecho principal"
+            },
+            {
+              "texto": "I graduated in June."
+            }
+          ],
+          [
+            {
+              "texto": "presente continuo"
+            },
+            {
+              "texto": "situación actual"
+            },
+            {
+              "texto": "I am working at an agency."
+            }
+          ],
+          [
+            {
+              "texto": "will have + participio"
+            },
+            {
+              "texto": "cumplido para una fecha"
+            },
+            {
+              "texto": "By next June I will have saved money."
+            }
+          ],
+          [
+            {
+              "texto": "will be + -ing"
+            },
+            {
+              "texto": "en curso en el futuro"
+            },
+            {
+              "texto": "This time next year I will be working abroad."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-10": {
+      "explicacion": {
+        "titulo": "La cronología completa de un viaje",
+        "texto": "Una cronología de viaje combina todo el bloque. El pasado simple cuenta los hechos principales (I missed my connection). Had + participio o had been + -ing sitúan lo anterior (the flight had been delayed). Was to have + participio cuenta el plan que no se cumplió (my arrival was to have been on Monday). Will have + participio o will be + -ing miran al futuro. Para corregir un dato, di that was a mistake y da el dato correcto con not + el dato equivocado."
+      },
+      "patron": {
+        "texto": "Pasado → plan frustrado → futuro → corrección:",
+        "formula": [
+          {
+            "texto": "I missed my connection because the flight had been delayed.",
+            "nota": "hecho principal + hecho anterior (had been + participio)"
+          },
+          {
+            "texto": "My arrival was to have been on Monday.",
+            "nota": "plan que no se cumplió"
+          },
+          {
+            "texto": "By Friday I will have arrived.",
+            "nota": "previsión cumplida"
+          },
+          {
+            "texto": "That was a mistake: it left at ten, not nine.",
+            "nota": "corrección del dato"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My arrival was to have be on Monday.",
+          "correcto": "My arrival was to have been on Monday.",
+          "explicacion": "Después de was to have va el participio: been, no be. Esta forma cuenta un plan que no se cumplió."
+        },
+        {
+          "incorrecto": "It left at ten, no nine.",
+          "correcto": "It left at ten, not nine.",
+          "explicacion": "Para corregir un dato se usa not + dato equivocado; no (sin t) solo sirve para responder que no."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia llama a Leo porque no ha llegado a la hora prevista.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, where are you? Your arrival was to have been at eight.",
+            "traduccion": "Leo, ¿dónde estás? Tu llegada tenía que haber sido a las ocho."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I missed my connection. The first flight had been delayed.",
+            "traduccion": "Perdí la conexión. El primer vuelo se había retrasado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Did you tell the airline?",
+            "traduccion": "¿Se lo dijiste a la aerolínea?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. I have asked for a refund. By midnight, I will have arrived.",
+            "traduccion": "Sí. He pedido un reembolso. Para medianoche habré llegado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué no llegó Leo a las ocho?",
+          "opciones": [
+            {
+              "es": "Porque perdió la conexión tras el retraso del primer vuelo."
+            },
+            {
+              "es": "Porque la aerolínea perdió su equipaje."
+            },
+            {
+              "es": "Porque Mia no lo esperaba."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo explica «I missed my connection» y «The first flight had been delayed»: el retraso del primer vuelo causó todo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Necesitas…",
+          "Forma",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "hecho anterior"
+            },
+            {
+              "texto": "had + participio / had been + -ing"
+            },
+            {
+              "texto": "The flight had been delayed."
+            }
+          ],
+          [
+            {
+              "texto": "plan frustrado"
+            },
+            {
+              "texto": "was to have + participio"
+            },
+            {
+              "texto": "My arrival was to have been on Monday."
+            }
+          ],
+          [
+            {
+              "texto": "previsión cumplida"
+            },
+            {
+              "texto": "will have + participio"
+            },
+            {
+              "texto": "By Friday I will have arrived."
+            }
+          ],
+          [
+            {
+              "texto": "acción en curso"
+            },
+            {
+              "texto": "will be + -ing"
+            },
+            {
+              "texto": "This time next week I will be sitting on a beach."
+            }
+          ],
+          [
+            {
+              "texto": "corregir un dato"
+            },
+            {
+              "texto": "that was a mistake… not…"
+            },
+            {
+              "texto": "It left at ten, not nine."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Clase 6: el item de situacion tenia dos respuestas defendibles (pasaporte encontrado tambien era anterior); reformulado a la causa del retraso. Ordenar con orden alternativo; opciones de escucha parafraseadas.",
+      "Clase 7: error frecuente 1 no era error real (was to sing + but es inglés válido); sustituido por participio. Estimulo 'sold very little' mas natural; ordenar con variante. Los items de was to have tienen una sola respuesta por consigna explicita.",
+      "Clase 9: ensenanza 'into my savings' corregida; error 1 sustituido; escucha con opcion ambigua (started a new job) corregida; rubrica sin la evidencia future perfect continuous que los datos no pedian; ordenar con orden alternativo.",
+      "Clase 10: error 1 sustituido (was to be + but es aceptable); estimulo de repaso ya no usa was to fly para un plan frustrado; audio de aterrizaje sin ambigüedad; rubrica con variantes (traveling, on the beach).",
+      "Clase 8 sin cambios de fondo (till descartado por vocabulario)."
+    ]
+  }
+}

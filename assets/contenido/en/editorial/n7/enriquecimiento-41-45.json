@@ -1,0 +1,619 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 41,
+    "end": 45
+  },
+  "classes": {
+    "en.n7.class-41": {
+      "explicacion": {
+        "titulo": "Tres señales de una frase recargada",
+        "texto": "Un texto recargado suele tener tres síntomas. Redundancia: una palabra repite lo que otra ya dice (end result, free gift). Nominalización vacía: un verbo escondido dentro de un sustantivo (make a decision en vez de decide). Relleno: una fórmula larga que tiene una versión corta (due to the fact that → because; at this point in time → now). Para elegir la versión más directa, pregúntate qué palabras puedes quitar sin perder información. En español solemos aceptar más rodeos; en inglés, la frase corta suena más natural."
+      },
+      "patron": {
+        "texto": "Frase recargada → versión directa:",
+        "formula": [
+          {
+            "texto": "make a decision",
+            "nota": "verbo vacío + sustantivo: la acción real está en el sustantivo"
+          },
+          {
+            "texto": "→ decide",
+            "nota": "el verbo directo dice lo mismo con menos palabras"
+          },
+          {
+            "texto": "end result",
+            "nota": "redundancia: result ya incluye la idea de final"
+          },
+          {
+            "texto": "→ result",
+            "nota": "se quita la palabra que repite la idea"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Due to that it rained, we stayed in.",
+          "correcto": "Because it rained, we stayed in.",
+          "explicacion": "Calco de «debido a que». Due to va con un sustantivo; antes de una oración completa se usa because."
+        },
+        {
+          "incorrecto": "I am considering to leave early.",
+          "correcto": "I am considering leaving early.",
+          "explicacion": "Consider va con -ing, no con to + infinitivo: considering leaving."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le enseña a Mia el aviso de un picnic del club y ella lo recorta.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Is my notice clear? It says: At this point in time, we will make a decision about the picnic.",
+            "traduccion": "¿Está claro mi aviso? Dice: «En este momento del tiempo, tomaremos una decisión sobre el picnic»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It is wordy. Try this: Now we will decide about the picnic.",
+            "traduccion": "Está recargado. Prueba esto: «Ahora decidiremos sobre el picnic»."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Shorter, yes. And what about due to the fact that it will rain?",
+            "traduccion": "Más corto, sí. ¿Y qué hago con «due to the fact that it will rain»?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Use because. It is plain and direct.",
+            "traduccion": "Usa because. Es sencillo y directo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambios propone Mia?",
+          "opciones": [
+            {
+              "es": "Sustituir las expresiones largas por now, decide y because."
+            },
+            {
+              "es": "Añadir más palabras para que el aviso suene más formal."
+            },
+            {
+              "es": "Quitar del aviso toda la información del picnic."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cambia at this point in time por now, make a decision por decide y due to the fact that por because: el mismo mensaje con menos palabras."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Versión recargada",
+          "Versión directa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "due to the fact that"
+            },
+            {
+              "texto": "because"
+            }
+          ],
+          [
+            {
+              "texto": "at this point in time"
+            },
+            {
+              "texto": "now"
+            }
+          ],
+          [
+            {
+              "texto": "give consideration to"
+            },
+            {
+              "texto": "consider"
+            }
+          ],
+          [
+            {
+              "texto": "completely finished"
+            },
+            {
+              "texto": "finished"
+            }
+          ],
+          [
+            {
+              "texto": "end result"
+            },
+            {
+              "texto": "result"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-42": {
+      "explicacion": {
+        "titulo": "Frases más cortas con verbos y participios",
+        "texto": "Para acortar una frase sin cambiar su significado hay cuatro recursos. Voz activa: Tom wrote the email en lugar de The email was written by Tom. Relativa reducida: the woman who is sitting → the woman sitting; the cake that was baked → the cake baked. Participio para causa o secuencia: Because she felt tired → Feeling tired; After he had finished → Having finished. Solo se reduce si la frase principal y el participio comparten sujeto y el sentido sigue claro; en español el gerundio es más libre, en inglés no."
+      },
+      "patron": {
+        "texto": "Frase larga → frase compacta:",
+        "formula": [
+          {
+            "texto": "The cake that was baked by my aunt",
+            "nota": "relativa completa: that + was + participio"
+          },
+          {
+            "texto": "→ The cake baked by my aunt",
+            "nota": "se quitan that was; el participio queda pegado al nombre"
+          },
+          {
+            "texto": "Because she felt tired,",
+            "nota": "causa con verbo conjugado"
+          },
+          {
+            "texto": "→ Feeling tired,",
+            "nota": "participio de presente: mismo sujeto que la frase principal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Walking to school, the rain started.",
+          "correcto": "Walking to school, we noticed the rain.",
+          "explicacion": "En español «Caminando al colegio, empezó a llover» es posible; en inglés el sujeto del participio debe ser el de la frase principal."
+        },
+        {
+          "incorrecto": "The woman sits by the window is my aunt.",
+          "correcto": "The woman sitting by the window is my aunt.",
+          "explicacion": "Al quitar who is hay que dejar la forma en -ing; no se mantiene el verbo conjugado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos le enseña a Sara la descripción de su pastel para el concurso del barrio y ella la acorta.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I wrote: The cake that was baked by my aunt won a prize at the fair.",
+            "traduccion": "Escribí: «El pastel que fue hecho por mi tía ganó un premio en la feria»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Cut that was. The cake baked by my aunt won a prize at the fair.",
+            "traduccion": "Quita that was. «The cake baked by my aunt won a prize at the fair»."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And this one: Because she felt tired, she went to bed early.",
+            "traduccion": "¿Y esta? «Because she felt tired, she went to bed early»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Try Feeling tired, she went to bed early. The subject is the same, so it works.",
+            "traduccion": "Prueba «Feeling tired, she went to bed early». El sujeto es el mismo, así que funciona."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué funciona la versión con Feeling tired?",
+          "opciones": [
+            {
+              "es": "Porque el sujeto de las dos partes de la frase es el mismo."
+            },
+            {
+              "es": "Porque la frase pasa a voz pasiva."
+            },
+            {
+              "es": "Porque se añade un conector más a la frase."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que el sujeto es el mismo (she): un participio solo puede sustituir a la oración de causa si comparte sujeto con la frase principal."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Frase larga",
+          "Frase compacta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The email was written by Tom."
+            },
+            {
+              "texto": "Tom wrote the email."
+            }
+          ],
+          [
+            {
+              "texto": "The woman who is sitting by the window"
+            },
+            {
+              "texto": "The woman sitting by the window"
+            }
+          ],
+          [
+            {
+              "texto": "The cake that was baked by my aunt"
+            },
+            {
+              "texto": "The cake baked by my aunt"
+            }
+          ],
+          [
+            {
+              "texto": "Because she felt tired, she went to bed."
+            },
+            {
+              "texto": "Feeling tired, she went to bed."
+            }
+          ],
+          [
+            {
+              "texto": "After he had finished the report, he left."
+            },
+            {
+              "texto": "Having finished the report, he left."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-43": {
+      "explicacion": {
+        "titulo": "Cómo reconocer la voz de quien escribe",
+        "texto": "La voz es la manera reconocible de sonar de un texto. Se nota en tres rasgos: el vocabulario (palabras amables o neutras), el ritmo (frases largas y fluidas o cortas y secas) y los recursos (preguntas, bromas, exclamaciones). Cuatro voces frecuentes: warm (cercana, habla al lector), dry (sobria, datos y frases cortas), ironic (dice lo contrario de lo que piensa, con humor) y playful (animada, juega con preguntas y bromas). Para describirla, nombra la voz y cita una pista: The voice is dry because the sentences are short."
+      },
+      "patron": {
+        "texto": "La voz + porque + pista:",
+        "formula": [
+          {
+            "texto": "The voice is warm",
+            "nota": "nombre de la voz: be + adjetivo"
+          },
+          {
+            "texto": "because the writer says",
+            "nota": "porque + la pista que lo demuestra"
+          },
+          {
+            "texto": "\"come in and sit down\".",
+            "nota": "cita exacta del texto entre comillas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The voice sounds like warm.",
+          "correcto": "The voice sounds warm.",
+          "explicacion": "Después de sound se usa directamente el adjetivo; sound like va con un sustantivo (sounds like a friend)."
+        },
+        {
+          "incorrecto": "The writer is ironic because he says the contrary.",
+          "correcto": "The writer is ironic because he says the opposite.",
+          "explicacion": "Calco de «dice lo contrario». Para «lo contrario» en inglés se usa the opposite; the contrary es muy formal y poco frecuente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia leen dos notas de una tienda y describen la voz de cada una.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Listen to this note: Come in, sit down, and let me tell you about the best soup in town.",
+            "traduccion": "Escucha esta nota: «Pasa, siéntate y déjame contarte la mejor sopa de la ciudad»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The voice is warm. It speaks to you with friendly words.",
+            "traduccion": "La voz es cálida. Te habla con palabras amables."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And this one: The shop opens at nine. It closes at six. There is no parking.",
+            "traduccion": "¿Y esta? «La tienda abre a las nueve. Cierra a las seis. No hay aparcamiento»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That is dry. The sentences are short and there are no jokes.",
+            "traduccion": "Esa es seca. Las frases son cortas y no hay bromas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué rasgo hace que Mia llame «dry» a la segunda nota?",
+          "opciones": [
+            {
+              "es": "Las frases son cortas y no hay bromas."
+            },
+            {
+              "es": "Las frases son largas y cuentan una historia."
+            },
+            {
+              "es": "Usa palabras amables para hablar al lector."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que la nota es seca porque las frases son cortas y no hay bromas; las palabras amables definen la voz cálida de la primera nota."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Voz",
+          "Pistas en el texto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "warm"
+            },
+            {
+              "texto": "palabras amables; habla directamente al lector"
+            }
+          ],
+          [
+            {
+              "texto": "dry"
+            },
+            {
+              "texto": "frases cortas; datos; sin bromas"
+            }
+          ],
+          [
+            {
+              "texto": "ironic"
+            },
+            {
+              "texto": "dice lo opuesto de lo que siente; exagera"
+            }
+          ],
+          [
+            {
+              "texto": "playful"
+            },
+            {
+              "texto": "preguntas, bromas y exclamaciones"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-44": {
+      "explicacion": {
+        "titulo": "Editar un borrador con un plan",
+        "texto": "Editar es revisar con un objetivo, no solo releer. Haz tres cambios de concisión: quita una redundancia (each and every → every), cambia un verbo vacío por uno directo (made a decision → decided) y pasa una frase pasiva a activa. Después haz un cambio de ritmo: une frases cortas seguidas o parte una muy larga para variar la longitud. Anota cada cambio con el patrón I changed X to Y because Z. Edita en este orden: primero el sentido, luego las palabras y, al final, el ritmo."
+      },
+      "patron": {
+        "texto": "Nota de cambio:",
+        "formula": [
+          {
+            "texto": "I changed \"made a decision\"",
+            "nota": "lo que cambiaste: I changed + texto original entre comillas"
+          },
+          {
+            "texto": "to \"decided\"",
+            "nota": "el cambio: to + versión nueva"
+          },
+          {
+            "texto": "because the verb is more direct.",
+            "nota": "la razón: because + efecto (más corto, más directo, más claro)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I changed \"because of\" for \"because\".",
+          "correcto": "I changed \"because of\" to \"because\".",
+          "explicacion": "Calco de «cambié X por Y». En inglés se cambia una cosa a otra: change X to Y."
+        },
+        {
+          "incorrecto": "I cut the repetition, so the text is more short.",
+          "correcto": "I cut the repetition, so the text is shorter.",
+          "explicacion": "Los adjetivos cortos forman el comparativo con -er (short → shorter), no con more."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Ana su borrador editado y ella lo revisa con él.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "You cut the padding, but the rhythm is flat. Every sentence has seven words.",
+            "traduccion": "Quitaste el relleno, pero el ritmo es plano. Todas las frases tienen siete palabras."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I see. I can combine the second and the third sentence.",
+            "traduccion": "Ya veo. Puedo combinar la segunda y la tercera frase."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Then write a note: I changed two sentences to one because the rhythm was flat.",
+            "traduccion": "Bien. Entonces escribe una nota: «I changed two sentences to one because the rhythm was flat»."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And I changed made a decision to decided, because it is more direct.",
+            "traduccion": "Y cambié «made a decision» por «decided», porque es más directo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué problema de ritmo ve Ana en el texto de Tom?",
+          "opciones": [
+            {
+              "es": "Todas las frases tienen casi la misma longitud."
+            },
+            {
+              "es": "Hay una sola frase muy larga en el texto."
+            },
+            {
+              "es": "Faltan datos concretos en la mayoría de las frases."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que cada frase tiene siete palabras: sin variación de longitud el ritmo es plano, y por eso Tom decide combinar dos frases."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de cambio",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Concisión: quitar redundancia"
+            },
+            {
+              "texto": "past experience → experience"
+            }
+          ],
+          [
+            {
+              "texto": "Concisión: verbo directo"
+            },
+            {
+              "texto": "made a list of → listed"
+            }
+          ],
+          [
+            {
+              "texto": "Concisión: voz activa"
+            },
+            {
+              "texto": "The box was opened by Sara. → Sara opened the box."
+            }
+          ],
+          [
+            {
+              "texto": "Ritmo: combinar frases"
+            },
+            {
+              "texto": "We sang. We danced. → We sang and danced."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-45": {
+      "explicacion": {
+        "titulo": "Un boletín con voz, estructura y concisión",
+        "texto": "Un boletín de barrio reúne todo el bloque. Organiza tres secciones, cada una con un titular corto. Mantén una voz constante: una cálida lleva saludo, tú al lector y frases breves. Aplica lo aprendido: verbos activos, sin relleno ni redundancias y con frases de longitud variada. Cada sección dice qué, cuándo y qué debe hacer el lector. Al final, pule el texto: busca párrafos densos, sobre todo verbos escondidos en sustantivos y participios que puedas reducir, y reescríbelos con un verbo directo."
+      },
+      "patron": {
+        "texto": "Sección del boletín:",
+        "formula": [
+          {
+            "texto": "Book swap:",
+            "nota": "titular corto de la sección"
+          },
+          {
+            "texto": "Come and share your old books on Sunday at four.",
+            "nota": "verbo activo + qué + cuándo, con voz cálida"
+          },
+          {
+            "texto": "Bring two books.",
+            "nota": "lo que debe hacer el lector: orden breve"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Bring a dish for share.",
+          "correcto": "Bring a dish to share.",
+          "explicacion": "Para expresar el propósito se usa to + verbo base (to share), no for + verbo."
+        },
+        {
+          "incorrecto": "The market opens at Wednesdays and Saturdays.",
+          "correcto": "The market opens on Wednesdays and Saturdays.",
+          "explicacion": "Con los días de la semana se usa on, aunque en español no haya preposición: «los miércoles»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Mia preparan el boletín de su calle para los vecinos.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "I wrote the headline: Street party. Then a short, warm greeting.",
+            "traduccion": "Escribí el titular: «Street party». Luego, un saludo corto y cálido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. But this paragraph is dense. It has forty words and no clear verb.",
+            "traduccion": "Bien. Pero este párrafo es denso. Tiene cuarenta palabras y ningún verbo claro."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I will cut the padding and use active verbs: Join us on 20 May and bring a dish to share.",
+            "traduccion": "Quitaré el relleno y usaré verbos activos: «Join us on 20 May and bring a dish to share»."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Much better. Now tell the neighbours who to call: Sara.",
+            "traduccion": "Mucho mejor. Ahora dile a los vecinos a quién llamar: Sara."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué problema tenía el párrafo de Carlos?",
+          "opciones": [
+            {
+              "es": "Era denso: muchas palabras y ningún verbo claro."
+            },
+            {
+              "es": "Era demasiado corto para los vecinos."
+            },
+            {
+              "es": "No tenía ningún titular."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que el párrafo es denso, con cuarenta palabras y sin verbo claro; Carlos lo arregla quitando el relleno y usando verbos activos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del boletín",
+          "Qué hace"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Greeting"
+            },
+            {
+              "texto": "abre con la voz elegida (cálida, seca, juguetona)"
+            }
+          ],
+          [
+            {
+              "texto": "Headline"
+            },
+            {
+              "texto": "titular corto que dice de qué trata la sección"
+            }
+          ],
+          [
+            {
+              "texto": "Body"
+            },
+            {
+              "texto": "qué, cuándo y dónde, en frases activas y de longitud variada"
+            }
+          ],
+          [
+            {
+              "texto": "Closing"
+            },
+            {
+              "texto": "da las gracias o el siguiente paso"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

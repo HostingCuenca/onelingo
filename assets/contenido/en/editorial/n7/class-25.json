@@ -1,0 +1,878 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-25",
+  "title": {
+    "en": "A guide to your city's story",
+    "es": "La historia de tu ciudad"
+  },
+  "objectives": {
+    "es": [
+      "Redactar un cartel informativo con pasivas de reporte, un causativo y atribución cuidadosa, y revisar un dato dudoso."
+    ]
+  },
+  "concepts": [
+    "n7-formal-passive-style-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-24"
+  ],
+  "usesVocabulary": [
+    "evidence",
+    "legend",
+    "claim",
+    "doubtful",
+    "source",
+    "reliable",
+    "thought",
+    "certain",
+    "paved"
+  ],
+  "usesPatterns": [
+    "n7-formal-passive-style-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "evidence",
+      "es": "prueba"
+    },
+    {
+      "en": "legend",
+      "es": "leyenda"
+    },
+    {
+      "en": "claim",
+      "es": "afirmación"
+    },
+    {
+      "en": "doubtful",
+      "es": "dudoso"
+    },
+    {
+      "en": "source",
+      "es": "fuente"
+    },
+    {
+      "en": "reliable",
+      "es": "fiable"
+    },
+    {
+      "en": "thought",
+      "es": "se cree"
+    },
+    {
+      "en": "certain",
+      "es": "seguro"
+    },
+    {
+      "en": "paved",
+      "es": "pavimentado"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-25.t01",
+      "en": "The fountain is said to have been built by monks, but there is no evidence.",
+      "es": "Se dice que la fuente fue construida por monjes, pero no hay pruebas.",
+      "explanationEs": "is said to have been + participio: un dato sobre el pasado sin prueba.",
+      "segments": [
+        "The fountain is said to have been built",
+        "by monks, but there is no evidence."
+      ],
+      "audioText": "The fountain is said to have been built by monks, but there is no evidence.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-formal-passive-style-5"
+    },
+    {
+      "id": "en.n7.class-25.t02",
+      "en": "It is claimed that the legend of the lost treasure is true, but the claim is doubtful.",
+      "es": "Se afirma que la leyenda del tesoro perdido es cierta, pero la afirmación es dudosa.",
+      "explanationEs": "It is claimed that… atribuye una afirmación sin hacerla tuya.",
+      "segments": [
+        "It is claimed that the legend of the lost",
+        "treasure is true, but the claim is doubtful."
+      ],
+      "audioText": "It is claimed that the legend of the lost treasure is true, but the claim is doubtful.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-formal-passive-style-5"
+    },
+    {
+      "id": "en.n7.class-25.t03",
+      "en": "The tower is thought to be older than the town hall.",
+      "es": "Se cree que la torre es más antigua que el ayuntamiento.",
+      "explanationEs": "is thought to be + adjetivo: pasiva de reporte con infinitivo.",
+      "segments": [
+        "The tower is thought to be",
+        "older than the town hall."
+      ],
+      "audioText": "The tower is thought to be older than the town hall.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-formal-passive-style-5"
+    },
+    {
+      "id": "en.n7.class-25.t04",
+      "en": "The council had the old clock repaired last year, which is certain.",
+      "es": "El ayuntamiento hizo reparar el viejo reloj el año pasado, y eso es seguro.",
+      "explanationEs": "Un hecho seguro se escribe sin atribución; aquí además aparece el causativo.",
+      "segments": [
+        "The council had the old clock",
+        "repaired last year, which is certain."
+      ],
+      "audioText": "The council had the old clock repaired last year, which is certain.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-formal-passive-style-5"
+    },
+    {
+      "id": "en.n7.class-25.t05",
+      "en": "A museum is a reliable source, so its dates can be stated as facts.",
+      "es": "Un museo es una fuente fiable, así que sus fechas pueden afirmarse como hechos.",
+      "explanationEs": "Con fuente fiable se escribe el dato directamente; sin ella, se atribuye.",
+      "segments": [
+        "A museum is a reliable source, so",
+        "its dates can be stated as facts."
+      ],
+      "audioText": "A museum is a reliable source, so its dates can be stated as facts.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-formal-passive-style-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c25.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué fórmula usas para un dato que solo cuenta una leyenda?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The fountain was built by monks, certainly."
+          },
+          {
+            "text": "The fountain is said to have been built by monks."
+          },
+          {
+            "text": "The fountain said to be built by monks."
+          }
+        ],
+        "teaches": [
+          "n7-formal-passive-style-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.pg01.seed-0",
+          "feedback": {
+            "es": "Is said to have been + participio atribuye un dato dudoso sobre el pasado; «certainly» lo afirma sin pruebas y «The fountain said to be» omite is."
+          },
+          "hint": {
+            "es": "Atribución con is said to have been + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c29cd1808efc1d8d76dd4f0da64c095082d4eed9313be8ba383ddf7285c85598"
+      },
+      {
+        "id": "en.n7.c25.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Se cree que la torre es más antigua que el ayuntamiento.»"
+        },
+        "answer": {
+          "text": "thought",
+          "accepted": [
+            "thought",
+            "believed",
+            "said"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-formal-passive-style-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.pg02.seed-0",
+          "feedback": {
+            "es": "Las pasivas de reporte usan is + participio de think, believe o say seguido de to + verbo."
+          },
+          "hint": {
+            "es": "Pasiva de reporte: is + participio de think, believe o say + to."
+          },
+          "text": "The tower is ___ to be older than the town hall."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cf2d7580a798bc2a921b35046b632bebfcbcb31f301918672300ecc2ec1f9eb4"
+      },
+      {
+        "id": "en.n7.c25.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El ayuntamiento hizo reparar el viejo reloj.»"
+        },
+        "answer": {
+          "text": "The council had the old clock repaired",
+          "tokens": [
+            "The",
+            "council",
+            "had",
+            "the",
+            "old",
+            "clock",
+            "repaired"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-formal-passive-style-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.pg03.seed-0",
+          "feedback": {
+            "es": "Have + objeto + participio: el ayuntamiento encargó la reparación."
+          },
+          "hint": {
+            "es": "Sujeto + had + objeto + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:815102edc661c00fb37aeb6f2d5598967f4dafed7b556799f0468e414e40a021"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c25.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cómo corregirías el borrador para que sea prudente?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The treasure is definitely under the square."
+          },
+          {
+            "text": "The square has a treasure under, nobody knows."
+          },
+          {
+            "text": "The treasure is said to be under the square."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.p01.seed-0",
+          "feedback": {
+            "es": "Sin pruebas, el dato se atribuye con is said to be; «definitely» lo afirma y «has a treasure under, nobody knows» está mal construida."
+          },
+          "text": "Borrador: «The treasure is under the square.» Solo hay una leyenda y nadie ha encontrado pruebas."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e10ba6f8dbca84fe1b0140ea27b600f15f0c7f0d58fb998ae30081fe37b91c2a"
+      },
+      {
+        "id": "en.n7.c25.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada fórmula con el tipo de dato."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "was built in 1850",
+              {
+                "es": "el museo lo confirma"
+              }
+            ],
+            [
+              "is said to have been built by monks",
+              {
+                "es": "solo hay una leyenda"
+              }
+            ],
+            [
+              "had the clock repaired",
+              {
+                "es": "el ayuntamiento lo encargó"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.p02.seed-0",
+          "feedback": {
+            "es": "Un hecho confirmado se escribe con pasiva simple, una leyenda con is said to y un trabajo encargado con have + objeto + participio."
+          },
+          "pairs": [
+            [
+              "was built in 1850",
+              {
+                "es": "el museo lo confirma"
+              }
+            ],
+            [
+              "is said to have been built by monks",
+              {
+                "es": "solo hay una leyenda"
+              }
+            ],
+            [
+              "had the clock repaired",
+              {
+                "es": "el ayuntamiento lo encargó"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0e9e9b84c3b7429ee0a579dd475d9f92e7738ad1e08291b020b5964279a23b4f"
+      },
+      {
+        "id": "en.n7.c25.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las dos frases del cartel."
+        },
+        "answer": {
+          "text": "claimed | source",
+          "accepted": [
+            "claimed | source"
+          ],
+          "parts": [
+            {
+              "text": "claimed",
+              "accepted": [
+                "claimed",
+                "said",
+                "believed",
+                "reported",
+                "thought"
+              ]
+            },
+            {
+              "text": "source",
+              "accepted": [
+                "source"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.p03.seed-0",
+          "feedback": {
+            "es": "It is claimed that… atribuye la afirmación y source nombra el origen de un dato."
+          },
+          "sentences": [
+            "It is ___ that the legend of the treasure is true.",
+            "The museum is a reliable ___ for this date."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          },
+          "text": "Traducción: «Se afirma que la leyenda del tesoro es cierta.» «El museo es una fuente fiable para esta fecha.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:01bd3ae9fc56f7d5ccce0cc1caa41e6be0fb40c23e1a705600f19da89698dc97"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c25.e01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el cartel de la fuente: hechos, datos atribuidos y un servicio."
+        },
+        "answer": {
+          "text": "The Old Fountain. The fountain in the square was built in 1850, according to the museum records. It is said to have been built by monks, but there is no evidence, so this is only a legend. It is believed that a tunnel connects it to the church, and it is thought to be the oldest fountain in the city. The fountain was damaged by a storm in 2015, and the council had it repaired by a local company in 2019. Today it is visited by hundreds of people every week.",
+          "accepted": [
+            "The Old Fountain. The fountain in the square was built in 1850, according to the museum records. It is said to have been built by monks, but there is no evidence, so this is only a legend. It is believed that a tunnel connects it to the church, and it is thought to be the oldest fountain in the city. The fountain was damaged by a storm in 2015, and the council had it repaired by a local company in 2019. Today it is visited by hundreds of people every week.",
+            "The Old Fountain. The fountain in the square was built in 1850, according to the museum records. It is claimed that it was built by monks, but there is no evidence, so this is only a legend. It is believed that a tunnel connects it to the church, and it is said to be the oldest fountain in the city. The fountain was damaged by a storm in 2015, and the council had it repaired by a local company in 2019. Today hundreds of people visit it every week.",
+            "The Old Fountain. The fountain in the square was built in 1850, according to the records of the museum. It is said to have been built by monks, but there is no evidence, so this is only a legend. A tunnel is believed to connect it to the church, and it is thought to be the oldest fountain in the city. The fountain was damaged by a storm in 2015, and the council had the fountain repaired by a local company in 2019. Today it is visited by hundreds of people every week."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5",
+          "n7-formal-passive-style-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.e01.seed-0",
+          "feedback": {
+            "es": "El cartel escribe el dato seguro con pasiva simple, atribuye los dudosos con pasivas de reporte y cuenta el servicio con have + objeto + participio."
+          },
+          "text": "Encargo: cartel de la fuente de la plaza. Datos: construida en 1850 (registros del museo: seguro); se dice que la construyeron monjes, pero no hay pruebas (leyenda); se cree que un túnel la une con la iglesia; se piensa que es la fuente más antigua de la ciudad; dañada por una tormenta en 2015; el ayuntamiento la hizo reparar a una empresa local en 2019; hoy la visitan cientos de personas cada semana.",
+          "scoring": {
+            "wordRange": [
+              70,
+              160
+            ],
+            "evidenceGroups": [
+              [
+                "built in 1850",
+                "was built in 1850",
+                "constructed in 1850",
+                "was constructed in 1850"
+              ],
+              [
+                "is said to",
+                "is believed to",
+                "it is said that",
+                "it is believed that",
+                "it is claimed that",
+                "is thought to",
+                "it is thought that",
+                "is claimed to"
+              ],
+              [
+                "had it repaired",
+                "had the fountain repaired",
+                "had the repairs done",
+                "had it restored",
+                "had the fountain restored",
+                "got it repaired",
+                "got the fountain repaired",
+                "had it fixed"
+              ],
+              [
+                "damaged by a storm",
+                "damaged in the storm",
+                "damaged in a storm",
+                "damaged during a storm",
+                "damaged by the storm"
+              ],
+              [
+                "legend",
+                "no evidence",
+                "not been proved",
+                "unproven",
+                "nobody has proved",
+                "no proof",
+                "never been proved"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0a3165163746acde751ef5954e1e7b803fd9f0692d148f44e2de89cc3ac550ec"
+      },
+      {
+        "id": "en.n7.c25.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cómo debe corregirse el dato de los monjes."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "It should be presented as a claim, not as a fact."
+          },
+          {
+            "text": "It should be deleted because it is false."
+          },
+          {
+            "text": "It should be given an exact date."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5",
+          "n7-formal-passive-style-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.e02.seed-0",
+          "feedback": {
+            "es": "El museo no tiene registros: el dato es una leyenda, así que se presenta como afirmación atribuida, no como hecho."
+          },
+          "audio": "Our draft says the fountain was built by monks in 1200. But the museum has no records of this, so the statement is only a legend.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9b51ae2f9a99f438b30d94bbd2895a408fa0ea2d74b6f4abae9d10e63fdcdb88"
+      },
+      {
+        "id": "en.n7.c25.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estos datos puede escribirse sin prudencia?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "A tunnel runs under the square."
+          },
+          {
+            "text": "The square was paved in 1850."
+          },
+          {
+            "text": "A famous singer danced in the square."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5",
+          "n7-formal-passive-style-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.e03.seed-0",
+          "feedback": {
+            "es": "Solo el dato del museo es un hecho con fuente fiable; el túnel y la cantante son historias de los vecinos o leyendas."
+          },
+          "text": "Registro del museo: «La plaza se pavimentó en 1850.» Cuento de los vecinos: «Un túnel pasa bajo ella.» Leyenda: «Una cantante famosa bailó aquí.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d89b1861a3d64f2c6b8c50bc3dc7acf3e255b65031c07d1d57a02a541b0ea21e"
+      },
+      {
+        "id": "en.n7.c25.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las tres frases del cartel."
+        },
+        "answer": {
+          "text": "been | believed | repaired",
+          "accepted": [
+            "been | believed | repaired"
+          ],
+          "parts": [
+            {
+              "text": "been",
+              "accepted": [
+                "been"
+              ]
+            },
+            {
+              "text": "believed",
+              "accepted": [
+                "believed",
+                "thought",
+                "said"
+              ]
+            },
+            {
+              "text": "repaired",
+              "accepted": [
+                "repaired",
+                "restored"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5",
+          "n7-formal-passive-style-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.e04.seed-0",
+          "feedback": {
+            "es": "Se combinan tres estructuras del bloque: modal perfecto pasivo, pasiva de reporte y causativo."
+          },
+          "sentences": [
+            "The roof should have ___ repaired earlier.",
+            "It is ___ to be the oldest square in the city.",
+            "The council had the old gate ___ last year."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          },
+          "text": "Traducción: «El techo debería haberse reparado antes.» «Se cree que es la plaza más antigua de la ciudad.» «El ayuntamiento hizo reparar la vieja puerta el año pasado.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f00cd5c17b79a1e8adf3ffbff2dde03356ccb529004a05d27439f8d32ba87601"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c25.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase sigue el hilo y omite un agente irrelevante?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "People opened it in 1920, and thousands of people have visited it since."
+          },
+          {
+            "text": "It opened in 1920 and has visited by thousands since."
+          },
+          {
+            "text": "It was opened in 1920 and has been visited by thousands since."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.r01.seed-0",
+          "feedback": {
+            "es": "La pasiva mantiene el museo como tema y omite los agentes irrelevantes; la activa introduce agentes vagos («people») y «has visited by» no es una pasiva completa."
+          },
+          "text": "The museum is the oldest building in the street."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:be7a193e89b5cd9911bea00e67bf5ba60c086bf23c51ea2a0a7482914929760b"
+      },
+      {
+        "id": "en.n7.c25.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Se dice que la fuente es la más antigua de la ciudad.»"
+        },
+        "answer": {
+          "text": "It is said that the fountain is the oldest in the city",
+          "tokens": [
+            "It",
+            "is",
+            "said",
+            "that",
+            "the",
+            "fountain",
+            "is",
+            "the",
+            "oldest",
+            "in",
+            "the",
+            "city"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.r02.seed-0",
+          "feedback": {
+            "es": "La pasiva de reporte con that: It is said that + cláusula completa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e840c7b433411a38957699aca26715d7f865f43a050f0bee243b8ac26ba203bb"
+      },
+      {
+        "id": "en.n7.c25.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe la frase con más prudencia."
+        },
+        "answer": {
+          "text": "The treasure is said to be hidden under the square.",
+          "accepted": [
+            "The treasure is said to be hidden under the square.",
+            "It is believed that the treasure is hidden under the square.",
+            "The treasure is believed to be hidden under the square.",
+            "The treasure is thought to be hidden under the square.",
+            "It is said that the treasure is hidden under the square."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-formal-passive-style-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c25.r03.seed-0",
+          "feedback": {
+            "es": "Sin pruebas se atribuye el dato con is said to be o con It is believed that…"
+          },
+          "text": "The treasure is hidden under the square."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1fcfba54137d1c99b101ef549581fbad2537fe07761a68dc88c2dcf10b1ac37f"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c25.e01": {
+      "reteach": "en.n7.class-25.t01",
+      "review": "en.n7.c25.r01"
+    },
+    "en.n7.c25.e02": {
+      "reteach": "en.n7.class-25.t02",
+      "review": "en.n7.c25.r02"
+    },
+    "en.n7.c25.e03": {
+      "reteach": "en.n7.class-25.t03",
+      "review": "en.n7.c25.r03"
+    },
+    "en.n7.c25.e04": {
+      "reteach": "en.n7.class-25.t04",
+      "review": "en.n7.c25.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n7-formal-passive-style-1",
+    "n7-formal-passive-style-2",
+    "n7-formal-passive-style-3",
+    "n7-formal-passive-style-4",
+    "n7-formal-passive-style-5"
+  ]
+}

@@ -1,0 +1,708 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 21,
+    "end": 25
+  },
+  "classes": {
+    "en.n7.class-21": {
+      "explicacion": {
+        "titulo": "La pasiva como herramienta de flujo",
+        "texto": "En inglés una frase suele empezar con lo que ya se conoce (el tema) y terminar con la información nueva. Si tu texto habla del puente y escribes «A storm damaged the bridge», el tema pasa al final y el lector pierde el hilo. La pasiva lo arregla: The bridge was damaged by a storm. Usa la pasiva cuando el tema es lo que recibe la acción o cuando el agente es largo y nuevo. Usa la activa cuando quien actúa ya es el tema: Our guide restored it."
+      },
+      "patron": {
+        "texto": "Tema conocido + pasiva + dato nuevo:",
+        "formula": [
+          {
+            "texto": "The bridge",
+            "nota": "tema conocido: ya se mencionó"
+          },
+          {
+            "texto": "was damaged",
+            "nota": "be + participio"
+          },
+          {
+            "texto": "by a storm in 1990.",
+            "nota": "agente nuevo al final, con by"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The tower was damaged for a storm.",
+          "correcto": "The tower was damaged by a storm.",
+          "explicacion": "El agente de la pasiva se introduce con by, no con for: «por» no se traduce siempre por for."
+        },
+        {
+          "incorrecto": "The old market demolished in 1950.",
+          "correcto": "The old market was demolished in 1950.",
+          "explicacion": "En inglés la pasiva siempre lleva be + participio; el participio solo no basta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia preparan una visita guiada al puente viejo de su ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What should I say about the bridge?",
+            "traduccion": "¿Qué debería decir del puente?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Start with the bridge. It was designed by a local architect.",
+            "traduccion": "Empieza con el puente. Lo diseñó un arquitecto local."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the storm? A storm damaged it in 1990.",
+            "traduccion": "¿Y la tormenta? Una tormenta lo dañó en 1990."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Better: it was damaged by a storm in 1990. Keep the bridge at the start.",
+            "traduccion": "Mejor: fue dañado por una tormenta en 1990. Mantén el puente al inicio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I see. Then the council restored it.",
+            "traduccion": "Ya veo. Luego el ayuntamiento lo restauró."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Say it was restored by the council. The bridge stays the topic.",
+            "traduccion": "Di que fue restaurado por el ayuntamiento. El puente sigue siendo el tema."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Mia cambia la frase de Tom?",
+          "opciones": [
+            {
+              "es": "Para que el puente siga al inicio de la frase."
+            },
+            {
+              "es": "Porque la tormenta no es importante y hay que quitarla."
+            },
+            {
+              "es": "Porque Tom usó un tiempo verbal equivocado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Keep the bridge at the start». La tormenta se conserva con by y el tiempo verbal no cambia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Mejor opción",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "El tema recibe la acción"
+            },
+            {
+              "texto": "Pasiva"
+            },
+            {
+              "texto": "The tower was restored in 2010."
+            }
+          ],
+          [
+            {
+              "texto": "El tema es quien actúa"
+            },
+            {
+              "texto": "Activa"
+            },
+            {
+              "texto": "The architect restored the tower."
+            }
+          ],
+          [
+            {
+              "texto": "El agente no importa"
+            },
+            {
+              "texto": "Pasiva sin by"
+            },
+            {
+              "texto": "The old market was demolished."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-22": {
+      "explicacion": {
+        "titulo": "Pasivas con modal perfecto y get",
+        "texto": "Para hablar del pasado con pasiva se combina modal + have been + participio. Should have been inspected: era lo correcto y no se hizo. Must have been neglected: deducción casi segura. Could o might have been repaired: era posible. Con get + participio se cuenta un suceso, sobre todo inesperado o informal: got damaged, got injured. Ojo: los verbos sin objeto, como collapse o happen, no tienen pasiva; se dice could have collapsed, nunca could have been collapsed."
+      },
+      "patron": {
+        "texto": "Sujeto + modal + have been + participio:",
+        "formula": [
+          {
+            "texto": "The roof",
+            "nota": "lo que recibe la acción"
+          },
+          {
+            "texto": "should have been",
+            "nota": "modal + have been"
+          },
+          {
+            "texto": "inspected",
+            "nota": "participio del verbo"
+          },
+          {
+            "texto": "years ago.",
+            "nota": "momento en el pasado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The roof should have inspected years ago.",
+          "correcto": "The roof should have been inspected years ago.",
+          "explicacion": "Falta been: sin él la frase parece activa y le falta el agente. La pasiva lleva modal + have been + participio."
+        },
+        {
+          "incorrecto": "The hall could have been collapsed in the storm.",
+          "correcto": "The hall could have collapsed in the storm.",
+          "explicacion": "Collapse no admite pasiva: el salón se derrumba solo, nadie lo derrumba."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara visitan un viejo teatro que se dañó en una tormenta.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look at that crack in the roof!",
+            "traduccion": "¡Mira esa grieta en el techo!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It should have been repaired years ago.",
+            "traduccion": "Debería haberse reparado hace años."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It must have been neglected for a decade. Nobody inspected it.",
+            "traduccion": "Tiene que haber sido descuidado durante una década. Nadie lo inspeccionó."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Luckily, nobody got injured last night when a piece fell.",
+            "traduccion": "Por suerte, nadie resultó herido anoche cuando cayó un trozo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The theatre could have collapsed. It has to be inspected urgently.",
+            "traduccion": "El teatro podría haberse derrumbado. Hay que inspeccionarlo con urgencia."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué piensa Leo de la grieta?",
+          "opciones": [
+            {
+              "es": "Que debió repararse hace años."
+            },
+            {
+              "es": "Que nadie debe entrar al teatro."
+            },
+            {
+              "es": "Que es imposible repararla."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «It should have been repaired years ago». Es un reproche por algo que no se hizo, no una prohibición."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Sentido",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "should have been + participio"
+            },
+            {
+              "texto": "lo correcto que no se hizo"
+            },
+            {
+              "texto": "The crack should have been repaired."
+            }
+          ],
+          [
+            {
+              "texto": "must have been + participio"
+            },
+            {
+              "texto": "deducción casi segura"
+            },
+            {
+              "texto": "The hall must have been neglected."
+            }
+          ],
+          [
+            {
+              "texto": "could / might have been + participio"
+            },
+            {
+              "texto": "posibilidad pasada"
+            },
+            {
+              "texto": "It could have been saved."
+            }
+          ],
+          [
+            {
+              "texto": "got + participio"
+            },
+            {
+              "texto": "suceso informal"
+            },
+            {
+              "texto": "Nobody got injured."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-23": {
+      "explicacion": {
+        "titulo": "Por qué se omite el agente",
+        "texto": "En un texto informativo la pasiva permite omitir al agente (by + quien actúa) cuando no aporta nada. Hay tres motivos: es desconocido (The statue was stolen), es obvio (The suspect was arrested) o es irrelevante para el lector (The gate is locked every night). Se mantiene cuando informa: The church was designed by Gaudí. Cuidado: omitir al agente también puede ocultar a un responsable, como en «Mistakes were made». Pregúntate: ¿le importa al lector quién lo hizo?"
+      },
+      "patron": {
+        "texto": "Tema + be + participio (+ by agente si importa):",
+        "formula": [
+          {
+            "texto": "The statue",
+            "nota": "tema: lo que recibe la acción"
+          },
+          {
+            "texto": "was stolen",
+            "nota": "be + participio"
+          },
+          {
+            "texto": "in 1998,",
+            "nota": "dato de tiempo"
+          },
+          {
+            "texto": "(by …)",
+            "nota": "solo si el agente aporta información"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The statue was stolen by somebody in 1998.",
+          "correcto": "The statue was stolen in 1998.",
+          "explicacion": "By somebody no añade información. Si no se sabe quién fue, simplemente se omite el agente."
+        },
+        {
+          "incorrecto": "The suspect was arrested by the police last week.",
+          "correcto": "The suspect was arrested last week.",
+          "explicacion": "Quien arresta es obvio (la policía): repetirlo es redundante en un texto informativo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Mia revisan el borrador de una guía de la ciudad.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "The draft says the statue was stolen by somebody in 1998.",
+            "traduccion": "El borrador dice que la estatua fue robada por alguien en 1998."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Nobody knows who did it, so we only say it was stolen.",
+            "traduccion": "Nadie sabe quién fue, así que solo decimos que fue robada."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And this one: the church was designed by Gaudí. Should we delete Gaudí too?",
+            "traduccion": "Y esta: la iglesia fue diseñada por Gaudí. ¿Borramos también a Gaudí?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No. The architect is famous, so the name is useful for visitors.",
+            "traduccion": "No. El arquitecto es famoso, así que el nombre es útil para los visitantes."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I see. And «the gate is locked every night»?",
+            "traduccion": "Entiendo. ¿Y «la puerta se cierra con llave cada noche»?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Who locks it is irrelevant, so we keep it short.",
+            "traduccion": "Quién la cierra es irrelevante, así que lo dejamos corto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué conservan el nombre de Gaudí?",
+          "opciones": [
+            {
+              "es": "Porque el arquitecto es famoso y su nombre informa al visitante."
+            },
+            {
+              "es": "Porque nadie sabe quién diseñó la iglesia."
+            },
+            {
+              "es": "Porque la pasiva siempre necesita un agente."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que el arquitecto es famoso y el nombre es útil. El agente se mantiene cuando aporta información."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Motivo",
+          "Decisión",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Agente desconocido"
+            },
+            {
+              "texto": "se omite"
+            },
+            {
+              "texto": "The statue was stolen in 1998."
+            }
+          ],
+          [
+            {
+              "texto": "Agente obvio"
+            },
+            {
+              "texto": "se omite"
+            },
+            {
+              "texto": "The suspect was arrested."
+            }
+          ],
+          [
+            {
+              "texto": "Agente irrelevante"
+            },
+            {
+              "texto": "se omite"
+            },
+            {
+              "texto": "The gate is locked every night."
+            }
+          ],
+          [
+            {
+              "texto": "Agente informativo"
+            },
+            {
+              "texto": "se mantiene"
+            },
+            {
+              "texto": "The church was designed by Gaudí."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-24": {
+      "explicacion": {
+        "titulo": "Una placa informativa en cuatro movimientos",
+        "texto": "Una placa o cartel cuenta la historia de un edificio con pasivas breves. 1) Hechos comprobados con pasiva simple y fecha: was built in 1912. 2) El agente solo si informa: designed by Mateo Vera. 3) Los datos dudosos con atribución prudente: It is believed that… 4) Lo que encargó alguien a otros, con have + objeto + participio: had the walls painted. Cierra con el presente (are offered, is protected). Evita opiniones personales y repeticiones."
+      },
+      "patron": {
+        "texto": "Hecho + (agente) + atribución + servicio:",
+        "formula": [
+          {
+            "texto": "The station was built in 1912",
+            "nota": "hecho comprobado: pasiva simple"
+          },
+          {
+            "texto": "by Mateo Vera.",
+            "nota": "agente solo si informa"
+          },
+          {
+            "texto": "It is believed that…",
+            "nota": "dato sin probar: atribución"
+          },
+          {
+            "texto": "The council had the walls painted.",
+            "nota": "servicio encargado a otros"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The council had painted the walls by local students.",
+          "correcto": "The council had the walls painted by local students.",
+          "explicacion": "Para un servicio encargado a otros el participio va tras el objeto: have + objeto + participio. Con «had painted» la frase es un pasado perfecto activo y no admite by students."
+        },
+        {
+          "incorrecto": "It believes that the clock was brought from Switzerland.",
+          "correcto": "It is believed that the clock was brought from Switzerland.",
+          "explicacion": "Para atribuir un dato sin nombrar a quien lo cree se usa la pasiva: It is believed that…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo escriben la placa de la vieja estación de su barrio.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Let us start with the facts. The station was built in 1912.",
+            "traduccion": "Empecemos por los hechos. La estación se construyó en 1912."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Right. And we say who designed it: Mateo Vera.",
+            "traduccion": "Bien. Y decimos quién la diseñó: Mateo Vera."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "What about the clock? Some people say it came from Switzerland.",
+            "traduccion": "¿Y el reloj? Algunos dicen que vino de Suiza."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We cannot prove it, so we write: it is believed that the clock was brought from Switzerland.",
+            "traduccion": "No podemos probarlo, así que escribimos: se cree que el reloj fue traído de Suiza."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. And the council paid someone to paint the walls, so we write that it had the walls painted.",
+            "traduccion": "Bien. Y el ayuntamiento pagó a alguien para pintar las paredes, así que escribimos que hizo pintar las paredes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué usan «it is believed that» para el reloj?",
+          "opciones": [
+            {
+              "es": "Porque no pueden probar que el reloj vino de Suiza."
+            },
+            {
+              "es": "Porque el reloj se fabricó en la estación."
+            },
+            {
+              "es": "Porque el ayuntamiento lo prohibió."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «We cannot prove it»: como no está probado, lo presentan con atribución prudente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho pasado"
+            },
+            {
+              "texto": "was / were + participio"
+            },
+            {
+              "texto": "The station was built in 1912."
+            }
+          ],
+          [
+            {
+              "texto": "Presente"
+            },
+            {
+              "texto": "is / are + participio"
+            },
+            {
+              "texto": "Tours are offered every Sunday."
+            }
+          ],
+          [
+            {
+              "texto": "Dato dudoso"
+            },
+            {
+              "texto": "It is believed that…"
+            },
+            {
+              "texto": "It is believed that the clock came from Switzerland."
+            }
+          ],
+          [
+            {
+              "texto": "Servicio encargado"
+            },
+            {
+              "texto": "have + objeto + participio"
+            },
+            {
+              "texto": "The council had the walls painted."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-25": {
+      "explicacion": {
+        "titulo": "Hechos, datos atribuidos y servicios",
+        "texto": "Un buen cartel separa tres niveles. Un hecho con fuente fiable se escribe directamente: The square was paved in 1850. Un dato sin pruebas, o de leyenda, se atribuye con una pasiva de reporte: It is said that… / is believed to be… / is said to have been built… Un trabajo encargado a otros se cuenta con have + objeto + participio: The council had the clock repaired. Antes de publicar, revisa las fuentes y baja la certeza de lo dudoso."
+      },
+      "patron": {
+        "texto": "Hecho / dato atribuido / servicio:",
+        "formula": [
+          {
+            "texto": "The square was paved in 1850.",
+            "nota": "hecho comprobado: pasiva simple"
+          },
+          {
+            "texto": "It is said to have been built by monks.",
+            "nota": "dato dudoso: atribución"
+          },
+          {
+            "texto": "The council had the clock repaired.",
+            "nota": "servicio encargado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The fountain says to have been built by monks.",
+          "correcto": "The fountain is said to have been built by monks.",
+          "explicacion": "La pasiva de reporte necesita is said: la fuente no «dice» nada, es el dato el que se dice."
+        },
+        {
+          "incorrecto": "The legend is believed that the treasure exists.",
+          "correcto": "It is believed that the treasure exists.",
+          "explicacion": "Con that el sujeto es it (It is believed that…); legend no puede ser el sujeto de esa estructura."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom revisan el cartel de una fuente antigua.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Our poster says the fountain was built by monks in 1200.",
+            "traduccion": "Nuestro cartel dice que la fuente fue construida por monjes en 1200."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is there any evidence?",
+            "traduccion": "¿Hay alguna prueba?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Only a legend. The museum does not mention it.",
+            "traduccion": "Solo una leyenda. El museo no lo menciona."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Then it is doubtful. We should write: the fountain is said to have been built by monks.",
+            "traduccion": "Entonces es dudoso. Deberíamos escribir: se dice que la fuente fue construida por monjes."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. But the repair is certain: the council had the fountain repaired in 2019.",
+            "traduccion": "Bien. Pero la reparación es segura: el ayuntamiento hizo reparar la fuente en 2019."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato puede presentarse como cierto?",
+          "opciones": [
+            {
+              "es": "La reparación de la fuente en 2019."
+            },
+            {
+              "es": "Que los monjes construyeron la fuente."
+            },
+            {
+              "es": "Que el museo habla de una leyenda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice que la reparación es segura. Lo de los monjes es una leyenda y el museo no dice nada de ella."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Nivel de certeza",
+          "Fórmula",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Comprobado"
+            },
+            {
+              "texto": "pasiva simple"
+            },
+            {
+              "texto": "The tower was built in 1700."
+            }
+          ],
+          [
+            {
+              "texto": "Atribuido"
+            },
+            {
+              "texto": "It is said / believed that…"
+            },
+            {
+              "texto": "It is believed that a tunnel exists."
+            }
+          ],
+          [
+            {
+              "texto": "Dudoso, sobre el pasado"
+            },
+            {
+              "texto": "is said to have been + participio"
+            },
+            {
+              "texto": "It is said to have been built by monks."
+            }
+          ],
+          [
+            {
+              "texto": "Servicio encargado"
+            },
+            {
+              "texto": "have + objeto + participio"
+            },
+            {
+              "texto": "The council had the gate painted."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C21: ítems activa/pasiva (guiada 1, práctica 1, evaluación 1 y 3) reformulados con criterio explícito (qué elemento queda como sujeto/tema) para dejar una sola respuesta defendible; distractor absurdo sustituido; feedback sin citar posiciones de opciones.",
+      "C21/C22/C23: ordenar con adverbiales móviles admite el otro orden en aceptadas; C23 relacionar desambigua agente obvio vs irrelevante y escucha con distractor plausible.",
+      "C24: modelo de placa de 150 a ~95 palabras sin datos inventados (objetivo mínimo 65), rúbrica con variantes (build/construct, façade/front wall, get/have, it is said/believed/thought); error frecuente del causativo reemplazado por uno plausible.",
+      "C25: modelo sin datos inventados; rúbrica con get/have repaired y variantes de atribución; feedback sin posiciones; distractor sin sentido sustituido.",
+      "Revisión independiente: sin P0/P1 pendientes."
+    ]
+  }
+}

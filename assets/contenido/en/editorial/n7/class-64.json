@@ -1,0 +1,828 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-64",
+  "title": {
+    "en": "Summarise with sources",
+    "es": "Resumir citando fuentes"
+  },
+  "objectives": {
+    "es": [
+      "Resumir una noticia atribuyendo cada afirmación a su fuente, marcando lo no confirmado y reportando una pregunta ajena."
+    ]
+  },
+  "concepts": [
+    "n7-media-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-63"
+  ],
+  "usesVocabulary": [
+    "official",
+    "witness",
+    "reportedly",
+    "allegedly",
+    "unconfirmed",
+    "confirm",
+    "source",
+    "summary"
+  ],
+  "usesPatterns": [
+    "n7-media-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "official",
+      "es": "funcionario, portavoz oficial"
+    },
+    {
+      "en": "witness",
+      "es": "testigo"
+    },
+    {
+      "en": "reportedly",
+      "es": "según se informa, supuestamente"
+    },
+    {
+      "en": "allegedly",
+      "es": "presuntamente"
+    },
+    {
+      "en": "unconfirmed",
+      "es": "no confirmado"
+    },
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    },
+    {
+      "en": "source",
+      "es": "fuente"
+    },
+    {
+      "en": "summary",
+      "es": "resumen"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-64.t01",
+      "en": "According to an official, the market will open again on Saturday.",
+      "es": "Según un funcionario, el mercado volverá a abrir el sábado.",
+      "explanationEs": "According to + fuente, y después el dato; no se añade un verbo de decir.",
+      "segments": [
+        "According to an official, the market",
+        "will open again on Saturday."
+      ],
+      "audioText": "According to an official, the market will open again on Saturday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-4"
+    },
+    {
+      "id": "en.n7.class-64.t02",
+      "en": "A witness said that the water reached half a metre in the square.",
+      "es": "Un testigo dijo que el agua llegó a medio metro en la plaza.",
+      "explanationEs": "Said that + dato atribuye la afirmación a quien la vio.",
+      "segments": [
+        "A witness said that the water reached",
+        "half a metre in the square."
+      ],
+      "audioText": "A witness said that the water reached half a metre in the square.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-4"
+    },
+    {
+      "id": "en.n7.class-64.t03",
+      "en": "The cause is reportedly a broken pipe, but this is still unconfirmed.",
+      "es": "La causa es, según se informa, una tubería rota, pero aún no está confirmado.",
+      "explanationEs": "Reportedly toma distancia del dato; unconfirmed avisa de que falta verificarlo.",
+      "segments": [
+        "The cause is reportedly a broken",
+        "pipe, but this is still unconfirmed."
+      ],
+      "audioText": "The cause is reportedly a broken pipe, but this is still unconfirmed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-4"
+    },
+    {
+      "id": "en.n7.class-64.t04",
+      "en": "The mayor's office has not been able to confirm the figure yet.",
+      "es": "La oficina de la alcaldesa todavía no ha podido confirmar la cifra.",
+      "explanationEs": "Not confirmed yet indica qué dato sigue abierto.",
+      "segments": [
+        "The mayor's office has not been",
+        "able to confirm the figure yet."
+      ],
+      "audioText": "The mayor's office has not been able to confirm the figure yet.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-4"
+    },
+    {
+      "id": "en.n7.class-64.t05",
+      "en": "The pipe was allegedly damaged last month, according to one source.",
+      "es": "La tubería habría sido dañada el mes pasado, según una fuente.",
+      "explanationEs": "Allegedly atribuye a otros una acusación o un dato sin asumirlo.",
+      "segments": [
+        "The pipe was allegedly damaged last",
+        "month, according to one source."
+      ],
+      "audioText": "The pipe was allegedly damaged last month, according to one source.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-4"
+    },
+    {
+      "id": "en.n7.class-64.t06",
+      "en": "A good summary gives a source for every claim and asks what is still unknown.",
+      "es": "Un buen resumen da una fuente para cada afirmación y señala lo que aún se ignora.",
+      "explanationEs": "Resumir bien es atribuir: cada afirmación lleva su fuente.",
+      "segments": [
+        "A good summary gives a source for every",
+        "claim and asks what is still unknown."
+      ],
+      "audioText": "A good summary gives a source for every claim and asks what is still unknown.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c64.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase atribuye bien el dato a su fuente?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "According to an official said, the road will close tonight."
+          },
+          {
+            "text": "According to an official, the road will close tonight."
+          },
+          {
+            "text": "An official according, the road will close tonight."
+          }
+        ],
+        "teaches": [
+          "n7-media-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.pg01.seed-0",
+          "feedback": {
+            "es": "According to + fuente ya atribuye el dato; añadir said o cambiar el orden rompe la frase."
+          },
+          "hint": {
+            "es": "Después de according to va solo la fuente, sin verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:96a007927906b5edfc0518274ca2d3ca8f9f3ea31d5355ed47ec5e2f984f91a6"
+      },
+      {
+        "id": "en.n7.c64.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La causa es, según se informa, una lámpara rota, pero no está confirmada.»"
+        },
+        "answer": {
+          "text": "reportedly",
+          "accepted": [
+            "reportedly",
+            "allegedly"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-media-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.pg02.seed-0",
+          "feedback": {
+            "es": "Reportedly marca que el dato viene de informes y no lo garantizas tú."
+          },
+          "hint": {
+            "es": "Es un adverbio que toma distancia del dato: se informa, pero no es seguro."
+          },
+          "text": "The cause is ___ a broken lamp, but it is unconfirmed."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:303b4956b03f105441847ae10e5c7b02d6bdb7dd1efeecfca8672f305a00058b"
+      },
+      {
+        "id": "en.n7.c64.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Un periodista preguntó si el mercado abriría el sábado.»"
+        },
+        "answer": {
+          "text": "A reporter asked whether the market would open on Saturday",
+          "tokens": [
+            "A",
+            "reporter",
+            "asked",
+            "whether",
+            "the",
+            "market",
+            "would",
+            "open",
+            "on",
+            "Saturday"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-media-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.pg03.seed-0",
+          "feedback": {
+            "es": "La pregunta reportada lleva whether y el orden de una afirmación: the market would open."
+          },
+          "hint": {
+            "es": "Después de whether va el sujeto y luego would + verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ff79fe92a12188bcfa50e4fbfc0120ce6d24b799012da926c6e302330bcfacd9"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c64.p01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres frases de un resumen con sus atribuciones."
+        },
+        "answer": {
+          "text": "witness | confirmed | spokesperson",
+          "accepted": [
+            "witness | confirmed | spokesperson"
+          ],
+          "parts": [
+            {
+              "text": "witness",
+              "accepted": [
+                "witness"
+              ]
+            },
+            {
+              "text": "confirmed",
+              "accepted": [
+                "confirmed"
+              ]
+            },
+            {
+              "text": "spokesperson",
+              "accepted": [
+                "spokesperson",
+                "statement"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.p01.seed-0",
+          "feedback": {
+            "es": "Un testigo aporta lo que vio, confirmed marca lo verificado y el portavoz es la fuente oficial."
+          },
+          "sentences": [
+            "According to a ___, the water reached half a metre.",
+            "The cause has not been ___ yet.",
+            "The council's ___ says the market will reopen soon."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d82a60d728229723ad6aaa8ff74a881e25d1e6c574132feed5ba0c41f2be5c3f"
+      },
+      {
+        "id": "en.n7.c64.p02",
+        "format": "escribir",
+        "prompt": {
+          "es": "Atribuye el dato a la alcaldesa con according to."
+        },
+        "answer": {
+          "text": "According to the mayor, the market will close on Monday for repairs.",
+          "accepted": [
+            "According to the mayor, the market will close on Monday for repairs.",
+            "According to the mayor the market will close on Monday for repairs.",
+            "According to the mayor, the market will close on Monday because of repairs.",
+            "According to the mayor, the market closes on Monday for repairs."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.p02.seed-0",
+          "feedback": {
+            "es": "La frase empieza con According to + fuente y después da el dato completo."
+          },
+          "text": "Fuente: la alcaldesa. Dato: el mercado cerrará el lunes por obras. Escribe una sola frase."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6e91883a54ca27a419d9fa6cb727a34a2245196f01dbebb12b8eba3290b05383"
+      },
+      {
+        "id": "en.n7.c64.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué responde la oficina de la alcaldesa."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "That the traders will get money tomorrow."
+          },
+          {
+            "text": "That the reporter's question was wrong."
+          },
+          {
+            "text": "That nothing can be confirmed yet."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.p03.seed-0",
+          "feedback": {
+            "es": "La oficina dice que es demasiado pronto para confirmar nada: todo sigue abierto."
+          },
+          "audio": "A reporter asked whether the traders would receive help. The mayor's office said that it was too early to confirm anything.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7877035a551558797e283211be155e804d89c68d01c328f3d0213f70f6298b69"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c64.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué versión marca bien que un dato no está confirmado?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The fire was started by a lamp, according to a neighbour, but the police have not confirmed it yet."
+          },
+          {
+            "text": "The fire was started by a lamp, and everybody knows it."
+          },
+          {
+            "text": "The fire was certainly started by a lamp, a witness said."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.e01.seed-0",
+          "feedback": {
+            "es": "Solo la primera atribuye el dato a un vecino y avisa de que la policía aún no lo ha confirmado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f43f9038ce01c4a052258057736ee58ee4939b232b18af66acb2f501607a4c6a"
+      },
+      {
+        "id": "en.n7.c64.e02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Según la alcaldesa, el agua llegó hasta la puerta.»"
+        },
+        "answer": {
+          "text": "According to the mayor the water reached the door",
+          "tokens": [
+            "According",
+            "to",
+            "the",
+            "mayor",
+            "the",
+            "water",
+            "reached",
+            "the",
+            "door"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.e02.seed-0",
+          "feedback": {
+            "es": "Primero la fuente (according to the mayor) y después el dato atribuido."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4e01e0d280259af03cd648684d36080395cd943b234084e1c5b83cf320698312"
+      },
+      {
+        "id": "en.n7.c64.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué dato sigue sin confirmarse."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "That the road will open on Friday."
+          },
+          {
+            "text": "That the bridge moved."
+          },
+          {
+            "text": "That an official spoke to reporters."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.e03.seed-0",
+          "feedback": {
+            "es": "El movimiento del puente solo lo afirma un vecino y nadie lo ha comprobado."
+          },
+          "audio": "An official told reporters that the road would open on Friday. A neighbour claimed that the bridge had moved, but nobody has checked it.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:73918938d1cb449b839a8bd8a0c23a47ba5218df1f02b909583933ec53ceab2a"
+      },
+      {
+        "id": "en.n7.c64.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el resumen de la noticia con fuentes, una duda y una pregunta reportada."
+        },
+        "answer": {
+          "text": "A storm flooded the Saturday market in Riverton this week. According to an official from the mayor's office, the market will open again on Saturday. A witness said that the water reached half a metre in the main square, and the local newspaper reported that twelve stalls were damaged. The cause of the flood is reportedly a broken pipe under the square, but this has not been confirmed yet. One neighbour allegedly saw workers repairing the same pipe last month, although nobody has confirmed that either. At the press conference, a reporter asked whether the traders would receive help. The official answered that the council was still studying the question. In short, the market should reopen soon, but the cause and the help for the traders are still uncertain.",
+          "accepted": [
+            "A storm flooded the Saturday market in Riverton this week. According to an official from the mayor's office, the market will open again on Saturday. A witness said that the water reached half a metre in the main square, and the local newspaper reported that twelve stalls were damaged. The cause of the flood is reportedly a broken pipe under the square, but this has not been confirmed yet. One neighbour allegedly saw workers repairing the same pipe last month, although nobody has confirmed that either. At the press conference, a reporter asked whether the traders would receive help. The official answered that the council was still studying the question. In short, the market should reopen soon, but the cause and the help for the traders are still uncertain.",
+            "A storm flooded the Saturday market in Riverton. According to an official, the market will open again on Saturday. A witness told reporters that the water reached half a metre in the square, and the local newspaper said that twelve stalls were damaged. A broken pipe is reportedly the cause of the flood, but this is unconfirmed. According to one source, the same pipe was repaired last month, but nobody has been able to confirm that. A reporter asked if the traders would receive help, and the official said that the council was still studying it. To sum up, the market will probably open on Saturday, but the cause of the flood and the help for the traders are still unknown.",
+            "The Saturday market in Riverton was flooded after a storm. The mayor's office told reporters that the market will open again on Saturday. One witness claimed that the water reached half a metre in the square, and the local newspaper reported that twelve stalls were damaged. The flood was allegedly caused by a broken pipe, although this has not been confirmed. One source said that the pipe was repaired last month, but nobody has confirmed it yet. A reporter wanted to know whether the traders would get help, and the official replied that the council was still studying the question. So, the market should open again soon, but some facts are still uncertain."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.e04.seed-0",
+          "feedback": {
+            "es": "El resumen atribuye cada dato a una fuente, marca lo no confirmado con reportedly o unconfirmed y reporta la pregunta del periodista con whether."
+          },
+          "text": "Notas: una tormenta inundó el mercado del sábado en Riverton. La oficina de la alcaldesa (un funcionario) dice que el mercado abrirá de nuevo el sábado. Un testigo dice que el agua llegó a medio metro en la plaza. El periódico local informa de que doce puestos quedaron dañados. La causa sería una tubería rota, sin confirmar. Según una fuente, la tubería ya se arregló el mes pasado (sin confirmar). Un periodista preguntó si los comerciantes recibirán ayuda; el funcionario respondió que el ayuntamiento aún lo estudia. Escribe un resumen de entre 110 y 170 palabras.",
+          "scoring": {
+            "wordRange": [
+              100,
+              240
+            ],
+            "evidenceGroups": [
+              [
+                "according to",
+                "an official said",
+                "an official told",
+                "the mayor's office said",
+                "the mayor's office told",
+                "a witness said",
+                "a witness told",
+                "a witness claimed",
+                "one witness claimed",
+                "the newspaper reported",
+                "the local newspaper said"
+              ],
+              [
+                "has not been confirmed",
+                "have not been confirmed",
+                "not been confirmed",
+                "is unconfirmed",
+                "is still unconfirmed",
+                "nobody has confirmed",
+                "no one has confirmed",
+                "nobody has been able to confirm",
+                "cannot be confirmed",
+                "not been able to confirm"
+              ],
+              [
+                "reportedly",
+                "allegedly",
+                "is said to",
+                "according to one source",
+                "one source said"
+              ],
+              [
+                "asked whether",
+                "asked if",
+                "wanted to know whether",
+                "wanted to know if"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5911386a1a6545a9a2b0e1cbc10fda727a6f0e1ed07c4d631e70bf64b566c791"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c64.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase reporta una pregunta ajena con el orden correcto?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A reporter wanted to know whether was the road safe."
+          },
+          {
+            "text": "A reporter wanted to know the road was whether safe."
+          },
+          {
+            "text": "A reporter wanted to know whether the road was safe."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.r01.seed-0",
+          "feedback": {
+            "es": "En la pregunta reportada el sujeto va antes del verbo, como en una afirmación."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6c5e7b76e29aeb70079098034e3027ba85ac0541cc5aaf334ddd6e4283385d52"
+      },
+      {
+        "id": "en.n7.c64.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Nadie ha podido verificar la cifra todavía.»"
+        },
+        "answer": {
+          "text": "verify",
+          "accepted": [
+            "verify",
+            "confirm"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.r02.seed-0",
+          "feedback": {
+            "es": "Verify es el verbo para comprobar que una cifra o un dato es cierto."
+          },
+          "text": "Nobody has been able to ___ the figure yet."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:17879f905e722550345d36b457f5ee0b6056e7403f95f3ba9bd05df49c42c057"
+      },
+      {
+        "id": "en.n7.c64.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién niega lo que dijo el testigo."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The driver."
+          },
+          {
+            "text": "The company."
+          },
+          {
+            "text": "A reporter."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c64.r03.seed-0",
+          "feedback": {
+            "es": "El conductor negó lo del testigo; la empresa solo dijo que no podía comprobar la cifra."
+          },
+          "audio": "According to a witness, the bus was full. The driver denied it, and the company said it could not check the number of passengers.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0b55f330bc8569c6af21432755dd7f2326e6fa62e624265d24a832fa0d56813"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c64.e01": {
+      "reteach": "en.n7.class-64.t01",
+      "review": "en.n7.c64.r01"
+    },
+    "en.n7.c64.e02": {
+      "reteach": "en.n7.class-64.t02",
+      "review": "en.n7.c64.r02"
+    },
+    "en.n7.c64.e03": {
+      "reteach": "en.n7.class-64.t03",
+      "review": "en.n7.c64.r03"
+    },
+    "en.n7.c64.e04": {
+      "reteach": "en.n7.class-64.t04",
+      "review": "en.n7.c64.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

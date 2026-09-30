@@ -1,0 +1,638 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 61,
+    "end": 65
+  },
+  "classes": {
+    "en.n6.class-61": {
+      "explicacion": {
+        "titulo": "Reconocer los movimientos de una negociación",
+        "texto": "Una negociación avanza con movimientos y cada uno tiene su frase típica. La oferta propone una cifra («My offer is…»). La contraoferta responde con otra cifra («Would you take…?», «How about…?»). El rechazo educado suele llevar «I'm afraid…». La aceptación cierra el trato («It's a deal!»). Para reconocerlos no traduzcas palabra por palabra: busca qué hace cada mensaje. Ojo: en inglés el sujeto es obligatorio, así que se dice «It's a deal», no «Is a deal»."
+      },
+      "patron": {
+        "texto": "Movimiento = frase típica:",
+        "formula": [
+          {
+            "texto": "My offer is sixty dollars.",
+            "nota": "oferta: propone una cifra"
+          },
+          {
+            "texto": "Would you take fifty?",
+            "nota": "contraoferta: otra cifra en forma de pregunta"
+          },
+          {
+            "texto": "I'm afraid I can't accept that.",
+            "nota": "rechazo con tacto"
+          },
+          {
+            "texto": "It's a deal!",
+            "nota": "aceptación: cierra el trato"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Is a deal!",
+          "correcto": "It's a deal!",
+          "explicacion": "En inglés hace falta el sujeto it: «It's a deal», aunque en español se omita."
+        },
+        {
+          "incorrecto": "I am agree with that price.",
+          "correcto": "I agree with that price.",
+          "explicacion": "Agree es un verbo, no un adjetivo: no se usa con am. En español «estoy de acuerdo» engaña."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia quiere comprar la vieja bicicleta de Leo y los dos negocian el precio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Hi Leo. Is your old bike still for sale?",
+            "traduccion": "Hola, Leo. ¿Todavía vendes tu vieja bicicleta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. My price is eighty dollars.",
+            "traduccion": "Sí. Mi precio es ochenta dólares."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That's a little high. Would you take sixty?",
+            "traduccion": "Es un poco alto. ¿Aceptarías sesenta?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I can go a little lower. How about seventy?",
+            "traduccion": "Puedo bajar un poco. ¿Qué tal setenta?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Seventy is reasonable. It's a deal!",
+            "traduccion": "Setenta es razonable. ¡Trato hecho!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué precio cierran el trato Mia y Leo?",
+          "opciones": [
+            {
+              "es": "Setenta dólares."
+            },
+            {
+              "es": "Sesenta dólares."
+            },
+            {
+              "es": "Ochenta dólares."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo baja de ochenta y propone setenta; Mia responde «Seventy is reasonable. It's a deal!». Sesenta fue solo la contraoferta de Mia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Movimiento",
+          "Frase típica"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Oferta"
+            },
+            {
+              "texto": "My offer is sixty dollars."
+            }
+          ],
+          [
+            {
+              "texto": "Contraoferta"
+            },
+            {
+              "texto": "Would you take fifty?"
+            }
+          ],
+          [
+            {
+              "texto": "Rechazo con tacto"
+            },
+            {
+              "texto": "I'm afraid I can't accept that."
+            }
+          ],
+          [
+            {
+              "texto": "Aceptación"
+            },
+            {
+              "texto": "It's a deal!"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-62": {
+      "explicacion": {
+        "titulo": "Condiciones y concesiones en una oferta",
+        "texto": "Las ofertas llevan condiciones y las cesiones se dicen con conectores. Para poner una condición usa provided that, on condition that (más firme) o as long as, seguidos de presente simple: nunca will. Para ceder usa although + oración («Although it is far, it is cheap») o even so entre dos frases («It is far. Even so, it is cheap»). Although no se combina con but. El subjuntivo español («siempre que sea barato») se convierte en presente simple en inglés."
+      },
+      "patron": {
+        "texto": "Oferta + condición o concesión:",
+        "formula": [
+          {
+            "texto": "I can pay half",
+            "nota": "oferta: lo que propones"
+          },
+          {
+            "texto": "provided that / as long as / on condition that",
+            "nota": "condición: lo que exiges a cambio"
+          },
+          {
+            "texto": "you book the hotel.",
+            "nota": "presente simple, nunca will"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We can go provided that it will be cheap.",
+          "correcto": "We can go provided that it is cheap.",
+          "explicacion": "Después de provided that se usa presente simple, aunque se hable del futuro."
+        },
+        {
+          "incorrecto": "Although the hostel is far, but it is cheap.",
+          "correcto": "Although the hostel is far, it is cheap.",
+          "explicacion": "Although ya expresa el contraste: no se añade but, aunque en español a veces se diga «aunque… pero»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom planean un fin de semana fuera y negocian cómo gastar el dinero.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Our budget for the weekend is four hundred dollars.",
+            "traduccion": "Nuestro presupuesto para el fin de semana es de cuatrocientos dólares."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "We can book this hotel provided that it includes breakfast.",
+            "traduccion": "Podemos reservar este hotel siempre que incluya el desayuno."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "OK. I will pay half on condition that you choose the restaurants.",
+            "traduccion": "De acuerdo. Pagaré la mitad a condición de que tú elijas los restaurantes."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Deal. The train is expensive. Even so, we can afford it.",
+            "traduccion": "Trato hecho. El tren es caro. Aun así, podemos pagarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué condición pone Sara para pagar la mitad?",
+          "opciones": [
+            {
+              "es": "Que Tom elija los restaurantes."
+            },
+            {
+              "es": "Que el hotel incluya el desayuno."
+            },
+            {
+              "es": "Que el tren sea más barato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I will pay half on condition that you choose the restaurants». El desayuno es la condición de Tom para reservar el hotel."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Conector",
+          "Función"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "provided that / on condition that / as long as"
+            },
+            {
+              "texto": "condición (con presente simple)"
+            }
+          ],
+          [
+            {
+              "texto": "although + oración"
+            },
+            {
+              "texto": "concesión dentro de la misma frase"
+            }
+          ],
+          [
+            {
+              "texto": "even so"
+            },
+            {
+              "texto": "concesión entre dos frases, con coma"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-63": {
+      "explicacion": {
+        "titulo": "Postura, límite y compromiso al escuchar",
+        "texto": "Al escuchar una negociación oral, anota tres cosas. La postura es lo que cada uno quiere («I need…», «I want…»). El límite es lo que no acepta («I can't…», «I won't…», «not after…»). El compromiso es la solución intermedia («How about…?», «Fine, as long as…», «In return…»). Fíjate en los conectores: but suele introducir el límite, y fine o deal cierran el acuerdo. Anota días, horas y cifras, porque son los datos que luego se piden."
+      },
+      "patron": {
+        "texto": "Lo que escuchas = lo que anotas:",
+        "formula": [
+          {
+            "texto": "I need the room on weekdays.",
+            "nota": "postura: lo que quiere"
+          },
+          {
+            "texto": "I can't give up the weekend.",
+            "nota": "límite: lo que no acepta"
+          },
+          {
+            "texto": "How about…? In return…",
+            "nota": "propuesta de compromiso y lo que se da a cambio"
+          },
+          {
+            "texto": "Fine. Deal.",
+            "nota": "acuerdo final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo insists to keep the room.",
+          "correcto": "Leo insists on keeping the room.",
+          "explicacion": "Insist va con on + -ing, no con to + verbo."
+        },
+        {
+          "incorrecto": "They arrived to a compromise.",
+          "correcto": "They reached a compromise.",
+          "explicacion": "«Llegar a un acuerdo» es reach a compromise. Arrive no se construye con to (sería arrive at), y aquí suena poco natural."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y su hermano Leo se reparten la habitación libre de la casa.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I need the spare room on weekday evenings. I have exams.",
+            "traduccion": "Necesito la habitación libre las tardes entre semana. Tengo exámenes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I want it on weekends for my guitar. That is my limit.",
+            "traduccion": "La quiero los fines de semana para mi guitarra. Ese es mi límite."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "How about this? I take Monday to Thursday and you take Friday to Sunday.",
+            "traduccion": "¿Qué te parece esto? Yo me quedo de lunes a jueves y tú de viernes a domingo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Fine, as long as I can play until eight.",
+            "traduccion": "De acuerdo, siempre que pueda tocar hasta las ocho."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Deal. But not after eight, please.",
+            "traduccion": "Trato hecho. Pero no después de las ocho, por favor."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Agreed.",
+            "traduccion": "Acordado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué días tendrá Ana la habitación?",
+          "opciones": [
+            {
+              "es": "De lunes a jueves."
+            },
+            {
+              "es": "De viernes a domingo."
+            },
+            {
+              "es": "Solo el fin de semana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana propone: «I take Monday to Thursday and you take Friday to Sunday», y Leo acepta. Los fines de semana son la postura y el límite de Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué anotas",
+          "Frases que oyes"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "I need… / I want… / I'd like…"
+            }
+          ],
+          [
+            {
+              "texto": "Límite"
+            },
+            {
+              "texto": "I can't… / I won't… / not after…"
+            }
+          ],
+          [
+            {
+              "texto": "Compromiso"
+            },
+            {
+              "texto": "How about…? / Fine, as long as… / In return…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-64": {
+      "explicacion": {
+        "titulo": "Responder a una oferta con una contraoferta",
+        "texto": "Una buena respuesta a una oferta que no te conviene tiene cuatro pasos: agradece y rechaza con tacto («Thank you, but I'm afraid I can't accept that»), propón tu alternativa («I suggest that we… / How about…?»), añade una condición («as long as…») y ofrece una concesión («Although…, I'm willing to…»). Con suggest va that + sujeto + verbo, no «suggest you to». El but tras el agradecimiento avisa del rechazo sin ser brusco."
+      },
+      "patron": {
+        "texto": "Rechazo + contraoferta + condición + concesión:",
+        "formula": [
+          {
+            "texto": "Thank you, but I'm afraid I can't accept that.",
+            "nota": "agradecer y rechazar con tacto"
+          },
+          {
+            "texto": "I suggest that we split the bills sixty-forty,",
+            "nota": "contraoferta concreta"
+          },
+          {
+            "texto": "as long as you clean up afterwards.",
+            "nota": "condición"
+          },
+          {
+            "texto": "Although I'm away, I'm willing to cook on Sundays.",
+            "nota": "concesión explícita"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I suggest you to split the bills.",
+          "correcto": "I suggest that we split the bills.",
+          "explicacion": "Con suggest no se usa persona + to + verbo: va that + sujeto + verbo, o suggest + -ing."
+        },
+        {
+          "incorrecto": "I would rather to pay less.",
+          "correcto": "I would rather pay less.",
+          "explicacion": "Después de would rather va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia propone repartir las facturas a medias y su compañero Carlos no está de acuerdo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Shall we split the bills fifty-fifty?",
+            "traduccion": "¿Repartimos las facturas al cincuenta por ciento?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thank you, Mia, but I'm afraid I can't accept that. I am away on Saturdays.",
+            "traduccion": "Gracias, Mia, pero me temo que no puedo aceptarlo. Estoy fuera los sábados."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "What do you suggest, then?",
+            "traduccion": "¿Qué sugieres entonces?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Sixty-forty would be fair. I'd pay forty, and I'm willing to cook on Sundays.",
+            "traduccion": "Un sesenta-cuarenta sería justo. Yo pagaría cuarenta y estoy dispuesto a cocinar los domingos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That sounds fair, as long as you really cook every Sunday.",
+            "traduccion": "Me parece justo, siempre que cocines de verdad todos los domingos."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It's a deal!",
+            "traduccion": "¡Trato hecho!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concesión ofrece Carlos?",
+          "opciones": [
+            {
+              "es": "Cocinar los domingos."
+            },
+            {
+              "es": "Pagar todas las facturas."
+            },
+            {
+              "es": "Limpiar la casa cada semana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «I'm willing to cook on Sundays»: es su concesión. La condición de Mia es que cocine de verdad cada domingo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Agradecer y rechazar"
+            },
+            {
+              "texto": "Thank you, but I'm afraid…"
+            }
+          ],
+          [
+            {
+              "texto": "Contraoferta"
+            },
+            {
+              "texto": "I suggest that we… / How about…?"
+            }
+          ],
+          [
+            {
+              "texto": "Condición"
+            },
+            {
+              "texto": "…as long as / provided that…"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Although…, I'm willing to…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-65": {
+      "explicacion": {
+        "titulo": "Una negociación completa, de la oferta al acuerdo",
+        "texto": "Una negociación completa combina todo lo visto: fija el total, intercambia ofertas y contraofertas, añade condiciones (provided that, as long as), cede con concesiones explícitas («I'm willing to…», «Although…») y cierra con un resumen que registra el acuerdo («So we agree that…»). Ceder dos veces de forma equilibrada suele bastar. Antes de cerrar, confirma con «Is that OK with you?». Y al escribir el acuerdo, anota las condiciones, no solo las cifras."
+      },
+      "patron": {
+        "texto": "Fases de una negociación:",
+        "formula": [
+          {
+            "texto": "I suggest… / How about…?",
+            "nota": "contraoferta"
+          },
+          {
+            "texto": "provided that / as long as…",
+            "nota": "condición"
+          },
+          {
+            "texto": "Although… I'm willing to…",
+            "nota": "concesión explícita"
+          },
+          {
+            "texto": "So we agree that…",
+            "nota": "resumen del acuerdo final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We agree that Leo pays the rent, as long as Mia will pay the bills.",
+          "correcto": "We agree that Leo pays the rent, as long as Mia pays the bills.",
+          "explicacion": "Después de as long as se usa presente simple, aunque la acción sea futura."
+        },
+        {
+          "incorrecto": "Mia gave up to Leo's plan.",
+          "correcto": "Mia gave in to Leo's plan.",
+          "explicacion": "Give up significa rendirse o dejar algo; ceder ante alguien es give in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo comparten piso y reparten el presupuesto del mes.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Our total budget is six hundred dollars a month.",
+            "traduccion": "Nuestro presupuesto total es de seiscientos dólares al mes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I can pay the rent, four hundred, provided that you pay the bills.",
+            "traduccion": "Puedo pagar el alquiler, cuatrocientos, siempre que tú pagues las facturas."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'm afraid that is not fair. How about three hundred each?",
+            "traduccion": "Me temo que eso no es justo. ¿Qué tal trescientos cada uno?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Three hundred each is fair, as long as you do the cooking.",
+            "traduccion": "Trescientos cada uno es justo, siempre que tú cocines."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Deal. In the end, it is a good compromise.",
+            "traduccion": "Trato hecho. Al final, es un buen compromiso."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué condición pone Leo para aceptar trescientos cada uno?",
+          "opciones": [
+            {
+              "es": "Que Mia cocine."
+            },
+            {
+              "es": "Que Mia pague el alquiler."
+            },
+            {
+              "es": "Que Mia pague las facturas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo acepta «as long as you do the cooking». Su primera oferta (él paga el alquiler y Mia las facturas) fue la que Mia rechazó."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Fase",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Oferta"
+            },
+            {
+              "texto": "My offer is… / I'll pay… provided that…"
+            }
+          ],
+          [
+            {
+              "texto": "Contraoferta"
+            },
+            {
+              "texto": "I'm afraid… How about…?"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "I'm willing to… / Although…"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "So we agree that… Is that OK with you?"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Mapa verificado: clases 61-65 (input, form, comprehension, production, transfer) coinciden con concepto, canDo y tarea; continuidad de ofertas, condiciones, posturas y contraoferta correcta.",
+      "63: incoherencia entre límite/flexibilidad de Leo en la enseñanza corregida; 'arrive to' explicado con precisión; evaluación e1 desacoplada de e0 (antes una revelaba a la otra); distractor de escucha g0 más plausible.",
+      "64: contradicción 'fuera los fines de semana' + 'cocino los domingos' resuelta (ahora fuera los sábados); feedback de repaso ya no cita posiciones de opción; rúbricas de escritura ampliadas con variantes (I'm sorry, I'll cook, provided, electric).",
+      "65: r0 con distractor realista (Carlos cook sin -s) en lugar de 'will to'; consigna del escribir fija el rol (Sara); feedback del ítem de situación aclarado.",
+      "62/64/65: aceptadas ampliadas (so long as, ready/prepared, resolved) y rúbricas con contracciones. Riesgo menor P2: 'if' no se acepta como conector en 62-e2/p1 (la consigna en español fija siempre que).",
+      "Dificultad de 61-63 algo baja para B2, asumida por el control léxico del contrato (P2)."
+    ]
+  }
+}

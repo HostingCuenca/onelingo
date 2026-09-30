@@ -445,6 +445,11 @@
                 "had",
                 "asked",
                 "us"
+              ],
+              "accepted": [
+                "However the result would be different if they had asked us",
+                "However if they had asked us the result would be different",
+                "If they had asked us the result would be different however"
               ]
             },
             "choices": [],
@@ -465,7 +470,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:c0773da46f674628a05e388370834b7c9a27533d1a7963d0246cb0f34466f63e"
+            "contentHash": "sha256:b4d692b77cc9ddee01872917cc7cd9636c505cf6d26a3bb0d4d4e9d0db837136"
           }
         ],
         "evaluation": [
@@ -715,7 +720,8 @@
               "accepted": [
                 "claim",
                 "say",
-                "believe"
+                "believe",
+                "think"
               ]
             },
             "choices": [],
@@ -737,7 +743,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:33b523920e828193a9ce1591a58227a430847f0086b5696025e3910e8c2f748d"
+            "contentHash": "sha256:1f7c7d351b2dd6739dca899f7aaad22ece6a747c489cde2fa67bc2ced25509e7"
           },
           {
             "id": "en.n5.c96.r03",
@@ -756,6 +762,10 @@
                 "read",
                 "more",
                 "slowly"
+              ],
+              "accepted": [
+                "In my view we should read more slowly",
+                "We should read more slowly in my view"
               ]
             },
             "choices": [],
@@ -776,7 +786,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:c0bb029318c729dde76658ec6210001bcf1cc209458bd9873c0db906331abc4c"
+            "contentHash": "sha256:8ee4e411b69602c5b2ffa343533ff5538d991239014586481cf984cfdaa944f6"
           }
         ]
       },
@@ -954,7 +964,7 @@
         {
           "id": "en.n5.class-97.t04",
           "en": "After checking the tenses, she wrote: I have lived here since June.",
-          "es": "Después de comprobar los tiempos verbales, escribió: Vivo aquí desde junio.",
+          "es": "Después de comprobar los tiempos verbales, escribió: Llevo viviendo aquí desde junio.",
           "explanationEs": "Revisar los tiempos: since + punto de inicio pide present perfect.",
           "segments": [
             "After checking the tenses, she wrote:",
@@ -1297,7 +1307,7 @@
                 "text": "My brother is tall. He is very tall. He plays football and he is very good."
               },
               {
-                "text": "My brother is very tall, so he plays football, and he is very good at it."
+                "text": "My brother is very tall and plays football very well."
               },
               {
                 "text": "My brother is tall, although he plays football, and he is very good."
@@ -1312,7 +1322,7 @@
               "variantSeed": "0",
               "variantId": "en.n5.c97.e01.seed-0",
               "feedback": {
-                "es": "Une las ideas con conectores y elimina la repetición de very tall y very good. Las otras versiones repiten o usan un conector que no encaja."
+                "es": "Une las ideas y elimina la repetición de tall y good. Una versión sigue repitiendo las frases cortas, y la otra usa although, que contrasta dos ideas que no se oponen."
               },
               "text": "Borrador: «My brother is tall. He is very tall. He plays football. He is very good.»"
             },
@@ -1321,7 +1331,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:0e0f1fb557dcbb33a5e8b578572394d47efa6b9304d48a7fc922706fd8ebce4c"
+            "contentHash": "sha256:be4b81fb3b1de4b6a27597bba9e9d9e0a86fe3cd5272a2345cdae022736690dd"
           },
           {
             "id": "en.n5.c97.e02",
@@ -1334,7 +1344,8 @@
               "accepted": [
                 "I bought a cinema ticket yesterday.",
                 "I bought a ticket for the cinema yesterday.",
-                "Yesterday I bought a cinema ticket."
+                "Yesterday I bought a cinema ticket.",
+                "Yesterday I bought a ticket for the cinema."
               ]
             },
             "choices": [],
@@ -1356,7 +1367,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:0852b2e5deef5711b421ab7dd2d3c0b5430e88162f47c40cf252cc6f00bde84e"
+            "contentHash": "sha256:e073430820bc99c2a1f8c3fabc533b5584777ed86aa23968bfb6dc99ed750fc5"
           },
           {
             "id": "en.n5.c97.e03",
@@ -1516,17 +1527,16 @@
           },
           {
             "id": "en.n5.c97.r03",
-            "format": "completar",
+            "format": "escribir",
             "prompt": {
-              "es": "Completa: «Hice que mi profesor revisara mi borrador.»"
+              "es": "Registra el cambio que hiciste en tu borrador."
             },
             "answer": {
-              "text": "check",
+              "text": "I replaced the word stuff with shoes because it is clearer.",
               "accepted": [
-                "check",
-                "read",
-                "correct",
-                "review"
+                "I replaced the word stuff with shoes because it is clearer.",
+                "I changed the word stuff to shoes because it is clearer.",
+                "I replaced stuff with shoes because it is more exact."
               ]
             },
             "choices": [],
@@ -1539,16 +1549,40 @@
               "variantSeed": "0",
               "variantId": "en.n5.c97.r03.seed-0",
               "feedback": {
-                "es": "Have + persona + verbo base: la persona hace la acción por ti."
+                "es": "El registro dice qué sustituyes, por cuál y por qué: replaced + palabra vaga + with + palabra exacta + because it is clearer."
               },
-              "text": "I had my teacher ___ my draft."
+              "text": "Borrador: «I bought some stuff.» Tu registro: sustituiste la palabra vaga «stuff» por «shoes» porque es más clara.",
+              "scoring": {
+                "wordRange": [
+                  6,
+                  22
+                ],
+                "evidenceGroups": [
+                  [
+                    "replaced",
+                    "changed",
+                    "substituted"
+                  ],
+                  [
+                    "stuff"
+                  ],
+                  [
+                    "shoes"
+                  ],
+                  [
+                    "because",
+                    "so",
+                    "as it is"
+                  ]
+                ]
+              }
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:2bfaf461d42f9aaf651257a2ecc8d5dbf4ccdea52fc4a8a7683f543ea7031abe"
+            "contentHash": "sha256:0c8a5a81731df9e095075c1bf22377ef30af9b718671be0c89ea3ac3a41852d5"
           }
         ]
       },
@@ -1764,13 +1798,13 @@
             },
             "choices": [
               {
-                "text": "Both say the library has a café."
+                "text": "Both say it closes at six."
               },
               {
-                "text": "Both say the library opens on Tuesday."
+                "text": "Both say it closes at eight."
               },
               {
-                "text": "Both say the library opens on Monday."
+                "text": "Both say it opens at nine."
               }
             ],
             "teaches": [
@@ -1782,12 +1816,12 @@
               "variantSeed": "0",
               "variantId": "en.n5.c98.pg01.seed-0",
               "feedback": {
-                "es": "Tanto el texto como el audio dicen que la biblioteca abre el lunes. Solo el audio menciona la cafetería."
+                "es": "Las dos fuentes dicen que la biblioteca abre a las nueve. El cierre es distinto: seis en el texto y ocho en el audio."
               },
               "hint": {
                 "es": "Busca el dato que aparece tanto en el texto como en el audio."
               },
-              "audio": "The new library opens on Monday at nine, and it has a café.",
+              "audio": "The new library opens on Monday at nine, and it stays open until eight.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -1796,14 +1830,14 @@
               ],
               "maxReplays": 3,
               "revealTranscriptAfterAttempt": true,
-              "text": "Article: The new library opens on Monday at nine."
+              "text": "Article: The new library opens on Monday at nine and closes at six."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:d3103781ab80750c2fb54524b920237bbe8377c4439cbb4bb8b870b6f3d01d46"
+            "contentHash": "sha256:2b752138df8c01f3c16556ab6e8a87c2ca5446a4659052000cf93bbd664bdc40"
           },
           {
             "id": "en.n5.c98.pg02",
@@ -1822,7 +1856,7 @@
                 "text": "The day of the concert."
               },
               {
-                "text": "The place of the concert."
+                "text": "Nothing: both sources agree."
               }
             ],
             "teaches": [
@@ -1834,12 +1868,12 @@
               "variantSeed": "0",
               "variantId": "en.n5.c98.pg02.seed-0",
               "feedback": {
-                "es": "El texto dice ocho libras y el audio diez: las fuentes difieren en el precio. El concierto y el lugar no cambian."
+                "es": "El texto dice ocho libras y el audio diez: las fuentes difieren en el precio. El día (sábado) coincide."
               },
               "hint": {
                 "es": "Compara las dos cifras: ¿qué dato cambia?"
               },
-              "audio": "Tickets for the concert cost ten pounds at the door.",
+              "audio": "The concert is on Saturday, and tickets cost ten pounds at the door.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -1848,14 +1882,14 @@
               ],
               "maxReplays": 3,
               "revealTranscriptAfterAttempt": true,
-              "text": "Article: Tickets for the concert cost eight pounds."
+              "text": "Article: The concert is on Saturday, and tickets cost eight pounds."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:ae6485863290ddc705cf77ff3aee5d520193db6c0193d08559acf2bba77f3a4d"
+            "contentHash": "sha256:a1bad00ea4becaf1869d84fd973934b76de3ae78c44014afe872623c4d518934"
           },
           {
             "id": "en.n5.c98.pg03",
@@ -1947,10 +1981,10 @@
             },
             "choices": [
               {
-                "text": "The match starts at six."
+                "text": "The gates open at five."
               },
               {
-                "text": "The match is cancelled."
+                "text": "The match starts at four."
               },
               {
                 "text": "The gates open at four."
@@ -1965,7 +1999,7 @@
               "variantSeed": "0",
               "variantId": "en.n5.c98.p02.seed-0",
               "feedback": {
-                "es": "El audio añade que las puertas abren a las cuatro; la hora del partido ya estaba en la nota y no hay cancelación."
+                "es": "El audio añade que las puertas abren a las cuatro; la hora del partido (las seis) ya estaba en la nota."
               },
               "audio": "The match starts at six, but the gates open at four.",
               "audioMode": "tts",
@@ -1983,7 +2017,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:4f64113006c72275db28f839d67aa4c4a8e52cf84a16cac41848d1c751edf7fa"
+            "contentHash": "sha256:ac9099c2a039fd190294c088452683e58036fcb415fc171b570c6377c6d384d0"
           },
           {
             "id": "en.n5.c98.p03",
@@ -2098,7 +2132,7 @@
               "feedback": {
                 "es": "El texto da el precio (seis mil libras) y el audio no lo dice. La apertura en marzo la mencionan las dos fuentes."
               },
-              "audio": "The new gym will open in March, but the price is still a secret.",
+              "audio": "The school's new gym will open in March, but the price is still a secret.",
               "audioMode": "tts",
               "languageCode": "en",
               "speedOptions": [
@@ -2114,7 +2148,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:b5ed91d2737eb2b8b7aef068502055d26f0716f377f135ca053e44cc4ebaa1b2"
+            "contentHash": "sha256:e0430ad59444d66784a0bfd32a9d72765f28572a7a6349ef91d9f06e897c98c7"
           },
           {
             "id": "en.n5.c98.e02",
@@ -2133,7 +2167,7 @@
                 "text": "The sources differ on how students travel."
               },
               {
-                "text": "The sources agree that nobody walks."
+                "text": "The sources differ on how many students there are."
               }
             ],
             "teaches": [],
@@ -2163,7 +2197,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:0bcbfee11a23fad3a86e7fb45c9d7dbed666be1d6fbbf3b4518f3c2927e7f6b1"
+            "contentHash": "sha256:a406edd8465fd18a105bb152f8972d368141c7d0e63b8a8a2702553645f581aa"
           },
           {
             "id": "en.n5.c98.e03",
@@ -2257,7 +2291,7 @@
                 "text": "Both say the party is at Ana's house."
               },
               {
-                "text": "Both say the party is at Leo's house."
+                "text": "The sources differ on when the party is."
               }
             ],
             "teaches": [],
@@ -2287,7 +2321,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:c866a5f92a023245f079d607fb7a7ac94d4c649212aa660ac87d01fc3cb4b559"
+            "contentHash": "sha256:60d5aabaf6c2877d7414815fdc6ce1868ef4ae869768277e294781eb60609839"
           },
           {
             "id": "en.n5.c98.r02",
@@ -2826,7 +2860,9 @@
               "text": "In short, public transport is a small change with a big benefit.",
               "accepted": [
                 "In short, public transport is a small change with a big benefit.",
-                "In conclusion, public transport is a small change with a big benefit."
+                "In conclusion, public transport is a small change with a big benefit.",
+                "To sum up, public transport is a small change with a big benefit.",
+                "In short, using public transport is a small change with a big benefit."
               ]
             },
             "choices": [],
@@ -2848,7 +2884,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:960f3dd6d2dade9312d95e60091317f7ec90e14813f981536ee4684a472da5eb"
+            "contentHash": "sha256:578f52712fe1712c327f630bc877cf8974e55d15fa9364cbbac03f9e6d582bc9"
           }
         ],
         "evaluation": [
@@ -2863,10 +2899,10 @@
             },
             "choices": [
               {
-                "text": "Today phones in class many things."
+                "text": "My topic today is whether should phones be allowed in class."
               },
               {
-                "text": "I am going to speak about of phones."
+                "text": "I'd like to talk phones in class."
               },
               {
                 "text": "My topic today is whether phones should be allowed in class."
@@ -2881,7 +2917,7 @@
               "variantSeed": "0",
               "variantId": "en.n5.c99.e01.seed-0",
               "feedback": {
-                "es": "My topic today is whether… anuncia el tema con una estructura correcta. Las otras dos son frases incorrectas."
+                "es": "My topic today is whether… anuncia el tema y, después de whether, el sujeto va antes de should. Las otras dos tienen el orden de palabras o la preposición mal."
               },
               "text": "Vas a dar una charla sobre el uso del móvil en clase."
             },
@@ -2890,7 +2926,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:350a95a59757c6b6e8ae71a2654a2258db095f838a47471f9e1679a35fccdd6e"
+            "contentHash": "sha256:ce275c3a9705d0f20749ed65aff07158efd02c0a2b11fd530d1882a736ccbc2e"
           },
           {
             "id": "en.n5.c99.e02",
@@ -2926,33 +2962,54 @@
                 "evidenceGroups": [
                   [
                     "My topic today is",
+                    "My topic is",
                     "I'd like to talk about",
-                    "I would like to talk about"
+                    "I would like to talk about",
+                    "I'm going to talk about",
+                    "I am going to talk about",
+                    "I want to talk about",
+                    "Today I will talk about"
                   ],
                   [
                     "Firstly",
-                    "First,"
+                    "First",
+                    "To begin with",
+                    "In the first place",
+                    "The first reason"
                   ],
                   [
                     "Secondly",
-                    "Second,"
+                    "Second",
+                    "Also",
+                    "In addition",
+                    "Another reason",
+                    "The second reason"
                   ],
                   [
                     "Suppose",
                     "If every student",
                     "If all students",
-                    "If everyone"
+                    "If everyone",
+                    "If students",
+                    "Imagine",
+                    "What if"
                   ],
                   [
                     "Admittedly",
                     "It is true that",
-                    "Although some"
+                    "Although",
+                    "Even though",
+                    "Of course",
+                    "I admit",
+                    "Granted"
                   ],
                   [
                     "In short",
                     "To sum up",
                     "In conclusion",
-                    "To conclude"
+                    "To conclude",
+                    "Overall",
+                    "All in all"
                   ]
                 ]
               }
@@ -2962,7 +3019,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:6c18202a0dbccc591f81adc16079e11bfe0798a51a3be0671f19a268f7388c1e"
+            "contentHash": "sha256:2ac5d9da50220951106ce7323007ebf29e9cb2d6351f3de32d69ef96137feb41"
           },
           {
             "id": "en.n5.c99.e03",
@@ -2973,7 +3030,8 @@
             "answer": {
               "text": "started",
               "accepted": [
-                "started"
+                "started",
+                "began"
               ]
             },
             "choices": [],
@@ -2995,7 +3053,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:f308f4ece84720b8fd830b6e2a3ca3bbd8d674d98a90537592648ea6b94516b9"
+            "contentHash": "sha256:bda7ed6855f2be06a3b6de8bf2602c85b97aee77e33cf9687553e32d32c3b9ad"
           },
           {
             "id": "en.n5.c99.e04",
@@ -3084,7 +3142,8 @@
             "answer": {
               "text": "schedules",
               "accepted": [
-                "schedules"
+                "schedules",
+                "timetables"
               ]
             },
             "choices": [],
@@ -3106,26 +3165,26 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:9d6c51517cde9fa670dc38c809c73ab48cc1d51e0d82b231a72d6993a3871cd5"
+            "contentHash": "sha256:c20b1812264dd832d11e0d3322c3fabb2f8a551b6504ed14467549ed43c75cfd"
           },
           {
             "id": "en.n5.c99.r03",
             "format": "elegir",
             "prompt": {
-              "es": "¿Qué frase sirve para empezar la charla?"
+              "es": "¿Qué frase sirve como segundo argumento con su razón?"
             },
             "answer": {
               "index": 1
             },
             "choices": [
               {
-                "text": "In short, homework."
+                "text": "In short, cycling is cheaper, so families save money."
               },
               {
-                "text": "My topic today is homework."
+                "text": "Secondly, cycling is cheaper, so families save money."
               },
               {
-                "text": "Firstly, I am homework today."
+                "text": "Suppose cycling is cheaper, so families save money."
               }
             ],
             "teaches": [],
@@ -3137,16 +3196,16 @@
               "variantSeed": "0",
               "variantId": "en.n5.c99.r03.seed-0",
               "feedback": {
-                "es": "My topic today is presenta el tema. In short cierra y firstly abre un argumento."
+                "es": "Secondly abre el segundo argumento y la razón lo sostiene. In short cierra la charla y suppose plantea una hipótesis, no un argumento."
               },
-              "text": "Vas a empezar tu charla sobre los deberes."
+              "text": "Ya diste tu primer argumento sobre ir en bicicleta. Ahora das el segundo, con su razón."
             },
             "accessibility": {
               "screenReader": true,
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:9697564f3b34a43d73572b2f61e20eac0dd3fc709a585c164615c4702d2652de"
+            "contentHash": "sha256:171e1d3316696c97e858320f2cd7bb0c6208b06db3c3b8df25a451db4bd2fff6"
           }
         ]
       },
@@ -3586,10 +3645,10 @@
             },
             "choices": [
               {
-                "text": "Because the building was closed."
+                "text": "Because fewer people were visiting it."
               },
               {
-                "text": "Because the staff went on holiday."
+                "text": "Because the building needed repairs."
               },
               {
                 "text": "Because it had less money to spend."
@@ -3621,7 +3680,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:6868617ab440823149195537ee41c4d319bdf7e53f90053730b3b9fc0afed0d8"
+            "contentHash": "sha256:180b16a8cf89f2a6e70689f505bce4ac6bab3beb494e5527cc6d2a147e7cc751"
           },
           {
             "id": "en.n5.c100.p03",
@@ -3666,7 +3725,9 @@
                     "has been opening",
                     "has only opened",
                     "has opened only",
-                    "has been open only"
+                    "has been open only",
+                    "has only been opening",
+                    "has only been open"
                   ]
                 ]
               }
@@ -3676,7 +3737,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:f167ca72dafd34216c2c83404be9d3b40d7b380131b8dd8ba08164ee7985d31d"
+            "contentHash": "sha256:84e42ade34846cc90abb81164b80b9b0a37680945b6bd08b7fc5343bcc376107"
           }
         ],
         "evaluation": [
@@ -3811,10 +3872,10 @@
               "es": "Resuelve el caso nuevo en 130–170 palabras y cierra con una nota de revisión."
             },
             "answer": {
-              "text": "The youth club used to open on Saturdays, but since January it has been opening only on weekdays. The director told us that the club had run out of money, and Mr Lee said that many teenagers had nowhere else to go. If the club had asked for help earlier, it would still be open on Saturdays now, and I wish it had done that. In my view, this is arguably a mistake, because Saturday is the day when young people have the most free time. Admittedly, the club needs money. However, I think neighbours could help, and a small budget would give teenagers a safe place again. My plan is to ask the neighbours for help by March, and I am sure many of them would say yes. Final revision: I changed soon to by March, so the deadline is clear.",
+              "text": "The school bus used to stop in front of our school, but since September it has been stopping only at the station. The driver told us that the town had changed the route, and Tom said that many students had been arriving late. If the town had asked the students earlier, the bus would still stop at the school now, and I wish it had done that. In my view, this is arguably a mistake, because tired students learn less. Admittedly, the town has a small budget. However, I think the director could help, and a short talk with her would give students a safe way to school again. My plan is to speak with the director by Friday, and I am sure she would listen. Final revision: I changed soon to by Friday, so the deadline is clear.",
               "accepted": [
-                "The youth club used to open on Saturdays, but since January it has been opening only on weekdays. The director told us that the club had run out of money, and Mr Lee said that many teenagers had nowhere else to go. If the club had asked for help earlier, it would still be open on Saturdays now, and I wish it had done that. In my view, this is arguably a mistake, because Saturday is the day when young people have the most free time. Admittedly, the club needs money. However, I think neighbours could help, and a small budget would give teenagers a safe place again. My plan is to ask the neighbours for help by March, and I am sure many of them would say yes. Final revision: I changed soon to by March, so the deadline is clear.",
-                "Since January, the youth club has been opening only on weekdays, although it used to open on Saturdays. The director said that the club had run out of money, and Mr Lee told us that many teenagers had nowhere else to go. If the club had asked for help earlier, it would still be open on Saturdays today. I wish it had asked. It is arguably a mistake, because Saturday is when young people have the most free time. It is true that the club needs money, but I think neighbours could help, and a small budget would give teenagers a safe place again. I suggest asking the neighbours for help by March. Final revision: I replaced soon with by March, so the deadline is clear."
+                "The school bus used to stop in front of our school, but since September it has been stopping only at the station. The driver told us that the town had changed the route, and Tom said that many students had been arriving late. If the town had asked the students earlier, the bus would still stop at the school now, and I wish it had done that. In my view, this is arguably a mistake, because tired students learn less. Admittedly, the town has a small budget. However, I think the director could help, and a short talk with her would give students a safe way to school again. My plan is to speak with the director by Friday, and I am sure she would listen. Final revision: I changed soon to by Friday, so the deadline is clear.",
+                "Since September, the school bus has been stopping only at the station, although it used to stop in front of our school. The driver said that the town had changed the route, and Tom told us that many students had been arriving late. If the town had asked the students earlier, the bus would still stop at the school today. I wish it had asked them. It is arguably a mistake, because tired students learn less. It is true that the town has a small budget, but I think the director could help. I suggest speaking with the director by Friday, because a short talk with her would give students a safe way to school again. Final revision: I replaced soon with by Friday, so the deadline is clear."
               ]
             },
             "choices": [],
@@ -3830,7 +3891,7 @@
               "feedback": {
                 "es": "La respuesta cuenta el cambio, reporta a dos personas, imagina otra situación, argumenta con cautela y registra una revisión con qué cambió y por qué."
               },
-              "text": "Caso: el club juvenil de tu barrio. Antes abría los sábados; desde enero solo abre entre semana. La directora dijo que el club se había quedado sin dinero; el señor Lee dijo que muchos jóvenes no tenían otro sitio adonde ir. Si el club hubiera pedido ayuda antes, hoy seguiría abierto los sábados, y ojalá lo hubiera hecho. Tu postura: es un error (dilo con cautela), aunque reconoces el problema del dinero. Propuesta: pedir ayuda a los vecinos antes de marzo. Termina con una nota de revisión: un cambio que mejora tu texto.",
+              "text": "Caso nuevo: el autobús escolar de tu barrio. Antes paraba delante del colegio; desde septiembre solo para en la estación. La conductora dijo que la ciudad había cambiado la ruta, y Tom dijo que muchos alumnos llegaban tarde. Si la ciudad hubiera preguntado antes a los alumnos, hoy el autobús seguiría parando en el colegio, y ojalá lo hubiera hecho. Tu postura: es un error (dilo con cautela), aunque reconoces que el presupuesto de la ciudad es pequeño. Propuesta: hablar con la directora antes del viernes. Termina con una nota de revisión: un cambio que mejora tu texto.",
               "scoring": {
                 "wordRange": [
                   110,
@@ -3838,50 +3899,74 @@
                 ],
                 "evidenceGroups": [
                   [
-                    "used to open",
-                    "used to be open",
-                    "used to be"
+                    "used to",
+                    "until September",
+                    "before September"
                   ],
                   [
-                    "since January"
+                    "since September",
+                    "from September",
+                    "has been stopping",
+                    "has only stopped",
+                    "has stopped only"
                   ],
                   [
-                    "director told us",
-                    "director said",
-                    "director told me",
-                    "director explained"
+                    "driver told",
+                    "driver said",
+                    "driver explained",
+                    "driver mentioned"
                   ],
                   [
-                    "Mr Lee said",
-                    "Mr Lee told",
-                    "Mr Lee explained",
-                    "Mr Lee thought"
+                    "Tom said",
+                    "Tom told",
+                    "Tom explained",
+                    "Tom mentioned",
+                    "Tom added"
                   ],
                   [
-                    "If the club had asked",
-                    "if the club had looked",
-                    "If the club had called"
+                    "if the town had",
+                    "if the town hadn't",
+                    "if they had",
+                    "if they hadn't",
+                    "if it had",
+                    "if it hadn't",
+                    "if the students had"
                   ],
                   [
-                    "I wish"
+                    "I wish",
+                    "If only"
                   ],
                   [
                     "in my view",
                     "in my opinion",
                     "arguably",
-                    "it seems"
+                    "it seems",
+                    "I think",
+                    "I believe",
+                    "perhaps",
+                    "probably",
+                    "might"
                   ],
                   [
                     "Admittedly",
                     "It is true that",
-                    "Although"
+                    "Although",
+                    "Even though",
+                    "Though",
+                    "Of course",
+                    "I admit"
                   ],
                   [
                     "Final revision",
                     "Revision",
                     "I changed",
                     "I replaced",
-                    "I corrected"
+                    "I corrected",
+                    "I improved",
+                    "I rewrote",
+                    "I added",
+                    "I cut",
+                    "I fixed"
                   ]
                 ]
               }
@@ -3891,7 +3976,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:19c6baf95f778a4178a0791be7dd9465237573aa000f34fdc69eb9d5c9f1efbb"
+            "contentHash": "sha256:db592e49340e0208eb233e90c393015b2c1028af4399f7d0d27dfb21f902195f"
           }
         ],
         "review": [
@@ -3952,7 +4037,7 @@
                 "text": "Having played football on Saturday."
               },
               {
-                "text": "Having changed the plan."
+                "text": "Having told nobody about the plan."
               }
             ],
             "teaches": [],
@@ -3981,7 +4066,7 @@
               "highContrast": true,
               "largeText": true
             },
-            "contentHash": "sha256:f9f24563cb550fffee69a5828cb3b5e0f19f465fca8282be05a76c038aeeeba1"
+            "contentHash": "sha256:7b74d8899da1ac9f1222da159fd76fd0f1a911aef6780e6809a8576698d5aebb"
           },
           {
             "id": "en.n5.c100.r03",

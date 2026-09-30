@@ -48,7 +48,7 @@ Set<String> basesFlexion(String w) {
 
 bool palabraConocida(String w, Set<String> conocidas) =>
     conocidas.contains(w) ||
-    RegExp(r'^\d+$').hasMatch(w) ||
+    RegExp(r'\d').hasMatch(w) ||
     basesFlexion(w).any(conocidas.contains);
 
 /// Problemas pedagógicos y de datos de una ruta. Vacío = íntegra.

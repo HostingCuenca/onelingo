@@ -177,8 +177,8 @@
           },
           {
             "hablante": "Sara",
-            "texto": "We did, yes. I'd tend to say we check the landlord's email first.",
-            "traduccion": "Sí, lo hicimos. Yo tendería a decir que revisemos primero el correo del casero."
+            "texto": "We did, yes. I'd tend to say we should check the landlord's email first.",
+            "traduccion": "Sí, lo hicimos. Yo tendería a decir que deberíamos revisar primero el correo del casero."
           }
         ],
         "item": {
@@ -196,7 +196,7 @@
             }
           ],
           "respuesta": 0,
-          "feedback": "Sara termina con «I'd tend to say we check the contract first»: propone comprobar el correo del casero, no pagar ni llamar aún."
+          "feedback": "Sara termina con «I'd tend to say we should check the landlord's email first»: propone revisar el correo del casero, no pagar ni llamar aún."
         }
       },
       "tabla": {
@@ -599,5 +599,18 @@
         ]
       }
     }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Corregido feedback de C32 que citaba 'contract' cuando el diálogo dice 'email'; 'I'd tend to say we should check' más natural.",
+      "Quitado 'did not'/'would not' como respuestas de colas (no válidas); añadido 'so long as' (C33), 'reasonable/great' (C31), 'understand' (C35) como respuestas defendibles.",
+      "C32: rúbrica de suavizar ya no acepta 'I'm not sure I'd agree' (invertía el sentido).",
+      "C34: modelo de escritura ampliado (~67 palabras) y rúbrica ajustada; consigna de repaso ya no contradice 'what if'.",
+      "C35: modelo con 'would be too much work' y audio de repaso sin incoherencia (sábados vs días laborables).",
+      "Dificultad lingüística baja para B2 alto pero consistente con el vocabulario enseñado; P2 sin bloquear."
+    ]
   }
 }

@@ -1,0 +1,430 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 46,
+    "end": 50
+  },
+  "classes": {
+    "en.n6.class-46": {
+      "explicacion": {
+        "titulo": "Cohesión léxica: la misma idea con otras palabras",
+        "texto": "Un texto bien escrito no repite siempre la misma palabra, pero se sigue sin perder el hilo. Tres recursos: sinónimo (lane → route), palabra más general (apples, oranges → the fruit) y familia de palabras (reduce → a reduction). Las palabras que remiten a la misma idea forman una cadena léxica. Al leer, pregúntate: ¿esta palabra nueva es otra cosa o la misma idea con otro nombre? Un sinónimo no siempre es intercambiable; si necesitas precisión, repite el término clave."
+      },
+      "patron": {
+        "texto": "Idea + otra palabra para la misma idea:",
+        "formula": [
+          {
+            "texto": "a new cycle lane",
+            "nota": "primera mención de la idea"
+          },
+          {
+            "texto": "The route",
+            "nota": "sinónimo: mismo referente, otra palabra"
+          },
+          {
+            "texto": "apples and oranges → the fruit",
+            "nota": "palabra más general que reúne varias"
+          },
+          {
+            "texto": "reduce → a reduction",
+            "nota": "misma familia: cambia de verbo a nombre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The council wants to reduce traffic. The reduce will help the air.",
+          "correcto": "The council wants to reduce traffic. The reduction will help the air.",
+          "explicacion": "Después de The hace falta un nombre: reduction. Reduce es un verbo."
+        },
+        {
+          "incorrecto": "Shops, bakeries and markets are opening. These business are creating jobs.",
+          "correcto": "Shops, bakeries and markets are opening. These businesses are creating jobs.",
+          "explicacion": "These va con plural: businesses, no business."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom leen un artículo sobre un nuevo carril bici.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The article says the council opened a new lane. Later it says the route. Is that a different thing?",
+            "traduccion": "El artículo dice que el ayuntamiento abrió un carril. Después dice el trayecto. ¿Es otra cosa?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No, it is the same thing. The writer uses route to avoid repeating lane.",
+            "traduccion": "No, es lo mismo. El autor usa route para no repetir lane."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the reduction? Before, it says reduce traffic.",
+            "traduccion": "¿Y la reducción? Antes dice reducir el tráfico."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Same idea: reduce is the verb and reduction is the noun.",
+            "traduccion": "La misma idea: reduce es el verbo y reduction es el nombre."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué el autor usa «route» después de «lane»?",
+          "opciones": [
+            {
+              "es": "Para no repetir la palabra lane."
+            },
+            {
+              "es": "Porque el carril y la ruta son cosas distintas."
+            },
+            {
+              "es": "Porque route es una palabra más formal."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica que route evita repetir lane: es la misma cosa con otro nombre. No son cosas distintas y nadie habla de formalidad."
+        }
+      }
+    },
+    "en.n6.class-47": {
+      "explicacion": {
+        "titulo": "Whether or not, rather than y otros contrastes",
+        "texto": "Estas estructuras comparan opciones con precisión. Whether… or (not): «tanto si… como si no» (Whether it rains or not). Rather than: «en lugar de», con la misma forma a los dos lados (walk rather than drive). As well as: «además de», suma un elemento (a river as well as a park). Not… but…: «no… sino…» (not in Norton but in Weston). Y repasa los correlativos: both… and suma, either… or elige y neither… nor niega las dos cosas con un verbo afirmativo."
+      },
+      "patron": {
+        "texto": "Dos opciones con la misma forma:",
+        "formula": [
+          {
+            "texto": "Whether it rains",
+            "nota": "tanto si… (no cambia nada)"
+          },
+          {
+            "texto": "or not,",
+            "nota": "…como si no"
+          },
+          {
+            "texto": "walk rather than drive",
+            "nota": "rather than: misma forma a los dos lados"
+          },
+          {
+            "texto": "a river as well as a park",
+            "nota": "as well as: además de"
+          },
+          {
+            "texto": "not in Norton but in Weston",
+            "nota": "not… but…: no… sino…"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Whether it rains or if not, the festival starts at six.",
+          "correcto": "Whether it rains or not, the festival starts at six.",
+          "explicacion": "Se dice whether… or not; no se traduce «o si no» con or if not."
+        },
+        {
+          "incorrecto": "Neither city doesn't have a zoo.",
+          "correcto": "Neither city has a zoo.",
+          "explicacion": "Neither ya es negativo: el verbo va en afirmativo (has). Con doesn't habría doble negación."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo eligen una ciudad para una excursión.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Norton or Weston? Whether it rains or not, I want to go to a beach.",
+            "traduccion": "¿Norton o Weston? Llueva o no, quiero ir a una playa."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then it is not Norton but Weston. Norton has a river as well as a park, but no beach.",
+            "traduccion": "Entonces no es Norton, sino Weston. Norton tiene un río además de un parque, pero no playa."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Both cities have museums, but neither city has a zoo.",
+            "traduccion": "Las dos ciudades tienen museos, pero ninguna tiene zoológico."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Fine. We can take either the train or the bus.",
+            "traduccion": "Bien. Podemos tomar el tren o el autobús."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué ciudad eligen para ir a la playa?",
+          "opciones": [
+            {
+              "es": "Weston, porque tiene playa."
+            },
+            {
+              "es": "Norton, porque tiene río y parque."
+            },
+            {
+              "es": "Ninguna, porque no hay zoológico."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «not Norton but Weston»: Norton tiene río y parque, pero no playa. El zoológico no decide nada: ninguna ciudad lo tiene."
+        }
+      }
+    },
+    "en.n6.class-48": {
+      "explicacion": {
+        "titulo": "Seguir el hilo: a qué remite cada palabra",
+        "texto": "Un texto se mantiene unido porque unas palabras remiten a otras. This señala algo ya dicho, a veces una frase entera. The former y the latter son «el primero» y «el segundo» de dos cosas nombradas. One/ones sustituyen un nombre contable ya mencionado (the old houses… the new ones). Did so o does, too sustituyen un verbo con su complemento. Such recoge un tipo de situación descrita. Para leer, busca hacia atrás el referente y comprueba que concuerda en número y sentido."
+      },
+      "patron": {
+        "texto": "Referencia + a qué remite:",
+        "formula": [
+          {
+            "texto": "The council closed the bridge. This caused delays.",
+            "nota": "this: toda la acción anterior"
+          },
+          {
+            "texto": "The former is quiet; the latter is busy.",
+            "nota": "el primero / el segundo de dos"
+          },
+          {
+            "texto": "the old houses… the new ones",
+            "nota": "ones: el mismo nombre en plural"
+          },
+          {
+            "texto": "a few did so",
+            "nota": "did so: el verbo ya dicho (moved)"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The old houses are cold, but the new one are warm.",
+          "correcto": "The old houses are cold, but the new ones are warm.",
+          "explicacion": "Si se sustituye un plural (houses), se usa ones; one es singular."
+        },
+        {
+          "incorrecto": "Norton is quiet and Weston is busy. The later is my favourite.",
+          "correcto": "Norton is quiet and Weston is busy. The latter is my favourite.",
+          "explicacion": "Later es «más tarde»; para «el segundo de los dos» se dice the latter."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom leen un texto sobre Norton y Weston y comentan a qué se refieren algunas palabras.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The text says Norton and Weston are growing. The former is quiet, the latter is busy.",
+            "traduccion": "El texto dice que Norton y Weston están creciendo. La primera es tranquila, la segunda es animada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So the former is Norton, and the latter is Weston.",
+            "traduccion": "Entonces la primera es Norton y la segunda es Weston."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Right. And the bridge closed. This caused delays. What does this mean?",
+            "traduccion": "Exacto. Y el puente cerró. Esto causó retrasos. ¿Qué significa this?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It means the closing of the bridge caused the delays.",
+            "traduccion": "Significa que el cierre del puente causó los retrasos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué se refiere «the latter»?",
+          "opciones": [
+            {
+              "es": "A Weston."
+            },
+            {
+              "es": "A Norton."
+            },
+            {
+              "es": "Al puente."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom aclara que the former es Norton y the latter es Weston. El puente se menciona después, con this."
+        }
+      }
+    },
+    "en.n6.class-49": {
+      "explicacion": {
+        "titulo": "De frases sueltas a un texto fluido",
+        "texto": "Un texto fluido une frases cortas con tres herramientas. Conectores: however, although y whereas contrastan; as a result marca la consecuencia; in addition suma una idea. Correlativos: both… and, neither… nor o either… or juntan dos datos en una sola frase. Referencias: it, they, this o these evitan repetir nombres. Método: agrupa las frases por tema, une con un conector, cambia las repeticiones por una referencia y relee para comprobar que cada it o this tiene un referente claro."
+      },
+      "patron": {
+        "texto": "Frase corta + conector + referencia:",
+        "formula": [
+          {
+            "texto": "Norton is small; however,",
+            "nota": "conector de contraste: ; antes y , después"
+          },
+          {
+            "texto": "it has a lively market.",
+            "nota": "it: referencia que evita repetir Norton"
+          },
+          {
+            "texto": "Both cities have parks, and neither has a zoo.",
+            "nota": "correlativo: dos datos en una frase"
+          },
+          {
+            "texto": "As a result, commuters save time.",
+            "nota": "conector de resultado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Norton is small, however it has a lively market.",
+          "correcto": "Norton is small; however, it has a lively market.",
+          "explicacion": "However no une dos oraciones con una coma: necesita punto y coma o punto antes y coma después."
+        },
+        {
+          "incorrecto": "Although Weston is busy, but its parks are calm.",
+          "correcto": "Although Weston is busy, its parks are calm.",
+          "explicacion": "Although ya expresa el contraste: no se añade but, como se haría con «aunque… pero»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos revisan un texto con frases demasiado cortas.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "My sentences are too short: Norton is small. Norton has a market. The market is lively.",
+            "traduccion": "Mis frases son demasiado cortas: Norton es pequeña. Norton tiene un mercado. El mercado es animado."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Join them: Norton is small; however, it has a lively market.",
+            "traduccion": "Únelas: Norton es pequeña; sin embargo, tiene un mercado animado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Better! Now: Weston has fast trains. Norton has no trains.",
+            "traduccion": "¡Mejor! Ahora: Weston tiene trenes rápidos. Norton no tiene trenes."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Try neither and nor: Weston has fast trains, whereas Norton has neither trains nor trams.",
+            "traduccion": "Prueba neither y nor: Weston tiene trenes rápidos, mientras que Norton no tiene ni trenes ni tranvías."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué usa Carlos para unir «Norton is small» y «Norton has a lively market»?",
+          "opciones": [
+            {
+              "es": "Un conector de contraste (however) y el pronombre it."
+            },
+            {
+              "es": "Una pregunta retórica y un cleft."
+            },
+            {
+              "es": "Una lista de tres elementos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos escribe «Norton is small; however, it has a lively market»: however contrasta y it evita repetir Norton."
+        }
+      }
+    },
+    "en.n6.class-50": {
+      "explicacion": {
+        "titulo": "Comparar dos lugares y defender una preferencia",
+        "texto": "Para comparar dos lugares con un texto cohesionado: 1) compara los mismos aspectos en los dos (precio, ruido, servicios); 2) contrasta con whereas, however o although y suma con in addition; 3) resume lo común con both… and o neither… nor; 4) evita repetir con it, the former, the latter o ones; 5) cierra con tu preferencia justificada (I prefer X to Y because…). Si alguien objeta, reconoce primero (That may be true) y contesta después con but y un dato."
+      },
+      "patron": {
+        "texto": "Dato + contraste + correlativo + preferencia:",
+        "formula": [
+          {
+            "texto": "Riverside is cheaper, whereas Hilltop is quieter.",
+            "nota": "contraste: whereas compara dos barrios"
+          },
+          {
+            "texto": "Neither neighbourhood has a cinema.",
+            "nota": "correlativo: neither resume lo que falta"
+          },
+          {
+            "texto": "The former is noisy; the latter is calm.",
+            "nota": "referencia: the former / the latter"
+          },
+          {
+            "texto": "I prefer Riverside because it is closer to work.",
+            "nota": "preferencia justificada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I prefer Riverside than Hilltop.",
+          "correcto": "I prefer Riverside to Hilltop.",
+          "explicacion": "Prefer se construye con to, no con than: prefer X to Y."
+        },
+        {
+          "incorrecto": "Riverside is more cheap than Hilltop.",
+          "correcto": "Riverside is cheaper than Hilltop.",
+          "explicacion": "Los adjetivos cortos forman el comparativo con -er: cheaper, no more cheap."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia defiende Riverside ante Leo, que prefiere Hilltop.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I prefer Riverside because it is cheaper and closer to work.",
+            "traduccion": "Prefiero Riverside porque es más barato y está más cerca del trabajo."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "But Riverside is noisy, whereas Hilltop is quiet.",
+            "traduccion": "Pero Riverside es ruidoso, mientras que Hilltop es tranquilo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That may be true, but the price matters more to me.",
+            "traduccion": "Puede ser cierto, pero el precio me importa más."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Fair. I still prefer Hilltop, but both have good schools.",
+            "traduccion": "Justo. Yo sigo prefiriendo Hilltop, pero los dos tienen buenos colegios."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo responde Mia a la objeción del ruido?",
+          "opciones": [
+            {
+              "es": "Reconoce que puede ser cierto, pero dice que el precio le importa más."
+            },
+            {
+              "es": "Niega que Riverside tenga ruido."
+            },
+            {
+              "es": "Cambia de opinión y elige Hilltop."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «That may be true, but the price matters more to me»: acepta el punto y mantiene su preferencia con una razón."
+        }
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C47/C50 neither...nor: concordancia verificada (Neither Norton nor Weston has; neither city has; neither one goes; Neither Riverside nor Hilltop has). Corregida la nota con '(has, no hasn't)' y la incoherencia 'best beach' frente a 'Norton no tiene playa'. Eval[1] de C47 pasa a nombrar as well as/rather/neither (antes 'and' era igual de válido).",
+      "C49: modelo de escritura incoherente ('whereas it has no lake', 'As a result' sin causa) reescrito; grupo único de conectores (bastaba 'but') dividido en contraste y adición/resultado. Nota: el texto fuente solo tiene 37 palabras, el modelo de 46 queda por debajo del 50 % del mapa pero ampliar obligaría a inventar datos.",
+      "C50: eval[0] contaba 'lugares' pero Hilltop también es un lugar; ahora cuenta edificios. Rúbrica: se quita 'but' del conector complejo, se añade grupo de justificación (because/matter more) y variantes de cheap/prefer/objeción; modelo ampliado a 65 palabras.",
+      "C46/C48: escucha con 'hall' ambigua (puede ser otro sitio) cambiada a 'place'; aceptada 'improvements'; traducción infiel ('vacíos') corregida; distractores absurdos de did so sustituidos; C49 practica[2] ya no repite literal la frase de la enseñanza."
+    ]
+  }
+}

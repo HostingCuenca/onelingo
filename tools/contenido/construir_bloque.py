@@ -68,8 +68,22 @@ def raices(w: str) -> set[str]:
     return res
 
 
+ORTOGRAFIA = (("our", "or"), ("ise", "ize"), ("yse", "yze"), ("tre", "ter"), ("ogue", "og"),
+              ("lled", "led"), ("lling", "ling"), ("ence", "ense"))
+
+
+def variantes_ortograficas(w: str) -> set[str]:
+    """Variantes británica/estadounidense (neighbour/neighbor, organise/organize)."""
+    res = {w}
+    for uk, us in ORTOGRAFIA:
+        for a, b in ((uk, us), (us, uk)):
+            if a in w:
+                res.add(w.replace(a, b))
+    return res
+
+
 def conocida(w: str, lexico: set[str]) -> bool:
-    return bool(raices(w) & lexico)
+    return any(raices(v) & lexico for v in variantes_ortograficas(w))
 
 
 def nombres_propios(texto: str) -> set[str]:

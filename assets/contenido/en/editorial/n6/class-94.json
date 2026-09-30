@@ -214,6 +214,10 @@
             "my",
             "uncle's",
             "village"
+          ],
+          "accepted": [
+            "Every summer we would spend a week in my uncle's village",
+            "We would spend a week in my uncle's village every summer"
           ]
         },
         "choices": [],
@@ -229,7 +233,7 @@
             "es": "Would + verbo base cuenta un hábito que se repetía en el pasado."
           },
           "hint": {
-            "es": "Empieza con Every summer y usa would + verbo base."
+            "es": "Empieza por la expresión de tiempo y usa el modal de los hábitos pasados."
           }
         },
         "accessibility": {
@@ -237,7 +241,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:e5d4f3c5f88ad8419434ca14a5af3c6701eef30bfa403d069810b0756367a5e2"
+        "contentHash": "sha256:f0ce6df8a62d8a439619728562b445632a1d25e759e713169f8c6cf6add64f51"
       },
       {
         "id": "en.n6.c94.pg02",
@@ -271,7 +275,7 @@
             "es": "Must have + participio deduce un hecho pasado a partir de una prueba: el suelo mojado."
           },
           "hint": {
-            "es": "Hay una prueba y una conclusión segura: busca must have."
+            "es": "Hay una prueba y una conclusión segura: ¿qué modal deduce el pasado?"
           },
           "text": "El suelo está mojado junto a la ventana. Estás seguro de que alguien la dejó abierta."
         },
@@ -280,7 +284,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:115ee446c960b16703ad9aa4ba19fde8cefb9b8dc229885ccf28db85972df921"
+        "contentHash": "sha256:d08c9c6f3a3ec3cd05e6b3bc65f2de7905cc1e7728ffc6e33e36fc6e407d9928"
       },
       {
         "id": "en.n6.c94.pg03",
@@ -307,7 +311,7 @@
             "es": "Un verbo en -ing al inicio une dos acciones hechas por la misma persona."
           },
           "hint": {
-            "es": "Verbo + -ing: la misma persona camina y encuentra."
+            "es": "Una sola persona hace las dos acciones: acorta la primera con una forma en -ing."
           },
           "text": "___ along the beach, I found an old bottle."
         },
@@ -316,7 +320,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:308e00d377eb49c34d36ab94378a06fcac0b87571263e9ad40e2cedb75e9d435"
+        "contentHash": "sha256:3d8bdce536d5bf996c0fbf9676278692339831816b27eaa67dd95d7452b7f57a"
       }
     ],
     "practice": [
@@ -451,7 +455,10 @@
           "accepted": [
             "It turned out that the thief was my neighbour.",
             "The twist was that the thief was my neighbour.",
-            "The thief turned out to be my neighbour."
+            "The thief turned out to be my neighbour.",
+            "It turned out that the thief was my neighbor.",
+            "The twist was that the thief was my neighbor.",
+            "The thief turned out to be my neighbor."
           ]
         },
         "choices": [],
@@ -466,14 +473,38 @@
           "feedback": {
             "es": "El giro se cuenta con it turned out that o the twist was that, más el dato inesperado."
           },
-          "text": "Giro: la persona que robó la bici resultó ser el vecino."
+          "text": "Giro: la persona que robó la bici resultó ser el vecino.",
+          "scoring": {
+            "wordRange": [
+              5,
+              14
+            ],
+            "evidenceGroups": [
+              [
+                "it turned out",
+                "the twist was",
+                "turned out to be",
+                "the twist is"
+              ],
+              [
+                "thief",
+                "stole",
+                "stolen",
+                "took"
+              ],
+              [
+                "neighbour",
+                "neighbor"
+              ]
+            ]
+          }
         },
         "accessibility": {
           "screenReader": true,
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:ed3b5921e5ff5b127d786107cde5320d86593e79b4c3f66029e804a684af8a8e"
+        "contentHash": "sha256:edf61d7604d34ecd029a0ec34ecf6c26813a1e6a38bc53a911247837e89ba204"
       }
     ],
     "evaluation": [
@@ -529,7 +560,7 @@
         "id": "en.n6.c94.e02",
         "format": "elegir",
         "prompt": {
-          "es": "¿Qué frase usa bien el participio inicial?"
+          "es": "Corrige la frase del recuadro: ¿cuál usa bien el participio inicial?"
         },
         "answer": {
           "index": 1
@@ -563,7 +594,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:833e346b199b3326f40d63185d3c5376f7396df9caaf3c6523c19c50890828f1"
+        "contentHash": "sha256:43fbe24908f73f9e128e31d3e924ff7a392cd2ceda435a3b1f3c2bdea56bf76c"
       },
       {
         "id": "en.n6.c94.e03",
@@ -602,13 +633,13 @@
         "id": "en.n6.c94.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe tu relato con giro (50–110 palabras) con estos datos."
+          "es": "Escribe tu relato con giro (55–120 palabras) con estos datos."
         },
         "answer": {
-          "text": "When I was a child, we would spend every summer at my grandparents' farm. One night, the cake had disappeared, so the cat must have eaten it. Walking into the kitchen, I noticed a strange smell. I wish I had locked the door! The twist was that my cousin was the thief. He had eaten the cake and blamed the cat.",
+          "text": "When I was a child, we would spend every summer at my grandparents' farm. One night, the cake had disappeared, so the cat must have eaten it. Walking into the kitchen, I noticed a strange smell. I wish I had locked the door! The twist was that my cousin was the thief. He had eaten the cake and blamed the cat. Everyone laughed, and he promised never to do it again.",
           "accepted": [
-            "When I was a child, we would spend every summer at my grandparents' farm. One night, the cake had disappeared, so the cat must have eaten it. Walking into the kitchen, I noticed a strange smell. I wish I had locked the door! The twist was that my cousin was the thief. He had eaten the cake and blamed the cat.",
-            "When I was little, we used to spend every summer at my grandparents' farm. One night, the cake had disappeared, so the cat must have taken it. Entering the kitchen, I noticed a strange smell. I wish I had locked the door. It turned out that my cousin was the thief. He had eaten the cake and blamed the cat."
+            "When I was a child, we would spend every summer at my grandparents' farm. One night, the cake had disappeared, so the cat must have eaten it. Walking into the kitchen, I noticed a strange smell. I wish I had locked the door! The twist was that my cousin was the thief. He had eaten the cake and blamed the cat. Everyone laughed, and he promised never to do it again.",
+            "When I was little, we used to spend every summer at my grandparents' farm. One night, the cake had disappeared, so the cat must have taken it. Entering the kitchen, I noticed a strange smell. I wish I had locked the door. It turned out that my cousin was the thief. He had eaten the cake and blamed the cat. Everyone laughed, and he promised never to do it again."
           ]
         },
         "choices": [],
@@ -626,35 +657,43 @@
           "text": "Datos: de niño, cada verano ibas a la granja de tus abuelos y jugabas con tu primo (hábito). Una noche desapareció el pastel y dedujiste que fue el gato. Al entrar en la cocina notaste un olor extraño. Te arrepientes de no haber cerrado la puerta. Giro: el culpable era tu primo.",
           "scoring": {
             "wordRange": [
-              50,
-              110
+              55,
+              120
             ],
             "evidenceGroups": [
               [
+                "we would",
+                "i would",
                 "would spend",
                 "would play",
-                "used to spend",
-                "used to play"
+                "would go",
+                "would visit",
+                "would help",
+                "used to"
               ],
               [
-                "must have eaten",
-                "must have taken",
-                "must have stolen"
+                "must have"
               ],
               [
-                "Walking into",
-                "Walking in",
-                "Entering the kitchen",
-                "Going into the kitchen",
-                "Coming into the kitchen"
+                "walking into",
+                "walking in",
+                "entering the kitchen",
+                "going into the kitchen",
+                "coming into the kitchen",
+                "stepping into the kitchen",
+                "walking to the kitchen",
+                "having entered"
               ],
               [
-                "I wish I had",
-                "I wish we had"
+                "i wish i had",
+                "i wish we had",
+                "i wish i'd",
+                "i wish we'd"
               ],
               [
-                "The twist was",
-                "It turned out",
+                "the twist was",
+                "the twist",
+                "it turned out",
                 "turned out"
               ]
             ]
@@ -665,7 +704,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:457d8ab620d66b5591ff51503b98dd76d69843ed9a2fc93377161b5f9b3bcaf0"
+        "contentHash": "sha256:1720b00fa8dec7c744f3af0c55f00da8c022653b3d6990abde22bed4bb0bed74"
       }
     ],
     "review": [
@@ -716,12 +755,12 @@
           "es": "Ordena: «Cuando era pequeña, veíamos películas cada sábado por la mañana.»"
         },
         "answer": {
-          "text": "When I was little, we would watch films every Saturday morning",
+          "text": "When I was little we would watch films every Saturday morning",
           "tokens": [
             "When",
             "I",
             "was",
-            "little,",
+            "little",
             "we",
             "would",
             "watch",
@@ -729,6 +768,10 @@
             "every",
             "Saturday",
             "morning"
+          ],
+          "accepted": [
+            "When I was little we would watch films every Saturday morning",
+            "We would watch films every Saturday morning when I was little"
           ]
         },
         "choices": [],
@@ -749,7 +792,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:be20eb2872b66d3498316c6aad507b97d04d927498351d4c5d8b3ef8283c22d9"
+        "contentHash": "sha256:70f799c2eb7dcb71c4b265104ca28cb9d924b387224f0573d58c22f18d67f037"
       },
       {
         "id": "en.n6.c94.r03",

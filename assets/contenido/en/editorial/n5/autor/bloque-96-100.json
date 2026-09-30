@@ -230,7 +230,11 @@
             "formato": "ordenar",
             "consigna": "Ordena: «Sin embargo, el resultado sería distinto si nos hubieran preguntado.»",
             "feedback": "Es un condicional mixto: if + had + participio para la causa pasada y would be para el resultado de hoy.",
-            "respuesta": "However the result would be different if they had asked us"
+            "respuesta": "However the result would be different if they had asked us",
+            "aceptadas": [
+              "However if they had asked us the result would be different",
+              "If they had asked us the result would be different however"
+            ]
           }
         ],
         "evaluacion": [
@@ -315,14 +319,18 @@
             "aceptadas": [
               "claim",
               "say",
-              "believe"
+              "believe",
+              "think"
             ]
           },
           {
             "formato": "ordenar",
             "consigna": "Ordena: «En mi opinión, deberíamos leer más despacio.»",
             "feedback": "In my view presenta la postura del autor, seguida de la idea que defiende.",
-            "respuesta": "In my view we should read more slowly"
+            "respuesta": "In my view we should read more slowly",
+            "aceptadas": [
+              "We should read more slowly in my view"
+            ]
           }
         ]
       },
@@ -436,7 +444,7 @@
         },
         {
           "en": "After checking the tenses, she wrote: I have lived here since June.",
-          "es": "Después de comprobar los tiempos verbales, escribió: Vivo aquí desde junio.",
+          "es": "Después de comprobar los tiempos verbales, escribió: Llevo viviendo aquí desde junio.",
           "nota": "Revisar los tiempos: since + punto de inicio pide present perfect."
         },
         {
@@ -628,9 +636,9 @@
           {
             "formato": "elegir",
             "consigna": "¿Cuál es la mejor versión del borrador, sin repeticiones?",
-            "feedback": "Une las ideas con conectores y elimina la repetición de very tall y very good. Las otras versiones repiten o usan un conector que no encaja.",
+            "feedback": "Une las ideas y elimina la repetición de tall y good. Una versión sigue repitiendo las frases cortas, y la otra usa although, que contrasta dos ideas que no se oponen.",
             "opciones": [
-              "My brother is very tall, so he plays football, and he is very good at it.",
+              "My brother is very tall and plays football very well.",
               "My brother is tall. He is very tall. He plays football and he is very good.",
               "My brother is tall, although he plays football, and he is very good."
             ],
@@ -646,7 +654,8 @@
             "respuesta": "I bought a cinema ticket yesterday.",
             "aceptadas": [
               "I bought a ticket for the cinema yesterday.",
-              "Yesterday I bought a cinema ticket."
+              "Yesterday I bought a cinema ticket.",
+              "Yesterday I bought a ticket for the cinema."
             ],
             "textoIdioma": "es"
           },
@@ -695,17 +704,40 @@
             "respuesta": "I cut two repeated sentences and read the text aloud"
           },
           {
-            "formato": "completar",
-            "consigna": "Completa: «Hice que mi profesor revisara mi borrador.»",
-            "feedback": "Have + persona + verbo base: la persona hace la acción por ti.",
-            "texto": "I had my teacher ___ my draft.",
-            "respuesta": "check",
+            "formato": "escribir",
+            "consigna": "Registra el cambio que hiciste en tu borrador.",
+            "feedback": "El registro dice qué sustituyes, por cuál y por qué: replaced + palabra vaga + with + palabra exacta + because it is clearer.",
+            "texto": "Borrador: «I bought some stuff.» Tu registro: sustituiste la palabra vaga «stuff» por «shoes» porque es más clara.",
+            "textoIdioma": "es",
+            "respuesta": "I replaced the word stuff with shoes because it is clearer.",
             "aceptadas": [
-              "check",
-              "read",
-              "correct",
-              "review"
-            ]
+              "I changed the word stuff to shoes because it is clearer.",
+              "I replaced stuff with shoes because it is more exact."
+            ],
+            "rubrica": {
+              "palabras": [
+                6,
+                22
+              ],
+              "evidencias": [
+                [
+                  "replaced",
+                  "changed",
+                  "substituted"
+                ],
+                [
+                  "stuff"
+                ],
+                [
+                  "shoes"
+                ],
+                [
+                  "because",
+                  "so",
+                  "as it is"
+                ]
+              ]
+            }
           }
         ]
       },
@@ -898,29 +930,29 @@
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige en qué coincide el audio con el texto.",
-            "feedback": "Tanto el texto como el audio dicen que la biblioteca abre el lunes. Solo el audio menciona la cafetería.",
+            "feedback": "Las dos fuentes dicen que la biblioteca abre a las nueve. El cierre es distinto: seis en el texto y ocho en el audio.",
             "opciones": [
-              "Both say the library opens on Monday.",
-              "Both say the library has a café.",
-              "Both say the library opens on Tuesday."
+              "Both say it opens at nine.",
+              "Both say it closes at six.",
+              "Both say it closes at eight."
             ],
             "respuesta": 0,
-            "audio": "The new library opens on Monday at nine, and it has a café.",
-            "texto": "Article: The new library opens on Monday at nine.",
+            "audio": "The new library opens on Monday at nine, and it stays open until eight.",
+            "texto": "Article: The new library opens on Monday at nine and closes at six.",
             "pista": "Busca el dato que aparece tanto en el texto como en el audio."
           },
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige en qué se diferencian el texto y el audio.",
-            "feedback": "El texto dice ocho libras y el audio diez: las fuentes difieren en el precio. El concierto y el lugar no cambian.",
+            "feedback": "El texto dice ocho libras y el audio diez: las fuentes difieren en el precio. El día (sábado) coincide.",
             "opciones": [
               "The price of the tickets.",
               "The day of the concert.",
-              "The place of the concert."
+              "Nothing: both sources agree."
             ],
             "respuesta": 0,
-            "audio": "Tickets for the concert cost ten pounds at the door.",
-            "texto": "Article: Tickets for the concert cost eight pounds.",
+            "audio": "The concert is on Saturday, and tickets cost ten pounds at the door.",
+            "texto": "Article: The concert is on Saturday, and tickets cost eight pounds.",
             "pista": "Compara las dos cifras: ¿qué dato cambia?"
           },
           {
@@ -952,11 +984,11 @@
           {
             "formato": "escuchar",
             "consigna": "Escucha y elige qué información añade el audio.",
-            "feedback": "El audio añade que las puertas abren a las cuatro; la hora del partido ya estaba en la nota y no hay cancelación.",
+            "feedback": "El audio añade que las puertas abren a las cuatro; la hora del partido (las seis) ya estaba en la nota.",
             "opciones": [
               "The gates open at four.",
-              "The match starts at six.",
-              "The match is cancelled."
+              "The gates open at five.",
+              "The match starts at four."
             ],
             "respuesta": 0,
             "audio": "The match starts at six, but the gates open at four.",
@@ -997,7 +1029,7 @@
               "The school has a new gym."
             ],
             "respuesta": 0,
-            "audio": "The new gym will open in March, but the price is still a secret.",
+            "audio": "The school's new gym will open in March, but the price is still a secret.",
             "texto": "Report: The school will open a new gym in March. It will cost six thousand pounds."
           },
           {
@@ -1007,7 +1039,7 @@
             "opciones": [
               "The sources differ on how students travel.",
               "The sources agree that most students walk.",
-              "The sources agree that nobody walks."
+              "The sources differ on how many students there are."
             ],
             "respuesta": 0,
             "audio": "Most students come by bus, and only a few walk.",
@@ -1044,7 +1076,7 @@
             "opciones": [
               "The sources differ on where the party is.",
               "Both say the party is at Ana's house.",
-              "Both say the party is at Leo's house."
+              "The sources differ on when the party is."
             ],
             "respuesta": 0,
             "audio": "The party is at Leo's house, not at Ana's.",
@@ -1336,7 +1368,9 @@
             "texto": "Tu cierre: usar el transporte público es un cambio pequeño con un gran beneficio.",
             "respuesta": "In short, public transport is a small change with a big benefit.",
             "aceptadas": [
-              "In conclusion, public transport is a small change with a big benefit."
+              "In conclusion, public transport is a small change with a big benefit.",
+              "To sum up, public transport is a small change with a big benefit.",
+              "In short, using public transport is a small change with a big benefit."
             ],
             "textoIdioma": "es"
           }
@@ -1345,11 +1379,11 @@
           {
             "formato": "elegir",
             "consigna": "¿Cuál es la introducción más clara para una charla sobre móviles en clase?",
-            "feedback": "My topic today is whether… anuncia el tema con una estructura correcta. Las otras dos son frases incorrectas.",
+            "feedback": "My topic today is whether… anuncia el tema y, después de whether, el sujeto va antes de should. Las otras dos tienen el orden de palabras o la preposición mal.",
             "opciones": [
               "My topic today is whether phones should be allowed in class.",
-              "Today phones in class many things.",
-              "I am going to speak about of phones."
+              "My topic today is whether should phones be allowed in class.",
+              "I'd like to talk phones in class."
             ],
             "respuesta": 0,
             "texto": "Vas a dar una charla sobre el uso del móvil en clase.",
@@ -1373,33 +1407,54 @@
               "evidencias": [
                 [
                   "My topic today is",
+                  "My topic is",
                   "I'd like to talk about",
-                  "I would like to talk about"
+                  "I would like to talk about",
+                  "I'm going to talk about",
+                  "I am going to talk about",
+                  "I want to talk about",
+                  "Today I will talk about"
                 ],
                 [
                   "Firstly",
-                  "First,"
+                  "First",
+                  "To begin with",
+                  "In the first place",
+                  "The first reason"
                 ],
                 [
                   "Secondly",
-                  "Second,"
+                  "Second",
+                  "Also",
+                  "In addition",
+                  "Another reason",
+                  "The second reason"
                 ],
                 [
                   "Suppose",
                   "If every student",
                   "If all students",
-                  "If everyone"
+                  "If everyone",
+                  "If students",
+                  "Imagine",
+                  "What if"
                 ],
                 [
                   "Admittedly",
                   "It is true that",
-                  "Although some"
+                  "Although",
+                  "Even though",
+                  "Of course",
+                  "I admit",
+                  "Granted"
                 ],
                 [
                   "In short",
                   "To sum up",
                   "In conclusion",
-                  "To conclude"
+                  "To conclude",
+                  "Overall",
+                  "All in all"
                 ]
               ]
             }
@@ -1411,7 +1466,8 @@
             "texto": "Suppose schools ___ at nine, students would be calmer.",
             "respuesta": "started",
             "aceptadas": [
-              "started"
+              "started",
+              "began"
             ]
           },
           {
@@ -1442,20 +1498,21 @@
             "texto": "Admittedly, some parents would have to change their ___.",
             "respuesta": "schedules",
             "aceptadas": [
-              "schedules"
+              "schedules",
+              "timetables"
             ]
           },
           {
             "formato": "elegir",
-            "consigna": "¿Qué frase sirve para empezar la charla?",
-            "feedback": "My topic today is presenta el tema. In short cierra y firstly abre un argumento.",
+            "consigna": "¿Qué frase sirve como segundo argumento con su razón?",
+            "feedback": "Secondly abre el segundo argumento y la razón lo sostiene. In short cierra la charla y suppose plantea una hipótesis, no un argumento.",
             "opciones": [
-              "My topic today is homework.",
-              "In short, homework.",
-              "Firstly, I am homework today."
+              "Secondly, cycling is cheaper, so families save money.",
+              "In short, cycling is cheaper, so families save money.",
+              "Suppose cycling is cheaper, so families save money."
             ],
             "respuesta": 0,
-            "texto": "Vas a empezar tu charla sobre los deberes.",
+            "texto": "Ya diste tu primer argumento sobre ir en bicicleta. Ahora das el segundo, con su razón.",
             "textoIdioma": "es"
           }
         ]
@@ -1732,8 +1789,8 @@
             "feedback": "La señora Patel dice que el presupuesto era más pequeño: la biblioteca tenía menos dinero para gastar.",
             "opciones": [
               "Because it had less money to spend.",
-              "Because the building was closed.",
-              "Because the staff went on holiday."
+              "Because fewer people were visiting it.",
+              "Because the building needed repairs."
             ],
             "respuesta": 0,
             "audio": "Mrs Patel told me that the library had changed its hours because the budget was smaller."
@@ -1765,7 +1822,9 @@
                   "has been opening",
                   "has only opened",
                   "has opened only",
-                  "has been open only"
+                  "has been open only",
+                  "has only been opening",
+                  "has only been open"
                 ]
               ]
             }
@@ -1811,10 +1870,10 @@
             "formato": "escribir",
             "consigna": "Resuelve el caso nuevo en 130–170 palabras y cierra con una nota de revisión.",
             "feedback": "La respuesta cuenta el cambio, reporta a dos personas, imagina otra situación, argumenta con cautela y registra una revisión con qué cambió y por qué.",
-            "texto": "Caso: el club juvenil de tu barrio. Antes abría los sábados; desde enero solo abre entre semana. La directora dijo que el club se había quedado sin dinero; el señor Lee dijo que muchos jóvenes no tenían otro sitio adonde ir. Si el club hubiera pedido ayuda antes, hoy seguiría abierto los sábados, y ojalá lo hubiera hecho. Tu postura: es un error (dilo con cautela), aunque reconoces el problema del dinero. Propuesta: pedir ayuda a los vecinos antes de marzo. Termina con una nota de revisión: un cambio que mejora tu texto.",
-            "respuesta": "The youth club used to open on Saturdays, but since January it has been opening only on weekdays. The director told us that the club had run out of money, and Mr Lee said that many teenagers had nowhere else to go. If the club had asked for help earlier, it would still be open on Saturdays now, and I wish it had done that. In my view, this is arguably a mistake, because Saturday is the day when young people have the most free time. Admittedly, the club needs money. However, I think neighbours could help, and a small budget would give teenagers a safe place again. My plan is to ask the neighbours for help by March, and I am sure many of them would say yes. Final revision: I changed soon to by March, so the deadline is clear.",
+            "texto": "Caso nuevo: el autobús escolar de tu barrio. Antes paraba delante del colegio; desde septiembre solo para en la estación. La conductora dijo que la ciudad había cambiado la ruta, y Tom dijo que muchos alumnos llegaban tarde. Si la ciudad hubiera preguntado antes a los alumnos, hoy el autobús seguiría parando en el colegio, y ojalá lo hubiera hecho. Tu postura: es un error (dilo con cautela), aunque reconoces que el presupuesto de la ciudad es pequeño. Propuesta: hablar con la directora antes del viernes. Termina con una nota de revisión: un cambio que mejora tu texto.",
+            "respuesta": "The school bus used to stop in front of our school, but since September it has been stopping only at the station. The driver told us that the town had changed the route, and Tom said that many students had been arriving late. If the town had asked the students earlier, the bus would still stop at the school now, and I wish it had done that. In my view, this is arguably a mistake, because tired students learn less. Admittedly, the town has a small budget. However, I think the director could help, and a short talk with her would give students a safe way to school again. My plan is to speak with the director by Friday, and I am sure she would listen. Final revision: I changed soon to by Friday, so the deadline is clear.",
             "aceptadas": [
-              "Since January, the youth club has been opening only on weekdays, although it used to open on Saturdays. The director said that the club had run out of money, and Mr Lee told us that many teenagers had nowhere else to go. If the club had asked for help earlier, it would still be open on Saturdays today. I wish it had asked. It is arguably a mistake, because Saturday is when young people have the most free time. It is true that the club needs money, but I think neighbours could help, and a small budget would give teenagers a safe place again. I suggest asking the neighbours for help by March. Final revision: I replaced soon with by March, so the deadline is clear."
+              "Since September, the school bus has been stopping only at the station, although it used to stop in front of our school. The driver said that the town had changed the route, and Tom told us that many students had been arriving late. If the town had asked the students earlier, the bus would still stop at the school today. I wish it had asked them. It is arguably a mistake, because tired students learn less. It is true that the town has a small budget, but I think the director could help. I suggest speaking with the director by Friday, because a short talk with her would give students a safe way to school again. Final revision: I replaced soon with by Friday, so the deadline is clear."
             ],
             "textoIdioma": "es",
             "rubrica": {
@@ -1824,50 +1883,74 @@
               ],
               "evidencias": [
                 [
-                  "used to open",
-                  "used to be open",
-                  "used to be"
+                  "used to",
+                  "until September",
+                  "before September"
                 ],
                 [
-                  "since January"
+                  "since September",
+                  "from September",
+                  "has been stopping",
+                  "has only stopped",
+                  "has stopped only"
                 ],
                 [
-                  "director told us",
-                  "director said",
-                  "director told me",
-                  "director explained"
+                  "driver told",
+                  "driver said",
+                  "driver explained",
+                  "driver mentioned"
                 ],
                 [
-                  "Mr Lee said",
-                  "Mr Lee told",
-                  "Mr Lee explained",
-                  "Mr Lee thought"
+                  "Tom said",
+                  "Tom told",
+                  "Tom explained",
+                  "Tom mentioned",
+                  "Tom added"
                 ],
                 [
-                  "If the club had asked",
-                  "if the club had looked",
-                  "If the club had called"
+                  "if the town had",
+                  "if the town hadn't",
+                  "if they had",
+                  "if they hadn't",
+                  "if it had",
+                  "if it hadn't",
+                  "if the students had"
                 ],
                 [
-                  "I wish"
+                  "I wish",
+                  "If only"
                 ],
                 [
                   "in my view",
                   "in my opinion",
                   "arguably",
-                  "it seems"
+                  "it seems",
+                  "I think",
+                  "I believe",
+                  "perhaps",
+                  "probably",
+                  "might"
                 ],
                 [
                   "Admittedly",
                   "It is true that",
-                  "Although"
+                  "Although",
+                  "Even though",
+                  "Though",
+                  "Of course",
+                  "I admit"
                 ],
                 [
                   "Final revision",
                   "Revision",
                   "I changed",
                   "I replaced",
-                  "I corrected"
+                  "I corrected",
+                  "I improved",
+                  "I rewrote",
+                  "I added",
+                  "I cut",
+                  "I fixed"
                 ]
               ]
             }
@@ -1894,7 +1977,7 @@
             "opciones": [
               "Not knowing about the change earlier.",
               "Having played football on Saturday.",
-              "Having changed the plan."
+              "Having told nobody about the plan."
             ],
             "respuesta": 0,
             "audio": "I wish I had known about the change, because I planned to play football there on Saturday."
@@ -1972,5 +2055,18 @@
         ]
       }
     }
-  ]
+  ],
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisión independiente completa de C96-C100 frente al mapa N5 v2; C100 cierra N5 con las cinco macrohebras (cambio, hipótesis/deseo, reporte de dos personas, postura cautelosa, revisión documentada).",
+      "C100 eva3 (capstone): repetía el caso del club ya enseñado (no era un caso nuevo); sustituido por un caso nuevo (autobús escolar) con modelo de 139 palabras, rúbrica de 9 grupos con variantes y dos respuestas aceptadas que cumplen todos los grupos.",
+      "Escucha: C98 gui0/gui1/pra1/eva0/eva1/rep0 reescritos porque la respuesta se deducía solo del texto, había dos respuestas defendibles (eva0) o los distractores eran absurdos; C100 pra1/rep1 con distractores plausibles.",
+      "C97: el patrón 'registrar un cambio' se enseñaba pero no se practicaba; rep2 ahora es un escribir con rúbrica; eva0 tenía una clave poco natural (so) y se reescribió; traducción de present perfect corregida.",
+      "C99: eva0 con distractores reales (orden de palabras), rep2 cambia a segundo argumento (evitaba duplicar la introducción), rúbrica de eva1 más flexible, 'began' aceptado.",
+      "Órdenes alternativas en ordenar (C96 pra2/rep2). Sin P0/P1 pendientes; 96-100 pasa el constructor."
+    ]
+  }
 }

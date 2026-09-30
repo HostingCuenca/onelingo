@@ -1,0 +1,839 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-70",
+  "title": {
+    "en": "Talk and answer questions",
+    "es": "Charla y turno de preguntas"
+  },
+  "objectives": {
+    "es": [
+      "Presentar una charla breve y gestionar el turno de preguntas: agradecer, pedir que repitan, reformular una duda y admitir lo que no se sabe."
+    ]
+  },
+  "concepts": [
+    "n6-speaking-to-an-audience-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n6.class-69"
+  ],
+  "usesVocabulary": [
+    "question",
+    "repeat",
+    "doubt",
+    "unexpected",
+    "answer",
+    "find out",
+    "what I mean is"
+  ],
+  "usesPatterns": [
+    "n6-speaking-to-an-audience-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "question",
+      "es": "pregunta"
+    },
+    {
+      "en": "repeat",
+      "es": "repetir"
+    },
+    {
+      "en": "doubt",
+      "es": "duda"
+    },
+    {
+      "en": "unexpected",
+      "es": "inesperado"
+    },
+    {
+      "en": "answer",
+      "es": "respuesta, contestar"
+    },
+    {
+      "en": "find out",
+      "es": "averiguar"
+    },
+    {
+      "en": "what I mean is",
+      "es": "lo que quiero decir es"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-70.t01",
+      "en": "Thank you for your question. It is a very good one.",
+      "es": "Gracias por tu pregunta. Es muy buena.",
+      "explanationEs": "Agradecer la pregunta te da tiempo para pensar la respuesta.",
+      "segments": [
+        "Thank you for your question. It",
+        "is a very good one."
+      ],
+      "audioText": "Thank you for your question. It is a very good one.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-speaking-to-an-audience-5"
+    },
+    {
+      "id": "en.n6.class-70.t02",
+      "en": "Could you repeat the question, please? I am not sure I understood.",
+      "es": "¿Podrías repetir la pregunta, por favor? No estoy seguro de haber entendido.",
+      "explanationEs": "Pedir que repitan es normal y mejor que contestar otra cosa. Could you… es cortés.",
+      "segments": [
+        "Could you repeat the question, please?",
+        "I am not sure I understood."
+      ],
+      "audioText": "Could you repeat the question, please? I am not sure I understood.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-speaking-to-an-audience-5"
+    },
+    {
+      "id": "en.n6.class-70.t03",
+      "en": "Is there any doubt about the price? What I mean is that cycling saves money, not time.",
+      "es": "¿Hay alguna duda sobre el precio? Lo que quiero decir es que ir en bici ahorra dinero, no tiempo.",
+      "explanationEs": "What I mean is… reformula tu respuesta cuando alguien no te ha entendido.",
+      "segments": [
+        "Is there any doubt about the price? What I",
+        "mean is that cycling saves money, not time."
+      ],
+      "audioText": "Is there any doubt about the price? What I mean is that cycling saves money, not time.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-speaking-to-an-audience-5"
+    },
+    {
+      "id": "en.n6.class-70.t04",
+      "en": "That is an unexpected question, so let me think for a moment.",
+      "es": "Es una pregunta inesperada, así que déjame pensar un momento.",
+      "explanationEs": "Unexpected: algo que no esperabas. Let me think te da unos segundos.",
+      "segments": [
+        "That is an unexpected question, so",
+        "let me think for a moment."
+      ],
+      "audioText": "That is an unexpected question, so let me think for a moment.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-speaking-to-an-audience-5"
+    },
+    {
+      "id": "en.n6.class-70.t05",
+      "en": "I don't know the answer, but I can find out and tell you later.",
+      "es": "No sé la respuesta, pero puedo averiguarla y decírtela luego.",
+      "explanationEs": "Find out: averiguar. Admitir que no sabes y prometer responder es mejor que inventar.",
+      "segments": [
+        "I don't know the answer, but I",
+        "can find out and tell you later."
+      ],
+      "audioText": "I don't know the answer, but I can find out and tell you later.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-speaking-to-an-audience-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c70.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Alguien te hace una pregunta difícil. ¿Qué dices para ganar tiempo?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I don't care about your question."
+          },
+          {
+            "text": "Thank you for your question. Let me think for a moment."
+          },
+          {
+            "text": "That question is wrong."
+          }
+        ],
+        "teaches": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.pg01.seed-0",
+          "feedback": {
+            "es": "Agradecer y pedir un momento para pensar es cortés y te da tiempo. Las otras dos son bruscas."
+          },
+          "hint": {
+            "es": "Busca la respuesta que agradece y te da tiempo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1c9c6441ffc3208fdc8c02f0a67df625322dd5060ae6c56ae563b02e6e16c259"
+      },
+      {
+        "id": "en.n6.c70.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Podría repetir la pregunta, por favor?»"
+        },
+        "answer": {
+          "text": "repeat",
+          "accepted": [
+            "repeat"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.pg02.seed-0",
+          "feedback": {
+            "es": "Could you repeat the question? es la forma cortés de pedir que vuelvan a decirla."
+          },
+          "hint": {
+            "es": "Es lo que pides cuando no has oído bien."
+          },
+          "text": "Could you ___ the question, please?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:839e8967631dd2e352e18eaa963131d6d39384e1557a1b7fbf12bc8abf8e3348"
+      },
+      {
+        "id": "en.n6.c70.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "No sabes una cifra exacta que te piden. ¿Cuál es la mejor reacción?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Nobody knows that, so it does not matter."
+          },
+          {
+            "text": "Yes, of course, it is always exactly ten."
+          },
+          {
+            "text": "I am not sure. I will find out and send you the exact figure."
+          }
+        ],
+        "teaches": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.pg03.seed-0",
+          "feedback": {
+            "es": "Admitir que no sabes y prometer averiguarlo es honesto y profesional. Las otras dos niegan la duda o inventan."
+          },
+          "hint": {
+            "es": "Es mejor admitir el límite que inventar."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:33d07626b220ea65aa36d2127d9adf6a0413bf5252749d3f76fadcb731650396"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c70.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase del turno de preguntas con la situación en que se usa."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Could you repeat that, please?",
+              {
+                "es": "no has oído la pregunta"
+              }
+            ],
+            [
+              "Do you mean the price or the time?",
+              {
+                "es": "no entiendes la pregunta"
+              }
+            ],
+            [
+              "What I mean is that it is cheaper.",
+              {
+                "es": "reformulas tu respuesta"
+              }
+            ],
+            [
+              "I can find out and write to you.",
+              {
+                "es": "no sabes la respuesta"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.p01.seed-0",
+          "feedback": {
+            "es": "Cada frase resuelve un problema distinto: no oír, no entender, no ser entendido o no saber."
+          },
+          "pairs": [
+            [
+              "Could you repeat that, please?",
+              {
+                "es": "no has oído la pregunta"
+              }
+            ],
+            [
+              "Do you mean the price or the time?",
+              {
+                "es": "no entiendes la pregunta"
+              }
+            ],
+            [
+              "What I mean is that it is cheaper.",
+              {
+                "es": "reformulas tu respuesta"
+              }
+            ],
+            [
+              "I can find out and write to you.",
+              {
+                "es": "no sabes la respuesta"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:87b95a04d8c4ec83c29aa4bd2437d9a447f96fda5f4db1728587122e536e4c97"
+      },
+      {
+        "id": "en.n6.c70.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la respuesta y elige cómo empieza el orador."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He praises the question and then answers briefly."
+          },
+          {
+            "text": "He refuses to answer."
+          },
+          {
+            "text": "He asks the audience to repeat."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.p02.seed-0",
+          "feedback": {
+            "es": "Empieza elogiando la pregunta («an interesting question») y responde corto con «In short»."
+          },
+          "audio": "That is an interesting question. In short, yes, but only in the summer.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8550a6bc4f114bedfbb6a527c58a68bc5e89270cc7c8bd5c07b6efb677aded3f"
+      },
+      {
+        "id": "en.n6.c70.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Déjame decirlo de otra manera.»"
+        },
+        "answer": {
+          "text": "Let me put it another way",
+          "tokens": [
+            "Let",
+            "me",
+            "put",
+            "it",
+            "another",
+            "way"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.p03.seed-0",
+          "feedback": {
+            "es": "Let me put it another way reformula cuando el público tiene dudas."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:495f36e3365a2ca2b563fae5be333007df3d231727b7f9bc5997b1186b799a47"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c70.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha esta intervención y elige qué necesita la persona."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She wants a longer answer."
+          },
+          {
+            "text": "She wants the speaker to say the question again."
+          },
+          {
+            "text": "She wants the talk to end."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5",
+          "n6-speaking-to-an-audience-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.e01.seed-0",
+          "feedback": {
+            "es": "Dice que no oyó bien y pide que repitan la pregunta: necesita oírla de nuevo."
+          },
+          "audio": "Sorry, I didn't catch that. Could you say the question again?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d9f50c7fc758c027994850bf4071d99f21961de1d174cc2d18dcefbe7bed6b7f"
+      },
+      {
+        "id": "en.n6.c70.e02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Gracias por tu pregunta» y «Puedo averiguarlo»."
+        },
+        "answer": {
+          "text": "question | out",
+          "accepted": [
+            "question | out"
+          ],
+          "parts": [
+            {
+              "text": "question",
+              "accepted": [
+                "question"
+              ]
+            },
+            {
+              "text": "out",
+              "accepted": [
+                "out"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5",
+          "n6-speaking-to-an-audience-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.e02.seed-0",
+          "feedback": {
+            "es": "Se agradece la question y, si no sabes la respuesta, se promete find out."
+          },
+          "sentences": [
+            "Thank you for your ___.",
+            "I don't know the answer, but I can find ___."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f815abfeb600827af474181b506f2f581df031624a74318e0f4c52ea07d03bf0"
+      },
+      {
+        "id": "en.n6.c70.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Dicho de otro modo, la bici es más barata.»"
+        },
+        "answer": {
+          "text": "In other words",
+          "accepted": [
+            "In other words",
+            "in other words"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5",
+          "n6-speaking-to-an-audience-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.e03.seed-0",
+          "feedback": {
+            "es": "In other words reformula lo dicho con palabras más sencillas."
+          },
+          "text": "___, a bike is cheaper."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:173ea4218383027812c5f84d3ea29c7d1ff711f1e4e64ff6c130f7aaff7b2252"
+      },
+      {
+        "id": "en.n6.c70.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una charla breve con apertura, un punto, cierre y tres respuestas al público."
+        },
+        "answer": {
+          "text": "Good morning, everyone. Have you ever cycled to school? My topic is cycling. To begin with, it is cheap and healthy, and anybody can start today. To sum up, a bike saves money, keeps you fit and is fun. Thank you for listening. Any questions? Is it expensive? Good question. A good bike costs less than a year of bus tickets, so in the end you save money. What about the rain? I don't know the answer, but I can find out and tell you later. I don't understand the price. Let me put it another way: a bike is cheaper than the bus.",
+          "accepted": [
+            "Good morning, everyone. Have you ever cycled to school? My topic is cycling. To begin with, it is cheap and healthy, and anybody can start today. To sum up, a bike saves money, keeps you fit and is fun. Thank you for listening. Any questions? Is it expensive? Good question. A good bike costs less than a year of bus tickets, so in the end you save money. What about the rain? I don't know the answer, but I can find out and tell you later. I don't understand the price. Let me put it another way: a bike is cheaper than the bus.",
+            "Hello, everyone. Imagine going to school without a car or a bus. My topic is cycling. First of all, it is cheap and good for your health, and it is easy to start. In conclusion, a bike is simple, useful and fun. Thank you for your attention. Any questions? Is it expensive? Thank you for your question. In short, no: a bike costs less than the bus. And if it rains? I am not sure, but I will find out and tell you later. I did not understand the price. What I mean is that it is cheaper than a bus ticket."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5",
+          "n6-speaking-to-an-audience-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.e04.seed-0",
+          "feedback": {
+            "es": "La respuesta completa tiene apertura, punto y cierre, agradece la primera pregunta, admite que no sabe la segunda y reformula la tercera."
+          },
+          "text": "Datos: tema: ciclismo. Apertura con pregunta, un punto (es barato y sano) y cierre con resumen y gracias. Turno de preguntas: 1) ¿Es caro? Responde con una frase. 2) ¿Y si llueve? No lo sabes: promete averiguarlo. 3) No entienden tu respuesta sobre el precio: reformula.",
+          "scoring": {
+            "wordRange": [
+              90,
+              170
+            ],
+            "evidenceGroups": [
+              [
+                "Have you ever",
+                "Imagine"
+              ],
+              [
+                "To begin with",
+                "First",
+                "First of all",
+                "My first point",
+                "Firstly"
+              ],
+              [
+                "To sum up",
+                "In conclusion",
+                "In short"
+              ],
+              [
+                "Thank you for listening",
+                "Thank you for your attention",
+                "Thank you"
+              ],
+              [
+                "Good question",
+                "Thank you for your question",
+                "Great question",
+                "That is a good question",
+                "interesting question",
+                "Thank you for asking"
+              ],
+              [
+                "I can find out",
+                "I will find out",
+                "I'll find out",
+                "find out"
+              ],
+              [
+                "Let me put it another way",
+                "What I mean is",
+                "In other words",
+                "Simply put",
+                "That is to say"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0457e421d81718f51107a6bcb4703b47f93eea52dbf4bf9508bf8edf66d677bd"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c70.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Quieres aclarar tu respuesta porque el público dudó. ¿Qué dices?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "I refuse to explain it again."
+          },
+          {
+            "text": "Nobody asked me anything."
+          },
+          {
+            "text": "What I mean is that it costs less than a bus."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.r01.seed-0",
+          "feedback": {
+            "es": "What I mean is… reformula tu respuesta para aclarar una duda. Las otras dos no ayudan al público."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a0ab1264d2d9c648536b5f0acdfa0a8063ed7150bb622496c371d24bed3da7d2"
+      },
+      {
+        "id": "en.n6.c70.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La última pregunta fue inesperada, pero la respondí bien.»"
+        },
+        "answer": {
+          "text": "unexpected",
+          "accepted": [
+            "unexpected"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.r02.seed-0",
+          "feedback": {
+            "es": "Unexpected describe algo que no esperabas, como una pregunta sorpresa."
+          },
+          "text": "The last question was ___, but I answered it well."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0813bdfcaade46ffd84a62d4f35ef944be12e51991b3f071b2cecd96bf3a282"
+      },
+      {
+        "id": "en.n6.c70.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Gracias por tu pregunta, es muy interesante.»"
+        },
+        "answer": {
+          "text": "Thank you for your question it is very interesting",
+          "tokens": [
+            "Thank",
+            "you",
+            "for",
+            "your",
+            "question",
+            "it",
+            "is",
+            "very",
+            "interesting"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-speaking-to-an-audience-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c70.r03.seed-0",
+          "feedback": {
+            "es": "Agradecer la pregunta es el primer paso al responder."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:80f56e3f064494e463bbe644d18456948f0c55fad7d5ed621dd2b61c88446f98"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c70.e01": {
+      "reteach": "en.n6.class-70.t01",
+      "review": "en.n6.c70.r01"
+    },
+    "en.n6.c70.e02": {
+      "reteach": "en.n6.class-70.t02",
+      "review": "en.n6.c70.r02"
+    },
+    "en.n6.c70.e03": {
+      "reteach": "en.n6.class-70.t03",
+      "review": "en.n6.c70.r03"
+    },
+    "en.n6.c70.e04": {
+      "reteach": "en.n6.class-70.t04",
+      "review": "en.n6.c70.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n6-speaking-to-an-audience-1",
+    "n6-speaking-to-an-audience-2",
+    "n6-speaking-to-an-audience-3",
+    "n6-speaking-to-an-audience-4",
+    "n6-speaking-to-an-audience-5"
+  ]
+}

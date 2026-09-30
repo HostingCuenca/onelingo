@@ -1,0 +1,815 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-63",
+  "title": {
+    "en": "Fact or opinion?",
+    "es": "¿Hecho u opinión?"
+  },
+  "objectives": {
+    "es": [
+      "Separar hechos verificables, opiniones e insinuaciones en noticias y publicaciones, fijándose en las palabras que empujan al lector."
+    ]
+  },
+  "concepts": [
+    "n7-media-3"
+  ],
+  "skills": [
+    "lectura",
+    "escucha",
+    "vocabulario"
+  ],
+  "prerequisites": [
+    "en.n7.class-62"
+  ],
+  "usesVocabulary": [
+    "fact",
+    "opinion",
+    "evidence",
+    "survey",
+    "figure",
+    "obviously",
+    "imply",
+    "verify",
+    "terrible"
+  ],
+  "usesPatterns": [
+    "n7-media-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "fact",
+      "es": "hecho, dato comprobable"
+    },
+    {
+      "en": "opinion",
+      "es": "opinión"
+    },
+    {
+      "en": "evidence",
+      "es": "pruebas"
+    },
+    {
+      "en": "survey",
+      "es": "encuesta"
+    },
+    {
+      "en": "figure",
+      "es": "cifra"
+    },
+    {
+      "en": "obviously",
+      "es": "obviamente, claramente"
+    },
+    {
+      "en": "imply",
+      "es": "insinuar, dar a entender"
+    },
+    {
+      "en": "verify",
+      "es": "comprobar, verificar"
+    },
+    {
+      "en": "terrible",
+      "es": "terrible, pésimo"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-63.t01",
+      "en": "According to the survey, sixty per cent of residents use the library every week.",
+      "es": "Según la encuesta, el sesenta por ciento de los residentes usa la biblioteca cada semana.",
+      "explanationEs": "Según una fuente + una cifra: se trata de un dato que se puede comprobar.",
+      "segments": [
+        "According to the survey, sixty per cent",
+        "of residents use the library every week."
+      ],
+      "audioText": "According to the survey, sixty per cent of residents use the library every week.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-3"
+    },
+    {
+      "id": "en.n7.class-63.t02",
+      "en": "The new timetable is obviously a terrible idea.",
+      "es": "El nuevo horario es obviamente una idea terrible.",
+      "explanationEs": "Obviously y terrible no describen un dato: expresan un juicio personal.",
+      "segments": [
+        "The new timetable is",
+        "obviously a terrible idea."
+      ],
+      "audioText": "The new timetable is obviously a terrible idea.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-3"
+    },
+    {
+      "id": "en.n7.class-63.t03",
+      "en": "The figure of two hundred complaints is a fact: you can verify it in the council records.",
+      "es": "La cifra de doscientas quejas es un hecho: puedes comprobarla en los registros del ayuntamiento.",
+      "explanationEs": "Un fact se puede verificar con registros, fechas o cifras.",
+      "segments": [
+        "The figure of two hundred complaints is a fact:",
+        "you can verify it in the council records."
+      ],
+      "audioText": "The figure of two hundred complaints is a fact: you can verify it in the council records.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-3"
+    },
+    {
+      "id": "en.n7.class-63.t04",
+      "en": "The report does not say the mayor lied, but the headline seems to imply it.",
+      "es": "El informe no dice que el alcalde mintió, pero el titular parece darlo a entender.",
+      "explanationEs": "Imply = sugerir sin afirmar; seems to imply marca una insinuación.",
+      "segments": [
+        "The report does not say the mayor lied,",
+        "but the headline seems to imply it."
+      ],
+      "audioText": "The report does not say the mayor lied, but the headline seems to imply it.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-3"
+    },
+    {
+      "id": "en.n7.class-63.t05",
+      "en": "Without evidence, a claim is only an opinion.",
+      "es": "Sin pruebas, una afirmación es solo una opinión.",
+      "explanationEs": "Evidence son las pruebas; sin ellas, lo que alguien afirma queda como opinión.",
+      "segments": [
+        "Without evidence, a claim",
+        "is only an opinion."
+      ],
+      "audioText": "Without evidence, a claim is only an opinion.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-media-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c63.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Cuál de estos enunciados es un hecho verificable?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The library opens at nine on weekdays."
+          },
+          {
+            "text": "The library is the best place in town."
+          },
+          {
+            "text": "The library should stay open all night."
+          }
+        ],
+        "teaches": [
+          "n7-media-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.pg01.seed-0",
+          "feedback": {
+            "es": "Un horario se puede comprobar; las otras dos frases expresan un juicio o un deseo personal."
+          },
+          "hint": {
+            "es": "Un hecho se puede comprobar con un horario, una cifra o un registro."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d9d23bb7c3ea3fc71299d62937f3f7f1bb5286bdf916f33741e8a21172bacde4"
+      },
+      {
+        "id": "en.n7.c63.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Una afirmación sin pruebas no se puede comprobar.»"
+        },
+        "answer": {
+          "text": "evidence",
+          "accepted": [
+            "evidence"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-media-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.pg02.seed-0",
+          "feedback": {
+            "es": "Evidence son las pruebas que permiten verificar una afirmación."
+          },
+          "hint": {
+            "es": "Es lo que necesitas para poder comprobar lo que alguien afirma."
+          },
+          "text": "A claim without ___ cannot be checked."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:281585632f15d0fbf52c16724fb78e0cd5e7a6d2476b6130a17a5821c920b07a"
+      },
+      {
+        "id": "en.n7.c63.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El titular parece insinuar que el alcalde mintió.»"
+        },
+        "answer": {
+          "text": "The headline seems to imply the mayor lied",
+          "tokens": [
+            "The",
+            "headline",
+            "seems",
+            "to",
+            "imply",
+            "the",
+            "mayor",
+            "lied"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-media-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.pg03.seed-0",
+          "feedback": {
+            "es": "Seems to imply marca una insinuación: sugiere algo sin afirmarlo."
+          },
+          "hint": {
+            "es": "La insinuación se construye con seems to + el verbo imply."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d5d9e14c2dc2199d25285592748b6d8f8bd84ba2d1875e9d8efad4a86bf1a6f9"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c63.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase del texto es una opinión y no un hecho?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Seven want a new park."
+          },
+          {
+            "text": "The park is obviously a waste of money."
+          },
+          {
+            "text": "Ten neighbours answered the survey."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.p01.seed-0",
+          "feedback": {
+            "es": "La frase del gasto usa obviously y un juicio; las otras dos son datos de la encuesta."
+          },
+          "text": "Ten neighbours answered the survey. Seven want a new park. The park is obviously a waste of money, wrote one of them."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ef96dfb66bf66d3929a44b8b8eec370c06affbb20df460de444aa534c2bdf16e"
+      },
+      {
+        "id": "en.n7.c63.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada enunciado con su tipo."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Forty students joined the trip, according to the school records.",
+              {
+                "es": "Hecho verificable"
+              }
+            ],
+            [
+              "The trip was obviously a waste of time.",
+              {
+                "es": "Opinión"
+              }
+            ],
+            [
+              "The teacher, a friend of the bus company, chose the cheapest bus.",
+              {
+                "es": "Insinuación"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.p02.seed-0",
+          "feedback": {
+            "es": "Los registros escolares dan un dato comprobable, obviously marca un juicio y la amistad con la empresa sugiere un favor."
+          },
+          "pairs": [
+            [
+              "Forty students joined the trip, according to the school records.",
+              {
+                "es": "Hecho verificable"
+              }
+            ],
+            [
+              "The trip was obviously a waste of time.",
+              {
+                "es": "Opinión"
+              }
+            ],
+            [
+              "The teacher, a friend of the bus company, chose the cheapest bus.",
+              {
+                "es": "Insinuación"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0c31f78e454199685ec67985fb73d2ae2572ce75e225e735cb1469a52802c93"
+      },
+      {
+        "id": "en.n7.c63.p03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué parte de la publicación se puede verificar."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The idea that the mayor wastes money."
+          },
+          {
+            "text": "The idea that the pool is too big."
+          },
+          {
+            "text": "The amount the pool cost."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.p03.seed-0",
+          "feedback": {
+            "es": "El coste de la piscina es una cifra que se puede comprobar; lo de malgastar dinero es un juicio con obviously."
+          },
+          "audio": "Mia read a post about the new swimming pool. It said the pool had cost two hundred thousand dollars. The post also said the mayor was obviously wasting money.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:08cd2f6232e7336fb7a732e4bb78335b4f0da547813f2695db8b4556eb89da54"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c63.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué enunciado de la reseña se puede verificar?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The new cinema opened on 3 May."
+          },
+          {
+            "text": "The film was boring."
+          },
+          {
+            "text": "The seats are terrible."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.e01.seed-0",
+          "feedback": {
+            "es": "Una fecha de apertura se comprueba; «boring» y «terrible» son juicios personales."
+          },
+          "text": "The new cinema opened on 3 May. Honestly, the film was boring, and the seats are terrible."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:427ac40bba7513aa380fb725ff60912a42a9a75cb5afb855a7aea851cdcf0048"
+      },
+      {
+        "id": "en.n7.c63.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué insinúa el titular aunque no lo afirme?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "That the mayor drove the bus."
+          },
+          {
+            "text": "That the contract was a favour to a relative."
+          },
+          {
+            "text": "That the company was the cheapest."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.e02.seed-0",
+          "feedback": {
+            "es": "Mencionar al primo del alcalde sugiere un favor; que fuera la empresa más barata es un hecho del artículo, no una insinuación."
+          },
+          "text": "Headline: Mayor's cousin wins bus contract. Article: The council chose the cheapest company."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8182411bd15610883ed1f8ea7963df3517295942321bafa47f2c4e21ef1e2ff5"
+      },
+      {
+        "id": "en.n7.c63.e03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige por qué Mia no acepta lo que dice Leo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Because she thinks Leo is lying about the rubbish."
+          },
+          {
+            "text": "Because she has never seen the lake."
+          },
+          {
+            "text": "Because a little rubbish does not prove the lake is dirty."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.e03.seed-0",
+          "feedback": {
+            "es": "Mia pide pruebas y dice que un poco de basura no basta para verificar la afirmación."
+          },
+          "audio": "Leo says the lake is dirty. Mia answers: show me some proof. Leo says he saw some rubbish there last week. Mia says some rubbish is not enough to prove the claim.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:82fac6830ca916096462c742456be3a44de16dca63b8efcfaedf57ec06b7f741"
+      },
+      {
+        "id": "en.n7.c63.e04",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres frases sobre cómo distinguir hechos y opiniones."
+        },
+        "answer": {
+          "text": "fact | opinion | verify",
+          "accepted": [
+            "fact | opinion | verify"
+          ],
+          "parts": [
+            {
+              "text": "fact",
+              "accepted": [
+                "fact"
+              ]
+            },
+            {
+              "text": "opinion",
+              "accepted": [
+                "opinion"
+              ]
+            },
+            {
+              "text": "verify",
+              "accepted": [
+                "verify",
+                "check"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.e04.seed-0",
+          "feedback": {
+            "es": "Un hecho se puede probar, las palabras de juicio delatan una opinión y para verificar una afirmación se buscan registros, fechas o cifras."
+          },
+          "sentences": [
+            "A ___ is something you can prove with a date or a figure.",
+            "Words like obviously often show an ___.",
+            "To ___ a claim, look for records, dates or numbers."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7e680154c7958bc4fb689bdc42c74196be053e9a2108239c85a041c64f6c441e"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c63.r01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Según la encuesta, la mitad de los vecinos usa el parque.»"
+        },
+        "answer": {
+          "text": "According to the survey half of the neighbours use the park",
+          "tokens": [
+            "According",
+            "to",
+            "the",
+            "survey",
+            "half",
+            "of",
+            "the",
+            "neighbours",
+            "use",
+            "the",
+            "park"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.r01.seed-0",
+          "feedback": {
+            "es": "Según una fuente se dice according to + fuente; después va el dato: half of the neighbours."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c219af53af94acde5f95fb2a98bd74148330b771038892ac3dee5e270215ccbc"
+      },
+      {
+        "id": "en.n7.c63.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es una opinión y no un hecho?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The museum is obviously too expensive."
+          },
+          {
+            "text": "The museum charges eight dollars."
+          },
+          {
+            "text": "The museum closes at five."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.r02.seed-0",
+          "feedback": {
+            "es": "Obviously y too expensive expresan un juicio; el precio y la hora de cierre se pueden comprobar."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:44884a2a4b4d7dab9608c7037543dd4a701b0b5a783ebf476450a65594f7ddf4"
+      },
+      {
+        "id": "en.n7.c63.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué frase es una opinión."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "That the school has two hundred students."
+          },
+          {
+            "text": "That the canteen's pizza is better than any other."
+          },
+          {
+            "text": "That the article is two pages long."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-media-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c63.r03.seed-0",
+          "feedback": {
+            "es": "«The best pizza in town» es un juicio personal; el número de alumnos es un dato."
+          },
+          "audio": "The article says the school has two hundred students, and that the canteen serves the best pizza in town.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a10aca1f58eb8829ee7adfee971b8999366ac76a49171511670cbc33eeb42adb"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c63.e01": {
+      "reteach": "en.n7.class-63.t01",
+      "review": "en.n7.c63.r01"
+    },
+    "en.n7.c63.e02": {
+      "reteach": "en.n7.class-63.t02",
+      "review": "en.n7.c63.r02"
+    },
+    "en.n7.c63.e03": {
+      "reteach": "en.n7.class-63.t03",
+      "review": "en.n7.c63.r03"
+    },
+    "en.n7.c63.e04": {
+      "reteach": "en.n7.class-63.t04",
+      "review": "en.n7.c63.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

@@ -44,7 +44,8 @@ def bases(w):
 
 
 def conocida(w, conocidas):
-    return w in conocidas or w.isdigit() or bool(bases(w) & conocidas)
+    # Tokens con cifras (cantidades, precios «£45», horas) cuentan como números.
+    return w in conocidas or any(c.isdigit() for c in w) or bool(bases(w) & conocidas)
 
 
 def huella_item(item):

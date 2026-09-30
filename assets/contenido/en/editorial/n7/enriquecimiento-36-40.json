@@ -1,0 +1,653 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n7.class-36": {
+      "explicacion": {
+        "titulo": "Modismos: transparentes y opacos",
+        "texto": "Un idiom (modismo) tiene un sentido que no sale de sumar sus palabras. Algunos son transparentes: la imagen ayuda (a piece of cake = muy fácil). Otros son opacos: la imagen no dice nada (raining cats and dogs = llover a cántaros; spill the beans = revelar un secreto). Para deducir el sentido, descarta el significado literal y busca una pista en el contexto: el resto de la frase, la situación, el tono. No los traduzcas palabra por palabra ni cambies ninguna palabra del modismo."
+      },
+      "patron": {
+        "texto": "Contexto + modismo = sentido figurado:",
+        "formula": [
+          {
+            "texto": "Take an umbrella:",
+            "nota": "pista del contexto: hace falta paraguas"
+          },
+          {
+            "texto": "it's raining cats and dogs!",
+            "nota": "modismo: las palabras no son literales"
+          },
+          {
+            "texto": "= it's raining very hard.",
+            "nota": "sentido figurado: llueve a cántaros"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The test was a piece of pie.",
+          "correcto": "The test was a piece of cake.",
+          "explicacion": "Un modismo es fijo: no se cambia ninguna palabra, aunque la nueva tenga sentido."
+        },
+        {
+          "incorrecto": "It's raining jugs outside.",
+          "correcto": "It's raining cats and dogs outside.",
+          "explicacion": "«A cántaros» no se traduce palabra por palabra: el modismo inglés es fijo y usa cats and dogs, no jugs."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom encuentra a Mia con mala cara un día de lluvia.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "You look tired, Mia.",
+            "traduccion": "Tienes cara de cansada, Mia."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'm a bit under the weather. And it's raining cats and dogs outside!",
+            "traduccion": "Estoy algo enferma. ¡Y está lloviendo a cántaros fuera!"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Take my umbrella, then. Go home and stay in bed.",
+            "traduccion": "Toma mi paraguas, entonces. Vete a casa y quédate en la cama."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo se siente Mia?",
+          "opciones": [
+            {
+              "es": "Un poco enferma."
+            },
+            {
+              "es": "Feliz por la lluvia."
+            },
+            {
+              "es": "Muy enfadada con Tom."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «under the weather»: un modismo que significa estar algo enfermo. Tom le aconseja quedarse en la cama, lo que lo confirma."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Modismo",
+          "Sentido",
+          "Tipo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a piece of cake"
+            },
+            {
+              "texto": "muy fácil"
+            },
+            {
+              "texto": "transparente"
+            }
+          ],
+          [
+            {
+              "texto": "under the weather"
+            },
+            {
+              "texto": "algo enfermo"
+            },
+            {
+              "texto": "opaco"
+            }
+          ],
+          [
+            {
+              "texto": "raining cats and dogs"
+            },
+            {
+              "texto": "llover a cántaros"
+            },
+            {
+              "texto": "opaco"
+            }
+          ],
+          [
+            {
+              "texto": "spill the beans"
+            },
+            {
+              "texto": "revelar un secreto"
+            },
+            {
+              "texto": "opaco"
+            }
+          ],
+          [
+            {
+              "texto": "the ball is in your court"
+            },
+            {
+              "texto": "te toca decidir"
+            },
+            {
+              "texto": "opaco"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-37": {
+      "explicacion": {
+        "titulo": "Símiles y metáforas",
+        "texto": "Un símil (simile) compara dos cosas con as… as o con like: as cold as ice; he roared like a lion. La estructura es as + adjetivo + as + nombre, o verbo + like + nombre. Una metáfora (metaphor) no usa as ni like: dice que una cosa es la otra (Sara is our rock). Ojo: as… as necesita el adjetivo en medio y nunca pierde el primer as, y las dos estructuras no se mezclan (no se dice «as cold like ice»). As + nombre sin comparar significa «en calidad de»."
+      },
+      "patron": {
+        "texto": "Símil con as… as, símil con like y metáfora:",
+        "formula": [
+          {
+            "texto": "as cold as ice",
+            "nota": "as + adjetivo + as + nombre"
+          },
+          {
+            "texto": "roared like a lion",
+            "nota": "verbo + like + a + nombre"
+          },
+          {
+            "texto": "Sara is our rock.",
+            "nota": "metáfora: sujeto + is + imagen, sin as ni like"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The water was so cold like ice.",
+          "correcto": "The water was as cold as ice.",
+          "explicacion": "El símil de intensidad usa as… as, no so… like. El segundo as introduce el nombre con el que se compara."
+        },
+        {
+          "incorrecto": "My brother roared as a lion.",
+          "correcto": "My brother roared like a lion.",
+          "explicacion": "Para comparar una acción se usa like. As + nombre significa «en calidad de», no «como»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo vuelven de bañarse en un lago.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Was the lake cold today?",
+            "traduccion": "¿Estaba frío el lago hoy?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It was as cold as ice! Tom laughed like a child anyway.",
+            "traduccion": "¡Estaba tan frío como el hielo! Tom se rio como un niño de todos modos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Sara?",
+            "traduccion": "¿Y Sara?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "She stayed calm. She is our rock, you know.",
+            "traduccion": "Mantuvo la calma. Ella es nuestra roca, ya sabes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué recurso usa Ana para el agua del lago?",
+          "opciones": [
+            {
+              "es": "Un símil con as… as."
+            },
+            {
+              "es": "Una metáfora sin as ni like."
+            },
+            {
+              "es": "Una frase literal sin imagen."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «as cold as ice»: compara el agua con el hielo usando as… as, que es un símil."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo",
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "símil con as… as"
+            },
+            {
+              "texto": "as + adjetivo + as + nombre"
+            },
+            {
+              "texto": "as light as a feather"
+            }
+          ],
+          [
+            {
+              "texto": "símil con like"
+            },
+            {
+              "texto": "verbo + like + nombre"
+            },
+            {
+              "texto": "roared like a lion"
+            }
+          ],
+          [
+            {
+              "texto": "metáfora"
+            },
+            {
+              "texto": "sujeto + is + imagen"
+            },
+            {
+              "texto": "Sara is our rock."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-38": {
+      "explicacion": {
+        "titulo": "Descifrar metáforas en una canción",
+        "texto": "Las letras usan imágenes para expresar emociones. Para interpretarlas: 1) lee el sentido literal («mi corazón es una maleta»); 2) pregúntate qué tiene en común esa imagen con lo que siente el cantante (estoy listo para irme); 3) confirma con el resto de la letra: la estrofa (verse) cuenta el problema y el estribillo (chorus) repite el mensaje. El contexto decide el sentido: un faro bajo la lluvia es alguien que te guía. No busques una maleta de verdad: la imagen es el sentimiento."
+      },
+      "patron": {
+        "texto": "Imagen → sentido literal → sentimiento:",
+        "formula": [
+          {
+            "texto": "My heart is a suitcase,",
+            "nota": "imagen: metáfora con is"
+          },
+          {
+            "texto": "packed and by the door.",
+            "nota": "detalle que completa la imagen: lista para partir"
+          },
+          {
+            "texto": "= I am ready to leave.",
+            "nota": "sentimiento que hay que deducir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I can't swim already.",
+          "correcto": "I can't swim anymore.",
+          "explicacion": "«Ya no» es not… anymore. Already significa «ya» con sentido afirmativo: algo ya ocurrió."
+        },
+        {
+          "incorrecto": "I'm a little boat that's sailing to home again.",
+          "correcto": "I'm a little boat that's sailing home again.",
+          "explicacion": "Home funciona como adverbio de lugar: sailing home, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos escuchan una canción y comentan la letra.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Listen to these lyrics: “The city is a river, and I can't swim anymore.” What does it mean?",
+            "traduccion": "Escucha esta letra: «La ciudad es un río y ya no puedo nadar». ¿Qué significa?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It isn't about a real river. The singer feels the city is too much.",
+            "traduccion": "No trata de un río de verdad. El cantante siente que la ciudad es demasiado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the lighthouse in the chorus?",
+            "traduccion": "¿Y el faro del estribillo?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It's a person who guides him. The chorus is about hope.",
+            "traduccion": "Es una persona que lo guía. El estribillo trata de la esperanza."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Carlos, ¿qué representa el río de la canción?",
+          "opciones": [
+            {
+              "es": "La ciudad, que agobia al cantante."
+            },
+            {
+              "es": "Un río real cerca de la casa del cantante."
+            },
+            {
+              "es": "Un deporte que quiere aprender."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que no es un río de verdad: la imagen expresa que el cantante siente la ciudad como algo demasiado grande."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Imagen",
+          "Sentido",
+          "Sentimiento"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a suitcase by the door"
+            },
+            {
+              "texto": "listo para irse"
+            },
+            {
+              "texto": "nervios e ilusión"
+            }
+          ],
+          [
+            {
+              "texto": "a river I can't swim in"
+            },
+            {
+              "texto": "la ciudad me supera"
+            },
+            {
+              "texto": "agobio"
+            }
+          ],
+          [
+            {
+              "texto": "a lighthouse in the rain"
+            },
+            {
+              "texto": "alguien que me guía"
+            },
+            {
+              "texto": "seguridad"
+            }
+          ],
+          [
+            {
+              "texto": "a boat sailing home"
+            },
+            {
+              "texto": "vuelvo a estar bien"
+            },
+            {
+              "texto": "alivio"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-39": {
+      "explicacion": {
+        "titulo": "Tu semana en imágenes, sin pasarte",
+        "texto": "Para contar tu semana con imágenes usa pocas y con propósito: un símil (as busy as a bee), una metáfora (Monday was a storm) y un modismo en su contexto (I broke the ice). Regla de oro: el texto debe entenderse también sin las imágenes, así que cada imagen acompaña un dato real (three exams, a party). No mezcles imágenes incompatibles en la misma frase (tormenta y maratón) y no pongas más de una o dos por párrafo: si te pasas (overdo), suena forzado."
+      },
+      "patron": {
+        "texto": "Imagen + dato real:",
+        "formula": [
+          {
+            "texto": "Monday was a storm:",
+            "nota": "metáfora: sujeto + was + imagen"
+          },
+          {
+            "texto": "three exams and no free minute.",
+            "nota": "dato real que explica la imagen"
+          },
+          {
+            "texto": "I was as busy as a bee,",
+            "nota": "símil con as… as"
+          },
+          {
+            "texto": "so I broke the ice at the party.",
+            "nota": "modismo en contexto, con un hecho"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "On Tuesday I was so busy as a bee.",
+          "correcto": "On Tuesday I was as busy as a bee.",
+          "explicacion": "El símil usa as… as, no so… as. El segundo as introduce la imagen con la que se compara."
+        },
+        {
+          "incorrecto": "I have to juggle with work and study.",
+          "correcto": "I have to juggle work and study.",
+          "explicacion": "Juggle lleva objeto directo; en español se dice «con», pero en inglés no se usa with."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo le pregunta a Mia cómo fue su semana.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "How was your week, Mia?",
+            "traduccion": "¿Cómo fue tu semana, Mia?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Monday was a storm: three exams. By Wednesday I was as busy as a bee.",
+            "traduccion": "El lunes fue una tormenta: tres exámenes. El miércoles estaba muy ocupada."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Wow! And the weekend?",
+            "traduccion": "¡Vaya! ¿Y el fin de semana?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Better. I broke the ice at Ana's party by asking about her cat.",
+            "traduccion": "Mejor. Rompí el hielo en la fiesta de Ana preguntando por su gato."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hizo Mia en la fiesta de Ana?",
+          "opciones": [
+            {
+              "es": "Empezó una conversación preguntando por un gato."
+            },
+            {
+              "es": "Hizo tres exámenes."
+            },
+            {
+              "es": "Trabajó muchas horas seguidas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "«Broke the ice» significa empezar una conversación, y Mia explica cómo: preguntó por el gato de Ana."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Ejemplo",
+          "Dato real"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "metáfora"
+            },
+            {
+              "texto": "Monday was a storm."
+            },
+            {
+              "texto": "three exams"
+            }
+          ],
+          [
+            {
+              "texto": "símil"
+            },
+            {
+              "texto": "as busy as a bee"
+            },
+            {
+              "texto": "work and study"
+            }
+          ],
+          [
+            {
+              "texto": "modismo"
+            },
+            {
+              "texto": "I broke the ice."
+            },
+            {
+              "texto": "a party, a cat"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-40": {
+      "explicacion": {
+        "titulo": "Un post con chispa",
+        "texto": "Un buen post cuenta una anécdota breve con dos o tres recursos figurados: un gancho (hook) al principio, una imagen en el centro y un toque de humor (spark) al final. Elige según tu audience: con amigos, humor y modismos; con desconocidos o lectores de otros países, imágenes universales. Si una imagen puede ser confusing, adáptala con un sentido directo (I felt lost). Y no uses literally con sentido figurado cuando alguien puede tomarlo al pie de la letra."
+      },
+      "patron": {
+        "texto": "Gancho + anécdota + chispa + versión directa:",
+        "formula": [
+          {
+            "texto": "I felt like a fish out of water.",
+            "nota": "gancho: imagen + situación"
+          },
+          {
+            "texto": "The anecdote: the facts, in order.",
+            "nota": "datos reales de la historia"
+          },
+          {
+            "texto": "I was over the moon.",
+            "nota": "chispa: un modismo al final"
+          },
+          {
+            "texto": "I mean, I was very happy.",
+            "nota": "versión directa para quien no conozca el modismo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was over the moon of the news.",
+          "correcto": "I was over the moon about the news.",
+          "explicacion": "Después de over the moon va about (o at) + la causa, no of."
+        },
+        {
+          "incorrecto": "I felt like a fish outside the water.",
+          "correcto": "I felt like a fish out of water.",
+          "explicacion": "El modismo es fijo: fish out of water, sin the ni outside. No se traduce palabra por palabra."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom enseña a Sara el borrador de su post sobre su primer día en un gimnasio nuevo.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Here's my post: “Yesterday I felt like a fish out of water at my new gym.” Is it a good hook?",
+            "traduccion": "Este es mi post: «Ayer me sentí como pez fuera del agua en mi nuevo gimnasio». ¿Es un buen gancho?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes, but I'm not sure your audience will get it. Some of your friends live abroad.",
+            "traduccion": "Sí, pero no estoy segura de que tu público lo entienda. Algunos de tus amigos viven en el extranjero."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fine, I'll adapt it: “I felt lost at my new gym.”",
+            "traduccion": "Vale, lo adaptaré: «Me sentí perdido en mi nuevo gimnasio»."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good. Now it's clear for everyone.",
+            "traduccion": "Bien. Ahora está claro para todos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué decide hacer Tom con el modismo?",
+          "opciones": [
+            {
+              "es": "Cambiarlo por «I felt lost» para que todos lo entiendan."
+            },
+            {
+              "es": "Dejarlo igual, sin cambios."
+            },
+            {
+              "es": "Borrar el gancho y la anécdota."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «I'll adapt it» y escribe «I felt lost»: sustituye el modismo por un sentido directo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Público",
+          "Recurso adecuado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "amigos"
+            },
+            {
+              "texto": "modismo y humor"
+            },
+            {
+              "texto": "I was over the moon."
+            }
+          ],
+          [
+            {
+              "texto": "lectores de otro país"
+            },
+            {
+              "texto": "imagen universal o sentido directo"
+            },
+            {
+              "texto": "I was very happy."
+            }
+          ],
+          [
+            {
+              "texto": "profesor o jefe"
+            },
+            {
+              "texto": "sentido directo"
+            },
+            {
+              "texto": "I was pleased."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C36: diálogo sin examen fuera de contexto; texto de evaluación ya no revela 'feels ill'; calco 'jugs' como error real; repaso sin glosa 'I give up'.",
+      "C37: explicación de like corregida; feedback de escucha coincidía mal con el audio (wind/horse).",
+      "C38: letra natural (metáforas claras); río-real como distractor inequívoco; 'swim in'; pista de 'clear' coherente; ordenar con orden alternativo; 'any more'.",
+      "C39/C40: modelos de escritura ampliados a ~72 y ~79 palabras; C40 sin 'ran like a horse' ni exceso de imágenes; alternativas válidas (balance/combine/manage, unclear).",
+      "Repeticiones de símiles (as quiet as a mouse) entre clases: P2 aceptado como repaso espiral."
+    ]
+  }
+}

@@ -1,0 +1,835 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-56",
+  "title": {
+    "en": "Offer and counteroffer",
+    "es": "Oferta y contraoferta"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer ofertas, contraofertas, concesiones, rechazos y aceptaciones en la compra de un objeto de segunda mano."
+    ]
+  },
+  "concepts": [
+    "n7-negotiation-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-55"
+  ],
+  "usesVocabulary": [
+    "offer",
+    "afford",
+    "discount",
+    "final",
+    "worth",
+    "deal",
+    "afraid",
+    "price"
+  ],
+  "usesPatterns": [
+    "n7-negotiation-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "offer",
+      "es": "ofrecer, oferta"
+    },
+    {
+      "en": "afford",
+      "es": "permitirse, poder pagar"
+    },
+    {
+      "en": "discount",
+      "es": "descuento"
+    },
+    {
+      "en": "final",
+      "es": "definitivo, final"
+    },
+    {
+      "en": "worth",
+      "es": "valer, merecer"
+    },
+    {
+      "en": "deal",
+      "es": "trato, acuerdo"
+    },
+    {
+      "en": "afraid",
+      "es": "me temo"
+    },
+    {
+      "en": "price",
+      "es": "precio"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-56.t01",
+      "en": "I can offer you eighty dollars for the bike.",
+      "es": "Puedo ofrecerte ochenta dólares por la bici.",
+      "explanationEs": "I can offer you + cantidad: es una oferta concreta.",
+      "segments": [
+        "I can offer you eighty",
+        "dollars for the bike."
+      ],
+      "audioText": "I can offer you eighty dollars for the bike.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-1"
+    },
+    {
+      "id": "en.n7.class-56.t02",
+      "en": "That is more than I can afford; would you take seventy?",
+      "es": "Eso es más de lo que puedo pagar; ¿aceptarías setenta?",
+      "explanationEs": "More than I can afford rechaza con educación; would you take + cantidad es una contraoferta.",
+      "segments": [
+        "That is more than I can",
+        "afford; would you take seventy?"
+      ],
+      "audioText": "That is more than I can afford; would you take seventy?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-1"
+    },
+    {
+      "id": "en.n7.class-56.t03",
+      "en": "I can give you a discount if you pick it up today.",
+      "es": "Puedo hacerte un descuento si vienes a recogerla hoy.",
+      "explanationEs": "Give you a discount + if: es una concesión con condición.",
+      "segments": [
+        "I can give you a discount",
+        "if you pick it up today."
+      ],
+      "audioText": "I can give you a discount if you pick it up today.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-1"
+    },
+    {
+      "id": "en.n7.class-56.t04",
+      "en": "I am afraid that is my final price.",
+      "es": "Me temo que ese es mi precio definitivo.",
+      "explanationEs": "I am afraid suaviza el rechazo; final price cierra la negociación.",
+      "segments": [
+        "I am afraid that",
+        "is my final price."
+      ],
+      "audioText": "I am afraid that is my final price.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-1"
+    },
+    {
+      "id": "en.n7.class-56.t05",
+      "en": "The bike is worth the money, because it is almost new.",
+      "es": "La bici vale lo que cuesta, porque es casi nueva.",
+      "explanationEs": "Be worth + dinero justifica el precio con una razón.",
+      "segments": [
+        "The bike is worth the money,",
+        "because it is almost new."
+      ],
+      "audioText": "The bike is worth the money, because it is almost new.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-1"
+    },
+    {
+      "id": "en.n7.class-56.t06",
+      "en": "All right, it is a deal.",
+      "es": "Está bien, trato hecho.",
+      "explanationEs": "It is a deal acepta y cierra la negociación.",
+      "segments": [
+        "All right, it",
+        "is a deal."
+      ],
+      "audioText": "All right, it is a deal.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c56.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué función tiene la frase del texto?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "It makes the first offer."
+          },
+          {
+            "text": "It accepts the deal."
+          },
+          {
+            "text": "It refuses to lower the price."
+          }
+        ],
+        "teaches": [
+          "n7-negotiation-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.pg01.seed-0",
+          "feedback": {
+            "es": "I am afraid… final price rechaza con tacto: el vendedor no bajará más."
+          },
+          "hint": {
+            "es": "Busca la palabra que indica que el precio ya no se mueve."
+          },
+          "text": "«I am afraid that is my final price.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0e8b30d614ef8e81b8855964f7a36acd11b7d2ca05adbe3b69ea59c55b948905"
+      },
+      {
+        "id": "en.n7.c56.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Eso es más de lo que puedo permitirme.»"
+        },
+        "answer": {
+          "text": "afford",
+          "accepted": [
+            "afford"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-negotiation-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.pg02.seed-0",
+          "feedback": {
+            "es": "More than I can afford es la forma educada de decir que algo es demasiado caro."
+          },
+          "hint": {
+            "es": "Mira la frase de la clase en la que Tom dice que el precio es muy alto."
+          },
+          "text": "That is more than I can ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f8f472524cf9ff1dfbfbb57fb1ceb6095b71cef2d1927e02f506b0a3ab882184"
+      },
+      {
+        "id": "en.n7.c56.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Si vienes hoy a recogerla, puedo hacerte un descuento.»"
+        },
+        "answer": {
+          "text": "If you pick it up today I can give you a discount",
+          "tokens": [
+            "If",
+            "you",
+            "pick",
+            "it",
+            "up",
+            "today",
+            "I",
+            "can",
+            "give",
+            "you",
+            "a",
+            "discount"
+          ],
+          "accepted": [
+            "If you pick it up today I can give you a discount",
+            "I can give you a discount if you pick it up today"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-negotiation-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.pg03.seed-0",
+          "feedback": {
+            "es": "La condición con if abre la frase y la concesión (I can give you a discount) la completa."
+          },
+          "hint": {
+            "es": "La condición con if puede ir al principio o al final de la frase."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:711f4544de4cc63155aef6d8de534c600f3471ef5a17bf75b64faf0beaf124b2"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c56.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada intervención con su función en la negociación."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I can offer you fifty dollars.",
+              {
+                "es": "Oferta"
+              }
+            ],
+            [
+              "Would you take sixty?",
+              {
+                "es": "Contraoferta"
+              }
+            ],
+            [
+              "I can give you a discount if you pay today.",
+              {
+                "es": "Concesión con condición"
+              }
+            ],
+            [
+              "I am afraid I cannot go lower.",
+              {
+                "es": "Rechazo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.p01.seed-0",
+          "feedback": {
+            "es": "Ofrecer, contraofertar, conceder con condición y rechazar son funciones distintas."
+          },
+          "pairs": [
+            [
+              "I can offer you fifty dollars.",
+              {
+                "es": "Oferta"
+              }
+            ],
+            [
+              "Would you take sixty?",
+              {
+                "es": "Contraoferta"
+              }
+            ],
+            [
+              "I can give you a discount if you pay today.",
+              {
+                "es": "Concesión con condición"
+              }
+            ],
+            [
+              "I am afraid I cannot go lower.",
+              {
+                "es": "Rechazo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:5509885fa10b601ba39cd353e10675441bf11fe1f0f78204d58ed52a00829a7d"
+      },
+      {
+        "id": "en.n7.c56.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace la persona que habla."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She makes a lower offer and explains her limit."
+          },
+          {
+            "text": "She accepts the price at once."
+          },
+          {
+            "text": "She gives a discount to the seller."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.p02.seed-0",
+          "feedback": {
+            "es": "Would you take fifty? es una contraoferta; that is all I can afford explica su límite."
+          },
+          "audio": "Would you take fifty dollars for the old desk? That is all I can afford.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:fb10c221b50a56148f0838edad77e6d5578de6400edd266dd79634980295c106"
+      },
+      {
+        "id": "en.n7.c56.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres intervenciones de una negociación."
+        },
+        "answer": {
+          "text": "afraid | discount | deal",
+          "accepted": [
+            "afraid | discount | deal"
+          ],
+          "parts": [
+            {
+              "text": "afraid",
+              "accepted": [
+                "afraid"
+              ]
+            },
+            {
+              "text": "discount",
+              "accepted": [
+                "discount"
+              ]
+            },
+            {
+              "text": "deal",
+              "accepted": [
+                "deal"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.p03.seed-0",
+          "feedback": {
+            "es": "I am afraid suaviza el rechazo, discount es la concesión y deal cierra el trato."
+          },
+          "sentences": [
+            "I am ___ that is my final price.",
+            "I can give you a ___ if you pay today.",
+            "All right, it is a ___."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:736a7be9fcc67312199cbeaf45480dee4297f656fbc2dd04de2e9266cd5c8f2d"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c56.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "El vendedor pide sesenta dólares por el teléfono. ¿Qué frase es una contraoferta?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It is a deal."
+          },
+          {
+            "text": "Would you take forty-five?"
+          },
+          {
+            "text": "That is my final price."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.e01.seed-0",
+          "feedback": {
+            "es": "Would you take forty-five? propone otro precio; las otras frases aceptan o rechazan."
+          },
+          "text": "Seller: «The phone is sixty dollars.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:856070ab9150159c5c4e14efaabb89a47160a27b7ea40a4f495dc3fe08a5f784"
+      },
+      {
+        "id": "en.n7.c56.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué condición pone el comprador."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The seller must bring it home."
+          },
+          {
+            "text": "The buyer will pay today."
+          },
+          {
+            "text": "The seller must include the helmet."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.e02.seed-0",
+          "feedback": {
+            "es": "But only if you include the helmet es la condición: el casco debe estar incluido."
+          },
+          "audio": "That is a bit more than I wanted to spend. I can go up to ninety dollars, but only if you include the helmet.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1a48c2a43d8e1b707c827edf341beba7a512517b4819effa14b5b316b06d30f4"
+      },
+      {
+        "id": "en.n7.c56.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me temo que no puedo bajar más el precio.»"
+        },
+        "answer": {
+          "text": "I am afraid I cannot go any lower",
+          "tokens": [
+            "I",
+            "am",
+            "afraid",
+            "I",
+            "cannot",
+            "go",
+            "any",
+            "lower"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.e03.seed-0",
+          "feedback": {
+            "es": "I am afraid suaviza el rechazo y cannot go any lower indica que no hay más rebaja."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:be93b05cf0b19edd0944cb012e6de37e3fe2b73e60481a309510cf8f4692f694"
+      },
+      {
+        "id": "en.n7.c56.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una contraoferta con una condición para la guitarra usada."
+        },
+        "answer": {
+          "text": "Would you take one hundred dollars if I pay today?",
+          "accepted": [
+            "Would you take one hundred dollars if I pay today?",
+            "I can offer you one hundred dollars if I pay today.",
+            "Would you take a hundred if I pay today?",
+            "Would you take a hundred dollars if I pay today?",
+            "Would you take 100 dollars if I pay today?",
+            "Would you take one hundred if I pay today?",
+            "Would you take one hundred dollars if I paid today?",
+            "If I pay today, would you take one hundred dollars?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.e04.seed-0",
+          "feedback": {
+            "es": "Una contraoferta combina un precio propio (one hundred) con una condición (if I pay today)."
+          },
+          "text": "El vendedor pide 140 dólares por una guitarra usada. Tú quieres pagar 100 si pagas hoy."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:025280076e30d8bc353055eb7645eac6ac3ee89aced1843e5b9420659a023d98"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c56.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase acepta el trato?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Fine, I will take it at that price."
+          },
+          {
+            "text": "I am afraid that is too much."
+          },
+          {
+            "text": "Would you take less?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.r01.seed-0",
+          "feedback": {
+            "es": "Fine, I will take it acepta el precio propuesto; las otras dos siguen negociando."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ba31438b974c917344b42d125d7b7241590e02195ae7ed2db49258cf4a010b37"
+      },
+      {
+        "id": "en.n7.c56.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El reloj vale cada dólar, porque es casi nuevo.»"
+        },
+        "answer": {
+          "text": "worth",
+          "accepted": [
+            "worth"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.r02.seed-0",
+          "feedback": {
+            "es": "Be worth + cantidad justifica el precio con una razón."
+          },
+          "text": "The watch is ___ every dollar, because it is almost new."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ff97cae95534de02ee5042cc714a1168de09018b7e55fc0ebc0f1b9780df875f"
+      },
+      {
+        "id": "en.n7.c56.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige cuándo baja el precio el vendedor."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "If the buyer pays today."
+          },
+          {
+            "text": "If the buyer also takes the lamp."
+          },
+          {
+            "text": "If the buyer comes back tomorrow."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c56.r03.seed-0",
+          "feedback": {
+            "es": "El descuento llega con la condición if you take the lamp as well."
+          },
+          "audio": "I am afraid my price is firm, but I can give you a discount if you take the lamp as well.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f501e45187bde488595cf804be3db46c06bfd59da4f195028ec7c1149fdf2fff"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c56.e01": {
+      "reteach": "en.n7.class-56.t01",
+      "review": "en.n7.c56.r01"
+    },
+    "en.n7.c56.e02": {
+      "reteach": "en.n7.class-56.t02",
+      "review": "en.n7.c56.r02"
+    },
+    "en.n7.c56.e03": {
+      "reteach": "en.n7.class-56.t03",
+      "review": "en.n7.c56.r03"
+    },
+    "en.n7.c56.e04": {
+      "reteach": "en.n7.class-56.t04",
+      "review": "en.n7.c56.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

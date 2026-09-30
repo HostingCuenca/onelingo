@@ -1,0 +1,698 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "classes": {
+    "en.n7.class-26": {
+      "explicacion": {
+        "titulo": "Palabras que señalan hacia atrás",
+        "texto": "Las palabras de referencia evitan repetir y enlazan las frases. This señala lo que acabas de decir (a menudo toda una idea); that señala algo dicho antes y suele valorarlo. The former y the latter se usan solo con dos elementos: the former es el primero que nombraste y the latter el último. Such + nombre significa «ese tipo de»: such scenery. Para hallar el referente, mira hacia atrás y prueba a sustituir la palabra por tu candidato: la frase debe tener sentido."
+      },
+      "patron": {
+        "texto": "Mención + palabra de referencia + comentario:",
+        "formula": [
+          {
+            "texto": "We took the ferry,",
+            "nota": "mención: la idea que se retomará"
+          },
+          {
+            "texto": "and this",
+            "nota": "referencia: señala toda la idea anterior"
+          },
+          {
+            "texto": "saved us a long detour.",
+            "nota": "comentario sobre esa idea"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The hostel and the hotel were full; the later was more expensive.",
+          "correcto": "The hostel and the hotel were full; the latter was more expensive.",
+          "explicacion": "Later significa «más tarde». Para «el último de los dos» se escribe the latter."
+        },
+        {
+          "incorrecto": "We missed the ferry. Such was a mistake.",
+          "correcto": "We missed the ferry. That was a mistake.",
+          "explicacion": "Such va acompañado de un nombre (such a mistake). Para señalar toda una idea se usa this o that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos revisan el borrador del blog de viaje de Carlos.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "You wrote: we missed the last ferry, and this cost us a day. What does this mean?",
+            "traduccion": "Escribiste: perdimos el último ferri, y esto nos costó un día. ¿Qué significa this?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "It means missing the ferry. That was the problem.",
+            "traduccion": "Significa perder el ferri. Ese fue el problema."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And here: the hostel and the hotel were full, and the former was cheaper. Which one is cheaper?",
+            "traduccion": "Y aquí: el albergue y el hotel estaban llenos y el primero era más barato. ¿Cuál es más barato?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "The hostel. The former is the first one I named. The latter is the hotel.",
+            "traduccion": "El albergue. El primero es el que nombré antes. El último es el hotel."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿a qué se refiere «the former»?",
+          "opciones": [
+            {
+              "es": "Al albergue, que Carlos nombró primero."
+            },
+            {
+              "es": "Al hotel, que Carlos nombró segundo."
+            },
+            {
+              "es": "Al ferri que perdieron."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice que the former es el primero que nombró, y nombró primero el albergue."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Palabra",
+          "Señala",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "this"
+            },
+            {
+              "texto": "la idea que acabas de decir"
+            },
+            {
+              "texto": "This saved us a day."
+            }
+          ],
+          [
+            {
+              "texto": "that"
+            },
+            {
+              "texto": "algo dicho antes, con valoración"
+            },
+            {
+              "texto": "That was a mistake."
+            }
+          ],
+          [
+            {
+              "texto": "the former / the latter"
+            },
+            {
+              "texto": "el primero / el último de dos"
+            },
+            {
+              "texto": "…the latter had better scenery."
+            }
+          ],
+          [
+            {
+              "texto": "such + nombre"
+            },
+            {
+              "texto": "ese tipo de cosa"
+            },
+            {
+              "texto": "such scenery"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-27": {
+      "explicacion": {
+        "titulo": "Cuantificador + of which / of whom",
+        "texto": "Para añadir un detalle sobre una parte de un grupo ya nombrado se usa coma + cuantificador + of which (cosas) u of whom (personas): We met six travellers, all of whom were walking to the same village. Sirven all, some, most, many, few, none, both, neither, one, two y hasta un superlativo (the highest of which). Si of which/whom es el sujeto, el verbo va directo (none of which had); si es el objeto, sigue un sujeto nuevo (a few of which I will share). Tras of se usa whom, nunca who."
+      },
+      "patron": {
+        "texto": "Grupo nombrado, + cuantificador + of which / whom + verbo:",
+        "formula": [
+          {
+            "texto": "We met six travellers,",
+            "nota": "grupo nombrado antes de la coma"
+          },
+          {
+            "texto": "all of whom",
+            "nota": "cuantificador + of whom (personas)"
+          },
+          {
+            "texto": "were going to the same village.",
+            "nota": "verbo directo: of whom ya es el sujeto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We met six travellers, all of who were going to the village.",
+          "correcto": "We met six travellers, all of whom were going to the village.",
+          "explicacion": "Después de una preposición (of) se usa whom, no who."
+        },
+        {
+          "incorrecto": "The guesthouses were old, neither of which they had hot water.",
+          "correcto": "The guesthouses were old, neither of which had hot water.",
+          "explicacion": "Of which ya hace de sujeto: no se repite con they."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo preparan una entrada de blog sobre un mercado de un pueblo.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What did you buy at the market?",
+            "traduccion": "¿Qué compraste en el mercado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I bought five souvenirs, two of which were handmade.",
+            "traduccion": "Compré cinco recuerdos, dos de los cuales eran hechos a mano."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And the people? Did you meet anybody?",
+            "traduccion": "¿Y la gente? ¿Conociste a alguien?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We met four tourists, all of whom were very friendly.",
+            "traduccion": "Conocimos a cuatro turistas, todos los cuales fueron muy amables."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Great. You can write both sentences like that in your blog.",
+            "traduccion": "Genial. Puedes escribir las dos frases así en tu blog."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuántos recuerdos eran hechos a mano?",
+          "opciones": [
+            {
+              "es": "Solo dos de ellos."
+            },
+            {
+              "es": "Los cinco."
+            },
+            {
+              "es": "Cuatro de ellos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo compró cinco recuerdos, two of which were handmade: solo dos eran hechos a mano. El cuatro corresponde a los turistas, no a los recuerdos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Para",
+          "Ejemplos",
+          "Nota"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Personas"
+            },
+            {
+              "texto": "all / some / most / none of whom"
+            },
+            {
+              "texto": "tras of se usa whom"
+            }
+          ],
+          [
+            {
+              "texto": "Cosas"
+            },
+            {
+              "texto": "all / some / most / none of which"
+            },
+            {
+              "texto": "también animales e ideas"
+            }
+          ],
+          [
+            {
+              "texto": "Dos elementos"
+            },
+            {
+              "texto": "both / neither / either of which"
+            },
+            {
+              "texto": "concuerda con el número"
+            }
+          ],
+          [
+            {
+              "texto": "Un número o un superlativo"
+            },
+            {
+              "texto": "two of which / the highest of which"
+            },
+            {
+              "texto": "va tras una coma"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-28": {
+      "explicacion": {
+        "titulo": "Elipsis y sustitución: no repetir lo dicho",
+        "texto": "Para no repetir, el inglés omite o sustituye lo que ya se entiende. One/ones reemplaza un nombre contable: a smaller one. Do so reemplaza un verbo con su complemento: I did so. Did too o so do I evitan repetir el verbo. So y not reemplazan una cláusula entera tras hope, think, believe o be afraid: I hope not = espero que no llueva. Al leer, repón la palabra omitida para comprobar el sentido; no uses one con incontables (no «a bigger water»)."
+      },
+      "patron": {
+        "texto": "Mención + sustituto + complemento nuevo:",
+        "formula": [
+          {
+            "texto": "I wanted a cheaper tent,",
+            "nota": "mención: el nombre que se repetirá"
+          },
+          {
+            "texto": "so I bought a smaller one.",
+            "nota": "one = tent: no se repite"
+          },
+          {
+            "texto": "I hope not.",
+            "nota": "not = that it will not rain"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I lost my old backpack, so I bought a new.",
+          "correcto": "I lost my old backpack, so I bought a new one.",
+          "explicacion": "Tras un adjetivo hace falta el sustituto one: en español basta «una nueva»."
+        },
+        {
+          "incorrecto": "Will it rain tomorrow? I hope that no.",
+          "correcto": "Will it rain tomorrow? I hope not.",
+          "explicacion": "«Espero que no» se dice I hope not: not sustituye a toda la cláusula, sin that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom leen el diario de viaje de Ana y comentan las palabras que sustituyen a otras.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "You wrote: I wanted a cheaper tent, so I bought a smaller one. What does one mean?",
+            "traduccion": "Escribiste: quería una tienda más barata, así que compré una más pequeña. ¿Qué significa one?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It replaces tent. I did not want to repeat the word.",
+            "traduccion": "Sustituye a tent. No quería repetir la palabra."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And here: will it rain tomorrow? I hope not.",
+            "traduccion": "Y aquí: ¿lloverá mañana? Espero que no."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Not means that it will not rain.",
+            "traduccion": "Not significa que no lloverá."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Got it. And Leo packed his backpack before sunrise, and Mia did too.",
+            "traduccion": "Entendido. Y Leo hizo su mochila antes del amanecer y Mia también."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sustituye «one» en el diario de Ana?",
+          "opciones": [
+            {
+              "es": "La palabra tent (tienda)."
+            },
+            {
+              "es": "La palabra cheaper."
+            },
+            {
+              "es": "La frase completa «I wanted a cheaper tent»."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «It replaces tent»: one evita repetir el nombre tent."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Sustituto",
+          "Reemplaza",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "one / ones"
+            },
+            {
+              "texto": "un nombre contable"
+            },
+            {
+              "texto": "a smaller one"
+            }
+          ],
+          [
+            {
+              "texto": "do so"
+            },
+            {
+              "texto": "verbo + complemento"
+            },
+            {
+              "texto": "I did so without checking."
+            }
+          ],
+          [
+            {
+              "texto": "so / not"
+            },
+            {
+              "texto": "una cláusula entera"
+            },
+            {
+              "texto": "I hope not."
+            }
+          ],
+          [
+            {
+              "texto": "did too"
+            },
+            {
+              "texto": "el verbo ya dicho"
+            },
+            {
+              "texto": "Mia did too."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-29": {
+      "explicacion": {
+        "titulo": "Sustantivos resumidores y transiciones",
+        "texto": "Un sustantivo resumidor (this proposal, such concerns, this trend, this decision, this development, this approach) condensa la idea anterior en un nombre precedido de this, these o such. Cierra un párrafo y abre el siguiente, y además valora lo dicho. Elige el nombre según la idea: un plan es un proposal, varias dudas son concerns, algo que se extiende es un trend, un acto de alguien es una decision. Las transiciones aclaran la relación: However (contraste), As a result (consecuencia), In addition (suma)."
+      },
+      "patron": {
+        "texto": "Idea + This / Such + sustantivo resumidor + comentario:",
+        "formula": [
+          {
+            "texto": "The council plans to ban cars.",
+            "nota": "idea que se quiere resumir"
+          },
+          {
+            "texto": "This proposal",
+            "nota": "sustantivo resumidor: this + nombre"
+          },
+          {
+            "texto": "has divided the town.",
+            "nota": "comentario sobre esa idea"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Shopkeepers are worried. Such concern are understandable.",
+          "correcto": "Shopkeepers are worried. Such concerns are understandable.",
+          "explicacion": "Such resume varias dudas: el nombre va en plural y el verbo también."
+        },
+        {
+          "incorrecto": "Shopkeepers feared losing customers. In the other hand, sales rose.",
+          "correcto": "Shopkeepers feared losing customers. On the other hand, sales rose.",
+          "explicacion": "La transición es On the other hand, con on, no in (por otro lado)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara revisan un texto sobre la ciudad para el periódico del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "My second paragraph starts with: the council plans to ban cars. It is hard to follow.",
+            "traduccion": "Mi segundo párrafo empieza con: el ayuntamiento planea prohibir los coches. Es difícil de seguir."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Begin the next paragraph with a summary noun: this proposal has divided the town.",
+            "traduccion": "Empieza el siguiente párrafo con un sustantivo resumidor: esta propuesta ha dividido a la ciudad."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Because it sums up the plan in two words?",
+            "traduccion": "¿Porque resume el plan en dos palabras?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Yes. And after the shopkeepers' complaints, write: such concerns are understandable.",
+            "traduccion": "Sí. Y tras las quejas de los comerciantes, escribe: tales preocupaciones son comprensibles."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And then I can write: however, sales rose.",
+            "traduccion": "Y luego puedo escribir: sin embargo, las ventas subieron."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿para qué sirve «this proposal»?",
+          "opciones": [
+            {
+              "es": "Para resumir el plan anterior y enlazar con lo siguiente."
+            },
+            {
+              "es": "Para dar una opinión personal sobre el alcalde."
+            },
+            {
+              "es": "Para cambiar de tema sin conexión."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara confirma que resume el plan en dos palabras: es un puente entre el párrafo anterior y el siguiente."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Idea anterior",
+          "Sustantivo resumidor",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Un plan"
+            },
+            {
+              "texto": "this proposal"
+            },
+            {
+              "texto": "This proposal has divided the town."
+            }
+          ],
+          [
+            {
+              "texto": "Varias dudas"
+            },
+            {
+              "texto": "such concerns"
+            },
+            {
+              "texto": "Such concerns are understandable."
+            }
+          ],
+          [
+            {
+              "texto": "Algo que se extiende"
+            },
+            {
+              "texto": "this trend"
+            },
+            {
+              "texto": "This trend is growing."
+            }
+          ],
+          [
+            {
+              "texto": "Una elección"
+            },
+            {
+              "texto": "this decision"
+            },
+            {
+              "texto": "This decision surprised everybody."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-30": {
+      "explicacion": {
+        "titulo": "Comparar dos lugares con un texto cohesionado",
+        "texto": "Un texto de varios párrafos se sostiene con recursos que ya conoces. Referencia: this, such, the former / the latter. Cláusulas con cuantificador: both of which, most of whom. Sustitución: the ones, one, so. Sustantivos resumidores: this decision, this contrast. Y conectores de contraste: whereas, while, in contrast. Para comparar, presenta los dos lugares, contrasta con whereas y cierra con una valoración. Al revisar, corrige la coma delante de however (se usa punto y coma o punto) y los this sin referente claro."
+      },
+      "patron": {
+        "texto": "Lugar A + whereas + lugar B; + sustantivo resumidor:",
+        "formula": [
+          {
+            "texto": "Lisbon is crowded and lively,",
+            "nota": "primer lugar: sus rasgos"
+          },
+          {
+            "texto": "whereas Sintra is peaceful.",
+            "nota": "contraste con el segundo lugar"
+          },
+          {
+            "texto": "This contrast is why I recommend both.",
+            "nota": "sustantivo resumidor y valoración"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Lisbon is crowded, however Sintra is peaceful.",
+          "correcto": "Lisbon is crowded; however, Sintra is peaceful.",
+          "explicacion": "However no une dos frases con solo una coma. Va tras punto y coma o punto, y con coma detrás; otra opción es whereas."
+        },
+        {
+          "incorrecto": "We visited two towns, both of them have a charming centre.",
+          "correcto": "We visited two towns, both of which have a charming centre.",
+          "explicacion": "Para unir las frases se usa both of which; con both of them quedan dos frases pegadas por una coma."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo planean una entrada de blog que compara dos ciudades.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I want to compare Lisbon and Sintra in my blog.",
+            "traduccion": "Quiero comparar Lisboa y Sintra en mi blog."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Start with the contrast: Lisbon is crowded, whereas Sintra is peaceful.",
+            "traduccion": "Empieza con el contraste: Lisboa es bulliciosa, mientras que Sintra es tranquila."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Both towns are charming. The former has the nightlife, and the latter has the calm.",
+            "traduccion": "Las dos ciudades son encantadoras. La primera tiene la vida nocturna y la segunda la calma."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Good. Then close with: this contrast makes the trip worth it.",
+            "traduccion": "Bien. Luego cierra con: este contraste hace que el viaje merezca la pena."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué propone Leo cerrar el texto?",
+          "opciones": [
+            {
+              "es": "Con un resumen del contraste usando «this contrast»."
+            },
+            {
+              "es": "Con una lista de precios de hoteles."
+            },
+            {
+              "es": "Con una queja sobre el ruido de Lisboa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo propone cerrar con «this contrast…»: un sustantivo resumidor que recoge el contraste de todo el texto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Recurso",
+          "Función",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Referencia"
+            },
+            {
+              "texto": "evitar repetir"
+            },
+            {
+              "texto": "the former … the latter"
+            }
+          ],
+          [
+            {
+              "texto": "Cuantificador + of which / whom"
+            },
+            {
+              "texto": "añadir un detalle"
+            },
+            {
+              "texto": "both of which have a charming centre"
+            }
+          ],
+          [
+            {
+              "texto": "Sustitución"
+            },
+            {
+              "texto": "acortar"
+            },
+            {
+              "texto": "the ones in the hills"
+            }
+          ],
+          [
+            {
+              "texto": "Sustantivo resumidor"
+            },
+            {
+              "texto": "cerrar una idea"
+            },
+            {
+              "texto": "This contrast is why…"
+            }
+          ],
+          [
+            {
+              "texto": "Conector de contraste"
+            },
+            {
+              "texto": "oponer dos ideas"
+            },
+            {
+              "texto": "whereas / in contrast"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C27: la explicación afirmaba que tras of which/whom siempre va el verbo, pero a few of which I will share lleva sujeto nuevo: corregida explicación, nota y patrón; relacionar desambiguado; feedback sin posiciones.",
+      "C28 evaluación 4 (escribir, 12 palabras): añadidas variantes (con but, orden inverso) y rúbrica con grupos flexibles (green one / blue one / prefer-better). Evaluación 1 parte 3 cambiada a «Leo ___ too» (did) para evitar la respuesta alternativa did so; práctica 2 acepta did it.",
+      "C29: modelo de reescritura sin datos inventados, rúbrica con grupos no solapados (antes this decision contaba en varios); relacionar sin pares solapados (However/On the other hand); repaso escribir acotado a development/trend.",
+      "C30: variante con comma splice corregida (in contrast con punto y coma) y most of whom fiel a los datos; rúbrica sin grupo mezclado (such an atmosphere); ordenar con whereas inicial aceptado.",
+      "Revisión independiente: sin P0/P1 pendientes."
+    ]
+  }
+}

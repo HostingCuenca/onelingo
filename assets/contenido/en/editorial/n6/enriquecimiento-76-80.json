@@ -1,0 +1,668 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 76,
+    "end": 80
+  },
+  "classes": {
+    "en.n6.class-76": {
+      "explicacion": {
+        "titulo": "Cómo un titular orienta la lectura",
+        "texto": "Un titular no solo resume: enmarca (frame) cómo vas a leer la noticia. Hay tres señales. Primera, las palabras cargadas (shocking, slashes) transmiten emoción o juicio, mientras que un verbo neutral (closes, announces) solo informa. Segunda, lo que se destaca u omite: qué dato va delante y cuál falta, como la razón o las cifras. Tercera, el tono, que puede ser calmado o enfadado. Pregunta siempre: ¿qué pensaría si solo leyera el titular? Y compáralo con otros titulares del mismo hecho."
+      },
+      "patron": {
+        "texto": "Quién + verbo + qué + consecuencia destacada:",
+        "formula": [
+          {
+            "texto": "Council",
+            "nota": "quién actúa"
+          },
+          {
+            "texto": "slashes",
+            "nota": "verbo cargado: suena violento"
+          },
+          {
+            "texto": "library budget,",
+            "nota": "qué pasa"
+          },
+          {
+            "texto": "leaving children with nowhere to read",
+            "nota": "consecuencia emocional destacada; falta la razón"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The headline omit the reason.",
+          "correcto": "The headline omits the reason.",
+          "explicacion": "Con headline (he/she/it) el verbo en presente lleva -s: omits."
+        },
+        {
+          "incorrecto": "The headline has a lot of emotional charge.",
+          "correcto": "The headline uses a lot of loaded words.",
+          "explicacion": "«Carga emocional» no se dice emotional charge; en inglés se habla de loaded words."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comparan dos titulares sobre la biblioteca del pueblo.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at two headlines about the library. One says: Council closes library. The other says: Council slashes library budget.",
+            "traduccion": "Mira dos titulares sobre la biblioteca. Uno dice: el ayuntamiento cierra la biblioteca. El otro dice: el ayuntamiento recorta el presupuesto de la biblioteca."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The second one has a loaded word: slashes.",
+            "traduccion": "El segundo tiene una palabra cargada: recorta."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Right. And it does not say why.",
+            "traduccion": "Exacto. Y no dice por qué."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, it omits the reason. The first headline is more neutral.",
+            "traduccion": "Sí, omite la razón. El primer titular es más neutral."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué palabra del segundo titular orienta la lectura?",
+          "opciones": [
+            {
+              "es": "El verbo «slashes», que tiene carga emocional."
+            },
+            {
+              "es": "La palabra «library», que es un lugar."
+            },
+            {
+              "es": "El nombre «council», que es una institución."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom señala: «The second one has a loaded word: slashes». Ese verbo añade emoción al hecho."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal",
+          "Titular neutral",
+          "Titular orientado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Verbo"
+            },
+            {
+              "texto": "Council reduces library budget"
+            },
+            {
+              "texto": "Council slashes library budget"
+            }
+          ],
+          [
+            {
+              "texto": "Adjetivo"
+            },
+            {
+              "texto": "Council announces plan"
+            },
+            {
+              "texto": "Council announces shocking plan"
+            }
+          ],
+          [
+            {
+              "texto": "Dato omitido"
+            },
+            {
+              "texto": "Library closes: only ten visitors a day"
+            },
+            {
+              "texto": "Library closes (no reason given)"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-77": {
+      "explicacion": {
+        "titulo": "Verbos de reporte: la actitud del periodista",
+        "texto": "Los verbos de reporte no solo dicen «dijo»: muestran la actitud del periodista. State informa sin dudas. Claim e insist dejan una distancia: «afirma, pero no está probado» y «lo repite con fuerza». Allege es aún más distante: sirve para acusaciones aún sin probar. Admit reconoce algo negativo para quien habla; deny rechaza una acusación. Todos van con that + oración: Police allege that… Ojo: es insist that, no insist in that; y deny that, no deny to."
+      },
+      "patron": {
+        "texto": "Sujeto + verbo de reporte + that + hecho:",
+        "formula": [
+          {
+            "texto": "Some drivers",
+            "nota": "la fuente: quién lo dice"
+          },
+          {
+            "texto": "claim",
+            "nota": "verbo de reporte: marca distancia"
+          },
+          {
+            "texto": "that",
+            "nota": "introduce lo que dice la fuente"
+          },
+          {
+            "texto": "the light was green.",
+            "nota": "lo que la fuente dice"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The mayor denies to close the park.",
+          "correcto": "The mayor denies that the park will close.",
+          "explicacion": "Deny se construye con that + oración (o con -ing), no con to + verbo."
+        },
+        {
+          "incorrecto": "Both teams insist in that they played fairly.",
+          "correcto": "Both teams insist that they played fairly.",
+          "explicacion": "En inglés se dice insist that; insistir «en que» no lleva preposición."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara lee una noticia a Leo y hablan de los verbos que usa.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Listen: Police allege that the man took the bike. Why not state?",
+            "traduccion": "Escucha: la policía alega que el hombre se llevó la bicicleta. ¿Por qué no state?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Because allege means that nobody has proved it yet.",
+            "traduccion": "Porque allege significa que nadie lo ha probado todavía."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I see. And the next line says: The man denies that he took it.",
+            "traduccion": "Ya veo. Y la línea siguiente dice: el hombre niega que se la llevara."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. The report does not state who saw him.",
+            "traduccion": "Sí. El informe no indica quién lo vio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué usa la noticia el verbo allege?",
+          "opciones": [
+            {
+              "es": "Porque todavía no está probado que el hombre se llevara la bicicleta."
+            },
+            {
+              "es": "Porque el hombre ya lo admitió todo."
+            },
+            {
+              "es": "Porque la policía no quiso hablar."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo explica que allege significa que nadie lo ha probado todavía; por eso el periódico no lo presenta como hecho."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Actitud",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "state"
+            },
+            {
+              "texto": "neutral, formal"
+            },
+            {
+              "texto": "The report states that the road is closed."
+            }
+          ],
+          [
+            {
+              "texto": "claim"
+            },
+            {
+              "texto": "distancia: no está probado"
+            },
+            {
+              "texto": "The driver claims that he was not speeding."
+            }
+          ],
+          [
+            {
+              "texto": "allege"
+            },
+            {
+              "texto": "acusación sin prueba"
+            },
+            {
+              "texto": "Police allege that the man took the bike."
+            }
+          ],
+          [
+            {
+              "texto": "insist"
+            },
+            {
+              "texto": "firmeza repetida"
+            },
+            {
+              "texto": "They insist that they played fairly."
+            }
+          ],
+          [
+            {
+              "texto": "admit / deny"
+            },
+            {
+              "texto": "reconoce / rechaza"
+            },
+            {
+              "texto": "The owner admits it. The mayor denies it."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-78": {
+      "explicacion": {
+        "titulo": "Un hecho, dos versiones",
+        "texto": "Cuando dos medios cuentan el mismo hecho, compáralos en tres columnas. Coincidencias: lo que dicen ambos (both say…), que suele ser lo más fiable. Diferencias: lo que uno dice y el otro no, o cifras distintas (one says…, the other says…; they differ about…). Datos sin comprobar: lo que aparece en una sola versión y nadie confirma (it is unverified). Las diferencias muestran el enfoque de cada medio; los datos sin comprobar necesitan una tercera fuente. Ojo: both lleva verbo en plural (both say)."
+      },
+      "patron": {
+        "texto": "Both outlets… but only one… and it is unverified:",
+        "formula": [
+          {
+            "texto": "Both outlets",
+            "nota": "coincidencia: los dos medios"
+          },
+          {
+            "texto": "say the market opened,",
+            "nota": "lo que coincide"
+          },
+          {
+            "texto": "but only one outlet",
+            "nota": "diferencia: solo uno"
+          },
+          {
+            "texto": "mentions the mayor's speech.",
+            "nota": "dato que queda sin comprobar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Both outlets says the market opened on Saturday.",
+          "correcto": "Both outlets say the market opened on Saturday.",
+          "explicacion": "Both es plural: el verbo no lleva -s (both say)."
+        },
+        {
+          "incorrecto": "They differ of the number of visitors.",
+          "correcto": "They differ about the number of visitors.",
+          "explicacion": "Con differ se usa about, on o in, no of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos comparan dos notas sobre el mercado del pueblo.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I have two notes about the market. Both say it opened on Saturday.",
+            "traduccion": "Tengo dos notas sobre el mercado. Las dos dicen que abrió el sábado."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Do they give the same attendance?",
+            "traduccion": "¿Dan la misma asistencia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. One says two thousand visitors, the other says five thousand.",
+            "traduccion": "No. Una dice dos mil visitantes, la otra dice cinco mil."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the mayor's speech?",
+            "traduccion": "¿Y el discurso del alcalde?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Only one outlet mentions it, and it is unverified.",
+            "traduccion": "Solo un medio lo menciona, y está sin comprobar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿en qué coinciden las dos notas?",
+          "opciones": [
+            {
+              "es": "En que el mercado abrió el sábado."
+            },
+            {
+              "es": "En el número de visitantes."
+            },
+            {
+              "es": "En el discurso del alcalde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Both say it opened on Saturday». Difieren en la asistencia y solo una menciona el discurso."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué busco",
+          "Señal en inglés",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Coincide"
+            },
+            {
+              "texto": "both say / the same in both"
+            },
+            {
+              "texto": "Both say that the market opened."
+            }
+          ],
+          [
+            {
+              "texto": "Cambia"
+            },
+            {
+              "texto": "one says… the other says…"
+            },
+            {
+              "texto": "One says 2,000 visitors, the other says 5,000."
+            }
+          ],
+          [
+            {
+              "texto": "Sin comprobar"
+            },
+            {
+              "texto": "nobody confirms / unverified"
+            },
+            {
+              "texto": "Nobody confirms that the mayor spoke."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-79": {
+      "explicacion": {
+        "titulo": "Reescribir sin sesgo y atribuir",
+        "texto": "Reescribir sin sesgo tiene tres pasos. Primero, cambia las palabras cargadas (greedy, hits, shocking) por verbos y adjetivos neutros (raises, announces). Segundo, quita los juicios y deja hechos y cifras (ten per cent). Tercero, atribuye cada dato a su fuente: The spokesperson says…, According to a residents' association… Usa verbos de reporte neutros (says, states, reports) y reserva claim o allege para cuando quieras marcar distancia. Ojo: es according to, no according the; y se sube «en un diez por ciento» con by."
+      },
+      "patron": {
+        "texto": "Hecho neutral + fuente atribuida:",
+        "formula": [
+          {
+            "texto": "The bus company",
+            "nota": "sujeto claro, sin adjetivo cargado"
+          },
+          {
+            "texto": "announces",
+            "nota": "verbo neutro"
+          },
+          {
+            "texto": "a ten per cent fare rise.",
+            "nota": "la cifra sustituye al juicio"
+          },
+          {
+            "texto": "A spokesperson says that costs have risen.",
+            "nota": "razón atribuida a su fuente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According the spokesperson, costs have risen.",
+          "correcto": "According to the spokesperson, costs have risen.",
+          "explicacion": "La expresión completa es according to; no se puede omitir to."
+        },
+        {
+          "incorrecto": "They raise fares in a ten per cent.",
+          "correcto": "They raise fares by ten per cent.",
+          "explicacion": "La diferencia de una subida se indica con by, no con in."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo escribe un titular para el periódico del colegio y Mia lo revisa.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Here is my headline: Greedy bus company hits commuters.",
+            "traduccion": "Este es mi titular: la codiciosa empresa de autobuses golpea a los viajeros."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Those are loaded words. Try a neutral one.",
+            "traduccion": "Son palabras cargadas. Prueba con uno neutral."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "OK: Bus company raises fares by ten per cent.",
+            "traduccion": "Vale: la empresa de autobuses sube las tarifas un diez por ciento."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Better. Now attribute the reason to a source.",
+            "traduccion": "Mejor. Ahora atribuye la razón a una fuente."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "A spokesperson says that costs have risen.",
+            "traduccion": "Un portavoz dice que los costes han subido."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe añadir Leo después del titular neutral?",
+          "opciones": [
+            {
+              "es": "La razón, atribuida a un portavoz."
+            },
+            {
+              "es": "Más palabras con carga emocional."
+            },
+            {
+              "es": "Su opinión sobre la empresa."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia pide: «attribute the reason to a source», y Leo responde con lo que dice un portavoz."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Sesgado",
+          "Neutral",
+          "Qué cambia"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Greedy company hits commuters"
+            },
+            {
+              "texto": "Company raises fares"
+            },
+            {
+              "texto": "verbo y adjetivo cargados"
+            }
+          ],
+          [
+            {
+              "texto": "Everyone is furious"
+            },
+            {
+              "texto": "A passenger group says fares are too high"
+            },
+            {
+              "texto": "se atribuye la opinión"
+            }
+          ],
+          [
+            {
+              "texto": "Shocking rise"
+            },
+            {
+              "texto": "A ten per cent rise"
+            },
+            {
+              "texto": "cifra en lugar de juicio"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-80": {
+      "explicacion": {
+        "titulo": "Comprobar una publicación viral",
+        "texto": "Para comprobar una publicación viral sigue tres pasos. Uno: busca señales de sesgo, como palabras de urgencia (URGENT, SHARE NOW), mayúsculas, emociones fuertes y ausencia de fuente. Dos: contrástala con al menos dos fuentes fiables (una oficial, un medio local) y fíjate en qué coincide y qué difiere. Tres: explica tu conclusión con certeza graduada: it is unlikely that…, it may well be a rumour, I cannot verify the rest. Recuerda que muchos shares no son una prueba. Ojo: no se dice it exists a rumour, sino there is a rumour."
+      },
+      "patron": {
+        "texto": "Señal de sesgo → contraste → conclusión graduada:",
+        "formula": [
+          {
+            "texto": "The post has no source,",
+            "nota": "señal de sesgo"
+          },
+          {
+            "texto": "but the school office says only one school will close,",
+            "nota": "fuente fiable que contradice"
+          },
+          {
+            "texto": "so it is unlikely that the post is true.",
+            "nota": "conclusión graduada"
+          },
+          {
+            "texto": "I cannot verify the rest.",
+            "nota": "límite reconocido"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It exists a rumour that all schools will close.",
+          "correcto": "There is a rumour that all schools will close.",
+          "explicacion": "«Existe un rumor» se dice there is a rumour; it exists no funciona así en inglés."
+        },
+        {
+          "incorrecto": "It is probably that the post is false.",
+          "correcto": "The post is probably false.",
+          "explicacion": "Probably es adverbio y va con el verbo: is probably false. Con it is hace falta el adjetivo probable."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo hablan de una publicación que circula por el colegio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Leo, have you seen this viral post? All schools will close for two weeks!",
+            "traduccion": "Leo, ¿has visto esta publicación viral? ¡Todos los colegios cerrarán dos semanas!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It has no source, and it says SHARE NOW. That worries me.",
+            "traduccion": "No tiene fuente y dice SHARE NOW. Eso me preocupa."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The school office website says that only one school will close on Friday.",
+            "traduccion": "La web de la oficina del colegio dice que solo un colegio cerrará el viernes."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then it is unlikely that the post is true. Let's verify it with the local radio too.",
+            "traduccion": "Entonces es poco probable que la publicación sea cierta. Verifiquémoslo también con la radio local."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dice la web de la oficina del colegio?",
+          "opciones": [
+            {
+              "es": "Que solo un colegio cerrará el viernes."
+            },
+            {
+              "es": "Que todos los colegios cerrarán dos semanas."
+            },
+            {
+              "es": "Que el colegio ya no tiene página web."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara cita la web: «only one school will close on Friday». Eso contradice la publicación viral."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Pregunta",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Señales"
+            },
+            {
+              "texto": "¿Presiona, no da fuente?"
+            },
+            {
+              "texto": "It says SHARE NOW and gives no source."
+            }
+          ],
+          [
+            {
+              "texto": "Fuentes"
+            },
+            {
+              "texto": "¿Qué dicen dos fuentes fiables?"
+            },
+            {
+              "texto": "The school office and the radio disagree with it."
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "¿Cuánta certeza tengo?"
+            },
+            {
+              "texto": "It may well be a rumour."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Feedbacks que citaban posición de opción (76 repaso0, 79 repaso0, 80 eval1, 78 eval1) reescritos por contenido.",
+      "77 e0: audio más natural (three phones caught fire).",
+      "Escribir cortos 76 e3, 77 e3, 78 e3, 80 p2 con rúbrica flexible; 79 p2 con más variantes aceptadas.",
+      "80 e2 acepta prove/show; 80 repaso1/2 variantes; rumour/rumor en rúbrica."
+    ]
+  }
+}

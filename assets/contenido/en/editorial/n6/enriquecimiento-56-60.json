@@ -1,0 +1,479 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 56,
+    "end": 60
+  },
+  "classes": {
+    "en.n6.class-56": {
+      "explicacion": {
+        "titulo": "Turnos de palabra en una reunión",
+        "texto": "En una reunión hay reglas de turno y cada frase tiene una función. Para pedir la palabra: Could I have the floor? o Could I add something? Para interrumpir con tacto: Sorry to interrupt, but… Para mantener la palabra: Let me finish my point. Para cederla: Go ahead, Over to you o I'll hand over to… Para cerrar: To sum up… Reconocer la función te dice qué hacer: hablar, esperar, aceptar una interrupción o tomar nota del resumen. Tras let va el verbo base, sin to."
+      },
+      "patron": {
+        "texto": "Función + frase clave + contenido:",
+        "formula": [
+          {
+            "texto": "Could I add something?",
+            "nota": "pedir la palabra"
+          },
+          {
+            "texto": "Let me finish my point.",
+            "nota": "mantener la palabra"
+          },
+          {
+            "texto": "Go ahead, Leo.",
+            "nota": "ceder la palabra"
+          },
+          {
+            "texto": "To sum up, we agree.",
+            "nota": "resumir al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sorry to interrupting, but the meeting ends at nine.",
+          "correcto": "Sorry to interrupt, but the meeting ends at nine.",
+          "explicacion": "Sorry to va seguido del verbo base: interrupt, no interrupting."
+        },
+        {
+          "incorrecto": "Let me to finish my point.",
+          "correcto": "Let me finish my point.",
+          "explicacion": "Después de let + persona va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara preside la reunión de vecinos y Leo y Mia quieren hablar sobre el parque.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Let's start. Leo, you have the floor.",
+            "traduccion": "Empecemos. Leo, tienes la palabra."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Thanks. My point is that the park needs more bins. Also...",
+            "traduccion": "Gracias. Mi idea es que el parque necesita más papeleras. Además..."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sorry to interrupt, but we have only ten minutes.",
+            "traduccion": "Perdona que te interrumpa, pero solo tenemos diez minutos."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Let me finish my point, please. It is short.",
+            "traduccion": "Déjame terminar mi idea, por favor. Es corta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Go ahead, Leo.",
+            "traduccion": "Adelante, Leo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Mia?",
+          "opciones": [
+            {
+              "es": "Interrumpe con tacto porque queda poco tiempo."
+            },
+            {
+              "es": "Cede la palabra a Leo."
+            },
+            {
+              "es": "Resume lo que se ha acordado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «Sorry to interrupt» y da la razón: solo quedan diez minutos. Quien cede la palabra es Sara."
+        }
+      }
+    },
+    "en.n6.class-57": {
+      "explicacion": {
+        "titulo": "Futuro formal: due to, set to, to y on the point of",
+        "texto": "Para anunciar planes oficiales en inglés se usan estructuras más formales que will o going to. Be due to + verbo base dice que algo se espera según el calendario; be set to + verbo base, que ya está fijado; be to + verbo base, que es un plan oficial (típico de noticias y actas); be on the point of + -ing, que está a punto de ocurrir. Be se conjuga con el sujeto (is, are) y el verbo siguiente no lleva -s. Recuerda también el futuro continuo (will be doing) y el perfecto (will have done)."
+      },
+      "patron": {
+        "texto": "Sujeto + be due to / set to / to + verbo + plazo:",
+        "formula": [
+          {
+            "texto": "The council",
+            "nota": "sujeto: be concuerda con él (is/are)"
+          },
+          {
+            "texto": "is set to vote",
+            "nota": "be set to + verbo base"
+          },
+          {
+            "texto": "on Friday.",
+            "nota": "plazo o fecha"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The library is due to opens in May.",
+          "correcto": "The library is due to open in May.",
+          "explicacion": "Después de due to va el verbo base, sin -s: la marca de tercera persona la lleva is."
+        },
+        {
+          "incorrecto": "The council is on the point of vote on Friday.",
+          "correcto": "The council is on the point of voting on Friday.",
+          "explicacion": "Después de on the point of va un verbo en -ing, porque of es una preposición."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Mia una noticia del barrio sobre la nueva biblioteca.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Look! The new library is due to open in March.",
+            "traduccion": "¡Mira! Está previsto que la nueva biblioteca abra en marzo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is that official?",
+            "traduccion": "¿Es oficial?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes. The mayor is to announce the exact date next week.",
+            "traduccion": "Sí. El alcalde anunciará la fecha exacta la próxima semana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the council?",
+            "traduccion": "¿Y el ayuntamiento?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "It is set to vote on the plan on Friday.",
+            "traduccion": "Tiene previsto votar el plan el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hará el ayuntamiento el viernes?",
+          "opciones": [
+            {
+              "es": "Votará el plan."
+            },
+            {
+              "es": "Anunciará la fecha exacta."
+            },
+            {
+              "es": "Abrirá la biblioteca."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «It is set to vote on the plan on Friday». El alcalde anuncia la fecha y la biblioteca abre en marzo."
+        }
+      }
+    },
+    "en.n6.class-58": {
+      "explicacion": {
+        "titulo": "Quién hará qué y para cuándo",
+        "texto": "Al escuchar la reunión de un club, anota para cada tarea tres datos: quién, qué y para cuándo. El plazo aparece con by + día (by Friday: a más tardar el viernes, no después) o con This time next week, que sitúa una acción en curso en ese futuro (will be walking). Para acciones terminadas antes del plazo se usa el futuro perfecto: will have booked. No confundas by Friday (límite) con on Friday (justo ese día) ni con until Friday (hasta ese día, durante todo el tiempo)."
+      },
+      "patron": {
+        "texto": "Quién + futuro + tarea + by + plazo:",
+        "formula": [
+          {
+            "texto": "Leo",
+            "nota": "quién: el responsable"
+          },
+          {
+            "texto": "will have booked the bus",
+            "nota": "qué: futuro perfecto, terminada antes del plazo"
+          },
+          {
+            "texto": "by Friday.",
+            "nota": "cuándo: by + día"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo will book the bus until Friday.",
+          "correcto": "Leo will book the bus by Friday.",
+          "explicacion": "Until indica que algo dura hasta un momento; para un plazo límite se usa by."
+        },
+        {
+          "incorrecto": "Tom will have check the route by Saturday.",
+          "correcto": "Tom will have checked the route by Saturday.",
+          "explicacion": "Después de will have va el participio: checked, no el verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos preside la reunión del club de senderismo y reparte tareas.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Who is responsible for the bus?",
+            "traduccion": "¿Quién es responsable del autobús?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I am. I will have booked it by Friday.",
+            "traduccion": "Yo. Lo habré reservado para el viernes."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. And the map?",
+            "traduccion": "Bien. ¿Y el mapa?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I will have printed it by Thursday.",
+            "traduccion": "Lo habré impreso para el jueves."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Thanks. This time next week, we will be walking the first route.",
+            "traduccion": "Gracias. A esta hora la semana que viene estaremos caminando la primera ruta."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién es responsable del autobús y para cuándo?",
+          "opciones": [
+            {
+              "es": "Leo, a más tardar el viernes."
+            },
+            {
+              "es": "Mia, el jueves."
+            },
+            {
+              "es": "Carlos, la semana que viene."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «I will have booked it by Friday». El mapa es de Mia y la semana que viene es cuando caminan."
+        }
+      }
+    },
+    "en.n6.class-59": {
+      "explicacion": {
+        "titulo": "El acta de una reunión",
+        "texto": "El acta (minutes) informa de lo que se acordó, no copia la conversación. Se escribe en tercera persona y con tono formal: The meeting agreed that…, Mia is to send the invitations by Friday, Tom will have booked the band by 1 June. Un buen acta tiene tres partes: los acuerdos (agreed that…), los responsables con su plazo (be to / will have + by) y un resumen final (To sum up,…). Lleva fecha y asistentes. No uses until en lugar de by para un plazo límite."
+      },
+      "patron": {
+        "texto": "Acuerdo + responsable con plazo + resumen:",
+        "formula": [
+          {
+            "texto": "The meeting agreed that the party is set for June.",
+            "nota": "acuerdo: agreed that + oración completa"
+          },
+          {
+            "texto": "Mia is to send the invitations by Friday.",
+            "nota": "responsable y plazo: be to + verbo + by"
+          },
+          {
+            "texto": "To sum up, we have three agreements.",
+            "nota": "resumen final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Sara is to sends the invitations by Friday.",
+          "correcto": "Sara is to send the invitations by Friday.",
+          "explicacion": "Después de be to va el verbo base, sin -s."
+        },
+        {
+          "incorrecto": "The meeting agreed that Tom will send the list until Friday.",
+          "correcto": "The meeting agreed that Tom will send the list by Friday.",
+          "explicacion": "Until indica que algo dura hasta un momento; para un plazo límite se usa by."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana, la secretaria, le enseña a Carlos el acta de la reunión de vecinos.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Here are the minutes. The meeting agreed that the party is set for 20 June.",
+            "traduccion": "Aquí está el acta. La reunión acordó que la fiesta está fijada para el 20 de junio."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And who is responsible for the invitations?",
+            "traduccion": "¿Y quién es responsable de las invitaciones?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Mia is to send them by Friday.",
+            "traduccion": "Mia debe enviarlas antes del viernes."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. Did we agree on the music?",
+            "traduccion": "Bien. ¿Acordamos lo de la música?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. Tom will have booked the band by the next meeting.",
+            "traduccion": "Sí. Tom habrá reservado la banda para la próxima reunión."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe hacer Mia y para cuándo?",
+          "opciones": [
+            {
+              "es": "Enviar las invitaciones antes del viernes."
+            },
+            {
+              "es": "Reservar la banda para la próxima reunión."
+            },
+            {
+              "es": "Fijar la fecha de la fiesta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Mia is to send them by Friday». La banda es de Tom y la fecha la acordó la reunión."
+        }
+      }
+    },
+    "en.n6.class-60": {
+      "explicacion": {
+        "titulo": "Planificar, discrepar con tacto y resumir",
+        "texto": "En una reunión de planificación combinas varias funciones. Propones un calendario con futuro perfecto (By 20 June, Tom will have booked the band) y futuro continuo (This time next month, we will be dancing). Si no estás de acuerdo, suavizas: I see your point, but I'm afraid… y propones una alternativa con Could we… instead? o An alternative is to… Cuidas los turnos (Could I finish? Over to you) y cierras con To sum up… Un «no» sin alternativa bloquea a la reunión; con alternativa, la ayuda a avanzar."
+      },
+      "patron": {
+        "texto": "Propuesta + desacuerdo con tacto + alternativa:",
+        "formula": [
+          {
+            "texto": "By 20 June, Tom will have booked the band.",
+            "nota": "propuesta con futuro perfecto"
+          },
+          {
+            "texto": "I see your point, but I'm afraid it is too tight.",
+            "nota": "desacuerdo con tacto"
+          },
+          {
+            "texto": "Could we postpone the party instead?",
+            "nota": "alternativa: Could we… instead?"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am afraid that I am not agree with the date.",
+          "correcto": "I'm afraid I don't agree with the date.",
+          "explicacion": "Agree es un verbo, no un adjetivo: se niega con don't, no con am not."
+        },
+        {
+          "incorrecto": "By 20 June, Tom will have book the band.",
+          "correcto": "By 20 June, Tom will have booked the band.",
+          "explicacion": "Después de will have va el participio: booked."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara preside la reunión de vecinos para fijar la fecha de la fiesta del barrio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "The party is set for 20 June. By then, Tom will have booked the band.",
+            "traduccion": "La fiesta está fijada para el 20 de junio. Para entonces, Tom habrá reservado la banda."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I see your point, but I'm afraid 20 June is too tight. The hall is not ready.",
+            "traduccion": "Entiendo tu idea, pero me temo que el 20 de junio es muy justo. El salón no está listo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Could we postpone the party to 27 June instead?",
+            "traduccion": "¿Podríamos aplazar la fiesta al 27 de junio?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Good alternative. To sum up: the party is now set for 27 June.",
+            "traduccion": "Buena alternativa. Para resumir: la fiesta queda fijada para el 27 de junio."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué alternativa se acepta?",
+          "opciones": [
+            {
+              "es": "Aplazar la fiesta al 27 de junio."
+            },
+            {
+              "es": "Cancelar la fiesta."
+            },
+            {
+              "es": "Hacer la fiesta el 20 de junio sin banda."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia propone aplazar la fiesta al 27 de junio y Sara lo acepta al resumir. Nadie habla de cancelar ni de quitar la banda."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Proponer un plazo"
+            },
+            {
+              "texto": "By 20 June, we will have booked the band."
+            }
+          ],
+          [
+            {
+              "texto": "Situar en el futuro"
+            },
+            {
+              "texto": "This time next month, we will be dancing."
+            }
+          ],
+          [
+            {
+              "texto": "Discrepar con tacto"
+            },
+            {
+              "texto": "I see your point, but I'm afraid…"
+            }
+          ],
+          [
+            {
+              "texto": "Proponer alternativa"
+            },
+            {
+              "texto": "Could we postpone the party instead?"
+            }
+          ],
+          [
+            {
+              "texto": "Resumir"
+            },
+            {
+              "texto": "To sum up, the party is set for 27 June."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C56: feedback de escucha corregido (quien habla no es Tom); cloze de eval sin reutilizar frases de guiada/enseñanza y con traducción; repaso2 sin reutilizar estímulo.",
+      "C57: error 1 ya no es el modelo de la escritura; 'this time next week' traducido con fidelidad; ordenar con orden alternativo; escucha con paráfrasis.",
+      "C58: repaso2 ya no repite la frase de la práctica; traducciones de 'this time next week'; error realista will have check.",
+      "C59: error 2 corregido (subjuntivo mandativo válido), estímulos de práctica/repaso y audio de eval ya no revelan la escritura; consigna 'el acta'.",
+      "C60: cloze de eval con frases nuevas y ayudas en español; aceptado reserved; rúbrica ampliada."
+    ]
+  }
+}

@@ -1,0 +1,645 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 16,
+    "end": 20
+  },
+  "classes": {
+    "en.n7.class-16": {
+      "explicacion": {
+        "titulo": "Cuánta certeza tienes: adverbios y adjetivos epistémicos",
+        "texto": "Los adverbios y adjetivos epistémicos indican cuánta certeza tiene quien habla. De más a menos seguro: undoubtedly / certainly (casi 100 %), in all likelihood (muy probable), presumably (suposición razonable), possibly (puede que sí, puede que no), conceivably (imaginable, pero poco creíble) y doubtful (poco probable). Los adverbios van antes del verbo principal, tras be o al inicio con coma; los adjetivos se usan con it is doubtful / likely / certain that… El hecho no cambia: cambia cuánto te comprometes con él."
+      },
+      "patron": {
+        "texto": "Sujeto + be + adverbio epistémico + afirmación:",
+        "formula": [
+          {
+            "texto": "The fault was",
+            "nota": "sujeto + be"
+          },
+          {
+            "texto": "undoubtedly",
+            "nota": "adverbio de certeza: va entre be y el participio"
+          },
+          {
+            "texto": "caused by the storm.",
+            "nota": "la afirmación sobre la que opinas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is probably that the lights will come on soon.",
+          "correcto": "It is likely that the lights will come on soon.",
+          "explicacion": "«Es probable que» se dice it is likely (probable) that; probably es un adverbio y no va después de it is."
+        },
+        {
+          "incorrecto": "With all likelihood, the power will be back by midnight.",
+          "correcto": "In all likelihood, the power will be back by midnight.",
+          "explicacion": "«Con toda probabilidad» es una locución fija: in all likelihood, no with all likelihood."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan del apagón que dejó sin luz a su barrio.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Do you know what caused the blackout?",
+            "traduccion": "¿Sabes qué causó el apagón?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Undoubtedly the storm. A tree hit the main cable.",
+            "traduccion": "Sin duda la tormenta. Un árbol golpeó el cable principal."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And when will the power be back?",
+            "traduccion": "¿Y cuándo volverá la luz?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "In all likelihood by midnight, but it is doubtful that it will be earlier.",
+            "traduccion": "Con toda probabilidad antes de medianoche, pero es dudoso que sea antes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sabe Ana con más certeza?",
+          "opciones": [
+            {
+              "es": "Que la tormenta causó el apagón."
+            },
+            {
+              "es": "Que la luz volverá antes de medianoche."
+            },
+            {
+              "es": "Que los técnicos están trabajando en el cable."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana usa undoubtedly para la causa (certeza casi total) e in all likelihood para la hora (solo muy probable)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Grado de certeza",
+          "Expresión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Casi seguro"
+            },
+            {
+              "texto": "undoubtedly, certainly"
+            }
+          ],
+          [
+            {
+              "texto": "Muy probable"
+            },
+            {
+              "texto": "in all likelihood, probably"
+            }
+          ],
+          [
+            {
+              "texto": "Suposición razonable"
+            },
+            {
+              "texto": "presumably"
+            }
+          ],
+          [
+            {
+              "texto": "Incierto (puede que sí, puede que no)"
+            },
+            {
+              "texto": "possibly, perhaps"
+            }
+          ],
+          [
+            {
+              "texto": "Imaginable pero poco creíble"
+            },
+            {
+              "texto": "conceivably"
+            }
+          ],
+          [
+            {
+              "texto": "Poco probable"
+            },
+            {
+              "texto": "it is doubtful that…, unlikely"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-17": {
+      "explicacion": {
+        "titulo": "Distanciarse de lo que se cuenta",
+        "texto": "Allegedly, supposedly, ostensibly y reportedly son adverbios evidenciales: no miden la certeza, sino de dónde viene la información y cuánto se distancia de ella el hablante. Allegedly: alguien acusa o afirma algo sin pruebas. Reportedly: lo cuentan los medios o unas fuentes. Supposedly: se supone que es así, pero hay dudas. Ostensibly: es la razón oficial, aunque la real puede ser otra. Van antes del verbo principal, tras el auxiliar (has reportedly lost) o al inicio con coma. No los uses con hechos comprobados."
+      },
+      "patron": {
+        "texto": "Sujeto + (auxiliar) + adverbio evidencial + verbo:",
+        "formula": [
+          {
+            "texto": "The company",
+            "nota": "sujeto"
+          },
+          {
+            "texto": "has reportedly",
+            "nota": "auxiliar + adverbio: el hablante se distancia"
+          },
+          {
+            "texto": "lost three million pounds.",
+            "nota": "información que el hablante no garantiza"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The mayor accepted allegedly gifts from a builder.",
+          "correcto": "The mayor allegedly accepted gifts from a builder.",
+          "explicacion": "El adverbio evidencial va antes del verbo principal (o tras el auxiliar), no entre el verbo y su complemento."
+        },
+        {
+          "incorrecto": "The mayor was allegedly found guilty by the court yesterday.",
+          "correcto": "The mayor was found guilty by the court yesterday.",
+          "explicacion": "Allegedly indica algo sin probar: una condena del tribunal es un hecho comprobado y se cuenta sin adverbio evidencial."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia comentan un titular del periódico local.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Did you see the headline? Council reportedly plans to close the library.",
+            "traduccion": "¿Viste el titular? El ayuntamiento planea cerrar la biblioteca, según se informa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Reportedly? Who says so?",
+            "traduccion": "¿Según se informa? ¿Quién lo dice?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "A reporter. The mayor denies it, and the council has not confirmed anything.",
+            "traduccion": "Un periodista. El alcalde lo niega y el ayuntamiento no ha confirmado nada."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Then we should wait. The museum is supposedly open tomorrow, but I do not believe it either.",
+            "traduccion": "Entonces deberíamos esperar. Se supone que el museo abre mañana, pero tampoco me lo creo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué el titular usa reportedly?",
+          "opciones": [
+            {
+              "es": "Porque la noticia no está confirmada por el ayuntamiento."
+            },
+            {
+              "es": "Porque el ayuntamiento confirmó el cierre."
+            },
+            {
+              "es": "Porque el alcalde anunció el cierre."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom explica que la información viene de un periodista: el alcalde lo niega y el ayuntamiento no ha confirmado nada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Adverbio",
+          "Distancia del hablante"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "allegedly"
+            },
+            {
+              "texto": "alguien lo acusa o afirma, sin pruebas"
+            }
+          ],
+          [
+            {
+              "texto": "reportedly"
+            },
+            {
+              "texto": "lo cuentan los medios o las fuentes"
+            }
+          ],
+          [
+            {
+              "texto": "supposedly"
+            },
+            {
+              "texto": "se supone así, pero hay dudas"
+            }
+          ],
+          [
+            {
+              "texto": "ostensibly"
+            },
+            {
+              "texto": "es la razón oficial; la real puede ser otra"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-18": {
+      "explicacion": {
+        "titulo": "Prueba, inferencia o rumor",
+        "texto": "Un mismo texto puede mezclar tres clases de información. Prueba directa: algo que se ve o se comprueba (Evidently, the glass is on the floor). Inferencia: una conclusión a partir de pistas (It appears that…, The ball seems to have…). Información de segunda mano o rumor: algo que alguien cuenta sin comprobar (Apparently…, There is a rumour that…). Apparently marca sobre todo lo que oyes o lees, no lo que ves tú. Al leer, pregúntate: ¿lo ha visto alguien, se deduce de pistas o solo se cuenta?"
+      },
+      "patron": {
+        "texto": "Marcador + afirmación: ¿prueba, inferencia o segunda mano?",
+        "formula": [
+          {
+            "texto": "Evidently, the glass is on the floor.",
+            "nota": "prueba directa: se ve"
+          },
+          {
+            "texto": "It appears that the ball broke it.",
+            "nota": "inferencia a partir de pistas"
+          },
+          {
+            "texto": "The ball seems to have hit it hard.",
+            "nota": "inferencia sobre el pasado"
+          },
+          {
+            "texto": "Apparently, a witness saw two boys.",
+            "nota": "segunda mano: se cuenta, no se ha comprobado"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Apparently the window is broken: I can see the glass on the floor.",
+          "correcto": "Evidently the window is broken: I can see the glass on the floor.",
+          "explicacion": "Apparently suele indicar información de segunda mano; si lo ves tú mismo, usa evidently (o clearly)."
+        },
+        {
+          "incorrecto": "The ball seems have hit the window.",
+          "correcto": "The ball seems to have hit the window.",
+          "explicacion": "Seems se construye con to: seems to have + participio para deducir algo del pasado."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Sara examinan una ventana rota del centro vecinal.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Look at the glass. Evidently, the window was broken from outside.",
+            "traduccion": "Mira el cristal. A todas luces, la ventana se rompió desde fuera."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And there is a football next to it. It appears that it came through the window.",
+            "traduccion": "Y hay un balón a su lado. Parece que entró por la ventana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Apparently, a witness saw two boys running away. But that is only what people are saying.",
+            "traduccion": "Al parecer, una testigo vio a dos chicos huir. Pero eso es solo lo que dice la gente."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Then the football is our only clue. We cannot say who the boys were.",
+            "traduccion": "Entonces el balón es nuestra única pista. No podemos decir quiénes eran los chicos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es solo información de segunda mano?",
+          "opciones": [
+            {
+              "es": "Que dos chicos huyeron corriendo."
+            },
+            {
+              "es": "Que la ventana se rompió desde fuera."
+            },
+            {
+              "es": "Que hay un balón junto a la ventana."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom usa apparently y añade que es solo lo que dice la gente. Los cristales y el balón los ven ellos mismos."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de información",
+          "Marcadores",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Prueba directa"
+            },
+            {
+              "texto": "evidently"
+            },
+            {
+              "texto": "Evidently, the window is broken."
+            }
+          ],
+          [
+            {
+              "texto": "Inferencia"
+            },
+            {
+              "texto": "it appears that / seems to have"
+            },
+            {
+              "texto": "The ball seems to have broken it."
+            }
+          ],
+          [
+            {
+              "texto": "Segunda mano"
+            },
+            {
+              "texto": "apparently / there is a rumour that"
+            },
+            {
+              "texto": "Apparently, two boys ran away."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-19": {
+      "explicacion": {
+        "titulo": "Reforzar o suavizar según la evidencia",
+        "texto": "Los reforzadores (clearly, undeniably, unquestionably) y los matizadores (arguably, it would seem, tend to, somewhat, to some extent) ajustan cuánto te comprometes con lo que afirmas. Refuerza solo cuando tienes pruebas sólidas; matiza cuando la evidencia es parcial o es tu opinión. Hay dos errores típicos: exagerar (nobody, always, never, the worst) y ser demasiado tímido (perhaps, maybe, possibly juntos para algo que sí está probado). Al revisar un párrafo, pregúntate para cada frase: ¿qué pruebas tengo?"
+      },
+      "patron": {
+        "texto": "Afirmación + evidencia → reforzador o matizador:",
+        "formula": [
+          {
+            "texto": "The survey shows that 90 percent agree,",
+            "nota": "evidencia sólida → refuerza"
+          },
+          {
+            "texto": "so it is undeniably popular.",
+            "nota": "reforzador: innegablemente"
+          },
+          {
+            "texto": "We only have a few opinions,",
+            "nota": "evidencia parcial → matiza"
+          },
+          {
+            "texto": "so it is arguably better.",
+            "nota": "matizador: podría decirse"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Everybody agrees that phones always ruin lessons.",
+          "correcto": "Many teachers say that phones often make lessons harder.",
+          "explicacion": "Everybody y always exageran: sustitúyelos por many y often (o tend to) para ajustarte a la evidencia."
+        },
+        {
+          "incorrecto": "The survey of ten students clearly proves that everyone learns better online.",
+          "correcto": "The survey of ten students suggests that some students may learn better online.",
+          "explicacion": "Con solo diez estudiantes, clearly proves y everyone exageran; suggests y some son más honestos con la evidencia."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos revisan un párrafo de opinión para el periódico del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Look at this sentence: nobody reads books anymore. That claim is exaggerated.",
+            "traduccion": "Mira esta frase: ya nadie lee libros. Esa afirmación es exagerada."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "You are right. We could write that young people tend to read less, to some extent because of phones.",
+            "traduccion": "Tienes razón. Podríamos escribir que los jóvenes suelen leer menos, en parte por los móviles."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And here we say the results are maybe perhaps a little good. But the survey is clear.",
+            "traduccion": "Y aquí decimos que los resultados son quizá, tal vez, algo buenos. Pero la encuesta es clara."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then we should say the results are undeniably good. The evidence is strong.",
+            "traduccion": "Entonces deberíamos decir que los resultados son innegablemente buenos. La evidencia es sólida."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué deben reforzar la segunda frase?",
+          "opciones": [
+            {
+              "es": "Porque la encuesta aporta pruebas claras."
+            },
+            {
+              "es": "Porque nadie lee libros."
+            },
+            {
+              "es": "Porque a Mia le gusta más."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos propone undeniably porque la encuesta es clara y la evidencia es sólida: en ese caso, reforzar es lo correcto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Evidencia",
+          "Qué usar",
+          "Ejemplos"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Sólida"
+            },
+            {
+              "texto": "reforzador"
+            },
+            {
+              "texto": "clearly, undeniably, unquestionably"
+            }
+          ],
+          [
+            {
+              "texto": "Parcial"
+            },
+            {
+              "texto": "matizador"
+            },
+            {
+              "texto": "arguably, it would seem, somewhat, to some extent"
+            }
+          ],
+          [
+            {
+              "texto": "Generalización"
+            },
+            {
+              "texto": "cuantificador suave"
+            },
+            {
+              "texto": "tend to, often, many (mejor que nobody, always, never)"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-20": {
+      "explicacion": {
+        "titulo": "Analizar un rumor y defender la conclusión",
+        "texto": "En un caso, clasifica primero las pistas: prueba directa (evidently: huellas en la tierra), inferencia (it appears that…, seems to have…) y segunda mano o rumor (apparently, reportedly, allegedly). Después formula dos hipótesis con grados distintos: in all likelihood o probably para la más sólida y conceivably o possibly para la débil. Refuerza solo lo que tienes probado y matiza el resto. Ante una objeción, reconócela (That is a fair point), responde con un dato (The gate was unlocked) y no saques conclusiones precipitadas."
+      },
+      "patron": {
+        "texto": "Pistas → hipótesis con grado → respuesta a la objeción:",
+        "formula": [
+          {
+            "texto": "Evidently, there are footprints.",
+            "nota": "prueba directa"
+          },
+          {
+            "texto": "In all likelihood, a person took them;",
+            "nota": "hipótesis fuerte"
+          },
+          {
+            "texto": "conceivably, it was a fox.",
+            "nota": "hipótesis débil"
+          },
+          {
+            "texto": "That is a fair objection, but…",
+            "nota": "reconoce la objeción, aporta un dato y sé prudente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The footprints are undoubtedly from a fox, but I am not sure.",
+          "correcto": "The footprints are conceivably from a fox, but I am not sure.",
+          "explicacion": "Undoubtedly expresa certeza casi total y contradice «no estoy seguro»: ajusta el marcador al grado real de certeza."
+        },
+        {
+          "incorrecto": "I found the footprints, so allegedly a person was here.",
+          "correcto": "I found the footprints, so evidently a person was here.",
+          "explicacion": "Allegedly te distancia de lo que dicen otros; para una conclusión tuya basada en pruebas que ves, usa evidently."
+        }
+      ],
+      "situacion": {
+        "contexto": "En la reunión del huerto, Sara y Carlos analizan quién se llevó las verduras.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Evidently, someone came in last night: there are footprints in the soil.",
+            "traduccion": "A todas luces, alguien entró anoche: hay huellas en la tierra."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Apparently, a neighbour saw a man with a bag at dawn. I think it was a member.",
+            "traduccion": "Al parecer, una vecina vio a un hombre con una bolsa al amanecer. Creo que fue un socio."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is only what she says. The gate was unlocked, so it appears that anyone could come in.",
+            "traduccion": "Eso es solo lo que ella dice. La puerta estaba sin cerrar, así que parece que cualquiera pudo entrar."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So who did it?",
+            "traduccion": "Entonces, ¿quién fue?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "In all likelihood, a stranger. We cannot rule out a member, but we should not jump to conclusions.",
+            "traduccion": "Con toda probabilidad, un desconocido. No podemos descartar a un socio, pero no deberíamos sacar conclusiones precipitadas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué presenta Sara como prueba directa con evidently?",
+          "opciones": [
+            {
+              "es": "Las huellas en la tierra."
+            },
+            {
+              "es": "Lo que vio la vecina al amanecer."
+            },
+            {
+              "es": "Que un socio se llevó las verduras."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara empieza con «Evidently, someone came in last night: there are footprints in the soil». Lo de la vecina es de segunda mano."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pista",
+          "Tipo",
+          "Cómo decirlo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Huellas en la tierra"
+            },
+            {
+              "texto": "prueba directa"
+            },
+            {
+              "texto": "Evidently, there are footprints."
+            }
+          ],
+          [
+            {
+              "texto": "Puerta sin cerrar"
+            },
+            {
+              "texto": "inferencia"
+            },
+            {
+              "texto": "It appears that nobody locked it."
+            }
+          ],
+          [
+            {
+              "texto": "Lo que cuenta una vecina"
+            },
+            {
+              "texto": "segunda mano"
+            },
+            {
+              "texto": "Apparently, a neighbour saw someone."
+            }
+          ],
+          [
+            {
+              "texto": "Un rumor sin pruebas"
+            },
+            {
+              "texto": "sin confirmar"
+            },
+            {
+              "texto": "Allegedly, a member took them."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

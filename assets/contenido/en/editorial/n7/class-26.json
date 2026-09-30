@@ -1,0 +1,775 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-26",
+  "title": {
+    "en": "This, that, the former",
+    "es": "Esto, aquello, el primero"
+  },
+  "objectives": {
+    "es": [
+      "Identificar a qué se refieren this, that, the former, the latter y such en un texto de varios párrafos."
+    ]
+  },
+  "concepts": [
+    "n7-cohesion-reference-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n7.class-25"
+  ],
+  "usesVocabulary": [
+    "itinerary",
+    "detour",
+    "scenery",
+    "latter",
+    "hostel",
+    "coast",
+    "ferry",
+    "former"
+  ],
+  "usesPatterns": [
+    "n7-cohesion-reference-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "itinerary",
+      "es": "itinerario"
+    },
+    {
+      "en": "detour",
+      "es": "desvío"
+    },
+    {
+      "en": "scenery",
+      "es": "paisaje"
+    },
+    {
+      "en": "latter",
+      "es": "el último (de dos)"
+    },
+    {
+      "en": "hostel",
+      "es": "albergue"
+    },
+    {
+      "en": "coast",
+      "es": "costa"
+    },
+    {
+      "en": "ferry",
+      "es": "ferri"
+    },
+    {
+      "en": "former",
+      "es": "el primero (de dos)"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-26.t01",
+      "en": "We took the ferry to the island, and this saved us a long detour.",
+      "es": "Tomamos el ferri a la isla y eso nos ahorró un largo desvío.",
+      "explanationEs": "This señala toda la idea anterior: tomar el ferri.",
+      "segments": [
+        "We took the ferry to the island,",
+        "and this saved us a long detour."
+      ],
+      "audioText": "We took the ferry to the island, and this saved us a long detour.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-cohesion-reference-1"
+    },
+    {
+      "id": "en.n7.class-26.t02",
+      "en": "The hostel and the hotel were both full; the former was cheaper, but the latter had better scenery.",
+      "es": "El albergue y el hotel estaban llenos; el primero era más barato, pero el segundo tenía mejor paisaje.",
+      "explanationEs": "The former = el primero nombrado (hostel); the latter = el último (hotel).",
+      "segments": [
+        "The hostel and the hotel were both full; the",
+        "former was cheaper, but the latter had better scenery."
+      ],
+      "audioText": "The hostel and the hotel were both full; the former was cheaper, but the latter had better scenery.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-cohesion-reference-1"
+    },
+    {
+      "id": "en.n7.class-26.t03",
+      "en": "The coast is beautiful, but such scenery is hard to reach without a car.",
+      "es": "La costa es preciosa, pero ese tipo de paisaje es difícil de alcanzar sin coche.",
+      "explanationEs": "Such + nombre = ese tipo de cosa ya descrita.",
+      "segments": [
+        "The coast is beautiful, but such scenery",
+        "is hard to reach without a car."
+      ],
+      "audioText": "The coast is beautiful, but such scenery is hard to reach without a car.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-cohesion-reference-1"
+    },
+    {
+      "id": "en.n7.class-26.t04",
+      "en": "We missed the last ferry. That was a mistake, and that detour cost us a day.",
+      "es": "Perdimos el último ferri. Eso fue un error, y ese desvío nos costó un día.",
+      "explanationEs": "That señala algo ya dicho y suele añadir una valoración.",
+      "segments": [
+        "We missed the last ferry. That was a",
+        "mistake, and that detour cost us a day."
+      ],
+      "audioText": "We missed the last ferry. That was a mistake, and that detour cost us a day.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-cohesion-reference-1"
+    },
+    {
+      "id": "en.n7.class-26.t05",
+      "en": "Our itinerary included a mountain village and a fishing port; the latter was my favourite.",
+      "es": "Nuestro itinerario incluía un pueblo de montaña y un puerto pesquero; este último fue mi favorito.",
+      "explanationEs": "Con dos elementos, the latter es el segundo: el puerto.",
+      "segments": [
+        "Our itinerary included a mountain village and a",
+        "fishing port; the latter was my favourite."
+      ],
+      "audioText": "Our itinerary included a mountain village and a fishing port; the latter was my favourite.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-cohesion-reference-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c26.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿A qué se refiere «this»?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The best scenery."
+          },
+          {
+            "text": "The trip."
+          },
+          {
+            "text": "Walking along the coast for hours."
+          }
+        ],
+        "teaches": [
+          "n7-cohesion-reference-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.pg01.seed-0",
+          "feedback": {
+            "es": "This retoma toda la idea anterior: caminar por la costa durante horas. No señala solo «the trip» ni «the scenery»."
+          },
+          "hint": {
+            "es": "This puede resumir toda la idea anterior, no solo un nombre."
+          },
+          "text": "We walked along the coast for hours, and this gave us the best views of the trip."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:161176b887db0c8429d8c5d0e6e7761528b9054eb61debe3effdb4df61f4f135"
+      },
+      {
+        "id": "en.n7.c26.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Vimos un pueblo y un puerto; el pueblo era tranquilo, el último ruidoso.»"
+        },
+        "answer": {
+          "text": "latter",
+          "accepted": [
+            "latter"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-cohesion-reference-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.pg02.seed-0",
+          "feedback": {
+            "es": "Con dos elementos, the latter es el segundo nombrado: el puerto."
+          },
+          "hint": {
+            "es": "Es el segundo de los dos que se nombraron."
+          },
+          "text": "We saw a village and a port; the village was quiet, but the ___ was noisy."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:17466711de2425d45d3b3f8e563b095e004424b30c4fe6a2d6f5a7e855577e3b"
+      },
+      {
+        "id": "en.n7.c26.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Ese tipo de paisaje es difícil de alcanzar sin coche.»"
+        },
+        "answer": {
+          "text": "Such scenery is hard to reach without a car",
+          "tokens": [
+            "Such",
+            "scenery",
+            "is",
+            "hard",
+            "to",
+            "reach",
+            "without",
+            "a",
+            "car"
+          ],
+          "accepted": [
+            "Such scenery is hard to reach without a car",
+            "Without a car such scenery is hard to reach"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-cohesion-reference-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.pg03.seed-0",
+          "feedback": {
+            "es": "Such + nombre abre la frase y significa «ese tipo de»: such scenery."
+          },
+          "hint": {
+            "es": "Such + nombre abre la frase."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bd85472c2a4f98f705c379a5d7500f8a2b9c5c6a8fe2727421be118905f33b58"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c26.p01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué señala «that» en el texto?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Missing the last ferry."
+          },
+          {
+            "text": "The ferry itself."
+          },
+          {
+            "text": "The next day."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.p01.seed-0",
+          "feedback": {
+            "es": "That retoma lo que acaba de contarse: perder el último ferri, y lo valora como un error."
+          },
+          "text": "We missed the last ferry. That was a mistake."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b71585cf26ecab62e412dbe4ebfb6d5e70bb0f2a2015230dfb0c89297238fbd4"
+      },
+      {
+        "id": "en.n7.c26.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada expresión con lo que señala."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "this",
+              {
+                "es": "la idea que acabas de decir"
+              }
+            ],
+            [
+              "the former",
+              {
+                "es": "el primero de dos elementos nombrados"
+              }
+            ],
+            [
+              "the latter",
+              {
+                "es": "el último de dos elementos nombrados"
+              }
+            ],
+            [
+              "such + nombre",
+              {
+                "es": "ese tipo de cosa"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.p02.seed-0",
+          "feedback": {
+            "es": "This señala lo inmediato, the former y the latter ordenan dos elementos y such + nombre habla de un tipo."
+          },
+          "pairs": [
+            [
+              "this",
+              {
+                "es": "la idea que acabas de decir"
+              }
+            ],
+            [
+              "the former",
+              {
+                "es": "el primero de dos elementos nombrados"
+              }
+            ],
+            [
+              "the latter",
+              {
+                "es": "el último de dos elementos nombrados"
+              }
+            ],
+            [
+              "such + nombre",
+              {
+                "es": "ese tipo de cosa"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4960d948cb116d013705d4051751b87f38eccceb3a1434aec6f8d7d1680f532c"
+      },
+      {
+        "id": "en.n7.c26.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Perdimos las maletas y por eso volvimos a casa antes.»"
+        },
+        "answer": {
+          "text": "that",
+          "accepted": [
+            "that",
+            "this"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.p03.seed-0",
+          "feedback": {
+            "es": "That is why resume la idea anterior como causa; this is why también es posible."
+          },
+          "text": "We lost our bags, and ___ is why we came home early."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f1094490792a383c9abd767863595f629151323913cb2efc1355648ec23f160c"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c26.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿A qué se refiere la expresión entre corchetes?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The coast."
+          },
+          {
+            "text": "The mountains."
+          },
+          {
+            "text": "The week."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.e01.seed-0",
+          "feedback": {
+            "es": "The latter es el último de los dos lugares nombrados: las montañas. Por eso hacía más frío allí."
+          },
+          "text": "We spent a week on the coast and two days in the mountains. [The latter] was colder than we expected."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b3b02b88a31957d403bb76b81d9f5ff226bcbf7e68bb4b65cd65a7aa7444268f"
+      },
+      {
+        "id": "en.n7.c26.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige dónde durmieron bien."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "In the cheap place."
+          },
+          {
+            "text": "In neither of them."
+          },
+          {
+            "text": "In the expensive place."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.e02.seed-0",
+          "feedback": {
+            "es": "The former es el albergue (ruidoso) y the latter el hotel, donde durmieron bien."
+          },
+          "audio": "We booked a cheap hostel and an expensive hotel. The former was noisy, but we slept well in the latter. That was a surprise.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7fc586395dc59a947140ec1d2bf86dc79995782abaccbbc18b8e525477da429b"
+      },
+      {
+        "id": "en.n7.c26.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué significa «such places» en el texto?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Places like the island described."
+          },
+          {
+            "text": "Places with crowds."
+          },
+          {
+            "text": "Only the island itself, nowhere else."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.e03.seed-0",
+          "feedback": {
+            "es": "Such places significa lugares de ese tipo, como la isla descrita: con playas tranquilas, agua clara y sin gente."
+          },
+          "text": "The island has quiet beaches, clear water and no crowds. Such places are rare."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8533967c4fda3837981230488a1c2960894f9dd4bfdfc3c12eb27684f8cd1a31"
+      },
+      {
+        "id": "en.n7.c26.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Ese fue el mejor día del viaje.»"
+        },
+        "answer": {
+          "text": "That was the best day of the trip",
+          "tokens": [
+            "That",
+            "was",
+            "the",
+            "best",
+            "day",
+            "of",
+            "the",
+            "trip"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.e04.seed-0",
+          "feedback": {
+            "es": "That retoma lo que acaba de contarse y lo valora: That was…"
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6c2178a0d6689b79423d0486ea06728578a5ecabca15309fcd73cbd959ef3a14"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c26.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué salió al mediodía?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The train."
+          },
+          {
+            "text": "The bus."
+          },
+          {
+            "text": "Both of them."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.r01.seed-0",
+          "feedback": {
+            "es": "The former es el primero nombrado: el autobús. El tren no se menciona en esa frase."
+          },
+          "text": "The bus and the train were both late. [The former] left at noon."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:99d062f27b4e18533b4524e4cd57c0f59175196c3565c3c01053019c4ec4c4ae"
+      },
+      {
+        "id": "en.n7.c26.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Nunca he visto un lugar tan hermoso.»"
+        },
+        "answer": {
+          "text": "such",
+          "accepted": [
+            "such"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.r02.seed-0",
+          "feedback": {
+            "es": "Such a + adjetivo + nombre expresa «tan»; so no se usa delante de a + nombre."
+          },
+          "text": "I have never seen ___ a beautiful place."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:18466b4375839496d8a4023490cdfc06ae61b5bde6a05053e4339fb23526ceb7"
+      },
+      {
+        "id": "en.n7.c26.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El primero era barato, pero el último era mejor.»"
+        },
+        "answer": {
+          "text": "The former was cheap but the latter was better",
+          "tokens": [
+            "The",
+            "former",
+            "was",
+            "cheap",
+            "but",
+            "the",
+            "latter",
+            "was",
+            "better"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-cohesion-reference-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c26.r03.seed-0",
+          "feedback": {
+            "es": "The former y the latter retoman los dos elementos nombrados antes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:44c038cf731649e6c5479bcae0ed8d37664a3d1cbb75706ee80147359018ed6f"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c26.e01": {
+      "reteach": "en.n7.class-26.t01",
+      "review": "en.n7.c26.r01"
+    },
+    "en.n7.c26.e02": {
+      "reteach": "en.n7.class-26.t02",
+      "review": "en.n7.c26.r02"
+    },
+    "en.n7.c26.e03": {
+      "reteach": "en.n7.class-26.t03",
+      "review": "en.n7.c26.r03"
+    },
+    "en.n7.c26.e04": {
+      "reteach": "en.n7.class-26.t04",
+      "review": "en.n7.c26.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

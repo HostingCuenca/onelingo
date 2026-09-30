@@ -1,0 +1,646 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n6.class-96": {
+      "explicacion": {
+        "titulo": "Leer un texto de opinión: piezas y certeza",
+        "texto": "Analizar un texto de opinión es localizar sus piezas. La tesis es la idea que el autor defiende. Los recursos la apoyan: datos, ejemplos o citas. Los conectores (however, therefore, in fact) muestran cómo se relacionan las ideas. Los matizadores (probably, may, seems to, could) indican el grado de certeza: will es seguro, probably y could dejan margen. Busca primero la tesis, luego los recursos y por último cuánta seguridad expresa el autor."
+      },
+      "patron": {
+        "texto": "Fichas para analizar un texto de opinión:",
+        "formula": [
+          {
+            "texto": "The writer's thesis is that cities need more parks.",
+            "nota": "tesis: la idea que defiende"
+          },
+          {
+            "texto": "She supports it with a statistic.",
+            "nota": "recurso: dato, ejemplo o cita"
+          },
+          {
+            "texto": "However, critics point out the cost.",
+            "nota": "conector: contraste"
+          },
+          {
+            "texto": "This will probably help, but it could cause problems.",
+            "nota": "matizador: grado de certeza"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The writer thesis is that we need more parks.",
+          "correcto": "The writer's thesis is that we need more parks.",
+          "explicacion": "La posesión entre personas se marca con 's: the writer's thesis, no the writer thesis."
+        },
+        {
+          "incorrecto": "The evidences suggest a clear trend.",
+          "correcto": "The evidence suggests a clear trend.",
+          "explicacion": "Evidence no se usa en plural y lleva verbo en singular, aunque en español digamos «las evidencias»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo comentan un artículo de opinión que acaban de leer.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "What is the writer's thesis?",
+            "traduccion": "¿Cuál es la tesis de la autora?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That cities should close their centres to cars.",
+            "traduccion": "Que las ciudades deberían cerrar sus centros a los coches."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And how does she support it?",
+            "traduccion": "¿Y cómo la apoya?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "With a statistic. However, she says the plan could cause some problems.",
+            "traduccion": "Con un dato estadístico. Sin embargo, dice que el plan podría causar algunos problemas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué apoya la autora su tesis?",
+          "opciones": [
+            {
+              "es": "Con un dato estadístico."
+            },
+            {
+              "es": "Con una cita de un político."
+            },
+            {
+              "es": "Con una pregunta retórica."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo responde «With a statistic»: el recurso que apoya la tesis es un dato estadístico."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Pregunta que te haces"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tesis"
+            },
+            {
+              "texto": "¿Qué defiende el autor?"
+            }
+          ],
+          [
+            {
+              "texto": "Recurso"
+            },
+            {
+              "texto": "¿Con qué lo apoya: dato, ejemplo o cita?"
+            }
+          ],
+          [
+            {
+              "texto": "Conector"
+            },
+            {
+              "texto": "¿Cómo enlaza las ideas: however, therefore, in fact?"
+            }
+          ],
+          [
+            {
+              "texto": "Matizador"
+            },
+            {
+              "texto": "¿Con cuánta seguridad habla: will, probably, could?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-97": {
+      "explicacion": {
+        "titulo": "Editar tu texto: cuatro preguntas",
+        "texto": "Editar tu propio texto es releerlo con cuatro preguntas. Precisión: ¿el tiempo verbal encaja con el momento que cuentas? (I had changed antes de I sent). Cohesión: ¿los conectores relacionan bien las ideas? (Although + coma, sin but; first, then, finally). Registro: en un texto formal evita las órdenes directas y usa I would be grateful if you could… Matiz: no afirmes más de lo que sabes; usa suggest, may o seem. Cambia una cosa cada vez y anota por qué."
+      },
+      "patron": {
+        "texto": "Cuatro preguntas para revisar un borrador:",
+        "formula": [
+          {
+            "texto": "By the time I sent it, I had already changed the title.",
+            "nota": "precisión: tiempo verbal"
+          },
+          {
+            "texto": "Although the room is small, it is bright.",
+            "nota": "cohesión: un solo conector"
+          },
+          {
+            "texto": "I would be grateful if you could check my draft.",
+            "nota": "registro: formal"
+          },
+          {
+            "texto": "The results suggest that teenagers sleep less.",
+            "nota": "matiz: no afirmar de más"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although the app is useful, but it may distract students.",
+          "correcto": "Although the app is useful, it may distract students.",
+          "explicacion": "En español podemos decir «aunque… pero», pero en inglés although ya contrasta: but sobra."
+        },
+        {
+          "incorrecto": "I want that you check my draft.",
+          "correcto": "I would be grateful if you could check my draft.",
+          "explicacion": "Want that no existe en inglés. Para pedir con formalidad se usa I would be grateful if you could…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana revisa con Mia el borrador de una redacción.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Mia, your draft is good, but I found some mistakes.",
+            "traduccion": "Mia, tu borrador está bien, pero he encontrado algunos errores."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Really? I wrote: Although the app is useful, but it may distract students.",
+            "traduccion": "¿De verdad? Escribí: Although the app is useful, but it may distract students."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Take out but. Although already shows the contrast.",
+            "traduccion": "Quita but. Although ya muestra el contraste."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Thanks! Finally I can fix the last paragraph.",
+            "traduccion": "¡Gracias! Por fin puedo arreglar el último párrafo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué debe quitar Mia?",
+          "opciones": [
+            {
+              "es": "La palabra but, porque although ya marca el contraste."
+            },
+            {
+              "es": "La palabra although, porque sobra."
+            },
+            {
+              "es": "El último párrafo completo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Take out but»: although ya expresa el contraste, así que but sobra."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Aspecto",
+          "Ejemplo corregido"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Precisión"
+            },
+            {
+              "texto": "When I arrived, they had already left."
+            }
+          ],
+          [
+            {
+              "texto": "Cohesión"
+            },
+            {
+              "texto": "Although it rained, we had fun."
+            }
+          ],
+          [
+            {
+              "texto": "Registro"
+            },
+            {
+              "texto": "I would be grateful if you could…"
+            }
+          ],
+          [
+            {
+              "texto": "Matiz"
+            },
+            {
+              "texto": "The results suggest that many…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-98": {
+      "explicacion": {
+        "titulo": "Seguir una discusión sin mezclar voces",
+        "texto": "Para seguir una discusión, anota de cada persona tres cosas: su postura (a favor, en contra o con dudas), su razón y si cambia de opinión. La postura aparece con in favour of, I'm against o I'd rather. La razón llega tras because o my main concern is. El acuerdo parcial se marca con I see your point, but… y el cambio de opinión con You've convinced me. Atribuye cada idea a quien la dijo: Tom objects to…, Mia is worried about… No mezcles las voces."
+      },
+      "patron": {
+        "texto": "Matriz de una discusión:",
+        "formula": [
+          {
+            "texto": "Mia is in favour of the plan, as long as…",
+            "nota": "postura + condición"
+          },
+          {
+            "texto": "Tom objects to it because his main concern is the noise.",
+            "nota": "razón de la postura"
+          },
+          {
+            "texto": "I see your point, but I'm not convinced.",
+            "nota": "acuerdo parcial"
+          },
+          {
+            "texto": "You've convinced me.",
+            "nota": "cambio de opinión"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Mia is in favour with the bike lane.",
+          "correcto": "Mia is in favour of the bike lane.",
+          "explicacion": "La expresión fija es in favour of, no in favour with."
+        },
+        {
+          "incorrecto": "I prefer we spend the money on the library.",
+          "correcto": "I'd rather we spent the money on the library.",
+          "explicacion": "Para preferir lo que otro haga se usa I'd rather + sujeto + pasado simple; prefer no admite esa estructura."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le pregunta a Leo cómo fue la reunión del barrio sobre un carril bici.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "How was the meeting about the bike lane?",
+            "traduccion": "¿Cómo fue la reunión sobre el carril bici?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Mia is in favour, as long as shops keep some parking. Tom objects because his main concern is the noise.",
+            "traduccion": "Mia está a favor, siempre que las tiendas conserven algo de aparcamiento. Tom se opone porque le preocupa el ruido."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And in the end?",
+            "traduccion": "¿Y al final?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Tom said: You've convinced me. A small lane might work.",
+            "traduccion": "Tom dijo: me has convencido. Un carril pequeño podría funcionar."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué se oponía Tom al carril bici al principio?",
+          "opciones": [
+            {
+              "es": "Por el ruido."
+            },
+            {
+              "es": "Por el coste."
+            },
+            {
+              "es": "Por la seguridad de los niños."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice que Tom se opone porque su principal preocupación es el ruido; después cambia de opinión."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué anotas",
+          "Cómo suena"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura"
+            },
+            {
+              "texto": "I'm in favour of… / I object to… / I'd rather…"
+            }
+          ],
+          [
+            {
+              "texto": "Razón"
+            },
+            {
+              "texto": "because… / my main concern is…"
+            }
+          ],
+          [
+            {
+              "texto": "Acuerdo parcial"
+            },
+            {
+              "texto": "I see your point, but…"
+            }
+          ],
+          [
+            {
+              "texto": "Cambio de opinión"
+            },
+            {
+              "texto": "You've convinced me."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-99": {
+      "explicacion": {
+        "titulo": "Preparar una respuesta final: cuatro piezas",
+        "texto": "Un borrador sólido tiene cuatro piezas. Postura matizada: di lo que piensas con prudencia (on balance, probably, may well). Evidencia atribuida: indica quién lo afirma (according to…, is said to have…, claims that…). Concesión: reconoce un punto del otro (Although the council has a point…). Plan con condición: propón una acción y su condición (as long as, provided that). Al terminar, revisa cuatro criterios: postura clara, fuentes nombradas, condición realista y conectores y tiempos coherentes."
+      },
+      "patron": {
+        "texto": "Borrador en cuatro piezas:",
+        "formula": [
+          {
+            "texto": "On balance, the market probably does more good than harm.",
+            "nota": "postura matizada"
+          },
+          {
+            "texto": "According to the local paper, traders are said to have lost half their income.",
+            "nota": "evidencia atribuida"
+          },
+          {
+            "texto": "Although the council has a point, moving the market may well hurt the town.",
+            "nota": "concesión + matiz"
+          },
+          {
+            "texto": "I would support a trial as long as traders are consulted first.",
+            "nota": "plan con condición"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "According to me, the market is important.",
+          "correcto": "In my opinion, the market is important.",
+          "explicacion": "According to se usa para atribuir algo a otra fuente. Tu propia postura se presenta con in my opinion o I think."
+        },
+        {
+          "incorrecto": "I would support a trial as long as traders will be consulted.",
+          "correcto": "I would support a trial as long as traders are consulted.",
+          "explicacion": "Tras as long as se usa el presente, no will, aunque hables del futuro."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le pregunta a Sara cómo plantea su respuesta sobre un plan para trasladar el mercado.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "What is your position on the market plan?",
+            "traduccion": "¿Cuál es tu postura sobre el plan del mercado?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "On balance, I think the market does more good than harm. According to the local paper, traders are said to have lost half their income.",
+            "traduccion": "En conjunto, creo que el mercado hace más bien que mal. Según el periódico local, se dice que los comerciantes perdieron la mitad de sus ingresos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And what do you propose?",
+            "traduccion": "¿Y qué propones?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A short trial, as long as traders are consulted first.",
+            "traduccion": "Una prueba corta, siempre que se consulte antes a los comerciantes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué condición pone Sara para el plan?",
+          "opciones": [
+            {
+              "es": "Que se consulte antes a los comerciantes."
+            },
+            {
+              "es": "Que el ayuntamiento pague a los comerciantes."
+            },
+            {
+              "es": "Que el mercado se traslade de inmediato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «as long as traders are consulted first»: la condición es consultar antes a los comerciantes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Cómo suena"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Postura matizada"
+            },
+            {
+              "texto": "On balance, … probably / may well …"
+            }
+          ],
+          [
+            {
+              "texto": "Evidencia atribuida"
+            },
+            {
+              "texto": "According to… / is said to have… / claims that…"
+            }
+          ],
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "Although X has a point, …"
+            }
+          ],
+          [
+            {
+              "texto": "Plan con condición"
+            },
+            {
+              "texto": "I would support… as long as / provided that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-100": {
+      "explicacion": {
+        "titulo": "La respuesta final: cinco líneas en un texto",
+        "texto": "El desempeño final reúne las cinco líneas del nivel en un solo texto. 1) Relato preciso: pasado simple, had + participio para lo anterior y, si quieres, un condicional o wish. 2) Postura matizada con must have, probably o may well. 3) Dos fuentes atribuidas con is said to have, claim that o according to. 4) Un plan con condición (as long as), concesión (although) y futuro. 5) Una revisión final: di qué cambiaste y por qué. Planifica en ese orden y reserva dos minutos para revisar."
+      },
+      "patron": {
+        "texto": "Cinco líneas de la respuesta final:",
+        "formula": [
+          {
+            "texto": "A storm damaged the roof, which nobody had checked for years.",
+            "nota": "relato: pasado y had + participio"
+          },
+          {
+            "texto": "If the council had repaired it, the library would be open now.",
+            "nota": "condicional o wish sobre el pasado"
+          },
+          {
+            "texto": "The roof must have been weak, so the damage was probably predictable.",
+            "nota": "postura: deducción + matiz"
+          },
+          {
+            "texto": "The mayor is said to have promised repairs, while residents claim that nothing has been done.",
+            "nota": "dos fuentes atribuidas"
+          },
+          {
+            "texto": "Although money is tight, we could reopen a room provided that volunteers help.",
+            "nota": "plan: concesión + condición"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If the council repaired the roof earlier, the library would be open now.",
+          "correcto": "If the council had repaired the roof earlier, the library would be open now.",
+          "explicacion": "Para un hecho pasado que no ocurrió se usa if + had + participio; if + pasado simple habla de hoy."
+        },
+        {
+          "incorrecto": "The mayor is said that he promised repairs.",
+          "correcto": "The mayor is said to have promised repairs.",
+          "explicacion": "Is said va seguido de to have + participio para un hecho pasado; no se usa that con este sujeto."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Carlos comentan el cierre de la biblioteca del barrio tras una tormenta.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Did you read about the library? A storm damaged the roof, which nobody had checked for years.",
+            "traduccion": "¿Leíste lo de la biblioteca? Una tormenta dañó el tejado, que nadie había revisado en años."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "If the council had repaired it earlier, the library would still be open.",
+            "traduccion": "Si el ayuntamiento lo hubiera reparado antes, la biblioteca seguiría abierta."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "True, although money is tight. We could reopen a small room provided that volunteers help.",
+            "traduccion": "Cierto, aunque el dinero escasea. Podríamos reabrir una sala pequeña siempre que ayuden voluntarios."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I will organise the volunteers. We will meet on Saturday.",
+            "traduccion": "Yo organizaré a los voluntarios. Nos reuniremos el sábado."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿bajo qué condición podrían reabrir una sala pequeña?",
+          "opciones": [
+            {
+              "es": "Que ayuden voluntarios."
+            },
+            {
+              "es": "Que el ayuntamiento pague todo."
+            },
+            {
+              "es": "Que pase la tormenta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «provided that volunteers help»: la condición es que ayuden voluntarios."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Línea de la respuesta",
+          "Estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Relato"
+            },
+            {
+              "texto": "pasado simple + had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Condicional o deseo"
+            },
+            {
+              "texto": "If + had + participio, would… / I wish + had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Postura matizada"
+            },
+            {
+              "texto": "must have + participio, probably, may well"
+            }
+          ],
+          [
+            {
+              "texto": "Fuentes atribuidas"
+            },
+            {
+              "texto": "is said to have…, claim that…, according to…"
+            }
+          ],
+          [
+            {
+              "texto": "Plan"
+            },
+            {
+              "texto": "Although…, … provided that / as long as …, we will…"
+            }
+          ],
+          [
+            {
+              "texto": "Revisión"
+            },
+            {
+              "texto": "I changed… to… because…"
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Revisadas las 5 clases (96-100; C100 capstone) contra el mapa N6; sin P0; las cinco macrohebras del nivel quedan cubiertas en la evaluación de C100.",
+      "P1 corregidos: C97 e1 revelaba la respuesta de e3 (se cambia el tema); C98 e0 revelaba la respuesta de e1 y C98 e2 repetía el estímulo de g0; C99 e1 feedback citaba 'forever' inexistente; C100 e1 copiaba la frase del modelo de e3; ensenanza 6 de C100 tenía inglés artificial ('changed was to had been').",
+      "Rúbricas de C99/C100 reestructuradas: todos los grupos deben cumplirse, así que se añadieron variantes (I'd, contracciones, sinónimos de fuente/condición/revisión) y un grupo de futuro en C100; rúbricas flexibles en p2 de C96 y C99.",
+      "P2: distractores de C100 e0 y C98 p1 más plausibles; acepta 'worry' y as/since; while como concesión en C99 g1."
+    ]
+  }
+}

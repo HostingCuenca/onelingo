@@ -1,0 +1,689 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 66,
+    "end": 70
+  },
+  "classes": {
+    "en.n6.class-66": {
+      "explicacion": {
+        "titulo": "Las tres partes de una charla",
+        "texto": "Una charla tiene tres partes. La apertura saluda al público y presenta el tema («Good morning, everyone. My topic today is…»). El desarrollo explica cada punto con marcadores como first, next y finally, que dicen al público dónde está. El cierre resume y agradece («To sum up… Thank you for listening»). Para reconocer una parte no traduzcas palabra por palabra: fíjate en el marcador y en lo que hace la frase."
+      },
+      "patron": {
+        "texto": "Parte de la charla = frase típica:",
+        "formula": [
+          {
+            "texto": "Good morning, everyone.",
+            "nota": "apertura: saludo al público"
+          },
+          {
+            "texto": "My topic today is…",
+            "nota": "apertura: presenta el tema"
+          },
+          {
+            "texto": "First… Next… Finally…",
+            "nota": "desarrollo: un marcador por punto"
+          },
+          {
+            "texto": "To sum up… Thank you.",
+            "nota": "cierre: resume y agradece"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Today I will talk you about my hobby.",
+          "correcto": "Today I will talk to you about my hobby.",
+          "explicacion": "Talk va con to antes de la persona y about antes del tema: talk to you about."
+        },
+        {
+          "incorrecto": "In the conclusion, light is important.",
+          "correcto": "In conclusion, light is important.",
+          "explicacion": "El marcador es in conclusion, sin artículo; en español sí se dice «en la conclusión»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana ensaya su charla escolar delante de su amigo Tom.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "How does your talk start, Ana?",
+            "traduccion": "¿Cómo empieza tu charla, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good morning, everyone. My topic today is street photography.",
+            "traduccion": "Buenos días a todos. Mi tema de hoy es la fotografía callejera."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Nice. And the middle?",
+            "traduccion": "Bien. ¿Y la parte central?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "First, light. Next, the camera. Finally, the people.",
+            "traduccion": "Primero, la luz. Después, la cámara. Por último, la gente."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the end?",
+            "traduccion": "¿Y el final?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "To sum up, light matters more than a camera. Then I say thank you.",
+            "traduccion": "Para resumir, la luz importa más que una cámara. Luego doy las gracias."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿con qué frase empieza Ana su cierre?",
+          "opciones": [
+            {
+              "es": "Con un resumen: «To sum up…»."
+            },
+            {
+              "es": "Con un saludo: «Good morning, everyone»."
+            },
+            {
+              "es": "Con el primer punto: «First…»."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que termina con «To sum up, light matters more than a camera»: el resumen abre el cierre. El saludo pertenece a la apertura."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Qué hace y cómo suena"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Saluda y presenta el tema: Good morning, everyone. My topic is…"
+            }
+          ],
+          [
+            {
+              "texto": "Desarrollo"
+            },
+            {
+              "texto": "Explica los puntos: First,… / Next,… / Finally,…"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Resume y agradece: To sum up,… Thank you for listening."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-67": {
+      "explicacion": {
+        "titulo": "Marcadores y reformulaciones",
+        "texto": "Los marcadores son señales que guían al público. To begin with abre un punto, moving on (o next) pasa al siguiente y to sum up abre el cierre. Las reformulaciones aclaran lo dicho: in other words (dicho de otro modo) o simply put (dicho de forma sencilla). Después del marcador va una coma. Ojo con dos trampas: «resumir» en un cierre es to sum up, no «to resume» (que significa reanudar), y se dice in other words, siempre en plural."
+      },
+      "patron": {
+        "texto": "Marcador + coma + idea:",
+        "formula": [
+          {
+            "texto": "To begin with,",
+            "nota": "abre el primer punto"
+          },
+          {
+            "texto": "Moving on,",
+            "nota": "pasa al siguiente punto"
+          },
+          {
+            "texto": "In other words,",
+            "nota": "aclara con palabras más sencillas"
+          },
+          {
+            "texto": "To sum up,",
+            "nota": "abre el cierre"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "To resume, cycling is cheap and healthy.",
+          "correcto": "To sum up, cycling is cheap and healthy.",
+          "explicacion": "«Resumir» se dice to sum up; to resume significa reanudar (falso amigo)."
+        },
+        {
+          "incorrecto": "In another words, it is cheap.",
+          "correcto": "In other words, it is cheap.",
+          "explicacion": "La expresión fija es in other words, con other y words en plural."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara ensaya su charla sobre ciclismo y Carlos le da consejos.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "To begin with, cycling is cheap.",
+            "traduccion": "Para empezar, ir en bici es barato."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Some people won't understand that. Can you make it clearer?",
+            "traduccion": "Hay gente que no lo entenderá. ¿Puedes hacerlo más claro?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "In other words, a bike costs less than a bus ticket.",
+            "traduccion": "Dicho de otro modo, una bici cuesta menos que un billete de autobús."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Good. Now give an example.",
+            "traduccion": "Bien. Ahora da un ejemplo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I save ten dollars a week. Moving on, let me talk about health.",
+            "traduccion": "Yo ahorro diez dólares a la semana. Pasando a otro punto, hablemos de la salud."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Sara con «In other words»?",
+          "opciones": [
+            {
+              "es": "Explica con otras palabras que la bici es barata."
+            },
+            {
+              "es": "Empieza el cierre de la charla."
+            },
+            {
+              "es": "Pasa a hablar de otro tema."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tras «In other words» Sara repite la idea de forma más sencilla: «a bike costs less than a bus ticket». El cambio de tema viene después, con moving on."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Marcador"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Empezar un punto"
+            },
+            {
+              "texto": "To begin with, / First of all,"
+            }
+          ],
+          [
+            {
+              "texto": "Pasar al siguiente"
+            },
+            {
+              "texto": "Moving on, / Next,"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "In other words, / Simply put,"
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "To sum up, / In conclusion,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-68": {
+      "explicacion": {
+        "titulo": "Cómo valorar una charla",
+        "texto": "Para valorar una charla elige aspectos concretos: claridad, ritmo, volumen, contacto visual y marcadores. Di una fortaleza y justifícala con un ejemplo oído («The best thing was… because…»). Después propón una mejora concreta con tacto («She could improve… / My suggestion is to…»). Evita «good» y «bad» a secas. Con too y enough cuida el orden: too fast, pero loud enough (enough va después del adjetivo)."
+      },
+      "patron": {
+        "texto": "Fortaleza + ejemplo + mejora:",
+        "formula": [
+          {
+            "texto": "The best thing was the structure,",
+            "nota": "fortaleza: algo concreto que funcionó"
+          },
+          {
+            "texto": "because first, next and finally were clear.",
+            "nota": "ejemplo oído que lo demuestra"
+          },
+          {
+            "texto": "She could improve her pace.",
+            "nota": "mejora dicha con tacto"
+          },
+          {
+            "texto": "My suggestion is to pause after each point.",
+            "nota": "sugerencia concreta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I suggest to speak more slowly.",
+          "correcto": "I suggest speaking more slowly.",
+          "explicacion": "Después de suggest va un verbo en -ing (o that + sujeto + verbo), no to + verbo."
+        },
+        {
+          "incorrecto": "The volume was enough loud.",
+          "correcto": "The volume was loud enough.",
+          "explicacion": "Enough va detrás del adjetivo: loud enough, no enough loud."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia comentan la charla de un compañero al salir del aula.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "What did you think of the talk?",
+            "traduccion": "¿Qué te pareció la charla?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The best thing was the structure. First, next and finally made it easy to follow.",
+            "traduccion": "Lo mejor fue la estructura. First, next y finally la hacían fácil de seguir."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And the pace?",
+            "traduccion": "¿Y el ritmo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "A little too fast. My suggestion is to pause after each point.",
+            "traduccion": "Un poco rápido. Mi sugerencia es hacer una pausa después de cada punto."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I agree. The volume was good, though.",
+            "traduccion": "Estoy de acuerdo. El volumen era bueno, eso sí."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, loud enough for everyone.",
+            "traduccion": "Sí, lo bastante alto para todos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué sugerencia da Tom para mejorar el ritmo?",
+          "opciones": [
+            {
+              "es": "Hacer una pausa después de cada punto."
+            },
+            {
+              "es": "Hablar más alto."
+            },
+            {
+              "es": "Mirar más a sus notas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice: «My suggestion is to pause after each point». El volumen ya era adecuado y mirar las notas sería un problema de contacto visual."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Aspecto",
+          "Juicio con ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Ritmo (pace)"
+            },
+            {
+              "texto": "Too fast: I could not follow the second point."
+            }
+          ],
+          [
+            {
+              "texto": "Volumen (volume)"
+            },
+            {
+              "texto": "Loud enough for the back row."
+            }
+          ],
+          [
+            {
+              "texto": "Contacto visual (eye contact)"
+            },
+            {
+              "texto": "She looked at her notes too much."
+            }
+          ],
+          [
+            {
+              "texto": "Marcadores"
+            },
+            {
+              "texto": "First, next and finally made it easy to follow."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-69": {
+      "explicacion": {
+        "titulo": "Una charla de dos minutos sobre una afición",
+        "texto": "Una charla de dos minutos tiene unas 130 palabras y tres partes. La apertura capta la atención con una pregunta o con «Imagine…» y presenta tu afición. El desarrollo tiene tres puntos con marcadores: first, next y last but not least. El cierre resume con «To sum up» y agradece. Ensaya en voz alta y cronometra: frases cortas, presente simple para tus hábitos y una sola idea por punto."
+      },
+      "patron": {
+        "texto": "Apertura + tres puntos + cierre:",
+        "formula": [
+          {
+            "texto": "Imagine… / Have you ever…?",
+            "nota": "apertura que capta la atención"
+          },
+          {
+            "texto": "First,… Next,…",
+            "nota": "puntos uno y dos"
+          },
+          {
+            "texto": "Last but not least,…",
+            "nota": "tercer punto"
+          },
+          {
+            "texto": "To sum up,… Thank you for listening.",
+            "nota": "cierre con resumen"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Have you ever draw a face?",
+          "correcto": "Have you ever drawn a face?",
+          "explicacion": "Con have you ever se usa el participio: drawn, no el verbo base."
+        },
+        {
+          "incorrecto": "I am interesting in drawing.",
+          "correcto": "I'm interested in drawing.",
+          "explicacion": "Interested describe a la persona que siente interés; interesting describe lo que interesa."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a su amiga Ana cómo será su charla sobre escalada.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Is your talk ready, Sara?",
+            "traduccion": "¿Está lista tu charla, Sara?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Almost. I start with a question: Have you ever climbed a wall?",
+            "traduccion": "Casi. Empiezo con una pregunta: ¿has escalado alguna vez un muro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. That catches the audience's attention. What are your three points?",
+            "traduccion": "Bien. Eso capta la atención del público. ¿Cuáles son tus tres puntos?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "First, safety. Next, equipment. Last but not least, fun.",
+            "traduccion": "Primero, la seguridad. Después, el equipo. Por último, pero no menos importante, la diversión."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And the ending?",
+            "traduccion": "¿Y el final?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "To sum up, climbing is for everyone. Then I thank them.",
+            "traduccion": "Para resumir, la escalada es para todos. Luego les doy las gracias."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo empieza Sara su charla?",
+          "opciones": [
+            {
+              "es": "Con una pregunta al público."
+            },
+            {
+              "es": "Con un resumen de los puntos."
+            },
+            {
+              "es": "Con el agradecimiento final."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice que empieza con la pregunta «Have you ever climbed a wall?» y Ana comenta que capta la atención del público. El resumen va al final."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Ejemplo",
+          "Tiempo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Have you ever drawn a face? My hobby is drawing."
+            },
+            {
+              "texto": "20 segundos"
+            }
+          ],
+          [
+            {
+              "texto": "Punto 1"
+            },
+            {
+              "texto": "First, anybody can start."
+            },
+            {
+              "texto": "30 segundos"
+            }
+          ],
+          [
+            {
+              "texto": "Punto 2"
+            },
+            {
+              "texto": "Next, it costs very little."
+            },
+            {
+              "texto": "30 segundos"
+            }
+          ],
+          [
+            {
+              "texto": "Punto 3"
+            },
+            {
+              "texto": "Last but not least, it helps you relax."
+            },
+            {
+              "texto": "30 segundos"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "To sum up,… Thank you for listening."
+            },
+            {
+              "texto": "10 segundos"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-70": {
+      "explicacion": {
+        "titulo": "Charla y turno de preguntas",
+        "texto": "Después de la charla llega el turno de preguntas. Tienes cuatro herramientas: agradecer y ganar tiempo («Thank you for your question»), responder corto con un marcador («In short, …»), aclarar si no entiendes («Could you repeat the question?») o reformular tu respuesta si dudan («What I mean is… / Let me put it another way…») y admitir límites («I don't know the answer, but I can find out»). Inventar una respuesta te quita credibilidad."
+      },
+      "patron": {
+        "texto": "Responder a una pregunta del público:",
+        "formula": [
+          {
+            "texto": "Thank you for your question.",
+            "nota": "agradecer y ganar tiempo"
+          },
+          {
+            "texto": "In short, …",
+            "nota": "responder corto, con marcador"
+          },
+          {
+            "texto": "What I mean is… / Let me put it another way…",
+            "nota": "reformular si hay dudas"
+          },
+          {
+            "texto": "I don't know, but I can find out.",
+            "nota": "admitir un límite sin inventar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Can you repeat me the question?",
+          "correcto": "Could you repeat the question?",
+          "explicacion": "Repeat no lleva un pronombre como complemento de persona: repeat the question, sin me."
+        },
+        {
+          "incorrecto": "I am not sure to understand your question.",
+          "correcto": "I am not sure I understand your question.",
+          "explicacion": "Después de I am not sure va una oración completa, no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana termina su charla sobre ciclismo y su amigo Tom le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Thank you, Ana. Is cycling really cheaper than the bus?",
+            "traduccion": "Gracias, Ana. ¿Ir en bici es realmente más barato que el autobús?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good question, Tom. For one person, yes.",
+            "traduccion": "Buena pregunta, Tom. Para una persona, sí."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And for a family of four?",
+            "traduccion": "¿Y para una familia de cuatro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is an unexpected question. What I mean is that the bus is cheaper for a big family.",
+            "traduccion": "Es una pregunta inesperada. Lo que quiero decir es que el autobús es más barato para una familia grande."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And what about the rain?",
+            "traduccion": "¿Y qué pasa con la lluvia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I don't know the answer, but I can find out and tell you later.",
+            "traduccion": "No sé la respuesta, pero puedo averiguarla y decírtela luego."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué hace Ana cuando no sabe responder sobre la lluvia?",
+          "opciones": [
+            {
+              "es": "Promete averiguarlo y contestar luego."
+            },
+            {
+              "es": "Cambia de tema."
+            },
+            {
+              "es": "Inventa una respuesta corta."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «I don't know the answer, but I can find out and tell you later»: admite que no sabe y promete responder, en lugar de inventar."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Situación",
+          "Qué decir"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "No has oído la pregunta"
+            },
+            {
+              "texto": "Could you repeat the question, please?"
+            }
+          ],
+          [
+            {
+              "texto": "No la entiendes"
+            },
+            {
+              "texto": "Do you mean…?"
+            }
+          ],
+          [
+            {
+              "texto": "No te han entendido"
+            },
+            {
+              "texto": "What I mean is… / Let me put it another way…"
+            }
+          ],
+          [
+            {
+              "texto": "No sabes la respuesta"
+            },
+            {
+              "texto": "I don't know the answer, but I can find out."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "Mapa verificado: clases 66-70 coinciden con concepto, canDo y tarea; progresión estructura de charla, marcadores/reformulación, valoración, charla de dos minutos y turno de preguntas.",
+      "68: distractores de escucha reescritos para depender solo de lo que el audio transmite (se eliminaron 'volumen alto', 'sin final', 'habló rápido', 'pausa larga'); ninguna opción de escucha se apoya en contacto visual ni gestos. e3 (lectura) reformulado: Tom señala un problema, no 'pide'.",
+      "67: e0 ambiguo ('In short' vs 'To sum up'/'In conclusion') reconvertido con varias aceptadas; g1 acepta Next (la tabla lo da como equivalente); r1 ya no queda revelado por el audio de e1.",
+      "69: feedback de g0 sin citar posición de opciones; r1 sustituido (repetía el marco 'Imagine a day without…' de p1); rúbrica de p2 ampliada.",
+      "70: ens2 reescrita con frase natural; consigna e1 con traducción para evitar 'Thank you for your attention'; rúbrica e3 con variantes (find out, Simply put, That is a good question).",
+      "Riesgo menor P2: 66-67 de dificultad A2-B1 alta para B2; contenido coherente y sin errores."
+    ]
+  }
+}

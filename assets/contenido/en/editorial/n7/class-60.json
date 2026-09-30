@@ -1,0 +1,862 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-60",
+  "title": {
+    "en": "Flat-share deal",
+    "es": "El trato del piso compartido"
+  },
+  "objectives": {
+    "es": [
+      "Cerrar una negociación de piso compartido y confirmar por escrito lo acordado con precisión."
+    ]
+  },
+  "concepts": [
+    "n7-negotiation-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-59"
+  ],
+  "usesVocabulary": [
+    "confirm",
+    "terms",
+    "discussed",
+    "regarding",
+    "bills",
+    "flatmate",
+    "notice",
+    "reply"
+  ],
+  "usesPatterns": [
+    "n7-negotiation-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "confirm",
+      "es": "confirmar"
+    },
+    {
+      "en": "terms",
+      "es": "condiciones, términos"
+    },
+    {
+      "en": "discussed",
+      "es": "hablamos, discutimos"
+    },
+    {
+      "en": "regarding",
+      "es": "en cuanto a"
+    },
+    {
+      "en": "bills",
+      "es": "gastos, facturas"
+    },
+    {
+      "en": "flatmate",
+      "es": "compañero de piso"
+    },
+    {
+      "en": "notice",
+      "es": "preaviso, aviso"
+    },
+    {
+      "en": "reply",
+      "es": "responder, respuesta"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-60.t01",
+      "en": "I am writing to confirm the terms we discussed on the phone.",
+      "es": "Te escribo para confirmar las condiciones que hablamos por teléfono.",
+      "explanationEs": "I am writing to confirm abre un mensaje de cierre; terms son las condiciones del acuerdo.",
+      "segments": [
+        "I am writing to confirm the",
+        "terms we discussed on the phone."
+      ],
+      "audioText": "I am writing to confirm the terms we discussed on the phone.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-5"
+    },
+    {
+      "id": "en.n7.class-60.t02",
+      "en": "Regarding the rent, we agreed on four hundred dollars a month, bills included.",
+      "es": "En cuanto al alquiler, acordamos cuatrocientos dólares al mes, gastos incluidos.",
+      "explanationEs": "Regarding + tema introduce cada punto; agree on + cantidad; bills included son los gastos incluidos.",
+      "segments": [
+        "Regarding the rent, we agreed on four",
+        "hundred dollars a month, bills included."
+      ],
+      "audioText": "Regarding the rent, we agreed on four hundred dollars a month, bills included.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-5"
+    },
+    {
+      "id": "en.n7.class-60.t03",
+      "en": "Your flatmate will pay the second half of the deposit by the twentieth.",
+      "es": "Tu compañero de piso pagará la segunda mitad del depósito antes del día veinte.",
+      "explanationEs": "By + fecha marca el plazo; un punto, una frase en la confirmación.",
+      "segments": [
+        "Your flatmate will pay the second half",
+        "of the deposit by the twentieth."
+      ],
+      "audioText": "Your flatmate will pay the second half of the deposit by the twentieth.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-5"
+    },
+    {
+      "id": "en.n7.class-60.t04",
+      "en": "Either side must give one month's notice before leaving the flat.",
+      "es": "Cualquiera de las partes debe avisar con un mes de antelación antes de dejar el piso.",
+      "explanationEs": "Give notice significa avisar con antelación.",
+      "segments": [
+        "Either side must give one month's",
+        "notice before leaving the flat."
+      ],
+      "audioText": "Either side must give one month's notice before leaving the flat.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-5"
+    },
+    {
+      "id": "en.n7.class-60.t05",
+      "en": "Please reply to confirm that these terms are correct.",
+      "es": "Por favor, responde para confirmar que estas condiciones son correctas.",
+      "explanationEs": "Cerrar pidiendo una respuesta evita malentendidos.",
+      "segments": [
+        "Please reply to confirm that",
+        "these terms are correct."
+      ],
+      "audioText": "Please reply to confirm that these terms are correct.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-negotiation-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c60.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase abre bien un mensaje de confirmación?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I am writing to confirm the dates we discussed."
+          },
+          {
+            "text": "I am writing for confirm the dates."
+          },
+          {
+            "text": "I write you confirming the dates."
+          }
+        ],
+        "teaches": [
+          "n7-negotiation-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.pg01.seed-0",
+          "feedback": {
+            "es": "Para expresar el propósito se usa to + verbo: to confirm."
+          },
+          "hint": {
+            "es": "El propósito se expresa con to + verbo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:db7fd80e2630242a3888a1cd3ed5ff0bb6ad29d1b97c4df4696a64e4e9fa095f"
+      },
+      {
+        "id": "en.n7.c60.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «En cuanto al depósito, acordamos doscientos dólares.»"
+        },
+        "answer": {
+          "text": "Regarding",
+          "accepted": [
+            "Regarding",
+            "Concerning"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-negotiation-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.pg02.seed-0",
+          "feedback": {
+            "es": "Regarding + tema introduce cada punto del mensaje."
+          },
+          "hint": {
+            "es": "Es la palabra de la clase que introduce cada punto del mensaje."
+          },
+          "text": "___ the deposit, we agreed on two hundred dollars."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2c83a46a10eb4d2b5a9d8fdfc1876698b7b731a6258e8807935bdc828076bfea"
+      },
+      {
+        "id": "en.n7.c60.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Por favor, responde para confirmar estas condiciones.»"
+        },
+        "answer": {
+          "text": "Please reply to confirm these terms",
+          "tokens": [
+            "Please",
+            "reply",
+            "to",
+            "confirm",
+            "these",
+            "terms"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-negotiation-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.pg03.seed-0",
+          "feedback": {
+            "es": "Please reply abre la petición y to confirm these terms dice para qué."
+          },
+          "hint": {
+            "es": "Empieza con please y usa to confirm para el propósito."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4f082c5c32061bbf31e3548e4fc6e924a4be2c2237cb904e292d4d8c45880a50"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c60.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quedó pendiente."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The rent."
+          },
+          {
+            "text": "The decision about pets."
+          },
+          {
+            "text": "The bills."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.p01.seed-0",
+          "feedback": {
+            "es": "The pets are still open: el alquiler y los gastos ya están acordados."
+          },
+          "audio": "Regarding the rent, we agreed on four hundred and twenty dollars, bills included. The pets are still open; the owner will reply by Friday.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:7e1d7c6971f1fd2cf3488c64bf2101bd777dd60a66cec2ff5160263e6ce85574"
+      },
+      {
+        "id": "en.n7.c60.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase confirma una condición con plazo?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "You can move in on the first, and the deposit is cheap."
+          },
+          {
+            "text": "You can move in, but nobody knows the date."
+          },
+          {
+            "text": "You can move in on the first, provided that the deposit is paid by the thirtieth."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.p02.seed-0",
+          "feedback": {
+            "es": "Solo la frase con provided that combina una condición con un plazo (by the thirtieth)."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a637c2f5c23be80a0ae58e4df12ba137e2094f085ea461b524719894b5c8daaf"
+      },
+      {
+        "id": "en.n7.c60.p03",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con su función en el mensaje."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I am writing to confirm…",
+              {
+                "es": "Abre el mensaje"
+              }
+            ],
+            [
+              "Regarding the rent,…",
+              {
+                "es": "Introduce un punto"
+              }
+            ],
+            [
+              "…is still open.",
+              {
+                "es": "Señala algo pendiente"
+              }
+            ],
+            [
+              "Please reply to confirm.",
+              {
+                "es": "Cierra pidiendo respuesta"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.p03.seed-0",
+          "feedback": {
+            "es": "Cada frase cumple una función distinta dentro de la confirmación."
+          },
+          "pairs": [
+            [
+              "I am writing to confirm…",
+              {
+                "es": "Abre el mensaje"
+              }
+            ],
+            [
+              "Regarding the rent,…",
+              {
+                "es": "Introduce un punto"
+              }
+            ],
+            [
+              "…is still open.",
+              {
+                "es": "Señala algo pendiente"
+              }
+            ],
+            [
+              "Please reply to confirm.",
+              {
+                "es": "Cierra pidiendo respuesta"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:cad2e62b1c5dcff5b32746043193545958f83dc527d5524dc49697c8d69022b6"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c60.e01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Ambas partes deben avisar con un mes de antelación.»"
+        },
+        "answer": {
+          "text": "Both sides must give one month's notice",
+          "tokens": [
+            "Both",
+            "sides",
+            "must",
+            "give",
+            "one",
+            "month's",
+            "notice"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5",
+          "n7-negotiation-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.e01.seed-0",
+          "feedback": {
+            "es": "Give notice significa avisar con antelación; one month's notice indica cuánto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c192fe4f8f15ece0f1547b7bbac66f8480bed03271d0f906e277260c36c766d0"
+      },
+      {
+        "id": "en.n7.c60.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pasa si Sam no responde antes del lunes."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She will offer the room to another person."
+          },
+          {
+            "text": "She will keep the room for another week."
+          },
+          {
+            "text": "She will lower the rent."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5",
+          "n7-negotiation-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.e02.seed-0",
+          "feedback": {
+            "es": "Unless I hear from you by Monday, I will offer the room to someone else: si no hay respuesta, ofrece la habitación a otra persona."
+          },
+          "audio": "Hi Sam, I am writing to confirm the terms. The rent is five hundred dollars. You can move in on the first, provided that you pay the deposit by Friday. Unless I hear from you by Monday, I will offer the room to someone else.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:34dcf03281dc81efe04ac80b4141b8632a166c50e2032a7e608782d8d18ed4ba"
+      },
+      {
+        "id": "en.n7.c60.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase refleja sin error las notas?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The rent and the pets are both settled."
+          },
+          {
+            "text": "The rent is settled at three hundred and fifty dollars; the pets are still open."
+          },
+          {
+            "text": "The rent is still open, but the pets are settled."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5",
+          "n7-negotiation-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.e03.seed-0",
+          "feedback": {
+            "es": "Las notas dicen que el alquiler está cerrado y las mascotas siguen abiertas."
+          },
+          "text": "Notes: rent, three hundred and fifty dollars, settled. Pets: still open. Deposit: half now, half later."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:bce2772cdbbade3ab829383b6444f01e1c3ebfac715f827aedf6b733c9537e7c"
+      },
+      {
+        "id": "en.n7.c60.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe el mensaje de confirmación con todos los puntos de tus notas."
+        },
+        "answer": {
+          "text": "Hello Carlos, I am writing to confirm the terms we discussed on the phone. Regarding the rent, we agreed on four hundred and fifty dollars a month, bills included. The deposit is also four hundred and fifty dollars, and I will pay it in two parts. The first part will arrive by the twentieth of May. I can move in on the first of June, provided that the first part of the deposit is paid on time. The question about pets is still open, and you will give me an answer by Friday. Finally, either of us must give one month's notice before leaving the flat. Please reply to confirm that these terms are correct. Thank you for your help, and I look forward to living in the flat.",
+          "accepted": [
+            "Hello Carlos, I am writing to confirm the terms we discussed on the phone. Regarding the rent, we agreed on four hundred and fifty dollars a month, bills included. The deposit is also four hundred and fifty dollars, and I will pay it in two parts. The first part will arrive by the twentieth of May. I can move in on the first of June, provided that the first part of the deposit is paid on time. The question about pets is still open, and you will give me an answer by Friday. Finally, either of us must give one month's notice before leaving the flat. Please reply to confirm that these terms are correct. Thank you for your help, and I look forward to living in the flat.",
+            "Hi Carlos, I am writing to confirm the terms we discussed. Regarding the rent, we agreed on four hundred and fifty dollars a month, bills included. The deposit is four hundred and fifty dollars, and I will pay it in two payments. The first payment will arrive before the twentieth of May. I can move in on the first of June, as long as the first payment is made on time. The question about pets is still open, and I will wait for your reply by Friday. Finally, either side must give one month's notice before leaving the flat. Please reply to confirm that these terms are correct. Thank you for your help, and I look forward to moving in.",
+            "Hello Carlos, I want to confirm the terms we discussed. Regarding the rent, we agreed on 450 dollars a month, bills included. The deposit is 450 dollars, and I will pay it in two parts. The first part will arrive by the twentieth of May. I can move in on the first of June, on condition that the first part is paid on time. The pets are not settled yet, and you will reply by Friday. Finally, either of us must give one month's notice before leaving the flat. Please let me know if these terms are correct. Thank you for your help, and I look forward to the flat."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5",
+          "n7-negotiation-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.e04.seed-0",
+          "feedback": {
+            "es": "El mensaje abre con el propósito, recorre precio, depósito, fecha, condición, pendiente y preaviso, y pide respuesta."
+          },
+          "text": "Notas: alquiler 450 dólares al mes, gastos incluidos (cerrado). Depósito 450, en dos partes; la primera antes del 20 de mayo. Mudanza el 1 de junio, siempre que se pague la primera parte. Mascotas: abierto; el casero responde el viernes. Preaviso: un mes. Escribe el mensaje a Carlos.",
+          "scoring": {
+            "wordRange": [
+              115,
+              230
+            ],
+            "evidenceGroups": [
+              [
+                "I am writing to confirm",
+                "I want to confirm",
+                "to confirm the terms"
+              ],
+              [
+                "four hundred and fifty",
+                "450"
+              ],
+              [
+                "in two parts",
+                "two payments",
+                "two instalments",
+                "in two",
+                "two installments",
+                "two instalments",
+                "in two payments"
+              ],
+              [
+                "by the twentieth",
+                "before the twentieth",
+                "by May 20",
+                "20th of May",
+                "by the 20th",
+                "before the 20th",
+                "by 20 May",
+                "May 20",
+                "twentieth of May",
+                "20th of May",
+                "20 May"
+              ],
+              [
+                "provided that",
+                "as long as",
+                "on condition that",
+                "unless"
+              ],
+              [
+                "still open",
+                "not settled",
+                "not decided",
+                "pending"
+              ],
+              [
+                "by Friday",
+                "on Friday"
+              ],
+              [
+                "one month's notice",
+                "a month's notice",
+                "one month notice",
+                "notice of one month",
+                "a month of notice"
+              ],
+              [
+                "Please reply",
+                "please confirm",
+                "let me know",
+                "reply"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:51b34b305f5cc77ebd0c0cfad85311a426910b1cb029735150750060eb09586a"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c60.r01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Acordamos cuatrocientos dólares al mes, gastos incluidos.»"
+        },
+        "answer": {
+          "text": "on",
+          "accepted": [
+            "on"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.r01.seed-0",
+          "feedback": {
+            "es": "El verbo agree se combina con on para la cifra o el tema acordado."
+          },
+          "text": "We agreed ___ four hundred dollars a month, bills included."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8357fe44845a85498be6d9b274f9358ecb9345672b57fc8108690f1076c3b468"
+      },
+      {
+        "id": "en.n7.c60.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué pide el hablante."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "That the price is lowered."
+          },
+          {
+            "text": "That the contract is cancelled."
+          },
+          {
+            "text": "That the price is confirmed in writing."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.r02.seed-0",
+          "feedback": {
+            "es": "Would you consider confirming it in writing? pide confirmar el precio por escrito."
+          },
+          "audio": "Sorry to interrupt, but I am not sure the price is settled. Would you consider confirming it in writing?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8bf2dea6f656b9d257d3a4308ad1f0aa0966ccb3d2d7ddfe04e91c4e1a543400"
+      },
+      {
+        "id": "en.n7.c60.r03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué contraoferta combina condición y concesión?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I could accept four hundred, provided that you paint the walls; in return, I can move in next week."
+          },
+          {
+            "text": "Four hundred, take it or leave it."
+          },
+          {
+            "text": "I accept four hundred because I like the flat."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-negotiation-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c60.r03.seed-0",
+          "feedback": {
+            "es": "Solo la frase con provided that y in return pone una condición y ofrece una concesión."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:dbb583587e40b6a95c8342f9a58e42b082692a274b572f5ae26d0d649dbd1a39"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c60.e01": {
+      "reteach": "en.n7.class-60.t01",
+      "review": "en.n7.c60.r01"
+    },
+    "en.n7.c60.e02": {
+      "reteach": "en.n7.class-60.t02",
+      "review": "en.n7.c60.r02"
+    },
+    "en.n7.c60.e03": {
+      "reteach": "en.n7.class-60.t03",
+      "review": "en.n7.c60.r03"
+    },
+    "en.n7.c60.e04": {
+      "reteach": "en.n7.class-60.t04",
+      "review": "en.n7.c60.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n7-negotiation-1",
+    "n7-negotiation-2",
+    "n7-negotiation-3",
+    "n7-negotiation-4",
+    "n7-negotiation-5"
+  ]
+}
