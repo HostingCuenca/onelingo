@@ -1,0 +1,667 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n3",
+  "range": {
+    "start": 96,
+    "end": 100
+  },
+  "classes": {
+    "en.n3.class-96": {
+      "explicacion": {
+        "titulo": "Leer un caso: fuente, tiempo y límite",
+        "texto": "Un caso práctico mezcla hechos, opiniones, fechas y límites. Antes de actuar, pregunta tres cosas. ¿Quién lo dice? Un hecho viene de una fuente (According to the caretaker…); una opinión, de una persona (Mia thinks…). ¿Cuándo? Separa el pasado (the roof leaked in March), lo que sigue hoy (has been closed since March) y el plan (will reopen on 1 June). ¿Qué límite hay? Busca only if, must o una fecha tope."
+      },
+      "patron": {
+        "texto": "Fuente + situación actual + plan:",
+        "formula": [
+          {
+            "texto": "According to the caretaker,",
+            "nota": "fuente: quién lo dice"
+          },
+          {
+            "texto": "the hall has been closed since March,",
+            "nota": "situación actual: has been + since + momento"
+          },
+          {
+            "texto": "and it will reopen on 1 June.",
+            "nota": "plan: will + verbo + fecha"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The hall is closed since March.",
+          "correcto": "The hall has been closed since March.",
+          "explicacion": "Calco de «está cerrado desde marzo». Con since se usa has been, no is: la situación empezó en el pasado y sigue hoy."
+        },
+        {
+          "incorrecto": "According the caretaker, the repair will finish on 1 June.",
+          "correcto": "According to the caretaker, the repair will finish on 1 June.",
+          "explicacion": "Calco de «según el conserje». La fuente se introduce con according to + persona o texto; sin to la frase es incorrecta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo leen el aviso del club y separan lo que saben.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Why does the club meet in the gym now?",
+            "traduccion": "¿Por qué el club se reúne ahora en el gimnasio?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The roof leaked in March, so the hall has been closed since then.",
+            "traduccion": "El techo tuvo una gotera en marzo, así que el salón está cerrado desde entonces."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "When will it reopen?",
+            "traduccion": "¿Cuándo volverá a abrir?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "According to the caretaker, on 1 June. Mia thinks that is too late.",
+            "traduccion": "Según el conserje, el 1 de junio. Mia piensa que es demasiado tarde."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "So the date is a fact from a source, and Mia's idea is an opinion.",
+            "traduccion": "Entonces la fecha es un hecho de una fuente y la idea de Mia es una opinión."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué dato viene del conserje?",
+          "opciones": [
+            {
+              "es": "La fecha de reapertura: el 1 de junio."
+            },
+            {
+              "es": "La idea de que es demasiado tarde."
+            },
+            {
+              "es": "El motivo de la gotera."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «According to the caretaker, on 1 June». Que sea demasiado tarde es una opinión de Mia y el motivo de la gotera lo cuenta Leo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Qué buscar",
+          "Cómo aparece"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Fuente"
+            },
+            {
+              "texto": "According to the caretaker… / The email says…"
+            }
+          ],
+          [
+            {
+              "texto": "Opinión"
+            },
+            {
+              "texto": "Mia thinks…"
+            }
+          ],
+          [
+            {
+              "texto": "Pasado"
+            },
+            {
+              "texto": "In March, the roof leaked."
+            }
+          ],
+          [
+            {
+              "texto": "Ahora"
+            },
+            {
+              "texto": "The hall has been closed since March."
+            }
+          ],
+          [
+            {
+              "texto": "Plan"
+            },
+            {
+              "texto": "It will reopen on 1 June."
+            }
+          ],
+          [
+            {
+              "texto": "Límite"
+            },
+            {
+              "texto": "…only if it pays £40 a week."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-97": {
+      "explicacion": {
+        "titulo": "Propósito, evidencia y siguiente paso",
+        "texto": "Una respuesta clara tiene un orden fijo. Párrafo 1: el propósito (I am writing to suggest…). Párrafo 2: la evidencia, con conectores: first para empezar, however para un límite y so para la consecuencia. Párrafo 3: el siguiente paso con finally, una persona y una fecha. Ojo: el propósito se dice con to + verbo, nunca con «for suggest»; y however no une dos frases con una simple coma: usa punto o punto y coma antes."
+      },
+      "patron": {
+        "texto": "Propósito + evidencia + siguiente paso:",
+        "formula": [
+          {
+            "texto": "I am writing to suggest a place.",
+            "nota": "propósito: I am writing to + verbo"
+          },
+          {
+            "texto": "First, the gym is free; however, it is small.",
+            "nota": "evidencia: first…; however,…"
+          },
+          {
+            "texto": "Finally, Mia will ask the council by Friday.",
+            "nota": "siguiente paso: finally + quién + will + cuándo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am writing for suggest a place for the club.",
+          "correcto": "I am writing to suggest a place for the club.",
+          "explicacion": "Calco de «para sugerir». El propósito se dice con to + verbo base, no con for."
+        },
+        {
+          "incorrecto": "The gym is free, however it is too small.",
+          "correcto": "The gym is free; however, it is too small.",
+          "explicacion": "However no une dos frases con una coma como «pero». Va tras punto o punto y coma y lleva coma detrás."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Carlos cómo ordenará su respuesta a la directora.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "What will your reply say first?",
+            "traduccion": "¿Qué dirá primero tu respuesta?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "First, the purpose: I am writing to suggest a place for the club until June.",
+            "traduccion": "Primero, el propósito: escribo para sugerir un lugar para el club hasta junio."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And then?",
+            "traduccion": "¿Y después?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The evidence. The gym is free; however, it is too small for forty children.",
+            "traduccion": "La evidencia. El gimnasio es gratis; sin embargo, es demasiado pequeño para cuarenta niños."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "What is your next step?",
+            "traduccion": "¿Cuál es tu siguiente paso?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Finally, I will ask the council by Friday.",
+            "traduccion": "Por último, preguntaré al ayuntamiento a más tardar el viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué va en el primer párrafo de la respuesta de Sara?",
+          "opciones": [
+            {
+              "es": "Su propósito: proponer un lugar para el club."
+            },
+            {
+              "es": "La evidencia: el gimnasio es pequeño."
+            },
+            {
+              "es": "El siguiente paso: preguntar al ayuntamiento."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «First, the purpose…». El primer párrafo declara para qué escribe; la evidencia y el paso final vienen después."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Párrafo",
+          "Conector y frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Propósito"
+            },
+            {
+              "texto": "I am writing to suggest…"
+            }
+          ],
+          [
+            {
+              "texto": "Evidencia"
+            },
+            {
+              "texto": "First…; however…; so…"
+            }
+          ],
+          [
+            {
+              "texto": "Siguiente paso"
+            },
+            {
+              "texto": "Finally, Mia will ask… by Friday."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-98": {
+      "explicacion": {
+        "titulo": "Tres voces: postura, razón y propuesta",
+        "texto": "En una discusión con varias voces, lo difícil es no mezclar a los hablantes. De cada persona anota tres cosas: su postura (prefer, agree, disagree), su razón (because…) y su propuesta (suggest, instead). Después compara: both señala lo que comparten dos personas y neither, lo que ninguna quiere. Atribuye siempre con el nombre (Ana says…, Tom suggests…): la misma razón puede pertenecer a otra persona."
+      },
+      "patron": {
+        "texto": "Hablante + postura + razón + propuesta:",
+        "formula": [
+          {
+            "texto": "Mia disagrees with the library hall",
+            "nota": "postura: quién y qué rechaza o prefiere"
+          },
+          {
+            "texto": "because it costs £40,",
+            "nota": "razón: because + dato"
+          },
+          {
+            "texto": "so she suggests the gym two days a week instead.",
+            "nota": "propuesta: suggests + alternativa + instead"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Neither Tom nor Mia doesn't want to pay £40.",
+          "correcto": "Neither Tom nor Mia wants to pay £40.",
+          "explicacion": "Calco de «ni Tom ni Mia no quieren». Neither ya es negativo: el verbo va en afirmativo."
+        },
+        {
+          "incorrecto": "Tom prefers the park instead of pay £40 a week.",
+          "correcto": "Tom prefers the park instead of paying £40 a week.",
+          "explicacion": "Después de instead of va un verbo en -ing; el español usa infinitivo («en vez de pagar») y de ahí el error."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo no pudo ir a la reunión del club y Ana le cuenta quién dijo qué.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What did Tom say about the park?",
+            "traduccion": "¿Qué dijo Tom sobre el parque?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Tom prefers the park because it is free.",
+            "traduccion": "Tom prefiere el parque porque es gratis."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And Mia? Does she agree with Tom?",
+            "traduccion": "¿Y Mia? ¿Está de acuerdo con Tom?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Not exactly. Mia suggests the gym two days a week instead.",
+            "traduccion": "No exactamente. Mia sugiere en su lugar el gimnasio dos días a la semana."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So neither Tom nor Mia wants the library hall?",
+            "traduccion": "¿Entonces ni Tom ni Mia quieren la sala de la biblioteca?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Right. Neither of them wants to pay £40 a week.",
+            "traduccion": "Exacto. Ninguno de los dos quiere pagar 40 libras a la semana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué propone Mia?",
+          "opciones": [
+            {
+              "es": "Usar el gimnasio dos días a la semana."
+            },
+            {
+              "es": "Usar el parque los días secos."
+            },
+            {
+              "es": "Pagar 40 libras por la biblioteca."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Mia suggests the gym two days a week instead». El parque es lo que prefiere Tom y pagar las 40 libras es justo lo que ni Tom ni Mia quieren."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Habla",
+          "Postura y razón",
+          "Propuesta"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Ana"
+            },
+            {
+              "texto": "prefers the library hall; the gym is too small"
+            },
+            {
+              "texto": "pay £40 a week"
+            }
+          ],
+          [
+            {
+              "texto": "Tom"
+            },
+            {
+              "texto": "prefers the park; it is free"
+            },
+            {
+              "texto": "use the park on dry days"
+            }
+          ],
+          [
+            {
+              "texto": "Mia"
+            },
+            {
+              "texto": "disagrees with the library hall; it costs £40"
+            },
+            {
+              "texto": "the gym two days a week"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-99": {
+      "explicacion": {
+        "titulo": "Borrador, lista de control y cambios reales",
+        "texto": "Escribir bien es redactar un borrador y revisarlo. Revisa con una lista de cuatro criterios: propósito (¿la primera frase dice para qué escribes?), fuente (¿cada dato dice quién lo afirma?), conectores (first, however, so, finally) y siguiente paso (quién, qué y cuándo). Un cambio cuenta solo si mejora la claridad, la precisión o la evidencia: soon → 1 June o añadir According to the caretaker sí; plan → idea, no. Anota cada cambio con I changed X to Y."
+      },
+      "patron": {
+        "texto": "Borrador + cambio + mejora:",
+        "formula": [
+          {
+            "texto": "The draft says soon,",
+            "nota": "lo que falla: una palabra vaga o un dato sin fuente"
+          },
+          {
+            "texto": "so I changed it to 1 June",
+            "nota": "el cambio: I changed X to Y"
+          },
+          {
+            "texto": "and added the source.",
+            "nota": "la mejora: I added + lo que faltaba"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I changed soon for 1 June.",
+          "correcto": "I changed soon to 1 June.",
+          "explicacion": "Calco de «cambié soon por 1 June». En inglés se cambia una cosa a otra: change X to Y."
+        },
+        {
+          "incorrecto": "According to the caretaker says, the hall will reopen on 1 June.",
+          "correcto": "According to the caretaker, the hall will reopen on 1 June.",
+          "explicacion": "According to ya atribuye el dato; no se le añade says. Se usa una fórmula o la otra: The caretaker says…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le enseña a Ana el borrador de su respuesta y lo revisan juntos.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "My draft says the hall will reopen soon. Is that clear?",
+            "traduccion": "Mi borrador dice que el salón volverá a abrir pronto. ¿Está claro?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Not yet. It is missing a source. Who said it?",
+            "traduccion": "Todavía no. Le falta una fuente. ¿Quién lo dijo?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "The caretaker said 1 June. So I changed soon to 1 June and named him.",
+            "traduccion": "El conserje dijo el 1 de junio. Así que cambié soon por el 1 de junio y lo nombré."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good. Now the reader can check the date and the source.",
+            "traduccion": "Bien. Ahora el lector puede comprobar la fecha y la fuente."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué cambios mejoraron el borrador de Tom?",
+          "opciones": [
+            {
+              "es": "Puso la fecha exacta y nombró la fuente."
+            },
+            {
+              "es": "Cambió una palabra por otra parecida."
+            },
+            {
+              "es": "Quitó el nombre del conserje."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom cambió soon por 1 June y nombró al conserje: fecha exacta y fuente. Quitar el nombre o cambiar palabras parecidas no mejora el texto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Criterio",
+          "Pregunta de revisión"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Purpose"
+            },
+            {
+              "texto": "Does the first sentence say why I am writing?"
+            }
+          ],
+          [
+            {
+              "texto": "Source"
+            },
+            {
+              "texto": "Does each fact say who says it?"
+            }
+          ],
+          [
+            {
+              "texto": "Linkers"
+            },
+            {
+              "texto": "Do first, however, so and finally join the ideas?"
+            }
+          ],
+          [
+            {
+              "texto": "Next step"
+            },
+            {
+              "texto": "Does the end say who will do what by when?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n3.class-100": {
+      "explicacion": {
+        "titulo": "Desempeño final: cinco hebras en una respuesta",
+        "texto": "El desempeño final junta todo el nivel en una respuesta de 100 a 140 palabras. Sigue este orden. 1) Cronología: un hecho pasado, la situación de hoy y el plan (Last month…; since then…; will…). 2) Dos opciones con su condición y su consecuencia (if + presente, will). 3) Dos fuentes, cada dato con su dueño (According to…; Mr Hill says…). 4) Responsable, plazo y seguimiento (Mia will… by Wednesday). 5) Una nota de revisión: qué cambiaste y por qué mejora. No inventes datos."
+      },
+      "patron": {
+        "texto": "Cronología + opción + fuente + acuerdo:",
+        "formula": [
+          {
+            "texto": "Last month, rain stopped the film night;",
+            "nota": "pasado: qué pasó y cuándo"
+          },
+          {
+            "texto": "since then the park has been quiet.",
+            "nota": "hoy: has been + since"
+          },
+          {
+            "texto": "If it rains, we will use the hall;",
+            "nota": "opción con condición: if + presente, will"
+          },
+          {
+            "texto": "according to the park office, it is free.",
+            "nota": "fuente: según quién"
+          },
+          {
+            "texto": "Mia will book it by Wednesday.",
+            "nota": "responsable + acción + plazo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If it will rain on Thursday, we will use the hall.",
+          "correcto": "If it rains on Thursday, we will use the hall.",
+          "explicacion": "Después de if se usa presente, no will; will va solo en la consecuencia."
+        },
+        {
+          "incorrecto": "The park has been quiet since three weeks.",
+          "correcto": "The park has been quiet for three weeks.",
+          "explicacion": "Since marca un inicio (since March); for marca una duración (for three weeks)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Mia cierran el plan de la noche de cine.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Which option do we choose for Saturday?",
+            "traduccion": "¿Qué opción elegimos para el sábado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The park is free, but if rain is likely on Thursday, we will use the hall.",
+            "traduccion": "El parque es gratis, pero si es probable que llueva el jueves, usaremos el salón."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. According to the park office, the stage is free. Who will book the hall?",
+            "traduccion": "Bien. Según la oficina del parque, el escenario es gratis. ¿Quién reservará el salón?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I am responsible for that. I will book it by Wednesday.",
+            "traduccion": "Soy responsable de eso. Lo reservaré a más tardar el miércoles."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién reservará el salón y para cuándo?",
+          "opciones": [
+            {
+              "es": "Leo, a más tardar el miércoles."
+            },
+            {
+              "es": "Mia, a más tardar el jueves."
+            },
+            {
+              "es": "Leo, el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice: «I am responsible for that. I will book it by Wednesday». El jueves es el día del pronóstico y el sábado, el de la película."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Hebra",
+          "Frase modelo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Cronología"
+            },
+            {
+              "texto": "Last month… since then… will…"
+            }
+          ],
+          [
+            {
+              "texto": "Opciones"
+            },
+            {
+              "texto": "Option A is free; option B costs £50."
+            }
+          ],
+          [
+            {
+              "texto": "Condición"
+            },
+            {
+              "texto": "If rain is likely, we will use the hall."
+            }
+          ],
+          [
+            {
+              "texto": "Fuentes"
+            },
+            {
+              "texto": "According to the park office… / Mr Hill says…"
+            }
+          ],
+          [
+            {
+              "texto": "Acuerdo"
+            },
+            {
+              "texto": "Mia will book the hall by Wednesday."
+            }
+          ],
+          [
+            {
+              "texto": "Revisión"
+            },
+            {
+              "texto": "I changed soon to Friday."
+            }
+          ]
+        ]
+      }
+    }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C96-C100 revisadas completas contra el mapa N3 (conceptos, fase, canDo, tarea de evaluación); explicaciones, patrones, errores y diálogos correctos y naturales.",
+      "Escuchas reescritas (C96 practica1/evaluacion1/repaso1, C97 practica1/evaluacion1/repaso1, C98 evaluacion1/repaso1, C99 practica1/evaluacion1, C100 practica1/evaluacion1/repaso1): su respuesta ya no aparece en textos, consignas u opciones de otros ítems y las opciones son paráfrasis o exigen atribuir lo oído.",
+      "Rúbricas de escritura (C96 a C100) ampliadas con variantes (said/says, by/before, fechas en varios formatos, is going to, sinónimos de conectores y fuentes) y verificadas con el modelo y cada respuesta aceptada.",
+      "Consignas de completar multiparte de C99 y C100 desambiguadas (by frente a on); feedback de repaso sin referencias a la posición de la opción (C97, C99, C100); traducciones de by como «a más tardar / para».",
+      "C98: feedback de la situación sin atribuir a Ana lo que no dice el diálogo; completar both sin alternativa defendible (also).",
+      "C100 integra de forma justa las cinco hebras de N3: cronología con since, opciones con condición, dos fuentes, responsable y plazo, y nota de revisión."
+    ]
+  }
+}
