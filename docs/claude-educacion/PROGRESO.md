@@ -8,10 +8,12 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 290/1.000 clases edi
 
 ## Trabajando ahora
 
-- **Pulido de las 290 clases publicadas antes de producir más** (auditoría `auditoria/AUDITORIA_2026-09-30.md`). Capa de enriquecimiento por bloques de 5 (`CONTRATO_ENRIQUECIMIENTO.md`): explicación en español, patrón, errores reales y situación con diálogo propio. Piloto de 15 clases con GO independiente integrado; ola 1 (90 clases) en autoría con 6 agentes.
-- N3 C91–C100 y el mapa de N4 quedan después del pulido y con el contrato enriquecido desde el origen.
+- Pulido de las 290 clases **terminado en local** (commit `bf0d57b`, build `main.dart.js` `e6eca1c7…`). Pendiente de autorización para desplegar como release `20260930-edu-6-pulido`.
+- Siguiente: N3 C91–C100 con el contrato enriquecido desde el origen (explicación, patrón, errores, situación y pistas incluidos en la autoría); después, mapa v2 de N4.
 
 ## Terminado recientemente
+
+- **Pulido de contenido N1–N3 (2026-09-30):** 290/290 clases enriquecidas (explicación en español, patrón, tabla, 2 errores reales, situación con diálogo e ítem propio, ejemplos reales); 668 «completar» con pista de traducción; ~200 ejercicios defectuosos y 429 ítems de dos opciones corregidos. Todo con autor y revisor independientes (`GO`) y validación automática obligatoria en el compilador. Biblioteca `2026.09.30-en-pulido.1`. 176 pruebas Flutter, 61 de herramientas, 10 idiomas sin errores.
 
 - Pulido de la app (2026-09-30, local, sin desplegar): fichas de ordenar desordenadas, contracciones aceptadas, umbral redondeado (3/4), repaso sin bucle, audio en escucha-ordenar/completar, nivel elegido en el diagnóstico, MCER por nivel, hash web, JSON compactos (12,4 → 7,3 MB), escritura larga sin rúbrica como producción abierta (216 ítems), situación con diálogo visible. Commits `d31dce7`…`5f8ce57`. 175 pruebas Flutter, 61 de herramientas, 10 idiomas sin errores.
 
