@@ -1,0 +1,425 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 51,
+    "end": 55
+  },
+  "classes": {
+    "en.n7.class-51": {
+      "explicacion": {
+        "titulo": "Pedir, mantener y ceder la palabra",
+        "texto": "En un debate hay cuatro movimientos: pedir turno (May I have the floor?), interrumpir con cortesía (Sorry to interrupt, but…), mantener el turno (Let me finish my point) y ceder la palabra (I will pass the floor to Tom). En español solemos decir «perdona, pero…» sin más; en inglés conviene suavizar con sorry, may I o could I. Si interrumpes sin señal, suenas agresivo aunque tu idea sea buena."
+      },
+      "patron": {
+        "texto": "Señal + permiso o motivo + idea:",
+        "formula": [
+          {
+            "texto": "Sorry to interrupt,",
+            "nota": "señal que suaviza la interrupción"
+          },
+          {
+            "texto": "but could I",
+            "nota": "pide permiso para hablar"
+          },
+          {
+            "texto": "add something",
+            "nota": "verbo base: lo que quieres hacer"
+          },
+          {
+            "texto": "about the garden?",
+            "nota": "el tema que quieres tratar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Stop! I want to talk now.",
+          "correcto": "May I have the floor for a moment?",
+          "explicacion": "Stop! suena a orden; pide el turno con may I y una petición amable."
+        },
+        {
+          "incorrecto": "Let me to finish my point.",
+          "correcto": "Let me finish my point, please.",
+          "explicacion": "Tras let me va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "En la asamblea del barrio, Sara modera el debate sobre un jardín comunitario.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Thank you, Tom. I will pass the floor to Ana.",
+            "traduccion": "Gracias, Tom. Le cedo la palabra a Ana."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Thank you. The garden will help the neighbours, and it is cheap.",
+            "traduccion": "Gracias. El jardín ayudará a los vecinos, y es barato."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sorry to interrupt, but could I add something?",
+            "traduccion": "Perdona que te interrumpa, pero ¿puedo añadir algo?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Let me finish my point, please.",
+            "traduccion": "Déjame terminar mi idea, por favor."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Of course. Sorry, Ana.",
+            "traduccion": "Claro. Perdona, Ana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué responde Ana cuando Leo la interrumpe?",
+          "opciones": [
+            {
+              "es": "Pide que le dejen terminar su idea."
+            },
+            {
+              "es": "Le cede la palabra a Leo."
+            },
+            {
+              "es": "Pide al moderador que hable."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «Let me finish my point, please». Mantiene su turno; no cede la palabra."
+        }
+      }
+    },
+    "en.n7.class-52": {
+      "explicacion": {
+        "titulo": "Retomar lo que dijo otra persona",
+        "texto": "Para retomar lo que dijo alguien usa un verbo de reporte (pointed out, claimed, argued, mentioned) y, si quieres, un adverbio que muestre tu postura: rightly (con razón) si estás de acuerdo, wrongly (erróneamente) si no. Los tiempos retroceden: will pasa a would. Las preguntas reportadas pierden la inversión: Leo asked whether the council had approved the plan, no «whether had the council…». Sin did ni signo de interrogación."
+      },
+      "patron": {
+        "texto": "As + persona + adverbio de postura + verbo de reporte, idea:",
+        "formula": [
+          {
+            "texto": "As Marta",
+            "nota": "la persona a quien retomas"
+          },
+          {
+            "texto": "rightly",
+            "nota": "postura: estás de acuerdo con ella"
+          },
+          {
+            "texto": "pointed out,",
+            "nota": "verbo de reporte"
+          },
+          {
+            "texto": "the lot is too small.",
+            "nota": "la idea, con orden de afirmación"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Leo asked whether had the council approved the plan.",
+          "correcto": "Leo asked whether the council had approved the plan.",
+          "explicacion": "En una pregunta reportada no se invierte: va sujeto + verbo, como en una afirmación."
+        },
+        {
+          "incorrecto": "Tom wrongly claimed that the garden will cost nothing.",
+          "correcto": "Tom wrongly claimed that the garden would cost nothing.",
+          "explicacion": "Al reportar en pasado, will retrocede a would."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tras la asamblea, Mia y Leo comentan quién dijo qué sobre el jardín del solar.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Did you hear Tom? He wrongly claimed that the garden would cost nothing.",
+            "traduccion": "¿Oíste a Tom? Afirmó erróneamente que el jardín no costaría nada."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And Carlos asked how much the project would cost.",
+            "traduccion": "Y Carlos preguntó cuánto costaría el proyecto."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "As Marta rightly pointed out, the old lot is too small for both.",
+            "traduccion": "Como bien señaló Marta, el solar es demasiado pequeño para los dos."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "True. Sara argued that parking matters more than flowers.",
+            "traduccion": "Cierto. Sara sostuvo que el aparcamiento importa más que las flores."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué opina Leo de la afirmación de Tom sobre el coste del jardín?",
+          "opciones": [
+            {
+              "es": "Que es un error: no la comparte."
+            },
+            {
+              "es": "Que Tom tiene razón."
+            },
+            {
+              "es": "Que no entiende lo que Tom dijo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo usa wrongly: «He wrongly claimed…». Ese adverbio marca que no comparte la afirmación."
+        }
+      }
+    },
+    "en.n7.class-53": {
+      "explicacion": {
+        "titulo": "Seguir la postura en un debate rápido",
+        "texto": "En un debate rápido la gente cambia de tema y mezcla ideas, pero la postura suele marcarse con pocas señales: I support / I oppose (a favor, en contra), I am not convinced (duda), I am torn (dividido) y I would rather… (preferencia). Escucha primero la señal y luego la razón, que suele venir con because o but. Ojo: un but puede cambiar la postura; I like the idea, but… casi siempre termina en rechazo o duda."
+      },
+      "patron": {
+        "texto": "Señal de postura + razón:",
+        "formula": [
+          {
+            "texto": "I am torn:",
+            "nota": "señal: dividido entre dos posturas"
+          },
+          {
+            "texto": "the garden is lovely,",
+            "nota": "primer argumento: a favor"
+          },
+          {
+            "texto": "but I am worried",
+            "nota": "but marca el cambio de postura"
+          },
+          {
+            "texto": "about the noise.",
+            "nota": "la razón en contra"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am agree with the garden.",
+          "correcto": "I agree with the garden.",
+          "explicacion": "Agree ya es un verbo: no lleva am. También puedes decir I support the garden."
+        },
+        {
+          "incorrecto": "I would rather to keep the trees.",
+          "correcto": "I would rather keep the trees.",
+          "explicacion": "Tras would rather va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "En la asamblea, cuatro vecinos hablan rápido y cambian de tema.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I fully support the garden, because it brings neighbours together.",
+            "traduccion": "Apoyo totalmente el jardín, porque une a los vecinos."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I am not convinced. I am worried about the noise.",
+            "traduccion": "No estoy convencido. Me preocupa el ruido."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I am torn: the garden is lovely, but I would rather keep the trees.",
+            "traduccion": "Estoy dividida: el jardín es precioso, pero preferiría conservar los árboles."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Could we find a compromise, a small garden and ten parking spaces?",
+            "traduccion": "¿Podemos buscar un punto medio, un jardín pequeño y diez plazas de aparcamiento?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That sounds fair. I oppose a big garden, not a small one.",
+            "traduccion": "Me parece justo. Me opongo a un jardín grande, no a uno pequeño."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué postura expresa Mia?",
+          "opciones": [
+            {
+              "es": "Está dividida entre dos ideas."
+            },
+            {
+              "es": "Apoya el jardín sin ninguna duda."
+            },
+            {
+              "es": "Se opone al jardín y al aparcamiento."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «I am torn»: le gusta el jardín, pero prefiere conservar los árboles. No lo apoya ni lo rechaza del todo."
+        }
+      }
+    },
+    "en.n7.class-54": {
+      "explicacion": {
+        "titulo": "Replicar sin subir la voz",
+        "texto": "Una buena réplica tiene tres pasos. Primero, cita o reporta lo dicho (Tom argued that…, Ana asked who…). Segundo, concede lo que es cierto (I concede that…, I take your point…) para no sonar agresivo. Tercero, responde con una contrapropuesta (However, I would suggest…; Instead of…, we could…). En español solemos abrir con «pero»; en inglés la concesión previa suaviza la réplica y hace que te escuchen."
+      },
+      "patron": {
+        "texto": "Reporte + concesión + contrapropuesta:",
+        "formula": [
+          {
+            "texto": "Tom argued that the garden is noisy.",
+            "nota": "reporte de lo que dijo la otra persona"
+          },
+          {
+            "texto": "I take your point;",
+            "nota": "concesión: reconoces lo válido"
+          },
+          {
+            "texto": "however, I would suggest",
+            "nota": "conector de réplica + verbo de propuesta"
+          },
+          {
+            "texto": "shorter opening hours.",
+            "nota": "contrapropuesta clara"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I concede that noise is a concern, however the garden will close at nine.",
+          "correcto": "I concede that noise is a concern; however, the garden will close at nine.",
+          "explicacion": "However necesita punto y coma antes y coma después; con una sola coma se unen mal las dos frases."
+        },
+        {
+          "incorrecto": "Instead to close the garden, I would suggest shorter hours.",
+          "correcto": "Instead of closing the garden, I would suggest shorter hours.",
+          "explicacion": "Se dice instead of + -ing, no instead to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara responde a Tom y a Ana en la asamblea.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "The garden will bring too much noise.",
+            "traduccion": "El jardín traerá demasiado ruido."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I concede that noise can be a concern, but the garden will close at nine.",
+            "traduccion": "Reconozco que el ruido puede ser una preocupación, pero el jardín cerrará a las nueve."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Who will pay for the water?",
+            "traduccion": "¿Quién pagará el agua?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair question. My answer is simple: the neighbours will share the cost.",
+            "traduccion": "Es una pregunta razonable. Mi respuesta es sencilla: los vecinos compartirán el coste."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Cómo responde Sara a la preocupación de Tom por el ruido?",
+          "opciones": [
+            {
+              "es": "Reconoce el problema y propone cerrar el jardín a las nueve."
+            },
+            {
+              "es": "Niega que el jardín pueda hacer ruido."
+            },
+            {
+              "es": "Propone construir un aparcamiento."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara concede («noise can be a concern») y replica con una solución: «the garden will close at nine»."
+        }
+      }
+    },
+    "en.n7.class-55": {
+      "explicacion": {
+        "titulo": "Asamblea de barrio: debatir y resumir",
+        "texto": "Una asamblea integra todo el bloque: pides turno (May I have the floor?), expones tu postura con una razón, replicas con concesión (I take your point; however…), reportas lo que otros preguntaron (Sara asked whether…) y resumes lo acordado con To summarize, the assembly agreed that… o decided to… El resumen debe ser fiel: atribuye cada postura con los verbos de reporte y no añadas opiniones tuyas."
+      },
+      "patron": {
+        "texto": "Resumen fiel de lo acordado:",
+        "formula": [
+          {
+            "texto": "To summarize,",
+            "nota": "abre el resumen"
+          },
+          {
+            "texto": "the assembly agreed that",
+            "nota": "acuerdo: agreed that + oración"
+          },
+          {
+            "texto": "the garden will open in spring,",
+            "nota": "lo acordado"
+          },
+          {
+            "texto": "and Sara asked whether the council would pay.",
+            "nota": "pregunta ajena reportada, aún pendiente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The assembly decided keep ten parking spaces.",
+          "correcto": "The assembly decided to keep ten parking spaces.",
+          "explicacion": "Después de decided va to + verbo base."
+        },
+        {
+          "incorrecto": "Sara asked whether would the council pay for the lights.",
+          "correcto": "Sara asked whether the council would pay for the lights.",
+          "explicacion": "En la pregunta reportada el sujeto va antes del verbo: no hay inversión."
+        }
+      ],
+      "situacion": {
+        "contexto": "Al final de la asamblea, Sara resume lo que se votó.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "To summarize, the assembly agreed that the garden will open in spring.",
+            "traduccion": "Para resumir, la asamblea acordó que el jardín abrirá en primavera."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the parking?",
+            "traduccion": "¿Y el aparcamiento?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The assembly decided to keep ten parking spaces. The vote was close.",
+            "traduccion": "La asamblea decidió mantener diez plazas de aparcamiento. La votación fue reñida."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Carlos asked whether the council would pay for the lights. We are still waiting.",
+            "traduccion": "Carlos preguntó si el ayuntamiento pagaría las luces. Seguimos esperando."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quedó pendiente?",
+          "opciones": [
+            {
+              "es": "Saber si el ayuntamiento pagará las luces."
+            },
+            {
+              "es": "Decidir cuándo abre el jardín."
+            },
+            {
+              "es": "Votar de nuevo el aparcamiento."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que Carlos preguntó si el ayuntamiento pagaría las luces y que siguen esperando la respuesta."
+        }
+      }
+    }
+  }
+}

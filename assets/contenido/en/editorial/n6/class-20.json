@@ -1,0 +1,794 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "transfer",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-20",
+  "title": {
+    "en": "Should have, needn't have",
+    "es": "Debieron hacerlo, no hacía falta"
+  },
+  "objectives": {
+    "es": [
+      "Comentar un viaje que salió mal: deducir causas con modales perfectos, valorar dos decisiones y recomendar qué habría sido mejor sin culpar."
+    ]
+  },
+  "concepts": [
+    "n6-judging-past-actions-5"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n6.class-19"
+  ],
+  "usesVocabulary": [
+    "flight",
+    "storm",
+    "weather",
+    "desk",
+    "luggage",
+    "train",
+    "cancelled",
+    "closed"
+  ],
+  "usesPatterns": [
+    "n6-judging-past-actions-5"
+  ],
+  "vocabulary": [
+    {
+      "en": "flight",
+      "es": "vuelo"
+    },
+    {
+      "en": "storm",
+      "es": "tormenta"
+    },
+    {
+      "en": "weather",
+      "es": "tiempo (clima)"
+    },
+    {
+      "en": "desk",
+      "es": "mostrador"
+    },
+    {
+      "en": "luggage",
+      "es": "equipaje"
+    },
+    {
+      "en": "train",
+      "es": "tren"
+    },
+    {
+      "en": "cancelled",
+      "es": "cancelado"
+    },
+    {
+      "en": "closed",
+      "es": "cerrado"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-20.t01",
+      "en": "Our flight was cancelled; there must have been a storm.",
+      "es": "Nuestro vuelo se canceló; seguro que hubo una tormenta.",
+      "explanationEs": "Must have been: deducción sobre la causa a partir de un hecho.",
+      "segments": [
+        "Our flight was cancelled; there",
+        "must have been a storm."
+      ],
+      "audioText": "Our flight was cancelled; there must have been a storm.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-judging-past-actions-5"
+    },
+    {
+      "id": "en.n6.class-20.t02",
+      "en": "We should have checked the weather before we booked.",
+      "es": "Deberíamos haber comprobado el tiempo antes de reservar.",
+      "explanationEs": "Should have + participio: valoración de una decisión que no se tomó.",
+      "segments": [
+        "We should have checked the",
+        "weather before we booked."
+      ],
+      "audioText": "We should have checked the weather before we booked.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-judging-past-actions-5"
+    },
+    {
+      "id": "en.n6.class-20.t03",
+      "en": "We needn't have rushed to the airport; the check-in desk was still closed.",
+      "es": "No hacía falta que corriéramos al aeropuerto; el mostrador de facturación seguía cerrado.",
+      "explanationEs": "Needn't have rushed: se corrió sin necesidad.",
+      "segments": [
+        "We needn't have rushed to the airport;",
+        "the check-in desk was still closed."
+      ],
+      "audioText": "We needn't have rushed to the airport; the check-in desk was still closed.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-judging-past-actions-5"
+    },
+    {
+      "id": "en.n6.class-20.t04",
+      "en": "The luggage might have stayed in another city.",
+      "es": "Quizá el equipaje se quedó en otra ciudad.",
+      "explanationEs": "Might have + participio: una posibilidad, no una certeza.",
+      "segments": [
+        "The luggage might have",
+        "stayed in another city."
+      ],
+      "audioText": "The luggage might have stayed in another city.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-judging-past-actions-5"
+    },
+    {
+      "id": "en.n6.class-20.t05",
+      "en": "Next time, we could take the train; it is bound to be on time.",
+      "es": "La próxima vez podríamos tomar el tren; seguro que llega puntual.",
+      "explanationEs": "Could + base propone una alternativa y bound to expresa certeza.",
+      "segments": [
+        "Next time, we could take the train;",
+        "it is bound to be on time."
+      ],
+      "audioText": "Next time, we could take the train; it is bound to be on time.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-judging-past-actions-5"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c20.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige la deducción lógica sobre la causa del problema."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "The weather should have been terrible."
+          },
+          {
+            "text": "The weather needn't have been terrible."
+          },
+          {
+            "text": "The weather must have been terrible."
+          }
+        ],
+        "teaches": [
+          "n6-judging-past-actions-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.pg01.seed-0",
+          "feedback": {
+            "es": "Las pistas (viento fuerte, cielo negro) permiten deducir la causa con must have; should y needn't no deducen."
+          },
+          "hint": {
+            "es": "Adivinas la causa a partir de pistas, no criticas ni dices que sobraba."
+          },
+          "text": "Our flight was cancelled. Outside, the wind was very strong and the sky was black."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2feaf06a8cee0f0a0b32cf37be20969db922cc9a9cd55fb4271317ea4c7a2304"
+      },
+      {
+        "id": "en.n6.c20.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Deberías haber comprado billetes de tren.»"
+        },
+        "answer": {
+          "text": "have",
+          "accepted": [
+            "have"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-judging-past-actions-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.pg02.seed-0",
+          "feedback": {
+            "es": "Una crítica sobre el pasado se forma con should have + participio."
+          },
+          "hint": {
+            "es": "Entre should y bought falta un auxiliar."
+          },
+          "text": "You should ___ bought train tickets."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:48941640cb7233c664590f11253f8a50b698b77c86e7dbde4d28f0196b9ce9b8"
+      },
+      {
+        "id": "en.n6.c20.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Seguro que el equipaje se quedó en Londres.»"
+        },
+        "answer": {
+          "text": "The luggage must have stayed in London",
+          "tokens": [
+            "The",
+            "luggage",
+            "must",
+            "have",
+            "stayed",
+            "in",
+            "London"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-judging-past-actions-5"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.pg03.seed-0",
+          "feedback": {
+            "es": "Must have + participio stayed deduce lo que casi seguro pasó con el equipaje."
+          },
+          "hint": {
+            "es": "Empieza con el sujeto y sigue con el modal perfecto de deducción."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d83919785f25b4099a24bdb61bbdc62cbb83fdfaf40a572358271cf7b211df74"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c20.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha: ¿qué lamenta la hablante?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "That they reached the airport too soon."
+          },
+          {
+            "text": "That they missed the flight."
+          },
+          {
+            "text": "That they forgot their luggage."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.p01.seed-0",
+          "feedback": {
+            "es": "Needn't have arrived so early dice que llegaron demasiado pronto, pues el vuelo se retrasó hasta la tarde."
+          },
+          "audio": "Our flight was supposed to leave at noon, but it was late until evening. We needn't have arrived so early.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:01fae73535c3762a9913d1c2ddf30649205d7d1473f702dfb13568d8eb682715"
+      },
+      {
+        "id": "en.n6.c20.p02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las tres frases de la conversación sobre el viaje."
+        },
+        "answer": {
+          "text": "might | should | were",
+          "accepted": [
+            "might | should | were"
+          ],
+          "parts": [
+            {
+              "text": "might",
+              "accepted": [
+                "might",
+                "may",
+                "could"
+              ]
+            },
+            {
+              "text": "should",
+              "accepted": [
+                "should"
+              ]
+            },
+            {
+              "text": "were",
+              "accepted": [
+                "were"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.p02.seed-0",
+          "feedback": {
+            "es": "Might expresa posibilidad, should critica y were supposed to recuerda el plan."
+          },
+          "sentences": [
+            "The hotel phoned us: the booking ___ have been lost.",
+            "You ___ have called the airline earlier.",
+            "We ___ supposed to arrive at six."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 2
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a3e06c68dc2be422086da9791abfd19ced753fa5a8ea456aaf2a26cd008dbb72"
+      },
+      {
+        "id": "en.n6.c20.p03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Deduce la causa con must have: el tren llegó tarde y hacía mucho viento."
+        },
+        "answer": {
+          "text": "The wind must have delayed the train.",
+          "accepted": [
+            "The wind must have delayed the train.",
+            "The strong wind must have delayed the train."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.p03.seed-0",
+          "feedback": {
+            "es": "La deducción sobre la causa de un hecho pasado se forma con must have + participio."
+          },
+          "text": "El tren llegó muy tarde. Hacía mucho viento. Escribe una deducción con must have sobre la causa del retraso."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:115cb1cdaab09fe51849ee3b7227be4f009379de89b9c85a2fd42465d01b3e02"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c20.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué crítica encaja con la decisión de Sara?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Sara needn't have checked the weather."
+          },
+          {
+            "text": "Sara should have checked the weather."
+          },
+          {
+            "text": "Sara must have checked the weather."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5",
+          "n6-judging-past-actions-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.e01.seed-0",
+          "feedback": {
+            "es": "Como no lo comprobó y hubo problemas, la crítica razonable es should have checked."
+          },
+          "text": "Sara didn't check the weather, and the ferry was cancelled."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6113a619457e945933b022eafee8d63bb225955559ccc3036f3cf42512fb96b9"
+      },
+      {
+        "id": "en.n6.c20.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué supone la hablante sobre el equipaje."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "That somebody took it on purpose."
+          },
+          {
+            "text": "That it was never packed."
+          },
+          {
+            "text": "That it could be in a different city."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5",
+          "n6-judging-past-actions-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.e02.seed-0",
+          "feedback": {
+            "es": "Might have gone to another city expresa una posibilidad; en el audio nadie habla de robo ni de que no se hiciera la maleta."
+          },
+          "audio": "Our luggage never arrived. It might have gone to another city, or somebody took it by mistake.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:16105e0a7c0dcd769ce4dfec1fe158903caf1b86691825a742e799e0ca9d9dba"
+      },
+      {
+        "id": "en.n6.c20.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Es imposible que el tren saliera: la estación estaba cerrada.»"
+        },
+        "answer": {
+          "text": "can't",
+          "accepted": [
+            "can't",
+            "couldn't"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5",
+          "n6-judging-past-actions-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.e03.seed-0",
+          "feedback": {
+            "es": "Con la estación cerrada, la deducción negativa es can't have left."
+          },
+          "text": "The train ___ have left; the station was closed."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:242fc0e784cbf231e0170f8d7eedce2fbcae625492bc805f4bba1e2185cab25a"
+      },
+      {
+        "id": "en.n6.c20.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Cuenta el viaje que salió mal: deduce, valora dos decisiones y recomienda."
+        },
+        "answer": {
+          "text": "Our weekend trip went wrong. The flight was cancelled, so there must have been a storm. We should have checked the weather before we booked, and we needn't have arrived at the airport so early, because the check-in desk was closed. Our luggage might have stayed in another city, and it was supposed to arrive that night. Next time, we could take the train, because it is bound to be cheaper and calmer, and we could leave earlier.",
+          "accepted": [
+            "Our weekend trip went wrong. The flight was cancelled, so there must have been a storm. We should have checked the weather before we booked, and we needn't have arrived at the airport so early, because the check-in desk was closed. Our luggage might have stayed in another city, and it was supposed to arrive that night. Next time, we could take the train, because it is bound to be cheaper and calmer, and we could leave earlier.",
+            "Our trip went wrong. The flight was cancelled, so there must have been a storm. We should have looked at the weather before we booked, and we needn't have come to the airport so early, because the desk was closed. Our luggage might have stayed in another city, and it was meant to arrive that night. Next time, we could take the train, because it is bound to be cheaper, and we could leave earlier."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5",
+          "n6-judging-past-actions-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.e04.seed-0",
+          "feedback": {
+            "es": "El relato deduce la causa, valora dos decisiones con should have y needn't have, recuerda lo esperado y termina con una recomendación."
+          },
+          "text": "Datos: el vuelo se canceló (tormenta); no comprobaron el tiempo antes de reservar; llegaron al aeropuerto muy temprano sin necesidad porque el mostrador estaba cerrado; el equipaje se perdió. Recomienda qué podrían hacer la próxima vez. Escribe unas 80 palabras.",
+          "scoring": {
+            "wordRange": [
+              65,
+              150
+            ],
+            "evidenceGroups": [
+              [
+                "must have",
+                "might have",
+                "can't have"
+              ],
+              [
+                "should have",
+                "shouldn't have"
+              ],
+              [
+                "needn't have",
+                "didn't need to"
+              ],
+              [
+                "supposed to",
+                "meant to"
+              ],
+              [
+                "Next time",
+                "next time",
+                "could take",
+                "could go"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:2c0a52ad66da944ebb570ae52d5d8117ef49a26e14ef67e595188a6e74d32f20"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c20.r01",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Seguro que había mucha gente en el aeropuerto.»"
+        },
+        "answer": {
+          "text": "There must have been a lot of people at the airport",
+          "tokens": [
+            "There",
+            "must",
+            "have",
+            "been",
+            "a",
+            "lot",
+            "of",
+            "people",
+            "at",
+            "the",
+            "airport"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.r01.seed-0",
+          "feedback": {
+            "es": "There must have been deduce que había mucha gente a partir de la situación."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ff96965f70bf1a817cb70a180e184160bd4756ac2e9605397bd95fa149a4c30b"
+      },
+      {
+        "id": "en.n6.c20.r02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase propone una recomendación para la próxima vez?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Next time, we could book a hotel near the station."
+          },
+          {
+            "text": "Last time, we should have booked earlier."
+          },
+          {
+            "text": "Yesterday, the hotel must have been full."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.r02.seed-0",
+          "feedback": {
+            "es": "La recomendación mira al futuro con next time + could; las otras frases miran al pasado."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0b3b270bbd37de679b4d42ac0368a0278e438c5781139480ef176f400b203061"
+      },
+      {
+        "id": "en.n6.c20.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Se suponía que el tren llegaba a las ocho.»"
+        },
+        "answer": {
+          "text": "supposed",
+          "accepted": [
+            "supposed",
+            "meant"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-judging-past-actions-5"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c20.r03.seed-0",
+          "feedback": {
+            "es": "El plan previsto se dice con was supposed to (o was meant to) más el verbo base."
+          },
+          "text": "The train was ___ to arrive at eight."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a420800963af1aa11262ef102f87272b62bdf4071a8ff12c2d37caeb8332b3b8"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c20.e01": {
+      "reteach": "en.n6.class-20.t01",
+      "review": "en.n6.c20.r01"
+    },
+    "en.n6.c20.e02": {
+      "reteach": "en.n6.class-20.t02",
+      "review": "en.n6.c20.r02"
+    },
+    "en.n6.c20.e03": {
+      "reteach": "en.n6.class-20.t03",
+      "review": "en.n6.c20.r03"
+    },
+    "en.n6.c20.e04": {
+      "reteach": "en.n6.class-20.t04",
+      "review": "en.n6.c20.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  },
+  "cumulativeEvaluation": [
+    "n6-judging-past-actions-1",
+    "n6-judging-past-actions-2",
+    "n6-judging-past-actions-3",
+    "n6-judging-past-actions-4",
+    "n6-judging-past-actions-5"
+  ]
+}

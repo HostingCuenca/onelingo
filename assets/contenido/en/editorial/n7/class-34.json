@@ -1,0 +1,845 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "production",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-34",
+  "title": {
+    "en": "Say no and keep the friendship",
+    "es": "Decir que no y conservar la amistad"
+  },
+  "objectives": {
+    "es": [
+      "Rechazar una propuesta poco aceptable con concesión, motivo, alternativa concreta y una cola para comprobar, sin sonar seco."
+    ]
+  },
+  "concepts": [
+    "n7-diplomatic-disagreement-4"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-33"
+  ],
+  "usesVocabulary": [
+    "proposal",
+    "instead",
+    "alternative",
+    "worried",
+    "budget",
+    "cheaper",
+    "the thing is",
+    "how about",
+    "what if"
+  ],
+  "usesPatterns": [
+    "n7-diplomatic-disagreement-4"
+  ],
+  "vocabulary": [
+    {
+      "en": "proposal",
+      "es": "propuesta"
+    },
+    {
+      "en": "instead",
+      "es": "en su lugar"
+    },
+    {
+      "en": "alternative",
+      "es": "alternativa"
+    },
+    {
+      "en": "worried",
+      "es": "preocupado"
+    },
+    {
+      "en": "budget",
+      "es": "presupuesto"
+    },
+    {
+      "en": "cheaper",
+      "es": "más barato"
+    },
+    {
+      "en": "the thing is",
+      "es": "el caso es que"
+    },
+    {
+      "en": "how about",
+      "es": "¿qué tal…?"
+    },
+    {
+      "en": "what if",
+      "es": "¿y si…?"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-34.t01",
+      "en": "I can see why you like the proposal, but the thing is, it's a lot of money.",
+      "es": "Entiendo por qué te gusta la propuesta, pero el caso es que es mucho dinero.",
+      "explanationEs": "Concesión (I can see why…) + motivo (the thing is…): dos pasos antes del no.",
+      "segments": [
+        "I can see why you like the proposal, but",
+        "the thing is, it's a lot of money."
+      ],
+      "audioText": "I can see why you like the proposal, but the thing is, it's a lot of money.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-diplomatic-disagreement-4"
+    },
+    {
+      "id": "en.n7.class-34.t02",
+      "en": "I'm a bit worried about the budget for this month.",
+      "es": "Me preocupa un poco el presupuesto de este mes.",
+      "explanationEs": "I'm worried about + nombre da una razón sin atacar la idea.",
+      "segments": [
+        "I'm a bit worried about",
+        "the budget for this month."
+      ],
+      "audioText": "I'm a bit worried about the budget for this month.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-diplomatic-disagreement-4"
+    },
+    {
+      "id": "en.n7.class-34.t03",
+      "en": "How about a cheaper weekend at home instead?",
+      "es": "¿Qué tal un fin de semana más barato en casa?",
+      "explanationEs": "How about + nombre o -ing ofrece una alternativa; instead la cierra.",
+      "segments": [
+        "How about a cheaper",
+        "weekend at home instead?"
+      ],
+      "audioText": "How about a cheaper weekend at home instead?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-diplomatic-disagreement-4"
+    },
+    {
+      "id": "en.n7.class-34.t04",
+      "en": "What if we cook together? It's a good alternative to a restaurant.",
+      "es": "¿Y si cocinamos juntos? Es una buena alternativa a un restaurante.",
+      "explanationEs": "What if we + verbo propone una solución; alternative to + nombre.",
+      "segments": [
+        "What if we cook together? It's",
+        "a good alternative to a restaurant."
+      ],
+      "audioText": "What if we cook together? It's a good alternative to a restaurant.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-diplomatic-disagreement-4"
+    },
+    {
+      "id": "en.n7.class-34.t05",
+      "en": "That alternative would work for everyone, wouldn't it?",
+      "es": "Esa alternativa funcionaría para todos, ¿no?",
+      "explanationEs": "La cola repite el auxiliar: would → wouldn't it? y pide confirmar.",
+      "segments": [
+        "That alternative would work",
+        "for everyone, wouldn't it?"
+      ],
+      "audioText": "That alternative would work for everyone, wouldn't it?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-diplomatic-disagreement-4"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c34.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase es una concesión antes de decir que no?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "No, that's a terrible idea."
+          },
+          {
+            "text": "I can see why you like it, but…"
+          },
+          {
+            "text": "You always choose the plans."
+          }
+        ],
+        "teaches": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.pg01.seed-0",
+          "feedback": {
+            "es": "«I can see why you like it, but…» reconoce lo bueno de la propuesta antes de poner el límite."
+          },
+          "hint": {
+            "es": "La concesión reconoce algo bueno de la idea del otro."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e0a192b53350f6a0e447743a3c5d5fb220e931e0625ed922b34002c7320e54a"
+      },
+      {
+        "id": "en.n7.c34.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Qué tal un plan más barato en su lugar?»"
+        },
+        "answer": {
+          "text": "instead",
+          "accepted": [
+            "instead"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.pg02.seed-0",
+          "feedback": {
+            "es": "Instead cierra la alternativa: propones un plan en lugar del anterior."
+          },
+          "hint": {
+            "es": "Es la palabra que significa «en su lugar» y va al final."
+          },
+          "text": "How about a cheaper plan ___?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1c3f7b31993970c3ac187f5dc39a0b28d7807cb92fb42269012e2100688d304b"
+      },
+      {
+        "id": "en.n7.c34.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me preocupa un poco el presupuesto de este mes.»"
+        },
+        "answer": {
+          "text": "I'm a bit worried about the budget this month",
+          "tokens": [
+            "I'm",
+            "a",
+            "bit",
+            "worried",
+            "about",
+            "the",
+            "budget",
+            "this",
+            "month"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.pg03.seed-0",
+          "feedback": {
+            "es": "I'm a bit worried about + nombre da el motivo de forma suave."
+          },
+          "hint": {
+            "es": "Empieza con I'm a bit y termina con la expresión de tiempo."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e977a9e9ac45c97f60c282a4fa0d8b62f4d36e3b72e9184901bb650a86a0342"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c34.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con el paso del no amable."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "I can see why you like it.",
+              {
+                "es": "concesión"
+              }
+            ],
+            [
+              "The thing is, it costs too much.",
+              {
+                "es": "motivo"
+              }
+            ],
+            [
+              "How about a picnic instead?",
+              {
+                "es": "alternativa"
+              }
+            ],
+            [
+              "That would be fine, wouldn't it?",
+              {
+                "es": "cola de comprobación"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.p01.seed-0",
+          "feedback": {
+            "es": "Cada frase cumple un paso: reconocer, explicar, ofrecer otra cosa o comprobar."
+          },
+          "pairs": [
+            [
+              "I can see why you like it.",
+              {
+                "es": "concesión"
+              }
+            ],
+            [
+              "The thing is, it costs too much.",
+              {
+                "es": "motivo"
+              }
+            ],
+            [
+              "How about a picnic instead?",
+              {
+                "es": "alternativa"
+              }
+            ],
+            [
+              "That would be fine, wouldn't it?",
+              {
+                "es": "cola de comprobación"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c6680051610a1b9e4b521bb8ced94d0f86d068f890c9008b74fd28bc28091762"
+      },
+      {
+        "id": "en.n7.c34.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué alternativa propone Sara."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A longer trip to the mountains."
+          },
+          {
+            "text": "A week at home."
+          },
+          {
+            "text": "A one-day trip to the lake."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.p02.seed-0",
+          "feedback": {
+            "es": "Después del motivo, Sara dice «What if we go to the lake for one day?»: propone una excursión de un día."
+          },
+          "audio": "Mia wants a weekend trip to the mountains for the flat. Sara says: it's a great idea, but the thing is, we can't afford it. What if we go to the lake for one day?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ea2b7efa3e42c53158be13d39f8c9ba3ec5219db24b257cb3c10deee2ca7ad62"
+      },
+      {
+        "id": "en.n7.c34.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «¿Y si cocinamos todos juntos?»"
+        },
+        "answer": {
+          "text": "if",
+          "accepted": [
+            "if"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.p03.seed-0",
+          "feedback": {
+            "es": "What if + oración propone una solución: What if we cook together?"
+          },
+          "text": "What ___ we cook together?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8ca40ae2fe068035c45706ececcba074aa67484de0b124d530332393d0e91589"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c34.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué respuesta a Leo tiene concesión, motivo y alternativa?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "I can see why you would like one, but the landlord says no pets. How about visiting a friend's dog instead?"
+          },
+          {
+            "text": "It's a great idea, but the landlord says no pets."
+          },
+          {
+            "text": "No. A dog is a bad idea in a flat."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.e01.seed-0",
+          "feedback": {
+            "es": "Solo la respuesta completa reconoce la idea, da el motivo (no se permiten mascotas) y ofrece otra cosa; las otras dejan un paso fuera."
+          },
+          "text": "Leo: “Let's buy a dog for the flat!”"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c4853c90fc587be18b3d9105e49478f969dad5511bcad82a86105fa50d650857"
+      },
+      {
+        "id": "en.n7.c34.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige el motivo para decir que no."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "It would cost too much money."
+          },
+          {
+            "text": "It could disturb the people next door."
+          },
+          {
+            "text": "It would be too far from home."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.e02.seed-0",
+          "feedback": {
+            "es": "Sara teme el ruido de noche: podría molestar a los vecinos. Después ofrece la alternativa de las noches de juegos."
+          },
+          "audio": "It's a nice idea, but I'm worried about the noise at night. How about a quiet board-game evening instead? That would work, wouldn't it?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:90bd478da060811b4d3f0a8c87fa162dcfa7889121f140e2902e9cb2fe888e72"
+      },
+      {
+        "id": "en.n7.c34.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Podría funcionar para todos, ¿no?»"
+        },
+        "answer": {
+          "text": "wouldn't",
+          "accepted": [
+            "wouldn't",
+            "would not"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.e03.seed-0",
+          "feedback": {
+            "es": "La cola repite el auxiliar de would y lo niega: wouldn't it?"
+          },
+          "text": "That would work for everyone, ___ it?"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f9de9c38b8e7b7f2d9f9cbd186b0dc733ef9c395f8fb0aeaac0ec04573a49ad6"
+      },
+      {
+        "id": "en.n7.c34.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Responde a Tom con concesión, motivo, alternativa y una cola."
+        },
+        "answer": {
+          "text": "I can see why you like dark red, Tom, and it's a bold idea. But the thing is, the room is small and the budget is tight this month. How about a light colour instead? We could paint it together on Saturday. That would work for everyone, wouldn't it?",
+          "accepted": [
+            "I can see why you like dark red, Tom, and it's a bold idea. But the thing is, the room is small and the budget is tight this month. How about a light colour instead? We could paint it together on Saturday. That would work for everyone, wouldn't it?",
+            "It's a great idea, Tom, and I can see why you like dark red. The problem is that the room is small and I'm worried about the budget this month. What if we choose a light colour instead? We could paint it together on Saturday, couldn't we?",
+            "I can see why you would like dark red, Tom. However, the room is small and the budget is tight this month. How about a lighter colour instead? We could all paint it together on Saturday. That would be fine, wouldn't it?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.e04.seed-0",
+          "feedback": {
+            "es": "Un no amable reconoce la idea, explica el límite con un dato, ofrece otra cosa concreta y comprueba con una cola."
+          },
+          "text": "Tom propone pintar el salón de rojo oscuro y pide 40 libras a cada uno. A ti no te convence: la sala es pequeña y el presupuesto de este mes es corto. Propón un color claro y pintar juntos el sábado.",
+          "scoring": {
+            "wordRange": [
+              35,
+              90
+            ],
+            "evidenceGroups": [
+              [
+                "I can see why",
+                "I see why",
+                "I understand why",
+                "it's a great idea",
+                "it's a bold idea",
+                "it's a nice idea"
+              ],
+              [
+                "the thing is",
+                "the problem is",
+                "I'm worried about",
+                "I'm a bit worried",
+                "the budget",
+                "too small",
+                "the room is small"
+              ],
+              [
+                "How about",
+                "What if we",
+                "instead",
+                "Why don't we",
+                "we could"
+              ],
+              [
+                "wouldn't it",
+                "couldn't we",
+                "wouldn't that",
+                "don't you think",
+                "wouldn't they"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a0e718f14be8a8142179ff734aa26ac893c244575e42692cdf52850c420351b5"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c34.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué paso falta en la respuesta de Sara a Mia?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "A reason for saying no."
+          },
+          {
+            "text": "An alternative plan."
+          },
+          {
+            "text": "A tag question to check."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.r01.seed-0",
+          "feedback": {
+            "es": "Sara reconoce la idea, da un motivo y propone una alternativa, pero no cierra con una cola para comprobar."
+          },
+          "text": "Sara: “It's a great idea, but I'm worried about the budget. How about a cheaper plan instead?”"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a364938a4c63ee2e6d7c5342ecc8c1fe0e3e5224225de9708f4f73802380cce4"
+      },
+      {
+        "id": "en.n7.c34.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué alternativa ofrece Sara."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "One party every month."
+          },
+          {
+            "text": "No parties at all."
+          },
+          {
+            "text": "A party every weekend."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.r02.seed-0",
+          "feedback": {
+            "es": "Sara reduce la propuesta de fiesta cada fin de semana a una fiesta al mes."
+          },
+          "audio": "Tom asks for a party every weekend. Sara says: I can see why you like them, but I'm a bit worried about the neighbours. How about one party a month?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:825ae1e6556618cb60164871324777a96eb892e86119390460c3c7ed4c88c230"
+      },
+      {
+        "id": "en.n7.c34.r03",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una alternativa con «how about» para la cena del viernes."
+        },
+        "answer": {
+          "text": "How about having dinner at home instead?",
+          "accepted": [
+            "How about having dinner at home instead?",
+            "What if we have dinner at home instead?",
+            "How about cooking dinner at home instead?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-diplomatic-disagreement-4"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c34.r03.seed-0",
+          "feedback": {
+            "es": "How about + -ing ofrece una alternativa sin cerrar la puerta: aquí, cenar en casa."
+          },
+          "text": "Tom quiere cenar fuera el viernes, pero es caro. Propón cenar en casa.",
+          "scoring": {
+            "wordRange": [
+              5,
+              14
+            ],
+            "evidenceGroups": [
+              [
+                "How about",
+                "What if",
+                "Why don't we",
+                "Let's"
+              ],
+              [
+                "dinner",
+                "eating",
+                "cooking"
+              ],
+              [
+                "at home",
+                "in"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a864de19081d583fdbd60ab32f713df4a5f89e308eef1cf632088de10b1a00d5"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c34.e01": {
+      "reteach": "en.n7.class-34.t01",
+      "review": "en.n7.c34.r01"
+    },
+    "en.n7.c34.e02": {
+      "reteach": "en.n7.class-34.t02",
+      "review": "en.n7.c34.r02"
+    },
+    "en.n7.c34.e03": {
+      "reteach": "en.n7.class-34.t03",
+      "review": "en.n7.c34.r03"
+    },
+    "en.n7.c34.e04": {
+      "reteach": "en.n7.class-34.t04",
+      "review": "en.n7.c34.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

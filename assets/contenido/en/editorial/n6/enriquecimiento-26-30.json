@@ -1,0 +1,580 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 26,
+    "end": 30
+  },
+  "classes": {
+    "en.n6.class-26": {
+      "explicacion": {
+        "titulo": "Cláusulas de participio: qué dicen y quién actúa",
+        "texto": "Una cláusula de participio sustituye a una frase con when, while o because y se separa con coma. Hay tres formas: presente (Walking home…, «mientras caminaba»; Feeling tired…, «como se sentía cansada»), perfecto (Having finished…, «después de terminar») y pasado (Built in 1900…, «que fue construido»). Regla clave: quien hace la acción del participio es el sujeto de la frase principal, el que aparece justo después de la coma. En «Walking home, I noticed a light» el que camina es I."
+      },
+      "patron": {
+        "texto": "Participio + coma + sujeto + verbo principal:",
+        "formula": [
+          {
+            "texto": "Walking home,",
+            "nota": "cláusula de participio: acción al mismo tiempo"
+          },
+          {
+            "texto": "I",
+            "nota": "sujeto: es quien camina"
+          },
+          {
+            "texto": "noticed a strange light.",
+            "nota": "acción principal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Walk home, I noticed a strange light.",
+          "correcto": "Walking home, I noticed a strange light.",
+          "explicacion": "La cláusula de participio de presente lleva -ing: Walking, no el verbo base walk."
+        },
+        {
+          "incorrecto": "Having finish the exam, Leo felt free.",
+          "correcto": "Having finished the exam, Leo felt free.",
+          "explicacion": "Tras having va el participio pasado: finished. Finish es el verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom pregunta por Mia y Ana le cuenta su tarde.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Where is Mia?",
+            "traduccion": "¿Dónde está Mia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Feeling tired, she went to bed early.",
+            "traduccion": "Sintiéndose cansada, se acostó temprano."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Did she study first?",
+            "traduccion": "¿Estudió antes?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. Having finished her homework, she closed her books.",
+            "traduccion": "Sí. Habiendo terminado la tarea, cerró sus libros."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué se acostó Mia temprano según Ana?",
+          "opciones": [
+            {
+              "es": "Porque se sentía cansada."
+            },
+            {
+              "es": "Porque terminó un examen difícil."
+            },
+            {
+              "es": "Porque su madre se lo pidió."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «Feeling tired, she went to bed early»: la cláusula de participio da el motivo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Walking home, …"
+            },
+            {
+              "texto": "mientras caminaba a casa"
+            }
+          ],
+          [
+            {
+              "texto": "Feeling tired, …"
+            },
+            {
+              "texto": "como se sentía cansada"
+            }
+          ],
+          [
+            {
+              "texto": "Having finished, …"
+            },
+            {
+              "texto": "después de terminar"
+            }
+          ],
+          [
+            {
+              "texto": "Built in 1900, …"
+            },
+            {
+              "texto": "que fue construida en 1900"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-27": {
+      "explicacion": {
+        "titulo": "Having + participio y participio pasado",
+        "texto": "Para combinar dos frases con el mismo sujeto tienes dos caminos. Si la primera acción ocurrió antes y explica la segunda, usa having + participio pasado: «We arrived early. We found seats» → «Having arrived early, we found seats». Si describes el estado o el origen del sujeto, basta el participio pasado solo: «The club was founded in 1950» → «Founded in 1950, the club…». Para negar, pon not delante: Not having eaten. El sujeto de la cláusula y el de la frase principal deben ser la misma persona o cosa."
+      },
+      "patron": {
+        "texto": "Having + participio pasado + coma + sujeto + verbo principal:",
+        "formula": [
+          {
+            "texto": "Having arrived early,",
+            "nota": "acción anterior, ya terminada"
+          },
+          {
+            "texto": "we",
+            "nota": "mismo sujeto que en la cláusula"
+          },
+          {
+            "texto": "found good seats.",
+            "nota": "acción principal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Arrived early, we found good seats.",
+          "correcto": "Having arrived early, we found good seats.",
+          "explicacion": "Arrived solo sin having suena a pasiva o a pasado simple mal colocado: para una acción anterior activa usa having arrived."
+        },
+        {
+          "incorrecto": "Not having eat all day, Tom was hungry.",
+          "correcto": "Not having eaten all day, Tom was hungry.",
+          "explicacion": "Después de having se usa el participio pasado: eaten, no el verbo base eat."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos pregunta a Sara por su viaje.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Did you like the hotel?",
+            "traduccion": "¿Te gustó el hotel?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Yes. Located near the river, it was very quiet.",
+            "traduccion": "Sí. Situado cerca del río, era muy tranquilo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And the trip?",
+            "traduccion": "¿Y el viaje?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Having lost our map, we asked a neighbour for help.",
+            "traduccion": "Habiendo perdido el mapa, pedimos ayuda a un vecino."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué pidió ayuda Sara a un vecino?",
+          "opciones": [
+            {
+              "es": "Porque habían perdido el mapa."
+            },
+            {
+              "es": "Porque el hotel estaba lejos del río."
+            },
+            {
+              "es": "Porque llegaron demasiado temprano."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «Having lost our map, we asked a neighbour for help»: perder el mapa ocurrió antes y fue el motivo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Dos frases",
+          "Una sola frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "We arrived early. We found seats."
+            },
+            {
+              "texto": "Having arrived early, we found seats."
+            }
+          ],
+          [
+            {
+              "texto": "The club was founded in 1950. It is famous."
+            },
+            {
+              "texto": "Founded in 1950, the club is famous."
+            }
+          ],
+          [
+            {
+              "texto": "Tom had not eaten. He was hungry."
+            },
+            {
+              "texto": "Not having eaten, Tom was hungry."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-28": {
+      "explicacion": {
+        "titulo": "¿Quién realiza la acción?",
+        "texto": "La cláusula de participio no tiene sujeto propio: toma el de la frase principal, el que va justo después de la coma. En «Walking past the park, Ana heard a dog bark» camina Ana. Si el sujeto de la frase principal no puede hacer esa acción, el lector se confunde: «Walking past the park, a dog jumped at Ana» parece decir que el perro caminaba. Para comprobarlo, pregúntate quién hace la acción del participio. Si no es el sujeto principal, reescribe con una cláusula completa («While Ana was walking past the park, a dog jumped at her») o cambia el sujeto."
+      },
+      "patron": {
+        "texto": "Participio + coma + el sujeto que hace esa acción:",
+        "formula": [
+          {
+            "texto": "Running for the bus,",
+            "nota": "acción: alguien corre"
+          },
+          {
+            "texto": "Tom",
+            "nota": "sujeto: debe ser quien corre"
+          },
+          {
+            "texto": "dropped his bag.",
+            "nota": "acción principal"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Walking past the park, a dog jumped at Ana.",
+          "correcto": "While Ana was walking past the park, a dog jumped at her.",
+          "explicacion": "La cláusula -ing tendría como sujeto al perro. Una cláusula completa con while dice claramente que camina Ana."
+        },
+        {
+          "incorrecto": "Reading the last page, a mistake was found.",
+          "correcto": "Reading the last page, I found a mistake.",
+          "explicacion": "Un error no puede leer una página: el sujeto de la frase principal debe ser quien lee."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia lee en voz alta una frase de su historia y Tom la revisa.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Listen: Walking past the park, a dog jumped at Ana.",
+            "traduccion": "Escucha: Al pasar por el parque, un perro saltó sobre Ana."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That is confusing. Who was walking, the dog or Ana?",
+            "traduccion": "Eso es confuso. ¿Quién caminaba, el perro o Ana?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Ana was walking, of course.",
+            "traduccion": "Ana caminaba, claro."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Then write: While Ana was walking past the park, a dog jumped at her.",
+            "traduccion": "Entonces escribe: Mientras Ana pasaba por el parque, un perro saltó sobre ella."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué dice Tom que la frase de Mia es confusa?",
+          "opciones": [
+            {
+              "es": "Porque parece que el perro era quien caminaba."
+            },
+            {
+              "es": "Porque Ana no estaba en el parque."
+            },
+            {
+              "es": "Porque falta el verbo de la frase principal."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom pregunta «Who was walking, the dog or Ana?»: con esa cláusula de participio, el sujeto que camina parece ser el perro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Frase",
+          "¿Quién hace la acción del participio?"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Running for the bus, Tom dropped his bag."
+            },
+            {
+              "texto": "Tom: claro"
+            }
+          ],
+          [
+            {
+              "texto": "Having seen the bag, a driver stopped."
+            },
+            {
+              "texto": "un conductor: claro"
+            }
+          ],
+          [
+            {
+              "texto": "Walking past the park, a dog jumped at Ana."
+            },
+            {
+              "texto": "¡el perro!: confuso"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-29": {
+      "explicacion": {
+        "titulo": "Combinar y comprimir",
+        "texto": "Para comprimir un relato de frases cortas, mira cada par con el mismo sujeto y decide qué relación hay. Acción anterior: having + participio pasado. Acciones a la vez o motivo: verbo + -ing. Estado o descripción: participio pasado o adjetivo («Tired but proud»). La cláusula puede ir delante, con coma, o detrás de la frase principal. Conserva el orden de los hechos y no pierdas información: cada frase corta debe seguir presente en algún sitio. Si el sujeto cambia, deja esa frase completa."
+      },
+      "patron": {
+        "texto": "Cláusula de participio + frase principal + cláusula final:",
+        "formula": [
+          {
+            "texto": "Having packed his bag,",
+            "nota": "acción anterior: having + participio"
+          },
+          {
+            "texto": "Leo left home,",
+            "nota": "frase principal con el mismo sujeto"
+          },
+          {
+            "texto": "feeling nervous.",
+            "nota": "estado al mismo tiempo: -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Wanting see the sunrise, Mia woke up early.",
+          "correcto": "Wanting to see the sunrise, Mia woke up early.",
+          "explicacion": "Wanting lleva to + verbo base como want: wanting to see. Sin to la frase queda incompleta."
+        },
+        {
+          "incorrecto": "Feeling nervous, the hill seemed very high.",
+          "correcto": "Feeling nervous, she thought the hill looked very high.",
+          "explicacion": "La colina no puede sentirse nerviosa: el sujeto de la frase principal debe ser la persona."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia enseña su relato a Leo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Your story has ten short sentences, Mia. It is hard to read.",
+            "traduccion": "Tu relato tiene diez frases cortas, Mia. Es difícil de leer."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "How can I make it better?",
+            "traduccion": "¿Cómo puedo mejorarlo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Join them. Having packed a bag, she left home.",
+            "traduccion": "Únelas. Habiendo preparado una bolsa, salió de casa."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And then? She climbed the hill and she was tired.",
+            "traduccion": "¿Y luego? Subió la colina y estaba cansada."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Having climbed the hill, she was tired. Keep the same person in every clause.",
+            "traduccion": "Habiendo subido la colina, estaba cansada. Mantén a la misma persona en cada cláusula."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué consejo da Leo para mejorar el relato?",
+          "opciones": [
+            {
+              "es": "Unir frases cortas con participios y mantener la misma persona."
+            },
+            {
+              "es": "Escribir más frases cortas y cambiar de personaje."
+            },
+            {
+              "es": "Quitar las acciones del principio del relato."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo une frases con «Having packed a bag, she left home» y pide mantener el mismo sujeto en cada cláusula."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Relación entre acciones",
+          "Forma"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Una va antes de la otra"
+            },
+            {
+              "texto": "Having + participio pasado"
+            }
+          ],
+          [
+            {
+              "texto": "Ocurren a la vez o hay motivo"
+            },
+            {
+              "texto": "Verbo + -ing"
+            }
+          ],
+          [
+            {
+              "texto": "Estado o descripción"
+            },
+            {
+              "texto": "Participio pasado o adjetivo"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-30": {
+      "explicacion": {
+        "titulo": "Describir una escena en movimiento",
+        "texto": "Para describir una escena combinas las tres formas del bloque: verbo + -ing para lo que ocurre a la vez o el motivo (Waving their flag, the crowd cheered), having + participio pasado para lo que pasó antes (Having scored a goal, Leo ran…) y participio pasado para el estado (Surrounded by his friends, Leo smiled). Antes de dar por buena cada frase, comprueba que el sujeto después de la coma sea quien hace la acción del participio. Si alguien duda, aclara con una frase completa: «Leo scored the goal, and the crowd cheered»."
+      },
+      "patron": {
+        "texto": "Participio + sujeto que actúa + verbo principal + participio final:",
+        "formula": [
+          {
+            "texto": "Having scored a goal,",
+            "nota": "acción anterior: having + participio"
+          },
+          {
+            "texto": "Leo",
+            "nota": "sujeto: quien marcó y quien corre"
+          },
+          {
+            "texto": "ran across the pitch,",
+            "nota": "acción principal"
+          },
+          {
+            "texto": "waving to the crowd.",
+            "nota": "acción a la vez: -ing al final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Having scored a goal, the crowd cheered Leo.",
+          "correcto": "Having scored a goal, Leo heard the crowd cheer.",
+          "explicacion": "El público no marcó el gol: tras la coma debe ir Leo, que es quien realiza la acción de having scored."
+        },
+        {
+          "incorrecto": "Surrounding by his friends, Leo smiled at the camera.",
+          "correcto": "Surrounded by his friends, Leo smiled at the camera.",
+          "explicacion": "Leo no rodea a nadie: lo rodean a él. Con sentido pasivo se usa el participio pasado surrounded."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos preparan el texto de la foto de un partido.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Listen to my text for the photo: Having scored the last goal, the crowd cheered.",
+            "traduccion": "Escucha mi texto para la foto: Habiendo marcado el último gol, el público animó."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That is confusing. Did the crowd score the goal?",
+            "traduccion": "Eso es confuso. ¿El público marcó el gol?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "No, Leo did.",
+            "traduccion": "No, lo marcó Leo."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Then write: Having scored the last goal, Leo ran across the pitch, and the crowd cheered.",
+            "traduccion": "Entonces escribe: Habiendo marcado el último gol, Leo corrió por el campo y el público animó."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué duda aclara Carlos sobre el texto de la foto?",
+          "opciones": [
+            {
+              "es": "Quién marcó el último gol: Leo y no el público."
+            },
+            {
+              "es": "Cuándo empezó el partido."
+            },
+            {
+              "es": "Dónde se sentó el público."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos pregunta «Did the crowd score the goal?» y Sara responde que fue Leo: el sujeto tras la coma debe ser quien marcó."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Uso en la escena"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Verbo + -ing"
+            },
+            {
+              "texto": "acción a la vez o motivo"
+            }
+          ],
+          [
+            {
+              "texto": "Having + participio pasado"
+            },
+            {
+              "texto": "acción anterior terminada"
+            }
+          ],
+          [
+            {
+              "texto": "Participio pasado"
+            },
+            {
+              "texto": "estado o pasiva: Surrounded by…"
+            }
+          ],
+          [
+            {
+              "texto": "Sujeto tras la coma"
+            },
+            {
+              "texto": "debe ser quien hace la acción"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

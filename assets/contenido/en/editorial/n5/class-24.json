@@ -440,7 +440,9 @@
         "answer": {
           "text": "because",
           "accepted": [
-            "because"
+            "because",
+            "since",
+            "as"
           ]
         },
         "choices": [],
@@ -462,7 +464,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:ed81b24152f5b337e72fdc57e458d00ec33be14dadc84e06aedb7ad3a179ee69"
+        "contentHash": "sha256:ac51fd3df30ba20166c7ce13298c8f11e4875bb5b83c7baf4718826bfec32359"
       }
     ],
     "evaluation": [
@@ -495,7 +497,7 @@
           "variantSeed": "0",
           "variantId": "en.n5.c24.e01.seed-0",
           "feedback": {
-            "es": "La taza de té y la ventana abierta apoyan que alguien entró. El conserje está de vacaciones y las luces sí las enciende una persona."
+            "es": "La taza de té y la ventana abierta apoyan que alguien entró. El conserje está de vacaciones, así que no pudo ser él, y la taza de té apunta a una persona."
           },
           "text": "Notes from the librarian: the lights in the old library are on every night. Clues: there is a cup of tea on a desk, the window is open, and the caretaker is on holiday this month."
         },
@@ -504,7 +506,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:a876ec8088c60bb40be9952b08c1173528a71cd9aa9cf645bc41c874f0e94505"
+        "contentHash": "sha256:265f005f53e99d04dc7458e1928cb6bb00ac3e2cd7807989507bd68cfe8c4d14"
       },
       {
         "id": "en.n5.c24.e02",
@@ -515,7 +517,8 @@
         "answer": {
           "text": "suggests",
           "accepted": [
-            "suggests"
+            "suggests",
+            "shows"
           ]
         },
         "choices": [],
@@ -537,7 +540,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:1ebdb5a168e378dcd6b4af5a11ad5778028bcae084086b1d3cf6a762ce405ba7"
+        "contentHash": "sha256:8da07f85442bda11995b782e47e9c2156d401eec2eba74ca6ad6ab3fa6844625"
       },
       {
         "id": "en.n5.c24.e03",
@@ -591,14 +594,14 @@
         "id": "en.n5.c24.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Escribe tu teoría sobre las flores con dos pistas y dos grados."
+          "es": "Escribe tu teoría sobre las flores con tres pistas y dos grados de certeza."
         },
         "answer": {
-          "text": "My theory is that a dog must have been getting into the garden at night. There are small footprints near the wall, so it can't have been a person. The gate was open, so chances are that the dog came in that way.",
+          "text": "My theory is that a dog must have been getting into the garden at night. There are small footprints near the wall, so it can't have been a person. There is mud near the flowers, and the gate was open, so chances are that the dog came in that way.",
           "accepted": [
-            "My theory is that a dog must have been getting into the garden at night. There are small footprints near the wall, so it can't have been a person. The gate was open, so chances are that the dog came in that way.",
-            "I think a dog may well have been coming into the garden at night. The small footprints near the wall suggest that it was not a person, and the open gate would explain how it got in.",
-            "My theory is that a dog must have entered the garden at night. One clue is the small footprints by the wall, so it can't have been an adult. The gate was open, so it might have come in that way."
+            "My theory is that a dog must have been getting into the garden at night. There are small footprints near the wall, so it can't have been a person. There is mud near the flowers, and the gate was open, so chances are that the dog came in that way.",
+            "I think a dog may well have been coming into the garden at night. The small footprints near the wall suggest that it was not a person, and the mud near the flowers means it must have been a dog. The open gate would explain how it got in.",
+            "My theory is that a dog must have come into the garden at night. One clue is the small footprints by the wall, and another is the mud near the flowers. The gate was open, so it might have come in that way."
           ]
         },
         "choices": [],
@@ -611,37 +614,53 @@
           "variantSeed": "0",
           "variantId": "en.n5.c24.e04.seed-0",
           "feedback": {
-            "es": "Una buena teoría nombra la idea, usa una pista con so o because y mezcla un grado fuerte (must have) con uno suave (may well, might, chances are)."
+            "es": "Una buena teoría nombra la idea, usa las tres pistas con so o because y mezcla un grado fuerte (must have, can't have) con uno suave (may well, might, chances are)."
           },
-          "text": "Cada mañana faltan flores (flowers) en el jardín del colegio. Pistas: huellas pequeñas (small footprints) cerca de la pared (wall) y la puerta (gate) abierta. Escribe entre 30 y 50 palabras.",
+          "text": "Cada mañana faltan flores (flowers) en el jardín del colegio. Pistas: huellas pequeñas (small footprints) cerca de la pared (wall), la puerta (gate) abierta y barro (mud) cerca de las flores. Escribe tu teoría con las tres pistas, entre 40 y 70 palabras.",
           "scoring": {
             "wordRange": [
-              25,
-              70
+              35,
+              90
             ],
             "evidenceGroups": [
               [
-                "My theory is",
-                "I think",
-                "I believe"
+                "footprints",
+                "footprint",
+                "prints",
+                "tracks"
               ],
               [
-                "footprints",
-                "prints",
-                "clue"
+                "gate",
+                "open",
+                "opened",
+                "door"
+              ],
+              [
+                "mud",
+                "muddy",
+                "dirt",
+                "dirty"
               ],
               [
                 "must have",
-                "may well have",
-                "might have",
-                "could have",
-                "chances are"
+                "can't have",
+                "couldn't have",
+                "bound to",
+                "certain",
+                "sure",
+                "definitely"
               ],
               [
-                "can't have been",
-                "couldn't have been",
-                "would explain",
-                "suggest"
+                "may well",
+                "might have",
+                "could have",
+                "may have",
+                "chances are",
+                "likely",
+                "probably",
+                "perhaps",
+                "maybe",
+                "possible"
               ]
             ]
           }
@@ -651,7 +670,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:9f58bb0a4f02d0dea33f7e1b1d95358c47dcaa2bbd1749fa651238cc613de42b"
+        "contentHash": "sha256:67c9602e97d5f318e40ef67b46e513f85286f00fe3c1a8125a4019c93bf0b506"
       }
     ],
     "review": [
@@ -685,27 +704,40 @@
           "scoring": {
             "wordRange": [
               8,
-              25
+              30
             ],
             "evidenceGroups": [
               [
                 "someone",
                 "somebody",
-                "a person"
+                "a person",
+                "a thief",
+                "a stranger",
+                "a man",
+                "a woman",
+                "a student",
+                "people",
+                "they"
               ],
               [
-                "must have come in",
-                "must have entered",
-                "may well have come in",
-                "might have come in"
+                "must have",
+                "may well have",
+                "might have",
+                "could have",
+                "can't have",
+                "couldn't have",
+                "bound to"
               ],
               [
-                "back door"
+                "back door",
+                "rear door",
+                "door at the back",
+                "door in the back"
               ],
               [
-                "lock is broken",
-                "lock was broken",
-                "broken lock"
+                "broken",
+                "forced",
+                "lock is not working"
               ]
             ]
           }
@@ -715,13 +747,13 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:c4520820bb2d0aeafad2478708c75a57dabc55737c77f7332eb2c975a785a213"
+        "contentHash": "sha256:1b71737feb463b1dc94e025c1e6154adee0c5fa87a963875fdbb7bcd4795fda2"
       },
       {
         "id": "en.n5.c24.r02",
         "format": "elegir",
         "prompt": {
-          "es": "Según Sara, ¿qué pasó con la puerta y quién entró?"
+          "es": "Según Sara, ¿qué piensa de la posibilidad de que alguien entrara?"
         },
         "answer": {
           "index": 1
@@ -755,7 +787,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:ffd27fa7301b645bd5ddd40bcf54afcb34f80bbd1a220cc45b7b0a1262e06158"
+        "contentHash": "sha256:de544f412a9ea6f2895ac4e8ca180214f5819c11a07436ff09275f4301198f37"
       },
       {
         "id": "en.n5.c24.r03",

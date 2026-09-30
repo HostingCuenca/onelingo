@@ -1,0 +1,811 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "comprehension",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-33",
+  "title": {
+    "en": "Rumour, claim or fact",
+    "es": "Rumor, afirmación o hecho"
+  },
+  "objectives": {
+    "es": [
+      "Distinguir quién dijo qué y con qué verbo de reporte (admit, deny, insist, warn, suggest) en entrevistas breves."
+    ]
+  },
+  "concepts": [
+    "n6-reporting-and-impersonal-3"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n6.class-32"
+  ],
+  "usesVocabulary": [
+    "admitted",
+    "denied",
+    "insisted",
+    "warned",
+    "suggested",
+    "coach",
+    "guide",
+    "spokesperson",
+    "repairs"
+  ],
+  "usesPatterns": [
+    "n6-reporting-and-impersonal-3"
+  ],
+  "vocabulary": [
+    {
+      "en": "admitted",
+      "es": "admitió"
+    },
+    {
+      "en": "denied",
+      "es": "negó"
+    },
+    {
+      "en": "insisted",
+      "es": "insistió"
+    },
+    {
+      "en": "warned",
+      "es": "advirtió"
+    },
+    {
+      "en": "suggested",
+      "es": "sugirió"
+    },
+    {
+      "en": "coach",
+      "es": "entrenador"
+    },
+    {
+      "en": "guide",
+      "es": "guía"
+    },
+    {
+      "en": "spokesperson",
+      "es": "portavoz"
+    },
+    {
+      "en": "repairs",
+      "es": "reparaciones"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-33.t01",
+      "en": "The mayor admitted that the bridge was late.",
+      "es": "El alcalde admitió que el puente iba con retraso.",
+      "explanationEs": "admitted + that + oración: reconoce algo incómodo. El verbo retrocede un tiempo (is → was).",
+      "segments": [
+        "The mayor admitted that",
+        "the bridge was late."
+      ],
+      "audioText": "The mayor admitted that the bridge was late.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-reporting-and-impersonal-3"
+    },
+    {
+      "id": "en.n6.class-33.t02",
+      "en": "The coach denied changing the team.",
+      "es": "El entrenador negó haber cambiado al equipo.",
+      "explanationEs": "denied + -ing: niega haber hecho algo. También vale denied that + oración.",
+      "segments": [
+        "The coach denied",
+        "changing the team."
+      ],
+      "audioText": "The coach denied changing the team.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-reporting-and-impersonal-3"
+    },
+    {
+      "id": "en.n6.class-33.t03",
+      "en": "The neighbour insisted on paying for the repairs.",
+      "es": "El vecino insistió en pagar las reparaciones.",
+      "explanationEs": "insisted on + -ing (o insisted that + oración): repite algo con fuerza.",
+      "segments": [
+        "The neighbour insisted on",
+        "paying for the repairs."
+      ],
+      "audioText": "The neighbour insisted on paying for the repairs.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-reporting-and-impersonal-3"
+    },
+    {
+      "id": "en.n6.class-33.t04",
+      "en": "The guide warned us not to swim in the river.",
+      "es": "El guía nos advirtió de que no nos bañáramos en el río.",
+      "explanationEs": "warned + persona + (not) to + verbo: avisa de un peligro.",
+      "segments": [
+        "The guide warned us not",
+        "to swim in the river."
+      ],
+      "audioText": "The guide warned us not to swim in the river.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-reporting-and-impersonal-3"
+    },
+    {
+      "id": "en.n6.class-33.t05",
+      "en": "The waiter suggested trying the soup.",
+      "es": "El camarero sugirió probar la sopa.",
+      "explanationEs": "suggested + -ing (o suggested that + oración): propone sin imponer.",
+      "segments": [
+        "The waiter suggested",
+        "trying the soup."
+      ],
+      "audioText": "The waiter suggested trying the soup.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-reporting-and-impersonal-3"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c33.pg01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada verbo de reporte con lo que hace quien habla."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "admitted",
+              {
+                "es": "reconoció algo incómodo"
+              }
+            ],
+            [
+              "denied",
+              {
+                "es": "dijo que no era cierto"
+              }
+            ],
+            [
+              "warned",
+              {
+                "es": "avisó de un peligro"
+              }
+            ],
+            [
+              "suggested",
+              {
+                "es": "propuso una idea"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.pg01.seed-0",
+          "feedback": {
+            "es": "Cada verbo indica la intención: reconocer, negar, avisar o proponer."
+          },
+          "hint": {
+            "es": "Piensa en la intención de quien habla: reconocer, negar, avisar o proponer."
+          },
+          "pairs": [
+            [
+              "admitted",
+              {
+                "es": "reconoció algo incómodo"
+              }
+            ],
+            [
+              "denied",
+              {
+                "es": "dijo que no era cierto"
+              }
+            ],
+            [
+              "warned",
+              {
+                "es": "avisó de un peligro"
+              }
+            ],
+            [
+              "suggested",
+              {
+                "es": "propuso una idea"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4e47f63342327b1f67e4bb69dac922dca9f72b83f7de33747adeb0dbe0457f8f"
+      },
+      {
+        "id": "en.n6.c33.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «El guía advirtió a los niños de que no se bañaran en el río.»"
+        },
+        "answer": {
+          "text": "warned",
+          "accepted": [
+            "warned"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.pg02.seed-0",
+          "feedback": {
+            "es": "Avisar de un peligro se dice warned + persona + not to + verbo."
+          },
+          "hint": {
+            "es": "Es un verbo que avisa de un peligro, con persona + not to."
+          },
+          "text": "The guide ___ the children not to swim in the river."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6c62a809f05060a5ed7c595aee25e3176d91c27d2bf42e26e18c8d5335137ced"
+      },
+      {
+        "id": "en.n6.c33.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La entrenadora sugirió descansar un día.»"
+        },
+        "answer": {
+          "text": "The coach suggested resting for a day",
+          "tokens": [
+            "The",
+            "coach",
+            "suggested",
+            "resting",
+            "for",
+            "a",
+            "day"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.pg03.seed-0",
+          "feedback": {
+            "es": "Suggested va seguido de una forma en -ing: suggested resting."
+          },
+          "hint": {
+            "es": "Suggested + verbo en -ing."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d7920c09135266e7a1ffd6e017a977dd543ecaafb5738de9d4b977af057d0e88"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c33.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha la entrevista y elige qué hizo Tom."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "He said he did not do it."
+          },
+          {
+            "text": "He accepted the blame."
+          },
+          {
+            "text": "He suggested a new plan."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.p01.seed-0",
+          "feedback": {
+            "es": "Tom dice «I deny it»: niega haber roto la ventana."
+          },
+          "audio": "Reporter: Did you break the window? Tom: No! I deny it. I was at home all afternoon.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e1e1e4cf52a519c07c3fc4b53f7cb9c00ddcc852cbe9d39b9d254b4b6c3a5cd"
+      },
+      {
+        "id": "en.n6.c33.p02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase informa bien de lo que dijo el vecino?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The neighbour denied carrying the bags."
+          },
+          {
+            "text": "The neighbour insisted on carrying the bags."
+          },
+          {
+            "text": "The neighbour warned us to carry the bags."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.p02.seed-0",
+          "feedback": {
+            "es": "Insisted on + -ing resume un «¡insisto!» seguido de una acción; las otras dos cambian la intención."
+          },
+          "text": "Neighbour: \"I will carry your bags. I insist!\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:0201d034a7b94be5a0ecb55137b511b45ac4eac4ac08a729ba8b6846c5c25d6d"
+      },
+      {
+        "id": "en.n6.c33.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa con el verbo de reporte que corresponde a cada hablante."
+        },
+        "answer": {
+          "text": "admitted | denied",
+          "accepted": [
+            "admitted | denied"
+          ],
+          "parts": [
+            {
+              "text": "admitted",
+              "accepted": [
+                "admitted"
+              ]
+            },
+            {
+              "text": "denied",
+              "accepted": [
+                "denied"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.p03.seed-0",
+          "feedback": {
+            "es": "El conductor reconoce su fallo (admitted) y el cocinero rechaza la acusación (denied)."
+          },
+          "sentences": [
+            "The driver ___ that the bus was late.",
+            "The cook ___ using the last eggs."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          },
+          "text": "Driver: \"Yes, the bus is late. It is my mistake.\" Cook: \"No, I did not use the last eggs.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:132cb09024bd45bef95f59b79bd4d78cfaa4ee4da35ed2be108beed0b3c6abd7"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c33.e01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha al agente y elige lo que hizo con la carretera."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He admitted a mistake about the road."
+          },
+          {
+            "text": "He suggested a new road."
+          },
+          {
+            "text": "He told people to stay away from the road."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.e01.seed-0",
+          "feedback": {
+            "es": "El agente dice «I warn everyone not to drive there»: avisa de un peligro, no admite ni propone nada."
+          },
+          "audio": "Reporter: Will the road stay open? Officer: I am afraid not. I warn everyone not to drive there tonight. The snow is very heavy.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6a147bb26cae7d5cd9ba357c05f9729a8d82d8202dcf0193e867ae4f4e4ffef0"
+      },
+      {
+        "id": "en.n6.c33.e02",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase informa de lo que dijo la profesora?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "The teacher admitted that she had forgotten the tickets."
+          },
+          {
+            "text": "The teacher denied that she had forgotten the tickets."
+          },
+          {
+            "text": "The teacher warned that she had forgotten the tickets."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.e02.seed-0",
+          "feedback": {
+            "es": "«Yes, I forgot» reconoce el fallo: admitted that + oración, con el verbo un tiempo atrás."
+          },
+          "text": "Teacher: \"Yes, I forgot the tickets. Sorry.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:630b52417c076760e1c370fe5eb47ce84a131e86b6bc18d05d89a67db04248a6"
+      },
+      {
+        "id": "en.n6.c33.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La niña negó haber roto el vaso.»"
+        },
+        "answer": {
+          "text": "denied",
+          "accepted": [
+            "denied"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.e03.seed-0",
+          "feedback": {
+            "es": "Negar haber hecho algo es denied + -ing."
+          },
+          "text": "The girl ___ breaking the glass."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1aca05eba9d455d1ab5456d3729b40f4409c62bd781daac6704cb678ae9b0079"
+      },
+      {
+        "id": "en.n6.c33.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «El portavoz insistió en que la noticia era falsa.»"
+        },
+        "answer": {
+          "text": "The spokesperson insisted that the news was false",
+          "tokens": [
+            "The",
+            "spokesperson",
+            "insisted",
+            "that",
+            "the",
+            "news",
+            "was",
+            "false"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.e04.seed-0",
+          "feedback": {
+            "es": "Insisted that + oración: el verbo de la noticia retrocede a pasado (was)."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:892caa5ff1240b0d784b612a57a3a13bd4f5b8b6f149b6399f60dacdf90a94e8"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c33.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué verbo de reporte resume lo que dijo Mia?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "denied"
+          },
+          {
+            "text": "suggested"
+          },
+          {
+            "text": "warned"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.r01.seed-0",
+          "feedback": {
+            "es": "«Why don't we go by bus?» propone una idea sin imponerla: suggested."
+          },
+          "text": "Mia: \"Why don't we go by bus? It is cheaper.\""
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:886d8fa3cadcd659476dcfd218e170df2d9568693b3eddd67dc2ba23286530ce"
+      },
+      {
+        "id": "en.n6.c33.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige lo que reconoce Leo."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He says somebody took the keys."
+          },
+          {
+            "text": "He asks Sara to look for them."
+          },
+          {
+            "text": "He accepts that he lost something."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.r02.seed-0",
+          "feedback": {
+            "es": "Leo dice «I admit it»: acepta que perdió las llaves."
+          },
+          "audio": "Sara: Did you lose the keys? Leo: Well, yes. I admit it. I left them on the bus.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:28dd8a86bbb7ad20d340e5b249c39263cd8a2e8d7ec424685d2429efe6009174"
+      },
+      {
+        "id": "en.n6.c33.r03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «La guía nos advirtió de que el camino estaba cerrado.»"
+        },
+        "answer": {
+          "text": "The guide warned us that the path was closed",
+          "tokens": [
+            "The",
+            "guide",
+            "warned",
+            "us",
+            "that",
+            "the",
+            "path",
+            "was",
+            "closed"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-reporting-and-impersonal-3"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c33.r03.seed-0",
+          "feedback": {
+            "es": "Warned + persona + that + oración: avisa de una situación peligrosa."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:8e5ee5016143c9c614f8d426463a640126a9e994db31df93498347d2db6015e3"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c33.e01": {
+      "reteach": "en.n6.class-33.t01",
+      "review": "en.n6.c33.r01"
+    },
+    "en.n6.c33.e02": {
+      "reteach": "en.n6.class-33.t02",
+      "review": "en.n6.c33.r02"
+    },
+    "en.n6.c33.e03": {
+      "reteach": "en.n6.class-33.t03",
+      "review": "en.n6.c33.r03"
+    },
+    "en.n6.c33.e04": {
+      "reteach": "en.n6.class-33.t04",
+      "review": "en.n6.c33.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

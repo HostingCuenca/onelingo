@@ -1,0 +1,668 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 71,
+    "end": 75
+  },
+  "classes": {
+    "en.n6.class-71": {
+      "explicacion": {
+        "titulo": "Afirmación, razón y prueba",
+        "texto": "Un argumento corto tiene tres piezas. La afirmación (claim) es lo que alguien dice que es verdad. La razón (reason) explica por qué y suele llevar because o the reason is that. La prueba (evidence) es un dato que otra persona puede comprobar: un número, un estudio, una encuesta con su fuente (according to…). Ojo: I think o everyone knows no son pruebas, son opiniones. Además, evidence es incontable: no existe evidences; se dice a lot of evidence o a piece of evidence."
+      },
+      "patron": {
+        "texto": "Afirmación + because + razón. According to + fuente, + prueba:",
+        "formula": [
+          {
+            "texto": "Schools should start later",
+            "nota": "afirmación: lo que quieres demostrar"
+          },
+          {
+            "texto": "because",
+            "nota": "conector que introduce la razón"
+          },
+          {
+            "texto": "teenagers need more sleep.",
+            "nota": "razón: por qué es verdad"
+          },
+          {
+            "texto": "According to a survey, most sleep badly.",
+            "nota": "prueba: dato + fuente que se puede comprobar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "There are many evidences for this claim.",
+          "correcto": "There is a lot of evidence for this claim.",
+          "explicacion": "Evidence es incontable: no lleva -s ni va con are."
+        },
+        {
+          "incorrecto": "The reason is because teenagers are tired.",
+          "correcto": "The reason is that teenagers are tired.",
+          "explicacion": "Después de the reason is se usa that. Because repite la idea (en español se dice «la razón es porque»)."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo dice que estudiar de noche es mejor y Ana le pide pruebas.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Studying at night is better. Everyone knows that.",
+            "traduccion": "Estudiar de noche es mejor. Todo el mundo lo sabe."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is only a claim, Leo. What is your reason?",
+            "traduccion": "Eso es solo una afirmación, Leo. ¿Cuál es tu razón?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "The house is quiet at night, so I can focus.",
+            "traduccion": "La casa está tranquila por la noche, así que puedo concentrarme."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a good reason. Do you have any evidence?",
+            "traduccion": "Es una buena razón. ¿Tienes alguna prueba?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "My cousin studies at night and he gets good grades.",
+            "traduccion": "Mi primo estudia de noche y saca buenas notas."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "One cousin is not evidence. A survey of many students is.",
+            "traduccion": "Un primo no es una prueba. Una encuesta a muchos estudiantes sí."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Ana aún no acepta la afirmación de Leo?",
+          "opciones": [
+            {
+              "es": "Porque un primo que estudia de noche no es una prueba suficiente."
+            },
+            {
+              "es": "Porque Leo no ha dado ninguna razón."
+            },
+            {
+              "es": "Porque Ana cree que de noche hay mucho ruido."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice: «One cousin is not evidence». Acepta la razón de Leo (la casa está tranquila), pero falta una prueba."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Responde a…",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Claim"
+            },
+            {
+              "texto": "¿Qué defiendes?"
+            },
+            {
+              "texto": "Homework should be shorter."
+            }
+          ],
+          [
+            {
+              "texto": "Reason"
+            },
+            {
+              "texto": "¿Por qué?"
+            },
+            {
+              "texto": "because students need time to rest."
+            }
+          ],
+          [
+            {
+              "texto": "Evidence"
+            },
+            {
+              "texto": "¿Cómo lo compruebo?"
+            },
+            {
+              "texto": "According to a survey, 65% are tired."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-72": {
+      "explicacion": {
+        "titulo": "Given that, assuming, it doesn't follow, may well",
+        "texto": "Estas expresiones gradúan la certeza. Given that + hecho presenta una razón que damos por cierta: Given that he trains daily, … Assuming (that) + suposición marca algo que aceptamos sin haberlo comprobado; si falla, cae la conclusión. It doesn't follow that… avisa de que la conclusión no sale de los datos. May well + verbo base significa «bien podría»: más fuerte que may, menos que will. Ojo: doesn't follow lleva follow sin -s, y después de may well no va to."
+      },
+      "patron": {
+        "texto": "Given that / Assuming that + base, + conclusión graduada:",
+        "formula": [
+          {
+            "texto": "Given that",
+            "nota": "hecho que damos por cierto"
+          },
+          {
+            "texto": "the team trains every day,",
+            "nota": "la razón"
+          },
+          {
+            "texto": "it may well",
+            "nota": "muy probable, pero no seguro"
+          },
+          {
+            "texto": "win the league.",
+            "nota": "verbo base, sin to"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It doesn't follows that a famous player is a good coach.",
+          "correcto": "It doesn't follow that a famous player is a good coach.",
+          "explicacion": "Después de doesn't el verbo va en forma base: follow, sin -s."
+        },
+        {
+          "incorrecto": "The team may well to win the league.",
+          "correcto": "The team may well win the league.",
+          "explicacion": "May well es un modal: después va el verbo base, sin to."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom, el entrenador, y Mia hablan del partido del sábado.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Given that we train every day, we may well win on Saturday.",
+            "traduccion": "Dado que entrenamos todos los días, bien podríamos ganar el sábado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Assuming that Sam is fit. He hurt his leg last week.",
+            "traduccion": "Suponiendo que Sam esté en forma. Se hizo daño en la pierna la semana pasada."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "True. But it doesn't follow that he can't play.",
+            "traduccion": "Es verdad. Pero no se deduce que no pueda jugar."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Is it certain that he will play?",
+            "traduccion": "¿Es seguro que jugará?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "No. It is likely, but not certain.",
+            "traduccion": "No. Es probable, pero no seguro."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué da Mia por supuesto sin tenerlo comprobado?",
+          "opciones": [
+            {
+              "es": "Que Sam esté recuperado de su lesión."
+            },
+            {
+              "es": "Que el equipo entrene cada día."
+            },
+            {
+              "es": "Que llueva el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice: «Assuming that Sam is fit»: se acepta su recuperación como suposición, aunque no está comprobada."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Qué marca",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Given that"
+            },
+            {
+              "texto": "razón que damos por cierta"
+            },
+            {
+              "texto": "Given that she trains daily, she may well win."
+            }
+          ],
+          [
+            {
+              "texto": "Assuming (that)"
+            },
+            {
+              "texto": "suposición sin comprobar"
+            },
+            {
+              "texto": "Assuming that it doesn't rain, we will go."
+            }
+          ],
+          [
+            {
+              "texto": "It doesn't follow that"
+            },
+            {
+              "texto": "conclusión injustificada"
+            },
+            {
+              "texto": "It doesn't follow that he is a good coach."
+            }
+          ],
+          [
+            {
+              "texto": "may well"
+            },
+            {
+              "texto": "muy probable, no seguro"
+            },
+            {
+              "texto": "The team may well lose."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-73": {
+      "explicacion": {
+        "titulo": "Tres fallos típicos de un argumento",
+        "texto": "Tres fallos se repiten en las redes. Generalización apresurada: un caso o muy pocos se convierten en regla para todos (my cousin did it, so it works for everyone). Falsa causa: dos hechos ocurren juntos y se afirma que uno causó el otro (he wore lucky socks, so the socks made him win). Apelación a la mayoría: se dice que algo es cierto porque todos lo hacen o lo creen. Busca palabras que delatan el salto: so, every, everyone, popular. Pregunta: ¿cuántos casos hay?, ¿hay otra causa posible?, ¿alguien lo ha comprobado?"
+      },
+      "patron": {
+        "texto": "Un caso + so + conclusión para todos:",
+        "formula": [
+          {
+            "texto": "One athlete tried it,",
+            "nota": "un solo caso"
+          },
+          {
+            "texto": "so",
+            "nota": "el salto a la conclusión"
+          },
+          {
+            "texto": "it works for every athlete.",
+            "nota": "regla general sin base"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Everyone think this drink is healthy.",
+          "correcto": "Everyone thinks this drink is healthy.",
+          "explicacion": "Everyone es singular aunque hable de muchos: el verbo lleva -s."
+        },
+        {
+          "incorrecto": "It is a prove that the socks work.",
+          "correcto": "It is proof that the socks work.",
+          "explicacion": "Prove es el verbo (demostrar); el sustantivo «prueba» es proof."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Leo leen una publicación en redes sobre una carrera.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look at this post: My brother drank this juice and won the race. The juice makes you fast!",
+            "traduccion": "Mira esta publicación: mi hermano bebió este zumo y ganó la carrera. ¡El zumo te hace rápido!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is only one race. The juice may not be the reason.",
+            "traduccion": "Es solo una carrera. Puede que el zumo no sea la razón."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "But many people in the comments say that it works.",
+            "traduccion": "Pero mucha gente en los comentarios dice que funciona."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Many people believe it, but that does not prove it.",
+            "traduccion": "Mucha gente lo cree, pero eso no lo demuestra."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Leo no acepta el mensaje de la publicación?",
+          "opciones": [
+            {
+              "es": "Porque se basa en una sola carrera y no demuestra que el zumo sea la causa."
+            },
+            {
+              "es": "Porque cree que el hermano de Sara no ganó la carrera."
+            },
+            {
+              "es": "Porque nadie ha comentado la publicación."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «It is only one race» y «that does not prove it»: un solo caso y opiniones repetidas no demuestran que el zumo sea la causa."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Fallo",
+          "Frase que lo delata",
+          "Pregunta para comprobarlo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Generalización apresurada"
+            },
+            {
+              "texto": "My cousin did it, so it works for everyone."
+            },
+            {
+              "texto": "¿Es un solo caso?"
+            }
+          ],
+          [
+            {
+              "texto": "Falsa causa"
+            },
+            {
+              "texto": "He wore lucky socks and won, so the socks made him win."
+            },
+            {
+              "texto": "¿Puede haber otra causa?"
+            }
+          ],
+          [
+            {
+              "texto": "Apelación a la mayoría"
+            },
+            {
+              "texto": "Everyone drinks it, so it must be healthy."
+            },
+            {
+              "texto": "¿Que sea popular lo prueba?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-74": {
+      "explicacion": {
+        "titulo": "Valorar una afirmación con equilibrio",
+        "texto": "Para evaluar una afirmación no basta con decir «es verdad» o «es mentira». Preséntala atribuida (some people say…), da razones a favor (On the one hand…) y en contra (On the other hand…), apoya cada una con un dato y gradúa la conclusión: it is unlikely that…, it is partly true, it depends on… Usa although para reconocer un punto contrario sin romper el argumento: Although water is important, other drinks also count. Ojo: no pongas although y but juntos."
+      },
+      "patron": {
+        "texto": "Afirmación, a favor, en contra y conclusión graduada:",
+        "formula": [
+          {
+            "texto": "Some people say that…",
+            "nota": "la afirmación, atribuida"
+          },
+          {
+            "texto": "On the one hand, …",
+            "nota": "razón a favor con un dato"
+          },
+          {
+            "texto": "On the other hand, although …",
+            "nota": "razón en contra y punto contrario"
+          },
+          {
+            "texto": "I conclude that it is partly true.",
+            "nota": "conclusión graduada"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Although water is important, but other drinks also count.",
+          "correcto": "Although water is important, other drinks also count.",
+          "explicacion": "Although ya marca el contraste: no se le añade but (en español «aunque… pero» suena normal)."
+        },
+        {
+          "incorrecto": "It depends of the person.",
+          "correcto": "It depends on the person.",
+          "explicacion": "Depender se dice depend on, no depend of."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Tom preparan la valoración de una afirmación para clase.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Our teacher wants us to evaluate this claim: everyone needs eight glasses of water a day.",
+            "traduccion": "Nuestro profesor quiere que evaluemos esta afirmación: todos necesitan ocho vasos de agua al día."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "On the one hand, water helps us stay hydrated.",
+            "traduccion": "Por un lado, el agua nos ayuda a mantenernos hidratados."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. But the evidence is limited. It depends on the person.",
+            "traduccion": "Sí. Pero la evidencia es limitada. Depende de la persona."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So what is your conclusion?",
+            "traduccion": "Entonces, ¿cuál es tu conclusión?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "It is unlikely that everyone needs exactly eight glasses.",
+            "traduccion": "Es poco probable que todos necesiten exactamente ocho vasos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué concluye Ana?",
+          "opciones": [
+            {
+              "es": "Que es poco probable que todos necesiten exactamente ocho vasos."
+            },
+            {
+              "es": "Que todo el mundo necesita ocho vasos."
+            },
+            {
+              "es": "Que el agua no es importante."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana termina con «It is unlikely that everyone needs exactly eight glasses»: una conclusión prudente, no absoluta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte",
+          "Lenguaje útil",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "A favor"
+            },
+            {
+              "texto": "On the one hand, + razón + dato"
+            },
+            {
+              "texto": "On the one hand, a study found that water helps."
+            }
+          ],
+          [
+            {
+              "texto": "En contra"
+            },
+            {
+              "texto": "On the other hand, although…"
+            },
+            {
+              "texto": "On the other hand, other drinks also count."
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "unlikely / partly true / it depends on"
+            },
+            {
+              "texto": "It is unlikely that everyone needs eight glasses."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-75": {
+      "explicacion": {
+        "titulo": "Debatir sin atacar: objeción y respuesta",
+        "texto": "En un debate no basta con repetir tu postura. Presenta tu postura (In my view…), escucha la objeción y responde en tres pasos: reconoce el punto (That is a fair point), responde con evidencia (but given that the survey shows…) y, si hace falta, admite un límite con tacto (I accept that my evidence is limited). Critica la idea, no a la persona: no digas You are wrong, di I see it differently. Y recuerda: I doubt that + oración; y I do not agree, no I am not agree."
+      },
+      "patron": {
+        "texto": "Reconocer + responder con un dato + admitir un límite:",
+        "formula": [
+          {
+            "texto": "That is a fair point,",
+            "nota": "reconoces la objeción"
+          },
+          {
+            "texto": "but given that 500 students answered the survey,",
+            "nota": "respondes con un dato"
+          },
+          {
+            "texto": "I still think the trend is real.",
+            "nota": "mantienes tu postura"
+          },
+          {
+            "texto": "I accept that the evidence has limits.",
+            "nota": "límite reconocido con tacto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am not agree that one survey is enough.",
+          "correcto": "I do not agree that one survey is enough.",
+          "explicacion": "Agree es un verbo: se niega con do not agree. No se usa am con agree."
+        },
+        {
+          "incorrecto": "I have a doubt that the survey is big enough.",
+          "correcto": "I doubt that the survey is big enough.",
+          "explicacion": "«Dudo que» se dice I doubt that. I have a doubt es un calco del español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Carlos debaten en el club del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Phones help teenagers relax before bed. That is my objection.",
+            "traduccion": "Los móviles ayudan a los adolescentes a relajarse antes de dormir. Esa es mi objeción."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "That is a fair point, but given that most students sleep less than seven hours, I think phones should be off at ten.",
+            "traduccion": "Es un punto razonable, pero dado que la mayoría de los estudiantes duermen menos de siete horas, creo que los móviles deberían estar apagados a las diez."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Do you have evidence?",
+            "traduccion": "¿Tienes pruebas?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "A school survey. I accept that it is small, but it may well show a trend.",
+            "traduccion": "Una encuesta del colegio. Reconozco que es pequeña, pero bien podría mostrar una tendencia."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Fair enough. I still doubt that one rule fits everyone.",
+            "traduccion": "De acuerdo. Sigo dudando que una sola regla sirva para todos."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué límite reconoce Sara de su propia prueba?",
+          "opciones": [
+            {
+              "es": "Que la encuesta del colegio es pequeña."
+            },
+            {
+              "es": "Que no tiene ninguna razón."
+            },
+            {
+              "es": "Que los móviles ayudan a relajarse."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice: «I accept that it is small». Reconoce que su encuesta es pequeña, pero mantiene que puede mostrar una tendencia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Función",
+          "Frase"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "1"
+            },
+            {
+              "texto": "Presentar la postura"
+            },
+            {
+              "texto": "In my view, phones should be off at ten."
+            }
+          ],
+          [
+            {
+              "texto": "2"
+            },
+            {
+              "texto": "Reconocer la objeción"
+            },
+            {
+              "texto": "That is a fair point, but…"
+            }
+          ],
+          [
+            {
+              "texto": "3"
+            },
+            {
+              "texto": "Responder con evidencia"
+            },
+            {
+              "texto": "Given that most students sleep badly, …"
+            }
+          ],
+          [
+            {
+              "texto": "4"
+            },
+            {
+              "texto": "Admitir un límite"
+            },
+            {
+              "texto": "I accept that my survey is small."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

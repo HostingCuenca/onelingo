@@ -258,7 +258,7 @@
     "en.n5.class-23": {
       "explicacion": {
         "titulo": "Escuchar la duda: causa, grado y pista",
-        "texto": "Cuando alguien especula, el grado de certeza está en el modal, no en el tono de voz. En cada frase busca tres datos: la causa (qué se cree que falló), el grado y la pista (because…). Certeza alta: must have. Probable: may well have. Posible pero dudoso: might (just) have, could have. Seguro que no: can't have, couldn't have. Un buen oyente anota los tres datos antes de decidir quién está más seguro."
+        "texto": "Cuando alguien especula, el grado de certeza está en el modal, no en el tono de voz. En cada frase busca tres datos: la causa (qué se cree que falló), el grado y la pista (because…). Certeza alta: must have. Probable: may well have. Posible pero dudoso: might have, could have. Seguro que no: can't have, couldn't have. Un buen oyente anota los tres datos antes de decidir quién está más seguro."
       },
       "patron": {
         "texto": "Causa + grado de certeza + pista:",
@@ -309,8 +309,8 @@
           },
           {
             "hablante": "Ana",
-            "texto": "And Tom says the referee can't have been the cause. He was fair all game.",
-            "traduccion": "Y Tom dice que el árbitro no puede haber sido la causa. Fue justo todo el partido."
+            "texto": "And Tom says the referee can't have been the cause. He was fair all through the match.",
+            "traduccion": "Y Tom dice que el árbitro no puede haber sido la causa. Fue justo durante todo el partido."
           },
           {
             "hablante": "Leo",
@@ -368,7 +368,7 @@
               "texto": "Posible pero dudoso"
             },
             {
-              "texto": "might (just) have been, could have been"
+              "texto": "might have been, could have been"
             }
           ],
           [
@@ -639,11 +639,24 @@
               "texto": "Cerrar el acuerdo"
             },
             {
-              "texto": "So it is most likely that…"
+              "texto": "So we agree that it is most likely…"
             }
           ]
         ]
       }
     }
+  },
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-reviewer-independiente",
+    "date": "2026-09-30",
+    "notes": [
+      "C21: ordenar ev2 acepta 'Without Leo' al inicio; 'possibility' aceptada en ev4. P2 sin corregir: falta repaso en espiral de modales de deducción (languageFocus).",
+      "C22: ev3 era ilógico (verja cerrada no impide esperar fuera), rehecho; re3 con inglés antinatural y calco ('have the same size') corregido; feedback pr3 citaba 'la última' (posición); re2 sin variante neighbor por léxico, ahora con Tom.",
+      "C23: ens/diálogo 'fair all game' no natural -> 'all through the match'; 'might just have' era engañoso, retirado; pr3 traducía 'quizá' por may well, corregido.",
+      "C24 ev4: el mapa pide tres pistas (había dos) -> añadida tercera (mud), modelo 51 palabras y rúbrica de 5 grupos con variantes (footprints/prints, dos grados de certeza fuerte/suave); re1 rúbrica ampliada; ev1 feedback citaba un dato no visible (las luces); ev2/pr3 aceptan sinónimos (shows, since, as).",
+      "C25: pr2 tenía un par ambiguo (chances are = cierre de acuerdo) sustituido; ev3 incoherente (mochila tomada por error 'en el vestíbulo') reescrito; ev2 'there' sin antecedente; ev4 ampliado (38 -> 54 palabras) con dos teorías y acuerdo, consigna sin error 'dudes', rúbrica de 5 grupos; re3 más natural.",
+      "Sin P0/P1 pendientes."
+    ]
   }
 }

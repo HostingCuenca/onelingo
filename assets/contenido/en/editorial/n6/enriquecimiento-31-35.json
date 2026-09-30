@@ -1,0 +1,631 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "classes": {
+    "en.n6.class-31": {
+      "explicacion": {
+        "titulo": "Se dice, se cree, se ha confirmado",
+        "texto": "En inglés, el «se» impersonal del español se expresa con it is + participio + that: it is said that («se dice que»), it is believed that («se cree que») e it has been confirmed that («se ha confirmado que»). Con there, there is thought to be presenta algo que se piensa que existe. Ninguna de estas frases dice quién habla; el verbo marca la certeza: said = rumor, believed/thought = creencia general, confirmed = hecho comprobado."
+      },
+      "patron": {
+        "texto": "It is + participio de un verbo de reporte + that + oración:",
+        "formula": [
+          {
+            "texto": "It is believed",
+            "nota": "it + is + participio: «se cree», sin decir quién lo cree"
+          },
+          {
+            "texto": "that",
+            "nota": "introduce lo que se cuenta"
+          },
+          {
+            "texto": "the mayor will leave the town.",
+            "nota": "la noticia: una oración completa con sujeto y verbo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Is said that the old hotel is haunted.",
+          "correcto": "It is said that the old hotel is haunted.",
+          "explicacion": "En inglés la frase necesita sujeto: it. No se puede omitir como en «Se dice que…»."
+        },
+        {
+          "incorrecto": "It says that the mayor will leave the town.",
+          "correcto": "It is said that the mayor will leave the town.",
+          "explicacion": "«It says» necesita una fuente concreta (the sign says…). Para el «se dice que» impersonal se usa la pasiva: it is said that."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Ana hablan del viejo puente de su pueblo.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Did you hear? It is said that there is treasure under the old bridge.",
+            "traduccion": "¿Te enteraste? Se dice que hay un tesoro bajo el puente viejo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Really? Is there any proof?",
+            "traduccion": "¿En serio? ¿Hay alguna prueba?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. It is believed that the mayor knows the secret.",
+            "traduccion": "No. Se cree que el alcalde conoce el secreto."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Well, it has been confirmed that the bridge will close on Monday. That is a fact.",
+            "traduccion": "Bueno, se ha confirmado que el puente cerrará el lunes. Eso es un hecho."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Then we can look for the treasure on Sunday!",
+            "traduccion": "¡Entonces podemos buscar el tesoro el domingo!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué es un hecho confirmado?",
+          "opciones": [
+            {
+              "es": "Que el puente cerrará el lunes."
+            },
+            {
+              "es": "Que hay un tesoro bajo el puente."
+            },
+            {
+              "es": "Que el alcalde conoce el secreto."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «it has been confirmed that the bridge will close on Monday»: es lo único comprobado; el tesoro y el secreto del alcalde son rumor o creencia."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Qué transmite"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "It is said that…"
+            },
+            {
+              "texto": "rumor: circula, nadie lo comprueba"
+            }
+          ],
+          [
+            {
+              "texto": "It is believed / thought that…"
+            },
+            {
+              "texto": "creencia general, sin pruebas firmes"
+            }
+          ],
+          [
+            {
+              "texto": "There is thought to be…"
+            },
+            {
+              "texto": "creencia: se piensa que algo existe"
+            }
+          ],
+          [
+            {
+              "texto": "It has been confirmed that…"
+            },
+            {
+              "texto": "hecho comprobado"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-32": {
+      "explicacion": {
+        "titulo": "Sujeto personal + is said to…",
+        "texto": "Para pasar de it is said that he… a una frase más compacta, el sujeto de la oración subordinada pasa al principio: he is said to be rich. Después de is said, believed, thought, known, reported o expected va to + infinitivo. Con to be hablas de ahora; con to be + -ing, de algo en curso; con to have + participio, de algo anterior. Ya no se escribe that ni se repite el sujeto."
+      },
+      "patron": {
+        "texto": "Sujeto + is said / believed / thought + to + infinitivo:",
+        "formula": [
+          {
+            "texto": "The writer",
+            "nota": "sujeto personal, al principio de la frase"
+          },
+          {
+            "texto": "is believed",
+            "nota": "is/are + participio: la fuente no se nombra"
+          },
+          {
+            "texto": "to have won the lottery.",
+            "nota": "to be / to be + -ing / to have + participio, según el momento"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She is thought to won the lottery.",
+          "correcto": "She is thought to have won the lottery.",
+          "explicacion": "Para un hecho anterior hace falta to have + participio; to + pasado simple no existe."
+        },
+        {
+          "incorrecto": "My neighbour is said that he is a famous writer.",
+          "correcto": "My neighbour is said to be a famous writer.",
+          "explicacion": "Con sujeto personal no se usa that: se pasa a to + infinitivo. That solo aparece en it is said that…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom hablan del nuevo vecino de su edificio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Who lives in the flat upstairs now?",
+            "traduccion": "¿Quién vive ahora en el piso de arriba?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "The new neighbour. He is said to be a famous writer.",
+            "traduccion": "El nuevo vecino. Se dice que es un escritor famoso."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Really? I heard he is thought to have won the lottery.",
+            "traduccion": "¿En serio? Oí que se piensa que ganó la lotería."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Maybe. He is expected to come to our party on Saturday.",
+            "traduccion": "Quizá. Se espera que venga a nuestra fiesta el sábado."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Then we can ask him!",
+            "traduccion": "¡Entonces podemos preguntárselo!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué se espera que haga el vecino el sábado?",
+          "opciones": [
+            {
+              "es": "Ir a la fiesta de Mia y Tom."
+            },
+            {
+              "es": "Ganar la lotería."
+            },
+            {
+              "es": "Publicar un libro nuevo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «he is expected to come to our party on Saturday»: la expectativa de futuro es ir a la fiesta."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Ahora"
+            },
+            {
+              "texto": "He is said to be rich."
+            }
+          ],
+          [
+            {
+              "texto": "En curso"
+            },
+            {
+              "texto": "He is said to be living in Rome."
+            }
+          ],
+          [
+            {
+              "texto": "Antes"
+            },
+            {
+              "texto": "He is said to have lived in Rome."
+            }
+          ],
+          [
+            {
+              "texto": "Futuro"
+            },
+            {
+              "texto": "He is expected to move soon."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-33": {
+      "explicacion": {
+        "titulo": "Verbos de reporte: quién dice qué y cómo",
+        "texto": "Cada verbo de reporte dice qué hizo la persona al hablar y pide su propio patrón. Admitted reconoce algo incómodo, denied lo niega, insisted lo repite con fuerza, warned avisa de un peligro y suggested propone sin imponer. Después van that + oración o una forma en -ing (admitted, denied, suggested + -ing; insisted on + -ing); warned lleva persona + to. Al escuchar una entrevista, anota tres datos: quién habla, qué verbo usa y qué información transmite."
+      },
+      "patron": {
+        "texto": "Quién + verbo de reporte + información:",
+        "formula": [
+          {
+            "texto": "The guide",
+            "nota": "quién habla"
+          },
+          {
+            "texto": "warned us",
+            "nota": "verbo de reporte + a quién, si hay receptor"
+          },
+          {
+            "texto": "not to swim in the river.",
+            "nota": "patrón del verbo: (not) to + verbo, that + oración o -ing"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The waiter suggested me to try the soup.",
+          "correcto": "The waiter suggested trying the soup.",
+          "explicacion": "Suggest no admite persona + to: se usa -ing o that + oración (he suggested that I try the soup)."
+        },
+        {
+          "incorrecto": "The coach denied to change the team.",
+          "correcto": "The coach denied changing the team.",
+          "explicacion": "Después de deny va una forma en -ing, no to + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara entrevista en la radio al entrenador del equipo del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Coach, the newspaper says you changed the team before the match.",
+            "traduccion": "Entrenador, el periódico dice que usted cambió al equipo antes del partido."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "That is not true. I deny changing the team.",
+            "traduccion": "Eso no es verdad. Niego haber cambiado al equipo."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "But two players looked tired.",
+            "traduccion": "Pero dos jugadores parecían cansados."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I admit that. I suggest giving them a day off, and I warn you: the next match will be difficult.",
+            "traduccion": "Eso lo admito. Sugiero darles un día libre y les aviso: el próximo partido será difícil."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué admite el entrenador?",
+          "opciones": [
+            {
+              "es": "Que dos jugadores estaban cansados."
+            },
+            {
+              "es": "Que cambió al equipo antes del partido."
+            },
+            {
+              "es": "Que el próximo partido será fácil."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos niega cambiar al equipo (deny) y admite que dos jugadores estaban cansados («I admit that»)."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Verbo",
+          "Patrón y ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "admitted"
+            },
+            {
+              "texto": "admitted that he was late"
+            }
+          ],
+          [
+            {
+              "texto": "denied"
+            },
+            {
+              "texto": "denied taking the money"
+            }
+          ],
+          [
+            {
+              "texto": "insisted"
+            },
+            {
+              "texto": "insisted on paying"
+            }
+          ],
+          [
+            {
+              "texto": "warned"
+            },
+            {
+              "texto": "warned us not to swim"
+            }
+          ],
+          [
+            {
+              "texto": "suggested"
+            },
+            {
+              "texto": "suggested trying the soup"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-34": {
+      "explicacion": {
+        "titulo": "There is said to be: rumores con tono neutral",
+        "texto": "Con there, la pasiva presenta algo que se dice o se piensa que existe: there is said to be + singular, there are thought to be + plural, there is believed to have been para el pasado. Para informar con neutralidad, mezcla estas estructuras con it is rumoured that y con un sujeto personal (is reported to…), y añade una nota de cautela: there is no proof o nobody has confirmed it. Un buen informe breve tiene lugar, rumor, fuente vaga y cautela."
+      },
+      "patron": {
+        "texto": "There + is/are + said/thought + to be + algo:",
+        "formula": [
+          {
+            "texto": "There is",
+            "nota": "there + be: presenta que algo existe"
+          },
+          {
+            "texto": "said",
+            "nota": "said / thought / believed, en pasiva"
+          },
+          {
+            "texto": "to be",
+            "nota": "to be (ahora) o to have been (antes)"
+          },
+          {
+            "texto": "a strange light in the house.",
+            "nota": "lo que se cuenta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "It is said to be a strange light in the house.",
+          "correcto": "There is said to be a strange light in the house.",
+          "explicacion": "Para decir que algo existe se usa there (como en there is), no it."
+        },
+        {
+          "incorrecto": "There is thought to be two secret rooms in the basement.",
+          "correcto": "There are thought to be two secret rooms in the basement.",
+          "explicacion": "El verbo be concuerda con lo que sigue: dos salas exigen are."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo hablan de una casa del final de su calle.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Do you know the abandoned house at the end of our street?",
+            "traduccion": "¿Conoces la casa abandonada del final de nuestra calle?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Yes. There is said to be a strange light in the basement at night.",
+            "traduccion": "Sí. Se dice que hay una luz extraña en el sótano por la noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "It is rumoured that the owner has left the country.",
+            "traduccion": "Se rumorea que el dueño se ha ido del país."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Has anyone confirmed that?",
+            "traduccion": "¿Alguien lo ha confirmado?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "No. There is no proof, so it is only a rumour.",
+            "traduccion": "No. No hay pruebas, así que es solo un rumor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué se sabe con seguridad sobre la casa?",
+          "opciones": [
+            {
+              "es": "Nada está comprobado: son solo rumores."
+            },
+            {
+              "es": "Que el dueño confirmó que se fue del país."
+            },
+            {
+              "es": "Que hay una luz extraña cada noche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo termina con «there is no proof, so it is only a rumour»: la luz y el viaje del dueño no están comprobados."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Estructura",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "There is said to be + singular"
+            },
+            {
+              "texto": "There is said to be a light."
+            }
+          ],
+          [
+            {
+              "texto": "There are thought to be + plural"
+            },
+            {
+              "texto": "There are thought to be two doors."
+            }
+          ],
+          [
+            {
+              "texto": "There is believed to have been + pasado"
+            },
+            {
+              "texto": "There is believed to have been a fire."
+            }
+          ],
+          [
+            {
+              "texto": "It is rumoured that + oración"
+            },
+            {
+              "texto": "It is rumoured that the owner left."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-35": {
+      "explicacion": {
+        "titulo": "De la entrevista al informe",
+        "texto": "Un buen informe de entrevista separa tres cosas: los hechos comprobados (se afirman y se citan con according to…), los rumores o creencias (estructura impersonal: it is said that, is believed to…) y las voces de personas concretas (claimed, admitted, denied…). Las preguntas se reportan con ask + if/whether o una palabra interrogativa, y el orden vuelve a ser el de una afirmación: she asked where the legend had started. Cita siempre la fuente y no conviertas un rumor en un hecho."
+      },
+      "patron": {
+        "texto": "Fuente + verbo + información, y la pregunta reportada:",
+        "formula": [
+          {
+            "texto": "According to the historian,",
+            "nota": "fuente concreta: de dónde sale el dato"
+          },
+          {
+            "texto": "the cave is said to have been a meeting place;",
+            "nota": "rumor con estructura impersonal"
+          },
+          {
+            "texto": "the villagers claimed that they heard music,",
+            "nota": "verbo de reporte + that: lo que afirma una persona"
+          },
+          {
+            "texto": "and I asked whether there was any evidence.",
+            "nota": "pregunta reportada: whether/if + orden afirmativo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She asked where was the treasure.",
+          "correcto": "She asked where the treasure was.",
+          "explicacion": "En una pregunta reportada el orden es el de una afirmación: sujeto + verbo, sin invertir."
+        },
+        {
+          "incorrecto": "He asked me if did I know the legend.",
+          "correcto": "He asked me if I knew the legend.",
+          "explicacion": "Sin do ni inversión, y con el verbo un tiempo atrás: if I knew."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara entrevista a un historiador para el periódico del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Carlos, is the legend of the cave true?",
+            "traduccion": "Carlos, ¿es cierta la leyenda de la cueva?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "There is no evidence. The villagers claim that they hear music there.",
+            "traduccion": "No hay pruebas. Los habitantes del pueblo afirman que oyen música allí."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And what is the source of the story?",
+            "traduccion": "¿Y cuál es la fuente de la historia?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "A local newspaper. The cave is said to have been a meeting place.",
+            "traduccion": "Un periódico local. Se dice que la cueva fue un lugar de reunión."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thank you. I will write that there is no evidence.",
+            "traduccion": "Gracias. Escribiré que no hay pruebas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué dice Carlos sobre la leyenda?",
+          "opciones": [
+            {
+              "es": "Que no hay pruebas y que los vecinos afirman oír música."
+            },
+            {
+              "es": "Que un libro de historia la confirma."
+            },
+            {
+              "es": "Que la cueva fue una escuela."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «there is no evidence» y que los habitantes «claim» que oyen música: son afirmaciones sin pruebas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Tipo de información",
+          "Cómo se escribe"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Hecho comprobado"
+            },
+            {
+              "texto": "According to the historian, …"
+            }
+          ],
+          [
+            {
+              "texto": "Rumor o creencia"
+            },
+            {
+              "texto": "It is said that… / is believed to…"
+            }
+          ],
+          [
+            {
+              "texto": "Voz de una persona"
+            },
+            {
+              "texto": "The villagers claimed that…"
+            }
+          ],
+          [
+            {
+              "texto": "Pregunta"
+            },
+            {
+              "texto": "She asked whether / where…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

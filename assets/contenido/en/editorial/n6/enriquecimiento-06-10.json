@@ -1,0 +1,611 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 6,
+    "end": 10
+  },
+  "classes": {
+    "en.n6.class-06": {
+      "explicacion": {
+        "titulo": "Supposing, in case, even if y what if: matices de if",
+        "texto": "Además de if, el inglés tiene expresiones que cambian el matiz de una condición. Supposing y what if proponen una hipótesis: «¿y si…?». In case no es «si»: indica una precaución, algo que haces ahora por si pasa algo después. Even if expresa concesión: la condición no cambia lo que harás. En todos los casos el verbo va en presente (o en pasado si la hipótesis es menos probable) y nunca con will: «in case it rains», no «in case it will rain»."
+      },
+      "patron": {
+        "texto": "Matiz + situación posible + resultado:",
+        "formula": [
+          {
+            "texto": "Supposing / What if + situación,",
+            "nota": "hipótesis: «¿y si…?»"
+          },
+          {
+            "texto": "…in case + situación",
+            "nota": "precaución: «por si acaso»"
+          },
+          {
+            "texto": "…even if + situación",
+            "nota": "concesión: «aunque»"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I will take an umbrella in case it will rain.",
+          "correcto": "I will take an umbrella in case it rains.",
+          "explicacion": "Tras in case, even if y supposing el verbo va en presente, sin will."
+        },
+        {
+          "incorrecto": "In case you want a refund, call us.",
+          "correcto": "If you want a refund, call us.",
+          "explicacion": "In case no significa «si»: expresa precaución. Para una condición normal se usa if."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo organizan un viaje de camping.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Supposing the train is delayed, what will we do?",
+            "traduccion": "Suponiendo que el tren se retrase, ¿qué haremos?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We will wait. I will take a spare charger in case my phone dies.",
+            "traduccion": "Esperaremos. Llevaré un cargador de repuesto por si mi móvil se queda sin batería."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And what if they cancel the trip?",
+            "traduccion": "¿Y si cancelan el viaje?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We get a refund. And we will sleep in the tent even if it rains!",
+            "traduccion": "Nos devuelven el dinero. ¡Y dormiremos en la tienda aunque llueva!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Por qué lleva Leo un cargador de repuesto?",
+          "opciones": [
+            {
+              "es": "Porque el tren se ha retrasado."
+            },
+            {
+              "es": "Porque su móvil ya se quedó sin batería."
+            },
+            {
+              "es": "Por si su móvil se queda sin batería."
+            }
+          ],
+          "respuesta": 2,
+          "feedback": "Leo dice «in case my phone dies»: in case expresa una precaución, algo que hace ahora por si pasa después."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Matiz"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "supposing / what if"
+            },
+            {
+              "texto": "Hipótesis: «¿y si…?»"
+            }
+          ],
+          [
+            {
+              "texto": "in case"
+            },
+            {
+              "texto": "Precaución: «por si acaso»"
+            }
+          ],
+          [
+            {
+              "texto": "even if"
+            },
+            {
+              "texto": "Concesión: «aunque»"
+            }
+          ],
+          [
+            {
+              "texto": "if"
+            },
+            {
+              "texto": "Condición normal"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-07": {
+      "explicacion": {
+        "titulo": "Condicionales formales: should, were to y happen to",
+        "texto": "En avisos, cartas y hoteles el inglés quita el if e invierte el orden: «Should you need help» equivale a «If you need help», pero suena formal y tentativo. «Were you to arrive» equivale a «If you were to arrive» y plantea una hipótesis con would. Con if también se usan should y happen to: indican que la posibilidad es pequeña («por casualidad»). No se añade will después de should ni would después de if."
+      },
+      "patron": {
+        "texto": "Condición formal + resultado:",
+        "formula": [
+          {
+            "texto": "Should you need anything,",
+            "nota": "should + sujeto: «si necesitara»"
+          },
+          {
+            "texto": "Were you to arrive early,",
+            "nota": "were + sujeto + to: hipótesis"
+          },
+          {
+            "texto": "If you happen to see it,",
+            "nota": "happen to: «por casualidad»"
+          },
+          {
+            "texto": "please contact reception.",
+            "nota": "resultado: will, can o imperativo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Should you will need anything, call us.",
+          "correcto": "Should you need anything, call us.",
+          "explicacion": "Tras should no va will: should + sujeto + verbo base."
+        },
+        {
+          "incorrecto": "If you would need help, call us.",
+          "correcto": "If you should need help, call us.",
+          "explicacion": "Después de if no se usa would: se usa should o el presente."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara llega a un hotel y habla con Leo, el recepcionista.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Good evening. Should you need anything, please contact reception.",
+            "traduccion": "Buenas noches. Si necesita algo, contacte con recepción."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Thank you. If I happen to lose my key, what do I do?",
+            "traduccion": "Gracias. Si por casualidad pierdo mi llave, ¿qué hago?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Were you to lose it, we would make you a new one at once.",
+            "traduccion": "Si la perdiera, le haríamos una nueva enseguida."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Great. And could you keep my luggage after checkout?",
+            "traduccion": "Perfecto. ¿Y podrían guardar mi equipaje después de la salida?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pasaría si Sara perdiera su llave?",
+          "opciones": [
+            {
+              "es": "Tendría que esperar al día siguiente."
+            },
+            {
+              "es": "Le harían una llave nueva enseguida."
+            },
+            {
+              "es": "Tendría que pagar el equipaje."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Leo dice «Were you to lose it, we would make you a new one at once»: la inversión con were to plantea la hipótesis y would da el resultado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma formal",
+          "Equivale a"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Should you need help,"
+            },
+            {
+              "texto": "If you need help,"
+            }
+          ],
+          [
+            {
+              "texto": "Were you to arrive early,"
+            },
+            {
+              "texto": "If you were to arrive early,"
+            }
+          ],
+          [
+            {
+              "texto": "If you should need help,"
+            },
+            {
+              "texto": "Si necesitara ayuda (poco probable)"
+            }
+          ],
+          [
+            {
+              "texto": "If you happen to see it,"
+            },
+            {
+              "texto": "Si por casualidad lo ve"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-08": {
+      "explicacion": {
+        "titulo": "Promesa, advertencia, amenaza o consejo",
+        "texto": "La misma estructura, if + presente y will, puede tener intenciones distintas. Para distinguirlas pregúntate: ¿la consecuencia es buena o mala? ¿Quién la causa? Si es buena y la causo yo, es una promesa. Si es mala y la causa otro o el azar, es una advertencia. Si es mala y la causo yo para presionar, es una amenaza. Si uso if I were you + would, es un consejo. El tono de voz y la relación entre las personas también ayudan."
+      },
+      "patron": {
+        "texto": "If + condición, resultado → intención:",
+        "formula": [
+          {
+            "texto": "If you help me, I will pay you.",
+            "nota": "promesa: bueno y lo causo yo"
+          },
+          {
+            "texto": "If you leave it, someone will take it.",
+            "nota": "advertencia: malo y lo causa otro"
+          },
+          {
+            "texto": "If you do it again, I will call the police.",
+            "nota": "amenaza: malo y lo causo yo"
+          },
+          {
+            "texto": "If I were you, I would…",
+            "nota": "consejo: if I were you + would"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If you will help me, I promise I will pay you.",
+          "correcto": "If you help me, I promise I will pay you.",
+          "explicacion": "Tras if, en una condición real, el verbo va en presente simple, sin will."
+        },
+        {
+          "incorrecto": "I warn you to don't park there.",
+          "correcto": "I warn you not to park there.",
+          "explicacion": "Después de warn + persona, la negación es not to + verbo base."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia son vecinos y hablan de la música alta.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Mia, your music is too loud at night.",
+            "traduccion": "Mia, tu música está muy alta por la noche."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Sorry! If you give me your number, I promise I will lower it after ten.",
+            "traduccion": "¡Perdón! Si me das tu número, te prometo que la bajaré después de las diez."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Thanks. But I warn you: if the landlord hears it, he will complain.",
+            "traduccion": "Gracias. Pero te aviso: si el casero la oye, se quejará."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "OK. And if I were you, I would talk to the neighbours upstairs too.",
+            "traduccion": "Vale. Y yo que tú hablaría también con los vecinos de arriba."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué intención tiene la frase de Mia sobre la música?",
+          "opciones": [
+            {
+              "es": "Una amenaza: llamará al casero."
+            },
+            {
+              "es": "Una promesa: bajará la música."
+            },
+            {
+              "es": "Un consejo: que Tom cambie de casa."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Mia dice «I promise I will lower it after ten»: una consecuencia buena para Tom que ella misma causa, es decir, una promesa."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Intención",
+          "Cómo reconocerla"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Promesa"
+            },
+            {
+              "texto": "Consecuencia buena que causo yo"
+            }
+          ],
+          [
+            {
+              "texto": "Advertencia"
+            },
+            {
+              "texto": "Consecuencia mala que causa otro o el azar"
+            }
+          ],
+          [
+            {
+              "texto": "Amenaza"
+            },
+            {
+              "texto": "Consecuencia mala que causo yo para presionar"
+            }
+          ],
+          [
+            {
+              "texto": "Consejo"
+            },
+            {
+              "texto": "If I were you + would"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-09": {
+      "explicacion": {
+        "titulo": "Una carta a tu yo del pasado",
+        "texto": "Una carta a tu yo joven combina condicionales con propósitos distintos. El mixto une una causa pasada con un resultado de hoy: «If I had taken that chance, I would be happier today». Supposing + presente plantea un problema futuro para darle un consejo. Even if ofrece ánimo: «aunque» pase algo, vale la pena. Should + sujeto cierra con tono amable y remoto. Organiza la carta: lamento, consejo con supposing, ánimo con even if y cierre con should."
+      },
+      "patron": {
+        "texto": "Carta a tu yo joven:",
+        "formula": [
+          {
+            "texto": "If I had taken…, I would be…",
+            "nota": "mixto: causa pasada, efecto de hoy"
+          },
+          {
+            "texto": "Supposing you feel…,",
+            "nota": "hipótesis para un consejo"
+          },
+          {
+            "texto": "Even if…, it is worth trying.",
+            "nota": "aunque: ánimo"
+          },
+          {
+            "texto": "Should you ever doubt…,",
+            "nota": "cierre amable: «si alguna vez»"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If I would have taken that chance, I would be happier.",
+          "correcto": "If I had taken that chance, I would be happier.",
+          "explicacion": "Después de if no va would: if + had + participio para el pasado."
+        },
+        {
+          "incorrecto": "Even if people will laugh, it is worth trying.",
+          "correcto": "Even if people laugh, it is worth trying.",
+          "explicacion": "Tras even if el verbo va en presente simple, sin will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana le cuenta a Leo la carta que escribe a su yo de quince años.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "What are you writing, Ana?",
+            "traduccion": "¿Qué escribes, Ana?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "A note for me at fifteen. If I had taken that chance, I would be in Canada today.",
+            "traduccion": "Una nota para mí a los quince años. Si hubiera aprovechado esa oportunidad, hoy estaría en Canadá."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Are you sad about it?",
+            "traduccion": "¿Estás triste por eso?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "A little. So I write: even if people laugh at your dream, it is worth trying.",
+            "traduccion": "Un poco. Por eso escribo: aunque se rían de tu sueño, vale la pena intentarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué consejo escribe Ana a su yo joven?",
+          "opciones": [
+            {
+              "es": "Que no hable de sus sueños."
+            },
+            {
+              "es": "Que intente cumplir su sueño aunque se rían."
+            },
+            {
+              "es": "Que no viaje a Canadá."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Ana escribe «even if people laugh at your dream, it is worth trying»: aunque se rían, vale la pena intentarlo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Condicional",
+          "Función"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "If I had…, I would…"
+            },
+            {
+              "texto": "Lamento del pasado que afecta a hoy"
+            }
+          ],
+          [
+            {
+              "texto": "Supposing you…,"
+            },
+            {
+              "texto": "Consejo para una situación posible"
+            }
+          ],
+          [
+            {
+              "texto": "Even if…,"
+            },
+            {
+              "texto": "Ánimo: aunque pase algo"
+            }
+          ],
+          [
+            {
+              "texto": "Should you ever…,"
+            },
+            {
+              "texto": "Cierre amable y remoto"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-10": {
+      "explicacion": {
+        "titulo": "Unless, provided that y otherwise: condiciones y advertencias",
+        "texto": "Unless equivale a if not: «We will go unless it rains» significa «iremos si no llueve»; el verbo va en afirmativo, sin otra negación. Provided (that) marca una condición imprescindible, «solo si». Otherwise advierte de lo que pasará si no cumples algo y abre una frase nueva, después de punto o punto y coma. Al planear con amigos puedes lamentar (I wish we had…), poner condiciones (unless, provided that) y advertir con otherwise."
+      },
+      "patron": {
+        "texto": "Plan con condiciones:",
+        "formula": [
+          {
+            "texto": "I wish we had saved more,",
+            "nota": "lamento con I wish + had + participio"
+          },
+          {
+            "texto": "We will go unless it rains,",
+            "nota": "unless: «a menos que»"
+          },
+          {
+            "texto": "provided that everyone pays;",
+            "nota": "provided that: «solo si»"
+          },
+          {
+            "texto": "otherwise, we lose the room.",
+            "nota": "otherwise: consecuencia de no hacerlo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "We will go unless it doesn't rain.",
+          "correcto": "We will go unless it rains.",
+          "explicacion": "Unless ya significa if not: el verbo va en afirmativo, sin otra negación."
+        },
+        {
+          "incorrecto": "We will go provided that will be sunny.",
+          "correcto": "We will go provided that it is sunny.",
+          "explicacion": "Provided that necesita un sujeto y un verbo en presente, sin will."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom, Mia y Carlos deciden cómo será su viaje a la costa.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "I wish we had saved more. Can we still afford the coast?",
+            "traduccion": "Ojalá hubiéramos ahorrado más. ¿Nos lo podemos permitir todavía?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Yes, provided that we keep to the budget.",
+            "traduccion": "Sí, siempre que respetemos el presupuesto."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "And we will sleep in the tent unless it rains.",
+            "traduccion": "Y dormiremos en la tienda a menos que llueva."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Pay the deposit today; otherwise, we will lose the booking.",
+            "traduccion": "Pagad el depósito hoy; de lo contrario, perderemos la reserva."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué pasará si no pagan el depósito hoy?",
+          "opciones": [
+            {
+              "es": "Dormirán en la tienda."
+            },
+            {
+              "es": "Perderán la reserva."
+            },
+            {
+              "es": "Cambiarán de destino."
+            }
+          ],
+          "respuesta": 1,
+          "feedback": "Tom dice «otherwise, we will lose the booking»: otherwise advierte de la consecuencia de no pagar hoy."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Qué hace"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "unless"
+            },
+            {
+              "texto": "A menos que (= if not)"
+            }
+          ],
+          [
+            {
+              "texto": "provided that"
+            },
+            {
+              "texto": "Solo si: condición necesaria"
+            }
+          ],
+          [
+            {
+              "texto": "otherwise"
+            },
+            {
+              "texto": "Advierte: si no, pasará…"
+            }
+          ],
+          [
+            {
+              "texto": "I wish we had + participio"
+            },
+            {
+              "texto": "Lamenta algo pasado"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

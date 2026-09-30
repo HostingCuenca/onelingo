@@ -423,7 +423,8 @@
         "answer": {
           "text": "not",
           "accepted": [
-            "not"
+            "not",
+            "never"
           ]
         },
         "choices": [],
@@ -445,7 +446,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:f6ccd97859e4cd3c5b1e9b67d9984166f4b2ccb6d9d49e44907a0f8d2c9b1e98"
+        "contentHash": "sha256:1e3100d2bc0f4812b5edf7827dbeae87db4d717a7c582398a4949df719ae4131"
       }
     ],
     "evaluation": [
@@ -577,14 +578,14 @@
         "id": "en.n5.c30.e04",
         "format": "escribir",
         "prompt": {
-          "es": "Cuenta un imprevisto de viaje: qué te hicieron, qué lamentas y qué agradeces."
+          "es": "Cuenta tres imprevistos de tu viaje y responde a las preguntas de tu amigo."
         },
         "answer": {
-          "text": "I remember being told about the strike only at the airport. After having waited for two hours, I was offered a refund. I regret having booked such a cheap flight, but I am glad to have been given my money back.",
+          "text": "I remember being told about the strike only at the airport. After having waited for two hours, I was left without my luggage, and then I was offered a refund. To answer your questions: no, I am not angry, and yes, I am glad to have been given my money back, but I regret having booked such a cheap flight.",
           "accepted": [
-            "I remember being told about the strike only at the airport. After having waited for two hours, I was offered a refund. I regret having booked such a cheap flight, but I am glad to have been given my money back.",
-            "We were told about the strike only at the airport. Having waited two hours, we were offered a refund. I regret having chosen the cheapest flight, and I am glad to have been given the money.",
-            "I remember being told about the strike at the airport. Having waited for two hours, I was given a refund. I am glad to have been given my money back, but I regret having booked that flight."
+            "I remember being told about the strike only at the airport. After having waited for two hours, I was left without my luggage, and then I was offered a refund. To answer your questions: no, I am not angry, and yes, I am glad to have been given my money back, but I regret having booked such a cheap flight.",
+            "We were told about the strike only at the airport. Having waited two hours, we were left without our luggage, and then we were offered a refund. No, I am not angry, and yes, I am glad to have been given the money, but I regret having chosen the cheapest flight.",
+            "I remember being told about the strike at the airport. After having waited for two hours, I was left without my bags, but I was offered a refund. I am a little angry, but I am glad to have been given my money back, and I regret having booked that flight."
           ]
         },
         "choices": [],
@@ -598,32 +599,60 @@
           "variantSeed": "0",
           "variantId": "en.n5.c30.e04.seed-0",
           "feedback": {
-            "es": "El relato ordena el imprevisto (being told), la espera (having waited) y el balance (regret having, glad to have been)."
+            "es": "El relato ordena los imprevistos (being told, having waited, left without), el balance (regret having, glad to have been) y responde a las dos preguntas."
           },
-          "text": "Situación: tu vuelo a Quito se canceló por una huelga (strike). Te avisaron solo en el aeropuerto, esperaste dos horas y te ofrecieron un reembolso (refund). Escribe entre 30 y 60 palabras.",
+          "text": "Situación: tu vuelo a Quito se canceló por una huelga (strike). Solo te avisaron en el aeropuerto, esperaste dos horas y te quedaste sin tu equipaje (luggage). Te ofrecieron un reembolso (refund). Tu amigo pregunta: «Are you angry? Did you get your money back?» Escribe entre 50 y 80 palabras: cuenta qué pasó, qué lamentas y qué agradeces, y responde.",
           "scoring": {
             "wordRange": [
-              25,
-              80
+              35,
+              100
             ],
             "evidenceGroups": [
               [
                 "being told",
                 "were told",
-                "was told"
+                "was told",
+                "been told",
+                "told me",
+                "told us"
               ],
               [
                 "having waited",
                 "after having waited",
-                "Having waited"
+                "waited",
+                "waiting",
+                "after waiting"
+              ],
+              [
+                "luggage",
+                "bags",
+                "suitcase",
+                "suitcases",
+                "baggage"
               ],
               [
                 "regret having",
-                "regret booking"
+                "regret booking",
+                "regret choosing",
+                "regret buying",
+                "regret not",
+                "regretted having"
               ],
               [
-                "glad to have been",
-                "glad to have"
+                "glad to have",
+                "happy to have",
+                "appreciate being",
+                "appreciate having",
+                "grateful",
+                "pleased to have"
+              ],
+              [
+                "angry",
+                "upset",
+                "annoyed",
+                "furious",
+                "calm",
+                "not angry"
               ]
             ]
           }
@@ -633,7 +662,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:02a038c0a55fe72cbecf24c51ff00a65b6e531517b447ee319d46f2ffa327ed8"
+        "contentHash": "sha256:570952ee7bd6f17e159abed94d72a956a2825bfe526c3ecd747ba89d0b678edd"
       }
     ],
     "review": [
@@ -648,13 +677,13 @@
         },
         "choices": [
           {
-            "text": "It is sure the luggage will never come."
+            "text": "The speaker is sure the luggage will never come."
           },
           {
-            "text": "It is almost sure the luggage went to another city."
+            "text": "The speaker is almost sure the luggage went to another city."
           },
           {
-            "text": "It thinks the luggage was stolen."
+            "text": "The speaker thinks the luggage was stolen."
           }
         ],
         "teaches": [],
@@ -683,7 +712,7 @@
           "highContrast": true,
           "largeText": true
         },
-        "contentHash": "sha256:181b015f8ec615c329ab10aa733cd8f8ed9b0437354b1dfeaf758d996ae4a341"
+        "contentHash": "sha256:69c0b5249681eaa3fcb5aa59767602eca2c415050968f20845007486cc08a979"
       },
       {
         "id": "en.n5.c30.r02",

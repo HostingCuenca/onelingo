@@ -1,0 +1,653 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 81,
+    "end": 85
+  },
+  "classes": {
+    "en.n6.class-81": {
+      "explicacion": {
+        "titulo": "Leer los números de una encuesta",
+        "texto": "Las encuestas casi nunca dan la cifra exacta: usan expresiones como a third (1/3), a quarter (1/4), half, the majority (más de la mitad) o a minority (menos de la mitad). Tras of + plural, el verbo va en plural: The majority of students walk. Twice as many … as … indica el doble. Para tendencias: a slight rise es una subida pequeña, y fell o a fall indican que baja. Lee primero la proporción, luego la tendencia."
+      },
+      "patron": {
+        "texto": "Proporción + of + grupo + verbo en plural:",
+        "formula": [
+          {
+            "texto": "A third of",
+            "nota": "proporción: a third, a quarter, the majority…"
+          },
+          {
+            "texto": "the students",
+            "nota": "el grupo al que se refiere"
+          },
+          {
+            "texto": "prefer football.",
+            "nota": "verbo en plural, sin -s"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The majority of students walks to school.",
+          "correcto": "The majority of students walk to school.",
+          "explicacion": "Tras the majority of + plural el verbo concuerda con students: walk, no walks."
+        },
+        {
+          "incorrecto": "Twice more girls than boys joined the club.",
+          "correcto": "Twice as many girls as boys joined the club.",
+          "explicacion": "El doble de personas se dice twice as many … as …; twice more no existe."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom leen los resultados de una encuesta escolar sobre cómo llegan los alumnos al colegio.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Look at this school survey. The majority of students walk to school.",
+            "traduccion": "Mira esta encuesta del colegio. La mayoría de los alumnos va caminando."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes, and only a quarter come by bus.",
+            "traduccion": "Sí, y solo una cuarta parte viene en autobús."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Cycling shows a slight rise since last year.",
+            "traduccion": "El ir en bici muestra una ligera subida desde el año pasado."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And only a small minority come by car.",
+            "traduccion": "Y solo una pequeña minoría viene en coche."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo llega al colegio la mayoría de los alumnos?",
+          "opciones": [
+            {
+              "es": "Caminando."
+            },
+            {
+              "es": "En autobús."
+            },
+            {
+              "es": "En coche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice que la mayoría de los alumnos camina al colegio; Mia añade que solo una cuarta parte usa el autobús."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "a third / a quarter"
+            },
+            {
+              "texto": "1/3 y 1/4 del total"
+            }
+          ],
+          [
+            {
+              "texto": "the majority"
+            },
+            {
+              "texto": "más de la mitad"
+            }
+          ],
+          [
+            {
+              "texto": "a minority"
+            },
+            {
+              "texto": "menos de la mitad"
+            }
+          ],
+          [
+            {
+              "texto": "twice as many … as …"
+            },
+            {
+              "texto": "el doble de … que …"
+            }
+          ],
+          [
+            {
+              "texto": "a slight rise / fall"
+            },
+            {
+              "texto": "una subida o bajada pequeña"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-82": {
+      "explicacion": {
+        "titulo": "Comparar datos con moldes fijos",
+        "texto": "Para comparar datos el inglés usa moldes fijos. Cuanto más…, más…: the + comparativo, the + comparativo (The more you practise, the better you score); con menos funciona igual: the less …, the more …. El doble: twice as + adjetivo + as, nunca twice more. Mucho menos: not nearly as + adjetivo + as. Con diferencia: by far + superlativo. En cada molde el comparativo va justo después de the o de as."
+      },
+      "patron": {
+        "texto": "Cuatro moldes para comparar datos:",
+        "formula": [
+          {
+            "texto": "The more students practise, the higher their scores are.",
+            "nota": "proporcional: the + comparativo …, the + comparativo"
+          },
+          {
+            "texto": "Group A reads twice as long as Group B.",
+            "nota": "el doble: twice as + adjetivo + as"
+          },
+          {
+            "texto": "Group B is not nearly as active as Group A.",
+            "nota": "mucho menos: not nearly as + adjetivo + as"
+          },
+          {
+            "texto": "Class 3 has by far the highest scores.",
+            "nota": "con diferencia: by far + superlativo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The more you practise, better you score.",
+          "correcto": "The more you practise, the better you score.",
+          "explicacion": "Las dos partes necesitan the: the more …, the better …. Sin el segundo the la estructura queda incompleta."
+        },
+        {
+          "incorrecto": "Group A sleeps twice more than Group B.",
+          "correcto": "Group A sleeps twice as much as Group B.",
+          "explicacion": "El doble se forma con twice as + much/many/adjetivo + as; twice more no existe."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo comentan los resultados de su encuesta sobre hábitos de estudio.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Look at our study survey. The more students practise, the higher their scores are.",
+            "traduccion": "Mira nuestra encuesta de estudio. Cuanto más practican los alumnos, más altas son sus puntuaciones."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. Group A reads twice as long as Group B.",
+            "traduccion": "Sí. El grupo A lee el doble de tiempo que el grupo B."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "And Group B is not nearly as active as Group A.",
+            "traduccion": "Y el grupo B no es ni de lejos tan activo como el grupo A."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Class 3 has by far the highest scores.",
+            "traduccion": "La clase 3 tiene con diferencia las puntuaciones más altas."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué relación muestra la encuesta?",
+          "opciones": [
+            {
+              "es": "Más práctica, puntuaciones más altas."
+            },
+            {
+              "es": "Más práctica, puntuaciones más bajas."
+            },
+            {
+              "es": "Menos práctica, puntuaciones más altas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «the more students practise, the higher their scores are»: la práctica y las puntuaciones suben juntas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Molde",
+          "Significado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "the more …, the more …"
+            },
+            {
+              "texto": "cuanto más …, más …"
+            }
+          ],
+          [
+            {
+              "texto": "twice as … as …"
+            },
+            {
+              "texto": "el doble de … que …"
+            }
+          ],
+          [
+            {
+              "texto": "not nearly as … as …"
+            },
+            {
+              "texto": "ni de lejos tan … como …"
+            }
+          ],
+          [
+            {
+              "texto": "by far the + superlativo"
+            },
+            {
+              "texto": "con diferencia el más …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-83": {
+      "explicacion": {
+        "titulo": "Sugerir no es demostrar",
+        "texto": "Al leer un informe, separa lo que un estudio sugiere de lo que demuestra. Suggests, indicates o shows a link hablan de una relación posible; prove se reserva para pruebas muy fuertes, y con una sola encuesta casi siempre se niega: does not prove. Busca también los límites: una muestra pequeña o de un solo grupo, y otros factores posibles. Que dos cosas vayan juntas (un link) no significa que una cause la otra. Las palabras cautas más útiles son may, might y suggest."
+      },
+      "patron": {
+        "texto": "Conclusión prudente con su límite:",
+        "formula": [
+          {
+            "texto": "The study suggests that",
+            "nota": "verbo cauto: sugiere, no demuestra"
+          },
+          {
+            "texto": "students who sleep more get better marks,",
+            "nota": "el hallazgo: una relación"
+          },
+          {
+            "texto": "but it does not prove",
+            "nota": "el límite: no hay prueba"
+          },
+          {
+            "texto": "that sleep is the cause.",
+            "nota": "la causa sigue sin demostrarse"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The survey doesn't prove nothing.",
+          "correcto": "The survey doesn't prove anything.",
+          "explicacion": "El inglés no admite doble negación: con doesn't se usa anything, no nothing."
+        },
+        {
+          "incorrecto": "The sample was little: only thirty people answered.",
+          "correcto": "The sample was small: only thirty people answered.",
+          "explicacion": "El tamaño de una muestra se dice small. Little se usa con cantidades que no se cuentan."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos y Sara leen el resumen de un estudio sobre el desayuno.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "This report says students who eat breakfast get better marks.",
+            "traduccion": "Este informe dice que los estudiantes que desayunan sacan mejores notas."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It suggests a link, but it does not prove that breakfast is the cause.",
+            "traduccion": "Sugiere una relación, pero no demuestra que el desayuno sea la causa."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Why not?",
+            "traduccion": "¿Por qué no?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "The sample was small, only thirty participants, and all of them came from one school.",
+            "traduccion": "La muestra era pequeña, solo treinta participantes, y todos venían del mismo colegio."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "I see. There may be another factor.",
+            "traduccion": "Ya veo. Puede haber otro factor."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Sara, ¿por qué el informe no demuestra la causa?",
+          "opciones": [
+            {
+              "es": "La muestra era pequeña y de un solo colegio."
+            },
+            {
+              "es": "Las preguntas eran demasiado difíciles."
+            },
+            {
+              "es": "El informe es muy antiguo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara explica que la muestra era pequeña y que todos los participantes venían del mismo colegio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Fuerza de la afirmación"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "may / might"
+            },
+            {
+              "texto": "es posible"
+            }
+          ],
+          [
+            {
+              "texto": "suggests / indicates"
+            },
+            {
+              "texto": "sugiere una relación"
+            }
+          ],
+          [
+            {
+              "texto": "shows a link"
+            },
+            {
+              "texto": "hay relación, no causa"
+            }
+          ],
+          [
+            {
+              "texto": "proves"
+            },
+            {
+              "texto": "demuestra (muy fuerte)"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-84": {
+      "explicacion": {
+        "titulo": "Un informe breve en cinco pasos",
+        "texto": "Un informe breve sigue cinco pasos. 1) Pregunta y muestra: We asked fifty students… (asked no lleva to). 2) Resultados con proporción: nearly half, a third, the majority of. 3) Una comparación: twice as many … as …. 4) Una limitación: However, the main limitation is that …. 5) Una conclusión prudente: The results suggest that … may …, y more research is needed. Usa el pasado para lo que hicisteis (we asked) y el presente para los hallazgos (nearly half sleep)."
+      },
+      "patron": {
+        "texto": "Cinco pasos de un informe:",
+        "formula": [
+          {
+            "texto": "We asked fifty students about their sleep.",
+            "nota": "pregunta y muestra: asked + personas"
+          },
+          {
+            "texto": "Nearly half of the respondents sleep less than seven hours.",
+            "nota": "resultado con proporción"
+          },
+          {
+            "texto": "Twice as many girls as boys feel tired.",
+            "nota": "comparación entre grupos"
+          },
+          {
+            "texto": "However, the main limitation is the small sample.",
+            "nota": "limitación"
+          },
+          {
+            "texto": "The results suggest that late phone use may affect sleep.",
+            "nota": "conclusión prudente"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The half of the respondents sleep less than seven hours.",
+          "correcto": "Half of the respondents sleep less than seven hours.",
+          "explicacion": "Con half no se usa the: Half of the respondents …, o Nearly half of …."
+        },
+        {
+          "incorrecto": "We asked to fifty students about their sleep.",
+          "correcto": "We asked fifty students about their sleep.",
+          "explicacion": "Ask + personas va sin preposición: we asked fifty students. En español sí se dice «preguntamos a»."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom preparan el informe de su encuesta para el periódico del colegio.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Let's write our report. First, we asked fifty students about their sleep.",
+            "traduccion": "Vamos a escribir nuestro informe. Primero, preguntamos a cincuenta alumnos sobre su sueño."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Nearly half of the respondents sleep less than seven hours on school nights.",
+            "traduccion": "Casi la mitad de los encuestados duerme menos de siete horas en las noches de colegio."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. Now we need a limitation. All the respondents study at our school.",
+            "traduccion": "Bien. Ahora necesitamos una limitación. Todos los encuestados estudian en nuestro colegio."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Right. The results suggest that late phone use may affect sleep, but we need more research.",
+            "traduccion": "Cierto. Los resultados sugieren que usar el móvil tarde puede afectar al sueño, pero necesitamos más investigación."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué limitación reconocen Mia y Tom?",
+          "opciones": [
+            {
+              "es": "Todos los encuestados estudian en su colegio."
+            },
+            {
+              "es": "Solo respondieron chicos."
+            },
+            {
+              "es": "La encuesta fue demasiado larga."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice que todos los encuestados estudian en su colegio: la muestra viene de un único centro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Parte del informe",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Pregunta y muestra"
+            },
+            {
+              "texto": "We asked fifty students …"
+            }
+          ],
+          [
+            {
+              "texto": "Resultado"
+            },
+            {
+              "texto": "Nearly half of the respondents …"
+            }
+          ],
+          [
+            {
+              "texto": "Comparación"
+            },
+            {
+              "texto": "Twice as many … as …"
+            }
+          ],
+          [
+            {
+              "texto": "Limitación"
+            },
+            {
+              "texto": "However, the main limitation is …"
+            }
+          ],
+          [
+            {
+              "texto": "Conclusión"
+            },
+            {
+              "texto": "The results suggest that … may …"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-85": {
+      "explicacion": {
+        "titulo": "Presentar una minininvestigación",
+        "texto": "Una minipresentación tiene cuatro momentos. Abre con Today I will present the findings. Da los resultados con lo que ya practicaste: nearly half, twice as many … as …, the more …, the less …. Reconoce un límite (The sample may not be representative) y contesta las dudas con calma: That is a fair doubt, but the results only suggest a link. Cierra proponiendo el siguiente paso: Further research should include …. Usa el presente para los resultados y may o suggest para no afirmar más de lo que muestran los datos."
+      },
+      "patron": {
+        "texto": "Cinco momentos de una presentación:",
+        "formula": [
+          {
+            "texto": "Today I will present the findings of our investigation.",
+            "nota": "apertura"
+          },
+          {
+            "texto": "Nearly half of the respondents sleep less than seven hours.",
+            "nota": "resultado con proporción o comparativo"
+          },
+          {
+            "texto": "The sample may not be representative.",
+            "nota": "límite reconocido"
+          },
+          {
+            "texto": "That is a fair doubt, but the results only suggest a link.",
+            "nota": "respuesta a una duda del público"
+          },
+          {
+            "texto": "Further research should include more schools.",
+            "nota": "siguiente paso"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Our sample is not enough representative.",
+          "correcto": "Our sample is not representative enough.",
+          "explicacion": "Enough va detrás del adjetivo: representative enough. En español «suficientemente» va delante."
+        },
+        {
+          "incorrecto": "Is a fair doubt, because the sample was small.",
+          "correcto": "That is a fair doubt, because the sample was small.",
+          "explicacion": "En inglés el sujeto es obligatorio: That is … o It is …. No se puede empezar con is, como en español."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana presenta su minininvestigación a la clase y Tom le hace preguntas.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Today I will present the findings of our investigation. Nearly half of the respondents sleep less than seven hours.",
+            "traduccion": "Hoy presentaré los resultados de nuestra investigación. Casi la mitad de los encuestados duerme menos de siete horas."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Is your sample representative?",
+            "traduccion": "¿Vuestra muestra es representativa?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "That is a fair doubt. It was small, so further research should include more schools.",
+            "traduccion": "Es una duda justa. Era pequeña, así que futuras investigaciones deberían incluir más colegios."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Do the results prove that phones make students tired?",
+            "traduccion": "¿Demuestran los resultados que los móviles cansan a los alumnos?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "No. They only suggest a link.",
+            "traduccion": "No. Solo sugieren una relación."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Ana, ¿qué hace falta investigar después?",
+          "opciones": [
+            {
+              "es": "Incluir alumnos de más colegios."
+            },
+            {
+              "es": "Preguntar solo a los profesores."
+            },
+            {
+              "es": "Repetir la encuesta con los mismos alumnos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que futuras investigaciones deberían incluir más colegios, porque su muestra era pequeña."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Momento",
+          "Frase útil"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Today I will present the findings …"
+            }
+          ],
+          [
+            {
+              "texto": "Resultados"
+            },
+            {
+              "texto": "Nearly half …, twice as many … as …"
+            }
+          ],
+          [
+            {
+              "texto": "Límite"
+            },
+            {
+              "texto": "The sample may not be representative."
+            }
+          ],
+          [
+            {
+              "texto": "Duda del público"
+            },
+            {
+              "texto": "That is a fair doubt, but …"
+            }
+          ],
+          [
+            {
+              "texto": "Siguiente paso"
+            },
+            {
+              "texto": "Further research should include …"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

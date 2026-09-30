@@ -1,0 +1,810 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-51",
+  "title": {
+    "en": "Signals for the floor",
+    "es": "Señales para tomar la palabra"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer y usar señales para pedir, mantener y ceder la palabra en un debate de vecinos."
+    ]
+  },
+  "concepts": [
+    "n7-advanced-debate-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n7.class-50"
+  ],
+  "usesVocabulary": [
+    "floor",
+    "interrupt",
+    "point",
+    "finish",
+    "add",
+    "chair",
+    "briefly",
+    "pass"
+  ],
+  "usesPatterns": [
+    "n7-advanced-debate-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "floor",
+      "es": "turno de palabra"
+    },
+    {
+      "en": "interrupt",
+      "es": "interrumpir"
+    },
+    {
+      "en": "point",
+      "es": "punto, idea"
+    },
+    {
+      "en": "finish",
+      "es": "terminar"
+    },
+    {
+      "en": "add",
+      "es": "añadir"
+    },
+    {
+      "en": "chair",
+      "es": "moderador, moderadora"
+    },
+    {
+      "en": "briefly",
+      "es": "brevemente"
+    },
+    {
+      "en": "pass",
+      "es": "ceder, pasar"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-51.t01",
+      "en": "May I have the floor for a moment?",
+      "es": "¿Puedo tomar la palabra un momento?",
+      "explanationEs": "May I have the floor pide el turno; es muy educado en reuniones.",
+      "segments": [
+        "May I have the",
+        "floor for a moment?"
+      ],
+      "audioText": "May I have the floor for a moment?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-advanced-debate-1"
+    },
+    {
+      "id": "en.n7.class-51.t02",
+      "en": "Sorry to interrupt, but could I add something?",
+      "es": "Perdona que te interrumpa, pero ¿puedo añadir algo?",
+      "explanationEs": "Sorry to interrupt suaviza la interrupción; después se pide permiso con could I.",
+      "segments": [
+        "Sorry to interrupt, but",
+        "could I add something?"
+      ],
+      "audioText": "Sorry to interrupt, but could I add something?",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-advanced-debate-1"
+    },
+    {
+      "id": "en.n7.class-51.t03",
+      "en": "Let me finish my point, please.",
+      "es": "Déjame terminar mi idea, por favor.",
+      "explanationEs": "Let me + verbo base pide seguir hablando sin que te corten.",
+      "segments": [
+        "Let me finish",
+        "my point, please."
+      ],
+      "audioText": "Let me finish my point, please.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-advanced-debate-1"
+    },
+    {
+      "id": "en.n7.class-51.t04",
+      "en": "Thank you, Ana. I will pass the floor to Tom.",
+      "es": "Gracias, Ana. Le cedo la palabra a Tom.",
+      "explanationEs": "Pass the floor to + persona cede el turno a otra persona.",
+      "segments": [
+        "Thank you, Ana. I will",
+        "pass the floor to Tom."
+      ],
+      "audioText": "Thank you, Ana. I will pass the floor to Tom.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-advanced-debate-1"
+    },
+    {
+      "id": "en.n7.class-51.t05",
+      "en": "The chair asks everyone to speak briefly.",
+      "es": "El moderador pide a todos que hablen brevemente.",
+      "explanationEs": "La chair dirige el debate; ask + persona + to + verbo base.",
+      "segments": [
+        "The chair asks everyone",
+        "to speak briefly."
+      ],
+      "audioText": "The chair asks everyone to speak briefly.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-advanced-debate-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c51.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Quieres hablar en la asamblea. ¿Qué dices para pedir el turno?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "May I have the floor for a moment?"
+          },
+          {
+            "text": "Let me finish my point, please."
+          },
+          {
+            "text": "I will pass the floor to Tom."
+          }
+        ],
+        "teaches": [
+          "n7-advanced-debate-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.pg01.seed-0",
+          "feedback": {
+            "es": "Pedir el turno se hace con may I have the floor; las otras frases mantienen o ceden el turno."
+          },
+          "hint": {
+            "es": "Pedir el turno empieza con una petición educada: may I…"
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:65b7fe4d554f4978011600d1b12f292ce00dc3c716314965ffb0dab4ea91b145"
+      },
+      {
+        "id": "en.n7.c51.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Gracias, Mia. Le cedo la palabra a Carlos.»"
+        },
+        "answer": {
+          "text": "pass",
+          "accepted": [
+            "pass"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-advanced-debate-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.pg02.seed-0",
+          "feedback": {
+            "es": "Para ceder el turno a otra persona se dice pass the floor to + nombre."
+          },
+          "hint": {
+            "es": "Mira la frase de la clase en la que la moderadora cede la palabra."
+          },
+          "text": "Thank you, Mia. I will ___ the floor to Carlos."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ceb557470e5702b16745d068f6eeee81b8afc23dc0cd1d1258a753fd511f5597"
+      },
+      {
+        "id": "en.n7.c51.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Déjame añadir un punto, por favor.»"
+        },
+        "answer": {
+          "text": "Let me add one point please",
+          "tokens": [
+            "Let",
+            "me",
+            "add",
+            "one",
+            "point",
+            "please"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-advanced-debate-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.pg03.seed-0",
+          "feedback": {
+            "es": "Let me va seguido de verbo base (add) y please cierra la petición con cortesía."
+          },
+          "hint": {
+            "es": "Let me se une directamente al verbo base, sin to."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f4b22e6d922c302f5097db57dbf2096505eccc3a23f32623e0d35af521aee30a"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c51.p01",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada señal con su función en el debate."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "May I have the floor?",
+              {
+                "es": "Pedir el turno"
+              }
+            ],
+            [
+              "Sorry to interrupt, but…",
+              {
+                "es": "Interrumpir con cortesía"
+              }
+            ],
+            [
+              "Let me finish my point.",
+              {
+                "es": "Mantener el turno"
+              }
+            ],
+            [
+              "I will pass the floor to Sara.",
+              {
+                "es": "Ceder la palabra"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.p01.seed-0",
+          "feedback": {
+            "es": "Cada señal tiene una función: pedir, interrumpir, mantener o ceder el turno."
+          },
+          "pairs": [
+            [
+              "May I have the floor?",
+              {
+                "es": "Pedir el turno"
+              }
+            ],
+            [
+              "Sorry to interrupt, but…",
+              {
+                "es": "Interrumpir con cortesía"
+              }
+            ],
+            [
+              "Let me finish my point.",
+              {
+                "es": "Mantener el turno"
+              }
+            ],
+            [
+              "I will pass the floor to Sara.",
+              {
+                "es": "Ceder la palabra"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b4a1ab589adf057abd1de988726bd137c9875138222a5cc9e6d9744674056ea8"
+      },
+      {
+        "id": "en.n7.c51.p02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace la persona que habla."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She gives the turn to another neighbour."
+          },
+          {
+            "text": "She breaks into the talk politely to add an idea."
+          },
+          {
+            "text": "She asks for more time to finish."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.p02.seed-0",
+          "feedback": {
+            "es": "Sorry to interrupt, but could I… es una interrupción cortés para añadir algo; no cede ni mantiene el turno."
+          },
+          "audio": "Sorry to interrupt, but could I say something about the parking?",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:b3eeaaf9994ba187571b60c14cfd0a0f5e9d4da996c38c2ac5fe55270c65630a"
+      },
+      {
+        "id": "en.n7.c51.p03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa tres señales de debate."
+        },
+        "answer": {
+          "text": "May | interrupt | finish",
+          "accepted": [
+            "May | interrupt | finish"
+          ],
+          "parts": [
+            {
+              "text": "May",
+              "accepted": [
+                "May",
+                "Can",
+                "Could"
+              ]
+            },
+            {
+              "text": "interrupt",
+              "accepted": [
+                "interrupt"
+              ]
+            },
+            {
+              "text": "finish",
+              "accepted": [
+                "finish"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.p03.seed-0",
+          "feedback": {
+            "es": "May I pide turno, sorry to interrupt suaviza la interrupción y let me finish mantiene el turno."
+          },
+          "sentences": [
+            "___ I have the floor for a moment?",
+            "Sorry to ___, but could I add something?",
+            "Let me ___ my point, please."
+          ],
+          "scoring": {
+            "parts": 3,
+            "minimumCorrect": 3
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:245e846cdf0d75a8334712cde16fa78b52cd42790640b5e2bed0f4f7b7ee466b"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c51.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Tom habla y Mia lo corta. ¿Qué debe decir Tom para seguir?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "May I have the floor, please?"
+          },
+          {
+            "text": "I will pass the floor to you."
+          },
+          {
+            "text": "Let me finish my point, please."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.e01.seed-0",
+          "feedback": {
+            "es": "Tom ya tiene el turno: lo mantiene con let me finish; pedir o ceder el turno no encaja."
+          },
+          "text": "Tom: «The garden needs water every day, so…»  Mia: «But the water is expensive!»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f5cfd756ca43e9faef7e02995c63d8fa625766a6294d8a7ae68cd29673f058f6"
+      },
+      {
+        "id": "en.n7.c51.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige quién habla después."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Mia"
+          },
+          {
+            "text": "Leo"
+          },
+          {
+            "text": "Sara"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.e02.seed-0",
+          "feedback": {
+            "es": "La moderadora cede el turno a Mia ahora; Leo ya habló y Sara hablará después."
+          },
+          "audio": "Thank you, Leo. I will pass the floor to Mia now, and Sara will speak after her.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e8d6102f2449a8ae7dc7993be7769b4f82e0e2e8d5fa469c1f74deedd2d322b6"
+      },
+      {
+        "id": "en.n7.c51.e03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «¿Podría añadir un punto más, brevemente?»"
+        },
+        "answer": {
+          "text": "Could I briefly add one more point",
+          "tokens": [
+            "Could",
+            "I",
+            "briefly",
+            "add",
+            "one",
+            "more",
+            "point"
+          ],
+          "accepted": [
+            "Could I briefly add one more point",
+            "Could I add one more point briefly"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.e03.seed-0",
+          "feedback": {
+            "es": "Could I abre la petición y briefly matiza cómo quieres hablar; add va en forma base."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:db1f84ac2b078b88b4f3bd0ae4311c0144240dd9800c82e4461dec800dc48264"
+      },
+      {
+        "id": "en.n7.c51.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Escribe una frase corta para interrumpir con cortesía y pedir permiso para añadir algo."
+        },
+        "answer": {
+          "text": "Sorry to interrupt, but could I add something?",
+          "accepted": [
+            "Sorry to interrupt, but could I add something?",
+            "Excuse me, may I add something?",
+            "Sorry to interrupt, but may I add a point?"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.e04.seed-0",
+          "feedback": {
+            "es": "Una interrupción cortés combina una señal (sorry to interrupt) y un permiso (could I o may I)."
+          },
+          "text": "Alguien está hablando en la asamblea y tú quieres añadir una idea."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:02eaa06882c505a9aa4a6b8f91fda6f8ab2322c72416a88b645d4e95b60828ed"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c51.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "La moderadora cierra la ronda de Tom. ¿Qué frase cede la palabra?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Sorry to interrupt, but could I speak?"
+          },
+          {
+            "text": "Thank you, Tom. Now I pass the floor to Sara."
+          },
+          {
+            "text": "May I have the floor, please?"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.r01.seed-0",
+          "feedback": {
+            "es": "Ceder la palabra es decir a quién le toca: pass the floor to Sara."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:90463a51eca0ddb3825b9bfbe708ac909f424d1db7317fe94f1425716049c028"
+      },
+      {
+        "id": "en.n7.c51.r02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «La moderadora pide a todos que hablen brevemente.»"
+        },
+        "answer": {
+          "text": "briefly",
+          "accepted": [
+            "briefly"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.r02.seed-0",
+          "feedback": {
+            "es": "Briefly es el adverbio que significa «brevemente» y va al final de la frase."
+          },
+          "text": "The chair asks everyone to speak ___."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4ceb357d9f99cd15c5fe7cfece5418bc3a4d4193daeff57f173db136dd352930"
+      },
+      {
+        "id": "en.n7.c51.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué quiere la hablante."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "To give the floor to Tom."
+          },
+          {
+            "text": "To ask Tom a question."
+          },
+          {
+            "text": "To keep speaking a little longer."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-advanced-debate-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c51.r03.seed-0",
+          "feedback": {
+            "es": "Let me finish my point first significa que quiere mantener el turno un poco más."
+          },
+          "audio": "Sorry, Tom, let me finish my point first. I only need one more minute.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:1bd7a389442ee990438ec4306b5b68dddcdd996b0c102d4e842a978f7a16bee9"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c51.e01": {
+      "reteach": "en.n7.class-51.t01",
+      "review": "en.n7.c51.r01"
+    },
+    "en.n7.c51.e02": {
+      "reteach": "en.n7.class-51.t02",
+      "review": "en.n7.c51.r02"
+    },
+    "en.n7.c51.e03": {
+      "reteach": "en.n7.class-51.t03",
+      "review": "en.n7.c51.r03"
+    },
+    "en.n7.c51.e04": {
+      "reteach": "en.n7.class-51.t04",
+      "review": "en.n7.c51.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

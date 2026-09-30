@@ -1,0 +1,814 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 6,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "form",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n6.class-92",
+  "title": {
+    "en": "Fix the paragraph",
+    "es": "Corregir el párrafo"
+  },
+  "objectives": {
+    "es": [
+      "Corregir en un párrafo errores de inversión, condicional, deducción, reporte y estructuras de rumor aplicando cinco controles de revisión."
+    ]
+  },
+  "concepts": [
+    "n6-integrated-review-and-storytelling-2"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escritura"
+  ],
+  "prerequisites": [
+    "en.n6.class-91"
+  ],
+  "usesVocabulary": [
+    "crowd",
+    "mayor",
+    "resigned",
+    "delay",
+    "exhausted",
+    "booked",
+    "taxi",
+    "queue"
+  ],
+  "usesPatterns": [
+    "n6-integrated-review-and-storytelling-2"
+  ],
+  "vocabulary": [
+    {
+      "en": "crowd",
+      "es": "multitud"
+    },
+    {
+      "en": "mayor",
+      "es": "alcalde"
+    },
+    {
+      "en": "resigned",
+      "es": "dimitió"
+    },
+    {
+      "en": "delay",
+      "es": "retraso"
+    },
+    {
+      "en": "exhausted",
+      "es": "agotado"
+    },
+    {
+      "en": "booked",
+      "es": "reservó"
+    },
+    {
+      "en": "taxi",
+      "es": "taxi (coche con conductor)"
+    },
+    {
+      "en": "queue",
+      "es": "cola, fila"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n6.class-92.t01",
+      "en": "Never had she seen such a crowd at the station.",
+      "es": "Nunca había visto tanta gente en la estación.",
+      "explanationEs": "Tras never, el auxiliar va antes del sujeto: had she seen, no she had seen.",
+      "segments": [
+        "Never had she seen such",
+        "a crowd at the station."
+      ],
+      "audioText": "Never had she seen such a crowd at the station.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-integrated-review-and-storytelling-2"
+    },
+    {
+      "id": "en.n6.class-92.t02",
+      "en": "The mayor is said to have resigned last night.",
+      "es": "Se dice que el alcalde dimitió anoche.",
+      "explanationEs": "Is said to have + participio cuenta un rumor sobre algo pasado.",
+      "segments": [
+        "The mayor is said to",
+        "have resigned last night."
+      ],
+      "audioText": "The mayor is said to have resigned last night.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-integrated-review-and-storytelling-2"
+    },
+    {
+      "id": "en.n6.class-92.t03",
+      "en": "If I had known about the delay, I would have taken a taxi.",
+      "es": "Si hubiera sabido lo del retraso, habría tomado un taxi.",
+      "explanationEs": "If + had + participio; would have va solo en la otra parte de la frase.",
+      "segments": [
+        "If I had known about the delay,",
+        "I would have taken a taxi."
+      ],
+      "audioText": "If I had known about the delay, I would have taken a taxi.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-integrated-review-and-storytelling-2"
+    },
+    {
+      "id": "en.n6.class-92.t04",
+      "en": "She must have been exhausted after the long flight.",
+      "es": "Seguro que estaba agotada después del largo vuelo.",
+      "explanationEs": "Must have been + adjetivo deduce cómo estaba alguien en el pasado.",
+      "segments": [
+        "She must have been exhausted",
+        "after the long flight."
+      ],
+      "audioText": "She must have been exhausted after the long flight.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-integrated-review-and-storytelling-2"
+    },
+    {
+      "id": "en.n6.class-92.t05",
+      "en": "He told me that he had already booked a taxi.",
+      "es": "Me dijo que ya había reservado un taxi.",
+      "explanationEs": "Al reportar, el pasado retrocede un paso: had booked. Con told hace falta decir a quién (me).",
+      "segments": [
+        "He told me that he",
+        "had already booked a taxi."
+      ],
+      "audioText": "He told me that he had already booked a taxi.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n6-integrated-review-and-storytelling-2"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n6.c92.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué frase corrige el error de inversión?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Hardly she sat down when the phone rang."
+          },
+          {
+            "text": "Hardly had sat she down when the phone rang."
+          },
+          {
+            "text": "Hardly had she sat down when the phone rang."
+          }
+        ],
+        "teaches": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.pg01.seed-0",
+          "feedback": {
+            "es": "Tras hardly el auxiliar had va delante del sujeto: Hardly had she sat down."
+          },
+          "hint": {
+            "es": "Tras hardly, el auxiliar had va antes del sujeto."
+          },
+          "text": "Hardly she had sat down when the phone rang."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3ca70d27bc3895395fa9fca457418e815ce7f44e2bf2edfced7ab1e5a2fa2ee5"
+      },
+      {
+        "id": "en.n6.c92.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Si hubiéramos sabido lo de la lluvia, habríamos traído paraguas.»"
+        },
+        "answer": {
+          "text": "had",
+          "accepted": [
+            "had"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.pg02.seed-0",
+          "feedback": {
+            "es": "If + had + participio es la forma del pasado irreal en la parte del if."
+          },
+          "hint": {
+            "es": "En la parte del if del pasado irreal va pasado perfecto: had + participio."
+          },
+          "text": "If we ___ known about the rain, we would have brought umbrellas."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:06c7668d9c5aac5aa57bca99795ec4cb81ce48461982934224ab1b66ebe5633c"
+      },
+      {
+        "id": "en.n6.c92.pg03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Se dice que el jefe se fue a las seis.»"
+        },
+        "answer": {
+          "text": "The manager is said to have left at six",
+          "tokens": [
+            "The",
+            "manager",
+            "is",
+            "said",
+            "to",
+            "have",
+            "left",
+            "at",
+            "six"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.pg03.seed-0",
+          "feedback": {
+            "es": "Is said to have + participio cuenta un rumor sobre algo que ya pasó."
+          },
+          "hint": {
+            "es": "Empieza con el sujeto y sigue con is said to have + participio."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:4623a3f5cee5bd473f0af7557bfc44139d830dcd79244fa3727fbfbc8745e2d3"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n6.c92.p01",
+        "format": "escribir",
+        "prompt": {
+          "es": "Corrige la frase con inversión."
+        },
+        "answer": {
+          "text": "Never had I felt so tired after a match.",
+          "accepted": [
+            "Never had I felt so tired after a match.",
+            "Never before had I felt so tired after a match."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.p01.seed-0",
+          "feedback": {
+            "es": "Con never al inicio, el auxiliar had pasa delante del sujeto: Never had I felt."
+          },
+          "text": "Never I had felt so tired after a match."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:60e845d4a4ec4783f13c970b4c82b1628b0549980a584b54b7ac8fe74be21e28"
+      },
+      {
+        "id": "en.n6.c92.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada frase con el punto de revisión que aplica."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Never had we seen such a long queue.",
+              {
+                "es": "Inversión tras never"
+              }
+            ],
+            [
+              "The pilot is said to have left early.",
+              {
+                "es": "Rumor sobre el pasado"
+              }
+            ],
+            [
+              "If she had known, she would have come.",
+              {
+                "es": "Condicional del pasado"
+              }
+            ],
+            [
+              "Sara told me that she had lost her bag.",
+              {
+                "es": "Reporte con retroceso"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.p02.seed-0",
+          "feedback": {
+            "es": "Cada frase muestra un control: inversión tras never, rumor con is said to have, condicional del pasado y reporte con retroceso."
+          },
+          "pairs": [
+            [
+              "Never had we seen such a long queue.",
+              {
+                "es": "Inversión tras never"
+              }
+            ],
+            [
+              "The pilot is said to have left early.",
+              {
+                "es": "Rumor sobre el pasado"
+              }
+            ],
+            [
+              "If she had known, she would have come.",
+              {
+                "es": "Condicional del pasado"
+              }
+            ],
+            [
+              "Sara told me that she had lost her bag.",
+              {
+                "es": "Reporte con retroceso"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:9ab4e493ef1a8a1841af546106e59b0f12959674da20b551c6ce8b991cfb1c2e"
+      },
+      {
+        "id": "en.n6.c92.p03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Elige el reporte correcto de lo que dijo Mia."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Mia told me that she had already booked the hotel."
+          },
+          {
+            "text": "Mia said me that she had already booked the hotel."
+          },
+          {
+            "text": "Mia told that she had already booked the hotel."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.p03.seed-0",
+          "feedback": {
+            "es": "Con told hace falta decir a quién, y el pasado retrocede un paso: had already booked."
+          },
+          "text": "Mia te dijo ayer: «Ya he reservado el hotel». Ahora se lo cuentas a otra persona."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:07da12db755e6296df1f9b32fc3f78299ebb5b285374f48722df7ef4255226be"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n6.c92.e01",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa las dos frases del párrafo de Leo."
+        },
+        "answer": {
+          "text": "than | to",
+          "accepted": [
+            "than | to"
+          ],
+          "parts": [
+            {
+              "text": "than",
+              "accepted": [
+                "than"
+              ]
+            },
+            {
+              "text": "to",
+              "accepted": [
+                "to"
+              ]
+            }
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.e01.seed-0",
+          "feedback": {
+            "es": "No sooner se completa con than, y el rumor sobre un hecho pasado usa is said to have + participio."
+          },
+          "sentences": [
+            "No sooner had we arrived ___ it started to rain.",
+            "The mayor is said ___ have resigned last night."
+          ],
+          "scoring": {
+            "parts": 2,
+            "minimumCorrect": 2
+          },
+          "text": "Traducciones: «Apenas habíamos llegado cuando empezó a llover.» / «Se dice que el alcalde dimitió anoche.»"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:6b73cbc8238810c987fa35bf9df3bd56035ff4a4d73e0c3299b61b2a5b343020"
+      },
+      {
+        "id": "en.n6.c92.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué habría pasado con más información."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Sara knew about the traffic and left early."
+          },
+          {
+            "text": "Sara left late because she did not know about the traffic."
+          },
+          {
+            "text": "Sara will leave earlier next time."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.e02.seed-0",
+          "feedback": {
+            "es": "If + had + participio describe el pasado irreal: Sara no sabía del tráfico y salió tarde."
+          },
+          "audio": "If Sara had known about the traffic, she would have left earlier.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:752bb47de3d15287fba1b17a6e9d3b1360d5b0e886a6f59cb95e7af497f8ac93"
+      },
+      {
+        "id": "en.n6.c92.e03",
+        "format": "elegir",
+        "prompt": {
+          "es": "Señala el reporte bien formado."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "My manager said us that the shop had closed."
+          },
+          {
+            "text": "My manager told that the shop had closed."
+          },
+          {
+            "text": "My manager told us that the shop had closed."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.e03.seed-0",
+          "feedback": {
+            "es": "Told necesita su complemento (us) y el pasado retrocede a had lost; said us y told that son incorrectos."
+          },
+          "text": "Tu jefe os dijo: «La tienda ha cerrado». Ahora se lo cuentas a un compañero."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:91c6332d924f017d5ff1bfe3b6f7f2bd93317407489166511fb5542b714f2b33"
+      },
+      {
+        "id": "en.n6.c92.e04",
+        "format": "escribir",
+        "prompt": {
+          "es": "Reescribe el párrafo con los dos errores corregidos."
+        },
+        "answer": {
+          "text": "If I had known about the crowd, I would have stayed home. Never had I seen so many people.",
+          "accepted": [
+            "If I had known about the crowd, I would have stayed home. Never had I seen so many people.",
+            "If I had known about the crowd, I would have stayed at home. Never before had I seen so many people."
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.e04.seed-0",
+          "feedback": {
+            "es": "Se corrigen dos puntos: if + had + participio en vez de would have, e inversión con had tras never."
+          },
+          "text": "If I would have known about the crowd, I would have stayed home. Never I had seen so many people.",
+          "scoring": {
+            "wordRange": [
+              15,
+              30
+            ],
+            "evidenceGroups": [
+              [
+                "If I had known",
+                "If I'd known"
+              ],
+              [
+                "Never had I seen",
+                "Never before had I seen"
+              ],
+              [
+                "would have stayed"
+              ]
+            ]
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e7917429ab4cc3b63dcc6d9bd95806477562f115c7d4993a4058f8dfe3a09cc4"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n6.c92.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué deducción sobre el pasado es correcta?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "She must have lost her phone."
+          },
+          {
+            "text": "She must lose her phone."
+          },
+          {
+            "text": "She must has lost her phone."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.r01.seed-0",
+          "feedback": {
+            "es": "Must have + participio deduce un hecho pasado; las otras opciones mezclan el modal con un verbo mal formado."
+          },
+          "text": "Sara no contesta a los mensajes desde ayer. Estás casi seguro de que perdió el móvil."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:ede47ee3af060ca76222d386e0432a1cad6d6f06c38df9544ce70959f4e7d80f"
+      },
+      {
+        "id": "en.n6.c92.r02",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Nunca había visto un cielo tan rojo.»"
+        },
+        "answer": {
+          "text": "Never had I seen such a red sky",
+          "tokens": [
+            "Never",
+            "had",
+            "I",
+            "seen",
+            "such",
+            "a",
+            "red",
+            "sky"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.r02.seed-0",
+          "feedback": {
+            "es": "La inversión con never pone had delante del sujeto."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:78414afc9e99cc28e609011dd80cc2303781f2c18eff7422a271535a5bdc2ff2"
+      },
+      {
+        "id": "en.n6.c92.r03",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué ocurrió primero."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "The flight was cancelled after the speaker arrived."
+          },
+          {
+            "text": "The flight was cancelled before the speaker arrived."
+          },
+          {
+            "text": "The speaker cancelled the flight."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n6-integrated-review-and-storytelling-2"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n6.c92.r03.seed-0",
+          "feedback": {
+            "es": "Had been cancelled marca un hecho anterior: el vuelo ya estaba cancelado antes de llegar al aeropuerto."
+          },
+          "audio": "When I got to the airport, they told me that the flight had been cancelled.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:34d8902d0c96312e980784923887f8ae34d0acfc4126aae0b3d43f692777a1cf"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n6.c92.e01": {
+      "reteach": "en.n6.class-92.t01",
+      "review": "en.n6.c92.r01"
+    },
+    "en.n6.c92.e02": {
+      "reteach": "en.n6.class-92.t02",
+      "review": "en.n6.c92.r02"
+    },
+    "en.n6.c92.e03": {
+      "reteach": "en.n6.class-92.t03",
+      "review": "en.n6.c92.r03"
+    },
+    "en.n6.c92.e04": {
+      "reteach": "en.n6.class-92.t04",
+      "review": "en.n6.c92.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

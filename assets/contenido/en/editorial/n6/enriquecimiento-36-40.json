@@ -1,0 +1,602 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 36,
+    "end": 40
+  },
+  "classes": {
+    "en.n6.class-36": {
+      "explicacion": {
+        "titulo": "Suavizar sin cambiar el mensaje",
+        "texto": "Entre personas que conviven, una queja o un rechazo directo suena brusco. En inglés se suaviza con matizadores: seems o seems to be («parece»), tend to («sueles», sin acusar), a bit + adjetivo («un poco»), I'd say («yo diría»), I'm afraid («me temo») y perhaps («quizá»). El mensaje es el mismo, pero el tono es más amable. Ojo: I'm afraid no habla de miedo, y a bit no quiere decir que el problema sea pequeño."
+      },
+      "patron": {
+        "texto": "Matizador + mensaje:",
+        "formula": [
+          {
+            "texto": "The music seems",
+            "nota": "seems: una observación prudente en vez de «es»"
+          },
+          {
+            "texto": "a bit",
+            "nota": "a bit: suaviza un adjetivo negativo"
+          },
+          {
+            "texto": "loud tonight.",
+            "nota": "el mensaje: lo que te molesta"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I have fear that I can't lend you my laptop.",
+          "correcto": "I'm afraid I can't lend you my laptop tonight.",
+          "explicacion": "«Me temo que» se dice I'm afraid; «tener miedo» no se traduce así aquí."
+        },
+        {
+          "incorrecto": "You tend to leaving the dishes in the sink.",
+          "correcto": "You tend to leave the dishes in the sink.",
+          "explicacion": "Tend va con to + verbo base, nunca con -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom comparten piso y ella habla con él sobre la música.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, the music seems a bit loud tonight.",
+            "traduccion": "Tom, la música parece un poco alta esta noche."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Oh, sorry! Is it a problem?",
+            "traduccion": "¡Uy, perdona! ¿Es un problema?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'd say it is, after ten. Perhaps you could turn it down then?",
+            "traduccion": "Yo diría que sí, pasadas las diez. ¿Quizá podrías bajarla entonces?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Of course. Thanks for telling me.",
+            "traduccion": "Claro. Gracias por decírmelo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué le pide Mia a Tom en realidad?",
+          "opciones": [
+            {
+              "es": "Que baje la música pasadas las diez."
+            },
+            {
+              "es": "Que apague la música toda la noche."
+            },
+            {
+              "es": "Que se vaya del piso esta noche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia suaviza con «seems a bit loud» y «perhaps you could turn it down»: pide bajar la música pasadas las diez, no apagarla."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Directo",
+          "Suavizado"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "The music is too loud."
+            },
+            {
+              "texto": "The music seems a bit loud."
+            }
+          ],
+          [
+            {
+              "texto": "You always leave the dishes."
+            },
+            {
+              "texto": "You tend to leave the dishes."
+            }
+          ],
+          [
+            {
+              "texto": "No, I can't lend it."
+            },
+            {
+              "texto": "I'm afraid I can't lend it."
+            }
+          ],
+          [
+            {
+              "texto": "We must clean the kitchen."
+            },
+            {
+              "texto": "Perhaps we could clean the kitchen."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-37": {
+      "explicacion": {
+        "titulo": "Preguntas negativas y pasado tentativo",
+        "texto": "Las preguntas negativas (wouldn't it be better…?, shouldn't we…?, couldn't you…?) no son quejas: proponen algo con tacto y esperan un «sí». Después de wouldn't it be better if va pasado simple (if we shared), aunque hables del futuro. El pasado tentativo (I was wondering if…, I was hoping…) aleja la petición y la hace más educada; después va could o would, no can ni will. Ojo: en español se omite el sujeto, pero en inglés hace falta it en wouldn't it be…?"
+      },
+      "patron": {
+        "texto": "Pregunta negativa o pasado tentativo + propuesta:",
+        "formula": [
+          {
+            "texto": "Wouldn't it be better",
+            "nota": "pregunta negativa: sugerencia amable, con it"
+          },
+          {
+            "texto": "if we shared",
+            "nota": "if + pasado simple, sin will ni would"
+          },
+          {
+            "texto": "the cleaning?",
+            "nota": "lo que propones"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Wouldn't it be better if we will share the cleaning?",
+          "correcto": "Wouldn't it be better if we shared the cleaning?",
+          "explicacion": "Después de if no se usa will: va pasado simple, aunque hables de algo futuro."
+        },
+        {
+          "incorrecto": "I was wondering if you can lend me your charger.",
+          "correcto": "I was wondering if you could lend me your charger.",
+          "explicacion": "Con I was wondering/hoping el verbo de la petición también retrocede: could, no can."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Carlos comparten piso y hablan de los días de limpieza.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "Carlos, I was wondering if we could change the cleaning days.",
+            "traduccion": "Carlos, me preguntaba si podríamos cambiar los días de limpieza."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Sure. What is the problem?",
+            "traduccion": "Claro. ¿Cuál es el problema?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Saturday is difficult for me. Wouldn't it be better if we cleaned on Sunday?",
+            "traduccion": "El sábado me viene mal. ¿No sería mejor que limpiáramos el domingo?"
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Shouldn't we ask Mia too?",
+            "traduccion": "¿No deberíamos preguntarle también a Mia?"
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Good idea. I was hoping she could come on Sunday as well.",
+            "traduccion": "Buena idea. Esperaba que ella pudiera venir el domingo también."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué propone Ana?",
+          "opciones": [
+            {
+              "es": "Limpiar el domingo en lugar del sábado."
+            },
+            {
+              "es": "No limpiar nunca más el piso."
+            },
+            {
+              "es": "Hablar con el casero el sábado."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «wouldn't it be better if we cleaned on Sunday?»: propone pasar la limpieza del sábado al domingo."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Directo",
+          "Con tacto"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Share the cleaning."
+            },
+            {
+              "texto": "Wouldn't it be better if we shared the cleaning?"
+            }
+          ],
+          [
+            {
+              "texto": "Talk to the landlord."
+            },
+            {
+              "texto": "Shouldn't we talk to the landlord first?"
+            }
+          ],
+          [
+            {
+              "texto": "Lend me your charger."
+            },
+            {
+              "texto": "I was wondering if you could lend me your charger."
+            }
+          ],
+          [
+            {
+              "texto": "I want to change the days."
+            },
+            {
+              "texto": "I was hoping we could change the days."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-38": {
+      "explicacion": {
+        "titulo": "Qué quieren decir en realidad",
+        "texto": "En inglés, un «no» directo suena brusco, así que muchas veces se dice con otras palabras. That sounds great o I'd love to aceptan. I'm not sure… o It's possible, but… expresan duda o un rechazo suave. That's interesting, but… y I'm afraid… rechazan con cortesía. Let me think about it pide tiempo. Para interpretar el mensaje, busca la expresión que lo revela y fíjate en el but: lo importante suele venir después."
+      },
+      "patron": {
+        "texto": "Expresión suave + intención real:",
+        "formula": [
+          {
+            "texto": "That's interesting, but…",
+            "nota": "concede y rechaza con cortesía"
+          },
+          {
+            "texto": "I'm not sure that…",
+            "nota": "duda o rechazo suave"
+          },
+          {
+            "texto": "Let me think about it.",
+            "nota": "pide tiempo para decidir"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "That sounds like great.",
+          "correcto": "That sounds great.",
+          "explicacion": "Con sounds + adjetivo no se usa like; like va con un sustantivo: it sounds like a plan."
+        },
+        {
+          "incorrecto": "Honestly, I need some time for think about it.",
+          "correcto": "Honestly, I need some time to think about it.",
+          "explicacion": "Para expresar finalidad con un verbo se usa to + verbo base, no for + verbo."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom le propone a Sara una fiesta en su piso.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Sara, what about a party in our flat on Friday?",
+            "traduccion": "Sara, ¿qué tal una fiesta en nuestro piso el viernes?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "Honestly, I'm not sure that's the best idea.",
+            "traduccion": "Sinceramente, no estoy segura de que sea la mejor idea."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Why? It sounds like fun.",
+            "traduccion": "¿Por qué? Suena divertido."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It's possible, but I'm afraid the neighbours will complain. Let me think about it.",
+            "traduccion": "Es posible, pero me temo que los vecinos se quejarán. Déjame pensarlo."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué quiere decir Sara en realidad?",
+          "opciones": [
+            {
+              "es": "Que duda de la fiesta y prefiere pensarlo."
+            },
+            {
+              "es": "Que acepta encantada la fiesta."
+            },
+            {
+              "es": "Que ya ha invitado a los vecinos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara usa «I'm not sure», «I'm afraid» y «let me think about it»: duda de la fiesta y pide tiempo antes de decidir."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Expresión",
+          "Intención real"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "That sounds great!"
+            },
+            {
+              "texto": "Acepta"
+            }
+          ],
+          [
+            {
+              "texto": "I'm not sure that's a good idea."
+            },
+            {
+              "texto": "Duda o rechaza con suavidad"
+            }
+          ],
+          [
+            {
+              "texto": "Interesting, but it might be tricky."
+            },
+            {
+              "texto": "Rechaza con cortesía"
+            }
+          ],
+          [
+            {
+              "texto": "Let me think about it."
+            },
+            {
+              "texto": "Pide tiempo"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-39": {
+      "explicacion": {
+        "titulo": "Discrepar sin ofender",
+        "texto": "Para discrepar con tacto, en inglés se sigue un orden: primero una concesión (I see your point, you're right that…), después la discrepancia suavizada (I'm not sure…, I'm a bit worried about…, I'd say…) y por último una alternativa (How about…? Perhaps we could…). Evita No, that's wrong o That's a bad idea, porque suenan a ataque. Though al final de la frase suaviza la objeción. La alternativa convierte la crítica en una propuesta."
+      },
+      "patron": {
+        "texto": "Concesión + discrepancia suave + alternativa:",
+        "formula": [
+          {
+            "texto": "I see your point,",
+            "nota": "concesión: reconoces la idea del otro"
+          },
+          {
+            "texto": "but I'm a bit worried about the cost.",
+            "nota": "matizador + motivo: discrepas sin atacar"
+          },
+          {
+            "texto": "How about a trial weekend instead?",
+            "nota": "alternativa: propones en lugar de solo negarte"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am not agree with you.",
+          "correcto": "I'm not sure I agree, but I see your point.",
+          "explicacion": "Agree es un verbo, no un adjetivo: no se usa con am/is. Además conviene suavizarlo con I'm not sure."
+        },
+        {
+          "incorrecto": "I'm a bit worry about the cost.",
+          "correcto": "I'm a bit worried about the cost.",
+          "explicacion": "Después de be va el adjetivo worried, no el verbo worry."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo propone tener un perro en el piso y Mia responde con tacto.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "Mia, what about getting a dog for the flat?",
+            "traduccion": "Mia, ¿qué tal tener un perro en el piso?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I see your point, and a dog would be great company. But I'm a bit worried about the cost, though.",
+            "traduccion": "Entiendo tu idea, y un perro sería una gran compañía. Pero me preocupa un poco el coste."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So you don't want one?",
+            "traduccion": "¿Entonces no quieres uno?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "It's not that. How about a trial weekend with Ana's dog instead?",
+            "traduccion": "No es eso. ¿Qué tal un fin de semana de prueba con el perro de Ana?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "That's a good compromise!",
+            "traduccion": "¡Es un buen acuerdo a medias!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué alternativa propone Mia?",
+          "opciones": [
+            {
+              "es": "Un fin de semana de prueba con el perro de una amiga."
+            },
+            {
+              "es": "Comprar un gato esta semana."
+            },
+            {
+              "es": "Esperar un año para decidir."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «how about a trial weekend with Ana's dog instead?»: propone probar con el perro de Ana, en lugar de tener uno propio."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "I see your point."
+            }
+          ],
+          [
+            {
+              "texto": "Matizador"
+            },
+            {
+              "texto": "I'm a bit worried about the cost, though."
+            }
+          ],
+          [
+            {
+              "texto": "Alternativa"
+            },
+            {
+              "texto": "How about a trial weekend instead?"
+            }
+          ],
+          [
+            {
+              "texto": "Evita"
+            },
+            {
+              "texto": "No, that's a bad idea."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-40": {
+      "explicacion": {
+        "titulo": "Pedir, discrepar y cerrar un acuerdo",
+        "texto": "En una conversación delicada se combinan tres movimientos. Primero, pedir un cambio con una pregunta negativa o un pasado tentativo (wouldn't it be fair if…?, I was wondering if…). Después, discrepar con matizadores y una concesión (I see your point, but I'm afraid…, I'd say…). Por último, cerrar con un acuerdo explícito: so we have a deal, we agreed to… Sin ese cierre, cada uno puede entender algo distinto; repite quién hace qué y cuándo."
+      },
+      "patron": {
+        "texto": "Pedir + discrepar + acordar:",
+        "formula": [
+          {
+            "texto": "I was wondering if we could change the schedule.",
+            "nota": "pasado tentativo: pides un cambio"
+          },
+          {
+            "texto": "I see your point, but I'm afraid Mondays are difficult.",
+            "nota": "concesión + matizador: discrepas con tacto"
+          },
+          {
+            "texto": "So we have a deal: …",
+            "nota": "acuerdo explícito: quién, qué y cuándo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I was wondering if we will change the schedule.",
+          "correcto": "I was wondering if we could change the schedule.",
+          "explicacion": "Después de I was wondering va could o would, no will: el pasado tentativo retrocede el verbo."
+        },
+        {
+          "incorrecto": "Wouldn't be fair if we split the bills?",
+          "correcto": "Wouldn't it be fair if we split the bills?",
+          "explicacion": "La pregunta negativa necesita it: en español se omite el sujeto, pero en inglés hace falta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Tom, compañeros de piso, arreglan el horario de limpieza.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, I was wondering if we could change the cleaning schedule.",
+            "traduccion": "Tom, me preguntaba si podríamos cambiar el horario de limpieza."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "I see your point, Mia, but I'm afraid Mondays are difficult for me.",
+            "traduccion": "Entiendo tu punto, Mia, pero me temo que los lunes me vienen mal."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Wouldn't it be fair if you cleaned on Fridays instead?",
+            "traduccion": "¿No sería justo que limpiaras los viernes en su lugar?"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Fridays are fine. So we have a deal?",
+            "traduccion": "Los viernes me van bien. ¿Entonces tenemos un trato?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "We have a deal: Tom cleans on Fridays.",
+            "traduccion": "Tenemos un trato: Tom limpia los viernes."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "¿Qué acuerdan al final?",
+          "opciones": [
+            {
+              "es": "Que Tom limpia los viernes."
+            },
+            {
+              "es": "Que Tom limpia los lunes."
+            },
+            {
+              "es": "Que Mia limpia los viernes."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia cierra con «we have a deal: Tom cleans on Fridays»: el acuerdo explícito es que Tom limpie los viernes."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Movimiento",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Pedir"
+            },
+            {
+              "texto": "Wouldn't it be fair if we split the bills?"
+            }
+          ],
+          [
+            {
+              "texto": "Discrepar"
+            },
+            {
+              "texto": "I'm afraid Mondays are a bit difficult for me."
+            }
+          ],
+          [
+            {
+              "texto": "Acordar"
+            },
+            {
+              "texto": "So we have a deal: you cook on Fridays."
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

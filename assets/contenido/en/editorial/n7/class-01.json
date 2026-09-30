@@ -1,0 +1,787 @@
+{
+  "schema": "onelingo.editorial.class.v1",
+  "course": "en",
+  "level": 7,
+  "cefr": "B2",
+  "scale": "client-10-levels-v1",
+  "status": "shadow",
+  "runtimeAi": false,
+  "phase": "input",
+  "variantSeed": "0",
+  "selectionPolicy": {
+    "deterministic": true
+  },
+  "evidencePolicy": {
+    "attemptRecords": [
+      "variantId",
+      "libraryVersion",
+      "selectionId"
+    ]
+  },
+  "qualityPolicy": {
+    "chronologyTokens": "enforce",
+    "answerReuseAcrossEarlyReserved": "forbid",
+    "answerEvidenceReuseAcrossPools": "forbid",
+    "agentContract": "editorial-agent.v2",
+    "minChoices": 3,
+    "maxPromptCharacters": 90,
+    "feedbackReuseWithinClass": "forbid",
+    "minClassFormats": 4
+  },
+  "id": "en.n7.class-01",
+  "title": {
+    "en": "One message, many registers",
+    "es": "Un mensaje, varios registros"
+  },
+  "objectives": {
+    "es": [
+      "Reconocer las marcas de registro (saludo, cierre, contracciones y léxico) en versiones de un mismo mensaje sobre un cambio de cita."
+    ]
+  },
+  "concepts": [
+    "n7-register-nuance-1"
+  ],
+  "skills": [
+    "gramática",
+    "lectura",
+    "escucha"
+  ],
+  "prerequisites": [
+    "en.n6.class-100"
+  ],
+  "usesVocabulary": [
+    "mate",
+    "cheers",
+    "dear",
+    "wondering",
+    "apologise",
+    "grateful",
+    "regards",
+    "sincerely"
+  ],
+  "usesPatterns": [
+    "n7-register-nuance-1"
+  ],
+  "vocabulary": [
+    {
+      "en": "mate",
+      "es": "colega, amigo (informal)"
+    },
+    {
+      "en": "cheers",
+      "es": "gracias; hasta luego (informal)"
+    },
+    {
+      "en": "dear",
+      "es": "estimado (en el saludo)"
+    },
+    {
+      "en": "wondering",
+      "es": "preguntándome"
+    },
+    {
+      "en": "apologise",
+      "es": "pedir disculpas"
+    },
+    {
+      "en": "grateful",
+      "es": "agradecido"
+    },
+    {
+      "en": "regards",
+      "es": "saludos (cierre de mensaje)"
+    },
+    {
+      "en": "sincerely",
+      "es": "atentamente"
+    }
+  ],
+  "teaching": [
+    {
+      "id": "en.n7.class-01.t01",
+      "en": "Sorry, mate, I can't come on Friday. Cheers!",
+      "es": "Lo siento, colega, el viernes no puedo ir. ¡Gracias!",
+      "explanationEs": "Mate, cheers, la contracción can't y la ausencia de saludo formal marcan un mensaje entre amigos.",
+      "segments": [
+        "Sorry, mate, I can't",
+        "come on Friday. Cheers!"
+      ],
+      "audioText": "Sorry, mate, I can't come on Friday. Cheers!",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-register-nuance-1"
+    },
+    {
+      "id": "en.n7.class-01.t02",
+      "en": "Dear Ms Clark, I am writing to apologise for missing Friday's class.",
+      "es": "Estimada Sra. Clark: le escribo para pedirle disculpas por faltar a la clase del viernes.",
+      "explanationEs": "Dear + título + apellido y I am writing to (sin contraer) marcan un mensaje formal.",
+      "segments": [
+        "Dear Ms Clark, I am writing",
+        "to apologise for missing Friday's class."
+      ],
+      "audioText": "Dear Ms Clark, I am writing to apologise for missing Friday's class.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-register-nuance-1"
+    },
+    {
+      "id": "en.n7.class-01.t03",
+      "en": "I was wondering if we could move the visit to Monday.",
+      "es": "Me preguntaba si podríamos cambiar la visita al lunes.",
+      "explanationEs": "I was wondering if es una petición muy cortés, más suave que Can we move it?",
+      "segments": [
+        "I was wondering if we could",
+        "move the visit to Monday."
+      ],
+      "audioText": "I was wondering if we could move the visit to Monday.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-register-nuance-1"
+    },
+    {
+      "id": "en.n7.class-01.t04",
+      "en": "I would be grateful if you could confirm the new time.",
+      "es": "Le agradecería que confirmara la nueva hora.",
+      "explanationEs": "I would be grateful if you could es formal; entre amigos dirías Can you tell me the time?",
+      "segments": [
+        "I would be grateful if you",
+        "could confirm the new time."
+      ],
+      "audioText": "I would be grateful if you could confirm the new time.",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-register-nuance-1"
+    },
+    {
+      "id": "en.n7.class-01.t05",
+      "en": "Kind regards, Leo Martin",
+      "es": "Un cordial saludo, Leo Martin",
+      "explanationEs": "Kind regards es un cierre formal y neutro que sirve casi siempre.",
+      "segments": [
+        "Kind regards,",
+        "Leo Martin"
+      ],
+      "audioText": "Kind regards, Leo Martin",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-register-nuance-1"
+    },
+    {
+      "id": "en.n7.class-01.t06",
+      "en": "Yours sincerely, Leo Martin",
+      "es": "Atentamente, Leo Martin",
+      "explanationEs": "Yours sincerely cierra el mensaje cuando el saludo lleva nombre (Dear Ms Clark).",
+      "segments": [
+        "Yours sincerely,",
+        "Leo Martin"
+      ],
+      "audioText": "Yours sincerely, Leo Martin",
+      "audioMode": "tts",
+      "languageCode": "en",
+      "patternId": "n7-register-nuance-1"
+    }
+  ],
+  "pools": {
+    "practiceGuided": [
+      {
+        "id": "en.n7.c01.pg01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Escribes a tu amigo Sam, que te invitó a su fiesta. ¿Qué mensaje eliges?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "I would be grateful if you could confirm the party."
+          },
+          {
+            "text": "Sorry, mate, can't come on Saturday. Cheers!"
+          },
+          {
+            "text": "Dear Sam, I am writing to apologise for Saturday."
+          }
+        ],
+        "teaches": [
+          "n7-register-nuance-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.pg01.seed-0",
+          "feedback": {
+            "es": "Con un amigo funcionan la frase corta, la contracción can't y mate o cheers; las otras dos opciones son demasiado formales."
+          },
+          "hint": {
+            "es": "Con un amigo: frases cortas y una despedida informal."
+          },
+          "text": "Situation: you can't go to Sam's party on Saturday."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f0d07ac50ec8f901488a37befeb133d8c38f0e65a07b76dff78f4e782abde9a3"
+      },
+      {
+        "id": "en.n7.c01.pg02",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa el cierre formal: «Atentamente, Leo Martin.»"
+        },
+        "answer": {
+          "text": "sincerely",
+          "accepted": [
+            "sincerely"
+          ]
+        },
+        "choices": [],
+        "teaches": [
+          "n7-register-nuance-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.pg02.seed-0",
+          "feedback": {
+            "es": "Yours sincerely cierra el mensaje formal que empieza con Dear + apellido."
+          },
+          "hint": {
+            "es": "Es la pareja formal de un saludo con Dear + apellido."
+          },
+          "text": "Yours ___, Leo Martin"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:02b3e8cfdc6a40b3390588575a7953e8f738bbdee31194a0adca63757b5a4af7"
+      },
+      {
+        "id": "en.n7.c01.pg03",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué saludo encaja con un mensaje formal para la profesora Clark?"
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "Hi Clark,"
+          },
+          {
+            "text": "Dear teacher Clark,"
+          },
+          {
+            "text": "Dear Ms Clark,"
+          }
+        ],
+        "teaches": [
+          "n7-register-nuance-1"
+        ],
+        "requires": [],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.pg03.seed-0",
+          "feedback": {
+            "es": "En un mensaje formal el saludo lleva Dear + título + apellido; Hi es informal y teacher no se usa así."
+          },
+          "hint": {
+            "es": "Busca título y apellido, sin la palabra teacher."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d84e0a585fbd97a15dbdbd08de00f89e3fcb855444966da97f4a0166aae978bf"
+      }
+    ],
+    "practice": [
+      {
+        "id": "en.n7.c01.p01",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha el mensaje y elige a quién va dirigido."
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "To a close friend."
+          },
+          {
+            "text": "To his landlord."
+          },
+          {
+            "text": "To his teacher."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.p01.seed-0",
+          "feedback": {
+            "es": "Hi, la contracción can't y Cheers son marcas de confianza; un casero o una profesora recibirían un mensaje formal."
+          },
+          "audio": "Hi Mia, I can't come on Friday, sorry! Cheers, Leo.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:3294011705db7a5ca90aa76ede56e66e4f377b11a16a3a99c1c871211752ee9d"
+      },
+      {
+        "id": "en.n7.c01.p02",
+        "format": "relacionar",
+        "prompt": {
+          "es": "Relaciona cada mensaje con la persona que lo recibe."
+        },
+        "answer": {
+          "pairs": [
+            [
+              "Dear Mr Brown, I was wondering if you could visit the flat on Monday.",
+              {
+                "es": "El casero"
+              }
+            ],
+            [
+              "Dear Ms Clark, I am writing to apologise for missing class.",
+              {
+                "es": "La profesora"
+              }
+            ],
+            [
+              "Sorry, mate, can't make it tonight. Cheers!",
+              {
+                "es": "Un amigo"
+              }
+            ]
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.p02.seed-0",
+          "feedback": {
+            "es": "El contenido da la pista: flat apunta al casero, class a la profesora y mate a un amigo."
+          },
+          "pairs": [
+            [
+              "Dear Mr Brown, I was wondering if you could visit the flat on Monday.",
+              {
+                "es": "El casero"
+              }
+            ],
+            [
+              "Dear Ms Clark, I am writing to apologise for missing class.",
+              {
+                "es": "La profesora"
+              }
+            ],
+            [
+              "Sorry, mate, can't make it tonight. Cheers!",
+              {
+                "es": "Un amigo"
+              }
+            ]
+          ]
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:a3ec07b70e147d50330feb6a8afb7a2e672e9ecc9e60f2a7a1c855d2c07a52af"
+      },
+      {
+        "id": "en.n7.c01.p03",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Me preguntaba si podríamos cambiar la visita.»"
+        },
+        "answer": {
+          "text": "I was wondering if we could change the visit",
+          "tokens": [
+            "I",
+            "was",
+            "wondering",
+            "if",
+            "we",
+            "could",
+            "change",
+            "the",
+            "visit"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.p03.seed-0",
+          "feedback": {
+            "es": "I was wondering if abre una petición cortés; después va la pregunta con could."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:e38d63447e19572aa7a6bc7f90ef4895184f39565a7582ca38e9d12a1e6b7ac1"
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "en.n7.c01.e01",
+        "format": "elegir",
+        "prompt": {
+          "es": "Lee el mensaje de Mia. ¿Cómo se nota que escribe a un amigo?"
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "Usa Dear, I am writing to y Yours sincerely."
+          },
+          {
+            "text": "Usa can't, Can you…? y Cheers."
+          },
+          {
+            "text": "Usa I would be grateful if you could."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.e01.seed-0",
+          "feedback": {
+            "es": "Can't, una petición directa y Cheers son las marcas de un mensaje entre amigos; las otras opciones son marcas formales."
+          },
+          "text": "Mia's message: 'Hi Leo, can't do Monday, sorry. Can you come on Tuesday? Cheers!'"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:df6f9f612b0245fe71b4c8bd935493137aed4df82a127bd1d7f7cfb4a5044224"
+      },
+      {
+        "id": "en.n7.c01.e02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace Leo y con qué tono."
+        },
+        "answer": {
+          "index": 2
+        },
+        "choices": [
+          {
+            "text": "He tells a friend to fix the heating now."
+          },
+          {
+            "text": "He thanks his teacher for a class."
+          },
+          {
+            "text": "He politely asks his landlord to fix the heating."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.e02.seed-0",
+          "feedback": {
+            "es": "Dear Mr Brown, I was wondering if y Kind regards forman una petición cortés al casero."
+          },
+          "audio": "Dear Mr Brown, I was wondering if you could repair the heating this week. Kind regards, Leo Martin.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:566b8ceccefe79e72e2cd1619a48296d28cac5f55ffdf39bfa0401648f2f900d"
+      },
+      {
+        "id": "en.n7.c01.e03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Le agradecería que confirmara la hora.»"
+        },
+        "answer": {
+          "text": "grateful",
+          "accepted": [
+            "grateful"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.e03.seed-0",
+          "feedback": {
+            "es": "I would be grateful if you could… es la petición formal más habitual en un mensaje al casero o al profesor."
+          },
+          "text": "I would be ___ if you could confirm the time."
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:767e07ab8d82322c2842d110c5ce86787d1ffd940ab455805107262e8573bd0b"
+      },
+      {
+        "id": "en.n7.c01.e04",
+        "format": "ordenar",
+        "prompt": {
+          "es": "Ordena: «Le escribo para pedirle disculpas al Sr. Brown.»"
+        },
+        "answer": {
+          "text": "I am writing to apologise to Mr Brown",
+          "tokens": [
+            "I",
+            "am",
+            "writing",
+            "to",
+            "apologise",
+            "to",
+            "Mr",
+            "Brown"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.e04.seed-0",
+          "feedback": {
+            "es": "I am writing to + verbo es la fórmula formal para explicar por qué escribes."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:d10e0ff8d14782a91b63b2da889117a71cf1f60f2b23ea51a409ca6b7926ad00"
+      }
+    ],
+    "review": [
+      {
+        "id": "en.n7.c01.r01",
+        "format": "elegir",
+        "prompt": {
+          "es": "¿Qué despedida usarías con tu amigo Sam?"
+        },
+        "answer": {
+          "index": 0
+        },
+        "choices": [
+          {
+            "text": "Cheers, Leo"
+          },
+          {
+            "text": "Yours sincerely, Leo Martin"
+          },
+          {
+            "text": "Kind regards, Leo Martin"
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.r01.seed-0",
+          "feedback": {
+            "es": "Entre amigos basta Cheers y tu nombre de pila; Yours sincerely y Kind regards son cierres de mensajes formales."
+          }
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:c2cff07a38276c69a9581d59aaa5bcc5e3c69e3c5c88e913d0bcf674e91f4c83"
+      },
+      {
+        "id": "en.n7.c01.r02",
+        "format": "escuchar",
+        "prompt": {
+          "es": "Escucha y elige qué hace Mia en su mensaje."
+        },
+        "answer": {
+          "index": 1
+        },
+        "choices": [
+          {
+            "text": "She invites her teacher to a party."
+          },
+          {
+            "text": "She apologises to her teacher for missing Friday."
+          },
+          {
+            "text": "She thanks a friend for a present."
+          }
+        ],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.r02.seed-0",
+          "feedback": {
+            "es": "Dear Ms Clark y Yours sincerely apuntan a una profesora, y I am writing to apologise da el motivo: pedir disculpas por faltar."
+          },
+          "audio": "Dear Ms Clark, I am writing to apologise. I cannot attend on Friday. Yours sincerely, Mia.",
+          "audioMode": "tts",
+          "languageCode": "en",
+          "speedOptions": [
+            0.75,
+            1.0
+          ],
+          "maxReplays": 3,
+          "revealTranscriptAfterAttempt": true
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:83429571cb285eba670e26bd9f93b084e0a618b85fafbcb9a0b251814918b7b2"
+      },
+      {
+        "id": "en.n7.c01.r03",
+        "format": "completar",
+        "prompt": {
+          "es": "Completa: «Estimado Sr. Brown:»"
+        },
+        "answer": {
+          "text": "Dear",
+          "accepted": [
+            "Dear",
+            "dear"
+          ]
+        },
+        "choices": [],
+        "teaches": [],
+        "requires": [
+          "n7-register-nuance-1"
+        ],
+        "origin": {
+          "kind": "editorial",
+          "variantSeed": "0",
+          "variantId": "en.n7.c01.r03.seed-0",
+          "feedback": {
+            "es": "El saludo de un mensaje formal empieza con Dear seguido de título y apellido."
+          },
+          "text": "___ Mr Brown,"
+        },
+        "accessibility": {
+          "screenReader": true,
+          "highContrast": true,
+          "largeText": true
+        },
+        "contentHash": "sha256:f3dce708a8bd4dc5c7de08f4acf64e4e1e30522fc42140f0546c5eca5edb9a9e"
+      }
+    ]
+  },
+  "remediationMap": {
+    "en.n7.c01.e01": {
+      "reteach": "en.n7.class-01.t01",
+      "review": "en.n7.c01.r01"
+    },
+    "en.n7.c01.e02": {
+      "reteach": "en.n7.class-01.t02",
+      "review": "en.n7.c01.r02"
+    },
+    "en.n7.c01.e03": {
+      "reteach": "en.n7.class-01.t03",
+      "review": "en.n7.c01.r03"
+    },
+    "en.n7.c01.e04": {
+      "reteach": "en.n7.class-01.t04",
+      "review": "en.n7.c01.r01"
+    }
+  },
+  "accessibility": {
+    "highContrast": true,
+    "largeText": true,
+    "screenReader": true,
+    "audioReplay": true
+  },
+  "recovery": {
+    "retryPool": "review",
+    "maxAttempts": 2,
+    "allowAudioReplay": true,
+    "preserveProgress": true
+  },
+  "remediationPolicy": {
+    "source": "editorial",
+    "deterministic": true
+  }
+}

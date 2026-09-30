@@ -1,0 +1,603 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 31,
+    "end": 35
+  },
+  "classes": {
+    "en.n7.class-31": {
+      "explicacion": {
+        "titulo": "Cuatro grados de acuerdo",
+        "texto": "En inglés casi nunca se dice «you're wrong» a un amigo. Se elige entre cuatro grados: acuerdo total (Exactly!), acuerdo parcial (I agree up to a point; That's a fair point, but…), desacuerdo suave (I see it differently; I'm not sure about that) y desacuerdo brusco (That's nonsense). El truco: primero reconoces algo del otro y después añades tu matiz con but. Los suavizadores bajan el volumen sin cambiar tu opinión."
+      },
+      "patron": {
+        "texto": "Reconocer + but + tu matiz:",
+        "formula": [
+          {
+            "texto": "That's a fair point,",
+            "nota": "reconoces algo de lo que dijo el otro"
+          },
+          {
+            "texto": "but",
+            "nota": "aquí entra tu matiz"
+          },
+          {
+            "texto": "I'm not sure it's fair on Sara.",
+            "nota": "duda suave, no un «no» seco"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am not agree with you about the rota.",
+          "correcto": "I don't agree with you about the rota.",
+          "explicacion": "Agree es un verbo, no un adjetivo como «de acuerdo». Se niega con don't, no con am not."
+        },
+        {
+          "incorrecto": "You are wrong, the rota is unfair.",
+          "correcto": "I see it differently; the rota feels unfair to me.",
+          "explicacion": "«You are wrong» suena brusco entre amigos. Con I see it differently das tu opinión sin atacar la del otro."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom y Mia, compañeros de piso, hablan de un cuadro de turnos de limpieza.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "I think we need a cleaning rota. Every flatmate does one job a week.",
+            "traduccion": "Creo que necesitamos un cuadro de turnos de limpieza. Cada compañero hace una tarea a la semana."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "That's a fair point, but I work late on Thursdays.",
+            "traduccion": "Es un argumento razonable, pero yo trabajo hasta tarde los jueves."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "So you don't agree?",
+            "traduccion": "¿Entonces no estás de acuerdo?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I agree up to a point. I just see it differently for Thursdays.",
+            "traduccion": "Estoy de acuerdo hasta cierto punto. Solo que los jueves lo veo distinto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué piensa Mia del cuadro de turnos?",
+          "opciones": [
+            {
+              "es": "Lo acepta en parte, pero ve un problema los jueves."
+            },
+            {
+              "es": "Lo rechaza de forma brusca."
+            },
+            {
+              "es": "Lo acepta del todo sin cambios."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «up to a point» y menciona los jueves: acepta la idea en general pero señala un límite concreto."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Grado",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "acuerdo total"
+            },
+            {
+              "texto": "Exactly, I agree."
+            }
+          ],
+          [
+            {
+              "texto": "acuerdo parcial"
+            },
+            {
+              "texto": "I agree up to a point, but…"
+            }
+          ],
+          [
+            {
+              "texto": "desacuerdo suave"
+            },
+            {
+              "texto": "I see it differently."
+            }
+          ],
+          [
+            {
+              "texto": "desacuerdo brusco"
+            },
+            {
+              "texto": "That's nonsense."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-32": {
+      "explicacion": {
+        "titulo": "Desacuerdo tentativo con would",
+        "texto": "Para discrepar sin chocar, el inglés usa formas tentativas con would: I'd have thought + hecho (expresa sorpresa: esperabas otra cosa), I'm not sure I'd agree (no estoy seguro de estar de acuerdo) e I'd tend to + verbo base (yo tendería a…). Mantienes tu desacuerdo, pero lo presentas como opinión personal. Ojo: tras I'd have va el participio (thought), y tras I'd tend to va el verbo base. Una cola (didn't we?) comprueba un dato sin acusar."
+      },
+      "patron": {
+        "texto": "I'd have thought + hecho esperado:",
+        "formula": [
+          {
+            "texto": "I'd have thought",
+            "nota": "'d = would: «habría pensado»; have + participio"
+          },
+          {
+            "texto": "the heating was included",
+            "nota": "lo que esperabas, en pasado"
+          },
+          {
+            "texto": "in the rent.",
+            "nota": "el dato sobre el que dudas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I would have think the heating was included.",
+          "correcto": "I'd have thought the heating was included.",
+          "explicacion": "Después de would have va el participio pasado: thought, no think."
+        },
+        {
+          "incorrecto": "I'd tend to saying it is too noisy.",
+          "correcto": "I'd tend to say it is too noisy.",
+          "explicacion": "Tras I'd tend to va el verbo en forma base, no en -ing."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo y Sara, compañeros de piso, hablan de quién paga la calefacción.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "I'd have thought the heating was included in the rent.",
+            "traduccion": "Habría pensado que la calefacción estaba incluida en el alquiler."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I'm not sure I'd agree. The landlord says bills are extra.",
+            "traduccion": "No estoy seguro de estar de acuerdo. El casero dice que las facturas van aparte."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "We agreed to split them, didn't we?",
+            "traduccion": "Acordamos dividirlas, ¿verdad?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "We did, yes. I'd tend to say we check the landlord's email first.",
+            "traduccion": "Sí, lo hicimos. Yo tendería a decir que revisemos primero el correo del casero."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué propone Sara al final?",
+          "opciones": [
+            {
+              "es": "Revisar el correo del casero antes de decidir."
+            },
+            {
+              "es": "Pagar la calefacción entre todos ahora mismo."
+            },
+            {
+              "es": "Escribir al casero esta noche."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara termina con «I'd tend to say we check the contract first»: propone comprobar el correo del casero, no pagar ni llamar aún."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Directo",
+          "Tentativo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "You're wrong about the rent."
+            },
+            {
+              "texto": "I'd have thought the rent was lower."
+            }
+          ],
+          [
+            {
+              "texto": "I don't agree."
+            },
+            {
+              "texto": "I'm not sure I'd agree."
+            }
+          ],
+          [
+            {
+              "texto": "It's too noisy."
+            },
+            {
+              "texto": "I'd tend to think it's too noisy."
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-33": {
+      "explicacion": {
+        "titulo": "¿Es un sí, un sí a medias o un no?",
+        "texto": "Para saber si alguien acepta, fíjate en la señal, no solo en la palabra yes. Aceptación: Sure, sounds good. Sí a medias: I suppose so (poco entusiasmo) o as long as… (con condición). Rechazo cortés: I'd love to, but… (es un no aunque empiece con «me encantaría»), I'm afraid I can't, Maybe another time, We'll see. Ojo: I'm afraid + oración significa «me temo que»; afraid of + nombre es tener miedo."
+      },
+      "patron": {
+        "texto": "Señal + lo que significa:",
+        "formula": [
+          {
+            "texto": "Sure, sounds good.",
+            "nota": "sí claro: acepta sin reservas"
+          },
+          {
+            "texto": "I suppose so, as long as…",
+            "nota": "sí a medias: poco entusiasmo o condición"
+          },
+          {
+            "texto": "I'd love to, but I'm afraid…",
+            "nota": "no cortés: empieza como un sí y termina en rechazo"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I am afraid of I can't come on Saturday.",
+          "correcto": "I'm afraid I can't come on Saturday.",
+          "explicacion": "«Me temo que» es I'm afraid + oración, sin of. Afraid of + nombre significa tener miedo."
+        },
+        {
+          "incorrecto": "I suppose yes, as long as we finish early.",
+          "correcto": "I suppose so, as long as we finish early.",
+          "explicacion": "Calco de «supongo que sí». En inglés se dice I suppose so, no I suppose yes."
+        }
+      ],
+      "situacion": {
+        "contexto": "Tom pregunta a sus compañeros de piso si van a cenar el sábado.",
+        "dialogo": [
+          {
+            "hablante": "Tom",
+            "texto": "Are you coming to dinner on Saturday?",
+            "traduccion": "¿Vienen a cenar el sábado?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "I'd love to, but I'm afraid I work that night.",
+            "traduccion": "Me encantaría, pero me temo que esa noche trabajo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And you, Leo?",
+            "traduccion": "¿Y tú, Leo?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I suppose so, as long as I can leave early.",
+            "traduccion": "Supongo que sí, siempre que pueda irme pronto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién va a la cena del sábado?",
+          "opciones": [
+            {
+              "es": "Leo, pero con una condición."
+            },
+            {
+              "es": "Mia y Leo, sin condiciones."
+            },
+            {
+              "es": "Ninguno de los dos."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia rechaza con «I'd love to, but…»; Leo dice «I suppose so, as long as…», un sí con condición."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Señal",
+          "Significa"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Sure, sounds good."
+            },
+            {
+              "texto": "acepta"
+            }
+          ],
+          [
+            {
+              "texto": "I suppose so, as long as…"
+            },
+            {
+              "texto": "acepta a medias"
+            }
+          ],
+          [
+            {
+              "texto": "I'd love to, but…"
+            },
+            {
+              "texto": "rechaza con cortesía"
+            }
+          ],
+          [
+            {
+              "texto": "Maybe another time."
+            },
+            {
+              "texto": "rechaza con cortesía"
+            }
+          ],
+          [
+            {
+              "texto": "We'll see."
+            },
+            {
+              "texto": "no se compromete"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-34": {
+      "explicacion": {
+        "titulo": "Decir que no sin perder al amigo",
+        "texto": "Un no que conserva la amistad tiene cuatro pasos: 1) concesión: reconoces lo bueno (I can see why…; It's a great idea, but…); 2) motivo: una razón, no un ataque (the thing is…; I'm worried about…); 3) alternativa concreta (How about…? What if we…? … instead); 4) cola para comprobar (…, wouldn't it?). Ojo: how about va seguido de nombre o -ing, y what if de una oración: How about going…? What if we go…?"
+      },
+      "patron": {
+        "texto": "Concesión + motivo + alternativa + cola:",
+        "formula": [
+          {
+            "texto": "I can see why you like it,",
+            "nota": "concesión: reconoces lo bueno"
+          },
+          {
+            "texto": "but I'm worried about the budget.",
+            "nota": "motivo: una razón concreta"
+          },
+          {
+            "texto": "How about a cheaper plan instead?",
+            "nota": "alternativa: how about + nombre / -ing"
+          },
+          {
+            "texto": "That would work, wouldn't it?",
+            "nota": "cola: repite el auxiliar y pide confirmar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "How about to go to a cheaper restaurant?",
+          "correcto": "How about going to a cheaper restaurant?",
+          "explicacion": "Después de how about va un nombre o un verbo en -ing, no to + verbo."
+        },
+        {
+          "incorrecto": "That would work for everyone, isn't it?",
+          "correcto": "That would work for everyone, wouldn't it?",
+          "explicacion": "La cola repite el auxiliar de la frase (would → wouldn't). «Isn't it?» no sirve como «¿no?» universal."
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos propone una gran fiesta en el piso y Sara contesta sin cerrarle la puerta.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Let's have a party for thirty people on Saturday.",
+            "traduccion": "Hagamos una fiesta para treinta personas el sábado."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "I can see why you like the proposal, but I'm worried about the budget.",
+            "traduccion": "Entiendo por qué te gusta la propuesta, pero me preocupa el presupuesto."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "So, what's your alternative?",
+            "traduccion": "Entonces, ¿cuál es tu alternativa?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "How about a small dinner instead? That would work, wouldn't it?",
+            "traduccion": "¿Qué tal una cena pequeña en su lugar? Funcionaría, ¿no?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué alternativa propone Sara?",
+          "opciones": [
+            {
+              "es": "Una cena pequeña."
+            },
+            {
+              "es": "Una fiesta todavía más grande."
+            },
+            {
+              "es": "Cancelar todo el plan."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara dice «How about a small dinner instead?»: cambia la fiesta de treinta por una cena pequeña."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Concesión"
+            },
+            {
+              "texto": "I can see why…; It's a good idea, but…"
+            }
+          ],
+          [
+            {
+              "texto": "Motivo"
+            },
+            {
+              "texto": "The thing is, …; I'm a bit worried about…"
+            }
+          ],
+          [
+            {
+              "texto": "Alternativa"
+            },
+            {
+              "texto": "How about…? What if we…? …instead"
+            }
+          ],
+          [
+            {
+              "texto": "Cola"
+            },
+            {
+              "texto": "…, wouldn't it?"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-35": {
+      "explicacion": {
+        "titulo": "Una reunión de piso, paso a paso",
+        "texto": "Una reunión de convivencia sigue un orden: 1) planteas el problema sin culpar (I'd like to raise a problem…); 2) discrepas con tacto de las propuestas (I see what you mean, but I'm not sure…; I'd have thought…) y buscas un compromiso; 3) aclaras malentendidos reformulando (If I understood you correctly…; I think there's a misunderstanding…); 4) cierras con un acuerdo verificable (To sum up, … Is that right?). A rule es una norma pactada; a ban, una prohibición total."
+      },
+      "patron": {
+        "texto": "Problema + discrepar + aclarar + cerrar:",
+        "formula": [
+          {
+            "texto": "I'd like to raise a problem:",
+            "nota": "abres el tema sin culpar"
+          },
+          {
+            "texto": "I see what you mean, but I'm not sure…",
+            "nota": "discrepas con tacto"
+          },
+          {
+            "texto": "If I understood you correctly,",
+            "nota": "reformulas para evitar malentendidos"
+          },
+          {
+            "texto": "To sum up, … Is that right?",
+            "nota": "cierras con un acuerdo que se puede verificar"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "I want to rise a problem about the kitchen.",
+          "correcto": "I'd like to raise a problem about the kitchen.",
+          "explicacion": "Plantear un tema es raise (lleva objeto); rise significa subir y no lleva objeto. Además, I'd like to suena más amable que I want."
+        },
+        {
+          "incorrecto": "If I understood you good, you want a ban.",
+          "correcto": "If I understood you correctly, you want a ban.",
+          "explicacion": "Después de un verbo se usa un adverbio (correctly o well), no el adjetivo good."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana, Leo y Mia celebran una reunión del piso sobre el ruido por la noche.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "I'd like to raise a problem: the noise is bad late at night.",
+            "traduccion": "Quisiera plantear un problema: el ruido es molesto por la noche."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I see what you mean, but I'm not sure a ban on guests is fair.",
+            "traduccion": "Veo lo que dices, pero no estoy seguro de que prohibir las visitas sea justo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "I think there's a misunderstanding. I want a rule, not a ban.",
+            "traduccion": "Creo que hay un malentendido. Quiero una norma, no una prohibición."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh, fair enough. To sum up, guests leave by eleven on weekdays. Is that right?",
+            "traduccion": "Oh, me parece justo. Para resumir, las visitas se van a las once entre semana. ¿Es así?"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué quiere Ana?",
+          "opciones": [
+            {
+              "es": "Una norma sobre la hora de las visitas, no una prohibición."
+            },
+            {
+              "es": "Prohibir todas las visitas del piso."
+            },
+            {
+              "es": "Que las visitas puedan quedarse hasta tarde."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana aclara el malentendido: «I want a rule, not a ban». Quiere una norma, no prohibir las visitas."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Fase",
+          "Fórmula"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Plantear"
+            },
+            {
+              "texto": "I'd like to raise a problem…"
+            }
+          ],
+          [
+            {
+              "texto": "Discrepar"
+            },
+            {
+              "texto": "I see what you mean, but I'm not sure…"
+            }
+          ],
+          [
+            {
+              "texto": "Aclarar"
+            },
+            {
+              "texto": "If I understood you correctly…"
+            }
+          ],
+          [
+            {
+              "texto": "Cerrar"
+            },
+            {
+              "texto": "To sum up, … Is that right?"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

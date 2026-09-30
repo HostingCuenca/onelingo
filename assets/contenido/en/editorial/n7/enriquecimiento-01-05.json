@@ -1,0 +1,630 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n7",
+  "range": {
+    "start": 1,
+    "end": 5
+  },
+  "classes": {
+    "en.n7.class-01": {
+      "explicacion": {
+        "titulo": "Mismo mensaje, tres voces",
+        "texto": "Un mismo mensaje cambia según quién lo recibe. Con un amigo usas contracciones (can't), palabras cortas (mate, cheers) y casi ningún saludo. Con un profesor o un casero usas formas completas (I am writing to…, I would be grateful if…), petición suave (I was wondering if…) y un cierre formal (Kind regards, Yours sincerely). Fíjate en tres marcas: léxico, contracciones y fórmulas de apertura y cierre."
+      },
+      "patron": {
+        "texto": "Apertura + petición + cierre:",
+        "formula": [
+          {
+            "texto": "Dear Ms Clark,",
+            "nota": "apertura formal: Dear + título + apellido"
+          },
+          {
+            "texto": "I was wondering if we could move it.",
+            "nota": "petición cortés, con formas completas"
+          },
+          {
+            "texto": "Kind regards,",
+            "nota": "cierre formal; con un amigo, Cheers"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mr Brown, sorry, mate, I can't come. Cheers!",
+          "correcto": "Dear Mr Brown, I am sorry, but I cannot come. Kind regards.",
+          "explicacion": "Mezclar un saludo formal con mate y cheers suena raro: mantén el mismo registro de principio a fin."
+        },
+        {
+          "incorrecto": "Dear teacher Clark, I am writing to apologise.",
+          "correcto": "Dear Ms Clark, I am writing to apologise.",
+          "explicacion": "En español escribes «querida profesora Clark»; en inglés se usa Dear + título (Ms, Mr) + apellido, no la palabra teacher."
+        }
+      ],
+      "situacion": {
+        "contexto": "Leo no puede ir el viernes y le cuenta a Mia cómo escribirá a cada persona.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Are you writing to Mr Brown about Friday?",
+            "traduccion": "¿Le escribes al Sr. Brown por lo del viernes?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. I'll write, 'I was wondering if we could move the visit.'",
+            "traduccion": "Sí. Escribiré: «Me preguntaba si podríamos cambiar la visita.»"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Good. And what about me?",
+            "traduccion": "Bien. ¿Y a mí?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Sorry, mate, I can't come on Friday. Cheers!",
+            "traduccion": "Lo siento, colega, el viernes no puedo ir. ¡Gracias!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué versión del mensaje recibe Mia?",
+          "opciones": [
+            {
+              "es": "Una corta, con mate y cheers."
+            },
+            {
+              "es": "Una formal, con I was wondering if."
+            },
+            {
+              "es": "Una con Dear y Kind regards."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Con Mia, Leo escribe «Sorry, mate, I can't come on Friday. Cheers!»; «I was wondering if» es lo que escribe al casero."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Marca",
+          "Con un amigo",
+          "Con un profesor o casero"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Apertura"
+            },
+            {
+              "texto": "Hi Mia,"
+            },
+            {
+              "texto": "Dear Ms Clark,"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Can we move it?"
+            },
+            {
+              "texto": "I was wondering if we could move it."
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Cheers!"
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-02": {
+      "explicacion": {
+        "titulo": "Mismo significado, distinta carga",
+        "texto": "Muchos pares de palabras dicen casi lo mismo, pero una suena a elogio y la otra a crítica. Curious, thrifty, slim, determined y confident son positivas o neutras; nosy, mean, skinny, stubborn y arrogant son negativas. Elige según lo que quieres decir de la persona y a quién se lo dices: con un casero o un profesor, el adjetivo negativo suena a insulto. Cuidado: en español «curioso», «ahorrador» o «delgado» no siempre marcan esa diferencia."
+      },
+      "patron": {
+        "texto": "Persona + be + adjetivo con carga:",
+        "formula": [
+          {
+            "texto": "My neighbour is",
+            "nota": "sujeto + be"
+          },
+          {
+            "texto": "curious / nosy",
+            "nota": "elige la carga: curious (positivo) o nosy (negativo)"
+          },
+          {
+            "texto": "about other people.",
+            "nota": "el tema del que hablas"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "My grandmother is mean because she saves money for her family.",
+          "correcto": "My grandmother is thrifty because she saves money for her family.",
+          "explicacion": "Mean critica al tacaño; para elogiar a quien ahorra con cabeza se dice thrifty."
+        },
+        {
+          "incorrecto": "I'm very nosy about Japan.",
+          "correcto": "I'm very curious about Japan.",
+          "explicacion": "Nosy es una crítica: se mete en la vida privada de otros; para un interés sincero se dice curious."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia y Leo hablan de su vecina nueva y del casero.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Our new neighbour asks me a lot of questions.",
+            "traduccion": "Nuestra vecina nueva me hace muchas preguntas."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Is she nosy?",
+            "traduccion": "¿Es entrometida?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "No, she's curious. She's new in town.",
+            "traduccion": "No, es curiosa. Es nueva en la ciudad."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "And the landlord?",
+            "traduccion": "¿Y el casero?"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "He's mean. He won't pay for any repairs.",
+            "traduccion": "Es tacaño. No quiere pagar ninguna reparación."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según Mia, ¿cómo son la vecina y el casero?",
+          "opciones": [
+            {
+              "es": "La vecina es curiosa, sin mala intención; el casero es tacaño."
+            },
+            {
+              "es": "La vecina es entrometida y el casero es ahorrador."
+            },
+            {
+              "es": "Los dos son tacaños."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Mia dice «No, she's curious» de la vecina y «He's mean» del casero; no habla de entrometimiento ni de ahorro."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Positivo o neutro",
+          "Negativo",
+          "De qué habla"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "curious"
+            },
+            {
+              "texto": "nosy"
+            },
+            {
+              "texto": "preguntas"
+            }
+          ],
+          [
+            {
+              "texto": "thrifty"
+            },
+            {
+              "texto": "mean"
+            },
+            {
+              "texto": "dinero"
+            }
+          ],
+          [
+            {
+              "texto": "slim"
+            },
+            {
+              "texto": "skinny"
+            },
+            {
+              "texto": "cuerpo"
+            }
+          ],
+          [
+            {
+              "texto": "determined"
+            },
+            {
+              "texto": "stubborn"
+            },
+            {
+              "texto": "decisiones"
+            }
+          ],
+          [
+            {
+              "texto": "confident"
+            },
+            {
+              "texto": "arrogant"
+            },
+            {
+              "texto": "seguridad"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-03": {
+      "explicacion": {
+        "titulo": "Lo que dice y lo que quiere decir",
+        "texto": "Lo que alguien escribe tiene dos capas: lo que dice y lo que quiere decir. Busca pistas. Una palabra muy positiva en una situación mala (Thanks a lot… lovely) indica sarcasmo. Once again, as I mentioned o el tercer recordatorio indican irritación. I'm afraid y It would be lovely if… indican cortesía, aunque pueden esconder una queja. Pregúntate siempre: ¿la frase encaja con la situación?"
+      },
+      "patron": {
+        "texto": "Pista + situación = actitud:",
+        "formula": [
+          {
+            "texto": "Thanks a lot",
+            "nota": "palabra positiva…"
+          },
+          {
+            "texto": "for waking me up at six.",
+            "nota": "…en una situación mala"
+          },
+          {
+            "texto": "= sarcastic",
+            "nota": "la actitud que deduces"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "She says 'lovely' about the noise, so she is happy.",
+          "correcto": "She says 'lovely' about the noise, so she is sarcastic.",
+          "explicacion": "Una palabra muy positiva junto a algo molesto suele ser sarcasmo; en español solemos leerla al pie de la letra."
+        },
+        {
+          "incorrecto": "I have fear the bus is late.",
+          "correcto": "I'm afraid the bus is late.",
+          "explicacion": "«Me temo que…» no se dice con have fear: para dar una mala noticia con cortesía se usa I'm afraid."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara y Tom leen dos notas que dejó el vecino de arriba.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "Look at this note: 'Thanks a lot for the music last night. It was lovely.'",
+            "traduccion": "Mira esta nota: «Mil gracias por la música de anoche. Fue preciosa.»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "That's sarcastic. The music was too loud.",
+            "traduccion": "Es sarcasmo. La música estaba demasiado alta."
+          },
+          {
+            "hablante": "Sara",
+            "texto": "And this one: 'Once again, I must mention the noise.'",
+            "traduccion": "Y esta: «Una vez más, debo mencionar el ruido.»"
+          },
+          {
+            "hablante": "Tom",
+            "texto": "He's irritated. It's the third note this week.",
+            "traduccion": "Está irritado. Es la tercera nota esta semana."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué Tom cree que el vecino está irritado?",
+          "opciones": [
+            {
+              "es": "Porque es la tercera nota por el ruido esta semana."
+            },
+            {
+              "es": "Porque la música le pareció preciosa."
+            },
+            {
+              "es": "Porque Sara le dio las gracias."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «It's the third note this week»: la repetición muestra que el vecino ya se ha cansado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pista",
+          "Actitud"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Thanks a lot… (por algo malo)"
+            },
+            {
+              "texto": "sarcasmo"
+            }
+          ],
+          [
+            {
+              "texto": "Once again… / as I mentioned…"
+            },
+            {
+              "texto": "irritación"
+            }
+          ],
+          [
+            {
+              "texto": "I'm afraid…"
+            },
+            {
+              "texto": "cortesía al dar una mala noticia"
+            }
+          ],
+          [
+            {
+              "texto": "It would be lovely if…"
+            },
+            {
+              "texto": "queja educada"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-04": {
+      "explicacion": {
+        "titulo": "Mismos datos, distinta voz",
+        "texto": "Para reescribir un mensaje, conserva los datos (qué pasa, desde cuándo, qué pides) y cambia solo la voz. Con un amigo: frases cortas, contracciones y vocabulario coloquial (sort it out, mate). Con un casero: frases completas, fórmulas de petición (Would it be possible to…, I would be grateful if…), vocabulario neutro (arrange a repair) y una disculpa por las molestias. Al terminar revisa dos cosas: que el contenido no cambie y que el tono no se mezcle."
+      },
+      "patron": {
+        "texto": "Dato fijo + voz del destinatario:",
+        "formula": [
+          {
+            "texto": "The boiler is leaking.",
+            "nota": "el dato no cambia con el destinatario"
+          },
+          {
+            "texto": "Can you sort it out, mate? / Would it be possible to arrange a repair?",
+            "nota": "la petición cambia: amigo o casero"
+          },
+          {
+            "texto": "Cheers! / Kind regards,",
+            "nota": "el cierre también cambia con la voz"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mr Brown, can you sort it out today, mate?",
+          "correcto": "Dear Mr Brown, would it be possible to arrange a repair today?",
+          "explicacion": "Un saludo formal con sort it out y mate mezcla registros; al casero se le pide con Would it be possible to…."
+        },
+        {
+          "incorrecto": "I want that you fix the boiler.",
+          "correcto": "I would like you to fix the boiler.",
+          "explicacion": "«Quiero que…» no se dice want that; en inglés se usa want/would like + persona + to + verbo, y would like es más cortés."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia avisa a Leo de que la caldera gotea y él le explica cómo escribirá al casero.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "The boiler is leaking again, Leo. Can you write to Mr Brown?",
+            "traduccion": "La caldera vuelve a gotear, Leo. ¿Puedes escribir al Sr. Brown?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Yes. To you I'd say, 'Can you sort it out today?'",
+            "traduccion": "Sí. A ti te diría: «¿Puedes arreglarlo hoy?»"
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And to him?",
+            "traduccion": "¿Y a él?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "'Would it be possible to arrange a repair? I am sorry for the inconvenience.'",
+            "traduccion": "«¿Sería posible concertar una reparación? Siento las molestias.»"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo pide Leo la reparación al casero?",
+          "opciones": [
+            {
+              "es": "Con una fórmula cortés y una disculpa por las molestias."
+            },
+            {
+              "es": "Con una orden corta: «Sort it out today!»."
+            },
+            {
+              "es": "No pide nada: solo informa de la avería."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo usa «Would it be possible to arrange a repair?» y añade «I am sorry for the inconvenience»: petición formal con disculpa."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Elemento",
+          "Con un amigo",
+          "Con el casero"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Saludo"
+            },
+            {
+              "texto": "Hi Mia,"
+            },
+            {
+              "texto": "Dear Mr Brown,"
+            }
+          ],
+          [
+            {
+              "texto": "Petición"
+            },
+            {
+              "texto": "Can you sort it out?"
+            },
+            {
+              "texto": "Would it be possible to arrange a repair?"
+            }
+          ],
+          [
+            {
+              "texto": "Cierre"
+            },
+            {
+              "texto": "Cheers!"
+            },
+            {
+              "texto": "Kind regards,"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n7.class-05": {
+      "explicacion": {
+        "titulo": "Un problema, tres voces y una corrección",
+        "texto": "Cuando tienes que comunicar el mismo problema a varias personas, el contenido se mantiene (qué pasa, desde cuándo, qué pides) y cambia la voz. A una amiga: directa y corta. A quien te recomendó algo: cordial y completo. Al casero: formal y preciso, con petición suave y cierre formal. Si un mensaje informal llega a la persona equivocada, corrige con una disculpa clara, explica qué querías decir y cambia la palabra de carga negativa por una positiva (thrifty en lugar de mean)."
+      },
+      "patron": {
+        "texto": "Problema + destinatario + voz:",
+        "formula": [
+          {
+            "texto": "The boiler is leaking.",
+            "nota": "el dato no cambia con el destinatario"
+          },
+          {
+            "texto": "Can you call the plumber? / Would it be possible to arrange a repair?",
+            "nota": "la voz cambia: amiga o casero"
+          },
+          {
+            "texto": "I meant thrifty, not mean.",
+            "nota": "corrección de una connotación mal elegida"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Dear Mr Brown, I think you are mean, so please repair the boiler.",
+          "correcto": "Dear Mr Brown, I would be grateful if you could repair the boiler.",
+          "explicacion": "Mean es una crítica personal; al casero se le pide con una fórmula cortés, sin valorar su carácter."
+        },
+        {
+          "incorrecto": "I'm sorry for the misunderstood.",
+          "correcto": "I'm sorry for the misunderstanding.",
+          "explicacion": "Misunderstood es el verbo (participio); el nombre «malentendido» es misunderstanding."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le avisa a Leo de que el casero ha visto un mensaje que no era para él.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Leo, Mr Brown saw your message to me. He is offended.",
+            "traduccion": "Leo, el Sr. Brown vio tu mensaje para mí. Está ofendido."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "Oh no! I wrote that he is mean.",
+            "traduccion": "¡Oh, no! Escribí que es tacaño."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Yes. What will you say to him?",
+            "traduccion": "Sí. ¿Qué le dirás?"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I'll explain the misunderstanding. I meant that he is thrifty.",
+            "traduccion": "Le explicaré el malentendido. Quería decir que es ahorrador."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿por qué está ofendido el casero?",
+          "opciones": [
+            {
+              "es": "Porque leyó que Leo lo llamaba tacaño en un mensaje para Mia."
+            },
+            {
+              "es": "Porque Leo no ha pagado el alquiler."
+            },
+            {
+              "es": "Porque Mia no quiso llamarlo."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Leo dice «I wrote that he is mean» y Mia confirma que el Sr. Brown vio ese mensaje: por eso se ofendió."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Destinatario",
+          "Voz",
+          "Ejemplo"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Mia"
+            },
+            {
+              "texto": "directa"
+            },
+            {
+              "texto": "Can you call the plumber?"
+            }
+          ],
+          [
+            {
+              "texto": "Ms Clark"
+            },
+            {
+              "texto": "cordial"
+            },
+            {
+              "texto": "I would still recommend the flat."
+            }
+          ],
+          [
+            {
+              "texto": "Mr Brown"
+            },
+            {
+              "texto": "formal"
+            },
+            {
+              "texto": "Would it be possible to arrange a repair?"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

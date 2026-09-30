@@ -1,0 +1,652 @@
+{
+  "schema": "onelingo.editorial.enrichment.v1",
+  "level": "n6",
+  "range": {
+    "start": 91,
+    "end": 95
+  },
+  "classes": {
+    "en.n6.class-91": {
+      "explicacion": {
+        "titulo": "Misma base, mensaje distinto",
+        "texto": "En inglés, un pequeño cambio de forma cambia todo el mensaje. Must have + participio deduce algo pasado («seguro que se fueron»); should have + participio critica algo que no se hizo. Wish + pasado lamenta algo irreal de hoy; hope habla de algo posible. Used to cubre estados y hábitos pasados; would solo hábitos repetidos. If + had + participio mira al pasado irreal; if + pasado simple, al presente irreal."
+      },
+      "patron": {
+        "texto": "Mira la forma antes de traducir:",
+        "formula": [
+          {
+            "texto": "must have left",
+            "nota": "deducción: estoy casi seguro"
+          },
+          {
+            "texto": "should have left",
+            "nota": "crítica: no lo hizo y debía"
+          },
+          {
+            "texto": "I wish I had… / I hope to…",
+            "nota": "irreal de hoy frente a posible"
+          },
+          {
+            "texto": "used to swim / would race",
+            "nota": "estado y hábito pasados"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lights are off, so they should have left.",
+          "correcto": "The lights are off, so they must have left.",
+          "explicacion": "Should have critica algo que no se hizo. Para deducir lo que probablemente pasó se usa must have."
+        },
+        {
+          "incorrecto": "I hope I had more time.",
+          "correcto": "I wish I had more time.",
+          "explicacion": "Hope no se combina con el pasado irreal. Para un deseo irreal de hoy se usa wish + pasado simple."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo llegan a casa de unos amigos y encuentran la puerta cerrada.",
+        "dialogo": [
+          {
+            "hablante": "Leo",
+            "texto": "The lights are off. They must have left.",
+            "traduccion": "Las luces están apagadas. Deben de haberse ido."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "They should have told us. We came all this way!",
+            "traduccion": "Deberían habernos avisado. ¡Hemos venido desde muy lejos!"
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I wish we had called earlier.",
+            "traduccion": "Ojalá hubiéramos llamado antes."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "Well, I hope they come back soon.",
+            "traduccion": "Bueno, espero que vuelvan pronto."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué critica Ana?",
+          "opciones": [
+            {
+              "es": "Que sus amigos no les avisaron."
+            },
+            {
+              "es": "Que Leo llegó tarde."
+            },
+            {
+              "es": "Que las luces estaban encendidas."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice «They should have told us»: critica que los amigos no avisaran de que se iban."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Forma",
+          "Mensaje"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "must have + participio"
+            },
+            {
+              "texto": "Deducción sobre el pasado"
+            }
+          ],
+          [
+            {
+              "texto": "should have + participio"
+            },
+            {
+              "texto": "Crítica o arrepentimiento"
+            }
+          ],
+          [
+            {
+              "texto": "wish + pasado simple"
+            },
+            {
+              "texto": "Deseo irreal de hoy"
+            }
+          ],
+          [
+            {
+              "texto": "hope + presente"
+            },
+            {
+              "texto": "Deseo posible"
+            }
+          ],
+          [
+            {
+              "texto": "would + verbo base"
+            },
+            {
+              "texto": "Solo hábitos pasados"
+            }
+          ],
+          [
+            {
+              "texto": "used to + verbo base"
+            },
+            {
+              "texto": "Hábitos y estados pasados"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-92": {
+      "explicacion": {
+        "titulo": "Revisar un texto: cinco controles",
+        "texto": "Para corregir un párrafo, pásalo por cinco controles. ¿Cuándo ocurrió? Elige un tiempo y mantenlo. ¿Es deducción o crítica? Must have frente a should have. ¿Empieza con never, hardly o no sooner? Entonces el auxiliar va antes del sujeto: Never had she seen. ¿Es un rumor sobre el pasado? Is said to have + participio. ¿Hay un if sobre el pasado? If + had + participio, nunca if + would have. ¿Reportas lo que alguien dijo? El verbo retrocede un paso."
+      },
+      "patron": {
+        "texto": "Cinco controles de corrección:",
+        "formula": [
+          {
+            "texto": "Never had she seen…",
+            "nota": "inversión: el auxiliar va antes del sujeto"
+          },
+          {
+            "texto": "is said to have resigned",
+            "nota": "rumor sobre el pasado"
+          },
+          {
+            "texto": "If I had known…, I would have taken…",
+            "nota": "condicional del pasado"
+          },
+          {
+            "texto": "must have been exhausted",
+            "nota": "deducción sobre el pasado"
+          },
+          {
+            "texto": "told me that he had booked",
+            "nota": "reporte con retroceso"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "If I would have known about the delay, I would have taken a taxi.",
+          "correcto": "If I had known about the delay, I would have taken a taxi.",
+          "explicacion": "En la parte del if no va would. Para el pasado irreal se usa if + had + participio."
+        },
+        {
+          "incorrecto": "Never she had seen such a crowd.",
+          "correcto": "Never had she seen such a crowd.",
+          "explicacion": "Después de never, el auxiliar had pasa delante del sujeto, como en una pregunta."
+        }
+      ],
+      "situacion": {
+        "contexto": "Mia le pide a Tom que revise un párrafo de su redacción.",
+        "dialogo": [
+          {
+            "hablante": "Mia",
+            "texto": "Tom, can you check my paragraph? I wrote: Never she had seen such a crowd.",
+            "traduccion": "Tom, ¿puedes revisar mi párrafo? Escribí: Never she had seen such a crowd."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "After never, had comes first: Never had she seen such a crowd.",
+            "traduccion": "Después de never va primero had: Never had she seen such a crowd."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "And here: If I would have known about the delay, I would have taken a taxi.",
+            "traduccion": "Y aquí: If I would have known about the delay, I would have taken a taxi."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Use had in the if part: If I had known about the delay, I would have taken a taxi.",
+            "traduccion": "Usa had en la parte del if: If I had known about the delay, I would have taken a taxi."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cómo corrige Tom la frase del taxi?",
+          "opciones": [
+            {
+              "es": "Cambia would have known por had known en la parte del if."
+            },
+            {
+              "es": "Quita la palabra delay de la frase."
+            },
+            {
+              "es": "Pone never al principio de la frase."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Tom dice «Use had in the if part»: sustituye would have known por had known y deja would have taken en el resultado."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Error típico",
+          "Corrección"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Never she had seen"
+            },
+            {
+              "texto": "Never had she seen"
+            }
+          ],
+          [
+            {
+              "texto": "If I would have known"
+            },
+            {
+              "texto": "If I had known"
+            }
+          ],
+          [
+            {
+              "texto": "is said to resigned"
+            },
+            {
+              "texto": "is said to have resigned"
+            }
+          ],
+          [
+            {
+              "texto": "He said me that"
+            },
+            {
+              "texto": "He told me that"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-93": {
+      "explicacion": {
+        "titulo": "Leer una canción o un clip: tema, tono y estructura",
+        "texto": "Para comprender un fragmento breve, responde tres preguntas. ¿De qué trata? Es el tema. ¿Cómo suena? Es el tono: esperanzado, triste, amargo. ¿Qué estructuras del nivel aparecen y qué expresan? Used to y would evocan el pasado; wish y had I known, el arrepentimiento; must have, una deducción. Después da tu reacción con una razón: I think… because… El tono no siempre coincide con la música, así que fíjate sobre todo en la letra."
+      },
+      "patron": {
+        "texto": "Tres pasos para analizar un fragmento:",
+        "formula": [
+          {
+            "texto": "The song is about a lost friendship.",
+            "nota": "tema: de qué trata"
+          },
+          {
+            "texto": "The tone is hopeful, but the last verse sounds bitter.",
+            "nota": "tono: cómo suena"
+          },
+          {
+            "texto": "I used to think the city never slept.",
+            "nota": "estructura del nivel: hábito pasado"
+          },
+          {
+            "texto": "I think the message is that we should say things earlier.",
+            "nota": "reacción con una razón"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "The lyrics says that the singer is lonely.",
+          "correcto": "The lyrics say that the singer is lonely.",
+          "explicacion": "Lyrics es plural en inglés: lleva say, no says, aunque en español «la letra» sea singular."
+        },
+        {
+          "incorrecto": "I am agree with the message.",
+          "correcto": "I agree with the message.",
+          "explicacion": "Agree es un verbo: no lleva am. En español «estoy de acuerdo» usa estar, pero en inglés se dice I agree."
+        }
+      ],
+      "situacion": {
+        "contexto": "Ana y Leo acaban de escuchar una canción en el coche.",
+        "dialogo": [
+          {
+            "hablante": "Ana",
+            "texto": "The music sounds happy, but the lyrics are sad.",
+            "traduccion": "La música suena alegre, pero la letra es triste."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "I know! The singer used to live in the city, and now he feels lonely.",
+            "traduccion": "¡Ya lo sé! El cantante vivía en la ciudad y ahora se siente solo."
+          },
+          {
+            "hablante": "Ana",
+            "texto": "In the chorus he repeats one line: Had I known, I would have stayed.",
+            "traduccion": "En el estribillo repite un verso: si lo hubiera sabido, me habría quedado."
+          },
+          {
+            "hablante": "Leo",
+            "texto": "So the message is about regret. I agree with that message.",
+            "traduccion": "Así que el mensaje trata del arrepentimiento. Estoy de acuerdo con ese mensaje."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿cuál es el tono real de la letra?",
+          "opciones": [
+            {
+              "es": "Triste, aunque la música suena alegre."
+            },
+            {
+              "es": "Alegre, igual que la música."
+            },
+            {
+              "es": "Enfadado con el cantante."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Ana dice que la música suena alegre pero la letra es triste: el tono de las palabras es de tristeza y arrepentimiento."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Paso",
+          "Qué haces"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Tema"
+            },
+            {
+              "texto": "Dices de qué trata: The song is about…"
+            }
+          ],
+          [
+            {
+              "texto": "Tono"
+            },
+            {
+              "texto": "Describes cómo suena: The tone is hopeful."
+            }
+          ],
+          [
+            {
+              "texto": "Estructura"
+            },
+            {
+              "texto": "Reconoces used to, wish, had I known, must have"
+            }
+          ],
+          [
+            {
+              "texto": "Reacción"
+            },
+            {
+              "texto": "I think… because…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-94": {
+      "explicacion": {
+        "titulo": "Un relato con giro en cinco piezas",
+        "texto": "Un relato con giro combina recursos del nivel. Would o used to crean el escenario con hábitos del pasado. Must have + participio explica un misterio. Un participio al inicio (Walking home, I saw…) une dos acciones de la misma persona sin repetir el sujeto. Wish + had + participio añade arrepentimiento. El final trae un dato inesperado, el giro, con the twist was that… o it turned out that… Mantén el pasado y marca el orden con one evening, suddenly y after."
+      },
+      "patron": {
+        "texto": "Cinco piezas del relato:",
+        "formula": [
+          {
+            "texto": "We would visit my grandmother every Sunday.",
+            "nota": "escenario: hábito pasado"
+          },
+          {
+            "texto": "The dog must have eaten it.",
+            "nota": "deducción: explica el misterio"
+          },
+          {
+            "texto": "Walking into the kitchen, I noticed a smell.",
+            "nota": "participio: una sola persona, dos acciones"
+          },
+          {
+            "texto": "I wish I had locked the door.",
+            "nota": "arrepentimiento"
+          },
+          {
+            "texto": "The twist was that the thief was my cousin.",
+            "nota": "giro final"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "Walking into the kitchen, the smell surprised me.",
+          "correcto": "Walking into the kitchen, I noticed a strange smell.",
+          "explicacion": "La persona que camina debe ser el sujeto de la frase principal: I noticed, no the smell surprised me."
+        },
+        {
+          "incorrecto": "I wish I locked the door that night.",
+          "correcto": "I wish I had locked the door that night.",
+          "explicacion": "Para lamentar algo que ya pasó, wish lleva had + participio. Wish + pasado simple habla de hoy."
+        }
+      ],
+      "situacion": {
+        "contexto": "Sara le cuenta a Tom un relato con giro que ha escrito.",
+        "dialogo": [
+          {
+            "hablante": "Sara",
+            "texto": "I have a story with a twist. When I was nine, we would visit my grandmother every Sunday.",
+            "traduccion": "Tengo un relato con giro. Cuando tenía nueve años, visitábamos a mi abuela cada domingo."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "Nice start. What happened?",
+            "traduccion": "Buen comienzo. ¿Qué pasó?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "One evening the cake had disappeared. The dog must have eaten it, I thought.",
+            "traduccion": "Una tarde el pastel había desaparecido. El perro debió de comérselo, pensé."
+          },
+          {
+            "hablante": "Tom",
+            "texto": "And the twist?",
+            "traduccion": "¿Y el giro?"
+          },
+          {
+            "hablante": "Sara",
+            "texto": "It turned out that my grandmother had eaten it! She looked very guilty.",
+            "traduccion": "¡Resultó que lo había comido mi abuela! Parecía muy culpable."
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿quién se había comido el pastel?",
+          "opciones": [
+            {
+              "es": "La abuela de Sara."
+            },
+            {
+              "es": "El perro."
+            },
+            {
+              "es": "El hermano de Sara."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Sara cuenta el giro: «It turned out that my grandmother had eaten it»; la deducción del perro era falsa."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Pieza",
+          "Estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Escenario"
+            },
+            {
+              "texto": "would / used to + verbo base"
+            }
+          ],
+          [
+            {
+              "texto": "Deducción"
+            },
+            {
+              "texto": "must have + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Dos acciones"
+            },
+            {
+              "texto": "verbo + -ing, sujeto + verbo"
+            }
+          ],
+          [
+            {
+              "texto": "Arrepentimiento"
+            },
+            {
+              "texto": "wish + had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Giro"
+            },
+            {
+              "texto": "it turned out that… / the twist was that…"
+            }
+          ]
+        ]
+      }
+    },
+    "en.n6.class-95": {
+      "explicacion": {
+        "titulo": "Cuatro funciones en una visita",
+        "texto": "Una situación real mezcla funciones que ya conoces, y conviene elegir la función antes de hablar. Para acoger, deduce con must be: «debes de estar cansada». Para contar una anécdota precisa, usa el pasado simple para los hechos y had + participio para lo anterior. Para negociar normas, ofrece una condición con as long as o provided that, sin will. Para una queja con tacto, usa I'd appreciate it if you could… o is said to have + participio, que no acusa a nadie."
+      },
+      "patron": {
+        "texto": "Cuatro funciones, cuatro estructuras:",
+        "formula": [
+          {
+            "texto": "You must be tired after such a long journey.",
+            "nota": "acoger: deducción amable"
+          },
+          {
+            "texto": "I had forgotten my charger, so my phone died.",
+            "nota": "anécdota: hecho anterior con had"
+          },
+          {
+            "texto": "You can use the kitchen as long as you clean up.",
+            "nota": "negociar: condición sin will"
+          },
+          {
+            "texto": "I'd appreciate it if you could keep the noise down.",
+            "nota": "queja con tacto"
+          }
+        ]
+      },
+      "erroresFrecuentes": [
+        {
+          "incorrecto": "You can use the kitchen as long as you will clean up.",
+          "correcto": "You can use the kitchen as long as you clean up.",
+          "explicacion": "Después de as long as se usa el presente, no will, aunque hablemos del futuro."
+        },
+        {
+          "incorrecto": "I'd appreciate if you could keep the noise down.",
+          "correcto": "I'd appreciate it if you could keep the noise down.",
+          "explicacion": "En inglés hace falta it entre appreciate e if: I'd appreciate it if…"
+        }
+      ],
+      "situacion": {
+        "contexto": "Carlos recibe en casa a Mia, su estudiante de intercambio.",
+        "dialogo": [
+          {
+            "hablante": "Carlos",
+            "texto": "Welcome, Mia! You must be tired after such a long journey.",
+            "traduccion": "¡Bienvenida, Mia! Debes de estar cansada después de un viaje tan largo."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "A little. When I arrived at the airport, I had forgotten my charger, so my phone died.",
+            "traduccion": "Un poco. Cuando llegué al aeropuerto, me había olvidado el cargador y mi móvil se apagó."
+          },
+          {
+            "hablante": "Carlos",
+            "texto": "Oh no! You can use mine. And you can use the kitchen as long as you clean up afterwards.",
+            "traduccion": "¡Vaya! Puedes usar el mío. Y puedes usar la cocina siempre que limpies después."
+          },
+          {
+            "hablante": "Mia",
+            "texto": "Of course. Thank you!",
+            "traduccion": "Claro. ¡Gracias!"
+          }
+        ],
+        "item": {
+          "formato": "elegir",
+          "consigna": "Según el diálogo, ¿qué condición pone Carlos para usar la cocina?",
+          "opciones": [
+            {
+              "es": "Que Mia limpie después de usarla."
+            },
+            {
+              "es": "Que Mia cocine para toda la familia."
+            },
+            {
+              "es": "Que Mia pida permiso cada vez."
+            }
+          ],
+          "respuesta": 0,
+          "feedback": "Carlos dice «as long as you clean up afterwards»: la condición es limpiar después de usar la cocina."
+        }
+      },
+      "tabla": {
+        "columnas": [
+          "Función",
+          "Estructura"
+        ],
+        "filas": [
+          [
+            {
+              "texto": "Acoger"
+            },
+            {
+              "texto": "You must be + adjetivo"
+            }
+          ],
+          [
+            {
+              "texto": "Anécdota"
+            },
+            {
+              "texto": "pasado simple + had + participio"
+            }
+          ],
+          [
+            {
+              "texto": "Negociar"
+            },
+            {
+              "texto": "as long as / provided that + presente"
+            }
+          ],
+          [
+            {
+              "texto": "Queja con tacto"
+            },
+            {
+              "texto": "I'd appreciate it if you could… / is said to have…"
+            }
+          ]
+        ]
+      }
+    }
+  }
+}
