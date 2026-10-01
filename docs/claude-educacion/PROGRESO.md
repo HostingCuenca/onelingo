@@ -53,9 +53,9 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Producción
 
-- Versión desplegada: `20260930-edu-13-lumo-feedback` · `main.dart.js` `6e0d55f7…`; biblioteca `0d281c1b…`; banco diagnóstico `16c0c6a5…`; backend sin cambios desde `edu-2`.
+- Versión desplegada: `20260930-edu-14-lumo-animado` · `main.dart.js` `7e121796…`; biblioteca `0d281c1b…`; banco diagnóstico `16c0c6a5…`; backend sin cambios desde `edu-2`.
 - Fecha: 2026-09-30
 - URL: https://onelingo.hostingcuenca.com
 - Estado de salud: `/api/salud` OK.
-- Respaldo: `/var/www/onelingo/backups/20260930-edu-13-lumo-feedback/web-anterior`
+- Respaldo: `/var/www/onelingo/backups/20260930-edu-14-lumo-animado/web-anterior`
 - Rollback: ver `DESPLIEGUES.md`; restauración web completa, sin reinicio de backend.

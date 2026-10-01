@@ -201,3 +201,12 @@ Commit: `469c40b` · Build: `main.dart.js` `6e0d55f7…`.
 Pruebas: 189 Flutter (1 omitida); navegador (build local, móvil): acierto y error verificados visualmente.
 Backup: `/var/www/onelingo/backups/20260930-edu-13-lumo-feedback/web-anterior` (= edu-12). Health: salud, APK, avatar y poses 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-13-lumo-feedback/web-retirada-post && cp -al backups/20260930-edu-13-lumo-feedback/web-anterior web'`
+
+## Release: 20260930-edu-14-lumo-animado
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: Lumo animado y siempre visible. Causa de «a veces no se ve»: en web cada imagen se descarga la primera vez que se dibuja y el panel aparecía antes. Arreglo: las 7 imágenes fijas se precargan al abrir la app y las animaciones (6 del cliente, optimizadas 6,6 → 2,7 MB: 216 px, 8 fps) en segundo plano; mientras la animación no está lista se ve la fija (mismo encuadre = sin salto). Reglas del cliente: sin rebote en el panel, nunca dos personajes a la vez (Lumo escucha solo antes de responder; feedback inline sin Lumo), prueba de nivel sin Lumo.
+Commit: `787b65d` · Build: `main.dart.js` `7e121796…`.
+Pruebas: 190 Flutter (1 omitida); navegador (build local, móvil): fijas precargadas al inicio y animaciones descargadas en segundo plano; prueba de nivel sin Lumo.
+Backup: `/var/www/onelingo/backups/20260930-edu-14-lumo-animado/web-anterior` (= edu-13). Health: salud, APK, avatar y poses 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-14-lumo-animado/web-retirada-post && cp -al backups/20260930-edu-14-lumo-animado/web-anterior web'`
