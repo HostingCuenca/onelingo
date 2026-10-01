@@ -1,7 +1,10 @@
 import {createAvatar} from './avatar.js?v=23';
-import {createLumo} from './lumo.js?v=23';
+import {createLumo} from './lumo.js?v=26';
 const $=id=>document.getElementById(id), audio=$('audio');
-const roster=await (await fetch('./roster.json?v=23')).json();
+// Todo lo que usa la conversación se carga ANTES de avisar a la app: si el
+// aviso llegaba antes que topics.json, el saludo fallaba en silencio y la
+// llamada se quedaba en «Conectando…».
+const [roster,units]=await Promise.all([fetch('./roster.json?v=23').then(r=>r.json()),fetch('./topics.json?v=25').then(r=>r.json())]);
 let config=null,tutor=null,avatar=null,ctx,analyser,history=[],busy=false,controller=null,vozController=null,audioURL=null,epoch=0,lastReply='',recorder=null,silenceTimer=null,recordingEpoch=0,selection=0;
 // Voz por frases: la primera se reproduce en streaming en cuanto llega y las
 // siguientes se descargan mientras tanto y suenan a continuación.
@@ -35,7 +38,6 @@ window.addEventListener('message',event=>{
  try{const c=JSON.parse(event.data);if(c.type!=='onelingo-avatar-init')return;const u=new URL(c.api);if(u.origin!==location.origin&&!['127.0.0.1','localhost'].includes(u.hostname))return;config=c;$('authStatus').textContent=c.token?`Nivel ${c.nivel} · tutores para practicar ${languageName()}`:'Inicia sesión en OneLingo para conversar con los tutores.';$('selectionCopy').textContent=`Elige a tu tutor de ${languageName()}. Puedes escribir o hablar; recibirás una respuesta y correcciones adaptadas a tu nivel.`;$('messageLabel').textContent=`Tu mensaje en ${languageName()}`;if(!embebido)renderGallery();controls();if(embebido&&tutorInicial&&!tutor){const t=roster.tutors.find(x=>x.id===tutorInicial);if(t)select(t);}}catch{}
 });
 parent.postMessage('onelingo-avatar-ready',location.origin);
-const units=await (await fetch('./topics.json')).json();
 for(const u of units){const o=document.createElement('option');o.value=u.id;o.textContent=u.nombre;$('topic').append(o)}
 // Integrado en la app la galería está oculta: no se dibuja (ahorra 11 retratos).
 function renderGallery(){
@@ -54,33 +56,56 @@ function reanudarAudio(){prepararAudio();return ctx.state==='running'?Promise.re
 function silencioWav(){const n=2205,b=new ArrayBuffer(44+n*2),v=new DataView(b),s=(o,t)=>[...t].forEach((c,i)=>v.setUint8(o+i,c.charCodeAt(0)));s(0,'RIFF');v.setUint32(4,36+n*2,true);s(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,44100,true);v.setUint32(28,88200,true);v.setUint16(32,2,true);v.setUint16(34,16,true);s(36,'data');v.setUint32(40,n*2,true);return URL.createObjectURL(new Blob([b],{type:'audio/wav'}));}
 // Sin sesión no hay conversación: decirlo en el escenario en lugar de quedarse en «Preparando».
 function sinSesion(){if(config?.token)return false;phase('Inicia sesión para conversar','error');status('Inicia sesión en OneLingo para conversar con tu tutor.');return true;}
-async function select(t){colgar(false);avatar?.dispose();avatar=null;tutor=t;history=[];lastReply='';$('messages').replaceChildren();ideas([]);$('name').textContent=`${t.name} · ${languageName()}`;$('llamarTexto').textContent=`Llamar a ${t.name}`;$('selection').hidden=true;$('session').hidden=false;$('stage').classList.toggle('dosd',t.tipo==='2d');controls();$('loading').hidden=false;$('loading').style.display='grid';$('loading').textContent=`Cargando ${t.name}…`;$('error').textContent='';phase('Preparando tutor','loading');const version=++selection;
+async function select(t){colgar(false);document.body.classList.remove('puede-llamar');avatar?.dispose();avatar=null;tutor=t;history=[];lastReply='';$('messages').replaceChildren();ideas([]);$('name').textContent=`${t.name} · ${languageName()}`;$('llamarTexto').textContent='Contestar';$('llamaTexto').textContent=`${t.name} te está llamando…`;$('selection').hidden=true;$('session').hidden=false;$('stage').classList.toggle('dosd',t.tipo==='2d');controls();$('loading').hidden=false;$('loading').style.display='grid';$('loading').textContent=`Cargando ${t.name}…`;$('error').textContent='';phase('Preparando tutor','loading');const version=++selection;
  try{prepararAudio();avatar=t.tipo==='2d'?createLumo($('stage'),audio,analyser):createAvatar($('stage'),audio,analyser);
   // El saludo (texto y voz) se prepara mientras carga el personaje: al tocar
   // «Llamar», el tutor contesta al instante.
   const carga=avatar.load(t.model,e=>{if(version===selection&&e.total)$('loading').textContent=`Cargando ${t.name} · ${Math.round(e.loaded/e.total*100)} %`});
   if(!sinSesion())void requestTutor('',true);
   await carga;if(version!==selection)return;$('loading').style.display='none';controls();
-  if(!sinSesion()){phase(`${t.name} está listo`,'ready');status(`Toca «Llamar» para hablar con ${t.name}.`);}}
+  if(!sinSesion())void autoiniciar(version);}
  catch(e){if(version!==selection)return;avatar?.dispose();avatar=null;error(e);status('No se pudo cargar el tutor. Regresa y vuelve a intentarlo.');controls();}
 }
-// Toque en «Llamar»: todo lo que exige un gesto ocurre aquí, antes de cualquier espera.
-$('llamar').onclick=async()=>{
+// Iniciar la llamada. La parte síncrona (reanudar audio, desbloquear <audio>
+// con un WAV silencioso y pedir el micrófono) debe ocurrir dentro del toque.
+function iniciarLlamada(){
  if(enLlamada||!avatar||!config?.token)return;
  prepararAudio();const reanudar=ctx.resume().catch(()=>{});
  desbloqueo=silencioWav();audio.src=desbloqueo;audio.play().catch(()=>{});
  const permiso=navigator.mediaDevices?.getUserMedia?.({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
- enLlamada=true;controls();phase('Conectando…','thinking');status(`Llamando a ${tutor.name}…`);
+ document.body.classList.remove('puede-llamar');enLlamada=true;controls();phase('Conectando…','thinking');status(`Conectando con ${tutor.name}…`);
+ vigilarConexion(epoch);
+ void continuarLlamada(reanudar,permiso);
+}
+async function continuarLlamada(reanudar,permiso){
  await conLimite(reanudar,1500);if(!enLlamada)return;
  // El saludo suena ya; el permiso del micrófono se resuelve en paralelo.
- if(colaVoz.length)siguienteFrase(epoch);else if(respuestaCompleta&&!busy&&lastReply)speak(lastReply,epoch);
+ if(colaVoz.length)siguienteFrase(epoch);else if(respuestaCompleta&&!busy){if(lastReply)speak(lastReply,epoch);else void requestTutor('',true);}
  try{const stream=await permiso;if(!enLlamada){stream?.getTracks().forEach(t=>t.stop());return;}micStream=stream;micSource=ctx.createMediaStreamSource(micStream);meter=ctx.createAnalyser();meter.fftSize=1024;micSource.connect(meter);}
  catch(e){micStream=null;manosLibres=false;controls();error(e?.name==='NotAllowedError'?'Sin permiso de micrófono: puedes escribir tus mensajes o activarlo en el navegador.':'No se pudo abrir el micrófono. Puedes escribir tus mensajes.');}
  finTurnoTutor();
-};
+}
+// Vigilante: un saludo normal tarda 1–2 s. Si a los 7 s sigue «Conectando…»
+// sin voz, se cancela la petición colgada y se reintenta (2 veces); después
+// se avisa en lugar de dejar al alumno esperando.
+function vigilarConexion(version,intento=1){setTimeout(()=>{if(!enLlamada||version!==epoch||$('stage').dataset.phase!=='thinking'||vozActiva||recorder)return;
+ if(intento>2){colgar(false);phase('No se pudo conectar','error');$('llamaTexto').textContent='No se pudo conectar';$('llamarTexto').textContent='Volver a llamar';error('El tutor no responde. Revisa tu conexión y vuelve a llamar.');return;}
+ stop();phase('Conectando…','thinking');status(`Reconectando con ${tutor.name}…`);if(lastReply)speak(lastReply,epoch);else void requestTutor('',true);vigilarConexion(epoch,intento+1);},7000);}
+$('llamar').onclick=iniciarLlamada;
+// Que el tutor empiece hablando: si el navegador permite audio sin toque
+// (escritorio, Android) la llamada arranca sola; si no (iPhone), se ve una
+// llamada entrante con «Contestar» en lugar de un silencio.
+async function autoiniciar(version){
+ prepararAudio();const prueba=silencioWav();desbloqueo=prueba;audio.src=prueba;
+ const [sonido]=await Promise.all([conLimite(audio.play().then(()=>true,()=>false),600),conLimite(ctx.resume().catch(()=>{}),600)]);
+ if(version!==selection||enLlamada)return;
+ if(sonido===true&&ctx.state==='running'){iniciarLlamada();return;}
+ audio.removeAttribute('src');llamadaEntrante();
+}
+function llamadaEntrante(){document.body.classList.add('puede-llamar');phase(`${tutor.name} te está llamando`,'ringing');$('llamaTexto').textContent=`${tutor.name} te está llamando…`;$('llamarTexto').textContent='Contestar';status(`Toca «Contestar» para hablar con ${tutor.name}.`);}
 function cerrarMicrofono(){micSource?.disconnect();micSource=null;meter=null;micStream?.getTracks().forEach(t=>t.stop());micStream=null;}
 // Colgar: se cierra el micrófono y, si hubo conversación, se muestra el resumen.
-function colgar(resumen=true){const habia=enLlamada;stop();enLlamada=false;cerrarMicrofono();controls();if(habia&&tutor){phase('Llamada terminada','ready');status(`Toca «Llamar» para volver a hablar con ${tutor.name}.`);if(resumen&&history.some(t=>t.rol==='alumno'))void mostrarResumen();}}
+function colgar(resumen=true){const habia=enLlamada;stop();enLlamada=false;cerrarMicrofono();controls();if(habia&&tutor){document.body.classList.add('puede-llamar');phase('Llamada terminada','ready');$('llamaTexto').textContent='Llamada terminada';$('llamarTexto').textContent=`Volver a llamar a ${tutor.name}`;status('Puedes volver a llamar cuando quieras.');if(resumen&&history.some(t=>t.rol==='alumno'))void mostrarResumen();}}
 $('end').onclick=()=>colgar(true);
 $('silenciar').onclick=()=>{manosLibres=!manosLibres;if(!manosLibres&&recorder)cancelRecording();controls();if(manosLibres&&enLlamada&&!busy&&!vozActiva&&micStream)escuchar();status(manosLibres?'Manos libres: te escucho cuando el tutor termina.':'Micrófono en pausa. Toca 🎙 o escribe para responder.');};
 function cancelRecording(){recordingEpoch++;clearInterval(silenceTimer);if(recorder){recorder.onstop=null;if(recorder.state==='recording')recorder.stop();recorder=null;}$('mic').textContent='🎙 Hablar';$('stage').classList.remove('escuchando');}
@@ -140,8 +165,7 @@ $('replay').onclick=()=>{if(!lastReply||busy||!enLlamada)return;cancelRecording(
 $('form').onsubmit=event=>{event.preventDefault();send()};
 async function send(){const text=$('text').value.trim();if(!text||busy||!config?.token)return;await requestTutor(text,false);}
 async function requestTutor(text,opening=false){if(busy||!config?.token||!tutor||!avatar)return;if(!opening)stop();const version=epoch;busy=true;respuestaCompleta=false;controls();$('error').textContent='';ideas([]);if(!opening){$('text').value='';bubble(text,'mine');history.push({rol:'alumno',texto:text});}let answer=null,replied=false,frases=0;controller=new AbortController();const current=controller;const timeout=setTimeout(()=>current.abort(),45000);const turnStarted=performance.now();audio.dataset.turnStartedAt=turnStarted;delete audio.dataset.firstAudioMs;delete audio.dataset.replyReadyMs;delete audio.dataset.firstSentenceMs;if(enLlamada)phase(opening?`${tutor.name} contesta…`:'Pensando','thinking');if(!opening)status('El tutor está preparando su respuesta…');
- const u=units.find(u=>u.id===Number($('topic').value));
- try{const response=await fetch(config.api+'/chat',{method:'POST',headers:{...headers(),'Content-Type':'application/json','Accept':'text/event-stream'},signal:current.signal,body:JSON.stringify({idiomaMeta:language(),idiomaNativo:config.idiomaNativo,nivel:config.nivel,tutorId:'avatar_'+tutor.id,historial:history.slice(-30),objetivo:config.contexto,...(u?{situacionId:u.id,situacion:u.nombre}: {})})});
+ try{const u=units.find(u=>u.id===Number($('topic').value));const response=await fetch(config.api+'/chat',{method:'POST',headers:{...headers(),'Content-Type':'application/json','Accept':'text/event-stream'},signal:current.signal,body:JSON.stringify({idiomaMeta:language(),idiomaNativo:config.idiomaNativo,nivel:config.nivel,tutorId:'avatar_'+tutor.id,historial:history.slice(-30),objetivo:config.contexto,...(u?{situacionId:u.id,situacion:u.nombre}: {})})});
   if(!response.ok)throw Error(response.status===401?'Tu sesión ha caducado. Vuelve a iniciar sesión.':`No se pudo conectar con el tutor (${response.status}).`);
   const reader=response.body.getReader(),decoder=new TextDecoder();let pending='',final=false;
   function event(raw){if(version!==epoch)return;const line=raw.split('\n').find(l=>l.startsWith('data: '));if(!line)return;const e=JSON.parse(line.slice(6));if(e.tipo==='error')throw Error(e.data);
@@ -152,7 +176,7 @@ async function requestTutor(text,opening=false){if(busy||!config?.token||!tutor|
   }
   while(true){const {done,value}=await reader.read();if(done)break;pending+=decoder.decode(value,{stream:true});const parts=pending.split('\n\n');pending=parts.pop();for(const p of parts)event(p);}if(!final)throw Error('La respuesta quedó incompleta. Puedes volver a intentarlo.');
  }catch(e){if(version===epoch){phase('No se pudo responder','error');error(e.name==='AbortError'?'El tutor tardó demasiado. Puedes volver a intentarlo.':e);if(!replied&&!frases&&!opening){$('text').value=text;history.pop();}}}
- finally{clearTimeout(timeout);if(version===epoch){busy=false;respuestaCompleta=true;controller=null;controls();if(!enLlamada&&opening&&lastReply)status(`${tutor.name} está listo. Toca «Llamar».`);finTurnoTutor();}}
+ finally{clearTimeout(timeout);if(version===epoch){busy=false;respuestaCompleta=true;controller=null;controls();finTurnoTutor();}}
 }
 // Resumen al colgar: logros, correcciones, vocabulario y el siguiente paso. El
 // servidor guarda los «hechos del alumno» para personalizar la próxima llamada.

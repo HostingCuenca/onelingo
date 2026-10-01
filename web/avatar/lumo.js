@@ -53,8 +53,15 @@ export function createLumo(stage, audio, analyser) {
     const url = n => new URL(`${dir}${n}.webp?v=lumo1`, location.href).href;
     base.src = url('base');
     for (const n of BOCAS) bocas[n].src = url(`boca-${n}`);
-    // Todas decodificadas antes de hablar: cambiar de boca nunca deja un hueco.
-    await Promise.all([base, ...Object.values(bocas)].map(i => i.decode()));
+    // Todas cargadas antes de hablar: cambiar de boca nunca deja un hueco.
+    // `decode()` solo como mejora y con límite: en pestañas ocultas (o con la
+    // app en segundo plano) puede no resolverse nunca y dejaba «Cargando…».
+    const cargada = img => new Promise((ok, fallo) => {
+      if (img.complete && img.naturalWidth) return ok();
+      img.addEventListener('load', () => ok(), { once: true });
+      img.addEventListener('error', () => fallo(new Error('No se pudo cargar a Lumo. Revisa tu conexión.')), { once: true });
+    }).then(() => Promise.race([img.decode().catch(() => {}), new Promise(r => setTimeout(r, 1500))]));
+    await Promise.all([base, ...Object.values(bocas)].map(cargada));
     if (eliminado) return;
     cargado = true;
     stage.dataset.loaded = 'true';
