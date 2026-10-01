@@ -28,6 +28,8 @@ import '../features/onboarding/ubicacion_screen.dart';
 import '../features/onboarding/welcome_screen.dart';
 import '../features/plans/plans_screen.dart';
 import '../features/plans/tutors_screen.dart';
+import '../features/nivel0/leccion_n0_screen.dart';
+import '../features/nivel0/nivel0_screen.dart';
 import '../features/practice/practice_screen.dart';
 import '../features/progress/progress_screen.dart';
 import '../shared/widgets/widgets.dart';
@@ -94,6 +96,22 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
               // Ruta de fundamentos por idioma (esquema 2). Sustituye a la
               // pantalla foundations-v1; su progreso se lee por alias.
+              // Nivel 0 · Leer y pronunciar (inglés desde cero), antes de Fundamentos.
+              GoRoute(
+                path: '/nivel0',
+                builder: (_, _) => const Nivel0Screen(),
+                routes: [
+                  GoRoute(
+                    path: 'sonidos',
+                    builder: (_, _) => const MapaSonidosScreen(),
+                  ),
+                  GoRoute(
+                    path: 'leccion/:id',
+                    builder: (_, state) =>
+                        LeccionN0Screen(leccionId: state.pathParameters['id']!),
+                  ),
+                ],
+              ),
               GoRoute(
                 path: '/fundamentos',
                 builder: (_, _) => const RutaScreen(),

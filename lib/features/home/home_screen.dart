@@ -47,7 +47,9 @@ class HomeScreen extends ConsumerWidget {
               onTap: () {
                 // Destino según idioma y progreso: la ruta de fundamentos
                 // mientras esté pendiente; en inglés, el camino de Aprender.
-                if (s.fundamentosPendientes) {
+                if (s.nivel0Pendiente) {
+                  context.go('/nivel0');
+                } else if (s.fundamentosPendientes) {
                   context.go('/fundamentos');
                 } else if (s.idiomaMeta == 'en') {
                   context.go('/aprender');

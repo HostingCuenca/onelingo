@@ -1,0 +1,185 @@
+{
+  "esquema": "onelingo.nivel0.v1",
+  "idioma": "en",
+  "titulo": "Nivel 0 · Leer y pronunciar",
+  "subtitulo": "Para quien empieza de cero: cómo suenan las letras y cómo se lee el inglés.",
+  "voz": "sofia",
+  "nota": "Marcado de palabras: (letras:sonido) pinta las letras con el color del sonido (ver sonidos.json); _ = muda, = = dos letras un sonido, * = e mágica. Lo que no está entre paréntesis se muestra en negro.",
+  "unidades": [
+    {
+      "id": "u01",
+      "titulo": "Hello! Mis primeras palabras",
+      "objetivo": "Saludar, dar las gracias y decir tu nombre de oído, y descubrir que una letra puede sonar distinto.",
+      "lecciones": [
+        {
+          "id": "u01.l01",
+          "titulo": "Hola y adiós",
+          "pasos": [
+            {"tipo": "lumo", "pose": "anima", "texto": "¡Hola! Soy Lumo. Aquí empiezas de cero: primero escuchas, luego dices y al final lees. Toca cada tarjeta para oírla."},
+            {"tipo": "escucha", "palabras": [{"m": "hello", "e": "1f44b", "t": "hola"}, {"m": "hi", "e": "1f642", "t": "hola (informal)"}, {"m": "goodbye", "e": "1f44b", "t": "adiós"}, {"m": "bye", "e": "1f64b", "t": "chao"}]},
+            {"tipo": "repite", "m": "hello", "t": "hola"},
+            {"tipo": "escucha_elige", "audio": "hello", "pregunta": "¿Qué oíste?", "opciones": [{"m": "hello", "e": "1f44b"}, {"m": "goodbye", "e": "1f64b"}], "correcta": 0},
+            {"tipo": "escucha_elige", "audio": "bye", "pregunta": "¿Qué oíste?", "opciones": [{"m": "hi", "e": "1f642"}, {"m": "bye", "e": "1f64b"}], "correcta": 1},
+            {"tipo": "repite", "m": "goodbye", "t": "adiós"},
+            {"tipo": "lumo", "pose": "celebra", "texto": "¡Ya saludas en inglés! Fíjate: hello no se lee como en español. Por eso vamos a aprender cómo suenan las letras."}
+          ]
+        },
+        {
+          "id": "u01.l02",
+          "titulo": "Gracias, por favor, sí y no",
+          "pasos": [
+            {"tipo": "escucha", "palabras": [{"m": "thank you", "e": "1f64f", "t": "gracias"}, {"m": "please", "e": "1f932", "t": "por favor"}, {"m": "yes", "e": "2705", "t": "sí"}, {"m": "no", "e": "274c", "t": "no"}]},
+            {"tipo": "repite", "m": "thank you", "t": "gracias"},
+            {"tipo": "escucha_elige", "audio": "please", "pregunta": "¿Qué oíste?", "opciones": [{"m": "please", "e": "1f932"}, {"m": "thank you", "e": "1f64f"}], "correcta": 0},
+            {"tipo": "escucha_elige", "audio": "yes", "pregunta": "¿Qué oíste?", "opciones": [{"m": "no", "e": "274c"}, {"m": "yes", "e": "2705"}], "correcta": 1},
+            {"tipo": "repite", "m": "please", "t": "por favor"},
+            {"tipo": "elige_significado", "m": "thank you", "pregunta": "¿Qué significa?", "opciones": ["gracias", "hola", "por favor"], "correcta": 0}
+          ]
+        },
+        {
+          "id": "u01.l03",
+          "titulo": "Me llamo…",
+          "pasos": [
+            {"tipo": "lumo", "pose": "anima", "texto": "Para presentarte basta una frase: My name is… y tu nombre. Escúchala y repítela."},
+            {"tipo": "escucha", "palabras": [{"m": "My name is Ana.", "e": "1f4db", "t": "Me llamo Ana."}, {"m": "I'm Leo.", "e": "1f64b", "t": "Soy Leo."}, {"m": "Nice to meet you.", "e": "1f91d", "t": "Mucho gusto."}]},
+            {"tipo": "repite", "m": "My name is Ana.", "t": "Me llamo Ana."},
+            {"tipo": "escucha_elige", "audio": "Nice to meet you.", "pregunta": "¿Qué oíste?", "opciones": [{"m": "Nice to meet you.", "e": "1f91d"}, {"m": "My name is Ana.", "e": "1f4db"}], "correcta": 0},
+            {"tipo": "repite", "m": "Nice to meet you.", "t": "Mucho gusto."},
+            {"tipo": "elige_significado", "m": "I'm Leo.", "pregunta": "¿Qué significa?", "opciones": ["Soy Leo.", "Adiós, Leo.", "Gracias, Leo."], "correcta": 0}
+          ]
+        },
+        {
+          "id": "u01.l04",
+          "titulo": "Una letra, varios sonidos",
+          "pasos": [
+            {"tipo": "lumo", "pose": "sorprendido", "texto": "En español la a siempre suena «a». En inglés no: la misma letra cambia de sonido. Por eso cada sonido tendrá su color."},
+            {"tipo": "escucha", "palabras": [{"m": "(a:ae)pple", "e": "1f34e", "t": "manzana"}, {"m": "c(a:ey)k(e:*)", "e": "1f382", "t": "pastel"}, {"m": "c(ar:ar)", "e": "1f697", "t": "carro"}, {"m": "(a:ax)b(ou:aw)t", "e": "1f47b", "t": "sobre, acerca de"}]},
+            {"tipo": "mira", "m": "(a:ae)pple", "sonido": "ae", "texto": "La a roja es la a de apple: boca bien abierta, entre la «a» y la «e» del español."},
+            {"tipo": "mira", "m": "c(a:ey)k(e:*)", "sonido": "ey", "texto": "La a verde dice su nombre, «ei», como en cake. La e del final no suena (la verás gris)."},
+            {"tipo": "toca_sonido", "sonido": "ae", "pregunta": "¿Cuál tiene la a roja de apple?", "opciones": [{"m": "c(a:ey)k(e:*)", "e": "1f382"}, {"m": "(a:ae)nt", "e": "1f41c"}], "correcta": 1},
+            {"tipo": "lumo", "pose": "celebra", "texto": "¡Eso es! En el Mapa de Sonidos tienes todos los colores. Vamos con el abecedario."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u02",
+      "titulo": "El abecedario",
+      "objetivo": "Decir el nombre de las letras y deletrear tu nombre.",
+      "lecciones": [
+        {
+          "id": "u02.l01",
+          "titulo": "Letras que riman con A",
+          "pasos": [
+            {"tipo": "lumo", "pose": "anima", "texto": "Las letras tienen un nombre (para deletrear) y un sonido (para leer). Hoy, los nombres. Estas cuatro riman: A, H, J, K."},
+            {"tipo": "letras", "letras": ["A", "H", "J", "K"], "nota": "Todas terminan en «ei»: ei, eich, yei, kei."},
+            {"tipo": "escucha_letra", "letra": "H", "opciones": ["A", "H", "K"]},
+            {"tipo": "escucha_letra", "letra": "J", "opciones": ["J", "K", "A"]},
+            {"tipo": "letras", "letras": ["B", "C", "D", "E", "G", "P", "T", "V", "Z"], "nota": "Riman con «i»: bi, si, di, i, yi, pi, ti, vi, zi."},
+            {"tipo": "escucha_letra", "letra": "E", "opciones": ["A", "E", "I"]},
+            {"tipo": "escucha_letra", "letra": "G", "opciones": ["J", "G", "C"]}
+          ]
+        },
+        {
+          "id": "u02.l02",
+          "titulo": "El resto del abecedario",
+          "pasos": [
+            {"tipo": "letras", "letras": ["F", "L", "M", "N", "S", "X"], "nota": "Empiezan con «e»: ef, el, em, en, es, ex."},
+            {"tipo": "letras", "letras": ["I", "Y"], "nota": "I suena «ai» y Y suena «uai»."},
+            {"tipo": "letras", "letras": ["O", "Q", "U", "W", "R"], "nota": "O «ou», Q «kiu», U «iu», W «dábel-iu», R «ar»."},
+            {"tipo": "escucha_letra", "letra": "I", "opciones": ["E", "I", "Y"]},
+            {"tipo": "escucha_letra", "letra": "R", "opciones": ["A", "R", "E"]},
+            {"tipo": "escucha_letra", "letra": "W", "opciones": ["U", "W", "V"]}
+          ]
+        },
+        {
+          "id": "u02.l03",
+          "titulo": "Deletrear tu nombre",
+          "pasos": [
+            {"tipo": "lumo", "pose": "anima", "texto": "Para deletrear se dicen los nombres de las letras. Si una letra se repite: double L, double S."},
+            {"tipo": "deletreo", "palabra": "ANA", "pregunta": "Escucha y elige el nombre", "opciones": ["ANA", "ANN", "AMA"], "correcta": 0},
+            {"tipo": "deletreo", "palabra": "LEO", "pregunta": "Escucha y elige el nombre", "opciones": ["LIO", "LEO", "REO"], "correcta": 1},
+            {"tipo": "deletreo", "palabra": "SAM", "pregunta": "Escucha y elige el nombre", "opciones": ["SAM", "PAM", "SAN"], "correcta": 0},
+            {"tipo": "escucha", "palabras": [{"m": "How do you spell it?", "e": "2753", "t": "¿Cómo se deletrea?"}, {"m": "Double L.", "e": "1f522", "t": "Doble L."}]},
+            {"tipo": "repite", "m": "How do you spell it?", "t": "¿Cómo se deletrea?"},
+            {"tipo": "lumo", "pose": "celebra", "texto": "¡Ya deletreas! Ahora lo más importante: el sonido de cada letra para poder leer."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u03",
+      "titulo": "Primeros sonidos: s a t i p n m d",
+      "objetivo": "Leer palabras de tres letras juntando sonidos: sat, pin, man.",
+      "lecciones": [
+        {
+          "id": "u03.l01",
+          "titulo": "s, a, t",
+          "pasos": [
+            {"tipo": "lumo", "pose": "anima", "texto": "Para leer no se usan los nombres de las letras sino sus sonidos. La s suena «sss», como una serpiente. La t es corta: «t»."},
+            {"tipo": "mira", "m": "(a:ae)pple", "sonido": "ae", "texto": "La a roja de apple: abre bien la boca. Es la que más vas a leer."},
+            {"tipo": "escucha", "palabras": [{"m": "(a:ae)pple", "e": "1f34e", "t": "manzana"}, {"m": "(a:ae)nt", "e": "1f41c", "t": "hormiga"}, {"m": "(a:ae)t", "t": "en (un lugar)"}]},
+            {"tipo": "mezcla", "m": "s(a:ae)t", "t": "se sentó"},
+            {"tipo": "toca_sonido", "sonido": "ae", "pregunta": "¿Cuál tiene la a roja de apple?", "opciones": [{"m": "(a:ae)nt", "e": "1f41c"}, {"m": "c(a:ey)k(e:*)", "e": "1f382"}, {"m": "c(ar:ar)", "e": "1f697"}], "correcta": 0},
+            {"tipo": "construye", "m": "s(a:ae)t", "fichas": ["s", "a", "t"]},
+            {"tipo": "repite", "m": "s(a:ae)t", "t": "se sentó"},
+            {"tipo": "construye", "m": "(a:ae)t", "fichas": ["a", "t", "s"]}
+          ]
+        },
+        {
+          "id": "u03.l02",
+          "titulo": "i, p",
+          "pasos": [
+            {"tipo": "mira", "m": "p(i:ih)g", "sonido": "ih", "texto": "La i rosa de pig es corta y relajada: entre la «i» y la «e» del español. No es «iii» larga."},
+            {"tipo": "escucha", "palabras": [{"m": "(i:ih)t", "e": "1f449", "t": "eso"}, {"m": "s(i:ih)t", "e": "1fa91", "t": "sentarse"}, {"m": "t(a:ae)p", "e": "1f6b0", "t": "grifo"}, {"m": "s(i:ih)p", "e": "1f964", "t": "sorbo"}]},
+            {"tipo": "mezcla", "m": "s(i:ih)t", "t": "sentarse"},
+            {"tipo": "escucha_elige", "audio": "sit", "pregunta": "¿sat o sit?", "opciones": [{"m": "s(a:ae)t"}, {"m": "s(i:ih)t", "e": "1fa91"}], "correcta": 1},
+            {"tipo": "escucha_elige", "audio": "tap", "pregunta": "¿tap o tip?", "opciones": [{"m": "t(a:ae)p", "e": "1f6b0"}, {"m": "t(i:ih)p"}], "correcta": 0},
+            {"tipo": "cambia", "de": "s(a:ae)t", "a": "s(i:ih)t", "opciones": ["a", "i", "t"]},
+            {"tipo": "construye", "m": "t(i:ih)p", "fichas": ["t", "i", "p", "a"]},
+            {"tipo": "repite", "m": "s(i:ih)p", "t": "sorbo"}
+          ]
+        },
+        {
+          "id": "u03.l03",
+          "titulo": "n",
+          "pasos": [
+            {"tipo": "escucha", "palabras": [{"m": "p(i:ih)n", "e": "1f4cc", "t": "alfiler"}, {"m": "p(a:ae)n", "e": "1f373", "t": "sartén"}, {"m": "n(a:ae)p", "e": "1f634", "t": "siesta"}, {"m": "t(i:ih)n", "e": "1f96b", "t": "lata"}]},
+            {"tipo": "mezcla", "m": "p(a:ae)n", "t": "sartén"},
+            {"tipo": "escucha_elige", "audio": "pin", "pregunta": "¿pin o pan?", "opciones": [{"m": "p(i:ih)n", "e": "1f4cc"}, {"m": "p(a:ae)n", "e": "1f373"}], "correcta": 0},
+            {"tipo": "toca_sonido", "sonido": "ih", "pregunta": "¿Cuál tiene la i rosa de pig?", "opciones": [{"m": "n(a:ae)p", "e": "1f634"}, {"m": "t(i:ih)n", "e": "1f96b"}], "correcta": 1},
+            {"tipo": "cambia", "de": "p(i:ih)n", "a": "t(i:ih)n", "opciones": ["p", "t", "n"]},
+            {"tipo": "construye", "m": "n(a:ae)p", "fichas": ["n", "a", "p", "i"]},
+            {"tipo": "repite", "m": "p(a:ae)n", "t": "sartén"}
+          ]
+        },
+        {
+          "id": "u03.l04",
+          "titulo": "m, d",
+          "pasos": [
+            {"tipo": "escucha", "palabras": [{"m": "m(a:ae)n", "e": "1f468", "t": "hombre"}, {"m": "m(a:ae)p", "e": "1f5fa", "t": "mapa"}, {"m": "d(a:ae)d", "e": "1f468_200d_1f467", "t": "papá"}, {"m": "s(a:ae)d", "e": "1f622", "t": "triste"}]},
+            {"tipo": "mezcla", "m": "m(a:ae)p", "t": "mapa"},
+            {"tipo": "escucha_elige", "audio": "dad", "pregunta": "¿Qué oíste?", "opciones": [{"m": "d(a:ae)d", "e": "1f468_200d_1f467"}, {"m": "s(a:ae)d", "e": "1f622"}], "correcta": 0},
+            {"tipo": "cambia", "de": "m(a:ae)n", "a": "m(a:ae)p", "opciones": ["n", "p", "d"]},
+            {"tipo": "construye", "m": "m(a:ae)p", "fichas": ["m", "a", "p", "d"]},
+            {"tipo": "construye", "m": "s(a:ae)d", "fichas": ["s", "a", "d", "i"]},
+            {"tipo": "repite", "m": "m(a:ae)n", "t": "hombre"}
+          ]
+        },
+        {
+          "id": "u03.l05",
+          "titulo": "¡Ya lees frases!",
+          "pasos": [
+            {"tipo": "lumo", "pose": "anima", "texto": "Con estas 8 letras ya puedes leer frases. Toca cada palabra si necesitas oírla."},
+            {"tipo": "lee", "m": "D(a:ae)n s(a:ae)t.", "t": "Dan se sentó.", "pregunta": "¿Qué imagen va con la frase?", "opciones": [{"e": "1fa91"}, {"e": "1f373"}], "correcta": 0},
+            {"tipo": "lee", "m": "P(a:ae)m (a:ae)nd D(a:ae)n n(a:ae)p.", "t": "Pam y Dan duermen la siesta.", "pregunta": "¿Qué hacen Pam y Dan?", "opciones": [{"e": "1f4cc"}, {"e": "1f634"}], "correcta": 1},
+            {"tipo": "lee", "m": "T(i:ih)m (i:ih)s s(a:ae)d.", "t": "Tim está triste.", "pregunta": "¿Cómo está Tim?", "opciones": [{"e": "1f622"}, {"e": "1f634"}], "correcta": 0},
+            {"tipo": "construye", "m": "p(i:ih)n", "fichas": ["p", "i", "n", "a"]},
+            {"tipo": "repite", "m": "D(a:ae)n s(a:ae)t.", "t": "Dan se sentó."},
+            {"tipo": "lumo", "pose": "celebra", "texto": "¡Leíste tus primeras frases en inglés! Sigue así: cada unidad suma letras y sonidos nuevos."}
+          ]
+        }
+      ]
+    }
+  ]
+}

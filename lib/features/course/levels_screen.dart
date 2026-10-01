@@ -13,6 +13,7 @@ import '../../core/state/providers.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../shared/widgets/tarjeta_fundamentos.dart';
+import '../nivel0/tarjeta_nivel0.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Mapa de los 10 niveles con su estado (bloqueado / en curso / aprobado).
@@ -57,6 +58,9 @@ class LevelsScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             const TituloSeccion('Explora tus diez etapas'),
             const SizedBox(height: 12),
+            // Nivel 0 · Leer y pronunciar (desde cero), antes de los diez niveles.
+            const TarjetaNivel0(),
+            const SizedBox(height: 10),
             for (var n = 1; n <= 10; n++)
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
