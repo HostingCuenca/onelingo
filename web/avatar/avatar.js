@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+// Geometría y formas de la cara comprimidas con meshopt (modelos 6 → 2 MB).
+import {MeshoptDecoder} from './vendor/meshopt_decoder.module.js';
 
 // Animation follows the audio analyser, not a wall-clock timer or generated video.
 // La boca combina visemas según el reparto de energía por bandas de frecuencia
@@ -21,7 +23,7 @@ export function createAvatar(stage, audio, analyser) {
   const values=new Uint8Array(analyser.fftSize), freq=new Uint8Array(analyser.frequencyBinCount), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function disposeRig(root){root?.traverse(o=>{if(o.geometry)o.geometry.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material])){if(!m)continue;for(const v of Object.values(m))if(v?.isTexture)v.dispose();m.dispose()}})}
   async function load(url,onProgress){
-    const gltf=await new GLTFLoader().loadAsync(url,onProgress);
+    const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url,onProgress);
     if(disposed){disposeRig(gltf.scene);return;}
     rig=gltf.scene;scene.add(rig);head=rig.getObjectByName('head');body=rig.getObjectByName('spine_03');
     if(!head||!body)throw Error('El rig del tutor no está disponible.');
