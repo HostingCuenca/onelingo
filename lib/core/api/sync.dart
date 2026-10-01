@@ -319,6 +319,52 @@ class Sync {
     return null;
   }
 
+  /// Revisión con IA de una respuesta escrita de la ruta: decide por
+  /// significado y corrección (no por coincidencia exacta) y explica qué
+  /// cambiar. null sin sesión, sin conexión o si tarda más de 12 s.
+  Future<Map<String, dynamic>?> revisarEscritura({
+    required String idiomaMeta,
+    required String idiomaNativo,
+    required int nivel,
+    required String itemId,
+    required String consigna,
+    required String texto,
+    required String modelo,
+    required List<String> aceptadas,
+    required String respuesta,
+    required bool abierta,
+  }) async {
+    if (!conectado) return null;
+    try {
+      final r = await http
+          .post(
+            Uri.parse('$baseUrl/ejercicios/revisar'),
+            headers: {
+              'content-type': 'application/json',
+              'authorization': 'Bearer $token',
+            },
+            body: jsonEncode({
+              'idiomaMeta': idiomaMeta,
+              'idiomaNativo': idiomaNativo,
+              'nivel': nivel,
+              'itemId': itemId,
+              'consigna': consigna,
+              'texto': texto,
+              'modelo': modelo,
+              'aceptadas': aceptadas.take(12).toList(),
+              'respuesta': respuesta,
+              'abierta': abierta,
+            }),
+          )
+          .timeout(const Duration(seconds: 12));
+      if (r.statusCode == 200) {
+        final j = jsonDecode(r.body);
+        if (j is Map<String, dynamic> && j['correcta'] is bool) return j;
+      }
+    } catch (_) {}
+    return null;
+  }
+
   /// Voz del alumno → texto con la IA del servidor (OpenAI). null si falla.
   Future<String?> transcribir(
     List<int> audio,

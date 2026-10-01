@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app/theme.dart';
+import '../../core/api/sync.dart';
 import '../../core/aprendizaje/biblioteca_adaptador.dart';
 import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/modelos.dart';
@@ -38,14 +40,139 @@ class _Pantalla {
   final bool repetida;
 }
 
+const _nombreIdioma = {
+  'en': 'inglés',
+  'es': 'español',
+  'fr': 'francés',
+  'de': 'alemán',
+  'pt': 'portugués',
+  'it': 'italiano',
+  'zh': 'chino',
+  'ja': 'japonés',
+  'ko': 'coreano',
+  'ru': 'ruso',
+};
+
+/// Ejercicios extra hechos con el material ya revisado de la clase, para que
+/// cada clase no sea siempre elegir/completar/ordenar/escuchar: «Une las
+/// parejas» con su vocabulario y «Escribe en …» con uno de sus ejemplos
+/// (lo corrige la IA si no coincide exactamente).
+({Item? unir, Item? escribir}) _ejerciciosDeClase(
+  UnidadRuta u,
+  List<String> cadena,
+) {
+  // Solo las clases editoriales N1–N10 (siempre la misma plantilla); las
+  // unidades de Fundamentos tienen una secuencia diseñada a mano.
+  if (!_claseEditorial.hasMatch(u.id)) return (unir: null, escribir: null);
+  final semilla = u.id.codeUnits.fold<int>(
+    7,
+    (h, c) => (h * 31 + c) & 0x3fffffff,
+  );
+  Item? unir, escribir;
+  final vocab = u.pasos.where((p) => p.tipo == TipoPaso.vocabulario);
+  final palabras = <Vocablo>[];
+  final vistos = <String>{};
+  for (final p in vocab) {
+    for (final id in p.refs) {
+      final v = u.vocablo(id);
+      final sentido = v?.traduccion.en(cadena).trim().toLowerCase() ?? '';
+      if (v == null || v.texto.trim().isEmpty || sentido.isEmpty) continue;
+      if (!vistos.add(sentido) || !vistos.add(v.texto.toLowerCase())) continue;
+      palabras.add(v);
+    }
+  }
+  if (palabras.length >= 3) {
+    palabras.shuffle(Random(semilla));
+    unir = Item(
+      id: '${u.id}.dinamico.unir',
+      formato: FormatoItem.relacionar,
+      consigna: const TextoApoyo({'es': 'Une cada palabra con su significado'}),
+      feedback: const TextoApoyo({
+        'es': 'Son palabras de esta clase: repásalas en voz alta.',
+      }),
+      pares: [for (final v in palabras.take(4)) (v.texto, v.traduccion)],
+    );
+  }
+  final ejemplos = [
+    for (final p in u.pasos.where((p) => p.tipo == TipoPaso.ejemplos))
+      ...p.frases.where(
+        (f) => f.texto.trim().isNotEmpty && !f.traduccion.isEmpty,
+      ),
+  ];
+  if (ejemplos.isNotEmpty) {
+    final f = ejemplos[semilla % ejemplos.length];
+    escribir = Item(
+      id: '${u.id}.dinamico.escribir',
+      formato: FormatoItem.escribir,
+      consigna: TextoApoyo({
+        'es': 'Escribe esta frase en ${_nombreIdioma[u.idioma] ?? u.idioma}',
+      }),
+      feedback: const TextoApoyo({'es': 'Es uno de los ejemplos de la clase.'}),
+      texto: f.traduccion.en(cadena),
+      respuesta: f.texto,
+      aceptadas: [f.texto],
+    );
+  }
+  return (unir: unir, escribir: escribir);
+}
+
+final _claseEditorial = RegExp(r'\.n\d+\.class-');
+
+/// Añade el ejercicio extra solo si ese formato no aparece ya en el bloque
+/// que verá el alumno.
+void _anadirSiFalta(
+  List<_Pantalla> bloque,
+  Paso paso,
+  Item? item, {
+  bool alInicio = false,
+}) {
+  if (item == null || bloque.any((p) => p.item?.formato == item.formato)) {
+    return;
+  }
+  bloque.insert(alInicio ? 0 : bloque.length, _Pantalla(paso, item));
+}
+
+/// Alterna los formatos: evita dos ejercicios seguidos del mismo tipo cuando
+/// hay otro disponible (sin cambiar qué ejercicios se hacen).
+List<_Pantalla> _alternar(List<_Pantalla> bloque) {
+  final pendientes = [...bloque], res = <_Pantalla>[];
+  while (pendientes.isNotEmpty) {
+    final anterior = res.isEmpty ? null : res.last.item?.formato;
+    final i = pendientes.indexWhere((p) => p.item?.formato != anterior);
+    res.add(pendientes.removeAt(i < 0 ? 0 : i));
+  }
+  return res;
+}
+
+/// Formatos de los ejercicios de una clase en el orden en que se ven.
+@visibleForTesting
+List<FormatoItem> formatosDeClase(
+  UnidadRuta u, {
+  List<String> cadena = const ['es'],
+}) => [
+  for (final p in _pantallasDe(u, repaso: false, cadena: cadena))
+    if (p.item != null) p.item!.formato,
+];
+
 List<_Pantalla> _pantallasDe(
   UnidadRuta u, {
   required bool repaso,
   BibliotecaUnidadRuntime? runtime,
+  List<String> cadena = const ['es'],
 }) {
   if (runtime?.activa == true) {
-    return _pantallasBiblioteca(u, repaso: repaso, runtime: runtime!);
+    return _pantallasBiblioteca(
+      u,
+      repaso: repaso,
+      runtime: runtime!,
+      cadena: cadena,
+    );
   }
+  final extra = repaso ? null : _ejerciciosDeClase(u, cadena);
+  final practicaExtra = Paso(
+    id: '${u.id}.dinamico',
+    tipo: TipoPaso.practicaIndependiente,
+  );
   final res = <_Pantalla>[];
   for (final p in u.pasos) {
     if (repaso) {
@@ -59,7 +186,18 @@ List<_Pantalla> _pantallasDe(
       res.add(_Pantalla(p));
     } else {
       if (p.tipo == TipoPaso.situacion) res.add(_Pantalla(p));
-      res.addAll(p.items.map((i) => _Pantalla(p, i)));
+      final bloque = [for (final i in p.items) _Pantalla(p, i)];
+      if (p.tipo == TipoPaso.practicaGuiada) {
+        _anadirSiFalta(bloque, practicaExtra, extra?.unir, alInicio: true);
+      }
+      if (p.tipo == TipoPaso.practicaIndependiente) {
+        _anadirSiFalta(bloque, practicaExtra, extra?.escribir);
+      }
+      res.addAll(
+        p.tipo == TipoPaso.evaluacion || !_claseEditorial.hasMatch(u.id)
+            ? bloque
+            : _alternar(bloque),
+      );
     }
   }
   return res;
@@ -69,10 +207,22 @@ List<_Pantalla> _pantallasBiblioteca(
   UnidadRuta u, {
   required bool repaso,
   required BibliotecaUnidadRuntime runtime,
+  List<String> cadena = const ['es'],
 }) {
   final result = <_Pantalla>[];
+  final extra = repaso ? null : _ejerciciosDeClase(u, cadena);
+  final practicaExtra = Paso(
+    id: '${u.id}.dinamico',
+    tipo: TipoPaso.practicaIndependiente,
+  );
 
-  void addPool(String pool, TipoPaso type, String suffix) {
+  void addPool(
+    String pool,
+    TipoPaso type,
+    String suffix, {
+    Item? antes,
+    Item? despues,
+  }) {
     final selection = runtime.pool(pool);
     if (selection == null) return;
     final step = Paso(
@@ -82,9 +232,10 @@ List<_Pantalla> _pantallasBiblioteca(
         for (final variant in selection.variants) itemDesdeVariante(variant),
       ],
     );
+    final bloque = <_Pantalla>[];
     for (var index = 0; index < step.items.length; index++) {
       final variant = selection.variants[index];
-      result.add(
+      bloque.add(
         _Pantalla(
           step,
           step.items[index],
@@ -95,6 +246,13 @@ List<_Pantalla> _pantallasBiblioteca(
         ),
       );
     }
+    _anadirSiFalta(bloque, practicaExtra, antes, alInicio: true);
+    _anadirSiFalta(bloque, practicaExtra, despues);
+    result.addAll(
+      type == TipoPaso.evaluacion || !_claseEditorial.hasMatch(u.id)
+          ? bloque
+          : _alternar(bloque),
+    );
   }
 
   if (repaso) {
@@ -104,8 +262,18 @@ List<_Pantalla> _pantallasBiblioteca(
   for (final step in u.pasos.where((step) => step.tipo.ensena)) {
     result.add(_Pantalla(step));
   }
-  addPool('practiceGuided', TipoPaso.practicaGuiada, 'guided');
-  addPool('practice', TipoPaso.practicaIndependiente, 'practice');
+  addPool(
+    'practiceGuided',
+    TipoPaso.practicaGuiada,
+    'guided',
+    antes: extra?.unir,
+  );
+  addPool(
+    'practice',
+    TipoPaso.practicaIndependiente,
+    'practice',
+    despues: extra?.escribir,
+  );
   for (final step in u.pasos.where((step) => step.tipo == TipoPaso.situacion)) {
     result.add(_Pantalla(step));
     // Ítem propio de la situación (enriquecimiento editorial). Las clases aún
@@ -241,6 +409,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     widget.unidad,
     repaso: widget.repaso,
     runtime: widget.runtime,
+    cadena: cadenaDelAlumno(ref.read(progressProvider), widget.ruta.curso),
   );
 
   /// Un ejercicio de práctica fallado vuelve al final de su bloque (una vez
@@ -441,47 +610,74 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         ),
       ),
       body: Movil(
-        child: ListView(
-          controller: scroll,
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
-          children: terminado
-              ? _resultado(context)
-              : [
-                  BarraProgreso((indice + 1) / pantallas.length, alto: 8),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Wrap(
-                          spacing: 8,
-                          runSpacing: 6,
-                          children: [
-                            Etiqueta(nombreTipo),
-                            if (pantalla.repetida)
-                              const Etiqueta(
-                                'Otra vez',
-                                color: OL.naranja,
-                                fondo: OL.naranjaSuave,
-                                icono: Icons.replay_rounded,
-                              ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        '${indice + 1} / ${pantallas.length}',
-                        style: const TextStyle(color: OL.gris),
-                      ),
-                    ],
+        child: !terminado && pantalla.item != null && !bloqueada
+            // Ejercicio: cabecera arriba, ejercicio desplazable y el botón
+            // COMPROBAR / SIGUIENTE fijo abajo, siempre a la vista.
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+                    child: _cabeceraPaso(pantalla, nombreTipo),
                   ),
-                  const SizedBox(height: 16),
-                  ..._contenido(context, pantalla),
+                  Expanded(
+                    child: _contenido(context, pantalla, fijo: true).single,
+                  ),
                 ],
-        ),
+              )
+            : ListView(
+                controller: scroll,
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
+                children: terminado
+                    ? _resultado(context)
+                    : [
+                        _cabeceraPaso(pantalla, nombreTipo),
+                        const SizedBox(height: 16),
+                        ..._contenido(context, pantalla),
+                      ],
+              ),
       ),
     );
   }
 
-  List<Widget> _contenido(BuildContext context, _Pantalla pantalla) {
+  /// Progreso de la unidad y tipo de paso (común a lecciones y ejercicios).
+  Widget _cabeceraPaso(_Pantalla pantalla, String nombreTipo) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      BarraProgreso((indice + 1) / pantallas.length, alto: 8),
+      const SizedBox(height: 12),
+      Row(
+        children: [
+          Expanded(
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 6,
+              children: [
+                Etiqueta(nombreTipo),
+                if (pantalla.repetida)
+                  const Etiqueta(
+                    'Otra vez',
+                    color: OL.naranja,
+                    fondo: OL.naranjaSuave,
+                    icono: Icons.replay_rounded,
+                  ),
+              ],
+            ),
+          ),
+          Text(
+            '${indice + 1} / ${pantallas.length}',
+            style: const TextStyle(color: OL.gris),
+          ),
+        ],
+      ),
+    ],
+  );
+
+  List<Widget> _contenido(
+    BuildContext context,
+    _Pantalla pantalla, {
+    bool fijo = false,
+  }) {
     final p = pantalla.paso;
     final item = pantalla.item;
     final idioma = u.idioma;
@@ -515,41 +711,44 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       final guiada = p.tipo == TipoPaso.practicaGuiada;
       final evalua = widget.repaso || p.tipo == TipoPaso.evaluacion;
       return [
-        // La pregunta de una situación se responde con el diálogo a la vista.
-        if (p.tipo == TipoPaso.situacion && p.frases.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: Tarjeta(
-              color: OL.azulSuave,
-              sombra: false,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (final linea in p.frases)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 3),
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            if (linea.hablante != null)
-                              TextSpan(
-                                text: '${linea.hablante}: ',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  color: OL.azul,
-                                ),
-                              ),
-                            TextSpan(text: linea.texto),
-                          ],
-                        ),
-                        style: const TextStyle(fontSize: 16, height: 1.35),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
         ItemView(
+          botonFijo: fijo,
+          encabezado: [
+            // La pregunta de una situación se responde con el diálogo a la vista.
+            if (p.tipo == TipoPaso.situacion && p.frases.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Tarjeta(
+                  color: OL.azulSuave,
+                  sombra: false,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final linea in p.frases)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 3),
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
+                                if (linea.hablante != null)
+                                  TextSpan(
+                                    text: '${linea.hablante}: ',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      color: OL.azul,
+                                    ),
+                                  ),
+                                TextSpan(text: linea.texto),
+                              ],
+                            ),
+                            style: const TextStyle(fontSize: 16, height: 1.35),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
           key: ValueKey('${p.id}:${item.id}:$indice'),
           item: item,
           idioma: idioma,
@@ -577,6 +776,26 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                 );
           },
           onContinuar: siguiente,
+          // Frases escritas: la IA acepta cualquier forma correcta (no solo
+          // las previstas) y explica qué cambiar.
+          revisarConIa: (item, respuesta) {
+            final s = ref.read(progressProvider);
+            return Sync.instancia.revisarEscritura(
+              idiomaMeta: idioma,
+              idiomaNativo: s.idiomaNativo,
+              nivel: s.nivelActual.clamp(1, 10),
+              itemId: item.id,
+              consigna: item.consigna.en(cadena),
+              texto: [
+                item.texto,
+                item.pregunta,
+              ].whereType<String>().join(' · '),
+              modelo: item.respuesta ?? '',
+              aceptadas: item.aceptadas,
+              respuesta: respuesta,
+              abierta: item.abierta,
+            );
+          },
         ),
       ];
     }

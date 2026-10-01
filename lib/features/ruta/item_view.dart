@@ -67,10 +67,25 @@ class ItemView extends StatefulWidget {
     required this.onComprobado,
     required this.onContinuar,
     this.lumo = true,
+    this.revisarConIa,
+    this.botonFijo = false,
+    this.encabezado = const [],
   });
 
   /// Lumo acompaña (escucha, pista, panel). La prueba de nivel lo desactiva.
   final bool lumo;
+
+  /// Revisión con IA de las respuestas escritas (frases y producción abierta).
+  /// Solo se consulta si la comparación exacta no basta; null o sin conexión
+  /// = corrección local. La prueba de nivel no la usa.
+  final Future<Map<String, dynamic>?> Function(Item item, String respuesta)?
+  revisarConIa;
+
+  /// En la unidad, el botón de acción va fijo abajo (el contenido se desplaza).
+  final bool botonFijo;
+
+  /// Lo que va antes de la consigna dentro de la zona desplazable.
+  final List<Widget> encabezado;
   final Item item;
   final String idioma;
   final List<String> cadena;
@@ -160,6 +175,7 @@ class _ItemViewState extends State<ItemView> {
     }
     opcionCompletar = null;
     correcta = null;
+    revisionIa = null;
     izquierda = null;
     emparejados.clear();
     errores = 0;
@@ -230,24 +246,42 @@ class _ItemViewState extends State<ItemView> {
     FormatoItem.relacionar => emparejados.length == item.pares.length,
   };
 
-  void comprobar() {
-    if (correcta != null || !listo) return;
+  bool revisando = false;
+  Map<String, dynamic>? revisionIa;
+
+  Future<void> comprobar() async {
+    if (correcta != null || !listo || revisando) return;
     final respuesta = respuestaActual;
-    final ok = esCompletarMultipartes
+    var ok = esCompletarMultipartes
         ? completarMultipartesAprobado
         : corregir(item, switch (item.formato) {
             FormatoItem.elegir || FormatoItem.escuchar => elegido,
             FormatoItem.relacionar => relacionAprobada,
             _ => respuesta,
           }, widget.idioma);
+    // Escribir: hay muchas formas correctas de decir lo mismo. Si no coincide
+    // con una respuesta aceptada (o es producción abierta), decide la IA.
+    if (item.formato == FormatoItem.escribir &&
+        widget.revisarConIa != null &&
+        (!ok || item.abierta)) {
+      setState(() => revisando = true);
+      final r = await widget.revisarConIa!(item, respuesta);
+      if (!mounted) return;
+      revisando = false;
+      if (r != null) {
+        revisionIa = r;
+        ok = r['correcta'] == true;
+      }
+    }
+    final conPanel = !item.abierta || revisionIa != null;
     setState(() {
       correcta = ok;
-      panelAbierto = !item.abierta;
+      panelAbierto = conPanel;
     });
     unawaited(VozNube.instancia.parar().catchError((_) {}));
     ok ? Efectos.correcto() : Efectos.incorrecto();
     widget.onComprobado(ok, respuesta);
-    if (!item.abierta) {
+    if (conPanel) {
       WidgetsBinding.instance.addPostFrameCallback((_) => abrirPanel(ok));
     }
   }
@@ -255,6 +289,8 @@ class _ItemViewState extends State<ItemView> {
   /// Explicación del resultado (se muestra en el panel inferior).
   Widget cuerpoFeedback(bool ok) {
     final item = widget.item;
+    final revision = revisionIa;
+    if (revision != null) return cuerpoRevision(ok, revision);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -278,6 +314,53 @@ class _ItemViewState extends State<ItemView> {
           t(item.feedback),
           style: const TextStyle(fontSize: 17, height: 1.4),
         ),
+      ],
+    );
+  }
+
+  /// Panel con la revisión de la IA: corrección mínima, explicación y otra
+  /// forma correcta (el modelo) si es distinta de lo que escribió el alumno.
+  Widget cuerpoRevision(bool ok, Map<String, dynamic> r) {
+    final dada = respuestaActual.trim();
+    String norma(String s) => s
+        .toLowerCase()
+        .replaceAll(RegExp(r"[^a-z0-9\u00C0-\uFFFF' ]"), '')
+        .trim();
+    final correccion = (r['correccion'] as String? ?? '').trim();
+    final explicacion = (r['explicacion'] as String? ?? '').trim();
+    final modelo = (item.respuesta ?? '').trim();
+    const fuerte = TextStyle(
+      fontSize: 17,
+      fontWeight: FontWeight.w800,
+      height: 1.35,
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (correccion.isNotEmpty && norma(correccion) != norma(dada))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              ok ? 'Más natural: $correccion' : 'Corrección: $correccion',
+              style: fuerte,
+            ),
+          ),
+        if (explicacion.isNotEmpty)
+          Text(explicacion, style: const TextStyle(fontSize: 17, height: 1.4)),
+        if (modelo.isNotEmpty &&
+            norma(modelo) != norma(dada) &&
+            norma(modelo) != norma(correccion))
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Text(
+              'Otra forma: $modelo',
+              style: const TextStyle(
+                fontSize: 15,
+                color: OL.gris,
+                height: 1.35,
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -693,106 +776,147 @@ class _ItemViewState extends State<ItemView> {
   @override
   Widget build(BuildContext context) {
     final ok = correcta;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          t(item.consigna),
-          style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800),
-        ),
-        if (item.imagen != null) ...[
-          const SizedBox(height: 14),
-          Semantics(
-            image: true,
-            label: item.imagenAlt,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(18),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 280),
-                child: Image.asset(
-                  item.imagen!,
-                  fit: BoxFit.contain,
-                  semanticLabel: item.imagenAlt,
-                  excludeFromSemantics: true,
-                ),
+    final contenido = <Widget>[
+      ...widget.encabezado,
+      Text(
+        t(item.consigna),
+        style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800),
+      ),
+      if (item.imagen != null) ...[
+        const SizedBox(height: 14),
+        Semantics(
+          image: true,
+          label: item.imagenAlt,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 280),
+              child: Image.asset(
+                item.imagen!,
+                fit: BoxFit.contain,
+                semanticLabel: item.imagenAlt,
+                excludeFromSemantics: true,
               ),
             ),
           ),
-        ],
-        const SizedBox(height: 16),
-        ...cuerpo(),
-        if (widget.guiada && item.pista != null && ok == null) ...[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton.icon(
-              onPressed: () => setState(() => verPista = !verPista),
-              icon: const Icon(Icons.lightbulb_outline),
-              label: Text(verPista ? 'Ocultar pista' : 'Ver una pista'),
-            ),
+        ),
+      ],
+      const SizedBox(height: 16),
+      ...cuerpo(),
+      if (widget.guiada && item.pista != null && ok == null) ...[
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton.icon(
+            onPressed: () => setState(() => verPista = !verPista),
+            icon: const Icon(Icons.lightbulb_outline),
+            label: Text(verPista ? 'Ocultar pista' : 'Ver una pista'),
           ),
-          if (verPista)
-            Row(
+        ),
+        if (verPista)
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (widget.lumo) ...[
+                const LumoReaccion(pose: PoseLumo.pensando, size: 60),
+                const SizedBox(width: 8),
+              ],
+              Expanded(
+                child: Text(
+                  t(item.pista),
+                  style: const TextStyle(fontSize: 17, height: 1.4),
+                ),
+              ),
+            ],
+          ),
+      ],
+      if (ok != null && item.abierta && revisionIa == null)
+        FeedbackDock(
+          child: AnswerFeedback(
+            correct: true,
+            title: '¡Texto listo! Compáralo con el modelo',
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (widget.lumo) ...[
-                  const LumoReaccion(pose: PoseLumo.pensando, size: 60),
-                  const SizedBox(width: 8),
-                ],
-                Expanded(
-                  child: Text(
-                    t(item.pista),
-                    style: const TextStyle(fontSize: 17, height: 1.4),
+                Text(
+                  item.respuesta ?? '',
+                  style: const TextStyle(
+                    fontSize: 17,
+                    height: 1.4,
+                    fontWeight: FontWeight.w700,
                   ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  t(item.feedback),
+                  style: const TextStyle(fontSize: 17, height: 1.4),
                 ),
               ],
             ),
-        ],
-        if (ok != null && item.abierta)
-          FeedbackDock(
-            child: AnswerFeedback(
-              correct: true,
-              title: '¡Texto listo! Compáralo con el modelo',
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.respuesta ?? '',
-                    style: const TextStyle(
-                      fontSize: 17,
-                      height: 1.4,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    t(item.feedback),
-                    style: const TextStyle(fontSize: 17, height: 1.4),
-                  ),
-                ],
-              ),
+          ),
+        ),
+    ];
+    final acciones = <Widget>[
+      if (ok == null && item.formato != FormatoItem.relacionar)
+        BotonPrincipal(
+          onPressed: listo && !revisando ? comprobar : null,
+          child: Text(revisando ? 'REVISANDO…' : 'COMPROBAR'),
+        ),
+      // Tras responder siempre se puede seguir; un fallo en la práctica
+      // vuelve al final del bloque (lo gestiona la unidad).
+      // Respuesta calificada: el panel inferior lleva SIGUIENTE. Este botón
+      // solo aparece en la producción abierta o si el panel se cerró.
+      if (ok != null && ((item.abierta && revisionIa == null) || !panelAbierto))
+        BotonPrincipal(
+          color: ok ? OL.verde : OL.rojo,
+          onPressed: widget.onContinuar,
+          child: const Text('SIGUIENTE'),
+        ),
+      if (ok == false && widget.permitirReintento && !panelAbierto)
+        TextButton.icon(
+          onPressed: reiniciar,
+          icon: const Icon(Icons.replay_rounded),
+          label: const Text('Intentar otra vez ahora'),
+        ),
+    ];
+    if (!widget.botonFijo) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [...contenido, const SizedBox(height: 16), ...acciones],
+      );
+    }
+    // Como en Duolingo: el ejercicio se desplaza y COMPROBAR / SIGUIENTE
+    // quedan siempre a la vista, fijos abajo y por encima del borde.
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: contenido,
             ),
           ),
-        const SizedBox(height: 16),
-        if (ok == null && item.formato != FormatoItem.relacionar)
-          BotonPrincipal(
-            onPressed: listo ? comprobar : null,
-            child: const Text('COMPROBAR'),
-          ),
-        // Tras responder siempre se puede seguir; un fallo en la práctica
-        // vuelve al final del bloque (lo gestiona la unidad).
-        // Respuesta calificada: el panel inferior lleva SIGUIENTE. Este botón
-        // solo aparece en la producción abierta o si el panel se cerró.
-        if (ok != null && (item.abierta || !panelAbierto))
-          BotonPrincipal(
-            color: ok ? OL.verde : OL.rojo,
-            onPressed: widget.onContinuar,
-            child: const Text('SIGUIENTE'),
-          ),
-        if (ok == false && widget.permitirReintento && !panelAbierto)
-          TextButton.icon(
-            onPressed: reiniciar,
-            icon: const Icon(Icons.replay_rounded),
-            label: const Text('Intentar otra vez ahora'),
+        ),
+        if (acciones.isNotEmpty)
+          DecoratedBox(
+            decoration: const BoxDecoration(
+              color: OL.fondo,
+              border: Border(top: BorderSide(color: OL.grisClaro)),
+            ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                20,
+                12,
+                20,
+                20 + MediaQuery.paddingOf(context).bottom,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: acciones,
+              ),
+            ),
           ),
       ],
     );

@@ -44,6 +44,11 @@ body.embebido #selection{display:none}
 .cargando{position:absolute;inset:0;display:grid;place-content:center;color:var(--morado);font-weight:800}
 .cargando[hidden]{display:none}
 .abajo{padding-bottom:max(14px,env(safe-area-inset-bottom))}
+/* Zona inferior de alto FIJO: el tutor y el micrófono no se mueven aunque
+   cambie el largo de los subtítulos (el texto se desplaza dentro). */
+body.en-llamada .abajo,body.puede-llamar .abajo{flex:none;height:clamp(250px,44vh,340px);display:flex;flex-direction:column}
+.zona-texto{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-top:4px}
+.llamada-inicio,.controles,.hablar-texto{flex:none}
 
 /* Subtítulos */
 .subtitulos{text-align:center;min-height:24px}
@@ -118,6 +123,7 @@ body.grabando .hablar-texto{color:var(--rojo)}
  <button id="tema" class="tema" type="button" aria-label="Cambiar el tema de la conversación"><span id="temaNombre">Conversación libre</span><b aria-hidden="true">▾</b></button>
  <div id="stage" data-phase="loading"><div id="loading" class="cargando">Cargando…</div></div>
  <div class="abajo columna">
+  <div class="zona-texto">
   <div class="subtitulos" aria-live="polite">
    <p id="subTutor" class="sub-tutor"></p>
    <p id="subTraduccion" class="sub-traduccion" hidden></p>
@@ -128,8 +134,9 @@ body.grabando .hablar-texto{color:var(--rojo)}
   <div id="ideas" class="ideas" hidden></div>
   <p id="status" class="pista" role="status"></p>
   <p id="error" class="aviso" role="alert"></p>
-  <div class="llamada-inicio"><p id="llamaTexto" class="llama-texto"></p><button id="llamar" class="llamar" type="button" disabled><span aria-hidden="true">📞</span><span id="llamarTexto">Contestar</span></button></div>
   <form id="form" class="escribir" hidden><input id="text" autocomplete="off" maxlength="600" placeholder="Escribe tu respuesta…" aria-label="Tu mensaje"><button id="send" class="enviar">Enviar</button></form>
+  </div>
+  <div class="llamada-inicio"><p id="llamaTexto" class="llama-texto"></p><button id="llamar" class="llamar" type="button" disabled><span aria-hidden="true">📞</span><span id="llamarTexto">Contestar</span></button></div>
   <div class="controles">
    <button id="teclado" class="redondo" type="button" aria-label="Escribir en lugar de hablar">⌨️</button>
    <button id="hablar" class="hablar" type="button" aria-label="Mantén pulsado para hablar">🎙</button>
