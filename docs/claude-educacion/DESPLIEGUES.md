@@ -210,3 +210,12 @@ Commit: `787b65d` · Build: `main.dart.js` `7e121796…`.
 Pruebas: 190 Flutter (1 omitida); navegador (build local, móvil): fijas precargadas al inicio y animaciones descargadas en segundo plano; prueba de nivel sin Lumo.
 Backup: `/var/www/onelingo/backups/20260930-edu-14-lumo-animado/web-anterior` (= edu-13). Health: salud, APK, avatar y poses 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-14-lumo-animado/web-retirada-post && cp -al backups/20260930-edu-14-lumo-animado/web-anterior web'`
+
+## Release: 20260930-edu-15-lumo-escucha
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: Lumo escucha (pata en la oreja, animado) en todos los ejercicios de audio: elegir/escuchar, escucha y ordena/completa, dictado y «escucha y escribe» de las lecciones antiguas; también en el coach de las pantallas de listening (Práctica, Fundamentos, unidades de escucha), donde antes salía Nara. Se oculta al abrir el panel de resultado (nunca dos personajes) y no aparece en la prueba de nivel.
+Commit: `acd6e77` · Build: `main.dart.js` `eb9bdc46…`.
+Pruebas: 192 Flutter (1 omitida), incluida `lumo_escucha_test.dart`; navegador (build local): coach de Práctica con Lumo escucha.
+Backup: `/var/www/onelingo/backups/20260930-edu-15-lumo-escucha/web-anterior` (= edu-14). Health 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-15-lumo-escucha/web-retirada-post && cp -al backups/20260930-edu-15-lumo-escucha/web-anterior web'`
