@@ -2,7 +2,11 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 // Animation follows the audio analyser, not a wall-clock timer or generated video.
-// This is an amplitude-driven approximation, not phoneme-accurate alignment.
+// La boca combina visemas según el reparto de energía por bandas de frecuencia
+// (graves → O/U, medios → A, agudos → E/I, sibilantes → S): no es alineación
+// fonética exacta, pero ya no es un simple abrir y cerrar.
+// Estados como el Video Call de Duolingo: «pensando» (cabeza inclinada, mirada
+// arriba) mientras llega la respuesta y «escuchando» (atento) mientras hablas.
 export function createAvatar(stage, audio, analyser) {
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(33,1,.1,100);
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
@@ -14,7 +18,7 @@ export function createAvatar(stage, audio, analyser) {
   for(const [c,i,p] of [[0xf8ffe8,3,[-3,5,4]],[0xcfe9ff,1.5,[3,3,1]],[0xadc7ff,2,[0,4,-3]]]){const l=new THREE.DirectionalLight(c,i);l.position.set(...p);scene.add(l);}
   const observer=new ResizeObserver(()=>{camera.aspect=stage.clientWidth/stage.clientHeight;camera.updateProjectionMatrix();renderer.setSize(stage.clientWidth,stage.clientHeight)});observer.observe(stage);
   let rig,head,body,restHead,restBody,morphs=[],frameId,disposed=false,previous=performance.now(),start=previous,lastRender=0;
-  const values=new Uint8Array(analyser.fftSize), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const values=new Uint8Array(analyser.fftSize), freq=new Uint8Array(analyser.frequencyBinCount), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function disposeRig(root){root?.traverse(o=>{if(o.geometry)o.geometry.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material])){if(!m)continue;for(const v of Object.values(m))if(v?.isTexture)v.dispose();m.dispose()}})}
   async function load(url,onProgress){
     const gltf=await new GLTFLoader().loadAsync(url,onProgress);
@@ -46,13 +50,27 @@ export function createAvatar(stage, audio, analyser) {
   function frame(now){if(disposed)return;frameId=requestAnimationFrame(frame);if(now-lastRender<33)return;lastRender=now;const t=(now-start)/1000,dt=Math.min((now-previous)/1000,.05);previous=now;
     if(head){analyser.getByteTimeDomainData(values);let sum=0;for(const x of values)sum+=((x-128)/128)**2;
       const speaking=!audio.paused&&!audio.ended, amplitude=speaking?Math.min(1,Math.sqrt(sum/values.length)*7):0;
+      // Reparto de energía por bandas (bins de ~86 Hz con fftSize 512 a 44,1 kHz).
+      let low=0,mid=0,high=0,sib=0;
+      if(speaking){analyser.getByteFrequencyData(freq);const bin=analyser.context.sampleRate/analyser.fftSize;
+        for(let i=1;i<freq.length;i++){const f=i*bin,v=freq[i]*freq[i];if(f<600)low+=v;else if(f<2000)mid+=v;else if(f<5000)high+=v;else if(f<9000)sib+=v;}}
+      const total=low+mid+high+sib||1, sLow=low/total, sMid=mid/total, sHigh=high/total, sSib=sib/total;
+      const mood=stage.dataset.phase, thinking=(mood==='thinking'||mood==='voice-loading')&&!speaking, listening=mood==='listening'&&!speaking;
       const motion=reduced?0:.55, phase=t%4.3,blink=phase<.17?Math.sin(phase/.17*Math.PI):0;
       rig.position.y=Math.sin(t*1.5)*.002*motion;
-      head.quaternion.copy(restHead).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(Math.sin(t*.82)*.018*motion,Math.sin(t*.61)*.055*motion,Math.sin(t*.43)*.025*motion)));
+      // Pensando: inclina la cabeza y mira un poco hacia arriba. Escuchando: leve asentimiento.
+      const tiltX=thinking?-.06:listening?Math.sin(t*2.2)*.025:0, tiltZ=thinking?.07:0;
+      head.quaternion.copy(restHead).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(Math.sin(t*.82)*.018*motion+tiltX,Math.sin(t*.61)*.055*motion,Math.sin(t*.43)*.025*motion+tiltZ)));
       body.quaternion.copy(restBody).multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(Math.sin(t*.65)*.007*motion,Math.sin(t*.4)*.012*motion,0)));
       for(const m of morphs)for(const [n,i] of Object.entries(m.morphTargetDictionary)){let target=0;
-        if(n==='viseme_aa')target=amplitude*.85;
-        else if(n==='viseme_O')target=amplitude*.15;
+        if(n==='viseme_aa')target=amplitude*(.35+sMid*.9);
+        else if(n==='viseme_O')target=amplitude*sLow*.9;
+        else if(n==='viseme_U')target=amplitude*sLow*.35;
+        else if(n==='viseme_E')target=amplitude*sHigh*.8;
+        else if(n==='viseme_I')target=amplitude*sHigh*.35;
+        else if(n==='viseme_SS')target=amplitude*sSib*1.2;
+        else if(n==='viseme_PP')target=speaking&&amplitude<.06?.35:0;
+        else if(n.startsWith('browInnerUp'))target=thinking?.35:0;
         else if(n==='eyeBlinkLeft'||n==='eyeBlinkRight')target=blink;
         else if(n.startsWith('eyeSquint'))target=.12;
         else if(n.startsWith('mouthSmile'))target=speaking?.03:.14;

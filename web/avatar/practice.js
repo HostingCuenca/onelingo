@@ -1,7 +1,10 @@
-import {createAvatar} from './avatar.js?v=15';
+import {createAvatar} from './avatar.js?v=16';
 const $=id=>document.getElementById(id), audio=$('audio');
 const roster=await (await fetch('./roster.json')).json();
 let config=null,tutor=null,avatar=null,ctx,analyser,history=[],busy=false,controller=null,audioController=null,audioURL=null,epoch=0,lastReply='',recorder=null,micStream=null,silenceTimer=null,recordingEpoch=0,micSource=null,selection=0;
+// Silencio que cierra el turno de voz. 3 s se sentía como lag; 1,2 s es el
+// rango habitual de los asistentes de voz sin cortar pausas naturales.
+const FIN_SILENCIO_MS=1200;
 const languages={en:'inglés',es:'español',fr:'francés',de:'alemán',pt:'portugués',it:'italiano',zh:'chino',ja:'japonés',ko:'coreano',ru:'ruso'};
 const preferred={en:['amara','sofia','clara'],es:['lucia','mateo'],fr:['clara','sofia'],de:['daniel','owen'],pt:['amara','mateo'],it:['sofia','mateo'],zh:['mei','kenji'],ja:['kenji','mei'],ko:['mei','kenji'],ru:['owen','clara']};
 const language=()=>config?.idiomaMeta||'en',languageName=()=>languages[language()]||languages.en;
@@ -24,8 +27,12 @@ function renderGallery(){
 }
 renderGallery();
 function ensureAudio(){if(!ctx){ctx=new AudioContext();analyser=ctx.createAnalyser();analyser.fftSize=512;ctx.createMediaElementSource(audio).connect(analyser);analyser.connect(ctx.destination);}return ctx.resume();}
-async function select(t){stop();avatar?.dispose();avatar=null;tutor=t;history=[];lastReply='';$('messages').replaceChildren();bubble(`${t.name} iniciará la conversación cuando termine de cargar.`,'feedback');$('name').textContent=`${t.name} · ${languageName()}`;$('selection').hidden=true;$('session').hidden=false;controls();$('loading').hidden=false;$('loading').style.display='grid';$('loading').textContent=`Cargando ${t.name}…`;$('error').textContent='';phase('Preparando tutor','loading');const version=++selection;
- try{await ensureAudio();avatar=createAvatar($('stage'),audio,analyser);await avatar.load(t.model,e=>{if(version===selection&&e.total)$('loading').textContent=`Cargando ${t.name} · ${Math.round(e.loaded/e.total*100)} %`});if(version!==selection)return;$('loading').style.display='none';controls();await requestTutor('',true);}
+async function select(t){stop();avatar?.dispose();avatar=null;tutor=t;history=[];lastReply='';$('messages').replaceChildren();bubble(`${t.name} te saluda enseguida.`,'feedback');$('name').textContent=`${t.name} · ${languageName()}`;$('selection').hidden=true;$('session').hidden=false;controls();$('loading').hidden=false;$('loading').style.display='grid';$('loading').textContent=`Cargando ${t.name}…`;$('error').textContent='';phase('Preparando tutor','loading');const version=++selection;
+ try{await ensureAudio();avatar=createAvatar($('stage'),audio,analyser);
+  // El saludo (texto y voz) se pide en paralelo: no espera a que el modelo 3D termine de descargarse.
+  const carga=avatar.load(t.model,e=>{if(version===selection&&e.total)$('loading').textContent=`Cargando ${t.name} · ${Math.round(e.loaded/e.total*100)} %`});
+  void requestTutor('',true);
+  await carga;if(version!==selection)return;$('loading').style.display='none';controls();}
  catch(e){if(version!==selection)return;avatar?.dispose();avatar=null;error(e);status('No se pudo cargar el tutor. Regresa y vuelve a intentarlo.');controls();}
 }
 function cancelRecording(){recordingEpoch++;clearInterval(silenceTimer);if(recorder){recorder.onstop=null;recorder.stop();recorder=null;}micStream?.getTracks().forEach(t=>t.stop());micStream=null;micSource?.disconnect();micSource=null;$('mic').textContent='🎙 Hablar';}
@@ -79,8 +86,8 @@ $('mic').onclick=async()=>{
   catch(e){if(version===epoch)error(e)}finally{clearTimeout(timer);if(version===epoch){busy=false;controller=null;controls();}}
   if(autoSend&&version===epoch)send();
  };
- current.start();$('mic').textContent='■ Terminar';$('state').textContent='Te escucho';status('Habla con calma. Se cierra tras 3 segundos de silencio.');controls();
- silenceTimer=setInterval(()=>{meter.getFloatTimeDomainData(samples);let sum=0;for(const x of samples)sum+=x*x;const now=performance.now();if(Math.sqrt(sum/samples.length)>.012){spoken=true;lastSpeech=now;}if((spoken&&now-lastSpeech>=3000)||(!spoken&&now-start>15000)||now-start>60000){clearInterval(silenceTimer);if(current.state==='recording')current.stop();}},100);
+ current.start();$('mic').textContent='■ Terminar';phase('Te escucho','listening');status('Habla con calma. Se envía cuando dejas de hablar (o pulsa Terminar).');controls();
+ silenceTimer=setInterval(()=>{meter.getFloatTimeDomainData(samples);let sum=0;for(const x of samples)sum+=x*x;const now=performance.now();if(Math.sqrt(sum/samples.length)>.012){spoken=true;lastSpeech=now;}if((spoken&&now-lastSpeech>=FIN_SILENCIO_MS)||(!spoken&&now-start>15000)||now-start>60000){clearInterval(silenceTimer);if(current.state==='recording')current.stop();}},100);
  }catch(e){cancelRecording();error(e.name==='NotAllowedError'?'Activa el permiso del micrófono en tu navegador.':e);controls();}
 };
 window.addEventListener('offline',()=>{stop();error('No hay conexión. Tus mensajes se conservan en esta conversación.');});

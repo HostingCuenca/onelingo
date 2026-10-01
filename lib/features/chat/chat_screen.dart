@@ -118,7 +118,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         }
       },
       segundos: 60,
-      silencio: const Duration(seconds: 3),
+      // 1,2 s de silencio cierra el turno (3 s se sentía como lag).
+      silencio: const Duration(milliseconds: 1200),
       onProcesando: () {
         if (mounted) {
           setState(() {
