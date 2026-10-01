@@ -68,7 +68,7 @@ class HomeScreen extends ConsumerWidget {
             _HomeActions(
               onAcademy: () => context.go('/aprender'),
               onSituations: () => context.go('/practicar'),
-              onTutor: () => context.push('/avatar'),
+              onTutor: () => context.push('/tutores'),
               onProgress: () => context.go('/perfil'),
               onDiagnostic: () => context.push(
                 '/prueba-nivel',

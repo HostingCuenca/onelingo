@@ -1,10 +1,14 @@
-import {createAvatar} from './avatar.js?v=20';
+import {createAvatar} from './avatar.js?v=22';
 const $=id=>document.getElementById(id), audio=$('audio');
 const roster=await (await fetch('./roster.json')).json();
 let config=null,tutor=null,avatar=null,ctx,analyser,history=[],busy=false,controller=null,audioController=null,audioURL=null,epoch=0,lastReply='',recorder=null,micStream=null,silenceTimer=null,recordingEpoch=0,micSource=null,selection=0;
 // Silencio que cierra el turno de voz. 3 s se sentía como lag; 1,2 s es el
 // rango habitual de los asistentes de voz sin cortar pausas naturales.
 const FIN_SILENCIO_MS=1200;
+// Modo integrado en la app: la galería y la cabecera las pone Flutter; aquí
+// solo el escenario y la conversación con el tutor elegido (?embebido&tutor=id).
+const parametros=new URLSearchParams(location.search), embebido=parametros.has('embebido'), tutorInicial=parametros.get('tutor');
+if(embebido)document.body.classList.add('embebido');
 const languages={en:'inglés',es:'español',fr:'francés',de:'alemán',pt:'portugués',it:'italiano',zh:'chino',ja:'japonés',ko:'coreano',ru:'ruso'};
 const preferred={en:['amara','sofia','clara'],es:['lucia','mateo'],fr:['clara','sofia'],de:['daniel','owen'],pt:['amara','mateo'],it:['sofia','mateo'],zh:['mei','kenji'],ja:['kenji','mei'],ko:['mei','kenji'],ru:['owen','clara']};
 const language=()=>config?.idiomaMeta||'en',languageName=()=>languages[language()]||languages.en;
@@ -15,7 +19,7 @@ function headers(){return {'Authorization':`Bearer ${config.token}`}}
 function controls(){const disabled=!config?.token||!avatar||!$('stage').dataset.loaded||busy||!!recorder;$('send').disabled=disabled;$('text').disabled=busy;$('topic').disabled=busy||!!recorder;$('mic').disabled=busy||!config?.token||!avatar;}
 window.addEventListener('message',event=>{
  if(event.origin!==location.origin||event.source!==parent)return;
- try{const c=JSON.parse(event.data);if(c.type!=='onelingo-avatar-init')return;const u=new URL(c.api);if(u.origin!==location.origin&&!['127.0.0.1','localhost'].includes(u.hostname))return;config=c;$('authStatus').textContent=c.token?`Nivel ${c.nivel} · tutores para practicar ${languageName()}`:'Inicia sesión en OneLingo para conversar con los tutores.';$('selectionCopy').textContent=`Elige a tu tutor de ${languageName()}. Puedes escribir o hablar; recibirás una respuesta y correcciones adaptadas a tu nivel.`;$('messageLabel').textContent=`Tu mensaje en ${languageName()}`;renderGallery();controls();}catch{}
+ try{const c=JSON.parse(event.data);if(c.type!=='onelingo-avatar-init')return;const u=new URL(c.api);if(u.origin!==location.origin&&!['127.0.0.1','localhost'].includes(u.hostname))return;config=c;$('authStatus').textContent=c.token?`Nivel ${c.nivel} · tutores para practicar ${languageName()}`:'Inicia sesión en OneLingo para conversar con los tutores.';$('selectionCopy').textContent=`Elige a tu tutor de ${languageName()}. Puedes escribir o hablar; recibirás una respuesta y correcciones adaptadas a tu nivel.`;$('messageLabel').textContent=`Tu mensaje en ${languageName()}`;renderGallery();controls();if(embebido&&tutorInicial&&!tutor){const t=roster.tutors.find(x=>x.id===tutorInicial);if(t)select(t);}}catch{}
 });
 parent.postMessage('onelingo-avatar-ready',location.origin);
 const units=await (await fetch('./topics.json')).json();

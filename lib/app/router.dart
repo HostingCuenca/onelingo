@@ -184,7 +184,14 @@ final routerProvider = Provider<GoRouter>((ref) {
                   modo: s.uri.queryParameters['modo'] ?? 'practica',
                 ),
               ),
-              GoRoute(path: '/avatar', builder: (_, _) => const AvatarScreen()),
+              // La galería de tutores es nativa (/tutores); /avatar/:id abre la
+              // videollamada integrada con el tutor elegido.
+              GoRoute(path: '/avatar', redirect: (_, _) => '/tutores'),
+              GoRoute(
+                path: '/avatar/:id',
+                builder: (_, s) =>
+                    AvatarScreen(tutorId: s.pathParameters['id'] ?? 'amara'),
+              ),
               GoRoute(
                 path: '/tutores',
                 builder: (_, _) => const TutorsScreen(),

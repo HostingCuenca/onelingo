@@ -21,7 +21,7 @@ class TutorAvatarBanner extends StatelessWidget {
     button: true,
     label: 'Practica con nuestros tutores de inteligencia artificial',
     child: Tarjeta(
-      onTap: () => context.push('/avatar'),
+      onTap: () => context.push('/tutores'),
       padding: EdgeInsets.zero,
       color: OL.moradoSuave,
       borde: OL.moradoClaro,
@@ -162,7 +162,7 @@ class _TutorFace extends StatelessWidget {
     ),
     child: ClipOval(
       child: Image.asset(
-        'assets/img/tutores/$id.png',
+        'assets/img/tutores/$id.webp',
         fit: BoxFit.cover,
         alignment: const Alignment(0, -.72),
         excludeFromSemantics: true,

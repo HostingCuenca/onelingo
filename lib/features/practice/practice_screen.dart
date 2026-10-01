@@ -138,7 +138,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
           ),
           const SizedBox(height: 16),
           Tarjeta(
-            onTap: () => abrir('/avatar'),
+            onTap: () => abrir('/tutores'),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -152,7 +152,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                 ),
                 const SizedBox(height: 12),
                 FilledButton.icon(
-                  onPressed: () => abrir('/avatar'),
+                  onPressed: () => abrir('/tutores'),
                   icon: const Icon(Icons.record_voice_over),
                   label: const Text('Elegir mi tutor'),
                 ),

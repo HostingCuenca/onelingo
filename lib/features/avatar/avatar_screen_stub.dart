@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'tutores_3d.dart';
 
 class AvatarScreen extends StatelessWidget {
-  const AvatarScreen({super.key});
+  const AvatarScreen({super.key, required this.tutorId});
+  final String tutorId;
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Tutor con IA')),
-    body: const Center(
-      child: Text('La prueba de avatares está disponible en la versión web.'),
+    appBar: AppBar(title: Text(tutor3d(tutorId)?.nombre ?? 'Tutor con IA')),
+    body: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'La videollamada está disponible en la versión web.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => context.push('/chat'),
+              child: const Text('Hablar con mi tutor por voz'),
+            ),
+          ],
+        ),
+      ),
     ),
   );
 }

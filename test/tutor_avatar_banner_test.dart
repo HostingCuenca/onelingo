@@ -22,7 +22,7 @@ void main() {
           ),
         ),
         GoRoute(
-          path: '/avatar',
+          path: '/tutores',
           builder: (_, _) => const Scaffold(body: Text('Tutor con IA')),
         ),
       ],
