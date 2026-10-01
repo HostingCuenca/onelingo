@@ -34,7 +34,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     frame = web.HTMLIFrameElement()
       ..src = Uri.base
           .resolve(
-            '/avatar/index.html?v=avatar24&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
+            '/avatar/index.html?v=avatar25&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
           )
           .toString()
       ..title = 'Practica con un tutor de IA'
