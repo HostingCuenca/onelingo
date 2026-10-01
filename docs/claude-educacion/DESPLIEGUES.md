@@ -219,3 +219,14 @@ Commit: `acd6e77` · Build: `main.dart.js` `eb9bdc46…`.
 Pruebas: 192 Flutter (1 omitida), incluida `lumo_escucha_test.dart`; navegador (build local): coach de Práctica con Lumo escucha.
 Backup: `/var/www/onelingo/backups/20260930-edu-15-lumo-escucha/web-anterior` (= edu-14). Health 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-15-lumo-escucha/web-retirada-post && cp -al backups/20260930-edu-15-lumo-escucha/web-anterior web'`
+
+## Releases 20260930-edu-16 a edu-19 — Tutor con IA fluido e integrado
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code). Detalle y plan: `TUTOR_AVATAR_V2.md`.
+- **edu-16-tutor-fluido** (`e56d3b7`): modelos 3D 24 → 4–5 MB (texturas 1024 WebP, visemas intactos), saludo en paralelo a la carga, fin de turno por 1,2 s de silencio (avatar y chat), boca por bandas de frecuencia, estados pensando/escuchando; Nara vuelve al coach de escucha.
+- **edu-17-avatar-ligero** (`258148a`): geometría y formas de la cara con meshopt → modelos 1,5–2,1 MB (antes 22–28 MB); decodificador meshoptimizer 0.25 (MIT). Medido en producción: GLB de Amara 2,1 MB en ~3 s.
+- **edu-18-tutores-integrados** (`468ae63`): visor en tema claro de la app, brazos con caída natural, plano de videollamada, retratos regenerados desde el 3D (WebP ~20 KB).
+- **edu-19-tutores-ia** (`002774c`, `main.dart.js` `a03d7333…`): pantalla nativa única «Tutores con IA» (/tutores) con videollamada 3D y chat de voz/texto; /avatar/:id abre la videollamada integrada con la cabecera y las pestañas de la app.
+Pruebas: 194 Flutter (1 omitida); navegador (build local y producción): galería, videollamada integrada, carga del modelo, boca con audio.
+Backups: `/var/www/onelingo/backups/20260930-edu-1{6,7,8,9}-*/web-anterior` (cada uno = el anterior). Health 200 en todos; `.env` igual; lock liberado.
+Rollback (a edu-15): `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-16-tutor-fluido/web-retirada-post && cp -al backups/20260930-edu-16-tutor-fluido/web-anterior web'`

@@ -24,12 +24,13 @@ Pedagogía: el avatar no recibía la unidad, el vocabulario enseñado ni los err
 - **GPT-4o** con prompt en tres capas (diseñadores de aprendizaje · personaje · alumno), nivel MCER, estructura de llamada (apertura, primera pregunta preparada, conversación, cierre) y memoria de «hechos del alumno» tras cada llamada.
 - Fuentes: blog de Rive y de Duolingo, heise, whitepaper de Duolingo (ver informe de investigación).
 
-## Fase 1 — hecha (release edu-16)
+## Fase 1 — hecha (releases edu-16 a edu-19)
 
-- Modelos 3D optimizados (texturas 1024 px WebP, visemas intactos): **24 MB → 4–5 MB** por tutor.
+- Modelos 3D optimizados (texturas 1024 px WebP + geometría meshopt, visemas intactos): **22–28 MB → 1,5–2,1 MB** por tutor (~3 s en producción).
 - El saludo (texto y voz) se pide **en paralelo** a la descarga del modelo.
 - Fin de turno de voz: **1,2 s** de silencio (avatar web y chat), con botón Terminar.
 - Boca por bandas de frecuencia (A, O/U, E/I, S, labios cerrados) en lugar de solo abrir/cerrar.
+- Integración: pantalla nativa única «Tutores con IA» (videollamada 3D + chat de voz/texto), visor en tema claro dentro de la app con cabecera y pestañas, brazos con caída natural, retratos regenerados.
 - Estados tipo Duolingo: **pensando** (cabeza inclinada, mirada arriba, cejas) mientras llega la respuesta o la voz, y **escuchando** (leve asentimiento) mientras el alumno habla.
 
 ## Fase 2 — propuesta (requiere decisiones)
