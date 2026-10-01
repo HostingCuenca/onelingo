@@ -82,7 +82,7 @@ void main() {
     await tester.pump();
     await tester.tap(find.text('need'));
     await tester.tap(find.text('to call'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(result, isTrue);
     expect(find.text('¡Correcto!'), findsOneWidget);

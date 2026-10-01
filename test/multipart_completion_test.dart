@@ -60,7 +60,7 @@ void main() {
     final comprobar = find.text('COMPROBAR');
     await tester.ensureVisible(comprobar);
     await tester.tap(comprobar);
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(result, isTrue);
     expect(find.text('¡Correcto!'), findsOneWidget);
@@ -113,7 +113,7 @@ void main() {
       final comprobar = find.text('COMPROBAR');
       await tester.ensureVisible(comprobar);
       await tester.tap(comprobar);
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(result, isFalse);
       expect(find.text('Vamos a repasarlo'), findsOneWidget);

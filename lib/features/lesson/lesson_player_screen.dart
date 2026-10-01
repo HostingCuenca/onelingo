@@ -328,10 +328,28 @@ class _StepViewState extends State<_StepView> {
         resp = seleccion;
         ok = seleccion == s.answer;
     }
-    setState(() => correcto = ok);
+    setState(() {
+      correcto = ok;
+      _panel = true;
+    });
     ok ? Efectos.correcto() : Efectos.incorrecto();
     widget.onResultado(ok, resp);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      await mostrarPanelResultado(
+        context,
+        correcto: ok,
+        titulo: ok ? '¡Correcto!' : 'Vamos a repasarlo',
+        cuerpo: _cuerpoFeedback(),
+      );
+      if (!mounted) return;
+      setState(() => _panel = false);
+      widget.onSiguiente();
+    });
   }
+
+  /// Panel inferior abierto (lleva su propio SIGUIENTE).
+  bool _panel = false;
 
   @override
   Widget build(BuildContext context) {
@@ -370,9 +388,11 @@ class _StepViewState extends State<_StepView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(child: SingleChildScrollView(child: cuerpo)),
-        if (correcto != null) FeedbackDock(child: _feedback()),
+        if (correcto != null && !_panel) FeedbackDock(child: _feedback()),
         const SizedBox(height: 10),
-        if (correcto != null || sinComprobar)
+        if (_panel)
+          const SizedBox.shrink()
+        else if (correcto != null || sinComprobar)
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: correcto == false
@@ -380,7 +400,7 @@ class _StepViewState extends State<_StepView> {
                   : (correcto == true ? OL.verde : OL.morado),
             ),
             onPressed: puede ? widget.onSiguiente : null,
-            child: const Text('CONTINUAR'),
+            child: Text(sinComprobar ? 'CONTINUAR' : 'SIGUIENTE'),
           )
         else
           ElevatedButton(
@@ -395,21 +415,23 @@ class _StepViewState extends State<_StepView> {
     key: ValueKey(correcto),
     correct: correcto!,
     title: correcto! ? '¡Correcto!' : 'Vamos a repasarlo',
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (!correcto!)
-          Text(
-            'Respuesta: ${s.answer}',
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-        if (s.translation.isNotEmpty)
-          Text(
-            s.translation,
-            style: const TextStyle(color: OL.gris, fontSize: 13),
-          ),
-      ],
-    ),
+    child: _cuerpoFeedback(),
+  );
+
+  Widget _cuerpoFeedback() => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      if (!correcto!)
+        Text(
+          'Respuesta: ${s.answer}',
+          style: const TextStyle(fontWeight: FontWeight.w600),
+        ),
+      if (s.translation.isNotEmpty)
+        Text(
+          s.translation,
+          style: const TextStyle(color: OL.gris, fontSize: 13),
+        ),
+    ],
   );
 
   Widget _titulo(TextTheme t, String txt) => Padding(

@@ -101,7 +101,7 @@ void main() {
     await texto(tester, opcion);
     await texto(tester, 'COMPROBAR');
     expect(find.text('¡Correcto!'), findsOneWidget);
-    await texto(tester, 'CONTINUAR');
+    await texto(tester, 'SIGUIENTE', ultimo: true);
   }
 
   Future<void> relacionar(
@@ -113,7 +113,7 @@ void main() {
       await texto(tester, der, ultimo: true);
     }
     expect(find.text('¡Correcto!'), findsOneWidget);
-    await texto(tester, 'CONTINUAR');
+    await texto(tester, 'SIGUIENTE', ultimo: true);
   }
 
   testWidgets(
@@ -141,7 +141,7 @@ void main() {
       await texto(tester, 'COMPROBAR');
       expect(find.text('Vamos a repasarlo'), findsOneWidget);
       expect(find.text('Respuesta: hello'), findsOneWidget);
-      await texto(tester, 'CONTINUAR');
+      await texto(tester, 'SIGUIENTE', ultimo: true);
       await responder(tester, 'thank you');
       await relacionar(tester, [
         ('hello', 'hola'),
@@ -180,7 +180,7 @@ void main() {
       await tester.enterText(find.byType(TextField), 'Thank you');
       await tester.pumpAndSettle();
       await texto(tester, 'COMPROBAR');
-      await texto(tester, 'CONTINUAR');
+      await texto(tester, 'SIGUIENTE', ultimo: true);
       await responder(tester, 'excuse me');
       // Recompensa: celebración con XP, precisión y tiempo.
       expect(find.text('¡Lección completada!'), findsOneWidget);

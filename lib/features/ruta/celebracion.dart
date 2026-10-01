@@ -116,7 +116,7 @@ class _CelebracionUnidadState extends State<CelebracionUnidad> {
                   ),
                   padding: const EdgeInsets.all(14),
                   child: Image.asset(
-                    'assets/img/mascotas/lumo-saludo-alpha.webp',
+                    'assets/img/mascotas/lumo-sorprendido-alpha.webp',
                     semanticLabel: 'Lumo celebra contigo',
                   ),
                 ),

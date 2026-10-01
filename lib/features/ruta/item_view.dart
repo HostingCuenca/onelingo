@@ -9,6 +9,7 @@ import '../../core/aprendizaje/modelos.dart';
 import '../../core/efectos.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
+import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
 import 'opcion_respuesta.dart';
 
@@ -235,10 +236,66 @@ class _ItemViewState extends State<ItemView> {
             FormatoItem.relacionar => relacionAprobada,
             _ => respuesta,
           }, widget.idioma);
-    setState(() => correcta = ok);
+    setState(() {
+      correcta = ok;
+      panelAbierto = !item.abierta;
+    });
     unawaited(VozNube.instancia.parar().catchError((_) {}));
     ok ? Efectos.correcto() : Efectos.incorrecto();
     widget.onComprobado(ok, respuesta);
+    if (!item.abierta) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => abrirPanel(ok));
+    }
+  }
+
+  /// Explicación del resultado (se muestra en el panel inferior).
+  Widget cuerpoFeedback(bool ok) {
+    final item = widget.item;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (ok && soloFallanTildes(item, respuestaActual, widget.idioma))
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              'Ojo con las tildes: ${item.respuesta}',
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+            ),
+          ),
+        if (!ok && respuestaCorrectaTexto() != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 6),
+            child: Text(
+              'Respuesta: ${respuestaCorrectaTexto()}',
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+            ),
+          ),
+        Text(
+          t(item.feedback),
+          style: const TextStyle(fontSize: 17, height: 1.4),
+        ),
+      ],
+    );
+  }
+
+  bool panelAbierto = false;
+
+  Future<void> abrirPanel(bool ok) async {
+    if (!mounted) return;
+    final r = await mostrarPanelResultado(
+      context,
+      correcto: ok,
+      titulo: ok ? '¡Correcto!' : 'Vamos a repasarlo',
+      cuerpo: cuerpoFeedback(ok),
+      reintentar: !ok && widget.permitirReintento,
+    );
+    if (!mounted) return;
+    setState(() => panelAbierto = false);
+    if (r == 'reintentar') {
+      reiniciar();
+    } else {
+      widget.onContinuar();
+    }
   }
 
   void tocarDerecha(int d) {
@@ -674,9 +731,18 @@ class _ItemViewState extends State<ItemView> {
             ),
           ),
           if (verPista)
-            Text(
-              t(item.pista),
-              style: const TextStyle(fontSize: 17, height: 1.4),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const LumoReaccion(pose: PoseLumo.pensando, size: 60),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    t(item.pista),
+                    style: const TextStyle(fontSize: 17, height: 1.4),
+                  ),
+                ),
+              ],
             ),
         ],
         if (ok != null && item.abierta)
@@ -703,45 +769,6 @@ class _ItemViewState extends State<ItemView> {
                 ],
               ),
             ),
-          )
-        else if (ok != null)
-          FeedbackDock(
-            child: AnswerFeedback(
-              correct: ok,
-              title: ok ? '¡Correcto!' : 'Vamos a repasarlo',
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (ok &&
-                      soloFallanTildes(item, respuestaActual, widget.idioma))
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Text(
-                        'Ojo con las tildes: ${item.respuesta}',
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
-                  if (!ok && respuestaCorrectaTexto() != null)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 6),
-                      child: Text(
-                        'Respuesta: ${respuestaCorrectaTexto()}',
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
-                  Text(
-                    t(item.feedback),
-                    style: const TextStyle(fontSize: 17, height: 1.4),
-                  ),
-                ],
-              ),
-            ),
           ),
         const SizedBox(height: 16),
         if (ok == null && item.formato != FormatoItem.relacionar)
@@ -751,13 +778,15 @@ class _ItemViewState extends State<ItemView> {
           ),
         // Tras responder siempre se puede seguir; un fallo en la práctica
         // vuelve al final del bloque (lo gestiona la unidad).
-        if (ok != null)
+        // Respuesta calificada: el panel inferior lleva SIGUIENTE. Este botón
+        // solo aparece en la producción abierta o si el panel se cerró.
+        if (ok != null && (item.abierta || !panelAbierto))
           BotonPrincipal(
-            color: ok ? OL.verde : OL.morado,
+            color: ok ? OL.verde : OL.rojo,
             onPressed: widget.onContinuar,
-            child: const Text('CONTINUAR'),
+            child: const Text('SIGUIENTE'),
           ),
-        if (ok == false && widget.permitirReintento)
+        if (ok == false && widget.permitirReintento && !panelAbierto)
           TextButton.icon(
             onPressed: reiniciar,
             icon: const Icon(Icons.replay_rounded),

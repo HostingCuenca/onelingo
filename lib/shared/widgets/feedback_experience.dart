@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
+import 'lumo.dart';
 import '../../core/efectos.dart';
 
 class SoundToggle extends StatelessWidget {
@@ -44,7 +45,7 @@ class FeedbackMotion extends StatelessWidget {
   );
 }
 
-/// Sello dibujado: trazo de acierto, flecha para revisar o estrella de finalización.
+/// Sello dibujado: ✓ de acierto, ✗ de error o estrella de finalización.
 class FeedbackBadge extends StatelessWidget {
   const FeedbackBadge({
     super.key,
@@ -82,7 +83,7 @@ class _BadgePainter extends CustomPainter {
         ? OL.morado
         : correct
         ? const Color(0xFF197D58)
-        : OL.morado;
+        : OL.rojo;
     canvas.drawCircle(c, r, Paint()..color = color.withValues(alpha: .10));
     final ring = Paint()
       ..color = color.withValues(alpha: .25)
@@ -140,14 +141,11 @@ class _BadgePainter extends CustomPainter {
       path.lineTo(c.dx - r * .12, c.dy + r * .35);
       path.lineTo(c.dx + r * .53, c.dy - r * .36);
     } else {
-      path.addArc(
-        Rect.fromCircle(center: c, radius: r * .48),
-        -.5,
-        math.pi * 1.6,
-      );
-      path.moveTo(c.dx - r * .49, c.dy - r * .44);
-      path.lineTo(c.dx - r * .49, c.dy);
-      path.lineTo(c.dx - r * .05, c.dy);
+      // Error: una X clara (antes era una flecha curva que parecía «repetir»).
+      path.moveTo(c.dx - r * .38, c.dy - r * .38);
+      path.lineTo(c.dx + r * .38, c.dy + r * .38);
+      path.moveTo(c.dx + r * .38, c.dy - r * .38);
+      path.lineTo(c.dx - r * .38, c.dy + r * .38);
     }
     final stroke = Paint()
       ..color = color
@@ -174,10 +172,14 @@ class AnswerFeedback extends StatelessWidget {
     required this.correct,
     required this.title,
     required this.child,
+    this.lumo = true,
   });
   final bool correct;
   final String title;
   final Widget child;
+
+  /// Lumo reacciona (feliz al acertar, triste pero amable al fallar).
+  final bool lumo;
   @override
   Widget build(BuildContext context) => FeedbackMotion(
     child: Semantics(
@@ -187,10 +189,10 @@ class AnswerFeedback extends StatelessWidget {
         margin: const EdgeInsets.only(top: 14),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: correct ? OL.verdeSuave : OL.moradoSuave,
+          color: correct ? OL.verdeSuave : OL.rojoSuave,
           borderRadius: BorderRadius.circular(22),
           border: Border.all(
-            color: (correct ? OL.verde : OL.morado).withValues(alpha: .28),
+            color: (correct ? OL.verde : OL.rojo).withValues(alpha: .28),
           ),
         ),
         child: Column(
@@ -198,8 +200,15 @@ class AnswerFeedback extends StatelessWidget {
           children: [
             Row(
               children: [
-                FeedbackBadge(correct: correct, size: 52),
-                const SizedBox(width: 10),
+                if (lumo) ...[
+                  LumoReaccion(
+                    pose: correct ? PoseLumo.acierto() : PoseLumo.errorAmable,
+                    size: 64,
+                  ),
+                  const SizedBox(width: 6),
+                ],
+                FeedbackBadge(correct: correct, size: 40),
+                const SizedBox(width: 8),
                 Expanded(
                   child: Text(
                     title,
@@ -275,6 +284,119 @@ class FeedbackDock extends StatelessWidget {
     ),
     child: Scrollbar(
       child: SingleChildScrollView(primary: false, child: child),
+    ),
+  );
+}
+
+/// Panel de resultado al estilo de las apps de idiomas: sube desde abajo con
+/// Lumo, el título, la explicación (con scroll propio) y SIGUIENTE siempre
+/// visible. Devuelve 'siguiente' o 'reintentar'.
+Future<String?> mostrarPanelResultado(
+  BuildContext context, {
+  required bool correcto,
+  required String titulo,
+  required Widget cuerpo,
+  bool reintentar = false,
+  String boton = 'SIGUIENTE',
+}) {
+  final pose = correcto ? PoseLumo.acierto() : PoseLumo.errorAmable;
+  final color = correcto ? const Color(0xFF197D58) : OL.rojo;
+  return showModalBottomSheet<String>(
+    context: context,
+    // Por encima de la barra de navegación, ocupando el borde inferior.
+    useRootNavigator: true,
+    isDismissible: false,
+    enableDrag: false,
+    isScrollControlled: true,
+    barrierColor: Colors.black.withValues(alpha: .12),
+    backgroundColor: correcto ? OL.verdeSuave : OL.rojoSuave,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(26)),
+    ),
+    builder: (context) => PopScope(
+      canPop: false,
+      child: SafeArea(
+        top: false,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.sizeOf(context).height * .62,
+          ),
+          child: Semantics(
+            liveRegion: true,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      LumoReaccion(pose: pose, size: 92),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: Row(
+                            children: [
+                              FeedbackBadge(correct: correcto, size: 40),
+                              const SizedBox(width: 6),
+                              Expanded(
+                                child: Text(
+                                  titulo,
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w900,
+                                    color: color,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Flexible(
+                    child: SingleChildScrollView(
+                      child: DefaultTextStyle.merge(
+                        style: const TextStyle(color: OL.texto),
+                        child: cuerpo,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  FilledButton(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: color,
+                      minimumSize: const Size.fromHeight(54),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    onPressed: () => Navigator.of(context).pop('siguiente'),
+                    child: Text(
+                      boton,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: .5,
+                      ),
+                    ),
+                  ),
+                  if (reintentar)
+                    TextButton.icon(
+                      onPressed: () => Navigator.of(context).pop('reintentar'),
+                      icon: const Icon(Icons.replay_rounded),
+                      label: const Text('Intentar otra vez ahora'),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     ),
   );
 }
