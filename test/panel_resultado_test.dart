@@ -5,7 +5,11 @@ import 'package:onelingo/shared/widgets/feedback_experience.dart';
 import 'package:onelingo/shared/widgets/lumo.dart';
 
 void main() {
-  Future<String?> abrir(WidgetTester tester, bool correcto) async {
+  Future<String?> abrir(
+    WidgetTester tester,
+    bool correcto, {
+    bool conLumo = true,
+  }) async {
     Efectos.sonido = false;
     addTearDown(() => Efectos.sonido = true);
     String? resultado;
@@ -21,6 +25,7 @@ void main() {
                   titulo: correcto ? '¡Correcto!' : 'Vamos a repasarlo',
                   cuerpo: const Text('Explicación'),
                   reintentar: !correcto,
+                  lumo: conLumo,
                 ),
                 child: const Text('abrir'),
               ),
@@ -57,6 +62,12 @@ void main() {
     expect(lumo(PoseLumo.errorAmable), findsOneWidget);
     expect(find.text('Explicación'), findsOneWidget);
     expect(find.text('Intentar otra vez ahora'), findsOneWidget);
+  });
+
+  testWidgets('Prueba de nivel: panel sin Lumo', (tester) async {
+    await abrir(tester, true, conLumo: false);
+    expect(find.text('¡Correcto!'), findsOneWidget);
+    expect(find.byType(LumoReaccion), findsNothing);
   });
 
   test('Las poses alternan al acertar', () {

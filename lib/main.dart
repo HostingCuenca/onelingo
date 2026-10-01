@@ -14,6 +14,7 @@ import 'core/efectos.dart';
 import 'core/voz.dart';
 import 'shared/widgets/connection_banner.dart';
 import 'core/state/providers.dart';
+import 'shared/widgets/lumo.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +49,9 @@ class OneLingoApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       builder: (context, child) => _UsoTracker(
-        child: _PrecargaEscritura(child: ConnectionBanner(child: child!)),
+        child: PrecargaLumo(
+          child: _PrecargaEscritura(child: ConnectionBanner(child: child!)),
+        ),
       ),
     );
   }

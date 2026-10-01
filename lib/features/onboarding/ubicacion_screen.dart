@@ -325,6 +325,8 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
           cadena: const [],
           guiada: false,
           permitirReintento: false,
+          // Prueba de nivel limpia, sin Lumo.
+          lumo: false,
           onComprobado: (correcta, _) => u!.responder(correcta),
           onContinuar: () {
             if (u!.actual != null) u!.responder(false);

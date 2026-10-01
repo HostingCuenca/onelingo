@@ -66,7 +66,11 @@ class ItemView extends StatefulWidget {
     required this.permitirReintento,
     required this.onComprobado,
     required this.onContinuar,
+    this.lumo = true,
   });
+
+  /// Lumo acompaña (escucha, pista, panel). La prueba de nivel lo desactiva.
+  final bool lumo;
   final Item item;
   final String idioma;
   final List<String> cadena;
@@ -288,6 +292,7 @@ class _ItemViewState extends State<ItemView> {
       titulo: ok ? '¡Correcto!' : 'Vamos a repasarlo',
       cuerpo: cuerpoFeedback(ok),
       reintentar: !ok && widget.permitirReintento,
+      lumo: widget.lumo,
     );
     if (!mounted) return;
     setState(() => panelAbierto = false);
@@ -383,11 +388,25 @@ class _ItemViewState extends State<ItemView> {
           if (item.audio != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
-              child: BotonAudio(
-                texto: item.audio!,
-                idioma: widget.idioma,
-                etiqueta: 'Escuchar el audio',
-                grande: true,
+              child: Row(
+                children: [
+                  // Lumo escucha contigo en los ejercicios de audio.
+                  // Solo antes de responder: con el panel abierto ya hay otro Lumo.
+                  if (widget.lumo &&
+                      item.formato == FormatoItem.escuchar &&
+                      correcta == null) ...[
+                    const LumoReaccion(pose: PoseLumo.escucha, size: 64),
+                    const SizedBox(width: 8),
+                  ],
+                  Expanded(
+                    child: BotonAudio(
+                      texto: item.audio!,
+                      idioma: widget.idioma,
+                      etiqueta: 'Escuchar el audio',
+                      grande: true,
+                    ),
+                  ),
+                ],
               ),
             ),
           if (item.audio == null && item.texto?.trim().isNotEmpty == true)
@@ -734,8 +753,10 @@ class _ItemViewState extends State<ItemView> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const LumoReaccion(pose: PoseLumo.pensando, size: 60),
-                const SizedBox(width: 8),
+                if (widget.lumo) ...[
+                  const LumoReaccion(pose: PoseLumo.pensando, size: 60),
+                  const SizedBox(width: 8),
+                ],
                 Expanded(
                   child: Text(
                     t(item.pista),

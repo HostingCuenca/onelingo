@@ -172,13 +172,15 @@ class AnswerFeedback extends StatelessWidget {
     required this.correct,
     required this.title,
     required this.child,
-    this.lumo = true,
+    this.lumo = false,
   });
   final bool correct;
   final String title;
   final Widget child;
 
-  /// Lumo reacciona (feliz al acertar, triste pero amable al fallar).
+  /// Lumo reacciona (feliz al acertar, triste pero amable al fallar). Por
+  /// defecto no: estas pantallas ya muestran un personaje y nunca debe haber
+  /// dos a la vez. El panel inferior es quien lleva a Lumo.
   final bool lumo;
   @override
   Widget build(BuildContext context) => FeedbackMotion(
@@ -298,6 +300,7 @@ Future<String?> mostrarPanelResultado(
   required Widget cuerpo,
   bool reintentar = false,
   String boton = 'SIGUIENTE',
+  bool lumo = true,
 }) {
   final pose = correcto ? PoseLumo.acierto() : PoseLumo.errorAmable;
   final color = correcto ? const Color(0xFF197D58) : OL.rojo;
@@ -332,8 +335,10 @@ Future<String?> mostrarPanelResultado(
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      LumoReaccion(pose: pose, size: 92),
-                      const SizedBox(width: 10),
+                      if (lumo) ...[
+                        LumoReaccion(pose: pose, size: 92),
+                        const SizedBox(width: 10),
+                      ],
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 12),
