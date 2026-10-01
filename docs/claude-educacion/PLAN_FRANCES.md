@@ -28,7 +28,11 @@ Alternativa (si se prefiere seguir las horas al pie de la letra): N1 100 · N2 1
 
 **Cada persona no hace todas:** la prueba de nivel (v2) ubica al alumno por destreza; quien ya sabe leer francés salta Fundamentos, y los bloques omitibles se aprueban con su evaluación.
 
-## 3. Fundamentos de francés: lectura y sonidos (antes y junto a N1)
+## 3. Empezar desde cero: cuatro pistas y una clase que lee, escucha y repite
+
+Para alguien con 0 conocimiento, N1 no puede suponer que ya lee, cuenta o conjuga. El inicio se apoya en **cuatro pistas** que avanzan juntas y en una **anatomía de clase** fija.
+
+### 3.1 Pista de lectura y sonidos (Fundamentos F1–F10)
 
 Una correspondencia letra-sonido nueva por microlección, 6–10 palabras (2–4 en pares mínimos), solo con lo ya visto. Orden basado en la progresión escolar francesa, *Phonétique progressive du français* (CLE) y AlphaLire (Le Point du FLE).
 
@@ -45,9 +49,70 @@ Una correspondencia letra-sonido nueva por microlección, 6–10 palabras (2–4
 | F9 gn, ill, la R y «-ent» | gn ≈ ñ; ill; R; ils parlent | junto a N1 |
 | F10 Palabras que se pegan | elisión, enchaînement, liaison obligatoria (ils‿ont / ils sont), ritmo; prueba de lectura | junto a N1 (bloque 5) |
 
-Cada microlección sigue 8 pasos: escuchar sin texto → ver la grafía con color → identificar → pares mínimos → leer y elegir el audio → dictado con fichas → repetir y comparar → mini lectura.
+Cada microlección: escuchar sin texto → ver la grafía con color → identificar → pares mínimos → leer y elegir el audio → dictado con fichas → **repetir** → mini lectura.
 
-Los Fundamentos actuales (8 unidades «versión inicial») y las 9 unidades A1 se reutilizan como material, pero se rehacen con esta secuencia.
+### 3.2 Pista de números (los números franceses son difíciles: 70 = soixante-dix, 80 = quatre-vingts)
+
+| Paso | Contenido | Dónde |
+|---|---|---|
+| 1 | 0–10, contar objetos, la edad con avoir | N1 bloque 2 |
+| 2 | 11–20 y el teléfono por pares (06 12 34…) | N1 bloque 6 |
+| 3 | 21–69 (vingt et un, trente-deux…) | N1 bloque 6 |
+| 4 | Precios en euros (2,50 € = deux euros cinquante) | N1 bloque 9 |
+| 5 | La hora y los días; fechas (le 3 mai) | N1 bloque 11 |
+| 6 | 70–99 (soixante-dix, quatre-vingts, quatre-vingt-dix) | N1 bloque 14 |
+| 7 | 100–1.000, años, ordinales (premier, deuxième) | N1 bloque 16 |
+| 8 | Repaso: dictado de números en contexto (precios, teléfonos, horarios) | cada bloque desde el 6 |
+
+Ejercicios: escucha y escribe la cifra, elige el número que oíste, dicta un teléfono, lee un precio en voz alta.
+
+### 3.3 Pista de primeras frases
+
+De palabras sueltas a frases propias, con fichas y modelos fijos: **Je suis… / C'est… / J'ai… / Je m'appelle… / J'aime… / Je voudrais… / Il y a…** → sujeto + verbo + complemento → negación → pregunta → dos frases unidas (et, mais, parce que). Cada bloque de N1 termina con el alumno diciendo y escribiendo 3–6 frases sobre sí mismo («Mi presentación», «Mi familia», «Mi día»…).
+
+### 3.4 Pista de verbos: «Mis verbos»
+
+Cada verbo nuevo trae su **tabla de conjugación con audio** (je, tu, il/elle/on, nous, vous, ils/elles), práctica de «¿qué persona oíste?» y de conjugar, y frases de uso. Clave para hispanohablantes: en los verbos en -er **cuatro formas suenan igual** (parle, parles, parle, parlent); se oye la diferencia en nous, vous y en la liaison (ils‿aiment).
+
+| Nivel | Verbos y tiempos |
+|---|---|
+| N1 | être, avoir, -er regulares (parler, habiter, aimer), aller, faire, venir, prendre, vouloir/pouvoir/devoir, -ir (finir), verbos pronominales (se lever); futur proche; introducción al passé composé |
+| N2 | passé composé completo (avoir/être), imparfait, futur simple, los 30 irregulares más frecuentes, imperativo |
+| N3–N4 | condicional, plus-que-parfait, subjuntivo presente, voz pasiva, gerundio |
+| N5–N7 | subjuntivo completo, condicional pasado, futur antérieur, participios |
+| N8–N10 | passé simple y tiempos literarios (comprensión) |
+
+La sección «Mis verbos» guarda todos los verbos aprendidos para consultarlos y repasarlos.
+
+### 3.5 Anatomía de una clase de N1 (10–12 minutos)
+
+1. **Sonido del día** (1 min): una grafía con audio, ligada a la pista de Fundamentos.
+2. **Aprende**: 4–6 palabras o un patrón, siempre con audio primero.
+3. **Repite**: 2 frases en voz alta con micrófono (la IA transcribe y compara).
+4. **Practica**: 6–8 ejercicios alternando escuchar, leer, unir, ordenar y escribir.
+5. **Mini lectura**: 3–6 frases solo con lo ya visto + 2 preguntas de comprensión.
+6. **Escribe o dicta**: una frase propia o un dictado corto.
+7. **Repaso**: 2 ítems de clases anteriores (repaso espaciado).
+
+### 3.6 Lectura y comprensión por nivel
+
+| Nivel | Lectura | Escucha |
+|---|---|---|
+| Fundamentos | palabras y frases de 3–5 palabras con marcas visuales | palabras y pares mínimos |
+| N1 | 30–60 palabras: carteles, mensajes, horarios, menús, mini diálogos | diálogos de 20–40 s, voz lenta disponible |
+| N2 | 80–150 palabras: correos, anuncios, relatos cortos | 40–90 s, velocidad natural |
+| N3–N4 | 200–350 palabras: artículos sencillos, foros, reseñas | 1–3 min, entrevistas y radio |
+| N5–N7 | 400–700 palabras: prensa, opinión, informes | 3–5 min, debates |
+| N8–N10 | textos largos, literarios y profesionales | conferencias, implícito e ironía |
+
+Cada bloque de N1 cierra con una lectura y una escucha que solo usan el vocabulario permitido hasta ese punto (el mismo control de léxico que en inglés).
+
+### 3.7 Repetición
+
+- **Repetir en voz alta** en cada clase (formato «Repite», nuevo).
+- **Repaso espaciado** de palabras, verbos y números según el historial del alumno.
+- Cada clase recicla al menos un 30 % de vocabulario anterior.
+- El fallo vuelve al final del bloque («Otra vez»), como en inglés.
 
 ## 4. Qué aprende el alumno en cada nivel
 
@@ -57,11 +122,11 @@ Puede: saludar y presentarse (y a otros), deletrear, pedir que repitan; números
 | Bloque | Tema (5 clases) | Gramática y sonido clave |
 |---|---|---|
 | 1 | Saludos, je m'appelle, tu/vous, ça va | entonación; elisión |
-| 2 | Alfabeto, deletrear, números 0–10, nacionalidades e idiomas | être; el femenino hace sonar la consonante |
-| 3 | Je parle, j'habite, j'aime | pronombres sujeto (on); verbos -er con terminaciones mudas |
+| 2 | Alfabeto, deletrear, números 0–10 y la edad, nacionalidades | être (tabla); el femenino hace sonar la consonante |
+| 3 | Je parle, j'habite, j'aime | pronombres sujeto (on); tabla de los verbos -er: cuatro formas suenan igual |
 | 4 | Objetos y personas | un/une, le/la/les; plural que se oye en el artículo (les‿amis) |
 | 5 | Edad y familia | avoir (ils‿ont / ils sont); posesivos |
-| 6 | Decir que no; números 11–69 y teléfono | ne…pas, pas de |
+| 6 | Decir que no; números 11–69 y el teléfono | ne…pas, pas de |
 | 7 | ¿Qué es? ¿Quién es? | c'est / il est; qui est-ce / qu'est-ce que c'est; il y a · evaluación mixta |
 | 8 | Hacer preguntas | entonación → est-ce que → interrogativos → quel(le) |
 | 9 | En el café | je voudrais; partitivo como frase hecha; precios |
@@ -69,9 +134,9 @@ Puede: saludar y presentarse (y a otros), deletrear, pedir que repitan; números
 | 11 | Días, fechas, hora y rutina | verbos pronominales |
 | 12 | Describir personas | concordancia y posición del adjetivo |
 | 13 | La ciudad | aller/venir + au/du; preposiciones con ciudades y países |
-| 14 | De compras: ropa y colores | ce/cet/cette/ces |
-| 15 | Verbos que más se usan | faire, prendre, vouloir, pouvoir, devoir; verbos en -ir |
-| 16 | Comida y cantidades | partitivos; beaucoup de, un peu de; il faut |
+| 14 | De compras: ropa, colores y números 70–99 | ce/cet/cette/ces |
+| 15 | Verbos que más se usan | tablas de faire, prendre, vouloir, pouvoir, devoir; verbos en -ir (finir) |
+| 16 | Comida, cantidades, 100–1.000 y ordinales | partitivos; beaucoup de, un peu de; il faut |
 | 17 | Indicaciones | imperativo; preposiciones de lugar |
 | 18 | Planes e invitaciones | futur proche, passé récent, être en train de |
 | 19 | Mi fin de semana | introducción al passé composé (avoir/être, pocos verbos); jamais; dans/depuis/il y a |
@@ -132,12 +197,13 @@ Principios (metaanálisis de entrenamiento fonético, 79 estudios): **en el inic
 - **Marcas visuales en el texto** (Fundamentos y clases 1–10 de N1): letras mudas en gris, «‿» en liaisons, nasales en color; se retiran entre las clases 11 y 20.
 - **Formatos nuevos:** tocar las letras mudas · detectar la liaison · dictado con fichas de grafías · clasificar palabras por sonido · distinguir masculino/femenino y singular/plural por el oído · repetir y comparar (micrófono). Los pares mínimos y «leer y elegir el audio» ya se pueden hacer con los formatos actuales.
 - **Botón tortuga** en todos los audios.
+- **Repite** (micrófono + IA que compara), **Mis verbos** (tablas con audio) y **módulo de números**: piezas comunes que también le faltan a inglés (ver `BRECHAS_INGLES_FUNDAMENTOS.md`).
 
 ## 7. Producción por fases
 
 | Fase | Alcance | Resultado |
 |---|---|---|
-| 0 | Elegir voces, diccionario de pronunciación, marcas visuales y formatos nuevos | base técnica |
+| 0 | Piezas comunes (también para inglés): «Repite» con micrófono, «Mis verbos», módulo de números, lectura graduada; voces, diccionario de pronunciación, marcas visuales y formatos de lectura | base técnica |
 | 1 | Fundamentos de francés (10 unidades, ~40 microlecciones) | el alumno lee francés básico |
 | 2 | N1 (100 clases) | A1 completo |
 | 3 | N2 (100 clases) | A2 |
@@ -153,3 +219,4 @@ Mismo método que inglés: mapa editorial por nivel → autoría por bloques con
 3. Voces: elegir narradora y voz masculina de la lista (y la voz francesa de Lumo).
 4. ¿Contamos con un revisor nativo de francés para la Fase 1?
 5. Confirmar el orden de fases (Fundamentos → N1 → N2 primero).
+6. ¿Hacemos primero las piezas comunes y el refuerzo de inglés (números, alfabeto y sonidos, verbos, Repite, lectura graduada) y luego arrancamos francés sobre esa base? (recomendado)
