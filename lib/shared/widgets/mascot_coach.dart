@@ -42,12 +42,16 @@ class _MascotCoachState extends State<MascotCoach> {
 
   @override
   Widget build(BuildContext context) {
-    final name = widget.listening ? 'Nara' : 'Lumo';
-    final stem = widget.listening ? 'nara' : 'lumo';
-    final still = 'assets/img/mascotas/$stem-reposo-alpha.png';
-    final motion = widget.idle && !widget.listening
+    // Escucha: Lumo con la pata en la oreja (antes, Nara).
+    const name = 'Lumo';
+    final still = widget.listening
+        ? 'assets/img/mascotas/lumo-escucha-alpha.webp'
+        : 'assets/img/mascotas/lumo-reposo-alpha.png';
+    final motion = widget.listening
+        ? 'assets/img/mascotas/lumo-escucha-anim-alpha.webp'
+        : widget.idle
         ? 'assets/img/mascotas/lumo-idle-alpha.webp'
-        : 'assets/img/mascotas/$stem-${widget.listening ? 'escucha' : 'saludo'}-alpha.webp';
+        : 'assets/img/mascotas/lumo-saludo-alpha.webp';
     Widget fallback() => Image.asset(
       still,
       width: 112,

@@ -13,6 +13,7 @@ import '../../core/efectos.dart';
 import '../../core/voz.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Reproductor de lección: recorre los `steps` y muestra un widget por tipo.
@@ -685,39 +686,50 @@ class _StepViewState extends State<_StepView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _titulo(t, 'Escucha y escribe'),
-        Tarjeta(
-          onTap: reproducir,
-          etiquetaSemantica: 'Reproducir audio para escribir',
-          child: Column(
-            children: [
-              const IconoCuadro(
-                Icons.play_arrow_rounded,
-                tamano: 72,
-                radio: 36,
-                relleno: true,
-              ),
-              const SizedBox(height: 10),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: mostrarAudio
-                    ? const Text(
-                        'Reproduciendo…',
-                        key: ValueKey('a'),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: OL.morado,
-                        ),
-                      )
-                    : const Text(
-                        'Toca para escuchar (puedes repetirlo las veces que quieras)',
-                        key: ValueKey('b'),
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: OL.gris, fontSize: 12),
-                      ),
-              ),
+        Row(
+          children: [
+            // Lumo escucha contigo (no con el panel abierto: nunca dos a la vez).
+            if (correcto == null) ...[
+              const LumoReaccion(pose: PoseLumo.escucha, size: 72),
+              const SizedBox(width: 8),
             ],
-          ),
+            Expanded(
+              child: Tarjeta(
+                onTap: reproducir,
+                etiquetaSemantica: 'Reproducir audio para escribir',
+                child: Column(
+                  children: [
+                    const IconoCuadro(
+                      Icons.play_arrow_rounded,
+                      tamano: 72,
+                      radio: 36,
+                      relleno: true,
+                    ),
+                    const SizedBox(height: 10),
+                    AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: mostrarAudio
+                          ? const Text(
+                              'Reproduciendo…',
+                              key: ValueKey('a'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                color: OL.morado,
+                              ),
+                            )
+                          : const Text(
+                              'Toca para escuchar (puedes repetirlo las veces que quieras)',
+                              key: ValueKey('b'),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: OL.gris, fontSize: 12),
+                            ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 14),
         TextField(

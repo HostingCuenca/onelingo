@@ -112,6 +112,7 @@ class _PrecargaLumoState extends State<PrecargaLumo> {
         PoseLumo.anima,
         PoseLumo.errorAmable,
         PoseLumo.pensando,
+        PoseLumo.escucha,
       ]) {
         precacheImage(AssetImage(p.assetAnimado), context, onError: (_, _) {});
       }

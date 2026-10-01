@@ -364,19 +364,32 @@ class _ItemViewState extends State<ItemView> {
     onSubmitted: (_) => comprobar(),
   );
 
+  /// Botón de audio con Lumo escuchando al lado. Solo antes de responder:
+  /// con el panel de resultado abierto ya hay otro Lumo (nunca dos a la vez).
+  Widget filaAudio(String etiqueta) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Row(
+      children: [
+        if (widget.lumo && correcta == null) ...[
+          const LumoReaccion(pose: PoseLumo.escucha, size: 64),
+          const SizedBox(width: 8),
+        ],
+        Expanded(
+          child: BotonAudio(
+            texto: item.audio!,
+            idioma: widget.idioma,
+            etiqueta: etiqueta,
+            grande: true,
+          ),
+        ),
+      ],
+    ),
+  );
+
   /// Audio del enunciado para formatos que no son de opción (ordenar o
   /// completar lo que se escucha).
   List<Widget> audioEnunciado() => [
-    if (item.audio != null)
-      Padding(
-        padding: const EdgeInsets.only(bottom: 16),
-        child: BotonAudio(
-          texto: item.audio!,
-          idioma: widget.idioma,
-          etiqueta: 'Escuchar el audio',
-          grande: true,
-        ),
-      ),
+    if (item.audio != null) filaAudio('Escuchar el audio'),
   ];
 
   List<Widget> cuerpo() {
@@ -385,30 +398,7 @@ class _ItemViewState extends State<ItemView> {
       case FormatoItem.elegir:
       case FormatoItem.escuchar:
         return [
-          if (item.audio != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Row(
-                children: [
-                  // Lumo escucha contigo en los ejercicios de audio.
-                  // Solo antes de responder: con el panel abierto ya hay otro Lumo.
-                  if (widget.lumo &&
-                      item.formato == FormatoItem.escuchar &&
-                      correcta == null) ...[
-                    const LumoReaccion(pose: PoseLumo.escucha, size: 64),
-                    const SizedBox(width: 8),
-                  ],
-                  Expanded(
-                    child: BotonAudio(
-                      texto: item.audio!,
-                      idioma: widget.idioma,
-                      etiqueta: 'Escuchar el audio',
-                      grande: true,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          if (item.audio != null) filaAudio('Escuchar el audio'),
           if (item.audio == null && item.texto?.trim().isNotEmpty == true)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -614,16 +604,7 @@ class _ItemViewState extends State<ItemView> {
                 ),
               ),
             ),
-          if (item.audio != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: BotonAudio(
-                texto: item.audio!,
-                idioma: widget.idioma,
-                etiqueta: 'Escuchar y escribir',
-                grande: true,
-              ),
-            ),
+          if (item.audio != null) filaAudio('Escuchar y escribir'),
           campoTexto(),
           if (item.abierta)
             Padding(
