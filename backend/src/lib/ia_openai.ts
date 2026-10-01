@@ -81,7 +81,48 @@ export function extraerReply(texto: string): string | undefined {
   try { return JSON.parse(m[1]); } catch { return undefined; }
 }
 
-export async function generarTutorStream(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], onReply: (texto: string) => void, signal: AbortSignal) {
+/**
+ * Texto de `reply` ya recibido aunque la cadena JSON aún no se haya cerrado.
+ * Se detiene antes de un escape incompleto para no decodificar medio carácter.
+ */
+export function replyParcial(texto: string): { texto: string; cerrado: boolean } | undefined {
+  const m = /^\s*\{\s*"reply"\s*:\s*"/.exec(texto);
+  if (!m) return undefined;
+  let i = m[0].length, seguro = i;
+  for (; i < texto.length; i++) {
+    const c = texto[i];
+    if (c === '"') { try { return { texto: JSON.parse(texto.slice(m[0].length - 1, i + 1)), cerrado: true }; } catch { return undefined; } }
+    if (c === '\\') {
+      const largo = texto[i + 1] === 'u' ? 6 : 2;
+      if (i + largo > texto.length) break;
+      i += largo - 1;
+    }
+    seguro = i + 1;
+  }
+  try { return { texto: JSON.parse(texto.slice(m[0].length - 1, seguro) + '"'), cerrado: false }; } catch { return undefined; }
+}
+
+const ABREVIATURAS = /(?:^|\s)(?:Mr|Mrs|Ms|Dr|St|Sr|Sra|Dra|etc|e\.g|i\.e|vs|p\.ej|[A-Z])\.$/;
+/**
+ * Frases terminadas dentro de `texto`: se corta tras . ! ? … (o sus formas
+ * CJK) seguidos de espacio, o al final si la cadena está cerrada. Las frases
+ * muy cortas («Ok.») se unen a la siguiente para no fragmentar la voz.
+ */
+export function frasesCompletas(texto: string, cerrado: boolean): string[] {
+  const frases: string[] = [];
+  let inicio = 0;
+  const re = /[.!?…。！？]+["'”’)]*(?=\s)|[。！？]+/g;
+  for (let m; (m = re.exec(texto));) {
+    const fin = m.index + m[0].length;
+    const trozo = texto.slice(inicio, fin).trim();
+    if (ABREVIATURAS.test(trozo) || trozo.length < (/[\u3040-\u9fff\uac00-\ud7af]/.test(trozo) ? 4 : 12)) continue;
+    frases.push(trozo); inicio = fin;
+  }
+  if (cerrado) { const resto = texto.slice(inicio).trim(); if (resto) frases.push(resto); }
+  return frases;
+}
+
+export async function generarTutorStream(system: string, mensajes: { role: 'user' | 'assistant'; content: string }[], onReply: (texto: string) => void, signal: AbortSignal, onFrase?: (texto: string, indice: number) => void) {
   const r = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST', signal,
     headers: { 'content-type': 'application/json', authorization: `Bearer ${config.openaiApiKey}` },
@@ -92,7 +133,7 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
   });
   if (!r.ok || !r.body) throw new Error(`OpenAI ${r.status}`);
   const reader = r.body.getReader(); const decoder = new TextDecoder();
-  let pending = '', texto = '', enviado = false, done = false;
+  let pending = '', texto = '', enviado = false, done = false, frasesEnviadas = 0;
   let modelo = config.openaiModelo, entrada = 0, salida = 0;
   try {
     while (true) {
@@ -109,6 +150,11 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
         modelo = j.model ?? modelo;
         if (j.usage) { entrada = j.usage.prompt_tokens; salida = j.usage.completion_tokens; }
         texto += j.choices?.[0]?.delta?.content ?? '';
+        // La voz arranca con la primera frase terminada, sin esperar al resto de la respuesta.
+        if (onFrase && !enviado) {
+          const parcial = replyParcial(texto);
+          if (parcial) for (const f of frasesCompletas(parcial.texto, parcial.cerrado).slice(frasesEnviadas)) onFrase(f, frasesEnviadas++);
+        }
         if (!enviado) {
           const reply = extraerReply(texto);
           if (reply?.trim() && reply.length <= 600) { enviado = true; onReply(reply); }

@@ -8,6 +8,7 @@ import { query, uno } from './db.js';
 
 /** Voces por rol: los 4 tutores de la app + narradores neutros para lecciones y Listening. */
 export const VOCES: Record<string, { id: string; nombre: string; descripcion: string }> = {
+  avatar_lumo: { id: 'cgSgspJ2msm6clMCkdW9', nombre: 'Lumo', descripcion: 'Jessica · juguetona, luminosa y cálida' },
   "avatar_amara": {"id": "M6ic45wruJGWAxLFEMNK", "nombre": "Amara", "descripcion": "Zoe · afroamericana · conversacional"},
   "avatar_sofia": {"id": "XrExE9yKIg1WjnnlVkGX", "nombre": "Sofía", "descripcion": "Matilda · estadounidense · educativa"},
   "avatar_lucia": {"id": "k6aNMn2EN3T8vpJSBhQw", "nombre": "Lucía", "descripcion": "Patty · inglés con acento mexicano suave"},

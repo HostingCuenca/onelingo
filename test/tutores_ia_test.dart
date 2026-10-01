@@ -16,6 +16,8 @@ void main() {
     ]);
     expect(tutores3dPara('ja').first.id, 'kenji');
     expect(tutores3d.length, 10);
+    expect(tutor3d('lumo')?.nombre, 'Lumo');
+    expect(lumoTutor.retrato, 'assets/img/tutores/lumo.webp');
   });
 
   testWidgets('Tutores con IA: videollamada 3D y chat en una sola pantalla', (
@@ -41,6 +43,15 @@ void main() {
       expect(find.text(t.nombre), findsWidgets, reason: t.id);
     }
     expect(find.text('Recomendado'), findsNWidgets(3));
+    // Lumo que habla, destacado antes de los tutores 3D.
+    expect(find.text('Habla con Lumo'), findsOneWidget);
+    expect(find.bySemanticsLabel('Videollamada con Lumo'), findsOneWidget);
+    expect(
+      tester.getTopLeft(find.text('Habla con Lumo')).dy,
+      lessThan(
+        tester.getTopLeft(find.text(tutores3dPara('en').first.nombre).first).dy,
+      ),
+    );
     expect(find.text('Hablar con mi tutor'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

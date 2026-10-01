@@ -70,6 +70,8 @@ class TutorsScreen extends ConsumerWidget {
                     ),
                   ),
                 ),
+              _TarjetaLumo(onTap: () => _abrirVideollamada(context, 'lumo')),
+              const SizedBox(height: 12),
               LayoutBuilder(
                 builder: (context, c) {
                   final columnas = c.maxWidth > 560 ? 3 : 2;
@@ -85,19 +87,7 @@ class TutorsScreen extends ConsumerWidget {
                         _TarjetaTutor3d(
                           tutor: t,
                           recomendado: recomendados.contains(t.id),
-                          onTap: () {
-                            if (kIsWeb) {
-                              context.push('/avatar/${t.id}');
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'La videollamada está disponible en la versión web.',
-                                  ),
-                                ),
-                              );
-                            }
-                          },
+                          onTap: () => _abrirVideollamada(context, t.id),
                         ),
                     ],
                   );
@@ -212,6 +202,74 @@ class TutorsScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+void _abrirVideollamada(BuildContext context, String id) {
+  if (kIsWeb) {
+    context.push('/avatar/$id');
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('La videollamada está disponible en la versión web.'),
+      ),
+    );
+  }
+}
+
+/// Lumo destacado: habla con bocas sincronizadas con la voz y carga al
+/// instante. Un solo personaje en la tarjeta, sin animación de entrada.
+class _TarjetaLumo extends StatelessWidget {
+  const _TarjetaLumo({required this.onTap});
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    button: true,
+    label: 'Videollamada con Lumo',
+    child: Tarjeta(
+      onTap: onTap,
+      color: OL.moradoSuave,
+      borde: OL.moradoClaro,
+      padding: const EdgeInsets.fromLTRB(8, 8, 16, 8),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 108,
+            height: 132,
+            child: Image.asset(
+              lumoTutor.retrato,
+              fit: BoxFit.contain,
+              excludeFromSemantics: true,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Etiqueta('Nuevo', color: OL.blanco, fondo: OL.naranja),
+                const SizedBox(height: 6),
+                const Text(
+                  'Habla con Lumo',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  lumoTutor.estilo,
+                  style: const TextStyle(
+                    color: OL.gris,
+                    fontSize: 13,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.videocam_rounded, color: OL.morado),
+        ],
+      ),
+    ),
+  );
 }
 
 class _Seccion extends StatelessWidget {

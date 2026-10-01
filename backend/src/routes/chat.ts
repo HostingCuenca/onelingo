@@ -3,11 +3,30 @@ import { PassThrough } from 'node:stream';
 import { z } from 'zod';
 import { contextoSituacion, unidades } from '../lib/situaciones.js';
 import { query } from '../lib/db.js';
-import { iaDisponible, responder } from '../lib/ia.js';
+import { iaDisponible, responder, resumirSesion } from '../lib/ia.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
 
 export default async function rutas(app: FastifyInstance) {
   app.get('/chat/estado', async () => ({ ia: iaDisponible() }));
+
+  /** Resumen al colgar la videollamada: logros, errores, vocabulario y hechos del alumno (se guardan para personalizar la siguiente llamada). */
+  app.post('/chat/resumen', { preHandler: requiereAlumno }, async (req, reply) => {
+    if (!iaDisponible()) return reply.code(503).send({ error: 'ia_no_configurada' });
+    const s = req.user as Sesion;
+    const d = z.object({
+      idiomaMeta: z.string().max(5), idiomaNativo: z.string().max(5).default('es'), nivel: z.number().int().min(1).max(10), tutorId: z.string().max(40),
+      historial: z.array(z.object({ rol: z.enum(['tutor', 'alumno']), texto: z.string().max(1200) })).max(40),
+    }).parse(req.body);
+    if (!d.historial.some(t => t.rol === 'alumno')) return reply.code(400).send({ error: 'sin_turnos' });
+    try {
+      const r = await resumirSesion(d);
+      await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1, $2, $3)', [s.sub, 'resumen_tutor', JSON.stringify({ idioma: d.idiomaMeta, tutorId: d.tutorId, nivel: d.nivel, turnos: d.historial.filter(t => t.rol === 'alumno').length, ...r })]);
+      return r;
+    } catch (e) {
+      req.log.error({ err: String(e) }, 'chat_resumen');
+      return reply.code(502).send({ error: 'resumen_error' });
+    }
+  });
 
   app.post('/chat', { preHandler: requiereAlumno }, async (req, reply) => {
     if (!iaDisponible()) return reply.code(503).send({ error: 'ia_no_configurada' });
@@ -42,7 +61,10 @@ export default async function rutas(app: FastifyInstance) {
           const r = await responder(peticion, texto => {
             req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_reply_ready');
             emit('reply', texto);
-          }, controller.signal);
+          }, controller.signal, (texto, indice) => {
+            if (indice === 0) req.log.info({ ms: Math.round(performance.now() - started) }, 'chat_primera_frase');
+            emit('frase', { indice, texto });
+          });
           emit('final', r.respuesta);
           output.end();
           const ultimo = [...d.historial].reverse().find(t => t.rol === 'alumno')?.texto ?? '';

@@ -6,6 +6,14 @@ class Tutor3d {
   String get retrato => 'assets/img/tutores/$id.webp';
 }
 
+/// Lumo que habla (2D con bocas sincronizadas con la voz): el tutor más
+/// ligero (~80 KB frente a 1,1–1,4 MB de un tutor 3D). Va destacado primero.
+const lumoTutor = Tutor3d(
+  'lumo',
+  'Lumo',
+  'Tu compañero de OneLingo: habla contigo, te corrige y carga al instante.',
+);
+
 const tutores3d = [
   Tutor3d('amara', 'Amara', 'Conversacional · acento estadounidense'),
   Tutor3d('sofia', 'Sofía', 'Educativa · acento estadounidense'),
@@ -44,7 +52,7 @@ List<Tutor3d> tutores3dPara(String idioma) {
 }
 
 Tutor3d? tutor3d(String id) {
-  for (final t in tutores3d) {
+  for (final t in [lumoTutor, ...tutores3d]) {
     if (t.id == id) return t;
   }
   return null;

@@ -48,7 +48,8 @@ export function createAvatar(stage, audio, analyser) {
     }
     restHead=head.quaternion.clone();restBody=body.quaternion.clone();
     rig.traverse(o=>{if(!o.isMesh)return;for(const m of (Array.isArray(o.material)?o.material:[o.material])){m.transparent=false;m.depthWrite=true;m.alphaTest=/afro|ponytail|bob|long01|short0|eyebrow|eyelash/.test(m.name)?.4:0;if(/afro|ponytail|braid|bob|long01|short0/.test(m.name)){m.roughness=.95;m.alphaTest=.12;}m.needsUpdate=true;}if(o.morphTargetDictionary)morphs.push(o)});
-    rig.updateMatrixWorld(true);const p=new THREE.Vector3();head.getWorldPosition(p);camera.position.set(0,p.y+.03,retrato?1.08:.95);camera.lookAt(0,p.y-.1,0);// plano de videollamada: cabeza, hombros y pechostage.dataset.loaded='true';
+    rig.updateMatrixWorld(true);const p=new THREE.Vector3();head.getWorldPosition(p);camera.position.set(0,p.y+.04,retrato?1.08:1.02);camera.lookAt(0,retrato?p.y-.1:p.y-.04,0);// plano de videollamada: cabeza, hombros y pecho
+    stage.dataset.loaded='true';
   }
   // 30 fps is sufficient for idle motion and amplitude lip movement. Rendering
   // the 30k-poly tutor at 60 fps competed with chat/audio callbacks on modest
@@ -60,7 +61,9 @@ export function createAvatar(stage, audio, analyser) {
       let low=0,mid=0,high=0,sib=0;
       if(speaking){analyser.getByteFrequencyData(freq);const bin=analyser.context.sampleRate/analyser.fftSize;
         for(let i=1;i<freq.length;i++){const f=i*bin,v=freq[i]*freq[i];if(f<600)low+=v;else if(f<2000)mid+=v;else if(f<5000)high+=v;else if(f<9000)sib+=v;}}
-      const total=low+mid+high+sib||1, sLow=low/total, sMid=mid/total, sHigh=high/total, sSib=sib/total;
+      // Cada banda relativa a su peso típico en la voz (las agudas tienen más
+      // frecuencias y antes dominaban: casi todo salía como E/S).
+      const nLow=low/.18,nMid=mid/.247,nHigh=high/.277,nSib=sib/.261,total=nLow+nMid+nHigh+nSib||1, sLow=nLow/total, sMid=nMid/total, sHigh=nHigh/total, sSib=nSib/total;
       const mood=stage.dataset.phase, thinking=(mood==='thinking'||mood==='voice-loading')&&!speaking, listening=mood==='listening'&&!speaking;
       const motion=reduced?0:.55, phase=t%4.3,blink=!retrato&&phase<.17?Math.sin(phase/.17*Math.PI):0;
       rig.position.y=Math.sin(t*1.5)*.002*motion;
@@ -78,7 +81,11 @@ export function createAvatar(stage, audio, analyser) {
         else if(n==='viseme_PP')target=speaking&&amplitude<.06?.35:0;
         else if(n.startsWith('browInnerUp'))target=thinking?.35:0;
         else if(n==='eyeBlinkLeft'||n==='eyeBlinkRight')target=blink;
-        else if(n.startsWith('eyeSquint'))target=.12;
+        // Mirada: arriba al pensar; al frente (a ti) al escuchar y al hablar.
+        else if(n==='eyeLookUpLeft'||n==='eyeLookUpRight')target=thinking?.4:0;
+        else if(n==='eyeLookOutLeft')target=thinking?.18:0;
+        else if(n==='eyeLookInRight')target=thinking?.18:0;
+        else if(n.startsWith('eyeSquint'))target=listening?.2:.12;
         else if(n.startsWith('mouthSmile'))target=speaking?.03:.14;
         m.morphTargetInfluences[i]=THREE.MathUtils.damp(m.morphTargetInfluences[i],target,35,dt);
       }stage.dataset.mouth=amplitude.toFixed(3);
