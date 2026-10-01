@@ -146,7 +146,7 @@ export async function generarTutorStream(system: string, mensajes: { role: 'user
         const data = line.slice(5).trim();
         if (data === '[DONE]') { done = true; continue; }
         const j = JSON.parse(data);
-        if (j.error || j.choices?.[0]?.delta?.refusal) throw new Error('Respuesta rechazada');
+        if (j.error || j.choices?.[0]?.delta?.refusal) throw new Error(`Respuesta rechazada: ${String(j.error?.message ?? j.error?.code ?? j.choices?.[0]?.delta?.refusal).slice(0, 160)}`);
         modelo = j.model ?? modelo;
         if (j.usage) { entrada = j.usage.prompt_tokens; salida = j.usage.completion_tokens; }
         texto += j.choices?.[0]?.delta?.content ?? '';

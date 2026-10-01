@@ -2,14 +2,15 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 // Geometría y formas de la cara comprimidas con meshopt (modelos 6 → 2 MB).
 import {MeshoptDecoder} from './vendor/meshopt_decoder.module.js';
+import {repartir} from './voz.js?v=27';
 
-// Animation follows the audio analyser, not a wall-clock timer or generated video.
+// La boca sigue la envolvente de la voz (voz.js), no un temporizador ni un vídeo.
 // La boca combina visemas según el reparto de energía por bandas de frecuencia
 // (graves → O/U, medios → A, agudos → E/I, sibilantes → S): no es alineación
 // fonética exacta, pero ya no es un simple abrir y cerrar.
 // Estados como el Video Call de Duolingo: «pensando» (cabeza inclinada, mirada
 // arriba) mientras llega la respuesta y «escuchando» (atento) mientras hablas.
-export function createAvatar(stage, audio, analyser) {
+export function createAvatar(stage, fuente) {
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(33,1,.1,100);
   // ?retrato: conserva el último cuadro para generar los retratos de la galería
   // (sin parpadeo y con un plano algo más abierto).
@@ -23,7 +24,7 @@ export function createAvatar(stage, audio, analyser) {
   for(const [c,i,p] of [[0xf8ffe8,3,[-3,5,4]],[0xcfe9ff,1.5,[3,3,1]],[0xadc7ff,2,[0,4,-3]]]){const l=new THREE.DirectionalLight(c,i);l.position.set(...p);scene.add(l);}
   const observer=new ResizeObserver(()=>{camera.aspect=stage.clientWidth/stage.clientHeight;camera.updateProjectionMatrix();renderer.setSize(stage.clientWidth,stage.clientHeight)});observer.observe(stage);
   let rig,head,body,restHead,restBody,morphs=[],frameId,disposed=false,previous=performance.now(),start=previous,lastRender=0;
-  const values=new Uint8Array(analyser.fftSize), freq=new Uint8Array(analyser.frequencyBinCount), reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function disposeRig(root){root?.traverse(o=>{if(o.geometry)o.geometry.dispose();for(const m of (Array.isArray(o.material)?o.material:[o.material])){if(!m)continue;for(const v of Object.values(m))if(v?.isTexture)v.dispose();m.dispose()}})}
   async function load(url,onProgress){
     const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url,onProgress);
@@ -48,22 +49,15 @@ export function createAvatar(stage, audio, analyser) {
     }
     restHead=head.quaternion.clone();restBody=body.quaternion.clone();
     rig.traverse(o=>{if(!o.isMesh)return;for(const m of (Array.isArray(o.material)?o.material:[o.material])){m.transparent=false;m.depthWrite=true;m.alphaTest=/afro|ponytail|bob|long01|short0|eyebrow|eyelash/.test(m.name)?.4:0;if(/afro|ponytail|braid|bob|long01|short0/.test(m.name)){m.roughness=.95;m.alphaTest=.12;}m.needsUpdate=true;}if(o.morphTargetDictionary)morphs.push(o)});
-    rig.updateMatrixWorld(true);const p=new THREE.Vector3();head.getWorldPosition(p);camera.position.set(0,p.y+.04,retrato?1.08:1.02);camera.lookAt(0,retrato?p.y-.1:p.y-.04,0);// plano de videollamada: cabeza, hombros y pecho
+    rig.updateMatrixWorld(true);const p=new THREE.Vector3();head.getWorldPosition(p);camera.position.set(0,p.y+.05,retrato?1.08:1.12);camera.lookAt(0,retrato?p.y-.1:p.y-.03,0);// plano de videollamada: cabeza, hombros y pecho
     stage.dataset.loaded='true';
   }
   // 30 fps is sufficient for idle motion and amplitude lip movement. Rendering
   // the 30k-poly tutor at 60 fps competed with chat/audio callbacks on modest
   // phones and on software-rendered browsers.
   function frame(now){if(disposed)return;frameId=requestAnimationFrame(frame);if(now-lastRender<33)return;lastRender=now;const t=(now-start)/1000,dt=Math.min((now-previous)/1000,.05);previous=now;
-    if(head){analyser.getByteTimeDomainData(values);let sum=0;for(const x of values)sum+=((x-128)/128)**2;
-      const speaking=!audio.paused&&!audio.ended, amplitude=speaking?Math.min(1,Math.sqrt(sum/values.length)*7):0;
-      // Reparto de energía por bandas (bins de ~86 Hz con fftSize 512 a 44,1 kHz).
-      let low=0,mid=0,high=0,sib=0;
-      if(speaking){analyser.getByteFrequencyData(freq);const bin=analyser.context.sampleRate/analyser.fftSize;
-        for(let i=1;i<freq.length;i++){const f=i*bin,v=freq[i]*freq[i];if(f<600)low+=v;else if(f<2000)mid+=v;else if(f<5000)high+=v;else if(f<9000)sib+=v;}}
-      // Cada banda relativa a su peso típico en la voz (las agudas tienen más
-      // frecuencias y antes dominaban: casi todo salía como E/S).
-      const nLow=low/.18,nMid=mid/.247,nHigh=high/.277,nSib=sib/.261,total=nLow+nMid+nHigh+nSib||1, sLow=nLow/total, sMid=nMid/total, sHigh=nHigh/total, sSib=nSib/total;
+    if(head){const muestra=fuente.muestra(),speaking=muestra.hablando,amplitude=speaking?muestra.amplitud:0;
+      const {graves:sLow,medios:sMid,agudos:sHigh,sibilantes:sSib}=repartir(muestra);
       const mood=stage.dataset.phase, thinking=(mood==='thinking'||mood==='voice-loading')&&!speaking, listening=mood==='listening'&&!speaking;
       const motion=reduced?0:.55, phase=t%4.3,blink=!retrato&&phase<.17?Math.sin(phase/.17*Math.PI):0;
       rig.position.y=Math.sin(t*1.5)*.002*motion;

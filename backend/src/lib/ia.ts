@@ -13,14 +13,15 @@ export const RespuestaTutor = z.object({
     original: z.string(), correcto: z.string(), explicacion: z.string().describe('Explicación breve en el idioma nativo del alumno'),
     skill: z.enum(['gramatica', 'vocabulario', 'conjugacion', 'listening', 'pronunciacion', 'frases', 'escritura']),
   })).describe('Errores del último mensaje del alumno; vacío si estaba bien'),
-  suggestions: z.array(z.string()).min(2).max(3).describe('Respuestas cortas que el alumno podría decir a continuación, en el idioma meta'),
+  // Sin mínimo: si el modelo propone una sola idea, el turno no debe fallar después de haber hablado.
+  suggestions: z.array(z.string()).max(3).describe('2-3 respuestas cortas que el alumno podría decir a continuación, en el idioma meta'),
 });
 export type RespuestaTutor = z.infer<typeof RespuestaTutor>;
 
 const IDIOMAS: Record<string, string> = { en: 'inglés', es: 'español', fr: 'francés', de: 'alemán', pt: 'portugués', it: 'italiano', zh: 'chino mandarín', ja: 'japonés', ko: 'coreano', ru: 'ruso' };
 const ROM: Record<string, string> = { zh: 'pinyin con tonos', ja: 'romaji Hepburn', ko: 'romanización revisada', ru: 'transliteración latina' };
 const TUTORES: Record<string, string> = {
-  avatar_lumo: 'Lumo, el ajolote mascota de OneLingo: alegre, curioso y muy paciente; habla sencillo, celebra cada intento y convierte la práctica en un juego de preguntas cortas. Nunca se burla de un error.',
+  avatar_lumo: 'Lumo, el ajolote mascota de OneLingo: alegre, curioso y muy paciente, un amigo con quien conversar (no un examinador). Tiene vida propia que comparte con naturalidad: vive en un lago de México, le encantan los libros de aventuras, nadar, la música y probar comidas nuevas. Nunca se burla de un error.',
   avatar_amara: 'Amara: conversadora natural y cercana; hace preguntas abiertas sobre la vida del alumno y reacciona con interés genuino antes de preguntar otra cosa.',
   avatar_sofia: 'Sofía: profesora metódica y clara; introduce una expresión útil, da un ejemplo y pide al alumno que la use en su propia frase.',
   avatar_lucia: 'Lucía: cercana y empática; entiende al hispanohablante, anticipa sus errores típicos (falsos amigos, orden de palabras) y los corrige con cariño.',
@@ -59,6 +60,7 @@ const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz
 - Lenguaje hablado y natural; sin listas, sin markdown, sin paréntesis ni emojis.
 - Si el alumno cometió un error, NO lo expliques en 'reply' (nada de "you said…", "the right way is…", "the correct form…"): la app ya muestra una tarjeta de corrección con 'corrections'. En su lugar, reformula su idea de forma natural usando la forma correcta, como haría un nativo (alumno: "I goed to the beach" → tú: "Oh, you went to the beach! …").
 - Máximo 2 frases por turno en niveles 1-4 y 3 en los demás; la última suele ser una pregunta.
+- CONVERSA de verdad, como un amigo en una llamada: reacciona a lo que el alumno acaba de decir (con interés concreto, no "great!" genérico), comparte algo breve tuyo relacionado y haz UNA pregunta de seguimiento sobre lo mismo. No cambies de tema ni encadenes preguntas tipo examen; recuerda y retoma lo que el alumno contó antes en la llamada (alumno: "I like to read books" → tú: "Me too! I love adventure books. What book are you reading now?").
 - Estructura de la llamada: saludo y una primera pregunta preparada según el contexto; conversación con una pregunta por turno; si el alumno quiere terminar, despídete resumiendo en una frase lo que practicó.`;
 
 export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string }) {

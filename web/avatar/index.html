@@ -1,82 +1,147 @@
-<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutores IA · OneLingo</title>
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Tutores IA · OneLingo</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#111726;color:#edf0fb;font:16px system-ui}main{max-width:1120px;margin:auto;padding:20px}h1{font-size:clamp(25px,4vw,38px);margin:8px 0}p{line-height:1.5;color:#c3c9db}button,select,textarea{font:inherit;border-radius:14px;border:1px solid #46506d;background:#242d43;color:#fff;padding:13px}button{cursor:pointer}button:hover{background:#374363}button:disabled{opacity:.5;cursor:wait}.primary{background:#7852ea;border-color:#9979ef}#gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}.tutor{padding:0;overflow:hidden;text-align:left}.tutor img{display:block;width:100%;aspect-ratio: .86;object-fit:cover;background:#263346}.tutor strong,.tutor small{display:block;padding:8px 12px}.tutor small{padding-top:0;font-size:12px;color:#c3c9db;min-height:48px}#session[hidden],#selection[hidden]{display:none}.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px}#stage{position:relative;height:570px;border-radius:25px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#526786,#1b263d 70%)}#stage canvas{width:100%;height:100%;display:block}.badge{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:9px;background:#18243ed9;border:1px solid #ffffff18;border-radius:30px;padding:8px 12px;font-size:13px;z-index:1;box-shadow:0 8px 24px #0b102650}.voice-waves{display:none;height:18px;align-items:center;gap:3px}.voice-waves i{display:block;width:3px;height:7px;border-radius:4px;background:#b8ffdf;animation:voice-wave .72s ease-in-out infinite}.voice-waves i:nth-child(2){animation-delay:.12s}.voice-waves i:nth-child(3){animation-delay:.24s}.voice-waves i:nth-child(4){animation-delay:.36s}.voice-waves i:nth-child(5){animation-delay:.48s}#stage[data-phase="speaking"] .badge{background:#153d39e8;border-color:#6fffc755}#stage[data-phase="speaking"] .voice-waves{display:flex}#stage[data-phase="thinking"] .badge::before,#stage[data-phase="voice-loading"] .badge::before{content:'';width:8px;height:8px;border-radius:50%;background:#c6afff;box-shadow:0 0 0 0 #c6afff70;animation:state-pulse 1.25s ease-out infinite}@keyframes voice-wave{0%,100%{height:5px;opacity:.65}50%{height:17px;opacity:1}}@keyframes state-pulse{70%{box-shadow:0 0 0 8px #c6afff00}100%{box-shadow:0 0 0 0 #c6afff00}}#loading{position:absolute;inset:0;display:grid;place-content:center;text-align:center;gap:15px}#loading::before{content:'✦';font-size:42px;color:#bca6ff;animation:rotate 2s infinite linear}@keyframes rotate{to{transform:rotate(360deg)}}#messages{min-height:90px;max-height:260px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:4px}.bubble{padding:13px 16px;border-radius:17px;background:#26334e;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.45}.mine{background:#58428a;margin-left:24px}.feedback{font-size:14px;color:#d1e4c8;background:#202f2b}textarea{width:100%;min-height:85px;resize:vertical;margin-top:12px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.actions button{min-height:48px}audio{width:100%;margin-top:10px}#status{min-height:48px;line-height:1.5;color:#cfc4ff}select{width:100%;margin-bottom:12px}.top{display:flex;gap:14px;align-items:center;margin-bottom:14px}.note{font-size:12px}#error{color:#ffc5c5}#replay{width:100%}@media(max-width:700px){main{padding:12px}.layout{grid-template-columns:1fr}#stage{height:340px}#messages{max-height:190px}.top h1{font-size:24px}}@media(max-width:700px){#session{display:flex;flex-direction:column;height:calc(100dvh - 24px)}.top{flex:none}.layout{flex:1;min-height:0;grid-template-rows:minmax(200px,35vh) minmax(0,1fr);gap:12px}.layout>div:last-child{overflow:auto;min-height:0;padding:0 2px 12px}#stage{height:100%;min-height:0}.top h1{margin:0}}@media(prefers-reduced-motion:reduce){#loading::before,.voice-waves i,#stage[data-phase="thinking"] .badge::before,#stage[data-phase="voice-loading"] .badge::before{animation:none}}
-</style>
-<style>
-#gallery{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.tutor{position:relative}.portrait{overflow:hidden;aspect-ratio:.72;background:#263346}.tutor .portrait img{height:100%;aspect-ratio:auto;object-position:center top;transform:scale(1.03)}.recommended{position:absolute;top:9px;left:9px;z-index:1;background:#7852ea;color:#fff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800}
-</style>
-<style>
-/* Integración con el diseño de OneLingo (theme.dart): fondo crema, morado
-   #4519BB, tarjetas blancas redondeadas y Nunito. Sustituye al tema oscuro. */
+/* Diseño de OneLingo (theme.dart): crema, morado #4519BB, Nunito. */
 @font-face{font-family:Nunito;src:url('../assets/assets/fonts/Nunito.ttf') format('truetype');font-weight:200 1000;font-display:swap}
-:root{--morado:#4519BB;--morado-claro:#E6DEFF;--morado-suave:#F3F0FF;--texto:#1C1B1B;--gris:#79758A;--borde:#EBE8E6;--verde:#40A652;--verde-suave:#E0F4E3;--naranja:#F7941D}
-body{background:#FCF9F8;color:var(--texto);font:16px Nunito,system-ui,sans-serif}
-main{padding:16px}
-h1{font-weight:900;color:var(--texto)}#eyebrow{color:var(--morado);font-weight:900;letter-spacing:.06em;font-size:13px}
-p{color:var(--gris)}#name{font-size:22px}
-button,select,textarea{background:#fff;color:var(--texto);border:1.5px solid var(--borde);font-weight:700}
-button:hover{background:var(--morado-suave)}textarea{font-weight:500}
-.primary{background:var(--morado);border-color:var(--morado);color:#fff}.primary:hover{background:#2E0F86}
-#back{padding:9px 14px}
-.tutor{background:#fff;border-radius:20px;border:1.5px solid var(--borde);box-shadow:0 6px 18px #4519bb12}
-.tutor small{color:var(--gris)}.portrait,.tutor img{background:var(--morado-claro)!important}
-.recommended{background:var(--naranja)}
-#stage{background:linear-gradient(180deg,var(--morado-suave),var(--morado-claro));border:1.5px solid var(--morado-claro)}
-.badge{background:#ffffffe6;color:var(--morado);border:1px solid var(--morado-claro);box-shadow:0 6px 18px #4519bb1f;font-weight:800}
-#stage[data-phase="speaking"] .badge{background:#fff;border-color:#40A65255;color:#197D58}
-.voice-waves i{background:var(--verde)}
-#stage[data-phase="thinking"] .badge::before,#stage[data-phase="voice-loading"] .badge::before{background:var(--morado);box-shadow:0 0 0 0 #4519bb55}
-#loading{color:var(--morado);font-weight:800}#loading::before{color:var(--morado)}
-.bubble{background:#fff;border:1.5px solid var(--borde);color:var(--texto)}
-.mine{background:var(--morado);border-color:var(--morado);color:#fff}
-.feedback{background:var(--verde-suave);border-color:#40A65233;color:#1F5A2B}
-#status{color:var(--morado);font-weight:700}#error{color:#E03349}
-label{color:var(--texto);font-weight:800}.note{color:var(--gris)}
-</style>
-<style>
-/* Integrado en la app (?embebido): sin galería ni cabecera propias. */
-body.embebido{background:#FCF9F8}
-body.embebido #selection,body.embebido .top{display:none!important}
-body.embebido main{padding:12px 14px 20px}
-@media(max-width:700px){body.embebido .layout{grid-template-rows:minmax(220px,42vh) minmax(0,1fr)}body.embebido #stage{height:100%}}
-@media(min-width:701px){body.embebido #stage{height:min(70vh,560px)}}
-</style>
-<style>
-/* Lumo 2D: base sin boca + bocas superpuestas (mismo lienzo). Sin rebotes:
-   solo cambia la boca y, al pensar, una leve inclinación. */
-.lumo2d{position:absolute;inset:8% 0 0;pointer-events:none;transform-origin:50% 80%;transition:transform .45s ease}
-.lumo2d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%}
+:root{--morado:#4519BB;--morado-oscuro:#2E0F86;--morado-claro:#E6DEFF;--morado-suave:#F3F0FF;--texto:#1C1B1B;--gris:#79758A;--borde:#EBE8E6;--verde:#40A652;--verde-suave:#E0F4E3;--rojo:#E03349;--naranja:#F7941D;--fondo:#FCF9F8}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--fondo);color:var(--texto);font:16px Nunito,system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit}
+button{cursor:pointer;border:0;background:none;color:inherit}
+button:disabled{opacity:.45;cursor:default}
+
+/* Galería (solo fuera de la app) */
+#selection{max-width:1000px;margin:auto;padding:20px}
+#selection h1{font-weight:900;margin:6px 0}#selection p{color:var(--gris)}
+#eyebrow{color:var(--morado)!important;font-weight:900;letter-spacing:.06em;font-size:13px}
+#gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tutor{position:relative;padding:0;overflow:hidden;text-align:left;background:#fff;border-radius:20px;border:1.5px solid var(--borde)}
+.portrait{aspect-ratio:.82;background:var(--morado-claro)}.portrait img{width:100%;height:100%;object-fit:cover;object-position:top}
+.tutor strong,.tutor small{display:block;padding:8px 12px 0}.tutor small{color:var(--gris);font-size:12px;padding-bottom:12px}
+.recommended{position:absolute;top:9px;left:9px;background:var(--naranja);color:#fff;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+body.embebido #selection{display:none}
+
+/* Llamada: pantalla completa, el tutor centrado, controles abajo. */
+.llamada{position:fixed;inset:0;display:flex;flex-direction:column;background:linear-gradient(180deg,#fff 0%,var(--morado-suave) 55%,var(--morado-claro) 100%);overflow:hidden}
+.llamada[hidden]{display:none}
+.columna{width:100%;max-width:560px;margin:0 auto;padding:0 16px}
+.cabecera{display:flex;align-items:center;gap:10px;padding-top:12px}
+.quien{flex:1;text-align:center;line-height:1.2}
+.quien strong{display:block;font-size:20px;font-weight:900}
+.quien span{font-size:13px;color:var(--gris);font-weight:700}
+.icono{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:#ffffffb0;position:relative}
+.icono:hover{background:#fff}
+.contador{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;border-radius:9px;background:var(--naranja);color:#fff;font-size:11px;font-weight:900;display:grid;place-items:center;padding:0 4px}
+.contador[hidden]{display:none}
+.tema{display:flex;align-items:center;gap:6px;margin:8px auto 0;padding:7px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-weight:800;font-size:14px;max-width:calc(100% - 32px)}
+.tema span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#stage{position:relative;flex:1;min-height:150px}
+#stage canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block}
+.lumo2d{position:absolute;inset:4% 0 0;pointer-events:none;transform-origin:50% 75%;transition:transform .45s ease}
+.lumo2d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 50%}
 .lumo2d img[hidden]{display:none}
 .lumo2d.pensando{transform:rotate(-3deg)}
-#stage.dosd{background:radial-gradient(ellipse at 50% 70%,#fff 0,var(--morado-suave) 45%,var(--morado-claro) 100%)}
-@media(prefers-reduced-motion:reduce){.lumo2d{transition:none}}
-/* Correcciones, ideas, traducción y resumen */
-.correccion{background:#FFF4E5;border:1.5px solid #F7941D55;border-radius:17px;padding:11px 14px;display:grid;gap:5px}
-.correccion-titulo{font-size:12px;font-weight:900;color:#B25E00;letter-spacing:.04em;text-transform:uppercase}
-.correccion-fila{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}.correccion s{color:#E03349}.correccion strong{color:#197D58}.correccion small{color:var(--gris);font-size:13px}.flecha{color:var(--gris)}
-.ideas{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.ideas[hidden]{display:none}.ideas-titulo{width:100%;font-size:12px;font-weight:900;color:var(--morado);letter-spacing:.04em;text-transform:uppercase}
-.idea{padding:8px 12px;border-radius:999px;background:var(--morado-suave);border-color:var(--morado-claro);color:var(--morado);font-size:14px;text-align:left}
-.romanizacion{display:block;margin-top:6px;font-size:13px;color:var(--gris)}
-.traduccion{margin-top:8px;font-size:14px;color:var(--gris)}.traduccion summary{cursor:pointer;color:var(--morado);font-weight:800;font-size:13px}.mine .traduccion{color:#fff}
-.terminar{grid-column:1/-1;color:var(--morado);border-color:var(--morado-claro)}
-.resumen{background:#fff;border:2px solid var(--morado-claro);border-radius:20px;padding:14px 16px}.resumen h3{margin:0 0 6px;color:var(--morado)}.resumen h4{margin:10px 0 4px;font-size:14px}.resumen ul{margin:0;padding-left:18px;display:grid;gap:4px}.resumen li small{display:block;color:var(--gris)}.resumen s{color:#E03349}.resumen strong{color:#197D58}.resumen .siguiente{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--verde-suave);color:#1F5A2B;font-weight:700}
-</style>
-<style>
-/* Llamada: «Llamar» (el toque que activa audio y micrófono), barra con
-   silenciar/colgar y aro verde mientras te escucha. */
-.llamada-inicio{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 16px;display:none;flex-direction:column;align-items:center;gap:8px;z-index:2;background:linear-gradient(180deg,transparent,#ffffffd9 45%)}
+.cargando{position:absolute;inset:0;display:grid;place-content:center;color:var(--morado);font-weight:800}
+.cargando[hidden]{display:none}
+.abajo{padding-bottom:max(14px,env(safe-area-inset-bottom))}
+
+/* Subtítulos */
+.subtitulos{text-align:center;min-height:24px}
+.sub-tutor{margin:0;font-size:19px;font-weight:800;line-height:1.35}
+.sub-traduccion{margin:4px 0 0;color:var(--gris);font-size:14px}
+.sub-alumno{margin:8px auto 0;display:table;max-width:92%;background:var(--morado);color:#fff;border-radius:16px 16px 4px 16px;padding:7px 12px;font-size:15px;font-weight:700}
+.sub-acciones{display:flex;justify-content:center;gap:14px;margin-top:4px}
+.enlace{color:var(--morado);font-weight:800;font-size:13px;padding:4px}
+.nota{display:block;margin:8px auto 0;padding:6px 12px;border-radius:12px;background:#FFF4E5;border:1.5px solid #F7941D55;font-size:14px;font-weight:700;color:#7A4300}
+.nota s{color:var(--rojo)}.nota b{color:#197D58}
+.ideas{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}
+.ideas[hidden],.sub-traduccion[hidden],.sub-alumno[hidden],.nota[hidden],.enlace[hidden]{display:none}
+.ideas-titulo{width:100%;text-align:center;font-size:12px;font-weight:900;color:var(--gris);letter-spacing:.04em;text-transform:uppercase}
+.idea{padding:7px 12px;border-radius:999px;background:#fff;border:1.5px solid var(--morado-claro);color:var(--morado);font-size:14px;font-weight:700}
+.pista{margin:8px 0 0;text-align:center;font-size:13px;color:var(--gris);font-weight:700;min-height:18px}
+.aviso{margin:6px 0 0;text-align:center;font-size:14px;color:var(--rojo);font-weight:700}
+.aviso:empty{display:none}
+.aviso button{color:var(--morado);font-weight:900;text-decoration:underline;margin-left:6px}
+
+/* Antes de contestar (y al colgar) no se ve lo que dirá el tutor. */
+body:not(.en-llamada) .subtitulos,body:not(.en-llamada) .ideas,body:not(.en-llamada) .pista{display:none}
+/* Llamada entrante / terminada */
+.llamada-inicio{display:none;flex-direction:column;align-items:center;gap:10px;padding:12px 0 6px}
 body.puede-llamar:not(.en-llamada) .llamada-inicio{display:flex}
-.llama-texto{margin:0;font-weight:900;font-size:17px;color:var(--texto)}
-.llamar{display:flex;align-items:center;gap:10px;padding:14px 26px;border-radius:999px;background:#40A652;border-color:#40A652;color:#fff;font-size:17px;font-weight:900;box-shadow:0 8px 22px #40a65255}
-.llamar:hover{background:#2F8F40}.llamar:disabled{opacity:.55}
-.barra-llamada{position:absolute;left:0;right:0;bottom:14px;display:none;justify-content:center;gap:18px;z-index:2}
-body.en-llamada .barra-llamada{display:flex}
-.redondo{width:54px;height:54px;padding:0;border-radius:50%;font-size:22px;display:grid;place-items:center;box-shadow:0 6px 16px #4519bb26}
-.redondo[aria-pressed="true"]{background:#F3F0FF;border-color:var(--morado)}
-.colgar{background:#E03349;border-color:#E03349;color:#fff}.colgar:hover{background:#B9233A}.colgar span{display:inline-block;transform:rotate(135deg)}
-#stage.escuchando{box-shadow:inset 0 0 0 4px #40A652}
-#stage[data-phase="listening"] .badge{color:#197D58;border-color:#40A65255}
+.llama-texto{margin:0;font-weight:900;font-size:17px}
+.llamar{display:flex;align-items:center;gap:10px;padding:15px 30px;border-radius:999px;background:var(--verde);color:#fff;font-size:18px;font-weight:900;box-shadow:0 8px 22px #40a65255}
+.llamar:hover{background:#2F8F40}
+
+/* Controles */
+.controles{display:none;align-items:center;justify-content:center;gap:28px;padding-top:12px}
+body.en-llamada .controles{display:flex}
+.redondo{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:21px;background:#fff;box-shadow:0 4px 14px #4519bb1f}
+.colgar{background:var(--rojo);color:#fff}.colgar span{display:inline-block;transform:rotate(135deg)}
+.hablar{width:78px;height:78px;border-radius:50%;display:grid;place-items:center;background:var(--morado);color:#fff;font-size:30px;box-shadow:0 8px 22px #4519bb55;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .15s,background .15s}
+body.grabando .hablar{background:var(--rojo);transform:scale(1.12);box-shadow:0 0 0 8px #e0334933}
+body.grabando.cancelando .hablar{background:var(--gris)}
+.hablar-texto{display:none;margin:8px 0 0;text-align:center;font-size:13px;font-weight:800;color:var(--morado)}
+body.en-llamada .hablar-texto{display:block}
+body.grabando .hablar-texto{color:var(--rojo)}
+.escribir{display:flex;gap:8px;margin-top:10px}
+.escribir[hidden]{display:none}
+.escribir input{flex:1;min-width:0;padding:12px 14px;border-radius:999px;border:1.5px solid var(--morado-claro);background:#fff}
+.enviar{padding:0 18px;border-radius:999px;background:var(--morado);color:#fff;font-weight:900}
+
+/* Hoja inferior: conversación y temas */
+.hoja{position:absolute;left:0;right:0;bottom:0;max-height:78%;display:flex;flex-direction:column;background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -10px 30px #4519bb26;z-index:5}
+.hoja[hidden]{display:none}
+.hoja-cabecera{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 8px;font-size:17px}
+.hoja-cuerpo{overflow:auto;padding:4px 16px 20px;display:flex;flex-direction:column;gap:10px}
+.hoja-cuerpo[hidden]{display:none}
+.bubble{padding:11px 14px;border-radius:16px;background:var(--morado-suave);white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.4;max-width:88%}
+.bubble.mine{align-self:flex-end;background:var(--morado);color:#fff}
+.bubble.feedback{align-self:center;background:none;color:var(--gris);font-size:13px}
+.traduccion{margin-top:6px;font-size:13px;color:var(--gris)}.traduccion summary{cursor:pointer;color:var(--morado);font-weight:800}
+.romanizacion{display:block;margin-top:4px;font-size:13px;color:var(--gris)}
+.correccion{background:#FFF4E5;border:1.5px solid #F7941D55;border-radius:14px;padding:10px 12px;display:grid;gap:4px}
+.correccion-titulo{font-size:11px;font-weight:900;color:#B25E00;letter-spacing:.04em;text-transform:uppercase}
+.correccion-fila{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}.correccion s{color:var(--rojo)}.correccion strong{color:#197D58}.correccion small{color:var(--gris)}.flecha{color:var(--gris)}
+.resumen{border:2px solid var(--morado-claro);border-radius:18px;padding:12px 14px}.resumen h3{margin:0 0 6px;color:var(--morado)}.resumen h4{margin:10px 0 4px;font-size:14px}.resumen ul{margin:0;padding-left:18px;display:grid;gap:4px}.resumen li small{display:block;color:var(--gris)}.resumen s{color:var(--rojo)}.resumen strong{color:#197D58}.resumen .siguiente{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--verde-suave);color:#1F5A2B;font-weight:700}
+.opcion-tema{text-align:left;padding:12px 14px;border-radius:14px;border:1.5px solid var(--borde);font-weight:700}
+.opcion-tema[aria-pressed="true"]{border-color:var(--morado);background:var(--morado-suave);color:var(--morado)}
+@media(prefers-reduced-motion:reduce){.lumo2d,.hablar{transition:none}}
 </style>
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/examples/jsm/"}}</script>
-<main><section id="selection"><p id="eyebrow">ONELINGO · TUTOR CON IA</p><h1>Una conversación, a tu ritmo.</h1><p id="selectionCopy">Elige a tu tutor. Puedes escribir o hablar; recibirás una respuesta y correcciones adaptadas a tu nivel.</p><p id="authStatus" role="status">Conectando con tu sesión…</p><div id="gallery"></div></section>
-<section id="session" hidden><div class="top"><button id="back">← Tutores</button><h1 id="name"></h1></div><div class="layout"><div id="stage" data-phase="loading"><span class="badge"><span id="state">Preparando tutor</span><span class="voice-waves" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><div id="loading">Cargando avatar…</div><div class="llamada-inicio"><p id="llamaTexto" class="llama-texto"></p><button id="llamar" class="llamar" type="button" disabled><span aria-hidden="true">📞</span><span id="llamarTexto">Contestar</span></button></div><div class="barra-llamada"><button id="silenciar" class="redondo" type="button" aria-pressed="false">🎙</button><button id="end" class="redondo colgar" type="button" title="Colgar" aria-label="Colgar la llamada"><span aria-hidden="true">📞</span></button></div></div><div><label for="topic">¿Qué quieres practicar?</label><select id="topic"><option value="">Conversación libre</option></select><div id="messages" role="log" aria-live="polite"></div><div id="ideas" class="ideas" hidden></div><form id="form"><label for="text" id="messageLabel">Tu mensaje</label><textarea id="text" maxlength="1200" placeholder="Escribe lo que quieras practicar…"></textarea><div class="actions"><button class="primary" id="send">Enviar mensaje</button><button type="button" id="mic">🎙 Hablar</button><button type="button" id="stop">Interrumpir</button><button type="button" id="replay">Repetir voz</button></div></form><label class="note"><input type="checkbox" id="review"> Revisar la transcripción antes de enviarla</label><div id="status" role="status">El tutor se prepara para conversar.</div><audio id="audio" controls preload="auto"></audio><p class="note">Manos libres: cuando el tutor termina, te escucha; haz una pausa y tu mensaje se envía. Toca al tutor para interrumpirlo. La boca sigue el audio en tiempo real, sin esperar un vídeo.</p><p id="error" role="alert"></p></div></div></section></main><script type="module" src="./practice.js?v=26"></script></html>
+<section id="selection"><p id="eyebrow">ONELINGO · TUTOR CON IA</p><h1>Una conversación, a tu ritmo.</h1><p id="selectionCopy">Elige a tu tutor.</p><p id="authStatus" role="status">Conectando con tu sesión…</p><div id="gallery"></div></section>
+<section id="session" class="llamada" hidden>
+ <header class="cabecera columna">
+  <button id="back" class="icono" type="button" aria-label="Volver a los tutores">←</button>
+  <div class="quien"><strong id="name">Tutor</strong><span id="state">Preparando…</span></div>
+  <button id="verConversacion" class="icono" type="button" aria-label="Ver la conversación">💬<span id="contador" class="contador" hidden></span></button>
+ </header>
+ <button id="tema" class="tema" type="button" aria-label="Cambiar el tema de la conversación"><span id="temaNombre">Conversación libre</span><b aria-hidden="true">▾</b></button>
+ <div id="stage" data-phase="loading"><div id="loading" class="cargando">Cargando…</div></div>
+ <div class="abajo columna">
+  <div class="subtitulos" aria-live="polite">
+   <p id="subTutor" class="sub-tutor"></p>
+   <p id="subTraduccion" class="sub-traduccion" hidden></p>
+   <div class="sub-acciones"><button id="replay" class="enlace" type="button" hidden>↻ Repetir</button><button id="verTraduccion" class="enlace" type="button" hidden>Ver traducción</button></div>
+   <p id="subAlumno" class="sub-alumno" hidden></p>
+   <button id="nota" class="nota" type="button" hidden></button>
+  </div>
+  <div id="ideas" class="ideas" hidden></div>
+  <p id="status" class="pista" role="status"></p>
+  <p id="error" class="aviso" role="alert"></p>
+  <div class="llamada-inicio"><p id="llamaTexto" class="llama-texto"></p><button id="llamar" class="llamar" type="button" disabled><span aria-hidden="true">📞</span><span id="llamarTexto">Contestar</span></button></div>
+  <form id="form" class="escribir" hidden><input id="text" autocomplete="off" maxlength="600" placeholder="Escribe tu respuesta…" aria-label="Tu mensaje"><button id="send" class="enviar">Enviar</button></form>
+  <div class="controles">
+   <button id="teclado" class="redondo" type="button" aria-label="Escribir en lugar de hablar">⌨️</button>
+   <button id="hablar" class="hablar" type="button" aria-label="Mantén pulsado para hablar">🎙</button>
+   <button id="end" class="redondo colgar" type="button" aria-label="Colgar la llamada"><span aria-hidden="true">📞</span></button>
+  </div>
+  <p id="hablarTexto" class="hablar-texto">Mantén pulsado para hablar</p>
+ </div>
+ <div id="panel" class="hoja" role="dialog" aria-labelledby="panelTitulo" hidden>
+  <div class="hoja-cabecera"><strong id="panelTitulo">Conversación</strong><button id="cerrarPanel" class="icono" type="button" aria-label="Cerrar">✕</button></div>
+  <div id="messages" class="hoja-cuerpo" role="log"></div>
+  <div id="temas" class="hoja-cuerpo" hidden></div>
+ </div>
+ <audio id="audio" preload="auto" playsinline></audio>
+</section>
+<script type="module" src="./practice.js?v=27"></script></html>

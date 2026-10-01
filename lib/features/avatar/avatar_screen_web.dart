@@ -34,7 +34,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     frame = web.HTMLIFrameElement()
       ..src = Uri.base
           .resolve(
-            '/avatar/index.html?v=avatar26&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
+            '/avatar/index.html?v=avatar27&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
           )
           .toString()
       ..title = 'Practica con un tutor de IA'
@@ -47,7 +47,13 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
           event.source != frame.contentWindow) {
         return;
       }
-      if (event.data.dartify() != 'onelingo-avatar-ready') return;
+      final dato = event.data.dartify();
+      // La flecha de la llamada (dentro del visor) vuelve a «Tutores con IA».
+      if (dato == 'onelingo-avatar-salir') {
+        if (mounted) context.canPop() ? context.pop() : context.go('/tutores');
+        return;
+      }
+      if (dato != 'onelingo-avatar-ready') return;
       final s = ref.read(progressProvider);
       frame.contentWindow?.postMessage(
         jsonEncode({
@@ -77,22 +83,32 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        tooltip: 'Tutores',
-        onPressed: () =>
-            context.canPop() ? context.pop() : context.go('/tutores'),
-      ),
-      title: Text(
-        '${tutor3d(widget.tutorId)?.nombre ?? 'Tutor'} · videollamada',
-      ),
-    ),
-    body: Sync.instancia.token == null
-        ? _SinSesion(nombre: tutor3d(widget.tutorId)?.nombre ?? 'tu tutor')
-        : HtmlElementView(viewType: viewType),
-  );
+  // La llamada ocupa toda la pantalla (como una videollamada): su cabecera,
+  // con el nombre del tutor y la flecha para volver, está dentro del visor.
+  Widget build(BuildContext context) => Sync.instancia.token == null
+      ? Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              tooltip: 'Tutores',
+              onPressed: () =>
+                  context.canPop() ? context.pop() : context.go('/tutores'),
+            ),
+            title: Text(
+              '${tutor3d(widget.tutorId)?.nombre ?? 'Tutor'} · videollamada',
+            ),
+          ),
+          body: _SinSesion(
+            nombre: tutor3d(widget.tutorId)?.nombre ?? 'tu tutor',
+          ),
+        )
+      : Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            bottom: false,
+            child: HtmlElementView(viewType: viewType),
+          ),
+        );
 }
 
 /// Sin sesión el tutor no puede conversar: se pide iniciarla en lugar de
