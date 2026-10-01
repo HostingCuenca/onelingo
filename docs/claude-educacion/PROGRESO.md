@@ -9,7 +9,7 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 ## Trabajando ahora
 
 - Pase de dificultad C1 (N8–N10) publicado en `20260930-edu-11-c1-dificultad`.
-- Siguiente: diagnóstico de ubicación v2 (plan en discusión con el cliente).
+- Prueba de nivel v2 de inglés publicada en `20260930-edu-12-prueba-nivel-v2` (DEC-025).
 
 ## Terminado recientemente
 
@@ -44,7 +44,7 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 ## Siguiente paso
 
 1. Recoger revisión del cliente sobre N1–N10 publicados.
-2. Diagnóstico de ubicación v2 alineado con N1–N10 (por habilidad, lecturas y audios del nivel).
+2. Recoger datos reales de la prueba de nivel v2 para recalibrar umbrales (eventos `diagnostico` versión 4).
 3. Auditoría #15 (léxico de validación separado del vocabulario enseñado), imágenes y personajes fijos (#20).
 
 ## Bloqueos
@@ -53,9 +53,9 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Producción
 
-- Versión desplegada: `20260930-edu-11-c1-dificultad` · `main.dart.js` `8c57e0a0…`; biblioteca `0d281c1b…`; backend sin cambios desde `edu-2`.
+- Versión desplegada: `20260930-edu-12-prueba-nivel-v2` · `main.dart.js` `7593f3ad…`; biblioteca `0d281c1b…`; banco diagnóstico `16c0c6a5…`; backend sin cambios desde `edu-2`.
 - Fecha: 2026-09-30
 - URL: https://onelingo.hostingcuenca.com
 - Estado de salud: `/api/salud` OK.
-- Respaldo: `/var/www/onelingo/backups/20260930-edu-11-c1-dificultad/web-anterior`
+- Respaldo: `/var/www/onelingo/backups/20260930-edu-12-prueba-nivel-v2/web-anterior`
 - Rollback: ver `DESPLIEGUES.md`; restauración web completa, sin reinicio de backend.

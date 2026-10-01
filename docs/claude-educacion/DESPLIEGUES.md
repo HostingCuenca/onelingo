@@ -183,3 +183,12 @@ Commit: `5422ab3` · Build: `main.dart.js` `8c57e0a0…`; biblioteca `0d281c1b�
 Pruebas: 178 Flutter (1 omitida), validar_ruta 0 errores en 10 idiomas, 1.000/1.000 clases con GO, 60/60 bloques C1 con GO y construcción en orden.
 Backup: `/var/www/onelingo/backups/20260930-edu-11-c1-dificultad/web-anterior` (= edu-10). Health: salud, APK, avatar y `n10-editorial.json` 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-11-c1-dificultad/web-retirada-post && cp -al backups/20260930-edu-11-c1-dificultad/web-anterior web'`
+
+## Release: 20260930-edu-12-prueba-nivel-v2
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: prueba de nivel v2 de inglés (DEC-025, `DIAGNOSTICO_V2.md`): ~8 min, adaptativa bayesiana por habilidad (escucha, lectura, gramática, vocabulario; escritura omitible), «empiezo de cero» sin examen, resultado por habilidad y elección N−1/N/N+1. Banco de 180 ítems (18 por nivel) con revisión independiente GO. El registro guarda el nivel en la escala del curso. Los demás idiomas siguen con el diagnóstico anterior.
+Commit: `8b93e3f` · Build: `main.dart.js` `7593f3ad…`; banco `diagnostico-v2.json` `16c0c6a5…` (servidos iguales).
+Pruebas: 186 Flutter (1 omitida), validar_ruta 0 errores, validar_diagnostico 10/10 OK con GO. Navegador (build local): alumno N5 simulado → «N5 · B2» en 19 preguntas; respuestas al azar → «Empiezas desde cero». Se detectó y corrigió en esa prueba que los `completar` con opciones se corregían siempre como error.
+Backup: `/var/www/onelingo/backups/20260930-edu-12-prueba-nivel-v2/web-anterior` (= edu-11). Health: salud, APK, avatar y banco 200; `.env` igual; lock liberado. Producción muestra la nueva pantalla en `/#/prueba-nivel`.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-12-prueba-nivel-v2/web-retirada-post && cp -al backups/20260930-edu-12-prueba-nivel-v2/web-anterior web'`
