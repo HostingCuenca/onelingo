@@ -306,3 +306,17 @@ Commit: `c26422d` · Build: `main.dart.js` `3985f80e…`.
 Pruebas: Flutter 202 (1 omitida) + `nivel0_test.dart` (marcado, coherencia del contenido: sonidos, imágenes, respuestas, fichas y cambios de letra; lección completa con progreso); navegador (390×760): portada del Nivel 0, colores de apple/cake/car/about, botones Escuchar/Lento, juntar sonidos, sat/sit con panel, tarjeta en Aprender. Arreglos durante la prueba: botón Lento invisible (ancho infinito del tema en una fila), doble toque en COMPROBAR abría dos paneles y saltaba un paso, imágenes que tardaban (precarga por lección).
 Backup: `/var/www/onelingo/backups/20261001-edu-25-nivel0/web-anterior` (= edu-24). Health 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-25-nivel0/web-retirada-post && cp -al backups/20261001-edu-25-nivel0/web-anterior web'`
+
+## Release: 20261001-edu-26-limpieza-prueba-nivel
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Solo web; backend sin cambios y sin reinicios.
+Contenido: fases A y B de la hoja de ruta (DEC-026, DEC-027, `docs/ARQUITECTURA_VIGENTE.md`).
+- Estética única: `BotonPrincipal` fijo, `OpcionRespuesta` y `FeedbackDock` en lecturas, escuchas, gramática, lecciones y examen de otros idiomas y en la prueba antigua; el tema estiliza `FilledButton`.
+- Sin selectores de nivel («Nivel interno», «Nivel de práctica», «Explorar nivel») y sin jerga interna.
+- Retirada la biblioteca de práctica antigua. La Biblioteca nueva tiene Lecturas, Escuchas, Guías de gramática y Mapa de sonidos.
+- Ubicación a prueba de azar: techo bayesiano en la prueba antigua; prueba obligatoria en el registro de todos los idiomas; no se puede empezar por encima del resultado.
+- Prueba para subir de nivel: 20 preguntas y 16 para aprobar. Aprender muestra cada nivel como superado, en curso, opcional o bloqueado.
+Commit: `20b3feb` · Build: `main.dart.js` `c5d0454a…` (servido igual).
+Pruebas: Flutter 213; análisis sin errores ni avisos. Nuevas: `arquitectura_test`, `prueba_nivel_test`, azar en `diagnostico_test`, `lectura_escucha_test`, `guias_gramatica_test`. Navegador (400×820): niveles con estado, tarjeta y prueba del nivel con botón fijo, Biblioteca → Lecturas en el nivel del alumno.
+Backup: `/var/www/onelingo/backups/20261001-edu-26-limpieza-prueba-nivel/web-anterior` (= edu-25). Salud 200; `.env` igual; APK, avatar y Nivel 0 servidos; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-26-limpieza-prueba-nivel/web-retirada-post2 && cp -al backups/20261001-edu-26-limpieza-prueba-nivel/web-anterior web'`
