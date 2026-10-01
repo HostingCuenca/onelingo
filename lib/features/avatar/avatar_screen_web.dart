@@ -34,7 +34,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     frame = web.HTMLIFrameElement()
       ..src = Uri.base
           .resolve(
-            '/avatar/index.html?v=avatar23&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
+            '/avatar/index.html?v=avatar24&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
           )
           .toString()
       ..title = 'Practica con un tutor de IA'
@@ -89,6 +89,44 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
         '${tutor3d(widget.tutorId)?.nombre ?? 'Tutor'} · videollamada',
       ),
     ),
-    body: HtmlElementView(viewType: viewType),
+    body: Sync.instancia.token == null
+        ? _SinSesion(nombre: tutor3d(widget.tutorId)?.nombre ?? 'tu tutor')
+        : HtmlElementView(viewType: viewType),
+  );
+}
+
+/// Sin sesión el tutor no puede conversar: se pide iniciarla en lugar de
+/// abrir una videollamada que no respondería.
+class _SinSesion extends StatelessWidget {
+  const _SinSesion({required this.nombre});
+  final String nombre;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.lock_outline_rounded, size: 40),
+          const SizedBox(height: 12),
+          Text(
+            'Inicia sesión para hablar con $nombre',
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            'Tu tutor recuerda tu nivel, tus correcciones y lo que practicaste en otras llamadas.',
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 16),
+          FilledButton(
+            onPressed: () => context.push('/login'),
+            child: const Text('Iniciar sesión'),
+          ),
+        ],
+      ),
+    ),
   );
 }

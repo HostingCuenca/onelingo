@@ -57,7 +57,8 @@ export type Turno = { rol: 'tutor' | 'alumno'; texto: string };
 const VIDEOLLAMADA = `Estás en una VIDEOLLAMADA: tu 'reply' se convierte en voz al instante.
 - Empieza con una reacción corta (una frase breve) y después la pregunta o el siguiente paso: la voz arranca con la primera frase.
 - Lenguaje hablado y natural; sin listas, sin markdown, sin paréntesis ni emojis.
-- Si el alumno cometió un error, retoma su idea dicha correctamente dentro de tu respuesta (reformulación natural, sin sermón) y deja la explicación en 'corrections'. Menciona como máximo una corrección por turno en voz.
+- Si el alumno cometió un error, NO lo expliques en 'reply' (nada de "you said…", "the right way is…", "the correct form…"): la app ya muestra una tarjeta de corrección con 'corrections'. En su lugar, reformula su idea de forma natural usando la forma correcta, como haría un nativo (alumno: "I goed to the beach" → tú: "Oh, you went to the beach! …").
+- Máximo 2 frases por turno en niveles 1-4 y 3 en los demás; la última suele ser una pregunta.
 - Estructura de la llamada: saludo y una primera pregunta preparada según el contexto; conversación con una pregunta por turno; si el alumno quiere terminar, despídete resumiendo en una frase lo que practicó.`;
 
 export function systemPrompt(p: { idiomaMeta: string; idiomaNativo: string; nivel: number; tutorId: string; situacion?: string; objetivo?: string; contexto?: string }) {

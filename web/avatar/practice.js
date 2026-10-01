@@ -37,12 +37,14 @@ function renderGallery(){
 }
 renderGallery();
 function ensureAudio(){if(!ctx){ctx=new AudioContext();analyser=ctx.createAnalyser();analyser.fftSize=512;ctx.createMediaElementSource(audio).connect(analyser);analyser.connect(ctx.destination);}return ctx.resume();}
+// Sin sesión no hay conversación: decirlo en el escenario en lugar de quedarse en «Preparando».
+function sinSesion(){if(config?.token)return false;phase('Inicia sesión para conversar','error');status('Inicia sesión en OneLingo para conversar con tu tutor.');return true;}
 async function select(t){stop();avatar?.dispose();avatar=null;tutor=t;history=[];lastReply='';$('messages').replaceChildren();ideas([]);bubble(`${t.name} te saluda enseguida.`,'feedback');$('name').textContent=`${t.name} · ${languageName()}`;$('selection').hidden=true;$('session').hidden=false;$('stage').classList.toggle('dosd',t.tipo==='2d');controls();$('loading').hidden=false;$('loading').style.display='grid';$('loading').textContent=`Cargando ${t.name}…`;$('error').textContent='';phase('Preparando tutor','loading');const version=++selection;
  try{await ensureAudio();avatar=t.tipo==='2d'?createLumo($('stage'),audio,analyser):createAvatar($('stage'),audio,analyser);
   // El saludo (texto y voz) se pide en paralelo: no espera a que el modelo termine de descargarse.
   const carga=avatar.load(t.model,e=>{if(version===selection&&e.total)$('loading').textContent=`Cargando ${t.name} · ${Math.round(e.loaded/e.total*100)} %`});
   void requestTutor('',true);
-  await carga;if(version!==selection)return;$('loading').style.display='none';controls();}
+  await carga;if(version!==selection)return;$('loading').style.display='none';controls();sinSesion();}
  catch(e){if(version!==selection)return;avatar?.dispose();avatar=null;error(e);status('No se pudo cargar el tutor. Regresa y vuelve a intentarlo.');controls();}
 }
 function cancelRecording(){recordingEpoch++;clearInterval(silenceTimer);if(recorder){recorder.onstop=null;recorder.stop();recorder=null;}micStream?.getTracks().forEach(t=>t.stop());micStream=null;micSource?.disconnect();micSource=null;$('mic').textContent='🎙 Hablar';}
