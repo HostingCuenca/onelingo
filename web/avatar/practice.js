@@ -1,4 +1,4 @@
-import {createAvatar} from './avatar.js?v=17';
+import {createAvatar} from './avatar.js?v=20';
 const $=id=>document.getElementById(id), audio=$('audio');
 const roster=await (await fetch('./roster.json')).json();
 let config=null,tutor=null,avatar=null,ctx,analyser,history=[],busy=false,controller=null,audioController=null,audioURL=null,epoch=0,lastReply='',recorder=null,micStream=null,silenceTimer=null,recordingEpoch=0,micSource=null,selection=0;

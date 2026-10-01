@@ -26,7 +26,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     super.initState();
     viewType = 'avatar-${DateTime.now().microsecondsSinceEpoch}';
     frame = web.HTMLIFrameElement()
-      ..src = Uri.base.resolve('/avatar/index.html?v=avatar17').toString()
+      ..src = Uri.base.resolve('/avatar/index.html?v=avatar20').toString()
       ..title = 'Practica con un tutor de IA'
       ..allow = 'microphone; autoplay'
       ..style.border = '0'

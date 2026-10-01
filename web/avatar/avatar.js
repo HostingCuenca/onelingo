@@ -11,7 +11,10 @@ import {MeshoptDecoder} from './vendor/meshopt_decoder.module.js';
 // arriba) mientras llega la respuesta y «escuchando» (atento) mientras hablas.
 export function createAvatar(stage, audio, analyser) {
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(33,1,.1,100);
-  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+  // ?retrato: conserva el último cuadro para generar los retratos de la galería
+  // (sin parpadeo y con un plano algo más abierto).
+  const retrato=new URLSearchParams(location.search).has('retrato');
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:retrato});
   renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
   renderer.outputColorSpace=THREE.SRGBColorSpace;
   renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.9;
@@ -28,14 +31,15 @@ export function createAvatar(stage, audio, analyser) {
     rig=gltf.scene;scene.add(rig);head=rig.getObjectByName('head');body=rig.getObjectByName('spine_03');
     if(!head||!body)throw Error('El rig del tutor no está disponible.');
     // El archivo conserva la pose abierta necesaria para el rig. Al mostrarlo,
-    // llevamos los brazos junto al torso para una presencia natural de tutor.
+    // bajamos los brazos con una separación natural (antes quedaban pegados
+    // al torso y se veían retraídos).
     rig.updateMatrixWorld(true);
     for(const [side,x] of [['l',-.16],['r',.16]]){
       const arm=rig.getObjectByName(`upperarm_${side}`),forearm=rig.getObjectByName(`lowerarm_${side}`);
       if(!arm||!forearm)continue;
       const shoulder=new THREE.Vector3(),elbow=new THREE.Vector3();
       arm.getWorldPosition(shoulder);forearm.getWorldPosition(elbow);
-      const current=elbow.sub(shoulder).normalize(),desired=new THREE.Vector3(x,-.985,.04).normalize();
+      const current=elbow.sub(shoulder).normalize(),desired=new THREE.Vector3(-x*1.6,-.95,.06).normalize();
       const delta=new THREE.Quaternion().setFromUnitVectors(current,desired);
       const world=new THREE.Quaternion();arm.getWorldQuaternion(world);world.premultiply(delta);
       const parentWorld=new THREE.Quaternion();arm.parent.getWorldQuaternion(parentWorld);
@@ -44,7 +48,7 @@ export function createAvatar(stage, audio, analyser) {
     }
     restHead=head.quaternion.clone();restBody=body.quaternion.clone();
     rig.traverse(o=>{if(!o.isMesh)return;for(const m of (Array.isArray(o.material)?o.material:[o.material])){m.transparent=false;m.depthWrite=true;m.alphaTest=/afro|ponytail|bob|long01|short0|eyebrow|eyelash/.test(m.name)?.4:0;if(/afro|ponytail|braid|bob|long01|short0/.test(m.name)){m.roughness=.95;m.alphaTest=.12;}m.needsUpdate=true;}if(o.morphTargetDictionary)morphs.push(o)});
-    rig.updateMatrixWorld(true);const p=new THREE.Vector3();head.getWorldPosition(p);camera.position.set(0,p.y+.015,1.15);camera.lookAt(0,p.y-.13,0);stage.dataset.loaded='true';
+    rig.updateMatrixWorld(true);const p=new THREE.Vector3();head.getWorldPosition(p);camera.position.set(0,p.y+.03,retrato?1.08:.95);camera.lookAt(0,p.y-.1,0);// plano de videollamada: cabeza, hombros y pechostage.dataset.loaded='true';
   }
   // 30 fps is sufficient for idle motion and amplitude lip movement. Rendering
   // the 30k-poly tutor at 60 fps competed with chat/audio callbacks on modest
@@ -58,7 +62,7 @@ export function createAvatar(stage, audio, analyser) {
         for(let i=1;i<freq.length;i++){const f=i*bin,v=freq[i]*freq[i];if(f<600)low+=v;else if(f<2000)mid+=v;else if(f<5000)high+=v;else if(f<9000)sib+=v;}}
       const total=low+mid+high+sib||1, sLow=low/total, sMid=mid/total, sHigh=high/total, sSib=sib/total;
       const mood=stage.dataset.phase, thinking=(mood==='thinking'||mood==='voice-loading')&&!speaking, listening=mood==='listening'&&!speaking;
-      const motion=reduced?0:.55, phase=t%4.3,blink=phase<.17?Math.sin(phase/.17*Math.PI):0;
+      const motion=reduced?0:.55, phase=t%4.3,blink=!retrato&&phase<.17?Math.sin(phase/.17*Math.PI):0;
       rig.position.y=Math.sin(t*1.5)*.002*motion;
       // Pensando: inclina la cabeza y mira un poco hacia arriba. Escuchando: leve asentimiento.
       const tiltX=thinking?-.06:listening?Math.sin(t*2.2)*.025:0, tiltZ=thinking?.07:0;

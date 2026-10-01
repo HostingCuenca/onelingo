@@ -5,6 +5,34 @@
 <style>
 #gallery{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.tutor{position:relative}.portrait{overflow:hidden;aspect-ratio:.72;background:#263346}.tutor .portrait img{height:100%;aspect-ratio:auto;object-position:center top;transform:scale(1.03)}.recommended{position:absolute;top:9px;left:9px;z-index:1;background:#7852ea;color:#fff;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:800}
 </style>
+<style>
+/* Integración con el diseño de OneLingo (theme.dart): fondo crema, morado
+   #4519BB, tarjetas blancas redondeadas y Nunito. Sustituye al tema oscuro. */
+@font-face{font-family:Nunito;src:url('../assets/assets/fonts/Nunito.ttf') format('truetype');font-weight:200 1000;font-display:swap}
+:root{--morado:#4519BB;--morado-claro:#E6DEFF;--morado-suave:#F3F0FF;--texto:#1C1B1B;--gris:#79758A;--borde:#EBE8E6;--verde:#40A652;--verde-suave:#E0F4E3;--naranja:#F7941D}
+body{background:#FCF9F8;color:var(--texto);font:16px Nunito,system-ui,sans-serif}
+main{padding:16px}
+h1{font-weight:900;color:var(--texto)}#eyebrow{color:var(--morado);font-weight:900;letter-spacing:.06em;font-size:13px}
+p{color:var(--gris)}#name{font-size:22px}
+button,select,textarea{background:#fff;color:var(--texto);border:1.5px solid var(--borde);font-weight:700}
+button:hover{background:var(--morado-suave)}textarea{font-weight:500}
+.primary{background:var(--morado);border-color:var(--morado);color:#fff}.primary:hover{background:#2E0F86}
+#back{padding:9px 14px}
+.tutor{background:#fff;border-radius:20px;border:1.5px solid var(--borde);box-shadow:0 6px 18px #4519bb12}
+.tutor small{color:var(--gris)}.portrait,.tutor img{background:var(--morado-claro)!important}
+.recommended{background:var(--naranja)}
+#stage{background:linear-gradient(180deg,var(--morado-suave),var(--morado-claro));border:1.5px solid var(--morado-claro)}
+.badge{background:#ffffffe6;color:var(--morado);border:1px solid var(--morado-claro);box-shadow:0 6px 18px #4519bb1f;font-weight:800}
+#stage[data-phase="speaking"] .badge{background:#fff;border-color:#40A65255;color:#197D58}
+.voice-waves i{background:var(--verde)}
+#stage[data-phase="thinking"] .badge::before,#stage[data-phase="voice-loading"] .badge::before{background:var(--morado);box-shadow:0 0 0 0 #4519bb55}
+#loading{color:var(--morado);font-weight:800}#loading::before{color:var(--morado)}
+.bubble{background:#fff;border:1.5px solid var(--borde);color:var(--texto)}
+.mine{background:var(--morado);border-color:var(--morado);color:#fff}
+.feedback{background:var(--verde-suave);border-color:#40A65233;color:#1F5A2B}
+#status{color:var(--morado);font-weight:700}#error{color:#E03349}
+label{color:var(--texto);font-weight:800}.note{color:var(--gris)}
+</style>
 <script type="importmap">{"imports":{"three":"./vendor/build/three.module.js","three/addons/":"./vendor/examples/jsm/"}}</script>
 <main><section id="selection"><p id="eyebrow">ONELINGO · TUTOR CON IA</p><h1>Una conversación, a tu ritmo.</h1><p id="selectionCopy">Elige a tu tutor. Puedes escribir o hablar; recibirás una respuesta y correcciones adaptadas a tu nivel.</p><p id="authStatus" role="status">Conectando con tu sesión…</p><div id="gallery"></div></section>
-<section id="session" hidden><div class="top"><button id="back">← Tutores</button><h1 id="name"></h1></div><div class="layout"><div id="stage" data-phase="loading"><span class="badge"><span id="state">Preparando tutor</span><span class="voice-waves" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><div id="loading">Cargando avatar…</div></div><div><label for="topic">¿Qué quieres practicar?</label><select id="topic"><option value="">Conversación libre</option></select><div id="messages" role="log" aria-live="polite"></div><form id="form"><label for="text" id="messageLabel">Tu mensaje</label><textarea id="text" maxlength="1200" placeholder="Escribe lo que quieras practicar…"></textarea><div class="actions"><button class="primary" id="send">Enviar mensaje</button><button type="button" id="mic">🎙 Hablar</button><button type="button" id="stop">Interrumpir respuesta</button><button type="button" id="replay">Repetir voz</button></div></form><label class="note"><input type="checkbox" id="review"> Revisar la transcripción antes de enviarla</label><div id="status" role="status">El tutor se prepara para conversar.</div><audio id="audio" controls preload="auto"></audio><p class="note">Termina con el botón o simplemente deja de hablar. La respuesta se envía automáticamente; activa la revisión si prefieres editarla. Movimiento de labios aproximado según el audio, sin esperar un vídeo.</p><p id="error" role="alert"></p></div></div></section></main><script type="module" src="./practice.js?v=17"></script></html>
+<section id="session" hidden><div class="top"><button id="back">← Tutores</button><h1 id="name"></h1></div><div class="layout"><div id="stage" data-phase="loading"><span class="badge"><span id="state">Preparando tutor</span><span class="voice-waves" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></span><div id="loading">Cargando avatar…</div></div><div><label for="topic">¿Qué quieres practicar?</label><select id="topic"><option value="">Conversación libre</option></select><div id="messages" role="log" aria-live="polite"></div><form id="form"><label for="text" id="messageLabel">Tu mensaje</label><textarea id="text" maxlength="1200" placeholder="Escribe lo que quieras practicar…"></textarea><div class="actions"><button class="primary" id="send">Enviar mensaje</button><button type="button" id="mic">🎙 Hablar</button><button type="button" id="stop">Interrumpir respuesta</button><button type="button" id="replay">Repetir voz</button></div></form><label class="note"><input type="checkbox" id="review"> Revisar la transcripción antes de enviarla</label><div id="status" role="status">El tutor se prepara para conversar.</div><audio id="audio" controls preload="auto"></audio><p class="note">Termina con el botón o simplemente deja de hablar. La respuesta se envía automáticamente; activa la revisión si prefieres editarla. Movimiento de labios aproximado según el audio, sin esperar un vídeo.</p><p id="error" role="alert"></p></div></div></section></main><script type="module" src="./practice.js?v=20"></script></html>
