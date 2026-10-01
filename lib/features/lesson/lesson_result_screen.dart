@@ -109,7 +109,7 @@ class LessonResultScreen extends ConsumerWidget {
                         ),
                       ),
                     const Spacer(),
-                    ElevatedButton(
+                    BotonPrincipal(
                       onPressed: () {
                         if (nivelCompleto) {
                           context.go('/examen/${l.nivel}');

@@ -6,10 +6,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/diagnostico.dart';
-import '../library/library_screen.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../shared/widgets/tarjeta_fundamentos.dart';
@@ -54,38 +54,20 @@ class LevelsScreen extends ConsumerWidget {
                 'Primero entiende el ejemplo; después practica a tu ritmo.',
           ),
           if (s.idiomaMeta == 'en') ...[
-            const CaminoPersonalizado(),
-            const SizedBox(height: 24),
-            const TituloSeccion('Explora tus diez etapas'),
+            const TituloSeccion('Tus diez niveles'),
             const SizedBox(height: 12),
             // Nivel 0 · Leer y pronunciar (desde cero), antes de los diez niveles.
             const TarjetaNivel0(),
             const SizedBox(height: 10),
+            const TarjetaFundamentos(),
+            const SizedBox(height: 10),
             for (var n = 1; n <= 10; n++)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Tarjeta(
-                  onTap: () => nivelRuta(n) != null
-                      ? context.push('/ruta/${nivelRuta(n)}')
-                      : context.push('/biblioteca?nivel=$n'),
-                  child: Row(
-                    children: [
-                      CircleAvatar(child: Text('$n')),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Nivel $n · ${cefrNivel(n)} · ${nivelRuta(n) != null
-                              ? 'Ruta guiada'
-                              : n.isOdd
-                              ? 'Explora'
-                              : 'Consolida'}',
-                          style: const TextStyle(fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      const Icon(Icons.arrow_forward_rounded),
-                    ],
-                  ),
-                ),
+              _TarjetaNivelRuta(
+                numero: n,
+                cefr: cefrNivel(n),
+                nivelId: nivelRuta(n),
+                ruta: ruta,
+                estado: s,
               ),
           ] else ...[
             const Text(
@@ -208,4 +190,107 @@ class _NivelCard extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Nivel de la ruta (inglés): superado, en curso o bloqueado. Se sube
+/// terminando sus clases o aprobando su prueba; nunca eligiendo el nivel.
+class _TarjetaNivelRuta extends StatelessWidget {
+  const _TarjetaNivelRuta({
+    required this.numero,
+    required this.cefr,
+    required this.nivelId,
+    required this.ruta,
+    required this.estado,
+  });
+  final int numero;
+  final String cefr;
+  final String? nivelId;
+  final RutaCargada? ruta;
+  final ProgressState estado;
+
+  @override
+  Widget build(BuildContext context) {
+    final id = nivelId;
+    final r = ruta;
+    if (id == null || r == null) {
+      return _fila(
+        context,
+        icono: Icons.schedule_rounded,
+        color: OL.gris,
+        detalle: 'Próximamente',
+        onTap: null,
+      );
+    }
+    final estados = estadosAlumno(r, estado);
+    final unidades = r.delNivel(id);
+    final superado = nivelSuperado(r, estados, estado.practicas, id);
+    final primera = estados[unidades.first.id]!;
+    final abierto =
+        primera.omitible || primera.estado != EstadoUnidad.bloqueada;
+    final aprobadas = unidades
+        .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
+        .length;
+    return _fila(
+      context,
+      icono: superado
+          ? Icons.check_circle_rounded
+          : abierto
+          ? Icons.play_circle_fill_rounded
+          : Icons.lock_rounded,
+      color: superado
+          ? OL.verde
+          : abierto
+          ? OL.morado
+          : OL.gris,
+      detalle: superado
+          ? 'Superado'
+          : primera.omitible
+          ? 'Opcional: está por debajo de tu nivel'
+          : abierto
+          ? '$aprobadas de ${unidades.length} clases'
+          : 'Termina el nivel anterior o aprueba su prueba',
+      onTap: () => context.push('/ruta/$id'),
+    );
+  }
+
+  Widget _fila(
+    BuildContext context, {
+    required IconData icono,
+    required Color color,
+    required String detalle,
+    required VoidCallback? onTap,
+  }) => Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: Tarjeta(
+      onTap: onTap,
+      color: onTap == null ? OL.fondo : OL.blanco,
+      sombra: onTap != null,
+      child: Row(
+        children: [
+          Icon(icono, color: color, size: 34),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Nivel $numero · $cefr',
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Text(
+                  detalle,
+                  style: const TextStyle(color: OL.gris, fontSize: 14),
+                ),
+              ],
+            ),
+          ),
+          if (onTap != null)
+            const Icon(Icons.chevron_right_rounded, color: OL.gris),
+        ],
+      ),
+    ),
+  );
 }

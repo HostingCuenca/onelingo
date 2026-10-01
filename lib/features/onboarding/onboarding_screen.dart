@@ -145,7 +145,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       }
     }
     _persistir();
-    if (paso == 5 && meta == 'en') {
+    // El nivel elegido es solo el punto de partida: la prueba decide en todos
+    // los idiomas (nadie se ubica alto sin demostrarlo). Desde cero, sin prueba.
+    if (paso == 5 && (meta == 'en' || nivelInicial > 0)) {
       final r = await context.push<Map<String, dynamic>>(
         '/prueba-nivel',
         extra: {
@@ -470,9 +472,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   Widget _nivel() => ListView(
     children: [
       Text(
-        meta == 'en'
-            ? 'Elige tu punto de partida. Después comprobaremos tu inglés con lectura, listening, gramática y escritura.'
-            : 'El diagnóstico personalizado está disponible primero para inglés. Puedes continuar con el curso de este idioma.',
+        'Elige tu punto de partida. Después una prueba corta confirma tu nivel: empezarás donde de verdad estás.',
       ),
       const SizedBox(height: 12),
       ListTile(

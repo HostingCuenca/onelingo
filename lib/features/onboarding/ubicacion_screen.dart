@@ -374,11 +374,9 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
           Wrap(
             spacing: 8,
             children: [
-              for (final n in {
-                if (r.nivel > 1) r.nivel - 1,
-                r.nivel,
-                if (r.nivel < 10) r.nivel + 1,
-              })
+              // Se puede empezar más abajo, nunca más arriba: para subir está
+              // la prueba de cada nivel.
+              for (final n in {if (r.nivel > 1) r.nivel - 1, r.nivel})
                 ChoiceChip(
                   label: Text(n == r.nivel ? 'N$n (recomendado)' : 'N$n'),
                   selected: nivel == n,

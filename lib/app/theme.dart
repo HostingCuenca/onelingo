@@ -117,6 +117,22 @@ ThemeData buildTheme() {
         ),
       ),
     ),
+    // Mismo estilo que ElevatedButton: sin esto, un FilledButton suelto sale
+    // con la píldora por defecto de Material 3 y rompe la estética.
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        backgroundColor: OL.morado,
+        foregroundColor: OL.blanco,
+        minimumSize: const Size.fromHeight(54),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        textStyle: TextStyle(
+          fontFamily: 'Nunito',
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 0.4,
+        ),
+      ),
+    ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: OL.texto,

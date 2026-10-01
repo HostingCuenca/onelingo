@@ -46,6 +46,42 @@ void main() {
     }
   });
 
+  test('responder al azar no deja a nadie en un nivel alto', () {
+    for (final declarado in [4, 7, 10]) {
+      for (var semilla = 0; semilla < 40; semilla++) {
+        final azar = Random(semilla);
+        final d = Diagnostico(
+          declarado: declarado,
+          banco: _banco(),
+          random: Random(semilla),
+        );
+        while (true) {
+          final q = d.siguiente();
+          if (q == null) break;
+          if (q.esEscritura) {
+            // Sin IA, la escritura de respaldo parte de la estimación actual.
+            d.registrarEscritura(
+              'asdf qwer zxcv',
+              Diagnostico.evaluarLocal('asdf qwer zxcv', d.estimacion),
+            );
+            continue;
+          }
+          // Elige una opción cualquiera o escribe algo sin sentido.
+          d.responder(
+            q.conOpciones
+                ? q.opciones[azar.nextInt(q.opciones.length)]
+                : 'xyz',
+          );
+        }
+        expect(
+          d.resultado().nivel,
+          lessThanOrEqualTo(2),
+          reason: 'declarado $declarado, semilla $semilla',
+        );
+      }
+    }
+  });
+
   test('parte del nivel declarado y nunca salta más de un nivel por respuesta', () {
     final d = Diagnostico(declarado: 7, banco: _banco(), random: Random(2));
     final q = d.siguiente()!;
@@ -68,7 +104,12 @@ void main() {
   test('una debilidad concentrada no hunde el nivel global y aparece en el plan', () {
     final r = _simular(7.0, 7, debilGramatica: true);
     expect(r.nivel, greaterThanOrEqualTo(6.0));
-    expect(r.debilidades, contains('Gramática'));
+    // La gramática queda como la competencia más baja.
+    final otras = [
+      for (final e in r.skills.entries)
+        if (e.key != 'gramatica' && e.key != 'escritura') e.value,
+    ];
+    expect(r.skills['gramatica']!, lessThan(otras.reduce(min)));
     expect(r.refuerzo.any((t) => t.contains('gramatica')), isTrue);
   });
 

@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../core/state/providers.dart';
 import '../core/voz.dart';
 import '../shared/widgets/app_navigation_icon.dart';
-import '../features/library/library_screen.dart';
+import '../features/library/biblioteca_screen.dart';
+import '../features/ruta/prueba_nivel_screen.dart';
 import '../features/ruta/ruta_screen.dart';
 import '../features/ruta/unidad_screen.dart';
 import '../features/library/grammar_screen.dart';
@@ -93,6 +94,15 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: '/ruta/:nivel',
                 builder: (_, state) =>
                     RutaScreen(nivel: state.pathParameters['nivel']!),
+                routes: [
+                  // Prueba para saltar el nivel (20 preguntas, 16 para aprobar).
+                  GoRoute(
+                    path: 'prueba',
+                    builder: (_, state) => PruebaNivelRutaScreen(
+                      nivel: state.pathParameters['nivel']!,
+                    ),
+                  ),
+                ],
               ),
               // Ruta de fundamentos por idioma (esquema 2). Sustituye a la
               // pantalla foundations-v1; su progreso se lee por alias.
@@ -144,10 +154,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
               GoRoute(
                 path: '/biblioteca',
-                builder: (_, st) => LibraryScreen(
-                  skill: st.uri.queryParameters['skill'],
-                  nivel: int.tryParse(st.uri.queryParameters['nivel'] ?? ''),
-                ),
+                builder: (_, _) => const BibliotecaScreen(),
               ),
               GoRoute(
                 path: '/leccion/:id',

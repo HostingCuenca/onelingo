@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/providers.dart';
@@ -55,17 +57,22 @@ int nivelBaseAlumnoCliente(ProgressState s) =>
     nivelBaseDe(desdeCero: s.fundamentos, nivelInicial: s.nivelCliente);
 
 /// Estados de la ruta de un alumno.
-Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) =>
-    estadosRuta(
+/// Los niveles superados con su prueba se omiten como los que la prueba de
+/// ubicación deja por debajo.
+Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) {
+  final ubicacion = ruta.curso.usaEscalaCliente
+      ? nivelBaseAlumnoCliente(s)
+      : nivelBaseAlumno(s);
+  final porPruebas = nivelPorPruebas(ruta, s.practicas);
+  return estadosRuta(
+    ruta,
+    s.practicas,
+    nivelBase: nivelBaseDisponible(
       ruta,
-      s.practicas,
-      nivelBase: nivelBaseDisponible(
-        ruta,
-        ruta.curso.usaEscalaCliente
-            ? nivelBaseAlumnoCliente(s)
-            : nivelBaseAlumno(s),
-      ),
-    );
+      porPruebas > 0 ? max(ubicacion, porPruebas + 1) : ubicacion,
+    ),
+  );
+}
 
 /// Cadena de idiomas de apoyo para mostrar textos al alumno (DEC-004).
 List<String> cadenaDelAlumno(ProgressState s, Curso curso) =>

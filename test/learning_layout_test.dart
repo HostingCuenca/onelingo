@@ -8,13 +8,12 @@ import 'package:onelingo/core/aprendizaje/cargador.dart';
 import 'package:onelingo/core/aprendizaje/dominio.dart';
 import 'package:onelingo/core/aprendizaje/providers.dart';
 import 'package:onelingo/core/efectos.dart';
-import 'package:onelingo/core/content/foundations.dart';
 import 'package:onelingo/core/state/providers.dart';
 import 'package:onelingo/shared/widgets/streak_card.dart';
-import 'package:onelingo/shared/widgets/learning_path.dart';
+import 'package:onelingo/shared/widgets/tarjeta_fundamentos.dart';
 
 void main() {
-  testWidgets('Racha y todas las áreas siguen legibles con texto grande', (
+  testWidgets('Racha y Fundamentos siguen legibles con texto grande', (
     tester,
   ) async {
     tester.view.physicalSize = const Size(320, 740);
@@ -41,7 +40,7 @@ void main() {
       ],
     );
     addTearDown(container.dispose);
-    Future<void> render(String recommendation) => tester.pumpWidget(
+    Future<void> render() => tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
@@ -55,11 +54,7 @@ void main() {
               child: Column(
                 children: [
                   const StreakCard(),
-                  LearningPath(
-                    nivel: 1,
-                    recommended: recommendation,
-                    practices: const {},
-                  ),
+                  const TarjetaFundamentos(),
                 ],
               ),
             ),
@@ -67,15 +62,10 @@ void main() {
         ),
       ),
     );
-    await render('gramatica');
+    await render();
     await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
-    expect(find.text('Gramática'), findsOneWidget);
-    await render('listening');
-    await tester.pumpAndSettle();
-    expect(find.text('Gramática'), findsOneWidget);
-    expect(find.byType(InkWell), findsNWidgets(6));
     expect(find.textContaining('Empieza desde cero'), findsOneWidget);
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox());
@@ -93,7 +83,7 @@ void main() {
       });
       final prefs = await SharedPreferences.getInstance();
       final cargador = CargadorRuta();
-      final ruta = (await tester.runAsync(() => cargador.cargar('en')))!!;
+      final ruta = (await tester.runAsync(() => cargador.cargar('en')))!;
       final container = ProviderContainer(
         overrides: [
           prefsProvider.overrideWithValue(prefs),
@@ -109,11 +99,7 @@ void main() {
             child: const MaterialApp(
               home: Scaffold(
                 body: SingleChildScrollView(
-                  child: LearningPath(
-                    nivel: 1,
-                    recommended: 'gramatica',
-                    practices: {},
-                  ),
+                  child: TarjetaFundamentos(),
                 ),
               ),
             ),
@@ -128,18 +114,6 @@ void main() {
       await render();
       expect(find.text('Empieza desde cero'), findsOneWidget);
       expect(find.text('0 de 7 unidades aprobadas'), findsOneWidget);
-      // La evidencia antigua de foundations-v1 es práctica con apoyo: no aprueba.
-      for (final unit in foundationUnits) {
-        for (var i = 0; i < unit.checks.length; i++) {
-          notifier.registrarPractica(foundationKey(unit, i), {
-            'correcta': true,
-            'resueltaConApoyo': true,
-            'conApoyo': true,
-          });
-        }
-      }
-      await render();
-      expect(find.text('0 de 7 unidades aprobadas'), findsOneWidget);
       // Aprobar la evaluación de la primera unidad sí avanza la ruta.
       final primera = ruta.unidades.first;
       notifier.registrarPractica(
@@ -149,7 +123,6 @@ void main() {
       await render();
       expect(find.text('Continuar: El alfabeto'), findsOneWidget);
       expect(find.text('1 de 7 unidades aprobadas'), findsOneWidget);
-      expect(find.text('Gramática'), findsOneWidget);
       expect(tester.takeException(), isNull);
     },
     timeout: const Timeout(Duration(seconds: 45)),

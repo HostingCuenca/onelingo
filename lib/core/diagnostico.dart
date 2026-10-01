@@ -493,7 +493,14 @@ class Diagnostico {
 
   bool get _terminaria =>
       n >= maxPreguntas ||
-      (n >= minPreguntas && _estable() && (escrituraHecha || estimacion < 1.5));
+      (n >= minPreguntas &&
+          _estable() &&
+          _confirmado &&
+          (escrituraHecha || estimacion < 1.5));
+
+  /// Las respuestas sostienen la estimación (a un nivel de distancia como
+  /// mucho). Si no, se siguen pidiendo preguntas para comprobarla.
+  bool get _confirmado => techoVerificado >= nivelActual - 1;
 
   /// Competencia menos medida (sin contar la escritura) para la siguiente pregunta.
   String _siguienteSkill() {
@@ -648,6 +655,7 @@ class Diagnostico {
     }
     if (n >= minPreguntas &&
         _estable() &&
+        _confirmado &&
         (escrituraHecha ||
             estimacion < 1.5 ||
             !_banco.any((q) => q.esEscritura))) {
@@ -674,7 +682,11 @@ class Diagnostico {
   }
 
   PreguntaDiag? _elegirObjetiva() {
-    final objetivo = nivelActual;
+    // Si la estimación va por delante de lo demostrado, se pregunta justo
+    // por encima de lo demostrado para confirmarlo o descartarlo.
+    final objetivo = n >= 6 && !_confirmado
+        ? techoVerificado + 1
+        : nivelActual;
     final conteo = _porSkill;
     for (final distancia in [0, 1, 2, 3, 10]) {
       final candidatas = _banco
@@ -843,7 +855,43 @@ class Diagnostico {
   double get nivelFinal {
     final e = mediaEscritura;
     final v = e == null ? estimacion : estimacion * 0.65 + e * 0.35;
-    return (v.clamp(0.0, 10.0) * 2).round() / 2;
+    return (min(v, techoVerificado.toDouble()).clamp(0.0, 10.0) * 2).round() /
+        2;
+  }
+
+  /// Nivel que demuestran las respuestas objetivas, sin partir del nivel
+  /// declarado: estimación bayesiana con prior uniforme (el mismo modelo que
+  /// la prueba v2 de inglés, `aprendizaje/ubicacion.dart`). Quien sabe hasta
+  /// el nivel t acierta casi siempre hasta t, a veces en t+1 y por encima solo
+  /// por azar. La estimación de [_ajustar] arranca en lo declarado y el azar
+  /// apenas la mueve; este techo impide quedar alto respondiendo al azar.
+  int get techoVerificado {
+    final p = List<double>.filled(11, 1);
+    for (final r in respuestas) {
+      final q = r.pregunta;
+      if (q.esEscritura) continue;
+      final azar = q.conOpciones && q.opciones.length >= 2
+          ? 1 / q.opciones.length
+          : .05;
+      for (var t = 0; t <= 10; t++) {
+        final acierto = q.nivel <= t
+            ? .92
+            : q.nivel == t + 1
+            ? .45
+            : azar;
+        p[t] *= r.correcta ? acierto : 1 - acierto;
+      }
+    }
+    // Prudente: el nivel más alto que se sostiene con un 80 % de seguridad
+    // (percentil 20 de la estimación). Con pocas respuestas o respuestas al
+    // azar la estimación es ancha y el techo queda bajo.
+    final total = p.reduce((a, b) => a + b);
+    var acumulado = 0.0;
+    for (var t = 0; t <= 10; t++) {
+      acumulado += p[t] / total;
+      if (acumulado >= .2) return t;
+    }
+    return 10;
   }
 
   ResultadoDiag resultado() {

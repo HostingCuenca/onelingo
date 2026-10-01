@@ -141,15 +141,18 @@ void main() {
         await tester.tap(find.text('Temario'));
         await tester.pumpAndSettle();
         expect(find.text('Elige tu próximo tema'), findsOneWidget);
-        expect(find.text('Nivel 10'), findsNothing);
-        final selector = find.byType(DropdownButtonFormField<int>);
-        await tester.tap(selector);
+        // El temario abre en el nivel actual; los niveles son chips.
+        expect(find.byType(DropdownButtonFormField<int>), findsNothing);
+        final nivel2 = find.widgetWithText(ChoiceChip, 'Nivel 2');
+        await tester.ensureVisible(nivel2);
         await tester.pumpAndSettle();
-        await tester.tap(find.text('Nivel 2').last);
+        await tester.tap(nivel2);
         await tester.pumpAndSettle();
         await tester.tap(find.text('Pronombres: a quién y de quién'));
         await tester.pumpAndSettle();
         expect(find.text('Nivel 2 · Tema 1 de 6'), findsOneWidget);
+        // Con el botón fijo abajo, a x2 el título puede quedar bajo el pliegue.
+        await reveal(find.text('Pronombres: a quién y de quién'));
         expect(find.text('Pronombres: a quién y de quién'), findsOneWidget);
         expect(find.text('Pregunta 1 de 2'), findsNothing);
         expect(tester.takeException(), isNull);

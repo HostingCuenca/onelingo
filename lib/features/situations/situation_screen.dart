@@ -78,7 +78,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
     final state = ref.watch(progressProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tu ruta de situación'),
+        title: const Text('Situación'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () =>
@@ -253,7 +253,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                                       ),
                                     ),
                                     Text(
-                                      '${detail.category} · introducción sugerida: nivel ${detail.level}',
+                                      detail.category,
                                       style: const TextStyle(fontSize: 11),
                                     ),
                                   ],
@@ -421,7 +421,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                       if (evidence.isNotEmpty) ...[
                         const SizedBox(height: 12),
                         const Text(
-                          'Últimas evidencias · practicar no equivale a dominar',
+                          'Tu práctica reciente',
                           style: TextStyle(fontWeight: FontWeight.w700),
                         ),
                         for (final e in evidence.take(3))
@@ -443,7 +443,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                         ),
                       ),
                       const Text(
-                        'Esta comprobación mide reconocimiento de vocabulario. La conversación comprueba cómo lo usas; no certifica tu nivel.',
+                        'Comprueba si reconoces las palabras. Para usarlas, practica la conversación.',
                       ),
                       const SizedBox(height: 16),
                       Text(

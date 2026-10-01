@@ -1,17 +1,23 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/learning_units.dart';
+import '../../core/efectos.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
-import '../../shared/widgets/widgets.dart';
+import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/mascot_coach.dart';
 import '../../shared/widgets/skill_badge.dart';
+import '../../shared/widgets/widgets.dart';
+import '../ruta/opcion_respuesta.dart';
 
-/// Teaching and formative checks. These answers do not certify proficiency.
+/// Pasos de una lectura/escucha graduada.
+enum _Paso { elegir, antes, texto, pregunta, final_ }
+
+/// «Lectura y escucha»: textos graduados del nivel del alumno, con palabras
+/// clave antes de empezar y una pregunta por pantalla.
 class LearningUnitScreen extends ConsumerStatefulWidget {
   const LearningUnitScreen({super.key, required this.skill, this.nivel = 1});
   final String skill;
@@ -21,459 +27,697 @@ class LearningUnitScreen extends ConsumerStatefulWidget {
 }
 
 class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
-  late int level;
-  int selectedUnit = 0;
-  bool checking = false, busy = false, heard = false, transcript = false;
+  _Paso paso = _Paso.elegir;
+  String? unitId;
+  int pregunta = 0;
+  int? eleccion;
+  bool comprobada = false;
+  int aciertos = 0;
+  bool busy = false, heard = false, transcript = false;
   final Set<String> transcriptsSeen = {};
   int audioGeneration = 0;
-  final Map<String, int> choices = {};
-  final Set<String> answered = {};
-  bool get listening => widget.skill == 'listening';
-  List<LearningQuestion> questionsFor(LearningUnit unit) {
-    if (widget.skill != 'vocabulario') return unit.questions;
-    final meanings = unit.words.map((w) => w.translation).toList();
-    return List.generate(unit.words.length, (i) {
-      final options = List<String>.of(meanings);
-      final seed = '${unit.id}-$i'.codeUnits.fold<int>(
-        17,
-        (a, b) => a * 31 + b,
-      );
-      options.shuffle(Random(seed));
-      return LearningQuestion(
-        'vocab-$i',
-        'En este contexto, ¿qué significa «${unit.words[i].word}»?',
-        options,
-        options.indexOf(meanings[i]),
-        '${unit.words[i].word} significa ${unit.words[i].translation}. Observa cómo se usa en el ejemplo.',
-        unit.words[i].example,
-      );
-    });
-  }
+  final scroll = ScrollController();
 
-  @override
-  void initState() {
-    super.initState();
-    level = widget.nivel.clamp(1, 10);
-  }
+  /// Solo hay dos materiales: escucha y lectura (cualquier otro valor, como
+  /// el antiguo 'vocabulario', se trata como lectura).
+  String get skill => widget.skill == 'listening' ? 'listening' : 'reading';
+  bool get listening => skill == 'listening';
+
+  String clave(LearningUnit u, LearningQuestion q) =>
+      'learn-$skill-${u.id}-${q.id}';
 
   @override
   void dispose() {
     audioGeneration++;
     VozNube.instancia.parar();
+    scroll.dispose();
     super.dispose();
   }
 
-  void changeUnit(VoidCallback change) {
+  /// Nivel del alumno; si no tiene material, el nivel inferior más cercano.
+  int nivelCon(List<LearningUnit> units) {
+    final deseado =
+        (widget.nivel != 1
+                ? widget.nivel
+                : ref.watch(progressProvider).nivelActual)
+            .clamp(1, 10);
+    final niveles = units.map((u) => u.level).toSet();
+    for (var n = deseado; n >= 1; n--) {
+      if (niveles.contains(n)) return n;
+    }
+    for (var n = deseado + 1; n <= 10; n++) {
+      if (niveles.contains(n)) return n;
+    }
+    return deseado;
+  }
+
+  bool unidadSuperada(LearningUnit u, Map<String, dynamic> practicas) =>
+      u.questions.isNotEmpty &&
+      u.questions.every(
+        (q) => (practicas[clave(u, q)] as Map?)?['correcta'] == true,
+      );
+
+  void irA(_Paso nuevo, {VoidCallback? cambio}) {
     audioGeneration++;
     VozNube.instancia.parar();
     setState(() {
-      change();
-      checking = false;
+      cambio?.call();
+      paso = nuevo;
       busy = false;
+    });
+    if (scroll.hasClients) scroll.jumpTo(0);
+  }
+
+  void abrirUnidad(LearningUnit u) => irA(
+    _Paso.antes,
+    cambio: () {
+      unitId = u.id;
+      pregunta = 0;
+      eleccion = null;
+      comprobada = false;
+      aciertos = 0;
       heard = false;
       transcript = false;
-    });
+    },
+  );
+
+  void avisarSinAudio() {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'No se pudo reproducir el audio. Comprueba tu conexión y vuelve a intentarlo.',
+        ),
+      ),
+    );
+  }
+
+  Future<void> escucharPalabra(String palabra) async {
+    final p = ref.read(progressProvider);
+    final ok = await VozNube.instancia.reproducir(
+      palabra,
+      p.idiomaMeta,
+      voz: p.tutorId,
+    );
+    if (!ok) avisarSinAudio();
   }
 
   Future<void> listen(LearningUnit unit) async {
     final generation = ++audioGeneration;
+    final p = ref.read(progressProvider);
     setState(() => busy = true);
     final ok = await VozNube.instancia.reproducir(
       unit.passage,
-      'en',
-      voz: ref.read(progressProvider).tutorId,
+      p.idiomaMeta,
+      voz: p.tutorId,
     );
     if (!mounted || generation != audioGeneration) return;
     setState(() {
       busy = false;
       heard = heard || ok;
     });
-    if (!ok) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'No se pudo reproducir el audio. Comprueba tu conexión y vuelve a intentarlo.',
-          ),
-        ),
-      );
-    }
+    if (!ok) avisarSinAudio();
   }
 
-  void check(LearningUnit unit, LearningQuestion q) {
-    final key = 'learn-${widget.skill}-${unit.id}-${q.id}';
-    if (answered.contains(key) || !choices.containsKey(key)) return;
-    ref.read(progressProvider.notifier).registrarPractica(key, {
-      'idioma': 'en',
-      'skill': widget.skill,
-      'nivel': level,
+  void comprobar(LearningUnit unit, LearningQuestion q) {
+    final elegida = eleccion;
+    if (comprobada || elegida == null) return;
+    final correcta = elegida == q.answerIndex;
+    ref.read(progressProvider.notifier).registrarPractica(clave(unit, q), {
+      'idioma': ref.read(progressProvider).idiomaMeta,
+      'skill': skill,
+      'nivel': unit.level,
       'tema': unit.title,
       'tipo': 'comprobacion_guiada',
-      'correcta': choices[key] == q.answerIndex,
-      'respuesta': q.options[choices[key]!],
+      'correcta': correcta,
+      'respuesta': q.options[elegida],
       'feedback': q.explanation,
       'conApoyo': listening ? transcriptsSeen.contains(unit.id) : true,
       'audioIniciado': heard,
     });
-    setState(() => answered.add(key));
+    correcta ? Efectos.correcto() : Efectos.incorrecto();
+    setState(() {
+      comprobada = true;
+      if (correcta) aciertos++;
+    });
+  }
+
+  void continuar(LearningUnit unit) {
+    if (pregunta + 1 < unit.questions.length) {
+      irA(
+        _Paso.pregunta,
+        cambio: () {
+          pregunta++;
+          eleccion = null;
+          comprobada = false;
+        },
+      );
+    } else {
+      Efectos.completado();
+      irA(_Paso.final_);
+    }
+  }
+
+  void volver() {
+    if (paso != _Paso.elegir) {
+      irA(_Paso.elegir);
+    } else {
+      context.canPop() ? context.pop() : context.go('/inicio');
+    }
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(
-        listening
-            ? 'Aprender listening'
-            : widget.skill == 'vocabulario'
-            ? 'Vocabulario en contexto'
-            : 'Aprender lectura',
+  Widget build(BuildContext context) => PopScope(
+    canPop: paso == _Paso.elegir,
+    onPopInvokedWithResult: (didPop, _) {
+      if (!didPop) irA(_Paso.elegir);
+    },
+    child: Scaffold(
+      appBar: AppBar(
+        title: Text(listening ? 'Escucha' : 'Lectura'),
+        leading: IconButton(
+          tooltip: 'Volver',
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: volver,
+        ),
+      ),
+      body: Movil(
+        child: ref
+            .watch(learningUnitsProvider(skill))
+            .when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (_, _) => Center(
+                child: TextButton(
+                  onPressed: () => ref.invalidate(learningUnitsProvider(skill)),
+                  child: const Text('No se pudo cargar. Reintentar'),
+                ),
+              ),
+              data: (units) {
+                final level = nivelCon(units);
+                final available = units
+                    .where((u) => u.level == level)
+                    .toList();
+                if (available.isEmpty) {
+                  return const Center(
+                    child: Text('Pronto habrá material para tu nivel.'),
+                  );
+                }
+                final unit = available.firstWhere(
+                  (u) => u.id == unitId,
+                  orElse: () => available.first,
+                );
+                return switch (paso) {
+                  _Paso.elegir => _elegir(available, level),
+                  _Paso.antes => _antes(unit),
+                  _Paso.texto => _texto(unit),
+                  _Paso.pregunta => _pregunta(unit),
+                  _Paso.final_ => _final(unit, available),
+                };
+              },
+            ),
       ),
     ),
-    body: Movil(
-      child: ref
-          .watch(learningUnitsProvider(widget.skill))
-          .when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (_, _) => Center(
-              child: TextButton(
-                onPressed: () =>
-                    ref.invalidate(learningUnitsProvider(widget.skill)),
-                child: const Text('No se pudo cargar. Reintentar'),
+  );
+
+  /// Contenido desplazable con la acción principal fija abajo.
+  Widget _marco(List<Widget> contenido, List<Widget> acciones) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      Expanded(
+        child: SingleChildScrollView(
+          controller: scroll,
+          padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: contenido,
+          ),
+        ),
+      ),
+      if (acciones.isNotEmpty)
+        DecoratedBox(
+          decoration: const BoxDecoration(
+            color: OL.fondo,
+            border: Border(top: BorderSide(color: OL.grisClaro)),
+          ),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+              20,
+              12,
+              20,
+              20 + MediaQuery.paddingOf(context).bottom,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: acciones,
+            ),
+          ),
+        ),
+    ],
+  );
+
+  Widget _elegir(List<LearningUnit> available, int level) {
+    final practicas = ref.watch(progressProvider).practicas;
+    return _marco([
+      Row(
+        children: [
+          InsigniaHabilidad(skill),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              listening ? 'Elige qué escuchar' : 'Elige qué leer',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 6),
+      Text(
+        'Nivel $level',
+        style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
+      ),
+      const SizedBox(height: 16),
+      for (final u in available)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: Tarjeta(
+            sombra: false,
+            borde: OL.grisClaro,
+            etiquetaSemantica: u.title,
+            onTap: () => abrirUnidad(u),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        u.title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        u.objective,
+                        style: const TextStyle(color: OL.gris, height: 1.4),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                unidadSuperada(u, practicas)
+                    ? const Icon(
+                        Icons.check_circle_rounded,
+                        color: OL.verde,
+                        semanticLabel: 'Completada',
+                      )
+                    : const Icon(
+                        Icons.chevron_right_rounded,
+                        color: OL.morado,
+                      ),
+              ],
+            ),
+          ),
+        ),
+    ], const []);
+  }
+
+  Widget _antes(LearningUnit unit) => _marco(
+    [
+      MascotCoach(
+        listening: listening,
+        message: listening
+            ? 'Conoce estas palabras y luego escucha con calma. Puedes repetir el audio.'
+            : 'Conoce estas palabras y luego búscalas en el texto.',
+      ),
+      Text(
+        'Antes de empezar',
+        style: Theme.of(context).textTheme.headlineMedium,
+      ),
+      const SizedBox(height: 4),
+      Text(
+        unit.title,
+        style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
+      ),
+      const SizedBox(height: 16),
+      Tarjeta(
+        color: OL.moradoSuave,
+        sombra: false,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(Icons.lightbulb_outline_rounded, color: OL.morado),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                unit.strategy,
+                style: const TextStyle(fontSize: 16, height: 1.5),
               ),
             ),
-            data: (units) {
-              final available = units.where((u) => u.level == level).toList();
-              if (available.isEmpty) {
-                return const Center(
-                  child: Text('Contenido en preparación para este nivel.'),
-                );
-              }
-              final unit =
-                  available[selectedUnit.clamp(0, available.length - 1)];
-              final evidence = ref.watch(progressProvider).practicas;
-              final checked = questionsFor(unit)
-                  .where(
-                    (q) => answered.contains(
-                      'learn-${widget.skill}-${unit.id}-${q.id}',
-                    ),
-                  )
-                  .length;
-              return ListView(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
-                children: [
-                  if (!checking)
-                    MascotCoach(
-                      listening: listening,
-                      message: listening
-                          ? 'Conoce las palabras y escucha con calma. Puedes repetir el audio.'
-                          : 'Primero conoce las palabras. Luego busca cómo se usan en el texto.',
-                    ),
-                  Row(
+          ],
+        ),
+      ),
+      const SizedBox(height: 20),
+      const Text(
+        'Palabras clave',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+      ),
+      for (final word in unit.words)
+        Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Tarjeta(
+            sombra: false,
+            borde: OL.grisClaro,
+            padding: const EdgeInsets.fromLTRB(16, 10, 8, 14),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InsigniaHabilidad(widget.skill),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          'Primero entiende.\nDespués comprueba.',
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  DropdownButtonFormField<int>(
-                    initialValue: level,
-                    isExpanded: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Nivel interno',
-                    ),
-                    items: [
-                      for (var n = 1; n <= 10; n++)
-                        DropdownMenuItem(value: n, child: Text('Nivel $n')),
-                    ],
-                    onChanged: (n) {
-                      if (n != null) {
-                        changeUnit(() {
-                          level = n;
-                          selectedUnit = 0;
-                        });
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  for (var i = 0; i < available.length; i++)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: OutlinedButton.icon(
-                        onPressed: () => changeUnit(() => selectedUnit = i),
-                        icon: Icon(
-                          i == selectedUnit
-                              ? Icons.radio_button_checked
-                              : Icons.radio_button_off,
-                        ),
-                        label: Text(available[i].title),
-                      ),
-                    ),
-                  const SizedBox(height: 8),
-                  Text(
-                    unit.title,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(unit.objective, style: const TextStyle(height: 1.45)),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: () => setState(() => checking = false),
-                          child: const Text('Aprender'),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: FilledButton(
-                          onPressed: () => setState(() => checking = true),
-                          child: const Text('Comprobar'),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  if (!checking) ...[
-                    Tarjeta(
-                      color: OL.moradoSuave,
-                      sombra: false,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Una estrategia para esta unidad',
-                            style: TextStyle(fontWeight: FontWeight.w900),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            unit.strategy,
-                            style: const TextStyle(fontSize: 16, height: 1.5),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      'Vocabulario antes de empezar',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    for (final word in unit.words)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8),
-                        child: Tarjeta(
-                          sombra: false,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${word.word} · ${word.translation}',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                word.example,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  height: 1.4,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    const SizedBox(height: 18),
-                  ],
-                  if (listening) ...[
-                    BotonPrincipal(
-                      onPressed: busy ? null : () => listen(unit),
-                      child: Text(
-                        busy
-                            ? 'PREPARANDO AUDIO…'
-                            : heard
-                            ? 'VOLVER A ESCUCHAR'
-                            : 'ESCUCHAR EN INGLÉS',
-                      ),
-                    ),
-                    const Text(
-                      'Puedes escuchar varias veces. La voz requiere conexión.',
-                      style: TextStyle(fontSize: 14, color: OL.gris),
-                    ),
-                    if (!checking)
-                      TextButton(
-                        onPressed: () => setState(() {
-                          transcript = !transcript;
-                          if (transcript) transcriptsSeen.add(unit.id);
-                        }),
-                        child: Text(
-                          transcript
-                              ? 'Ocultar transcripción'
-                              : 'Ver transcripción de apoyo',
-                        ),
-                      ),
-                  ],
-                  if (!listening ||
-                      (!checking && transcript) ||
-                      (checking && checked == questionsFor(unit).length)) ...[
-                    const SizedBox(height: 12),
-                    Tarjeta(
-                      sombra: false,
-                      child: SelectableText(
-                        unit.passage,
-                        style: const TextStyle(fontSize: 17, height: 1.65),
-                      ),
-                    ),
-                  ],
-                  if (!checking) ...[
-                    const SizedBox(height: 18),
-                    BotonPrincipal(
-                      onPressed: () => setState(() => checking = true),
-                      child: const Text('COMPROBAR LO QUE ENTENDÍ'),
-                    ),
-                  ],
-                  if (checking) ...[
-                    const SizedBox(height: 12),
-                    Text(
-                      'Comprobación guiada · $checked/${questionsFor(unit).length}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const Text(
-                      'Practicar este material no demuestra todavía retención a largo plazo.',
-                      style: TextStyle(color: OL.gris, fontSize: 14),
-                    ),
-                    for (final q in questionsFor(unit))
-                      Builder(
-                        builder: (context) {
-                          final key =
-                              'learn-${widget.skill}-${unit.id}-${q.id}';
-                          final done = answered.contains(key);
-                          final previous = evidence[key] as Map?;
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: Tarjeta(
-                              sombra: false,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    q.prompt,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w800,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  for (var i = 0; i < q.options.length; i++)
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 6),
-                                      child: OutlinedButton(
-                                        onPressed: done
-                                            ? null
-                                            : () => setState(
-                                                () => choices[key] = i,
-                                              ),
-                                        style: OutlinedButton.styleFrom(
-                                          backgroundColor: choices[key] == i
-                                              ? OL.moradoSuave
-                                              : null,
-                                          alignment: Alignment.centerLeft,
-                                        ),
-                                        child: Text(q.options[i]),
-                                      ),
-                                    ),
-                                  if (!done)
-                                    FilledButton(
-                                      onPressed:
-                                          choices[key] == null ||
-                                              (listening && !heard)
-                                          ? null
-                                          : () => check(unit, q),
-                                      child: Text(
-                                        listening && !heard
-                                            ? 'Escucha el audio primero'
-                                            : 'Comprobar respuesta',
-                                      ),
-                                    ),
-                                  if (done) ...[
-                                    if (choices[key] != q.answerIndex)
-                                      TextButton.icon(
-                                        onPressed: () => setState(() {
-                                          answered.remove(key);
-                                          choices.remove(key);
-                                        }),
-                                        icon: const Icon(Icons.refresh_rounded),
-                                        label: const Text('INTENTAR OTRA VEZ'),
-                                      ),
-                                    Text(
-                                      choices[key] == q.answerIndex
-                                          ? 'Bien razonado'
-                                          : 'Vamos a revisarlo',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        color: choices[key] == q.answerIndex
-                                            ? OL.verde
-                                            : OL.rojo,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      q.explanation,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        height: 1.4,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      'Evidencia: “${q.evidence}”',
-                                      style: const TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () =>
-                                          setState(() => checking = false),
-                                      child: const Text(
-                                        'Volver a la explicación',
-                                      ),
-                                    ),
-                                  ],
-                                  if (!done && previous != null)
-                                    const Text(
-                                      'Ya practicaste esta pregunta. Este intento es un repaso.',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: OL.gris,
-                                      ),
-                                    ),
-                                ],
-                              ),
+                      const SizedBox(height: 6),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: word.word,
+                              style: const TextStyle(color: OL.morado),
                             ),
-                          );
-                        },
+                            TextSpan(
+                              text: ' · ${word.translation}',
+                              style: const TextStyle(color: OL.texto),
+                            ),
+                          ],
+                        ),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 17,
+                        ),
                       ),
-                  ],
-                ],
-              );
-            },
+                      const SizedBox(height: 6),
+                      Text(
+                        word.example,
+                        style: const TextStyle(fontSize: 16, height: 1.4),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  tooltip: 'Escuchar «${word.word}»',
+                  onPressed: () => escucharPalabra(word.word),
+                  icon: const Icon(
+                    Icons.volume_up_outlined,
+                    color: OL.morado,
+                  ),
+                ),
+              ],
+            ),
           ),
+        ),
+    ],
+    [
+      BotonPrincipal(
+        onPressed: () => irA(_Paso.texto),
+        child: Text(listening ? 'ESCUCHAR' : 'EMPEZAR A LEER'),
+      ),
+    ],
+  );
+
+  Widget _botonEscuchar(LearningUnit unit, {bool compacto = false}) => Tarjeta(
+    color: OL.moradoSuave,
+    borde: OL.morado,
+    sombra: false,
+    etiquetaSemantica: heard ? 'Volver a escuchar' : 'Escuchar',
+    onTap: busy ? null : () => listen(unit),
+    padding: EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: compacto ? 12 : 24,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        busy
+            ? SizedBox.square(
+                dimension: compacto ? 24 : 34,
+                child: const CircularProgressIndicator(strokeWidth: 3),
+              )
+            : Icon(
+                heard ? Icons.replay_rounded : Icons.volume_up_rounded,
+                color: OL.morado,
+                size: compacto ? 26 : 40,
+              ),
+        const SizedBox(width: 12),
+        Flexible(
+          child: Text(
+            busy
+                ? 'PREPARANDO AUDIO…'
+                : heard
+                ? 'VOLVER A ESCUCHAR'
+                : 'ESCUCHAR',
+            style: TextStyle(
+              color: OL.morado,
+              fontSize: compacto ? 16 : 20,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+        ),
+      ],
     ),
   );
+
+  Widget _textoPasaje(LearningUnit unit) => Tarjeta(
+    sombra: false,
+    borde: OL.grisClaro,
+    child: SelectableText(
+      unit.passage,
+      style: const TextStyle(fontSize: 18, height: 1.65),
+    ),
+  );
+
+  Widget _texto(LearningUnit unit) => _marco(
+    [
+      Text(
+        unit.title,
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+      ),
+      const SizedBox(height: 16),
+      if (!listening) _textoPasaje(unit),
+      if (listening) ...[
+        _botonEscuchar(unit),
+        const SizedBox(height: 8),
+        const Text(
+          'Puedes escucharlo varias veces.',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 14, color: OL.gris),
+        ),
+        const SizedBox(height: 8),
+        Align(
+          child: TextButton.icon(
+            onPressed: () => setState(() {
+              transcript = !transcript;
+              if (transcript) transcriptsSeen.add(unit.id);
+            }),
+            icon: Icon(
+              transcript
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+            ),
+            label: Text(
+              transcript ? 'Ocultar transcripción' : 'Ver transcripción',
+            ),
+          ),
+        ),
+        if (transcript) _textoPasaje(unit),
+      ],
+    ],
+    [
+      BotonPrincipal(
+        onPressed: () => irA(
+          _Paso.pregunta,
+          cambio: () {
+            pregunta = 0;
+            eleccion = null;
+            comprobada = false;
+            aciertos = 0;
+          },
+        ),
+        child: const Text('RESPONDER'),
+      ),
+    ],
+  );
+
+  Widget _pregunta(LearningUnit unit) {
+    final q = unit.questions[pregunta.clamp(0, unit.questions.length - 1)];
+    final correcta = eleccion == q.answerIndex;
+    final faltaAudio = listening && !heard;
+    return _marco(
+      [
+        Row(
+          children: [
+            Expanded(
+              child: BarraProgreso(
+                pregunta / unit.questions.length +
+                    (comprobada ? 1 / unit.questions.length : 0),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              '${pregunta + 1} de ${unit.questions.length}',
+              style: const TextStyle(
+                color: OL.gris,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        if (listening) ...[
+          _botonEscuchar(unit, compacto: true),
+          const SizedBox(height: 16),
+        ] else
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: () => setState(() => transcript = !transcript),
+              icon: const Icon(Icons.menu_book_rounded),
+              label: Text(transcript ? 'Ocultar el texto' : 'Ver el texto'),
+            ),
+          ),
+        if (!listening && transcript) ...[
+          _textoPasaje(unit),
+          const SizedBox(height: 16),
+        ],
+        Text(
+          q.prompt,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+        ),
+        const SizedBox(height: 14),
+        for (var i = 0; i < q.options.length; i++)
+          OpcionRespuesta(
+            texto: q.options[i],
+            estado: comprobada && i == q.answerIndex
+                ? EstadoOpcion.correcta
+                : comprobada && i == eleccion
+                ? EstadoOpcion.incorrecta
+                : eleccion == i
+                ? EstadoOpcion.seleccionada
+                : EstadoOpcion.normal,
+            onTap: comprobada
+                ? null
+                : () {
+                    Efectos.toque();
+                    setState(() => eleccion = i);
+                  },
+          ),
+        if (faltaAudio && !comprobada)
+          const Text(
+            'Escucha el audio primero.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: OL.gris),
+          ),
+      ],
+      [
+        if (comprobada)
+          FeedbackDock(
+            child: AnswerFeedback(
+              correct: correcta,
+              title: correcta ? '¡Bien!' : 'Casi',
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (!correcta)
+                    Text(
+                      'Respuesta: ${q.options[q.answerIndex]}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  Text(
+                    q.explanation,
+                    style: const TextStyle(fontSize: 16, height: 1.45),
+                  ),
+                  if (q.evidence.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      'En el texto: “${q.evidence}”',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        if (!comprobada)
+          BotonPrincipal(
+            onPressed: eleccion == null || faltaAudio
+                ? null
+                : () => comprobar(unit, q),
+            child: const Text('COMPROBAR'),
+          )
+        else
+          BotonPrincipal(
+            color: correcta ? OL.verde : OL.rojo,
+            onPressed: () => continuar(unit),
+            child: const Text('CONTINUAR'),
+          ),
+      ],
+    );
+  }
+
+  Widget _final(LearningUnit unit, List<LearningUnit> available) {
+    final total = unit.questions.length;
+    final otra = available.length > 1
+        ? available[(available.indexOf(unit) + 1) % available.length]
+        : unit;
+    return _marco(
+      [
+        const SizedBox(height: 24),
+        const Center(child: FeedbackBadge(completed: true, size: 96)),
+        const SizedBox(height: 12),
+        Text(
+          aciertos == total ? '¡Lo entendiste todo!' : '¡Terminaste!',
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          '$aciertos de $total correctas',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 18,
+            color: OL.gris,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Tarjeta(
+          sombra: false,
+          borde: OL.grisClaro,
+          child: Text(
+            unit.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontWeight: FontWeight.w800),
+          ),
+        ),
+      ],
+      [
+        BotonPrincipal(
+          onPressed: () => abrirUnidad(otra),
+          child: Text(listening ? 'OTRA ESCUCHA' : 'OTRA LECTURA'),
+        ),
+        TextButton(
+          onPressed: () =>
+              context.canPop() ? context.pop() : context.go('/inicio'),
+          child: const Text('VOLVER'),
+        ),
+      ],
+    );
+  }
 }

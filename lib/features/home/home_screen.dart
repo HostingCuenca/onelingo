@@ -12,7 +12,6 @@ import '../../shared/widgets/mascot_coach.dart';
 import '../../shared/widgets/streak_card.dart';
 import '../../shared/widgets/tutor_avatar_banner.dart';
 import '../../shared/widgets/widgets.dart';
-import '../library/library_screen.dart';
 
 // Respaldo reversible de la pantalla anterior:
 // docs/backups/home_screen_before_home_reorganization_2026-09-25.dart.txt
@@ -76,10 +75,7 @@ class HomeScreen extends ConsumerWidget {
                 '/prueba-nivel',
                 extra: {'idioma': s.idiomaMeta, 'nivel': s.nivelInicial},
               ),
-              // La biblioteca solo tiene contenido en inglés por ahora.
-              onLibrary: () => s.idiomaMeta == 'en'
-                  ? context.push('/biblioteca')
-                  : context.go('/aprender'),
+              onLibrary: () => context.push('/biblioteca'),
             ),
             const SizedBox(height: 18),
             const MascotCoach(
@@ -91,7 +87,6 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             if (s.planId.isEmpty) _TrialBanner(restante: restante),
             if (s.planId.isEmpty) const SizedBox(height: 16),
-            if (s.idiomaMeta == 'en') const CaminoPersonalizado(),
             if (s.idiomaMeta != 'en') ...[
               const TituloSeccion('Tu camino de aprendizaje'),
               const SizedBox(height: 10),
@@ -165,7 +160,7 @@ class HomeScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Diagnóstico orientativo: nivel ${s.diagnostico!['nivel']}',
+                        'Tu prueba de nivel: nivel ${s.diagnostico!['nivel']}',
                         style: const TextStyle(fontWeight: FontWeight.w800),
                       ),
                       const SizedBox(height: 6),

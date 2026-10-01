@@ -362,7 +362,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             'modo': widget.modo,
             'asistida': usoAyuda,
             'feedback': corrections.isEmpty
-                ? 'Turno practicado sin correcciones textuales; dominio aún no evaluado.'
+                ? 'Turno practicado sin correcciones.'
                 : feedback.substring(0, feedback.length.clamp(0, 1200)),
             'correcciones': corrections.take(3).toList(),
           },

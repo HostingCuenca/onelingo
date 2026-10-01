@@ -149,8 +149,21 @@ class _Ruta extends StatelessWidget {
     final aprobadas = unidades
         .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
         .length;
-    final completo = nivelAprobado(ruta, estados, nivel);
-    final hayLeccionesExtra = nivel == 'f0' && leccionesDe(0).isNotEmpty;
+    final completo = nivelSuperado(ruta, estados, estado.practicas, nivel);
+    // Prueba para saltar: en el nivel al que ha llegado el alumno (su primera
+    // unidad ya abierta y sin omitir) y que aún no ha superado.
+    final primera = unidades.isEmpty ? null : estados[unidades.first.id];
+    final ofrecerPrueba =
+        nivel != 'f0' &&
+        !completo &&
+        primera != null &&
+        !primera.omitible &&
+        primera.estado != EstadoUnidad.bloqueada;
+    // Lecciones antiguas como práctica extra solo en idiomas sin Nivel 0 propio.
+    final hayLeccionesExtra =
+        nivel == 'f0' &&
+        ruta.curso.idioma != 'en' &&
+        leccionesDe(0).isNotEmpty;
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
       children: [
@@ -205,6 +218,35 @@ class _Ruta extends StatelessWidget {
             info: estados[recomendada.id]!,
             titulo: t(recomendada.titulo),
             objetivo: t(recomendada.objetivo),
+          ),
+        if (ofrecerPrueba)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Tarjeta(
+              color: OL.moradoSuave,
+              borde: OL.moradoClaro,
+              onTap: () => context.push('/ruta/$nivel/prueba'),
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.workspace_premium_rounded,
+                    color: OL.morado,
+                    size: 32,
+                  ),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      '¿Ya dominas este nivel? Haz su prueba y pasa al siguiente.',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                  Icon(Icons.chevron_right_rounded, color: OL.gris),
+                ],
+              ),
+            ),
           ),
         if (completo)
           Padding(
@@ -268,7 +310,7 @@ class _Ruta extends StatelessWidget {
         ],
         const SizedBox(height: 8),
         const Text(
-          'Aprobar una unidad no es dominarla: la marcamos como dominada cuando la recuerdas en un repaso días después.',
+          'Lo que apruebas vuelve en repasos cortos para que no se te olvide.',
           style: TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
         ),
         if (hayLeccionesExtra) ...[

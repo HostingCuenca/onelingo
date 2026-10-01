@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'grafo.dart';
 import 'migracion.dart';
 import 'modelos.dart';
@@ -24,6 +26,10 @@ abstract final class ClaveRuta {
   static String repaso(String unidad) => 'ruta:$unidad:repaso';
   static String nivelCompleto(String idioma, String nivel) =>
       'ruta:$idioma.$nivel:completa';
+
+  /// Prueba para saltar un nivel (aprobada → el nivel cuenta como superado).
+  static String pruebaNivel(String idioma, String nivel) =>
+      'ruta:$idioma.$nivel:prueba';
 }
 
 /// Evidencia de una clave, con los alias históricos de foundations-v1.
@@ -284,3 +290,72 @@ Set<String> vocabularioConocido(RutaCargada ruta, String unidadId) => {
   for (final id in {unidadId, ...prerequisitosTransitivos(ruta, unidadId)})
     for (final v in ruta.unidad(id)?.vocabulario ?? const <Vocablo>[]) v.texto,
 };
+
+/// Preguntas de la prueba de un nivel y aciertos para aprobarla.
+const preguntasPruebaNivel = 20;
+const aciertosPruebaNivel = 16;
+
+/// Formatos que se corrigen solos (la producción libre queda fuera).
+const _formatosPrueba = {
+  FormatoItem.elegir,
+  FormatoItem.escuchar,
+  FormatoItem.completar,
+  FormatoItem.ordenar,
+  FormatoItem.relacionar,
+};
+
+/// Prueba de un nivel: una pregunta de evaluación de cada tramo del nivel
+/// (20 tramos de clases seguidas), al azar en cada intento, para que cubra
+/// todo el nivel y no se pueda memorizar.
+List<Item> itemsPruebaNivel(RutaCargada ruta, String nivel, Random rnd) {
+  final unidades = ruta.delNivel(nivel);
+  if (unidades.isEmpty) return const [];
+  final tramos = min(preguntasPruebaNivel, unidades.length);
+  final res = <Item>[];
+  for (var t = 0; t < tramos; t++) {
+    final desde = t * unidades.length ~/ tramos;
+    final hasta = (t + 1) * unidades.length ~/ tramos;
+    final candidatos = [
+      for (final u in unidades.sublist(desde, hasta))
+        for (final (_, i) in u.itemsDe(TipoPaso.evaluacion))
+          if (_formatosPrueba.contains(i.formato)) i,
+    ];
+    if (candidatos.isNotEmpty) {
+      res.add(candidatos[rnd.nextInt(candidatos.length)]);
+    }
+  }
+  return res;
+}
+
+bool pruebaNivelAprobada(
+  Map<String, dynamic> practicas,
+  String idioma,
+  String nivel,
+) =>
+    (practicas[ClaveRuta.pruebaNivel(idioma, nivel)] as Map?)?['aprobada'] ==
+    true;
+
+/// Nivel completo por cualquiera de los dos caminos: todas sus unidades
+/// aprobadas o su prueba aprobada.
+bool nivelSuperado(
+  RutaCargada ruta,
+  Map<String, InfoUnidad> e,
+  Map<String, dynamic> practicas,
+  String nivel,
+) =>
+    pruebaNivelAprobada(practicas, ruta.curso.idioma, nivel) ||
+    nivelAprobado(ruta, e, nivel);
+
+/// Nivel interno más alto superado con su prueba (0 si ninguno).
+int nivelPorPruebas(RutaCargada ruta, Map<String, dynamic> practicas) {
+  var m = 0;
+  for (final n in ruta.curso.niveles) {
+    final interno = n.nivelInterno;
+    if (interno != null &&
+        interno > m &&
+        pruebaNivelAprobada(practicas, ruta.curso.idioma, n.id)) {
+      m = interno;
+    }
+  }
+  return m;
+}

@@ -209,3 +209,22 @@ Motivo: con 4 ítems de evaluación, 0,8 exigía el 100 %.
 Fecha: 2026-09-30. Acordado con el cliente: diagnóstico corto (~8 min) e inteligente, que sube la dificultad mientras el alumno acierta y se detiene al empezar a fallar; ubicación por habilidad (escucha, lectura, gramática, vocabulario; escritura omitible); «empiezo de cero» sin examen; sin micrófono ni IA en tiempo de ejecución.
 Decisión: estimación bayesiana por habilidad sobre N0–N10 (prior centrado en la autodeclaración, otras habilidades con peso 0,4, pregunta en el nivel mediano, cierre con ±1 nivel al 85 % o 6 preguntas, parada temprana si P(N0) ≥ 85 %). Banco de 180 ítems (18 por nivel) con revisión independiente GO. Inicio = media redondeada hacia abajo, sin superar en 2 a la habilidad más débil; el alumno puede elegir un nivel arriba o abajo.
 Evidencia: simulación (3.000 alumnos): 92 % de habilidades y 95 % de inicios a ±1 nivel, 1–2 % sobreubicación, ~18 preguntas; sin conocimientos: ~6,5 preguntas. Detalle: `DIAGNOSTICO_V2.md`. Los otros 9 idiomas mantienen el diagnóstico anterior.
+
+## DEC-026 — Nadie elige su nivel; se sube demostrándolo
+Fecha: 2026-10-01 · Acordado con el cliente («personas al azar quedaban en niveles altos»).
+Decisión:
+- El nivel elegido en el registro solo es el punto de partida; la prueba de ubicación decide en todos los idiomas (antes, fuera de inglés, el alumno se ubicaba a mano).
+- El resultado permite empezar un nivel más abajo, nunca más arriba.
+- La prueba antigua (idiomas sin v2) lleva un techo bayesiano con prior uniforme, el percentil 20 de lo que demuestran las respuestas. Además sigue preguntando hasta confirmar la estimación.
+- Para subir: terminar las clases del nivel o aprobar la **prueba del nivel**: 20 preguntas de evaluación, una por tramo de 5 clases, al azar en cada intento, formatos autocorregibles y 16 aciertos para aprobar. Aprobada, el nivel cuenta como superado (`ruta:<idioma>.<nivel>:prueba`) y sus clases quedan abiertas para repasar.
+- Ningún desplegable de nivel en pantallas del alumno.
+Evidencia: con la prueba antigua, quien respondía al azar desde el nivel 8 terminaba de media en 4,8 (≥5 en el 56 %). Con el techo, `diagnostico_test` comprueba 120 recorridos al azar desde 4, 7 y 10, todos en ≤2. La prueba v2 al azar sale «desde cero» en el 69–99 % según la autodeclaración.
+
+## DEC-027 — Limpieza de la generación antigua de pantallas (fase A)
+Fecha: 2026-10-01 · Acordado con el cliente (flujo A → E: limpieza, prueba de nivel, situaciones por tramo, léxico único, francés).
+Decisión:
+- Se retiran la biblioteca de práctica antigua (`library_screen`, banco por habilidad con selector de nivel), `LearningPath`, `LearningPrimer` y `foundations_screen`.
+- «Biblioteca» pasa a ser consulta y práctica libre del nivel del alumno: Lecturas, Escuchas, Guías de gramática y Mapa de sonidos.
+- Toda pantalla de ejercicios usa `BotonPrincipal` fijo, `OpcionRespuesta` y `FeedbackDock`, y no muestra jerga interna.
+- `test/arquitectura_test.dart` vigila estas reglas.
+Referencia: `docs/ARQUITECTURA_VIGENTE.md`.

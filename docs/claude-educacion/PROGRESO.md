@@ -1,6 +1,6 @@
 # Estado actual
 
-Última actualización: 2026-09-30
+Última actualización: 2026-10-01
 Responsable: Claude (Claude Code)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
 Fase actual: **Inglés N1–N10 completo y publicado (1.000 clases)**; siguiente fase: revisión del cliente y calidad C1.
@@ -8,10 +8,18 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Trabajando ahora
 
-- Pase de dificultad C1 (N8–N10) publicado en `20260930-edu-11-c1-dificultad`.
-- Prueba de nivel v2 de inglés publicada en `20260930-edu-12-prueba-nivel-v2` (DEC-025).
+- Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).
+- Siguiente: **C, situaciones v2** (50 situaciones × 3 tramos).
 
 ## Terminado recientemente
+
+- **Fases A y B (2026-10-01, DEC-026/027):**
+  - Estética unificada: tema para `FilledButton`; `BotonPrincipal` fijo, `OpcionRespuesta` y `FeedbackDock` en lecturas, escuchas, gramática, lecciones, examen y prueba antigua.
+  - Retirados la biblioteca de práctica antigua, LearningPath, LearningPrimer y foundations. La Biblioteca nueva tiene Lecturas, Escuchas, Guías y Mapa de sonidos.
+  - Sin selectores de nivel ni jerga.
+  - Ubicación a prueba de azar: techo bayesiano en la prueba antigua, prueba obligatoria en el registro de todos los idiomas y sin opción N+1.
+  - Prueba para subir de nivel (20 preguntas, 16 para aprobar) y niveles con estado en Aprender.
+  - Documentación consolidada: `ARQUITECTURA_VIGENTE.md`, nuevo `AGENTS.md` y `docs/archivo/`. Reglas vigiladas por `test/arquitectura_test.dart`. 213 pruebas Flutter.
 
 - **Inglés N3 C91 → N10 C100 (2026-09-30):** 710 clases por autoría compacta (`CONTRATO_AUTORIA_COMPACTA.md`, `construir_bloque.py`), mapas v2 N4–N10 validados, cada bloque con autor y revisor independientes (GO). Releases edu-7 (N3–N4), edu-8 (N5–N6), edu-9 (N7–N9) y edu-10 (N10). Los revisores corrigieron claves erróneas (P0) en N9 C33/C35/C38/C40, fugas de respuesta, rúbricas laxas y español peninsular. P2 abierto: dificultad léxica de N8–N10 algo baja para C1 (el control «nada sin enseñar» limita el léxico); modelos de escritura larga al 55–75 % del rango del mapa.
 

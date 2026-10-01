@@ -15,6 +15,7 @@ import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
+import '../ruta/opcion_respuesta.dart';
 
 /// Reproductor de lección: recorre los `steps` y muestra un widget por tipo.
 /// Cuenta aciertos, registra errores y al final guarda el progreso.
@@ -394,17 +395,15 @@ class _StepViewState extends State<_StepView> {
         if (_panel)
           const SizedBox.shrink()
         else if (correcto != null || sinComprobar)
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: correcto == false
-                  ? OL.rojo
-                  : (correcto == true ? OL.verde : OL.morado),
-            ),
+          BotonPrincipal(
+            color: correcto == false
+                ? OL.rojo
+                : (correcto == true ? OL.verde : OL.morado),
             onPressed: puede ? widget.onSiguiente : null,
             child: Text(sinComprobar ? 'CONTINUAR' : 'SIGUIENTE'),
           )
         else
-          ElevatedButton(
+          BotonPrincipal(
             onPressed: puede ? _comprobar : null,
             child: const Text('COMPROBAR'),
           ),
@@ -512,29 +511,23 @@ class _StepViewState extends State<_StepView> {
       ),
       const SizedBox(height: 14),
       for (final o in opciones)
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: AnimatedScale(
-            scale: seleccion == o && correcto == null ? 1.03 : 1.0,
-            duration: const Duration(milliseconds: 160),
-            curve: Curves.easeOutBack,
-            child: _Opcion(
-              texto: o,
-              seleccionada: seleccion == o,
-              estado: correcto == null
-                  ? null
-                  : (o == s.answer ? true : (seleccion == o ? false : null)),
-              onTap: correcto == null
-                  ? () {
-                      Efectos.toque();
-                      setState(() => seleccion = o);
-                      if (s.type == StepType.multipleChoice) {
-                        Voz.instancia.hablar(o, idiomaContenido);
-                      }
-                    }
-                  : null,
-            ),
+        OpcionRespuesta(
+          texto: o,
+          estado: _estadoOpcion(
+            seleccion == o,
+            correcto == null
+                ? null
+                : (o == s.answer ? true : (seleccion == o ? false : null)),
           ),
+          onTap: correcto == null
+              ? () {
+                  Efectos.toque();
+                  setState(() => seleccion = o);
+                  if (s.type == StepType.multipleChoice) {
+                    Voz.instancia.hablar(o, idiomaContenido);
+                  }
+                }
+              : null,
         ),
     ],
   );
@@ -758,42 +751,38 @@ class _StepViewState extends State<_StepView> {
     Widget chip(String txt, bool esIzq) {
       final unida = unidas.contains(txt);
       final sel = esIzq && izq == txt;
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: _Opcion(
-          texto: txt,
-          seleccionada: sel,
-          estado: unida ? true : null,
-          onTap: unida
-              ? null
-              : () {
-                  if (esIzq) {
-                    setState(() => izq = txt);
-                    return;
-                  }
-                  if (izq == null) return;
-                  final par = s.pairs.firstWhere((p) => p.$1 == izq);
-                  if (par.$2 == txt) {
-                    Efectos.correcto();
-                    setState(() {
-                      unidas.addAll([izq!, txt]);
-                      izq = null;
-                      if (unidas.length == s.pairs.length * 2) {
-                        widget.onResultado(
-                          fallos == 0,
-                          fallos == 0 ? 'todas' : '$fallos fallos',
-                        );
-                      }
-                    });
-                  } else {
-                    Efectos.incorrecto();
-                    setState(() {
-                      fallos++;
-                      izq = null;
-                    });
-                  }
-                },
-        ),
+      return OpcionRespuesta(
+        texto: txt,
+        estado: _estadoOpcion(sel, unida ? true : null),
+        onTap: unida
+            ? null
+            : () {
+                if (esIzq) {
+                  setState(() => izq = txt);
+                  return;
+                }
+                if (izq == null) return;
+                final par = s.pairs.firstWhere((p) => p.$1 == izq);
+                if (par.$2 == txt) {
+                  Efectos.correcto();
+                  setState(() {
+                    unidas.addAll([izq!, txt]);
+                    izq = null;
+                    if (unidas.length == s.pairs.length * 2) {
+                      widget.onResultado(
+                        fallos == 0,
+                        fallos == 0 ? 'todas' : '$fallos fallos',
+                      );
+                    }
+                  });
+                } else {
+                  Efectos.incorrecto();
+                  setState(() {
+                    fallos++;
+                    izq = null;
+                  });
+                }
+              },
       );
     }
 
@@ -1228,77 +1217,14 @@ class _ImagenOpcion extends StatelessWidget {
   }
 }
 
-class _Opcion extends StatelessWidget {
-  const _Opcion({
-    required this.texto,
-    required this.seleccionada,
-    this.estado,
-    this.onTap,
-  });
-  final String texto;
-  final bool seleccionada;
-  final bool? estado; // true correcto, false incorrecto, null neutro
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color borde = estado == true
-        ? OL.verde
-        : estado == false
-        ? OL.rojo
-        : seleccionada
-        ? OL.morado
-        : OL.grisClaro;
-    final Color fondo = estado == true
-        ? OL.verdeSuave
-        : estado == false
-        ? OL.rojoSuave
-        : seleccionada
-        ? OL.moradoSuave
-        : OL.blanco;
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(14),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          decoration: BoxDecoration(
-            color: fondo,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: borde,
-              width: seleccionada || estado != null ? 2 : 1.5,
-            ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  texto,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: estado == true ? OL.verde : OL.texto,
-                  ),
-                ),
-              ),
-              if (estado == true)
-                const Icon(Icons.check_circle, color: OL.verde, size: 20),
-              if (estado == false)
-                const Icon(Icons.cancel, color: OL.rojo, size: 20),
-              if (estado == null && seleccionada)
-                const Icon(
-                  Icons.radio_button_checked,
-                  color: OL.morado,
-                  size: 20,
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+/// Traduce el estado antiguo (seleccionada + acierto/fallo) al de
+/// `OpcionRespuesta`.
+EstadoOpcion _estadoOpcion(bool seleccionada, bool? acierto) =>
+    switch (acierto) {
+      true => EstadoOpcion.correcta,
+      false => EstadoOpcion.incorrecta,
+      null => seleccionada ? EstadoOpcion.seleccionada : EstadoOpcion.normal,
+    };
 
 class _Ficha extends StatelessWidget {
   const _Ficha(this.texto, {this.onTap});

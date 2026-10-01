@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../../core/aprendizaje/ubicacion.dart' show Autodeclaracion;
 import '../../core/perfil_aprendizaje.dart';
 import '../../core/biblioteca.dart';
 import '../../shared/widgets/perfil_seleccion.dart';
@@ -22,6 +23,7 @@ import '../../core/efectos.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/widgets.dart';
+import '../ruta/opcion_respuesta.dart';
 
 /// Diagnóstico adaptativo de nivel: parte del nivel declarado, mide una
 /// competencia distinta en cada pregunta (elegir, completar, escuchar, dictado,
@@ -55,27 +57,17 @@ class DiagnosticoScreen extends ConsumerStatefulWidget {
 }
 
 class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
-  static const _auto = [
-    (
-      'Nunca lo he estudiado',
-      'Empiezo desde cero: letras, sonidos y palabras',
-      0,
-    ),
-    ('Sé lo básico', 'Saludos, números, frases sueltas', 2),
-    (
-      'Me defiendo',
-      'Situaciones sencillas: comprar, preguntar, presentarme',
-      4,
-    ),
-    (
-      'Converso con soltura',
-      'Hablo de mi vida y mi trabajo sin mucho esfuerzo',
-      6,
-    ),
-    ('Nivel avanzado', 'Debato, leo textos largos, entiendo acentos', 8),
-  ];
+  /// «¿Cuánto sabes?» solo fija la dificultad de la primera pregunta (como
+  /// la prueba v2 de inglés); el resultado sale únicamente de las respuestas.
+  static const _etiquetasAuto = {
+    Autodeclaracion.nada: 'Nada',
+    Autodeclaracion.poco: 'Un poco',
+    Autodeclaracion.defiendo: 'Me defiendo',
+    Autodeclaracion.bastante: 'Bastante',
+    Autodeclaracion.avanzado: 'Avanzado',
+  };
 
-  int? autoevaluacion;
+  late Autodeclaracion autoevaluacion;
   int declarado = 4;
   Diagnostico? diag;
   PreguntaDiag? q;
@@ -119,17 +111,11 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     objetivos = List<String>.from(
       widget.configuracion['objetivos'] as List? ?? st.objetivos,
     );
-    declarado = (widget.configuracion['nivel'] as int? ?? st.nivelInicial)
-        .clamp(0, 10);
-    autoevaluacion = declarado == 0
-        ? 0
-        : declarado <= 2
-        ? 1
-        : declarado <= 4
-        ? 2
-        : declarado <= 6
-        ? 3
-        : 4;
+    // El nivel del registro solo elige el punto de partida (0/1/3/5/7).
+    autoevaluacion = Autodeclaracion.desdeNivel(
+      (widget.configuracion['nivel'] as int? ?? st.nivelInicial).clamp(0, 10),
+    );
+    declarado = autoevaluacion.inicio;
     final meta =
         widget.configuracion['idioma'] as String? ??
         widget.idioma ??
@@ -296,7 +282,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         'actividadesDisponibles': [
           for (final skill in RutaBiblioteca.habilidades)
             ...RutaBiblioteca.seleccionar(
-              banco: BancoDiag.de('en'),
+              banco: BancoDiag.de(idiomaContenido),
               nivel: r.recomendado.clamp(1, 10),
               skill: skill,
               sectores: sectores,
@@ -534,74 +520,35 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           style: TextStyle(color: OL.gris, height: 1.4),
         ),
         const SizedBox(height: 16),
-        if (!esOnboarding)
-          for (var i = 0; i < _auto.length; i++)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Tarjeta(
-                onTap: () => setState(() {
-                  autoevaluacion = i;
-                  declarado = _auto[i].$3;
-                  Efectos.toque();
-                }),
-                borde: autoevaluacion == i ? OL.morado : null,
-                color: autoevaluacion == i ? OL.moradoSuave : OL.blanco,
-                child: Row(
-                  children: [
-                    Icon(
-                      autoevaluacion == i
-                          ? Icons.radio_button_checked
-                          : Icons.radio_button_off,
-                      color: autoevaluacion == i ? OL.morado : OL.grisClaro,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _auto[i].$1,
-                            style: const TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            _auto[i].$2,
-                            style: const TextStyle(
-                              color: OL.gris,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-        if (!esOnboarding && autoevaluacion != null && autoevaluacion! > 0) ...[
-          const SizedBox(height: 6),
+        if (!esOnboarding) ...[
           Text(
-            'Ajusta el nivel en el que crees estar: $declarado de 10',
+            '¿Cuánto ${meta.nombre} sabes?',
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
-          Slider(
-            value: declarado.toDouble(),
-            min: 1,
-            max: 10,
-            divisions: 9,
-            label: '$declarado',
-            activeColor: OL.morado,
-            onChanged: (v) => setState(() => declarado = v.round()),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final a in Autodeclaracion.values)
+                ChoiceChip(
+                  label: Text(_etiquetasAuto[a]!),
+                  selected: autoevaluacion == a,
+                  onSelected: (_) => setState(() {
+                    autoevaluacion = a;
+                    declarado = a.inicio;
+                    Efectos.toque();
+                  }),
+                ),
+            ],
           ),
-          Text(
-            'La prueba empieza en el nivel $declarado y se ajusta sola. Elegir bien ahorra preguntas.',
-            style: const TextStyle(color: OL.gris, fontSize: 12),
+          const SizedBox(height: 8),
+          const Text(
+            'Solo decide por dónde empezamos. Tu nivel sale de tus respuestas.',
+            style: TextStyle(color: OL.gris, fontSize: 12),
           ),
+          const SizedBox(height: 16),
         ],
-        const SizedBox(height: 16),
-        Text(
-          'Punto de partida: nivel $declarado',
-          style: const TextStyle(fontWeight: FontWeight.w700),
-        ),
         if (!esOnboarding)
           PerfilSeleccion(
             sectores: sectores,
@@ -619,7 +566,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
             ),
           ),
         const SizedBox(height: 16),
-        ElevatedButton(
+        BotonPrincipal(
           onPressed:
               !bancoListo ||
                   !Sync.instancia.conectado ||
@@ -635,7 +582,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
             child: const Text('Inicia sesión para realizar el diagnóstico'),
           ),
         const Text(
-          'Resultado orientativo para personalizar tu aprendizaje. La expresión oral no se evalúa en esta prueba.',
+          'Tu resultado sale solo de tus respuestas. La expresión oral no se evalúa en esta prueba.',
           textAlign: TextAlign.center,
           style: TextStyle(color: OL.gris, fontSize: 12),
         ),
@@ -655,7 +602,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           const SizedBox(height: 16),
           Text(errorCarga!, textAlign: TextAlign.center),
           const SizedBox(height: 16),
-          ElevatedButton(
+          BotonPrincipal(
             onPressed: _siguiente,
             child: const Text('REINTENTAR'),
           ),
@@ -824,28 +771,21 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
 
   List<Widget> _opciones(PreguntaDiag p) => [
     for (final o in p.opciones)
-      Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: AnimatedScale(
-          scale: seleccion == o && correcto == null ? 1.03 : 1.0,
-          duration: const Duration(milliseconds: 160),
-          curve: Curves.easeOutBack,
-          child: _Opcion(
-            texto: o,
-            seleccionada: seleccion == o,
-            estado: correcto == null
-                ? null
-                : (o == p.respuestaCorrecta
-                      ? true
-                      : (seleccion == o ? false : null)),
-            onTap: correcto == null
-                ? () {
-                    Efectos.toque();
-                    setState(() => seleccion = o);
-                  }
-                : null,
-          ),
-        ),
+      OpcionRespuesta(
+        texto: o,
+        estado: correcto == null
+            ? (seleccion == o ? EstadoOpcion.seleccionada : EstadoOpcion.normal)
+            : (o == p.respuestaCorrecta
+                  ? EstadoOpcion.correcta
+                  : (seleccion == o
+                        ? EstadoOpcion.incorrecta
+                        : EstadoOpcion.normal)),
+        onTap: correcto == null
+            ? () {
+                Efectos.toque();
+                setState(() => seleccion = o);
+              }
+            : null,
       ),
   ];
 
@@ -1015,10 +955,8 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
   Widget _boton(PreguntaDiag p, bool respondida) {
     if (respondida) {
       final ok = correcto ?? false;
-      return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ok ? OL.verde : OL.rojo,
-        ),
+      return BotonPrincipal(
+        color: ok ? OL.verde : OL.rojo,
         onPressed: _siguiente,
         child: const Text('SIGUIENTE'),
       );
@@ -1027,7 +965,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       final palabras = texto.text.trim().isEmpty
           ? 0
           : texto.text.trim().split(RegExp(r'\s+')).length;
-      return ElevatedButton(
+      return BotonPrincipal(
         onPressed: palabras >= (p.nivel <= 2 ? 1 : 3) && !evaluando
             ? _enviarEscritura
             : null,
@@ -1041,7 +979,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
             ? seleccion.isNotEmpty
             : texto.text.trim().isNotEmpty) &&
         (!p.esAuditiva || audioListo);
-    return ElevatedButton(
+    return BotonPrincipal(
       onPressed: listo ? _comprobar : null,
       child: const Text('COMPROBAR'),
     );
@@ -1087,9 +1025,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         ),
         const SizedBox(height: 14),
         Text(
-          n == 0
-              ? 'Tu punto de partida: Fundamentos'
-              : 'Nivel orientativo: $nivelTexto',
+          n == 0 ? 'Tu punto de partida: Fundamentos' : 'Tu nivel: $nivelTexto',
           textAlign: TextAlign.center,
           style: t.headlineMedium,
         ),
@@ -1296,7 +1232,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           ),
         ),
         const SizedBox(height: 16),
-        ElevatedButton(
+        BotonPrincipal(
           onPressed: perfilCargando ? null : () => _terminar(n),
           child: Text(
             n == 0 ? 'EMPEZAR POR FUNDAMENTOS' : 'EMPEZAR EN EL NIVEL $n',
@@ -1315,72 +1251,6 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
             ),
           ),
       ],
-    );
-  }
-}
-
-class _Opcion extends StatelessWidget {
-  const _Opcion({
-    required this.texto,
-    required this.seleccionada,
-    this.estado,
-    this.onTap,
-  });
-  final String texto;
-  final bool seleccionada;
-  final bool? estado;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color borde = estado == true
-        ? OL.verde
-        : estado == false
-        ? OL.rojo
-        : seleccionada
-        ? OL.morado
-        : OL.grisClaro;
-    final Color fondo = estado == true
-        ? OL.verdeSuave
-        : estado == false
-        ? OL.rojoSuave
-        : seleccionada
-        ? OL.moradoSuave
-        : OL.blanco;
-    return Material(
-      color: fondo,
-      borderRadius: BorderRadius.circular(14),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(14),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: borde,
-              width: seleccionada || estado != null ? 2 : 1.5,
-            ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  texto,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    height: 1.3,
-                  ),
-                ),
-              ),
-              if (estado == true)
-                const Icon(Icons.check_circle, color: OL.verde, size: 20),
-              if (estado == false)
-                const Icon(Icons.cancel, color: OL.rojo, size: 20),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

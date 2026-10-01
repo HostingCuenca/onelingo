@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelingo/core/diagnostico.dart';
 import 'package:onelingo/core/state/providers.dart';
@@ -68,7 +70,13 @@ void main() {
           'vocabulario',
         ]),
       );
-      expect(d.nivelFinal, ((d.estimacion * .65 + 4 * .35) * 2).round() / 2);
+      // La escritura pesa un 35 %, sin superar lo que demuestran las respuestas.
+      expect(
+        d.nivelFinal,
+        (min(d.estimacion * .65 + 4 * .35, d.techoVerificado.toDouble()) * 2)
+                .round() /
+            2,
+      );
     },
   );
   test(

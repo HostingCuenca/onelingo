@@ -188,7 +188,7 @@ void main() {
       expect(find.text('XP GANADA'), findsOneWidget);
       expect(find.textContaining('+'), findsWidgets);
 
-      final ruta = (await tester.runAsync(() => CargadorRuta().cargar('en')))!!;
+      final ruta = (await tester.runAsync(() => CargadorRuta().cargar('en')))!;
       final estados = estadosRuta(ruta, c.read(progressProvider).practicas);
       expect(estados['en.f0.primer-contacto']!.estado, EstadoUnidad.aprobada);
       expect(estados['en.f0.alfabeto']!.estado, EstadoUnidad.disponible);
