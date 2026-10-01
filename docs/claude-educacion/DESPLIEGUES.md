@@ -280,3 +280,16 @@ Commit: `5f15691` · Build: `main.dart.js` `a0ea11d1…`.
 Pruebas: backend 17 (nuevas `chat-voz.test.ts`: transcripción→respuesta y reintento) + `tsc` en staging; Flutter 194 (1 omitida); navegador con servidor y micrófono simulados (390×700): llamada entrante sin subtítulos previos, contestar → habla en 40 ms con bocas M/E/A/U, mantener/soltar → transcripción y respuesta, deslizar cancela sin petición, fallo → Reintentar, temas, teclado, colgar → resumen, tutor 3D con la nueva fuente, respaldo 404 → /transcribir + /chat.
 Backup: `/var/www/onelingo/backups/20261001-edu-23-llamada-v3/` (`web-anterior` = edu-22, `backend-src` = 3 archivos previos). Salud OK; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-23-llamada-v3; mv web staging/20261001-edu-23-llamada-v3/web-retirada-post && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api'`
+
+## Release: 20261001-edu-24-lecciones-ia
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Reinicio de `onelingo-api` autorizado por el cliente.
+Contenido:
+- **Escritura revisada por IA** (`POST /ejercicios/revisar`, `revisarEscritura` en `ia.ts`): si la frase no coincide exactamente con una respuesta aceptada, o es producción abierta (antes solo contaba palabras), la IA decide por significado y corrección, exige la estructura practicada (p. ej. present perfect) y explica qué cambiar; el panel muestra «Corrección»/«Más natural», la explicación y «Otra forma» (el modelo). Coincidencia exacta = sin IA. Sin sesión/conexión = corrección local. La prueba de nivel no la usa. Probado con el proveedor real: acepta sinónimos y otro orden, rechaza pasado simple cuando se pide present perfect, «has repair», respuesta incompleta y tiempos mezclados (1–2 s).
+- **Botones fijos**: COMPROBAR/SIGUIENTE quedan abajo y siempre visibles; el ejercicio se desplaza.
+- **Lecciones más dinámicas** (clases N1–N10): «Une las parejas» con el vocabulario de la clase y «Escribe en inglés» con un ejemplo de la clase cuando el bloque no los tiene; formatos alternados. En las 1.000 clases: unir ≈7 → 14 %, escribir ≈9 → 13 %, elegir ≈34 → 29 %; mismo tipo seguido 7 %. Fundamentos conserva su secuencia.
+- **Llamada**: zona inferior de alto fijo; el tutor y el micrófono no se mueven con subtítulos largos (el texto se desplaza dentro).
+Commit: `31b1cf6` · Build: `main.dart.js` `9aa5892f…`.
+Pruebas: backend 18 (nueva `revisar-escritura.test.ts`) + `tsc` en staging; Flutter 197 (1 omitida; nuevas `ejercicios_dinamicos_test.dart`: variedad en todas las clases, IA acepta otra forma, sin IA si coincide); navegador: tutor y micrófono a la misma altura con texto corto y largo.
+Backup: `/var/www/onelingo/backups/20261001-edu-24-lecciones-ia/` (`web-anterior` = edu-23, `backend-src` = app.ts e ia.ts previos). Salud OK; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-24-lecciones-ia; mv web staging/20261001-edu-24-lecciones-ia/web-retirada-post && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && rm -f backend/src/routes/ejercicios.ts && pm2 restart onelingo-api'`
