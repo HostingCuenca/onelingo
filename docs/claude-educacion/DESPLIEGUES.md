@@ -192,3 +192,12 @@ Commit: `8b93e3f` · Build: `main.dart.js` `7593f3ad…`; banco `diagnostico-v2.
 Pruebas: 186 Flutter (1 omitida), validar_ruta 0 errores, validar_diagnostico 10/10 OK con GO. Navegador (build local): alumno N5 simulado → «N5 · B2» en 19 preguntas; respuestas al azar → «Empiezas desde cero». Se detectó y corrigió en esa prueba que los `completar` con opciones se corregían siempre como error.
 Backup: `/var/www/onelingo/backups/20260930-edu-12-prueba-nivel-v2/web-anterior` (= edu-11). Health: salud, APK, avatar y banco 200; `.env` igual; lock liberado. Producción muestra la nueva pantalla en `/#/prueba-nivel`.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-12-prueba-nivel-v2/web-retirada-post && cp -al backups/20260930-edu-12-prueba-nivel-v2/web-anterior web'`
+
+## Release: 20260930-edu-13-lumo-feedback
+
+Fecha: 2026-09-30 · Responsable: Claude (Claude Code)
+Contenido: Lumo reacciona al responder. Panel inferior al estilo Duolingo (sube por encima de la barra de navegación) con Lumo, ✓/✗, título, explicación con scroll propio y **SIGUIENTE** siempre visible: verde con Lumo feliz (celebra/anima alternados) al acertar; rojo con Lumo triste amable (error-amable) al fallar, con «Intentar otra vez» en práctica. Aplica a la ruta, la prueba de nivel y las lecciones antiguas; el resto de pantallas usa el mismo componente con Lumo y colores nuevos. Lumo pensando en las pistas y sorprendido al completar unidad. 6 poses nuevas del cliente optimizadas (5,3 MB → 149 KB, WebP 360 px); fuentes en `output/imagegen/mascotas/fuente/`.
+Commit: `469c40b` · Build: `main.dart.js` `6e0d55f7…`.
+Pruebas: 189 Flutter (1 omitida); navegador (build local, móvil): acierto y error verificados visualmente.
+Backup: `/var/www/onelingo/backups/20260930-edu-13-lumo-feedback/web-anterior` (= edu-12). Health: salud, APK, avatar y poses 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-13-lumo-feedback/web-retirada-post && cp -al backups/20260930-edu-13-lumo-feedback/web-anterior web'`
