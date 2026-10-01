@@ -23,7 +23,8 @@ import '../features/lesson/lesson_result_screen.dart';
 import '../features/mistakes/mistakes_screen.dart';
 import '../features/onboarding/login_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
-import '../features/onboarding/diagnostico_screen.dart';
+import '../features/onboarding/ubicacion_screen.dart';
+
 import '../features/onboarding/welcome_screen.dart';
 import '../features/plans/plans_screen.dart';
 import '../features/plans/tutors_screen.dart';
@@ -63,7 +64,7 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(path: '/inicio', builder: (_, _) => const HomeScreen()),
               GoRoute(
                 path: '/prueba-nivel',
-                builder: (_, st) => DiagnosticoScreen(
+                builder: (_, st) => PruebaNivelScreen(
                   idioma: st.uri.queryParameters['idioma'],
                   configuracion: st.extra is Map<String, dynamic>
                       ? st.extra as Map<String, dynamic>

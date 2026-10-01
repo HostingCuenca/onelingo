@@ -203,3 +203,9 @@ Alternativa futura: corrección por el tutor IA con rúbrica, cuando se conecte 
 Fecha: 2026-09-30 · Responsable: Claude
 Decisión: `aciertosNecesarios = floor(total × umbral)` (mínimo 1; con 1–2 ítems, todos). Con 0,8: 3/4 y 2/3 aprueban.
 Motivo: con 4 ítems de evaluación, 0,8 exigía el 100 %.
+
+## DEC-025 — Prueba de nivel v2 de inglés (adaptativa por habilidad)
+
+Fecha: 2026-09-30. Acordado con el cliente: diagnóstico corto (~8 min) e inteligente, que sube la dificultad mientras el alumno acierta y se detiene al empezar a fallar; ubicación por habilidad (escucha, lectura, gramática, vocabulario; escritura omitible); «empiezo de cero» sin examen; sin micrófono ni IA en tiempo de ejecución.
+Decisión: estimación bayesiana por habilidad sobre N0–N10 (prior centrado en la autodeclaración, otras habilidades con peso 0,4, pregunta en el nivel mediano, cierre con ±1 nivel al 85 % o 6 preguntas, parada temprana si P(N0) ≥ 85 %). Banco de 180 ítems (18 por nivel) con revisión independiente GO. Inicio = media redondeada hacia abajo, sin superar en 2 a la habilidad más débil; el alumno puede elegir un nivel arriba o abajo.
+Evidencia: simulación (3.000 alumnos): 92 % de habilidades y 95 % de inicios a ±1 nivel, 1–2 % sobreubicación, ~18 preguntas; sin conocimientos: ~6,5 preguntas. Detalle: `DIAGNOSTICO_V2.md`. Los otros 9 idiomas mantienen el diagnóstico anterior.

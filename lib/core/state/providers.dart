@@ -401,6 +401,13 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
       nivelInicial: nivelInicial,
       fundamentos: fundamentos,
       diagnostico: diagnostico,
+      // La prueba de nivel v2 ubica directamente en la escala del curso.
+      nivelEscala: diagnostico?['escala'] == escalaDiagnosticoCliente
+          ? escalaDiagnosticoCliente
+          : null,
+      nivelClienteInicial: diagnostico?['escala'] == escalaDiagnosticoCliente
+          ? (diagnostico!['nivelCliente'] as num).round().clamp(0, 10)
+          : null,
       sectores: sectores,
       objetivos: objetivos,
       trialInicio: state.trialInicio ?? DateTime.now(),
