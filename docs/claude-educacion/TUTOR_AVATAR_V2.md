@@ -33,12 +33,17 @@ Pedagogía: el avatar no recibía la unidad, el vocabulario enseñado ni los err
 - Integración: pantalla nativa única «Tutores con IA» (videollamada 3D + chat de voz/texto), visor en tema claro dentro de la app con cabecera y pestañas, brazos con caída natural, retratos regenerados.
 - Estados tipo Duolingo: **pensando** (cabeza inclinada, mirada arriba, cejas) mientras llega la respuesta o la voz, y **escuchando** (leve asentimiento) mientras el alumno habla.
 
-## Fase 2 — propuesta (requiere decisiones)
+## Fase 2 — hecha (release edu-20, 2026-10-01)
 
-1. **Servidor** (cambio de configuración, requiere autorización): gzip para JS/WASM y `Cache-Control` largo para modelos e imágenes. Reduce la carga inicial de ~5 MB a ~1,5 MB.
-2. **Backend** (requiere reiniciar `onelingo-api`): la IA emite la respuesta **frase a frase** y la voz arranca con la primera frase → ~1–1,5 s hasta oír al tutor.
-3. **Pedagogía**: pasar al tutor la unidad actual, el vocabulario y los errores recientes; prompt en tres capas; tarjeta de corrección en pantalla (el tutor la dice breve); resumen de «hechos del alumno» al terminar.
-4. **Lumo como tutor que habla** (recomendado, al estilo Duolingo): personaje 2D con 6–8 bocas y estados (escucha, piensa, habla, corrige, celebra).
-   - Activo necesario: un archivo **Rive** de Lumo, o un juego de imágenes de su boca (cerrada, A, O, E, U, M/B/P) con el mismo encuadre.
-   - Voz: mantener la cadena actual en streaming (barata) o pasar a voz a voz en tiempo real (Gemini Live ≈ $0,012/min; gpt-realtime mini ≈ $0,02–0,05/min) con la boca por amplitud.
-5. **HeyGen**: LiveAvatar no admite personajes de dibujos (no sirve para Lumo en tiempo real) y cuesta ≈ $0,08/min. Usarlo para **vídeos pre-renderizados** (intros de nivel, explicaciones), no para la conversación.
+1. **Servidor**: compresión y caché en el vhost de OneLingo (carga inicial de la app ~5 → ~1,5 MB en la red).
+2. **Backend frase a frase**: evento SSE `frase`; la voz arranca con la primera frase y las siguientes se precargan.
+3. **Pedagogía**: personalidades distintas, prompt en tres capas, reglas de videollamada (corrección por reformulación; el detalle va en la tarjeta), ideas para responder, traducción a demanda, resumen al terminar con «hechos del alumno» para la siguiente llamada.
+4. **Lumo que habla** (2D con 6 bocas, ~80 KB) junto a los 10 tutores 3D (se conservan, 1,1–1,4 MB).
+5. **HeyGen**: sigue sin usarse para la conversación (LiveAvatar no admite personajes de dibujos); útil para vídeos pre-renderizados.
+
+## Pendiente / ideas
+
+- Parpadeo y más expresiones de Lumo (ojos cerrados, cejas) si se dibujan los activos con el mismo lienzo.
+- Lumo en Android: el chat nativo podría mostrar las bocas con la voz (hoy la videollamada es solo web).
+- Voz a voz en tiempo real (Gemini Live ≈ $0,012/min, gpt-realtime mini ≈ $0,02–0,05/min) si se quiere bajar de ~1 s.
+- Recalibrar `BANDAS_TIPICAS` (lumo.js) con más voces; `?depurar` guarda las bandas en `window.__bandas`.

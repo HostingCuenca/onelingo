@@ -230,3 +230,21 @@ Fecha: 2026-09-30 · Responsable: Claude (Claude Code). Detalle y plan: `TUTOR_A
 Pruebas: 194 Flutter (1 omitida); navegador (build local y producción): galería, videollamada integrada, carga del modelo, boca con audio.
 Backups: `/var/www/onelingo/backups/20260930-edu-1{6,7,8,9}-*/web-anterior` (cada uno = el anterior). Health 200 en todos; `.env` igual; lock liberado.
 Rollback (a edu-15): `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20260930-edu-16-tutor-fluido/web-retirada-post && cp -al backups/20260930-edu-16-tutor-fluido/web-anterior web'`
+
+## Release: 20261001-edu-20-tutores-v2
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Autorizado por el cliente: cambio de servidor y reinicio del backend. Detalle: `TUTOR_AVATAR_V2.md` (Fase 2).
+Contenido:
+- **Lumo que habla** (2D, base sin boca + 6 bocas de `assets/img/mascotas/lumo-habla`, regeneradas a 720 px desde las maestras; ~80 KB): tutor destacado en «Tutores con IA», voz Jessica (ElevenLabs), boca por energía de bandas normalizada (A/E/O/U/M), inclinación leve al pensar, sin rebotes.
+- **Voz frase a frase**: el backend emite `frase` por cada frase terminada; el visor reproduce la primera en streaming y precarga las siguientes. Medido con el proveedor real: primera frase 0,76–1,5 s frente a respuesta completa 1,0–1,8 s.
+- **Pedagogía**: personalidades distintas para los 10 tutores 3D + Lumo; prompt en tres capas (personaje · diseño pedagógico · alumno) con reglas de videollamada (reacción breve primero, corrección por reformulación natural, 2–3 frases); tarjetas de corrección, ideas para responder, traducción a demanda; «Terminar llamada» → resumen (logros, a mejorar, vocabulario, siguiente paso) guardado como `eventos.resumen_tutor` y usado al abrir la siguiente llamada («hechos del alumno»). Nuevo endpoint `POST /chat/resumen`; evento SSE `frase` (Flutter lo ignora: compatible).
+- **Modelos 3D** 1,6–2,2 → 1,1–1,4 MB (0,75–1,0 MB con gzip), mismas 32 expresiones; mirada (arriba al pensar), encuadre con la cabeza completa, boca 3D con bandas normalizadas.
+- **Arreglos**: «Enviar mensaje» quedaba desactivado (un comentario se tragaba `stage.dataset.loaded`); sin sesión la videollamada pide iniciarla.
+- **Servidor (Apache, vhost OneLingo)**: compresión para JS, WASM, GLB, fuentes, SVG y JSON (el `AddOutputFilterByType` del vhost anulaba el global); tipo `image/webp`; caché: modelos/retratos/Lumo versionados 1 año `immutable`, vendor 30 días, imágenes y fuentes 1 día, JSON y JS del visor `no-cache`. `main.dart.js` 4,16 → 1,22 MB en la red; GLB de Amara 2,2 → 0,99 MB; three.js 603 → 118 KB. `configtest` OK y `reload` (sin reinicio).
+Commits: `2f16716`, `0ed0ee3` · Build: `main.dart.js` `05ef68d8…`.
+Pruebas: 194 Flutter (1 omitida); backend 15 (`tutor-frases.test.ts` nuevo) + `tsc` en staging del servidor; navegador (build local): Lumo carga y cambia de boca con audio (A 32 %, E 27 %, M 25 %, O 10 %, U 6 %; ~7,6 cambios/s), flujo simulado completo (frases en cola, tarjetas, ideas, resumen), Amara con modelo comprimido = mismo encuadre que el original; producción: cabeceras de compresión/caché, galería con Lumo, visor sin sesión; proveedor real en el servidor: frases, correcciones, voz de Lumo y resumen.
+Backups: `/var/www/onelingo/backups/20261001-edu-20-tutores-v2/` (`web-anterior` = edu-19, `backend-src` = 5 archivos previos, `apache-onelingo-le-ssl.conf`). Backend reiniciado 2 veces (`pm2 restart onelingo-api`; la 2.ª para el ajuste de correcciones); salud OK; `.env` igual; lock liberado.
+Rollback:
+```
+ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-20-tutores-v2; mv web staging/20261001-edu-20-tutores-v2/web-retirada-post && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api; R=$(readlink -f /etc/apache2/sites-enabled/onelingo.hostingcuenca.com-le-ssl.conf); cp -a $B/apache-onelingo-le-ssl.conf "$R" && apache2ctl configtest && systemctl reload apache2'
+```

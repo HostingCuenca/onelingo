@@ -53,9 +53,9 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Producción
 
-- Versión desplegada: `20260930-edu-19-tutores-ia` · `main.dart.js` `a03d7333…`; biblioteca `0d281c1b…`; banco diagnóstico `16c0c6a5…`; backend sin cambios desde `edu-2`.
-- Fecha: 2026-09-30
+- Versión desplegada: `20261001-edu-20-tutores-v2` · `main.dart.js` `05ef68d8…`; backend: 5 archivos del tutor (`ia.ts`, `ia_openai.ts`, `situaciones.ts`, `voz.ts`, `routes/chat.ts`); Apache con compresión y caché (vhost de OneLingo).
+- Fecha: 2026-10-01
 - URL: https://onelingo.hostingcuenca.com
 - Estado de salud: `/api/salud` OK.
-- Respaldo: `/var/www/onelingo/backups/20260930-edu-19-tutores-ia/web-anterior`
-- Rollback: ver `DESPLIEGUES.md`; restauración web completa, sin reinicio de backend.
+- Respaldo: `/var/www/onelingo/backups/20261001-edu-20-tutores-v2/` (`web-anterior`, `backend-src`, `apache-onelingo-le-ssl.conf`).
+- Rollback: ver `DESPLIEGUES.md` (web, backend con `pm2 restart` y vhost con `reload`).

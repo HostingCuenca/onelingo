@@ -76,11 +76,11 @@
 
 ## Tutor/avatar
 
-- [ ] Medir latencia STT, LLM y TTS en un turno real y guardar trazas de servidor/cliente.
-- [ ] Pilotar un avatar humano 2D Rive reutilizable con estados y visemas temporizados.
+- [x] Medir latencia STT, LLM y TTS en un turno real (logs `chat_primera_frase`, `chat_reply_ready`, `voz_first_chunk`; cliente `audio.dataset.*`). edu-20.
+- [x] Lumo 2D que habla (6 bocas por bandas de audio, estados pensar/escuchar) en lugar de Rive. edu-20.
 - [ ] Resolver alineación fonética de ElevenLabs por idioma antes de declarar lip-sync.
-- [ ] Mantener un botón explícito de detener grabación además del corte a 3 s de silencio.
-- [ ] Conectar tutor, unidad, vocabulario, gramática y errores recientes del alumno.
+- [x] Botón Terminar además del corte por silencio (1,2 s). edu-16.
+- [x] Tutor con unidad, vocabulario, camino del alumno, turnos previos y «hechos del alumno» (resumen al terminar). edu-20.
 - [ ] Decidir la experiencia Android; hoy el 3D solo funciona en web.
 
 ## Android y release
