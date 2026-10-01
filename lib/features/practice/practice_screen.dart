@@ -5,8 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../app/theme.dart';
 import '../../shared/widgets/daily_activities.dart';
 import '../../shared/widgets/mascot_coach.dart';
+import '../../core/aprendizaje/providers.dart';
 import '../../core/content/catalog.dart';
-import '../../core/content/curriculum.dart';
+import '../../core/content/situaciones.dart';
 import '../../core/content/fotos.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -27,6 +28,15 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
   Widget build(BuildContext context) {
     final s = ref.watch(progressProvider);
     final t = tutor(s.tutorId);
+    final tramo = Tramo.deNivel(ref.watch(nivelAlumnoProvider));
+    final contenido = ref
+        .watch(situacionesProvider(s.idiomaMeta))
+        .valueOrNull;
+    EstadoTramo? estado(int id) {
+      final c = contenido?[id];
+      return c == null ? null : estadoTramo(s.practicas, s.idiomaMeta, c, tramo);
+    }
+
     final categorias = [
       'Todas',
       ...{for (final x in situaciones) x.categoria},
@@ -162,7 +172,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
           const SizedBox(height: 20),
           const TituloSeccion('50 situaciones'),
           Text(
-            'Nivel ${s.nivelActual} · ${nivel(s.nivelActual).nombre}',
+            'Tu tramo: ${tramo.nombre} · ${tramo.niveles}',
             style: const TextStyle(
               fontSize: 14,
               color: OL.morado,
@@ -171,7 +181,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
           ),
           const SizedBox(height: 4),
           const Text(
-            'Cada situación se adapta a tu nivel: no es lo mismo pedir en un restaurante en Nivel 1 que en Nivel 10.',
+            'Cada situación tiene tres tramos: Básico, Intermedio y Avanzado. Ves el de tu nivel y puedes repasar los anteriores.',
             style: TextStyle(color: OL.gris, fontSize: 14, height: 1.4),
           ),
           const SizedBox(height: 12),
@@ -259,31 +269,21 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                                             relleno: true,
                                           ),
                                         ),
-                                        Positioned(
-                                          right: 8,
-                                          top: 8,
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 7,
-                                              vertical: 2,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.black.withValues(
-                                                alpha: 0.45,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(99),
-                                            ),
-                                            child: Text(
-                                              '${x.id}',
-                                              style: const TextStyle(
+                                        if (estado(x.id)?.completado ??
+                                            false)
+                                          const Positioned(
+                                            right: 8,
+                                            top: 8,
+                                            child: CircleAvatar(
+                                              radius: 14,
+                                              backgroundColor: OL.verde,
+                                              child: Icon(
+                                                Icons.check_rounded,
                                                 color: OL.blanco,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w800,
+                                                size: 18,
                                               ),
                                             ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ),
@@ -306,7 +306,9 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                                           ),
                                         ),
                                         Text(
-                                          x.categoria,
+                                          estado(x.id)?.empezado ?? false
+                                              ? '${x.categoria} · ${(estado(x.id)!.progreso * 100).round()} %'
+                                              : x.categoria,
                                           style: const TextStyle(
                                             color: OL.gris,
                                             fontSize: 14,

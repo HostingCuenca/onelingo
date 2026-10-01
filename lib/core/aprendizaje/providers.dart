@@ -189,3 +189,26 @@ class RegistroRuta {
 }
 
 final registroRutaProvider = Provider<RegistroRuta>(RegistroRuta.new);
+
+/// Nivel del curso en que está el alumno (1–10): el de su ubicación o el
+/// siguiente al último nivel superado (clases o prueba), lo que sea mayor.
+/// Es el que usan situaciones y biblioteca; nunca lo elige el alumno.
+final nivelAlumnoProvider = Provider<int>((ref) {
+  final s = ref.watch(progressProvider);
+  final ruta = ref.watch(rutaProvider(s.idiomaMeta)).valueOrNull;
+  var n = ruta?.curso.usaEscalaCliente ?? false ? s.nivelCliente : s.nivelActual;
+  if (ruta != null) {
+    final e = estadosAlumno(ruta, s);
+    for (final nv in ruta.curso.niveles) {
+      final interno = nv.nivelInterno;
+      if (interno != null &&
+          interno >= 1 &&
+          interno + 1 > n &&
+          ruta.delNivel(nv.id).isNotEmpty &&
+          nivelSuperado(ruta, e, s.practicas, nv.id)) {
+        n = interno + 1;
+      }
+    }
+  }
+  return n.clamp(1, 10);
+});

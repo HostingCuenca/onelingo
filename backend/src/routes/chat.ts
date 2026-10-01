@@ -1,7 +1,7 @@
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { PassThrough } from 'node:stream';
 import { z } from 'zod';
-import { contextoSituacion, unidades } from '../lib/situaciones.js';
+import { contextoSituacion, objetivoValido } from '../lib/situaciones.js';
 import { query } from '../lib/db.js';
 import { iaDisponible, responder, resumirSesion } from '../lib/ia.js';
 import { openaiDisponible, transcribirOpenAI } from '../lib/ia_openai.js';
@@ -16,7 +16,7 @@ const EsquemaChat = z.object({
 type DatosChat = z.infer<typeof EsquemaChat>;
 
 const objetivoInvalido = (d: DatosChat) =>
-  !!d.objetivoId && (d.idiomaMeta !== 'en' || !unidades.find(u => u.id === d.situacionId)?.objetivos.some(o => o.id === d.objetivoId));
+  !!d.objetivoId && !objetivoValido(d.idiomaMeta, d.situacionId, d.objetivoId);
 
 async function guardarTurno(s: Sesion, d: DatosChat, r: Awaited<ReturnType<typeof responder>>) {
   const ultimo = [...d.historial].reverse().find(t => t.rol === 'alumno')?.texto ?? '';

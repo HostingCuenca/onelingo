@@ -14,11 +14,20 @@ import 'tutores_3d.dart';
 
 /// Same-origin isolated viewer; credentials stay in memory and never in URLs.
 class AvatarScreen extends ConsumerStatefulWidget {
-  const AvatarScreen({super.key, required this.tutorId});
+  const AvatarScreen({
+    super.key,
+    required this.tutorId,
+    this.tema,
+    this.objetivoId,
+  });
 
   /// Tutor elegido en «Tutores con IA»: el visor se abre integrado (sin su
   /// galería ni cabecera propias) y directamente con este tutor.
   final String tutorId;
+
+  /// Situación y objetivo con que empieza la llamada (desde una situación).
+  final int? tema;
+  final String? objetivoId;
   @override
   ConsumerState<AvatarScreen> createState() => _AvatarScreenState();
 }
@@ -34,7 +43,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
     frame = web.HTMLIFrameElement()
       ..src = Uri.base
           .resolve(
-            '/avatar/index.html?v=avatar28&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
+            '/avatar/index.html?v=avatar29&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
           )
           .toString()
       ..title = 'Practica con un tutor de IA'
@@ -63,6 +72,8 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
           'nivel': s.nivelActual.clamp(1, 10),
           'idiomaMeta': s.idiomaMeta,
           'idiomaNativo': s.idiomaNativo,
+          'tema': ?widget.tema,
+          'objetivoId': ?widget.objetivoId,
           'contexto':
               'Sectores: ${s.sectores.join(', ')}. Objetivos: ${s.objetivos.join(', ')}. '
               'Prioridades de aprendizaje: ${RutaBiblioteca.prioridades(s.diagnostico, s.practicas).take(3).join(', ')}. '

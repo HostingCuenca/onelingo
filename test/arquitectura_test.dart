@@ -63,9 +63,13 @@ void main() {
       'lib/shared/widgets/learning_path.dart',
       'lib/shared/widgets/learning_primer.dart',
       'lib/core/content/foundations.dart',
+      // Fase C: las situaciones tienen una sola fuente (SITUACIONES_V2.md).
+      'lib/core/content/situation_units.dart',
+      'assets/contenido/en/situational_vocabulary.json',
+      'backend/src/content/situational-vocabulary-en.json',
     ];
     for (final r in retiradas) {
-      expect(File(r).existsSync(), isFalse, reason: '$r se retiró en A');
+      expect(File(r).existsSync(), isFalse, reason: '$r se retiró');
     }
   });
 

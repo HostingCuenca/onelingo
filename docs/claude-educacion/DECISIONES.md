@@ -228,3 +228,14 @@ Decisión:
 - Toda pantalla de ejercicios usa `BotonPrincipal` fijo, `OpcionRespuesta` y `FeedbackDock`, y no muestra jerga interna.
 - `test/arquitectura_test.dart` vigila estas reglas.
 Referencia: `docs/ARQUITECTURA_VIGENTE.md`.
+
+## DEC-028 — Situaciones v2: las mismas 50 en tres tramos
+Fecha: 2026-10-01 · Acordado con el cliente («vocabulario por nivel y vinculado a las situaciones»).
+Decisión:
+- Cada situación tiene **tres tramos**: Básico (N1–3), Intermedio (N4–6) y Avanzado (N7–10). Cada uno con 3 objetivos, 10 palabras con ejemplo, 4 frases útiles y una prueba de 10 preguntas (80 % para aprobar).
+- El tramo sale del nivel del alumno (`nivelAlumnoProvider`). Los inferiores quedan abiertos y los superiores, bloqueados.
+- **Completado** = prueba aprobada + al menos un objetivo practicado con el tutor.
+- Cada objetivo se practica por chat o en videollamada (Lumo), ya situado en su tema y objetivo.
+- Fuente única con copias generadas; inglés general americano.
+- Los objetivos del básico conservan sus ids (`s<id>-o1..o3`). Los nuevos son `s<id>-i*` y `s<id>-a*`.
+Motivo: antes la situación era igual en N1 y en N10, no tenía progreso, la prueba no terminaba y la lista existía en cuatro copias a mano.

@@ -6,8 +6,7 @@ import 'package:http/http.dart' as http;
 import '../../app/theme.dart';
 import '../../core/biblioteca.dart';
 import '../../core/conexion.dart';
-import '../situations/situation_screen.dart';
-import '../../core/content/situation_units.dart';
+import '../../core/content/situaciones.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/fotos.dart';
 import '../../core/api/sync.dart';
@@ -522,14 +521,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           if (widget.objetivoId != null)
                             Text(
                               ref
-                                      .watch(situationUnitsProvider)
-                                      .asData
-                                      ?.value
-                                      .where((u) => u.id == sit?.id)
-                                      .expand((u) => u.objectives)
-                                      .where((o) => o.id == widget.objetivoId)
-                                      .firstOrNull
-                                      ?.title ??
+                                      .watch(situacionesProvider(_idm))
+                                      .valueOrNull?[sit?.id]
+                                      ?.objetivo(widget.objetivoId!)
+                                      ?.titulo ??
                                   'Preparando tu objetivo',
                               style: const TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -539,18 +534,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       ),
                     ),
                   ],
-                ),
-              ),
-            if (sit != null &&
-                _idm == 'en' &&
-                MediaQuery.viewInsetsOf(context).bottom == 0)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SituationSections(
-                  selected: widget.modo == 'prueba' ? 3 : 2,
-                  onSelected: (i) {
-                    context.pushReplacement('/situacion/${sit!.id}?seccion=$i');
-                  },
                 ),
               ),
             if (escuchando || transcribiendo)

@@ -9,9 +9,15 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 ## Trabajando ahora
 
 - Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).
-- Siguiente: **C, situaciones v2** (50 situaciones × 3 tramos).
+- Siguiente: **D, léxico único**, con «Mis palabras» y «Mis verbos».
 
 ## Terminado recientemente
+
+- **Fase C, situaciones v2 (2026-10-01, DEC-028):**
+  - Las 50 situaciones × 3 tramos: 450 objetivos, 1.500 palabras y 600 frases, con autoría y revisión independiente GO por lote.
+  - Pantalla nueva con selector de tramo, avance, objetivos (chat y videollamada), palabras, frases y la prueba de 10 preguntas.
+  - Las tarjetas de Practicar muestran el avance.
+  - Fuente única con generador; el servidor responde con el tramo del alumno.
 
 - **Fases A y B (2026-10-01, DEC-026/027):**
   - Estética unificada: tema para `FilledButton`; `BotonPrincipal` fijo, `OpcionRespuesta` y `FeedbackDock` en lecturas, escuchas, gramática, lecciones, examen y prueba antigua.

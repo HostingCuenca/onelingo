@@ -1,14 +1,41 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { query } from './db.js';
 
-type Unit = { id: number; nombre: string; vocabulario: { en: string; es: string }[]; objetivos: { id: string; titulo: string; frase: string; traduccion: string }[] };
-export const unidades: Unit[] = JSON.parse(readFileSync(new URL('../content/situaciones-en.json', import.meta.url), 'utf8'));
-type Lexicon = { situacionId: number; vocabulary: { en: string; es: string; example: string; nivelInicial: number }[]; patterns: { template: string; translation: string; examples: { en: string; es: string }[] }[] };
-export const lexicoSituaciones: Lexicon[] = JSON.parse(readFileSync(new URL('../content/situational-vocabulary-en.json', import.meta.url), 'utf8')).situations;
-export function materialSituacion(id: number): string {
-  const lexicon = lexicoSituaciones.find(s => s.situacionId === id);
-  if (!lexicon) return '';
-  return `Material de enseñanza disponible (no lo recites todo): ${JSON.stringify({ vocabulario: lexicon.vocabulary, estructuras: lexicon.patterns })}. Selecciona una o dos expresiones adecuadas al objetivo activo y al nivel; enseña con un ejemplo breve antes de pedir producción propia cuando el alumno lo necesite.`;
+// Situaciones v2 (docs/claude-educacion/SITUACIONES_V2.md). Copia generada por
+// tools/contenido/generar_situaciones.py desde assets/contenido/<idioma>/situaciones.json.
+export type Tramo = 'basico' | 'intermedio' | 'avanzado';
+type Objetivo = { id: string; titulo: string; frase: string; traduccion: string };
+type ContenidoTramo = { objetivos: Objetivo[]; vocabulario: { en: string; es: string; ejemplo: string }[]; frases: { en: string; es: string }[] };
+export type Situacion = { id: number; nombre: string; tramos: Record<Tramo, ContenidoTramo> };
+
+const cache = new Map<string, Situacion[]>();
+/** Situaciones de un idioma ([] si aún no tiene contenido). */
+export function situacionesDe(idioma: string): Situacion[] {
+  if (!/^[a-z]{2}$/.test(idioma)) return [];
+  if (!cache.has(idioma)) {
+    const url = new URL(`../content/situaciones-${idioma}.json`, import.meta.url);
+    cache.set(idioma, existsSync(url) ? JSON.parse(readFileSync(url, 'utf8')).situaciones : []);
+  }
+  return cache.get(idioma)!;
+}
+
+/** Tramo del nivel del curso: N1–3 básico, N4–6 intermedio, N7–10 avanzado. */
+export const tramoDeNivel = (nivel: number): Tramo => nivel >= 7 ? 'avanzado' : nivel >= 4 ? 'intermedio' : 'basico';
+const NOMBRE_TRAMO: Record<Tramo, string> = { basico: 'básico (A1–B1 inicial)', intermedio: 'intermedio (B1–B2)', avanzado: 'avanzado (B2 alto–C1)' };
+
+/** Tramo al que pertenece un objetivo de la situación (undefined si no es suyo). */
+export function tramoDeObjetivo(s: Situacion, objetivoId: string): Tramo | undefined {
+  return (Object.keys(s.tramos) as Tramo[]).find(t => s.tramos[t].objetivos.some(o => o.id === objetivoId));
+}
+
+export function objetivoValido(idioma: string, situacionId: number | undefined, objetivoId: string): boolean {
+  const s = situacionesDe(idioma).find(x => x.id === situacionId);
+  return !!s && !!tramoDeObjetivo(s, objetivoId);
+}
+
+export function materialSituacion(s: Situacion, tramo: Tramo): string {
+  const t = s.tramos[tramo];
+  return `Material de enseñanza del tramo ${NOMBRE_TRAMO[tramo]} (no lo recites todo): ${JSON.stringify({ vocabulario: t.vocabulario, frases: t.frases })}. Selecciona una o dos expresiones adecuadas al objetivo activo y al nivel; enseña con un ejemplo breve antes de pedir producción propia cuando el alumno lo necesite.`;
 }
 const text = (value: unknown, max = 300) => typeof value === 'string' ? value.slice(0, max) : '';
 
@@ -26,10 +53,12 @@ export function resumirCamino(state: any, idioma: string, situacionId?: number):
     evidencias: evidence.slice(0, 4).map(e => ({ objetivo: text(e.objetivoId), tipo: text(e.tipo), fecha: text(e.fecha), asistida: e.asistida === true || e.conApoyo === true || e.tipo === 'comprobacion_guiada' || e.tipo === 'practica_guiada', resultado: typeof e.correcta === 'boolean' ? e.correcta : undefined, feedback: text(e.feedback, 500) })),
   }).slice(0, 3500);
 }
-export async function contextoSituacion(userId: string, d: { idiomaMeta: string; situacionId?: number; objetivoId?: string; modo?: string; historial: { rol: string }[] }): Promise<string> {
-  const unit = d.idiomaMeta === 'en' ? unidades.find(u => u.id === d.situacionId) : undefined;
-  const objective = unit?.objetivos.find(o => o.id === d.objetivoId);
-  if (d.objetivoId && !objective) throw new Error('objetivo_invalido');
+export async function contextoSituacion(userId: string, d: { idiomaMeta: string; nivel?: number; situacionId?: number; objetivoId?: string; modo?: string; historial: { rol: string }[] }): Promise<string> {
+  const unit = situacionesDe(d.idiomaMeta).find(u => u.id === d.situacionId);
+  const tramoObjetivo = unit && d.objetivoId ? tramoDeObjetivo(unit, d.objetivoId) : undefined;
+  if (d.objetivoId && !tramoObjetivo) throw new Error('objetivo_invalido');
+  const tramo = tramoObjetivo ?? tramoDeNivel(d.nivel ?? 1);
+  const objective = tramoObjetivo ? unit!.tramos[tramo].objetivos.find(o => o.id === d.objetivoId) : undefined;
   const abriendo = d.historial.filter(t => t.rol === 'alumno').length <= 1;
   const [states, previous, resumenes] = await Promise.all([
     query('SELECT estado FROM progreso WHERE usuario_id = $1', [userId]),
@@ -41,8 +70,8 @@ export async function contextoSituacion(userId: string, d: { idiomaMeta: string;
     !abriendo ? Promise.resolve([]) : query("SELECT datos, fecha FROM eventos WHERE usuario_id = $1 AND tipo = 'resumen_tutor' AND datos->>'idioma' = $2 ORDER BY fecha DESC LIMIT 3", [userId, d.idiomaMeta]),
   ]);
   return [
-    unit ? `Unidad curricular: ${unit.nombre}. Objetivos disponibles: ${unit.objetivos.map(o => `${o.id}: ${o.titulo}`).join('; ')}. Vocabulario inicial: ${unit.vocabulario.map(w => w.en).join(', ')}.` : '',
-    unit ? materialSituacion(unit.id) : '',
+    unit ? `Situación: ${unit.nombre}, tramo ${NOMBRE_TRAMO[tramo]}. Objetivos del tramo: ${unit.tramos[tramo].objetivos.map(o => `${o.id}: ${o.titulo}`).join('; ')}.` : '',
+    unit ? materialSituacion(unit, tramo) : '',
     objective ? `Objetivo activo: ${objective.titulo}. Ejemplo de enseñanza: ${objective.frase}. No exijas copiarlo: acepta otras formas correctas. Empieza DIRECTAMENTE en este objetivo y da por resueltos los pasos previos. No hagas preguntas de otro objetivo: si se trata de pedir o modificar un plato, pregunta qué desea pedir o cambiar, no cuántas personas necesitan mesa. El historial anterior no debe reiniciar etapas previas.` : '',
     d.modo === 'prueba' ? 'Modo prueba comunicativa: plantea una tarea concreta del objetivo activo, una pregunta por turno, sin dar la respuesta ni traducir antes del intento. Da feedback después y varía la siguiente tarea. No emitas un certificado, nivel nuevo ni una puntuación global.' : 'Modo práctica: parte del objetivo activo, ofrece andamiaje breve cuando haga falta y avanza de ejemplo a producción propia. Si hay dificultades guardadas, vuelve a comprobarlas con un ejemplo distinto.',
     'Adapta la complejidad al nivel y a la evidencia reciente. Un turno sin correcciones no demuestra dominio. El texto transcrito NO permite medir pronunciación ni demostrar listening. No inventes logros ni unidades completadas. En situaciones médicas, legales o emergencias practica el idioma, no des indicaciones profesionales.',

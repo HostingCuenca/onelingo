@@ -10,11 +10,11 @@ const $ = id => document.getElementById(id), audio = $('audio');
 // aviso llegaba antes que topics.json, el saludo fallaba en silencio.
 const [roster, units] = await Promise.all([
   fetch('./roster.json?v=23').then(r => r.json()),
-  fetch('./topics.json?v=25').then(r => r.json()),
+  fetch('./topics.json?v=26').then(r => r.json()),
 ]);
 
 let config = null, tutor = null, avatar = null, history = [], epoch = 0, selection = 0, busy = false, controller = null;
-let lastReply = '', ultimoFallo = null, temaId = null, enLlamada = false, inicioLlamada = 0, reloj = null, correcciones = 0;
+let lastReply = '', ultimoFallo = null, temaId = null, objetivoId = null, enLlamada = false, inicioLlamada = 0, reloj = null, correcciones = 0;
 // Voz: cada frase se descarga como MP3 (con su envolvente para la boca) y
 // suena en orden por un <audio> normal. Sin WebAudio: en iPhone, al abrir el
 // micrófono el AudioContext cambiaba de frecuencia y la voz se entrecortaba.
@@ -59,6 +59,9 @@ window.addEventListener('message', event => {
     const u = new URL(c.api);
     if (u.origin !== location.origin && !['127.0.0.1', 'localhost'].includes(u.hostname)) return;
     config = c;
+    // Abierta desde una situación: empieza con su tema y objetivo.
+    const temaInicial = units.find(x => x.id === c.tema);
+    if (temaInicial) { temaId = temaInicial.id; objetivoId = c.objetivoId || null; $('temaNombre').textContent = temaInicial.nombre; }
     $('authStatus').textContent = c.token ? `Nivel ${c.nivel} · tutores para practicar ${languageName()}` : 'Inicia sesión en OneLingo para conversar con los tutores.';
     $('text').placeholder = `Escribe en ${languageName()}…`;
     if (!embebido) renderGallery();
@@ -340,7 +343,7 @@ async function requestTutor(entrada, opening = false) {
   const current = controller, timeout = setTimeout(() => current.abort(), 45000);
   try {
     const u = units.find(x => x.id === temaId);
-    const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {})};
+    const datos = {idiomaMeta: language(), idiomaNativo: config.idiomaNativo, nivel: config.nivel, tutorId: 'avatar_' + tutor.id, historial: history.slice(-30), objetivo: config.contexto, ...(u ? {situacionId: u.id, situacion: u.nombre} : {}), ...(u && objetivoId ? {objetivoId} : {})};
     let response;
     if (entrada?.audio) {
       const form = new FormData();
@@ -517,7 +520,7 @@ function pintarTemas() {
 function elegirTema(u) {
   $('panel').hidden = true;
   if (u.id === temaId) return;
-  temaId = u.id; $('temaNombre').textContent = u.nombre;
+  temaId = u.id; objetivoId = null; $('temaNombre').textContent = u.nombre;
   stop(); if (grab) cancelarGrabacion();
   history = []; lastReply = ''; limpiarTurno();
   burbuja(`Nuevo tema: ${u.nombre}`, 'feedback');

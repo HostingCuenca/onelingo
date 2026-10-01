@@ -13,6 +13,8 @@ import '../features/library/grammar_screen.dart';
 import '../features/library/learning_unit_screen.dart';
 import '../features/chat/chat_screen.dart';
 import '../features/avatar/avatar_screen.dart';
+import '../core/content/situaciones.dart';
+import '../features/situations/prueba_situacion_screen.dart';
 import '../features/situations/situation_screen.dart';
 import '../features/course/level_screen.dart';
 import '../features/course/levels_screen.dart';
@@ -193,10 +195,21 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: '/situacion/:id',
                 builder: (_, s) => SituationScreen(
-                  id: int.tryParse(s.pathParameters['id'] ?? '') ?? 0,
-                  section:
-                      int.tryParse(s.uri.queryParameters['seccion'] ?? '') ?? 0,
+                  id: int.tryParse(s.pathParameters['id'] ?? '') ?? 1,
                 ),
+                routes: [
+                  // Prueba de un tramo (?tramo=basico|intermedio|avanzado).
+                  GoRoute(
+                    path: 'prueba',
+                    builder: (_, s) => PruebaSituacionScreen(
+                      id: int.tryParse(s.pathParameters['id'] ?? '') ?? 1,
+                      tramo: Tramo.values.firstWhere(
+                        (t) => t.name == s.uri.queryParameters['tramo'],
+                        orElse: () => Tramo.basico,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: '/chat',
@@ -214,8 +227,12 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(path: '/avatar', redirect: (_, _) => '/tutores'),
               GoRoute(
                 path: '/avatar/:id',
-                builder: (_, s) =>
-                    AvatarScreen(tutorId: s.pathParameters['id'] ?? 'amara'),
+                // ?tema=<situación>&objetivo=<id>: la llamada empieza ahí.
+                builder: (_, s) => AvatarScreen(
+                  tutorId: s.pathParameters['id'] ?? 'amara',
+                  tema: int.tryParse(s.uri.queryParameters['tema'] ?? ''),
+                  objetivoId: s.uri.queryParameters['objetivo'],
+                ),
               ),
               GoRoute(
                 path: '/tutores',

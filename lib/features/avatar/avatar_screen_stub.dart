@@ -4,8 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'tutores_3d.dart';
 
 class AvatarScreen extends StatelessWidget {
-  const AvatarScreen({super.key, required this.tutorId});
+  const AvatarScreen({
+    super.key,
+    required this.tutorId,
+    this.tema,
+    this.objetivoId,
+  });
   final String tutorId;
+  final int? tema;
+  final String? objetivoId;
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(tutor3d(tutorId)?.nombre ?? 'Tutor con IA')),
