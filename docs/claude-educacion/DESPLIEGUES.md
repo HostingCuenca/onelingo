@@ -248,3 +248,13 @@ Rollback:
 ```
 ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-20-tutores-v2; mv web staging/20261001-edu-20-tutores-v2/web-retirada-post && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api; R=$(readlink -f /etc/apache2/sites-enabled/onelingo.hostingcuenca.com-le-ssl.conf); cp -a $B/apache-onelingo-le-ssl.conf "$R" && apache2ctl configtest && systemctl reload apache2'
 ```
+
+## Release: 20261001-edu-21-llamada
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code).
+Causa del «Cargando Lumo…» infinito (iPhone, iOS 18.7, visto en el log de Apache: cargaba el visor pero nunca pedía las imágenes ni `/api/chat`): el visor esperaba `AudioContext.resume()`, que en iOS (y en navegadores con autoplay bloqueado) no se resuelve sin un toque dentro del propio iframe; el toque en la tarjeta de Flutter no cuenta. Afectaba también a los tutores 3D.
+Contenido: la carga ya no espera al audio; botón «Llamar a <tutor>» (el toque desbloquea audio, `<audio>` con un WAV silencioso y micrófono); el personaje y el saludo (texto + voz por frases) se preparan antes y contesta al instante; manos libres como Duolingo Video Call / modo voz de ChatGPT: micrófono abierto toda la llamada, escucha al terminar el tutor, pausa de 1,2 s = enviar, 15 s sin hablar = deja de escuchar; tocar al tutor lo interrumpe; silenciar y colgar (resumen); la galería oculta ya no se dibuja en modo integrado. Solo web (backend y Apache sin cambios).
+Commit: `41ab9b9` · Build: `main.dart.js` `731da52f…`.
+Pruebas: navegador (build local) con `resume()` bloqueado hasta el toque (simulación de iOS) y micrófono simulado: Lumo carga y el saludo queda precargado sin sonar; al tocar «Llamar» habla al instante; escucha sola; habla + pausa → transcribe, envía y Lumo responde; tocar interrumpe; colgar muestra el resumen. `flutter analyze` sin incidencias.
+Backup: `/var/www/onelingo/backups/20261001-edu-21-llamada/web-anterior` (= edu-20). Health 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-21-llamada/web-retirada-post && cp -al backups/20261001-edu-21-llamada/web-anterior web'`
