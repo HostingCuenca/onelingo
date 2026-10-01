@@ -1,6 +1,6 @@
 # Nivel 0 de inglés: leer y pronunciar desde cero
 
-Estado: **propuesta para aprobación** · Fecha: 2026-10-01 · Responsable: Claude.
+Estado: **aprobado y en producción (unidades 1–3, release edu-25)** · Fecha: 2026-10-01 · Responsable: Claude.
 Investigación completa con fuentes: `investigacion/ingles-nivel0-fonetica.md`.
 
 ## 1. Por qué
@@ -108,7 +108,11 @@ Cada sonido de vocal tiene **una imagen ancla y un color**. Las letras de la pal
 
 **Las mismas piezas sirven para francés** (letras mudas, nasales, liaison): se construyen una vez.
 
-## 7. Decisiones pendientes
+## 7. Decisiones del cliente (2026-10-01)
+
+Nivel 0 nuevo antes de Fundamentos · Mapa de Sonidos propio · emoji y Lumo como guía · las imágenes que falten se buscan en internet con licencia que permita uso comercial (no se generan). Acento: inglés general americano. Audio de sonidos puros: pendiente; por ahora palabras clave y versión lenta.
+
+## Decisiones pendientes (histórico de la propuesta)
 
 1. **Sitio:** ¿Nivel 0 nuevo antes de Fundamentos (recomendado) o rehacer Fundamentos?
 2. **Sistema visual:** ¿Mapa de Sonidos propio (recomendado) o pedir licencia del Color Vowel Chart?

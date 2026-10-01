@@ -293,3 +293,16 @@ Commit: `31b1cf6` · Build: `main.dart.js` `9aa5892f…`.
 Pruebas: backend 18 (nueva `revisar-escritura.test.ts`) + `tsc` en staging; Flutter 197 (1 omitida; nuevas `ejercicios_dinamicos_test.dart`: variedad en todas las clases, IA acepta otra forma, sin IA si coincide); navegador: tutor y micrófono a la misma altura con texto corto y largo.
 Backup: `/var/www/onelingo/backups/20261001-edu-24-lecciones-ia/` (`web-anterior` = edu-23, `backend-src` = app.ts e ia.ts previos). Salud OK; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-24-lecciones-ia; mv web staging/20261001-edu-24-lecciones-ia/web-retirada-post && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && rm -f backend/src/routes/ejercicios.ts && pm2 restart onelingo-api'`
+
+## Release: 20261001-edu-25-nivel0
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Decisiones del cliente: Nivel 0 nuevo (no se toca Fundamentos), Mapa de Sonidos propio, emoji y Lumo como guía, imágenes buscadas en internet (no generadas).
+Contenido: **Nivel 0 · Leer y pronunciar** (inglés general americano, voz Matilda `sofia`), pista propia antes de Fundamentos que no altera la ruta ni sus reglas de léxico.
+- Contenido: `assets/contenido/en/nivel0/` → `sonidos.json` (19 sonidos de vocal con imagen ancla y color; marcas de muda, dígrafo y e mágica) y `nivel0.json` con las unidades 1–3 (12 lecciones): Hello! de oído y «una letra, varios sonidos»; el abecedario y deletrear; primeros sonidos s a t i p n m d con frases decodificables.
+- App: lector de lecciones (`lib/features/nivel0/`) con pasos escuchar, mirar, juntar sonidos (letras que se iluminan, lento → rápido), toca el sonido, pares mínimos, significado, letras, deletreo, construir con fichas, cambiar una letra, repetir con micrófono (IA compara) y leer frases tocables; panel de resultado con Lumo; botón tortuga; progreso por lección (`nivel0:en:<id>`) y desbloqueo en orden; Mapa de Sonidos; tarjeta en Aprender (inglés) y el botón de Inicio lleva al Nivel 0 a quien empezó de cero (`nivel0Pendiente`).
+- Imágenes: 44 emoji Noto (Google, Apache 2.0) en WebP, créditos en `assets/img/emoji/CREDITOS.md`.
+- Pendiente: unidades 4–14 y prueba final; audio de sonidos puros (por ahora se enseña con palabras clave y versión lenta).
+Commit: `c26422d` · Build: `main.dart.js` `3985f80e…`.
+Pruebas: Flutter 202 (1 omitida) + `nivel0_test.dart` (marcado, coherencia del contenido: sonidos, imágenes, respuestas, fichas y cambios de letra; lección completa con progreso); navegador (390×760): portada del Nivel 0, colores de apple/cake/car/about, botones Escuchar/Lento, juntar sonidos, sat/sit con panel, tarjeta en Aprender. Arreglos durante la prueba: botón Lento invisible (ancho infinito del tema en una fila), doble toque en COMPROBAR abría dos paneles y saltaba un paso, imágenes que tardaban (precarga por lección).
+Backup: `/var/www/onelingo/backups/20261001-edu-25-nivel0/web-anterior` (= edu-24). Health 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-25-nivel0/web-retirada-post && cp -al backups/20261001-edu-25-nivel0/web-anterior web'`
