@@ -53,7 +53,7 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Producción
 
-- Versión desplegada: `20261001-edu-21-llamada` · `main.dart.js` `731da52f…` (sobre edu-20); backend: 5 archivos del tutor (`ia.ts`, `ia_openai.ts`, `situaciones.ts`, `voz.ts`, `routes/chat.ts`); Apache con compresión y caché (vhost de OneLingo).
+- Versión desplegada: `20261001-edu-22-llamada-entrante` · `main.dart.js` `9e2c1d21…` (sobre edu-20); backend: 5 archivos del tutor (`ia.ts`, `ia_openai.ts`, `situaciones.ts`, `voz.ts`, `routes/chat.ts`); Apache con compresión y caché (vhost de OneLingo).
 - Fecha: 2026-10-01
 - URL: https://onelingo.hostingcuenca.com
 - Estado de salud: `/api/salud` OK.

@@ -258,3 +258,13 @@ Commit: `41ab9b9` · Build: `main.dart.js` `731da52f…`.
 Pruebas: navegador (build local) con `resume()` bloqueado hasta el toque (simulación de iOS) y micrófono simulado: Lumo carga y el saludo queda precargado sin sonar; al tocar «Llamar» habla al instante; escucha sola; habla + pausa → transcribe, envía y Lumo responde; tocar interrumpe; colgar muestra el resumen. `flutter analyze` sin incidencias.
 Backup: `/var/www/onelingo/backups/20261001-edu-21-llamada/web-anterior` (= edu-20). Health 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-21-llamada/web-retirada-post && cp -al backups/20261001-edu-21-llamada/web-anterior web'`
+
+## Release: 20261001-edu-22-llamada-entrante
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code).
+Causa de «Conectando…» que a veces no conectaba (confirmado: ninguna petición `/api/chat` llegó al backend desde el iPhone): carrera en el visor. Avisaba a la app antes de cargar `topics.json`; si el `init` llegaba antes (habitual en móvil), `requestTutor` leía `units` sin inicializar, lanzaba un error fuera del `try` y dejaba `busy=true`: el saludo nunca se pedía y la llamada esperaba para siempre.
+Contenido: roster y temas se cargan antes de avisar; `requestTutor` nunca deja `busy` colgado; el tutor empieza a hablar solo si el navegador permite audio sin toque (escritorio, Android) y, si no (iPhone), pantalla de llamada entrante «<Tutor> te está llamando · Contestar» (en lugar de «está listo» + silencio); vigilante: a los 7 s sin voz cancela y reintenta (2 veces) y luego avisa con «Volver a llamar»; carga de Lumo con `load` + `decode()` con límite (en segundo plano `decode()` podía no resolverse). Solo web.
+Commit: `625c83f` · Build: `main.dart.js` `9e2c1d21…`.
+Pruebas (navegador, build local con servidor simulado): iPhone simulado (audio bloqueado sin toque) → llamada entrante, al contestar habla al instante; audio permitido → empieza a hablar solo (1,6 s); saludo colgado → reintento a los 7 s y habla (8,9 s); pestaña oculta → Lumo carga.
+Backup: `/var/www/onelingo/backups/20261001-edu-22-llamada-entrante/web-anterior` (= edu-21). Health 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-22-llamada-entrante/web-retirada-post && cp -al backups/20261001-edu-22-llamada-entrante/web-anterior web'`
