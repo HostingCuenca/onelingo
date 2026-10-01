@@ -320,3 +320,21 @@ Commit: `20b3feb` · Build: `main.dart.js` `c5d0454a…` (servido igual).
 Pruebas: Flutter 213; análisis sin errores ni avisos. Nuevas: `arquitectura_test`, `prueba_nivel_test`, azar en `diagnostico_test`, `lectura_escucha_test`, `guias_gramatica_test`. Navegador (400×820): niveles con estado, tarjeta y prueba del nivel con botón fijo, Biblioteca → Lecturas en el nivel del alumno.
 Backup: `/var/www/onelingo/backups/20261001-edu-26-limpieza-prueba-nivel/web-anterior` (= edu-25). Salud 200; `.env` igual; APK, avatar y Nivel 0 servidos; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-26-limpieza-prueba-nivel/web-retirada-post2 && cp -al backups/20261001-edu-26-limpieza-prueba-nivel/web-anterior web'`
+
+## Release: 20261001-edu-27-situaciones-tramos
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). El cliente autorizó el reinicio de `onelingo-api` de esta release.
+Contenido: fase C (DEC-028, `SITUACIONES_V2.md`).
+- Las 50 situaciones en 3 tramos: Básico N1–3, Intermedio N4–6 y Avanzado N7–10.
+- Pantalla nueva: selector de tramo según el nivel del alumno, avance, objetivos con chat o videollamada, palabras, frases y prueba de 10 preguntas con nota.
+- La videollamada se abre en el tema y objetivo elegidos.
+- Fuente única con copias generadas.
+- Servidor: `situaciones.ts`, `chat.ts` y `situaciones-en.json` nuevos, con objetivos de los tres tramos y material del tramo; retirado `situational-vocabulary-en.json`. Se desplegaron solo esos archivos; el `config.ts` de producción no se toca.
+Commit: `b5dfe8a` · Build: `main.dart.js` `043f7b0e…`.
+Pruebas:
+- Flutter 216 (1 omitida); backend 19.
+- `tsc` en staging con el backend de producción.
+- Navegador (400×820): situación 1 en nivel 5, con Intermedio como «Tu nivel», Avanzado bloqueado y la prueba con su panel de respuesta.
+- En producción: `objetivoValido('en',1,'s1-i1')` y `('en',1,'s1-a2')` dan true; `('en',2,'s1-i1')` da false.
+Backup: `/var/www/onelingo/backups/20261001-edu-27-situaciones-tramos/` (`web-anterior` = edu-26; `backend-src` con los 4 archivos previos). Salud 200; `.env` igual; APK servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-27-situaciones-tramos; mv web staging/20261001-edu-27-situaciones-tramos/web-retirada-post2 && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api'`
