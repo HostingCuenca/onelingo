@@ -446,3 +446,13 @@ Commits: `7c33982` (FR-6), `b53e2fb` (N2) · Build: `main.dart.js` `a052b5bf…`
 Pruebas: Flutter 242 (1 omitida), con `ubicacion_idiomas_test` (azar en francés → «desde cero» ≥ 90 %); `validar_diagnostico.py --compilar` inglés sin cambios; `validar_ruta.py` y `validar_plan.py fr` 0 errores. Navegador: prueba de ubicación en francés con la interfaz en inglés («How much French do you know?», dos opciones, escucha con «7 h 45 / 8 h 45 / 8 h 15»).
 Backup: `/var/www/onelingo/backups/20261002-edu-36-frances-ubicacion-n2/web-anterior` (= edu-35). Salud 200; `.env` igual; APK servido; `diagnostico-v2.json` (fr) y `n2-b03.json` servidos; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-36-frances-ubicacion-n2/web-retirada-post2 && cp -al backups/20261002-edu-36-frances-ubicacion-n2/web-anterior web'`
+
+## Release: 20261002-edu-37-frances-n2-b4-b6
+
+Fecha: 2026-10-02 · Responsable: Claude (Claude Code). Solo web (contenido); backend sin cambios y sin reinicios.
+Contenido: francés FR-7, segunda tanda del Nivel 2.
+- N2 francés B4–B6: clases 16–30 (planes y predicciones, comparar y elegir productos, restaurante y cocina), escritas desde sus fichas y revisadas con GO.
+Commit: `0b579f4` · Build: `main.dart.js` `a052b5bf…` (sin cambios de código respecto a edu-36).
+Pruebas: Flutter 242 (1 omitida); `validar_ruta.py` y `validar_plan.py fr` 0 errores. Navegador: N2 clase 28 con la interfaz en español.
+Backup: `/var/www/onelingo/backups/20261002-edu-37-frances-n2-b4-b6/web-anterior` (= edu-36). Salud 200; `.env` igual; APK servido; `n2-b06.json` servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-37-frances-n2-b4-b6/web-retirada-post2 && cp -al backups/20261002-edu-37-frances-n2-b4-b6/web-anterior web'`
