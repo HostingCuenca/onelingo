@@ -1,20 +1,33 @@
-# Encargo: N1 francés (FR-5c), 50 clases en 10 bloques
+# Encargo: ruta francesa N1–N10, 50 clases por nivel en 10 bloques
+
+Se escribió para N1 (FR-5c, publicado) y vale para todos los niveles: donde dice N1, aplica la tabla «Por nivel».
 
 Lee antes:
-- **tus 5 fichas** en `curriculo/fr/n1.json` (`PLAN_CLASES.md`): escribe exactamente lo que dicen. No introduzcas gramática que no esté en su `introduce` ni en clases anteriores; lo que ya se vio va como repaso;
-- `PLAN_PRODUCCION.md` §2 (mapa de bloques y tema de cada clase);
+- **tus 5 fichas** en `curriculo/fr/nX.json` (y `personajes` / `hechosDelReparto` de `n1.json`, más la `nota` del nivel) (`PLAN_CLASES.md`): escribe exactamente lo que dicen. No introduzcas gramática que no esté en su `introduce` ni en clases anteriores; lo que ya se vio va como repaso;
 - `PLAN_FRANCES.md` §3–§4 (pistas y anatomía de clase);
 - `ESQUEMA_CONTENIDO.md` (esquema 2: unidad, pasos, ítems y reglas);
-- `assets/contenido/fr/ruta/a1-1.json` como modelo de estilo. Sus 9 unidades pueden reutilizarse en B1–B3.
+- como modelo de estilo, las clases publicadas del nivel anterior (`assets/contenido/fr/ruta/`) y sus `revision-*.md`.
+
+## Por nivel
+
+| Nivel | cefr | nivelInterno | Duración de la clase | Sonido del día | Lectura en la situación |
+|---|---|---|---|---|---|
+| N1 | A1 | 1 | 10–12 min | sí, una grafía del Nivel 0 | diálogo de 3–6 líneas |
+| N2 | A2 | 2 | 12–15 min | no; una nota de pronunciación cuando la clase la necesite | diálogo o texto de 6–10 líneas (≈ 80–120 palabras) |
+| N3–N4 | B1 | 3–4 | 15 min | no | texto de 150–250 palabras |
+| N5–N7 | B2 | 5–7 | 15–20 min | no | texto de 300–500 palabras |
+| N8–N10 | C1 | 8–10 | 20 min | no | texto de 400–700 palabras |
+
+Desde N2 las explicaciones pueden ser más densas, pero siguen siendo cortas y con ejemplos. La evaluación sigue pidiendo ≥ 4 ítems y ≥ 2 formatos; los `escribir` abiertos (`abierta: true`) no puntúan y se suman a esos 4.
 
 ## Archivo por bloque
 
-`tools/contenido/ruta-fr/n1-bXX.json` con `{"modulo": "fr.n1-bXX", "unidades": [5 unidades]}`.
+`tools/contenido/ruta-fr/nX-bYY.json` con `{"modulo": "fr.nX-bYY", "unidades": [5 unidades]}`; la revisión va en `revision-nX-bYY.md` (N1 usó `revision-bYY.md`).
 
-- **Ids:** `fr.n1.c01` … `fr.n1.c50`.
-- **Orden:** `orden` = 100 + n en el borrador; el integrador lo renumera a continuación de Fundamentos.
-- **Nivel:** `cefr: "A1"`, `nivelInterno: 1`.
-- **Prerrequisitos:** c01 → `fr.f0.se-presenter`; cada clase siguiente → la anterior.
+- **Ids:** `fr.nX.c01` … `fr.nX.c50`.
+- **Orden:** `orden` = 100·X + n en el borrador; el integrador lo renumera.
+- **Nivel:** `cefr` y `nivelInterno` del nivel (tabla «Por nivel»).
+- **Prerrequisitos:** c01 → la última clase del nivel anterior (N1: `fr.f0.se-presenter`); cada clase siguiente → la anterior. El integrador los reescribe.
 - **Concepto:** un id neutral (`saludos`, `presente-er`, `numeros-0-20`…).
 - **Textos de apoyo:** todos `{"es": …, "en": …}` (español neutro de América con tú; inglés americano). La versión inglesa compara con el inglés cuando ayuda.
 

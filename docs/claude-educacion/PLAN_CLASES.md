@@ -48,7 +48,7 @@ Reglas (las comprueba `python3 tools/curriculo/validar_plan.py <idioma>`):
 ## 3. Ciclo de un bloque
 
 1. **Ficha.** El coordinador comprueba que las 5 fichas del bloque están en el plan con GO.
-2. **Autor.** Recibe las 5 fichas y `ENCARGO_N1_FR.md` (o el encargo del idioma). Escribe exactamente lo que dicen: no introduce gramática que no esté en `introduce` ni en lo ya visto.
+2. **Autor.** Recibe las 5 fichas y `ENCARGO_RUTA_FR.md` (o el encargo del idioma). Escribe exactamente lo que dicen: no introduce gramática que no esté en `introduce` ni en lo ya visto.
 3. **Validación.** `validar_ruta.py <idioma> --borrador …` con 0 errores.
 4. **Revisor.** Otro agente contrasta el bloque con sus fichas y con las notas de calibración del encargo y deja `revision-bXX.md` con GO.
 5. **Integración y publicación.** `integrar.py`, suite completa, prueba en el navegador (interfaz es y en), despliegue por tandas y estados del plan en `publicado`.
