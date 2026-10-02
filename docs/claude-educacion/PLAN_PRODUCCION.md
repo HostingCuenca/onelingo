@@ -26,8 +26,8 @@ Actualizado: 2026-10-01 · Responsable: Claude. **Este documento ordena todo lo 
 | FR-5a | Plan de clases: marco común (`curriculo/marco.json`) y fichas del francés N1–N10 (`curriculo/fr/nX.json`) | marco ✅; N1–N6 con GO; N7–N10 escritas, en revisión | `validar_plan.py fr` sin errores y revisión del plan con GO; N1–N2 antes de seguir con B5 |
 | FR-5b | App: niveles de la ruta para cualquier idioma (`idiomasConRuta`) | ✅ hecho para el francés | Aprender muestra Nivel 0 → Fundamentos → N1… (superado / en curso / bloqueado) y prueba del nivel en francés; las lecciones antiguas se retiran del francés |
 | FR-5c | N1: 50 clases en esquema 2 (`fr/ruta/n1-bXX.json`) | ✅ 50 clases publicadas (edu-33, edu-34, edu-35); integrador `tools/contenido/ruta-fr/integrar.py` | 10 bloques con GO y `validar_ruta.py fr` sin errores; se publica por tandas (B1–B3, B4–B6, B7–B10) |
-| FR-6 | Prueba de ubicación v2 en francés | pendiente | `UbicacionScreen` por idioma; banco con 18 ítems por nivel publicado (N1 y luego N2); simulación de respuestas al azar → «desde cero» |
-| FR-7 | N2 (A2): 50 clases | después de FR-5 | igual que FR-5c |
+| FR-6 | Prueba de ubicación v2 en francés | en curso: app genérica por idioma con tope en lo publicado + banco N1 | `UbicacionScreen` por idioma; banco con 18 ítems por nivel publicado (N1 y luego N2); simulación de respuestas al azar → «desde cero» |
+| FR-7 | N2 (A2): 50 clases | en curso: B1–B3 en autoría desde sus fichas | igual que FR-5c |
 | FR-8 | N3–N10 | según demanda | — |
 | FR-R | Revisión nativa | cuando haya revisor | lista por partes: Nivel 0 → situaciones → N1 |
 
