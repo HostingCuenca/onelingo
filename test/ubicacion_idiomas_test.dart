@@ -278,7 +278,7 @@ void main() {
       },
     );
 
-    testWidgets('Aprender: N1 en curso (no superado) con diagnóstico N4', (
+    testWidgets('Aprender: el nivel publicado más alto en curso con diagnóstico N4', (
       tester,
     ) async {
       tester.view.physicalSize = const Size(390, 2400);
@@ -304,8 +304,12 @@ void main() {
       );
       await tester.pump();
       await tester.pump();
+      // Con el tope, el alumno estudia el nivel publicado más alto (hoy N1 o
+      // N2), no un nivel sin clases.
+      final tope = nivelPublicadoMaximo(fr);
+      final cefr = fr.curso.niveles.firstWhere((n) => n.id == 'n$tope').cefr;
       final n1 = find.ancestor(
-        of: find.text('Nivel 1 · A1'),
+        of: find.text('Nivel $tope · $cefr'),
         matching: find.byType(Row),
       );
       expect(n1, findsWidgets);
@@ -317,7 +321,7 @@ void main() {
         find.descendant(
           of: n1.first,
           matching: find.textContaining(
-            'de ${fr.delNivel('n1').length} clases',
+            'de ${fr.delNivel('n$tope').length} clases',
           ),
         ),
         findsOneWidget,
