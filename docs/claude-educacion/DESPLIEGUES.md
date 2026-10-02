@@ -388,3 +388,16 @@ Commit: `adbc8f5` · Build: `main.dart.js` `4d499782…`.
 Pruebas: Flutter 227 (1 omitida); `validar_nivel0.py fr --bilingue` 0 errores; `validar_ruta.py` 0 errores. Navegador (400×820): alumno nativo de inglés en francés, con el Nivel 0 en inglés (40 lecciones, «Continue: The o and the é»).
 Backup: `/var/www/onelingo/backups/20261001-edu-31-frances-bilingue/web-anterior` (= edu-30). Salud 200; `.env` igual; APK servido; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-31-frances-bilingue/web-retirada-post2 && cp -al backups/20261001-edu-31-frances-bilingue/web-anterior web'`
+
+## Release: 20261001-edu-32-frances-verbos-situaciones
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). El cliente autorizó el reinicio de `onelingo-api` de esta release.
+Contenido: francés FR-3, FR-4 y FR-5b.
+- Mis verbos en francés: 120 verbos × 5 tiempos.
+- 50 situaciones en francés × 3 tramos, bilingües.
+- Aprender e Inicio con niveles de ruta en francés.
+- Servidor: `situaciones.ts` (textos de apoyo `{es, en}`) y `situaciones-fr.json`.
+Commit: `63c47a1` · Build: `main.dart.js` `9e624c56…`.
+Pruebas: Flutter 230 (1 omitida); backend 21; `tsc` en staging. En producción: `situacionesDe('fr')` = 50, `situacionesDe('en')` = 50 y `objetivoValido('fr', 1, 's1-a1')` = true.
+Backup: `/var/www/onelingo/backups/20261001-edu-32-frances-verbos-situaciones/` (`web-anterior` = edu-31; `backend-src` con el `situaciones.ts` previo). Salud 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-32-frances-verbos-situaciones; mv web staging/20261001-edu-32-frances-verbos-situaciones/web-retirada-post2 && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && rm -f backend/src/content/situaciones-fr.json && pm2 restart onelingo-api'`
