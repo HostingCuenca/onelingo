@@ -425,3 +425,13 @@ Commit: `80f7188` · Build: `main.dart.js` `a3944073…` (sin cambios de código
 Pruebas: Flutter 230 (1 omitida); `validar_ruta.py` 0 errores; `validar_plan.py fr` 0 errores. Navegador: clase 25 con la interfaz en inglés y clase 33 en español.
 Backup: `/var/www/onelingo/backups/20261001-edu-34-frances-n1-b5-b7/web-anterior` (= edu-33). Salud 200; `.env` igual; APK servido; `n1-b07.json` servido; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-34-frances-n1-b5-b7/web-retirada-post2 && cp -al backups/20261001-edu-34-frances-n1-b5-b7/web-anterior web'`
+
+## Release: 20261002-edu-35-frances-n1-completo
+
+Fecha: 2026-10-02 · Responsable: Claude (Claude Code). Solo web (contenido); backend sin cambios y sin reinicios.
+Contenido: francés FR-5c terminado, Nivel 1 completo (50 clases).
+- N1 francés B8–B10: clases 36–50 (verbos frecuentes y comida, moverse y planes, fin de semana con passé composé), la prueba tipo DELF A1 (c49) y el proyecto «Ma vie en français» (c50). Escritas desde sus fichas y revisadas con GO.
+Commit: `34736b3` · Build: `main.dart.js` `a3944073…` (sin cambios de código).
+Pruebas: Flutter 230 (1 omitida); `validar_ruta.py` 0 errores; `validar_plan.py fr` 0 errores. Navegador: prueba del Nivel 1 en francés (20 preguntas, primera «Ordena: ¡Chao, hasta mañana!»).
+Backup: `/var/www/onelingo/backups/20261002-edu-35-frances-n1-completo/web-anterior` (= edu-34). Salud 200; `.env` igual; APK servido; `n1-b10.json` servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-35-frances-n1-completo/web-retirada-post2 && cp -al backups/20261002-edu-35-frances-n1-completo/web-anterior web'`
