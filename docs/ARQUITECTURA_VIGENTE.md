@@ -1,6 +1,6 @@
 # OneLingo: arquitectura vigente
 
-Actualizado: 2026-10-01 (fases A, B y C; DEC-026 a DEC-028).
+Actualizado: 2026-10-01 (fases A–D; DEC-026 a DEC-029).
 
 **Este es el mapa que manda.** Si otro documento lo contradice, vale este. Los documentos de `docs/archivo/` son historia: no los uses para decidir. Si cambias la estructura, actualiza este archivo en el mismo commit.
 
@@ -20,7 +20,7 @@ Actualizado: 2026-10-01 (fases A, B y C; DEC-026 a DEC-028).
 | Inicio | continuar, accesos (Academia, 50 situaciones, Tutor IA, Progreso, Prueba de nivel, Biblioteca) | `home/home_screen.dart` |
 | Aprender | Nivel 0 (inglés desde cero) → Fundamentos → N1–N10 con estado (superado / en curso / bloqueado) y prueba de cada nivel | `course/levels_screen.dart`, `nivel0/*`, `ruta/ruta_screen.dart`, `ruta/unidad_screen.dart`, `ruta/prueba_nivel_screen.dart` |
 | Practicar | 50 situaciones; tutores IA (chat y videollamada) | `practice/practice_screen.dart`, `situations/situation_screen.dart`, `chat/chat_screen.dart`, `plans/tutors_screen.dart`, `avatar/*` + `web/avatar/` |
-| Biblioteca (desde Inicio) | Lecturas, Escuchas, Guías de gramática, Mapa de sonidos; luego «Mis palabras» y «Mis verbos» | `library/biblioteca_screen.dart`, `library/learning_unit_screen.dart`, `library/grammar_screen.dart` |
+| Biblioteca (desde Inicio) | Mis palabras (repaso espaciado por palabra), Mis verbos (tablas, audio, práctica), Lecturas, Escuchas, Guías de gramática, Mapa de sonidos | `library/biblioteca_screen.dart`, `lexico/*`, `library/learning_unit_screen.dart`, `library/grammar_screen.dart` |
 | Perfil | progreso, errores, planes | `progress/*`, `mistakes/*`, `plans/plans_screen.dart` |
 | Entrada | bienvenida, registro, prueba de ubicación | `onboarding/*` (`ubicacion_screen.dart` inglés v2; `diagnostico_screen.dart` resto) |
 
@@ -35,12 +35,14 @@ Actualizado: 2026-10-01 (fases A, B y C; DEC-026 a DEC-028).
 | Prueba de ubicación (otros idiomas, legado) | `assets/contenido/<idioma>/diagnostico.json` o lecciones | `core/diagnostico.dart` (con techo verificado, DEC-026) | `test/diagnostico_test.dart` |
 | Prueba de cada nivel | ítems de evaluación de la propia ruta | `itemsPruebaNivel`, `nivelSuperado`, `nivelPorPruebas` en `dominio.dart` | `test/prueba_nivel_test.dart` |
 | Situaciones (50 × 3 tramos) | `assets/contenido/situaciones/catalogo.json` (lista) + `assets/contenido/<idioma>/situaciones.json` (contenido por tramo). **Generados, no editar:** `lib/core/content/catalogo_situaciones.g.dart`, `web/avatar/topics.json`, `backend/src/content/situaciones-<idioma>.json` | `core/content/situaciones.dart`, `backend/src/lib/situaciones.ts` | `tools/contenido/validar_situaciones.py`, `generar_situaciones.py --comprobar`, `test/situaciones_v2_test.dart`, `backend/test/situaciones.test.ts` |
+| Léxico único (índice) | No es otra fuente: se calcula desde la ruta (pasos de vocabulario), las situaciones y el Nivel 0 | `core/lexico/lexico.dart` (`lexicoProvider`, `misPalabrasProvider`, repaso por palabra en `practicas['lexico:<idioma>']`) | `test/lexico_test.dart` |
+| Verbos («Mis verbos») | `tools/contenido/verbos/verbos-<idioma>.json` (revisada). **Generado:** `assets/contenido/<idioma>/verbos.json`, con tablas y nivel tomado de la ruta | `core/lexico/verbos.dart`; `tools/contenido/verbos/generar_verbos.py` | `generar_verbos.py --comprobar`, `test/lexico_test.dart` |
 | Lecturas y escuchas | `assets/contenido/en/{reading,listening}_units.json` | `core/content/learning_units.dart` | `test/lectura_escucha_test.dart` |
 | Guías de gramática | `lib/core/content/grammar_guides.dart` | — | `test/guias_gramatica_test.dart` |
 | Tutores y voz | `backend/src/lib/ia.ts` (personas), `backend/src/lib/voz.ts`, `web/avatar/roster.json` | `backend/src/routes/chat.ts` | `backend/test/*` |
 | Progreso del alumno | `ProgressState.practicas` (claves en `ClaveRuta`) | `core/state/providers.dart` | estados calculados, nunca guardados (DEC-006) |
 
-Claves de progreso: `ruta:<unidad>:<paso>:<item>`, `ruta:<unidad>:evaluacion`, `ruta:<unidad>:repaso`, `ruta:<idioma>.<nivel>:completa`, `ruta:<idioma>.<nivel>:prueba`, `nivel0:en:<leccion>`, `situacion:<idioma>:<id>:<tramo>:prueba`, `situacion-<idioma>-<id>-<objetivoId>`.
+Claves de progreso: `ruta:<unidad>:<paso>:<item>`, `ruta:<unidad>:evaluacion`, `ruta:<unidad>:repaso`, `ruta:<idioma>.<nivel>:completa`, `ruta:<idioma>.<nivel>:prueba`, `nivel0:en:<leccion>`, `situacion:<idioma>:<id>:<tramo>:prueba`, `situacion-<idioma>-<id>-<objetivoId>`, `lexico:<idioma>` (`{palabras: {clave: [caja, fecha]}}`), `verbo:<idioma>:<id>`.
 
 Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nivelAlumnoProvider` (ubicación o siguiente al último nivel superado).
 
@@ -50,7 +52,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 |---|---|---|
 | `lesson/lesson_player_screen.dart`, `course/level_screen.dart`, `exam/*`, `core/content/curriculum.dart`, `assets/contenido/<idioma>/nivel-N.json` | Cursos de los idiomas sin ruta 10×100 (francés, alemán…) | fase E, idioma por idioma |
 | `onboarding/diagnostico_screen.dart` + `core/diagnostico.dart` | Ubicación de los idiomas sin prueba v2 | cuando cada idioma tenga su banco v2 |
-| `core/biblioteca.dart` (`RutaBiblioteca.prioridades`) | Resumen del alumno para la IA (chat, llamada) | fase D (léxico y perfil únicos) |
+| `core/biblioteca.dart` (`RutaBiblioteca.prioridades`) | Resumen del alumno para la IA (chat, llamada) | cuando el perfil del alumno se unifique |
 
 **Retirado en A** (no recrear; lo comprueba `test/arquitectura_test.dart`): `library/library_screen.dart`, `shared/widgets/learning_path.dart`, `shared/widgets/learning_primer.dart`, `foundations/foundations_screen.dart`, `core/content/foundations.dart`.
 
@@ -71,7 +73,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 | A | Limpieza visual y de legado; reglas vigiladas por prueba | **hecha** |
 | B | Ubicación a prueba de azar y prueba para subir de nivel | **hecha** (DEC-026) |
 | C | Situaciones v2: las mismas 50 en 3 tramos (Básico N1–3, Intermedio N4–6, Avanzado N7–10), con progreso, prueba con nota y videollamada con el tema (`SITUACIONES_V2.md`) | **hecha** (DEC-028) |
-| D | Léxico único (id, nivel, situaciones, clases) + «Mis palabras» con repaso por palabra; «Mis verbos» con tablas de conjugación y audio (confirmado por el cliente) | pendiente |
+| D | Léxico único + «Mis palabras» con repaso por palabra + «Mis verbos» con tablas, audio y práctica | **hecha** (DEC-029) |
 | E | Francés sobre esta base: Fundamentos de lectura con el motor del Nivel 0, situaciones por tramo, léxico único (`PLAN_FRANCES.md`) | pendiente |
 
 ## 7. Validar antes de entregar

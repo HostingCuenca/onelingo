@@ -9,6 +9,7 @@ import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
+import '../../core/lexico/lexico.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -106,8 +107,8 @@ class ProgressScreen extends ConsumerWidget {
               ),
               _Stat(
                 Icons.menu_book_outlined,
-                '${s.vocabularioAprendido}',
-                'Vocabulario practicado',
+                '${ref.watch(misPalabrasProvider).valueOrNull?.length ?? s.vocabularioAprendido}',
+                'Mis palabras',
                 OL.verde,
               ),
               _Stat(

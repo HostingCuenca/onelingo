@@ -9,9 +9,15 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 ## Trabajando ahora
 
 - Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).
-- Siguiente: **D, léxico único**, con «Mis palabras» y «Mis verbos».
+- Siguiente: **E, francés** sobre esta base (`PLAN_FRANCES.md`): las decisiones pendientes del plan (voces, revisor nativo) y los Fundamentos de lectura con el motor del Nivel 0.
 
 ## Terminado recientemente
+
+- **Fase D, léxico (2026-10-01, DEC-029):**
+  - Índice único de más de 4.000 palabras calculado desde ruta, situaciones y Nivel 0.
+  - «Mis palabras» con repaso espaciado por palabra, agrupadas por nivel o situación, con búsqueda.
+  - «Mis verbos»: 174 verbos con 5 tablas y audio, más práctica de irregulares.
+  - Perfil cuenta Mis palabras. Biblioteca enlaza ambas pantallas.
 
 - **Fase C, situaciones v2 (2026-10-01, DEC-028):**
   - Las 50 situaciones × 3 tramos: 450 objetivos, 1.500 palabras y 600 frases, con autoría y revisión independiente GO por lote.

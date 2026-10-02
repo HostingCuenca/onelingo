@@ -30,7 +30,19 @@ class BibliotecaScreen extends ConsumerWidget {
               style: TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
             ),
             const SizedBox(height: 16),
+            _Entrada(
+              icono: Icons.style_rounded,
+              titulo: 'Mis palabras',
+              detalle: 'Todo lo que has aprendido, con repaso para que no se te olvide.',
+              onTap: () => context.push('/palabras'),
+            ),
             if (ingles) ...[
+              _Entrada(
+                icono: Icons.swap_horiz_rounded,
+                titulo: 'Mis verbos',
+                detalle: 'Cómo se conjugan, con audio y práctica de los irregulares.',
+                onTap: () => context.push('/verbos'),
+              ),
               _Entrada(
                 habilidad: 'comprension',
                 titulo: 'Lecturas',
@@ -64,15 +76,6 @@ class BibliotecaScreen extends ConsumerWidget {
                   style: TextStyle(fontSize: 15, height: 1.4),
                 ),
               ),
-            const SizedBox(height: 6),
-            const Tarjeta(
-              color: OL.amarilloSuave,
-              sombra: false,
-              child: Text(
-                'Próximamente: «Mis palabras», con el vocabulario que vas aprendiendo y su repaso.',
-                style: TextStyle(fontSize: 14, height: 1.35),
-              ),
-            ),
           ],
         ),
       ),

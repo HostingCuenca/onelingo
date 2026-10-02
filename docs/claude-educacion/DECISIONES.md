@@ -239,3 +239,15 @@ Decisión:
 - Fuente única con copias generadas; inglés general americano.
 - Los objetivos del básico conservan sus ids (`s<id>-o1..o3`). Los nuevos son `s<id>-i*` y `s<id>-a*`.
 Motivo: antes la situación era igual en N1 y en N10, no tenía progreso, la prueba no terminaba y la lista existía en cuatro copias a mano.
+
+## DEC-029 — Léxico único, «Mis palabras» y «Mis verbos»
+Fecha: 2026-10-01 · Acordado con el cliente (fase D; «Mis verbos» confirmado).
+Decisión:
+- **El léxico es un índice calculado**, no otra fuente. Reúne las palabras que enseñan la ruta (pasos de vocabulario), las situaciones (por tramo) y el Nivel 0. La clave es la palabra normalizada; para cada una se guardan su nivel mínimo y sus orígenes.
+- **«Mis palabras»** son las de las clases practicadas, los tramos de situación empezados y las lecciones del Nivel 0 completas. Se calculan; no se guardan.
+- **El repaso es por palabra**, en cajas con intervalos de 1, 3, 7, 16, 35 y 90 días. Un fallo devuelve la palabra a la caja 0 y la repasa mañana. Solo se guardan `[caja, fecha]` por palabra en `lexico:<idioma>`.
+- **Una sesión de repaso** tiene 10 palabras: primero las vencidas y luego las nuevas. Las formas se alternan (significado, cómo se dice y escucha), y las falladas vuelven al final.
+- **«Mis verbos»** sale de una fuente revisada de 174 verbos (108 irregulares), de la que se generan las tablas: presente, pasado, futuro con will, presente perfecto y presente continuo, con audio.
+  - El nivel de cada verbo se toma de la ruta.
+  - La práctica usa 10 preguntas, sobre todo irregulares, con errores típicos como distractores (goed, went/gone, falta de -s).
+  - El esquema sirve para francés, que tendrá personas y tiempos propios.

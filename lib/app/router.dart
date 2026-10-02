@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../core/state/providers.dart';
 import '../core/voz.dart';
 import '../shared/widgets/app_navigation_icon.dart';
+import '../features/lexico/mis_palabras_screen.dart';
+import '../features/lexico/mis_verbos_screen.dart';
+import '../features/lexico/repaso_palabras_screen.dart';
 import '../features/library/biblioteca_screen.dart';
 import '../features/ruta/prueba_nivel_screen.dart';
 import '../features/ruta/ruta_screen.dart';
@@ -153,6 +156,32 @@ final routerProvider = Provider<GoRouter>((ref) {
                       int.tryParse(state.uri.queryParameters['nivel'] ?? '') ??
                       1,
                 ),
+              ),
+              // Fase D: vocabulario del alumno y verbos.
+              GoRoute(
+                path: '/palabras',
+                builder: (_, _) => const MisPalabrasScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'repaso',
+                    builder: (_, _) => const RepasoPalabrasScreen(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: '/verbos',
+                builder: (_, _) => const MisVerbosScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'practica',
+                    builder: (_, _) => const PracticaVerbosScreen(),
+                  ),
+                  GoRoute(
+                    path: ':id',
+                    builder: (_, s) =>
+                        VerboScreen(id: s.pathParameters['id'] ?? ''),
+                  ),
+                ],
               ),
               GoRoute(
                 path: '/biblioteca',

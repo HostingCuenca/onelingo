@@ -561,6 +561,32 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
     );
   }
 
+  /// Repaso de «Mis palabras» (fase D): guarda caja y próxima fecha de cada
+  /// palabra respondida en `lexico:<idioma>` y suma 1 XP por acierto.
+  void guardarRepasoPalabras(
+    String idioma,
+    Map<String, List<Object>> cambios,
+    int aciertos,
+  ) {
+    final clave = 'lexico:$idioma';
+    final anterior =
+        (state.practicas[clave] as Map?)?['palabras'] as Map? ?? const {};
+    _save(
+      _conActividad(
+        state.copyWith(
+          practicas: {
+            ...state.practicas,
+            clave: {
+              'palabras': {...anterior, ...cambios},
+              'fecha': DateTime.now().toIso8601String(),
+            },
+          },
+        ),
+        aciertos,
+      ),
+    );
+  }
+
   /// Last turn and bounded correction evidence; does not award mastery or XP.
   void guardarTurnoSituacion(
     int id,
