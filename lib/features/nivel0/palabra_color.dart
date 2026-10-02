@@ -91,7 +91,7 @@ class ImagenPalabra extends StatelessWidget {
         );
 }
 
-/// Pronuncia en la voz del Nivel 0 (inglés americano). `lento` = versión
+/// Pronuncia en la voz del Nivel 0 de su idioma. `lento` = versión
 /// tortuga. Las letras sueltas van con la voz del sistema (la voz en la nube
 /// las lee como sonido, no como nombre).
 Future<void> decir(
@@ -100,8 +100,8 @@ Future<void> decir(
   bool lento = false,
   bool letra = false,
 }) => Voz.instancia.hablar(
-  texto,
-  'en',
+  texto.replaceAll(enlace, ' '),
+  n.idioma,
   voz: n.voz,
   velocidad: lento ? 0.4 : null,
   sistema: letra,

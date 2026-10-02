@@ -24,3 +24,12 @@ test('zh y ja se leen sin los espacios entre palabras del contenido', () => {
   assert.equal(textoParaVoz('저는 학생이에요', 'ko'), '저는 학생이에요');
   assert.equal(textoParaVoz('Hello  there', 'en'), 'Hello there');
 });
+
+test('francés usa voces nativas: Hélène narra y Nicolas en diálogos', async () => {
+  const { rolDeVoz } = await import('../src/lib/voz.js');
+  assert.equal(rolDeVoz(undefined, 'fr'), 'helene');
+  assert.equal(rolDeVoz('narrador', 'fr'), 'nicolas');
+  assert.equal(rolDeVoz('narradora', 'en'), 'narradora');
+  assert.equal(rolDeVoz('avatar_lumo', 'fr'), 'avatar_lumo');
+  assert.equal(rolDeVoz('no-existe', 'en'), 'narradora');
+});

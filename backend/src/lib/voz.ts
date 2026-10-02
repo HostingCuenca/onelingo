@@ -25,7 +25,21 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   max: { id: 'pNInz6obpgDQGcFmaJgB', nombre: 'Adam', descripcion: 'Tutor directo: firme y conciso' },
   narradora: { id: 'Xb7hH8MSUJpSbSDYk0k2', nombre: 'Alice', descripcion: 'Narradora de lecciones y Listening' },
   narrador: { id: 'JBFqnCBsd6RMkjVDRZzb', nombre: 'George', descripcion: 'Narrador de diálogos y Listening' },
+  // Francés de Francia (elegidas por el cliente, 2026-10-01).
+  helene: { id: 'imRmmzTqlLHt9Do1HufF', nombre: 'Hélène', descripcion: 'Narradora francesa · educativa y calmada' },
+  nicolas: { id: 'aQROLel5sQbj1vuIVi6B', nombre: 'Nicolas', descripcion: 'Narrador parisino · diálogos' },
 };
+
+/** Voz nativa por idioma para los roles neutros (lecciones y diálogos). */
+const NATIVAS: Record<string, Record<string, string>> = {
+  fr: { narradora: 'helene', narrador: 'nicolas' },
+};
+
+/** Rol efectivo: el pedido si existe (si no, narradora), con la voz nativa del idioma. */
+export function rolDeVoz(voz: string | undefined, idioma: string): string {
+  const rol = VOCES[voz ?? ''] ? (voz as string) : 'narradora';
+  return NATIVAS[idioma]?.[rol] ?? rol;
+}
 
 export const vozDisponible = () => config.elevenApiKey.length > 0;
 
@@ -94,7 +108,7 @@ export async function obtenerAudio(p: { texto: string; idioma: string; voz?: str
   const texto = textoParaVoz(p.texto, p.idioma);
   if (!texto) throw new Error('texto_vacio');
   if (texto.length > config.vozMaxCaracteres) throw new Error(`texto_demasiado_largo (${texto.length} > ${config.vozMaxCaracteres})`);
-  const rol = VOCES[p.voz ?? ''] ? (p.voz as string) : 'narradora';
+  const rol = rolDeVoz(p.voz, p.idioma);
   const v = VOCES[rol];
   const hash = hashAudio(texto, v.id, config.elevenModelo, p.idioma);
   const ruta = path.join(dir(), `${hash}.mp3`);
@@ -150,7 +164,7 @@ export const vozExiste = (hash: string) => uno('SELECT hash FROM audios WHERE ha
 export async function obtenerAudioStream(p: { texto: string; idioma: string; voz?: string }, signal: AbortSignal, onFirst: () => void) {
   const texto = textoParaVoz(p.texto, p.idioma);
   if (!texto || texto.length > config.vozMaxCaracteres) throw new Error('texto_invalido');
-  const rol = VOCES[p.voz ?? ''] ? p.voz! : 'narradora';
+  const rol = rolDeVoz(p.voz, p.idioma);
   const v = VOCES[rol]; const hash = hashAudio(texto, v.id, config.elevenModelo, p.idioma);
   const ruta = path.join(dir(), `${hash}.mp3`);
   try {

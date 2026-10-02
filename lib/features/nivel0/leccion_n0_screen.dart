@@ -56,7 +56,7 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
       setState(() => indice++);
       return;
     }
-    ref.read(progressProvider.notifier).registrarPractica(claveN0(l.id), {
+    ref.read(progressProvider.notifier).registrarPractica(claveN0(ref.read(progressProvider).idiomaMeta, l.id), {
       'completa': true,
       'correcta': true,
       'aciertos': aciertos,
@@ -68,7 +68,7 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
     if (n != null &&
         siguienteN0(n, ref.read(progressProvider).practicas) == null) {
       ref.read(progressProvider.notifier).registrarPractica(
-        'nivel0:en:completo',
+        claveN0Completo(n.idioma),
         {'correcta': true, 'skill': 'lectura'},
       );
     }
@@ -85,8 +85,8 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
         body: Center(child: Text('No se pudo cargar la lección.')),
       ),
       data: (n) {
-        final l = n.leccion(widget.leccionId);
-        if (l == null) {
+        final l = n?.leccion(widget.leccionId);
+        if (n == null || l == null) {
           return Scaffold(
             appBar: AppBar(),
             body: const Center(child: Text('Lección no encontrada.')),
@@ -527,8 +527,8 @@ class _PasoMezclaState extends State<_PasoMezcla> {
       ),
       children: [
         _titulo('Junta los sonidos'),
-        const Text(
-          'Escucha despacio y luego rápido: así se lee en inglés.',
+        Text(
+          widget.n.texto('junta'),
           style: TextStyle(color: OL.gris, fontSize: 16),
         ),
         const SizedBox(height: 24),
@@ -606,7 +606,7 @@ class _PasoRepiteState extends State<_PasoRepite> {
       aviso = '';
     });
     final ok = await Oido.instancia.escuchar(
-      'en',
+      widget.n.idioma,
       (t, fin) {
         if (!mounted) return;
         setState(() {

@@ -9,9 +9,15 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 ## Trabajando ahora
 
 - Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).
-- Siguiente: **E, francés** sobre esta base (`PLAN_FRANCES.md`): las decisiones pendientes del plan (voces, revisor nativo) y los Fundamentos de lectura con el motor del Nivel 0.
+- **E, francés (en curso):** hechos las voces y el Nivel 0 F1–F5. Siguen F6–F10 (consonantes, nasales, R, enlace y prueba de lectura); después situaciones, verbos y N1 en francés.
 
 ## Terminado recientemente
+
+- **Fase E, primera entrega de francés (2026-10-01, DEC-030):**
+  - Voces Hélène y Nicolas.
+  - Nivel 0 multilingüe: el contenido trae su idioma, voz y textos.
+  - Francés F1–F5: 20 lecciones, mapa de 15 sonidos y 70 emoji Noto nuevos.
+  - Validador `validar_nivel0.py` y descargador de emoji.
 
 - **Fase D, léxico (2026-10-01, DEC-029):**
   - Índice único de más de 4.000 palabras calculado desde ruta, situaciones y Nivel 0.

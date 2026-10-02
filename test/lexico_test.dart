@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelingo/core/aprendizaje/cargador.dart';
-import 'package:onelingo/core/aprendizaje/dominio.dart';
 import 'package:onelingo/core/aprendizaje/modelos.dart';
 import 'package:onelingo/core/content/situaciones.dart';
 import 'package:onelingo/core/lexico/lexico.dart';

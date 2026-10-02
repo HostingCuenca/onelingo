@@ -19,7 +19,7 @@ class TarjetaNivel0 extends ConsumerWidget {
     final practicas = ref.watch(progressProvider).practicas;
     if (nivel == null) return const SizedBox.shrink();
     final hechas = nivel.lecciones
-        .where((l) => leccionN0Completa(practicas, l.id))
+        .where((l) => leccionN0Completa(practicas, nivel.idioma, l.id))
         .length;
     final total = nivel.lecciones.length;
     return Semantics(
@@ -30,7 +30,7 @@ class TarjetaNivel0 extends ConsumerWidget {
         borde: OL.moradoClaro,
         child: Row(
           children: [
-            const ImagenPalabra('1f34e', tamano: 54),
+            ImagenPalabra(nivel.texto('emoji'), tamano: 54),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -43,7 +43,7 @@ class TarjetaNivel0 extends ConsumerWidget {
                   const SizedBox(height: 2),
                   Text(
                     hechas == 0
-                        ? 'Si empiezas de cero: cómo suenan las letras y cómo se lee el inglés.'
+                        ? nivel.texto('tarjeta')
                         : '$hechas de $total lecciones',
                     style: const TextStyle(
                       color: OL.gris,
@@ -53,7 +53,7 @@ class TarjetaNivel0 extends ConsumerWidget {
                   ),
                   const SizedBox(height: 6),
                   PalabraColor(
-                    '(a:ae)pple · c(a:ey)k(e:*) · c(ar:ar)',
+                    nivel.texto('muestra'),
                     nivel: nivel,
                     tamano: 18,
                     centrar: false,

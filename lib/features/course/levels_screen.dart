@@ -75,8 +75,10 @@ class LevelsScreen extends ConsumerWidget {
               style: TextStyle(color: OL.gris, fontSize: 14),
             ),
             const SizedBox(height: 14),
-            // Nivel 0 = ruta de fundamentos del idioma (DEC-007); las
-            // lecciones antiguas quedan como práctica extra dentro de la ruta.
+            // Nivel 0 · Leer y pronunciar, si el idioma lo tiene (se oculta
+            // solo si no); después Fundamentos (DEC-007).
+            const TarjetaNivel0(),
+            const SizedBox(height: 10),
             const TarjetaFundamentos(),
             const SizedBox(height: 12),
             for (final lvl in niveles) _NivelCard(lvl: lvl, s: s),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/nivel0/nivel0.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/skill_badge.dart';
 import '../../shared/widgets/widgets.dart';
@@ -36,6 +37,13 @@ class BibliotecaScreen extends ConsumerWidget {
               detalle: 'Todo lo que has aprendido, con repaso para que no se te olvide.',
               onTap: () => context.push('/palabras'),
             ),
+            if (idiomasConNivel0.contains(s.idiomaMeta))
+              _Entrada(
+                icono: Icons.palette_outlined,
+                titulo: 'Mapa de sonidos',
+                detalle: 'Cada sonido con su imagen y su color, para leer sin dudas.',
+                onTap: () => context.push('/nivel0/sonidos'),
+              ),
             if (ingles) ...[
               _Entrada(
                 icono: Icons.swap_horiz_rounded,
@@ -60,12 +68,6 @@ class BibliotecaScreen extends ConsumerWidget {
                 titulo: 'Guías de gramática',
                 detalle: 'Reglas con ejemplos para consultar cuando dudes.',
                 onTap: () => context.push('/gramatica?nivel=$nivel'),
-              ),
-              _Entrada(
-                icono: Icons.palette_outlined,
-                titulo: 'Mapa de sonidos',
-                detalle: 'Cada sonido del inglés con su imagen y su color.',
-                onTap: () => context.push('/nivel0/sonidos'),
               ),
             ] else
               const Tarjeta(

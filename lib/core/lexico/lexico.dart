@@ -145,7 +145,7 @@ class LexicoIndice {
     }
     bool vista(OrigenPalabra o) => o.unidad != null
         ? unidadesVistas.contains(o.unidad) ||
-              leccionN0Completa(practicas, o.unidad!)
+              leccionN0Completa(practicas, idioma, o.unidad!)
         : tramos.contains((o.situacion!, o.tramo!));
     return [
       for (final e in entradas.values)
@@ -164,7 +164,7 @@ final lexicoProvider = FutureProvider<LexicoIndice>((ref) async {
   final idioma = s.$1;
   final ruta = await ref.watch(rutaProvider(idioma).future);
   final situaciones = await ref.watch(situacionesProvider(idioma).future);
-  final nivel0 = idioma == 'en' ? await ref.watch(nivel0Provider.future) : null;
+  final nivel0 = await ref.watch(nivel0Provider.future);
   return LexicoIndice.construir(
     idioma: idioma,
     cadena: ruta == null

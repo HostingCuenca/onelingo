@@ -251,3 +251,15 @@ Decisión:
   - El nivel de cada verbo se toma de la ruta.
   - La práctica usa 10 preguntas, sobre todo irregulares, con errores típicos como distractores (goed, went/gone, falta de -s).
   - El esquema sirve para francés, que tendrá personas y tiempos propios.
+
+## DEC-030 — Francés: voces nativas y Nivel 0 de lectura
+Fecha: 2026-10-01 · Acordado con el cliente (francés de Francia, Hélène y Nicolas).
+Decisión:
+- **Voces nativas:** los roles neutros usan la voz nativa del idioma (`NATIVAS`): en francés, Hélène narra y Nicolas dialoga.
+- **Nivel 0 multilingüe:** el contenido trae su idioma, voz y textos de interfaz (`idiomasConNivel0`).
+- **Francés F1–F5 (20 lecciones):**
+  - el mapa de sonidos tiene 15 sonidos de vocal con imagen y color;
+  - la marca `‿` sirve para el enlace;
+  - autoría en dos lotes y revisión independiente GO con 24 correcciones.
+- **El registro y Aprender** recomiendan el Nivel 0 a quien empieza de cero también en francés.
+- **Versión inicial:** el contenido se publica con revisión independiente por IA; queda pendiente la de un nativo.

@@ -137,12 +137,12 @@ class ProgressState {
       leccionesDe(0).isNotEmpty &&
       completadasEnNivel(0) < totalLeccionesDe(0);
 
-  /// Nivel 0 · Leer y pronunciar (inglés): recomendado a quien empieza de
-  /// cero, antes de Fundamentos, hasta completar sus lecciones.
+  /// Nivel 0 · Leer y pronunciar: recomendado a quien empieza de cero, antes
+  /// de Fundamentos, hasta completar sus lecciones (idiomas que lo tienen).
   bool get nivel0Pendiente =>
-      idiomaMeta == 'en' &&
+      const {'en', 'fr'}.contains(idiomaMeta) &&
       fundamentos &&
-      !practicas.containsKey('nivel0:en:completo');
+      !practicas.containsKey('nivel0:$idiomaMeta:completo');
 
   /// Marca que escribe la ruta nueva al aprobar todas las unidades de f0.
   bool get rutaFundamentosAprobada =>

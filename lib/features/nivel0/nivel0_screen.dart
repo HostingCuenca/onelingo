@@ -31,9 +31,15 @@ class Nivel0Screen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) =>
             const Center(child: Text('No se pudo cargar el Nivel 0.')),
-        data: (n) {
+        data: (n0) {
+          if (n0 == null) {
+            return const Center(
+              child: Text('Este idioma aún no tiene Nivel 0.'),
+            );
+          }
+          final n = n0;
           final hechas = n.lecciones
-              .where((l) => leccionN0Completa(practicas, l.id))
+              .where((l) => leccionN0Completa(practicas, n.idioma, l.id))
               .length;
           final siguiente = siguienteN0(n, practicas);
           return Movil(
@@ -116,20 +122,21 @@ class Nivel0Screen extends ConsumerWidget {
                       padding: const EdgeInsets.only(bottom: 8),
                       child: _FilaLeccion(
                         leccion: l,
-                        completa: leccionN0Completa(practicas, l.id),
+                        completa: leccionN0Completa(practicas, n.idioma, l.id),
                         abierta: leccionN0Abierta(n, practicas, l.id),
                       ),
                     ),
                   const SizedBox(height: 14),
                 ],
-                const Tarjeta(
-                  color: OL.amarilloSuave,
-                  sombra: false,
-                  child: Text(
-                    'Próximamente: más sonidos (c, k, e, h, r…), la e mágica, vocales largas y la prueba final «Ya puedo leer inglés».',
-                    style: TextStyle(fontSize: 14, height: 1.35),
+                if (n.texto('proximamente').isNotEmpty)
+                  Tarjeta(
+                    color: OL.amarilloSuave,
+                    sombra: false,
+                    child: Text(
+                      n.texto('proximamente'),
+                      style: const TextStyle(fontSize: 14, height: 1.35),
+                    ),
                   ),
-                ),
               ],
             ),
           );
@@ -185,13 +192,6 @@ class _FilaLeccion extends StatelessWidget {
 class MapaSonidosScreen extends ConsumerWidget {
   const MapaSonidosScreen({super.key});
 
-  static const _grupos = {
-    'corta': 'Vocales cortas',
-    'larga': 'Vocales largas (dicen su nombre)',
-    'diptongo': 'Vocales que se deslizan',
-    'r': 'Vocales con R',
-    'fantasma': 'La vocal fantasma',
-  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -203,11 +203,19 @@ class MapaSonidosScreen extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) =>
             const Center(child: Text('No se pudo cargar el mapa.')),
-        data: (n) {
+        data: (n0) {
+          if (n0 == null) {
+            return const Center(
+              child: Text('Este idioma aún no tiene Nivel 0.'),
+            );
+          }
+          final n = n0;
           // Unidad más alta con alguna lección completa.
           var vista = 1;
           for (final u in n.unidades) {
-            if (u.lecciones.any((l) => leccionN0Completa(practicas, l.id))) {
+            if (u.lecciones.any(
+              (l) => leccionN0Completa(practicas, n.idioma, l.id),
+            )) {
               vista = int.tryParse(u.id.replaceAll(RegExp(r'\D'), '')) ?? vista;
             }
           }
@@ -215,12 +223,16 @@ class MapaSonidosScreen extends ConsumerWidget {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
               children: [
-                const Text(
-                  'En inglés una misma letra puede sonar distinto. Cada sonido tiene una imagen y un color: así lo verás en las palabras. Toca una tarjeta para oírla.',
-                  style: TextStyle(fontSize: 15, height: 1.4, color: OL.gris),
+                Text(
+                  n.texto('mapaIntro'),
+                  style: const TextStyle(
+                    fontSize: 15,
+                    height: 1.4,
+                    color: OL.gris,
+                  ),
                 ),
                 const SizedBox(height: 14),
-                for (final g in _grupos.entries) ...[
+                for (final g in n.grupos.entries) ...[
                   Text(
                     g.value,
                     style: const TextStyle(

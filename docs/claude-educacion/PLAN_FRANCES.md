@@ -1,6 +1,6 @@
 # Plan del curso de francés (N1–N10)
 
-Estado: **propuesta para aprobación** · Fecha: 2026-10-01 · Responsable: Claude.
+Estado: **aprobado; en producción por fases** (decisiones del 2026-10-01 en §9) · Fecha: 2026-10-01 · Responsable: Claude.
 Investigación completa (con fuentes): `investigacion/frances-mcer-niveles-horas.md` y `investigacion/frances-hispanohablantes-lectura-voces.md`.
 
 ## 1. Resumen
@@ -220,3 +220,18 @@ Mismo método que inglés: mapa editorial por nivel → autoría por bloques con
 4. ¿Contamos con un revisor nativo de francés para la Fase 1?
 5. Confirmar el orden de fases (Fundamentos → N1 → N2 primero).
 6. ¿Hacemos primero las piezas comunes y el refuerzo de inglés (números, alfabeto y sonidos, verbos, Repite, lectura graduada) y luego arrancamos francés sobre esa base? (recomendado)
+
+## 9. Decisiones del cliente (2026-10-01)
+
+- **Francés de Francia** como estándar; Québec solo como nota cultural.
+- **Voces:** Hélène (narradora de lecciones, rol `narradora` en francés) y Nicolas (diálogos, rol `narrador`). En el servidor, `NATIVAS` de `backend/src/lib/voz.ts`.
+- **Orden de las fases A–E** (`docs/ARQUITECTURA_VIGENTE.md`): el francés se construye sobre la base limpia.
+  - **Fundamentos de lectura (§3.1)** se implementan como **Nivel 0 · Leer y pronunciar** con el mismo motor del inglés: `assets/contenido/fr/nivel0/`, mapa de sonidos propio y marca `‿` de enlace. Después vienen Fundamentos (ruta f0) y N1.
+- **Revisor nativo:** sin confirmar. El contenido sale como versión inicial, con revisión independiente por IA, hasta que lo revise una persona nativa.
+
+### Estado de la pista de lectura
+
+| Unidad | Contenido | Estado |
+|---|---|---|
+| F1–F5 | lo que ya sabes leer; letras que no suenan; ou y u; las e; eu, o, oi | primera entrega |
+| F6–F10 | consonantes nuevas; nasales I y II; gn, ill, R y -ent; enlace y prueba de lectura | pendiente |

@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Nivel 0 · Leer y pronunciar (inglés desde cero). Contenido en
-/// assets/contenido/en/nivel0/: el mapa de sonidos (sonidos.json) y las
+import '../state/providers.dart';
+
+/// Nivel 0 · Leer y pronunciar (desde cero, por idioma). Contenido en
+/// `assets/contenido/<idioma>/nivel0/`: el mapa de sonidos (sonidos.json) y las
 /// unidades (nivel0.json). Es una pista propia, antes de Fundamentos: no
 /// altera la ruta ni sus reglas de léxico (aquí se leen palabras como «sat»).
 
@@ -21,6 +23,9 @@ class Segmento {
   String? get sonido =>
       (clave == null || muda || digrafo || magica) ? null : clave;
 }
+
+/// Unión entre palabras (liaison/enlace): se ve en la palabra, no se lee.
+const enlace = '‿';
 
 final _grupo = RegExp(r'\(([^():]+):([^()]+)\)');
 
@@ -39,7 +44,7 @@ List<Segmento> segmentos(String marcado) {
 
 /// Texto sin marcas (lo que se escucha y se escribe).
 String textoPlano(String marcado) =>
-    segmentos(marcado).map((s) => s.texto).join();
+    segmentos(marcado).map((s) => s.texto).join().replaceAll(enlace, ' ');
 
 class SonidoVocal {
   const SonidoVocal({
@@ -147,15 +152,29 @@ class UnidadN0 {
   final List<LeccionN0> lecciones;
 }
 
+/// Idiomas con Nivel 0 (contenido en `assets/contenido/<idioma>/nivel0/`).
+/// Mantener igual que `ProgressState.nivel0Pendiente`.
+const idiomasConNivel0 = {'en', 'fr'};
+
 class Nivel0 {
   Nivel0({
+    this.idioma = 'en',
+    this.textos = const {},
     required this.titulo,
     required this.subtitulo,
     required this.voz,
     required this.unidades,
     required this.sonidos,
   });
-  final String titulo, subtitulo, voz;
+  final String idioma, titulo, subtitulo, voz;
+
+  /// Textos de interfaz propios del idioma (tarjeta, mapa, grupos…).
+  final Map<String, dynamic> textos;
+  String texto(String clave) => (textos[clave] as String?) ?? '';
+  Map<String, String> get grupos => {
+    for (final e in (textos['grupos'] as Map? ?? const {}).entries)
+      '${e.key}': '${e.value}',
+  };
   final List<UnidadN0> unidades;
   final List<SonidoVocal> sonidos;
 
@@ -175,6 +194,8 @@ class Nivel0 {
 
   static Nivel0 desdeJson(Map<String, dynamic> n, Map<String, dynamic> s) =>
       Nivel0(
+        idioma: (n['idioma'] as String?) ?? 'en',
+        textos: Map<String, dynamic>.from(n['textos'] as Map? ?? const {}),
         titulo: n['titulo'] as String,
         subtitulo: n['subtitulo'] as String,
         voz: (n['voz'] as String?) ?? 'sofia',
@@ -200,21 +221,27 @@ class Nivel0 {
       );
 }
 
-final nivel0Provider = FutureProvider<Nivel0>((ref) async {
-  final n = jsonDecode(
-    await rootBundle.loadString('assets/contenido/en/nivel0/nivel0.json'),
-  );
-  final s = jsonDecode(
-    await rootBundle.loadString('assets/contenido/en/nivel0/sonidos.json'),
-  );
+/// Nivel 0 del idioma que estudia el alumno (null si ese idioma no tiene).
+final nivel0Provider = FutureProvider<Nivel0?>((ref) async {
+  final idioma = ref.watch(progressProvider.select((s) => s.idiomaMeta));
+  if (!idiomasConNivel0.contains(idioma)) return null;
+  final base = 'assets/contenido/$idioma/nivel0';
+  final n = jsonDecode(await rootBundle.loadString('$base/nivel0.json'));
+  final s = jsonDecode(await rootBundle.loadString('$base/sonidos.json'));
   return Nivel0.desdeJson(n as Map<String, dynamic>, s as Map<String, dynamic>);
 });
 
 /// Clave de progreso de una lección del Nivel 0.
-String claveN0(String leccionId) => 'nivel0:en:$leccionId';
+String claveN0(String idioma, String leccionId) => 'nivel0:$idioma:$leccionId';
 
-bool leccionN0Completa(Map<String, dynamic> practicas, String leccionId) =>
-    (practicas[claveN0(leccionId)] as Map?)?['completa'] == true;
+/// Marca de Nivel 0 terminado (deja de recomendarse al empezar).
+String claveN0Completo(String idioma) => 'nivel0:$idioma:completo';
+
+bool leccionN0Completa(
+  Map<String, dynamic> practicas,
+  String idioma,
+  String leccionId,
+) => (practicas[claveN0(idioma, leccionId)] as Map?)?['completa'] == true;
 
 /// Una lección se abre cuando la anterior está completa (la primera, siempre).
 bool leccionN0Abierta(
@@ -223,13 +250,14 @@ bool leccionN0Abierta(
   String leccionId,
 ) {
   final i = n.lecciones.indexWhere((l) => l.id == leccionId);
-  return i <= 0 || leccionN0Completa(practicas, n.lecciones[i - 1].id);
+  return i <= 0 ||
+      leccionN0Completa(practicas, n.idioma, n.lecciones[i - 1].id);
 }
 
 /// Siguiente lección por hacer (null si todas están completas).
 LeccionN0? siguienteN0(Nivel0 n, Map<String, dynamic> practicas) {
   for (final l in n.lecciones) {
-    if (!leccionN0Completa(practicas, l.id)) return l;
+    if (!leccionN0Completa(practicas, n.idioma, l.id)) return l;
   }
   return null;
 }

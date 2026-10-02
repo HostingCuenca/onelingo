@@ -1,6 +1,6 @@
 # OneLingo: arquitectura vigente
 
-Actualizado: 2026-10-01 (fases A–D; DEC-026 a DEC-029).
+Actualizado: 2026-10-01 (fases A–D, E en curso; DEC-026 a DEC-030).
 
 **Este es el mapa que manda.** Si otro documento lo contradice, vale este. Los documentos de `docs/archivo/` son historia: no los uses para decidir. Si cambias la estructura, actualiza este archivo en el mismo commit.
 
@@ -30,7 +30,7 @@ Actualizado: 2026-10-01 (fases A–D; DEC-026 a DEC-029).
 |---|---|---|---|
 | Curso por niveles (ruta, esquema 2) | `assets/contenido/<idioma>/ruta/curso.json` + módulos (`f0.json`, `nN-editorial.json`) | `lib/core/aprendizaje/` (`modelos`, `dominio`, `providers`) | `python3 tools/validar_ruta.py`, `test/ruta_*` |
 | Ejercicios de las clases editoriales | `assets/contenido/en/exercise-library.json` + activación | `core/aprendizaje/biblioteca_adaptador.dart` | herramientas en `tools/contenido/` |
-| Nivel 0 inglés (leer y pronunciar) | `assets/contenido/en/nivel0/{nivel0,sonidos}.json`, `assets/img/emoji/` | `core/nivel0/nivel0.dart` | `test/nivel0_test.dart` |
+| Nivel 0 (leer y pronunciar), por idioma: en, fr | `assets/contenido/<idioma>/nivel0/{nivel0,sonidos}.json` (textos de interfaz en `textos`), `assets/img/emoji/` (Noto, `tools/contenido/descargar_emoji.py`). Francés: borradores revisados en `tools/contenido/nivel0-fr/` → `integrar.py` | `core/nivel0/nivel0.dart` (`idiomasConNivel0`) | `tools/contenido/validar_nivel0.py <idioma>`, `test/nivel0_test.dart` |
 | Prueba de ubicación inglés v2 | `assets/contenido/en/diagnostico-v2.json` (fuente en `plan-editorial/diagnostico/`) | `core/aprendizaje/ubicacion.dart` | `tools/contenido/validar_diagnostico.py`, `test/ubicacion*_test.dart` |
 | Prueba de ubicación (otros idiomas, legado) | `assets/contenido/<idioma>/diagnostico.json` o lecciones | `core/diagnostico.dart` (con techo verificado, DEC-026) | `test/diagnostico_test.dart` |
 | Prueba de cada nivel | ítems de evaluación de la propia ruta | `itemsPruebaNivel`, `nivelSuperado`, `nivelPorPruebas` en `dominio.dart` | `test/prueba_nivel_test.dart` |
@@ -39,10 +39,11 @@ Actualizado: 2026-10-01 (fases A–D; DEC-026 a DEC-029).
 | Verbos («Mis verbos») | `tools/contenido/verbos/verbos-<idioma>.json` (revisada). **Generado:** `assets/contenido/<idioma>/verbos.json`, con tablas y nivel tomado de la ruta | `core/lexico/verbos.dart`; `tools/contenido/verbos/generar_verbos.py` | `generar_verbos.py --comprobar`, `test/lexico_test.dart` |
 | Lecturas y escuchas | `assets/contenido/en/{reading,listening}_units.json` | `core/content/learning_units.dart` | `test/lectura_escucha_test.dart` |
 | Guías de gramática | `lib/core/content/grammar_guides.dart` | — | `test/guias_gramatica_test.dart` |
+| Voces nativas por idioma | `NATIVAS` en `backend/src/lib/voz.ts` (fr: Hélène narra, Nicolas dialoga) | `rolDeVoz` | `backend/test/voz-idioma.test.ts` |
 | Tutores y voz | `backend/src/lib/ia.ts` (personas), `backend/src/lib/voz.ts`, `web/avatar/roster.json` | `backend/src/routes/chat.ts` | `backend/test/*` |
 | Progreso del alumno | `ProgressState.practicas` (claves en `ClaveRuta`) | `core/state/providers.dart` | estados calculados, nunca guardados (DEC-006) |
 
-Claves de progreso: `ruta:<unidad>:<paso>:<item>`, `ruta:<unidad>:evaluacion`, `ruta:<unidad>:repaso`, `ruta:<idioma>.<nivel>:completa`, `ruta:<idioma>.<nivel>:prueba`, `nivel0:en:<leccion>`, `situacion:<idioma>:<id>:<tramo>:prueba`, `situacion-<idioma>-<id>-<objetivoId>`, `lexico:<idioma>` (`{palabras: {clave: [caja, fecha]}}`), `verbo:<idioma>:<id>`.
+Claves de progreso: `ruta:<unidad>:<paso>:<item>`, `ruta:<unidad>:evaluacion`, `ruta:<unidad>:repaso`, `ruta:<idioma>.<nivel>:completa`, `ruta:<idioma>.<nivel>:prueba`, `nivel0:<idioma>:<leccion>`, `situacion:<idioma>:<id>:<tramo>:prueba`, `situacion-<idioma>-<id>-<objetivoId>`, `lexico:<idioma>` (`{palabras: {clave: [caja, fecha]}}`), `verbo:<idioma>:<id>`.
 
 Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nivelAlumnoProvider` (ubicación o siguiente al último nivel superado).
 
@@ -74,7 +75,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 | B | Ubicación a prueba de azar y prueba para subir de nivel | **hecha** (DEC-026) |
 | C | Situaciones v2: las mismas 50 en 3 tramos (Básico N1–3, Intermedio N4–6, Avanzado N7–10), con progreso, prueba con nota y videollamada con el tema (`SITUACIONES_V2.md`) | **hecha** (DEC-028) |
 | D | Léxico único + «Mis palabras» con repaso por palabra + «Mis verbos» con tablas, audio y práctica | **hecha** (DEC-029) |
-| E | Francés sobre esta base: Fundamentos de lectura con el motor del Nivel 0, situaciones por tramo, léxico único (`PLAN_FRANCES.md`) | pendiente |
+| E | Francés sobre esta base (`PLAN_FRANCES.md`): voces nativas y Nivel 0 F1–F5 hechos; siguen F6–F10, situaciones y verbos en francés, y N1 | **en curso** (DEC-030) |
 
 ## 7. Validar antes de entregar
 

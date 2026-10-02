@@ -31,10 +31,14 @@ class _AudioGlobal extends GlobalAudioplayersPlatformInterface {
   dynamic noSuchMethod(Invocation invocation) => Future<void>.value();
 }
 
-Nivel0 cargar() => Nivel0.desdeJson(
-  jsonDecode(File('assets/contenido/en/nivel0/nivel0.json').readAsStringSync())
+Nivel0 cargar([String idioma = 'en']) => Nivel0.desdeJson(
+  jsonDecode(
+        File('assets/contenido/$idioma/nivel0/nivel0.json').readAsStringSync(),
+      )
       as Map<String, dynamic>,
-  jsonDecode(File('assets/contenido/en/nivel0/sonidos.json').readAsStringSync())
+  jsonDecode(
+        File('assets/contenido/$idioma/nivel0/sonidos.json').readAsStringSync(),
+      )
       as Map<String, dynamic>,
 );
 
@@ -91,8 +95,10 @@ void main() {
     expect(textoPlano('Hello!'), 'Hello!');
   });
 
-  test('Contenido del Nivel 0 coherente (sonidos, imágenes y respuestas)', () {
-    final n = cargar();
+  for (final idioma in idiomasConNivel0)
+  test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
+    final n = cargar(idioma);
+    expect(n.idioma, idioma);
     expect(n.unidades, isNotEmpty);
     expect(n.sonidos.length, greaterThanOrEqualTo(15));
     final problemas = <String>[];
@@ -225,7 +231,7 @@ void main() {
     expect(find.text('¡Lección completada!'), findsOneWidget);
     expect(find.text('3 de 3 respuestas bien'), findsOneWidget);
     expect(
-      leccionN0Completa(c.read(progressProvider).practicas, 'u01.l02'),
+      leccionN0Completa(c.read(progressProvider).practicas, 'en', 'u01.l02'),
       isTrue,
     );
   });
