@@ -414,3 +414,14 @@ Pruebas: Flutter 230 (1 omitida); `validar_ruta.py` 0 errores; `validar_plan.py 
 Lock: había quedado un lock vacío de edu-32 (creado 03:24 UTC, un minuto después de su cambio; producción seguía en el build de edu-32); se retiró antes de tomar el nuevo.
 Backup: `/var/www/onelingo/backups/20261001-edu-33-frances-n1-b1-b4/web-anterior` (= edu-32). Salud 200; `.env` igual; APK servido; `n1-b04.json` servido; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-33-frances-n1-b1-b4/web-retirada-post2 && cp -al backups/20261001-edu-33-frances-n1-b1-b4/web-anterior web'`
+
+## Release: 20261001-edu-34-frances-n1-b5-b7
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Solo web (contenido); backend sin cambios y sin reinicios.
+Contenido: francés FR-5c, segunda tanda del Nivel 1.
+- N1 francés B5–B7: clases 21–35 (café y compras, gustos y rutina, describir y ubicarse), escritas desde sus fichas y revisadas con GO.
+- Guías de pronunciación de B1–B4 alineadas con el Nivel 0 (j = «sh», in/un = «en»).
+Commit: `80f7188` · Build: `main.dart.js` `a3944073…` (sin cambios de código respecto a edu-33).
+Pruebas: Flutter 230 (1 omitida); `validar_ruta.py` 0 errores; `validar_plan.py fr` 0 errores. Navegador: clase 25 con la interfaz en inglés y clase 33 en español.
+Backup: `/var/www/onelingo/backups/20261001-edu-34-frances-n1-b5-b7/web-anterior` (= edu-33). Salud 200; `.env` igual; APK servido; `n1-b07.json` servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-34-frances-n1-b5-b7/web-retirada-post2 && cp -al backups/20261001-edu-34-frances-n1-b5-b7/web-anterior web'`
