@@ -59,7 +59,7 @@ Los títulos, objetivos, gramática y vocabulario coinciden con `curriculo/fr/n2
 
 ## Hechos del reparto confirmados
 
-- Ana vive en París y lleva un año allí: estudia francés por la mañana en la escuela de idiomas (c01, c02) y trabaja por la tarde en la recepción de un hotel (c01, c02, c03 «Ana part de l’hôtel à six heures», c05). / Ana lives in Paris and has been there a year: she studies French in the morning at the language school and works afternoons at a hotel front desk.
+- Ana vive en París desde hace unos meses (N2 cubre su primer año; termina con «Un an à Paris»): estudia francés por la mañana en la escuela de idiomas (c01, c02) y trabaja por la tarde en la recepción de un hotel (c01, c02, c03 «Ana part de l’hôtel à six heures», c05). / Ana has lived in Paris for a few months (N2 covers her first year, ending with “Un an à Paris”): she studies French in the morning at the language school and works afternoons at a hotel front desk.
 - Ana no trabaja los domingos, a veces los sábados; toma el metro o el bus y almuerza en la cantina del hotel (c03). / Ana does not work Sundays, sometimes Saturdays; she takes the subway or bus and has lunch in the hotel cafeteria.
 - Hugo es estudiante universitario en París y va siempre en bicicleta (c01, c03). / Hugo is a university student in Paris and always bikes.
 - Hugo: clases de lunes a viernes, empieza a las 8, termina las clases a las 5 (c03), estudia en casa por la noche hasta las 10 (c01), se acuesta a las 11 y duerme 8 horas (c03); hace una pasantía (stage) de tres meses (c04). / Hugo: classes Monday to Friday, starts at 8, classes end at 5, studies at home in the evening until 10, goes to bed at 11 and sleeps 8 hours; does a three-month internship (stage).
