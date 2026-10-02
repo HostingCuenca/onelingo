@@ -1,0 +1,70 @@
+GO
+
+# Revisión N4 · B6 (fr.n4.c26–c30) — la reunión y el trabajo
+
+Revisor independiente (francés de Francia, inglés americano, español neutro de América). Archivo revisado y corregido: `tools/contenido/ruta-fr/n4-b06.json` (copia del original antes de editar en el scratchpad de la sesión). Solo se tocó ese archivo y este informe; no se ejecutó git ni se leyó ningún `.env`.
+
+## Validación
+
+- `python3 tools/validar_ruta.py fr --borrador n4-b01 … n4-b06` (los `n3-b*` ya están integrados en `assets/contenido/fr/ruta/`, omitidos): **0 errores**. También 0 errores añadiendo n4-b07 … n4-b10.
+- `python3 tools/curriculo/validar_plan.py fr`: ningún «título de la unidad difiere» para fr.n4.c26–c30 (el único aviso de ese tipo es fr.n5.c26, ajeno al bloque).
+
+## Contraste con las fichas
+
+Títulos, objetivos, gramática, `introduce`, `recicla`, vocabulario de la ficha (9 / 9 / 8 / 8 / 8 palabras, todas presentes, con artículo), situación y tarea coinciden con `curriculo/fr/n4.json`. Los planes de ejercicios están completos (5 guiados, 4 independientes, 2 de comprensión y 6 de evaluación por clase; mismo formato y misma clave; redacción pulida, p. ej. las tareas de traducción de i4). Nada de c31 en adelante: c26 (registros) → c27 (veuillez / merci de) → c28 (même si) → c29 (l’un… l’autre) → c30 (le neutro); `par contre / cependant`, `proposer que`, `ne… ni… ni`, `y / en` y `pronoms COD` aparecen como repaso, no como contenido nuevo.
+
+Anatomía conforme a «Por nivel» (N4: 15 min, texto de 150–250 palabras, sin sonido del día) y al encargo: explicaciones → tablas → ejemplos (8) → vocabulario → guiada (5, todas con `pista`) → independiente (4, sin pista) → situación (c26 171 / c27 174 / c28 159 / c29 166 / c30 162 palabras contadas por espacios; mensajes, correos, reunión, acta y cierre) con 2 ítems de comprensión coherentes con el texto → evaluación con 5 ítems puntuables (4–5 formatos) + 1 `escribir` con `abierta: true` que no puntúa. Formatos del bloque: los seis (relacionar en c26, c27 y c28). 4 `erroresFrecuentes` por clase. Hablantes: Ana, Hugo, Léa, Monsieur Martin, Le directeur, La collègue. Guías de sonido según la Calibración 6 (sh / zh, nasales «en» / “an”, ü y ö definidas en c26 y c27).
+
+## Correcciones aplicadas
+
+Variedad de historia y coherencia de horario (petición del coordinador):
+
+c27
+- Situación: la anécdota «cita del martes con Monsieur Martin movida al jueves a mediodía» ya está en N2 c20 y N3 c19. Ahora Ana pide cambiar la reunión del **miércoles** (tiene cita con el médico el miércoles por la mañana; antes «trabajo en el hotel el martes») y Monsieur Martin la pasa al **viernes a las once y media**. Cambios en diálogo[0–3], traducciones es / en, ejemplo «Salut Hugo, on peut décaler la réunion à vendredi ?» y modelo de e6 (mercredi / vendredi, médecin). Se eliminó «midi» y «jeudi» del texto. `s1` y `s2` siguen intactos.
+
+c26
+- Situación: el mensaje de Monsieur Martin citaba otra vez «réunion de jeudi … à midi». Ahora es «réunion de lundi … à onze heures». La respuesta de Ana pedía perdón por un «retard» que no existía; ahora «Je vous prie de bien vouloir m’excuser : je ne peux pas rester après une heure. Je travaille à l’hôtel à deux heures.» (modela vous, el ne… pas completo y la fórmula de la clase; clase por la mañana y hotel desde las 2). Se quitó el «Ne vous inquiétez pas» de Ana a su profesor (el pedido era al revés). Traducciones es / en actualizadas.
+- e3 (`escuchar`): la opción «Estándar entre amigos / Standard between friends» → «Estándar / Standard» (misma etiqueta que en i1); el orden de opciones se mantiene con «Formal» como respuesta.
+- Vocabulario `la nana`: se quitó «un poco anticuada / a bit dated» (dato discutible, no aporta).
+
+Otras correcciones de contenido:
+
+c27
+- Vocabulario `merci de` (es): «la t de merci es «s»» → «la c de merci suena «s»» (merci no lleva t).
+- Explicación 2: decía «cinco partes» y enumeraba más; reescrita sin el número. El criterio de cierre ahora es coherente con el diálogo: Je vous prie d’agréer en el primer mensaje a un jefe, profesor o desconocido; Bien cordialement en una respuesta dentro de un intercambio o con alguien con quien trabajas (así Ana escribe «agréer» a Monsieur Martin, como pide la ficha, y él responde «Bien cordialement»).
+- Tabla «Cómo empezar y cómo terminar»: fila «colega o profesor» → «alguien con quien trabajas, o una respuesta dentro de un intercambio» (antes contradecía el primer correo de Ana a su profesor); texto de la tabla ampliado en es / en.
+
+c28
+- Ejemplos: la traducción es de «Même s’il pleut, nous sortons» pasa de «Aunque llueve» a «Aunque llueva, salimos» y la de «Même si c’est cher, je le prends» a «Aunque sea caro, me lo llevo» (el español natural usa subjuntivo; la explicación ya avisa de esa diferencia).
+- Ejemplos 9 → 8 (rango del encargo 5–8): quitado «Je suis tout à fait d’accord pour la réunion mensuelle» (está en la tabla de reacciones).
+
+c29
+- Ejemplos 9 → 8: quitado «Premier point de l’ordre du jour : le tour de table» (la tabla y el vocabulario enseñan esas palabras; el validador sigue en 0).
+
+c30
+- Explicación 1: «en español decimos «sí, lo estamos»» era engañoso (el español sí tiene «lo») → «en español puedes responder solo «Estamos»; en francés hace falta el pronombre: Nous le sommes, no Nous sommes» (en: «in English you can answer just “We are.”…»).
+- Explicación 3: «Los pronombres en e y» se leía como la conjunción «e» → «Los pronombres «en» y «y»», con «En» / «Y» entre comillas en las dos frases siguientes.
+- Explicación 2: añadida la nota del registro (Comme je te l’ai dit con un amigo; Comme je vous l’ai dit con el jefe o el equipo) para reciclar `registres-langue` de la ficha, con un ejemplo nuevo («Comme je te l’ai dit, la réunion est à dix heures»).
+- Ejemplos 9 → 8: quitados «Pour récapituler : la décision est validée…» y «Tu penses à l’examen ? — Oui, j’y pense» (ambos cubiertos por las tablas); sustituidos por el ejemplo con «te». g5 sigue usando «Tu penses à l’examen ?» (enseñado en la tabla).
+
+## Revisado y sin cambios
+
+Registros familiar / estándar / formal (ouais, t’inquiète, caída del ne, tres formas de la pregunta, vous con Madame Dubois); veuillez + infinitivo sin de, merci de + infinitivo, je vous prie de bien vouloir, pronombres delante del infinitivo; même si + indicativo (même s’il / même si elle) frente a «aunque + subjuntivo» del español; cortesía al discrepar y contrapropuesta; l’un… l’autre / les uns… les autres con concordancia, ni l’un ni l’autre ne + verbo sin pas, c’est à toi de, se charger de / s’occuper de + en; le neutro (je le sais, nous le sommes, elle l’est, comme je vous l’ai dit), en / y neutros. Un solo resultado defendible en los ítems: los `elegir` tienen distractores claramente incorrectos; los `ordenar` aceptan los órdenes naturales (c26 g5 con «À la réunion, est-ce que vous venez ?», c27 i2 con ci-joint antes o después del complemento, c28 e4 y c30 e4 con la subordinada al final); `completar` con `opciones` donde hay dos formas plausibles (je m’en / je m’y, j’en / j’y, le / les / en); los `escribir` puntuables traen variantes en `aceptadas` (con y sin elisión, con y sin «bien vouloir», con y sin «et»); los `relacionar` tienen 3–4 pares con glosas distintas; las pistas resuelven su ítem sin darlo todo hecho. Tipografía: U+202F antes de ? ! : ; y ’ en todo el francés (los únicos espacios normales ante «?» están en el título de c26, igual que el plan y que los títulos ya publicados de N3). Español sin peninsularismos (plata, tipo, tranquilo, capacitación, recepcionista, celular, cita con el médico) e inglés americano (cc’d, wiped out, coworker, Monday’s meeting).
+
+Palabras añadidas por el autor a las de la ficha, todas enseñadas antes de usarse: c26 le travail, travailler, l’ami, le repas, l’argent, s’inquiéter, excuser, prier, la présence, formel; c27 le camarade, le courriel, agréer, salutations, merci de, répondre, confirmer; c28 embaucher, le réceptionniste, mensuel, la proposition, parler, proposer, essayer; c29 s’occuper de, l’invitation, l’invité, la boisson, ni l’un ni l’autre; c30 la formation, prêt, savoir, j’en suis sûr, j’y pense, comme prévu, comme je vous l’ai dit. Tarjetas de vocabulario: 19 / 16 / 16 / 14 / 13 (más que las 6–12 del encargo, pero muchas son el equivalente estándar o formas ya conocidas; mismo criterio que N2 b06).
+
+## Hechos del reparto confirmados
+
+- Ana recibe en un mismo día un mensaje de Hugo (mañana no trabaja y la invita a comer a mediodía), otro de una compañera del hotel (le pide trabajar el sábado por la mañana en la recepción; Ana acepta la mañana pero no la noche) y otro de Monsieur Martin (le pide confirmar su presencia en la reunión del lunes a las 11); Ana termina su clase a las 11, trabaja en el hotel desde las 2 y avisa a Monsieur Martin de que no puede quedarse después de la una (c26). / Ana gets three messages the same day: one from Hugo (he doesn’t work tomorrow and invites her to lunch at noon), one from a hotel coworker (asks her to work Saturday morning at the front desk; Ana accepts the morning but not the evening) and one from Monsieur Martin (asks her to confirm her attendance at Monday’s 11 o’clock meeting); Ana’s class ends at 11, she works at the hotel from 2 and tells Monsieur Martin she can’t stay after one (c26).
+- Ana escribe a Monsieur Martin (vous; primer mensaje con «Je vous prie d’agréer…», después «Bien cordialement») para cambiar la reunión del miércoles porque tiene cita con el médico el miércoles por la mañana; Monsieur Martin la pasa al viernes a las 11 y media, dura una hora y pone a Chloé en copia; Ana reenvía el mensaje a una compañera de clase, a quien tutea (c27). / Ana writes to Monsieur Martin (vous; a first message ending “Je vous prie d’agréer…”, then “Bien cordialement”) to move Wednesday’s meeting because she has a doctor’s appointment Wednesday morning; Monsieur Martin moves it to Friday at 11:30, it lasts an hour and he copies Chloé; Ana forwards the message to a classmate, whom she addresses with tu (c27).
+- El director del hotel propone en una reunión de equipo cuatro cambios: abrir el desayuno a las 6, contratar a un segundo recepcionista, cambiar los horarios de la recepción y una reunión mensual el primer lunes del mes; Ana (que lo trata de vous) discrepa de las dos primeras («même si l’idée est bonne, ça coûte trop cher»), propone probar un mes el cambio de horarios y acepta la reunión mensual (c28). / The hotel director proposes four changes in a team meeting: open breakfast at 6, hire a second receptionist, change reception hours and a monthly meeting on the first Monday of the month; Ana (who uses vous with him) disagrees with the first two (“même si l’idée est bonne, ça coûte trop cher”), suggests trying the schedule change for a month and accepts the monthly meeting (c28).
+- Ana, Emma, Hugo y Léa preparan una fiesta sorpresa para Madame Dubois el domingo a las 6; Ana es la moderadora y Léa redacta el acta (reunión del martes): Hugo y Ana preparan el pastel y llegan a las 5, Emma y Léa decoran la sala, Hugo se encarga de la música, Ana de las invitaciones, Emma de las bebidas (hace las compras), Léa recibe a los invitados y ordena la sala; próxima reunión el viernes a mediodía (c29). / Ana, Emma, Hugo and Léa plan a surprise party for Madame Dubois on Sunday at 6; Ana chairs and Léa writes the minutes (Tuesday’s meeting): Hugo and Ana make the cake and arrive at 5, Emma and Léa decorate the room, Hugo handles the music, Ana the invitations, Emma the drinks (she does the shopping), Léa welcomes the guests and tidies up; next meeting Friday at noon (c29).
+- Ana dirige (por encargo del director) una reunión de cierre de dos minutos con el equipo del hotel: la formación empieza el lunes a las 2 y dura tres días, el nuevo horario queda validado, la reunión mensual (primer lunes del mes) queda adoptada; el director ya lo había dicho el día anterior a todos; el punto siguiente es el horario de diciembre, la próxima reunión es el viernes a las 3 y Ana se encarga del acta; Ana trata de vous al director y de tú a su colega (c30). / Ana chairs, at the director’s request, a two-minute closing meeting with the hotel team: the training starts Monday at 2 and lasts three days, the new schedule is approved, the monthly meeting (first Monday of the month) is adopted; the director had already told everyone the day before; the next item is the December schedule, the next meeting is Friday at 3 and Ana takes the minutes; Ana uses vous with the director and tu with her coworker (c30).
+
+Sin contradicciones con N1–N3 ni con los otros borradores N4: Ana estudia por la mañana y trabaja en el hotel por la tarde (nada de clases ni de turnos de hotel solapados; la formación del lunes a las 2 y la reunión del viernes a las 3 caen en su horario de trabajo; el domingo de la fiesta no trabaja, N2); Monsieur Martin (vous, reuniones a las 11, N2 c02 / c04); Chloé secretaria que organiza su planning; Madame Dubois, antigua propietaria que sigue cerca (nota del nivel y n4-b03); Emma en el restaurante de Karim y libre el domingo (N2); Hugo sin auto; Léa amiga del grupo. La cita con Monsieur Martin ya no repite el cambio martes → jueves a mediodía de N2 c20 y N3 c19.
+
+## Pendiente / sin resolver
+
+- Ninguna palabra francesa se eliminó ni se renombró de forma que afecte a otros bloques (de c27 salieron «midi» y «jeudi» del diálogo, vocabulario de niveles anteriores; la cadena n4-b01 … n4-b10 sigue en 0 errores).
+- Observación de coordinación: las situaciones de c28 (159) y c26–c30 en general quedan por debajo de las «unas 170–200» de las fichas, pero dentro del rango 150–250 del encargo; si se quiere más lectura, ampliar en una futura pasada. Los títulos de c26 y de otras fichas con «?» llevan espacio normal (como el plan y los títulos publicados de N3); no se tocó.
+- En c27 la tarea abierta e6 pide «50 a 160 palabras en total» (la ficha dice «2 correos de 80 palabras»); no puntúa, se deja el rango del autor porque el modelo (81 palabras) lo cumple.

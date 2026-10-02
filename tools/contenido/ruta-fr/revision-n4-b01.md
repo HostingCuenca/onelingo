@@ -1,0 +1,72 @@
+# Revisión independiente · N4 francés, bloque 1 (clases 1–5)
+
+- **Archivo:** `tools/contenido/ruta-fr/n4-b01.json` (`fr.n4.c01` … `fr.n4.c05`). Revisor distinto del autor.
+- **Validador:** `python3 tools/validar_ruta.py fr --borrador tools/contenido/ruta-fr/n4-b01.json` → **0 errores** (N3 ya está integrado en `assets/contenido/fr/ruta/`, así que no se encadenan los `n3-b*.json`); encadenado con `n4-b02.json` … `n4-b10.json` → **0 errores**. Después de mis cambios se repitió.
+- **Plan:** `python3 tools/curriculo/validar_plan.py fr` → ningún «título de la unidad difiere» para fr.n4.c01–c05 (solo los avisos ajenos de n5).
+- **Longitud de la situación** (150–250 palabras): c01 195 (correo, 4 párrafos), c02 186 (blog, 4), c03 203 (8 réplicas), c04 208 (mensaje de video, 5), c05 204 (blog, 4). Coherentes con sus ítems de comprensión (una sola respuesta cada uno). Hablantes: Ana, Hugo, Madame Dubois (nombres, no español).
+- **Evaluación:** 5 ítems puntuables y 4–5 formatos distintos por clase; el `escribir` abierto (`abierta: true`) se suma aparte. 3 `erroresFrecuentes` por clase. Práctica guiada: 5 ítems con `pista` en todas.
+- **Tipografía:** U+202F antes de ? ! : ; y dentro de « » en todo el francés; 0 apóstrofos rectos; sin anglicismos británicos ni regionalismos de España en es / en.
+
+## Veredicto
+
+GO
+
+## Contraste con las fichas
+
+Títulos y objetivos idénticos a `curriculo/fr/n4.json`; gramática, `introduce` (se-rappeler, lorsque-des-que, superlatif-quantite, venir-de-aller-imparfait, preposition-qui + relatifs-composes), `recicla`, vocabulario de la ficha (todas las palabras, c01 con 12 entradas), situación y tarea coinciden. Los ejercicios planificados están todos, con el mismo formato y clave, en guiada, independiente, situación y evaluación (el autor pulió la redacción, p. ej. c04 i4 pasó a una traducción guiada con plus-que-parfait). Nada de c06 en adelante: aller + infinitivo, el plus-que-parfait, dont y los relativos simples llegan como repaso; `auquel`/`duquel` quedan fuera. Extras del autor que se mantienen porque los usan sus ítems: `lorsque`, `dès que`, `les cousins` (c02); `à l’époque`, `le commerce`, `la pollution` (c03); `un souvenir`, `se souvenir de`, `le premier jour d’école` (c01).
+
+## Cambios aplicados (clase · ítem · antes → después)
+
+### Errores de contenido
+
+1. **c02, c03, c04, c05 · `contexto` de la situación (es).** Estaba escrito en francés (copia del texto meta) → en español: «Hugo escribe una entrada de blog…», «Ana se encuentra con Madame Dubois… Se tratan de vous.», «Hugo envía un mensaje de video a su abuela… Se tratan de tú.», «Ana escribe un artículo en su blog…».
+2. **c04 · explicación p3 (es / en).** Decía que `j’allais + infinitivo` es «justo después» sin aclarar y mezclaba tres momentos → ahora: hecho clave en passé composé; plus-que-parfait = lo ya pasado antes; `je venais de` = lo que acababa de pasar, justo antes; `j’allais` = lo que iba a pasar enseguida, justo después.
+3. **c04 · ejemplo 9.** «À dix-huit ans, c’est la majorité : elle venait de quitter l’internat.» (presente genérico + imparfait, sin hecho clave y con «elle» sin referente) → «Elle venait de quitter l’internat quand elle a eu dix-huit ans : c’était la majorité.» (es «Acababa de dejar el internado cuando cumplió dieciocho años: era la mayoría de edad.», en “She had just left the boarding school when she turned eighteen: it was legal adulthood.”).
+4. **c04 · ejemplo 7 (es) y e2 (consigna es).** «pasar el bachillerato / iba a pasar el bac» (en español «pasar» = aprobar, falso amigo) → «presentar el bachillerato» / «iba a presentar el bac».
+5. **c04 · i3 (feedback en).** «He already had his coat on…» (el hablante es «je») → «I already had my coat on: I was about to go out, j’allais sortir.»
+6. **c04 · s1 (pregunta).** «¿Qué acababa de hacer Hugo…?» tenía dos hechos ciertos en el texto (los exámenes y recibir el billete por e-mail) → «¿Qué acababa de terminar Hugo cuando lo llamaron?» / “What had Hugo just finished…?”.
+7. **c01 · i4 (consigna).** «lo recuerdo muy bien» admitía `je m’en souviens` (válido) además de `je me le rappelle` → la consigna fija el verbo: «con se rappeler y un pronombre» / “with se rappeler and a pronoun”.
+8. **c01 · tabla p7.** Las filas no eran paralelas («Je me souviens de lui» ↔ «Je me le rappelle», «Je me souviens d’elle» ↔ «Je me la rappelle bien») → seis filas paralelas con el mismo complemento en ambas columnas (cette maison, mon premier jour, ces vacances, très bien, avec plaisir).
+9. **c01 · ejemplo 1.** «cette maison bleue à Quito» contradecía la casa amarilla del correo de Ana → «cette maison jaune à Quito» (es «amarilla», en “yellow”).
+10. **c02 · explicación p2 (es / en).** «chaque fois que… expresa siempre repetición, así que lleva imparfait» (en pasado puede ir con passé composé en series cerradas) → «para hábitos del pasado lleva imparfait» / “for past habits it takes the imparfait”.
+11. **c03 · diálogo, línea de Ana (vous).** «Comment il était à l’époque ?» (registro oral, con una persona a la que trata de vous) → «Comment était-il à l’époque ?».
+12. **c03 · i3 (aceptadas).** + «C’est le quartier où il y a le moins de bruit la nuit.», «… pendant la nuit.» (órdenes y construcciones naturales).
+13. **c05 · e5 (relacionar).** Las glosas eran solo «avec qui / chez qui / pour qui» repetidas en es y en, sin ayuda → «avec qui (con quien) / (with whom)», «chez qui (en casa de quien) / (at whose home)», «pour qui (por quien) / (for whom)».
+
+### Guías de sonido y vocabulario
+
+14. **c01 · p4 y nota.** `ö` se usaba antes de definirse y se definía además `ü`, que no aparece en la clase → se define `ö` al inicio (e muda de je, me, se) y se quita `ü`; en el en: «in je, me and se the e is a short “uh”». La nota de «le premier jour d’école» llevaba «jur» (calibración 6: j = «sh») → «lö prö-myé shur dé-kol».
+15. **c01 · p1 / p2 (en).** “reflexive verb” → “pronominal verb (it takes me, te, se…)”.
+16. **c01 · vocabulario.** 13 entradas (máx. 12) → se quita `l’enfance` (ya enseñada en N2 B2 y presente en los ejemplos).
+17. **c02 · nota de `le goûter`.** «ü no aparece aquí; û = «u» española» (confuso) → «oû suena «u» (como la u española, no la ü francesa)» / “oû is “oo””.
+18. **c02 · p3.** «ö es la e muda» (pero en «tör» es «eu») → «ö es la e muda y también el sonido «eu» (corto, entre «e» y «o»…)»; en: «the mute e is a short “uh”».
+19. **c02 · vocabulario.** `les cousins` estaba en la lista pero no en la tarjeta de vocabulario → añadido a `refs`.
+20. **c03 · notas.** `à l’époque`: «la q final suena «k»» → «la terminación -que suena «k»»; `commerce`: «la s final de commerces no suena» (sugería una s final en «mèrs») → «la c de -ce suena «s»; en commerces la s del plural no suena».
+21. **c03 · vocabulario.** `autrefois` (palabra del título de la clase, enseñada solo en tablas y ejemplos) → entrada nueva `v-autrefois` («antes, en otro tiempo» / “in the past, formerly”, «o-trö-fwa» / “oh-truh-FWA”) y ref; la unidad queda en 12 entradas.
+22. **c04 · notas.** `les études supérieures`: «ö es la e muda» (en «ryör» es «eu») → «ö es el sonido «eu»…»; p4 (en): “the e is the mute ö” → “the e is a short “uh””.
+23. **c05 · p4 y nota de `l’idole`.** `ö` sin definir en «lö-kèl» y mal definida en meilleur → definición inicial (e muda y «eu») y se quita el paréntesis erróneo; `l’idole`: «la e muda de le desaparece» (idole es femenino) → «idole es femenino (une idole); l’ viene de la.» / “l’ stands for la.”
+
+## Revisión punto por punto
+
+1. **Francés de Francia.** c01: se souvenir de + en / pronombre tónico, se rappeler + COD con me le / me la / me les, ça me rappelle, marquée / marqué por concordancia con me. c02: lorsque / dès que / aussitôt que / chaque fois que + imparfait (hábito) y passé composé (hecho único), `lorsqu’il`. c03: le plus de / le moins de fijos (sin concordancia), davantage (de), autant de, autrefois / à l’époque + imparfait, de nos jours + presente. c04: venais / allais + infinitivo, plus-que-parfait de repaso. c05: preposición + qui para personas, preposición + lequel / laquelle / lesquels / lesquelles con el género y número del sustantivo, solo preposiciones que no se contraen, dont de repaso. Correcto.
+2. **Explicaciones es / en.** Cortas, con ejemplos, españolas neutras (tú, ustedes, auto, celular, sueldo, pasantía, abarrotes) e inglés americano (paycheck, phone booth, landline, stores, cell phone). Los contrastes con el inglés están (“I remember my house” sin preposición; “the friend I played with” sin preposición final).
+3. **Una sola respuesta.** Revisados todos los ítems: `elegir` con una sola opción correcta, `completar` con `aceptadas` donde hay variantes (c02 i3, c03 g3 «plus», c03 i3, c04 g5 / e4 con inversión de orden), `ordenar` con los órdenes naturales (c02 e5, c03 g5, c04 g5 y e4; el resto tiene un único orden natural). Los `escribir` abiertos no puntúan.
+4. **Pistas.** Las 25 pistas de guiada ayudan a resolver ese ítem, no repiten la consigna.
+5. **Relacionar.** Glosas distintas entre sí en c01, c02, c03, c04; c05 corregido (ver cambio 13).
+6. **Anatomía.** explicación → tablas → ejemplos (con audio) → vocabulario → guiada (5, con pista) → independiente (3–4) → situación (texto de 186–208 palabras + 2 ítems) → evaluación (5 puntuables + 1 abierta). Todos los formatos (elegir, escuchar, ordenar, completar, escribir, relacionar) aparecen en el bloque.
+7. **Nada sin enseñar / nada de clases posteriores.** El validador da 0 errores; revisión manual: ninguna clase usa gramática de una clase posterior del bloque (los relativos con preposición solo aparecen en c05; `où` y `dont` son repaso de N2–N3).
+
+## Hechos del reparto confirmados
+
+- Ana encuentra un álbum de fotos viejo en su cuarto y le escribe un correo a Lucas (se tutean; vuelven a escribirse tras casi un año sin hacerlo). De su infancia en Quito recuerda con precisión la casa pequeña y amarilla con un jardín pequeño; recuerda con menos claridad al vecino que tenía un perro grande (era amable con ella, pero no recuerda el nombre del perro); y cada verano pasaba un mes con sus padres en el campo, en casa de su abuela, cuya sopa es su «madeleine de Proust» (c01) / Ana finds an old photo album in her room and writes an e-mail to Lucas (they use tu; they are back in touch after almost a year without writing). From her childhood in Quito she remembers the small yellow house with a small garden clearly; the neighbor with a big dog less clearly (he was kind to her, but she doesn’t remember the dog’s name); and every summer she spent a month with her parents in the countryside at her grandmother’s, whose soup is her “madeleine de Proust” (c01).
+- Hugo, de niño, pasaba todo el verano en Lyon en casa de su abuela: jugaba en el jardín con sus primos y una bande de copains, merendaba pan con chocolate, su abuela lo castigaba un poco cuando hacía una travesura y los domingos hacía un pastel de chocolate; el último verano su abuela lo esperó a la salida de la estación y entendió que esos veranos se acababan (c02) / As a child, Hugo spent the whole summer in Lyon at his grandmother’s: he played in the garden with his cousins and a group of friends, had bread with chocolate for his snack, his grandmother punished him a little when he got into mischief and made a chocolate cake on Sundays; the last summer his grandmother waited for him at the station exit and he understood those summers were ending (c02).
+- Madame Dubois lleva cuarenta años viviendo en el barrio; recuerda que antes había menos autos, más comercios pequeños (panaderías, una tienda de abarrotes), una cabina telefónica en cada esquina, teléfono fijo en casa y cartas manuscritas; ella y Ana se tratan de vous; el barrio de los padres de Ana en Quito es el que más parques tiene de la ciudad (c03) / Madame Dubois has lived in the neighborhood for forty years; she remembers fewer cars, more small stores (bakeries, a grocery store), a phone booth on every corner, landlines at home and handwritten letters; she and Ana use vous; the neighborhood of Ana’s parents in Quito is the one with the most parks in the city (c03).
+- Hugo, hace dos años, acababa de terminar sus exámenes y estaba a punto de irse de vacaciones con Léa (ya tenía el boleto de tren) cuando lo llamó el responsable de una oficina de la ciudad, a la que había enviado una carta un mes antes, para ofrecerle una pasantía de tres meses (su primer trabajo); cambió sus planes (Léa se molestó, pero lo entendió), solo fue a ver a su abuela un fin de semana y, con su primer sueldo, pagó su alquiler él solo (c04) / Two years ago Hugo had just finished his exams and was about to leave on vacation with Léa (he already had his train ticket) when the manager of a city office, where he had sent a letter a month earlier, called to offer him a three-month internship (his first job); he changed his plans (Léa was upset but understood), visited his grandmother for just one weekend and paid his rent by himself with his first paycheck (c04).
+- Ana tuvo en Quito una profesora de francés a la que admiraba y gracias a la cual empezó a aprender francés (con libros en los que encontró sus primeras palabras); la casa de campo de su abuela sigue ahí; su abuela fue siempre la persona con quien pudo contar (c05) / In Quito Ana had a French teacher she admired and thanks to whom she started learning French (with books where she found her first words); her grandmother’s countryside house is still there; her grandmother was always the person she could count on (c05).
+
+## Sin resolver
+
+- **Cronología de la pasantía de Hugo (c04).** «Il y a deux ans» encaja con N2 (pasantía de tres meses en 2027) si N4 transcurre desde octubre de 2028; si el coordinador adelanta N4, habría que cambiar a «il y a trois ans». Los hechos de N2 / N3 (pasantía, informe de pasantía en N3 c03) no se contradicen.
+- **`davantage de … qu’avant` (c03, ejemplo 3 y g3).** La Académie lo admite y viene de la ficha; si un revisor nativo lo prefiere con `plus de`, g3 ya acepta `plus` en `aceptadas`.
+- **Tabla de imparfait de c02** muestra je / il / nous / ils (sin tu ni vous) porque es repaso de N2 c09 y la explicación da todas las terminaciones; la de c04 (venir de / aller) sí es completa.
+- **Palabras del vocabulario no incluidas en la ficha** y que se mantienen: ver «Contraste con las fichas». Ninguna palabra francesa de este bloque se retiró de una forma que afecte a b02–b10; `l’enfance` solo salió de la lista de vocabulario de c01 (sigue enseñada en N2 y en los ejemplos).
