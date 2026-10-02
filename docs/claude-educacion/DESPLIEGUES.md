@@ -485,3 +485,12 @@ Commit: `a779bdc` · Build: `main.dart.js` sin cambios de lógica (solo tests).
 Pruebas: Flutter 242 (1 omitida); `validar_ruta.py` y `validar_plan.py fr` 0 errores.
 Backup: `/var/www/onelingo/backups/20261002-edu-40-frances-n4-n5/web-anterior` (= edu-39). Salud 200; `.env` igual; APK servido; `n5-b10.json` servido; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-40-frances-n4-n5/web-retirada-post2 && cp -al backups/20261002-edu-40-frances-n4-n5/web-anterior web'`
+
+## Release: 20261002-edu-41-frances-n6-n7
+
+Fecha: 2026-10-02 · Responsable: Claude (Claude Code). Solo web (contenido); backend sin cambios y sin reinicios.
+Contenido: francés N6 y N7 (B2) completos, 100 clases escritas desde fichas con plan de ejercicios y revisadas bloque a bloque (GO); bancos de ubicación N5 y N6 compilados (108 ítems, N1–N6).
+Commit: `3002f02` (build) + `e825e52` (solo palabrasLibres/fichas) · Build: `main.dart.js` sin cambios de lógica.
+Pruebas: Flutter 242 (1 omitida); `validar_ruta.py` y `validar_plan.py fr` 0 errores.
+Backup: `/var/www/onelingo/backups/20261002-edu-41-frances-n6-n7/web-anterior` (= edu-40). Salud 200; `.env` igual; APK servido; `n7-b10.json` servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-41-frances-n6-n7/web-retirada-post2 && cp -al backups/20261002-edu-41-frances-n6-n7/web-anterior web'`
