@@ -20,10 +20,30 @@ def celda(c):
     return str(c)
 
 
+ETAPA = {'practica_guiada': 'guiada', 'practica_independiente': 'independiente', 'situacion': 'situacion',
+         'evaluacion': 'evaluacion'}
+
+
+def item_real(i):
+    """Un ejercicio publicado como lo ve el alumno: consigna, enunciado y respuesta."""
+    ops = i.get('opciones') or []
+    resp = i.get('respuesta')
+    if isinstance(resp, int) and 0 <= resp < len(ops):
+        resp = ops[resp]
+    if i.get('pares'):
+        resp = ' · '.join(f'{a} = {celda(b)}' for a, b in (p for p in i['pares'] if isinstance(p, list) and len(p) == 2))
+    enunciado = i.get('texto') or i.get('audio') or ES(i.get('preguntaApoyo')) or ES(i.get('pregunta')) or ''
+    if i.get('tokens') and not enunciado:
+        enunciado = ' / '.join(i['tokens'])
+    return {'formato': i.get('formato', ''), 'consigna': ES(i.get('consigna')), 'enunciado': enunciado,
+            'opciones': [celda(o) for o in ops], 'respuesta': celda(resp) if resp is not None else '',
+            'abierta': bool(i.get('abierta'))}
+
+
 def resumen_unidad(u):
     """Lo que el revisor necesita ver de una clase publicada (en español)."""
     r = {'explicaciones': [], 'tablas': [], 'ejemplos': [], 'vocabulario': [], 'situacion': None,
-         'practica': 0, 'evaluacion': 0, 'formatos': []}
+         'practica': 0, 'evaluacion': 0, 'formatos': [], 'ejercicios': {}}
     formatos = set()
     for v in u.get('vocabulario', []):
         r['vocabulario'].append([v.get('texto', ''), ES(v.get('traduccion'))])
@@ -41,6 +61,8 @@ def resumen_unidad(u):
             r['situacion'] = {'contexto': ES(p.get('contexto')),
                               'dialogo': [[l.get('hablante', ''), l.get('texto', ''), ES(l.get('traduccion'))]
                                           for l in p.get('dialogo', [])]}
+        if t in ETAPA and isinstance(p.get('items'), list):
+            r['ejercicios'].setdefault(ETAPA[t], []).extend(item_real(i) for i in p['items'] if isinstance(i, dict))
         if t in ('practica_guiada', 'practica_independiente'):
             r['practica'] += len(p.get('items', []))
         if t == 'evaluacion':
@@ -78,6 +100,7 @@ def main():
                 'recicla': c.get('recicla', []), 'campo': ES(c.get('vocabulario', {}).get('campo')),
                 'palabras': c.get('vocabulario', {}).get('palabras', []), 'sonido': c.get('sonido', ''),
                 'situacion': sit.get(c.get('situacion'), ''), 'tarea': ES(c.get('tarea')), 'estado': c.get('estado'),
+                'ejercicios': c.get('ejercicios'),
                 'contenido': resumen_unidad(u) if u else None,
             })
         niveles.append({

@@ -3,7 +3,7 @@
 Se escribió para N1 (FR-5c, publicado) y vale para todos los niveles: donde dice N1, aplica la tabla «Por nivel».
 
 Lee antes:
-- **tus 5 fichas** en `curriculo/fr/nX.json` (y `personajes` / `hechosDelReparto` de `n1.json`, más la `nota` del nivel) (`PLAN_CLASES.md`): escribe exactamente lo que dicen. No introduzcas gramática que no esté en su `introduce` ni en clases anteriores; lo que ya se vio va como repaso;
+- **tus 5 fichas** en `curriculo/fr/nX.json` (`PLAN_CLASES.md`), con `personajes` / `hechosDelReparto` de `n1.json` y la `nota` del nivel: escribe exactamente lo que dicen. No introduzcas gramática que no esté en su `introduce` ni en clases anteriores; lo que ya se vio va como repaso. Escribe los ejercicios de su **plan de ejercicios** (`ejercicios`) en ese formato y sobre esa clave; puedes pulir la redacción y completar `aceptadas`, pistas y feedback;
 - `PLAN_FRANCES.md` §3–§4 (pistas y anatomía de clase);
 - `ESQUEMA_CONTENIDO.md` (esquema 2: unidad, pasos, ítems y reglas);
 - como modelo de estilo, las clases publicadas del nivel anterior (`assets/contenido/fr/ruta/`) y sus `revision-*.md`.

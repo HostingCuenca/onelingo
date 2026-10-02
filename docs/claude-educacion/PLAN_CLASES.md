@@ -37,6 +37,25 @@ La escala es la del cliente (`escala-cliente.json`): N1 = A1 completo, N2 = A2, 
 }
 ```
 
+Además, toda ficha `planificado` lleva su **plan de ejercicios**, para que el autor sepa exactamente qué escribir:
+
+```json
+"ejercicios": {
+  "guiada":        [{"formato": "completar", "clave": "subjonctif-present",
+                     "consigna": "Completa con el subjuntivo de venir.",
+                     "ejemplo": "Il faut que tu ___ demain. → viennes"}],
+  "independiente": [/* 3–4 */],
+  "situacion":     {"texto": "Qué pasa, quién habla y en qué formato (diálogo, correo, anuncio)",
+                    "preguntas": [/* 1–2 */]},
+  "evaluacion":    [/* 4–8, ≥ 3 formatos; evalúa cada punto de introduce y responde a la tarea */]
+}
+```
+
+- `formato`: elegir, escuchar, ordenar, completar, escribir o relacionar.
+- `clave`: el punto que trabaja, de `introduce` o `recicla` de la ficha.
+- `consigna` (en español) y `ejemplo`: el ítem tal como se verá, con la respuesta tras «→».
+- El autor escribe esos ejercicios; puede pulir la redacción, no cambiar formato, clave ni lo que se evalúa.
+
 Reglas (las comprueba `python3 tools/curriculo/validar_plan.py <idioma>`):
 - 50 clases por nivel, 5 por bloque, alineadas con el bloque del marco.
 - `introduce`: cada punto se introduce **una sola vez** en todo el idioma. Lo que vuelve a aparecer va en `recicla`, y solo puede reciclarse lo introducido antes. Así dos bloques no enseñan lo mismo (lo que pasó con la edad en B3 y B4).

@@ -103,6 +103,13 @@ details.pub > div { padding: 4px 12px 12px; display: grid; gap: 12px; background
 .dlg div { display: grid; grid-template-columns: minmax(70px, auto) 1fr; gap: 8px; }
 .dlg b { font-weight: 600; color: var(--accent); }
 .note { display: grid; gap: 6px; }
+.ej { display: grid; gap: 10px; }
+.ej-grupo h4 { margin: 0 0 6px; font: 700 12px var(--f-body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ej-grupo ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.ej-grupo li { padding-left: 2px; }
+.fmt { font: 600 11.5px var(--f-mono); padding: 1px 6px; border-radius: 5px; background: var(--accent-soft); color: var(--accent); margin-right: 6px; }
+.resp { color: var(--ok); font-weight: 600; }
+.clave { font: 11.5px var(--f-mono); color: var(--muted); }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper);
   padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: 14px; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
@@ -200,8 +207,30 @@ function contenido(c) {
     <div class="field"><h4>Vocabulario</h4><ul class="cols">${k.vocabulario.map(v => `<li><span class="fr">${esc(v[0])}</span> <span class="muted">— ${esc(v[1])}</span></li>`).join('')}</ul></div>
     ${s ? `<div class="field"><h4>Situación</h4><p class="muted">${esc(s.contexto)}</p><div class="dlg">${s.dialogo.map(l => `<div><b>${esc(l[0])}</b><span><span class="fr">${esc(l[1])}</span><br><small class="muted">${esc(l[2])}</small></span></div>`).join('')}</div></div>` : ''}
     ${k.errores.length ? `<div class="field"><h4>Errores frecuentes</h4><ul>${k.errores.map(e => `<li><s class="muted">${esc(e[0])}</s> → <span class="fr">${esc(e[1])}</span><br><small class="muted">${esc(e[2])}</small></li>`).join('')}</ul></div>` : ''}
-    <p class="muted" style="margin:0">${k.practica} ejercicios de práctica · ${k.evaluacion} de evaluación · formatos: ${esc(k.formatos.join(', '))}</p>
+    ${ejerciciosReales(k.ejercicios)}
   </div></details>`;
+}
+
+const ETAPAS = [['guiada', 'Práctica guiada'], ['independiente', 'Práctica independiente'], ['situacion', 'Preguntas de la situación'], ['evaluacion', 'Evaluación']];
+function separar(ej) { const i = String(ej || '').lastIndexOf('→'); return i < 0 ? [ej, ''] : [ej.slice(0, i).trim(), ej.slice(i + 1).trim()]; }
+function itemPlan(it) {
+  const [enun, resp] = separar(it.ejemplo);
+  return `<li><span class="fmt">${esc(it.formato)}</span>${esc(it.consigna)}<br><span class="fr">${esc(enun)}</span>${resp ? ` <span class="resp">→ ${esc(resp)}</span>` : ''} <span class="clave">· ${esc(it.clave)}</span></li>`;
+}
+function planEjercicios(ej) {
+  if (!ej) return '';
+  return `<div class="ej"><div class="ej-grupo"><h4>Plan de ejercicios</h4></div>${ETAPAS.map(([k, label]) => {
+    const items = k === 'situacion' ? (ej.situacion || {}).preguntas || [] : ej[k] || [];
+    const extra = k === 'situacion' && ej.situacion ? `<p class="muted" style="margin:0 0 6px">${esc(ej.situacion.texto)}</p>` : '';
+    return items.length ? `<div class="ej-grupo"><h4>${label} · ${items.length}</h4>${extra}<ol>${items.map(itemPlan).join('')}</ol></div>` : '';
+  }).join('')}</div>`;
+}
+function itemReal(it) {
+  const ops = it.opciones && it.opciones.length ? `<br><small class="muted">${esc(it.opciones.join(' / '))}</small>` : '';
+  return `<li><span class="fmt">${esc(it.formato)}${it.abierta ? ' · abierta' : ''}</span>${esc(it.consigna)}${it.enunciado ? `<br><span class="fr">${esc(it.enunciado)}</span>` : ''}${ops}${it.respuesta ? ` <span class="resp">→ ${esc(it.respuesta)}</span>` : ''}</li>`;
+}
+function ejerciciosReales(ej) {
+  return `<div class="ej">${ETAPAS.map(([k, label]) => (ej[k] || []).length ? `<div class="ej-grupo"><h4>${label} · ${ej[k].length}</h4><ol>${ej[k].map(itemReal).join('')}</ol></div>` : '').join('')}</div>`;
 }
 
 function claseHTML(c) {
@@ -216,6 +245,7 @@ function claseHTML(c) {
       <div class="field"><h4>Tarea de evaluación</h4><p>${esc(c.tarea)}</p></div>
       <div class="field"><h4>Introduce · repasa</h4><div class="keys">${c.introduce.map(k => `<span class="key new">${esc(k)}</span>`).join('')}${c.recicla.map(k => `<span class="key">${esc(k)}</span>`).join('')}</div></div>
     </div>
+    ${c.contenido ? '' : planEjercicios(c.ejercicios)}
     ${contenido(c)}
     <div class="note"><label class="field" for="nota-${docId(c.id)}"><h4>Tu nota para esta clase</h4></label>
       <textarea id="nota-${docId(c.id)}" placeholder="Qué cambiarías: tema, ejemplo, palabra, nivel de dificultad…">${esc(r.nota || '')}</textarea>
@@ -226,7 +256,7 @@ function claseHTML(c) {
 function renderNivel(n) {
   const r = rev[docId('nivel-n' + n.nivel)] || {};
   const q = filtro.trim().toLowerCase();
-  const pasa = c => !q || [c.titulo, c.objetivo, c.tarea, c.campo, ...c.gramatica, ...c.palabras, ...c.introduce].join(' ').toLowerCase().includes(q);
+  const pasa = c => !q || [c.titulo, c.objetivo, c.tarea, c.campo, ...c.gramatica, ...c.palabras, ...c.introduce, JSON.stringify(c.ejercicios || '')].join(' ').toLowerCase().includes(q);
   const bloques = n.bloques.map(b => {
     const cs = n.clases.filter(c => c.bloque === b.bloque && pasa(c));
     if (!cs.length) return '';

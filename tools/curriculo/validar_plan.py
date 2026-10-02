@@ -97,6 +97,53 @@ def unidades_existentes(idioma):
     return pub, bor
 
 
+FORMATOS = {'elegir', 'escuchar', 'ordenar', 'completar', 'escribir', 'relacionar'}
+CUANTOS = {'guiada': (3, 5), 'independiente': (3, 4), 'evaluacion': (4, 8)}
+
+
+def validar_item(it, d, claves):
+    if not isinstance(it, dict):
+        errores.append(f'{d}: ejercicio no válido')
+        return
+    if it.get('formato') not in FORMATOS:
+        errores.append(f'{d}: formato {it.get("formato")!r} no válido')
+    for campo in ('consigna', 'ejemplo'):
+        if not (isinstance(it.get(campo), str) and it[campo].strip()):
+            errores.append(f'{d}: falta «{campo}»')
+    if it.get('clave') not in claves:
+        errores.append(f'{d}: clave {it.get("clave")!r} no está en introduce ni en recicla de la ficha')
+
+
+def validar_ejercicios(c, d, intro, recicla):
+    """Plan de ejercicios de la ficha (PLAN_CLASES.md §2): lo exigen las
+    clases planificadas, para que el autor sepa exactamente qué escribir."""
+    ej = c.get('ejercicios')
+    if not isinstance(ej, dict):
+        errores.append(f'{d}: falta el plan de ejercicios')
+        return
+    claves = set(intro) | set(recicla)
+    for paso, (mn, mx) in CUANTOS.items():
+        items = ej.get(paso) or []
+        if not mn <= len(items) <= mx:
+            errores.append(f'{d}: {paso} debe tener {mn}–{mx} ejercicios ({len(items)})')
+        for i, it in enumerate(items, 1):
+            validar_item(it, f'{d} {paso}[{i}]', claves)
+    s = ej.get('situacion') or {}
+    if not (isinstance(s.get('texto'), str) and s['texto'].strip()):
+        errores.append(f'{d}: falta situacion.texto (qué pasa y quién habla)')
+    preg = s.get('preguntas') or []
+    if not 1 <= len(preg) <= 2:
+        errores.append(f'{d}: la situación lleva 1–2 preguntas de comprensión')
+    for i, it in enumerate(preg, 1):
+        validar_item(it, f'{d} situacion[{i}]', claves)
+    ev = ej.get('evaluacion') or []
+    if len({it.get('formato') for it in ev if isinstance(it, dict)}) < 3:
+        errores.append(f'{d}: la evaluación usa al menos 3 formatos')
+    sin = [k for k in intro if k not in {it.get('clave') for it in ev if isinstance(it, dict)}]
+    if sin:
+        errores.append(f'{d}: la evaluación no evalúa {", ".join(sin)}')
+
+
 def validar_idioma(idioma, marco):
     carpeta = CURRICULO / idioma
     if not carpeta.exists():
@@ -166,6 +213,8 @@ def validar_idioma(idioma, marco):
             elif mb and s not in mb.get('situaciones', []):
                 avisos.append(f'{d}: la situación {s} no está en el bloque {bloque} del marco')
             e = c.get('estado')
+            if e == 'planificado' or c.get('ejercicios'):
+                validar_ejercicios(c, d, intro, c.get('recicla') or [])
             if e not in ESTADOS:
                 errores.append(f'{d}: estado {e!r} no válido')
                 continue
