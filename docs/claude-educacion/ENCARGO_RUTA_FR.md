@@ -81,3 +81,10 @@ Valida junto con todos los bloques anteriores del borrador. Debe dar 0 errores.
    - ü para la u francesa, ö para eu / e; se definen la primera vez que aparecen en un bloque.
    - En inglés: «zh» para j («bon-zhoor»); la nasal se aproxima avisando que la n no suena («vingt» = “van”, sin cerrar la boca en la n).
 
+
+## Calibración (revisiones de N2, 2026-10-02)
+
+7. **Español neutro de América e inglés americano.** Sí: departamento, celular, boleto, mesero, papas fritas, jugo, computadora, estacionar, ustedes. No: piso (vivienda), móvil, billete, camarero, patatas, zumo, ordenador, aparcar, vosotros. Inglés: apartment, cell phone, check, fries, store, subway, sneakers; los pisos franceses con su equivalente de EE. UU. (1er étage = second floor).
+8. **La historia no se contradice.** Lee `personajes` y `hechosDelReparto` de los niveles anteriores y del tuyo, y la `nota` del nivel. En tu informe lista los hechos nuevos que inventes (una línea `- es / en` cada uno); el revisor los confirma en «Hechos del reparto confirmados».
+9. **Una sola respuesta.** Si dos formas serían válidas (futur proche y futur simple, on y nous, con y sin elisión), la consigna fija cuál se pide o `aceptadas` incluye todas. Los `escribir` abiertos (`abierta: true`) no cuentan entre los ítems puntuables de la evaluación.
+10. **Validación con borradores.** Valida tu bloque encadenado con los borradores anteriores del mismo nivel que aún no estén integrados (`--borrador nX-b01.json … nX-bYY.json`). Si uno ya está en `assets/contenido/fr/ruta/`, quítalo de la lista: daría «id duplicado».
