@@ -13,7 +13,8 @@
   El módulo antiguo `fr.a1-1` sale del curso; su archivo se conserva.
 - Termina con `validar_ruta.py fr`.
 
-Uso: python3 tools/contenido/ruta-fr/integrar.py
+Uso: python3 tools/contenido/ruta-fr/integrar.py [--hasta N]
+     (--hasta N: integra solo hasta el nivel N, aunque haya bloques GO de niveles siguientes)
 """
 import json
 import pathlib
@@ -34,8 +35,9 @@ def aprobado(nv, b):
 
 def main():
     marco = {n['nivel']: n for n in json.loads((RAIZ / 'curriculo/marco.json').read_text(encoding='utf-8'))['niveles']}
+    hasta = int(sys.argv[sys.argv.index('--hasta') + 1]) if '--hasta' in sys.argv else 10
     niveles = []  # (nivel, [(bloque, datos)])
-    for nv in range(1, 11):
+    for nv in range(1, hasta + 1):
         bloques = []
         for b in range(1, BLOQUES + 1):
             fuente = AQUI / f'n{nv}-b{b:02d}.json'

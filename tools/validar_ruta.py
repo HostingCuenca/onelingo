@@ -98,6 +98,10 @@ class Validador:
         if curso.get("revision") not in ("inicial", "revisada"):
             self.error("curso.json", "revision debe ser 'inicial' o 'revisada'")
         libres = {w for p in curso.get("palabrasLibres", []) for w in palabras(p)}
+        # vocabularioEstricto: solo cuenta como enseñado el vocabulario que se
+        # muestra (refs de un paso `vocabulario`) o aparece en ejemplos,
+        # patrones y tablas; un vocablo declarado pero oculto no basta.
+        self.estricto = bool(curso.get("vocabularioEstricto"))
         niveles = {n["id"]: n for n in curso.get("niveles", [])}
         for n in niveles.values():
             self.apoyo(n.get("titulo"), f"nivel {n['id']}.titulo")
@@ -181,7 +185,14 @@ class Validador:
     def conocidas(self, u, unidades, vistos=None):
         res = set()
         for x in self._cadena(u, unidades):
-            res |= {w for v in x.get("vocabulario", []) for w in palabras(v.get("texto", ""))}
+            if getattr(self, "estricto", False):
+                mostrados = {r for p in x.get("pasos", []) if p.get("tipo") == "vocabulario" for r in p.get("refs", [])}
+                res |= {w for v in x.get("vocabulario", []) if v.get("id") in mostrados
+                        for w in palabras(v.get("texto", ""))}
+                res |= {w for p in x.get("pasos", []) if p.get("tipo") in ("ejemplos", "patron")
+                        for e in p.get("items", p.get("ejemplos", [])) for w in palabras(e.get("texto", ""))}
+            else:
+                res |= {w for v in x.get("vocabulario", []) for w in palabras(v.get("texto", ""))}
             # Las celdas de las tablas (escrituras, conjugaciones) también enseñan.
             res |= {w for p in x.get("pasos", []) if p.get("tipo") == "tabla"
                     for fila in p.get("filas", []) for c in fila if isinstance(c, dict) and "texto" in c
@@ -315,7 +326,12 @@ class Validador:
                 # puede declarar formas de transferencia, nombres propios o
                 # flexiones necesarias para validar ejercicios sin convertir
                 # cada distractor y cada frase completa en una tarjeta visible.
-                conocidas |= declaradas
+                if self.estricto:
+                    por_id = {v.get("id"): v for v in u.get("vocabulario", [])}
+                    conocidas |= {w for r in p.get("refs", []) if r in por_id
+                                  for w in palabras(por_id[r].get("texto", ""))}
+                else:
+                    conocidas |= declaradas
             if tipo in ENSENAR:
                 # Una vez mostrado por un paso de enseñanza, el vocabulario
                 # también puede utilizarse como distractor legítimo.
