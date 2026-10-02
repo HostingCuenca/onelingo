@@ -116,6 +116,8 @@ Cada bloque de N1 cierra con una lectura y una escucha que solo usan el vocabula
 
 ## 4. Qué aprende el alumno en cada nivel
 
+> **Manda el plan de clases** (`curriculo/fr/nX.json`, DEC-034): esta sección es la orientación inicial. Ajustes ya hechos en el plan: 50 clases por nivel y «bien que» en N5.
+
 ### N1 · A1 completo (100 clases)
 Puede: saludar y presentarse (y a otros), deletrear, pedir que repitan; números, hora, fechas, precios; gustos y rutina; comprar y pedir en un café o restaurante; pedir y dar una dirección sencilla; describir personas y lugares; invitar, aceptar y rechazar; planes inmediatos; rellenar un formulario y escribir un mensaje de 40 palabras.
 
@@ -152,7 +154,7 @@ Clave: plus-que-parfait, condicional presente, si + imparfait, subjuntivo presen
 
 ### N4 · B1+ (100 clases)
 Resumir y opinar sobre textos y entrevistas, referir lo que otros dijeron, plantear problemas y soluciones, entrevista de trabajo, médico, valorar películas y libros, texto argumentado de ~160 palabras.
-Clave: discurso indirecto en pasado, voz pasiva, doble pronombre, relativos compuestos, estructuras de énfasis, pour que / bien que.
+Clave: discurso indirecto en pasado, voz pasiva, doble pronombre, relativos compuestos, estructuras de énfasis, pour que.
 
 ### N5 · B2 (100 clases)
 Defender una opinión con argumentos y ejemplos, ventajas e inconvenientes, arrepentimiento y reproches, grados de certeza, comprender actualidad y conversaciones entre nativos.

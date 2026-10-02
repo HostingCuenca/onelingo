@@ -23,7 +23,7 @@ Lee antes:
 En orden:
 1. `explicacion`: corta y concreta. La primera abre con el **sonido del día**, un recordatorio de una grafía del Nivel 0 relacionada con las palabras de la clase.
 2. `ejemplos`: 5–8, con audio.
-3. `vocabulario`: 6–10 vocablos con artículo en los sustantivos.
+3. `vocabulario`: las palabras de la ficha (6–12), con artículo en los sustantivos. Si la gramática de la ficha necesita otra palabra, enséñala y dilo en el informe.
 4. `patron` o `tabla`: conjugaciones con la tabla completa.
 5. `practica_guiada`: 3–5 ítems con `pista`.
 6. `practica_independiente`: 3–4 ítems.
@@ -62,3 +62,9 @@ Valida junto con todos los bloques anteriores del borrador. Debe dar 0 errores.
 3. Guías de sonido exactas: cuidado con las consonantes finales (CaReFuL: la r de «bonjour» sí suena). Define ü/ö la primera vez que aparezcan.
 4. Los diálogos modelan el objetivo de la clase y la cortesía francesa («Et vous ?», «Enchanté(e)»).
 5. Personajes coherentes en todo el bloque (nombre, edad, ciudad): cada pregunta de comprensión con una sola respuesta. Formas femeninas para personajes femeninos.
+6. **Guías de pronunciación en español** (las mismas del Nivel 0):
+   - j y g suave (ge, gi) se escriben «sh» («bonjour» = «bon-shur»). Nunca «y» ni «j», que en español suenan distinto.
+   - Las nasales in / ain / un se escriben «en» («vingt» = «ven», «lundi» = «len-di»); an / en, «an»; on, «on».
+   - ü para la u francesa, ö para eu / e; se definen la primera vez que aparecen en un bloque.
+   - En inglés: «zh» para j («bon-zhoor»); la nasal se aproxima avisando que la n no suena («vingt» = “van”, sin cerrar la boca en la n).
+
