@@ -401,3 +401,16 @@ Commit: `63c47a1` · Build: `main.dart.js` `9e624c56…`.
 Pruebas: Flutter 230 (1 omitida); backend 21; `tsc` en staging. En producción: `situacionesDe('fr')` = 50, `situacionesDe('en')` = 50 y `objetivoValido('fr', 1, 's1-a1')` = true.
 Backup: `/var/www/onelingo/backups/20261001-edu-32-frances-verbos-situaciones/` (`web-anterior` = edu-31; `backend-src` con el `situaciones.ts` previo). Salud 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-32-frances-verbos-situaciones; mv web staging/20261001-edu-32-frances-verbos-situaciones/web-retirada-post2 && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && rm -f backend/src/content/situaciones-fr.json && pm2 restart onelingo-api'`
+
+## Release: 20261001-edu-33-frances-n1-b1-b4
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Solo web; backend sin cambios y sin reinicios.
+Contenido: francés FR-5c, primera tanda del Nivel 1 y plan de clases (DEC-034).
+- N1 francés B1–B4: clases 1–20, revisadas con GO y bilingües, con el reparto de personajes coherente.
+- Ruta: número de clase dentro del nivel; los niveles futuros muestran el MCER de la escala del cliente.
+- Plan de clases: marco común y fichas del francés N1–N2 (no van en la app).
+Commit: `436ae3b` · Build: `main.dart.js` `a3944073…`.
+Pruebas: Flutter 230 (1 omitida); `validar_ruta.py` 0 errores; `validar_plan.py fr` 0 errores. Navegador: Aprender en francés (Nivel 1 · A1 con 20 clases numeradas 1…20; N2 · A2, N3 · B1), clase 18 con la interfaz en español y clase 8 en inglés.
+Lock: había quedado un lock vacío de edu-32 (creado 03:24 UTC, un minuto después de su cambio; producción seguía en el build de edu-32); se retiró antes de tomar el nuevo.
+Backup: `/var/www/onelingo/backups/20261001-edu-33-frances-n1-b1-b4/web-anterior` (= edu-32). Salud 200; `.env` igual; APK servido; `n1-b04.json` servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-33-frances-n1-b1-b4/web-retirada-post2 && cp -al backups/20261001-edu-33-frances-n1-b1-b4/web-anterior web'`
