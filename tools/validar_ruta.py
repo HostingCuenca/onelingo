@@ -2,6 +2,9 @@
 """Valida las rutas de aprendizaje (assets/contenido/<idioma>/ruta/).
 
 Uso: python3 tools/validar_ruta.py [idioma ...]   (sin argumentos: todos)
+     python3 tools/validar_ruta.py fr --borrador b01.json [b02.json …]
+       valida además módulos en borrador (aún no están en curso.json), como si
+       se publicaran: sirve para revisar un bloque antes de integrarlo.
 Sale con código 1 si hay errores. Reglas en docs/claude-educacion/ESQUEMA_CONTENIDO.md.
 """
 import json
@@ -60,8 +63,9 @@ def huella_item(item):
 
 
 class Validador:
-    def __init__(self, idioma):
+    def __init__(self, idioma, borradores=()):
         self.idioma = idioma
+        self.borradores = list(borradores)
         self.errores = []
         self.advertencias = []
 
@@ -113,6 +117,18 @@ class Validador:
                 self.error(m["archivo"], "campo modulo no coincide con curso.json")
             if not datos.get("unidades"):
                 self.error(m["archivo"], "módulo sin unidades")
+            for u in datos.get("unidades", []):
+                if u.get("id") in unidades:
+                    self.error(u.get("id"), "id de unidad duplicado")
+                unidades[u.get("id")] = u
+        for archivo in self.borradores:
+            try:
+                datos = json.loads(Path(archivo).read_text(encoding="utf-8"))
+            except Exception as e:  # noqa: BLE001
+                self.error(str(archivo), f"no se puede leer: {e}")
+                continue
+            if not datos.get("unidades"):
+                self.error(str(archivo), "módulo sin unidades")
             for u in datos.get("unidades", []):
                 if u.get("id") in unidades:
                     self.error(u.get("id"), "id de unidad duplicado")
@@ -410,11 +426,16 @@ class Validador:
 
 
 def main():
-    idiomas = sys.argv[1:] or sorted(p.name for p in RAIZ.iterdir() if (p / "ruta").is_dir())
+    args = sys.argv[1:]
+    borradores = []
+    if "--borrador" in args:
+        i = args.index("--borrador")
+        args, borradores = args[:i], args[i + 1:]
+    idiomas = args or sorted(p.name for p in RAIZ.iterdir() if (p / "ruta").is_dir())
     errores = []
     advertencias = []
     for idioma in idiomas:
-        validador = Validador(idioma)
+        validador = Validador(idioma, borradores if len(idiomas) == 1 else ())
         errores += validador.validar()
         advertencias += validador.advertencias
     for e in errores:

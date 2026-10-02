@@ -75,12 +75,19 @@ class TramoSituacion {
         ObjetivoSituacion(o['id'], o['titulo'], o['frase'], o['traduccion']),
     ],
     [
+      // Inglés usa en/es; los idiomas nuevos, meta/traduccion (ya resuelta al
+      // idioma de la interfaz por localizarApoyo).
       for (final v in j['vocabulario'] as List)
-        PalabraSituacion(v['id'], v['en'], v['es'], v['ejemplo']),
+        PalabraSituacion(
+          v['id'],
+          v['meta'] ?? v['en'],
+          v['traduccion'] ?? v['es'],
+          v['ejemplo'],
+        ),
     ],
     [
       for (final f in j['frases'] as List)
-        FraseSituacion(f['id'], f['en'], f['es']),
+        FraseSituacion(f['id'], f['meta'] ?? f['en'], f['traduccion'] ?? f['es']),
     ],
   );
 }

@@ -22,7 +22,7 @@ Horas guiadas de referencia (CIA France, Alliance Française, DELF, Sorbonne; de
 | Acumulado | 90 | 200 | 290 | 380 | 450 | 525 | 600 | 695 | 790 | 880 |
 | Vocabulario receptivo acumulado | ~700 | ~1.500 | ~2.000 | ~2.500 | ~2.900 | ~3.300 | ~3.600 | ~4.000 | ~4.500 | ~5.000 |
 
-**Recomendación: 100 clases por nivel (20 bloques × 5), igual que inglés.** Razones: misma experiencia y misma barra de progreso en todos los idiomas, mismas herramientas de autoría y validación, y la prueba de nivel ya trabaja con esa escala. Lo que varía con las horas no es el número de clases sino **su densidad**: en N1 las clases son cortas (~10–12 min) y llevan sonido del día; en N2 hay más repaso (es el nivel con más horas); desde N5 las clases son más largas (~15–20 min) con textos y producción extensa.
+**Decisión final (DEC-033): 50 clases por nivel (10 bloques × 5).** (La propuesta original era 100, como inglés.) Razones: misma experiencia y misma barra de progreso en todos los idiomas, mismas herramientas de autoría y validación, y la prueba de nivel ya trabaja con esa escala. Lo que varía con las horas no es el número de clases sino **su densidad**: en N1 las clases son cortas (~10–12 min) y llevan sonido del día; en N2 hay más repaso (es el nivel con más horas); desde N5 las clases son más largas (~15–20 min) con textos y producción extensa.
 
 Alternativa (si se prefiere seguir las horas al pie de la letra): N1 100 · N2 120 · N3–N4 100 · N5–N7 80 · N8–N10 100 = 960 clases. Complica las herramientas y la interfaz sin beneficio claro para el alumno.
 
@@ -239,9 +239,9 @@ Todo el contenido nace **bilingüe** (apoyo en español e inglés), así sirve a
 | FR-2 | Fundamentos (ruta f0, 8 unidades) y «Primeras frases» (a1-1), con apoyo en inglés | después del Nivel 0 | **hecho**, contenido inicial |
 | FR-3 | «Mis verbos» en francés: unos 120 verbos con 6 personas y 5 tiempos (presente, passé composé, imperfecto, futur proche, futuro), regulares -er/-ir e irregulares | todos | pendiente |
 | FR-4 | Las 50 situaciones en francés × 3 tramos, bilingües | todos | pendiente |
-| FR-5 | N1 (A1): 100 clases en 20 bloques, con número, primeras frases, sonido del día, Repite y mini lectura (§3–§4) | A1 | pendiente: mapa editorial y luego autoría por bloques con revisión GO |
+| FR-5 | N1 (A1): **50 clases en 10 bloques** (DEC-033), con números, primeras frases, sonido del día, Repite y mini lectura (§3–§4) | A1 | pendiente: mapa editorial y luego autoría por bloques con revisión GO |
 | FR-6 | Prueba de ubicación v2 de francés (banco por nivel, mismo motor que inglés) | ubicación | pendiente |
-| FR-7 | N2 (A2), 100 clases | A2 | pendiente |
+| FR-7 | N2 (A2), 50 clases | A2 | pendiente |
 | FR-8 | N3–N10 | según demanda | pendiente |
 
 **Orden recomendado:** FR-3 y FR-4 (rápidos, reutilizan los motores de inglés), luego FR-5 por bloques y FR-6 en paralelo con N1.

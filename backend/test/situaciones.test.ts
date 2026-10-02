@@ -17,7 +17,7 @@ test('situaciones v2: copia generada idéntica a la fuente, 50 × 3 tramos', () 
     assert.equal(t.vocabulario.length, 10);
     assert.ok(t.objetivos.every(o => o.frase && o.traduccion && o.titulo));
   }
-  assert.deepEqual(situacionesDe('fr'), []);
+  assert.deepEqual(situacionesDe('de'), []);
   assert.deepEqual(situacionesDe('../x'), []);
 });
 test('objetivos de cualquier tramo son válidos solo en su situación', () => {
@@ -25,7 +25,7 @@ test('objetivos de cualquier tramo son válidos solo en su situación', () => {
   assert.ok(objetivoValido('en', 1, 's1-i1'));
   assert.ok(objetivoValido('en', 1, 's1-a3'));
   assert.equal(objetivoValido('en', 2, 's1-i1'), false);
-  assert.equal(objetivoValido('fr', 1, 's1-o1'), false);
+  assert.equal(objetivoValido('de', 1, 's1-o1'), false);
   assert.equal(tramoDeNivel(3), 'basico');
   assert.equal(tramoDeNivel(4), 'intermedio');
   assert.equal(tramoDeNivel(9), 'avanzado');
@@ -78,4 +78,19 @@ test('el material enseña solo el tramo pedido', () => {
   }}, 'en', 1));
   assert.equal(context.evidencias[0].asistida, true);
   assert.equal(context.evidencias[0].resultado, true);
+});
+
+test('francés: situaciones bilingües, objetivos válidos y prompt con el título en español', async () => {
+  const fr = situacionesDe('fr');
+  assert.equal(fr.length, 50);
+  assert.ok(objetivoValido('fr', 1, 's1-o1'));
+  assert.ok(objetivoValido('fr', 50, 's50-a3'));
+  assert.equal(objetivoValido('fr', 1, 's2-o1'), false);
+  const original = pool.query;
+  (pool as any).query = async () => ({ rows: [] });
+  try {
+    const ctx = await contextoSituacion('x', { idiomaMeta: 'fr', nivel: 2, situacionId: 1, objetivoId: 's1-o1', historial: [] });
+    assert.ok(!ctx.includes('[object Object]'));
+    assert.match(ctx, /Objetivo activo: /);
+  } finally { pool.query = original; }
 });

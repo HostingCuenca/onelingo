@@ -8,6 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:onelingo/core/content/catalog.dart';
 import 'package:onelingo/core/content/situaciones.dart';
+import 'package:onelingo/core/i18n/i18n.dart';
 import 'package:onelingo/core/state/providers.dart';
 import 'package:onelingo/features/situations/prueba_situacion_screen.dart';
 import 'package:onelingo/features/situations/situation_screen.dart';
@@ -53,6 +54,32 @@ void main() {
     }
     // El básico conserva los objetivos de siempre (progreso y servidor).
     expect(contenido[1]!.tramo(Tramo.basico).objetivos.first.id, 's1-o1');
+  });
+
+  test('francés: 50 situaciones bilingües con palabras en francés', () {
+    for (final interfaz in ['es', 'en']) {
+      final fr = situacionesDesdeJson(
+        localizarApoyo(
+              jsonDecode(
+                File('assets/contenido/fr/situaciones.json').readAsStringSync(),
+              ),
+              interfaz,
+            )
+            as Map<String, dynamic>,
+      )!;
+      expect(fr.length, 50);
+      final t = fr[1]!.tramo(Tramo.basico);
+      expect(t.objetivos.first.id, 's1-o1');
+      // meta → palabra francesa; traducción en el idioma de la interfaz.
+      expect(t.vocabulario.first.en, isNot(contains('{')));
+      expect(t.vocabulario.first.es, isNotEmpty);
+      expect(t.objetivos.first.titulo, isNotEmpty);
+    }
+    final v = Process.runSync('python3', [
+      'tools/contenido/validar_situaciones.py',
+      'assets/contenido/fr/situaciones.json',
+    ]);
+    expect(v.exitCode, 0, reason: '${v.stdout}');
   });
 
   test('el tramo sale del nivel y los superiores se abren al llegar', () {

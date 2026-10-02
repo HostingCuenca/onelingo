@@ -7,6 +7,7 @@ import '../../core/content/catalog.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/content/fotos.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/aprendizaje/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/daily_activities.dart';
 import '../../shared/widgets/mascot_coach.dart';
@@ -51,7 +52,7 @@ class HomeScreen extends ConsumerWidget {
                   context.go('/nivel0');
                 } else if (s.fundamentosPendientes) {
                   context.go('/fundamentos');
-                } else if (s.idiomaMeta == 'en') {
+                } else if (idiomasConRuta.contains(s.idiomaMeta)) {
                   context.go('/aprender');
                 } else if (actual != null) {
                   context.push('/leccion/${actual.id}');
@@ -88,7 +89,8 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             if (s.planId.isEmpty) _TrialBanner(restante: restante),
             if (s.planId.isEmpty) const SizedBox(height: 16),
-            if (s.idiomaMeta != 'en') ...[
+            // Lecciones antiguas: solo idiomas que aún no tienen ruta por niveles.
+            if (!idiomasConRuta.contains(s.idiomaMeta)) ...[
               TituloSeccion(tr('Tu camino de aprendizaje')),
               const SizedBox(height: 10),
               Tarjeta(
@@ -259,13 +261,13 @@ class HomeScreen extends ConsumerWidget {
             Row(
               children: [
                 _Stat(
-                  '${s.idiomaMeta == 'en' ? s.practicas.length : s.completadas.length}',
-                  s.idiomaMeta == 'en' ? tr('ACTIVIDADES') : tr('LECCIONES'),
+                  '${idiomasConRuta.contains(s.idiomaMeta) ? s.practicas.length : s.completadas.length}',
+                  idiomasConRuta.contains(s.idiomaMeta) ? tr('ACTIVIDADES') : tr('LECCIONES'),
                 ),
                 const SizedBox(width: 10),
                 _Stat(
-                  '${s.idiomaMeta == 'en' ? s.practicas.values.whereType<Map>().where((e) => e['correcta'] == true).length : s.vocabularioAprendido}',
-                  s.idiomaMeta == 'en' ? tr('RESUELTAS') : tr('PALABRAS'),
+                  '${idiomasConRuta.contains(s.idiomaMeta) ? s.practicas.values.whereType<Map>().where((e) => e['correcta'] == true).length : s.vocabularioAprendido}',
+                  idiomasConRuta.contains(s.idiomaMeta) ? tr('RESUELTAS') : tr('PALABRAS'),
                 ),
                 const SizedBox(width: 10),
                 _Stat('${s.segundosEstudio ~/ 60}', tr('MINUTOS')),

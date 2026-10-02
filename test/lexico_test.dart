@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:onelingo/core/aprendizaje/cargador.dart';
 import 'package:onelingo/core/aprendizaje/modelos.dart';
 import 'package:onelingo/core/content/situaciones.dart';
+import 'package:onelingo/core/i18n/i18n.dart';
 import 'package:onelingo/core/lexico/lexico.dart';
 import 'package:onelingo/core/lexico/verbos.dart';
 import 'package:onelingo/core/nivel0/nivel0.dart';
@@ -129,7 +130,10 @@ void main() {
       '--comprobar',
     ]);
     expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
-    final v = Verbos.fromJson(_json('assets/contenido/en/verbos.json'));
+    final v = Verbos.fromJson(
+      localizarApoyo(_json('assets/contenido/en/verbos.json'), 'es')
+          as Map<String, dynamic>,
+    );
     expect(v.verbos.length, greaterThan(150));
     final go = v.porId('go')!;
     expect(go.irregular, isTrue);
@@ -150,6 +154,7 @@ void main() {
       }
     }
     final p = preguntasVerbos(
+      v,
       [
         for (final x in v.verbos)
           if (x.nivel <= 2) x,
@@ -160,6 +165,25 @@ void main() {
     for (final q in p) {
       expect(q.opciones.toSet().length, q.opciones.length);
       expect(q.correcta, inInclusiveRange(0, q.opciones.length - 1));
+    }
+  });
+
+  test('Mis verbos en francés: tablas completas, j’ ante vocal y práctica', () {
+    final v = Verbos.fromJson(
+      localizarApoyo(_json('assets/contenido/fr/verbos.json'), 'en')
+          as Map<String, dynamic>,
+    );
+    expect(v.verbos.length, greaterThanOrEqualTo(100));
+    final aller = v.porId('aller')!;
+    expect(aller.irregular, isTrue);
+    expect(aller.tablas['futuro']![0], 'irai');
+    expect(aller.es, 'to go');
+    expect(v.conPronombre(0, aller.tablas['futuro']![0]), 'j’irai');
+    expect(v.conPronombre(1, 'vas'), 'tu vas');
+    final p = preguntasVerbos(v, v.verbos, Random(5));
+    expect(p.length, 10);
+    for (final q in p) {
+      expect(q.opciones.toSet().length, q.opciones.length);
     }
   });
 }

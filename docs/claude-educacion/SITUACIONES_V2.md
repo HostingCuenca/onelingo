@@ -88,3 +88,22 @@ Reglas:
 - **Revisión:** cada lote tuvo una revisión independiente con veredicto GO (`revision-N.md`). En total, unos 1.060 cambios: inglés americano, naturalidad, español neutro, vocabulario y progresión.
 - **Integración:** `python3 tools/contenido/situaciones/integrar_lotes.py`. Solo integra lotes con GO y 0 errores, y después regenera las copias.
 - **Para cambiar el contenido:** edita `assets/contenido/en/situaciones.json` y ejecuta `validar_situaciones.py` y `generar_situaciones.py`.
+
+## Esquema genérico para idiomas nuevos (francés en adelante)
+
+Inglés conserva sus claves (`en` = palabra meta, `es` = traducción). Los idiomas nuevos usan claves neutras y apoyo bilingüe:
+
+```json
+{"id": 1, "tramos": {"basico": {
+  "objetivos": [{"id": "s1-o1", "titulo": {"es": "Pedir una mesa", "en": "Ask for a table"},
+                 "frase": "Une table pour deux, s’il vous plaît.",
+                 "traduccion": {"es": "Una mesa para dos, por favor.", "en": "A table for two, please."}}],
+  "vocabulario": [{"id": "s1-b-v1", "meta": "la carte", "traduccion": {"es": "la carta, el menú", "en": "the menu"},
+                   "ejemplo": "Je peux voir la carte ?"}],
+  "frases": [{"id": "s1-b-f1", "meta": "L’addition, s’il vous plaît.", "traduccion": {"es": "La cuenta, por favor.", "en": "The check, please."}}]
+}}}
+```
+
+- **`meta`:** el texto en el idioma que se aprende (con artículo en los sustantivos).
+- **`traduccion` y `titulo`:** `{es, en}`, resueltos con `localizarApoyo`.
+- **Ids:** los mismos de siempre (`s<id>-o1`… básico, `s<id>-i*` intermedio, `s<id>-a*` avanzado).

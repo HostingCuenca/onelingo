@@ -54,7 +54,7 @@ class LevelsScreen extends ConsumerWidget {
             message:
                 tr('Primero entiende el ejemplo; después practica a tu ritmo.'),
           ),
-          if (s.idiomaMeta == 'en') ...[
+          if (idiomasConRuta.contains(s.idiomaMeta)) ...[
             TituloSeccion(tr('Tus diez niveles')),
             const SizedBox(height: 12),
             // Nivel 0 · Leer y pronunciar (desde cero), antes de los diez niveles.

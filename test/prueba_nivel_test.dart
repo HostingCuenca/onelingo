@@ -71,4 +71,12 @@ void main() {
     // El nivel 3 sigue cerrado hasta superar el 2.
     expect(e[ruta.delNivel('n3').first.id]!.estado, EstadoUnidad.bloqueada);
   });
+
+  test('francés: la prueba del nivel sale de su propia ruta', () async {
+    final fr = (await CargadorRuta().cargar('fr'))!;
+    final n1 = fr.curso.niveles.firstWhere((n) => n.nivelInterno == 1);
+    final items = itemsPruebaNivel(fr, n1.id, Random(3));
+    expect(items, isNotEmpty);
+    expect(items.where((i) => i.formato == FormatoItem.escribir), isEmpty);
+  });
 }

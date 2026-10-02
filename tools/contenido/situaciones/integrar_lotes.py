@@ -4,7 +4,8 @@
 Solo entra un lote cuyo `revision-N.md` dice GO y que pasa el validador.
 Escribe assets/contenido/en/situaciones.json y regenera las copias.
 
-Uso: python3 tools/contenido/situaciones/integrar_lotes.py
+Uso: python3 tools/contenido/situaciones/integrar_lotes.py [idioma]
+     (en: lotes en borrador/; otros idiomas: lotes en <idioma>/)
 """
 import json
 import pathlib
@@ -13,8 +14,9 @@ import subprocess
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parents[3]
-BORRADOR = RAIZ / 'tools/contenido/situaciones/borrador'
-DESTINO = RAIZ / 'assets/contenido/en/situaciones.json'
+IDIOMA = sys.argv[1] if len(sys.argv) > 1 else 'en'
+BORRADOR = RAIZ / 'tools/contenido/situaciones' / ('borrador' if IDIOMA == 'en' else IDIOMA)
+DESTINO = RAIZ / f'assets/contenido/{IDIOMA}/situaciones.json'
 sys.path.insert(0, str(RAIZ / 'tools/contenido'))
 from validar_situaciones import validar  # noqa: E402
 
@@ -37,7 +39,7 @@ def main():
         json.dumps(
             {
                 'version': '2026.10.01',
-                'idioma': 'en',
+                'idioma': IDIOMA,
                 'situaciones': [
                     {'id': s['id'], 'tramos': s['tramos']} for s in situaciones
                 ],

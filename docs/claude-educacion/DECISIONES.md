@@ -280,3 +280,11 @@ Decisión:
 - **Contenido nuevo:** nace bilingüe. `validar_nivel0.py --bilingue` y `nivel0_test` lo exigen en francés.
 - **Francés hecho bilingüe:** Nivel 0 F1–F10 (40 lecciones) y la ruta f0 + a1-1 (2.233 textos), con revisión independiente GO.
 - **Selector de idioma de la app:** en la bienvenida, en el paso del idioma nativo y en Perfil. Al cambiarlo se conserva el borrador del registro.
+
+## DEC-033 — 50 clases por nivel en francés y en los demás idiomas
+Fecha: 2026-10-01 · Decisión del cliente («así reducimos a la mitad y no nos extendemos indefinidamente»).
+Decisión:
+- **Tamaño:** los niveles N1–N10 de francés y del resto de idiomas tienen **50 clases** (10 bloques × 5) en lugar de 100. Inglés conserva sus 1.000 clases ya publicadas.
+- **Contenido por clase:** la densidad sube. Se mantiene la misma anatomía (sonido del día, aprende, repite, practica, mini lectura, escribe, repaso).
+- **Ritmo:** las pistas de números, verbos y lectura se reparten en la mitad de clases.
+- **La app no depende del número de clases.** La prueba de cada nivel toma una pregunta por tramo, hasta 20 tramos, y las barras y estados cuentan lo que el nivel tenga.

@@ -156,7 +156,7 @@ class _MisVerbosScreenState extends ConsumerState<MisVerbosScreen> {
                                 ),
                                 Flexible(
                                   child: Text(
-                                    '${x.formas['pasado']} · ${x.formas['participio']}',
+                                    x.resumen.skip(1).join(' · '),
                                     textAlign: TextAlign.end,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w800,
@@ -243,7 +243,9 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                           children: [
                             Expanded(
                               child: Text(
-                                'to ${verbo.infinitivo}',
+                                v.idioma == 'en'
+                                    ? 'to ${verbo.infinitivo}'
+                                    : verbo.infinitivo,
                                 style: const TextStyle(
                                   fontSize: 26,
                                   fontWeight: FontWeight.w900,
@@ -260,7 +262,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                         const SizedBox(height: 10),
                         InkWell(
                           onTap: () => oir(
-                            '${verbo.infinitivo}, ${verbo.formas['pasado']}, ${verbo.formas['participio']}',
+                            verbo.resumen.join(', '),
                           ),
                           child: Row(
                             children: [
@@ -271,7 +273,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                               const SizedBox(width: 6),
                               Expanded(
                                 child: Text(
-                                  '${verbo.infinitivo} · ${verbo.formas['pasado']} · ${verbo.formas['participio']}',
+                                  verbo.resumen.join(' · '),
                                   style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w800,
@@ -282,7 +284,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                           ),
                         ),
                         Text(
-                          tr('infinitivo · pasado · participio'),
+                          v.etiquetaResumen,
                           style: const TextStyle(color: OL.gris, fontSize: 13),
                         ),
                       ],
@@ -328,9 +330,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                               i++
                             )
                               InkWell(
-                                onTap: () => oir(
-                                  '${v.personas[i].meta.split(' /').first} ${formas[i]}',
-                                ),
+                                onTap: () => oir(v.conPronombre(i, formas[i])),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 7,
@@ -463,7 +463,7 @@ class _PracticaVerbosScreenState extends ConsumerState<PracticaVerbosScreen> {
     final nivel = ref.watch(nivelAlumnoProvider);
     final v = ref.watch(verbosProvider(s.idiomaMeta)).valueOrNull;
     if (v != null && preguntas == null) {
-      preguntas = preguntasVerbos([
+      preguntas = preguntasVerbos(v, [
         for (final x in v.verbos)
           if (x.nivel <= nivel) x,
       ], Random());

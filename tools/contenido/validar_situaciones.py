@@ -34,11 +34,44 @@ BRITANICO = re.compile(
 
 
 def palabras(t):
-    return len(re.findall(r"[A-Za-z’']+", t))
+    # Letras de cualquier idioma (très, déjà); el apóstrofo une (l’ami = 1).
+    return len(re.findall(r"[^\W\d_]+(?:['’][^\W\d_]+)*", t))
+
+
+def _bilingue(x):
+    return isinstance(x, dict) and str(x.get('es', '')).strip() and str(x.get('en', '')).strip()
+
+
+def _normalizar(situaciones, errores):
+    """Esquema genérico (meta + traduccion {es, en}) → claves del validador.
+
+    Devuelve True si el contenido es de un idioma nuevo (no inglés).
+    """
+    generico = False
+    for s in situaciones:
+        for tramo, t in (s.get('tramos') or {}).items():
+            donde = f's{s.get("id")} {tramo}'
+            for o in t.get('objetivos', []):
+                if isinstance(o.get('titulo'), dict) or isinstance(o.get('traduccion'), dict):
+                    generico = True
+                    if not _bilingue(o.get('titulo')) or not _bilingue(o.get('traduccion')):
+                        errores.append(f'{donde}: objetivo {o.get("id")} sin español e inglés')
+                    o['titulo'] = (o.get('titulo') or {}).get('es', '') if isinstance(o.get('titulo'), dict) else o.get('titulo', '')
+                    o['traduccion'] = (o.get('traduccion') or {}).get('es', '') if isinstance(o.get('traduccion'), dict) else o.get('traduccion', '')
+            for v in t.get('vocabulario', []) + t.get('frases', []):
+                if 'meta' in v:
+                    generico = True
+                    if not _bilingue(v.get('traduccion')):
+                        errores.append(f'{donde}: {v.get("id")} sin traducción en español e inglés')
+                    v['en'] = v.get('meta', '')
+                    v['es'] = (v.get('traduccion') or {}).get('es', '') if isinstance(v.get('traduccion'), dict) else ''
+    return generico
 
 
 def validar(situaciones):
     errores = []
+    situaciones = json.loads(json.dumps(situaciones))  # sin tocar el original
+    generico = _normalizar(situaciones, errores)
     for s in situaciones:
         sid = s.get('id')
         tramos = s.get('tramos') or {}
@@ -77,8 +110,10 @@ def validar(situaciones):
                     continue
                 if palabras(en) > 5:
                     errores.append(f'{donde}: «{en}» tiene más de 5 palabras')
-                raiz = re.sub(r'[^a-z]+', ' ', en.lower()).split()
-                ejemplo = re.sub(r'[^a-z]+', ' ', v['ejemplo'].lower())
+                raiz = re.sub(r'[^a-zà-ÿœ]+', ' ', en.lower()).split()
+                ejemplo = re.sub(r'[^a-zà-ÿœ]+', ' ', v['ejemplo'].lower())
+                if generico and len(raiz) > 1 and raiz[0] in ('le', 'la', 'les', 'un', 'une', 'des', 'l', 'du', 'de'):
+                    raiz = raiz[1:]  # el artículo no tiene que repetirse en el ejemplo
                 if raiz and raiz[0][:4] not in ejemplo:
                     errores.append(f'{donde}: el ejemplo de «{en}» no la contiene')
                 clave = en.lower()
@@ -93,7 +128,7 @@ def validar(situaciones):
                     errores.append(f'{donde}: frase {n} incompleta')
             textos_es = [o.get('traduccion', '') for o in objs] + [v.get('es', '') for v in voc] + [f.get('es', '') for f in fr]
             textos_en = [o.get('frase', '') for o in objs] + [v.get('en', '') + ' ' + v.get('ejemplo', '') for v in voc] + [f.get('en', '') for f in fr]
-            for x in textos_en:
+            for x in ([] if generico else textos_en):
                 m = BRITANICO.search(x)
                 if m:
                     errores.append(f'{donde}: «{m.group(0)}» es inglés británico (usamos el americano)')

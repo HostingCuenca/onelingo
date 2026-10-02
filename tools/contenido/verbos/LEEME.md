@@ -18,3 +18,22 @@ Lista de objetos:
 - **Ejemplo:** una frase natural y corta (≤ 10 palabras) que usa el verbo, con su traducción al español neutro.
 - **Exclusiones:** sin verbos modales (can, must…) ni phrasal verbs.
 - **Formas especiales:** `be` y `have` llevan sus formas especiales en el generador.
+
+## Francés: `verbos-fr.json` (y otros idiomas nuevos)
+
+Cada verbo trae explícitas sus **tablas**, sin deducirlas:
+
+```json
+{"infinitivo": "aller", "traduccion": {"es": "ir", "en": "to go"}, "tipo": "irregular", "nivel": 1,
+ "tablas": {
+   "presente":      ["vais", "vas", "va", "allons", "allez", "vont"],
+   "passe_compose": ["suis allé(e)", "es allé(e)", "est allé(e)", "sommes allé(e)s", "êtes allé(e)(s)", "sont allé(e)s"],
+   "imperfecto":    ["allais", "allais", "allait", "allions", "alliez", "allaient"],
+   "futur_proche":  ["vais aller", "vas aller", "va aller", "allons aller", "allez aller", "vont aller"],
+   "futuro":        ["irai", "iras", "ira", "irons", "irez", "iront"]
+ },
+ "ejemplo": {"meta": "Je vais au marché.", "traduccion": {"es": "Voy al mercado.", "en": "I'm going to the market."}}}
+```
+
+- **Personas, en orden:** je, tu, il/elle/on, nous, vous, ils/elles. La forma va sin pronombre; la app escribe j’ ante vocal o h muda.
+- **Tipo:** `regular` solo para los -er regulares y los -ir del tipo finir; los demás son `irregular`.
