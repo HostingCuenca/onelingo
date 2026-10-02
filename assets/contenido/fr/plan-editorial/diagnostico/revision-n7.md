@@ -1,0 +1,39 @@
+# Revisión independiente · diagnóstico francés N7
+
+GO
+
+Revisor: claude-reviewer-dx-fr · 2026-10-02 · validador `--idioma fr` sin errores (18 ítems, léxico contra la ruta publicada hasta N7). No se ejecutó `--compilar`.
+
+## Cambios (ítem: antes → después)
+
+- escucha.1: sin cambio («il ne savait pas qu’il y resterait trois ans» = futuro en el pasado, c08; la trampa «il avait prévu» exige entender «ne savait pas»).
+- escucha.2: sin cambio (avoir beau, c26; ver residual).
+- escucha.3: la última frase daba la respuesta («le prix ne changera pas» ↔ «le loyer reste le même»), y la consigna ya fijaba el caso «si no pintan». Ahora: «baisser notre loyer de dix pour cent pendant deux mois, à charge pour nous de repeindre la cuisine avant mars. Faute de quoi, la baisse sera deux fois moins importante.» Hay que combinar el 10 % de la primera frase con la última y entender «faute de quoi» (c31). Consigna «cuánto baja el alquiler si no pintan a tiempo»; opciones cinq (correcta) / dix (la cifra del audio) / ne baisse pas du tout; las tres miden 7 palabras.
+- escucha.4: sin cambio (si ce n’est / ne serait-ce que, c45; la opción «Rien, elle a tout aimé» repite «tout aimé» del audio).
+- lectura.1: «il mit la maison en vente» ↔ «vendre sa maison» se resolvía por léxico, y los troncos del passé simple (mourut, vint, fit) eran adivinables. Texto nuevo con «il dut vendre la maison de la famille» (y «il put enfin ouvrir» como señuelo dos frases después, c06). Consigna «qué se cuenta de la venta de la casa»; opciones «il a gardé la maison toute sa vie» / «il a choisi de la vendre» / «il n’a pas eu le choix» (correcta: dut = tuvo que). Sin cognados ni repetición léxica con la correcta.
+- lectura.2: sin cambio («à la fin du XIXe siècle» → años 1890, c20; «les années 1920» del texto y el XVIIIe como distractores).
+- lectura.3: la correcta era la única más larga (9 contra 7 y 8 palabras) y «argent déjà trouvé» se descartaba solo por «encore faut-il». Ahora: «pour le projet, sans condition» / «pour le projet, si l’argent est trouvé» (correcta) / «contre le projet, qu’il trouve trop cher». Longitudes 6 / 9 / 9.
+- lectura.4: «nombreux sont ceux qui le font» (primera frase) y la fiesta «pour toutes ces familles» daban «casi todas» sin la inversión. Texto neutro («on parle souvent des départs à l’étranger») y la fiesta «pour les familles du quartier». Opciones: «peu de familles ont un parent à l’étranger» (lectura ingenua de «rares… ont») / «beaucoup de familles ont quitté la France» / «presque toutes ont un parent à l’étranger» (correcta); 7 / 7 / 8 palabras.
+- gramatica.1, 2, 3 y 4: sin cambio (il ne fait aucun doute que + indicativo; quelles que soient con concordancia, mientras «quel que soit» ya se vio en N6; veiller à ce que + subjuntivo; ne expletivo tras craindre, con «soit absent» como lectura ingenua).
+- vocabulario.1 y 2: sin cambio (économe / radin / fouineur / borné, todas de N7; poser un lapin con chat y chien como señuelos).
+- vocabulario.3: remboursement (N2) y préavis (N4) eran palabras ya conocidas por un alumno de N6, que acertaba por descarte de lo conocido. Opciones ahora surclassement (correcta) / revirement (c11) / faux pas (c38), todas de N7 y masculinas como pide «un ___». Consigna «el sustantivo» (antes «la palabra del hotel»).
+- vocabulario.4: «roman de gare» se descartaba por «film» y «coup de cœur» por «pas aimé». Ahora navet (correcta) / coup de cœur / calembour. Consigna «la expresión que completa la frase».
+- escritura.1: rúbrica rehecha. (1) Concesión «adjetivo + que + subjuntivo»: ~100 formas de adjetivos (masculino, femenino, plural) × soit / puisse / paraisse / ait con sujeto il / elle / on / ils / elles o inversión; antes fallaban «pour utile que puisse être», «si juste que paraisse», «pour séduisant qu’il paraisse», «si grande qu’ait été». (2) «loin de / d’» + ~190 infinitivos (se añaden diviser, gêner, punir, convaincre, motiver…) y pronombre + infinitivo («loin de nous aider»); los pronombres sueltos que no son pronombre-objeto («la», «l’») ya no valen. (3) Tema de la medida: determinante y sustantivo concordados (mesure, décision, loi, règle, idée, projet, plan, réforme, taxe, interdiction, dispositif…); se quitan combinaciones absurdas («la idée», «au foule»). Mínimo 14 → 12 palabras (una respuesta completa y corta, «Si utile que soit cette loi, elle est trop chère. Loin d’aider, elle gêne.», tiene 13).
+- escritura.2: rúbrica rehecha. (1) «suite à la lecture de» + 16 objetos (article, éditorial, tribune, dossier…). (2) Fórmula de toma de palabra con continuación obligatoria: antes «permettez-moi de dire» o «je tiens à dire» pasaban sin contenido; ahora el verbo (~33 en «je tiens à…», ~27 en «permettez-moi de…») va seguido de que / de / determinante, más «je tiens à réagir» + ~60 continuaciones y fórmulas equivalentes (je me permets de, je souhaite / voudrais / aimerais réagir, je me dois de). (3) Tema solo de turismo: antes «ville», «quartier», «habitants» daban por válida una carta sobre fútbol que dijera «notre ville»; ahora tourisme, touristes, visiteurs, hôtels, locations, Airbnb, croisières, adjetivo touristique… Mínimo 16 → 14.
+- review: PENDING → GO.
+
+## Comprobaciones
+
+- Una sola respuesta defendible por ítem; claves verificadas contra texto y audio. Escucha: ninguna se resuelve sin oír (futuro en el pasado, concesión, cálculo del 5 %, «si ce n’est la fin»).
+- Cada ítem depende de un punto N7 ausente de N1–N6: futur dans le passé (c08), avoir beau (c26), à charge pour / faute de quoi (c31), si ce n’est (c45), passé simple dut / put (c06), datación con siglos (c20), encore faut-il que (c29), inversión del atributo (c39), il ne fait aucun doute (c13), quelles que soient (c27), veiller à ce que (c34), ne expletivo (c37), connotación (c02), poser un lapin (c23), surclassement (c33), navet (c45), concesión intensiva y loin de (c28, c29), carta al lector (c47).
+- Rúbricas probadas con la normalización de la app (`_normalizar_app`): modelo, aceptadas y 50 respuestas plausibles o no (otros adjetivos, verbos, determinantes, con y sin tildes, apóstrofo recto, mayúsculas). Pasan: variantes con otros adjetivos, «pour… que puisse être», «si… que paraisse», «loin de nous aider», «loin d’être», «je tiens à vous dire que», «permettez-moi de réagir», «je me permets de réagir aux». Fallan: español, inglés, media tarea, fuera de tema (fútbol, mascotas), «quelle que soit» en lugar de «si… que», «Si bonne qu’elle soit. Loin de résoudre. La mesure.» (8 palabras) y fórmulas desnudas.
+- Tipografía: U+202F antes de : ! ? ; y apóstrofo ’. Consignas ≤ 90 (es) y ≤ 110 (en); español neutro; inglés estadounidense.
+- Posiciones de la respuesta: 6 / 5 / 5 en A / B / C. La correcta no es la única más larga en ningún ítem.
+- Reparto: inicio (registro y connotación, passé simple, futuro en el pasado), mitad (certeza, datación, modismos, avoir beau, quelles que, encore faut-il), final (faute de quoi, veiller à ce que, ne expletivo, inversión del atributo, ne serait-ce que, carta).
+
+## Residual aceptado
+
+- escucha.2 (avoir beau) se entiende por yuxtaposición («s’entraîner tous les soirs… il perd toujours»): un alumno de N6 puede acertar sin conocer la construcción; el distractor causal solo lo descarta quien la reconoce. escucha.1 también se resuelve en parte por léxico («ne savait pas» + «trois ans»).
+- vocabulario.3: surclassement se descifra en parte por sur + classe y el contexto. vocabulario.4: un alumno que sepa navet = nabo puede dudar entre navet y calembour.
+- Las rúbricas no ven orden ni sentido: «Si bonne qu’elle soit la mesure loin de résoudre la mesure la mesure la mesure» (12 palabras) pasa; el formato (frases por grupo) no permite exigir que formen oraciones. escritura.1 acepta «loin de nous» / «loin de vous» sin infinitivo detrás.
+- Tamaño: n7.json ~123 KB indentado (las evidencias van en una línea por grupo); N6 es ~346 KB.
