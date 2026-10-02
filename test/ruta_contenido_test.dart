@@ -121,7 +121,10 @@ void main() {
     () async {
       for (final l in idiomas) {
         final ruta = (await CargadorRuta().cargar(l.code))!;
-        final a1 = ruta.delNivel(l.code == 'en' ? 'n1' : 'a1-1');
+        // Con N1 publicado (inglés, francés) el A1 es n1; si no, a1-1.
+        final a1 = ruta.delNivel(
+          ruta.delNivel('n1').isNotEmpty ? 'n1' : 'a1-1',
+        );
         expect(a1.length, greaterThanOrEqualTo(7), reason: l.code);
         // El A1 empieza donde terminan los fundamentos.
         expect(a1.first.prerequisitos, [

@@ -2,7 +2,8 @@
 """Integra los bloques de N1 francés aprobados en la ruta (ENCARGO_N1_FR.md).
 
 - Solo entra un bloque con `revision-bXX.md` en GO, en orden y sin huecos (B1, B2…).
-- Encadena prerrequisitos: c01 → fr.f0.se-presenter y cada clase → la anterior
+- Encadena prerrequisitos: c01 → fr.f0.se-presenter y cada clase → la anterior,
+  y numera el orden global a continuación de Fundamentos
   (los autores usan prerrequisitos provisionales para trabajar en paralelo).
 - Copia cada bloque a assets/contenido/fr/ruta/n1-bXX.json y registra en
   curso.json el nivel `n1` (A1, nivelInterno 1) con sus módulos. El módulo
@@ -47,10 +48,14 @@ def main():
     if not bloques:
         sys.exit('No hay bloques con revisión GO.')
     anterior = 'fr.f0.se-presenter'
+    # El orden global es consecutivo: N1 sigue a Fundamentos.
+    orden = 1 + max(u['orden'] for u in json.loads((RUTA / 'f0.json').read_text(encoding='utf-8'))['unidades'])
     for n, datos in bloques:
         for u in datos['unidades']:
             u['prerequisitos'] = [anterior]
+            u['orden'] = orden
             anterior = u['id']
+            orden += 1
         datos['modulo'] = f'fr.n1-b{n:02d}'
         (RUTA / f'n1-b{n:02d}.json').write_text(
             json.dumps(datos, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

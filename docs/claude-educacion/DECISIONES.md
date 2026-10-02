@@ -288,3 +288,11 @@ Decisión:
 - **Contenido por clase:** la densidad sube. Se mantiene la misma anatomía (sonido del día, aprende, repite, practica, mini lectura, escribe, repaso).
 - **Ritmo:** las pistas de números, verbos y lectura se reparten en la mitad de clases.
 - **La app no depende del número de clases.** La prueba de cada nivel toma una pregunta por tramo, hasta 20 tramos, y las barras y estados cuentan lo que el nivel tenga.
+
+## DEC-034 — Plan de clases antes del contenido
+Fecha: 2026-10-01 · Decisión del cliente («antes de empezar necesitamos la planificación de todas las clases así no nos perdemos o divagamos»).
+Decisión:
+- **Marco común** (`curriculo/marco.json`): 10 niveles × 10 bloques iguales para todos los idiomas salvo el inglés, con tema, objetivo, funciones, léxico y situaciones.
+- **Plan por idioma** (`curriculo/<idioma>/nX.json`): una ficha por clase (título, objetivo, gramática, lo que introduce y recicla, vocabulario, sonido, situación, tarea y estado).
+- **Nada se escribe fuera del plan.** Cada punto se introduce una sola vez; los autores reciben las fichas de su bloque y el revisor las contrasta. Valida `tools/curriculo/validar_plan.py`.
+- Método completo en `PLAN_CLASES.md`.

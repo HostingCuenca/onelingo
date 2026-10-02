@@ -1026,3 +1026,14 @@ class Diagnostico {
     return plan;
   }
 }
+
+/// MCER de un nivel en la escala del cliente (N1 = A1 … N10 = C1),
+/// `escala-cliente.json`.
+String cefrNivel(int nivel) => switch (nivel) {
+  <= 0 => 'Desde cero',
+  1 => 'A1',
+  2 => 'A2',
+  3 || 4 => 'B1',
+  5 || 6 || 7 => 'B2',
+  _ => 'C1',
+};

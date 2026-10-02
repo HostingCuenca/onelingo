@@ -309,6 +309,7 @@ class _Ruta extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 10),
             child: _FilaUnidad(
               unidad: u,
+              numero: unidades.indexOf(u) + 1,
               info: estados[u.id]!,
               titulo: t(u.titulo),
               objetivo: t(u.objetivo),
@@ -422,12 +423,16 @@ class _Destacada extends StatelessWidget {
 class _FilaUnidad extends StatelessWidget {
   const _FilaUnidad({
     required this.unidad,
+    required this.numero,
     required this.info,
     required this.titulo,
     required this.objetivo,
     required this.previa,
   });
   final UnidadRuta unidad;
+
+  /// Número de la clase dentro de su nivel (1, 2…), no el orden global.
+  final int numero;
   final InfoUnidad info;
   final String titulo, objetivo;
   final String? previa;
@@ -454,7 +459,7 @@ class _FilaUnidad extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${unidad.orden}. $titulo',
+                    '$numero. $titulo',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w800,

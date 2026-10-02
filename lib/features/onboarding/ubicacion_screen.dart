@@ -466,15 +466,6 @@ String _habilidad(String h) => switch (h) {
 
 /// MCER de cada nivel del curso (escala cliente).
 /// Ojo: también se guarda en el diagnóstico (`cefr`), por eso no se traduce aquí.
-String cefrNivel(int nivel) => switch (nivel) {
-  <= 0 => 'Desde cero',
-  1 => 'A1',
-  2 => 'A2',
-  3 || 4 => 'B1',
-  5 || 6 || 7 => 'B2',
-  _ => 'C1',
-};
-
 /// `/prueba-nivel`: inglés usa la prueba v2; los demás idiomas, el
 /// diagnóstico anterior.
 class PruebaNivelScreen extends ConsumerWidget {

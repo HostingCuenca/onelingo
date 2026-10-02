@@ -215,12 +215,12 @@ void main() {
     expect(find.text('Fundamentos de Inglés'), findsOneWidget);
     expect(find.text('Siguiente paso'), findsOneWidget);
     expect(
-      find.text('0. Primer contacto', skipOffstage: false),
+      find.text('1. Primer contacto', skipOffstage: false),
       findsOneWidget,
     );
     expect(find.text('Versión inicial'), findsNothing);
     await tester.scrollUntilVisible(
-      find.text('6. Presentarte'),
+      find.text('7. Presentarte'),
       200,
       scrollable: find.byType(Scrollable).first,
     );

@@ -38,11 +38,11 @@ class LevelsScreen extends ConsumerWidget {
 
     // MCER según la escala del curso (Nivel 2 = A2, Nivel 3 = B1…); la
     // equivalencia histórica solo si el curso no declara el nivel.
-    String cefrNivel(int n) {
+    String cefrDelNivel(int n) {
       for (final nv in ruta?.curso.niveles ?? const <NivelCurso>[]) {
         if (nv.id == 'n$n') return nv.cefr;
       }
-      return cefrDe(n.toDouble());
+      return cefrNivel(n);
     }
 
     return Scaffold(
@@ -65,7 +65,7 @@ class LevelsScreen extends ConsumerWidget {
             for (var n = 1; n <= 10; n++)
               _TarjetaNivelRuta(
                 numero: n,
-                cefr: cefrNivel(n),
+                cefr: cefrDelNivel(n),
                 nivelId: nivelRuta(n),
                 ruta: ruta,
                 estado: s,

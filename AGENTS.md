@@ -5,7 +5,8 @@ Este repositorio es la fuente de verdad. Lee en este orden y no más allá de lo
 1. `docs/ARQUITECTURA_VIGENTE.md`: el mapa que manda (pantallas, fuentes canónicas, legado congelado, reglas de interfaz y hoja de ruta A–E).
 2. `docs/claude-educacion/PROGRESO.md`: en qué estamos.
 3. `docs/claude-educacion/DECISIONES.md`: lo que el cliente ya decidió (DEC-xxx). No lo reviertas sin preguntar.
-4. Solo para tu área: el plan o contrato correspondiente (`ESQUEMA_CONTENIDO.md`, `DIAGNOSTICO_V2.md`, `NIVEL_0_INGLES.md`, `PLAN_FRANCES.md`…).
+4. Contenido de idiomas distintos del inglés: `docs/claude-educacion/PLAN_CLASES.md` (ninguna clase se escribe fuera de su ficha en `curriculo/<idioma>/nX.json`).
+5. Solo para tu área: el plan o contrato correspondiente (`ESQUEMA_CONTENIDO.md`, `DIAGNOSTICO_V2.md`, `NIVEL_0_INGLES.md`, `PLAN_FRANCES.md`…).
 
 `docs/archivo/` es historia: no lo uses para decidir.
 
