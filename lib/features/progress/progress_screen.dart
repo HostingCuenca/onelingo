@@ -12,6 +12,7 @@ import '../../core/models/models.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/lexico/lexico.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Perfil y progreso del estudiante (REQUERIMIENTOS §13).
@@ -320,20 +321,7 @@ class ProgressScreen extends ConsumerWidget {
             style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
           ),
           const SizedBox(height: 6),
-          Wrap(
-            spacing: 8,
-            children: [
-              for (final e in I18n.disponibles.entries)
-                ChoiceChip(
-                  label: Text(e.value),
-                  selected: s.interfaz == e.key,
-                  selectedColor: OL.moradoClaro,
-                  onSelected: (_) => ref
-                      .read(progressProvider.notifier)
-                      .elegirIdiomaInterfaz(e.key),
-                ),
-            ],
-          ),
+          const SelectorIdiomaApp(),
           const SizedBox(height: 8),
           const EffectsSettings(),
           const SizedBox(height: 10),

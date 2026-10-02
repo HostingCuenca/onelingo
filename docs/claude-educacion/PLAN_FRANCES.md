@@ -229,9 +229,26 @@ Mismo método que inglés: mapa editorial por nivel → autoría por bloques con
   - **Fundamentos de lectura (§3.1)** se implementan como **Nivel 0 · Leer y pronunciar** con el mismo motor del inglés: `assets/contenido/fr/nivel0/`, mapa de sonidos propio y marca `‿` de enlace. Después vienen Fundamentos (ruta f0) y N1.
 - **Revisor nativo:** sin confirmar. El contenido sale como versión inicial, con revisión independiente por IA, hasta que lo revise una persona nativa.
 
+### Hoja de ruta de la academia de francés (actualizada 2026-10-01)
+
+Todo el contenido nace **bilingüe** (apoyo en español e inglés), así sirve a hispanohablantes y a anglohablantes.
+
+| Fase | Qué | Para quién | Estado |
+|---|---|---|---|
+| FR-1 | Nivel 0 · Leer y pronunciar: F1–F10, 40 lecciones (sonidos, letras mudas, nasales, R, enlace, prueba «Ya lees francés») | desde cero | **hecho**, bilingüe |
+| FR-2 | Fundamentos (ruta f0, 8 unidades) y «Primeras frases» (a1-1), con apoyo en inglés | después del Nivel 0 | **hecho**, contenido inicial |
+| FR-3 | «Mis verbos» en francés: unos 120 verbos con 6 personas y 5 tiempos (presente, passé composé, imperfecto, futur proche, futuro), regulares -er/-ir e irregulares | todos | pendiente |
+| FR-4 | Las 50 situaciones en francés × 3 tramos, bilingües | todos | pendiente |
+| FR-5 | N1 (A1): 100 clases en 20 bloques, con número, primeras frases, sonido del día, Repite y mini lectura (§3–§4) | A1 | pendiente: mapa editorial y luego autoría por bloques con revisión GO |
+| FR-6 | Prueba de ubicación v2 de francés (banco por nivel, mismo motor que inglés) | ubicación | pendiente |
+| FR-7 | N2 (A2), 100 clases | A2 | pendiente |
+| FR-8 | N3–N10 | según demanda | pendiente |
+
+**Orden recomendado:** FR-3 y FR-4 (rápidos, reutilizan los motores de inglés), luego FR-5 por bloques y FR-6 en paralelo con N1.
+
 ### Estado de la pista de lectura
 
 | Unidad | Contenido | Estado |
 |---|---|---|
-| F1–F5 | lo que ya sabes leer; letras que no suenan; ou y u; las e; eu, o, oi | primera entrega |
-| F6–F10 | consonantes nuevas; nasales I y II; gn, ill, R y -ent; enlace y prueba de lectura | pendiente |
+| F1–F5 | lo que ya sabes leer; letras que no suenan; ou y u; las e; eu, o, oi | hecho (bilingüe) |
+| F6–F10 | consonantes nuevas; nasales I y II; gn, ill, R y -ent; enlace y prueba de lectura | hecho (bilingüe) |

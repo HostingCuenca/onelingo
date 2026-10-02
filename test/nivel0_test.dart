@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onelingo/app/theme.dart';
 import 'package:onelingo/core/efectos.dart';
+import 'package:onelingo/core/i18n/i18n.dart';
 import 'package:onelingo/core/nivel0/nivel0.dart';
 import 'package:onelingo/core/state/providers.dart';
 import 'package:onelingo/features/nivel0/leccion_n0_screen.dart';
@@ -31,16 +32,18 @@ class _AudioGlobal extends GlobalAudioplayersPlatformInterface {
   dynamic noSuchMethod(Invocation invocation) => Future<void>.value();
 }
 
-Nivel0 cargar([String idioma = 'en']) => Nivel0.desdeJson(
-  jsonDecode(
-        File('assets/contenido/$idioma/nivel0/nivel0.json').readAsStringSync(),
-      )
-      as Map<String, dynamic>,
-  jsonDecode(
-        File('assets/contenido/$idioma/nivel0/sonidos.json').readAsStringSync(),
-      )
-      as Map<String, dynamic>,
-);
+Nivel0 cargar([String idioma = 'en', String interfaz = 'es']) {
+  // Igual que la app: los textos {es, en} se resuelven al idioma de la interfaz.
+  Map<String, dynamic> leer(String archivo) =>
+      localizarApoyo(
+            jsonDecode(
+              File('assets/contenido/$idioma/nivel0/$archivo').readAsStringSync(),
+            ),
+            interfaz,
+          )
+          as Map<String, dynamic>;
+  return Nivel0.desdeJson(leer('nivel0.json'), leer('sonidos.json'));
+}
 
 void main() {
   AudioplayersPlatformInterface.instance = _Audio();
@@ -93,6 +96,16 @@ void main() {
     expect(textoPlano('(sh:=)(i:ih)p'), 'ship');
     expect(segmentos('(k:_)n(ow:ow)')[0].muda, isTrue);
     expect(textoPlano('Hello!'), 'Hello!');
+  });
+
+  test('El Nivel 0 francés trae cada explicación en español e inglés', () {
+    // Sirve a hispanohablantes y anglohablantes (I18N.md, fase I2).
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'fr',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
   });
 
   for (final idioma in idiomasConNivel0)

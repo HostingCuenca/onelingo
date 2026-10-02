@@ -14,6 +14,7 @@ import '../../core/content/curriculum.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Flujo de primera experiencia (REQUERIMIENTOS §10):
@@ -273,19 +274,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   Widget _contenido() => switch (paso) {
     0 => _cuenta(),
-    1 => _idiomas(
-      nativo,
-      (c) {
-        setState(() {
-          nativo = c;
-          diagnostico = null;
-        });
-        // La app pasa al idioma nativo elegido (si lo tiene; si no, inglés).
-        ref
-            .read(progressProvider.notifier)
-            .elegirIdiomaInterfaz(idiomaInterfazPara(c));
-      },
-      soloDisponibles: false,
+    1 => Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(child: _idiomaNativo()),
+        const SizedBox(height: 10),
+        // El idioma de la app sigue al nativo, pero se puede cambiar aquí.
+        Text(
+          tr('Idioma de la app'),
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+        ),
+        const SizedBox(height: 6),
+        const SelectorIdiomaApp(),
+      ],
     ),
     2 => _idiomas(
       meta,
@@ -389,6 +390,23 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       }),
     ),
   );
+
+  Widget _idiomaNativo() => _idiomas(
+      nativo,
+      (c) {
+        setState(() {
+          nativo = c;
+          diagnostico = null;
+        });
+        // La app pasa al idioma nativo elegido (si lo tiene; si no, inglés).
+        // Antes se guarda el borrador: cambiar de idioma reconstruye la app.
+        _persistir();
+        ref
+            .read(progressProvider.notifier)
+            .elegirIdiomaInterfaz(idiomaInterfazPara(c));
+      },
+      soloDisponibles: false,
+    );
 
   Widget _idiomas(
     String sel,

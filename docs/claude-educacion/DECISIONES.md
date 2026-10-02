@@ -272,3 +272,11 @@ Decisión:
 - **Idioma de la interfaz:** el elegido en Perfil o, si no hay elección, el nativo, y si no está disponible, inglés. La primera visita usa el idioma del dispositivo.
 - **Textos de apoyo del contenido:** siguen el idioma de la interfaz.
 - **Alternativa descartada:** las ARB de Flutter. Obligaban a inventar unas 940 claves y a reescribir cada llamada.
+
+## DEC-032 — Contenido bilingüe e idioma de la app en el registro
+Fecha: 2026-10-01 · Acordado con el cliente («al registrarse, que puedan elegir el idioma de la interfaz»).
+Decisión:
+- **Textos de apoyo:** cualquiera puede ser `{"es": …, "en": …}`. `localizarApoyo` lo resuelve al idioma de la interfaz al cargar (Nivel 0, situaciones…); la ruta ya usaba `TextoApoyo`.
+- **Contenido nuevo:** nace bilingüe. `validar_nivel0.py --bilingue` y `nivel0_test` lo exigen en francés.
+- **Francés hecho bilingüe:** Nivel 0 F1–F10 (40 lecciones) y la ruta f0 + a1-1 (2.233 textos), con revisión independiente GO.
+- **Selector de idioma de la app:** en la bienvenida, en el paso del idioma nativo y en Perfil. Al cambiarlo se conserva el borrador del registro.

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/i18n/i18n.dart';
+import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -26,6 +27,11 @@ class WelcomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const Align(
+                      alignment: Alignment.centerRight,
+                      child: SelectorIdiomaApp(sobreColor: true),
+                    ),
+                    const SizedBox(height: 12),
                     Text(
                       tr('ONE LINGO · A TU RITMO'),
                       textAlign: TextAlign.center,

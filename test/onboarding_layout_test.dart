@@ -56,7 +56,8 @@ void main() {
         'Coreano',
         'Ruso',
       ]) {
-        final rect = tester.getRect(find.text(idioma));
+        // .first: «Español» también está en el selector de idioma de la app.
+        final rect = tester.getRect(find.text(idioma).first);
         expect(rect.top, greaterThan(0));
         expect(
           rect.bottom,

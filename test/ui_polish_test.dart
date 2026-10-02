@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:onelingo/core/state/providers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:onelingo/app/theme.dart';
 import 'package:onelingo/features/onboarding/welcome_screen.dart';
 import 'package:onelingo/shared/widgets/primary_button.dart';
@@ -12,17 +15,22 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
+    SharedPreferences.setMockInitialValues({});
+    final prefs = await SharedPreferences.getInstance();
     await tester.pumpWidget(
-      MaterialApp(
-        theme: buildTheme(),
-        builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            textScaler: const TextScaler.linear(1.5),
-            disableAnimations: true,
+      ProviderScope(
+        overrides: [prefsProvider.overrideWithValue(prefs)],
+        child: MaterialApp(
+          theme: buildTheme(),
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaler: const TextScaler.linear(1.5),
+              disableAnimations: true,
+            ),
+            child: child!,
           ),
-          child: child!,
+          home: const WelcomeScreen(),
         ),
-        home: const WelcomeScreen(),
       ),
     );
     await tester.pumpAndSettle();

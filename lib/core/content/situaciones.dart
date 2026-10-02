@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../i18n/i18n.dart';
+import '../state/providers.dart';
 
 /// Situaciones v2 (docs/claude-educacion/SITUACIONES_V2.md): las 50 de
 /// `catalogo_situaciones.g.dart`, cada una con tres tramos que crecen con el
@@ -133,7 +134,11 @@ final situacionesProvider =
       } catch (_) {
         return null;
       }
-      return situacionesDesdeJson(jsonDecode(raw) as Map<String, dynamic>);
+      // Textos de apoyo {es, en} en el idioma de la interfaz.
+      final interfaz = ref.watch(progressProvider.select((s) => s.interfaz));
+      return situacionesDesdeJson(
+        localizarApoyo(jsonDecode(raw), interfaz) as Map<String, dynamic>,
+      );
     });
 
 // --- Progreso ---------------------------------------------------------------

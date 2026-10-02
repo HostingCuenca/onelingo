@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/i18n.dart';
 import '../state/providers.dart';
 
 /// Nivel 0 · Leer y pronunciar (desde cero, por idioma). Contenido en
@@ -224,10 +225,18 @@ class Nivel0 {
 /// Nivel 0 del idioma que estudia el alumno (null si ese idioma no tiene).
 final nivel0Provider = FutureProvider<Nivel0?>((ref) async {
   final idioma = ref.watch(progressProvider.select((s) => s.idiomaMeta));
+  // Explicaciones en el idioma de la interfaz (textos {es, en} del JSON).
+  final interfaz = ref.watch(progressProvider.select((s) => s.interfaz));
   if (!idiomasConNivel0.contains(idioma)) return null;
   final base = 'assets/contenido/$idioma/nivel0';
-  final n = jsonDecode(await rootBundle.loadString('$base/nivel0.json'));
-  final s = jsonDecode(await rootBundle.loadString('$base/sonidos.json'));
+  final n = localizarApoyo(
+    jsonDecode(await rootBundle.loadString('$base/nivel0.json')),
+    interfaz,
+  );
+  final s = localizarApoyo(
+    jsonDecode(await rootBundle.loadString('$base/sonidos.json')),
+    interfaz,
+  );
   return Nivel0.desdeJson(n as Map<String, dynamic>, s as Map<String, dynamic>);
 });
 

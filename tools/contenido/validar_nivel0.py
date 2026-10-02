@@ -2,7 +2,10 @@
 """Valida unidades del Nivel 0 (mismas reglas que test/nivel0_test.dart).
 
 Uso:
-  python3 tools/contenido/validar_nivel0.py <idioma> [archivo.json]
+  python3 tools/contenido/validar_nivel0.py <idioma> [archivo.json] [--bilingue]
+
+Con --bilingue exige que cada texto de apoyo sea {"es": …, "en": …}
+(fase I2: el contenido sirve a hispanohablantes y a anglohablantes).
 
 Sin archivo valida assets/contenido/<idioma>/nivel0/nivel0.json. El archivo
 puede ser un nivel0.json completo o un borrador {"unidades": [...]}.
@@ -36,6 +39,41 @@ def plano(m):
 
 def opciones(p):
     return [o if isinstance(o, dict) else {'m': o} for o in p.get('opciones', [])]
+
+
+CAMPOS_APOYO = ('texto', 'pregunta', 't', 'nota', 'titulo', 'objetivo')
+
+
+def faltan_idiomas(datos):
+    """Textos de apoyo que no tienen español e inglés."""
+    res = []
+
+    def bilingue(v):
+        return isinstance(v, dict) and v.get('es') and v.get('en')
+
+    for u in datos['unidades']:
+        for campo in ('titulo', 'objetivo'):
+            if u.get(campo) and not bilingue(u[campo]):
+                res.append(f'{u["id"]}.{campo}')
+        for l in u['lecciones']:
+            if not bilingue(l.get('titulo')):
+                res.append(f'{l["id"]}.titulo')
+            for i, p in enumerate(l.get('pasos', [])):
+                for campo in CAMPOS_APOYO:
+                    if campo in p and not bilingue(p[campo]):
+                        res.append(f'{l["id"]}#{i}.{campo}')
+                for w in p.get('palabras', []) + [o for o in p.get('opciones', []) if isinstance(o, dict)]:
+                    if 't' in w and not bilingue(w['t']):
+                        res.append(f'{l["id"]}#{i}.palabra.t')
+                if p['tipo'] == 'elige_significado':
+                    if not all(bilingue(o) for o in p.get('opciones', [])):
+                        res.append(f'{l["id"]}#{i}.opciones')
+    for k, v in (datos.get('textos') or {}).items():
+        if k == 'grupos':
+            res += [f'textos.grupos.{g}' for g, t in v.items() if not bilingue(t)]
+        elif k not in ('muestra', 'emoji') and not bilingue(v):
+            res.append(f'textos.{k}')
+    return res
 
 
 def validar(idioma, datos):
@@ -110,14 +148,20 @@ def validar(idioma, datos):
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
-    idioma = sys.argv[1]
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    idioma = args[0]
     ruta = (
-        pathlib.Path(sys.argv[2])
-        if len(sys.argv) > 2
+        pathlib.Path(args[1])
+        if len(args) > 1
         else RAIZ / f'assets/contenido/{idioma}/nivel0/nivel0.json'
     )
     datos = json.loads(ruta.read_text(encoding='utf-8'))
     problemas, faltan = validar(idioma, datos)
+    if '--bilingue' in sys.argv:
+        sin = faltan_idiomas(datos)
+        problemas += [f'sin español e inglés: {x}' for x in sin[:40]]
+        if len(sin) > 40:
+            problemas.append(f'… y {len(sin) - 40} más')
     for p in problemas:
         print('ERROR', p)
     if faltan:

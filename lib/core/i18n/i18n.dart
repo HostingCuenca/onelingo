@@ -62,3 +62,26 @@ String trDato(String es) => I18n.traducir(es, const {});
 /// disponible; si no, inglés.
 String idiomaInterfazPara(String nativo) =>
     I18n.disponibles.containsKey(nativo) ? nativo : 'en';
+
+/// Idiomas que puede tener un texto de apoyo del contenido.
+const _apoyos = {'es', 'en', 'fr', 'pt', 'de', 'it'};
+
+/// Resuelve los textos de apoyo de un JSON de contenido: cada mapa
+/// `{"es": …, "en": …}` (solo cadenas) se cambia por el texto en [idioma],
+/// o en español si falta. Lo demás queda igual. Así un contenido puede pasar
+/// de un texto simple (solo español) a bilingüe sin tocar el modelo.
+Object? localizarApoyo(Object? j, String idioma) {
+  if (j is List) return [for (final x in j) localizarApoyo(x, idioma)];
+  if (j is Map) {
+    if (j.isNotEmpty &&
+        j.containsKey('es') &&
+        j.keys.every(_apoyos.contains) &&
+        j.values.every((v) => v is String)) {
+      return (j[idioma] as String?) ?? j['es'] as String;
+    }
+    return {
+      for (final e in j.entries) '${e.key}': localizarApoyo(e.value, idioma),
+    };
+  }
+  return j;
+}
