@@ -241,18 +241,20 @@ void main() {
           'nivel': 8,
           'recomendado': 8,
         };
-        for (final s in [
+        for (final (s, nivel) in [
           // Diagnóstico antiguo (escala histórica).
-          frances(nivelInicial: 4, diagnostico: diag),
-          frances(nivelInicial: 8, diagnostico: diag),
+          (frances(nivelInicial: 4, diagnostico: diag), 4),
+          (frances(nivelInicial: 8, diagnostico: diag), 8),
           // Prueba v2 guardada antes de limitarse (escala del curso).
-          frances(nivelCliente: 4, diagnostico: {'idioma': 'fr'}),
+          (frances(nivelCliente: 4, diagnostico: {'idioma': 'fr'}), 4),
         ]) {
+          // Se queda en su nivel si está publicado; si no, en el más alto.
+          final esperado = min(nivel, maximo);
           final e = estadosAlumno(fr, s);
-          expect(nivelUbicacionRuta(fr, s), maximo);
-          expect(nivelAlumnoEnRuta(fr, s), maximo);
-          // El último nivel publicado está abierto, no superado ni omitido.
-          final id = 'n$maximo';
+          expect(nivelUbicacionRuta(fr, s), esperado);
+          expect(nivelAlumnoEnRuta(fr, s), esperado);
+          // Su nivel está abierto, no superado ni omitido.
+          final id = 'n$esperado';
           final primera = e[fr.delNivel(id).first.id]!;
           expect(nivelSuperado(fr, e, s.practicas, id), isFalse);
           expect(primera.omitible, isFalse);
@@ -304,9 +306,9 @@ void main() {
       );
       await tester.pump();
       await tester.pump();
-      // Con el tope, el alumno estudia el nivel publicado más alto (hoy N1 o
-      // N2), no un nivel sin clases.
-      final tope = nivelPublicadoMaximo(fr);
+      // Con el tope, el alumno estudia N4 o, si aún no está publicado, el
+      // nivel publicado más alto; nunca un nivel sin clases.
+      final tope = min(4, nivelPublicadoMaximo(fr));
       final cefr = fr.curso.niveles.firstWhere((n) => n.id == 'n$tope').cefr;
       final n1 = find.ancestor(
         of: find.text('Nivel $tope · $cefr'),

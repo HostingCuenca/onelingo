@@ -1,0 +1,80 @@
+# Revisión independiente · N6 francés, bloque 7 (clases 31–35)
+
+- **Archivo:** `tools/contenido/ruta-fr/n6-b07.json` (`fr.n6.c31` … `fr.n6.c35`). Revisor distinto del autor.
+- **Validador:** `python3 tools/validar_ruta.py fr --borrador n5-b01…b10 n6-b01…b07` → **0 errores en c31–c35** (repetido tras los últimos cambios; al final de la revisión el validador añadió la regla «el modelo tiene menos palabras que minimoPalabras» y da 17 errores, todos en unidades de otros bloques —n4.c02/c04/c49/c50, n5.c06…c46, n6.c02/c03/c05—, ninguno en b07; los borradores N3–N4 ya están integrados y se quitaron de la lista). Con n6-b08…b10 añadidos, c31–c35 siguen sin errores (los 19 errores que salen son de otros bloques en curso).
+- **Plan:** `python3 tools/curriculo/validar_plan.py fr` → 0 errores; ningún «título de la unidad difiere» para c31–c35.
+- Vocabulario estricto (punto 11) comprobado: todo lo nuevo de situación e ítems está en tarjetas, ejemplos o tablas.
+- Leídos también los borradores n6-b02, b06 y b09 (situaciones donde aparece Karim) para buscar choques de reparto: no hay.
+
+## Veredicto
+
+GO
+
+## Contraste con las fichas
+
+Cada clase enseña lo que dice su ficha y nada posterior: c31 quitte à + infinitivo (repaso de si + imparfait, atenuación, à condition que, ofrecer con je peux vous proposer / Qu’en dites-vous ?); c32 quand bien même + condicional (contraste con même si + imparfait; conceder: je veux bien, je suis prêt à); c33 en contrepartie / en échange de / moyennant, je vous propose plutôt, que diriez-vous de, à supposer que; c34 s’engager à + infinitivo / à ce que + subjuntivo, il est entendu que + futuro, futur antérieur, tenir à ce que y le fait que (recicla); c35 se laisser + infinitivo (participio invariable), laisser + infinitivo, se faire avoir. `titulo` y `objetivo` iguales a los de la ficha; todas las palabras de `vocabulario` de las fichas están (9 + 8 + 8 + 8 + 9, más palabras de apoyo declaradas). Los ejercicios del plan están todos con el mismo formato y la misma clave, en el mismo orden (guiada 5, independiente 4, situación 2, evaluación 6). `orden` 631–635, prerrequisitos c30 → c31 → … → c35, `cefr` B2, `nivelInterno` 6. `erroresFrecuentes`: 3 (c31, c33) o 4 (c32, c34, c35) por clase.
+
+**Evaluación (≥ 4 ítems puntuables en ≥ 2 formatos):** cada clase tiene 5 ítems puntuables + 1 `escribir` abierto (`abierta: true`, no puntúa y se suma a los 4). Formatos puntuables: c31 5 (completar, elegir, escuchar, ordenar, relacionar), c32 4, c33 3, c34 4, c35 5. Todas cumplen.
+
+**Situaciones (300–500 palabras, contando por espacios):** c31 326, c32 326, c33 322, c34 320, c35 316 (antes 320 / 326 / 307 / 304 / 302: c33–c35 estaban justo sobre el mínimo). Hablantes: Karim, Ana, Le technicien, Le fournisseur; nunca en español.
+
+## Cambios aplicados (clase · ítem · antes → después)
+
+### c31
+1. **Situación, línea 1 de Karim.** «Pouvez-vous le réparer avant lundi ?» (c32 y c34 terminan las obras el lunes, así que el pedido de c31 contradecía la serie) → «Pouvez-vous passer demain ?» (es / en adaptados).
+2. **Cifras de la situación y de la tabla «Las palabras de la lectura».** El presupuesto era «environ six cents euros»; en c33 el presupuesto detallado suma 220 € (pieza) + 2 h × 80 € = 380 € → «environ quatre cents euros» (todas las apariciones, es / en incluidos).
+3. **Situación, cierre.** Karim «prends l’entretien» ya en c31, pero en c33 y c34 el contrato de mantenimiento sigue en negociación (contradicción de historia) → «À ce prix-là, je suis content. Pour l’entretien, je regarde le devis ce soir.» y, al final, «C’est pour ça que je veux le prendre, quitte à payer l’entretien chaque année» (con «un contrat d’entretien»); es / en adaptados. La hipótesis s2 («Si vous me faisiez un prix, je prendrais l’entretien») sigue siendo válida.
+4. **Tabla p5.** La fila del futuro («vous ferez / vous faites») estaba bajo las columnas «Imparfait» y «Condicional» (etiquetas falsas) → sacada a una tabla propia p5b «Cuidado: no es el futuro ni el presente» con sus columnas (los distractores `ferez` y `faites` de i2 siguen enseñados).
+
+### c32
+5. **Tabla p5.** Igual que en c31: la fila «futuro» con formas mezcladas (reviendrez / voudrons / baisserez / ferez) bajo columnas de imparfait y condicional → tabla propia p5b «Cuidado: el futuro no es una hipótesis» (verbo / futuro).
+6. Comprobado y sin cambios: la secuencia sigue las `items` de la ficha y es coherente (ver abajo).
+
+### c33
+7. **Tarifa (tabla de lectura y situación).** «Le tarif horaire est de quatre-vingts euros pour deux heures de travail» (ambiguo: ¿80 € en total o por hora?) → «… quatre-vingts euros. Pour deux heures de travail, cela fait cent soixante euros.» (es / en; ahora 160 + 220 = 380 €, coherente con c31).
+8. **g4 (elegir) · consigna.** «Que dites-vous de ce tarif ?» también es francés correcto → consigna «Repaso: elige el condicional de cortesía.» (es / en) para que haya una sola respuesta.
+9. **g3 y i1 (completar) · aceptadas.** «En ___ d’un paiement comptant» / «en ___ d’un acompte» admiten también `contrepartie` → `aceptadas: ["contrepartie"]` en ambos.
+10. **Errores frecuentes 2 (explicación).** «De + un se contrae» (es élision) → «se elide» / “elides”.
+11. **Tabla p5.** Mezclaba «presente / futuro» y «condicional / subjuntivo» en dos columnas → dos tablas: p5 (dire: presente, futuro, condicional de cortesía, también en pregunta) y p5b («À supposer que + subjuntivo»: payer, accepter, signer, pouvoir).
+12. **Situación, texto de Karim (en).** «That’s what a counterpart is.» → «That’s what a contrepartie is: something in return.» Y se añade «Je ne perds rien, et lui, il garde un client.» (es / en) para pasar de 307 palabras.
+
+### c34
+13. **Situación (contexto + diálogo).** Karim enviaba la confirmación y Ana la corregía después de enviada, mientras el técnico ya la «recibía» → el contexto dice que Karim se la enseña a Ana antes de enviarla (es / en) y Karim cierra la corrección con «J’écris la garantie dans la confirmation, et je l’envoie ce soir.» (es / en).
+14. **Situación (cierre).** «Tout sera simple» → «…, parce que tout sera écrit» (es / en). La situación pasa de 304 a 320 palabras.
+15. **Tabla p4.** La fila «el verbo sin pronombre» (il engage / vous engagez / nous engageons) podía confundirse con «comprometerse» → etiqueta «forma base sin pronombre (engager = contratar; no es «comprometerse»)» / “…(engager = to hire; not “to commit oneself”)”.
+16. **e4 (ordenar) · aceptadas.** + «Il est entendu que lundi, les travaux seront finis.» (otro orden natural).
+
+### c35
+17. **e3 (escuchar) · audio.** «j’ai droit à un délai de réflexion» (afirma un derecho legal que no existe para un contrato de reparación) → «j’ai besoin d’un délai de réflexion» (las opciones y el feedback siguen valiendo).
+18. **Situación, Ana (ley).** «il y a souvent un délai de réflexion» (en el derecho francés la venta fuera del local da un plazo de retractación, no de reflexión) → «on peut souvent changer d’avis pendant quelques jours» (es / en adaptados; `changer d’avis` se enseña en una fila nueva de la tabla de lectura).
+19. **Situación, orden de réplicas.** Dos réplicas seguidas de Ana, la segunda empezando con «Bonne idée.» sin que nadie propusiera nada → fundidas en una sola («… Demandez aussi l’offre par écrit : …»).
+20. **Situación, longitud.** 302 palabras → 316: el técnico añade «…, et demain, le prix ne sera plus le même.» y Karim cierra con «Une bonne offre est encore valable demain.» (es / en).
+21. **Tabla p3.** + fila «Karim ne s’est pas laissé avoir.» (se laisser avoir): la plantilla de e2 (`Karim ne s’est pas ___ avoir. (laisser)`) usaba una combinación no enseñada.
+22. **Tabla p4.** La fila «laissez- / -moi» (texto sin sentido para el audio) → «laissez- + moi» con etiqueta explicativa y una fila nueva «ne me laissez pas me tromper de contrat» (imperativo negativo con pronombre).
+23. **Tabla p5, fila «la formule complète».** La frase de ejemplo no contenía la expresión → «La formule complète coûte quatre cents euros par an : le nettoyage et une assistance téléphonique sont compris.» (es / en).
+
+## Revisión punto por punto
+
+1. **Francés de Francia.** Correctos: quitte à + infinitivo (misma persona), si + imparfait / condicional (nunca si + condicional), quand bien même + condicional en las dos partes (con avoir, lâcher, vouloir, reviendrais…), même si + imparfait, être prêt à, en contrepartie de / en échange de (+ d’un) / moyennant + sustantivo (nunca infinitivo), à supposer que + subjuntivo (payiez, acceptiez), que diriez-vous de, s’engager à + infinitivo / à ce que + subjuntivo (soit, soient), il est entendu que + futuro, futur antérieur (aura, aurons), tenir à ce que, le fait que + subjuntivo, se laisser + infinitivo (laissé invariable, laisserai, ne vous laissez pas), laissez-moi. Tipografía: U+202F antes de ? ! : ; y dentro de « », apóstrofos ’ en todo el bloque.
+2. **Explicaciones es / en.** Cortas, con ejemplos y contraste con el español y el inglés; es neutro con «usted»/tú impersonal, vocabulario neutro (descuento, presupuesto, horno, arras); en americano.
+3. **Respuesta única y `aceptadas`.** Revisados todos los `completar`, `elegir` y `ordenar`: ver cambios 8, 9 y 16; los demás `ordenar` (c31 g5, c32 g5 y e4, c33 g5, c34 g5) ya incluían el orden alternativo natural, y c31 e4, c35 e4 tienen un solo orden natural.
+4. **Pistas y relacionar.** Cada pista ayuda a su ítem; las glosas de los dos `relacionar` (c31 e5, c35 e5) son claramente distintas.
+5. **Ana ↔ Karim: vous.** Siempre vous en los cinco diálogos (también Karim ↔ técnico ↔ proveedor y Ana ↔ técnico); no aparece ningún tu/te/toi.
+6. **Números, fechas y señal (c31–c35, ya coherentes).** Pedido grande para el martes (c31, c32, c34). Presupuesto ≈ 400 € (c31) = pieza original 220 € + 2 h × 80 € = 380 € (c33); el proveedor sube la pieza a 230 € y la baja a 220 € (c32), y c33 / c34 usan 220 €. Tarifa 80 €/h (c31, c33) → Karim pide 70 € (c33) → acuerdo en 75 € (c34). Descuento del 10 % por pago al contado (c33, c34); contrato de mantenimiento 120 €/año (c33, c34); suplemento de 20 € por venir el sábado (c33), Karim prefiere el lunes a las 8 (c33), obras terminadas el lunes y saldo «d’ici lundi soir» (c34). Entrega de la pieza el viernes por la mañana (c32). Arras de 100 € antes del jueves, garantía de un año (c34). Fórmula completa 400 € al año, 300 € «solo hoy» (c35); el contrato de mantenimiento de 120 € ya está firmado (c35).
+7. **Secuencia de c32 (ficha vs. ficha).** La línea de contexto de la ficha dice «concede el plazo, pero no el precio», y sus ítems dicen que Karim rechaza el plazo de 10 días y que el proveedor baja el precio. Es coherente: Karim rechaza los 10 días («Quand bien même vous baisseriez le prix, je ne pourrais pas accepter ce délai»), el proveedor ofrece entregar el viernes (concede el plazo), Karim acepta ese plazo («je suis prêt à faire un effort sur le délai») y mantiene su tope de 220 € (no concede el precio), y el proveedor termina bajando de 230 a 220 € («C’est mon dernier mot»). El contexto del texto («concede el plazo, pero no el precio») resume la posición de Karim y Ana lo repite al final; s1 y s2 coinciden con el diálogo.
+8. **Palabras retiradas.** Eliminé solo «réparer» en la frase de c31 que se cambió (sigue en la clase en otras frases) y «accepté» / «prends l’entretien» de la réplica de Karim (siguen en c32 y en c31). Ninguna palabra enseñada del bloque desaparece, y el validador sobre b01–b10 no da errores en c31–c35. No afecta a bloques posteriores.
+
+## Hechos del reparto confirmados
+
+- El horno del restaurante de Karim se avería antes de un gran pedido para el martes; Karim negocia por teléfono con un técnico sin nombre («Le technicien»): tarifa de 80 € la hora, presupuesto de unos 400 € y un descuento del 12 % tras empezar en el 10 %; el técnico pasa al día siguiente a las 8 (c31). / The oven at Karim’s restaurant breaks down before a big order due Tuesday; Karim negotiates by phone with an unnamed technician (“Le technicien”): rate 80 € an hour, quote of about 400 € and a 12 % discount (after starting at 10 %); the technician comes the next day at 8 (c31).
+- Karim, el técnico, el proveedor de piezas y Ana se tratan todos de vous; Ana acompaña a Karim al taller del técnico y anota la última palabra de cada uno (c32). / Karim, the technician, the parts supplier and Ana all use vous with one another; Ana goes with Karim to the technician’s workshop and notes down everyone’s last word (c32).
+- La pieza principal del horno está rota: el proveedor la sube a 230 € por el transporte y solo puede entregarla en diez días; Karim rechaza los diez días, acepta entrega el viernes por la mañana y no pasa de 220 €; el proveedor baja a 220 € y, si se retrasa, concede un 10 % (c32). / The oven’s main part is broken: the supplier raises its price to 230 € because of transport and can only deliver in ten days; Karim rejects ten days, accepts Friday morning delivery and will not go above 220 €; the supplier comes down to 220 € and, if late, grants 10 % off (c32).
+- Presupuesto del técnico (c33): pieza original 220 € o reacondicionada 130 €, 80 € la hora por dos horas (160 €), contrato de mantenimiento 120 € al año, venir el sábado con 20 € de recargo; Karim prefiere la pieza original, pide un 10 % por pago al contado y una tarifa de 70 € a cambio del contrato, y rechaza el sábado (empezar el lunes a las 8). / Technician’s quote (c33): original part 220 € or refurbished 130 €, 80 € an hour for two hours (160 €), servicing contract 120 € a year, Saturday visit for a 20 € surcharge; Karim prefers the original part, asks for 10 % off for cash payment and a 70 € rate in exchange for the contract, and declines Saturday (starting Monday at 8).
+- Acuerdo (c34): pieza original a 220 €, tarifa de 75 €, 10 % de descuento por pago al contado y contrato de mantenimiento; arras de 100 € antes del jueves, saldo al terminar las obras el lunes por la noche, garantía de un año, el técnico devuelve las arras si hay retraso; Ana revisa la confirmación escrita de Karim y le hace añadir la garantía. / Agreement (c34): original part at 220 €, rate of 75 €, 10 % off for cash payment and the servicing contract; 100 € deposit before Thursday, balance paid when the work ends Monday night, one-year warranty, the technician refunds the deposit if late; Ana reviews Karim’s written confirmation and has him add the warranty.
+- Ya reparado el horno (c35), el técnico propone una «formule complète» a 400 € al año (300 € «solo hoy»); Karim lo rechaza, pide una semana para pensarlo y comparará con otro técnico; Karim cuenta que hace años se dejó convencer por un vendedor y pagó demasiado; Ana le recuerda que la ley protege contra la venta forzada. / Once the oven is repaired (c35), the technician offers a “formule complète” at 400 € a year (300 € “today only”); Karim refuses, asks for a week to think and will compare with another technician; Karim says that years ago he let a salesman convince him and paid too much; Ana reminds him that the law protects against forced selling.
+
+## Sin resolver (decisión de ficha, no del bloque)
+
+- **c31, frase modelo de la ficha** «Je préfère attendre (la facture), quitte à payer plus tard» es algo circular (esperar la factura y pagar más tarde es casi lo mismo, el inconveniente real sería «payer plus cher»). El autor la siguió tal cual en la explicación, la tabla, g1, s1 y el diálogo; la gramática es correcta y el ítem tiene una sola respuesta, así que no lo cambié. Si se quiere pulir, convendría reescribir la ficha (p. ej. «quitte à payer un peu plus cher») y repasar esos cinco puntos.
+- **c35, participio invariable.** Se enseña «elles se sont laissé convaincre» (norma actual: laissé invariable ante infinitivo, rectificaciones de 1990). La concordancia tradicional («laissées») sigue apareciendo en textos cuidados; el ítem i2 admite solo `laissé`, como pide la ficha.
+- **c33, en échange de + infinitivo** («Je baisse le tarif en échange de payer comptant») es gramatical pero poco frecuente; se deja porque lo pide la ficha y la tabla ya lo marca «menos frecuente».
