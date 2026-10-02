@@ -1,12 +1,16 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../diagnostico.dart' show escalaDiagnosticoCliente;
 import '../state/providers.dart';
 import 'biblioteca_adaptador.dart';
 import 'cargador.dart';
 import 'dominio.dart';
 import 'modelos.dart';
+import 'ubicacion.dart';
 
 final cargadorRutaProvider = Provider<CargadorRuta>((_) => CargadorRuta());
 final cargadorBibliotecaProvider = Provider<CargadorBiblioteca>(
@@ -52,6 +56,65 @@ final rutaProvider = FutureProvider.family<RutaCargada?, String>(
   (ref, idioma) => ref.watch(cargadorRutaProvider).cargar(idioma),
 );
 
+/// Banco de la prueba de ubicación v2 de un idioma con ruta, ya limitado a
+/// lo publicado (FR-6). Null si el idioma no tiene ruta, banco o niveles
+/// publicados: entonces sigue con el diagnóstico anterior.
+class BancoUbicacion {
+  const BancoUbicacion(this.json, this.nivelMaximo);
+
+  /// `assets/contenido/<idioma>/diagnostico-v2.json` tal cual (textos de
+  /// apoyo sin resolver: se resuelven con el idioma de la interfaz).
+  final Map<String, dynamic> json;
+
+  /// Nivel más alto con preguntas en el banco y clases publicadas.
+  final int nivelMaximo;
+
+  List<ItemUbicacion> banco(String interfaz) =>
+      ItemUbicacion.bancoLocalizado(json, interfaz);
+}
+
+String rutaBancoUbicacion(String idioma) =>
+    'assets/contenido/$idioma/diagnostico-v2.json';
+
+final bancoUbicacionProvider = FutureProvider.family<BancoUbicacion?, String>((
+  ref,
+  idioma,
+) async {
+  if (!idiomasConRuta.contains(idioma)) return null;
+  final Map<String, dynamic> json;
+  try {
+    json =
+        jsonDecode(await rootBundle.loadString(rutaBancoUbicacion(idioma)))
+            as Map<String, dynamic>;
+  } catch (_) {
+    return null;
+  }
+  final ruta = await ref.watch(rutaProvider(idioma).future);
+  if (ruta == null) return null;
+  final tope = nivelMaximoUbicacion(
+    ItemUbicacion.banco(json),
+    publicados: nivelesPublicados(ruta),
+  );
+  return tope < 1 ? null : BancoUbicacion(json, tope);
+});
+
+/// La ubicación guardada está en la escala del curso (N1 = A1 completo):
+/// la del curso si la declara o la de una prueba de nivel v2.
+bool ubicacionEnEscalaCliente(RutaCargada ruta, ProgressState s) =>
+    ruta.curso.usaEscalaCliente || s.nivelEscala == escalaDiagnosticoCliente;
+
+/// Nivel de ubicación efectivo en la ruta: el de la prueba de nivel, pero
+/// nunca por encima del nivel publicado más alto (un francés ubicado en N4
+/// por el diagnóstico anterior empieza en N1 mientras solo haya N1). El
+/// diagnóstico guardado no se toca: al publicarse más niveles, se aplica.
+int nivelUbicacionRuta(RutaCargada ruta, ProgressState s) =>
+    nivelBaseDisponible(
+      ruta,
+      ubicacionEnEscalaCliente(ruta, s)
+          ? nivelBaseAlumnoCliente(s)
+          : nivelBaseAlumno(s),
+    );
+
 /// Nivel desde el que empieza la ruta del alumno (omite lo ya superado).
 int nivelBaseAlumno(ProgressState s) =>
     nivelBaseDe(desdeCero: s.fundamentos, nivelInicial: s.nivelInicial);
@@ -65,9 +128,7 @@ int nivelBaseAlumnoCliente(ProgressState s) =>
 /// Los niveles superados con su prueba se omiten como los que la prueba de
 /// ubicación deja por debajo.
 Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) {
-  final ubicacion = ruta.curso.usaEscalaCliente
-      ? nivelBaseAlumnoCliente(s)
-      : nivelBaseAlumno(s);
+  final ubicacion = nivelUbicacionRuta(ruta, s);
   final porPruebas = nivelPorPruebas(ruta, s.practicas);
   return estadosRuta(
     ruta,
@@ -198,22 +259,35 @@ final registroRutaProvider = Provider<RegistroRuta>(RegistroRuta.new);
 /// Nivel del curso en que está el alumno (1–10): el de su ubicación o el
 /// siguiente al último nivel superado (clases o prueba), lo que sea mayor.
 /// Es el que usan situaciones y biblioteca; nunca lo elige el alumno.
+/// Con la ruta cargada, nunca supera el nivel publicado más alto.
 final nivelAlumnoProvider = Provider<int>((ref) {
   final s = ref.watch(progressProvider);
   final ruta = ref.watch(rutaProvider(s.idiomaMeta)).valueOrNull;
-  var n = ruta?.curso.usaEscalaCliente ?? false ? s.nivelCliente : s.nivelActual;
-  if (ruta != null) {
-    final e = estadosAlumno(ruta, s);
-    for (final nv in ruta.curso.niveles) {
-      final interno = nv.nivelInterno;
-      if (interno != null &&
-          interno >= 1 &&
-          interno + 1 > n &&
-          ruta.delNivel(nv.id).isNotEmpty &&
-          nivelSuperado(ruta, e, s.practicas, nv.id)) {
-        n = interno + 1;
-      }
+  if (ruta == null) return s.nivelActual.clamp(1, 10);
+  return nivelAlumnoEnRuta(ruta, s);
+});
+
+/// [nivelAlumnoProvider] con la ruta ya cargada.
+int nivelAlumnoEnRuta(RutaCargada ruta, ProgressState s) {
+  // Los idiomas que aún estudian con las lecciones antiguas no se limitan
+  // por su ruta piloto.
+  final tope = idiomasConRuta.contains(ruta.curso.idioma)
+      ? max(1, nivelPublicadoMaximo(ruta))
+      : 10;
+  var n = min(
+    ubicacionEnEscalaCliente(ruta, s) ? s.nivelCliente : s.nivelActual,
+    tope,
+  );
+  final e = estadosAlumno(ruta, s);
+  for (final nv in ruta.curso.niveles) {
+    final interno = nv.nivelInterno;
+    if (interno != null &&
+        interno >= 1 &&
+        interno + 1 > n &&
+        ruta.delNivel(nv.id).isNotEmpty &&
+        nivelSuperado(ruta, e, s.practicas, nv.id)) {
+      n = interno + 1;
     }
   }
-  return n.clamp(1, 10);
-});
+  return n.clamp(1, tope);
+}

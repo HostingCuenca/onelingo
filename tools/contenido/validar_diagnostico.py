@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
-"""Valida (y compila) el banco del diagnóstico de ubicación v2 de inglés.
+"""Valida (y compila) el banco de la prueba de ubicación v2 de un idioma.
 
 Uso:
   python3 tools/contenido/validar_diagnostico.py assets/contenido/en/plan-editorial/diagnostico/n4.json
-  python3 tools/contenido/validar_diagnostico.py --compilar   # valida los 10 niveles y escribe el banco
+  python3 tools/contenido/validar_diagnostico.py --compilar   # inglés: valida los 10 niveles y escribe el banco
+  python3 tools/contenido/validar_diagnostico.py --idioma fr  # valida los niveles presentes del francés
+  python3 tools/contenido/validar_diagnostico.py --idioma fr --compilar
+      # compila solo los niveles con revisión GO (consecutivos desde N1)
 
-Reglas en docs/claude-educacion/DIAGNOSTICO_V2.md.
+Fuentes: assets/contenido/<idioma>/plan-editorial/diagnostico/nN.json.
+Salida: assets/contenido/<idioma>/diagnostico-v2.json.
+Reglas en docs/claude-educacion/DIAGNOSTICO_V2.md (sección «Otros idiomas»).
 """
 
 from __future__ import annotations
@@ -18,9 +23,22 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import construir_bloque as cb  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import validar_ruta as vr  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[2]
-FUENTES = ROOT / "assets/contenido/en/plan-editorial/diagnostico"
-SALIDA = ROOT / "assets/contenido/en/diagnostico-v2.json"
+
+
+def fuentes(idioma: str) -> Path:
+    return ROOT / f"assets/contenido/{idioma}/plan-editorial/diagnostico"
+
+
+def salida(idioma: str) -> Path:
+    return ROOT / f"assets/contenido/{idioma}/diagnostico-v2.json"
+
+
+FUENTES = fuentes("en")
+SALIDA = salida("en")
 
 HABILIDADES = {"escucha": ("escuchar",), "lectura": ("elegir",), "gramatica": ("elegir", "completar"),
                "vocabulario": ("elegir", "completar"), "escritura": ("escribir",)}
@@ -31,24 +49,104 @@ ESCUCHA = {1: (5, 15), 2: (8, 20), 3: (12, 25), 4: (15, 30), 5: (20, 40), 6: (25
            7: (30, 55), 8: (35, 60), 9: (40, 70), 10: (45, 80)}
 MAX_CORRECTA_MAS_LARGA = 0.35
 POSICION = re.compile(r"\b(primer[ao]?|segund[ao]|tercer[ao]?|cuart[ao]|últim[ao])\s+(opci[oó]n|respuesta)", re.I)
+POSICION_EN = re.compile(r"\b(first|second|third|fourth|last)\s+(option|answer|choice)", re.I)
+# Textos de apoyo del ítem (TextoApoyo en la app).
+APOYOS = ("consigna", "feedback", "pista", "preguntaApoyo")
+# Palabras con letras de cualquier alfabeto (école, aujourd'hui); el inglés
+# sigue con cb.PALABRA para no cambiar sus recuentos.
+PALABRA_UNICODE = re.compile(r"[^\W\d_]+(?:['’][^\W\d_]+)*")
 
 
-def n_palabras(t: str) -> int:
-    return len(cb.PALABRA.findall(str(t or "")))
+def n_palabras(t: str, idioma: str = "en") -> int:
+    patron = cb.PALABRA if idioma == "en" else PALABRA_UNICODE
+    return len(patron.findall(str(t or "")))
+
+
+# --- Otros idiomas: léxico de la ruta publicada y rúbrica como la app ---
+
+def lexico_ruta(idioma: str, nivel: int) -> tuple[set[str], set[str]]:
+    """(conocidas, distractores) hasta el final del nivel en la ruta publicada.
+
+    Mismo criterio que tools/validar_ruta.py: vocabulario y tablas de las
+    unidades (f0 y N1…N); las formas incorrectas enseñadas solo valen como
+    distractor."""
+    base = ROOT / f"assets/contenido/{idioma}/ruta"
+    curso = json.loads((base / "curso.json").read_text(encoding="utf-8"))
+    conocidas = {w for p in curso.get("palabrasLibres", []) for w in vr.palabras(p)}
+    errores: set[str] = set()
+    for m in curso.get("modulos", []):
+        try:
+            datos = json.loads((base / m["archivo"]).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for u in datos.get("unidades", []):
+            interno = u.get("nivelInterno")
+            if interno is None or interno > nivel:
+                continue
+            conocidas |= _ensenadas(u)
+            errores |= {w for e in u.get("erroresFrecuentes", [])
+                        for w in vr.palabras(re.sub(r"\([^)]*\)", " ", e.get("incorrecto", "")))}
+    return conocidas, conocidas | errores
+
+
+def no_ensenadas(texto: str, lexico: set[str]) -> set[str]:
+    """Palabras del texto que la ruta no enseña (símbolos y cifras no cuentan)."""
+    return {w for w in vr.palabras(str(texto or "").replace("___", " "))
+            if any(c.isalpha() for c in w) and not vr.conocida(w, lexico)}
+
+
+def _ensenadas(u: dict) -> set[str]:
+    res = {w for v in u.get("vocabulario", []) for w in vr.palabras(v.get("texto", ""))}
+    res |= {w for p in u.get("pasos", []) if p.get("tipo") == "tabla"
+            for fila in p.get("filas", []) for c in fila if isinstance(c, dict) and "texto" in c
+            for w in vr.palabras(c["texto"])}
+    return res
+
+
+_PUNTUACION_APP = re.compile(r"[.,!?¡¿;:/。、！？「」…\"“”«»()—–，：；]")
+_TILDES = str.maketrans({"á": "a", "à": "a", "â": "a", "ä": "a", "ã": "a", "å": "a",
+                         "é": "e", "è": "e", "ê": "e", "ë": "e", "í": "i", "ì": "i", "î": "i", "ï": "i",
+                         "ó": "o", "ò": "o", "ô": "o", "ö": "o", "õ": "o", "ú": "u", "ù": "u", "û": "u",
+                         "ü": "u", "ç": "c", "ñ": "n", "œ": "oe", "æ": "ae"})
+
+
+def _normalizar_app(t: str) -> str:
+    """Igual que normalizar + sinTildes de correccion.dart (idiomas sin
+    contracciones inglesas). \\s incluye U+202F y U+00A0, como en Dart."""
+    t = t.lower().replace("’", "'").replace("‘", "'")
+    t = re.sub(r"\s+", " ", _PUNTUACION_APP.sub(" ", t)).strip()
+    return t.translate(_TILDES)
+
+
+def cumple_rubrica(texto: str, rub: dict, idioma: str) -> bool:
+    if idioma == "en":
+        return cb.cumple_rubrica(texto, rub)
+    dada = _normalizar_app(texto)
+    lo, hi = rub["palabras"]
+    if not lo <= len(dada.split()) <= hi:
+        return False
+    dada = f" {dada} "
+    return all(any((ev := _normalizar_app(f)) and f" {ev} " in dada for f in grupo)
+               for grupo in rub["evidencias"])
 
 
 def es_texto(v) -> str:
     return v.get("es", "") if isinstance(v, dict) else ""
 
 
-def validar(path: Path) -> tuple[list[str], list[dict]]:
+def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
     errores: list[str] = []
     doc = json.loads(path.read_text(encoding="utf-8"))
     nivel = doc.get("nivel")
     if nivel not in LECTURA:
         return [f"{path.name}: «nivel» debe ser 1–10"], []
+    if idioma != "en" and doc.get("idioma", idioma) != idioma:
+        errores.append(f"{path.name}: «idioma» debe ser {idioma}")
     items = doc.get("items") or []
-    lex = cb.lexico_previo(nivel, 101)
+    if idioma == "en":
+        lex = cb.lexico_previo(nivel, 101)
+    else:
+        lex_ruta, lex_distractores = lexico_ruta(idioma, nivel)
     ids, consignas = set(), set()
     cuenta = {h: 0 for h in HABILIDADES}
     con_opciones = delata = 0
@@ -63,7 +161,7 @@ def validar(path: Path) -> tuple[list[str], list[dict]]:
             e(f"nivel debe ser {nivel}")
         if f not in HABILIDADES[h]:
             e(f"formato {f} no válido para {h}")
-        esperado = f"dx.en.n{nivel}.{h}.{cuenta[h]}"
+        esperado = f"dx.{idioma}.n{nivel}.{h}.{cuenta[h]}"
         if it.get("id") != esperado:
             e(f"id esperado {esperado}")
         if iid in ids:
@@ -79,16 +177,31 @@ def validar(path: Path) -> tuple[list[str], list[dict]]:
             e("falta feedback.es")
         if POSICION.search(feedback):
             e("el feedback no puede citar la posición de una opción")
+        if idioma != "en":
+            # Apoyo bilingüe para hispanohablantes y anglohablantes (I18N.md).
+            for campo in APOYOS:
+                if campo not in it:
+                    continue
+                v = it[campo]
+                if not isinstance(v, dict) or set(v) != {"es", "en"} or \
+                        not all(isinstance(x, str) and x.strip() for x in v.values()):
+                    e(f"{campo}: texto de apoyo bilingüe {{es, en}} sin vacíos")
+            consigna_en = (it.get("consigna") or {}).get("en", "") if isinstance(it.get("consigna"), dict) else ""
+            if len(consigna_en) > 110:
+                e("consigna.en ≤ 110 caracteres")
+            feedback_en = it.get("feedback").get("en", "") if isinstance(it.get("feedback"), dict) else ""
+            if POSICION_EN.search(feedback_en):
+                e("el feedback (en) no puede citar la posición de una opción")
         textos_en: list[str] = []
         if h == "lectura":
             lo, hi = LECTURA[nivel]
-            n = n_palabras(it.get("texto", ""))
+            n = n_palabras(it.get("texto", ""), idioma)
             if not lo <= n <= hi:
                 e(f"el pasaje tiene {n} palabras (N{nivel}: {lo}–{hi})")
             textos_en.append(it.get("texto", ""))
         if h == "escucha":
             lo, hi = ESCUCHA[nivel]
-            n = n_palabras(it.get("audio", ""))
+            n = n_palabras(it.get("audio", ""), idioma)
             if not lo <= n <= hi:
                 e(f"el audio tiene {n} palabras (N{nivel}: {lo}–{hi})")
             if it.get("texto"):
@@ -99,7 +212,7 @@ def validar(path: Path) -> tuple[list[str], list[dict]]:
         op = it.get("opciones")
         if f in ("elegir", "escuchar") or (f == "completar"):
             if not isinstance(op, list) or not 3 <= len(op) <= 4 or not all(isinstance(o, str) and o.strip() for o in op):
-                e("3–4 opciones (texto inglés)")
+                e("3–4 opciones (texto inglés)" if idioma == "en" else f"3–4 opciones (texto en {idioma})")
                 op = []
             elif len({o.strip().casefold() for o in op}) != len(op):
                 e("opciones repetidas")
@@ -108,9 +221,20 @@ def validar(path: Path) -> tuple[list[str], list[dict]]:
                 e("respuesta debe ser el índice de la opción correcta")
             elif op:
                 con_opciones += 1
-                largos = [n_palabras(o) for o in op]
+                largos = [n_palabras(o, idioma) for o in op]
                 delata += largos[r] == max(largos) and largos.count(max(largos)) == 1
-            textos_en += op or []
+            if idioma == "en":
+                textos_en += op or []
+            else:
+                # Como en la ruta: los distractores pueden usar formas
+                # incorrectas enseñadas como error frecuente.
+                r_ok = it.get("respuesta") if isinstance(it.get("respuesta"), int) else -1
+                for i_op, o in enumerate(op or []):
+                    lexico = lex_ruta if i_op == r_ok else lex_distractores
+                    faltan_op = no_ensenadas(o, lexico)
+                    if faltan_op:
+                        e(f"opción {i_op}: palabras no enseñadas hasta el final de N{nivel}: "
+                          f"{', '.join(sorted(faltan_op))}")
             if f == "completar" and it.get("texto", "").count("___") != 1:
                 e("completar: `texto` con exactamente un ___")
         if f == "escribir":
@@ -127,12 +251,17 @@ def validar(path: Path) -> tuple[list[str], list[dict]]:
             else:
                 rub = {"palabras": [lo, hi], "evidencias": ev}
                 for t in [modelo, *acept]:
-                    if not cb.cumple_rubrica(t, rub):
+                    if not cumple_rubrica(t, rub, idioma):
                         e(f"escribir: el texto no supera su rúbrica: «{t[:60]}…»")
             textos_en.append(modelo)
-            if it.get("texto") and it.get("textoIdioma", "en") == "en":
+            if it.get("texto") and it.get("textoIdioma", idioma) == idioma:
                 textos_en.append(it["texto"])
-        faltan = {w for t in textos_en for w in cb.palabras(t) if not cb.conocida(w, lex)}
+        if idioma == "en":
+            faltan = {w for t in textos_en for w in cb.palabras(t) if not cb.conocida(w, lex)}
+        else:
+            # Sin la regla de ortografía británica/estadounidense; la tipografía
+            # francesa (U+202F antes de ? ! : ;) es un espacio más.
+            faltan = {w for t in textos_en for w in no_ensenadas(t, lex_ruta)}
         if faltan:
             e(f"palabras no enseñadas hasta el final de N{nivel}: {', '.join(sorted(faltan))}")
     for h, n in POR_HABILIDAD.items():
@@ -146,20 +275,43 @@ def validar(path: Path) -> tuple[list[str], list[dict]]:
 
 def main(argv: list[str]) -> int:
     compilar = "--compilar" in argv
+    idioma = "en"
+    if "--idioma" in argv:
+        k = argv.index("--idioma")
+        if k + 1 >= len(argv) or not re.fullmatch(r"[a-z]{2}", argv[k + 1]):
+            print("--idioma necesita un código de idioma (en, fr…)")
+            return 2
+        idioma = argv[k + 1]
+        argv = argv[:k] + argv[k + 2:]
     rutas = [Path(a) for a in argv if not a.startswith("--")]
-    if compilar or not rutas:
-        rutas = [FUENTES / f"n{n}.json" for n in range(1, 11)]
-    total_err, banco = 0, []
+    todos = compilar or not rutas
+    if todos:
+        rutas = [fuentes(idioma) / f"n{n}.json" for n in range(1, 11)]
+        if idioma != "en":
+            # Otros idiomas: solo los niveles que ya existen (N1, luego N2…).
+            rutas = [p for p in rutas if p.exists()]
+            if not rutas:
+                print(f"{fuentes(idioma).relative_to(ROOT)}: no hay niveles"); return 1
+    total_err, banco, compilados = 0, [], []
     for p in rutas:
         if not p.exists():
             print(f"{p.name}: no existe"); total_err += 1; continue
-        err, items = validar(p)
-        if compilar and (json.loads(p.read_text(encoding="utf-8")).get("review") or {}).get("status") != "GO":
+        err, items = validar(p, idioma)
+        sin_go = (json.loads(p.read_text(encoding="utf-8")).get("review") or {}).get("status") != "GO"
+        if compilar and sin_go and idioma != "en":
+            # Un nivel sin GO no se compila, pero no impide compilar los demás.
+            print(f"{p.name}: sin revisión independiente GO · no se compila"
+                  f"{'' if not err else f' ({len(err)} error(es))'}")
+            for x in err[:40]:
+                print("  ERROR", x)
+            continue
+        if compilar and sin_go:
             err.append(f"{p.name}: sin revisión independiente GO")
         total_err += len(err)
         print(f"{p.name}: {'OK' if not err else f'{len(err)} error(es)'} · {len(items)} ítems")
         for x in err[:40]:
             print("  ERROR", x)
+        compilados.append(json.loads(p.read_text(encoding="utf-8")).get("nivel"))
         for it in items:
             # La vista de ítems corrige «completar» por texto: se exporta la
             # opción correcta como respuesta (la fuente guarda el índice).
@@ -168,12 +320,17 @@ def main(argv: list[str]) -> int:
                       "aceptadas": [it["opciones"][it["respuesta"]]]}
             banco.append(it)
     if compilar:
+        if idioma != "en" and (not compilados or compilados != list(range(1, len(compilados) + 1))):
+            print(f"Los niveles con GO deben ser consecutivos desde N1 (hay {compilados or 'ninguno'}).")
+            total_err += 1
         if total_err:
             print("No se compila: hay errores.")
             return 1
-        SALIDA.write_text(json.dumps({"schema": "onelingo.diagnostico.v2", "idioma": "en", "items": banco},
-                                     ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
-        print(f"escrito {SALIDA.relative_to(ROOT)} · {len(banco)} ítems")
+        destino = salida(idioma)
+        destino.write_text(json.dumps({"schema": "onelingo.diagnostico.v2", "idioma": idioma, "items": banco},
+                                      ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+        print(f"escrito {destino.relative_to(ROOT) if destino.is_relative_to(ROOT) else destino} · {len(banco)} ítems"
+              + ("" if idioma == "en" else f" · niveles {', '.join(f'N{n}' for n in compilados)}"))
     return 1 if total_err else 0
 
 

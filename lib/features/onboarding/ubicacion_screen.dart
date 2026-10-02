@@ -1,13 +1,14 @@
-import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/api/sync.dart';
+import '../../core/aprendizaje/providers.dart';
 import '../../core/aprendizaje/ubicacion.dart';
+import '../../core/content/curriculum.dart' show idioma;
 import '../../core/diagnostico.dart';
 import '../../core/efectos.dart';
 import '../../core/i18n/i18n.dart';
@@ -16,10 +17,21 @@ import '../../core/voz.dart';
 import '../ruta/item_view.dart';
 import 'diagnostico_screen.dart';
 
-/// Prueba de nivel de inglés v2 (DEC-025): ~8 minutos, adaptativa por
-/// habilidad. Sustituye al diagnóstico antiguo solo en inglés.
+/// Prueba de nivel v2 (DEC-025, FR-6): ~8 minutos, adaptativa por
+/// habilidad. La usan los idiomas con ruta que tienen banco
+/// (`assets/contenido/<idioma>/diagnostico-v2.json`); el resultado nunca
+/// supera el nivel publicado más alto. Los demás siguen con el diagnóstico
+/// antiguo (`PruebaNivelScreen`).
 class UbicacionScreen extends ConsumerStatefulWidget {
-  const UbicacionScreen({super.key, this.configuracion = const {}});
+  const UbicacionScreen({
+    super.key,
+    this.idioma,
+    this.configuracion = const {},
+  });
+
+  /// Idioma que se evalúa; por defecto `configuracion['idioma']` o el
+  /// idioma meta del alumno.
+  final String? idioma;
 
   /// Igual que el diagnóstico antiguo: `onboarding` y `nivel` (el que eligió
   /// en el registro, 0–10).
@@ -32,7 +44,14 @@ class UbicacionScreen extends ConsumerStatefulWidget {
 enum _Fase { cargando, pregunta, intro, test, escritura, resultado }
 
 class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
-  static List<(Autodeclaracion, String, String)> get _opciones => [
+  /// Puntos de partida con contenido en este idioma (sin «Avanzado» si el
+  /// curso solo llega a N1).
+  List<(Autodeclaracion, String, String)> get _opciones => [
+    for (final o in _todasLasOpciones)
+      if (Autodeclaracion.hasta(nivelMaximo).contains(o.$1)) o,
+  ];
+
+  List<(Autodeclaracion, String, String)> get _todasLasOpciones => [
     (
       Autodeclaracion.nada,
       tr('Nada, empiezo de cero'),
@@ -56,12 +75,21 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     (
       Autodeclaracion.avanzado,
       tr('Avanzado'),
-      tr('Uso el inglés en el trabajo o los estudios'),
+      tr('Uso el {idioma} en el trabajo o los estudios', {
+        'idioma': _nombreIdioma(idioma),
+      }),
     ),
   ];
 
+  late final String idioma =
+      widget.idioma ??
+      widget.configuracion['idioma'] as String? ??
+      ref.read(progressProvider).idiomaMeta;
   _Fase fase = _Fase.cargando;
   List<ItemUbicacion> banco = [];
+
+  /// Nivel más alto que puede dar la prueba (banco ∩ niveles publicados).
+  int nivelMaximo = 0;
   Ubicacion? u;
   ItemUbicacion? actual;
   int indice = 0;
@@ -84,10 +112,11 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
 
   Future<void> _cargar() async {
     try {
-      final raw = await rootBundle.loadString(
-        'assets/contenido/en/diagnostico-v2.json',
-      );
-      banco = ItemUbicacion.banco(jsonDecode(raw) as Map<String, dynamic>);
+      final b = await ref.read(bancoUbicacionProvider(idioma).future);
+      if (b == null) throw StateError('sin banco v2 para $idioma');
+      // Consignas y feedback en el idioma de la interfaz ({es, en}).
+      banco = b.banco(ref.read(progressProvider).interfaz);
+      nivelMaximo = b.nivelMaximo;
     } catch (e) {
       error = tr(
         'No pudimos cargar la prueba. Revisa la conexión e inténtalo otra vez.',
@@ -98,8 +127,11 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     setState(() {
       // En el registro ya eligió su punto de partida: no se lo preguntamos
       // otra vez (salvo «desde cero», que confirma aquí).
-      if (esOnboarding && nivel is int && nivel > 0) {
-        _empezar(Autodeclaracion.desdeNivel(nivel), mostrarIntro: true);
+      if (esOnboarding && nivel is int && nivel > 0 && nivelMaximo > 0) {
+        _empezar(
+          Autodeclaracion.desdeNivel(min(nivel, nivelMaximo)),
+          mostrarIntro: true,
+        );
       } else {
         fase = _Fase.pregunta;
       }
@@ -107,7 +139,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
   }
 
   void _empezar(Autodeclaracion d, {bool mostrarIntro = false}) {
-    u = Ubicacion(banco: banco, declarado: d);
+    u = Ubicacion(banco: banco, declarado: d, nivelMaximo: nivelMaximo);
     if (d == Autodeclaracion.nada) {
       _mostrarResultado();
       return;
@@ -150,7 +182,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
   Map<String, dynamic> _json(int nivel) {
     final r = u!.resultado();
     return {
-      'idioma': 'en',
+      'idioma': idioma,
       'version': 4,
       'escala': escalaDiagnosticoCliente,
       'escalaPresentacion': 'onelingo-10-a1-c1-v1',
@@ -174,11 +206,12 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
       'aciertos': r.aciertos,
       'habilidades': r.habilidades,
       'escritura': r.escritura,
-      'idioma': 'en',
+      'idioma': idioma,
+      'nivelMaximo': nivelMaximo,
     });
     final datos = _json(nivel);
     final st = ref.read(progressProvider);
-    if (st.onboardingDone && !esOnboarding && st.idiomaMeta == 'en') {
+    if (st.onboardingDone && !esOnboarding && st.idiomaMeta == idioma) {
       ref.read(progressProvider.notifier).guardarDiagnostico(datos, nivel);
     }
     if (context.canPop()) {
@@ -234,7 +267,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        tr('¿Cuánto inglés sabes?'),
+        tr('¿Cuánto {idioma} sabes?', {'idioma': _nombreIdioma(idioma)}),
         style: Theme.of(context).textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.w900),
       ),
@@ -274,7 +307,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        tr('Comprobemos tu inglés'),
+        tr('Comprobemos tu {idioma}', {'idioma': _nombreIdioma(idioma)}),
         style: Theme.of(context).textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.w900),
       ),
@@ -291,7 +324,11 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
       const SizedBox(height: 8),
       TextButton(
         onPressed: () => setState(() {
-          u = Ubicacion(banco: banco, declarado: Autodeclaracion.nada);
+          u = Ubicacion(
+            banco: banco,
+            declarado: Autodeclaracion.nada,
+            nivelMaximo: nivelMaximo,
+          );
           _mostrarResultado();
         }),
         child: Text(tr('Prefiero empezar desde cero')),
@@ -334,8 +371,9 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
         ItemView(
           key: ValueKey('${i.item.id}:$indice'),
           item: i.item,
-          idioma: 'en',
-          cadena: const [],
+          // Voz y corrección en el idioma evaluado.
+          idioma: idioma,
+          cadena: [ref.read(progressProvider).interfaz, 'es'],
           guiada: false,
           permitirReintento: false,
           // Prueba de nivel limpia, sin Lumo.
@@ -454,6 +492,14 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
   );
 }
 
+/// Nombre del idioma evaluado dentro de una frase («¿Cuánto francés
+/// sabes?»), en el idioma de la interfaz.
+String _nombreIdioma(String code) => switch (code) {
+  'en' => tr('inglés'),
+  'fr' => tr('francés'),
+  _ => idioma(code).nombre,
+};
+
 /// Nombre de la habilidad (`nombresHabilidad`) en el idioma de la interfaz.
 String _habilidad(String h) => switch (h) {
   'escucha' => tr('Escucha'),
@@ -466,8 +512,8 @@ String _habilidad(String h) => switch (h) {
 
 /// MCER de cada nivel del curso (escala cliente).
 /// Ojo: también se guarda en el diagnóstico (`cefr`), por eso no se traduce aquí.
-/// `/prueba-nivel`: inglés usa la prueba v2; los demás idiomas, el
-/// diagnóstico anterior.
+/// `/prueba-nivel`: los idiomas con ruta y banco v2 (inglés, francés…) usan
+/// la prueba v2; los demás, el diagnóstico anterior.
 class PruebaNivelScreen extends ConsumerWidget {
   const PruebaNivelScreen({
     super.key,
@@ -483,8 +529,21 @@ class PruebaNivelScreen extends ConsumerWidget {
         configuracion['idioma'] as String? ??
         idioma ??
         ref.read(progressProvider).idiomaMeta;
-    return meta == 'en'
-        ? UbicacionScreen(configuracion: configuracion)
-        : DiagnosticoScreen(idioma: idioma, configuracion: configuracion);
+    final anterior = DiagnosticoScreen(
+      idioma: idioma,
+      configuracion: configuracion,
+    );
+    if (!idiomasConRuta.contains(meta)) return anterior;
+    return ref
+        .watch(bancoUbicacionProvider(meta))
+        .when(
+          loading: () => const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          ),
+          error: (_, _) => anterior,
+          data: (b) => b == null
+              ? anterior
+              : UbicacionScreen(idioma: meta, configuracion: configuracion),
+        );
   }
 }

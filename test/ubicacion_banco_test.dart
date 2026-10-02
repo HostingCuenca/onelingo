@@ -127,9 +127,14 @@ void main() {
             ),
           ),
         );
-        await tester.runAsync(
-          () => Future<void>.delayed(const Duration(milliseconds: 300)),
-        );
+        // El banco se limita a los niveles publicados: espera también a la ruta.
+        for (var k = 0; k < 100; k++) {
+          await tester.runAsync(
+            () => Future<void>.delayed(const Duration(milliseconds: 100)),
+          );
+          await tester.pump();
+          if (find.byType(CircularProgressIndicator).evaluate().isEmpty) break;
+        }
         await tester.pumpAndSettle();
       }
 

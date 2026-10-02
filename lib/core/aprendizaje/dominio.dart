@@ -103,6 +103,17 @@ int nivelBaseDisponible(RutaCargada ruta, int solicitado) {
   return solicitado.clamp(0, maximo).toInt();
 }
 
+/// Niveles N1–N10 (nivel interno) que ya tienen unidades publicadas.
+Set<int> nivelesPublicados(RutaCargada ruta) => {
+  for (final nv in ruta.curso.niveles)
+    if ((nv.nivelInterno ?? 0) >= 1 && ruta.delNivel(nv.id).isNotEmpty)
+      nv.nivelInterno!,
+};
+
+/// Nivel más alto con unidades publicadas (0 si solo hay Fundamentos).
+int nivelPublicadoMaximo(RutaCargada ruta) =>
+    nivelesPublicados(ruta).fold(0, max);
+
 /// En escrituras no latinas, demostrar un nivel oral/global no prueba que el
 /// alumno sepa leer. Estas unidades no se omiten sin evidencia específica.
 bool alfabetizacionObligatoria(UnidadRuta u) =>

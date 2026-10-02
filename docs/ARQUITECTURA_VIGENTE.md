@@ -22,7 +22,7 @@ Actualizado: 2026-10-01 (fases A–D e I1; E en curso; DEC-026 a DEC-031).
 | Practicar | 50 situaciones; tutores IA (chat y videollamada) | `practice/practice_screen.dart`, `situations/situation_screen.dart`, `chat/chat_screen.dart`, `plans/tutors_screen.dart`, `avatar/*` + `web/avatar/` |
 | Biblioteca (desde Inicio) | Mis palabras (repaso espaciado por palabra), Mis verbos (tablas, audio, práctica), Lecturas, Escuchas, Guías de gramática, Mapa de sonidos | `library/biblioteca_screen.dart`, `lexico/*`, `library/learning_unit_screen.dart`, `library/grammar_screen.dart` |
 | Perfil | progreso, errores, planes | `progress/*`, `mistakes/*`, `plans/plans_screen.dart` |
-| Entrada | bienvenida, registro, prueba de ubicación | `onboarding/*` (`ubicacion_screen.dart` inglés v2; `diagnostico_screen.dart` resto) |
+| Entrada | bienvenida, registro, prueba de ubicación | `onboarding/*` (`ubicacion_screen.dart` v2 para idiomas con ruta y banco: inglés, francés; `diagnostico_screen.dart` resto) |
 
 ## 3. Fuentes canónicas
 
@@ -31,7 +31,7 @@ Actualizado: 2026-10-01 (fases A–D e I1; E en curso; DEC-026 a DEC-031).
 | Curso por niveles (ruta, esquema 2) | `assets/contenido/<idioma>/ruta/curso.json` + módulos (`f0.json`, `nN-editorial.json`) | `lib/core/aprendizaje/` (`modelos`, `dominio`, `providers`) | `python3 tools/validar_ruta.py`, `test/ruta_*` |
 | Ejercicios de las clases editoriales | `assets/contenido/en/exercise-library.json` + activación | `core/aprendizaje/biblioteca_adaptador.dart` | herramientas en `tools/contenido/` |
 | Nivel 0 (leer y pronunciar), por idioma: en, fr | `assets/contenido/<idioma>/nivel0/{nivel0,sonidos}.json` (textos de interfaz en `textos`), `assets/img/emoji/` (Noto, `tools/contenido/descargar_emoji.py`). Francés: borradores revisados en `tools/contenido/nivel0-fr/` → `integrar.py` | `core/nivel0/nivel0.dart` (`idiomasConNivel0`) | `tools/contenido/validar_nivel0.py <idioma>`, `test/nivel0_test.dart` |
-| Prueba de ubicación inglés v2 | `assets/contenido/en/diagnostico-v2.json` (fuente en `plan-editorial/diagnostico/`) | `core/aprendizaje/ubicacion.dart` | `tools/contenido/validar_diagnostico.py`, `test/ubicacion*_test.dart` |
+| Prueba de ubicación v2 (inglés; francés y demás idiomas con ruta según tengan banco) | `assets/contenido/<idioma>/diagnostico-v2.json` (fuente en `<idioma>/plan-editorial/diagnostico/`) | `core/aprendizaje/ubicacion.dart`, `bancoUbicacionProvider`; tope en el último nivel publicado (`nivelUbicacionRuta`) | `tools/contenido/validar_diagnostico.py [--idioma fr]`, `test/ubicacion*_test.dart` |
 | Prueba de ubicación (otros idiomas, legado) | `assets/contenido/<idioma>/diagnostico.json` o lecciones | `core/diagnostico.dart` (con techo verificado, DEC-026) | `test/diagnostico_test.dart` |
 | Prueba de cada nivel | ítems de evaluación de la propia ruta | `itemsPruebaNivel`, `nivelSuperado`, `nivelPorPruebas` en `dominio.dart` | `test/prueba_nivel_test.dart` |
 | Situaciones (50 × 3 tramos) | `assets/contenido/situaciones/catalogo.json` (lista) + `assets/contenido/<idioma>/situaciones.json` (contenido por tramo). **Generados, no editar:** `lib/core/content/catalogo_situaciones.g.dart`, `web/avatar/topics.json`, `backend/src/content/situaciones-<idioma>.json` | `core/content/situaciones.dart`, `backend/src/lib/situaciones.ts` | `tools/contenido/validar_situaciones.py`, `generar_situaciones.py --comprobar`, `test/situaciones_v2_test.dart`, `backend/test/situaciones.test.ts` |

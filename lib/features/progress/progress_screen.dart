@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/aprendizaje/providers.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
@@ -23,6 +24,8 @@ class ProgressScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
     final n = s.nivelActual;
+    // Nivel que ve el alumno: el de la ruta, sin superar lo publicado.
+    final nAlumno = ref.watch(nivelAlumnoProvider);
     final hab = s.porHabilidad;
     final maxHab = hab.values.fold(1, (a, b) => a > b ? a : b);
     final t = tutor(s.tutorId);
@@ -69,7 +72,7 @@ class ProgressScreen extends ConsumerWidget {
                         spacing: 6,
                         runSpacing: 6,
                         children: [
-                          Etiqueta(tr('Nivel {n} · {nombre}', {'n': n, 'nombre': nivel(n).nombre})),
+                          Etiqueta(tr('Nivel {n} · {nombre}', {'n': nAlumno, 'nombre': nivel(nAlumno).nombre})),
                           Etiqueta(
                             plan == null ? tr('Prueba gratuita') : plan.nombre,
                             color: plan == null

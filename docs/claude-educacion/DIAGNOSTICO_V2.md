@@ -1,6 +1,6 @@
 # Diagnóstico de ubicación v2 — Inglés N1–N10
 
-Actualizado: 2026-09-30. Decisión: DEC-025. Sustituye al banco antiguo de 87 preguntas (escala 0–10) solo en inglés; los otros 9 idiomas siguen con el diagnóstico actual.
+Actualizado: 2026-09-30. Decisión: DEC-025. Sustituye al banco antiguo de 87 preguntas (escala 0–10) en inglés y, desde FR-6, en cada idioma con ruta que tenga su banco (sección «Otros idiomas»); el resto sigue con el diagnóstico anterior.
 
 ## Principios (acordados con el cliente)
 
@@ -58,3 +58,21 @@ Reglas comunes: 3–4 opciones distintas y plausibles, una sola defendible; la c
 - Compilación: `python3 tools/contenido/validar_diagnostico.py --compilar` (exige GO en los 10 niveles; exporta la respuesta de `completar` como texto, que es como corrige la vista de ítems).
 - Pruebas: `test/ubicacion_test.dart` (simulación) y `test/ubicacion_banco_test.dart` (banco real: cobertura, corrección de cada ítem, simulación y pantalla).
 - Verificado en navegador (build local): un alumno N5 simulado sale «N5 · B2» en 19 preguntas; uno que responde al azar sale «Empiezas desde cero».
+
+## Otros idiomas (FR-6)
+
+La misma prueba sirve para cualquier idioma de `idiomasConRuta` (`lib/core/aprendizaje/providers.dart`) que tenga banco. El francés es el primero.
+
+- **Banco:** fuentes `assets/contenido/<idioma>/plan-editorial/diagnostico/nN.json`; compilado `assets/contenido/<idioma>/diagnostico-v2.json` (`{"schema": "onelingo.diagnostico.v2", "idioma": "<idioma>", "items": […]}`).
+- **Validar y compilar:** `python3 tools/contenido/validar_diagnostico.py --idioma fr [--compilar]`. Sin `--idioma` sigue siendo el inglés, con la misma salida.
+  - Se compilan solo los niveles presentes con revisión `GO`, consecutivos desde N1 (hoy N1; luego N2…). Un nivel sin GO se informa y no se compila. No se exigen los 10.
+  - Mismo formato, ids (`dx.<idioma>.nN.<habilidad>.<k>`), reparto (4 × 4 + 2 de escritura) y longitudes que en inglés.
+  - Textos de apoyo (`consigna`, `feedback`, `pista`, `preguntaApoyo`) **bilingües** `{"es", "en"}`, sin vacíos; `consigna.es` ≤ 90 caracteres y `consigna.en` ≤ 110. El feedback no cita posiciones («primera opción», «first option»).
+  - Léxico: cada palabra del estímulo, de la opción correcta y de la respuesta modelo debe estar enseñada en la ruta publicada hasta el final de N (vocabulario y tablas de las unidades de f0 a N, más `palabrasLibres`, con el mismo criterio que `tools/validar_ruta.py`); los distractores pueden usar además las formas de `erroresFrecuentes`. Cifras y símbolos (`2,50 €`) no cuentan.
+  - Sin la regla de ortografía británica/estadounidense del inglés. La tipografía francesa (espacio fino U+202F antes de `? ! : ;`, comillas « ») se admite: cuenta como espacio y puntuación.
+  - Rúbrica de escritura comprobada como la corrige la app para ese idioma (sin contracciones inglesas ni flexiones -s/-ed/-ing; tildes opcionales).
+- **App:** `/prueba-nivel` abre `UbicacionScreen(idioma)` si el idioma tiene ruta y banco (`bancoUbicacionProvider`); si no, el diagnóstico anterior.
+  - Textos de apoyo con `localizarApoyo` en el idioma de la interfaz; voz y corrección en el idioma evaluado.
+  - **Tope:** la prueba solo pregunta y ubica hasta el nivel más alto con ítems en el banco **y** unidades publicadas (`ruta.delNivel('nX').isNotEmpty`). Con solo N1, el resultado es 0 (Nivel 0 / Fundamentos) o 1, y la primera pantalla solo ofrece «Nada» y «Un poco».
+  - El alumno ya ubicado por encima de lo publicado (p. ej. N4 con el diagnóstico antiguo) conserva su diagnóstico, pero su nivel efectivo (`nivelUbicacionRuta`, `nivelAlumnoProvider`) se limita al último nivel publicado; al publicarse más niveles, se aplica.
+- **Pruebas:** `test/ubicacion_idiomas_test.dart` (azar en francés → «desde cero», nunca por encima de N1; tope; pantalla; nivel efectivo de alumnos antiguos). Con el banco francés compilado se activa también la simulación sobre el banco real.

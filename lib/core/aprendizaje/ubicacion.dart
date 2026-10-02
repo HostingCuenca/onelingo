@@ -14,6 +14,10 @@ import 'modelos.dart';
 /// ve preguntas de B2 y el diagnóstico dura unos 8 minutos.
 /// Simulación de referencia (tools, 3000 alumnos sintéticos): 92 % de las
 /// habilidades a ±1 nivel, inicio a ±1 en el 95 %, ~18 preguntas.
+///
+/// Sirve para cualquier idioma con banco v2 (FR-6): la estimación se limita
+/// a los niveles 0…[Ubicacion.nivelMaximo] (los que tienen preguntas en el
+/// banco y clases publicadas), así nadie se ubica donde aún no hay curso.
 
 const habilidadesUbicacion = ['escucha', 'lectura', 'gramatica', 'vocabulario'];
 
@@ -36,6 +40,13 @@ enum Autodeclaracion {
 
   const Autodeclaracion(this.inicio);
   final int inicio;
+
+  /// Puntos de partida que se pueden ofrecer si el curso llega hasta
+  /// [nivelMaximo]: solo los que empiezan en un nivel con contenido.
+  static List<Autodeclaracion> hasta(int nivelMaximo) => [
+    for (final d in values)
+      if (d.inicio <= max(0, nivelMaximo)) d,
+  ];
 
   /// Desde el nivel que el alumno eligió en el registro (0–10).
   static Autodeclaracion desdeNivel(int nivel) => nivel <= 0
@@ -70,6 +81,31 @@ class ItemUbicacion {
     for (final i in json['items'] as List)
       ItemUbicacion.fromJson(i as Map<String, dynamic>),
   ];
+
+  /// Banco de `assets/contenido/<idioma>/diagnostico-v2.json` con los textos
+  /// de apoyo (`{es, en}`) resueltos en el idioma de la interfaz.
+  static List<ItemUbicacion> bancoLocalizado(
+    Map<String, dynamic> json,
+    String interfaz,
+  ) => banco(localizarApoyo(json, interfaz) as Map<String, dynamic>);
+}
+
+/// Nivel más alto que puede dar la prueba: con preguntas objetivas en el
+/// banco y, si se conocen, unidades publicadas en la ruta ([publicados]).
+int nivelMaximoUbicacion(
+  Iterable<ItemUbicacion> banco, {
+  Set<int>? publicados,
+}) {
+  var m = 0;
+  for (final i in banco) {
+    if (i.habilidad != 'escritura' &&
+        i.nivel > m &&
+        i.nivel <= 10 &&
+        (publicados == null || publicados.contains(i.nivel))) {
+      m = i.nivel;
+    }
+  }
+  return m;
 }
 
 class RespuestaUbicacion {
@@ -117,15 +153,24 @@ class ResultadoUbicacion {
 }
 
 class Ubicacion {
+  /// [nivelMaximo] limita el resultado (p. ej. al último nivel publicado);
+  /// por defecto, el nivel más alto con preguntas en el banco.
   Ubicacion({
     required List<ItemUbicacion> banco,
     required this.declarado,
+    int? nivelMaximo,
     this.maxPreguntas = 22,
     Random? random,
-  }) : _banco = List.of(banco),
+  }) : nivelMaximo = min(
+         nivelMaximo ?? 10,
+         nivelMaximoUbicacion(banco),
+       ).clamp(0, 10),
+       _banco = List.of(banco),
        _rnd = random ?? Random() {
+    // Por encima del tope no se pregunta: ahí no se puede ubicar a nadie.
+    _banco.removeWhere((i) => i.nivel > this.nivelMaximo);
     final w = [
-      for (var t = 0; t <= 10; t++)
+      for (var t = 0; t <= this.nivelMaximo; t++)
         exp(-pow(t - declarado.inicio, 2) / (2 * _sd * _sd)),
     ];
     final s = w.reduce((a, b) => a + b);
@@ -138,6 +183,10 @@ class Ubicacion {
   static const _umbral = 0.85;
 
   final Autodeclaracion declarado;
+
+  /// Nivel más alto que puede dar la prueba (10 en inglés; 1 en un idioma
+  /// con solo N1 publicado). 0: no hay banco y se empieza desde cero.
+  final int nivelMaximo;
   final int maxPreguntas;
   final List<ItemUbicacion> _banco;
   final Random _rnd;
@@ -154,13 +203,14 @@ class Ubicacion {
   int? nivelEscritura;
 
   int get n => respuestas.length;
+  bool get _sinPreguntas => declarado == Autodeclaracion.nada || nivelMaximo < 1;
   bool get objetivasTerminadas =>
-      declarado == Autodeclaracion.nada ||
+      _sinPreguntas ||
       _sinBase ||
       _cerradas.length == habilidadesUbicacion.length;
   bool get terminado =>
       objetivasTerminadas &&
-      (declarado == Autodeclaracion.nada ||
+      (_sinPreguntas ||
           _sinBase ||
           escrituraHecha ||
           escrituraOmitida);
@@ -202,7 +252,7 @@ class Ubicacion {
       if (r.item.habilidad == 'escritura') continue;
       final peso = h == null || r.item.habilidad == h ? 1.0 : _pesoOtras;
       final azar = _azar(r.item);
-      for (var t = 0; t <= 10; t++) {
+      for (var t = 0; t <= nivelMaximo; t++) {
         final q = _pAcierto(r.item.nivel, t, azar);
         p[t] *= pow(r.correcta ? q : 1 - q, peso);
       }
@@ -213,16 +263,16 @@ class Ubicacion {
 
   static int _mediana(List<double> p) {
     var a = 0.0;
-    for (var t = 0; t <= 10; t++) {
+    for (var t = 0; t < p.length; t++) {
       a += p[t];
       if (a >= .5) return t;
     }
-    return 10;
+    return p.length - 1;
   }
 
   static int _moda(List<double> p) {
     var m = 0;
-    for (var t = 1; t <= 10; t++) {
+    for (var t = 1; t < p.length; t++) {
       if (p[t] > p[m]) m = t;
     }
     return m;
@@ -231,18 +281,18 @@ class Ubicacion {
   static double _seguridad(List<double> p) {
     final m = _moda(p);
     var s = 0.0;
-    for (var t = max(0, m - 1); t <= min(10, m + 1); t++) {
+    for (var t = max(0, m - 1); t <= min(p.length - 1, m + 1); t++) {
       s += p[t];
     }
     return s;
   }
 
-  /// Nivel estimado de una habilidad (0–10).
-  int nivelDe(String h) => _sinBase ? 0 : _moda(_posterior(h));
+  /// Nivel estimado de una habilidad (0–[nivelMaximo]).
+  int nivelDe(String h) => _sinBase || nivelMaximo < 1 ? 0 : _moda(_posterior(h));
 
   /// Siguiente pregunta objetiva; null cuando toca la escritura o terminó.
   ItemUbicacion? siguiente() {
-    if (declarado == Autodeclaracion.nada) return actual = null;
+    if (_sinPreguntas) return actual = null;
     if (n >= 3 && _posterior(null)[0] >= _umbral) _sinBase = true;
     if (_sinBase || n >= maxPreguntas) {
       _cerradas.addAll(habilidadesUbicacion);
@@ -253,7 +303,7 @@ class Ubicacion {
     ];
     if (abiertas.isEmpty) return actual = null;
     final h = abiertas[_turno++ % abiertas.length];
-    final objetivo = _mediana(_posterior(h)).clamp(1, 10);
+    final objetivo = _mediana(_posterior(h)).clamp(1, nivelMaximo);
     final item = _elegir(h, objetivo);
     if (item == null) {
       _cerradas.add(h);
@@ -302,10 +352,10 @@ class Ubicacion {
   /// Nivel de inicio: media de las habilidades objetivas redondeada hacia
   /// abajo, sin superar en más de 2 a la más débil.
   int get nivelInicio {
-    if (declarado == Autodeclaracion.nada || _sinBase) return 0;
+    if (_sinPreguntas || _sinBase) return 0;
     final v = [for (final h in habilidadesUbicacion) nivelDe(h)];
     final media = v.reduce((a, b) => a + b) / v.length;
-    return min(media.floor(), v.reduce(min) + 2).clamp(0, 10);
+    return min(media.floor(), v.reduce(min) + 2).clamp(0, nivelMaximo);
   }
 
   /// Tarea de escritura en el nivel estimado (null si no hay o empieza de cero).
