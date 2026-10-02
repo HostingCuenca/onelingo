@@ -338,3 +338,16 @@ Pruebas:
 - En producción: `objetivoValido('en',1,'s1-i1')` y `('en',1,'s1-a2')` dan true; `('en',2,'s1-i1')` da false.
 Backup: `/var/www/onelingo/backups/20261001-edu-27-situaciones-tramos/` (`web-anterior` = edu-26; `backend-src` con los 4 archivos previos). Salud 200; `.env` igual; APK servido; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-27-situaciones-tramos; mv web staging/20261001-edu-27-situaciones-tramos/web-retirada-post2 && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api'`
+
+## Release: 20261001-edu-28-palabras-verbos
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Solo web; backend sin cambios y sin reinicios.
+Contenido: fase D (DEC-029).
+- Léxico único calculado desde ruta, situaciones y Nivel 0.
+- «Mis palabras»: repaso espaciado por palabra y sesiones de 10, agrupadas por nivel o situación.
+- «Mis verbos»: 174 verbos con 5 tablas, audio por persona y práctica de irregulares.
+- Biblioteca y Perfil enlazados.
+Commit: `913346c` · Build: `main.dart.js` `0b1d1590…`.
+Pruebas: Flutter 221 (1 omitida), con la nueva `lexico_test.dart`. Navegador (400×820): Mis palabras con 20 palabras de dos situaciones, sesión de repaso y tabla de «go».
+Backup: `/var/www/onelingo/backups/20261001-edu-28-palabras-verbos/web-anterior` (= edu-27). Salud 200; `.env` igual; APK y `verbos.json` servidos; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-28-palabras-verbos/web-retirada-post2 && cp -al backups/20261001-edu-28-palabras-verbos/web-anterior web'`
