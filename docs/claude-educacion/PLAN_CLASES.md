@@ -51,7 +51,8 @@ Reglas (las comprueba `python3 tools/curriculo/validar_plan.py <idioma>`):
 2. **Autor.** Recibe las 5 fichas y `ENCARGO_RUTA_FR.md` (o el encargo del idioma). Escribe exactamente lo que dicen: no introduce gramática que no esté en `introduce` ni en lo ya visto.
 3. **Validación.** `validar_ruta.py <idioma> --borrador …` con 0 errores.
 4. **Revisor.** Otro agente contrasta el bloque con sus fichas y con las notas de calibración del encargo y deja `revision-bXX.md` con GO.
-5. **Integración y publicación.** `integrar.py`, suite completa, prueba en el navegador (interfaz es y en), despliegue por tandas y estados del plan en `publicado`.
+5. **Reparto.** El revisor lista los «Hechos del reparto confirmados» (`- es / en`); `python3 tools/curriculo/reparto.py <idioma> <nivel>` los copia al plan para el bloque siguiente.
+6. **Integración y publicación.** `integrar.py`, suite completa, prueba en el navegador (interfaz es y en), despliegue por tandas y estados del plan en `publicado`.
 
 Los bloques se escriben **en orden**. Dos autores en paralelo solo si sus fichas ya están cerradas, porque cada autor necesita saber qué vocabulario y qué gramática existen antes de su bloque.
 
