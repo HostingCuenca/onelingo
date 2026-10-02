@@ -435,3 +435,14 @@ Commit: `34736b3` · Build: `main.dart.js` `a3944073…` (sin cambios de código
 Pruebas: Flutter 230 (1 omitida); `validar_ruta.py` 0 errores; `validar_plan.py fr` 0 errores. Navegador: prueba del Nivel 1 en francés (20 preguntas, primera «Ordena: ¡Chao, hasta mañana!»).
 Backup: `/var/www/onelingo/backups/20261002-edu-35-frances-n1-completo/web-anterior` (= edu-34). Salud 200; `.env` igual; APK servido; `n1-b10.json` servido; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-35-frances-n1-completo/web-retirada-post2 && cp -al backups/20261002-edu-35-frances-n1-completo/web-anterior web'`
+
+## Release: 20261002-edu-36-frances-ubicacion-n2
+
+Fecha: 2026-10-02 · Responsable: Claude (Claude Code). Solo web; backend sin cambios y sin reinicios.
+Contenido: francés FR-6 y primera tanda de FR-7.
+- Prueba de ubicación v2 por idioma: el francés la usa con su banco N1 (18 ítems, GO). Nunca ubica por encima de lo publicado; los alumnos ubicados antes por encima quedan topados sin borrar su diagnóstico; Perfil muestra ese nivel.
+- N2 francés B1–B3: clases 1–15 de A2, revisadas con GO.
+Commits: `7c33982` (FR-6), `b53e2fb` (N2) · Build: `main.dart.js` `a052b5bf…`.
+Pruebas: Flutter 242 (1 omitida), con `ubicacion_idiomas_test` (azar en francés → «desde cero» ≥ 90 %); `validar_diagnostico.py --compilar` inglés sin cambios; `validar_ruta.py` y `validar_plan.py fr` 0 errores. Navegador: prueba de ubicación en francés con la interfaz en inglés («How much French do you know?», dos opciones, escucha con «7 h 45 / 8 h 45 / 8 h 15»).
+Backup: `/var/www/onelingo/backups/20261002-edu-36-frances-ubicacion-n2/web-anterior` (= edu-35). Salud 200; `.env` igual; APK servido; `diagnostico-v2.json` (fr) y `n2-b03.json` servidos; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-36-frances-ubicacion-n2/web-retirada-post2 && cp -al backups/20261002-edu-36-frances-ubicacion-n2/web-anterior web'`
