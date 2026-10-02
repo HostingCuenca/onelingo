@@ -425,6 +425,11 @@ class Validador:
                 self.error(donde, "falta respuesta")
             if f == "completar" and "___" not in it.get("texto", ""):
                 self.error(donde, "completar necesita '___' en texto")
+            # La app acepta el modelo de una producción abierta solo si llega al mínimo.
+            if it.get("abierta") and it.get("minimoPalabras"):
+                n = len(re.sub(r"[^\w'’\-]+", " ", it.get("respuesta", "")).split())
+                if n < it["minimoPalabras"]:
+                    self.error(donde, f"el modelo tiene {n} palabras, menos que minimoPalabras ({it['minimoPalabras']})")
             self.meta(it.get("texto", ""), conocidas, f"{donde}.texto")
             self.meta(it.get("respuesta", ""), conocidas, f"{donde}.respuesta")
             for o in it.get("opciones", []):

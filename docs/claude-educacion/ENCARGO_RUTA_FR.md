@@ -89,3 +89,9 @@ Valida junto con todos los bloques anteriores del borrador. Debe dar 0 errores.
 9. **Una sola respuesta.** Si dos formas serían válidas (futur proche y futur simple, on y nous, con y sin elisión), la consigna fija cuál se pide o `aceptadas` incluye todas. Los `escribir` abiertos (`abierta: true`) no cuentan entre los ítems puntuables de la evaluación.
 10. **Validación con borradores.** Valida tu bloque encadenado con los borradores anteriores del mismo nivel que aún no estén integrados (`--borrador nX-b01.json … nX-bYY.json`). Si uno ya está en `assets/contenido/fr/ruta/`, quítalo de la lista: daría «id duplicado».
 11. **Vocabulario estricto** (`curso.json` → `vocabularioEstricto`). Solo cuenta como enseñado lo que se muestra: tarjetas del paso `vocabulario` (`refs`), ejemplos, patrones y tablas. Un vocablo declarado en `vocabulario` pero oculto no basta: si una palabra nueva aparece en la situación o en un ítem, enséñala en una tarjeta, un ejemplo o una tabla «Para leer…».
+12. **Reparto canónico (manda sobre las fichas si chocan).**
+    - Ana y Emma viven desde N4 c11 en un departamento nuevo: el casero es **Monsieur Roux** y la vecina del piso de abajo es **Madame Lefort** (ruido, fiestas, acuerdos de convivencia).
+    - **Madame Dubois** fue su casera; vive cerca, en el edificio antiguo, y sigue siendo amiga de Ana (memorias del abuelo, novelas, consejos, asociación de barrio). No es la casera actual ni vive debajo.
+    - El hotel de Ana tiene un **director** (Le directeur, sin nombre); Ana le habla de vous.
+    - Ana habla de vous con Karim, con el director, con Chloé y con las vecinas; de tu con Emma, Léa y Hugo.
+13. **Producción abierta.** En un `escribir` con `abierta: true`, el modelo (`respuesta`) debe tener al menos `minimoPalabras` palabras: la app comprueba que su propio modelo se acepta. El validador lo exige.
