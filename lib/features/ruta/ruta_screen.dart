@@ -10,6 +10,7 @@ import '../../core/content/curriculum.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/mascot_coach.dart';
 import '../../shared/widgets/widgets.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Ruta de un nivel (por defecto Fundamentos, nivel 0) del idioma que
 /// estudia el alumno.
@@ -28,13 +29,13 @@ class RutaScreen extends ConsumerWidget {
         .where((n) => n.id == nivelResuelto)
         .firstOrNull;
     final titulo = nivelResuelto == 'f0' || datosNivel == null
-        ? 'Fundamentos de $nombre'
+        ? tr('Fundamentos de {idioma}', {'idioma': nombre})
         : '${datosNivel.titulo.en(cadenaDelAlumno(s, r!.curso))} · $nombre';
     return Scaffold(
       appBar: AppBar(
         title: Text(titulo),
         leading: IconButton(
-          tooltip: 'Volver',
+          tooltip: tr('Volver'),
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/aprender'),
@@ -44,7 +45,7 @@ class RutaScreen extends ConsumerWidget {
         child: ruta.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, _) =>
-              const Center(child: Text('No se pudo cargar la ruta.')),
+              Center(child: Text(tr('No se pudo cargar la ruta.'))),
           data: (r) => r == null
               ? _SinRuta(nombre: nombre)
               : _Ruta(
@@ -79,13 +80,16 @@ class _SinRuta extends StatelessWidget {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        'La ruta de fundamentos de $nombre está en preparación.',
+        tr(
+          'La ruta de fundamentos de {idioma} está en preparación.',
+          {'idioma': nombre},
+        ),
         style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
       ),
       const SizedBox(height: 16),
       BotonPrincipal(
         onPressed: () => context.go('/aprender'),
-        child: const Text('IR A APRENDER'),
+        child: Text(tr('IR A APRENDER')),
       ),
     ],
   );
@@ -169,8 +173,8 @@ class _Ruta extends StatelessWidget {
       children: [
         MascotCoach(
           message: completo
-              ? '¡Terminaste este nivel! Repasa cuando te lo pida y sigue avanzando.'
-              : 'Primero te enseño con ejemplos. Después practicas y, al final, compruebas lo que sabes.',
+              ? tr('¡Terminaste este nivel! Repasa cuando te lo pida y sigue avanzando.')
+              : tr('Primero te enseño con ejemplos. Después practicas y, al final, compruebas lo que sabes.'),
         ),
         Row(
           children: [
@@ -190,10 +194,10 @@ class _Ruta extends StatelessWidget {
               ),
             ),
             if (ruta.curso.revisionInicial)
-              const Tooltip(
-                message: 'Contenido nuevo pendiente de revisión por hablantes nativos.',
+              Tooltip(
+                message: tr('Contenido nuevo pendiente de revisión por hablantes nativos.'),
                 child: Etiqueta(
-                  'Versión inicial',
+                  tr('Versión inicial'),
                   color: OL.naranja,
                   fondo: OL.naranjaSuave,
                   icono: Icons.science_outlined,
@@ -203,7 +207,11 @@ class _Ruta extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          '$aprobadas de ${unidades.length} unidades aprobadas · $cefr',
+          tr('{aprobadas} de {total} unidades aprobadas · {cefr}', {
+            'aprobadas': aprobadas,
+            'total': unidades.length,
+            'cefr': cefr,
+          }),
           style: const TextStyle(color: OL.gris, fontSize: 16),
         ),
         const SizedBox(height: 8),
@@ -226,24 +234,24 @@ class _Ruta extends StatelessWidget {
               color: OL.moradoSuave,
               borde: OL.moradoClaro,
               onTap: () => context.push('/ruta/$nivel/prueba'),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.workspace_premium_rounded,
                     color: OL.morado,
                     size: 32,
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      '¿Ya dominas este nivel? Haz su prueba y pasa al siguiente.',
-                      style: TextStyle(
+                      tr('¿Ya dominas este nivel? Haz su prueba y pasa al siguiente.'),
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                   ),
-                  Icon(Icons.chevron_right_rounded, color: OL.gris),
+                  const Icon(Icons.chevron_right_rounded, color: OL.gris),
                 ],
               ),
             ),
@@ -268,8 +276,10 @@ class _Ruta extends StatelessWidget {
                   Expanded(
                     child: Text(
                       siguienteNivel == null
-                          ? 'Nivel completado. Sigue practicando en Aprender.'
-                          : 'Nivel completado. Continúa: ${t(siguienteNivel.titulo)}.',
+                          ? tr('Nivel completado. Sigue practicando en Aprender.')
+                          : tr('Nivel completado. Continúa: {nivel}.', {
+                              'nivel': t(siguienteNivel.titulo),
+                            }),
                       style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w800,
@@ -309,16 +319,16 @@ class _Ruta extends StatelessWidget {
           ),
         ],
         const SizedBox(height: 8),
-        const Text(
-          'Lo que apruebas vuelve en repasos cortos para que no se te olvide.',
-          style: TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
+        Text(
+          tr('Lo que apruebas vuelve en repasos cortos para que no se te olvide.'),
+          style: const TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
         ),
         if (hayLeccionesExtra) ...[
           const SizedBox(height: 12),
           TextButton.icon(
             onPressed: () => context.push('/aprender/nivel/0'),
             icon: const Icon(Icons.library_books_outlined),
-            label: const Text('Práctica extra: lecciones del Nivel 0'),
+            label: Text(tr('Práctica extra: lecciones del Nivel 0')),
           ),
         ],
       ],
@@ -327,17 +337,17 @@ class _Ruta extends StatelessWidget {
 }
 
 String etiquetaEstado(InfoUnidad info) {
-  if (info.repasoPendiente) return 'Repaso pendiente';
+  if (info.repasoPendiente) return tr('Repaso pendiente');
   if (info.omitible && !info.estado.alMenos(EstadoUnidad.practicada)) {
-    return 'Opcional · según tu nivel';
+    return tr('Opcional · según tu nivel');
   }
   return switch (info.estado) {
-    EstadoUnidad.bloqueada => 'Bloqueada',
-    EstadoUnidad.disponible => 'Disponible',
-    EstadoUnidad.enCurso => 'En curso',
-    EstadoUnidad.practicada => 'Practicada · falta comprobar',
-    EstadoUnidad.aprobada => 'Aprobada',
-    EstadoUnidad.dominada => 'Dominada',
+    EstadoUnidad.bloqueada => tr('Bloqueada'),
+    EstadoUnidad.disponible => tr('Disponible'),
+    EstadoUnidad.enCurso => tr('En curso'),
+    EstadoUnidad.practicada => tr('Practicada · falta comprobar'),
+    EstadoUnidad.aprobada => tr('Aprobada'),
+    EstadoUnidad.dominada => tr('Dominada'),
   };
 }
 
@@ -381,10 +391,10 @@ class _Destacada extends StatelessWidget {
           children: [
             Text(
               repaso
-                  ? 'Toca repasar'
+                  ? tr('Toca repasar')
                   : info.estado == EstadoUnidad.disponible
-                  ? 'Siguiente paso'
-                  : 'Continúa',
+                  ? tr('Siguiente paso')
+                  : tr('Continúa'),
               style: const TextStyle(
                 color: OL.morado,
                 fontWeight: FontWeight.w800,
@@ -400,7 +410,7 @@ class _Destacada extends StatelessWidget {
             const SizedBox(height: 14),
             BotonPrincipal(
               onPressed: () => context.push(destino),
-              child: Text(repaso ? 'REPASAR' : 'EMPEZAR'),
+              child: Text(repaso ? tr('REPASAR') : tr('EMPEZAR')),
             ),
           ],
         ),
@@ -453,7 +463,9 @@ class _FilaUnidad extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     bloqueada && previa != null
-                        ? 'Puedes leerla. Para practicar, primero «$previa».'
+                        ? tr('Puedes leerla. Para practicar, primero «{previa}».', {
+                            'previa': previa,
+                          })
                         : objetivo,
                     style: const TextStyle(
                       color: OL.gris,

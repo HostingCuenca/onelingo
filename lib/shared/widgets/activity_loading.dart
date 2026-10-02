@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 import '../../core/efectos.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Reserva el espacio del ejercicio mientras llega el contenido real.
 class ActivityLoading extends StatefulWidget {
   const ActivityLoading({
     super.key,
-    this.label = 'Preparando tu actividad…',
+    this.label,
     this.detail,
     this.compact = false,
   });
-  final String label;
+  final String? label;
+  String get _texto => label ?? tr('Preparando tu actividad…');
   final String? detail;
   final bool compact;
   @override
@@ -43,7 +45,7 @@ class _ActivityLoadingState extends State<ActivityLoading>
       if (animate && !motion.isAnimating) motion.repeat();
       if (!animate && motion.isAnimating) motion.stop();
       return Semantics(
-        label: '${widget.label} ${widget.detail ?? ''}',
+        label: '${widget._texto} ${widget.detail ?? ''}',
         liveRegion: true,
         child: ExcludeSemantics(
           child: AnimatedBuilder(
@@ -133,7 +135,7 @@ class _ActivityLoadingState extends State<ActivityLoading>
                   orbit,
                   const SizedBox(height: 12),
                   Text(
-                    widget.label,
+                    widget._texto,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,

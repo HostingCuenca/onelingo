@@ -13,6 +13,12 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Terminado recientemente
 
+- **I1, interfaz en inglés (2026-10-01, DEC-031):**
+  - 939 textos con `tr()` en unos 70 archivos (6 agentes por grupos de archivos).
+  - `en.json` traducido y revisado (GO, 44 correcciones).
+  - Selector de idioma en Perfil; primera visita en el idioma del dispositivo.
+  - Reglas vigiladas por pruebas.
+
 - **Fase E, primera entrega de francés (2026-10-01, DEC-030):**
   - Voces Hélène y Nicolas.
   - Nivel 0 multilingüe: el contenido trae su idioma, voz y textos.

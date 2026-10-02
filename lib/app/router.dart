@@ -17,6 +17,7 @@ import '../features/library/learning_unit_screen.dart';
 import '../features/chat/chat_screen.dart';
 import '../features/avatar/avatar_screen.dart';
 import '../core/content/situaciones.dart';
+import '../core/i18n/i18n.dart';
 import '../features/situations/prueba_situacion_screen.dart';
 import '../features/situations/situation_screen.dart';
 import '../features/course/level_screen.dart';
@@ -313,26 +314,26 @@ class _Shell extends StatelessWidget {
           child: NavigationBar(
             selectedIndex: shell.currentIndex,
             onDestinationSelected: (i) => _switchTab(context, i),
-            destinations: const [
+            destinations: [
               NavigationDestination(
-                icon: AppNavigationIcon(0),
-                selectedIcon: AppNavigationIcon(0, selected: true),
-                label: 'Inicio',
+                icon: const AppNavigationIcon(0),
+                selectedIcon: const AppNavigationIcon(0, selected: true),
+                label: tr('Inicio'),
               ),
               NavigationDestination(
-                icon: AppNavigationIcon(1),
-                selectedIcon: AppNavigationIcon(1, selected: true),
-                label: 'Aprender',
+                icon: const AppNavigationIcon(1),
+                selectedIcon: const AppNavigationIcon(1, selected: true),
+                label: tr('Aprender'),
               ),
               NavigationDestination(
-                icon: AppNavigationIcon(2),
-                selectedIcon: AppNavigationIcon(2, selected: true),
-                label: 'Practicar',
+                icon: const AppNavigationIcon(2),
+                selectedIcon: const AppNavigationIcon(2, selected: true),
+                label: tr('Practicar'),
               ),
               NavigationDestination(
-                icon: AppNavigationIcon(3),
-                selectedIcon: AppNavigationIcon(3, selected: true),
-                label: 'Perfil',
+                icon: const AppNavigationIcon(3),
+                selectedIcon: const AppNavigationIcon(3, selected: true),
+                label: tr('Perfil'),
               ),
             ],
           ),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/curriculum.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../core/efectos.dart';
@@ -48,13 +49,13 @@ class LessonResultScreen extends ConsumerWidget {
                           ? Efectos.nivel
                           : Efectos.completado,
                       titulo: pct == 100
-                          ? '¡Perfecto, ${s.nombre.split(' ').first}!'
-                          : '¡Lección completada!',
+                          ? tr('¡Perfecto, {nombre}!', {'nombre': s.nombre.split(' ').first})
+                          : tr('¡Lección completada!'),
                       subtitulo:
-                          '${l?.titulo ?? ''}\nPráctica completada. El dominio se confirma con ejercicios nuevos y repaso.',
+                          '${l?.titulo ?? ''}\n${tr('Práctica completada. El dominio se confirma con ejercicios nuevos y repaso.')}',
                       fichas: [
                         FichaLogro(
-                          'ACIERTOS',
+                          tr('ACIERTOS'),
                           OL.morado,
                           Icons.check_circle_rounded,
                           aciertos,
@@ -80,9 +81,9 @@ class LessonResultScreen extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text(
-                                    'Siguiente lección',
-                                    style: TextStyle(
+                                  Text(
+                                    tr('Siguiente lección'),
+                                    style: const TextStyle(
                                       color: OL.gris,
                                       fontSize: 11,
                                     ),
@@ -103,9 +104,9 @@ class LessonResultScreen extends ConsumerWidget {
                       Tarjeta(
                         color: OL.naranjaSuave,
                         sombra: false,
-                        child: const Text(
-                          '¡Completaste las 100 lecciones! El examen final ya está desbloqueado.',
-                          style: TextStyle(fontWeight: FontWeight.w700),
+                        child: Text(
+                          tr('¡Completaste las 100 lecciones! El examen final ya está desbloqueado.'),
+                          style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ),
                     const Spacer(),
@@ -119,16 +120,16 @@ class LessonResultScreen extends ConsumerWidget {
                           context.go('/inicio');
                         }
                       },
-                      child: Text(nivelCompleto ? 'IR AL EXAMEN' : 'CONTINUAR'),
+                      child: Text(nivelCompleto ? tr('IR AL EXAMEN') : tr('CONTINUAR')),
                     ),
                     const SizedBox(height: 10),
                     OutlinedButton(
                       onPressed: () => context.go('/leccion/$lessonId'),
-                      child: const Text('Repetir lección'),
+                      child: Text(tr('Repetir lección')),
                     ),
                     TextButton(
                       onPressed: () => context.go('/inicio'),
-                      child: const Text('Volver al inicio'),
+                      child: Text(tr('Volver al inicio')),
                     ),
                   ],
                 ),

@@ -12,6 +12,7 @@ import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
 import 'opcion_respuesta.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Reproduce un texto del idioma meta en su idioma: voz de la nube con el
 /// idioma forzado y, para sílabas sueltas no latinas o sin sesión, la voz
@@ -43,15 +44,19 @@ class BotonAudio extends StatelessWidget {
             icon: const Icon(Icons.volume_up_rounded, size: 30),
             label: Padding(
               padding: const EdgeInsets.symmetric(vertical: 14),
-              child: Text(etiqueta ?? 'Escuchar'),
+              child: Text(etiqueta ?? tr('Escuchar')),
             ),
           )
         : IconButton(
-            tooltip: etiqueta ?? 'Escuchar',
+            tooltip: etiqueta ?? tr('Escuchar'),
             onPressed: () => escucharTexto(context, texto, idioma),
             icon: const Icon(Icons.volume_up_outlined, color: OL.morado),
           );
-    return Semantics(button: true, label: etiqueta ?? 'Escuchar', child: boton);
+    return Semantics(
+      button: true,
+      label: etiqueta ?? tr('Escuchar'),
+      child: boton,
+    );
   }
 }
 
@@ -298,7 +303,9 @@ class _ItemViewState extends State<ItemView> {
           Padding(
             padding: const EdgeInsets.only(bottom: 6),
             child: Text(
-              'Ojo con las tildes: ${item.respuesta}',
+              tr('Ojo con las tildes: {respuesta}', {
+                'respuesta': item.respuesta,
+              }),
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
             ),
           ),
@@ -306,7 +313,9 @@ class _ItemViewState extends State<ItemView> {
           Padding(
             padding: const EdgeInsets.only(bottom: 6),
             child: Text(
-              'Respuesta: ${respuestaCorrectaTexto()}',
+              tr('Respuesta: {respuesta}', {
+                'respuesta': respuestaCorrectaTexto(),
+              }),
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
             ),
           ),
@@ -341,7 +350,9 @@ class _ItemViewState extends State<ItemView> {
           Padding(
             padding: const EdgeInsets.only(bottom: 6),
             child: Text(
-              ok ? 'Más natural: $correccion' : 'Corrección: $correccion',
+              ok
+                  ? tr('Más natural: {correccion}', {'correccion': correccion})
+                  : tr('Corrección: {correccion}', {'correccion': correccion}),
               style: fuerte,
             ),
           ),
@@ -353,7 +364,7 @@ class _ItemViewState extends State<ItemView> {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              'Otra forma: $modelo',
+              tr('Otra forma: {modelo}', {'modelo': modelo}),
               style: const TextStyle(
                 fontSize: 15,
                 color: OL.gris,
@@ -372,7 +383,7 @@ class _ItemViewState extends State<ItemView> {
     final r = await mostrarPanelResultado(
       context,
       correcto: ok,
-      titulo: ok ? '¡Correcto!' : 'Vamos a repasarlo',
+      titulo: ok ? tr('¡Correcto!') : tr('Vamos a repasarlo'),
       cuerpo: cuerpoFeedback(ok),
       reintentar: !ok && widget.permitirReintento,
       lumo: widget.lumo,
@@ -439,9 +450,9 @@ class _ItemViewState extends State<ItemView> {
     style: const TextStyle(fontSize: 20),
     minLines: item.abierta ? 4 : 1,
     maxLines: item.abierta ? 8 : 1,
-    decoration: const InputDecoration(
-      hintText: 'Escribe tu respuesta',
-      border: OutlineInputBorder(),
+    decoration: InputDecoration(
+      hintText: tr('Escribe tu respuesta'),
+      border: const OutlineInputBorder(),
     ),
     onChanged: (_) => setState(() {}),
     onSubmitted: (_) => comprobar(),
@@ -472,7 +483,7 @@ class _ItemViewState extends State<ItemView> {
   /// Audio del enunciado para formatos que no son de opción (ordenar o
   /// completar lo que se escucha).
   List<Widget> audioEnunciado() => [
-    if (item.audio != null) filaAudio('Escuchar el audio'),
+    if (item.audio != null) filaAudio(tr('Escuchar el audio')),
   ];
 
   List<Widget> cuerpo() {
@@ -481,7 +492,7 @@ class _ItemViewState extends State<ItemView> {
       case FormatoItem.elegir:
       case FormatoItem.escuchar:
         return [
-          if (item.audio != null) filaAudio('Escuchar el audio'),
+          if (item.audio != null) filaAudio(tr('Escuchar el audio')),
           if (item.audio == null && item.texto?.trim().isNotEmpty == true)
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -502,7 +513,9 @@ class _ItemViewState extends State<ItemView> {
                 padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
                 onTap: () =>
                     escucharTexto(context, item.pregunta!, widget.idioma),
-                etiquetaSemantica: 'Escuchar ${item.pregunta!}',
+                etiquetaSemantica: tr('Escuchar {texto}', {
+                  'texto': item.pregunta!,
+                }),
                 child: Row(
                   children: [
                     Expanded(
@@ -556,9 +569,9 @@ class _ItemViewState extends State<ItemView> {
               runSpacing: 8,
               children: [
                 if (orden.isEmpty)
-                  const Text(
-                    'Toca las palabras en orden',
-                    style: TextStyle(color: OL.gris, fontSize: 16),
+                  Text(
+                    tr('Toca las palabras en orden'),
+                    style: const TextStyle(color: OL.gris, fontSize: 16),
                   ),
                 for (final i in orden)
                   opcionBoton(
@@ -619,7 +632,7 @@ class _ItemViewState extends State<ItemView> {
                 enableSuggestions: false,
                 textCapitalization: TextCapitalization.none,
                 decoration: InputDecoration(
-                  hintText: 'Respuesta ${i + 1}',
+                  hintText: tr('Respuesta {n}', {'n': i + 1}),
                   border: const OutlineInputBorder(),
                 ),
                 onChanged: (_) => setState(() {}),
@@ -687,14 +700,22 @@ class _ItemViewState extends State<ItemView> {
                 ),
               ),
             ),
-          if (item.audio != null) filaAudio('Escuchar y escribir'),
+          if (item.audio != null) filaAudio(tr('Escuchar y escribir')),
           campoTexto(),
           if (item.abierta)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                '${contarPalabras(escrito.text)} palabras · se piden '
-                '${item.maximoPalabras == null ? 'al menos ${item.minimoPalabras ?? 1}' : 'entre ${item.minimoPalabras ?? 1} y ${item.maximoPalabras}'}',
+                item.maximoPalabras == null
+                    ? tr('{n} palabras · se piden al menos {min}', {
+                        'n': contarPalabras(escrito.text),
+                        'min': item.minimoPalabras ?? 1,
+                      })
+                    : tr('{n} palabras · se piden entre {min} y {max}', {
+                        'n': contarPalabras(escrito.text),
+                        'min': item.minimoPalabras ?? 1,
+                        'max': item.maximoPalabras,
+                      }),
                 style: const TextStyle(color: OL.gris, fontSize: 15),
               ),
             ),
@@ -717,7 +738,7 @@ class _ItemViewState extends State<ItemView> {
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
-                'Esa pareja no coincide. Prueba con otra.',
+                tr('Esa pareja no coincide. Prueba con otra.'),
                 style: const TextStyle(
                   color: OL.rojo,
                   fontWeight: FontWeight.w700,
@@ -809,7 +830,7 @@ class _ItemViewState extends State<ItemView> {
           child: TextButton.icon(
             onPressed: () => setState(() => verPista = !verPista),
             icon: const Icon(Icons.lightbulb_outline),
-            label: Text(verPista ? 'Ocultar pista' : 'Ver una pista'),
+            label: Text(verPista ? tr('Ocultar pista') : tr('Ver una pista')),
           ),
         ),
         if (verPista)
@@ -833,7 +854,7 @@ class _ItemViewState extends State<ItemView> {
         FeedbackDock(
           child: AnswerFeedback(
             correct: true,
-            title: '¡Texto listo! Compáralo con el modelo',
+            title: tr('¡Texto listo! Compáralo con el modelo'),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -859,7 +880,7 @@ class _ItemViewState extends State<ItemView> {
       if (ok == null && item.formato != FormatoItem.relacionar)
         BotonPrincipal(
           onPressed: listo && !revisando ? comprobar : null,
-          child: Text(revisando ? 'REVISANDO…' : 'COMPROBAR'),
+          child: Text(revisando ? tr('REVISANDO…') : tr('COMPROBAR')),
         ),
       // Tras responder siempre se puede seguir; un fallo en la práctica
       // vuelve al final del bloque (lo gestiona la unidad).
@@ -869,13 +890,13 @@ class _ItemViewState extends State<ItemView> {
         BotonPrincipal(
           color: ok ? OL.verde : OL.rojo,
           onPressed: widget.onContinuar,
-          child: const Text('SIGUIENTE'),
+          child: Text(tr('SIGUIENTE')),
         ),
       if (ok == false && widget.permitirReintento && !panelAbierto)
         TextButton.icon(
           onPressed: reiniciar,
           icon: const Icon(Icons.replay_rounded),
-          label: const Text('Intentar otra vez ahora'),
+          label: Text(tr('Intentar otra vez ahora')),
         ),
     ];
     if (!widget.botonFijo) {

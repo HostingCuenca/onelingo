@@ -7,6 +7,7 @@ import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/state/providers.dart';
 import 'widgets.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Acceso a la ruta de Fundamentos del idioma que se estudia, con su avance.
 class TarjetaFundamentos extends ConsumerWidget {
@@ -24,7 +25,9 @@ class TarjetaFundamentos extends ConsumerWidget {
     final aprobadas = estados == null
         ? 0
         : unidades
-              .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
+              .where(
+                (u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada),
+              )
               .length;
     final cadena = ruta == null ? const ['es'] : cadenaDelAlumno(s, ruta.curso);
     final completo = unidades.isNotEmpty && aprobadas == unidades.length;
@@ -45,10 +48,12 @@ class TarjetaFundamentos extends ConsumerWidget {
           const SizedBox(height: 10),
           Text(
             completo
-                ? 'Fundamentos completados'
+                ? tr('Fundamentos completados')
                 : aprobadas == 0 && siguiente?.orden == 0
-                ? 'Empieza desde cero'
-                : 'Continuar: ${siguiente?.titulo.en(cadena) ?? 'Fundamentos'}',
+                ? tr('Empieza desde cero')
+                : tr('Continuar: {titulo}', {
+                    'titulo': siguiente?.titulo.en(cadena) ?? tr('Fundamentos'),
+                  }),
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w900,
@@ -58,9 +63,9 @@ class TarjetaFundamentos extends ConsumerWidget {
           const SizedBox(height: 8),
           Text(
             completo
-                ? 'Repasa cuando te lo pidamos para asegurar lo aprendido.'
+                ? tr('Repasa cuando te lo pidamos para asegurar lo aprendido.')
                 : siguiente?.objetivo.en(cadena) ??
-                      'Aprende las bases paso a paso.',
+                      tr('Aprende las bases paso a paso.'),
             style: const TextStyle(fontSize: 16, height: 1.4),
           ),
           const SizedBox(height: 12),
@@ -68,8 +73,15 @@ class TarjetaFundamentos extends ConsumerWidget {
           const SizedBox(height: 8),
           Text(
             nivel == 'f0'
-                ? '$aprobadas de ${unidades.length} unidades aprobadas'
-                : '${tituloNivel ?? ''} · $aprobadas de ${unidades.length} unidades aprobadas',
+                ? tr('{aprobadas} de {total} unidades aprobadas', {
+                    'aprobadas': aprobadas,
+                    'total': unidades.length,
+                  })
+                : tr('{nivel} · {aprobadas} de {total} unidades aprobadas', {
+                    'nivel': tituloNivel ?? '',
+                    'aprobadas': aprobadas,
+                    'total': unidades.length,
+                  }),
             style: const TextStyle(fontSize: 14, height: 1.4, color: OL.gris),
           ),
         ],

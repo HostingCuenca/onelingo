@@ -81,6 +81,10 @@ def datos():
     for s in cat['situaciones']:
         res.setdefault(s['nombre'], []).append('catalogo.json')
         res.setdefault(s['categoria'], []).append('catalogo.json')
+    # Nombres de idiomas y de los niveles antiguos (Language/Level.nombre).
+    cur = (RAIZ / 'lib/core/content/curriculum.dart').read_text(encoding='utf-8')
+    for m in re.finditer(r"(?:Language|Level)\((?:[^()]|\([^()]*\))*?nombre:\s*'([^']+)'", cur):
+        res.setdefault(m.group(1), []).append('curriculum.dart')
     return res
 
 

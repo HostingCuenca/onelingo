@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/theme.dart';
 import '../../core/api/sync.dart';
 import '../../core/content/curriculum.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -92,14 +93,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     super.dispose();
   }
 
-  static const _titulos = [
-    'Crea tu cuenta',
-    '¿Cuál es tu idioma nativo?',
-    '¿Qué idioma quieres aprender?',
-    '¿A qué te dedicas?',
-    'Tus objetivos',
-    '¿Cuál es tu nivel?',
-    'Tu prueba gratuita',
+  static List<String> get _titulos => [
+    tr('Crea tu cuenta'),
+    tr('¿Cuál es tu idioma nativo?'),
+    tr('¿Qué idioma quieres aprender?'),
+    tr('¿A qué te dedicas?'),
+    tr('Tus objetivos'),
+    tr('¿Cuál es tu nivel?'),
+    tr('Tu prueba gratuita'),
   ];
 
   bool get _puedeSeguir => switch (paso) {
@@ -138,7 +139,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       if (!ok) {
         setState(
           () => errorRegistro = Sync.instancia.ultimoError.isEmpty
-              ? 'No pudimos crear la cuenta. Comprueba la conexión e inténtalo otra vez.'
+              ? tr(
+                  'No pudimos crear la cuenta. Comprueba la conexión e inténtalo otra vez.',
+                )
               : Sync.instancia.ultimoError,
         );
         return;
@@ -219,7 +222,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Paso ${paso + 1} de 7',
+                tr('Paso {n} de 7', {'n': paso + 1}),
                 style: const TextStyle(
                   color: OL.gris,
                   fontWeight: FontWeight.w600,
@@ -253,12 +256,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 onPressed: _puedeSeguir && !creando ? _siguiente : null,
                 child: Text(
                   creando
-                      ? 'CREANDO TU CUENTA…'
+                      ? tr('CREANDO TU CUENTA…')
                       : (paso == 6
-                            ? 'COMENZAR MI HORA GRATIS'
+                            ? tr('COMENZAR MI HORA GRATIS')
                             : paso == 5 && meta == 'en'
-                            ? 'COMPROBAR MI NIVEL'
-                            : 'CONTINUAR'),
+                            ? tr('COMPROBAR MI NIVEL')
+                            : tr('CONTINUAR')),
                 ),
               ),
             ],
@@ -272,10 +275,16 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     0 => _cuenta(),
     1 => _idiomas(
       nativo,
-      (c) => setState(() {
-        nativo = c;
-        diagnostico = null;
-      }),
+      (c) {
+        setState(() {
+          nativo = c;
+          diagnostico = null;
+        });
+        // La app pasa al idioma nativo elegido (si lo tiene; si no, inglés).
+        ref
+            .read(progressProvider.notifier)
+            .elegirIdiomaInterfaz(idiomaInterfazPara(c));
+      },
       soloDisponibles: false,
     ),
     2 => _idiomas(
@@ -294,44 +303,47 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   Widget _cuenta() => ListView(
     children: [
-      const Text(
-        'Nombre completo',
-        style: TextStyle(fontWeight: FontWeight.w600),
+      Text(
+        tr('Nombre completo'),
+        style: const TextStyle(fontWeight: FontWeight.w600),
       ),
       const SizedBox(height: 6),
       TextField(
         controller: nombre,
         onChanged: (_) => setState(() {}),
-        decoration: const InputDecoration(
-          hintText: 'Tu nombre',
-          prefixIcon: Icon(Icons.person_outline),
+        decoration: InputDecoration(
+          hintText: tr('Tu nombre'),
+          prefixIcon: const Icon(Icons.person_outline),
         ),
       ),
       const SizedBox(height: 14),
-      const Text(
-        'Correo electrónico',
-        style: TextStyle(fontWeight: FontWeight.w600),
+      Text(
+        tr('Correo electrónico'),
+        style: const TextStyle(fontWeight: FontWeight.w600),
       ),
       const SizedBox(height: 6),
       TextField(
         controller: correo,
         onChanged: (_) => setState(() {}),
         keyboardType: TextInputType.emailAddress,
-        decoration: const InputDecoration(
-          hintText: 'tu@email.com',
-          prefixIcon: Icon(Icons.mail_outline),
+        decoration: InputDecoration(
+          hintText: tr('tu@email.com'),
+          prefixIcon: const Icon(Icons.mail_outline),
         ),
       ),
       const SizedBox(height: 14),
-      const Text('Contraseña', style: TextStyle(fontWeight: FontWeight.w600)),
+      Text(
+        tr('Contraseña'),
+        style: const TextStyle(fontWeight: FontWeight.w600),
+      ),
       const SizedBox(height: 6),
       TextField(
         controller: clave,
         obscureText: true,
         onChanged: (_) => setState(() {}),
-        decoration: const InputDecoration(
-          hintText: 'Mínimo 6 caracteres',
-          prefixIcon: Icon(Icons.lock_outline),
+        decoration: InputDecoration(
+          hintText: tr('Mínimo 6 caracteres'),
+          prefixIcon: const Icon(Icons.lock_outline),
         ),
       ),
       if (errorRegistro != null) ...[
@@ -348,12 +360,12 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       const SizedBox(height: 16),
       TextButton(
         onPressed: () => context.go('/login'),
-        child: const Text('Ya tengo una cuenta · Iniciar sesión'),
+        child: Text(tr('Ya tengo una cuenta · Iniciar sesión')),
       ),
       if (kDebugMode)
         OutlinedButton.icon(
           icon: const Icon(Icons.science_outlined),
-          label: const Text('Rellenar usuario demo de pruebas'),
+          label: Text(tr('Rellenar usuario demo de pruebas')),
           onPressed: () => setState(() {
             final id = DateTime.now().microsecondsSinceEpoch;
             nombre.text = 'Demo onboarding';
@@ -443,7 +455,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            l.nombre,
+                            _nombreIdioma(l.code, l.nombre),
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -472,11 +484,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   Widget _nivel() => ListView(
     children: [
       Text(
-        'Elige tu punto de partida. Después una prueba corta confirma tu nivel: empezarás donde de verdad estás.',
+        tr(
+          'Elige tu punto de partida. Después una prueba corta confirma tu nivel: empezarás donde de verdad estás.',
+        ),
       ),
       const SizedBox(height: 12),
       ListTile(
-        title: const Text('Empiezo desde cero'),
+        title: Text(tr('Empiezo desde cero')),
         leading: Icon(
           nivelInicial == 0
               ? Icons.radio_button_checked
@@ -505,7 +519,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Nivel ${n.numero} · ${n.nombre}',
+                        tr('Nivel {n} · {nombre}', {
+                          'n': n.numero,
+                          'nombre': _nombreNivel(n.nombre),
+                        }),
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       Text(
@@ -528,56 +545,91 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         gradient: OL.gradienteNaranja,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Etiqueta('PRUEBA GRATUITA', color: OL.naranja, fondo: OL.blanco),
-            SizedBox(height: 12),
+          children: [
+            Etiqueta(
+              tr('PRUEBA GRATUITA'),
+              color: OL.naranja,
+              fondo: OL.blanco,
+            ),
+            const SizedBox(height: 12),
             Text(
-              '1 hora gratis',
-              style: TextStyle(
+              tr('1 hora gratis'),
+              style: const TextStyle(
                 color: OL.blanco,
                 fontSize: 30,
                 fontWeight: FontWeight.w800,
               ),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Text(
-              'Durante 60 minutos de uso real puedes probar todas las funciones '
-              'principales: lecciones, práctica libre, conversación con IA y '
-              'corrección de errores. Después eliges tu plan.',
-              style: TextStyle(color: Color(0xFFFFF3E0), height: 1.5),
+              tr(
+                'Durante 60 minutos de uso real puedes probar todas las funciones '
+                'principales: lecciones, práctica libre, conversación con IA y '
+                'corrección de errores. Después eliges tu plan.',
+              ),
+              style: const TextStyle(color: Color(0xFFFFF3E0), height: 1.5),
             ),
           ],
         ),
       ),
       const SizedBox(height: 18),
-      const Text(
-        'Qué vas a encontrar',
-        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+      Text(
+        tr('Qué vas a encontrar'),
+        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
       ),
       const SizedBox(height: 10),
-      const _Punto(
+      _Punto(
         Icons.map_outlined,
-        'Curso estructurado',
-        '10 niveles · 100 lecciones por nivel · examen final al 65 %',
+        tr('Curso estructurado'),
+        tr('10 niveles · 100 lecciones por nivel · examen final al 65 %'),
       ),
-      const _Punto(
+      _Punto(
         Icons.forum_outlined,
-        'Práctica libre con IA',
-        '50 situaciones reales adaptadas a tu nivel + conversación libre',
+        tr('Práctica libre con IA'),
+        tr('50 situaciones reales adaptadas a tu nivel + conversación libre'),
       ),
-      const _Punto(
+      _Punto(
         Icons.fact_check_outlined,
-        'Corrección de errores',
-        'Cada error con su explicación y una nueva oportunidad para practicarlo',
+        tr('Corrección de errores'),
+        tr(
+          'Cada error con su explicación y una nueva oportunidad para practicarlo',
+        ),
       ),
-      const _Punto(
+      _Punto(
         Icons.insights_outlined,
-        'Progreso',
-        'XP, racha, tiempo de estudio y habilidades',
+        tr('Progreso'),
+        tr('XP, racha, tiempo de estudio y habilidades'),
       ),
     ],
   );
 }
+
+/// Nombre del idioma en el idioma de la interfaz.
+String _nombreIdioma(String code, String nombre) => switch (code) {
+  'en' => tr('Inglés'),
+  'es' => tr('Español'),
+  'fr' => tr('Francés'),
+  'de' => tr('Alemán'),
+  'pt' => tr('Portugués'),
+  'it' => tr('Italiano'),
+  'zh' => tr('Chino mandarín'),
+  'ja' => tr('Japonés'),
+  'ko' => tr('Coreano'),
+  'ru' => tr('Ruso'),
+  _ => nombre,
+};
+
+/// Nombre del nivel (curriculum.dart) en el idioma de la interfaz.
+String _nombreNivel(String nombre) => switch (nombre) {
+  'Básico' => tr('Básico'),
+  'Básico Avanzado' => tr('Básico Avanzado'),
+  'Intermedio' => tr('Intermedio'),
+  'Intermedio Avanzado' => tr('Intermedio Avanzado'),
+  'Avanzado' => tr('Avanzado'),
+  'Avanzado Superior' => tr('Avanzado Superior'),
+  'Dominio' => tr('Dominio'),
+  _ => nombre,
+};
 
 class _Punto extends StatelessWidget {
   const _Punto(this.icono, this.titulo, this.texto);

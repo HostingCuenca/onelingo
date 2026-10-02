@@ -6,6 +6,7 @@ import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/content/fotos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/daily_activities.dart';
 import '../../shared/widgets/mascot_coach.dart';
@@ -61,8 +62,8 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 20),
             TituloSeccion(
-              'Elige cómo aprender',
-              accion: 'Ver ruta',
+              tr('Elige cómo aprender'),
+              accion: tr('Ver ruta'),
               onAccion: () => context.go('/aprender'),
             ),
             const SizedBox(height: 10),
@@ -78,9 +79,9 @@ class HomeScreen extends ConsumerWidget {
               onLibrary: () => context.push('/biblioteca'),
             ),
             const SizedBox(height: 18),
-            const MascotCoach(
+            MascotCoach(
               idle: true,
-              message: 'Un pequeño paso hoy también cuenta. Elige una actividad y avancemos juntos.',
+              message: tr('Un pequeño paso hoy también cuenta. Elige una actividad y avancemos juntos.'),
             ),
             const SizedBox(height: 4),
             const StreakCard(),
@@ -88,7 +89,7 @@ class HomeScreen extends ConsumerWidget {
             if (s.planId.isEmpty) _TrialBanner(restante: restante),
             if (s.planId.isEmpty) const SizedBox(height: 16),
             if (s.idiomaMeta != 'en') ...[
-              const TituloSeccion('Tu camino de aprendizaje'),
+              TituloSeccion(tr('Tu camino de aprendizaje')),
               const SizedBox(height: 10),
               Tarjeta(
                 child: Row(
@@ -107,12 +108,12 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           Text(
                             n == 0
-                                ? 'Fundamentos · empieza de cero'
-                                : 'Nivel $n · ${lvl.nombre}',
+                                ? tr('Fundamentos · empieza de cero')
+                                : tr('Nivel {n} · {nombre}', {'n': n, 'nombre': lvl.nombre}),
                             style: const TextStyle(color: OL.gris),
                           ),
                           Text(
-                            '${s.completadasEnNivel(n)} de ${totalLeccionesDe(n)} lecciones',
+                            tr('{hechas} de {total} lecciones', {'hechas': s.completadasEnNivel(n), 'total': totalLeccionesDe(n)}),
                             style: const TextStyle(color: OL.gris),
                           ),
                           const SizedBox(height: 12),
@@ -124,7 +125,7 @@ class HomeScreen extends ConsumerWidget {
                                   ? () => context.push('/examen/$n')
                                   : () => context.push('/leccion/${actual.id}'),
                               child: Text(
-                                actual == null ? 'Hacer examen' : 'Continuar',
+                                actual == null ? tr('Hacer examen') : tr('Continuar'),
                                 style: const TextStyle(fontSize: 14),
                               ),
                             ),
@@ -150,7 +151,7 @@ class HomeScreen extends ConsumerWidget {
               const SizedBox(height: 22),
               if (s.diagnostico != null &&
                   ((s.diagnostico!['plan'] as List?) ?? []).isNotEmpty) ...[
-                const TituloSeccion('Tu plan de refuerzo'),
+                TituloSeccion(tr('Tu plan de refuerzo')),
                 const SizedBox(height: 10),
                 Tarjeta(
                   color: OL.moradoSuave,
@@ -160,7 +161,7 @@ class HomeScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Tu prueba de nivel: nivel ${s.diagnostico!['nivel']}',
+                        tr('Tu prueba de nivel: nivel {nivel}', {'nivel': s.diagnostico!['nivel']}),
                         style: const TextStyle(fontWeight: FontWeight.w800),
                       ),
                       const SizedBox(height: 6),
@@ -176,7 +177,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 18),
               ],
-              const TituloSeccion('Lección diaria'),
+              TituloSeccion(tr('Lección diaria')),
               const SizedBox(height: 10),
               if (actual != null)
                 Tarjeta(
@@ -198,7 +199,7 @@ class HomeScreen extends ConsumerWidget {
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  'Lección ${actual.numero}',
+                                  tr('Lección {n}', {'n': actual.numero}),
                                   style: const TextStyle(
                                     color: OL.morado,
                                     fontWeight: FontWeight.w800,
@@ -230,11 +231,11 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 )
               else
-                const Tarjeta(
+                Tarjeta(
                   color: OL.verdeSuave,
                   sombra: false,
                   child: Text(
-                    'Completaste las 100 lecciones del nivel. ¡Es hora del examen final!',
+                    tr('Completaste las 100 lecciones del nivel. ¡Es hora del examen final!'),
                   ),
                 ),
               const SizedBox(height: 22),
@@ -242,32 +243,32 @@ class HomeScreen extends ConsumerWidget {
             const TutorAvatarBanner(),
             const SizedBox(height: 22),
             TituloSeccion(
-              'Situaciones de la vida real',
-              accion: 'Ver las 50',
+              tr('Situaciones de la vida real'),
+              accion: tr('Ver las 50'),
               onAccion: () => context.go('/practicar'),
             ),
             const SizedBox(height: 10),
             const _SituationPreview(),
             const SizedBox(height: 22),
-            const TituloSeccion('Actividades diarias'),
+            TituloSeccion(tr('Actividades diarias')),
             const SizedBox(height: 10),
             const DailyActivities(),
             const SizedBox(height: 22),
-            const TituloSeccion('Tu progreso en números'),
+            TituloSeccion(tr('Tu progreso en números')),
             const SizedBox(height: 10),
             Row(
               children: [
                 _Stat(
                   '${s.idiomaMeta == 'en' ? s.practicas.length : s.completadas.length}',
-                  s.idiomaMeta == 'en' ? 'ACTIVIDADES' : 'LECCIONES',
+                  s.idiomaMeta == 'en' ? tr('ACTIVIDADES') : tr('LECCIONES'),
                 ),
                 const SizedBox(width: 10),
                 _Stat(
                   '${s.idiomaMeta == 'en' ? s.practicas.values.whereType<Map>().where((e) => e['correcta'] == true).length : s.vocabularioAprendido}',
-                  s.idiomaMeta == 'en' ? 'RESUELTAS' : 'PALABRAS',
+                  s.idiomaMeta == 'en' ? tr('RESUELTAS') : tr('PALABRAS'),
                 ),
                 const SizedBox(width: 10),
-                _Stat('${s.segundosEstudio ~/ 60}', 'MINUTOS'),
+                _Stat('${s.segundosEstudio ~/ 60}', tr('MINUTOS')),
               ],
             ),
           ],
@@ -297,8 +298,8 @@ class _TrialBanner extends StatelessWidget {
         Expanded(
           child: Text(
             restante == 0
-                ? 'Tu hora gratis terminó · elige un plan para continuar'
-                : 'Prueba gratuita · te quedan ${restante ~/ 60} min',
+                ? tr('Tu hora gratis terminó · elige un plan para continuar')
+                : tr('Prueba gratuita · te quedan {min} min', {'min': restante ~/ 60}),
             style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
           ),
         ),
@@ -332,7 +333,7 @@ class _HomeHeader extends StatelessWidget {
           const Expanded(child: _OneLingoWordmark()),
           Semantics(
             button: true,
-            label: 'Abrir perfil de $nombre',
+            label: tr('Abrir perfil de {nombre}', {'nombre': nombre}),
             child: InkWell(
               onTap: onProfile,
               customBorder: const CircleBorder(),
@@ -360,14 +361,14 @@ class _HomeHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hola, $nombre',
+                  tr('Hola, {nombre}', {'nombre': nombre}),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const Text(
-                  '¿Qué quieres aprender hoy?',
-                  style: TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
+                Text(
+                  tr('¿Qué quieres aprender hoy?'),
+                  style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
                 ),
               ],
             ),
@@ -393,7 +394,7 @@ class _OneLingoWordmark extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     header: true,
-    label: 'OneLingo. Un mundo, más oportunidades.',
+    label: tr('OneLingo. Un mundo, más oportunidades.'),
     child: Align(
       alignment: Alignment.centerLeft,
       child: Image.asset(
@@ -415,7 +416,7 @@ class _LearnTodayHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: 'Aprende hoy para crear un mejor mañana. Continuar aprendiendo.',
+    label: tr('Aprende hoy para crear un mejor mañana. Continuar aprendiendo.'),
     child: Material(
       color: Colors.transparent,
       child: InkWell(
@@ -463,17 +464,17 @@ class _LearnTodayHero extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Aprende hoy',
-                        style: TextStyle(
+                      Text(
+                        tr('Aprende hoy'),
+                        style: const TextStyle(
                           fontSize: 25,
                           height: 1.02,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
-                      const Text(
-                        'un mejor mañana',
-                        style: TextStyle(
+                      Text(
+                        tr('un mejor mañana'),
+                        style: const TextStyle(
                           color: OL.morado,
                           fontSize: 24,
                           height: 1.08,
@@ -490,20 +491,20 @@ class _LearnTodayHero extends StatelessWidget {
                           color: OL.blanco.withValues(alpha: .88),
                           borderRadius: BorderRadius.circular(99),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'CONTINUAR',
-                              style: TextStyle(
+                              tr('CONTINUAR'),
+                              style: const TextStyle(
                                 color: OL.morado,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: .45,
                               ),
                             ),
-                            SizedBox(width: 4),
-                            Icon(
+                            const SizedBox(width: 4),
+                            const Icon(
                               Icons.arrow_forward_rounded,
                               color: OL.morado,
                               size: 17,
@@ -552,48 +553,48 @@ class _HomeActions extends StatelessWidget {
       children: [
         _HomeActionCard(
           asset: 'assets/img/home-icons/home-academia.webp',
-          title: 'Academia',
-          subtitle: 'Cursos por niveles',
+          title: tr('Academia'),
+          subtitle: tr('Cursos por niveles'),
           color: OL.azul,
           softColor: OL.azulSuave,
           onTap: onAcademy,
         ),
         _HomeActionCard(
           asset: 'assets/img/home-icons/home-situaciones.webp',
-          title: '50 situaciones',
-          subtitle: 'Inglés para la vida real',
+          title: tr('50 situaciones'),
+          subtitle: tr('Para la vida real'),
           color: OL.verde,
           softColor: OL.verdeSuave,
           onTap: onSituations,
         ),
         _HomeActionCard(
           asset: 'assets/img/home-icons/home-tutor-ia.webp',
-          title: 'Tutor con IA',
-          subtitle: 'Conversa con un avatar',
+          title: tr('Tutor con IA'),
+          subtitle: tr('Conversa con un avatar'),
           color: OL.morado,
           softColor: OL.moradoSuave,
           onTap: onTutor,
         ),
         _HomeActionCard(
           asset: 'assets/img/home-icons/home-progreso.webp',
-          title: 'Progreso',
-          subtitle: 'Avance, racha y logros',
+          title: tr('Progreso'),
+          subtitle: tr('Avance, racha y logros'),
           color: OL.naranja,
           softColor: OL.naranjaSuave,
           onTap: onProgress,
         ),
         _HomeActionCard(
           asset: 'assets/img/home-icons/home-diagnostico.webp',
-          title: 'Diagnóstico',
-          subtitle: 'Descubre qué reforzar',
+          title: tr('Diagnóstico'),
+          subtitle: tr('Descubre qué reforzar'),
           color: OL.rojo,
           softColor: OL.rojoSuave,
           onTap: onDiagnostic,
         ),
         _HomeActionCard(
           asset: 'assets/img/home-icons/home-biblioteca.webp',
-          title: 'Biblioteca',
-          subtitle: 'Lectura, audio y práctica',
+          title: tr('Biblioteca'),
+          subtitle: tr('Lectura, audio y práctica'),
           color: const Color(0xFF0799A8),
           softColor: const Color(0xFFDDF5F6),
           onTap: onLibrary,
@@ -745,7 +746,7 @@ class _SituationPreview extends StatelessWidget {
                         right: 12,
                         bottom: 12,
                         child: Text(
-                          sit.nombre,
+                          trDato(sit.nombre),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(

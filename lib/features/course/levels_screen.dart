@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/diagnostico.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
@@ -45,16 +46,16 @@ class LevelsScreen extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Curso de ${meta.nombre}')),
+      appBar: AppBar(title: Text(tr('Curso de {idioma}', {'idioma': meta.nombre}))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
         children: [
-          const MascotCoach(
+          MascotCoach(
             message:
-                'Primero entiende el ejemplo; después practica a tu ritmo.',
+                tr('Primero entiende el ejemplo; después practica a tu ritmo.'),
           ),
           if (s.idiomaMeta == 'en') ...[
-            const TituloSeccion('Tus diez niveles'),
+            TituloSeccion(tr('Tus diez niveles')),
             const SizedBox(height: 12),
             // Nivel 0 · Leer y pronunciar (desde cero), antes de los diez niveles.
             const TarjetaNivel0(),
@@ -70,9 +71,9 @@ class LevelsScreen extends ConsumerWidget {
                 estado: s,
               ),
           ] else ...[
-            const Text(
-              '10 niveles · 100 lecciones por nivel · examen final al 65 %',
-              style: TextStyle(color: OL.gris, fontSize: 14),
+            Text(
+              tr('10 niveles · 100 lecciones por nivel · examen final al 65 %'),
+              style: const TextStyle(color: OL.gris, fontSize: 14),
             ),
             const SizedBox(height: 14),
             // Nivel 0 · Leer y pronunciar, si el idioma lo tiene (se oculta
@@ -140,8 +141,8 @@ class _NivelCard extends StatelessWidget {
                   children: [
                     Text(
                       n == 0
-                          ? 'Fundamentos · empieza de cero'
-                          : 'Nivel $n · ${lvl.nombre}',
+                          ? tr('Fundamentos · empieza de cero')
+                          : tr('Nivel {n} · {nombre}', {'n': n, 'nombre': lvl.nombre}),
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 15,
@@ -177,8 +178,8 @@ class _NivelCard extends StatelessWidget {
                       const SizedBox(height: 6),
                       Etiqueta(
                         aprobado
-                            ? 'Examen aprobado · ${s.examenes[n]}%'
-                            : 'Examen ${s.examenes[n]}% · repite',
+                            ? tr('Examen aprobado · {nota}%', {'nota': s.examenes[n]})
+                            : tr('Examen {nota}% · repite', {'nota': s.examenes[n]}),
                         color: aprobado ? OL.verde : OL.rojo,
                       ),
                     ],
@@ -219,7 +220,7 @@ class _TarjetaNivelRuta extends StatelessWidget {
         context,
         icono: Icons.schedule_rounded,
         color: OL.gris,
-        detalle: 'Próximamente',
+        detalle: tr('Próximamente'),
         onTap: null,
       );
     }
@@ -245,12 +246,12 @@ class _TarjetaNivelRuta extends StatelessWidget {
           ? OL.morado
           : OL.gris,
       detalle: superado
-          ? 'Superado'
+          ? tr('Superado')
           : primera.omitible
-          ? 'Opcional: está por debajo de tu nivel'
+          ? tr('Opcional: está por debajo de tu nivel')
           : abierto
-          ? '$aprobadas de ${unidades.length} clases'
-          : 'Termina el nivel anterior o aprueba su prueba',
+          ? tr('{hechas} de {total} clases', {'hechas': aprobadas, 'total': unidades.length})
+          : tr('Termina el nivel anterior o aprueba su prueba'),
       onTap: () => context.push('/ruta/$id'),
     );
   }
@@ -276,7 +277,7 @@ class _TarjetaNivelRuta extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Nivel $numero · $cefr',
+                  tr('Nivel {n} · {cefr}', {'n': numero, 'cefr': cefr}),
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w800,

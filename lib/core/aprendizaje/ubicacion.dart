@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import '../i18n/i18n.dart';
 import 'modelos.dart';
 
 /// Diagnóstico de ubicación v2 (DEC-025, docs/claude-educacion/DIAGNOSTICO_V2.md).
@@ -16,12 +17,13 @@ import 'modelos.dart';
 
 const habilidadesUbicacion = ['escucha', 'lectura', 'gramatica', 'vocabulario'];
 
-const nombresHabilidad = {
-  'escucha': 'Escucha',
-  'lectura': 'Lectura',
-  'gramatica': 'Gramática',
-  'vocabulario': 'Vocabulario',
-  'escritura': 'Escritura',
+/// Nombre visible de cada habilidad, en el idioma de la interfaz.
+Map<String, String> get nombresHabilidad => {
+  'escucha': tr('Escucha'),
+  'lectura': tr('Lectura'),
+  'gramatica': tr('Gramática'),
+  'vocabulario': tr('Vocabulario'),
+  'escritura': tr('Escritura'),
 };
 
 /// Respuesta a «¿Cuánto inglés sabes?»: centra la estimación inicial.

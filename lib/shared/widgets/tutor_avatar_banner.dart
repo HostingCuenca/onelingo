@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import 'widgets.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Entrada compacta al tutor con IA usando los retratos reales del roster 3D.
 class TutorAvatarBanner extends StatelessWidget {
@@ -19,7 +20,7 @@ class TutorAvatarBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: 'Practica con nuestros tutores de inteligencia artificial',
+    label: tr('Practica con nuestros tutores de inteligencia artificial'),
     child: Tarjeta(
       onTap: () => context.push('/tutores'),
       padding: EdgeInsets.zero,
@@ -57,41 +58,43 @@ class TutorAvatarBanner extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Practica con nuestros avatares',
+                      Text(
+                        tr('Practica con nuestros avatares'),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           height: 1.08,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
                       const SizedBox(height: 7),
-                      const Text(
-                        'Habla con un tutor de IA adaptado a tu idioma y nivel.',
+                      Text(
+                        tr(
+                          'Habla con un tutor de IA adaptado a tu idioma y nivel.',
+                        ),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 13, height: 1.28),
+                        style: const TextStyle(fontSize: 13, height: 1.28),
                       ),
                       const Spacer(),
-                      const FittedBox(
+                      FittedBox(
                         fit: BoxFit.scaleDown,
                         alignment: Alignment.centerLeft,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'ELEGIR TUTOR',
-                              style: TextStyle(
+                              tr('ELEGIR TUTOR'),
+                              style: const TextStyle(
                                 color: OL.morado,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: .3,
                               ),
                             ),
-                            SizedBox(width: 3),
-                            Icon(
+                            const SizedBox(width: 3),
+                            const Icon(
                               Icons.arrow_forward_rounded,
                               size: 17,
                               color: OL.morado,

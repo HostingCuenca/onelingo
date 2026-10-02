@@ -5,6 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import 'content/curriculum.dart';
 import 'content/idiomas.dart' show soloNativo;
+import 'i18n/i18n.dart';
 import 'voz.dart' show similitud;
 import 'models/models.dart';
 import 'placement.dart';
@@ -64,31 +65,34 @@ enum TipoDiag {
   ordenar,
 }
 
-const tiposDiagNombre = {
-  TipoDiag.eleccion: 'Elige',
-  TipoDiag.natural: 'La más natural',
-  TipoDiag.significado: 'Significado',
-  TipoDiag.contexto: 'Comprensión',
-  TipoDiag.situacion: 'Situación',
-  TipoDiag.error: 'Detecta el error',
-  TipoDiag.completar: 'Completa',
-  TipoDiag.corta: 'Respuesta corta',
-  TipoDiag.ordenar: 'Ordena la frase',
-  TipoDiag.escucha: 'Escucha',
-  TipoDiag.dictado: 'Dictado',
-  TipoDiag.escritura: 'Escribe',
+/// Nombre visible de cada tipo de pregunta (idioma de la interfaz).
+Map<TipoDiag, String> get tiposDiagNombre => {
+  TipoDiag.eleccion: tr('Elige'),
+  TipoDiag.natural: tr('La más natural'),
+  TipoDiag.significado: tr('Significado'),
+  TipoDiag.contexto: tr('Comprensión'),
+  TipoDiag.situacion: tr('Situación'),
+  TipoDiag.error: tr('Detecta el error'),
+  TipoDiag.completar: tr('Completa'),
+  TipoDiag.corta: tr('Respuesta corta'),
+  TipoDiag.ordenar: tr('Ordena la frase'),
+  TipoDiag.escucha: tr('Escucha'),
+  TipoDiag.dictado: tr('Dictado'),
+  TipoDiag.escritura: tr('Escribe'),
 };
 
-const skillsDiag = {
-  'listening': 'Listening',
-  'comprension': 'Lectura',
-  'vocabulario': 'Vocabulario',
-  'gramatica': 'Gramática',
-  'tiempos': 'Tiempos verbales',
-  'expresiones': 'Expresiones naturales',
-  'contexto': 'Comprensión contextual',
-  'cotidiano': 'Comunicación cotidiana',
-  'escritura': 'Escritura',
+/// Competencias del diagnóstico (clave → nombre visible en el idioma de la
+/// interfaz).
+Map<String, String> get skillsDiag => {
+  'listening': tr('Listening'),
+  'comprension': tr('Lectura'),
+  'vocabulario': tr('Vocabulario'),
+  'gramatica': tr('Gramática'),
+  'tiempos': tr('Tiempos verbales'),
+  'expresiones': tr('Expresiones naturales'),
+  'contexto': tr('Comprensión contextual'),
+  'cotidiano': tr('Comunicación cotidiana'),
+  'escritura': tr('Escritura'),
 };
 
 class PreguntaDiag {
@@ -206,7 +210,7 @@ class PreguntaDiag {
     },
     tipo: TipoDiag.eleccion,
     tema: s.hint.isEmpty ? 'repaso del nivel $nivel' : s.hint,
-    instruccion: 'Elige la opción correcta.',
+    instruccion: tr('Elige la opción correcta.'),
     texto: s.prompt,
     opciones: s.options,
     correcta: s.options.indexOf(s.answer).clamp(0, s.options.length - 1),
@@ -345,7 +349,7 @@ class ResultadoDiag {
 
 /// Equivalencia curricular orientativa, no acreditación ni escala psicométrica.
 String cefrDe(double n) {
-  if (n < 1) return 'Pre-A1 · Fundamentos';
+  if (n < 1) return tr('Pre-A1 · Fundamentos');
   if (n < 3) return 'A1';
   if (n < 5) return 'A2';
   if (n < 7) return 'B1';
@@ -844,8 +848,10 @@ class Diagnostico {
     return EvaluacionEscritura(
       puntuacion: p.clamp(1, 10),
       comentario: palabras.length < 8
-          ? 'Texto muy corto: escribe al menos 3 frases para medir mejor tu escritura.'
-          : 'Evaluación aproximada sin IA: cuenta de frases y vocabulario.',
+          ? tr(
+              'Texto muy corto: escribe al menos 3 frases para medir mejor tu escritura.',
+            )
+          : tr('Evaluación aproximada sin IA: cuenta de frases y vocabulario.'),
       porIa: false,
     );
   }
@@ -961,8 +967,14 @@ class Diagnostico {
                   in (skills.entries.toList()
                         ..sort((a, b) => a.value.compareTo(b.value)))
                       .take(3))
-                'Biblioteca · ${skillsDiag[s.key]}: práctica al nivel ${s.value.round().clamp(1, 10)}, con explicación y ejemplos nuevos.',
-              'Tutor con IA: aplica lo que necesitas reforzar a tus objetivos.',
+                tr(
+                  'Biblioteca · {habilidad}: práctica al nivel {nivel}, con explicación y ejemplos nuevos.',
+                  {
+                    'habilidad': skillsDiag[s.key],
+                    'nivel': s.value.round().clamp(1, 10),
+                  },
+                ),
+              tr('Tutor con IA: aplica lo que necesitas reforzar a tus objetivos.'),
             ]
           : planDe(recomendado, refuerzo),
       escritura: _escritura,
@@ -974,9 +986,9 @@ class Diagnostico {
     final plan = <String>[];
     if (recomendado == 0) {
       plan.add(
-        'Fundamentos: letras y sonidos, números, colores y palabras básicas',
+        tr('Fundamentos: letras y sonidos, números, colores y palabras básicas'),
       );
-      plan.add('Después, Nivel 1 desde la unidad 1');
+      plan.add(tr('Después, Nivel 1 desde la unidad 1'));
       return plan;
     }
     final niveles = {recomendado, if (recomendado > 1) recomendado - 1};
@@ -991,19 +1003,24 @@ class Diagnostico {
         for (final u in unidadesDe(nv)) {
           final titulo = u.titulo.toLowerCase();
           if (claves.any((c) => titulo.contains(c))) {
-            hallado =
-                'Nivel $nv · Unidad ${u.numero}: ${u.titulo} (refuerza: $tema)';
+            hallado = tr(
+              'Nivel {nivel} · Unidad {unidad}: {titulo} (refuerza: {tema})',
+              {'nivel': nv, 'unidad': u.numero, 'titulo': u.titulo, 'tema': tema},
+            );
             break;
           }
         }
         if (hallado != null) break;
       }
-      plan.add(hallado ?? 'Refuerzo con la IA: $tema');
+      plan.add(hallado ?? tr('Refuerzo con la IA: {tema}', {'tema': tema}));
       if (plan.length >= 6) break;
     }
     if (plan.isEmpty) {
       plan.add(
-        'Empieza el Nivel $recomendado desde la unidad 1: no se detectaron debilidades claras',
+        tr(
+          'Empieza el Nivel {nivel} desde la unidad 1: no se detectaron debilidades claras',
+          {'nivel': recomendado},
+        ),
       );
     }
     return plan;

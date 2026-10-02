@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/perfil_aprendizaje.dart';
+import '../../core/i18n/i18n.dart';
 
 class PerfilSeleccion extends StatelessWidget {
   const PerfilSeleccion({
@@ -44,18 +45,18 @@ class PerfilSeleccion extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (!soloObjetivos) ...[
-          const Text(
-            'Elige uno o varios sectores',
-            style: TextStyle(fontWeight: FontWeight.w700),
+          Text(
+            tr('Elige uno o varios sectores'),
+            style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),
           opciones(sectoresAprendizaje, sectores, true),
         ],
         if (!soloSectores) ...[
           const SizedBox(height: 20),
-          const Text(
-            '¿Qué quieres lograr con el inglés?',
-            style: TextStyle(fontWeight: FontWeight.w700),
+          Text(
+            tr('¿Qué quieres lograr con el inglés?'),
+            style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),
           opciones(objetivosAprendizaje, objetivos, false),

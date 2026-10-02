@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/conexion.dart';
 import '../../app/theme.dart';
+import '../../core/i18n/i18n.dart';
 
 class ConnectionBanner extends StatelessWidget {
   const ConnectionBanner({super.key, required this.child});
@@ -46,8 +47,12 @@ class ConnectionBanner extends StatelessWidget {
                       Expanded(
                         child: Text(
                           estado == EstadoConexion.sinConexion
-                              ? 'Sin conexión con OneLingo. Comprueba tu conexión.'
-                              : 'El servidor no está disponible temporalmente.',
+                              ? tr(
+                                  'Sin conexión con OneLingo. Comprueba tu conexión.',
+                                )
+                              : tr(
+                                  'El servidor no está disponible temporalmente.',
+                                ),
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
@@ -56,7 +61,7 @@ class ConnectionBanner extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: Conexion.comprobar,
-                        child: const Text('Reintentar'),
+                        child: Text(tr('Reintentar')),
                       ),
                     ],
                   ),

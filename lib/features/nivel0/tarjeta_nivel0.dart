@@ -7,6 +7,7 @@ import '../../core/nivel0/nivel0.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import 'palabra_color.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Acceso al Nivel 0 · Leer y pronunciar en Aprender (inglés). Sin personaje:
 /// la pantalla ya tiene su mascota y nunca debe haber dos a la vez.
@@ -24,7 +25,7 @@ class TarjetaNivel0 extends ConsumerWidget {
     final total = nivel.lecciones.length;
     return Semantics(
       button: true,
-      label: 'Nivel 0, leer y pronunciar',
+      label: tr('Nivel 0, leer y pronunciar'),
       child: Tarjeta(
         onTap: () => context.push('/nivel0'),
         borde: OL.moradoClaro,
@@ -36,15 +37,18 @@ class TarjetaNivel0 extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Nivel 0 · Leer y pronunciar',
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
+                  Text(
+                    tr('Nivel 0 · Leer y pronunciar'),
+                    style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w900),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     hechas == 0
                         ? nivel.texto('tarjeta')
-                        : '$hechas de $total lecciones',
+                        : tr('{hechas} de {total} lecciones', {
+                            'hechas': hechas,
+                            'total': total,
+                          }),
                     style: const TextStyle(
                       color: OL.gris,
                       fontSize: 13,

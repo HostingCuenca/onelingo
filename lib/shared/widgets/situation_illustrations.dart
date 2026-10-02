@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Dos ilustraciones contextuales; las fotos originales siguen en las tarjetas.
 class SituationIllustrations extends StatefulWidget {
@@ -25,7 +26,9 @@ class _SituationIllustrationsState extends State<SituationIllustrations> {
             itemBuilder: (context, i) => Image.asset(
               'assets/img/situaciones/situacion-${widget.id.toString().padLeft(2, '0')}-${i + 1}.webp',
               fit: BoxFit.cover,
-              semanticLabel: 'Ilustración de la situación, escena ${i + 1}',
+              semanticLabel: tr('Ilustración de la situación, escena {n}', {
+                'n': i + 1,
+              }),
               errorBuilder: (context, error, stack) => const ColoredBox(
                 color: OL.moradoSuave,
                 child: Center(
@@ -57,7 +60,7 @@ class _SituationIllustrationsState extends State<SituationIllustrations> {
             ),
           const SizedBox(width: 8),
           Text(
-            'Escena ${selected + 1} de 2 · desliza',
+            tr('Escena {n} de 2 · desliza', {'n': selected + 1}),
             style: const TextStyle(color: OL.gris, fontSize: 11),
           ),
         ],

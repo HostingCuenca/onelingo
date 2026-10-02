@@ -12,6 +12,7 @@ import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import '../../shared/widgets/mascot_coach.dart';
 import '../ruta/opcion_respuesta.dart';
+import '../../core/i18n/i18n.dart';
 
 /// La enseñanza permanece visible, incluso después de comprobar respuestas.
 class GrammarScreen extends ConsumerStatefulWidget {
@@ -151,17 +152,17 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                 children: [
                   Row(
                     children: [
-                      const Expanded(
+                      Expanded(
                         child: Text(
-                          'Elige tu próximo tema',
-                          style: TextStyle(
+                          tr('Elige tu próximo tema'),
+                          style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),
                       IconButton(
-                        tooltip: 'Cerrar temario',
+                        tooltip: tr('Cerrar temario'),
                         onPressed: () => Navigator.pop(context),
                         icon: const Icon(Icons.close_rounded),
                       ),
@@ -177,7 +178,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                             padding: const EdgeInsets.only(right: 8),
                             child: ChoiceChip(
                               key: n == level ? chipActual : null,
-                              label: Text('Nivel $n'),
+                              label: Text(tr('Nivel {n}', {'n': n})),
                               selected: selectedLevel == n,
                               onSelected: (_) =>
                                   update(() => selectedLevel = n),
@@ -234,7 +235,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                                   ? OL.verde
                                   : OL.morado,
                               semanticLabel: practicado(item)
-                                  ? 'Practicado'
+                                  ? tr('Practicado')
                                   : null,
                             ),
                             onTap: () =>
@@ -282,7 +283,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
       return [
         BotonPrincipal(
           onPressed: () => showStep(1),
-          child: const Text('AHORA ME TOCA A MÍ'),
+          child: Text(tr('AHORA ME TOCA A MÍ')),
         ),
       ];
     }
@@ -290,7 +291,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
       return [
         BotonPrincipal(
           onPressed: () => showStep(2),
-          child: const Text('COMPROBAR CON EJEMPLOS'),
+          child: Text(tr('COMPROBAR CON EJEMPLOS')),
         ),
       ];
     }
@@ -302,7 +303,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
           onPressed: choices.containsKey(id)
               ? () => check(guide, question)
               : null,
-          child: const Text('COMPROBAR'),
+          child: Text(tr('COMPROBAR')),
         ),
       ];
     }
@@ -312,13 +313,15 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
       FeedbackDock(
         child: AnswerFeedback(
           correct: correct,
-          title: correct ? '¡Bien razonado!' : 'Vamos a entenderlo',
+          title: correct ? tr('¡Bien razonado!') : tr('Vamos a entenderlo'),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (!correct)
                 Text(
-                  'Respuesta: ${q.options[q.answer]}',
+                  tr('Respuesta: {respuesta}', {
+                    'respuesta': q.options[q.answer],
+                  }),
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
@@ -335,7 +338,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                     choices.remove(id);
                   }),
                   icon: const Icon(Icons.refresh_rounded),
-                  label: const Text('INTENTAR OTRA VEZ'),
+                  label: Text(tr('INTENTAR OTRA VEZ')),
                 ),
             ],
           ),
@@ -346,10 +349,10 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
         onPressed: () => _siguiente(guide, guides),
         child: Text(
           !ultima
-              ? 'SIGUIENTE PREGUNTA'
+              ? tr('SIGUIENTE PREGUNTA')
               : topic + 1 < guides.length
-              ? 'SIGUIENTE TEMA'
-              : 'ELEGIR OTRO TEMA',
+              ? tr('SIGUIENTE TEMA')
+              : tr('ELEGIR OTRO TEMA'),
         ),
       ),
     ];
@@ -364,9 +367,9 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
         MediaQuery.disableAnimationsOf(context) || !Efectos.animaciones.value;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Gramática'),
+        title: Text(tr('Gramática')),
         leading: IconButton(
-          tooltip: 'Volver',
+          tooltip: tr('Volver'),
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/inicio'),
@@ -382,16 +385,17 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                 padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
                 children: [
                   if (step == 0)
-                    const MascotCoach(
-                      message:
-                          'Lee un ejemplo conmigo. Después puedes crear tu propia frase.',
+                    MascotCoach(
+                      message: tr(
+                        'Lee un ejemplo conmigo. Después puedes crear tu propia frase.',
+                      ),
                     ),
                   if (level == 1)
                     TextButton.icon(
                       onPressed: () => context.push('/fundamentos'),
                       icon: const Icon(Icons.school_outlined),
-                      label: const Text(
-                        '¿Empiezas desde cero? Aprende paso a paso',
+                      label: Text(
+                        tr('¿Empiezas desde cero? Aprende paso a paso'),
                       ),
                     ),
                   Wrap(
@@ -400,7 +404,11 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                     spacing: 12,
                     children: [
                       Text(
-                        'Nivel $level · Tema ${topic + 1} de ${guides.length}',
+                        tr('Nivel {nivel} · Tema {tema} de {total}', {
+                          'nivel': level,
+                          'tema': topic + 1,
+                          'total': guides.length,
+                        }),
                         style: const TextStyle(
                           color: OL.gris,
                           fontWeight: FontWeight.w700,
@@ -409,7 +417,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                       TextButton.icon(
                         onPressed: chooseTopic,
                         icon: const Icon(Icons.grid_view_rounded, size: 18),
-                        label: const Text('Temario'),
+                        label: Text(tr('Temario')),
                       ),
                     ],
                   ),
@@ -444,12 +452,15 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                           TextButton.icon(
                             onPressed: () => showStep(0),
                             icon: const Icon(Icons.auto_stories_rounded),
-                            label: const Text('Consultar el ejemplo'),
+                            label: Text(tr('Consultar el ejemplo')),
                           ),
                         ],
                         if (step == 2) ...[
                           Text(
-                            'Pregunta ${question + 1} de ${guide.checks.length}',
+                            tr('Pregunta {n} de {total}', {
+                              'n': question + 1,
+                              'total': guide.checks.length,
+                            }),
                             style: const TextStyle(
                               fontWeight: FontWeight.w800,
                               color: OL.gris,
@@ -459,17 +470,22 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                           _question(guide, question),
                           if (answered &&
                               question == guide.checks.length - 1) ...[
-                            const Text(
-                              '¡Has practicado este tema!',
-                              style: TextStyle(
+                            Text(
+                              tr('¡Has practicado este tema!'),
+                              style: const TextStyle(
                                 fontSize: 21,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
                             const SizedBox(height: 8),
-                            const Text(
-                              'Puedes volver a los ejemplos cuando lo necesites.',
-                              style: TextStyle(color: OL.gris, height: 1.4),
+                            Text(
+                              tr(
+                                'Puedes volver a los ejemplos cuando lo necesites.',
+                              ),
+                              style: const TextStyle(
+                                color: OL.gris,
+                                height: 1.4,
+                              ),
                             ),
                             const SizedBox(height: 8),
                           ],
@@ -479,12 +495,12 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                                 setState(() => question--);
                                 showStep(2);
                               },
-                              child: const Text('Revisar pregunta anterior'),
+                              child: Text(tr('Revisar pregunta anterior')),
                             ),
                           TextButton.icon(
                             onPressed: () => showStep(0),
                             icon: const Icon(Icons.menu_book_rounded),
-                            label: const Text('VOLVER A LA EXPLICACIÓN'),
+                            label: Text(tr('VOLVER A LA EXPLICACIÓN')),
                           ),
                         ],
                       ],
@@ -530,7 +546,10 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
               borderRadius: BorderRadius.circular(14),
               onTap: () => showStep(i),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 4,
+                ),
                 decoration: BoxDecoration(
                   color: step == i ? OL.morado : OL.moradoSuave,
                   borderRadius: BorderRadius.circular(14),
@@ -548,7 +567,7 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      ['Aprende', 'Crea', 'Prueba'][i],
+                      [tr('Aprende'), tr('Crea'), tr('Prueba')][i],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: step == i ? OL.blanco : OL.morado,
@@ -571,9 +590,9 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          'La idea clave',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+        Text(
+          tr('La idea clave'),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 10),
         Text(guide.rule, style: const TextStyle(fontSize: 16, height: 1.55)),
@@ -610,9 +629,9 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
           child: ExpansionTile(
             key: ValueKey('tip-${guide.id}'),
             tilePadding: EdgeInsets.zero,
-            title: const Text(
-              'Un consejo para recordarlo',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+            title: Text(
+              tr('Un consejo para recordarlo'),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
             ),
             children: [
               Padding(
@@ -634,9 +653,9 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          'Dilo a tu manera',
-          style: TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
+        Text(
+          tr('Dilo a tu manera'),
+          style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 10),
         Text(
@@ -650,16 +669,16 @@ class _GrammarScreenState extends ConsumerState<GrammarScreen> {
           minLines: 3,
           maxLines: 6,
           onChanged: (v) => _guardarBorrador(guide.id, v),
-          decoration: const InputDecoration(
-            labelText: 'Tus propias frases',
-            hintText: 'Escribe tu ejemplo en inglés…',
+          decoration: InputDecoration(
+            labelText: tr('Tus propias frases'),
+            hintText: tr('Escribe tu ejemplo en inglés…'),
             alignLabelWithHint: true,
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          'Escribe sin miedo: tu borrador se guarda y no lleva nota.',
-          style: TextStyle(fontSize: 14, color: OL.gris, height: 1.4),
+        Text(
+          tr('Escribe sin miedo: tu borrador se guarda y no lleva nota.'),
+          style: const TextStyle(fontSize: 14, color: OL.gris, height: 1.4),
         ),
       ],
     ),

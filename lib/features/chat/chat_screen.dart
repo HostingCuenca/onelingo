@@ -12,6 +12,7 @@ import '../../core/content/fotos.dart';
 import '../../core/api/sync.dart';
 import '../../core/perfil_aprendizaje.dart';
 import '../../core/content/idiomas.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/voz.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
@@ -139,8 +140,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             SnackBar(
               content: Text(
                 e.isEmpty
-                    ? 'No se escuchó nada. Acércate al micrófono e inténtalo otra vez.'
-                    : 'No se pudo escuchar ($e). Comprueba el micrófono.',
+                    ? tr('No se escuchó nada. Acércate al micrófono e inténtalo otra vez.')
+                    : tr('No se pudo escuchar ({error}). Comprueba el micrófono.', {
+                        'error': e,
+                      }),
               ),
             ),
           );
@@ -150,9 +153,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     if (!ok && mounted) {
       setState(() => escuchando = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'Micrófono no disponible en este dispositivo. Escribe tu respuesta.',
+            tr('Micrófono no disponible en este dispositivo. Escribe tu respuesta.'),
           ),
         ),
       );
@@ -221,7 +224,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   }
 
   String? _traduccionApertura(int n) =>
-      n <= 3 ? 'Toca para traducir · mantén pulsado para escuchar' : null;
+      n <= 3 ? tr('Toca para traducir · mantén pulsado para escuchar') : null;
 
   List<String> _sugerencias(int n) {
     if (sugerenciasIA.isNotEmpty) return sugerenciasIA;
@@ -429,10 +432,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       pensando = false;
       _respuestaEnCurso = null;
       errorConexion = !Sync.instancia.conectado
-          ? 'Inicia sesión para practicar con el tutor.'
+          ? tr('Inicia sesión para practicar con el tutor.')
           : Conexion.estado.value == EstadoConexion.sinConexion
-          ? 'Sin conexión con OneLingo. Tu mensaje se conserva; comprueba la conexión y reintenta.'
-          : 'El tutor no está disponible en este momento. Tu mensaje se conserva; puedes reintentar.';
+          ? tr(
+              'Sin conexión con OneLingo. Tu mensaje se conserva; comprueba la conexión y reintenta.',
+            )
+          : tr(
+              'El tutor no está disponible en este momento. Tu mensaje se conserva; puedes reintentar.',
+            );
     });
   }
 
@@ -454,11 +461,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              sit?.nombre ?? 'Conversación libre',
+              sit == null ? tr('Conversación libre') : trDato(sit!.nombre),
               style: const TextStyle(fontSize: 16),
             ),
             Text(
-              '${t.nombre} · ${nombrePersonalidad(t.personalidad)} · Nivel $n',
+              tr('{tutor} · {personalidad} · Nivel {n}', {
+                'tutor': t.nombre,
+                'personalidad': nombrePersonalidad(t.personalidad),
+                'n': n,
+              }),
               style: const TextStyle(
                 fontSize: 11,
                 color: OL.gris,
@@ -469,7 +480,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         ),
         actions: [
           IconButton(
-            tooltip: 'Cómo se adapta la IA a tu nivel',
+            tooltip: tr('Cómo se adapta la IA a tu nivel'),
             onPressed: () => showModalBottomSheet(
               context: context,
               builder: (_) => _PerfilSheet(perfil: perfil, tutor: t),
@@ -498,7 +509,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             ? 62
                             : 110,
                         fit: BoxFit.cover,
-                        semanticLabel: 'Tutor ${t.nombre}',
+                        semanticLabel: tr('Tutor {tutor}', {'tutor': t.nombre}),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -515,8 +526,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           ),
                           Text(
                             widget.modo == 'prueba'
-                                ? 'Prueba de comunicación · sin pistas'
-                                : 'Practica a tu ritmo · nivel $n',
+                                ? tr('Prueba de comunicación · sin pistas')
+                                : tr('Practica a tu ritmo · nivel {n}', {'n': n}),
                           ),
                           if (widget.objetivoId != null)
                             Text(
@@ -525,7 +536,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                       .valueOrNull?[sit?.id]
                                       ?.objetivo(widget.objetivoId!)
                                       ?.titulo ??
-                                  'Preparando tu objetivo',
+                                  tr('Preparando tu objetivo'),
                               style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                               ),
@@ -556,15 +567,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     Expanded(
                       child: Text(
                         transcribiendo
-                            ? 'Transcribiendo tu respuesta…'
-                            : 'Te escucho · termina tras 3 s de silencio',
+                            ? tr('Transcribiendo tu respuesta…')
+                            : tr('Te escucho · termina tras 3 s de silencio'),
                         style: const TextStyle(fontSize: 12),
                       ),
                     ),
                     if (escuchando)
                       TextButton(
                         onPressed: _hablarAlTutor,
-                        child: const Text('Detener y enviar'),
+                        child: Text(tr('Detener y enviar')),
                       ),
                   ],
                 ),
@@ -590,7 +601,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                     OutlinedButton.icon(
                       onPressed: pensando ? null : () => _responderConIA(n),
                       icon: const Icon(Icons.refresh),
-                      label: const Text('Reintentar mensaje'),
+                      label: Text(tr('Reintentar mensaje')),
                     ),
                   ],
                 ),
@@ -610,7 +621,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       : _Msg(
                           _respuestaEnCurso!,
                           mio: false,
-                          sub: 'Preparando traducción y comentarios…',
+                          sub: tr('Preparando traducción y comentarios…'),
                         ),
                   color: color,
                   tutor: t,
@@ -628,7 +639,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   }),
                   icon: const Icon(Icons.lightbulb_outline),
                   label: Text(
-                    mostrarAyuda ? 'Ocultar ayuda' : 'Necesito una pista',
+                    mostrarAyuda ? tr('Ocultar ayuda') : tr('Necesito una pista'),
                   ),
                 ),
               ),
@@ -671,8 +682,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 children: [
                   IconButton.filled(
                     tooltip: escuchando
-                        ? 'Detener y enviar'
-                        : 'Grabar respuesta',
+                        ? tr('Detener y enviar')
+                        : tr('Grabar respuesta'),
                     style: IconButton.styleFrom(
                       backgroundColor: escuchando ? OL.rojo : color,
                       fixedSize: const Size(48, 48),
@@ -694,18 +705,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       textInputAction: TextInputAction.send,
                       decoration: InputDecoration(
                         hintText: transcribiendo
-                            ? 'Transcribiendo tu respuesta…'
+                            ? tr('Transcribiendo tu respuesta…')
                             : escuchando
                             ? (Oido.instancia.modo == 'nube'
-                                  ? 'Habla con calma…'
-                                  : 'Escuchando…')
-                            : 'Escribe tu respuesta...',
+                                  ? tr('Habla con calma…')
+                                  : tr('Escuchando…'))
+                            : tr('Escribe tu respuesta...'),
                       ),
                     ),
                   ),
                   const SizedBox(width: 6),
                   IconButton(
-                    tooltip: 'Enviar mensaje',
+                    tooltip: tr('Enviar mensaje'),
                     onPressed:
                         pensando ||
                             transcribiendo ||
@@ -818,9 +829,9 @@ class _Burbuja extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'CORRECCIÓN',
-                          style: TextStyle(
+                        Text(
+                          tr('CORRECCIÓN'),
+                          style: const TextStyle(
                             color: OL.rojo,
                             fontSize: 10,
                             fontWeight: FontWeight.w800,
@@ -877,28 +888,30 @@ class _PerfilSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Cómo se adapta la IA · Nivel ${perfil.nivel}',
+          tr('Cómo se adapta la IA · Nivel {n}', {'n': perfil.nivel}),
           style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 12),
         _F(
-          'Tutor',
+          tr('Tutor'),
           '${tutor.nombre} · ${nombrePersonalidad(tutor.personalidad)}',
         ),
         _F(
-          'Vocabulario',
+          tr('Vocabulario'),
           perfil.vocabularioMax == 0
-              ? 'Sin límite'
-              : 'Hasta ${perfil.vocabularioMax} palabras',
+              ? tr('Sin límite')
+              : tr('Hasta {n} palabras', {'n': perfil.vocabularioMax}),
         ),
-        _F('Tiempos verbales', perfil.tiempos),
-        _F('Longitud de frase', perfil.longitudFrase),
-        _F('Velocidad de habla', '${perfil.velocidad}x'),
-        _F('Corrección', perfil.correccion),
+        _F(tr('Tiempos verbales'), perfil.tiempos),
+        _F(tr('Longitud de frase'), perfil.longitudFrase),
+        _F(tr('Velocidad de habla'), '${perfil.velocidad}x'),
+        _F(tr('Corrección'), perfil.correccion),
         const SizedBox(height: 8),
-        const Text(
-          'Este perfil se inyecta en el prompt de la IA junto con la situación y tu idioma nativo (ARQUITECTURA §5).',
-          style: TextStyle(color: OL.gris, fontSize: 12),
+        Text(
+          tr(
+            'Este perfil se inyecta en el prompt de la IA junto con la situación y tu idioma nativo (ARQUITECTURA §5).',
+          ),
+          style: const TextStyle(color: OL.gris, fontSize: 12),
         ),
       ],
     ),

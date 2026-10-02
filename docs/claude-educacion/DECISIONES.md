@@ -263,3 +263,12 @@ Decisión:
   - autoría en dos lotes y revisión independiente GO con 24 correcciones.
 - **El registro y Aprender** recomiendan el Nivel 0 a quien empieza de cero también en francés.
 - **Versión inicial:** el contenido se publica con revisión independiente por IA; queda pendiente la de un nativo.
+
+## DEC-031 — Interfaz multilingüe con el español como clave
+Fecha: 2026-10-01 · Acordado con el cliente: la app también es para nativos de inglés (y otros), sin reescribir todo, y la interfaz se elige en Perfil.
+Decisión:
+- **Clave en español:** `tr('texto en español')` con diccionarios `assets/i18n/<idioma>.json`. Si falta una traducción se ve el español.
+- **Herramientas:** `tools/i18n/extraer.py` comprueba que nada quede sin traducir, y `arquitectura_test` impide textos visibles sin `tr()`.
+- **Idioma de la interfaz:** el elegido en Perfil o, si no hay elección, el nativo, y si no está disponible, inglés. La primera visita usa el idioma del dispositivo.
+- **Textos de apoyo del contenido:** siguen el idioma de la interfaz.
+- **Alternativa descartada:** las ARB de Flutter. Obligaban a inventar unas 940 claves y a reescribir cada llamada.

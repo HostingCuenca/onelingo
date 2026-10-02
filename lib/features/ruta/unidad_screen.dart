@@ -20,6 +20,7 @@ import 'celebracion.dart';
 import 'item_view.dart';
 import 'ruta_screen.dart';
 import 'tabla_ruta.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Una pantalla del recorrido de la unidad: un paso de enseñanza, el diálogo
 /// de una situación o un ítem.
@@ -306,7 +307,7 @@ class UnidadScreen extends ConsumerWidget {
           const Scaffold(body: Center(child: CircularProgressIndicator())),
       error: (e, _) => Scaffold(
         appBar: AppBar(),
-        body: const Center(child: Text('No se pudo cargar la unidad.')),
+        body: Center(child: Text(tr('No se pudo cargar la unidad.'))),
       ),
       data: (r) {
         final u = r?.unidad(unidadId);
@@ -328,15 +329,15 @@ class UnidadScreen extends ConsumerWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        'Esta lección se renovó y ahora forma parte de un nivel nuevo.',
+                      Text(
+                        tr('Esta lección se renovó y ahora forma parte de un nivel nuevo.'),
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                       const SizedBox(height: 20),
                       BotonPrincipal(
                         onPressed: () => context.go('/ruta/$sustituto'),
-                        child: const Text('IR AL NIVEL'),
+                        child: Text(tr('IR AL NIVEL')),
                       ),
                     ],
                   ),
@@ -346,7 +347,7 @@ class UnidadScreen extends ConsumerWidget {
           }
           return Scaffold(
             appBar: AppBar(),
-            body: const Center(child: Text('Esta unidad no existe.')),
+            body: Center(child: Text(tr('Esta unidad no existe.'))),
           );
         }
         return runtime.when(
@@ -354,8 +355,8 @@ class UnidadScreen extends ConsumerWidget {
               const Scaffold(body: Center(child: CircularProgressIndicator())),
           error: (_, _) => Scaffold(
             appBar: AppBar(),
-            body: const Center(
-              child: Text('No se pudo preparar la biblioteca de ejercicios.'),
+            body: Center(
+              child: Text(tr('No se pudo preparar la biblioteca de ejercicios.')),
             ),
           ),
           data: (resolved) {
@@ -367,9 +368,9 @@ class UnidadScreen extends ConsumerWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(24),
                     child: Text(
-                      'Esta clase está temporalmente fuera de servicio. '
-                      'No se sustituyó silenciosamente por contenido antiguo.\n\n'
-                      '${resolved.diagnostico.errores.join('\n')}',
+                      '${tr('Esta clase está temporalmente fuera de servicio. '
+                          'No se sustituyó silenciosamente por contenido antiguo.')}'
+                      '\n\n${resolved.diagnostico.errores.join('\n')}',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -591,19 +592,25 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     ref.watch(progressProvider);
     final pantalla = pantallas[indice];
     final nombreTipo = switch (pantalla.paso.tipo) {
-      TipoPaso.explicacion || TipoPaso.patron || TipoPaso.tabla => 'Aprende',
-      TipoPaso.ejemplos => 'Ejemplos',
-      TipoPaso.vocabulario => 'Vocabulario',
-      TipoPaso.practicaGuiada => 'Práctica con ayuda',
-      TipoPaso.practicaIndependiente => 'Practica tú',
-      TipoPaso.situacion => 'En situación',
-      TipoPaso.evaluacion => 'Comprueba',
+      TipoPaso.explicacion ||
+      TipoPaso.patron ||
+      TipoPaso.tabla => tr('Aprende'),
+      TipoPaso.ejemplos => tr('Ejemplos'),
+      TipoPaso.vocabulario => tr('Vocabulario'),
+      TipoPaso.practicaGuiada => tr('Práctica con ayuda'),
+      TipoPaso.practicaIndependiente => tr('Practica tú'),
+      TipoPaso.situacion => tr('En situación'),
+      TipoPaso.evaluacion => tr('Comprueba'),
     };
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.repaso ? 'Repaso · ${t(u.titulo)}' : t(u.titulo)),
+        title: Text(
+          widget.repaso
+              ? tr('Repaso · {titulo}', {'titulo': t(u.titulo)})
+              : t(u.titulo),
+        ),
         leading: IconButton(
-          tooltip: 'Volver a la ruta',
+          tooltip: tr('Volver a la ruta'),
           icon: const Icon(Icons.close_rounded),
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/fundamentos'),
@@ -655,8 +662,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               children: [
                 Etiqueta(nombreTipo),
                 if (pantalla.repetida)
-                  const Etiqueta(
-                    'Otra vez',
+                  Etiqueta(
+                    tr('Otra vez'),
                     color: OL.naranja,
                     fondo: OL.naranjaSuave,
                     icono: Icons.replay_rounded,
@@ -693,7 +700,10 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               const Icon(Icons.lock_outline, color: OL.morado, size: 40),
               const SizedBox(height: 10),
               Text(
-                'Ya puedes leer esta unidad. Para practicarla, primero practica «${t(previa?.titulo)}».',
+                tr(
+                  'Ya puedes leer esta unidad. Para practicarla, primero practica «{previa}».',
+                  {'previa': t(previa?.titulo)},
+                ),
                 style: const TextStyle(fontSize: 18, height: 1.4),
               ),
             ],
@@ -703,7 +713,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         BotonPrincipal(
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/fundamentos'),
-          child: Text('VOLVER A LA RUTA'),
+          child: Text(tr('VOLVER A LA RUTA')),
         ),
       ];
     }
@@ -826,9 +836,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         }
       case TipoPaso.vocabulario:
         vista.add(
-          const Text(
-            'Toca cualquier parte de la tarjeta para escuchar cada palabra.',
-            style: TextStyle(color: OL.gris, fontSize: 16),
+          Text(
+            tr('Toca cualquier parte de la tarjeta para escuchar cada palabra.'),
+            style: const TextStyle(color: OL.gris, fontSize: 16),
           ),
         );
         vista.add(const SizedBox(height: 10));
@@ -893,9 +903,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         vista.add(TablaRuta(paso: p, idioma: u.idioma, cadena: cadena));
         vista.add(const SizedBox(height: 8));
         vista.add(
-          const Text(
-            'Toca cada casilla para escucharla.',
-            style: TextStyle(color: OL.gris, fontSize: 15),
+          Text(
+            tr('Toca cada casilla para escucharla.'),
+            style: const TextStyle(color: OL.gris, fontSize: 15),
           ),
         );
       case TipoPaso.situacion:
@@ -940,15 +950,15 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       if (indice > 0)
         TextButton(
           onPressed: () => ir(indice - 1),
-          child: const Text('VOLVER AL PASO ANTERIOR'),
+          child: Text(tr('VOLVER AL PASO ANTERIOR')),
         ),
       BotonPrincipal(
         onPressed: siguiente,
         child: Text(
           p.tipo == TipoPaso.situacion &&
                   p.items.any((i) => !i.id.contains('situation-check'))
-              ? 'PARTICIPAR'
-              : 'SIGUIENTE',
+              ? tr('PARTICIPAR')
+              : tr('SIGUIENTE'),
         ),
       ),
     ]);
@@ -962,7 +972,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         const SizedBox(width: 10),
         Expanded(
           child: Text(
-            'Objetivo: ${t(u.objetivo)}',
+            tr('Objetivo: {objetivo}', {'objetivo': t(u.objetivo)}),
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
         ),
@@ -982,7 +992,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     child: Tarjeta(
       color: color,
       padding: const EdgeInsets.fromLTRB(16, 12, 6, 12),
-      etiquetaSemantica: 'Escuchar $texto',
+      etiquetaSemantica: tr('Escuchar {texto}', {'texto': texto}),
       onTap: () => escucharTexto(context, texto, u.idioma),
       child: Row(
         children: [
@@ -1060,17 +1070,17 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         CelebracionUnidad(
           nivelCompleto: nivelNuevo,
           titulo: widget.repaso
-              ? '¡Repaso superado!'
+              ? tr('¡Repaso superado!')
               : nivelNuevo
-              ? '¡Nivel completado!'
-              : '¡Lección completada!',
+              ? tr('¡Nivel completado!')
+              : tr('¡Lección completada!'),
           subtitulo: widget.repaso
-              ? 'Lo recuerdas: esta unidad queda más firme.'
+              ? tr('Lo recuerdas: esta unidad queda más firme.')
               : nivelNuevo
               ? (u.nivel == 'f0'
-                    ? 'Completaste los Fundamentos. Ya tienes el Nivel 1 disponible.'
-                    : 'Completaste ${t(tituloNivel)}.')
-              : 'Aprobar no es lo mismo que dominar: te pediremos un repaso breve dentro de unos días.',
+                    ? tr('Completaste los Fundamentos. Ya tienes el Nivel 1 disponible.')
+                    : tr('Completaste {nivel}.', {'nivel': t(tituloNivel)}))
+              : tr('Aprobar no es lo mismo que dominar: te pediremos un repaso breve dentro de unos días.'),
           fichas: [
             FichaLogro.xp(xpGanada),
             FichaLogro.precision(precision),
@@ -1089,8 +1099,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               const SizedBox(height: 8),
               Text(
                 widget.repaso
-                    ? 'Hay que repasarlo'
-                    : 'Todavía no, vamos a repasarlo',
+                    ? tr('Hay que repasarlo')
+                    : tr('Todavía no, vamos a repasarlo'),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 24,
@@ -1099,7 +1109,14 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               ),
               const SizedBox(height: 8),
               Text(
-                '$aciertos de $puntuables correctas a la primera. Se necesitan ${aciertosNecesarios(puntuables, u.umbral)}.',
+                tr(
+                  '{aciertos} de {total} correctas a la primera. Se necesitan {necesarias}.',
+                  {
+                    'aciertos': aciertos,
+                    'total': puntuables,
+                    'necesarias': aciertosNecesarios(puntuables, u.umbral),
+                  },
+                ),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 17),
               ),
@@ -1108,9 +1125,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         ),
       if (!ok && fallos.isNotEmpty) ...[
         const SizedBox(height: 16),
-        const Text(
-          'Repasa estos puntos:',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+        Text(
+          tr('Repasa estos puntos:'),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 8),
         for (final f in fallos)
@@ -1129,14 +1146,14 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
         if (!widget.repaso)
           BotonPrincipal(
             onPressed: volverAEnsenar,
-            child: Text('VOLVER A LA EXPLICACIÓN'),
+            child: Text(tr('VOLVER A LA EXPLICACIÓN')),
           ),
         const SizedBox(height: 8),
         OutlinedButton(
           onPressed: reintentarEvaluacion,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 14),
-            child: Text('INTENTARLO DE NUEVO'),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            child: Text(tr('INTENTARLO DE NUEVO')),
           ),
         ),
       ],
@@ -1145,7 +1162,11 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           onPressed: () => context.pushReplacement(
             '/fundamentos/unidad/${siguienteUnidad.id}',
           ),
-          child: Text('SIGUIENTE: ${t(siguienteUnidad.titulo).toUpperCase()}'),
+          child: Text(
+            tr('SIGUIENTE: {unidad}', {
+              'unidad': t(siguienteUnidad.titulo).toUpperCase(),
+            }),
+          ),
         ),
       const SizedBox(height: 8),
       OutlinedButton(
@@ -1154,7 +1175,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
             : (context.canPop() ? context.pop() : context.go('/fundamentos')),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 14),
-          child: Text(nivelNuevo ? 'IR A APRENDER' : 'VER MI RUTA'),
+          child: Text(nivelNuevo ? tr('IR A APRENDER') : tr('VER MI RUTA')),
         ),
       ),
     ];

@@ -13,6 +13,7 @@ import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/widgets.dart';
 import '../ruta/opcion_respuesta.dart';
+import '../../core/i18n/i18n.dart';
 
 enum _Filtro { minivel, irregulares, regulares, todos }
 
@@ -35,18 +36,18 @@ class _MisVerbosScreenState extends ConsumerState<MisVerbosScreen> {
     final nivel = ref.watch(nivelAlumnoProvider);
     final datos = ref.watch(verbosProvider(s.idiomaMeta));
     return Scaffold(
-      appBar: AppBar(title: const Text('Mis verbos')),
+      appBar: AppBar(title: Text(tr('Mis verbos'))),
       body: Movil(
         child: datos.when(
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (_, _) => const Center(child: Text('No se pudo cargar.')),
+          error: (_, _) => Center(child: Text(tr('No se pudo cargar.'))),
           data: (v) {
             if (v == null) {
-              return const Padding(
-                padding: EdgeInsets.all(24),
+              return Padding(
+                padding: const EdgeInsets.all(24),
                 child: Text(
-                  'Los verbos de este idioma llegan con su nuevo curso.',
-                  style: TextStyle(fontSize: 17),
+                  tr('Los verbos de este idioma llegan con su nuevo curso.'),
+                  style: const TextStyle(fontSize: 17),
                 ),
               );
             }
@@ -76,16 +77,22 @@ class _MisVerbosScreenState extends ConsumerState<MisVerbosScreen> {
                   child: ListView(
                     padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
                     children: [
-                      const Text(
-                        'Toca un verbo para ver cómo se conjuga y escucharlo. Los irregulares hay que memorizarlos: practícalos a menudo.',
-                        style: TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
+                      Text(
+                        tr(
+                          'Toca un verbo para ver cómo se conjuga y escucharlo. Los irregulares hay que memorizarlos: practícalos a menudo.',
+                        ),
+                        style: const TextStyle(
+                          color: OL.gris,
+                          fontSize: 15,
+                          height: 1.4,
+                        ),
                       ),
                       const SizedBox(height: 12),
                       TextField(
                         onChanged: (x) => setState(() => busqueda = x),
-                        decoration: const InputDecoration(
-                          hintText: 'Buscar verbo (go, went, ir…)',
-                          prefixIcon: Icon(Icons.search),
+                        decoration: InputDecoration(
+                          hintText: tr('Buscar verbo (go, went, ir…)'),
+                          prefixIcon: const Icon(Icons.search),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -94,10 +101,10 @@ class _MisVerbosScreenState extends ConsumerState<MisVerbosScreen> {
                         runSpacing: 8,
                         children: [
                           for (final (f, nombre) in [
-                            (_Filtro.minivel, 'De mi nivel'),
-                            (_Filtro.irregulares, 'Irregulares'),
-                            (_Filtro.regulares, 'Regulares'),
-                            (_Filtro.todos, 'Todos'),
+                            (_Filtro.minivel, tr('De mi nivel')),
+                            (_Filtro.irregulares, tr('Irregulares')),
+                            (_Filtro.regulares, tr('Regulares')),
+                            (_Filtro.todos, tr('Todos')),
                           ])
                             ChoiceChip(
                               label: Text(nombre),
@@ -109,7 +116,7 @@ class _MisVerbosScreenState extends ConsumerState<MisVerbosScreen> {
                       ),
                       const SizedBox(height: 12),
                       Text(
-                        '${lista.length} verbos',
+                        tr('{n} verbos', {'n': lista.length}),
                         style: const TextStyle(color: OL.gris, fontSize: 14),
                       ),
                       const SizedBox(height: 6),
@@ -181,7 +188,7 @@ class _MisVerbosScreenState extends ConsumerState<MisVerbosScreen> {
                       onPressed: practicables.length < 3
                           ? null
                           : () => context.push('/verbos/practica'),
-                      child: const Text('PRACTICAR VERBOS'),
+                      child: Text(tr('PRACTICAR VERBOS')),
                     ),
                   ),
                 ),
@@ -219,7 +226,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
     final verbo = v?.porId(widget.id);
     void oir(String t) => VozNube.instancia.reproducir(t, idioma);
     return Scaffold(
-      appBar: AppBar(title: Text(verbo?.infinitivo ?? 'Verbo')),
+      appBar: AppBar(title: Text(verbo?.infinitivo ?? tr('Verbo'))),
       body: Movil(
         child: v == null || verbo == null
             ? const Center(child: CircularProgressIndicator())
@@ -244,7 +251,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                               ),
                             ),
                             Etiqueta(
-                              verbo.irregular ? 'Irregular' : 'Regular',
+                              verbo.irregular ? tr('Irregular') : tr('Regular'),
                               color: verbo.irregular ? OL.naranja : OL.verde,
                             ),
                           ],
@@ -274,9 +281,9 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                             ],
                           ),
                         ),
-                        const Text(
-                          'infinitivo · pasado · participio',
-                          style: TextStyle(color: OL.gris, fontSize: 13),
+                        Text(
+                          tr('infinitivo · pasado · participio'),
+                          style: const TextStyle(color: OL.gris, fontSize: 13),
                         ),
                       ],
                     ),
@@ -315,12 +322,15 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                               ),
                             ),
                             const SizedBox(height: 6),
-                            for (var i = 0;
-                                i < formas.length && i < v.personas.length;
-                                i++)
+                            for (
+                              var i = 0;
+                              i < formas.length && i < v.personas.length;
+                              i++
+                            )
                               InkWell(
-                                onTap: () =>
-                                    oir('${v.personas[i].meta.split(' /').first} ${formas[i]}'),
+                                onTap: () => oir(
+                                  '${v.personas[i].meta.split(' /').first} ${formas[i]}',
+                                ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
                                     vertical: 7,
@@ -374,7 +384,7 @@ class _VerboScreenState extends ConsumerState<VerboScreen> {
                     },
                   ),
                   const SizedBox(height: 14),
-                  const TituloSeccion('Ejemplo'),
+                  TituloSeccion(tr('Ejemplo')),
                   const SizedBox(height: 8),
                   Tarjeta(
                     sombra: false,
@@ -453,20 +463,17 @@ class _PracticaVerbosScreenState extends ConsumerState<PracticaVerbosScreen> {
     final nivel = ref.watch(nivelAlumnoProvider);
     final v = ref.watch(verbosProvider(s.idiomaMeta)).valueOrNull;
     if (v != null && preguntas == null) {
-      preguntas = preguntasVerbos(
-        [
-          for (final x in v.verbos)
-            if (x.nivel <= nivel) x,
-        ],
-        Random(),
-      );
+      preguntas = preguntasVerbos([
+        for (final x in v.verbos)
+          if (x.nivel <= nivel) x,
+      ], Random());
     }
     final fin = preguntas != null && indice >= preguntas!.length;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Practicar verbos'),
+        title: Text(tr('Practicar verbos')),
         leading: IconButton(
-          tooltip: 'Salir',
+          tooltip: tr('Salir'),
           icon: const Icon(Icons.close_rounded),
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/verbos'),
@@ -538,7 +545,7 @@ class _PracticaVerbosScreenState extends ConsumerState<PracticaVerbosScreen> {
             child: FeedbackDock(
               child: AnswerFeedback(
                 correct: bien,
-                title: bien ? '¡Bien!' : 'Casi',
+                title: bien ? tr('¡Bien!') : tr('Casi'),
                 child: Text(q.explicacion, style: const TextStyle(height: 1.4)),
               ),
             ),
@@ -559,7 +566,7 @@ class _PracticaVerbosScreenState extends ConsumerState<PracticaVerbosScreen> {
                     if (indice >= preguntas!.length) Efectos.completado();
                   })
                 : (elegida == null ? null : _comprobar),
-            child: Text(comprobada ? 'CONTINUAR' : 'COMPROBAR'),
+            child: Text(comprobada ? tr('CONTINUAR') : tr('COMPROBAR')),
           ),
         ),
       ],
@@ -581,10 +588,12 @@ class _PracticaVerbosScreenState extends ConsumerState<PracticaVerbosScreen> {
               style: const TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Los irregulares se aprenden repitiendo: vuelve mañana y verás cómo salen solos.',
+            Text(
+              tr(
+                'Los irregulares se aprenden repitiendo: vuelve mañana y verás cómo salen solos.',
+              ),
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, height: 1.4, color: OL.gris),
+              style: const TextStyle(fontSize: 16, height: 1.4, color: OL.gris),
             ),
           ],
         ),
@@ -594,7 +603,7 @@ class _PracticaVerbosScreenState extends ConsumerState<PracticaVerbosScreen> {
         child: BotonPrincipal(
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/verbos'),
-          child: const Text('VOLVER A MIS VERBOS'),
+          child: Text(tr('VOLVER A MIS VERBOS')),
         ),
       ),
     ],

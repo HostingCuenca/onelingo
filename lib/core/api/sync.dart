@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart' show MediaType;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../i18n/i18n.dart';
+
 /// Cliente mínimo del backend (onelingo-backend). Offline-first: el estado vive
 /// en el dispositivo y se sube en segundo plano; si el servidor no responde, no
 /// afecta a la app.
@@ -100,9 +102,11 @@ class Sync {
           ? <String, dynamic>{}
           : jsonDecode(r.body) as Map<String, dynamic>;
       if (r.statusCode >= 200 && r.statusCode < 300) return j;
-      ultimoError = (j['error'] ?? 'Error ${r.statusCode}').toString();
+      ultimoError =
+          (j['error'] ?? tr('Error {codigo}', {'codigo': r.statusCode}))
+              .toString();
     } catch (_) {
-      ultimoError = 'No se pudo conectar con el servidor';
+      ultimoError = tr('No se pudo conectar con el servidor');
     }
     return null;
   }

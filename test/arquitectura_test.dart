@@ -73,6 +73,31 @@ void main() {
     }
   });
 
+  test('los textos visibles pasan por tr() (I18N.md)', () {
+    // Texto en español escrito directo en un widget: no se traduciría.
+    final visible = RegExp(
+      r"""(?:Text|labelText|hintText|tooltip|title|label|subtitle)\s*[:(]\s*(?:const\s+)?(?:Text\(\s*)?'([^'\n$]*[a-záéíóúñ¿¡][^'\n$]*)'""",
+    );
+    const marcas = {'Google', 'OneLingo', 'Lumo'};
+    final fallos = <String>[];
+    for (final f in dart) {
+      if (!f.path.startsWith('lib/features') &&
+          !f.path.startsWith('lib/shared') &&
+          !f.path.startsWith('lib/app')) {
+        continue;
+      }
+      final lineas = f.readAsLinesSync();
+      for (var i = 0; i < lineas.length; i++) {
+        for (final m in visible.allMatches(lineas[i])) {
+          if (!marcas.contains(m.group(1))) {
+            fallos.add('${f.path}:${i + 1}: ${m.group(1)}');
+          }
+        }
+      }
+    }
+    expect(fallos, isEmpty, reason: fallos.join('\n'));
+  });
+
   test('las opciones de respuesta usan OpcionRespuesta', () {
     // Las pantallas de ejercicios no dibujan opciones propias.
     final fallos = [

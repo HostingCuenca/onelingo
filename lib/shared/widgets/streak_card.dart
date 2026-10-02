@@ -8,6 +8,7 @@ import '../../app/theme.dart';
 import '../../core/state/providers.dart';
 import '../../core/efectos.dart';
 import 'widgets.dart';
+import '../../core/i18n/i18n.dart';
 
 class StreakCard extends ConsumerStatefulWidget {
   const StreakCard({super.key});
@@ -73,8 +74,12 @@ class _StreakCardState extends ConsumerState<StreakCard>
     }
     final monday = DateTime(now.year, now.month, now.day - (now.weekday - 1));
     return Semantics(
-      label:
-          'Racha de ${s.rachaVigente} días. ${active ? 'Actividad de hoy completada' : 'Aún sin actividad hoy'}',
+      label: tr('Racha de {n} días. {estado}', {
+        'n': s.rachaVigente,
+        'estado': active
+            ? tr('Actividad de hoy completada')
+            : tr('Aún sin actividad hoy'),
+      }),
       child: Tarjeta(
         color: OL.naranjaSuave,
         borde: OL.naranja.withValues(alpha: .4),
@@ -105,7 +110,11 @@ class _StreakCardState extends ConsumerState<StreakCard>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${s.rachaVigente} ${s.rachaVigente == 1 ? 'día' : 'días'} de constancia',
+                        s.rachaVigente == 1
+                            ? tr('{n} día de constancia', {'n': s.rachaVigente})
+                            : tr('{n} días de constancia', {
+                                'n': s.rachaVigente,
+                              }),
                         style: const TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w900,
@@ -114,8 +123,8 @@ class _StreakCardState extends ConsumerState<StreakCard>
                       const SizedBox(height: 4),
                       Text(
                         active
-                            ? '¡Hoy ya diste un paso!'
-                            : 'Una práctica hoy mantiene tu hábito.',
+                            ? tr('¡Hoy ya diste un paso!')
+                            : tr('Una práctica hoy mantiene tu hábito.'),
                         style: const TextStyle(fontSize: 13, height: 1.35),
                       ),
                     ],
@@ -136,11 +145,12 @@ class _StreakCardState extends ConsumerState<StreakCard>
                         final isToday = key == today;
                         return Semantics(
                           label:
-                              '${date.day}/${date.month}: ${done ? 'actividad registrada' : 'sin actividad registrada'}',
+                              '${date.day}/${date.month}: ${done ? tr('actividad registrada') : tr('sin actividad registrada')}',
                           child: Column(
                             children: [
                               Text(
-                                ['L', 'M', 'X', 'J', 'V', 'S', 'D'][i],
+                                // Iniciales de lunes a domingo.
+                                tr('L M X J V S D').split(' ')[i],
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w800,
                                   fontSize: 11,
@@ -191,9 +201,9 @@ class _StreakCardState extends ConsumerState<StreakCard>
               ],
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Cada intento cuenta, incluso si te equivocas.',
-              style: TextStyle(fontSize: 11, color: OL.texto),
+            Text(
+              tr('Cada intento cuenta, incluso si te equivocas.'),
+              style: const TextStyle(fontSize: 11, color: OL.texto),
             ),
           ],
         ),

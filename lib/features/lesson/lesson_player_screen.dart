@@ -10,6 +10,7 @@ import '../../app/theme.dart';
 import '../../core/barajar.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/efectos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/voz.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
@@ -64,7 +65,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
           .agregarError(
             skill: step.skill,
             original: respuestaUsuario.isEmpty
-                ? '(sin respuesta)'
+                ? tr('(sin respuesta)')
                 : respuestaUsuario,
             correccion: step.answer.isEmpty ? step.prompt : step.answer,
             explicacion: _explicacion(step),
@@ -76,14 +77,14 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
 
   String _explicacion(LessonStep s) => switch (s.type) {
     StepType.orderWords =>
-      'Fíjate en el orden de las palabras: la frase correcta es "${s.answer}".',
+      tr('Fíjate en el orden de las palabras: la frase correcta es "{frase}".', {'frase': s.answer}),
     StepType.fillBlank =>
-      'Fíjate en el verbo y en la concordancia con el sujeto.',
-    StepType.listenWrite => 'Escucha de nuevo y presta atención a cada palabra; revisa la ortografía.',
+      tr('Fíjate en el verbo y en la concordancia con el sujeto.'),
+    StepType.listenWrite => tr('Escucha de nuevo y presta atención a cada palabra; revisa la ortografía.'),
     StepType.matchPairs =>
-      'Repasa el vocabulario de la unidad con las tarjetas.',
+      tr('Repasa el vocabulario de la unidad con las tarjetas.'),
     _ =>
-      'La forma correcta es "${s.answer.isEmpty ? s.prompt : s.answer}". Practícala en voz alta.',
+      tr('La forma correcta es "{forma}". Practícala en voz alta.', {'forma': s.answer.isEmpty ? s.prompt : s.answer}),
   };
 
   void _siguiente() {
@@ -104,7 +105,7 @@ class _LessonPlayerScreenState extends ConsumerState<LessonPlayerScreen> {
   Widget build(BuildContext context) {
     final l = lesson;
     if (l == null) {
-      return const Scaffold(body: Center(child: Text('Lección no encontrada')));
+      return Scaffold(body: Center(child: Text(tr('Lección no encontrada'))));
     }
     final step = l.steps[i];
     return Scaffold(
@@ -296,7 +297,7 @@ class _StepViewState extends State<_StepView> {
               Oido.instancia.ultimoError.isNotEmpty) {
             dicho = '';
             sinMicro =
-                Oido.instancia.ultimoError.contains('audio') ||
+                Oido.instancia.sinAudio ||
                 Oido.instancia.ultimoError.contains('permission');
           }
         });
@@ -341,7 +342,7 @@ class _StepViewState extends State<_StepView> {
       await mostrarPanelResultado(
         context,
         correcto: ok,
-        titulo: ok ? '¡Correcto!' : 'Vamos a repasarlo',
+        titulo: ok ? tr('¡Correcto!') : tr('Vamos a repasarlo'),
         cuerpo: _cuerpoFeedback(),
       );
       if (!mounted) return;
@@ -400,12 +401,12 @@ class _StepViewState extends State<_StepView> {
                 ? OL.rojo
                 : (correcto == true ? OL.verde : OL.morado),
             onPressed: puede ? widget.onSiguiente : null,
-            child: Text(sinComprobar ? 'CONTINUAR' : 'SIGUIENTE'),
+            child: Text(sinComprobar ? tr('CONTINUAR') : tr('SIGUIENTE')),
           )
         else
           BotonPrincipal(
             onPressed: puede ? _comprobar : null,
-            child: const Text('COMPROBAR'),
+            child: Text(tr('COMPROBAR')),
           ),
       ],
     );
@@ -414,7 +415,7 @@ class _StepViewState extends State<_StepView> {
   Widget _feedback() => AnswerFeedback(
     key: ValueKey(correcto),
     correct: correcto!,
-    title: correcto! ? '¡Correcto!' : 'Vamos a repasarlo',
+    title: correcto! ? tr('¡Correcto!') : tr('Vamos a repasarlo'),
     child: _cuerpoFeedback(),
   );
 
@@ -423,7 +424,7 @@ class _StepViewState extends State<_StepView> {
     children: [
       if (!correcto!)
         Text(
-          'Respuesta: ${s.answer}',
+          tr('Respuesta: {respuesta}', {'respuesta': s.answer}),
           style: const TextStyle(fontWeight: FontWeight.w600),
         ),
       if (s.translation.isNotEmpty)
@@ -441,11 +442,11 @@ class _StepViewState extends State<_StepView> {
 
   Widget _flashcard(TextTheme t) => Column(
     children: [
-      _titulo(t, 'Nueva palabra'),
+      _titulo(t, tr('Nueva palabra')),
       Tarjeta(
         padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
         onTap: () => Voz.instancia.hablar(s.prompt, idiomaContenido),
-        etiquetaSemantica: 'Escuchar ${s.prompt}',
+        etiquetaSemantica: tr('Escuchar {texto}', {'texto': s.prompt}),
         child: Column(
           children: [
             const IconoCuadro(
@@ -469,17 +470,17 @@ class _StepViewState extends State<_StepView> {
                         fontWeight: FontWeight.w700,
                       ),
                     )
-                  : const Text(
-                      'Toca la tarjeta para escuchar',
-                      key: ValueKey('hint'),
-                      style: TextStyle(color: OL.gris),
+                  : Text(
+                      tr('Toca la tarjeta para escuchar'),
+                      key: const ValueKey('hint'),
+                      style: const TextStyle(color: OL.gris),
                     ),
             ),
             TextButton(
               onPressed: () =>
                   setState(() => mostrarTraduccion = !mostrarTraduccion),
               child: Text(
-                mostrarTraduccion ? 'OCULTAR TRADUCCIÓN' : 'VER TRADUCCIÓN',
+                mostrarTraduccion ? tr('OCULTAR TRADUCCIÓN') : tr('VER TRADUCCIÓN'),
               ),
             ),
           ],
@@ -494,8 +495,8 @@ class _StepViewState extends State<_StepView> {
       _titulo(
         t,
         s.type == StepType.fillBlank
-            ? 'Completa la frase'
-            : 'Elige la respuesta correcta',
+            ? tr('Completa la frase')
+            : tr('Elige la respuesta correcta'),
       ),
       Tarjeta(
         color: OL.moradoSuave,
@@ -535,7 +536,7 @@ class _StepViewState extends State<_StepView> {
   Widget _imagen(TextTheme t) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      _titulo(t, 'Elige la imagen'),
+      _titulo(t, tr('Elige la imagen')),
       Tarjeta(
         color: OL.moradoSuave,
         sombra: false,
@@ -579,7 +580,7 @@ class _StepViewState extends State<_StepView> {
   Widget _ordena(TextTheme t) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      _titulo(t, 'Ordena la frase'),
+      _titulo(t, tr('Ordena la frase')),
       Tarjeta(
         color: OL.moradoSuave,
         sombra: false,
@@ -593,7 +594,7 @@ class _StepViewState extends State<_StepView> {
                 children: [
                   Text(
                     s.hint.isEmpty
-                        ? 'Traduce al ${nombreIdiomaContenido()}'
+                        ? tr('Traduce al {idioma}', {'idioma': nombreIdiomaContenido()})
                         : s.hint,
                     style: const TextStyle(
                       color: OL.gris,
@@ -637,11 +638,11 @@ class _StepViewState extends State<_StepView> {
                     : null,
               ),
             if (respuesta.isEmpty)
-              const Padding(
-                padding: EdgeInsets.all(6),
+              Padding(
+                padding: const EdgeInsets.all(6),
                 child: Text(
-                  'Toca las palabras en orden',
-                  style: TextStyle(color: OL.gris),
+                  tr('Toca las palabras en orden'),
+                  style: const TextStyle(color: OL.gris),
                 ),
               ),
           ],
@@ -678,7 +679,7 @@ class _StepViewState extends State<_StepView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _titulo(t, 'Escucha y escribe'),
+        _titulo(t, tr('Escucha y escribe')),
         Row(
           children: [
             // Lumo escucha contigo (no con el panel abierto: nunca dos a la vez).
@@ -689,7 +690,7 @@ class _StepViewState extends State<_StepView> {
             Expanded(
               child: Tarjeta(
                 onTap: reproducir,
-                etiquetaSemantica: 'Reproducir audio para escribir',
+                etiquetaSemantica: tr('Reproducir audio para escribir'),
                 child: Column(
                   children: [
                     const IconoCuadro(
@@ -702,20 +703,20 @@ class _StepViewState extends State<_StepView> {
                     AnimatedSwitcher(
                       duration: const Duration(milliseconds: 200),
                       child: mostrarAudio
-                          ? const Text(
-                              'Reproduciendo…',
-                              key: ValueKey('a'),
+                          ? Text(
+                              tr('Reproduciendo…'),
+                              key: const ValueKey('a'),
                               textAlign: TextAlign.center,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 color: OL.morado,
                               ),
                             )
-                          : const Text(
-                              'Toca para escuchar (puedes repetirlo las veces que quieras)',
-                              key: ValueKey('b'),
+                          : Text(
+                              tr('Toca para escuchar (puedes repetirlo las veces que quieras)'),
+                              key: const ValueKey('b'),
                               textAlign: TextAlign.center,
-                              style: TextStyle(color: OL.gris, fontSize: 12),
+                              style: const TextStyle(color: OL.gris, fontSize: 12),
                             ),
                     ),
                   ],
@@ -731,15 +732,15 @@ class _StepViewState extends State<_StepView> {
           onChanged: (_) => setState(() {}),
           minLines: 2,
           maxLines: 3,
-          decoration: const InputDecoration(
-            hintText: 'Escribe lo que escuches...',
+          decoration: InputDecoration(
+            hintText: tr('Escribe lo que escuches...'),
           ),
         ),
         const SizedBox(height: 10),
         if (s.hint.isNotEmpty)
           Align(
             alignment: Alignment.centerLeft,
-            child: Etiqueta('Pista: ${s.hint}', icono: Icons.lightbulb_outline),
+            child: Etiqueta(tr('Pista: {pista}', {'pista': s.hint}), icono: Icons.lightbulb_outline),
           ),
       ],
     );
@@ -771,7 +772,7 @@ class _StepViewState extends State<_StepView> {
                     if (unidas.length == s.pairs.length * 2) {
                       widget.onResultado(
                         fallos == 0,
-                        fallos == 0 ? 'todas' : '$fallos fallos',
+                        fallos == 0 ? 'todas' : tr('{n} fallos', {'n': fallos}),
                       );
                     }
                   });
@@ -789,10 +790,10 @@ class _StepViewState extends State<_StepView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _titulo(t, 'Une las parejas'),
-        const Text(
-          'Toca una palabra y luego su traducción',
-          style: TextStyle(color: OL.gris),
+        _titulo(t, tr('Une las parejas')),
+        Text(
+          tr('Toca una palabra y luego su traducción'),
+          style: const TextStyle(color: OL.gris),
         ),
         const SizedBox(height: 14),
         Row(
@@ -811,7 +812,7 @@ class _StepViewState extends State<_StepView> {
             ),
           ],
         ),
-        if (fallos > 0) Etiqueta('$fallos intentos fallidos', color: OL.rojo),
+        if (fallos > 0) Etiqueta(tr('{n} intentos fallidos', {'n': fallos}), color: OL.rojo),
       ],
     );
   }
@@ -821,26 +822,26 @@ class _StepViewState extends State<_StepView> {
         ? OL.gris
         : (parecido! >= 0.6 ? OL.verde : OL.rojo);
     final String mensaje = sinMicro
-        ? 'Micrófono no disponible en este dispositivo. Puedes continuar.'
+        ? tr('Micrófono no disponible en este dispositivo. Puedes continuar.')
         : grabando
         ? (Oido.instancia.modo == 'nube'
-              ? 'Grabando… toca detener al terminar o deja 3 segundos de silencio'
-              : 'Escuchando… repite la frase')
+              ? tr('Grabando… toca detener al terminar o deja 3 segundos de silencio')
+              : tr('Escuchando… repite la frase'))
         : parecido == null
-        ? 'Toca el micrófono y repite la frase'
+        ? tr('Toca el micrófono y repite la frase')
         : parecido! >= 0.9
-        ? 'La transcripción coincide con las palabras del modelo.'
+        ? tr('La transcripción coincide con las palabras del modelo.')
         : parecido! >= 0.6
-        ? 'Se reconocieron varias palabras del modelo.'
-        : 'No se entendió bien. Escucha el modelo y vuelve a intentarlo.';
+        ? tr('Se reconocieron varias palabras del modelo.')
+        : tr('No se entendió bien. Escucha el modelo y vuelve a intentarlo.');
     return Column(
       children: [
-        _titulo(t, 'Repite en voz alta'),
+        _titulo(t, tr('Repite en voz alta')),
         Tarjeta(
           padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 20),
           onTap: () =>
               Voz.instancia.hablar(s.prompt, idiomaContenido, velocidad: 0.4),
-          etiquetaSemantica: 'Escuchar modelo: ${s.prompt}',
+          etiquetaSemantica: tr('Escuchar modelo: {texto}', {'texto': s.prompt}),
           child: Column(
             children: [
               Text(
@@ -858,21 +859,21 @@ class _StepViewState extends State<_StepView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.volume_up_outlined,
                           size: 22,
                           color: OL.morado,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Flexible(
                           child: Text(
-                            'Toca la tarjeta para escuchar',
+                            tr('Toca la tarjeta para escuchar'),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: OL.morado,
                               fontWeight: FontWeight.w700,
                             ),
@@ -918,17 +919,17 @@ class _StepViewState extends State<_StepView> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
-                    'Transcripción: "$dicho"',
+                    tr('Transcripción: "{dicho}"', {'dicho': dicho}),
                     style: const TextStyle(fontSize: 13),
                   ),
                 ),
               ],
               if (parecido != null) ...[
                 const SizedBox(height: 10),
-                const Text(
-                  'Coincidencia de palabras; no evalúa pronunciación ni entonación.',
+                Text(
+                  tr('Coincidencia de palabras; no evalúa pronunciación ni entonación.'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 12, color: OL.gris),
+                  style: const TextStyle(fontSize: 12, color: OL.gris),
                 ),
                 const SizedBox(height: 6),
                 BarraProgreso(parecido!, color: estadoColor),
@@ -956,7 +957,7 @@ class _StepViewState extends State<_StepView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _titulo(t, 'Antes de empezar'),
+        _titulo(t, tr('Antes de empezar')),
         if (s.prompt.isNotEmpty)
           Tarjeta(
             color: OL.moradoSuave,
@@ -964,9 +965,9 @@ class _StepViewState extends State<_StepView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'GRAMÁTICA DE LA UNIDAD',
-                  style: TextStyle(
+                Text(
+                  tr('GRAMÁTICA DE LA UNIDAD'),
+                  style: const TextStyle(
                     color: OL.morado,
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
@@ -983,9 +984,9 @@ class _StepViewState extends State<_StepView> {
           ),
         if (errores.isNotEmpty) ...[
           const SizedBox(height: 14),
-          const Text(
-            'Ojo con estos errores',
-            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+          Text(
+            tr('Ojo con estos errores'),
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
           ),
           const SizedBox(height: 8),
           for (final e in errores)
@@ -1050,7 +1051,7 @@ class _StepViewState extends State<_StepView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _titulo(t, 'Situación real'),
+        _titulo(t, tr('Situación real')),
         Text(
           s.prompt,
           style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w600),
@@ -1079,7 +1080,7 @@ class _StepViewState extends State<_StepView> {
                     idiomaContenido,
                     voz: i.isEven ? 'narrador' : 'narradora',
                   ),
-                  etiquetaSemantica: 'Escuchar ${visibles[i].$2}',
+                  etiquetaSemantica: tr('Escuchar {texto}', {'texto': visibles[i].$2}),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1128,14 +1129,14 @@ class _StepViewState extends State<_StepView> {
             icon: const Icon(Icons.play_arrow_rounded),
             label: Text(
               replica.isEven
-                  ? 'Tu turno: escucha y repite, luego sigue'
-                  : 'Siguiente réplica',
+                  ? tr('Tu turno: escucha y repite, luego sigue')
+                  : tr('Siguiente réplica'),
             ),
           )
         else
-          const Text(
-            'Toca cualquier burbuja para volver a escucharla.',
-            style: TextStyle(color: OL.gris, fontSize: 12),
+          Text(
+            tr('Toca cualquier burbuja para volver a escucharla.'),
+            style: const TextStyle(color: OL.gris, fontSize: 12),
             textAlign: TextAlign.center,
           ),
       ],

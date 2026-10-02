@@ -7,6 +7,7 @@ import '../../app/theme.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/situaciones.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/situation_illustrations.dart';
@@ -43,8 +44,8 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
   void _llamada(ObjetivoSituacion o) {
     if (!kIsWeb) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('La videollamada está disponible en la versión web.'),
+        SnackBar(
+          content: Text(tr('La videollamada está disponible en la versión web.')),
         ),
       );
       return;
@@ -59,7 +60,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
     final sit = situacion(widget.id.clamp(1, situaciones.length));
     final contenido = ref.watch(situacionesProvider(s.idiomaMeta));
     return Scaffold(
-      appBar: AppBar(title: Text(sit.nombre)),
+      appBar: AppBar(title: Text(trDato(sit.nombre))),
       body: Movil(
         child: contenido.when(
           loading: () => const Center(child: CircularProgressIndicator()),
@@ -67,12 +68,12 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
             child: TextButton(
               onPressed: () =>
                   ref.invalidate(situacionesProvider(s.idiomaMeta)),
-              child: const Text('No se pudo cargar. Reintentar'),
+              child: Text(tr('No se pudo cargar. Reintentar')),
             ),
           ),
           data: (todas) {
             final c = todas?[widget.id];
-            if (c == null) return _SinContenido(nombre: sit.nombre);
+            if (c == null) return _SinContenido(nombre: trDato(sit.nombre));
             final propio = Tramo.deNivel(nivel);
             final tramo = visto ?? propio;
             final t = c.tramo(tramo);
@@ -101,11 +102,11 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                       const SizedBox(height: 12),
                       _Avance(estado: estado),
                       const SizedBox(height: 20),
-                      const TituloSeccion('Objetivos'),
+                      TituloSeccion(tr('Objetivos')),
                       const SizedBox(height: 4),
-                      const Text(
-                        'Practica cada objetivo con tu tutor, por chat o en videollamada.',
-                        style: TextStyle(color: OL.gris, fontSize: 14),
+                      Text(
+                        tr('Practica cada objetivo con tu tutor, por chat o en videollamada.'),
+                        style: const TextStyle(color: OL.gris, fontSize: 14),
                       ),
                       const SizedBox(height: 10),
                       for (final o in t.objetivos)
@@ -123,7 +124,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                           onLlamada: () => _llamada(o),
                         ),
                       const SizedBox(height: 14),
-                      const TituloSeccion('Palabras'),
+                      TituloSeccion(tr('Palabras')),
                       const SizedBox(height: 10),
                       for (final p in t.vocabulario)
                         _Linea(
@@ -133,7 +134,7 @@ class _SituationScreenState extends ConsumerState<SituationScreen> {
                           onOir: () => _oir(p.en, s.idiomaMeta),
                         ),
                       const SizedBox(height: 14),
-                      const TituloSeccion('Frases útiles'),
+                      TituloSeccion(tr('Frases útiles')),
                       const SizedBox(height: 10),
                       for (final f in t.frases)
                         _Linea(
@@ -168,13 +169,16 @@ class _SinContenido extends StatelessWidget {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        'Las situaciones guiadas de este idioma están en preparación. Mientras tanto, practica «$nombre» con tu tutor.',
+        tr(
+          'Las situaciones guiadas de este idioma están en preparación. Mientras tanto, practica «{situacion}» con tu tutor.',
+          {'situacion': nombre},
+        ),
         style: const TextStyle(fontSize: 17, height: 1.4),
       ),
       const SizedBox(height: 16),
       BotonPrincipal(
         onPressed: () => context.push('/chat'),
-        child: const Text('HABLAR CON MI TUTOR'),
+        child: Text(tr('HABLAR CON MI TUTOR')),
       ),
     ],
   );
@@ -211,7 +215,10 @@ class _SelectorTramo extends StatelessWidget {
                   : () => ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
-                          '${t.nombre} se abre al llegar al Nivel ${t.nivelMinimo}.',
+                          tr('{tramo} se abre al llegar al Nivel {nivel}.', {
+                            'tramo': t.nombre,
+                            'nivel': t.nivelMinimo,
+                          }),
                         ),
                       ),
                     ),
@@ -252,7 +259,7 @@ class _SelectorTramo extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      t == propio ? 'Tu nivel' : t.niveles,
+                      t == propio ? tr('Tu nivel') : t.niveles,
                       style: const TextStyle(fontSize: 11, color: OL.gris),
                     ),
                   ],
@@ -278,12 +285,19 @@ class _Avance extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          estado.completado ? '¡Tramo completado!' : 'Tu avance',
+          estado.completado ? tr('¡Tramo completado!') : tr('Tu avance'),
           style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
         ),
         Text(
-          '${estado.objetivosPracticados} de ${estado.totalObjetivos} objetivos practicados · '
-          'prueba ${estado.pruebaAprobada ? 'aprobada' : 'pendiente'}',
+          estado.pruebaAprobada
+              ? tr('{hechos} de {total} objetivos practicados · prueba aprobada', {
+                  'hechos': estado.objetivosPracticados,
+                  'total': estado.totalObjetivos,
+                })
+              : tr('{hechos} de {total} objetivos practicados · prueba pendiente', {
+                  'hechos': estado.objetivosPracticados,
+                  'total': estado.totalObjetivos,
+                }),
           style: const TextStyle(color: OL.gris, fontSize: 13),
         ),
         const SizedBox(height: 8),
@@ -361,7 +375,7 @@ class _TarjetaObjetivo extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: onChat,
                   icon: const Icon(Icons.chat_bubble_outline_rounded),
-                  label: const Text('Chat'),
+                  label: Text(tr('Chat')),
                 ),
               ),
               const SizedBox(width: 8),
@@ -369,7 +383,7 @@ class _TarjetaObjetivo extends StatelessWidget {
                 child: OutlinedButton.icon(
                   onPressed: onLlamada,
                   icon: const Icon(Icons.videocam_outlined),
-                  label: const Text('Videollamada'),
+                  label: Text(tr('Videollamada')),
                 ),
               ),
             ],
@@ -459,8 +473,11 @@ class _PiePrueba extends StatelessWidget {
           onPressed: onPrueba,
           child: Text(
             nota == null
-                ? 'HACER LA PRUEBA'
-                : 'REPETIR LA PRUEBA · MEJOR ${nota.$1}/${nota.$2}',
+                ? tr('HACER LA PRUEBA')
+                : tr('REPETIR LA PRUEBA · MEJOR {aciertos}/{total}', {
+                    'aciertos': nota.$1,
+                    'total': nota.$2,
+                  }),
           ),
         ),
       ),

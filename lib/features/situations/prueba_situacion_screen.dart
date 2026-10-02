@@ -8,6 +8,7 @@ import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/situaciones.dart';
 import '../../core/efectos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
@@ -44,8 +45,8 @@ List<PreguntaSituacion> preguntasPruebaSituacion(TramoSituacion t, Random rnd) {
     final opciones = [p.es, ...otras.take(3)]..shuffle(rnd);
     return PreguntaSituacion(
       enunciado: oir
-          ? 'Escucha. ¿Qué significa?'
-          : '¿Qué significa «${p.en}»?',
+          ? tr('Escucha. ¿Qué significa?')
+          : tr('¿Qué significa «{palabra}»?', {'palabra': p.en}),
       opciones: opciones,
       correcta: opciones.indexOf(p.es),
       explicacion: '${p.en} = ${p.es}. ${p.ejemplo}',
@@ -64,7 +65,9 @@ List<PreguntaSituacion> preguntasPruebaSituacion(TramoSituacion t, Random rnd) {
     final opciones = [for (final x in t.objetivos) x.frase]..shuffle(rnd);
     res.add(
       PreguntaSituacion(
-        enunciado: 'Quieres: ${o.titulo.toLowerCase()}. ¿Qué dices?',
+        enunciado: tr('Quieres: {objetivo}. ¿Qué dices?', {
+          'objetivo': o.titulo.toLowerCase(),
+        }),
         opciones: opciones,
         correcta: opciones.indexOf(o.frase),
         explicacion: '«${o.frase}» = ${o.traduccion}',
@@ -166,9 +169,9 @@ class _PruebaSituacionScreenState
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prueba · ${widget.tramo.nombre}'),
+        title: Text(tr('Prueba · {tramo}', {'tramo': widget.tramo.nombre})),
         leading: IconButton(
-          tooltip: 'Salir',
+          tooltip: tr('Salir'),
           icon: const Icon(Icons.close_rounded),
           onPressed: () => context.canPop()
               ? context.pop()
@@ -179,7 +182,7 @@ class _PruebaSituacionScreenState
         child: preguntas == null
             ? const Center(child: CircularProgressIndicator())
             : terminada
-            ? _resultado(sit.nombre)
+            ? _resultado(trDato(sit.nombre))
             : _pregunta(),
       ),
     );
@@ -226,7 +229,7 @@ class _PruebaSituacionScreenState
                 OutlinedButton.icon(
                   onPressed: () => _oir(q.audio!),
                   icon: const Icon(Icons.volume_up_rounded),
-                  label: Text(oida ? 'Escuchar otra vez' : 'Escuchar'),
+                  label: Text(oida ? tr('Escuchar otra vez') : tr('Escuchar')),
                 ),
               ],
               const SizedBox(height: 16),
@@ -253,7 +256,7 @@ class _PruebaSituacionScreenState
             child: FeedbackDock(
               child: AnswerFeedback(
                 correct: bien,
-                title: bien ? '¡Bien!' : 'Casi',
+                title: bien ? tr('¡Bien!') : tr('Casi'),
                 child: Text(
                   q.explicacion,
                   style: const TextStyle(height: 1.4),
@@ -272,10 +275,12 @@ class _PruebaSituacionScreenState
             onPressed: comprobada ? _siguiente : (puede ? _comprobar : null),
             child: Text(
               comprobada
-                  ? (indice + 1 < preguntas!.length ? 'CONTINUAR' : 'VER MI NOTA')
+                  ? (indice + 1 < preguntas!.length
+                        ? tr('CONTINUAR')
+                        : tr('VER MI NOTA'))
                   : q.audio != null && !oida
-                  ? 'ESCUCHA PRIMERO'
-                  : 'COMPROBAR',
+                  ? tr('ESCUCHA PRIMERO')
+                  : tr('COMPROBAR'),
             ),
           ),
         ),
@@ -305,17 +310,23 @@ class _PruebaSituacionScreenState
               const SizedBox(height: 8),
               Text(
                 aprobada
-                    ? '¡Aprobaste el tramo ${widget.tramo.nombre} de «$nombre»!'
-                    : 'Necesitas ${aciertosPruebaSituacion(total)}. Repasa las palabras y vuelve a intentarlo.',
+                    ? tr('¡Aprobaste el tramo {tramo} de «{situacion}»!', {
+                        'tramo': widget.tramo.nombre,
+                        'situacion': nombre,
+                      })
+                    : tr(
+                        'Necesitas {minimo}. Repasa las palabras y vuelve a intentarlo.',
+                        {'minimo': aciertosPruebaSituacion(total)},
+                      ),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 17, height: 1.4),
               ),
               if (aprobada) ...[
                 const SizedBox(height: 8),
-                const Text(
-                  'Para completarlo, practica al menos un objetivo con tu tutor.',
+                Text(
+                  tr('Para completarlo, practica al menos un objetivo con tu tutor.'),
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: OL.gris, fontSize: 15),
+                  style: const TextStyle(color: OL.gris, fontSize: 15),
                 ),
               ],
             ],
@@ -327,7 +338,7 @@ class _PruebaSituacionScreenState
             onPressed: () => context.canPop()
                 ? context.pop()
                 : context.go('/situacion/${widget.id}'),
-            child: const Text('VOLVER A LA SITUACIÓN'),
+            child: Text(tr('VOLVER A LA SITUACIÓN')),
           ),
         ),
       ],

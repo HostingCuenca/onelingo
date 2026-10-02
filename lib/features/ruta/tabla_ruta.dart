@@ -4,6 +4,7 @@ import '../../app/theme.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/efectos.dart';
 import 'item_view.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Cuadro de escritura o de conjugación. Cada celda en el idioma meta se
 /// escucha al tocarla (kana, hangul, cirílico, pinyin, formas verbales).
@@ -102,7 +103,7 @@ class _CeldaVista extends StatelessWidget {
     final corta = texto.runes.length <= 3;
     return Semantics(
       button: true,
-      label: 'Escuchar $texto',
+      label: tr('Escuchar {texto}', {'texto': texto}),
       child: InkWell(
         onTap: () {
           Efectos.toque();

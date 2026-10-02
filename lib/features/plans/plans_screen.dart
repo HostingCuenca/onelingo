@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -19,7 +20,7 @@ class PlansScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.canPop() ? context.pop() : context.go('/inicio')),
-        title: const Text('Planes y precios'),
+        title: Text(tr('Planes y precios')),
       ),
       body: Movil(
         child: ListView(
@@ -34,12 +35,12 @@ class PlansScreen extends ConsumerWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(restante == 0 ? 'Tu hora gratis terminó' : 'Prueba gratuita en curso',
+                      Text(restante == 0 ? tr('Tu hora gratis terminó') : tr('Prueba gratuita en curso'),
                           style: const TextStyle(fontWeight: FontWeight.w800)),
                       Text(
                         restante == 0
-                            ? 'Elige un plan para seguir aprendiendo. Tu progreso se conserva.'
-                            : 'Te quedan ${restante ~/ 60} min de uso real. Después eliges tu plan.',
+                            ? tr('Elige un plan para seguir aprendiendo. Tu progreso se conserva.')
+                            : tr('Te quedan {min} min de uso real. Después eliges tu plan.', {'min': restante ~/ 60}),
                         style: const TextStyle(color: OL.gris, fontSize: 12, height: 1.4),
                       ),
                       const SizedBox(height: 6),
@@ -49,9 +50,9 @@ class PlansScreen extends ConsumerWidget {
                 ]),
               ),
             const SizedBox(height: 18),
-            Text('Desbloquea tu potencial', style: Theme.of(context).textTheme.headlineMedium),
-            const Text('Elige cuántos idiomas quieres aprender. Todos los planes incluyen el curso completo, la práctica libre y la IA.',
-                style: TextStyle(color: OL.gris, height: 1.4)),
+            Text(tr('Desbloquea tu potencial'), style: Theme.of(context).textTheme.headlineMedium),
+            Text(tr('Elige cuántos idiomas quieres aprender. Todos los planes incluyen el curso completo, la práctica libre y la IA.'),
+                style: const TextStyle(color: OL.gris, height: 1.4)),
             const SizedBox(height: 16),
             for (final p in planes)
               Padding(
@@ -62,13 +63,13 @@ class PlansScreen extends ConsumerWidget {
                     Row(children: [
                       Text(p.nombre, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
                       const Spacer(),
-                      if (p.idiomas == 2) const Etiqueta('POPULAR'),
-                      if (p.id == s.planId) const Etiqueta('TU PLAN', color: OL.verde),
+                      if (p.idiomas == 2) Etiqueta(tr('POPULAR')),
+                      if (p.id == s.planId) Etiqueta(tr('TU PLAN'), color: OL.verde),
                     ]),
                     const SizedBox(height: 6),
                     Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
                       Text('\$${p.precio}', style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w800, color: OL.morado, height: 1)),
-                      const Padding(padding: EdgeInsets.only(bottom: 4, left: 4), child: Text('/ mes', style: TextStyle(color: OL.gris))),
+                      Padding(padding: const EdgeInsets.only(bottom: 4, left: 4), child: Text(tr('/ mes'), style: const TextStyle(color: OL.gris))),
                     ]),
                     const SizedBox(height: 12),
                     for (final i in p.incluye)
@@ -88,19 +89,19 @@ class PlansScreen extends ConsumerWidget {
                           : () {
                               ref.read(progressProvider.notifier).elegirPlan(p.id);
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Plan "${p.nombre}" activado (pago real en la fase 2)'),
+                                content: Text(tr('Plan "{plan}" activado (pago real en la fase 2)', {'plan': p.nombre})),
                                 backgroundColor: OL.verde,
                               ));
                             },
-                      child: Text(p.id == s.planId ? 'PLAN ACTUAL' : 'ELEGIR ${p.nombre.toUpperCase()}'),
+                      child: Text(p.id == s.planId ? tr('PLAN ACTUAL') : tr('ELEGIR {plan}', {'plan': p.nombre.toUpperCase()})),
                     ),
                   ]),
                 ),
               ),
-            const Text(
-              'Pago mensual, cancela cuando quieras. En móvil se cobra por la tienda (Apple/Google); en web con tarjeta.',
+            Text(
+              tr('Pago mensual, cancela cuando quieras. En móvil se cobra por la tienda (Apple/Google); en web con tarjeta.'),
               textAlign: TextAlign.center,
-              style: TextStyle(color: OL.gris, fontSize: 11),
+              style: const TextStyle(color: OL.gris, fontSize: 11),
             ),
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../app/theme.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/content/fotos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -24,13 +25,13 @@ class LevelScreen extends ConsumerWidget {
     final examenListo = s.examenDesbloqueado(nivel);
 
     return Scaffold(
-      appBar: AppBar(title: Text(nivel == 0 ? 'Fundamentos · empieza de cero' : 'Nivel $nivel · ${lvl.nombre}')),
+      appBar: AppBar(title: Text(nivel == 0 ? tr('Fundamentos · empieza de cero') : tr('Nivel {n} · {nombre}', {'n': nivel, 'nombre': lvl.nombre}))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
         children: [
           HeroCard(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Etiqueta(nivel == 0 ? 'Antes del Nivel 1' : 'Nivel $nivel de 10', color: OL.morado, fondo: OL.blanco),
+              Etiqueta(nivel == 0 ? tr('Antes del Nivel 1') : tr('Nivel {n} de 10', {'n': nivel}), color: OL.morado, fondo: OL.blanco),
               const SizedBox(height: 10),
               Text(lvl.descripcion,
                   style: const TextStyle(color: OL.blanco, fontSize: 15, fontWeight: FontWeight.w700, height: 1.35)),
@@ -55,11 +56,11 @@ class LevelScreen extends ConsumerWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(nivel == 0 ? 'Prueba de fundamentos' : 'Examen final del nivel', style: const TextStyle(fontWeight: FontWeight.w700)),
+                  Text(nivel == 0 ? tr('Prueba de fundamentos') : tr('Examen final del nivel'), style: const TextStyle(fontWeight: FontWeight.w700)),
                   Text(
                     examenListo
-                        ? 'Necesitas 65 % para desbloquear el Nivel ${nivel + 1}'
-                        : 'Se desbloquea al completar las 100 lecciones',
+                        ? tr('Necesitas 65 % para desbloquear el Nivel {n}', {'n': nivel + 1})
+                        : tr('Se desbloquea al completar las 100 lecciones'),
                     style: const TextStyle(color: OL.gris, fontSize: 12),
                   ),
                 ]),
@@ -107,7 +108,7 @@ class _UnidadCard extends StatelessWidget {
                       child: Image.asset(fotoUnidad(u.nivel, u.numero)!, width: 44, height: 44, fit: BoxFit.cover),
                     ),
                   ),
-            title: Text('Unidad ${u.numero} · ${u.titulo}',
+            title: Text(tr('Unidad {n} · {titulo}', {'n': u.numero, 'titulo': u.titulo}),
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14, color: bloqueada ? OL.gris : OL.texto)),
             subtitle: Padding(
               padding: const EdgeInsets.only(top: 6),
@@ -155,7 +156,7 @@ class _LeccionRow extends StatelessWidget {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(l.titulo.split(': ').first,
                   style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13, color: habilitada ? OL.texto : OL.gris)),
-              Text('${l.subtitulo} · ${l.steps.length} ejercicios${pct != null ? ' · $pct %' : ''}',
+              Text('${l.subtitulo} · ${tr('{n} ejercicios', {'n': l.steps.length})}${pct != null ? ' · $pct %' : ''}',
                   style: const TextStyle(color: OL.gris, fontSize: 11)),
             ]),
           ),
@@ -163,7 +164,7 @@ class _LeccionRow extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(99)),
-              child: const Text('Ir', style: TextStyle(color: OL.blanco, fontWeight: FontWeight.w800, fontSize: 12)),
+              child: Text(tr('Ir'), style: const TextStyle(color: OL.blanco, fontWeight: FontWeight.w800, fontSize: 12)),
             )
           else if (estado == LessonState.completada)
             const Icon(Icons.replay, size: 18, color: OL.gris),

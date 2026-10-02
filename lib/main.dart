@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,15 @@ Future<void> main() async {
   Sync.instancia.inicializar(prefs);
   Efectos.inicializar(prefs);
   await I18n.cargar();
+  // Primera visita: la interfaz arranca en el idioma del dispositivo (español
+  // si es español; si no, inglés). Luego se cambia en Perfil o en el registro.
+  if (prefs.getString('onelingo.progress.v1') == null) {
+    final dispositivo = PlatformDispatcher.instance.locale.languageCode;
+    await prefs.setString(
+      'onelingo.progress.v1',
+      jsonEncode({'idiomaInterfaz': idiomaInterfazPara(dispositivo)}),
+    );
+  }
   Efectos.antesDeSonar = Voz.instancia.parar;
   unawaited(Efectos.precargar());
   runApp(

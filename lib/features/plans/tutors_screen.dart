@@ -6,21 +6,23 @@ import 'package:go_router/go_router.dart';
 import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/fotos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import '../avatar/tutores_3d.dart';
 
-const _idiomas = {
-  'en': 'inglés',
-  'es': 'español',
-  'fr': 'francés',
-  'de': 'alemán',
-  'pt': 'portugués',
-  'it': 'italiano',
-  'zh': 'chino',
-  'ja': 'japonés',
-  'ko': 'coreano',
-  'ru': 'ruso',
+/// Nombre del idioma meta en el idioma de la interfaz.
+String _idioma(String codigo) => switch (codigo) {
+  'es' => tr('español'),
+  'fr' => tr('francés'),
+  'de' => tr('alemán'),
+  'pt' => tr('portugués'),
+  'it' => tr('italiano'),
+  'zh' => tr('chino'),
+  'ja' => tr('japonés'),
+  'ko' => tr('coreano'),
+  'ru' => tr('ruso'),
+  _ => tr('inglés'),
 };
 
 /// Tutores con IA: una sola pantalla para la videollamada con un tutor 3D y
@@ -31,7 +33,7 @@ class TutorsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
-    final idioma = _idiomas[s.idiomaMeta] ?? 'inglés';
+    final idioma = _idioma(s.idiomaMeta);
     final recomendados = recomendados3d(s.idiomaMeta);
     return Scaffold(
       appBar: AppBar(
@@ -40,7 +42,7 @@ class TutorsScreen extends ConsumerWidget {
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/practicar'),
         ),
-        title: const Text('Tutores con IA'),
+        title: Text(tr('Tutores con IA')),
       ),
       body: Movil(
         child: SingleChildScrollView(
@@ -49,14 +51,17 @@ class TutorsScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Practica $idioma conversando. Tu tutor te escucha, te responde con voz, corrige tus errores y se adapta a tu nivel.',
+                tr(
+                  'Practica {idioma} conversando. Tu tutor te escucha, te responde con voz, corrige tus errores y se adapta a tu nivel.',
+                  {'idioma': idioma},
+                ),
                 style: const TextStyle(color: OL.gris, height: 1.4),
               ),
               const SizedBox(height: 20),
-              const _Seccion(
+              _Seccion(
                 icono: Icons.videocam_rounded,
-                titulo: 'Videollamada con un tutor',
-                texto: 'Cara a cara, por voz o escribiendo.',
+                titulo: tr('Videollamada con un tutor'),
+                texto: tr('Cara a cara, por voz o escribiendo.'),
               ),
               if (!kIsWeb)
                 Padding(
@@ -64,9 +69,11 @@ class TutorsScreen extends ConsumerWidget {
                   child: Tarjeta(
                     color: OL.amarilloSuave,
                     sombra: false,
-                    child: const Text(
-                      'La videollamada está disponible en la versión web. Mientras tanto, usa el chat de voz de abajo.',
-                      style: TextStyle(fontSize: 13, height: 1.35),
+                    child: Text(
+                      tr(
+                        'La videollamada está disponible en la versión web. Mientras tanto, usa el chat de voz de abajo.',
+                      ),
+                      style: const TextStyle(fontSize: 13, height: 1.35),
                     ),
                   ),
                 ),
@@ -94,10 +101,12 @@ class TutorsScreen extends ConsumerWidget {
                 },
               ),
               const SizedBox(height: 28),
-              const _Seccion(
+              _Seccion(
                 icono: Icons.forum_rounded,
-                titulo: 'Chat de voz y texto',
-                texto: 'Elige la personalidad de tu tutor; recuerda tus objetivos y correcciones.',
+                titulo: tr('Chat de voz y texto'),
+                texto: tr(
+                  'Elige la personalidad de tu tutor; recuerda tus objetivos y correcciones.',
+                ),
               ),
               for (final t in tutores)
                 Padding(
@@ -173,20 +182,20 @@ class TutorsScreen extends ConsumerWidget {
                 ),
                 onPressed: () => context.push('/chat'),
                 icon: const Icon(Icons.mic_rounded),
-                label: const Text('Hablar con mi tutor'),
+                label: Text(tr('Hablar con mi tutor')),
               ),
               const SizedBox(height: 12),
               Tarjeta(
                 color: OL.moradoSuave,
                 sombra: false,
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(Icons.wifi_rounded, color: OL.morado),
-                    SizedBox(width: 12),
+                    const Icon(Icons.wifi_rounded, color: OL.morado),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        'Para conversar con la IA necesitas conexión a internet.',
-                        style: TextStyle(
+                        tr('Para conversar con la IA necesitas conexión a internet.'),
+                        style: const TextStyle(
                           fontSize: 12,
                           color: OL.morado,
                           fontWeight: FontWeight.w600,
@@ -209,8 +218,8 @@ void _abrirVideollamada(BuildContext context, String id) {
     context.push('/avatar/$id');
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('La videollamada está disponible en la versión web.'),
+      SnackBar(
+        content: Text(tr('La videollamada está disponible en la versión web.')),
       ),
     );
   }
@@ -225,7 +234,7 @@ class _TarjetaLumo extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: 'Videollamada con Lumo',
+    label: tr('Videollamada con Lumo'),
     child: Tarjeta(
       onTap: onTap,
       color: OL.moradoSuave,
@@ -247,11 +256,11 @@ class _TarjetaLumo extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Etiqueta('Nuevo', color: OL.blanco, fondo: OL.naranja),
+                Etiqueta(tr('Nuevo'), color: OL.blanco, fondo: OL.naranja),
                 const SizedBox(height: 6),
-                const Text(
-                  'Habla con Lumo',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
+                Text(
+                  tr('Habla con Lumo'),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -321,7 +330,7 @@ class _TarjetaTutor3d extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: 'Videollamada con ${tutor.nombre}',
+    label: tr('Videollamada con {tutor}', {'tutor': tutor.nombre}),
     child: Tarjeta(
       onTap: onTap,
       padding: EdgeInsets.zero,
@@ -351,7 +360,7 @@ class _TarjetaTutor3d extends StatelessWidget {
                     top: 8,
                     left: 8,
                     child: Etiqueta(
-                      'Recomendado',
+                      tr('Recomendado'),
                       color: OL.blanco,
                       fondo: OL.naranja,
                     ),

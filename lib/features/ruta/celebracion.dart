@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../core/efectos.dart';
 import '../../shared/confeti.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Estadística de la celebración (valor animado de 0 al final).
 class FichaLogro {
@@ -22,16 +23,16 @@ class FichaLogro {
   final bool animar;
 
   static FichaLogro xp(int v) =>
-      FichaLogro('XP GANADA', OL.amarillo, Icons.bolt_rounded, v, (x) => '+$x');
+      FichaLogro(tr('XP GANADA'), OL.amarillo, Icons.bolt_rounded, v, (x) => '+$x');
   static FichaLogro precision(int v) => FichaLogro(
-    'PRECISIÓN',
+    tr('PRECISIÓN'),
     OL.verde,
     Icons.track_changes_rounded,
     v,
     (x) => '$x %',
   );
   static FichaLogro tiempo(Duration d) => FichaLogro(
-    'TIEMPO',
+    tr('TIEMPO'),
     OL.azul,
     Icons.timer_outlined,
     0,
@@ -39,7 +40,7 @@ class FichaLogro {
     animar: false,
   );
   static FichaLogro racha(int dias) => FichaLogro(
-    'RACHA',
+    tr('RACHA'),
     OL.naranja,
     Icons.local_fire_department_rounded,
     dias,
@@ -117,7 +118,7 @@ class _CelebracionUnidadState extends State<CelebracionUnidad> {
                   padding: const EdgeInsets.all(14),
                   child: Image.asset(
                     'assets/img/mascotas/lumo-sorprendido-alpha.webp',
-                    semanticLabel: 'Lumo celebra contigo',
+                    semanticLabel: tr('Lumo celebra contigo'),
                   ),
                 ),
               ),

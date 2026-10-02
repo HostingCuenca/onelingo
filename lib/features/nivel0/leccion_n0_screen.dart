@@ -14,6 +14,7 @@ import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
 import 'palabra_color.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Lección del Nivel 0: pasos cortos de escuchar, mirar, juntar sonidos,
 /// construir y leer. Un solo personaje a la vez (Lumo en la explicación o
@@ -43,7 +44,7 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
     await mostrarPanelResultado(
       context,
       correcto: ok,
-      titulo: ok ? '¡Muy bien!' : 'Casi, mira cómo es',
+      titulo: ok ? tr('¡Muy bien!') : tr('Casi, mira cómo es'),
       cuerpo: cuerpo,
     );
     respondiendo = false;
@@ -81,22 +82,22 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
     return nivel.when(
       loading: () =>
           const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (_, _) => const Scaffold(
-        body: Center(child: Text('No se pudo cargar la lección.')),
+      error: (_, _) => Scaffold(
+        body: Center(child: Text(tr('No se pudo cargar la lección.'))),
       ),
       data: (n) {
         final l = n?.leccion(widget.leccionId);
         if (n == null || l == null) {
           return Scaffold(
             appBar: AppBar(),
-            body: const Center(child: Text('Lección no encontrada.')),
+            body: Center(child: Text(tr('Lección no encontrada.'))),
           );
         }
         _precargar(n, l);
         return Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              tooltip: 'Salir',
+              tooltip: tr('Salir'),
               icon: const Icon(Icons.close_rounded),
               onPressed: salir,
             ),
@@ -162,7 +163,7 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
       'cambia' => _PasoCambia(key: k, n: n, paso: p, onRespuesta: res),
       _ => _PasoLumo(
         key: k,
-        paso: PasoN0('lumo', {'texto': 'Sigamos.', 'pose': 'anima'}),
+        paso: PasoN0('lumo', {'texto': tr('Sigamos.'), 'pose': 'anima'}),
         onSeguir: sig,
       ),
     };
@@ -226,7 +227,7 @@ class _BotonesAudio extends StatelessWidget {
         child: FilledButton.icon(
           onPressed: onNormal,
           icon: const Icon(Icons.volume_up_rounded),
-          label: const Text('Escuchar'),
+          label: Text(tr('Escuchar')),
         ),
       ),
       const SizedBox(width: 10),
@@ -234,7 +235,7 @@ class _BotonesAudio extends StatelessWidget {
         child: OutlinedButton.icon(
           onPressed: onLento,
           icon: const ImagenPalabra('1f422', tamano: 22),
-          label: const Text('Lento'),
+          label: Text(tr('Lento')),
         ),
       ),
     ],
@@ -256,7 +257,7 @@ class _PasoLumo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _Marco(
-    boton: BotonPrincipal(onPressed: onSeguir, child: const Text('SIGUIENTE')),
+    boton: BotonPrincipal(onPressed: onSeguir, child: Text(tr('SIGUIENTE'))),
     children: [
       const SizedBox(height: 12),
       Center(child: LumoReaccion(pose: _pose(paso.pose), size: 150)),
@@ -294,7 +295,7 @@ class _TarjetaPalabra extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Semantics(
     button: true,
-    label: palabra.texto.isEmpty ? 'Imagen' : palabra.texto,
+    label: palabra.texto.isEmpty ? tr('Imagen') : palabra.texto,
     child: Tarjeta(
       onTap: onTap,
       borde: seleccionada ? OL.morado : null,
@@ -368,10 +369,10 @@ class _PasoEscuchaState extends State<_PasoEscucha> {
     return _Marco(
       boton: BotonPrincipal(
         onPressed: oidas.isEmpty ? null : widget.onSeguir,
-        child: const Text('SIGUIENTE'),
+        child: Text(tr('SIGUIENTE')),
       ),
       children: [
-        _titulo('Escucha y mira'),
+        _titulo(tr('Escucha y mira')),
         _cuadricula([
           for (var i = 0; i < ps.length; i++)
             _TarjetaPalabra(
@@ -382,10 +383,10 @@ class _PasoEscuchaState extends State<_PasoEscucha> {
             ),
         ]),
         const SizedBox(height: 12),
-        const Text(
-          'Toca cada tarjeta para oírla.',
+        Text(
+          tr('Toca cada tarjeta para oírla.'),
           textAlign: TextAlign.center,
-          style: TextStyle(color: OL.gris),
+          style: const TextStyle(color: OL.gris),
         ),
       ],
     );
@@ -410,7 +411,7 @@ class _PasoMira extends StatelessWidget {
     return _Marco(
       boton: BotonPrincipal(
         onPressed: onSeguir,
-        child: const Text('SIGUIENTE'),
+        child: Text(tr('SIGUIENTE')),
       ),
       children: [
         if (sonido != null)
@@ -523,10 +524,10 @@ class _PasoMezclaState extends State<_PasoMezcla> {
     return _Marco(
       boton: BotonPrincipal(
         onPressed: listo ? widget.onSeguir : null,
-        child: const Text('SIGUIENTE'),
+        child: Text(tr('SIGUIENTE')),
       ),
       children: [
-        _titulo('Junta los sonidos'),
+        _titulo(tr('Junta los sonidos')),
         Text(
           widget.n.texto('junta'),
           style: TextStyle(color: OL.gris, fontSize: 16),
@@ -557,7 +558,7 @@ class _PasoMezclaState extends State<_PasoMezcla> {
           child: OutlinedButton.icon(
             onPressed: reproducir,
             icon: const Icon(Icons.replay_rounded),
-            label: const Text('Otra vez'),
+            label: Text(tr('Otra vez')),
           ),
         ),
       ],
@@ -628,7 +629,7 @@ class _PasoRepiteState extends State<_PasoRepite> {
       setState(() {
         grabando = false;
         intentado = true;
-        aviso = 'No se pudo usar el micrófono. Dilo en voz alta y sigue.';
+        aviso = tr('No se pudo usar el micrófono. Dilo en voz alta y sigue.');
       });
     }
   }
@@ -639,10 +640,10 @@ class _PasoRepiteState extends State<_PasoRepite> {
     return _Marco(
       boton: BotonPrincipal(
         onPressed: widget.onSeguir,
-        child: Text(intentado ? 'SIGUIENTE' : 'SALTAR'),
+        child: Text(intentado ? tr('SIGUIENTE') : tr('SALTAR')),
       ),
       children: [
-        _titulo('Escucha y repite'),
+        _titulo(tr('Escucha y repite')),
         PalabraColor(widget.paso.marcado, nivel: widget.n, tamano: 46),
         if (widget.paso.traduccion != null)
           Text(
@@ -659,7 +660,7 @@ class _PasoRepiteState extends State<_PasoRepite> {
         Center(
           child: Semantics(
             button: true,
-            label: grabando ? 'Terminar de grabar' : 'Grabar mi voz',
+            label: grabando ? tr('Terminar de grabar') : tr('Grabar mi voz'),
             child: InkWell(
               onTap: grabar,
               customBorder: const CircleBorder(),
@@ -681,7 +682,7 @@ class _PasoRepiteState extends State<_PasoRepite> {
         ),
         const SizedBox(height: 10),
         Text(
-          grabando ? 'Te escucho…' : 'Toca el micrófono y dilo',
+          grabando ? tr('Te escucho…') : tr('Toca el micrófono y dilo'),
           textAlign: TextAlign.center,
           style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
         ),
@@ -692,8 +693,11 @@ class _PasoRepiteState extends State<_PasoRepite> {
             sombra: false,
             child: Text(
               bien
-                  ? '¡Muy bien! Se entiende «$texto».'
-                  : 'Oímos «$dicho». Escucha otra vez y vuelve a intentarlo.',
+                  ? tr('¡Muy bien! Se entiende «{texto}».', {'texto': texto})
+                  : tr(
+                      'Oímos «{dicho}». Escucha otra vez y vuelve a intentarlo.',
+                      {'dicho': dicho},
+                    ),
               style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
           ),
@@ -721,9 +725,9 @@ class _PasoLetras extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _Marco(
-    boton: BotonPrincipal(onPressed: onSeguir, child: const Text('SIGUIENTE')),
+    boton: BotonPrincipal(onPressed: onSeguir, child: Text(tr('SIGUIENTE'))),
     children: [
-      _titulo('El nombre de las letras'),
+      _titulo(tr('El nombre de las letras')),
       Wrap(
         spacing: 10,
         runSpacing: 10,
@@ -732,7 +736,7 @@ class _PasoLetras extends StatelessWidget {
           for (final l in paso.letras)
             Semantics(
               button: true,
-              label: 'Letra $l',
+              label: tr('Letra {letra}', {'letra': l}),
               child: Tarjeta(
                 onTap: () => decir(n, l, letra: true),
                 padding: const EdgeInsets.symmetric(
@@ -756,7 +760,7 @@ class _PasoLetras extends StatelessWidget {
         child: OutlinedButton.icon(
           onPressed: () => decir(n, '${paso.letras.join(', ')}.'),
           icon: const Icon(Icons.volume_up_rounded),
-          label: const Text('Escuchar todas'),
+          label: Text(tr('Escuchar todas')),
         ),
       ),
       if ((paso.j['nota'] as String?) != null) ...[
@@ -891,7 +895,8 @@ class _PasoElegirState extends State<_PasoElegir> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (!ok) const Text('La respuesta es:', style: TextStyle(fontSize: 16)),
+        if (!ok)
+          Text(tr('La respuesta es:'), style: const TextStyle(fontSize: 16)),
         buena,
         if (p.tipo == 'lee' && p.traduccion != null)
           Text(
@@ -913,10 +918,10 @@ class _PasoElegirState extends State<_PasoElegir> {
                 elegida == correcta,
                 cuerpo(elegida == correcta),
               ),
-        child: const Text('COMPROBAR'),
+        child: Text(tr('COMPROBAR')),
       ),
       children: [
-        _titulo(p.pregunta.isEmpty ? 'Elige' : p.pregunta),
+        _titulo(p.pregunta.isEmpty ? tr('Elige') : p.pregunta),
         if (p.tipo == 'toca_sonido' && sonido != null) ...[
           Center(child: ImagenPalabra(sonido.emoji, tamano: 72)),
           Center(
@@ -1022,10 +1027,10 @@ class _PasoConstruyeState extends State<_PasoConstruye> {
               ),
             )
           : null,
-      child: const Text('COMPROBAR'),
+      child: Text(tr('COMPROBAR')),
     ),
     children: [
-      _titulo('Escribe la palabra que oyes'),
+      _titulo(tr('Escribe la palabra que oyes')),
       _BotonesAudio(
         onNormal: () => decir(widget.n, objetivo),
         onLento: () => decir(widget.n, objetivo, lento: true),
@@ -1148,10 +1153,10 @@ class _PasoCambiaState extends State<_PasoCambia> {
                   centrar: false,
                 ),
               ),
-        child: const Text('COMPROBAR'),
+        child: Text(tr('COMPROBAR')),
       ),
       children: [
-        _titulo('Cambia una letra'),
+        _titulo(tr('Cambia una letra')),
         PalabraColor(
           (widget.paso.j['de'] as String?) ?? de,
           nivel: widget.n,
@@ -1175,10 +1180,10 @@ class _PasoCambiaState extends State<_PasoCambia> {
           onLento: () => decir(widget.n, a, lento: true),
         ),
         const SizedBox(height: 18),
-        const Text(
-          '¿Qué letra cambia?',
+        Text(
+          tr('¿Qué letra cambia?'),
           textAlign: TextAlign.center,
-          style: TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
+          style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 10),
         Wrap(
@@ -1231,22 +1236,25 @@ class _Final extends ConsumerWidget {
             ? context.go('/nivel0')
             : context.pushReplacement('/nivel0/leccion/${siguiente.id}'),
         child: Text(
-          siguiente == null ? 'VOLVER AL NIVEL 0' : 'SIGUIENTE LECCIÓN',
+          siguiente == null ? tr('VOLVER AL NIVEL 0') : tr('SIGUIENTE LECCIÓN'),
         ),
       ),
       children: [
         const SizedBox(height: 16),
         const Center(child: LumoReaccion(pose: PoseLumo.celebra, size: 170)),
         const SizedBox(height: 12),
-        const Text(
-          '¡Lección completada!',
+        Text(
+          tr('¡Lección completada!'),
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
+          style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 6),
         if (total > 0)
           Text(
-            '$aciertos de $total respuestas bien',
+            tr('{aciertos} de {total} respuestas bien', {
+              'aciertos': aciertos,
+              'total': total,
+            }),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 18, color: OL.gris),
           ),
@@ -1254,7 +1262,7 @@ class _Final extends ConsumerWidget {
         Center(
           child: TextButton(
             onPressed: () => context.go('/nivel0'),
-            child: const Text('Ver todas las lecciones'),
+            child: Text(tr('Ver todas las lecciones')),
           ),
         ),
       ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/i18n/i18n.dart';
 import '../../shared/widgets/widgets.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -25,10 +26,10 @@ class WelcomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Text(
-                      'ONE LINGO · A TU RITMO',
+                    Text(
+                      tr('ONE LINGO · A TU RITMO'),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: OL.moradoClaro,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 2,
@@ -95,7 +96,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 28),
                     Text(
-                      'Un idioma.\nMil posibilidades.',
+                      tr('Un idioma.\nMil posibilidades.'),
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineLarge
                           ?.copyWith(
@@ -106,10 +107,12 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Aprende, practica y atrévete a hablar.\nTu camino, con ayuda de la IA.',
+                    Text(
+                      tr(
+                        'Aprende, practica y atrévete a hablar.\nTu camino, con ayuda de la IA.',
+                      ),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: OL.moradoClaro,
                         fontSize: 16,
                         height: 1.5,
@@ -117,19 +120,19 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.auto_awesome_rounded,
                           color: OL.naranja,
                           size: 20,
                         ),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Flexible(
                           child: Text(
-                            'Pequeños pasos. Grandes logros.',
-                            style: TextStyle(
+                            tr('Pequeños pasos. Grandes logros.'),
+                            style: const TextStyle(
                               color: OL.blanco,
                               fontWeight: FontWeight.w700,
                               fontSize: 13,
@@ -142,7 +145,7 @@ class WelcomeScreen extends StatelessWidget {
                     BotonPrincipal(
                       color: OL.naranja,
                       onPressed: () => context.go('/onboarding'),
-                      child: const Text('EMPEZAR MI CAMINO'),
+                      child: Text(tr('EMPEZAR MI CAMINO')),
                     ),
                     const SizedBox(height: 8),
                     OutlinedButton(
@@ -151,7 +154,7 @@ class WelcomeScreen extends StatelessWidget {
                         foregroundColor: OL.blanco,
                         side: const BorderSide(color: OL.moradoClaro, width: 2),
                       ),
-                      child: const Text('YA TENGO CUENTA'),
+                      child: Text(tr('YA TENGO CUENTA')),
                     ),
                   ],
                 ),

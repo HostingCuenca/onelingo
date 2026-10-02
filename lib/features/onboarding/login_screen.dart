@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../app/theme.dart';
 import '../../core/api/sync.dart';
 import '../../core/content/demo_users.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -38,7 +39,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       return;
     }
     if (correo.isEmpty || pass.text.isEmpty) {
-      setState(() => error = 'Escribe tu correo y tu contraseña.');
+      setState(() => error = tr('Escribe tu correo y tu contraseña.'));
       return;
     }
     setState(() { cargando = true; error = null; aviso = null; });
@@ -46,7 +47,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (!mounted) return;
     setState(() => cargando = false);
     if (!ok) {
-      setState(() => error = Sync.instancia.ultimoError.isEmpty ? 'No se pudo iniciar sesión.' : Sync.instancia.ultimoError);
+      setState(() => error = Sync.instancia.ultimoError.isEmpty ? tr('No se pudo iniciar sesión.') : Sync.instancia.ultimoError);
       return;
     }
     ref.read(progressProvider.notifier).iniciarSesionReal(
@@ -78,9 +79,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           );
       context.go('/inicio');
     } on GoogleSignInException catch (e) {
-      setState(() => error = e.code == GoogleSignInExceptionCode.canceled ? null : 'Google: ${e.description ?? e.code.name}. Falta configurar el ID de cliente (ver AUTENTICACION.md).');
+      setState(() => error = e.code == GoogleSignInExceptionCode.canceled ? null : tr('Google: {detalle}. Falta configurar el ID de cliente (ver AUTENTICACION.md).', {'detalle': e.description ?? e.code.name}));
     } catch (e) {
-      setState(() => error = 'Google Sign-In no está configurado todavía en esta app (ver AUTENTICACION.md).');
+      setState(() => error = tr('Google Sign-In no está configurado todavía en esta app (ver AUTENTICACION.md).'));
     } finally {
       if (mounted) setState(() => cargando = false);
     }
@@ -89,7 +90,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   Future<void> _recuperar() async {
     final correo = email.text.trim().toLowerCase();
     if (correo.isEmpty || !correo.contains('@')) {
-      setState(() => error = 'Escribe tu correo para enviarte el enlace.');
+      setState(() => error = tr('Escribe tu correo para enviarte el enlace.'));
       return;
     }
     setState(() { cargando = true; error = null; });
@@ -97,7 +98,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (!mounted) return;
     setState(() {
       cargando = false;
-      aviso = msg ?? (Sync.instancia.ultimoError.isEmpty ? 'No se pudo enviar el correo.' : Sync.instancia.ultimoError);
+      aviso = msg ?? (Sync.instancia.ultimoError.isEmpty ? tr('No se pudo enviar el correo.') : Sync.instancia.ultimoError);
     });
   }
 
@@ -112,7 +113,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/bienvenida')),
-        title: const Text('Iniciar sesión'),
+        title: Text(tr('Iniciar sesión')),
       ),
       body: Movil(
         child: ListView(
@@ -120,20 +121,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           children: [
             const Center(child: Logo(tamano: 90)),
             const SizedBox(height: 8),
-            Text('Bienvenido de nuevo', textAlign: TextAlign.center, style: Theme.of(context).textTheme.headlineMedium),
+            Text(tr('Bienvenido de nuevo'), textAlign: TextAlign.center, style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: 18),
             TextField(
               controller: email,
               keyboardType: TextInputType.emailAddress,
               autocorrect: false,
-              decoration: const InputDecoration(hintText: 'Correo electrónico', prefixIcon: Icon(Icons.mail_outline)),
+              decoration: InputDecoration(hintText: tr('Correo electrónico'), prefixIcon: const Icon(Icons.mail_outline)),
               onChanged: (_) => setState(() => error = null),
             ),
             const SizedBox(height: 10),
             TextField(
               controller: pass,
               obscureText: true,
-              decoration: const InputDecoration(hintText: 'Contraseña', prefixIcon: Icon(Icons.lock_outline)),
+              decoration: InputDecoration(hintText: tr('Contraseña'), prefixIcon: const Icon(Icons.lock_outline)),
               onSubmitted: (_) => _entrar(),
             ),
             if (error != null) ...[
@@ -145,17 +146,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               Text(aviso!, style: const TextStyle(color: OL.verde, fontSize: 12, fontWeight: FontWeight.w600)),
             ],
             const SizedBox(height: 14),
-            ElevatedButton(onPressed: cargando ? null : _entrar, child: Text(cargando ? 'UN MOMENTO…' : 'ENTRAR')),
+            ElevatedButton(onPressed: cargando ? null : _entrar, child: Text(cargando ? tr('UN MOMENTO…') : tr('ENTRAR'))),
             const SizedBox(height: 6),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              TextButton(onPressed: cargando ? null : _recuperar, child: const Text('Olvidé mi contraseña')),
-              TextButton(onPressed: () => context.go('/onboarding'), child: const Text('Crear cuenta nueva')),
+              TextButton(onPressed: cargando ? null : _recuperar, child: Text(tr('Olvidé mi contraseña'))),
+              TextButton(onPressed: () => context.go('/onboarding'), child: Text(tr('Crear cuenta nueva'))),
             ]),
             const SizedBox(height: 6),
-            const Row(children: [
-              Expanded(child: Divider()),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 12), child: Text('O CONTINUAR CON', style: TextStyle(color: OL.gris, fontSize: 11, fontWeight: FontWeight.w700))),
-              Expanded(child: Divider()),
+            Row(children: [
+              const Expanded(child: Divider()),
+              Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: Text(tr('O CONTINUAR CON'), style: const TextStyle(color: OL.gris, fontSize: 11, fontWeight: FontWeight.w700))),
+              const Expanded(child: Divider()),
             ]),
             const SizedBox(height: 12),
             OutlinedButton.icon(
@@ -167,13 +168,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(color: OL.amarilloSuave, borderRadius: BorderRadius.circular(14)),
-              child: const Row(children: [
-                Icon(Icons.science_outlined, color: Color(0xFF9A6B00)),
-                SizedBox(width: 10),
+              child: Row(children: [
+                const Icon(Icons.science_outlined, color: Color(0xFF9A6B00)),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    'DEMO · Usuarios de prueba (no necesitan servidor). Toca uno y pulsa ENTRAR. Contraseña: 1234',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF6B4A00), height: 1.4),
+                    tr('DEMO · Usuarios de prueba (no necesitan servidor). Toca uno y pulsa ENTRAR. Contraseña: 1234'),
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Color(0xFF6B4A00), height: 1.4),
                   ),
                 ),
               ]),
@@ -201,7 +202,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ]),
                     ),
                     IconButton(
-                      tooltip: 'Entrar como ${u.nombre}',
+                      tooltip: tr('Entrar como {nombre}', {'nombre': u.nombre}),
                       onPressed: () { _usar(u); _entrar(); },
                       icon: const Icon(Icons.login, color: OL.morado),
                     ),

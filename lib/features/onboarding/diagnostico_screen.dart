@@ -20,6 +20,7 @@ import '../../core/content/contenido_json.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/diagnostico.dart';
 import '../../core/efectos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/widgets.dart';
@@ -59,12 +60,12 @@ class DiagnosticoScreen extends ConsumerStatefulWidget {
 class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
   /// «¿Cuánto sabes?» solo fija la dificultad de la primera pregunta (como
   /// la prueba v2 de inglés); el resultado sale únicamente de las respuestas.
-  static const _etiquetasAuto = {
-    Autodeclaracion.nada: 'Nada',
-    Autodeclaracion.poco: 'Un poco',
-    Autodeclaracion.defiendo: 'Me defiendo',
-    Autodeclaracion.bastante: 'Bastante',
-    Autodeclaracion.avanzado: 'Avanzado',
+  static Map<Autodeclaracion, String> get _etiquetasAuto => {
+    Autodeclaracion.nada: tr('Nada'),
+    Autodeclaracion.poco: tr('Un poco'),
+    Autodeclaracion.defiendo: tr('Me defiendo'),
+    Autodeclaracion.bastante: tr('Bastante'),
+    Autodeclaracion.avanzado: tr('Avanzado'),
   };
 
   late Autodeclaracion autoevaluacion;
@@ -246,7 +247,9 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       if (mounted) {
         setState(() {
           cargando = false;
-          errorCarga = 'No pudimos generar la pregunta. Comprueba tu conexión y reintenta; tus respuestas se conservan.';
+          errorCarga = tr(
+            'No pudimos generar la pregunta. Comprueba tu conexión y reintenta; tus respuestas se conservan.',
+          );
         });
       }
       return;
@@ -328,9 +331,11 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     });
     if (!ok && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text(
-            'No se pudo reproducir el audio. Toca para reintentar; no afecta a tu puntuación.',
+            tr(
+              'No se pudo reproducir el audio. Toca para reintentar; no afecta a tu puntuación.',
+            ),
           ),
         ),
       );
@@ -413,7 +418,9 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     if (r == null) {
       setState(() {
         evaluando = false;
-        errorEscritura = 'No pudimos evaluar tu texto. Puedes reenviarlo sin perderlo; no se asignó una nota.';
+        errorEscritura = tr(
+          'No pudimos evaluar tu texto. Puedes reenviarlo sin perderlo; no se asignó una nota.',
+        );
       });
       return;
     }
@@ -490,7 +497,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/inicio'),
         ),
-        title: const Text('Diagnóstico de nivel'),
+        title: Text(tr('Diagnóstico de nivel')),
         actions: const [SoundToggle()],
       ),
       body: Movil(
@@ -513,16 +520,25 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     final meta = idioma(idiomaContenido);
     return ListView(
       children: [
-        Text('Comprobemos tu ${meta.nombre}', style: t.headlineMedium),
+        Text(
+          tr('Comprobemos tu {idioma}', {
+            'idioma': _nombreIdioma(meta.code, meta.nombre),
+          }),
+          style: t.headlineMedium,
+        ),
         const SizedBox(height: 6),
-        const Text(
-          'Partimos del nivel elegido y ajustamos la dificultad. En inglés: 10 actividades de lectura, listening, vocabulario, gramática y escritura, con una explicación después de cada respuesta.',
-          style: TextStyle(color: OL.gris, height: 1.4),
+        Text(
+          tr(
+            'Partimos del nivel elegido y ajustamos la dificultad. En inglés: 10 actividades de lectura, listening, vocabulario, gramática y escritura, con una explicación después de cada respuesta.',
+          ),
+          style: const TextStyle(color: OL.gris, height: 1.4),
         ),
         const SizedBox(height: 16),
         if (!esOnboarding) ...[
           Text(
-            '¿Cuánto ${meta.nombre} sabes?',
+            tr('¿Cuánto {idioma} sabes?', {
+              'idioma': _nombreIdioma(meta.code, meta.nombre),
+            }),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
@@ -543,9 +559,11 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
             ],
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Solo decide por dónde empezamos. Tu nivel sale de tus respuestas.',
-            style: TextStyle(color: OL.gris, fontSize: 12),
+          Text(
+            tr(
+              'Solo decide por dónde empezamos. Tu nivel sale de tus respuestas.',
+            ),
+            style: const TextStyle(color: OL.gris, fontSize: 12),
           ),
           const SizedBox(height: 16),
         ],
@@ -562,7 +580,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Text(
-              '${sectores.map((s) => sectoresAprendizaje[s] ?? s).join(' · ')}\n${objetivos.map((s) => objetivosAprendizaje[s] ?? s).join(' · ')}',
+              '${sectores.map(_sector).join(' · ')}\n${objetivos.map(_objetivo).join(' · ')}',
             ),
           ),
         const SizedBox(height: 16),
@@ -573,18 +591,20 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
                   (personalizado && (sectores.isEmpty || objetivos.isEmpty))
               ? null
               : _empezar,
-          child: const Text('EMPEZAR EL DIAGNÓSTICO'),
+          child: Text(tr('EMPEZAR EL DIAGNÓSTICO')),
         ),
         const SizedBox(height: 8),
         if (!Sync.instancia.conectado)
           TextButton(
             onPressed: () => context.push('/login'),
-            child: const Text('Inicia sesión para realizar el diagnóstico'),
+            child: Text(tr('Inicia sesión para realizar el diagnóstico')),
           ),
-        const Text(
-          'Tu resultado sale solo de tus respuestas. La expresión oral no se evalúa en esta prueba.',
+        Text(
+          tr(
+            'Tu resultado sale solo de tus respuestas. La expresión oral no se evalúa en esta prueba.',
+          ),
           textAlign: TextAlign.center,
-          style: TextStyle(color: OL.gris, fontSize: 12),
+          style: const TextStyle(color: OL.gris, fontSize: 12),
         ),
       ],
     );
@@ -604,7 +624,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           const SizedBox(height: 16),
           BotonPrincipal(
             onPressed: _siguiente,
-            child: const Text('REINTENTAR'),
+            child: Text(tr('REINTENTAR')),
           ),
         ],
       );
@@ -613,8 +633,11 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       return SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: ActivityLoading(
-          label: 'Seleccionando una actividad para ti…',
-          detail: 'Dificultad ${d.nivelActual} · ${d.n} respondidas',
+          label: tr('Seleccionando una actividad para ti…'),
+          detail: tr('Dificultad {nivel} · {n} respondidas', {
+            'nivel': d.nivelActual,
+            'n': d.n,
+          }),
         ),
       );
     }
@@ -630,7 +653,10 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           children: [
             Expanded(child: BarraProgreso(progreso, color: OL.naranja)),
             const SizedBox(width: 10),
-            Etiqueta('Dificultad ${p.nivel}', color: OL.morado),
+            Etiqueta(
+              tr('Dificultad {nivel}', {'nivel': p.nivel}),
+              color: OL.morado,
+            ),
           ],
         ),
         const SizedBox(height: 8),
@@ -639,17 +665,19 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           runSpacing: 6,
           children: [
             Etiqueta(
-              'Pregunta ${d.n + (respondida ? 0 : 1)}${personalizado ? ' de 10' : ''}',
+              personalizado
+                  ? tr('Pregunta {n} de 10', {'n': d.n + (respondida ? 0 : 1)})
+                  : tr('Pregunta {n}', {'n': d.n + (respondida ? 0 : 1)}),
               color: OL.gris,
               fondo: OL.fondo,
             ),
             Etiqueta(
-              skillsDiag[p.skill] ?? p.skill,
+              _skill(p.skill),
               color: OL.morado,
               fondo: OL.moradoSuave,
             ),
             Etiqueta(
-              tiposDiagNombre[p.tipo] ?? '',
+              _tipo(p.tipo),
               color: OL.naranja,
               fondo: OL.naranjaSuave,
               icono: p.esAuditiva
@@ -659,8 +687,8 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
                   : Icons.quiz_outlined,
             ),
             if (d.origenActual == 'ia')
-              const Etiqueta(
-                'IA',
+              Etiqueta(
+                tr('IA'),
                 color: OL.verde,
                 fondo: OL.verdeSuave,
                 icono: Icons.auto_awesome,
@@ -730,8 +758,8 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     sombra: false,
     onTap: reproduciendo ? null : _escuchar,
     etiquetaSemantica: audioListo
-        ? 'Volver a escuchar el audio'
-        : 'Escuchar audio',
+        ? tr('Volver a escuchar el audio')
+        : tr('Escuchar audio'),
     child: Column(
       children: [
         AnimatedScale(
@@ -747,10 +775,10 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         const SizedBox(height: 10),
         Text(
           reproduciendo
-              ? 'Preparando audio…'
+              ? tr('Preparando audio…')
               : audioListo
-              ? 'Volver a escuchar'
-              : 'Escuchar audio',
+              ? tr('Volver a escuchar')
+              : tr('Escuchar audio'),
           style: const TextStyle(color: OL.gris, fontSize: 12),
         ),
         if (mostrarTexto || respondida) ...[
@@ -792,8 +820,10 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
   Widget _ordenar(PreguntaDiag p, bool respondida) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const Text(
-        'Toca las palabras para formar la frase. Toca una palabra elegida para devolverla.',
+      Text(
+        tr(
+          'Toca las palabras para formar la frase. Toca una palabra elegida para devolverla.',
+        ),
       ),
       const SizedBox(height: 12),
       Container(
@@ -806,7 +836,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           spacing: 6,
           runSpacing: 6,
           children: [
-            if (orden.isEmpty) const Text('Tu frase aparecerá aquí'),
+            if (orden.isEmpty) Text(tr('Tu frase aparecerá aquí')),
             for (final i in orden)
               ActionChip(
                 label: Text(fichas[i]),
@@ -844,10 +874,10 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     onSubmitted: (_) => _comprobar(),
     decoration: InputDecoration(
       hintText: p.tipo == TipoDiag.dictado
-          ? 'Escribe lo que oíste'
+          ? tr('Escribe lo que oíste')
           : p.tipo == TipoDiag.completar
-          ? 'Escribe la palabra que falta'
-          : 'Escribe tu respuesta',
+          ? tr('Escribe la palabra que falta')
+          : tr('Escribe tu respuesta'),
       prefixIcon: const Icon(Icons.edit_outlined),
     ),
   );
@@ -865,22 +895,27 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           maxLines: 6,
           minLines: 4,
           onChanged: (_) => setState(() {}),
-          decoration: const InputDecoration(
-            hintText: 'Escribe 3-5 frases en el idioma que estás aprendiendo, sin traductor.',
+          decoration: InputDecoration(
+            hintText: tr(
+              'Escribe 3-5 frases en el idioma que estás aprendiendo, sin traductor.',
+            ),
           ),
         ),
         const SizedBox(height: 6),
         Text(
-          '$palabras palabras · responde a todos los puntos de la consigna',
+          tr(
+            '{n} palabras · responde a todos los puntos de la consigna',
+            {'n': palabras},
+          ),
           style: const TextStyle(color: OL.gris, fontSize: 12),
         ),
         if (errorEscritura != null)
           Text(errorEscritura!, style: const TextStyle(color: OL.rojo)),
         if (evaluando) ...[
           const SizedBox(height: 14),
-          const ActivityLoading(
+          ActivityLoading(
             compact: true,
-            label: 'Revisando tu respuesta…',
+            label: tr('Revisando tu respuesta…'),
           ),
         ],
       ],
@@ -893,17 +928,21 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     return AnswerFeedback(
       correct: ok,
       title: e != null
-          ? 'Escritura: ${e.puntuacion.toStringAsFixed(1)} de 10'
+          ? tr('Escritura: {nota} de 10', {
+              'nota': e.puntuacion.toStringAsFixed(1),
+            })
           : ok
-          ? '¡Correcto!'
-          : 'Vamos a repasarlo',
+          ? tr('¡Correcto!')
+          : tr('Vamos a repasarlo'),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (e == null && !ok && p.respuestaCorrecta.isNotEmpty) ...[
             const SizedBox(height: 6),
             Text(
-              'Respuesta correcta: ${p.respuestaCorrecta}',
+              tr('Respuesta correcta: {respuesta}', {
+                'respuesta': p.respuestaCorrecta,
+              }),
               style: const TextStyle(fontWeight: FontWeight.w600),
             ),
           ],
@@ -921,9 +960,9 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           if (e != null) ...[
             if (e.correccion.isNotEmpty) ...[
               const SizedBox(height: 8),
-              const Text(
-                'Versión corregida',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
+              Text(
+                tr('Versión corregida'),
+                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12),
               ),
               Text(e.correccion, style: const TextStyle(height: 1.4)),
             ],
@@ -939,11 +978,11 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
               ),
             ],
             if (!e.porIa)
-              const Padding(
-                padding: EdgeInsets.only(top: 6),
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
                 child: Text(
-                  'Sin conexión con la IA: evaluación aproximada.',
-                  style: TextStyle(color: OL.gris, fontSize: 11),
+                  tr('Sin conexión con la IA: evaluación aproximada.'),
+                  style: const TextStyle(color: OL.gris, fontSize: 11),
                 ),
               ),
           ],
@@ -958,7 +997,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       return BotonPrincipal(
         color: ok ? OL.verde : OL.rojo,
         onPressed: _siguiente,
-        child: const Text('SIGUIENTE'),
+        child: Text(tr('SIGUIENTE')),
       );
     }
     if (p.esEscritura) {
@@ -969,7 +1008,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         onPressed: palabras >= (p.nivel <= 2 ? 1 : 3) && !evaluando
             ? _enviarEscritura
             : null,
-        child: const Text('ENVIAR PARA EVALUAR'),
+        child: Text(tr('ENVIAR PARA EVALUAR')),
       );
     }
     final listo =
@@ -981,7 +1020,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         (!p.esAuditiva || audioListo);
     return BotonPrincipal(
       onPressed: listo ? _comprobar : null,
-      child: const Text('COMPROBAR'),
+      child: Text(tr('COMPROBAR')),
     );
   }
 
@@ -1015,9 +1054,9 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
                     height: 1,
                   ),
                 ),
-                const Text(
-                  'de 10',
-                  style: TextStyle(color: OL.gris, fontSize: 12),
+                Text(
+                  tr('de 10'),
+                  style: const TextStyle(color: OL.gris, fontSize: 12),
                 ),
               ],
             ),
@@ -1025,23 +1064,34 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         ),
         const SizedBox(height: 14),
         Text(
-          n == 0 ? 'Tu punto de partida: Fundamentos' : 'Tu nivel: $nivelTexto',
+          n == 0
+              ? tr('Tu punto de partida: Fundamentos')
+              : tr('Tu nivel: {nivel}', {'nivel': nivelTexto}),
           textAlign: TextAlign.center,
           style: t.headlineMedium,
         ),
         const SizedBox(height: 4),
         Text(
-          '${r.preguntas} actividades · ${evidencias.where((e) => e['correcta'] == true).length}/${evidencias.where((e) => e['correcta'] != null).length} respuestas objetivas correctas',
+          tr(
+            '{actividades} actividades · {aciertos}/{total} respuestas objetivas correctas',
+            {
+              'actividades': r.preguntas,
+              'aciertos': evidencias.where((e) => e['correcta'] == true).length,
+              'total': evidencias.where((e) => e['correcta'] != null).length,
+            },
+          ),
           textAlign: TextAlign.center,
           style: const TextStyle(color: OL.gris, fontSize: 13),
         ),
         const SizedBox(height: 16),
-        const Text(
-          'Perfil inicial basado en pocas muestras por competencia. Seguiremos afinándolo con la práctica. Expresión oral: no evaluada.',
-          style: TextStyle(color: OL.gris, fontSize: 12),
+        Text(
+          tr(
+            'Perfil inicial basado en pocas muestras por competencia. Seguiremos afinándolo con la práctica. Expresión oral: no evaluada.',
+          ),
+          style: const TextStyle(color: OL.gris, fontSize: 12),
         ),
         const SizedBox(height: 12),
-        const TituloSeccion('Por competencia'),
+        TituloSeccion(tr('Por competencia')),
         const SizedBox(height: 8),
         Tarjeta(
           child: Column(
@@ -1054,7 +1104,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
                       SizedBox(
                         width: 150,
                         child: Text(
-                          '${skillsDiag[e.key] ?? e.key} (${evidencias.where((x) => x['skill'] == e.key).length})',
+                          '${_skill(e.key)} (${evidencias.where((x) => x['skill'] == e.key).length})',
                           style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
@@ -1114,7 +1164,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         ],
         if (r.refuerzo.isNotEmpty) ...[
           const SizedBox(height: 16),
-          const TituloSeccion('Qué reforzar'),
+          TituloSeccion(tr('Qué reforzar')),
           const SizedBox(height: 8),
           Tarjeta(
             color: OL.moradoSuave,
@@ -1131,7 +1181,9 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Text(
-                      'Errores repetidos: ${r.recurrentes.join(', ')}',
+                      tr('Errores repetidos: {errores}', {
+                        'errores': r.recurrentes.join(', '),
+                      }),
                       style: const TextStyle(color: OL.gris, fontSize: 12),
                     ),
                   ),
@@ -1141,21 +1193,21 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         ],
         if (perfilCargando || perfilIa != null) ...[
           const SizedBox(height: 16),
-          const TituloSeccion('Lo que dice tu profesor de IA'),
+          TituloSeccion(tr('Lo que dice tu profesor de IA')),
           const SizedBox(height: 8),
           Tarjeta(
             child: perfilCargando
-                ? const Row(
+                ? Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 18,
                         height: 18,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
-                        'Redactando tu resumen…',
-                        style: TextStyle(color: OL.gris),
+                        tr('Redactando tu resumen…'),
+                        style: const TextStyle(color: OL.gris),
                       ),
                     ],
                   )
@@ -1182,7 +1234,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
           ),
         ],
         const SizedBox(height: 16),
-        const TituloSeccion('Tu plan inicial'),
+        TituloSeccion(tr('Tu plan inicial')),
         const SizedBox(height: 8),
         Tarjeta(
           child: Column(
@@ -1218,10 +1270,15 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
                 ),
               Text(
                 n > 1
-                    ? 'Tu punto de partida es el nivel $n. Esto no acredita el dominio de todas las habilidades anteriores: el refuerzo seguirá atendiendo sus dificultades.'
+                    ? tr(
+                        'Tu punto de partida es el nivel {n}. Esto no acredita el dominio de todas las habilidades anteriores: el refuerzo seguirá atendiendo sus dificultades.',
+                        {'n': n},
+                      )
                     : n == 1
-                    ? 'Empezarás desde el principio, con las bases del idioma.'
-                    : 'Antes de formar frases aprenderás las letras y sus sonidos, los números, los colores y las palabras básicas.',
+                    ? tr('Empezarás desde el principio, con las bases del idioma.')
+                    : tr(
+                        'Antes de formar frases aprenderás las letras y sus sonidos, los números, los colores y las palabras básicas.',
+                      ),
                 style: const TextStyle(
                   color: OL.gris,
                   fontSize: 12,
@@ -1235,22 +1292,99 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         BotonPrincipal(
           onPressed: perfilCargando ? null : () => _terminar(n),
           child: Text(
-            n == 0 ? 'EMPEZAR POR FUNDAMENTOS' : 'EMPEZAR EN EL NIVEL $n',
+            n == 0
+                ? tr('EMPEZAR POR FUNDAMENTOS')
+                : tr('EMPEZAR EN EL NIVEL {n}', {'n': n}),
           ),
         ),
         if (!perfilCargando && n > 1)
           TextButton(
             onPressed: () => _terminar(n - 1),
-            child: Text('Prefiero empezar un nivel más abajo (Nivel ${n - 1})'),
+            child: Text(
+              tr('Prefiero empezar un nivel más abajo (Nivel {n})', {
+                'n': n - 1,
+              }),
+            ),
           ),
         if (!perfilCargando && n == 1)
           TextButton(
             onPressed: () => _terminar(0),
-            child: const Text(
-              'Prefiero empezar por Fundamentos (letras y sonidos)',
+            child: Text(
+              tr('Prefiero empezar por Fundamentos (letras y sonidos)'),
             ),
           ),
       ],
     );
   }
 }
+
+/// Nombre del idioma en el idioma de la interfaz.
+String _nombreIdioma(String code, String nombre) => switch (code) {
+  'en' => tr('Inglés'),
+  'es' => tr('Español'),
+  'fr' => tr('Francés'),
+  'de' => tr('Alemán'),
+  'pt' => tr('Portugués'),
+  'it' => tr('Italiano'),
+  'zh' => tr('Chino mandarín'),
+  'ja' => tr('Japonés'),
+  'ko' => tr('Coreano'),
+  'ru' => tr('Ruso'),
+  _ => nombre,
+};
+
+/// Competencia (`skillsDiag`) en el idioma de la interfaz.
+String _skill(String k) => switch (k) {
+  'listening' => tr('Listening'),
+  'comprension' => tr('Lectura'),
+  'vocabulario' => tr('Vocabulario'),
+  'gramatica' => tr('Gramática'),
+  'tiempos' => tr('Tiempos verbales'),
+  'expresiones' => tr('Expresiones naturales'),
+  'contexto' => tr('Comprensión contextual'),
+  'cotidiano' => tr('Comunicación cotidiana'),
+  'escritura' => tr('Escritura'),
+  _ => skillsDiag[k] ?? k,
+};
+
+/// Formato de la pregunta (`tiposDiagNombre`) en el idioma de la interfaz.
+String _tipo(TipoDiag t) => switch (t) {
+  TipoDiag.eleccion => tr('Elige'),
+  TipoDiag.natural => tr('La más natural'),
+  TipoDiag.significado => tr('Significado'),
+  TipoDiag.contexto => tr('Comprensión'),
+  TipoDiag.situacion => tr('Situación'),
+  TipoDiag.error => tr('Detecta el error'),
+  TipoDiag.completar => tr('Completa'),
+  TipoDiag.corta => tr('Respuesta corta'),
+  TipoDiag.ordenar => tr('Ordena la frase'),
+  TipoDiag.escucha => tr('Escucha'),
+  TipoDiag.dictado => tr('Dictado'),
+  TipoDiag.escritura => tr('Escribe'),
+};
+
+/// Sector (`sectoresAprendizaje`) en el idioma de la interfaz.
+String _sector(String s) => switch (s) {
+  'estudiante' => tr('Estudiante'),
+  'tecnologia' => tr('Tecnología e ingeniería'),
+  'salud' => tr('Salud y bienestar'),
+  'negocios' => tr('Negocios y administración'),
+  'ventas' => tr('Ventas y atención al cliente'),
+  'educacion' => tr('Educación e investigación'),
+  'turismo' => tr('Turismo y hostelería'),
+  'general' => tr('Otros sectores / vida cotidiana'),
+  _ => sectoresAprendizaje[s] ?? s,
+};
+
+/// Objetivo (`objetivosAprendizaje`) en el idioma de la interfaz.
+String _objetivo(String s) => switch (s) {
+  'conversar' => tr('Conversar con confianza'),
+  'trabajar' => tr('Reuniones y trabajo en equipo'),
+  'entrevistas' => tr('Entrevistas y oportunidades'),
+  'viajar' => tr('Viajar y vivir en otro país'),
+  'estudiar' => tr('Estudiar y entender contenidos'),
+  'clientes' => tr('Atender y comunicarme con clientes'),
+  'escribir' => tr('Escribir mensajes y correos'),
+  'escuchar' => tr('Entender conversaciones y videos'),
+  _ => objetivosAprendizaje[s] ?? s,
+};

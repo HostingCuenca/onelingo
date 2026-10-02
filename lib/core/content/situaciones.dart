@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/i18n.dart';
+
 /// Situaciones v2 (docs/claude-educacion/SITUACIONES_V2.md): las 50 de
 /// `catalogo_situaciones.g.dart`, cada una con tres tramos que crecen con el
 /// alumno. Contenido en `assets/contenido/<idioma>/situaciones.json`.
@@ -12,8 +14,24 @@ enum Tramo {
   intermedio('Intermedio', 'Niveles 4–6', 4),
   avanzado('Avanzado', 'Niveles 7–10', 7);
 
-  const Tramo(this.nombre, this.niveles, this.nivelMinimo);
-  final String nombre, niveles;
+  const Tramo(this.nombreEs, this.nivelesEs, this.nivelMinimo);
+
+  /// Textos en español (dato estable; se muestran con [nombre] y [niveles]).
+  final String nombreEs, nivelesEs;
+
+  /// Nombre visible en el idioma de la interfaz.
+  String get nombre => switch (this) {
+    basico => tr('Básico'),
+    intermedio => tr('Intermedio'),
+    avanzado => tr('Avanzado'),
+  };
+
+  /// Rango de niveles visible en el idioma de la interfaz.
+  String get niveles => switch (this) {
+    basico => tr('Niveles {desde}–{hasta}', {'desde': 1, 'hasta': 3}),
+    intermedio => tr('Niveles {desde}–{hasta}', {'desde': 4, 'hasta': 6}),
+    avanzado => tr('Niveles {desde}–{hasta}', {'desde': 7, 'hasta': 10}),
+  };
 
   /// Nivel del curso desde el que se abre.
   final int nivelMinimo;

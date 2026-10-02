@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/api/sync.dart';
 import '../../core/state/providers.dart';
 import '../../core/biblioteca.dart';
+import '../../core/i18n/i18n.dart';
 import 'tutores_3d.dart';
 
 /// Same-origin isolated viewer; credentials stay in memory and never in URLs.
@@ -46,7 +47,7 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
             '/avatar/index.html?v=avatar29&embebido=1&tutor=${Uri.encodeComponent(widget.tutorId)}',
           )
           .toString()
-      ..title = 'Practica con un tutor de IA'
+      ..title = tr('Practica con un tutor de IA')
       ..allow = 'microphone; autoplay'
       ..style.border = '0'
       ..style.width = '100%'
@@ -101,16 +102,18 @@ class _AvatarScreenState extends ConsumerState<AvatarScreen> {
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
-              tooltip: 'Tutores',
+              tooltip: tr('Tutores'),
               onPressed: () =>
                   context.canPop() ? context.pop() : context.go('/tutores'),
             ),
             title: Text(
-              '${tutor3d(widget.tutorId)?.nombre ?? 'Tutor'} · videollamada',
+              tr('{tutor} · videollamada', {
+                'tutor': tutor3d(widget.tutorId)?.nombre ?? tr('Tutor'),
+              }),
             ),
           ),
           body: _SinSesion(
-            nombre: tutor3d(widget.tutorId)?.nombre ?? 'tu tutor',
+            nombre: tutor3d(widget.tutorId)?.nombre ?? tr('tu tutor'),
           ),
         )
       : Scaffold(
@@ -138,19 +141,21 @@ class _SinSesion extends StatelessWidget {
           const Icon(Icons.lock_outline_rounded, size: 40),
           const SizedBox(height: 12),
           Text(
-            'Inicia sesión para hablar con $nombre',
+            tr('Inicia sesión para hablar con {nombre}', {'nombre': nombre}),
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 6),
-          const Text(
-            'Tu tutor recuerda tu nivel, tus correcciones y lo que practicaste en otras llamadas.',
+          Text(
+            tr(
+              'Tu tutor recuerda tu nivel, tus correcciones y lo que practicaste en otras llamadas.',
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
           FilledButton(
             onPressed: () => context.push('/login'),
-            child: const Text('Iniciar sesión'),
+            child: Text(tr('Iniciar sesión')),
           ),
         ],
       ),

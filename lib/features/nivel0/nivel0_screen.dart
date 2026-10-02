@@ -8,6 +8,7 @@ import '../../core/state/providers.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
 import 'palabra_color.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Nivel 0 · Leer y pronunciar: unidades y lecciones con su progreso, y
 /// acceso al Mapa de Sonidos. Lumo guía (un solo personaje en pantalla).
@@ -25,16 +26,16 @@ class Nivel0Screen extends ConsumerWidget {
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/inicio'),
         ),
-        title: const Text('Nivel 0 · Leer y pronunciar'),
+        title: Text(tr('Nivel 0 · Leer y pronunciar')),
       ),
       body: nivel.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) =>
-            const Center(child: Text('No se pudo cargar el Nivel 0.')),
+            Center(child: Text(tr('No se pudo cargar el Nivel 0.'))),
         data: (n0) {
           if (n0 == null) {
-            return const Center(
-              child: Text('Este idioma aún no tiene Nivel 0.'),
+            return Center(
+              child: Text(tr('Este idioma aún no tiene Nivel 0.')),
             );
           }
           final n = n0;
@@ -73,7 +74,10 @@ class Nivel0Screen extends ConsumerWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              '$hechas de ${n.lecciones.length} lecciones',
+                              tr('{hechas} de {total} lecciones', {
+                                'hechas': hechas,
+                                'total': n.lecciones.length,
+                              }),
                               style: const TextStyle(
                                 color: OL.gris,
                                 fontSize: 13,
@@ -92,15 +96,17 @@ class Nivel0Screen extends ConsumerWidget {
                         context.push('/nivel0/leccion/${siguiente.id}'),
                     child: Text(
                       hechas == 0
-                          ? 'EMPEZAR'
-                          : 'CONTINUAR: ${siguiente.titulo.toUpperCase()}',
+                          ? tr('EMPEZAR')
+                          : tr('CONTINUAR: {leccion}', {
+                              'leccion': siguiente.titulo.toUpperCase(),
+                            }),
                     ),
                   ),
                 const SizedBox(height: 10),
                 OutlinedButton.icon(
                   onPressed: () => context.push('/nivel0/sonidos'),
                   icon: const Icon(Icons.palette_outlined),
-                  label: const Text('Mapa de sonidos'),
+                  label: Text(tr('Mapa de sonidos')),
                 ),
                 const SizedBox(height: 22),
                 for (final u in n.unidades) ...[
@@ -198,15 +204,15 @@ class MapaSonidosScreen extends ConsumerWidget {
     final nivel = ref.watch(nivel0Provider);
     final practicas = ref.watch(progressProvider).practicas;
     return Scaffold(
-      appBar: AppBar(title: const Text('Mapa de sonidos')),
+      appBar: AppBar(title: Text(tr('Mapa de sonidos'))),
       body: nivel.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (_, _) =>
-            const Center(child: Text('No se pudo cargar el mapa.')),
+            Center(child: Text(tr('No se pudo cargar el mapa.'))),
         data: (n0) {
           if (n0 == null) {
-            return const Center(
-              child: Text('Este idioma aún no tiene Nivel 0.'),
+            return Center(
+              child: Text(tr('Este idioma aún no tiene Nivel 0.')),
             );
           }
           final n = n0;
@@ -290,7 +296,10 @@ class _TarjetaSonido extends StatelessWidget {
     opacity: aprendido ? 1 : .45,
     child: Semantics(
       button: true,
-      label: '${s.nombre}, color ${s.colorNombre}',
+      label: tr('{nombre}, color {color}', {
+        'nombre': s.nombre,
+        'color': s.colorNombre,
+      }),
       child: Tarjeta(
         onTap: () => decir(n, '${s.ancla}. ${s.ejemplos.join(', ')}.'),
         padding: const EdgeInsets.all(12),
@@ -322,7 +331,7 @@ class _TarjetaSonido extends StatelessWidget {
             ),
             if (!aprendido)
               Text(
-                'Unidad ${s.unidad}',
+                tr('Unidad {n}', {'n': s.unidad}),
                 style: const TextStyle(fontSize: 11, color: OL.gris),
               ),
           ],

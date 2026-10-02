@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -27,7 +28,7 @@ class _MistakesScreenState extends ConsumerState<MistakesScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.canPop() ? context.pop() : context.go('/perfil')),
-        title: const Text('Mis errores'),
+        title: Text(tr('Mis errores')),
       ),
       body: Movil(
         child: ListView(
@@ -38,12 +39,12 @@ class _MistakesScreenState extends ConsumerState<MistakesScreen> {
               child: Row(children: [
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    const Text('Repasa tus errores', style: TextStyle(color: OL.blanco, fontSize: 20, fontWeight: FontWeight.w800)),
+                    Text(tr('Repasa tus errores'), style: const TextStyle(color: OL.blanco, fontSize: 20, fontWeight: FontWeight.w800)),
                     const SizedBox(height: 4),
                     Text(
                       pendientes == 0
-                          ? 'No tienes errores pendientes. ¡Sigue así!'
-                          : 'Conviértelos en fortalezas: tienes $pendientes por practicar.',
+                          ? tr('No tienes errores pendientes. ¡Sigue así!')
+                          : tr('Conviértelos en fortalezas: tienes {n} por practicar.', {'n': pendientes}),
                       style: const TextStyle(color: Color(0xFFFFE3E6), fontSize: 13, height: 1.4),
                     ),
                   ]),
@@ -57,7 +58,7 @@ class _MistakesScreenState extends ConsumerState<MistakesScreen> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _Filtro('Todos', filtro == null, () => setState(() => filtro = null)),
+                  _Filtro(tr('Todos'), filtro == null, () => setState(() => filtro = null)),
                   for (final k in Skill.values)
                     if (s.errores.any((e) => e.skill == k))
                       _Filtro(k.nombre, filtro == k, () => setState(() => filtro = k)),
@@ -66,13 +67,13 @@ class _MistakesScreenState extends ConsumerState<MistakesScreen> {
             ),
             const SizedBox(height: 14),
             if (lista.isEmpty)
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 40),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40),
                 child: Column(children: [
-                  Icon(Icons.emoji_events_outlined, size: 48, color: OL.grisClaro),
-                  SizedBox(height: 10),
-                  Text('Aquí aparecerán los errores que cometas en lecciones, exámenes y conversaciones.',
-                      textAlign: TextAlign.center, style: TextStyle(color: OL.gris)),
+                  const Icon(Icons.emoji_events_outlined, size: 48, color: OL.grisClaro),
+                  const SizedBox(height: 10),
+                  Text(tr('Aquí aparecerán los errores que cometas en lecciones, exámenes y conversaciones.'),
+                      textAlign: TextAlign.center, style: const TextStyle(color: OL.gris)),
                 ]),
               ),
             for (final e in lista) _ErrorCard(e: e),
@@ -117,11 +118,11 @@ class _ErrorCard extends ConsumerWidget {
 
   String _hace() {
     final d = DateTime.now().difference(e.fecha);
-    if (d.inMinutes < 1) return 'ahora';
-    if (d.inHours < 1) return 'hace ${d.inMinutes} min';
-    if (d.inDays < 1) return 'hace ${d.inHours} h';
-    if (d.inDays == 1) return 'ayer';
-    return 'hace ${d.inDays} días';
+    if (d.inMinutes < 1) return tr('ahora');
+    if (d.inHours < 1) return tr('hace {n} min', {'n': d.inMinutes});
+    if (d.inDays < 1) return tr('hace {n} h', {'n': d.inHours});
+    if (d.inDays == 1) return tr('ayer');
+    return tr('hace {n} días', {'n': d.inDays});
   }
 
   @override
@@ -161,13 +162,13 @@ class _ErrorCard extends ConsumerWidget {
             ),
             const SizedBox(height: 10),
             if (e.practicado)
-              const Etiqueta('Practicado', color: OL.verde, icono: Icons.check_circle_outline)
+              Etiqueta(tr('Practicado'), color: OL.verde, icono: Icons.check_circle_outline)
             else
               OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(42)),
                 onPressed: () => _practicar(context, ref),
                 icon: const Icon(Icons.record_voice_over_outlined, size: 18),
-                label: const Text('Practicar de nuevo'),
+                label: Text(tr('Practicar de nuevo')),
               ),
           ]),
         ),
@@ -179,14 +180,14 @@ class _ErrorCard extends ConsumerWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('Escribe la forma correcta'),
+        title: Text(tr('Escribe la forma correcta')),
         content: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(e.explicacion, style: const TextStyle(color: OL.gris, fontSize: 13)),
           const SizedBox(height: 12),
-          TextField(controller: ctrl, autofocus: true, decoration: const InputDecoration(hintText: 'Tu respuesta')),
+          TextField(controller: ctrl, autofocus: true, decoration: InputDecoration(hintText: tr('Tu respuesta'))),
         ]),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancelar')),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(tr('Cancelar'))),
           ElevatedButton(
             style: ElevatedButton.styleFrom(minimumSize: const Size(120, 44)),
             onPressed: () {
@@ -195,11 +196,11 @@ class _ErrorCard extends ConsumerWidget {
               Navigator.pop(ctx);
               if (ok) ref.read(progressProvider.notifier).marcarErrorPracticado(e.id);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(ok ? '¡Correcto! Error superado.' : 'Casi. La forma correcta es: ${e.correccion}'),
+                content: Text(ok ? tr('¡Correcto! Error superado.') : tr('Casi. La forma correcta es: {forma}', {'forma': e.correccion})),
                 backgroundColor: ok ? OL.verde : OL.rojo,
               ));
             },
-            child: const Text('Comprobar'),
+            child: Text(tr('Comprobar')),
           ),
         ],
       ),

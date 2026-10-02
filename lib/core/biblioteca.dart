@@ -1,4 +1,5 @@
 import 'diagnostico.dart';
+import 'i18n/i18n.dart';
 
 /// Selección reproducible basada en evidencias; la IA interpreta, no inventa IDs.
 class RutaBiblioteca {
@@ -149,14 +150,21 @@ class RutaBiblioteca {
         .toList();
     final errores = rs.where((r) => r['correcta'] == false).length;
     if (errores > 0) {
-      return '$errores actividades con errores por reforzar. Practica y comprueba con ejemplos nuevos.';
+      return tr(
+        '{n} actividades con errores por reforzar. Practica y comprueba con ejemplos nuevos.',
+        {'n': errores},
+      );
     }
     if (rs.isNotEmpty) {
-      return 'Continúa con ejemplos nuevos y repasa lo que ya has trabajado.';
+      return tr('Continúa con ejemplos nuevos y repasa lo que ya has trabajado.');
     }
     if ((diagnostico?['skills'] as Map?)?.containsKey(skill) ?? false) {
-      return 'Seleccionado a partir de tu diagnóstico inicial. Afinaremos el perfil con tus respuestas.';
+      return tr(
+        'Seleccionado a partir de tu diagnóstico inicial. Afinaremos el perfil con tus respuestas.',
+      );
     }
-    return 'Aún necesitamos observar esta habilidad. Empieza con una práctica breve.';
+    return tr(
+      'Aún necesitamos observar esta habilidad. Empieza con una práctica breve.',
+    );
   }
 }

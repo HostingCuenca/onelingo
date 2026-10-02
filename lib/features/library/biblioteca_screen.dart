@@ -7,6 +7,7 @@ import '../../core/nivel0/nivel0.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/skill_badge.dart';
 import '../../shared/widgets/widgets.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Biblioteca: material de consulta y práctica libre, siempre del nivel del
 /// alumno (nunca se le pide elegir nivel). Lo que se enseña en orden vive en
@@ -21,61 +22,75 @@ class BibliotecaScreen extends ConsumerWidget {
     // Lecturas, escuchas y guías existen por ahora solo en inglés.
     final ingles = s.idiomaMeta == 'en';
     return Scaffold(
-      appBar: AppBar(title: const Text('Biblioteca')),
+      appBar: AppBar(title: Text(tr('Biblioteca'))),
       body: Movil(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 8, 20, 32),
           children: [
-            const Text(
-              'Lee, escucha y consulta a tu ritmo. Todo está ajustado a tu nivel.',
-              style: TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
+            Text(
+              tr(
+                'Lee, escucha y consulta a tu ritmo. Todo está ajustado a tu nivel.',
+              ),
+              style: const TextStyle(color: OL.gris, fontSize: 15, height: 1.4),
             ),
             const SizedBox(height: 16),
             _Entrada(
               icono: Icons.style_rounded,
-              titulo: 'Mis palabras',
-              detalle: 'Todo lo que has aprendido, con repaso para que no se te olvide.',
+              titulo: tr('Mis palabras'),
+              detalle: tr(
+                'Todo lo que has aprendido, con repaso para que no se te olvide.',
+              ),
               onTap: () => context.push('/palabras'),
             ),
             if (idiomasConNivel0.contains(s.idiomaMeta))
               _Entrada(
                 icono: Icons.palette_outlined,
-                titulo: 'Mapa de sonidos',
-                detalle: 'Cada sonido con su imagen y su color, para leer sin dudas.',
+                titulo: tr('Mapa de sonidos'),
+                detalle: tr(
+                  'Cada sonido con su imagen y su color, para leer sin dudas.',
+                ),
                 onTap: () => context.push('/nivel0/sonidos'),
               ),
             if (ingles) ...[
               _Entrada(
                 icono: Icons.swap_horiz_rounded,
-                titulo: 'Mis verbos',
-                detalle: 'Cómo se conjugan, con audio y práctica de los irregulares.',
+                titulo: tr('Mis verbos'),
+                detalle: tr(
+                  'Cómo se conjugan, con audio y práctica de los irregulares.',
+                ),
                 onTap: () => context.push('/verbos'),
               ),
               _Entrada(
                 habilidad: 'comprension',
-                titulo: 'Lecturas',
-                detalle: 'Textos cortos con sus palabras clave y preguntas.',
+                titulo: tr('Lecturas'),
+                detalle: tr(
+                  'Textos cortos con sus palabras clave y preguntas.',
+                ),
                 onTap: () => context.push('/estudiar?skill=comprension'),
               ),
               _Entrada(
                 habilidad: 'listening',
-                titulo: 'Escuchas',
-                detalle: 'Audios de tu nivel, con transcripción si la necesitas.',
+                titulo: tr('Escuchas'),
+                detalle: tr(
+                  'Audios de tu nivel, con transcripción si la necesitas.',
+                ),
                 onTap: () => context.push('/estudiar?skill=listening'),
               ),
               _Entrada(
                 habilidad: 'gramatica',
-                titulo: 'Guías de gramática',
-                detalle: 'Reglas con ejemplos para consultar cuando dudes.',
+                titulo: tr('Guías de gramática'),
+                detalle: tr('Reglas con ejemplos para consultar cuando dudes.'),
                 onTap: () => context.push('/gramatica?nivel=$nivel'),
               ),
             ] else
-              const Tarjeta(
+              Tarjeta(
                 color: OL.moradoSuave,
                 sombra: false,
                 child: Text(
-                  'La biblioteca de este idioma llega con su nuevo curso. Mientras tanto, practica con tu tutor y las situaciones.',
-                  style: TextStyle(fontSize: 15, height: 1.4),
+                  tr(
+                    'La biblioteca de este idioma llega con su nuevo curso. Mientras tanto, practica con tu tutor y las situaciones.',
+                  ),
+                  style: const TextStyle(fontSize: 15, height: 1.4),
                 ),
               ),
           ],

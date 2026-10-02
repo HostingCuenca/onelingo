@@ -1,20 +1,24 @@
-const sectoresAprendizaje = <String, String>{
-  'estudiante': 'Estudiante',
-  'tecnologia': 'Tecnología e ingeniería',
-  'salud': 'Salud y bienestar',
-  'negocios': 'Negocios y administración',
-  'ventas': 'Ventas y atención al cliente',
-  'educacion': 'Educación e investigación',
-  'turismo': 'Turismo y hostelería',
-  'general': 'Otros sectores / vida cotidiana',
+import 'i18n/i18n.dart';
+
+/// Sectores (id → nombre visible en el idioma de la interfaz).
+Map<String, String> get sectoresAprendizaje => {
+  'estudiante': tr('Estudiante'),
+  'tecnologia': tr('Tecnología e ingeniería'),
+  'salud': tr('Salud y bienestar'),
+  'negocios': tr('Negocios y administración'),
+  'ventas': tr('Ventas y atención al cliente'),
+  'educacion': tr('Educación e investigación'),
+  'turismo': tr('Turismo y hostelería'),
+  'general': tr('Otros sectores / vida cotidiana'),
 };
-const objetivosAprendizaje = <String, String>{
-  'conversar': 'Conversar con confianza',
-  'trabajar': 'Reuniones y trabajo en equipo',
-  'entrevistas': 'Entrevistas y oportunidades',
-  'viajar': 'Viajar y vivir en otro país',
-  'estudiar': 'Estudiar y entender contenidos',
-  'clientes': 'Atender y comunicarme con clientes',
-  'escribir': 'Escribir mensajes y correos',
-  'escuchar': 'Entender conversaciones y videos',
+/// Objetivos (id → nombre visible en el idioma de la interfaz).
+Map<String, String> get objetivosAprendizaje => {
+  'conversar': tr('Conversar con confianza'),
+  'trabajar': tr('Reuniones y trabajo en equipo'),
+  'entrevistas': tr('Entrevistas y oportunidades'),
+  'viajar': tr('Viajar y vivir en otro país'),
+  'estudiar': tr('Estudiar y entender contenidos'),
+  'clientes': tr('Atender y comunicarme con clientes'),
+  'escribir': tr('Escribir mensajes y correos'),
+  'escuchar': tr('Entender conversaciones y videos'),
 };

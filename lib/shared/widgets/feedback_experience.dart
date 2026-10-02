@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import 'lumo.dart';
 import '../../core/efectos.dart';
+import '../../core/i18n/i18n.dart';
 
 class SoundToggle extends StatelessWidget {
   const SoundToggle({super.key});
@@ -12,7 +13,7 @@ class SoundToggle extends StatelessWidget {
   Widget build(BuildContext context) => ValueListenableBuilder<bool>(
     valueListenable: Efectos.sonidos,
     builder: (_, enabled, _) => IconButton(
-      tooltip: enabled ? 'Silenciar efectos' : 'Activar efectos',
+      tooltip: enabled ? tr('Silenciar efectos') : tr('Activar efectos'),
       onPressed: () => Efectos.cambiarSonido(!enabled),
       icon: Icon(enabled ? Icons.volume_up_rounded : Icons.volume_off_rounded),
     ),
@@ -238,20 +239,20 @@ class EffectsSettings extends StatelessWidget {
     children: [
       _switch(
         Efectos.sonidos,
-        'Sonidos de práctica',
-        'Aciertos, errores y actividades completadas',
+        tr('Sonidos de práctica'),
+        tr('Aciertos, errores y actividades completadas'),
         Efectos.cambiarSonido,
       ),
       _switch(
         Efectos.animaciones,
-        'Animaciones de práctica',
-        'Celebraciones y transiciones breves',
+        tr('Animaciones de práctica'),
+        tr('Celebraciones y transiciones breves'),
         Efectos.cambiarAnimaciones,
       ),
       _switch(
         Efectos.vibraciones,
-        'Vibración suave',
-        'En dispositivos compatibles',
+        tr('Vibración suave'),
+        tr('En dispositivos compatibles'),
         Efectos.cambiarVibracion,
       ),
     ],
@@ -299,7 +300,7 @@ Future<String?> mostrarPanelResultado(
   required String titulo,
   required Widget cuerpo,
   bool reintentar = false,
-  String boton = 'SIGUIENTE',
+  String? boton,
   bool lumo = true,
 }) {
   final pose = correcto ? PoseLumo.acierto() : PoseLumo.errorAmable;
@@ -382,7 +383,7 @@ Future<String?> mostrarPanelResultado(
                     ),
                     onPressed: () => Navigator.of(context).pop('siguiente'),
                     child: Text(
-                      boton,
+                      boton ?? tr('SIGUIENTE'),
                       style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w900,
@@ -394,7 +395,7 @@ Future<String?> mostrarPanelResultado(
                     TextButton.icon(
                       onPressed: () => Navigator.of(context).pop('reintentar'),
                       icon: const Icon(Icons.replay_rounded),
-                      label: const Text('Intentar otra vez ahora'),
+                      label: Text(tr('Intentar otra vez ahora')),
                     ),
                 ],
               ),

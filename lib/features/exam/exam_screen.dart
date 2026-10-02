@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/curriculum.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -128,7 +129,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  'Examen final · Nivel ${widget.nivel}',
+                  tr('Examen final · Nivel {n}', {'n': widget.nivel}),
                   style: const TextStyle(
                     color: OL.gris,
                     fontSize: 12,
@@ -138,8 +139,8 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                 const SizedBox(height: 8),
                 Text(
                   p.type == StepType.fillBlank
-                      ? 'Completa la frase'
-                      : 'Elige la respuesta correcta',
+                      ? tr('Completa la frase')
+                      : tr('Elige la respuesta correcta'),
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 14),
@@ -184,14 +185,14 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                   BotonPrincipal(
                     color: OL.naranja,
                     onPressed: seleccion.isEmpty ? null : _comprobar,
-                    child: const Text('RESPONDER'),
+                    child: Text(tr('RESPONDER')),
                   )
                 else
                   BotonPrincipal(
                     color: correcto! ? OL.verde : OL.rojo,
                     onPressed: _siguiente,
                     child: Text(
-                      i + 1 < preguntas.length ? 'SIGUIENTE' : 'VER RESULTADO',
+                      i + 1 < preguntas.length ? tr('SIGUIENTE') : tr('VER RESULTADO'),
                     ),
                   ),
               ],
@@ -203,7 +204,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   }
 
   Widget _intro(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text('Examen · Nivel ${widget.nivel}')),
+    appBar: AppBar(title: Text(tr('Examen · Nivel {n}', {'n': widget.nivel}))),
     body: Movil(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -214,42 +215,42 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
               gradient: OL.gradienteNaranja,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Icon(
+                children: [
+                  const Icon(
                     Icons.workspace_premium_outlined,
                     color: OL.blanco,
                     size: 40,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    'Examen final del nivel',
-                    style: TextStyle(
+                    tr('Examen final del nivel'),
+                    style: const TextStyle(
                       color: OL.blanco,
                       fontSize: 22,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   Text(
-                    'Demuestra lo que aprendiste en las 100 lecciones.',
-                    style: TextStyle(color: Color(0xFFFFF3E0)),
+                    tr('Demuestra lo que aprendiste en las 100 lecciones.'),
+                    style: const TextStyle(color: Color(0xFFFFF3E0)),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-            const _Regla(
+            _Regla(
               Icons.quiz_outlined,
-              '$totalPreguntas preguntas mezcladas de todas las unidades',
+              tr('{n} preguntas mezcladas de todas las unidades', {'n': totalPreguntas}),
             ),
-            const _Regla(Icons.percent, 'Necesitas 65 % o más para aprobar'),
-            const _Regla(
+            _Regla(Icons.percent, tr('Necesitas 65 % o más para aprobar')),
+            _Regla(
               Icons.lock_open_outlined,
-              'Al aprobar se desbloquea el siguiente nivel automáticamente',
+              tr('Al aprobar se desbloquea el siguiente nivel automáticamente'),
             ),
-            const _Regla(
+            _Regla(
               Icons.replay,
-              'Si no apruebas, repasa tus errores y vuelve a intentarlo',
+              tr('Si no apruebas, repasa tus errores y vuelve a intentarlo'),
             ),
             const Spacer(),
             BotonPrincipal(
@@ -257,7 +258,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
               onPressed: preguntas.isEmpty
                   ? null
                   : () => setState(() => empezado = true),
-              child: const Text('EMPEZAR EXAMEN'),
+              child: Text(tr('EMPEZAR EXAMEN')),
             ),
           ],
         ),
@@ -291,7 +292,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  aprobado ? '¡APROBADO!' : 'NO APROBADO',
+                  aprobado ? tr('¡APROBADO!') : tr('NO APROBADO'),
                   style: Theme.of(context).textTheme.headlineLarge
                       ?.copyWith(color: aprobado ? OL.verde : OL.rojo),
                 ),
@@ -299,9 +300,9 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                 Text(
                   aprobado
                       ? (ultimo
-                            ? 'Completaste el nivel máximo del programa.'
-                            : 'El Nivel ${widget.nivel + 1} ya está desbloqueado.')
-                      : 'Necesitas 65 %. Repasa tus errores y vuelve a presentar el examen.',
+                            ? tr('Completaste el nivel máximo del programa.')
+                            : tr('El Nivel {n} ya está desbloqueado.', {'n': widget.nivel + 1}))
+                      : tr('Necesitas 65 %. Repasa tus errores y vuelve a presentar el examen.'),
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: OL.gris, height: 1.5),
                 ),
@@ -310,8 +311,8 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _Dato('$aciertos/${preguntas.length}', 'Aciertos'),
-                      _Dato('${Level.minimoAprobacion}%', 'Mínimo'),
+                      _Dato('$aciertos/${preguntas.length}', tr('Aciertos')),
+                      _Dato('${Level.minimoAprobacion}%', tr('Mínimo')),
                       _Dato(aprobado ? '+200' : '+20', 'XP'),
                     ],
                   ),
@@ -331,15 +332,15 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                   child: Text(
                     aprobado
                         ? (ultimo
-                              ? 'VER MI LOGRO'
-                              : 'IR AL NIVEL ${widget.nivel + 1}')
-                        : 'REPASAR MIS ERRORES',
+                              ? tr('VER MI LOGRO')
+                              : tr('IR AL NIVEL {n}', {'n': widget.nivel + 1}))
+                        : tr('REPASAR MIS ERRORES'),
                   ),
                 ),
                 const SizedBox(height: 10),
                 OutlinedButton(
                   onPressed: () => context.go('/inicio'),
-                  child: const Text('Volver al inicio'),
+                  child: Text(tr('Volver al inicio')),
                 ),
               ],
             ),

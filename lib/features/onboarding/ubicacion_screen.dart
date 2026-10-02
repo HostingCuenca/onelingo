@@ -10,6 +10,7 @@ import '../../core/api/sync.dart';
 import '../../core/aprendizaje/ubicacion.dart';
 import '../../core/diagnostico.dart';
 import '../../core/efectos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../ruta/item_view.dart';
@@ -31,27 +32,31 @@ class UbicacionScreen extends ConsumerStatefulWidget {
 enum _Fase { cargando, pregunta, intro, test, escritura, resultado }
 
 class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
-  static const _opciones = [
-    (Autodeclaracion.nada, 'Nada, empiezo de cero', 'Nunca lo he estudiado'),
+  static List<(Autodeclaracion, String, String)> get _opciones => [
+    (
+      Autodeclaracion.nada,
+      tr('Nada, empiezo de cero'),
+      tr('Nunca lo he estudiado'),
+    ),
     (
       Autodeclaracion.poco,
-      'Un poco',
-      'Saludos, palabras sueltas, frases simples',
+      tr('Un poco'),
+      tr('Saludos, palabras sueltas, frases simples'),
     ),
     (
       Autodeclaracion.defiendo,
-      'Me defiendo',
-      'Conversaciones cotidianas sencillas',
+      tr('Me defiendo'),
+      tr('Conversaciones cotidianas sencillas'),
     ),
     (
       Autodeclaracion.bastante,
-      'Bastante',
-      'Entiendo textos y conversaciones normales',
+      tr('Bastante'),
+      tr('Entiendo textos y conversaciones normales'),
     ),
     (
       Autodeclaracion.avanzado,
-      'Avanzado',
-      'Uso el inglés en el trabajo o los estudios',
+      tr('Avanzado'),
+      tr('Uso el inglés en el trabajo o los estudios'),
     ),
   ];
 
@@ -84,7 +89,9 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
       );
       banco = ItemUbicacion.banco(jsonDecode(raw) as Map<String, dynamic>);
     } catch (e) {
-      error = 'No pudimos cargar la prueba. Revisa la conexión e inténtalo otra vez.';
+      error = tr(
+        'No pudimos cargar la prueba. Revisa la conexión e inténtalo otra vez.',
+      );
     }
     if (!mounted) return;
     final nivel = widget.configuracion['nivel'];
@@ -185,10 +192,10 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Prueba de nivel'),
+        title: Text(tr('Prueba de nivel')),
         leading: IconButton(
           icon: const Icon(Icons.close),
-          tooltip: 'Salir',
+          tooltip: tr('Salir'),
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/inicio'),
         ),
@@ -227,14 +234,16 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        '¿Cuánto inglés sabes?',
+        tr('¿Cuánto inglés sabes?'),
         style: Theme.of(context).textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.w900),
       ),
       const SizedBox(height: 8),
-      const Text(
-        'Así empezamos la prueba en tu nivel. Dura unos 8 minutos y se adapta: '
-        'sube de dificultad mientras aciertas y se detiene cuando llega a tu límite.',
+      Text(
+        tr(
+          'Así empezamos la prueba en tu nivel. Dura unos 8 minutos y se adapta: '
+          'sube de dificultad mientras aciertas y se detiene cuando llega a tu límite.',
+        ),
       ),
       if (error != null) ...[
         const SizedBox(height: 12),
@@ -265,25 +274,27 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        'Comprobemos tu inglés',
+        tr('Comprobemos tu inglés'),
         style: Theme.of(context).textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.w900),
       ),
       const SizedBox(height: 10),
-      const Text(
-        'Unos 8 minutos: escucha, lectura, gramática y vocabulario, y al final '
-        'una o dos frases escritas. La prueba se adapta a ti: si algo es '
-        'demasiado difícil, no pasa nada, es justo lo que buscamos.',
+      Text(
+        tr(
+          'Unos 8 minutos: escucha, lectura, gramática y vocabulario, y al final '
+          'una o dos frases escritas. La prueba se adapta a ti: si algo es '
+          'demasiado difícil, no pasa nada, es justo lo que buscamos.',
+        ),
       ),
       const SizedBox(height: 24),
-      FilledButton(onPressed: _siguiente, child: const Text('Empezar')),
+      FilledButton(onPressed: _siguiente, child: Text(tr('Empezar'))),
       const SizedBox(height: 8),
       TextButton(
         onPressed: () => setState(() {
           u = Ubicacion(banco: banco, declarado: Autodeclaracion.nada);
           _mostrarResultado();
         }),
-        child: const Text('Prefiero empezar desde cero'),
+        child: Text(tr('Prefiero empezar desde cero')),
       ),
     ],
   );
@@ -297,7 +308,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
         Row(
           children: [
             Chip(
-              label: Text(nombresHabilidad[i.habilidad] ?? i.habilidad),
+              label: Text(_habilidad(i.habilidad)),
               backgroundColor: OL.moradoSuave,
             ),
             const Spacer(),
@@ -307,15 +318,17 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
                   u!.omitirEscritura();
                   _mostrarResultado();
                 },
-                child: const Text('Omitir'),
+                child: Text(tr('Omitir')),
               ),
           ],
         ),
         if (escritura)
-          const Padding(
-            padding: EdgeInsets.only(bottom: 8),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
             child: Text(
-              'Último paso: escribe con tus palabras. Si prefieres, puedes omitirlo.',
+              tr(
+                'Último paso: escribe con tus palabras. Si prefieres, puedes omitirlo.',
+              ),
             ),
           ),
         ItemView(
@@ -345,17 +358,24 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
       padding: const EdgeInsets.all(20),
       children: [
         Text(
-          r.desdeCero ? 'Empiezas desde cero' : 'Tu nivel: N${r.nivel}',
+          r.desdeCero
+              ? tr('Empiezas desde cero')
+              : tr('Tu nivel: N{nivel}', {'nivel': r.nivel}),
           style: t.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 6),
         Text(
           r.desdeCero
-              ? 'Perfecto: te guiamos paso a paso desde los sonidos y las '
-                    'primeras frases. Avanzarás rápido.'
-              : '${cefrNivel(r.nivel)} · ${r.preguntas} preguntas. '
-                    'Empieza en la primera clase del nivel; los niveles '
-                    'anteriores quedan disponibles para repasar.',
+              ? tr(
+                  'Perfecto: te guiamos paso a paso desde los sonidos y las '
+                  'primeras frases. Avanzarás rápido.',
+                )
+              : tr(
+                  '{cefr} · {preguntas} preguntas. '
+                  'Empieza en la primera clase del nivel; los niveles '
+                  'anteriores quedan disponibles para repasar.',
+                  {'cefr': cefrNivel(r.nivel), 'preguntas': r.preguntas},
+                ),
         ),
         if (!r.desdeCero) ...[
           const SizedBox(height: 20),
@@ -364,12 +384,15 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
           if (r.reforzar.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
-              'Te conviene reforzar: '
-              '${r.reforzar.map((h) => nombresHabilidad[h]!.toLowerCase()).join(', ')}.',
+              tr('Te conviene reforzar: {habilidades}.', {
+                'habilidades': r.reforzar
+                    .map((h) => _habilidad(h).toLowerCase())
+                    .join(', '),
+              }),
             ),
           ],
           const SizedBox(height: 20),
-          Text('¿Dónde quieres empezar?', style: t.titleMedium),
+          Text(tr('¿Dónde quieres empezar?'), style: t.titleMedium),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
@@ -378,7 +401,11 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
               // la prueba de cada nivel.
               for (final n in {if (r.nivel > 1) r.nivel - 1, r.nivel})
                 ChoiceChip(
-                  label: Text(n == r.nivel ? 'N$n (recomendado)' : 'N$n'),
+                  label: Text(
+                    n == r.nivel
+                        ? tr('N{n} (recomendado)', {'n': n})
+                        : 'N$n',
+                  ),
                   selected: nivel == n,
                   onSelected: (_) => setState(() => elegido = n),
                 ),
@@ -389,7 +416,9 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
         FilledButton(
           onPressed: () => _terminar(nivel),
           child: Text(
-            r.desdeCero ? 'Empezar desde cero' : 'Empezar en N$nivel',
+            r.desdeCero
+                ? tr('Empezar desde cero')
+                : tr('Empezar en N{nivel}', {'nivel': nivel}),
           ),
         ),
       ],
@@ -400,7 +429,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.only(bottom: 10),
     child: Row(
       children: [
-        SizedBox(width: 110, child: Text(nombresHabilidad[h] ?? h)),
+        SizedBox(width: 110, child: Text(_habilidad(h))),
         Expanded(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6),
@@ -415,7 +444,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
         SizedBox(
           width: 52,
           child: Text(
-            nivel == 0 ? 'inicio' : 'N$nivel',
+            nivel == 0 ? tr('inicio') : 'N$nivel',
             textAlign: TextAlign.end,
             style: const TextStyle(fontWeight: FontWeight.w800),
           ),
@@ -425,7 +454,18 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
   );
 }
 
+/// Nombre de la habilidad (`nombresHabilidad`) en el idioma de la interfaz.
+String _habilidad(String h) => switch (h) {
+  'escucha' => tr('Escucha'),
+  'lectura' => tr('Lectura'),
+  'gramatica' => tr('Gramática'),
+  'vocabulario' => tr('Vocabulario'),
+  'escritura' => tr('Escritura'),
+  _ => nombresHabilidad[h] ?? h,
+};
+
 /// MCER de cada nivel del curso (escala cliente).
+/// Ojo: también se guarda en el diagnóstico (`cefr`), por eso no se traduce aquí.
 String cefrNivel(int nivel) => switch (nivel) {
   <= 0 => 'Desde cero',
   1 => 'A1',

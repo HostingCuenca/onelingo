@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/content/curriculum.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -37,9 +38,9 @@ class ProgramCompleteScreen extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 28),
-                  const Text(
-                    'PROGRAMA COMPLETADO',
-                    style: TextStyle(
+                  Text(
+                    tr('PROGRAMA COMPLETADO'),
+                    style: const TextStyle(
                       color: OL.naranja,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 2,
@@ -47,15 +48,18 @@ class ProgramCompleteScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '¡Felicidades, ${s.nombre.split(' ').first}!',
+                    tr('¡Felicidades, {nombre}!', {'nombre': s.nombre.split(' ').first}),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headlineLarge
                         ?.copyWith(color: OL.blanco),
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Completaste los 10 niveles de ${idioma(s.idiomaMeta).nombre}: 1 000 lecciones, '
-                    '10 exámenes y el Nivel Dominio. Ya te comunicas con naturalidad.',
+                    tr(
+                      'Completaste los 10 niveles de {idioma}: 1 000 lecciones, '
+                      '10 exámenes y el Nivel Dominio. Ya te comunicas con naturalidad.',
+                      {'idioma': idioma(s.idiomaMeta).nombre},
+                    ),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: Color(0xFFE0D8FF),
@@ -65,23 +69,23 @@ class ProgramCompleteScreen extends ConsumerWidget {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      _Dato('${s.xp}', 'XP totales'),
-                      _Dato('${s.completadas.length}', 'Lecciones'),
-                      _Dato('${s.segundosEstudio ~/ 3600} h', 'Estudio'),
+                      _Dato('${s.xp}', tr('XP totales')),
+                      _Dato('${s.completadas.length}', tr('Lecciones')),
+                      _Dato('${s.segundosEstudio ~/ 3600} h', tr('Estudio')),
                     ],
                   ),
                   const Spacer(),
                   BotonPrincipal(
                     color: OL.naranja,
                     onPressed: () => context.go('/practicar'),
-                    child: const Text('SEGUIR PRACTICANDO CON IA'),
+                    child: Text(tr('SEGUIR PRACTICANDO CON IA')),
                   ),
                   const SizedBox(height: 10),
                   TextButton(
                     onPressed: () => context.go('/planes'),
-                    child: const Text(
-                      'Aprender otro idioma',
-                      style: TextStyle(color: OL.blanco),
+                    child: Text(
+                      tr('Aprender otro idioma'),
+                      style: const TextStyle(color: OL.blanco),
                     ),
                   ),
                 ],

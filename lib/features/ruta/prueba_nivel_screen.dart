@@ -12,6 +12,7 @@ import '../../core/efectos.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import 'item_view.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Prueba para saltar un nivel: 20 preguntas de evaluación repartidas por
 /// todo el nivel; con 16 aciertos el nivel cuenta como superado y se abre el
@@ -84,13 +85,16 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
         .where((n) => n.id == widget.nivel)
         .firstOrNull;
     final nombreNivel = datos == null
-        ? 'este nivel'
-        : 'el Nivel ${datos.nivelInterno ?? ''}';
+        ? tr('este nivel')
+        : tr('el Nivel {n}', {'n': datos.nivelInterno ?? ''});
+    final nivelTitulo = datos == null
+        ? tr('este nivel')
+        : tr('Nivel {n}', {'n': datos.nivelInterno ?? ''});
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prueba de ${nombreNivel.replaceFirst('el ', '')}'),
+        title: Text(tr('Prueba de {nivel}', {'nivel': nivelTitulo})),
         leading: IconButton(
-          tooltip: 'Salir',
+          tooltip: tr('Salir'),
           icon: const Icon(Icons.close_rounded),
           onPressed: () => context.canPop()
               ? context.pop()
@@ -119,16 +123,22 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
             const Icon(Icons.workspace_premium_rounded, color: OL.morado, size: 64),
             const SizedBox(height: 12),
             Text(
-              '¿Ya dominas $nombreNivel?',
+              tr('¿Ya dominas {nivel}?', {'nivel': nombreNivel}),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 12),
             Text(
-              '$preguntasPruebaNivel preguntas de todo el nivel. Con '
-              '$aciertosPruebaNivel aciertos lo das por superado y pasas al '
-              'siguiente. Si no llegas, sigues aprendiendo donde estás: no '
-              'pierdes nada y puedes intentarlo otra vez.',
+              tr(
+                '{preguntas} preguntas de todo el nivel. Con '
+                '{aciertos} aciertos lo das por superado y pasas al '
+                'siguiente. Si no llegas, sigues aprendiendo donde estás: no '
+                'pierdes nada y puedes intentarlo otra vez.',
+                {
+                  'preguntas': preguntasPruebaNivel,
+                  'aciertos': aciertosPruebaNivel,
+                },
+              ),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, height: 1.45),
             ),
@@ -139,7 +149,7 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: BotonPrincipal(
           onPressed: () => _empezar(ruta),
-          child: const Text('EMPEZAR LA PRUEBA'),
+          child: Text(tr('EMPEZAR LA PRUEBA')),
         ),
       ),
     ],
@@ -207,21 +217,29 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                aprobada ? '¡Superaste $nombreNivel!' : 'Todavía no',
+                aprobada
+                    ? tr('¡Superaste {nivel}!', {'nivel': nombreNivel})
+                    : tr('Todavía no'),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 8),
               Text(
-                '$aciertos de ${items.length} aciertos.',
+                tr('{aciertos} de {total} aciertos.', {
+                  'aciertos': aciertos,
+                  'total': items.length,
+                }),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 12),
               Text(
                 aprobada
-                    ? 'Este nivel queda superado y se abre el siguiente. Sus clases siguen disponibles para repasar.'
-                    : 'Necesitas $aciertosPruebaNivel. Sigue con las clases del nivel: cada una te acerca, y puedes repetir la prueba cuando quieras.',
+                    ? tr('Este nivel queda superado y se abre el siguiente. Sus clases siguen disponibles para repasar.')
+                    : tr(
+                        'Necesitas {aciertos}. Sigue con las clases del nivel: cada una te acerca, y puedes repetir la prueba cuando quieras.',
+                        {'aciertos': aciertosPruebaNivel},
+                      ),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16, height: 1.45),
               ),
@@ -238,8 +256,8 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
             ),
             child: Text(
               aprobada && siguiente != null
-                  ? 'IR AL SIGUIENTE NIVEL'
-                  : 'VOLVER AL NIVEL',
+                  ? tr('IR AL SIGUIENTE NIVEL')
+                  : tr('VOLVER AL NIVEL'),
             ),
           ),
         ),

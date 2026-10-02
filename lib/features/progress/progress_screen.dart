@@ -28,12 +28,12 @@ class ProgressScreen extends ConsumerWidget {
     final plan = planes.where((p) => p.id == s.planId).firstOrNull;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Mi progreso')),
+      appBar: AppBar(title: Text(tr('Mi progreso'))),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
         children: [
-          const MascotCoach(
-            message: 'Tu progreso se construye practicando y repasando. Cada habilidad cuenta.',
+          MascotCoach(
+            message: tr('Tu progreso se construye practicando y repasando. Cada habilidad cuenta.'),
           ),
           Tarjeta(
             child: Row(
@@ -68,9 +68,9 @@ class ProgressScreen extends ConsumerWidget {
                         spacing: 6,
                         runSpacing: 6,
                         children: [
-                          Etiqueta('Nivel $n · ${nivel(n).nombre}'),
+                          Etiqueta(tr('Nivel {n} · {nombre}', {'n': n, 'nombre': nivel(n).nombre})),
                           Etiqueta(
-                            plan == null ? 'Prueba gratuita' : plan.nombre,
+                            plan == null ? tr('Prueba gratuita') : plan.nombre,
                             color: plan == null
                                 ? const Color(0xFF9A6B00)
                                 : OL.verde,
@@ -96,55 +96,57 @@ class ProgressScreen extends ConsumerWidget {
               _Stat(Icons.bolt_outlined, '${s.xp}', 'XP', OL.naranja),
               _Stat(
                 Icons.local_fire_department_outlined,
-                '${s.rachaVigente} ${s.rachaVigente == 1 ? 'día' : 'días'}',
-                'Racha',
+                s.rachaVigente == 1
+                    ? tr('{n} día', {'n': s.rachaVigente})
+                    : tr('{n} días', {'n': s.rachaVigente}),
+                tr('Racha'),
                 OL.rojo,
               ),
               _Stat(
                 Icons.schedule_outlined,
                 '${s.segundosEstudio ~/ 60} min',
-                'Tiempo de estudio',
+                tr('Tiempo de estudio'),
                 OL.azul,
               ),
               _Stat(
                 Icons.menu_book_outlined,
                 '${ref.watch(misPalabrasProvider).valueOrNull?.length ?? s.vocabularioAprendido}',
-                'Mis palabras',
+                tr('Mis palabras'),
                 OL.verde,
               ),
               _Stat(
                 Icons.check_circle_outline,
                 '${s.completadas.length}',
-                'Lecciones completadas',
+                tr('Lecciones completadas'),
                 OL.morado,
               ),
               _Stat(
                 Icons.flag_outlined,
-                'Lección ${s.leccionActual(n)?.numero ?? 100}',
-                'Lección actual',
+                tr('Lección {n}', {'n': s.leccionActual(n)?.numero ?? 100}),
+                tr('Lección actual'),
                 OL.morado,
               ),
             ],
           ),
           const SizedBox(height: 20),
           if (s.idiomaMeta == 'en') ...[
-            const TituloSeccion('Práctica de inglés'),
+            TituloSeccion(tr('Práctica de inglés')),
             const SizedBox(height: 10),
             Tarjeta(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
-                    'Tu actividad por área',
-                    style: TextStyle(fontWeight: FontWeight.w900),
+                  Text(
+                    tr('Tu actividad por área'),
+                    style: const TextStyle(fontWeight: FontWeight.w900),
                   ),
                   const SizedBox(height: 8),
-                  for (final entry in const {
-                    'vocabulario': 'Vocabulario',
-                    'gramatica': 'Gramática',
-                    'comprension': 'Lectura',
-                    'listening': 'Listening',
-                    'escritura': 'Escritura',
+                  for (final entry in {
+                    'vocabulario': tr('Vocabulario'),
+                    'gramatica': tr('Gramática'),
+                    'comprension': tr('Lectura'),
+                    'listening': tr('Listening'),
+                    'escritura': tr('Escritura'),
                   }.entries)
                     Builder(
                       builder: (context) {
@@ -162,22 +164,22 @@ class ProgressScreen extends ConsumerWidget {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 6),
                           child: Text(
-                            '${entry.value}: ${items.length} actividades · $review por reforzar',
+                            tr('{area}: {n} actividades · {review} por reforzar', {'area': entry.value, 'n': items.length, 'review': review}),
                           ),
                         );
                       },
                     ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Estas cifras muestran práctica, no dominio. Los aciertos con ayuda se guardan por separado de las evaluaciones de nivel.',
-                    style: TextStyle(fontSize: 14, color: OL.gris, height: 1.4),
+                  Text(
+                    tr('Estas cifras muestran práctica, no dominio. Los aciertos con ayuda se guardan por separado de las evaluaciones de nivel.'),
+                    style: const TextStyle(fontSize: 14, color: OL.gris, height: 1.4),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
           ],
-          const TituloSeccion('Lecciones por habilidad'),
+          TituloSeccion(tr('Lecciones por habilidad')),
           const SizedBox(height: 10),
           Tarjeta(
             child: Column(
@@ -230,7 +232,7 @@ class ProgressScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const TituloSeccion('Niveles y exámenes'),
+          TituloSeccion(tr('Niveles y exámenes')),
           const SizedBox(height: 10),
           Tarjeta(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -253,7 +255,7 @@ class ProgressScreen extends ConsumerWidget {
                           : OL.gris,
                     ),
                     title: Text(
-                      'Nivel ${lvl.numero} · ${lvl.nombre}',
+                      tr('Nivel {n} · {nombre}', {'n': lvl.numero, 'nombre': lvl.nombre}),
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
@@ -261,9 +263,9 @@ class ProgressScreen extends ConsumerWidget {
                     ),
                     trailing: Text(
                       lvl.numero < s.nivelInicial
-                          ? 'Convalidado'
+                          ? tr('Convalidado')
                           : s.examenes.containsKey(lvl.numero)
-                          ? 'Examen ${s.examenes[lvl.numero]}%'
+                          ? tr('Examen {nota}%', {'nota': s.examenes[lvl.numero]})
                           : '${s.completadasEnNivel(lvl.numero)}/100',
                       style: TextStyle(
                         color:
@@ -282,33 +284,33 @@ class ProgressScreen extends ConsumerWidget {
           const SizedBox(height: 20),
           _Fila(
             Icons.quiz_outlined,
-            'Prueba de nivel',
-            'Vuelve a medir tu nivel y ajusta tu punto de partida',
+            tr('Prueba de nivel'),
+            tr('Vuelve a medir tu nivel y ajusta tu punto de partida'),
             () => context.push('/prueba-nivel'),
           ),
           _Fila(
             Icons.fact_check_outlined,
-            'Mis errores',
-            '${s.errores.where((e) => !e.practicado).length} por practicar',
+            tr('Mis errores'),
+            tr('{n} por practicar', {'n': s.errores.where((e) => !e.practicado).length}),
             () => context.push('/errores'),
           ),
           _Fila(
             Icons.smart_toy_outlined,
-            'Tutor de IA',
+            tr('Tutor de IA'),
             '${t.nombre} · ${nombrePersonalidad(t.personalidad)}',
             () => context.push('/tutores'),
           ),
           _Fila(
             Icons.workspace_premium_outlined,
-            'Plan de suscripción',
+            tr('Plan de suscripción'),
             plan?.nombre ??
-                'Prueba gratuita · ${s.trialRestante ~/ 60} min restantes',
+                tr('Prueba gratuita · {min} min restantes', {'min': s.trialRestante ~/ 60}),
             () => context.push('/planes'),
           ),
           const SizedBox(height: 16),
-          const Text(
-            'Tu experiencia',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+          Text(
+            tr('Tu experiencia'),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           // Idioma de la app: los nombres van siempre en su propio idioma
@@ -339,32 +341,32 @@ class ProgressScreen extends ConsumerWidget {
             onPressed: () => showDialog(
               context: context,
               builder: (ctx) => AlertDialog(
-                title: const Text('¿Reiniciar la demo?'),
-                content: const Text(
-                  'Se borra el progreso local y vuelves al registro.',
+                title: Text(tr('¿Reiniciar la demo?')),
+                content: Text(
+                  tr('Se borra el progreso local y vuelves al registro.'),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(ctx),
-                    child: const Text('Cancelar'),
+                    child: Text(tr('Cancelar')),
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(ctx);
                       ref.read(progressProvider.notifier).reiniciar();
                     },
-                    child: const Text(
-                      'Reiniciar',
-                      style: TextStyle(color: OL.rojo),
+                    child: Text(
+                      tr('Reiniciar'),
+                      style: const TextStyle(color: OL.rojo),
                     ),
                   ),
                 ],
               ),
             ),
             icon: const Icon(Icons.logout, color: OL.rojo, size: 18),
-            label: const Text(
-              'Cerrar sesión / reiniciar demo',
-              style: TextStyle(color: OL.rojo),
+            label: Text(
+              tr('Cerrar sesión / reiniciar demo'),
+              style: const TextStyle(color: OL.rojo),
             ),
           ),
         ],

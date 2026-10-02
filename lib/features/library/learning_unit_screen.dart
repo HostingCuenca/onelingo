@@ -12,6 +12,7 @@ import '../../shared/widgets/mascot_coach.dart';
 import '../../shared/widgets/skill_badge.dart';
 import '../../shared/widgets/widgets.dart';
 import '../ruta/opcion_respuesta.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Pasos de una lectura/escucha graduada.
 enum _Paso { elegir, antes, texto, pregunta, final_ }
@@ -104,9 +105,11 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
   void avisarSinAudio() {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
+      SnackBar(
         content: Text(
-          'No se pudo reproducir el audio. Comprueba tu conexión y vuelve a intentarlo.',
+          tr(
+            'No se pudo reproducir el audio. Comprueba tu conexión y vuelve a intentarlo.',
+          ),
         ),
       ),
     );
@@ -194,9 +197,9 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
     },
     child: Scaffold(
       appBar: AppBar(
-        title: Text(listening ? 'Escucha' : 'Lectura'),
+        title: Text(listening ? tr('Escucha') : tr('Lectura')),
         leading: IconButton(
-          tooltip: 'Volver',
+          tooltip: tr('Volver'),
           icon: const Icon(Icons.arrow_back_rounded),
           onPressed: volver,
         ),
@@ -209,17 +212,15 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
               error: (_, _) => Center(
                 child: TextButton(
                   onPressed: () => ref.invalidate(learningUnitsProvider(skill)),
-                  child: const Text('No se pudo cargar. Reintentar'),
+                  child: Text(tr('No se pudo cargar. Reintentar')),
                 ),
               ),
               data: (units) {
                 final level = nivelCon(units);
-                final available = units
-                    .where((u) => u.level == level)
-                    .toList();
+                final available = units.where((u) => u.level == level).toList();
                 if (available.isEmpty) {
-                  return const Center(
-                    child: Text('Pronto habrá material para tu nivel.'),
+                  return Center(
+                    child: Text(tr('Pronto habrá material para tu nivel.')),
                   );
                 }
                 final unit = available.firstWhere(
@@ -285,7 +286,7 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              listening ? 'Elige qué escuchar' : 'Elige qué leer',
+              listening ? tr('Elige qué escuchar') : tr('Elige qué leer'),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
@@ -293,7 +294,7 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
       ),
       const SizedBox(height: 6),
       Text(
-        'Nivel $level',
+        tr('Nivel {n}', {'n': level}),
         style: const TextStyle(color: OL.gris, fontWeight: FontWeight.w700),
       ),
       const SizedBox(height: 16),
@@ -328,15 +329,12 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
                 ),
                 const SizedBox(width: 12),
                 unidadSuperada(u, practicas)
-                    ? const Icon(
+                    ? Icon(
                         Icons.check_circle_rounded,
                         color: OL.verde,
-                        semanticLabel: 'Completada',
+                        semanticLabel: tr('Completada'),
                       )
-                    : const Icon(
-                        Icons.chevron_right_rounded,
-                        color: OL.morado,
-                      ),
+                    : const Icon(Icons.chevron_right_rounded, color: OL.morado),
               ],
             ),
           ),
@@ -349,11 +347,13 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
       MascotCoach(
         listening: listening,
         message: listening
-            ? 'Conoce estas palabras y luego escucha con calma. Puedes repetir el audio.'
-            : 'Conoce estas palabras y luego búscalas en el texto.',
+            ? tr(
+                'Conoce estas palabras y luego escucha con calma. Puedes repetir el audio.',
+              )
+            : tr('Conoce estas palabras y luego búscalas en el texto.'),
       ),
       Text(
-        'Antes de empezar',
+        tr('Antes de empezar'),
         style: Theme.of(context).textTheme.headlineMedium,
       ),
       const SizedBox(height: 4),
@@ -380,9 +380,9 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
         ),
       ),
       const SizedBox(height: 20),
-      const Text(
-        'Palabras clave',
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+      Text(
+        tr('Palabras clave'),
+        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
       ),
       for (final word in unit.words)
         Padding(
@@ -426,12 +426,9 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Escuchar «${word.word}»',
+                  tooltip: tr('Escuchar «{palabra}»', {'palabra': word.word}),
                   onPressed: () => escucharPalabra(word.word),
-                  icon: const Icon(
-                    Icons.volume_up_outlined,
-                    color: OL.morado,
-                  ),
+                  icon: const Icon(Icons.volume_up_outlined, color: OL.morado),
                 ),
               ],
             ),
@@ -441,7 +438,7 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
     [
       BotonPrincipal(
         onPressed: () => irA(_Paso.texto),
-        child: Text(listening ? 'ESCUCHAR' : 'EMPEZAR A LEER'),
+        child: Text(listening ? tr('ESCUCHAR') : tr('EMPEZAR A LEER')),
       ),
     ],
   );
@@ -450,12 +447,9 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
     color: OL.moradoSuave,
     borde: OL.morado,
     sombra: false,
-    etiquetaSemantica: heard ? 'Volver a escuchar' : 'Escuchar',
+    etiquetaSemantica: heard ? tr('Volver a escuchar') : tr('Escuchar'),
     onTap: busy ? null : () => listen(unit),
-    padding: EdgeInsets.symmetric(
-      horizontal: 16,
-      vertical: compacto ? 12 : 24,
-    ),
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: compacto ? 12 : 24),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -473,10 +467,10 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
         Flexible(
           child: Text(
             busy
-                ? 'PREPARANDO AUDIO…'
+                ? tr('PREPARANDO AUDIO…')
                 : heard
-                ? 'VOLVER A ESCUCHAR'
-                : 'ESCUCHAR',
+                ? tr('VOLVER A ESCUCHAR')
+                : tr('ESCUCHAR'),
             style: TextStyle(
               color: OL.morado,
               fontSize: compacto ? 16 : 20,
@@ -508,10 +502,10 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
       if (listening) ...[
         _botonEscuchar(unit),
         const SizedBox(height: 8),
-        const Text(
-          'Puedes escucharlo varias veces.',
+        Text(
+          tr('Puedes escucharlo varias veces.'),
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14, color: OL.gris),
+          style: const TextStyle(fontSize: 14, color: OL.gris),
         ),
         const SizedBox(height: 8),
         Align(
@@ -526,7 +520,9 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
                   : Icons.visibility_outlined,
             ),
             label: Text(
-              transcript ? 'Ocultar transcripción' : 'Ver transcripción',
+              transcript
+                  ? tr('Ocultar transcripción')
+                  : tr('Ver transcripción'),
             ),
           ),
         ),
@@ -544,7 +540,7 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
             aciertos = 0;
           },
         ),
-        child: const Text('RESPONDER'),
+        child: Text(tr('RESPONDER')),
       ),
     ],
   );
@@ -565,7 +561,10 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
             ),
             const SizedBox(width: 12),
             Text(
-              '${pregunta + 1} de ${unit.questions.length}',
+              tr('{n} de {total}', {
+                'n': pregunta + 1,
+                'total': unit.questions.length,
+              }),
               style: const TextStyle(
                 color: OL.gris,
                 fontWeight: FontWeight.w800,
@@ -583,7 +582,9 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
             child: TextButton.icon(
               onPressed: () => setState(() => transcript = !transcript),
               icon: const Icon(Icons.menu_book_rounded),
-              label: Text(transcript ? 'Ocultar el texto' : 'Ver el texto'),
+              label: Text(
+                transcript ? tr('Ocultar el texto') : tr('Ver el texto'),
+              ),
             ),
           ),
         if (!listening && transcript) ...[
@@ -613,10 +614,10 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
                   },
           ),
         if (faltaAudio && !comprobada)
-          const Text(
-            'Escucha el audio primero.',
+          Text(
+            tr('Escucha el audio primero.'),
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, color: OL.gris),
+            style: const TextStyle(fontSize: 14, color: OL.gris),
           ),
       ],
       [
@@ -624,13 +625,15 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
           FeedbackDock(
             child: AnswerFeedback(
               correct: correcta,
-              title: correcta ? '¡Bien!' : 'Casi',
+              title: correcta ? tr('¡Bien!') : tr('Casi'),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (!correcta)
                     Text(
-                      'Respuesta: ${q.options[q.answerIndex]}',
+                      tr('Respuesta: {respuesta}', {
+                        'respuesta': q.options[q.answerIndex],
+                      }),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
@@ -643,7 +646,7 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
                   if (q.evidence.isNotEmpty) ...[
                     const SizedBox(height: 6),
                     Text(
-                      'En el texto: “${q.evidence}”',
+                      tr('En el texto: “{cita}”', {'cita': q.evidence}),
                       style: const TextStyle(
                         fontSize: 15,
                         fontStyle: FontStyle.italic,
@@ -659,13 +662,13 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
             onPressed: eleccion == null || faltaAudio
                 ? null
                 : () => comprobar(unit, q),
-            child: const Text('COMPROBAR'),
+            child: Text(tr('COMPROBAR')),
           )
         else
           BotonPrincipal(
             color: correcta ? OL.verde : OL.rojo,
             onPressed: () => continuar(unit),
-            child: const Text('CONTINUAR'),
+            child: Text(tr('CONTINUAR')),
           ),
       ],
     );
@@ -682,13 +685,16 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
         const Center(child: FeedbackBadge(completed: true, size: 96)),
         const SizedBox(height: 12),
         Text(
-          aciertos == total ? '¡Lo entendiste todo!' : '¡Terminaste!',
+          aciertos == total ? tr('¡Lo entendiste todo!') : tr('¡Terminaste!'),
           textAlign: TextAlign.center,
           style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 8),
         Text(
-          '$aciertos de $total correctas',
+          tr('{aciertos} de {total} correctas', {
+            'aciertos': aciertos,
+            'total': total,
+          }),
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 18,
@@ -710,12 +716,12 @@ class _LearningUnitState extends ConsumerState<LearningUnitScreen> {
       [
         BotonPrincipal(
           onPressed: () => abrirUnidad(otra),
-          child: Text(listening ? 'OTRA ESCUCHA' : 'OTRA LECTURA'),
+          child: Text(listening ? tr('OTRA ESCUCHA') : tr('OTRA LECTURA')),
         ),
         TextButton(
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/inicio'),
-          child: const Text('VOLVER'),
+          child: Text(tr('VOLVER')),
         ),
       ],
     );

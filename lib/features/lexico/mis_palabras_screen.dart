@@ -8,6 +8,7 @@ import '../../core/lexico/lexico.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/widgets.dart';
+import '../../core/i18n/i18n.dart';
 
 /// «Mis palabras»: todo el vocabulario que el alumno ya vio en clases,
 /// situaciones y Nivel 0, agrupado por nivel o por situación, con su repaso
@@ -36,14 +37,14 @@ class _MisPalabrasScreenState extends ConsumerState<MisPalabrasScreen> {
     final s = ref.watch(progressProvider);
     final mias = ref.watch(misPalabrasProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('Mis palabras')),
+      appBar: AppBar(title: Text(tr('Mis palabras'))),
       body: Movil(
         child: mias.when(
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (_, _) => Center(
             child: TextButton(
               onPressed: () => ref.invalidate(lexicoProvider),
-              child: const Text('No se pudo cargar. Reintentar'),
+              child: Text(tr('No se pudo cargar. Reintentar')),
             ),
           ),
           data: (palabras) {
@@ -112,10 +113,12 @@ class _MisPalabrasScreenState extends ConsumerState<MisPalabrasScreen> {
                           : () => context.push('/palabras/repaso'),
                       child: Text(
                         paraHoy > 0
-                            ? 'REPASAR $paraHoy ${paraHoy == 1 ? 'PALABRA' : 'PALABRAS'}'
+                            ? (paraHoy == 1
+                                  ? tr('REPASAR {n} PALABRA', {'n': paraHoy})
+                                  : tr('REPASAR {n} PALABRAS', {'n': paraHoy}))
                             : nuevas > 0
-                            ? 'PRACTICAR PALABRAS NUEVAS'
-                            : 'TODO AL DÍA',
+                            ? tr('PRACTICAR PALABRAS NUEVAS')
+                            : tr('TODO AL DÍA'),
                       ),
                     ),
                   ),
@@ -140,29 +143,30 @@ class _MisPalabrasScreenState extends ConsumerState<MisPalabrasScreen> {
                 e,
           ];
     final grupos = <String, List<EntradaLexico>>{};
+    final deClases = tr('De las clases');
     for (final e in visibles) {
       if (agrupar == _Agrupar.nivel) {
         grupos
             .putIfAbsent(
-              e.nivel == 0 ? 'Desde cero' : 'Nivel ${e.nivel}',
+              e.nivel == 0 ? tr('Desde cero') : tr('Nivel {n}', {'n': e.nivel}),
               () => [],
             )
             .add(e);
       } else {
         final ids = e.situaciones.toList()..sort();
         if (ids.isEmpty) {
-          grupos.putIfAbsent('De las clases', () => []).add(e);
+          grupos.putIfAbsent(deClases, () => []).add(e);
         }
         for (final id in ids) {
-          grupos.putIfAbsent(situacion(id).nombre, () => []).add(e);
+          grupos.putIfAbsent(trDato(situacion(id).nombre), () => []).add(e);
         }
       }
     }
     final claves = grupos.keys.toList();
     if (agrupar == _Agrupar.situacion) {
       claves.sort((a, b) {
-        if (a == 'De las clases') return 1;
-        if (b == 'De las clases') return -1;
+        if (a == deClases) return 1;
+        if (b == deClases) return -1;
         return a.compareTo(b);
       });
     }
@@ -181,15 +185,17 @@ class _Vacio extends StatelessWidget {
     children: [
       const Icon(Icons.menu_book_rounded, size: 64, color: OL.morado),
       const SizedBox(height: 12),
-      const Text(
-        'Aquí aparecerán las palabras que aprendas en tus clases y situaciones, listas para repasar.',
+      Text(
+        tr(
+          'Aquí aparecerán las palabras que aprendas en tus clases y situaciones, listas para repasar.',
+        ),
         textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 17, height: 1.4),
+        style: const TextStyle(fontSize: 17, height: 1.4),
       ),
       const SizedBox(height: 20),
       BotonPrincipal(
         onPressed: () => context.go('/aprender'),
-        child: const Text('IR A APRENDER'),
+        child: Text(tr('IR A APRENDER')),
       ),
     ],
   );
@@ -237,18 +243,18 @@ class _Cabecera extends StatelessWidget {
         sombra: false,
         child: Row(
           children: [
-            _dato('$total', 'palabras', OL.morado),
-            _dato('$paraHoy', 'para hoy', OL.naranja),
-            _dato('$dominadas', 'dominadas', OL.verde),
+            _dato('$total', tr('palabras'), OL.morado),
+            _dato('$paraHoy', tr('para hoy'), OL.naranja),
+            _dato('$dominadas', tr('dominadas'), OL.verde),
           ],
         ),
       ),
       const SizedBox(height: 12),
       TextField(
         onChanged: onBuscar,
-        decoration: const InputDecoration(
-          hintText: 'Buscar palabra…',
-          prefixIcon: Icon(Icons.search),
+        decoration: InputDecoration(
+          hintText: tr('Buscar palabra…'),
+          prefixIcon: const Icon(Icons.search),
         ),
       ),
       const SizedBox(height: 10),
@@ -256,8 +262,8 @@ class _Cabecera extends StatelessWidget {
         spacing: 8,
         children: [
           for (final (a, nombre) in [
-            (_Agrupar.nivel, 'Por nivel'),
-            (_Agrupar.situacion, 'Por situación'),
+            (_Agrupar.nivel, tr('Por nivel')),
+            (_Agrupar.situacion, tr('Por situación')),
           ])
             ChoiceChip(
               label: Text(nombre),
@@ -312,7 +318,9 @@ class _FilaPalabra extends StatelessWidget {
           ),
           // Fuerza de la memoria: un punto por repaso superado.
           Semantics(
-            label: caja == null ? 'Sin repasar' : 'Repasada $caja veces',
+            label: caja == null
+                ? tr('Sin repasar')
+                : tr('Repasada {n} veces', {'n': caja}),
             child: Row(
               children: [
                 for (var i = 0; i < 5; i++)

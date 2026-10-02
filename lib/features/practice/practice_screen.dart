@@ -9,6 +9,7 @@ import '../../core/aprendizaje/providers.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/situaciones.dart';
 import '../../core/content/fotos.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -45,7 +46,8 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
       final okCat = categoria == 'Todas' || x.categoria == categoria;
       final okBusq =
           busqueda.isEmpty ||
-          x.nombre.toLowerCase().contains(busqueda.toLowerCase());
+          x.nombre.toLowerCase().contains(busqueda.toLowerCase()) ||
+          trDato(x.nombre).toLowerCase().contains(busqueda.toLowerCase());
       return okCat && okBusq;
     }).toList();
 
@@ -59,7 +61,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Práctica libre con IA'),
+        title: Text(tr('Práctica libre con IA')),
         actions: [
           TextButton.icon(
             onPressed: () => context.push('/tutores'),
@@ -82,17 +84,19 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
         children: [
-          const MascotCoach(
+          MascotCoach(
             listening: true,
-            message: 'Elige una situación y ensaya a tu ritmo. Puedes escuchar, repetir y pedir ayuda.',
+            message: tr(
+              'Elige una situación y ensaya a tu ritmo. Puedes escuchar, repetir y pedir ayuda.',
+            ),
           ),
           HeroCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Conversación libre',
-                  style: TextStyle(
+                Text(
+                  tr('Conversación libre'),
+                  style: const TextStyle(
                     color: OL.blanco,
                     fontSize: 22,
                     fontWeight: FontWeight.w800,
@@ -100,7 +104,10 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Habla de lo que quieras. La IA se adapta al nivel ${s.nivelActual} y a lo que necesitas reforzar.',
+                  tr(
+                    'Habla de lo que quieras. La IA se adapta al nivel {nivel} y a lo que necesitas reforzar.',
+                    {'nivel': s.nivelActual},
+                  ),
                   style: const TextStyle(
                     color: Color(0xFFE0D8FF),
                     fontSize: 16,
@@ -109,8 +116,8 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                 ),
                 const SizedBox(height: 14),
                 for (final row in [
-                  [('Mi día', 49), ('Trabajo', 21)],
-                  [('Viajes', 39), ('Noticias', 50)],
+                  [(tr('Mi día'), 49), (tr('Trabajo'), 21)],
+                  [(tr('Viajes'), 39), (tr('Noticias'), 50)],
                 ])
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
@@ -141,7 +148,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                   ),
                   onPressed: () => abrir('/chat'),
                   icon: const Icon(Icons.mic_rounded),
-                  label: const Text('Hablar con mi tutor'),
+                  label: Text(tr('Hablar con mi tutor')),
                 ),
               ],
             ),
@@ -152,27 +159,32 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Practica con un tutor de IA',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                Text(
+                  tr('Practica con un tutor de IA'),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Elige un tutor para tu idioma. Conversa con voz, gestos y refuerzo adaptado a tu nivel.',
+                Text(
+                  tr(
+                    'Elige un tutor para tu idioma. Conversa con voz, gestos y refuerzo adaptado a tu nivel.',
+                  ),
                 ),
                 const SizedBox(height: 12),
                 FilledButton.icon(
                   onPressed: () => abrir('/tutores'),
                   icon: const Icon(Icons.record_voice_over),
-                  label: const Text('Elegir mi tutor'),
+                  label: Text(tr('Elegir mi tutor')),
                 ),
               ],
             ),
           ),
           const SizedBox(height: 20),
-          const TituloSeccion('50 situaciones'),
+          TituloSeccion(tr('50 situaciones')),
           Text(
-            'Tu tramo: ${tramo.nombre} · ${tramo.niveles}',
+            tr('Tu tramo: {tramo} · {niveles}', {
+              'tramo': tramo.nombre,
+              'niveles': tramo.niveles,
+            }),
             style: const TextStyle(
               fontSize: 14,
               color: OL.morado,
@@ -180,16 +192,18 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Cada situación tiene tres tramos: Básico, Intermedio y Avanzado. Ves el de tu nivel y puedes repasar los anteriores.',
-            style: TextStyle(color: OL.gris, fontSize: 14, height: 1.4),
+          Text(
+            tr(
+              'Cada situación tiene tres tramos: Básico, Intermedio y Avanzado. Ves el de tu nivel y puedes repasar los anteriores.',
+            ),
+            style: const TextStyle(color: OL.gris, fontSize: 14, height: 1.4),
           ),
           const SizedBox(height: 12),
           TextField(
             onChanged: (v) => setState(() => busqueda = v),
-            decoration: const InputDecoration(
-              hintText: 'Buscar situación...',
-              prefixIcon: Icon(Icons.search),
+            decoration: InputDecoration(
+              hintText: tr('Buscar situación...'),
+              prefixIcon: const Icon(Icons.search),
             ),
           ),
           const SizedBox(height: 10),
@@ -199,7 +213,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
             children: [
               for (final c in categorias)
                 ChoiceChip(
-                  label: Text(c),
+                  label: Text(c == 'Todas' ? tr('Todas') : trDato(c)),
                   selected: categoria == c,
                   onSelected: (_) => setState(() => categoria = c),
                   materialTapTargetSize: MaterialTapTargetSize.padded,
@@ -299,7 +313,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          x.nombre,
+                                          trDato(x.nombre),
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w800,
                                             fontSize: 17,
@@ -307,8 +321,11 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
                                         ),
                                         Text(
                                           estado(x.id)?.empezado ?? false
-                                              ? '${x.categoria} · ${(estado(x.id)!.progreso * 100).round()} %'
-                                              : x.categoria,
+                                              ? tr('{categoria} · {pct} %', {
+                                                  'categoria': trDato(x.categoria),
+                                                  'pct': (estado(x.id)!.progreso * 100).round(),
+                                                })
+                                              : trDato(x.categoria),
                                           style: const TextStyle(
                                             color: OL.gris,
                                             fontSize: 14,
@@ -329,17 +346,17 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
             },
           ),
           if (lista.isEmpty)
-            const Tarjeta(
+            Tarjeta(
               child: Text(
-                'No encontramos esa situación. Prueba otra palabra o categoría.',
+                tr('No encontramos esa situación. Prueba otra palabra o categoría.'),
               ),
             ),
           const SizedBox(height: 20),
-          const TituloSeccion('Actividades diarias'),
+          TituloSeccion(tr('Actividades diarias')),
           const SizedBox(height: 4),
-          const Text(
-            'Práctica complementaria al curso.',
-            style: TextStyle(color: OL.gris, fontSize: 14),
+          Text(
+            tr('Práctica complementaria al curso.'),
+            style: const TextStyle(color: OL.gris, fontSize: 14),
           ),
           const SizedBox(height: 10),
           const DailyActivities(),

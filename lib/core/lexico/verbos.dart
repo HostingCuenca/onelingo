@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../i18n/i18n.dart';
+
 /// «Mis verbos» (fase D): tablas de conjugación por idioma, generadas desde
 /// `tools/contenido/verbos/verbos-<idioma>.json`. El esquema es el mismo para
 /// todos los idiomas (personas, tiempos y una tabla por tiempo).
@@ -131,19 +133,27 @@ PreguntaVerbo? preguntaVerbo(Verbo v, int tipo, Random rnd) {
   final f = v.formas;
   final (enunciado, correcta, explicacion) = switch (tipo % 3) {
     0 => (
-      'Pasado de «${v.infinitivo}» (${v.es})',
+      tr('Pasado de «{verbo}» ({significado})', {
+        'verbo': v.infinitivo,
+        'significado': v.es,
+      }),
       f['pasado']!,
-      '${v.infinitivo} → ${f['pasado']} (pasado). ${v.irregular ? 'Es irregular: hay que aprenderlo.' : 'Es regular: termina en -ed.'}',
+      '${tr('{verbo} → {forma} (pasado).', {'verbo': v.infinitivo, 'forma': f['pasado']})} '
+          '${v.irregular ? tr('Es irregular: hay que aprenderlo.') : tr('Es regular: termina en -ed.')}',
     ),
     1 => (
-      'Participio de «${v.infinitivo}»: I have ___',
+      tr('Participio de «{verbo}»: I have ___', {'verbo': v.infinitivo}),
       f['participio']!,
-      'I have ${f['participio']}. El participio va con have/has.',
+      tr('I have {forma}. El participio va con have/has.', {
+        'forma': f['participio'],
+      }),
     ),
     _ => (
       'He ___ (${v.infinitivo}) every day.',
       f['tercera']!,
-      'Con he, she o it el presente lleva -s: ${f['tercera']}.',
+      tr('Con he, she o it el presente lleva -s: {forma}.', {
+        'forma': f['tercera'],
+      }),
     ),
   };
   final otras = _distractores(v, correcta)..shuffle(rnd);

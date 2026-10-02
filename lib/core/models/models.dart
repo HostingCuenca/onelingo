@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../i18n/i18n.dart';
+
 /// Habilidad que mide un paso de lección. Alimenta las barras del perfil y la
 /// clasificación de errores (REQUERIMIENTOS §8 y §13).
 enum Skill {
@@ -13,8 +15,23 @@ enum Skill {
   escritura('Escritura'),
   conversacion('Conversación');
 
-  const Skill(this.nombre);
-  final String nombre;
+  const Skill(this.nombreEs);
+
+  /// Nombre en español (dato estable; no se muestra tal cual).
+  final String nombreEs;
+
+  /// Nombre visible en el idioma de la interfaz.
+  String get nombre => switch (this) {
+    vocabulario => tr('Vocabulario'),
+    gramatica => tr('Gramática'),
+    conjugacion => tr('Conjugación'),
+    listening => tr('Listening'),
+    pronunciacion => tr('Pronunciación'),
+    frases => tr('Formación de frases'),
+    lectura => tr('Lectura'),
+    escritura => tr('Escritura'),
+    conversacion => tr('Conversación'),
+  };
 }
 
 /// Los ~10 tipos de ejercicio del reproductor de lección (ARQUITECTURA §1).
@@ -34,25 +51,32 @@ enum StepType {
 class Language {
   const Language({
     required this.code,
-    required this.nombre,
+    required String nombre,
     required this.nombreNativo,
     this.disponible = true,
-  });
+  }) : nombreEs = nombre;
   final String code;
-  final String nombre; // en español
+  final String nombreEs; // en español (clave de traducción)
   final String nombreNativo; // en el propio idioma
+
+  /// Nombre en el idioma de la interfaz.
+  String get nombre => trDato(nombreEs);
   final bool disponible;
 }
 
 class Level {
   const Level({
     required this.numero,
-    required this.nombre,
+    required String nombre,
     required this.descripcion,
     required this.temario,
-  });
+  }) : nombreEs = nombre;
   final int numero;
-  final String nombre;
+  final String nombreEs;
+
+  /// Nombre en el idioma de la interfaz (la descripción y el temario son
+  /// contenido antiguo, solo en español).
+  String get nombre => trDato(nombreEs);
   final String descripcion;
   final List<String> temario;
 

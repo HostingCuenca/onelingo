@@ -1,6 +1,6 @@
 # OneLingo: arquitectura vigente
 
-Actualizado: 2026-10-01 (fases A–D, E en curso; DEC-026 a DEC-030).
+Actualizado: 2026-10-01 (fases A–D e I1; E en curso; DEC-026 a DEC-031).
 
 **Este es el mapa que manda.** Si otro documento lo contradice, vale este. Los documentos de `docs/archivo/` son historia: no los uses para decidir. Si cambias la estructura, actualiza este archivo en el mismo commit.
 
@@ -64,6 +64,10 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 - **Feedback:** `FeedbackDock` / `AnswerFeedback` (`shared/widgets/feedback_experience.dart`) y `Efectos.correcto()/incorrecto()`.
 - **Base:** `Tarjeta`, `Movil`, `Etiqueta`, `BarraProgreso` y colores `OL.*` (`app/theme.dart`). El tema también estiliza `FilledButton`, pero en pantallas nuevas se usa `BotonPrincipal`.
 - **Personajes:** nunca dos a la vez. Sin rebotes ni movimientos raros. Sin Lumo en las pruebas de nivel. Nara es otra mascota.
+- **Interfaz multilingüe (I18N.md):**
+  - todo texto visible pasa por `tr('texto en español')` y su traducción va en `assets/i18n/<idioma>.json`;
+  - los datos se muestran con `trDato`;
+  - el contenido lleva su apoyo en el propio JSON (`TextoApoyo`), no `tr()`.
 - **Textos:** español neutro (tú), sin jerga interna. Prohibido: «nivel interno», «orientativo», «evidencia», «no certifica», «comprobación guiada», «banco piloto». El nivel se muestra como «Nivel N · A2»; nunca se pide.
 - **Imágenes:** no se generan. Se buscan con licencia de uso comercial y se registran sus créditos.
 
@@ -75,6 +79,8 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 | B | Ubicación a prueba de azar y prueba para subir de nivel | **hecha** (DEC-026) |
 | C | Situaciones v2: las mismas 50 en 3 tramos (Básico N1–3, Intermedio N4–6, Avanzado N7–10), con progreso, prueba con nota y videollamada con el tema (`SITUACIONES_V2.md`) | **hecha** (DEC-028) |
 | D | Léxico único + «Mis palabras» con repaso por palabra + «Mis verbos» con tablas, audio y práctica | **hecha** (DEC-029) |
+| I1 | Interfaz en inglés y selector de idioma en Perfil (`I18N.md`) | **hecha** (DEC-031) |
+| I2 | Contenido con apoyo en inglés para anglohablantes (francés primero) | pendiente |
 | E | Francés sobre esta base (`PLAN_FRANCES.md`): voces nativas y Nivel 0 F1–F5 hechos; siguen F6–F10, situaciones y verbos en francés, y N1 | **en curso** (DEC-030) |
 
 ## 7. Validar antes de entregar

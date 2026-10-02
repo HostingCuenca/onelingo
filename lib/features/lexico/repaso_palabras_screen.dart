@@ -12,6 +12,7 @@ import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/widgets.dart';
 import '../ruta/opcion_respuesta.dart';
+import '../../core/i18n/i18n.dart';
 
 /// Formas de preguntar una palabra; se alternan dentro de la sesión.
 enum FormaPregunta { significado, inversa, escucha }
@@ -37,12 +38,12 @@ PreguntaPalabra preguntaPalabra(
   String texto(EntradaLexico x) => inversa ? x.texto : x.traduccion;
   final candidatos =
       [
-        for (final x in banco)
-          if (x.clave != e.clave &&
-              x.traduccion.toLowerCase() != e.traduccion.toLowerCase() &&
-              texto(x).toLowerCase() != texto(e).toLowerCase())
-            x,
-      ]
+          for (final x in banco)
+            if (x.clave != e.clave &&
+                x.traduccion.toLowerCase() != e.traduccion.toLowerCase() &&
+                texto(x).toLowerCase() != texto(e).toLowerCase())
+              x,
+        ]
         ..shuffle(rnd)
         ..sort(
           (a, b) =>
@@ -148,9 +149,9 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
     if (cola == null && mias != null && lexico != null) _preparar(mias, lexico);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Repaso de palabras'),
+        title: Text(tr('Repaso de palabras')),
         leading: IconButton(
-          tooltip: 'Salir',
+          tooltip: tr('Salir'),
           icon: const Icon(Icons.close_rounded),
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/palabras'),
@@ -171,9 +172,13 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
     final bien = elegida == q.correcta;
     final puede = elegida != null && (!q.escucha || oida);
     final enunciado = switch (q.forma) {
-      FormaPregunta.significado => '¿Qué significa «${q.entrada.texto}»?',
-      FormaPregunta.inversa => '¿Cómo se dice «${q.entrada.traduccion}»?',
-      FormaPregunta.escucha => 'Escucha. ¿Qué significa?',
+      FormaPregunta.significado => tr('¿Qué significa «{palabra}»?', {
+        'palabra': q.entrada.texto,
+      }),
+      FormaPregunta.inversa => tr('¿Cómo se dice «{palabra}»?', {
+        'palabra': q.entrada.traduccion,
+      }),
+      FormaPregunta.escucha => tr('Escucha. ¿Qué significa?'),
     };
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -198,12 +203,12 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
             padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
             children: [
               if (indice >= total)
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 8),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Etiqueta(
-                      'Otra vez',
+                      tr('Otra vez'),
                       color: OL.naranja,
                       fondo: OL.naranjaSuave,
                       icono: Icons.replay_rounded,
@@ -222,7 +227,7 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
                 OutlinedButton.icon(
                   onPressed: () => _oir(q.entrada.texto),
                   icon: const Icon(Icons.volume_up_rounded),
-                  label: Text(oida ? 'Escuchar otra vez' : 'Escuchar'),
+                  label: Text(oida ? tr('Escuchar otra vez') : tr('Escuchar')),
                 ),
               ],
               const SizedBox(height: 16),
@@ -249,7 +254,7 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
             child: FeedbackDock(
               child: AnswerFeedback(
                 correct: bien,
-                title: bien ? '¡Bien!' : 'Casi',
+                title: bien ? tr('¡Bien!') : tr('Casi'),
                 child: Text(
                   '${q.entrada.texto} = ${q.entrada.traduccion}'
                   '${q.entrada.ejemplo == null ? '' : '\n${q.entrada.ejemplo}'}',
@@ -269,10 +274,10 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
             onPressed: comprobada ? _siguiente : (puede ? _comprobar : null),
             child: Text(
               comprobada
-                  ? 'CONTINUAR'
+                  ? tr('CONTINUAR')
                   : q.escucha && !oida
-                  ? 'ESCUCHA PRIMERO'
-                  : 'COMPROBAR',
+                  ? tr('ESCUCHA PRIMERO')
+                  : tr('COMPROBAR'),
             ),
           ),
         ),
@@ -290,15 +295,22 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
             const Center(child: FeedbackBadge(completed: true, size: 110)),
             const SizedBox(height: 16),
             Text(
-              total == 0 ? 'Todo al día' : '$aciertos de $total a la primera',
+              total == 0
+                  ? tr('Todo al día')
+                  : tr('{aciertos} de {total} a la primera', {
+                      'aciertos': aciertos,
+                      'total': total,
+                    }),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
             ),
             const SizedBox(height: 10),
-            const Text(
-              'Las que aciertas vuelven cada vez más espaciadas; las que fallas, mañana. Así se quedan en la memoria.',
+            Text(
+              tr(
+                'Las que aciertas vuelven cada vez más espaciadas; las que fallas, mañana. Así se quedan en la memoria.',
+              ),
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, height: 1.4, color: OL.gris),
+              style: const TextStyle(fontSize: 16, height: 1.4, color: OL.gris),
             ),
           ],
         ),
@@ -308,7 +320,7 @@ class _RepasoPalabrasScreenState extends ConsumerState<RepasoPalabrasScreen> {
         child: BotonPrincipal(
           onPressed: () =>
               context.canPop() ? context.pop() : context.go('/palabras'),
-          child: const Text('VOLVER A MIS PALABRAS'),
+          child: Text(tr('VOLVER A MIS PALABRAS')),
         ),
       ),
     ],

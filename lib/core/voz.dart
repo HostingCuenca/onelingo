@@ -16,6 +16,7 @@ import 'silencio.dart';
 import 'blob_cleanup_stub.dart'
     if (dart.library.js_interop) 'blob_cleanup_web.dart';
 import 'efectos.dart';
+import 'i18n/i18n.dart';
 import 'content/idiomas.dart';
 
 /// Voz de la app. Primero intenta la voz natural del servidor (ElevenLabs, con
@@ -249,6 +250,9 @@ class Oido {
   void Function()? _onFin;
   String ultimoError = '';
 
+  /// El micrófono no captó sonido (no depende del idioma del mensaje).
+  bool sinAudio = false;
+
   /// Transcripción con la IA del servidor (se puede apagar desde ajustes).
   static bool nube = true;
 
@@ -311,6 +315,7 @@ class Oido {
   }) async {
     final sesion = ++_sesion;
     ultimoError = '';
+    sinAudio = false;
     await Efectos.detener();
     await Voz.instancia.parar();
     if (sesion != _sesion) return false;
@@ -388,7 +393,7 @@ class Oido {
       }
     }
     if (kIsWeb && silencio != null) {
-      ultimoError = 'Revisa el permiso del micrófono y tu sesión.';
+      ultimoError = tr('Revisa el permiso del micrófono y tu sesión.');
       return false;
     }
     if (!await preparar() || sesion != _sesion) return false;
@@ -470,7 +475,8 @@ class Oido {
             );
             if (texto == null) ultimoError = Sync.instancia.ultimoError;
           } else {
-            ultimoError = 'audio vacío: no se captó sonido del micrófono';
+            sinAudio = true;
+            ultimoError = tr('audio vacío: no se captó sonido del micrófono');
           }
         }
       } catch (e) {
