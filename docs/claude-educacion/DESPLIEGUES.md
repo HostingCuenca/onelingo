@@ -375,3 +375,16 @@ Commit: `d95262f` · Build: `main.dart.js` `815cf48f…`.
 Pruebas: Flutter 226 (1 omitida), con `i18n_test` y la nueva regla de `arquitectura_test`. Navegador (400×820): alumno nativo de inglés que aprende francés, con Home, Learn, Practice y Profile en inglés.
 Backup: `/var/www/onelingo/backups/20261001-edu-30-interfaz-ingles/web-anterior` (= edu-29). Salud 200; `.env` igual; APK y `en.json` servidos; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-30-interfaz-ingles/web-retirada-post2 && cp -al backups/20261001-edu-30-interfaz-ingles/web-anterior web'`
+
+## Release: 20261001-edu-31-frances-bilingue
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Solo web; backend sin cambios y sin reinicios.
+Contenido: I2 y francés FR-1/FR-2 (DEC-032).
+- Nivel 0 francés completo y bilingüe: F1–F10, 40 lecciones.
+- Ruta francesa con apoyo en inglés.
+- Selector de idioma de la app en la bienvenida, el registro y Perfil.
+- `localizarApoyo` para el contenido bilingüe.
+Commit: `adbc8f5` · Build: `main.dart.js` `4d499782…`.
+Pruebas: Flutter 227 (1 omitida); `validar_nivel0.py fr --bilingue` 0 errores; `validar_ruta.py` 0 errores. Navegador (400×820): alumno nativo de inglés en francés, con el Nivel 0 en inglés (40 lecciones, «Continue: The o and the é»).
+Backup: `/var/www/onelingo/backups/20261001-edu-31-frances-bilingue/web-anterior` (= edu-30). Salud 200; `.env` igual; APK servido; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-31-frances-bilingue/web-retirada-post2 && cp -al backups/20261001-edu-31-frances-bilingue/web-anterior web'`
