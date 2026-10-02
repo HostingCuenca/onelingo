@@ -362,3 +362,16 @@ Commit: `3ad21f7` · Build: `main.dart.js` `ecfd5f3c…`.
 Pruebas: Flutter 222 (1 omitida); backend 20; `tsc` en staging. Navegador: Nivel 0 francés (portada, lección 1 «papa» con la a roja). En producción, `rolDeVoz(narradora, fr)` = Hélène.
 Backup: `/var/www/onelingo/backups/20261001-edu-29-frances-nivel0/` (`web-anterior` = edu-28; `backend-src` con el `voz.ts` previo). Salud 200; `.env` igual; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-29-frances-nivel0; mv web staging/20261001-edu-29-frances-nivel0/web-retirada-post2 && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api'`
+
+## Release: 20261001-edu-30-interfaz-ingles
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). Solo web; backend sin cambios y sin reinicios. Publicada por indicación del cliente tras pasar las pruebas.
+Contenido: I1 (DEC-031).
+- Interfaz en inglés: 939 textos.
+- Selector «Idioma de la app» en Perfil.
+- Primera visita en el idioma del dispositivo; la interfaz cambia al elegir el idioma nativo en el registro.
+- Nombres de situaciones, idiomas y niveles traducidos.
+Commit: `d95262f` · Build: `main.dart.js` `815cf48f…`.
+Pruebas: Flutter 226 (1 omitida), con `i18n_test` y la nueva regla de `arquitectura_test`. Navegador (400×820): alumno nativo de inglés que aprende francés, con Home, Learn, Practice y Profile en inglés.
+Backup: `/var/www/onelingo/backups/20261001-edu-30-interfaz-ingles/web-anterior` (= edu-29). Salud 200; `.env` igual; APK y `en.json` servidos; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-30-interfaz-ingles/web-retirada-post2 && cp -al backups/20261001-edu-30-interfaz-ingles/web-anterior web'`
