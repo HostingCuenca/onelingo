@@ -11,6 +11,7 @@ import 'app/theme.dart';
 import 'core/api/sync.dart';
 import 'core/conexion.dart';
 import 'core/efectos.dart';
+import 'core/i18n/i18n.dart';
 import 'core/voz.dart';
 import 'shared/widgets/connection_banner.dart';
 import 'core/state/providers.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   Sync.instancia.inicializar(prefs);
   Efectos.inicializar(prefs);
+  await I18n.cargar();
   Efectos.antesDeSonar = Voz.instancia.parar;
   unawaited(Efectos.precargar());
   runApp(
@@ -36,21 +38,28 @@ class OneLingoApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final interfaz = ref.watch(progressProvider.select((s) => s.interfaz));
+    I18n.idioma.value = interfaz;
     return MaterialApp.router(
       title: 'OneLingo',
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
       routerConfig: ref.watch(routerProvider),
-      locale: const Locale('es'),
+      locale: Locale(interfaz),
       supportedLocales: const [Locale('es'), Locale('en')],
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      builder: (context, child) => _UsoTracker(
-        child: PrecargaLumo(
-          child: _PrecargaEscritura(child: ConnectionBanner(child: child!)),
+      // Al cambiar el idioma de la interfaz se reconstruye todo el árbol
+      // (la ubicación del router se conserva).
+      builder: (context, child) => KeyedSubtree(
+        key: ValueKey(interfaz),
+        child: _UsoTracker(
+          child: PrecargaLumo(
+            child: _PrecargaEscritura(child: ConnectionBanner(child: child!)),
+          ),
         ),
       ),
     );

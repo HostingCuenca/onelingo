@@ -76,7 +76,7 @@ Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) {
 
 /// Cadena de idiomas de apoyo para mostrar textos al alumno (DEC-004).
 List<String> cadenaDelAlumno(ProgressState s, Curso curso) =>
-    cadenaApoyo(s.idiomaNativo, curso.apoyoPredeterminado);
+    cadenaApoyo(s.interfaz, curso.apoyoPredeterminado);
 
 /// Registro de evidencia de la ruta sobre `registrarPractica`, que conserva
 /// primera respuesta, intentos y fechas, y concede XP una sola vez por clave.

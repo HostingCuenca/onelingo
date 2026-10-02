@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../api/sync.dart';
 import '../content/catalog.dart';
 import '../content/contenido_json.dart';
+import '../i18n/i18n.dart';
 import '../content/curriculum.dart';
 import '../diagnostico.dart'
     show
@@ -42,6 +43,7 @@ class ProgressState {
     this.nombre = 'Bryan',
     this.email = '',
     this.idiomaNativo = 'es',
+    this.idiomaInterfaz,
     this.idiomaMeta = 'en',
     this.nivelInicial = 1,
     this.nivelEscala = escalaDiagnosticoLegacy,
@@ -70,6 +72,12 @@ class ProgressState {
   final String nombre;
   final String email;
   final String idiomaNativo;
+
+  /// Idioma de la interfaz elegido en Perfil (null = según el nativo).
+  final String? idiomaInterfaz;
+
+  /// Idioma en que se ve la app y los textos de apoyo del contenido.
+  String get interfaz => idiomaInterfaz ?? idiomaInterfazPara(idiomaNativo);
   final String idiomaMeta;
 
   /// Ubicación histórica usada por la ruta anterior. Nunca se sobrescribe
@@ -228,6 +236,7 @@ class ProgressState {
     String? nombre,
     String? email,
     String? idiomaNativo,
+    String? idiomaInterfaz,
     String? idiomaMeta,
     int? nivelInicial,
     String? nivelEscala,
@@ -255,6 +264,7 @@ class ProgressState {
     nombre: nombre ?? this.nombre,
     email: email ?? this.email,
     idiomaNativo: idiomaNativo ?? this.idiomaNativo,
+    idiomaInterfaz: idiomaInterfaz ?? this.idiomaInterfaz,
     idiomaMeta: idiomaMeta ?? this.idiomaMeta,
     nivelInicial: nivelInicial ?? this.nivelInicial,
     nivelEscala: nivelEscala ?? this.nivelEscala,
@@ -284,6 +294,7 @@ class ProgressState {
     'nombre': nombre,
     'email': email,
     'idiomaNativo': idiomaNativo,
+    'idiomaInterfaz': ?idiomaInterfaz,
     'idiomaMeta': idiomaMeta,
     'nivelInicial': nivelInicial,
     'nivelEscala': nivelEscala,
@@ -313,6 +324,7 @@ class ProgressState {
     nombre: j['nombre'] as String? ?? 'Bryan',
     email: j['email'] as String? ?? '',
     idiomaNativo: j['idiomaNativo'] as String? ?? 'es',
+    idiomaInterfaz: j['idiomaInterfaz'] as String?,
     idiomaMeta: j['idiomaMeta'] as String? ?? 'en',
     nivelInicial: j['nivelInicial'] as int? ?? 1,
     nivelEscala: j['nivelEscala'] as String? ?? escalaDiagnosticoLegacy,
@@ -621,6 +633,9 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
   }
 
   void elegirTutor(String id) => _save(state.copyWith(tutorId: id));
+
+  void elegirIdiomaInterfaz(String codigo) =>
+      _save(state.copyWith(idiomaInterfaz: codigo));
 
   void elegirPlan(String id) => _save(state.copyWith(planId: id));
 

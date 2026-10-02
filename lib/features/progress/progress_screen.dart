@@ -9,6 +9,7 @@ import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
+import '../../core/i18n/i18n.dart';
 import '../../core/lexico/lexico.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
@@ -309,6 +310,29 @@ class ProgressScreen extends ConsumerWidget {
             'Tu experiencia',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
           ),
+          const SizedBox(height: 8),
+          // Idioma de la app: los nombres van siempre en su propio idioma
+          // para que cualquiera encuentre el suyo.
+          Text(
+            tr('Idioma de la app'),
+            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 8,
+            children: [
+              for (final e in I18n.disponibles.entries)
+                ChoiceChip(
+                  label: Text(e.value),
+                  selected: s.interfaz == e.key,
+                  selectedColor: OL.moradoClaro,
+                  onSelected: (_) => ref
+                      .read(progressProvider.notifier)
+                      .elegirIdiomaInterfaz(e.key),
+                ),
+            ],
+          ),
+          const SizedBox(height: 8),
           const EffectsSettings(),
           const SizedBox(height: 10),
           TextButton.icon(
