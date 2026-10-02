@@ -351,3 +351,14 @@ Commit: `913346c` · Build: `main.dart.js` `0b1d1590…`.
 Pruebas: Flutter 221 (1 omitida), con la nueva `lexico_test.dart`. Navegador (400×820): Mis palabras con 20 palabras de dos situaciones, sesión de repaso y tabla de «go».
 Backup: `/var/www/onelingo/backups/20261001-edu-28-palabras-verbos/web-anterior` (= edu-27). Salud 200; `.env` igual; APK y `verbos.json` servidos; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261001-edu-28-palabras-verbos/web-retirada-post2 && cp -al backups/20261001-edu-28-palabras-verbos/web-anterior web'`
+
+## Release: 20261001-edu-29-frances-nivel0
+
+Fecha: 2026-10-01 · Responsable: Claude (Claude Code). El cliente autorizó el reinicio de `onelingo-api` de esta release.
+Contenido: primera entrega de francés (DEC-030).
+- Voces nativas: Hélène narra y Nicolas dialoga; solo cambia `voz.ts` en el servidor.
+- Nivel 0 multilingüe y francés F1–F5 (20 lecciones, mapa de 15 sonidos, 70 emoji Noto).
+Commit: `3ad21f7` · Build: `main.dart.js` `ecfd5f3c…`.
+Pruebas: Flutter 222 (1 omitida); backend 20; `tsc` en staging. Navegador: Nivel 0 francés (portada, lección 1 «papa» con la a roja). En producción, `rolDeVoz(narradora, fr)` = Hélène.
+Backup: `/var/www/onelingo/backups/20261001-edu-29-frances-nivel0/` (`web-anterior` = edu-28; `backend-src` con el `voz.ts` previo). Salud 200; `.env` igual; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; B=backups/20261001-edu-29-frances-nivel0; mv web staging/20261001-edu-29-frances-nivel0/web-retirada-post2 && cp -al $B/web-anterior web; cp -a $B/backend-src/backend/src/. backend/src/ && pm2 restart onelingo-api'`
