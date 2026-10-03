@@ -101,3 +101,23 @@ Las 9 unidades de `a1-1` (Primeras frases) se reutilizan como material de B1–B
 | Lectura graduada por bloque | comprensión lectora | con N1 francés (mini lectura en la situación) |
 | Prueba de ubicación v2 genérica (FR-6) | ubicar en cualquier idioma | en paralelo con N1 |
 | Adaptar ejemplos al nativo (p. ej. «je parle anglais» para anglohablantes) | naturalidad | después; anotado |
+
+## Agentes: cómo lanzarlos sin agotar el límite (2026-10-02)
+
+El 02-10 los agentes autores y revisores consumieron unos 2.300 M tokens de contexto, frente a ~500 M de la sesión principal. Cada autor hacía 90–110 llamadas y llegaba a 350–500 k de contexto, que se relee en cada llamada. Con el método de abajo, cada agente terminó en 15–35 llamadas y unos 150–300 k tokens, alrededor de 10 veces menos.
+
+1. **Un paquete por bloque:** `python3 tools/curriculo/paquete.py <idioma> N B`. Junta brief, esquema, plan, nota del nivel, índice, las 5 fichas, reparto, hechos recientes y una clase modelo. El encargo dice «lee SOLO este paquete».
+2. **Validar solo el bloque:** `python3 tools/curriculo/validar_bloque.py <idioma> N B`. Los bloques que faltan se sustituyen por esbozos, para que la cadena de prerrequisitos no se rompa, y solo imprime los errores del bloque.
+3. **Escritura:**
+   - Una clase por archivo con Write.
+   - Correcciones con Edit puntual.
+   - Nunca reconstruir el JSON en heredocs de Python repetidos.
+   - Nunca imprimir archivos enteros.
+   - Tope de unas 30 llamadas.
+4. **Tipografía francesa al integrar:** `python3 tools/contenido/tipografia_fr.py <archivos>`. Varios autores no ponían U+202F.
+5. **Revisores con avisos concretos.** Cada revisor recibe en su encargo los choques conocidos:
+   - nombres repetidos;
+   - papeles del reparto;
+   - opciones en es/en;
+   - tablas infladas.
+6. **Nombres nuevos:** antes de usar un apellido para un personaje o autor ficticio, buscar que no esté ya en `curriculo/` ni en `assets/contenido/<idioma>/ruta/`. Si se usa, añadirlo a `palabrasLibres`.
