@@ -1,15 +1,15 @@
 # Estado actual
 
-Última actualización: 2026-10-01
+Última actualización: 2026-10-02
 Responsable: Claude (Claude Code)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
-Fase actual: **Inglés N1–N10 completo y publicado (1.000 clases)**; siguiente fase: revisión del cliente y calidad C1.
+Fase actual: **Inglés N1–N10 (1.000 clases) y francés N1–N10 (500 clases) completos y publicados**; siguiente fase: revisión del cliente/nativa y el siguiente idioma con el mismo método (DEC-034).
 Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases editoriales integradas y activas · programa inglés total 100 %
 
 ## Trabajando ahora
 
 - Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).
-- **E, francés (en curso):** ver la hoja de ruta FR-1…FR-8 en `PLAN_FRANCES.md` §9. FR-1 y FR-2 hechos y bilingües; siguen FR-3 (verbos), FR-4 (situaciones) y FR-5 (N1).
+- **E, francés (HECHO, edu-43, 2026-10-02):** francés N1–N10 completo en producción. Son 500 clases escritas desde las fichas `curriculo/fr/nX.json` por autores sonnet y revisadas bloque a bloque por un revisor distinto (GO). Hay bancos de ubicación N1–N10 con 180 ítems y GO. Pendiente: revisión nativa (FR-R). Método para el siguiente idioma: paquete de contexto por bloque y validador por bloque (ver `PLAN_PRODUCCION.md`).
 
 ## Terminado recientemente
 

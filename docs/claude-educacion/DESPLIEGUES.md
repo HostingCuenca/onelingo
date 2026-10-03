@@ -503,3 +503,17 @@ Commit: `3f46557` · Build: `main.dart.js` sha256 `2bae06ec939a9206…` (API_URL
 Pruebas: Flutter 242 (1 omitida); `validar_ruta.py`, `validar_plan.py fr` y `validar_diagnostico.py --idioma fr` 0 errores.
 Backup: `/var/www/onelingo/backups/20261002-edu-42-frances-n8/web-anterior` (= edu-41). Salud 200; `.env` igual; APK servido; `n8-b10.json` y `diagnostico-v2.json` servidos; lock liberado. (El primer intento falló antes del intercambio porque faltaba la carpeta de staging; se creó y se completó con el mismo respaldo.)
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-42-frances-n8/web-retirada-post2 && cp -al backups/20261002-edu-42-frances-n8/web-anterior web'`
+
+## Release: 20261002-edu-43-frances-n9-n10
+
+Fecha: 2026-10-02 · Responsable: Claude (Claude Code). Solo web (contenido); backend sin cambios y sin reinicios.
+Contenido: francés N9 y N10 (C1) completos. Son 100 clases escritas desde fichas y revisadas bloque a bloque (GO); con esto el francés N1–N10 queda completo (500 clases). Bancos de ubicación N9 y N10 compilados (180 ítems, N1–N10).
+Commits: `f35290d` (N9), `6d5ceba` (N10), `cf2bb28` (bancos) · Build: `main.dart.js` sha256 `2bae06ec939a9206…` (API_URL prod), igual al servido.
+Pruebas: Flutter 242 (1 omitida) con N9–N10; pruebas de ubicación/diagnóstico 40 tras compilar los bancos; `validar_ruta.py`, `validar_plan.py fr` y `validar_diagnostico.py --idioma fr` con 0 errores.
+Backup: `/var/www/onelingo/backups/20261002-edu-43-frances-n9-n10/web-anterior` (= edu-42). Verificado:
+- salud 200;
+- `.env` sin cambios;
+- APK, `n9-b01.json`, `n10-b10.json` y `diagnostico-v2.json` servidos;
+- `curso.json` con f0, N1–N10 y c2;
+- lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-43-frances-n9-n10/web-retirada-post2 && cp -al backups/20261002-edu-43-frances-n9-n10/web-anterior web'`

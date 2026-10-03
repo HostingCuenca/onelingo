@@ -1,6 +1,6 @@
 # Plan de producción: francés y el resto de idiomas
 
-Actualizado: 2026-10-01 · Responsable: Claude. **Este documento ordena todo lo que falta.** Las clases se escriben solo desde su ficha del plan (`PLAN_CLASES.md`, DEC-034). El detalle pedagógico del francés está en `PLAN_FRANCES.md` y la arquitectura en `docs/ARQUITECTURA_VIGENTE.md`.
+Actualizado: 2026-10-02 · Responsable: Claude. **Este documento ordena todo lo que falta.** Las clases se escriben solo desde su ficha del plan (`PLAN_CLASES.md`, DEC-034). El detalle pedagógico del francés está en `PLAN_FRANCES.md` y la arquitectura en `docs/ARQUITECTURA_VIGENTE.md`.
 
 ## 0. Reglas que valen para todo
 
@@ -26,9 +26,9 @@ Actualizado: 2026-10-01 · Responsable: Claude. **Este documento ordena todo lo 
 | FR-5a | Plan de clases: marco común (`curriculo/marco.json`) y fichas del francés N1–N10 (`curriculo/fr/nX.json`) | ✅ marco + 500 fichas del francés N1–N10, todas con revisión GO | `validar_plan.py fr` sin errores y revisión del plan con GO; N1–N2 antes de seguir con B5 |
 | FR-5b | App: niveles de la ruta para cualquier idioma (`idiomasConRuta`) | ✅ hecho para el francés | Aprender muestra Nivel 0 → Fundamentos → N1… (superado / en curso / bloqueado) y prueba del nivel en francés; las lecciones antiguas se retiran del francés |
 | FR-5c | N1: 50 clases en esquema 2 (`fr/ruta/n1-bXX.json`) | ✅ 50 clases publicadas (edu-33, edu-34, edu-35); integrador `tools/contenido/ruta-fr/integrar.py` | 10 bloques con GO y `validar_ruta.py fr` sin errores; se publica por tandas (B1–B3, B4–B6, B7–B10) |
-| FR-6 | Prueba de ubicación v2 en francés | ✅ edu-36 (N1) y edu-38 (N2); cada nivel nuevo trae su banco de 18 ítems | `UbicacionScreen` por idioma; banco con 18 ítems por nivel publicado (N1 y luego N2); simulación de respuestas al azar → «desde cero» |
+| FR-6 | Prueba de ubicación v2 en francés | ✅ bancos N1–N10 (180 ítems, todos con GO) publicados; el último en edu-43 | `UbicacionScreen` por idioma; banco con 18 ítems por nivel publicado (N1 y luego N2); simulación de respuestas al azar → «desde cero» |
 | FR-7 | N2 (A2): 50 clases | ✅ 50 clases publicadas (edu-36, edu-37, edu-38) y banco de ubicación N2 | igual que FR-5c |
-| FR-8 | N3–N10 | según demanda | — |
+| FR-8 | N3–N10 | ✅ 400 clases publicadas (edu-39 a edu-43), escritas desde fichas y revisadas bloque a bloque (GO) | igual que FR-5c |
 | FR-R | Revisión nativa | cuando haya revisor | lista por partes: Nivel 0 → situaciones → N1 |
 
 **Orden de trabajo:**
