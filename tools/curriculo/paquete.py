@@ -45,6 +45,9 @@ for f in sorted(glob.glob(f'{R}/tools/contenido/ruta-{idi}/revision-n{n}-b*.md')
 mid = x.modelo or f'{idi}.n{max(1, n - 1)}.c01'
 mi, mn, mc = re.match(r'(\w+)\.n(\d+)\.c(\d+)', mid).groups()
 fuente = f'assets/contenido/{mi}/ruta/n{mn}-b{(int(mc) - 1) // 5 + 1:02d}.json'
+borrador = f'tools/contenido/ruta-{mi}/n{mn}-b{(int(mc) - 1) // 5 + 1:02d}.json'
+if not os.path.exists(os.path.join(R, fuente)) and os.path.exists(os.path.join(R, borrador)):
+    fuente = borrador  # bloque aprobado aún sin integrar
 if not os.path.exists(os.path.join(R, fuente)):
     # Idioma sin clases publicadas todavía: el modelo es la clase equivalente del francés.
     mi, mid = 'fr', f'fr.n{mn}.c{mc}'
