@@ -32,8 +32,8 @@ w('\n\n########## Reparto: personajes (n1.json)\n' + json.dumps(n1['personajes']
 txt = json.dumps(cards, ensure_ascii=False)
 libres = L(f'assets/contenido/{idi}/ruta/curso.json').get('palabrasLibres', [])
 names = [p for p in libres if p != 'Ana' and len(p) > 2 and re.search(r'\b' + re.escape(p) + r'\b', txt)]
-w(f'\n\n########## Hechos del reparto sobre: {", ".join(names) or "(nadie nombrado)"} (últimos 3 niveles; los anteriores están en curriculo/{idi}/nK.json)\n')
-for k in range(max(1, n - 3), n):
+w(f'\n\n########## Hechos del reparto sobre: {", ".join(names) or "(nadie nombrado)"} (este nivel y los 3 anteriores; los anteriores están en curriculo/{idi}/nK.json)\n')
+for k in range(max(1, n - 3), n + 1):
     for h in L(f'curriculo/{idi}/n{k}.json').get('hechosDelReparto', []):
         if any(re.search(r'\b' + re.escape(p) + r'\b', h['es']) for p in names): w(f"- N{k}: {h['es']}\n")
 w('\n\n########## Hechos confirmados en revisiones de borradores aún sin recoger\n')
@@ -43,10 +43,16 @@ for f in sorted(glob.glob(f'{R}/tools/contenido/ruta-{idi}/revision-n{n}-b*.md')
     s = re.search(r'## Hechos del reparto confirmados\n(.*?)(\n## |\Z)', open(f).read(), re.S)
     if s: w(f'\n### N{n} B{kb}\n' + '\n'.join(l.split(' / ')[0] for l in s[1].strip().splitlines()) + '\n')
 mid = x.modelo or f'{idi}.n{max(1, n - 1)}.c01'
-mn, mc = re.match(rf'{idi}\.n(\d+)\.c(\d+)', mid).groups()
-mod = L(f'assets/contenido/{idi}/ruta/n{mn}-b{(int(mc) - 1) // 5 + 1:02d}.json')
+mi, mn, mc = re.match(r'(\w+)\.n(\d+)\.c(\d+)', mid).groups()
+fuente = f'assets/contenido/{mi}/ruta/n{mn}-b{(int(mc) - 1) // 5 + 1:02d}.json'
+if not os.path.exists(os.path.join(R, fuente)):
+    # Idioma sin clases publicadas todavía: el modelo es la clase equivalente del francés.
+    mi, mid = 'fr', f'fr.n{mn}.c{mc}'
+    fuente = f'assets/contenido/fr/ruta/n{mn}-b{(int(mc) - 1) // 5 + 1:02d}.json'
+mod = L(fuente)
 u = [u for u in mod['unidades'] if u['id'] == mid]
-w(f'\n\n########## MODELO de clase publicada ({mid}; solo estilo y forma)\n' + json.dumps({'modulo': mod['modulo'], 'unidades': u}, ensure_ascii=False, indent=1))
+aviso = '' if mi == idi else f'; es del curso de francés: copia la forma, no el idioma ni el apoyo, que en {idi} va según el encargo'
+w(f'\n\n########## MODELO de clase publicada ({mid}; solo estilo y forma{aviso})\n' + json.dumps({'modulo': mod['modulo'], 'unidades': u}, ensure_ascii=False, indent=1))
 os.makedirs(x.salida, exist_ok=True)
 p = f'{x.salida}/{idi}-n{n}-b{b:02d}.md'
 open(p, 'w').write(''.join(out)); print(p, len(''.join(out)) // 1000, 'kB')
