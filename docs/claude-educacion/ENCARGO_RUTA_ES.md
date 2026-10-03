@@ -43,7 +43,8 @@ En orden: `explicacion` (en N1 abre con el sonido del día), `ejemplos` (5–8 c
 3. **Una sola respuesta** por ítem; si dos formas valen, la consigna fija cuál o `aceptadas` incluye todas.
 4. **Opciones de comprensión** en español desde N3 (en N1–N2 pueden ir en inglés). No se pasan opciones al inglés para esquivar palabras no enseñadas: se enseña la palabra o se reformula.
 5. **Tablas de lectura** (título «To read: …»): como máximo 15 filas, palabra + sentido + frase; los nombres propios no llevan fila. Si hacen falta más, la situación se reescribe con palabras ya enseñadas.
-6. **Producción abierta:** en un `escribir` con `abierta: true`, el modelo tiene al menos `minimoPalabras` palabras.
+6. **Un solo hueco** por `completar`: la app escribe la respuesta en todos los `___`. Si la ficha trae dos huecos («¡Buenos ___! ¿Cómo ___?»), deja el que evalúa el punto de la clase o parte el ítem en dos.
+7. **Producción abierta:** en un `escribir` con `abierta: true`, el modelo tiene al menos `minimoPalabras` palabras.
 
 ## Validación
 

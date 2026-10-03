@@ -497,6 +497,9 @@ class Validador:
                 self.error(donde, "falta respuesta")
             if f == "completar" and "___" not in it.get("texto", ""):
                 self.error(donde, "completar necesita '___' en texto")
+            # La app escribe la respuesta en todos los huecos: uno solo por ítem.
+            if f == "completar" and it.get("texto", "").count("___") > 1:
+                self.error(donde, "completar con más de un '___' (la app admite un solo hueco)")
             # La app acepta el modelo de una producción abierta solo si llega al mínimo.
             if it.get("abierta") and it.get("minimoPalabras"):
                 n = len(re.sub(r"[^\w'’\-]+", " ", it.get("respuesta", "")).split())

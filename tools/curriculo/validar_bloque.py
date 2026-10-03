@@ -6,6 +6,8 @@ pedido; los bloques que todavía no existen se sustituyen por esbozos mínimos
 (id, orden, prerrequisitos) para que la cadena no se rompa. Imprime solo los
 errores del bloque, así los agentes no persiguen errores ajenos.
 
+Los esbozos enseñan el vocabulario de sus fichas.
+
 Uso: python3 tools/curriculo/validar_bloque.py fr 10 5
 """
 import json, os, re, subprocess, sys, tempfile
@@ -34,8 +36,13 @@ for k in range(desde, n + 1):
             if c['bloque'] != j: continue
             i = int(c['id'].split('.c')[1])
             prev = f'{idi}.n{k}.c{i - 1:02d}' if i > 1 else f'{idi}.n{k - 1}.c50'
+            # El esbozo enseña el vocabulario de la ficha: los bloques se pueden escribir en
+            # paralelo contando solo con lo que las fichas anteriores prometen enseñar.
+            voc = [{'id': f'v-{c["id"]}-{x}', 'texto': w, 'traduccion': {'en': w}}
+                   for x, w in enumerate(c.get('vocabulario', {}).get('palabras', []))]
             us.append({'id': c['id'], 'orden': k * 100 + i, 'titulo': c['titulo'], 'objetivo': c['objetivo'],
-                       'cefr': cur['cefr'], 'nivelInterno': k, 'prerequisitos': [prev], 'pasos': []})
+                       'cefr': cur['cefr'], 'nivelInterno': k, 'prerequisitos': [prev], 'vocabulario': voc,
+                       'pasos': [{'id': 'p1', 'tipo': 'vocabulario', 'refs': [v['id'] for v in voc]}] if voc else []})
         sp = f'{tmp}/n{k}-b{j:02d}.json'
         json.dump({'modulo': {'id': f'{idi}.n{k}-b{j:02d}'}, 'unidades': us}, open(sp, 'w'), ensure_ascii=False)
         fs.append(sp); esbozos.append(f'n{k}-b{j:02d}')
