@@ -517,3 +517,16 @@ Backup: `/var/www/onelingo/backups/20261002-edu-43-frances-n9-n10/web-anterior` 
 - `curso.json` con f0, N1–N10 y c2;
 - lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-43-frances-n9-n10/web-retirada-post2 && cp -al backups/20261002-edu-43-frances-n9-n10/web-anterior web'`
+
+## Release: 20261002-edu-44-frances-tipografia
+
+Fecha: 2026-10-02 · Responsable: Claude (Claude Code). Solo web (contenido); backend sin cambios y sin reinicios.
+Contenido: tipografía francesa normalizada en N1–N10, con U+202F antes de ? ! : ; y dentro de « » (184 cadenas publicadas; `tools/contenido/tipografia_fr.py`).
+Commit: `4baa44d`. Pruebas: `ruta_contenido_test` 18/18; `validar_ruta.py fr` 0 errores.
+Backup: `/var/www/onelingo/backups/20261002-edu-44-frances-tipografia/web-anterior` (= edu-43). Verificado:
+- salud 200;
+- `.env` sin cambios;
+- APK servido;
+- `n7-b05.json` servido idéntico al local;
+- lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-44-frances-tipografia/web-retirada-post2 && cp -al backups/20261002-edu-44-frances-tipografia/web-anterior web'`
