@@ -1,0 +1,39 @@
+# Revisión N10 B6 (fr.n10.c26–c30)
+
+GO
+
+Validación: `validar_bloque.py 10 6` → 0 error(es) del bloque; `validar_plan.py fr` sin avisos para c26–c30.
+
+Resumen: las cinco clases enseñan lo que dicen sus fichas, con los ejercicios planeados (formato, clave y evaluación intactos), sin gramática de clases posteriores. Typografía francesa correcta (U+202F, ’), opciones de comprensión en francés, tablas «Para leer…» de 4–9 filas, modelos abiertos ≥ `minimoPalabras`. Continuidad c26–c29 (autor 1) y c30 (autor 2) coherente: Passerelles, 10 000 € de aporte por socio, préstamo de 40 000 €, diez guías, mil clientes, tuteo con Hugo y vous con comité, asesora y jurado.
+
+## Correcciones
+
+- c26, tabla «Para leer la situación»: se conserva la fila «Passerelles (une passerelle)» (el validador exige enseñar la palabra y la fila explica el juego de palabras; no se pudo quitar sin error).
+- c27, ejemplo 7: «Une levée de fonds donne un investisseur providentiel à l’agence» (sentido incorrecto) → «Une levée de fonds ouvre le capital à un investisseur providentiel» (es: «Una captación de capital abre el capital a un inversionista ángel»).
+- c28, situación (turno de Ana): «Hugo garde de toute façon son poste à la mairie» (hablaba de Hugo en tercera persona estando él presente) → «tu gardes de toute façon ton poste à la mairie» (es/en ajustados).
+- c28, g4: «___ , nous tiendrions» → «___, nous tiendrions» (espacio sobrante).
+- c29, situación: dos turnos seguidos de Hugo (estatuto jurídico + «Troisième point») → fundidos en un turno (texto, es, en).
+- c30, errores frecuentes nº 4: se quita la anotación en español dentro del texto francés «(el dato real es 4 982)» y el dato pasa a la explicación.
+- c30, glosas de «pas loin de» («justo por debajo de la cifra» → «casi, un poco por debajo de la cifra») y de «à peu de chose près» («después de la cifra: casi exacta» → «casi exacto (va después de la cifra)»), en tabla, g2, e4 y pista (es/en).
+- c30, tabla «Redondear con honestidad»: «Nous visons quelque 300 clients» para el dato real 301 → «Nous avons quelque 300 clients»; «Nous aurons pas loin de 5 000» → «Nous avons pas loin de 5 000»; «sera de l’ordre de» → «est de l’ordre de» (datos reales en presente).
+- c30, situación: «Elle vient du chiffre d’affaires … et sur la croissance» → «et de la croissance» (es/en ajustados); la respuesta a la segunda pregunta del jurado pasa de Ana a Hugo (como dice el contexto y la ficha: Hugo responde a las dos preguntas).
+- c30, i1 (única respuesta defendible): `aceptadas` ampliadas con «Passerelles a pas loin de 5 000 / 5000 / cinq mille clients».
+- c30, es: «previsional» (no es español en este sentido) → «previsión» («Porque una previsión nunca es exacta», «reemplazamos la previsión por…»); feedback s2 «una cifra exacta no tienen esa precisión» → «una cifra exacta daría una precisión que no tienen».
+- c27–c30, es: «inversor(es)» → «inversionista(s)» (español neutro de América).
+
+## Hechos del reparto confirmados
+
+- Passerelles, agencia franco-ecuatoriana de circuitos de patrimonio entre París y Quito, creada por Ana y Hugo como socios (cofundadores) / Passerelles, a Franco-Ecuadorian heritage-tour agency between Paris and Quito, founded by Ana and Hugo as partners (co-founders) (c26–c30).
+- Ana presenta el plan (cuatro minutos) ante el comité de la cámara de comercio, presidido por un «président du comité» sin nombre, con una integrante («la responsable du comité»); Ana los trata de vous y a Hugo de tú / Ana presents the plan (four minutes) to the chamber of commerce committee, chaired by an unnamed “président du comité”, with one female member; Ana uses vous with them and tu with Hugo (c26).
+- Plan de Passerelles: clientela cible = familias franco-ecuatorianas y escuelas; ventaja competitiva = doble competencia franco-ecuatoriana; paquetes por circuito y visitas privadas (un tercio de los ingresos); préstamo de 40 000 €; cada socio aporta 10 000 €; en tres años: oficina en Quito, diez guías y mil clientes / Passerelles plan: target = Franco-Ecuadorian families and schools; competitive advantage = double Franco-Ecuadorian skill set; per-tour packages and private visits (a third of revenue); 40,000 € loan; each partner contributes 10,000 €; within three years: an office in Quito, ten guides and a thousand customers (c26–c27).
+- Ana solicita el préstamo en su banco a una asesora sin nombre («la conseillère», vous): 3 % a siete años, avales personales de los dos socios, seguro y plazo de gracia de seis meses; el uso de los fondos es formar a diez guías (25 000 €) y crear el sitio web (15 000 €) / Ana requests the loan at her bank from an unnamed advisor (“la conseillère”, vous): 3% over seven years, personal surety from both partners, insurance and a six-month grace period; funds go to training ten guides (25,000 €) and building the website (15,000 €) (c27).
+- Ana dejó la agencia de Madame Mercier «el mes pasado» antes de pedir el préstamo; Hugo conserva su puesto en el servicio de patrimonio de la alcaldía / Ana left Madame Mercier’s agency “last month”, before requesting the loan; Hugo keeps his job in the city hall heritage service (c27, c28, c29).
+- Contingencias de Passerelles: estacionalidad (reserva de tres meses de gastos fijos), crisis sanitaria (visitas en línea), vuelo cancelado (circuito alternativo en la ciudad), guía enfermo (suplente) y alza de la tasa (renegociar el plazo); Ana y Hugo se tutean / Passerelles contingencies: seasonality (three-month fixed-cost reserve), health crisis (online tours), canceled flight (alternative city tour), sick guide (replacement) and a rate increase (renegotiate the payment schedule); Ana and Hugo use tu (c28).
+- Pacto de socios negociado en un café: capital a partes iguales (50 % cada uno), 50 % de los derechos de voto cada uno, Ana dirige los circuitos y Hugo las alianzas, decisiones importantes conjuntas, salida con preaviso de seis meses y un experto fija el precio de la participación; Ana pedirá cita con un abogado para redactarlo / Partnership agreement negotiated in a café: capital in equal shares (50% each), 50% of voting rights each, Ana runs the tours and Hugo the partnerships, major decisions taken jointly, exit with six months’ notice and an expert sets the price of the stake; Ana will make an appointment with a lawyer to draft it (c29).
+- Pitch ante un jurado de inversionistas en un concurso de emprendedores (tres minutos; presidente del jurado e inversionista, sin nombre; vous): unos 300 clientes el primer año, casi 40 circuitos, diez guías, facturación del orden de 200 000 € el tercer año, crecimiento anual del orden del 15 %, unas diez mil visitas web al año y valoración del orden de un millón de euros; Hugo responde a las dos preguntas del jurado / Pitch to a panel of investors at an entrepreneurs’ contest (three minutes; unnamed panel chair and a female investor; vous): about 300 customers in year one, close to 40 tours, ten guides, revenue around 200,000 € in year three, annual growth around 15%, about ten thousand web visits a year and a valuation around one million euros; Hugo answers the panel’s two questions (c30).
+
+## Sin resolver
+
+- La fila «Passerelles (une passerelle)» de la tabla de c26 es un nombre propio (punto 14 del encargo); se mantiene porque `palabrasLibres` no incluye «Passerelles» y el validador exige enseñarla. Si el integrador añade «Passerelles» a `palabrasLibres` en `curso.json`, se puede quitar la fila.
+- Dependencia con B5 (no disponible): c27 afirma que Ana dejó la agencia de Madame Mercier el mes pasado; si B5 de N10 la mantiene empleada en la agencia, hay que armonizar (B1–B4 la muestran todavía en la agencia, coherente con B6 posterior).
+- Cifras de c26 (mil clientes, dos mil visitantes) y c30 (300 clientes el primer año, diez mil visitas web) son compatibles pero no idénticas; se dejan así por ser objetivos distintos (clientes, visitantes del circuito, visitas web).

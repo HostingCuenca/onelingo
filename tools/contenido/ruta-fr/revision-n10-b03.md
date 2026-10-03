@@ -1,0 +1,30 @@
+# Revisión · fr N10 B3 (fr.n10.c11–c15)
+
+GO
+
+Validación: `validar_bloque.py 10 3` → 0 error(es) del bloque; `validar_plan.py fr` sin «título de la unidad difiere» para c11–c15.
+
+Comprobado: títulos y objetivos igual que las fichas; gramática, introduce/recicla y vocabulario (8 palabras por clase) iguales a la ficha; ejercicios del plan presentes (guiada, independiente, situación con 2 preguntas, evaluación de 6 ítems con ≥ 3 formatos; los `escribir` son abiertos y cumplen `minimoPalabras`); nada de clases posteriores; situaciones de 456–483 palabras (rango C1 400–700); tablas «Para leer» de 1–7 filas (máx. 15) sin nombres propios; opciones de comprensión en francés; relacionar con glosas distintas; `aceptadas` con las variantes válidas; hablantes con nombre o papel en francés; U+202F y ’ correctos.
+
+## Correcciones
+
+- c11, situación (contexto y diálogo, es/en): «la nueva vecina del segundo piso (deuxième étage)» → «la nueva vecina del edificio» / «notre nouvelle voisine». El piso fijaba una ubicación que podía chocar con Madame Lefort (vecina de abajo) y metía un término de pisos innecesario.
+- c12, situación, línea de Ana: «Dans un rapport pour le directeur de l’hôtel» → «pour Madame Mercier» (es/en igual). En N9–N10 Ana ya trabaja en la agencia de Madame Mercier, no en el hotel.
+- c12, guiada, `completar` (pista): «Es el infinitivo del verbo que sigue a “je vais” en la expresión de la tabla» (confuso) → «Después de “je vais” va un infinitivo: es el verbo de la expresión “… de rire” de la tabla» (es/en).
+- c14, errorFrecuente 3 (Cassandre): «también para un hombre, según el modelo del mito» → «se dice une Cassandre, incluso si hablas de un hombre» (es/en).
+- c14, situación (contexto): se aclara que el sobrino de treinta años del tío es un primo mayor de Léa y no está presente (Léa tiene un hermano de 11 años; así no hay confusión con él).
+- c15, situación: se quitó a «Mateo» (hablante y mención en contexto y en la línea de Ana) → «Un invité» (invitado ecuatoriano sin nombre). Mateo aparece en B9 como recién llegado a quien Ana ayuda; evita contradecir esa ficha.
+- c15, situación, línea de la invitada: «mais pas à cause de nous… on a tous pris peur» (poco natural y sin sentido claro) → «mais pas contre nous… on s’est tous sentis critiqués» (es/en).
+- c15, evaluación, `completar` («Je ne voulais pas te ___»): se eliminó la aceptada «offenser» (daría «te offenser», agramatical: exigiría «t’offenser») y la consigna pasa a «el verbo de esta clase que significa “ofender” (herir el amor propio)».
+
+## Hechos del reparto confirmados
+
+- Fiesta en el departamento de Emma y Ana: se quema el gratin de Emma, Hugo llega con una hora de retraso, Karim bromea sin sonreír, y una vecina nueva del edificio (sin nombre, invitada por Emma, no es Madame Lefort) llega con pan; Ana trata de vous a Karim y de tú a Léa, Emma y Hugo (c11). / Party in Emma and Ana’s apartment: Emma’s gratin burns, Hugo arrives an hour late, Karim jokes deadpan, and a new neighbor in the building (unnamed, invited by Emma, not Madame Lefort) comes with bread; Ana uses vous with Karim and tu with Léa, Emma and Hugo (c11).
+- Léa cuenta a Ana por teléfono la fiesta de cumpleaños de Hugo (unas sesenta personas, un pastel de Karim que Hugo casi deja caer, una caída de Hugo en bicicleta antes de la fiesta); Ana no fue por trabajo y al día siguiente lo comenta con Karim (vous); Ana escribe sus informes para Madame Mercier con cifras exactas (c12). / Léa tells Ana by phone about Hugo’s birthday party (about sixty people, a cake from Karim that Hugo nearly dropped, a bike fall by Hugo before the party); Ana missed it because of work and discusses it with Karim the next day (vous); Ana writes her reports for Madame Mercier with exact figures (c12).
+- Ana y Léa (se tutean) preparan el cartel del concierto de jazz de barrio de la asociación de vecinos, que le pidió Madame Dubois (miembro de la asociación y amiga de Ana, conoce todos los refranes); Ana elige el título «Mieux vaut jazz que jamais» (c13). / Ana and Léa (tu) prepare the poster for the neighborhood association’s jazz concert, requested by Madame Dubois (an association member and Ana’s friend, who knows all the proverbs); Ana chooses the title “Mieux vaut jazz que jamais” (c13).
+- Comida familiar en casa de Sophie (madre de Léa, médica; Ana la trata de vous): asisten un tío de Léa (hermano de Sophie, Harpagon según su esposa) y su tía; el sobrino de treinta años del tío, primo mayor de Léa, vive aún con sus padres; la abuela de Ana, en Quito, hacía una tarta que Ana evoca como su «madeleine de Proust»; Ana dejó la casa de sus padres en Quito (c14). / Family lunch at Sophie’s (Léa’s mother, a doctor; Ana uses vous with her): Léa’s uncle (Sophie’s brother, a “Harpagon” according to his wife) and aunt attend; the uncle’s thirty-year-old nephew, an older cousin of Léa’s, still lives with his parents; Ana’s grandmother in Quito made a tart that Ana recalls as her “madeleine de Proust”; Ana left her parents’ home in Quito (c14).
+- Fiesta franco-ecuatoriana en el departamento de Emma y Ana: Hugo llega una hora tarde y bromea (segundo grado) sobre la puntualidad de los ecuatorianos; un invitado ecuatoriano y una invitada, sin nombre, lo toman al pie de la letra; Ana media (tú con Hugo y Emma) y Hugo repara con autodérision; Emma, que trabaja en un restaurante por las noches, observa cuándo un cliente toma una broma al pie de la letra (c15). / Franco-Ecuadorian party in Emma and Ana’s apartment: Hugo arrives an hour late and jokes (second degree) about Ecuadorians’ punctuality; an unnamed Ecuadorian guest and another guest take it literally; Ana mediates (tu with Hugo and Emma) and Hugo repairs with self-mockery; Emma, who works evenings in a restaurant, notices when a customer takes a joke literally (c15).
+
+## Sin resolver
+
+- Nada bloqueante. Nota para el integrador: c14 menciona a Sophie como madre de Léa sin repetir que es médica en el diálogo (consistente con N1/N2); c15 deja sin nombre a los invitados ecuatorianos para no chocar con «Mateo, recién llegado» de N10 B9.
