@@ -557,6 +557,8 @@ Calendario fijado al escribir N8 (2033): B1 10–31 ene (empieza el curso del DE
 
 Historia (2034): Emma es jefa de proyectos en Andes Vivos: contactos en una feria en Lima (B1), reuniones, selección de personal (B5), informes para donantes (B6), seguridad en las rutas (B7), trámites públicos (B8) y un conflicto con un proveedor (B9).
 
+Calendario fijado al escribir N9 (2034): B1 feria de Lima jue 18–sáb 20 may (llegada el mié 17) · B2 22–27 may (gala del décimo aniversario el sáb 27) · B3 1–5 jun (el taller pasa del lun 12 al lun 19, a las 12:00; Inés de viaje del 1 al 5) · B4 reunión mensual el mar 6 jun, acta el mié 7 (plazos mar 13, mié 14, vie 30) · B5 entrevistas los jue 8 y 15 jun; Inés llama a la Candidata el vie 16 · B6 3–14 jul (informe del semestre; cuenta de la subvención) · B7 ago (derrumbe el sáb 12; golpe leve en Latacunga el sáb 26) · B8 sep (solicitud de visa el lun 11, resolución el vie 22; denuncia del robo el mié 27) · B9 oct (avería el lun 2; acuerdo con el taller el mar 24) · B10 reunión el mar 7 nov; ensayo y balance el jue 14 dic; el consejo aprueba la ruta el vie 15 dic.
+
 - **B1 Crear contactos**
   - `charla-trivial`
   - `coincidir-en`

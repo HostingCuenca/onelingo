@@ -1,0 +1,49 @@
+GO
+
+## Validación
+`python3 tools/curriculo/validar_bloque.py es 9 6` → 0 error(es) del bloque (tras las correcciones; las dos pasadas intermedias con «claridad» y «menciona» no enseñadas se arreglaron en el mismo ciclo).
+Comprobaciones propias: calendario de julio de 2034 (lun 3, mié 5, jue 6, vie 7, lun 10, mar 11, mié 12, vie 14) correcto; cifras del canon (300, 305, 302, 380, 450, 280; 2.017; 64 %; 61.420 / 55.900 / 5.520 / 38.500; 120.000; 412, 20 %, 82 %, 38 %) y derivados (49 % de marzo a mayo, 336 → «unos 340» al mes, unos 10.000 al mes, unos 30 por visitante) cuadran en las cinco clases; lecturas de 477–517 palabras; ningún hablante con dos turnos seguidos; trato correcto (Emma de usted a Inés, Inés de tú a Emma; usted mutuo con la Ejecutiva; tuteo entre Emma, Kenji y Valentina); en boca de los personajes ya no aparece «procedimiento de recogida» sino «recolección de datos»; ningún distractor de comprensión es verdadero según el texto; Emma nunca llama «desplome» a junio.
+
+## Correcciones
+- [reparto] c26 p10 e4: audio «Las visitas cayeron un cuarenta por ciento en un mes.» → «Las reservas cayeron…» y consigna «bookings» (ningún mes de la ruta cayó un 40 %: mayo→junio fue −38 % y Emma lo llama caída moderada) (media)
+- [pedagogía] c26 p3b: fila «la evolución» eliminada (ya enseñada en es.n5.c02) (baja)
+- [apoyo-en] c26 p8 i2 feedback: «with no por» (ambiguo, el ítem contiene «por ciento») → «with no por before the amount» (baja)
+- [reparto] c27 p10 e2: «Las visitas ___ las 400 al mes» / «hover around 400 a month» → 340 (el promedio del canon es 336; 400 contradecía la clase y el p6) (media)
+- [explicación-falsa] c27 p2: «Spanish writes thousands with a period» → «in Ecuador and much of South America thousands are written with a period…, not with a comma as in English» (México y otros usan coma) (media)
+- [pedagogía] c27 p3b: filas «la diapositiva», «la mitad», «superar», «natural» eliminadas (ya enseñadas antes) (baja)
+- [pedagogía] c27 p3b: ejemplo de «preciso» → «Necesitamos un dato preciso, dicho con claridad.» para que «claridad» siga enseñada tras quitar la fila de «superar» (baja)
+- [aceptadas] c28 p8 i2: «Los gastos fueron ___ 56.000 dólares» aceptaba solo alrededor de / en torno a / cerca de → añadidas «unos», «casi», «poco menos de» (también verdaderas con 55.900) (media)
+- [reparto] c28 p9: «Ella puede firmar el lunes por la mañana» → «por la tarde» (el lunes 10 por la mañana Inés está en su despacho con Emma en c29) (media)
+- [idioma-es] c28 p9 Ejecutiva: «se lo enviamos por correo» sin antecedente claro → «el estado de cuenta se lo enviamos…» (+ traducción) (baja)
+- [idioma-es] c28 p9 Emma: «sin mezclar los dos dineros» (poco natural) → «sin mezclar las dos cosas» (+ traducción) (baja)
+- [pedagogía] c28 p3b: filas «el margen», «la cédula», «el titular», «firmar», «el requisito», «hábil», «el plazo», «la comisión» eliminadas (ya enseñadas en N3–N6) (baja)
+- [pedagogía] c28 s1 y e4: posición de la respuesta correcta repartida (s1 → índice 0, e4 → índice 2; antes cuatro de seis ítems eran índice 1) (baja)
+- [reparto] c29 p9 Inés: «el procedimiento de recogida» (peninsular) → «la recolección de datos»; la fundación lo llama «procedimiento de recogida» solo como reconocimiento (media)
+- [pedagogía] c29 p3b: añadida fila «la recolección de datos» (necesaria para enseñarla) y eliminadas «el borrador», «el hecho», «la fuente», «citar», «el apartado», «nominal», «anotar» (ya enseñadas) (baja)
+- [pedagogía] c29 p4: ejemplo de la metodología «…el procedimiento de recogida» → «…la recolección de datos» (baja)
+- [apoyo-en] c29 p5 ejemplo 2, nota: «it is part of the procedure of data gathering» (sin sentido) → «The methodology is the part that explains the data collection.» (baja)
+- [otro] c29 p4b: primera columna con etiquetas en inglés como celdas `texto` (meta, con audio) → celdas `apoyo` (media)
+- [apoyo-en] c29 p9 s2 feedback: citaba «Pásala a un anexo», frase que no está en el diálogo → cita real «Eso va a un anexo» (media)
+- [pedagogía] c29 e1: respuesta correcta repartida (índice 2 → 0; no había ninguna en 0) (baja)
+- [pedagogía] c30 p3b: filas «la muestra», «deberse a», «demostrar», «el encuestado», «confirmar / confirmarlo», «honesto / honesta» eliminadas (ya enseñadas); ejemplo de «responder / responden» → «Un visitante responde y menciona el reportaje.» para que «menciona» siga enseñada (baja)
+- [pedagogía] c30 i1 y e4: respuesta correcta repartida (ambas pasan a índice 0; ninguna estaba en 0) (baja)
+
+## Hechos del reparto confirmados
+- Emma trata de usted a Inés Cárdenas (directora) e Inés la tutea; Emma, Kenji y Valentina se tutean. / Emma uses usted with Inés Cárdenas (director) and Inés uses tú with her; Emma, Kenji and Valentina use tú with each other.
+- Con la Ejecutiva del banco, Emma y Kenji se tratan de usted mutuo; entre ellos se tutean. / With the bank's account executive, Emma and Kenji use mutual usted; with each other they use tú.
+- Lunes 3 de julio de 2034: Kenji envía a Emma las visitas mensuales de enero a junio del Quilotoa (300, 305, 302, 380, 450, 280) y Emma responde el mismo día; estancamiento en el primer trimestre, notable repunte en abril y mayo por el reportaje de televisión, descenso moderado en junio por las lluvias. / Monday, July 3, 2034: Kenji emails Emma the monthly Quilotoa visits for January–June; stagnation in Q1, a notable rebound in April–May thanks to the TV report, a moderate decline in June because of the rains.
+- Kenji quería escribir «desplome» para junio; Emma lo rechaza y propone «descenso moderado»; Kenji acepta y hará la tabla con las cifras exactas, Emma el texto. / Kenji wanted «desplome» for June; Emma rejects it and proposes «descenso moderado»; Kenji agrees and will do the table with exact figures, Emma the text.
+- Miércoles 5 de julio: Emma y Kenji redondean las cifras para las diapositivas del consejo del viernes 7 (alrededor de 2.000 visitantes, en torno a 61.000 dólares, casi dos tercios de extranjeros); la tabla del informe lleva las cifras exactas (2.017; 61.420; 64 %). Promedio unos 340 visitas al mes, unos 10.000 dólares al mes, unos 30 dólares por visitante. / Wednesday, July 5: Emma and Kenji round the figures for the board slides (Friday, July 7); the report table keeps the exact figures; average about 340 visits and 10,000 dollars a month, about 30 dollars per visitor.
+- Jueves 6 de julio, en el banco: Emma y Kenji piden abrir una cuenta corriente exclusiva para la subvención anual de 120.000 dólares; semestre con ingresos de 61.420, gastos de 55.900 y superávit de 5.520; saldo de la cuenta de proyectos 38.500 dólares. Kenji lleva el presupuesto y se encarga de la tesorería con la contadora. / Thursday, July 6, at the bank: Emma and Kenji ask to open a dedicated checking account for the 120,000-dollar annual grant; semester income 61,420, expenses 55,900, surplus 5,520; project account balance 38,500. Kenji handles the budget and the treasury with the accountant.
+- Apertura de la cuenta: tres requisitos (contrato de la subvención, cédula de los titulares, carta de la fundación); titulares Inés Cárdenas y Emma; plazo de cuatro días hábiles; documentos el lunes 10 por la tarde, cuenta lista el viernes 14; sin comisión de apertura. / Account opening: three requirements (grant contract, holders' ID cards, foundation letter); holders Inés Cárdenas and Emma; four working days; documents on Monday, July 10 in the afternoon, account ready Friday, July 14; no opening fee.
+- Lunes 10 de julio por la mañana: Inés revisa con Emma el borrador de 38 páginas del informe a la fundación donante y pide tres cambios (resumen ejecutivo al principio y en una página; lista de encuestas a un anexo; hechos separados de interpretaciones con su fuente); Emma entrega la nueva versión el miércoles 12 por la mañana e Inés la revisa por la tarde. / Monday, July 10, morning: Inés reviews the 38-page draft with Emma and asks for three changes; Emma hands in the new version Wednesday, July 12 morning and Inés reviews it that afternoon.
+- La fundación llama a la recolección de datos «procedimiento de recogida»; en Andes Vivos se dice «recolección de datos». / The foundation calls data collection «procedimiento de recogida»; at Andes Vivos they say «recolección de datos».
+- Encuesta de salida: 412 respuestas (20 % de los 2.017 visitantes), 82 % volvería, 38 % de los encuestados menciona el reportaje. / Exit survey: 412 responses (20 % of the 2,017 visitors), 82 % would return, 38 % of respondents mention the TV report.
+- Martes 11 de julio: Valentina escribió «El reportaje causó el aumento»; Emma la matiza («a priori… habría que confirmarlo», la muestra podría no ser representativa) y Valentina reescribe; Emma recomienda «parece haber influido». / Tuesday, July 11: Valentina wrote «The TV report caused the increase»; Emma softens it and Valentina rewrites it; Emma recommends «parece haber influido».
+
+## Sin resolver
+- c26: la ficha pone «el apogeo» en el vocabulario; el autor lo enseña en la tabla «To read» (y usa repunte, descenso y auge en el vocabulario). Se deja: la palabra está enseñada antes de usarse y el vocabulario ya tiene 12 entradas (máximo).
+- c26/c30: tras la limpieza quedan en las tablas «To read» algunas filas con una forma ya vista junto a otras nuevas (responder/responden, influir/influye/influyó, categórico/categórica, coincidir/coincide/coincidan, exclusivo/exclusiva) y «la escala» (ya enseñada como «stopover» en N3, aquí «scale of a chart»). Se dejan porque aportan formas o un sentido nuevo.
+- c26: la ficha fija que la caída de mayo a junio (450 → 280, −38 %) es «moderada» y Emma lo justifica comparando junio con enero; se mantiene por el plan, pero es la parte más discutible numéricamente. Las lluvias se mantienen como causa (sin afirmar nada sobre la estación).
+
+Total: 21 correcciones (0 altas, 8 medias, 13 bajas)
