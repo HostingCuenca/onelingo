@@ -244,7 +244,9 @@ def validar_idioma(idioma, marco):
             if e in ('escrito', 'revisado') and cid not in pub and cid not in bor:
                 errores.append(f'{d}: marcada {e} pero no hay unidad con ese id')
             u = pub.get(cid) or bor.get(cid)
-            if u and isinstance(u.get('titulo'), dict) and u['titulo'] != c.get('titulo'):
+            # Se comparan solo los idiomas de apoyo que trae la unidad (el español va solo en inglés).
+            if u and isinstance(u.get('titulo'), dict) and any(
+                    u['titulo'][k] != (c.get('titulo') or {}).get(k) for k in u['titulo']):
                 avisos.append(f'{d}: el título de la unidad difiere del plan')
         if mapa and len(clases) == BLOQUES * CLASES_POR_BLOQUE:
             for b, ks in mapa.get(nv, {}).items():
