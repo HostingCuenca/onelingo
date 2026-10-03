@@ -493,6 +493,8 @@ Calendario fijado al escribir N7 (2032): B1 4–17 feb (derrumbe; recorrido del 
 
 Historia (2033): Emma prepara el DELE C1 en un curso donde conoce a Martina (argentina, voseo); habla rápida y radio; variedades del español; reclamación por escrito; presenta un estudio en un curso universitario (B9).
 
+Calendario fijado al escribir N8 (2033): B1 10–31 ene (empieza el curso del DELE C1, los jueves; Emma conoce a Martina el primer día; vuelo a Guayaquil) · B2 1–28 feb (informe para Inés, cena en casa de Mateo el sáb 12, Andrés desaparece del lun 21 al vie 25, departamento de Mateo) · B3 1–14 mar (compras; zapatos para la hermana de Emma, que vive en EE. UU.) · B4 17 mar–2 abr (módulo de variedades desde el jue 17; excursión a la sierra el sáb 19; hotel de Madrid para unas vacaciones de julio) · B5 3–17 abr (Emma cumple 32 el mar 12; se inscribe en el DELE C1 de noviembre) · B6 18–26 abr · B7 28 abr–4 may (módulo de literatura con sesiones extra) · B8 5–31 may (reclamación de internet el jue 5; nueva Administradora del edificio) · B9 3–28 oct (3.100 visitantes = proyección de todo 2033) · B10 31 oct–18 nov (feriado del jue 3 de noviembre; simulacro y nota provisional antes del examen).
+
 - **B1 Escucha rápida y habla conectada**
   - `formas-reducidas-oral`: pa’, ’ta, ’toy
   - `muletillas`: este…, o sea, tipo, nomás
