@@ -20,7 +20,7 @@ Fuente única para escribir las fichas `curriculo/es/nX.json` (DEC-034). Fija **
 | **Daniela Andrade** | 22, la hija; estudia Arquitectura en la universidad; se vuelve la mejor amiga de Emma | tú |
 | **Mateo Ruiz** | 29, mexicano de Guadalajara, diseñador gráfico, vive en Quito; conoció a Emma en un intercambio de idiomas (f0) | tú |
 | **Sofía Herrera** | 35, mexicana, profesora de español de Emma en el instituto | usted al principio; desde N1 B6 tú (ella se lo pide) |
-| **Andrés Vaca** | 31, ecuatoriano, coordinador académico del instituto y compañero de trabajo de Emma | tú |
+| **Andrés Vaca** | 31, ecuatoriano, coordinador académico del instituto y compañero de trabajo de Emma; jefe directo de Emma mientras ella es coordinadora de cursos (2028–agosto 2029); desde que Emma entra en Andes Vivos, amigo y excolega | tú |
 | **Doña Carmen** | 65, dueña de la tienda del barrio (La Floresta) | usted |
 
 Los Andrade viven en una casa en **La Floresta**, un barrio de Quito, con un perro, **Toby**. El instituto está en La Mariscal. Personajes de roles sin nombre: «Mesero», «Mesera», «Vendedora», «Recepcionista», «Taxista», «Doctora», «Policía»… (en español: se muestra igual con la interfaz en inglés).
