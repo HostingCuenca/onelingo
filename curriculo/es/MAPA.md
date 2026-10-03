@@ -429,6 +429,8 @@ Calendario fijado al escribir N6: B1 abril–mayo (Emma cumple 30 el sábado 12-
 
 Historia (2032): Emma redacta mensajes delicados para la fundación; investiga la historia de Quito para una ruta guiada (B4); visita a Daniela en Madrid (B8); lee novelas latinoamericanas (B9).
 
+Calendario fijado al escribir N7 (2032): B1 4–17 feb (derrumbe; recorrido del sáb 14 pasa al sáb 21) · B2 24 feb–5 mar · B3 9–19 mar (golpe al taxi el mar 16) · B4 23 mar–1 abr · B5 3–24 abr (aniversario de Andes Vivos el sáb 10; Emma cumple 31 el lun 12) · B6 26–30 abr (reunión de tarifas) · B7 3–12 may (negociación del viaje) · viaje de 24 estudiantes del vie 14 al lun 17 may · B8 Madrid del lun 24 al lun 31 may (cumpleaños de Daniela el sáb 29) · B9 club de lectura 3–24 jun (Sofía propone el DELE C1 el jue 24) · B10 7–26 jun (informe y quejas del viaje; Emma acepta preparar el DELE).
+
 - **B1 Registro y matices**
   - `registros-lexico`
   - `formulas-mensajes-delicados`: lamentamos informarle que…

@@ -1,0 +1,36 @@
+GO
+
+## Validación
+`python3 tools/curriculo/validar_bloque.py es 7 3` → 0 errores del bloque (antes y después de las correcciones).
+Comprobado además: lecturas de 356–369 palabras (300–500); 8 ejemplos por clase; un solo `___` por `completar`; tablas «To read» de ≤ 13 filas; ningún hablante con dos turnos seguidos; fechas de marzo de 2032 correctas (c11 martes 9, c12 viernes 12, c13 lunes 15, c14 miércoles 17 con el golpe al taxi el martes 16 a las 19:00, c15 viernes 19; en c15, 1:00 p. m. en Quito = 7:00 p. m. en Madrid, UTC+1); tú/usted según el reparto (Emma → don Jorge usted, él la tutea; Policía usted mutuo; Emma–Kenji–Valentina–Daniela tú); pronunciaciones figuradas revisadas (ow-toh-MOH-beel, ow-toh-moh-bee-LEES-tah, behs-TEE-hyoh, moh-toh-see-KLEES-tah, kah-rroh-seh-REE-ah y demás: tónica correcta); gramática nueva = solo el `introduce` de cada ficha; ejercicios según el plan de cada ficha.
+
+## Correcciones
+- [reparto] c11, situación (turnos 14–15): Emma tenía dos turnos seguidos (celular olvidado / «¿Y cómo está Daniela?», que además preguntaba al padre por su hija tras decir que habló con ella ayer) → un solo turno de Emma que añade «Por cierto, ayer hablé con Daniela por videollamada. La vi muy contenta.» (media)
+- [reparto] c11, situación (turnos 15–16): don Jorge tenía dos turnos seguidos → un solo turno que empieza «Sí, está muy bien…» y sigue con «Y tú, Emma, ¿piensas a veces en el instituto?» (media)
+- [apoyo-en] c11, v-trancon (nota): «the everyday word in Ecuador and Colombia» → «a colloquial word used in Ecuador and Colombia; el tráfico is the neutral word» (baja)
+- [reparto] c13, situación (Policía): «el automovilista debe de haberse distraído» → «el conductor de la camioneta debe de haberse distraído» (alta)
+- [reparto] c13, situación (Valentina): «¿Y el automovilista tendrá que pagar…?» → «¿Y el conductor de la camioneta tendrá que pagar…?» (media)
+- [apoyo-en] c13, v-automovilista (nota): se añade que es palabra formal para quien conduce un carro y que, para el de la camioneta, el texto dice «el conductor de la camioneta» (baja)
+- [pedagogía] c13, situación (Valentina): «Debe de haber mucho trabajo hoy en la ciudad» (haber impersonal, se confunde con «deber de + haber + participio») → «Debe de tener mucho trabajo hoy» (suposición sobre el presente, contraste limpio con la estructura de la clase) (baja)
+- [explicación-falsa] c13, p3b «debió»: «he / she must have (with de); he / she had to» → «he / she must have (debió de + infinitive); without de: he / she should have» (media)
+- [apoyo-en] c14, v-huir (nota): «Say “weer”, in one syllable» → se añade que rima con «beer», h muda y r de un solo golpe (baja)
+- [idioma-es] c14, situación (Policía, cierre): «Es normal. Un taxi es su trabajo.» (sin sentido tras la respuesta de Emma) → «Gracias, con eso es suficiente.» (media)
+- [explicación-falsa] c14, p1: «Spanish never uses the gerund here» → el gerundio existe (Lo vi corriendo); ahora dice que con ver / oír lo normal es el infinitivo y que el curso lo usa (media)
+- [explicación-falsa] c14, erroresFrecuentes «Vi saliendo un hombre»: «Spanish uses the infinitive» → «the natural choice for an action is the infinitive» (baja)
+- [aceptadas] c15, situación s1: el distractor «Casi se cayó.» también era verdad según el diálogo (Emma «por poco me caigo en el bordillo»), dos respuestas correctas → «Casi pierde el vuelo.» (alta)
+- [explicación-falsa] c15, erroresFrecuentes «Por poco no pierdo el bus»: la explicación se contradecía («almost did not miss… I caught it») → explica que «por poco no + verbo» = casi no lo logré y lo logré, y que para «casi lo pierdo» se usa «por poco pierdo» sin «no» (alta)
+
+## Hechos del reparto confirmados
+- Martes 9 de marzo de 2032, 8:30: Emma va en el taxi de don Jorge a una reunión a las 9:00 y están en un trancón; Emma le habla de usted, él la tutea / On Tuesday, March 9, 2032, 8:30 a.m., Emma rides in don Jorge's taxi to a 9:00 meeting and they are stuck in traffic; Emma uses usted, he uses tú
+- Don Jorge no compró el carro nuevo hace dos años porque prefirió ayudar a Daniela en Madrid (por eso tiene tantas reparaciones) / Don Jorge did not buy the new car two years ago because he preferred to help Daniela in Madrid (hence the many repairs)
+- Daniela vive y trabaja en Madrid; Rosa la llama todos los días; Emma habla con Daniela por videollamada (ayer, en c11) / Daniela lives and works in Madrid; Rosa calls her every day; Emma talks to Daniela by video call (yesterday, in c11)
+- Emma trabaja en Andes Vivos desde 2029; antes estaba en el instituto («si no hubiera aceptado el trabajo en Andes Vivos, todavía estaría en el instituto») / Emma has worked at Andes Vivos since 2029; before that she was at the institute
+- Viernes 12 de marzo de 2032: Emma, Kenji y Valentina (se tutean) esperan en una parada un bus de visitantes que debía llegar a las 9:00; llega a las 10:00 por la congestión de la lluvia; el conductor trabajaba por primera vez con ellos / On Friday, March 12, 2032, Emma, Kenji and Valentina (tú) wait for a visitor bus due at 9:00; it arrives at 10:00 because of rain traffic; the driver was working with them for the first time
+- Lunes 15 de marzo de 2032, 17:00: choque de una camioneta y una moto en un cruce con el semáforo averiado desde la mañana; no hay heridos graves (el motociclista, un golpe en la mano); Emma y Valentina llegan después, no vieron nada; Policía y ellas se tratan de usted / Monday, March 15, 2032, 5:00 p.m.: a truck and a motorcycle collide at an intersection with a traffic light broken since morning; no serious injuries (the motorcyclist has a bump on his hand); Emma and Valentina arrive afterward and saw nothing; usted with the Policía
+- Martes 16 de marzo de 2032, 19:00: una camioneta blanca golpea el taxi estacionado de don Jorge frente a la oficina; Emma declara como testigo el miércoles 17 ante un Policía (usted mutuo); no vio la placa; el hombre era alto y llevaba chaqueta negra; la camioneta tenía una luz rota; don Jorge llegó diez minutos después / Tuesday, March 16, 2032, 7:00 p.m.: a white truck hits don Jorge's parked taxi in front of the office; Emma gives a witness statement on Wednesday the 17th to a Policía (usted both ways); she did not see the plate; the man was tall in a black jacket; the truck had a broken light; don Jorge arrived ten minutes later
+- Viernes 19 de marzo de 2032: videollamada Emma (Quito, 1:00 p. m.) – Daniela (Madrid, 7:00 p. m.), se tutean; por la mañana una moto frenó a dos metros de Emma en un paso de cebra; Daniela casi pierde el metro y casi no entrega un proyecto a tiempo; Emma no le cuenta nada a Rosa / Friday, March 19, 2032: video call Emma (Quito, 1:00 p.m.) – Daniela (Madrid, 7:00 p.m.), tú; that morning a motorcycle stopped two meters from Emma at a crosswalk; Daniela nearly missed the metro and nearly failed to hand in a project on time; Emma does not tell Rosa
+
+## Sin resolver
+- Ninguna falla abierta. Observaciones menores que no bloquean: «camioneta» se glosa como «truck» (en Ecuador es una pickup o furgoneta; «pickup truck» sería más exacto); «bordillo» y «paso de cebra» son vocabulario de las fichas con sabor peninsular (Daniela, desde Madrid, los usa de forma aceptable; Emma los dice en Quito) — se dejan por ser de la ficha.
+
+Total: 14 correcciones (3 altas, 6 medias, 5 bajas)

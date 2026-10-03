@@ -1,0 +1,37 @@
+GO
+
+## Validación
+`python3 tools/curriculo/validar_bloque.py es 7 4` → 0 errores del bloque (antes y después de las correcciones). Lecturas de 347–372 palabras de diálogo (rango B2 cumplido), sin turnos seguidos del mismo hablante, todos los `completar` con un solo `___`, todos los `ordenar` coinciden con sus tokens, un solo acierto por ítem. Las fichas se respetan en formato, clave y contenido evaluado; la gramática nueva es solo el `introduce` de cada ficha. Fechas comprobadas con calendario: c16 martes 23-mar, c17 jueves 25-mar, c18 sábado 27-mar, c19 martes 30-mar y c20 jueves 1-abr de 2032 (ajustes finales del coordinador). Ninguna clase menciona la edad de Emma (cumple 31 el lunes 12-abr).
+
+## Correcciones
+- [explicación-falsa] c18 p9 diálogo (Emma, truco del siglo): «los años que empiezan con 17 casi siempre son del siglo dieciocho» (1700 no es XVIII, 1800 no empieza con 17) → «un año como 1750 empieza con 17, pero es del siglo dieciocho. El número del siglo es uno más. Y 1700 todavía es del siglo diecisiete» (y traducción) (alta)
+- [explicación-falsa] c18 p1: «English often says “the seventeen hundreds” for the same years [XVII]» (las seventeen hundreds son el siglo XVIII) → «English also names centuries by their years (“the seventeen hundreds” are the 18th century), so the numbers can mislead you» (alta)
+- [explicación-falsa] c18 p7 g4 pista: «Years that start with 15 are in the XVI century» (1500 es XV) → «A year like 1550 is in the 16th century: the century number is one more than 15» (baja)
+- [explicación-falsa] c18 p1: «Only the first nine centuries use ordinals» → «For centuries before the 10th, ordinals are used (el siglo noveno), but that is rare today» (baja)
+- [apoyo-en] c18 p5 ejemplo 2, nota: «El siglo XVIII va de 1701 a 1800.» (apoyo en español) → «The 18th century runs from 1701 to 1800.» (media)
+- [pedagogía] c18 p9 diálogo: «la iglesia tiene más de cuatro siglos» (no se deduce de «siglo XVII» solo; 1700 daría 332 años) → «más de tres siglos» en pregunta, respuesta y traducciones, cierto para todo el siglo XVII (baja)
+- [explicación-falsa] c19 p1: «you never say a principio / a mediado» y «do not translate … al final» (al final de es español correcto, con otro sentido; a principio de existe en el habla) → forma estándar en plural y nota de que «al final de» apunta al final exacto, «a finales de» a la última parte (media)
+- [explicación-falsa] c19 erroresFrecuentes 2, explicación: «are always plural» → «are used in the plural» (baja)
+- [explicación-falsa] c20 v-eeuu nota: «It is plural, so the verb is plural too» (Estados Unidos sin artículo suele llevar verbo singular) → «With the article it takes a plural verb (los Estados Unidos son); without it, many speakers use a singular verb (Estados Unidos es)» (media)
+- [reparto] c16 p9 contexto: martes 9-mar → martes 23-mar de 2032 (por el calendario de B3) (media)
+- [reparto] c17 p9 contexto: jueves 18-mar → jueves 25-mar de 2032; «Hoy es jueves» sigue coherente (media)
+- [reparto] c19 p9 contexto: martes 6-abr → martes 30-mar de 2032 (B5 empieza el 3-abr) (media)
+- [reparto] c20 p9 contexto: jueves 15-abr → jueves 1-abr de 2032; los grupos de La Paz y Estados Unidos llegan ese día (media)
+- [pedagogía] c16–c20, 33 ítems `elegir`/`escuchar`: la respuesta correcta estaba casi siempre en la posición 0 (≈ 85 %) → opciones reordenadas para repartirla entre las tres posiciones (12/11/11); no se tocaron los enunciados, y c17 s1 (Dos / Tres / Cinco) conserva su orden natural (media)
+
+## Hechos del reparto confirmados
+- Emma, Kenji y Valentina se tutean y prueban la ruta del centro histórico en un bus turístico (martes 23 de marzo de 2032); Emma hace de guía, Kenji toma notas, Valentina aconseja separar leyenda de dato documentado / Emma, Kenji and Valentina use tú and test the historic-center route on a tourist bus (Tuesday, March 23, 2032); Emma plays the guide, Kenji takes notes, Valentina advises separating legend from documented fact
+- Emma y un Turista se tratan de usted; ella le explica el camino a la iglesia (jueves 25 de marzo de 2032) / Emma and a Tourist use usted; she gives directions to the church (Thursday, March 25, 2032)
+- Plaza ficticia del centro histórico: iglesia del siglo XVII (terminada hacia 1610, «a principios del siglo XVII»), fuente del XVIII (hacia 1750), luz eléctrica a finales del XIX (en torno a 1895), edificio de correos en los años treinta (a mediados), primer tren en 1908; el tranvía no aparece / Fictional square in the historic center: 17th-century church (finished around 1610), 18th-century fountain (around 1750), electric light at the end of the 19th century (around 1895), post office building in the 1930s (mid-decade), first train in 1908; the tram does not appear
+- Leyendas de la plaza: el atrio de la iglesia «se terminó en una sola noche», un túnel entre el convento y la iglesia y el cura que escondió un tesoro son leyenda; «la plaza fue un mercado» consta por el manuscrito de un cronista del convento / Legends of the square: the churchyard finished in one night, a tunnel between the convent and the church and the priest's hidden treasure are legend; «the square was a market» is documented by a chronicler's manuscript from the convent
+- Emma explica a un grupo de visitantes, de ustedes, un mural cronológico de la plaza (sábado 27 de marzo de 2032); la Colonia duró casi tres siglos / Emma explains a chronological mural of the square to a group of visitors (usted/ustedes) (Saturday, March 27, 2032); the Colony lasted almost three centuries
+- Emma y Kenji (tú) revisan el guion del bus turístico en la oficina de Andes Vivos (martes 30 de marzo de 2032); Kenji lleva la revisión y se lo pasa a Valentina; el museo de la estación guarda la historia del primer tren (1908) / Emma and Kenji (tú) review the tourist-bus script in the Andes Vivos office (Tuesday, March 30, 2032); Kenji reviews it and passes it to Valentina; the station museum covers the first train (1908)
+- Emma recibe a dos grupos de visitantes, uno de La Paz y otro de Estados Unidos (jueves 1 de abril de 2032), a quienes trata de ustedes; el grupo de La Paz viajará después a La Habana; Emma es de Chicago / Emma welcomes two groups of visitors, one from La Paz and one from the United States (Thursday, April 1, 2032), using ustedes; the La Paz group will travel on to Havana; Emma is from Chicago
+- Emma trata de usted a Inés Cárdenas, que la tutea, y revisa con ella los topónimos del mensaje de bienvenida / Emma uses usted with Inés Cárdenas, who uses tú with her, and checks the place names of the welcome message with her
+- Quito dependió del Virreinato del Perú durante buena parte de la Colonia (la Real Audiencia de Quito pasó a depender de Nueva Granada en el siglo XVIII); Cuenca está al sur de Quito; Quito es la capital del Ecuador / Quito depended on the Viceroyalty of Peru for a good part of the Colony (the Audiencia of Quito came under New Granada in the 18th century); Cuenca is south of Quito; Quito is the capital of Ecuador
+
+## Sin resolver
+- Nada bloqueante. Observación menor: c20 g3 (`ordenar`) tiene una aceptada («Yo soy de La Paz.») que no se puede formar con los tokens; no hace daño y se deja.
+- Tanto las cuentas de siglos como las de años cuadran con el canon: de la iglesia (hacia 1610) a 2032 hay más de cuatro siglos, y de la iglesia al edificio de correos (años treinta) más de trescientos años; en c18 se usa «más de tres siglos», verdadero con cualquier fecha del XVII.
+
+Total: 14 correcciones (2 altas, 8 medias, 4 bajas)
