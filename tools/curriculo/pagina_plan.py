@@ -3,6 +3,7 @@
 publicado) para revisarla y aprobarla nivel a nivel.
 
 Uso: python3 tools/curriculo/pagina_plan.py fr salida.html
+(salida fuera de tools/curriculo: pagina_plan.html es la plantilla)
 Los datos van embebidos; las aprobaciones y notas viven en la base del
 artifact (colección «revision»), no en el archivo.
 """
@@ -11,7 +12,9 @@ import sys
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[2]
-ES = lambda v: (v.get('es') if isinstance(v, dict) else v) or ''  # noqa: E731
+# Texto en español; el curso de español (apoyo solo en inglés) cae al inglés.
+ES = lambda v: ((v.get('es') or v.get('en')) if isinstance(v, dict) else v) or ''  # noqa: E731
+NOMBRE = {'fr': ('francés', 'Francés de Francia'), 'es': ('español', 'Español latinoamericano · apoyo en inglés')}
 
 
 def celda(c):
@@ -78,6 +81,8 @@ def resumen_unidad(u):
 
 def main():
     idioma, salida = sys.argv[1], Path(sys.argv[2])
+    if salida.resolve() == (Path(__file__).parent / 'pagina_plan.html').resolve():
+        sys.exit('la salida no puede ser la plantilla pagina_plan.html')
     marco = json.loads((RAIZ / 'curriculo/marco.json').read_text(encoding='utf-8'))
     sit = {s['id']: s['nombre'] for s in json.loads(
         (RAIZ / 'assets/contenido/situaciones/catalogo.json').read_text(encoding='utf-8'))['situaciones']}
@@ -135,6 +140,8 @@ def main():
     datos = {'idioma': idioma, 'niveles': niveles, 'personajes': personajes, 'hechosN1': [ES(h) for h in n1.get('hechosDelReparto', [])],
              'antes': antes, 'extra': extra}
     plantilla = (Path(__file__).parent / 'pagina_plan.html').read_text(encoding='utf-8')
+    nombre, variedad = NOMBRE.get(idioma, (idioma, idioma))
+    plantilla = plantilla.replace('Plan del francés', f'Plan del {nombre}').replace('Francés de Francia', variedad)
     salida.write_text(plantilla.replace('/*DATOS*/null', json.dumps(datos, ensure_ascii=False).replace('</', '<\\/')),
                       encoding='utf-8')
     print(f'{salida}: {salida.stat().st_size // 1024} KB')

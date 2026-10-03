@@ -144,12 +144,30 @@ def validar_ejercicios(c, d, intro, recicla):
         errores.append(f'{d}: la evaluación no evalúa {", ".join(sin)}')
 
 
+def leer_mapa(idioma):
+    """{nivel: {bloque: [claves]}} de curriculo/<idioma>/MAPA.md, si el idioma
+    tiene mapa: fija qué introduce cada bloque (el francés no lo tiene)."""
+    p = CURRICULO / idioma / 'MAPA.md'
+    mapa, nv, b = {}, None, None
+    for linea in p.read_text(encoding='utf-8').splitlines() if p.exists() else []:
+        if m := re.match(r'## N(\d+)\b', linea):
+            nv = int(m.group(1))
+            mapa[nv] = {}
+        elif nv and (m := re.match(r'- \*\*B(\d+)\b', linea)):
+            b = int(m.group(1))
+            mapa[nv][b] = []
+        elif nv and b and (m := re.match(r'\s+- `([a-z0-9-]+)`', linea)):
+            mapa[nv][b].append(m.group(1))
+    return mapa
+
+
 def validar_idioma(idioma, marco):
     carpeta = CURRICULO / idioma
     if not carpeta.exists():
         errores.append(f'{idioma}: falta curriculo/{idioma}/')
         return
     pub, bor = unidades_existentes(idioma)
+    mapa = leer_mapa(idioma)
     introducidas = {}
     palabras = {}
     resumen = []
@@ -195,6 +213,8 @@ def validar_idioma(idioma, marco):
                 avisos.append(f'{d}: no recicla nada')
             for k in intro:
                 introducidas[k] = cid
+                if mapa and k not in mapa.get(nv, {}).get(bloque, []):
+                    errores.append(f'{d}: introduce «{k}», que MAPA.md no da al bloque {bloque}')
             voc = c.get('vocabulario') or {}
             bilingue(voc.get('campo'), f'{d} vocabulario.campo')
             pals = voc.get('palabras')
@@ -226,6 +246,11 @@ def validar_idioma(idioma, marco):
             u = pub.get(cid) or bor.get(cid)
             if u and isinstance(u.get('titulo'), dict) and u['titulo'] != c.get('titulo'):
                 avisos.append(f'{d}: el título de la unidad difiere del plan')
+        if mapa and len(clases) == BLOQUES * CLASES_POR_BLOQUE:
+            for b, ks in mapa.get(nv, {}).items():
+                falta = [k for k in ks if introducidas.get(k, '').split('.')[1:2] != [f'n{nv}']]
+                if falta:
+                    errores.append(f'{d0} b{b}: MAPA.md pide introducir {", ".join(falta)}')
         resumen.append(f'n{nv}: ' + ', '.join(f'{v} {k}' for k, v in estados.items() if v))
     print(f'{idioma}: ' + ' · '.join(resumen))
 

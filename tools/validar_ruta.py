@@ -102,6 +102,12 @@ class Validador:
         # muestra (refs de un paso `vocabulario`) o aparece en ejemplos,
         # patrones y tablas; un vocablo declarado pero oculto no basta.
         self.estricto = bool(curso.get("vocabularioEstricto"))
+        # reglasAutoria: reglas mecánicas que en el francés causaron ~30 % de
+        # las correcciones de revisión (tablas «Para leer», opciones de
+        # comprensión, extensión de la situación, apellidos del reparto).
+        self.autoria = bool(curso.get("reglasAutoria"))
+        self.libres = libres
+        self.reparto = self._reparto() if self.autoria else {}
         niveles = {n["id"]: n for n in curso.get("niveles", [])}
         for n in niveles.values():
             self.apoyo(n.get("titulo"), f"nivel {n['id']}.titulo")
@@ -142,7 +148,73 @@ class Validador:
         self.grafo(unidades)
         for u in unidades.values():
             self.unidad(u, unidades, libres)
+            # Solo las clases del plan (DEC-034: <idioma>.nX.cNN), no Fundamentos ni el contenido anterior.
+            if self.autoria and re.search(r"\.n\d+\.c\d+$", str(u.get("id", ""))):
+                self.reglas_autoria(u)
         return self.errores
+
+    def _reparto(self):
+        """{apellido: {nombre: género}} del reparto (curriculo/<idioma>/n1.json)."""
+        p = RAIZ.parents[1] / "curriculo" / self.idioma / "n1.json"
+        res = {}
+        if p.exists():
+            for per in json.loads(p.read_text(encoding="utf-8")).get("personajes", []):
+                partes = str(per.get("nombre", "")).split()
+                if len(partes) == 2 and partes[0].lower() not in self.TITULOS:
+                    res.setdefault(partes[1], {})[partes[0]] = per.get("genero")
+        return res
+
+    TITULOS = {"señor": "m", "don": "m", "doctor": "m", "dr": "m", "sr": "m",
+               "señora": "f", "doña": "f", "doctora": "f", "dra": "f", "sra": "f", "señorita": "f",
+               "monsieur": "m", "madame": "f", "mademoiselle": "f"}
+    LECTURA = {1: (3, 6, "líneas"), 2: (60, 160, "palabras"), 3: (130, 300, "palabras"), 4: (130, 300, "palabras"),
+               5: (270, 560, "palabras"), 6: (270, 560, "palabras"), 7: (270, 560, "palabras"),
+               8: (360, 770, "palabras"), 9: (360, 770, "palabras"), 10: (360, 770, "palabras")}
+
+    def apellidos(self, texto, donde):
+        """Un apellido del reparto solo va con su nombre o con un tratamiento de su género."""
+        for m in re.finditer(r"(?=\b([A-Za-zÁÉÍÓÚÑáéíóúñ]+)\.? ([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+))", texto or ""):
+            previo, apellido = m.group(1), m.group(2)
+            if apellido not in self.reparto or previo[0].islower() and previo.lower() not in self.TITULOS:
+                continue
+            familia = self.reparto[apellido]
+            genero = self.TITULOS.get(previo.lower())
+            if genero is None and previo not in familia and previo[0].isupper():
+                self.error(donde, f"«{previo} {apellido}»: {apellido} es del reparto ({', '.join(familia)})")
+            elif genero and genero not in familia.values():
+                self.error(donde, f"«{previo} {apellido}»: nadie del reparto con ese apellido es {'hombre' if genero == 'm' else 'mujer'}")
+
+    def reglas_autoria(self, u):
+        uid = u.get("id", "?")
+        nivel = u.get("nivelInterno")
+        for p in u.get("pasos", []):
+            donde = f"{uid}.{p.get('id')}"
+            if p.get("tipo") == "tabla":
+                titulo = " ".join(str(v) for v in (p.get("titulo") or {}).values()).lower()
+                if re.search(r"para leer|to read", titulo):
+                    if len(p.get("filas", [])) > 15:
+                        self.error(donde, f"tabla «Para leer» con {len(p['filas'])} filas (máx. 15): reescribe la situación con palabras ya enseñadas")
+                    for i, fila in enumerate(p.get("filas", [])):
+                        c0 = fila[0] if fila and isinstance(fila[0], dict) else {}
+                        t = str(c0.get("texto", "")).strip()
+                        if t and all(w in self.libres for w in palabras(t)):
+                            self.error(donde, f"fila {i} «{t}»: los nombres propios no llevan fila")
+                        if re.search(r"(^[-–])|([-–]$)", t):
+                            self.error(donde, f"fila {i} «{t}»: celda suelta; la fila es palabra + sentido + frase")
+            if p.get("tipo") == "situacion":
+                for i, d in enumerate(p.get("dialogo", [])):
+                    self.apellidos(d.get("hablante", ""), f"{donde}.dialogo[{i}].hablante")
+                    self.apellidos(d.get("texto", ""), f"{donde}.dialogo[{i}]")
+                if isinstance(nivel, int) and nivel in self.LECTURA:
+                    mn, mx, unidad = self.LECTURA[nivel]
+                    dialogo = p.get("dialogo", [])
+                    n = len(dialogo) if unidad == "líneas" else len(palabras(" ".join(d.get("texto", "") for d in dialogo)))
+                    if not mn <= n <= mx:
+                        self.error(donde, f"la lectura tiene {n} {unidad}; en el nivel {nivel}: {mn}–{mx}")
+                if isinstance(nivel, int) and nivel >= 3:
+                    for it in p.get("items", []):
+                        if it.get("formato") in ("elegir", "escuchar") and any(isinstance(o, dict) for o in it.get("opciones", [])):
+                            self.error(f"{donde}.{it.get('id')}", "desde el nivel 3 las opciones de comprensión van en el idioma meta: enseña la palabra o reformula")
 
     def grafo(self, unidades):
         for uid, u in unidades.items():
