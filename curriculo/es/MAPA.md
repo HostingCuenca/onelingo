@@ -365,6 +365,8 @@ Historia (2030): Emma coordina proyectos de turismo comunitario en Andes Vivos; 
 
 Historia (2031): Emma negocia con proveedores y comunidades; da su primera charla en una feria de turismo (B8); Mateo abre su estudio de diseño (B5); equipo nuevo: Kenji y Valentina.
 
+Calendario fijado al escribir N6: B1 abril–mayo (Emma cumple 30 el sábado 12-abr-2031) · B2 sin mes (hacia mayo–junio) · B3 mayo–junio · B4 julio · B5 agosto (estudio de Mateo) · B6 octubre · B7 primera mitad de noviembre · B8 ensayos del 17 al 28 de noviembre · B9 sin mes salvo la encuesta (finales de noviembre) · B10: debate el lunes 1-dic, montaje y feria el sábado 13-dic-2031, cierre el lunes 22-dic.
+
 - **B1 Familias y relaciones hoy**
   - `como-si`
   - `a-diferencia-de`

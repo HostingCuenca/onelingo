@@ -46,7 +46,12 @@ for k in range(desde, n + 1):
         sp = f'{tmp}/n{k}-b{j:02d}.json'
         json.dump({'modulo': {'id': f'{idi}.n{k}-b{j:02d}'}, 'unidades': us}, open(sp, 'w'), ensure_ascii=False)
         fs.append(sp); esbozos.append(f'n{k}-b{j:02d}')
-out = subprocess.run(['python3', 'tools/validar_ruta.py', idi, '--borrador', *fs], cwd=R, capture_output=True, text=True).stdout
+res = subprocess.run(['python3', 'tools/validar_ruta.py', idi, '--borrador', *fs], cwd=R, capture_output=True, text=True)
+out = res.stdout
+if 'Traceback' in res.stderr:
+    # Un fallo del validador (p. ej. un campo de texto null) no puede pasar por «0 errores».
+    print(res.stderr.strip().splitlines()[-1])
+    sys.exit(f'== N{n} B{b}: validar_ruta.py falló; revisa campos nulos o mal formados en los borradores')
 clases = '|'.join(f'{(b - 1) * 5 + i:02d}' for i in range(1, 6))
 mios = [l for l in out.splitlines() if re.search(rf'{idi}\.n{n}\.c({clases})\b', l) or f'n{n}-b{b:02d}' in l]
 print('\n'.join(mios[:60]) + (f'\n... (+{len(mios) - 60} más)' if len(mios) > 60 else ''))
