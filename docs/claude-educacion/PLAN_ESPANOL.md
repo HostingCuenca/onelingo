@@ -28,7 +28,7 @@ Actualizado: 2026-10-03 · DEC-034. Mismo método que el francés (`PLAN_FRANCES
 | ES-3 | Nivel 0 corto «Leer y pronunciar» (5 unidades: vocales, letras que cambian para un anglohablante —h, j/g, ll/y, ñ, r/rr, c/z/qu, b/v, d—, acento y tilde, diptongos, prueba). La ortografía española es transparente: basta una versión corta | propuesta |
 | ES-4 | Las 50 situaciones × 3 tramos en español (`assets/contenido/es/situaciones.json`) | pendiente |
 | ES-5 | «Mis verbos» en español (`verbos-es.json`, unos 120 verbos con 6 personas y los tiempos de A1–B2) | pendiente |
-| ES-6 | Plan N1–N10: 500 fichas con plan de ejercicios, revisión del plan y página para aprobar | revisado (10 GO, `revision-nX.md`); esperando aprobación |
+| ES-6 | Plan N1–N10: 500 fichas con plan de ejercicios, revisión del plan y página para aprobar | aprobado el 03-10 (10 GO, `revision-nX.md`); cronología N9–N10 fijada en `MAPA.md` |
 | ES-7 | N1 (A1): piloto de modelos en los bloques 1–2, después el resto por bloques con revisión GO; se retira `a1-1` | tras aprobar ES-6 |
 | ES-8 | Prueba de ubicación v2 en español (banco por nivel) y N2–N10 | después |
 

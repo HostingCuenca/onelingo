@@ -36,7 +36,7 @@ Los Andrade viven en una casa en **La Floresta**, un barrio de Quito, con un per
 - **N5–N7** (2030–2032): Emma coordina proyectos de turismo comunitario; residencia ecuatoriana (N5 B1); en N7 B8 visita a Daniela en Madrid.
 - **N8** (2033): Emma prepara el DELE C1.
 - **N9** (2034): Emma es jefa de proyectos en Andes Vivos.
-- **N10** (2035): Emma y Mateo fundan **Puente**, una pequeña agencia de turismo responsable e interpretación.
+- **N10** (2035): Emma y Mateo fundan **Puente**, una pequeña agencia de turismo responsable e interpretación. Emma sigue en Andes Vivos hasta lanzar la ruta de abril y lo deja a finales de abril (Inés queda como mentora); Puente se prepara de enero a mayo (pruebas, preventas, pilotos) y se lanza oficialmente el 1 de junio.
 
 ---
 
