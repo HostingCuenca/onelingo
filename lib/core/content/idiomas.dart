@@ -15,9 +15,10 @@ const idiomasNoLatinos = {'zh', 'ja', 'ko', 'ru'};
 /// Idiomas que no separan palabras con espacios (las frases del banco sí lo hacen).
 const idiomasSinEspacios = {'zh', 'ja'};
 
-/// Locale de voz por idioma.
+/// Locale de voz por idioma (español latinoamericano: es-MX, el más extendido
+/// en las voces y el reconocimiento de Android, iOS y web).
 const localeVoz = {
-  'en': 'en-US', 'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE', 'pt': 'pt-BR',
+  'en': 'en-US', 'es': 'es-MX', 'fr': 'fr-FR', 'de': 'de-DE', 'pt': 'pt-BR',
   'it': 'it-IT', 'zh': 'zh-CN', 'ja': 'ja-JP', 'ko': 'ko-KR', 'ru': 'ru-RU',
 };
 
