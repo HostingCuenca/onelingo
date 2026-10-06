@@ -1,0 +1,36 @@
+GO
+
+# Revisión N4 · B2 (pt.n4.c06–c10) · revisor independiente
+
+Validador: `validar_bloque.py pt 4 2` → 0 errores. Escucha: ≥2 `escuchar` por clase (c06 g2+i3; c07 g2+i2; c08 g2+i2; c09 g2+e1; c10 i2+e1), conservados, con el audio igual a la respuesta. Los `relacionar` de la ficha están en las 5 evaluaciones (3–4 pares, una sola correspondencia). Borrador sólido en lo didáctico; la mayor parte de los cambios (≈ 95) son tablas «Para ler» sobrantes.
+
+## Cambios
+
+- **Tablas «Para ler» (80 filas quitadas, 5 tablas fusionadas):** se probó fila a fila con el validador y se quitaron las 80 que no hacían falta (ya enseñadas en N1–N3, N4 B1 o en la propia clase) o que eran formas flexionadas de palabras enseñadas: «eu perdi», «eu lamento», «mandei uma mensagem», «eu já vi», «ele não atende», «estranha», «sozinha», «cara», «generosa», «baixa», «difícil, difíceis». Se conservaron solo 30 filas con palabra nueva (p. ej. «o mestrado», «dividir», «morno», «caseiro», «o ímã de frevo», «o sotaque», «assustadora», «conseguir», «o namorado», «a amizade»). Las dos tablas «Palabras del diálogo» de cada clase quedan fusionadas en una.
+- **Falso amigo corregido (c09):** «estranhar» estaba traducido «extrañar», que en español de América es «echar de menos» (= sentir saudade). Traducciones ES arregladas («Quizás te parezcan raras las vocales») en diálogo, relacionar e3 y tabla; ⚠ añadido en la explicación p1 (ES/EN): «Estranhar no es extrañar».
+- **erroresFrecuentes (1):** c10 «Eu estou segura que ela volta» no es error real (estar seguro/a de que es portugués válido y chocaba con el vocabulario «seguro») → «Seguro que ela volta no Natal.» (calco de «seguro que») → «Com certeza ela volta no Natal.» El resto (fazido, abrida, exquisita, tenho visto, tomara que + indicativo, talvez que, É improvável que eu vou, mala sorte, ter + infinitivo) son errores reales de hispanohablante.
+- **Canon (1):** c10 i3 pedía «tu fin de semana» con «aula com a Renata» como cosa segura, pero Renata da clase martes y jueves a las 19:00 → «tu próxima semana» (consigna ES/EN); el modelo se conserva.
+- **Situación en diálogo con narración en contexto (1):** c07 el diálogo pasaba de la llamada a «Meus desejos para você» sin explicar que Camila escribe una tarjeta → añadido en `contexto` (ES/EN): «Depois da ligação, a Camila escreve um cartão com desejos para a Ana».
+- **Diálogo (1):** c10 dos intervenciones seguidas de Camila fusionadas en una.
+- **Traducciones/portuñol (2):** c10 «No tengo certeza de nada» → «No estoy segura de nada»; tabla de escala «No estoy segura / No tengo certeza» → «No estoy segura».
+- **Feedback inexacto (2):** c06 e3 y c07 e3 decían que cada par respondía a «una situación/problema del diálogo» cuando varios son hipótesis nuevas → reformulado (c06: «solo una parte viene del diálogo»; c07: «un problema del viaje»).
+- **Paridad ES/EN (1):** c09 explicación p3 ES citaba «o rio está cheio» sin equivalente en EN → quitado.
+- **Sin cambios, verificados:** pt-BR natural (devia ter te avisado, tomara que, deve ter + participio, será que + indicativo, talvez + subjuntivo, com certeza/provavelmente + indicativo, É improvável que + subjuntivo); «pequeno-almoço» (c09) y «autocarro» (c10) solo reconocimiento, marcados como Portugal en tabla y traducción; falsos amigos ⚠ presentes (má/mala, ninguém, casaco/abrigo, esquisito/exquisito, evidência, seguro, estranhar); «a gente podia ter viajado mais juntas» (c06 g3), «Se abrir, a vaga deve ser sua» (c09 e4) y demás `ordenar` con una sola solución natural; distractores = errores reales; sin Ecuador; nombres de la ficha (Bia, Lucas, Dona Marina, Iara, Bruno) del reparto.
+- **Dudas del autor decididas:** (1) `relacionar` con lado derecho {es,en} en vez de pt↔pt: aceptado, es el esquema (texto meta ↔ TextoApoyo) y evita pares defendibles en dos sentidos. (2) Hechos de la lista: c10 la mesa con un bilhete en español (Ana la preparó antes de que Camila llegara a Maré Digital, 2026), c08 el paquete con bolo de rolo y dos ímãs de frevo, c09 Ana duda de que Iara abra la vaga de gerente a mitad de año: confirmados, coherentes con N4 B1 y con el reparto. (3) Cierre de B2: c10 es la fiesta de despedida en el Café da Bia y termina con el brindis de Bia; Ana se va a Lisboa y Larissa no aparece (entra en B3): correcto. (4) «pequeno-almoço»/«autocarro»: solo reconocimiento, aceptado. (5) Narración en `contexto`: aplicado (c07 corregido).
+
+## Hechos del reparto confirmados
+
+- c06 (viernes en la noche, Café da Bia): Ana anuncia que la aceptaron en una maestría en Lisboa y viaja dentro de tres semanas; tenía miedo de no pasar y se lo calló meses (estudiaba de noche). Camila no fue con Ana a Caruaru en el São João del año anterior (2028) porque se quedó trabajando. Bia lamenta no haber hecho un bolo de rolo de despedida y lo hará el sábado. Antes, Ana y Camila compartían todo, hasta las cuentas; Ana discutía con Camila por la ventana abierta. Quedan tres fines de semana.
+- c07 (diez días antes del embarque, apartamento de Graças): Ana intenta cerrar la maleta por primera vez y le falta el abrigo (casaco) porque Lisboa es fría; el embarque es a las 22h en el aeropuerto del Recife; Dona Marina (a senhora; ella la tutea con você) llama y le manda un bolo de rolo con Lucas; Camila escribe una tarjeta de deseos y le pide que vuelva para el São João.
+- c08 (miércoles en la noche, Graças): llega un paquete sin remitente con un bolo de rolo todavía tibio, dos ímãs de frevo y una nota «Para as meninas não esquecerem Recife»; la letra redondita es de Dona Marina (tarjetas de Navidad); deducen que lo trajo Lucas, que hace los favores de su madre; Lucas responde con un emoji de risa. Dona Marina vive en Boa Viagem y ya no va mucho a Graças.
+- c09 (sábado en la mañana, orilla del Capibaribe, ocho días antes de la mudanza): Ana duda de si se adaptará a Lisboa y al acento; Camila quizá viva sola un tiempo después de que se vaya Ana; Camila duda de que Iara abra una vaga de gerente (quizá a mitad de año); Ana opina que sería suya.
+- c10 (fiesta de despedida en el Café da Bia, con Lucas y Bia): Ana quizá no vuelva en el São João porque el pasaje es caro en junio, pero quizá en Navidad; vuelve con certeza a visitar; cuando Camila llegó a Maré Digital (8-09-2026), Ana ya le había preparado una mesa con un bilhete en español; Camila la llama la persona más generosa del Porto Digital. Ana viaja desde Recife (embarque 22h) y desde B3 habla desde Lisboa; Larissa entra en el cuarto de Ana en Graças en B3.
+
+## Correcciones de ficha
+
+- c10 (independiente, escribir): el ejemplo «Fim de semana: aula com a Renata (certo)» contradice el canon (Renata da clase martes y jueves a las 19:00, no en fin de semana). Aplicado en el borrador como «próxima semana»; la ficha conserva «fin de semana» (no se edita).
+
+## Sin resolver
+
+- «Camila no fue a Caruaru en el São João del año anterior» es un hecho que B3+ deben respetar. Ana viaja unas semanas después de la fiesta, antes del São João (en c10 el pasaje de junio es caro): no fijar fecha exacta de salida.
+- El orden temporal interno de B2 es: c06 (3 semanas antes), c07 (10 días), c09 (8 días; c08 es un miércoles dentro de ese periodo) y c10 (fiesta final); los bloques siguientes no deben depender de más detalle.
