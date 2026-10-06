@@ -33,3 +33,29 @@ test('francés usa voces nativas: Hélène narra y Nicolas en diálogos', async 
   assert.equal(rolDeVoz('avatar_lumo', 'fr'), 'avatar_lumo');
   assert.equal(rolDeVoz('no-existe', 'en'), 'narradora');
 });
+
+test('alemán usa voces nativas: Petra narra y Julius en diálogos', async () => {
+  const { rolDeVoz } = await import('../src/lib/voz.js');
+  assert.equal(rolDeVoz(undefined, 'de'), 'petra');
+  assert.equal(rolDeVoz('narrador', 'de'), 'julius');
+  assert.equal(rolDeVoz('avatar_lumo', 'de'), 'avatar_lumo');
+});
+
+test('alemán: las cifras se leen en palabras (años, fechas, horas, §, decimales)', () => {
+  const v = (t: string) => textoParaVoz(t, 'de');
+  assert.equal(v('Der Dichter starb 1950.'), 'Der Dichter starb neunzehnhundertfünfzig.');
+  assert.equal(v('Sie wurde 1921 geboren.'), 'Sie wurde neunzehnhunderteinundzwanzig geboren.');
+  assert.equal(v('Das war im Jahr 2024.'), 'Das war im Jahr zweitausendvierundzwanzig.');
+  assert.equal(v('Laut § 437 BGB hat der Käufer Rechte.'), 'Laut Paragraf vierhundertsiebenunddreißig BGB hat der Käufer Rechte.');
+  assert.equal(v('im Sinne des § 434 BGB'), 'im Sinne des Paragrafen vierhundertvierunddreißig BGB');
+  assert.equal(v('Es kostet 1950 Euro.'), 'Es kostet eintausendneunhundertfünfzig Euro.');
+  assert.equal(v('Wir zahlen 1.000 €.'), 'Wir zahlen eintausend Euro.');
+  assert.equal(v('bis zum 15. März'), 'bis zum fünfzehnten März');
+  assert.equal(v('Der 3. Mai ist ein Freitag.'), 'Der dritte Mai ist ein Freitag.');
+  assert.equal(v('um 7:15 Uhr'), 'um sieben Uhr fünfzehn');
+  assert.equal(v('um 1 Uhr'), 'um ein Uhr');
+  assert.equal(v('bei 3,5 %'), 'bei drei Komma fünf Prozent');
+  assert.equal(v('Wir haben 21 Gäste und 101 Stühle.'), 'Wir haben einundzwanzig Gäste und einhunderteins Stühle.');
+  assert.equal(v('Ich bin 15, mein Vater ist 50.'), 'Ich bin fünfzehn, mein Vater ist fünfzig.');
+  assert.equal(textoParaVoz('Es kostet 437 Euro.', 'fr'), 'Es kostet 437 Euro.');
+});

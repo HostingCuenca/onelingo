@@ -5,6 +5,7 @@ import path from 'node:path';
 import { Readable } from 'node:stream';
 import { config } from './config.js';
 import { query, uno } from './db.js';
+import { numerosEnPalabrasDe } from './numeros_de.js';
 
 /** Voces por rol: los 4 tutores de la app + narradores neutros para lecciones y Listening. */
 export const VOCES: Record<string, { id: string; nombre: string; descripcion: string }> = {
@@ -28,11 +29,15 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   // Francés de Francia (elegidas por el cliente, 2026-10-01).
   helene: { id: 'imRmmzTqlLHt9Do1HufF', nombre: 'Hélène', descripcion: 'Narradora francesa · educativa y calmada' },
   nicolas: { id: 'aQROLel5sQbj1vuIVi6B', nombre: 'Nicolas', descripcion: 'Narrador parisino · diálogos' },
+  // Alemán estándar de Alemania (calibración 2026-10-06: mejor lectura de Umlaut, ch e -ig).
+  petra: { id: 'lzvBSKYbNWDD0a6BaJSK', nombre: 'Petra', descripcion: 'Narradora alemana · educativa y clara' },
+  julius: { id: 'n6JEKnKG5a8I78SoBRry', nombre: 'Julius', descripcion: 'Narrador alemán · diálogos' },
 };
 
 /** Voz nativa por idioma para los roles neutros (lecciones y diálogos). */
 const NATIVAS: Record<string, Record<string, string>> = {
   fr: { narradora: 'helene', narrador: 'nicolas' },
+  de: { narradora: 'petra', narrador: 'julius' },
 };
 
 /** Rol efectivo: el pedido si existe (si no, narradora), con la voz nativa del idioma. */
@@ -48,7 +53,9 @@ export function textoParaVoz(t: string, idioma = 'en') {
   const limpio = t.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
   // En chino y japonés el contenido separa palabras con espacios para los
   // ejercicios; la voz debe leer la frase continua, sin pausas artificiales.
-  return idioma === 'zh' || idioma === 'ja' ? limpio.replace(/ /g, '') : limpio;
+  if (idioma === 'zh' || idioma === 'ja') return limpio.replace(/ /g, '');
+  // En alemán la voz lee mal las cifras: se le pasan escritas (ver numeros_de.ts).
+  return idioma === 'de' ? numerosEnPalabrasDe(limpio) : limpio;
 }
 
 /** Idiomas que Flash/Turbo v2.5 pueden forzar con `language_code` (ISO 639-1). */
