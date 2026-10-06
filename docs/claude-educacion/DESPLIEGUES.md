@@ -545,3 +545,18 @@ Backup: `/var/www/onelingo/backups/20261005-edu-45-espanol/{web-anterior,backend
 - lock liberado.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261005-edu-45-espanol/web-retirada-post && cp -al backups/20261005-edu-45-espanol/web-anterior web'`
 Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo; cp backups/20261005-edu-45-espanol/backend-anterior/situaciones.ts backend/src/lib/ && rm backend/src/content/situaciones-es.json && pm2 restart onelingo-api'`
+
+## Release: 20261006-edu-46-portugues
+
+Fecha: 2026-10-06 · Responsable: Claude (Claude Code). Web + backend (1 archivo nuevo); sin reinicio de `onelingo-api`.
+Contenido: curso de portugués de Brasil completo (DEC-035): ruta N1–N10 (500 clases, bloques con GO, pasada de canon), prueba de ubicación v2 (180 ítems), 50 situaciones × 3 tramos, Nivel 0, «Mis verbos»; `idiomasConRuta` incluye `pt`; apoyo es/en.
+Commit: `1d2dfc8` (build desde worktree limpio de HEAD) · `main.dart.js` sha256 `d7b02de9409d106c…` (API_URL prod).
+Backend: `src/content/situaciones-pt.json` añadido; `src/lib/situaciones.ts` idéntico al de prod (sin cambios); `config.ts` de prod intacto.
+Pruebas: Flutter 258 + 1 omitida en HEAD limpio («All tests passed!»); `validar_ruta.py` 0 errores en todos los idiomas.
+Backup: `/var/www/onelingo/backups/20261006-edu-46-portugues/{web-anterior,backend-anterior}` (= edu-45). Verificado:
+- `/api/salud` 200;
+- `situaciones-pt.json` = 50 situaciones (lectura en node); el proceso carga el archivo de forma perezosa por idioma (si ya había cacheado `pt` vacío antes del despliegue, haría falta reiniciar `onelingo-api`);
+- `n10-b10.json`, `diagnostico-v2.json`, `verbos.json` y `situaciones.json` del portugués servidos; APK conservado;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261006-edu-46-portugues/web-retirada-post && cp -al backups/20261006-edu-46-portugues/web-anterior web'`
+Rollback backend: `ssh -F /dev/null root@167.235.20.41 'rm /var/www/onelingo/backend/src/content/situaciones-pt.json'`
