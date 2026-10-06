@@ -149,6 +149,26 @@ void main() {
           : 'el banco francés aún no está compilado',
     );
 
+    test(
+      'al azar con el banco real del español (apoyo solo en inglés)',
+      () {
+        final j =
+            jsonDecode(
+                  File('assets/contenido/es/diagnostico-v2.json')
+                      .readAsStringSync(),
+                )
+                as Map<String, dynamic>;
+        for (final interfaz in ['en', 'es']) {
+          final banco = ItemUbicacion.bancoLocalizado(j, interfaz);
+          expect(banco.length, 180);
+          comprobarAzar(banco, nivelMaximo: 1);
+        }
+      },
+      skip: File('assets/contenido/es/diagnostico-v2.json').existsSync()
+          ? false
+          : 'el banco español aún no está compilado',
+    );
+
     test('quien domina N1 sale en N1 y nunca por encima del banco', () {
       final banco = ItemUbicacion.banco(bancoFrances());
       final rnd = Random(4);

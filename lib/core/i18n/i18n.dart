@@ -68,16 +68,18 @@ const _apoyos = {'es', 'en', 'fr', 'pt', 'de', 'it'};
 
 /// Resuelve los textos de apoyo de un JSON de contenido: cada mapa
 /// `{"es": …, "en": …}` (solo cadenas) se cambia por el texto en [idioma],
-/// o en español si falta. Lo demás queda igual. Así un contenido puede pasar
-/// de un texto simple (solo español) a bilingüe sin tocar el modelo.
+/// o en español si falta, o en inglés si tampoco hay español (el curso de
+/// español se explica solo en inglés: `{"en": …}`). Lo demás queda igual.
+/// Así un contenido puede pasar de un texto simple (solo español) a bilingüe
+/// sin tocar el modelo.
 Object? localizarApoyo(Object? j, String idioma) {
   if (j is List) return [for (final x in j) localizarApoyo(x, idioma)];
   if (j is Map) {
     if (j.isNotEmpty &&
-        j.containsKey('es') &&
+        (j.containsKey('es') || j.containsKey('en')) &&
         j.keys.every(_apoyos.contains) &&
         j.values.every((v) => v is String)) {
-      return (j[idioma] as String?) ?? j['es'] as String;
+      return (j[idioma] ?? j['es'] ?? j['en']) as String;
     }
     return {
       for (final e in j.entries) '${e.key}': localizarApoyo(e.value, idioma),

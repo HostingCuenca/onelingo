@@ -130,8 +130,12 @@ def cumple_rubrica(texto: str, rub: dict, idioma: str) -> bool:
                for grupo in rub["evidencias"])
 
 
-def es_texto(v) -> str:
-    return v.get("es", "") if isinstance(v, dict) else ""
+# Cursos cuyo apoyo es solo inglés (el español se explica en inglés).
+APOYO_SOLO_EN = {"es"}
+
+
+def es_texto(v, clave: str = "es") -> str:
+    return v.get(clave, "") if isinstance(v, dict) else ""
 
 
 def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
@@ -167,17 +171,30 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
         if iid in ids:
             e("id duplicado")
         ids.add(iid)
-        consigna, feedback = es_texto(it.get("consigna")), es_texto(it.get("feedback"))
-        if not consigna or len(consigna) > 90:
-            e("consigna.es obligatoria y ≤ 90 caracteres")
+        solo_en = idioma in APOYO_SOLO_EN
+        clave = "en" if solo_en else "es"
+        consigna, feedback = es_texto(it.get("consigna"), clave), es_texto(it.get("feedback"), clave)
+        if not consigna or len(consigna) > (110 if solo_en else 90):
+            e(f"consigna.{clave} obligatoria y ≤ {110 if solo_en else 90} caracteres")
         if consigna.casefold() in consignas:
             e("consigna repetida")
         consignas.add(consigna.casefold())
         if not feedback:
-            e("falta feedback.es")
+            e(f"falta feedback.{clave}")
         if POSICION.search(feedback):
             e("el feedback no puede citar la posición de una opción")
-        if idioma != "en":
+        if solo_en:
+            # Apoyo solo en inglés, como la ruta del idioma (idiomasApoyo: ["en"]).
+            for campo in APOYOS:
+                if campo not in it:
+                    continue
+                v = it[campo]
+                if not isinstance(v, dict) or set(v) != {"en"} or \
+                        not all(isinstance(x, str) and x.strip() for x in v.values()):
+                    e(f"{campo}: texto de apoyo {{en}} sin vacíos")
+            if POSICION_EN.search(feedback):
+                e("el feedback (en) no puede citar la posición de una opción")
+        elif idioma != "en":
             # Apoyo bilingüe para hispanohablantes y anglohablantes (I18N.md).
             for campo in APOYOS:
                 if campo not in it:

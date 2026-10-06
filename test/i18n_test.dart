@@ -43,4 +43,12 @@ void main() {
     ]);
     expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
   });
+
+  test('localizarApoyo: bilingüe, solo español o solo inglés (curso de español)', () {
+    expect(localizarApoyo({'es': 'Hola', 'en': 'Hi'}, 'en'), 'Hi');
+    expect(localizarApoyo({'es': 'Hola', 'en': 'Hi'}, 'fr'), 'Hola');
+    expect(localizarApoyo({'en': 'Listen'}, 'es'), 'Listen');
+    expect(localizarApoyo({'en': 'Listen'}, 'en'), 'Listen');
+    expect(localizarApoyo({'meta': 'x', 'en': 'y'}, 'es'), {'meta': 'x', 'en': 'y'});
+  });
 }
