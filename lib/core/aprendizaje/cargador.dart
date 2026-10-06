@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+import 'integridad.dart' show indiceFormasVerbales;
 import 'modelos.dart';
 
 /// Carga las rutas desde assets (rootBundle: válido en web y móvil).
@@ -9,6 +10,7 @@ class CargadorRuta {
   CargadorRuta({AssetBundle? bundle}) : _bundle = bundle ?? rootBundle;
   final AssetBundle _bundle;
   final _cache = <String, Future<RutaCargada?>>{};
+  final _formas = <String, Future<Map<String, Set<String>>>>{};
 
   /// Módulos que no se pudieron cargar (para pruebas y diagnóstico).
   final modulosConError = <String>[];
@@ -39,6 +41,23 @@ class CargadorRuta {
     unidades.sort((a, b) => a.orden.compareTo(b.orden));
     return RutaCargada(curso, unidades);
   }
+
+  /// Forma conjugada → infinitivos según `assets/contenido/<idioma>/verbos.json`
+  /// (la misma fuente que «Mis verbos»), para `problemasDeContenido`; vacío si
+  /// el idioma no tiene tabla de verbos.
+  Future<Map<String, Set<String>>> formasVerbales(String idioma) =>
+      _formas.putIfAbsent(idioma, () async {
+        final String raw;
+        try {
+          raw = await _bundle.loadString(
+            'assets/contenido/$idioma/verbos.json',
+            cache: false,
+          );
+        } catch (_) {
+          return const {};
+        }
+        return indiceFormasVerbales(jsonDecode(raw) as Map<String, dynamic>);
+      });
 
   Future<List<UnidadRuta>> _modulo(String idioma, ModuloIndice m) async {
     // Un módulo ausente o dañado no debe tumbar el curso entero; las

@@ -37,19 +37,39 @@ void main() {
     idiomaContenido = 'en';
   });
 
-  test('el portugués (en reconstrucción) tiene Fundamentos solo en la ruta f0: 8 unidades', () async {
+  test('el portugués (en reconstrucción): Fundamentos solo en la ruta f0 (8 unidades) y N1 encadenado tras ella', () async {
     expect(idiomasSoloRutaF0, contains('pt'));
     await ContenidoJson.precargar('pt');
     expect(Fundamentos.disponible('pt'), isFalse); // sin nivel-0.json antiguo
-    final ruta = await CargadorRuta().cargar('pt');
+    final cargador = CargadorRuta();
+    final ruta = await cargador.cargar('pt');
     expect(ruta, isNotNull);
+    expect(cargador.modulosConError, isEmpty);
     final f0 = ruta!.delNivel('f0');
     expect(f0, hasLength(8));
     expect(f0.first.id, 'pt.f0.primeiro-contato');
     expect(f0.last.id, 'pt.f0.apresentar-se');
-    expect(problemasDeContenido(ruta), isEmpty);
-    // Solo Fundamentos: aún sin niveles N publicados ni ruta por niveles.
-    expect(ruta.curso.niveles.where((n) => n.estado == EstadoNivel.publicado).map((n) => n.id), ['f0']);
+    expect(problemasDeContenido(ruta, formasVerbales: await cargador.formasVerbales('pt')), isEmpty);
+    // Publicados solo los niveles que integró tools/contenido/ruta-pt/integrar.py:
+    // f0 y luego N1, N2… consecutivos, cada uno con clases y encadenado al anterior.
+    final publicados = [
+      for (final n in ruta.curso.niveles)
+        if (n.estado == EstadoNivel.publicado) n.id,
+    ];
+    expect(publicados.first, 'f0');
+    expect(publicados.skip(1), [for (var i = 1; i < publicados.length; i++) 'n$i']);
+    expect(publicados, contains('n1'));
+    var previa = f0.last.id;
+    for (final nivel in publicados.skip(1)) {
+      final clases = ruta.delNivel(nivel);
+      expect(clases.length, greaterThanOrEqualTo(5), reason: nivel);
+      for (final u in clases) {
+        expect(u.id, startsWith('pt.$nivel.c'), reason: u.id);
+        expect(u.prerequisitos, [previa], reason: u.id);
+        previa = u.id;
+      }
+    }
+    // Aún sin la ruta por niveles en la app (sigue fuera de idiomasConRuta).
     expect(idiomasConRuta, isNot(contains('pt')));
     const s = ProgressState(idiomaMeta: 'pt', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);

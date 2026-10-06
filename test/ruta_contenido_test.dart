@@ -12,11 +12,18 @@ void main() {
 
   for (final l in idiomas) {
     test('Ruta ${l.code}: existe, grafo válido y nada sin enseñar', () async {
-      final ruta = await CargadorRuta().cargar(l.code);
+      final cargador = CargadorRuta();
+      final ruta = await cargador.cargar(l.code);
       expect(ruta, isNotNull, reason: 'falta assets/contenido/${l.code}/ruta');
       final unidades = ruta!.delNivel('f0');
       expect(unidades.length, greaterThanOrEqualTo(5));
-      expect(problemasDeContenido(ruta), isEmpty);
+      expect(
+        problemasDeContenido(
+          ruta,
+          formasVerbales: await cargador.formasVerbales(l.code),
+        ),
+        isEmpty,
+      );
       // Cadena lineal: la primera sin prerrequisitos, las demás con alguno.
       expect(unidades.first.prerequisitos, isEmpty);
       for (final u in unidades.skip(1)) {
@@ -124,17 +131,13 @@ void main() {
         final ruta = (await CargadorRuta().cargar(l.code))!;
         bool conTabla(List<UnidadRuta> us) =>
             us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));
-        // En reconstrucción (portugués, DEC-035): solo Fundamentos, sin A1 aún.
+        // En reconstrucción (portugués, DEC-035): sin el a1-1 antiguo; su A1
+        // es el N1 nuevo, que pasa por las mismas comprobaciones.
         if (idiomasSoloRutaF0.contains(l.code)) {
-          expect(ruta.delNivel('n1'), isEmpty, reason: l.code);
           expect(ruta.delNivel('a1-1'), isEmpty, reason: l.code);
-          expect(conTabla(ruta.delNivel('f0')), isTrue, reason: l.code);
-          expect(ruta.unidades.map((u) => u.orden).toList(), [
-            for (var i = 0; i < ruta.unidades.length; i++) i,
-          ], reason: l.code);
-          continue;
+          expect(ruta.delNivel('n1'), isNotEmpty, reason: l.code);
         }
-        // Con N1 publicado (inglés, francés) el A1 es n1; si no, a1-1.
+        // Con N1 publicado (inglés, francés, portugués…) el A1 es n1; si no, a1-1.
         final a1 = ruta.delNivel(
           ruta.delNivel('n1').isNotEmpty ? 'n1' : 'a1-1',
         );

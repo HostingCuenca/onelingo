@@ -53,9 +53,193 @@ bool palabraConocida(String w, Set<String> conocidas) =>
     RegExp(r'\d').hasMatch(w) ||
     basesFlexion(w).any(conocidas.contains);
 
+/// Forma conjugada → infinitivos, a partir de `verbos.json` (misma regla que
+/// `formas_pt` en tools/validar_ruta.py): cuentan las celdas de todas las
+/// tablas y las formas sueltas.
+Map<String, Set<String>> indiceFormasVerbales(Map<String, dynamic> verbos) {
+  final res = <String, Set<String>>{};
+  for (final v in verbos['verbos'] as List? ?? const []) {
+    final infinitivo = (v['infinitivo'] as String).toLowerCase();
+    final formas = [
+      for (final t in (v['tablas'] as Map? ?? const {}).values)
+        ...List<String>.from(t as List),
+      ...(v['formas'] as Map? ?? const {}).values.cast<String>(),
+    ];
+    for (final f in formas) {
+      for (final w in palabrasMeta(f)) {
+        res.putIfAbsent(w, () => {}).add(infinitivo);
+      }
+    }
+  }
+  return res;
+}
+
+/// Formas base posibles de una flexión nominal portuguesa, número y género
+/// (misma regla que `bases_pt` en tools/validar_ruta.py).
+Set<String> basesFlexionPt(String w) {
+  final res = <String>{};
+  const sufijos = [
+    ('ões', ['ão']),
+    ('ães', ['ão']),
+    ('ãos', ['ão']),
+    ('ais', ['al']),
+    ('éis', ['el']),
+    ('eis', ['el', 'il']),
+    ('óis', ['ol']),
+    ('uis', ['ul']),
+    ('is', ['il']),
+    ('ns', ['m']),
+    ('es', ['']),
+    ('s', ['']),
+  ];
+  for (final (suf, reemplazos) in sufijos) {
+    if (w.endsWith(suf) && w.length - suf.length >= 2) {
+      final raiz = w.substring(0, w.length - suf.length);
+      for (final r in reemplazos) {
+        res.add(raiz + r);
+      }
+    }
+  }
+  // Femenino → masculino (aberta → aberto), también sobre los singulares ya
+  // obtenidos (brasileiras → brasileira → brasileiro).
+  for (final f in [w, ...res]) {
+    if (f.endsWith('a') && f.length >= 3) {
+      final raiz = f.substring(0, f.length - 1);
+      res.addAll(['${raiz}o', '${raiz}e']);
+      if (f.endsWith('ora')) res.add(raiz); // professora → professor
+    }
+  }
+  return res;
+}
+
+/// Terminaciones de los verbos regulares (presente, pretérito, imperfecto,
+/// futuro, condicional, subjuntivos, participio y gerundio) por vocal temática.
+const _desinenciasPt = {
+  'a': [
+    'o', 'a', 'as', 'amos', 'am', 'ei', 'ou', 'aram', 'ava', 'avas', //
+    'ávamos', 'avam', 'e', 'es', 'emos', 'em', 'ado', 'ada', 'ados', 'adas',
+    'ando', 'asse', 'assem', 'ássemos', 'armos', 'arem', 'arei', 'ará',
+    'aremos', 'arão', 'aria', 'ariam', 'aríamos',
+  ],
+  'e': [
+    'o', 'e', 'es', 'emos', 'em', 'i', 'eu', 'eram', 'ia', 'ias', 'íamos', //
+    'iam', 'a', 'as', 'amos', 'am', 'ido', 'ida', 'idos', 'idas', 'endo',
+    'esse', 'essem', 'ermos', 'erem', 'erei', 'erá', 'eremos', 'erão', 'eria',
+    'eriam', 'eríamos',
+  ],
+  'i': [
+    'o', 'e', 'es', 'imos', 'em', 'i', 'iu', 'iram', 'ia', 'ias', 'íamos', //
+    'iam', 'a', 'as', 'amos', 'am', 'ido', 'ida', 'idos', 'idas', 'indo',
+    'isse', 'issem', 'irmos', 'irem', 'irei', 'irá', 'iremos', 'irão', 'iria',
+    'iriam', 'iríamos',
+  ],
+};
+
+/// Cambios ortográficos ante e: liguei/ligue (ligar), fiquei (ficar),
+/// comecei (começar).
+const _ortografiaPt = [('gu', 'g'), ('qu', 'c'), ('c', 'ç')];
+
+/// Infinitivos posibles de una forma de verbo regular portugués (misma regla
+/// que `infinitivos_pt` en tools/validar_ruta.py).
+Set<String> infinitivosPt(String w) {
+  final res = <String>{};
+  for (final MapEntry(key: vocal, value: desinencias)
+      in _desinenciasPt.entries) {
+    for (final d in desinencias) {
+      if (w.endsWith(d) && w.length - d.length >= 2) {
+        final raiz = w.substring(0, w.length - d.length);
+        res.add('$raiz${vocal}r');
+        for (final (antes, despues) in _ortografiaPt) {
+          if (raiz.endsWith(antes)) {
+            final sinCambio = raiz.substring(0, raiz.length - antes.length);
+            res.add('$sinCambio$despues${vocal}r');
+          }
+        }
+      }
+    }
+  }
+  // Gerundio de verbos cortos: indo (ir), sendo (ser), tendo (ter), pondo (pôr).
+  if (['ando', 'endo', 'indo'].any(w.endsWith)) {
+    res.add('${w.substring(0, w.length - 3)}r');
+  }
+  if (w == 'pondo') res.add('pôr');
+  return res;
+}
+
+/// Clítico tras guion → formas base que deben estar enseñadas («-la» = «a»).
+const _cliticosPt = {
+  'se': {'se'},
+  'me': {'me'},
+  'te': {'te'},
+  'lhe': {'lhe'},
+  'lhes': {'lhe', 'lhes'},
+  'o': {'o'},
+  'a': {'a'},
+  'os': {'os', 'o'},
+  'as': {'as', 'a'},
+  'lo': {'o'},
+  'la': {'a'},
+  'los': {'os', 'o'},
+  'las': {'as', 'a'},
+  'no': {'o'},
+  'na': {'a'},
+  'nos': {'nos', 'os', 'o'},
+  'nas': {'as', 'a'},
+};
+
+/// «deixá-la» ← deixar, «fazê-lo» ← fazer, «pô-lo» ← pôr; «parti-lo» queda en
+/// «parti» → partir.
+const _infinitivoPt = {'á': 'ar', 'ê': 'er', 'ô': 'or', 'i': 'ir'};
+
+/// Como [palabraConocida], aceptando además plurales/femeninos de palabras
+/// enseñadas y formas conjugadas de verbos cuyo infinitivo ya se enseñó
+/// (misma regla que `conocida_pt` en tools/validar_ruta.py). [formasVerbales]
+/// es el índice de [indiceFormasVerbales] sobre `assets/contenido/pt/verbos.json`.
+bool palabraConocidaPt(
+  String w,
+  Set<String> conocidas, [
+  Map<String, Set<String>> formasVerbales = const {},
+]) {
+  if (palabraConocida(w, conocidas) ||
+      basesFlexionPt(w).any(conocidas.contains)) {
+    return true;
+  }
+  if ((formasVerbales[w] ?? const <String>{}).any(conocidas.contains) ||
+      infinitivosPt(w).any(conocidas.contains)) {
+    return true;
+  }
+  // Ênclise: «registra-se», «deixá-la», «fazê-lo»; el clítico cuenta si se
+  // enseñó su forma base («-la» tras «deixá» = «a»).
+  final guion = w.indexOf('-');
+  if (guion < 0) return false;
+  final verbo = w.substring(0, guion);
+  final clitico = w.substring(guion + 1);
+  if (clitico.contains('-') ||
+      !(_cliticosPt[clitico] ?? const <String>{}).any(conocidas.contains)) {
+    return false;
+  }
+  final ultima = verbo.isEmpty ? '' : verbo[verbo.length - 1];
+  final sinAcento = _infinitivoPt[ultima];
+  return {
+    verbo,
+    if (sinAcento != null) verbo.substring(0, verbo.length - 1) + sinAcento,
+  }.any((v) => palabraConocidaPt(v, conocidas, formasVerbales));
+}
+
 /// Problemas pedagógicos y de datos de una ruta. Vacío = íntegra.
-List<String> problemasDeContenido(RutaCargada ruta) {
+///
+/// En portugués valen además las flexiones de lo enseñado
+/// ([palabraConocidaPt]); [formasVerbales] (ver
+/// `CargadorRuta.formasVerbales`) añade las formas irregulares de su
+/// `verbos.json`. Sin él la comprobación solo es más estricta, nunca más laxa.
+List<String> problemasDeContenido(
+  RutaCargada ruta, {
+  Map<String, Set<String>> formasVerbales = const {},
+}) {
   final errores = [...validarGrafo(ruta.unidades)];
+  final bool Function(String, Set<String>) conocida = ruta.curso.idioma == 'pt'
+      ? (w, saber) => palabraConocidaPt(w, saber, formasVerbales)
+      : palabraConocida;
   final apoyos = ruta.curso.idiomasApoyo;
   final libres = {
     for (final p in ruta.curso.palabrasLibres) ...palabrasMeta(p),
@@ -98,7 +282,7 @@ List<String> problemasDeContenido(RutaCargada ruta) {
       if (texto == null) return;
       final validas = distractor ? saberDistractor : saber;
       final faltan = palabrasMeta(texto)
-          .where((w) => !palabraConocida(w, validas))
+          .where((w) => !conocida(w, validas))
           .toSet();
       if (faltan.isNotEmpty) {
         errores.add('$donde: palabras no enseñadas ${faltan.join(', ')}');

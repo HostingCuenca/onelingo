@@ -117,6 +117,11 @@ def infinitivos_pt(w):
                 for antes, despues in _ORTOGRAFIA_PT:
                     if raiz.endswith(antes):
                         res.add(raiz[: -len(antes)] + despues + vocal + "r")
+    # Gerundio de verbos cortos: indo (ir), sendo (ser), tendo (ter), pondo (pôr).
+    if w.endswith(("ando", "endo", "indo")):
+        res.add(w[:-3] + "r")
+    if w == "pondo":
+        res.add("pôr")
     return res
 
 

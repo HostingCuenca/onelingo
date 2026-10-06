@@ -32,7 +32,9 @@ RUTA = RAIZ / 'assets/contenido/pt/ruta'
 BLOQUES = 10
 ULTIMA_F0 = 'pt.f0.apresentar-se'
 NOMBRES_LIBRES = [
+    'Lins',
     'Jesus',
+    'Rosário',
     'Ana',
     'Beatriz',
     'Bia',
