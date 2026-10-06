@@ -1,0 +1,36 @@
+GO
+
+# Revisión N5 · B1 (pt.n5.c01–c05) · revisor independiente
+
+Validador: `validar_bloque.py pt 5 1` → 0 errores. Escucha: ≥ 2 `escuchar` por clase (c01 g2+e1; c02 g2+i1+e1; c03 g2+e1; c04 g2+e1; c05 g2+s1+e1), dentro de los límites del esquema. Los `relacionar` de la ficha están en las cinco evaluaciones. Borrador sólido: el portugués, las explicaciones ES/EN y la progresión son correctos; solo hubo correcciones puntuales (≈ 17).
+
+## Cambios
+
+- **Pronunciación (1):** c01 decía que la «o» de «fosse» es abierta y que ayuda a no confundirla con «fui». Es incorrecto: «fosse» tiene «ô» cerrada y «foram» «ó» abierta. Párrafo reescrito (ES y EN) con ese contraste, que es el sonido del día (vocales abiertas/cerradas).
+- **Explicación (1):** c01 ES «Peçam que eu faça…» (imperativo) → «Pedem que eu faça…» (igual que en EN).
+- **Tablas «Para ler» (12 filas quitadas, 5 sustituidas):** deduplicadas contra N1–N4 y entre clases: c01 «pedia», «explicar» (ya enseñado); c01 «pediam»/«exigiam» (formas flexionadas) → sustituidas por «o passaporte» y «os antecedentes criminais» con las mismas frases (el validador exige esas frases para enseñar passaporte, cópia, páginas, válido, antecedentes, criminais); c03 «biométrica» (femenino), «coletados» (masculino) y «analisou» quitadas; «biométricos» → «biométrico» (así valen plural y femenino) y fila nueva «após» (su frase enseña «coletados»); c04 «concede-se» (ya en la tabla de «se» pasivo); c05 «criado» (ya en la tabla del infinitivo compuesto). Se conservan, porque el validador las exige antes de usarse, «precisa-se», «pede-se», «alugasse» (c04) y «preferia» (c02).
+- **Diálogo (2):** c03 tenía dos líneas seguidas de Ana, la segunda («Nossa. Então me manda um e-mail…») fuera de lugar. Ahora: «Nossa, que sorte a sua! E quando você vai agendar a coleta?» tras la historia del rapaz, y el pedido del resumen se une a la despedida («…vamos comemorar no Café da Bia! Me manda um e-mail com o resumo…»). c03 ES «¡Ana, la aprobaron!» (para «foi deferido») → «¡Ana, fue concedido!».
+- **Traducciones (2):** c02 «ómnibus» → «autobús» (convención de N1–N4); c05 «emigrar también es madurar» → «inmigrar…» (el texto pt dice «imigrar»).
+- **Distractores (2):** c02 g2 «mandarão» (no es un error de hispanohablante) → «mandem» (presente en vez de imperfeito), con el feedback ajustado; c03 g2 «O pedido analisou pela autoridade» (mezcla de activa y pasiva, y obligaba a una fila de flexión) → «analisado por a autoridade» (error real: «por a» sin contraer).
+- **Falsos amigos / notas (3):** c05 «amadurecer» no es un falso amigo y la nota («no madurecer») era falsa (existe «madurecer»): ahora «equivale a madurar, con el prefijo a-», sin ⚠. c05 «sotaque» reescrita con el contraste real: «acento» en pt es la marca gráfica o la sílaba tónica. c05 «costume» no es falso amigo para el hispanohablante («traje» no tiene relación): la nota avisa del inglés («costume» = disfraz) y se mantiene el ⚠ por el contraste.
+- **Sin cambios, verificados:** erroresFrecuentes de las cinco clases (fazia/tinha/seja tras «era preciso que»; mandam/pode/é tras «queria que»; foi analisada, as certidões foi, por a; Vende-se móveis, Precisam-se de, Alugam-se vaga; ter me corrigiu, ter vivi, ter aprender) son errores reales. Una sola respuesta por ítem. Falsos amigos marcados donde aparecen (despachante, fila≠cola, senha, deferido≠diferido, parecer, edital, vaga, cadastro, sotaque, costume). Nombres de la ficha en palabrasLibres (Valentina, Daniela, Alberto, Iara, Renata, Bruno, Ana). Sin Ecuador. Lecturas de c01–c05 en el rango B2. `relacionar` con apoyo idéntico al texto pt en c01/c02/c03/c05: son pares pt↔pt (forma ↔ forma, hecho ↔ agente), no hay traducción que dar; sin ambigüedad.
+- **Dudas del autor decididas:** (1) aviso del apto 402 en vez de 502: aceptado (N4 B3: infiltración en el 402, es el apartamento de Camila). (2) edital con «alunos» (no «ex-alunos») y Renata pide depoimentos de «alunos»: aceptado, Camila sigue en la Escola Capibaribe en N5; en c04 «como já sou aluna, posso pedir a isenção». (3) Vaga de garagem de seu Alberto en el edificio de Graças y Camila sin carro: aceptado como hecho nuevo (ver abajo). (4) Falsos amigos marcados: confirmados salvo amadurecer (quitado; ver arriba).
+
+## Hechos del reparto confirmados
+
+- c01 (marzo de 2030): Camila Ortega pide la residencia por plazo indeterminado ante la Polícia Federal; lleva tres años y medio en Recife. Lista: formulario y protocolo impreso, pasaporte válido y copia de las páginas usadas, certidão de antecedentes criminais con emisión reciente, comprobante de residencia a su nombre (las cuentas están a nombre de seu Alberto, que le da una declaración), tasa pagada hasta cinco días hábiles antes con comprobante, foto con fondo blanco; el sistema pedía que cada persona hiciera su cita y no había horario esa semana; si no puede asistir, cancela por el sitio con dos días hábiles de antelación. Se lo cuenta a Bruno en la oficina de Maré Digital.
+- c02: un error en el formulario (dígito del pasaporte cambiado) obliga a emitir una guía nueva; Valentina (funcionaria del despachante, filial de Boa Viagem, trato «a senhora») deja un mensaje de voz a las 8h40 y pide pasar mañana entre las 9h y el mediodía; Camila tenía reunión con Iara a las 10h; Ana (en Lisboa) la aconseja escribir con cortesía y pedir la guía por e-mail y la firma digital.
+- c03: el 12 de junio de 2030 el pedido fue analizado por la autoridad migratoria y deferido; falta la recogida de datos biométricos en hasta 30 días (cita hecha por la solicitante) y la emisión de la carteira. Seu Alberto fue quien firmó la declaración y fue aceptada. En abril, otro solicitante (un rapaz) vio su pedido indeferido por entregar un comprobante fuera de plazo. Camila llama a Ana, que propone celebrar en el Café da Bia cuando llegue la carteira.
+- c04: seu Alberto Tavares (o senhor, vive en Casa Forte) es dueño del apartamento 402 de Graças y de su vaga de garagem coberta, vacía porque Camila no tiene carro («a gente nunca usa a vaga»); condiciones: contrato mínimo de seis meses, caução de un mês, reajuste anual, visitas los sábados con él. Camila redacta el aviso («Aluga-se vaga de garagem…») y pide la isenção de la tasa del curso de conversación de la Escola Capibaribe como aluna.
+- c05: en septiembre de 2030 Camila completa cuatro años en Recife; oye en el carro de aplicativo un pódcast local con Daniela (chilena, cuatro años en Recife) y recibe un mensaje de la profesora Renata, que arma un mural con depoimentos de alunos para la turma nova; Camila escribe su balanço (sotaque, saudade, conquistas, adaptación). Camila y Renata siguen intercambiando mensajes de vez en cuando.
+
+## Correcciones de ficha
+
+- c04: la ficha dice «apartamento 502»; el reparto de N4 B3 fija el 402 (infiltración en el 402) → el borrador usa 402.
+- c04 (situación): la ficha da la isenção a «ex-alunos»; en N5 Camila sigue en la escuela → el borrador usa «alunos» (y «como já sou aluna»).
+- c05 (situación): la ficha pide «depoimentos de ex-alunos»; el borrador usa «alunos».
+- c01 (ficha, ejercicio de situación): «morava em Recife havia três anos e meio» se pasó a presente («moro… há três anos e meio») porque lo cuenta Camila en diálogo; coherente con marzo de 2030.
+
+## Sin resolver
+
+Ninguno.
