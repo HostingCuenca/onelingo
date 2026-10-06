@@ -560,3 +560,18 @@ Backup: `/var/www/onelingo/backups/20261006-edu-46-portugues/{web-anterior,backe
 - lock liberado.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261006-edu-46-portugues/web-retirada-post && cp -al backups/20261006-edu-46-portugues/web-anterior web'`
 Rollback backend: `ssh -F /dev/null root@167.235.20.41 'rm /var/www/onelingo/backend/src/content/situaciones-pt.json'`
+
+## Release: 20261006-edu-47-aleman
+
+Fecha: 2026-10-06 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat. Web + backend (1 archivo cambiado, 2 nuevos); con reinicio de `onelingo-api`.
+Contenido: curso de alemán completo (método ligero, sin historia): ruta N1–N10 (500 clases, 100 bloques con GO), prueba de ubicación v2, 50 situaciones × 3 tramos, Nivel 0, «Mis verbos»; `idiomasConRuta` incluye `de`; apoyo es/en; contenido heredado sin Ecuador.
+Commits: `ec8330e`, `ebcb5c0`, `eaa07cd` (build desde worktree limpio de `eaa07cd`) · `main.dart.js` sha256 `698b7838ab045863…` (API_URL prod).
+Backend: `src/lib/voz.ts` (voces Petra/Julius para `de` y cifras en palabras), `src/lib/numeros_de.ts` y `src/content/situaciones-de.json` añadidos; `tsc --noEmit` en staging OK; `config.ts` de prod intacto; `.env` sin cambios (hash igual).
+Pruebas: Flutter 272 y backend 23/23 en HEAD; validadores 0 errores.
+Backup: `/var/www/onelingo/backups/20261006-edu-47-aleman/{web-anterior,backend-anterior}` (= edu-46). Verificado:
+- `/api/salud` 200 tras el reinicio; sin errores nuevos en el log;
+- staging: «§ 437 … 1921» → «Paragraf vierhundertsiebenunddreißig … neunzehnhunderteinundzwanzig»; `situacionesDe('de')` = 50;
+- `curso.json`, `n5-b03.json`, `n10-b10.json` y `situaciones.json` del alemán servidos con el mismo sha256 que el repo; APK conservado;
+- lock liberado. La web anterior queda también en `/var/www/onelingo/web-saliente-20261006-edu-47-aleman` (enlaces duros; se puede borrar).
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261006-edu-47-aleman/web-retirada-post && cp -al backups/20261006-edu-47-aleman/web-anterior web'`
+Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo; cp backups/20261006-edu-47-aleman/backend-anterior/voz.ts backend/src/lib/ && rm backend/src/lib/numeros_de.ts backend/src/content/situaciones-de.json && pm2 restart onelingo-api'`
