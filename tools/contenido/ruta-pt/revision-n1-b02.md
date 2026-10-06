@@ -42,3 +42,7 @@ Validador: `python3 tools/curriculo/validar_bloque.py pt 1 2` → 0 errores (enc
 ## Sin resolver
 - La ficha c08 dice «s final em decidir»: conviene corregir el rótulo del `sonido` en `curriculo/pt/n1.json` (p. ej. «c y d em decidir»).
 - En c10 «Moro em Recife e trabalho na cidade» es redundante pero lo fija la ficha; los vocablos «Porto Digital» no están enseñados.
+
+## Pasada de escucha
+
+Se convirtieron a `escuchar` los ítems c06 g3, c07 e3, c08 g3, c09 g3 y c10 g3 (audio pt-BR de la frase, opciones es/en). Cada clase queda con 2 escuchar. Sin otros cambios.

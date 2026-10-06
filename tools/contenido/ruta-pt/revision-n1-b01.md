@@ -50,3 +50,7 @@ Cobertura de las fichas (introduce/recicla/vocabulario/plan de ejercicios) compl
 ## Sin resolver
 - «Laura» (ficha c02 e5) pendiente de añadirse a `palabrasLibres` si se quiere restaurar (hoy «Lara»).
 - Las fichas c02 y c05 pedían «mexicano» en c02 (antes de c05, donde se introduce): el plan debería moverlo.
+
+## Pasada de escucha
+
+Se convirtieron a `escuchar` (audio pt-BR de la frase, opciones es/en, misma clave 0): c01 i1, c02 i1, c03 i1, c04 i1, c05 e1 e i1, y en el bloque 2 c06 g3, c07 e3, c08 g3, c09 g3, c10 g3. Cada clase queda con 2 escuchar (c05 con 2 nuevos). Sin otros cambios.
