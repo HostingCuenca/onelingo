@@ -530,3 +530,18 @@ Backup: `/var/www/onelingo/backups/20261002-edu-44-frances-tipografia/web-anteri
 - `n7-b05.json` servido idéntico al local;
 - lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261002-edu-44-frances-tipografia/web-retirada-post2 && cp -al backups/20261002-edu-44-frances-tipografia/web-anterior web'`
+
+## Release: 20261005-edu-45-espanol
+
+Fecha: 2026-10-05 · Responsable: Claude (Claude Code). Web + backend (2 archivos); reinicio de `onelingo-api` autorizado por el cliente para esta release.
+Contenido: curso de español para angloparlantes completo (DEC-034): ruta N1–N10 (500 clases, bloques con GO), prueba de ubicación v2 (180 ítems), 50 situaciones × 3 tramos, Nivel 0 «Leer y pronunciar» (5 unidades, 18 lecciones), «Mis verbos» (124), voz del dispositivo es-MX; apoyo solo en inglés (`localizarApoyo` acepta `{en}`).
+Commit: `2a79a1c` (build desde worktree limpio de HEAD) · `main.dart.js` sha256 `10edb5126ecadeb8…` (API_URL prod).
+Backend: `src/lib/situaciones.ts` (apoyo `{en}`) y `src/content/situaciones-es.json` copiados archivo por archivo; `config.ts` de prod intacto.
+Pruebas: Flutter 248 en HEAD limpio («All tests passed!»); backend tsc + 10/10.
+Backup: `/var/www/onelingo/backups/20261005-edu-45-espanol/{web-anterior,backend-anterior}` (= edu-44). Verificado:
+- `/api/salud` 200 y `onelingo-api` online tras el reinicio;
+- `situacionesDe('es')` = 50 en prod;
+- `n10-b10.json`, `diagnostico-v2.json`, `situaciones.json`, `nivel0.json` y `verbos.json` del español servidos; APK conservado;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261005-edu-45-espanol/web-retirada-post && cp -al backups/20261005-edu-45-espanol/web-anterior web'`
+Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo; cp backups/20261005-edu-45-espanol/backend-anterior/situaciones.ts backend/src/lib/ && rm backend/src/content/situaciones-es.json && pm2 restart onelingo-api'`
