@@ -4,9 +4,10 @@ import { query } from './db.js';
 // Situaciones v2 (docs/claude-educacion/SITUACIONES_V2.md). Copia generada por
 // tools/contenido/generar_situaciones.py desde assets/contenido/<idioma>/situaciones.json.
 export type Tramo = 'basico' | 'intermedio' | 'avanzado';
-// Textos de apoyo: cadena (inglés, histórico) o {es, en} (idiomas nuevos).
-type Apoyo = string | { es: string; en?: string };
-const apoyo = (x: Apoyo | undefined) => (typeof x === 'string' ? x : x?.es ?? '');
+// Textos de apoyo: cadena (inglés, histórico), {es, en} (idiomas nuevos) o
+// solo {en} (el español, que se explica en inglés).
+type Apoyo = string | { es?: string; en?: string };
+const apoyo = (x: Apoyo | undefined) => (typeof x === 'string' ? x : x?.es ?? x?.en ?? '');
 type Objetivo = { id: string; titulo: Apoyo; frase: string; traduccion: Apoyo };
 type ContenidoTramo = { objetivos: Objetivo[]; vocabulario: { en?: string; es?: string; meta?: string; traduccion?: Apoyo; ejemplo: string }[]; frases: { en?: string; es?: string; meta?: string; traduccion?: Apoyo }[] };
 export type Situacion = { id: number; nombre: string; tramos: Record<Tramo, ContenidoTramo> };

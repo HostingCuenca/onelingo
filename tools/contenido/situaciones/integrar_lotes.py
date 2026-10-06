@@ -29,7 +29,7 @@ def main():
         if not revision.exists() or not re.search(r'\bGO\b', revision.read_text()):
             sys.exit(f'lote-{n}: sin revisión GO')
         datos = json.loads(lote.read_text(encoding='utf-8'))
-        errores = validar(datos)
+        errores = validar(datos, IDIOMA)
         if errores:
             sys.exit(f'lote-{n}: {len(errores)} errores ({errores[0]})')
         situaciones += datos
