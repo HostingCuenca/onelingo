@@ -56,6 +56,78 @@ def conocida(w, conocidas):
     return w in conocidas or any(c.isdigit() for c in w) or bool(bases(w) & conocidas)
 
 
+_FORMAS_PT = None
+
+
+def formas_pt():
+    """Forma conjugada → infinitivos, según la tabla de verbos del portugués."""
+    global _FORMAS_PT
+    if _FORMAS_PT is None:
+        _FORMAS_PT = {}
+        ruta = RAIZ / "pt" / "verbos.json"
+        if ruta.exists():
+            for v in json.loads(ruta.read_text(encoding="utf-8")).get("verbos", []):
+                inf = v["infinitivo"].lower()
+                formas = [f for t in v.get("tablas", {}).values() for f in t]
+                formas += list(v.get("formas", {}).values())
+                for f in formas:
+                    for w in palabras(f):
+                        _FORMAS_PT.setdefault(w, set()).add(inf)
+    return _FORMAS_PT
+
+
+def bases_pt(w):
+    """Formas base posibles de una flexión nominal portuguesa (número y género)."""
+    res = set()
+    for suf, reemplazos in (("ões", ("ão",)), ("ães", ("ão",)), ("ãos", ("ão",)), ("ais", ("al",)),
+                            ("éis", ("el",)), ("eis", ("el", "il")), ("óis", ("ol",)), ("uis", ("ul",)),
+                            ("is", ("il",)), ("ns", ("m",)), ("es", ("",)), ("s", ("",))):
+        if w.endswith(suf) and len(w) - len(suf) >= 2:
+            res |= {w[: -len(suf)] + r for r in reemplazos}
+    for f in [w] + sorted(res):
+        if f.endswith("a") and len(f) >= 3:
+            res |= {f[:-1] + "o", f[:-1] + "e"} | ({f[:-1]} if f.endswith("ora") else set())
+    return res
+
+
+# Terminaciones de los verbos regulares (presente, pretérito, imperfecto, futuro,
+# condicional, subjuntivos, participio y gerundio) → vocal temática posible.
+_DESINENCIAS_PT = {
+    "a": ("o", "a", "as", "amos", "am", "ei", "ou", "aram", "ava", "avas", "ávamos", "avam",
+          "e", "es", "emos", "em", "ado", "ada", "ados", "adas", "ando", "asse", "assem", "ássemos",
+          "armos", "arem", "arei", "ará", "aremos", "arão", "aria", "ariam", "aríamos"),
+    "e": ("o", "e", "es", "emos", "em", "i", "eu", "eram", "ia", "ias", "íamos", "iam",
+          "a", "as", "amos", "am", "ido", "ida", "idos", "idas", "endo", "esse", "essem",
+          "ermos", "erem", "erei", "erá", "eremos", "erão", "eria", "eriam", "eríamos"),
+    "i": ("o", "e", "es", "imos", "em", "i", "iu", "iram", "ia", "ias", "íamos", "iam",
+          "a", "as", "amos", "am", "ido", "ida", "idos", "idas", "indo", "isse", "issem",
+          "irmos", "irem", "irei", "irá", "iremos", "irão", "iria", "iriam", "iríamos"),
+}
+# Cambios ortográficos ante e: liguei/ligue (ligar), fiquei (ficar), comecei (começar).
+_ORTOGRAFIA_PT = (("gu", "g"), ("qu", "c"), ("c", "ç"))
+
+
+def infinitivos_pt(w):
+    res = set()
+    for vocal, desinencias in _DESINENCIAS_PT.items():
+        for d in desinencias:
+            if w.endswith(d) and len(w) - len(d) >= 2:
+                raiz = w[: -len(d)]
+                res.add(raiz + vocal + "r")
+                for antes, despues in _ORTOGRAFIA_PT:
+                    if raiz.endswith(antes):
+                        res.add(raiz[: -len(antes)] + despues + vocal + "r")
+    return res
+
+
+def conocida_pt(w, conocidas):
+    """Como `conocida`, aceptando además plurales/femeninos de palabras enseñadas
+    y formas conjugadas de verbos cuyo infinitivo ya se enseñó."""
+    if conocida(w, conocidas) or bases_pt(w) & conocidas:
+        return True
+    return bool((formas_pt().get(w, set()) | infinitivos_pt(w)) & conocidas)
+
+
 def huella_item(item):
     """Contenido puntuable, sin id, pista, consigna ni feedback editorial."""
     datos = {k: item[k] for k in CAMPOS_HUELLA if k in item}
@@ -450,7 +522,8 @@ class Validador:
                         self.advertencia(uid, f"contaminación: ítems exactos reutilizados entre {da} y {db}")
 
     def meta(self, texto, conocidas, donde):
-        faltan = [w for w in palabras(texto) if not conocida(w, conocidas)]
+        prueba = conocida_pt if self.idioma == "pt" else conocida
+        faltan = [w for w in palabras(texto) if not prueba(w, conocidas)]
         if faltan:
             self.error(donde, f"usa palabras no enseñadas: {', '.join(sorted(set(faltan)))}")
 
