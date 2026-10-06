@@ -1,0 +1,35 @@
+GO
+
+# Revisión N8 · B9 (pt.n8.c41–c45) · revisor independiente
+
+Validador: `validar_bloque.py pt 8 9` → 0 errores (1 al empezar: «prever» no enseñado en c43; 1 propio durante la revisión: «diminuíram» al podar la fila «diminuir», restaurada). Escucha: c41 3 `escuchar`, c42–c45 2 cada una (conservados, alineados con la ficha). `relacionar` de la ficha conservados en c41–c44 (c45 no trae) sin las «propuestas cruzadas». Diálogos de 364–376 palabras, sin turnos seguidos del mismo hablante (14 fusiones). Progresión: cautela (hedging) → citar fuentes → describir gráficos → estructura de la presentación → integración en un estudio breve. Correcciones: ≈ 75 (casi todas son 41 filas de «Para ler» podadas y 14 fusiones de turnos).
+
+## Cambios
+
+- **`contexto.es`/`apoyo`:** c41 `contexto.es` empezaba con portugués («Aula de metodologia na UFPE.») → «Clase de metodología en la UFPE.». c45 p1 decía «los dados» en español y «the dados» en inglés → «los datos» / «the data». Los `relacionar` de c42 y c44 tenían el lado derecho en portugués dentro de `es` («repetição espaçada», «uso mais intenso à noite»…) → ahora en español/inglés («repetición espaciada»/«spaced repetition»…). El resto de `contexto.es/en`, tablas, notas, errores y traducciones están en {es, en}.
+- **«Para ler» deduplicada** (script contra n1–n7, n8-b01..b08 y f0, comprobada con el validador): c41 11 → 2 (provisório, a aprendizagem); c42 12 → 5 (decisivo, plágio, revista científica, repetição espaçada, prática regular); c43 11 → 4 (diminuir, sazonal, satisfação, gradual; «diminuir» se conserva porque el validador no acepta «diminuíram» sin esa fila); c44 10 → 0 (todas ya enseñadas: se elimina el paso de tabla; la clase conserva patron, ejemplos y vocabulario); c45 10 → 2 (coletar, noturno). Sin formas flexionadas en ninguna tabla.
+- **⚠ falsos amigos (dudas del autor):** se conservan los reales: amostra/mostra (c41), citação ≠ «citación» (c42), banca (c45) y evidência (c41, matiz «prueba»). Se quitan por no ser falsos amigos: fonte (c42 vocab y explicación; también «fuente» sirve de tipografía en español), eixo («eje de un país» era un sinsentido), pico, barra (c43), roteiro, apresentar (c44; el «⚠ no es rotero» no existía), pesquisa, dado y discussão (c45; «pesquisa» y «dado» existen igual en español). Las explicaciones pasan a nota neutra sin ⚠.
+- **Notas de pronunciación corregidas:** c44 «conclusão: Sin tilde en español» (falso: «conclusión» lleva tilde) → «No termina en -sión»; c44 «estudo é ≈ estudué» → «apresento o objetivo ≈ apresentu objetivu»; c43 «queda»: «é como en hierro» (diptongo) → «como la e de perro».
+- **erroresFrecuentes (reales de hispanohablante):** c42 «Segundo mim» (hipercorrección que casi nadie escribe) → «Segundo eu» (calco de «según yo») con explicación y diálogo/profesora («evite segundo eu») y p1 ajustados; c43 «no abril» (poco real) → «por mes» (mês sin circunflejo, calco de «mes»); c44 «segundo, explico o método» (no es error: «segundo» ordinal existe) → «Por fin, apresento…» → «Por fim» (calco de «por fin», con el matiz de enfim/finalmente). Se conservan y verifican: c41 «parece sugerir» sin concordancia, «indicam de que», «a mostra»; c42 «de acordo a», «Pereira e Lopes afirma»; c43 «Houveram», «cairam»; c44 «apresentar sobre», «Conclui-se de que»; c45 «Foi feitas», «na noite», «o 60%».
+- **c43, «prever» no enseñado:** el diálogo decía «Não quero prever… previsão segura» → «Não quero afirmar nada sobre julho. Con seis meses de datos, a evidência não permite uma conclusão segura» (es/en actualizados), manteniendo la cautela de la ficha.
+- **Diálogos:** 14 turnos dobles fusionados (c41 Camila; c42 Professora, Tomás; c43 Camila, Professora, Camila; c44 Camila ×3, Tomás ×3; c45 Camila ×3 en la apertura de la presentación, Camila).
+- **Sin cambios, verificados:** una sola respuesta por ítem (distractores tajantes/«prova»/«todos» claramente inadecuados), gramática solo la de `introduce` (subjuntivo solo en «Uma hipótese possível é que… influencie», fórmula de la ficha), estructura g/i/s/e según la ficha, sin Ecuador/Quito/Lins/Rafael/Moacir, sin gerundio pt-PT, trato correcto (Camila ↔ Tomás: você; Camila → profesora: «a senhora» en c41; la profesora trata de você), fuentes Nogueira (2020) y Pereira e Lopes (2018) declaradas ficticias en c42, datos de gráfico y estudio declarados de ejercicio (c43, c45).
+- **Ficha c42:** «o professor do curso» → «a professora» (dudas del autor); aceptado. En c45 la banca tiene además un «Professor» sin nombre junto a la «Professora»: ambos sin nombre, sin conflicto con el canon.
+
+## Hechos del reparto confirmados
+
+- N8 = 2033, curso de preparación al Celpe-Bras; en B9 el contexto es el curso de metodología de la UFPE. Sin fechas del calendario en este bloque: c44 ensayo un martes, c45 presentación un viernes.
+- Profesora (sin nombre) trata a Camila de você; Camila le dice «a senhora» (c41) y «professora». Un profesor de la banca sin nombre aparece solo en c45. Tomás (compañero argentino, «Na Argentina…» en c41, «No meu país…» en c42) ayuda con la redacción, anota transiciones en el ensayo (c44) y asiste a la presentación (c45); se tutean con você.
+- Fuentes ficticias: Nogueira (2020) (repetição espaçada, memória de longo prazo) y Pereira e Lopes (2018) (contato diário amplia o vocabulário). Datos de ejercicio: cuestionario a 40 participantes (alumnos extranjeros de portugués), 60 % estudia de noche, pico de uso a las 22 h, muestra pequeña; gráfico de visitas a la app de Maré Digital de enero a junio: ≈1200 en enero, pico de 2400 en abril, ≈1900 en junio (caída de ≈500), hipótesis estacional no confirmada; el uso nocturno pasa de 40 % a 60 % en el ejemplo de c45.
+- c45: el acta registra «Foi apresentado um estudo breve e foram feitas duas perguntas»; Camila agradece la pregunta, responde con datos y reitera la limitación; propone ampliar la muestra y señalar el límite del tiempo exacto de estudio. Nombres secundarios nuevos: ninguno. Sin Rafael, Moacir, Ecuador ni Quito.
+
+## Correcciones de ficha
+
+- c42 (ficha, situación): «O professor do curso» choca con el canon (la profesora no tiene nombre y es mujer); se usa «a professora».
+- c41/c42/c43/c44/c45: los `relacionar` traen «propuestas iniciales cruzadas» (omitidas, como en bloques anteriores).
+- c43 (ficha, vocabulario): `barra` y `série` no se usan en la situación de la ficha; se enseñan con el diálogo («Cada barra representa um mês»).
+- c45 (ficha, recicla): `minutes-passive-conventions` e `insistence-courtesy-formulas` son de N8 B7/B8; el bloque los reutiliza en el acta y en «Reitero que…».
+
+## Sin resolver
+
+- Ninguno. La deduplicación se hizo contra los borradores actuales de n1–n7 y n8-b01..b08; si alguno se reescribe y deja de enseñar una palabra de las filas eliminadas (p. ej. provar, generalizar, cautela, afirmar, defender, concordar, ressalva, subir, cair, visita, cerca de, aproximadamente, ocorrer, indício, em seguida, por fim, participante, questionário, ata, reiterar, maioria, público), el validador lo señalará en este bloque.
