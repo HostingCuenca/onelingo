@@ -43,7 +43,7 @@ Personajes de rol sin nombre: «Garçom», «Garçonete», «Vendedora», «Rece
 - **N2** (2027): su primer Carnaval; en B3 Camila y Ana alquilan un apartamento en Graças.
 - **N3** (2028): Camila es líder de producto; sus padres la visitan (B3); viaje a Fernando de Noronha (B5).
 - **N4** (2029): Camila postula a gerente de producto con Iara (B5); Ana se va a Lisboa a hacer una maestría (se despide al final de B2; Larissa ocupa su cuarto en Graças; desde ahí trae notas de Portugal, solo de reconocimiento).
-- **N5–N7** (2030–2032): Camila es gerente de producto; regulariza su residencia (N5 B1); lidera un proyecto de visitas guiadas (N5 B9); en N7 B8 visita a Ana en Lisboa.
+- **N5–N7** (2030–2032): Camila es gerente de producto; regulariza su residencia (N5 B1); lidera un proyecto de visitas guiadas (N5 B9); en N7 B2 (c09–c10) viaja por primera vez a Lisboa y se queda en casa de Ana; en N7 B8 vuelve a Lisboa por una conferencia de producto (ficticia) y repite visita a Ana.
 - **N8** (2033): Camila se prepara para el Celpe-Bras.
 - **N9** (2034): Camila es directora de producto en Maré Digital.
 - **N10** (2035): Camila y Lucas fundan **Travessia**, un pequeño estudio de producto digital y localización español–portugués. Camila deja Maré Digital a finales de marzo (Iara queda como mentora); Travessia se prepara de enero a agosto y se lanza oficialmente el 5 de septiembre de 2035, nueve años después de su llegada. Ana colabora desde Lisboa.
@@ -441,7 +441,7 @@ Historia: Camila negocia con clientes (Diego) y con su equipo (Yasmin); primera 
 
 ## N7 · B2 alto (2032)
 
-Historia: Camila escribe mensajes delicados para clientes; investiga la historia de Recife (holandeses en el siglo XVII, el puerto, los puentes) para una ruta guiada (B4); visita a Ana en Lisboa (B8; las diferencias entre Brasil y Portugal se comentan como cultura, sin clave de gramática: pt-PT entra en N8 B4); lee a Clarice Lispector, Manuel Bandeira y João Cabral (B9).
+Historia: Camila escribe mensajes delicados para clientes; investiga la historia de Recife (holandeses en el siglo XVII, el puerto, los puentes) para una ruta guiada (B4); viaja a Lisboa por primera vez y se queda en casa de Ana (B2, c09–c10); vuelve a Lisboa por una conferencia de producto ficticia y repite visita a Ana (B8; las diferencias entre Brasil y Portugal se comentan como cultura, sin clave de gramática: pt-PT entra en N8 B4); lee a Clarice Lispector, Manuel Bandeira y João Cabral (B9).
 
 - **B1 Registro y matices** — mensajes delicados a clientes.
   - `register-continuum`: coloquial, neutro y formal
