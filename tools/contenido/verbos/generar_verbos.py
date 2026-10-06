@@ -50,6 +50,23 @@ IDIOMAS = {
         ],
         'etiqueta': ('infinitivo · presente (je) · participio', 'infinitive · present (je) · past participle'),
     },
+    # Portugués de Brasil para hispanohablantes: sin tu/vós (você y ele/ela comparten forma).
+    'pt': {
+        'personas': [
+            ('eu', 'yo', 'I'), ('você', 'tú / usted', 'you'), ('ele / ela', 'él / ella', 'he / she'),
+            ('nós', 'nosotros', 'we'), ('vocês', 'ustedes', 'you (plural)'), ('eles / elas', 'ellos / ellas', 'they'),
+        ],
+        'tiempos': [
+            ('presente', 'Presente (presente)', 'Present (presente)', 'Lo que haces normalmente o ahora.', 'What you do usually or right now.'),
+            ('preterito', 'Pretérito perfecto (pretérito perfeito)', 'Simple past (pretérito perfeito)', 'Algo que pasó y terminó; también el pasado reciente.', 'Something that happened and is finished.'),
+            ('imperfecto', 'Imperfecto (pretérito imperfeito)', 'Imperfect (pretérito imperfeito)', 'Cómo eran las cosas o lo que hacías habitualmente.', 'How things were or what you used to do.'),
+            ('futuro', 'Futuro (futuro do presente)', 'Future (futuro do presente)', 'Lo que harás más adelante (en el habla se usa más «vou + infinitivo»).', 'What you will do later (speech often uses «vou + infinitive»).'),
+            ('condicional', 'Condicional (futuro do pretérito)', 'Conditional (futuro do pretérito)', 'Lo que harías; pedidos corteses.', 'What you would do; polite requests.'),
+            ('subjuntivo', 'Subjuntivo presente (presente do subjuntivo)', 'Present subjunctive (presente do subjuntivo)', 'Después de deseos y dudas: quero que você venha.', 'After wishes and doubts: quero que você venha.'),
+            ('futuro_subjuntivo', 'Futuro del subjuntivo (futuro do subjuntivo)', 'Future subjunctive (futuro do subjuntivo)', 'Después de se y quando para algo futuro: se eu puder, quando você chegar.', 'After se and quando for future events: se eu puder, quando você chegar.'),
+        ],
+        'etiqueta': ('infinitivo · presente (eu) · participio', 'infinitive · present (eu) · past participle'),
+    },
     # Español para anglohablantes: el apoyo es solo inglés (como su ruta), así
     # que las traducciones de personas y tiempos van en la columna «en».
     'es': {

@@ -8,6 +8,7 @@ import '../content/catalog.dart';
 import '../content/contenido_json.dart';
 import '../i18n/i18n.dart';
 import '../content/curriculum.dart';
+import '../content/fundamentos.dart' show idiomasSoloRutaF0;
 import '../diagnostico.dart'
     show
         escalaDiagnosticoCliente,
@@ -138,17 +139,20 @@ class ProgressState {
 
   /// Fundamentos pendientes: recomendados y sin terminar. Se terminan al
   /// aprobar la ruta de fundamentos del idioma (DEC-007) o, como antes,
-  /// completando todas las lecciones antiguas del nivel 0.
+  /// completando todas las lecciones antiguas del nivel 0. Los idiomas en
+  /// reconstrucción ([idiomasSoloRutaF0]) no tienen lecciones antiguas: solo
+  /// cuenta la ruta.
   bool get fundamentosPendientes =>
       fundamentos &&
       !rutaFundamentosAprobada &&
-      leccionesDe(0).isNotEmpty &&
-      completadasEnNivel(0) < totalLeccionesDe(0);
+      (idiomasSoloRutaF0.contains(idiomaMeta) ||
+          leccionesDe(0).isNotEmpty &&
+              completadasEnNivel(0) < totalLeccionesDe(0));
 
   /// Nivel 0 · Leer y pronunciar: recomendado a quien empieza de cero, antes
   /// de Fundamentos, hasta completar sus lecciones (idiomas que lo tienen).
   bool get nivel0Pendiente =>
-      const {'en', 'fr', 'es'}.contains(idiomaMeta) &&
+      const {'en', 'fr', 'es', 'pt'}.contains(idiomaMeta) &&
       fundamentos &&
       !practicas.containsKey('nivel0:$idiomaMeta:completo');
 

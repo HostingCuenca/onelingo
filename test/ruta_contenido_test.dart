@@ -4,6 +4,7 @@ import 'package:onelingo/core/aprendizaje/cargador.dart';
 import 'package:onelingo/core/aprendizaje/integridad.dart';
 import 'package:onelingo/core/aprendizaje/modelos.dart';
 import 'package:onelingo/core/content/curriculum.dart';
+import 'package:onelingo/core/content/fundamentos.dart' show idiomasSoloRutaF0;
 
 /// Integridad de las rutas de los 10 idiomas habilitados.
 void main() {
@@ -121,6 +122,18 @@ void main() {
     () async {
       for (final l in idiomas) {
         final ruta = (await CargadorRuta().cargar(l.code))!;
+        bool conTabla(List<UnidadRuta> us) =>
+            us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));
+        // En reconstrucción (portugués, DEC-035): solo Fundamentos, sin A1 aún.
+        if (idiomasSoloRutaF0.contains(l.code)) {
+          expect(ruta.delNivel('n1'), isEmpty, reason: l.code);
+          expect(ruta.delNivel('a1-1'), isEmpty, reason: l.code);
+          expect(conTabla(ruta.delNivel('f0')), isTrue, reason: l.code);
+          expect(ruta.unidades.map((u) => u.orden).toList(), [
+            for (var i = 0; i < ruta.unidades.length; i++) i,
+          ], reason: l.code);
+          continue;
+        }
         // Con N1 publicado (inglés, francés) el A1 es n1; si no, a1-1.
         final a1 = ruta.delNivel(
           ruta.delNivel('n1').isNotEmpty ? 'n1' : 'a1-1',
@@ -131,8 +144,6 @@ void main() {
           ruta.delNivel('f0').last.id,
         ], reason: l.code);
         // Hay tablas (escritura o conjugación) en fundamentos y en A1.
-        bool conTabla(List<UnidadRuta> us) =>
-            us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));
         expect(conTabla(ruta.delNivel('f0')), isTrue, reason: l.code);
         if (l.code != 'en') expect(conTabla(a1), isTrue, reason: l.code);
         // Orden global consecutivo.

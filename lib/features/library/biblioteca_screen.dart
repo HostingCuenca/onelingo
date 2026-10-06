@@ -52,7 +52,7 @@ class BibliotecaScreen extends ConsumerWidget {
                 onTap: () => context.push('/nivel0/sonidos'),
               ),
             // Idiomas con verbos generados (assets/contenido/<idioma>/verbos.json).
-            if (const {'en', 'fr', 'es'}.contains(s.idiomaMeta))
+            if (const {'en', 'fr', 'es', 'pt'}.contains(s.idiomaMeta))
               _Entrada(
                 icono: Icons.swap_horiz_rounded,
                 titulo: tr('Mis verbos'),

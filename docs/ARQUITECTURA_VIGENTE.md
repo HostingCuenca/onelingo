@@ -1,6 +1,6 @@
 # OneLingo: arquitectura vigente
 
-Actualizado: 2026-10-01 (fases A–D e I1; E en curso; DEC-026 a DEC-031).
+Actualizado: 2026-10-03 (portugués reiniciado; planificación de Nivel 0 y Fundamentos; DEC-035).
 
 **Este es el mapa que manda.** Si otro documento lo contradice, vale este. Los documentos de `docs/archivo/` son historia: no los uses para decidir. Si cambias la estructura, actualiza este archivo en el mismo commit.
 
@@ -30,7 +30,8 @@ Actualizado: 2026-10-01 (fases A–D e I1; E en curso; DEC-026 a DEC-031).
 |---|---|---|---|
 | Curso por niveles (ruta, esquema 2) | `assets/contenido/<idioma>/ruta/curso.json` + módulos (`f0.json`, `nN-editorial.json`) | `lib/core/aprendizaje/` (`modelos`, `dominio`, `providers`) | `python3 tools/validar_ruta.py`, `test/ruta_*` |
 | Ejercicios de las clases editoriales | `assets/contenido/en/exercise-library.json` + activación | `core/aprendizaje/biblioteca_adaptador.dart` | herramientas en `tools/contenido/` |
-| Nivel 0 (leer y pronunciar), por idioma: en, fr | `assets/contenido/<idioma>/nivel0/{nivel0,sonidos}.json` (textos de interfaz en `textos`), `assets/img/emoji/` (Noto, `tools/contenido/descargar_emoji.py`). Francés: borradores revisados en `tools/contenido/nivel0-fr/` → `integrar.py` | `core/nivel0/nivel0.dart` (`idiomasConNivel0`) | `tools/contenido/validar_nivel0.py <idioma>`, `test/nivel0_test.dart` |
+| Nivel 0 (leer y pronunciar), activo por idioma: en, fr | `assets/contenido/<idioma>/nivel0/{nivel0,sonidos}.json` (textos de interfaz en `textos`), `assets/img/emoji/` (Noto, `tools/contenido/descargar_emoji.py`). Francés: borradores revisados en `tools/contenido/nivel0-fr/` → `integrar.py`. Portugués está solo en staging editorial: `tools/contenido/nivel0-pt/borrador/`; no está activo ni habilitado en el runtime. | `core/nivel0/nivel0.dart` (`idiomasConNivel0`) | `tools/contenido/validar_nivel0.py <idioma>`, `test/nivel0_test.dart` |
+| Fundamentos portugués en staging | Plan canónico: `curriculo/pt/f0.json` (8 fichas, 24 claves). Borrador ejecutable: `tools/contenido/ruta-pt/borrador-f0.json` (8 unidades, 102 vocablos, 104 ejercicios). Ninguno está activo. | El borrador se escribió desde las fichas sin recuperar el legado; F6 bloquea publicación hasta producir/revisar el audio A→B | `python3 tools/curriculo/validar_fundamentos.py pt`, `python3 tools/contenido/ruta-pt/validar.py` |
 | Prueba de ubicación v2 (inglés; francés y demás idiomas con ruta según tengan banco) | `assets/contenido/<idioma>/diagnostico-v2.json` (fuente en `<idioma>/plan-editorial/diagnostico/`) | `core/aprendizaje/ubicacion.dart`, `bancoUbicacionProvider`; tope en el último nivel publicado (`nivelUbicacionRuta`) | `tools/contenido/validar_diagnostico.py [--idioma fr]`, `test/ubicacion*_test.dart` |
 | Prueba de ubicación (otros idiomas, legado) | `assets/contenido/<idioma>/diagnostico.json` o lecciones | `core/diagnostico.dart` (con techo verificado, DEC-026) | `test/diagnostico_test.dart` |
 | Prueba de cada nivel | ítems de evaluación de la propia ruta | `itemsPruebaNivel`, `nivelSuperado`, `nivelPorPruebas` en `dominio.dart` | `test/prueba_nivel_test.dart` |
@@ -82,6 +83,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 | I1 | Interfaz en inglés y selector de idioma en Perfil (`I18N.md`) | **hecha** (DEC-031) |
 | I2 | Contenido con apoyo en inglés para anglohablantes (francés primero) | pendiente |
 | E | Francés sobre esta base (`PLAN_FRANCES.md`): voces nativas y Nivel 0 F1–F5 hechos; siguen F6–F10, situaciones y verbos en francés, y N1 | **en curso** (DEC-030) |
+| P | Portugués pt-BR (`PLAN_PORTUGUES.md`): legado retirado; Nivel 0, Fundamentos y N1 completos con GO editorial en staging; N1 tiene 50 clases y 652 ejercicios; outline N2 aprobado con 50 clases y 48 claves nuevas; N2 C01–C10 aprobadas con 130 ejercicios; nada está activo | **en planificación/autoría por niveles** (DEC-035) |
 
 ## 7. Validar antes de entregar
 

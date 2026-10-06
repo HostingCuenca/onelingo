@@ -58,3 +58,14 @@ Como el francés, con tablas explícitas, pero el apoyo es **solo inglés** y el
 
 - **Personas, en orden:** yo, tú, él/ella/usted, nosotros/nosotras, ustedes, ellos/ellas (sin vosotros: la quinta persona es «ustedes» y coincide con la sexta). La forma va sin pronombre; los reflexivos llevan el pronombre en la forma («me levanto», «te levantas», «se levanta», «nos levantamos», «se levantan», «se levantan»; «me he levantado»).
 - **Tipo:** `regular` solo si las siete tablas siguen el modelo -ar/-er/-ir sin cambios de raíz ni de ortografía; los de cambio vocálico (pensar, poder, pedir), ortográficos (buscar, llegar, coger) e irregulares son `irregular`. `reflexivo` no es tipo: lo marca el infinitivo en -se.
+
+## Portugués: `verbos-pt.json` (pt-BR, curso para hispanohablantes)
+
+Como el francés (traducción `{es, en}`, tablas explícitas) más el campo `participio` explícito. 125 verbos de alta frecuencia, nivel 1–4.
+
+- **Personas, en orden:** eu, você, ele / ela, nós, vocês, eles / elas. Portugués de Brasil: sin tu ni vós; «você» comparte forma con «ele/ela» y «vocês» con «eles/elas» (como «ustedes» en el español). «A gente» (= nós, con verbo en 3.ª singular) solo se menciona en notas, no tiene columna.
+- **Siete tiempos:** `presente`, `preterito` (pretérito perfeito), `imperfecto` (pretérito imperfeito), `futuro` (futuro do presente), `condicional` (futuro do pretérito), `subjuntivo` (presente do subjuntivo) y `futuro_subjuntivo` (futuro do subjuntivo: «se eu puder»). No hay tiempo `perfecto` compuesto: en pt-BR «tenho falado» expresa repetición continua, no el pretérito perfecto del español, y sería una trampa para el hispanohablante.
+- **Participio:** siempre explícito. Se usan los participios irregulares del uso brasileño: ganho, gasto, pago, aceito, entregue, pego; además aberto, escrito, feito, dito, posto, visto, vindo, coberto.
+- **Ortografía post-Acordo:** pôr (con circunflejo), vêm, veem, leem, creem, dão, sem acento en «ideia».
+- **Tipo:** `regular` solo si las siete tablas siguen el modelo -ar/-er/-ir sin cambios ortográficos ni participio especial; ficar/pagar/chegar (c→qu, g→gu), los de cambio de raíz e irregulares son `irregular`.
+- Se generó con un script auxiliar de reglas más tablas irregulares; la fuente final es el JSON revisado a mano.

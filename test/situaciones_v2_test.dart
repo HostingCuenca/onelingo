@@ -109,6 +109,30 @@ void main() {
     expect(v.exitCode, 0, reason: '${v.stdout}');
   });
 
+  test('portugués: 50 situaciones pt-BR con apoyo es/en', () {
+    for (final interfaz in ['es', 'en']) {
+      final pt = situacionesDesdeJson(
+        localizarApoyo(
+              jsonDecode(
+                File('assets/contenido/pt/situaciones.json').readAsStringSync(),
+              ),
+              interfaz,
+            )
+            as Map<String, dynamic>,
+      )!;
+      expect(pt.length, 50);
+      final t = pt[1]!.tramo(Tramo.basico);
+      expect(t.objetivos.first.id, 's1-o1');
+      expect(t.vocabulario.first.es, isNotEmpty);
+      expect(t.objetivos.first.titulo, isNot(contains('{')));
+    }
+    final v = Process.runSync('python3', [
+      'tools/contenido/validar_situaciones.py',
+      'assets/contenido/pt/situaciones.json',
+    ]);
+    expect(v.exitCode, 0, reason: '${v.stdout}');
+  });
+
   test('el tramo sale del nivel y los superiores se abren al llegar', () {
     expect(Tramo.deNivel(1), Tramo.basico);
     expect(Tramo.deNivel(3), Tramo.basico);

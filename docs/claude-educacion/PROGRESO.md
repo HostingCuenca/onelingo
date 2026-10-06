@@ -1,13 +1,14 @@
 # Estado actual
 
-Última actualización: 2026-10-02
-Responsable: Claude (Claude Code)
+Última actualización: 2026-10-03
+Responsable: Codex (plan y staging portugués)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
 Fase actual: **Inglés N1–N10 (1.000 clases) y francés N1–N10 (500 clases) completos y publicados**; siguiente fase: revisión del cliente/nativa y el siguiente idioma con el mismo método (DEC-034).
-Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases editoriales integradas y activas · programa inglés total 100 %
+Porcentaje aproximado: Fundamentos activos en 9 idiomas; portugués retirado y en reconstrucción con 8/8 fichas aprobadas · Inglés 1.000/1.000 clases editoriales integradas y activas · programa inglés total 100 %
 
 ## Trabajando ahora
 
+- **Portugués reiniciado desde cero (DEC-035):** el legado activo fue retirado con respaldo recuperable; `PLAN_PORTUGUES.md` obtuvo GO documental. El Nivel 0 nuevo tiene GO editorial en `tools/contenido/nivel0-pt/borrador/`: 10 unidades, 40 lecciones, 362 pasos, apoyo ES/EN y batería final determinista descrita. Sigue en NO-GO técnico: no está en `assets/`, no está habilitado en el runtime y faltan voces brasileñas, umbral/refuerzo real y 10 emoji Noto. Las ocho fichas de Fundamentos y su ruta ejecutable tienen GO editorial: `curriculo/pt/f0.json` y `tools/contenido/ruta-pt/borrador-f0.json` pasan con 0 errores (8 unidades, 24 claves, 102 vocablos y 104 ejercicios); F6 exige producir y revisar el audio A→B. N1 está completo en `curriculo/pt/n1.json`: 50/50 clases, 652 ejercicios, 650 consignas únicas, 49 claves nuevas y 40 previos; validadores, auditoría longitudinal y simulación de estudiante están en GO. El outline N2 también obtuvo GO en `tools/curriculo/pt/n2-outline.json`: 50/50 clases, 48 claves nuevas, 89 previos, tres auditorías finales y 0 errores. N2 C01–C10 están aprobadas en dos lotes: 10 clases, 130 ejercicios únicos, dos revisiones pt-BR y dos simulaciones de estudiante en GO tras corregir fuentes, secuencias y escenas. Todo sigue fuera del runtime. El diagnóstico N1 requiere una ruta portuguesa publicada para validar léxico, por lo que no se compila ni activa todavía.
 - Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).
 - **E, francés (HECHO, edu-43, 2026-10-02):** francés N1–N10 completo en producción. Son 500 clases escritas desde las fichas `curriculo/fr/nX.json` por autores sonnet y revisadas bloque a bloque por un revisor distinto (GO). Hay bancos de ubicación N1–N10 con 180 ítems y GO. Pendiente: revisión nativa (FR-R). Método para el siguiente idioma: paquete de contexto por bloque y validador por bloque (ver `PLAN_PRODUCCION.md`).
 
@@ -81,12 +82,17 @@ Porcentaje aproximado: Fundamentos en 10 idiomas · Inglés 1.000/1.000 clases e
 
 ## Siguiente paso
 
-1. Recoger revisión del cliente sobre N1–N10 publicados.
-2. Recoger datos reales de la prueba de nivel v2 para recalibrar umbrales (eventos `diagnostico` versión 4).
-3. Auditoría #15 (léxico de validación separado del vocabulario enseñado), imágenes y personajes fijos (#20).
+1. Poblar N2 C11–C15 desde el outline aprobado, aplicando las mismas barreras de validador, revisión pt-BR y simulación de estudiante usadas en C01–C10.
+2. Elegir y probar dos voces nativas brasileñas.
+3. Integrar Nivel 0 portugués con umbral de 80 % y refuerzo P3–P9, sin activarlo hasta que pasen pruebas ES/EN.
+4. Producir y revisar por oído los dos clips A/B de F6; mantener el borrador fuera de `assets/` mientras falten.
+5. Preparar el diagnóstico editorial N1 en staging; validarlo/compilarlo solo cuando exista la ruta portuguesa publicada, sin activar todavía el idioma.
+6. Recoger revisión del cliente sobre N1–N10 publicados.
+7. Recoger datos reales de la prueba de nivel v2 para recalibrar umbrales (eventos `diagnostico` versión 4).
 
 ## Bloqueos
 
+- Portugués: dos voces nativas pt-BR, soporte del runtime para `evaluacion/refuerzo/categoria` antes de activar Nivel 0 y producción/revisión humana del audio A→B de Fundamentos F6.
 - Revisión nativa de 9 idiomas (decisión humana).
 
 ## Producción

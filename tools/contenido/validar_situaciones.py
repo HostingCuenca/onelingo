@@ -131,7 +131,8 @@ def validar(situaciones, idioma=None):
                 raiz = re.sub(r'[^a-zà-ÿœ]+', ' ', en.lower()).split()
                 ejemplo = re.sub(r'[^a-zà-ÿœ]+', ' ', v['ejemplo'].lower())
                 if generico and len(raiz) > 1 and raiz[0] in ('le', 'la', 'les', 'un', 'une', 'des', 'l', 'du', 'de',
-                                                           'el', 'los', 'las', 'una', 'unos', 'unas'):
+                                                           'el', 'los', 'las', 'una', 'unos', 'unas',
+                                                           'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas'):
                     raiz = raiz[1:]  # el artículo no tiene que repetirse en el ejemplo
                 if raiz and raiz[0][:4] not in ejemplo:
                     errores.append(f'{donde}: el ejemplo de «{en}» no la contiene')

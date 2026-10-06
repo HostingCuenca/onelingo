@@ -296,3 +296,14 @@ Decisión:
 - **Plan por idioma** (`curriculo/<idioma>/nX.json`): una ficha por clase (título, objetivo, gramática, lo que introduce y recicla, vocabulario, sonido, situación, tarea y estado).
 - **Nada se escribe fuera del plan.** Cada punto se introduce una sola vez; los autores reciben las fichas de su bloque y el revisor las contrasta. Valida `tools/curriculo/validar_plan.py`.
 - Método completo en `PLAN_CLASES.md`.
+
+## DEC-035 — Reinicio pedagógico del portugués desde cero
+Fecha: 2026-10-03 · Decisión del cliente («borremos eso antiguo del portugués» y profundizar el Nivel 0 antes de las 500 clases).
+Decisión:
+- El contenido portugués anterior (`nivel-0/1/2`, ruta `f0`/`a1-1` y sus semillas) se retira de las fuentes activas. Se conserva únicamente como respaldo recuperable en `docs/archivo/pt-legacy-2026-10-03/` y no puede reutilizarse como autoridad ni ampliarse.
+- Variante productiva: portugués de Brasil (`pt-BR`); portugués europeo solo para reconocimiento desde niveles avanzados.
+- El curso nuevo empieza con **Nivel 0 profundo: 10 unidades × 4 microlecciones**, para una persona sin conocimientos de Brasil ni del idioma. Después vienen Fundamentos comunicativos nuevos y N1–N10.
+- Portugués sigue DEC-033: 50 clases por nivel, 10 bloques de 5, hasta C1; no promete C2.
+- Todo nace bilingüe `{es, en}` y con autor/revisor distintos. La IA no es necesaria para cursar ni aprobar.
+- Antes de aprobar `curriculo/pt`, deben congelarse el inventario sonoro, los prerrequisitos de Fundamentos, la política de variación regional y las voces nativas brasileñas.
+Referencia: `PLAN_PORTUGUES.md`.

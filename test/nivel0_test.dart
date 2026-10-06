@@ -118,12 +118,28 @@ void main() {
     expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
   });
 
+  test('El Nivel 0 portugués (pt-BR) trae cada explicación en español e inglés', () {
+    // Reinicio desde cero (DEC-035): apoyo bilingüe como el francés.
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'pt',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    final n = cargar('pt');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(40));
+    expect(n.sonidos, hasLength(12)); // vocales orales y nasales congeladas
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);
     expect(n.idioma, idioma);
     expect(n.unidades, isNotEmpty);
-    expect(n.sonidos.length, greaterThanOrEqualTo(15));
+    // El portugués de Brasil congela 12 IDs vocálicos (7 orales + 5 nasales).
+    expect(n.sonidos.length, greaterThanOrEqualTo(idioma == 'pt' ? 12 : 15));
     final problemas = <String>[];
     void marcado(String id, String m) {
       for (final s in segmentos(m)) {

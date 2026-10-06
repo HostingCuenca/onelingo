@@ -207,4 +207,25 @@ void main() {
       }
     }
   });
+
+  test('Mis verbos en portugués: pt-BR con apoyo es/en y futuro do subjuntivo', () {
+    for (final interfaz in ['es', 'en']) {
+      final v = Verbos.fromJson(
+        localizarApoyo(_json('assets/contenido/pt/verbos.json'), interfaz)
+            as Map<String, dynamic>,
+      );
+      expect(v.verbos.length, greaterThanOrEqualTo(100));
+      final ir = v.porId('ir')!;
+      expect(ir.irregular, isTrue);
+      expect(ir.tablas['presente']![0], 'vou');
+      expect(ir.tablas['preterito']![0], 'fui');
+      expect(ir.tablas['futuro_subjuntivo']![0], 'for');
+      expect(ir.es, interfaz == 'es' ? 'ir' : 'to go');
+      final p = preguntasVerbos(v, v.verbos, Random(5));
+      expect(p.length, 10);
+      for (final q in p) {
+        expect(q.opciones.toSet().length, q.opciones.length);
+      }
+    }
+  });
 }
