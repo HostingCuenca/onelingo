@@ -1,0 +1,45 @@
+GO
+
+# Revisión N4 · B3 (pt.n4.c11–c15) · revisor independiente
+
+Validador: `validar_bloque.py pt 4 3` → 0 errores. Escucha: cada clase conserva ≥2 `escuchar` (g4 y e5 en las cinco, con el audio igual a la respuesta correcta). Los `relacionar` de la ficha están en las cinco evaluaciones (3–4 pares, una sola correspondencia). El borrador respeta las fichas (gramática solo la de `introduce`, vocabulario de la ficha, tareas y ejercicios en el mismo formato y clave). Cambios totales: ≈ 55, la mayoría tablas «Para ler» sobrantes.
+
+## Cambios
+
+- **Tablas «Para ler» (26 filas quitadas, 6 formas flexionadas pasadas a infinitivo):** probado fila a fila con el validador. Quitadas las ya enseñadas o flexiones de verbos enseñados: «procuramos», «exigimos», «noite», «ajudam», «dividir», «entendemos», «emprestam», «visitam», «concorda», «aprovada», «simpáticos», «piorando», «avisado», «devia», «chame», «devolve», «devolvida», «faltam», «pensam», «claro», «reveza», «divide», «desço», «papel», «sacolas», «limpa». Flexiones que el validador aún exigía, sustituidas por su infinitivo: «preferimos» → «preferir», «necessária» → «necessário», «pingando» → «pingar», «verifica» → «verificar», «cumprimentaram» → «cumprimentar», «respeitaram» → «respeitar». Quedan de 4 a 7 filas por clase; «reúnem» y «reúne» se quedan porque el validador no deriva formas con hiato acentuado de «reunir».
+- **Nombre del reparto (c12):** «Dona Carolina» chocaba con Carolina Dias, clienta de Maré Digital (N3 B7–B8). → «Dona Lúcia» (vecina mayor de Graças, personaje secundario de N2, en `palabrasLibres`): diálogo, hablante, preguntas, relacionar e3 y escribir i2 («Valentina e Dona Lúcia se visitam aos domingos»). Rafael, Luana y Valentina se conservan como vecinos secundarios (sin apellido; no son Rafael Moura).
+- **`contexto` de la situación en español (5):** el campo `es` de las cinco situaciones estaba escrito en portugués (apoyo roto para el alumno). → español neutro (el `en` ya estaba en inglés). Ver «Sin resolver»: el mismo defecto aparece en otros bloques pt.
+- **Coherencia con el canon de la ficha (c15):** el diálogo hacía que Camila se encargara del mercado del miércoles y de la cocina, contra los hechos (Larissa: baño el sábado y mercado el miércoles; Camila: basura martes y viernes, internet y gas) y contra i2/e3/e6 del propio borrador. Reescrito: Larissa baño «aos sábados» y mercado «na quarta»; Camila basura, internet y gas; dos turnos nuevos (qué hacer si una no puede) para pasar de 108 a ≥130 palabras de lectura; Larissa (no Camila) hace la deducción «Deve ser o lixo reciclável da Camila», como pide i3; dos turnos seguidos de Larissa fusionados.
+- **erroresFrecuentes (3):**
+  - c12 «Os vizinhos ajudam uns aos outros» no es error real en pt-BR (se omite el se con frecuencia) y chocaba con el ejemplo y i1 «ajudam um ao outro» sin se. → ejemplo e i1 ahora con «se ajudam um ao outro»; el error pasa a «Elas se ajudam uma a outra» → «uma à outra» (calco de «una a otra»; a + a = à).
+  - c14 «A caução é um aumento do aluguel» era confusión de concepto, no error de hispanohablante. → «A caución é de três meses» → «caução» (calco ortográfico -ción/-ção).
+  - c15 la explicación de «Quem se queda com o lixo?» hablaba de un pronombre sobrante; el error es la forma española «se queda». → explicación corregida.
+- **c11 explicación p2 (ES/EN):** decía que «ter → tenha» es irregular; sale regular de «tenho». → solo ser → seja y estar → esteja son irregulares.
+- **c11 diálogo (1):** «Uma hora depois: alguma resposta interessante?» era una acotación puesta en boca de Larissa. → «Camila, alguma resposta interessante?»; el paso del tiempo va en el `contexto`.
+- **c12:** el diálogo termina con Camila y Larissa comentando el final; añadido en el `contexto` (ES). ⚠ añadidos en la explicación (ES/EN) para los falsos amigos que marcaba la ficha: síndico (administrador elegido por los vecinos) y cumprimentar ≠ cumplir (cumprir).
+- **c13 relacionar e3 (1):** «o síndico ↔ administra el edificio y revisa la filtración» era defendible también para «o encanador» (la filtración es agua). → pares «encanador ↔ arregla fugas de agua», «eletricista ↔ arregla problemas de luz», «síndico ↔ administra el edificio».
+- **c14 diálogo (1):** tres turnos con hablante «Contrato» (no es personaje ni papel en portugués) → un solo turno de Seu Alberto que lee las cláusulas del borrador; texto de las cláusulas intacto. Decide la duda del autor: «Contrato» como hablante no es aceptable.
+- **c15 explicación (ES):** el ⚠ de lixo ahora da el par completo («lujo» = luxo).
+- **Sin cambios, verificados:** pt-BR natural (que + subjuntivo en relativas de búsqueda, peço/exijo/sugiro que + subjuntivo, o senhor con seu Alberto, fico com / fico responsável por, a gente reveza); falsos amigos presentes (procurar, conserto ≠ concierto, arreglar no existe, lixo ≠ luxo, síndico, cumprimentar, caução/prazo); distractores = errores reales (tenga, arregle, se queda, responsável da, um ao outros); una sola respuesta por ítem; sin Ecuador; Camila de Miami en Recife; hechos de Recife/Brasil reales (IPCA se cita como «índice oficial»).
+- **Dudas del autor decididas:** (1) `relacionar` pt ↔ significado {es,en}: aceptado (mismo criterio que B2). (2) Hablante «Contrato»: reformulado (arriba). (3) Hechos de asamblea y tareas: confirmados; «Dona Carolina» cambiada por «Dona Lúcia». (4) ⚠ conserto/concierto, lixo/luxo, síndico, cumprimentar/cumplir: presentes. (5) Tablas ≤15 filas y deduplicadas contra N1–N3 y N4 B1–B2: hecho.
+
+## Hechos del reparto confirmados
+
+- c11 (noche, apartamento de Graças): seu Alberto avisó de que el alquiler subirá en el contrato nuevo; Larissa va a compartir el apartamento con Camila tras la partida de Ana; deciden mirar otras opciones antes de hablar con él. Escriben un anuncio para un grupo del barrio: dos cuartos en Graças, cerca del Capibaribe, con varanda, amueblado (aún no tienen muebles), sin garaje necesario, vecindario tranquilo, hasta R$ 2.500 en el modelo. Una hora después llega una sola respuesta (tiene varanda pero queda lejos del río): su apartamento sigue siendo mejor.
+- c12 (asamblea del condomínio en Graças): participan el síndico (sin nombre), Camila, Larissa, Dona Lúcia (vecina mayor, a senhora), Rafael, Luana y Valentina (vecinos secundarios). Camila dice que los vecinos se respetan, se saludan en el ascensor y los del tercer piso se ayudan; Dona Lúcia se queja del ruido nocturno; Rafael y Luana no se hablan desde una discusión por la garagem; aprueban silencio después de las 22h; al final Rafael y Luana se saludan.
+- c13 (mensajes de Camila): desde ayer hay una infiltración en el techo del baño del 402, que viene del 502; pide al síndico que verifique con el morador del 502. A seu Alberto (o senhor) le pide que llame a un encanador y le mande el orçamento antes del conserto; el encanador va el jueves a las 14h y Camila está en casa esa tarde; el grifo de la cocina también gotea; sugiere que traiga un grifo nuevo.
+- c14 (borrador del contrato): cláusula 3 plazo de 12 meses desde enero; cláusula 4 reajuste anual por índice oficial (el borrador no nombra el IPCA); cláusula 6 caução de tres meses de aluguel, devuelta al final del contrato tras la vistoria; cláusula 8 multa proporcional a los meses que faltan si el locatário sale antes. Seu Alberto es el locador y Camila y Larissa son locatárias; la caução es la misma del contrato anterior (no hay que pagarla de nuevo); este año el aumento será pequeño; seu Alberto hará la vistoria de salida con ellas.
+- c15 (cuadro de turnos, pegado en la puerta de la geladeira): Camila, basura reciclable martes y viernes, internet y gas; Larissa, limpieza del baño (sábado), mercado (miércoles), luz y condomínio; platos por turnos; las cuentas se dividen por dos a fin de mes; si una no puede hacer su tarea, cambian y avisan.
+- Trato: Camila usa «o senhor» con seu Alberto y con el síndico en los mensajes; Camila y Larissa se tratan de você.
+
+## Correcciones de ficha
+
+- c12: la ficha (y la `tarea`) nombra «Dona Carolina» en la asamblea; choca con Carolina Dias (clienta, N3). Aplicado «Dona Lúcia» en el borrador; la ficha no se edita.
+- c12 (independiente): «ajudam ___ → um ao outro» omite el se que la propia clase enseña; en el borrador va «se ajudam ___».
+- c15: la ficha de situación dice «sábado» para el baño y «miércoles» para el mercado, pero el borrador original contradecía esos días; ya coinciden con la ficha.
+
+## Sin resolver
+
+- **Defecto transversal pt:** el campo `es` del `contexto` de `situacion` está escrito en portugués en muchos bloques ya revisados (recuento aproximado por heurística: N1 B4, B5, B7, B9, B10; N2 B3, B8; N3 B1–B5, B8; N4 B1, B2 (4 de 5), B8, B9 y bloques N5–N6). Corregido solo en B3; conviene un barrido antes de integrar.
+- El borrador del contrato no nombra el IPCA (los hechos del reparto sí). Si B10 lo cita, habrá que enseñarlo como sigla.
+- «Reunir» exige las formas «reúnem»/«reúne» como filas de tabla (el validador no deriva el hiato acentuado); alternativa futura: enseñar «reunir-se» como verbo.
