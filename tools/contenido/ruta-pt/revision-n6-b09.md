@@ -1,0 +1,45 @@
+GO
+
+# Revisión N6 · B9 (pt.n6.c41–c45) · revisor independiente
+
+Validador: `validar_bloque.py pt 6 9` → 0 errores (el borrador llegaba con 1: c42 pi.i2 usaba «tipo», no enseñada); `validar_plan_detallado.py pt` sin errores. Progresión correcta: verbos de tendencia (c41) → comparar con prudencia (c42) → predecir con matices (c43) → límites de los datos (c44) → analizar efectos (c45). Plan de ejercicios de las fichas respetado (mismos formatos y claves). `relacionar` de la ficha en las cinco evaluaciones (c41 e2, c42 e3, c43 e4, c44 e3, c45 e3). ≥ 2 `escuchar` por clase (c41 g2+s1+e3, c42 s1+e2, c43 s1+e2, c44 g2+s1, c45 s1+e2). Contextos `es` en español y `en` en inglés (2 corregidos). Canon: Camila de Miami en Recife; sin Ecuador; Ana no aparece; Yasmin ya trabaja en Maré Digital (2031); cifras del app 12–18 mil usuarios activos (ene–jun 2031), coherentes con B8. Sin fechas con día de la semana (no hubo que comprobar calendario 2031). Lecturas (diálogos) de 271–284 palabras (mínimo 270). Correcciones: 26.
+
+## Cambios
+
+- **Vocabulario > 12 / palabras extra ya enseñadas (13 filas fuera):** deduplicado contra N1–N5 y N6 B1–B8 (5.117 formas). c41: `ativo` (ya enseñado en plural «ativos»), 11 → 10. c42: `parceiro`, `velho`, `a Colômbia`, `o museu` (ya enseñadas), 13 → 9. c43: `o trimestre` (ya enseñada), 10 → 9. c44: `a causa`, `a pesquisa`, `o blog`, `o estudo`, `concluir` (ya enseñadas), 14 → 9. c45: `a renda`, `resultar` (ya enseñadas), 14 → 12. Se mantienen aunque ya enseñadas las palabras que traen las fichas (tendência, cenário, previsão, hipótese, margem de erro, amostra, viés, correlação, causalidade, impacto, efeito, consequência, fator, acessibilidade, etc.), como en B8 con `plateia`. Extras nuevas que quedan: c41 download, evolução; c42 absoluto; c43 tender a; c44 implicar, população; c45 sociedade, crescimento, audioguia, inclusão.
+- **Una sola respuesta / palabra no enseñada (1):** c42 pi.i2: distractor «um tipo de gráfico» → «uma faixa de cor» (confusión real con «faixa»); la respuesta correcta sigue siendo «um grupo de idade».
+- **Contexto / traducciones en español (3):** c41 contexto ES empezaba en portugués («Janeiro a junho de 2031:») → «De enero a junio de 2031:»; c43 traducción ES del presentador dejaba «professora Paula Lima, especialista em turismo» → «la profesora Paula Lima, especialista en turismo»; c45 contexto ES «Tecnologia e sociedad» (mezcla) → «Tecnología y sociedad».
+- **Diálogos desordenados (4):** c41: dos réplicas seguidas de Iara y dos de Camila (con «Combinado» suelto) → fusionadas en una de Iara y una de Camila que responde (hipótesis de la caída de la valoración + envío antes de las cuatro de la tarde); c42: Camila hablaba de «Yasmin completa» estando Yasmin en la conversación → «e você completa com os números»; c43: «no cenário pior… Em dois casos» → «no pior cenário… Nos dois casos»; c44: «para outro blog» (ambiguo) → «para um blog» (como la ficha).
+- **Falsos amigos (⚠) (4 notas corregidas):** c41 `disparar`: el ⚠ no era un falso amigo («dispararse» existe en español) → nota neutra «como dispararse (los precios se dispararon)»; c44 `amostra`: «amostra grátis» = «muestra gratis», no era falso amigo → ⚠ quitado, queda la precisión de significado en estudios; c44 `inferir`: ⚠ quitado (cognado real). c43 `cenário`: nota reescrita (antes confusa) → «como escenario; ⚠ no «cena» (escena; la comida de la noche es «o jantar»)». Se mantienen: «faixa etária» (faixa de pedestres), «pesquisa» (explicación p1), «desdobramento».
+- **Explicación con palabra no enseñada (1):** c45 p2 «deve gerar» → «deve aumentar».
+- **erroresFrecuentes:** revisados, todos son errores reales de hispanohablante (aumentou/aumentaram, «oscilou de … e», «cresceu o número», «em relação com», «em comparação de», «média» por «mediana», «caem» por «caiam», «tende de», «representativo» sin concordancia, «permite de», «contribuiu a», «resultou a», «levou de»). Sin cambios.
+- **Escucha:** el autor ya había convertido 2–3 ítems por clase (misma clave y mismo contenido); se confirman. Los distractores son plausibles al oído.
+- **Tablas:** c41, c43 y c45 son tablas de conjugación de enseñanza (infinitivo + formas de la ficha), no «Para ler»; se conservan. No hay tablas «Para ler» en el bloque.
+- **Palabras de la ficha repetidas:** `margem` (c44) ya viene de c43 («a margem de erro»); no se añade como entrada propia.
+
+## Decisión de las dudas del autor
+
+1. Vocabulario > 12 en c42, c44, c45 → **podado y deduplicado** (ver arriba); c42 y c44 quedan en 9 y c45 en 12.
+2. c41 i1 (ficha con dos huecos «de / para») reducido a uno («para»): **confirmado** (regla del validador: un solo hueco por `completar`).
+3. Hechos nuevos: c43 analista del podcast = profesora Paula Lima, especialista en turismo → **confirmado** (invitada de un podcast, nombre secundario). c44 Camila escribe una crítica de 120 palabras (viene de la tarea de la ficha) → **confirmado**. c45 horario de noche → filas menores (viene del relacionar de la ficha) → **confirmado**.
+
+## Hechos del reparto confirmados
+
+- c41: panel del app de visitas guiadas de enero a junio de 2031: usuarios activos de 12 mil (ene.) a 18 mil (mayo), estabilizados en 18 mil en junio; tiempo medio de uso de 9 a 14 minutos; valoración en la tienda de 4,8 a 4,5; cancelaciones de 800 (ene.) a 500 (jun.); las descargas se dispararon en diciembre (campaña de fin de año, según Bruno) y luego oscilan entre 2 mil y 3 mil al mes. Iara Menezes (a senhora para Camila; ella tutea a Camila con você) pide un informe corto para la reunión con los socios; Camila lo envía antes de las cuatro de la tarde y hará un análisis mejor la semana siguiente tras hablar con Yasmin (hipótesis: la nueva versión va lenta en algunos celulares).
+- c42: México 9.000 usuarios, 30 museos socios, media de 300 por museo, grupo de edad principal 25–34; Colombia 4.500 usuarios, 10 museos, media de 450 por museo, grupo principal 35–44. Yasmin: en cifras absolutas manda México, proporcionalmente Colombia. Bruno pregunta por la edad del público; propone mirar la mediana. Camila redacta la nota al equipo con tres comparaciones; Yasmin completa los números y avisa cuando esté la tabla con la mediana; datos de solo seis meses (comparación limitada).
+- c43: podcast de tecnología con la profesora Paula Lima (especialista en turismo): el turismo cultural en el Nordeste tiende a crecer en el segundo semestre; con el fin de las lluvias fuertes en agosto, las visitas deben aumentar desde septiembre; es posible que los museos abran más horarios los sábados; margen de error de las proyecciones: 5 %. Camila: «se a previsão estiver certa, precisamos de mais guias no app»; Yasmin: posible necesidad de más servidores en octubre; Lucas teme comprar servidores de más; Dona Marina opina que tras las lluvias el Recife Antigo se llena de turistas; para el próximo trimestre escribirán tres previsiones con la margen de error clara.
+- c44: estudio comentado en un blog: 60 estudiantes universitarios de 18 a 24 años, un solo mes, formulario en línea; el blog concluye que el celular causa insomnio; Camila, Yasmin y Lucas critican la muestra (pequeña, no representativa, sesgo de edad), correlación no implica causa, «tudo indica que há uma relação». Camila escribirá una crítica de 120 palabras para un blog (empieza por lo positivo); Yasmin ayuda con la revisión.
+- c45: mesa redonda «Tecnologia e sociedade» en el Porto Digital con una mediadora y un investigador invitado: el audioguía contribuyó a la accesibilidad (más de mil personas con baja visión hicieron visitas solas); más ingresos para los museos pequeños; la versión en español tuvo impacto positivo sobre los turistas de lengua española; desdobramento negativo: la fila los fines de semana, que el horario de la noche redujo (filas menores); el equipo medirá el efecto de las filas y propondrá más horarios antes de la nueva fase del proyecto.
+- Trato en B9: Camila con Iara: «a senhora» (Iara la tutea); con Yasmin, Bruno, Lucas y Dona Marina: você (Dona Marina la tutea y Camila la llama «Dona Marina»).
+
+## Correcciones de ficha
+
+- c41 (relacionar): el ejemplo trae propuestas cruzadas que no pertenecen al ítem; en el borrador solo van los 4 pares correctos (igual que en c42–c45).
+- c41 g1/i1: la ficha pedía «de / para» en un mismo hueco (dos huecos); el validador solo admite uno, así que i1 pide solo «para».
+- c43 e2 (escuchar): el audio de la ficha usa «a gente precise de mais servidores»; se conserva como «a gente precise de mais servidores» (subjuntivo correcto con «a gente»).
+- c45 e2 (escuchar): la ficha dice «turistas latino-americanos, que dobrou»; el borrador usa «turistas de língua espanhola» (consistente con B8; no fija una cifra no establecida en el canon).
+- c44: la ficha lista `margem` como palabra nueva, pero «a margem de erro» ya se enseña en c43; no se repite.
+
+## Sin resolver
+
+- Ninguno. Nota de continuidad para B10: el app de visitas guiadas cierra el semestre con 18 mil usuarios activos, valoración 4,5 y México/Colombia con 30 y 10 museos socios; el audioguía alcanzó a más de mil personas con baja visión.
