@@ -1,0 +1,48 @@
+GO
+
+# Revisión N7 · B8 (pt.n7.c36–c40) · revisor independiente
+
+Validador: `validar_bloque.py pt 7 8` → 0 errores. Cada clase enseña lo que dice su ficha (generalización matizada; fórmulas de choque cultural; evitar estereotipos; reconocimiento de variedades regionales; comentario intercultural integrado) y nada más. Escucha: 2 `escuchar` por clase (c36 i2+e5, c37 i2+e5, c38 i2+e5, c39 g2+e5, c40 i2+e5), todos con una sola respuesta. `relacionar` de la ficha conservado en las cinco clases (e4). Todos los `es`/`en` de contexto, apoyo y textos de apoyo revisados con script (sin portugués en `es` ni español en `en`, salvo citas entre «»). Sin Ecuador ni pt-PT. No hay días de la semana con fecha. Diálogos de 270–309 palabras (rango 270–560). Correcciones: ≈25 (más 44 filas de «Para ler» quitadas).
+
+## Cambios
+
+- **Canon de Lisboa (duda decidida por el orquestador): B8 = SEGUNDO viaje.** El borrador presentaba la visita como si fuera la primera y como «dos semanas visitando a Ana». Ahora: c36 y c37 `contexto` dicen que Camila está en Lisboa «por segunda vez»: vino por una conferencia de producto (ficticia, sin marca) y se quedó unos días más en casa de Ana (dos semanas en total, como fija el MAPA). c36: Ana «Desta vez você vai conhecer mais gente daqui»; c37: Ana «…você está em Lisboa de novo… o que você ainda estranha, desta vez?»; c40: Camila «depois da minha segunda viagem a Lisboa». No contradice B2 (c09–c10: primer viaje, vacaciones, sin conferencia, se aloja con Ana). Ana solo aparece en Lisboa y a distancia; no hay escenas físicas con Larissa/Heitor.
+- **Dudas del autor decididas.**
+  - c37 «mensaje a Ana desde Lisboa»: el diálogo en persona queda, pero Ana ya no pide un audio «para os seus pais» (incoherente con e6 y con la ficha, que piden un mensaje a Ana) sino «escreve uma mensagem para mim… Eu quero guardar essa lista»; Camila responde «Vou escrever agora mesmo».
+  - c38 audio «festeiros/maneira» → «forró/jeito»: aceptado (vocabulario ya enseñado y menos cargado). c40 «são diferentes… Não quero generalizar» en vez de «diferem… pretendo»: aceptado (palabras enseñadas).
+  - Inventados: **feirante sin nombre (c39) → seu Paulo** (canon: Seu Paulo Gomes, feriante, «o senhor»; ya no habla en la clase: Camila relata lo que él le explicó). Colega gaúcho sin nombre (c39, e5): se mantiene como secundario anónimo. Cliente de Lisboa sin nombre en el comentario recibido por Bruno (c38): se mantiene.
+  - ⚠ sotaque vs acento: ya estaba en la nota de `v-sotaque` y en c39 p2; ahora además es un error frecuente real (c39: «O acento do Nordeste…» → «sotaque»).
+- **Escucha (c39):** i2 era un `escuchar` cuyas dos opciones solo se distinguían por «a» / «à» (crasis), idénticas al oído → volvió a `elegir` (como en la ficha) y la escucha pasó a g2 (misma clave, «mexerica/bergamota»).
+- **Diálogos:** hablantes consecutivos del mismo personaje fusionados (c36, c37, c38, c39, c40); c38 «Sim.» sin pregunta previa eliminado; c39 el feirante hablaba dentro de una clase con Renata → relato de Camila; c40 «cerca de 200 / 300 palabras» (cifras en audio) → «Ainda está curto. Preciso escrever mais».
+- **c40 e5 (audio):** «Para um nordestino, o almoço de domingo é sagrado» era una generalización en una clase contra estereotipos → «Para muitos nordestinos…».
+- **erroresFrecuentes (10 reescritos, todos errores reales de hispanohablante):**
+  - c36: «Ninguno chega na hora» (explicación incoherente) → «Não todos…» (calco de «no todos»); «Não nem todos» (nadie lo escribe) → «Em general» (→ «em geral»).
+  - c37: «me acostumei com» (en Brasil «acostumar-se com» también se oye; no es error) → «Todavia não me acostumei…» (⚠ «todavia» = sin embargo, no «todavía»; correcto «ainda não»).
+  - c38: «Todo português é reservado» (es un estereotipo, no un error de lengua) → «dizer de que» (dequeísmo); «Não nem todo» → «Nem todo os brasileiros» (concordancia todo/todos).
+  - c39: «Os nordestinos falam errado» (prejuicio, no error de lengua) → «O acento do Nordeste» (acento/sotaque).
+  - c40: «A contrário de» → «Ao contrário que» (calco de «al contrario que»); «Os lisboetas são de um jeito…» (generalización, no error) → «Por outra parte» (calco de «por otra parte»; correcto «por outro lado»). De paso se quitó «lisboetas» del bloque (no enseñada).
+- **Falsos amigos (⚠):** añadido en c39 «bergamota» (en español, el cítrico del té Earl Grey o una pera; en el Sul de Brasil, la mandarina); c37 «todavia» (arriba). Mantenidos: estranhar≠extrañar, preconceito≠preconcepto, sotaque≠acento, intercâmbio≠cambio, etiqueta (cortesía).
+- **Dedupe de «Para ler»** contra N1–N6 y N7 B1–B7: de 14 + 12 + 14 + 15 + 14 = 69 filas quedan 4 + 4 + 5 + 11 + 1 = 25. Método: se quitaron todas y se devolvieron solo las que reclamaba el validador (c36: embora/haja, os portugueses, o vinho, ofender-se; c37: caminhar, despedir-se, a quantidade de gente, o pastel de nata; c38: o nordestino, o transporte, evitar, variar, o dado; c39: aipim, mandioca, raiz, bergamota, mexerica, referir-se a, nomear, esforço, gaúcho, feirante, regional; c40: o almoço de domingo/sagrado). Eliminadas, entre otras: o jantar, a sobremesa, o suco, a mesa, na hora, combinada, conversar, estranhar, tendem a, ficar até tarde, o silêncio, a ladeira, o balcão, o horário, a viagem, já, ainda, a porta, o forró, barulhento, reservado, o jovem, as redes sociais, o turista, o morador, a feira, a fruta, a vogal, o artigo, a estação, o clima, o mercado, o vizinho, a água, a geração, os pais, ao contrário de, por outro lado, enquanto, tanto… quanto, a conclusão.
+- **Sin cambios, verificados:** una sola respuesta en todos los ítems (c36 g2/e2/e4; c37 e2 «Estranhei você… tenho saudade» es el único incorrecto; c38 g2/e2; c39 e2/e4 por eliminación; c40 g2/e2/e4); `completar` con un solo hueco; `relacionar` con pares cruzados en la ficha y sin opción doble defendible; apoyo {es,en} exacto; hechos reales (macaxeira/aipim/mandioca, mexerica/bergamota, Lisboa con estaciones marcadas y Recife con calor constante, pastel de nata, café en el balcão, metrô silencioso).
+
+## Hechos del reparto confirmados
+
+- Viaje: Camila viaja a Lisboa por SEGUNDA vez en 2032: conferencia de producto ficticia (sin marca real), dos semanas en total; se queda unos días en casa de Ana. El primer viaje fue el de N7 B2 (c09–c10). Ana aparece en B8 solo en Lisboa (c36–c37).
+- c36: antes de una cena con amigos de Ana en Lisboa, Ana explica las costumbres: el jantar empieza hacia las 21h y la mayoría llega un poco tarde; se suele llevar sobremesa o vino (quien no bebe, suco); se queda mucho tiempo a la mesa, aunque no todos hasta tarde. En Recife Camila llega unos veinte minutos después de la hora combinada. Camila escribirá una carta (a sus padres en el diálogo; a Ana en e6).
+- c37: una semana en Lisboa; a Camila le extrañan la cena a las 21h, el silencio en el metrô y las despedidas largas en la puerta; ya se acostumbró a tomar el café en el balcão con un pastel de nata; aún no se acostumbra a las ladeiras; echa de menos Recife, a Dona Marina y a sus padres (habló con su madre por video); Ana le pide un mensaje con tres cosas que extraña y dos a las que se acostumbró.
+- c38: Bruno recibe el comentario de un cliente de Lisboa (sin nombre) «os brasileiros são todos barulhentos e chegam sempre atrasados»; Camila propone respuesta respetuosa («Nem todo brasileiro é barulhento; sem generalizar…», «Pelo que observei…») con un dato (muchos moradores de Lisboa trabajan con turismo); Bruno la redacta y Camila la revisa. Todo você.
+- c39: clase con la profesora Renata (você): seu Paulo (feriante, «o senhor») le explicó que en Recife/Nordeste se dice macaxeira, en Rio de Janeiro aipim y en São Paulo mandioca; un colega gaúcho (sin nombre) le explicó bergamota (Sul) / mexerica (São Paulo y Minas); el sotaque del Nordeste abre más las vogais; Camila entiende macaxeira sin esfuerzo y aipim solo por el vocabulario local.
+- c40: artículo de Camila (boletín de la Escola Capibaribe) «Duas cidades à beira da água» sobre vivir en Recife y en Lisboa, con Renata (você); escrito tras su segundo viaje a Lisboa; «tanto em Recife quanto em Lisboa», «ao contrário de»; la profesora le advierte que la feria no es central «para todos»; el almuerzo de domingo como punto común; debe llegar a 300 palabras y entregarlo en la próxima clase.
+- Trato: Camila habla de «o senhor» a seu Paulo; você con Ana, Bruno, Renata y Dona Marina en lo cotidiano (con Dona Marina «a senhora» como en el reparto). Iara, Larissa, Heitor y Lucas no intervienen en el bloque.
+
+## Correcciones de ficha
+
+- N7 c37 (situación): la ficha dice «Ana, que passou o dia a trabalho na cidade do Porto» y a la vez «Estou no seu bairro em Lisboa»; con el canon de B8 (segundo viaje, dos semanas con Ana) el bloque usa un diálogo en persona y el «mensaje a Ana» queda como producto escrito (ejercicios i3/e6). La ficha debería hablar de un mensaje escrito/de voz de Camila a Ana, no de un «audio para los padres».
+- N7 c37 (situación/ejercicios): la ficha da por supuesto que Camila nunca estuvo en Lisboa («estranhei» todo); con el segundo viaje el diálogo aclara que son cosas que aún le extrañan «desta vez».
+- N7 c38 (audio): «festeiros/maneira» → «forró/jeito» (palabras ya enseñadas); la ficha debería actualizarse.
+- N7 c39 (ejercicios): el `elegir` de independiente sobre «à entoação» no se puede convertir en `escuchar` (a/à son idénticos al oído); la escucha va en la guiada g2.
+- N7 hechosDelReparto «Cronologías (B2)» / «Culturas en contacto (B8)» y la `nota` del nivel: ya son coherentes con el canon (B2 primer viaje; B8 segundo, conferencia ficticia); en la fila de B2 sigue diciendo «la misma visita que se vive en B8» (ver revision-n7-b02).
+
+## Sin resolver
+
+Ninguno.
