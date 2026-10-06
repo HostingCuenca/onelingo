@@ -1,12 +1,15 @@
 # Estado actual
 
-Última actualización: 2026-10-03
-Responsable: Codex (plan y staging portugués)
+Última actualización: 2026-10-06
+Responsable: Claude (Claude Code)
 Rama o worktree: `claude/educacion-multilenguaje` en `/home/roggrt/Documents/onelingo` (sin worktree)
-Fase actual: **Inglés N1–N10 (1.000 clases) y francés N1–N10 (500 clases) completos y publicados**; siguiente fase: revisión del cliente/nativa y el siguiente idioma con el mismo método (DEC-034).
+Fase actual: **Inglés (1.000 clases), francés, español y portugués de Brasil (500 clases cada uno) completos**; portugués listo para publicar (edu-46). Siguiente idioma: **alemán**, con el método ligero de `PLAN_ALEMAN.md` (sin historia continua; un solo commit al terminar el idioma).
 Porcentaje aproximado: Fundamentos activos en 9 idiomas; portugués retirado y en reconstrucción con 8/8 fichas aprobadas · Inglés 1.000/1.000 clases editoriales integradas y activas · programa inglés total 100 %
 
 ## Trabajando ahora
+
+- **Portugués de Brasil completo (DEC-035, 06-10):** ruta f0 + N1–N10 (500 clases; 100 bloques revisados con GO; fichas alineadas con los bloques; pase final de canon: trato você Iara↔Camila, nombres únicos, MAPA actualizado), prueba de ubicación v2 (180 ítems, 10 GO), `pt` en `idiomasConRuta`, F6 de Fundamentos en versión escrita (el contraste A/B por oído queda para cuando haya voz pt-BR revisada). Voz del dispositivo pt-BR; voces propias pendientes de elección del cliente. Protagonista Camila Ortega (Miami, hija de colombianos, vive en Recife); sin menciones a Ecuador.
+- **Alemán (diseño ligero, 06-10):** `PLAN_ALEMAN.md`, `ENCARGO_RUTA_DE.md`, `curriculo/de/f0.json` y outlines N1–N10 en `tools/curriculo/de/`; sin commit hasta terminar el idioma.
 
 - **Portugués reiniciado desde cero (DEC-035):** el legado activo fue retirado con respaldo recuperable; `PLAN_PORTUGUES.md` obtuvo GO documental. El Nivel 0 nuevo tiene GO editorial en `tools/contenido/nivel0-pt/borrador/`: 10 unidades, 40 lecciones, 362 pasos, apoyo ES/EN y batería final determinista descrita. Sigue en NO-GO técnico: no está en `assets/`, no está habilitado en el runtime y faltan voces brasileñas, umbral/refuerzo real y 10 emoji Noto. Las ocho fichas de Fundamentos y su ruta ejecutable tienen GO editorial: `curriculo/pt/f0.json` y `tools/contenido/ruta-pt/borrador-f0.json` pasan con 0 errores (8 unidades, 24 claves, 102 vocablos y 104 ejercicios); F6 exige producir y revisar el audio A→B. N1 está completo en `curriculo/pt/n1.json`: 50/50 clases, 652 ejercicios, 650 consignas únicas, 49 claves nuevas y 40 previos; validadores, auditoría longitudinal y simulación de estudiante están en GO. El outline N2 también obtuvo GO en `tools/curriculo/pt/n2-outline.json`: 50/50 clases, 48 claves nuevas, 89 previos, tres auditorías finales y 0 errores. N2 C01–C10 están aprobadas en dos lotes: 10 clases, 130 ejercicios únicos, dos revisiones pt-BR y dos simulaciones de estudiante en GO tras corregir fuentes, secuencias y escenas. Todo sigue fuera del runtime. El diagnóstico N1 requiere una ruta portuguesa publicada para validar léxico, por lo que no se compila ni activa todavía.
 - Hoja de ruta acordada el 2026-10-01: A limpieza → B ubicación y prueba de nivel → C situaciones por tramo → D léxico único y «Mis palabras» → E francés (`docs/ARQUITECTURA_VIGENTE.md`, sección 6).

@@ -89,10 +89,13 @@ def lexico_ruta(idioma: str, nivel: int) -> tuple[set[str], set[str]]:
     return conocidas, conocidas | errores
 
 
-def no_ensenadas(texto: str, lexico: set[str]) -> set[str]:
-    """Palabras del texto que la ruta no enseña (símbolos y cifras no cuentan)."""
+def no_ensenadas(texto: str, lexico: set[str], idioma: str = "") -> set[str]:
+    """Palabras del texto que la ruta no enseña (símbolos y cifras no cuentan).
+
+    En portugués acepta, como la ruta, flexiones y conjugaciones de lo enseñado."""
+    conocida = vr.conocida_pt if idioma == "pt" else vr.conocida
     return {w for w in vr.palabras(str(texto or "").replace("___", " "))
-            if any(c.isalpha() for c in w) and not vr.conocida(w, lexico)}
+            if any(c.isalpha() for c in w) and not conocida(w, lexico)}
 
 
 def _ensenadas(u: dict) -> set[str]:
@@ -248,7 +251,7 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
                 r_ok = it.get("respuesta") if isinstance(it.get("respuesta"), int) else -1
                 for i_op, o in enumerate(op or []):
                     lexico = lex_ruta if i_op == r_ok else lex_distractores
-                    faltan_op = no_ensenadas(o, lexico)
+                    faltan_op = no_ensenadas(o, lexico, idioma)
                     if faltan_op:
                         e(f"opción {i_op}: palabras no enseñadas hasta el final de N{nivel}: "
                           f"{', '.join(sorted(faltan_op))}")
@@ -278,7 +281,7 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
         else:
             # Sin la regla de ortografía británica/estadounidense; la tipografía
             # francesa (U+202F antes de ? ! : ;) es un espacio más.
-            faltan = {w for t in textos_en for w in no_ensenadas(t, lex_ruta)}
+            faltan = {w for t in textos_en for w in no_ensenadas(t, lex_ruta, idioma)}
         if faltan:
             e(f"palabras no enseñadas hasta el final de N{nivel}: {', '.join(sorted(faltan))}")
     for h, n in POR_HABILIDAD.items():

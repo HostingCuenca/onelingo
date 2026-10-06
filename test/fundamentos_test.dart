@@ -37,7 +37,7 @@ void main() {
     idiomaContenido = 'en';
   });
 
-  test('el portugués (en reconstrucción): Fundamentos solo en la ruta f0 (8 unidades) y N1 encadenado tras ella', () async {
+  test('el portugués: Fundamentos solo en la ruta f0 (8 unidades) y N1–N10 encadenados tras ella', () async {
     expect(idiomasSoloRutaF0, contains('pt'));
     await ContenidoJson.precargar('pt');
     expect(Fundamentos.disponible('pt'), isFalse); // sin nivel-0.json antiguo
@@ -69,8 +69,9 @@ void main() {
         previa = u.id;
       }
     }
-    // Aún sin la ruta por niveles en la app (sigue fuera de idiomasConRuta).
-    expect(idiomasConRuta, isNot(contains('pt')));
+    // Curso completo publicado: f0 y N1–N10, con la ruta por niveles activa.
+    expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
+    expect(idiomasConRuta, contains('pt'));
     const s = ProgressState(idiomaMeta: 'pt', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);
     expect(s.nivel0Pendiente, isTrue);

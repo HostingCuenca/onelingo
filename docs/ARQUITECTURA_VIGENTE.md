@@ -83,7 +83,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 | I1 | Interfaz en inglés y selector de idioma en Perfil (`I18N.md`) | **hecha** (DEC-031) |
 | I2 | Contenido con apoyo en inglés para anglohablantes (francés primero) | pendiente |
 | E | Francés sobre esta base (`PLAN_FRANCES.md`): voces nativas y Nivel 0 F1–F5 hechos; siguen F6–F10, situaciones y verbos en francés, y N1 | **en curso** (DEC-030) |
-| P | Portugués pt-BR (`PLAN_PORTUGUES.md`): legado retirado; Nivel 0, Fundamentos y N1 completos con GO editorial en staging; N1 tiene 50 clases y 652 ejercicios; outline N2 aprobado con 50 clases y 48 claves nuevas; N2 C01–C10 aprobadas con 130 ejercicios; nada está activo | **en planificación/autoría por niveles** (DEC-035) |
+| P | Portugués pt-BR (`PLAN_PORTUGUES.md`): Nivel 0, Fundamentos, ruta N1–N10 (500 clases, bloques con GO) y prueba de ubicación v2 (180 ítems); `pt` en `idiomasConRuta` | **completo** (DEC-035, 06-10) |
 
 ## 7. Validar antes de entregar
 

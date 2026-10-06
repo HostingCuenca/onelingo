@@ -1,6 +1,6 @@
 # Plan del curso de portugués de Brasil
 
-Estado: **Nivel 0, Fundamentos y N1 completos con GO editorial; outline N2 y C01–C10 aprobados en staging; idioma inactivo** · Fecha: 2026-10-03 · Alcance: Nivel 0, Fundamentos y N1–N10. Antes de activar el idioma quedan por elegir y probar dos voces nativas brasileñas, producir/revisar el contraste auditivo F6, cerrar la aprobación/refuerzo determinista del Nivel 0 en el runtime y crear/validar el diagnóstico N1 contra la futura ruta publicada.
+Estado: **completo y activo** (06-10-2026): Nivel 0, Fundamentos (f0), ruta N1–N10 (500 clases con GO por bloque) y prueba de ubicación v2 (180 ítems). F6 e2 publicada en versión escrita; el contraste auditivo A/B queda pendiente de voces pt-BR revisadas. Voces propias pendientes de elección del cliente.
 
 Este documento reemplaza cualquier planificación portuguesa anterior. El material retirado a `docs/archivo/pt-legacy-2026-10-03/` es solo histórico y no puede usarse como fuente del curso nuevo.
 
