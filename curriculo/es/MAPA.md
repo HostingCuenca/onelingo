@@ -559,6 +559,8 @@ Historia (2034): Emma es jefa de proyectos en Andes Vivos: contactos en una feri
 
 Calendario fijado al escribir N9 (2034): B1 feria de Lima jue 18–sáb 20 may (llegada el mié 17) · B2 22–27 may (gala del décimo aniversario el sáb 27) · B3 1–5 jun (el taller pasa del lun 12 al lun 19, a las 12:00; Inés de viaje del 1 al 5) · B4 reunión mensual el mar 6 jun, acta el mié 7 (plazos mar 13, mié 14, vie 30) · B5 entrevistas los jue 8 y 15 jun; Inés llama a la Candidata el vie 16 · B6 3–14 jul (informe del semestre; cuenta de la subvención) · B7 ago (derrumbe el sáb 12; golpe leve en Latacunga el sáb 26) · B8 sep (solicitud de visa el lun 11, resolución el vie 22; denuncia del robo el mié 27) · B9 oct (avería el lun 2; acuerdo con el taller el mar 24) · B10 reunión el mar 7 nov; ensayo y balance el jue 14 dic; el consejo aprueba la ruta el vie 15 dic.
 
+Calendario fijado al escribir N10 (2035): B1 15–28 ene (Atacames sáb 20–dom 21; preventas) · B2 1–28 feb (viaje de prueba a Mindo sáb 10–dom 11; cumpleaños de Andrés el sáb 24; café del mar 27) · B3 1–18 mar (registro de Puente a inicios de marzo; inauguración de la oficina el sáb 10) · B4 19–31 mar · B5 1–20 abr (Emma cumple 34 el jue 12) · B6 23 abr–4 may (Emma deja Andes Vivos el lun 30 abr) · B7 5–13 may (rodaje) · B8 14–27 may (minga el sáb 19 a las 8:00; recorridos piloto; el instituto está en La Mariscal) · B9 4–22 jun (tras el lanzamiento del vie 1 jun) · B10 25 jun–13 jul.
+
 - **B1 Crear contactos**
   - `charla-trivial`
   - `coincidir-en`

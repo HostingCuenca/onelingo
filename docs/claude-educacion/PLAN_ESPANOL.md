@@ -1,6 +1,6 @@
 # Plan del español para anglohablantes
 
-Actualizado: 2026-10-03 · DEC-034. Mismo método que el francés (`PLAN_FRANCES.md`, `PLAN_CLASES.md`): ninguna clase se escribe fuera de su ficha.
+Actualizado: 2026-10-05 · DEC-034. Mismo método que el francés (`PLAN_FRANCES.md`, `PLAN_CLASES.md`): ninguna clase se escribe fuera de su ficha.
 
 ## 1. Decisiones (2026-10-03)
 
@@ -31,6 +31,6 @@ Actualizado: 2026-10-03 · DEC-034. Mismo método que el francés (`PLAN_FRANCES
 | ES-6 | Plan N1–N10: 500 fichas con plan de ejercicios, revisión del plan y página para aprobar | aprobado el 03-10 (10 GO, `revision-nX.md`); cronología N9–N10 fijada en `MAPA.md` |
 | ES-7 | N1 (A1): piloto de modelos en B1 (Sonnet 21 correcciones vs Haiku 53 → autor Sonnet), después B2–B10 en paralelo con revisión GO; se retira `a1-1` | **hecho** el 03-10 (50 clases, 10 GO, integrado; falta deploy) |
 | ES-8 | Prueba de ubicación v2 en español (banco por nivel) | después |
-| ES-9 | N2–N10 con el mismo flujo (10 autores Sonnet en paralelo, revisor por bloque, integrar) | N2–N9 **hechos** el 03-10 (integrados; falta deploy); N10 en autoría |
+| ES-9 | N2–N10 con el mismo flujo (10 autores Sonnet en paralelo, revisor por bloque, integrar) | N2–N10 **hechos** (N2–N9 el 03-10, N10 el 05-10; 500 clases integradas, falta deploy) |
 
 **Validador (hecho el 03-10):** `curso.json` del español lleva `vocabularioEstricto` y `reglasAutoria`. Con esta última, `tools/validar_ruta.py` exige en las clases del plan (`es.nX.cNN`) lo que causó cerca del 30 % de las correcciones del francés: tablas de lectura de ≤ 15 filas y sin nombres propios ni celdas sueltas, opciones de comprensión en español desde N3, extensión de la lectura por nivel y apellidos del reparto bien usados.
