@@ -1,0 +1,48 @@
+GO
+
+# Revisión N7 · B10 (pt.n7.c46–c50) · revisor independiente
+
+Validador: `validar_bloque.py pt 7 10` → 0 errores. Cada clase enseña lo que dice su ficha (caso con tres destinatarios; análisis y debate del caso; dossier B2 alto; proyecto integrador sin punto nuevo; prueba de cierre sin punto nuevo) y nada más. Escucha: 2 `escuchar` por clase (c46 g4+e5, c47 g4+e5, c48 g4+e5, c49 g4+e5, c50 g4+e5), cada uno con una sola respuesta. `relacionar` de la ficha conservado en las cinco clases (e4). `es`/`en` de contexto, apoyo, traducciones y textos revisados con script y a mano (sin portugués en `es` ni español en `en`, salvo citas entre «»). Sin Ecuador ni pt-PT. Sin fechas con día de la semana (solo «quinta-feira», «terça», «sexta-feira» sin fecha). Correcciones: ≈45 (más 36 filas de «Para ler» quitadas).
+
+## Cambios
+
+- **Dudas del autor decididas.**
+  - «versão final», «prova oral», «nota final» (vocabulario sin guion, como piden las fichas con espacio en la lectura); «custo-benefício» con guion: confirmado.
+  - ⚠ de la lista del autor: «pessoal» queda como falso amigo real (c46); «prezado» pasa a nota de uso (equivale a «Estimado», no es falso amigo); «parecer/ressalvas» en c49 se reformulan (en español «parecer» ya existe como sustantivo, no es falso amigo) y se añade el falso amigo obligatorio **escritório ≠ oficina (taller)**; «cadastro ≠ catastro» se mantiene en c47; «questão/nota/conquista/aprovação» (c50) se reducen a una nota de palabras de la prueba, sin falsos amigos inexistentes; «coerência/coesão» (c48) pasa a «Ojo» (no es falso amigo) y se añade «autoavaliação ≠ autoevaluación».
+  - «Faz seis anos que moro em Recife» (c50): correcto para 2032 (llegó el 5-sep-2026). Bruno, Camila y Yasmin trabajan en Maré Digital, que está en el Porto Digital (MAPA y N4–N7): confirmado.
+  - Hechos del app de fidelidade (c49: 60 % de ventas recurrentes, telas aprobadas en 48 h, entrega en 6 semanas, Bia Santos del Café da Bia): conservados; coinciden con la ficha y no chocan con B1–B9.
+  - «Oito questões» (c50): coincide con los 8 ítems de la evaluación. Confirmado.
+  - «Não pode haver sido» (c49): se mantiene como error real (calco de «no puede haber sido»); «chegar no» fuera.
+  - «foi mal» y «mixaria» solo como distractores o ejemplos de lo que no se escribe; «mixaria» ya no figura en erroresFrecuentes de c50 (sustituido).
+  - Dedupe contra N1–N6 y N7 B1–B9: «Para ler» pasó de 56+ filas a 21 (c46 0, c47 2, c48 7, c49 8, c50 4); se quitaron todas las filas y se devolvieron solo las que reclamaba el validador (verbos en infinitivo, sin formas flexionadas). Las segundas tablas (p3b) de c48, c49 y c50 eliminadas; c46 sin tabla.
+- **Opciones de `escuchar` en español → portugués** (10 ítems; el resto de N7 las lleva en portugués): c46 g4/e5, c47 g4/e5, c48 g4/e5, c49 g4/e5, c50 g4/e5.
+- **Una sola respuesta (consignas con hueco ambiguo).** c46 i1 («A ___ da correção»: «realização» vs «entrega») → consigna «nominalización de realizar»; c46 s2 («cordialidade e ___») → «(compensación por el daño)»; c47 e1 («Segundo a ___»: «auditoria» vs «métrica») → «revisión sistemática del cadastro»; c49 e1 → «nominalización de entregar»; c50 e1 («não ___ possível»: «foi» vs «é») → «pretérito de ser»; c50 e6 («Fica ___ que») → «participio de acordar».
+- **Errores frecuentes (que sean errores reales de hispanohablante).**
+  - c46 #3 («O pessoal da empresa é de cinco funcionários», dudoso) → «a entrega sufriu um retraso» → «sofreu um atraso» (calcos reales).
+  - c48 #2 («Domino tudo perfeitamente…», no es error de lengua) → «autoevaluação» → «autoavaliação».
+  - c50 #2 («en 1637 chega», lapsus) → mezcla de presente histórico y pretérito («invadem… chegou»); c50 #3 («mixaria», no es error) → «Tudo indica **de** que» (dequeísmo calcado).
+- **Diálogos.** c46: Camila hablaba sola al comienzo → ahora se dirige a Bruno («Bruno, o Diego reclamou…»); «o senhor não foi avisado» (Diego se trata de você) → «não houve nenhum aviso». c47: Yasmin se reportaba a sí misma («eu disse… levaria») → «O fluxo novo leva três semanas, mas um protótipo leva só uma» (coherente con e5, que sí informa en indirecto). c48: Camila trataba a Renata de «a senhora» (canon: você) → «para você fazer…», «pedir uma revisão a você». c49: la frase de imposibilidad de Yasmin («Não pode ter sido uma boa ideia ignorar o custo», sin sentido) → «Esse custo não pode ter sido pensado com o escopo completo»; el audio e5 y el ejemplo («não pode ter sido o servidor; o erro apareceu antes da atualização», ilógico) → «Não pode ter sido a atualização; o erro apareceu antes dela» (opciones adaptadas). c49 s1: opción con «planilha» (palabra no enseñada, único error del validador) → «Contrato, viagem e festa».
+- **Explicaciones.** c46: «tu jefe» → «tu coordinador» (Iara es la directora); ⚠ quitado «no tiene que ver con precio» y el «ruego» mal descrito. c48: la nota de pronunciación decía que «ç» está en coesão/revisão (no la tienen) → ejemplos «contradição», «autoavaliação» y la «s» como «z» en coesão/revisão; nota de «portfólio» (era «por-TFÓ-li-u») → «por-ti-FÓ-li-u»; nota de «autoavaliação» («no existe ci con z», sin sentido) corregida. c49: nota de «ressalvas» (He-SSAL) → «he-SAL-vas». c50: ⚠ rehecho (en español «prueba» ya significa examen; «aprobación» y «conquista» no son falsos amigos). Filas de tabla: «a mixaria» («porquería») → «ridiculez / pittance»; «a cafeteria» con frase coherente con el reparto.
+- **Sin cambios, verificados:** `completar` con un solo hueco; pares de `relacionar` sin opción doble defendible (cruzados en la ficha); límites de `escribir` (minimoPalabras ≤ palabras del modelo); lectura de los diálogos dentro del rango; apoyo {es,en} exacto; sin gramática nueva en c49–c50 (solo recicla de B1–B9: registro, nominalización, gerundio, imposibilidad, estructura de exposición, lenguaje figurado, debate, negociación, comentario intercultural, presente histórico, modismos, refutación, acuerdo escrito, travessão).
+- **Falsos amigos (⚠):** pessoal ≠ personal (c46), cadastro ≠ catastro (c47), coerência/coesão y autoavaliação (aviso de ortografía, c48), escritório ≠ oficina y parecer (c49), questão (c50). Nuevos: ninguno fuera de la lista del encargo.
+
+## Hechos del reparto confirmados
+
+- Todo el bloque transcurre en 2032 en Recife. No aparecen Ana, Iara (solo mencionada en el nivel), Larissa, Heitor, seu Paulo ni los viajes a Lisboa; el cierre remite a B1 (aviso delicado, registro), B3 (causa y evidencia), B4 (presente histórico: 1630 invasión holandesa, 1637 Maurício de Nassau llega a Recife), B5 (quebrar o galho), B6 (debate y refutación), B7 (oferta condicional, fica acordado), B8 (estranhar, acostumar-se, saudade) y B9 (travessão, narrador).
+- c46: Diego Salazar (cliente, trato de você con Camila; mensaje formal «Prezado Diego») reclama por el retraso del módulo de relatórios: plazo final el día 10, sin aviso, afectó su reunión con inversionistas. Respuesta: incidência no servidor desde las 9h, corrección hasta las 18h, nueva fecha día 20, reparación = un mes de suporte gratuito. Bruno (coordinador, neutro) aprueba; el time recibe un aviso coloquial.
+- c47: debate en la sala de reuniones del Porto Digital, moderado por Bruno: cambiar el diseño del app de reserva de visitas; auditoría de usabilidad: 40 % abandona el cadastro; rehacer el fluxo tarda 3 semanas, un protótipo 1; resolución: protótipo hasta el viernes y nueva evaluación; Camila escribe su posición con tres fuentes y Yasmin envía la cronologia de projeto.
+- c48: la profesora Renata Souza (Camila le habla de você) pide un portfólio con tres textos (e-mail formal al cliente, posición en el debate, comentario literario), criterios coerência, coesão y estilo, y una reflexão de 150 palavras; entrega el viernes, primera versión el jueves.
+- c49: Bia Santos (Café da Bia) quiere un aplicativo de fidelidade; Bruno pide relatório con proposta, defensa en el debate del martes y revisión del registro del mensaje final (hasta el jueves). Yasmin cree que el costo es alto. Cifras: 60 % de las ventas vienen de clientes recorrentes; si Bia aprueba las telas en 48 horas, entrega en seis semanas; contrapartida: acordar el escopo de la primera versión. Parecer: la proposta es viable; recomendação: empezar por una primera versión simple.
+- c50: prueba de cierre en la Escola Capibaribe de Português con la profesora Renata (você): ocho questões sobre un caso (atraso de entrega, mensagem ao cliente, debate, comentário literário) más prova oral de dos minutos; nota final = desempenho escrito + oral. Camila: «faz seis anos que moro em Recife» (2032).
+- Trato: Camila usa você con Bruno, Yasmin, Bia, Diego y Renata; no hay «o senhor/a senhora» en el bloque.
+
+## Correcciones de ficha
+
+- N7 c46 (evaluación/guiada): ítems `completar` con respuesta no única (c46 i1 «A ___ da correção»; c47 e1 «Segundo a ___»; c49 e1 «A ___ do relatório»; c50 e1 «não ___ possível»; c50 e6 «Fica ___ que»): conviene que las consignas fijen la forma (nominalización de X, pretérito de ser, participio de acordar), como hace el bloque.
+- N7 c49 (evaluación e5): «Não pode ter sido o servidor; o erro apareceu antes da atualização» es ilógico (el error previo a la actualización descarta la actualización, no el servidor); el bloque usa «Não pode ter sido a atualização…».
+- N7 c50 (guiada g2 y vocabulario): «mixaria» es una palabra despectiva usada solo como distractor; no debería ir como vocabulario activo ni en errores frecuentes.
+- N7 c48: la ficha dice sonido «cedilla» pero casi ninguna palabra nueva lleva ç salvo «avaliação/contradição»; el bloque lo explica con esas palabras.
+
+## Sin resolver
+
+Ninguno.
