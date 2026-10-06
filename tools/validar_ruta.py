@@ -288,7 +288,7 @@ class Validador:
             donde = f"{uid}.{p.get('id')}"
             if p.get("tipo") == "tabla":
                 titulo = " ".join(str(v) for v in (p.get("titulo") or {}).values()).lower()
-                if re.search(r"para leer|to read", titulo):
+                if re.search(r"para le?er|to read", titulo):
                     if len(p.get("filas", [])) > 15:
                         self.error(donde, f"tabla «Para leer» con {len(p['filas'])} filas (máx. 15): reescribe la situación con palabras ya enseñadas")
                     for i, fila in enumerate(p.get("filas", [])):
