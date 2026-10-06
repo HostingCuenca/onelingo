@@ -125,7 +125,27 @@ def conocida_pt(w, conocidas):
     y formas conjugadas de verbos cuyo infinitivo ya se enseñó."""
     if conocida(w, conocidas) or bases_pt(w) & conocidas:
         return True
-    return bool((formas_pt().get(w, set()) | infinitivos_pt(w)) & conocidas)
+    if (formas_pt().get(w, set()) | infinitivos_pt(w)) & conocidas:
+        return True
+    # Ênclise: «registra-se», «deixá-la», «fazê-lo»; el clítico cuenta si se
+    # enseñó su forma base («-la» tras «deixá» = «a»).
+    verbo, _, clitico = w.partition("-")
+    if not clitico or "-" in clitico or not _CLITICOS_PT.get(clitico, set()) & conocidas:
+        return False
+    candidatos = {verbo}
+    if verbo[-1:] in _INFINITIVO_PT:
+        candidatos.add(verbo[:-1] + _INFINITIVO_PT[verbo[-1]])
+    return any(conocida_pt(v, conocidas) for v in candidatos)
+
+
+_CLITICOS_PT = {
+    "se": {"se"}, "me": {"me"}, "te": {"te"}, "lhe": {"lhe"}, "lhes": {"lhe", "lhes"},
+    "o": {"o"}, "a": {"a"}, "os": {"os", "o"}, "as": {"as", "a"},
+    "lo": {"o"}, "la": {"a"}, "los": {"os", "o"}, "las": {"as", "a"},
+    "no": {"o"}, "na": {"a"}, "nos": {"nos", "os", "o"}, "nas": {"as", "a"},
+}
+# «deixá-la» ← deixar, «fazê-lo» ← fazer, «pô-lo» ← pôr; «parti-lo» queda en «parti» → partir.
+_INFINITIVO_PT = {"á": "ar", "ê": "er", "ô": "or", "i": "ir"}
 
 
 def huella_item(item):
