@@ -155,7 +155,7 @@ class UnidadN0 {
 
 /// Idiomas con Nivel 0 (contenido en `assets/contenido/<idioma>/nivel0/`).
 /// Mantener igual que `ProgressState.nivel0Pendiente`.
-const idiomasConNivel0 = {'en', 'fr'};
+const idiomasConNivel0 = {'en', 'fr', 'es'};
 
 class Nivel0 {
   Nivel0({

@@ -98,6 +98,16 @@ void main() {
     expect(textoPlano('Hello!'), 'Hello!');
   });
 
+  test('El Nivel 0 español trae cada explicación en inglés', () {
+    // El español se explica solo en inglés (como su ruta).
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'es',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+  });
+
   test('El Nivel 0 francés trae cada explicación en español e inglés', () {
     // Sirve a hispanohablantes y anglohablantes (I18N.md, fase I2).
     final r = Process.runSync('python3', [

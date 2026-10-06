@@ -44,11 +44,18 @@ def opciones(p):
 CAMPOS_APOYO = ('texto', 'pregunta', 't', 'nota', 'titulo', 'objetivo')
 
 
-def faltan_idiomas(datos):
-    """Textos de apoyo que no tienen español e inglés."""
+# Idiomas cuyo apoyo es solo inglés (el español se explica en inglés).
+APOYO_SOLO_EN = {'es'}
+
+
+def faltan_idiomas(datos, idioma=''):
+    """Textos de apoyo que no tienen español e inglés (o solo inglés si el
+    idioma está en APOYO_SOLO_EN)."""
     res = []
 
     def bilingue(v):
+        if idioma in APOYO_SOLO_EN:
+            return isinstance(v, dict) and set(v) == {'en'} and v.get('en')
         return isinstance(v, dict) and v.get('es') and v.get('en')
 
     for u in datos['unidades']:
@@ -158,8 +165,9 @@ def main():
     datos = json.loads(ruta.read_text(encoding='utf-8'))
     problemas, faltan = validar(idioma, datos)
     if '--bilingue' in sys.argv:
-        sin = faltan_idiomas(datos)
-        problemas += [f'sin español e inglés: {x}' for x in sin[:40]]
+        sin = faltan_idiomas(datos, idioma)
+        falta = 'solo inglés' if idioma in APOYO_SOLO_EN else 'español e inglés'
+        problemas += [f'sin {falta}: {x}' for x in sin[:40]]
         if len(sin) > 40:
             problemas.append(f'… y {len(sin) - 40} más')
     for p in problemas:
