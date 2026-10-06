@@ -84,7 +84,7 @@ Nivel del alumno para todo lo que no es la ruta (situaciones, biblioteca): `nive
 | I2 | Contenido con apoyo en inglés para anglohablantes (francés primero) | pendiente |
 | E | Francés sobre esta base (`PLAN_FRANCES.md`): voces nativas y Nivel 0 F1–F5 hechos; siguen F6–F10, situaciones y verbos en francés, y N1 | **en curso** (DEC-030) |
 | P | Portugués pt-BR (`PLAN_PORTUGUES.md`): Nivel 0, Fundamentos, ruta N1–N10 (500 clases, bloques con GO) y prueba de ubicación v2 (180 ítems); `pt` en `idiomasConRuta` | **completo** (DEC-035, 06-10) |
-| D | Alemán (`PLAN_ALEMAN.md`, método ligero sin historia): Nivel 0, Fundamentos (f0), ruta N1–N10 (500 clases, 100 bloques con GO), prueba de ubicación v2 (180 ítems) y «Mis verbos» (128); `de` en `idiomasConRuta`; módulo heredado `de.a1-1` retirado | **completo** (06-10) |
+| D | Alemán (`PLAN_ALEMAN.md`, método ligero sin historia): Nivel 0, Fundamentos (f0), ruta N1–N10 (500 clases, 100 bloques con GO), prueba de ubicación v2 (180 ítems), 50 situaciones × 3 tramos y «Mis verbos» (128); `de` en `idiomasConRuta`; módulo heredado `de.a1-1` retirado | **completo** (06-10) |
 
 ## 7. Validar antes de entregar
 

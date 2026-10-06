@@ -133,6 +133,30 @@ void main() {
     expect(v.exitCode, 0, reason: '${v.stdout}');
   });
 
+  test('alemán: 50 situaciones de-DE con apoyo es/en', () {
+    for (final interfaz in ['es', 'en']) {
+      final de = situacionesDesdeJson(
+        localizarApoyo(
+              jsonDecode(
+                File('assets/contenido/de/situaciones.json').readAsStringSync(),
+              ),
+              interfaz,
+            )
+            as Map<String, dynamic>,
+      )!;
+      expect(de.length, 50);
+      final t = de[1]!.tramo(Tramo.basico);
+      expect(t.objetivos.first.id, 's1-o1');
+      expect(t.vocabulario.first.es, isNotEmpty);
+      expect(t.objetivos.first.titulo, isNot(contains('{')));
+    }
+    final v = Process.runSync('python3', [
+      'tools/contenido/validar_situaciones.py',
+      'assets/contenido/de/situaciones.json',
+    ]);
+    expect(v.exitCode, 0, reason: '${v.stdout}');
+  });
+
   test('el tramo sale del nivel y los superiores se abren al llegar', () {
     expect(Tramo.deNivel(1), Tramo.basico);
     expect(Tramo.deNivel(3), Tramo.basico);

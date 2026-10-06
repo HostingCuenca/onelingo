@@ -1,6 +1,6 @@
 # Plan del curso de alemán (de) N1–N10 para hispanohablantes
 
-Estado: **completo** (06-10-2026): Nivel 0, Fundamentos (f0), ruta N1–N10 (500 clases; 100 bloques con GO), prueba de ubicación v2 (180 ítems, 10 GO) y «Mis verbos» (128); `de` en `idiomasConRuta`; `de.a1-1` retirado (el idioma no tenía ruta activa, así que no hay progreso de ruta que mapear). Diseño original (05-10-2026): Sigue DEC-034 (plan de clases antes del contenido; 10 niveles × 50 clases en bloques de 5; Fundamentos f0 de 8 unidades), con el **método ligero** descrito abajo. Nada de esto está integrado en la app todavía.
+Estado: **completo** (06-10-2026): Nivel 0, Fundamentos (f0), ruta N1–N10 (500 clases; 100 bloques con GO), prueba de ubicación v2 (180 ítems, 10 GO), 50 situaciones × 3 tramos (5 lotes con GO) y «Mis verbos» (128); `de` en `idiomasConRuta`; `de.a1-1` retirado (el idioma no tenía ruta activa, así que no hay progreso de ruta que mapear). Diseño original (05-10-2026): Sigue DEC-034 (plan de clases antes del contenido; 10 niveles × 50 clases en bloques de 5; Fundamentos f0 de 8 unidades), con el **método ligero** descrito abajo. Nada de esto está integrado en la app todavía.
 
 Hecho y validado:
 

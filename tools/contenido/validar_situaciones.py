@@ -132,8 +132,11 @@ def validar(situaciones, idioma=None):
                 ejemplo = re.sub(r'[^a-zà-ÿœ]+', ' ', v['ejemplo'].lower())
                 if generico and len(raiz) > 1 and raiz[0] in ('le', 'la', 'les', 'un', 'une', 'des', 'l', 'du', 'de',
                                                            'el', 'los', 'las', 'una', 'unos', 'unas',
-                                                           'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas'):
-                    raiz = raiz[1:]  # el artículo no tiene que repetirse en el ejemplo
+                                                           'o', 'a', 'os', 'as', 'um', 'uma', 'uns', 'umas',
+                                                           'der', 'die', 'das', 'ein', 'eine', 'sich'):
+                    # el artículo (o el «sich» del reflexivo alemán, que en el ejemplo
+                    # va conjugado: «Ich melde mich») no tiene que repetirse en el ejemplo
+                    raiz = raiz[1:]
                 if raiz and raiz[0][:4] not in ejemplo:
                     errores.append(f'{donde}: el ejemplo de «{en}» no la contiene')
                 clave = en.lower()
