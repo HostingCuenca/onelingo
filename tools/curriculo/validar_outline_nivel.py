@@ -157,6 +157,8 @@ def main() -> None:
             errores.append(f'raíz: {len(repetidos)} {etiqueta} repetidos exactamente')
 
     for clave, origen in introduccion.items():
+        if 'transfer' in clave or clave.startswith('integrated-') or clave.startswith('integration-'):
+            continue  # claves de integración (5.ª clase del bloque): no se reciclan como gramática
         apariciones = [
             i - origen for i, clase in enumerate(clases[origen + 1:], origen + 1)
             if clave in clase.get('recicla', [])

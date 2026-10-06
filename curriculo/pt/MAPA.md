@@ -42,7 +42,7 @@ Personajes de rol sin nombre: «Garçom», «Garçonete», «Vendedora», «Rece
 - **N1** (sept.–dic. 2026): los primeros meses de Camila en Recife, en casa de Dona Marina.
 - **N2** (2027): su primer Carnaval; en B3 Camila y Ana alquilan un apartamento en Graças.
 - **N3** (2028): Camila es líder de producto; sus padres la visitan (B3); viaje a Fernando de Noronha (B5).
-- **N4** (2029): Camila postula a gerente de producto con Iara (B5); Ana se va a Lisboa a hacer una maestría (B6; desde ahí trae notas de Portugal, solo de reconocimiento).
+- **N4** (2029): Camila postula a gerente de producto con Iara (B5); Ana se va a Lisboa a hacer una maestría (se despide al final de B2; Larissa ocupa su cuarto en Graças; desde ahí trae notas de Portugal, solo de reconocimiento).
 - **N5–N7** (2030–2032): Camila es gerente de producto; regulariza su residencia (N5 B1); lidera un proyecto de visitas guiadas (N5 B9); en N7 B8 visita a Ana en Lisboa.
 - **N8** (2033): Camila se prepara para el Celpe-Bras.
 - **N9** (2034): Camila es directora de producto en Maré Digital.
@@ -252,7 +252,7 @@ Historia: Camila es líder de producto; sus padres visitan Recife; viaje a Ferna
 
 ## N4 · B1 (2029)
 
-Historia: Camila postula a gerente de producto (B5, Iara Menezes); Ana se va a Lisboa (B6) y en las videollamadas trae el portugués de Portugal solo como reconocimiento; Camila renegocia el apartamento (B3); fiestas de São João y medio ambiente (B9).
+Historia: Camila postula a gerente de producto (B5, Iara Menezes); Ana se va a Lisboa (despedida al final de B2; Larissa es la nueva compañera de piso) y en las videollamadas trae el portugués de Portugal solo como reconocimiento; Camila renegocia el apartamento (B3); fiestas de São João y medio ambiente (B9).
 
 - **B1 Recuerdos y experiencias de vida** — Camila repasa sus primeros años en Recife.
   - `perfeito-composto-tenho-feito`: tenho + particípio para repetición continuada; contraste con el perfecto español
@@ -517,41 +517,49 @@ Historia: Camila prepara el Celpe-Bras en un curso donde conoce a Tomás (argent
   - `mild-irony-markers`: olha só; que beleza, hein
   - `inference-expressions`: dá a entender que; pelo visto; subentende-se
   - `attitude-lexicon`: léxico de actitud y tono
+  - `implicit-reading-transfer`: integración de presuposición, ironía, inferencia y actitud en un texto con subtexto
 - **B3 Cómo persuade un mensaje** — discursos, eslóganes y campañas.
   - `persuasion-devices-framing`: encuadre, repetición, preguntas
   - `slogan-rhyme-brevity`: brevedad y rima
   - `parallelism-repetition`: paralelismo y triple repetición
   - `critical-analysis-formulas`: o texto pretende…; apela a…
+  - `persuasion-analysis-transfer`: integración de encuadre, eslogan, paralelismo y análisis crítico en una propuesta de venta
 - **B4 Variedades de la lengua** — Nordeste, Sudeste, Sur y primer contacto con pt-PT.
   - `regional-brazilian-varieties`: macaxeira/aipim/mandioca; léxico y entonación
   - `pt-pt-lexical-recognition`: autocarro, comboio, pequeno-almoço; solo reconocimiento
   - `pt-pt-grammar-recognition`: estar a + infinitivo, tu, ênclise; solo reconocimiento
   - `adapt-to-interlocutor-formulas`: aqui dizemos…; você quer dizer…?
+  - `varieties-adaptation-transfer`: integración de variedades regionales, reconocimiento de pt-PT y adaptación al interlocutor
 - **B5 Expresiones idiomáticas** — modismos y refranes en contexto.
   - `proverbs-refranes`: dichos populares en contexto
   - `idioms-register-control`: gíria frente a formal
   - `paraphrase-techniques`: ou seja; dito de outra forma
   - `lyrics-commentary-vocab`: verso, estribilho, metáfora
+  - `idioms-register-transfer`: integración de refranes, registro, paráfrasis y comentario de letras en conversación
 - **B6 Cine, series y pódcasts** — notas, resumen y comentario.
   - `film-analysis-vocab`: plano, cena, roteiro, trilha sonora
   - `podcast-summary-structure`: tema, postura y conclusión
   - `evaluative-language-reviews`: léxico evaluativo
   - `comment-opinion-formulas`: na minha leitura…; o que mais chama atenção
+  - `cultural-review-transfer`: integración de análisis fílmico, resumen, léxico evaluativo y fórmulas de opinión en una crítica
 - **B7 Literatura y memoria** — crónica y fragmentos literarios.
   - `evocative-imperfeito-memory`: imperfeito evocativo; eu me lembro de
   - `adverbs-mente-precision`: advérbios em -mente para precisión
   - `chronicle-genre-structure`: crônica: cena, reflexión, cierre
   - `stylistic-figures`: comparación, personificación, metonimia
+  - `memory-narrative-transfer`: integración de imperfeito evocativo, adverbios, crónica y figuras en un texto de memoria
 - **B8 Reclamar y dar seguimiento por escrito** — reclamación escalada.
   - `escalated-complaint-structure`: antecedentes, incumplimiento, petición, plazo
   - `formal-letter-formulas`: Ao Senhor…; Aguardo retorno
   - `insistence-courtesy-formulas`: reitero; conforme e-mail anterior
   - `case-closure-formulas`: dou por encerrado; solicito confirmação por escrito
+  - `complaint-dossier-transfer`: integración de reclamación, carta formal, insistencia y cierre en un expediente
 - **B9 Estudiar y presentar con cautela** — estudio breve en un curso universitario.
   - `academic-hedging`: parece sugerir; os resultados indicam que…
   - `academic-citation-formulas`: segundo X (2020); de acordo com
   - `graph-description-formulas`: o gráfico mostra; eixo; pico
   - `presentation-structure-academic`: objetivo, método, resultados, conclusão
+  - `academic-presentation-transfer`: integración de cautela, cita, gráfico y estructura en un estudio breve
 - **B10 Repaso y proyecto del nivel** — proyecto cultural integrado.
 
 ## N9 · C1 (2034)
@@ -563,36 +571,43 @@ Historia: Camila es directora de producto en Maré Digital: contactos en una fer
   - `affinity-building-formulas`: buscar intereses comunes
   - `professional-introduction-pitch`: presentación profesional de 30 segundos
   - `follow-up-message-formulas`: foi um prazer; como combinamos
+  - `networking-transfer`: Integración: apertura, afinidad, pitch y seguimiento en una tarde de contactos
 - **B2 Historias con propósito** — una historia de producto con gancho.
   - `story-hook-formulas`: comecei com…; imagine que…
   - `tension-narrative-tenses`: presente histórico; perfeito e imperfeito narrativos
   - `plot-turn-markers`: só que; foi aí que
   - `lesson-extraction-formulas`: a lição é…; aprendi que…
+  - `storytelling-integrated-transfer`: Integración: gancho, tensión, giro y lección en una historia completa
 - **B3 Mensajes claros y breves** — correos ejecutivos.
   - `executive-summary-structure`: pirámide invertida
   - `brevity-nominalization`: nominalización y listas
   - `priority-signal-formulas`: ação necessária; em resumo
   - `decision-communication-formulas`: decidimos que…; a partir de…
+  - `executive-email-transfer`: Integración: asunto, apertura, lista, acción y cierre en un correo ejecutivo
 - **B4 Dirigir reuniones** — moderar y registrar acuerdos.
   - `meeting-moderation-formulas`: abertura, pauta, encerramento
   - `giving-floor-formulas`: passo a palavra a…; quem gostaria de…?
   - `debate-summary-formulas`: resumindo as posições…
   - `minutes-action-items`: responsável, prazo, ação
+  - `meeting-integrated-transfer`: Integración: moderación, palabra, resumen y acta en una reunión
 - **B5 Entrevistas y procesos de selección** — selección de personal.
   - `star-answer-structure`: situação, tarefa, ação, resultado
   - `candidacy-defense-formulas`: o que posso agregar…
   - `interviewer-question-formulas`: preguntas de entrevistador
   - `salary-negotiation-formulas`: pretensão salarial; benefícios
+  - `selection-process-transfer`: Integración: STAR, defensa, preguntas y negociación en un proceso de selección
 - **B6 Informes y datos** — informes con límites de la evidencia.
   - `report-structure-formal`: resumen, método, resultados, recomendaciones
   - `data-source-citation-rigor`: fonte, ano, amostra
   - `conclusion-hedging-limits`: com as ressalvas…
   - `recommendation-formulas`: recomenda-se; sugere-se
+  - `report-integrated-transfer`: Integración: estructura, citas, cautela y recomendaciones en un informe
 - **B7 Riesgo, seguridad y prevención** — temporada de lluvias.
   - `risk-assessment-formulas`: probabilidade e impacto
   - `warning-formulas`: atenção; sob pena de
   - `prevention-measure-formulas`: a fim de evitar; recomenda-se
   - `emergency-instruction-formulas`: mantenha a calma; evacuem
+  - `risk-plan-transfer`: Integración: evaluación, advertencia, prevención y emergencia en un plan de riesgos
 - **B8 Normas y trámites públicos** — naturalización y trámites.
   - `normative-text-comprehension`: fica vedado; é facultado; sujeito a
   - `duty-right-formulas`: tem direito a; é dever de
@@ -604,6 +619,7 @@ Historia: Camila es directora de producto en Maré Digital: contactos en una fer
   - `conflict-management-formulas`: gestionar tensión
   - `i-messages-no-blame`: eu me sinto…quando…
   - `reparation-proposal-formulas`: proponho que…; como forma de reparar
+  - `negotiation-integrated-transfer`: Integración: intereses, tensión, mensajes en primera persona y reparación en una negociación
 - **B10 Repaso y proyecto del nivel** — propuesta con calendario, presupuesto y riesgos.
 
 ## N10 · C1 dominio (2035)
