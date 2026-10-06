@@ -1,0 +1,41 @@
+GO
+
+# Revisión N8 · B2 (pt.n8.c06–c10) · revisor independiente
+
+Validador: `validar_bloque.py pt 8 2` → 0 errores. Escucha: 2 `escuchar` por clase (g4 + i4 en las cinco; son ítems añadidos con audio sobre el mismo contenido que los de la ficha; no sustituyen a ningún `elegir`/`completar` de la ficha, que se conservan). El `relacionar` de la ficha está en las cinco evaluaciones (sin las propuestas cruzadas, decisión del autor aceptada). Progresión correcta (presuposición → ironía suave → inferencia con indicio → léxico de actitud → lectura integrada de una carta). Explicaciones ES/EN correctas tras las correcciones; contextos `es` en español y `en` en inglés; diálogos de 362–388 palabras (rango del validador, mínimo 360). Escribir abiertos de evaluación con `abierta` y `minimoPalabras` 8/12/10/14/18. Correcciones: ≈ 52.
+
+## Cambios
+
+- **Canon (1 nombre):** c07, «Rafael» (el compañero que llegó a las 10 a la reunión de las 9) → «Gustavo» (nombre de equipo de diseño del reparto de N5, ya en `palabrasLibres`; ningún otro bloque de N8 lo usa). «Rafael» queda para el desarrollador de Maré Digital y para los Rafael del reparto. Tomás (c09): ahora dice «Em Rosário, minha cidade, eu usava um app parecido» y se enseña «Rosário» con una fila en «Para ler» (ver Sin resolver).
+- **Falso positivo de «falso amigo» (c06):** «o costume» estaba marcado como «falso amigo parcial» con una nota incoherente; en español es costumbre igual. Ahora el aviso es para quien piensa en inglés («costume» = disfraz; en portugués «fantasia»).
+- **Explicación falsa (c09):** la clase decía que «o autor tem entusiasmo» es un error del hispanohablante y que solo vale «mostra/demonstra». «Tem entusiasmo» es perfectamente portugués. Reescrito en la explicación (p2), en el diálogo (Camila ya no lo declara «erro comum») y en ES/EN: «mostra/demonstra + sustantivo» o «é + adjetivo», más el aviso ortográfico real (escéptico → cético).
+- **erroresFrecuentes (7 reescritos, todos errores o lecturas erróneas reales):** c06 #1 (lectura de «já não» como negación simple, ahora con la frase de la ficha); c08 #1 «Por visto» → «Pelo visto» (la forma anterior era una frase correcta sin indicio, no un error); c08 #2 «dá entender de que» (el dequeísmo; la explicación anterior decía que sin la «a» era un calco del español, falso: el español también dice «da a entender»); c09 #1 «escético» → «cético» (la contradicción entusiasmo/cético no era un error de hispanohablante); c09 #3 «demonstra reprovação o app» → «pelo app»; c10 #2 la frase errónea contenía el verbo español «dice» («A carta dice que…») → «diz»; c10 #3 «Pelo visto, o fornecedor quer negociar» (frase correcta) → «Como…, por isso…» (doble conector, calco de «como…, por eso»).
+- **Diálogos:** c06 «a equipe de vendas era a última a mudar» (no se deduce de «até») → «era a que menos se esperava»; c07 «falar sozinho com a pessoa» (significa hablar solo, consigo mismo) → «falar com a pessoa depois, só os dois, num lugar calmo»; c08 el primer turno de Bruno hacía pasar el texto del cliente por habla suya («Esse é o e-mail do cliente, Camila») → «o cliente escreveu: …»; c08 Camila «eu escrevi pelo visto» → «eu usei»; c08 razón circular («porque disse que vai falar com o sócio depois») → «porque escreveu que precisa resolver isso antes de falar com o sócio»; c10 «Você fala de desde que…?» (citación sin marco) → «Você fala da frase desde que…?», y «ainda estamos abertos…» introducido con «a frase»; c10 «a que pagamento eles se referem» → «a que pagamento a carta se refere» («referem» no estaba enseñado).
+- **Relacionar (c06):** la 4.ª pareja «A loja ainda não respondeu» repetía «ainda» (ya hay «ainda trabalha»); la ficha pide «já não»: ahora «O cliente já não aceita relatórios em papel» ↔ «Antes sí los aceptaba». Una sola correspondencia por pareja (cada «antes sí» lleva un contenido distinto).
+- **c07 audio:** g4 `escuchar` («Que beleza, hein!») no daba el contexto (el café en el teclado) fuera de la pista; el contexto pasa a la consigna ES/EN.
+- **Palabras no enseñadas (c07):** «sério» e «interessante» (3 usos en el diálogo) se añaden a «Para ler» con frase.
+- **Vocabulario extra / «Para ler»:** quitadas 5 filas ya enseñadas: c07 «ofender» (n7-b08 c36) y «o rosto» (n7-b09 c43); c10 «referir-se» (n7-b08 c39); duplicadas dentro del bloque c09 «claramente» y «diretamente» (c06) y c10 «o fornecedor» (c07). Sin duplicados con N1–N7 ni n8-b01 (comprobado por script contra ejemplos/vocabulario/patrón/tabla). Se mantienen sin duplicar: c06 diretamente, claramente, adivinhar; c07 provedor, fornecedor, teclado, acalmar, sério, interessante; c08 gerência, subentender, atento; c09 demonstrar, atitude, convicção, Rosário; c10 entusiasmado. Sin formas flexionadas.
+- **Vocabulario/pronunciación:** c09 «postura»: el ⚠ «no es cómo se sienta alguien» era un falso aviso (en español «postura» también es posición del autor); reescrito sin ⚠. EN «nasal «sown»» → «saun» (c09, c10).
+- **Dudas del autor decididas:** (1) relacionar con frases completas ↔ presupuesto: aceptado (en c06 se restituyó una pareja «já não»). (2) «Rafael» → «Gustavo»; Tomás en c09 con Rosário. (3) fornecedor/provedor/gerência: no los enseña ningún bloque n1–n7 ni n8-b01; se mantienen como filas, sin repetirlos entre c07 y c10. (4) escribir abiertos con `abierta` y mínimo: correcto, valores verificados contra el modelo (11/18/15/21/25 palabras). (5) Diálogos de 362–388 palabras: correcto.
+- **Sin cambios, verificados:** una sola respuesta por ítem; distractores razonables; apoyo {es,en} exacto; pronunciación de pressuposto, agora (abierta), indício, reprovação, reticência, tácito; hechos del reparto (Camila, Bruno, Iara, Ana en Lisboa, Tomás, Lia, Caio, Luana; trato você entre pares); falsos amigos: «ressalva» ≠ «reserva», «gozação» ≠ «gozo», «recado» (mensaje), «costume» (aviso inglés).
+
+## Hechos del reparto confirmados
+
+- Tomás Aguirre es de Rosário (Argentina): c09 dice que en su ciudad usaba un app de ônibus parecido; sigue tratándose de você con Camila. Compañero de curso (c09 reseñas de Lia y Caio, secundarios).
+- c06: nota interna de Iara a «Pessoal» (cliente que ya no acepta informes en papel, equipo de ventas por e-mail, dos informes pendientes del mes anterior, teléfono apagado desde el lunes después de las 17h por falta de recepción). Camila y Bruno la analizan; Bruno propone una nota más corta de tres puntos.
+- c07: Ana (Lisboa) llama por vídeo a Bruno (la imagen se congela tres veces); el proveedor de internet prometió arreglarla; Bruno le devuelve «Olha só quem fala» (ella prometió llamar ayer); entra Camila a comentar. Ana habla en pt-BR neutro en este diálogo. Gustavo (diseño, Maré Digital) llegó a las 10h a la reunión de las 9h.
+- c08: cliente de Maré Digital pide por tercera vez la segunda vía del contrato; Camila deduce irritación y posible cancelación (socio). Bruno enviará la respuesta y un correo a Iara con «aparentemente».
+- c09: dos reseñas de un app de ônibus (Lia pondera con una ressalva sobre anuncios; Caio reprueba); ejemplos ficticios.
+- c10: carta de la Gráfica Boa Vista (proveedor de papel, ficticia): aumento del 15 %, «desde que o pagamento chegue em dia desta vez»; Bruno responderá en tres partes (agradecer, preguntar, proponer reunión). Recibe de Bruno el tratamiento «Prezado Bruno».
+- Nombre secundario nuevo: Gustavo (c07). Sin Rafael, Ecuador, Quito en el bloque.
+
+## Correcciones de ficha
+
+- c06 (ficha, relacionar): «já não = antes sí» y «deixou de = antes lo hacía» son casi idénticos, por lo que las pistas cruzadas no discriminan; el bloque usa frases completas con su contenido propio.
+- c07 (ficha, relacionar): «olha só = qué sorpresa» no refleja el uso irónico («olha só quem fala»); el bloque usa «Foi só uma brincadeira ↔ no era en serio».
+- c09 (ficha, vocabulario): «postura» no es falso amigo (en español también es posición); no se marca ⚠.
+- N8 (MAPA): fijar Rosário como ciudad de Tomás y añadir «Rosário» a `palabrasLibres` de `curso.json` (hoy el bloque lo enseña con una fila en «Para ler», contra la regla de que los nombres propios no llevan fila; si se añade a `palabrasLibres`, quitar esa fila de c09).
+
+## Sin resolver
+
+- «Rosário» como fila en c09: el validador solo lo acepta si se enseña; al integrar, añadir «Rosário» a `palabrasLibres` y quitar la fila.
