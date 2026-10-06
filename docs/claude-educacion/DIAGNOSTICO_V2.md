@@ -73,6 +73,7 @@ La misma prueba sirve para cualquier idioma de `idiomasConRuta` (`lib/core/apren
   - Rúbrica de escritura comprobada como la corrige la app para ese idioma (sin contracciones inglesas ni flexiones -s/-ed/-ing; tildes opcionales).
 - **Español (ES-8, 2026-10-05):** banco N1–N10 (180 ítems, 10 GO). Como la ruta del español, el apoyo es **solo inglés** `{"en"}` (`APOYO_SOLO_EN` en el validador: `consigna.en` ≤ 110 caracteres, sin clave `es`); `localizarApoyo` cae al inglés también con la interfaz en español.
 - **Portugués de Brasil (06-10):** banco N1–N10 (180 ítems, 10 GO), apoyo bilingüe `{es, en}` como el francés. El léxico se comprueba con la morfología pt de la ruta (`conocida_pt`: flexiones, conjugaciones y ênclise de lo enseñado).
+- **Alemán (06-10):** banco N1–N10 (180 ítems, 10 GO), apoyo `{es, en}`; léxico comprobado con `conocida_de` (flexiones de lo enseñado) contra la ruta integrada.
 - **App:** `/prueba-nivel` abre `UbicacionScreen(idioma)` si el idioma tiene ruta y banco (`bancoUbicacionProvider`); si no, el diagnóstico anterior.
   - Textos de apoyo con `localizarApoyo` en el idioma de la interfaz; voz y corrección en el idioma evaluado.
   - **Tope:** la prueba solo pregunta y ubica hasta el nivel más alto con ítems en el banco **y** unidades publicadas (`ruta.delNivel('nX').isNotEmpty`). Con solo N1, el resultado es 0 (Nivel 0 / Fundamentos) o 1, y la primera pantalla solo ofrece «Nada» y «Un poco».

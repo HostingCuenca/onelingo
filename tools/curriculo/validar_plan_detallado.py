@@ -5,6 +5,15 @@ Uso:
   python3 tools/curriculo/validar_plan_detallado.py pt
   python3 tools/curriculo/validar_plan_detallado.py pt /tmp/plan.json
   python3 tools/curriculo/validar_plan_detallado.py pt /tmp/piloto.json --parcial
+  python3 tools/curriculo/validar_plan_detallado.py de curriculo/de/n1.json --parcial
+
+Por idioma (``POR_IDIOMA``): lengua exigida en la situación, regex de español
+infiltrado, frases genéricas y control de la c50. El portugués es el valor por
+defecto (fr/es heredan ese comportamiento tal cual). En ``de`` (método ligero,
+sin reparto) la c50 de cada nivel es la prueba: sin ``introduce`` y con una
+evaluación que repasa al menos 5 claves del nivel. Con ``--parcial`` las fichas
+aún en ``esqueleto`` sin ``ejercicios`` se cuentan como pendientes y no se
+validan (sirve para validar un nivel a medio planificar).
 
 El nivel se infiere de ``nivel`` o del primer id de clase (por ejemplo,
 ``pt.n2.c01``). Sin ruta explícita se conserva N1 como valor predeterminado.
@@ -58,6 +67,26 @@ SITUACION_GENERICA = re.compile(
     r'leia o di[aá]logo e responda conforme os dados',
     re.IGNORECASE,
 )
+# Alemán: palabras españolas frecuentes que no existen como palabra alemana
+# (se evitan «die», «oder», «also», «es», «so», «den»: son alemán legítimo).
+ESPANOL_EN_SITUACION_DE = re.compile(
+    r'\b(el|la|los|las|que|pero|con|una|del|para|porque|tambi[eé]n|'
+    r'despu[eé]s|luego|seg[uú]n|ayer|ma[nñ]ana|dice|pregunta|responde|'
+    r'est[aá]|son|hay|muy|y)\b',
+    re.IGNORECASE,
+)
+SITUACION_GENERICA_DE = re.compile(
+    r'in einer (?:realen|allt[aä]glichen) situation|eine person liest eine nachricht|'
+    r'lies den dialog und antworte|der dialog informiert|antworte nach den daten',
+    re.IGNORECASE,
+)
+POR_IDIOMA = {
+    # Valor por defecto = comportamiento histórico (pt; fr/es lo heredan sin cambios).
+    'pt': {'lengua': 'pt-BR', 'espanol': ESPANOL_EN_SITUACION,
+           'generica': SITUACION_GENERICA, 'c50': 'pt'},
+    'de': {'lengua': 'alemán', 'espanol': ESPANOL_EN_SITUACION_DE,
+           'generica': SITUACION_GENERICA_DE, 'c50': 'prueba'},
+}
 
 
 def normalizar_firma(texto: str) -> str:
@@ -105,8 +134,15 @@ def main() -> None:
     idioma = sys.argv[1] if len(sys.argv) > 1 else 'pt'
     ruta = Path(sys.argv[2]) if len(sys.argv) > 2 else RAIZ / 'curriculo' / idioma / 'n1.json'
     parcial = '--parcial' in sys.argv[3:]
+    conf = POR_IDIOMA.get(idioma, POR_IDIOMA['pt'])
     datos = json.loads(ruta.read_text(encoding='utf-8'))
     clases = datos.get('clases', [])
+    pendientes = 0
+    if parcial:
+        # Fichas aún sin plan de ejercicios: se validan cuando se planifiquen.
+        planificadas = [x for x in clases if x.get('estado') != 'esqueleto' or x.get('ejercicios')]
+        pendientes = len(clases) - len(planificadas)
+        clases = planificadas
     nivel = datos.get('nivel')
     if not isinstance(nivel, int) and clases:
         coincidencia_nivel = re.fullmatch(
@@ -155,10 +191,10 @@ def main() -> None:
         texto = situacion.get('texto')
         if not isinstance(texto, str) or len(texto.split()) < 24:
             errores.append(f'{cid}: situación demasiado vaga')
-        elif PROHIBIDAS.search(texto) or MAQUILLAJE.search(texto) or SITUACION_GENERICA.search(texto):
+        elif PROHIBIDAS.search(texto) or MAQUILLAJE.search(texto) or conf['generica'].search(texto):
             errores.append(f'{cid}: situación con texto plantilla')
-        elif ESPANOL_EN_SITUACION.search(texto):
-            errores.append(f'{cid}: situación no redactada íntegramente en pt-BR')
+        elif conf['espanol'].search(texto):
+            errores.append(f'{cid}: situación no redactada íntegramente en {conf["lengua"]}')
         elif '\n' not in texto and texto.count('—') < 2 and texto.count(':') < 2:
             errores.append(f'{cid}: situación sin diálogo, mensaje, anuncio o datos concretos')
 
@@ -292,6 +328,17 @@ def main() -> None:
         )
 
     clase_c50 = next((x for x in clases if x.get('id') == 'pt.n1.c50'), None)
+    if conf['c50'] == 'prueba':
+        # c50 genérica: prueba del nivel, sin claves nuevas y repasando el nivel.
+        clase_c50 = None
+        prueba = next((x for x in clases if str(x.get('id', '')).endswith('.c50')), None)
+        if prueba is not None:
+            ev = (prueba.get('ejercicios') or {}).get('evaluacion') or []
+            claves_ev = {x.get('clave') for x in ev if isinstance(x, dict)}
+            if prueba.get('introduce'):
+                errores.append(f'{prueba["id"]}: la c50 es la prueba del nivel y no introduce claves')
+            if len(ev) < 6 or len(claves_ev) < 5:
+                errores.append(f'{prueba["id"]}: la prueba necesita ≥ 6 ítems de evaluación sobre ≥ 5 claves del nivel')
     if clase_c50 is not None:
         c50 = clase_c50.get('ejercicios', {}).get('evaluacion', [])
         requeridas = {
@@ -308,6 +355,7 @@ def main() -> None:
         f'{len(errores)} errores · {len(clases)} clases · '
         f'{sum(consignas.values())} ejercicios · '
         f'{len(consignas)} consignas únicas · {len(ejemplos)} ejemplos únicos'
+        + (f' · {pendientes} fichas en esqueleto sin validar' if pendientes else '')
     )
     raise SystemExit(1 if errores else 0)
 

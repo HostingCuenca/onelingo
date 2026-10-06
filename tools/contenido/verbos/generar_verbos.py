@@ -86,7 +86,28 @@ IDIOMAS = {
         ],
         'etiqueta': (None, 'infinitive · present (yo) · past participle'),
     },
+    # Alemán (PLAN_ALEMAN.md §7.4). Fuente verbos-de.json, por verbo:
+    #   infinitivo, traduccion {es,en}, tipo (regular|fuerte|mixto|modal|irregular), nivel,
+    #   auxiliar ('haben'|'sein'), trennbar (prefijo separable o null), partizip2,
+    #   praeteritum3sg, imperativo {du, ihr, Sie} (opcional), tablas (6 formas por tiempo,
+    #   separables partidos: «stehe auf»; perfekt con auxiliar: «bin aufgestanden»), ejemplo.
+    'de': {
+        'personas': [
+            ('ich', 'yo', 'I'), ('du', 'tú', 'you'), ('er / sie / es', 'él / ella', 'he / she / it'),
+            ('wir', 'nosotros', 'we'), ('ihr', 'ustedes (informal)', 'you (plural, informal)'),
+            ('sie / Sie', 'ellos / ellas / usted(es)', 'they / you (formal)'),
+        ],
+        'tiempos': [
+            ('praesens', 'Presente (Präsens)', 'Present (Präsens)', 'Lo que haces normalmente, ahora o pronto.', 'What you do usually, now or soon.'),
+            ('praeteritum', 'Pasado simple (Präteritum)', 'Simple past (Präteritum)', 'Pasado de textos escritos; en el habla, con sein, haben y los modales.', 'Past in written texts; in speech, with sein, haben and modals.'),
+            ('perfekt', 'Pasado compuesto (Perfekt)', 'Present perfect (Perfekt)', 'El pasado del habla: haben o sein + participio al final.', 'The spoken past: haben or sein + participle at the end.'),
+            ('futur1', 'Futuro (Futur I)', 'Future (Futur I)', 'werden + infinitivo: planes, promesas y suposiciones.', 'werden + infinitive: plans, promises and guesses.'),
+            ('konjunktiv2', 'Condicional (Konjunktiv II)', 'Conditional (Konjunktiv II)', 'Lo que harías y pedidos corteses: ich würde, ich hätte, ich könnte.', 'What you would do and polite requests: ich würde, ich hätte, ich könnte.'),
+        ],
+        'etiqueta': ('infinitivo · Präteritum (er) · Perfekt (er)', 'infinitive · Präteritum (er) · Perfekt (er)'),
+    },
 }
+AUX_DE = {'haben': 'hat', 'sein': 'ist'}
 SOLO_EN = {i for i, c in IDIOMAS.items() if c.get('soloEn')}
 BE = {
     'presente': ['am', 'are', 'is', 'are', 'are', 'are'],
@@ -162,10 +183,38 @@ def validar(idioma, verbos):
                 fila = tablas.get(t) or []
                 if len(fila) != 6 or not all(str(x).strip() for x in fila):
                     errores.append(f'{inf}: tabla «{t}» incompleta')
+            if idioma == 'de':
+                errores += validar_de(v)
             ej = v.get('ejemplo') or {}
             tej = ej.get('traduccion') or {}
             if not ej.get('meta') or not tej.get('en') or (idioma not in SOLO_EN and not tej.get('es')):
                 errores.append(f'{inf}: ejemplo incompleto')
+    return errores
+
+
+def validar_de(v):
+    """Campos propios del alemán: auxiliar, separable, Stammformen e imperativo."""
+    inf, errores = v.get('infinitivo', ''), []
+    for k in ('partizip2', 'praeteritum3sg'):
+        if not str(v.get(k, '')).strip():
+            errores.append(f'{inf}: falta {k}')
+    if v.get('auxiliar') not in AUX_DE:
+        errores.append(f'{inf}: auxiliar debe ser haben o sein')
+    pref = v.get('trennbar')
+    if pref is not None and not (isinstance(pref, str) and inf.startswith(pref) and len(pref) < len(inf)):
+        errores.append(f'{inf}: trennbar debe ser el prefijo separable del infinitivo o null')
+    tablas = v.get('tablas') or {}
+    pres = tablas.get('praesens') or []
+    if pref and pres and not all(str(f).endswith(' ' + pref) for f in pres):
+        errores.append(f'{inf}: el presente de un separable lleva la partícula al final («stehe {pref}»)')
+    perf = tablas.get('perfekt') or []
+    if perf and v.get('partizip2') and not all(str(f).endswith(' ' + v['partizip2']) for f in perf):
+        errores.append(f'{inf}: el Perfekt debe terminar en el partizip2')
+    if len(perf) == 6 and v.get('auxiliar') in AUX_DE and perf[2].split()[0] != AUX_DE[v['auxiliar']]:
+        errores.append(f'{inf}: el Perfekt (er) no usa el auxiliar {v["auxiliar"]}')
+    imp = v.get('imperativo')
+    if imp is not None and (not isinstance(imp, dict) or set(imp) != {'du', 'ihr', 'Sie'}):
+        errores.append(f'{inf}: imperativo debe ser {{du, ihr, Sie}}')
     return errores
 
 
@@ -192,6 +241,18 @@ def generar(idioma):
             resumen = [inf, v['pasado'], v['participio']]
             traduccion = apoyo(v['es'])
             ejemplo = {'meta': v['ejemplo']['en'], 'traduccion': apoyo(v['ejemplo']['es'])}
+        elif idioma == 'de':
+            tablas = v['tablas']
+            participio = v['partizip2']
+            formas = {'participio': participio, 'praeteritum3sg': v['praeteritum3sg'],
+                      'auxiliar': v['auxiliar']}
+            if v.get('trennbar'):
+                formas['trennbar'] = v['trennbar']
+            for p, f in (v.get('imperativo') or {}).items():
+                formas[f'imperativo_{p}'] = f.rstrip('!')  # sin «!»: la ruta las usa como formas conocidas
+            resumen = [inf, v['praeteritum3sg'], f'{AUX_DE[v["auxiliar"]]} {participio}']
+            traduccion = v['traduccion']
+            ejemplo = v['ejemplo']
         else:
             tablas = v['tablas']
             if 'participio' in v:

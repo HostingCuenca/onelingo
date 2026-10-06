@@ -1,0 +1,15 @@
+**GO**
+
+Revisor de N4 B7 (de.n4.c31–c35). Validador: 0 errores del bloque tras las correcciones. Situaciones (palabras): c31 161, c32 155, c33 157, c34 154, c35 152 (mínimo con margen 151). Nombres: todos de NOMBRES_LIBRES. Sin Ecuador ni Lumo. ⚠ no necesarios (ningún falso amigo real nuevo; «halt» se marca como coloquial).
+
+## Cambios
+- c31: sin cambios. Revisadas las dudas del autor: «ehrgeizig» (Ehrgeiz + -ig) correcto; relacionar g3 con una sola pareja posible dentro del conjunto cerrado.
+- c32: explicación EN: quitada la frase extra sobre el inglés (ES y EN ahora equivalentes). Diálogo: la réplica de Lena «Das stimmt… für ihn» no respondía a nada y Lena hablaba dos veces seguidas; reescrita («für uns») y fusionadas. e5: la consigna regalaba la respuesta entera; ahora «empieza con Ich habe y termina con zum Trainieren». e7: consigna con «siempre que (va seguida de dass)»; con «dass» solo vale «vorausgesetzt» entre lo enseñado (sofern/falls/wenn no admiten dass). La frase «Ich trainiere, vorausgesetzt, dass ich Zeit habe» es natural.
+- c33: explicación ES alineada con EN (la preposición no coincide con la del español ni la del inglés). Diálogo: fusionadas dos réplicas seguidas de Herr Müller y quitado el «Sehr gut» sin referente. e5 «en presente» (evita Perfekt/modal). e6 «cada vez mejor» (evita «noch besser»). e7 «de modo que» (evita «damit»). g3 (complemento ↔ verbo en ES): OK, una sola pareja. Distractor «besteht von»: error real (calco del inglés «of») y en e4 se distingue por el audio; se mantiene.
+- c34: fila final de «Zum Lesen» («Hiermit gratuliere ich Ihnen…») eliminada: no aparece en la situación ni en ningún ítem. Errores frecuentes 2 y 3 sustituidos: «Gib nicht auf, du!» no es error real y «Probier es ruhig sein!» era absurdo; ahora «*Mach doch mit mal!» (separable) y «*Ich gratuliere dich zum Sieg» (dativo). Diálogo: fusionadas réplicas seguidas de Anna y de Tom. gratulieren + zum: no es adelantado (zu/zum ya vistos; «zum Sieg» se explica en la clase).
+- c35: **i3 (escribir de transformación sin frase de partida)**: «Une las dos ideas» no decía cuáles; ahora trae «Tim ist sehr nervös. Er kann nicht essen.». Resto de `escribir` del bloque revisados: ninguno es de transformación sin partida (c31 i3/e5, c32 i2/e5, c33 i3/e5, c34 i3/e5, c35 e5 traen datos o estructura en la consigna). Diálogo: «Die Stimmung war so laut» no es natural; ahora «Im Stadion war es so laut…» (y fila de tabla igual); fusionadas dos réplicas seguidas de Lena. e7: consigna «anima a probar sin miedo» (evita «doch»).
+
+## Sin resolver
+- c34: en la situación Tom invita a Lea a inscribirse en un «Turnier» tras una carrera; es un poco forzado pero es el reciclaje pedido por la ficha (verb-prepositions-2). No se cambia.
+- c33/c31/c35: Herr + apellido que tutea a los jugadores (entrenador): declarado en el contexto («Todos se tutean»); correcto en deporte.
+- Voces de-DE: confirmar en la calibración general la sílaba tónica de «ehrgeizig» y «Läuferin» como en las guías.

@@ -1,0 +1,18 @@
+GO
+
+# Revisión N10 B7 (de.n10.c31–c35)
+
+Validador: `validar_bloque.py de 10 7` = 0 errores. Situaciones (palabras): c31 425, c32 432, c33 426, c34 428, c35 438 (mínimo con margen 421).
+
+## Cambios por clase
+- Todas: comprobado que cada `escribir` de transformación trae la frase de partida en la consigna (c31 e1/e5, c32 i2, c33 i1/e5, c34 i2/e5, c35 i1/e5): todos la traen. Fundidos los turnos consecutivos del mismo hablante (c31, c32, c34); `.».` doble corregido. Nombres propios todos de NOMBRES_LIBRES.
+- c31: nota de «Regisseurin»: «re-gi-SÖR» era erróneo (la «g» de «Regisseur» suena «zh»); EN «ur» -> «ö». Quitada la analogía dudosa «en español la crítica también empieza con la tesis» (ES y EN). Eval completar «Drehbuch» (también cabía «Buch»): consigna con «empieza con «Dreh»»; s2 con «ein» y de «dirección tranquila» (antes decía «imagen» y la frase era sobre la Regie).
+- c32: «⚠ Roman ≠ romance»: EN decía «Roman Empire» (choque falso); ahora «romance» (= Romanze/Liebesgeschichte), igual que el ES. Esta es la ÚNICA nota ⚠ de Roman en el bloque. «widerspiegeln» estaba como «inseparable»: es separable («spiegelt … wider»); corregidas la nota y el error frecuente (con modal va junto). Nota de «prägen»: quitada la «r vocal muy suave» (inventada) y añadido el acento. p2: el ejemplo «Die Wende war vorbei» no era Plusquamperfekt; sustituido por «Wir waren damals schon gegangen» (de la tabla). «el bloque» -> «la expresión». relacionar: «Epoche» = «una etapa histórica en general» (no compite con «Nachkriegszeit»).
+- c33: la nota de «Romanvorlage» duplicaba el ⚠ de c32 con EN absurdo («Roman-style anything»): ahora solo explica Roman + Vorlage. «wohingegen» (e2 eval ya «woh…»): añadido «(no «während»)»; en la pregunta de la situación (Tim usa también «während») faltaba la restricción: ahora «empieza con «woh» (no «während»)». Pronunciación: «wohingegen» lleva acento en «HIN» y la «h» de «hin» sí suena (antes «la h alarga la o», falso); «ung» ES sin «sing» inglés. Error «spannend als»: ES/EN confusos («el español … se hace con -er») reescritos. relacionar: «Fassung» = «una de las versiones de una misma obra» (no choca con «Verfilmung»).
+- c34: Konjunktiv I: la explicación presentaba la formación general con otros verbos; reducida a «sein» y «haben» (forma de 3.ª sing., tabla completa; «wir/sie haben» = indicativo avisado; «otros verbos no se evalúan aquí»). «sei(e)st» -> «seist». «Guten Tag, Jonas … Sie» (Sie + nombre de pila): quitado «Jonas». EN «to base oneself on» -> «to rely on» y «In favor speaks the fact that» -> «What speaks in favor is that»; ES «A favor habla el hecho de que». Pronunciación: «Mehrdeutigkeit» (MEHR/MAYR, h muda) y «Lesart» (LEE-sart / LAY-zart). relacionar: Deutung/interpretieren se distinguen por clase de palabra (sustantivo/verbo). +1 frase de Jonas para el margen de longitud.
+- c35: nota de «Regisseur» (zh, ö, como en c31); «beeinflussen» (prefijo átono, sin «se separa be-ein-»). «Ich spreche zweihundert Wörter lang» -> «etwa zwanzig Minuten»; «Diskussion geben» -> «werden»; ES «policiales» -> «películas policiacas». Falta la réplica de Frau Roth antes del «Perfekt» de Herr Lang: añadida («Ja, gern. Das hilft mir sehr.»).
+
+## Sin resolver
+- «Wende» como nombre propio de época y años («1991») en diálogos: se dejan como cifras (el audio de-DE debe leerlas bien en la calibración).
+- c35: «Heute wird … gelobt» (Präsens pasivo) y «übernommen» aparecen solo en el diálogo; el validador los acepta, pero conviene que el usuario los vea traducidos (están en la traducción).
+- Verificar con voz de-DE la «g» de «Regisseur» (zh) y el acento de «wohingegen».

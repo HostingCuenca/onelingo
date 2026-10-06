@@ -17,7 +17,7 @@ RAIZ = Path(__file__).resolve().parents[2]
 CURRICULO = RAIZ / 'curriculo'
 CEFR = {1: 'A1', 2: 'A2', 3: 'B1', 4: 'B1', 5: 'B2', 6: 'B2', 7: 'B2', 8: 'C1', 9: 'C1', 10: 'C1'}
 BLOQUES, CLASES_POR_BLOQUE = 10, 5
-ESTADOS = ('planificado', 'escrito', 'revisado', 'publicado')
+ESTADOS = ('esqueleto', 'planificado', 'escrito', 'revisado', 'publicado')  # esqueleto: ficha copiada del outline, aún sin plan de ejercicios (de, nivel a medio planificar)
 SLUG = re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 
 errores, avisos = [], []

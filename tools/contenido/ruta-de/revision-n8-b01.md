@@ -1,0 +1,18 @@
+GO
+
+Revisor distinto del autor. Validador tras los cambios: `validar_bloque.py de 8 1` = 0 errores. Alemán, ⚠, una sola respuesta, extensión (c01–c05 dentro de 360–770 palabras) y ausencia de Ecuador/Lumo comprobados.
+
+## Cambios por clase
+
+- **c01:** «hab» y «nee» (usadas en la situación sin enseñar) pasan a la explicación y a la tabla de formas habladas (filas nuevas). e1 ahora evalúa «so’n» en contexto («so einen Termin», acusativo). ES latino: «portátil» a «laptop», «Madre mía» a «Caramba», «Vale» a «Bueno».
+- **c02:** explicación de la elipsis precisada (se deja vacío el primer lugar, el Vorfeld; el verbo pasa a la 1.ª posición; «ich» se mantiene). Aviso de que «der Paul / die Anna» es coloquial (sur y centro). Se aclara que no se trabaja el acusativo masculino (den). Fila «Das mache ich / Mach ich» en la tabla de elipsis (enseña «mach»; «kenn» ya estaba). Notas de «kenn ich» y «sag ich doch» corregidas (se omite «das», no «ich»; «la voz sube» era inventado). Error frecuente 1 cambiado a uno real («*Die Chefin, der…», género); explicación del error 2 reescrita (el hispanohablante omite el sujeto). Quitado «Ihr beiden, ihr…» (retoma con ihr contradecía la regla der/die/das). «ordenador» a «computadora», «Vale» a «Bueno».
+- **c03:** la última fila de la tabla oral/escrita era idéntica en ambas columnas; oral ahora «weil ich muss noch lernen». Quitado «also» como «es decir» (falso amigo / uso antinatural). Nota de «Norm» (la «r» vocalizada) en lugar de comparar con el inglés.
+- **c04:** guías de sonido corregidas: Missverständnis (acento en MISS-, no en VER-), verstehen («fer-SHTEE-en»), gemeint (EN «guh-MYNT»), Punkt (u corta). «Nicht keine Flüge» (antinatural) por «Wir buchen weiter Flüge, aber weniger». «vale» (valer) a «se aplica / rige».
+- **c05 (decisión sobre la regla 1 de calibración):** ninguna cadena con «.» entra ya como respuesta, opción de texto, ordenar, audio, diálogo ni celda `texto`. Se enseña y se evalúa la **forma dicha**: los vocablos pasan a la forma completa («zum Beispiel», «unter anderem», «gegebenenfalls», «beziehungsweise», «und so weiter», «das heißt», «vergleiche», «die Nummer, -n») con la abreviatura en la traducción («se abrevia «z. B.»»). La forma escrita vive solo en celdas `apoyo` (tabla), consignas, pares de `relacionar` (izquierda alemán completo, derecha apoyo {es,en} con la abreviatura), opciones {es,en} (e4) y notas/traducciones. Ítems reescritos: g1, g2, g3, i1, i2, e1, e2, e3, e4, e5, s1 (ahora piden «das heißt», «gegebenenfalls», «und so weiter», «Zimmer Nummer zwölf ist frei», etc.). Diálogo reescrito con formas dichas (la nota escrita aparece entre paréntesis en la traducción) y ampliado para llegar a 360 palabras; «schreibe … mit» (separable partido sin enseñar) eliminado. Error 1 por «*Brot, Käse und usw.» (típico de «y etc.»). Ejemplo del estilo telegráfico alineado con la nota. ⚠ Karte añadido en «die Tageskarte»; «billete» a «boleto/pase diario».
+- Desvío respecto a la ficha: el vocabulario de c05 trae las formas completas en vez de las abreviaturas literales; las abreviaturas siguen presentes como lo que se aprende a escribir. «Der Paul» (no «Peter») se mantiene como en el borrador.
+
+## Sin resolver
+
+- Audio: confirmar con la voz de-DE que lee bien «Haste», «isses», «gibt’s», «so’n» y las frases con «–» (pausa tras «weil»); si no, mover el guion a texto de apoyo.
+- La ficha de c02 llama a «Weiß ich nicht» «elipsis del sujeto»; en realidad se omite el objeto («das»). El bloque lo explica correctamente; conviene corregir la ficha.
+- c05 e4 usa opciones {es,en} idénticas con la abreviatura; si el validador de la app no admite opciones de apoyo en `escuchar`, cambiar a opciones con forma completa.

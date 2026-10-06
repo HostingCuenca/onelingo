@@ -19,7 +19,7 @@ RAIZ = Path(__file__).resolve().parent.parent / "assets" / "contenido"
 ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron", "tabla"}
 ORDEN_TIPOS = ["ensenar", "practica_guiada", "practica_independiente", "situacion", "evaluacion"]
 FORMATOS = {"elegir", "escuchar", "ordenar", "completar", "escribir", "relacionar"}
-PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」…\"“”()«»—–，：；]")
+PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」…\"“”„()«»‹›—–，：；]")
 CAMPOS_HUELLA = {
     "formato", "consigna", "pregunta", "preguntaApoyo", "opciones", "respuesta",
     "aceptadas", "tokens", "texto", "audio", "pares",
@@ -27,8 +27,8 @@ CAMPOS_HUELLA = {
 
 
 def palabras(texto):
-    texto = texto.replace("’", "'").replace("___", " ")
-    # Comillas simples de cita ('once', shopkeepers') no forman parte de la palabra.
+    texto = texto.replace("’", "'").replace("‘", "'").replace("‚", "'").replace("___", " ")
+    # Comillas simples de cita ('once', shopkeepers', alemán ‚so‘) no forman parte de la palabra.
     res = [p.strip("'") for p in PUNTUACION.sub(" ", texto.lower()).split()]
     return [p for p in res if p and p != "-"]
 
@@ -56,24 +56,28 @@ def conocida(w, conocidas):
     return w in conocidas or any(c.isdigit() for c in w) or bool(bases(w) & conocidas)
 
 
-_FORMAS_PT = None
+_FORMAS = {}
 
 
-def formas_pt():
-    """Forma conjugada → infinitivos, según la tabla de verbos del portugués."""
-    global _FORMAS_PT
-    if _FORMAS_PT is None:
-        _FORMAS_PT = {}
-        ruta = RAIZ / "pt" / "verbos.json"
+def formas_verbales(idioma):
+    """Forma conjugada → infinitivos, según assets/contenido/<idioma>/verbos.json
+    (celdas de las tablas y formas sueltas; el auxiliar del alemán no cuenta)."""
+    if idioma not in _FORMAS:
+        indice = _FORMAS[idioma] = {}
+        ruta = RAIZ / idioma / "verbos.json"
         if ruta.exists():
             for v in json.loads(ruta.read_text(encoding="utf-8")).get("verbos", []):
                 inf = v["infinitivo"].lower()
                 formas = [f for t in v.get("tablas", {}).values() for f in t]
-                formas += list(v.get("formas", {}).values())
+                formas += [f for k, f in v.get("formas", {}).items() if k != "auxiliar" and isinstance(f, str)]
                 for f in formas:
                     for w in palabras(f):
-                        _FORMAS_PT.setdefault(w, set()).add(inf)
-    return _FORMAS_PT
+                        indice.setdefault(w, set()).add(inf)
+    return _FORMAS[idioma]
+
+
+def formas_pt():
+    return formas_verbales("pt")
 
 
 def bases_pt(w):
@@ -151,6 +155,236 @@ _CLITICOS_PT = {
 }
 # «deixá-la» ← deixar, «fazê-lo» ← fazer, «pô-lo» ← pôr; «parti-lo» queda en «parti» → partir.
 _INFINITIVO_PT = {"á": "ar", "ê": "er", "ô": "or", "i": "ir"}
+
+
+# ── Alemán ────────────────────────────────────────────────────────────────
+# Heurística como la del portugués: una forma cuenta si su base ya se enseñó.
+# Mismas reglas en lib/core/aprendizaje/integridad.dart (palabraConocidaDe).
+
+_ALT_GRAFIA_DE = {"ss": "ß", "ae": "ä", "oe": "ö", "ue": "ü"}
+
+
+def grafias_de(w):
+    """La palabra con ß/ss, ä/ae, ö/oe y ü/ue intercambiadas (máx. 64 grafías)."""
+    plano = w.replace("ß", "ss").replace("ä", "ae").replace("ö", "oe").replace("ü", "ue")
+    res = [""]
+    i = 0
+    while i < len(plano):
+        par = plano[i:i + 2]
+        if par in _ALT_GRAFIA_DE and len(res) < 64:
+            res = [r + x for r in res for x in (par, _ALT_GRAFIA_DE[par])]
+            i += 2
+        else:
+            res = [r + plano[i] for r in res]
+            i += 1
+    return set(res)
+
+
+def sin_umlaut_de(w):
+    """Quita la última diéresis: Äpfel → apfel, Häuser → hauser, läuft → lauft."""
+    res = set()
+    for a, b in (("äu", "au"), ("ä", "a"), ("ö", "o"), ("ü", "u")):
+        i = w.rfind(a)
+        if i >= 0:
+            res.add(w[:i] + b + w[i + len(a):])
+    return res
+
+
+def _quitar_de(w, sufijos, minimo=2):
+    return {w[: -len(s)] for s in sufijos if w.endswith(s) and len(w) - len(s) >= minimo}
+
+
+# Plural, caso y terminación de adjetivo; luego grado (comparativo/superlativo).
+_SUF_NOMINAL_DE = ("ern", "nen", "sen", "ens", "en", "em", "er", "es", "se", "e", "n", "s")
+_SUF_GRADO_DE = ("est", "st", "er")
+_GRADO_IRREG_DE = {
+    "besser": "gut", "best": "gut", "mehr": "viel", "meist": "viel", "lieber": "gern",
+    "liebst": "gern", "höher": "hoch", "höchst": "hoch", "nächst": "nah", "größt": "groß",
+}
+# Palabras que parecen flexión de otra y no lo son (aber ≠ ab+er, dass ≠ das+s…).
+_NO_DERIVAR_DE = {"aber", "unser", "euer", "denen", "deren", "wenn", "denn", "das", "dass",
+                  "neun", "ihnen", "etwas", "ins", "eins"}
+
+
+def bases_de(w):
+    """Bases posibles de una flexión nominal/adjetival alemana: plural (-e, -er,
+    -n, -en, -s, -nen, -se, con diéresis), -n/-s/-es de caso, terminaciones de
+    adjetivo y grado (-er, -(e)st, diéresis, besser/best…)."""
+    if w in _NO_DERIVAR_DE:
+        return set()
+    n1 = _quitar_de(w, _SUF_NOMINAL_DE)
+    res = set(n1)
+    for x in {w} | n1:
+        if x in _NO_DERIVAR_DE:
+            continue
+        if x in _GRADO_IRREG_DE:
+            res.add(_GRADO_IRREG_DE[x])
+        res |= _quitar_de(x, _SUF_GRADO_DE)
+    for x in res | {w}:
+        res = res | sin_umlaut_de(x)
+    for x in set(res):
+        # e caída del tema: dunkle → dunkel, teure → teuer, Regeln → regel ya sale.
+        if len(x) >= 3 and x[-1] in "lr" and x[-2] != "e":
+            res.add(x[:-1] + "e" + x[-1])
+    res.discard(w)
+    return res
+
+
+def _forma_a_inf_de(tabla):
+    return {f: set(infs.split("|")) for infs, formas in tabla.items() for f in formas.split()}
+
+
+# Formas sueltas (presente irregular, Präteritum y Konjunktiv II de sein/haben/werden).
+_FORMAS_IRREG_DE = _forma_a_inf_de({
+    "sein": "bin bist ist sind seid sei seien seist war warst waren wart wäre wärst wären wärt wäret wärest",
+    "haben": "hast hat hatte hattest hatten hattet hätte hättest hätten hättet",
+    "werden": "wirst wird wurde wurdest wurden wurdet würde würdest würden würdet",
+    "wissen": "weiß weißt",
+    "können": "kann kannst",
+    "müssen": "muss musst",
+    "wollen": "will willst",
+    "dürfen": "darf darfst",
+    "sollen": "soll sollst",
+    "mögen": "mag magst",
+    "tun": "tu tue tust tut tun",
+    "nehmen": "nimm nimmst nimmt",
+    "treten": "tritt trittst",
+    "halten": "hält hältst",
+    "gelten": "gilt",
+    "raten": "rät rätst",
+    "laden": "lädt",
+})
+# Bases de Präteritum fuerte/mixto y de Konjunktiv II; admiten -st/-t/-en/-n detrás
+# (gingen, kamst, könntest, wüssten).
+_BASES_IRREG_DE = _forma_a_inf_de({
+    "gehen": "ging ginge", "kommen": "kam käme", "sehen": "sah sähe", "geben": "gab gäbe",
+    "finden": "fand fände", "lesen": "las", "essen": "aß", "trinken": "trank",
+    "sprechen": "sprach", "nehmen": "nahm", "fahren": "fuhr", "laufen": "lief",
+    "bleiben": "blieb", "schreiben": "schrieb", "stehen": "stand", "sitzen": "saß",
+    "liegen": "lag", "rufen": "rief", "denken": "dachte", "bringen": "brachte",
+    "kennen": "kannte", "nennen": "nannte", "rennen": "rannte", "wissen": "wusste wüsste",
+    "tun": "tat täte", "heißen": "hieß", "schlafen": "schlief", "treffen": "traf",
+    "fliegen": "flog", "helfen": "half", "beginnen": "begann", "ziehen": "zog",
+    "tragen": "trug", "fallen": "fiel", "halten": "hielt", "lassen": "ließ",
+    "waschen": "wusch", "singen": "sang", "schwimmen": "schwamm", "gewinnen": "gewann",
+    "sterben": "starb", "steigen": "stieg", "schneiden": "schnitt", "verlieren": "verlor",
+    "vergessen": "vergaß", "empfehlen": "empfahl", "bitten": "bat", "schließen": "schloss",
+    "bieten": "bot", "greifen": "griff", "scheinen": "schien", "fangen": "fing",
+    "können": "konnte könnte", "müssen": "musste müsste", "dürfen": "durfte dürfte",
+    "mögen": "mochte möchte", "wollen": "wollte", "sollen": "sollte",
+})
+# Partizip II fuerte/mixto sin ge- (gegangen, verstanden ← ver+standen, begonnen).
+_PARTIZIP_DE = _forma_a_inf_de({
+    "gehen": "gangen", "sein": "wesen", "werden": "worden", "trinken": "trunken",
+    "finden": "funden", "schreiben": "schrieben", "sprechen": "sprochen", "nehmen": "nommen",
+    "bleiben": "blieben", "essen": "gessen", "treffen": "troffen", "stehen": "standen",
+    "helfen": "holfen", "wissen": "wusst", "denken": "dacht", "bringen": "bracht",
+    "kennen": "kannt", "nennen": "nannt", "rennen": "rannt", "fliegen": "flogen",
+    "ziehen": "zogen", "sitzen": "sessen", "liegen": "legen", "sterben": "storben",
+    "schwimmen": "schwommen", "singen": "sungen", "gewinnen": "wonnen", "ginnen": "gonnen",
+    "steigen": "stiegen", "schneiden": "schnitten", "tun": "tan", "mögen": "mocht",
+    "können": "konnt", "müssen": "musst", "dürfen": "durft", "lieren": "loren",
+    "gebären": "boren", "bitten": "beten", "schließen": "schlossen", "bieten": "boten",
+    "greifen": "griffen", "scheinen": "schienen", "leihen": "liehen", "schweigen": "schwiegen",
+})
+_SEPARABLES_DE = ("zusammen", "zurück", "vorbei", "weiter", "wieder", "kennen", "fern", "fest",
+                  "nach", "teil", "auf", "aus", "ein", "mit", "vor", "weg", "los", "bei",
+                  "her", "hin", "ab", "an", "um", "zu")
+_INSEPARABLES_DE = ("miss", "emp", "ent", "zer", "ver", "be", "er")
+
+
+def _regular_de(raiz):
+    res = {raiz + "en"}
+    if raiz.endswith(("el", "er")):
+        res.add(raiz + "n")  # wandert → wandern
+    if len(raiz) >= 3 and raiz[-1] in "lr" and raiz[-2] != "e":
+        res.add(raiz[:-1] + "e" + raiz[-1] + "n")  # sammle → sammeln
+    return res
+
+
+def _cambio_vocal_de(raiz):
+    """Raíz de presente con cambio vocálico → raíz del infinitivo (liest, gibt, fährt)."""
+    res = sin_umlaut_de(raiz)
+    i = raiz.rfind("ie")
+    if i >= 0:
+        res.add(raiz[:i] + "e" + raiz[i + 2:])
+    i = raiz.rfind("i")
+    if i >= 0:
+        res.add(raiz[:i] + "e" + raiz[i + 1:])
+    return res
+
+
+def infinitivos_de(w, prefijos=True, sin_ge=False):
+    """Infinitivos posibles de una forma verbal alemana."""
+    res = set()
+    for e in ("", "st", "t", "n", "en", "est", "et"):
+        if w.endswith(e) and len(w) - len(e) >= 2:
+            base = w[: len(w) - len(e)] if e else w
+            res |= _BASES_IRREG_DE.get(base, set())
+    res |= _FORMAS_IRREG_DE.get(w, set())
+    # Presente (e de unión: arbeitest, wartet; wir/sie = infinitivo) e imperativo (komm, geh).
+    for e in ("est", "et", "st", "en", "t", "e", "n", ""):
+        if w.endswith(e) and len(w) - len(e) >= 2:
+            raiz = w[: len(w) - len(e)] if e else w
+            res |= _regular_de(raiz)
+            if e in ("est", "st", "t", ""):
+                for r in _cambio_vocal_de(raiz):
+                    res |= _regular_de(r)
+    # Präteritum regular: machte, arbeiteten.
+    for e in ("etest", "etet", "eten", "ete", "test", "tet", "ten", "te"):
+        if w.endswith(e) and len(w) - len(e) >= 2:
+            res |= _regular_de(w[: -len(e)])
+    # Partizip II: ge-…-(e)t regular, ge-…-en fuerte, más la tabla de irregulares.
+    nucleos = [w] if sin_ge else []
+    if w.startswith("ge") and len(w) >= 5:
+        nucleos.append(w[2:])
+    for n in nucleos:
+        res |= _PARTIZIP_DE.get(n, set())
+        for e in ("et", "t", "en"):
+            if n.endswith(e) and len(n) - len(e) >= 2:
+                res |= _regular_de(n[: -len(e)])
+    if prefijos:
+        for p in _INSEPARABLES_DE:
+            if w.startswith(p) and len(w) - len(p) >= 3:
+                res |= {p + i for i in infinitivos_de(w[len(p):], False, True)}
+        for p in _SEPARABLES_DE:
+            if w.startswith(p) and len(w) - len(p) >= 3:
+                resto = w[len(p):]
+                # anzurufen → anrufen; angerufen → an + gerufen.
+                for r in {resto} | ({resto[2:]} if resto.startswith("zu") and len(resto) >= 5 else set()):
+                    res |= {p + i for i in infinitivos_de(r, False)}
+    return res
+
+
+def conocida_de(w, conocidas):
+    """Como `conocida` (sin la morfología inglesa), aceptando además flexiones
+    alemanas de palabras enseñadas: plurales, caso, adjetivos y grado, formas
+    verbales (presente, Präteritum, Konjunktiv II, Partizip II, separables) y
+    grafías ß/ss, ä/ae, ö/oe, ü/ue. Las mayúsculas ya las quita `palabras`."""
+    if w in conocidas or any(c.isdigit() for c in w):
+        return True
+    formas = formas_verbales("de")
+    for g in grafias_de(w):
+        candidatos = {g} | bases_de(g) | formas.get(g, set())
+        infs = infinitivos_de(g)
+        # Participio declinado como adjetivo: gekochte, geschlossenen.
+        for x in _quitar_de(g, ("e", "en", "em", "er", "es"), 4):
+            if x.endswith(("t", "en")):
+                infs |= infinitivos_de(x)
+        # Verbo separable con el prefijo aparte en la frase: «ich rufe … an».
+        infs |= {p + i for i in infs for p in _SEPARABLES_DE}
+        candidatos |= infs
+        if any(v in conocidas for c in candidatos for v in grafias_de(c)):
+            return True
+    # El prefijo separado («an», «auf») cuenta si se enseñó un verbo con él.
+    return w in _SEPARABLES_DE and any(
+        c.startswith(w) and len(c) >= len(w) + 4 and c.endswith("n") and c not in _SEPARABLES_DE
+        for c in conocidas)
+
+
+def conocida_para(idioma):
+    """Prueba de «palabra conocida» que corresponde al idioma de la ruta."""
+    return {"pt": conocida_pt, "de": conocida_de}.get(idioma, conocida)
 
 
 def huella_item(item):
@@ -284,8 +518,14 @@ class Validador:
     def reglas_autoria(self, u):
         uid = u.get("id", "?")
         nivel = u.get("nivelInterno")
+        for v in u.get("vocabulario", []):
+            if not isinstance(v.get("id"), str) or not v["id"]:
+                self.error(f"{uid}.vocabulario", f"«{v.get('texto')}» sin id")
         for p in u.get("pasos", []):
             donde = f"{uid}.{p.get('id')}"
+            # La app lee el id de cada paso como String: sin él el módulo entero no carga.
+            if not isinstance(p.get("id"), str) or not p["id"]:
+                self.error(donde, f"paso «{p.get('tipo')}» sin id")
             if p.get("tipo") == "tabla":
                 titulo = " ".join(str(v) for v in (p.get("titulo") or {}).values()).lower()
                 if re.search(r"para le?er|to read", titulo):
@@ -294,7 +534,8 @@ class Validador:
                     for i, fila in enumerate(p.get("filas", [])):
                         c0 = fila[0] if fila and isinstance(fila[0], dict) else {}
                         t = str(c0.get("texto", "")).strip()
-                        if t and all(w in self.libres for w in palabras(t)):
+                        # Con minúscula inicial no es nombre propio (alemán «lange» frente al apellido Lange).
+                        if t and not t[:1].islower() and all(w in self.libres for w in palabras(t)):
                             self.error(donde, f"fila {i} «{t}»: los nombres propios no llevan fila")
                         if re.search(r"(^[-–])|([-–]$)", t):
                             self.error(donde, f"fila {i} «{t}»: celda suelta; la fila es palabra + sentido + frase")
@@ -547,7 +788,7 @@ class Validador:
                         self.advertencia(uid, f"contaminación: ítems exactos reutilizados entre {da} y {db}")
 
     def meta(self, texto, conocidas, donde):
-        prueba = conocida_pt if self.idioma == "pt" else conocida
+        prueba = conocida_para(self.idioma)
         faltan = [w for w in palabras(texto) if not prueba(w, conocidas)]
         if faltan:
             self.error(donde, f"usa palabras no enseñadas: {', '.join(sorted(set(faltan)))}")

@@ -92,8 +92,8 @@ def lexico_ruta(idioma: str, nivel: int) -> tuple[set[str], set[str]]:
 def no_ensenadas(texto: str, lexico: set[str], idioma: str = "") -> set[str]:
     """Palabras del texto que la ruta no enseña (símbolos y cifras no cuentan).
 
-    En portugués acepta, como la ruta, flexiones y conjugaciones de lo enseñado."""
-    conocida = vr.conocida_pt if idioma == "pt" else vr.conocida
+    En portugués y alemán acepta, como la ruta, flexiones y conjugaciones de lo enseñado."""
+    conocida = vr.conocida_para(idioma)
     return {w for w in vr.palabras(str(texto or "").replace("___", " "))
             if any(c.isalpha() for c in w) and not conocida(w, lexico)}
 

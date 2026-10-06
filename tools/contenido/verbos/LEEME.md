@@ -69,3 +69,12 @@ Como el francés (traducción `{es, en}`, tablas explícitas) más el campo `par
 - **Ortografía post-Acordo:** pôr (con circunflejo), vêm, veem, leem, creem, dão, sem acento en «ideia».
 - **Tipo:** `regular` solo si las siete tablas siguen el modelo -ar/-er/-ir sin cambios ortográficos ni participio especial; ficar/pagar/chegar (c→qu, g→gu), los de cambio de raíz e irregulares son `irregular`.
 - Se generó con un script auxiliar de reglas más tablas irregulares; la fuente final es el JSON revisado a mano.
+
+## Alemán: `verbos-de.json` (alemán estándar, curso para hispanohablantes)
+
+Como el francés (traducción `{es, en}`, tablas explícitas `praesens`, `praeteritum`, `perfekt`, `futur1`, `konjunktiv2`) más los campos propios: `partizip2`, `praeteritum3sg`, `auxiliar` (haben | sein), `trennbar` (prefijo separable o null) e `imperativo` `{du, ihr, Sie}` (opcional; no lo llevan modales ni impersonales). 128 verbos, nivel 0–4 tomado de la ruta.
+
+- **Personas, en orden:** ich, du, er/sie/es, wir, ihr, sie/Sie. La forma va sin pronombre.
+- **Separables:** presente con la partícula al final («stehe auf»); Perfekt y Futur con el infinitivo/participio unido («ist aufgestanden», «werde aufstehen»).
+- **Konjunktiv II:** forma propia en sein, haben, werden, los modales y wissen (wäre, hätte, würde, könnte, wüsste…); el resto «würde + infinitivo».
+- **Sin reflexivos** por ahora: el validador exige la partícula separable al final del presente y no contempla el pronombre.

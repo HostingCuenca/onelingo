@@ -1,0 +1,16 @@
+GO
+
+# Revisión N10 B8 (de.n10.c36–c40)
+
+Validador: `validar_bloque.py de 10 8` = 0 errores. Situaciones: c36 404, c37 394, c38 414, c39 397, c40 397 palabras (mínimo con margen 390; máximo 770). Nombres de hablantes todos en NOMBRES_LIBRES. Morfología de respuestas revisada a mano (Plusquamperfekt war/hatte, dativo con «seit», Konjunktiv II/I, relativos, «zu» + infinitivo, separables); sin fallos. No hay `escribir` de transformación sin frase de partida: c36 i1/e5, c37 e5, c39 i2/e5, c40 i1/e5 la traen en la consigna.
+
+## Cambios por clase
+- c36: nota de «vertrösten» sin ⚠ (confusión con «trösten» dentro del alemán, no falso amigo es/en); «Das ist richtig» tras la petición de ticket -> «Gern.»; fila «sofort» de la tabla (no aparecía en el diálogo) eliminada; `contexto.es` estaba en alemán -> español; pistas g2–g4 específicas (participio -t, W + verbo en 2.ª posición, haben/sein con «kommen»).
+- c37: `contexto.es` en español; e5 contradecía su respuesta («en lugar de «ein»») -> «añadiendo «so etwas wie» delante de «ein Schirm»»; i2 «palabra» -> «frase»; «Dann ich:» -> «Dann bin ich dran:»; la relativa ambigua «Ding zum Schneiden von Papier, das …» -> «Ding zum Schneiden, das …»; quitado «also» de las pausas de búsqueda (falso amigo sin avisar); es: «hervidora» -> «hervidor eléctrico», «Hm.» sin correspondencia, coma sobrante; nota de «umschreiben» reescrita: inseparable = parafrasear (um-SCHREI-ben), separable = reescribir (UM-schreiben); pistas g1–g4 específicas.
+- c38: ⚠ Termin correcto (se mantiene); `peinlich`: nota normal sobre «painful» (choque solo con el inglés); g3 admite «Das war so nicht gemeint.» (`aceptadas`); cabeceras de la tabla de Konjunktiv II = infinitivos (können/haben/werden); «gemeint sein» = pasivo de estado y fuera la frase comparativa es/en; «In vielen Firmen ist direkt nicht unhöflich» -> «…ist es nicht unhöflich, direkt zu sein»; ES: «Interpreté su correo en el sentido de que…», «quise decir otra cosa», «¿qué quiso decir con eso?», «petición»; e5 nombra «wollen»; i3 sin la frase ««klarstellen» no aparece aquí»; pistas específicas.
+- c39: `contexto.es` en español; Lena: «Spielplatz, der seit Monaten alt ist» (forzado, ES decía «sucio») -> «…der neue Helfer braucht»; tabla de relativos «Ak.» -> «Akk.»; nota de «s» sonora más clara; tablas ≤15 filas (12/6/4/4), todas las filas usadas, sin recortes; pistas específicas.
+- c40: ⚠ Termin y ⚠ bekommen (choque con «become») correctos; «Dort wird stehen, der Antrag sei vollständig» -> «Dort steht dann, der Antrag sei vollständig» (diálogo y feedback s3; opciones s3 en indicativo); `contexto.es` en español; error frecuente n.º 3 sustituido por el real «*…teilt mit, dass der Antrag sei vollständig»; i2 fija «antes de que» (bevor); «Termin» = ter-MIIN (la «ie» ES se leía como diptongo); fila «der Mitarbeiter» (sin uso) eliminada; «Danke» a mitad de diálogo -> «Gut»; «Das sind viele Schritte» repetido -> quitado; pistas específicas.
+
+## Sin resolver
+- c40: la cadena Bescheinigung / Nachweis / Unterlagen es densa (la ficha la exige); no se simplificó para no salirse del plan.
+- Pendiente de calibración con voces de-DE (común a todo el bloque): ä larga en «Gerät/ungefähr», «ch» de «Nachweis/Nachbarschaft».

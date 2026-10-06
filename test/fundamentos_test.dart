@@ -77,6 +77,36 @@ void main() {
     expect(s.nivel0Pendiente, isTrue);
   });
 
+  test('el alemán: ruta f0 (8 unidades) y N1–N10 encadenados tras ella, sin el a1-1 heredado', () async {
+    final cargador = CargadorRuta();
+    final ruta = await cargador.cargar('de');
+    expect(ruta, isNotNull);
+    expect(cargador.modulosConError, isEmpty);
+    final f0 = ruta!.delNivel('f0');
+    expect(f0, hasLength(8));
+    expect(f0.first.id, 'de.f0.laute-gruesse');
+    expect(f0.last.id, 'de.f0.vorstellen');
+    expect(ruta.delNivel('a1-1'), isEmpty);
+    expect(problemasDeContenido(ruta, formasVerbales: await cargador.formasVerbales('de')), isEmpty);
+    final publicados = [
+      for (final n in ruta.curso.niveles)
+        if (n.estado == EstadoNivel.publicado) n.id,
+    ];
+    // Curso completo publicado (método ligero: 50 clases por nivel).
+    expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
+    var previa = f0.last.id;
+    for (final nivel in publicados.skip(1)) {
+      final clases = ruta.delNivel(nivel);
+      expect(clases, hasLength(50), reason: nivel);
+      for (final u in clases) {
+        expect(u.id, startsWith('de.$nivel.c'), reason: u.id);
+        expect(u.prerequisitos, [previa], reason: u.id);
+        previa = u.id;
+      }
+    }
+    expect(idiomasConRuta, contains('de'));
+  });
+
   test('el japonés empieza por hiragana y el coreano por hangul', () async {
     await ContenidoJson.precargar('ja');
     await ContenidoJson.precargar('ko');

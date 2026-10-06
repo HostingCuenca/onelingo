@@ -1,0 +1,18 @@
+**GO**
+
+Revisión N9 b05 (de.n9.c21–c25). Validador: 0 errores del bloque. Situaciones tras la revisión: 426 / 424 / 427 / 422 / 432 palabras (mínimo N9 con margen 8 %: 421). Todos los `escribir` del bloque traen la frase de partida o los elementos completos en la consigna (c23 i2 es la única transformación: parte de «Was reizt Sie an der Stelle?»).
+
+## Cambios
+- **c21:** diálogo de Tim: «wir verteilen die Handlung gemeinsam» (antinatural) pasa a «wir verteilen die Aufgaben gemeinsam» (es/en actualizados). e3 (`ordenar`): se acepta el orden «um 12 Prozent» antes de «den Umsatz» (`aceptadas`).
+- **c22:** ⚠ «Branche»: la nota ES ya no lleva ⚠ ni habla de «sucursal» (el choque es solo con el inglés «branch»); el ⚠ queda solo en EN. Guía de «übertragbar» en ES alineada con la del encargo («ü» = «i» con los labios de «u»). Ejemplo «Ich bin zwar Quereinsteiger…»: el ES («cambiante de sector») se reescribió de forma natural. Diálogo: la traducción ES de la última intervención de Lea omitía la frase final («Además, le digo al equipo pronto qué espero»); añadida.
+- **c23:** explicación: eliminada la frase sobre entonación (regla fonética no respaldada), en es y en. Traducción de «Lieferung» (pedido → entrega). g4: feedback decía «verbo conjugado “aufgebaut ist”» (el conjugado es «ist»); corregido. g3: distractor «Auf Wiedersehen.» sustituido por «Was reizt Sie an dieser Stelle?» (pregunta abierta que no es repregunta). Diálogo ampliado con una línea de Paul para dar margen de extensión (421 → 427).
+- **c24:** cifras con punto de millar («55.000», «48.000», «52.000», «60.000», «50.000») fuera de lo evaluado: g1, i2 (respuesta), s2, e1 y e6/c25 pasan a palabras (fünfundfünfzigtausend, achtundvierzigtausend, zweiundfünfzigtausend, sechzigtausend, fünfzigtausend); la consigna de i2 pide la cifra en letras. Se mantienen «48.000», etc. en celdas `apoyo`, consignas y explicación (permitido). Nota de tabla «liegt bei 50.000» pasada a palabras. «zusagen»: quitada del ES la frase «No significa “decir además”» (sin equivalente en EN y sin falso amigo real). Diálogo: «über Netto sprechen» → «von netto sprechen»; ES «El horario flexible lo hay para todos» → «Aquí hay horario flexible para todos».
+- **c25:** e6 (opciones con «50.000»): pasadas a «fünfzigtausend». «In dieser Stelle gibt es oft Termindruck» → «Bei dieser Stelle…». Dos intervenciones seguidas de Jan separadas con una línea de Frau Becker («Möchten Sie noch etwas ergänzen?»). e2: distractor absurdo «die Kaffeepause» → «die Fehlerquote». e3 (`ordenar`): se acepta «um 30 Prozent» antes de «die Fehlerquote».
+
+## Revisado y conforme
+- ⚠ **bekommen** (c24, «volverse/become» ≠ recibir): real, bien marcado desde el español. ⚠ **Termindruck/Termin** (c25, celda `apoyo`): real. «vorgestellt» (c24): enseñado en la tabla «Para leer» y en ejemplos; no se evalúa. Acento «be-LAST-bar-keit» (c25): correcto.
+- Sie/du, nombres (Schneider, Roth, Brandt, Hartmann, Keller, Weber, Schulz, Neumann, Becker, Wolf, Tim, Lea, Paul, Lena, Jan: todos libres), sin Ecuador ni Lumo. `relacionar` con alemán a la izquierda y apoyo {es,en} a la derecha. Tablas «Para leer» ≤ 15 filas.
+- Konjunktiv II y «wenn … dann» (c24), indirekte Fragen (c23), «daran, dass» (c25), «zwar … aber / gerade weil» (c22) y STAR (c21): alemán correcto; posición verbal descrita con «1.ª posición» solo tras subordinada completa.
+
+## Sin resolver
+- Algunos distractores de comprensión siguen siendo muy débiles pero inequívocos (c21 e6 «Variante B ist blau.», c22 e2 «Mir ist alles egal.», c23 e5 «Auf Wiedersehen.»); no afectan a la corrección de la respuesta única.

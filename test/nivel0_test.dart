@@ -133,6 +133,26 @@ void main() {
     expect(n.sonidos, hasLength(12)); // vocales orales y nasales congeladas
   });
 
+  test('El Nivel 0 alemán trae cada explicación en español e inglés', () {
+    // Método ligero (PLAN_ALEMAN.md §3): 16 claves de lectura en 10 unidades.
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'de',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    final n = cargar('de');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(40));
+    expect(n.sonidos, hasLength(27)); // vocales, Umlaut, diptongos y consonantes
+    // Lumo solo da la bienvenida: nunca en la prueba de salida (u10).
+    expect(
+      [for (final l in n.unidades.last.lecciones) ...l.pasos.map((p) => p.tipo)],
+      isNot(contains('lumo')),
+    );
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);

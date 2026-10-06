@@ -2,16 +2,19 @@ import 'correccion.dart';
 import 'grafo.dart';
 import 'modelos.dart';
 
-final _puntuacion = RegExp(r'[.,!?¡¿;:。、！？「」…"“”()«»—–，：；]');
+final _puntuacion = RegExp(r'[.,!?¡¿;:。、！？「」…"“”„()«»‹›—–，：；]');
 
 /// Palabras de un texto en el idioma meta (misma regla que tools/validar_ruta.py).
 List<String> palabrasMeta(String texto) => texto
     .replaceAll('’', "'")
+    .replaceAll('‘', "'")
+    .replaceAll('‚', "'")
     .replaceAll('___', ' ')
     .toLowerCase()
     .replaceAll(_puntuacion, ' ')
     .split(RegExp(r'\s+'))
-    // Comillas simples de cita ('once', shopkeepers') no son parte de la palabra.
+    // Comillas simples de cita ('once', shopkeepers', alemán ‚so‘) no son
+    // parte de la palabra.
     .map((p) => p.replaceAll(RegExp(r"^'+|'+$"), ''))
     .where((p) => p.isNotEmpty && p != '-')
     .toList();
@@ -54,7 +57,7 @@ bool palabraConocida(String w, Set<String> conocidas) =>
     basesFlexion(w).any(conocidas.contains);
 
 /// Forma conjugada → infinitivos, a partir de `verbos.json` (misma regla que
-/// `formas_pt` en tools/validar_ruta.py): cuentan las celdas de todas las
+/// `formas_verbales` en tools/validar_ruta.py): cuentan las celdas de todas las
 /// tablas y las formas sueltas.
 Map<String, Set<String>> indiceFormasVerbales(Map<String, dynamic> verbos) {
   final res = <String, Set<String>>{};
@@ -63,7 +66,10 @@ Map<String, Set<String>> indiceFormasVerbales(Map<String, dynamic> verbos) {
     final formas = [
       for (final t in (v['tablas'] as Map? ?? const {}).values)
         ...List<String>.from(t as List),
-      ...(v['formas'] as Map? ?? const {}).values.cast<String>(),
+      // El auxiliar del alemán (haben/sein) no es una forma del verbo.
+      for (final MapEntry(:key, :value)
+          in (v['formas'] as Map? ?? const {}).entries)
+        if (key != 'auxiliar' && value is String) value,
     ];
     for (final f in formas) {
       for (final w in palabrasMeta(f)) {
@@ -226,10 +232,348 @@ bool palabraConocidaPt(
   }.any((v) => palabraConocidaPt(v, conocidas, formasVerbales));
 }
 
+// ── Alemán ──────────────────────────────────────────────────────────────────
+// Heurística como la del portugués: una forma cuenta si su base ya se enseñó.
+// Misma regla que `conocida_de` en tools/validar_ruta.py.
+
+const _altGrafiaDe = {'ss': 'ß', 'ae': 'ä', 'oe': 'ö', 'ue': 'ü'};
+
+/// La palabra con ß/ss, ä/ae, ö/oe y ü/ue intercambiadas (máx. 64 grafías;
+/// misma regla que `grafias_de` en tools/validar_ruta.py).
+Set<String> grafiasDe(String w) {
+  final plano = w
+      .replaceAll('ß', 'ss')
+      .replaceAll('ä', 'ae')
+      .replaceAll('ö', 'oe')
+      .replaceAll('ü', 'ue');
+  var res = [''];
+  var i = 0;
+  while (i < plano.length) {
+    final par = i + 2 <= plano.length ? plano.substring(i, i + 2) : '';
+    final alt = _altGrafiaDe[par];
+    if (alt != null && res.length < 64) {
+      res = [
+        for (final r in res) ...['$r$par', '$r$alt'],
+      ];
+      i += 2;
+    } else {
+      final c = plano[i];
+      res = [for (final r in res) '$r$c'];
+      i += 1;
+    }
+  }
+  return res.toSet();
+}
+
+/// Quita la última diéresis: äpfel → apfel, häuser → hauser, läuft → lauft.
+Set<String> _sinUmlautDe(String w) {
+  final res = <String>{};
+  for (final (a, b) in const [
+    ('äu', 'au'),
+    ('ä', 'a'),
+    ('ö', 'o'),
+    ('ü', 'u'),
+  ]) {
+    final i = w.lastIndexOf(a);
+    if (i >= 0) res.add(w.substring(0, i) + b + w.substring(i + a.length));
+  }
+  return res;
+}
+
+Set<String> _quitarDe(String w, List<String> sufijos, [int minimo = 2]) => {
+  for (final s in sufijos)
+    if (w.endsWith(s) && w.length - s.length >= minimo)
+      w.substring(0, w.length - s.length),
+};
+
+/// Plural, caso y terminación de adjetivo; luego grado.
+const _sufNominalDe = [
+  'ern', 'nen', 'sen', 'ens', 'en', 'em', 'er', 'es', 'se', 'e', 'n', 's', //
+];
+const _sufGradoDe = ['est', 'st', 'er'];
+const _gradoIrregDe = {
+  'besser': 'gut',
+  'best': 'gut',
+  'mehr': 'viel',
+  'meist': 'viel',
+  'lieber': 'gern',
+  'liebst': 'gern',
+  'höher': 'hoch',
+  'höchst': 'hoch',
+  'nächst': 'nah',
+  'größt': 'groß',
+};
+
+/// Palabras que parecen flexión de otra y no lo son (aber ≠ ab+er, dass ≠ das+s…).
+const _noDerivarDe = {
+  'aber', 'unser', 'euer', 'denen', 'deren', 'wenn', 'denn', 'das', 'dass', //
+  'neun', 'ihnen', 'etwas', 'ins', 'eins',
+};
+
+/// Bases posibles de una flexión nominal/adjetival alemana: plural (-e, -er,
+/// -n, -en, -s, -nen, -se, con diéresis), -n/-s/-es de caso, terminaciones de
+/// adjetivo y grado (misma regla que `bases_de` en tools/validar_ruta.py).
+Set<String> basesFlexionDe(String w) {
+  if (_noDerivarDe.contains(w)) return {};
+  final n1 = _quitarDe(w, _sufNominalDe);
+  final res = {...n1};
+  for (final x in {w, ...n1}) {
+    if (_noDerivarDe.contains(x)) continue;
+    final irreg = _gradoIrregDe[x];
+    if (irreg != null) res.add(irreg);
+    res.addAll(_quitarDe(x, _sufGradoDe));
+  }
+  for (final x in {...res, w}) {
+    res.addAll(_sinUmlautDe(x));
+  }
+  for (final x in {...res}) {
+    // e caída del tema: dunkle → dunkel, teure → teuer.
+    if (x.length >= 3 &&
+        'lr'.contains(x[x.length - 1]) &&
+        x[x.length - 2] != 'e') {
+      res.add('${x.substring(0, x.length - 1)}e${x[x.length - 1]}');
+    }
+  }
+  res.remove(w);
+  return res;
+}
+
+Map<String, Set<String>> _formaAInfDe(Map<String, String> tabla) {
+  final res = <String, Set<String>>{};
+  for (final MapEntry(key: inf, value: formas) in tabla.entries) {
+    for (final f in formas.split(' ')) {
+      res.putIfAbsent(f, () => {}).add(inf);
+    }
+  }
+  return res;
+}
+
+/// Formas sueltas (presente irregular, Präteritum y Konjunktiv II de
+/// sein/haben/werden).
+final _formasIrregDe = _formaAInfDe(const {
+  'sein':
+      'bin bist ist sind seid sei seien seist war warst waren wart wäre wärst '
+      'wären wärt wäret wärest',
+  'haben': 'hast hat hatte hattest hatten hattet hätte hättest hätten hättet',
+  'werden':
+      'wirst wird wurde wurdest wurden wurdet würde würdest würden würdet',
+  'wissen': 'weiß weißt',
+  'können': 'kann kannst',
+  'müssen': 'muss musst',
+  'wollen': 'will willst',
+  'dürfen': 'darf darfst',
+  'sollen': 'soll sollst',
+  'mögen': 'mag magst',
+  'tun': 'tu tue tust tut tun',
+  'nehmen': 'nimm nimmst nimmt',
+  'treten': 'tritt trittst',
+  'halten': 'hält hältst',
+  'gelten': 'gilt',
+  'raten': 'rät rätst',
+  'laden': 'lädt',
+});
+
+/// Bases de Präteritum fuerte/mixto y de Konjunktiv II; admiten -st/-t/-en/-n
+/// detrás (gingen, kamst, könntest, wüssten).
+final _basesIrregDe = _formaAInfDe(const {
+  'gehen': 'ging ginge', 'kommen': 'kam käme', 'sehen': 'sah sähe', //
+  'geben': 'gab gäbe', 'finden': 'fand fände', 'lesen': 'las', 'essen': 'aß',
+  'trinken': 'trank', 'sprechen': 'sprach', 'nehmen': 'nahm', 'fahren': 'fuhr',
+  'laufen': 'lief', 'bleiben': 'blieb', 'schreiben': 'schrieb',
+  'stehen': 'stand', 'sitzen': 'saß', 'liegen': 'lag', 'rufen': 'rief',
+  'denken': 'dachte', 'bringen': 'brachte', 'kennen': 'kannte',
+  'nennen': 'nannte', 'rennen': 'rannte', 'wissen': 'wusste wüsste',
+  'tun': 'tat täte', 'heißen': 'hieß', 'schlafen': 'schlief',
+  'treffen': 'traf', 'fliegen': 'flog', 'helfen': 'half',
+  'beginnen': 'begann', 'ziehen': 'zog', 'tragen': 'trug', 'fallen': 'fiel',
+  'halten': 'hielt', 'lassen': 'ließ', 'waschen': 'wusch', 'singen': 'sang',
+  'schwimmen': 'schwamm', 'gewinnen': 'gewann', 'sterben': 'starb',
+  'steigen': 'stieg', 'schneiden': 'schnitt', 'verlieren': 'verlor',
+  'vergessen': 'vergaß', 'empfehlen': 'empfahl', 'bitten': 'bat',
+  'schließen': 'schloss', 'bieten': 'bot', 'greifen': 'griff',
+  'scheinen': 'schien', 'fangen': 'fing', 'können': 'konnte könnte',
+  'müssen': 'musste müsste', 'dürfen': 'durfte dürfte',
+  'mögen': 'mochte möchte', 'wollen': 'wollte', 'sollen': 'sollte',
+});
+
+/// Partizip II fuerte/mixto sin ge- (gegangen, verstanden ← ver+standen).
+final _partizipDe = _formaAInfDe(const {
+  'gehen': 'gangen', 'sein': 'wesen', 'werden': 'worden', //
+  'trinken': 'trunken', 'finden': 'funden', 'schreiben': 'schrieben',
+  'sprechen': 'sprochen', 'nehmen': 'nommen', 'bleiben': 'blieben',
+  'essen': 'gessen', 'treffen': 'troffen', 'stehen': 'standen',
+  'helfen': 'holfen', 'wissen': 'wusst', 'denken': 'dacht',
+  'bringen': 'bracht', 'kennen': 'kannt', 'nennen': 'nannt',
+  'rennen': 'rannt', 'fliegen': 'flogen', 'ziehen': 'zogen',
+  'sitzen': 'sessen', 'liegen': 'legen', 'sterben': 'storben',
+  'schwimmen': 'schwommen', 'singen': 'sungen', 'gewinnen': 'wonnen',
+  'ginnen': 'gonnen', 'steigen': 'stiegen', 'schneiden': 'schnitten',
+  'tun': 'tan', 'mögen': 'mocht', 'können': 'konnt', 'müssen': 'musst',
+  'dürfen': 'durft', 'lieren': 'loren', 'gebären': 'boren',
+  'bitten': 'beten', 'schließen': 'schlossen', 'bieten': 'boten',
+  'greifen': 'griffen', 'scheinen': 'schienen', 'leihen': 'liehen',
+  'schweigen': 'schwiegen',
+});
+
+const _separablesDe = [
+  'zusammen', 'zurück', 'vorbei', 'weiter', 'wieder', 'kennen', 'fern', //
+  'fest', 'nach', 'teil', 'auf', 'aus', 'ein', 'mit', 'vor', 'weg', 'los',
+  'bei', 'her', 'hin', 'ab', 'an', 'um', 'zu',
+];
+const _inseparablesDe = ['miss', 'emp', 'ent', 'zer', 'ver', 'be', 'er'];
+
+Set<String> _regularDe(String raiz) {
+  final res = {'${raiz}en'};
+  if (raiz.endsWith('el') || raiz.endsWith('er')) res.add('${raiz}n');
+  if (raiz.length >= 3 &&
+      'lr'.contains(raiz[raiz.length - 1]) &&
+      raiz[raiz.length - 2] != 'e') {
+    // sammle → sammeln
+    res.add('${raiz.substring(0, raiz.length - 1)}e${raiz[raiz.length - 1]}n');
+  }
+  return res;
+}
+
+/// Raíz de presente con cambio vocálico → raíz del infinitivo (liest, gibt, fährt).
+Set<String> _cambioVocalDe(String raiz) {
+  final res = _sinUmlautDe(raiz);
+  var i = raiz.lastIndexOf('ie');
+  if (i >= 0) res.add('${raiz.substring(0, i)}e${raiz.substring(i + 2)}');
+  i = raiz.lastIndexOf('i');
+  if (i >= 0) res.add('${raiz.substring(0, i)}e${raiz.substring(i + 1)}');
+  return res;
+}
+
+String _sinFinal(String w, String e) => w.substring(0, w.length - e.length);
+
+/// Infinitivos posibles de una forma verbal alemana (misma regla que
+/// `infinitivos_de` en tools/validar_ruta.py).
+Set<String> infinitivosDe(
+  String w, {
+  bool prefijos = true,
+  bool sinGe = false,
+}) {
+  final res = <String>{};
+  for (final e in const ['', 'st', 't', 'n', 'en', 'est', 'et']) {
+    if (w.endsWith(e) && w.length - e.length >= 2) {
+      res.addAll(_basesIrregDe[_sinFinal(w, e)] ?? const {});
+    }
+  }
+  res.addAll(_formasIrregDe[w] ?? const {});
+  // Presente (e de unión: arbeitest, wartet; wir/sie = infinitivo) e
+  // imperativo (komm, geh).
+  for (final e in const ['est', 'et', 'st', 'en', 't', 'e', 'n', '']) {
+    if (w.endsWith(e) && w.length - e.length >= 2) {
+      final raiz = _sinFinal(w, e);
+      res.addAll(_regularDe(raiz));
+      if (const ['est', 'st', 't', ''].contains(e)) {
+        for (final r in _cambioVocalDe(raiz)) {
+          res.addAll(_regularDe(r));
+        }
+      }
+    }
+  }
+  // Präteritum regular: machte, arbeiteten.
+  for (final e in const [
+    'etest', 'etet', 'eten', 'ete', 'test', 'tet', 'ten', 'te', //
+  ]) {
+    if (w.endsWith(e) && w.length - e.length >= 2) {
+      res.addAll(_regularDe(_sinFinal(w, e)));
+    }
+  }
+  // Partizip II: ge-…-(e)t regular, ge-…-en fuerte y la tabla de irregulares.
+  final nucleos = [
+    if (sinGe) w,
+    if (w.startsWith('ge') && w.length >= 5) w.substring(2),
+  ];
+  for (final n in nucleos) {
+    res.addAll(_partizipDe[n] ?? const {});
+    for (final e in const ['et', 't', 'en']) {
+      if (n.endsWith(e) && n.length - e.length >= 2) {
+        res.addAll(_regularDe(_sinFinal(n, e)));
+      }
+    }
+  }
+  if (prefijos) {
+    for (final p in _inseparablesDe) {
+      if (w.startsWith(p) && w.length - p.length >= 3) {
+        res.addAll({
+          for (final i in infinitivosDe(
+            w.substring(p.length),
+            prefijos: false,
+            sinGe: true,
+          ))
+            '$p$i',
+        });
+      }
+    }
+    for (final p in _separablesDe) {
+      if (w.startsWith(p) && w.length - p.length >= 3) {
+        final resto = w.substring(p.length);
+        // anzurufen → anrufen; angerufen → an + gerufen.
+        for (final r in {
+          resto,
+          if (resto.startsWith('zu') && resto.length >= 5) resto.substring(2),
+        }) {
+          res.addAll({
+            for (final i in infinitivosDe(r, prefijos: false)) '$p$i',
+          });
+        }
+      }
+    }
+  }
+  return res;
+}
+
+/// Como [palabraConocida] (sin la morfología inglesa), aceptando además
+/// flexiones alemanas de palabras enseñadas: plurales, caso, adjetivos y
+/// grado, formas verbales (presente, Präteritum, Konjunktiv II, Partizip II,
+/// separables) y grafías ß/ss, ä/ae, ö/oe, ü/ue. Las mayúsculas ya las quita
+/// [palabrasMeta]. Misma regla que `conocida_de` en tools/validar_ruta.py;
+/// [formasVerbales] es el índice de [indiceFormasVerbales] sobre
+/// `assets/contenido/de/verbos.json` (si existe).
+bool palabraConocidaDe(
+  String w,
+  Set<String> conocidas, [
+  Map<String, Set<String>> formasVerbales = const {},
+]) {
+  if (conocidas.contains(w) || RegExp(r'\d').hasMatch(w)) return true;
+  for (final g in grafiasDe(w)) {
+    final infs = infinitivosDe(g);
+    // Participio declinado como adjetivo: gekochte, geschlossenen.
+    for (final x in _quitarDe(g, const ['e', 'en', 'em', 'er', 'es'], 4)) {
+      if (x.endsWith('t') || x.endsWith('en')) infs.addAll(infinitivosDe(x));
+    }
+    // Verbo separable con el prefijo aparte en la frase: «ich rufe … an».
+    infs.addAll({
+      for (final i in [...infs])
+        for (final p in _separablesDe) '$p$i',
+    });
+    final candidatos = {
+      g,
+      ...basesFlexionDe(g),
+      ...?formasVerbales[g],
+      ...infs,
+    };
+    if (candidatos.any((c) => grafiasDe(c).any(conocidas.contains))) {
+      return true;
+    }
+  }
+  // El prefijo separado («an», «auf») cuenta si se enseñó un verbo con él.
+  return _separablesDe.contains(w) &&
+      conocidas.any(
+        (c) =>
+            c.startsWith(w) &&
+            c.length >= w.length + 4 &&
+            c.endsWith('n') &&
+            !_separablesDe.contains(c),
+      );
+}
+
 /// Problemas pedagógicos y de datos de una ruta. Vacío = íntegra.
 ///
-/// En portugués valen además las flexiones de lo enseñado
-/// ([palabraConocidaPt]); [formasVerbales] (ver
+/// En portugués y alemán valen además las flexiones de lo enseñado
+/// ([palabraConocidaPt], [palabraConocidaDe]); [formasVerbales] (ver
 /// `CargadorRuta.formasVerbales`) añade las formas irregulares de su
 /// `verbos.json`. Sin él la comprobación solo es más estricta, nunca más laxa.
 List<String> problemasDeContenido(
@@ -237,9 +581,12 @@ List<String> problemasDeContenido(
   Map<String, Set<String>> formasVerbales = const {},
 }) {
   final errores = [...validarGrafo(ruta.unidades)];
-  final bool Function(String, Set<String>) conocida = ruta.curso.idioma == 'pt'
-      ? (w, saber) => palabraConocidaPt(w, saber, formasVerbales)
-      : palabraConocida;
+  final bool Function(String, Set<String>) conocida =
+      switch (ruta.curso.idioma) {
+        'pt' => (w, saber) => palabraConocidaPt(w, saber, formasVerbales),
+        'de' => (w, saber) => palabraConocidaDe(w, saber, formasVerbales),
+        _ => palabraConocida,
+      };
   final apoyos = ruta.curso.idiomasApoyo;
   final libres = {
     for (final p in ruta.curso.palabrasLibres) ...palabrasMeta(p),
