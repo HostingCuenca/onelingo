@@ -1,0 +1,39 @@
+GO
+
+# Revisión N4 · B6 (pt.n4.c26–c30) · revisor independiente
+
+Validador: `validar_bloque.py pt 4 6` → 0 errores. El borrador respeta las fichas (gramática solo la de `introduce`, tareas y plan de ejercicios con la misma clave y formato). Escucha: cada clase tiene 2 `escuchar` (g4 y e5 en las cinco). Los `relacionar` de la ficha están en las cinco evaluaciones (3–4 pares, una sola correspondencia). `contexto.es` de las cinco situaciones está en español y `en` en inglés. Lecturas de 130–136 palabras (rango 130–300). Canon: Camila de Miami en Recife, sin Ecuador. Cambios totales: ≈ 30.
+
+## Cambios
+
+- **Vocabulario fuera de ficha, deduplicado contra N1–N3 y N4 B1–B5 (6 entradas quitadas):** ya enseñadas y quitadas: c26 «a candidatura» (B5); c27 «conseguir», «o home office», «baixo»; c30 «enviar (enviarei, enviaremos)» (además llevaba formas flexionadas). Se mantienen las nuevas que la ficha usa en sus propios ejercicios o textos: c26 «o abraço», «carinhoso» (relacionar), «a seleção» (elegir); c27 «impossível» (distractor de ficha); c28 «a tabela» (tarea y situación); c29 «plenamente» (ordenar), «a preocupação» (situación), «o respeito» (ordenar), «ressalvar» (vocabulario de ficha); c30 «o áudio» (tarea), «conforme» (situación). Resultado: 11 / 9 / 9 / 11 / 10 palabras por clase.
+- **Reformulaciones del autor, decididas:**
+  - restauradas por ser enseñables: c26 «já sabe» → «já soube da minha candidatura» (ficha); c26 «por semana» → «quarenta horas semanais» (semanais, B5); c27 «o salário talvez possa ser melhor» → «a faixa salarial talvez possa ser melhor» (faixa salarial, B5 c25; «revista» de la ficha no está enseñada, por eso «melhor»); c27 «Quero a resposta» → «Quero mais detalhes» (detalhes, B5; modelo «Só queria pedir mais detalhes»); c29 «muitos problemas» → «receber muitas reclamações» (reclamação, B4); c29 «relatório por semana» → «relatórios semanais».
+  - se mantienen porque la palabra de la ficha no es enseñable: c26 «confirmo minha presença» → «confirmo que vou à conversa» («presença» no está enseñada); c28 «o gráfico» → «o documento» («gráfico» no está enseñada); c30 «tô indo» → «tô saindo» (el validador rechaza «indo»; se probó y se revirtió).
+- **Hechos del reparto, decididos:** Iara firma «Iara Menezes» y Camila logra 1 semana en lugar de 3. Para que las «3 semanas» cuenten, en c29 la propuesta de Iara ahora dice «cortar as três semanas de testes com usuários» (antes «a fase de testes», sin cifra, y Camila decía «em vez de três» sin referente). El profesor Ricardo (UFPE): Lucas lo trata de «professor Ricardo» y «o senhor» (e2 de c28); en el diálogo de c28 Camila usa el mismo trato con él. Bruno concuerda con la fecha de septiembre (c29).
+- **Explicaciones y notas (6):** c27 p2 decía que «talvez» suena casi «talvês» por reducción de «e» final (falso: «talvez» termina en «z»); se deja solo la reducción de «prazo». c28 nota de «dona»: decía a la vez «no es dueña» y «dueña se dice a dona» → «como doña; sola, también es la dueña». c28 p2: la frase sobre la «s» entre vocales no se aplicaba a ninguna palabra del texto → sonido de «dona» y de «nh». c29 p2: afirmaba que en español «estar de acuerdo con / discrepar de» difieren del portugués; es falso (son iguales) → se explica el error real («discordar com» por «en desacuerdo con» y omitir la preposición); quitado «sempre» del texto del sonido. c30 p2: «prarreunião» (no existe) → «se oye casi como una sola palabra».
+- **erroresFrecuentes (2):** c29 «Concordo de parte com a senhora» (no es un error de hispanohablante; «en parte» = «em parte») → «Eu discordo com a proposta» → «da proposta» (calco de «en desacuerdo con»). c29 explicación de «Eu concordo a proposta» sin la comparación errónea con el español. Resto verificados: «Talvez … precisa», «Acho que … seja», «Apelido/Sobrenome», «tu podes», «você» con la médica, «a gente vamos», «nós vai», «tá/pra» en correo formal, «você» con Dona Marina, mezcla de registros.
+- **Diálogos (3):** c29 línea duplicada de Camila («Entendo que o prazo é importante…») que repetía la anterior → quitada; se añade Iara «E você, Camila, o que acha?» y la coda de Camila «Assim a gente mantém a data de setembro e também os testes» (mantiene las 130 palabras y justifica la propuesta). c30 la pregunta de Ana sobre la reunión y la respuesta de Camila inventaban un plazo extra («mais um dia») y repetían el audio → «Ela aceitou a semana de testes?» / «Aceitou, sim! Ela gostou do argumento. Agora vou escrever o e-mail para ela, em tom formal.».
+- **Sin cambios, verificados:** los trato (Iara «a senhora», Dona Marina «a senhora», seu Pedro «o senhor», Bruno «você»); dudas de c26 (Camila a Ana «você», a Dona Marina «a senhora»); distractores reales de las guiadas/evaluaciones; una sola respuesta por ítem; falsos amigos marcados (cumprimento, seleção, apelido, seu, educado, argumento, vaga ya en B5, dona).
+
+## Hechos del reparto confirmados
+
+- c26: tras pasar a la última etapa, Camila escribe a Iara («Prezada Iara, bom dia… confirmo que vou à conversa de quinta-feira… Atenciosamente, Camila Ortega») y recibe respuesta firmada «Iara Menezes» (cuarenta horas semanales, contrato, salario en la conversación). A Ana (en Lisboa) le escribe «Oi, amiga!… Beijo!»; a Dona Marina le dice «a senhora» y ella responde «Um abraço carinhoso»; a Bruno le cuenta el mismo día (você).
+- c27: tras la conversación del jueves con Iara, Camila redacta un borrador directo (salario bajo, dos días de home office, respuesta hasta el viernes); Ana lo ve por videollamada y lo suaviza con «acho que… talvez», «só queria confirmar», «será que a senhora consegue…»; Iara responde que pueden conversar el viernes («Acho que podemos conversar na sexta»).
+- c28: tabla de trato de Camila: Iara «Bom dia, Iara» + a senhora; Dra. Helena «doutora Helena» + a senhora; seu Pedro (portero del edificio de Dona Marina) «seu Pedro» + o senhor; Dona Marina «Dona Marina» + a senhora; Bruno «Bruno» + você; profesor Ricardo (UFPE) «professor Ricardo» + o senhor (Lucas lo trata así). El apelido «Cami» es solo para amigos. Ana, desde Lisboa, comenta que en Portugal se dice «senhor doutor».
+- c29: reunión del lunes: Iara quiere lanzar en septiembre y cortar las tres semanas de pruebas con usuarios; Bruno concuerda con la fecha; Camila concuerda en parte, discrepa de cortar las pruebas y propone una semana en lugar de tres; Iara acepta («É um bom argumento. Vamos fazer assim.»); queda septiembre con una semana de pruebas.
+- c30: tras esa reunión, Camila manda un audio a Ana («a gente vai lançar… com uma semana de testes») y un correo formal a Iara («conforme combinado… nós vamos lançar… enviarei o cronograma na quinta-feira»); Ana dice que el correo quedó bien. Tratamiento con Iara: «a senhora» en el correo.
+- Cronología del bloque: jueves conversación de salario (c26–c27, c28 en videollamada con Ana), lunes reunión de lanzamiento (c29), cronograma de Camila para el jueves siguiente (c30). El resultado de la candidatura sigue sin resolverse (N4).
+
+## Correcciones de ficha
+
+- c28: la ficha usa «mostrar o gráfico» y c29/c27 usan «reclamações» y «revista»/«detalhes»: «gráfico» y «revista» no están enseñadas, por lo que el borrador usa «documento» y «melhor».
+- c29: la ficha dice «uma semana de testes em vez de três» sin decir de dónde salen las tres semanas; el borrador lo fija en la propuesta de Iara.
+- c26: la ficha usa «confirmo minha presença» (no enseñada).
+- c30: la ficha ordena «[tô / indo / pra…]»; el validador no acepta «indo» (gerundio no enseñado). Se usa «saindo».
+
+## Sin resolver
+
+- La tarea oral de c26 y las de escritura abierta (e6 de cada clase) no puntúan; no hay evaluación de voz.
+- Si algún bloque posterior necesita «presença», «gráfico» o «indo», deberá enseñarlos en su vocabulario.
+- «Dona Marina (carta)» y la despedida «Um abraço carinhoso» (c26) quedan como los ejemplos canónicos de despedida cercana y respetuosa.
