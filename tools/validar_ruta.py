@@ -19,7 +19,7 @@ RAIZ = Path(__file__).resolve().parent.parent / "assets" / "contenido"
 ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron", "tabla"}
 ORDEN_TIPOS = ["ensenar", "practica_guiada", "practica_independiente", "situacion", "evaluacion"]
 FORMATOS = {"elegir", "escuchar", "ordenar", "completar", "escribir", "relacionar"}
-PUNTUACION = re.compile(r"[.,!?¡¿;:/。、！？「」…\"“”()«»—–，：；]")
+PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」…\"“”()«»—–，：；]")
 CAMPOS_HUELLA = {
     "formato", "consigna", "pregunta", "preguntaApoyo", "opciones", "respuesta",
     "aceptadas", "tokens", "texto", "audio", "pares",
