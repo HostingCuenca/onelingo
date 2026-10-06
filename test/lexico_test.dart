@@ -186,4 +186,25 @@ void main() {
       expect(q.opciones.toSet().length, q.opciones.length);
     }
   });
+
+  test('Mis verbos en español: tablas completas, apoyo en inglés y práctica', () {
+    for (final interfaz in ['en', 'es']) {
+      final v = Verbos.fromJson(
+        localizarApoyo(_json('assets/contenido/es/verbos.json'), interfaz)
+            as Map<String, dynamic>,
+      );
+      expect(v.verbos.length, greaterThanOrEqualTo(100));
+      final ir = v.porId('ir')!;
+      expect(ir.irregular, isTrue);
+      expect(ir.tablas['preterito']![0], 'fui');
+      expect(ir.tablas['subjuntivo']![0], 'vaya');
+      expect(ir.es, 'to go');
+      expect(v.conPronombre(1, 'vas'), 'tú vas');
+      final p = preguntasVerbos(v, v.verbos, Random(5));
+      expect(p.length, 10);
+      for (final q in p) {
+        expect(q.opciones.toSet().length, q.opciones.length);
+      }
+    }
+  });
 }

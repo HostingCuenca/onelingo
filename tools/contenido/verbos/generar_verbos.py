@@ -50,7 +50,27 @@ IDIOMAS = {
         ],
         'etiqueta': ('infinitivo · presente (je) · participio', 'infinitive · present (je) · past participle'),
     },
+    # Español para anglohablantes: el apoyo es solo inglés (como su ruta), así
+    # que las traducciones de personas y tiempos van en la columna «en».
+    'es': {
+        'soloEn': True,
+        'personas': [
+            ('yo', None, 'I'), ('tú', None, 'you'), ('él / ella / usted', None, 'he / she / you (formal)'),
+            ('nosotros / nosotras', None, 'we'), ('ustedes', None, 'you (plural)'), ('ellos / ellas', None, 'they'),
+        ],
+        'tiempos': [
+            ('presente', None, 'Present', None, 'What you do usually or right now.'),
+            ('preterito', None, 'Preterite (pretérito)', None, 'A finished action at a specific time (ayer, el lunes).'),
+            ('imperfecto', None, 'Imperfect (imperfecto)', None, 'How things were or what you used to do.'),
+            ('futuro', None, 'Future (futuro)', None, 'What will happen; also a guess about now.'),
+            ('condicional', None, 'Conditional (condicional)', None, 'What would happen; polite requests.'),
+            ('perfecto', None, 'Present perfect (pretérito perfecto)', None, 'Haber + participle: what you have done (in Latin America, mostly for experiences).'),
+            ('subjuntivo', None, 'Present subjunctive', None, 'After wishes, doubts and «que» in many sentences: quiero que vengas.'),
+        ],
+        'etiqueta': (None, 'infinitive · present (yo) · past participle'),
+    },
 }
+SOLO_EN = {i for i, c in IDIOMAS.items() if c.get('soloEn')}
 BE = {
     'presente': ['am', 'are', 'is', 'are', 'are', 'are'],
     'pasado': ['was', 'were', 'was', 'were', 'were', 'were'],
@@ -113,7 +133,12 @@ def validar(idioma, verbos):
                 errores.append(f'{inf}: sin ejemplo')
         else:
             tr = v.get('traduccion') or {}
-            if not tr.get('es') or not tr.get('en'):
+            if idioma in SOLO_EN:
+                if set(tr) != {'en'} or not tr.get('en'):
+                    errores.append(f'{inf}: traducción solo en inglés {{en}}')
+                if not str(v.get('participio', '')).strip():
+                    errores.append(f'{inf}: falta participio')
+            elif not tr.get('es') or not tr.get('en'):
                 errores.append(f'{inf}: traducción sin español e inglés')
             tablas = v.get('tablas') or {}
             for t in tiempos:
@@ -121,12 +146,15 @@ def validar(idioma, verbos):
                 if len(fila) != 6 or not all(str(x).strip() for x in fila):
                     errores.append(f'{inf}: tabla «{t}» incompleta')
             ej = v.get('ejemplo') or {}
-            if not ej.get('meta') or not (ej.get('traduccion') or {}).get('es') or not (ej.get('traduccion') or {}).get('en'):
+            tej = ej.get('traduccion') or {}
+            if not ej.get('meta') or not tej.get('en') or (idioma not in SOLO_EN and not tej.get('es')):
                 errores.append(f'{inf}: ejemplo incompleto')
     return errores
 
 
 def apoyo(es, en=None):
+    if es is None:  # idioma con apoyo solo en inglés
+        return {'en': en}
     return {'es': es, **({'en': en} if en else {})}
 
 
@@ -149,13 +177,18 @@ def generar(idioma):
             ejemplo = {'meta': v['ejemplo']['en'], 'traduccion': apoyo(v['ejemplo']['es'])}
         else:
             tablas = v['tablas']
-            # Participio: última palabra de «je» en passé composé (allé(e) → allé).
-            participio = tablas['passe_compose'][0].split()[-1].replace('(e)', '')
+            if 'participio' in v:
+                participio = v['participio']
+            else:
+                # Participio: última palabra de «je» en passé composé (allé(e) → allé).
+                participio = tablas['passe_compose'][0].split()[-1].replace('(e)', '')
             formas = {'participio': participio}
             resumen = [inf, tablas['presente'][0], participio]
             traduccion = v['traduccion']
             ejemplo = v['ejemplo']
         clave = re.sub(r'^(se |s’|s\')', '', inf)
+        if idioma == 'es':
+            clave = inf  # la ruta enseña el infinitivo tal cual (levantarse)
         salida.append({
             'id': re.sub(r'[^a-z0-9]+', '-', inf.lower().replace('’', '-')).strip('-'),
             'infinitivo': inf,

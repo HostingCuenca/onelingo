@@ -25,12 +25,12 @@ Actualizado: 2026-10-05 · DEC-034. Mismo método que el francés (`PLAN_FRANCES
 |---|---|---|
 | ES-1 | Voces nativas latinoamericanas (narradora y narrador) en `NATIVAS.es` de `backend/src/lib/voz.ts`; hoy el español usa las voces por defecto | pendiente (deploy de backend: requiere autorización) |
 | ES-2 | Fundamentos: revisión. Hecho el 03-10: Emma es de Estados Unidos (no de Canadá) y el jefe de la unidad 4 es el señor Torres (no García, el apellido de Emma) | revisión parcial |
-| ES-3 | Nivel 0 corto «Leer y pronunciar» (5 unidades: vocales, letras que cambian para un anglohablante —h, j/g, ll/y, ñ, r/rr, c/z/qu, b/v, d—, acento y tilde, diptongos, prueba). La ortografía española es transparente: basta una versión corta | propuesta |
-| ES-4 | Las 50 situaciones × 3 tramos en español (`assets/contenido/es/situaciones.json`) | pendiente |
-| ES-5 | «Mis verbos» en español (`verbos-es.json`, unos 120 verbos con 6 personas y los tiempos de A1–B2) | pendiente |
+| ES-3 | Nivel 0 corto «Leer y pronunciar» (5 unidades: vocales, letras que cambian para un anglohablante —h, j/g, ll/y, ñ, r/rr, c/z/qu, b/v, d—, acento y tilde, diptongos, prueba). La ortografía española es transparente: basta una versión corta | **hecho** el 05-10: 5 unidades, 18 lecciones, 16 sonidos, apoyo solo en inglés (`assets/contenido/es/nivel0/`, revisión GO) |
+| ES-4 | Las 50 situaciones × 3 tramos en español (`assets/contenido/es/situaciones.json`) | **hecho** el 05-10: 50 situaciones × 3 tramos en 5 lotes con revisión GO (`tools/contenido/situaciones/es/`); la copia del backend requiere deploy |
+| ES-5 | «Mis verbos» en español (`verbos-es.json`, unos 120 verbos con 6 personas y los tiempos de A1–B2) | **hecho** el 05-10: 124 verbos, 7 tiempos (presente, pretérito, imperfecto, futuro, condicional, perfecto, subjuntivo), revisión GO con conjugador independiente |
 | ES-6 | Plan N1–N10: 500 fichas con plan de ejercicios, revisión del plan y página para aprobar | aprobado el 03-10 (10 GO, `revision-nX.md`); cronología N9–N10 fijada en `MAPA.md` |
 | ES-7 | N1 (A1): piloto de modelos en B1 (Sonnet 21 correcciones vs Haiku 53 → autor Sonnet), después B2–B10 en paralelo con revisión GO; se retira `a1-1` | **hecho** el 03-10 (50 clases, 10 GO, integrado; falta deploy) |
-| ES-8 | Prueba de ubicación v2 en español (banco por nivel) | después |
+| ES-8 | Prueba de ubicación v2 en español (banco por nivel) | **hecho** el 05-10: 180 ítems (N1–N10), 10 revisiones GO (`assets/contenido/es/diagnostico-v2.json`) |
 | ES-9 | N2–N10 con el mismo flujo (10 autores Sonnet en paralelo, revisor por bloque, integrar) | N2–N10 **hechos** (N2–N9 el 03-10, N10 el 05-10; 500 clases integradas, falta deploy) |
 
 **Validador (hecho el 03-10):** `curso.json` del español lleva `vocabularioEstricto` y `reglasAutoria`. Con esta última, `tools/validar_ruta.py` exige en las clases del plan (`es.nX.cNN`) lo que causó cerca del 30 % de las correcciones del francés: tablas de lectura de ≤ 15 filas y sin nombres propios ni celdas sueltas, opciones de comprensión en español desde N3, extensión de la lectura por nivel y apellidos del reparto bien usados.

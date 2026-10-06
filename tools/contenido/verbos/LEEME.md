@@ -37,3 +37,24 @@ Cada verbo trae explícitas sus **tablas**, sin deducirlas:
 
 - **Personas, en orden:** je, tu, il/elle/on, nous, vous, ils/elles. La forma va sin pronombre; la app escribe j’ ante vocal o h muda.
 - **Tipo:** `regular` solo para los -er regulares y los -ir del tipo finir; los demás son `irregular`.
+
+## Español: `verbos-es.json` (curso para anglohablantes)
+
+Como el francés, con tablas explícitas, pero el apoyo es **solo inglés** y el participio va aparte:
+
+```json
+{"infinitivo": "ir", "traduccion": {"en": "to go"}, "tipo": "irregular", "nivel": 1, "participio": "ido",
+ "tablas": {
+   "presente":    ["voy", "vas", "va", "vamos", "van", "van"],
+   "preterito":   ["fui", "fuiste", "fue", "fuimos", "fueron", "fueron"],
+   "imperfecto":  ["iba", "ibas", "iba", "íbamos", "iban", "iban"],
+   "futuro":      ["iré", "irás", "irá", "iremos", "irán", "irán"],
+   "condicional": ["iría", "irías", "iría", "iríamos", "irían", "irían"],
+   "perfecto":    ["he ido", "has ido", "ha ido", "hemos ido", "han ido", "han ido"],
+   "subjuntivo":  ["vaya", "vayas", "vaya", "vayamos", "vayan", "vayan"]
+ },
+ "ejemplo": {"meta": "Voy al mercado los sábados.", "traduccion": {"en": "I go to the market on Saturdays."}}}
+```
+
+- **Personas, en orden:** yo, tú, él/ella/usted, nosotros/nosotras, ustedes, ellos/ellas (sin vosotros: la quinta persona es «ustedes» y coincide con la sexta). La forma va sin pronombre; los reflexivos llevan el pronombre en la forma («me levanto», «te levantas», «se levanta», «nos levantamos», «se levantan», «se levantan»; «me he levantado»).
+- **Tipo:** `regular` solo si las siete tablas siguen el modelo -ar/-er/-ir sin cambios de raíz ni de ortografía; los de cambio vocálico (pensar, poder, pedir), ortográficos (buscar, llegar, coger) e irregulares son `irregular`. `reflexivo` no es tipo: lo marca el infinitivo en -se.
