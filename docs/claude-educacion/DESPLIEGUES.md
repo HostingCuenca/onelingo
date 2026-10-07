@@ -584,3 +584,13 @@ Commit: `3bae9e8` (build desde worktree limpio) · `main.dart.js` sha256 `189c62
 Pruebas: Flutter en el worktree, todas en verde salvo `ruta_recorrido_test` «N1 activo entra al recorrido editorial», que falló por tiempo con la máquina cargada y pasa al correrlo solo (5/5); `validar_ruta.py` 10 idiomas, 0 errores.
 Backup: `/var/www/onelingo/backups/20261007-edu-48-chip-idioma/web-anterior` (= edu-47). Verificado: `/`, `/api/salud` y `main.dart.js` 200 con el sha256 del build; `it/nivel-1.json` ya no se sirve (404); lock liberado. La web anterior queda también en `/var/www/onelingo/web-saliente-20261007-edu-48-chip-idioma` (enlaces duros; se puede borrar, igual que `web-saliente-20261006-edu-47-aleman`).
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-48-chip-idioma/web-retirada-post && cp -al backups/20261007-edu-48-chip-idioma/web-anterior web'`
+
+## Release: 20261007-edu-49-italiano
+
+Fecha: 2026-10-07 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat (plan de la semana: publicar cada idioma al 100 %). Solo web; sin cambios de backend ni reinicio.
+Contenido: italiano esencial, Fundamentos (f0) + N1–N4 (200 clases), prueba de ubicación N1–N4 y Nivel 0. N5–N10 aparecen como «Próximamente».
+Commit: `fd2cc6e` (incluye `bee468b`; build desde worktree limpio) · `main.dart.js` sha256 `951aab309ecfa276…` (API_URL prod).
+Pruebas: Flutter completo en el worktree, 328 en verde. `ruta_recorrido_test` «N1 activo entra al recorrido editorial» falló por tiempo con la máquina cargada; ya fallaba igual en `3bae9e8`, y al repetirlo pasa el archivo entero. `validar_ruta.py`: 10 idiomas, 0 errores.
+Pendiente: las voces nativas Luna/Carmelo (`backend/src/lib/voz.ts`, en `bee468b`) no están desplegadas porque requieren reiniciar PM2 con autorización. Mientras tanto, el italiano usa la voz por defecto.
+Backup: `/var/www/onelingo/backups/20261007-edu-49-italiano/web-anterior` (= edu-48). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `it/ruta/curso.json`, `it/ruta/n4-b10.json` y `it/diagnostico-v2.json` responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-49-italiano`.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-49-italiano/web-retirada-post && cp -al backups/20261007-edu-49-italiano/web-anterior web'`
