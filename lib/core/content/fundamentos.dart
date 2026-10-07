@@ -16,8 +16,9 @@ import 'idiomas.dart' show soloNativo;
 /// Contenido: `assets/contenido/<idioma>/nivel-0.json` (semilla `tools/contenido/semilla/<idioma>-nivel-0.txt`).
 /// Idiomas en reconstrucción cuyo Fundamentos es solo la ruta f0
 /// (`assets/contenido/<idioma>/ruta/f0.json`): su `nivel-0.json` antiguo se
-/// retiró al reiniciarlos desde cero (portugués, DEC-035) y no se resucita.
-const idiomasSoloRutaF0 = {'pt'};
+/// retiró al reiniciarlos desde cero (portugués, DEC-035; italiano, versión
+/// esencial de 10-2026) y no se resucita.
+const idiomasSoloRutaF0 = {'pt', 'it'};
 
 const nivelFundamentos = Level(
   numero: 0,

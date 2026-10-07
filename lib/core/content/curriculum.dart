@@ -430,7 +430,7 @@ void invalidarCacheContenido(String idioma) {
 List<Unit> unidadesDe(int n) {
   final idm = idiomaContenido;
   return _cacheUnidades.putIfAbsent('$idm-$n', () {
-    // Idiomas sin ruta nueva (it, ja, ko, ru, zh): sin lecciones antiguas;
+    // Idiomas sin ruta nueva (ja, ko, ru, zh): sin lecciones antiguas;
     // la app muestra «En preparación» (tutor, situaciones y práctica siguen).
     if (!idiomasConRuta.contains(idm)) return const <Unit>[];
     // 0) Fundamentos (nivel 0): tramo previo para empezar de cero.

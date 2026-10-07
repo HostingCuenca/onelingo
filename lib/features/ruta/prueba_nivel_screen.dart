@@ -12,6 +12,7 @@ import '../../core/efectos.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import 'item_view.dart';
+import '../../shared/widgets/romanizacion.dart';
 import '../../core/i18n/i18n.dart';
 
 /// Prueba para saltar un nivel: 20 preguntas de evaluación repartidas por
@@ -34,6 +35,9 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
   int indice = 0, aciertos = 0;
   bool respondida = false;
 
+  /// Romanización: null = la del nivel (visible hasta N2, oculta desde N3).
+  bool? verRom;
+
   void _empezar(RutaCargada ruta) {
     setState(() {
       items = itemsPruebaNivel(ruta, widget.nivel, Random());
@@ -54,25 +58,26 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
     }
     final aprobada =
         aciertos >= aciertosPruebaNivel * items.length / preguntasPruebaNivel;
-    ref
-        .read(progressProvider.notifier)
-        .registrarPractica(ClaveRuta.pruebaNivel(ruta.curso.idioma, widget.nivel), {
-          'idioma': ruta.curso.idioma,
-          'skill': 'evaluacion',
-          'tipo': 'prueba_nivel',
-          'nivel': widget.nivel,
-          'aciertos': aciertos,
-          'total': items.length,
-          // Una vez aprobada queda aprobada aunque se repita después.
-          'aprobada':
-              aprobada ||
-              pruebaNivelAprobada(
-                ref.read(progressProvider).practicas,
-                ruta.curso.idioma,
-                widget.nivel,
-              ),
-          'correcta': aprobada,
-        });
+    ref.read(progressProvider.notifier).registrarPractica(
+      ClaveRuta.pruebaNivel(ruta.curso.idioma, widget.nivel),
+      {
+        'idioma': ruta.curso.idioma,
+        'skill': 'evaluacion',
+        'tipo': 'prueba_nivel',
+        'nivel': widget.nivel,
+        'aciertos': aciertos,
+        'total': items.length,
+        // Una vez aprobada queda aprobada aunque se repita después.
+        'aprobada':
+            aprobada ||
+            pruebaNivelAprobada(
+              ref.read(progressProvider).practicas,
+              ruta.curso.idioma,
+              widget.nivel,
+            ),
+        'correcta': aprobada,
+      },
+    );
     aprobada ? Efectos.completado() : Efectos.incorrecto();
     setState(() => fase = _Fase.resultado);
   }
@@ -120,7 +125,11 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
           children: [
-            const Icon(Icons.workspace_premium_rounded, color: OL.morado, size: 64),
+            const Icon(
+              Icons.workspace_premium_rounded,
+              color: OL.morado,
+              size: 64,
+            ),
             const SizedBox(height: 12),
             Text(
               tr('¿Ya dominas {nivel}?', {'nivel': nombreNivel}),
@@ -157,6 +166,10 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
 
   Widget _pregunta(RutaCargada ruta, ProgressState s) {
     final item = items[indice];
+    final nivelInterno = ruta.curso.niveles
+        .where((n) => n.id == widget.nivel)
+        .firstOrNull
+        ?.nivelInterno;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -185,6 +198,13 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
             guiada: false,
             permitirReintento: false,
             lumo: false,
+            mostrarRom: verRom ?? romVisiblePorDefecto(nivelInterno),
+            onAlternarRom: romVisiblePorDefecto(nivelInterno)
+                ? null
+                : () => setState(
+                    () => verRom =
+                        !(verRom ?? romVisiblePorDefecto(nivelInterno)),
+                  ),
             onComprobado: (correcta, _) {
               if (respondida) return;
               respondida = true;
@@ -221,7 +241,10 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
                     ? tr('¡Superaste {nivel}!', {'nivel': nombreNivel})
                     : tr('Todavía no'),
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
+                style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
@@ -230,12 +253,17 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
                   'total': items.length,
                 }),
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: 12),
               Text(
                 aprobada
-                    ? tr('Este nivel queda superado y se abre el siguiente. Sus clases siguen disponibles para repasar.')
+                    ? tr(
+                        'Este nivel queda superado y se abre el siguiente. Sus clases siguen disponibles para repasar.',
+                      )
                     : tr(
                         'Necesitas {aciertos}. Sigue con las clases del nivel: cada una te acerca, y puedes repetir la prueba cuando quieras.',
                         {'aciertos': aciertosPruebaNivel},

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
 import '../../core/efectos.dart';
+import '../../shared/widgets/romanizacion.dart';
 
 enum EstadoOpcion { normal, seleccionada, correcta, incorrecta }
 
@@ -17,8 +18,12 @@ class OpcionRespuesta extends StatefulWidget {
     required this.estado,
     required this.onTap,
     this.compacta = false,
+    this.rom,
   });
   final String texto;
+
+  /// Romanización pequeña y gris bajo el texto (ru, ko, ja, zh).
+  final String? rom;
   final EstadoOpcion estado;
   final VoidCallback? onTap;
 
@@ -60,7 +65,12 @@ class _OpcionRespuestaState extends State<OpcionRespuesta>
 
   (Color fondo, Color borde, Color pedestal, Color texto) get _colores =>
       switch (widget.estado) {
-        EstadoOpcion.normal => (OL.blanco, OL.grisClaro, OL.grisClaro, OL.texto),
+        EstadoOpcion.normal => (
+          OL.blanco,
+          OL.grisClaro,
+          OL.grisClaro,
+          OL.texto,
+        ),
         EstadoOpcion.seleccionada => (
           OL.moradoSuave,
           OL.morado,
@@ -87,6 +97,14 @@ class _OpcionRespuestaState extends State<OpcionRespuesta>
     final activa = widget.onTap != null;
     final hundida = _presionada && activa;
     final radio = widget.compacta ? 14.0 : 16.0;
+    final textoPrincipal = Text(
+      widget.texto,
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w800,
+        color: colorTexto,
+      ),
+    );
     final tarjeta = AnimatedContainer(
       duration: const Duration(milliseconds: 90),
       margin: EdgeInsets.only(top: hundida ? 3 : 0),
@@ -105,14 +123,18 @@ class _OpcionRespuestaState extends State<OpcionRespuesta>
           borderRadius: BorderRadius.circular(radio),
           border: Border.all(color: borde, width: 2),
         ),
-        child: Text(
-          widget.texto,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w800,
-            color: colorTexto,
-          ),
-        ),
+        child: widget.rom == null
+            ? textoPrincipal
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: widget.compacta
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                children: [
+                  textoPrincipal,
+                  TextoRom(widget.rom, tamano: widget.compacta ? 12 : 14),
+                ],
+              ),
       ),
     );
     return Padding(

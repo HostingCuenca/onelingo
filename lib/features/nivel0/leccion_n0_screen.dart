@@ -13,6 +13,7 @@ import '../../core/voz.dart';
 import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
+import '../../shared/widgets/romanizacion.dart';
 import 'palabra_color.dart';
 import '../../core/i18n/i18n.dart';
 
@@ -57,14 +58,17 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
       setState(() => indice++);
       return;
     }
-    ref.read(progressProvider.notifier).registrarPractica(claveN0(ref.read(progressProvider).idiomaMeta, l.id), {
-      'completa': true,
-      'correcta': true,
-      'aciertos': aciertos,
-      'total': respondidas,
-      'skill': 'lectura',
-      'nivel0': true,
-    });
+    ref.read(progressProvider.notifier).registrarPractica(
+      claveN0(ref.read(progressProvider).idiomaMeta, l.id),
+      {
+        'completa': true,
+        'correcta': true,
+        'aciertos': aciertos,
+        'total': respondidas,
+        'skill': 'lectura',
+        'nivel0': true,
+      },
+    );
     final n = ref.read(nivel0Provider).valueOrNull;
     if (n != null &&
         siguienteN0(n, ref.read(progressProvider).practicas) == null) {
@@ -285,11 +289,15 @@ class _TarjetaPalabra extends StatelessWidget {
     required this.palabra,
     this.seleccionada = false,
     this.onTap,
+    this.mostrarRom = true,
   });
   final Nivel0 n;
   final Palabra palabra;
   final bool seleccionada;
   final VoidCallback? onTap;
+
+  /// En los pasos de escucha la romanización delataría la respuesta.
+  final bool mostrarRom;
   static const tamano = 30.0;
 
   @override
@@ -308,6 +316,7 @@ class _TarjetaPalabra extends StatelessWidget {
           if (palabra.marcado.isNotEmpty) ...[
             const SizedBox(height: 6),
             PalabraColor(palabra.marcado, nivel: n, tamano: tamano),
+            if (mostrarRom) TextoRom(palabra.rom, alineacion: TextAlign.center),
           ],
           if (palabra.traduccion != null)
             Text(
@@ -409,10 +418,7 @@ class _PasoMira extends StatelessWidget {
     final sonido = paso.sonido == null ? null : n.porId[paso.sonido];
     final texto = textoPlano(paso.marcado);
     return _Marco(
-      boton: BotonPrincipal(
-        onPressed: onSeguir,
-        child: Text(tr('SIGUIENTE')),
-      ),
+      boton: BotonPrincipal(onPressed: onSeguir, child: Text(tr('SIGUIENTE'))),
       children: [
         if (sonido != null)
           Center(
@@ -437,6 +443,7 @@ class _PasoMira extends StatelessWidget {
           Center(child: ImagenPalabra(sonido.emoji, tamano: 110)),
         const SizedBox(height: 8),
         PalabraColor(paso.marcado, nivel: n, tamano: 64),
+        TextoRom(paso.rom, tamano: 20, alineacion: TextAlign.center),
         const SizedBox(height: 12),
         _BotonesAudio(
           onNormal: () => decir(n, texto),
@@ -547,6 +554,7 @@ class _PasoMezclaState extends State<_PasoMezcla> {
           ),
           textAlign: TextAlign.center,
         ),
+        TextoRom(widget.paso.rom, tamano: 18, alineacion: TextAlign.center),
         if (widget.paso.traduccion != null)
           Text(
             widget.paso.traduccion!,
@@ -645,6 +653,7 @@ class _PasoRepiteState extends State<_PasoRepite> {
       children: [
         _titulo(tr('Escucha y repite')),
         PalabraColor(widget.paso.marcado, nivel: widget.n, tamano: 46),
+        TextoRom(widget.paso.rom, tamano: 18, alineacion: TextAlign.center),
         if (widget.paso.traduccion != null)
           Text(
             widget.paso.traduccion!,
@@ -820,6 +829,26 @@ class _PasoElegirState extends State<_PasoElegir> {
       ? p.textos.indexOf((p.j['letra'] as String?) ?? '')
       : p.correcta;
 
+  /// Pasos de reconocer lo que se oye: la romanización de las opciones
+  /// delataría la respuesta y solo aparece al corregir.
+  bool get esEscucha => const {
+    'escucha_elige',
+    'toca_sonido',
+    'escucha_letra',
+    'deletreo',
+  }.contains(p.tipo);
+
+  /// Romanización de la respuesta correcta (panel de resultado).
+  String? get romCorrecta => switch (p.tipo) {
+    'escucha_letra' => p.letraRom ?? p.romOpcion(correcta),
+    'deletreo' => p.rom,
+    'elige_significado' => p.rom,
+    _ =>
+      correcta >= 0 && correcta < p.opciones.length
+          ? p.opciones[correcta].rom
+          : null,
+  };
+
   void oir({bool lento = false}) {
     if (audio.isEmpty) return;
     decir(widget.n, audio, lento: lento, letra: p.tipo == 'escucha_letra');
@@ -845,14 +874,21 @@ class _PasoElegirState extends State<_PasoElegir> {
         onTap: () => setState(() => elegida = i),
         borde: sel ? OL.morado : null,
         color: sel ? OL.moradoSuave : OL.blanco,
-        child: Text(
-          t,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: p.tipo == 'elige_significado' ? 20 : 34,
-            fontWeight: FontWeight.w900,
-            color: OL.morado,
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              t,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: p.tipo == 'elige_significado' ? 20 : 34,
+                fontWeight: FontWeight.w900,
+                color: OL.morado,
+              ),
+            ),
+            if (!esEscucha)
+              TextoRom(p.romOpcion(i), alineacion: TextAlign.center),
+          ],
         ),
       );
     }
@@ -861,6 +897,7 @@ class _PasoElegirState extends State<_PasoElegir> {
       n: widget.n,
       palabra: o,
       seleccionada: sel,
+      mostrarRom: !esEscucha,
       onTap: () {
         setState(() => elegida = i);
         // Tocar el sonido: al tocar se oye la palabra (es parte de la tarea).
@@ -898,6 +935,7 @@ class _PasoElegirState extends State<_PasoElegir> {
         if (!ok)
           Text(tr('La respuesta es:'), style: const TextStyle(fontSize: 16)),
         buena,
+        TextoRom(romCorrecta, tamano: 16),
         if (p.tipo == 'lee' && p.traduccion != null)
           Text(
             '«${p.traduccion}»',
@@ -938,6 +976,7 @@ class _PasoElegirState extends State<_PasoElegir> {
         ],
         if (p.tipo == 'elige_significado' || p.tipo == 'lee') ...[
           _FraseTocable(n: widget.n, marcado: p.marcado),
+          TextoRom(p.rom, tamano: 18, alineacion: TextAlign.center),
           const SizedBox(height: 10),
         ],
         if (audio.isNotEmpty) ...[
@@ -1019,11 +1058,19 @@ class _PasoConstruyeState extends State<_PasoConstruye> {
       onPressed: formada.length == objetivo.length
           ? () => widget.onRespuesta(
               formada.toLowerCase() == objetivo.toLowerCase(),
-              PalabraColor(
-                widget.paso.marcado,
-                nivel: widget.n,
-                tamano: 36,
-                centrar: false,
+              // Las fichas no muestran romanización (delatarían lo que se
+              // oye): solo la palabra corregida la lleva.
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  PalabraColor(
+                    widget.paso.marcado,
+                    nivel: widget.n,
+                    tamano: 36,
+                    centrar: false,
+                  ),
+                  TextoRom(widget.paso.rom, tamano: 16),
+                ],
               ),
             )
           : null,
@@ -1146,11 +1193,17 @@ class _PasoCambiaState extends State<_PasoCambia> {
             ? null
             : () => widget.onRespuesta(
                 elegida == a[pos],
-                PalabraColor(
-                  (widget.paso.j['a'] as String?) ?? a,
-                  nivel: widget.n,
-                  tamano: 36,
-                  centrar: false,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    PalabraColor(
+                      (widget.paso.j['a'] as String?) ?? a,
+                      nivel: widget.n,
+                      tamano: 36,
+                      centrar: false,
+                    ),
+                    TextoRom(widget.paso.aRom, tamano: 16),
+                  ],
                 ),
               ),
         child: Text(tr('COMPROBAR')),
@@ -1162,6 +1215,7 @@ class _PasoCambiaState extends State<_PasoCambia> {
           nivel: widget.n,
           tamano: 40,
         ),
+        TextoRom(widget.paso.deRom, tamano: 16, alineacion: TextAlign.center),
         const Center(
           child: Icon(Icons.arrow_downward_rounded, size: 36, color: OL.gris),
         ),

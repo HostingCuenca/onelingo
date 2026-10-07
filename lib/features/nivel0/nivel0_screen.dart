@@ -7,6 +7,7 @@ import '../../core/nivel0/nivel0.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
+import '../../shared/widgets/romanizacion.dart';
 import 'palabra_color.dart';
 import '../../core/i18n/i18n.dart';
 
@@ -34,9 +35,7 @@ class Nivel0Screen extends ConsumerWidget {
             Center(child: Text(tr('No se pudo cargar el Nivel 0.'))),
         data: (n0) {
           if (n0 == null) {
-            return Center(
-              child: Text(tr('Este idioma aún no tiene Nivel 0.')),
-            );
+            return Center(child: Text(tr('Este idioma aún no tiene Nivel 0.')));
           }
           final n = n0;
           final hechas = n.lecciones
@@ -198,7 +197,6 @@ class _FilaLeccion extends StatelessWidget {
 class MapaSonidosScreen extends ConsumerWidget {
   const MapaSonidosScreen({super.key});
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nivel = ref.watch(nivel0Provider);
@@ -207,13 +205,10 @@ class MapaSonidosScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(tr('Mapa de sonidos'))),
       body: nivel.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, _) =>
-            Center(child: Text(tr('No se pudo cargar el mapa.'))),
+        error: (_, _) => Center(child: Text(tr('No se pudo cargar el mapa.'))),
         data: (n0) {
           if (n0 == null) {
-            return Center(
-              child: Text(tr('Este idioma aún no tiene Nivel 0.')),
-            );
+            return Center(child: Text(tr('Este idioma aún no tiene Nivel 0.')));
           }
           final n = n0;
           // Unidad más alta con alguna lección completa.
@@ -315,6 +310,7 @@ class _TarjetaSonido extends StatelessWidget {
                 color: s.grupo == 'fantasma' ? OL.gris : s.color,
               ),
             ),
+            TextoRom(s.anclaRom, tamano: 12, alineacion: TextAlign.center),
             Text(
               s.colorNombre,
               style: const TextStyle(fontSize: 12, color: OL.gris),

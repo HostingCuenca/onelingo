@@ -2,7 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:onelingo/core/aprendizaje/cargador.dart';
 import 'package:onelingo/core/aprendizaje/integridad.dart';
 import 'package:onelingo/core/aprendizaje/modelos.dart';
-import 'package:onelingo/core/aprendizaje/providers.dart' show idiomasConRuta;
+import 'package:onelingo/core/aprendizaje/dominio.dart' show nivelPublicadoMaximo;
+import 'package:onelingo/core/aprendizaje/providers.dart' show idiomasConRuta, nivelAlumnoEnRuta;
 import 'package:onelingo/core/content/contenido_json.dart';
 import 'package:onelingo/core/content/curriculum.dart';
 import 'package:onelingo/core/content/fundamentos.dart';
@@ -107,8 +108,53 @@ void main() {
     expect(idiomasConRuta, contains('de'));
   });
 
-  test('it, ja, ko, ru y zh no tienen Fundamentos antiguos (curso en preparación)', () async {
-    for (final idm in ['it', 'ja', 'ko', 'ru', 'zh']) {
+  test('el italiano (versión esencial): ruta f0 (8 unidades) y solo N1–N4 publicados', () async {
+    expect(idiomasSoloRutaF0, contains('it'));
+    await ContenidoJson.precargar('it');
+    expect(Fundamentos.disponible('it'), isFalse); // sin nivel-0.json antiguo
+    final cargador = CargadorRuta();
+    final ruta = await cargador.cargar('it');
+    expect(ruta, isNotNull);
+    expect(cargador.modulosConError, isEmpty);
+    final f0 = ruta!.delNivel('f0');
+    expect(f0, hasLength(8));
+    expect(f0.first.id, 'it.f0.primo-contatto');
+    expect(f0.last.id, 'it.f0.presentarsi');
+    expect(ruta.delNivel('a1-1'), isEmpty);
+    expect(ruta.curso.idiomasApoyo, ['es', 'en']);
+    expect(problemasDeContenido(ruta, formasVerbales: await cargador.formasVerbales('it')), isEmpty);
+    final publicados = [
+      for (final n in ruta.curso.niveles)
+        if (n.estado == EstadoNivel.publicado) n.id,
+    ];
+    // Versión esencial: N1–N4 (50 clases por nivel); N5–N10 aún no existen
+    // en el curso, así que la app los muestra «Próximamente» y no se juegan.
+    expect(publicados, ['f0', for (var i = 1; i <= 4; i++) 'n$i']);
+    for (var i = 5; i <= 10; i++) {
+      expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
+    }
+    expect(nivelPublicadoMaximo(ruta), 4);
+    var previa = f0.last.id;
+    for (final nivel in publicados.skip(1)) {
+      final clases = ruta.delNivel(nivel);
+      expect(clases, hasLength(50), reason: nivel);
+      for (final u in clases) {
+        expect(u.id, startsWith('it.$nivel.c'), reason: u.id);
+        expect(u.prerequisitos, [previa], reason: u.id);
+        previa = u.id;
+      }
+    }
+    expect(idiomasConRuta, contains('it'));
+    const s = ProgressState(idiomaMeta: 'it', fundamentos: true);
+    expect(s.fundamentosPendientes, isTrue);
+    expect(s.nivel0Pendiente, isTrue);
+    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N4.
+    const alto = ProgressState(idiomaMeta: 'it', nivelInicial: 8);
+    expect(nivelAlumnoEnRuta(ruta, alto), 4);
+  });
+
+  test('ja, ko, ru y zh no tienen Fundamentos antiguos (curso en preparación)', () async {
+    for (final idm in ['ja', 'ko', 'ru', 'zh']) {
       await ContenidoJson.precargar(idm);
       expect(Fundamentos.disponible(idm), isFalse, reason: idm);
       idiomaContenido = idm;

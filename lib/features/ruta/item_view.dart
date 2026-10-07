@@ -12,6 +12,7 @@ import '../../shared/widgets/feedback_experience.dart';
 import '../../shared/widgets/lumo.dart';
 import '../../shared/widgets/widgets.dart';
 import 'opcion_respuesta.dart';
+import '../../shared/widgets/romanizacion.dart';
 import '../../core/i18n/i18n.dart';
 
 /// Reproduce un texto del idioma meta en su idioma: voz de la nube con el
@@ -75,7 +76,14 @@ class ItemView extends StatefulWidget {
     this.revisarConIa,
     this.botonFijo = false,
     this.encabezado = const [],
+    this.mostrarRom = true,
+    this.onAlternarRom,
   });
+
+  /// Romanización visible (N1–N2). Desde N3 llega oculta y [onAlternarRom]
+  /// pone el botón «Ver romanización» (docs/claude-educacion/ROMANIZACION.md).
+  final bool mostrarRom;
+  final VoidCallback? onAlternarRom;
 
   /// Lumo acompaña (escucha, pista, panel). La prueba de nivel lo desactiva.
   final bool lumo;
@@ -161,6 +169,25 @@ class _ItemViewState extends State<ItemView> {
 
   Item get item => widget.item;
   String t(TextoApoyo? texto) => texto?.en(widget.cadena) ?? '';
+
+  /// Romanización que se ve ahora (null si está oculta o no hay).
+  String? rom(String? r) => widget.mostrarRom ? r : null;
+
+  /// Tarjeta con un texto del ítem y, debajo, su romanización.
+  Widget tarjetaTexto(String texto, String? romanizacion) => Padding(
+    padding: const EdgeInsets.only(bottom: 16),
+    child: Tarjeta(
+      color: OL.moradoSuave,
+      sombra: false,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(texto, style: const TextStyle(fontSize: 17, height: 1.4)),
+          TextoRom(rom(romanizacion)),
+        ],
+      ),
+    ),
+  );
 
   @override
   void dispose() {
@@ -423,9 +450,11 @@ class _ItemViewState extends State<ItemView> {
     VoidCallback? onTap, {
     bool? acierto,
     bool compacta = false,
+    String? romanizacion,
   }) => OpcionRespuesta(
     texto: texto,
     compacta: compacta,
+    rom: rom(romanizacion),
     estado: acierto == true
         ? EstadoOpcion.correcta
         : acierto == false
@@ -494,17 +523,7 @@ class _ItemViewState extends State<ItemView> {
         return [
           if (item.audio != null) filaAudio(tr('Escuchar el audio')),
           if (item.audio == null && item.texto?.trim().isNotEmpty == true)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Tarjeta(
-                color: OL.moradoSuave,
-                sombra: false,
-                child: Text(
-                  item.texto!,
-                  style: const TextStyle(fontSize: 17, height: 1.4),
-                ),
-              ),
-            ),
+            tarjetaTexto(item.texto!, item.textoRom),
           if (item.pregunta != null)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
@@ -519,12 +538,18 @@ class _ItemViewState extends State<ItemView> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Text(
-                        item.pregunta!,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.pregunta!,
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                          TextoRom(rom(item.preguntaRom), tamano: 15),
+                        ],
                       ),
                     ),
                     const Padding(
@@ -551,6 +576,11 @@ class _ItemViewState extends State<ItemView> {
               acierto: bloqueado && (i == item.indiceRespuesta || i == elegido)
                   ? i == item.indiceRespuesta
                   : null,
+              // En «escuchar» la romanización de las opciones delataría lo
+              // que se oye: aparece al corregir.
+              romanizacion: item.formato == FormatoItem.escuchar && !bloqueado
+                  ? null
+                  : item.romOpcion(i),
             ),
         ];
       case FormatoItem.ordenar:
@@ -580,6 +610,7 @@ class _ItemViewState extends State<ItemView> {
                     bloqueado ? null : () => setState(() => orden.remove(i)),
                     acierto: bloqueado ? correcta : null,
                     compacta: true,
+                    romanizacion: item.romToken(i),
                   ),
               ],
             ),
@@ -596,6 +627,7 @@ class _ItemViewState extends State<ItemView> {
                     false,
                     bloqueado ? null : () => setState(() => orden.add(i)),
                     compacta: true,
+                    romanizacion: item.romToken(i),
                   ),
             ],
           ),
@@ -605,17 +637,7 @@ class _ItemViewState extends State<ItemView> {
           return [
             ...audioEnunciado(),
             if (item.texto?.trim().isNotEmpty == true)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Tarjeta(
-                  color: OL.moradoSuave,
-                  sombra: false,
-                  child: Text(
-                    item.texto!,
-                    style: const TextStyle(fontSize: 17, height: 1.4),
-                  ),
-                ),
-              ),
+              tarjetaTexto(item.texto!, item.textoRom),
             for (var i = 0; i < item.textosPartes.length; i++) ...[
               Text(
                 '${i + 1}. ${item.textosPartes[i]}',
@@ -652,20 +674,20 @@ class _ItemViewState extends State<ItemView> {
         final frase = corte < 0
             ? textoCompleto
             : textoCompleto.substring(corte + 2);
+        // La romanización se parte igual que el texto (lectura / frase).
+        final romCompleto = item.textoRom;
+        final corteRom = romCompleto?.lastIndexOf('\n\n') ?? -1;
+        final romLectura = corteRom < 0 || lectura == null
+            ? null
+            : romCompleto!.substring(0, corteRom);
+        final romFrase = romCompleto == null
+            ? null
+            : corteRom < 0
+            ? (lectura == null ? romCompleto : null)
+            : romCompleto.substring(corteRom + 2);
         return [
           ...audioEnunciado(),
-          if (lectura != null)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 14),
-              child: Tarjeta(
-                color: OL.moradoSuave,
-                sombra: false,
-                child: Text(
-                  lectura,
-                  style: const TextStyle(fontSize: 17, height: 1.4),
-                ),
-              ),
-            ),
+          if (lectura != null) tarjetaTexto(lectura, romLectura),
           Text(
             frase.replaceAll(
               '___',
@@ -673,15 +695,19 @@ class _ItemViewState extends State<ItemView> {
             ),
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
           ),
+          TextoRom(rom(romFrase), tamano: 16),
           const SizedBox(height: 16),
           if (item.opciones.isNotEmpty)
-            for (final o in [for (final i in ordenOpciones) item.opciones[i]])
+            for (final i in ordenOpciones)
               opcionBoton(
-                textoOpcion(o),
-                opcionCompletar == textoOpcion(o),
+                textoOpcion(item.opciones[i]),
+                opcionCompletar == textoOpcion(item.opciones[i]),
                 bloqueado
                     ? null
-                    : () => setState(() => opcionCompletar = textoOpcion(o)),
+                    : () => setState(
+                        () => opcionCompletar = textoOpcion(item.opciones[i]),
+                      ),
+                romanizacion: item.romOpcion(i),
               )
           else
             campoTexto(),
@@ -689,17 +715,7 @@ class _ItemViewState extends State<ItemView> {
       case FormatoItem.escribir:
         return [
           if (item.audio == null && item.texto?.trim().isNotEmpty == true)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Tarjeta(
-                color: OL.moradoSuave,
-                sombra: false,
-                child: Text(
-                  item.texto!,
-                  style: const TextStyle(fontSize: 17, height: 1.4),
-                ),
-              ),
-            ),
+            tarjetaTexto(item.texto!, item.textoRom),
           if (item.audio != null) filaAudio(tr('Escuchar y escribir')),
           campoTexto(),
           if (item.abierta)
@@ -723,17 +739,7 @@ class _ItemViewState extends State<ItemView> {
       case FormatoItem.relacionar:
         return [
           if (item.texto?.trim().isNotEmpty == true)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Tarjeta(
-                color: OL.moradoSuave,
-                sombra: false,
-                child: Text(
-                  item.texto!,
-                  style: const TextStyle(fontSize: 17, height: 1.4),
-                ),
-              ),
-            ),
+            tarjetaTexto(item.texto!, item.textoRom),
           if (errores > 0 && !bloqueado)
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
@@ -759,6 +765,7 @@ class _ItemViewState extends State<ItemView> {
                             ? null
                             : () => setState(() => izquierda = i),
                         acierto: emparejados.contains(i) ? true : null,
+                        romanizacion: item.romPar(i),
                       ),
                   ],
                 ),
@@ -803,6 +810,11 @@ class _ItemViewState extends State<ItemView> {
         t(item.consigna),
         style: const TextStyle(fontSize: 21, fontWeight: FontWeight.w800),
       ),
+      if (widget.onAlternarRom != null && item.tieneRom)
+        BotonRomanizacion(
+          visible: widget.mostrarRom,
+          onPressed: widget.onAlternarRom!,
+        ),
       if (item.imagen != null) ...[
         const SizedBox(height: 14),
         Semantics(

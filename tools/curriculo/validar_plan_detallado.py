@@ -10,7 +10,7 @@ Uso:
 Por idioma (``POR_IDIOMA``): lengua exigida en la situación, regex de español
 infiltrado, frases genéricas y control de la c50. El portugués es el valor por
 defecto (fr/es heredan ese comportamiento tal cual). En ``de`` (método ligero,
-sin reparto) la c50 de cada nivel es la prueba: sin ``introduce`` y con una
+sin reparto) y en ``it`` (igual que ``de``) la c50 de cada nivel es la prueba: sin ``introduce`` y con una
 evaluación que repasa al menos 5 claves del nivel. Con ``--parcial`` las fichas
 aún en ``esqueleto`` sin ``ejercicios`` se cuentan como pendientes y no se
 validan (sirve para validar un nivel a medio planificar).
@@ -80,12 +80,28 @@ SITUACION_GENERICA_DE = re.compile(
     r'lies den dialog und antworte|der dialog informiert|antworte nach den daten',
     re.IGNORECASE,
 )
+# Italiano: solo marcadores claramente españoles. «la», «che», «con», «per»,
+# «come», «una», «del», «di», «dice», «son», «para» también son italiano y no
+# cuentan; «pero» sin tilde no choca con «però» (la ò es parte de la palabra).
+ESPANOL_EN_SITUACION_IT = re.compile(
+    r'[ñ¿¡]|\b(el|los|las|pero|tambi[eé]n|est[aá]|qu[eé]|porque|muy|hay|ayer|'
+    r'despu[eé]s|luego|seg[uú]n|ma[nñ]ana|pregunta|responde|usted|ustedes|'
+    r'nosotros|hoy|gracias|hola|y)\b',
+    re.IGNORECASE,
+)
+SITUACION_GENERICA_IT = re.compile(
+    r'in una situazione (?:reale|quotidiana)|una persona legge un messaggio|'
+    r'leggi il dialogo e rispondi|il dialogo informa|rispondi secondo i dati',
+    re.IGNORECASE,
+)
 POR_IDIOMA = {
     # Valor por defecto = comportamiento histórico (pt; fr/es lo heredan sin cambios).
     'pt': {'lengua': 'pt-BR', 'espanol': ESPANOL_EN_SITUACION,
            'generica': SITUACION_GENERICA, 'c50': 'pt'},
     'de': {'lengua': 'alemán', 'espanol': ESPANOL_EN_SITUACION_DE,
            'generica': SITUACION_GENERICA_DE, 'c50': 'prueba'},
+    'it': {'lengua': 'italiano', 'espanol': ESPANOL_EN_SITUACION_IT,
+           'generica': SITUACION_GENERICA_IT, 'c50': 'prueba'},
 }
 
 

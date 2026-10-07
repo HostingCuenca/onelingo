@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../aprendizaje/modelos.dart' show romDe, romsDe, romEn;
 import '../i18n/i18n.dart';
 import '../state/providers.dart';
 
@@ -59,8 +60,14 @@ class SonidoVocal {
     required this.grafias,
     required this.ejemplos,
     required this.unidad,
+    this.anclaRom,
+    this.ejemplosRom = const [],
   });
   final String id, grupo, colorNombre, ancla, emoji, nombre;
+
+  /// Romanización del ancla y de cada ejemplo (ko, zh…).
+  final String? anclaRom;
+  final List<String?> ejemplosRom;
   final Color color;
   final List<String> grafias, ejemplos;
   final int unidad;
@@ -78,20 +85,24 @@ class SonidoVocal {
     grafias: [for (final g in j['grafias'] as List) '$g'],
     ejemplos: [for (final g in j['ejemplos'] as List) '$g'],
     unidad: j['unidad'] as int,
+    anclaRom: romDe(j['anclaRom']),
+    ejemplosRom: romsDe(j['ejemplosRom']),
   );
 }
 
-/// Palabra con marcado, imagen (emoji) y traducción.
+/// Palabra con marcado, imagen (emoji), traducción y romanización (`rom`,
+/// solo ru, ko, ja y zh: docs/claude-educacion/ROMANIZACION.md).
 class Palabra {
-  const Palabra(this.marcado, {this.emoji, this.traduccion});
+  const Palabra(this.marcado, {this.emoji, this.traduccion, this.rom});
   final String marcado;
-  final String? emoji, traduccion;
+  final String? emoji, traduccion, rom;
   String get texto => textoPlano(marcado);
 
   factory Palabra.fromJson(Map<String, dynamic> j) => Palabra(
     (j['m'] as String?) ?? '',
     emoji: j['e'] as String?,
     traduccion: j['t'] as String?,
+    rom: romDe(j['rom']),
   );
 }
 
@@ -110,13 +121,27 @@ class PasoN0 {
   String? get pose => j['pose'] as String?;
   String? get sonido => j['sonido'] as String?;
   int get correcta => (j['correcta'] as int?) ?? 0;
+
+  /// Romanización: `rom` va con `m`; `letraRom`, `deRom` y `aRom` con su
+  /// campo; `opcionesRom` y `fichasRom` son listas paralelas.
+  String? get rom => romDe(j['rom']);
+  String? get letraRom => romDe(j['letraRom']);
+  String? get deRom => romDe(j['deRom']);
+  String? get aRom => romDe(j['aRom']);
+  List<String?> get opcionesRom => romsDe(j['opcionesRom']);
+  List<String?> get fichasRom => romsDe(j['fichasRom']);
+  String? romOpcion(int i) => romEn(opcionesRom, i);
+  String? romFicha(int i) => romEn(fichasRom, i);
+
   List<Palabra> get palabras => [
     for (final p in (j['palabras'] as List? ?? const []))
       Palabra.fromJson(p as Map<String, dynamic>),
   ];
   List<Palabra> get opciones => [
-    for (final o in (j['opciones'] as List? ?? const []))
-      o is String ? Palabra(o) : Palabra.fromJson(o as Map<String, dynamic>),
+    for (final (i, o) in (j['opciones'] as List? ?? const []).indexed)
+      o is String
+          ? Palabra(o, rom: romOpcion(i))
+          : Palabra.fromJson(o as Map<String, dynamic>),
   ];
   List<String> get textos => [
     for (final o in (j['opciones'] as List? ?? const [])) '$o',
@@ -155,7 +180,7 @@ class UnidadN0 {
 
 /// Idiomas con Nivel 0 (contenido en `assets/contenido/<idioma>/nivel0/`).
 /// Mantener igual que `ProgressState.nivel0Pendiente`.
-const idiomasConNivel0 = {'en', 'fr', 'es', 'pt', 'de'};
+const idiomasConNivel0 = {'en', 'fr', 'es', 'pt', 'de', 'it'};
 
 class Nivel0 {
   Nivel0({
@@ -193,33 +218,38 @@ class Nivel0 {
     return null;
   }
 
-  static Nivel0 desdeJson(Map<String, dynamic> n, Map<String, dynamic> s) =>
-      Nivel0(
-        idioma: (n['idioma'] as String?) ?? 'en',
-        textos: Map<String, dynamic>.from(n['textos'] as Map? ?? const {}),
-        titulo: n['titulo'] as String,
-        subtitulo: n['subtitulo'] as String,
-        voz: (n['voz'] as String?) ?? 'sofia',
-        sonidos: [
-          for (final v in s['vocales'] as List)
-            SonidoVocal.fromJson(v as Map<String, dynamic>),
-        ],
-        unidades: [
-          for (final u in n['unidades'] as List)
-            UnidadN0(
-              u['id'] as String,
-              u['titulo'] as String,
-              u['objetivo'] as String,
-              [
-                for (final l in u['lecciones'] as List)
-                  LeccionN0(l['id'] as String, l['titulo'] as String, [
-                    for (final p in l['pasos'] as List)
-                      PasoN0(p['tipo'] as String, p as Map<String, dynamic>),
-                  ]),
-              ],
-            ),
-        ],
-      );
+  /// [idioma]: el del curso, por si el JSON no lo trae (la voz y el TTS de
+  /// letras como `escucha_letra` usan siempre este idioma, nunca el español).
+  static Nivel0 desdeJson(
+    Map<String, dynamic> n,
+    Map<String, dynamic> s, {
+    String idioma = 'en',
+  }) => Nivel0(
+    idioma: (n['idioma'] as String?) ?? idioma,
+    textos: Map<String, dynamic>.from(n['textos'] as Map? ?? const {}),
+    titulo: n['titulo'] as String,
+    subtitulo: n['subtitulo'] as String,
+    voz: (n['voz'] as String?) ?? 'sofia',
+    sonidos: [
+      for (final v in s['vocales'] as List)
+        SonidoVocal.fromJson(v as Map<String, dynamic>),
+    ],
+    unidades: [
+      for (final u in n['unidades'] as List)
+        UnidadN0(
+          u['id'] as String,
+          u['titulo'] as String,
+          u['objetivo'] as String,
+          [
+            for (final l in u['lecciones'] as List)
+              LeccionN0(l['id'] as String, l['titulo'] as String, [
+                for (final p in l['pasos'] as List)
+                  PasoN0(p['tipo'] as String, p as Map<String, dynamic>),
+              ]),
+          ],
+        ),
+    ],
+  );
 }
 
 /// Nivel 0 del idioma que estudia el alumno (null si ese idioma no tiene).
@@ -237,7 +267,11 @@ final nivel0Provider = FutureProvider<Nivel0?>((ref) async {
     jsonDecode(await rootBundle.loadString('$base/sonidos.json')),
     interfaz,
   );
-  return Nivel0.desdeJson(n as Map<String, dynamic>, s as Map<String, dynamic>);
+  return Nivel0.desdeJson(
+    n as Map<String, dynamic>,
+    s as Map<String, dynamic>,
+    idioma: idioma,
+  );
 });
 
 /// Clave de progreso de una lección del Nivel 0.

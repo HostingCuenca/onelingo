@@ -34,6 +34,21 @@ class TextoApoyo {
   }
 }
 
+/// Romanización opcional (docs/claude-educacion/ROMANIZACION.md): null si
+/// falta o va vacía.
+String? romDe(Object? v) =>
+    v is String && v.trim().isNotEmpty ? v.trim() : null;
+
+/// Lista paralela de romanizaciones (`opcionesRom`, `tokensRom`, `paresRom`…).
+/// Cada posición vacía o ausente es null.
+List<String?> romsDe(Object? v) => [
+  for (final r in v is List ? v : const []) romDe(r),
+];
+
+/// Posición [i] de una lista paralela de romanizaciones (null si no hay).
+String? romEn(List<String?> roms, int i) =>
+    i >= 0 && i < roms.length ? roms[i] : null;
+
 /// Cadena de resolución: nativo → predeterminado del curso → español.
 List<String> cadenaApoyo(String nativo, String predeterminado) => [
   nativo,
@@ -142,7 +157,7 @@ class Vocablo {
   factory Vocablo.fromJson(Map<String, dynamic> j) => Vocablo(
     id: j['id'] as String,
     texto: j['texto'] as String,
-    rom: (j['rom'] as String?)?.trim().isEmpty ?? true ? null : j['rom'],
+    rom: romDe(j['rom']),
     traduccion: TextoApoyo.fromJson(j['traduccion']),
     nota: j['nota'] == null ? null : TextoApoyo.fromJson(j['nota']),
   );
@@ -156,18 +171,20 @@ class Frase {
     required this.traduccion,
     this.nota,
     this.hablante,
+    this.hablanteRom,
   });
   final String texto;
-  final String? rom, hablante;
+  final String? rom, hablante, hablanteRom;
   final TextoApoyo traduccion;
   final TextoApoyo? nota;
 
   factory Frase.fromJson(Map<String, dynamic> j) => Frase(
     texto: j['texto'] as String,
-    rom: (j['rom'] as String?)?.trim().isEmpty ?? true ? null : j['rom'],
+    rom: romDe(j['rom']),
     traduccion: TextoApoyo.fromJson(j['traduccion']),
     nota: j['nota'] == null ? null : TextoApoyo.fromJson(j['nota']),
     hablante: j['hablante'] as String?,
+    hablanteRom: romDe(j['hablanteRom']),
   );
 }
 
@@ -224,9 +241,29 @@ class Item {
     this.maximoPalabras,
     this.evidenciasEscritura = const [],
     this.abierta = false,
+    this.textoRom,
+    this.preguntaRom,
+    this.opcionesRom = const [],
+    this.tokensRom = const [],
+    this.paresRom = const [],
   });
   final String id;
   final FormatoItem formato;
+
+  /// Romanización (ru, ko, ja, zh): `textoRom`/`preguntaRom` bajo el texto y
+  /// listas paralelas a [opciones], [tokens] y a la izquierda de [pares].
+  /// `audio` y `respuesta` nunca llevan (docs/claude-educacion/ROMANIZACION.md).
+  final String? textoRom, preguntaRom;
+  final List<String?> opcionesRom, tokensRom, paresRom;
+
+  String? romOpcion(int i) => romEn(opcionesRom, i);
+  String? romToken(int i) => romEn(tokensRom, i);
+  String? romPar(int i) => romEn(paresRom, i);
+
+  bool get tieneRom =>
+      textoRom != null ||
+      preguntaRom != null ||
+      [...opcionesRom, ...tokensRom, ...paresRom].any((r) => r != null);
 
   /// Producción abierta (escritura larga sin rúbrica): el alumno escribe
   /// dentro del rango de palabras y compara su texto con el modelo. No puntúa.
@@ -293,6 +330,11 @@ class Item {
         for (final p in j['pares'] as List? ?? const [])
           ((p as List)[0] as String, TextoApoyo.fromJson(p[1])),
       ],
+      textoRom: romDe(j['textoRom']),
+      preguntaRom: romDe(j['preguntaRom']),
+      opcionesRom: romsDe(j['opcionesRom']),
+      tokensRom: romsDe(j['tokensRom']),
+      paresRom: romsDe(j['paresRom']),
     );
   }
 
@@ -330,7 +372,7 @@ class Celda {
 
   factory Celda.fromJson(Map<String, dynamic> j) => Celda(
     texto: j['texto'] as String?,
-    rom: (j['rom'] as String?)?.trim().isEmpty ?? true ? null : j['rom'],
+    rom: romDe(j['rom']),
     apoyo: j['apoyo'] == null ? null : TextoApoyo.fromJson(j['apoyo']),
   );
 }

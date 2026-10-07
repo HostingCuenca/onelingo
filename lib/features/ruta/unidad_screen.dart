@@ -19,6 +19,7 @@ import '../../core/efectos.dart';
 import 'celebracion.dart';
 import 'item_view.dart';
 import 'ruta_screen.dart';
+import '../../shared/widgets/romanizacion.dart';
 import 'tabla_ruta.dart';
 import '../../core/i18n/i18n.dart';
 
@@ -92,6 +93,7 @@ const _nombreIdioma = {
         'es': 'Son palabras de esta clase: repásalas en voz alta.',
       }),
       pares: [for (final v in palabras.take(4)) (v.texto, v.traduccion)],
+      paresRom: [for (final v in palabras.take(4)) v.rom],
     );
   }
   final ejemplos = [
@@ -330,7 +332,9 @@ class UnidadScreen extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        tr('Esta lección se renovó y ahora forma parte de un nivel nuevo.'),
+                        tr(
+                          'Esta lección se renovó y ahora forma parte de un nivel nuevo.',
+                        ),
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 18),
                       ),
@@ -356,7 +360,9 @@ class UnidadScreen extends ConsumerWidget {
           error: (_, _) => Scaffold(
             appBar: AppBar(),
             body: Center(
-              child: Text(tr('No se pudo preparar la biblioteca de ejercicios.')),
+              child: Text(
+                tr('No se pudo preparar la biblioteca de ejercicios.'),
+              ),
             ),
           ),
           data: (resolved) {
@@ -369,7 +375,7 @@ class UnidadScreen extends ConsumerWidget {
                     padding: const EdgeInsets.all(24),
                     child: Text(
                       '${tr('Esta clase está temporalmente fuera de servicio. '
-                          'No se sustituyó silenciosamente por contenido antiguo.')}'
+                      'No se sustituyó silenciosamente por contenido antiguo.')}'
                       '\n\n${resolved.diagnostico.errores.join('\n')}',
                       textAlign: TextAlign.center,
                     ),
@@ -451,6 +457,19 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
   Duration duracion = Duration.zero;
 
   UnidadRuta get u => widget.unidad;
+
+  /// Romanización (ru, ko, ja, zh): visible en Fundamentos, N1 y N2; desde N3
+  /// oculta y se abre con «Ver romanización» (vale para toda la clase).
+  late bool verRom = romVisiblePorDefecto(u.nivelInterno);
+  bool get romOcultable => !romVisiblePorDefecto(u.nivelInterno);
+  void alternarRom() => setState(() => verRom = !verRom);
+
+  bool _pasoTieneRom(Paso p) =>
+      p.frases.any((f) => f.rom != null) ||
+      p.filas.any((f) => f.any((c) => c.rom != null)) ||
+      (p.tipo == TipoPaso.vocabulario &&
+          p.refs.any((id) => u.vocablo(id)?.rom != null));
+
   String get claveProgreso => 'onelingo.ruta.pos.${u.id}';
   List<String> get cadena =>
       cadenaDelAlumno(ref.read(progressProvider), widget.ruta.curso);
@@ -764,6 +783,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           idioma: idioma,
           cadena: cadena,
           guiada: guiada,
+          mostrarRom: verRom,
+          onAlternarRom: romOcultable ? alternarRom : null,
           permitirReintento: !evalua,
           onComprobado: (correcta, respuesta) {
             // La producción abierta no puntúa: solo se compara con el modelo.
@@ -816,6 +837,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900),
         ),
       if (p.titulo != null) const SizedBox(height: 12),
+      if (romOcultable && _pasoTieneRom(p))
+        BotonRomanizacion(visible: verRom, onPressed: alternarRom),
     ];
     switch (p.tipo) {
       case TipoPaso.explicacion:
@@ -837,7 +860,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       case TipoPaso.vocabulario:
         vista.add(
           Text(
-            tr('Toca cualquier parte de la tarjeta para escuchar cada palabra.'),
+            tr(
+              'Toca cualquier parte de la tarjeta para escuchar cada palabra.',
+            ),
             style: const TextStyle(color: OL.gris, fontSize: 16),
           ),
         );
@@ -900,7 +925,14 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           );
           vista.add(const SizedBox(height: 10));
         }
-        vista.add(TablaRuta(paso: p, idioma: u.idioma, cadena: cadena));
+        vista.add(
+          TablaRuta(
+            paso: p,
+            idioma: u.idioma,
+            cadena: cadena,
+            mostrarRom: verRom,
+          ),
+        );
         vista.add(const SizedBox(height: 8));
         vista.add(
           Text(
@@ -935,6 +967,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                     t(linea.traduccion),
                     '',
                     hablante: linea.hablante,
+                    hablanteRom: linea.hablanteRom,
                     color: propio ? OL.moradoSuave : OL.blanco,
                   ),
                 ),
@@ -986,6 +1019,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     String traduccion,
     String nota, {
     String? hablante,
+    String? hablanteRom,
     Color color = OL.blanco,
   }) => Padding(
     padding: const EdgeInsets.only(bottom: 10),
@@ -1002,7 +1036,9 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               children: [
                 if (hablante != null)
                   Text(
-                    hablante,
+                    verRom && hablanteRom != null
+                        ? '$hablante · $hablanteRom'
+                        : hablante,
                     style: const TextStyle(
                       color: OL.morado,
                       fontWeight: FontWeight.w800,
@@ -1015,11 +1051,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                if (rom != null)
-                  Text(
-                    rom,
-                    style: const TextStyle(color: OL.gris, fontSize: 16),
-                  ),
+                TextoRom(verRom ? rom : null, tamano: 16),
                 Text(traduccion, style: const TextStyle(fontSize: 17)),
                 if (nota.isNotEmpty)
                   Padding(
@@ -1078,9 +1110,13 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
               ? tr('Lo recuerdas: esta unidad queda más firme.')
               : nivelNuevo
               ? (u.nivel == 'f0'
-                    ? tr('Completaste los Fundamentos. Ya tienes el Nivel 1 disponible.')
+                    ? tr(
+                        'Completaste los Fundamentos. Ya tienes el Nivel 1 disponible.',
+                      )
                     : tr('Completaste {nivel}.', {'nivel': t(tituloNivel)}))
-              : tr('Aprobar no es lo mismo que dominar: te pediremos un repaso breve dentro de unos días.'),
+              : tr(
+                  'Aprobar no es lo mismo que dominar: te pediremos un repaso breve dentro de unos días.',
+                ),
           fichas: [
             FichaLogro.xp(xpGanada),
             FichaLogro.precision(precision),

@@ -41,6 +41,22 @@ test('alemán usa voces nativas: Petra narra y Julius en diálogos', async () =>
   assert.equal(rolDeVoz('avatar_lumo', 'de'), 'avatar_lumo');
 });
 
+test('it, ru, ko, ja y zh usan voces nativas para narrar y para los diálogos', async () => {
+  const { rolDeVoz } = await import('../src/lib/voz.js');
+  const esperadas: Record<string, [string, string]> = {
+    it: ['luna', 'carmelo'],
+    ru: ['mariia', 'stanislav'],
+    ko: ['jiyoung', 'chris_ko'],
+    ja: ['kyoko', 'hinata'],
+    zh: ['shanshan', 'evan'],
+  };
+  for (const [idioma, [narradora, narrador]] of Object.entries(esperadas)) {
+    assert.equal(rolDeVoz(undefined, idioma), narradora);
+    assert.equal(rolDeVoz('narrador', idioma), narrador);
+    assert.equal(rolDeVoz('avatar_lumo', idioma), 'avatar_lumo');
+  }
+});
+
 test('alemán: las cifras se leen en palabras (años, fechas, horas, §, decimales)', () => {
   const v = (t: string) => textoParaVoz(t, 'de');
   assert.equal(v('Der Dichter starb 1950.'), 'Der Dichter starb neunzehnhundertfünfzig.');

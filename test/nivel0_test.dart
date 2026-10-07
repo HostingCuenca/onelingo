@@ -153,6 +153,27 @@ void main() {
     );
   });
 
+  test('El Nivel 0 italiano trae cada explicación en español e inglés', () {
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'it',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    expect(idiomasConNivel0, contains('it'));
+    final n = cargar('it');
+    expect(n.idioma, 'it');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(40));
+    expect(n.sonidos.length, greaterThanOrEqualTo(15));
+    // Lumo solo da la bienvenida: nunca en la prueba de salida (u10).
+    expect(
+      [for (final l in n.unidades.last.lecciones) ...l.pasos.map((p) => p.tipo)],
+      isNot(contains('lumo')),
+    );
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);

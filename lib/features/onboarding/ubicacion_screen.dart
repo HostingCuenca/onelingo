@@ -535,7 +535,7 @@ class PruebaNivelScreen extends ConsumerWidget {
       idioma: idioma,
       configuracion: configuracion,
     );
-    // Idiomas sin ruta nueva (it, ja, ko, ru, zh): aún no hay prueba de nivel.
+    // Idiomas sin ruta nueva (ja, ko, ru, zh): aún no hay prueba de nivel.
     if (!idiomasConRuta.contains(meta)) {
       return Scaffold(
         appBar: AppBar(title: Text(tr('Prueba de nivel'))),

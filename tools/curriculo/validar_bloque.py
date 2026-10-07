@@ -20,7 +20,16 @@ if n in integrados:
     sys.exit(f'N{n} ya está integrado en curso.json: valida con python3 tools/validar_ruta.py {idi}')
 desde = max([k for k in integrados if k < n], default=0) + 1
 tmp = tempfile.mkdtemp(prefix='esbozos-')
+# N1 c01 cuelga de la última unidad de Fundamentos (no existe ninguna «n0.c50»).
+# Fundamentos: los publicados o, si el idioma aún no los tiene en assets, el borrador nuevo (que entra
+# también como borrador para que su vocabulario cuente como enseñado).
+f0_p = f'{R}/assets/contenido/{idi}/ruta/f0.json'
+f0_b = f'{R}/tools/contenido/ruta-{idi}/borrador-f0.json'
 fs, esbozos = [], []
+if not os.path.exists(f0_p) and os.path.exists(f0_b):
+    f0_p = f0_b
+    fs.append(f0_b)
+ultima_f0 = max(json.load(open(f0_p))['unidades'], key=lambda u: u['orden'])['id'] if os.path.exists(f0_p) else f'{idi}.n0.c50'
 for k in range(desde, n + 1):
     for j in range(1, 11):
         if (k, j) > (n, b): break
@@ -35,7 +44,7 @@ for k in range(desde, n + 1):
         for c in cur['clases']:
             if c['bloque'] != j: continue
             i = int(c['id'].split('.c')[1])
-            prev = f'{idi}.n{k}.c{i - 1:02d}' if i > 1 else f'{idi}.n{k - 1}.c50'
+            prev = f'{idi}.n{k}.c{i - 1:02d}' if i > 1 else f'{idi}.n{k - 1}.c50' if k > 1 else ultima_f0
             # El esbozo enseña el vocabulario de la ficha: los bloques se pueden escribir en
             # paralelo contando solo con lo que las fichas anteriores prometen enseñar.
             voc = [{'id': f'v-{c["id"]}-{x}', 'texto': w, 'traduccion': {'en': w}}

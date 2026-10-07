@@ -14,10 +14,14 @@ class TablaRuta extends StatelessWidget {
     required this.paso,
     required this.idioma,
     required this.cadena,
+    this.mostrarRom = true,
   });
   final Paso paso;
   final String idioma;
   final List<String> cadena;
+
+  /// Romanización bajo cada celda (oculta desde N3 hasta que se pide).
+  final bool mostrarRom;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,10 @@ class TablaRuta extends StatelessWidget {
             children: [
               for (final c in paso.columnas)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 6,
+                  ),
                   child: Text(
                     c.en(cadena),
                     textAlign: TextAlign.center,
@@ -57,7 +64,12 @@ class TablaRuta extends StatelessWidget {
             children: [
               for (var i = 0; i < columnas; i++)
                 i < fila.length
-                    ? _CeldaVista(celda: fila[i], idioma: idioma, cadena: cadena)
+                    ? _CeldaVista(
+                        celda: fila[i],
+                        idioma: idioma,
+                        cadena: cadena,
+                        mostrarRom: mostrarRom,
+                      )
                     : const SizedBox.shrink(),
             ],
           ),
@@ -71,7 +83,10 @@ class TablaRuta extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: columnas > 5
-          ? SingleChildScrollView(scrollDirection: Axis.horizontal, child: tabla)
+          ? SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: tabla,
+            )
           : tabla,
     );
   }
@@ -82,10 +97,12 @@ class _CeldaVista extends StatelessWidget {
     required this.celda,
     required this.idioma,
     required this.cadena,
+    this.mostrarRom = true,
   });
   final Celda celda;
   final String idioma;
   final List<String> cadena;
+  final bool mostrarRom;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +139,7 @@ class _CeldaVista extends StatelessWidget {
                   color: OL.texto,
                 ),
               ),
-              if (celda.rom != null)
+              if (mostrarRom && celda.rom != null)
                 Text(
                   celda.rom!,
                   textAlign: TextAlign.center,

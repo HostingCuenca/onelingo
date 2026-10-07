@@ -32,12 +32,28 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   // Alemán estándar de Alemania (calibración 2026-10-06: mejor lectura de Umlaut, ch e -ig).
   petra: { id: 'lzvBSKYbNWDD0a6BaJSK', nombre: 'Petra', descripcion: 'Narradora alemana · educativa y clara' },
   julius: { id: 'n6JEKnKG5a8I78SoBRry', nombre: 'Julius', descripcion: 'Narrador alemán · diálogos' },
+  // Voces nativas de it, ru, ko, ja y zh (calibración 2026-10-07: síntesis y transcripción de vuelta).
+  luna: { id: 'BZc8d1MPTdZkyGbE9Sin', nombre: 'Luna', descripcion: 'Narradora italiana · educativa y pausada' },
+  carmelo: { id: 'HuK8QKF35exsCh2e7fLT', nombre: 'Carmelo', descripcion: 'Narrador italiano · diálogos' },
+  mariia: { id: 'EDpEYNf6XIeKYRzYcx4I', nombre: 'Mariia', descripcion: 'Narradora rusa (Moscú) · calmada y clara' },
+  stanislav: { id: 'ogi2DyUAKJb7CEdqqvlU', nombre: 'Stanislav', descripcion: 'Narrador ruso (Moscú) · diálogos' },
+  jiyoung: { id: 'AW5wrnG1jVizOYY7R1Oo', nombre: 'Jiyoung', descripcion: 'Narradora coreana (Seúl) · cálida y clara' },
+  chris_ko: { id: 'PDoCXqBQFGsvfO0hNkEs', nombre: 'Chris', descripcion: 'Narrador coreano (Seúl) · diálogos' },
+  kyoko: { id: '4lOQ7A2l7HPuG7UIHiKA', nombre: 'Kyoko', descripcion: 'Narradora japonesa (Kantō) · calmada' },
+  hinata: { id: 'j210dv0vWm7fCknyQpbA', nombre: 'Hinata', descripcion: 'Narrador japonés · diálogos' },
+  shanshan: { id: 'ByhETIclHirOlWnWKhHc', nombre: 'Shan Shan', descripcion: 'Narradora china (mandarín de Pekín)' },
+  evan: { id: 'MI36FIkp9wRP7cpWKPTl', nombre: 'Evan', descripcion: 'Narrador chino (mandarín de Pekín) · diálogos' },
 };
 
 /** Voz nativa por idioma para los roles neutros (lecciones y diálogos). */
 const NATIVAS: Record<string, Record<string, string>> = {
   fr: { narradora: 'helene', narrador: 'nicolas' },
   de: { narradora: 'petra', narrador: 'julius' },
+  it: { narradora: 'luna', narrador: 'carmelo' },
+  ru: { narradora: 'mariia', narrador: 'stanislav' },
+  ko: { narradora: 'jiyoung', narrador: 'chris_ko' },
+  ja: { narradora: 'kyoko', narrador: 'hinata' },
+  zh: { narradora: 'shanshan', narrador: 'evan' },
 };
 
 /** Rol efectivo: el pedido si existe (si no, narradora), con la voz nativa del idioma. */
