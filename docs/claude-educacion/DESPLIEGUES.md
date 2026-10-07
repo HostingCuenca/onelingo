@@ -594,3 +594,13 @@ Pruebas: Flutter completo en el worktree, 328 en verde. `ruta_recorrido_test` «
 Pendiente: las voces nativas Luna/Carmelo (`backend/src/lib/voz.ts`, en `bee468b`) no están desplegadas porque requieren reiniciar PM2 con autorización. Mientras tanto, el italiano usa la voz por defecto.
 Backup: `/var/www/onelingo/backups/20261007-edu-49-italiano/web-anterior` (= edu-48). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `it/ruta/curso.json`, `it/ruta/n4-b10.json` y `it/diagnostico-v2.json` responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-49-italiano`.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-49-italiano/web-retirada-post && cp -al backups/20261007-edu-49-italiano/web-anterior web'`
+
+## Release: 20261007-edu-50-chino
+
+Fecha: 2026-10-07 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat (plan de la semana). Solo web; sin cambios de backend ni reinicio.
+Contenido: chino mandarín esencial, con Fundamentos (f0) + N1–N2 (100 clases, pinyin con sandhi), prueba de ubicación N1–N2 y Nivel 0. N3–N10 aparecen como «Próximamente». La rúbrica de escritura para zh/ja ahora busca evidencias sin espacios y mide en caracteres.
+Commit: `cc57f11` (build desde worktree limpio) · `main.dart.js` sha256 `772c58d4d466eac0…` (API_URL prod).
+Pruebas: Flutter completo en el worktree, 342 en verde. `ruta_recorrido_test` falló por tiempo (inestable, ya conocido) y pasa al repetirlo (5/5). `validar_ruta.py`: 10 idiomas, 0 errores.
+Pendiente: voces nativas Shan Shan/Evan (`voz.ts`), que necesitan reiniciar PM2 con autorización. Aún no está desplegado el arreglo del paso `deletreo` del Nivel 0 (`626c969`).
+Backup: `/var/www/onelingo/backups/20261007-edu-50-chino/web-anterior` (= edu-49). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `zh/ruta/curso.json`, `zh/ruta/n2-b10.json`, `zh/diagnostico-v2.json` e `it/ruta/n4-b10.json` responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-50-chino`.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-50-chino/web-retirada-post && cp -al backups/20261007-edu-50-chino/web-anterior web'`
