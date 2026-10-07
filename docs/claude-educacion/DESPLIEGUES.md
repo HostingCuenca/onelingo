@@ -614,3 +614,13 @@ Pruebas: Flutter completo en el worktree, 366 en verde. `ruta_recorrido_test` fa
 Pendiente: voces nativas Kyoko/Hinata (`voz.ts`), que necesitan reiniciar PM2 con autorización.
 Backup: `/var/www/onelingo/backups/20261007-edu-51-japones/web-anterior` (= edu-50). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `ja/ruta/curso.json`, `ja/ruta/n2-b10.json`, `ja/diagnostico-v2.json`, `zh/ruta/n2-b10.json` e `it/ruta/n4-b10.json` responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-51-japones`.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-51-japones/web-retirada-post && cp -al backups/20261007-edu-51-japones/web-anterior web'`
+
+## Release: 20261007-edu-52-ruso
+
+Fecha: 2026-10-07 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat (plan de la semana). Solo web; sin cambios de backend ni reinicio.
+Contenido: ruso esencial, con Fundamentos (f0) + N1–N2 (100 clases, cirílico con rom letra a letra y acento), prueba de ubicación N1–N2 y Nivel 0 corregido (rom de rótulos, acentos, deRom/aRom/letraRom). N3–N10 aparecen como «Próximamente».
+Commit: `2c316b3` (build desde worktree limpio) · `main.dart.js` sha256 `dbdbd1266b4ee1ed…` (API_URL prod).
+Pruebas: Flutter completo en el worktree, 382 en verde. `ruta_recorrido_test` falló por tiempo (inestable, ya conocido) y pasa al repetirlo (5/5). `validar_ruta.py`: 10 idiomas, 0 errores.
+Pendiente: voces nativas Mariia/Stanislav (`voz.ts`), que necesitan reiniciar PM2 con autorización.
+Backup: `/var/www/onelingo/backups/20261007-edu-52-ruso/web-anterior` (= edu-51). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `ru/ruta/curso.json`, `ru/ruta/n2-b10.json`, `ru/diagnostico-v2.json`, y los `n*-b10` de ja, zh e it responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-52-ruso`.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-52-ruso/web-retirada-post && cp -al backups/20261007-edu-52-ruso/web-anterior web'`
