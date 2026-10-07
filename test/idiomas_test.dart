@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:onelingo/core/aprendizaje/providers.dart' show idiomasConRuta;
 import 'package:onelingo/core/content/curriculum.dart';
-import 'package:onelingo/core/content/idiomas.dart';
 
 void main() {
-  test('los 10 idiomas tienen 100 lecciones de Nivel 1 con pasos', () {
-    for (final l in idiomas) {
+  test('los idiomas con ruta tienen 100 lecciones de Nivel 1 con pasos', () {
+    for (final l in idiomas.where((l) => idiomasConRuta.contains(l.code))) {
       idiomaContenido = l.code;
       final lecciones = leccionesDe(1);
       expect(lecciones.length, 100, reason: l.code);
@@ -18,14 +18,14 @@ void main() {
     idiomaContenido = 'en';
   });
 
-  test('idiomas no latinos muestran romanización entre paréntesis', () {
-    for (final code in idiomasNoLatinos) {
+  test('idiomas sin ruta nueva (it, ja, ko, ru, zh): sin lecciones antiguas', () {
+    for (final code in const ['it', 'ja', 'ko', 'ru', 'zh']) {
       idiomaContenido = code;
-      final u1 = unidadesDe(1).first;
-      for (final (palabra, _) in u1.vocab) {
-        expect(palabra, matches(RegExp(r'\([^)]+\)')), reason: '$code: $palabra');
+      expect(idiomasConRuta, isNot(contains(code)), reason: code);
+      for (final n in [0, 1, 2]) {
+        expect(unidadesDe(n), isEmpty, reason: '$code N$n');
+        expect(leccionesDe(n), isEmpty, reason: '$code N$n');
       }
-      expect(soloNativo(u1.vocab.first.$1), isNot(contains('(')));
     }
     idiomaContenido = 'en';
   });

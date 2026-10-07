@@ -19,7 +19,7 @@ RAIZ = Path(__file__).resolve().parent.parent / "assets" / "contenido"
 ENSENAR = {"explicacion", "ejemplos", "vocabulario", "patron", "tabla"}
 ORDEN_TIPOS = ["ensenar", "practica_guiada", "practica_independiente", "situacion", "evaluacion"]
 FORMATOS = {"elegir", "escuchar", "ordenar", "completar", "escribir", "relacionar"}
-PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」…\"“”„()«»‹›—–，：；]")
+PUNTUACION = re.compile(r"[.,!?¡¿;:。、！？「」『』・（）…\"“”„()«»‹›—–，：；]")
 CAMPOS_HUELLA = {
     "formato", "consigna", "pregunta", "preguntaApoyo", "opciones", "respuesta",
     "aceptadas", "tokens", "texto", "audio", "pares",
@@ -382,9 +382,346 @@ def conocida_de(w, conocidas):
         for c in conocidas)
 
 
+# ── Italiano ──────────────────────────────────────────────────────────────
+# Heurística como la del alemán: una forma cuenta si su base ya se enseñó.
+# Elisión (l'amico, dell'acqua, c'è, quest'anno), truncamiento (po', buon,
+# signor), plurales/femeninos, -issimo/-mente, verbos regulares (-are, -ere,
+# -ire, -isc-), irregulares frecuentes y pronombres enclíticos (chiamarsi,
+# dimmi). Mismas reglas en lib/core/aprendizaje/integridad.dart (palabraConocidaIt).
+
+_VOCALES_IT = "aeio"
+# Elididas sin vocal fácil de reponer: l' = il/lo/la, dell' = del/della…
+_ELISION_IT = {"l": {"il", "lo", "la"}, "gl": {"gli"}, "dell": {"del", "della", "dello"},
+               "nell": {"nel", "nella", "nello"}, "all": {"al", "alla", "allo"},
+               "sull": {"sul", "sulla", "sullo"}, "dall": {"dal", "dalla", "dallo"},
+               "coll": {"col", "colla", "collo"}, "un": {"una", "uno"}}
+# Preposición articulada elidida = preposición + artículo l' enseñados por separado.
+_PREP_ART_IT = {"dell": "di", "nell": "in", "all": "a", "sull": "su", "dall": "da", "coll": "con"}
+_ARTICULO_L_IT = {"l", "il", "lo", "la"}
+# Truncamientos (apócope) sin apóstrofo o con él ya quitado por `palabras` (po' → po).
+_APOCOPE_IT = {"po": "poco", "be": "bene", "buon": "buono", "bel": "bello", "quel": "quello",
+               "gran": "grande", "san": "santo", "nessun": "nessuno", "ciascun": "ciascuno",
+               "alcun": "alcuno", "qual": "quale", "tal": "tale", "signor": "signore",
+               "dottor": "dottore", "professor": "professore", "ingegner": "ingegnere",
+               "suor": "suora", "mal": "male", "ben": "bene", "fin": "fino"}
+_PLURAL_IRREG_IT = {"uomini": "uomo", "uova": "uovo", "dita": "dito", "braccia": "braccio",
+                    "labbra": "labbro", "ossa": "osso", "paia": "paio", "migliaia": "migliaio",
+                    "centinaia": "centinaio", "ginocchia": "ginocchio", "mogli": "moglie",
+                    "buoi": "bue", "templi": "tempio"}
+_SUF_NOMINAL_IT = (("chi", ("co",)), ("ghi", ("go",)), ("che", ("ca",)), ("ghe", ("ga",)),
+                   ("ci", ("co", "ce", "cio", "cia")), ("gi", ("go", "ge", "gio", "gia")),
+                   ("ce", ("cia",)), ("ge", ("gia",)), ("trice", ("tore",)), ("trici", ("tore", "trice")),
+                   ("essa", ("e", "o")), ("esse", ("e", "o", "essa")),
+                   ("i", ("o", "e", "a", "io")), ("e", ("a",)), ("a", ("o",)))
+# Palabras que parecen flexión de otra y no lo son (anche ≠ anca, dei ≠ dea…).
+_NO_DERIVAR_IT = {"anche", "come", "che", "dei", "nei", "sei", "lei", "mai", "poi", "oggi",
+                  "bene", "male", "gli", "le", "la", "lo", "ci", "si", "mi", "ti", "vi", "ne",
+                  "se", "e", "a", "i", "o", "da", "di", "fa", "va", "qui", "qua", "ma", "tra", "fra"}
+
+
+def bases_it(w):
+    """Bases posibles de una flexión nominal/adjetival italiana: plural (-i, -e,
+    -chi/-ghi, -ci/-gi, -ce/-ge, irregulares), femenino → masculino,
+    -trice/-essa, superlativo -issimo y adverbio en -mente."""
+    if w in _NO_DERIVAR_IT:
+        return set()
+    res = set()
+    if w in _PLURAL_IRREG_IT:
+        res.add(_PLURAL_IRREG_IT[w])
+    # -issimo/-issima/-issimi/-issime → bello, grande
+    m = re.fullmatch(r"(.{2,})issim[oaie]", w)
+    if m:
+        res |= {m.group(1) + "o", m.group(1) + "e", m.group(1) + "a"}
+    # -mente → lenta/lento, facile, veloce
+    m = re.fullmatch(r"(.{2,})mente", w)
+    if m:
+        r = m.group(1)
+        res |= {r, r + "e"} | ({r[:-1] + "o"} if r.endswith("a") else set())
+    for x in [w] + sorted(res):
+        for suf, reemplazos in _SUF_NOMINAL_IT:
+            if x.endswith(suf) and len(x) - len(suf) >= 2:
+                res |= {x[: -len(suf)] + r for r in reemplazos}
+    # femenino → masculino también sobre lo ya obtenido (italiane → italiana → italiano).
+    for x in sorted(res):
+        if x.endswith("a") and len(x) >= 3:
+            res.add(x[:-1] + "o")
+    res.discard(w)
+    return res
+
+
+def _forma_a_inf_it(tabla):
+    res = {}
+    for inf, formas in tabla.items():
+        for f in formas.split():
+            res.setdefault(f, set()).add(inf)
+    return res
+
+
+# Formas irregulares frecuentes (presente, pasado remoto, futuro/condicional
+# con raíz contraída, subjuntivo, imperativo y participio).
+_FORMAS_IRREG_IT = _forma_a_inf_it({
+    "essere": "sono sei è siamo siete ero eri era eravamo eravate erano fui fu fummo foste furono "
+              "sarò sarai sarà saremo sarete saranno sarei saresti sarebbe saremmo sareste sarebbero "
+              "sia siano siate fossi fosse fossimo fossero stato stata stati state",
+    "avere": "ho hai ha abbiamo avete hanno ebbi ebbe ebbero avrò avrai avrà avremo avrete avranno "
+             "avrei avresti avrebbe avremmo avreste avrebbero abbia abbiano abbiate",
+    "andare": "vado vai va vanno andrò andrai andrà andremo andrete andranno andrei andresti "
+              "andrebbe andremmo andreste andrebbero vada vadano",
+    "fare": "faccio fai fa facciamo fate fanno facevo facevi faceva facevamo facevate facevano "
+            "feci fece facemmo faceste fecero faccia facciano facendo fatto",
+    "stare": "sto stai sta stiamo stanno stetti stette stettero stia stiano",
+    "dare": "do dai dà diamo danno diedi diede diedero dettero dia diano",
+    "dire": "dico dici dice diciamo dite dicono dicevo dicevi diceva dicevamo dicevate dicevano "
+            "dirò dirai dirà diremo direte diranno direi diresti direbbe dissi disse dissero dica "
+            "dicano dicendo detto",
+    "potere": "posso puoi può possiamo potete possono potrò potrai potrà potremo potrete potranno "
+              "potrei potresti potrebbe potremmo potreste potrebbero possa possano",
+    "volere": "voglio vuoi vuole vogliamo volete vogliono vorrò vorrai vorrà vorremo vorrete "
+              "vorranno vorrei vorresti vorrebbe vorremmo vorreste vorrebbero volli volle vollero "
+              "voglia vogliano",
+    "dovere": "devo debbo devi deve dobbiamo dovete devono debbono dovrò dovrai dovrà dovremo "
+              "dovrete dovranno dovrei dovresti dovrebbe dovremmo dovreste dovrebbero debba debbano",
+    "sapere": "so sai sa sappiamo sanno saprò saprai saprà sapremo saprete sapranno saprei "
+              "sapresti saprebbe sapremmo sapreste saprebbero seppi seppe seppero sappia sappiano",
+    "venire": "vengo vieni viene vengono verrò verrai verrà verremo verrete verranno verrei "
+              "verresti verrebbe verremmo verreste verrebbero venni venne vennero venga vengano",
+    "uscire": "esco esci esce escono esca escano",
+    "bere": "bevo bevi beve beviamo bevete bevono bevevo bevevi beveva bevevamo bevevate bevevano "
+            "berrò berrai berrà berremo berrete berranno berrei berresti berrebbe bevvi bevve "
+            "bevvero beva bevano bevendo bevuto",
+    "tenere": "tengo tieni tiene tengono terrò terrai terrà terremo terrete terranno terrei "
+              "terresti terrebbe tenni tenne tennero tenga tengano",
+    "rimanere": "rimango rimangono rimarrò rimarrai rimarrà rimarrei rimasi rimase rimasero "
+                "rimasto rimanga",
+    "piacere": "piaccio piacciono piacque piacquero piaccia piacciano",
+    "morire": "muoio muori muore muoiono morto muoia",
+    "salire": "salgo salgono salga",
+    "scegliere": "scelgo scelgono scelsi scelse scelsero scelto scelga",
+    "togliere": "tolgo tolgono tolsi tolse tolto tolga",
+    "sedere": "siedo siedi siede siedono sieda",
+    "nascere": "nacqui nacque nacquero nato",
+    "vivere": "vissi visse vissero vissuto vivrò vivrai vivrà vivremo vivrete vivranno vivrei",
+    "vedere": "vidi vide videro visto vedrò vedrai vedrà vedremo vedrete vedranno vedrei "
+              "vedresti vedrebbe",
+    "prendere": "presi prese presero preso",
+    "mettere": "misi mise misero messo",
+    "leggere": "lessi lesse lessero letto",
+    "scrivere": "scrissi scrisse scrissero scritto",
+    "aprire": "aperto", "offrire": "offerto", "soffrire": "sofferto", "coprire": "coperto",
+    "chiudere": "chiusi chiuse chiusero chiuso",
+    "rispondere": "risposi rispose risposero risposto",
+    "chiedere": "chiesi chiese chiesero chiesto",
+    "correre": "corsi corse corsero corso",
+    "perdere": "persi perse persero perso",
+    "decidere": "decisi decise decisero deciso",
+    "scendere": "scesi scese scesero sceso",
+    "spendere": "spesi spese spesero speso",
+    "accendere": "accesi accese acceso",
+    "rompere": "ruppi ruppe ruppero rotto",
+    "muovere": "mossi mosse mosso",
+    "succedere": "successe successo",
+    "conoscere": "conobbi conobbe conobbero",
+    "crescere": "crebbi crebbe",
+    "vincere": "vinsi vinse vinto",
+    "spegnere": "spensi spense spento",
+    "piangere": "piansi pianse pianto",
+    "ridere": "risi rise riso",
+    "dividere": "divisi divise diviso",
+    "porre": "pongo poni pone poniamo ponete pongono posi pose posto",
+})
+# Prefijos de compuestos de irregulares (rifare, ottenere, permettere, comporre).
+_PREFIJOS_IT = ("sotto", "ri", "pre", "com", "con", "dis", "man", "ot", "per", "pro", "tra",
+                "sor", "av", "ap", "sup", "im", "in")
+_CLITICOS_IT = {"lo": {"lo"}, "la": {"la"}, "li": {"li"}, "le": {"le"}, "ne": {"ne"},
+                "mi": {"mi"}, "ti": {"ti"}, "si": {"si"}, "ci": {"ci"}, "vi": {"vi"},
+                "gli": {"gli"}}
+# Primer clítico de un grupo (me lo → melo, glielo).
+_CLITICOS_COMB_IT = {"me": "mi", "te": "ti", "se": "si", "ce": "ci", "ve": "vi", "glie": "gli"}
+# Imperativos monosilábicos que doblan la consonante del clítico (dimmi, fallo, dammi).
+_IMPERATIVO_CORTO_IT = {"di": "dire", "fa": "fare", "da": "dare", "va": "andare", "sta": "stare"}
+
+_DESINENCIAS_IT = {
+    "are": ("o", "i", "a", "iamo", "ate", "ano", "avo", "avi", "ava", "avamo", "avate", "avano",
+            "erò", "erai", "erà", "eremo", "erete", "eranno", "erei", "eresti", "erebbe",
+            "eremmo", "ereste", "erebbero", "arò", "arai", "arà", "aremo", "arete", "aranno",
+            "arei", "aresti", "arebbe", "aremmo", "areste", "arebbero", "ai", "asti", "ò",
+            "ammo", "aste", "arono", "ino", "iate", "ato", "ata", "ati", "ate", "ando", "are",
+            "assi", "asse", "assimo", "assero"),
+    "ere": ("o", "i", "e", "iamo", "ete", "ono", "evo", "evi", "eva", "evamo", "evate", "evano",
+            "erò", "erai", "erà", "eremo", "erete", "eranno", "erei", "eresti", "erebbe",
+            "eremmo", "ereste", "erebbero", "ei", "etti", "é", "ette", "emmo", "este", "erono",
+            "ettero", "a", "ano", "iate", "uto", "uta", "uti", "ute", "iuto", "iuta", "iuti",
+            "iute", "endo", "ere", "essi", "esse", "essimo", "essero"),
+    "ire": ("o", "i", "e", "iamo", "ite", "ono", "ivo", "ivi", "iva", "ivamo", "ivate", "ivano",
+            "irò", "irai", "irà", "iremo", "irete", "iranno", "irei", "iresti", "irebbe",
+            "iremmo", "ireste", "irebbero", "ii", "isti", "ì", "immo", "iste", "irono", "a",
+            "ano", "iate", "ito", "ita", "iti", "ite", "endo", "ire", "isco", "isci", "isce",
+            "iscono", "isca", "iscano", "issi", "isse", "issimo", "issero"),
+}
+
+
+def _irregulares_it(w):
+    res = set(_FORMAS_IRREG_IT.get(w, set()))
+    # Participio irregular con género y número: fatta, scritti, aperte.
+    if not res and w[-1:] in "aie" and len(w) >= 4:
+        res |= {i for i in _FORMAS_IRREG_IT.get(w[:-1] + "o", set())
+                if (w[:-1] + "o").endswith(("to", "so"))}
+    return res
+
+
+def infinitivos_it(w, prefijos=True):
+    """Infinitivos posibles de una forma verbal italiana."""
+    res = _irregulares_it(w)
+    for tema, desinencias in _DESINENCIAS_IT.items():
+        for d in desinencias:
+            if w.endswith(d) and len(w) - len(d) >= 2:
+                raiz = w[: -len(d)]
+                res.add(raiz + tema)
+                if raiz.endswith(("ch", "gh")):  # cerchi → cercare, paghiamo → pagare
+                    res.add(raiz[:-1] + tema)
+                if tema == "are" and d[0] in "ie":  # studi → studiare, mangerò → mangiare
+                    res.add(raiz + "iare")
+                if tema == "ere" and raiz.endswith("uc"):  # traduco → tradurre
+                    res.add(raiz[:-1] + "rre")
+    # Infinitivo reflexivo enseñado como tal: chiamo → chiamarsi.
+    res |= {i[:-1] + "si" for i in list(res) if i.endswith("re")}
+    if prefijos:
+        for p in _PREFIJOS_IT:
+            if w.startswith(p) and len(w) - len(p) >= 3:
+                res |= {p + i for i in _irregulares_it(w[len(p):])}
+    return res
+
+
+def _enclitico_it(w, conocidas):
+    """Forma verbal + pronombres enclíticos: chiamarsi, vederlo, dimmi, dandoglielo."""
+    for c, bases in _CLITICOS_IT.items():
+        if not w.endswith(c) or len(w) - len(c) < 2 or not bases & conocidas:
+            continue
+        resto = w[: -len(c)]
+        restos = {resto}
+        for comb, base in _CLITICOS_COMB_IT.items():
+            if resto.endswith(comb) and len(resto) - len(comb) >= 2 and base in conocidas:
+                restos.add(resto[: -len(comb)])
+        for r in set(restos):
+            # Consonante doblada tras imperativo corto: dimmi, fallo, dammelo.
+            if len(r) >= 3 and r[-1] == c[0] and r[:-1] in _IMPERATIVO_CORTO_IT:
+                if _IMPERATIVO_CORTO_IT[r[:-1]] in conocidas:
+                    return True
+            candidatos = {r + "e"} if r.endswith("r") else set()  # chiamar(si) → chiamare
+            candidatos |= infinitivos_it(r)
+            if candidatos & conocidas:
+                return True
+    return False
+
+
+def _elision_it(prefijo, conocidas):
+    """La parte elidida delante del apóstrofo (l', dell', un', c', quest', anch')."""
+    if prefijo in conocidas or any(prefijo + v in conocidas for v in _VOCALES_IT):
+        return True
+    if _ELISION_IT.get(prefijo, set()) & conocidas:
+        return True
+    prep = _PREP_ART_IT.get(prefijo)
+    if prep and prep in conocidas and _ARTICULO_L_IT & conocidas:
+        return True
+    # Ya enseñada en otra palabra elidida: «l'amico» enseña «l'» para «l'acqua».
+    return any(c.startswith(prefijo + "'") for c in conocidas if "'" in c)
+
+
+def _grafias_it(w):
+    """é/è finales intercambiables (perché/perchè, caffè/caffé)."""
+    res = {w}
+    if w.endswith("é"):
+        res.add(w[:-1] + "è")
+    elif w.endswith("è"):
+        res.add(w[:-1] + "é")
+    return res
+
+
+def conocida_it(w, conocidas):
+    """Como `conocida` (sin la morfología inglesa), aceptando además la elisión
+    (l'amico, dell'acqua, c'è, un'amica), truncamientos (po', buon), flexiones
+    italianas de palabras enseñadas (plural, femenino, -issimo, -mente), formas
+    verbales (regulares, irregulares frecuentes, verbos.json si existe) y
+    enclíticos. Las mayúsculas y comillas ya las quita `palabras`."""
+    if w in conocidas or any(c.isdigit() for c in w):
+        return True
+    if "'" in w:
+        prefijo, _, resto = w.partition("'")
+        return bool(prefijo) and _elision_it(prefijo, conocidas) and conocida_it(resto, conocidas)
+    formas = formas_verbales("it")
+    for g in _grafias_it(w):
+        if g in conocidas:
+            return True
+        candidatos = {g} | bases_it(g) | formas.get(g, set()) | infinitivos_it(g)
+        if g in _APOCOPE_IT:
+            candidatos.add(_APOCOPE_IT[g])
+        if candidatos & conocidas:
+            return True
+    if _enclitico_it(w, conocidas):
+        return True
+    # Vista ya tras un apóstrofo en lo enseñado: «dov'è» enseña «è».
+    return any(c.endswith("'" + w) for c in conocidas if "'" in c)
+
+
+# ── Ruso, coreano, japonés y chino ────────────────────────────────────────
+# Sin morfología inventada: una forma cuenta solo si se enseñó tal cual (el
+# vocablo «читать (читаю)» o «자다 (자요)» enseña las dos formas, porque
+# `palabras` parte por los paréntesis). Los campos `rom` nunca se validan.
+# Mismas reglas en lib/core/aprendizaje/integridad.dart.
+
+def normalizar_ru(w):
+    """Sin acento gráfico (U+0301) y con ё ≡ е, para comparar."""
+    return w.replace("́", "").replace("ё", "е")
+
+
+def conocida_ru(w, conocidas):
+    """Forma exacta enseñada, ignorando el acento U+0301 y la diferencia ё/е."""
+    if w in conocidas or any(c.isdigit() for c in w):
+        return True
+    n = normalizar_ru(w)
+    return n in conocidas or any(normalizar_ru(c) == n for c in conocidas)
+
+
+def conocida_cjk(w, conocidas):
+    """Japonés y chino: el curso escribe con espacios entre palabras y
+    `palabras` quita la puntuación de ancho completo. Sin segmentar: cada
+    token, partículas sueltas incluidas (は, の, 的, 吗), debe estar enseñado."""
+    return w in conocidas or any(c.isdigit() for c in w)
+
+
+# Partículas que pueden ir pegadas a un sustantivo en el eojeol (ficha ko.md).
+PARTICULAS_KO = ("은", "는", "이", "가", "을", "를", "에", "에서", "도", "의", "와", "과",
+                 "하고", "으로", "로", "이에요", "예요", "에게", "한테", "부터", "까지",
+                 "만", "보다", "처럼", "이랑", "랑")
+# Partícula de tema/adición tras otra de caso: 서울에서는, 주말에는, 저한테도.
+_PARTICULAS_KO_FINAL = ("은", "는", "도", "만")
+_PARTICULAS_KO_INTERIOR = ("에", "에서", "에게", "한테", "하고", "와", "과", "으로", "로",
+                           "부터", "까지", "보다", "처럼", "이랑", "랑")
+
+
+def _quitar_particula_ko(w, conocidas, particulas):
+    """Raíces de `w` tras quitar una partícula final enseñada (sin tocar jamo)."""
+    return {w[: -len(p)] for p in particulas
+            if len(w) > len(p) and w.endswith(p) and p in conocidas}
+
+
+def conocida_ko(w, conocidas):
+    """Eojeol enseñado tal cual, o sustantivo enseñado + partícula pegada que
+    también se enseñó (저는, 서울에서, 학생이에요); como mucho dos partículas
+    si la última es 은/는/도/만 (서울에서는). Los verbos conjugados solo
+    cuentan si se enseñó esa forma exacta."""
+    if w in conocidas or any(c.isdigit() for c in w):
+        return True
+    if _quitar_particula_ko(w, conocidas, PARTICULAS_KO) & conocidas:
+        return True
+    return any(_quitar_particula_ko(r, conocidas, _PARTICULAS_KO_INTERIOR) & conocidas
+               for r in _quitar_particula_ko(w, conocidas, _PARTICULAS_KO_FINAL))
+
+
 def conocida_para(idioma):
     """Prueba de «palabra conocida» que corresponde al idioma de la ruta."""
-    return {"pt": conocida_pt, "de": conocida_de}.get(idioma, conocida)
+    return {"pt": conocida_pt, "de": conocida_de, "it": conocida_it, "ru": conocida_ru,
+            "ko": conocida_ko, "ja": conocida_cjk, "zh": conocida_cjk}.get(idioma, conocida)
 
 
 def huella_item(item):
@@ -474,7 +811,8 @@ class Validador:
                 if u.get("id") in unidades:
                     self.error(u.get("id"), "id de unidad duplicado")
                 unidades[u.get("id")] = u
-        if not unidades:
+        # Curso «en preparación» (it, ja, ko, ru, zh): módulos vacíos a propósito.
+        if not unidades and (curso.get("modulos") or self.borradores):
             self.error("curso", "sin unidades")
         self.grafo(unidades)
         for u in unidades.values():

@@ -11,7 +11,7 @@ void main() {
   setUpAll(() async {
     final cargador = CargadorRuta();
     rutas = {
-      for (final idioma in ['en', 'ja', 'ko', 'ru'])
+      for (final idioma in ['en'])
         idioma: (await cargador.cargar(idioma))!,
     };
   });
@@ -62,22 +62,6 @@ void main() {
     }, ahora: DateTime(2026, 9, 27));
     expect(estados[unidad.id]!.repasoPendiente, isTrue);
     expect(unidadRecomendada(ruta, estados)?.id, unidad.id);
-  });
-
-  test('ja/ko/ru: alfabetización explícita no se vuelve omitible', () {
-    for (final idioma in ['ja', 'ko', 'ru']) {
-      final ruta = rutas[idioma]!;
-      final fundamentos = ruta.delNivel('f0');
-      expect(fundamentos, isNotEmpty, reason: idioma);
-      final alfabetizacion = fundamentos.where(alfabetizacionObligatoria);
-      expect(alfabetizacion, isNotEmpty, reason: idioma);
-      final estados = estadosRuta(ruta, {}, nivelBase: 1);
-      expect(
-        alfabetizacion.every((u) => !estados[u.id]!.omitible),
-        isTrue,
-        reason: idioma,
-      );
-    }
   });
 
   test('fallar un repaso crea refuerzo sin borrar el dominio histórico', () {

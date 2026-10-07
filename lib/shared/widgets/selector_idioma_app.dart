@@ -33,12 +33,20 @@ class SelectorIdiomaApp extends ConsumerWidget {
               label: Text(e.value),
               selected: actual == e.key,
               showCheckmark: false,
-              selectedColor: sobreColor ? OL.blanco : OL.moradoClaro,
-              backgroundColor: sobreColor
-                  ? OL.blanco.withValues(alpha: .15)
-                  : OL.blanco,
+              // M3 ignora backgroundColor/selectedColor en parte: se fija el
+              // color por estado con `color` para que el chip nunca salga
+              // blanco opaco con texto blanco.
+              color: WidgetStateProperty.resolveWith<Color?>((states) {
+                final sel = states.contains(WidgetState.selected);
+                if (sobreColor) {
+                  return sel ? OL.blanco : OL.blanco.withValues(alpha: .15);
+                }
+                return sel ? OL.moradoClaro : OL.blanco;
+              }),
               labelStyle: TextStyle(
                 fontWeight: FontWeight.w800,
+                // Sobre fondo morado: no seleccionado = texto blanco; en el
+                // resto de casos el texto es morado (contrasta con blanco).
                 color: sobreColor && actual != e.key ? OL.blanco : OL.morado,
               ),
               side: BorderSide(

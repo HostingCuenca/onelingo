@@ -6,6 +6,10 @@ import 'package:onelingo/core/aprendizaje/modelos.dart';
 import 'package:onelingo/core/content/curriculum.dart';
 import 'package:onelingo/core/content/fundamentos.dart' show idiomasSoloRutaF0;
 
+/// Idiomas sin ruta nueva: su curso está «en preparación» (sin módulos; las
+/// lecciones antiguas se retiraron).
+const _enPreparacion = {'it', 'ja', 'ko', 'ru', 'zh'};
+
 /// Integridad de las rutas de los 10 idiomas habilitados.
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +19,11 @@ void main() {
       final cargador = CargadorRuta();
       final ruta = await cargador.cargar(l.code);
       expect(ruta, isNotNull, reason: 'falta assets/contenido/${l.code}/ruta');
+      if (_enPreparacion.contains(l.code)) {
+        expect(ruta!.unidades, isEmpty, reason: l.code);
+        expect(cargador.modulosConError, isEmpty, reason: l.code);
+        return;
+      }
       final unidades = ruta!.delNivel('f0');
       expect(unidades.length, greaterThanOrEqualTo(5));
       expect(
@@ -125,9 +134,9 @@ void main() {
   );
 
   test(
-    'Los 10 idiomas tienen escritura/sonidos y un A1 inicial con tablas',
+    'Los idiomas con ruta tienen escritura/sonidos y un A1 inicial con tablas',
     () async {
-      for (final l in idiomas) {
+      for (final l in idiomas.where((l) => !_enPreparacion.contains(l.code))) {
         final ruta = (await CargadorRuta().cargar(l.code))!;
         bool conTabla(List<UnidadRuta> us) =>
             us.any((u) => u.pasos.any((p) => p.tipo == TipoPaso.tabla));

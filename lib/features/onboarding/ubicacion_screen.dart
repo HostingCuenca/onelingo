@@ -8,12 +8,14 @@ import '../../app/theme.dart';
 import '../../core/api/sync.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/aprendizaje/ubicacion.dart';
+import '../../core/content/curriculum.dart' as cur show idioma;
 import '../../core/content/curriculum.dart' show idioma;
 import '../../core/diagnostico.dart';
 import '../../core/efectos.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
+import '../../shared/widgets/tarjeta_en_preparacion.dart';
 import '../ruta/item_view.dart';
 import 'diagnostico_screen.dart';
 
@@ -533,7 +535,16 @@ class PruebaNivelScreen extends ConsumerWidget {
       idioma: idioma,
       configuracion: configuracion,
     );
-    if (!idiomasConRuta.contains(meta)) return anterior;
+    // Idiomas sin ruta nueva (it, ja, ko, ru, zh): aún no hay prueba de nivel.
+    if (!idiomasConRuta.contains(meta)) {
+      return Scaffold(
+        appBar: AppBar(title: Text(tr('Prueba de nivel'))),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: TarjetaEnPreparacion(idioma: cur.idioma(meta).nombre),
+        ),
+      );
+    }
     return ref
         .watch(bancoUbicacionProvider(meta))
         .when(

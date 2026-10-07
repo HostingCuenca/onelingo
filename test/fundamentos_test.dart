@@ -15,7 +15,7 @@ void main() {
 
   test('el nivel 0 (Fundamentos) existe en los idiomas con contenido antiguo y genera lecciones cortas', () async {
     // El portugués se reinició desde cero (DEC-035): su Fundamentos es solo la ruta f0.
-    for (final idm in ['en', 'es', 'fr', 'de', 'it', 'zh', 'ja', 'ko', 'ru']) {
+    for (final idm in ['en', 'es', 'fr', 'de']) {
       await ContenidoJson.precargar(idm);
       idiomaContenido = idm;
       expect(Fundamentos.unidades(idm).length, 8, reason: idm);
@@ -107,14 +107,13 @@ void main() {
     expect(idiomasConRuta, contains('de'));
   });
 
-  test('el japonés empieza por hiragana y el coreano por hangul', () async {
-    await ContenidoJson.precargar('ja');
-    await ContenidoJson.precargar('ko');
-    expect(Fundamentos.unidades('ja').first.items.first.simbolo, 'あ');
-    expect(Fundamentos.unidades('ko').first.items.first.simbolo, 'ㄱ');
-    expect(Fundamentos.unidades('ko').first.esEscritura, isTrue);
-    idiomaContenido = 'ja';
-    expect(leccionesDe(0).first.titulo, startsWith('Descubre'));
+  test('it, ja, ko, ru y zh no tienen Fundamentos antiguos (curso en preparación)', () async {
+    for (final idm in ['it', 'ja', 'ko', 'ru', 'zh']) {
+      await ContenidoJson.precargar(idm);
+      expect(Fundamentos.disponible(idm), isFalse, reason: idm);
+      idiomaContenido = idm;
+      expect(leccionesDe(0), isEmpty, reason: idm);
+    }
     idiomaContenido = 'en';
   });
 }

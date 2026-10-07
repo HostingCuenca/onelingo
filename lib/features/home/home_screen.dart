@@ -12,6 +12,7 @@ import '../../core/state/providers.dart';
 import '../../shared/widgets/daily_activities.dart';
 import '../../shared/widgets/mascot_coach.dart';
 import '../../shared/widgets/streak_card.dart';
+import '../../shared/widgets/tarjeta_en_preparacion.dart';
 import '../../shared/widgets/tutor_avatar_banner.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -24,9 +25,6 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
-    final n = s.nivelActual;
-    final lvl = nivel(n);
-    final actual = s.leccionActual(n);
     final meta = idioma(s.idiomaMeta);
     final restante = s.trialRestante;
     final nombre = nombreLimpio(s.nombre, email: s.email).split(' ').first;
@@ -52,10 +50,6 @@ class HomeScreen extends ConsumerWidget {
                   context.go('/nivel0');
                 } else if (s.fundamentosPendientes) {
                   context.go('/fundamentos');
-                } else if (idiomasConRuta.contains(s.idiomaMeta)) {
-                  context.go('/aprender');
-                } else if (actual != null) {
-                  context.push('/leccion/${actual.id}');
                 } else {
                   context.go('/aprender');
                 }
@@ -89,157 +83,11 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             if (s.planId.isEmpty) _TrialBanner(restante: restante),
             if (s.planId.isEmpty) const SizedBox(height: 16),
-            // Lecciones antiguas: solo idiomas que aún no tienen ruta por niveles.
+            // Idiomas sin ruta nueva (it, ja, ko, ru, zh): curso en preparación.
             if (!idiomasConRuta.contains(s.idiomaMeta)) ...[
               TituloSeccion(tr('Tu camino de aprendizaje')),
               const SizedBox(height: 10),
-              Tarjeta(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            meta.nombre,
-                            style: const TextStyle(
-                              color: OL.morado,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                          Text(
-                            n == 0
-                                ? tr('Fundamentos · empieza de cero')
-                                : tr('Nivel {n} · {nombre}', {'n': n, 'nombre': lvl.nombre}),
-                            style: const TextStyle(color: OL.gris),
-                          ),
-                          Text(
-                            tr('{hechas} de {total} lecciones', {'hechas': s.completadasEnNivel(n), 'total': totalLeccionesDe(n)}),
-                            style: const TextStyle(color: OL.gris),
-                          ),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: 200,
-                            height: 44,
-                            child: ElevatedButton(
-                              onPressed: actual == null
-                                  ? () => context.push('/examen/$n')
-                                  : () => context.push('/leccion/${actual.id}'),
-                              child: Text(
-                                actual == null ? tr('Hacer examen') : tr('Continuar'),
-                                style: const TextStyle(fontSize: 14),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    AnilloProgreso(
-                      valor: s.progresoNivel(n),
-                      tamano: 84,
-                      color: OL.verde,
-                      child: Text(
-                        '${(s.progresoNivel(n) * 100).round()}%',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 22),
-              if (s.diagnostico != null &&
-                  ((s.diagnostico!['plan'] as List?) ?? []).isNotEmpty) ...[
-                TituloSeccion(tr('Tu plan de refuerzo')),
-                const SizedBox(height: 10),
-                Tarjeta(
-                  color: OL.moradoSuave,
-                  sombra: false,
-                  onTap: () => context.go('/perfil'),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        tr('Tu prueba de nivel: nivel {nivel}', {'nivel': s.diagnostico!['nivel']}),
-                        style: const TextStyle(fontWeight: FontWeight.w800),
-                      ),
-                      const SizedBox(height: 6),
-                      for (final linea
-                          in ((s.diagnostico!['plan'] as List).cast<String>())
-                              .take(3))
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 3),
-                          child: Text('• $linea'),
-                        ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 18),
-              ],
-              TituloSeccion(tr('Lección diaria')),
-              const SizedBox(height: 10),
-              if (actual != null)
-                Tarjeta(
-                  color: OL.moradoClaro,
-                  sombra: false,
-                  onTap: () => context.push('/leccion/${actual.id}'),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  unidadesDe(n)[actual.unidad - 1].icono,
-                                  size: 18,
-                                  color: OL.morado,
-                                ),
-                                const SizedBox(width: 6),
-                                Text(
-                                  tr('Lección {n}', {'n': actual.numero}),
-                                  style: const TextStyle(
-                                    color: OL.morado,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              actual.titulo,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                            Text(
-                              '${actual.subtitulo} · +${actual.xp} XP',
-                              style: const TextStyle(color: OL.gris),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const IconoCuadro(
-                        Icons.play_arrow_rounded,
-                        relleno: true,
-                        tamano: 48,
-                        radio: 24,
-                      ),
-                    ],
-                  ),
-                )
-              else
-                Tarjeta(
-                  color: OL.verdeSuave,
-                  sombra: false,
-                  child: Text(
-                    tr('Completaste las 100 lecciones del nivel. ¡Es hora del examen final!'),
-                  ),
-                ),
+              TarjetaEnPreparacion(idioma: meta.nombre),
               const SizedBox(height: 22),
             ],
             const TutorAvatarBanner(),

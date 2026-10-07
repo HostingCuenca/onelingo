@@ -6,13 +6,12 @@ import 'package:onelingo/core/models/models.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('el currículo usa el contenido JSON empaquetado cuando existe', () async {
+  test('un idioma sin ruta nueva (zh) ya no carga lecciones antiguas', () async {
     await ContenidoJson.precargar('zh');
-    expect(ContenidoJson.unidades('zh', 1)?.length, 20);
+    expect(ContenidoJson.unidades('zh', 1), isNull);
     idiomaContenido = 'zh';
-    final u1 = unidadesDe(1).first;
-    expect(u1.vocab.first.$1, '我 (wǒ)'); // Unidad 1: pronombres (semilla manual)
-    expect(leccionesDe(1).length, 100);
+    expect(unidadesDe(1), isEmpty);
+    expect(leccionesDe(1), isEmpty);
     idiomaContenido = 'en';
   });
 

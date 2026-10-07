@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../app/theme.dart';
+import '../aprendizaje/providers.dart' show idiomasConRuta;
 import '../models/models.dart';
 import 'contenido_json.dart';
 import 'fundamentos.dart';
@@ -429,6 +430,9 @@ void invalidarCacheContenido(String idioma) {
 List<Unit> unidadesDe(int n) {
   final idm = idiomaContenido;
   return _cacheUnidades.putIfAbsent('$idm-$n', () {
+    // Idiomas sin ruta nueva (it, ja, ko, ru, zh): sin lecciones antiguas;
+    // la app muestra «En preparación» (tutor, situaciones y práctica siguen).
+    if (!idiomasConRuta.contains(idm)) return const <Unit>[];
     // 0) Fundamentos (nivel 0): tramo previo para empezar de cero.
     if (n == 0) return Fundamentos.comoUnits(idm);
     // 1) Contenido generado por el pipeline, si está empaquetado en assets.

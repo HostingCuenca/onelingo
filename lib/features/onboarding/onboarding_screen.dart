@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/aprendizaje/providers.dart' show idiomasConRuta;
 import '../../core/api/sync.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/i18n/i18n.dart';
@@ -151,7 +152,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     _persistir();
     // El nivel elegido es solo el punto de partida: la prueba decide en todos
     // los idiomas (nadie se ubica alto sin demostrarlo). Desde cero, sin prueba.
-    if (paso == 5 && (meta == 'en' || nivelInicial > 0)) {
+    // Idiomas sin ruta nueva (it, ja, ko, ru, zh): no hay prueba de nivel;
+    // se empieza desde cero.
+    if (paso == 5 && !idiomasConRuta.contains(meta)) {
+      nivelInicial = 0;
+    } else if (paso == 5 && (meta == 'en' || nivelInicial > 0)) {
       final r = await context.push<Map<String, dynamic>>(
         '/prueba-nivel',
         extra: {

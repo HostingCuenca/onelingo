@@ -2,7 +2,7 @@ import 'correccion.dart';
 import 'grafo.dart';
 import 'modelos.dart';
 
-final _puntuacion = RegExp(r'[.,!?¡¿;:。、！？「」…"“”„()«»‹›—–，：；]');
+final _puntuacion = RegExp(r'[.,!?¡¿;:。、！？「」『』・（）…"“”„()«»‹›—–，：；]');
 
 /// Palabras de un texto en el idioma meta (misma regla que tools/validar_ruta.py).
 List<String> palabrasMeta(String texto) => texto
@@ -570,10 +570,738 @@ bool palabraConocidaDe(
       );
 }
 
+// ── Italiano ────────────────────────────────────────────────────────────────
+// Heurística como la del alemán: una forma cuenta si su base ya se enseñó.
+// Elisión (l'amico, dell'acqua, c'è, quest'anno), truncamiento (po', buon,
+// signor), plurales/femeninos, -issimo/-mente, verbos regulares (-are, -ere,
+// -ire, -isc-), irregulares frecuentes y pronombres enclíticos (chiamarsi,
+// dimmi). Misma regla que `conocida_it` en tools/validar_ruta.py.
+
+const _vocalesIt = ['a', 'e', 'i', 'o'];
+
+/// Elididas sin vocal fácil de reponer: l' = il/lo/la, dell' = del/della…
+const _elididasIt = {
+  'l': {'il', 'la', 'lo'},
+  'gl': {'gli'},
+  'dell': {'del', 'della', 'dello'},
+  'nell': {'nel', 'nella', 'nello'},
+  'all': {'al', 'alla', 'allo'},
+  'sull': {'sul', 'sulla', 'sullo'},
+  'dall': {'dal', 'dalla', 'dallo'},
+  'coll': {'col', 'colla', 'collo'},
+  'un': {'una', 'uno'},
+};
+
+/// Preposición articulada elidida = preposición + artículo enseñados aparte.
+const _prepArtIt = {
+  'dell': 'di',
+  'nell': 'in',
+  'all': 'a',
+  'sull': 'su',
+  'dall': 'da',
+  'coll': 'con',
+};
+const _articuloLIt = {'il', 'l', 'la', 'lo'};
+
+/// Truncamientos (po' → po, buon, signor).
+const _apocopeIt = {
+  'po': 'poco',
+  'be': 'bene',
+  'buon': 'buono',
+  'bel': 'bello',
+  'quel': 'quello',
+  'gran': 'grande',
+  'san': 'santo',
+  'nessun': 'nessuno',
+  'ciascun': 'ciascuno',
+  'alcun': 'alcuno',
+  'qual': 'quale',
+  'tal': 'tale',
+  'signor': 'signore',
+  'dottor': 'dottore',
+  'professor': 'professore',
+  'ingegner': 'ingegnere',
+  'suor': 'suora',
+  'mal': 'male',
+  'ben': 'bene',
+  'fin': 'fino',
+};
+const _pluralIrregIt = {
+  'uomini': 'uomo',
+  'uova': 'uovo',
+  'dita': 'dito',
+  'braccia': 'braccio',
+  'labbra': 'labbro',
+  'ossa': 'osso',
+  'paia': 'paio',
+  'migliaia': 'migliaio',
+  'centinaia': 'centinaio',
+  'ginocchia': 'ginocchio',
+  'mogli': 'moglie',
+  'buoi': 'bue',
+  'templi': 'tempio',
+};
+const _sufNominalIt = [
+  ('chi', ['co']),
+  ('ghi', ['go']),
+  ('che', ['ca']),
+  ('ghe', ['ga']),
+  ('ci', ['co', 'ce', 'cio', 'cia']),
+  ('gi', ['go', 'ge', 'gio', 'gia']),
+  ('ce', ['cia']),
+  ('ge', ['gia']),
+  ('trice', ['tore']),
+  ('trici', ['tore', 'trice']),
+  ('essa', ['e', 'o']),
+  ('esse', ['e', 'o', 'essa']),
+  ('i', ['o', 'e', 'a', 'io']),
+  ('e', ['a']),
+  ('a', ['o']),
+];
+
+/// Palabras que parecen flexión de otra y no lo son (anche ≠ anca, dei ≠ dea).
+const _noDerivarIt = {
+  'a',
+  'anche',
+  'bene',
+  'che',
+  'ci',
+  'come',
+  'da',
+  'dei',
+  'di',
+  'e',
+  'fa',
+  'fra',
+  'gli',
+  'i',
+  'la',
+  'le',
+  'lei',
+  'lo',
+  'ma',
+  'mai',
+  'male',
+  'mi',
+  'ne',
+  'nei',
+  'o',
+  'oggi',
+  'poi',
+  'qua',
+  'qui',
+  'se',
+  'sei',
+  'si',
+  'ti',
+  'tra',
+  'va',
+  'vi',
+};
+
+/// Formas irregulares frecuentes (presente, pasado remoto, futuro/condicional
+/// con raíz contraída, subjuntivo y participio).
+final _formasIrregIt = _formaAInfDe(const {
+  'essere':
+      'sono sei è siamo siete ero eri era eravamo eravate erano '
+      'fui fu fummo foste furono sarò sarai sarà saremo sarete '
+      'saranno sarei saresti sarebbe saremmo sareste sarebbero '
+      'sia siano siate fossi fosse fossimo fossero stato stata '
+      'stati state',
+  'avere':
+      'ho hai ha abbiamo avete hanno ebbi ebbe ebbero avrò avrai '
+      'avrà avremo avrete avranno avrei avresti avrebbe avremmo '
+      'avreste avrebbero abbia abbiano abbiate',
+  'andare':
+      'vado vai va vanno andrò andrai andrà andremo andrete '
+      'andranno andrei andresti andrebbe andremmo andreste '
+      'andrebbero vada vadano',
+  'fare':
+      'faccio fai fa facciamo fate fanno facevo facevi faceva '
+      'facevamo facevate facevano feci fece facemmo faceste '
+      'fecero faccia facciano facendo fatto',
+  'stare':
+      'sto stai sta stiamo stanno stetti stette stettero stia '
+      'stiano',
+  'dare':
+      'do dai dà diamo danno diedi diede diedero dettero dia '
+      'diano',
+  'dire':
+      'dico dici dice diciamo dite dicono dicevo dicevi diceva '
+      'dicevamo dicevate dicevano dirò dirai dirà diremo direte '
+      'diranno direi diresti direbbe dissi disse dissero dica '
+      'dicano dicendo detto',
+  'potere':
+      'posso puoi può possiamo potete possono potrò potrai potrà '
+      'potremo potrete potranno potrei potresti potrebbe potremmo '
+      'potreste potrebbero possa possano',
+  'volere':
+      'voglio vuoi vuole vogliamo volete vogliono vorrò vorrai '
+      'vorrà vorremo vorrete vorranno vorrei vorresti vorrebbe '
+      'vorremmo vorreste vorrebbero volli volle vollero voglia '
+      'vogliano',
+  'dovere':
+      'devo debbo devi deve dobbiamo dovete devono debbono dovrò '
+      'dovrai dovrà dovremo dovrete dovranno dovrei dovresti '
+      'dovrebbe dovremmo dovreste dovrebbero debba debbano',
+  'sapere':
+      'so sai sa sappiamo sanno saprò saprai saprà sapremo '
+      'saprete sapranno saprei sapresti saprebbe sapremmo '
+      'sapreste saprebbero seppi seppe seppero sappia sappiano',
+  'venire':
+      'vengo vieni viene vengono verrò verrai verrà verremo '
+      'verrete verranno verrei verresti verrebbe verremmo '
+      'verreste verrebbero venni venne vennero venga vengano',
+  'uscire': 'esco esci esce escono esca escano',
+  'bere':
+      'bevo bevi beve beviamo bevete bevono bevevo bevevi beveva '
+      'bevevamo bevevate bevevano berrò berrai berrà berremo '
+      'berrete berranno berrei berresti berrebbe bevvi bevve '
+      'bevvero beva bevano bevendo bevuto',
+  'tenere':
+      'tengo tieni tiene tengono terrò terrai terrà terremo '
+      'terrete terranno terrei terresti terrebbe tenni tenne '
+      'tennero tenga tengano',
+  'rimanere':
+      'rimango rimangono rimarrò rimarrai rimarrà rimarrei rimasi '
+      'rimase rimasero rimasto rimanga',
+  'piacere': 'piaccio piacciono piacque piacquero piaccia piacciano',
+  'morire': 'muoio muori muore muoiono morto muoia',
+  'salire': 'salgo salgono salga',
+  'scegliere': 'scelgo scelgono scelsi scelse scelsero scelto scelga',
+  'togliere': 'tolgo tolgono tolsi tolse tolto tolga',
+  'sedere': 'siedo siedi siede siedono sieda',
+  'nascere': 'nacqui nacque nacquero nato',
+  'vivere':
+      'vissi visse vissero vissuto vivrò vivrai vivrà vivremo '
+      'vivrete vivranno vivrei',
+  'vedere':
+      'vidi vide videro visto vedrò vedrai vedrà vedremo vedrete '
+      'vedranno vedrei vedresti vedrebbe',
+  'prendere': 'presi prese presero preso',
+  'mettere': 'misi mise misero messo',
+  'leggere': 'lessi lesse lessero letto',
+  'scrivere': 'scrissi scrisse scrissero scritto',
+  'aprire': 'aperto',
+  'offrire': 'offerto',
+  'soffrire': 'sofferto',
+  'coprire': 'coperto',
+  'chiudere': 'chiusi chiuse chiusero chiuso',
+  'rispondere': 'risposi rispose risposero risposto',
+  'chiedere': 'chiesi chiese chiesero chiesto',
+  'correre': 'corsi corse corsero corso',
+  'perdere': 'persi perse persero perso',
+  'decidere': 'decisi decise decisero deciso',
+  'scendere': 'scesi scese scesero sceso',
+  'spendere': 'spesi spese spesero speso',
+  'accendere': 'accesi accese acceso',
+  'rompere': 'ruppi ruppe ruppero rotto',
+  'muovere': 'mossi mosse mosso',
+  'succedere': 'successe successo',
+  'conoscere': 'conobbi conobbe conobbero',
+  'crescere': 'crebbi crebbe',
+  'vincere': 'vinsi vinse vinto',
+  'spegnere': 'spensi spense spento',
+  'piangere': 'piansi pianse pianto',
+  'ridere': 'risi rise riso',
+  'dividere': 'divisi divise diviso',
+  'porre': 'pongo poni pone poniamo ponete pongono posi pose posto',
+});
+
+/// Prefijos de compuestos de irregulares (rifare, ottenere, permettere).
+const _prefijosIt = [
+  'sotto',
+  'ri',
+  'pre',
+  'com',
+  'con',
+  'dis',
+  'man',
+  'ot',
+  'per',
+  'pro',
+  'tra',
+  'sor',
+  'av',
+  'ap',
+  'sup',
+  'im',
+  'in',
+];
+const _cliticosIt = {
+  'lo': {'lo'},
+  'la': {'la'},
+  'li': {'li'},
+  'le': {'le'},
+  'ne': {'ne'},
+  'mi': {'mi'},
+  'ti': {'ti'},
+  'si': {'si'},
+  'ci': {'ci'},
+  'vi': {'vi'},
+  'gli': {'gli'},
+};
+
+/// Primer clítico de un grupo (me lo → melo, glielo).
+const _cliticosCombIt = {
+  'me': 'mi',
+  'te': 'ti',
+  'se': 'si',
+  'ce': 'ci',
+  've': 'vi',
+  'glie': 'gli',
+};
+
+/// Imperativos cortos que doblan la consonante del clítico (dimmi, fallo).
+const _imperativoCortoIt = {
+  'di': 'dire',
+  'fa': 'fare',
+  'da': 'dare',
+  'va': 'andare',
+  'sta': 'stare',
+};
+const _desinenciasIt = {
+  'are': [
+    'o',
+    'i',
+    'a',
+    'iamo',
+    'ate',
+    'ano',
+    'avo',
+    'avi',
+    'ava',
+    'avamo',
+    'avate',
+    'avano',
+    'erò',
+    'erai',
+    'erà',
+    'eremo',
+    'erete',
+    'eranno',
+    'erei',
+    'eresti',
+    'erebbe',
+    'eremmo',
+    'ereste',
+    'erebbero',
+    'arò',
+    'arai',
+    'arà',
+    'aremo',
+    'arete',
+    'aranno',
+    'arei',
+    'aresti',
+    'arebbe',
+    'aremmo',
+    'areste',
+    'arebbero',
+    'ai',
+    'asti',
+    'ò',
+    'ammo',
+    'aste',
+    'arono',
+    'ino',
+    'iate',
+    'ato',
+    'ata',
+    'ati',
+    'ate',
+    'ando',
+    'are',
+    'assi',
+    'asse',
+    'assimo',
+    'assero',
+  ],
+  'ere': [
+    'o',
+    'i',
+    'e',
+    'iamo',
+    'ete',
+    'ono',
+    'evo',
+    'evi',
+    'eva',
+    'evamo',
+    'evate',
+    'evano',
+    'erò',
+    'erai',
+    'erà',
+    'eremo',
+    'erete',
+    'eranno',
+    'erei',
+    'eresti',
+    'erebbe',
+    'eremmo',
+    'ereste',
+    'erebbero',
+    'ei',
+    'etti',
+    'é',
+    'ette',
+    'emmo',
+    'este',
+    'erono',
+    'ettero',
+    'a',
+    'ano',
+    'iate',
+    'uto',
+    'uta',
+    'uti',
+    'ute',
+    'iuto',
+    'iuta',
+    'iuti',
+    'iute',
+    'endo',
+    'ere',
+    'essi',
+    'esse',
+    'essimo',
+    'essero',
+  ],
+  'ire': [
+    'o',
+    'i',
+    'e',
+    'iamo',
+    'ite',
+    'ono',
+    'ivo',
+    'ivi',
+    'iva',
+    'ivamo',
+    'ivate',
+    'ivano',
+    'irò',
+    'irai',
+    'irà',
+    'iremo',
+    'irete',
+    'iranno',
+    'irei',
+    'iresti',
+    'irebbe',
+    'iremmo',
+    'ireste',
+    'irebbero',
+    'ii',
+    'isti',
+    'ì',
+    'immo',
+    'iste',
+    'irono',
+    'a',
+    'ano',
+    'iate',
+    'ito',
+    'ita',
+    'iti',
+    'ite',
+    'endo',
+    'ire',
+    'isco',
+    'isci',
+    'isce',
+    'iscono',
+    'isca',
+    'iscano',
+    'issi',
+    'isse',
+    'issimo',
+    'issero',
+  ],
+};
+
+final _issimoIt = RegExp(r'^(.{2,})issim[oaie]$');
+final _menteIt = RegExp(r'^(.{2,})mente$');
+
+/// Bases posibles de una flexión nominal/adjetival italiana: plural (-i, -e,
+/// -chi/-ghi, -ci/-gi, -ce/-ge, irregulares), femenino → masculino,
+/// -trice/-essa, superlativo -issimo y adverbio en -mente (misma regla que
+/// `bases_it` en tools/validar_ruta.py).
+Set<String> basesFlexionIt(String w) {
+  if (_noDerivarIt.contains(w)) return {};
+  final res = <String>{};
+  final irreg = _pluralIrregIt[w];
+  if (irreg != null) res.add(irreg);
+  final issimo = _issimoIt.firstMatch(w);
+  if (issimo != null) {
+    final r = issimo.group(1)!;
+    res.addAll(['${r}o', '${r}e', '${r}a']);
+  }
+  final mente = _menteIt.firstMatch(w);
+  if (mente != null) {
+    final r = mente.group(1)!;
+    res.addAll([r, '${r}e']);
+    if (r.endsWith('a')) res.add('${r.substring(0, r.length - 1)}o');
+  }
+  for (final x in [w, ...res]) {
+    for (final (suf, reemplazos) in _sufNominalIt) {
+      if (x.endsWith(suf) && x.length - suf.length >= 2) {
+        for (final r in reemplazos) {
+          res.add(_sinFinal(x, suf) + r);
+        }
+      }
+    }
+  }
+  // Femenino → masculino también sobre lo ya obtenido (italiane → italiano).
+  for (final x in [...res]) {
+    if (x.endsWith('a') && x.length >= 3) res.add('${_sinFinal(x, 'a')}o');
+  }
+  res.remove(w);
+  return res;
+}
+
+Set<String> _irregularesIt(String w) {
+  final res = {...?_formasIrregIt[w]};
+  // Participio irregular con género y número: fatta, scritti, aperte.
+  if (res.isEmpty && w.length >= 4 && 'aie'.contains(w[w.length - 1])) {
+    final o = '${w.substring(0, w.length - 1)}o';
+    if (o.endsWith('to') || o.endsWith('so')) {
+      res.addAll(_formasIrregIt[o] ?? const {});
+    }
+  }
+  return res;
+}
+
+/// Infinitivos posibles de una forma verbal italiana (misma regla que
+/// `infinitivos_it` en tools/validar_ruta.py).
+Set<String> infinitivosIt(String w, {bool prefijos = true}) {
+  final res = _irregularesIt(w);
+  for (final MapEntry(key: tema, value: desinencias)
+      in _desinenciasIt.entries) {
+    for (final d in desinencias) {
+      if (w.endsWith(d) && w.length - d.length >= 2) {
+        final raiz = _sinFinal(w, d);
+        res.add(raiz + tema);
+        // cerchi → cercare, paghiamo → pagare
+        if (raiz.endsWith('ch') || raiz.endsWith('gh')) {
+          res.add(raiz.substring(0, raiz.length - 1) + tema);
+        }
+        // studi → studiare, mangerò → mangiare
+        if (tema == 'are' && 'ie'.contains(d[0])) res.add('${raiz}iare');
+        // traduco → tradurre
+        if (tema == 'ere' && raiz.endsWith('uc')) {
+          res.add('${raiz.substring(0, raiz.length - 1)}rre');
+        }
+      }
+    }
+  }
+  // Infinitivo reflexivo enseñado como tal: chiamo → chiamarsi.
+  res.addAll([
+    for (final i in res)
+      if (i.endsWith('re')) '${i.substring(0, i.length - 1)}si',
+  ]);
+  if (prefijos) {
+    for (final p in _prefijosIt) {
+      if (w.startsWith(p) && w.length - p.length >= 3) {
+        res.addAll([
+          for (final i in _irregularesIt(w.substring(p.length))) '$p$i',
+        ]);
+      }
+    }
+  }
+  return res;
+}
+
+/// Forma verbal + pronombres enclíticos: chiamarsi, vederlo, dimmi.
+bool _encliticoIt(String w, Set<String> conocidas) {
+  for (final MapEntry(key: c, value: bases) in _cliticosIt.entries) {
+    if (!w.endsWith(c) ||
+        w.length - c.length < 2 ||
+        !bases.any(conocidas.contains)) {
+      continue;
+    }
+    final resto = _sinFinal(w, c);
+    final restos = {resto};
+    for (final MapEntry(key: comb, value: base) in _cliticosCombIt.entries) {
+      if (resto.endsWith(comb) &&
+          resto.length - comb.length >= 2 &&
+          conocidas.contains(base)) {
+        restos.add(_sinFinal(resto, comb));
+      }
+    }
+    for (final r in restos) {
+      // Consonante doblada tras imperativo corto: dimmi, fallo, dammelo.
+      if (r.length >= 3 && r[r.length - 1] == c[0]) {
+        final corto = _imperativoCortoIt[r.substring(0, r.length - 1)];
+        if (corto != null && conocidas.contains(corto)) return true;
+      }
+      final candidatos = {
+        if (r.endsWith('r')) '${r}e', // chiamar(si) → chiamare
+        ...infinitivosIt(r),
+      };
+      if (candidatos.any(conocidas.contains)) return true;
+    }
+  }
+  return false;
+}
+
+/// La parte elidida delante del apóstrofo (l', dell', un', c', quest', anch').
+bool _elisionIt(String prefijo, Set<String> conocidas) {
+  if (conocidas.contains(prefijo) ||
+      _vocalesIt.any((v) => conocidas.contains('$prefijo$v'))) {
+    return true;
+  }
+  if ((_elididasIt[prefijo] ?? const <String>{}).any(conocidas.contains)) {
+    return true;
+  }
+  final prep = _prepArtIt[prefijo];
+  if (prep != null &&
+      conocidas.contains(prep) &&
+      _articuloLIt.any(conocidas.contains)) {
+    return true;
+  }
+  // Ya enseñada en otra palabra elidida: «l'amico» enseña «l'» para «l'acqua».
+  return conocidas.any((c) => c.startsWith("$prefijo'"));
+}
+
+/// é/è finales intercambiables (perché/perchè, caffè/caffé).
+Set<String> _grafiasIt(String w) => {
+  w,
+  if (w.endsWith('é')) '${_sinFinal(w, 'é')}è',
+  if (w.endsWith('è')) '${_sinFinal(w, 'è')}é',
+};
+
+/// Como [palabraConocida] (sin la morfología inglesa), aceptando además la
+/// elisión (l'amico, dell'acqua, c'è, un'amica), truncamientos (po', buon),
+/// flexiones italianas de palabras enseñadas (plural, femenino, -issimo,
+/// -mente), formas verbales (regulares, irregulares frecuentes y, si existe,
+/// `assets/contenido/it/verbos.json` vía [formasVerbales]) y enclíticos. Las
+/// mayúsculas y comillas ya las quita [palabrasMeta]. Misma regla que
+/// `conocida_it` en tools/validar_ruta.py.
+bool palabraConocidaIt(
+  String w,
+  Set<String> conocidas, [
+  Map<String, Set<String>> formasVerbales = const {},
+]) {
+  if (conocidas.contains(w) || RegExp(r'\d').hasMatch(w)) return true;
+  final apostrofo = w.indexOf("'");
+  if (apostrofo >= 0) {
+    final prefijo = w.substring(0, apostrofo);
+    return prefijo.isNotEmpty &&
+        _elisionIt(prefijo, conocidas) &&
+        palabraConocidaIt(
+          w.substring(apostrofo + 1),
+          conocidas,
+          formasVerbales,
+        );
+  }
+  for (final g in _grafiasIt(w)) {
+    final candidatos = {
+      g,
+      ...basesFlexionIt(g),
+      ...?formasVerbales[g],
+      ...infinitivosIt(g),
+      ?_apocopeIt[g],
+    };
+    if (candidatos.any(conocidas.contains)) return true;
+  }
+  if (_encliticoIt(w, conocidas)) return true;
+  // Vista ya tras un apóstrofo en lo enseñado: «dov'è» enseña «è».
+  return conocidas.any((c) => c.endsWith("'$w"));
+}
+
+// ── Ruso, coreano, japonés y chino ─────────────────────────────────────────
+// Sin morfología inventada: una forma cuenta solo si se enseñó tal cual (el
+// vocablo «читать (читаю)» o «자다 (자요)» enseña las dos formas, porque
+// [palabrasMeta] parte por los paréntesis). Los campos `rom` nunca se validan.
+// Mismas reglas en tools/validar_ruta.py.
+
+final _digito = RegExp(r'\d');
+
+/// Sin acento gráfico (U+0301) y con ё ≡ е, para comparar (`normalizar_ru`).
+String normalizarRu(String w) =>
+    w.replaceAll('́', '').replaceAll('ё', 'е');
+
+/// Forma exacta enseñada, ignorando el acento U+0301 y la diferencia ё/е.
+/// Misma regla que `conocida_ru` en tools/validar_ruta.py.
+bool palabraConocidaRu(String w, Set<String> conocidas) {
+  if (conocidas.contains(w) || _digito.hasMatch(w)) return true;
+  final n = normalizarRu(w);
+  return conocidas.contains(n) || conocidas.any((c) => normalizarRu(c) == n);
+}
+
+/// Japonés y chino: el curso escribe con espacios entre palabras y
+/// [palabrasMeta] quita la puntuación de ancho completo. Sin segmentar: cada
+/// token, partículas sueltas incluidas (は, の, 的, 吗), debe estar enseñado.
+/// Misma regla que `conocida_cjk` en tools/validar_ruta.py.
+bool palabraConocidaCjk(String w, Set<String> conocidas) =>
+    conocidas.contains(w) || _digito.hasMatch(w);
+
+/// Partículas que pueden ir pegadas a un sustantivo en el eojeol (ficha ko.md).
+const particulasKo = [
+  '은', '는', '이', '가', '을', '를', '에', '에서', '도', '의', '와', '과', //
+  '하고', '으로', '로', '이에요', '예요', '에게', '한테', '부터', '까지',
+  '만', '보다', '처럼', '이랑', '랑',
+];
+// Partícula de tema/adición tras otra de caso: 서울에서는, 주말에는, 저한테도.
+const _particulasKoFinal = ['은', '는', '도', '만'];
+const _particulasKoInterior = [
+  '에', '에서', '에게', '한테', '하고', '와', '과', '으로', '로', //
+  '부터', '까지', '보다', '처럼', '이랑', '랑',
+];
+
+/// Raíces de [w] tras quitar una partícula final enseñada (sin tocar jamo).
+Set<String> _quitarParticulaKo(
+  String w,
+  Set<String> conocidas,
+  List<String> particulas,
+) => {
+  for (final p in particulas)
+    if (w.length > p.length && w.endsWith(p) && conocidas.contains(p))
+      w.substring(0, w.length - p.length),
+};
+
+/// Eojeol enseñado tal cual, o sustantivo enseñado + partícula pegada que
+/// también se enseñó (저는, 서울에서, 학생이에요); como mucho dos partículas si
+/// la última es 은/는/도/만 (서울에서는). Los verbos conjugados solo cuentan si
+/// se enseñó esa forma exacta. Misma regla que `conocida_ko` en
+/// tools/validar_ruta.py.
+bool palabraConocidaKo(String w, Set<String> conocidas) {
+  if (conocidas.contains(w) || _digito.hasMatch(w)) return true;
+  if (_quitarParticulaKo(w, conocidas, particulasKo).any(conocidas.contains)) {
+    return true;
+  }
+  return _quitarParticulaKo(w, conocidas, _particulasKoFinal).any(
+    (r) => _quitarParticulaKo(
+      r,
+      conocidas,
+      _particulasKoInterior,
+    ).any(conocidas.contains),
+  );
+}
+
+/// Prueba de «palabra conocida» que corresponde al idioma de la ruta (misma
+/// tabla que `conocida_para` en tools/validar_ruta.py).
+bool Function(String, Set<String>) palabraConocidaPara(
+  String idioma, [
+  Map<String, Set<String>> formasVerbales = const {},
+]) => switch (idioma) {
+  'pt' => (w, saber) => palabraConocidaPt(w, saber, formasVerbales),
+  'de' => (w, saber) => palabraConocidaDe(w, saber, formasVerbales),
+  'it' => (w, saber) => palabraConocidaIt(w, saber, formasVerbales),
+  'ru' => palabraConocidaRu,
+  'ko' => palabraConocidaKo,
+  'ja' || 'zh' => palabraConocidaCjk,
+  _ => palabraConocida,
+};
+
 /// Problemas pedagógicos y de datos de una ruta. Vacío = íntegra.
 ///
-/// En portugués y alemán valen además las flexiones de lo enseñado
-/// ([palabraConocidaPt], [palabraConocidaDe]); [formasVerbales] (ver
+/// En portugués, alemán e italiano valen además las flexiones de lo enseñado
+/// ([palabraConocidaPt], [palabraConocidaDe], [palabraConocidaIt]); en ruso,
+/// coreano, japonés y chino, solo lo enseñado tal cual (ver
+/// [palabraConocidaPara]); [formasVerbales] (ver
 /// `CargadorRuta.formasVerbales`) añade las formas irregulares de su
 /// `verbos.json`. Sin él la comprobación solo es más estricta, nunca más laxa.
 List<String> problemasDeContenido(
@@ -581,12 +1309,7 @@ List<String> problemasDeContenido(
   Map<String, Set<String>> formasVerbales = const {},
 }) {
   final errores = [...validarGrafo(ruta.unidades)];
-  final bool Function(String, Set<String>) conocida =
-      switch (ruta.curso.idioma) {
-        'pt' => (w, saber) => palabraConocidaPt(w, saber, formasVerbales),
-        'de' => (w, saber) => palabraConocidaDe(w, saber, formasVerbales),
-        _ => palabraConocida,
-      };
+  final conocida = palabraConocidaPara(ruta.curso.idioma, formasVerbales);
   final apoyos = ruta.curso.idiomasApoyo;
   final libres = {
     for (final p in ruta.curso.palabrasLibres) ...palabrasMeta(p),

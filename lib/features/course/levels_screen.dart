@@ -8,11 +8,11 @@ import '../../app/theme.dart';
 import '../../core/diagnostico.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/content/curriculum.dart';
-import '../../core/models/models.dart';
 import '../../core/state/providers.dart';
 import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
+import '../../shared/widgets/tarjeta_en_preparacion.dart';
 import '../../shared/widgets/tarjeta_fundamentos.dart';
 import '../nivel0/tarjeta_nivel0.dart';
 import '../../shared/widgets/widgets.dart';
@@ -71,125 +71,9 @@ class LevelsScreen extends ConsumerWidget {
                 estado: s,
               ),
           ] else ...[
-            Text(
-              tr('10 niveles · 100 lecciones por nivel · examen final al 65 %'),
-              style: const TextStyle(color: OL.gris, fontSize: 14),
-            ),
-            const SizedBox(height: 14),
-            // Nivel 0 · Leer y pronunciar, si el idioma lo tiene (se oculta
-            // solo si no); después Fundamentos (DEC-007).
-            const TarjetaNivel0(),
-            const SizedBox(height: 10),
-            const TarjetaFundamentos(),
-            const SizedBox(height: 12),
-            for (final lvl in niveles) _NivelCard(lvl: lvl, s: s),
+            TarjetaEnPreparacion(idioma: meta.nombre),
           ],
         ],
-      ),
-    );
-  }
-}
-
-class _NivelCard extends StatelessWidget {
-  const _NivelCard({required this.lvl, required this.s});
-  final Level lvl;
-  final ProgressState s;
-
-  @override
-  Widget build(BuildContext context) {
-    final n = lvl.numero;
-    final desbloqueado = s.nivelDesbloqueado(n);
-    final aprobado = s.examenAprobado(n);
-    final progreso = s.progresoNivel(n);
-    final esActual = desbloqueado && !aprobado;
-    final color = aprobado
-        ? OL.verde
-        : esActual
-        ? OL.morado
-        : OL.gris;
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Opacity(
-        opacity: desbloqueado ? 1 : 0.55,
-        child: Tarjeta(
-          onTap: desbloqueado ? () => context.push('/aprender/nivel/$n') : null,
-          borde: esActual ? OL.moradoClaro : null,
-          child: Row(
-            children: [
-              AnilloProgreso(
-                valor: aprobado ? 1 : progreso,
-                tamano: 56,
-                grosor: 6,
-                color: color,
-                child: aprobado
-                    ? const Icon(Icons.check, color: OL.verde)
-                    : desbloqueado
-                    ? Text(
-                        '$n',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          color: color,
-                        ),
-                      )
-                    : const Icon(Icons.lock_outline, color: OL.gris, size: 18),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      n == 0
-                          ? tr('Fundamentos · empieza de cero')
-                          : tr('Nivel {n} · {nombre}', {'n': n, 'nombre': lvl.nombre}),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      lvl.descripcion,
-                      style: const TextStyle(
-                        color: OL.gris,
-                        fontSize: 14,
-                        height: 1.3,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: BarraProgreso(progreso, color: color, alto: 6),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          '${s.completadasEnNivel(n)}/${totalLeccionesDe(n)}',
-                          style: const TextStyle(
-                            color: OL.gris,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (s.examenes.containsKey(n)) ...[
-                      const SizedBox(height: 6),
-                      Etiqueta(
-                        aprobado
-                            ? tr('Examen aprobado · {nota}%', {'nota': s.examenes[n]})
-                            : tr('Examen {nota}% · repite', {'nota': s.examenes[n]}),
-                        color: aprobado ? OL.verde : OL.rojo,
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              const Icon(Icons.chevron_right, color: OL.gris),
-            ],
-          ),
-        ),
       ),
     );
   }
