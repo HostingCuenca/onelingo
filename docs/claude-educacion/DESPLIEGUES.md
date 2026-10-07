@@ -624,3 +624,13 @@ Pruebas: Flutter completo en el worktree, 382 en verde. `ruta_recorrido_test` fa
 Pendiente: voces nativas Mariia/Stanislav (`voz.ts`), que necesitan reiniciar PM2 con autorización.
 Backup: `/var/www/onelingo/backups/20261007-edu-52-ruso/web-anterior` (= edu-51). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `ru/ruta/curso.json`, `ru/ruta/n2-b10.json`, `ru/diagnostico-v2.json`, y los `n*-b10` de ja, zh e it responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-52-ruso`.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-52-ruso/web-retirada-post && cp -al backups/20261007-edu-52-ruso/web-anterior web'`
+
+## Release: 20261007-edu-53-coreano
+
+Fecha: 2026-10-07 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat (plan de la semana). Solo web; sin cambios de backend ni reinicio.
+Contenido: coreano esencial, con Fundamentos (f0) + N1–N2 (100 clases, hangul con rom RR), prueba de ubicación N1–N2 y Nivel 0. N3–N10 aparecen como «Próximamente». Con esto ya no queda ningún idioma «En preparación».
+Commit: `ae209d5` (build desde worktree limpio) · `main.dart.js` sha256 `e43669b7fab657cc…` (API_URL prod).
+Pruebas: Flutter completo en el worktree, 398 en verde. `ruta_recorrido_test` falló por tiempo (inestable, ya conocido) y pasa al repetirlo (5/5). `validar_ruta.py`: 10 idiomas, 0 errores.
+Pendiente: voces nativas Jiyoung/Chris (`voz.ts`), que necesitan reiniciar PM2 con autorización.
+Backup: `/var/www/onelingo/backups/20261007-edu-53-coreano/web-anterior` (= edu-52). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `ko/ruta/curso.json`, `ko/ruta/n2-b10.json`, `ko/diagnostico-v2.json`, y los `n*-b10` de ru, ja, zh e it responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-53-coreano`.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-53-coreano/web-retirada-post && cp -al backups/20261007-edu-53-coreano/web-anterior web'`
