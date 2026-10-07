@@ -575,3 +575,12 @@ Backup: `/var/www/onelingo/backups/20261006-edu-47-aleman/{web-anterior,backend-
 - lock liberado. La web anterior queda también en `/var/www/onelingo/web-saliente-20261006-edu-47-aleman` (enlaces duros; se puede borrar).
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261006-edu-47-aleman/web-retirada-post && cp -al backups/20261006-edu-47-aleman/web-anterior web'`
 Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo; cp backups/20261006-edu-47-aleman/backend-anterior/voz.ts backend/src/lib/ && rm backend/src/lib/numeros_de.ts backend/src/content/situaciones-de.json && pm2 restart onelingo-api'`
+
+## Release: 20261007-edu-48-chip-idioma
+
+Fecha: 2026-10-07 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat (plan de la semana). Solo web; sin cambios de backend ni reinicio.
+Contenido: chip de idioma legible en el registro (antes blanco sobre blanco); contenido viejo retirado de it/ja/ko/ru/zh (`nivel-0/1/2.json`, `ruta/a1-1.json`, `f0` antiguo) y tarjeta «En preparación» mientras esos idiomas no tienen ruta; `vocabularioEstricto` para ru/ko/ja/zh.
+Commit: `3bae9e8` (build desde worktree limpio) · `main.dart.js` sha256 `189c6219747b4c49…` (API_URL prod).
+Pruebas: Flutter en el worktree, todas en verde salvo `ruta_recorrido_test` «N1 activo entra al recorrido editorial», que falló por tiempo con la máquina cargada y pasa al correrlo solo (5/5); `validar_ruta.py` 10 idiomas, 0 errores.
+Backup: `/var/www/onelingo/backups/20261007-edu-48-chip-idioma/web-anterior` (= edu-47). Verificado: `/`, `/api/salud` y `main.dart.js` 200 con el sha256 del build; `it/nivel-1.json` ya no se sirve (404); lock liberado. La web anterior queda también en `/var/www/onelingo/web-saliente-20261007-edu-48-chip-idioma` (enlaces duros; se puede borrar, igual que `web-saliente-20261006-edu-47-aleman`).
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-48-chip-idioma/web-retirada-post && cp -al backups/20261007-edu-48-chip-idioma/web-anterior web'`
