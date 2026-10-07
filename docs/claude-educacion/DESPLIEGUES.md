@@ -604,3 +604,13 @@ Pruebas: Flutter completo en el worktree, 342 en verde. `ruta_recorrido_test` fa
 Pendiente: voces nativas Shan Shan/Evan (`voz.ts`), que necesitan reiniciar PM2 con autorización. Aún no está desplegado el arreglo del paso `deletreo` del Nivel 0 (`626c969`).
 Backup: `/var/www/onelingo/backups/20261007-edu-50-chino/web-anterior` (= edu-49). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `zh/ruta/curso.json`, `zh/ruta/n2-b10.json`, `zh/diagnostico-v2.json` e `it/ruta/n4-b10.json` responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-50-chino`.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-50-chino/web-retirada-post && cp -al backups/20261007-edu-50-chino/web-anterior web'`
+
+## Release: 20261007-edu-51-japones
+
+Fecha: 2026-10-07 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat (plan de la semana). Solo web; sin cambios de backend ni reinicio.
+Contenido: japonés esencial, con Fundamentos (f0) + N1–N2 (100 clases, kana con rom Hepburn), prueba de ubicación N1–N2 y Nivel 0. N3–N10 aparecen como «Próximamente». También va el arreglo del Nivel 0 (`626c969`): el paso `deletreo` con letras en orden (pt, de, it, ru, ko, ja) ahora es un ejercicio de ordenar con audio, y no un «elegir» roto.
+Commit: `ea734ff` (incluye `626c969`; build desde worktree limpio) · `main.dart.js` sha256 `25a55251afbcad74…` (API_URL prod).
+Pruebas: Flutter completo en el worktree, 366 en verde. `ruta_recorrido_test` falló por tiempo (inestable, ya conocido) y pasa al repetirlo (5/5). `validar_ruta.py`: 10 idiomas, 0 errores.
+Pendiente: voces nativas Kyoko/Hinata (`voz.ts`), que necesitan reiniciar PM2 con autorización.
+Backup: `/var/www/onelingo/backups/20261007-edu-51-japones/web-anterior` (= edu-50). Verificado: `/`, `/api/salud`, `main.dart.js` (sha256 del build), `ja/ruta/curso.json`, `ja/ruta/n2-b10.json`, `ja/diagnostico-v2.json`, `zh/ruta/n2-b10.json` e `it/ruta/n4-b10.json` responden 200; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261007-edu-51-japones`.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261007-edu-51-japones/web-retirada-post && cp -al backups/20261007-edu-51-japones/web-anterior web'`
