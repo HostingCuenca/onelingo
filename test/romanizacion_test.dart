@@ -10,9 +10,32 @@ import 'package:onelingo/features/ruta/item_view.dart';
 import 'package:onelingo/shared/widgets/romanizacion.dart';
 
 /// Romanización de ru, ko, ja y zh (docs/claude-educacion/ROMANIZACION.md).
-/// Los cuatro idiomas aún no están publicados: los JSON se leen directamente
-/// (borradores de Fundamentos y Nivel 0), sin pasar por `idiomasConNivel0`.
+/// Los JSON se leen directamente (borradores de Fundamentos y Nivel 0), sin
+/// pasar por `idiomasConNivel0`. El chino ya está publicado (versión esencial
+/// N1–N2): también se comprueba su ruta integrada en assets.
 const _noLatinos = ['ru', 'ko', 'ja', 'zh'];
+
+/// Todas las clases publicadas de un idioma (f0 y N1…), leídas de assets.
+List<UnidadRuta> _rutaPublicada(String idioma) {
+  final base = 'assets/contenido/$idioma/ruta';
+  final curso =
+      jsonDecode(File('$base/curso.json').readAsStringSync())
+          as Map<String, dynamic>;
+  return [
+    for (final m in curso['modulos'] as List)
+      for (final u
+          in (jsonDecode(
+                    File('$base/${m['archivo']}').readAsStringSync(),
+                  )
+                  as Map<String, dynamic>)['unidades']
+              as List)
+        UnidadRuta.fromJson(
+          u as Map<String, dynamic>,
+          idioma: idioma,
+          nivel: m['nivel'] as String,
+        ),
+  ];
+}
 
 final _escritura = {
   'ru': RegExp(r'[А-Яа-яЁё]'),
@@ -116,12 +139,15 @@ void main() {
     });
   });
 
-  for (final idioma in _noLatinos) {
-    test('Fundamentos ($idioma): cada texto, opción, ficha y par en el '
+  for (final (idioma, fuente, unidades) in [
+    for (final i in _noLatinos) (i, 'Fundamentos', () => _borrador(i)),
+    ('zh', 'Ruta publicada f0–N2', () => _rutaPublicada('zh')),
+  ]) {
+    test('$fuente ($idioma): cada texto, opción, ficha y par en el '
         'idioma tiene su romanización', () {
       final hay = _escritura[idioma]!;
       var conRom = 0;
-      for (final u in _borrador(idioma)) {
+      for (final u in unidades()) {
         for (final p in u.pasos) {
           for (final it in p.items) {
             final donde = '${u.id}/${it.id}';
@@ -165,10 +191,11 @@ void main() {
   });
 
   group('Nivel 0 de ru, ko, ja y zh', () {
-    test('aún no se publican (no están en idiomasConNivel0)', () {
-      for (final idioma in _noLatinos) {
+    test('ru, ko y ja aún no se publican; zh sí (idiomasConNivel0)', () {
+      for (final idioma in ['ru', 'ko', 'ja']) {
         expect(idiomasConNivel0.contains(idioma), isFalse);
       }
+      expect(idiomasConNivel0, contains('zh'));
     });
 
     for (final idioma in _noLatinos) {

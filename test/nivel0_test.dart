@@ -49,7 +49,11 @@ void main() {
   AudioplayersPlatformInterface.instance = _Audio();
   GlobalAudioplayersPlatformInterface.instance = _AudioGlobal();
 
-  Future<ProviderContainer> montar(WidgetTester tester, Widget pantalla) async {
+  Future<ProviderContainer> montar(
+    WidgetTester tester,
+    Widget pantalla, {
+    String idioma = 'en',
+  }) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -58,7 +62,7 @@ void main() {
     Efectos.sonido = false;
     addTearDown(() => Efectos.sonido = true);
     final prefs = await SharedPreferences.getInstance();
-    final n = cargar();
+    final n = cargar(idioma);
     final c = ProviderContainer(
       overrides: [
         prefsProvider.overrideWithValue(prefs),
@@ -174,6 +178,65 @@ void main() {
     );
   });
 
+  test('El Nivel 0 chino trae cada explicación en español e inglés', () {
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'zh',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    expect(idiomasConNivel0, contains('zh'));
+    final n = cargar('zh');
+    expect(n.idioma, 'zh');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(44));
+    expect(n.sonidos.length, greaterThanOrEqualTo(15));
+    // Lumo solo da la bienvenida: nunca en la prueba de salida (u10).
+    expect(
+      [for (final l in n.unidades.last.lecciones) ...l.pasos.map((p) => p.tipo)],
+      isNot(contains('lumo')),
+    );
+  });
+
+  test('Nivel 0 chino: lo que se oye está en chino y coincide con la respuesta', () {
+    final n = cargar('zh');
+    final hanzi = RegExp(r'[\u4e00-\u9fff]');
+    final problemas = <String>[];
+    for (final l in n.lecciones) {
+      for (final (i, p) in l.pasos.indexed) {
+        final id = '${l.id}#$i ${p.tipo}';
+        switch (p.tipo) {
+          case 'escucha_elige':
+            // Se oye `audio` (no `m`) y es la opción correcta, con su pinyin.
+            final audio = (p.j['audio'] as String?) ?? '';
+            if (!hanzi.hasMatch(audio)) problemas.add('$id: audio «$audio»');
+            if (p.opciones[p.correcta].texto != audio) {
+              problemas.add('$id: el audio no es la opción correcta');
+            }
+            if (p.opciones[p.correcta].rom == null) problemas.add('$id: sin rom');
+          case 'toca_sonido' || 'escucha':
+            final ws = p.tipo == 'escucha' ? p.palabras : p.opciones;
+            for (final w in ws) {
+              if (!hanzi.hasMatch(w.texto) || w.rom == null) {
+                problemas.add('$id: «${w.texto}» sin chino o sin rom');
+              }
+            }
+          case 'mira' || 'repite' || 'construye' || 'elige_significado':
+            if (!hanzi.hasMatch(textoPlano(p.marcado)) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin chino o sin rom');
+            }
+          case 'deletreo':
+            // Lo que suena es `palabra`; con solo `m` saldría mudo.
+            if (((p.j['palabra'] as String?) ?? '').isEmpty) {
+              problemas.add('$id: deletreo sin «palabra»');
+            }
+        }
+      }
+    }
+    expect(problemas, isEmpty, reason: problemas.join('\n'));
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);
@@ -208,6 +271,14 @@ void main() {
       expect(l.pasos, isNotEmpty, reason: l.id);
       for (final (i, p) in l.pasos.indexed) {
         final id = '${l.id}#$i ${p.tipo}';
+        // Solo tipos que LeccionN0Screen sabe mostrar (si no, sale Lumo).
+        if (!const {
+          'lumo', 'escucha', 'mira', 'mezcla', 'repite', 'letras',
+          'escucha_elige', 'toca_sonido', 'elige_significado',
+          'escucha_letra', 'deletreo', 'lee', 'construye', 'cambia',
+        }.contains(p.tipo)) {
+          problemas.add('$id: tipo desconocido');
+        }
         marcado(id, p.marcado);
         for (final w in [...p.palabras, ...p.opciones]) {
           marcado(id, w.marcado);
@@ -290,6 +361,22 @@ void main() {
       expect(find.byIcon(Icons.lock_rounded), findsWidgets);
     },
   );
+
+  testWidgets('Nivel 0 chino: la lección muestra caracteres con su pinyin', (
+    tester,
+  ) async {
+    await montar(
+      tester,
+      const LeccionN0Screen(leccionId: 'u01l02'),
+      idioma: 'zh',
+    );
+    expect(tester.takeException(), isNull);
+    // Primer paso (escucha): palabras en chino con su pinyin.
+    final escucha = cargar('zh').leccion('u01l02')!.pasos.first;
+    expect(escucha.tipo, 'escucha');
+    final w = escucha.palabras.first;
+    expect(find.textContaining(w.rom!), findsWidgets);
+  });
 
   testWidgets('Lección completa: escuchar, elegir y registrar el progreso', (
     tester,

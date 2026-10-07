@@ -117,6 +117,20 @@ int contarPalabras(String texto) =>
 bool produccionAbiertaCompleta(Item item, String respuesta) =>
     contarPalabras(respuesta) >= (item.minimoPalabras ?? 1);
 
+/// Idiomas que se escriben sin espacios entre palabras (el curso los pone,
+/// pero el alumno puede no hacerlo).
+bool _sinEspacios(String idioma) => idioma == 'zh' || idioma == 'ja';
+
+final _caracterCjk = RegExp(r'[\u3040-\u30ff\u3400-\u9fff]');
+
+/// Extensión de una respuesta para la rúbrica: palabras; en zh y ja, cada
+/// carácter cuenta como una (no se puede segmentar sin diccionario) y lo
+/// demás (cifras, letras) por palabras.
+int _extensionRubrica(String texto, String idioma) => _sinEspacios(idioma)
+    ? _caracterCjk.allMatches(texto).length +
+        contarPalabras(texto.replaceAll(_caracterCjk, ' '))
+    : contarPalabras(texto);
+
 bool _cumpleRubricaEscritura(Item item, String respuesta, String idioma) {
   if (item.abierta) return produccionAbiertaCompleta(item, respuesta);
   if (item.evidenciasEscritura.isEmpty ||
@@ -124,7 +138,7 @@ bool _cumpleRubricaEscritura(Item item, String respuesta, String idioma) {
       item.maximoPalabras == null) {
     return respuestaEscritaCorrecta(item, respuesta, idioma);
   }
-  final palabras = contarPalabras(respuesta);
+  final palabras = _extensionRubrica(respuesta, idioma);
   if (palabras < item.minimoPalabras! || palabras > item.maximoPalabras!) {
     return false;
   }
@@ -133,6 +147,8 @@ bool _cumpleRubricaEscritura(Item item, String respuesta, String idioma) {
     (grupo) => grupo.any((frase) {
       final evidencia = sinTildes(_forma(frase, idioma));
       if (evidencia.isEmpty) return false;
+      // zh/ja: [_forma] quita los espacios; la evidencia se busca dentro.
+      if (_sinEspacios(idioma)) return dada.contains(evidencia);
       if (dada.contains(' $evidencia ')) return true;
       // La última palabra admite flexiones regulares (complaint → complaints,
       // decide → decided): el alumno no debe fallar por el número o el tiempo.

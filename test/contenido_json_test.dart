@@ -6,10 +6,10 @@ import 'package:onelingo/core/models/models.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test('un idioma sin ruta nueva (zh) ya no carga lecciones antiguas', () async {
-    await ContenidoJson.precargar('zh');
-    expect(ContenidoJson.unidades('zh', 1), isNull);
-    idiomaContenido = 'zh';
+  test('un idioma sin ruta nueva (ja) ya no carga lecciones antiguas', () async {
+    await ContenidoJson.precargar('ja');
+    expect(ContenidoJson.unidades('ja', 1), isNull);
+    idiomaContenido = 'ja';
     expect(unidadesDe(1), isEmpty);
     expect(leccionesDe(1), isEmpty);
     idiomaContenido = 'en';

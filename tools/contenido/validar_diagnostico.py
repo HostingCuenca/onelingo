@@ -121,11 +121,24 @@ def _normalizar_app(t: str) -> str:
     return t.translate(_TILDES)
 
 
+# zh y ja se escriben sin espacios: como en correccion.dart (_sinEspacios),
+# la extensión se mide en caracteres y las evidencias se buscan sin espacios.
+SIN_ESPACIOS = {"zh", "ja"}
+_CARACTER_CJK = re.compile(r"[\u3040-\u30ff\u3400-\u9fff]")
+
+
 def cumple_rubrica(texto: str, rub: dict, idioma: str) -> bool:
     if idioma == "en":
         return cb.cumple_rubrica(texto, rub)
     dada = _normalizar_app(texto)
     lo, hi = rub["palabras"]
+    if idioma in SIN_ESPACIOS:
+        n = len(_CARACTER_CJK.findall(dada)) + len(_CARACTER_CJK.sub(" ", dada).split())
+        if not lo <= n <= hi:
+            return False
+        dada = dada.replace(" ", "")
+        return all(any((ev := _normalizar_app(f).replace(" ", "")) and ev in dada for f in grupo)
+                   for grupo in rub["evidencias"])
     if not lo <= len(dada.split()) <= hi:
         return False
     dada = f" {dada} "
@@ -139,6 +152,57 @@ APOYO_SOLO_EN = {"es"}
 
 def es_texto(v, clave: str = "es") -> str:
     return v.get(clave, "") if isinstance(v, dict) else ""
+
+
+def _modulo_zh():
+    """Reglas del chino de tools/contenido/ruta-zh/validar.py (sandhi, espacios,
+    puntuación de ancho completo, solo simplificado)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "validar_zh", ROOT / "tools/contenido/ruta-zh/validar.py")
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    return modulo
+
+
+_PAUSAS_ZH = re.compile(r"[\s。，？！、；：…“”（）]+")
+_PAUSAS_ROM = re.compile(r"[\s,.?!;:…\"()]+")
+
+
+def errores_chino(it: dict) -> list[str]:
+    """Romanización y tipografía de un ítem en chino (docs/claude-educacion/ROMANIZACION.md):
+    `textoRom`/`opcionesRom` paralelos al chino, palabra a palabra; pinyin con el
+    sandhi escrito; palabras separadas por espacios y puntuación de ancho
+    completo pegada. `audio`, `respuesta` y `aceptadas` no llevan rom."""
+    import rom_items  # noqa: E402  (tools/contenido)
+    zh = _modulo_zh()
+    hay = lambda t: isinstance(t, str) and bool(zh.HANZI.search(t))  # noqa: E731
+
+    def comprobar(texto: str, rom: str):
+        a = [t for t in _PAUSAS_ZH.split(texto) if zh.HANZI.search(t)]
+        b = [g for g in _PAUSAS_ROM.split(rom.replace("___", " ")) if g.strip("-—'")]
+        if len(a) != len(b):
+            return f"«{texto}» tiene {len(a)} palabras y «{rom}» tiene {len(b)} grupos; deben coincidir uno a uno"
+        return None
+
+    errores = rom_items.errores({"unidades": [{"id": it.get("id", "?"), "pasos": [{"items": [it]}]}]},
+                                hay, comprobar)
+    for k, v in it.items():
+        if k.endswith("Rom"):
+            for r in (v if isinstance(v, list) else [v]):
+                if isinstance(r, str) and r:
+                    # El hueco corta la cadena de sandhi (no se sabe qué va en él).
+                    e, a = zh.errores_rom(r.replace("___", ","), f"{k} «{r}»")
+                    errores += e + a
+    textos = [it.get("texto"), it.get("audio"), *(it.get("opciones") or [])]
+    if it.get("formato") == "escribir":
+        textos += [it.get("respuesta"), *(it.get("aceptadas") or [])]
+    for t in textos:
+        if hay(t):
+            e, a = zh.errores_texto_chino(t, "texto")
+            errores += e + a
+    iid = str(it.get("id", "?"))
+    return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores]
 
 
 def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
@@ -276,6 +340,9 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
             textos_en.append(modelo)
             if it.get("texto") and it.get("textoIdioma", idioma) == idioma:
                 textos_en.append(it["texto"])
+        if idioma == "zh":
+            for x in errores_chino(it):
+                errores.append(x)
         if idioma == "en":
             faltan = {w for t in textos_en for w in cb.palabras(t) if not cb.conocida(w, lex)}
         else:

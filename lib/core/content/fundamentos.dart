@@ -17,8 +17,9 @@ import 'idiomas.dart' show soloNativo;
 /// Idiomas en reconstrucción cuyo Fundamentos es solo la ruta f0
 /// (`assets/contenido/<idioma>/ruta/f0.json`): su `nivel-0.json` antiguo se
 /// retiró al reiniciarlos desde cero (portugués, DEC-035; italiano, versión
-/// esencial de 10-2026) y no se resucita.
-const idiomasSoloRutaF0 = {'pt', 'it'};
+/// esencial de 10-2026) y no se resucita. El chino (versión esencial de
+/// 10-2026) nunca tuvo `nivel-0.json`: también es solo la ruta f0.
+const idiomasSoloRutaF0 = {'pt', 'it', 'zh'};
 
 const nivelFundamentos = Level(
   numero: 0,
