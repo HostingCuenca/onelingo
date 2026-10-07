@@ -8,7 +8,7 @@ import 'package:onelingo/core/content/fundamentos.dart' show idiomasSoloRutaF0;
 
 /// Idiomas sin ruta nueva: su curso está «en preparación» (sin módulos; las
 /// lecciones antiguas se retiraron).
-const _enPreparacion = {'ko', 'ru'};
+const _enPreparacion = {'ko'};
 
 /// Integridad de las rutas de los 10 idiomas habilitados.
 void main() {

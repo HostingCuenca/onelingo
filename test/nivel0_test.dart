@@ -316,6 +316,102 @@ void main() {
     expect(problemas, isEmpty, reason: problemas.join('\n'));
   });
 
+  test('El Nivel 0 ruso trae cada explicación en español e inglés', () {
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'ru',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    expect(idiomasConNivel0, contains('ru'));
+    final n = cargar('ru');
+    expect(n.idioma, 'ru');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(41));
+    expect(n.sonidos.length, greaterThanOrEqualTo(15));
+    // Lumo solo da la bienvenida: nunca en la prueba de salida (u10).
+    expect(
+      [for (final l in n.unidades.last.lecciones) ...l.pasos.map((p) => p.tipo)],
+      isNot(contains('lumo')),
+    );
+  });
+
+  test('Nivel 0 ruso: lo que se oye está en cirílico y coincide con la respuesta', () {
+    final n = cargar('ru');
+    final ruso = RegExp(r'[А-Яа-яЁё]');
+    final problemas = <String>[];
+    for (final l in n.lecciones) {
+      for (final (i, p) in l.pasos.indexed) {
+        final id = '${l.id}#$i ${p.tipo}';
+        switch (p.tipo) {
+          case 'escucha_elige':
+            // Se oye `audio` (no `m`) y es la opción correcta; las opciones
+            // llevan su rom (se ve al corregir, no antes).
+            final audio = (p.j['audio'] as String?) ?? '';
+            if (!ruso.hasMatch(audio)) problemas.add('$id: audio «$audio»');
+            if (p.opciones[p.correcta].texto != audio) {
+              problemas.add('$id: el audio no es la opción correcta');
+            }
+            if (p.opciones[p.correcta].rom == null) problemas.add('$id: sin rom');
+          case 'toca_sonido':
+            for (final w in p.opciones) {
+              if (!ruso.hasMatch(w.texto) || w.rom == null) {
+                problemas.add('$id: «${w.texto}» sin cirílico o sin rom');
+              }
+            }
+          case 'escucha':
+            for (final w in p.palabras) {
+              if (!ruso.hasMatch(w.texto) || w.rom == null) {
+                problemas.add('$id: «${w.texto}» sin cirílico o sin rom');
+              }
+            }
+          case 'mira' || 'repite' || 'mezcla' || 'construye' || 'elige_significado' || 'lee':
+            if (!ruso.hasMatch(textoPlano(p.marcado)) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin cirílico o sin rom');
+            }
+          case 'escucha_letra':
+            // Suena `letra` (letra suelta, con la voz del sistema) y está
+            // entre las opciones; su rom se ve al corregir.
+            final letra = (p.j['letra'] as String?) ?? '';
+            if (!ruso.hasMatch(letra) || !p.textos.contains(letra)) {
+              problemas.add('$id: la letra «$letra» no está en las opciones');
+            }
+            if (p.letraRom == null) problemas.add('$id: sin letraRom');
+          case 'deletreo':
+            // Formato B (ordenar): se oye la palabra `m` y las piezas, una
+            // letra cada una, forman esa palabra en orden.
+            final palabra = textoPlano(p.marcado);
+            if (!ruso.hasMatch(palabra) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin cirílico o sin rom');
+            }
+            if (p.textos.join().toLowerCase() != palabra.toLowerCase() ||
+                !p.textos.every((t) => t.runes.length == 1)) {
+              problemas.add('$id: las piezas ${p.textos} no forman «$palabra»');
+            }
+          case 'cambia':
+            final de = textoPlano((p.j['de'] as String?) ?? '');
+            final a = textoPlano((p.j['a'] as String?) ?? '');
+            final dif = [
+              for (var k = 0; k < de.length && k < a.length; k++)
+                if (de[k] != a[k]) k,
+            ];
+            if (de.length != a.length || dif.length != 1 || !p.textos.contains(a[dif.first])) {
+              problemas.add('$id: «$de» → «$a» no cambia una sola letra de las opciones');
+            }
+            if (p.deRom == null || p.aRom == null) problemas.add('$id: sin deRom o aRom');
+        }
+        // Ningún acento gráfico (U+0301) en el ruso: el acento va solo en el rom.
+        final soloRu = [
+          p.marcado, p.j['audio'], p.j['letra'], p.j['de'], p.j['a'],
+          ...p.palabras.map((w) => w.marcado), ...p.textos, ...p.fichas,
+        ].whereType<String>().join();
+        if (soloRu.contains('\u0301')) problemas.add('$id: acento U+0301 en el cirílico');
+      }
+    }
+    expect(problemas, isEmpty, reason: problemas.join('\n'));
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);
@@ -468,6 +564,22 @@ void main() {
     expect(tester.takeException(), isNull);
     // Primer paso (escucha): palabras en kana con su rōmaji.
     final escucha = cargar('ja').leccion('u01l02')!.pasos.first;
+    expect(escucha.tipo, 'escucha');
+    final w = escucha.palabras.first;
+    expect(find.textContaining(w.rom!), findsWidgets);
+  });
+
+  testWidgets('Nivel 0 ruso: la lección muestra cirílico con su rom', (
+    tester,
+  ) async {
+    await montar(
+      tester,
+      const LeccionN0Screen(leccionId: 'u01l02'),
+      idioma: 'ru',
+    );
+    expect(tester.takeException(), isNull);
+    // Primer paso (escucha): palabras en cirílico con su rom.
+    final escucha = cargar('ru').leccion('u01l02')!.pasos.first;
     expect(escucha.tipo, 'escucha');
     final w = escucha.palabras.first;
     expect(find.textContaining(w.rom!), findsWidgets);

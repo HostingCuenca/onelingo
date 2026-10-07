@@ -11,8 +11,9 @@ import 'package:onelingo/shared/widgets/romanizacion.dart';
 
 /// Romanización de ru, ko, ja y zh (docs/claude-educacion/ROMANIZACION.md).
 /// Los JSON se leen directamente (borradores de Fundamentos y Nivel 0), sin
-/// pasar por `idiomasConNivel0`. El chino y el japonés ya están publicados
-/// (versión esencial N1–N2): también se comprueba su ruta integrada en assets.
+/// pasar por `idiomasConNivel0`. El chino, el japonés y el ruso ya están
+/// publicados (versión esencial N1–N2): también se comprueba su ruta integrada
+/// en assets.
 const _noLatinos = ['ru', 'ko', 'ja', 'zh'];
 
 /// Todas las clases publicadas de un idioma (f0 y N1…), leídas de assets.
@@ -143,6 +144,7 @@ void main() {
     for (final i in _noLatinos) (i, 'Fundamentos', () => _borrador(i)),
     ('zh', 'Ruta publicada f0–N2', () => _rutaPublicada('zh')),
     ('ja', 'Ruta publicada f0–N2', () => _rutaPublicada('ja')),
+    ('ru', 'Ruta publicada f0–N2', () => _rutaPublicada('ru')),
   ]) {
     test('$fuente ($idioma): cada texto, opción, ficha y par en el '
         'idioma tiene su romanización', () {
@@ -192,11 +194,9 @@ void main() {
   });
 
   group('Nivel 0 de ru, ko, ja y zh', () {
-    test('ru y ko aún no se publican; zh y ja sí (idiomasConNivel0)', () {
-      for (final idioma in ['ru', 'ko']) {
-        expect(idiomasConNivel0.contains(idioma), isFalse);
-      }
-      expect(idiomasConNivel0, containsAll(['zh', 'ja']));
+    test('ko aún no se publica; zh, ja y ru sí (idiomasConNivel0)', () {
+      expect(idiomasConNivel0.contains('ko'), isFalse);
+      expect(idiomasConNivel0, containsAll(['zh', 'ja', 'ru']));
     });
 
     for (final idioma in _noLatinos) {
@@ -250,6 +250,28 @@ void main() {
       ];
       expect(letras, isNotEmpty);
       expect(letras.every((p) => p.letraRom != null), isTrue);
+    });
+
+    test('ru: escucha_letra lleva letraRom y cambia lleva deRom y aRom', () {
+      final pasos = [for (final l in _nivel0('ru').lecciones) ...l.pasos];
+      final letras = pasos.where((p) => p.tipo == 'escucha_letra');
+      expect(letras, isNotEmpty);
+      expect(letras.every((p) => p.letraRom != null), isTrue);
+      final cambia = pasos.where((p) => p.tipo == 'cambia');
+      expect(cambia, isNotEmpty);
+      expect(cambia.every((p) => p.deRom != null && p.aRom != null), isTrue);
+      // Los rótulos en mayúsculas llevan la mayúscula de cada letra (ВХОД →
+      // VKhOD) y el acento sobre la vocal tónica, como las clases.
+      final roms = {
+        for (final p in pasos)
+          if (p.tipo == 'mira') p.marcado: p.rom,
+      };
+      expect(roms.values.any((r) => r == 'VKhOD · VÝKhOD'), isTrue);
+      // El mapa de sonidos lleva la rom del ancla y de cada ejemplo.
+      for (final snd in _nivel0('ru').sonidos) {
+        expect(snd.anclaRom, isNotNull, reason: snd.id);
+        expect(snd.ejemplosRom.length, snd.ejemplos.length, reason: snd.id);
+      }
     });
 
     test('zh: anclaRom y ejemplosRom en el mapa de sonidos', () {

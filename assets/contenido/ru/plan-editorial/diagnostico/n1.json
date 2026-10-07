@@ -1,0 +1,521 @@
+{
+  "idioma": "ru",
+  "nivel": 1,
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-integrador",
+    "date": "2026-10-07",
+    "notes": [
+      "Versión esencial: N1–N2. Léxico comprobado con validar_diagnostico.py contra la ruta integrada (conocida_ru: cada palabra enseñada tal cual hasta el final de N1, con ё ≡ е); cirílico sin marcas de acento; rom letra a letra con la tilde de acento solo en el rom (palabras de las clases copiadas de sus pares texto↔rom; comprobado con las reglas de tools/contenido/ruta-ru/validar.py); una sola respuesta defendible revisada ítem por ítem; posiciones repartidas.",
+      "Escritura: la extensión se mide en palabras y las evidencias se buscan con ё ≡ е y sin puntuación, como corrige la app (correccion.dart). Sin Lumo, sin Ecuador, sin cifras."
+    ]
+  },
+  "items": [
+    {
+      "id": "dx.ru.n1.escucha.1",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige de qué país es la persona.",
+        "en": "Listen and choose which country the person is from."
+      },
+      "audio": "Здравствуйте! Меня зовут Мария. Я из Мексики.",
+      "opciones": [
+        "из Испании",
+        "из Мексики",
+        "из Колумбии"
+      ],
+      "opcionesRom": [
+        "iz Ispánii",
+        "iz Méksiki",
+        "iz Kolúmbii"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Dice «Я из Мексики» (Ya iz Méksiki): es de México. España y Colombia no aparecen.",
+        "en": "She says «Я из Мексики» (Ya iz Méksiki): she is from Mexico. Spain and Colombia are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n1.escucha.2",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige a qué hora se levanta la persona.",
+        "en": "Listen and choose what time the person gets up."
+      },
+      "audio": "Я встаю в семь часов. Потом я завтракаю.",
+      "opciones": [
+        "в шесть часов",
+        "в восемь часов",
+        "в семь часов"
+      ],
+      "opcionesRom": [
+        "v shest' chasóv",
+        "v vósem' chasóv",
+        "v sem' chasóv"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Dice «Я встаю в семь часов» (Ya vstayú v sem' chasóv): se levanta a las siete. Las seis y las ocho no aparecen.",
+        "en": "It says «Я встаю в семь часов» (Ya vstayú v sem' chasóv): the person gets up at seven. Six and eight are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n1.escucha.3",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige cuánto cuesta el libro.",
+        "en": "Listen and choose how much the book costs."
+      },
+      "audio": "Сколько стоит эта книга? Сто пятьдесят рублей.",
+      "opciones": [
+        "сто пятьдесят рублей",
+        "сто двадцать рублей",
+        "двести пятьдесят рублей"
+      ],
+      "opcionesRom": [
+        "sto pyat'desyát rubléy",
+        "sto dvádtsat' rubléy",
+        "dvésti pyat'desyát rubléy"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Dice «Сто пятьдесят рублей» (Sto pyat'desyát rubléy): ciento cincuenta rublos. Ciento veinte y doscientos cincuenta no aparecen.",
+        "en": "It says «Сто пятьдесят рублей» (Sto pyat'desyát rubléy): one hundred fifty rubles. One hundred twenty and two hundred fifty are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n1.escucha.4",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige hacia dónde hay que ir después de seguir recto.",
+        "en": "Listen and choose where to go after going straight."
+      },
+      "audio": "Аптека недалеко. Прямо, потом направо.",
+      "opciones": [
+        "налево",
+        "назад",
+        "направо"
+      ],
+      "opcionesRom": [
+        "nalévo",
+        "nazád",
+        "naprávo"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Dice «Прямо, потом направо» (Pryámo, potóm naprávo): primero recto y luego a la derecha, no a la izquierda ni hacia atrás.",
+        "en": "It says «Прямо, потом направо» (Pryámo, potóm naprávo): first straight, then to the right, not left or back."
+      }
+    },
+    {
+      "id": "dx.ru.n1.lectura.1",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige dónde trabaja Olga.",
+        "en": "Read and choose where Olga works."
+      },
+      "texto": "Привет! Меня зовут Ольга. Я живу в Казани и работаю в школе. Вечером я люблю читать книги.",
+      "textoRom": "Privét! Menyá zovút Ól'ga. Ya zhivú v Kazáni i rabótayu v shkóle. Vécherom ya lyublyú chitát' knígi.",
+      "opciones": [
+        "в школе",
+        "в магазине",
+        "в больнице"
+      ],
+      "opcionesRom": [
+        "v shkóle",
+        "v magazíne",
+        "v bol'nítse"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "El texto dice «работаю в школе» (rabótayu v shkóle): Olga trabaja en una escuela, no en una tienda ni en un hospital.",
+        "en": "The text says «работаю в школе» (rabótayu v shkóle): Olga works at a school, not at a store or a hospital."
+      }
+    },
+    {
+      "id": "dx.ru.n1.lectura.2",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el mensaje y elige cuándo se ven.",
+        "en": "Read the message and choose when they meet."
+      },
+      "texto": "Анна, привет! Сегодня я очень занят. Давай встретимся завтра в пять часов в кафе. Пока! Максим",
+      "textoRom": "Ánna, privét! Segódnya ya óchen' zányat. Daváy vstrétimsya závtra v pyat' chasóv v kafé. Poká! Maksím",
+      "opciones": [
+        "сегодня в пять часов",
+        "завтра в пять часов",
+        "завтра в шесть часов"
+      ],
+      "opcionesRom": [
+        "segódnya v pyat' chasóv",
+        "závtra v pyat' chasóv",
+        "závtra v shest' chasóv"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Escribe «Давай встретимся завтра в пять часов» (Daváy vstrétimsya závtra v pyat' chasóv): se ven mañana a las cinco. Hoy está ocupado.",
+        "en": "He writes «Давай встретимся завтра в пять часов» (Daváy vstrétimsya závtra v pyat' chasóv): they meet tomorrow at five. Today he is busy."
+      }
+    },
+    {
+      "id": "dx.ru.n1.lectura.3",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige qué hace Iván por la noche.",
+        "en": "Read and choose what Ivan does in the evening."
+      },
+      "texto": "Меня зовут Иван. Утром я пью кофе и завтракаю. Днём я работаю в офисе. Вечером я смотрю фильм.",
+      "textoRom": "Menyá zovút Iván. Útrom ya p'yu kófe i závtrakayu. Dnyom ya rabótayu v ófise. Vécherom ya smotryú fil'm.",
+      "opciones": [
+        "играть в футбол",
+        "читать книги",
+        "смотреть фильм"
+      ],
+      "opcionesRom": [
+        "igrát' v futból",
+        "chitát' knígi",
+        "smotrét' fil'm"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "El texto dice «Вечером я смотрю фильм» (Vécherom ya smotryú fil'm): por la noche ve una película. El café es por la mañana.",
+        "en": "The text says «Вечером я смотрю фильм» (Vécherom ya smotryú fil'm): in the evening he watches a movie. The coffee is in the morning."
+      }
+    },
+    {
+      "id": "dx.ru.n1.lectura.4",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige la profesión del padre.",
+        "en": "Read and choose the father’s job."
+      },
+      "texto": "Это моя семья. Моя мама — врач, а мой отец — инженер. Мой брат — студент. Моя сестра любит футбол.",
+      "textoRom": "Éto moyá sem'yá. Moyá máma — vrach, a moy otéts — inzhenér. Moy brat — studént. Moyá sestrá lyúbit futból.",
+      "opciones": [
+        "врач",
+        "студент",
+        "инженер"
+      ],
+      "opcionesRom": [
+        "vrach",
+        "studént",
+        "inzhenér"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "El texto dice «мой отец — инженер» (moy otéts — inzhenér): el padre es ingeniero. La madre es médica y el hermano, estudiante.",
+        "en": "The text says «мой отец — инженер» (moy otéts — inzhenér): the father is an engineer. The mother is a doctor and the brother is a student."
+      }
+    },
+    {
+      "id": "dx.ru.n1.gramatica.1",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con la preposición del lugar donde vives.",
+        "en": "Complete with the preposition for where you live."
+      },
+      "texto": "Я живу ___ Москве.",
+      "textoRom": "Ya zhivú ___ Moskvé.",
+      "opciones": [
+        "на",
+        "в",
+        "из"
+      ],
+      "opcionesRom": [
+        "na",
+        "v",
+        "iz"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Con una ciudad se usa «в» (v): «Я живу в Москве» (Ya zhivú v Moskvé). «из» (iz) indica de dónde vienes y «на» (na) no se usa con ciudades.",
+        "en": "With a city you use «в» (v): «Я живу в Москве» (Ya zhivú v Moskvé). «из» (iz) says where you come from, and «на» (na) is not used with cities."
+      }
+    },
+    {
+      "id": "dx.ru.n1.gramatica.2",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la frase correcta: esto es mi libro.",
+        "en": "Choose the correct sentence: this is my book."
+      },
+      "opciones": [
+        "Это моя книга.",
+        "Это мой книга.",
+        "Это моё книга."
+      ],
+      "opcionesRom": [
+        "Éto moyá kníga.",
+        "Éto moy kníga.",
+        "Éto moyó kníga."
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "«книга» (kníga) es femenino y va con «моя» (moyá): «Это моя книга» (Éto moyá kníga). «мой» (moy) es masculino y «моё» (moyó), neutro.",
+        "en": "«книга» (kníga) is feminine and takes «моя» (moyá): «Это моя книга» (Éto moyá kníga). «мой» (moy) is masculine and «моё» (moyó) is neuter."
+      }
+    },
+    {
+      "id": "dx.ru.n1.gramatica.3",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: no tengo hermano.",
+        "en": "Complete: I do not have a brother."
+      },
+      "texto": "У меня нет ___.",
+      "textoRom": "U menyá net ___.",
+      "opciones": [
+        "брат",
+        "братья",
+        "брата"
+      ],
+      "opcionesRom": [
+        "brat",
+        "brát'ya",
+        "bráta"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Después de «нет» (net) el sustantivo cambia de final: «У меня нет брата» (U menyá net bráta). «брат» (brat) y «братья» (brát'ya) no sirven aquí.",
+        "en": "After «нет» (net) the noun changes its ending: «У меня нет брата» (U menyá net bráta). «брат» (brat) and «братья» (brát'ya) do not fit here."
+      }
+    },
+    {
+      "id": "dx.ru.n1.gramatica.4",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la frase correcta: tú trabajas en una oficina.",
+        "en": "Choose the correct sentence: you work in an office."
+      },
+      "opciones": [
+        "Ты работаешь в офисе.",
+        "Ты работаю в офисе.",
+        "Ты работает в офисе."
+      ],
+      "opcionesRom": [
+        "Ty rabótayesh' v ófise.",
+        "Ty rabótayu v ófise.",
+        "Ty rabótayet v ófise."
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Con «ты» (ty) el verbo termina en «-ешь» (-yesh'): «Ты работаешь» (Ty rabótayesh'). «работаю» (rabótayu) es de «я» (ya) y «работает» (rabótayet), de «он» (on) o «она» (oná).",
+        "en": "With «ты» (ty) the verb ends in «-ешь» (-yesh'): «Ты работаешь» (Ty rabótayesh'). «работаю» (rabótayu) goes with «я» (ya), and «работает» (rabótayet) with «он» (on) or «она» (oná)."
+      }
+    },
+    {
+      "id": "dx.ru.n1.vocabulario.1",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con lo que necesitas para llamar.",
+        "en": "Complete with what you need to make a call."
+      },
+      "texto": "Мне нужен ___. Я хочу позвонить.",
+      "textoRom": "Mne núzhen ___. Ya khochú pozvonít'.",
+      "opciones": [
+        "телефон",
+        "стол",
+        "ключ"
+      ],
+      "opcionesRom": [
+        "telefón",
+        "stol",
+        "klyuch"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Para llamar necesitas un «телефон» (telefón, teléfono). Una mesa («стол» (stol)) y una llave («ключ» (klyuch)) no sirven para llamar.",
+        "en": "To make a call you need a «телефон» (telefón, telephone). A table («стол» (stol)) and a key («ключ» (klyuch)) are no use for calling."
+      }
+    },
+    {
+      "id": "dx.ru.n1.vocabulario.2",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige el lugar donde se toma el tren.",
+        "en": "Choose the place where you catch a train."
+      },
+      "opciones": [
+        "аптека",
+        "вокзал",
+        "школа"
+      ],
+      "opcionesRom": [
+        "aptéka",
+        "vokzál",
+        "shkóla"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«вокзал» (vokzál, estación) es el lugar del tren. «аптека» (aptéka, farmacia) y «школа» (shkóla, escuela) son otros lugares.",
+        "en": "«вокзал» (vokzál, station) is where you catch a train. «аптека» (aptéka, pharmacy) and «школа» (shkóla, school) are other places."
+      }
+    },
+    {
+      "id": "dx.ru.n1.vocabulario.3",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige lo contrario de «большой» (bol'shóy, grande).",
+        "en": "Choose the opposite of «большой» (bol'shóy, big)."
+      },
+      "opciones": [
+        "красивый",
+        "новый",
+        "маленький"
+      ],
+      "opcionesRom": [
+        "krasívyy",
+        "nóvyy",
+        "málen'kiy"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«маленький» (málen'kiy, pequeño) es lo contrario de «большой» (bol'shóy). «красивый» (krasívyy, bonito) y «новый» (nóvyy, nuevo) no son opuestos de «grande».",
+        "en": "«маленький» (málen'kiy, small) is the opposite of «большой» (bol'shóy). «красивый» (krasívyy, beautiful) and «новый» (nóvyy, new) are not opposites of “big.”"
+      }
+    },
+    {
+      "id": "dx.ru.n1.vocabulario.4",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con el día que sigue.",
+        "en": "Complete with the next day."
+      },
+      "texto": "Сегодня понедельник, завтра ___.",
+      "textoRom": "Segódnya ponedél'nik, závtra ___.",
+      "opciones": [
+        "пятница",
+        "вторник",
+        "среда"
+      ],
+      "opcionesRom": [
+        "pyátnitsa",
+        "vtórnik",
+        "sredá"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Después del lunes viene «вторник» (vtórnik, martes). «среда» (sredá, miércoles) y «пятница» (pyátnitsa, viernes) no siguen al lunes.",
+        "en": "After Monday comes «вторник» (vtórnik, Tuesday). «среда» (sredá, Wednesday) and «пятница» (pyátnitsa, Friday) do not follow Monday."
+      }
+    },
+    {
+      "id": "dx.ru.n1.escritura.1",
+      "nivel": 1,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases: quién eres, dónde vives o trabajas y qué te gusta.",
+        "en": "Write 2–3 sentences: who you are, where you live or work, and what you like."
+      },
+      "aceptadas": [
+        "Меня зовут Иван. Я работаю в школе. Я люблю футбол.",
+        "Я Мария. Я из Мексики. Мне нравится читать книги."
+      ],
+      "evidenciasEscritura": [
+        [
+          "меня зовут",
+          "я анна",
+          "я иван",
+          "я мария",
+          "я студент",
+          "я студентка",
+          "я врач"
+        ],
+        [
+          "я живу",
+          "я работаю",
+          "я из",
+          "я учусь"
+        ],
+        [
+          "я люблю",
+          "мне нравится",
+          "мне нравятся"
+        ]
+      ],
+      "minimoPalabras": 7,
+      "maximoPalabras": 60,
+      "respuesta": "Меня зовут Анна. Я живу в Москве. Я люблю кофе.",
+      "feedback": {
+        "es": "Preséntate con «Меня зовут…» (Menyá zovút…), di dónde vives o trabajas con «Я живу в… / Я работаю в…» (Ya zhivú v… / Ya rabótayu v…) y qué te gusta con «Я люблю…» (Ya lyublyú…).",
+        "en": "Introduce yourself with «Меня зовут…» (Menyá zovút…), say where you live or work with «Я живу в… / Я работаю в…» (Ya zhivú v… / Ya rabótayu v…) and what you like with «Я люблю…» (Ya lyublyú…)."
+      }
+    },
+    {
+      "id": "dx.ru.n1.escritura.2",
+      "nivel": 1,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases sobre tu día: a qué hora te levantas y qué haces.",
+        "en": "Write 2–3 sentences about your day: what time you get up and what you do."
+      },
+      "aceptadas": [
+        "Утром я встаю в шесть часов. Я завтракаю и читаю книги.",
+        "Я встаю в восемь часов. Днём я работаю, а вечером смотрю фильм."
+      ],
+      "evidenciasEscritura": [
+        [
+          "я встаю",
+          "я просыпаюсь"
+        ],
+        [
+          "в шесть",
+          "в семь",
+          "в восемь",
+          "в девять",
+          "в пять",
+          "в десять"
+        ],
+        [
+          "я пью",
+          "я завтракаю",
+          "я работаю",
+          "я читаю",
+          "я смотрю",
+          "я иду"
+        ]
+      ],
+      "minimoPalabras": 7,
+      "maximoPalabras": 60,
+      "respuesta": "Я встаю в семь часов. Я пью кофе. Потом я работаю в офисе.",
+      "feedback": {
+        "es": "Di a qué hora te levantas con «Я встаю в… часов» (Ya vstayú v… chasóv) y añade qué haces con «Я пью…» (Ya p'yu…), «Я работаю…» (Ya rabótayu…) o «Я читаю…» (Ya chitáyu…).",
+        "en": "Say what time you get up with «Я встаю в… часов» (Ya vstayú v… chasóv) and add what you do with «Я пью…» (Ya p'yu…), «Я работаю…» (Ya rabótayu…) or «Я читаю…» (Ya chitáyu…)."
+      }
+    }
+  ]
+}

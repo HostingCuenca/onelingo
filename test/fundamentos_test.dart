@@ -255,8 +255,59 @@ void main() {
     expect(nivelAlumnoEnRuta(ruta, alto), 2);
   });
 
-  test('ko y ru no tienen Fundamentos antiguos (curso en preparación)', () async {
-    for (final idm in ['ko', 'ru']) {
+  test('el ruso (versión esencial): ruta f0 (8 unidades) y solo N1–N2 publicados', () async {
+    expect(idiomasSoloRutaF0, contains('ru'));
+    await ContenidoJson.precargar('ru');
+    expect(Fundamentos.disponible('ru'), isFalse); // no tiene nivel-0.json (su Nivel 0 es el nuevo, en nivel0/)
+    final cargador = CargadorRuta();
+    final ruta = await cargador.cargar('ru');
+    expect(ruta, isNotNull);
+    expect(cargador.modulosConError, isEmpty);
+    final f0 = ruta!.delNivel('f0');
+    expect(f0, hasLength(8));
+    expect(f0.first.id, 'ru.f0.privetstviya');
+    expect(f0.last.id, 'ru.f0.predstavlenie');
+    expect(ruta.delNivel('a1-1'), isEmpty);
+    expect(ruta.curso.idiomasApoyo, ['es', 'en']);
+    expect(problemasDeContenido(ruta, formasVerbales: await cargador.formasVerbales('ru')), isEmpty);
+    final publicados = [
+      for (final n in ruta.curso.niveles)
+        if (n.estado == EstadoNivel.publicado) n.id,
+    ];
+    // Versión esencial: N1–N2 (50 clases por nivel); N3–N10 aún no existen
+    // en el curso, así que la app los muestra «Próximamente» y no se juegan.
+    expect(publicados, ['f0', 'n1', 'n2']);
+    for (var i = 3; i <= 10; i++) {
+      expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
+    }
+    expect(nivelPublicadoMaximo(ruta), 2);
+    var previa = f0.last.id;
+    for (final nivel in publicados.skip(1)) {
+      final clases = ruta.delNivel(nivel);
+      expect(clases, hasLength(50), reason: nivel);
+      for (final u in clases) {
+        expect(u.id, startsWith('ru.$nivel.c'), reason: u.id);
+        expect(u.prerequisitos, [previa], reason: u.id);
+        previa = u.id;
+      }
+    }
+    // La romanización llega intacta a las clases (N1–N2: visible).
+    final items = [
+      for (final u in ruta.unidades)
+        for (final p in u.pasos) ...p.items,
+    ];
+    expect(items.where((i) => i.tieneRom).length, greaterThan(500));
+    expect(idiomasConRuta, contains('ru'));
+    const s = ProgressState(idiomaMeta: 'ru', fundamentos: true);
+    expect(s.fundamentosPendientes, isTrue);
+    expect(s.nivel0Pendiente, isTrue);
+    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N2.
+    const alto = ProgressState(idiomaMeta: 'ru', nivelInicial: 8);
+    expect(nivelAlumnoEnRuta(ruta, alto), 2);
+  });
+
+  test('ko no tiene Fundamentos antiguos (curso en preparación)', () async {
+    for (final idm in ['ko']) {
       await ContenidoJson.precargar(idm);
       expect(Fundamentos.disponible(idm), isFalse, reason: idm);
       idiomaContenido = idm;

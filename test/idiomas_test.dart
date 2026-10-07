@@ -18,8 +18,8 @@ void main() {
     idiomaContenido = 'en';
   });
 
-  test('idiomas sin ruta nueva (ko, ru): sin lecciones antiguas', () {
-    for (final code in const ['ko', 'ru']) {
+  test('idiomas sin ruta nueva (ko): sin lecciones antiguas', () {
+    for (final code in const ['ko']) {
       idiomaContenido = code;
       expect(idiomasConRuta, isNot(contains(code)), reason: code);
       for (final n in [0, 1, 2]) {

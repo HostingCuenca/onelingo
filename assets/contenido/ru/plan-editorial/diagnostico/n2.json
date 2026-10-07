@@ -1,0 +1,534 @@
+{
+  "idioma": "ru",
+  "nivel": 2,
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-integrador",
+    "date": "2026-10-07",
+    "notes": [
+      "Versión esencial: N1–N2. Léxico comprobado con validar_diagnostico.py contra la ruta integrada (conocida_ru: cada palabra enseñada tal cual hasta el final de N2, con ё ≡ е); cirílico sin marcas de acento; rom letra a letra con la tilde de acento solo en el rom (palabras de las clases copiadas de sus pares texto↔rom; comprobado con las reglas de tools/contenido/ruta-ru/validar.py); una sola respuesta defendible revisada ítem por ítem; posiciones repartidas.",
+      "Escritura: la extensión se mide en palabras y las evidencias se buscan con ё ≡ е y sin puntuación, como corrige la app (correccion.dart). Sin Lumo, sin Ecuador, sin cifras."
+    ]
+  },
+  "items": [
+    {
+      "id": "dx.ru.n2.escucha.1",
+      "nivel": 2,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige qué compró la hermana.",
+        "en": "Listen and choose what the sister bought."
+      },
+      "audio": "Вчера я ходил в магазин. Я купил рубашку, а сестра купила футболку.",
+      "opciones": [
+        "футболку",
+        "рубашку",
+        "куртку"
+      ],
+      "opcionesRom": [
+        "futbólku",
+        "rubáshku",
+        "kúrtku"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Dice «а сестра купила футболку» (a sestrá kupíla futbólku): la hermana compró una camiseta. La camisa la compró él y la chaqueta no aparece.",
+        "en": "It says «а сестра купила футболку» (a sestrá kupíla futbólku): the sister bought a T-shirt. He bought the shirt, and the jacket is not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n2.escucha.2",
+      "nivel": 2,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige en qué plataforma sale el tren.",
+        "en": "Listen and choose which platform the train leaves from."
+      },
+      "audio": "Поезд на Москву отправляется в девять часов. Платформа номер пять.",
+      "opciones": [
+        "платформа три",
+        "платформа пять",
+        "платформа девять"
+      ],
+      "opcionesRom": [
+        "platfórma tri",
+        "platfórma pyat'",
+        "platfórma dévyat'"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Dice «Платформа номер пять» (Platfórma nómer pyat'): el tren sale de la plataforma cinco. «девять» (dévyat') es la hora, no la plataforma.",
+        "en": "It says «Платформа номер пять» (Platfórma nómer pyat'): the train leaves from platform five. «девять» (dévyat') is the time, not the platform."
+      }
+    },
+    {
+      "id": "dx.ru.n2.escucha.3",
+      "nivel": 2,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige qué le duele a la persona.",
+        "en": "Listen and choose what hurts."
+      },
+      "audio": "У меня болит голова. Мне нужно лечь и немного отдохнуть.",
+      "opciones": [
+        "горло",
+        "живот",
+        "голова"
+      ],
+      "opcionesRom": [
+        "górlo",
+        "zhivót",
+        "golová"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Dice «У меня болит голова» (U menyá bolít golová): le duele la cabeza. El cuello y el estómago no aparecen.",
+        "en": "It says «У меня болит голова» (U menyá bolít golová): the person has a headache. The throat and the stomach are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n2.escucha.4",
+      "nivel": 2,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha la receta y elige qué se hace al final.",
+        "en": "Listen to the recipe and choose what you do last."
+      },
+      "audio": "Сначала нарежьте помидоры, потом добавьте соль и смешайте.",
+      "opciones": [
+        "нарезать помидоры",
+        "добавить соль",
+        "смешать"
+      ],
+      "opcionesRom": [
+        "narézat' pomidóry",
+        "dobávit' sol'",
+        "smeshát'"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Dice «потом добавьте соль и смешайте» (potóm dobáv'te sol' i smesháyte): lo último es mezclar. Cortar y salar van antes.",
+        "en": "It says «потом добавьте соль и смешайте» (potóm dobáv'te sol' i smesháyte): mixing comes last. Cutting and salting come first."
+      }
+    },
+    {
+      "id": "dx.ru.n2.lectura.1",
+      "nivel": 2,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el mensaje y elige qué le pide Maxim a Anna.",
+        "en": "Read the message and choose what Maxim asks Anna to do."
+      },
+      "texto": "Анна, привет! Завтра я не смогу прийти на урок: я устал и у меня болит голова. Я пойду к врачу в десять часов. Позвони мне вечером, пожалуйста. Максим",
+      "textoRom": "Ánna, privét! Závtra ya ne smogú priytí na urók: ya ustál i u menyá bolít golová. Ya poydú k vrachú v désyat' chasóv. Pozvoní mne vécherom, pozháluysta. Maksím",
+      "opciones": [
+        "позвонить вечером",
+        "прийти на урок",
+        "пойти к врачу"
+      ],
+      "opcionesRom": [
+        "pozvonít' vécherom",
+        "priytí na urók",
+        "poytí k vrachú"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Escribe «Позвони мне вечером» (Pozvoní mne vécherom): le pide que lo llame por la noche. Él es quien faltará a clase y quien irá al médico.",
+        "en": "He writes «Позвони мне вечером» (Pozvoní mne vécherom): he asks her to call him in the evening. He is the one who will miss class and see the doctor."
+      }
+    },
+    {
+      "id": "dx.ru.n2.lectura.2",
+      "nivel": 2,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige cuántos días quiere reservar María.",
+        "en": "Read and choose how many days María wants to book."
+      },
+      "texto": "Здравствуйте! Я хочу забронировать одноместный номер с пятницы на три дня. Мне нужен тихий номер на втором этаже. Сколько он стоит? Ответьте, пожалуйста. Спасибо. Мария Иванова",
+      "textoRom": "Zdrávstvuyte! Ya khochú zabronírovat' odnoméstnyy nómer s pyátnitsy na tri dnya. Mne núzhen tíkhiy nómer na vtoróm etazhé. Skól'ko on stóit? Otvét'te, pozháluysta. Spasíbo. Maríya Ivánova",
+      "opciones": [
+        "два дня",
+        "три дня",
+        "пять дней"
+      ],
+      "opcionesRom": [
+        "dva dnya",
+        "tri dnya",
+        "pyat' dney"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Escribe «на три дня» (na tri dnya): quiere reservar tres días. Dos y cinco no aparecen.",
+        "en": "She writes «на три дня» (na tri dnya): she wants to book three days. Two and five are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n2.lectura.3",
+      "nivel": 2,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige qué perdió la persona.",
+        "en": "Read and choose what the person lost."
+      },
+      "texto": "Вчера у меня был тяжёлый день. Утром я опоздала на работу: шёл снег. Днём я потеряла ключ, а вечером очень устала и пошла спать. Сегодня я отдыхаю.",
+      "textoRom": "Vcherá u menyá byl tyazhyólyy den'. Útrom ya opozdála na rabótu: shyol sneg. Dnyom ya poteryála klyuch, a vécherom óchen' ustála i poshlá spat'. Segódnya ya otdykháyu.",
+      "opciones": [
+        "телефон",
+        "паспорт",
+        "ключ"
+      ],
+      "opcionesRom": [
+        "telefón",
+        "pásport",
+        "klyuch"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "El texto dice «Днём я потеряла ключ» (Dnyom ya poteryála klyuch): perdió la llave. El teléfono y el pasaporte no aparecen.",
+        "en": "The text says «Днём я потеряла ключ» (Dnyom ya poteryála klyuch): she lost her key. The phone and the passport are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ru.n2.lectura.4",
+      "nivel": 2,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige a qué hora es la fiesta.",
+        "en": "Read and choose what time the party is."
+      },
+      "texto": "В субботу у меня день рождения. Я приглашаю тебя в кафе. Мы будем там в шесть часов. Там будет вкусный торт. Ты придёшь? Я очень жду. Анна",
+      "textoRom": "V subbótu u menyá den' rozhdéniya. Ya priglasháyu tebyá v kafé. My búdem tam v shest' chasóv. Tam búdet vkúsnyy tort. Ty pridyósh'? Ya óchen' zhdu. Ánna",
+      "opciones": [
+        "в пять часов",
+        "в шесть часов",
+        "в семь часов"
+      ],
+      "opcionesRom": [
+        "v pyat' chasóv",
+        "v shest' chasóv",
+        "v sem' chasóv"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "El texto dice «Мы будем там в шесть часов» (My búdem tam v shest' chasóv): la fiesta es a las seis, en el café.",
+        "en": "The text says «Мы будем там в шесть часов» (My búdem tam v shest' chasóv): the party is at six, at the café."
+      }
+    },
+    {
+      "id": "dx.ru.n2.gramatica.1",
+      "nivel": 2,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con el verbo en pasado.",
+        "en": "Complete with the verb in the past."
+      },
+      "texto": "Вчера Анна ___ в магазин.",
+      "textoRom": "Vcherá Ánna ___ v magazín.",
+      "opciones": [
+        "ходил",
+        "ходила",
+        "ходят"
+      ],
+      "opcionesRom": [
+        "khodíl",
+        "khodíla",
+        "khódyat"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "En pasado el verbo concuerda con el género: Anna es mujer, así que «ходила» (khodíla). «ходил» (khodíl) es masculino y «ходят» (khódyat) es presente.",
+        "en": "In the past the verb agrees with gender: Anna is a woman, so «ходила» (khodíla). «ходил» (khodíl) is masculine and «ходят» (khódyat) is present tense."
+      }
+    },
+    {
+      "id": "dx.ru.n2.gramatica.2",
+      "nivel": 2,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: voy al trabajo todos los días.",
+        "en": "Complete: I go to work every day."
+      },
+      "texto": "Я ___ на работу каждый день.",
+      "textoRom": "Ya ___ na rabótu kázhdyy den'.",
+      "opciones": [
+        "хожу",
+        "иду",
+        "пойду"
+      ],
+      "opcionesRom": [
+        "khozhú",
+        "idú",
+        "poydú"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Una acción habitual se dice con «ходить» (khodít'): «Я хожу на работу каждый день» (Ya khozhú na rabótu kázhdyy den'). «иду» (idú) es un solo viaje ahora y «пойду» (poydú) es futuro.",
+        "en": "A habitual action uses «ходить» (khodít'): «Я хожу на работу каждый день» (Ya khozhú na rabótu kázhdyy den'). «иду» (idú) is one trip happening now, and «пойду» (poydú) is future."
+      }
+    },
+    {
+      "id": "dx.ru.n2.gramatica.3",
+      "nivel": 2,
+      "habilidad": "gramatica",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la frase correcta: tengo dos libros.",
+        "en": "Choose the correct sentence: I have two books."
+      },
+      "opciones": [
+        "У меня два книги.",
+        "У меня две книг.",
+        "У меня две книги."
+      ],
+      "opcionesRom": [
+        "U menyá dva knígi.",
+        "U menyá dve knig.",
+        "U menyá dve knígi."
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«книга» (kníga) es femenino: con 2, 3 y 4 se usa «две» (dve) y el sustantivo en «-и» (-i): «две книги» (dve knígi). «два» (dva) es masculino y «книг» (knig) va con 5 o más.",
+        "en": "«книга» (kníga) is feminine: with 2, 3 and 4 you use «две» (dve) and the noun ending in «-и» (-i): «две книги» (dve knígi). «два» (dva) is masculine, and «книг» (knig) goes with 5 or more."
+      }
+    },
+    {
+      "id": "dx.ru.n2.gramatica.4",
+      "nivel": 2,
+      "habilidad": "gramatica",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la frase correcta: este teléfono es más barato que ese.",
+        "en": "Choose the correct sentence: this phone is cheaper than that one."
+      },
+      "opciones": [
+        "Этот телефон дешевле, чем тот.",
+        "Этот телефон дешёвый, чем тот.",
+        "Этот телефон дёшево, чем тот."
+      ],
+      "opcionesRom": [
+        "Étot telefón deshevlé, chem tot.",
+        "Étot telefón deshyóvyy, chem tot.",
+        "Étot telefón dyóshevo, chem tot."
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Para comparar se usa la forma «дешевле» (deshevlé) y después «чем» (chem): «дешевле, чем тот» (deshevlé, chem tot). «дешёвый» (deshyóvyy) y «дёшево» (dyóshevo) no se combinan con «чем» (chem).",
+        "en": "To compare you use the form «дешевле» (deshevlé) followed by «чем» (chem): «дешевле, чем тот» (deshevlé, chem tot). «дешёвый» (deshyóvyy) and «дёшево» (dyóshevo) do not combine with «чем» (chem)."
+      }
+    },
+    {
+      "id": "dx.ru.n2.vocabulario.1",
+      "nivel": 2,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con lo que necesitas si te duele la cabeza.",
+        "en": "Complete with what you need when you have a headache."
+      },
+      "texto": "У меня болит голова. Мне нужна ___.",
+      "textoRom": "U menyá bolít golová. Mne nuzhná ___.",
+      "opciones": [
+        "куртка",
+        "сумка",
+        "таблетка"
+      ],
+      "opcionesRom": [
+        "kúrtka",
+        "súmka",
+        "tablétka"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Con dolor de cabeza se toma una «таблетка» (tablétka, pastilla). Una chaqueta y una bolsa no ayudan.",
+        "en": "With a headache you take a «таблетка» (tablétka, pill). A jacket and a bag do not help."
+      }
+    },
+    {
+      "id": "dx.ru.n2.vocabulario.2",
+      "nivel": 2,
+      "habilidad": "vocabulario",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la habitación donde se prepara la comida.",
+        "en": "Choose the room where food is cooked."
+      },
+      "opciones": [
+        "кухня",
+        "спальня",
+        "ванная"
+      ],
+      "opcionesRom": [
+        "kúkhnya",
+        "spál'nya",
+        "vánnaya"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "«кухня» (kúkhnya, cocina) es donde se cocina. «спальня» (spál'nya, dormitorio) es para dormir y «ванная» (vánnaya, baño) es para lavarse.",
+        "en": "«кухня» (kúkhnya, kitchen) is where you cook. «спальня» (spál'nya, bedroom) is for sleeping and «ванная» (vánnaya, bathroom) is for washing."
+      }
+    },
+    {
+      "id": "dx.ru.n2.vocabulario.3",
+      "nivel": 2,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con lo que necesitas cuando llueve.",
+        "en": "Complete with what you need when it rains."
+      },
+      "texto": "Идёт дождь. Мне нужен ___.",
+      "textoRom": "Idyót dozhd'. Mne núzhen ___.",
+      "opciones": [
+        "шарф",
+        "зонт",
+        "рюкзак"
+      ],
+      "opcionesRom": [
+        "sharf",
+        "zont",
+        "ryukzák"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Con lluvia se usa un «зонт» (zont, paraguas). Una bufanda y una mochila no te protegen de la lluvia.",
+        "en": "In the rain you use a «зонт» (zont, umbrella). A scarf and a backpack do not protect you from the rain."
+      }
+    },
+    {
+      "id": "dx.ru.n2.vocabulario.4",
+      "nivel": 2,
+      "habilidad": "vocabulario",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige lo contrario de «холодно» (khólodno, frío).",
+        "en": "Choose the opposite of «холодно» (khólodno, cold)."
+      },
+      "opciones": [
+        "больно",
+        "далеко",
+        "тепло"
+      ],
+      "opcionesRom": [
+        "ból'no",
+        "dalekó",
+        "tepló"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«тепло» (tepló, cálido) es lo contrario de «холодно» (khólodno). «больно» (ból'no, doloroso) y «далеко» (dalekó, lejos) no son temperaturas.",
+        "en": "«тепло» (tepló, warm) is the opposite of «холодно» (khólodno). «больно» (ból'no, painful) and «далеко» (dalekó, far) are not temperatures."
+      }
+    },
+    {
+      "id": "dx.ru.n2.escritura.1",
+      "nivel": 2,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 3–4 frases en pasado: qué hiciste ayer.",
+        "en": "Write 3–4 sentences in the past: what you did yesterday."
+      },
+      "aceptadas": [
+        "Вчера я работала дома. Потом я ходила в парк. Вечером я смотрела фильм.",
+        "Утром я был на работе. Днём я купил подарок, а вечером читал."
+      ],
+      "evidenciasEscritura": [
+        [
+          "вчера я",
+          "утром я",
+          "днём я",
+          "вечером я"
+        ],
+        [
+          "я работал",
+          "я работала",
+          "я ходил",
+          "я ходила",
+          "я купил",
+          "я купила",
+          "я был",
+          "я была",
+          "я читал",
+          "я читала",
+          "я смотрел",
+          "я смотрела"
+        ],
+        [
+          "потом я",
+          "днём я",
+          "вечером я",
+          "а потом",
+          "а вечером"
+        ]
+      ],
+      "minimoPalabras": 10,
+      "maximoPalabras": 90,
+      "respuesta": "Вчера я работал в офисе. Потом я ходил в магазин и купил хлеб. Вечером я читал книги.",
+      "feedback": {
+        "es": "Cuenta tu día con verbos en pasado: «Вчера я работал / работала…» (Vcherá ya rabótal / rabótala…), «Потом я ходил / ходила…» (Potóm ya khodíl / khodíla…), «Вечером я читал / читала…» (Vécherom ya chitál / chitála…).",
+        "en": "Tell your day with past-tense verbs: «Вчера я работал / работала…» (Vcherá ya rabótal / rabótala…), «Потом я ходил / ходила…» (Potóm ya khodíl / khodíla…), «Вечером я читал / читала…» (Vécherom ya chitál / chitála…)."
+      }
+    },
+    {
+      "id": "dx.ru.n2.escritura.2",
+      "nivel": 2,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases con tus planes para el fin de semana.",
+        "en": "Write 2–3 sentences with your plans for the weekend."
+      },
+      "aceptadas": [
+        "Завтра я поеду в Москву. Я хочу купить подарок для сестры.",
+        "В пятницу я пойду в парк. В субботу я буду работать."
+      ],
+      "evidenciasEscritura": [
+        [
+          "в субботу",
+          "в воскресенье",
+          "в пятницу",
+          "завтра я",
+          "сегодня вечером"
+        ],
+        [
+          "я пойду",
+          "я поеду",
+          "я буду",
+          "мы пойдём",
+          "мы поедем",
+          "я хочу"
+        ],
+        [
+          "в кино",
+          "в парк",
+          "в кафе",
+          "в москву",
+          "буду отдыхать",
+          "буду читать",
+          "буду работать",
+          "хочу купить",
+          "хочу отдохнуть"
+        ]
+      ],
+      "minimoPalabras": 8,
+      "maximoPalabras": 80,
+      "respuesta": "В субботу я пойду в кино. В воскресенье я буду отдыхать и читать.",
+      "feedback": {
+        "es": "Usa el futuro: «В субботу я пойду в…» (V subbótu ya poydú v…), «В воскресенье я буду отдыхать» (V voskresén'ye ya búdu otdykhát') o «Я поеду в…» (Ya poyédu v…).",
+        "en": "Use the future: «В субботу я пойду в…» (V subbótu ya poydú v…), «В воскресенье я буду отдыхать» (V voskresén'ye ya búdu otdykhát') or «Я поеду в…» (Ya poyédu v…)."
+      }
+    }
+  ]
+}

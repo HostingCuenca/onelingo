@@ -66,7 +66,7 @@ LEX_SRC = """
 бана^н бар банк балко^н авто^бус гора^ год го^лос гита^ра го^род нога^ газ дом да друг
 де^рево вода^ до^ктор доро^га зе^бра зо^на ва^за ро^за звезда^ зима^ луна^ ла^мпа лиса^ лук
 ле^то слон стол стул па^па парк порт пти^ца по^чта фо^то флаг ко^фе футбо^л телефо^н чай май
-трамва^й музе^й мой твой жира^ф жук жар у^жин жена^ журна^л нож этаж^ шокола^д шар шум шко^ла
+трамва^й музе^й мой твой жира^ф жук жар у^жин жена^ журна^л нож эта^ж шокола^д шар шум шко^ла
 ша^пка маши^на борщ щи щу^ка о^вощи ещё чат час челове^к ру^чка врач чек цирк цвето^к цена^
 центр конце^рт у^лица оте^ц
 рад ряд люк ты мы вы сыр сын ры^ба мы^ло ми^ло был бил
@@ -78,6 +78,7 @@ LEX_SRC = """
 здра^вствуйте спаси^бо приве^т до свида^ния извини^те пожа^луйста зову^т меня^ дела^ пока^
 вход вы^ход апте^ка магази^н туале^т откры^то закры^то аэропо^рт гости^ница университе^т рестора^н
 макси^м мари^я ро^лфа зи^фка
+еда^ игра^ коне^ц о^блако у^тка чемода^н ю^бка я^блоко
 """
 LEX = {}
 for _t in LEX_SRC.split():
@@ -108,8 +109,10 @@ def rom_palabra(tok):
             r = MAP.get(c, c)
         if nvoc >= 2 and c in VOC and (i == ac or c == 'ё'):
             r = r[:-1] + TILDE[r[-1]]
-        out += r
-    if todo_mayus or tok[0] != tok[0].lower():
+        # Palabra toda en mayúsculas (rótulos: ВХОД): como en la ficha, cada letra
+        # lleva su mayúscula (Х → Kh, Ж → Zh, Щ → Shch): VKhOD, как «США» → SShA.
+        out += r[0].upper() + r[1:] if todo_mayus else r
+    if not todo_mayus and tok[0] != tok[0].lower():
         out = out[0].upper() + out[1:]
     return out
 
@@ -230,7 +233,8 @@ def sonidos_json():
                     'Model: standard Moscow Russian. Stress is not written in Cyrillic: it is marked with ´ in the romanization.'),
         'vocales': [
             {'id': i, 'grupo': g, 'color': PALETA[n][0], 'colorNombre': b(PALETA[n][1], PALETA[n][2]),
-             'ancla': a, 'emoji': e, 'nombre': b(nes, nen), 'grafias': gr, 'ejemplos': ej, 'unidad': u}
+             'ancla': a, 'anclaRom': rom(a), 'emoji': e, 'nombre': b(nes, nen), 'grafias': gr,
+             'ejemplos': ej, 'ejemplosRom': [rom(x) for x in ej], 'unidad': u}
             for n, (i, g, a, e, nes, nen, gr, ej, u) in enumerate(SONIDOS)
         ],
     }
@@ -746,6 +750,14 @@ def agregar_rom(o):
         m = o.get('m')
         if isinstance(m, str) and CIRILICO.search(m) and 'rom' not in o:
             o['rom'] = rom(plano(m))
+        if o.get('tipo') == 'escucha_letra' and isinstance(o.get('letra'), str) and 'letraRom' not in o:
+            # La letra que suena: su rom aparece solo al corregir (delataría la respuesta).
+            o['letraRom'] = rom(o['letra'])
+        if o.get('tipo') == 'cambia':
+            # La palabra de partida y la nueva llevan su rom (la nueva solo se ve al corregir).
+            for campo in ('de', 'a'):
+                if isinstance(o.get(campo), str) and campo + 'Rom' not in o:
+                    o[campo + 'Rom'] = rom(plano(o[campo]))
         for v in list(o.values()):
             agregar_rom(v)
     elif isinstance(o, list):
@@ -773,7 +785,10 @@ if __name__ == '__main__':
     agregar_rom(datos)
     if FALTAN:
         sys.exit('Faltan en LEX_SRC (añadir con ^ tras la vocal tónica): ' + ' '.join(sorted(FALTAN)))
-    escribir('sonidos.json', sonidos_json())
+    sonidos = sonidos_json()
+    if FALTAN:
+        sys.exit('Faltan en LEX_SRC (añadir con ^ tras la vocal tónica): ' + ' '.join(sorted(FALTAN)))
+    escribir('sonidos.json', sonidos)
     escribir('nivel0.json', datos)
     r = subprocess.run([sys.executable, str(RAIZ / 'tools/contenido/validar_nivel0.py'), 'ru',
                         str(DESTINO / 'nivel0.json'), '--bilingue'])

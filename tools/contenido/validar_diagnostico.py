@@ -110,7 +110,7 @@ _PUNTUACION_APP = re.compile(r"[.,!?¡¿;:/。、！？「」…\"“”«»()�
 _TILDES = str.maketrans({"á": "a", "à": "a", "â": "a", "ä": "a", "ã": "a", "å": "a",
                          "é": "e", "è": "e", "ê": "e", "ë": "e", "í": "i", "ì": "i", "î": "i", "ï": "i",
                          "ó": "o", "ò": "o", "ô": "o", "ö": "o", "õ": "o", "ú": "u", "ù": "u", "û": "u",
-                         "ü": "u", "ç": "c", "ñ": "n", "œ": "oe", "æ": "ae"})
+                         "ü": "u", "ç": "c", "ñ": "n", "œ": "oe", "æ": "ae", "ё": "е"})
 
 
 def _normalizar_app(t: str) -> str:
@@ -121,6 +121,7 @@ def _normalizar_app(t: str) -> str:
     return t.translate(_TILDES)
 
 
+# El ruso se normaliza con ё ≡ е (_TILDES, como sinTildes de correccion.dart).
 # zh y ja se escriben sin espacios: como en correccion.dart (_sinEspacios),
 # la extensión se mide en caracteres y las evidencias se buscan sin espacios.
 SIN_ESPACIOS = {"zh", "ja"}
@@ -249,6 +250,69 @@ def errores_japones(it: dict) -> list[str]:
     errores += [f"cifra arábiga en «{t}»" for t in textos if hay(t) and re.search(r"[0-9]", t)]
     iid = str(it.get("id", "?"))
     return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores + avisos]
+
+
+def _modulo_ru():
+    """Reglas del ruso de tools/contenido/ruta-ru/validar.py (rom letra a letra con
+    la tilde de acento solo en el rom, cirílico sin U+0301, sin alfabetos mezclados)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "validar_ru", ROOT / "tools/contenido/ruta-ru/validar.py")
+    modulo = importlib.util.module_from_spec(spec)
+    argv, sys.argv = sys.argv, sys.argv[:1]  # validar.py lee sys.argv[1] al importarse
+    try:
+        spec.loader.exec_module(modulo)
+    finally:
+        sys.argv = argv
+    return modulo
+
+
+_ECUADOR_RU = re.compile(r"ecuador|ecuatorian|quito|guayaquil|cuenca|эквадор", re.I)
+
+
+def errores_ruso(it: dict) -> list[str]:
+    """Romanización y tipografía de un ítem en ruso (docs/claude-educacion/ROMANIZACION.md,
+    tools/ia/idiomas/ru.md): `textoRom`/`opcionesRom` paralelos al ruso, una palabra de
+    rom por cada palabra rusa, letra a letra (ё = yo, е = ye al inicio o tras vocal o ь/ъ,
+    ь = ', una tilde aguda por palabra de 2+ sílabas y ninguna en los monosílabos); el
+    cirílico nunca lleva marca de acento ni letras latinas mezcladas. `audio`,
+    `respuesta` y `aceptadas` no llevan rom. Nunca Ecuador."""
+    import rom_items  # noqa: E402  (tools/contenido)
+    ru = _modulo_ru()
+    hay = lambda t: isinstance(t, str) and bool(ru.CIRILICO.search(t))  # noqa: E731
+
+    def comprobar(texto: str, rom: str):
+        propios: list[str] = []
+        ru.comprobar_par("", "", texto, rom, propios)
+        return "; ".join(e.split(": ", 1)[-1].strip() for e in propios) or None
+
+    errores = rom_items.errores({"unidades": [{"id": it.get("id", "?"), "pasos": [{"items": [it]}]}]},
+                                hay, comprobar)
+
+    def textos(x):
+        if isinstance(x, str):
+            yield x
+        elif isinstance(x, dict):
+            for v in x.values():
+                yield from textos(v)
+        elif isinstance(x, list):
+            for v in x:
+                yield from textos(v)
+
+    for t in textos(it):
+        if ru.ACENTO in t:
+            errores.append(f"marca de acento U+0301 en «{t[:40]}»: el acento va solo en el rom")
+        for palabra in re.findall(r"[A-Za-zА-Яа-яЁё]+", t):
+            if ru.CIRILICO.search(palabra) and re.search(r"[A-Za-z]", palabra):
+                errores.append(f"letras latinas y cirílicas mezcladas en «{palabra}»")
+        if _ECUADOR_RU.search(t):
+            errores.append(f"menciona Ecuador: «{t[:40]}»")
+    # En el texto que se oye o se lee no van cifras ni símbolos (se escriben en palabras).
+    for t in [it.get("audio"), it.get("texto"), *(it.get("opciones") or [])]:
+        if hay(t) and re.search(r"[0-9₽%/→]", t):
+            errores.append(f"cifra o símbolo en «{t[:40]}»: se escribe en palabras")
+    iid = str(it.get("id", "?"))
+    return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores]
 
 
 def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
@@ -391,6 +455,9 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
                 errores.append(x)
         if idioma == "ja":
             for x in errores_japones(it):
+                errores.append(x)
+        if idioma == "ru":
+            for x in errores_ruso(it):
                 errores.append(x)
         if idioma == "en":
             faltan = {w for t in textos_en for w in cb.palabras(t) if not cb.conocida(w, lex)}
