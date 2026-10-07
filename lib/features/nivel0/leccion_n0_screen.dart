@@ -161,8 +161,11 @@ class _LeccionN0ScreenState extends ConsumerState<LeccionN0Screen> {
       'toca_sonido' ||
       'elige_significado' ||
       'escucha_letra' ||
-      'deletreo' ||
       'lee' => _PasoElegir(key: k, n: n, paso: p, onRespuesta: res),
+      'deletreo' =>
+        esDeletreoOrdena(p)
+            ? _PasoOrdena(key: k, n: n, paso: p, onRespuesta: res)
+            : _PasoElegir(key: k, n: n, paso: p, onRespuesta: res),
       'construye' => _PasoConstruye(key: k, n: n, paso: p, onRespuesta: res),
       'cambia' => _PasoCambia(key: k, n: n, paso: p, onRespuesta: res),
       _ => _PasoLumo(
@@ -819,8 +822,12 @@ class _PasoElegirState extends State<_PasoElegir> {
   String get audio => switch (p.tipo) {
     'escucha_elige' => (p.j['audio'] as String?) ?? '',
     'escucha_letra' => (p.j['letra'] as String?) ?? '',
+    // Formato A: se oye la palabra deletreada. Formato B con opciones
+    // sueltas (sin `palabra`): se oye la palabra `m`.
     'deletreo' =>
-      '${((p.j['palabra'] as String?) ?? '').split('').join(', ')}.',
+      p.j['palabra'] is String
+          ? '${(p.j['palabra'] as String).split('').join(', ')}.'
+          : textoPlano(p.marcado),
     'elige_significado' || 'lee' => textoPlano(p.marcado),
     _ => '',
   };
@@ -1126,6 +1133,173 @@ class _PasoConstruyeState extends State<_PasoConstruye> {
               opacity: usadas.contains(i) ? .25 : 1,
               child: Tarjeta(
                 onTap: usadas.contains(i) || formada.length >= objetivo.length
+                    ? null
+                    : () => setState(() => usadas.add(i)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 8,
+                ),
+                child: Text(
+                  fichas[i],
+                  style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w900,
+                    color: OL.morado,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    ],
+  );
+}
+
+/// Paso `deletreo` de formato B para ORDENAR: sin `palabra`, con `m` y con
+/// `opciones` que son piezas sueltas (una letra, jamo o kana cada una) en el
+/// orden correcto. Si alguna opción es más larga (un correo, una palabra) el
+/// paso es de elegir y lo resuelve `_PasoElegir`.
+bool esDeletreoOrdena(PasoN0 p) {
+  if (p.tipo != 'deletreo' || p.j['palabra'] is String) return false;
+  if (p.marcado.isEmpty) return false;
+  final piezas = p.textos;
+  return piezas.length >= 2 && piezas.every((t) => t.runes.length == 1);
+}
+
+/// Ordenar las letras de la palabra que oyes (`deletreo` formato B). La
+/// respuesta es la lista `opciones` en orden; se compara pieza a pieza (vale
+/// con jamo y con letras repetidas, que son intercambiables).
+class _PasoOrdena extends StatefulWidget {
+  const _PasoOrdena({
+    super.key,
+    required this.n,
+    required this.paso,
+    required this.onRespuesta,
+  });
+  final Nivel0 n;
+  final PasoN0 paso;
+  final void Function(bool ok, Widget cuerpo) onRespuesta;
+  @override
+  State<_PasoOrdena> createState() => _PasoOrdenaState();
+}
+
+class _PasoOrdenaState extends State<_PasoOrdena> {
+  final usadas = <int>[];
+  late final String palabra = textoPlano(widget.paso.marcado);
+  late final List<String> correctas = widget.paso.textos;
+  late final List<String> fichas = () {
+    final f = [...correctas];
+    // Nunca en el orden de la respuesta (si todas son iguales, da igual).
+    final r = Random(palabra.hashCode);
+    for (var i = 0; i < 30; i++) {
+      f.shuffle(r);
+      if (f.join('\u0000') != correctas.join('\u0000')) break;
+    }
+    return f;
+  }();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => decir(widget.n, palabra));
+  }
+
+  bool get completa => usadas.length == correctas.length;
+
+  bool get acierto {
+    for (var i = 0; i < correctas.length; i++) {
+      if (fichas[usadas[i]] != correctas[i]) return false;
+    }
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) => _Marco(
+    boton: BotonPrincipal(
+      onPressed: completa
+          ? () => widget.onRespuesta(
+              acierto,
+              // Las fichas no muestran romanización (delatarían lo que se
+              // oye): solo la palabra corregida la lleva.
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  PalabraColor(
+                    widget.paso.marcado,
+                    nivel: widget.n,
+                    tamano: 36,
+                    centrar: false,
+                  ),
+                  TextoRom(widget.paso.rom, tamano: 16),
+                ],
+              ),
+            )
+          : null,
+      child: Text(tr('COMPROBAR')),
+    ),
+    children: [
+      _titulo(
+        widget.paso.pregunta.isEmpty
+            ? tr('Ordena las letras de la palabra que oyes')
+            : widget.paso.pregunta,
+      ),
+      _BotonesAudio(
+        onNormal: () => decir(widget.n, palabra),
+        onLento: () => decir(widget.n, palabra, lento: true),
+      ),
+      const SizedBox(height: 24),
+      LayoutBuilder(
+        builder: (context, c) {
+          final ancho = ((c.maxWidth - 8.0 * fichas.length) / fichas.length)
+              .clamp(34.0, 58.0);
+          return Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (var i = 0; i < fichas.length; i++)
+                GestureDetector(
+                  key: ValueKey('hueco$i'),
+                  onTap: i < usadas.length
+                      ? () => setState(() => usadas.removeAt(i))
+                      : null,
+                  child: Container(
+                    width: ancho,
+                    height: 66,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: OL.blanco,
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: i < usadas.length ? OL.morado : OL.grisClaro,
+                        width: 2,
+                      ),
+                    ),
+                    child: Text(
+                      i < usadas.length ? fichas[usadas[i]] : '',
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          );
+        },
+      ),
+      const SizedBox(height: 28),
+      Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          for (var i = 0; i < fichas.length; i++)
+            Opacity(
+              opacity: usadas.contains(i) ? .25 : 1,
+              child: Tarjeta(
+                key: ValueKey('ficha$i'),
+                onTap: usadas.contains(i) || completa
                     ? null
                     : () => setState(() => usadas.add(i)),
                 padding: const EdgeInsets.symmetric(
