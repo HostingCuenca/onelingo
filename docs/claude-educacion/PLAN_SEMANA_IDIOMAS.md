@@ -52,7 +52,7 @@ openai_contenido.py clases  XX N B      --manual --ligera
 ## Pendientes antes de las clases de ru, ko, ja y zh (06-10)
 1. **Una sola convención de `rom` en los ítems.** HECHO (07-10): [ROMANIZACION.md](ROMANIZACION.md). Los 4 f0, los 4 Nivel 0, los validadores, `esquemas.py` (solo ru, ko, ja y zh) y la app la siguen.
 2. **App y Nivel 0:**
-   - añadir ru, ko, ja y zh a `idiomasConNivel0` (`lib/core/nivel0/nivel0.dart`);
+   - añadir ru, ko, ja y zh a `idiomasConNivel0` (`lib/core/nivel0/nivel0.dart`) (zh y ja: HECHO 07-10, con su f0 y N1–N2 integrados);
    - leer `rom` en `Palabra.fromJson` y en los pasos: HECHO (07-10);
    - que `escucha_letra` use la voz del idioma: HECHO (usa `Nivel0.idioma`).
 3. **Revisión de muestras:**

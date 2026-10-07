@@ -205,6 +205,52 @@ def errores_chino(it: dict) -> list[str]:
     return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores]
 
 
+def _modulo_ja():
+    """Reglas del japonés de tools/contenido/ruta-ja/validar.py (kana sin kanji,
+    puntuación de ancho completo, partículas aparte, tokens razonables)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "validar_ja", ROOT / "tools/contenido/ruta-ja/validar.py")
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    return modulo
+
+
+def errores_japones(it: dict) -> list[str]:
+    """Romanización y tipografía de un ítem en japonés (docs/claude-educacion/ROMANIZACION.md):
+    `textoRom`/`opcionesRom` paralelos al japonés, una palabra de rōmaji por cada palabra
+    (Hepburn modificado de tools/ia/idiomas/ja.md, con macrones, n', wa/e/o y mayúscula solo
+    al inicio de frase y en nombres propios: tools/contenido/hepburn_ja.py); palabras
+    separadas por espacios y puntuación de ancho completo pegada; sin kanji. `audio`,
+    `respuesta` y `aceptadas` no llevan rom."""
+    import hepburn_ja  # noqa: E402  (tools/contenido)
+    import rom_items  # noqa: E402
+    ja = _modulo_ja()
+    hay = lambda t: isinstance(t, str) and bool(ja.KANA.search(t) or ja.KANJI.search(t))  # noqa: E731
+
+    def comprobar(texto: str, rom: str):
+        if ja.KANA.search(rom) or ja.KANJI.search(rom):
+            return "rom con kana o kanji"
+        e = hepburn_ja.errores_rom(texto, rom)
+        return "; ".join(e) if e else None
+
+    errores = rom_items.errores({"unidades": [{"id": it.get("id", "?"), "pasos": [{"items": [it]}]}]},
+                                hay, comprobar)
+    textos = [it.get("texto"), it.get("audio"), *(it.get("opciones") or [])]
+    if it.get("formato") == "escribir":
+        textos += [it.get("respuesta"), *(it.get("aceptadas") or [])]
+        textos += [e for g in it.get("evidenciasEscritura") or [] for e in g]
+    textos = [t for t in textos if isinstance(t, str)]
+    avisos: list[str] = []
+    ja.revisar_japones(textos, errores, avisos)
+    # «はは» (madre) no es una partícula は pegada.
+    avisos = [x for x in avisos if "pegada en «はは»" not in x]
+    # Los números van en kana: ninguna cifra arábiga en el japonés (ficha, escritura por nivel).
+    errores += [f"cifra arábiga en «{t}»" for t in textos if hay(t) and re.search(r"[0-9]", t)]
+    iid = str(it.get("id", "?"))
+    return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores + avisos]
+
+
 def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
     errores: list[str] = []
     doc = json.loads(path.read_text(encoding="utf-8"))
@@ -342,6 +388,9 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
                 textos_en.append(it["texto"])
         if idioma == "zh":
             for x in errores_chino(it):
+                errores.append(x)
+        if idioma == "ja":
+            for x in errores_japones(it):
                 errores.append(x)
         if idioma == "en":
             faltan = {w for t in textos_en for w in cb.palabras(t) if not cb.conocida(w, lex)}

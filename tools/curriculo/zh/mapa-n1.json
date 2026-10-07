@@ -1,0 +1,856 @@
+{
+ "claves": [
+  {
+   "clase": "c01",
+   "bloque": 1,
+   "clave": "greeting-times-and-titles",
+   "gramatica": [
+    "saludos según el momento: 早上 好, 下午 好, 晚上 好, 大家 好; despedida de la noche: 晚安",
+    "título tras el apellido, sin 的: 王 老师 好, 张 先生 好, 刘 女士 好",
+    "despedidas con tiempo: 明天 见, 一会儿 见; 您 好 con mayores, 你 好 con amigos"
+   ],
+   "funcion": "Saludar y despedirte según la hora y el respeto debido, usando apellido + título.",
+   "depende_de": [
+    "greeting-ni-hao",
+    "formal-nin",
+    "goodbye-zaijian"
+   ]
+  },
+  {
+   "clase": "c02",
+   "bloque": 1,
+   "clave": "surname-xing-guixing",
+   "gramatica": [
+    "姓 + apellido y 叫 + nombre completo: 我 姓 王, 我 叫 王 芳",
+    "preguntar: 你 姓 什么？ (informal), 您 贵姓？ (cortés, solo del otro; nunca 我 贵姓)",
+    "你 叫 什么 名字？ frente a 你 姓 什么？: no se mezclan; sin 吗 con 什么"
+   ],
+   "funcion": "Decir y preguntar el apellido y el nombre completo, de forma cortés o informal.",
+   "depende_de": [
+    "name-jiao",
+    "ask-name",
+    "formal-nin",
+    "shenme-questions"
+   ]
+  },
+  {
+   "clase": "c03",
+   "bloque": 1,
+   "clave": "adverbs-ye-dou",
+   "gramatica": [
+    "也 («también») y 都 («todos, ambos») van antes del verbo: 我 也 是 学生, 我们 都 是 学生",
+    "orden fijo: 我们 也 都 是 墨西哥人 (也 antes de 都); nunca *我 是 也 学生",
+    "都 resume un sujeto plural; no se usa con sujeto singular"
+   ],
+   "funcion": "Presentar a varias personas diciendo que comparten nacionalidad u ocupación.",
+   "depende_de": [
+    "shi-copula",
+    "pronouns-subject",
+    "plural-men",
+    "nationality-ren"
+   ]
+  },
+  {
+   "clase": "c04",
+   "bloque": 1,
+   "clave": "zenme-how-write-spell",
+   "gramatica": [
+    "怎么 + verbo para preguntar el cómo: 你 的 名字 怎么 写？ 这 个 字 怎么 读？",
+    "deletrear en voz alta con letras del pinyin: 王 是 w-a-n-g; 怎么 拼？",
+    "请 pedir ayuda: 请 问, 这 个 字 怎么 说？ (sin 吗 con palabra interrogativa)"
+   ],
+   "funcion": "Preguntar y decir cómo se escribe o se lee un nombre o una palabra, y deletrear en pinyin.",
+   "depende_de": [
+    "pinyin-spelling-rules",
+    "ask-name",
+    "repair-survival",
+    "surname-xing-guixing"
+   ]
+  },
+  {
+   "clase": "c05",
+   "bloque": 1,
+   "clave": "integrated-greetings-introductions",
+   "gramatica": [
+    "integración: saludo según la hora + título + 我 姓 / 我 叫 + nacionalidad",
+    "cadena: 你 好 吗？ → 我 很 好 → 你 叫 什么 名字？ → 怎么 写？",
+    "也 y 都 al presentar a varios; 您 / 你 según la persona"
+   ],
+   "funcion": "Mantener una presentación completa: saludar, decir nombre y nacionalidad, deletrear y despedirte.",
+   "depende_de": [
+    "greeting-times-and-titles",
+    "surname-xing-guixing",
+    "adverbs-ye-dou",
+    "zenme-how-write-spell",
+    "introduce-self",
+    "how-are-you"
+   ]
+  },
+  {
+   "clase": "c06",
+   "bloque": 2,
+   "clave": "zhu-zai-nali",
+   "gramatica": [
+    "住 在 + lugar: 我 住 在 北京, 我 住 在 一 个 小 城市",
+    "preguntar: 你 住 在 哪里？ (哪里 ocupa el lugar de la respuesta; sin 吗)",
+    "en frases cortas 在 puede omitirse: 我 住 北京; contraste con 我 在 北京 (estoy en)"
+   ],
+   "funcion": "Decir y preguntar dónde vives (ciudad o país).",
+   "depende_de": [
+    "location-zai",
+    "introduce-self",
+    "shenme-questions",
+    "nationality-ren"
+   ]
+  },
+  {
+   "clase": "c07",
+   "bloque": 2,
+   "clave": "zai-place-before-verb-work",
+   "gramatica": [
+    "在 + lugar antes del verbo: 我 在 学校 学习, 他 在 公司 工作",
+    "preguntar la ocupación: 你 做 什么 工作？ — 我 是 医生 / 老师 / 学生",
+    "orden: sujeto + 在 + lugar + verbo (nunca *我 工作 在 公司)"
+   ],
+   "funcion": "Decir a qué te dedicas y dónde trabajas o estudias.",
+   "depende_de": [
+    "location-zai",
+    "shi-copula",
+    "shenme-questions",
+    "zhu-zai-nali"
+   ]
+  },
+  {
+   "clase": "c08",
+   "bloque": 2,
+   "clave": "speak-languages-shuo-xue",
+   "gramatica": [
+    "说 + idioma: 我 说 西班牙语 和 英语 (和 une idiomas); 不 说: 我 不 说 法语",
+    "学 + idioma para lo que estudias: 我 学 中文",
+    "一点: 我 说 一点 中文; 你 说 中文 吗？ — 说 / 不 说"
+   ],
+   "funcion": "Decir qué idiomas hablas, cuáles estudias y preguntar a otros.",
+   "depende_de": [
+    "ma-questions",
+    "negation-bu",
+    "adverbs-ye-dou",
+    "nationality-ren",
+    "zai-place-before-verb-work"
+   ]
+  },
+  {
+   "clase": "c09",
+   "bloque": 2,
+   "clave": "xihuan-like-noun",
+   "gramatica": [
+    "喜欢 + sustantivo: 我 喜欢 咖啡, 我 不 喜欢 茶",
+    "gradación: 很 喜欢, 最 喜欢; pregunta: 你 喜欢 什么？ / 你 喜欢 咖啡 吗？",
+    "respuesta corta repitiendo el verbo: 喜欢 / 不 喜欢 (sin 是)"
+   ],
+   "funcion": "Expresar y preguntar gustos básicos con sustantivos.",
+   "depende_de": [
+    "negation-bu",
+    "hen-adjective",
+    "ma-questions",
+    "shenme-questions"
+   ]
+  },
+  {
+   "clase": "c10",
+   "bloque": 2,
+   "clave": "integrated-talking-about-me",
+   "gramatica": [
+    "integración: 住 在 + 哪里, 在 + lugar + 工作, 说 + idioma, 喜欢 + sustantivo",
+    "también 也 / 都 para comparar con otra persona",
+    "preguntar de vuelta con 你 呢 (se repasa; la clave llega en el bloque 4) y respuestas con repetición del verbo"
+   ],
+   "funcion": "Hablar de ti: dónde vives, a qué te dedicas, qué hablas y qué te gusta.",
+   "depende_de": [
+    "zhu-zai-nali",
+    "zai-place-before-verb-work",
+    "speak-languages-shuo-xue",
+    "xihuan-like-noun",
+    "introduce-self"
+   ]
+  },
+  {
+   "clase": "c11",
+   "bloque": 3,
+   "clave": "family-members-kou-he",
+   "gramatica": [
+    "familia: 爸爸, 妈妈, 哥哥, 姐姐, 弟弟, 妹妹; 我 家 有 四 口 人 (口 cuenta miembros de la familia)",
+    "familia cercana sin 的: 我 妈妈, 我 家; con 的 para amigos y otros: 我 的 朋友",
+    "和 une sustantivos: 我 有 一 个 哥哥 和 一 个 妹妹"
+   ],
+   "funcion": "Presentar a tu familia y decir cuántos son.",
+   "depende_de": [
+    "you-have-meiyou",
+    "de-possessive",
+    "measure-word-ge",
+    "numbers-0-10",
+    "plural-men"
+   ]
+  },
+  {
+   "clase": "c12",
+   "bloque": 3,
+   "clave": "ji-and-liang-counting",
+   "gramatica": [
+    "几 para cantidades pequeñas (hasta ~10): 你 有 几 个 姐姐？ 你 家 有 几 口 人？ (多少 para cantidades grandes)",
+    "两 con cantidades y 二 al contar, en números y fechas: 两 个 弟弟, 二十, 二 月",
+    "edad con 几 / 多 大: 你 几 岁？ (niños) y 你 多 大？ (jóvenes), repaso de age-basic"
+   ],
+   "funcion": "Preguntar y decir cuántos hay y la edad, eligiendo bien 几 / 多少 y 两 / 二.",
+   "depende_de": [
+    "numbers-0-10",
+    "numbers-11-99",
+    "how-much-duoshao-qian",
+    "measure-word-ge",
+    "age-basic",
+    "family-members-kou-he"
+   ]
+  },
+  {
+   "clase": "c13",
+   "bloque": 3,
+   "clave": "measure-words-common-objects",
+   "gramatica": [
+    "clasificadores frecuentes: 本 (libros), 杯 (tazas y vasos), 张 (superficies planas), 件 (ropa), 只 (animales), 条 (largos), 位 (personas con respeto)",
+    "estructura: número + clasificador + sustantivo: 一 本 书, 两 张 票; con demostrativo: 这 本 书, 那 件 衣服",
+    "no hay plural en el sustantivo: *三 书; 个 sigue siendo el comodín"
+   ],
+   "funcion": "Nombrar y contar objetos cotidianos con el clasificador adecuado.",
+   "depende_de": [
+    "measure-word-ge",
+    "zhe-na",
+    "ji-and-liang-counting",
+    "shenme-questions"
+   ]
+  },
+  {
+   "clase": "c14",
+   "bloque": 3,
+   "clave": "shei-na-question-words",
+   "gramatica": [
+    "谁 pregunta por personas: 这 是 谁？ 这 是 谁 的 书？ — 是 我 的 (de sin sustantivo)",
+    "哪 + clasificador: 哪 本 书 是 你 的？ 哪 位 是 王 老师？",
+    "sin 吗 con 谁 y 哪; la palabra interrogativa ocupa el lugar de la respuesta"
+   ],
+   "funcion": "Identificar objetos y a quién pertenecen con preguntas con 谁 y 哪.",
+   "depende_de": [
+    "de-possessive",
+    "zhe-na",
+    "measure-words-common-objects",
+    "shenme-questions"
+   ]
+  },
+  {
+   "clase": "c15",
+   "bloque": 3,
+   "clave": "integrated-family-and-things",
+   "gramatica": [
+    "integración: 这 是 我 的…, 他 是 我 的 …, 我 家 有 … 口 人",
+    "clasificadores en contexto: 三 本 书, 一 只 猫, 两 个 弟弟",
+    "谁 的 / 几 / 两 en un diálogo de presentación familiar"
+   ],
+   "funcion": "Presentar a tu familia y decir qué objetos son de quién.",
+   "depende_de": [
+    "family-members-kou-he",
+    "ji-and-liang-counting",
+    "measure-words-common-objects",
+    "shei-na-question-words"
+   ]
+  },
+  {
+   "clase": "c16",
+   "bloque": 4,
+   "clave": "ne-follow-up-questions",
+   "gramatica": [
+    "呢 devuelve la pregunta: 我 很 好, 你 呢？ 我 住 在 北京, 你 呢？",
+    "呢 para preguntar dónde está algo: 我 的 手机 呢？ 我 的 钥匙 呢？",
+    "呢 no sustituye a 吗 y no sube el tono al final"
+   ],
+   "funcion": "Devolver una pregunta sin repetirla y preguntar por algo que falta.",
+   "depende_de": [
+    "how-are-you",
+    "hen-adjective",
+    "ma-questions",
+    "location-zai",
+    "de-possessive"
+   ]
+  },
+  {
+   "clase": "c17",
+   "bloque": 4,
+   "clave": "verb-not-verb-questions",
+   "gramatica": [
+    "pregunta afirmativa-negativa: 你 是 不 是 老师？ 你 有 没有 哥哥？ 好 不 好？",
+    "no se combina con 吗; respuesta repitiendo el verbo: 是 / 不 是, 有 / 没有",
+    "en 是 不 是 el 不 pasa a tono neutro: shì bu shì"
+   ],
+   "funcion": "Hacer preguntas de sí o no con la forma A 不 A y responderlas.",
+   "depende_de": [
+    "ma-questions",
+    "shi-copula",
+    "negation-bu",
+    "you-have-meiyou",
+    "hen-adjective"
+   ]
+  },
+  {
+   "clase": "c18",
+   "bloque": 4,
+   "clave": "negation-bu-mei-contrast",
+   "gramatica": [
+    "不 niega hábitos, estados y 是: 我 不 喝 咖啡; 没有 niega 有: 我 没有 手机",
+    "不 太 + adjetivo («no muy»): 不 太 忙; 都 不 (nadie) frente a 不 都 (no todos)",
+    "respuestas negativas: 不 是, 不 对, 没有; nunca *没 是 ni *不 有"
+   ],
+   "funcion": "Negar con precisión: no soy, no hago, no tengo, no todos.",
+   "depende_de": [
+    "negation-bu",
+    "you-have-meiyou",
+    "adverbs-ye-dou",
+    "hen-adjective"
+   ]
+  },
+  {
+   "clase": "c19",
+   "bloque": 4,
+   "clave": "contact-details-yao-digits",
+   "gramatica": [
+    "números de teléfono dígito a dígito; 一 se lee yāo: 手机 号码 是 …",
+    "pedir y dar datos: 你 的 电话 号码 是 多少？ 你 的 微信 是 什么？",
+    "pedir repetir: 请 再 说 一 遍, 请 说 慢 一点, 我 写 一下"
+   ],
+   "funcion": "Pedir y dar el teléfono y otros datos de contacto, y pedir que repitan.",
+   "depende_de": [
+    "numbers-0-10",
+    "numbers-11-99",
+    "how-much-duoshao-qian",
+    "zenme-how-write-spell",
+    "repair-survival",
+    "shenme-questions"
+   ]
+  },
+  {
+   "clase": "c20",
+   "bloque": 4,
+   "clave": "integrated-questions-and-answers",
+   "gramatica": [
+    "integración: 吗, 什么, 谁, 哪, 几, 呢 y A 不 A en una entrevista corta",
+    "responder en negativo con 不 / 没有 / 不 太",
+    "intercambiar datos y repetir con 再 说 一 遍"
+   ],
+   "funcion": "Preguntar, responder en negativo e intercambiar datos de contacto en un mismo diálogo.",
+   "depende_de": [
+    "ne-follow-up-questions",
+    "verb-not-verb-questions",
+    "negation-bu-mei-contrast",
+    "contact-details-yao-digits",
+    "shei-na-question-words"
+   ]
+  },
+  {
+   "clase": "c21",
+   "bloque": 5,
+   "clave": "yao-order-measure-words",
+   "gramatica": [
+    "pedir: 我 要 一 杯 咖啡, 请 给 我 一 个 …, 来 一 杯 …",
+    "preguntar: 你 要 什么？ 还 要 别 的 吗？ — 不 要, 谢谢",
+    "adjetivo de una sílaba sin 的 delante: 一 杯 热 咖啡; en el café los clasificadores se usan siempre"
+   ],
+   "funcion": "Pedir una bebida o comida en un café y responder a la pregunta del camarero.",
+   "depende_de": [
+    "measure-words-common-objects",
+    "shenme-questions",
+    "ma-questions",
+    "negation-bu",
+    "ji-and-liang-counting"
+   ]
+  },
+  {
+   "clase": "c22",
+   "bloque": 5,
+   "clave": "adjective-de-color-size",
+   "gramatica": [
+    "颜色 + 的: 红色 的 衬衫, 这 件 是 白色 的 (colores 红, 黑, 白, 蓝, 绿, 黄)",
+    "sustantivo sobreentendido con 的: 我 要 红 的, 大 的, 小 的",
+    "pedir otra talla: 有 大 一 点 的 吗？ (一点 tras el adjetivo: 小 一点, 长 一点)"
+   ],
+   "funcion": "Describir ropa por color y pedir otra talla o color.",
+   "depende_de": [
+    "de-possessive",
+    "measure-words-common-objects",
+    "shei-na-question-words",
+    "hen-adjective"
+   ]
+  },
+  {
+   "clase": "c23",
+   "bloque": 5,
+   "clave": "money-kuai-yigong-hundreds",
+   "gramatica": [
+    "dinero: 块 (块 钱) y 毛; precios hasta cientos: 二十 块, 一 百 二十 块, 两 百 块, 一 千",
+    "一共 多少 钱？ 找 您 … 块; 太 贵 了, 便宜 一点",
+    "pagar: 我 付 款 / 扫 码, 现金 还 是 手机 (el pago exacto se aprende como frases hechas)"
+   ],
+   "funcion": "Preguntar el precio, entender la cuenta y pagar en efectivo o con el celular.",
+   "depende_de": [
+    "numbers-11-99",
+    "how-much-duoshao-qian",
+    "yao-order-measure-words",
+    "adjective-de-color-size"
+   ]
+  },
+  {
+   "clase": "c24",
+   "bloque": 5,
+   "clave": "haishi-either-or-questions",
+   "gramatica": [
+    "还是 ofrece alternativas: 你 喝 茶 还是 咖啡？ 热 的 还是 冰 的？",
+    "elegir una: 我 喝 咖啡, 不 喝 茶 (sin 吗 ni 或者 en pregunta)",
+    "这 件 还是 那 件？ 红 的 还是 蓝 的？"
+   ],
+   "funcion": "Elegir entre dos opciones al pedir o comprar.",
+   "depende_de": [
+    "yao-order-measure-words",
+    "adjective-de-color-size",
+    "ma-questions",
+    "shenme-questions",
+    "verb-not-verb-questions"
+   ]
+  },
+  {
+   "clase": "c25",
+   "bloque": 5,
+   "clave": "integrated-cafe-and-shopping",
+   "gramatica": [
+    "integración: 要 + clasificador, 还是, 一共 多少 钱, 太 贵 了",
+    "pedir ropa por color y talla con 的",
+    "pagar y dar las gracias con fórmulas de cortesía"
+   ],
+   "funcion": "Pedir en un café, comprar ropa y pagar en una misma escena.",
+   "depende_de": [
+    "yao-order-measure-words",
+    "adjective-de-color-size",
+    "money-kuai-yigong-hundreds",
+    "haishi-either-or-questions",
+    "thanks-xiexie"
+   ]
+  },
+  {
+   "clase": "c26",
+   "bloque": 6,
+   "clave": "xihuan-plus-verb",
+   "gramatica": [
+    "喜欢 + verbo: 我 喜欢 听 音乐, 我 喜欢 看 电影, 不 喜欢 做 饭",
+    "verbos de ocio: 打 篮球, 踢 足球, 游泳, 听, 看, 玩; 最 喜欢 + verbo",
+    "contraste: 喜欢 + sustantivo (café) y 喜欢 + verbo (leer)"
+   ],
+   "funcion": "Hablar de lo que te gusta hacer en tu tiempo libre.",
+   "depende_de": [
+    "xihuan-like-noun",
+    "negation-bu",
+    "adverbs-ye-dou",
+    "haishi-either-or-questions"
+   ]
+  },
+  {
+   "clase": "c27",
+   "bloque": 6,
+   "clave": "weekdays-and-dates",
+   "gramatica": [
+    "星期 一 … 星期 五, 星期 六, 星期 天 (日); 今天 星期 几？",
+    "月 y 号: 九 月 二十五 号; 今天 几 月 几 号？",
+    "predicado nominal sin 是: 今天 星期 三 (no *今天 是 星期 三 como forma básica); 昨天 / 明天 / 后天"
+   ],
+   "funcion": "Decir y preguntar el día de la semana y la fecha.",
+   "depende_de": [
+    "numbers-11-99",
+    "ji-and-liang-counting",
+    "shi-copula",
+    "negation-bu"
+   ]
+  },
+  {
+   "clase": "c28",
+   "bloque": 6,
+   "clave": "clock-time-dian-ke-fen",
+   "gramatica": [
+    "hora: 现在 几 点？ 三 点, 三 点 半, 三 点 一 刻, 两 点 (nunca 二 点)",
+    "minutos: 十 点 十 分, 差 五 分 三 点",
+    "franjas: 早上, 上午, 中午, 下午, 晚上; se usan antes de la hora"
+   ],
+   "funcion": "Decir y preguntar la hora.",
+   "depende_de": [
+    "numbers-11-99",
+    "ji-and-liang-counting",
+    "weekdays-and-dates"
+   ]
+  },
+  {
+   "clase": "c29",
+   "bloque": 6,
+   "clave": "time-word-before-verb-routine",
+   "gramatica": [
+    "sujeto + tiempo + (lugar) + verbo: 我 每天 七 点 起床, 八 点 去 学校",
+    "verbos de rutina: 起床, 吃 饭, 上 班, 回 家, 睡 觉; 去 + lugar",
+    "frecuencia: 每天, 常常, 一般, 然后; el tiempo nunca va detrás del verbo (*我 去 学校 八 点)"
+   ],
+   "funcion": "Describir tu día con horas y verbos de rutina en el orden correcto.",
+   "depende_de": [
+    "clock-time-dian-ke-fen",
+    "weekdays-and-dates",
+    "zai-place-before-verb-work",
+    "xihuan-plus-verb"
+   ]
+  },
+  {
+   "clase": "c30",
+   "bloque": 6,
+   "clave": "integrated-routine-and-free-time",
+   "gramatica": [
+    "integración: hora + rutina, 周末 + actividad, 喜欢 + verbo",
+    "preferir entre dos actividades con 还是",
+    "describir tu semana con 每天 / 常常"
+   ],
+   "funcion": "Contar tu día y tu fin de semana de ocio con horas y gustos.",
+   "depende_de": [
+    "xihuan-plus-verb",
+    "weekdays-and-dates",
+    "clock-time-dian-ke-fen",
+    "time-word-before-verb-routine",
+    "haishi-either-or-questions"
+   ]
+  },
+  {
+   "clase": "c31",
+   "bloque": 7,
+   "clave": "degree-adverbs-zhen-feichang",
+   "gramatica": [
+    "adverbios de grado antes del adjetivo: 很, 真, 非常, 比较, 有点",
+    "adjetivos de descripción: 大, 小, 高, 矮, 漂亮, 好看, 安静, 热闹, 干净",
+    "有点 con matiz negativo: 有点 贵; 一点 va después: 便宜 一点 (contraste)"
+   ],
+   "funcion": "Describir personas y lugares con distintos grados.",
+   "depende_de": [
+    "hen-adjective",
+    "negation-bu-mei-contrast",
+    "adjective-de-color-size",
+    "money-kuai-yigong-hundreds"
+   ]
+  },
+  {
+   "clase": "c32",
+   "bloque": 7,
+   "clave": "topic-comment-description",
+   "gramatica": [
+    "tema + comentario: 她 头发 很 长, 他 个子 很 高, 这 个 城市 人 很 多",
+    "negación y 也 / 都: 他 眼睛 不 大; 我们 都 很 高",
+    "sin 有 ni 是: *她 有 头发 很 长"
+   ],
+   "funcion": "Describir el aspecto de una persona o rasgos de un lugar con una estructura natural en chino.",
+   "depende_de": [
+    "degree-adverbs-zhen-feichang",
+    "hen-adjective",
+    "de-possessive",
+    "adverbs-ye-dou"
+   ]
+  },
+  {
+   "clase": "c33",
+   "bloque": 7,
+   "clave": "cong-lai-origin",
+   "gramatica": [
+    "从 + lugar + 来: 我 从 墨西哥 来; 来自 + país: 我 来自 哥伦比亚",
+    "preguntar: 你 从 哪里 来？ 你 是 哪 国 人？",
+    "来 («venir») frente a 去 («ir») según el punto de vista"
+   ],
+   "funcion": "Decir de dónde vienes y preguntar a otros.",
+   "depende_de": [
+    "nationality-ren",
+    "zhu-zai-nali",
+    "shei-na-question-words",
+    "time-word-before-verb-routine"
+   ]
+  },
+  {
+   "clase": "c34",
+   "bloque": 7,
+   "clave": "you-existence-vs-zai",
+   "gramatica": [
+    "existencia: lugar + 有 + sustantivo: 我 的 城市 有 一 个 大 公园, 北京 有 很 多 人",
+    "localización: sujeto + 在 + lugar: 公园 在 学校 附近; 没有 para negar",
+    "contraste 有 / 在 y 很 多 + sustantivo (sin 的)"
+   ],
+   "funcion": "Hablar de tu ciudad: qué hay y dónde está.",
+   "depende_de": [
+    "you-have-meiyou",
+    "location-zai",
+    "ji-and-liang-counting",
+    "degree-adverbs-zhen-feichang",
+    "negation-bu-mei-contrast"
+   ]
+  },
+  {
+   "clase": "c35",
+   "bloque": 7,
+   "clave": "integrated-describe-people-and-places",
+   "gramatica": [
+    "integración: 很 / 非常 + adjetivo, 她 头发 很 长, 从 + 来, 有 / 在",
+    "describir a una persona y a su ciudad en un párrafo breve",
+    "preguntar y responder sobre origen y lugar"
+   ],
+   "funcion": "Describir a una persona y la ciudad de donde viene.",
+   "depende_de": [
+    "degree-adverbs-zhen-feichang",
+    "topic-comment-description",
+    "cong-lai-origin",
+    "you-existence-vs-zai",
+    "zhu-zai-nali"
+   ]
+  },
+  {
+   "clase": "c36",
+   "bloque": 8,
+   "clave": "xiang-yao-want",
+   "gramatica": [
+    "想 + verbo («querer, tener ganas»): 我 想 喝 茶, 你 想 吃 什么？",
+    "要 + verbo (decisión más firme): 我 要 学 中文; 不 想 (negativo)",
+    "diferencia: 要 + sustantivo al pedir; 想 + verbo para deseos; nunca *我 不 要 去"
+   ],
+   "funcion": "Decir qué quieres hacer y qué quieres comer o beber.",
+   "depende_de": [
+    "xihuan-plus-verb",
+    "yao-order-measure-words",
+    "negation-bu-mei-contrast"
+   ]
+  },
+  {
+   "clase": "c37",
+   "bloque": 8,
+   "clave": "hui-neng-keyi-modals",
+   "gramatica": [
+    "会 + verbo (saber hacer algo aprendido): 我 会 说 中文",
+    "能 (posibilidad, capacidad) y 可以 (permiso): 我 今天 能 来, 我 可以 坐 这里 吗？",
+    "negación: 不 会, 不 能, 不 可以 (no está permitido) y 不 行"
+   ],
+   "funcion": "Decir qué sabes hacer, qué puedes hacer y pedir permiso.",
+   "depende_de": [
+    "xiang-yao-want",
+    "speak-languages-shuo-xue",
+    "ma-questions",
+    "verb-not-verb-questions"
+   ]
+  },
+  {
+   "clase": "c38",
+   "bloque": 8,
+   "clave": "yao-dei-obligation",
+   "gramatica": [
+    "要 / 得 + verbo (obligación): 我 得 工作, 我 要 去 医院",
+    "应该 («conviene, debería») y 不 用 (no hace falta): 你 不 用 来",
+    "别 + verbo («no hagas»): 别 说 英语"
+   ],
+   "funcion": "Expresar lo que debes hacer y lo que no hace falta.",
+   "depende_de": [
+    "xiang-yao-want",
+    "hui-neng-keyi-modals",
+    "negation-bu-mei-contrast"
+   ]
+  },
+  {
+   "clase": "c39",
+   "bloque": 8,
+   "clave": "food-quantity-measure-words",
+   "gramatica": [
+    "clasificadores de comida: 斤, 公斤, 瓶, 袋, 盒, 碗, 个 y 一点 / 很 多",
+    "买 + número + clasificador + sustantivo: 买 两 斤 苹果; 一 斤 多少 钱？",
+    "alimentos: 水果, 蔬菜, 鸡蛋, 牛奶, 面包, 米饭; cantidades hasta 1000"
+   ],
+   "funcion": "Comprar alimentos pidiendo cantidades y preguntar el precio por peso.",
+   "depende_de": [
+    "measure-words-common-objects",
+    "money-kuai-yigong-hundreds",
+    "yao-order-measure-words",
+    "ji-and-liang-counting"
+   ]
+  },
+  {
+   "clase": "c40",
+   "bloque": 8,
+   "clave": "integrated-wants-and-groceries",
+   "gramatica": [
+    "integración: 想 / 要 / 会 / 能 / 得 en una compra",
+    "pedir cantidades con clasificadores y preguntar precios",
+    "rechazar con 不 用 y 不 行 cuando no se puede"
+   ],
+   "funcion": "Hacer la compra diciendo qué quieres, puedes y debes hacer.",
+   "depende_de": [
+    "xiang-yao-want",
+    "hui-neng-keyi-modals",
+    "yao-dei-obligation",
+    "food-quantity-measure-words"
+   ]
+  },
+  {
+   "clase": "c41",
+   "bloque": 9,
+   "clave": "locative-words-fangwei",
+   "gramatica": [
+    "上 / 下 / 前 / 后 / 里 / 外 con 面: 桌子 上面, 学校 前面, 旁边, 对面, 中间",
+    "在 + sustantivo + 方位: 书 在 桌子 上; 学校 在 银行 旁边; existencia con 有",
+    "distancia: 离 + lugar + 很 近 / 很 远: 学校 离 我 家 很 近"
+   ],
+   "funcion": "Ubicar objetos y lugares con palabras de posición y distancia.",
+   "depende_de": [
+    "you-existence-vs-zai",
+    "location-zai",
+    "zhe-na"
+   ]
+  },
+  {
+   "clase": "c42",
+   "bloque": 9,
+   "clave": "directions-wang-zou-guai",
+   "gramatica": [
+    "往 + dirección + verbo: 往 左 拐, 往 右 拐, 一 直 往 前 走",
+    "preguntar: 请问, … 怎么 走？ 到 路口 再 拐",
+    "verbos de dirección: 走, 拐, 过, 到; orden con 再"
+   ],
+   "funcion": "Pedir y dar indicaciones sencillas en la calle.",
+   "depende_de": [
+    "locative-words-fangwei",
+    "zenme-how-write-spell",
+    "repair-survival",
+    "time-word-before-verb-routine"
+   ]
+  },
+  {
+   "clase": "c43",
+   "bloque": 9,
+   "clave": "transport-zuo-qi-qu",
+   "gramatica": [
+    "坐 + transporte público: 坐 地铁, 坐 公共汽车, 坐 出租车; 骑 自行车; 走 路",
+    "secuencia de verbos: 我 坐 地铁 去 学校; 怎么 去？ 多 长 时间？",
+    "去 y 到 + lugar; 来 y 去 según la dirección"
+   ],
+   "funcion": "Decir cómo y a dónde vas usando el transporte.",
+   "depende_de": [
+    "directions-wang-zou-guai",
+    "time-word-before-verb-routine",
+    "zai-place-before-verb-work",
+    "cong-lai-origin"
+   ]
+  },
+  {
+   "clase": "c44",
+   "bloque": 9,
+   "clave": "plans-and-invitations-ba",
+   "gramatica": [
+    "planes: 明天 / 下 个 星期 / 周末 + 我 打算 / 想 / 要 + verbo",
+    "invitar: 我们 一起 去 吧, 你 想 不 想 去？ (吧 sugiere)",
+    "aceptar: 好 啊, 太 好 了; rechazar: 不好意思, 我 得 工作"
+   ],
+   "funcion": "Hablar de planes próximos e invitar o responder a una invitación.",
+   "depende_de": [
+    "xiang-yao-want",
+    "weekdays-and-dates",
+    "transport-zuo-qi-qu",
+    "yao-dei-obligation"
+   ]
+  },
+  {
+   "clase": "c45",
+   "bloque": 9,
+   "clave": "integrated-getting-around-and-plans",
+   "gramatica": [
+    "integración: indicaciones, transporte, planes y invitaciones en un mismo diálogo",
+    "orden tiempo + lugar + verbo con 坐 / 往 / 一起",
+    "aceptar o rechazar con cortesía y proponer otra opción"
+   ],
+   "funcion": "Moverte por la ciudad y quedar con alguien para un plan.",
+   "depende_de": [
+    "locative-words-fangwei",
+    "directions-wang-zou-guai",
+    "transport-zuo-qi-qu",
+    "plans-and-invitations-ba"
+   ]
+  },
+  {
+   "clase": "c46",
+   "bloque": 10,
+   "clave": "le-completed-action-past-words",
+   "gramatica": [
+    "了 detrás del verbo marca acción completada: 我 昨天 买 了 一 本 书",
+    "palabras de tiempo pasado: 昨天, 前天, 上 个 星期, 去年; el tiempo va antes del verbo",
+    "sin 了 para hábitos y estados pasados: 我 每天 去 学校; *我 昨天 很 忙 了"
+   ],
+   "funcion": "Contar qué hiciste ayer o el fin de semana.",
+   "depende_de": [
+    "time-word-before-verb-routine",
+    "weekdays-and-dates",
+    "measure-words-common-objects",
+    "food-quantity-measure-words"
+   ]
+  },
+  {
+   "clase": "c47",
+   "bloque": 10,
+   "clave": "mei-past-negation-questions",
+   "gramatica": [
+    "negar una acción pasada con 没(有): 我 昨天 没 去, 没 买",
+    "preguntar: 你 去 了 吗？ 你 去 了 没有？",
+    "contraste: 不 (hábito y futuro) frente a 没 (acción no realizada)"
+   ],
+   "funcion": "Decir que no hiciste algo y preguntar a otros qué hicieron.",
+   "depende_de": [
+    "le-completed-action-past-words",
+    "negation-bu-mei-contrast",
+    "verb-not-verb-questions",
+    "ma-questions"
+   ]
+  },
+  {
+   "clase": "c48",
+   "bloque": 10,
+   "clave": "duration-since-le-final",
+   "gramatica": [
+    "situación que continúa: 我 学 中文 三 个 月 了; 我 在 这里 住 了 两 年 了",
+    "从 … 开始 («desde»): 我 从 九 月 开始 学 中文",
+    "preguntar: 你 学 了 多 长 时间 了？ 已经 + duración"
+   ],
+   "funcion": "Decir desde cuándo o cuánto tiempo llevas haciendo algo.",
+   "depende_de": [
+    "le-completed-action-past-words",
+    "mei-past-negation-questions",
+    "clock-time-dian-ke-fen",
+    "weekdays-and-dates"
+   ]
+  },
+  {
+   "clase": "c49",
+   "bloque": 10,
+   "clave": "project-n1",
+   "gramatica": [
+    "proyecto de nivel: presentar tu ciudad y tus planes",
+    "combinar presentación, gustos, rutina, planes, pasado reciente y desde cuándo",
+    "coherencia de orden: tiempo + lugar + verbo y uso correcto de 了, 在, 想, 会"
+   ],
+   "funcion": "Presentarte y contar tu mundo: quién eres, qué haces, adónde vas y qué hiciste.",
+   "depende_de": [
+    "integrated-greetings-introductions",
+    "integrated-talking-about-me",
+    "integrated-family-and-things",
+    "integrated-questions-and-answers",
+    "integrated-cafe-and-shopping",
+    "integrated-routine-and-free-time",
+    "integrated-describe-people-and-places",
+    "integrated-wants-and-groceries",
+    "integrated-getting-around-and-plans",
+    "duration-since-le-final"
+   ]
+  }
+ ]
+}

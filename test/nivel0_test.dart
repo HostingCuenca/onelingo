@@ -237,6 +237,85 @@ void main() {
     expect(problemas, isEmpty, reason: problemas.join('\n'));
   });
 
+  test('El Nivel 0 japonés trae cada explicación en español e inglés', () {
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'ja',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    expect(idiomasConNivel0, contains('ja'));
+    final n = cargar('ja');
+    expect(n.idioma, 'ja');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(43));
+    expect(n.sonidos.length, greaterThanOrEqualTo(15));
+    // Lumo solo da la bienvenida: nunca en la prueba de salida (u10).
+    expect(
+      [for (final l in n.unidades.last.lecciones) ...l.pasos.map((p) => p.tipo)],
+      isNot(contains('lumo')),
+    );
+  });
+
+  test('Nivel 0 japonés: lo que se oye está en kana y coincide con la respuesta', () {
+    final n = cargar('ja');
+    final kana = RegExp(r'[ぁ-ゖァ-ヺー]');
+    final kanji = RegExp(r'[一-鿿]');
+    final problemas = <String>[];
+    for (final l in n.lecciones) {
+      for (final (i, p) in l.pasos.indexed) {
+        final id = '${l.id}#$i ${p.tipo}';
+        switch (p.tipo) {
+          case 'escucha_elige':
+            // Se oye `audio` (no `m`) y es la opción correcta; las opciones
+            // no llevan rōmaji (la delatarían).
+            final audio = (p.j['audio'] as String?) ?? '';
+            if (!kana.hasMatch(audio)) problemas.add('$id: audio «$audio»');
+            if (p.opciones[p.correcta].texto != audio) {
+              problemas.add('$id: el audio no es la opción correcta');
+            }
+          case 'toca_sonido':
+            for (final w in p.opciones) {
+              if (!kana.hasMatch(w.texto)) problemas.add('$id: «${w.texto}» sin kana');
+            }
+          case 'escucha':
+            for (final w in p.palabras) {
+              if (!kana.hasMatch(w.texto) || w.rom == null) {
+                problemas.add('$id: «${w.texto}» sin kana o sin rom');
+              }
+            }
+          case 'mira' || 'repite' || 'mezcla' || 'construye' || 'elige_significado':
+            if (!kana.hasMatch(textoPlano(p.marcado)) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin kana o sin rom');
+            }
+          case 'lee':
+            if (!kana.hasMatch(textoPlano(p.marcado)) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin kana o sin rom');
+            }
+            for (final w in p.opciones) {
+              if (!kana.hasMatch(w.texto)) problemas.add('$id: «${w.texto}» sin kana');
+            }
+          case 'escucha_letra':
+            // Suena `letra` (kana suelto) y está entre las opciones.
+            final letra = (p.j['letra'] as String?) ?? '';
+            if (!kana.hasMatch(letra) || !p.textos.contains(letra)) {
+              problemas.add('$id: la letra «$letra» no está en las opciones');
+            }
+            if (p.letraRom == null) problemas.add('$id: sin letraRom');
+        }
+        // Ningún kanji en el japonés del Nivel 0 (solo kana); las explicaciones
+        // en es/en pueden citarlos.
+        final soloJa = [
+          p.marcado, p.j['audio'], p.j['letra'], p.j['de'], p.j['a'],
+          ...p.palabras.map((w) => w.marcado), ...p.textos, ...p.fichas,
+        ].whereType<String>().join();
+        if (kanji.hasMatch(soloJa)) problemas.add('$id: kanji en el japonés');
+      }
+    }
+    expect(problemas, isEmpty, reason: problemas.join('\n'));
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);
@@ -373,6 +452,22 @@ void main() {
     expect(tester.takeException(), isNull);
     // Primer paso (escucha): palabras en chino con su pinyin.
     final escucha = cargar('zh').leccion('u01l02')!.pasos.first;
+    expect(escucha.tipo, 'escucha');
+    final w = escucha.palabras.first;
+    expect(find.textContaining(w.rom!), findsWidgets);
+  });
+
+  testWidgets('Nivel 0 japonés: la lección muestra kana con su rōmaji', (
+    tester,
+  ) async {
+    await montar(
+      tester,
+      const LeccionN0Screen(leccionId: 'u01l02'),
+      idioma: 'ja',
+    );
+    expect(tester.takeException(), isNull);
+    // Primer paso (escucha): palabras en kana con su rōmaji.
+    final escucha = cargar('ja').leccion('u01l02')!.pasos.first;
     expect(escucha.tipo, 'escucha');
     final w = escucha.palabras.first;
     expect(find.textContaining(w.rom!), findsWidgets);
