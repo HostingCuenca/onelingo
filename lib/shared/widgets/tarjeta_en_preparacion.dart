@@ -4,7 +4,7 @@ import '../../app/theme.dart';
 import '../../core/i18n/i18n.dart';
 import 'widgets.dart';
 
-/// Idiomas que aún no tienen ruta nueva (ja, ko, ru, zh): en lugar de las
+/// Idiomas que aún no tienen ruta nueva (hoy ninguno): en lugar de las
 /// lecciones antiguas, el curso aparece «En preparación». El tutor IA, las
 /// situaciones y la práctica siguen disponibles.
 class TarjetaEnPreparacion extends StatelessWidget {

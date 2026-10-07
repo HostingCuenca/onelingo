@@ -152,7 +152,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     _persistir();
     // El nivel elegido es solo el punto de partida: la prueba decide en todos
     // los idiomas (nadie se ubica alto sin demostrarlo). Desde cero, sin prueba.
-    // Idiomas sin ruta nueva (ja, ko, ru, zh): no hay prueba de nivel;
+    // Idiomas sin ruta nueva (hoy ninguno): no hay prueba de nivel;
     // se empieza desde cero.
     if (paso == 5 && !idiomasConRuta.contains(meta)) {
       nivelInicial = 0;

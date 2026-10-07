@@ -18,15 +18,12 @@ void main() {
     idiomaContenido = 'en';
   });
 
-  test('idiomas sin ruta nueva (ko): sin lecciones antiguas', () {
-    for (final code in const ['ko']) {
-      idiomaContenido = code;
-      expect(idiomasConRuta, isNot(contains(code)), reason: code);
-      for (final n in [0, 1, 2]) {
-        expect(unidadesDe(n), isEmpty, reason: '$code N$n');
-        expect(leccionesDe(n), isEmpty, reason: '$code N$n');
-      }
+  test('ningún idioma queda sin ruta nueva (ko ya la tiene)', () {
+    // Con ko (versión esencial N1–N2) los 10 idiomas habilitados tienen ruta:
+    // la tarjeta «En preparación» ya no se muestra para ninguno.
+    expect(idiomasConRuta, contains('ko'));
+    for (final l in idiomas) {
+      expect(idiomasConRuta, contains(l.code), reason: l.code);
     }
-    idiomaContenido = 'en';
   });
 }

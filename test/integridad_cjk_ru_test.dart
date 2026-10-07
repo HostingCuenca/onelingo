@@ -83,6 +83,15 @@ void main() {
     test('puntuación', () {
       expect(palabrasMeta('«저는 학생이에요?»'), ['저는', '학생이에요']);
     });
+    test('números sinocoreanos compuestos de dígitos enseñados', () {
+      final n = saber(['일', '이', '삼', '오', '공', '십', '천', '만']);
+      for (final w in ['이십', '십일', '삼천', '십만', '삼십오만', '공일공']) {
+        expect(faltan('ko', w, n), isEmpty, reason: w);
+      }
+      // Dos dígitos seguidos sin multiplicador (오삼) no son un número; a 이백 le falta 백.
+      expect(faltan('ko', '오삼', n), ['오삼']);
+      expect(faltan('ko', '이백', n), ['이백']);
+    });
   });
 
   group('ruso', () {

@@ -89,7 +89,7 @@ Esta ficha se inserta en todos los prompts de `tools/ia/prompts/`. Es la única 
 - **Enlace (연음):** una 받침 seguida de ㅇ inicial pasa a la sílaba siguiente: 한국어 → han-gu-geo; 음악 → eu-mak; 있어요 → i-sseo-yo.
 - **Asimilación (solo las básicas):**
   - nasalización: ㄱ/ㅂ + ㄴ/ㅁ → ㅇ/ㅁ + ㄴ/ㅁ: 감사합니다 → «gamsahamnida» (ㅂ+ㄴ → «mn»); 한국말 → «hangungmal»; 국물 → «gungmul».
-  - ㄴ+ㄹ → «ll»: 실례 → «sillye».
+  - ㄴ+ㄹ → «ll»: 진료 → «jillyo», 연락 → «yeollak». (실례 → «sillye» ya se escribe con ㄹ+ㄹ.)
   - Nada más (tensión, ㅎ débil, ㄹ+ㄴ) hasta que la clase lo enseñe.
 - **ㄹ (r/l):** entre vocales = «r» simple como en «pero» (사랑 → «sarang»); al inicio de sílaba tras pausa, entre «r» y «l»; ante consonante o al final = «l» (달 → «dal», 일본 → «ilbon»); ㄹㄹ = «ll» larga (칠레 → «chille»). Nunca vibrante múltiple como «rr».
 - **Ritmo y entonación:** cada sílaba dura casi lo mismo y no hay acento de intensidad como en español: no marques la sílaba «fuerte». En las preguntas con -요 la entonación final sube (학생이에요?); en afirmaciones baja.

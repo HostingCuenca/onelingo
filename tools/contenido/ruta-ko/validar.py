@@ -111,7 +111,9 @@ def error_rom(rom: str):
         return f'rom con caracteres no RR: {sorted(set(ROM_MALA.findall(rom)))}'
     # Mayúscula solo en nombres propios de la ficha (apellidos, nombres de pila, ciudades).
     for pal in re.findall(r'[A-Za-z]+(?:-[A-Za-z]+)*', rom):
-        if pal[0].isupper() and pal not in ROM_PROPIOS and pal.split('-')[0] not in ROM_PROPIOS:
+        # Un nombre propio puede llevar partículas pegadas: Seoure (서울에, el enlace
+        # pasa la ㄹ a la sílaba siguiente), Busane (부산에).
+        if pal[0].isupper() and not any(pal.startswith(p) for p in [*ROM_PROPIOS, 'Seour']):
             return f'rom con mayúscula fuera de nombres propios: {pal}'
     return None
 

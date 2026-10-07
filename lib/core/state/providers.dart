@@ -152,7 +152,7 @@ class ProgressState {
   /// Nivel 0 · Leer y pronunciar: recomendado a quien empieza de cero, antes
   /// de Fundamentos, hasta completar sus lecciones (idiomas que lo tienen).
   bool get nivel0Pendiente =>
-      const {'en', 'fr', 'es', 'pt', 'de', 'it', 'zh', 'ja', 'ru'}.contains(idiomaMeta) &&
+      const {'en', 'fr', 'es', 'pt', 'de', 'it', 'zh', 'ja', 'ru', 'ko'}.contains(idiomaMeta) &&
       fundamentos &&
       !practicas.containsKey('nivel0:$idiomaMeta:completo');
 

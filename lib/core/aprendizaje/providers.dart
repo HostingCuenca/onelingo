@@ -49,7 +49,7 @@ final bibliotecaUnidadRuntimeProvider =
 /// Idiomas cuya pantalla Aprender usa los niveles de la ruta (esquema 2,
 /// con estado y prueba de cada nivel). El resto sigue con las lecciones
 /// antiguas hasta tener su N1 (PLAN_PRODUCCION.md, FR-5b).
-const idiomasConRuta = {'en', 'fr', 'es', 'pt', 'de', 'it', 'zh', 'ja', 'ru'};
+const idiomasConRuta = {'en', 'fr', 'es', 'pt', 'de', 'it', 'zh', 'ja', 'ru', 'ko'};
 
 /// Ruta de un idioma (null si aún no tiene).
 final rutaProvider = FutureProvider.family<RutaCargada?, String>(

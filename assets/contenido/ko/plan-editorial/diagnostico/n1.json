@@ -1,0 +1,548 @@
+{
+  "idioma": "ko",
+  "nivel": 1,
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-integrador",
+    "date": "2026-10-07",
+    "notes": [
+      "Versión esencial: N1–N2. Léxico comprobado con validar_diagnostico.py contra la ruta integrada (conocida_ko: cada eojeol enseñado tal cual o raíz enseñada + partículas/cópula enseñadas, hasta el final de N1); hangul con espacios entre eojeol; 해요체 salvo donde la clase enseña 합니다체; rom RR oficial por eojeol (los eojeol de las clases copian su rom; el resto se calcula con las reglas de tools/ia/idiomas/ko.md y se comprueba con las reglas de tools/contenido/ruta-ko/validar.py); una sola respuesta defendible revisada ítem por ítem; posiciones repartidas.",
+      "Escritura: la extensión se mide en eojeol y las evidencias (secuencias de eojeol) se buscan sin puntuación, como corrige la app (correccion.dart). Sin Lumo, sin Ecuador, sin cifras en el coreano."
+    ]
+  },
+  "items": [
+    {
+      "id": "dx.ko.n1.escucha.1",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige dónde vive la persona.",
+        "en": "Listen and choose where the person lives."
+      },
+      "audio": "안녕하세요. 저는 박서연이에요. 부산에 살아요.",
+      "opciones": [
+        "서울에 살아요",
+        "부산에 살아요",
+        "인천에 살아요"
+      ],
+      "opcionesRom": [
+        "Seoure sarayo",
+        "Busane sarayo",
+        "Incheone sarayo"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Dice «부산에 살아요» (Busane sarayo): vive en Busan. Seúl e Incheon no se mencionan.",
+        "en": "She says «부산에 살아요» (Busane sarayo): she lives in Busan. Seoul and Incheon are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ko.n1.escucha.2",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige a qué hora se levanta la persona.",
+        "en": "Listen and choose what time the person gets up."
+      },
+      "audio": "저는 매일 일곱 시에 일어나요. 그리고 커피를 마셔요.",
+      "opciones": [
+        "여섯 시에 일어나요",
+        "여덟 시에 일어나요",
+        "일곱 시에 일어나요"
+      ],
+      "opcionesRom": [
+        "yeoseot sie ireonayo",
+        "yeodeol sie ireonayo",
+        "ilgop sie ireonayo"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Dice «일곱 시에 일어나요» (ilgop sie ireonayo): se levanta a las siete. Las seis y las ocho no se mencionan.",
+        "en": "It says «일곱 시에 일어나요» (ilgop sie ireonayo): the person gets up at seven. Six and eight are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ko.n1.escucha.3",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige cuánto cuesta el paraguas.",
+        "en": "Listen and choose how much the umbrella costs."
+      },
+      "audio": "이 우산 얼마예요? 오천 원이에요.",
+      "opciones": [
+        "오천 원이에요",
+        "삼천 원이에요",
+        "삼만 원이에요"
+      ],
+      "opcionesRom": [
+        "ocheon wonieyo",
+        "samcheon wonieyo",
+        "samman wonieyo"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Dice «오천 원이에요» (ocheon wonieyo): cuesta cinco mil wones. Tres mil y treinta mil no se mencionan.",
+        "en": "It says «오천 원이에요» (ocheon wonieyo): it costs five thousand won. Three thousand and thirty thousand are not mentioned."
+      }
+    },
+    {
+      "id": "dx.ko.n1.escucha.4",
+      "nivel": 1,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige hacia dónde hay que ir después de bajar.",
+        "en": "Listen and choose where to go after getting off."
+      },
+      "audio": "다음 정류장에서 내려요. 그리고 오른쪽으로 가세요.",
+      "opciones": [
+        "왼쪽으로 가세요",
+        "오른쪽으로 가세요",
+        "앞으로 쭉 가세요"
+      ],
+      "opcionesRom": [
+        "oenjjogeuro gaseyo",
+        "oreunjjogeuro gaseyo",
+        "apeuro jjuk gaseyo"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Dice «오른쪽으로 가세요» (oreunjjogeuro gaseyo): hay que ir a la derecha, no a la izquierda ni recto.",
+        "en": "It says «오른쪽으로 가세요» (oreunjjogeuro gaseyo): go to the right, not left or straight ahead."
+      }
+    },
+    {
+      "id": "dx.ko.n1.lectura.1",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el mensaje y elige cuándo se ven.",
+        "en": "Read the message and choose when they meet."
+      },
+      "texto": "민준 씨, 안녕하세요? 오늘 저는 회사에 가요. 내일은 쉬어요. 내일 두 시에 카페에서 만나요. 같이 커피를 마셔요! 지은",
+      "textoRom": "Min-jun ssi, annyeonghaseyo? oneul jeoneun hoesae gayo. naeireun swieoyo. naeil du sie kapeeseo mannayo. gachi keopireul masyeoyo! Ji-eun",
+      "opciones": [
+        "오늘 두 시에",
+        "내일 세 시에",
+        "내일 두 시에"
+      ],
+      "opcionesRom": [
+        "oneul du sie",
+        "naeil se sie",
+        "naeil du sie"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Escribe «내일 두 시에 카페에서 만나요» (naeil du sie kapeeseo mannayo): se ven mañana a las dos. Hoy ella va a la empresa.",
+        "en": "She writes «내일 두 시에 카페에서 만나요» (naeil du sie kapeeseo mannayo): they meet tomorrow at two. Today she goes to the office."
+      }
+    },
+    {
+      "id": "dx.ko.n1.lectura.2",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige con quién va Seoyeon al café.",
+        "en": "Read and choose who Seoyeon goes to the café with."
+      },
+      "texto": "서연 씨는 대학생이에요. 부산에 살아요. 주말에는 영화를 봐요. 그리고 친구하고 같이 카페에 가요. 커피를 아주 좋아해요.",
+      "textoRom": "Seo-yeon ssineun daehaksaengieyo. Busane sarayo. jumareneun yeonghwareul bwayo. geurigo chinguhago gachi kapee gayo. keopireul aju joahaeyo.",
+      "opciones": [
+        "친구하고 가요",
+        "혼자 가요",
+        "가족하고 가요"
+      ],
+      "opcionesRom": [
+        "chinguhago gayo",
+        "honja gayo",
+        "gajokago gayo"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "El texto dice «친구하고 같이 카페에 가요» (chinguhago gachi kapee gayo): va con un amigo o una amiga, no sola ni con su familia.",
+        "en": "The text says «친구하고 같이 카페에 가요» (chinguhago gachi kapee gayo): she goes with a friend, not alone or with her family."
+      }
+    },
+    {
+      "id": "dx.ko.n1.lectura.3",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige la profesión del padre.",
+        "en": "Read and choose the father’s job."
+      },
+      "texto": "이 사진은 우리 가족이에요. 아버지는 의사예요. 어머니는 선생님이에요. 형은 대학생이에요. 동생은 아직 학생이에요. 저는 회사원이에요.",
+      "textoRom": "i sajineun uri gajogieyo. abeojineun uisayeyo. eomeonineun seonsaengnimieyo. hyeongeun daehaksaengieyo. dongsaengeun ajik haksaengieyo. jeoneun hoesawonieyo.",
+      "opciones": [
+        "선생님이에요",
+        "의사예요",
+        "회사원이에요"
+      ],
+      "opcionesRom": [
+        "seonsaengnimieyo",
+        "uisayeyo",
+        "hoesawonieyo"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "El texto dice «아버지는 의사예요» (abeojineun uisayeyo): el padre es médico. La madre es profesora.",
+        "en": "The text says «아버지는 의사예요» (abeojineun uisayeyo): the father is a doctor. The mother is a teacher."
+      }
+    },
+    {
+      "id": "dx.ko.n1.lectura.4",
+      "nivel": 1,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige qué días descansa la persona.",
+        "en": "Read and choose which days the person rests."
+      },
+      "texto": "저는 회사원이에요. 월요일부터 금요일까지 아침 아홉 시에 출근해요. 저녁 여섯 시에 퇴근해요. 토요일하고 일요일에는 쉬어요. 주말에는 보통 집에서 요리해요.",
+      "textoRom": "jeoneun hoesawonieyo. woryoilbuteo geumyoilkkaji achim ahop sie chulgeunhaeyo. jeonyeok yeoseot sie toegeunhaeyo. toyoilhago iryoireneun swieoyo. jumareneun botong jibeseo yorihaeyo.",
+      "opciones": [
+        "금요일하고 토요일",
+        "월요일하고 화요일",
+        "토요일하고 일요일"
+      ],
+      "opcionesRom": [
+        "geumyoilhago toyoil",
+        "woryoilhago hwayoil",
+        "toyoilhago iryoil"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "El texto dice «토요일하고 일요일에는 쉬어요» (toyoilhago iryoireneun swieoyo): descansa el sábado y el domingo.",
+        "en": "The text says «토요일하고 일요일에는 쉬어요» (toyoilhago iryoireneun swieoyo): the person rests on Saturday and Sunday."
+      }
+    },
+    {
+      "id": "dx.ko.n1.gramatica.1",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con la partícula de tema correcta.",
+        "en": "Complete with the correct topic particle."
+      },
+      "texto": "어머니___ 의사예요.",
+      "textoRom": "eomeoni___ uisayeyo.",
+      "opciones": [
+        "는",
+        "은",
+        "를"
+      ],
+      "opcionesRom": [
+        "neun",
+        "eun",
+        "reul"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Después de una vocal («어머니» (eomeoni)) va «는» (neun): «어머니는 의사예요» (eomeonineun uisayeyo). «은» (eun) va después de consonante y «를» (reul) marca el objeto.",
+        "en": "After a vowel («어머니» (eomeoni)) you use «는» (neun): «어머니는 의사예요» (eomeonineun uisayeyo). «은» (eun) follows a consonant and «를» (reul) marks the object."
+      }
+    },
+    {
+      "id": "dx.ko.n1.gramatica.2",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con la partícula del lugar donde haces algo.",
+        "en": "Complete with the particle for the place where you do something."
+      },
+      "texto": "도서관___ 공부해요.",
+      "textoRom": "doseogwan___ gongbuhaeyo.",
+      "opciones": [
+        "에",
+        "에서",
+        "가"
+      ],
+      "opcionesRom": [
+        "e",
+        "eseo",
+        "ga"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Para el lugar donde se hace una acción se usa «에서» (eseo): «도서관에서 공부해요» (doseogwaneseo gongbuhaeyo). «에» (e) indica destino o existencia y «가» (ga) marca el sujeto.",
+        "en": "For the place where an action happens you use «에서» (eseo): «도서관에서 공부해요» (doseogwaneseo gongbuhaeyo). «에» (e) marks a destination or where something is, and «가» (ga) marks the subject."
+      }
+    },
+    {
+      "id": "dx.ko.n1.gramatica.3",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la frase correcta: yo soy médico.",
+        "en": "Choose the correct sentence: I am a doctor."
+      },
+      "opciones": [
+        "저는 의사예요.",
+        "저는 의사이에요.",
+        "저은 의사예요."
+      ],
+      "opcionesRom": [
+        "jeoneun uisayeyo.",
+        "jeoneun uisaieyo.",
+        "jeoeun uisayeyo."
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Después de vocal («의사» (uisa)) va «예요» (yeyo), no «이에요» (ieyo). Con «저» (jeo) el tema es «는» (neun), no «은» (eun).",
+        "en": "After a vowel («의사» (uisa)) you use «예요» (yeyo), not «이에요» (ieyo). With «저» (jeo) the topic particle is «는» (neun), not «은» (eun)."
+      }
+    },
+    {
+      "id": "dx.ko.n1.gramatica.4",
+      "nivel": 1,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa la frase sobre ayer.",
+        "en": "Complete the sentence about yesterday."
+      },
+      "texto": "어제 학교에 ___.",
+      "textoRom": "eoje hakgyoe ___.",
+      "opciones": [
+        "갈 거예요",
+        "가요",
+        "갔어요"
+      ],
+      "opcionesRom": [
+        "gal geoyeyo",
+        "gayo",
+        "gasseoyo"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Con «어제» (eoje, ayer) va el pasado: «갔어요» (gasseoyo). «가요» (gayo) es presente y «갈 거예요» (gal geoyeyo) es futuro.",
+        "en": "With «어제» (eoje, yesterday) you use the past: «갔어요» (gasseoyo). «가요» (gayo) is present and «갈 거예요» (gal geoyeyo) is future."
+      }
+    },
+    {
+      "id": "dx.ko.n1.vocabulario.1",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con el día que sigue.",
+        "en": "Complete with the next day."
+      },
+      "texto": "목요일 다음은 ___이에요.",
+      "textoRom": "mogyoil daeumeun ___ieyo.",
+      "opciones": [
+        "수요일",
+        "토요일",
+        "금요일"
+      ],
+      "opcionesRom": [
+        "suyoil",
+        "toyoil",
+        "geumyoil"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Después del jueves viene «금요일» (geumyoil, viernes). «수요일» (suyoil, miércoles) va antes y «토요일» (toyoil, sábado) viene después del viernes.",
+        "en": "After Thursday comes «금요일» (geumyoil, Friday). «수요일» (suyoil, Wednesday) comes before and «토요일» (toyoil, Saturday) comes after Friday."
+      }
+    },
+    {
+      "id": "dx.ko.n1.vocabulario.2",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige el lugar donde te atiende un médico.",
+        "en": "Choose the place where a doctor sees you."
+      },
+      "opciones": [
+        "은행",
+        "병원",
+        "카페"
+      ],
+      "opcionesRom": [
+        "eunhaeng",
+        "byeongwon",
+        "kape"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«병원» (byeongwon, hospital) es el lugar donde atiende un médico. «은행» (eunhaeng, banco) y «카페» (kape, cafetería) son otros lugares.",
+        "en": "«병원» (byeongwon, hospital) is where a doctor sees you. «은행» (eunhaeng, bank) and «카페» (kape, café) are other places."
+      }
+    },
+    {
+      "id": "dx.ko.n1.vocabulario.3",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige lo contrario de «크다» (keuda, grande).",
+        "en": "Choose the opposite of «크다» (keuda, big)."
+      },
+      "opciones": [
+        "작다",
+        "싸다",
+        "늦다"
+      ],
+      "opcionesRom": [
+        "jakda",
+        "ssada",
+        "neutda"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "«작다» (jakda, pequeño) es lo contrario de «크다» (keuda). «싸다» (ssada, barato) y «늦다» (neutda, tarde) no son opuestos de «grande».",
+        "en": "«작다» (jakda, small) is the opposite of «크다» (keuda). «싸다» (ssada, cheap) and «늦다» (neutda, late) are not opposites of “big.”"
+      }
+    },
+    {
+      "id": "dx.ko.n1.vocabulario.4",
+      "nivel": 1,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa con el momento del día en que duermes.",
+        "en": "Complete with the time of day when you sleep."
+      },
+      "texto": "아침에 일어나요. ___에 자요.",
+      "textoRom": "achime ireonayo. ___e jayo.",
+      "opciones": [
+        "오전",
+        "아침",
+        "밤"
+      ],
+      "opcionesRom": [
+        "ojeon",
+        "achim",
+        "bam"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Se duerme por la «밤» (bam, noche): «밤에 자요» (bame jayo). «아침» (achim, mañana) ya aparece al levantarse y «오전» (ojeon, antes del mediodía) no encaja.",
+        "en": "You sleep at «밤» (bam, night): «밤에 자요» (bame jayo). «아침» (achim, morning) is when you get up, and «오전» (ojeon, before noon) does not fit."
+      }
+    },
+    {
+      "id": "dx.ko.n1.escritura.1",
+      "nivel": 1,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases: quién eres, dónde vives y qué te gusta.",
+        "en": "Write 2–3 sentences: who you are, where you live, and what you like."
+      },
+      "aceptadas": [
+        "저는 회사원이에요. 부산에 살아요. 음악을 좋아해요.",
+        "저는 대학생이에요. 인천에 살아요. 커피를 좋아해요."
+      ],
+      "evidenciasEscritura": [
+        [
+          "저는 학생이에요",
+          "저는 대학생이에요",
+          "저는 회사원이에요",
+          "저는 은행원이에요",
+          "저는 직원이에요",
+          "저는 의사예요",
+          "저는 선생님이에요",
+          "저는 가수예요",
+          "제 이름은"
+        ],
+        [
+          "서울에 살아요",
+          "부산에 살아요",
+          "인천에 살아요",
+          "대구에 살아요",
+          "대전에 살아요",
+          "광주에 살아요",
+          "수원에 살아요",
+          "울산에 살아요",
+          "전주에 살아요",
+          "제주에 살아요",
+          "한국에 살아요",
+          "미국에 살아요"
+        ],
+        [
+          "영화를 좋아해요",
+          "음악을 좋아해요",
+          "축구를 좋아해요",
+          "커피를 좋아해요",
+          "고기를 좋아해요",
+          "김치를 좋아해요",
+          "소설을 좋아해요",
+          "한국어를 좋아해요",
+          "야구를 좋아해요",
+          "농구를 좋아해요",
+          "라면을 좋아해요"
+        ]
+      ],
+      "minimoPalabras": 5,
+      "maximoPalabras": 40,
+      "respuesta": "저는 학생이에요. 서울에 살아요. 영화를 좋아해요.",
+      "feedback": {
+        "es": "Di quién eres con «저는 학생이에요» (jeoneun haksaengieyo), dónde vives con «서울에 살아요» (Seoure sarayo) y qué te gusta con «영화를 좋아해요» (yeonghwareul joahaeyo).",
+        "en": "Say who you are with «저는 학생이에요» (jeoneun haksaengieyo), where you live with «서울에 살아요» (Seoure sarayo) and what you like with «영화를 좋아해요» (yeonghwareul joahaeyo)."
+      }
+    },
+    {
+      "id": "dx.ko.n1.escritura.2",
+      "nivel": 1,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases sobre tu día: a qué hora te levantas y qué haces.",
+        "en": "Write 2–3 sentences about your day: what time you get up and what you do."
+      },
+      "aceptadas": [
+        "아침에 여덟 시에 일어나요. 한국어를 공부해요. 그리고 회사에 가요.",
+        "저는 여섯 시에 일어나요. 세수하고 커피를 마셔요. 저녁에 친구를 만나요."
+      ],
+      "evidenciasEscritura": [
+        [
+          "다섯 시에 일어나요",
+          "여섯 시에 일어나요",
+          "일곱 시에 일어나요",
+          "여덟 시에 일어나요",
+          "아홉 시에 일어나요",
+          "열 시에 일어나요"
+        ],
+        [
+          "커피를 마셔요",
+          "아침을 먹어요",
+          "한국어를 공부해요",
+          "샤워하고 출근해요",
+          "세수하고 커피를",
+          "운동을 해요"
+        ],
+        [
+          "회사에 가요",
+          "학교에 가요",
+          "영화를 봐요",
+          "친구를 만나요",
+          "친구하고 만나요",
+          "집에서 쉬어요",
+          "도서관에서 공부해요",
+          "회사에서 일해요",
+          "책을 읽어요"
+        ]
+      ],
+      "minimoPalabras": 6,
+      "maximoPalabras": 40,
+      "respuesta": "저는 일곱 시에 일어나요. 커피를 마셔요. 저녁에 영화를 봐요.",
+      "feedback": {
+        "es": "Di a qué hora te levantas con «일곱 시에 일어나요» (ilgop sie ireonayo) y añade qué haces con «커피를 마셔요» (keopireul masyeoyo) o «회사에 가요» (hoesae gayo).",
+        "en": "Say what time you get up with «일곱 시에 일어나요» (ilgop sie ireonayo) and add what you do with «커피를 마셔요» (keopireul masyeoyo) or «회사에 가요» (hoesae gayo)."
+      }
+    }
+  ]
+}

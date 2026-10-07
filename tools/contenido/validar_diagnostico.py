@@ -315,6 +315,114 @@ def errores_ruso(it: dict) -> list[str]:
     return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores]
 
 
+def _modulo_ko():
+    """Reglas del coreano de tools/contenido/ruta-ko/validar.py (rom sin hangul ni diacríticos,
+    mayúscula solo en nombres propios, sin Ecuador)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "validar_ko", ROOT / "tools/contenido/ruta-ko/validar.py")
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    return modulo
+
+
+_LEXICO_ROM_KO: dict[str, set[str]] | None = None
+
+
+def _lexico_rom_ko() -> dict[str, set[str]]:
+    """eojeol → roms que le dan las clases publicadas (texto/rom, textoRom, opcionesRom…):
+    un eojeol de las clases debe llevar en el diagnóstico la misma rom que allí."""
+    global _LEXICO_ROM_KO
+    if _LEXICO_ROM_KO is not None:
+        return _LEXICO_ROM_KO
+    import rr_ko  # noqa: E402  (tools/contenido)
+    lex: dict[str, set[str]] = {}
+
+    def par(c, r):
+        if isinstance(c, str) and isinstance(r, str):
+            a, b = rr_ko.tokens_hangul(c), [x for x in re.split(r"\s+", r.replace("___", " ")) if re.search("[A-Za-z]", x)]
+            if len(a) == len(b):
+                for x, y in zip(a, b):
+                    lex.setdefault(x, set()).add(re.sub(r"[^A-Za-z\-]", "", y))
+
+    def recorrer(x):
+        if isinstance(x, dict):
+            if "texto" in x and "rom" in x:
+                par(x["texto"], x["rom"])
+            for k in ("texto", "pregunta"):
+                if k in x and k + "Rom" in x:
+                    par(x[k], x[k + "Rom"])
+            for k in ("opciones", "tokens"):
+                if isinstance(x.get(k), list) and isinstance(x.get(k + "Rom"), list) \
+                        and len(x[k]) == len(x[k + "Rom"]):
+                    for c, r in zip(x[k], x[k + "Rom"]):
+                        par(c, r)
+            for v in x.values():
+                recorrer(v)
+        elif isinstance(x, list):
+            for v in x:
+                recorrer(v)
+
+    for f in sorted((ROOT / "assets/contenido/ko/ruta").glob("*.json")):
+        if f.name != "curso.json":
+            recorrer(json.loads(f.read_text(encoding="utf-8")))
+    _LEXICO_ROM_KO = lex
+    return lex
+
+
+_ECUADOR_KO = re.compile(r"ecuador|ecuatorian|quito|guayaquil|cuenca|에콰도르|키토|과야킬|쿠엥카", re.I)
+
+
+def errores_coreano(it: dict) -> list[str]:
+    """Romanización y tipografía de un ítem en coreano (docs/claude-educacion/ROMANIZACION.md,
+    tools/ia/idiomas/ko.md): `textoRom`/`opcionesRom` paralelos al coreano, una palabra de
+    rom por eojeol (RR oficial, comprobada con tools/contenido/rr_ko.py y con la rom de
+    las clases; nombre completo = 2 palabras); hangul con espacios entre eojeol, sin hanja
+    ni kana, sin 당신 ni Ecuador, sin cifras ni símbolos en lo que se oye o se lee.
+    `audio`, `respuesta` y `aceptadas` no llevan rom."""
+    import rom_items  # noqa: E402  (tools/contenido)
+    import rr_ko  # noqa: E402
+    ko = _modulo_ko()
+    hay = lambda t: isinstance(t, str) and bool(ko.HANGUL.search(t))  # noqa: E731
+    lexico = _lexico_rom_ko()
+
+    def comprobar(texto: str, rom: str):
+        e = ko.error_rom(rom.replace("___", "").strip() or "-")
+        e = None if e == "rom vacío" else e
+        if e is None or e.startswith("rom con mayúscula fuera"):
+            e = "; ".join(rr_ko.errores_rom(texto, rom, lexico)) or None
+        return e
+
+    errores = rom_items.errores({"unidades": [{"id": it.get("id", "?"), "pasos": [{"items": [it]}]}]},
+                                hay, comprobar)
+
+    def textos(x):
+        if isinstance(x, str):
+            yield x
+        elif isinstance(x, dict):
+            for v in x.values():
+                yield from textos(v)
+        elif isinstance(x, list):
+            for v in x:
+                yield from textos(v)
+
+    for t in textos(it):
+        if _ECUADOR_KO.search(t):
+            errores.append(f"menciona Ecuador: «{t[:40]}»")
+        if re.search(r"[\u3040-\u30ff\u3400-\u9fff]", t):
+            errores.append(f"hanja o kana en «{t[:40]}»")
+    for t in [it.get("audio"), it.get("texto"), *(it.get("opciones") or [])]:
+        if hay(t) and re.search(r"[0-9₩%/→_]", str(t).replace("___", "")):
+            errores.append(f"cifra o símbolo en «{str(t)[:40]}»: se escribe en palabras")
+        if hay(t) and re.search(r"(?<![가-힣])당신", str(t)):
+            errores.append(f"usa 당신 en «{str(t)[:40]}»")
+    for t in [it.get("audio"), it.get("texto"), *(it.get("opciones") or []), it.get("respuesta")]:
+        if hay(t) and re.search(r"[가-힣][,.?!]?\S*[가-힣]", str(t)) and "  " in str(t):
+            errores.append(f"doble espacio en «{str(t)[:40]}»")
+    iid = str(it.get("id", "?"))
+    return [x.replace(f"{iid}/{iid}", iid, 1) if x.startswith(iid) else f"{iid}: {x}" for x in errores]
+
+
 def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
     errores: list[str] = []
     doc = json.loads(path.read_text(encoding="utf-8"))
@@ -458,6 +566,9 @@ def validar(path: Path, idioma: str = "en") -> tuple[list[str], list[dict]]:
                 errores.append(x)
         if idioma == "ru":
             for x in errores_ruso(it):
+                errores.append(x)
+        if idioma == "ko":
+            for x in errores_coreano(it):
                 errores.append(x)
         if idioma == "en":
             faltan = {w for t in textos_en for w in cb.palabras(t) if not cb.conocida(w, lex)}

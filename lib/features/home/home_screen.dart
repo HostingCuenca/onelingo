@@ -83,7 +83,7 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             if (s.planId.isEmpty) _TrialBanner(restante: restante),
             if (s.planId.isEmpty) const SizedBox(height: 16),
-            // Idiomas sin ruta nueva (ja, ko, ru, zh): curso en preparación.
+            // Idiomas sin ruta nueva (hoy ninguno): curso en preparación.
             if (!idiomasConRuta.contains(s.idiomaMeta)) ...[
               TituloSeccion(tr('Tu camino de aprendizaje')),
               const SizedBox(height: 10),

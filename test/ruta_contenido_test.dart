@@ -6,9 +6,10 @@ import 'package:onelingo/core/aprendizaje/modelos.dart';
 import 'package:onelingo/core/content/curriculum.dart';
 import 'package:onelingo/core/content/fundamentos.dart' show idiomasSoloRutaF0;
 
-/// Idiomas sin ruta nueva: su curso está «en preparación» (sin módulos; las
-/// lecciones antiguas se retiraron).
-const _enPreparacion = {'ko'};
+/// Idiomas sin ruta nueva: su curso estaría «en preparación» (sin módulos; las
+/// lecciones antiguas se retiraron). Hoy ninguno: el coreano entró en versión
+/// esencial (N1–N2) y ya tiene ruta.
+const _enPreparacion = <String>{};
 
 /// Integridad de las rutas de los 10 idiomas habilitados.
 void main() {

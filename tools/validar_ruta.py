@@ -705,12 +705,30 @@ def _quitar_particula_ko(w, conocidas, particulas):
             if len(w) > len(p) and w.endswith(p) and p in conocidas}
 
 
+_DIGITOS_SINO_KO = "일이삼사오육칠팔구"
+_GRUPO_SINO_KO = (rf"(?:[{_DIGITOS_SINO_KO}]?천)?(?:[{_DIGITOS_SINO_KO}]?백)?"
+                  rf"(?:[{_DIGITOS_SINO_KO}]?십)?[{_DIGITOS_SINO_KO}]?")
+_NUMERO_SINO_KO = re.compile(rf"(?:{_GRUPO_SINO_KO}만)?{_GRUPO_SINO_KO}")
+
+
+def _numero_sino_ko(w, conocidas):
+    """Número sinocoreano compuesto cuyos dígitos y multiplicadores están
+    enseñados: 이십, 십일, 삼백오십, 오천 (con 십/백/천/만) o una serie de 3+
+    dígitos (공일공, un teléfono). Una pareja de dígitos como 오이 no cuenta."""
+    if len(w) < 2 or not all(c in conocidas for c in w):
+        return False
+    if _NUMERO_SINO_KO.fullmatch(w) and any(m in w for m in "십백천만"):
+        return True
+    return len(w) >= 3 and all(c in _DIGITOS_SINO_KO + "공영" for c in w)
+
+
 def conocida_ko(w, conocidas):
     """Eojeol enseñado tal cual, o sustantivo enseñado + partícula pegada que
     también se enseñó (저는, 서울에서, 학생이에요); como mucho dos partículas
-    si la última es 은/는/도/만 (서울에서는). Los verbos conjugados solo
+    si la última es 은/는/도/만 (서울에서는); o un número sinocoreano compuesto
+    de dígitos enseñados (이천, 공일공). Los verbos conjugados solo
     cuentan si se enseñó esa forma exacta."""
-    if w in conocidas or any(c.isdigit() for c in w):
+    if w in conocidas or any(c.isdigit() for c in w) or _numero_sino_ko(w, conocidas):
         return True
     if _quitar_particula_ko(w, conocidas, PARTICULAS_KO) & conocidas:
         return True

@@ -1262,13 +1262,35 @@ Set<String> _quitarParticulaKo(
       w.substring(0, w.length - p.length),
 };
 
+const _digitosSinoKo = '일이삼사오육칠팔구';
+const _grupoSinoKo =
+    '(?:[$_digitosSinoKo]?천)?(?:[$_digitosSinoKo]?백)?'
+    '(?:[$_digitosSinoKo]?십)?[$_digitosSinoKo]?';
+final _numeroSinoKo = RegExp('^(?:$_grupoSinoKo만)?$_grupoSinoKo\$');
+
+/// Número sinocoreano compuesto cuyos dígitos y multiplicadores están
+/// enseñados: 이십, 십일, 삼백오십, 오천 (con 십/백/천/만) o una serie de 3+
+/// dígitos (공일공, un teléfono). Una pareja de dígitos como 오이 no cuenta.
+bool _esNumeroSinoKo(String w, Set<String> conocidas) {
+  final letras = w.split('');
+  if (letras.length < 2 || !letras.every(conocidas.contains)) return false;
+  if (_numeroSinoKo.hasMatch(w) && RegExp('[십백천만]').hasMatch(w)) return true;
+  return letras.length >= 3 &&
+      letras.every((c) => '$_digitosSinoKo공영'.contains(c));
+}
+
 /// Eojeol enseñado tal cual, o sustantivo enseñado + partícula pegada que
 /// también se enseñó (저는, 서울에서, 학생이에요); como mucho dos partículas si
-/// la última es 은/는/도/만 (서울에서는). Los verbos conjugados solo cuentan si
+/// la última es 은/는/도/만 (서울에서는); o un número sinocoreano compuesto de
+/// dígitos enseñados (이천, 공일공). Los verbos conjugados solo cuentan si
 /// se enseñó esa forma exacta. Misma regla que `conocida_ko` en
 /// tools/validar_ruta.py.
 bool palabraConocidaKo(String w, Set<String> conocidas) {
-  if (conocidas.contains(w) || _digito.hasMatch(w)) return true;
+  if (conocidas.contains(w) ||
+      _digito.hasMatch(w) ||
+      _esNumeroSinoKo(w, conocidas)) {
+    return true;
+  }
   if (_quitarParticulaKo(w, conocidas, particulasKo).any(conocidas.contains)) {
     return true;
   }

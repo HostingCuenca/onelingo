@@ -194,9 +194,8 @@ void main() {
   });
 
   group('Nivel 0 de ru, ko, ja y zh', () {
-    test('ko aún no se publica; zh, ja y ru sí (idiomasConNivel0)', () {
-      expect(idiomasConNivel0.contains('ko'), isFalse);
-      expect(idiomasConNivel0, containsAll(['zh', 'ja', 'ru']));
+    test('ko, zh, ja y ru se publican (idiomasConNivel0)', () {
+      expect(idiomasConNivel0, containsAll(['ko', 'zh', 'ja', 'ru']));
     });
 
     for (final idioma in _noLatinos) {
@@ -241,6 +240,32 @@ void main() {
       final construye = pasos.firstWhere((p) => p.fichasRom.isNotEmpty);
       expect(construye.romFicha(0), isNotNull);
       expect(_nivel0('ko').sonidos.first.anclaRom, isNotNull);
+    });
+
+    test('ko: el mapa de sonidos lleva rom en el ancla y en cada ejemplo', () {
+      final n = _nivel0('ko');
+      expect(n.sonidos.length, greaterThanOrEqualTo(15));
+      for (final snd in n.sonidos) {
+        expect(snd.anclaRom, isNotNull, reason: snd.id);
+        expect(snd.ejemplosRom.length, snd.ejemplos.length, reason: snd.id);
+      }
+    });
+
+    test('ko: la rom sigue la RR de las clases (ㅎ, ciudades, 이에요, 십육, 실례)', () {
+      final pasos = [for (final l in _nivel0('ko').lecciones) ...l.pasos];
+      final roms = [
+        for (final p in pasos) ...[
+          if (p.rom != null) p.rom!,
+          for (final w in p.palabras)
+            if (w.rom != null) w.rom!,
+        ],
+      ].join(' ');
+      // Ciudades con mayúscula (Seoure, Busane) y nada de las formas retiradas
+      // por la pasada final de coherencia (simnyuk, sillye, ieyo).
+      expect(RegExp(r'(^|\s)(seoul|seour|busan)').hasMatch(roms), isFalse);
+      for (final mala in ['sibyug', 'sibyuk', 'silrye', 'silye', 'ikheyo']) {
+        expect(roms.contains(mala), isFalse, reason: mala);
+      }
     });
 
     test('ja: escucha_letra lleva letraRom', () {

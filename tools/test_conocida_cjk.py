@@ -91,6 +91,15 @@ class Coreano(unittest.TestCase):
     def test_puntuacion(self):
         self.assertEqual(palabras("«저는 학생이에요?»"), ["저는", "학생이에요"])
 
+    def test_numeros_sinocoreanos_compuestos(self):
+        # Cada dígito y multiplicador enseñado: el número compuesto vale.
+        n = saber("일", "이", "삼", "오", "공", "십", "천", "만")
+        for w in ("이십", "십일", "삼천", "십만", "삼십오만", "공일공"):
+            self.assertEqual(todas("ko", w, n), [], w)
+        # Dos dígitos seguidos sin multiplicador (오삼) no son un número; a 이백 le falta 백.
+        self.assertEqual(todas("ko", "오삼", n), ["오삼"])
+        self.assertEqual(todas("ko", "이백", n), ["이백"])
+
 
 class Ruso(unittest.TestCase):
     def test_conocida(self):

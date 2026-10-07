@@ -412,6 +412,127 @@ void main() {
     expect(problemas, isEmpty, reason: problemas.join('\n'));
   });
 
+  test('El Nivel 0 coreano trae cada explicación en español e inglés', () {
+    final r = Process.runSync('python3', [
+      'tools/contenido/validar_nivel0.py',
+      'ko',
+      '--bilingue',
+    ]);
+    expect(r.exitCode, 0, reason: '${r.stdout}${r.stderr}');
+    expect('${r.stdout}', isNot(contains('EMOJI QUE FALTAN')));
+    expect(idiomasConNivel0, contains('ko'));
+    final n = cargar('ko');
+    expect(n.idioma, 'ko');
+    expect(n.unidades, hasLength(10));
+    expect(n.lecciones, hasLength(40));
+    expect(n.sonidos.length, greaterThanOrEqualTo(15));
+    // Lumo solo da la bienvenida: nunca en la prueba de salida (u10).
+    expect(
+      [for (final l in n.unidades.last.lecciones) ...l.pasos.map((p) => p.tipo)],
+      isNot(contains('lumo')),
+    );
+  });
+
+  test('Nivel 0 coreano: lo que se oye está en hangul y coincide con la respuesta', () {
+    final n = cargar('ko');
+    final hangul = RegExp(r'[가-힣ㄱ-ㅣ]');
+    // Jamo de compatibilidad de cada sílaba (ㄴ ㅏ ㅁ ㅜ para 나무).
+    const inicial = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
+    const vocal = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
+    const final_ = [
+      '', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ',
+      'ㄾ', 'ㄿ', 'ㅀ', 'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ',
+      'ㅍ', 'ㅎ',
+    ];
+    String jamo(String palabra) {
+      final sb = StringBuffer();
+      for (final r in palabra.runes) {
+        if (r < 0xAC00 || r > 0xD7A3) {
+          sb.writeCharCode(r);
+          continue;
+        }
+        final c = r - 0xAC00;
+        sb.write(inicial[c ~/ 588]);
+        sb.write(vocal[(c % 588) ~/ 28]);
+        sb.write(final_[c % 28]);
+      }
+      return sb.toString();
+    }
+
+    final problemas = <String>[];
+    for (final l in n.lecciones) {
+      for (final (i, p) in l.pasos.indexed) {
+        final id = '${l.id}#$i ${p.tipo}';
+        switch (p.tipo) {
+          case 'escucha_elige':
+            // Se oye `audio` (no `m`) y es la opción correcta; las opciones
+            // llevan su rom (se ve al corregir, no antes).
+            final audio = (p.j['audio'] as String?) ?? '';
+            if (!hangul.hasMatch(audio)) problemas.add('$id: audio «$audio»');
+            if (p.opciones[p.correcta].texto != audio) {
+              problemas.add('$id: el audio no es la opción correcta');
+            }
+            if (p.opciones[p.correcta].rom == null) problemas.add('$id: sin rom');
+          case 'toca_sonido':
+            for (final w in p.opciones) {
+              if (!hangul.hasMatch(w.texto) || w.rom == null) {
+                problemas.add('$id: «${w.texto}» sin hangul o sin rom');
+              }
+            }
+          case 'escucha':
+            for (final w in p.palabras) {
+              if (!hangul.hasMatch(w.texto) || w.rom == null) {
+                problemas.add('$id: «${w.texto}» sin hangul o sin rom');
+              }
+            }
+          case 'mira' || 'repite' || 'mezcla' || 'construye' || 'lee':
+            if (!hangul.hasMatch(textoPlano(p.marcado)) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin hangul o sin rom');
+            }
+          case 'deletreo':
+            // Formato B (ordenar): se oye la palabra `m` y las piezas, un jamo
+            // cada una, forman esa palabra en orden.
+            final palabra = textoPlano(p.marcado);
+            if (!hangul.hasMatch(palabra) || p.rom == null) {
+              problemas.add('$id: «${p.marcado}» sin hangul o sin rom');
+            }
+            if (p.textos.join() != jamo(palabra) ||
+                !p.textos.every((t) => t.runes.length == 1)) {
+              problemas.add('$id: las piezas ${p.textos} no forman «$palabra»');
+            }
+          case 'cambia':
+            final de = textoPlano((p.j['de'] as String?) ?? '');
+            final a = textoPlano((p.j['a'] as String?) ?? '');
+            // Cambia una sola sílaba y la nueva está entre las opciones.
+            final dif = [
+              for (var k = 0; k < de.runes.length && k < a.runes.length; k++)
+                if (de.runes.elementAt(k) != a.runes.elementAt(k)) k,
+            ];
+            if (de.runes.length != a.runes.length ||
+                dif.length != 1 ||
+                !p.textos.contains(String.fromCharCode(a.runes.elementAt(dif.first)))) {
+              problemas.add('$id: «$de» → «$a» no cambia una sola sílaba de las opciones');
+            }
+            if (p.deRom == null || p.aRom == null) problemas.add('$id: sin deRom o aRom');
+        }
+        // Ningún hanja ni kana en el coreano del Nivel 0.
+        final soloKo = [
+          p.marcado, p.j['audio'], p.j['de'], p.j['a'],
+          ...p.palabras.map((w) => w.marcado), ...p.textos, ...p.fichas,
+        ].whereType<String>().join();
+        if (RegExp('[\\u4E00-\\u9FFF\\u3040-\\u30FF]').hasMatch(soloKo)) {
+          problemas.add('$id: hanja o kana en el coreano');
+        }
+      }
+    }
+    expect(problemas, isEmpty, reason: problemas.join('\n'));
+    // El deletreo está en el curso (ordenar las letras de la palabra).
+    expect(
+      [for (final l in n.lecciones) for (final p in l.pasos) p.tipo].where((t) => t == 'deletreo'),
+      isNotEmpty,
+    );
+  });
+
   for (final idioma in idiomasConNivel0)
   test('Contenido del Nivel 0 ($idioma) coherente (sonidos, imágenes y respuestas)', () {
     final n = cargar(idioma);
@@ -580,6 +701,22 @@ void main() {
     expect(tester.takeException(), isNull);
     // Primer paso (escucha): palabras en cirílico con su rom.
     final escucha = cargar('ru').leccion('u01l02')!.pasos.first;
+    expect(escucha.tipo, 'escucha');
+    final w = escucha.palabras.first;
+    expect(find.textContaining(w.rom!), findsWidgets);
+  });
+
+  testWidgets('Nivel 0 coreano: la lección muestra hangul con su rom', (
+    tester,
+  ) async {
+    await montar(
+      tester,
+      const LeccionN0Screen(leccionId: 'u01l02'),
+      idioma: 'ko',
+    );
+    expect(tester.takeException(), isNull);
+    // Primer paso (escucha): palabras en hangul con su rom.
+    final escucha = cargar('ko').leccion('u01l02')!.pasos.first;
     expect(escucha.tipo, 'escucha');
     final w = escucha.palabras.first;
     expect(find.textContaining(w.rom!), findsWidgets);
