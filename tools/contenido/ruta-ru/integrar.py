@@ -31,9 +31,11 @@ cual: este script solo reescribe `orden`, `prerequisitos` y `modulo`.
   `tools/ia/chequeos.py` con 0 errores (se comprueba antes de integrar), y la
   del f0, pasar `validar.py`; no se exigen archivos revision-*.md. Un nivel
   ya integrado no pasa otra vez por validar_bloque.py (lo rechaza): lo cubre
-  el `validar_ruta.py ru` final. Los niveles que aún no existen (N3–N10) no
-  se declaran en curso.json: la app los muestra bloqueados («Próximamente»)
+  el `validar_ruta.py ru` final. Los niveles que aún no existen no se
+  declaran en curso.json: la app los muestra bloqueados («Próximamente»)
   y la prueba de ubicación nunca ubica por encima del último publicado.
+  Desde el 13-10-2026 están integrados N1–N10: el ruso está completo (rom en
+  todo texto ruso en N1–N4; desde N5, solo en el vocabulario).
 - Ruso sin morfología inventada: `vocabularioEstricto` solo da por conocida una
   forma enseñada tal cual (con ё ≡ е y sin acento gráfico); las formas
   flexionadas van entre paréntesis en el vocablo («читать (читаю)»). No lleva

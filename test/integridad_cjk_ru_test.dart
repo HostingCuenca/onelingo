@@ -160,6 +160,18 @@ void main() {
       // Ni la forma no enseñada ni el caso que falta se deducen.
       expect(faltan('ru', 'Он руководит складом.', s), ['он', 'руководит']);
     });
+    test('N5–N10: frases y comillas entre paréntesis, «…» y б/у', () {
+      final s = saber([
+        'стороны договора (стороны обязуются; именуемый в дальнейшем «Арендатор»)',
+        'мягкий (мягок, мягкими, насколько … настолько)',
+        'завязать разговор (Что вас сюда привело?)', 'запчасти б/у',
+      ]);
+      expect(faltan('ru', 'Стороны обязуются: «Арендатор» именуемый в дальнейшем.', s), isEmpty);
+      expect(faltan('ru', 'Насколько мягок, настолько мягкий!', s), isEmpty);
+      expect(faltan('ru', 'Что вас сюда привело? Запчасти б/у.', s), isEmpty);
+      // Lo que no está en ningún vocablo no se deduce del paréntesis.
+      expect(faltan('ru', 'Арендатор обязуется.', s), ['обязуется']);
+    });
   });
 
   test('sin morfología inglesa fuera del inglés', () {

@@ -12,12 +12,13 @@ import 'package:onelingo/shared/widgets/romanizacion.dart';
 /// Romanización de ru, ko, ja y zh (docs/claude-educacion/ROMANIZACION.md).
 /// Los JSON se leen directamente (borradores de Fundamentos y Nivel 0), sin
 /// pasar por `idiomasConNivel0`. El chino, el japonés, el ruso y el coreano ya
-/// están publicados (versión esencial: N1–N4):
+/// están publicados (versión esencial: N1–N4; el ruso, N1–N10):
 /// también se comprueba su ruta integrada en assets.
 const _noLatinos = ['ru', 'ko', 'ja', 'zh'];
 
-/// Todas las clases publicadas de un idioma (f0 y N1…), leídas de assets.
-List<UnidadRuta> _rutaPublicada(String idioma) {
+/// Todas las clases publicadas de un idioma (f0 y N1…), leídas de assets;
+/// con [hasta], solo las de nivel interno ≤ [hasta].
+List<UnidadRuta> _rutaPublicada(String idioma, {int hasta = 10}) {
   final base = 'assets/contenido/$idioma/ruta';
   final curso =
       jsonDecode(File('$base/curso.json').readAsStringSync())
@@ -30,11 +31,12 @@ List<UnidadRuta> _rutaPublicada(String idioma) {
                   )
                   as Map<String, dynamic>)['unidades']
               as List)
-        UnidadRuta.fromJson(
-          u as Map<String, dynamic>,
-          idioma: idioma,
-          nivel: m['nivel'] as String,
-        ),
+        if (((u as Map<String, dynamic>)['nivelInterno'] as int? ?? 0) <= hasta)
+          UnidadRuta.fromJson(
+            u,
+            idioma: idioma,
+            nivel: m['nivel'] as String,
+          ),
   ];
 }
 
@@ -144,7 +146,9 @@ void main() {
     for (final i in _noLatinos) (i, 'Fundamentos', () => _borrador(i)),
     ('zh', 'Ruta publicada f0–N4', () => _rutaPublicada('zh')),
     ('ja', 'Ruta publicada f0–N4', () => _rutaPublicada('ja')),
-    ('ru', 'Ruta publicada f0–N4', () => _rutaPublicada('ru')),
+    // ru: rom en todo texto ruso solo en N1–N4; desde N5, solo en el
+    // vocabulario (tools/ia/idiomas/ru.md; prueba aparte más abajo).
+    ('ru', 'Ruta publicada f0–N4', () => _rutaPublicada('ru', hasta: 4)),
     ('ko', 'Ruta publicada f0–N4', () => _rutaPublicada('ko')),
   ]) {
     test('$fuente ($idioma): cada texto, opción, ficha y par en el '
@@ -183,6 +187,25 @@ void main() {
       expect(conRom, greaterThan(20));
     });
   }
+
+  test('ru N5–N10: rom solo en el vocabulario, nunca en los ejercicios', () {
+    final altas = [
+      for (final u in _rutaPublicada('ru'))
+        if ((u.nivelInterno ?? 0) >= 5) u,
+    ];
+    expect(altas, hasLength(300));
+    for (final u in altas) {
+      expect(u.vocabulario, isNotEmpty, reason: u.id);
+      for (final v in u.vocabulario) {
+        expect(v.rom, isNotNull, reason: '${u.id}: ${v.texto}');
+      }
+      for (final p in u.pasos) {
+        for (final it in p.items) {
+          expect(it.tieneRom, isFalse, reason: '${u.id}/${it.id}');
+        }
+      }
+    }
+  });
 
   test('ru: las líneas de diálogo traen hablanteRom', () {
     final lineas = [

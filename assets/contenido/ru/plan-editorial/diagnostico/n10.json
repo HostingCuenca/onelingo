@@ -1,0 +1,510 @@
+{
+  "idioma": "ru",
+  "nivel": 10,
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-autor",
+    "date": "2026-10-13",
+    "notes": [
+      "Versión esencial: N10. Léxico comprobado con validar_diagnostico.py mediante un envoltorio temporal (scratchpad/banco-ru-n10/val.py: ruta integrada más los bloques tools/contenido/ruta-ru/n5 a n10 aún sin integrar). Cirílico sin marcas de acento; rom con tilde solo en el rom. Una sola respuesta defendible revisada ítem por ítem; posiciones repartidas. Claves: чуть не / едва / на волоске (c06), мало сказать, мимо нот, сыграться (c11), кредит в размере, процентов годовых, собственный взнос (c27), беспошлинный провоз y заявить к досмотру (c43), смешивать корреляцию и причинность, контрпример (c16), экранизация, в отличие от, не столько… сколько… (c33-c34), констатировать, приходится признать, оставить за скобками (c24), передовица, заголовок-интрига (c46), примыкать к (c23), при неблагоприятном развитии событий (c28), сократить/избыточный (c24), точка безубыточности (c26), сумбурный (c31), пошлина (c43), solicitud de crédito (c27) y reseña con в отличие от / по моему разумению (c35). Sin Ecuador.",
+      "Integración de N5–N10 (2026-10-13): con N10 ya integrado en la ruta (assets/contenido/ru/ruta), revalidado con validar_diagnostico.py --idioma ru sin envoltorio: OK; compilado en diagnostico-v2.json (N1–N10, 180 ítems). Sin cambios en los ítems."
+    ]
+  },
+  "items": [
+    {
+      "id": "dx.ru.n10.escucha.1",
+      "nivel": 10,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige qué pasó con el tren.",
+        "en": "Listen and choose what happened with the train."
+      },
+      "audio": "Вчера я чуть не опоздал на поезд. Шёл на вокзал, замешкался, а когда опомнился, до отправления оставалось три минуты. Я рванул вперёд и едва успел: двери уже закрывались. Проводник сказал, что я пришёл как раз вовремя, на волоске. Теперь я всегда выхожу из дома заранее, чтобы не рисковать.",
+      "opciones": [
+        "он опоздал и остался на станции",
+        "он едва успел сесть в поезд",
+        "он ждал поезд три минуты"
+      ],
+      "opcionesRom": [
+        "on opozdál i ostálsya na stántsii",
+        "on yedvá uspél sest' v póyezd",
+        "on zhdal póyezd tri minúty"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Dice «чуть не опоздал» (chut' ne opozdál) y «едва успел» (yedvá uspél): llegó justo, «на волоске» (na voloské) (por un pelo). No perdió el tren, y los tres minutos eran lo que faltaba para la salida, no una espera.",
+        "en": "It says «чуть не опоздал» (chut' ne opozdál) and «едва успел» (yedvá uspél): he made it just in time, «на волоске» (na voloské) (by a hair). He did not miss the train, and the three minutes were what was left before departure, not a wait."
+      }
+    },
+    {
+      "id": "dx.ru.n10.escucha.2",
+      "nivel": 10,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige cómo califica Anna el canto del solista.",
+        "en": "Listen and choose how Anna rates the soloist's singing."
+      },
+      "audio": "— Как тебе концерт, Анна? — Мало сказать, что певец фальшивил: он весь вечер пел мимо нот. Лишь к концу все сыгрались, а зал слушал без энтузиазма. Не сказать, чтобы я ждала много, но такого не ждала. — Билеты стоили дорого, а вечер, прямо скажем, не удался. — Мягко сказано!",
+      "opciones": [
+        "певец пел очень плохо",
+        "певец пел точно, но тихо",
+        "певец пел хорошо только в конце"
+      ],
+      "opcionesRom": [
+        "pevéts pel óchen' plókho",
+        "pevéts pel tóchno, no tíkho",
+        "pevéts pel khoroshó tól'ko v kontsé"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Anna dice «Мало сказать, что певец фальшивил» (Málo skazát', chto pevéts fal'shívil): fue mucho peor que desafinar, cantó «мимо нот» (mímo not) toda la noche. Solo al final todos se «сыгрались» (sygrális') hacia el final, no el cantante.",
+        "en": "Anna says «Мало сказать, что певец фальшивил» (Málo skazát', chto pevéts fal'shívil): it was far worse than being out of tune, he sang «мимо нот» (mímo not) all evening. Only at the end did everyone «сыгрались» (sygrális') by the end, not the singer."
+      }
+    },
+    {
+      "id": "dx.ru.n10.escucha.3",
+      "nivel": 10,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige cuánto dinero propio aporta el cliente.",
+        "en": "Listen and choose how much of his own money the client puts in."
+      },
+      "audio": "Здравствуйте, это банк. Мы рассмотрим вашу заявку. Вы запрашиваете кредит в размере восемьсот тысяч рублей под двенадцать процентов годовых. Срок погашения — пять лет. Собственный взнос составляет двести тысяч рублей. Как обеспечение вы можете предоставить в залог машину. График платежей мы пришлём по почте, а погасить кредит досрочно можно в любой момент.",
+      "opciones": [
+        "восемьсот тысяч рублей",
+        "сто тысяч рублей",
+        "двести тысяч рублей"
+      ],
+      "opcionesRom": [
+        "vosem'sót týsyach rubléy",
+        "sto týsyach rubléy",
+        "dvésti týsyach rubléy"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Dice «Собственный взнос составляет двести тысяч рублей» (Sóbstvennyy vznos sostavlyáyet dvésti týsyach rubléy). Los «восемьсот тысяч» (vosem'sót týsyach) son el monto del «кредит в размере…» (kredít v razmére…), no el aporte propio.",
+        "en": "It says «Собственный взнос составляет двести тысяч рублей» (Sóbstvennyy vznos sostavlyáyet dvésti týsyach rubléy). The «восемьсот тысяч» (vosem'sót týsyach) is the amount of the «кредит в размере…» (kredít v razmére…), not the own contribution."
+      }
+    },
+    {
+      "id": "dx.ru.n10.escucha.4",
+      "nivel": 10,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige qué debe declarar el viajero.",
+        "en": "Listen and choose what the traveller must declare."
+      },
+      "audio": "Здравствуйте. Личный багаж — это беспошлинный провоз, но дорогие вещи нужно заявить к досмотру. Вы привезли с собой часы и ноутбук. Часы очень дорогие, поэтому их нужно заявить. Ноутбук — это личный багаж, и пошлину за него платить не нужно. Шаг за шагом: возьмите бланк и заполните его. Всё это есть в памятке.",
+      "opciones": [
+        "только ноутбук",
+        "только часы",
+        "и часы, и ноутбук"
+      ],
+      "opcionesRom": [
+        "tól'ko noutbúk",
+        "tól'ko chasý",
+        "i chasý, i noutbúk"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Los objetos caros hay que «заявить к досмотру» (zayavít' k dosmótru) (declararlos al control): el reloj. Del portátil dice que es equipaje personal y que no habrá «пошлину» (póshlinu) (arancel) que pagar.",
+        "en": "Expensive items must be «заявить к досмотру» (zayavít' k dosmótru) (declared at inspection): the watch. Of the laptop it says it is personal baggage and no «пошлину» (póshlinu) (duty) will be due."
+      }
+    },
+    {
+      "id": "dx.ru.n10.lectura.1",
+      "nivel": 10,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el texto y elige qué reprocha el oponente al ponente.",
+        "en": "Read the text and choose what the opponent objects to in the speaker."
+      },
+      "texto": "На круглом столе спорили о работе из дома. Докладчик показал график и сказал: в тот год, когда люди стали работать из дома, прибыль выросла, значит, причина в удалённой работе. «Вы смешиваете корреляцию и причинность, — сказал оппонент. — Приведу контрпример: в другой отрасли прибыль тоже выросла, хотя все сидели в офисе. Это не закономерность, а случайная связь». Докладчик ответил: «Допустим, но именно поэтому нужны новые данные». Оппонент согласился лишь отчасти: «Данные нужны, однако нельзя приписывать успех одной причине». Зал слушал обоих участников дискуссии. Ведущий напомнил про лимит времени и предложил вернуться к фактам. Вопросы из зала решили оставить на конец. Спор шёл уже второй час, но никто не хотел уступать.",
+      "textoRom": "Na krúglom stolé spórili o rabóte iz dóma. Dokládchik pokazál gráfik i skazál: v tot god, kogdá lyúdi stáli rabótat' iz dóma, príbyl' výrosla, znáchit, prichína v udalyónnoy rabóte. «Vy smeshívayete korrelyátsiyu i prichínnost', — skazál opponént. — Privedú kontrprimér: v drugóy ótrasli príbyl' tózhe výrosla, khotyá vse sidéli v ófise. Éto ne zakonomérnost', a slucháynaya svyaz'». Dokládchik otvétil: «Dopustím, no ímenno poetomú nuzhný nóvyye dánnyye». Opponént soglasílsya lish' otchásti: «Dánnyye nuzhný, odnáko nél'zya pripísyvat' uspékh odnóy prichíne». Zal slúshal obóikh uchástnikov diskússii. Vedúshchiy napómnil pro limít vrémeni i predlozhíl vernút'sya k fáktam. Voprósy iz zála reshíli ostávit' na konéts. Spor shyol uzhé vtoróy chas, no niktó ne khotél ustupát'.",
+      "opciones": [
+        "он не показал ни одного графика",
+        "он говорил дольше лимита времени",
+        "он принимает связь за причину"
+      ],
+      "opcionesRom": [
+        "on ne pokazál ni odnogó gráfika",
+        "on govoríl dól'she limíta vrémeni",
+        "on prinimáyet svyaz' za prichínu"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "El oponente le dice «Вы смешиваете корреляцию и причинность» (Vy smeshívayete korrelyátsiyu i prichínnost') y da un «контрпример» (kontrprimér). El gráfico sí se mostró, y el límite de tiempo solo lo recordó el moderador.",
+        "en": "The opponent tells him «Вы смешиваете корреляцию и причинность» (Vy smeshívayete korrelyátsiyu i prichínnost') and gives a «контрпример» (kontrprimér). The graph was shown, and only the moderator reminded everyone of the time limit."
+      }
+    },
+    {
+      "id": "dx.ru.n10.lectura.2",
+      "nivel": 10,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el texto y elige qué dice el crítico de la película.",
+        "en": "Read the text and choose what the critic says about the film."
+      },
+      "texto": "Критик сравнил роман и киноверсию. В отличие от романа, который мрачен, фильм светел. Режиссёр меняет акценты: главный герой говорит меньше, а его вину передаёт взгляд. Экранизация сохраняет дух книги и не уступает роману. Некоторые сцены повторяют книгу, но финал другой: в романе герой уходит, тогда как в фильме остаётся. Критик пишет, что фильм не столько повторяет роман, сколько спорит с ним. По его мнению, так работают лучшие экранизации: они похожи на книгу, но живут своей жизнью. Книга и фильм говорят об одном, но по-разному. Он также отмечает музыкальное оформление и ракурс камеры. Он советует сначала прочесть роман, а потом смотреть фильм, чтобы увидеть, где режиссёр сделал свой выбор.",
+      "textoRom": "Krítik sravníl román i kinovérsiyu. V otlíchiye ot romána, kotóryy mrachén, fil'm svetél. Rezhissyór menyáyet aktsénty: glávnyy geróy govorít mén'she, a yegó vinú peredayót vzglyad. Ekranizátsiya sokhranyáyet dukh knígi i ne ustupáyet románu. Nekotóryye stsény povtoryáyut knígu, no finál drugóy: v románe geróy ukhódit, togdá kak v fíl'me ostayótsya. Krítik píshet, chto fil'm ne stól'ko povtoryáyet román, skól'ko spórit s nim. Po yegó mnéniyu, tak rabótayut lúchshiye ekranizátsii: oní pokhózhi na knígu, no zhivút svoyéy zhízn'yu. Kníga i fil'm govoryát ob odnóm, no po-ráznomu. On tákzhe otmecháyet muzykál'noye oformléniye i rakúrs kámery. On sovétuyet snáchala prochést' román, a potóm smotrét' fil'm, chtóby uvídet', gde rezhissyór sdélal svoy výbor.",
+      "opciones": [
+        "фильм не повторяет роман, но сохраняет его дух",
+        "фильм точно повторяет роман и его финал",
+        "фильм хуже романа, потому что в нём нет героя"
+      ],
+      "opcionesRom": [
+        "fil'm ne povtoryáyet román, no sokhranyáyet yegó dukh",
+        "fil'm tóchno povtoryáyet román i yegó finál",
+        "fil'm khúzhe romána, potomú chto v nyom net geroyá"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "El crítico escribe «фильм не столько повторяет роман, сколько спорит с ним» (fil'm ne stól'ko povtoryáyet román, skól'ko spórit s nim) y que la «экранизация сохраняет дух книги» (ekranizátsiya sokhranyáyet dukh knígi). Además el final es otro, así que no lo repite.",
+        "en": "The critic writes «фильм не столько повторяет роман, сколько спорит с ним» (fil'm ne stól'ko povtoryáyet román, skól'ko spórit s nim) and that the «экранизация сохраняет дух книги» (ekranizátsiya sokhranyáyet dukh knígi). The ending is also different, so it does not repeat it."
+      }
+    },
+    {
+      "id": "dx.ru.n10.lectura.3",
+      "nivel": 10,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el texto y elige qué concluye el autor del artículo.",
+        "en": "Read the text and choose what the author of the article concludes."
+      },
+      "texto": "Автору статьи приходится констатировать: на сегодняшний день вопрос остаётся открытым. Приходится признать, что в данном случае выборка слишком мала, а погрешность измерения велика. Не приходится сомневаться в одном: нужно увеличить объём выборки и проверить результаты ещё раз. Научный консультант просит сократить избыточное вступление и оставить за скобками второстепенные вопросы. Вычитка сделала текст короче, но главный вывод остался прежним: надёжных доказательств пока нет. Автор обещает вернуться к теме, когда будут новые данные. Он благодарен за помощь. Статья небольшая, но в ней есть ссылки на источники. Автор делает выводы осторожно и просит читателей быть осторожными. Оппонент отметил, что ограничения исследования описали честно, однако воспроизводимость остаётся под вопросом.",
+      "textoRom": "Ávtoru stat'í prikhóditsya konstatírovat': na segódnyashniy den' voprós ostayótsya otkrýtym. Prikhóditsya priznát', chto v dánnom slúchaye výborka slíshkom malá, a pogréshnost' izmeréniya veliká. Ne prikhóditsya somnevát'sya v odnóm: núzhno uvelíchit' ob\"yóm výborki i provérit' rezul'táty yeshchyó raz. Naúchnyy konsul'tánt prosít sokratít' izbýtochnoye vstupléniye i ostávit' za skóbkami vtorostepénnyye voprósy. Výchitka sdélala tekst koróche, no glávnyy vývod ostálsya prézhnim: nadyózhnykh dokazátel'stv poká net. Ávtor obeshcháyet vernút'sya k téme, kogdá búdut nóvyye dánnyye. On blagodáren za pómoshch'. Stat'yá nebol'sháya, no v ney yest' ssýlki na istóchniki. Ávtor délayet vývody ostorózhno i prosít chitáteley byt' ostorózhnymi. Opponént otmétil, chto ogranícheniya isslédovaniya opisáli chéstno, odnáko vosproizvodímost' ostayótsya pod voprósom.",
+      "opciones": [
+        "вопрос закрыт, доказательства очень надёжные",
+        "вопрос открыт, надёжных доказательств нет",
+        "вопрос решён, потому что выборка большая"
+      ],
+      "opcionesRom": [
+        "voprós zakrýt, dokazátel'stva óchen' nadyózhnyye",
+        "voprós otkrýt, nadyózhnykh dokazátel'stv net",
+        "voprós reshyón, potomú chto výborka bol'sháya"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "El autor «констатирует» (konstatíruyet) que el asunto «остаётся открытым» (ostayótsya otkrýtym): la muestra es pequeña, el error de medición grande y «надёжных доказательств пока нет» (nadyózhnykh dokazátel'stv póka net).",
+        "en": "The author «констатирует» (konstatíruyet) that the matter «остаётся открытым» (ostayótsya otkrýtym): the sample is small, the measurement error large and «надёжных доказательств пока нет» (nadyózhnykh dokazátel'stv póka net)."
+      }
+    },
+    {
+      "id": "dx.ru.n10.lectura.4",
+      "nivel": 10,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el texto y elige qué dice el autor del resumen de prensa.",
+        "en": "Read the text and choose what the author of the press review says."
+      },
+      "texto": "В обзоре прессы сравнили две газеты. В передовице первой газеты редакция прямо пишет: министр допустил ошибку. Вторая газета решила осветить то же событие иначе. Заголовок-интрига обещает: сенсация! Но в сводке новостей нет ни одного нового факта. Подзаголовок расставляет акценты по-своему: это не ошибка, а недоразумение. Автор обзора считает, что первая газета занимает чёткую позицию, тогда как вторая лишь привлекла внимание. Он также отмечает, что обе газеты приводят одни и те же цифры, но делают разные выводы. Читателю остаётся самому решить, какая газета убедительна. Автор писал обзор спокойно и без спешки. Редакционная позиция видна уже в заголовке. Он приводит по две цитаты из каждой передовицы.",
+      "textoRom": "V obzóre préssy sravníli dve gazéty. V peredovítse pérvoy gazéty redáktsiya pryámo píshet: minístr dopustíl oshíbku. Vtoráya gazéta reshíla osvetít' to zhe sobýtiye ináche. Zagolóvok-intríga obeshcháyet: sensátsiya! No v svódke novostéy net ni odnogó nóvogo fákta. Podzagolóvok rasstavlyáyet aktsénty po-svoyemú: éto ne oshíbka, a nedorazuméniye. Ávtor obzóra schitáyet, chto pérvaya gazéta zanimáyet chyótkuyu pozítsiyu, togdá kak vtoráya lish' privleklá vnimániye. On tákzhe otmecháyet, chto óbe gazéty privódyat odní i te zhe tsífry, no délayut ráznyye vývody. Chitátelyu ostayótsya sámomu reshít', kakáya gazéta ubeditél'na. Ávtor pisál obzór spokóyno i bez spéshki. Redaktsiónnaya pozítsiya vidná uzhé v zagolóvke. On privódit po dve tsitáty iz kázhdoy peredovítsy.",
+      "opciones": [
+        "обе газеты приводят разные цифры и делают одинаковые выводы",
+        "вторая газета прямо пишет, что министр допустил ошибку",
+        "первая газета занимает чёткую позицию, вторая лишь привлекла внимание"
+      ],
+      "opcionesRom": [
+        "óbe gazéty privódyat ráznyye tsífry i délayut odínakovyye vývody",
+        "vtoráya gazéta pryámo píshet, chto minístr dopustíl oshíbku",
+        "pérvaya gazéta zanimáyet chyótkuyu pozítsiyu, vtoráya lish' privleklá vnimániye"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "El autor dice que la primera gaceta toma «чёткую позицию» (chyótkuyu pozítsiyu) en la «передовица» (peredovítsa), mientras que la segunda «лишь привлекла внимание» (lish' privleklá vnimániye) con un «заголовок-интрига» (zagolóvok-intríga). Las dos usan las mismas cifras, pero sacan conclusiones distintas.",
+        "en": "The author says the first paper takes a «чёткую позицию» (chyótkuyu pozítsiyu) in its «передовица» (peredovítsa), while the second «лишь привлекла внимание» (lish' privleklá vnimániye) with a «заголовок-интрига» (zagolóvok-intríga). Both use the same figures but draw different conclusions."
+      }
+    },
+    {
+      "id": "dx.ru.n10.gramatica.1",
+      "nivel": 10,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige la palabra que completa la estructura.",
+        "en": "Choose the word that completes the structure."
+      },
+      "texto": "Речь идёт не ___ о страхе, сколько о вине.",
+      "textoRom": "Rech' idyót ne ___ o strákhe, skól'ko o viné.",
+      "opciones": [
+        "сколько",
+        "столько",
+        "только"
+      ],
+      "opcionesRom": [
+        "skól'ko",
+        "stól'ko",
+        "tól'ko"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "La estructura es «не столько… сколько…» (ne stól'ko… skól'ko…) (no tanto… como…): «Речь идёт не столько о страхе, сколько о вине» (Rech' idyót ne stól'ko o strákhe, skól'ko o viné). «не сколько» (ne skól'ko) y «не только… сколько» (ne tól'ko… skól'ko) no forman la pareja.",
+        "en": "The structure is «не столько… сколько…» (ne stól'ko… skól'ko…) (not so much… as…): «Речь идёт не столько о страхе, сколько о вине» (Rech' idyót ne stól'ko o strákhe, skól'ko o viné). «не сколько» (ne skól'ko) and «не только… сколько» (ne tól'ko… skól'ko) do not make the pair."
+      }
+    },
+    {
+      "id": "dx.ru.n10.gramatica.2",
+      "nivel": 10,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige la forma verbal correcta.",
+        "en": "Choose the correct verb form."
+      },
+      "texto": "Он шарахнулся от волны и чуть не ___ в воду.",
+      "textoRom": "On sharákhnulsya ot volný i chut' ne ___ v vódu.",
+      "opciones": [
+        "упал",
+        "упала",
+        "упали"
+      ],
+      "opcionesRom": [
+        "upál",
+        "upalá",
+        "upáli"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "«чуть не» (chut' ne) va con un pasado perfectivo y dice que algo estuvo a punto de pasar: «чуть не упал» (chut' ne upál) (casi se cae). «упала» (upalá) y «упали» (upáli) no concuerdan con «Он» (On).",
+        "en": "«чуть не» (chut' ne) goes with a perfective past and says something almost happened: «чуть не упал» (chut' ne upál) (he almost fell). «упала» (upalá) and «упали» (upáli) do not agree with «Он» (On)."
+      }
+    },
+    {
+      "id": "dx.ru.n10.gramatica.3",
+      "nivel": 10,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige la forma correcta con el verbo.",
+        "en": "Choose the correct form with the verb."
+      },
+      "texto": "В этой дискуссии автор примыкает ___.",
+      "textoRom": "V étoy diskússii ávtor primykáyet ___.",
+      "opciones": [
+        "с Кузнецовым",
+        "Кузнецова",
+        "к Кузнецову"
+      ],
+      "opcionesRom": [
+        "s Kuznetsóvym",
+        "Kuznetsóva",
+        "k Kuznetsóvu"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«примыкать к» (primykát' k) pide dativo: «примыкает к Кузнецову» (primykáyet k Kuznetsóvu) (se suma a Kuznetsov). Con «с» más instrumental o sin preposición este verbo no funciona.",
+        "en": "«примыкать к» (primykát' k) takes the dative: «примыкает к Кузнецову» (primykáyet k Kuznetsóvu) (sides with Kuznetsov). With «с» plus the instrumental or with no preposition this verb does not work."
+      }
+    },
+    {
+      "id": "dx.ru.n10.gramatica.4",
+      "nivel": 10,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige la forma correcta tras la preposición.",
+        "en": "Choose the correct form after the preposition."
+      },
+      "texto": "При ___ развитии событий мы выберем план Б.",
+      "textoRom": "Pri ___ razvítii sobýtiy my výberem plan B.",
+      "opciones": [
+        "неблагоприятное",
+        "неблагоприятном",
+        "неблагоприятные"
+      ],
+      "opcionesRom": [
+        "neblagopriyátnoye",
+        "neblagopriyátnom",
+        "neblagopriyátnyye"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«При» (pri) pide prepositivo, y adjetivo y sustantivo concuerdan: «При неблагоприятном развитии событий» (Pri neblagopriyátnom razvítii sobýtiy) (en caso de un desarrollo desfavorable). Nominativo singular y plural no sirven tras «при» (pri).",
+        "en": "«При» (pri) takes the prepositional, and adjective and noun agree: «При неблагоприятном развитии событий» (Pri neblagopriyátnom razvítii sobýtiy) (in case of an unfavorable course of events). Nominative singular and plural do not work after «при» (pri)."
+      }
+    },
+    {
+      "id": "dx.ru.n10.vocabulario.1",
+      "nivel": 10,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige el verbo que completa la frase.",
+        "en": "Choose the verb that completes the sentence."
+      },
+      "texto": "Текст слишком длинный, поэтому его нужно ___.",
+      "textoRom": "Tekst slíshkom dlínnyy, poetomú yegó núzhno ___.",
+      "opciones": [
+        "затормозить",
+        "перекрыть",
+        "сократить"
+      ],
+      "opcionesRom": [
+        "zatormozít'",
+        "perekrýt'",
+        "sokratít'"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«сократить» (sokratít') (acortar) es lo que se hace con un texto «избыточный» (izbýtochnyy) (excesivo). «затормозить» (zatormozít') (frenar) y «перекрыть» (perekrýt') (cortar el paso) no se aplican a un texto.",
+        "en": "«сократить» (sokratít') (to shorten) is what you do with an «избыточный» (izbýtochnyy) (excessive) text. «затормозить» (zatormozít') (to brake) and «перекрыть» (perekrýt') (to shut off) do not apply to a text."
+      }
+    },
+    {
+      "id": "dx.ru.n10.vocabulario.2",
+      "nivel": 10,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige el término que completa la definición.",
+        "en": "Choose the term that completes the definition."
+      },
+      "texto": "___ — это момент, когда доходы компании и её расходы совпадают.",
+      "textoRom": "___ — éto momént, kogdá dokhódy kompánii i yeyó raskhódy sovpadáyut.",
+      "opciones": [
+        "Валовая прибыль",
+        "Точка безубыточности",
+        "Срок погашения"
+      ],
+      "opcionesRom": [
+        "Valováya príbyl'",
+        "Tóchka bezubýtochnosti",
+        "Srok pogasheníya"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«точка безубыточности» (tóchka bezubýtochnosti) (punto de equilibrio) es el momento en que ingresos y gastos se igualan. «валовая прибыль» (valováya príbyl') (beneficio bruto) y «срок погашения» (srok pogasheníya) (plazo de amortización) son otra cosa.",
+        "en": "«точка безубыточности» (tóchka bezubýtochnosti) (break-even point) is the moment when income and costs are equal. «валовая прибыль» (valováya príbyl') (gross profit) and «срок погашения» (srok pogasheníya) (repayment term) are something else."
+      }
+    },
+    {
+      "id": "dx.ru.n10.vocabulario.3",
+      "nivel": 10,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige el adjetivo que describe el texto.",
+        "en": "Choose the adjective that describes the text."
+      },
+      "texto": "В этом тексте нет порядка и главной мысли: он очень ___.",
+      "textoRom": "V étom tékste net poryádka i glávnoy mýsli: on óchen' ___.",
+      "opciones": [
+        "сумбурный",
+        "выверенный",
+        "цельный"
+      ],
+      "opcionesRom": [
+        "sumbúrnyy",
+        "výverennyy",
+        "tsél'nyy"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "«сумбурный» (sumbúrnyy) (caótico) describe un texto con ideas que saltan y sin orden. «выверенный» (výverennyy) (muy pulido) y «цельный» (tsél'nyy) (coherente) dicen justo lo contrario.",
+        "en": "«сумбурный» (sumbúrnyy) (chaotic) describes a text whose ideas jump around with no order. «выверенный» (výverennyy) (carefully calibrated) and «цельный» (tsél'nyy) (coherent) say exactly the opposite."
+      }
+    },
+    {
+      "id": "dx.ru.n10.vocabulario.4",
+      "nivel": 10,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Elige el sustantivo que completa la frase.",
+        "en": "Choose the noun that completes the sentence."
+      },
+      "texto": "Плата за ввоз вещей — это ___.",
+      "textoRom": "Pláta za vvoz veshchéy — éto ___.",
+      "opciones": [
+        "памятка",
+        "пошлина",
+        "маркировка"
+      ],
+      "opcionesRom": [
+        "pámyatka",
+        "póshlina",
+        "markiróvka"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«пошлина» (póshlina) (arancel) es lo que se paga por traer mercancías: «платить пошлину» (platít' póshlinu). Una «памятка» (pámyatka) (folleto informativo) y una «маркировка» (markiróvka) (etiquetado) no se pagan.",
+        "en": "«пошлина» (póshlina) (duty) is what you pay for bringing goods in: «платить пошлину» (platít' póshlinu). A «памятка» (pámyatka) (information leaflet) and a «маркировка» (markiróvka) (labeling) are not paid."
+      }
+    },
+    {
+      "id": "dx.ru.n10.escritura.1",
+      "nivel": 10,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 3–4 frases: solicitud de crédito con monto, interés y plazo.",
+        "en": "Write 3–4 sentences: a loan request with amount, interest and term."
+      },
+      "aceptadas": [
+        "Мы запрашиваем кредит в размере пятисот тысяч рублей под двенадцать процентов годовых. Собственный взнос составляет сто тысяч рублей. Срок погашения — пять лет. Мы готовы предоставить обеспечение.",
+        "Прошу рассмотреть заявку на кредит в размере трёхсот тысяч рублей под десять процентов годовых. Срок погашения — три года. Собственный взнос составляет пятьдесят тысяч рублей. Заранее благодарю за ответ."
+      ],
+      "evidenciasEscritura": [
+        [
+          "кредит в размере"
+        ],
+        [
+          "процентов годовых"
+        ],
+        [
+          "срок погашения",
+          "собственный взнос"
+        ]
+      ],
+      "minimoPalabras": 25,
+      "maximoPalabras": 130,
+      "respuesta": "Мы запрашиваем кредит в размере пятисот тысяч рублей под двенадцать процентов годовых. Собственный взнос составляет сто тысяч рублей. Срок погашения — пять лет. Мы готовы предоставить обеспечение.",
+      "feedback": {
+        "es": "Pide con «кредит в размере…» (kredít v razmére…) y el monto, da la tasa con «процентов годовых» (protséntov godovýkh) y añade el «срок погашения» (srok pogasheníya) o el «собственный взнос» (sóbstvennyy vznos).",
+        "en": "Ask with «кредит в размере…» (kredít v razmére…) and the amount, give the rate with «процентов годовых» (protséntov godovýkh) and add the «срок погашения» (srok pogasheníya) or the «собственный взнос» (sóbstvennyy vznos)."
+      }
+    },
+    {
+      "id": "dx.ru.n10.escritura.2",
+      "nivel": 10,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 3–4 frases: reseña breve de una película, con comparación y opinión.",
+        "en": "Write 3–4 sentences: a short film review with comparison and opinion."
+      },
+      "aceptadas": [
+        "Я был на премьерном показе. В отличие от романа, драматургия фильма сильная, а актёрский ансамбль не уступает книге. По моему разумению, это кассовый успех. Мой вердикт — смотреть.",
+        "Фильм я посмотрел с интересом. В отличие от книги, он светел и динамичен, а музыкальное оформление очень удачно. На мой взгляд, актёрский ансамбль здесь лучшее, что есть."
+      ],
+      "evidenciasEscritura": [
+        [
+          "в отличие от"
+        ],
+        [
+          "по моему разумению",
+          "на мой взгляд"
+        ],
+        [
+          "актёрский ансамбль",
+          "музыкальное оформление"
+        ]
+      ],
+      "minimoPalabras": 25,
+      "maximoPalabras": 130,
+      "respuesta": "Я был на премьерном показе. В отличие от романа, драматургия фильма сильная, а актёрский ансамбль не уступает книге. По моему разумению, это кассовый успех. Мой вердикт — смотреть.",
+      "feedback": {
+        "es": "Compara con «в отличие от» (v otlíchiye ot), da tu juicio con «по моему разумению» (po moyemú razuméniyu) o «на мой взгляд» (na moy vzglyad) y nombra un rasgo como «актёрский ансамбль» (aktyórskiy ansámbl') o «музыкальное оформление» (muzykál'noye oformléniye).",
+        "en": "Compare with «в отличие от» (v otlíchiye ot), give your verdict with «по моему разумению» (po moyemú razuméniyu) or «на мой взгляд» (na moy vzglyad) and name a feature such as «актёрский ансамбль» (aktyórskiy ansámbl') or «музыкальное оформление» (muzykál'noye oformléniye)."
+      }
+    }
+  ]
+}
