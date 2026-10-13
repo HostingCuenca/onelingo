@@ -153,7 +153,7 @@ void main() {
     expect(nivelAlumnoEnRuta(ruta, alto), 6);
   });
 
-  test('el chino (versión esencial): ruta f0 (8 unidades) y solo N1–N2 publicados', () async {
+  test('el chino (versión esencial): ruta f0 (8 unidades) y solo N1–N4 publicados', () async {
     expect(idiomasSoloRutaF0, contains('zh'));
     await ContenidoJson.precargar('zh');
     expect(Fundamentos.disponible('zh'), isFalse); // nunca tuvo nivel-0.json
@@ -172,13 +172,13 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial: N1–N2 (50 clases por nivel); N3–N10 aún no existen
+    // Versión esencial: N1–N4 (50 clases por nivel); N5–N10 aún no existen
     // en el curso, así que la app los muestra «Próximamente» y no se juegan.
-    expect(publicados, ['f0', 'n1', 'n2']);
-    for (var i = 3; i <= 10; i++) {
+    expect(publicados, ['f0', 'n1', 'n2', 'n3', 'n4']);
+    for (var i = 5; i <= 10; i++) {
       expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
     }
-    expect(nivelPublicadoMaximo(ruta), 2);
+    expect(nivelPublicadoMaximo(ruta), 4);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
@@ -189,7 +189,7 @@ void main() {
         previa = u.id;
       }
     }
-    // La romanización llega intacta a las clases (N1–N2: visible).
+    // La romanización llega intacta a las clases (N1–N4: visible).
     final items = [
       for (final u in ruta.unidades)
         for (final p in u.pasos) ...p.items,
@@ -199,9 +199,9 @@ void main() {
     const s = ProgressState(idiomaMeta: 'zh', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);
     expect(s.nivel0Pendiente, isTrue);
-    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N2.
+    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N4.
     const alto = ProgressState(idiomaMeta: 'zh', nivelInicial: 8);
-    expect(nivelAlumnoEnRuta(ruta, alto), 2);
+    expect(nivelAlumnoEnRuta(ruta, alto), 4);
   });
 
   test('el japonés (versión esencial): ruta f0 (8 unidades) y solo N1–N4 publicados', () async {

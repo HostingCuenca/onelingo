@@ -12,7 +12,7 @@ import 'package:onelingo/shared/widgets/romanizacion.dart';
 /// Romanización de ru, ko, ja y zh (docs/claude-educacion/ROMANIZACION.md).
 /// Los JSON se leen directamente (borradores de Fundamentos y Nivel 0), sin
 /// pasar por `idiomasConNivel0`. El chino, el japonés, el ruso y el coreano ya
-/// están publicados (versión esencial: N1–N2; el ruso, el coreano y el japonés, N1–N4):
+/// están publicados (versión esencial: N1–N4):
 /// también se comprueba su ruta integrada en assets.
 const _noLatinos = ['ru', 'ko', 'ja', 'zh'];
 
@@ -142,7 +142,7 @@ void main() {
 
   for (final (idioma, fuente, unidades) in [
     for (final i in _noLatinos) (i, 'Fundamentos', () => _borrador(i)),
-    ('zh', 'Ruta publicada f0–N2', () => _rutaPublicada('zh')),
+    ('zh', 'Ruta publicada f0–N4', () => _rutaPublicada('zh')),
     ('ja', 'Ruta publicada f0–N4', () => _rutaPublicada('ja')),
     ('ru', 'Ruta publicada f0–N4', () => _rutaPublicada('ru')),
     ('ko', 'Ruta publicada f0–N4', () => _rutaPublicada('ko')),

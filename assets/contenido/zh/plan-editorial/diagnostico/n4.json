@@ -1,0 +1,546 @@
+{
+  "idioma": "zh",
+  "nivel": 4,
+  "review": {
+    "status": "GO",
+    "reviewer": "claude-integrador",
+    "date": "2026-10-12",
+    "notes": [
+      "Versión esencial N4 (HSK 3.0 B1). Léxico comprobado contra f0–N2 publicados + clases N3 y N4 de tools/contenido/ruta-zh (conocida_cjk); pinyin con sandhi en superficie según tools/ia/idiomas/zh.md (3+3 en cadena: todos menos el último a 2.º, solo ante otro 3.º; tono de diccionario ante hueco; bu neutro en potenciales); una sola respuesta defendible revisada ítem por ítem; posiciones repartidas.",
+      "12-10: alineado con la pasada final de las clases N4: nombres con tono en es/en (Wáng Lěi, Chén Liàng, Zhāng Hào, Lǐ Tāo), 路上 / 每天 / 小时候 juntos (lùshang, měitiān), consigna con «你» en tú. Sin erhua. Cobertura: no hay ítem propio para c43 (通过 … 来), c44 (不 是 … 吗？) ni c48 (一方面 … 另一方面); c45, c49 y c50 son de repaso/prueba.",
+      "12-10 (integración): revisado de nuevo ítem por ítem contra las clases N4 integradas en assets/contenido/zh/ruta (nombres con tono, 路上/每天/开车 juntos, sandhi 3+3 de superficie, sin erhua, consignas en tú, una sola respuesta defendible); validar_diagnostico.py --idioma zh OK. GO."
+    ]
+  },
+  "items": [
+    {
+      "id": "dx.zh.n4.escucha.1",
+      "nivel": 4,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige qué cree la persona que le pasó a Wáng Lěi.",
+        "en": "Listen and choose what the speaker thinks happened to Wáng Lěi."
+      },
+      "audio": "会议 已经 开始 半 个 小时 了，王 磊 还 没 到。他 从来 不 迟到，电话 也 没 人 接，肯定 是 路上 堵车 了。",
+      "opciones": [
+        "感冒 了",
+        "忘 了",
+        "堵车 了"
+      ],
+      "opcionesRom": [
+        "gǎnmào le",
+        "wàng le",
+        "dǔchē le"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "La deducción segura va con «肯定 是 …»: «肯定 是 路上 堵车 了», seguro que hay tráfico en el camino. No dice que esté enfermo ni que se le haya olvidado.",
+        "en": "A confident guess uses «肯定 是 …»: «肯定 是 路上 堵车 了», he must be stuck in traffic. The speaker does not say he is sick or that he forgot."
+      }
+    },
+    {
+      "id": "dx.zh.n4.escucha.2",
+      "nivel": 4,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige quién paga la reparación.",
+        "en": "Listen and choose who pays for fixing the faucet."
+      },
+      "audio": "厨房 的 水龙头 漏水 了。室友 想 自己 修，不过 按照 合同，修理 费 由 房东 承担，所以 我们 请 房东 明天 来 看 一下。",
+      "opciones": [
+        "室友",
+        "中介",
+        "房东"
+      ],
+      "opcionesRom": [
+        "shìyǒu",
+        "zhōngjiè",
+        "fángdōng"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«修理 费 由 房东 承担»: según el contrato (按照 合同), el arreglo lo paga el dueño del departamento. El compañero de departamento solo quería arreglarlo él mismo, y la agencia no se menciona.",
+        "en": "«修理 费 由 房东 承担»: according to the contract (按照 合同), the landlord pays for the repair. The roommate only wanted to fix it himself, and the agency is not mentioned."
+      }
+    },
+    {
+      "id": "dx.zh.n4.escucha.3",
+      "nivel": 4,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige cómo terminó la final.",
+        "en": "Listen and choose how the final ended."
+      },
+      "audio": "昨天 的 决赛 是 上海 队 对 北京 队。开始 的 时候 上海 队 打 得 很 好，可是 最后 北京 队 以 三 比 二 打败 了 上海 队。",
+      "opciones": [
+        "上海 队 赢 了",
+        "两 个 队 打平 了",
+        "北京 队 赢 了"
+      ],
+      "opcionesRom": [
+        "Shànghǎi duì yíng le",
+        "liǎng gè duì dǎpíng le",
+        "Běijīng duì yíng le"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«北京 队 以 三 比 二 打败 了 上海 队»: el equipo de Pekín ganó tres a dos. Shanghái solo jugó bien al principio (开始 的 时候), y no hubo empate.",
+        "en": "«北京 队 以 三 比 二 打败 了 上海 队»: the Beijing team won three to two. Shanghai only played well at the beginning (开始 的 时候), and it was not a tie."
+      }
+    },
+    {
+      "id": "dx.zh.n4.escucha.4",
+      "nivel": 4,
+      "habilidad": "escucha",
+      "formato": "escuchar",
+      "consigna": {
+        "es": "Escucha y elige qué come esta familia en el Año Nuevo chino.",
+        "en": "Listen and choose what this family eats for Chinese New Year."
+      },
+      "audio": "我们 家 过 春节 不 是 吃 饺子，而 是 吃 汤圆。北方 人 一般 吃 饺子，而 南方 人 更 喜欢 吃 汤圆。",
+      "opciones": [
+        "饺子",
+        "汤圆",
+        "粽子"
+      ],
+      "opcionesRom": [
+        "jiǎozi",
+        "tāngyuán",
+        "zòngzi"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«不 是 吃 饺子，而 是 吃 汤圆»: «不 是 A，而 是 B» corrige y da lo correcto, así que comen bolitas dulces de arroz. Los «饺子» son lo que se come en el norte.",
+        "en": "«不 是 吃 饺子，而 是 吃 汤圆»: «不 是 A，而 是 B» corrects and gives the right one, so they eat sweet rice balls. Dumplings are what people eat in the north."
+      }
+    },
+    {
+      "id": "dx.zh.n4.lectura.1",
+      "nivel": 4,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige qué dejó de hacer la persona cuando se mudó a la ciudad.",
+        "en": "Read and choose what the person stopped doing after moving to the city."
+      },
+      "texto": "我 曾经 在 农村 住 过 五 年。那 时候 我 家 有 一 个 大 院子，爷爷 养 了 一 只 狗。我 常常 跟 爷爷 在 河 里 钓鱼。后来 我们 搬 到 了 城市，我 再 也 不 钓鱼 了。现在 我 每天 坐 地铁 上班。跟 以前 相比，现在 的 生活 方便 多 了，不过 我 还 记得 那 段 自由 的 童年。",
+      "textoRom": "Wǒ céngjīng zài nóngcūn zhù guo wǔ nián. Nà shíhou wǒ jiā yǒu yí gè dà yuànzi, yéye yǎng le yì zhī gǒu. Wǒ chángcháng gēn yéye zài hé li diàoyú. Hòulái wǒmen bān dào le chéngshì, wǒ zài yě bú diàoyú le. Xiànzài wó měitiān zuò dìtiě shàngbān. Gēn yǐqián xiāngbǐ, xiànzài de shēnghuó fāngbiàn duō le, búguò wǒ hái jìde nà duàn zìyóu de tóngnián.",
+      "opciones": [
+        "坐 地铁",
+        "钓鱼",
+        "上班"
+      ],
+      "opcionesRom": [
+        "zuò dìtiě",
+        "diàoyú",
+        "shàngbān"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«再 也 不 + verbo + 了» es «ya no … nunca más»: «我 再 也 不 钓鱼 了». Tomar el metro e ir al trabajo es lo que hace ahora (现在 … 每天).",
+        "en": "«再 也 不 + verb + 了» means «never … anymore»: «我 再 也 不 钓鱼 了». Taking the subway to work is what the person does now (现在 … 每天)."
+      }
+    },
+    {
+      "id": "dx.zh.n4.lectura.2",
+      "nivel": 4,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige en cuánto tiempo va a resolver el banco el problema.",
+        "en": "Read and choose how soon the bank will deal with the problem."
+      },
+      "texto": "上 个 星期，我 的 银行卡 被 扣 了 两千 块。可是 我 根本 没 用 这 张 卡 买 过 东西，也 并 没有 给 别人 转账。我 给 银行 打 了 五 次 电话，连 一 次 都 没 人 接。今天 我 去 银行 申请 冻结 这 张 卡，柜员 说 会 在 三 个 工作日 内 处理。",
+      "textoRom": "Shàng gè xīngqī, wǒ de yínhángkǎ bèi kòu le liǎngqiān kuài. Kěshì wǒ gēnběn méi yòng zhè zhāng ká mǎi guo dōngxi, yě bìng méiyóu gěi biérén zhuǎnzhàng. Wó gěi yínháng dǎ le wǔ cì diànhuà, lián yí cì dōu méi rén jiē. Jīntiān wǒ qù yínháng shēnqǐng dòngjié zhè zhāng kǎ, guìyuán shuō huì zài sān gè gōngzuòrì nèi chúlǐ.",
+      "opciones": [
+        "三 个 工作日",
+        "五 天",
+        "一 个 星期"
+      ],
+      "opcionesRom": [
+        "sān gè gōngzuòrì",
+        "wǔ tiān",
+        "yí gè xīngqī"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "El plazo va con «在 + duración + 内»: «会 在 三 个 工作日 内 处理», en tres días hábiles. «五 次» son las llamadas y «上 个 星期», cuándo le cobraron.",
+        "en": "The deadline uses «在 + duration + 内»: «会 在 三 个 工作日 内 处理», within three working days. «五 次» is the number of calls and «上 个 星期» is when the money was taken."
+      }
+    },
+    {
+      "id": "dx.zh.n4.lectura.3",
+      "nivel": 4,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee el correo y elige por qué Chén Liàng solicita el puesto.",
+        "en": "Read the email and choose why Chén Liàng is applying for the job."
+      },
+      "texto": "王 经理，您 好！我 叫 陈 亮，在 银行 做 过 三 年 会计。我 既 会 英语，又 会 西班牙语，也 擅长 做 表格。我 之所以 申请 这 个 职位，是 因为 我 对 市场 很 感兴趣。请问 公司 是否 提供 住宿？如 有 问题，请 随时 联系 我。谢谢！",
+      "textoRom": "Wáng jīnglǐ, nín hǎo! Wǒ jiào Chén Liàng, zài yínháng zuò guo sān nián kuàijì. Wǒ jì huì Yīngyǔ, yòu huì Xībānyáyǔ, yě shàncháng zuò biǎogé. Wǒ zhīsuóyǐ shēnqǐng zhè gè zhíwèi, shì yīnwèi wǒ duì shìcháng hén gǎnxìngqù. Qǐngwèn gōngsī shìfǒu tígōng zhùsù? Rú yǒu wèntí, qǐng suíshí liánxì wǒ. Xièxie!",
+      "opciones": [
+        "会 西班牙语",
+        "对 市场 感兴趣",
+        "公司 提供 住宿"
+      ],
+      "opcionesRom": [
+        "huì Xībānyáyǔ",
+        "duì shìcháng gǎnxìngqù",
+        "gōngsī tígōng zhùsù"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "La causa va después de «之所以 …，是 因为 …»: «是 因为 我 对 市场 很 感兴趣». El español es una de sus habilidades, y el alojamiento es una pregunta (是否 提供 住宿？).",
+        "en": "The reason comes after «之所以 …，是 因为 …»: «是 因为 我 对 市场 很 感兴趣». Spanish is one of his skills, and housing is a question (是否 提供 住宿？)."
+      }
+    },
+    {
+      "id": "dx.zh.n4.lectura.4",
+      "nivel": 4,
+      "habilidad": "lectura",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Lee y elige qué les dijeron que no hicieran de ninguna manera.",
+        "en": "Read and choose what they were told never to do."
+      },
+      "texto": "这 次 自驾游，我们 租 了 一 辆 自动挡 的 车。租车 公司 说 每天 不 能 超过 三百 公里，还 要 交 两千 块 押金。他们 还 提醒 我们：这 条 路 限速 八十 公里，千万 别 超速，不然 要 罚款。路上 车 爆胎 了，幸好 有 备胎。",
+      "textoRom": "Zhè cì zìjiàyóu, wǒmen zū le yí liàng zìdòngdǎng de chē. Zūchē gōngsī shuō měitiān bù néng chāoguò sānbǎi gōnglǐ, hái yào jiāo liǎngqiān kuài yājīn. Tāmen hái tíxíng wǒmen: zhè tiáo lù xiànsù bāshí gōnglǐ, qiānwàn bié chāosù, bùrán yào fákuǎn. Lùshang chē bàotāi le, xìngháo yǒu bèitāi.",
+      "opciones": [
+        "超速",
+        "交 押金",
+        "租车"
+      ],
+      "opcionesRom": [
+        "chāosù",
+        "jiāo yājīn",
+        "zūchē"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "La advertencia fuerte es «千万 别 + verbo»: «千万 别 超速», no excedan el límite de velocidad por nada. Dejar un depósito y alquilar el carro es lo que sí hicieron.",
+        "en": "The strong warning is «千万 别 + verb»: «千万 别 超速», do not speed under any circumstances. Paying a deposit and renting the car are things they did."
+      }
+    },
+    {
+      "id": "dx.zh.n4.gramatica.1",
+      "nivel": 4,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: está tan ocupado que ni siquiera tiene tiempo para comer.",
+        "en": "Complete: he is so busy that he does not even have time to eat."
+      },
+      "texto": "我 太 忙 了，___ 吃 饭 的 时间 都 没有。",
+      "textoRom": "Wǒ tài máng le, ___ chī fàn de shíjiān dōu méiyǒu.",
+      "opciones": [
+        "跟",
+        "把",
+        "连"
+      ],
+      "opcionesRom": [
+        "gēn",
+        "bǎ",
+        "lián"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "«连 … 都 + negación» significa «ni siquiera»: «连 吃 饭 的 时间 都 没有». «跟» es «con» y «把» necesita un verbo de acción después.",
+        "en": "«连 … 都 + negative» means «not even»: «连 吃 饭 的 时间 都 没有». «跟» means «with», and «把» needs an action verb after it."
+      }
+    },
+    {
+      "id": "dx.zh.n4.gramatica.2",
+      "nivel": 4,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: la razón por la que estudia chino es que quiere trabajar en China.",
+        "en": "Complete: the reason he studies Chinese is that he wants to work in China."
+      },
+      "texto": "我 ___ 学 中文，是 因为 我 想 去 中国 工作。",
+      "textoRom": "Wǒ ___ xué Zhōngwén, shì yīnwèi wó xiǎng qù Zhōngguó gōngzuò.",
+      "opciones": [
+        "因为",
+        "之所以",
+        "所以"
+      ],
+      "opcionesRom": [
+        "yīnwèi",
+        "zhīsuóyǐ",
+        "suóyǐ"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "Cuando la causa va al final con «是 因为», la primera parte lleva «之所以»: «我 之所以 学 中文，是 因为 …». «因为» y «所以» no forman pareja con «是 因为».",
+        "en": "When the cause comes at the end with «是 因为», the first part takes «之所以»: «我 之所以 学 中文，是 因为 …». «因为» and «所以» do not pair with «是 因为»."
+      }
+    },
+    {
+      "id": "dx.zh.n4.gramatica.3",
+      "nivel": 4,
+      "habilidad": "gramatica",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: con el desarrollo de la ciudad, hay cada vez más carros.",
+        "en": "Complete: as the city develops, there are more and more cars."
+      },
+      "texto": "___ 城市 的 发展，路上 的 车 越来越 多 了。",
+      "textoRom": "___ chéngshì de fāzhǎn, lùshang de chē yuèláiyuè duō le.",
+      "opciones": [
+        "随着",
+        "连",
+        "由"
+      ],
+      "opcionesRom": [
+        "suízhe",
+        "lián",
+        "yóu"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "Un cambio que acompaña a otro se dice con «随着 + … 的 发展，…»: «随着 城市 的 发展，路上 的 车 越来越 多 了». «连» necesita «都» y «由» presenta a quien se encarga de algo.",
+        "en": "A change that goes along with another uses «随着 + … 的 发展，…»: «随着 城市 的 发展，路上 的 车 越来越 多 了». «连» needs «都», and «由» introduces who is in charge of something."
+      }
+    },
+    {
+      "id": "dx.zh.n4.gramatica.4",
+      "nivel": 4,
+      "habilidad": "gramatica",
+      "formato": "elegir",
+      "consigna": {
+        "es": "Elige la frase correcta: si no fuera porque me lo recordaste, habría llegado tarde.",
+        "en": "Choose the correct sentence: if you had not reminded me, I would have been late."
+      },
+      "opciones": [
+        "要 不 是 你 提醒 我，我 就 迟到 了。",
+        "要 是 不 你 提醒 我，我 就 迟到 了。",
+        "你 提醒 我 要 不 是，我 就 迟到 了。"
+      ],
+      "opcionesRom": [
+        "Yào bú shì nǐ tíxíng wǒ, wǒ jiù chídào le.",
+        "Yào shì bù nǐ tíxíng wǒ, wǒ jiù chídào le.",
+        "Nǐ tíxíng wǒ yào bú shì, wǒ jiù chídào le."
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "La estructura es «要 不 是 + lo que pasó，… 就 … 了», con «要 不 是» al principio y en ese orden: «要 不 是 你 提醒 我，我 就 迟到 了».",
+        "en": "The pattern is «要 不 是 + what happened，… 就 … 了», with «要 不 是» at the start and in that order: «要 不 是 你 提醒 我，我 就 迟到 了»."
+      }
+    },
+    {
+      "id": "dx.zh.n4.vocabulario.1",
+      "nivel": 4,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: se arrepiente de no haberle pedido perdón antes.",
+        "en": "Complete: they regret not apologizing to her sooner."
+      },
+      "texto": "我 现在 很 ___，当时 应该 早 一点 跟 她 道歉。",
+      "textoRom": "Wǒ xiànzài hěn ___, dāngshí yīnggāi zǎo yìdiǎn gēn tā dàoqiàn.",
+      "opciones": [
+        "佩服",
+        "后悔",
+        "盼望"
+      ],
+      "opcionesRom": [
+        "pèifu",
+        "hòuhuǐ",
+        "pànwàng"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«当时 应该 …» muestra que se lamenta de algo que no hizo: «我 现在 很 后悔». «佩服» es admirar a alguien y «盼望», esperar con ilusión.",
+        "en": "«当时 应该 …» shows regret about something not done: «我 现在 很 后悔». «佩服» means to admire someone, and «盼望» means to look forward to something."
+      }
+    },
+    {
+      "id": "dx.zh.n4.vocabulario.2",
+      "nivel": 4,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: perdió la tarjeta de crédito y va al banco a reportarla.",
+        "en": "Complete: they lost their credit card and are going to the bank to report it."
+      },
+      "texto": "我 的 信用卡 丢 了，要 马上 去 银行 ___。",
+      "textoRom": "Wǒ de xìnyòngkǎ diū le, yào mǎshàng qù yínháng ___.",
+      "opciones": [
+        "退货",
+        "续租",
+        "挂失"
+      ],
+      "opcionesRom": [
+        "tuìhuò",
+        "xùzū",
+        "guàshī"
+      ],
+      "respuesta": 2,
+      "feedback": {
+        "es": "Si pierdes una tarjeta, la reportas en el banco: «去 银行 挂失». «退货» es devolver una compra y «续租», renovar un alquiler.",
+        "en": "If you lose a card, you report it at the bank: «去 银行 挂失». «退货» means to return a purchase, and «续租» means to renew a lease."
+      }
+    },
+    {
+      "id": "dx.zh.n4.vocabulario.3",
+      "nivel": 4,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: viviste diez años en China; con razón hablas tan bien.",
+        "en": "Complete: you lived in China for ten years, no wonder you speak so well."
+      },
+      "texto": "你 在 中国 住 过 十 年，___ 你 的 中文 这么 好！",
+      "textoRom": "Nǐ zài Zhōngguó zhù guo shí nián, ___ nǐ de Zhōngwén zhème hǎo!",
+      "opciones": [
+        "恐怕",
+        "难怪",
+        "千万"
+      ],
+      "opcionesRom": [
+        "kǒngpà",
+        "nánguài",
+        "qiānwàn"
+      ],
+      "respuesta": 1,
+      "feedback": {
+        "es": "«难怪» es «con razón»: ya sabes la causa (diez años en China) y entiendes el resultado. «恐怕» expresa temor y «千万» va con advertencias (千万 别 …).",
+        "en": "«难怪» means «no wonder»: you know the cause (ten years in China) and understand the result. «恐怕» expresses worry, and «千万» goes with warnings (千万 别 …)."
+      }
+    },
+    {
+      "id": "dx.zh.n4.vocabulario.4",
+      "nivel": 4,
+      "habilidad": "vocabulario",
+      "formato": "completar",
+      "consigna": {
+        "es": "Completa: Zhāng Hào se encarga del diseño y Lǐ Tāo, de las ventas.",
+        "en": "Complete: Zhāng Hào handles design and Lǐ Tāo handles sales."
+      },
+      "texto": "张 浩 和 李 涛 ___ 负责 设计 和 销售。",
+      "textoRom": "Zhāng Hào hé Lǐ Tāo ___ fùzé shèjì hé xiāoshòu.",
+      "opciones": [
+        "分别",
+        "以免",
+        "之所以"
+      ],
+      "opcionesRom": [
+        "fēnbié",
+        "yímiǎn",
+        "zhīsuóyǐ"
+      ],
+      "respuesta": 0,
+      "feedback": {
+        "es": "«分别» indica que cada uno se encarga de lo suyo, en el mismo orden: Zhāng Hào del diseño y Lǐ Tāo de las ventas. «以免» es «para no» y «之所以» va con «是 因为».",
+        "en": "«分别» shows that each person handles their own part, in the same order: Zhāng Hào design and Lǐ Tāo sales. «以免» means «so as not to», and «之所以» goes with «是 因为»."
+      }
+    },
+    {
+      "id": "dx.zh.n4.escritura.1",
+      "nivel": 4,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases: algo que ya no haces (不 再) y compáralo con antes (跟 以前 相比).",
+        "en": "Write 2–3 sentences: something you no longer do (不 再), compared with before (跟 以前 相比)."
+      },
+      "respuesta": "我 小时候 曾经 在 农村 住 过 三 年，那 时候 常常 跟 朋友 在 院子 里 玩。现在 我 不 再 住 在 农村 了。跟 以前 相比，现在 的 生活 方便 多 了。",
+      "aceptadas": [
+        "以前 我 每天 都 骑 自行车 上学，现在 不 再 骑 了。跟 以前 相比，我 现在 更 忙 了。",
+        "我 曾经 在 上海 住 过 两 年，那 时候 常常 去 饭馆 吃 饭。现在 我 再 也 不 去 了。跟 那 时候 相比，我 现在 很 少 出去 吃 饭。"
+      ],
+      "evidenciasEscritura": [
+        [
+          "曾经 在",
+          "曾经 住",
+          "曾经 去",
+          "曾经 是",
+          "曾经 有",
+          "曾经 学",
+          "那 时候",
+          "小 时候",
+          "以前 我",
+          "过去 我",
+          "我 以前",
+          "我 过去"
+        ],
+        [
+          "不 再",
+          "再 也 不",
+          "再 也 没"
+        ],
+        [
+          "跟 以前 相比",
+          "和 以前 相比",
+          "跟 小时候 相比",
+          "和 小时候 相比",
+          "跟 过去 相比",
+          "和 过去 相比",
+          "跟 那 时候 相比",
+          "和 那 时候 相比",
+          "不 如 以前",
+          "不 如 过去"
+        ]
+      ],
+      "minimoPalabras": 20,
+      "maximoPalabras": 150,
+      "feedback": {
+        "es": "Di qué hacías antes («曾经 …», «那 时候 …»), qué ya no haces con «不 再 … 了» y compara con «跟 以前 相比，…».",
+        "en": "Say what you used to do («曾经 …», «那 时候 …»), what you no longer do with «不 再 … 了», and compare with «跟 以前 相比，…»."
+      }
+    },
+    {
+      "id": "dx.zh.n4.escritura.2",
+      "nivel": 4,
+      "habilidad": "escritura",
+      "formato": "escribir",
+      "consigna": {
+        "es": "Escribe 2–3 frases: un deseo con «要是 … 就 好 了» y un lamento con «早 知道 …，… 就 …».",
+        "en": "Write 2–3 sentences: a wish with «要是 … 就 好 了» and a regret with «早 知道 …，… 就 …»."
+      },
+      "respuesta": "要是 我 会 开车 就 好 了。早 知道 今天 会 下雨，我 就 带 雨伞 了。",
+      "aceptadas": [
+        "早 知道 这么 贵，我 就 不 买 了。要是 我 有 更 多 钱 就 好 了。",
+        "要是 能 常常 见 到 你 就 好 了。早 知道 你 今天 不 忙，我 就 给 你 打 电话 了。"
+      ],
+      "evidenciasEscritura": [
+        [
+          "要是 我",
+          "要是 能",
+          "要是 你",
+          "要是 有",
+          "要是 我们",
+          "要是 他",
+          "要是 她",
+          "要是 明天",
+          "要是 今天"
+        ],
+        [
+          "就 好 了"
+        ],
+        [
+          "早 知道"
+        ],
+        [
+          "我 就",
+          "就 不",
+          "就 会",
+          "就 带",
+          "就 去",
+          "就 买",
+          "就 给",
+          "就 早"
+        ]
+      ],
+      "minimoPalabras": 20,
+      "maximoPalabras": 150,
+      "feedback": {
+        "es": "El deseo va con «要是 … 就 好 了» («要是 我 会 开车 就 好 了») y el lamento, con «早 知道 …，我 就 … 了».",
+        "en": "The wish uses «要是 … 就 好 了» («要是 我 会 开车 就 好 了»), and the regret uses «早 知道 …，我 就 … 了»."
+      }
+    }
+  ]
+}
