@@ -15,14 +15,24 @@ void main() {
     ruta = (await CargadorRuta().cargar('en'))!;
   });
 
-  test('la prueba cubre todo el nivel con formatos que se corrigen solos', () {
+  test('la prueba es exigente: 90 %, todo el nivel, escuchar y escribir', () {
+    expect(
+      aciertosPruebaNivel / preguntasPruebaNivel,
+      greaterThanOrEqualTo(0.9),
+    );
     for (final nivel in ['n1', 'n5', 'n10']) {
       final items = itemsPruebaNivel(ruta, nivel, Random(1));
       expect(items, hasLength(preguntasPruebaNivel), reason: nivel);
       expect(items.map((i) => i.id).toSet(), hasLength(items.length));
+      final formatos = items.map((i) => i.formato).toList();
+      // Se oye y se produce: elegir y relacionar (que se aciertan por
+      // descarte) solo entran si un tramo no tiene otra cosa.
+      int n(FormatoItem f) => formatos.where((x) => x == f).length;
+      expect(n(FormatoItem.escuchar), greaterThanOrEqualTo(5), reason: nivel);
+      expect(n(FormatoItem.escribir), greaterThanOrEqualTo(3), reason: nivel);
       expect(
-        items.where((i) => i.formato == FormatoItem.escribir),
-        isEmpty,
+        n(FormatoItem.elegir) + n(FormatoItem.relacionar),
+        lessThanOrEqualTo(2),
         reason: nivel,
       );
       // Cada intento sale distinto: no se puede memorizar.
@@ -76,7 +86,38 @@ void main() {
     final fr = (await CargadorRuta().cargar('fr'))!;
     final n1 = fr.curso.niveles.firstWhere((n) => n.nivelInterno == 1);
     final items = itemsPruebaNivel(fr, n1.id, Random(3));
-    expect(items, isNotEmpty);
-    expect(items.where((i) => i.formato == FormatoItem.escribir), isEmpty);
+    expect(items, hasLength(preguntasPruebaNivel));
+    expect(items.where((i) => i.formato == FormatoItem.escribir), isNotEmpty);
+  });
+
+  test('tras suspender hay que esperar para repetirla', () {
+    final clave = ClaveRuta.pruebaNivel('en', 'n1');
+    final intento = DateTime(2026, 10, 13, 9);
+    Map<String, dynamic> con(bool aprobada) => {
+      clave: {'aprobada': aprobada, 'fecha': intento.toIso8601String()},
+    };
+    expect(pruebaNivelDisponibleDesde(const {}, 'en', 'n1'), isNull);
+    expect(
+      pruebaNivelDisponibleDesde(
+        con(false),
+        'en',
+        'n1',
+        ahora: intento.add(const Duration(hours: 1)),
+      ),
+      intento.add(esperaPruebaNivel),
+    );
+    expect(
+      pruebaNivelDisponibleDesde(
+        con(false),
+        'en',
+        'n1',
+        ahora: intento.add(esperaPruebaNivel),
+      ),
+      isNull,
+    );
+    expect(
+      pruebaNivelDisponibleDesde(con(true), 'en', 'n1', ahora: intento),
+      isNull,
+    );
   });
 }

@@ -67,6 +67,8 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
         'nivel': widget.nivel,
         'aciertos': aciertos,
         'total': items.length,
+        // La espera para repetirla cuenta desde aquí (registrarPractica
+        // guarda la fecha del intento).
         // Una vez aprobada queda aprobada aunque se repita después.
         'aprobada':
             aprobada ||
@@ -118,51 +120,78 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
     );
   }
 
-  Widget _intro(RutaCargada ruta, String nombreNivel) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Expanded(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
-          children: [
-            const Icon(
-              Icons.workspace_premium_rounded,
-              color: OL.morado,
-              size: 64,
-            ),
-            const SizedBox(height: 12),
-            Text(
-              tr('¿Ya dominas {nivel}?', {'nivel': nombreNivel}),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              tr(
-                '{preguntas} preguntas de todo el nivel. Con '
-                '{aciertos} aciertos lo das por superado y pasas al '
-                'siguiente. Si no llegas, sigues aprendiendo donde estás: no '
-                'pierdes nada y puedes intentarlo otra vez.',
-                {
-                  'preguntas': preguntasPruebaNivel,
-                  'aciertos': aciertosPruebaNivel,
-                },
+  Widget _intro(RutaCargada ruta, String nombreNivel) {
+    final espera = pruebaNivelDisponibleDesde(
+      ref.read(progressProvider).practicas,
+      ruta.curso.idioma,
+      widget.nivel,
+    )?.toLocal();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+            children: [
+              const Icon(
+                Icons.workspace_premium_rounded,
+                color: OL.morado,
+                size: 64,
               ),
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 16, height: 1.45),
-            ),
-          ],
+              const SizedBox(height: 12),
+              Text(
+                tr('¿Ya dominas {nivel}?', {'nivel': nombreNivel}),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                tr(
+                  '{preguntas} preguntas de todo el nivel: escuchar, escribir '
+                  'y gramática. Necesitas {aciertos} aciertos para darlo por '
+                  'superado y pasar al siguiente. Si no llegas, sigues '
+                  'aprendiendo donde estás y puedes repetirla en {horas} horas.',
+                  {
+                    'preguntas': preguntasPruebaNivel,
+                    'aciertos': aciertosPruebaNivel,
+                    'horas': esperaPruebaNivel.inHours,
+                  },
+                ),
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 16, height: 1.45),
+              ),
+              if (espera != null) ...[
+                const SizedBox(height: 16),
+                Text(
+                  tr('Podrás repetirla a partir del {fecha} a las {hora}.', {
+                    'fecha': '${espera.day}/${espera.month}',
+                    'hora':
+                        '${espera.hour}:${espera.minute.toString().padLeft(2, '0')}',
+                  }),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: OL.naranja,
+                  ),
+                ),
+              ],
+            ],
+          ),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        child: BotonPrincipal(
-          onPressed: () => _empezar(ruta),
-          child: Text(tr('EMPEZAR LA PRUEBA')),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: BotonPrincipal(
+            onPressed: espera == null ? () => _empezar(ruta) : null,
+            child: Text(tr('EMPEZAR LA PRUEBA')),
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 
   Widget _pregunta(RutaCargada ruta, ProgressState s) {
     final item = items[indice];
@@ -265,8 +294,11 @@ class _PruebaNivelRutaScreenState extends ConsumerState<PruebaNivelRutaScreen> {
                         'Este nivel queda superado y se abre el siguiente. Sus clases siguen disponibles para repasar.',
                       )
                     : tr(
-                        'Necesitas {aciertos}. Sigue con las clases del nivel: cada una te acerca, y puedes repetir la prueba cuando quieras.',
-                        {'aciertos': aciertosPruebaNivel},
+                        'Necesitas {aciertos}. Sigue con las clases del nivel: cada una te acerca, y podrás repetir la prueba en {horas} horas.',
+                        {
+                          'aciertos': aciertosPruebaNivel,
+                          'horas': esperaPruebaNivel.inHours,
+                        },
                       ),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16, height: 1.45),

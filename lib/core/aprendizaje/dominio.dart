@@ -302,21 +302,36 @@ Set<String> vocabularioConocido(RutaCargada ruta, String unidadId) => {
     for (final v in ruta.unidad(id)?.vocabulario ?? const <Vocablo>[]) v.texto,
 };
 
-/// Preguntas de la prueba de un nivel y aciertos para aprobarla.
-const preguntasPruebaNivel = 20;
-const aciertosPruebaNivel = 16;
+/// Preguntas de la prueba de un nivel y aciertos para aprobarla (90 %).
+/// Antes eran 16 de 20 sin escritura y se repetía al instante: se pasaba
+/// de nivel acertando por descarte.
+const preguntasPruebaNivel = 30;
+const aciertosPruebaNivel = 27;
 
-/// Formatos que se corrigen solos (la producción libre queda fuera).
+/// Espera tras suspender la prueba antes de poder repetirla.
+const esperaPruebaNivel = Duration(hours: 12);
+
+/// Formatos que se corrigen solos, incluida la escritura (con rúbrica).
 const _formatosPrueba = {
   FormatoItem.elegir,
   FormatoItem.escuchar,
   FormatoItem.completar,
   FormatoItem.ordenar,
   FormatoItem.relacionar,
+  FormatoItem.escribir,
 };
 
+/// Reparto de habilidades: cada tramo pide, por turno, comprensión
+/// auditiva, producción escrita o gramática (completar/ordenar). Elegir y
+/// relacionar quedan de reserva: se aciertan por descarte.
+const _turnosPrueba = [
+  {FormatoItem.escuchar},
+  {FormatoItem.escribir},
+  {FormatoItem.completar, FormatoItem.ordenar},
+];
+
 /// Prueba de un nivel: una pregunta de evaluación de cada tramo del nivel
-/// (20 tramos de clases seguidas), al azar en cada intento, para que cubra
+/// (30 tramos de clases seguidas), al azar en cada intento, para que cubra
 /// todo el nivel y no se pueda memorizar.
 List<Item> itemsPruebaNivel(RutaCargada ruta, String nivel, Random rnd) {
   final unidades = ruta.delNivel(nivel);
@@ -331,11 +346,43 @@ List<Item> itemsPruebaNivel(RutaCargada ruta, String nivel, Random rnd) {
         for (final (_, i) in u.itemsDe(TipoPaso.evaluacion))
           if (_formatosPrueba.contains(i.formato)) i,
     ];
-    if (candidatos.isNotEmpty) {
-      res.add(candidatos[rnd.nextInt(candidatos.length)]);
-    }
+    if (candidatos.isEmpty) continue;
+    final turno = _turnosPrueba[t % _turnosPrueba.length];
+    final preferidos = [
+      for (final i in candidatos)
+        if (turno.contains(i.formato)) i,
+    ];
+    final exigentes = [
+      for (final i in candidatos)
+        if (i.formato != FormatoItem.elegir &&
+            i.formato != FormatoItem.relacionar)
+          i,
+    ];
+    final pool = preferidos.isNotEmpty
+        ? preferidos
+        : exigentes.isNotEmpty
+        ? exigentes
+        : candidatos;
+    res.add(pool[rnd.nextInt(pool.length)]);
   }
+  res.shuffle(rnd);
   return res;
+}
+
+/// Hasta cuándo hay que esperar para repetir una prueba suspendida
+/// (null = se puede hacer ya).
+DateTime? pruebaNivelDisponibleDesde(
+  Map<String, dynamic> practicas,
+  String idioma,
+  String nivel, {
+  DateTime? ahora,
+}) {
+  final r = practicas[ClaveRuta.pruebaNivel(idioma, nivel)] as Map?;
+  if (r == null || r['aprobada'] == true) return null;
+  final fecha = DateTime.tryParse('${r['fecha'] ?? ''}');
+  if (fecha == null) return null;
+  final desde = fecha.add(esperaPruebaNivel);
+  return desde.isAfter(ahora ?? DateTime.now()) ? desde : null;
 }
 
 bool pruebaNivelAprobada(
