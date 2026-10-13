@@ -24,7 +24,12 @@ import uuid
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 TOMAS = [('eleven_flash_v2_5', 0), ('eleven_v3', 0), ('eleven_flash_v2_5', 1), ('eleven_v3', 1), ('eleven_multilingual_v2', 0)]
-AJUSTES = {'stability': 0.5, 'similarity_boost': 0.75, 'style': 0.2, 'use_speaker_boost': True}
+# Una vocal suelta sale a menudo como interjección («Ah?», «Hã?») u otra palabra («Okey»):
+# más tomas, y solo vale la vocal tal cual.
+TOMAS_VOCAL = TOMAS + [('eleven_flash_v2_5', 2), ('eleven_v3', 2), ('eleven_flash_v2_5', 3)]
+# Lo corto se sintetiza estable y sin estilo: menos entonación de pregunta o sorpresa.
+AJUSTES = {'stability': 1.0, 'similarity_boost': 0.8, 'style': 0.0, 'use_speaker_boost': True}
+VOCALES = set('aeiouyáéíóúàèìòùâêîôûäöüãõ')
 
 
 def clave():
@@ -78,15 +83,38 @@ def comparable(s):
     return re.sub(r'[\s\W_]', '', s)
 
 
+def sin_acento(s):
+    return ''.join(c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn')
+
+
+def aceptables(caso):
+    acept = {comparable(e) for e in caso['esperado']}
+    for e in list(acept):
+        if len(e) == 1 and e in VOCALES:  # la vocal tal cual: «a», «ah»
+            base = sin_acento(e)
+            acept |= {base, base + 'h'}
+    return acept
+
+
 def coincide(caso, oido):
+    # Pregunta, exclamación o palabras de más: no es la vocal o la letra tal cual.
+    if re.search(r'[?!¿¡？！]', oido):
+        return False
+    if len(oido.split()) > max(len(e.split()) for e in caso['esperado']):
+        return False
     o = comparable(oido)
-    return bool(o) and any(o == comparable(e) for e in caso['esperado'])
+    return bool(o) and (o in aceptables(caso) or sin_acento(o) in aceptables(caso))
+
+
+def es_vocal(caso):
+    n = comparable(caso['normalizado'])
+    return len(n) == 1 and (n in VOCALES or n in 'аеёиоуыэюяアイウエオあいうえお아어오우으이애에')
 
 
 def procesar(caso, salida):
     destino = os.path.join(salida, caso['hash'] + '.mp3')
     tomas = []
-    for modelo, n in TOMAS:
+    for modelo, n in (TOMAS_VOCAL if es_vocal(caso) else TOMAS):
         try:
             mp3 = sintetizar(caso['normalizado'], caso['voz_id'], caso['idioma'], modelo)
             oido = transcribir(mp3, caso['idioma'])
@@ -94,6 +122,7 @@ def procesar(caso, salida):
             tomas.append({'modelo': modelo, 'error': str(e)[:120]})
             continue
         tomas.append({'modelo': modelo, 'toma': n, 'oido': oido, 'mp3': mp3})
+        # La API no guarda semilla: cada llamada es una toma distinta aunque el texto se repita.
         # Las cifras se transcriben como cifra o como palabra: basta la primera toma.
         if coincide(caso, oido) or re.fullmatch(r'\d+', comparable(caso['normalizado'])):
             break
@@ -102,8 +131,9 @@ def procesar(caso, salida):
         return {**caso, 'estado': 'error', 'tomas': tomas}
     elegida = next((t for t in buenas if coincide(caso, t['oido'])), None)
     estado = 'verificado' if elegida else 'sin_verificar'
-    # Sin coincidencia: la de v3 (la que mejor pronuncia sílabas sueltas) o la primera.
-    elegida = elegida or next((t for t in buenas if t['modelo'] == 'eleven_v3'), buenas[0])
+    # Sin coincidencia: una sin tono de pregunta, mejor de v3 (pronuncia mejor las sílabas sueltas).
+    llanas = [t for t in buenas if t['oido'] and not re.search(r'[?!¿¡？！]', t['oido'])] or buenas
+    elegida = elegida or next((t for t in llanas if t['modelo'] == 'eleven_v3'), llanas[0])
     with open(destino, 'wb') as f:
         f.write(elegida['mp3'])
     resumen = [{k: v for k, v in t.items() if k != 'mp3'} for t in tomas]

@@ -83,8 +83,9 @@ for (const idioma of IDIOMAS) {
       if (typeof x !== 'string' || !x.trim()) return;
       if (enN0 && LETRAS_N0.has(clave)) return anotar(idioma, x, voz, 'letra');
       // Como `decir` (palabra_color.dart): solo letras sueltas → por su nombre.
+      if (!(enN0 ? VOZ_N0 : VOZ).has(clave)) return; // ids, sonidos, colores: no se oyen
       if (enN0 && soloLetras(plano(x))) return anotar(idioma, plano(x), voz, 'letra');
-      if ((enN0 ? VOZ_N0 : VOZ).has(clave)) anotar(idioma, enN0 ? plano(x) : x, voz);
+      anotar(idioma, enN0 ? plano(x) : x, voz);
     };
     recorrer(JSON.parse(readFileSync(f, 'utf8')));
   }
