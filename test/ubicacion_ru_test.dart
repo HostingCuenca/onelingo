@@ -17,10 +17,10 @@ import 'package:onelingo/features/course/levels_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Prueba de ubicación v2 del ruso (versión esencial): banco real
-/// `assets/contenido/ru/diagnostico-v2.json`, N1–N2, apoyo {es, en} y
+/// `assets/contenido/ru/diagnostico-v2.json`, N1–N4, apoyo {es, en} y
 /// romanización (`textoRom`, `opcionesRom`) en cada texto y opción en ruso
 /// (cirílico sin marcas de acento; el acento va solo en el rom).
-/// Nunca ubica por encima de N2 (último nivel con clases publicadas).
+/// Nunca ubica por encima de N4 (último nivel con clases publicadas).
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final json =
@@ -29,17 +29,17 @@ void main() {
   final banco = ItemUbicacion.bancoLocalizado(json, 'es');
   final cirilico = RegExp(r'[А-Яа-яЁё]');
 
-  test('El banco cubre N1–N2 en las cinco habilidades y nada más', () {
+  test('El banco cubre N1–N4 en las cinco habilidades y nada más', () {
     expect(json['idioma'], 'ru');
-    expect(banco, hasLength(36));
-    for (var n = 1; n <= 2; n++) {
+    expect(banco, hasLength(72));
+    for (var n = 1; n <= 4; n++) {
       for (final h in [...habilidadesUbicacion, 'escritura']) {
         final k = banco.where((i) => i.nivel == n && i.habilidad == h).length;
         expect(k, h == 'escritura' ? 2 : 4, reason: 'N$n $h');
       }
     }
-    expect(banco.where((i) => i.nivel > 2), isEmpty);
-    expect(nivelMaximoUbicacion(banco), 2);
+    expect(banco.where((i) => i.nivel > 4), isEmpty);
+    expect(nivelMaximoUbicacion(banco), 4);
   });
 
   test('Apoyo en español latino y en inglés según la interfaz', () {
@@ -69,7 +69,7 @@ void main() {
         expect(it.texto, isNull, reason: it.id);
       }
     }
-    expect(banco.where((u) => u.item.tieneRom), hasLength(32));
+    expect(banco.where((u) => u.item.tieneRom), hasLength(64));
     // El cirílico nunca lleva marca de acento (U+0301): el acento va solo en
     // el rom. Ninguna cifra ni símbolo en lo que se lee o se oye, y sin Lumo.
     final prohibido = RegExp('[\u0301₽%0-9]');
@@ -144,29 +144,76 @@ void main() {
       corregir(n2, 'Утром я дома. Днём я в офисе. Потом я в парке.', 'ru'),
       isFalse,
     );
+    // N3: lo ya logrado (уже) y lo pendiente (ещё не), con ё ≡ е.
+    final n3 = banco.firstWhere((u) => u.item.id == 'dx.ru.n3.escritura.1').item;
+    expect(
+      corregir(n3, 'Я уже нашла работу и наконец сдала экзамен. Но квартиру я ещё не нашла.', 'ru'),
+      isTrue,
+    );
+    expect(
+      corregir(n3, 'я уже нашел работу и наконец сдал экзамен но я еще не нашел квартиру', 'ru'),
+      isTrue,
+    );
+    // Sin nada pendiente no cumple.
+    expect(
+      corregir(n3, 'Я уже нашёл работу и наконец сдал экзамен. Я живу у сестры.', 'ru'),
+      isFalse,
+    );
+    expect(corregir(n3, 'Я уже нашёл работу.', 'ru'), isFalse);
+    // N3: una propuesta sin finalidad (чтобы) no cumple.
+    final n3b = banco.firstWhere((u) => u.item.id == 'dx.ru.n3.escritura.2').item;
+    expect(
+      corregir(n3b, 'Я предлагаю поставить скамейки во дворе. Если бы у нас был бюджет, мы бы посадили цветы.', 'ru'),
+      isFalse,
+    );
+    // N4: el pasado habitual (бывало / раньше) frente al presente (теперь).
+    final n4 = banco.firstWhere((u) => u.item.id == 'dx.ru.n4.escritura.1').item;
+    expect(
+      corregir(n4, 'Раньше мы жили в посёлке и часто играли во дворе. А теперь мы живём в Москве. Я скучаю по родному городу.', 'ru'),
+      isTrue,
+    );
+    expect(
+      corregir(n4, 'раньше мы жили в поселке и часто играли во дворе а теперь мы живем в москве я скучаю по родному городу', 'ru'),
+      isTrue,
+    );
+    // Sin el contraste con el presente no cumple.
+    expect(
+      corregir(n4, 'Раньше мы жили в посёлке. Мы часто играли во дворе. Я скучаю по родному городу.', 'ru'),
+      isFalse,
+    );
+    // N4: correo formal sin petición (прошу / просьба) no cumple.
+    final n4b = banco.firstWhere((u) => u.item.id == 'dx.ru.n4.escritura.2').item;
+    expect(
+      corregir(n4b, 'Здравствуйте! Пишу вам по поводу перевода: деньги ещё не пришли. С уважением, Андрей.', 'ru'),
+      isFalse,
+    );
+    expect(
+      corregir(n4b, 'Здравствуйте! Пишу вам по поводу перевода: деньги ещё не пришли. Прошу вас проверить перевод. С уважением, Андрей.', 'ru'),
+      isTrue,
+    );
   });
 
-  test('El tope es N2: lo publicado en la ruta y en el banco', () async {
+  test('El tope es N4: lo publicado en la ruta y en el banco', () async {
     expect(idiomasConRuta, contains('ru'));
     final ruta = (await CargadorRuta().cargar('ru'))!;
-    expect(nivelesPublicados(ruta), {1, 2});
-    expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 2);
+    expect(nivelesPublicados(ruta), {1, 2, 3, 4});
+    expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 4);
   });
 
-  testWidgets('Aprender: N1–N2 publicados y N3–N10 «Próximamente»', (tester) async {
+  testWidgets('Aprender: N1–N4 publicados y N5–N10 «Próximamente»', (tester) async {
     tester.view.physicalSize = const Size(390, 2600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     final ruta = (await tester.runAsync(() => CargadorRuta().cargar('ru')))!;
-    // Un alumno ubicado por el diagnóstico antiguo en N8 estudia N2, el último publicado.
+    // Un alumno ubicado por el diagnóstico antiguo en N8 estudia N4, el último publicado.
     const s = ProgressState(
       onboardingDone: true,
       nombre: 'Ana',
       idiomaMeta: 'ru',
       nivelInicial: 8,
     );
-    expect(nivelAlumnoEnRuta(ruta, s), 2);
+    expect(nivelAlumnoEnRuta(ruta, s), 4);
     SharedPreferences.setMockInitialValues({
       'onelingo.progress.v1': jsonEncode(s.toJson()),
     });
@@ -185,11 +232,14 @@ void main() {
     expect(find.text('En preparación'), findsNothing);
     expect(find.text('Nivel 1 · A1'), findsOneWidget);
     expect(find.text('Nivel 2 · A2'), findsOneWidget);
-    // N3–N10 no existen en el curso: la app los muestra bloqueados.
-    expect(find.text('Próximamente'), findsNWidgets(8));
+    // N3 y N4 son ambos B1 en el marco.
+    expect(find.text('Nivel 3 · B1'), findsOneWidget);
+    expect(find.text('Nivel 4 · B1'), findsOneWidget);
+    // N5–N10 no existen en el curso: la app los muestra bloqueados.
+    expect(find.text('Próximamente'), findsNWidgets(6));
   });
 
-  test('Alumnos simulados: nunca por encima de N2 y bien ubicados hasta N2', () {
+  test('Alumnos simulados: nunca por encima de N4 y bien ubicados hasta N4', () {
     final rnd = Random(7);
     var ok = 0;
     const n = 300;
@@ -198,13 +248,13 @@ void main() {
       final u = Ubicacion(
         banco: banco,
         declarado: Autodeclaracion.desdeNivel(max(1, t)),
-        nivelMaximo: 2,
+        nivelMaximo: 4,
         random: rnd,
       );
-      expect(u.nivelMaximo, 2);
+      expect(u.nivelMaximo, 4);
       var guardia = 0;
       for (var i = u.siguiente(); i != null; i = u.siguiente()) {
-        expect(i.nivel, lessThanOrEqualTo(2));
+        expect(i.nivel, lessThanOrEqualTo(4));
         final p = i.nivel <= t ? .92 : (i.nivel == t + 1 ? .45 : 1 / 3);
         u.responder(rnd.nextDouble() < p);
         expect(++guardia, lessThan(30));
@@ -212,11 +262,11 @@ void main() {
       if (u.escritura() != null) u.responder(true);
       expect(u.terminado, isTrue);
       final r = u.resultado();
-      expect(r.nivel, lessThanOrEqualTo(2), reason: 'nivel real $t');
+      expect(r.nivel, lessThanOrEqualTo(4), reason: 'nivel real $t');
       for (final v in r.habilidades.values) {
-        expect(v, lessThanOrEqualTo(2));
+        expect(v, lessThanOrEqualTo(4));
       }
-      if ((r.nivel - min(t, 2)).abs() <= 1) ok++;
+      if ((r.nivel - min(t, 4)).abs() <= 1) ok++;
     }
     expect(ok / n, greaterThan(.85));
   });
@@ -232,7 +282,7 @@ void main() {
         Autodeclaracion.defiendo,
         Autodeclaracion.avanzado,
       ][k % 4];
-      final u = Ubicacion(banco: banco, declarado: d, nivelMaximo: 2, random: rnd);
+      final u = Ubicacion(banco: banco, declarado: d, nivelMaximo: 4, random: rnd);
       for (var i = u.siguiente(); i != null; i = u.siguiente()) {
         u.responder(rnd.nextInt(i.item.opciones.length) == i.item.indiceRespuesta);
       }

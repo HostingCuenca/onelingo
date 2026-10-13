@@ -118,6 +118,28 @@ void main() {
       expect(faltan('ru', 'Анна — врач! «По-русски»?', s), isEmpty);
       expect(faltan('ru', 'Анна — доктор.', s), ['доктор']);
     });
+    test('N3: varias formas entre paréntesis y preposición con guion', () {
+      final s = saber([
+        'я', 'повесить (повесил)', 'куртка (куртку)', //
+        'вешалка (на вешалку, на вешалке)', 'из-за', 'дождь (из-за дождя)',
+      ]);
+      expect(faltan('ru', 'Я повесил куртку на вешалку.', s), isEmpty);
+      expect(faltan('ru', 'Куртка на вешалке? Из-за дождя!', s), isEmpty);
+      // Un caso no enseñado no se deduce de los otros.
+      expect(faltan('ru', 'под вешалкой', s), ['под', 'вешалкой']);
+    });
+    test('N4: paréntesis con «;» y «:» (régimen y formas del verbo)', () {
+      final s = saber([
+        'я', 'и', //
+        'коллектив (коллектива; руководить коллективом: руковожу, руководите)',
+        'заведовать (заведую, заведовал, заведовала; склад: склада, складом)',
+        'вничью (закончился вничью)', 'матч',
+      ]);
+      expect(faltan('ru', 'Я руковожу коллективом и заведую складом.', s), isEmpty);
+      expect(faltan('ru', 'Матч закончился вничью!', s), isEmpty);
+      // Ni la forma no enseñada ni el caso que falta se deducen.
+      expect(faltan('ru', 'Он руководит складом.', s), ['он', 'руководит']);
+    });
   });
 
   test('sin morfología inglesa fuera del inglés', () {

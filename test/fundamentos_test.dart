@@ -108,7 +108,7 @@ void main() {
     expect(idiomasConRuta, contains('de'));
   });
 
-  test('el italiano (versión esencial): ruta f0 (8 unidades) y solo N1–N4 publicados', () async {
+  test('el italiano (versión esencial): ruta f0 (8 unidades) y solo N1–N6 publicados', () async {
     expect(idiomasSoloRutaF0, contains('it'));
     await ContenidoJson.precargar('it');
     expect(Fundamentos.disponible('it'), isFalse); // sin nivel-0.json antiguo
@@ -127,13 +127,13 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial: N1–N4 (50 clases por nivel); N5–N10 aún no existen
+    // Versión esencial: N1–N6 (50 clases por nivel); N7–N10 aún no existen
     // en el curso, así que la app los muestra «Próximamente» y no se juegan.
-    expect(publicados, ['f0', for (var i = 1; i <= 4; i++) 'n$i']);
-    for (var i = 5; i <= 10; i++) {
+    expect(publicados, ['f0', for (var i = 1; i <= 6; i++) 'n$i']);
+    for (var i = 7; i <= 10; i++) {
       expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
     }
-    expect(nivelPublicadoMaximo(ruta), 4);
+    expect(nivelPublicadoMaximo(ruta), 6);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
@@ -148,9 +148,9 @@ void main() {
     const s = ProgressState(idiomaMeta: 'it', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);
     expect(s.nivel0Pendiente, isTrue);
-    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N4.
+    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N6.
     const alto = ProgressState(idiomaMeta: 'it', nivelInicial: 8);
-    expect(nivelAlumnoEnRuta(ruta, alto), 4);
+    expect(nivelAlumnoEnRuta(ruta, alto), 6);
   });
 
   test('el chino (versión esencial): ruta f0 (8 unidades) y solo N1–N2 publicados', () async {
@@ -255,7 +255,7 @@ void main() {
     expect(nivelAlumnoEnRuta(ruta, alto), 2);
   });
 
-  test('el ruso (versión esencial): ruta f0 (8 unidades) y solo N1–N2 publicados', () async {
+  test('el ruso (versión esencial): ruta f0 (8 unidades) y solo N1–N4 publicados', () async {
     expect(idiomasSoloRutaF0, contains('ru'));
     await ContenidoJson.precargar('ru');
     expect(Fundamentos.disponible('ru'), isFalse); // no tiene nivel-0.json (su Nivel 0 es el nuevo, en nivel0/)
@@ -274,13 +274,13 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial: N1–N2 (50 clases por nivel); N3–N10 aún no existen
+    // Versión esencial: N1–N4 (50 clases por nivel); N5–N10 aún no existen
     // en el curso, así que la app los muestra «Próximamente» y no se juegan.
-    expect(publicados, ['f0', 'n1', 'n2']);
-    for (var i = 3; i <= 10; i++) {
+    expect(publicados, ['f0', 'n1', 'n2', 'n3', 'n4']);
+    for (var i = 5; i <= 10; i++) {
       expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
     }
-    expect(nivelPublicadoMaximo(ruta), 2);
+    expect(nivelPublicadoMaximo(ruta), 4);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
@@ -291,7 +291,7 @@ void main() {
         previa = u.id;
       }
     }
-    // La romanización llega intacta a las clases (N1–N2: visible).
+    // La romanización llega intacta a las clases (N1–N4: visible).
     final items = [
       for (final u in ruta.unidades)
         for (final p in u.pasos) ...p.items,
@@ -301,9 +301,9 @@ void main() {
     const s = ProgressState(idiomaMeta: 'ru', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);
     expect(s.nivel0Pendiente, isTrue);
-    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N2.
+    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N4.
     const alto = ProgressState(idiomaMeta: 'ru', nivelInicial: 8);
-    expect(nivelAlumnoEnRuta(ruta, alto), 2);
+    expect(nivelAlumnoEnRuta(ruta, alto), 4);
   });
 
   test('el coreano (versión esencial): ruta f0 (9 unidades) y solo N1–N2 publicados', () async {
