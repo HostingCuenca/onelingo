@@ -646,3 +646,37 @@ Pruebas: Flutter completo en el worktree, 408 en verde (1 omitido); backend 27/2
 Backup: `/var/www/onelingo/backups/20261013-edu-54-ola2-voces/{web-anterior,backend-anterior}`. Verificado: `/`, `/api/salud`, `main.dart.js` (sha256), los `n*-b10` nuevos de it, ru, ko, ja y zh y `zh/diagnostico-v2.json` responden 200; `/api/voz/estado` lista las voces nuevas; PM2 `online`; lock liberado. La web anterior queda en `/var/www/onelingo/web-saliente-20261013-edu-54-ola2-voces`.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261013-edu-54-ola2-voces/web-retirada-post && cp -al backups/20261013-edu-54-ola2-voces/web-anterior web'`
 Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo; cp backups/20261013-edu-54-ola2-voces/backend-anterior/voz.ts backend/src/lib/ && cp backups/20261013-edu-54-ola2-voces/backend-anterior/routes-voz.ts backend/src/routes/voz.ts && rm backend/src/lib/voz_texto.ts && pm2 restart onelingo-api'`
+
+## Release: 20261013-edu-55-italiano
+
+Fecha: 2026-10-13 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat («ok despleguemos y los exámenes más exigentes»). Solo web; sin cambios de backend ni reinicio.
+Contenido: italiano COMPLETO, con Fundamentos (f0) y N1–N10 (500 clases); N7–N10 son nuevos (`ea7c50f`). La prueba de ubicación llega hasta N10 (diagnóstico v2 con 180 ítems). También va la prueba de nivel más exigente (`89f597a`): 30 preguntas, hay que acertar 27 (90 %) con escuchar, escribir y gramática, y tras suspender se espera 12 h. Vale para todos los idiomas.
+Audio: 22 audios cortos nuevos de it y ru, pregenerados con `tools/voz/pregenerar_cortos.py` y verificados por transcripción. Las abreviaturas de ru N8 (→, ≠, ↑, ↓, т. к., см.) se oyen como su lectura («к», «а не», «больше», «меньше», «так как», «смотри»). Se añadieron con `--ignore-existing` a `/var/www/onelingo/audio` (1980 → 2002); no se reemplazó ninguno. Quedan sin pregenerar «тя» y «po’» porque ninguna toma salía bien.
+Commit: `ea7c50f` (build desde worktree limpio) · `main.dart.js` sha256 `e48aeaec1e93a6f8…` (API_URL prod).
+Pruebas: Flutter completo en el worktree, 409 en verde (1 omitido). `validar_ruta.py`: 10 idiomas, 0 errores.
+Backup: `/var/www/onelingo/backups/20261013-edu-55-italiano/web-anterior` (= edu-54). Verificado:
+- responden 200: `/`, `/api/salud`, `it/ruta/curso.json`, `it/ruta/n10-b10.json`, `it/diagnostico-v2.json` y los `n4-b10` de ru y zh;
+- curso it con N1–N10 publicados;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261013-edu-55-italiano/web-retirada-post && cp -al backups/20261013-edu-55-italiano/web-anterior web'`
+
+## Release: 20261013-edu-56-ruso
+
+Fecha: 2026-10-13 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat. Solo web; sin cambios de backend ni reinicio.
+Contenido:
+- Ruso COMPLETO, con Fundamentos (f0) y N1–N10 (500 clases); N5–N10 son nuevos (`4630bdc`). La prueba de ubicación llega hasta N10 (diagnóstico v2 con 180 ítems).
+- Acentos del rom corregidos en N1–N4 ya publicado (`629976d`): sléduyushchaya, yáytsa, právilo, zapólnite, rúki, délala/délayete, otprávlyu, dnevniké, poberézh'ye, znála, rasskazála y -nibud' átono.
+- Los puntos de la auditoría que ya eran correctos se dejaron como estaban.
+- Incluye todo lo de edu-55.
+Commit: `629976d` (build desde worktree limpio) · `main.dart.js` sha256 `e48aeaec1e93a6f8…` (el código Dart es el mismo que en edu-55; cambian los assets).
+Pruebas: Flutter completo en el worktree, 411 en verde (1 omitido). `validar_ruta.py`: 10 idiomas, 0 errores. `validar_diagnostico.py --idioma ru`: n1–n10 OK.
+Backup: `/var/www/onelingo/backups/20261013-edu-56-ruso/web-anterior` (= edu-55). Verificado:
+- responden 200: `/`, `/api/salud`, `ru/ruta/n5-b01.json`, `ru/ruta/n10-b10.json`, `ru/diagnostico-v2.json`, `it/ruta/n10-b10.json` y `ko/ruta/n4-b10.json`;
+- curso ru con N1–N10 publicados;
+- `n1-b10` lleva «znála»;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261013-edu-56-ruso/web-retirada-post && cp -al backups/20261013-edu-56-ruso/web-anterior web'`
+Limpieza (autorizada por el usuario):
+- Se borraron los 8 `web-saliente-*` de edu-47 a edu-54 y los de edu-55 y edu-56. Eran enlaces duros a `backups/*/web-anterior`, así que solo liberan ~2 MB.
+- Las 27 tomas de audio sobrantes de edu-54 se movieron a `backups/20261013-audio-sobrante/`.
+- El espacio real lo ocupan `backups/` (14 GB) y `staging/` (4,8 GB). Siguen intactos a la espera de que el usuario decida.
