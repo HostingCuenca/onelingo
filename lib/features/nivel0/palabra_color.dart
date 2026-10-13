@@ -92,8 +92,9 @@ class ImagenPalabra extends StatelessWidget {
 }
 
 /// Pronuncia en la voz del Nivel 0 de su idioma. `lento` = versión
-/// tortuga. Las letras sueltas van con la voz del sistema (la voz en la nube
-/// las lee como sonido, no como nombre).
+/// tortuga. `letra` = se oye el nombre de cada letra («hache», «Jott», «вэ»):
+/// el servidor lo escribe en su idioma, porque la letra suelta sale muda o
+/// como sonido.
 Future<void> decir(
   Nivel0 n,
   String texto, {
@@ -104,5 +105,18 @@ Future<void> decir(
   n.idioma,
   voz: n.voz,
   velocidad: lento ? 0.4 : null,
-  sistema: letra,
+  modo: letra || soloLetras(texto) ? 'letra' : null,
 );
+
+/// «ß», «G, H», «L-E-N-A», «Ä, Ö, Ü»: solo letras sueltas, que en el Nivel 0
+/// se leen por su nombre.
+bool soloLetras(String texto) {
+  final piezas = texto
+      .split(RegExp(r'[\s,\-–]+'))
+      .where((p) => p.isNotEmpty)
+      .toList();
+  return piezas.isNotEmpty &&
+      piezas.every(
+        (p) => p.runes.length == 1 && RegExp(r'\p{L}', unicode: true).hasMatch(p),
+      );
+}

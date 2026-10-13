@@ -6,6 +6,7 @@ import { Readable } from 'node:stream';
 import { config } from './config.js';
 import { query, uno } from './db.js';
 import { numerosEnPalabrasDe } from './numeros_de.js';
+import { normalizarParaVoz } from './voz_texto.js';
 
 /** Voces por rol: los 4 tutores de la app + narradores neutros para lecciones y Listening. */
 export const VOCES: Record<string, { id: string; nombre: string; descripcion: string }> = {
@@ -43,10 +44,21 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   hinata: { id: 'j210dv0vWm7fCknyQpbA', nombre: 'Hinata', descripcion: 'Narrador japonés · diálogos' },
   shanshan: { id: 'ByhETIclHirOlWnWKhHc', nombre: 'Shan Shan', descripcion: 'Narradora china (mandarín de Pekín)' },
   evan: { id: 'MI36FIkp9wRP7cpWKPTl', nombre: 'Evan', descripcion: 'Narrador chino (mandarín de Pekín) · diálogos' },
+  // Español latino neutro, portugués de Brasil y diálogos en inglés americano
+  // (auditoría de voces 2026-10-13: síntesis y transcripción de vuelta).
+  isabel: { id: 'rixsIpPlTphvsJd2mI03', nombre: 'Isabel', descripcion: 'Narradora mexicana · neutra y educativa' },
+  enrique: { id: 'gbTn1bmCvNgk0QEAVyfM', nombre: 'Enrique', descripcion: 'Narrador mexicano · diálogos' },
+  fernanda: { id: '7iqXtOF3wl3pomwXFY7G', nombre: 'Fernanda', descripcion: 'Narradora brasileña · clara y cordial' },
+  paulo: { id: 'Qrdut83w0Cr152Yb4Xn3', nombre: 'Paulo', descripcion: 'Narrador brasileño · diálogos' },
+  chris_en: { id: 'iP95p4xoKVk53GoZ742B', nombre: 'Chris', descripcion: 'Narrador estadounidense · diálogos' },
 };
 
 /** Voz nativa por idioma para los roles neutros (lecciones y diálogos). */
 const NATIVAS: Record<string, Record<string, string>> = {
+  // El curso de inglés es americano: antes narraban Alice y George (británicos).
+  en: { narradora: 'sofia', narrador: 'chris_en' },
+  es: { narradora: 'isabel', narrador: 'enrique' },
+  pt: { narradora: 'fernanda', narrador: 'paulo' },
   fr: { narradora: 'helene', narrador: 'nicolas' },
   de: { narradora: 'petra', narrador: 'julius' },
   it: { narradora: 'luna', narrador: 'carmelo' },
@@ -64,12 +76,18 @@ export function rolDeVoz(voz: string | undefined, idioma: string): string {
 
 export const vozDisponible = () => config.elevenApiKey.length > 0;
 
-/** Quita la romanización "(…)" y normaliza espacios: solo se sintetiza el texto nativo. */
-export function textoParaVoz(t: string, idioma = 'en') {
-  const limpio = t.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+/**
+ * Quita la romanización "(…)" y la notación de la vista (ver voz_texto.ts):
+ * solo se sintetiza lo que se pronuncia. `modo: 'letra'` lee nombres de letras.
+ */
+export function textoParaVoz(t: string, idioma = 'en', modo?: string) {
+  const nativo = t.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+  const limpio = normalizarParaVoz(nativo, idioma, modo);
   // En chino y japonés el contenido separa palabras con espacios para los
   // ejercicios; la voz debe leer la frase continua, sin pausas artificiales.
-  if (idioma === 'zh' || idioma === 'ja') return limpio.replace(/ /g, '');
+  // La coma que separa alternativas pasa a la de su escritura.
+  if (idioma === 'zh') return limpio.replace(/, ?/g, '，').replace(/ /g, '');
+  if (idioma === 'ja') return limpio.replace(/, ?/g, '、').replace(/ /g, '');
   // En alemán la voz lee mal las cifras: se le pasan escritas (ver numeros_de.ts).
   return idioma === 'de' ? numerosEnPalabrasDe(limpio) : limpio;
 }
@@ -127,8 +145,8 @@ async function sintetizar(texto: string, vozId: string, idioma: string): Promise
 export type Audio = { hash: string; buffer: Buffer; cache: boolean; voz: string; caracteres: number };
 
 /** Devuelve el MP3 de `texto` con la voz del rol `voz`; lo genera solo si no existe. */
-export async function obtenerAudio(p: { texto: string; idioma: string; voz?: string }): Promise<Audio> {
-  const texto = textoParaVoz(p.texto, p.idioma);
+export async function obtenerAudio(p: { texto: string; idioma: string; voz?: string; modo?: string }): Promise<Audio> {
+  const texto = textoParaVoz(p.texto, p.idioma, p.modo);
   if (!texto) throw new Error('texto_vacio');
   if (texto.length > config.vozMaxCaracteres) throw new Error(`texto_demasiado_largo (${texto.length} > ${config.vozMaxCaracteres})`);
   const rol = rolDeVoz(p.voz, p.idioma);
@@ -184,8 +202,8 @@ export async function cuotaVoz() {
 export const vozExiste = (hash: string) => uno('SELECT hash FROM audios WHERE hash = $1', [hash]);
 
 /** Stream the first generation; only complete audio becomes reusable cache. */
-export async function obtenerAudioStream(p: { texto: string; idioma: string; voz?: string }, signal: AbortSignal, onFirst: () => void) {
-  const texto = textoParaVoz(p.texto, p.idioma);
+export async function obtenerAudioStream(p: { texto: string; idioma: string; voz?: string; modo?: string }, signal: AbortSignal, onFirst: () => void) {
+  const texto = textoParaVoz(p.texto, p.idioma, p.modo);
   if (!texto || texto.length > config.vozMaxCaracteres) throw new Error('texto_invalido');
   const rol = rolDeVoz(p.voz, p.idioma);
   const v = VOCES[rol]; const hash = hashAudio(texto, v.id, config.elevenModelo, p.idioma);

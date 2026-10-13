@@ -49,14 +49,16 @@ class Voz {
   /// `voz` es el rol de voz del servidor: id del tutor (mia, leo, sofia, max),
   /// `narradora` (lecciones, por defecto) o `narrador` (diálogos).
   /// `velocidad` ≤ 0.4 reproduce despacio (modo Listening lento).
-  /// `sistema` fuerza la voz del dispositivo (ver [mejorConVozDelSistema]).
+  /// `modo: 'letra'` lee el nombre de las letras (Nivel 0); lo resuelve el
+  /// servidor en su idioma. La voz del dispositivo es solo el respaldo: con
+  /// letras sueltas en mayúscula dice «A mayúscula», así que recibe minúsculas.
   Future<void> hablar(
     String texto,
     String idioma, {
     double? velocidad,
     String? voz,
     bool progresivo = true,
-    bool sistema = false,
+    String? modo,
   }) async {
     final solicitud = ++_solicitud;
     await Efectos.detener();
@@ -67,7 +69,7 @@ class Voz {
         ? nativo.replaceAll(' ', '')
         : nativo;
     if (limpio.isEmpty) return;
-    if (natural && Sync.instancia.conectado && !sistema) {
+    if (natural && Sync.instancia.conectado) {
       await _tts.stop().catchError((_) {});
       if (solicitud != _solicitud) return;
       final ok = await VozNube.instancia.reproducir(
@@ -76,6 +78,7 @@ class Voz {
         voz: voz ?? 'narradora',
         progresivo: progresivo,
         lento: (velocidad ?? 1) <= 0.4,
+        modo: modo,
       );
       if (ok || solicitud != _solicitud) return;
     }
@@ -85,7 +88,7 @@ class Voz {
       if (velocidad != null) await _tts.setSpeechRate(velocidad);
       await _tts.stop();
       _ttsUsado = true;
-      await _tts.speak(limpio);
+      await _tts.speak(paraVozDelSistema(limpio));
     } catch (_) {
       // Sin motor de voz disponible (p. ej. simulador sin voces): se ignora.
     }
@@ -114,24 +117,37 @@ class VozNube {
   String ultimoError = '';
   int _turno = 0;
 
-  String _clave(String texto, String idioma, String voz) =>
-      sha1.convert(utf8.encode('$voz|$idioma|$texto')).toString();
+  String _clave(String texto, String idioma, String voz, [String? modo]) =>
+      sha1
+          .convert(utf8.encode('$voz|$idioma|${modo == null ? '' : '$modo|'}$texto'))
+          .toString();
 
-  Uri _url(String texto, String idioma, String voz, {bool conToken = false}) =>
-      Uri.parse('${Sync.baseUrl}/voz').replace(
-        queryParameters: {
-          'texto': texto,
-          'idioma': idioma,
-          'voz': voz,
-          if (conToken) 'token': Sync.instancia.token ?? '',
-        },
-      );
+  Uri _url(
+    String texto,
+    String idioma,
+    String voz, {
+    bool conToken = false,
+    String? modo,
+  }) => Uri.parse('${Sync.baseUrl}/voz').replace(
+    queryParameters: {
+      'texto': texto,
+      'idioma': idioma,
+      'voz': voz,
+      'modo': ?modo,
+      if (conToken) 'token': Sync.instancia.token ?? '',
+    },
+  );
 
-  Future<String?> _archivoLocal(String texto, String idioma, String voz) async {
+  Future<String?> _archivoLocal(
+    String texto,
+    String idioma,
+    String voz, [
+    String? modo,
+  ]) async {
     if (kIsWeb) return null;
     try {
       _dir ??= '${(await getTemporaryDirectory()).path}/onelingo_voz';
-      final f = File('$_dir/${_clave(texto, idioma, voz)}.mp3');
+      final f = File('$_dir/${_clave(texto, idioma, voz, modo)}.mp3');
       return await f.exists() && await f.length() > 0 ? f.path : null;
     } catch (_) {
       return null;
@@ -139,8 +155,13 @@ class VozNube {
   }
 
   /// Descarga (o recupera de la caché local) el MP3 y devuelve su ruta; null si falla.
-  Future<String?> _archivo(String texto, String idioma, String voz) {
-    final k = _clave(texto, idioma, voz);
+  Future<String?> _archivo(
+    String texto,
+    String idioma,
+    String voz, [
+    String? modo,
+  ]) {
+    final k = _clave(texto, idioma, voz, modo);
     return _enCurso.putIfAbsent(k, () async {
       try {
         _dir ??= '${(await getTemporaryDirectory()).path}/onelingo_voz';
@@ -148,7 +169,7 @@ class VozNube {
         if (await f.exists() && await f.length() > 0) return f.path;
         final r = await http
             .get(
-              _url(texto, idioma, voz),
+              _url(texto, idioma, voz, modo: modo),
               headers: {'authorization': 'Bearer ${Sync.instancia.token}'},
             )
             .timeout(const Duration(seconds: 15));
@@ -175,6 +196,7 @@ class VozNube {
     String voz = 'narradora',
     bool lento = false,
     bool progresivo = true,
+    String? modo,
   }) async {
     final mio = ++_turno;
     ultimoError = '';
@@ -184,14 +206,14 @@ class VozNube {
       await _player.stop();
       await _player.setPlaybackRate(lento ? 0.8 : 1.0);
       if (mio != _turno) return false;
-      final local = await _archivoLocal(texto, idioma, voz);
+      final local = await _archivoLocal(texto, idioma, voz, modo);
       if (mio != _turno) return false;
       if (local != null) {
         await _player.play(DeviceFileSource(local));
         return mio == _turno;
       }
       if (kIsWeb || progresivo) {
-        final url = _url(texto, idioma, voz, conToken: true);
+        final url = _url(texto, idioma, voz, conToken: true, modo: modo);
         await _player.play(
           UrlSource(
             (progresivo ? url.replace(path: '${url.path}/stream') : url)
@@ -200,7 +222,7 @@ class VozNube {
         );
         return mio == _turno;
       }
-      final ruta = await _archivo(texto, idioma, voz);
+      final ruta = await _archivo(texto, idioma, voz, modo);
       if (ruta == null || mio != _turno) {
         return false; // Cancelar no equivale a haber escuchado.
       }
@@ -605,17 +627,9 @@ double similitud(String dicho, String esperado) {
   return (negationChanged || sameTokensReordered) && score >= .5 ? .49 : score;
 }
 
-/// Una sílaba o signo suelto de una escritura no latina («あ», «妈», «아»,
-/// «да») suena mejor con la voz nativa del dispositivo: la voz de la nube no
-/// tiene contexto y lo pronuncia con el acento de su idioma de origen.
-bool mejorConVozDelSistema(String texto, String idioma) {
-  final letras = soloNativo(
-    texto,
-  ).replaceAll(RegExp(r'[\s\p{P}]', unicode: true), '');
-  if (letras.isEmpty) return false;
-  // Una letra suelta del alfabeto («G», «ß», «ñ»): la voz del dispositivo
-  // dice su nombre en el idioma; la de la nube la lee como sonido suelto.
-  if (letras.runes.length == 1) return true;
-  return const {'ja', 'zh', 'ko', 'ru'}.contains(idioma) &&
-      letras.runes.length <= 2;
+/// Texto para la voz del dispositivo (respaldo sin conexión). Una letra
+/// suelta en mayúscula la leen como «A mayúscula»: va en minúscula.
+String paraVozDelSistema(String texto) {
+  final letras = texto.replaceAll(RegExp(r'[\s\p{P}]', unicode: true), '');
+  return letras.runes.length == 1 ? letras.toLowerCase() : texto;
 }

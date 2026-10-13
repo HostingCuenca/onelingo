@@ -48,4 +48,17 @@ void main() {
     expect(await pending, false);
     expect(platform.resumes, previous);
   });
+  test('el modo letra viaja al servidor', () async {
+    platform.prepare = true; platform.requested = null;
+    expect(await VozNube.instancia.reproducir('H', 'es', modo: 'letra'), true);
+    expect(Uri.parse(platform.sources.last).queryParameters['modo'], 'letra');
+    await VozNube.instancia.parar();
+  });
+  test('la voz del dispositivo (respaldo) recibe letras sueltas en minúscula', () {
+    // Con «A» dice «A mayúscula»; con «a», el nombre de la letra.
+    expect(paraVozDelSistema('A'), 'a');
+    expect(paraVozDelSistema('Я.'), 'я');
+    expect(paraVozDelSistema('Hola'), 'Hola');
+    expect(paraVozDelSistema('あ'), 'あ');
+  });
 }

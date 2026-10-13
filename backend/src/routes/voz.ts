@@ -25,7 +25,7 @@ export default async function rutas(app: FastifyInstance) {
   }));
 
   app.get('/voz/stream', { preHandler: alumnoOToken }, async (req, reply) => {
-    const q = z.object({ texto: z.string().min(1).max(600), idioma: z.string().default('en'), voz: z.string().optional() }).parse(req.query);
+    const q = z.object({ texto: z.string().min(1).max(600), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional() }).parse(req.query);
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 30000);
     const started = performance.now();
@@ -43,7 +43,7 @@ export default async function rutas(app: FastifyInstance) {
 
   /** MP3 de un texto. Se genera la primera vez y luego sale de la caché (cabecera X-Voz-Cache). */
   app.get('/voz', { preHandler: alumnoOToken }, async (req, reply) => {
-    const q = z.object({ texto: z.string().min(1), idioma: z.string().default('en'), voz: z.string().optional(), token: z.string().optional() }).parse(req.query);
+    const q = z.object({ texto: z.string().min(1), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional(), token: z.string().optional() }).parse(req.query);
     try {
       const a = await obtenerAudio(q);
       return reply.type('audio/mpeg')

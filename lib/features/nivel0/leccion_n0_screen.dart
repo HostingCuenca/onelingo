@@ -770,7 +770,7 @@ class _PasoLetras extends StatelessWidget {
       const SizedBox(height: 14),
       Center(
         child: OutlinedButton.icon(
-          onPressed: () => decir(n, '${paso.letras.join(', ')}.'),
+          onPressed: () => decir(n, paso.letras.join(', '), letra: true),
           icon: const Icon(Icons.volume_up_rounded),
           label: Text(tr('Escuchar todas')),
         ),
@@ -826,7 +826,7 @@ class _PasoElegirState extends State<_PasoElegir> {
     // sueltas (sin `palabra`): se oye la palabra `m`.
     'deletreo' =>
       p.j['palabra'] is String
-          ? '${(p.j['palabra'] as String).split('').join(', ')}.'
+          ? (p.j['palabra'] as String).split('').join(', ')
           : textoPlano(p.marcado),
     'elige_significado' || 'lee' => textoPlano(p.marcado),
     _ => '',
@@ -858,7 +858,14 @@ class _PasoElegirState extends State<_PasoElegir> {
 
   void oir({bool lento = false}) {
     if (audio.isEmpty) return;
-    decir(widget.n, audio, lento: lento, letra: p.tipo == 'escucha_letra');
+    decir(
+      widget.n,
+      audio,
+      lento: lento,
+      letra:
+          p.tipo == 'escucha_letra' ||
+          (p.tipo == 'deletreo' && p.j['palabra'] is String),
+    );
   }
 
   @override
