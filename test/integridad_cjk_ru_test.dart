@@ -92,6 +92,16 @@ void main() {
       expect(faltan('ko', '오삼', n), ['오삼']);
       expect(faltan('ko', '이백', n), ['이백']);
     });
+    test('N3–N4: formas y frases entre paréntesis, con el -시- enseñado', () {
+      final s = saber([
+        '는', '부부 (서로 아끼세요, 서로 아끼시는 부부)', //
+        '모시다 (모셔요, 할아버지를 모시고, 모시세요)',
+      ]);
+      expect(faltan('ko', '할아버지를 모시고 서로 아끼세요.', s), isEmpty);
+      expect(faltan('ko', '부부는 모셔요? 아끼시는 부부!', s), isEmpty);
+      // Ni el pasado honorífico ni otra forma no enseñada se deducen.
+      expect(faltan('ko', '모셨어요 아끼셨어요', s), ['모셨어요', '아끼셨어요']);
+    });
   });
 
   group('ruso', () {
