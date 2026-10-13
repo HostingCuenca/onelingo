@@ -132,7 +132,9 @@ def procesar(caso, salida):
     elegida = next((t for t in buenas if coincide(caso, t['oido'])), None)
     estado = 'verificado' if elegida else 'sin_verificar'
     # Sin coincidencia: una sin tono de pregunta, mejor de v3 (pronuncia mejor las sílabas sueltas).
-    llanas = [t for t in buenas if t['oido'] and not re.search(r'[?!¿¡？！]', t['oido'])] or buenas
+    # Nunca ruido ni silencio («[música]», «[clic]», vacío): antes una toma dudosa pero hablada.
+    habladas = [t for t in buenas if t['oido'] and '[' not in t['oido']] or buenas
+    llanas = [t for t in habladas if not re.search(r'[?!¿¡？！]', t['oido'])] or habladas
     elegida = elegida or next((t for t in llanas if t['modelo'] == 'eleven_v3'), llanas[0])
     with open(destino, 'wb') as f:
         f.write(elegida['mp3'])
