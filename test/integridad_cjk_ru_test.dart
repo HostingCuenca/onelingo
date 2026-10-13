@@ -39,6 +39,16 @@ void main() {
       expect(s.containsAll({'日本', 'にほん', '何', 'なに', 'なん'}), isTrue);
       expect(faltan('ja', 'にほん', s), isEmpty);
     });
+    test('N3–N4: kanji con su lectura y formas entre paréntesis', () {
+      final s = saber([
+        'が', 'を', '男の人 (おとこのひと)', 'ひきます (ひく、 ひいた)', //
+        '気づきます (きづきます) (気づきました)', 'ギター',
+      ]);
+      expect(faltan('ja', '男の人 が 気づきました。', s), isEmpty);
+      expect(faltan('ja', 'おとこのひと が ギター を ひいた。', s), isEmpty);
+      // Ni otra forma del verbo ni la escritura sin kanji no enseñada se deducen.
+      expect(faltan('ja', '気づいた ひかない きづいた', s), ['気づいた', 'ひかない', 'きづいた']);
+    });
   });
 
   group('chino', () {

@@ -217,16 +217,44 @@ def _modulo_ja():
     return modulo
 
 
+_KANJI_JA: dict[int, set[str]] = {}
+
+
+def kanji_ensenados_ja(nivel: int) -> set[str]:
+    """Kanji enseñados hasta el final del nivel en la ruta publicada del japonés:
+    los que aparecen en el vocabulario o en las tablas de las unidades (mismo
+    criterio que `_ensenadas`). N1–N2 no enseñan ninguno: todo va en kana."""
+    if nivel not in _KANJI_JA:
+        kanji = re.compile(r"[一-鿿㐀-䶿]")
+        base = ROOT / "assets/contenido/ja/ruta"
+        curso = json.loads((base / "curso.json").read_text(encoding="utf-8"))
+        res: set[str] = set()
+        for m in curso.get("modulos", []):
+            try:
+                datos = json.loads((base / m["archivo"]).read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            for u in datos.get("unidades", []):
+                interno = u.get("nivelInterno")
+                if interno is not None and interno <= nivel:
+                    res |= {k for w in _ensenadas(u) for k in kanji.findall(w)}
+        _KANJI_JA[nivel] = res
+    return _KANJI_JA[nivel]
+
+
 def errores_japones(it: dict) -> list[str]:
     """Romanización y tipografía de un ítem en japonés (docs/claude-educacion/ROMANIZACION.md):
     `textoRom`/`opcionesRom` paralelos al japonés, una palabra de rōmaji por cada palabra
     (Hepburn modificado de tools/ia/idiomas/ja.md, con macrones, n', wa/e/o y mayúscula solo
     al inicio de frase y en nombres propios: tools/contenido/hepburn_ja.py); palabras
-    separadas por espacios y puntuación de ancho completo pegada; sin kanji. `audio`,
+    separadas por espacios y puntuación de ancho completo pegada; kanji solo los enseñados
+    hasta el nivel del ítem (ninguno en N1–N2: kanji_ensenados_ja). `audio`,
     `respuesta` y `aceptadas` no llevan rom."""
     import hepburn_ja  # noqa: E402  (tools/contenido)
     import rom_items  # noqa: E402
     ja = _modulo_ja()
+    nivel = it.get("nivel")
+    ja.KANJI_PERMITIDOS = kanji_ensenados_ja(nivel) if isinstance(nivel, int) else set()
     hay = lambda t: isinstance(t, str) and bool(ja.KANA.search(t) or ja.KANJI.search(t))  # noqa: E731
 
     def comprobar(texto: str, rom: str):
