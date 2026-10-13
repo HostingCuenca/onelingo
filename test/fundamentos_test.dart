@@ -108,7 +108,7 @@ void main() {
     expect(idiomasConRuta, contains('de'));
   });
 
-  test('el italiano (versión esencial): ruta f0 (8 unidades) y solo N1–N6 publicados', () async {
+  test('el italiano (versión esencial): ruta f0 (8 unidades) y N1–N10 publicados', () async {
     expect(idiomasSoloRutaF0, contains('it'));
     await ContenidoJson.precargar('it');
     expect(Fundamentos.disponible('it'), isFalse); // sin nivel-0.json antiguo
@@ -127,13 +127,10 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial: N1–N6 (50 clases por nivel); N7–N10 aún no existen
-    // en el curso, así que la app los muestra «Próximamente» y no se juegan.
-    expect(publicados, ['f0', for (var i = 1; i <= 6; i++) 'n$i']);
-    for (var i = 7; i <= 10; i++) {
-      expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
-    }
-    expect(nivelPublicadoMaximo(ruta), 6);
+    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // queda ningún nivel «Próximamente».
+    expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
+    expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
@@ -148,9 +145,9 @@ void main() {
     const s = ProgressState(idiomaMeta: 'it', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);
     expect(s.nivel0Pendiente, isTrue);
-    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N6.
+    // Un alumno ubicado en N8 estudia N8: ya está publicado.
     const alto = ProgressState(idiomaMeta: 'it', nivelInicial: 8);
-    expect(nivelAlumnoEnRuta(ruta, alto), 6);
+    expect(nivelAlumnoEnRuta(ruta, alto), 8);
   });
 
   test('el chino (versión esencial): ruta f0 (8 unidades) y solo N1–N4 publicados', () async {

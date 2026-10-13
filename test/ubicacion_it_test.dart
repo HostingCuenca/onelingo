@@ -16,9 +16,9 @@ import 'package:onelingo/core/state/providers.dart';
 import 'package:onelingo/features/course/levels_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Prueba de ubicación v2 del italiano (versión esencial): banco real
-/// `assets/contenido/it/diagnostico-v2.json`, N1–N6, apoyo {es, en}.
-/// Nunca ubica por encima de N6 (último nivel con clases publicadas).
+/// Prueba de ubicación v2 del italiano (versión esencial, curso completo):
+/// banco real `assets/contenido/it/diagnostico-v2.json`, N1–N10, apoyo {es, en}.
+/// Nunca ubica por encima de N10 (último nivel del curso, todo publicado).
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final json =
@@ -26,17 +26,17 @@ void main() {
           as Map<String, dynamic>;
   final banco = ItemUbicacion.bancoLocalizado(json, 'es');
 
-  test('El banco cubre N1–N6 en las cinco habilidades y nada más', () {
+  test('El banco cubre N1–N10 en las cinco habilidades y nada más', () {
     expect(json['idioma'], 'it');
-    expect(banco, hasLength(108));
-    for (var n = 1; n <= 6; n++) {
+    expect(banco, hasLength(180));
+    for (var n = 1; n <= 10; n++) {
       for (final h in [...habilidadesUbicacion, 'escritura']) {
         final k = banco.where((i) => i.nivel == n && i.habilidad == h).length;
         expect(k, h == 'escritura' ? 2 : 4, reason: 'N$n $h');
       }
     }
-    expect(banco.where((i) => i.nivel > 6), isEmpty);
-    expect(nivelMaximoUbicacion(banco), 6);
+    expect(banco.where((i) => i.nivel > 10), isEmpty);
+    expect(nivelMaximoUbicacion(banco), 10);
   });
 
   test('Apoyo en español latino y en inglés según la interfaz', () {
@@ -73,27 +73,27 @@ void main() {
     }
   });
 
-  test('El tope es N6: lo publicado en la ruta y en el banco', () async {
+  test('El tope es N10: lo publicado en la ruta y en el banco', () async {
     expect(idiomasConRuta, contains('it'));
     final ruta = (await CargadorRuta().cargar('it'))!;
-    expect(nivelesPublicados(ruta), {1, 2, 3, 4, 5, 6});
-    expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 6);
+    expect(nivelesPublicados(ruta), {for (var n = 1; n <= 10; n++) n});
+    expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 10);
   });
 
-  testWidgets('Aprender: N1–N6 publicados y N7–N10 «Próximamente»', (tester) async {
+  testWidgets('Aprender: N1–N10 publicados y ninguno «Próximamente» ni «En preparación»', (tester) async {
     tester.view.physicalSize = const Size(390, 2600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     final ruta = (await tester.runAsync(() => CargadorRuta().cargar('it')))!;
-    // Un alumno ubicado por el diagnóstico antiguo en N8 estudia N6, el último publicado.
+    // Un alumno ubicado en N10 estudia N10: ya está publicado.
     const s = ProgressState(
       onboardingDone: true,
       nombre: 'Ana',
       idiomaMeta: 'it',
-      nivelInicial: 8,
+      nivelInicial: 10,
     );
-    expect(nivelAlumnoEnRuta(ruta, s), 6);
+    expect(nivelAlumnoEnRuta(ruta, s), 10);
     SharedPreferences.setMockInitialValues({
       'onelingo.progress.v1': jsonEncode(s.toJson()),
     });
@@ -110,30 +110,31 @@ void main() {
     await tester.pump();
     await tester.pump();
     expect(find.text('En preparación'), findsNothing);
-    for (final t in ['Nivel 1 · A1', 'Nivel 2 · A2', 'Nivel 3 · B1', 'Nivel 4 · B1']) {
+    for (final t in [
+      'Nivel 1 · A1', 'Nivel 2 · A2', 'Nivel 3 · B1', 'Nivel 4 · B1', 'Nivel 5 · B2', //
+      'Nivel 6 · B2', 'Nivel 7 · B2', 'Nivel 8 · C1', 'Nivel 9 · C1', 'Nivel 10 · C1',
+    ]) {
       expect(find.text(t), findsOneWidget, reason: t);
     }
-    expect(find.text('Nivel 5 · B2'), findsOneWidget);
-    expect(find.text('Nivel 6 · B2'), findsOneWidget);
-    // N7–N10 no existen en el curso: la app los muestra bloqueados.
-    expect(find.text('Próximamente'), findsNWidgets(4));
+    // Curso completo: ningún nivel queda bloqueado por falta de clases.
+    expect(find.text('Próximamente'), findsNothing);
   });
 
-  test('Alumnos simulados: nunca por encima de N6 y bien ubicados hasta N6', () {
+  test('Alumnos simulados: nunca por encima de N10 y bien ubicados hasta N10', () {
     final rnd = Random(7);
-    var ok = 0, hasta6 = 0;
+    var ok = 0, total = 0;
     for (var k = 0; k < 300; k++) {
       final t = rnd.nextInt(11); // nivel real 0–10
       final u = Ubicacion(
         banco: banco,
         declarado: Autodeclaracion.desdeNivel(max(1, t)),
-        nivelMaximo: 6,
+        nivelMaximo: 10,
         random: rnd,
       );
-      expect(u.nivelMaximo, 6);
+      expect(u.nivelMaximo, 10);
       var guardia = 0;
       for (var i = u.siguiente(); i != null; i = u.siguiente()) {
-        expect(i.nivel, lessThanOrEqualTo(6));
+        expect(i.nivel, lessThanOrEqualTo(10));
         final p = i.nivel <= t ? .92 : (i.nivel == t + 1 ? .45 : 1 / 3);
         u.responder(rnd.nextDouble() < p);
         expect(++guardia, lessThan(30));
@@ -141,20 +142,20 @@ void main() {
       if (u.escritura() != null) u.responder(true);
       expect(u.terminado, isTrue);
       final r = u.resultado();
-      expect(r.nivel, lessThanOrEqualTo(6), reason: 'nivel real $t');
+      expect(r.nivel, lessThanOrEqualTo(10), reason: 'nivel real $t');
       for (final v in r.habilidades.values) {
-        expect(v, lessThanOrEqualTo(6));
+        expect(v, lessThanOrEqualTo(10));
       }
-      final esperado = min(t, 6);
-      hasta6++;
+      final esperado = t;
+      total++;
       if ((r.nivel - esperado).abs() <= 1) ok++;
     }
-    expect(ok / hasta6, greaterThan(.85));
+    expect(ok / total, greaterThan(.85));
   });
 
   test('Al azar casi siempre empieza desde cero', () {
     final rnd = Random(21);
-    var ceros = 0;
+    var ceros = 0, altos = 0;
     const n = 400;
     for (var k = 0; k < n; k++) {
       final d = [
@@ -163,15 +164,19 @@ void main() {
         Autodeclaracion.defiendo,
         Autodeclaracion.avanzado,
       ][k % 4];
-      final u = Ubicacion(banco: banco, declarado: d, nivelMaximo: 6, random: rnd);
+      final u = Ubicacion(banco: banco, declarado: d, nivelMaximo: 10, random: rnd);
       for (var i = u.siguiente(); i != null; i = u.siguiente()) {
         u.responder(rnd.nextInt(i.item.opciones.length) == i.item.indiceRespuesta);
       }
       if (u.escritura() != null) u.responder(false);
       final r = u.resultado();
-      expect(r.nivel, lessThanOrEqualTo(1), reason: 'azar, $d');
+      // Con diez niveles, un acertante con mucha suerte que se declara
+      // avanzado pasa rara vez de N1 (como en zh y ja).
+      expect(r.nivel, lessThanOrEqualTo(2), reason: 'azar, $d');
+      if (r.nivel > 1) altos++;
       if (r.desdeCero) ceros++;
     }
+    expect(altos, lessThanOrEqualTo(1), reason: '$altos de $n por encima de N1');
     expect(ceros / n, greaterThan(.9), reason: '$ceros de $n desde cero');
   });
 }
