@@ -688,3 +688,12 @@ Antes de borrar se comprobó que nada las usa: Apache sirve `/var/www/onelingo/w
 Después de borrar, `main.dart.js` tiene el mismo sha256 (`e48aeaec…`) y `web/` los mismos 1348 archivos. Responden 200 `/`, `/api/salud` y los cursos.
 Disco: 90 % → 65 % (de 3,9 GB a 13 GB libres). Solo se tocó `/var/www/onelingo/`.
 Siguen ahí, sin decidir: 18 copias de pruebas de diseño de septiembre (avatares, home, mascotas, voz), en `backups/` y `staging/`.
+
+## Release: 20261013-edu-57-sin-etiqueta
+
+Fecha: 2026-10-13 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat («sí, quitemos»). Solo web; sin cambios de backend ni reinicio.
+Contenido: se quita la etiqueta «Versión inicial» de la pantalla de los cursos en todos los idiomas. El campo `revision` sigue en `curso.json` como dato interno.
+Commit: `5c01fd3` (build desde worktree limpio) · `main.dart.js` sha256 `df3682c977f9fb5d…` (API_URL prod; no contiene «Versión inicial»).
+Pruebas: Flutter completo en el worktree, 411 en verde (1 omitido).
+Backup: `/var/www/onelingo/backups/20261013-edu-57-sin-etiqueta/web-anterior` (= edu-56). Verificado: `/`, `/api/salud` y los `n10-b10` de it y ru responden 200; lock liberado. El `web-saliente` se borró porque es un enlace duro al backup.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261013-edu-57-sin-etiqueta/web-retirada-post && cp -al backups/20261013-edu-57-sin-etiqueta/web-anterior web'`
