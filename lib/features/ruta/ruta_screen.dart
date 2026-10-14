@@ -176,34 +176,18 @@ class _Ruta extends StatelessWidget {
               ? tr('¡Terminaste este nivel! Repasa cuando te lo pida y sigue avanzando.')
               : tr('Primero te enseño con ejemplos. Después practicas y, al final, compruebas lo que sabes.'),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                t(
-                  modulos.length == 1
-                      ? modulos.first.titulo
-                      : ruta.curso.niveles
-                            .firstWhere((n) => n.id == nivel)
-                            .titulo,
-                ),
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-            ),
-            if (ruta.curso.revisionInicial)
-              Tooltip(
-                message: tr('Contenido nuevo pendiente de revisión por hablantes nativos.'),
-                child: Etiqueta(
-                  tr('Versión inicial'),
-                  color: OL.naranja,
-                  fondo: OL.naranjaSuave,
-                  icono: Icons.science_outlined,
-                ),
-              ),
-          ],
+        Text(
+          t(
+            modulos.length == 1
+                ? modulos.first.titulo
+                : ruta.curso.niveles
+                      .firstWhere((n) => n.id == nivel)
+                      .titulo,
+          ),
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w900,
+          ),
         ),
         const SizedBox(height: 8),
         Text(

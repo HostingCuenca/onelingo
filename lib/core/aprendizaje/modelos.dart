@@ -116,7 +116,7 @@ class Curso {
 
   bool get usaEscalaCliente => curriculumScale == 'client-10-levels-v1';
 
-  /// Contenido sin revisión nativa: se muestra la etiqueta «Versión inicial».
+  /// Contenido sin revisión nativa (dato interno; desde 2026-10-13 la app ya no muestra etiqueta).
   final bool revisionInicial;
   final List<String> idiomasApoyo, palabrasLibres;
   final List<NivelCurso> niveles;
