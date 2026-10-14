@@ -680,3 +680,11 @@ Limpieza (autorizada por el usuario):
 - Se borraron los 8 `web-saliente-*` de edu-47 a edu-54 y los de edu-55 y edu-56. Eran enlaces duros a `backups/*/web-anterior`, así que solo liberan ~2 MB.
 - Las 27 tomas de audio sobrantes de edu-54 se movieron a `backups/20261013-audio-sobrante/`.
 - El espacio real lo ocupan `backups/` (14 GB) y `staging/` (4,8 GB). Siguen intactos a la espera de que el usuario decida.
+
+## Limpieza del servidor (2026-10-13, autorizada por el usuario)
+
+Se borraron las 52 versiones antiguas de la web (edu-1 a edu-53). Cada una tenía dos copias que compartían archivos (enlaces duros): `backups/<T>/web-anterior` y `staging/<T>/web-retirada`. Hubo que borrar las dos para liberar espacio. Se conservan las de edu-54, edu-55 y edu-56, así que los rollbacks de esas tres siguen valiendo.
+Antes de borrar se comprobó que nada las usa: Apache sirve `/var/www/onelingo/web` y `/panel`, PM2 corre desde `backend/` y no hay enlaces simbólicos hacia `backups/`.
+Después de borrar, `main.dart.js` tiene el mismo sha256 (`e48aeaec…`) y `web/` los mismos 1348 archivos. Responden 200 `/`, `/api/salud` y los cursos.
+Disco: 90 % → 65 % (de 3,9 GB a 13 GB libres). Solo se tocó `/var/www/onelingo/`.
+Siguen ahí, sin decidir: 18 copias de pruebas de diseño de septiembre (avatares, home, mascotas, voz), en `backups/` y `staging/`.
