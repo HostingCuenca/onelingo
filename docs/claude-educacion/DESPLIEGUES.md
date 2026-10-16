@@ -697,3 +697,18 @@ Commit: `5c01fd3` (build desde worktree limpio) · `main.dart.js` sha256 `df3682
 Pruebas: Flutter completo en el worktree, 411 en verde (1 omitido).
 Backup: `/var/www/onelingo/backups/20261013-edu-57-sin-etiqueta/web-anterior` (= edu-56). Verificado: `/`, `/api/salud` y los `n10-b10` de it y ru responden 200; lock liberado. El `web-saliente` se borró porque es un enlace duro al backup.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261013-edu-57-sin-etiqueta/web-retirada-post && cp -al backups/20261013-edu-57-sin-etiqueta/web-anterior web'`
+
+## Release: 20261016-edu-58-coreano
+
+Fecha: 2026-10-16 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat («terminemos y publiquemos el coreano»). Solo web y audios cortos; sin cambios de backend ni reinicio.
+Contenido: coreano COMPLETO, con Fundamentos (f0) y N1–N10 (500 clases); N5–N10 son nuevos (`aee54c1`). Desde N5 la romanización va solo en el vocabulario. La prueba de ubicación llega hasta N10 (diagnóstico v2 con 180 ítems).
+Audio: 39 audios cortos de ko pregenerados; se subieron solo los 26 verificados por transcripción, con `--ignore-existing` (2002 → 2028). Los 13 sin verificar (리, 긴, 바, 여, 녀, 걔, 팬, -적, V-되, V-(으)며, N 및 N, y los vocablos 덤/넉 con formas entre paréntesis) siguen generándose al vuelo con `/voz`.
+Commit: `aee54c1` (build desde worktree limpio) · `main.dart.js` sha256 `df3682c977f9fb5d…` (el código Dart es el mismo que en edu-57; cambian los assets).
+Pruebas: Flutter completo, 413 en verde (1 omitido) y 0 fallos, corrido en el árbol principal con el mismo contenido que `aee54c1`. `validar_ruta.py`: 10 idiomas, 0 errores. `validar_diagnostico.py --idioma ko`: n1–n10 OK.
+Backup: `/var/www/onelingo/backups/20261016-edu-58-coreano/web-anterior` (= edu-57). Verificado:
+- responden 200: `/`, `/api/salud`, `ko/ruta/curso.json`, `ko/ruta/n5-b01.json`, `ko/ruta/n10-b10.json`, `ko/diagnostico-v2.json` y los `n10-b10` de ru e it;
+- curso ko con f0 y N1–N10 publicados (c2 planificado);
+- PM2 `onelingo-api` online;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261016-edu-58-coreano/web-retirada-post && cp -al backups/20261016-edu-58-coreano/web-anterior web'`
+Pendiente (para después de terminar todos los idiomas): barrido de naturalidad de ko con Kiwi (el validador solo acepta la palabra exacta o palabra + partícula de una lista, lo que deja diálogos rígidos en N5–N10).
