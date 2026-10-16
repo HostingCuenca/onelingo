@@ -31,9 +31,11 @@ cual: este script solo reescribe `orden`, `prerequisitos` y `modulo`.
   `tools/ia/chequeos.py` con 0 errores (se comprueba antes de integrar), y la
   del f0, pasar `validar.py`; no se exigen archivos revision-*.md. Un nivel
   ya integrado no pasa otra vez por validar_bloque.py (lo rechaza): lo cubre
-  el `validar_ruta.py ko` final. Los niveles que aún no existen (N3–N10) no
-  se declaran en curso.json: la app los muestra bloqueados («Próximamente»)
+  el `validar_ruta.py ko` final. Los niveles que aún no existen no se
+  declaran en curso.json: la app los muestra bloqueados («Próximamente»)
   y la prueba de ubicación nunca ubica por encima del último publicado.
+  Desde el 16-10-2026 están integrados N1–N10: el coreano está completo (rom
+  en todo texto coreano en N1–N4; desde N5, solo en el vocabulario).
 - Coreano sin morfología inventada: `vocabularioEstricto` da por conocido un eojeol si es
   una forma enseñada tal cual o una raíz enseñada + partículas/cópula enseñadas pegadas
   (conocida_ko de tools/validar_ruta.py y palabraConocidaKo de integridad.dart); las

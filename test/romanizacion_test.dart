@@ -149,7 +149,9 @@ void main() {
     // ru: rom en todo texto ruso solo en N1–N4; desde N5, solo en el
     // vocabulario (tools/ia/idiomas/ru.md; prueba aparte más abajo).
     ('ru', 'Ruta publicada f0–N4', () => _rutaPublicada('ru', hasta: 4)),
-    ('ko', 'Ruta publicada f0–N4', () => _rutaPublicada('ko')),
+    // ko: igual que ru, rom en todo texto coreano solo en N1–N4; desde N5,
+    // solo en el vocabulario (tools/ia/idiomas/ko.md; prueba aparte más abajo).
+    ('ko', 'Ruta publicada f0–N4', () => _rutaPublicada('ko', hasta: 4)),
   ]) {
     test('$fuente ($idioma): cada texto, opción, ficha y par en el '
         'idioma tiene su romanización', () {
@@ -191,6 +193,25 @@ void main() {
   test('ru N5–N10: rom solo en el vocabulario, nunca en los ejercicios', () {
     final altas = [
       for (final u in _rutaPublicada('ru'))
+        if ((u.nivelInterno ?? 0) >= 5) u,
+    ];
+    expect(altas, hasLength(300));
+    for (final u in altas) {
+      expect(u.vocabulario, isNotEmpty, reason: u.id);
+      for (final v in u.vocabulario) {
+        expect(v.rom, isNotNull, reason: '${u.id}: ${v.texto}');
+      }
+      for (final p in u.pasos) {
+        for (final it in p.items) {
+          expect(it.tieneRom, isFalse, reason: '${u.id}/${it.id}');
+        }
+      }
+    }
+  });
+
+  test('ko N5–N10: rom solo en el vocabulario, nunca en los ejercicios', () {
+    final altas = [
+      for (final u in _rutaPublicada('ko'))
         if ((u.nivelInterno ?? 0) >= 5) u,
     ];
     expect(altas, hasLength(300));

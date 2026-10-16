@@ -112,6 +112,18 @@ void main() {
       // Ni el pasado honorífico ni otra forma no enseñada se deducen.
       expect(faltan('ko', '모셨어요 아끼셨어요', s), ['모셨어요', '아끼셨어요']);
     });
+    test('N5–N10: 의 tras sustantivo; 과의 solo si se enseñó la forma', () {
+      final s = saber([
+        '가족', '화해', '의', '과', '로', '은', '는', '이', '그', '장면', //
+        '읽히다 (읽혀요)',
+      ]);
+      // Como en ko.n10.c34: «그 장면이 가족의 화해로 읽혀요».
+      expect(faltan('ko', '그 장면이 가족의 화해로 읽혀요.', s), isEmpty);
+      // 과 + 의 no es partícula interior + final (은/는/도/만): no se deduce.
+      expect(faltan('ko', '가족과의 화해', s), ['가족과의']);
+      // Interior + tema sí: 가족과는.
+      expect(faltan('ko', '가족과는 화해로 읽혀요', s), isEmpty);
+    });
   });
 
   group('ruso', () {

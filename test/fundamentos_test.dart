@@ -305,7 +305,7 @@ void main() {
     expect(nivelAlumnoEnRuta(ruta, alto), 8);
   });
 
-  test('el coreano (versión esencial): ruta f0 (9 unidades) y solo N1–N4 publicados', () async {
+  test('el coreano (versión esencial): ruta f0 (9 unidades) y N1–N10 publicados', () async {
     expect(idiomasSoloRutaF0, contains('ko'));
     await ContenidoJson.precargar('ko');
     expect(Fundamentos.disponible('ko'), isFalse); // no tiene nivel-0.json (su Nivel 0 es el nuevo, en nivel0/)
@@ -324,13 +324,10 @@ void main() {
       for (final n in ruta.curso.niveles)
         if (n.estado == EstadoNivel.publicado) n.id,
     ];
-    // Versión esencial: N1–N4 (50 clases por nivel); N5–N10 aún no existen
-    // en el curso, así que la app los muestra «Próximamente» y no se juegan.
-    expect(publicados, ['f0', 'n1', 'n2', 'n3', 'n4']);
-    for (var i = 5; i <= 10; i++) {
-      expect(ruta.delNivel('n$i'), isEmpty, reason: 'n$i');
-    }
-    expect(nivelPublicadoMaximo(ruta), 4);
+    // Versión esencial, curso completo: N1–N10 (50 clases por nivel); no
+    // queda ningún nivel «Próximamente».
+    expect(publicados, ['f0', for (var i = 1; i <= 10; i++) 'n$i']);
+    expect(nivelPublicadoMaximo(ruta), 10);
     var previa = f0.last.id;
     for (final nivel in publicados.skip(1)) {
       final clases = ruta.delNivel(nivel);
@@ -341,19 +338,24 @@ void main() {
         previa = u.id;
       }
     }
-    // La romanización llega intacta a las clases (N1–N4: visible).
+    // La romanización llega intacta a las clases (N1–N4: en todo texto coreano).
     final items = [
       for (final u in ruta.unidades)
-        for (final p in u.pasos) ...p.items,
+        if ((u.nivelInterno ?? 0) <= 4)
+          for (final p in u.pasos) ...p.items,
     ];
     expect(items.where((i) => i.tieneRom).length, greaterThan(500));
+    // Desde N5, solo el vocabulario lleva rom (tools/ia/idiomas/ko.md).
+    for (final u in ruta.unidades.where((u) => (u.nivelInterno ?? 0) >= 5)) {
+      expect(u.vocabulario.every((v) => v.rom != null), isTrue, reason: u.id);
+    }
     expect(idiomasConRuta, contains('ko'));
     const s = ProgressState(idiomaMeta: 'ko', fundamentos: true);
     expect(s.fundamentosPendientes, isTrue);
     expect(s.nivel0Pendiente, isTrue);
-    // Un alumno ubicado más arriba (diagnóstico antiguo) se queda en N4.
+    // Un alumno ubicado en N8 estudia N8: ya está publicado.
     const alto = ProgressState(idiomaMeta: 'ko', nivelInicial: 8);
-    expect(nivelAlumnoEnRuta(ruta, alto), 4);
+    expect(nivelAlumnoEnRuta(ruta, alto), 8);
   });
 
 }
