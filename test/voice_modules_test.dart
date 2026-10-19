@@ -54,6 +54,24 @@ void main() {
     expect(Uri.parse(platform.sources.last).queryParameters['modo'], 'letra');
     await VozNube.instancia.parar();
   });
+  test('la URL y la caché local llevan la versión de las voces', () async {
+    platform.prepare = true; platform.requested = null;
+    expect(await VozNube.instancia.reproducir('Hallo', 'de', voz: 'hombre_b'), true);
+    final q = Uri.parse(platform.sources.last).queryParameters;
+    expect(q['v'], VozNube.versionVoces);
+    expect(q['voz'], 'hombre_b');
+    await VozNube.instancia.parar();
+  });
+  test('celdas en idioma de apoyo: sin voz en ja, zh, ko y ru; los latinos no se adivinan', () {
+    expect(audibleEnIdioma('Resumen', 'ko'), false);
+    expect(audibleEnIdioma('Palabra repetida + verbo', 'ko'), false);
+    expect(audibleEnIdioma('V-되', 'ko'), true);
+    expect(audibleEnIdioma('вопреки + dativo', 'ru'), true);
+    expect(audibleEnIdioma('0 · 1 · 2 · 3', 'ru'), true);
+    expect(audibleEnIdioma('KTV 很 好玩', 'zh'), true);
+    expect(audibleEnIdioma('は', 'ja'), true);
+    expect(audibleEnIdioma('cerca', 'en'), true);
+  });
   test('la voz del dispositivo (respaldo) recibe letras sueltas en minúscula', () {
     // Con «A» dice «A mayúscula»; con «a», el nombre de la letra.
     expect(paraVozDelSistema('A'), 'a');

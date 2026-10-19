@@ -12,6 +12,7 @@ import '../../core/aprendizaje/biblioteca_adaptador.dart';
 import '../../core/aprendizaje/dominio.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
+import '../../core/elenco.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/widgets.dart';
@@ -952,6 +953,8 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
           ),
         );
         vista.add(const SizedBox(height: 12));
+        // Cada personaje con su voz (elenco.json; ver core/elenco.dart).
+        final hablantes = [for (final f in p.frases) f.hablante];
         for (final linea in p.frases) {
           final propio = linea.hablante == 'Tú' || linea.hablante == 'You';
           vista.add(
@@ -968,6 +971,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
                     '',
                     hablante: linea.hablante,
                     hablanteRom: linea.hablanteRom,
+                    dialogo: hablantes,
                     color: propio ? OL.moradoSuave : OL.blanco,
                   ),
                 ),
@@ -1013,6 +1017,20 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     ),
   );
 
+  /// Una línea con la voz de su hablante dentro del diálogo; sin diálogo
+  /// (ejemplos, patrón), la narradora.
+  Future<void> _escucharLinea(
+    String texto,
+    String? hablante,
+    List<String?>? dialogo,
+  ) async {
+    final voz = dialogo == null
+        ? null
+        : await Elenco.voz(u.idioma, dialogo, hablante);
+    if (!mounted) return;
+    await escucharTexto(context, texto, u.idioma, voz: voz);
+  }
+
   Widget _tarjetaFrase(
     String texto,
     String? rom,
@@ -1020,6 +1038,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
     String nota, {
     String? hablante,
     String? hablanteRom,
+    List<String?>? dialogo,
     Color color = OL.blanco,
   }) => Padding(
     padding: const EdgeInsets.only(bottom: 10),
@@ -1027,7 +1046,7 @@ class _UnidadRecorridoState extends ConsumerState<_UnidadRecorrido> {
       color: color,
       padding: const EdgeInsets.fromLTRB(16, 12, 6, 12),
       etiquetaSemantica: tr('Escuchar {texto}', {'texto': texto}),
-      onTap: () => escucharTexto(context, texto, u.idioma),
+      onTap: () => _escucharLinea(texto, hablante, dialogo),
       child: Row(
         children: [
           Expanded(

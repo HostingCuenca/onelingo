@@ -16,9 +16,14 @@ import '../../shared/widgets/romanizacion.dart';
 import '../../core/i18n/i18n.dart';
 
 /// Reproduce un texto del idioma meta con la voz nativa de su idioma (en la
-/// nube, con el idioma forzado; la del dispositivo solo sin sesión).
-Future<void> escucharTexto(BuildContext context, String texto, String idioma) =>
-    Voz.instancia.hablar(texto, idioma);
+/// nube, con el idioma forzado; la del dispositivo solo sin sesión). `voz` es
+/// el rol (p. ej. el del personaje de un diálogo); por defecto, la narradora.
+Future<void> escucharTexto(
+  BuildContext context,
+  String texto,
+  String idioma, {
+  String? voz,
+}) => Voz.instancia.hablar(texto, idioma, voz: voz);
 
 /// Botón de audio reutilizable.
 class BotonAudio extends StatelessWidget {

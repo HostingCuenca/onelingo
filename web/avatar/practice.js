@@ -225,20 +225,27 @@ $('back').onclick = () => { if (embebido) { colgar(false); parent.postMessage('o
 
 // ---------- Voz del tutor ----------
 function senalVoz() { if (!vozController) vozController = new AbortController(); return vozController.signal; }
-function urlVoz(text) {
+// La voz es la nativa del idioma practicado según el género del avatar
+// (rolDeVoz en backend/src/lib/voz.ts). Un texto largo lo divide el servidor
+// por frases. `previo` (la frase anterior de la misma respuesta) va como
+// previous_text: cada frase no empieza con entonación de inicio.
+function urlVoz(text, previo = '') {
   const url = new URL(config.api + '/voz/stream');
-  url.search = new URLSearchParams({texto: text.slice(0, 600), idioma: language(), voz: 'avatar_' + tutor.id});
+  url.search = new URLSearchParams({texto: text, idioma: language(), voz: 'avatar_' + tutor.id, ...(previo ? {previo} : {})});
   return url;
 }
-function prepararFrase(text) {
-  return fetch(urlVoz(text), {headers: headers(), signal: senalVoz()})
+let fraseAnterior = {version: -1, texto: ''};
+function prepararFrase(text, version) {
+  const previo = fraseAnterior.version === version ? fraseAnterior.texto : '';
+  fraseAnterior = {version, texto: text};
+  return fetch(urlVoz(text, previo), {headers: headers(), signal: senalVoz()})
     .then(r => { if (!r.ok) throw Error(`La voz no está disponible (${r.status}).`); return r.arrayBuffer(); })
     .then(async bytes => ({url: URL.createObjectURL(new Blob([bytes], {type: 'audio/mpeg'})), env: await envolvente(bytes).catch(() => null)}));
 }
 // Cada frase se descarga en cuanto llega (en paralelo a la que suena). Antes
 // de contestar solo se descargan: suenan al empezar la llamada.
 function encolar(text, version) {
-  const listo = prepararFrase(text);
+  const listo = prepararFrase(text, version);
   listo.catch(() => {});
   cola.push({text, listo});
   if (enLlamada && !sonando) siguiente(version);
@@ -262,7 +269,7 @@ async function siguiente(version) {
 }
 function soltarURL() { if (urlActual) { URL.revokeObjectURL(urlActual); urlActual = null; } }
 function detenerVoz() {
-  vozController?.abort(); vozController = null;
+  vozController?.abort(); vozController = null; fraseAnterior = {version: -1, texto: ''};
   for (const item of cola) item.listo.then(f => URL.revokeObjectURL(f.url), () => {});
   cola = []; sonando = false; envActual = null;
   audio.pause(); audio.removeAttribute('src'); audio.load(); soltarURL();
@@ -331,6 +338,7 @@ async function requestTutor(entrada, opening = false) {
   if (busy || !config?.token || !tutor || !avatar) return;
   if (!opening) stop();
   const version = epoch;
+  fraseAnterior = {version: -1, texto: ''}; // turno nuevo: sin frase anterior
   busy = true; respuestaCompleta = false; controls(); error(''); ultimoFallo = null;
   let frases = 0, final = false, transcrito = false;
   if (!opening) {

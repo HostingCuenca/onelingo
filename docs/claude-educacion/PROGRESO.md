@@ -17,6 +17,8 @@ Porcentaje aproximado: Fundamentos activos en 9 idiomas; portugués retirado y e
 
 ## Terminado recientemente
 
+- **Voces nativas por rol (2026-10-19, sin desplegar):** cinco roles por idioma en `NATIVAS` (selección del piloto: Liam sustituye a Chris en en, Sami a Luna en it, Caroline a Hélène en fr). Chat, videollamada y Lumo hablan con voz nativa del idioma practicado (mujer_b / hombre_b / lumo por género). Diálogos de la ruta con voz por personaje (`elenco.json` + `lib/core/elenco.dart`). style 0; la clave de caché incluye modelo y ajustes (v2); los cortos verificados se siguen sirviendo con su clave anterior. Textos > 600 caracteres: se dividen por frases en el servidor. Videollamada con `previous_text`. Pendiente: desplegar, cifras a palabras fuera del alemán, apellidos japoneses sin género (respaldo por orden).
+
 - **I2 y francés FR-1/FR-2 (2026-10-01, DEC-032):**
   - Contenido bilingüe con `localizarApoyo`.
   - Nivel 0 francés F1–F10 completo (40 lecciones, bilingüe, revisión GO con 67 correcciones).

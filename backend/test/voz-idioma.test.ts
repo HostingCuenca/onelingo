@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { codigoIdiomaVoz, cuerpoSintesis, hashAudio, rolDeVoz, textoParaVoz } from '../src/lib/voz.js';
+import { readFileSync } from 'node:fs';
+import { codigoIdiomaVoz, cuerpoSintesis, hashAudio, hashAudioLegado, esAudioCorto, rolDeVoz, rolPedido, textoParaVoz, trocearTexto, NATIVAS, ROLES, VOCES, AJUSTES_VOZ } from '../src/lib/voz.js';
 
 test('la síntesis fuerza el idioma en modelos v2.5 y no en los demás', () => {
   assert.equal(codigoIdiomaVoz('ja', 'eleven_flash_v2_5'), 'ja');
@@ -11,11 +12,29 @@ test('la síntesis fuerza el idioma en modelos v2.5 y no en los demás', () => {
   assert.equal('language_code' in cuerpoSintesis('あ', 'ja', 'eleven_multilingual_v2'), false);
 });
 
-test('la caché distingue idiomas y conserva la clave inglesa anterior', () => {
-  const anterior = hashAudio('no', 'voz', 'm');
-  assert.equal(hashAudio('no', 'voz', 'm', 'en'), anterior);
-  assert.notEqual(hashAudio('no', 'voz', 'm', 'es'), anterior);
+test('la caché distingue idiomas, voz, modelo y ajustes; mismo texto y voz = mismo hash', () => {
+  assert.equal(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm', 'es'));
+  assert.equal(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm', 'es', { ...AJUSTES_VOZ }));
   assert.notEqual(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm', 'pt'));
+  assert.notEqual(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'otra', 'm', 'es'));
+  assert.notEqual(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm2', 'es'));
+  assert.notEqual(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm', 'es', { ...AJUSTES_VOZ, style: 0.2 }));
+  assert.notEqual(hashAudio('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm', 'es', { ...AJUSTES_VOZ, speed: 0.9 }));
+  // Los cortos pregenerados conservan su clave anterior (inglés sin idioma).
+  assert.equal(hashAudioLegado('no', 'voz', 'm', 'en'), hashAudioLegado('no', 'voz', 'm'));
+  assert.notEqual(hashAudioLegado('no', 'voz', 'm', 'es'), hashAudioLegado('no', 'voz', 'm', 'en'));
+  assert.notEqual(hashAudioLegado('no', 'voz', 'm', 'es'), hashAudio('no', 'voz', 'm', 'es'));
+  assert.equal(cuerpoSintesis('Hola', 'es', 'eleven_flash_v2_5').voice_settings.style, 0);
+  assert.equal(cuerpoSintesis('Hola', 'es', 'eleven_flash_v2_5', 'Antes.').previous_text, 'Antes.');
+  assert.equal('previous_text' in cuerpoSintesis('Hola', 'es', 'eleven_flash_v2_5'), false);
+});
+
+test('audios cortos: letra, sílaba o palabra de 1–2 letras', () => {
+  assert.equal(esAudioCorto('A', 'a.'), true);
+  assert.equal(esAudioCorto('马', '马。'), true);
+  assert.equal(esAudioCorto('你好', '你好'), false);
+  assert.equal(esAudioCorto('Y', 'i griega.', 'letra'), true);
+  assert.equal(esAudioCorto('casa', 'casa'), false);
 });
 
 test('zh y ja se leen sin los espacios entre palabras del contenido', () => {
@@ -25,37 +44,75 @@ test('zh y ja se leen sin los espacios entre palabras del contenido', () => {
   assert.equal(textoParaVoz('Hello  there', 'en'), 'Hello there');
 });
 
-test('francés usa voces nativas: Hélène narra y Nicolas en diálogos', async () => {
-  const { rolDeVoz } = await import('../src/lib/voz.js');
-  assert.equal(rolDeVoz(undefined, 'fr'), 'caroline');
-  assert.equal(rolDeVoz('narrador', 'fr'), 'nicolas');
-  assert.equal(rolDeVoz('narradora', 'en'), 'sofia');
-  assert.equal(rolDeVoz('avatar_lumo', 'fr'), 'avatar_lumo');
-  assert.equal(rolDeVoz('no-existe', 'en'), 'sofia');
-  assert.equal(rolDeVoz('no-existe', 'xx'), 'narradora');
-});
+const SELECCION: Record<string, [string, string, string, string, string]> = {
+  // narradora, narrador, mujer_b, hombre_b, lumo (piloto de voces 2026-10-19)
+  en: ['XrExE9yKIg1WjnnlVkGX', 'TX3LPaxmHKxFdv7VOQHJ', '56AoDkrOh6qfVPDXZ7Pt', 'UgBBYS2sOqTuMpoF3BR0', 'tnSpp4vdxKPjI9w0GnoV'],
+  es: ['rixsIpPlTphvsJd2mI03', 'gbTn1bmCvNgk0QEAVyfM', '86V9x9hrQds83qf7zaGn', 'htFfPSZGJwjBv1CL0aMD', 'ajOR9IDAaubDK5qtLUqQ'],
+  fr: ['kwhMCf63M8O3rCfnQ3oQ', 'aQROLel5sQbj1vuIVi6B', 'YxrwjAKoUKULGd0g8K9Y', 'kENkNtk0xyzG09WW40xE', 'FvmvwvObRqIHojkEGh5N'],
+  de: ['lzvBSKYbNWDD0a6BaJSK', 'n6JEKnKG5a8I78SoBRry', 'v3V1d2rk6528UrLKRuy8', 'aTTiK3YzK3dXETpuDE2h', 'HRIShmNY56JGHVU1vXIt'],
+  pt: ['7iqXtOF3wl3pomwXFY7G', 'Qrdut83w0Cr152Yb4Xn3', 'MZxV5lN3cv7hi1376O0m', '9pDzHy2OpOgeXM8SeL0t', 'RGymW84CSmfVugnA5tvA'],
+  it: ['fQmr8dTaOQq116mo2X7F', 'HuK8QKF35exsCh2e7fLT', '6KQ52XTjdNd1FfUgGmV6', 'W71zT1VwIFFx3mMGH2uZ', 'Kq9pDHHIMmJsG9PEqOtv'],
+  ru: ['EDpEYNf6XIeKYRzYcx4I', 'ogi2DyUAKJb7CEdqqvlU', 'Jbte7ht1CqapnZvc4KpK', 'rQOBu7YxCDxGiFdTm28w', 'AB9XsbSA4eLG12t2myjN'],
+  ko: ['AW5wrnG1jVizOYY7R1Oo', 'PDoCXqBQFGsvfO0hNkEs', 'uyVNoMrnUku1dZyVEXwD', '4JJwo477JUAx3HV0T7n7', '8jHHF8rMqMlg8if2mOUe'],
+  ja: ['4lOQ7A2l7HPuG7UIHiKA', 'j210dv0vWm7fCknyQpbA', 'WQz3clzUdMqvBf0jswZQ', 'b34JylakFZPlGS0BnwyY', 'B8gJV1IhpuegLxdpXFOE'],
+  zh: ['ByhETIclHirOlWnWKhHc', 'MI36FIkp9wRP7cpWKPTl', '5eoK8NqMBsMdqUmImHNs', 'lt7GBaCoAHWbT7JSZ5Xs', 'NchRhc5KPgHwZagz6MrZ'],
+};
+const idDe = (voz: string | undefined, idioma: string) => VOCES[rolDeVoz(voz, idioma)].id;
 
-test('alemán usa voces nativas: Petra narra y Julius en diálogos', async () => {
-  const { rolDeVoz } = await import('../src/lib/voz.js');
-  assert.equal(rolDeVoz(undefined, 'de'), 'petra');
-  assert.equal(rolDeVoz('narrador', 'de'), 'julius');
-  assert.equal(rolDeVoz('avatar_lumo', 'de'), 'avatar_lumo');
-});
-
-test('it, ru, ko, ja y zh usan voces nativas para narrar y para los diálogos', async () => {
-  const { rolDeVoz } = await import('../src/lib/voz.js');
-  const esperadas: Record<string, [string, string]> = {
-    it: ['luna', 'carmelo'],
-    ru: ['mariia', 'stanislav'],
-    ko: ['jiyoung', 'chris_ko'],
-    ja: ['kyoko', 'hinata'],
-    zh: ['shanshan', 'evan'],
-  };
-  for (const [idioma, [narradora, narrador]] of Object.entries(esperadas)) {
-    assert.equal(rolDeVoz(undefined, idioma), narradora);
-    assert.equal(rolDeVoz('narrador', idioma), narrador);
-    assert.equal(rolDeVoz('avatar_lumo', idioma), 'avatar_lumo');
+test('cada idioma tiene su voz nativa para los cinco roles (ids de la selección)', () => {
+  assert.deepEqual(Object.keys(NATIVAS).sort(), Object.keys(SELECCION).sort());
+  for (const [idioma, ids] of Object.entries(SELECCION)) {
+    ROLES.forEach((rol, i) => assert.equal(idDe(rol, idioma), ids[i], `${idioma} ${rol}`));
+    assert.equal(new Set(ids).size, 5, `${idioma}: cinco voces distintas`);
   }
+  // Hélène (desactivada), Chris (en) y Luna (it) ya no suenan.
+  const ids = new Set(Object.values(VOCES).map((v) => v.id));
+  for (const fuera of ['imRmmzTqlLHt9Do1HufF', 'iP95p4xoKVk53GoZ742B', 'BZc8d1MPTdZkyGbE9Sin']) assert.equal(ids.has(fuera), false);
+});
+
+test('tutores, avatares y roles se traducen a la voz nativa del idioma practicado', () => {
+  for (const idioma of Object.keys(SELECCION)) {
+    const [narradora, narrador, mujer, hombre, lumo] = SELECCION[idioma];
+    assert.equal(idDe(undefined, idioma), narradora);
+    assert.equal(idDe('no-existe', idioma), narradora);
+    assert.equal(idDe('narrador', idioma), narrador);
+    for (const t of ['mia', 'sofia', 'avatar_amara', 'avatar_sofia', 'avatar_lucia', 'avatar_clara', 'avatar_mei', 'mujer_b']) assert.equal(idDe(t, idioma), mujer, `${idioma} ${t}`);
+    for (const t of ['leo', 'max', 'avatar_malik', 'avatar_mateo', 'avatar_owen', 'avatar_daniel', 'avatar_kenji', 'hombre_b']) assert.equal(idDe(t, idioma), hombre, `${idioma} ${t}`);
+    assert.equal(idDe('avatar_lumo', idioma), lumo);
+    assert.equal(idDe('lumo', idioma), lumo);
+  }
+  assert.equal(rolDeVoz('narradora', 'fr'), 'fr_caroline');
+  assert.equal(rolDeVoz('avatar_nuevo', 'de'), 'de_petra');
+  assert.equal(rolDeVoz('no-existe', 'xx'), 'en_matilda');
+  assert.equal(rolDeVoz('de_julius', 'fr'), 'de_julius'); // clave directa (panel)
+});
+
+test('el género de cada avatar coincide con web/avatar/roster.json', () => {
+  const roster = JSON.parse(readFileSync(new URL('../../web/avatar/roster.json', import.meta.url), 'utf8'));
+  for (const t of roster.tutors as { id: string; gender: string }[]) {
+    const esperado = t.id === 'lumo' ? 'lumo' : t.gender === 'female' ? 'mujer_b' : t.gender === 'male' ? 'hombre_b' : 'narradora';
+    assert.equal(rolPedido(`avatar_${t.id}`), esperado, t.id);
+  }
+});
+
+test('textos largos: trozos ≤ máximo, por frases, sin perder texto', () => {
+  assert.deepEqual(trocearTexto('Hola.', 600), ['Hola.']);
+  const frase = 'Esta es una frase de prueba bastante normal. ';
+  const largo = frase.repeat(30).trim();
+  const t = trocearTexto(largo, 600);
+  assert.ok(t.length > 1);
+  for (const x of t) { assert.ok(x.length <= 600); assert.ok(x.endsWith('.')); }
+  assert.equal(t.join(' '), largo);
+  const zh = '我们今天去学校。你呢？'.repeat(40);
+  const tz = trocearTexto(zh, 100);
+  for (const x of tz) { assert.ok(x.length <= 100); assert.ok(/[。？]$/.test(x)); }
+  assert.equal(tz.join(''), zh);
+  assert.deepEqual(trocearTexto('¿Vienes? «Sí.» Vale', 9), ['¿Vienes?', '«Sí.»', 'Vale']);
+  // Una frase sin puntos: por comas, luego por palabras, al final a cuchillo.
+  const comas = Array.from({ length: 40 }, (_, i) => `parte ${i}`).join(', ');
+  for (const x of trocearTexto(comas, 50)) assert.ok(x.length <= 50);
+  assert.deepEqual(trocearTexto('a'.repeat(25), 10), ['a'.repeat(10), 'a'.repeat(10), 'a'.repeat(5)]);
+  assert.equal(trocearTexto('Dr. Weber kommt.', 600).length, 1);
 });
 
 test('alemán: las cifras se leen en palabras (años, fechas, horas, §, decimales)', () => {
@@ -75,15 +132,6 @@ test('alemán: las cifras se leen en palabras (años, fechas, horas, §, decimal
   assert.equal(v('Wir haben 21 Gäste und 101 Stühle.'), 'Wir haben einundzwanzig Gäste und einhunderteins Stühle.');
   assert.equal(v('Ich bin 15, mein Vater ist 50.'), 'Ich bin fünfzehn, mein Vater ist fünfzig.');
   assert.equal(textoParaVoz('Es kostet 437 Euro.', 'fr'), 'Es kostet 437 Euro.');
-});
-
-test('en (americano), es (latino) y pt (Brasil) usan voces nativas; Lumo conserva la suya', () => {
-  const esperadas: Record<string, [string, string]> = { en: ['sofia', 'chris_en'], es: ['isabel', 'enrique'], pt: ['fernanda', 'paulo'] };
-  for (const [idioma, [narradora, narrador]] of Object.entries(esperadas)) {
-    assert.equal(rolDeVoz(undefined, idioma), narradora);
-    assert.equal(rolDeVoz('narrador', idioma), narrador);
-    assert.equal(rolDeVoz('avatar_lumo', idioma), 'avatar_lumo');
-  }
 });
 
 test('letras: modo letra dice el nombre; sin modo, una letra suelta es palabra en minúscula', () => {

@@ -46,8 +46,9 @@ class Voz {
   }
 
   /// Habla `texto` en el idioma dado; quita la romanización entre paréntesis.
-  /// `voz` es el rol de voz del servidor: id del tutor (mia, leo, sofia, max),
-  /// `narradora` (lecciones, por defecto) o `narrador` (diálogos).
+  /// `voz` es el rol de voz del servidor: `narradora` (por defecto),
+  /// `narrador`, `mujer_b`, `hombre_b`, `lumo`, o un tutor (mia, sofia → mujer_b;
+  /// leo, max → hombre_b). Suena la voz nativa de `idioma` para ese rol.
   /// `velocidad` ≤ 0.4 reproduce despacio (modo Listening lento).
   /// `modo: 'letra'` lee el nombre de las letras (Nivel 0); lo resuelve el
   /// servidor en su idioma. La voz del dispositivo es solo el respaldo: con
@@ -117,9 +118,18 @@ class VozNube {
   String ultimoError = '';
   int _turno = 0;
 
+  /// Versión de las voces del servidor. Súbela cuando cambie la voz de un
+  /// rol o sus ajustes: entra en la clave de los MP3 descargados y en la URL,
+  /// así el dispositivo no reproduce audio con la voz anterior.
+  static const versionVoces = 'v2';
+
   String _clave(String texto, String idioma, String voz, [String? modo]) =>
       sha1
-          .convert(utf8.encode('$voz|$idioma|${modo == null ? '' : '$modo|'}$texto'))
+          .convert(
+            utf8.encode(
+              '$versionVoces|$voz|$idioma|${modo == null ? '' : '$modo|'}$texto',
+            ),
+          )
           .toString();
 
   Uri _url(
@@ -134,6 +144,7 @@ class VozNube {
       'idioma': idioma,
       'voz': voz,
       'modo': ?modo,
+      'v': versionVoces,
       if (conToken) 'token': Sync.instancia.token ?? '',
     },
   );
@@ -625,6 +636,25 @@ double similitud(String dicho, String esperado) {
   // La UI usa 0.6: un cambio de polaridad o un reordenamiento completo
   // no debe aprobar por compartir casi todas las palabras.
   return (negationChanged || sameTokensReordered) && score >= .5 ? .49 : score;
+}
+
+final _escrituraMeta = {
+  'ja': RegExp(r'[\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Han}]', unicode: true),
+  'zh': RegExp(r'\p{Script=Han}', unicode: true),
+  'ko': RegExp(r'\p{Script=Hangul}', unicode: true),
+  'ru': RegExp(r'\p{Script=Cyrillic}', unicode: true),
+};
+final _latina = RegExp(r'\p{Script=Latin}', unicode: true);
+
+/// Falso si el texto está, con seguridad, en el idioma de apoyo (español o
+/// inglés): en ja, zh, ko y ru, con letras latinas y sin ningún carácter de la
+/// escritura meta (p. ej. una celda «Resumen» en coreano). Cifras y símbolos
+/// sí suenan. En los idiomas de escritura latina no se adivina: haría falta un
+/// campo del contenido que lo marque.
+bool audibleEnIdioma(String texto, String idioma) {
+  final meta = _escrituraMeta[idioma];
+  if (meta == null) return true;
+  return meta.hasMatch(texto) || !_latina.hasMatch(texto);
 }
 
 /// Texto para la voz del dispositivo (respaldo sin conexión). Una letra

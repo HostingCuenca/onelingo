@@ -40,7 +40,8 @@ Actualizado: 2026-10-03 (portugués reiniciado; planificación de Nivel 0 y Fund
 | Verbos («Mis verbos») | `tools/contenido/verbos/verbos-<idioma>.json` (revisada). **Generado:** `assets/contenido/<idioma>/verbos.json`, con tablas y nivel tomado de la ruta | `core/lexico/verbos.dart`; `tools/contenido/verbos/generar_verbos.py` | `generar_verbos.py --comprobar`, `test/lexico_test.dart` |
 | Lecturas y escuchas | `assets/contenido/en/{reading,listening}_units.json` | `core/content/learning_units.dart` | `test/lectura_escucha_test.dart` |
 | Guías de gramática | `lib/core/content/grammar_guides.dart` | — | `test/guias_gramatica_test.dart` |
-| Voces nativas por idioma | `NATIVAS` en `backend/src/lib/voz.ts` (fr: Hélène narra, Nicolas dialoga) | `rolDeVoz` | `backend/test/voz-idioma.test.ts` |
+| Voces nativas por idioma y rol | `NATIVAS` en `backend/src/lib/voz.ts` (narradora, narrador, mujer_b, hombre_b, lumo; tutores y avatares se traducen por género al idioma practicado) | `rolDeVoz` | `backend/test/voz-idioma.test.ts`, `backend/test/voz-trozos.test.ts` |
+| Voz de cada personaje en los diálogos | `assets/contenido/<idioma>/elenco.json` (`hablante → rol`; generado y conservando lo manual con `tools/voz/elenco.py`) | `lib/core/elenco.dart` (`vocesDelDialogo`: elenco, respaldo por orden, sin dos voces iguales) | `test/elenco_test.dart` |
 | Tutores y voz | `backend/src/lib/ia.ts` (personas), `backend/src/lib/voz.ts`, `web/avatar/roster.json` | `backend/src/routes/chat.ts` | `backend/test/*` |
 | Progreso del alumno | `ProgressState.practicas` (claves en `ClaveRuta`) | `core/state/providers.dart` | estados calculados, nunca guardados (DEC-006) |
 

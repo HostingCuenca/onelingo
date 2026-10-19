@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../app/theme.dart';
 import '../../core/aprendizaje/modelos.dart';
 import '../../core/efectos.dart';
+import '../../core/voz.dart';
 import 'item_view.dart';
 import '../../core/i18n/i18n.dart';
 
@@ -118,14 +119,19 @@ class _CeldaVista extends StatelessWidget {
       );
     }
     final corta = texto.runes.length <= 3;
+    // Una celda en el idioma de apoyo («Resumen» en coreano) no se lee con la
+    // voz meta: se muestra igual, pero sin audio.
+    final audible = audibleEnIdioma(texto, idioma);
     return Semantics(
-      button: true,
-      label: tr('Escuchar {texto}', {'texto': texto}),
+      button: audible,
+      label: audible ? tr('Escuchar {texto}', {'texto': texto}) : texto,
       child: InkWell(
-        onTap: () {
-          Efectos.toque();
-          escucharTexto(context, texto, idioma);
-        },
+        onTap: audible
+            ? () {
+                Efectos.toque();
+                escucharTexto(context, texto, idioma);
+              }
+            : null,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
           child: Column(

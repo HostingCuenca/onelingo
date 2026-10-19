@@ -2,7 +2,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 import { query } from '../lib/db.js';
 import { config } from '../lib/config.js';
-import { obtenerAudio, obtenerAudioStream, leerAudio, vozDisponible, VOCES, cuotaVoz, textoParaVoz, hashAudio } from '../lib/voz.js';
+import { obtenerAudio, obtenerAudioStream, leerAudio, vozDisponible, VOCES, NATIVAS, AJUSTES_VOZ, cuotaVoz, textoParaVoz, hashAudio, ajustesDeVoz, vozMaxTotal } from '../lib/voz.js';
 import { transcribirOpenAI, openaiDisponible } from '../lib/ia_openai.js';
 import { requiereAlumno, requiereAdmin, type Sesion } from '../lib/auth.js';
 
@@ -19,13 +19,17 @@ async function adminOToken(req: FastifyRequest, reply: FastifyReply) {
 }
 
 export default async function rutas(app: FastifyInstance) {
+  /** Voces efectivas: por idioma y rol, el locutor nativo que suena (sin ids). */
   app.get('/voz/estado', async () => ({
-    voz: vozDisponible(), modelo: config.elevenModelo, transcripcion: openaiDisponible(),
-    voces: Object.fromEntries(Object.entries(VOCES).map(([k, v]) => [k, { nombre: v.nombre, descripcion: v.descripcion }])),
+    voz: vozDisponible(), modelo: config.elevenModelo, transcripcion: openaiDisponible(), ajustes: AJUSTES_VOZ,
+    voces: Object.fromEntries(Object.entries(NATIVAS).map(([idioma, roles]) => [idioma,
+      Object.fromEntries(Object.entries(roles).map(([rol, clave]) => [rol, { nombre: VOCES[clave].nombre, descripcion: VOCES[clave].descripcion }]))])),
   }));
 
   app.get('/voz/stream', { preHandler: alumnoOToken }, async (req, reply) => {
-    const q = z.object({ texto: z.string().min(1).max(600), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional() }).parse(req.query);
+    // Más de vozMaxCaracteres: el servidor lo divide por frases (ver obtenerAudio).
+    // `previo` = frase anterior de la misma respuesta (videollamada): mejor entonación.
+    const q = z.object({ texto: z.string().min(1).max(vozMaxTotal()), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional(), previo: z.string().max(2000).optional() }).parse(req.query);
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 30000);
     const started = performance.now();
@@ -41,13 +45,18 @@ export default async function rutas(app: FastifyInstance) {
     }
   });
 
-  /** MP3 de un texto. Se genera la primera vez y luego sale de la caché (cabecera X-Voz-Cache). */
+  /**
+   * MP3 de un texto. Se genera la primera vez y luego sale de la caché (cabecera X-Voz-Cache).
+   * Sin `immutable`: la URL nombra el rol («narradora»), no la voz, y la voz de un
+   * rol puede cambiar; un día de caché del navegador basta. La URL por hash
+   * (/voz/audio/:hash) sí es inmutable: el hash incluye voz, modelo y ajustes.
+   */
   app.get('/voz', { preHandler: alumnoOToken }, async (req, reply) => {
     const q = z.object({ texto: z.string().min(1), idioma: z.string().default('en'), voz: z.string().optional(), modo: z.enum(['letra']).optional(), token: z.string().optional() }).parse(req.query);
     try {
       const a = await obtenerAudio(q);
       return reply.type('audio/mpeg')
-        .header('cache-control', 'public, max-age=31536000, immutable')
+        .header('cache-control', 'private, max-age=86400')
         .header('x-voz-cache', a.cache ? 'hit' : 'miss')
         .header('x-voz-hash', a.hash)
         .header('x-voz-voz', a.voz)
@@ -118,7 +127,7 @@ export default async function rutas(app: FastifyInstance) {
     const d = z.object({ texto: z.string().min(1), idioma: z.string().default('en'), voz: z.string().optional() }).parse(req.body);
     try {
       const a = await obtenerAudio(d);
-      return { hash: a.hash, cache: a.cache, voz: a.voz, caracteres: a.caracteres, existiaHash: hashAudio(textoParaVoz(d.texto, d.idioma), VOCES[a.voz].id, config.elevenModelo, d.idioma) === a.hash };
+      return { hash: a.hash, cache: a.cache, voz: a.voz, caracteres: a.caracteres, existiaHash: hashAudio(textoParaVoz(d.texto, d.idioma), VOCES[a.voz].id, config.elevenModelo, d.idioma, ajustesDeVoz(a.voz)) === a.hash };
     } catch (e) { return reply.code(502).send({ error: String(e).slice(0, 200) }); }
   });
 }

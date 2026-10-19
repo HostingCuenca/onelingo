@@ -229,7 +229,12 @@ class Nivel0 {
     textos: Map<String, dynamic>.from(n['textos'] as Map? ?? const {}),
     titulo: n['titulo'] as String,
     subtitulo: n['subtitulo'] as String,
-    voz: (n['voz'] as String?) ?? 'sofia',
+    // «sofia» era la voz del Nivel 0 en inglés (Matilda, hoy la narradora
+    // en); el servidor la reserva para la tutora (mujer_b).
+    voz: switch (n['voz'] as String?) {
+      null || 'sofia' => 'narradora',
+      final v => v,
+    },
     sonidos: [
       for (final v in s['vocales'] as List)
         SonidoVocal.fromJson(v as Map<String, dynamic>),

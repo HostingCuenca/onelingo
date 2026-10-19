@@ -2,13 +2,14 @@
  * Manifiesto de audios cortos para pregenerar y verificar (tools/voz/pregenerar_cortos.py).
  * Una letra o sílaba suelta sale muda o mal en la voz (auditoría 2026-10-13), así que
  * se generan aparte, se transcriben de vuelta y la toma buena queda en la caché del
- * servidor con la misma clave que usaría `/voz` (texto normalizado + voz + modelo + idioma).
+ * servidor con la clave de cortos que consulta `/voz` (`hashAudioLegado`, la clave v1: texto normalizado +
+ * voz + modelo + idioma; sin ajustes, porque los cortos llevan los suyos, estables).
  *
  *   cd backend && npx tsx ../tools/voz/manifiesto_cortos.mts [modelo] > /tmp/manifiesto.json
  */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { hashAudio, rolDeVoz, textoParaVoz, VOCES } from '../../backend/src/lib/voz.ts';
+import { esAudioCorto, hashAudioLegado, rolDeVoz, textoParaVoz, VOCES } from '../../backend/src/lib/voz.ts';
 import { nombreLetra } from '../../backend/src/lib/voz_texto.ts';
 
 const RAIZ = path.resolve(import.meta.dirname, '../../assets/contenido');
@@ -20,7 +21,6 @@ const VOZ_N0 = new Set(['m', 'texto', 'audio', 'palabra', 'palabras', 'de', 'a',
 /** Pasos del Nivel 0 cuyas opciones se oyen al tocarlas (en los demás son letras o piezas mudas). */
 const OPCIONES_CON_VOZ = new Set(['escucha_elige', 'toca_sonido', 'lee', 'elige_significado']);
 const LETRAS_N0 = new Set(['letras', 'letra']);
-const CJK = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u;
 
 type Caso = { idioma: string; texto: string; modo?: string; normalizado: string; esperado: string[]; rol: string; voz_id: string; hash: string };
 
@@ -43,12 +43,12 @@ const casos = new Map<string, Caso>();
 function anotar(idioma: string, texto: string, voz: string, modo?: string) {
   const normalizado = textoParaVoz(texto, idioma, modo);
   const letras = normalizado.replace(/[\s\p{P}]/gu, '');
-  // Sílaba suelta (kana, hangul, hanzi) o palabra de hasta dos letras.
-  if (!letras || (!modo && [...letras].length > (CJK.test(letras) ? 1 : 2))) return;
-  if (modo && [...texto.replace(/[\s\p{P}]/gu, '')].length > 1) return; // secuencias: se oyen bien
+  // Sílaba suelta (kana, hangul, hanzi) o palabra de hasta dos letras; con modo
+  // letra, una sola letra (las secuencias se oyen bien). Mismo criterio que /voz.
+  if (!esAudioCorto(texto, normalizado, modo)) return;
   const rol = rolDeVoz(voz, idioma);
   const v = VOCES[rol];
-  const hash = hashAudio(normalizado, v.id, MODELO, idioma);
+  const hash = hashAudioLegado(normalizado, v.id, MODELO, idioma);
   if (casos.has(hash)) return;
   const base = texto.replace(/[\s\p{P}]/gu, '');
   const esperado = modo ? [base, nombreLetra(base, idioma), normalizado.replace(/[.。]$/u, '')] : [letras];
@@ -58,7 +58,8 @@ function anotar(idioma: string, texto: string, voz: string, modo?: string) {
 for (const idioma of IDIOMAS) {
   const dir = path.join(RAIZ, idioma);
   const n0 = JSON.parse(readFileSync(path.join(dir, 'nivel0', 'nivel0.json'), 'utf8'));
-  const vozN0: string = n0.voz ?? 'sofia';
+  // «sofia» era la voz del Nivel 0 en inglés (Matilda = narradora en): ver nivel0.dart.
+  const vozN0: string = !n0.voz || n0.voz === 'sofia' ? 'narradora' : n0.voz;
   for (const f of archivos(dir)) {
     const enN0 = f.includes(`${path.sep}nivel0${path.sep}`);
     const voz = enN0 ? vozN0 : 'narradora';
