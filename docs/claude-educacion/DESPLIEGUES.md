@@ -734,3 +734,18 @@ Web: backup `/var/www/onelingo/backups/20261019-edu-60-voces/web-anterior` (= ed
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-60-voces/web-retirada-post && cp -al backups/20261019-edu-60-voces/web-anterior web'`
 Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo && cp -a backups/20261019-112334/lib-voz.ts backend/src/lib/voz.ts && cp -a backups/20261019-112334/routes-voz.ts backend/src/routes/voz.ts && pm2 restart onelingo-api'`
 Audios cortos (mismo día, tras edu-60): faltaban 321 cortos con las voces nuevas (fr Caroline 212, it Sami 95, ko 13, ru 1). Se pregeneraron con `tools/voz/pregenerar_cortos.py` y se subieron 264 con `--ignore-existing` (2035 → 2299): 194 verificados por transcripción y 70 aceptados a mano porque la transcripción era correcta pero no literal (cifras dichas como palabra, «Deuxième», «10 %», «Trois heures», homófonos «Ça»/«Si»/«Du»/«Se», «E» → «Euh», «n°» → «Numéro»). Se descartaron los demás (letras y sílabas sueltas mal dichas, y «74», «94», «71», «79» oídos como otra cifra): esos se generan al vuelo.
+
+## Release: 20261019-edu-61-chino
+
+Fecha: 2026-10-19 · Responsable: Claude (Claude Code), dentro del encargo del usuario en el chat («continuemos con japonés y chino, terminemos todas las clases»), con el flujo de un despliegue por idioma completo. Solo web y audios cortos; sin cambios de backend ni reinicio.
+Contenido: chino COMPLETO, con Fundamentos (f0) y N1–N10 (500 clases); N5–N10 son nuevos (`6d1b086`), cada nivel con corrección por parejas de bloques y pasada final. Desde N5 el pinyin va solo en el vocabulario. La prueba de ubicación llega hasta N10 (diagnóstico v2 con 180 ítems). El validador (Python y Dart) acepta numerales chinos compuestos de caracteres enseñados.
+Audio: 190 cortos de zh pendientes (caracteres sueltos de N5–N10); se subieron solo los 92 verificados por transcripción, con `--ignore-existing` (2299 → 2391). Los 98 sin verificar (oídos como otra sílaba o tono: 其→起, 向→想, 教→叫…) se generan al vuelo con `/voz`.
+Commit: `6d1b086` (build desde worktree limpio) · `main.dart.js` sha256 `fa472738c58bd50b…` (igual que edu-60: solo cambian los assets).
+Pruebas: Flutter completo, 420 en verde (1 omitido) y 0 fallos, con el mismo contenido que `6d1b086`. `validar_ruta.py`: 10 idiomas, 0 errores. `validar_diagnostico.py --idioma zh`: n1–n10 OK.
+Backup: `/var/www/onelingo/backups/20261019-edu-61-chino/web-anterior` (= edu-60). Verificado:
+- responden 200: `/`, `/api/salud`, `zh/ruta/curso.json`, `zh/ruta/n5-b01.json`, `zh/ruta/n10-b10.json`, `zh/diagnostico-v2.json` y `ko/ruta/n10-b10.json`;
+- curso zh con f0 y N1–N10 publicados (c2 planificado);
+- PM2 `onelingo-api` online;
+- lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-61-chino/web-retirada-post && cp -al backups/20261019-edu-61-chino/web-anterior web'`
+Pendiente (barrido): ordinales 第五+ separados por el validador; compuestos verbo+resultado (说完, 做好) separados; palabras básicas sin entrada (放心, 到底, 规则…); `elenco.json` de zh por regenerar con los personajes de N5–N10.
