@@ -61,6 +61,14 @@ class Chino(unittest.TestCase):
         self.assertEqual(palabras("书、茶，“水”：（好）；对！"), ["书", "茶", "水", "好", "对"])
         self.assertEqual(todas("zh", "书、茶。", saber("书", "茶")), [])
 
+    def test_numeros_compuestos(self):
+        n = saber("一", "二", "五", "九", "十", "百", "千", "万", "百分之")
+        for w in ["五十", "一百二十", "九千", "一万", "二十五", "百分之五十", "一一九"]:
+            self.assertEqual(todas("zh", w, n), [], w)
+        # Dos dígitos sin multiplicador no son un número; a 三十 le falta 三.
+        self.assertEqual(todas("zh", "五九 三十", n), ["五九", "三十"])
+        self.assertEqual(todas("zh", "百分之五十", saber("五", "十")), ["百分之五十"])
+
 
 class Coreano(unittest.TestCase):
     S = saber("저", "학생", "은", "는", "이에요", "서울", "에", "에서", "자다 (자요)")

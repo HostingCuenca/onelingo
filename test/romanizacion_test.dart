@@ -144,7 +144,9 @@ void main() {
 
   for (final (idioma, fuente, unidades) in [
     for (final i in _noLatinos) (i, 'Fundamentos', () => _borrador(i)),
-    ('zh', 'Ruta publicada f0–N4', () => _rutaPublicada('zh')),
+    // zh: pinyin en todo texto chino solo en N1–N4; desde N5, solo en el
+    // vocabulario (tools/ia/idiomas/zh.md; prueba aparte más abajo).
+    ('zh', 'Ruta publicada f0–N4', () => _rutaPublicada('zh', hasta: 4)),
     ('ja', 'Ruta publicada f0–N4', () => _rutaPublicada('ja')),
     // ru: rom en todo texto ruso solo en N1–N4; desde N5, solo en el
     // vocabulario (tools/ia/idiomas/ru.md; prueba aparte más abajo).
@@ -212,6 +214,25 @@ void main() {
   test('ko N5–N10: rom solo en el vocabulario, nunca en los ejercicios', () {
     final altas = [
       for (final u in _rutaPublicada('ko'))
+        if ((u.nivelInterno ?? 0) >= 5) u,
+    ];
+    expect(altas, hasLength(300));
+    for (final u in altas) {
+      expect(u.vocabulario, isNotEmpty, reason: u.id);
+      for (final v in u.vocabulario) {
+        expect(v.rom, isNotNull, reason: '${u.id}: ${v.texto}');
+      }
+      for (final p in u.pasos) {
+        for (final it in p.items) {
+          expect(it.tieneRom, isFalse, reason: '${u.id}/${it.id}');
+        }
+      }
+    }
+  });
+
+  test('zh N5–N10: pinyin solo en el vocabulario, nunca en los ejercicios', () {
+    final altas = [
+      for (final u in _rutaPublicada('zh'))
         if ((u.nivelInterno ?? 0) >= 5) u,
     ];
     expect(altas, hasLength(300));

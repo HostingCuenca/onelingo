@@ -1234,9 +1234,38 @@ bool palabraConocidaRu(String w, Set<String> conocidas) {
 /// Japonés y chino: el curso escribe con espacios entre palabras y
 /// [palabrasMeta] quita la puntuación de ancho completo. Sin segmentar: cada
 /// token, partículas sueltas incluidas (は, の, 的, 吗), debe estar enseñado.
+/// Excepción: números compuestos de caracteres enseñados (五十, 一万).
 /// Misma regla que `conocida_cjk` en tools/validar_ruta.py.
 bool palabraConocidaCjk(String w, Set<String> conocidas) =>
-    conocidas.contains(w) || _digito.hasMatch(w);
+    conocidas.contains(w) ||
+    _digito.hasMatch(w) ||
+    _esNumeroHan(w, conocidas);
+
+const _digitosHan = '零〇一二三四五六七八九两';
+final _numeroHan = RegExp('^[$_digitosHan十百千万亿]+\$');
+
+/// Número en caracteres chinos cuyos caracteres están enseñados como
+/// palabra: 五十, 一百二十, 九千, 一万 (con 十/百/千/万/亿) o una serie de 3+
+/// dígitos (一一〇, un teléfono); también 百分之 + número si 百分之 se
+/// enseñó (百分之五十). Una pareja de dígitos como 五三 no cuenta. Misma regla
+/// que `_numero_han` en tools/validar_ruta.py.
+bool _esNumeroHan(String w, Set<String> conocidas) {
+  if (w.startsWith('百分之') && conocidas.contains('百分之') && w.length > 3) {
+    final resto = w.substring(3);
+    if (resto.split('').every(conocidas.contains) &&
+        _numeroHan.hasMatch(resto)) {
+      return true;
+    }
+  }
+  final letras = w.split('');
+  if (letras.length < 2 ||
+      !letras.every(conocidas.contains) ||
+      !_numeroHan.hasMatch(w)) {
+    return false;
+  }
+  return RegExp('[十百千万亿]').hasMatch(w) ||
+      (letras.length >= 3 && letras.every(_digitosHan.contains));
+}
 
 /// Partículas que pueden ir pegadas a un sustantivo en el eojeol (ficha ko.md).
 const particulasKo = [

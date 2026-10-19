@@ -16,10 +16,11 @@ import 'package:onelingo/core/state/providers.dart';
 import 'package:onelingo/features/course/levels_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Prueba de ubicación v2 del chino mandarín (versión esencial): banco real
-/// `assets/contenido/zh/diagnostico-v2.json`, N1–N4, apoyo {es, en} y pinyin
-/// (`textoRom`, `opcionesRom`) en cada texto y opción en chino.
-/// Nunca ubica por encima de N4 (último nivel con clases publicadas).
+/// Prueba de ubicación v2 del chino mandarín (versión esencial, curso
+/// completo): banco real `assets/contenido/zh/diagnostico-v2.json`, N1–N10,
+/// apoyo {es, en} y pinyin (`textoRom`, `opcionesRom`) en cada texto y opción
+/// en chino de los ítems cerrados (la escritura no lleva rom).
+/// Nunca ubica por encima de N10 (último nivel del curso, todo publicado).
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   final json =
@@ -28,17 +29,17 @@ void main() {
   final banco = ItemUbicacion.bancoLocalizado(json, 'es');
   final hanzi = RegExp(r'[一-鿿]');
 
-  test('El banco cubre N1–N4 en las cinco habilidades y nada más', () {
+  test('El banco cubre N1–N10 en las cinco habilidades y nada más', () {
     expect(json['idioma'], 'zh');
-    expect(banco, hasLength(72));
-    for (var n = 1; n <= 4; n++) {
+    expect(banco, hasLength(180));
+    for (var n = 1; n <= 10; n++) {
       for (final h in [...habilidadesUbicacion, 'escritura']) {
         final k = banco.where((i) => i.nivel == n && i.habilidad == h).length;
         expect(k, h == 'escritura' ? 2 : 4, reason: 'N$n $h');
       }
     }
-    expect(banco.where((i) => i.nivel > 4), isEmpty);
-    expect(nivelMaximoUbicacion(banco), 4);
+    expect(banco.where((i) => i.nivel > 10), isEmpty);
+    expect(nivelMaximoUbicacion(banco), 10);
   });
 
   test('Apoyo en español latino y en inglés según la interfaz', () {
@@ -68,7 +69,7 @@ void main() {
         expect(it.texto, isNull, reason: it.id);
       }
     }
-    expect(banco.where((u) => u.item.tieneRom), hasLength(64));
+    expect(banco.where((u) => u.item.tieneRom), hasLength(160));
     // Sin cifras ni letras latinas en el chino (los números van en hanzi).
     for (final u in banco) {
       final it = u.item;
@@ -161,29 +162,77 @@ void main() {
       corregir(n4b, '要是 我 有 时间 就 好 了。我 想 去 北京 旅行。', 'zh'),
       isFalse,
     );
+    // N5: cómo se adaptó (渐渐), qué es distinto (对 … 来 说) y cómo era antes.
+    final n5 = banco.firstWhere((u) => u.item.id == 'dx.zh.n5.escritura.1').item;
+    expect(
+      corregir(n5, '刚到这个城市的时候，一切都很陌生。我渐渐适应了这里。对我来说，现在的生活比以前方便。', 'zh'),
+      isTrue,
+    );
+    // Sin «对 … 来 说» no cumple aunque sea largo.
+    expect(
+      corregir(n5, '刚 搬 来 的 时候，我 很 孤单。渐渐 地，我 认识 了 很 多 邻居。现在 这里 的 饮食 比 以前 更 方便。', 'zh'),
+      isFalse,
+    );
+    // N6: retroalimentación sin el consejo con 不妨 no cumple.
+    final n6 = banco.firstWhere((u) => u.item.id == 'dx.zh.n6.escritura.2').item;
+    expect(
+      corregir(n6, '你 的 报告 内容 很 清楚。不过 结尾 部分 有待 提高。你 可以 多 举 几 个 例子。', 'zh'),
+      isFalse,
+    );
+    // N7: correo formal sin «此致 敬礼» no cumple.
+    final n7 = banco.firstWhere((u) => u.item.id == 'dx.zh.n7.escritura.1').item;
+    expect(
+      corregir(n7, '鉴于 房源 紧张，现将 租赁 安排 告知 如下：房客 须 提前 一 个 月 通知 屋主。恳请 见谅。', 'zh'),
+      isFalse,
+    );
+    // N8: sin «不得不 承认» no cumple.
+    final n8 = banco.firstWhere((u) => u.item.id == 'dx.zh.n8.escritura.2').item;
+    expect(
+      corregir(n8, '与其 说 他 在 生气，不如 说 他 很 失望。他 的 话 也 不无 道理。', 'zh'),
+      isFalse,
+    );
+    // N9: reglamento con 未经 许可 y 不得 …; sin la sanción (违者 …) no cumple.
+    final n9 = banco.firstWhere((u) => u.item.id == 'dx.zh.n9.escritura.1').item;
+    expect(corregir(n9, '未经许可，不得在展品前拍照，违者一律处罚。', 'zh'), isTrue);
+    expect(corregir(n9, '未经许可，不得在展品前拍照，请大家注意。', 'zh'), isFalse);
+    // N10: disculpa con tacto; demasiado corta no cumple aunque tenga las claves.
+    final n10 = banco.firstWhere((u) => u.item.id == 'dx.zh.n10.escritura.1').item;
+    expect(corregir(n10, '我无意冒犯你，请见谅，你别往心里去。', 'zh'), isTrue);
+    expect(corregir(n10, '无意冒犯，请见谅，别往心里去', 'zh'), isFalse);
   });
 
-  test('El tope es N4: lo publicado en la ruta y en el banco', () async {
+  test('El tope es N10: lo publicado en la ruta y en el banco', () async {
     expect(idiomasConRuta, contains('zh'));
     final ruta = (await CargadorRuta().cargar('zh'))!;
-    expect(nivelesPublicados(ruta), {1, 2, 3, 4});
-    expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 4);
+    expect(nivelesPublicados(ruta), {for (var n = 1; n <= 10; n++) n});
+    expect(nivelMaximoUbicacion(banco, publicados: nivelesPublicados(ruta)), 10);
+    // Cada nivel nuevo (N5–N10) trae sus 50 clases.
+    for (var n = 5; n <= 10; n++) {
+      expect(ruta.delNivel('n$n'), hasLength(50), reason: 'N$n');
+    }
   });
 
-  testWidgets('Aprender: N1–N4 publicados y N5–N10 «Próximamente»', (tester) async {
+  testWidgets('Aprender: N1–N10 publicados y ninguno «Próximamente» ni «En preparación»', (tester) async {
     tester.view.physicalSize = const Size(390, 2600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     final ruta = (await tester.runAsync(() => CargadorRuta().cargar('zh')))!;
-    // Un alumno ubicado por el diagnóstico antiguo en N8 estudia N4, el último publicado.
-    const s = ProgressState(
+    // Un alumno ubicado en N8 estudia N8 (ya publicado); uno en N10, N10.
+    const s8 = ProgressState(
       onboardingDone: true,
       nombre: 'Ana',
       idiomaMeta: 'zh',
       nivelInicial: 8,
     );
-    expect(nivelAlumnoEnRuta(ruta, s), 4);
+    expect(nivelAlumnoEnRuta(ruta, s8), 8);
+    const s = ProgressState(
+      onboardingDone: true,
+      nombre: 'Ana',
+      idiomaMeta: 'zh',
+      nivelInicial: 10,
+    );
+    expect(nivelAlumnoEnRuta(ruta, s), 10);
     SharedPreferences.setMockInitialValues({
       'onelingo.progress.v1': jsonEncode(s.toJson()),
     });
@@ -200,16 +249,17 @@ void main() {
     await tester.pump();
     await tester.pump();
     expect(find.text('En preparación'), findsNothing);
-    expect(find.text('Nivel 1 · A1'), findsOneWidget);
-    expect(find.text('Nivel 2 · A2'), findsOneWidget);
-    // N3 y N4 son ambos B1 en el marco.
-    expect(find.text('Nivel 3 · B1'), findsOneWidget);
-    expect(find.text('Nivel 4 · B1'), findsOneWidget);
-    // N5–N10 no existen en el curso: la app los muestra bloqueados.
-    expect(find.text('Próximamente'), findsNWidgets(6));
+    for (final t in [
+      'Nivel 1 · A1', 'Nivel 2 · A2', 'Nivel 3 · B1', 'Nivel 4 · B1', 'Nivel 5 · B2', //
+      'Nivel 6 · B2', 'Nivel 7 · B2', 'Nivel 8 · C1', 'Nivel 9 · C1', 'Nivel 10 · C1',
+    ]) {
+      expect(find.text(t), findsOneWidget, reason: t);
+    }
+    // Curso completo: ningún nivel queda bloqueado por falta de clases.
+    expect(find.text('Próximamente'), findsNothing);
   });
 
-  test('Alumnos simulados: nunca por encima de N4 y bien ubicados hasta N4', () {
+  test('Alumnos simulados: nunca por encima de N10 y bien ubicados hasta N10', () {
     final rnd = Random(7);
     var ok = 0;
     const n = 300;
@@ -218,13 +268,13 @@ void main() {
       final u = Ubicacion(
         banco: banco,
         declarado: Autodeclaracion.desdeNivel(max(1, t)),
-        nivelMaximo: 4,
+        nivelMaximo: 10,
         random: rnd,
       );
-      expect(u.nivelMaximo, 4);
+      expect(u.nivelMaximo, 10);
       var guardia = 0;
       for (var i = u.siguiente(); i != null; i = u.siguiente()) {
-        expect(i.nivel, lessThanOrEqualTo(4));
+        expect(i.nivel, lessThanOrEqualTo(10));
         final p = i.nivel <= t ? .92 : (i.nivel == t + 1 ? .45 : 1 / 3);
         u.responder(rnd.nextDouble() < p);
         expect(++guardia, lessThan(30));
@@ -232,11 +282,11 @@ void main() {
       if (u.escritura() != null) u.responder(true);
       expect(u.terminado, isTrue);
       final r = u.resultado();
-      expect(r.nivel, lessThanOrEqualTo(4), reason: 'nivel real $t');
+      expect(r.nivel, lessThanOrEqualTo(10), reason: 'nivel real $t');
       for (final v in r.habilidades.values) {
-        expect(v, lessThanOrEqualTo(4));
+        expect(v, lessThanOrEqualTo(10));
       }
-      if ((r.nivel - min(t, 4)).abs() <= 1) ok++;
+      if ((r.nivel - t).abs() <= 1) ok++;
     }
     expect(ok / n, greaterThan(.85));
   });
@@ -252,14 +302,14 @@ void main() {
         Autodeclaracion.defiendo,
         Autodeclaracion.avanzado,
       ][k % 4];
-      final u = Ubicacion(banco: banco, declarado: d, nivelMaximo: 4, random: rnd);
+      final u = Ubicacion(banco: banco, declarado: d, nivelMaximo: 10, random: rnd);
       for (var i = u.siguiente(); i != null; i = u.siguiente()) {
         u.responder(rnd.nextInt(i.item.opciones.length) == i.item.indiceRespuesta);
       }
       if (u.escritura() != null) u.responder(false);
       final r = u.resultado();
-      // Con cuatro niveles, un acertante con mucha suerte pasa rara vez de N1
-      // (como en ja, ru y ko).
+      // Con diez niveles, un acertante con mucha suerte que se declara
+      // avanzado pasa rara vez de N1 (como en ru, it, ko y ja).
       expect(r.nivel, lessThanOrEqualTo(2), reason: 'azar, $d');
       if (r.nivel > 1) altos++;
       if (r.desdeCero) ceros++;

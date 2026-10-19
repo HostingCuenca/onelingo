@@ -65,6 +65,15 @@ void main() {
       expect(palabrasMeta('书、茶，“水”：（好）；对！'), ['书', '茶', '水', '好', '对']);
       expect(faltan('zh', '书、茶。', saber(['书', '茶'])), isEmpty);
     });
+    test('números compuestos de caracteres enseñados', () {
+      final n = saber(['一', '二', '五', '九', '十', '百', '千', '万', '百分之']);
+      for (final w in ['五十', '一百二十', '九千', '一万', '二十五', '百分之五十', '一一九']) {
+        expect(faltan('zh', w, n), isEmpty, reason: w);
+      }
+      // Dos dígitos sin multiplicador no son un número; a 三十 le falta 三.
+      expect(faltan('zh', '五九 三十', n), ['五九', '三十']);
+      expect(faltan('zh', '百分之五十', saber(['五', '十'])), ['百分之五十']);
+    });
   });
 
   group('coreano', () {

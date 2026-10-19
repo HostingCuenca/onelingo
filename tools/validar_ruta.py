@@ -682,11 +682,30 @@ def conocida_ru(w, conocidas):
     return n in conocidas or any(normalizar_ru(c) == n for c in conocidas)
 
 
+_DIGITOS_HAN = "零〇一二三四五六七八九两"
+_NUMERO_HAN = re.compile(rf"[{_DIGITOS_HAN}十百千万亿]+")
+
+
+def _numero_han(w, conocidas):
+    """Número en caracteres chinos cuyos caracteres están enseñados como
+    palabra: 五十, 一百二十, 九千, 一万 (con 十/百/千/万/亿) o una serie de 3+
+    dígitos (一一〇, un teléfono); también 百分之 + número si 百分之 se
+    enseñó (百分之五十). Una pareja de dígitos como 五三 no cuenta."""
+    if w.startswith("百分之") and "百分之" in conocidas and len(w) > 3:
+        w = w[3:]
+        if all(c in conocidas for c in w) and _NUMERO_HAN.fullmatch(w):
+            return True
+    if len(w) < 2 or not all(c in conocidas for c in w) or not _NUMERO_HAN.fullmatch(w):
+        return False
+    return any(m in w for m in "十百千万亿") or (len(w) >= 3 and all(c in _DIGITOS_HAN for c in w))
+
+
 def conocida_cjk(w, conocidas):
     """Japonés y chino: el curso escribe con espacios entre palabras y
     `palabras` quita la puntuación de ancho completo. Sin segmentar: cada
-    token, partículas sueltas incluidas (は, の, 的, 吗), debe estar enseñado."""
-    return w in conocidas or any(c.isdigit() for c in w)
+    token, partículas sueltas incluidas (は, の, 的, 吗), debe estar enseñado.
+    Excepción: números compuestos de caracteres enseñados (五十, 一万)."""
+    return w in conocidas or any(c.isdigit() for c in w) or _numero_han(w, conocidas)
 
 
 # Partículas que pueden ir pegadas a un sustantivo en el eojeol (ficha ko.md).
