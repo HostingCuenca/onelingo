@@ -722,3 +722,14 @@ Pruebas: `tsc --noEmit` limpio; `voz-idioma`, `voice-stream` y `chat-voz`: 16/16
 Backup: `/var/www/onelingo/backups/20261019-100210/voz.ts`. Se reinició solo `onelingo-api` (online) y `/api/salud` responde 200.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'cp -a /var/www/onelingo/backups/20261019-100210/voz.ts /var/www/onelingo/backend/src/lib/voz.ts && pm2 restart onelingo-api'`. No sirve de nada mientras Hélène siga desactivada.
 Efecto: los audios franceses de narradora ya en caché siguen con la voz de Hélène; los nuevos salen con Caroline.
+
+## Release: 20261019-edu-60-voces
+
+Fecha: 2026-10-19 · Responsable: Claude (Claude Code), autorizado por el usuario en el chat («que este pulido bien lo de las voces si es necesario reiniciar el servidor de la api procedamos»). Backend (dos archivos) + web.
+Contenido: voces nativas por rol (cinco por idioma: narradora, narrador, mujer_b, hombre_b, lumo); tutores, avatares y Lumo con voz nativa del idioma practicado; elenco por idioma (`assets/contenido/<idioma>/elenco.json`) para que cada personaje del diálogo tenga su voz; ajustes (style 0) en el hash con respaldo a la clave antigua; textos largos por frase; `previous_text` en la videollamada (`practice.js?v=29`). Sin pregeneración masiva: el audio se genera al usarse y queda en caché.
+Commit: `0fd0575` (build desde worktree limpio) · `main.dart.js` sha256 `fa472738c58bd50b…`.
+Pruebas: backend `tsc --noEmit` limpio y 32/32 en verde; Flutter: suite de voz y pantallas de clase 91/91 en verde y `flutter analyze` sin errores ni avisos (la suite completa de contenido no se repitió: el contenido no cambia en este commit; el agente de implementación la pasó con 418 en verde).
+Backend: copia en `/var/www/onelingo/backups/20261019-112334/{lib-voz.ts,routes-voz.ts}`; antes del cambio prod era idéntico a `d64a715` (todo `src/` igual salvo `config.ts`). Se reinició solo `onelingo-api` (online); `/api/salud` 200; `/api/voz/estado` muestra los cinco roles por idioma.
+Web: backup `/var/www/onelingo/backups/20261019-edu-60-voces/web-anterior` (= edu-58). Responden 200: `/`, `/api/salud`, `fr/elenco.json`, `ko/ruta/n10-b10.json`, `avatar/index.html`. Lock liberado.
+Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-60-voces/web-retirada-post && cp -al backups/20261019-edu-60-voces/web-anterior web'`
+Rollback backend: `ssh -F /dev/null root@167.235.20.41 'cd /var/www/onelingo && cp -a backups/20261019-112334/lib-voz.ts backend/src/lib/voz.ts && cp -a backups/20261019-112334/routes-voz.ts backend/src/routes/voz.ts && pm2 restart onelingo-api'`
