@@ -712,3 +712,13 @@ Backup: `/var/www/onelingo/backups/20261016-edu-58-coreano/web-anterior` (= edu-
 - lock liberado.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261016-edu-58-coreano/web-retirada-post && cp -al backups/20261016-edu-58-coreano/web-anterior web'`
 Pendiente (para después de terminar todos los idiomas): barrido de naturalidad de ko con Kiwi (el validador solo acepta la palabra exacta o palabra + partícula de una lista, lo que deja diálogos rígidos en N5–N10).
+
+## Release: 20261019-edu-59-voz-francesa (hotfix de backend)
+
+Fecha: 2026-10-19 · Responsable: Claude (Claude Code), con autorización del usuario para reiniciar la API por el trabajo de voces («si es necesario reiniciar el servidor de la api procedamos»).
+Motivo: la dueña de la voz Hélène (`imRmmzTqlLHt9Do1HufF`), narradora francesa, la desactivó en ElevenLabs. Comprobado por API el 19-10: Hélène responde `403 voice_disabled` y Caroline (`kwhMCf63M8O3rCfnQ3oQ`) responde 200. Por eso fallaba todo audio francés que no estuviera en caché.
+Cambio: `backend/src/lib/voz.ts` añade `caroline` y pasa `fr.narradora` de `helene` a `caroline`; el test `voz-idioma` se actualiza. Se desplegó solo ese archivo (el `config.ts` de prod es distinto); antes del cambio el `voz.ts` de prod era idéntico al local.
+Pruebas: `tsc --noEmit` limpio; `voz-idioma`, `voice-stream` y `chat-voz`: 16/16 en verde.
+Backup: `/var/www/onelingo/backups/20261019-100210/voz.ts`. Se reinició solo `onelingo-api` (online) y `/api/salud` responde 200.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'cp -a /var/www/onelingo/backups/20261019-100210/voz.ts /var/www/onelingo/backend/src/lib/voz.ts && pm2 restart onelingo-api'`. No sirve de nada mientras Hélène siga desactivada.
+Efecto: los audios franceses de narradora ya en caché siguen con la voz de Hélène; los nuevos salen con Caroline.

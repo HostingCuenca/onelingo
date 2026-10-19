@@ -27,7 +27,7 @@ test('zh y ja se leen sin los espacios entre palabras del contenido', () => {
 
 test('francés usa voces nativas: Hélène narra y Nicolas en diálogos', async () => {
   const { rolDeVoz } = await import('../src/lib/voz.js');
-  assert.equal(rolDeVoz(undefined, 'fr'), 'helene');
+  assert.equal(rolDeVoz(undefined, 'fr'), 'caroline');
   assert.equal(rolDeVoz('narrador', 'fr'), 'nicolas');
   assert.equal(rolDeVoz('narradora', 'en'), 'sofia');
   assert.equal(rolDeVoz('avatar_lumo', 'fr'), 'avatar_lumo');

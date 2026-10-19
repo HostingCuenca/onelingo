@@ -29,6 +29,8 @@ export const VOCES: Record<string, { id: string; nombre: string; descripcion: st
   narrador: { id: 'JBFqnCBsd6RMkjVDRZzb', nombre: 'George', descripcion: 'Narrador de diálogos y Listening' },
   // Francés de Francia (elegidas por el cliente, 2026-10-01).
   helene: { id: 'imRmmzTqlLHt9Do1HufF', nombre: 'Hélène', descripcion: 'Narradora francesa · educativa y calmada' },
+  // La dueña desactivó Hélène (403 voice_disabled, 2026-10-19): la sustituye Caroline.
+  caroline: { id: 'kwhMCf63M8O3rCfnQ3oQ', nombre: 'Caroline', descripcion: 'Narradora francesa · estándar y clara' },
   nicolas: { id: 'aQROLel5sQbj1vuIVi6B', nombre: 'Nicolas', descripcion: 'Narrador parisino · diálogos' },
   // Alemán estándar de Alemania (calibración 2026-10-06: mejor lectura de Umlaut, ch e -ig).
   petra: { id: 'lzvBSKYbNWDD0a6BaJSK', nombre: 'Petra', descripcion: 'Narradora alemana · educativa y clara' },
@@ -59,7 +61,7 @@ const NATIVAS: Record<string, Record<string, string>> = {
   en: { narradora: 'sofia', narrador: 'chris_en' },
   es: { narradora: 'isabel', narrador: 'enrique' },
   pt: { narradora: 'fernanda', narrador: 'paulo' },
-  fr: { narradora: 'helene', narrador: 'nicolas' },
+  fr: { narradora: 'caroline', narrador: 'nicolas' },
   de: { narradora: 'petra', narrador: 'julius' },
   it: { narradora: 'luna', narrador: 'carmelo' },
   ru: { narradora: 'mariia', narrador: 'stanislav' },
