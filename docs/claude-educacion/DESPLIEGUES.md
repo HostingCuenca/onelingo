@@ -779,3 +779,12 @@ Pruebas: backend 44/44 (`npx tsx --test test/*.test.ts`), `tsc --noEmit` limpio;
 Backup: web en `backups/20261019-edu-63-voces-cifras/web-anterior` (= edu-62); `voz.ts` y `voz_texto.ts` anteriores en `backups/20261019-edu-63-voces-cifras/backend-lib/`. Verificado: `/`, `/main.dart.js`, `/api/salud`, `/api/voz/estado`, `ja/elenco_clases.json` responden 200; PM2 `onelingo-api` online y las demás apps intactas; lock liberado.
 Rollback: web `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261019-edu-63-voces-cifras/web-retirada-post && cp -al backups/20261019-edu-63-voces-cifras/web-anterior web'`; backend: copiar `backend-lib/voz.ts` y `voz_texto.ts` a `backend/src/lib/` y `pm2 restart onelingo-api` (los numeros_*.ts y lecturas_ja.json nuevos quedan sin uso).
 Visto en el log de errores de la API (anterior a esta release): Gemini responde 403 «project has been denied access» y el diagnóstico cae a OpenAI.
+
+## Release: 20261020-edu-64-panel
+
+Fecha: 2026-10-19 (noche) · Responsable: Claude (Claude Code), por pedido del usuario («panel de administrador … usuarios registrados, clases, analíticas»). Backend archivo por archivo + panel; PM2 `onelingo-api` reiniciado (solo esa app).
+Contenido: panel `/panel` con analíticas (DAU/WAU/MAU, registros y activos 30 días, embudo, retención D1/D7/D30, clases por idioma × nivel, abandono, prueba de ubicación, coste estimado de IA y voz), alumnos con filtros/orden/CSV y detalle con progreso real por idioma (ids `ja.n3.c06`; antes contaba `L1-`). `/admin/usuarios/:id` ya no envía `password_hash` ni tokens. Migración `004_indices_panel.sql` (solo índices) aplicada al arrancar. Detalle en `docs/PANEL_ADMIN.md`.
+Commit: `fd6d2b5`. Pruebas: backend 54/54, `tsc` limpio, `npm run build` del panel OK; prueba manual del agente en local (escritorio y 375 px).
+Backup: `backups/20261020-edu-64-panel/` (`backend/admin.ts` anterior y `panel-anterior`). Verificado: `/api/salud` 200, `/panel/` 200, `/api/admin/resumen` 401 sin sesión; log «Migración aplicada: 004_indices_panel.sql»; PM2 online; lock liberado.
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; cp backups/20261020-edu-64-panel/backend/admin.ts backend/src/routes/admin.ts; mv panel staging/20261020-edu-64-panel/panel-retirado && cp -al backups/20261020-edu-64-panel/panel-anterior panel; pm2 restart onelingo-api'` (analitica.ts e índices quedan sin uso).
+Visto: ufw permite 5432/tcp (Postgres) desde cualquier IP → avisado al usuario, sin tocar.
