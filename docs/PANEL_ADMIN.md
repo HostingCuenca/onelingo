@@ -34,6 +34,26 @@ Las tarifas son estimaciones: ajústalas en `backend/src/lib/analitica.ts` con l
 
 `backend/sql/004_indices_panel.sql` añade índices sobre `eventos(fecha)`, `eventos(tipo, fecha)`, `conversaciones(fecha)`, `usuarios(creado_en)` y `errores(skill)`. Las clases se calculan recorriendo `progreso.estado.practicas` de todos los alumnos en cada carga del resumen. Con decenas de miles de alumnos convendría registrar un evento por clase aprobada (ver abajo).
 
+## Conexiones (claves de API)
+
+Página «Conexiones» del panel (`panel/src/paginas/Conexiones.tsx`). El administrador cambia las claves y modelos de **ElevenLabs** (voz), **OpenAI** (tutor, evaluación de escritura y transcripción) y **Gemini** (generación/diagnóstico de respaldo) sin tocar el servidor. Código: `backend/src/lib/conexiones.ts` y `backend/src/routes/conexiones.ts`.
+
+- **Qué guarda y dónde**: tabla `conexiones` (`backend/sql/005_conexiones.sql`), una fila por proveedor. `datos` es un JSON cifrado con AES-256-GCM (clave = sha256(`'onelingo-conexiones:' + JWT_SECRET`)) que solo contiene lo que difiere del `.env`: clave, modelos y, en OpenAI, la Admin key opcional. `verificacion` guarda el resultado de la última verificación (sin claves).
+- **Precedencia**: panel > `.env`. Al arrancar, `cargarConexiones()` (en `server.ts`, tras `migrar()`) aplica lo guardado sobre `config`. Al guardar se aplica en caliente: los consumidores leen `config` en cada llamada, así que no hace falta reiniciar. Los audios ya generados se conservan. `IA_PROVEEDOR` (tutor en uso) no cambia desde el panel.
+- **Si cambia `JWT_SECRET`**: las filas no se pueden descifrar; se ignoran, se usa el `.env` y la página muestra un aviso para volver a guardar la clave.
+- **Volver atrás**: «Volver a la configuración del servidor» (`DELETE`) borra la fila y restaura los valores del `.env` que había al arrancar.
+- **Verificación** (antes de guardar, timeout 10 s, solo llamadas de lectura gratuitas):
+  - Formato: una clave reconocible de otro proveedor se rechaza sin llamar a nadie («Esta clave es de OpenAI, no de ElevenLabs…»). Se quitan espacios, saltos de línea y comillas pegados. Formatos: ElevenLabs `sk_…` (o 32 hex), OpenAI `sk-proj-…`/`sk-svcacct-…`/`sk-…`, Admin key `sk-admin-…`, Gemini `AIza…` (39) o `AQ.…` (claves «auth» de AI Studio), Anthropic `sk-ant-…`.
+  - ElevenLabs: `GET /v1/user/subscription` (cuota) y `GET /v1/models` (modelo). Una clave sin permiso «User» se acepta con aviso (no se verá el consumo). ElevenLabs responde 401 o 400 «API key is invalid» a una clave falsa.
+  - OpenAI: `GET /v1/models` y comprobación de los tres modelos configurados (si falta uno: aviso). Admin key: `GET /v1/organization/costs`. La lista de modelos no comprueba el saldo.
+  - Gemini: `GET /v1beta/models` (cabecera `x-goog-api-key`) y el modelo configurado; un 403 («project has been denied access») se muestra con el mensaje de Google.
+  - Se guarda con `ok` o `aviso`; con `error` no se guarda nada. Clave vacía = conservar la actual (solo cambian los modelos).
+- **Consumo** (`GET /admin/conexiones/consumo`, los tres en paralelo):
+  - ElevenLabs: **real** (plan, caracteres usados/límite, renovación) + lo generado por OneLingo este mes según la tabla `audios` (coste estimado con `USD_POR_MIL_CARACTERES_VOZ`).
+  - OpenAI: **real** si hay Admin key (Costs API del mes, por concepto); si no, **estimado** con los tokens de `conversaciones` y las tarifas de `analitica.ts` (no incluye transcripción ni evaluación).
+  - Gemini: **estimado** si hay conversaciones con modelos `gemini*`; si no, enlace a Google AI Studio → Usage (Google no da el consumo por API).
+- **Endpoints** (todos con sesión de administrador): `GET /admin/conexiones` (origen `panel`/`servidor`/`sin configurar`, clave enmascarada `sk_…a1b2`, modelos, última verificación, avisos), `POST /admin/conexiones/:proveedor/verificar` (sin guardar; cuerpo vacío = verifica lo actual), `PUT /admin/conexiones/:proveedor`, `DELETE /admin/conexiones/:proveedor`, `GET /admin/conexiones/consumo`. Ninguna respuesta ni log contiene claves completas.
+
 ## Lo que la app aún no registra
 
 - **Clase aprobada como evento**: la ruta nueva solo sincroniza `practicas`; un evento `clase_aprobada` (unidad, aciertos, total) daría historial exacto en hora del servidor.

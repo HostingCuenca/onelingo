@@ -6,8 +6,11 @@ import UsuarioDetalle from './paginas/UsuarioDetalle'
 import Correos from './paginas/Correos'
 import Conversaciones from './paginas/Conversaciones'
 import Audios from './paginas/Audios'
+import Conexiones from './paginas/Conexiones'
 
-type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' }
+const LOGO = `${import.meta.env.BASE_URL}logo-panel.webp`
+
+type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' }
 
 function Login({ onOk }: { onOk: () => void }) {
   const [usuario, setUsuario] = useState('admin'); const [pin, setPin] = useState(''); const [err, setErr] = useState('')
@@ -18,6 +21,7 @@ function Login({ onOk }: { onOk: () => void }) {
   }
   return (
     <form className="login" onSubmit={entrar}>
+      <img className="logo-login" src={LOGO} alt="OneLingo" width={77} height={72} />
       <h1>One<span style={{ color: 'var(--morado)' }}>Lingo</span> · Panel</h1>
       <p className="muted">Administración de alumnos y progreso</p>
       <input value={usuario} onChange={(e) => setUsuario(e.target.value)} placeholder="Usuario" />
@@ -39,11 +43,12 @@ export default function App() {
   return (
     <div className="app">
       <aside>
-        <div className="marca">One<b>Lingo</b> · Panel</div>
+        <div className="marca"><img src={LOGO} alt="" width={34} height={32} /><span>One<b>Lingo</b> · Panel</span></div>
         <a className={ruta.p === 'resumen' ? 'activo' : ''} onClick={() => setRuta({ p: 'resumen' })}>Resumen</a>
         <a className={ruta.p === 'usuarios' || ruta.p === 'usuario' ? 'activo' : ''} onClick={() => setRuta({ p: 'usuarios' })}>Alumnos</a>
         <a className={ruta.p === 'conversaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conversaciones' })}>Conversaciones IA</a>
         <a className={ruta.p === 'audios' ? 'activo' : ''} onClick={() => setRuta({ p: 'audios' })}>Voz y audios</a>
+        <a className={ruta.p === 'conexiones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conexiones' })}>Conexiones</a>
         <a className={ruta.p === 'correos' ? 'activo' : ''} onClick={() => setRuta({ p: 'correos' })}>Correos</a>
         <div className="pie"><span className="api">API: {import.meta.env.DEV ? 'localhost:8091' : 'misma raíz'}<br /></span><button className="sec" onClick={() => { guardarToken(null); setSesion(false) }}>Salir</button></div>
       </aside>
@@ -54,6 +59,7 @@ export default function App() {
         {ruta.p === 'correos' && <Correos />}
         {ruta.p === 'conversaciones' && <Conversaciones />}
         {ruta.p === 'audios' && <Audios />}
+        {ruta.p === 'conexiones' && <Conexiones />}
       </main>
     </div>
   )

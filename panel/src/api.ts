@@ -1,5 +1,5 @@
 const BASE = '/api'
-export class ApiError extends Error { status: number; constructor(m: string, s: number) { super(m); this.status = s } }
+export class ApiError extends Error { status: number; datos?: any; constructor(m: string, s: number, d?: any) { super(m); this.status = s; this.datos = d } }
 export const token = () => localStorage.getItem('onelingo.panel.token')
 export const guardarToken = (t: string | null) => t ? localStorage.setItem('onelingo.panel.token', t) : localStorage.removeItem('onelingo.panel.token')
 export async function api<T = any>(ruta: string, op: { metodo?: string; cuerpo?: unknown } = {}): Promise<T> {
@@ -9,7 +9,7 @@ export async function api<T = any>(ruta: string, op: { metodo?: string; cuerpo?:
     body: op.cuerpo === undefined ? undefined : JSON.stringify(op.cuerpo),
   })
   const d = await r.json().catch(() => ({}))
-  if (!r.ok) throw new ApiError(d.error ?? `Error ${r.status}`, r.status)
+  if (!r.ok) throw new ApiError(d.error ?? `Error ${r.status}`, r.status, d)
   return d as T
 }
 export const fecha = (v?: string | null) => v ? new Date(v).toLocaleString('es-EC', { dateStyle: 'short', timeStyle: 'short' }) : '—'
