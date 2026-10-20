@@ -788,3 +788,13 @@ Commit: `fd6d2b5`. Pruebas: backend 54/54, `tsc` limpio, `npm run build` del pan
 Backup: `backups/20261020-edu-64-panel/` (`backend/admin.ts` anterior y `panel-anterior`). Verificado: `/api/salud` 200, `/panel/` 200, `/api/admin/resumen` 401 sin sesión; log «Migración aplicada: 004_indices_panel.sql»; PM2 online; lock liberado.
 Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; cp backups/20261020-edu-64-panel/backend/admin.ts backend/src/routes/admin.ts; mv panel staging/20261020-edu-64-panel/panel-retirado && cp -al backups/20261020-edu-64-panel/panel-anterior panel; pm2 restart onelingo-api'` (analitica.ts e índices quedan sin uso).
 Visto: ufw permite 5432/tcp (Postgres) desde cualquier IP → avisado al usuario, sin tocar.
+
+## Release: 20261020-edu-65-app-020
+
+Fecha: 2026-10-20 · Responsable: Claude (Claude Code), por pedido del usuario («compila la app, lanza emuladores, revisa errores y sube una versión al login como descarga»). Solo web + APK; sin backend.
+Contenido: app 0.2.0+2 (`2ee2e53`): registro con el idioma meta real (objetivos, niveles sin gramática del inglés, prueba gratuita con 50 clases por nivel fuera de en y el 90 % real de la prueba de nivel), perfil con nivel y clase de la ruta (antes «Lección 100»), y bloque «Descarga la app para Android» en bienvenida y login (solo web).
+APK: firmado con la llave propia (`~/.config/onelingo-firma/onelingo-release.jks`, SHA-1 `E3:C8:F4:AD:95:1D:BF:62:4D:97:CC:4D:C1:4E:25:96:D1:11:03:DC`), `--split-per-abi`: `/descargas/onelingo.apk` (arm64-v8a, 97 MB) y `/descargas/onelingo-armv7.apk`; `/descargas/version.json`. API_URL de prod (`onelingo.hostingcuenca.com/api`).
+Pruebas: Flutter completo 433 en verde (1 omitido); emuladores Pixel 7/Pixel 6 (API 34): APK de publicación arranca sin errores contra prod; recorrido completo (registro → prueba de ubicación → inicio → ruta → clase con audio → práctica → perfil) con un APK de depuración contra el backend local.
+Backup: `backups/20261020-edu-65-app-020/web-anterior`. Verificado: `/`, `/main.dart.js` (sha `58981f2368e8c7bb…`), `/descargas/version.json`, `/descargas/onelingo.apk` (application/vnd.android.package-archive) responden; en el navegador la bienvenida muestra «Descarga la app para Android · Versión 0.2.0 · 97 MB».
+Rollback: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261020-edu-65-app-020/web-retirada-post && cp -al backups/20261020-edu-65-app-020/web-anterior web'`
+Pendiente: dominio onelingo.org (DNS lo cambia el usuario en Porkbun), login con Google (cliente: orígenes y SHA-1 en Google Cloud), bloque «DEMO · usuarios de prueba» visible en el login de producción (decisión del usuario).
