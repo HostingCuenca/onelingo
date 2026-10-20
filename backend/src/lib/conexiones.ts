@@ -1,5 +1,5 @@
 /**
- * Conexiones con los proveedores externos (ElevenLabs, OpenAI, Gemini)
+ * Conexiones con los proveedores externos (ElevenLabs, OpenAI, Gemini, Stripe)
  * configurables desde el panel: el administrador cambia claves y modelos sin
  * tocar el servidor. Lo guardado en el panel (tabla `conexiones`, cifrado)
  * tiene prioridad sobre el `.env`; borrarlo vuelve a los valores del `.env`.
@@ -14,13 +14,20 @@ import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:
 import { config } from './config.js';
 import { query } from './db.js';
 import { costeIa, costeVoz } from './analitica.js';
+import { configurarWebhook, ErrorStripe, esRestringida, llamarStripe, modoDeClave, type ModoPago } from './pagos/stripe.js';
 
-export type ProveedorId = 'elevenlabs' | 'openai' | 'gemini';
+export type ProveedorId = 'elevenlabs' | 'openai' | 'gemini' | 'stripe';
 type PropConfig = 'elevenApiKey' | 'elevenModelo' | 'openaiApiKey' | 'openaiModelo' | 'openaiModeloEvaluacion' | 'openaiModeloTranscripcion' | 'geminiApiKey' | 'geminiModelo';
-type CampoDef = { prop: PropConfig | null; secreto: boolean; etiqueta: string };
+/**
+ * `prop`: propiedad de `config` a la que va el campo (null = se guarda aparte, en `extras`).
+ * `oculto`: lo rellena el servidor (p. ej. el secreto del webhook de Stripe); no se edita ni se muestra.
+ * `tipo`: validación de los campos no secretos (nombre de modelo o URL).
+ */
+type CampoDef = { prop: PropConfig | null; secreto: boolean; etiqueta: string; oculto?: boolean; tipo?: 'modelo' | 'url' };
+type DefProveedor = { nombre: string; uso: string; clave?: string; campos: Record<string, CampoDef>; sugerencias: Record<string, string[]> };
 
 /** Campos que se pueden configurar por proveedor y la propiedad de `config` a la que van. */
-export const PROVEEDORES: Record<ProveedorId, { nombre: string; uso: string; campos: Record<string, CampoDef>; sugerencias: Record<string, string[]> }> = {
+export const PROVEEDORES: Record<ProveedorId, DefProveedor> = {
   elevenlabs: {
     nombre: 'ElevenLabs', uso: 'Voz: audios de las clases y del Listening (con caché)',
     campos: {
@@ -52,8 +59,20 @@ export const PROVEEDORES: Record<ProveedorId, { nombre: string; uso: string; cam
     },
     sugerencias: { modelo: ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.5-flash-lite'] },
   },
+  stripe: {
+    nombre: 'Stripe', uso: 'Pagos: suscripciones con Stripe Checkout y Customer Portal', clave: 'secretKey',
+    campos: {
+      secretKey: { prop: null, secreto: true, etiqueta: 'Clave secreta o restringida (sk_… / rk_…)' },
+      urlApp: { prop: null, secreto: false, etiqueta: 'URL pública de la app', tipo: 'url' },
+      webhookSecret: { prop: null, secreto: true, etiqueta: 'Secreto del webhook', oculto: true },
+      webhookId: { prop: null, secreto: false, etiqueta: 'Webhook', oculto: true },
+      modo: { prop: null, secreto: false, etiqueta: 'Modo', oculto: true },
+    },
+    sugerencias: {},
+  },
 };
-export const esProveedor = (p: string): p is ProveedorId => p === 'elevenlabs' || p === 'openai' || p === 'gemini';
+export const esProveedor = (p: string): p is ProveedorId => p === 'elevenlabs' || p === 'openai' || p === 'gemini' || p === 'stripe';
+const campoClave = (p: ProveedorId) => PROVEEDORES[p].clave ?? 'apiKey';
 
 /**
  * Valores del servidor (.env) tal como estaban al arrancar, para «volver a la
@@ -66,9 +85,35 @@ const ORIGINAL: Record<PropConfig, string> = {
   openaiModeloEvaluacion: config.openaiModeloEvaluacion, openaiModeloTranscripcion: config.openaiModeloTranscripcion,
   geminiApiKey: config.geminiApiKey, geminiModelo: config.geminiModelo,
 };
-const ADMIN_KEY_SERVIDOR = process.env.OPENAI_ADMIN_KEY ?? '';
-let adminKeyOpenAI = ADMIN_KEY_SERVIDOR;
-export const adminKeyActual = () => adminKeyOpenAI;
+/**
+ * Campos sin propiedad en `config` (Admin key de OpenAI y todo Stripe): valor
+ * del servidor (variables opcionales del entorno) y valor en uso.
+ * Stripe no está en el `.env` de hoy: su origen inicial es «sin configurar».
+ */
+const EXTRA_SERVIDOR: Record<string, string> = {
+  'openai.adminKey': process.env.OPENAI_ADMIN_KEY ?? '',
+  'stripe.secretKey': process.env.STRIPE_SECRET_KEY ?? '',
+  'stripe.webhookSecret': process.env.STRIPE_WEBHOOK_SECRET ?? '',
+};
+const extras: Record<string, string> = { ...EXTRA_SERVIDOR };
+/** URL pública de la app por defecto: `config.publicUrl` sin `/api` final. */
+export const urlAppPorDefecto = () => config.publicUrl.replace(/\/+$/, '').replace(/\/api$/, '');
+const extraServidor = (p: ProveedorId, campo: string) => p === 'stripe' && campo === 'urlApp' ? urlAppPorDefecto() : EXTRA_SERVIDOR[`${p}.${campo}`] ?? '';
+const extraActual = (p: ProveedorId, campo: string) => extras[`${p}.${campo}`] || extraServidor(p, campo);
+export const adminKeyActual = () => extraActual('openai', 'adminKey');
+
+/** Configuración de Stripe en uso (solo para el servidor; nunca se envía al panel). */
+export function stripeConfig() {
+  const secretKey = extraActual('stripe', 'secretKey');
+  return {
+    secretKey, urlApp: extraActual('stripe', 'urlApp').replace(/\/+$/, ''),
+    webhookSecret: extraActual('stripe', 'webhookSecret'), webhookId: extraActual('stripe', 'webhookId'),
+    modo: (modoDeClave(secretKey) ?? null) as ModoPago | null,
+  };
+}
+/** Se llama tras guardar Stripe (lo registra lib/pagos/planes.ts para sincronizar los planes). */
+let alGuardarStripe: (() => Promise<string[]>) | null = null;
+export function registrarAlGuardarStripe(fn: () => Promise<string[]>) { alGuardarStripe = fn; }
 
 export type Verificacion = { ok: boolean; nivel: 'ok' | 'aviso' | 'error'; mensaje: string; detalles?: string[]; verificadoEn: string };
 type Estado = { datos: Record<string, string> | null; actualizadoEn: string | null; verificacion: Verificacion | null; avisos: string[] };
@@ -76,6 +121,7 @@ const estado: Record<ProveedorId, Estado> = {
   elevenlabs: { datos: null, actualizadoEn: null, verificacion: null, avisos: [] },
   openai: { datos: null, actualizadoEn: null, verificacion: null, avisos: [] },
   gemini: { datos: null, actualizadoEn: null, verificacion: null, avisos: [] },
+  stripe: { datos: null, actualizadoEn: null, verificacion: null, avisos: [] },
 };
 
 // ── Detección y formato de claves ────────────────────────────────────────────
@@ -96,10 +142,16 @@ const estado: Record<ProveedorId, Estado> = {
  *   en su documentación (elevenlabs.io/docs/api-reference/authentication solo
  *   indica la cabecera `xi-api-key`); se confirma con la llamada real.
  * - Anthropic: `sk-ant-…` (solo para reconocerla y rechazarla con un mensaje claro).
+ * - Stripe: secretas `sk_test_`/`sk_live_`, restringidas `rk_test_`/`rk_live_`,
+ *   publicables `pk_test_`/`pk_live_` y secretos de webhook `whsec_`
+ *   (docs.stripe.com/keys, 20-10-2026).
  */
-export type TipoClave = 'openai' | 'openai-admin' | 'gemini' | 'elevenlabs' | 'anthropic';
+export type TipoClave = 'openai' | 'openai-admin' | 'gemini' | 'elevenlabs' | 'anthropic' | 'stripe' | 'stripe-publicable' | 'stripe-webhook';
 export function detectarProveedor(clave: string): TipoClave | null {
   const c = limpiarClave(clave);
+  if (/^(sk|rk)_(test|live)_[A-Za-z0-9]{10,}$/.test(c)) return 'stripe';
+  if (/^pk_(test|live)_/.test(c)) return 'stripe-publicable';
+  if (/^whsec_/.test(c)) return 'stripe-webhook';
   if (/^sk-ant-/.test(c)) return 'anthropic';
   if (/^sk-admin-/.test(c)) return 'openai-admin';
   if (/^sk-(proj|svcacct|None)-/.test(c) || /^sk-[A-Za-z0-9_-]{20,}$/.test(c)) return 'openai';
@@ -107,13 +159,16 @@ export function detectarProveedor(clave: string): TipoClave | null {
   if (/^sk_[A-Za-z0-9]{20,}$/.test(c) || /^[a-f0-9]{32,}$/i.test(c)) return 'elevenlabs';
   return null;
 }
-const NOMBRE_TIPO: Record<TipoClave, string> = { openai: 'OpenAI', 'openai-admin': 'OpenAI (Admin key de organización)', gemini: 'Google Gemini', elevenlabs: 'ElevenLabs', anthropic: 'Anthropic (Claude)' };
+const NOMBRE_TIPO: Record<TipoClave, string> = { openai: 'OpenAI', 'openai-admin': 'OpenAI (Admin key de organización)', gemini: 'Google Gemini', elevenlabs: 'ElevenLabs', anthropic: 'Anthropic (Claude)', stripe: 'Stripe', 'stripe-publicable': 'Stripe (clave publicable)', 'stripe-webhook': 'Stripe (secreto de webhook)' };
 const PISTA: Record<TipoClave, string> = {
   elevenlabs: 'Las claves de ElevenLabs empiezan con sk_ (o, en cuentas antiguas, son 32 caracteres hexadecimales).',
   openai: 'Las claves de OpenAI empiezan con sk-proj- (clave de proyecto) o sk-.',
   'openai-admin': 'Las Admin keys de OpenAI empiezan con sk-admin- y se crean en Organization → Admin keys.',
   gemini: 'Las claves de Gemini empiezan con AIza (39 caracteres) o, las nuevas de Google AI Studio, con AQ.',
   anthropic: 'Las claves de Anthropic empiezan con sk-ant-.',
+  stripe: 'Las claves de Stripe para el servidor empiezan con sk_test_ o rk_test_ (modo test) y sk_live_ o rk_live_ (modo real).',
+  'stripe-publicable': 'Pega la clave secreta (sk_…) o una restringida (rk_…).',
+  'stripe-webhook': 'El secreto del webhook lo configura OneLingo solo al guardar; pega la clave secreta (sk_…) o una restringida (rk_…).',
 };
 
 /** Quita espacios, saltos de línea y comillas pegados por error. */
@@ -122,7 +177,7 @@ export function limpiarClave(clave: string) {
 }
 
 /** Tipo de clave que espera cada campo secreto. */
-const ESPERADO: Record<string, TipoClave> = { 'elevenlabs.apiKey': 'elevenlabs', 'openai.apiKey': 'openai', 'openai.adminKey': 'openai-admin', 'gemini.apiKey': 'gemini' };
+const ESPERADO: Record<string, TipoClave> = { 'elevenlabs.apiKey': 'elevenlabs', 'openai.apiKey': 'openai', 'openai.adminKey': 'openai-admin', 'gemini.apiKey': 'gemini', 'stripe.secretKey': 'stripe' };
 
 /**
  * Valida el formato de una clave para un campo. Una clave reconocida como de
@@ -138,19 +193,27 @@ export function validarFormato(proveedor: ProveedorId, campo: string, valor: str
   const tipo = detectarProveedor(clave);
   if (tipo === esperado) return { ok: true, clave };
   if (tipo === 'openai-admin' && esperado === 'openai') return { ok: false, mensaje: 'Esta es una Admin key de OpenAI: va en el campo «Admin key», no en la clave de API. Las claves de proyecto empiezan con sk-proj-.' };
+  if (tipo === 'stripe-publicable' && esperado === 'stripe') return { ok: false, mensaje: 'Esta es la clave publicable; pega la secreta (sk_…)' };
+  if (tipo === 'stripe-webhook' && esperado === 'stripe') return { ok: false, mensaje: `Este es un secreto de webhook (whsec_…), no una clave de API. ${PISTA['stripe-webhook']}` };
   if (tipo === 'openai' && esperado === 'openai-admin') return { ok: false, mensaje: 'Esta es una clave de proyecto de OpenAI, no una Admin key. Las Admin keys empiezan con sk-admin- y se crean en Organization → Admin keys.' };
   if (tipo) return { ok: false, mensaje: `Esta clave es de ${NOMBRE_TIPO[tipo]}, no de ${PROVEEDORES[proveedor].nombre}. ${PISTA[esperado]}` };
   return { ok: true, clave, aviso: `El formato no es el habitual de ${PROVEEDORES[proveedor].nombre}; se comprobará con el proveedor.` };
 }
 
 const MODELO_VALIDO = /^[A-Za-z0-9._:\/-]{1,80}$/;
+/** URL http(s) sin espacios, query ni fragmento (p. ej. https://onelingo.app). */
+export function validarUrl(v: string): string | null {
+  const s = v.trim().replace(/\/+$/, '');
+  if (s.length > 200 || /\s/.test(s)) return null;
+  try { const u = new URL(s); return (u.protocol === 'https:' || u.protocol === 'http:') && !u.search && !u.hash && !u.username ? s : null; } catch { return null; }
+}
 
 /** `sk_…a1b2`: prefijo no secreto (hasta 8 caracteres) + últimos 4. Nunca más. */
 export function enmascarar(clave: string | null | undefined): string | null {
   const c = limpiarClave(clave ?? '');
   if (!c) return null;
   if (c.length < 16) return '••••';
-  const prefijo = (/^(sk-proj-|sk-svcacct-|sk-admin-|sk-None-|sk-ant-|sk_|sk-|AIza|AQ\.)/.exec(c)?.[1] ?? '').slice(0, 8);
+  const prefijo = (/^(sk_test_|sk_live_|rk_test_|rk_live_|whsec_|sk-proj-|sk-svcacct-|sk-admin-|sk-None-|sk-ant-|sk_|sk-|AIza|AQ\.)/.exec(c)?.[1] ?? '').slice(0, 8);
   return `${prefijo}…${c.slice(-4)}`;
 }
 
@@ -178,7 +241,7 @@ export function aplicar(proveedor: ProveedorId, datos: Record<string, string> | 
   for (const [campo, def] of Object.entries(PROVEEDORES[proveedor].campos)) {
     const v = datos?.[campo];
     if (def.prop) (config as any)[def.prop] = v ? v : ORIGINAL[def.prop];
-    else if (campo === 'adminKey') adminKeyOpenAI = v ? v : ADMIN_KEY_SERVIDOR;
+    else extras[`${proveedor}.${campo}`] = v ? v : extraServidor(proveedor, campo);
   }
   estado[proveedor].datos = datos && Object.keys(datos).length ? datos : null;
 }
@@ -188,13 +251,13 @@ export const restaurar = (proveedor: ProveedorId) => aplicar(proveedor, null);
 export function valoresActuales(proveedor: ProveedorId): Record<string, string> {
   const r: Record<string, string> = {};
   for (const [campo, def] of Object.entries(PROVEEDORES[proveedor].campos)) {
-    r[campo] = def.prop ? String((config as any)[def.prop] ?? '') : campo === 'adminKey' ? adminKeyOpenAI : '';
+    r[campo] = def.prop ? String((config as any)[def.prop] ?? '') : extraActual(proveedor, campo);
   }
   return r;
 }
 const valorServidor = (proveedor: ProveedorId, campo: string) => {
   const def = PROVEEDORES[proveedor].campos[campo];
-  return def.prop ? ORIGINAL[def.prop] : campo === 'adminKey' ? ADMIN_KEY_SERVIDOR : '';
+  return def.prop ? ORIGINAL[def.prop] : extraServidor(proveedor, campo);
 };
 
 /** Lee la tabla y aplica lo guardado sobre `config`. Se llama al arrancar, tras migrar(). */
@@ -325,6 +388,45 @@ async function verificarGemini(v: Record<string, string>, op: Opciones): Promise
 }
 
 /**
+ * Stripe: `GET /v1/account` (clave secreta) o `GET /v1/balance` (restringida,
+ * que puede no tener permiso de cuenta). Ambas son lecturas gratuitas.
+ * Una clave inventada responde 401 «Invalid API Key provided».
+ */
+async function verificarStripe(v: Record<string, string>, op: Opciones): Promise<Verificacion> {
+  const t = op.timeoutMs ?? TIMEOUT_MS;
+  const modo = modoDeClave(v.secretKey);
+  const detalles: string[] = [];
+  let nivel: Verificacion['nivel'] = 'ok';
+  try {
+    if (esRestringida(v.secretKey)) {
+      const b = await llamarStripe(v.secretKey, 'GET', '/balance', {}, { timeoutMs: t });
+      detalles.push(`Clave restringida válida (${b?.livemode ? 'modo real' : 'modo test'}). Comprueba que tenga los permisos de «¿Cómo obtengo la clave?».`);
+    } else {
+      const a = await llamarStripe(v.secretKey, 'GET', '/account', {}, { timeoutMs: t });
+      const nombre = a?.settings?.dashboard?.display_name || a?.business_profile?.name || a?.email || '';
+      detalles.push(`Cuenta ${a?.id ?? '?'}${nombre ? ` · ${nombre}` : ''}.`);
+      if (a?.charges_enabled === false && modo === 'live') { nivel = 'aviso'; detalles.push('La cuenta aún no puede cobrar en modo real: completa la activación en Stripe.'); }
+    }
+  } catch (e) {
+    if (e instanceof ErrorStripe) {
+      if (e.status === 401) return res('error', `Clave inválida: Stripe la rechazó (${e.message}).`);
+      if (e.status === 403) return res('error', `La clave no tiene permiso para leer ${esRestringida(v.secretKey) ? 'el saldo (Balance → Read)' : 'la cuenta'}: ${e.message}`);
+      if (e.status === 0) return res('error', e.message);
+      return res('error', `Stripe respondió ${e.status}: ${e.message}`);
+    }
+    return errorDeRed('Stripe', e, t);
+  }
+  detalles.unshift(modo === 'live' ? 'MODO REAL: los cobros son de verdad.' : 'MODO TEST: pagos simulados (tarjeta 4242 4242 4242 4242).');
+  const url = v.urlApp ? validarUrl(v.urlApp) : null;
+  if (!url) return res('error', 'Falta la URL pública de la app (https://…).', detalles);
+  if (/^http:\/\/|\/\/(localhost|127\.|0\.0\.0\.0|\[::1\])/.test(url)) {
+    nivel = 'aviso';
+    detalles.push('La URL de la app es local o sin https: Stripe no podrá entregar el webhook. Los pagos se confirman igual con «Confirmar» al volver de Checkout.');
+  }
+  return res(nivel, nivel === 'ok' ? 'Clave válida.' : 'Clave válida, con avisos.', detalles);
+}
+
+/**
  * Valores finales a verificar/guardar: lo enviado (limpio y validado) sobre
  * lo actual. Un campo de clave vacío conserva la clave en uso.
  */
@@ -334,6 +436,7 @@ export function prepararValores(proveedor: ProveedorId, cuerpo: Record<string, u
   const errores: Record<string, string> = {};
   const avisos: string[] = [];
   for (const [campo, def] of Object.entries(PROVEEDORES[proveedor].campos)) {
+    if (def.oculto) continue; // los rellena el servidor
     const bruto = cuerpo?.[campo];
     if (bruto === undefined || bruto === null) continue;
     if (typeof bruto !== 'string') { errores[campo] = 'Valor no válido.'; continue; }
@@ -346,19 +449,26 @@ export function prepararValores(proveedor: ProveedorId, cuerpo: Record<string, u
     } else {
       const m = bruto.trim();
       if (!m) continue;
+      if (def.tipo === 'url') {
+        const u = validarUrl(m);
+        if (!u) { errores[campo] = 'URL no válida: usa https://dominio (sin espacios, ? ni #).'; continue; }
+        cambios[campo] = u; continue;
+      }
       if (!MODELO_VALIDO.test(m)) { errores[campo] = 'Nombre de modelo no válido (solo letras, números y . _ - : /).'; continue; }
       cambios[campo] = m;
     }
   }
   if (proveedor === 'openai' && cuerpo?.quitarAdminKey === true) cambios.adminKey = '';
   const valores = { ...actuales, ...cambios };
-  if (!valores.apiKey) errores.apiKey ??= 'Falta la clave de API.';
+  const ck = campoClave(proveedor);
+  if (!valores[ck]) errores[ck] ??= 'Falta la clave de API.';
   return { valores, cambios, errores, avisos };
 }
 
 /** Verifica unos valores ya preparados contra el proveedor (sin guardar). */
 export async function verificarValores(proveedor: ProveedorId, v: Record<string, string>, op: Opciones = {}): Promise<Verificacion> {
-  const r = proveedor === 'elevenlabs' ? await verificarEleven(v, op) : proveedor === 'openai' ? await verificarOpenAI(v, op) : await verificarGemini(v, op);
+  const r = proveedor === 'elevenlabs' ? await verificarEleven(v, op) : proveedor === 'openai' ? await verificarOpenAI(v, op)
+    : proveedor === 'stripe' ? await verificarStripe(v, op) : await verificarGemini(v, op);
   const { cuota: _c, ...limpio } = r as any;
   return limpio;
 }
@@ -382,8 +492,13 @@ export async function verificar(proveedor: ProveedorId, cuerpo: Record<string, u
 export async function guardar(proveedor: ProveedorId, cuerpo: Record<string, unknown> = {}, op: Opciones = {}): Promise<ResultadoOperacion> {
   const p = prepararValores(proveedor, cuerpo);
   if (Object.keys(p.errores).length) return { ok: false, errores: p.errores };
-  const verificacion = await verificarValores(proveedor, p.valores, op);
+  let verificacion = await verificarValores(proveedor, p.valores, op);
   if (!verificacion.ok) return { ok: false, verificacion, avisos: p.avisos };
+  if (proveedor === 'stripe') {
+    const s = await prepararStripe(p.valores, op);
+    Object.assign(p.valores, s.valores);
+    verificacion = { ...verificacion, nivel: verificacion.nivel === 'ok' && s.aviso ? 'aviso' : verificacion.nivel, detalles: [...(verificacion.detalles ?? []), ...s.detalles] };
+  }
   // Se guarda solo lo que difiere del servidor: lo demás sigue heredando del .env.
   const datos: Record<string, string> = {};
   for (const campo of Object.keys(PROVEEDORES[proveedor].campos)) {
@@ -403,7 +518,35 @@ export async function guardar(proveedor: ProveedorId, cuerpo: Record<string, unk
     estado[proveedor].actualizadoEn = filas[0]?.actualizado_en ? new Date(filas[0].actualizado_en).toISOString() : new Date().toISOString();
   }
   estado[proveedor].verificacion = verificacion; estado[proveedor].avisos = [];
+  if (proveedor === 'stripe' && alGuardarStripe) {
+    const d = await alGuardarStripe().catch((e) => [`No se pudieron sincronizar los planes: ${String(e?.message ?? e).slice(0, 200)}`]);
+    if (d.length) verificacion.detalles = [...(verificacion.detalles ?? []), ...d];
+  }
   return { ok: true, verificacion, avisos: p.avisos };
+}
+
+/**
+ * Al vincular Stripe: modo y webhook (crea o reutiliza el endpoint y guarda su
+ * secreto); después, planes y Customer Portal (alGuardarStripe). Un fallo aquí no impide guardar la clave: se
+ * avisa y los pagos se confirman con «Confirmar» al volver de Checkout.
+ */
+async function prepararStripe(v: Record<string, string>, op: Opciones) {
+  const valores: Record<string, string> = { modo: modoDeClave(v.secretKey) ?? '' };
+  const detalles: string[] = [];
+  let aviso = false;
+  const o = { timeoutMs: op.timeoutMs ?? TIMEOUT_MS };
+  const misma = v.secretKey === extraActual('stripe', 'secretKey');
+  const url = `${v.urlApp}/api/stripe/webhook`;
+  try {
+    const w = await configurarWebhook(v.secretKey, url, misma ? { id: extraActual('stripe', 'webhookId'), secreto: extraActual('stripe', 'webhookSecret') } : {}, o);
+    valores.webhookId = w.id; valores.webhookSecret = w.secreto;
+    detalles.push(`Webhook ${w.accion === 'reutilizado' ? 'reutilizado' : w.accion === 'creado' ? 'creado' : 'recreado'} en ${url}.`);
+  } catch (e: any) {
+    aviso = true; valores.webhookId = ''; valores.webhookSecret = '';
+    detalles.push(`No se pudo crear el webhook (${String(e?.message ?? e).slice(0, 200)}). Sin webhook, el pago se confirma al volver de Checkout («Confirmar»); las renovaciones y cancelaciones no se actualizarán solas.`);
+  }
+  // El Customer Portal (con cambio de plan) se configura después, al sincronizar los planes (alGuardarStripe).
+  return { valores, detalles, aviso };
 }
 
 /** DELETE: borra lo del panel y vuelve a los valores del servidor (.env). */
@@ -416,19 +559,21 @@ export async function eliminar(proveedor: ProveedorId) {
 /** GET /admin/conexiones: estado sin claves (solo enmascaradas). */
 export function resumen() {
   const proveedores = (Object.keys(PROVEEDORES) as ProveedorId[]).map((id) => {
-    const def = PROVEEDORES[id], e = estado[id], v = valoresActuales(id);
+    const def = PROVEEDORES[id], e = estado[id], v = valoresActuales(id), ck = campoClave(id);
     const panel = !!e.datos;
-    const claveServidor = valorServidor(id, 'apiKey');
+    const claveServidor = valorServidor(id, ck);
     const origen = panel ? 'panel' : claveServidor ? 'servidor' : 'sin configurar';
     const modelos: Record<string, string> = {};
-    for (const [campo, c] of Object.entries(def.campos)) if (!c.secreto) modelos[campo] = v[campo];
+    const visibles = Object.entries(def.campos).filter(([, c]) => !c.oculto);
+    for (const [campo, c] of visibles) if (!c.secreto) modelos[campo] = v[campo];
     return {
       id, nombre: def.nombre, uso: def.uso, origen,
-      claveOrigen: e.datos?.apiKey ? 'panel' : claveServidor ? 'servidor' : 'ninguna',
-      clave: enmascarar(v.apiKey), configurada: !!v.apiKey,
+      claveOrigen: e.datos?.[ck] ? 'panel' : claveServidor ? 'servidor' : 'ninguna',
+      clave: enmascarar(v[ck]), configurada: !!v[ck],
       ...(id === 'openai' ? { adminKey: enmascarar(v.adminKey) } : {}),
-      modelos, campos: Object.fromEntries(Object.entries(def.campos).map(([k, c]) => [k, { etiqueta: c.etiqueta, secreto: c.secreto }])),
-      sugerencias: def.sugerencias,
+      ...(id === 'stripe' ? { modo: modoDeClave(v.secretKey), webhook: !!v.webhookSecret } : {}),
+      modelos, campos: Object.fromEntries(visibles.map(([k, c]) => [k, { etiqueta: c.etiqueta, secreto: c.secreto }])),
+      sugerencias: id === 'stripe' ? { urlApp: [urlAppPorDefecto()] } : def.sugerencias,
       ultimaVerificacion: e.verificacion, actualizadoEn: e.actualizadoEn, avisos: e.avisos,
     };
   });
@@ -466,6 +611,7 @@ async function consumoOpenAI(op: Opciones, ia: Awaited<ReturnType<typeof iaDelMe
   const t = op.timeoutMs ?? TIMEOUT_MS;
   const propias = ia.filter((f) => f.proveedor === 'openai');
   const estimado = { coste: redondear(propias.reduce((a, f) => a + f.coste, 0)), conversaciones: propias.reduce((a, f) => a + f.conversaciones, 0), modelos: propias };
+  const adminKeyOpenAI = adminKeyActual();
   if (adminKeyOpenAI) {
     try {
       let total = 0, moneda = 'usd', pagina: string | null = null, vueltas = 0;
@@ -500,10 +646,47 @@ function consumoGemini(ia: Awaited<ReturnType<typeof iaDelMes>>) {
   };
 }
 
-/** GET /admin/conexiones/consumo: los tres en paralelo; un fallo no tumba a los otros. */
+/**
+ * Stripe: ingresos del mes resumidos desde `GET /v1/balance_transactions`
+ * (cobros menos reembolsos, comisiones y neto por moneda) y suscripciones
+ * activas de Stripe según la tabla `suscripciones`.
+ */
+async function consumoStripe(op: Opciones) {
+  const s = stripeConfig();
+  const [loc] = await query<{ activas: number }>(
+    `SELECT count(*) FILTER (WHERE origen = 'stripe' AND estado IN ('activa', 'prueba_stripe') AND modo IS NOT DISTINCT FROM $1)::int AS activas FROM suscripciones`, [s.modo]).catch(() => []);
+  const activas = loc?.activas ?? 0;
+  if (!s.secretKey) return { tipo: 'sin configurar', activas, nota: 'Vincula Stripe para ver los ingresos.' };
+  try {
+    const porMoneda = new Map<string, { bruto: number; comisiones: number; neto: number; cobros: number; reembolsos: number }>();
+    let despues: string | null = null, vueltas = 0;
+    do {
+      const r: any = await llamarStripe(s.secretKey, 'GET', '/balance_transactions', { created: { gte: inicioDeMes() }, limit: 100, ...(despues ? { starting_after: despues } : {}) }, { timeoutMs: op.timeoutMs ?? TIMEOUT_MS });
+      for (const b of r?.data ?? []) {
+        if (!['charge', 'payment', 'refund', 'payment_refund'].includes(b?.type)) continue;
+        const m = String(b.currency ?? 'usd'), x = porMoneda.get(m) ?? { bruto: 0, comisiones: 0, neto: 0, cobros: 0, reembolsos: 0 };
+        x.bruto += Number(b.amount ?? 0); x.comisiones += Number(b.fee ?? 0); x.neto += Number(b.net ?? 0);
+        if (b.type.includes('refund')) x.reembolsos++; else x.cobros++;
+        porMoneda.set(m, x);
+      }
+      despues = r?.has_more ? r?.data?.at(-1)?.id ?? null : null;
+    } while (despues && ++vueltas < 5);
+    const c = (v: number) => Math.round(v) / 100;
+    return {
+      tipo: 'real', modo: s.modo, activas,
+      ingresos: [...porMoneda].map(([moneda, x]) => ({ moneda, bruto: c(x.bruto), comisiones: c(x.comisiones), neto: c(x.neto), cobros: x.cobros, reembolsos: x.reembolsos })),
+      ...(vueltas >= 5 ? { nota: 'Más de 500 movimientos este mes: se muestran los 500 más recientes.' } : {}),
+    };
+  } catch (e: any) {
+    const m = e instanceof ErrorStripe ? (e.status === 403 ? 'La clave no tiene permiso «Balance → Read» para ver los ingresos.' : `Stripe respondió ${e.status}: ${e.message}`) : errorDeRed('Stripe', e, op.timeoutMs ?? TIMEOUT_MS).mensaje;
+    return { tipo: 'error', modo: s.modo, activas, nota: m };
+  }
+}
+
+/** GET /admin/conexiones/consumo: todos en paralelo; un fallo no tumba a los otros. */
 export async function consumo(op: Opciones = {}) {
   const ia = await iaDelMes();
-  const [e, o, g] = await Promise.allSettled([consumoEleven(op), consumoOpenAI(op, ia), Promise.resolve(consumoGemini(ia))]);
+  const [e, o, g, st] = await Promise.allSettled([consumoEleven(op), consumoOpenAI(op, ia), Promise.resolve(consumoGemini(ia)), consumoStripe(op)]);
   const val = (r: PromiseSettledResult<any>) => r.status === 'fulfilled' ? r.value : { tipo: 'error', nota: 'No se pudo calcular el consumo.' };
-  return { mes: new Date(inicioDeMes() * 1000).toISOString().slice(0, 7), elevenlabs: val(e), openai: val(o), gemini: val(g) };
+  return { mes: new Date(inicioDeMes() * 1000).toISOString().slice(0, 7), elevenlabs: val(e), openai: val(o), gemini: val(g), stripe: val(st) };
 }

@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { query, uno } from '../lib/db.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
+import { planEfectivo } from '../lib/pagos/suscripciones.js';
 
 const Registro = z.object({
   email: z.string().email(),
@@ -71,6 +72,11 @@ export default async function rutas(app: FastifyInstance) {
     const s = req.user as Sesion;
     const estado = Estado.parse(req.body);
     const nivel = nivelActual(estado);
+    // El servidor es la autoridad del plan: se ignora el `planId` del cliente y
+    // se guarda el del servidor. La prueba usada nunca baja (máximo de ambos).
+    const servidor = await uno<{ trial_segundos: number }>('SELECT trial_segundos FROM usuarios WHERE id = $1', [s.sub]);
+    estado.planId = await planEfectivo(s.sub);
+    estado.trialSegundos = Math.max(Number(servidor?.trial_segundos ?? 0), Math.max(0, Math.round(estado.trialSegundos || 0)));
     await query(
       `INSERT INTO progreso (usuario_id, estado, nivel_actual, lecciones_completadas, xp, racha, segundos_estudio, actualizado_en)
        VALUES ($1,$2,$3,$4,$5,$6,$7, now())
@@ -81,8 +87,8 @@ export default async function rutas(app: FastifyInstance) {
     );
     await query(
       `UPDATE usuarios SET nombre = COALESCE($2, nombre), idioma_nativo = COALESCE($3, idioma_nativo), idioma_meta = COALESCE($4, idioma_meta),
-         plan_id=$5, tutor_id=$6, trial_segundos=$7, trial_inicio = COALESCE($8::timestamptz, trial_inicio), ultima_actividad=now() WHERE id=$1`,
-      [s.sub, estado.nombre ?? null, estado.idiomaNativo ?? null, estado.idiomaMeta ?? null, estado.planId, estado.tutorId, estado.trialSegundos, estado.trialInicio ?? null],
+         tutor_id=$5, trial_segundos=GREATEST(trial_segundos, $6), trial_inicio = COALESCE($7::timestamptz, trial_inicio), ultima_actividad=now() WHERE id=$1`,
+      [s.sub, estado.nombre ?? null, estado.idiomaNativo ?? null, estado.idiomaMeta ?? null, estado.tutorId, estado.trialSegundos, estado.trialInicio ?? null],
     );
     for (const e of estado.errores) {
       await query(
@@ -98,7 +104,7 @@ export default async function rutas(app: FastifyInstance) {
         [s.sub, Number(nivelStr), pct, pct >= 65],
       );
     }
-    return { ok: true, nivelActual: nivel };
+    return { ok: true, nivelActual: nivel, planId: estado.planId };
   });
 
   app.post('/usuarios/me/eventos', { preHandler: requiereAlumno }, async (req) => {

@@ -10,6 +10,7 @@ import '../../core/content/catalog.dart';
 import '../../core/content/situaciones.dart';
 import '../../core/content/fotos.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -52,7 +53,7 @@ class _PracticeScreenState extends ConsumerState<PracticeScreen> {
     }).toList();
 
     void abrir(String ruta) {
-      if (s.trialAgotado) {
+      if (ref.read(estadoPlanProvider).trialAgotado) {
         context.push('/planes');
       } else {
         context.push(ruta);

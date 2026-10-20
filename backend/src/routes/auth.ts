@@ -7,6 +7,17 @@ import { config } from '../lib/config.js';
 import { enviarCorreo, plantilla } from '../lib/correo.js';
 import { query, uno } from '../lib/db.js';
 import { requiereAlumno, type Sesion } from '../lib/auth.js';
+import { planEfectivo } from '../lib/pagos/suscripciones.js';
+
+/**
+ * Estado guardado con el plan del servidor (autoridad del plan) y la prueba
+ * usada que nunca baja (máximo entre lo guardado y `usuarios.trial_segundos`).
+ */
+async function estadoConPlan(usuarioId: string, estado: any) {
+  if (!estado || typeof estado !== 'object') return estado ?? null;
+  const u = await uno<{ trial_segundos: number }>('SELECT trial_segundos FROM usuarios WHERE id = $1', [usuarioId]);
+  return { ...estado, planId: await planEfectivo(usuarioId), trialSegundos: Math.max(Number(estado.trialSegundos ?? 0) || 0, Number(u?.trial_segundos ?? 0)) };
+}
 
 const google = new OAuth2Client();
 const tokenDe = (app: FastifyInstance, id: string) => app.jwt.sign({ sub: id, rol: 'alumno' } satisfies Sesion);
@@ -47,7 +58,7 @@ export default async function rutas(app: FastifyInstance) {
     await query('UPDATE usuarios SET ultima_actividad = now() WHERE id = $1', [u.id]);
     await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1,$2,$3)', [u.id, 'login', JSON.stringify({ metodo: 'password' })]);
     const p = await uno('SELECT estado FROM progreso WHERE usuario_id = $1', [u.id]);
-    return { id: u.id, token: tokenDe(app, u.id), estado: p?.estado ?? null };
+    return { id: u.id, token: tokenDe(app, u.id), estado: await estadoConPlan(u.id, p?.estado) };
   });
 
   /** Inicio de sesión con Google: la app manda el idToken; se verifica contra los client IDs configurados. */
@@ -70,7 +81,7 @@ export default async function rutas(app: FastifyInstance) {
       : await uno('INSERT INTO usuarios (email, nombre, idioma_nativo, idioma_meta, nivel_inicial, plataforma, trial_inicio, google_id, email_verificado) VALUES ($1,$2,$3,$4,$5,$6, now(), $7, true) RETURNING id', [email, nombre, idiomaNativo, idiomaMeta, nivelInicial, plataforma, payload.sub]);
     await query('INSERT INTO eventos (usuario_id, tipo, datos) VALUES ($1,$2,$3)', [u!.id, existe ? 'login' : 'registro', JSON.stringify({ metodo: 'google' })]);
     const p = await uno('SELECT estado FROM progreso WHERE usuario_id = $1', [u!.id]);
-    return { id: u!.id, token: tokenDe(app, u!.id), nombre, email, estado: p?.estado ?? null, nuevo: !existe };
+    return { id: u!.id, token: tokenDe(app, u!.id), nombre, email, estado: await estadoConPlan(u!.id, p?.estado), nuevo: !existe };
   });
 
   app.post('/auth/recuperar', async (req) => {
@@ -113,6 +124,6 @@ export default async function rutas(app: FastifyInstance) {
     const s = req.user as Sesion;
     const p = await uno('SELECT estado, actualizado_en FROM progreso WHERE usuario_id = $1', [s.sub]);
     const u = await uno('SELECT email, nombre, email_verificado FROM usuarios WHERE id = $1', [s.sub]);
-    return { estado: p?.estado ?? null, actualizado: p?.actualizado_en ?? null, usuario: u };
+    return { estado: await estadoConPlan(s.sub, p?.estado), actualizado: p?.actualizado_en ?? null, usuario: u };
   });
 }

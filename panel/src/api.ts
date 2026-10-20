@@ -5,7 +5,8 @@ export const guardarToken = (t: string | null) => t ? localStorage.setItem('onel
 export async function api<T = any>(ruta: string, op: { metodo?: string; cuerpo?: unknown } = {}): Promise<T> {
   const r = await fetch(BASE + ruta, {
     method: op.metodo ?? 'GET',
-    headers: { 'content-type': 'application/json', ...(token() ? { authorization: `Bearer ${token()}` } : {}) },
+    // Sin cuerpo no se manda content-type: Fastify rechaza un JSON vacío (DELETE, POST sin datos).
+    headers: { ...(op.cuerpo === undefined ? {} : { 'content-type': 'application/json' }), ...(token() ? { authorization: `Bearer ${token()}` } : {}) },
     body: op.cuerpo === undefined ? undefined : JSON.stringify(op.cuerpo),
   })
   const d = await r.json().catch(() => ({}))
@@ -35,3 +36,7 @@ export const PLATAFORMAS: Record<string, string> = { web: 'Web', android: 'Andro
 export const nivelCorto = (n: number | null | undefined) => n === null || n === undefined ? '—' : n === 0 ? 'F0' : `N${n}`
 export const usd = (v: number) => `$${v < 1 ? v.toFixed(v < 0.01 && v > 0 ? 4 : 2) : v.toFixed(2)}`
 export const num = (v: number) => Number(v ?? 0).toLocaleString('es')
+/** Estado de una suscripción → [clase de pill, etiqueta]. */
+export const ESTADOS: Record<string, [string, string]> = {
+  activa: ['ok', 'Activa'], prueba_stripe: ['ok', 'Prueba (Stripe)'], impago: ['mal', 'Impago'], cancelada: ['trial', 'Cancelada'], vencida: ['mal', 'Vencida'], sin_plan: ['', 'Sin plan'],
+}

@@ -15,6 +15,7 @@ import '../../core/models/models.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/lexico/lexico.dart';
 import '../../core/nivel0/nivel0.dart';
+import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
@@ -55,7 +56,19 @@ class ProgressScreen extends ConsumerWidget {
     final hab = s.porHabilidad;
     final maxHab = hab.values.fold(1, (a, b) => a > b ? a : b);
     final t = tutor(s.tutorId);
-    final plan = planes.where((p) => p.id == s.planId).firstOrNull;
+    final estadoPlan = ref.watch(estadoPlanProvider);
+    final nombrePlan = estadoPlan.tienePlan
+        ? (ref
+                  .watch(catalogoPlanesProvider)
+                  .plan(estadoPlan.planId)
+                  ?.nombreEn(s.interfaz) ??
+              estadoPlan.planId)
+        : null;
+    // Estado de la suscripción: el del servidor si lo hay; en DEMO, activa.
+    final sus = estadoPlan.suscripcion;
+    final estadoSuscripcion = sus != null && (sus.acceso || sus.stripeVigente)
+        ? (sus.esCortesia ? tr('Cortesía') : sus.estadoTexto)
+        : tr('Activa');
 
     return Scaffold(
       appBar: AppBar(title: Text(tr('Mi progreso'))),
@@ -100,11 +113,11 @@ class ProgressScreen extends ConsumerWidget {
                         children: [
                           Etiqueta(etiquetaNivel),
                           Etiqueta(
-                            plan == null ? tr('Prueba gratuita') : plan.nombre,
-                            color: plan == null
+                            nombrePlan ?? tr('Prueba gratuita'),
+                            color: nombrePlan == null
                                 ? const Color(0xFF9A6B00)
                                 : OL.verde,
-                            fondo: plan == null ? OL.amarilloSuave : null,
+                            fondo: nombrePlan == null ? OL.amarilloSuave : null,
                           ),
                         ],
                       ),
@@ -297,9 +310,12 @@ class ProgressScreen extends ConsumerWidget {
           ),
           _Fila(
             Icons.workspace_premium_outlined,
-            tr('Plan de suscripción'),
-            plan?.nombre ??
-                tr('Prueba gratuita · {min} min restantes', {'min': s.trialRestante ~/ 60}),
+            tr('Suscripción'),
+            nombrePlan != null
+                ? '$nombrePlan · $estadoSuscripcion'
+                : estadoPlan.trialAgotado
+                ? tr('Prueba gratuita terminada · elige un plan')
+                : tr('Prueba gratuita · {min} min restantes', {'min': estadoPlan.trialRestante ~/ 60}),
             () => context.push('/planes'),
           ),
           const SizedBox(height: 16),

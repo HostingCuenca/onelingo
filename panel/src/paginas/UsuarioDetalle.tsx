@@ -1,12 +1,66 @@
 import { useEffect, useState } from 'react'
-import { api, fecha, hace, IDIOMAS, minutos, nivelCorto, num, PLANES, PLATAFORMAS, SKILLS, usd } from '../api'
+import { api, ESTADOS, fecha, hace, IDIOMAS, minutos, nivelCorto, num, PLATAFORMAS, SKILLS, usd } from '../api'
 
 const lista = (v: unknown) => (Array.isArray(v) ? v.join(', ') : typeof v === 'object' && v ? Object.keys(v).join(', ') : String(v ?? ''))
 
-export default function UsuarioDetalle({ id, volver }: { id: string; volver: () => void }) {
+/** Suscripción del alumno y cortesía (acceso sin pago dado por el administrador). */
+function Suscripcion({ id, s, alCambiar }: { id: string; s: any; alCambiar: () => void }) {
+  const [planes, setPlanes] = useState<{ id: string; nombre: { es: string }; archivado: boolean }[]>([])
+  const [plan, setPlan] = useState(''); const [hasta, setHasta] = useState(''); const [nota, setNota] = useState('')
+  const [msg, setMsg] = useState(''); const [ocupado, setOcupado] = useState(false)
+  useEffect(() => { api('/admin/planes').then((r) => { const l = r.planes.filter((p: any) => !p.archivado); setPlanes(l); setPlan((x) => x || l[0]?.id || '') }).catch(() => {}) }, [])
+  const [clase, etq] = ESTADOS[s.estado] ?? ['', s.estado]
+  const enStripe = s.origen === 'stripe' && ['activa', 'prueba_stripe', 'impago'].includes(s.estado)
+  const dar = async (e: React.FormEvent) => {
+    e.preventDefault(); setOcupado(true); setMsg('')
+    try {
+      await api(`/admin/usuarios/${id}/cortesia`, { metodo: 'POST', cuerpo: { planId: plan, hasta: hasta ? new Date(`${hasta}T23:59:59`).toISOString() : null, nota } })
+      setHasta(''); setNota(''); alCambiar()
+    } catch (x: any) { setMsg(x.datos?.detalles?.join(' · ') || x.message) } finally { setOcupado(false) }
+  }
+  const quitar = async () => {
+    if (!confirm('¿Quitar la cortesía? El alumno pierde el acceso del plan.')) return
+    setOcupado(true); setMsg('')
+    try { await api(`/admin/usuarios/${id}/cortesia`, { metodo: 'DELETE' }); alCambiar() } catch (x: any) { setMsg(x.message) } finally { setOcupado(false) }
+  }
+  return (
+    <div className="tarjeta">
+      <h2>Suscripción</h2>
+      <div className="conexion-estado" style={{ marginTop: 0 }}>
+        <span className={`pill ${clase}`}>{etq}</span>
+        {s.origen && <span className="pill">{s.origen === 'cortesia' ? 'Cortesía' : 'Stripe'}</span>}
+        {s.modo && <span className={`pill ${s.modo === 'live' ? 'ok' : 'trial'}`}>{s.modo === 'live' ? 'MODO REAL' : 'MODO TEST'}</span>}
+        <span className={`pill ${s.acceso ? 'ok' : 'mal'}`}>{s.acceso ? 'Con acceso' : 'Sin acceso'}</span>
+      </div>
+      <div className="sus-datos">
+        <div><div className="l">Plan</div><b>{s.planId || s.filaPlanId || '—'}</b></div>
+        <div><div className="l">{s.cancelaAlFinal ? 'Se cancela el' : s.origen === 'cortesia' ? 'Hasta' : 'Periodo hasta'}</div>{s.periodoFin ? fecha(s.periodoFin) : s.origen === 'cortesia' ? 'Sin fecha' : '—'}</div>
+        <div><div className="l">Prueba gratuita</div>{minutos(s.prueba.segundosUsados)} de {s.prueba.minutos} min{s.prueba.agotada ? ' · agotada' : ''}</div>
+        {s.stripeClienteId && <div><div className="l">Cliente de Stripe</div><span className="mono">{s.stripeClienteId}</span></div>}
+      </div>
+      {s.nota && <p className="muted uso-nota">Nota: {s.nota}</p>}
+      {s.origen === 'cortesia' && <div className="acciones"><button className="sec" disabled={ocupado} onClick={quitar}>Quitar cortesía</button></div>}
+      {enStripe ? <p className="muted uso-nota">Paga con Stripe: los cambios (cancelar, tarjeta) se hacen en el portal del alumno o en el Dashboard de Stripe.</p> : (
+        <form className="conexion-form" onSubmit={dar} style={{ marginTop: 12 }}>
+          <h3 className="seccion" style={{ margin: '4px 0 0' }}>{s.origen === 'cortesia' ? 'Cambiar cortesía' : 'Dar cortesía'}</h3>
+          <div className="form-grid tres">
+            <label className="campo"><span>Plan</span><select value={plan} onChange={(e) => setPlan(e.target.value)} required>{planes.map((p) => <option key={p.id} value={p.id}>{p.nombre.es} ({p.id})</option>)}</select></label>
+            <label className="campo"><span>Hasta (vacío = sin fecha)</span><input type="date" value={hasta} min={new Date().toISOString().slice(0, 10)} onChange={(e) => setHasta(e.target.value)} /></label>
+            <label className="campo"><span>Nota</span><input maxLength={500} value={nota} onChange={(e) => setNota(e.target.value)} placeholder="Beca, socio, prueba…" /></label>
+          </div>
+          <div className="acciones"><button disabled={ocupado || !plan}>{ocupado ? 'Guardando…' : 'Dar acceso'}</button></div>
+        </form>
+      )}
+      {msg && <p className="err">{msg}</p>}
+    </div>
+  )
+}
+
+export default function UsuarioDetalle({ id, volver, desde = 'usuarios' }: { id: string; volver: () => void; desde?: 'usuarios' | 'suscripciones' }) {
   const [d, setD] = useState<any>(null)
   const [err, setErr] = useState('')
-  useEffect(() => { api(`/admin/usuarios/${id}`).then(setD).catch((e) => setErr(e.message)) }, [id])
+  const cargar = () => api(`/admin/usuarios/${id}`).then(setD).catch((e) => setErr(e.message))
+  useEffect(() => { cargar() }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
   if (err) return <p className="err">{err}</p>
   if (!d) return <p className="muted">Cargando…</p>
   const u = d.usuario, p = d.progreso, e = p?.estado ?? {}
@@ -14,9 +68,9 @@ export default function UsuarioDetalle({ id, volver }: { id: string; volver: () 
   const nivelMax = Math.max(-1, ...(d.progresoIdiomas.find((x: any) => x.idioma === u.idioma_meta)?.niveles ?? []).filter((n: any) => n.clases > 0).map((n: any) => n.nivel))
   return (
     <>
-      <div className="cab"><div><span className="volver" onClick={volver}>← Alumnos</span><h1>{u.nombre}</h1>
+      <div className="cab"><div><span className="volver" onClick={volver}>← {desde === 'suscripciones' ? 'Suscripciones' : 'Alumnos'}</span><h1>{u.nombre}</h1>
         <span className="muted mono">{u.email} · {PLATAFORMAS[u.plataforma || 'desconocida'] ?? u.plataforma} · registrado {fecha(u.creado_en)} · activo {hace(u.ultima_actividad)}</span></div>
-        <div>{u.plan_id ? <span className="pill ok">{PLANES[u.plan_id] ?? u.plan_id}</span> : <span className="pill trial">Prueba gratuita · {Math.max(0, 60 - Math.round(u.trial_segundos / 60))} min</span>}</div></div>
+        <div>{d.suscripcion.acceso ? <span className="pill ok">Plan {d.suscripcion.planId}</span> : <span className="pill trial">Prueba gratuita · {Math.round(d.suscripcion.prueba.restanteSegundos / 60)} min</span>}</div></div>
       <div className="kpis">
         <div className="kpi"><div className="v">{IDIOMAS[u.idioma_meta] ?? u.idioma_meta}</div><div className="l">Aprende</div><div className="nota">nativo: {IDIOMAS[u.idioma_nativo] ?? u.idioma_nativo}</div></div>
         <div className="kpi"><div className="v">{d.clases}</div><div className="l">Clases completadas</div>{d.legado > 0 && <div className="nota">{d.legado} del temario antiguo</div>}</div>
@@ -26,6 +80,7 @@ export default function UsuarioDetalle({ id, volver }: { id: string; volver: () 
         <div className="kpi"><div className="v">{d.ia.conversaciones}</div><div className="l">Turnos con tutor IA</div><div className="nota">{num(d.ia.entrada + d.ia.salida)} tokens · {usd(d.ia.coste)}</div></div>
       </div>
 
+      <Suscripcion id={id} s={d.suscripcion} alCambiar={cargar} />
       <div className="grid2">
         <div className="tarjeta"><h2>Progreso por idioma y nivel</h2>
           {d.progresoIdiomas.map((pi: any) => <div key={pi.idioma} style={{ marginBottom: 12 }}>

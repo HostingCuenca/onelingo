@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/sync.dart';
-import '../content/catalog.dart';
 import '../content/contenido_json.dart';
 import '../i18n/i18n.dart';
+import '../pagos/modelos.dart' show usaServidorPagos;
 import '../content/curriculum.dart';
 import '../content/fundamentos.dart' show idiomasSoloRutaF0;
 import '../diagnostico.dart'
@@ -199,16 +199,16 @@ class ProgressState {
 
   double progresoNivel(int n) => completadasEnNivel(n) / totalLeccionesDe(n);
 
-  int get trialRestante {
-    if (planId.isNotEmpty) return segundosPruebaGratis;
-    return (segundosPruebaGratis - trialSegundos).clamp(
-      0,
-      segundosPruebaGratis,
-    );
+  /// Prueba gratuita local (DEMO o sin servidor) de [total] segundos. El
+  /// total sale de `GET /planes` (`pruebaMinutos`); lo que ve el alumno se lee
+  /// de `estadoPlanProvider`, que usa el servidor cuando hay sesión.
+  int trialRestanteDe(int total) {
+    if (planId.isNotEmpty) return total;
+    return (total - trialSegundos).clamp(0, total);
   }
 
-  bool get trialAgotado =>
-      planId.isEmpty && trialInicio != null && trialRestante == 0;
+  bool trialAgotadoDe(int total) =>
+      planId.isEmpty && trialInicio != null && trialRestanteDe(total) == 0;
 
   Map<Skill, int> get porHabilidad {
     final m = <Skill, int>{for (final s in Skill.values) s: 0};
@@ -641,7 +641,21 @@ class ProgressNotifier extends StateNotifier<ProgressState> {
   void elegirIdiomaInterfaz(String codigo) =>
       _save(state.copyWith(idiomaInterfaz: codigo));
 
-  void elegirPlan(String id) => _save(state.copyWith(planId: id));
+  /// Plan elegido en el dispositivo: solo DEMO o sin servidor. Con sesión de
+  /// servidor el plan lo asigna el servidor (pago o cortesía). Devuelve si
+  /// se asignó.
+  bool elegirPlan(String id) {
+    if (usaServidorPagos(state.email)) return false;
+    _save(state.copyWith(planId: id));
+    return true;
+  }
+
+  /// Plan efectivo que dice el servidor (dato derivado, como `usuarios.plan_id`):
+  /// detiene o reanuda el conteo local de la prueba.
+  void aplicarPlanServidor(String planId) {
+    if (planId == state.planId) return;
+    _save(state.copyWith(planId: planId));
+  }
 
   /// Suma XP y actualiza la racha (un día nuevo con actividad = +1).
   ProgressState _conActividad(ProgressState s, int xpGanado) {

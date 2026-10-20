@@ -10,8 +10,12 @@ import { fileURLToPath } from 'node:url';
 /** Zona horaria en la que se cuentan los días (registros, activos…). */
 export const ZONA_HORARIA = 'America/Guayaquil';
 
-/** Minutos de prueba gratis (igual que `segundosPruebaGratis` en lib/core/content/catalog.dart). */
-export const SEGUNDOS_PRUEBA = 60 * 60;
+/**
+ * Prueba gratuita por defecto (igual que `segundosPruebaGratis` en lib/core/content/catalog.dart).
+ * El valor en uso se edita en el panel (tabla `ajustes_pago`, `ajustesPago()` en lib/pagos/planes.ts).
+ */
+export const PRUEBA_MINUTOS_POR_DEFECTO = 60;
+export const SEGUNDOS_PRUEBA = PRUEBA_MINUTOS_POR_DEFECTO * 60;
 
 /** Una clase empezada y sin aprobar cuenta como abandonada pasados estos días. */
 export const DIAS_ABANDONO = 2;

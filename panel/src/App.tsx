@@ -7,10 +7,12 @@ import Correos from './paginas/Correos'
 import Conversaciones from './paginas/Conversaciones'
 import Audios from './paginas/Audios'
 import Conexiones from './paginas/Conexiones'
+import Planes from './paginas/Planes'
+import Suscripciones from './paginas/Suscripciones'
 
 const LOGO = `${import.meta.env.BASE_URL}logo-panel.webp`
 
-type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' }
+type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string; desde?: 'usuarios' | 'suscripciones' } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' } | { p: 'conexiones' } | { p: 'planes' } | { p: 'suscripciones' }
 
 function Login({ onOk }: { onOk: () => void }) {
   const [usuario, setUsuario] = useState('admin'); const [pin, setPin] = useState(''); const [err, setErr] = useState('')
@@ -46,6 +48,8 @@ export default function App() {
         <div className="marca"><img src={LOGO} alt="" width={34} height={32} /><span>One<b>Lingo</b> · Panel</span></div>
         <a className={ruta.p === 'resumen' ? 'activo' : ''} onClick={() => setRuta({ p: 'resumen' })}>Resumen</a>
         <a className={ruta.p === 'usuarios' || ruta.p === 'usuario' ? 'activo' : ''} onClick={() => setRuta({ p: 'usuarios' })}>Alumnos</a>
+        <a className={ruta.p === 'planes' ? 'activo' : ''} onClick={() => setRuta({ p: 'planes' })}>Planes</a>
+        <a className={ruta.p === 'suscripciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'suscripciones' })}>Suscripciones</a>
         <a className={ruta.p === 'conversaciones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conversaciones' })}>Conversaciones IA</a>
         <a className={ruta.p === 'audios' ? 'activo' : ''} onClick={() => setRuta({ p: 'audios' })}>Voz y audios</a>
         <a className={ruta.p === 'conexiones' ? 'activo' : ''} onClick={() => setRuta({ p: 'conexiones' })}>Conexiones</a>
@@ -55,7 +59,9 @@ export default function App() {
       <main>
         {ruta.p === 'resumen' && <Resumen />}
         {ruta.p === 'usuarios' && <Usuarios abrir={(id) => setRuta({ p: 'usuario', id })} />}
-        {ruta.p === 'usuario' && <UsuarioDetalle id={ruta.id} volver={() => setRuta({ p: 'usuarios' })} />}
+        {ruta.p === 'usuario' && <UsuarioDetalle id={ruta.id} desde={ruta.desde ?? 'usuarios'} volver={() => setRuta({ p: ruta.desde ?? 'usuarios' })} />}
+        {ruta.p === 'planes' && <Planes />}
+        {ruta.p === 'suscripciones' && <Suscripciones abrir={(id) => setRuta({ p: 'usuario', id, desde: 'suscripciones' })} />}
         {ruta.p === 'correos' && <Correos />}
         {ruta.p === 'conversaciones' && <Conversaciones />}
         {ruta.p === 'audios' && <Audios />}

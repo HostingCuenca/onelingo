@@ -33,6 +33,7 @@ import '../features/onboarding/onboarding_screen.dart';
 import '../features/onboarding/ubicacion_screen.dart';
 
 import '../features/onboarding/welcome_screen.dart';
+import '../features/plans/pago_screen.dart';
 import '../features/plans/plans_screen.dart';
 import '../features/plans/tutors_screen.dart';
 import '../features/nivel0/leccion_n0_screen.dart';
@@ -65,6 +66,15 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: '/bienvenida', builder: (_, _) => const WelcomeScreen()),
       GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
       GoRoute(path: '/onboarding', builder: (_, _) => const OnboardingScreen()),
+      // Vuelta de Stripe en la web (#/pago?estado=ok&session_id=…,
+      // ?estado=cancelado o ?estado=portal). Fuera del menú inferior.
+      GoRoute(
+        path: '/pago',
+        builder: (_, s) => PagoScreen(
+          estado: s.uri.queryParameters['estado'] ?? '',
+          sessionId: s.uri.queryParameters['session_id'],
+        ),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => _Shell(shell: shell),
         branches: [

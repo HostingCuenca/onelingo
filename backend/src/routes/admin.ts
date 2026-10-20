@@ -8,9 +8,11 @@ import { vozDisponible } from '../lib/voz.js';
 import { openaiDisponible } from '../lib/ia_openai.js';
 import { geminiDisponible } from '../lib/ia_gemini.js';
 import {
-  aCsv, catalogoClases, catalogoConEspera, costeIa, costeVoz, DIAS_ABANDONO, diaDe, infoClase, NIVELES_TABLA, resumirClases, SEGUNDOS_PRUEBA,
+  aCsv, catalogoClases, catalogoConEspera, costeIa, costeVoz, DIAS_ABANDONO, diaDe, infoClase, NIVELES_TABLA, resumirClases,
   serieDias, tablaIdiomaNivel, tarifaDe, totalesCatalogo, USD_POR_MIL_CARACTERES_VOZ, ZONA_HORARIA, type FilaClase,
 } from '../lib/analitica.js';
+import { ajustesPago } from '../lib/pagos/planes.js';
+import { filaDe, metricasSuscripciones, refrescarPlanesDerivados, suscripcionDe } from '../lib/pagos/suscripciones.js';
 
 /**
  * Días en que cada alumno tuvo actividad ($1 = zona horaria): eventos,
@@ -63,6 +65,7 @@ const vacio = (v?: string) => (v?.trim() ? v.trim() : null);
 
 /** Alumnos filtrados (hasta 5000), con sus clases completadas, ordenados. */
 async function listarUsuarios(f: z.infer<typeof FiltrosUsuarios>) {
+  await refrescarPlanesDerivados(); // cortesías o periodos que caducaron
   const filas = await query(
     `SELECT u.id, u.email, u.nombre, u.idioma_nativo, u.idioma_meta, u.plan_id, u.tutor_id, u.trial_segundos,
             CASE WHEN u.plataforma = '' THEN 'desconocida' ELSE u.plataforma END AS plataforma, u.es_demo,
@@ -109,6 +112,8 @@ export default async function rutas(app: FastifyInstance) {
   app.get('/admin/resumen', { preHandler: requiereAdmin }, async () => {
     const tz = ZONA_HORARIA;
     await catalogoConEspera(); // títulos y totales de clases (primera carga, como mucho 3 s)
+    await refrescarPlanesDerivados(); // `plan_id` derivado de `suscripciones` (cortesías o periodos que caducaron)
+    const { pruebaMinutos } = await ajustesPago();
     const [u] = await query(`SELECT count(*)::int AS total,
         count(*) FILTER (WHERE (creado_en AT TIME ZONE $1)::date = (now() AT TIME ZONE $1)::date)::int AS nuevos_hoy,
         count(*) FILTER (WHERE creado_en > now() - interval '7 days')::int AS nuevos7d,
@@ -118,7 +123,7 @@ export default async function rutas(app: FastifyInstance) {
         count(*) FILTER (WHERE plan_id = '' AND trial_segundos >= $2)::int AS prueba_agotada,
         count(*) FILTER (WHERE es_demo)::int AS demo,
         (now() AT TIME ZONE $1)::date::text AS hoy
-      FROM usuarios`, [tz, SEGUNDOS_PRUEBA]);
+      FROM usuarios`, [tz, pruebaMinutos * 60]);
     const { hoy, ...usuarios } = u as Record<string, any>;
     const [activos] = await query(`WITH ${DIAS_ACTIVOS}
       SELECT count(DISTINCT usuario_id) FILTER (WHERE dia = h.hoy)::int AS dau,
@@ -222,6 +227,7 @@ export default async function rutas(app: FastifyInstance) {
       },
       errores: errores.map((e) => ({ ...e, frecuentes: frecuentes.filter((f) => f.skill === e.skill).map((f) => ({ correccion: f.correccion, n: f.n })) })),
       estudio, examenes,
+      pruebaMinutos, suscripciones: await metricasSuscripciones(),
     };
   });
 
@@ -284,7 +290,10 @@ export default async function rutas(app: FastifyInstance) {
       conversaciones: suma(iaModelos, 'conversaciones'), entrada: suma(iaModelos, 'entrada'), salida: suma(iaModelos, 'salida'),
       coste: redondear(iaModelos.reduce((a, m) => a + costeIa(m.modelo || '', m.entrada, m.salida), 0), 4),
     };
+    const fs = await filaDe(id);
+    const suscripcion = { ...(await suscripcionDe(id)), nota: fs?.nota ?? '', stripeClienteId: fs?.stripe_cliente_id ?? null, stripeSuscripcionId: fs?.stripe_suscripcion_id ?? null, filaPlanId: fs?.plan_id ?? null };
     return {
+      suscripcion,
       usuario, progreso, porNivel, progresoIdiomas, ultimasClases, empezadas, clases: r.aprobadas.length,
       legado: r.aprobadas.filter((a) => infoClase(a.unidad).legado).length,
       ubicacion, conversaciones, ia, errores, examenes, eventos,

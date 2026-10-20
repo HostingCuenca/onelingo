@@ -8,6 +8,7 @@ import '../../core/content/curriculum.dart';
 import '../../core/content/fotos.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/aprendizaje/providers.dart';
+import '../../core/pagos/providers.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/daily_activities.dart';
 import '../../shared/widgets/mascot_coach.dart';
@@ -26,7 +27,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
     final meta = idioma(s.idiomaMeta);
-    final restante = s.trialRestante;
+    final plan = ref.watch(estadoPlanProvider);
+    final restante = plan.trialRestante;
     final nombre = nombreLimpio(s.nombre, email: s.email).split(' ').first;
 
     return Scaffold(
@@ -81,8 +83,8 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 4),
             const StreakCard(),
             const SizedBox(height: 16),
-            if (s.planId.isEmpty) _TrialBanner(restante: restante),
-            if (s.planId.isEmpty) const SizedBox(height: 16),
+            if (!plan.tienePlan) _TrialBanner(restante: restante),
+            if (!plan.tienePlan) const SizedBox(height: 16),
             // Idiomas sin ruta nueva (hoy ninguno): curso en preparación.
             if (!idiomasConRuta.contains(s.idiomaMeta)) ...[
               TituloSeccion(tr('Tu camino de aprendizaje')),
@@ -148,7 +150,7 @@ class _TrialBanner extends StatelessWidget {
         Expanded(
           child: Text(
             restante == 0
-                ? tr('Tu hora gratis terminó · elige un plan para continuar')
+                ? tr('Tu prueba gratuita terminó · elige un plan para continuar')
                 : tr('Prueba gratuita · te quedan {min} min', {'min': restante ~/ 60}),
             style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
           ),

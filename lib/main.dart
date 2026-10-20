@@ -13,6 +13,7 @@ import 'core/api/sync.dart';
 import 'core/conexion.dart';
 import 'core/efectos.dart';
 import 'core/i18n/i18n.dart';
+import 'core/pagos/providers.dart';
 import 'core/voz.dart';
 import 'shared/widgets/connection_banner.dart';
 import 'core/state/providers.dart';
@@ -117,7 +118,7 @@ class _PrecargaEscritura extends ConsumerWidget {
   }
 }
 
-/// Mide el tiempo de uso real (prueba gratuita de 1 hora y tiempo de estudio):
+/// Mide el tiempo de uso real (prueba gratuita y tiempo de estudio):
 /// cada 30 s en primer plano suma 30 s. En fase 2 este latido va al servidor.
 class _UsoTracker extends ConsumerStatefulWidget {
   const _UsoTracker({required this.child});
@@ -137,6 +138,15 @@ class _UsoTrackerState extends ConsumerState<_UsoTracker>
     WidgetsBinding.instance.addObserver(this);
     _iniciar();
     Conexion.comprobar();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _refrescarPlanes());
+  }
+
+  /// Planes y suscripción del servidor: al arrancar y al volver a primer
+  /// plano (en Android, al volver del navegador tras pagar o gestionar).
+  void _refrescarPlanes() {
+    if (!mounted) return;
+    ref.read(catalogoPlanesProvider.notifier).refrescar();
+    ref.read(suscripcionProvider.notifier).refrescar();
   }
 
   void _iniciar() {
@@ -154,6 +164,7 @@ class _UsoTrackerState extends ConsumerState<_UsoTracker>
     if (state == AppLifecycleState.resumed) {
       Conexion.comprobar();
       _iniciar();
+      _refrescarPlanes();
     } else {
       _timer?.cancel();
     }

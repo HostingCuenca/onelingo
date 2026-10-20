@@ -15,6 +15,8 @@ import rutasChat from './routes/chat.js';
 import rutasVoz from './routes/voz.js';
 import rutasDiagnostico from './routes/diagnostico.js';
 import rutasConexiones from './routes/conexiones.js';
+import rutasPlanes from './routes/planes.js';
+import rutasPagos from './routes/pagos.js';
 
 export async function crearApp() {
   const app = Fastify({ logger: { level: process.env.LOG_LEVEL ?? 'info' }, bodyLimit: 2 * 1024 * 1024 });
@@ -37,6 +39,8 @@ export async function crearApp() {
   await app.register(rutasDiagnostico);
   await app.register(rutasAdmin);
   await app.register(rutasConexiones);
+  await app.register(rutasPlanes);
+  await app.register(rutasPagos);
   await app.register(rutasEjercicios);
   return app;
 }

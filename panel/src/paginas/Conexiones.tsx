@@ -3,17 +3,39 @@ import { api, ApiError, fecha, num, usd } from '../api'
 
 type Verificacion = { ok: boolean; nivel: 'ok' | 'aviso' | 'error'; mensaje: string; detalles?: string[]; verificadoEn: string }
 type Proveedor = {
-  id: 'elevenlabs' | 'openai' | 'gemini'; nombre: string; uso: string; origen: 'panel' | 'servidor' | 'sin configurar'; claveOrigen: string
+  id: 'elevenlabs' | 'openai' | 'gemini' | 'stripe'; nombre: string; uso: string; origen: 'panel' | 'servidor' | 'sin configurar'; claveOrigen: string
   clave: string | null; configurada: boolean; adminKey?: string | null; modelos: Record<string, string>
   campos: Record<string, { etiqueta: string; secreto: boolean }>; sugerencias: Record<string, string[]>
   ultimaVerificacion: Verificacion | null; actualizadoEn: string | null; avisos: string[]
+  modo?: 'test' | 'live' | null; webhook?: boolean
 }
 
 const ORIGEN: Record<string, string> = { panel: 'Configurada desde el panel', servidor: 'Del servidor (.env)', 'sin configurar': 'Sin configurar' }
 const ESTADO: Record<string, [string, string]> = { ok: ['ok', 'Verificada'], aviso: ['trial', 'Con avisos'], error: ['mal', 'Error'] }
 
 /** Pasos para obtener cada clave (enlaces oficiales comprobados el 20-10-2026). */
-const INSTRUCCIONES: Record<string, { pasos: React.ReactNode[]; formato: string }> = {
+const INSTRUCCIONES: Record<string, { pasos: React.ReactNode[]; formato: string; nota?: React.ReactNode }> = {
+  stripe: {
+    formato: 'Empieza con sk_test_ o rk_test_',
+    pasos: [
+      <>Entra en <a href="https://dashboard.stripe.com/test/apikeys" target="_blank" rel="noreferrer">Stripe Dashboard → Developers → API keys</a> con el interruptor en <b>modo test</b> (sandbox). Las claves de prueba empiezan con <span className="mono">sk_test_</span> / <span className="mono">rk_test_</span>; la <span className="mono">pk_test_</span> (publicable) no sirve aquí.</>,
+      <>Opción rápida: copia la <b>Secret key</b> (<span className="mono">sk_test_…</span>). Opción recomendada: <b>Create restricted key</b>, ponle de nombre «OneLingo servidor», deja todo en <b>None</b> y da solo estos permisos:
+        <ul>
+          <li><b>Checkout Sessions</b>: Write (crear la página de pago y leerla al volver)</li>
+          <li><b>Customers</b>: Write (Checkout crea el cliente; el portal lo usa)</li>
+          <li><b>Subscriptions</b>: Read (leer el estado de cada suscripción)</li>
+          <li><b>Products</b> y <b>Prices</b>: Write (sincronizar los planes)</li>
+          <li><b>Webhook Endpoints</b>: Write (crear el webhook al guardar)</li>
+          <li><b>Customer portal</b>: Write (configurar el portal y abrir sesiones)</li>
+          <li><b>Balance</b>: Read (verificar la clave y ver los ingresos del mes)</li>
+        </ul>
+        Write incluye Read. Fuentes: <a href="https://docs.stripe.com/keys/restricted-api-keys" target="_blank" rel="noreferrer">Restricted API keys</a> y <a href="https://docs.stripe.com/stripe-apps/reference/permissions" target="_blank" rel="noreferrer">lista de permisos</a>.</>,
+      <>Pega la clave, revisa la <b>URL pública de la app</b> (https, la misma donde se abre OneLingo) y pulsa <b>Guardar</b>. OneLingo crea el webhook en <span className="mono">&lt;URL&gt;/api/stripe/webhook</span>, crea en Stripe un producto y un precio por plan y configura el Customer Portal (cancelar al final del periodo, tarjeta, facturas y cambio de plan entre los planes visibles, con prorrateo).</>,
+      <>Prueba un pago desde la app con la tarjeta <span className="mono">4242 4242 4242 4242</span>, cualquier fecha futura y cualquier CVC. Las suscripciones aparecen en <b>Suscripciones</b>.</>,
+      <><b>Pasar a modo real</b>: repite los pasos con el interruptor en modo real y pega la clave <span className="mono">sk_live_</span> o <span className="mono">rk_live_</span> (mismos permisos). No hay que cambiar código: se crean el webhook y los productos de modo real y la tarjeta muestra «MODO REAL». Antes, activa la cuenta en Stripe para poder cobrar.</>,
+    ],
+    nota: <>La clave se guarda cifrada y se aplica al instante. Si el webhook no se puede crear (p. ej. con una URL local), los pagos se confirman igual cuando el alumno vuelve de Checkout («Confirmar»), pero las renovaciones y cancelaciones no se actualizan solas. «Volver a la configuración del servidor» desvincula Stripe: la app mostrará «Próximamente».</>,
+  },
   elevenlabs: {
     formato: 'Empieza con sk_',
     pasos: [
@@ -56,6 +78,14 @@ function Resultado({ v, titulo }: { v: Verificacion; titulo?: string }) {
 
 function Consumo({ id, c }: { id: string; c: any }) {
   if (!c) return <p className="muted">Cargando consumo…</p>
+  if (id === 'stripe') return <>
+    <div className="uso-fila"><b>{num(c.activas ?? 0)}</b> suscripciones activas de Stripe{c.modo ? ` (${c.modo === 'live' ? 'modo real' : 'modo test'})` : ''}</div>
+    {c.tipo === 'real' && (c.ingresos?.length ? <table><tbody>{c.ingresos.map((x: any) => <tr key={x.moneda}>
+      <td>Ingresos del mes ({x.moneda.toUpperCase()})<br /><span className="muted">{x.cobros} cobros{x.reembolsos ? ` · ${x.reembolsos} reembolsos` : ''}</span></td>
+      <td className="num">{usd(x.bruto)}<br /><span className="muted">neto {usd(x.neto)} · comisión {usd(Math.abs(x.comisiones))}</span></td></tr>)}</tbody></table>
+      : <div className="muted uso-nota">Sin cobros este mes.</div>)}
+    {c.nota && <div className="muted uso-nota">{c.nota}</div>}
+  </>
   if (id === 'elevenlabs') {
     const q = c.cuota
     const pct = q && q.limite ? Math.min(100, Math.round((q.usados / q.limite) * 100)) : 0
@@ -114,11 +144,11 @@ function Tarjeta({ p, consumo, alCambiar }: { p: Proveedor; consumo: any; alCamb
     } catch (x: any) {
       const d = x instanceof ApiError ? x.datos : null
       if (d?.errores) setErrores(d.errores)
-      setRes({ v: d?.verificacion, error: d?.errores ? undefined : x.message, avisos: d?.avisos })
+      setRes({ v: d?.verificacion, error: d?.errores || d?.verificacion ? undefined : x.message, avisos: d?.avisos })
     } finally { setOcupado('') }
   }
   const volver = async () => {
-    if (!confirm(`¿Volver a la configuración del servidor para ${p.nombre}? Se borra lo guardado en el panel y se usa la clave del .env.`)) return
+    if (!confirm(p.id === 'stripe' ? '¿Desvincular Stripe? Se borra la clave guardada; la app dejará de ofrecer la suscripción («Próximamente»). Las suscripciones ya pagadas siguen en Stripe.' : `¿Volver a la configuración del servidor para ${p.nombre}? Se borra lo guardado en el panel y se usa la clave del .env.`)) return
     setOcupado('volver'); setRes(null)
     try { await api(`/admin/conexiones/${p.id}`, { metodo: 'DELETE' }); alCambiar() }
     catch (x: any) { setRes({ error: x.message }) } finally { setOcupado('') }
@@ -136,6 +166,8 @@ function Tarjeta({ p, consumo, alCambiar }: { p: Proveedor; consumo: any; alCamb
       <div className="conexion-estado">
         <span className={`pill ${clase}`}>{etiqueta}</span>
         <span className="pill">{ORIGEN[p.origen]}</span>
+        {p.id === 'stripe' && p.modo && <span className={`pill ${p.modo === 'live' ? 'ok' : 'trial'}`}>{p.modo === 'live' ? 'MODO REAL' : 'MODO TEST'}</span>}
+        {p.id === 'stripe' && p.configurada && <span className={`pill ${p.webhook ? 'ok' : 'mal'}`}>{p.webhook ? 'Webhook activo' : 'Sin webhook'}</span>}
         {p.clave && <span className="mono">{p.clave}</span>}
         {p.origen === 'panel' && p.claveOrigen === 'servidor' && <span className="muted">(clave del servidor, modelos del panel)</span>}
       </div>
@@ -171,7 +203,7 @@ function Tarjeta({ p, consumo, alCambiar }: { p: Proveedor; consumo: any; alCamb
         <div className="acciones">
           <button type="button" className="sec" disabled={!!ocupado} onClick={() => enviar('verificar')}>{ocupado === 'verificar' ? 'Verificando…' : 'Verificar'}</button>
           <button type="submit" disabled={!!ocupado}>{ocupado === 'guardar' ? 'Verificando y guardando…' : 'Guardar'}</button>
-          {p.origen === 'panel' && <button type="button" className="sec" disabled={!!ocupado} onClick={volver}>{ocupado === 'volver' ? 'Restaurando…' : 'Volver a la configuración del servidor'}</button>}
+          {p.origen === 'panel' && <button type="button" className="sec" disabled={!!ocupado} onClick={volver}>{ocupado === 'volver' ? 'Restaurando…' : p.id === 'stripe' ? 'Desvincular Stripe' : 'Volver a la configuración del servidor'}</button>}
         </div>
       </form>
       {res?.error && <p className="err">{res.error}</p>}
@@ -182,7 +214,7 @@ function Tarjeta({ p, consumo, alCambiar }: { p: Proveedor; consumo: any; alCamb
       <details className="instr">
         <summary>¿Cómo obtengo la clave?</summary>
         <ol>{ins.pasos.map((x, i) => <li key={i}>{x}</li>)}</ol>
-        <p className="muted">Al guardar, la clave se aplica al instante en el servidor, sin reiniciar. Los audios ya generados se conservan (están en caché). Si algo falla, «Volver a la configuración del servidor» recupera la del .env.</p>
+        <p className="muted">{ins.nota ?? 'Al guardar, la clave se aplica al instante en el servidor, sin reiniciar. Los audios ya generados se conservan (están en caché). Si algo falla, «Volver a la configuración del servidor» recupera la del .env.'}</p>
       </details>
     </div>
   )
@@ -200,7 +232,7 @@ export default function Conexiones() {
   return (
     <>
       <div className="cab"><h1>Conexiones</h1><span className="muted">Tutor IA en uso: {d.iaProveedor}{consumo?.mes ? ` · consumo de ${consumo.mes}` : ''}</span></div>
-      <p className="muted pie-nota" style={{ margin: '-8px 0 16px' }}>Claves y modelos de los proveedores externos. Cada clave se comprueba con el proveedor antes de guardarse; se guarda cifrada y tiene prioridad sobre el .env del servidor.</p>
+      <p className="muted pie-nota" style={{ margin: '-8px 0 16px' }}>Claves y modelos de los proveedores externos (y Stripe para los pagos). Cada clave se comprueba con el proveedor antes de guardarse; se guarda cifrada y tiene prioridad sobre el .env del servidor.</p>
       <div className="conexiones">
         {d.proveedores.map((p) => <Tarjeta key={p.id} p={p} consumo={consumo?.[p.id]} alCambiar={() => { cargar(); cargarConsumo() }} />)}
       </div>

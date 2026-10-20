@@ -8,7 +8,8 @@ El panel (`panel/`, servido en `/panel`) lee la API `backend/src/routes/admin.ts
 |---|---|
 | Registrados, nuevos hoy/7 d/30 d | `usuarios.creado_en`. «Demo» = `es_demo` (alta antigua sin contraseña). |
 | Activos hoy / 7 d / 30 d (DAU, WAU, MAU) | Alumnos distintos con algún **día activo** en la ventana. Un día activo sale de: `eventos.fecha`, `conversaciones.fecha`, `progreso.estado.diasActividad` (días que guarda la app) y `usuarios.ultima_actividad`. |
-| Plataforma, idioma meta y nativo, plan | `usuarios.plataforma` (vacío = «Sin dato»), `idioma_meta`, `idioma_nativo`, `plan_id` (vacío = prueba). «Agotaron la prueba» = sin plan y `trial_segundos` ≥ 60 min. |
+| Plataforma, idioma meta y nativo, plan | `usuarios.plataforma` (vacío = «Sin dato»), `idioma_meta`, `idioma_nativo`, `plan_id` (vacío = prueba; derivado de `suscripciones`, ver «Planes y suscripciones»). «Agotaron la prueba» = sin plan y `trial_segundos` ≥ los minutos de prueba de `ajustes_pago` (60 por defecto). |
+| Suscripciones | `suscripciones` (bloque `suscripciones` de la respuesta): activas de Stripe, MRR, nuevas y canceladas en 30 días, impagos y cortesías vigentes, del modo de Stripe en uso. |
 | Registros y activos por día | Las mismas fuentes, día a día durante 30 días. |
 | Embudo | Registrados → prueba de ubicación (evento `diagnostico` o `estado.diagnostico`) → 1 clase → 5 clases → volvieron otro día (algún día activo posterior al del registro). |
 | Retención D1/D7/D30 | De quienes se registraron hace al menos N días, % con actividad el día N o después. |
@@ -54,9 +55,56 @@ Página «Conexiones» del panel (`panel/src/paginas/Conexiones.tsx`). El admini
   - Gemini: **estimado** si hay conversaciones con modelos `gemini*`; si no, enlace a Google AI Studio → Usage (Google no da el consumo por API).
 - **Endpoints** (todos con sesión de administrador): `GET /admin/conexiones` (origen `panel`/`servidor`/`sin configurar`, clave enmascarada `sk_…a1b2`, modelos, última verificación, avisos), `POST /admin/conexiones/:proveedor/verificar` (sin guardar; cuerpo vacío = verifica lo actual), `PUT /admin/conexiones/:proveedor`, `DELETE /admin/conexiones/:proveedor`, `GET /admin/conexiones/consumo`. Ninguna respuesta ni log contiene claves completas.
 
+## Planes y suscripciones
+
+Fase 1 con **Stripe en modo test**. El administrador edita los planes, da acceso de cortesía y vincula Stripe pegando su clave; el alumno paga en Stripe Checkout y gestiona su suscripción en el Customer Portal. **El servidor es la autoridad del plan**: la app ya no se asigna planes (salvo los usuarios DEMO sin servidor).
+
+Código: `backend/src/lib/pagos/` (`stripe.ts` cliente REST sin SDK + firma del webhook, `proveedor.ts` interfaz `ProveedorPagos` e implementación de Stripe, `planes.ts`, `suscripciones.ts`, `webhook.ts`), rutas `backend/src/routes/planes.ts` y `pagos.ts`, migraciones `backend/sql/006_pagos.sql` y `007_pagos_portal.sql`. Panel: «Planes», «Suscripciones», la sección «Suscripción» del alumno y la tarjeta Stripe de «Conexiones». Pruebas: `backend/test/pagos.test.ts` (crea una base temporal en el Postgres local y simula Stripe).
+
+### Flujo
+
+1. **Vincular** (Conexiones → Stripe): se pega `sk_test_…` o `rk_test_…` (una `pk_…` se rechaza: «Esta es la clave publicable; pega la secreta (sk_…)»). Al guardar: se verifica con `GET /v1/account` (o `GET /v1/balance` si es restringida) y se detecta el modo; se crea o reutiliza el webhook en `<URL de la app>/api/stripe/webhook` y se guarda su secreto cifrado; se sincronizan los planes y se configura el Customer Portal de OneLingo. La URL de la app por defecto es `PUBLIC_URL` sin `/api`.
+2. **Planes**: cada plan es un Product (`metadata.plan_id`) con un Price recurrente. Cambiar precio, moneda o intervalo crea un Price nuevo (pasa a `default_price`) y archiva el anterior; **los suscriptores actuales conservan su precio** (no se toca ninguna suscripción). Si Stripe falla, el plan se guarda igual y queda «Sin sincronizar» con botón «Reintentar». Ocultar = no se ofrece; archivar = además se desactiva el Product; no hay borrado físico si alguien lo usa.
+3. **Pago**: la app pide `POST /pagos/checkout { planId }` y abre la URL de Checkout. Al volver (`<URL app>/#/pago?estado=ok&session_id=…`) llama a `POST /pagos/confirmar { sessionId }`, que consulta la sesión en Stripe y sincroniza: **funciona sin webhook**. El webhook mantiene al día renovaciones, impagos y cancelaciones.
+4. **Gestión y cambio de plan**: `POST /pagos/portal` abre el Customer Portal (en la app, «Cambiar de plan» para quien tiene una suscripción de Stripe en curso): cancelar al final del periodo, tarjeta, facturas y **cambio de plan con prorrateo** (`subscription_update`: `default_allowed_updates=[price]`, `proration_behavior=create_prorations`, `products` = Product y Price actual de cada plan visible, no archivado y sincronizado, por `orden`, máximo 10). Es una configuración propia (`metadata.origen=onelingo`, id en `ajustes_pago.stripe_portal_id`): la sesión la pide con `configuration`, sin tocar la configuración por defecto de la cuenta. Se actualiza cada vez que se sincroniza un plan (crear, editar, ocultar, archivar, «Reintentar») y al vincular Stripe; si falla, el plan se guarda igual y el panel avisa. Vuelve a `#/pago?estado=portal`; el webhook `customer.subscription.updated` trae el Price nuevo y cambia el plan.
+5. **Cortesía**: en el detalle del alumno, «Dar acceso» con plan, fecha opcional y nota; «Quitar cortesía». No se puede dar a quien tiene una suscripción de Stripe en curso (409).
+
+### Tablas
+
+| Tabla | Qué guarda |
+|---|---|
+| `planes` | Nombre, descripción y ventajas en es/en, idiomas, `precio_centavos`, moneda, `intervalo` (`mes`/`anio`), destacado, visible, orden, archivado; ids de Stripe con su modo, firma del precio sincronizado (`importe|moneda|intervalo`), `stripe_sincronizado` y último error. Semilla: p1 $20, p2 $30 (destacado, «POPULAR» en la app), p3 $40 al mes (ventajas de `catalog.dart` y `en.json`). 007 destaca p2 en bases donde 006 se aplicó antes, solo si la fila no se editó y no hay otro destacado. |
+| `planes_precios` | Historial de Prices de Stripe de cada plan (con fecha de archivado): un suscriptor con un Price antiguo o archivado se asocia igualmente a su plan. |
+| `suscripciones` | Una fila por alumno: plan, `origen` (`stripe`/`cortesia`), `estado` (`activa`, `prueba_stripe`, `impago`, `cancelada`, `vencida`), `cancela_al_final`, `periodo_fin`, ids de cliente/suscripción/precio de Stripe, `modo`, nota, importe e intervalo reales del suscriptor (para el MRR), alta y cancelación. |
+| `pagos_eventos` | Id de cada evento de Stripe recibido (idempotencia), tipo, si se procesó y el error. |
+| `ajustes_pago` | Minutos de prueba gratuita (60), moneda por defecto (`usd`) e id y modo de la configuración del Customer Portal de OneLingo. |
+
+**Acceso**: estado `activa` o `prueba_stripe`; `cancelada` con `periodo_fin` futuro; o cortesía sin fecha o con fecha futura. `usuarios.plan_id` es un dato derivado (plan con acceso o vacío) que se actualiza en cada cambio y se refresca al abrir el resumen y la lista de alumnos (cortesías o periodos caducados). A quien no tiene fila en `suscripciones` no se le toca el `plan_id` antiguo. **Plan de una suscripción de Stripe**: por su Price actual (`planes.stripe_precio_id` o el historial `planes_precios`, que incluye los archivados), luego `metadata.plan_id` del Price, el Product del plan y, por último, `metadata.plan_id` de la suscripción, que tras un cambio en el portal sigue diciendo el plan de la compra. Estados de Stripe: `active` → activa, `trialing` → prueba_stripe, `past_due`/`unpaid`/`incomplete` → impago, `canceled` → cancelada (hasta `ended_at`), el resto → vencida.
+
+**Prueba gratuita**: `PUT /usuarios/me/progreso` ignora el `planId` del cliente y guarda `trial_segundos` = máximo entre lo guardado y lo que manda la app (nunca baja). Login, Google y `GET /usuarios/me/progreso` devuelven `estado` con el `planId` del servidor y esa prueba.
+
+### Endpoints (sin `/api`: Apache lo quita)
+
+- Públicos y del alumno: `GET /planes` (sin sesión; solo visibles y no archivados, por `orden`; `pagos.disponible=false` si Stripe no está vinculado → la app muestra «Próximamente»), `GET /usuarios/me/suscripcion`, `POST /pagos/checkout` (409 si ya tiene una suscripción de Stripe en curso, 503 sin Stripe), `POST /pagos/confirmar`, `POST /pagos/portal`.
+- Webhook: `POST /stripe/webhook`, cuerpo crudo (parser propio solo en esa ruta), firma `Stripe-Signature` HMAC-SHA256 con tolerancia de 5 min. Eventos: `checkout.session.completed`, `customer.subscription.created|updated|deleted`, `invoice.paid`, `invoice.payment_failed`. Un evento repetido responde 200 sin reprocesarse; uno que falla responde 500 y Stripe lo reintenta. Los eventos del otro modo (test/live) se ignoran.
+- Panel (administrador): `GET/POST /admin/planes`, `PUT /admin/planes/:id`, `POST /admin/planes/:id/archivar` (`{ archivado:false }` restaura), `POST /admin/planes/:id/sincronizar`, `DELETE /admin/planes/:id` (solo si nadie lo usa), `GET /admin/suscripciones?estado=&q=` (filas y resumen: activas, MRR en USD con anuales /12 e importe real de cada suscriptor, nuevas y canceladas en 30 días, impagos, cortesías), `POST/DELETE /admin/usuarios/:id/cortesia`, `GET/PUT /admin/pagos/ajustes`.
+
+### Modo test → modo real
+
+Basta con pegar en Conexiones la clave `sk_live_…` o `rk_live_…` (con los mismos permisos) y guardar: se crea el webhook de modo real, se crean en modo real los productos y precios (los ids de test no sirven en live) y la tarjeta muestra «MODO REAL». No hay que cambiar código. Antes, la cuenta de Stripe debe estar activada para cobrar. Las suscripciones de test quedan en la tabla con `modo='test'` y no cuentan en el resumen del modo real. «Desvincular Stripe» borra la clave (la app vuelve a «Próximamente»); el webhook queda creado en Stripe y se reutiliza o recrea al volver a vincular.
+
+Clave restringida recomendada (permisos mínimos; fuentes: docs.stripe.com/keys/restricted-api-keys y docs.stripe.com/stripe-apps/reference/permissions): Checkout Sessions = Write, Customers = Write, Subscriptions = Read, Products = Write, Prices = Write, Webhook Endpoints = Write, Customer portal = Write, Balance = Read.
+
+### Si el webhook falla
+
+- Con una URL local o sin https, Stripe no puede entregar el webhook: el guardado avisa y sigue. El pago se confirma igual con **«Confirmar»** cuando el alumno vuelve de Checkout (`POST /pagos/confirmar`), pero las renovaciones, impagos y cancelaciones no se actualizan solas.
+- Si el webhook responde error, Stripe lo reintenta durante días; el motivo queda en `pagos_eventos.error` y en el log del servidor. En el Dashboard de Stripe (Developers → Webhooks → el endpoint de OneLingo) se ven los intentos y se pueden reenviar.
+- Si se cambió `JWT_SECRET` o se perdió el secreto del webhook, vuelve a guardar la clave en Conexiones: el webhook se recrea con un secreto nuevo.
+- Para probar en local sin webhook: Checkout con la tarjeta `4242 4242 4242 4242` y vuelta a la app con `session_id`.
+
 ## Lo que la app aún no registra
 
 - **Clase aprobada como evento**: la ruta nueva solo sincroniza `practicas`; un evento `clase_aprobada` (unidad, aciertos, total) daría historial exacto en hora del servidor.
 - **Apertura de la app / sesión**: no hay evento al abrir; la actividad depende de la sincronización del progreso.
 - **Tokens de Gemini, transcripción y revisión de escritura**: no se guardan, así que su coste no se estima.
-- **Pagos**: `plan_id` no guarda fecha ni importe, así que no hay ingresos ni conversión por fecha.
+- **Conversión de la prueba al pago por fecha**: hay fechas de alta y cancelación de cada suscripción, pero no un evento «vio los planes» para medir el embudo prueba → pago.
