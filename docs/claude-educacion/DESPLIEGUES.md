@@ -808,3 +808,10 @@ App: web y APK 0.2.0+2 recompilados con `API_URL=https://onelingo.org/api` desde
 Backup: `backups/20261020-edu-66-dominio/web-anterior`. Verificado: `https://onelingo.org/`, `/main.dart.js`, `/api/salud`, `/panel/`, `/descargas/version.json`, `https://www.onelingo.org/` y `https://onelingo.hostingcuenca.com/` responden 200; PM2 intacto; lock liberado.
 Rollback web: `ssh -F /dev/null root@167.235.20.41 'set -e; cd /var/www/onelingo; mv web staging/20261020-edu-66-dominio/web-retirada-post && cp -al backups/20261020-edu-66-dominio/web-anterior web'`
 Pendiente: `http://onelingo.org` responde 200 sin redirigir a https (la regla de reescritura del vhost :80 solo cubre onelingo.hostingcuenca.com; el cambio fue bloqueado y queda para el usuario). Las APK 0.2.0 ya instaladas siguen usando onelingo.hostingcuenca.com, que se mantiene.
+
+## Release: 20261020-edu-67-panel-pin
+
+Fecha: 2026-10-20 · Responsable: Claude (Claude Code), por pedido del usuario («ponle un PIN genérico básico, 2345; cuando pasemos a producción blindamos todo»). `.env` del backend en prod: `ADMIN_PIN` cambiado a un PIN genérico temporal (respaldo del `.env` anterior en `/root/respaldos-apache/20261020-115934/backend-env-antes-pin`); PM2 `onelingo-api` reiniciado con `--update-env` (solo esa app). Panel (`0ef0712`): el login ya no precarga «1234» ni muestra la pista «Demo: admin / 1234».
+Verificado: `POST /api/admin/login` con el PIN nuevo 200 y con 1234 401; `/panel/` 200 y el Resumen carga datos reales en el navegador; PM2 online; lock liberado.
+Backup panel: `backups/20261020-edu-67-panel-pin/panel-anterior`.
+Pendiente al salir a producción: cuentas de administrador por persona, contraseña fuerte y límite de intentos en `/admin/login` (hoy no hay).
