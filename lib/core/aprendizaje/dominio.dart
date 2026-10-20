@@ -278,6 +278,12 @@ UnidadRuta? unidadRecomendada(RutaCargada ruta, Map<String, InfoUnidad> e) {
     final info = e[u.id]!;
     if (info.repasoPendiente) return u;
   }
+  return unidadNueva(ruta, e);
+}
+
+/// Próxima clase nueva del alumno (sin contar repasos): la primera no
+/// omitida, abierta y aún sin aprobar. Marca su nivel y su clase actuales.
+UnidadRuta? unidadNueva(RutaCargada ruta, Map<String, InfoUnidad> e) {
   for (final u in ruta.unidades) {
     final info = e[u.id]!;
     if (!info.omitible &&
@@ -287,6 +293,17 @@ UnidadRuta? unidadRecomendada(RutaCargada ruta, Map<String, InfoUnidad> e) {
     }
   }
   return null;
+}
+
+/// Clases de cada nivel N1–N10 publicado si todos tienen las mismas (100 en
+/// inglés, 50 en los demás idiomas); null si varían o no hay ninguno.
+int? clasesPorNivel(RutaCargada ruta) {
+  final cuentas = {
+    for (final nv in ruta.curso.niveles)
+      if ((nv.nivelInterno ?? 0) >= 1 && ruta.delNivel(nv.id).isNotEmpty)
+        ruta.delNivel(nv.id).length,
+  };
+  return cuentas.length == 1 ? cuentas.single : null;
 }
 
 /// Nivel completo: todas sus unidades al menos aprobadas.
@@ -307,6 +324,10 @@ Set<String> vocabularioConocido(RutaCargada ruta, String unidadId) => {
 /// de nivel acertando por descarte.
 const preguntasPruebaNivel = 30;
 const aciertosPruebaNivel = 27;
+
+/// Aciertos de la prueba de un nivel en porcentaje (90), para mostrarlo.
+int get porcentajePruebaNivel =>
+    (aciertosPruebaNivel * 100 / preguntasPruebaNivel).round();
 
 /// Espera tras suspender la prueba antes de poder repetirla.
 const esperaPruebaNivel = Duration(hours: 12);

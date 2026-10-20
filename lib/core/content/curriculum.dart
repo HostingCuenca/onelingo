@@ -24,12 +24,13 @@ const idiomas = [
 
 Language idioma(String code) => idiomas.firstWhere((l) => l.code == code);
 
-/// Los 10 niveles tal como los definió el cliente.
+/// Los 10 niveles tal como los definió el cliente. Las descripciones son
+/// comunicativas y valen para los 10 idiomas (se muestran con `trDato`).
 const niveles = [
   Level(
     numero: 1,
     nombre: 'Básico',
-    descripcion: 'Las bases del idioma: saludos, números, familia, presente simple.',
+    descripcion: 'Las bases del idioma: saludos, presentaciones, números, familia y tu día a día.',
     temario: [
       'Pronombres personales', 'Saludos y presentaciones', 'Alfabeto y sonidos',
       'Números', 'Colores', 'Días, meses y fechas', 'Familia', 'Casa',
@@ -42,7 +43,7 @@ const niveles = [
   Level(
     numero: 2,
     nombre: 'Básico',
-    descripcion: 'Amplía las bases: pasado y futuro básicos, posesivos, vida diaria.',
+    descripcion: 'Amplía las bases: tu rutina, lo que hiciste, tus planes y compras sencillas.',
     temario: [
       'Verbos frecuentes', 'Conjugación', 'Presente', 'Pasado básico',
       'Futuro básico', 'Preguntas y respuestas', 'Negaciones',
@@ -55,7 +56,7 @@ const niveles = [
   Level(
     numero: 3,
     nombre: 'Básico Avanzado',
-    descripcion: 'Hacia conversaciones naturales: irregulares, continuo, comparaciones.',
+    descripcion: 'Hacia conversaciones naturales: describir, comparar y contar experiencias.',
     temario: [
       'Verbos regulares e irregulares', 'Pasado', 'Futuro', 'Presente continuo',
       'Comparaciones', 'Cantidades', 'Expresiones frecuentes',
@@ -95,7 +96,7 @@ const niveles = [
   Level(
     numero: 6,
     nombre: 'Intermedio Avanzado',
-    descripcion: 'Bastante fluidez: phrasal verbs, negociaciones y debates sencillos.',
+    descripcion: 'Bastante fluidez: expresiones naturales, negociaciones y debates sencillos.',
     temario: [
       'Gramática avanzada', 'Vocabulario avanzado', 'Expresiones naturales',
       'Phrasal verbs', 'Tiempos verbales combinados', 'Conversaciones largas',

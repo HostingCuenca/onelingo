@@ -9,6 +9,7 @@ import '../../core/api/sync.dart';
 import '../../core/content/demo_users.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/state/providers.dart';
+import '../../shared/widgets/descarga_android.dart';
 import '../../shared/widgets/widgets.dart';
 
 /// Inicio de sesión: cuenta real (correo + contraseña o Google) contra el
@@ -164,6 +165,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               icon: const Icon(Icons.g_mobiledata, size: 26),
               label: const Text('Google'),
             ),
+            // Solo en la web: enlace al APK de Android.
+            const SizedBox(height: 10),
+            const DescargaAndroid(),
             const SizedBox(height: 18),
             Container(
               padding: const EdgeInsets.all(14),

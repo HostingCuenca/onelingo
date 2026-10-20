@@ -7,23 +7,10 @@ import '../../app/theme.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/fotos.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/i18n/nombres_idioma.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/widgets.dart';
 import '../avatar/tutores_3d.dart';
-
-/// Nombre del idioma meta en el idioma de la interfaz.
-String _idioma(String codigo) => switch (codigo) {
-  'es' => tr('español'),
-  'fr' => tr('francés'),
-  'de' => tr('alemán'),
-  'pt' => tr('portugués'),
-  'it' => tr('italiano'),
-  'zh' => tr('chino'),
-  'ja' => tr('japonés'),
-  'ko' => tr('coreano'),
-  'ru' => tr('ruso'),
-  _ => tr('inglés'),
-};
 
 /// Tutores con IA: una sola pantalla para la videollamada con un tutor 3D y
 /// el chat de voz y texto (antes eran dos experiencias separadas).
@@ -33,7 +20,7 @@ class TutorsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
-    final idioma = _idioma(s.idiomaMeta);
+    final idioma = nombreIdiomaEnFrase(s.idiomaMeta);
     final recomendados = recomendados3d(s.idiomaMeta);
     return Scaffold(
       appBar: AppBar(

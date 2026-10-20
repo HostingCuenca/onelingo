@@ -9,7 +9,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
-import '../../core/aprendizaje/providers.dart' show idiomasConRuta;
+import '../../core/aprendizaje/dominio.dart'
+    show clasesPorNivel, porcentajePruebaNivel;
+import '../../core/aprendizaje/providers.dart' show idiomasConRuta, rutaProvider;
 import '../../core/api/sync.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/i18n/i18n.dart';
@@ -119,6 +121,11 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   bool creando = false;
 
+  /// Tras elegir el punto de partida viene la prueba de nivel (en todos los
+  /// idiomas con ruta; desde cero, solo en inglés).
+  bool get _haraPrueba =>
+      idiomasConRuta.contains(meta) && (meta == 'en' || nivelInicial > 0);
+
   Future<void> _siguiente() async {
     if (paso == 0 && !sesionPreparada) {
       setState(() {
@@ -156,7 +163,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     // se empieza desde cero.
     if (paso == 5 && !idiomasConRuta.contains(meta)) {
       nivelInicial = 0;
-    } else if (paso == 5 && (meta == 'en' || nivelInicial > 0)) {
+    } else if (paso == 5 && _haraPrueba) {
       final r = await context.push<Map<String, dynamic>>(
         '/prueba-nivel',
         extra: {
@@ -265,7 +272,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       ? tr('CREANDO TU CUENTA…')
                       : (paso == 6
                             ? tr('COMENZAR MI HORA GRATIS')
-                            : paso == 5 && meta == 'en'
+                            : paso == 5 && _haraPrueba
                             ? tr('COMPROBAR MI NIVEL')
                             : tr('CONTINUAR')),
                 ),
@@ -384,6 +391,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   Widget _perfil(bool metas) => SingleChildScrollView(
     child: PerfilSeleccion(
+      idiomaMeta: meta,
       sectores: sectores,
       objetivos: objetivos,
       soloObjetivos: metas,
@@ -549,7 +557,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                         style: const TextStyle(fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        n.descripcion,
+                        trDato(n.descripcion),
                         style: const TextStyle(color: OL.gris, fontSize: 12),
                       ),
                     ],
@@ -561,6 +569,27 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         ),
     ],
   );
+
+  /// Resumen del curso del idioma elegido, con sus cifras reales: clases
+  /// por nivel de su ruta y aciertos de la prueba para subir de nivel.
+  String _resumenCurso() {
+    final ruta = ref.watch(rutaProvider(meta)).valueOrNull;
+    final clases = ruta == null ? null : clasesPorNivel(ruta);
+    final datos = {
+      'niveles': niveles.length,
+      'clases': clases,
+      'pct': porcentajePruebaNivel,
+    };
+    return clases == null
+        ? tr(
+            '{niveles} niveles · para subir, termina sus clases o aprueba la prueba del nivel ({pct} %)',
+            datos,
+          )
+        : tr(
+            '{niveles} niveles · {clases} clases por nivel · para subir, termina sus clases o aprueba la prueba del nivel ({pct} %)',
+            datos,
+          );
+  }
 
   Widget _trial() => ListView(
     children: [
@@ -604,7 +633,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       _Punto(
         Icons.map_outlined,
         tr('Curso estructurado'),
-        tr('10 niveles · 100 lecciones por nivel · examen final al 65 %'),
+        _resumenCurso(),
       ),
       _Punto(
         Icons.forum_outlined,

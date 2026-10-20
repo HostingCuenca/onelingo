@@ -9,10 +9,10 @@ import '../../core/api/sync.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/aprendizaje/ubicacion.dart';
 import '../../core/content/curriculum.dart' as cur show idioma;
-import '../../core/content/curriculum.dart' show idioma;
 import '../../core/diagnostico.dart';
 import '../../core/efectos.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/i18n/nombres_idioma.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/tarjeta_en_preparacion.dart';
@@ -78,7 +78,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
       Autodeclaracion.avanzado,
       tr('Avanzado'),
       tr('Uso el {idioma} en el trabajo o los estudios', {
-        'idioma': _nombreIdioma(idioma),
+        'idioma': nombreIdiomaEnFrase(idioma),
       }),
     ),
   ];
@@ -269,7 +269,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        tr('¿Cuánto {idioma} sabes?', {'idioma': _nombreIdioma(idioma)}),
+        tr('¿Cuánto {idioma} sabes?', {'idioma': nombreIdiomaEnFrase(idioma)}),
         style: Theme.of(context).textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.w900),
       ),
@@ -309,7 +309,7 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     padding: const EdgeInsets.all(20),
     children: [
       Text(
-        tr('Comprobemos tu {idioma}', {'idioma': _nombreIdioma(idioma)}),
+        tr('Comprobemos tu {idioma}', {'idioma': nombreIdiomaEnFrase(idioma)}),
         style: Theme.of(context).textTheme.headlineSmall
             ?.copyWith(fontWeight: FontWeight.w900),
       ),
@@ -493,14 +493,6 @@ class _UbicacionScreenState extends ConsumerState<UbicacionScreen> {
     ),
   );
 }
-
-/// Nombre del idioma evaluado dentro de una frase («¿Cuánto francés
-/// sabes?»), en el idioma de la interfaz.
-String _nombreIdioma(String code) => switch (code) {
-  'en' => tr('inglés'),
-  'fr' => tr('francés'),
-  _ => idioma(code).nombre,
-};
 
 /// Nombre de la habilidad (`nombresHabilidad`) en el idioma de la interfaz.
 String _habilidad(String h) => switch (h) {

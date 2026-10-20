@@ -6,12 +6,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
+import '../../core/aprendizaje/dominio.dart';
+import '../../core/aprendizaje/modelos.dart';
 import '../../core/aprendizaje/providers.dart';
 import '../../core/content/catalog.dart';
 import '../../core/content/curriculum.dart';
 import '../../core/models/models.dart';
 import '../../core/i18n/i18n.dart';
 import '../../core/lexico/lexico.dart';
+import '../../core/nivel0/nivel0.dart';
 import '../../core/state/providers.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
@@ -23,9 +26,32 @@ class ProgressScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(progressProvider);
-    final n = s.nivelActual;
     // Nivel que ve el alumno: el de la ruta, sin superar lo publicado.
     final nAlumno = ref.watch(nivelAlumnoProvider);
+    final ruta = ref.watch(rutaProvider(s.idiomaMeta)).valueOrNull;
+    final estados = ruta == null ? null : estadosAlumno(ruta, s);
+    final pos = ruta == null ? null : posicionEnRuta(ruta, s);
+    // Quien empieza de cero pasa antes por el Nivel 0 · Leer y pronunciar.
+    final n0 = s.nivel0Pendiente ? ref.watch(nivel0Provider).valueOrNull : null;
+    final n0Hechas = n0 == null
+        ? 0
+        : n0.lecciones
+              .where((l) => leccionN0Completa(s.practicas, n0.idioma, l.id))
+              .length;
+    // Nivel y clase actuales con el mismo criterio que Aprender.
+    final nivelPos = pos?.nivel == null
+        ? null
+        : ruta!.curso.niveles.where((x) => x.id == pos!.nivel).firstOrNull;
+    final etiquetaNivel = n0 != null
+        ? tr('Nivel 0 · Leer y pronunciar')
+        : nivelPos != null
+        ? _tituloNivel(nivelPos)
+        : tr('Nivel {n}', {'n': nAlumno});
+    final claseActual = n0 != null && n0.lecciones.isNotEmpty
+        ? '${(n0Hechas + 1).clamp(1, n0.lecciones.length)}/${n0.lecciones.length}'
+        : pos != null && pos.nivel != null
+        ? '${pos.clase}/${pos.total}'
+        : '—';
     final hab = s.porHabilidad;
     final maxHab = hab.values.fold(1, (a, b) => a > b ? a : b);
     final t = tutor(s.tutorId);
@@ -64,7 +90,7 @@ class ProgressScreen extends ConsumerWidget {
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
-                        '${idioma(s.idiomaNativo).nombre} → ${idioma(s.idiomaMeta).nombre}',
+                        '${trDato(idioma(s.idiomaNativo).nombre)} → ${trDato(idioma(s.idiomaMeta).nombre)}',
                         style: const TextStyle(color: OL.gris, fontSize: 14),
                       ),
                       const SizedBox(height: 6),
@@ -72,7 +98,7 @@ class ProgressScreen extends ConsumerWidget {
                         spacing: 6,
                         runSpacing: 6,
                         children: [
-                          Etiqueta(tr('Nivel {n} · {nombre}', {'n': nAlumno, 'nombre': nivel(nAlumno).nombre})),
+                          Etiqueta(etiquetaNivel),
                           Etiqueta(
                             plan == null ? tr('Prueba gratuita') : plan.nombre,
                             color: plan == null
@@ -120,14 +146,14 @@ class ProgressScreen extends ConsumerWidget {
               ),
               _Stat(
                 Icons.check_circle_outline,
-                '${s.completadas.length}',
+                pos == null ? '—' : '${pos.aprobadas}',
                 tr('Lecciones completadas'),
                 OL.morado,
               ),
               _Stat(
                 Icons.flag_outlined,
-                tr('Lección {n}', {'n': s.leccionActual(n)?.numero ?? 100}),
-                tr('Lección actual'),
+                claseActual,
+                tr('Clase actual'),
                 OL.morado,
               ),
             ],
@@ -236,56 +262,21 @@ class ProgressScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 20),
-          TituloSeccion(tr('Niveles y exámenes')),
-          const SizedBox(height: 10),
-          Tarjeta(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Column(
-              children: [
-                for (final lvl in niveles)
-                  ListTile(
-                    dense: true,
-                    contentPadding: EdgeInsets.zero,
-                    leading: Icon(
-                      s.examenAprobado(lvl.numero)
-                          ? Icons.check_circle
-                          : s.nivelDesbloqueado(lvl.numero)
-                          ? Icons.radio_button_checked
-                          : Icons.lock_outline,
-                      color: s.examenAprobado(lvl.numero)
-                          ? OL.verde
-                          : s.nivelDesbloqueado(lvl.numero)
-                          ? OL.morado
-                          : OL.gris,
-                    ),
-                    title: Text(
-                      tr('Nivel {n} · {nombre}', {'n': lvl.numero, 'nombre': lvl.nombre}),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
-                    trailing: Text(
-                      lvl.numero < s.nivelInicial
-                          ? tr('Convalidado')
-                          : s.examenes.containsKey(lvl.numero)
-                          ? tr('Examen {nota}%', {'nota': s.examenes[lvl.numero]})
-                          : '${s.completadasEnNivel(lvl.numero)}/100',
-                      style: TextStyle(
-                        color:
-                            s.examenAprobado(lvl.numero) ||
-                                lvl.numero < s.nivelInicial
-                            ? OL.verde
-                            : OL.gris,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-              ],
+          if (ruta != null && estados != null) ...[
+            TituloSeccion(tr('Tus diez niveles')),
+            const SizedBox(height: 10),
+            Tarjeta(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Column(
+                children: [
+                  for (final nv in ruta.curso.niveles)
+                    if ((nv.nivelInterno ?? 0) >= 1)
+                      _FilaNivel(ruta: ruta, estados: estados, s: s, nivel: nv),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
+            const SizedBox(height: 20),
+          ],
           _Fila(
             Icons.quiz_outlined,
             tr('Prueba de nivel'),
@@ -365,6 +356,11 @@ class ProgressScreen extends ConsumerWidget {
     );
   }
 
+  /// Nombre del nivel como en Aprender: «Fundamentos» o «Nivel 2 · A2».
+  static String _tituloNivel(NivelCurso nv) => (nv.nivelInterno ?? 0) < 1
+      ? tr('Fundamentos')
+      : tr('Nivel {n} · {cefr}', {'n': nv.nivelInterno, 'cefr': nv.cefr});
+
   Color _colorHab(Skill k) => switch (k) {
     Skill.vocabulario => OL.morado,
     Skill.gramatica || Skill.conjugacion => OL.naranja,
@@ -372,6 +368,72 @@ class ProgressScreen extends ConsumerWidget {
     Skill.conversacion => OL.rojo,
     _ => OL.verde,
   };
+}
+
+/// Un nivel N1–N10 de la ruta: superado (por sus clases o su prueba),
+/// convalidado por la prueba de ubicación, en curso o bloqueado.
+class _FilaNivel extends StatelessWidget {
+  const _FilaNivel({
+    required this.ruta,
+    required this.estados,
+    required this.s,
+    required this.nivel,
+  });
+  final RutaCargada ruta;
+  final Map<String, InfoUnidad> estados;
+  final ProgressState s;
+  final NivelCurso nivel;
+
+  @override
+  Widget build(BuildContext context) {
+    final unidades = ruta.delNivel(nivel.id);
+    final primera = unidades.isEmpty ? null : estados[unidades.first.id];
+    final superado =
+        primera != null && nivelSuperado(ruta, estados, s.practicas, nivel.id);
+    final convalidado = !superado && (primera?.omitible ?? false);
+    final abierto =
+        primera != null && primera.estado != EstadoUnidad.bloqueada;
+    final aprobadas = unidades
+        .where((u) => estados[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
+        .length;
+    final hecho = superado || convalidado;
+    return ListTile(
+      dense: true,
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(
+        primera == null
+            ? Icons.schedule_rounded
+            : hecho
+            ? Icons.check_circle
+            : abierto
+            ? Icons.radio_button_checked
+            : Icons.lock_outline,
+        color: hecho
+            ? OL.verde
+            : abierto
+            ? OL.morado
+            : OL.gris,
+      ),
+      title: Text(
+        ProgressScreen._tituloNivel(nivel),
+        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+      ),
+      trailing: Text(
+        primera == null
+            ? tr('Próximamente')
+            : superado
+            ? tr('Superado')
+            : convalidado
+            ? tr('Convalidado')
+            : '$aprobadas/${unidades.length}',
+        style: TextStyle(
+          color: hecho ? OL.verde : OL.gris,
+          fontWeight: FontWeight.w700,
+          fontSize: 14,
+        ),
+      ),
+    );
+  }
 }
 
 class _Stat extends StatelessWidget {

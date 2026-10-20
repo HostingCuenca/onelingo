@@ -140,6 +140,30 @@ Map<String, InfoUnidad> estadosAlumno(RutaCargada ruta, ProgressState s) {
   );
 }
 
+/// Dónde está el alumno en su ruta, con el criterio de Aprender (perfil).
+/// [nivel] es el id del nivel de su próxima clase nueva (`f0`, `n1`…) y
+/// [clase] su número dentro del nivel, de [total]; null si no queda ninguna
+/// abierta. [aprobadas] son las clases aprobadas de toda la ruta.
+typedef PosicionRuta = ({String? nivel, int clase, int total, int aprobadas});
+
+PosicionRuta posicionEnRuta(RutaCargada ruta, ProgressState s) {
+  final e = estadosAlumno(ruta, s);
+  final aprobadas = ruta.unidades
+      .where((u) => e[u.id]!.estado.alMenos(EstadoUnidad.aprobada))
+      .length;
+  final u = unidadNueva(ruta, e);
+  if (u == null) {
+    return (nivel: null, clase: 0, total: 0, aprobadas: aprobadas);
+  }
+  final delNivel = ruta.delNivel(u.nivel);
+  return (
+    nivel: u.nivel,
+    clase: delNivel.indexWhere((x) => x.id == u.id) + 1,
+    total: delNivel.length,
+    aprobadas: aprobadas,
+  );
+}
+
 /// Cadena de idiomas de apoyo para mostrar textos al alumno (DEC-004).
 List<String> cadenaDelAlumno(ProgressState s, Curso curso) =>
     cadenaApoyo(s.interfaz, curso.apoyoPredeterminado);

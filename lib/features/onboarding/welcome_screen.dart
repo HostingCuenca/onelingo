@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../app/theme.dart';
 import '../../core/i18n/i18n.dart';
+import '../../shared/widgets/descarga_android.dart';
 import '../../shared/widgets/selector_idioma_app.dart';
 import '../../shared/widgets/widgets.dart';
 
@@ -162,6 +163,9 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       child: Text(tr('YA TENGO CUENTA')),
                     ),
+                    // Solo en la web: enlace al APK de Android.
+                    const SizedBox(height: 12),
+                    const DescargaAndroid(sobreColor: true),
                   ],
                 ),
               ),

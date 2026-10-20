@@ -21,6 +21,7 @@ import '../../core/content/curriculum.dart';
 import '../../core/diagnostico.dart';
 import '../../core/efectos.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/i18n/nombres_idioma.dart';
 import '../../core/state/providers.dart';
 import '../../core/voz.dart';
 import '../../shared/widgets/widgets.dart';
@@ -522,14 +523,14 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
       children: [
         Text(
           tr('Comprobemos tu {idioma}', {
-            'idioma': _nombreIdioma(meta.code, meta.nombre),
+            'idioma': nombreIdiomaEnFrase(meta.code),
           }),
           style: t.headlineMedium,
         ),
         const SizedBox(height: 6),
         Text(
           tr(
-            'Partimos del nivel elegido y ajustamos la dificultad. En inglés: 10 actividades de lectura, listening, vocabulario, gramática y escritura, con una explicación después de cada respuesta.',
+            'Partimos del nivel elegido y ajustamos la dificultad: actividades de lectura, escucha, vocabulario, gramática y escritura, con una explicación después de cada respuesta.',
           ),
           style: const TextStyle(color: OL.gris, height: 1.4),
         ),
@@ -537,7 +538,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         if (!esOnboarding) ...[
           Text(
             tr('¿Cuánto {idioma} sabes?', {
-              'idioma': _nombreIdioma(meta.code, meta.nombre),
+              'idioma': nombreIdiomaEnFrase(meta.code),
             }),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
@@ -569,6 +570,7 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
         ],
         if (!esOnboarding)
           PerfilSeleccion(
+            idiomaMeta: idiomaContenido,
             sectores: sectores,
             objetivos: objetivos,
             onChanged: (s, o) => setState(() {
@@ -1317,21 +1319,6 @@ class _DiagnosticoScreenState extends ConsumerState<DiagnosticoScreen> {
     );
   }
 }
-
-/// Nombre del idioma en el idioma de la interfaz.
-String _nombreIdioma(String code, String nombre) => switch (code) {
-  'en' => tr('Inglés'),
-  'es' => tr('Español'),
-  'fr' => tr('Francés'),
-  'de' => tr('Alemán'),
-  'pt' => tr('Portugués'),
-  'it' => tr('Italiano'),
-  'zh' => tr('Chino mandarín'),
-  'ja' => tr('Japonés'),
-  'ko' => tr('Coreano'),
-  'ru' => tr('Ruso'),
-  _ => nombre,
-};
 
 /// Competencia (`skillsDiag`) en el idioma de la interfaz.
 String _skill(String k) => switch (k) {

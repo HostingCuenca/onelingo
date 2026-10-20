@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/perfil_aprendizaje.dart';
 import '../../core/i18n/i18n.dart';
+import '../../core/i18n/nombres_idioma.dart';
 
 class PerfilSeleccion extends StatelessWidget {
   const PerfilSeleccion({
@@ -9,12 +10,16 @@ class PerfilSeleccion extends StatelessWidget {
     required this.sectores,
     required this.objetivos,
     required this.onChanged,
+    required this.idiomaMeta,
     this.soloObjetivos = false,
     this.soloSectores = false,
   });
   final List<String> sectores, objetivos;
   final void Function(List<String>, List<String>) onChanged;
   final bool soloObjetivos, soloSectores;
+
+  /// Idioma que se estudia: la pregunta de objetivos lo nombra.
+  final String idiomaMeta;
   @override
   Widget build(BuildContext context) {
     Widget opciones(
@@ -55,7 +60,9 @@ class PerfilSeleccion extends StatelessWidget {
         if (!soloSectores) ...[
           const SizedBox(height: 20),
           Text(
-            tr('¿Qué quieres lograr con el inglés?'),
+            tr('¿Qué quieres lograr con el {idioma}?', {
+              'idioma': nombreIdiomaEnFrase(idiomaMeta),
+            }),
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),

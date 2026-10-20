@@ -85,6 +85,9 @@ def datos():
     cur = (RAIZ / 'lib/core/content/curriculum.dart').read_text(encoding='utf-8')
     for m in re.finditer(r"(?:Language|Level)\((?:[^()]|\([^()]*\))*?nombre:\s*'([^']+)'", cur):
         res.setdefault(m.group(1), []).append('curriculum.dart')
+    # Descripciones de los niveles (Level.descripcion, registro paso 6).
+    for m in re.finditer(r"Level\((?:[^()]|\([^()]*\))*?descripcion:\s*'([^']+)'", cur):
+        res.setdefault(m.group(1), []).append('curriculum.dart')
     return res
 
 

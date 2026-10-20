@@ -67,7 +67,7 @@ LevelProfile perfilNivel(int n) => perfilesNivel[n.clamp(1, 10) - 1];
 /// Planes (getter: nombres y ventajas en el idioma de la interfaz).
 List<Plan> get planes => [
   Plan(id: 'p1', nombre: tr('Un idioma'), idiomas: 1, precio: 20, incluye: [
-    tr('1 idioma a elegir'), tr('10 niveles · 1 000 lecciones'), tr('50 situaciones de práctica'),
+    tr('1 idioma a elegir'), tr('10 niveles con todas sus clases'), tr('50 situaciones de práctica'),
     tr('Conversación libre con IA'), tr('Corrección de errores y progreso'),
   ]),
   Plan(id: 'p2', nombre: tr('Dos idiomas'), idiomas: 2, precio: 30, incluye: [
