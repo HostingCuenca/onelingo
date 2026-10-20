@@ -10,7 +10,7 @@ import Audios from './paginas/Audios'
 type Ruta = { p: 'resumen' } | { p: 'usuarios' } | { p: 'usuario'; id: string } | { p: 'correos' } | { p: 'conversaciones' } | { p: 'audios' }
 
 function Login({ onOk }: { onOk: () => void }) {
-  const [usuario, setUsuario] = useState('admin'); const [pin, setPin] = useState('1234'); const [err, setErr] = useState('')
+  const [usuario, setUsuario] = useState('admin'); const [pin, setPin] = useState(''); const [err, setErr] = useState('')
   const entrar = async (e: React.FormEvent) => {
     e.preventDefault()
     try { const r = await api<{ token: string }>('/admin/login', { metodo: 'POST', cuerpo: { usuario, pin } }); guardarToken(r.token); onOk() }
@@ -24,7 +24,6 @@ function Login({ onOk }: { onOk: () => void }) {
       <input value={pin} onChange={(e) => setPin(e.target.value)} placeholder="PIN" type="password" />
       {err && <div className="err">{err}</div>}
       <button>Entrar</button>
-      <p className="muted" style={{ fontSize: 12 }}>Demo: admin / 1234 (se cambia en .env del backend)</p>
     </form>
   )
 }
