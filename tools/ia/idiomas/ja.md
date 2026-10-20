@@ -14,7 +14,9 @@ Esta ficha se inserta en todos los prompts de `tools/ia/prompts/`. Es la única 
   - Kanji únicamente en este puñado de palabras muy frecuentes, cada una enseñada explícitamente como entrada de vocabulario con su lectura en kana: 日本 (にほん), 人 (じん, ひと), 私 (わたし), 先生 (せんせい), 学生 (がくせい), 円 (えん), 水 (みず), 駅 (えき), 何 (なに, なん), 今 (いま).
   - En Fundamentos (`ja.f0.*`) no hay ningún kanji: todo va en kana.
   - Una palabra con kanji aún no enseñado se escribe en kana.
-- **N3–N4:** kanji progresivo hasta ≈ 100 (nivel JLPT N5). **N5–N6:** hasta ≈ 300 (JLPT N4). **N7–N8:** hasta ≈ 650 (JLPT N3). **N9–N10:** hasta ≈ 1000, sin salir de lo enseñado.
+- **N3–N4:** kanji progresivo (publicado: ≈ 63 al cerrar N4). **Desde N5, objetivo acumulado de lectura** (revisión metodológica del 19-10-2026, referencias JLPT/MCER): N5 ≈ 300 · N6 ≈ 500 · N7 ≈ 700 · N8 ≈ 950 · N9 ≈ 1200 · N10 ≈ 1500, unos 4–5 kanji nuevos por clase, sin salir de lo enseñado.
+  - Los kanji se eligen por frecuencia dentro del vocabulario de la propia clase (cruzado con la lista orientativa del JLPT); cada kanji nuevo aparece dentro de una palabra del vocabulario, nunca suelto. Se piden para reconocer y leer; escribir es con el teclado (kana → kanji).
+  - Puente: una palabra que el alumno ya conoce en kana (N1–N4) puede volver como entrada de vocabulario en su forma con kanji (p. ej. たべる → 食べる). Cuenta como kanji nuevo, no como vocablo repetido.
   - Cada kanji entra primero en una entrada de vocabulario con su lectura en kana (campo `lectura`); después puede usarse en cualquier texto.
   - Los apellidos y ciudades de la lista cerrada pasan a kanji solo cuando todos sus kanji están enseñados. Los nombres de pila se quedan siempre en hiragana.
 - **`rom`** (rōmaji Hepburn modificado):

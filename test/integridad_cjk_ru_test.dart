@@ -49,6 +49,20 @@ void main() {
       // Ni otra forma del verbo ni la escritura sin kanji no enseñada se deducen.
       expect(faltan('ja', '気づいた ひかない きづいた', s), ['気づいた', 'ひかない', 'きづいた']);
     });
+    test('N5–N10: lecturas con «;», patrones con «～» y ejemplos entre paréntesis', () {
+      final s = saber([
+        '怒鳴る (どなる; 怒鳴った, 怒鳴らん)', //
+        '～ ん ばかり (～ ん ばかり の; ～ ん ばかり に; 泣かん)',
+        '声', 'の', 'でした', '即して (そくして, 事実 に 即して)', '報告', 'します',
+        '賄う (まかなう; 賄います, 賄われる, 賄われます)', '費用', 'は', '貯金', 'で',
+      ]);
+      expect(faltan('ja', '怒鳴らん ばかり の 声 でした。', s), isEmpty);
+      expect(faltan('ja', '泣かん ばかり の 声 でした。', s), isEmpty);
+      expect(faltan('ja', '事実 に 即して 報告 します。', s), isEmpty);
+      expect(faltan('ja', '費用 は 貯金 で 賄われます。', s), isEmpty);
+      // Una forma que no está entre paréntesis no se deduce.
+      expect(faltan('ja', '怒鳴って 賄わない どなった', s), ['怒鳴って', '賄わない', 'どなった']);
+    });
   });
 
   group('chino', () {

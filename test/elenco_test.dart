@@ -7,6 +7,21 @@ import 'package:onelingo/core/elenco.dart';
 const _roles = {'narradora', 'narrador', 'mujer_b', 'hombre_b', 'lumo'};
 const _idiomas = ['en', 'es', 'fr', 'de', 'pt', 'it', 'ru', 'ko', 'ja', 'zh'];
 
+/// Apellidos japoneses de la lista cerrada (tools/ia/idiomas/ja.md), en kana y
+/// en kanji: no dicen el género, así que tools/voz/elenco.py no los asigna
+/// (regla 4) y la app usa el respaldo por orden de aparición.
+const _apellidosJa = {
+  'たなか', 'すずき', 'わたなべ', 'たかはし', 'いとう', //
+  'やまもと', 'なかむら', 'こばやし', 'かとう', 'よしだ',
+  '田中', '鈴木', '渡辺', '高橋', '伊藤', '山本', '中村', '小林', '加藤', '吉田',
+};
+
+/// Hablante sin género inferible por diseño: apellido japonés, solo o con
+/// さん / せんせい / ぶちょう (como la raíz de tools/voz/elenco.py).
+bool _sinGeneroPorDiseno(String idioma, String h) =>
+    idioma == 'ja' &&
+    _apellidosJa.contains(h.replaceFirst(RegExp(r'(さん|ちゃん|くん|せんせい|ぶちょう)$'), ''));
+
 void main() {
   test('dos mujeres (o dos hombres) de un diálogo suenan distintas', () {
     final v = vocesDelDialogo(
@@ -39,7 +54,8 @@ void main() {
         expect(_roles, contains(e.value), reason: '$idioma ${e.key}');
       }
       // Los hablantes de la ruta publicada que faltan usan el respaldo por
-      // orden; son pocos (apellidos japoneses, oficios sin género claro).
+      // orden; son pocos (oficios sin género claro). Los apellidos japoneses
+      // no cuentan: no tienen género y su ausencia es intencionada.
       final hablantes = <String>{};
       for (final ruta in Directory('assets/contenido/$idioma/ruta').listSync()) {
         if (ruta is! File || !ruta.path.endsWith('.json')) continue;
@@ -54,7 +70,9 @@ void main() {
         }
         recorrer(jsonDecode(ruta.readAsStringSync()));
       }
-      final faltan = hablantes.where((h) => !elenco.containsKey(h)).length;
+      final faltan = hablantes
+          .where((h) => !elenco.containsKey(h) && !_sinGeneroPorDiseno(idioma, h))
+          .length;
       expect(faltan, lessThanOrEqualTo(hablantes.length * 0.6), reason: idioma);
     }
   });
